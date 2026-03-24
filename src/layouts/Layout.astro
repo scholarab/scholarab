@@ -1,0 +1,220 @@
+---
+import Nav from '../components/Nav.astro';
+import BottomNav from '../components/BottomNav.astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
+import Analytics from '@vercel/analytics/astro';
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogUrl?: string;
+  canonical?: string;
+  currentPath: string;
+  containerClass?: string;
+  missingText?: string;
+}
+
+const {
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  ogUrl,
+  canonical,
+  currentPath,
+  containerClass = 'max-w-6xl',
+  missingText = "Know a scholarship we're missing?",
+} = Astro.props;
+---
+
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="google-site-verification" content="nhpc-sXNyJgfEMBonhftRYTiJpQMP0NDTVRDsIy2Yk4" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={ogTitle ?? title} />
+    <meta property="og:description" content={ogDescription ?? description} />
+    <meta property="og:type" content="website" />
+    {ogUrl && <meta property="og:url" content={ogUrl} />}
+    <meta property="og:image" content="https://www.scholarab.ca/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://www.scholarab.ca/og-image.png" />
+    <link rel="canonical" href={canonical ?? ogUrl ?? "https://www.scholarab.ca"} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high" />
+    <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.toggle('dark', t === 'dark');
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+    <ClientRouter />
+    <slot name="head" />
+  </head>
+  <body class="bg-[#f5f5fa] dark:bg-[#0a0a0f] text-gray-900 dark:text-white min-h-screen min-h-[100svh] flex flex-col overflow-x-hidden">
+    <Nav currentPath={currentPath} />
+    <div class={`${containerClass} mx-auto w-full flex-1 px-4 pb-24 md:pb-8 md:px-8`}>
+      <slot />
+    </div>
+    <footer class="hidden md:block border-t border-black/5 dark:border-white/[0.06] mt-8 relative" style="z-index:1;">
+      <div class={`${containerClass} mx-auto px-4 pt-6 pb-24 md:py-6 md:px-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm text-black/30 dark:text-white/25 text-center sm:text-left`}>
+        <span>© 2026 ScholarAB &nbsp;·&nbsp; Made in Medicine Hat, Alberta.</span>
+        <a href="mailto:contact.scholarab@gmail.com" class="hover:text-black/60 dark:hover:text-white/50 transition-colors">{missingText}</a>
+      </div>
+    </footer>
+    <BottomNav />
+    <SpeedInsights />
+    <Analytics />
+    <script>
+      // ── Slow connection animation kill ─────────────────────
+      const conn = (navigator as any).connection;
+      if (conn?.effectiveType === '2g' || conn?.effectiveType === 'slow-2g') {
+        document.body.classList.add('no-animations');
+      }
+
+      // ── Prefetch on hover / touchstart ─────────────────────
+      const prefetched = new Set();
+
+      function prefetch(href: string) {
+        if (!href || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('#')) return;
+        if (prefetched.has(href)) return;
+        prefetched.add(href);
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = href;
+        document.head.appendChild(link);
+      }
+
+      document.addEventListener('mousedown', (e) => {
+        const a = (e.target as HTMLElement).closest('a');
+        if (a) prefetch(a.getAttribute('href') ?? '');
+      }, { passive: true });
+
+      document.addEventListener('touchstart', (e) => {
+        const a = (e.target as HTMLElement).closest('a');
+        if (a) prefetch(a.getAttribute('href') ?? '');
+      }, { passive: true });
+
+      // Preload key pages once on first load
+      document.addEventListener('astro:page-load', () => {
+        const pagesToPreload = ['/', '/scholarships', '/programs', '/saved', '/about'];
+        pagesToPreload.forEach(href => {
+          if (prefetched.has(href)) return;
+          prefetched.add(href);
+          const link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = href;
+          document.head.appendChild(link);
+        });
+      }, { once: true });
+
+      // ── Navigation progress bar ────────────────────────────
+      const bar = document.createElement('div');
+      bar.id = 'nav-progress';
+      bar.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #22d3a5;
+        z-index: 999999;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        pointer-events: none;
+        opacity: 0;
+      `;
+      document.body.appendChild(bar);
+
+      let progressT1: number | null = null;
+      let progressT2: number | null = null;
+      let progressT3: number | null = null;
+
+      function startProgress() {
+        if (progressT1 !== null) { clearTimeout(progressT1); progressT1 = null; }
+        if (progressT2 !== null) { clearTimeout(progressT2); progressT2 = null; }
+        if (progressT3 !== null) { clearTimeout(progressT3); progressT3 = null; }
+        bar.style.opacity = '1';
+        bar.style.transform = 'scaleX(0)';
+        requestAnimationFrame(() => {
+          bar.style.transition = 'transform 0.15s ease, opacity 0.3s ease';
+          bar.style.transform = 'scaleX(0.85)';
+          progressT1 = window.setTimeout(() => {
+            progressT1 = null;
+            bar.style.transition = 'transform 1s ease, opacity 0.3s ease';
+            bar.style.transform = 'scaleX(0.95)';
+          }, 150);
+        });
+      }
+
+      function finishProgress() {
+        if (progressT1 !== null) { clearTimeout(progressT1); progressT1 = null; }
+        bar.style.transition = 'transform 0.08s ease, opacity 0.3s ease';
+        bar.style.transform = 'scaleX(1)';
+        progressT2 = window.setTimeout(() => {
+          progressT2 = null;
+          bar.style.opacity = '0';
+          progressT3 = window.setTimeout(() => {
+            progressT3 = null;
+            bar.style.transform = 'scaleX(0)';
+          }, 300);
+        }, 80);
+      }
+
+      // Phase 1 — Ripple + haptic on teal buttons
+      document.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.btn-teal');
+        if (!btn) return;
+        navigator.vibrate?.(8);
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'btn-ripple';
+        const size = Math.max(rect.width, rect.height) * 2.2;
+        ripple.style.width  = `${size}px`;
+        ripple.style.height = `${size}px`;
+        ripple.style.left   = `${e.clientX - rect.left - size / 2}px`;
+        ripple.style.top    = `${e.clientY - rect.top  - size / 2}px`;
+        btn.appendChild(ripple);
+        ripple.animate(
+          [{ transform: 'scale(0)', opacity: 0.4 }, { transform: 'scale(1)', opacity: 0 }],
+          { duration: 480, easing: 'ease-out' }
+        ).onfinish = () => ripple.remove();
+      }, { passive: true });
+
+      // Phase 1 — Haptic on filter/sort pills
+      document.addEventListener('click', (e) => {
+        const pill = (e.target as HTMLElement).closest('.sort-pill, .tab-pill, .bn-tab');
+        if (pill) navigator.vibrate?.(6);
+      }, { passive: true });
+
+      // Use Astro ViewTransitions lifecycle events
+      document.addEventListener('astro:before-preparation', startProgress);
+      document.addEventListener('astro:page-load', finishProgress);
+
+      // ── Service worker registration ─────────────────────────
+      document.addEventListener('astro:page-load', () => {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js');
+        }
+      }, { once: true });
+    </script>
+  </body>
+</html>

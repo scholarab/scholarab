@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DetailLayout from '../../components/DetailLayout.astro';
+import SchemaLD from '../../components/SchemaLD.astro';
+import scholarships from '../../data/scholarships.json';
+import { generateSlug } from '../../lib/utils.jsx';
+import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.js';
+
+export async function getStaticPaths() {
+  return scholarships.map(s => ({
+    params: { slug: generateSlug(s.title) },
+    props: { scholarship: s },
+  }));
+}
+
+const { scholarship } = Astro.props;
+const slug = generateSlug(scholarship.title);
+
+
+function formatDate(str: string): string {
+  if (!str) return '—';
+  const d = new Date(str + 'T00:00:00');
+  return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const todayDate = new Date();
+todayDate.setHours(0, 0, 0, 0);
+const openDate     = new Date((scholarship.open_date || '1970-01-01') + 'T00:00:00');
+const deadlineDate = new Date(scholarship.deadline + 'T00:00:00');
+const status = todayDate < openDate ? 'future' : todayDate > deadlineDate ? 'closed' : 'active';
+
+const calendarUrl = (() => {
+  if (!scholarship.deadline) return undefined;
+  const d = scholarship.deadline.replace(/-/g, '');
+  const text = encodeURIComponent(scholarship.title);
+  const details = encodeURIComponent(`Apply at: ${scholarship.url}`);
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${d}/${d}&details=${details}`;
+})();
+
+const rawBadge = CATEGORY_BADGE[scholarship.category] || DEFAULT_BADGE;
+const badge    = { ...rawBadge, label: scholarship.category || '' };
+
+const description  = `The ${scholarship.title} offers ${scholarship.amount} to ${scholarship.audience}${scholarship.region ? ` in ${scholarship.region}` : ''}. Deadline: ${formatDate(scholarship.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
+const canonical    = `https://www.scholarab.ca/scholarships/${slug}`;
+const pageTitle    = `${scholarship.title} | ScholarAB — Alberta Scholarships`;
+const parsedAmount = (() => { const n = parseInt(scholarship.amount.replace(/[$,]/g, '')); return isNaN(n) ? null : n; })();
+
+const ldJson = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOccupationalProgram',
+  'name': scholarship.title,
+  'description': description,
+  'url': canonical,
+  ...(scholarship.deadline ? { 'applicationDeadline': scholarship.deadline } : {}),
+  ...(parsedAmount !== null ? { 'offers': { '@type': 'Offer', 'price': parsedAmount, 'priceCurrency': 'CAD' } } : {}),
+  'provider': { '@type': 'Organization', 'name': 'ScholarAB', 'url': 'https://www.scholarab.ca' },
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={description}
+  ogTitle={pageTitle}
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+  currentPath="/scholarships"
+  containerClass="max-w-2xl"
+>
+  <SchemaLD schema={ldJson} slot="head" />
+
+  <DetailLayout
+    badge={badge}
+    title={scholarship.title}
+    amount={scholarship.amount}
+    url={scholarship.url}
+    status={status}
+    openDate={formatDate(scholarship.open_date)}
+    calendarUrl={calendarUrl}
+    backHref="/scholarships"
+    backLabel="Back to Scholarships"
+    ctaLabel="Apply Now →"
+    itemId={scholarship.id}
+    itemType="scholarship"
+  >
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-gray-100 dark:border-white/[0.07] pt-6">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Deadline</p>
+        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{formatDate(scholarship.deadline)}</p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Opens</p>
+        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{formatDate(scholarship.open_date)}</p>
+      </div>
+      {scholarship.region && (
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Region</p>
+          <p class="text-sm font-medium text-gray-800 dark:text-white/80">{scholarship.region}</p>
+        </div>
+      )}
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Eligibility</p>
+        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{scholarship.audience}</p>
+      </div>
+    </div>
+
+    {scholarship.notes && (
+      <div class="mb-6 p-4 rounded-xl bg-gray-50 dark:bg-white/[0.04] border border-gray-100 dark:border-white/[0.07]">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Notes</p>
+        <p class="text-sm text-gray-600 dark:text-white/60">{scholarship.notes}</p>
+      </div>
+    )}
+
+    {scholarship.applyViaGuidance && (
+      <div class="mb-6 p-4 rounded-xl border" style="background: rgba(34,211,165,0.06); border-color: rgba(34,211,165,0.2);">
+        <p class="text-sm text-[#22d3a5]">
+          <span class="font-semibold">How to apply:</span> Contact your school guidance counsellor to apply for this scholarship.
+        </p>
+      </div>
+    )}
+  </DetailLayout>
+</Layout>

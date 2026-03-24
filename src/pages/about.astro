@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import scholarships from '../data/scholarships.json';
+
+const scholarshipCount = scholarships.length;
+---
+
+<Layout
+  title="About ScholarAB | Free Alberta Scholarship Directory"
+  description="ScholarAB is a free, open-source scholarship directory built for Alberta high school students. No ads, no login, no data sold."
+  ogTitle="About ScholarAB | Free Alberta Scholarship Directory"
+  ogDescription="ScholarAB is a free, open-source scholarship directory built for Alberta high school students. No ads, no login, no data sold."
+  ogUrl="https://www.scholarab.ca/about"
+  currentPath="/about"
+>
+  <div class="max-w-3xl">
+    <header class="mb-12 pt-4">
+<h1 class="font-extrabold leading-[1.1] tracking-[-0.03em] text-gray-900 dark:text-white mb-3" style="font-size: clamp(28px, 4vw, 48px);">
+        Built by a student,<br><span style="color: #22d3a5">for students.</span>
+      </h1>
+      <p class="text-sm text-black/40 dark:text-white/40 mt-3">There was a problem. Now it's fixed.</p>
+    </header>
+
+    <main class="space-y-14">
+
+      <section>
+        <h2 class="font-bold text-xl text-gray-800 dark:text-white mb-4" style="border-left: 3px solid rgba(34,211,165,0.5); padding-left: 10px;">The problem</h2>
+        <p class="text-sm leading-relaxed text-gray-500 dark:text-white/45">
+          Scholarship information in Alberta was scattered across dozens of websites and school bulletin
+          boards. There was no single place to find what was open, what was closing, or what you actually
+          qualified for.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-bold text-xl text-gray-800 dark:text-white mb-4" style="border-left: 3px solid rgba(34,211,165,0.5); padding-left: 10px;">The fix</h2>
+        <div class="space-y-3 text-sm leading-relaxed text-gray-500 dark:text-white/45">
+          <p>
+            ScholarAB is a free scholarship directory for Alberta high school students. Every listing is
+            verified by hand. Deadlines are tracked. Nothing is scraped or auto-generated.
+          </p>
+          <p>No account needed. No ads. No algorithm. Just scholarships.</p>
+        </div>
+        <p class="text-sm text-black/40 dark:text-white/40 mt-3">
+          Built by a student. Not affiliated with any school or organization.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-bold text-xl text-gray-800 dark:text-white mb-5" style="border-left: 3px solid rgba(34,211,165,0.5); padding-left: 10px;">Our principles</h2>
+        <div class="space-y-3">
+          <div class="card flex gap-4 p-5">
+            <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#fce7f3;font-size:22px;flex-shrink:0;">🚫</span>
+            <div>
+              <p class="font-semibold text-gray-800 dark:text-white mb-1 text-sm">No ads.</p>
+              <p class="text-sm text-gray-500 dark:text-white/40">ScholarAB does not show ads. No sponsored listings, no paid placement.</p>
+            </div>
+          </div>
+          <div class="card flex gap-4 p-5">
+            <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#dbeafe;font-size:22px;flex-shrink:0;">🔒</span>
+            <div>
+              <p class="font-semibold text-gray-800 dark:text-white mb-1 text-sm">No data collection.</p>
+              <p class="text-sm text-gray-500 dark:text-white/40">ScholarAB does not collect your name, email, or location. The only data collected is anonymous page views through Vercel.</p>
+            </div>
+          </div>
+          <div class="card flex gap-4 p-5">
+            <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#d1fae5;font-size:22px;flex-shrink:0;">👤</span>
+            <div>
+              <p class="font-semibold text-gray-800 dark:text-white mb-1 text-sm">No login required.</p>
+              <p class="text-sm text-gray-500 dark:text-white/40">No account needed. Everything is public and works on any device.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-bold text-xl text-gray-800 dark:text-white mb-4">Open source</h2>
+        <p class="text-sm leading-relaxed text-gray-500 dark:text-white/45 mb-5">
+          The code is open source under AGPL-3.0. Any use or modification must also be released under the same license.
+        </p>
+        <a
+          href="https://github.com/scholarab/scholarab"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors text-gray-700 hover:text-gray-900 dark:text-white/60 dark:hover:text-white/90 bg-black/5 hover:bg-black/8 dark:bg-white/5 dark:hover:bg-white/8"
+          style="border: 0.5px solid rgba(255,255,255,0.1);"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+          </svg>
+          View on GitHub
+        </a>
+      </section>
+
+      <section>
+        <h2 class="font-bold text-xl text-gray-800 dark:text-white mb-4">Contact</h2>
+        <p class="text-sm leading-relaxed text-gray-500 dark:text-white/45 mb-4">
+          Broken link? Have feedback? Want to contribute?
+        </p>
+        <a
+          href="mailto:contact.scholarab@gmail.com"
+          class="text-sm underline underline-offset-4 hover:opacity-80 transition-opacity"
+          style="color: #22d3a5;"
+        >
+          contact.scholarab@gmail.com
+        </a>
+      </section>
+
+    </main>
+
+  </div>
+</Layout>

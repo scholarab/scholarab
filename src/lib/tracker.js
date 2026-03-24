@@ -1,0 +1,61 @@
+let _saved = null;
+let _savedPrograms = null;
+
+/** Coerce legacy string ids to numbers, dedupe, drop garbage (matches numeric ids in JSON). */
+function normalizeIdList(raw) {
+  if (!Array.isArray(raw)) return [];
+  const out = [];
+  const seen = new Set();
+  for (const v of raw) {
+    const n =
+      typeof v === 'number' && Number.isFinite(v)
+        ? v
+        : typeof v === 'string' && /^\d+$/.test(String(v).trim())
+          ? Number(String(v).trim())
+          : NaN;
+    if (!Number.isFinite(n) || seen.has(n)) continue;
+    seen.add(n);
+    out.push(n);
+  }
+  return out;
+}
+
+export function getSaved() {
+  if (_saved === null) {
+    const raw = JSON.parse(localStorage.getItem('scholarab_saved') || '[]');
+    _saved = normalizeIdList(raw);
+    if (JSON.stringify(raw) !== JSON.stringify(_saved)) {
+      localStorage.setItem('scholarab_saved', JSON.stringify(_saved));
+    }
+  }
+  return _saved;
+}
+
+export function toggleSaved(id) {
+  const saved = getSaved();
+  const idx = saved.findIndex((s) => s === id);
+  if (idx > -1) saved.splice(idx, 1);
+  else saved.push(id);
+  localStorage.setItem('scholarab_saved', JSON.stringify(saved));
+  return saved;
+}
+
+export function getSavedPrograms() {
+  if (_savedPrograms === null) {
+    const raw = JSON.parse(localStorage.getItem('scholarab_saved_programs') || '[]');
+    _savedPrograms = normalizeIdList(raw);
+    if (JSON.stringify(raw) !== JSON.stringify(_savedPrograms)) {
+      localStorage.setItem('scholarab_saved_programs', JSON.stringify(_savedPrograms));
+    }
+  }
+  return _savedPrograms;
+}
+
+export function toggleSavedProgram(id) {
+  const saved = getSavedPrograms();
+  const idx = saved.findIndex((s) => s === id);
+  if (idx > -1) saved.splice(idx, 1);
+  else saved.push(id);
+  localStorage.setItem('scholarab_saved_programs', JSON.stringify(saved));
+  return saved;
+}

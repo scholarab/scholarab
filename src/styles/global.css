@@ -1,0 +1,337 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/inter-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter-700.woff2') format('woff2');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Focus ring ────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #22d3a5;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Spring easing variables ──────────────────────────────── */
+:root {
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --spring-snappy: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+/* Heading letter-spacing */
+h1, h2 {
+  letter-spacing: -0.02em;
+}
+
+/* ── Dark-theme card ──────────────────────────────────────── */
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 16px;
+  contain: layout style;
+}
+.dark .card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+}
+.card-interactive {
+  transition: transform 0.22s var(--spring), box-shadow 0.22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.card-interactive:hover {
+  box-shadow: 0 0 0 2px var(--card-glow, rgba(34, 211, 165, 0.4)), 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: scale(1.02);
+}
+.dark .card-interactive:hover {
+  box-shadow: 0 0 0 2px var(--card-glow, rgba(34, 211, 165, 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
+  transform: scale(1.02);
+}
+/* #1 — Card press: compress on down, spring back on release */
+.card-interactive:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+/* ── Card entrance animations ─────────────────────────────── */
+/* #4 — Card entrance: scale + translate with spring easing */
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Phase 2 — Filter cascade entrance (left-to-right slide) */
+@keyframes cardEntranceFilter {
+  from { opacity: 0; transform: translateX(-14px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+.card-entrance-filter {
+  animation: cardEntranceFilter 0.3s var(--spring) both;
+  animation-delay: var(--card-delay, 0s);
+}
+
+/* Phase 3 — Shimmer keyframe (transform-only: composited, zero paint cost) */
+@keyframes shimmer {
+  to { transform: translateX(200%); }
+}
+.card.card-before-reveal {
+  opacity: 1;
+  position: relative;
+  overflow: hidden;
+  background: rgba(150,150,150,0.07) !important;
+  border-color: rgba(150,150,150,0.1) !important;
+  border-top-color: rgba(150,150,150,0.1) !important;
+}
+.card.card-before-reveal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(150,150,150,0.14) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: shimmer 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+.card-before-reveal * { opacity: 0 !important; }
+.card-entrance {
+  animation: cardEntrance 0.35s var(--spring) both;
+  animation-delay: var(--card-delay, 0s);
+}
+.card-entrance * { opacity: 1 !important; }
+
+/* ── #2 — Bookmark pop animation ──────────────────────────── */
+@keyframes bookmarkPop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.55); }
+  65%  { transform: scale(0.85); }
+  82%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.bookmark-pop {
+  animation: bookmarkPop 0.45s var(--spring) both;
+}
+
+/* ── Region chip scroll row ───────────────────────────────── */
+.chips-row {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.chips-row::-webkit-scrollbar { display: none; }
+
+/* ── #3 — Tab pill buttons with spring press ──────────────── */
+.tab-pill {
+  border-radius: 50px;
+  padding: 7px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+  color: rgba(0, 0, 0, 0.4);
+  transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.25s var(--spring);
+  -webkit-tap-highlight-color: transparent;
+}
+.tab-pill:active {
+  transform: scale(0.91);
+}
+.tab-pill.active {
+  background: rgba(34, 211, 165, 0.1);
+  border-color: rgba(34, 211, 165, 0.35);
+  color: #16a37e;
+}
+.dark .tab-pill {
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.4);
+}
+.dark .tab-pill.active {
+  background: rgba(34, 211, 165, 0.1);
+  border-color: rgba(34, 211, 165, 0.3);
+  color: #22d3a5;
+}
+
+/* ── #3 — Sort pill buttons with spring press ─────────────── */
+.sort-pill {
+  border-radius: 50px;
+  padding: 5px 14px;
+  font-size: 11px;
+  cursor: pointer;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: transparent;
+  color: rgba(0, 0, 0, 0.4);
+  transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.25s var(--spring);
+  -webkit-tap-highlight-color: transparent;
+}
+.sort-pill:active {
+  transform: scale(0.89);
+}
+.sort-pill.active {
+  border-color: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.7);
+}
+.dark .sort-pill {
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.4);
+}
+.dark .sort-pill.active {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+/* ── #1 — Teal CTA button spring press ───────────────────── */
+.btn-teal {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--spring), opacity 0.15s;
+}
+.btn-teal:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+/* ── Navbar scroll shadow ─────────────────────────────────── */
+.glass-nav.scrolled {
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+.dark .glass-nav.scrolled {
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Saved page empty state bounce ───────────────────────── */
+@keyframes emptyBounce {
+  0%, 100% { transform: translateY(0); }
+  25%       { transform: translateY(-8px); }
+  50%       { transform: translateY(-4px); }
+  75%       { transform: translateY(-6px); }
+}
+.empty-bounce {
+  animation: emptyBounce 2.5s ease-in-out 3;
+  display: inline-block;
+}
+
+/* ── Saved page card hover — subtler scale ────────────────── */
+.saved-list .card-interactive:hover,
+.dark .saved-list .card-interactive:hover {
+  transform: scale(1.015);
+}
+
+/* ── #7 — How it works step entrance ─────────────────────── */
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.step-hidden { opacity: 0; }
+.step-visible {
+  animation: stepIn 0.38s var(--spring) forwards;
+  animation-delay: var(--step-delay, 0s);
+}
+
+/* ── #5 — Page view transitions ───────────────────────────── */
+@keyframes page-slide-in {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes page-slide-out {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-12px); }
+}
+::view-transition-old(root) {
+  animation: page-slide-out 0.12s ease both;
+}
+::view-transition-new(root) {
+  animation: page-slide-in 0.2s var(--spring-snappy) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+
+  .card-entrance,
+  .card-entrance-filter,
+  .card-before-reveal,
+  .step-hidden,
+  .step-visible,
+  .hero-word,
+  .empty-bounce {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .card.card-before-reveal::before {
+    animation: none !important;
+    display: none;
+  }
+
+  .card-interactive {
+    transition: none !important;
+  }
+
+  .glass-nav {
+    transition: none !important;
+  }
+}
+
+/* Phase 1 — Filter count number morph */
+@keyframes countPop {
+  from { opacity: 0; transform: translateY(-8px) scale(0.85); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Phase 1 — Ripple on teal buttons */
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  transform: scale(0);
+}
+
+/* ── Slow connection animation kill switch ───────────────────────
+   Applied via JS when navigator.connection.effectiveType is 2g/slow-2g.
+   TO REVERT: delete from this comment to the closing } below         */
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+  animation: none !important;
+  animation-duration: 0.001ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition: none !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}

@@ -1,0 +1,114 @@
+---
+import BookmarkButton from './BookmarkButton.jsx';
+
+interface Props {
+  badge: { emoji: string; label: string; color: string; bg: string; border: string };
+  title: string;
+  titleMb?: string;
+  subtitle?: string;
+  amount?: string;
+  amountStyle?: string;
+  url: string;
+  status: 'active' | 'closed' | 'future';
+  openDate?: string;
+  backHref: string;
+  backLabel: string;
+  ctaLabel?: string;
+  calendarUrl?: string;
+  itemId?: number;
+  itemType?: 'scholarship' | 'program';
+}
+
+const {
+  badge,
+  title,
+  titleMb = 'mb-2',
+  subtitle,
+  amount,
+  amountStyle = 'clamp(28px, 5vw, 40px)',
+  url,
+  status,
+  openDate,
+  backHref,
+  backLabel,
+  ctaLabel = 'Apply Now →',
+  calendarUrl,
+  itemId,
+  itemType,
+} = Astro.props;
+---
+
+<main class="py-6">
+  <a
+    href={backHref}
+    class="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-white/40 hover:text-[#22d3a5] dark:hover:text-[#22d3a5] transition-colors mb-6"
+  >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    {backLabel}
+  </a>
+
+  <div class="relative card p-6 md:p-8" style={`border-top: 2px solid ${badge.color};`}>
+    {itemId !== undefined && itemType && (
+      <div class="absolute top-5 right-5 md:top-7 md:right-7">
+        <BookmarkButton id={itemId} type={itemType} client:load />
+      </div>
+    )}
+    <span
+      class="inline-flex items-center gap-1.5 rounded-full text-xs font-semibold mb-4"
+      style={`padding: 3px 10px; background: ${badge.bg}; color: ${badge.color}; border: 1px solid ${badge.border};`}
+    >
+      <span style="font-size: 15px;">{badge.emoji}</span>
+      {badge.label}
+    </span>
+
+    <h1 class={`font-bold text-gray-900 dark:text-white ${titleMb} leading-tight`} style="font-size: clamp(20px, 4vw, 30px);">
+      {title}
+    </h1>
+
+    {subtitle && (
+      <p class="text-sm text-gray-400 dark:text-white/35 mb-6">{subtitle}</p>
+    )}
+
+    {amount && (
+      <p class="font-extrabold mb-6 text-[#22d3a5]" style={`font-size: ${amountStyle}; line-height: 1.1;`}>
+        {amount}
+      </p>
+    )}
+
+    <slot />
+
+    <div class="pt-2 flex flex-col gap-2">
+      {status === 'closed' ? (
+        <button disabled class="w-full py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
+          Closed
+        </button>
+      ) : status === 'future' ? (
+        <button disabled class="w-full py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
+          Opening Soon{openDate ? ` — ${openDate}` : ''}
+        </button>
+      ) : (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-teal block w-full text-center py-3 px-4 rounded-xl text-sm font-semibold transition-opacity hover:opacity-85"
+          style="background: #22d3a5; color: #0a0a0f;"
+        >
+          {ctaLabel}
+        </a>
+      )}
+      {calendarUrl && status !== 'closed' && (
+        <a
+          href={calendarUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block w-full text-center py-2.5 px-4 rounded-xl text-sm font-medium transition-colors border text-gray-500 dark:text-white/40 border-gray-200 dark:border-white/10 hover:border-[#22d3a5] hover:text-[#22d3a5] dark:hover:border-[#22d3a5] dark:hover:text-[#22d3a5]"
+        >
+          Add deadline to Google Calendar
+        </a>
+      )}
+    </div>
+  </div>
+</main>
