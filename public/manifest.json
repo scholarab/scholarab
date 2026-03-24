@@ -1,0 +1,13 @@
+{
+  "name": "ScholarAB",
+  "short_name": "ScholarAB",
+  "description": "Free Alberta scholarship and research program directory for high school students.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#22d3a5",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

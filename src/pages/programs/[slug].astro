@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DetailLayout from '../../components/DetailLayout.astro';
+import SchemaLD from '../../components/SchemaLD.astro';
+import programs from '../../data/research-programs.json';
+import { generateSlug } from '../../lib/utils.jsx';
+import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.js';
+
+export async function getStaticPaths() {
+  return programs.map(p => ({
+    params: { slug: generateSlug(p.name) },
+    props: { program: p },
+  }));
+}
+
+const { program } = Astro.props;
+const slug = generateSlug(program.name);
+
+
+function formatDate(str: string): string {
+  if (!str || str === 'TBA' || str === 'Ongoing') return str;
+  const d = new Date(str + 'T00:00:00');
+  return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const todayDate = new Date();
+todayDate.setHours(0, 0, 0, 0);
+const isClosed = program.deadline && program.deadline !== 'TBA' && program.deadline !== 'Ongoing'
+  ? todayDate > new Date(program.deadline + 'T00:00:00')
+  : false;
+
+const rawBadge = CATEGORY_BADGE[program.category] || DEFAULT_BADGE;
+const badge    = { ...rawBadge, emoji: program.emoji || rawBadge.emoji, label: program.category };
+
+const metaDescription = program.description.length > 160
+  ? program.description.slice(0, 157) + '...'
+  : program.description;
+const canonical = `https://www.scholarab.ca/programs/${slug}`;
+const pageTitle = `${program.name} | ScholarAB — Alberta Research Programs`;
+
+const ldJson = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOccupationalProgram',
+  'name': program.name,
+  'description': metaDescription,
+  'url': canonical,
+  ...(program.deadline && program.deadline !== 'TBA' && program.deadline !== 'Ongoing'
+    ? { 'applicationDeadline': program.deadline }
+    : {}),
+  'provider': { '@type': 'Organization', 'name': program.provider },
+};
+
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    { '@type': 'ListItem', 'position': 1, 'name': 'ScholarAB', 'item': 'https://www.scholarab.ca' },
+    { '@type': 'ListItem', 'position': 2, 'name': 'Research Programs', 'item': 'https://www.scholarab.ca/programs' },
+    { '@type': 'ListItem', 'position': 3, 'name': program.name, 'item': canonical },
+  ],
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDescription}
+  ogTitle={pageTitle}
+  ogDescription={metaDescription}
+  ogUrl={canonical}
+  canonical={canonical}
+  currentPath="/programs"
+  containerClass="max-w-2xl"
+>
+  <SchemaLD schema={ldJson} slot="head" />
+  <SchemaLD schema={breadcrumbJson} slot="head" />
+
+  <DetailLayout
+    badge={badge}
+    title={program.name}
+    titleMb="mb-1"
+    subtitle={program.provider}
+    amount={program.paid && program.stipend ? program.stipend : undefined}
+    amountStyle="clamp(20px, 3vw, 28px)"
+    url={program.url}
+    status={isClosed ? 'closed' : 'active'}
+    backHref="/programs"
+    backLabel="Back to Programs"
+    ctaLabel="Learn More →"
+    itemId={program.id}
+    itemType="program"
+    pageUrl={canonical}
+  >
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-gray-100 dark:border-white/[0.07] pt-6">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Duration</p>
+        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{program.duration}</p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Grades</p>
+        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{program.grades}</p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Location</p>
+        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{program.location}</p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Deadline</p>
+        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{formatDate(program.deadline)}</p>
+      </div>
+    </div>
+
+    <div class="mb-6 p-4 rounded-xl bg-gray-50 dark:bg-white/[0.04] border border-gray-100 dark:border-white/[0.07]">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Eligibility</p>
+      <p class="text-sm text-gray-600 dark:text-white/60">{program.eligibility}</p>
+    </div>
+
+    <div class="mb-6">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-2">About</p>
+      <p class="text-sm leading-relaxed text-gray-600 dark:text-white/60">{program.description}</p>
+    </div>
+  </DetailLayout>
+</Layout>

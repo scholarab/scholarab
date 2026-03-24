@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import programs from '../data/research-programs.json';
+import ResearchList from '../components/ResearchList.jsx';
+---
+
+<Layout
+  title="Alberta Student Research Programs 2026 | ScholarAB"
+  description="Discover research programs and summer opportunities for Alberta high school students. Science, health, engineering, arts and more."
+  ogTitle="Alberta Student Research Programs 2026 | ScholarAB"
+  ogDescription="Discover research programs and summer opportunities for Alberta high school students. Science, health, engineering, arts and more."
+  ogUrl="https://www.scholarab.ca/programs"
+  currentPath="/programs"
+>
+  <main>
+    <h1 class="font-bold text-gray-900 dark:text-white mb-1" style="font-size: clamp(22px, 3vw, 32px);">Research Programs</h1>
+    <p class="text-sm text-gray-500 dark:text-white/45 mb-6">University-run summer programs, labs, and competitions open to Alberta high school students.</p>
+    <ResearchList programs={programs} client:load />
+  </main>
+</Layout>
