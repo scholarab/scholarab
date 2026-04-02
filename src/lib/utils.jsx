@@ -3,7 +3,6 @@ import { useRef } from 'react';
 export { generateSlug } from './generateSlug.js';
 
 export const SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
-export const SPRING_SNAPPY = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
 
 export function getToday() {
   const d = new Date();
@@ -89,21 +88,20 @@ export function BookmarkButton({ isSaved, onToggle }) {
     <button
       ref={btnRef}
       onClick={handleClick}
-      className={`flex-shrink-0 transition-colors flex items-center justify-center ${
+      className={`flex-shrink-0 transition-colors ${
         isSaved
           ? 'text-[#22d3a5]'
-          : 'text-gray-400 dark:text-white/25 hover:text-gray-600 dark:hover:text-white/45'
+          : 'text-gray-300 dark:text-white/20 hover:text-gray-400 dark:hover:text-white/35'
       }`}
       aria-label={isSaved ? 'Remove bookmark' : 'Add bookmark'}
-      style={{ lineHeight: 0, width: 32, height: 32, margin: -6 }}
+      style={{ lineHeight: 0 }}
     >
       <svg
-        width="20" height="20" viewBox="0 0 24 24"
+        width="16" height="16" viewBox="0 0 24 24"
         fill={isSaved ? 'currentColor' : 'none'}
         stroke="currentColor" strokeWidth="2"
         strokeLinecap="round" strokeLinejoin="round"
         aria-hidden="true"
-        style={{ pointerEvents: 'none' }}
       >
         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
       </svg>

@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useEffect, useMemo } from 'react';
+import { useRef, useLayoutEffect, useMemo } from 'react';
 import { useScholarships, INITIAL_BATCH } from '../hooks/useScholarships.js';
 import ScholarshipCard from './ScholarshipCard.jsx';
 import { SPRING } from '../lib/utils.jsx';

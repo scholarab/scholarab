@@ -7,7 +7,7 @@ const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 const activeScholarships = scholarships.filter(s => s.active === true);
-const activeTotal = activeScholarships.reduce((sum, s) => sum + parseInt(s.amount.replace(/[$,]/g, '')), 0);
+const activeTotal = activeScholarships.reduce((sum, s) => { const n = parseInt(s.amount.replace(/[$,]/g, ''), 10); return sum + (isNaN(n) ? 0 : n); }, 0);
 const researchCount = programs.length;
 
 const scholarshipCount = scholarships.filter(s => {
