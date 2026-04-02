@@ -30,7 +30,7 @@ function RemovableItem({ onRemove, onWillRemove, children }) {
     };
   }
 
-  return <div ref={wrapperRef}>{children(remove)}</div>;
+  return <div ref={wrapperRef} className="h-full">{children(remove)}</div>;
 }
 
 function ScholarshipCard({ s, index, onUnsave, isInitial }) {
@@ -68,7 +68,7 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }) {
   return (
     <div
       ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col gap-3 ${isClosed ? '' : 'card-interactive'}`}
+      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col gap-3 h-full ${isClosed ? '' : 'card-interactive'}`}
       style={{ opacity: isClosed ? 0.45 : isFuture ? 0.75 : undefined }}
     >
       <div className="flex items-start justify-between gap-2">
@@ -147,7 +147,7 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
   }
 
   return (
-    <div ref={cardRef} className={`${isInitial ? '' : 'card-before-reveal '}card card-interactive p-5 flex flex-col gap-3`}>
+    <div ref={cardRef} className={`${isInitial ? '' : 'card-before-reveal '}card card-interactive p-5 flex flex-col gap-3 h-full`}>
       <div className="flex items-start justify-between gap-2">
         <h3 className="font-semibold text-sm text-gray-900 dark:text-white leading-snug">{p.name}</h3>
         <button
