@@ -27,7 +27,7 @@ const todayDate = new Date();
 todayDate.setHours(0, 0, 0, 0);
 const openDate     = new Date((scholarship.open_date || '1970-01-01') + 'T00:00:00');
 const deadlineDate = new Date(scholarship.deadline + 'T00:00:00');
-const status = todayDate < openDate ? 'future' : todayDate > deadlineDate ? 'closed' : 'active';
+const status = todayDate < openDate ? 'future' : todayDate > deadlineDate ? 'closed' : scholarship.status === 'Opening Soon' ? 'future' : 'active';
 
 const calendarUrl = (() => {
   if (!scholarship.deadline) return undefined;
@@ -75,7 +75,7 @@ const ldJson = {
     amount={scholarship.amount}
     url={scholarship.url}
     status={status}
-    openDate={formatDate(scholarship.open_date)}
+    openDate={scholarship.open_date ? formatDate(scholarship.open_date) : (status === 'future' ? 'TBA' : undefined)}
     calendarUrl={calendarUrl}
     backHref="/scholarships"
     backLabel="Back to Scholarships"
