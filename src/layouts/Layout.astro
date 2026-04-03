@@ -214,6 +214,17 @@ const {
       document.addEventListener('astro:before-preparation', startProgress);
       document.addEventListener('astro:page-load', finishProgress);
 
+      // ── will-change cleanup after card entrance ────────────
+      // GPU layers stay promoted forever if will-change is never removed,
+      // wasting VRAM. Release each card's compositor layer as soon as its
+      // entrance animation finishes. (Telegram Web principle: clean up layers)
+      document.addEventListener('animationend', (e) => {
+        const el = e.target as HTMLElement;
+        if (el.classList.contains('card-entrance') || el.classList.contains('card-entrance-filter')) {
+          el.style.willChange = 'auto';
+        }
+      }, { passive: true });
+
       // ── Service worker registration ─────────────────────────
       document.addEventListener('astro:page-load', () => {
         if ('serviceWorker' in navigator) {

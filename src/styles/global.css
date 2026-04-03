@@ -61,17 +61,31 @@ h1, h2 {
   background: rgba(255, 255, 255, 0.04);
   border: 0.5px solid rgba(255, 255, 255, 0.08);
 }
+/* Hover glow via ::after opacity — box-shadow on the element itself forces
+   a repaint every animation frame. An ::after with opacity:0→1 is
+   compositor-only: zero paint cost on hover. (Telegram Web principle #1) */
 .card-interactive {
-  transition: transform 0.22s var(--spring), box-shadow 0.22s ease;
+  transition: transform 0.22s var(--spring);
   -webkit-tap-highlight-color: transparent;
 }
-.card-interactive:hover {
+.card-interactive::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   box-shadow: 0 0 0 2px var(--card-glow, rgba(34, 211, 165, 0.4)), 0 4px 20px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  pointer-events: none;
+}
+.dark .card-interactive::after {
+  box-shadow: 0 0 0 2px var(--card-glow, rgba(34, 211, 165, 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
+}
+.card-interactive:hover {
   transform: scale(1.02);
 }
-.dark .card-interactive:hover {
-  box-shadow: 0 0 0 2px var(--card-glow, rgba(34, 211, 165, 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
-  transform: scale(1.02);
+.card-interactive:hover::after {
+  opacity: 1;
 }
 /* #1 — Card press: compress on down, spring back on release */
 .card-interactive:active {
@@ -107,6 +121,10 @@ h1, h2 {
   background: rgba(150,150,150,0.07) !important;
   border-color: rgba(150,150,150,0.1) !important;
   border-top-color: rgba(150,150,150,0.1) !important;
+  /* GPU-promote the card before its entrance animation starts so the
+     compositor layer exists by the time cardEntrance fires.
+     (Telegram Web principle: promote layers before they animate) */
+  will-change: transform;
 }
 .card.card-before-reveal::before {
   content: '';
@@ -121,6 +139,8 @@ h1, h2 {
   transform: translateX(-100%);
   animation: shimmer 1.5s ease-in-out infinite;
   pointer-events: none;
+  /* GPU-promote the shimmer sweep so it never triggers a repaint */
+  will-change: transform;
 }
 .card-before-reveal * { opacity: 0 !important; }
 .card-entrance {
@@ -298,6 +318,11 @@ h1, h2 {
 
   .card-interactive {
     transition: none !important;
+  }
+
+  .card.card-before-reveal,
+  .card.card-before-reveal::before {
+    will-change: auto !important;
   }
 
   .glass-nav {
