@@ -48,6 +48,7 @@ export function useScholarships(initialScholarships) {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [visibleCount,   setVisibleCount  ] = useState(INITIAL_BATCH);
   const [sheetOpen,      setSheetOpen     ] = useState(false);
+  const [query,          setQuery         ] = useState('');
 
   const [savedIds, setSavedIds] = useState([]);
   const batchSizeRef    = useRef(INITIAL_BATCH);
@@ -88,9 +89,20 @@ export function useScholarships(initialScholarships) {
   const filtered = useMemo(() => {
     const withoutClosed = initialScholarships.filter(s => getStatus(s) !== 'closed');
 
-    const afterRegion = selectedRegion === null
+    const afterSearch = query.trim() === ''
       ? withoutClosed
-      : withoutClosed.filter(REGION_MATCH[selectedRegion]);
+      : withoutClosed.filter(s => {
+          const q = query.toLowerCase();
+          return (
+            s.title.toLowerCase().includes(q) ||
+            (s.audience && s.audience.toLowerCase().includes(q)) ||
+            (s.category && s.category.toLowerCase().includes(q))
+          );
+        });
+
+    const afterRegion = selectedRegion === null
+      ? afterSearch
+      : afterSearch.filter(REGION_MATCH[selectedRegion]);
 
     return [...afterRegion].sort((a, b) => {
       if (sortBy === 'closest_due') return new Date(a.deadline) - new Date(b.deadline);
@@ -134,7 +146,9 @@ export function useScholarships(initialScholarships) {
     setRegion:        toggleRegion,
     sheetOpen,
     setSheetOpen,
-    hasActiveFilters: sortBy !== 'featured' || selectedRegion !== null,
+    query,
+    setQuery:         (q) => { hasFiltered.current = true; setVisibleCount(batchSizeRef.current); setQuery(q); },
+    hasActiveFilters: sortBy !== 'featured' || selectedRegion !== null || query.trim() !== '',
     regionKey:        selectedRegion ?? '',
     sentinelRef,
     savedIds,

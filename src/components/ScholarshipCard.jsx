@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { getToday, BookmarkButton, generateSlug } from '../lib/utils.jsx';
+import { getToday, BookmarkButton, generateSlug, formatDeadline } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 
@@ -90,12 +90,15 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
             </p>
           </div>
           <div className="text-right flex flex-col items-end overflow-hidden">
+            {status === 'future' && (
+              <span style={{ fontSize: 9, fontWeight: 600, marginBottom: 2 }} className="text-blue-400 dark:text-blue-400 uppercase tracking-wide">Opens</span>
+            )}
             <p style={{
               fontSize: 12,
               fontWeight: 700,
               color: isClosed ? undefined : status === 'future' ? undefined : deadlineSoon ? '#f87171' : undefined,
             }} className={isClosed ? 'text-gray-300 dark:text-white/20' : status === 'future' ? 'text-blue-500 dark:text-blue-400' : deadlineSoon ? '' : 'text-gray-600 dark:text-white/50'}>
-              {status === 'future' ? scholarship.open_date : scholarship.deadline}
+              {status === 'future' ? formatDeadline(scholarship.open_date) : scholarship.deadline}
             </p>
             {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
               <span style={{ fontSize: 9, marginTop: 2, color: daysLeft <= 30 ? '#f87171' : 'rgba(128,128,128,0.45)' }}>

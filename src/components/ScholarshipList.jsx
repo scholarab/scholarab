@@ -33,6 +33,8 @@ export default function ScholarshipList({ initialScholarships }) {
     setRegion,
     sheetOpen,
     setSheetOpen,
+    query,
+    setQuery,
     hasActiveFilters,
     regionKey,
     sentinelRef,
@@ -130,6 +132,32 @@ export default function ScholarshipList({ initialScholarships }) {
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22d3a5', position: 'absolute', top: 4, right: 4 }} />
           )}
         </button>
+      </div>
+
+      {/* ── Search bar ── */}
+      <div className="relative mb-4">
+        <svg className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 dark:text-white/25" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.5"/>
+          <path d="M10.5 10.5L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+        <input
+          type="search"
+          placeholder="Search scholarships…"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm bg-white dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/25 focus:outline-none focus:border-[#22d3a5]/50 transition-colors"
+        />
+        {query && (
+          <button
+            onClick={() => setQuery('')}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-white/25 hover:text-gray-600 dark:hover:text-white/50 transition-colors"
+            aria-label="Clear search"
+          >
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* ── Region pills row (mobile + desktop) ── */}
@@ -261,9 +289,11 @@ export default function ScholarshipList({ initialScholarships }) {
       {/* Empty state */}
       {filtered.length === 0 && (
         <p className="text-center py-16 text-gray-400 dark:text-white/25">
-          {selectedRegion !== null
-            ? 'No scholarships match your filters.'
-            : 'No scholarships to show.'}
+          {query.trim() !== ''
+            ? 'No scholarships match your search.'
+            : selectedRegion !== null
+              ? 'No scholarships match your filters.'
+              : 'No scholarships to show.'}
         </p>
       )}
     </div>

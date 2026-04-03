@@ -21,7 +21,7 @@ This project is open source! If you know of a local scholarship that isn't on th
 3. Add a new JSON object to the array with the following format:
    ```json
    {
-     "id": 99,
+     "id": 126,
      "title": "Name of Scholarship",
      "amount": "$1,000",
      "deadline": "YYYY-MM-DD",
@@ -35,8 +35,9 @@ This project is open source! If you know of a local scholarship that isn't on th
    }
    ```
    **Field reference:**
+   - `id`: a unique integer not already used in `scholarships.json`
    - `category`: `Community` | `Academic` | `STEM` | `Indigenous` | `Arts` | `Trades`
-   - `region`: `Medicine Hat` | `Alberta-wide` | `National` | `Lethbridge` | `Calgary` | `Edmonton`
+   - `region`: `Medicine Hat` | `Alberta` | `Alberta-wide` | `National` | `Lethbridge` | `Calgary` | `Edmonton`
    - `active`: set to `true`; set to `false` once the scholarship is permanently discontinued
    - `lastVerified`: month you confirmed the listing is still active (e.g. `"2026-03"`)
    - `open_date`: omit if unknown; only set when applications open on a future date
