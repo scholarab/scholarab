@@ -36,7 +36,7 @@
     "category": "Community",
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
-    "active": false
+    "active": true
   },
   {
     "id": 4,
@@ -86,7 +86,7 @@
     "category": "Academic",
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
-    "active": false
+    "active": true
   },
   {
     "id": 14,
@@ -111,7 +111,7 @@
     "category": "Trades",
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
-    "active": false
+    "active": true
   },
   {
     "id": 17,
@@ -139,7 +139,7 @@
     "region": "Alberta",
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
-    "active": true
+    "active": false
   },
   {
     "id": 19,
@@ -181,7 +181,7 @@
     "region": "Medicine Hat",
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
-    "active": false
+    "active": true
   },
   {
     "id": 22,
@@ -252,7 +252,7 @@
     "region": "Medicine Hat",
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
-    "active": false
+    "active": true
   },
   {
     "id": 28,
@@ -318,7 +318,7 @@
     "region": "Medicine Hat",
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
-    "active": false
+    "active": true
   },
   {
     "id": 35,
@@ -330,7 +330,7 @@
     "category": "Indigenous",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": true
+    "active": false
   },
   {
     "id": 36,
@@ -938,7 +938,7 @@
     "category": "Arts",
     "region": "Edmonton",
     "lastVerified": "2026-03",
-    "active": true
+    "active": false
   },
   {
     "id": 85,
@@ -950,7 +950,7 @@
     "category": "Arts",
     "region": "Edmonton",
     "lastVerified": "2026-03",
-    "active": true
+    "active": false
   },
   {
     "id": 86,
