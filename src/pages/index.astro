@@ -25,13 +25,13 @@ const scholarshipCount = scholarships.filter(s => {
   ogUrl="https://www.scholarab.ca"
   currentPath="/"
 >
-  <script type="application/ld+json" slot="head">{JSON.stringify({
+  <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "ScholarAB",
     "url": "https://www.scholarab.ca",
     "description": "Free Alberta scholarship and research program directory for high school students."
-  })}</script>
+  })} slot="head" />
   <main class="pb-8">
 
     <!-- Hero -->
