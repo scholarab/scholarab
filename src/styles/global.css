@@ -50,6 +50,24 @@ h1, h2 {
   letter-spacing: -0.02em;
 }
 
+/* ── Stretched card link (Bootstrap pattern) ─────────────── */
+/* The <a class="card-nav-link"> inside a card title has its ::after
+   stretched to cover the entire card (card has contain:layout as
+   containing block). Interactive elements (bookmark, CTA button) sit
+   at z-index:1, above the z-index:0 overlay, so they capture clicks
+   first without any stopPropagation or JS navigation needed. */
+.card-nav-link {
+  color: inherit;
+  text-decoration: none;
+}
+.card-nav-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 16px;
+}
+
 /* ── Dark-theme card ──────────────────────────────────────── */
 .card {
   background: #ffffff;

@@ -58,14 +58,8 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
         minHeight: 320,
         opacity: isClosed ? 0.45 : undefined,
         borderTop: `2px solid ${accentColor}`,
-        cursor: 'pointer',
-        touchAction: 'manipulation',
         '--card-glow': `${accentColor}66`,
       }}
-      onClick={(e) => { if (e.target.closest?.('[data-no-nav]')) return; window.location.href = `/programs/${generateSlug(program.name)}`; }}
-      onKeyDown={e => { if (e.key === 'Enter') window.location.href = `/programs/${generateSlug(program.name)}`; }}
-      role="link"
-      tabIndex={0}
     >
       {/* TOP SECTION */}
       <div>
@@ -77,12 +71,12 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
               {program.category}
             </span>
           ); })()}
-          <div data-no-nav onClick={e => e.stopPropagation()}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
+          <div style={{ position: 'relative', zIndex: 1 }}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
         </div>
 
         {/* Name + provider + meta + description + stipend */}
         <h2 className={`font-bold text-base leading-snug mb-1 ${isClosed ? 'text-gray-400 dark:text-white/25' : 'text-gray-900 dark:text-white'}`}>
-          {program.name}
+          <a href={`/programs/${generateSlug(program.name)}`} className="card-nav-link">{program.name}</a>
         </h2>
         <p className="text-xs mb-2 text-gray-400 dark:text-white/30">{program.provider}</p>
         <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3">
@@ -122,14 +116,14 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
       </div>
 
       {/* BOTTOM SECTION — button */}
-      <div style={{ paddingTop: 16 }}>
+      <div style={{ paddingTop: 16, position: 'relative', zIndex: 1 }}>
         {isClosed ? (
-          <button disabled onClick={e => e.stopPropagation()} className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
+          <button disabled className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
             Closed
           </button>
         ) : (
           <a href={program.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
-            onClick={e => { track('learn_more', { id: program.id, name: program.name }); e.stopPropagation(); }}
+            onClick={() => track('learn_more', { id: program.id, name: program.name })}
             className="btn-teal block w-full text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
             style={{ background: '#22d3a5', color: '#0a0a0f' }}>
             Learn More

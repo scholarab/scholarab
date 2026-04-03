@@ -50,14 +50,8 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
         minHeight: 280,
         opacity: isClosed ? 0.45 : isUpcoming ? 0.75 : undefined,
         borderTop: `2px solid ${accentColor}`,
-        cursor: 'pointer',
-        touchAction: 'manipulation',
         '--card-glow': `${accentColor}66`,
       }}
-      onClick={(e) => { if (e.target.closest?.('[data-no-nav]')) return; window.location.href = `/scholarships/${slug}`; }}
-      onKeyDown={e => { if (e.key === 'Enter') window.location.href = `/scholarships/${slug}`; }}
-      role="link"
-      tabIndex={0}
     >
       {/* TOP SECTION */}
       <div style={{ flexGrow: 1 }}>
@@ -69,12 +63,12 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
               {scholarship.category}
             </span>
           ); })() : <span />}
-          <div data-no-nav onClick={e => e.stopPropagation()}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
+          <div style={{ position: 'relative', zIndex: 1 }}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
         </div>
 
         {/* Title + audience */}
         <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-gray-400 dark:text-white/25' : 'text-gray-900 dark:text-white'}`}>
-          {scholarship.title}
+          <a href={`/scholarships/${slug}`} className="card-nav-link">{scholarship.title}</a>
         </h2>
         <p className="text-sm line-clamp-2 mb-2 text-gray-500 dark:text-white/45">
           {scholarship.audience}
@@ -108,18 +102,18 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
       </div>
 
       {/* BOTTOM SECTION — button */}
-      <div style={{ paddingTop: 16 }}>
+      <div style={{ paddingTop: 16, position: 'relative', zIndex: 1 }}>
         {isClosed ? (
-          <button disabled onClick={e => e.stopPropagation()} className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
+          <button disabled className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
             Closed
           </button>
         ) : status === 'future' ? (
-          <button disabled onClick={e => e.stopPropagation()} className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
+          <button disabled className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
             Opening Soon
           </button>
         ) : (
           <a href={scholarship.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
-            onClick={e => { track('apply_now', { id: scholarship.id, title: scholarship.title }); e.stopPropagation(); }}
+            onClick={() => track('apply_now', { id: scholarship.id, title: scholarship.title })}
             className="btn-teal block w-full text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
             style={{ background: '#22d3a5', color: '#0a0a0f' }}>
             Apply Now
