@@ -8,7 +8,6 @@ export function getStatus(s) {
   const deadline = new Date(s.deadline + 'T00:00:00');
   if (t < open)     return 'future';
   if (t > deadline) return 'closed';
-  if (s.status === 'Opening Soon') return 'future';
   return 'active';
 }
 
