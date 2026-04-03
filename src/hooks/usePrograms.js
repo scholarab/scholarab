@@ -84,9 +84,10 @@ export function usePrograms(initialPrograms) {
   const STATUS_ORDER = { active: 0, tba: 1, closed: 2 };
 
   const filtered = useMemo(() => {
+    const nonClosed = initialPrograms.filter(p => getStatus(p) !== 'closed');
     const afterCategory = selectedCategory === 'all'
-      ? initialPrograms
-      : initialPrograms.filter(p => p.category === selectedCategory);
+      ? nonClosed
+      : nonClosed.filter(p => p.category === selectedCategory);
 
     return [...afterCategory].sort((a, b) => {
       const sa = getStatus(a), sb = getStatus(b);
