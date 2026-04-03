@@ -2,12 +2,8 @@ name: validate-data
 
 on:
   pull_request:
-    paths:
-      - 'src/data/**'
   push:
     branches: [main]
-    paths:
-      - 'src/data/**'
 
 jobs:
   validate:
