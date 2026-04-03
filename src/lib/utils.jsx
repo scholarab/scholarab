@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { toast } from 'sonner';
 
 export { generateSlug } from './generateSlug.js';
 
@@ -18,7 +17,39 @@ export function formatDeadline(str) {
 }
 
 export function showToast(message) {
-  toast(message);
+  const TOAST_ID = 'sa-toast';
+  document.getElementById(TOAST_ID)?.remove();
+  const el = document.createElement('div');
+  el.id = TOAST_ID;
+  Object.assign(el.style, {
+    position: 'fixed',
+    bottom: '90px',
+    left: '50%',
+    transform: 'translateX(-50%) translateY(8px)',
+    background: '#22d3a5',
+    color: '#0a0a0f',
+    padding: '10px 22px',
+    borderRadius: '999px',
+    fontSize: '13px',
+    fontWeight: '600',
+    whiteSpace: 'nowrap',
+    zIndex: '999999999',
+    opacity: '0',
+    pointerEvents: 'none',
+    transition: 'opacity 0.25s ease, transform 0.25s ease',
+    boxShadow: '0 4px 20px rgba(34,211,165,0.35)',
+  });
+  el.textContent = message;
+  document.body.appendChild(el);
+  requestAnimationFrame(() => {
+    el.style.opacity = '1';
+    el.style.transform = 'translateX(-50%) translateY(0)';
+  });
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-50%) translateY(8px)';
+    setTimeout(() => el.remove(), 300);
+  }, 2800);
 }
 
 export function BookmarkButton({ isSaved, onToggle }) {

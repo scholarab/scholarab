@@ -62,7 +62,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
         touchAction: 'manipulation',
         '--card-glow': `${accentColor}66`,
       }}
-      onClick={() => window.location.href = `/programs/${generateSlug(program.name)}`}
+      onClick={(e) => { if (e.target.closest?.('[data-no-nav]')) return; window.location.href = `/programs/${generateSlug(program.name)}`; }}
       onKeyDown={e => { if (e.key === 'Enter') window.location.href = `/programs/${generateSlug(program.name)}`; }}
       role="link"
       tabIndex={0}
@@ -77,7 +77,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
               {program.category}
             </span>
           ); })()}
-          <div onClick={e => e.stopPropagation()}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
+          <div data-no-nav onClick={e => e.stopPropagation()}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
         </div>
 
         {/* Name + provider + meta + description + stipend */}

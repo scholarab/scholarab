@@ -54,7 +54,7 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
         touchAction: 'manipulation',
         '--card-glow': `${accentColor}66`,
       }}
-      onClick={() => window.location.href = `/scholarships/${slug}`}
+      onClick={(e) => { if (e.target.closest?.('[data-no-nav]')) return; window.location.href = `/scholarships/${slug}`; }}
       onKeyDown={e => { if (e.key === 'Enter') window.location.href = `/scholarships/${slug}`; }}
       role="link"
       tabIndex={0}
@@ -69,7 +69,7 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
               {scholarship.category}
             </span>
           ); })() : <span />}
-          <div onClick={e => e.stopPropagation()}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
+          <div data-no-nav onClick={e => e.stopPropagation()}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
         </div>
 
         {/* Title + audience */}
