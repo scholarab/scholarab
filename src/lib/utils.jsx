@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { toast } from 'sonner';
 
 export { generateSlug } from './generateSlug.js';
 
@@ -16,49 +17,8 @@ export function formatDeadline(str) {
   return d.toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-let _toastTimer = null;
-
 export function showToast(message) {
-  if (_toastTimer !== null) { clearTimeout(_toastTimer); _toastTimer = null; }
-  document.getElementById('scholarab-toast')?.remove();
-  const toast = document.createElement('div');
-  toast.id = 'scholarab-toast';
-  toast.textContent = message;
-  toast.style.cssText = `
-    position: fixed;
-    bottom: 90px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: #22d3a5;
-    color: #0a0a0f;
-    padding: 10px 22px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    z-index: 99999;
-    opacity: 0;
-    pointer-events: none;
-    white-space: nowrap;
-    box-shadow: 0 4px 20px rgba(34,211,165,0.35);
-  `;
-  document.body.appendChild(toast);
-  toast.animate(
-    [
-      { opacity: 0, transform: 'translateX(-50%) translateY(20px)' },
-      { opacity: 1, transform: 'translateX(-50%) translateY(0px)' },
-    ],
-    { duration: 350, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', fill: 'forwards' }
-  );
-  _toastTimer = setTimeout(() => {
-    _toastTimer = null;
-    toast.animate(
-      [
-        { opacity: 1, transform: 'translateX(-50%) translateY(0px)' },
-        { opacity: 0, transform: 'translateX(-50%) translateY(10px)' },
-      ],
-      { duration: 220, easing: 'ease-in', fill: 'forwards' }
-    ).onfinish = () => toast.remove();
-  }, 1600);
+  toast(message);
 }
 
 export function BookmarkButton({ isSaved, onToggle }) {

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { getSavedPrograms, toggleSavedProgram } from '../lib/tracker.js';
 import { getToday } from '../lib/utils.jsx';
 
@@ -41,10 +42,10 @@ export function usePrograms(initialPrograms) {
   const [sheetOpen,        setSheetOpen        ] = useState(false);
   const [savedIds,         setSavedIds         ] = useState([]);
 
-  const batchSizeRef    = useRef(INITIAL_BATCH);
-  const hasFiltered     = useRef(false);
-  const sentinelRef     = useRef(null);
-  const visibleCountRef = useRef(visibleCount);
+  const batchSizeRef = useRef(INITIAL_BATCH);
+  const hasFiltered  = useRef(false);
+
+  const { ref: sentinelRef, inView } = useInView({ rootMargin: '300px' });
 
   const validCategories = useMemo(
     () => new Set(initialPrograms.map(p => p.category)),
@@ -97,23 +98,15 @@ export function usePrograms(initialPrograms) {
     });
   }, [initialPrograms, selectedCategory, sortBy]);
 
-  visibleCountRef.current = visibleCount;
-
+  // Infinite scroll via react-intersection-observer
   useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
-    const chunk = () => batchSizeRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && visibleCountRef.current < filtered.length) {
-          setVisibleCount(v => v + chunk());
-        }
-      },
-      { rootMargin: '300px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [filtered.length]);
+    if (inView) {
+      setVisibleCount(v => {
+        if (v < filtered.length) return v + batchSizeRef.current;
+        return v;
+      });
+    }
+  }, [inView, filtered.length]);
 
   return {
     filtered,

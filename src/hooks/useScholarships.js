@@ -1,4 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
+import Fuse from 'fuse.js';
+import { useDebounce } from 'use-debounce';
+import { useInView } from 'react-intersection-observer';
 import { getSaved, toggleSaved } from '../lib/tracker.js';
 import { getToday } from '../lib/utils.jsx';
 
@@ -35,26 +38,26 @@ function getInitialParams() {
 function updateURL(sort, region) {
   if (typeof window === 'undefined') return;
   const params = new URLSearchParams();
-  if (sort && sort !== 'random') params.set('sort', sort);
-  if (region)                    params.set('region', region);
+  if (sort && sort !== 'featured') params.set('sort', sort);
+  if (region)                      params.set('region', region);
   const qs     = params.toString();
   const newUrl = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
   window.history.replaceState(null, '', newUrl);
 }
 
 export function useScholarships(initialScholarships) {
-  /** Matches server render: no URL reads or random shuffle until after mount. */
   const [sortBy,         setSortBy        ] = useState('featured');
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [visibleCount,   setVisibleCount  ] = useState(INITIAL_BATCH);
   const [sheetOpen,      setSheetOpen     ] = useState(false);
   const [query,          setQuery         ] = useState('');
+  const [debouncedQuery]                    = useDebounce(query, 200);
+  const [savedIds,       setSavedIds      ] = useState([]);
 
-  const [savedIds, setSavedIds] = useState([]);
-  const batchSizeRef    = useRef(INITIAL_BATCH);
-  const hasFiltered     = useRef(false);
-  const sentinelRef     = useRef(null);
-  const visibleCountRef = useRef(visibleCount);
+  const batchSizeRef = useRef(INITIAL_BATCH);
+  const hasFiltered  = useRef(false);
+
+  const { ref: sentinelRef, inView } = useInView({ rootMargin: '300px' });
 
   useEffect(() => {
     const p = getInitialParams();
@@ -86,19 +89,25 @@ export function useScholarships(initialScholarships) {
     updateURL(value, selectedRegion);
   }
 
-  const filtered = useMemo(() => {
-    const withoutClosed = initialScholarships.filter(s => getStatus(s) !== 'closed');
+  const withoutClosed = useMemo(
+    () => initialScholarships.filter(s => getStatus(s) !== 'closed'),
+    [initialScholarships]
+  );
 
-    const afterSearch = query.trim() === ''
+  const fuse = useMemo(() => new Fuse(withoutClosed, {
+    keys: [
+      { name: 'title',    weight: 0.6 },
+      { name: 'audience', weight: 0.2 },
+      { name: 'category', weight: 0.15 },
+      { name: 'notes',    weight: 0.05 },
+    ],
+    threshold: 0.35,
+  }), [withoutClosed]);
+
+  const filtered = useMemo(() => {
+    const afterSearch = debouncedQuery.trim() === ''
       ? withoutClosed
-      : withoutClosed.filter(s => {
-          const q = query.toLowerCase();
-          return (
-            s.title.toLowerCase().includes(q) ||
-            (s.audience && s.audience.toLowerCase().includes(q)) ||
-            (s.category && s.category.toLowerCase().includes(q))
-          );
-        });
+      : fuse.search(debouncedQuery).map(r => r.item);
 
     const afterRegion = selectedRegion === null
       ? afterSearch
@@ -117,25 +126,17 @@ export function useScholarships(initialScholarships) {
       if (sa === 'active') return new Date(a.deadline) - new Date(b.deadline);
       return 0;
     });
-  }, [initialScholarships, selectedRegion, sortBy, query]);
+  }, [withoutClosed, fuse, selectedRegion, sortBy, debouncedQuery]);
 
-  visibleCountRef.current = visibleCount;
-
+  // Infinite scroll via react-intersection-observer
   useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
-    const chunk = () => batchSizeRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && visibleCountRef.current < filtered.length) {
-          setVisibleCount(v => v + chunk());
-        }
-      },
-      { rootMargin: '300px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [filtered.length]);
+    if (inView) {
+      setVisibleCount(v => {
+        if (v < filtered.length) return v + batchSizeRef.current;
+        return v;
+      });
+    }
+  }, [inView, filtered.length]);
 
   return {
     filtered,

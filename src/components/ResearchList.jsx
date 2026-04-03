@@ -1,7 +1,7 @@
-import { useRef, useLayoutEffect, useMemo } from 'react';
+import { useMemo } from 'react';
+import { Drawer } from 'vaul';
 import { usePrograms, INITIAL_BATCH } from '../hooks/usePrograms.js';
 import ProgramCard from './ProgramCard.jsx';
-import { SPRING } from '../lib/utils.jsx';
 
 const SORT_OPTIONS = [
   { value: 'featured',    label: 'Featured' },
@@ -35,59 +35,6 @@ export default function ResearchList({ programs }) {
   const pillBase = 'flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
   const pillOn   = 'text-[#22d3a5]';
   const pillOff  = 'bg-white text-gray-600 border-gray-200 dark:bg-white/[0.03] dark:text-white/45 dark:border-white/10';
-
-  // ── Spring bottom sheet ─────────────────────────────────────
-  const sheetRef  = useRef(null);
-  const dragStart = useRef(null);
-
-  useLayoutEffect(() => {
-    if (sheetOpen && sheetRef.current) {
-      sheetRef.current.animate(
-        [{ transform: 'translateY(100%)' }, { transform: 'translateY(0)' }],
-        { duration: 280, easing: SPRING, fill: 'forwards' }
-      );
-    }
-  }, [sheetOpen]);
-
-  function closeSheet() {
-    if (!sheetRef.current) { setSheetOpen(false); return; }
-    const from = sheetRef.current.style.transform || 'translateY(0)';
-    sheetRef.current.style.transform = '';
-    const anim = sheetRef.current.animate(
-      [{ transform: from }, { transform: 'translateY(110%)' }],
-      { duration: 280, easing: 'ease-in', fill: 'forwards' }
-    );
-    anim.onfinish = () => setSheetOpen(false);
-  }
-
-  function onDragStart(e) {
-    dragStart.current = { y: e.clientY, t: Date.now() };
-    e.currentTarget.setPointerCapture(e.pointerId);
-  }
-
-  function onDragMove(e) {
-    if (dragStart.current === null || !sheetRef.current) return;
-    const dy = Math.max(0, e.clientY - dragStart.current.y);
-    sheetRef.current.style.transform = `translateY(${dy}px)`;
-  }
-
-  function onDragEnd(e) {
-    if (dragStart.current === null) return;
-    const dy = Math.max(0, e.clientY - dragStart.current.y);
-    const elapsed = Date.now() - dragStart.current.t;
-    const velocity = dy / Math.max(elapsed, 1) * 1000;
-    dragStart.current = null;
-    if (!sheetRef.current) return;
-    if (dy > 80 || velocity > 400) {
-      closeSheet();
-    } else {
-      const anim = sheetRef.current.animate(
-        [{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0)' }],
-        { duration: 220, easing: SPRING, fill: 'forwards' }
-      );
-      anim.onfinish = () => { if (sheetRef.current) sheetRef.current.style.transform = ''; };
-    }
-  }
 
   const savedSet = useMemo(() => new Set(savedIds), [savedIds]);
 
@@ -164,31 +111,19 @@ export default function ResearchList({ programs }) {
         </div>
       </div>
 
-      {/* ── MOBILE: Bottom sheet ── */}
-      {sheetOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40 md:hidden"
-            style={{ background: 'rgba(0,0,0,0.45)' }}
-            onClick={closeSheet}
-          />
-          <div
-            ref={sheetRef}
-            className={`fixed left-0 right-0 z-50 md:hidden rounded-t-2xl ${sheetBg} flex flex-col`}
-            style={{ bottom: 64, boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)', willChange: 'transform' }}
+      {/* ── MOBILE: Bottom sheet (vaul) ── */}
+      <Drawer.Root open={sheetOpen} onOpenChange={setSheetOpen}>
+        <Drawer.Portal>
+          <Drawer.Overlay className="fixed inset-0 z-40 md:hidden bg-black/[0.45]" />
+          <Drawer.Content
+            aria-label="Sort options"
+            className={`fixed left-0 right-0 z-50 md:hidden rounded-t-2xl ${sheetBg} flex flex-col outline-none`}
+            style={{ bottom: 64, boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}
           >
-            {/* Drag handle */}
-            <div
-              className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-black/[0.06] dark:border-white/[0.07] flex-shrink-0"
-              style={{ touchAction: 'none', cursor: 'grab' }}
-              onPointerDown={onDragStart}
-              onPointerMove={onDragMove}
-              onPointerUp={onDragEnd}
-            >
+            <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-black/[0.06] dark:border-white/[0.07] flex-shrink-0">
               <span className="font-semibold text-gray-900 dark:text-white text-base">Sort</span>
-              <button onClick={closeSheet} aria-label="Close"
-                className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-white/40 hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
-                onPointerDown={e => e.stopPropagation()}>
+              <button onClick={() => setSheetOpen(false)} aria-label="Close"
+                className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-white/40 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -214,16 +149,16 @@ export default function ResearchList({ programs }) {
 
             <div className="flex-shrink-0 px-5 py-4 border-t border-black/[0.06] dark:border-white/[0.07]" style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
               <button
-                onClick={closeSheet}
+                onClick={() => setSheetOpen(false)}
                 className="w-full py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
                 style={{ background: '#22d3a5', color: '#0a0a0f' }}
               >
                 Done
               </button>
             </div>
-          </div>
-        </>
-      )}
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer.Root>
 
       {/* Card grid */}
       <div key={`${categoryKey}-${sortBy}`}
