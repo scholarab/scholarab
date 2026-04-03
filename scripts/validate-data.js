@@ -15,6 +15,8 @@ const programs = JSON.parse(
 
 let failed = false;
 
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
 function isHttpUrl(u) {
   try {
     const p = new URL(String(u).trim()).protocol;
@@ -24,6 +26,49 @@ function isHttpUrl(u) {
   }
 }
 
+function isValidDate(str) {
+  if (!DATE_RE.test(str)) return false;
+  const d = new Date(str + 'T00:00:00');
+  return !isNaN(d.getTime());
+}
+
+// ── Scholarship IDs must be unique ──────────────────────────────────────────
+const schIds = new Map();
+for (const s of scholarships) {
+  if (s.id === undefined || s.id === null) {
+    console.error(`Scholarship "${s.title}": missing id`);
+    failed = true;
+    continue;
+  }
+  if (!schIds.has(s.id)) schIds.set(s.id, []);
+  schIds.get(s.id).push(s.title);
+}
+for (const [id, titles] of schIds) {
+  if (titles.length > 1) {
+    console.error(`Duplicate scholarship id ${id}: "${titles.join('", "')}"`);
+    failed = true;
+  }
+}
+
+// ── Program IDs must be unique ───────────────────────────────────────────────
+const progIds = new Map();
+for (const p of programs) {
+  if (p.id === undefined || p.id === null) {
+    console.error(`Program "${p.name}": missing id`);
+    failed = true;
+    continue;
+  }
+  if (!progIds.has(p.id)) progIds.set(p.id, []);
+  progIds.get(p.id).push(p.name);
+}
+for (const [id, names] of progIds) {
+  if (names.length > 1) {
+    console.error(`Duplicate program id ${id}: "${names.join('", "')}"`);
+    failed = true;
+  }
+}
+
+// ── Scholarship slugs must be unique ────────────────────────────────────────
 const schSlugs = new Map();
 for (const s of scholarships) {
   if (!s.title || String(s.title).trim() === '') {
@@ -47,6 +92,7 @@ for (const [slug, ids] of schSlugs) {
   }
 }
 
+// ── Program slugs must be unique ────────────────────────────────────────────
 const progSlugs = new Map();
 for (const p of programs) {
   if (!p.name || String(p.name).trim() === '') {
@@ -70,22 +116,48 @@ for (const [slug, ids] of progSlugs) {
   }
 }
 
+// ── Scholarship field checks ─────────────────────────────────────────────────
 for (const s of scholarships) {
+  const tag = `Scholarship [${s.id}] "${s.title}"`;
+
+  if (!s.amount || String(s.amount).trim() === '') {
+    console.error(`${tag}: missing amount`);
+    failed = true;
+  }
+
   if (!s.url || String(s.url).trim() === '') {
-    console.error(`Scholarship [${s.id}] ${s.title}: missing url`);
+    console.error(`${tag}: missing url`);
     failed = true;
   } else if (!isHttpUrl(s.url)) {
-    console.error(`Scholarship [${s.id}] ${s.title}: url must be http(s): ${s.url}`);
+    console.error(`${tag}: url must be http(s): ${s.url}`);
+    failed = true;
+  }
+
+  if (s.deadline && !isValidDate(s.deadline)) {
+    console.error(`${tag}: deadline must be YYYY-MM-DD, got: ${s.deadline}`);
+    failed = true;
+  }
+
+  if (s.open_date && !isValidDate(s.open_date)) {
+    console.error(`${tag}: open_date must be YYYY-MM-DD, got: ${s.open_date}`);
     failed = true;
   }
 }
 
+// ── Program field checks ─────────────────────────────────────────────────────
 for (const p of programs) {
+  const tag = `Program [${p.id}] "${p.name}"`;
+
   if (!p.url || String(p.url).trim() === '') {
-    console.error(`Program [${p.id}] ${p.name}: missing url`);
+    console.error(`${tag}: missing url`);
     failed = true;
   } else if (!isHttpUrl(p.url)) {
-    console.error(`Program [${p.id}] ${p.name}: url must be http(s): ${p.url}`);
+    console.error(`${tag}: url must be http(s): ${p.url}`);
+    failed = true;
+  }
+
+  if (p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && !isValidDate(p.deadline)) {
+    console.error(`${tag}: deadline must be YYYY-MM-DD (or "TBA"/"Ongoing"), got: ${p.deadline}`);
     failed = true;
   }
 }
