@@ -66,6 +66,7 @@ export function usePrograms(initialPrograms) {
   function handleToggleSave(id) {
     const newSaved = toggleSavedProgram(id);
     setSavedIds([...newSaved]);
+    track('save_toggle', { id, saved: newSaved.has(id) });
   }
 
   function handleSetCategory(cat) {

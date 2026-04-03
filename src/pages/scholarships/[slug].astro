@@ -2,11 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import DetailLayout from '../../components/DetailLayout.astro';
 import SchemaLD from '../../components/SchemaLD.astro';
-import scholarships from '../../data/scholarships.json';
+import { loadScholarships } from '../../lib/data-loader';
 import { generateSlug } from '../../lib/utils.jsx';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.js';
 
 export async function getStaticPaths() {
+  const scholarships = await loadScholarships();
   return scholarships.map(s => ({
     params: { slug: generateSlug(s.title) },
     props: { scholarship: s },
@@ -25,7 +26,7 @@ function formatDate(str: string): string {
 
 const todayDate = new Date();
 todayDate.setHours(0, 0, 0, 0);
-const openDate     = new Date((scholarship.open_date || '1970-01-01') + 'T00:00:00');
+const openDate     = new Date((scholarship.openDate || '1970-01-01') + 'T00:00:00');
 const deadlineDate = new Date(scholarship.deadline + 'T00:00:00');
 const status = todayDate < openDate ? 'future' : todayDate > deadlineDate ? 'closed' : 'active';
 
@@ -78,7 +79,7 @@ const breadcrumbJson = {
     amount={scholarship.amount}
     url={scholarship.url}
     status={status}
-    openDate={scholarship.open_date ? formatDate(scholarship.open_date) : undefined}
+    openDate={scholarship.openDate ? formatDate(scholarship.openDate) : undefined}
     backHref="/scholarships"
     backLabel="Back to Scholarships"
     ctaLabel="Apply Now →"
@@ -93,7 +94,7 @@ const breadcrumbJson = {
       </div>
       <div>
         <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-1">Opens</p>
-        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{formatDate(scholarship.open_date)}</p>
+        <p class="text-sm font-medium text-gray-800 dark:text-white/80">{formatDate(scholarship.openDate)}</p>
       </div>
       {scholarship.region && (
         <div>

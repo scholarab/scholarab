@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import scholarships from '../data/scholarships.json';
+import { loadScholarships } from '../lib/data-loader';
 import ScholarshipList from '../components/ScholarshipList.jsx';
+const scholarships = await loadScholarships();
 ---
 
 <Layout

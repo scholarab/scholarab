@@ -1,0 +1,93 @@
+export type Scholarship = {
+  id: number
+  title: string
+  amount: string
+  deadline: string | null
+  openDate: string | null
+  audience: string | null
+  url: string
+  category: string | null
+  lastVerified: string | null
+  region: string | null
+  notes: string | null
+  applyViaGuidance: boolean
+  active: boolean
+}
+
+export type Program = {
+  id: number
+  name: string
+  emoji: string | null
+  category: string | null
+  provider: string | null
+  grades: string | null
+  duration: string | null
+  paid: boolean
+  stipend: string | null
+  location: string | null
+  eligibility: string | null
+  deadline: string | null
+  url: string
+  description: string | null
+  lastVerified: string | null
+}
+
+export async function loadScholarships(): Promise<Scholarship[]> {
+  if (process.env.DATABASE_URL) {
+    try {
+      const { db } = await import('./db/client')
+      const { scholarships } = await import('./db/schema')
+      const rows = await db.select().from(scholarships)
+      return rows.map(r => ({
+        id: r.id,
+        title: r.title,
+        amount: r.amount,
+        deadline: r.deadline ?? null,
+        openDate: r.openDate ?? null,
+        audience: r.audience ?? null,
+        url: r.url,
+        category: r.category ?? null,
+        lastVerified: r.lastVerified ?? null,
+        region: r.region ?? null,
+        notes: r.notes ?? null,
+        applyViaGuidance: r.applyViaGuidance ?? false,
+        active: r.active ?? true,
+      }))
+    } catch (e) {
+      console.error('DB load failed, falling back to JSON:', e)
+    }
+  }
+  const data = await import('../data/scholarships.json')
+  return (data.default as any[]).map(s => ({ ...s, openDate: s.openDate ?? s.open_date ?? null }))
+}
+
+export async function loadPrograms(): Promise<Program[]> {
+  if (process.env.DATABASE_URL) {
+    try {
+      const { db } = await import('./db/client')
+      const { researchPrograms } = await import('./db/schema')
+      const rows = await db.select().from(researchPrograms)
+      return rows.map(r => ({
+        id: r.id,
+        name: r.name,
+        emoji: r.emoji ?? null,
+        category: r.category ?? null,
+        provider: r.provider ?? null,
+        grades: r.grades ?? null,
+        duration: r.duration ?? null,
+        paid: r.paid ?? false,
+        stipend: r.stipend ?? null,
+        location: r.location ?? null,
+        eligibility: r.eligibility ?? null,
+        deadline: r.deadline ?? null,
+        url: r.url,
+        description: r.description ?? null,
+        lastVerified: r.lastVerified ?? null,
+      }))
+    } catch (e) {
+      console.error('DB load failed, falling back to JSON:', e)
+    }
+  }
+  const data = await import('../data/research-programs.json')
+  return data.default as Program[]
+}

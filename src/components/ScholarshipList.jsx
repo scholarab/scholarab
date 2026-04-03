@@ -200,11 +200,9 @@ export default function ScholarshipList({ initialScholarships }) {
       {/* Empty state */}
       {filtered.length === 0 && (
         <p className="text-center py-16 text-gray-400 dark:text-white/25">
-          {query.trim() !== ''
-            ? 'No scholarships match your search.'
-            : selectedRegion !== null
-              ? 'No scholarships match your filters.'
-              : 'No scholarships to show.'}
+          {selectedRegion !== null
+            ? 'No scholarships match your filters.'
+            : 'No scholarships to show.'}
         </p>
       )}
     </div>

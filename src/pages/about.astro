@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import scholarships from '../data/scholarships.json';
+import { loadScholarships } from '../lib/data-loader';
 
+const scholarships = await loadScholarships();
 const scholarshipCount = scholarships.length;
 ---
 
@@ -39,10 +40,9 @@ const scholarshipCount = scholarships.length;
             ScholarAB is a free scholarship directory for Alberta high school students. Every listing is
             verified by hand. Deadlines are tracked. Nothing is scraped or auto-generated.
           </p>
-          <p>No account needed. No ads. No algorithm. Just scholarships.</p>
         </div>
         <p class="text-sm text-black/40 dark:text-white/40 mt-3">
-          Created by a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" class="hover:opacity-70 transition-opacity">Medicine Hat High School</a> student. This is an independent project — not a school assignment, not affiliated with any organization. Built entirely on my own.
+          Created by a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" class="hover:opacity-70 transition-opacity">Medicine Hat High School</a> student.
         </p>
       </section>
 

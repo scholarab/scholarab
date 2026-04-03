@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import scholarships from '../data/scholarships.json';
-import programs from '../data/research-programs.json';
+import { loadScholarships, loadPrograms } from '../lib/data-loader';
+
+const scholarships = await loadScholarships();
+const programs = await loadPrograms();
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);

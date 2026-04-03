@@ -1,0 +1,18 @@
+---
+export const prerender = false
+import LoginForm from '../../components/admin/LoginForm'
+import '../../styles/global.css'
+---
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — ScholarAB</title>
+  <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high" />
+  <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
+</head>
+<body class="bg-[#0a0a0f] text-white min-h-screen flex items-center justify-center p-4">
+  <LoginForm client:load next={Astro.url.searchParams.get('next') || '/admin/scholarships'} />
+</body>
+</html>

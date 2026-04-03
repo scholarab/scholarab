@@ -1,0 +1,36 @@
+---
+export const prerender = false
+import { db } from '../../lib/db/client'
+import { researchPrograms } from '../../lib/db/schema'
+import { desc } from 'drizzle-orm'
+import AdminShell from '../../components/admin/AdminShell'
+import '../../styles/global.css'
+
+const user = Astro.locals.user!
+let data: typeof researchPrograms.$inferSelect[] = []
+try {
+  data = await db.select().from(researchPrograms).orderBy(desc(researchPrograms.updatedAt))
+} catch (e) {
+  console.error('DB error:', e)
+}
+---
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs — ScholarAB Admin</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0a0a0f] text-white min-h-screen">
+  <AdminShell
+    client:load
+    user={user}
+    page="programs"
+    data={JSON.stringify(data)}
+  />
+</body>
+</html>

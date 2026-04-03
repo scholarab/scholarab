@@ -106,7 +106,7 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }) {
         </button>
       ) : (
         <a
-          href={s.url} target="_blank" rel="noopener noreferrer"
+          href={s.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
           className="mt-auto block w-full text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
           style={{ background: '#22d3a5', color: '#0a0a0f' }}
         >
@@ -170,7 +170,7 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
         <span className="text-xs text-gray-400 dark:text-white/35">{formatDeadline(p.deadline)}</span>
       )}
       <a
-        href={p.url} target="_blank" rel="noopener noreferrer"
+        href={p.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
         className="mt-auto block w-full text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
         style={{ background: '#22d3a5', color: '#0a0a0f' }}
       >

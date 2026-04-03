@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import programs from '../data/research-programs.json';
+import { loadPrograms } from '../lib/data-loader';
 import ResearchList from '../components/ResearchList.jsx';
+const programs = await loadPrograms();
 ---
 
 <Layout
