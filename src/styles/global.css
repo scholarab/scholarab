@@ -77,6 +77,12 @@ h1, h2 {
   opacity: 0;
   transition: opacity 0.22s ease;
   pointer-events: none;
+  /* z-index: -1 places ::after below ALL card content in the stacking context.
+     Firefox has a known quirk where pointer-events: none on a positioned
+     pseudo-element at opacity:1 (hover) doesn't reliably pass clicks through.
+     Below z-index 0, it's physically unreachable by pointer events. The
+     box-shadow still extends outside the card and is visible as the glow. */
+  z-index: -1;
 }
 .dark .card-interactive::after {
   box-shadow: 0 0 0 2px var(--card-glow, rgba(34, 211, 165, 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
