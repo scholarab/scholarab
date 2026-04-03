@@ -89,9 +89,29 @@ export function useScholarships(initialScholarships) {
     track('filter_sort', { sort: value, page: 'scholarships' });
   }
 
+  // Pre-compute status and parsed amounts once per data change — avoids
+  // repeated Date construction and regex parsing inside sort comparators.
+  const statusCache = useMemo(() => {
+    const m = new Map();
+    for (const s of initialScholarships) m.set(s.id, getStatus(s));
+    return m;
+  }, [initialScholarships]);
+
+  const amountCache = useMemo(() => {
+    const m = new Map();
+    for (const s of initialScholarships) m.set(s.id, parseInt(s.amount.replace(/[$,]/g, '')) || 0);
+    return m;
+  }, [initialScholarships]);
+
+  const deadlineCache = useMemo(() => {
+    const m = new Map();
+    for (const s of initialScholarships) m.set(s.id, new Date(s.deadline));
+    return m;
+  }, [initialScholarships]);
+
   const withoutClosed = useMemo(
-    () => initialScholarships.filter(s => getStatus(s) !== 'closed'),
-    [initialScholarships]
+    () => initialScholarships.filter(s => statusCache.get(s.id) !== 'closed'),
+    [initialScholarships, statusCache]
   );
 
   const filtered = useMemo(() => {
@@ -100,26 +120,27 @@ export function useScholarships(initialScholarships) {
       : withoutClosed.filter(REGION_MATCH[selectedRegion]);
 
     return [...afterRegion].sort((a, b) => {
-      if (sortBy === 'closest_due') return new Date(a.deadline) - new Date(b.deadline);
-      const amtA = parseInt(a.amount.replace(/[$,]/g, '')) || 0;
-      const amtB = parseInt(b.amount.replace(/[$,]/g, '')) || 0;
+      if (sortBy === 'closest_due') return deadlineCache.get(a.id) - deadlineCache.get(b.id);
+      const amtA = amountCache.get(a.id);
+      const amtB = amountCache.get(b.id);
       if (sortBy === 'highest_pay') return amtB - amtA;
       if (sortBy === 'lowest_pay')  return amtA - amtB;
-      const sa = getStatus(a), sb = getStatus(b);
+      const sa = statusCache.get(a.id), sb = statusCache.get(b.id);
       const ORDER = { active: 0, future: 1 };
       if ((ORDER[sa] ?? 2) !== (ORDER[sb] ?? 2)) return (ORDER[sa] ?? 2) - (ORDER[sb] ?? 2);
-      if (sa === 'active') return new Date(a.deadline) - new Date(b.deadline);
+      if (sa === 'active') return deadlineCache.get(a.id) - deadlineCache.get(b.id);
       return 0;
     });
-  }, [withoutClosed, selectedRegion, sortBy]);
+  }, [withoutClosed, selectedRegion, sortBy, statusCache, amountCache, deadlineCache]);
 
+  // RAF-batch the visible count increment so scroll-driven renders don't
+  // block the main thread mid-frame.
   useEffect(() => {
-    if (inView) {
-      setVisibleCount(v => {
-        if (v < filtered.length) return v + batchSizeRef.current;
-        return v;
-      });
-    }
+    if (!inView) return;
+    const rafId = requestAnimationFrame(() => {
+      setVisibleCount(v => v < filtered.length ? v + batchSizeRef.current : v);
+    });
+    return () => cancelAnimationFrame(rafId);
   }, [inView, filtered.length]);
 
   return {

@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react'
 import { toast } from 'sonner'
 
+const PAGE_SIZE = 25
+
 type Program = {
   id: number
   name: string
@@ -34,6 +36,7 @@ const emptyForm = (): Partial<Program> => ({
 export default function ProgramManager({ initialData }: Props) {
   const [items, setItems] = useState<Program[]>(initialData)
   const [search, setSearch] = useState('')
+  const [page, setPage] = useState(0)
   const [modal, setModal] = useState<{ type: 'edit' | 'add' | 'delete'; item?: Program } | null>(null)
   const [form, setForm] = useState<Partial<Program>>(emptyForm())
   const [saving, setSaving] = useState(false)
@@ -43,6 +46,13 @@ export default function ProgramManager({ initialData }: Props) {
     items.filter(p => p.name.toLowerCase().includes(search.toLowerCase())),
     [items, search]
   )
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
+  const paginated = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+
+  function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearch(e.target.value)
+    setPage(0)
+  }
 
   const openAdd = () => { setForm(emptyForm()); setShowAdvanced(false); setModal({ type: 'add' }) }
   const openEdit = (item: Program) => { setForm({ ...item }); setShowAdvanced(false); setModal({ type: 'edit', item }) }
@@ -131,7 +141,7 @@ export default function ProgramManager({ initialData }: Props) {
         type="search"
         placeholder="Search programs…"
         value={search}
-        onChange={e => setSearch(e.target.value)}
+        onChange={handleSearch}
         className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-none focus:border-[#22d3a5]/50 transition"
       />
 
@@ -148,7 +158,7 @@ export default function ProgramManager({ initialData }: Props) {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((p, i) => (
+            {paginated.map((p, i) => (
               <tr key={p.id} className={`border-b border-white/[0.04] hover:bg-white/[0.02] transition ${i % 2 === 0 ? '' : 'bg-white/[0.01]'}`}>
                 <td className="px-4 py-3 font-medium max-w-xs truncate">
                   {p.emoji && <span className="mr-1.5">{p.emoji}</span>}
@@ -170,12 +180,34 @@ export default function ProgramManager({ initialData }: Props) {
                 </td>
               </tr>
             ))}
-            {filtered.length === 0 && (
+            {paginated.length === 0 && (
               <tr><td colSpan={6} className="px-4 py-8 text-center text-white/30">No programs found</td></tr>
             )}
           </tbody>
         </table>
       </div>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-4 text-sm text-white/40">
+          <span>{filtered.length} total · page {page + 1} of {totalPages}</span>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setPage(p => Math.max(0, p - 1))}
+              disabled={page === 0}
+              className="px-3 py-1.5 rounded-lg border border-white/10 disabled:opacity-30 hover:border-white/20 transition"
+            >
+              ← Prev
+            </button>
+            <button
+              onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+              disabled={page >= totalPages - 1}
+              className="px-3 py-1.5 rounded-lg border border-white/10 disabled:opacity-30 hover:border-white/20 transition"
+            >
+              Next →
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Edit/Add Modal */}
       {(modal?.type === 'edit' || modal?.type === 'add') && (

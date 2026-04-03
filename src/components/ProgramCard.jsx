@@ -4,6 +4,7 @@ import { formatDeadline, BookmarkButton, generateSlug } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/usePrograms.js';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { getToday } from '../lib/utils.jsx';
+import { observeCard, unobserveCard } from '../lib/cardObserver.js';
 
 function isWithin30Days(deadlineStr) {
   if (!deadlineStr || deadlineStr === 'TBA' || deadlineStr === 'Ongoing') return false;
@@ -38,16 +39,12 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
       }
       return;
     }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        el.style.setProperty('--card-delay', delay);
-        el.classList.remove('card-before-reveal');
-        el.classList.add(isFiltered ? 'card-entrance-filter' : 'card-entrance');
-        observer.disconnect();
-      }
-    }, { threshold: 0.05 });
-    observer.observe(el);
-    return () => observer.disconnect();
+    observeCard(el, () => {
+      el.style.setProperty('--card-delay', delay);
+      el.classList.remove('card-before-reveal');
+      el.classList.add(isFiltered ? 'card-entrance-filter' : 'card-entrance');
+    });
+    return () => unobserveCard(el);
   }, [index, isFiltered, isInitial]);
 
   return (

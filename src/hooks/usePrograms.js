@@ -88,27 +88,43 @@ export function usePrograms(initialPrograms) {
 
   const STATUS_ORDER = { active: 0, tba: 1, closed: 2 };
 
+  // Pre-compute status and deadlines once per data change.
+  const statusCache = useMemo(() => {
+    const m = new Map();
+    for (const p of initialPrograms) m.set(p.id, getStatus(p));
+    return m;
+  }, [initialPrograms]);
+
+  const deadlineCache = useMemo(() => {
+    const m = new Map();
+    for (const p of initialPrograms) {
+      if (p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing') {
+        m.set(p.id, new Date(p.deadline + 'T00:00:00'));
+      }
+    }
+    return m;
+  }, [initialPrograms]);
+
   const filtered = useMemo(() => {
-    const nonClosed = initialPrograms.filter(p => getStatus(p) !== 'closed');
+    const nonClosed = initialPrograms.filter(p => statusCache.get(p.id) !== 'closed');
     const afterCategory = selectedCategory === 'all'
       ? nonClosed
       : nonClosed.filter(p => p.category === selectedCategory);
 
     return [...afterCategory].sort((a, b) => {
-      const sa = getStatus(a), sb = getStatus(b);
+      const sa = statusCache.get(a.id), sb = statusCache.get(b.id);
       if (STATUS_ORDER[sa] !== STATUS_ORDER[sb]) return STATUS_ORDER[sa] - STATUS_ORDER[sb];
-      if (sa === 'active') return new Date(a.deadline) - new Date(b.deadline);
+      if (sa === 'active') return (deadlineCache.get(a.id) ?? 0) - (deadlineCache.get(b.id) ?? 0);
       return 0;
     });
-  }, [initialPrograms, selectedCategory, sortBy]);
+  }, [initialPrograms, selectedCategory, sortBy, statusCache, deadlineCache]);
 
   useEffect(() => {
-    if (inView) {
-      setVisibleCount(v => {
-        if (v < filtered.length) return v + batchSizeRef.current;
-        return v;
-      });
-    }
+    if (!inView) return;
+    const rafId = requestAnimationFrame(() => {
+      setVisibleCount(v => v < filtered.length ? v + batchSizeRef.current : v);
+    });
+    return () => cancelAnimationFrame(rafId);
   }, [inView, filtered.length]);
 
   return {

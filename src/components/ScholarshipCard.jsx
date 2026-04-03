@@ -3,6 +3,7 @@ import { track } from '@vercel/analytics';
 import { getToday, BookmarkButton, generateSlug, formatDeadline } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
+import { observeCard, unobserveCard } from '../lib/cardObserver.js';
 
 export default function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }) {
   const status       = getStatus(scholarship);
@@ -29,16 +30,12 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
       }
       return;
     }
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        el.style.setProperty('--card-delay', delay);
-        el.classList.remove('card-before-reveal');
-        el.classList.add(isFiltered ? 'card-entrance-filter' : 'card-entrance');
-        observer.disconnect();
-      }
-    }, { threshold: 0.05 });
-    observer.observe(el);
-    return () => observer.disconnect();
+    observeCard(el, () => {
+      el.style.setProperty('--card-delay', delay);
+      el.classList.remove('card-before-reveal');
+      el.classList.add(isFiltered ? 'card-entrance-filter' : 'card-entrance');
+    });
+    return () => unobserveCard(el);
   }, [index, isFiltered, isInitial]);
 
   return (
