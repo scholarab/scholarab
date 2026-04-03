@@ -141,7 +141,7 @@ export default function ScholarshipList({ initialScholarships }) {
           <path d="M10.5 10.5L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
         </svg>
         <input
-          type="search"
+          type="text"
           placeholder="Search scholarships…"
           value={query}
           onChange={e => setQuery(e.target.value)}

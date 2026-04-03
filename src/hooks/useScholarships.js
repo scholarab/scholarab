@@ -117,7 +117,7 @@ export function useScholarships(initialScholarships) {
       if (sa === 'active') return new Date(a.deadline) - new Date(b.deadline);
       return 0;
     });
-  }, [initialScholarships, selectedRegion, sortBy]);
+  }, [initialScholarships, selectedRegion, sortBy, query]);
 
   visibleCountRef.current = visibleCount;
 
