@@ -114,9 +114,7 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
     backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(0,0,0,0.08);
     position: relative;
-    /* padding removed from transition — animating layout properties forces
-       a full reflow every scroll frame. The shrink snap is imperceptible
-       at normal scroll speeds. (Telegram Web principle: never animate layout) */
+    transition: padding 0.3s ease;
   }
   .glass-nav::after {
     content: '';
