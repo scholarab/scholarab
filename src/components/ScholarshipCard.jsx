@@ -1,11 +1,11 @@
 import { useRef, useEffect, memo } from 'react';
 import { track } from '@vercel/analytics';
-import { getToday, generateSlug, formatDeadline } from '../lib/utils.jsx';
+import { getToday, generateSlug, formatDeadline, showToast } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { observeCard, unobserveCard } from '../lib/cardObserver.js';
 
-function ScholarshipCard({ scholarship, index, isFiltered, isInitial }) {
+function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }) {
   const status       = getStatus(scholarship);
   const isClosed     = status === 'closed';
   const daysLeft     = status === 'active'
@@ -117,6 +117,25 @@ function ScholarshipCard({ scholarship, index, isFiltered, isInitial }) {
             Opening Soon
           </button>
         )}
+        <button
+          onClick={() => { showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
+          aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
+          style={{
+            width: 44,
+            flexShrink: 0,
+            borderRadius: 10,
+            background: isSaved ? 'rgba(34,211,165,0.12)' : 'rgba(255,255,255,0.07)',
+            border: `0.5px solid ${isSaved ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.18)'}`,
+            color: isSaved ? '#22d3a5' : 'rgba(200,200,210,0.7)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'color 0.15s, background 0.15s, border-color 0.15s',
+          }}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
       </div>
     </div>
   );
