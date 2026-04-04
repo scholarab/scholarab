@@ -48,7 +48,7 @@
   width: 700px; height: 700px;
   background: #22d3a5;
   filter: blur(130px);
-  opacity: 0.07;
+  opacity: 0.20;
   top: -280px; left: -180px;
   animation: orb-1 20s ease-in-out infinite alternate;
 }
@@ -56,7 +56,7 @@
   width: 600px; height: 600px;
   background: #3b82f6;
   filter: blur(130px);
-  opacity: 0.06;
+  opacity: 0.15;
   top: -180px; right: -140px;
   animation: orb-2 26s ease-in-out infinite alternate;
 }
@@ -64,7 +64,7 @@
   width: 650px; height: 650px;
   background: #a78bfa;
   filter: blur(140px);
-  opacity: 0.05;
+  opacity: 0.13;
   bottom: -240px; left: calc(50% - 325px);
   animation: orb-3 22s ease-in-out infinite alternate;
 }
