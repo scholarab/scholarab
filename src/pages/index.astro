@@ -21,14 +21,8 @@ const scholarshipCount = scholarships.filter(s => {
   return new Date(s.deadline + 'T00:00:00') >= today;
 }).length;
 
-const previewScholarships = activeScholarships
-  .slice()
-  .sort((a, b) => {
-    const av = parseInt(a.amount.replace(/[$,]/g, ''), 10) || 0;
-    const bv = parseInt(b.amount.replace(/[$,]/g, ''), 10) || 0;
-    return bv - av;
-  })
-  .slice(0, 5);
+const PREVIEW_IDS = [14, 116]; // Alexander Rutherford, UCalgary President's Admission
+const previewScholarships = PREVIEW_IDS.map(id => scholarships.find(s => s.id === id)).filter(Boolean);
 
 ---
 
