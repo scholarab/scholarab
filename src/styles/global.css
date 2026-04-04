@@ -31,13 +31,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Mobile: compensate for fixed nav (removes it from flow) ─ */
-/* Fixed nav height: ~60px (py-3 + SVG 36px) + top offset 8px = 68px.
-   76px gives 8px breathing room between nav bottom and content.       */
-@media (max-width: 768px) {
-  #main-content {
-    padding-top: 76px;
-  }
+/* ── Isolate main content stacking context ────────────────────
+   Cards with transform: scale create new stacking contexts. Without
+   isolation, a card's stacking context can escape above the fixed/sticky
+   nav (z-index: 500). isolation: isolate creates a top-level stacking
+   context for #main-content at z-index: auto, which always sits below
+   the nav's explicit z-index: 500 in the root stacking context.      */
+#main-content {
+  isolation: isolate;
 }
 
 /* ── Background orbs ───────────────────────────────────────── */
