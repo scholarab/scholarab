@@ -23,9 +23,9 @@ export function showToast(message) {
   el.id = TOAST_ID;
   Object.assign(el.style, {
     position: 'fixed',
-    bottom: '90px',
+    top: '72px',
     left: '50%',
-    transform: 'translateX(-50%) translateY(8px)',
+    transform: 'translateX(-50%) translateY(-8px)',
     background: '#22d3a5',
     color: '#0a0a0f',
     padding: '10px 22px',
@@ -47,7 +47,7 @@ export function showToast(message) {
   });
   setTimeout(() => {
     el.style.opacity = '0';
-    el.style.transform = 'translateX(-50%) translateY(8px)';
+    el.style.transform = 'translateX(-50%) translateY(-8px)';
     setTimeout(() => el.remove(), 300);
   }, 2800);
 }
