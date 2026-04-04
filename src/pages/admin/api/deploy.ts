@@ -5,7 +5,18 @@ import { deployLog } from '../../../lib/db/schema'
 
 export const prerender = false
 
+const ALLOWED_ORIGINS = [
+  'https://www.scholarab.ca',
+  'https://scholarab.ca',
+  'http://localhost:4321',
+]
+
 export const POST: APIRoute = async ({ request }) => {
+  const origin = request.headers.get('origin')
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
+  }
+
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
 

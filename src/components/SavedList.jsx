@@ -239,6 +239,14 @@ export default function SavedList({ initialScholarships, initialPrograms }) {
   useEffect(() => {
     setSavedScholarshipIds([...getSaved()]);
     setSavedProgramIds([...getSavedPrograms()]);
+
+    // Sync state when another tab saves/removes items
+    function handleStorage(e) {
+      if (e.key === 'scholarab_saved')          setSavedScholarshipIds([...getSaved()]);
+      if (e.key === 'scholarab_saved_programs') setSavedProgramIds([...getSavedPrograms()]);
+    }
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
   }, []);
 
   const savedScholarships = useMemo(() => {
@@ -252,11 +260,6 @@ export default function SavedList({ initialScholarships, initialPrograms }) {
   }, [initialPrograms, savedProgramIds]);
   const totalSaved = savedScholarships.length + savedPrograms.length;
 
-  useEffect(() => {
-    if (!window.matchMedia('(max-width: 768px)').matches) return;
-    document.body.style.overflowY = totalSaved > 4 ? '' : 'hidden';
-    return () => { document.body.style.overflowY = ''; };
-  }, [totalSaved]);
 
   function unsaveScholarship(id) {
     const next = toggleSaved(id);

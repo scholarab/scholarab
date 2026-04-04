@@ -1,4 +1,4 @@
-const CACHE_NAME = 'scholarab-v3';
+const CACHE_NAME = 'scholarab-v4';
 const PAGES_TO_CACHE = ['/', '/scholarships', '/programs', '/saved', '/about'];
 
 self.addEventListener('install', (event) => {
@@ -24,6 +24,10 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   if (!event.request.url.startsWith(self.location.origin)) return;
+
+  const { pathname } = new URL(event.request.url);
+  // Never cache API or admin routes — auth state and data mutations must always be fresh
+  if (pathname.startsWith('/api/') || pathname.startsWith('/admin/')) return;
 
   event.respondWith(
     fetch(event.request)

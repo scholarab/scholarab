@@ -15,6 +15,11 @@ export const auth = betterAuth({
     cookieName: 'admin_session',
     expiresIn: 60 * 60 * 24 * 7, // 7 days
   },
+  rateLimit: {
+    window: 300,  // 5-minute window
+    max: 10,      // max 10 auth requests per window
+    storage: 'memory',
+  },
   trustedOrigins: [
     'http://localhost:4321',
     'https://www.scholarab.ca',

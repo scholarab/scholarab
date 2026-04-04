@@ -1,6 +1,14 @@
 let _saved = null;
 let _savedPrograms = null;
 
+// Invalidate in-memory caches when another tab writes to localStorage
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'scholarab_saved')          _saved = null;
+    if (e.key === 'scholarab_saved_programs') _savedPrograms = null;
+  });
+}
+
 /** Coerce legacy string ids to numbers, dedupe, drop garbage (matches numeric ids in JSON). */
 function normalizeIdList(raw) {
   if (!Array.isArray(raw)) return [];
