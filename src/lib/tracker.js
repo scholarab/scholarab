@@ -30,10 +30,14 @@ function normalizeIdList(raw) {
 
 export function getSaved() {
   if (_saved === null) {
-    const raw = JSON.parse(localStorage.getItem('scholarab_saved') || '[]');
-    _saved = normalizeIdList(raw);
-    if (JSON.stringify(raw) !== JSON.stringify(_saved)) {
-      localStorage.setItem('scholarab_saved', JSON.stringify(_saved));
+    try {
+      const raw = JSON.parse(localStorage.getItem('scholarab_saved') || '[]');
+      _saved = normalizeIdList(raw);
+      if (JSON.stringify(raw) !== JSON.stringify(_saved)) {
+        localStorage.setItem('scholarab_saved', JSON.stringify(_saved));
+      }
+    } catch {
+      _saved = [];
     }
   }
   return _saved;
