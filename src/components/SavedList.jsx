@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.js';
-import { formatDeadline } from '../lib/utils.jsx';
+import { formatDeadline, showToast } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
 
 const REGION_DOT_COLORS = {
@@ -38,6 +38,7 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }) {
   const isClosed = status === 'closed';
   const isFuture = status === 'future';
   const cardRef  = useRef(null);
+  const bmkRef   = useRef(null);
 
   useEffect(() => {
     const el = cardRef.current;
@@ -71,18 +72,8 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }) {
       className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col gap-3 h-full ${isClosed ? '' : 'card-interactive'}`}
       style={{ opacity: isClosed ? 0.45 : isFuture ? 0.75 : undefined }}
     >
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex items-start gap-2">
         <h3 className="font-semibold text-sm text-gray-900 dark:text-white leading-snug">{s.title}</h3>
-        <button
-          onClick={handleUnsave}
-          className="text-[#22d3a5] flex-shrink-0 transition-opacity hover:opacity-60"
-          aria-label="Remove bookmark"
-          style={{ lineHeight: 0 }}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-          </svg>
-        </button>
       </div>
       <p className="font-bold text-lg leading-none" style={{ color: '#22d3a5' }}>{s.amount}</p>
       <div className="flex items-center gap-2 flex-wrap">
@@ -96,29 +87,62 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }) {
           </span>
         )}
       </div>
-      {isClosed ? (
-        <button disabled className="mt-auto w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
-          Closed
-        </button>
-      ) : isFuture ? (
-        <button disabled className="mt-auto w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
-          Opening Soon
-        </button>
-      ) : (
-        <a
-          href={s.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
-          className="mt-auto block w-full text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
-          style={{ background: '#22d3a5', color: '#0a0a0f' }}
+      <div className="mt-auto" style={{ display: 'flex', gap: 8, position: 'relative', zIndex: 1 }}>
+        {isClosed ? (
+          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
+            Closed
+          </button>
+        ) : isFuture ? (
+          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
+            Opening Soon
+          </button>
+        ) : (
+          <a
+            href={s.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
+            className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
+            style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            Apply Now
+          </a>
+        )}
+        <button
+          ref={bmkRef}
+          onClick={() => {
+            bmkRef.current?.animate(
+              [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
+              { duration: 380, easing: 'ease-out' }
+            );
+            navigator.vibrate?.(12);
+            showToast('Removed from saved');
+            handleUnsave();
+          }}
+          aria-label="Remove bookmark"
+          style={{
+            width: 44, flexShrink: 0, alignSelf: 'stretch', borderRadius: 10,
+            background: 'rgba(34,211,165,0.12)',
+            backdropFilter: 'blur(16px) saturate(2)',
+            WebkitBackdropFilter: 'blur(16px) saturate(2)',
+            border: '0.5px solid rgba(34,211,165,0.4)',
+            boxShadow: 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)',
+            color: '#22d3a5',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',
+            WebkitTapHighlightColor: 'transparent',
+          }}
         >
-          Apply Now
-        </a>
-      )}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }
 
 function ProgramCard({ p, index, onUnsave, isInitial }) {
   const cardRef = useRef(null);
+  const bmkRef  = useRef(null);
 
   useEffect(() => {
     const el = cardRef.current;
@@ -148,18 +172,8 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
 
   return (
     <div ref={cardRef} className={`${isInitial ? '' : 'card-before-reveal '}card card-interactive p-5 flex flex-col gap-3 h-full`}>
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex items-start gap-2">
         <h3 className="font-semibold text-sm text-gray-900 dark:text-white leading-snug">{p.name}</h3>
-        <button
-          onClick={handleUnsave}
-          className="text-[#22d3a5] flex-shrink-0 transition-opacity hover:opacity-60"
-          aria-label="Remove bookmark"
-          style={{ lineHeight: 0 }}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-          </svg>
-        </button>
       </div>
       {p.category && (
         <span className="self-start text-xs font-medium px-2 py-0.5 rounded-md bg-gray-100 text-gray-500 border border-gray-200 dark:bg-white/[0.07] dark:text-white/50 dark:border-white/10">
@@ -169,13 +183,45 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
       {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && (
         <span className="text-xs text-gray-400 dark:text-white/35">{formatDeadline(p.deadline)}</span>
       )}
-      <a
-        href={p.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
-        className="mt-auto block w-full text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
-        style={{ background: '#22d3a5', color: '#0a0a0f' }}
-      >
-        Learn More
-      </a>
+      <div className="mt-auto" style={{ display: 'flex', gap: 8, position: 'relative', zIndex: 1 }}>
+        <a
+          href={p.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
+          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
+          style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          Learn More
+        </a>
+        <button
+          ref={bmkRef}
+          onClick={() => {
+            bmkRef.current?.animate(
+              [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
+              { duration: 380, easing: 'ease-out' }
+            );
+            navigator.vibrate?.(12);
+            showToast('Removed from saved');
+            handleUnsave();
+          }}
+          aria-label="Remove bookmark"
+          style={{
+            width: 44, flexShrink: 0, alignSelf: 'stretch', borderRadius: 10,
+            background: 'rgba(34,211,165,0.12)',
+            backdropFilter: 'blur(16px) saturate(2)',
+            WebkitBackdropFilter: 'blur(16px) saturate(2)',
+            border: '0.5px solid rgba(34,211,165,0.4)',
+            boxShadow: 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)',
+            color: '#22d3a5',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',
+            WebkitTapHighlightColor: 'transparent',
+          }}
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }
