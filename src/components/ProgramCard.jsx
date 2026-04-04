@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { formatDeadline, generateSlug } from '../lib/utils.jsx';
+import { formatDeadline, generateSlug, showToast, showConfetti } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/usePrograms.js';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { getToday } from '../lib/utils.jsx';
@@ -13,7 +13,7 @@ function isWithin30Days(deadlineStr) {
   return diff >= 0 && diff <= 30;
 }
 
-export default function ProgramCard({ program, index, isFiltered, isInitial }) {
+export default function ProgramCard({ program, index, isSaved, onToggleSave, isFiltered, isInitial }) {
   const status      = getStatus(program);
   const isClosed    = status === 'closed';
   const accentColor = (CATEGORY_BADGE[program.category] || DEFAULT_BADGE).color;
@@ -29,6 +29,7 @@ export default function ProgramCard({ program, index, isFiltered, isInitial }) {
 
   const cardRef = useRef(null);
   const navRef  = useRef(null);
+  const bmkRef  = useRef(null);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
@@ -117,21 +118,58 @@ export default function ProgramCard({ program, index, isFiltered, isInitial }) {
         </div>
       </div>
 
-      {/* BOTTOM SECTION — Learn More */}
-      <div style={{ paddingTop: 16, position: 'relative', zIndex: 1 }}>
+      {/* BOTTOM SECTION — Learn More + Bookmark (mobile only) */}
+      <div style={{ paddingTop: 16, position: 'relative', zIndex: 1, display: 'flex', gap: 8 }}>
         {isClosed ? (
-          <button disabled className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
+          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
             Closed
           </button>
         ) : (
           <a href={program.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
             data-no-card-nav
             onClick={() => track('learn_more', { id: program.id, name: program.name })}
-            className="btn-teal block text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
-            style={{ background: '#22d3a5', color: '#0a0a0f' }}>
+            className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
+            style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             Learn More
           </a>
         )}
+        <div className="card-bookmark-wrap">
+          <button
+            ref={bmkRef}
+            data-no-card-nav
+            onClick={() => {
+              bmkRef.current?.animate(
+                [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
+                { duration: 380, easing: 'ease-out' }
+              );
+              navigator.vibrate?.(12);
+              if (!isSaved) showConfetti(bmkRef.current);
+              showToast(isSaved ? 'Removed from saved' : 'Saved ✓');
+              onToggleSave();
+            }}
+            aria-label={isSaved ? 'Remove bookmark' : 'Save program'}
+            style={{
+              width: 52,
+              alignSelf: 'stretch',
+              borderRadius: 10,
+              background: isSaved ? 'rgba(34,211,165,0.12)' : 'rgba(255,255,255,0.07)',
+              border: `0.5px solid ${isSaved ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.18)'}`,
+              boxShadow: isSaved
+                ? 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)'
+                : 'inset 0 1px 0 rgba(255,255,255,0.1), 0 1px 4px rgba(0,0,0,0.12)',
+              color: isSaved ? '#22d3a5' : 'rgba(200,200,210,0.7)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer',
+              touchAction: 'manipulation',
+              transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',
+              WebkitTapHighlightColor: 'transparent',
+            }}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
