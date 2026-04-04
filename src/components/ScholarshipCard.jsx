@@ -17,13 +17,10 @@ function ScholarshipCard({ scholarship, index, isFiltered, isInitial }) {
   const amountColor  = isClosed ? 'text-gray-300 dark:text-white/20' : 'text-[#22d3a5]';
   const slug         = generateSlug(scholarship.title);
   const cardRef = useRef(null);
-  const navRef  = useRef(null);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
     const delay = `${Math.min(index ?? 0, 6) * 0.03}s`;
-    // Initial above-fold cards: data is already in the bundle, no shimmer needed.
-    // On first load just appear; on filter re-mount animate immediately.
     if (isInitial) {
       if (isFiltered) {
         el.style.setProperty('--card-delay', delay);
@@ -42,10 +39,8 @@ function ScholarshipCard({ scholarship, index, isFiltered, isInitial }) {
   return (
     <div
       ref={cardRef}
-      onClick={(e) => { if (!e.target.closest('[data-no-card-nav]')) navRef.current?.click(); }}
-      className={`${isInitial ? '' : 'card-before-reveal '}card ${isClosed ? '' : 'card-interactive'} p-5`}
+      className={`${isInitial ? '' : 'card-before-reveal '}card p-5`}
       style={{
-        cursor: 'pointer',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -53,12 +48,11 @@ function ScholarshipCard({ scholarship, index, isFiltered, isInitial }) {
         minHeight: 280,
         opacity: isClosed ? 0.45 : isUpcoming ? 0.75 : undefined,
         borderTop: `2px solid ${accentColor}`,
-        '--card-glow': `${accentColor}66`,
       }}
     >
       {/* TOP SECTION */}
       <div style={{ flexGrow: 1 }}>
-        {/* Category badge + bookmark */}
+        {/* Category badge */}
         <div className="flex items-start justify-between gap-2 mb-3">
           {scholarship.category ? (() => { const badge = CATEGORY_BADGE[scholarship.category] || DEFAULT_BADGE; return (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
@@ -70,7 +64,7 @@ function ScholarshipCard({ scholarship, index, isFiltered, isInitial }) {
 
         {/* Title + audience */}
         <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-gray-400 dark:text-white/25' : 'text-gray-900 dark:text-white'}`}>
-          <a ref={navRef} href={`/scholarships/${slug}`} className="card-nav-link" data-no-card-nav>{scholarship.title}</a>
+          {scholarship.title}
         </h2>
         <p className="text-sm line-clamp-2 mb-2 text-gray-500 dark:text-white/45">
           {scholarship.audience}
@@ -103,24 +97,25 @@ function ScholarshipCard({ scholarship, index, isFiltered, isInitial }) {
         </div>
       </div>
 
-      {/* BOTTOM SECTION — Apply Now */}
-      <div style={{ paddingTop: 16, position: 'relative', zIndex: 1 }}>
-        {isClosed ? (
-          <button disabled className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
-            Closed
-          </button>
-        ) : status === 'future' ? (
-          <button disabled className="w-full py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
-            Opening Soon
-          </button>
-        ) : (
+      {/* BOTTOM SECTION */}
+      <div style={{ paddingTop: 16, display: 'flex', gap: 8 }}>
+        <a href={`/scholarships/${slug}`}
+          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold"
+          style={{ background: 'rgba(255,255,255,0.07)', border: '0.5px solid rgba(255,255,255,0.18)', color: 'rgba(200,200,210,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          View Details
+        </a>
+        {status === 'active' && (
           <a href={scholarship.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
-            data-no-card-nav
             onClick={() => track('apply_now', { id: scholarship.id, title: scholarship.title })}
-            className="btn-teal block text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
-            style={{ background: '#22d3a5', color: '#0a0a0f' }}>
+            className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
+            style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             Apply Now
           </a>
+        )}
+        {status === 'future' && (
+          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
+            Opening Soon
+          </button>
         )}
       </div>
     </div>

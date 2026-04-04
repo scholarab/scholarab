@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { Drawer } from 'vaul';
 import { useScholarships, PAGE_SIZE } from '../hooks/useScholarships.js';
 import ScholarshipCard from './ScholarshipCard.jsx';
@@ -39,12 +38,8 @@ export default function ScholarshipList({ initialScholarships }) {
     setSheetOpen,
     hasActiveFilters,
     regionKey,
-    savedIds,
-    handleToggleSave,
     isFiltered,
   } = useScholarships(initialScholarships);
-
-  const savedSet = useMemo(() => new Set(savedIds), [savedIds]);
 
   const sheetBg  = 'bg-white dark:bg-[#141418]';
   const pillBase = 'flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
@@ -187,8 +182,6 @@ export default function ScholarshipList({ initialScholarships }) {
             key={s.id}
             scholarship={s}
             index={i}
-            isSaved={savedSet.has(s.id)}
-            onToggleSave={() => handleToggleSave(s.id)}
             isFiltered={isFiltered}
             isInitial={!isFiltered && page === 1 && i < PAGE_SIZE}
           />
