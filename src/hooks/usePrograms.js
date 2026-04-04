@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { track } from '@vercel/analytics';
+import { getSavedPrograms, toggleSavedProgram } from '../lib/tracker.js';
 import { getToday } from '../lib/utils.jsx';
 
 /** Desktop default for SSR/hydration; mobile batch applied in useEffect after mount. */
@@ -40,6 +41,7 @@ export function usePrograms(initialPrograms) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [visibleCount,     setVisibleCount     ] = useState(INITIAL_BATCH);
   const [sheetOpen,        setSheetOpen        ] = useState(false);
+  const [savedIds,         setSavedIds         ] = useState([]);
   const batchSizeRef = useRef(INITIAL_BATCH);
   const hasFiltered  = useRef(false);
 
@@ -57,7 +59,14 @@ export function usePrograms(initialPrograms) {
     const batch = window.innerWidth < 768 ? 8 : 16;
     batchSizeRef.current = batch;
     setVisibleCount(batch);
+    setSavedIds([...getSavedPrograms()]);
   }, [initialPrograms, validCategories]);
+
+  function handleToggleSave(id) {
+    const newSaved = toggleSavedProgram(id);
+    setSavedIds([...newSaved]);
+    track('save_toggle', { id, saved: newSaved.includes(id) });
+  }
 
   function handleSetCategory(cat) {
     hasFiltered.current = true;
@@ -129,6 +138,8 @@ export function usePrograms(initialPrograms) {
     hasActiveFilters: sortBy !== 'featured' || selectedCategory !== 'all',
     categoryKey:      selectedCategory,
     sentinelRef,
+    savedIds,
+    handleToggleSave,
     isFiltered:       hasFiltered.current,
   };
 }

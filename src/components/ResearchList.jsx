@@ -21,8 +21,12 @@ export default function ResearchList({ programs }) {
     hasActiveFilters,
     categoryKey,
     sentinelRef,
+    savedIds,
+    handleToggleSave,
     isFiltered,
   } = usePrograms(programs);
+
+  const savedSet = useMemo(() => new Set(savedIds), [savedIds]);
 
   const categories = useMemo(
     () => ['all', ...[...new Set(programs.map(p => p.category))].sort()],
@@ -168,6 +172,8 @@ export default function ResearchList({ programs }) {
             key={p.id}
             program={p}
             index={i}
+            isSaved={savedSet.has(p.id)}
+            onToggleSave={() => handleToggleSave(p.id)}
             isFiltered={isFiltered}
             isInitial={!isFiltered && i < INITIAL_BATCH}
           />
