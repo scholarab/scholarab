@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useMemo } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.js';
 import { formatDeadline, showToast } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
+import { observeCard, unobserveCard } from '../lib/cardObserver.js';
 
 const REGION_DOT_COLORS = {
   'Medicine Hat': '#f97316',
@@ -42,19 +43,14 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }) {
 
   useEffect(() => {
     const el = cardRef.current;
-    if (!el) return;
-    if (isInitial) return;
+    if (!el || isInitial) return;
     const delay = `${Math.min(index ?? 0, 6) * 0.03}s`;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        el.style.setProperty('--card-delay', delay);
-        el.classList.remove('card-before-reveal');
-        el.classList.add('card-entrance');
-        observer.disconnect();
-      }
-    }, { threshold: 0.1 });
-    observer.observe(el);
-    return () => observer.disconnect();
+    observeCard(el, () => {
+      el.style.setProperty('--card-delay', delay);
+      el.classList.remove('card-before-reveal');
+      el.classList.add('card-entrance');
+    });
+    return () => unobserveCard(el);
   }, [index, isInitial]);
 
   function handleUnsave() {
@@ -146,19 +142,14 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
 
   useEffect(() => {
     const el = cardRef.current;
-    if (!el) return;
-    if (isInitial) return;
+    if (!el || isInitial) return;
     const delay = `${Math.min(index ?? 0, 6) * 0.03}s`;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        el.style.setProperty('--card-delay', delay);
-        el.classList.remove('card-before-reveal');
-        el.classList.add('card-entrance');
-        observer.disconnect();
-      }
-    }, { threshold: 0.1 });
-    observer.observe(el);
-    return () => observer.disconnect();
+    observeCard(el, () => {
+      el.style.setProperty('--card-delay', delay);
+      el.classList.remove('card-before-reveal');
+      el.classList.add('card-entrance');
+    });
+    return () => unobserveCard(el);
   }, [index, isInitial]);
 
   function handleUnsave() {

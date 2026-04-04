@@ -1,7 +1,6 @@
 ---
 import Nav from '../components/Nav.astro';
 import BottomNav from '../components/BottomNav.astro';
-import ToasterIsland from '../components/ToasterIsland.jsx';
 import SpeedInsights from '@vercel/speed-insights/astro';
 import Analytics from '@vercel/analytics/astro';
 import { ClientRouter } from 'astro:transitions';
@@ -84,7 +83,6 @@ const {
       </div>
     </footer>
     <BottomNav />
-    <ToasterIsland client:load />
     <SpeedInsights />
     <Analytics />
     <script>
