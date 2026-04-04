@@ -50,12 +50,7 @@ const {
     {backLabel}
   </a>
 
-  <div class="relative card p-6 md:p-8" style={`border-top: 2px solid ${badge.color};`}>
-    {itemId !== undefined && itemType && (
-      <div class="absolute top-5 right-5 md:top-7 md:right-7">
-        <BookmarkButton id={itemId} type={itemType} client:load />
-      </div>
-    )}
+  <div class="card p-6 md:p-8" style={`border-top: 2px solid ${badge.color};`}>
     <span
       class="inline-flex items-center gap-1.5 rounded-full text-xs font-semibold mb-4"
       style={`padding: 3px 10px; background: ${badge.bg}; color: ${badge.color}; border: 1px solid ${badge.border};`}
@@ -80,13 +75,13 @@ const {
 
     <slot />
 
-    <div class="pt-2 flex flex-col gap-2">
+    <div class="pt-2 flex gap-2">
       {status === 'closed' ? (
-        <button disabled class="w-full py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
+        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
           Closed
         </button>
       ) : status === 'future' ? (
-        <button disabled class="w-full py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
+        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
           Opening Soon{openDate ? ` — ${openDate}` : ''}
         </button>
       ) : (
@@ -96,11 +91,14 @@ const {
           rel="noopener noreferrer"
           referrerpolicy="no-referrer"
           onclick="window.va?.('event',{name:'apply_detail'})"
-          class="btn-teal block w-full text-center py-3 px-4 rounded-xl text-sm font-semibold transition-opacity hover:opacity-85"
-          style="background: #22d3a5; color: #0a0a0f;"
+          class="btn-teal flex-1 text-center py-3 px-4 rounded-xl text-sm font-semibold transition-opacity hover:opacity-85"
+          style="background: #22d3a5; color: #0a0a0f; display: flex; align-items: center; justify-content: center;"
         >
           {ctaLabel}
         </a>
+      )}
+      {itemId !== undefined && itemType && (
+        <BookmarkButton id={itemId} type={itemType} client:load />
       )}
     </div>
 
