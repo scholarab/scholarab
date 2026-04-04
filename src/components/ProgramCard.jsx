@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { formatDeadline, generateSlug, showToast } from '../lib/utils.jsx';
+import { formatDeadline, generateSlug, showToast, showConfetti } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/usePrograms.js';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { getToday } from '../lib/utils.jsx';
@@ -28,6 +28,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
     : 'text-gray-500 dark:text-white/40';
 
   const cardRef = useRef(null);
+  const bmkRef  = useRef(null);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
@@ -129,7 +130,8 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
           </a>
         )}
         <button
-          onClick={() => { showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
+          ref={bmkRef}
+          onClick={() => { if (!isSaved) showConfetti(bmkRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save program'}
           style={{
             width: 44,

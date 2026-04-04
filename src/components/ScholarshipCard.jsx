@@ -1,6 +1,6 @@
 import { useRef, useEffect, memo } from 'react';
 import { track } from '@vercel/analytics';
-import { getToday, generateSlug, formatDeadline, showToast } from '../lib/utils.jsx';
+import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { observeCard, unobserveCard } from '../lib/cardObserver.js';
@@ -17,6 +17,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
   const amountColor  = isClosed ? 'text-gray-300 dark:text-white/20' : 'text-[#22d3a5]';
   const slug         = generateSlug(scholarship.title);
   const cardRef = useRef(null);
+  const bmkRef  = useRef(null);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
@@ -118,7 +119,8 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           </button>
         )}
         <button
-          onClick={() => { showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
+          ref={bmkRef}
+          onClick={() => { if (!isSaved) showConfetti(bmkRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
           style={{
             width: 44,
