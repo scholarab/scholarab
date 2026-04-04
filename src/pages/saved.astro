@@ -17,6 +17,6 @@ const programs = await loadPrograms();
   <main>
     <h1 class="font-bold text-gray-900 dark:text-white mb-1" style="font-size: clamp(22px, 3vw, 32px);">My Saved</h1>
     <p class="text-sm text-gray-500 dark:text-white/45 mb-6">Your bookmarked scholarships and research programs.</p>
-    <SavedList initialScholarships={scholarships} initialPrograms={programs} client:load />
+    <SavedList initialScholarships={scholarships} initialPrograms={programs} client:idle />
   </main>
 </Layout>

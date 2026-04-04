@@ -303,7 +303,7 @@ export default function ScholarshipManager({ initialData }: Props) {
             )}
 
             <div className="flex gap-3 mt-6 justify-end">
-              <button onClick={closeModal} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition">Cancel</button>
+              <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
               <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f] disabled:opacity-50" style={{background:'#22d3a5'}}>
                 {saving ? 'Saving…' : 'Save scholarship'}
               </button>
@@ -319,7 +319,7 @@ export default function ScholarshipManager({ initialData }: Props) {
             <h2 className="text-lg font-semibold mb-2">Delete scholarship?</h2>
             <p className="text-white/50 text-sm mb-6">"{modal.item?.title}" will be permanently removed.</p>
             <div className="flex gap-3 justify-end">
-              <button onClick={closeModal} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition">Cancel</button>
+              <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
               <button onClick={handleDelete} disabled={saving} className="px-4 py-2 rounded-lg text-sm font-medium bg-red-500 hover:bg-red-600 text-white disabled:opacity-50 transition">
                 {saving ? 'Deleting…' : 'Delete'}
               </button>

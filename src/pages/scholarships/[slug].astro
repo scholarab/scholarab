@@ -27,8 +27,8 @@ function formatDate(str: string): string {
 const todayDate = new Date();
 todayDate.setHours(0, 0, 0, 0);
 const openDate     = new Date((scholarship.openDate || '1970-01-01') + 'T00:00:00');
-const deadlineDate = new Date(scholarship.deadline + 'T00:00:00');
-const status = todayDate < openDate ? 'future' : todayDate > deadlineDate ? 'closed' : 'active';
+const deadlineDate = scholarship.deadline ? new Date(scholarship.deadline + 'T00:00:00') : null;
+const status = todayDate < openDate ? 'future' : (deadlineDate && todayDate > deadlineDate) ? 'closed' : 'active';
 
 const rawBadge = CATEGORY_BADGE[scholarship.category] || DEFAULT_BADGE;
 const badge    = { ...rawBadge, label: scholarship.category || '' };

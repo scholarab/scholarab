@@ -90,7 +90,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
               fontWeight: 700,
               color: isClosed ? undefined : status === 'future' ? undefined : deadlineSoon ? '#f87171' : undefined,
             }} className={isClosed ? 'text-gray-300 dark:text-white/20' : status === 'future' ? 'text-blue-500 dark:text-blue-400' : deadlineSoon ? '' : 'text-gray-600 dark:text-white/50'}>
-              {status === 'future' ? (formatDeadline(scholarship.open_date) || 'TBA') : formatDeadline(scholarship.deadline)}
+              {status === 'future' ? (formatDeadline(scholarship.openDate ?? scholarship.open_date) || 'TBA') : formatDeadline(scholarship.deadline)}
             </p>
             {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
               <span style={{ fontSize: 9, marginTop: 2, color: daysLeft <= 30 ? '#f87171' : 'rgba(128,128,128,0.45)' }}>

@@ -46,7 +46,12 @@ export default function AdminShell({ user, page, data }: Props) {
     window.location.href = '/admin/login'
   }
 
-  const parsedData = JSON.parse(data)
+  let parsedData: unknown[]
+  try {
+    parsedData = JSON.parse(data)
+  } catch {
+    parsedData = []
+  }
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white flex" style={{fontFamily: 'Inter, system-ui, sans-serif'}}>

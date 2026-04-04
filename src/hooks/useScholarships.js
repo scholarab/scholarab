@@ -6,7 +6,7 @@ import { getToday } from '../lib/utils.jsx';
 export function getStatus(s) {
   const todayMs = getToday().getTime();
   // Use build-time precomputed ms values when available — avoids Date construction per call
-  const openMs  = s._open_ms     ?? new Date((s.open_date  || '1970-01-01') + 'T00:00:00').getTime();
+  const openMs  = s._open_ms     ?? new Date((s.openDate || s.open_date || '1970-01-01') + 'T00:00:00').getTime();
   const deadMs  = s._deadline_ms ?? new Date(s.deadline    + 'T00:00:00').getTime();
   if (todayMs < openMs) return 'future';
   if (todayMs > deadMs) return 'closed';
