@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.js';
-import { showToast } from '../lib/utils.jsx';
+import { showToast, showConfetti } from '../lib/utils.jsx';
 
 export default function BookmarkButton({ id, type }) {
   const [saved, setSaved] = useState(false);
@@ -20,6 +20,7 @@ export default function BookmarkButton({ id, type }) {
     const next = type === 'program' ? toggleSavedProgram(id) : toggleSaved(id);
     const nowSaved = next.includes(id);
     setSaved(nowSaved);
+    if (nowSaved) showConfetti(btnRef.current);
     showToast(nowSaved ? 'Saved ✓' : 'Removed from saved');
   }
 

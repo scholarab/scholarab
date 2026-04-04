@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { formatDeadline, generateSlug, showToast } from '../lib/utils.jsx';
+import { formatDeadline, generateSlug, showToast, showConfetti } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/usePrograms.js';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { getToday } from '../lib/utils.jsx';
@@ -137,6 +137,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
               { duration: 380, easing: 'ease-out' }
             );
             navigator.vibrate?.(12);
+            if (!isSaved) showConfetti(bmkRef.current);
             showToast(isSaved ? 'Removed from saved' : 'Saved ✓');
             onToggleSave();
           }}

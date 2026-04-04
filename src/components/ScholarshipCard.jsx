@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { getToday, generateSlug, formatDeadline, showToast } from '../lib/utils.jsx';
+import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { observeCard, unobserveCard } from '../lib/cardObserver.js';
@@ -127,6 +127,7 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
               { duration: 380, easing: 'ease-out' }
             );
             navigator.vibrate?.(12);
+            if (!isSaved) showConfetti(bmkRef.current);
             showToast(isSaved ? 'Removed from saved' : 'Saved ✓');
             onToggleSave();
           }}

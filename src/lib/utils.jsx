@@ -16,6 +16,63 @@ export function formatDeadline(str) {
   return d.toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
+export function showConfetti(originEl) {
+  document.getElementById('sa-confetti')?.remove();
+  const rect = originEl?.getBoundingClientRect();
+  const ox = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+  const oy = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'sa-confetti';
+  canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:999999998;';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  const COLORS = ['#22d3a5', '#5ee8c4', '#ffffff', '#fbbf24', '#a78bfa', '#f472b6'];
+  const particles = Array.from({ length: 65 }, () => {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 9 + 4;
+    return {
+      x: ox, y: oy,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 5,
+      w: Math.random() * 7 + 3,
+      h: Math.random() * 4 + 2,
+      rot: Math.random() * Math.PI * 2,
+      rotV: (Math.random() - 0.5) * 0.26,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    };
+  });
+
+  const start = performance.now();
+  let rafId;
+  function tick(now) {
+    const elapsed = now - start;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    for (const p of particles) {
+      p.vy += 0.4;
+      p.vx *= 0.98;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.rotV;
+      if (p.y < canvas.height + 20) alive = true;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, 1 - elapsed / 1600);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    }
+    if (alive && elapsed < 1800) rafId = requestAnimationFrame(tick);
+    else canvas.remove();
+  }
+  rafId = requestAnimationFrame(tick);
+}
+
 export function showToast(message) {
   const TOAST_ID = 'sa-toast';
   document.getElementById(TOAST_ID)?.remove();
