@@ -29,6 +29,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
 
   const cardRef = useRef(null);
   const bmkRef  = useRef(null);
+  const navRef  = useRef(null);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
@@ -51,8 +52,10 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
   return (
     <div
       ref={cardRef}
+      onClick={(e) => { if (!e.target.closest('[data-no-card-nav]')) navRef.current?.click(); }}
       className={`${isInitial ? '' : 'card-before-reveal '}card ${isClosed ? '' : 'card-interactive'} p-5`}
       style={{
+        cursor: 'pointer',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -76,7 +79,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
 
         {/* Name + provider + meta + description + stipend */}
         <h2 className={`font-bold text-base leading-snug mb-1 ${isClosed ? 'text-gray-400 dark:text-white/25' : 'text-gray-900 dark:text-white'}`}>
-          <a href={`/programs/${generateSlug(program.name)}`} className="card-nav-link">{program.name}</a>
+          <a ref={navRef} href={`/programs/${generateSlug(program.name)}`} className="card-nav-link" data-no-card-nav>{program.name}</a>
         </h2>
         <p className="text-xs mb-2 text-gray-400 dark:text-white/30">{program.provider}</p>
         <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3">
@@ -123,6 +126,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
           </button>
         ) : (
           <a href={program.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
+            data-no-card-nav
             onClick={() => track('learn_more', { id: program.id, name: program.name })}
             className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
             style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -131,6 +135,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
         )}
         <button
           ref={bmkRef}
+          data-no-card-nav
           onClick={() => {
             bmkRef.current?.animate(
               [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],

@@ -18,6 +18,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
   const slug         = generateSlug(scholarship.title);
   const cardRef = useRef(null);
   const bmkRef  = useRef(null);
+  const navRef  = useRef(null);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
@@ -42,8 +43,10 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
   return (
     <div
       ref={cardRef}
+      onClick={(e) => { if (!e.target.closest('[data-no-card-nav]')) navRef.current?.click(); }}
       className={`${isInitial ? '' : 'card-before-reveal '}card ${isClosed ? '' : 'card-interactive'} p-5`}
       style={{
+        cursor: 'pointer',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -68,7 +71,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
 
         {/* Title + audience */}
         <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-gray-400 dark:text-white/25' : 'text-gray-900 dark:text-white'}`}>
-          <a href={`/scholarships/${slug}`} className="card-nav-link">{scholarship.title}</a>
+          <a ref={navRef} href={`/scholarships/${slug}`} className="card-nav-link" data-no-card-nav>{scholarship.title}</a>
         </h2>
         <p className="text-sm line-clamp-2 mb-2 text-gray-500 dark:text-white/45">
           {scholarship.audience}
@@ -113,6 +116,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           </button>
         ) : (
           <a href={scholarship.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
+            data-no-card-nav
             onClick={() => track('apply_now', { id: scholarship.id, title: scholarship.title })}
             className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
             style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -121,6 +125,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
         )}
         <button
           ref={bmkRef}
+          data-no-card-nav
           onClick={() => {
             bmkRef.current?.animate(
               [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
