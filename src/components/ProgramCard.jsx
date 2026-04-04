@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { formatDeadline, BookmarkButton, generateSlug } from '../lib/utils.jsx';
+import { formatDeadline, generateSlug } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/usePrograms.js';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { getToday } from '../lib/utils.jsx';
@@ -13,7 +13,7 @@ function isWithin30Days(deadlineStr) {
   return diff >= 0 && diff <= 30;
 }
 
-export default function ProgramCard({ program, index, isSaved, onToggleSave, isFiltered, isInitial }) {
+export default function ProgramCard({ program, index, isFiltered, isInitial }) {
   const status      = getStatus(program);
   const isClosed    = status === 'closed';
   const accentColor = (CATEGORY_BADGE[program.category] || DEFAULT_BADGE).color;
@@ -71,7 +71,6 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
               {program.category}
             </span>
           ); })()}
-          <div style={{ position: 'relative', zIndex: 1 }}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
         </div>
 
         {/* Name + provider + meta + description + stipend */}

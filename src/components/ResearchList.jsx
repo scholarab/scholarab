@@ -21,8 +21,6 @@ export default function ResearchList({ programs }) {
     hasActiveFilters,
     categoryKey,
     sentinelRef,
-    savedIds,
-    handleToggleSave,
     isFiltered,
   } = usePrograms(programs);
 
@@ -35,8 +33,6 @@ export default function ResearchList({ programs }) {
   const pillBase = 'flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
   const pillOn   = 'text-[#22d3a5]';
   const pillOff  = 'bg-white text-gray-600 border-gray-200 dark:bg-white/[0.03] dark:text-white/45 dark:border-white/10';
-
-  const savedSet = useMemo(() => new Set(savedIds), [savedIds]);
 
   return (
     <div>
@@ -172,8 +168,6 @@ export default function ResearchList({ programs }) {
             key={p.id}
             program={p}
             index={i}
-            isSaved={savedSet.has(p.id)}
-            onToggleSave={() => handleToggleSave(p.id)}
             isFiltered={isFiltered}
             isInitial={!isFiltered && i < INITIAL_BATCH}
           />

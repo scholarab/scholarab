@@ -1,11 +1,11 @@
 import { useRef, useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { getToday, BookmarkButton, generateSlug, formatDeadline } from '../lib/utils.jsx';
+import { getToday, generateSlug, formatDeadline } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { observeCard, unobserveCard } from '../lib/cardObserver.js';
 
-export default function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }) {
+export default function ScholarshipCard({ scholarship, index, isFiltered, isInitial }) {
   const status       = getStatus(scholarship);
   const isClosed     = status === 'closed';
   const daysLeft     = status === 'active'
@@ -63,7 +63,6 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
               {scholarship.category}
             </span>
           ); })() : <span />}
-          <div style={{ position: 'relative', zIndex: 1 }}><BookmarkButton isSaved={isSaved} onToggle={onToggleSave} /></div>
         </div>
 
         {/* Title + audience */}
