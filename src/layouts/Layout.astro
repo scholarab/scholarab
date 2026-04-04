@@ -70,7 +70,7 @@ const {
     <ClientRouter />
     <slot name="head" />
   </head>
-  <body class="bg-[#f5f5fa] dark:bg-[#0a0a0f] text-gray-900 dark:text-white min-h-screen min-h-[100svh] flex flex-col overflow-x-clip">
+  <body class="bg-[#f5f5fa] dark:bg-[#0a0a0f] text-gray-900 dark:text-white min-h-screen min-h-[100svh] flex flex-col overflow-x-clip overscroll-none">
 
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#22d3a5;color:#0a0a0f;">Skip to content</a>
     <Nav currentPath={currentPath} />

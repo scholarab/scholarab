@@ -60,6 +60,11 @@ body {
     radial-gradient(ellipse at center, rgba(167,139,250,0.09) 0%, transparent 70%);
 }
 
+/* Disable iOS Safari rubber-band bounce at scroll boundaries */
+html {
+  overscroll-behavior: none;
+}
+
 @keyframes orbs-drift {
   from { background-position: 4% -2%,  96% -2%,  50% 102%; }
   to   { background-position: 8%  6%,  90%  6%,  54%  96%; }
