@@ -51,13 +51,16 @@ const previewScholarships = PREVIEW_IDS.map(id => scholarships.find(s => s.id ==
         <span class="hero-word" style="opacity:0;transform:translateY(10px);display:inline-block">opportunity</span>
         <span class="hero-word" style="opacity:0;transform:translateY(10px);display:inline-block">directory.</span>
       </p>
-      <p id="stat-counter" data-target={activeTotal} class="mb-4 md:mb-8 font-bold" style="font-size: clamp(36px, 8vw, 48px); color: #22d3a5; letter-spacing: -0.03em; line-height: 1.1;">{'$' + activeTotal.toLocaleString('en-CA') + '+ open right now'}</p>
+      <div class="mb-4 md:mb-8">
+        <p id="stat-counter" data-target={activeTotal} class="font-bold" style="font-size: clamp(36px, 9vw, 52px); color: #22d3a5; letter-spacing: -0.03em; line-height: 1.1; white-space: nowrap;">{'$' + activeTotal.toLocaleString('en-CA') + '+'}</p>
+        <p class="font-semibold text-sm" style="color: #22d3a5; opacity: 0.65;">open right now</p>
+      </div>
       <script>
         function initCounter() {
           const el = document.getElementById('stat-counter');
           if (!el) return;
           const target = parseInt(el.dataset.target, 10);
-          const finalText = '$' + target.toLocaleString('en-CA') + '+ open right now';
+          const finalText = '$' + target.toLocaleString('en-CA') + '+';
 
           if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             el.textContent = finalText;
@@ -79,7 +82,7 @@ const previewScholarships = PREVIEW_IDS.map(id => scholarships.find(s => s.id ==
           function tick(now: number) {
             const t = Math.min((now - start) / duration, 1);
             const value = Math.round(easeInExpo(t) * target);
-            el.textContent = '$' + fmt.format(value) + '+ open right now';
+            el.textContent = '$' + fmt.format(value) + '+';
             if (t < 1) requestAnimationFrame(tick);
           }
           requestAnimationFrame(tick);
@@ -147,7 +150,6 @@ const previewScholarships = PREVIEW_IDS.map(id => scholarships.find(s => s.id ==
           >
             <p class="font-semibold text-xs text-gray-900 dark:text-white leading-snug line-clamp-2">{s.title}</p>
             <p class="font-bold text-lg leading-none mt-auto" style="color: #22d3a5;">{s.amount}</p>
-            {s.deadline && <p class="text-[11px] text-gray-400 dark:text-white/35">{formatDeadline(s.deadline)}</p>}
           </a>
         ))}
         <a
