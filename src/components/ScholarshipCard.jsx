@@ -133,13 +133,13 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           }}
           aria-label={isSaved ? 'Remove bookmark' : 'Save scholarship'}
           style={{
+            position: 'relative',
+            zIndex: 2,
             width: 52,
             flexShrink: 0,
             alignSelf: 'stretch',
             borderRadius: 10,
             background: isSaved ? 'rgba(34,211,165,0.12)' : 'rgba(255,255,255,0.07)',
-            backdropFilter: 'blur(16px) saturate(2)',
-            WebkitBackdropFilter: 'blur(16px) saturate(2)',
             border: `0.5px solid ${isSaved ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.18)'}`,
             boxShadow: isSaved
               ? 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)'
