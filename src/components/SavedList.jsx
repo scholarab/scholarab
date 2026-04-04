@@ -226,29 +226,6 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
   );
 }
 
-function EmptyState() {
-  return (
-    <div className="text-center py-16">
-      <span className="empty-bounce text-4xl mb-4 block">🔖</span>
-      <p className="text-sm text-gray-400 dark:text-white/30 mb-6">Nothing saved yet. Bookmark scholarships and programs you want to apply for.</p>
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <a
-          href="/scholarships"
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-opacity hover:opacity-85"
-          style={{ background: '#22d3a5', color: '#0a0a0f' }}
-        >
-          Browse Scholarships
-        </a>
-        <a
-          href="/programs"
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/10 text-gray-600 dark:text-white/50 hover:border-[#22d3a5] hover:text-[#22d3a5] dark:hover:border-[#22d3a5] dark:hover:text-[#22d3a5] transition-colors"
-        >
-          Browse Programs
-        </a>
-      </div>
-    </div>
-  );
-}
 
 function SectionEmptyState({ href, label }) {
   return (
@@ -267,7 +244,6 @@ function SectionEmptyState({ href, label }) {
 export default function SavedList({ initialScholarships, initialPrograms }) {
   const [savedScholarshipIds, setSavedScholarshipIds] = useState([]);
   const [savedProgramIds, setSavedProgramIds] = useState([]);
-  const [globalExiting, setGlobalExiting] = useState(false);
 
   useEffect(() => {
     setSavedScholarshipIds([...getSaved()]);
@@ -283,8 +259,7 @@ export default function SavedList({ initialScholarships, initialPrograms }) {
     const idSet = new Set(savedProgramIds);
     return initialPrograms.filter(p => idSet.has(p.id));
   }, [initialPrograms, savedProgramIds]);
-  const totalSaved        = savedScholarships.length + savedPrograms.length;
-  const isEmpty           = totalSaved === 0;
+  const totalSaved = savedScholarships.length + savedPrograms.length;
 
   useEffect(() => {
     if (!window.matchMedia('(max-width: 768px)').matches) return;
@@ -295,79 +270,54 @@ export default function SavedList({ initialScholarships, initialPrograms }) {
   function unsaveScholarship(id) {
     const next = toggleSaved(id);
     setSavedScholarshipIds([...next]);
-    setGlobalExiting(false);
   }
 
   function unsaveProgram(id) {
     const next = toggleSavedProgram(id);
     setSavedProgramIds([...next]);
-    setGlobalExiting(false);
-  }
-
-  if (isEmpty && !globalExiting) {
-    return <EmptyState />;
   }
 
   return (
-    <div className="relative">
-      <style>{`
-        @keyframes savedlist-fadein {
-          from { opacity: 0; transform: translateY(8px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
+    <div className="saved-list space-y-10">
+      <section>
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-4">Scholarships</h2>
+        {savedScholarships.length === 0 ? (
+          <SectionEmptyState href="/scholarships" label="Find scholarships" />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {savedScholarships.map((s, i) => (
+              <RemovableItem
+                key={s.id}
+                onRemove={() => unsaveScholarship(s.id)}
+              >
+                {(triggerRemove) => (
+                  <ScholarshipCard s={s} index={i} onUnsave={triggerRemove} isInitial={i < 6} />
+                )}
+              </RemovableItem>
+            ))}
+          </div>
+        )}
+      </section>
 
-      {!isEmpty && (
-        <div className="saved-list space-y-10">
-          <section>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-4">Scholarships</h2>
-            {savedScholarships.length === 0 ? (
-              <SectionEmptyState href="/scholarships" label="Find scholarships" />
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {savedScholarships.map((s, i) => (
-                  <RemovableItem
-                    key={s.id}
-                    onRemove={() => unsaveScholarship(s.id)}
-                    onWillRemove={totalSaved === 1 ? () => setGlobalExiting(true) : undefined}
-                  >
-                    {(triggerRemove) => (
-                      <ScholarshipCard s={s} index={i} onUnsave={triggerRemove} isInitial={i < 6} />
-                    )}
-                  </RemovableItem>
-                ))}
-              </div>
-            )}
-          </section>
-
-          <section>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-4">Research Programs</h2>
-            {savedPrograms.length === 0 ? (
-              <SectionEmptyState href="/programs" label="Find programs" />
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {savedPrograms.map((p, i) => (
-                  <RemovableItem
-                    key={p.id}
-                    onRemove={() => unsaveProgram(p.id)}
-                    onWillRemove={totalSaved === 1 ? () => setGlobalExiting(true) : undefined}
-                  >
-                    {(triggerRemove) => (
-                      <ProgramCard p={p} index={i} onUnsave={triggerRemove} isInitial={i < 6} />
-                    )}
-                  </RemovableItem>
-                ))}
-              </div>
-            )}
-          </section>
-        </div>
-      )}
-
-      {globalExiting && (
-        <div style={{ animation: 'savedlist-fadein 350ms ease 150ms both' }}>
-          <EmptyState />
-        </div>
-      )}
+      <section>
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-4">Research Programs</h2>
+        {savedPrograms.length === 0 ? (
+          <SectionEmptyState href="/programs" label="Find programs" />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {savedPrograms.map((p, i) => (
+              <RemovableItem
+                key={p.id}
+                onRemove={() => unsaveProgram(p.id)}
+              >
+                {(triggerRemove) => (
+                  <ProgramCard p={p} index={i} onUnsave={triggerRemove} isInitial={i < 6} />
+                )}
+              </RemovableItem>
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 }
