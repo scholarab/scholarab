@@ -143,7 +143,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
           }}
           aria-label={isSaved ? 'Remove bookmark' : 'Save program'}
           style={{
-            width: 44,
+            width: 52,
             flexShrink: 0,
             alignSelf: 'stretch',
             borderRadius: 10,
@@ -157,6 +157,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
             color: isSaved ? '#22d3a5' : 'rgba(200,200,210,0.7)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'pointer',
+            touchAction: 'manipulation',
             transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',
             WebkitTapHighlightColor: 'transparent',
           }}
