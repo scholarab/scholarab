@@ -4,7 +4,7 @@ const navCls = (p) => `hidden md:block transition-colors ${currentPath === p ? '
 const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.startsWith(p) ? 'text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:text-white/50 dark:hover:text-white/90'}`;
 ---
 
-<div class="sticky top-2 z-50 mb-10" style="padding: 0 16px;">
+<div id="top-nav-wrapper" class="sticky top-2 z-50 mb-10" style="padding: 0 16px;">
   <div class="nav-wrapper mx-auto" style="max-width: 900px; position: relative;">
     <nav class="glass-nav flex justify-between items-center px-6 py-3" style="border-radius: 9999px;">
       <a href="/" onclick="if(window.location.pathname==='/'){event.preventDefault()}" class="hover:opacity-80 transition-opacity flex items-center gap-2" aria-label="ScholarAB home">
@@ -156,5 +156,34 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
   @media (max-height: 500px) and (orientation: landscape) {
     .glass-nav { padding-top: 4px !important; padding-bottom: 4px !important; }
     .glass-nav img { height: 24px !important; }
+  }
+  /* ── Mobile nav: fixed instead of sticky (Safari sticky+backdrop-filter bug),
+     no backdrop-filter (eliminates iOS content-invisible-during-scroll bug
+     and body-orb bleed-through via saturate amplification)            ── */
+  @media (max-width: 768px) {
+    #top-nav-wrapper {
+      position: fixed !important;
+      top: 8px;
+      left: 0;
+      right: 0;
+      margin-bottom: 0 !important;
+    }
+    .glass-nav {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background: rgba(245, 245, 250, 0.96);
+    }
+    .dark .glass-nav {
+      background: rgba(10, 10, 15, 0.96);
+    }
+    .glass-nav.scrolled,
+    .dark .glass-nav.scrolled {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      box-shadow: none;
+    }
+    .glass-nav.scrolled::after {
+      opacity: 0;
+    }
   }
 </style>

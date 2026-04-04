@@ -31,6 +31,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Mobile: compensate for fixed nav (removes it from flow) ─ */
+/* Fixed nav height: ~60px (py-3 + SVG 36px) + top offset 8px = 68px.
+   76px gives 8px breathing room between nav bottom and content.       */
+@media (max-width: 768px) {
+  #main-content {
+    padding-top: 76px;
+  }
+}
+
 /* ── Background orbs ───────────────────────────────────────── */
 /* background-image layers are always behind element content — no z-index needed */
 body {
