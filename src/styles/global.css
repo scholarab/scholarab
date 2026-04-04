@@ -113,6 +113,7 @@ h1, h2 {
 
 /* ── Dark-theme card ──────────────────────────────────────── */
 .card {
+  position: relative;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.14);
   border-radius: 16px;
