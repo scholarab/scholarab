@@ -89,7 +89,7 @@ export function useScholarships(initialScholarships) {
     hasFiltered.current = true;
     setPage(newPage);
     updateURL(sortBy, selectedRegion, newPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }, [sortBy, selectedRegion]);
 
   // statusCache depends on today's date — must stay runtime

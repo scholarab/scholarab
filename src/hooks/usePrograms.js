@@ -86,7 +86,7 @@ export function usePrograms(initialPrograms) {
     hasFiltered.current = true;
     setPage(newPage);
     updateURL(sortBy, selectedCategory, newPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }, [sortBy, selectedCategory]);
 
   const STATUS_ORDER = { active: 0, tba: 1, closed: 2 };
