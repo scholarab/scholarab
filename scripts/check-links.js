@@ -34,23 +34,39 @@ async function checkUrl(url) {
   }
 }
 
-const broken = [];
+const CONCURRENCY = 10;
 
-for (const s of scholarships) {
-  if (!s.url) continue;
-  process.stdout.write(`Scholarship [${s.id}] ${s.title}... `);
-  const { ok, status } = await checkUrl(s.url);
-  console.log(ok ? `OK (${status})` : `BROKEN (${status})`);
-  if (!ok) broken.push({ kind: 'scholarship', name: s.title, url: s.url, error: String(status) });
+// Run async tasks in parallel with a concurrency limit — no extra dependencies needed.
+async function checkBatch(items) {
+  const results = [];
+  for (let i = 0; i < items.length; i += CONCURRENCY) {
+    const slice = items.slice(i, i + CONCURRENCY);
+    const batch = await Promise.all(slice.map(item => item()));
+    results.push(...batch);
+  }
+  return results;
 }
 
-for (const p of programs) {
-  if (!p.url) continue;
-  process.stdout.write(`Program [${p.id}] ${p.name}... `);
-  const { ok, status } = await checkUrl(p.url);
-  console.log(ok ? `OK (${status})` : `BROKEN (${status})`);
-  if (!ok) broken.push({ kind: 'program', name: p.name, url: p.url, error: String(status) });
-}
+const schTasks = scholarships
+  .filter(s => s.url)
+  .map(s => async () => {
+    process.stdout.write(`Scholarship [${s.id}] ${s.title}... `);
+    const { ok, status } = await checkUrl(s.url);
+    console.log(ok ? `OK (${status})` : `BROKEN (${status})`);
+    return ok ? null : { kind: 'scholarship', name: s.title, url: s.url, error: String(status) };
+  });
+
+const progTasks = programs
+  .filter(p => p.url)
+  .map(p => async () => {
+    process.stdout.write(`Program [${p.id}] ${p.name}... `);
+    const { ok, status } = await checkUrl(p.url);
+    console.log(ok ? `OK (${status})` : `BROKEN (${status})`);
+    return ok ? null : { kind: 'program', name: p.name, url: p.url, error: String(status) };
+  });
+
+const results = await checkBatch([...schTasks, ...progTasks]);
+const broken  = results.filter(Boolean);
 
 if (broken.length === 0) {
   console.log('\nAll links OK.');

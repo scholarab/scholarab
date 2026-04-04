@@ -2,7 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import { loadPrograms } from '../lib/data-loader';
 import ResearchList from '../components/ResearchList.jsx';
-const programs = await loadPrograms();
+const raw = await loadPrograms();
+// Enrich at build time — avoids Date parsing on every user's device
+const programs = raw.map(p => ({
+  ...p,
+  _deadline_ms: p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
+    ? new Date(p.deadline + 'T00:00:00').getTime()
+    : null,
+}));
 ---
 
 <Layout

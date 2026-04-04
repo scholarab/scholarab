@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { Drawer } from 'vaul';
-import { usePrograms, INITIAL_BATCH } from '../hooks/usePrograms.js';
+import { usePrograms, PAGE_SIZE } from '../hooks/usePrograms.js';
 import ProgramCard from './ProgramCard.jsx';
+import Pagination from './Pagination.jsx';
 
 const SORT_OPTIONS = [
   { value: 'featured',    label: 'Featured' },
@@ -11,7 +12,10 @@ const SORT_OPTIONS = [
 export default function ResearchList({ programs }) {
   const {
     filtered,
-    visibleCount,
+    visibleItems,
+    page,
+    totalPages,
+    handlePageChange,
     sortBy,
     setSort,
     selectedCategory,
@@ -20,7 +24,6 @@ export default function ResearchList({ programs }) {
     setSheetOpen,
     hasActiveFilters,
     categoryKey,
-    sentinelRef,
     savedIds,
     handleToggleSave,
     isFiltered,
@@ -165,9 +168,9 @@ export default function ResearchList({ programs }) {
       </Drawer.Root>
 
       {/* Card grid */}
-      <div key={`${categoryKey}-${sortBy}`}
+      <div key={`${categoryKey}-${sortBy}-${page}`}
         className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
-        {filtered.slice(0, visibleCount).map((p, i) => (
+        {visibleItems.map((p, i) => (
           <ProgramCard
             key={p.id}
             program={p}
@@ -175,15 +178,12 @@ export default function ResearchList({ programs }) {
             isSaved={savedSet.has(p.id)}
             onToggleSave={() => handleToggleSave(p.id)}
             isFiltered={isFiltered}
-            isInitial={!isFiltered && i < INITIAL_BATCH}
+            isInitial={!isFiltered && page === 1 && i < PAGE_SIZE}
           />
         ))}
       </div>
 
-      {/* Infinite scroll sentinel */}
-      {visibleCount < filtered.length && (
-        <div ref={sentinelRef} style={{ height: 1 }} aria-hidden="true" />
-      )}
+      <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
 
       {/* Empty state */}
       {filtered.length === 0 && (

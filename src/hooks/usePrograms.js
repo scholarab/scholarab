@@ -1,36 +1,38 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { track } from '@vercel/analytics';
 import { getSavedPrograms, toggleSavedProgram } from '../lib/tracker.js';
 import { getToday } from '../lib/utils.jsx';
 
-/** Desktop default for SSR/hydration; mobile batch applied in useEffect after mount. */
-export const INITIAL_BATCH = 16;
+export const PAGE_SIZE = 16;
 
 export function getStatus(p) {
   if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') return 'tba';
-  const deadline = new Date(p.deadline + 'T00:00:00');
-  if (getToday() > deadline) return 'closed';
+  // Use build-time precomputed ms value when available
+  const deadMs = p._deadline_ms ?? new Date(p.deadline + 'T00:00:00').getTime();
+  if (getToday().getTime() > deadMs) return 'closed';
   return 'active';
 }
 
 const SORT_VALUES = ['featured', 'closest_due'];
 
 function getInitialParams(validCategories) {
-  if (typeof window === 'undefined') return { sort: 'featured', category: 'all' };
-  const params = new URLSearchParams(window.location.search);
-  const rawSort = params.get('sort') || 'featured';
-  const sort = SORT_VALUES.includes(rawSort) ? rawSort : 'featured';
-  const rawCat = params.get('category') || 'all';
-  const category = rawCat === 'all' || validCategories.has(rawCat) ? rawCat : 'all';
-  return { sort, category };
+  if (typeof window === 'undefined') return { sort: 'featured', category: 'all', page: 1 };
+  const params    = new URLSearchParams(window.location.search);
+  const rawSort   = params.get('sort') || 'featured';
+  const sort      = SORT_VALUES.includes(rawSort) ? rawSort : 'featured';
+  const rawCat    = params.get('category') || 'all';
+  const category  = rawCat === 'all' || validCategories.has(rawCat) ? rawCat : 'all';
+  const rawPage   = parseInt(params.get('page') || '1', 10);
+  const page      = rawPage >= 1 ? rawPage : 1;
+  return { sort, category, page };
 }
 
-function updateURL(sort, category) {
+function updateURL(sort, category, page) {
   if (typeof window === 'undefined') return;
   const params = new URLSearchParams();
-  if (sort && sort !== 'featured') params.set('sort', sort);
-  if (category && category !== 'all') params.set('category', category);
+  if (sort && sort !== 'featured')       params.set('sort', sort);
+  if (category && category !== 'all')    params.set('category', category);
+  if (page && page > 1)                  params.set('page', String(page));
   const qs = params.toString();
   const newUrl = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
   window.history.replaceState(null, '', newUrl);
@@ -39,13 +41,10 @@ function updateURL(sort, category) {
 export function usePrograms(initialPrograms) {
   const [sortBy,           setSortBy          ] = useState('featured');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [visibleCount,     setVisibleCount     ] = useState(INITIAL_BATCH);
+  const [page,             setPage            ] = useState(1);
   const [sheetOpen,        setSheetOpen        ] = useState(false);
   const [savedIds,         setSavedIds         ] = useState([]);
-  const batchSizeRef = useRef(INITIAL_BATCH);
-  const hasFiltered  = useRef(false);
-
-  const { ref: sentinelRef, inView } = useInView({ rootMargin: '300px' });
+  const hasFiltered = useRef(false);
 
   const validCategories = useMemo(
     () => new Set(initialPrograms.map(p => p.category)),
@@ -56,51 +55,46 @@ export function usePrograms(initialPrograms) {
     const p = getInitialParams(validCategories);
     setSortBy(p.sort);
     setSelectedCategory(p.category);
-    const batch = window.innerWidth < 768 ? 8 : 16;
-    batchSizeRef.current = batch;
-    setVisibleCount(batch);
+    setPage(p.page);
     setSavedIds([...getSavedPrograms()]);
   }, [initialPrograms, validCategories]);
 
-  function handleToggleSave(id) {
+  const handleToggleSave = useCallback((id) => {
     const newSaved = toggleSavedProgram(id);
     setSavedIds([...newSaved]);
     track('save_toggle', { id, saved: newSaved.includes(id) });
-  }
+  }, []);
 
-  function handleSetCategory(cat) {
+  const handleSetCategory = useCallback((cat) => {
     hasFiltered.current = true;
-    setVisibleCount(batchSizeRef.current);
     const next = cat === 'all' ? 'all' : (selectedCategory === cat ? 'all' : cat);
     setSelectedCategory(next);
-    updateURL(sortBy, next);
+    setPage(1);
+    updateURL(sortBy, next, 1);
     if (next !== 'all') track('filter_category', { category: next, page: 'programs' });
-  }
+  }, [selectedCategory, sortBy]);
 
-  function handleSetSort(value) {
+  const handleSetSort = useCallback((value) => {
     hasFiltered.current = true;
-    setVisibleCount(batchSizeRef.current);
     setSortBy(value);
-    updateURL(value, selectedCategory);
+    setPage(1);
+    updateURL(value, selectedCategory, 1);
     track('filter_sort', { sort: value, page: 'programs' });
-  }
+  }, [selectedCategory]);
+
+  const handlePageChange = useCallback((newPage) => {
+    hasFiltered.current = true;
+    setPage(newPage);
+    updateURL(sortBy, selectedCategory, newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [sortBy, selectedCategory]);
 
   const STATUS_ORDER = { active: 0, tba: 1, closed: 2 };
 
-  // Pre-compute status and deadlines once per data change.
+  // statusCache depends on today's date — must stay runtime
   const statusCache = useMemo(() => {
     const m = new Map();
     for (const p of initialPrograms) m.set(p.id, getStatus(p));
-    return m;
-  }, [initialPrograms]);
-
-  const deadlineCache = useMemo(() => {
-    const m = new Map();
-    for (const p of initialPrograms) {
-      if (p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing') {
-        m.set(p.id, new Date(p.deadline + 'T00:00:00'));
-      }
-    }
     return m;
   }, [initialPrograms]);
 
@@ -113,22 +107,22 @@ export function usePrograms(initialPrograms) {
     return [...afterCategory].sort((a, b) => {
       const sa = statusCache.get(a.id), sb = statusCache.get(b.id);
       if (STATUS_ORDER[sa] !== STATUS_ORDER[sb]) return STATUS_ORDER[sa] - STATUS_ORDER[sb];
-      if (sa === 'active') return (deadlineCache.get(a.id) ?? 0) - (deadlineCache.get(b.id) ?? 0);
+      // Use build-time precomputed ms values; fall back to 0 if absent
+      if (sa === 'active') return (a._deadline_ms ?? 0) - (b._deadline_ms ?? 0);
       return 0;
     });
-  }, [initialPrograms, selectedCategory, sortBy, statusCache, deadlineCache]);
+  }, [initialPrograms, selectedCategory, sortBy, statusCache]);
 
-  useEffect(() => {
-    if (!inView) return;
-    const rafId = requestAnimationFrame(() => {
-      setVisibleCount(v => v < filtered.length ? v + batchSizeRef.current : v);
-    });
-    return () => cancelAnimationFrame(rafId);
-  }, [inView, filtered.length]);
+  const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage     = Math.min(page, totalPages);
+  const visibleItems = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
   return {
     filtered,
-    visibleCount,
+    visibleItems,
+    page: safePage,
+    totalPages,
+    handlePageChange,
     sortBy,
     setSort:          handleSetSort,
     selectedCategory,
@@ -137,7 +131,6 @@ export function usePrograms(initialPrograms) {
     setSheetOpen,
     hasActiveFilters: sortBy !== 'featured' || selectedCategory !== 'all',
     categoryKey:      selectedCategory,
-    sentinelRef,
     savedIds,
     handleToggleSave,
     isFiltered:       hasFiltered.current,

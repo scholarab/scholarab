@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { Drawer } from 'vaul';
-import { useScholarships, INITIAL_BATCH } from '../hooks/useScholarships.js';
+import { useScholarships, PAGE_SIZE } from '../hooks/useScholarships.js';
 import ScholarshipCard from './ScholarshipCard.jsx';
+import Pagination from './Pagination.jsx';
 
 const REGION_DOT_COLORS = {
   'Medicine Hat': '#f97316',
@@ -26,7 +27,10 @@ const SORT_OPTIONS = [
 export default function ScholarshipList({ initialScholarships }) {
   const {
     filtered,
-    visibleCount,
+    visibleItems,
+    page,
+    totalPages,
+    handlePageChange,
     sortBy,
     setSort,
     selectedRegion,
@@ -35,7 +39,6 @@ export default function ScholarshipList({ initialScholarships }) {
     setSheetOpen,
     hasActiveFilters,
     regionKey,
-    sentinelRef,
     savedIds,
     handleToggleSave,
     isFiltered,
@@ -177,9 +180,9 @@ export default function ScholarshipList({ initialScholarships }) {
       </Drawer.Root>
 
       {/* Card grid */}
-      <div key={`${regionKey}-${sortBy}`}
+      <div key={`${regionKey}-${sortBy}-${page}`}
         className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
-        {filtered.slice(0, visibleCount).map((s, i) => (
+        {visibleItems.map((s, i) => (
           <ScholarshipCard
             key={s.id}
             scholarship={s}
@@ -187,15 +190,12 @@ export default function ScholarshipList({ initialScholarships }) {
             isSaved={savedSet.has(s.id)}
             onToggleSave={() => handleToggleSave(s.id)}
             isFiltered={isFiltered}
-            isInitial={!isFiltered && i < INITIAL_BATCH}
+            isInitial={!isFiltered && page === 1 && i < PAGE_SIZE}
           />
         ))}
       </div>
 
-      {/* Infinite scroll sentinel */}
-      {visibleCount < filtered.length && (
-        <div ref={sentinelRef} style={{ height: 1 }} aria-hidden="true" />
-      )}
+      <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
 
       {/* Empty state */}
       {filtered.length === 0 && (

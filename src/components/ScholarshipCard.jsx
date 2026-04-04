@@ -1,11 +1,11 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import { track } from '@vercel/analytics';
 import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.jsx';
 import { getStatus } from '../hooks/useScholarships.js';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
 import { observeCard, unobserveCard } from '../lib/cardObserver.js';
 
-export default function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }) {
+function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }) {
   const status       = getStatus(scholarship);
   const isClosed     = status === 'closed';
   const daysLeft     = status === 'active'
@@ -159,3 +159,5 @@ export default function ScholarshipCard({ scholarship, index, isSaved, onToggleS
     </div>
   );
 }
+
+export default memo(ScholarshipCard);

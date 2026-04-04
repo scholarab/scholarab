@@ -2,7 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships } from '../lib/data-loader';
 import ScholarshipList from '../components/ScholarshipList.jsx';
-const scholarships = await loadScholarships();
+const raw = await loadScholarships();
+// Enrich at build time — avoids regex/Date parsing on every user's device
+const scholarships = raw.map(s => ({
+  ...s,
+  _amount_cents: parseInt(String(s.amount || '').replace(/[$,]/g, '')) || 0,
+  _deadline_ms:  s.deadline  ? new Date(s.deadline  + 'T00:00:00').getTime() : 0,
+  _open_ms:      s.open_date ? new Date(s.open_date + 'T00:00:00').getTime() : 0,
+}));
 ---
 
 <Layout
