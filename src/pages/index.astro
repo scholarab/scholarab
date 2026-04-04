@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
+import { generateSlug, formatDeadline } from '../lib/utils.jsx';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -19,6 +20,15 @@ const scholarshipCount = scholarships.filter(s => {
   if (!s.deadline) return true;
   return new Date(s.deadline + 'T00:00:00') >= today;
 }).length;
+
+const previewScholarships = activeScholarships
+  .slice()
+  .sort((a, b) => {
+    const av = parseInt(a.amount.replace(/[$,]/g, ''), 10) || 0;
+    const bv = parseInt(b.amount.replace(/[$,]/g, ''), 10) || 0;
+    return bv - av;
+  })
+  .slice(0, 5);
 
 ---
 
@@ -47,7 +57,7 @@ const scholarshipCount = scholarships.filter(s => {
         <span class="hero-word" style="opacity:0;transform:translateY(10px);display:inline-block">opportunity</span>
         <span class="hero-word" style="opacity:0;transform:translateY(10px);display:inline-block">directory.</span>
       </p>
-      <p id="stat-counter" data-target={activeTotal} class="mb-4 md:mb-8 font-bold" style="font-size: clamp(22px, 3vw, 38px); color: #22d3a5; letter-spacing: -0.02em;">{'$' + activeTotal.toLocaleString('en-CA') + '+ open right now'}</p>
+      <p id="stat-counter" data-target={activeTotal} class="mb-4 md:mb-8 font-bold" style="font-size: clamp(36px, 8vw, 48px); color: #22d3a5; letter-spacing: -0.03em; line-height: 1.1;">{'$' + activeTotal.toLocaleString('en-CA') + '+ open right now'}</p>
       <script>
         function initCounter() {
           const el = document.getElementById('stat-counter');
@@ -116,19 +126,44 @@ const scholarshipCount = scholarships.filter(s => {
         });
       </script>
       <div class="flex flex-col sm:flex-row gap-3 sm:justify-center">
-        <a href="/scholarships" class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-85" style="background: #22d3a5; color: #0a0a0f;">
+        <a href="/scholarships" class="inline-flex items-center justify-center px-7 py-4 rounded-full text-base font-semibold transition-opacity hover:opacity-85" style="background: #22d3a5; color: #0a0a0f;">
           Find Scholarships
         </a>
-        <a href="/programs" class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-semibold transition-colors border" style="background: rgba(34,211,165,0.15); border-color: rgba(34,211,165,0.6); color: #22d3a5;">
+        <a href="/programs" class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-semibold transition-colors border border-gray-200 dark:border-white/15 text-gray-500 dark:text-white/45 hover:border-[#22d3a5] hover:text-[#22d3a5] dark:hover:border-[#22d3a5] dark:hover:text-[#22d3a5]">
           Research Programs
         </a>
       </div>
 
-      <!-- Stats row -->
-      <div class="flex items-center justify-center sm:justify-center gap-2 mt-6 text-xs text-gray-400 dark:text-white/30 flex-wrap">
+      <!-- Stats row — desktop only; mobile gets preview strip below -->
+      <div class="hidden sm:flex items-center justify-center gap-2 mt-6 text-xs text-gray-400 dark:text-white/30 flex-wrap">
         <span>{scholarshipCount} scholarships</span>
         <span aria-hidden="true">·</span>
         <span>{researchCount} research programs</span>
+      </div>
+    </div>
+
+    <!-- Scholarship preview strip — mobile only -->
+    <div class="md:hidden mt-6 -mx-4 px-4">
+      <div class="flex gap-3 overflow-x-auto pb-1" style="scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none;">
+        {previewScholarships.map(s => (
+          <a
+            href={`/scholarships/${generateSlug(s.title)}`}
+            class="card card-interactive flex-shrink-0 p-4 flex flex-col gap-2 no-underline"
+            style="width: 172px; scroll-snap-align: start; min-height: 110px;"
+          >
+            <p class="font-semibold text-xs text-gray-900 dark:text-white leading-snug line-clamp-2">{s.title}</p>
+            <p class="font-bold text-lg leading-none mt-auto" style="color: #22d3a5;">{s.amount}</p>
+            {s.deadline && <p class="text-[11px] text-gray-400 dark:text-white/35">{formatDeadline(s.deadline)}</p>}
+          </a>
+        ))}
+        <a
+          href="/scholarships"
+          class="flex-shrink-0 flex flex-col items-center justify-center gap-1 rounded-2xl text-center"
+          style="width: 80px; scroll-snap-align: start;"
+        >
+          <span class="text-xl" style="color: #22d3a5;">→</span>
+          <span class="text-xs font-semibold" style="color: #22d3a5;">See all</span>
+        </a>
       </div>
     </div>
 
