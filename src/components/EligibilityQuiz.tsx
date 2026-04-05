@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import type { Scholarship } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll, getConfidenceTier } from '../lib/eligibility-matcher'
+import { getSaved, toggleSaved } from '../lib/tracker.js'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -389,7 +390,12 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   const strong = results.filter(r => r.tier === 'strong')
   const good   = results.filter(r => r.tier === 'good')
   const possible = results.filter(r => r.tier === 'possible')
-  const confirmed = [...strong, ...good]
+
+  const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
+  const handleToggleSave = useCallback((id: number) => {
+    toggleSaved(id)
+    setSavedIds(new Set(getSaved()))
+  }, [])
 
   return (
     <div>
@@ -456,7 +462,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                 <span className={`text-xs px-2 py-0.5 rounded-full border ${style.badge}`}>
                   {style.label}
                 </span>
-                <div className="flex gap-2">
+                <div className="flex items-center gap-3">
                   <a
                     href={`/scholarships/${s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`}
                     className="text-xs text-white/40 hover:text-white transition"
@@ -472,6 +478,22 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                   >
                     Apply →
                   </a>
+                  <button
+                    onClick={() => handleToggleSave(s.id)}
+                    aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
+                    style={{
+                      width: 28, height: 28, borderRadius: 8, flexShrink: 0,
+                      background: savedIds.has(s.id) ? 'rgba(34,211,165,0.12)' : 'rgba(255,255,255,0.06)',
+                      border: `0.5px solid ${savedIds.has(s.id) ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.15)'}`,
+                      color: savedIds.has(s.id) ? '#22d3a5' : 'rgba(200,200,210,0.5)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+                      transition: 'color 0.15s, background 0.15s, border-color 0.15s',
+                    }}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill={savedIds.has(s.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
