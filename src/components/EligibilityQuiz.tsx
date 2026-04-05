@@ -438,7 +438,9 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                 </span>
                 <div className="flex items-center gap-3">
                   <a
-                    href={`/scholarships/${generateSlug(s.title)}?from=match`}
+                    href={`/scholarships/${generateSlug(s.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-xs text-gray-400 dark:text-white/40 hover:text-gray-900 dark:hover:text-white transition"
                   >
                     Details
