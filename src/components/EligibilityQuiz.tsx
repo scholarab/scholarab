@@ -502,9 +502,19 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       </div>
 
       {results.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-white/40 mb-2">No matches found for your exact profile.</p>
-          <p className="text-sm text-white/25">Try broadening your answers or browsing all scholarships.</p>
+        <div className="text-center py-12 px-4">
+          <p className="text-3xl mb-4">🔍</p>
+          <p className="font-semibold text-white mb-2">No scholarships matched your profile</p>
+          <p className="text-sm text-white/40 mb-6 max-w-sm mx-auto">
+            Try leaving some optional fields blank — identity, GPA, and school answers narrow results significantly.
+          </p>
+          <button
+            onClick={() => { setStep(1); setGrade(''); setCity(''); setSchoolBoard(''); setTargetInstitution(''); setFields([]); setAverageBracket(null); setIdentifiesAsFemale(null); setIdentifiesAsLGBTQ(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null); setInFosterCare(null); setInApprenticeship(null); setCitizenship(null) }}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition"
+            style={{ background: '#22d3a5', color: '#0a0a0f' }}
+          >
+            Try again
+          </button>
         </div>
       )}
 
