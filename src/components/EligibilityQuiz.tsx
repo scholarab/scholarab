@@ -448,14 +448,12 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                   <button
                     onClick={() => handleToggleSave(s.id)}
                     aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
-                    style={{
-                      width: 28, height: 28, borderRadius: 8, flexShrink: 0,
-                      background: savedIds.has(s.id) ? 'rgba(34,211,165,0.12)' : 'rgba(255,255,255,0.06)',
-                      border: `0.5px solid ${savedIds.has(s.id) ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.15)'}`,
-                      color: savedIds.has(s.id) ? '#22d3a5' : 'rgba(200,200,210,0.5)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                      transition: 'color 0.15s, background 0.15s, border-color 0.15s',
-                    }}
+                    className={`flex items-center justify-center flex-shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${
+                      savedIds.has(s.id)
+                        ? 'text-[#22d3a5] border border-[#22d3a5]/40'
+                        : 'text-gray-400 border border-gray-300 dark:border-white/15 dark:text-white/40'
+                    }`}
+                    style={{ width: 28, height: 28, background: savedIds.has(s.id) ? 'rgba(34,211,165,0.12)' : undefined }}
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill={savedIds.has(s.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
