@@ -34,21 +34,53 @@ const emptyForm = (): Partial<Scholarship> => ({
 export default function ScholarshipManager({ initialData }: Props) {
   const [items, setItems] = useState<Scholarship[]>(initialData)
   const [search, setSearch] = useState('')
+  const [regionTab, setRegionTab] = useState<string>('All')
   const [page, setPage] = useState(0)
   const [modal, setModal] = useState<{ type: 'edit' | 'add' | 'delete'; item?: Scholarship } | null>(null)
   const [form, setForm] = useState<Partial<Scholarship>>(emptyForm())
   const [saving, setSaving] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
 
-  const filtered = useMemo(() =>
-    items.filter(s => s.title.toLowerCase().includes(search.toLowerCase())),
-    [items, search]
-  )
+  // Duplicate detection: only active when adding
+  const duplicate = useMemo(() => {
+    if (modal?.type !== 'add' || !form.title?.trim()) return null
+    const needle = form.title.trim().toLowerCase()
+    return items.find(s => s.title.trim().toLowerCase() === needle) ?? null
+  }, [form.title, items, modal?.type])
+
+  const filtered = useMemo(() => {
+    let list = items.filter(s => s.title.toLowerCase().includes(search.toLowerCase()))
+    if (regionTab !== 'All') {
+      if (regionTab === 'No region') {
+        list = list.filter(s => !s.region)
+      } else {
+        list = list.filter(s => s.region === regionTab)
+      }
+    }
+    return list
+  }, [items, search, regionTab])
+
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
   const paginated = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
+  // Count per region tab for badges
+  const regionCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: items.length, 'No region': 0 }
+    for (const r of REGIONS) counts[r] = 0
+    for (const s of items) {
+      if (s.region && counts[s.region] !== undefined) counts[s.region]++
+      else if (!s.region) counts['No region']++
+    }
+    return counts
+  }, [items])
+
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value)
+    setPage(0)
+  }
+
+  function handleRegionTab(r: string) {
+    setRegionTab(r)
     setPage(0)
   }
 
@@ -99,17 +131,7 @@ export default function ScholarshipManager({ initialData }: Props) {
     }
   }
 
-  const field = (key: keyof Scholarship, label: string, type = 'text') => (
-    <div key={key}>
-      <label className="block text-xs text-white/50 mb-1">{label}</label>
-      <input
-        type={type}
-        value={(form[key] as string) ?? ''}
-        onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
-        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition"
-      />
-    </div>
-  )
+  const ALL_TABS = ['All', ...REGIONS, 'No region']
 
   return (
     <div>
@@ -123,6 +145,7 @@ export default function ScholarshipManager({ initialData }: Props) {
         </button>
       </div>
 
+      {/* Search */}
       <input
         type="search"
         placeholder="Search scholarships…"
@@ -131,6 +154,30 @@ export default function ScholarshipManager({ initialData }: Props) {
         className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-none focus:border-[#22d3a5]/50 transition"
       />
 
+      {/* Region tabs */}
+      <div className="flex gap-1.5 flex-wrap mb-4">
+        {ALL_TABS.map(r => {
+          const count = regionCounts[r] ?? 0
+          const active = regionTab === r
+          return (
+            <button
+              key={r}
+              onClick={() => handleRegionTab(r)}
+              className="px-3 py-1 rounded-full text-xs font-medium transition"
+              style={{
+                background: active ? 'rgba(34,211,165,0.15)' : 'rgba(255,255,255,0.05)',
+                border: active ? '1px solid rgba(34,211,165,0.35)' : '1px solid rgba(255,255,255,0.08)',
+                color: active ? '#22d3a5' : 'rgba(255,255,255,0.4)',
+              }}
+            >
+              {r}
+              <span className="ml-1.5 opacity-60">{count}</span>
+            </button>
+          )
+        })}
+      </div>
+
+      {/* Table */}
       <div className="border border-white/[0.06] rounded-xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
@@ -170,7 +217,7 @@ export default function ScholarshipManager({ initialData }: Props) {
 
       {totalPages > 1 && (
         <div className="flex items-center justify-between mt-4 text-sm text-white/40">
-          <span>{filtered.length} total · page {page + 1} of {totalPages}</span>
+          <span>{filtered.length} results · page {page + 1} of {totalPages}</span>
           <div className="flex gap-2">
             <button
               onClick={() => setPage(p => Math.max(0, p - 1))}
@@ -197,7 +244,14 @@ export default function ScholarshipManager({ initialData }: Props) {
             <h2 className="text-lg font-semibold mb-1">{modal.type === 'edit' ? 'Edit Scholarship' : 'Add Scholarship'}</h2>
             <p className="text-xs text-white/30 mb-5">Fields marked * are required</p>
 
-            {/* ── Essential fields ── */}
+            {/* Duplicate warning */}
+            {duplicate && (
+              <div className="mb-4 px-4 py-3 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-300 text-sm">
+                ⚠️ A scholarship with this name already exists: <span className="font-semibold">"{duplicate.title}"</span>
+              </div>
+            )}
+
+            {/* Essential fields */}
             <div className="space-y-4">
               <div>
                 <label className="block text-sm text-white/70 mb-1.5">Scholarship name *</label>
@@ -267,7 +321,7 @@ export default function ScholarshipManager({ initialData }: Props) {
               </label>
             </div>
 
-            {/* ── Advanced toggle ── */}
+            {/* Advanced toggle */}
             <button
               type="button"
               onClick={() => setShowAdvanced(v => !v)}
@@ -304,7 +358,7 @@ export default function ScholarshipManager({ initialData }: Props) {
 
             <div className="flex gap-3 mt-6 justify-end">
               <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
-              <button onClick={handleSave} disabled={saving} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f] disabled:opacity-50" style={{background:'#22d3a5'}}>
+              <button onClick={handleSave} disabled={saving || !!duplicate} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f] disabled:opacity-50" style={{background:'#22d3a5'}}>
                 {saving ? 'Saving…' : 'Save scholarship'}
               </button>
             </div>
