@@ -54,14 +54,9 @@ const {
   <script>
     const link = document.getElementById('detail-back-link') as HTMLAnchorElement | null;
     const label = document.getElementById('detail-back-label');
-    if (link && label && window.history.length > 1 && document.referrer) {
-      try {
-        const refPath = new URL(document.referrer).pathname;
-        if (refPath === '/match') {
-          label.textContent = 'Back to results';
-          link.href = '/match';
-        }
-      } catch {}
+    if (link && label && new URLSearchParams(location.search).get('from') === 'match') {
+      label.textContent = 'Back to results';
+      link.href = '/match';
       link.addEventListener('click', (e) => {
         e.preventDefault();
         history.back();

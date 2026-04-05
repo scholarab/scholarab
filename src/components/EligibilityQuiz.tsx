@@ -422,7 +422,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                 </span>
                 <div className="flex items-center gap-3">
                   <a
-                    href={`/scholarships/${s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`}
+                    href={`/scholarships/${s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}?from=match`}
                     className="text-xs text-gray-400 dark:text-white/40 hover:text-gray-900 dark:hover:text-white transition"
                   >
                     Details
