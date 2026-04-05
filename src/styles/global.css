@@ -355,20 +355,17 @@ h1, h2 {
 }
 
 /* ── #5 — Page view transitions ───────────────────────────── */
-/* Old: fade only (no transform) = guaranteed compositor thread, zero jank */
-/* New: translate3d only with opacity = smooth entrance */
-@keyframes page-out {
-  to { opacity: 0; }
-}
+/* Old: no animation — stays fully visible underneath (never transparent = no dark flash) */
+/* New: slides in on top with opacity */
 @keyframes page-in {
-  from { opacity: 0; transform: translate3d(18px, 0, 0); }
+  from { opacity: 0; transform: translate3d(20px, 0, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 ::view-transition-old(root) {
-  animation: page-out 0.18s ease-in both;
+  animation: none;
 }
 ::view-transition-new(root) {
-  animation: page-in 0.32s cubic-bezier(0, 0, 0.2, 1) both;
+  animation: page-in 0.3s cubic-bezier(0, 0, 0.2, 1) both;
 }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
