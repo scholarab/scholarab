@@ -374,6 +374,20 @@ h1, h2 {
     opacity: 1 !important;
     transform: none !important;
   }
+  /* Disable hero word + how-it-works step animations — show instantly */
+  .hero-word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .step-hidden {
+    opacity: 1 !important;
+  }
+  .step-visible {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
