@@ -49,6 +49,7 @@ export default function ScholarshipManager({ initialData }: Props) {
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [showEligibility, setShowEligibility] = useState(false)
   const [parsing, setParsing] = useState(false)
+  const [bulkProgress, setBulkProgress] = useState<{ done: number; total: number } | null>(null)
   const modalOpenRef = useRef(false)
 
   // Auto-refresh every 60s — skip if a modal is open to avoid disrupting edits
@@ -221,6 +222,42 @@ export default function ScholarshipManager({ initialData }: Props) {
     }
   }
 
+  const handleBulkParse = async () => {
+    const untagged = items.filter(s => !s.eligibility && s.audience?.trim())
+    if (untagged.length === 0) { toast.success('All scholarships are already tagged'); return }
+    setBulkProgress({ done: 0, total: untagged.length })
+    let done = 0
+    let failed = 0
+    for (const s of untagged) {
+      try {
+        const res = await fetch('/admin/api/scholarships/parse-eligibility', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: s.id }),
+        })
+        if (res.ok) {
+          const { eligibility } = await res.json()
+          // Save immediately
+          await fetch(`/admin/api/scholarships/${s.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ eligibility }),
+          })
+          setItems(prev => prev.map(x => x.id === s.id ? { ...x, eligibility } : x))
+        } else {
+          failed++
+        }
+      } catch {
+        failed++
+      }
+      done++
+      setBulkProgress({ done, total: untagged.length })
+    }
+    setBulkProgress(null)
+    if (failed === 0) toast.success(`Tagged ${done} scholarship${done !== 1 ? 's' : ''}`)
+    else toast.success(`Tagged ${done - failed}/${done} — ${failed} failed`)
+  }
+
   const ALL_TABS = ['All', ...REGIONS, 'No region']
 
   return (
@@ -228,11 +265,27 @@ export default function ScholarshipManager({ initialData }: Props) {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-xl font-semibold">Scholarships</h1>
-          <p className="text-sm text-white/40">{items.length} total</p>
+          <p className="text-sm text-white/40">
+            {items.length} total · {items.filter(s => s.eligibility).length} tagged
+          </p>
         </div>
-        <button onClick={openAdd} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f]" style={{background:'#22d3a5'}}>
-          + Add scholarship
-        </button>
+        <div className="flex items-center gap-2">
+          {bulkProgress ? (
+            <span className="text-xs text-white/40 animate-pulse">
+              Parsing {bulkProgress.done}/{bulkProgress.total}…
+            </span>
+          ) : (
+            <button
+              onClick={handleBulkParse}
+              className="px-3 py-2 rounded-lg text-xs font-medium border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition"
+            >
+              ✦ Parse all untagged
+            </button>
+          )}
+          <button onClick={openAdd} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f]" style={{background:'#22d3a5'}}>
+            + Add scholarship
+          </button>
+        </div>
       </div>
 
       {/* Search */}
