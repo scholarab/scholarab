@@ -20,7 +20,7 @@ type Scholarship = {
 }
 
 const CATEGORIES = ['Arts', 'Business', 'Community', 'Engineering', 'General', 'Health', 'Indigenous', 'LGBTQ+', 'Science', 'Sports', 'Trades', 'Other']
-const REGIONS = ['National', 'Province-wide', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer', 'Northern Alberta', 'Southern Alberta', 'Canada-wide']
+const REGIONS = ['National', 'Alberta', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']
 
 interface Props {
   initialData: Scholarship[]
