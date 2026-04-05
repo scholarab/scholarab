@@ -1,12 +1,12 @@
-import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import type { Scholarship } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
-import { matchAll, getConfidenceTier } from '../lib/eligibility-matcher'
+import { matchAll } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved } from '../lib/tracker.js'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type Step = 1 | 2 | 3 | 4 | 'results'
+type Step = 1 | 2 | 3 | 'results'
 
 interface Props {
   scholarships: Scholarship[]
@@ -25,16 +25,6 @@ const CITY_OPTIONS = [
   'Medicine Hat', 'Calgary', 'Edmonton', 'Lethbridge', 'Red Deer', 'Other Alberta',
 ]
 
-const SCHOOL_BOARDS = [
-  'CBE (Calgary Public)',
-  'CCSD (Calgary Catholic)',
-  'Edmonton Public Schools',
-  'Edmonton Catholic Schools',
-  'MHPSD (Medicine Hat)',
-  'Lethbridge School Division',
-  'Other / Not sure',
-]
-
 const INSTITUTIONS = [
   'University of Calgary',
   'University of Alberta',
@@ -43,7 +33,7 @@ const INSTITUTIONS = [
   'University of Lethbridge',
   'Medicine Hat College',
   'Trades / Apprenticeship program',
-  'Other / Not sure',
+  'Not sure yet',
 ]
 
 const FIELDS = [
@@ -62,18 +52,14 @@ const FIELDS = [
 ]
 
 const AVERAGE_BRACKETS = [
-  { value: 55, label: 'Below 65%' },
-  { value: 67, label: '65–74%' },
-  { value: 77, label: '75–79%' },
-  { value: 82, label: '80–84%' },
-  { value: 87, label: '85–89%' },
-  { value: 92, label: '90–94%' },
-  { value: 97, label: '95%+' },
+  { value: 72, label: 'Below 80%' },
+  { value: 85, label: '80 – 89%' },
+  { value: 93, label: '90% or higher' },
 ]
 
 const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
-  strong: { badge: 'bg-[#22d3a5]/15 text-[#22d3a5] border-[#22d3a5]/30', label: 'Strong match' },
-  good:   { badge: 'bg-blue-500/15 text-blue-400 border-blue-500/30', label: 'Good match' },
+  strong:   { badge: 'bg-[#22d3a5]/15 text-[#22d3a5] border-[#22d3a5]/30', label: 'Strong match' },
+  good:     { badge: 'bg-blue-500/15 text-blue-400 border-blue-500/30', label: 'Good match' },
   possible: { badge: 'bg-white/10 text-white/40 border-white/15', label: 'Possible match' },
 }
 
@@ -97,8 +83,8 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
 }
 
 function ProgressBar({ step }: { step: Step }) {
-  const steps = [1, 2, 3, 4]
-  const current = step === 'results' ? 4 : (step as number)
+  const steps = [1, 2, 3]
+  const current = step === 'results' ? 3 : (step as number)
   return (
     <div className="flex gap-1.5 mb-8">
       {steps.map(s => (
@@ -124,16 +110,13 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   // Step 1
   const [grade, setGrade] = useState<StudentProfile['grade'] | ''>('')
   const [city, setCity] = useState('')
-
-  // Step 2
-  const [schoolBoard, setSchoolBoard] = useState('')
   const [targetInstitution, setTargetInstitution] = useState('')
 
-  // Step 3
+  // Step 2
   const [fields, setFields] = useState<string[]>([])
   const [averageBracket, setAverageBracket] = useState<number | null>(null)
 
-  // Step 4
+  // Step 3
   const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(null)
   const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(null)
   const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(null)
@@ -146,9 +129,9 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     return {
       grade: grade as StudentProfile['grade'],
       city,
-      schoolBoard: schoolBoard && schoolBoard !== 'Other / Not sure' ? schoolBoard : null,
+      schoolBoard: null,
       specificSchool: null,
-      targetInstitution: targetInstitution && targetInstitution !== 'Other / Not sure' ? targetInstitution : null,
+      targetInstitution: targetInstitution && targetInstitution !== 'Not sure yet' ? targetInstitution : null,
       fields,
       averagePercent: averageBracket,
       identifiesAsFemale,
@@ -161,7 +144,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       extracurriculars: [],
       citizenship,
     }
-  }, [grade, city, schoolBoard, targetInstitution, fields, averageBracket,
+  }, [grade, city, targetInstitution, fields, averageBracket,
       identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
       inFosterCare, inApprenticeship, citizenship])
 
@@ -190,32 +173,31 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     setFields(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f])
   }
 
-  function toggleIdentity(
-    current: boolean | null,
-    setter: (v: boolean | null) => void,
-    newVal: true | false,
-  ) {
-    // clicking same value again → deselect (back to null = not answered)
-    setter(current === newVal ? null : newVal)
+  function toggleIdentity(current: boolean | null, setter: (v: boolean | null) => void) {
+    setter(current === true ? null : true)
   }
 
-  const canNext1 = grade !== '' && city !== ''
+  function reset() {
+    setStep(1); setGrade(''); setCity(''); setTargetInstitution('');
+    setFields([]); setAverageBracket(null);
+    setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null);
+    setInFosterCare(null); setInApprenticeship(null); setCitizenship(null)
+  }
 
-  // Must be declared before any conditional returns (Rules of Hooks)
   const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
   const handleToggleSave = useCallback((id: number) => {
     toggleSaved(id)
     setSavedIds(new Set(getSaved()))
   }, [])
 
-  // ── Steps ──────────────────────────────────────────────────────────────────
+  // ── Step 1 — Where are you at? ──────────────────────────────────────────────
 
   if (step === 1) {
     return (
       <div>
         <ProgressBar step={1} />
         <h2 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">Where are you at?</h2>
-        <p className="text-sm text-gray-500 dark:text-white/40 mb-6">We'll use this to filter scholarships by location and grade.</p>
+        <p className="text-sm text-gray-500 dark:text-white/40 mb-6">We'll use this to filter scholarships by grade and location.</p>
 
         <div className="mb-6">
           <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">Your grade</p>
@@ -233,7 +215,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           )}
         </div>
 
-        <div className="mb-8">
+        <div className="mb-6">
           <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">Your city</p>
           <div className="flex flex-wrap gap-2">
             {CITY_OPTIONS.map(c => (
@@ -242,9 +224,18 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           </div>
         </div>
 
+        <div className="mb-8">
+          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">Where are you planning to study? <span className="text-gray-400 dark:text-white/25 font-normal">(optional)</span></p>
+          <div className="flex flex-wrap gap-2">
+            {INSTITUTIONS.map(inst => (
+              <Chip key={inst} label={inst} active={targetInstitution === inst} onClick={() => setTargetInstitution(prev => prev === inst ? '' : inst)} />
+            ))}
+          </div>
+        </div>
+
         <button
           onClick={() => setStep(2)}
-          disabled={!canNext1}
+          disabled={grade === '' || city === ''}
           className="w-full py-3 rounded-xl text-sm font-semibold transition disabled:opacity-30"
           style={{ background: '#22d3a5', color: '#0a0a0f' }}
         >
@@ -254,52 +245,17 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     )
   }
 
+  // ── Step 2 — What do you want to study? ────────────────────────────────────
+
   if (step === 2) {
     return (
       <div>
         <ProgressBar step={2} />
-        <h2 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">Your school</h2>
-        <p className="text-sm text-gray-500 dark:text-white/40 mb-6">Optional — but helps us find school-specific awards.</p>
-
-        <div className="mb-6">
-          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">School board</p>
-          <div className="flex flex-wrap gap-2">
-            {SCHOOL_BOARDS.map(b => (
-              <Chip key={b} label={b} active={schoolBoard === b} onClick={() => setSchoolBoard(prev => prev === b ? '' : b)} />
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-8">
-          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">Where are you planning to go?</p>
-          <div className="flex flex-wrap gap-2">
-            {INSTITUTIONS.map(inst => (
-              <Chip key={inst} label={inst} active={targetInstitution === inst} onClick={() => setTargetInstitution(prev => prev === inst ? '' : inst)} />
-            ))}
-          </div>
-        </div>
-
-        <div className="flex gap-3">
-          <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 transition">
-            ← Back
-          </button>
-          <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: '#22d3a5', color: '#0a0a0f' }}>
-            Next →
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  if (step === 3) {
-    return (
-      <div>
-        <ProgressBar step={3} />
         <h2 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">What do you want to study?</h2>
-        <p className="text-sm text-gray-500 dark:text-white/40 mb-6">Optional — helps surface field-specific scholarships.</p>
+        <p className="text-sm text-gray-500 dark:text-white/40 mb-6">Optional — helps surface scholarships specific to your field.</p>
 
         <div className="mb-6">
-          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">Intended field of study</p>
+          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">Field of study</p>
           <div className="flex flex-wrap gap-2">
             {FIELDS.map(({ value, label }) => (
               <Chip key={value} label={label} active={fields.includes(value)} onClick={() => toggleField(value)} />
@@ -317,10 +273,10 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </div>
 
         <div className="flex gap-3">
-          <button onClick={() => setStep(2)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 transition">
+          <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 transition">
             ← Back
           </button>
-          <button onClick={() => setStep(4)} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: '#22d3a5', color: '#0a0a0f' }}>
+          <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: '#22d3a5', color: '#0a0a0f' }}>
             Next →
           </button>
         </div>
@@ -328,61 +284,59 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     )
   }
 
-  if (step === 4) {
-    const identityChip = (label: string, current: boolean | null, setter: (v: boolean | null) => void) => (
-      <Chip label={label} active={current === true} onClick={() => toggleIdentity(current, setter, true)} />
-    )
+  // ── Step 3 — About you ─────────────────────────────────────────────────────
 
+  if (step === 3) {
     return (
       <div>
-        <ProgressBar step={4} />
+        <ProgressBar step={3} />
         <h2 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">About you</h2>
         <p className="text-sm text-gray-500 dark:text-white/40 mb-1">All optional. Helps surface scholarships made for you specifically.</p>
         <p className="text-xs text-gray-400 dark:text-white/25 mb-6 flex items-center gap-1.5">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          Your answers are processed on this device only and never sent anywhere.
+          Processed on this device only — never sent anywhere.
         </p>
 
         <div className="mb-5">
-          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">I identify as <span className="text-gray-400 dark:text-white/25 font-normal">(optional)</span></p>
+          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">I identify as</p>
           <div className="flex flex-wrap gap-2">
             <Chip label="Male" active={identifiesAsFemale === false} onClick={() => setIdentifiesAsFemale(prev => prev === false ? null : false)} />
             <Chip label="Female" active={identifiesAsFemale === true} onClick={() => setIdentifiesAsFemale(prev => prev === true ? null : true)} />
-            {identityChip('Indigenous (First Nations, Métis, Inuit)', identifiesAsIndigenous, setIdentifiesAsIndigenous)}
-            {identityChip('Person of colour', identifiesAsBIPOC, setIdentifiesAsBIPOC)}
+            <Chip label="Indigenous (First Nations, Métis, Inuit)" active={identifiesAsIndigenous === true} onClick={() => toggleIdentity(identifiesAsIndigenous, setIdentifiesAsIndigenous)} />
+            <Chip label="Person of colour" active={identifiesAsBIPOC === true} onClick={() => toggleIdentity(identifiesAsBIPOC, setIdentifiesAsBIPOC)} />
           </div>
         </div>
 
         <div className="mb-5">
-          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">My situation <span className="text-gray-400 dark:text-white/25 font-normal">(optional)</span></p>
+          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">My situation</p>
           <div className="flex flex-wrap gap-2">
-            <Chip label="In apprenticeship (RAP / CTS)" active={inApprenticeship === true} onClick={() => toggleIdentity(inApprenticeship, setInApprenticeship, true)} />
-            <Chip label="In foster / government care" active={inFosterCare === true} onClick={() => toggleIdentity(inFosterCare, setInFosterCare, true)} />
+            <Chip label="In apprenticeship (RAP / CTS)" active={inApprenticeship === true} onClick={() => toggleIdentity(inApprenticeship, setInApprenticeship)} />
+            <Chip label="In foster / government care" active={inFosterCare === true} onClick={() => toggleIdentity(inFosterCare, setInFosterCare)} />
           </div>
         </div>
 
         <div className="mb-8">
           <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">Citizenship</p>
           <div className="flex flex-wrap gap-2">
-            {[
+            {([
               { value: 'canadian_citizen', label: 'Canadian citizen' },
               { value: 'permanent_resident', label: 'Permanent resident' },
               { value: 'other', label: 'Other / International' },
-            ].map(({ value, label }) => (
+            ] as { value: StudentProfile['citizenship']; label: string }[]).map(({ value, label }) => (
               <Chip
-                key={value}
+                key={value as string}
                 label={label}
                 active={citizenship === value}
-                onClick={() => setCitizenship(prev => prev === value ? null : value as StudentProfile['citizenship'])}
+                onClick={() => setCitizenship(prev => prev === value ? null : value)}
               />
             ))}
           </div>
         </div>
 
         <div className="flex gap-3">
-          <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 transition">
+          <button onClick={() => setStep(2)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 transition">
             ← Back
           </button>
           <button
@@ -401,8 +355,8 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
   if (!results) return null
 
-  const strong = results.filter(r => r.tier === 'strong')
-  const good   = results.filter(r => r.tier === 'good')
+  const strong   = results.filter(r => r.tier === 'strong')
+  const good     = results.filter(r => r.tier === 'good')
   const possible = results.filter(r => r.tier === 'possible')
 
   return (
@@ -418,11 +372,10 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           </p>
         )}
         <p className="text-xs text-gray-400 dark:text-white/25 mt-1">
-          "Up to" total counts strong + good matches only. Always verify eligibility on the scholarship's official site.
+          Strong + good matches only. Always verify eligibility on the official site.
         </p>
       </div>
 
-      {/* Tier breakdown */}
       <div className="flex gap-3 mb-6 flex-wrap">
         {strong.length > 0 && (
           <span className="text-xs px-3 py-1 rounded-full border bg-[#22d3a5]/10 text-[#22d3a5] border-[#22d3a5]/30">
@@ -441,11 +394,9 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         )}
       </div>
 
-      {/* Scholarship list */}
       <div className="space-y-3">
         {results.map(({ scholarship: s, tier }) => {
           const style = TIER_STYLES[tier]
-          const amountNum = parseAmount(s.amount)
           return (
             <div
               key={s.id}
@@ -513,10 +464,10 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <p className="text-3xl mb-4">🔍</p>
           <p className="font-semibold text-gray-900 dark:text-white mb-2">No scholarships matched your profile</p>
           <p className="text-sm text-gray-500 dark:text-white/40 mb-6 max-w-sm mx-auto">
-            Try leaving some optional fields blank — identity, GPA, and school answers narrow results significantly.
+            Try leaving optional fields blank — average and identity answers narrow results significantly.
           </p>
           <button
-            onClick={() => { setStep(1); setGrade(''); setCity(''); setSchoolBoard(''); setTargetInstitution(''); setFields([]); setAverageBracket(null); setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null); setInFosterCare(null); setInApprenticeship(null); setCitizenship(null) }}
+            onClick={reset}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition"
             style={{ background: '#22d3a5', color: '#0a0a0f' }}
           >
@@ -527,7 +478,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
       <div className="mt-8 pt-6 border-t border-gray-100 dark:border-white/[0.06] flex flex-col sm:flex-row gap-3">
         <button
-          onClick={() => { setStep(1); setGrade(''); setCity(''); setSchoolBoard(''); setTargetInstitution(''); setFields([]); setAverageBracket(null); setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null); setInFosterCare(null); setInApprenticeship(null); setCitizenship(null) }}
+          onClick={reset}
           className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 transition"
         >
           Start over
