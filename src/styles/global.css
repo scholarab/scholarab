@@ -45,7 +45,7 @@
 /* background-image layers are always behind element content — no z-index needed */
 body {
   background-image:
-    radial-gradient(ellipse at center, rgba(34,211,165,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse at center, rgba(var(--brand-rgb),0.22) 0%, transparent 70%),
     radial-gradient(ellipse at center, rgba(59,130,246,0.16) 0%, transparent 70%),
     radial-gradient(ellipse at center, rgba(167,139,250,0.14) 0%, transparent 70%);
   background-size: 65% 55%, 58% 48%, 62% 52%;
@@ -55,7 +55,7 @@ body {
 }
 .dark body {
   background-image:
-    radial-gradient(ellipse at center, rgba(34,211,165,0.14) 0%, transparent 70%),
+    radial-gradient(ellipse at center, rgba(var(--brand-rgb),0.14) 0%, transparent 70%),
     radial-gradient(ellipse at center, rgba(59,130,246,0.10) 0%, transparent 70%),
     radial-gradient(ellipse at center, rgba(167,139,250,0.09) 0%, transparent 70%);
 }
@@ -81,7 +81,7 @@ html.dark {
 
 /* ── Focus ring ────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #22d3a5;
+  outline: 2px solid var(--brand);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -90,6 +90,14 @@ html.dark {
 :root {
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --spring-snappy: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --brand: #22d3a5;
+  --brand-rgb: 34, 211, 165;
+  --brand-dim: rgba(34, 211, 165, 0.10);
+  --brand-border: rgba(34, 211, 165, 0.35);
+  --t-card: 0.35s;
+  --t-press: 0.1s;
+  --t-nav: 380ms;
+  --t-standard: 0.22s;
 }
 
 
@@ -133,7 +141,7 @@ h1, h2 {
    a repaint every animation frame. An ::after with opacity:0→1 is
    compositor-only: zero paint cost on hover. (Telegram Web principle #1) */
 .card-interactive {
-  transition: transform 0.22s var(--spring);
+  transition: transform var(--t-standard) var(--spring);
   -webkit-tap-highlight-color: transparent;
 }
 .card-interactive::after {
@@ -141,9 +149,9 @@ h1, h2 {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: 0 0 0 2px var(--card-glow, rgba(34, 211, 165, 0.4)), 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 2px var(--card-glow, rgba(var(--brand-rgb), 0.4)), 0 4px 20px rgba(0, 0, 0, 0.08);
   opacity: 0;
-  transition: opacity 0.22s ease;
+  transition: opacity var(--t-standard) ease;
   pointer-events: none;
   /* z-index: -1 places ::after below ALL card content in the stacking context.
      Firefox has a known quirk where pointer-events: none on a positioned
@@ -153,7 +161,7 @@ h1, h2 {
   z-index: -1;
 }
 .dark .card-interactive::after {
-  box-shadow: 0 0 0 2px var(--card-glow, rgba(34, 211, 165, 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 2px var(--card-glow, rgba(var(--brand-rgb), 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
 }
 .card-interactive:hover {
   transform: scale(1.02);
@@ -164,7 +172,7 @@ h1, h2 {
 /* #1 — Card press: compress on down, spring back on release */
 .card-interactive:active {
   transform: scale(0.97);
-  transition: transform 0.1s ease;
+  transition: transform var(--t-press) ease;
 }
 
 /* ── Card entrance animations ─────────────────────────────── */
@@ -218,7 +226,7 @@ h1, h2 {
 }
 .card-before-reveal * { opacity: 0 !important; }
 .card-entrance {
-  animation: cardEntrance 0.35s var(--spring) both;
+  animation: cardEntrance var(--t-card) var(--spring) both;
   animation-delay: var(--card-delay, 0s);
 }
 .card-entrance * { opacity: 1 !important; }
@@ -240,8 +248,18 @@ h1, h2 {
 .chips-row {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 .chips-row::-webkit-scrollbar { display: none; }
+
+[vaul-drawer] {
+  will-change: transform;
+  -webkit-overflow-scrolling: touch;
+}
+[vaul-drawer-overlay] {
+  will-change: opacity;
+}
 
 /* ── #3 — Tab pill buttons with spring press ──────────────── */
 .tab-pill {
@@ -260,8 +278,8 @@ h1, h2 {
   transform: scale(0.91);
 }
 .tab-pill.active {
-  background: rgba(34, 211, 165, 0.1);
-  border-color: rgba(34, 211, 165, 0.35);
+  background: rgba(var(--brand-rgb), 0.1);
+  border-color: rgba(var(--brand-rgb), 0.35);
   color: #16a37e;
 }
 .dark .tab-pill {
@@ -269,9 +287,9 @@ h1, h2 {
   color: rgba(255, 255, 255, 0.4);
 }
 .dark .tab-pill.active {
-  background: rgba(34, 211, 165, 0.1);
-  border-color: rgba(34, 211, 165, 0.3);
-  color: #22d3a5;
+  background: rgba(var(--brand-rgb), 0.1);
+  border-color: rgba(var(--brand-rgb), 0.3);
+  color: var(--brand);
 }
 
 /* ── #3 — Sort pill buttons with spring press ─────────────── */
@@ -454,4 +472,24 @@ h1, h2 {
   transition-duration: 0.001ms !important;
   transition-delay: 0ms !important;
   scroll-behavior: auto !important;
+}
+.no-animations {
+  --t-card: 0.001ms !important;
+  --t-press: 0.001ms !important;
+  --t-nav: 0.001ms !important;
+  --t-standard: 0.001ms !important;
+}
+
+.animation-reduced body {
+  animation: none;
+}
+.animation-reduced {
+  --t-card: 0.15s;
+  --t-press: 0.05s;
+  --t-nav: 150ms;
+  --t-standard: 0.1s;
+}
+.animation-reduced .card-entrance,
+.animation-reduced .card-entrance-filter {
+  --card-delay: 0s !important;
 }

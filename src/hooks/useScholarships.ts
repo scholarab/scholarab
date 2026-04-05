@@ -110,7 +110,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     hasFiltered.current = true;
     setPage(newPage);
     updateURL(sortBy, selectedRegion, newPage);
-    window.scrollTo(0, 0);
+    requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' })));
   }, [sortBy, selectedRegion]);
 
   // statusCache depends on today's date — must stay runtime

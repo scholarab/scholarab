@@ -101,7 +101,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     hasFiltered.current = true;
     setPage(newPage);
     updateURL(sortBy, selectedCategory, newPage);
-    window.scrollTo(0, 0);
+    requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' })));
   }, [sortBy, selectedCategory]);
 
   const STATUS_ORDER: Record<ProgramStatus, number> = { active: 0, tba: 1, closed: 2 };

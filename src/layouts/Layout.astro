@@ -89,8 +89,18 @@ const {
     <script>
       // ── Slow connection animation kill ─────────────────────
       const conn = (navigator as any).connection;
-      if (conn?.effectiveType === '2g' || conn?.effectiveType === 'slow-2g') {
+      const effectiveType = conn?.effectiveType;
+      const hardwareConcurrency = navigator.hardwareConcurrency ?? 4;
+      const deviceMemory = (navigator as any).deviceMemory ?? 4;
+
+      if (effectiveType === '2g' || effectiveType === 'slow-2g') {
         document.body.classList.add('no-animations');
+      } else if (
+        effectiveType === '3g' ||
+        hardwareConcurrency <= 2 ||
+        deviceMemory <= 1
+      ) {
+        document.body.classList.add('animation-reduced');
       }
 
       // ── Prefetch on hover / touchstart ─────────────────────

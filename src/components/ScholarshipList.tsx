@@ -3,6 +3,7 @@ import { Drawer } from 'vaul';
 import { useScholarships, PAGE_SIZE } from '../hooks/useScholarships.ts';
 import ScholarshipCard from './ScholarshipCard.tsx';
 import Pagination from './Pagination.tsx';
+import AnimatedNumber from './AnimatedNumber.tsx';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 
 interface ScholarshipListProps {
@@ -65,12 +66,7 @@ export default function ScholarshipList({ initialScholarships }: ScholarshipList
       {/* ── MOBILE: Filter button row ── */}
       <div className="md:hidden mb-5 flex items-center justify-between gap-3">
         <p className="text-sm text-gray-400 dark:text-white/25 flex-shrink-0">
-          <span
-            key={filtered.length}
-            style={{ display: 'inline-block', animation: 'countPop 0.3s cubic-bezier(0.34,1.56,0.64,1) both' }}
-          >
-            {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
-          </span>
+          <AnimatedNumber value={filtered.length} suffix={` scholarship${filtered.length !== 1 ? 's' : ''}`} />
         </p>
         <button
           onClick={() => setSheetOpen(true)}
@@ -114,12 +110,7 @@ export default function ScholarshipList({ initialScholarships }: ScholarshipList
       {/* ── DESKTOP: Count + sort row ── */}
       <div className="hidden md:flex mb-5 items-center justify-between gap-4">
         <p className="text-sm text-gray-400 dark:text-white/25 flex-shrink-0">
-          <span
-            key={filtered.length}
-            style={{ display: 'inline-block', animation: 'countPop 0.3s cubic-bezier(0.34,1.56,0.64,1) both' }}
-          >
-            {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
-          </span>
+          <AnimatedNumber value={filtered.length} suffix={` scholarship${filtered.length !== 1 ? 's' : ''}`} />
         </p>
         <div className="flex items-center gap-1.5">
           {SORT_OPTIONS.map(({ value, label }) => (
