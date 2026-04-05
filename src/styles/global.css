@@ -230,6 +230,7 @@ h1, h2 {
   animation: bookmarkPop 0.45s var(--spring) both;
 }
 
+
 /* ── Region chip scroll row ───────────────────────────────── */
 .chips-row {
   -ms-overflow-style: none;
