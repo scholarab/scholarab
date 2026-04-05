@@ -57,30 +57,20 @@ const {
     <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin />
-    <script is:inline>
-      (function () {
-        try {
-          var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          document.documentElement.classList.toggle('dark', t === 'dark');
-        } catch (e) {
-          document.documentElement.classList.add('dark');
-        }
-      })();
-    </script>
     <ClientRouter />
     <slot name="head" />
   </head>
-  <body class="bg-[#f5f5fa] dark:bg-[#0a0a0f] text-gray-900 dark:text-white min-h-screen min-h-[100svh] flex flex-col overflow-x-clip md:overscroll-none">
+  <body class="bg-[#0a0a0f] text-white min-h-screen min-h-[100svh] flex flex-col overflow-x-clip md:overscroll-none">
 
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#22d3a5;color:#0a0a0f;">Skip to content</a>
     <Nav currentPath={currentPath} />
     <div id="main-content" class={`${containerClass} mx-auto w-full flex-1 px-4 pb-24 md:pb-8 md:px-8`}>
       <slot />
     </div>
-    <footer class="hidden md:block border-t border-black/5 dark:border-white/[0.06] mt-8 relative" style="z-index:1;">
-      <div class="max-w-6xl mx-auto px-4 pt-6 pb-24 md:py-6 md:px-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm text-black/30 dark:text-white/25 text-center sm:text-left">
-        <span>© 2026 ScholarAB &nbsp;·&nbsp; Created by a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="hover:text-black/60 dark:hover:text-white/50 transition-colors">Medicine Hat High School</a> student. &nbsp;·&nbsp; <a href="/privacy" class="hover:text-black/60 dark:hover:text-white/50 transition-colors">Privacy</a></span>
-        <a href="mailto:contact.scholarab@gmail.com" class="hover:text-black/60 dark:hover:text-white/50 transition-colors">{missingText}</a>
+    <footer class="hidden md:block border-t border-white/[0.06] mt-8 relative" style="z-index:1;">
+      <div class="max-w-6xl mx-auto px-4 pt-6 pb-24 md:py-6 md:px-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm text-white/25 text-center sm:text-left">
+        <span>© 2026 ScholarAB &nbsp;·&nbsp; Created by a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="hover:text-white/50 transition-colors">Medicine Hat High School</a> student.</span>
+        <a href="mailto:contact.scholarab@gmail.com" class="hover:text-white/50 transition-colors">{missingText}</a>
       </div>
     </footer>
     <BottomNav />

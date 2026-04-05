@@ -1,7 +1,7 @@
 ---
 const { currentPath } = Astro.props;
-const navCls = (p) => `hidden md:block transition-colors ${currentPath === p ? 'text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:text-white/50 dark:hover:text-white/90'}`;
-const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.startsWith(p) ? 'text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:text-white/50 dark:hover:text-white/90'}`;
+const navCls = (p) => `hidden md:block transition-colors ${currentPath === p ? 'text-white' : 'text-white/50 hover:text-white/90'}`;
+const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.startsWith(p) ? 'text-white' : 'text-white/50 hover:text-white/90'}`;
 ---
 
 <div id="top-nav-wrapper" class="sticky top-2 z-[500] mb-10" style="padding: 0 16px;">
@@ -24,40 +24,15 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
         <a href="/programs" aria-current={currentPath.startsWith('/programs') ? 'page' : undefined} class={navClsStart('/programs')}>Programs</a>
         <a href="/saved" aria-current={currentPath === '/saved' ? 'page' : undefined} class={navCls('/saved')}>Saved</a>
         <a href="/about" aria-current={currentPath === '/about' ? 'page' : undefined} class={navCls('/about')}>About</a>
-        <button id="theme-toggle" aria-label="Toggle color theme" class="w-8 h-8 flex items-center justify-center rounded-lg text-lg leading-none text-gray-500 hover:text-gray-800 hover:bg-black/5 dark:text-white/40 dark:hover:text-white/80 dark:hover:bg-white/5 transition-colors">🌙</button>
       </div>
     </nav>
   </div>
 </div>
 
 <script>
-  function applyTheme() {
-    const theme = localStorage.getItem('theme') ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.textContent = theme === 'dark' ? '🌙' : '☀️ ';
-  }
-
-  function handleToggle() {
-    const isDark = document.documentElement.classList.contains('dark');
-    const next = isDark ? 'light' : 'dark';
-    localStorage.setItem('theme', next);
-    document.documentElement.classList.toggle('dark', !isDark);
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.textContent = next === 'dark' ? '🌙' : '☀️ ';
-  }
-
   let scrollAbort: AbortController | null = null;
 
   function initNav() {
-    applyTheme();
-    const btn = document.getElementById('theme-toggle');
-    if (btn) {
-      // Clone to remove any previous listener before re-attaching
-      const fresh = btn.cloneNode(true);
-      btn.replaceWith(fresh);
-      (fresh as HTMLElement).addEventListener('click', handleToggle);
-    }
     const nav = document.querySelector('.glass-nav');
     if (nav) {
       if (scrollAbort) scrollAbort.abort();
@@ -71,13 +46,11 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
     }
   }
 
-  // Fires on first load AND every ClientRouter navigation
   document.addEventListener('astro:page-load', initNav);
 </script>
 
 <style is:global>
-  .logo-scholar { fill: #0a0a0f; }
-  .dark .logo-scholar { fill: #ffffff; }
+  .logo-scholar { fill: #ffffff; }
   .beta-badge {
     font-size: 9px;
     font-weight: 700;
@@ -95,10 +68,10 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
     -webkit-tap-highlight-color: transparent;
   }
   .glass-nav {
-    background: rgba(245, 245, 250, 0.8);
+    background: rgba(10, 10, 15, 0.8);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(0,0,0,0.08);
+    border: 0.5px solid rgba(255,255,255,0.1);
     position: relative;
     transition: padding 0.3s ease;
   }
@@ -107,7 +80,7 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    box-shadow: 0 8px 16px -4px rgba(0,0,0,0.35);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -115,20 +88,8 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
   .glass-nav.scrolled::after {
     opacity: 1;
   }
-  .dark .glass-nav {
-    background: rgba(10, 10, 15, 0.8);
-    border: 0.5px solid rgba(255,255,255,0.1);
-  }
-  .dark .glass-nav::after {
-    box-shadow: 0 8px 16px -4px rgba(0,0,0,0.35);
-  }
   @media (min-width: 769px) {
     .glass-nav {
-      background: rgba(255,255,255,0.8);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      backdrop-filter: blur(20px) saturate(180%);
-    }
-    .dark .glass-nav {
       background: rgba(255,255,255,0.05);
     }
   }
@@ -140,27 +101,15 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
     .glass-nav { padding-top: 4px !important; padding-bottom: 4px !important; }
     .glass-nav img { height: 24px !important; }
   }
-  /* ── Mobile nav overrides ─────────────────────────────────────────────
-     1. No backdrop-filter: eliminates iOS Safari bug where child elements
-        become invisible inside sticky+backdrop-filter during scroll.
-     2. Solid background: removes body-orb bleed-through entirely
-        (backdrop-filter's saturate amplifies the teal orb).
-     3. No scrolled shadow/::after: looks wrong on mobile.             ── */
   @media (max-width: 768px) {
     .glass-nav {
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.07);
-      box-shadow: none;
-    }
-    .dark .glass-nav {
       background: #1c1c28;
       border: 0.5px solid rgba(255, 255, 255, 0.07);
       box-shadow: none;
     }
-    .glass-nav.scrolled,
-    .dark .glass-nav.scrolled {
+    .glass-nav.scrolled {
       -webkit-backdrop-filter: none !important;
       backdrop-filter: none !important;
       box-shadow: none !important;

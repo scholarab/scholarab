@@ -37,34 +37,22 @@
 }
 
 /* ── Background orbs ───────────────────────────────────────── */
-/* background-image layers are always behind element content — no z-index needed */
 body {
   background-image:
-    radial-gradient(ellipse at center, rgba(var(--brand-rgb),0.22) 0%, transparent 70%),
-    radial-gradient(ellipse at center, rgba(59,130,246,0.16) 0%, transparent 70%),
-    radial-gradient(ellipse at center, rgba(167,139,250,0.14) 0%, transparent 70%);
+    radial-gradient(ellipse at center, rgba(var(--brand-rgb),0.14) 0%, transparent 70%),
+    radial-gradient(ellipse at center, rgba(59,130,246,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse at center, rgba(167,139,250,0.09) 0%, transparent 70%);
   background-size: 65% 55%, 58% 48%, 62% 52%;
   background-position: 4% -2%, 96% -2%, 50% 102%;
   background-repeat: no-repeat;
   animation: orbs-drift 22s ease-in-out infinite alternate;
 }
-.dark body {
-  background-image:
-    radial-gradient(ellipse at center, rgba(var(--brand-rgb),0.14) 0%, transparent 70%),
-    radial-gradient(ellipse at center, rgba(59,130,246,0.10) 0%, transparent 70%),
-    radial-gradient(ellipse at center, rgba(167,139,250,0.09) 0%, transparent 70%);
-}
 
-/* Disable iOS Safari rubber-band bounce at scroll boundaries (desktop only) */
-/* Background on html (not just body) prevents dark flash during view transitions */
 html {
-  background-color: #f5f5fa;
+  background-color: #0a0a0f;
 }
 @media (min-width: 769px) {
   html { overscroll-behavior: none; }
-}
-html.dark {
-  background-color: #0a0a0f;
 }
 
 @keyframes orbs-drift {
@@ -97,13 +85,10 @@ html.dark {
   --t-standard: 0.22s;
 }
 
-
-/* Heading letter-spacing */
 h1, h2 {
   letter-spacing: -0.02em;
 }
 
-/* Stretched card link — ::after is for cursor affordance only, not pointer events */
 .card-nav-link {
   color: inherit;
   text-decoration: none;
@@ -117,19 +102,14 @@ h1, h2 {
   pointer-events: none;
 }
 
-/* ── Dark-theme card ──────────────────────────────────────── */
+/* ── Card ─────────────────────────────────────────────────── */
 .card {
   position: relative;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   contain: layout style;
 }
-.dark .card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 0.5px solid rgba(255, 255, 255, 0.08);
-}
-/* Hover glow via ::after opacity — compositor-only, zero repaint cost */
 .card-interactive {
   transition: transform var(--t-standard) var(--spring);
   -webkit-tap-highlight-color: transparent;
@@ -139,14 +119,11 @@ h1, h2 {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: 0 0 0 2px var(--card-glow, rgba(var(--brand-rgb), 0.4)), 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 2px var(--card-glow, rgba(var(--brand-rgb), 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity var(--t-standard) ease;
   pointer-events: none;
-  z-index: -1; /* below card content so pointer events pass through */
-}
-.dark .card-interactive::after {
-  box-shadow: 0 0 0 2px var(--card-glow, rgba(var(--brand-rgb), 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 .card-interactive:hover {
   transform: scale(1.02);
@@ -154,13 +131,10 @@ h1, h2 {
 .card-interactive:hover::after {
   opacity: 1;
 }
-/* #1 — Card press: compress on down, spring back on release */
 .card-interactive:active {
   transform: scale(0.97);
   transition: transform var(--t-press) ease;
 }
-
-
 
 /* ── Region chip scroll row ───────────────────────────────── */
 .chips-row {
@@ -179,16 +153,16 @@ h1, h2 {
   will-change: opacity;
 }
 
-/* ── #3 — Tab pill buttons with spring press ──────────────── */
+/* ── Tab pill buttons ─────────────────────────────────────── */
 .tab-pill {
   border-radius: 50px;
   padding: 7px 20px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   background: transparent;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
   transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.25s var(--spring);
   -webkit-tap-highlight-color: transparent;
 }
@@ -197,28 +171,19 @@ h1, h2 {
 }
 .tab-pill.active {
   background: rgba(var(--brand-rgb), 0.1);
-  border-color: rgba(var(--brand-rgb), 0.35);
-  color: #16a37e;
-}
-.dark .tab-pill {
-  border-color: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.4);
-}
-.dark .tab-pill.active {
-  background: rgba(var(--brand-rgb), 0.1);
   border-color: rgba(var(--brand-rgb), 0.3);
   color: var(--brand);
 }
 
-/* ── #3 — Sort pill buttons with spring press ─────────────── */
+/* ── Sort pill buttons ────────────────────────────────────── */
 .sort-pill {
   border-radius: 50px;
   padding: 5px 14px;
   font-size: 11px;
   cursor: pointer;
-  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
   background: transparent;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
   transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.25s var(--spring);
   -webkit-tap-highlight-color: transparent;
 }
@@ -226,21 +191,12 @@ h1, h2 {
   transform: scale(0.89);
 }
 .sort-pill.active {
-  border-color: rgba(0, 0, 0, 0.25);
-  background: rgba(0, 0, 0, 0.06);
-  color: rgba(0, 0, 0, 0.7);
-}
-.dark .sort-pill {
-  border-color: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.4);
-}
-.dark .sort-pill.active {
   border-color: rgba(255, 255, 255, 0.35);
   background: rgba(255, 255, 255, 0.06);
   color: #fff;
 }
 
-/* ── #1 — Teal CTA button spring press ───────────────────── */
+/* ── Teal CTA button ──────────────────────────────────────── */
 .btn-teal {
   position: relative;
   overflow: hidden;
@@ -255,9 +211,6 @@ h1, h2 {
 .glass-nav.scrolled {
   backdrop-filter: blur(32px) saturate(200%);
   -webkit-backdrop-filter: blur(32px) saturate(200%);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-}
-.dark .glass-nav.scrolled {
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
 }
 
@@ -273,14 +226,12 @@ h1, h2 {
   display: inline-block;
 }
 
-/* ── Saved page card hover — subtler scale ────────────────── */
-.saved-list .card-interactive:hover,
-.dark .saved-list .card-interactive:hover {
+/* ── Saved page card hover ────────────────────────────────── */
+.saved-list .card-interactive:hover {
   transform: scale(1.015);
 }
 
-
-/* ── #5 — Page view transitions ───────────────────────────── */
+/* ── Page view transitions ────────────────────────────────── */
 @keyframes page-in {
   from { opacity: 0; transform: translate3d(20px, 0, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
@@ -299,10 +250,7 @@ h1, h2 {
   .glass-nav { transition: none !important; }
 }
 
-/* Phase 1 — Filter count number morph */
 @keyframes countPop {
   from { opacity: 0; transform: translateY(-8px) scale(0.85); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
-
-
