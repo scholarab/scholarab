@@ -2,6 +2,13 @@
 export const prerender = false
 import LoginForm from '../../components/admin/LoginForm'
 import '../../styles/global.css'
+
+// Block mobile access — redirect to home
+const ua = Astro.request.headers.get('user-agent') ?? '';
+const isMobile = /android|iphone|ipad|ipod|mobile/i.test(ua);
+if (isMobile) {
+  return Astro.redirect('/');
+}
 ---
 <!DOCTYPE html>
 <html lang="en" class="dark">
