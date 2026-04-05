@@ -135,7 +135,6 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
   // Step 4
   const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(null)
-  const [identifiesAsLGBTQ, setIdentifiesAsLGBTQ] = useState<boolean | null>(null)
   const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(null)
   const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(null)
   const [inFosterCare, setInFosterCare] = useState<boolean | null>(null)
@@ -153,7 +152,6 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       fields,
       averagePercent: averageBracket,
       identifiesAsFemale,
-      identifiesAsLGBTQ,
       identifiesAsIndigenous,
       identifiesAsBIPOC,
       hasFinancialNeed: null,
@@ -164,7 +162,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       citizenship,
     }
   }, [grade, city, schoolBoard, targetInstitution, fields, averageBracket,
-      identifiesAsFemale, identifiesAsLGBTQ, identifiesAsIndigenous, identifiesAsBIPOC,
+      identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
       inFosterCare, inApprenticeship, citizenship])
 
   const results = useMemo(() => {
@@ -343,8 +341,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         <div className="mb-5">
           <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">I identify as <span className="text-gray-400 dark:text-white/25 font-normal">(select all that apply)</span></p>
           <div className="flex flex-wrap gap-2">
-            {identityChip('Female / woman / non-binary', identifiesAsFemale, setIdentifiesAsFemale)}
-            {identityChip('2SLGBTQ+', identifiesAsLGBTQ, setIdentifiesAsLGBTQ)}
+            {identityChip('Female / woman', identifiesAsFemale, setIdentifiesAsFemale)}
             {identityChip('Indigenous (First Nations, Métis, Inuit)', identifiesAsIndigenous, setIdentifiesAsIndigenous)}
             {identityChip('BIPOC', identifiesAsBIPOC, setIdentifiesAsBIPOC)}
           </div>
@@ -511,7 +508,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
             Try leaving some optional fields blank — identity, GPA, and school answers narrow results significantly.
           </p>
           <button
-            onClick={() => { setStep(1); setGrade(''); setCity(''); setSchoolBoard(''); setTargetInstitution(''); setFields([]); setAverageBracket(null); setIdentifiesAsFemale(null); setIdentifiesAsLGBTQ(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null); setInFosterCare(null); setInApprenticeship(null); setCitizenship(null) }}
+            onClick={() => { setStep(1); setGrade(''); setCity(''); setSchoolBoard(''); setTargetInstitution(''); setFields([]); setAverageBracket(null); setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null); setInFosterCare(null); setInApprenticeship(null); setCitizenship(null) }}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition"
             style={{ background: '#22d3a5', color: '#0a0a0f' }}
           >
@@ -522,7 +519,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
       <div className="mt-8 pt-6 border-t border-gray-100 dark:border-white/[0.06] flex flex-col sm:flex-row gap-3">
         <button
-          onClick={() => { setStep(1); setGrade(''); setCity(''); setSchoolBoard(''); setTargetInstitution(''); setFields([]); setAverageBracket(null); setIdentifiesAsFemale(null); setIdentifiesAsLGBTQ(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null); setInFosterCare(null); setInApprenticeship(null); setCitizenship(null) }}
+          onClick={() => { setStep(1); setGrade(''); setCity(''); setSchoolBoard(''); setTargetInstitution(''); setFields([]); setAverageBracket(null); setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null); setInFosterCare(null); setInApprenticeship(null); setCitizenship(null) }}
           className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-gray-200 dark:border-white/10 text-gray-500 dark:text-white/50 transition"
         >
           Start over

@@ -14,7 +14,6 @@ const baseProfile: StudentProfile = {
   fields: [],
   averagePercent: null,
   identifiesAsFemale: null,
-  identifiesAsLGBTQ: null,
   identifiesAsIndigenous: null,
   identifiesAsBIPOC: null,
   hasFinancialNeed: null,

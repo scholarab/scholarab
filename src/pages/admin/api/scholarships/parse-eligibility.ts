@@ -20,7 +20,6 @@ const SCHEMA_DESC = `{
   maxAge: number | null,
   genderRequired: "female" | null,  // "female" only if explicitly restricted to girls/women/female-identifying. null otherwise.
   indigenousRequired: boolean,      // true only if First Nations/Métis/Inuit identity is explicitly required
-  lgbtqRequired: boolean,
   bipocRequired: boolean,
   financialNeed: boolean,
   maxFamilyIncome: number | null,   // Dollar amount cap if stated (e.g. 65000 for "$65,000"). null otherwise.

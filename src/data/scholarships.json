@@ -429,30 +429,6 @@
     "active": true
   },
   {
-    "id": 44,
-    "title": "Skipping Stone Foundation Trans Community Award",
-    "amount": "$2,500",
-    "deadline": "2026-05-30",
-    "audience": "Graduating Calgary CBE/CCSD trans and gender-diverse students",
-    "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
-    "category": "Community",
-    "lastVerified": "2026-03",
-    "region": "Calgary",
-    "active": true
-  },
-  {
-    "id": 45,
-    "title": "CPA Alberta 2SLGBTQIA+ Success Award",
-    "amount": "$2,000",
-    "deadline": "2026-05-01",
-    "audience": "Grade 12 Alberta students who identify as 2SLGBTQIA+",
-    "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
-    "category": "Academic",
-    "lastVerified": "2026-03",
-    "region": "Alberta",
-    "active": true
-  },
-  {
     "id": 46,
     "title": "Alex Tutschek FCPA Award for Indigenous Student Achievement",
     "amount": "$1,500",
@@ -493,7 +469,7 @@
     "title": "CPA Alberta Empowered Young Woman Award",
     "amount": "$2,000",
     "deadline": "2026-05-01",
-    "audience": "Grade 12 Alberta students who identify as a girl/woman (including non-binary, trans, two-spirited)",
+    "audience": "Grade 12 Alberta students who identify as a girl/woman",
     "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
     "category": "Academic",
     "lastVerified": "2026-03",

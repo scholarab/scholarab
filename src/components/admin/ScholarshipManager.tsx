@@ -24,7 +24,7 @@ type Scholarship = {
   updatedAt: string
 }
 
-const CATEGORIES = ['Arts', 'Business', 'Community', 'Engineering', 'General', 'Health', 'Indigenous', 'LGBTQ+', 'Science', 'Sports', 'Trades', 'Other']
+const CATEGORIES = ['Arts', 'Business', 'Community', 'Engineering', 'General', 'Health', 'Indigenous', 'Science', 'Sports', 'Trades', 'Other']
 const REGIONS = ['National', 'Alberta', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']
 
 interface Props {
@@ -650,10 +650,6 @@ function EligibilityEditor({ value, onChange }: { value: EligibilityCriteria; on
           <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
             <input type="checkbox" checked={value.indigenousRequired} onChange={e => set({ indigenousRequired: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
             Indigenous required
-          </label>
-          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
-            <input type="checkbox" checked={value.lgbtqRequired} onChange={e => set({ lgbtqRequired: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
-            2SLGBTQ+ required
           </label>
           <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
             <input type="checkbox" checked={value.bipocRequired} onChange={e => set({ bipocRequired: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />

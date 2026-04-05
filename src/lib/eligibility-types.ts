@@ -10,7 +10,6 @@ export type EligibilityCriteria = {
   maxAge: number | null
   genderRequired: 'female' | null  // null = open to all genders
   indigenousRequired: boolean
-  lgbtqRequired: boolean
   bipocRequired: boolean
   financialNeed: boolean
   maxFamilyIncome: number | null   // dollar amount cap (e.g. 65000)
@@ -31,7 +30,6 @@ export const EMPTY_ELIGIBILITY: EligibilityCriteria = {
   maxAge: null,
   genderRequired: null,
   indigenousRequired: false,
-  lgbtqRequired: false,
   bipocRequired: false,
   financialNeed: false,
   maxFamilyIncome: null,
@@ -54,7 +52,6 @@ export type StudentProfile = {
   // All identity fields are nullable — null means "student did not answer"
   // Only hard-filters when the student explicitly answered
   identifiesAsFemale: boolean | null
-  identifiesAsLGBTQ: boolean | null
   identifiesAsIndigenous: boolean | null
   identifiesAsBIPOC: boolean | null
 

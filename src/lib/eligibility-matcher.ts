@@ -22,7 +22,7 @@ function regionMatches(city: string, scholarshipRegion: string | null): boolean 
  * Hard filters: any single failure immediately returns match: false.
  * Soft signals: adjust confidence score (0–1) without disqualifying.
  *
- * Identity fields (gender, Indigenous, LGBTQ+, BIPOC) are only used as hard
+ * Identity fields (gender, Indigenous, BIPOC) are only used as hard
  * filters when the student explicitly answered. null means "not answered" and
  * the filter is skipped — showing the scholarship as a possible match.
  */
@@ -88,12 +88,6 @@ export function matchScholarship(
   // ── Indigenous (hard filter only if student answered) ─────────────────────
   if (eligibility.indigenousRequired && profile.identifiesAsIndigenous === false) {
     reasons.push('Requires Indigenous identity (First Nations, Métis, or Inuit)')
-    return { match: false, confidence: 0, reasons }
-  }
-
-  // ── LGBTQ+ (hard filter only if student answered) ─────────────────────────
-  if (eligibility.lgbtqRequired && profile.identifiesAsLGBTQ === false) {
-    reasons.push('Requires 2SLGBTQ+ identity')
     return { match: false, confidence: 0, reasons }
   }
 
