@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import type { Scholarship } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll } from '../lib/eligibility-matcher'
@@ -104,25 +104,39 @@ function parseAmount(amount: string): number {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
+const STORAGE_KEY = 'scholarab-quiz'
+
+function loadSaved() {
+  try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || 'null') } catch { return null }
+}
+
 export default function EligibilityQuiz({ scholarships }: Props) {
-  const [step, setStep] = useState<Step>(1)
+  const s = loadSaved()
 
-  // Step 1
-  const [grade, setGrade] = useState<StudentProfile['grade'] | ''>('')
-  const [city, setCity] = useState('')
-  const [targetInstitution, setTargetInstitution] = useState('')
+  const [step, setStep] = useState<Step>(s?.step ?? 1)
+  const [grade, setGrade] = useState<StudentProfile['grade'] | ''>(s?.grade ?? '')
+  const [city, setCity] = useState<string>(s?.city ?? '')
+  const [targetInstitution, setTargetInstitution] = useState<string>(s?.targetInstitution ?? '')
+  const [fields, setFields] = useState<string[]>(s?.fields ?? [])
+  const [averageBracket, setAverageBracket] = useState<number | null>(s?.averageBracket ?? null)
+  const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(s?.identifiesAsFemale ?? null)
+  const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(s?.identifiesAsIndigenous ?? null)
+  const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(s?.identifiesAsBIPOC ?? null)
+  const [inFosterCare, setInFosterCare] = useState<boolean | null>(s?.inFosterCare ?? null)
+  const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(s?.inApprenticeship ?? null)
+  const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(s?.citizenship ?? null)
 
-  // Step 2
-  const [fields, setFields] = useState<string[]>([])
-  const [averageBracket, setAverageBracket] = useState<number | null>(null)
-
-  // Step 3
-  const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(null)
-  const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(null)
-  const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(null)
-  const [inFosterCare, setInFosterCare] = useState<boolean | null>(null)
-  const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(null)
-  const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(null)
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+        step, grade, city, targetInstitution, fields, averageBracket,
+        identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
+        inFosterCare, inApprenticeship, citizenship,
+      }))
+    } catch {}
+  }, [step, grade, city, targetInstitution, fields, averageBracket,
+      identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
+      inFosterCare, inApprenticeship, citizenship])
 
   const profile = useMemo((): StudentProfile | null => {
     if (!grade || !city) return null
@@ -178,6 +192,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   }
 
   function reset() {
+    try { sessionStorage.removeItem(STORAGE_KEY) } catch {}
     setStep(1); setGrade(''); setCity(''); setTargetInstitution('');
     setFields([]); setAverageBracket(null);
     setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null);
