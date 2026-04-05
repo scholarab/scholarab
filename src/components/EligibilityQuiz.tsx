@@ -17,8 +17,8 @@ interface Props {
 const GRADE_OPTIONS = [
   { value: '10', label: 'Grade 10' },
   { value: '11', label: 'Grade 11' },
-  { value: '12', label: 'Grade 12' },
-  { value: 'post-secondary', label: 'Entering post-secondary' },
+  { value: '12', label: 'Grade 12 — in high school' },
+  { value: 'post-secondary', label: 'First year — university or college' },
 ]
 
 const CITY_OPTIONS = [
@@ -224,6 +224,13 @@ export default function EligibilityQuiz({ scholarships }: Props) {
               <Chip key={value} label={label} active={grade === value} onClick={() => setGrade(value as StudentProfile['grade'])} />
             ))}
           </div>
+          {(grade === '10' || grade === '11') && (
+            <div className="mt-3 p-3 rounded-lg border border-amber-400/30 bg-amber-400/8 text-xs text-amber-600 dark:text-amber-400/80">
+              Most scholarships are for Grade 12 students — results here will be limited.{' '}
+              <a href="/programs" className="underline font-medium">Browse research & mentorship programs</a>{' '}
+              instead — many are open to Grade 10 and 11.
+            </div>
+          )}
         </div>
 
         <div className="mb-8">
@@ -329,8 +336,8 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     return (
       <div>
         <ProgressBar step={4} />
-        <h2 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">A few more things</h2>
-        <p className="text-sm text-gray-500 dark:text-white/40 mb-1">All optional. Some scholarships target specific groups — these help us find them.</p>
+        <h2 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">About you</h2>
+        <p className="text-sm text-gray-500 dark:text-white/40 mb-1">All optional. Helps surface scholarships made for you specifically.</p>
         <p className="text-xs text-gray-400 dark:text-white/25 mb-6 flex items-center gap-1.5">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
@@ -339,19 +346,20 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </p>
 
         <div className="mb-5">
-          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">I identify as <span className="text-gray-400 dark:text-white/25 font-normal">(select all that apply)</span></p>
+          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">I identify as <span className="text-gray-400 dark:text-white/25 font-normal">(optional)</span></p>
           <div className="flex flex-wrap gap-2">
-            {identityChip('Female / woman', identifiesAsFemale, setIdentifiesAsFemale)}
+            <Chip label="Male" active={identifiesAsFemale === false} onClick={() => setIdentifiesAsFemale(prev => prev === false ? null : false)} />
+            <Chip label="Female" active={identifiesAsFemale === true} onClick={() => setIdentifiesAsFemale(prev => prev === true ? null : true)} />
             {identityChip('Indigenous (First Nations, Métis, Inuit)', identifiesAsIndigenous, setIdentifiesAsIndigenous)}
-            {identityChip('BIPOC', identifiesAsBIPOC, setIdentifiesAsBIPOC)}
+            {identityChip('Person of colour', identifiesAsBIPOC, setIdentifiesAsBIPOC)}
           </div>
         </div>
 
         <div className="mb-5">
-          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">My situation</p>
+          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">My situation <span className="text-gray-400 dark:text-white/25 font-normal">(optional)</span></p>
           <div className="flex flex-wrap gap-2">
-            <Chip label="In RAP / CTS apprenticeship" active={inApprenticeship === true} onClick={() => toggleIdentity(inApprenticeship, setInApprenticeship, true)} />
-            <Chip label="In government care / foster care" active={inFosterCare === true} onClick={() => toggleIdentity(inFosterCare, setInFosterCare, true)} />
+            <Chip label="In apprenticeship (RAP / CTS)" active={inApprenticeship === true} onClick={() => toggleIdentity(inApprenticeship, setInApprenticeship, true)} />
+            <Chip label="In foster / government care" active={inFosterCare === true} onClick={() => toggleIdentity(inFosterCare, setInFosterCare, true)} />
           </div>
         </div>
 
