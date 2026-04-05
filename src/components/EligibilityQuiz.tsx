@@ -3,6 +3,7 @@ import type { Scholarship } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved } from '../lib/tracker.ts'
+import { showConfetti } from '../lib/utils.ts'
 import { generateSlug } from '../lib/generateSlug.ts'
 import { useQuizState } from '../hooks/useQuizState.ts'
 
@@ -176,9 +177,11 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   }
 
   const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
-  const handleToggleSave = useCallback((id: number) => {
+  const handleToggleSave = useCallback((id: number, el?: Element | null) => {
     toggleSaved(id)
-    setSavedIds(new Set(getSaved()))
+    const next = new Set(getSaved())
+    if (next.has(id)) showConfetti(el)
+    setSavedIds(next)
   }, [])
 
   // ── Step 1 — Where are you at? ──────────────────────────────────────────────
@@ -422,7 +425,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                     Apply →
                   </a>
                   <button
-                    onClick={() => handleToggleSave(s.id)}
+                    onClick={(e) => handleToggleSave(s.id, e.currentTarget)}
                     aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
                     className={`flex items-center justify-center flex-shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${
                       savedIds.has(s.id)
