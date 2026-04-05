@@ -167,10 +167,14 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
     .glass-nav {
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
-      background: #f5f5fa;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      box-shadow: none;
     }
     .dark .glass-nav {
-      background: #0a0a0f;
+      background: #1c1c28;
+      border: 0.5px solid rgba(255, 255, 255, 0.07);
+      box-shadow: none;
     }
     .glass-nav.scrolled,
     .dark .glass-nav.scrolled {
