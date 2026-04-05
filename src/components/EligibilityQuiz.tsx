@@ -18,7 +18,7 @@ interface Props {
 const GRADE_OPTIONS = [
   { value: '10', label: 'Grade 10' },
   { value: '11', label: 'Grade 11' },
-  { value: '12', label: 'Grade 12 — in high school' },
+  { value: '12', label: 'Grade 12' },
 ]
 
 const CITY_OPTIONS = [
