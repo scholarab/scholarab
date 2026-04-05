@@ -2,13 +2,17 @@
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships } from '../lib/data-loader';
 import ScholarshipList from '../components/ScholarshipList.tsx';
+import { generateSlug } from '../lib/generateSlug';
+import { formatDeadline } from '../lib/utils';
 const raw = await loadScholarships();
 // Enrich at build time — avoids regex/Date parsing on every user's device
 const scholarships = raw.map(s => ({
   ...s,
   _amount_cents: parseInt(String(s.amount || '').replace(/[$,]/g, '')) || 0,
   _deadline_ms:  s.deadline  ? new Date(s.deadline  + 'T00:00:00').getTime() : 0,
-  _open_ms:      (s.openDate || s.open_date) ? new Date((s.openDate || s.open_date) + 'T00:00:00').getTime() : 0,
+  _open_ms:      s.openDate ? new Date(s.openDate + 'T00:00:00').getTime() : 0,
+  _slug:         generateSlug(s.title),
+  _deadline_formatted: s.deadline ? formatDeadline(s.deadline) : null,
 }));
 ---
 

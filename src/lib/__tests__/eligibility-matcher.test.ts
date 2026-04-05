@@ -423,3 +423,185 @@ describe('matchAll', () => {
     expect(results[0].tier).toBe('possible')
   })
 })
+
+// ── Comprehensive scenario tests ──────────────────────────────────────────────
+
+describe('comprehensive scenarios', () => {
+  it('student matching all criteria returns definite/high confidence', () => {
+    const profile: StudentProfile = {
+      ...baseProfile,
+      grade: '12',
+      city: 'Medicine Hat',
+      fields: ['STEM'],
+      averagePercent: 90,
+      identifiesAsFemale: false,
+      citizenship: 'canadian_citizen',
+    }
+    const scholarship = baseScholarship({
+      grades: ['12'],
+      fields: ['STEM'],
+      minAverage: 80,
+      citizenship: 'canadian',
+    })
+    const result = matchScholarship(profile, scholarship)
+    expect(result.match).toBe(true)
+    expect(result.confidence).toBeGreaterThanOrEqual(0.65)
+    const tier = getConfidenceTier(result.confidence)
+    expect(['strong', 'good']).toContain(tier)
+  })
+
+  it('student missing hard requirement (wrong region) is filtered out', () => {
+    const profile: StudentProfile = {
+      ...baseProfile,
+      city: 'Calgary',
+    }
+    const scholarship = { ...baseScholarship(), region: 'Medicine Hat' }
+    const result = matchScholarship(profile, scholarship)
+    expect(result.match).toBe(false)
+    expect(result.confidence).toBe(0)
+    expect(result.reasons.length).toBeGreaterThan(0)
+  })
+
+  it('student matching region but wrong grade is filtered out', () => {
+    const profile: StudentProfile = {
+      ...baseProfile,
+      grade: '10',
+      city: 'Medicine Hat',
+    }
+    const scholarship = baseScholarship({ grades: ['12'] })
+    const result = matchScholarship(profile, scholarship)
+    expect(result.match).toBe(false)
+    expect(result.reasons[0]).toContain('Grade')
+  })
+
+  it('Indigenous student gets extra matches on Indigenous-required scholarships', () => {
+    const indigenousProfile: StudentProfile = {
+      ...baseProfile,
+      identifiesAsIndigenous: true,
+    }
+    const nonIndigenousProfile: StudentProfile = {
+      ...baseProfile,
+      identifiesAsIndigenous: false,
+    }
+    const scholarship = baseScholarship({ indigenousRequired: true })
+
+    const matchesIndigenous = matchScholarship(indigenousProfile, scholarship)
+    const matchesNonIndigenous = matchScholarship(nonIndigenousProfile, scholarship)
+
+    expect(matchesIndigenous.match).toBe(true)
+    expect(matchesNonIndigenous.match).toBe(false)
+  })
+
+  it('female student gets female-only scholarships', () => {
+    const femaleProfile: StudentProfile = {
+      ...baseProfile,
+      identifiesAsFemale: true,
+    }
+    const maleProfile: StudentProfile = {
+      ...baseProfile,
+      identifiesAsFemale: false,
+    }
+    const scholarship = baseScholarship({ genderRequired: 'female' })
+
+    expect(matchScholarship(femaleProfile, scholarship).match).toBe(true)
+    expect(matchScholarship(maleProfile, scholarship).match).toBe(false)
+  })
+
+  it('student with high GPA (93%) gets academic scholarships with high confidence', () => {
+    const highGPAProfile: StudentProfile = {
+      ...baseProfile,
+      averagePercent: 93,
+    }
+    const scholarship = baseScholarship({ minAverage: 80 })
+    const result = matchScholarship(highGPAProfile, scholarship)
+    expect(result.match).toBe(true)
+    // Should pass easily with high GPA
+    expect(result.confidence).toBeGreaterThan(0.5)
+  })
+
+  it('scholarship with no eligibility set returns as possible', () => {
+    const result = matchScholarship(baseProfile, { region: null, eligibility: null })
+    expect(result.match).toBe(true)
+    expect(result.confidence).toBe(0.4)
+    expect(getConfidenceTier(result.confidence)).toBe('possible')
+  })
+
+  it('matchAll with full profile and list of scholarships returns sorted results', () => {
+    const profile: StudentProfile = {
+      grade: '12',
+      city: 'Medicine Hat',
+      schoolBoard: null,
+      specificSchool: null,
+      targetInstitution: 'Medicine Hat College',
+      fields: ['health'],
+      averagePercent: 85,
+      identifiesAsFemale: true,
+      identifiesAsIndigenous: false,
+      identifiesAsBIPOC: false,
+      hasFinancialNeed: null,
+      familyIncome: null,
+      inFosterCare: false,
+      inApprenticeship: false,
+      extracurriculars: [],
+      citizenship: 'canadian_citizen',
+    }
+
+    const scholarshipList = [
+      // Perfect match: grade 12, Medicine Hat, health, female
+      {
+        id: 1,
+        region: 'Medicine Hat' as string | null,
+        eligibility: {
+          ...EMPTY_ELIGIBILITY,
+          grades: ['12'],
+          fields: ['health'],
+          genderRequired: 'female' as const,
+          targetInstitutions: ['Medicine Hat College'],
+        },
+      },
+      // Partial match: national, no restrictions
+      {
+        id: 2,
+        region: 'National' as string | null,
+        eligibility: EMPTY_ELIGIBILITY,
+      },
+      // No match: wrong region
+      {
+        id: 3,
+        region: 'Calgary' as string | null,
+        eligibility: EMPTY_ELIGIBILITY,
+      },
+      // No match: Indigenous required, student said not Indigenous
+      {
+        id: 4,
+        region: null as string | null,
+        eligibility: { ...EMPTY_ELIGIBILITY, indigenousRequired: true },
+      },
+      // Possible: no eligibility data
+      {
+        id: 5,
+        region: null as string | null,
+        eligibility: null,
+      },
+    ]
+
+    const results = matchAll(profile, scholarshipList)
+
+    // Scholarships 3 and 4 should be excluded
+    const ids = results.map(r => r.id)
+    expect(ids).not.toContain(3)
+    expect(ids).not.toContain(4)
+    expect(ids).toContain(1)
+    expect(ids).toContain(2)
+    expect(ids).toContain(5)
+
+    // Results should be sorted by confidence descending
+    for (let i = 0; i < results.length - 1; i++) {
+      expect(results[i]!.confidence).toBeGreaterThanOrEqual(results[i + 1]!.confidence)
+    }
+
+    // Scholarship 1 (perfect match) should have the highest confidence
+    const topResult = results[0]
+    expect(topResult?.id).toBe(1)
+  })
+})

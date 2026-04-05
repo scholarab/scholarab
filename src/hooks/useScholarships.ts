@@ -9,7 +9,8 @@ export interface ScholarshipWithMeta extends Scholarship {
   _open_ms?: number;
   _deadline_ms?: number;
   _amount_cents?: number;
-  open_date?: string | null;
+  _slug?: string;
+  _deadline_formatted?: string | null;
 }
 
 export type ScholarshipStatus = 'active' | 'future' | 'closed';
@@ -17,7 +18,7 @@ export type ScholarshipStatus = 'active' | 'future' | 'closed';
 export function getStatus(s: ScholarshipWithMeta): ScholarshipStatus {
   const todayMs = getToday().getTime();
   // Use build-time precomputed ms values when available — avoids Date construction per call
-  const openMs  = s._open_ms     ?? new Date((s.openDate || s.open_date || '1970-01-01') + 'T00:00:00').getTime();
+  const openMs  = s._open_ms     ?? new Date((s.openDate || '1970-01-01') + 'T00:00:00').getTime();
   const deadMs  = s._deadline_ms ?? new Date((s.deadline ?? '') + 'T00:00:00').getTime();
   if (todayMs < openMs) return 'future';
   if (todayMs > deadMs) return 'closed';

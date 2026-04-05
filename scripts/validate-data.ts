@@ -3,7 +3,6 @@ import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { generateSlug } from '../src/lib/generateSlug.ts';
-import parseJson from 'secure-json-parse';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -13,7 +12,7 @@ interface Scholarship {
   amount?: string;
   url?: string;
   deadline?: string;
-  open_date?: string;
+  openDate?: string;
   [key: string]: unknown;
 }
 
@@ -25,10 +24,10 @@ interface Program {
   [key: string]: unknown;
 }
 
-const scholarships: Scholarship[] = parseJson(
+const scholarships: Scholarship[] = JSON.parse(
   readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8')
 );
-const programs: Program[] = parseJson(
+const programs: Program[] = JSON.parse(
   readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8')
 );
 
@@ -60,7 +59,7 @@ for (const s of scholarships) {
     continue;
   }
   if (!schIds.has(s.id)) schIds.set(s.id, []);
-  schIds.get(s.id)!.push(s.title ?? '');
+  (schIds.get(s.id) ?? []).push(s.title ?? '');
 }
 for (const [id, titles] of schIds) {
   if (titles.length > 1) {
@@ -78,7 +77,7 @@ for (const p of programs) {
     continue;
   }
   if (!progIds.has(p.id)) progIds.set(p.id, []);
-  progIds.get(p.id)!.push(p.name ?? '');
+  (progIds.get(p.id) ?? []).push(p.name ?? '');
 }
 for (const [id, names] of progIds) {
   if (names.length > 1) {
@@ -102,7 +101,7 @@ for (const s of scholarships) {
     continue;
   }
   if (!schSlugs.has(g)) schSlugs.set(g, []);
-  schSlugs.get(g)!.push(s.id!);
+  (schSlugs.get(g) ?? []).push(s.id!);
 }
 for (const [slug, ids] of schSlugs) {
   if (ids.length > 1) {
@@ -126,7 +125,7 @@ for (const p of programs) {
     continue;
   }
   if (!progSlugs.has(g)) progSlugs.set(g, []);
-  progSlugs.get(g)!.push(p.id!);
+  (progSlugs.get(g) ?? []).push(p.id!);
 }
 for (const [slug, ids] of progSlugs) {
   if (ids.length > 1) {
@@ -157,8 +156,8 @@ for (const s of scholarships) {
     failed = true;
   }
 
-  if (s.open_date && !isValidDate(s.open_date)) {
-    console.error(`${tag}: open_date must be YYYY-MM-DD, got: ${s.open_date}`);
+  if (s.openDate && !isValidDate(s.openDate)) {
+    console.error(`${tag}: openDate must be YYYY-MM-DD, got: ${s.openDate}`);
     failed = true;
   }
 }

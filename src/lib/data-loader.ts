@@ -1,3 +1,37 @@
+import { z } from 'zod'
+import type { EligibilityCriteria } from './eligibility-types'
+
+// ── Zod schema for EligibilityCriteria ───────────────────────────────────────
+const eligibilitySchema = z.object({
+  grades: z.array(z.string()).default([]),
+  schoolBoards: z.array(z.string()).default([]),
+  specificSchools: z.array(z.string()).default([]),
+  targetInstitutions: z.array(z.string()).default([]),
+  fields: z.array(z.string()).default([]),
+  minAverage: z.number().nullable().default(null),
+  minAge: z.number().nullable().default(null),
+  maxAge: z.number().nullable().default(null),
+  genderRequired: z.literal('female').nullable().default(null),
+  indigenousRequired: z.coerce.boolean().default(false),
+  bipocRequired: z.coerce.boolean().default(false),
+  financialNeed: z.coerce.boolean().default(false),
+  maxFamilyIncome: z.number().nullable().default(null),
+  fosterCare: z.coerce.boolean().default(false),
+  citizenship: z.enum(['canadian', 'permanent_resident', 'any']).default('any'),
+  apprenticeship: z.coerce.boolean().default(false),
+  extracurriculars: z.array(z.string()).default([]),
+})
+
+function parseEligibility(raw: unknown): EligibilityCriteria | null {
+  if (raw === null || raw === undefined) return null
+  const result = eligibilitySchema.safeParse(raw)
+  if (!result.success) {
+    console.warn('eligibility parse failed:', result.error.issues)
+    return null
+  }
+  return result.data as EligibilityCriteria
+}
+
 export type Scholarship = {
   id: number
   title: string
@@ -12,7 +46,7 @@ export type Scholarship = {
   notes: string | null
   applyViaGuidance: boolean
   active: boolean
-  eligibility: import('./eligibility-types').EligibilityCriteria | null
+  eligibility: EligibilityCriteria | null
 }
 
 export type Program = {
@@ -56,14 +90,14 @@ export async function loadScholarships(): Promise<Scholarship[]> {
           notes: r.notes ?? null,
           applyViaGuidance: r.applyViaGuidance ?? false,
           active: r.active ?? true,
-          eligibility: (r.eligibility as import('./eligibility-types').EligibilityCriteria | null) ?? null,
+          eligibility: parseEligibility(r.eligibility),
         }))
     } catch (e) {
       console.error('DB load failed, falling back to JSON:', e)
     }
   }
   const data = await import('../data/scholarships.json')
-  return (data.default as any[]).map(s => ({ ...s, openDate: s.openDate ?? s.open_date ?? null, eligibility: null }))
+  return (data.default as any[]).map(s => ({ ...s, openDate: s.openDate ?? null, eligibility: null }))
 }
 
 export async function loadPrograms(): Promise<Program[]> {
