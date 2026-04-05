@@ -101,8 +101,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
       {/* BOTTOM SECTION */}
       <div style={{ paddingTop: 16, display: 'flex', gap: 8 }}>
         <a href={`/scholarships/${slug}`}
-          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold"
-          style={{ background: 'rgba(255,255,255,0.07)', border: '0.5px solid rgba(255,255,255,0.18)', color: 'rgba(200,200,210,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:border-white/[0.18] dark:text-white/60 dark:hover:border-white/30 dark:hover:text-white/80 transition-colors">
           View Details
         </a>
         {status === 'active' && (
@@ -122,17 +121,8 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           ref={bmkRef}
           onClick={() => { if (!isSaved) showConfetti(bmkRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
-          style={{
-            width: 44,
-            flexShrink: 0,
-            borderRadius: 10,
-            background: isSaved ? 'rgba(34,211,165,0.12)' : 'rgba(255,255,255,0.07)',
-            border: `0.5px solid ${isSaved ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.18)'}`,
-            color: isSaved ? '#22d3a5' : 'rgba(200,200,210,0.7)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer',
-            transition: 'color 0.15s, background 0.15s, border-color 0.15s',
-          }}
+          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-[#22d3a5] border border-[#22d3a5]/40' : 'text-gray-400 border border-gray-200 dark:border-white/[0.18] dark:text-white/50'}`}
+          style={{ width: 44, background: isSaved ? 'rgba(34,211,165,0.12)' : undefined }}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
