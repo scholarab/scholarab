@@ -220,7 +220,7 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
 
 function SectionEmptyState({ href, label }) {
   return (
-    <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-dashed border-gray-200 dark:border-white/[0.08] text-sm text-gray-400 dark:text-white/30">
+    <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-dashed border-gray-300 dark:border-white/[0.08] text-sm text-gray-500 dark:text-white/30">
       <span>None saved yet.</span>
       <a
         href={href}
@@ -274,7 +274,7 @@ export default function SavedList({ initialScholarships, initialPrograms }) {
   return (
     <div className="saved-list space-y-10">
       <section>
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-4">Scholarships</h2>
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-white/30 mb-4">Scholarships</h2>
         {savedScholarships.length === 0 ? (
           <SectionEmptyState href="/scholarships" label="Find scholarships" />
         ) : (
@@ -294,7 +294,7 @@ export default function SavedList({ initialScholarships, initialPrograms }) {
       </section>
 
       <section>
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-4">Research Programs</h2>
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-white/30 mb-4">Research Programs</h2>
         {savedPrograms.length === 0 ? (
           <SectionEmptyState href="/programs" label="Find programs" />
         ) : (
