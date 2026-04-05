@@ -19,6 +19,7 @@ type Program = {
   url: string
   description: string | null
   lastVerified: string | null
+  active: boolean
 }
 
 const CATEGORIES = ['Biology', 'Chemistry', 'Computer Science', 'Engineering', 'Environmental', 'Math', 'Medicine', 'Physics', 'Social Science', 'Multidisciplinary', 'Other']
@@ -30,7 +31,7 @@ interface Props {
 const emptyForm = (): Partial<Program> => ({
   name: '', emoji: '', category: '', provider: '', grades: '', duration: '',
   paid: false, stipend: '', location: '', eligibility: '', deadline: '',
-  url: '', description: '', lastVerified: ''
+  url: '', description: '', lastVerified: '', active: true
 })
 
 export default function ProgramManager({ initialData }: Props) {
@@ -154,6 +155,7 @@ export default function ProgramManager({ initialData }: Props) {
               <th className="text-left px-4 py-3 font-medium">Grades</th>
               <th className="text-left px-4 py-3 font-medium">Location</th>
               <th className="text-left px-4 py-3 font-medium">Paid</th>
+              <th className="text-left px-4 py-3 font-medium">Status</th>
               <th className="px-4 py-3" />
             </tr>
           </thead>
@@ -173,6 +175,11 @@ export default function ProgramManager({ initialData }: Props) {
                   ) : (
                     <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/40">Unpaid</span>
                   )}
+                </td>
+                <td className="px-4 py-3">
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${p.active ? 'bg-[#22d3a5]/15 text-[#22d3a5]' : 'bg-white/10 text-white/40'}`}>
+                    {p.active ? 'Active' : 'Inactive'}
+                  </span>
                 </td>
                 <td className="px-4 py-3 text-right">
                   <button onClick={() => openEdit(p)} className="text-white/30 hover:text-white mr-3 transition">Edit</button>
@@ -269,6 +276,11 @@ export default function ProgramManager({ initialData }: Props) {
                   placeholder="Stipend amount (e.g. $5,000)"
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
               )}
+
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" checked={form.active ?? true} onChange={e => setForm(f => ({ ...f, active: e.target.checked }))} className="accent-[#22d3a5] w-4 h-4" />
+                <span className="text-sm text-white/70">Show on public site (active)</span>
+              </label>
             </div>
 
             {/* ── Advanced toggle ── */}

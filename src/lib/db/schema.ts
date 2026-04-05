@@ -82,6 +82,7 @@ export const researchPrograms = pgTable('research_programs', {
   url: text('url').notNull(),
   description: text('description'),
   lastVerified: text('last_verified'),
+  active: boolean('active').default(true),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 })

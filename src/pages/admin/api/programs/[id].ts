@@ -22,6 +22,7 @@ const UpdateSchema = z.object({
   url: z.string().url().optional(),
   description: z.string().optional().nullable(),
   lastVerified: z.string().optional().nullable(),
+  active: z.boolean().optional(),
 })
 
 export const PUT: APIRoute = async ({ request, params }) => {

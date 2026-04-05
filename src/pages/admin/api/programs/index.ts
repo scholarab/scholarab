@@ -21,6 +21,7 @@ const CreateSchema = z.object({
   url: z.string().url(),
   description: z.string().optional().nullable(),
   lastVerified: z.string().optional().nullable(),
+  active: z.boolean().default(true),
 })
 
 export const POST: APIRoute = async ({ request }) => {
