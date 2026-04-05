@@ -7,7 +7,17 @@ import parseJson from 'secure-json-parse';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const filePath = join(__dirname, '../src/data/scholarships.json');
 
-const scholarships = parseJson(readFileSync(filePath, 'utf8'));
+interface Scholarship {
+  id: number | string;
+  title: string;
+  active: boolean;
+  deadline?: string;
+  open_date?: string;
+  pendingReview?: boolean;
+  [key: string]: unknown;
+}
+
+const scholarships: Scholarship[] = parseJson(readFileSync(filePath, 'utf8'));
 
 const today = new Date();
 today.setUTCHours(0, 0, 0, 0);

@@ -10,21 +10,31 @@ import { generateSlug } from '../src/lib/generateSlug.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+interface Scholarship {
+  title: string;
+  [key: string]: unknown;
+}
+
+interface Program {
+  name: string;
+  [key: string]: unknown;
+}
+
 const BASE = 'https://www.scholarab.ca';
 const lastmod = new Date().toISOString().slice(0, 10);
 
-const scholarships = JSON.parse(
+const scholarships: Scholarship[] = JSON.parse(
   readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8')
 );
-const programs = JSON.parse(
+const programs: Program[] = JSON.parse(
   readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8')
 );
 
-function urlEntry(loc, priority) {
+function urlEntry(loc: string, priority: string): string {
   return `  <url><loc>${loc}</loc><lastmod>${lastmod}</lastmod><priority>${priority}</priority></url>`;
 }
 
-const lines = [
+const lines: string[] = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   urlEntry(`${BASE}/`, '1.0'),

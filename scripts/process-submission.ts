@@ -9,8 +9,26 @@ import sanitizeHtml from 'sanitize-html';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const filePath = join(__dirname, '../src/data/scholarships.json');
 
+interface ScholarshipEntry {
+  id: number;
+  title: string;
+  amount: string;
+  deadline: string;
+  audience: string;
+  url: string;
+  category: string;
+  lastVerified: string;
+  region: string;
+  notes: string;
+  active: boolean;
+  pendingReview: boolean;
+  submitter_name?: string;
+  submitter_email?: string;
+  [key: string]: unknown;
+}
+
 // Strip all HTML tags from text input
-function cleanText(str) {
+function cleanText(str: unknown): string {
   return sanitizeHtml(String(str ?? ''), { allowedTags: [], allowedAttributes: {} }).trim();
 }
 
@@ -27,13 +45,23 @@ const {
   INPUT_SUBMITTER_EMAIL,
 } = process.env;
 
-const required = { INPUT_NAME, INPUT_ORGANIZATION, INPUT_AMOUNT, INPUT_DEADLINE, INPUT_APPLY_URL, INPUT_CATEGORY, INPUT_REGION, INPUT_DESCRIPTION };
+const required: Record<string, string | undefined> = {
+  INPUT_NAME,
+  INPUT_ORGANIZATION,
+  INPUT_AMOUNT,
+  INPUT_DEADLINE,
+  INPUT_APPLY_URL,
+  INPUT_CATEGORY,
+  INPUT_REGION,
+  INPUT_DESCRIPTION,
+};
+
 for (const [key, val] of Object.entries(required)) {
   if (!val?.trim()) { console.error(`Missing required input: ${key}`); process.exit(1); }
 }
 
 // Validate apply URL
-if (!validator.isURL(INPUT_APPLY_URL.trim(), { protocols: ['http', 'https'], require_protocol: true })) {
+if (!validator.isURL(INPUT_APPLY_URL!.trim(), { protocols: ['http', 'https'], require_protocol: true })) {
   console.error('Invalid INPUT_APPLY_URL: must be a valid http(s) URL');
   process.exit(1);
 }
@@ -45,23 +73,25 @@ if (INPUT_SUBMITTER_EMAIL?.trim() && !validator.isEmail(INPUT_SUBMITTER_EMAIL.tr
 }
 
 // Validate date format
-if (!validator.isDate(INPUT_DEADLINE.trim(), { format: 'YYYY-MM-DD', strictMode: true })) {
+if (!validator.isDate(INPUT_DEADLINE!.trim(), { format: 'YYYY-MM-DD', strictMode: true })) {
   console.error('Invalid INPUT_DEADLINE: must be YYYY-MM-DD format');
   process.exit(1);
 }
 
-const amountNum = parseInt(INPUT_AMOUNT.replace(/[$,]/g, ''), 10);
+const amountNum = parseInt(INPUT_AMOUNT!.replace(/[$,]/g, ''), 10);
 if (!Number.isFinite(amountNum) || amountNum < 0) {
   console.error('Invalid INPUT_AMOUNT: must be a non-negative number');
   process.exit(1);
 }
 const amountStr = '$' + amountNum.toLocaleString('en-CA');
 
-const scholarships = parseJson(readFileSync(filePath, 'utf8'));
+const scholarships: ScholarshipEntry[] = parseJson(readFileSync(filePath, 'utf8'));
 
 // Reject duplicate URLs
-const normalizedApplyUrl = INPUT_APPLY_URL.trim().toLowerCase().replace(/\/+$/, '');
-const duplicate = scholarships.find(s => s.url && s.url.trim().toLowerCase().replace(/\/+$/, '') === normalizedApplyUrl);
+const normalizedApplyUrl = INPUT_APPLY_URL!.trim().toLowerCase().replace(/\/+$/, '');
+const duplicate = scholarships.find(
+  (s) => s.url && s.url.trim().toLowerCase().replace(/\/+$/, '') === normalizedApplyUrl
+);
 if (duplicate) {
   console.error(`Duplicate URL: a scholarship already exists with this apply URL (id ${duplicate.id}: "${duplicate.title}")`);
   process.exit(1);
@@ -69,16 +99,16 @@ if (duplicate) {
 
 const numericIds = scholarships
   .map((s) => s.id)
-  .filter((id) => typeof id === 'number' && Number.isFinite(id));
+  .filter((id): id is number => typeof id === 'number' && Number.isFinite(id));
 const nextId = (numericIds.length ? Math.max(...numericIds) : 0) + 1;
 
-const entry = {
+const entry: ScholarshipEntry = {
   id: nextId,
   title: cleanText(INPUT_NAME),
   amount: amountStr,
-  deadline: INPUT_DEADLINE.trim(),
+  deadline: INPUT_DEADLINE!.trim(),
   audience: cleanText(INPUT_ORGANIZATION),
-  url: INPUT_APPLY_URL.trim(),
+  url: INPUT_APPLY_URL!.trim(),
   category: cleanText(INPUT_CATEGORY),
   lastVerified: new Date().toISOString().slice(0, 7),
   region: cleanText(INPUT_REGION),

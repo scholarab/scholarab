@@ -4,12 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "tsx scripts/validate-data.js && tsx scripts/generate-sitemap.js && astro build",
+    "build": "tsx scripts/validate-data.ts && tsx scripts/generate-sitemap.ts && astro build",
     "preview": "astro preview",
-    "check-links": "tsx scripts/check-links.js",
-    "auto-expire": "tsx scripts/auto-expire.js",
-    "sitemap": "tsx scripts/generate-sitemap.js",
-    "validate-data": "tsx scripts/validate-data.js",
+    "check-links": "tsx scripts/check-links.ts",
+    "auto-expire": "tsx scripts/auto-expire.ts",
+    "sitemap": "tsx scripts/generate-sitemap.ts",
+    "validate-data": "tsx scripts/validate-data.ts",
     "test": "vitest run"
   },
   "dependencies": {

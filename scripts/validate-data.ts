@@ -7,10 +7,28 @@ import parseJson from 'secure-json-parse';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const scholarships = parseJson(
+interface Scholarship {
+  id?: number | string | null;
+  title?: string;
+  amount?: string;
+  url?: string;
+  deadline?: string;
+  open_date?: string;
+  [key: string]: unknown;
+}
+
+interface Program {
+  id?: number | string | null;
+  name?: string;
+  url?: string;
+  deadline?: string;
+  [key: string]: unknown;
+}
+
+const scholarships: Scholarship[] = parseJson(
   readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8')
 );
-const programs = parseJson(
+const programs: Program[] = parseJson(
   readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8')
 );
 
@@ -18,7 +36,7 @@ let failed = false;
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-function isHttpUrl(u) {
+function isHttpUrl(u: unknown): boolean {
   try {
     const p = new URL(String(u).trim()).protocol;
     return p === 'http:' || p === 'https:';
@@ -27,14 +45,14 @@ function isHttpUrl(u) {
   }
 }
 
-function isValidDate(str) {
+function isValidDate(str: string): boolean {
   if (!DATE_RE.test(str)) return false;
   const d = new Date(str + 'T00:00:00');
   return !isNaN(d.getTime());
 }
 
 // ── Scholarship IDs must be unique ──────────────────────────────────────────
-const schIds = new Map();
+const schIds = new Map<number | string, string[]>();
 for (const s of scholarships) {
   if (s.id === undefined || s.id === null) {
     console.error(`Scholarship "${s.title}": missing id`);
@@ -42,7 +60,7 @@ for (const s of scholarships) {
     continue;
   }
   if (!schIds.has(s.id)) schIds.set(s.id, []);
-  schIds.get(s.id).push(s.title);
+  schIds.get(s.id)!.push(s.title ?? '');
 }
 for (const [id, titles] of schIds) {
   if (titles.length > 1) {
@@ -52,7 +70,7 @@ for (const [id, titles] of schIds) {
 }
 
 // ── Program IDs must be unique ───────────────────────────────────────────────
-const progIds = new Map();
+const progIds = new Map<number | string, string[]>();
 for (const p of programs) {
   if (p.id === undefined || p.id === null) {
     console.error(`Program "${p.name}": missing id`);
@@ -60,7 +78,7 @@ for (const p of programs) {
     continue;
   }
   if (!progIds.has(p.id)) progIds.set(p.id, []);
-  progIds.get(p.id).push(p.name);
+  progIds.get(p.id)!.push(p.name ?? '');
 }
 for (const [id, names] of progIds) {
   if (names.length > 1) {
@@ -70,7 +88,7 @@ for (const [id, names] of progIds) {
 }
 
 // ── Scholarship slugs must be unique ────────────────────────────────────────
-const schSlugs = new Map();
+const schSlugs = new Map<string, Array<number | string>>();
 for (const s of scholarships) {
   if (!s.title || String(s.title).trim() === '') {
     console.error(`Scholarship [${s.id}]: missing title`);
@@ -84,7 +102,7 @@ for (const s of scholarships) {
     continue;
   }
   if (!schSlugs.has(g)) schSlugs.set(g, []);
-  schSlugs.get(g).push(s.id);
+  schSlugs.get(g)!.push(s.id!);
 }
 for (const [slug, ids] of schSlugs) {
   if (ids.length > 1) {
@@ -94,7 +112,7 @@ for (const [slug, ids] of schSlugs) {
 }
 
 // ── Program slugs must be unique ────────────────────────────────────────────
-const progSlugs = new Map();
+const progSlugs = new Map<string, Array<number | string>>();
 for (const p of programs) {
   if (!p.name || String(p.name).trim() === '') {
     console.error(`Program [${p.id}]: missing name`);
@@ -108,7 +126,7 @@ for (const p of programs) {
     continue;
   }
   if (!progSlugs.has(g)) progSlugs.set(g, []);
-  progSlugs.get(g).push(p.id);
+  progSlugs.get(g)!.push(p.id!);
 }
 for (const [slug, ids] of progSlugs) {
   if (ids.length > 1) {
