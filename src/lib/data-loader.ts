@@ -30,6 +30,7 @@ export type Program = {
   url: string
   description: string | null
   lastVerified: string | null
+  active: boolean
 }
 
 export async function loadScholarships(): Promise<Scholarship[]> {
@@ -38,21 +39,23 @@ export async function loadScholarships(): Promise<Scholarship[]> {
       const { db } = await import('./db/client')
       const { scholarships } = await import('./db/schema')
       const rows = await db.select().from(scholarships)
-      return rows.map(r => ({
-        id: r.id,
-        title: r.title,
-        amount: r.amount,
-        deadline: r.deadline ?? null,
-        openDate: r.openDate ?? null,
-        audience: r.audience ?? null,
-        url: r.url,
-        category: r.category ?? null,
-        lastVerified: r.lastVerified ?? null,
-        region: r.region ?? null,
-        notes: r.notes ?? null,
-        applyViaGuidance: r.applyViaGuidance ?? false,
-        active: r.active ?? true,
-      }))
+      return rows
+        .filter(r => r.active !== false)
+        .map(r => ({
+          id: r.id,
+          title: r.title,
+          amount: r.amount,
+          deadline: r.deadline ?? null,
+          openDate: r.openDate ?? null,
+          audience: r.audience ?? null,
+          url: r.url,
+          category: r.category ?? null,
+          lastVerified: r.lastVerified ?? null,
+          region: r.region ?? null,
+          notes: r.notes ?? null,
+          applyViaGuidance: r.applyViaGuidance ?? false,
+          active: r.active ?? true,
+        }))
     } catch (e) {
       console.error('DB load failed, falling back to JSON:', e)
     }
@@ -67,23 +70,26 @@ export async function loadPrograms(): Promise<Program[]> {
       const { db } = await import('./db/client')
       const { researchPrograms } = await import('./db/schema')
       const rows = await db.select().from(researchPrograms)
-      return rows.map(r => ({
-        id: r.id,
-        name: r.name,
-        emoji: r.emoji ?? null,
-        category: r.category ?? null,
-        provider: r.provider ?? null,
-        grades: r.grades ?? null,
-        duration: r.duration ?? null,
-        paid: r.paid ?? false,
-        stipend: r.stipend ?? null,
-        location: r.location ?? null,
-        eligibility: r.eligibility ?? null,
-        deadline: r.deadline ?? null,
-        url: r.url,
-        description: r.description ?? null,
-        lastVerified: r.lastVerified ?? null,
-      }))
+      return rows
+        .filter(r => r.active !== false)
+        .map(r => ({
+          id: r.id,
+          name: r.name,
+          emoji: r.emoji ?? null,
+          category: r.category ?? null,
+          provider: r.provider ?? null,
+          grades: r.grades ?? null,
+          duration: r.duration ?? null,
+          paid: r.paid ?? false,
+          stipend: r.stipend ?? null,
+          location: r.location ?? null,
+          eligibility: r.eligibility ?? null,
+          deadline: r.deadline ?? null,
+          url: r.url,
+          description: r.description ?? null,
+          lastVerified: r.lastVerified ?? null,
+          active: r.active ?? true,
+        }))
     } catch (e) {
       console.error('DB load failed, falling back to JSON:', e)
     }
