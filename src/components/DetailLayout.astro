@@ -41,14 +41,33 @@ const {
 
 <main class="py-6">
   <a
+    id="detail-back-link"
     href={backHref}
     class="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-white/40 hover:text-[#22d3a5] dark:hover:text-[#22d3a5] transition-colors mb-6"
   >
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-    {backLabel}
+    <span id="detail-back-label">{backLabel}</span>
   </a>
+
+  <script>
+    const link = document.getElementById('detail-back-link') as HTMLAnchorElement | null;
+    const label = document.getElementById('detail-back-label');
+    if (link && label && window.history.length > 1 && document.referrer) {
+      try {
+        const refPath = new URL(document.referrer).pathname;
+        if (refPath === '/match') {
+          label.textContent = 'Back to results';
+          link.href = '/match';
+        }
+      } catch {}
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.back();
+      });
+    }
+  </script>
 
   <div class="card p-6 md:p-8" style={`border-top: 2px solid ${badge.color};`}>
     <span
