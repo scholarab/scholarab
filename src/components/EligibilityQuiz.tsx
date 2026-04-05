@@ -1,0 +1,507 @@
+import { useState, useMemo } from 'react'
+import type { Scholarship } from '../lib/data-loader'
+import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
+import { matchAll, getConfidenceTier } from '../lib/eligibility-matcher'
+
+// ── Types ─────────────────────────────────────────────────────────────────────
+
+type Step = 1 | 2 | 3 | 4 | 'results'
+
+interface Props {
+  scholarships: Scholarship[]
+}
+
+// ── Constants ─────────────────────────────────────────────────────────────────
+
+const GRADE_OPTIONS = [
+  { value: '10', label: 'Grade 10' },
+  { value: '11', label: 'Grade 11' },
+  { value: '12', label: 'Grade 12' },
+  { value: 'post-secondary', label: 'Entering post-secondary' },
+]
+
+const CITY_OPTIONS = [
+  'Medicine Hat', 'Calgary', 'Edmonton', 'Lethbridge', 'Red Deer', 'Other Alberta',
+]
+
+const SCHOOL_BOARDS = [
+  'CBE (Calgary Public)',
+  'CCSD (Calgary Catholic)',
+  'Edmonton Public Schools',
+  'Edmonton Catholic Schools',
+  'MHPSD (Medicine Hat)',
+  'Lethbridge School Division',
+  'Other / Not sure',
+]
+
+const INSTITUTIONS = [
+  'University of Calgary',
+  'University of Alberta',
+  'MacEwan University',
+  'Mount Royal University',
+  'University of Lethbridge',
+  'Medicine Hat College',
+  'Trades / Apprenticeship program',
+  'Other / Not sure',
+]
+
+const FIELDS = [
+  { value: 'STEM', label: 'STEM' },
+  { value: 'health', label: 'Health & Medicine' },
+  { value: 'business', label: 'Business' },
+  { value: 'arts', label: 'Arts & Humanities' },
+  { value: 'trades', label: 'Trades' },
+  { value: 'agriculture', label: 'Agriculture' },
+  { value: 'education', label: 'Education' },
+  { value: 'social_work', label: 'Social Work' },
+  { value: 'environmental', label: 'Environmental' },
+  { value: 'engineering', label: 'Engineering' },
+  { value: 'law', label: 'Law' },
+  { value: 'music', label: 'Music / Performing Arts' },
+]
+
+const AVERAGE_BRACKETS = [
+  { value: 55, label: 'Below 65%' },
+  { value: 67, label: '65–74%' },
+  { value: 77, label: '75–79%' },
+  { value: 82, label: '80–84%' },
+  { value: 87, label: '85–89%' },
+  { value: 92, label: '90–94%' },
+  { value: 97, label: '95%+' },
+]
+
+const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
+  strong: { badge: 'bg-[#22d3a5]/15 text-[#22d3a5] border-[#22d3a5]/30', label: 'Strong match' },
+  good:   { badge: 'bg-blue-500/15 text-blue-400 border-blue-500/30', label: 'Good match' },
+  possible: { badge: 'bg-white/10 text-white/40 border-white/15', label: 'Possible match' },
+}
+
+// ── Helper components ─────────────────────────────────────────────────────────
+
+function Chip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
+      style={active
+        ? { background: 'rgba(34,211,165,0.12)', borderColor: 'rgba(34,211,165,0.4)', color: '#22d3a5' }
+        : { background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}
+    >
+      {label}
+    </button>
+  )
+}
+
+function ProgressBar({ step }: { step: Step }) {
+  const steps = [1, 2, 3, 4]
+  const current = step === 'results' ? 4 : (step as number)
+  return (
+    <div className="flex gap-1.5 mb-8">
+      {steps.map(s => (
+        <div
+          key={s}
+          className="h-1 flex-1 rounded-full transition-all duration-300"
+          style={{ background: s <= current ? '#22d3a5' : 'rgba(255,255,255,0.1)' }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function parseAmount(amount: string): number {
+  return parseInt(String(amount).replace(/[$,]/g, ''), 10) || 0
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
+
+export default function EligibilityQuiz({ scholarships }: Props) {
+  const [step, setStep] = useState<Step>(1)
+
+  // Step 1
+  const [grade, setGrade] = useState<StudentProfile['grade'] | ''>('')
+  const [city, setCity] = useState('')
+
+  // Step 2
+  const [schoolBoard, setSchoolBoard] = useState('')
+  const [targetInstitution, setTargetInstitution] = useState('')
+
+  // Step 3
+  const [fields, setFields] = useState<string[]>([])
+  const [averageBracket, setAverageBracket] = useState<number | null>(null)
+
+  // Step 4
+  const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(null)
+  const [identifiesAsLGBTQ, setIdentifiesAsLGBTQ] = useState<boolean | null>(null)
+  const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(null)
+  const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(null)
+  const [inFosterCare, setInFosterCare] = useState<boolean | null>(null)
+  const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(null)
+  const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(null)
+
+  const profile = useMemo((): StudentProfile | null => {
+    if (!grade || !city) return null
+    return {
+      grade: grade as StudentProfile['grade'],
+      city,
+      schoolBoard: schoolBoard && schoolBoard !== 'Other / Not sure' ? schoolBoard : null,
+      specificSchool: null,
+      targetInstitution: targetInstitution && targetInstitution !== 'Other / Not sure' ? targetInstitution : null,
+      fields,
+      averagePercent: averageBracket,
+      identifiesAsFemale,
+      identifiesAsLGBTQ,
+      identifiesAsIndigenous,
+      identifiesAsBIPOC,
+      hasFinancialNeed: null,
+      familyIncome: null,
+      inFosterCare,
+      inApprenticeship,
+      extracurriculars: [],
+      citizenship,
+    }
+  }, [grade, city, schoolBoard, targetInstitution, fields, averageBracket,
+      identifiesAsFemale, identifiesAsLGBTQ, identifiesAsIndigenous, identifiesAsBIPOC,
+      inFosterCare, inApprenticeship, citizenship])
+
+  const results = useMemo(() => {
+    if (!profile) return null
+    const matched = matchAll(profile, scholarships.map(s => ({
+      id: s.id,
+      region: s.region,
+      eligibility: s.eligibility,
+    })))
+    const scholarshipMap = new Map(scholarships.map(s => [s.id, s]))
+    return matched.map(m => ({
+      ...m,
+      scholarship: scholarshipMap.get(m.id)!,
+    })).filter(m => m.scholarship)
+  }, [profile, scholarships])
+
+  const totalAmount = useMemo(() => {
+    if (!results) return 0
+    return results
+      .filter(r => r.tier !== 'possible')
+      .reduce((sum, r) => sum + parseAmount(r.scholarship.amount), 0)
+  }, [results])
+
+  function toggleField(f: string) {
+    setFields(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f])
+  }
+
+  function toggleIdentity(
+    current: boolean | null,
+    setter: (v: boolean | null) => void,
+    newVal: true | false,
+  ) {
+    // clicking same value again → deselect (back to null = not answered)
+    setter(current === newVal ? null : newVal)
+  }
+
+  const canNext1 = grade !== '' && city !== ''
+
+  // ── Steps ──────────────────────────────────────────────────────────────────
+
+  if (step === 1) {
+    return (
+      <div>
+        <ProgressBar step={1} />
+        <h2 className="text-xl font-bold mb-1 text-white">Where are you at?</h2>
+        <p className="text-sm text-white/40 mb-6">We'll use this to filter scholarships by location and grade.</p>
+
+        <div className="mb-6">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">Your grade</p>
+          <div className="flex flex-wrap gap-2">
+            {GRADE_OPTIONS.map(({ value, label }) => (
+              <Chip key={value} label={label} active={grade === value} onClick={() => setGrade(value as StudentProfile['grade'])} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">Your city</p>
+          <div className="flex flex-wrap gap-2">
+            {CITY_OPTIONS.map(c => (
+              <Chip key={c} label={c} active={city === c} onClick={() => setCity(c)} />
+            ))}
+          </div>
+        </div>
+
+        <button
+          onClick={() => setStep(2)}
+          disabled={!canNext1}
+          className="w-full py-3 rounded-xl text-sm font-semibold transition disabled:opacity-30"
+          style={{ background: '#22d3a5', color: '#0a0a0f' }}
+        >
+          Next →
+        </button>
+      </div>
+    )
+  }
+
+  if (step === 2) {
+    return (
+      <div>
+        <ProgressBar step={2} />
+        <h2 className="text-xl font-bold mb-1 text-white">Your school</h2>
+        <p className="text-sm text-white/40 mb-6">Optional — but helps us find school-specific awards.</p>
+
+        <div className="mb-6">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">School board</p>
+          <div className="flex flex-wrap gap-2">
+            {SCHOOL_BOARDS.map(b => (
+              <Chip key={b} label={b} active={schoolBoard === b} onClick={() => setSchoolBoard(prev => prev === b ? '' : b)} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">Where are you planning to go?</p>
+          <div className="flex flex-wrap gap-2">
+            {INSTITUTIONS.map(inst => (
+              <Chip key={inst} label={inst} active={targetInstitution === inst} onClick={() => setTargetInstitution(prev => prev === inst ? '' : inst)} />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex gap-3">
+          <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-sm font-semibold border transition" style={{ borderColor: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}>
+            ← Back
+          </button>
+          <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: '#22d3a5', color: '#0a0a0f' }}>
+            Next →
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (step === 3) {
+    return (
+      <div>
+        <ProgressBar step={3} />
+        <h2 className="text-xl font-bold mb-1 text-white">What do you want to study?</h2>
+        <p className="text-sm text-white/40 mb-6">Optional — helps surface field-specific scholarships.</p>
+
+        <div className="mb-6">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">Intended field of study</p>
+          <div className="flex flex-wrap gap-2">
+            {FIELDS.map(({ value, label }) => (
+              <Chip key={value} label={label} active={fields.includes(value)} onClick={() => toggleField(value)} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">Academic average</p>
+          <div className="flex flex-wrap gap-2">
+            {AVERAGE_BRACKETS.map(({ value, label }) => (
+              <Chip key={value} label={label} active={averageBracket === value} onClick={() => setAverageBracket(prev => prev === value ? null : value)} />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex gap-3">
+          <button onClick={() => setStep(2)} className="flex-1 py-3 rounded-xl text-sm font-semibold border transition" style={{ borderColor: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}>
+            ← Back
+          </button>
+          <button onClick={() => setStep(4)} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: '#22d3a5', color: '#0a0a0f' }}>
+            Next →
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (step === 4) {
+    const identityChip = (label: string, current: boolean | null, setter: (v: boolean | null) => void) => (
+      <Chip label={label} active={current === true} onClick={() => toggleIdentity(current, setter, true)} />
+    )
+
+    return (
+      <div>
+        <ProgressBar step={4} />
+        <h2 className="text-xl font-bold mb-1 text-white">A few more things</h2>
+        <p className="text-sm text-white/40 mb-1">All optional. Some scholarships target specific groups — these help us find them.</p>
+        <p className="text-xs text-white/25 mb-6 flex items-center gap-1.5">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Your answers are processed on this device only and never sent anywhere.
+        </p>
+
+        <div className="mb-5">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">I identify as <span className="text-white/25 font-normal">(select all that apply)</span></p>
+          <div className="flex flex-wrap gap-2">
+            {identityChip('Female / woman / non-binary', identifiesAsFemale, setIdentifiesAsFemale)}
+            {identityChip('2SLGBTQ+', identifiesAsLGBTQ, setIdentifiesAsLGBTQ)}
+            {identityChip('Indigenous (First Nations, Métis, Inuit)', identifiesAsIndigenous, setIdentifiesAsIndigenous)}
+            {identityChip('BIPOC', identifiesAsBIPOC, setIdentifiesAsBIPOC)}
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">My situation</p>
+          <div className="flex flex-wrap gap-2">
+            <Chip label="In RAP / CTS apprenticeship" active={inApprenticeship === true} onClick={() => toggleIdentity(inApprenticeship, setInApprenticeship, true)} />
+            <Chip label="In government care / foster care" active={inFosterCare === true} onClick={() => toggleIdentity(inFosterCare, setInFosterCare, true)} />
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <p className="text-sm text-white/60 mb-2.5 font-medium">Citizenship</p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { value: 'canadian_citizen', label: 'Canadian citizen' },
+              { value: 'permanent_resident', label: 'Permanent resident' },
+              { value: 'other', label: 'Other / International' },
+            ].map(({ value, label }) => (
+              <Chip
+                key={value}
+                label={label}
+                active={citizenship === value}
+                onClick={() => setCitizenship(prev => prev === value ? null : value as StudentProfile['citizenship'])}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex gap-3">
+          <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl text-sm font-semibold border transition" style={{ borderColor: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}>
+            ← Back
+          </button>
+          <button
+            onClick={() => setStep('results')}
+            className="flex-1 py-3 rounded-xl text-sm font-semibold transition"
+            style={{ background: '#22d3a5', color: '#0a0a0f' }}
+          >
+            Find my scholarships →
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Results ────────────────────────────────────────────────────────────────
+
+  if (!results) return null
+
+  const strong = results.filter(r => r.tier === 'strong')
+  const good   = results.filter(r => r.tier === 'good')
+  const possible = results.filter(r => r.tier === 'possible')
+  const confirmed = [...strong, ...good]
+
+  return (
+    <div>
+      <div className="mb-8">
+        <p className="text-sm text-white/40 mb-1">Based on your profile</p>
+        <h2 className="text-2xl font-bold text-white mb-1">
+          {results.length} scholarship{results.length !== 1 ? 's' : ''} found
+        </h2>
+        {totalAmount > 0 && (
+          <p className="font-bold" style={{ fontSize: 28, color: '#22d3a5', letterSpacing: '-0.02em' }}>
+            Up to ${totalAmount.toLocaleString('en-CA')} available
+          </p>
+        )}
+        <p className="text-xs text-white/25 mt-1">
+          "Up to" total counts strong + good matches only. Always verify eligibility on the scholarship's official site.
+        </p>
+      </div>
+
+      {/* Tier breakdown */}
+      <div className="flex gap-3 mb-6 flex-wrap">
+        {strong.length > 0 && (
+          <span className="text-xs px-3 py-1 rounded-full border bg-[#22d3a5]/10 text-[#22d3a5] border-[#22d3a5]/30">
+            {strong.length} strong match{strong.length !== 1 ? 'es' : ''}
+          </span>
+        )}
+        {good.length > 0 && (
+          <span className="text-xs px-3 py-1 rounded-full border bg-blue-500/10 text-blue-400 border-blue-500/30">
+            {good.length} good match{good.length !== 1 ? 'es' : ''}
+          </span>
+        )}
+        {possible.length > 0 && (
+          <span className="text-xs px-3 py-1 rounded-full border bg-white/5 text-white/35 border-white/10">
+            {possible.length} possible
+          </span>
+        )}
+      </div>
+
+      {/* Scholarship list */}
+      <div className="space-y-3">
+        {results.map(({ scholarship: s, tier }) => {
+          const style = TIER_STYLES[tier]
+          const amountNum = parseAmount(s.amount)
+          return (
+            <div
+              key={s.id}
+              className="p-4 rounded-xl border"
+              style={{ background: 'rgba(255,255,255,0.025)', borderColor: 'rgba(255,255,255,0.07)' }}
+            >
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-white text-sm leading-snug">{s.title}</p>
+                  {s.audience && (
+                    <p className="text-xs text-white/35 mt-0.5 line-clamp-1">{s.audience}</p>
+                  )}
+                </div>
+                <div className="flex-shrink-0 text-right">
+                  <p className="font-bold text-[#22d3a5]" style={{ fontSize: 18 }}>{s.amount}</p>
+                  {s.deadline && (
+                    <p className="text-xs text-white/30 mt-0.5">Due {s.deadline}</p>
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center justify-between gap-2">
+                <span className={`text-xs px-2 py-0.5 rounded-full border ${style.badge}`}>
+                  {style.label}
+                </span>
+                <div className="flex gap-2">
+                  <a
+                    href={`/scholarships/${s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`}
+                    className="text-xs text-white/40 hover:text-white transition"
+                  >
+                    Details
+                  </a>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-medium transition"
+                    style={{ color: '#22d3a5' }}
+                  >
+                    Apply →
+                  </a>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {results.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-white/40 mb-2">No matches found for your exact profile.</p>
+          <p className="text-sm text-white/25">Try broadening your answers or browsing all scholarships.</p>
+        </div>
+      )}
+
+      <div className="mt-8 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row gap-3">
+        <button
+          onClick={() => { setStep(1); setGrade(''); setCity(''); setSchoolBoard(''); setTargetInstitution(''); setFields([]); setAverageBracket(null); setIdentifiesAsFemale(null); setIdentifiesAsLGBTQ(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null); setInFosterCare(null); setInApprenticeship(null); setCitizenship(null) }}
+          className="flex-1 py-2.5 rounded-xl text-sm font-medium border transition"
+          style={{ borderColor: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.5)' }}
+        >
+          Start over
+        </button>
+        <a
+          href="/scholarships"
+          className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition"
+          style={{ background: '#22d3a5', color: '#0a0a0f' }}
+        >
+          Browse all scholarships
+        </a>
+      </div>
+    </div>
+  )
+}

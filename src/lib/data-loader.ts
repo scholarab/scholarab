@@ -12,6 +12,7 @@ export type Scholarship = {
   notes: string | null
   applyViaGuidance: boolean
   active: boolean
+  eligibility: import('./eligibility-types').EligibilityCriteria | null
 }
 
 export type Program = {
@@ -55,13 +56,14 @@ export async function loadScholarships(): Promise<Scholarship[]> {
           notes: r.notes ?? null,
           applyViaGuidance: r.applyViaGuidance ?? false,
           active: r.active ?? true,
+          eligibility: (r.eligibility as import('./eligibility-types').EligibilityCriteria | null) ?? null,
         }))
     } catch (e) {
       console.error('DB load failed, falling back to JSON:', e)
     }
   }
   const data = await import('../data/scholarships.json')
-  return (data.default as any[]).map(s => ({ ...s, openDate: s.openDate ?? s.open_date ?? null }))
+  return (data.default as any[]).map(s => ({ ...s, openDate: s.openDate ?? s.open_date ?? null, eligibility: null }))
 }
 
 export async function loadPrograms(): Promise<Program[]> {

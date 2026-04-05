@@ -9,9 +9,11 @@
     "check-links": "node scripts/check-links.js",
     "auto-expire": "node scripts/auto-expire.js",
     "sitemap": "node scripts/generate-sitemap.js",
-    "validate-data": "node scripts/validate-data.js"
+    "validate-data": "node scripts/validate-data.js",
+    "test": "vitest run"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
     "@astrojs/react": "^5.0.1",
     "@astrojs/vercel": "^10.0.4",
     "@neondatabase/serverless": "^1.0.2",
@@ -37,6 +39,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.10"
+    "drizzle-kit": "^0.31.10",
+    "vitest": "^4.1.2"
   }
 }

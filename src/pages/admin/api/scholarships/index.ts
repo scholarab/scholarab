@@ -20,6 +20,7 @@ const CreateSchema = z.object({
   notes: z.string().optional().nullable(),
   applyViaGuidance: z.boolean().default(false),
   active: z.boolean().default(true),
+  eligibility: z.unknown().optional().nullable(),
 })
 
 export const GET: APIRoute = async ({ request }) => {

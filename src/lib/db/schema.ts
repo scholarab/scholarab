@@ -62,6 +62,7 @@ export const scholarships = pgTable('scholarships', {
   notes: text('notes'),
   applyViaGuidance: boolean('apply_via_guidance').default(false),
   active: boolean('active').default(true),
+  eligibility: jsonb('eligibility'),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 })

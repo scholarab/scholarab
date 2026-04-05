@@ -1,5 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
+import type { EligibilityCriteria } from '../../lib/eligibility-types'
+import { EMPTY_ELIGIBILITY } from '../../lib/eligibility-types'
 
 const PAGE_SIZE = 25
 const REFRESH_INTERVAL = 60_000 // 60 seconds
@@ -18,6 +20,7 @@ type Scholarship = {
   notes: string | null
   applyViaGuidance: boolean
   active: boolean
+  eligibility: EligibilityCriteria | null
   updatedAt: string
 }
 
@@ -30,7 +33,8 @@ interface Props {
 
 const emptyForm = (): Partial<Scholarship> => ({
   title: '', amount: '', deadline: '', openDate: '', audience: '', url: '',
-  category: '', lastVerified: '', region: '', notes: '', applyViaGuidance: false, active: true
+  category: '', lastVerified: '', region: '', notes: '', applyViaGuidance: false, active: true,
+  eligibility: null,
 })
 
 export default function ScholarshipManager({ initialData }: Props) {
@@ -43,6 +47,8 @@ export default function ScholarshipManager({ initialData }: Props) {
   const [saving, setSaving] = useState(false)
   const [fetching, setFetching] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
+  const [showEligibility, setShowEligibility] = useState(false)
+  const [parsing, setParsing] = useState(false)
   const modalOpenRef = useRef(false)
 
   // Auto-refresh every 60s — skip if a modal is open to avoid disrupting edits
@@ -105,12 +111,13 @@ export default function ScholarshipManager({ initialData }: Props) {
     setPage(0)
   }
 
-  const openAdd = () => { setForm(emptyForm()); setShowAdvanced(false); setModal({ type: 'add' }) }
+  const openAdd = () => { setForm(emptyForm()); setShowAdvanced(false); setShowEligibility(false); setModal({ type: 'add' }) }
 
   // Re-fetch fresh data before opening edit modal
   const openEdit = async (item: Scholarship) => {
     setForm({ ...item })
     setShowAdvanced(false)
+    setShowEligibility(false)
     setModal({ type: 'edit', item })
     setFetching(true)
     try {
@@ -127,8 +134,33 @@ export default function ScholarshipManager({ initialData }: Props) {
     }
   }
 
+  const handleParseEligibility = async () => {
+    if (!modal?.item?.id) return
+    setParsing(true)
+    try {
+      const res = await fetch('/admin/api/scholarships/parse-eligibility', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: modal.item.id }),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        toast.error('Parse failed: ' + (err.error ?? 'Unknown error'))
+        return
+      }
+      const { eligibility } = await res.json()
+      setForm(f => ({ ...f, eligibility }))
+      setShowEligibility(true)
+      toast.success('Eligibility parsed — review and save')
+    } catch (e) {
+      toast.error('Parse failed: ' + String(e))
+    } finally {
+      setParsing(false)
+    }
+  }
+
   const openDelete = (item: Scholarship) => setModal({ type: 'delete', item })
-  const closeModal = () => { setModal(null); setFetching(false) }
+  const closeModal = () => { setModal(null); setFetching(false); setParsing(false) }
 
   const handleSave = async () => {
     setSaving(true)
@@ -245,6 +277,7 @@ export default function ScholarshipManager({ initialData }: Props) {
               <th className="text-left px-4 py-3 font-medium">Deadline</th>
               <th className="text-left px-4 py-3 font-medium">Region</th>
               <th className="text-left px-4 py-3 font-medium">Status</th>
+              <th className="text-left px-4 py-3 font-medium">Eligibility</th>
               <th className="px-4 py-3" />
             </tr>
           </thead>
@@ -258,6 +291,11 @@ export default function ScholarshipManager({ initialData }: Props) {
                 <td className="px-4 py-3">
                   <span className={`text-xs px-2 py-0.5 rounded-full ${s.active ? 'bg-[#22d3a5]/15 text-[#22d3a5]' : 'bg-white/10 text-white/40'}`}>
                     {s.active ? 'Active' : 'Inactive'}
+                  </span>
+                </td>
+                <td className="px-4 py-3">
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${s.eligibility ? 'bg-blue-500/15 text-blue-400' : 'bg-white/5 text-white/25'}`}>
+                    {s.eligibility ? 'Tagged' : 'Untagged'}
                   </span>
                 </td>
                 <td className="px-4 py-3 text-right">
@@ -411,6 +449,40 @@ export default function ScholarshipManager({ initialData }: Props) {
               </div>
             )}
 
+            {/* ── Eligibility toggle ── */}
+            <div className="mt-4 border-t border-white/[0.06] pt-4">
+              <div className="flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={() => setShowEligibility(v => !v)}
+                  className="text-xs text-white/30 hover:text-white/60 transition flex items-center gap-1"
+                >
+                  <span>{showEligibility ? '▾' : '▸'}</span>
+                  {showEligibility ? 'Hide eligibility criteria' : 'Show eligibility criteria'}
+                  {form.eligibility && <span className="ml-2 px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400">Tagged</span>}
+                </button>
+                {modal?.type === 'edit' && modal.item?.audience && (
+                  <button
+                    type="button"
+                    onClick={handleParseEligibility}
+                    disabled={parsing}
+                    className="text-xs px-2.5 py-1 rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition disabled:opacity-40"
+                  >
+                    {parsing ? 'Parsing…' : '✦ Parse with AI'}
+                  </button>
+                )}
+              </div>
+
+              {showEligibility && (
+                <div className="mt-3 space-y-3 p-3 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                  <EligibilityEditor
+                    value={form.eligibility ?? EMPTY_ELIGIBILITY}
+                    onChange={e => setForm(f => ({ ...f, eligibility: e }))}
+                  />
+                </div>
+              )}
+            </div>
+
             <div className="flex gap-3 mt-6 justify-end">
               <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
               <button onClick={handleSave} disabled={saving || fetching || !!localDuplicate} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f] disabled:opacity-50" style={{background:'#22d3a5'}}>
@@ -436,6 +508,154 @@ export default function ScholarshipManager({ initialData }: Props) {
           </div>
         </div>
       )}
+    </div>
+  )
+}
+
+// ── Eligibility Editor ─────────────────────────────────────────────────────────
+
+const GRADE_OPTIONS = ['10', '11', '12', 'post-secondary']
+const FIELD_OPTIONS = ['STEM', 'health', 'business', 'arts', 'trades', 'agriculture', 'education', 'music', 'social_work', 'environmental', 'engineering', 'law', 'criminal_justice', 'humanities']
+const EXTRACURRICULAR_OPTIONS = ['volunteer', 'music', 'sports', '4-H', 'science_fair', 'RAP']
+
+function ToggleChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="text-xs px-2 py-0.5 rounded-full border transition"
+      style={{
+        background: active ? 'rgba(34,211,165,0.15)' : 'rgba(255,255,255,0.04)',
+        borderColor: active ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.1)',
+        color: active ? '#22d3a5' : 'rgba(255,255,255,0.4)',
+      }}
+    >
+      {label}
+    </button>
+  )
+}
+
+function toggleArr(arr: string[], val: string): string[] {
+  return arr.includes(val) ? arr.filter(v => v !== val) : [...arr, val]
+}
+
+function EligibilityEditor({ value, onChange }: { value: EligibilityCriteria; onChange: (v: EligibilityCriteria) => void }) {
+  const set = (patch: Partial<EligibilityCriteria>) => onChange({ ...value, ...patch })
+
+  return (
+    <div className="space-y-3 text-xs">
+      <div>
+        <p className="text-white/40 mb-1.5">Grades</p>
+        <div className="flex flex-wrap gap-1.5">
+          {GRADE_OPTIONS.map(g => (
+            <ToggleChip key={g} label={g} active={value.grades.includes(g)} onClick={() => set({ grades: toggleArr(value.grades, g) })} />
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p className="text-white/40 mb-1.5">Fields of study</p>
+        <div className="flex flex-wrap gap-1.5">
+          {FIELD_OPTIONS.map(f => (
+            <ToggleChip key={f} label={f} active={value.fields.includes(f)} onClick={() => set({ fields: toggleArr(value.fields, f) })} />
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <div>
+          <label className="text-white/40 block mb-1">Min average (%)</label>
+          <input
+            type="number"
+            value={value.minAverage ?? ''}
+            onChange={e => set({ minAverage: e.target.value ? parseInt(e.target.value) : null })}
+            placeholder="e.g. 75"
+            min={0} max={100}
+            className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-white text-xs focus:outline-none focus:border-[#22d3a5]/50"
+          />
+        </div>
+        <div>
+          <label className="text-white/40 block mb-1">Max family income ($)</label>
+          <input
+            type="number"
+            value={value.maxFamilyIncome ?? ''}
+            onChange={e => set({ maxFamilyIncome: e.target.value ? parseInt(e.target.value) : null })}
+            placeholder="e.g. 65000"
+            min={0}
+            className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-white text-xs focus:outline-none focus:border-[#22d3a5]/50"
+          />
+        </div>
+      </div>
+
+      <div>
+        <p className="text-white/40 mb-1.5">Identity requirements</p>
+        <div className="flex flex-wrap gap-2">
+          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
+            <input type="checkbox" checked={value.genderRequired === 'female'} onChange={e => set({ genderRequired: e.target.checked ? 'female' : null })} className="accent-[#22d3a5] w-3 h-3" />
+            Female-identifying only
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
+            <input type="checkbox" checked={value.indigenousRequired} onChange={e => set({ indigenousRequired: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
+            Indigenous required
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
+            <input type="checkbox" checked={value.lgbtqRequired} onChange={e => set({ lgbtqRequired: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
+            2SLGBTQ+ required
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
+            <input type="checkbox" checked={value.bipocRequired} onChange={e => set({ bipocRequired: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
+            BIPOC required
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-white/40 mb-1.5">Other requirements</p>
+        <div className="flex flex-wrap gap-2">
+          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
+            <input type="checkbox" checked={value.financialNeed} onChange={e => set({ financialNeed: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
+            Financial need
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
+            <input type="checkbox" checked={value.fosterCare} onChange={e => set({ fosterCare: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
+            Foster care history
+          </label>
+          <label className="flex items-center gap-1.5 cursor-pointer text-white/50">
+            <input type="checkbox" checked={value.apprenticeship} onChange={e => set({ apprenticeship: e.target.checked })} className="accent-[#22d3a5] w-3 h-3" />
+            RAP/apprenticeship
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-white/40 mb-1.5">Citizenship</p>
+        <select
+          value={value.citizenship}
+          onChange={e => set({ citizenship: e.target.value as EligibilityCriteria['citizenship'] })}
+          className="bg-[#1a1a24] border border-white/10 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-[#22d3a5]/50"
+        >
+          <option value="any">Any</option>
+          <option value="canadian">Canadian citizens</option>
+          <option value="permanent_resident">Citizens + PRs</option>
+        </select>
+      </div>
+
+      <div>
+        <p className="text-white/40 mb-1.5">Extracurriculars</p>
+        <div className="flex flex-wrap gap-1.5">
+          {EXTRACURRICULAR_OPTIONS.map(e => (
+            <ToggleChip key={e} label={e} active={value.extracurriculars.includes(e)} onClick={() => set({ extracurriculars: toggleArr(value.extracurriculars, e) })} />
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={() => onChange({ ...EMPTY_ELIGIBILITY })}
+        className="text-white/20 hover:text-red-400 transition text-xs mt-1"
+      >
+        Clear all eligibility data
+      </button>
     </div>
   )
 }
