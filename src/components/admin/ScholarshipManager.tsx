@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 
 const PAGE_SIZE = 25
+const REFRESH_INTERVAL = 60_000 // 60 seconds
 
 type Scholarship = {
   id: number
@@ -17,6 +18,7 @@ type Scholarship = {
   notes: string | null
   applyViaGuidance: boolean
   active: boolean
+  updatedAt: string
 }
 
 const CATEGORIES = ['Arts', 'Business', 'Community', 'Engineering', 'General', 'Health', 'Indigenous', 'LGBTQ+', 'Science', 'Sports', 'Trades', 'Other']
@@ -39,10 +41,32 @@ export default function ScholarshipManager({ initialData }: Props) {
   const [modal, setModal] = useState<{ type: 'edit' | 'add' | 'delete'; item?: Scholarship } | null>(null)
   const [form, setForm] = useState<Partial<Scholarship>>(emptyForm())
   const [saving, setSaving] = useState(false)
+  const [fetching, setFetching] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
+  const modalOpenRef = useRef(false)
 
-  // Duplicate detection: only active when adding
-  const duplicate = useMemo(() => {
+  // Auto-refresh every 60s — skip if a modal is open to avoid disrupting edits
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      if (modalOpenRef.current) return
+      try {
+        const res = await fetch('/admin/api/scholarships')
+        if (!res.ok) return
+        const fresh: Scholarship[] = await res.json()
+        setItems(fresh)
+      } catch {
+        // silent — don't bother user if refresh fails
+      }
+    }, REFRESH_INTERVAL)
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    modalOpenRef.current = modal !== null
+  }, [modal])
+
+  // Duplicate detection: only active when adding, checks local state for instant feedback
+  const localDuplicate = useMemo(() => {
     if (modal?.type !== 'add' || !form.title?.trim()) return null
     const needle = form.title.trim().toLowerCase()
     return items.find(s => s.title.trim().toLowerCase() === needle) ?? null
@@ -51,11 +75,9 @@ export default function ScholarshipManager({ initialData }: Props) {
   const filtered = useMemo(() => {
     let list = items.filter(s => s.title.toLowerCase().includes(search.toLowerCase()))
     if (regionTab !== 'All') {
-      if (regionTab === 'No region') {
-        list = list.filter(s => !s.region)
-      } else {
-        list = list.filter(s => s.region === regionTab)
-      }
+      list = regionTab === 'No region'
+        ? list.filter(s => !s.region)
+        : list.filter(s => s.region === regionTab)
     }
     return list
   }, [items, search, regionTab])
@@ -63,7 +85,6 @@ export default function ScholarshipManager({ initialData }: Props) {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
   const paginated = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
-  // Count per region tab for badges
   const regionCounts = useMemo(() => {
     const counts: Record<string, number> = { All: items.length, 'No region': 0 }
     for (const r of REGIONS) counts[r] = 0
@@ -85,9 +106,29 @@ export default function ScholarshipManager({ initialData }: Props) {
   }
 
   const openAdd = () => { setForm(emptyForm()); setShowAdvanced(false); setModal({ type: 'add' }) }
-  const openEdit = (item: Scholarship) => { setForm({ ...item }); setShowAdvanced(false); setModal({ type: 'edit', item }) }
+
+  // Re-fetch fresh data before opening edit modal
+  const openEdit = async (item: Scholarship) => {
+    setForm({ ...item })
+    setShowAdvanced(false)
+    setModal({ type: 'edit', item })
+    setFetching(true)
+    try {
+      const res = await fetch(`/admin/api/scholarships/${item.id}`)
+      if (res.ok) {
+        const fresh: Scholarship = await res.json()
+        setForm({ ...fresh })
+        setModal({ type: 'edit', item: fresh })
+      }
+    } catch {
+      // keep stale data if fetch fails — not ideal but still workable
+    } finally {
+      setFetching(false)
+    }
+  }
+
   const openDelete = (item: Scholarship) => setModal({ type: 'delete', item })
-  const closeModal = () => setModal(null)
+  const closeModal = () => { setModal(null); setFetching(false) }
 
   const handleSave = async () => {
     setSaving(true)
@@ -95,11 +136,28 @@ export default function ScholarshipManager({ initialData }: Props) {
       const isEdit = modal?.type === 'edit'
       const url = isEdit ? `/admin/api/scholarships/${modal.item!.id}` : '/admin/api/scholarships'
       const method = isEdit ? 'PUT' : 'POST'
+      // Include updatedAt for optimistic locking on edits
+      const body = isEdit ? { ...form, updatedAt: modal.item!.updatedAt } : form
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(body),
       })
+
+      if (res.status === 409) {
+        const err = await res.json()
+        if (err.error === 'duplicate') {
+          toast.error(`Already exists: "${err.existing}"`)
+        } else if (err.error === 'conflict') {
+          toast.error(err.message)
+          // Refresh list so they see the latest state
+          const fresh = await fetch('/admin/api/scholarships')
+          if (fresh.ok) setItems(await fresh.json())
+          closeModal()
+        }
+        return
+      }
+
       if (!res.ok) throw new Error(await res.text())
       const saved: Scholarship = await res.json()
       setItems(prev => isEdit
@@ -219,18 +277,12 @@ export default function ScholarshipManager({ initialData }: Props) {
         <div className="flex items-center justify-between mt-4 text-sm text-white/40">
           <span>{filtered.length} results · page {page + 1} of {totalPages}</span>
           <div className="flex gap-2">
-            <button
-              onClick={() => setPage(p => Math.max(0, p - 1))}
-              disabled={page === 0}
-              className="px-3 py-1.5 rounded-lg border border-white/10 disabled:opacity-30 hover:border-white/20 transition"
-            >
+            <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
+              className="px-3 py-1.5 rounded-lg border border-white/10 disabled:opacity-30 hover:border-white/20 transition">
               ← Prev
             </button>
-            <button
-              onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
-              disabled={page >= totalPages - 1}
-              className="px-3 py-1.5 rounded-lg border border-white/10 disabled:opacity-30 hover:border-white/20 transition"
-            >
+            <button onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1}
+              className="px-3 py-1.5 rounded-lg border border-white/10 disabled:opacity-30 hover:border-white/20 transition">
               Next →
             </button>
           </div>
@@ -241,13 +293,16 @@ export default function ScholarshipManager({ initialData }: Props) {
       {(modal?.type === 'edit' || modal?.type === 'add') && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={closeModal}>
           <div className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <h2 className="text-lg font-semibold mb-1">{modal.type === 'edit' ? 'Edit Scholarship' : 'Add Scholarship'}</h2>
+            <div className="flex items-center justify-between mb-1">
+              <h2 className="text-lg font-semibold">{modal.type === 'edit' ? 'Edit Scholarship' : 'Add Scholarship'}</h2>
+              {fetching && <span className="text-xs text-white/30 animate-pulse">Loading latest…</span>}
+            </div>
             <p className="text-xs text-white/30 mb-5">Fields marked * are required</p>
 
             {/* Duplicate warning */}
-            {duplicate && (
+            {localDuplicate && (
               <div className="mb-4 px-4 py-3 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-300 text-sm">
-                ⚠️ A scholarship with this name already exists: <span className="font-semibold">"{duplicate.title}"</span>
+                ⚠️ A scholarship with this name already exists: <span className="font-semibold">"{localDuplicate.title}"</span>
               </div>
             )}
 
@@ -358,7 +413,7 @@ export default function ScholarshipManager({ initialData }: Props) {
 
             <div className="flex gap-3 mt-6 justify-end">
               <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
-              <button onClick={handleSave} disabled={saving || !!duplicate} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f] disabled:opacity-50" style={{background:'#22d3a5'}}>
+              <button onClick={handleSave} disabled={saving || fetching || !!localDuplicate} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f] disabled:opacity-50" style={{background:'#22d3a5'}}>
                 {saving ? 'Saving…' : 'Save scholarship'}
               </button>
             </div>

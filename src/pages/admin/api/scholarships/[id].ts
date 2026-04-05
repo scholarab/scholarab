@@ -22,6 +22,18 @@ const UpdateSchema = z.object({
   active: z.boolean().optional(),
 })
 
+export const GET: APIRoute = async ({ request, params }) => {
+  const session = await auth.api.getSession({ headers: request.headers })
+  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+
+  const id = parseInt(params.id!)
+  if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
+
+  const [item] = await db.select().from(scholarships).where(eq(scholarships.id, id))
+  if (!item) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
+  return new Response(JSON.stringify(item), { status: 200 })
+}
+
 export const PUT: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
@@ -31,7 +43,27 @@ export const PUT: APIRoute = async ({ request, params }) => {
 
   try {
     const body = await request.json()
-    const data = UpdateSchema.parse(body)
+    const { updatedAt: clientUpdatedAt, ...rest } = body
+    const data = UpdateSchema.parse(rest)
+
+    // Optimistic locking: check if record was modified since client loaded it
+    if (clientUpdatedAt) {
+      const [current] = await db
+        .select({ updatedAt: scholarships.updatedAt })
+        .from(scholarships)
+        .where(eq(scholarships.id, id))
+      if (!current) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
+
+      const dbTs = Math.floor(new Date(current.updatedAt).getTime() / 1000)
+      const clientTs = Math.floor(new Date(clientUpdatedAt).getTime() / 1000)
+      if (dbTs !== clientTs) {
+        return new Response(
+          JSON.stringify({ error: 'conflict', message: 'This record was modified by someone else. Please refresh and try again.' }),
+          { status: 409 }
+        )
+      }
+    }
+
     const [updated] = await db
       .update(scholarships)
       .set({ ...data, updatedAt: new Date() })
