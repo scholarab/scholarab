@@ -4,21 +4,6 @@
 <nav id="bottom-nav" class="bottom-nav-bar md:hidden fixed bottom-0 left-0 right-0" style="z-index: 9999;">
   <div class="flex h-16 relative">
 
-    <!-- Sliding indicator -->
-    <div id="bn-indicator" style="
-      position: absolute;
-      top: 6px;
-      height: calc(100% - 12px);
-      border-radius: 14px;
-      background: rgba(34, 211, 165, 0.12);
-      border: 0.5px solid rgba(34, 211, 165, 0.25);
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0;
-      will-change: transform;
-      transition: opacity 0.2s ease;
-    "></div>
-
     <!-- Home -->
     <a href="/" id="bn-home" class="bn-tab flex-1 flex flex-col items-center justify-center gap-[3px]" style="z-index:1;" aria-label="Home">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -69,68 +54,12 @@
 
 <script lang="ts">
   const TEAL = '#22d3a5';
-  const SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
   const IDS = ['bn-home', 'bn-scholarships', 'bn-programs', 'bn-saved', 'bn-about'];
-  let indicatorAnim: Animation | null = null;
-  let currentIndicatorX: number | null = null;
-
-  function moveIndicator(tabEl: HTMLElement) {
-    const indicator = document.getElementById('bn-indicator');
-    const nav = document.getElementById('bottom-nav');
-    if (!indicator || !nav) return;
-
-    const navRect = nav.getBoundingClientRect();
-    const tabRect = tabEl.getBoundingClientRect();
-
-    const targetX = tabRect.left - navRect.left + 4;
-    const w = tabRect.width - 8;
-
-    // Width is static (all tabs equal) — set once, never animated
-    indicator.style.left = '0';
-    indicator.style.width = `${w}px`;
-    indicator.style.opacity = '1';
-
-    const fromX = currentIndicatorX ?? targetX;
-    currentIndicatorX = targetX;
-
-    if (indicatorAnim) indicatorAnim.cancel();
-
-    indicatorAnim = indicator.animate(
-      [
-        { transform: `translateX(${fromX}px)` },
-        { transform: `translateX(${targetX}px)` },
-      ],
-      { duration: 380, easing: SPRING, fill: 'forwards' }
-    );
-
-    indicatorAnim.onfinish = () => {
-      indicator.style.transform = `translateX(${targetX}px)`;
-    };
-  }
 
   function setActive(tabId: string) {
     IDS.forEach(id => {
       const el = document.getElementById(id);
-      if (!el) return;
-      const isActive = id === `bn-${tabId}`;
-      const wasActive = el.dataset.active === 'true';
-      el.style.color = isActive ? TEAL : '';
-      el.dataset.active = isActive ? 'true' : 'false';
-
-      if (isActive) {
-        moveIndicator(el);
-        if (!wasActive) {
-          el.animate(
-            [
-              { transform: 'scale(1)'    },
-              { transform: 'scale(0.88)' },
-              { transform: 'scale(1.14)' },
-              { transform: 'scale(1)'    },
-            ],
-            { duration: 380, easing: SPRING }
-          );
-        }
-      }
+      if (el) el.style.color = id === `bn-${tabId}` ? TEAL : '';
     });
   }
 
@@ -143,7 +72,6 @@
     setActive('home');
   }
 
-  // astro:page-load fires on first load AND every ClientRouter navigation
   document.addEventListener('astro:page-load', resolveActive);
 </script>
 

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { track } from '@vercel/analytics';
 import { getSaved, toggleSaved } from '../lib/tracker.ts';
 import { getToday } from '../lib/utils.ts';
@@ -74,8 +74,6 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [page,           setPage          ] = useState(1);
   const [sheetOpen,      setSheetOpen     ] = useState(false);
   const [savedIds,       setSavedIds      ] = useState<number[]>([]);
-  const hasFiltered = useRef(false);
-
   useEffect(() => {
     const p = getInitialParams();
     setSortBy(p.sort);
@@ -91,7 +89,6 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   }, []);
 
   const toggleRegion = useCallback((region: RegionKey | null) => {
-    hasFiltered.current = true;
     const next = region === null ? null : (selectedRegion === region ? null : region);
     setSelectedRegion(next);
     setPage(1);
@@ -100,7 +97,6 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   }, [selectedRegion, sortBy]);
 
   const handleSetSort = useCallback((value: SortValue) => {
-    hasFiltered.current = true;
     setSortBy(value);
     setPage(1);
     updateURL(value, selectedRegion, 1);
@@ -108,7 +104,6 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   }, [selectedRegion]);
 
   const handlePageChange = useCallback((newPage: number) => {
-    hasFiltered.current = true;
     setPage(newPage);
     updateURL(sortBy, selectedRegion, newPage);
     requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' })));
@@ -164,6 +159,5 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     regionKey:        selectedRegion ?? '',
     savedIds,
     handleToggleSave,
-    isFiltered:       hasFiltered.current,
   };
 }

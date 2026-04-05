@@ -41,80 +41,10 @@ const scholarshipCount = scholarships.filter(s => {
 
     <!-- Hero -->
     <div class="max-w-2xl mx-auto text-center pt-8 md:pt-12 pb-2">
-      <p id="hero-subtitle" class="font-semibold text-gray-600 dark:text-white/70 mb-2" style="font-size: clamp(18px, 2.5vw, 28px); display: flex; flex-wrap: wrap; justify-content: center; gap: 0 6px;" aria-label="Alberta's student opportunity directory.">
-        <span class="hero-word" style="opacity:0;transform:translateY(10px);display:inline-block">Alberta's</span>
-        <span class="hero-word" style="opacity:0;transform:translateY(10px);display:inline-block">student</span>
-        <span class="hero-word" style="opacity:0;transform:translateY(10px);display:inline-block">opportunity</span>
-        <span class="hero-word" style="opacity:0;transform:translateY(10px);display:inline-block">directory.</span>
+      <p class="font-semibold text-gray-600 dark:text-white/70 mb-2" style="font-size: clamp(18px, 2.5vw, 28px);">
+        Alberta's student opportunity directory.
       </p>
-      <p id="stat-counter" data-target={activeTotal} class="mb-4 md:mb-8 font-bold" style="font-size: clamp(22px, 3vw, 38px); color: #22d3a5; letter-spacing: -0.02em;">{'$' + activeTotal.toLocaleString('en-CA') + '+ open right now'}</p>
-      <script>
-        function initCounter() {
-          const el = document.getElementById('stat-counter');
-          if (!el) return;
-          const target = parseInt(el.dataset.target, 10);
-          const finalText = '$' + target.toLocaleString('en-CA') + '+ open right now';
-
-          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            el.textContent = finalText;
-            return;
-          }
-
-          // Animate only on true first load, show final value on back-navigation
-          const visited = sessionStorage.getItem('scholarab_visited');
-          if (visited) {
-            el.textContent = finalText;
-            return;
-          }
-          sessionStorage.setItem('scholarab_visited', '1');
-
-          const duration = 2000;
-          const start = performance.now();
-          const fmt = new Intl.NumberFormat('en-CA');
-          const easeInExpo = (t: number) => t === 0 ? 0 : Math.pow(2, 10 * t - 10);
-          function tick(now: number) {
-            const t = Math.min((now - start) / duration, 1);
-            const value = Math.round(easeInExpo(t) * target);
-            el.textContent = '$' + fmt.format(value) + '+ open right now';
-            if (t < 1) requestAnimationFrame(tick);
-          }
-          requestAnimationFrame(tick);
-        }
-
-        document.addEventListener('astro:page-load', () => {
-          if (window.location.pathname === '/') initCounter();
-        });
-      </script>
-      <script>
-        function initHeroReveal() {
-          const words = document.querySelectorAll('.hero-word');
-          if (!words.length) return;
-          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('.hero-word').forEach(el => {
-              (el as HTMLElement).style.opacity = '1';
-              (el as HTMLElement).style.transform = 'none';
-            });
-            return;
-          }
-          words.forEach((el, i) => {
-            const htmlEl = el as HTMLElement;
-            htmlEl.style.opacity = '0';
-            htmlEl.style.transform = 'translateY(10px)';
-            setTimeout(() => {
-              htmlEl.animate(
-                [
-                  { opacity: 0, transform: 'translateY(10px)' },
-                  { opacity: 1, transform: 'translateY(0)'    },
-                ],
-                { duration: 280, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', fill: 'forwards' }
-              );
-            }, 80 + i * 55);
-          });
-        }
-        document.addEventListener('astro:page-load', () => {
-          if (window.location.pathname === '/') initHeroReveal();
-        });
-      </script>
+      <p class="mb-4 md:mb-8 font-bold" style="font-size: clamp(22px, 3vw, 38px); color: #22d3a5; letter-spacing: -0.02em;">{'$' + activeTotal.toLocaleString('en-CA') + '+ open right now'}</p>
       <div class="flex flex-col items-center gap-3">
         <div class="flex flex-row gap-3 justify-center">
           <a href="/scholarships" class="inline-flex items-center justify-center whitespace-nowrap px-5 py-3.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-85" style="background: #22d3a5; color: #0a0a0f;">
@@ -142,54 +72,22 @@ const scholarshipCount = scholarships.filter(s => {
     <div class="max-w-2xl mx-auto mt-16">
       <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-white/30 mb-6 text-center">How it works</p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="how-step step-hidden flex flex-col gap-2">
+        <div class="flex flex-col gap-2">
           <span class="font-bold text-2xl" style="color: #22d3a5;">1</span>
           <p class="font-semibold text-sm text-gray-800 dark:text-white">Browse</p>
           <p class="text-sm text-gray-500 dark:text-white/40">Browse {scholarshipCount}+ scholarships and research programs across Alberta</p>
         </div>
-        <div class="how-step step-hidden flex flex-col gap-2">
+        <div class="flex flex-col gap-2">
           <span class="font-bold text-2xl" style="color: #22d3a5;">2</span>
           <p class="font-semibold text-sm text-gray-800 dark:text-white">Filter</p>
           <p class="text-sm text-gray-500 dark:text-white/40">Filter by region, category, or deadline to find what fits you</p>
         </div>
-        <div class="how-step step-hidden flex flex-col gap-2">
+        <div class="flex flex-col gap-2">
           <span class="font-bold text-2xl" style="color: #22d3a5;">3</span>
           <p class="font-semibold text-sm text-gray-800 dark:text-white">Apply</p>
           <p class="text-sm text-gray-500 dark:text-white/40">Click Apply Now and go straight to the official application</p>
         </div>
       </div>
     </div>
-
-  <script>
-    let stepsObserver: IntersectionObserver | null = null;
-
-    function initSteps() {
-      if (stepsObserver) { stepsObserver.disconnect(); stepsObserver = null; }
-      const steps = document.querySelectorAll('.how-step');
-      if (!steps.length) return;
-      // Reset state in case of back-navigation
-      steps.forEach((el, i) => {
-        el.classList.remove('step-visible');
-        el.classList.add('step-hidden');
-        (el as HTMLElement).style.setProperty('--step-delay', `${i * 0.1}s`);
-      });
-      stepsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const el = entry.target;
-            stepsObserver!.unobserve(el);
-            requestAnimationFrame(() => {
-              el.classList.remove('step-hidden');
-              el.classList.add('step-visible');
-            });
-          }
-        });
-      }, { threshold: 0.15 });
-      steps.forEach(el => stepsObserver!.observe(el));
-    }
-
-    // astro:page-load fires on first load AND every ClientRouter navigation
-    document.addEventListener('astro:page-load', initSteps);
-  </script>
   </main>
 </Layout>

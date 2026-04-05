@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
-import { showToast, showConfetti } from '../lib/utils.ts';
+import { showToast } from '../lib/utils.ts';
 
 interface BookmarkButtonProps {
   id: number;
@@ -25,7 +25,6 @@ export default function BookmarkButton({ id, type }: BookmarkButtonProps) {
     const next = type === 'program' ? toggleSavedProgram(id) : toggleSaved(id);
     const nowSaved = next.includes(id);
     setSaved(nowSaved);
-    if (nowSaved) showConfetti(btnRef.current);
     showToast(nowSaved ? 'Saved ✓' : 'Removed from saved');
   }
 

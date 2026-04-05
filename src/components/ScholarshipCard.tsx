@@ -1,21 +1,17 @@
-import { useRef, memo } from 'react';
+import { memo } from 'react';
 import { track } from '@vercel/analytics';
-import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.ts';
+import { getToday, generateSlug, formatDeadline, showToast } from '../lib/utils.ts';
 import { getStatus } from '../hooks/useScholarships.ts';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
-import { useCardEntrance } from '../hooks/useCardEntrance.ts';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 
 interface ScholarshipCardProps {
   scholarship: ScholarshipWithMeta;
-  index: number;
   isSaved: boolean;
   onToggleSave: () => void;
-  isFiltered: boolean;
-  isInitial: boolean;
 }
 
-function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }: ScholarshipCardProps) {
+function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCardProps) {
   const status       = getStatus(scholarship);
   const isClosed     = status === 'closed';
   const daysLeft     = status === 'active'
@@ -26,14 +22,10 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
   const isUpcoming   = status === 'future';
   const amountColor  = isClosed ? 'text-gray-300 dark:text-white/20' : 'text-[#22d3a5]';
   const slug         = scholarship._slug ?? generateSlug(scholarship.title);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const bmkRef  = useRef<HTMLButtonElement>(null);
-  useCardEntrance(cardRef, index, isInitial, isFiltered);
 
   return (
     <div
-      ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col justify-between h-full`}
+      className="card p-5 flex flex-col justify-between h-full"
       style={{ minHeight: 280, opacity: isClosed ? 0.45 : isUpcoming ? 0.75 : undefined, borderTop: `2px solid ${badge.color}` }}
     >
       <div className="grow">
@@ -46,7 +38,6 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           ) : <span />}
         </div>
 
-        {/* Title + audience */}
         <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-gray-400 dark:text-white/25' : 'text-gray-900 dark:text-white'}`}>
           {scholarship.title}
         </h2>
@@ -54,7 +45,6 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           {scholarship.audience}
         </p>
 
-        {/* Amount + deadline */}
         <div className="pt-4 grid grid-cols-2 gap-2 border-t border-gray-100 dark:border-white/[0.06]">
           <div>
             <p className={`${amountColor}`} style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.1 }}>
@@ -63,11 +53,10 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           </div>
           <div className="text-right flex flex-col items-end overflow-hidden">
             {status === 'future' && (
-              <span style={{ fontSize: 9, fontWeight: 600, marginBottom: 2 }} className="text-blue-400 dark:text-blue-400 uppercase tracking-wide">Opens</span>
+              <span style={{ fontSize: 9, fontWeight: 600, marginBottom: 2 }} className="text-blue-400 uppercase tracking-wide">Opens</span>
             )}
             <p style={{
-              fontSize: 12,
-              fontWeight: 700,
+              fontSize: 12, fontWeight: 700,
               color: isClosed ? undefined : status === 'future' ? undefined : deadlineSoon ? '#f87171' : undefined,
             }} className={isClosed ? 'text-gray-300 dark:text-white/20' : status === 'future' ? 'text-blue-500 dark:text-blue-400' : deadlineSoon ? '' : 'text-gray-600 dark:text-white/50'}>
               {status === 'future' ? (formatDeadline(scholarship.openDate) || 'TBA') : formatDeadline(scholarship.deadline)}
@@ -100,8 +89,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           </button>
         )}
         <button
-          ref={bmkRef}
-          onClick={() => { if (!isSaved) showConfetti(bmkRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
+          onClick={() => { showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
           className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-[#22d3a5] border border-[#22d3a5]/40' : 'text-gray-400 border border-gray-200 dark:border-white/[0.18] dark:text-white/50'}`}
           style={{ width: 44, background: isSaved ? 'rgba(34,211,165,0.12)' : undefined }}

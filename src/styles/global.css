@@ -160,69 +160,6 @@ h1, h2 {
   transition: transform var(--t-press) ease;
 }
 
-/* ── Card entrance animations ─────────────────────────────── */
-/* #4 — Card entrance: scale + translate with spring easing */
-@keyframes cardEntrance {
-  from { opacity: 0; transform: translateY(14px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* Phase 2 — Filter cascade entrance (left-to-right slide) */
-@keyframes cardEntranceFilter {
-  from { opacity: 0; transform: translateX(-14px) scale(0.97); }
-  to   { opacity: 1; transform: translateX(0) scale(1); }
-}
-.card-entrance-filter {
-  animation: cardEntranceFilter 0.3s var(--spring) both;
-  animation-delay: var(--card-delay, 0s);
-}
-
-/* Phase 3 — Shimmer keyframe (transform-only: composited, zero paint cost) */
-@keyframes shimmer {
-  to { transform: translateX(200%); }
-}
-.card.card-before-reveal {
-  opacity: 1;
-  position: relative;
-  overflow: hidden;
-  background: rgba(150,150,150,0.07) !important;
-  border-color: rgba(150,150,150,0.1) !important;
-  border-top-color: rgba(150,150,150,0.1) !important;
-  will-change: transform;
-}
-.card.card-before-reveal::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(150,150,150,0.14) 50%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  animation: shimmer 1.5s ease-in-out infinite;
-  pointer-events: none;
-  will-change: transform;
-}
-.card-before-reveal * { opacity: 0 !important; }
-.card-entrance {
-  animation: cardEntrance var(--t-card) var(--spring) both;
-  animation-delay: var(--card-delay, 0s);
-}
-.card-entrance * { opacity: 1 !important; }
-
-/* ── #2 — Bookmark pop animation ──────────────────────────── */
-@keyframes bookmarkPop {
-  0%   { transform: scale(1); }
-  35%  { transform: scale(1.55); }
-  65%  { transform: scale(0.85); }
-  82%  { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-.bookmark-pop {
-  animation: bookmarkPop 0.45s var(--spring) both;
-}
 
 
 /* ── Region chip scroll row ───────────────────────────────── */
@@ -342,16 +279,6 @@ h1, h2 {
   transform: scale(1.015);
 }
 
-/* ── #7 — How it works step entrance ─────────────────────── */
-@keyframes stepIn {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.step-hidden { opacity: 0; }
-.step-visible {
-  animation: stepIn 0.38s var(--spring) forwards;
-  animation-delay: var(--step-delay, 0s);
-}
 
 /* ── #5 — Page view transitions ───────────────────────────── */
 @keyframes page-in {
@@ -368,37 +295,8 @@ h1, h2 {
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none; }
-
-  .card-entrance,
-  .card-entrance-filter,
-  .card-before-reveal,
-  .step-hidden,
-  .step-visible,
-  .hero-word,
-  .empty-bounce {
-    animation: none !important;
-    transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .card.card-before-reveal::before {
-    animation: none !important;
-    display: none;
-  }
-
-  .card-interactive {
-    transition: none !important;
-  }
-
-  .card.card-before-reveal,
-  .card.card-before-reveal::before {
-    will-change: auto !important;
-  }
-
-  .glass-nav {
-    transition: none !important;
-  }
+  .empty-bounce { animation: none !important; }
+  .glass-nav { transition: none !important; }
 }
 
 /* Phase 1 — Filter count number morph */
@@ -407,12 +305,4 @@ h1, h2 {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Phase 1 — Ripple on teal buttons */
-.btn-ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  pointer-events: none;
-  transform: scale(0);
-}
 

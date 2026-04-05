@@ -60,12 +60,8 @@ const {
     <script is:inline>
       (function () {
         try {
-          if (window.innerWidth <= 768) {
-            document.documentElement.classList.add('dark');
-          } else {
-            var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.classList.toggle('dark', t === 'dark');
-          }
+          var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.toggle('dark', t === 'dark');
         } catch (e) {
           document.documentElement.classList.add('dark');
         }
@@ -91,41 +87,7 @@ const {
     <SpeedInsights />
     <Analytics />
     <script>
-      // Prevent same-page navigation (causes black flash)
-      document.addEventListener('click', (e) => {
-        const a = (e.target as HTMLElement).closest('a');
-        if (!a) return;
-        const href = a.getAttribute('href');
-        if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
-        try {
-          const target = new URL(href, window.location.href);
-          if (target.pathname === window.location.pathname && target.search === window.location.search) {
-            e.preventDefault();
-          }
-        } catch {}
-      }, { capture: true });
-
-      // Ripple + haptic on teal buttons
-      document.addEventListener('click', (e) => {
-        const btn = (e.target as HTMLElement).closest('.btn-teal');
-        if (!btn) return;
-        navigator.vibrate?.(8);
-        const rect = btn.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'btn-ripple';
-        const size = Math.max(rect.width, rect.height) * 2.2;
-        ripple.style.width  = `${size}px`;
-        ripple.style.height = `${size}px`;
-        ripple.style.left   = `${e.clientX - rect.left - size / 2}px`;
-        ripple.style.top    = `${e.clientY - rect.top  - size / 2}px`;
-        btn.appendChild(ripple);
-        ripple.animate(
-          [{ transform: 'scale(0)', opacity: 0.4 }, { transform: 'scale(1)', opacity: 0 }],
-          { duration: 480, easing: 'ease-out' }
-        ).onfinish = () => ripple.remove();
-      }, { passive: true });
-
-      // Haptic on filter/sort pills
+      // Haptic on filter/sort pills and bn-tabs
       document.addEventListener('click', (e) => {
         const pill = (e.target as HTMLElement).closest('.sort-pill, .tab-pill, .bn-tab');
         if (pill) navigator.vibrate?.(6);

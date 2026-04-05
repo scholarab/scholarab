@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useMemo } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
 import { formatDeadline, showToast } from '../lib/utils.ts';
 import { getStatus } from '../hooks/useScholarships.ts';
-import { useCardEntrance } from '../hooks/useCardEntrance.ts';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 
@@ -66,18 +65,15 @@ function RemovableItem({ onRemove, onWillRemove, children }: RemovableItemProps)
 
 interface ScholarshipCardProps {
   s: ScholarshipWithMeta;
-  index: number;
   onUnsave: () => void;
-  isInitial: boolean;
 }
 
-function ScholarshipCard({ s, index, onUnsave, isInitial }: ScholarshipCardProps) {
+function ScholarshipCard({ s, onUnsave }: ScholarshipCardProps) {
   const status   = getStatus(s);
   const isClosed = status === 'closed';
   const isFuture = status === 'future';
   const cardRef  = useRef<HTMLDivElement>(null);
   const bmkRef   = useRef<HTMLButtonElement>(null);
-  useCardEntrance(cardRef, index, isInitial);
 
   function handleUnsave() {
     const el = cardRef.current;
@@ -91,7 +87,7 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }: ScholarshipCardProps
   return (
     <div
       ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col gap-3 h-full ${isClosed ? '' : 'card-interactive'}`}
+      className={`card p-5 flex flex-col gap-3 h-full ${isClosed ? '' : 'card-interactive'}`}
       style={{ opacity: isClosed ? 0.45 : isFuture ? 0.75 : undefined }}
     >
       <div className="flex items-start gap-2">
@@ -149,15 +145,12 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }: ScholarshipCardProps
 
 interface ProgramCardProps {
   p: ProgramWithMeta;
-  index: number;
   onUnsave: () => void;
-  isInitial: boolean;
 }
 
-function ProgramCard({ p, index, onUnsave, isInitial }: ProgramCardProps) {
+function ProgramCard({ p, onUnsave }: ProgramCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const bmkRef  = useRef<HTMLButtonElement>(null);
-  useCardEntrance(cardRef, index, isInitial);
 
   function handleUnsave() {
     const el = cardRef.current;
@@ -169,7 +162,7 @@ function ProgramCard({ p, index, onUnsave, isInitial }: ProgramCardProps) {
   }
 
   return (
-    <div ref={cardRef} className={`${isInitial ? '' : 'card-before-reveal '}card card-interactive p-5 flex flex-col gap-3 h-full`}>
+    <div ref={cardRef} className="card card-interactive p-5 flex flex-col gap-3 h-full">
       <div className="flex items-start gap-2">
         <h3 className="font-semibold text-sm text-gray-900 dark:text-white leading-snug">{p.name}</h3>
       </div>
@@ -275,7 +268,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
                 onRemove={() => unsaveScholarship(s.id)}
               >
                 {(triggerRemove) => (
-                  <ScholarshipCard s={s} index={i} onUnsave={triggerRemove} isInitial={i < 6} />
+                  <ScholarshipCard s={s} onUnsave={triggerRemove} />
                 )}
               </RemovableItem>
             ))}
@@ -295,7 +288,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
                 onRemove={() => unsaveProgram(p.id)}
               >
                 {(triggerRemove) => (
-                  <ProgramCard p={p} index={i} onUnsave={triggerRemove} isInitial={i < 6} />
+                  <ProgramCard p={p} onUnsave={triggerRemove} />
                 )}
               </RemovableItem>
             ))}
