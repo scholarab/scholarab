@@ -351,18 +351,26 @@ h1, h2 {
 
 /* ── #5 — Page view transitions ───────────────────────────── */
 @keyframes page-slide-in {
-  from { opacity: 0; transform: translateX(18px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translate3d(28px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 @keyframes page-slide-out {
-  from { opacity: 1; transform: translateX(0); }
-  to   { opacity: 0; transform: translateX(-12px); }
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to   { opacity: 0; transform: translate3d(-16px, 0, 0); }
 }
 ::view-transition-old(root) {
-  animation: page-slide-out 0.12s ease both;
+  animation: page-slide-out 0.26s cubic-bezier(0.4, 0, 1, 1) both;
 }
 ::view-transition-new(root) {
-  animation: page-slide-in 0.2s var(--spring-snappy) both;
+  animation: page-slide-in 0.3s cubic-bezier(0, 0, 0.2, 1) both;
+}
+@media (max-width: 768px) {
+  ::view-transition-old(root) {
+    animation-duration: 0.22s;
+  }
+  ::view-transition-new(root) {
+    animation-duration: 0.28s;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
