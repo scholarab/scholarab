@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useMemo } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
 import { formatDeadline, showToast } from '../lib/utils.ts';
 import { getStatus } from '../hooks/useScholarships.ts';
-import { observeCard, unobserveCard } from '../lib/cardObserver.ts';
+import { useCardEntrance } from '../hooks/useCardEntrance.ts';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 
@@ -17,6 +17,23 @@ const REGION_DOT_COLORS: Record<string, string> = {
   'Alberta-wide': '#22d3a5',
   'National':     '#3b82f6',
 };
+
+const BOOKMARK_BTN_STYLE: React.CSSProperties = {
+  width: 44, flexShrink: 0, alignSelf: 'stretch', borderRadius: 10,
+  background: 'rgba(34,211,165,0.12)',
+  backdropFilter: 'blur(16px) saturate(2)',
+  WebkitBackdropFilter: 'blur(16px) saturate(2)',
+  border: '0.5px solid rgba(34,211,165,0.4)',
+  boxShadow: 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)',
+  color: '#22d3a5', display: 'flex', alignItems: 'center', justifyContent: 'center',
+  cursor: 'pointer', transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',
+  WebkitTapHighlightColor: 'transparent',
+};
+
+const BOUNCE_KEYFRAMES = [
+  { transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' },
+  { transform: 'scale(1.05)' }, { transform: 'scale(1)' },
+];
 
 interface RemovableItemProps {
   onRemove: () => void;
@@ -60,18 +77,7 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }: ScholarshipCardProps
   const isFuture = status === 'future';
   const cardRef  = useRef<HTMLDivElement>(null);
   const bmkRef   = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el || isInitial) return;
-    const delay = `${Math.min(index ?? 0, 6) * 0.03}s`;
-    observeCard(el, () => {
-      el.style.setProperty('--card-delay', delay);
-      el.classList.remove('card-before-reveal');
-      el.classList.add('card-entrance');
-    });
-    return () => unobserveCard(el);
-  }, [index, isInitial]);
+  useCardEntrance(cardRef, index, isInitial);
 
   function handleUnsave() {
     const el = cardRef.current;
@@ -124,28 +130,13 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }: ScholarshipCardProps
         <button
           ref={bmkRef}
           onClick={() => {
-            bmkRef.current?.animate(
-              [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
-              { duration: 380, easing: 'ease-out' }
-            );
+            bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
             navigator.vibrate?.(12);
             showToast('Removed from saved');
             handleUnsave();
           }}
           aria-label="Remove bookmark"
-          style={{
-            width: 44, flexShrink: 0, alignSelf: 'stretch', borderRadius: 10,
-            background: 'rgba(34,211,165,0.12)',
-            backdropFilter: 'blur(16px) saturate(2)',
-            WebkitBackdropFilter: 'blur(16px) saturate(2)',
-            border: '0.5px solid rgba(34,211,165,0.4)',
-            boxShadow: 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)',
-            color: '#22d3a5',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer',
-            transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',
-            WebkitTapHighlightColor: 'transparent',
-          }}
+          style={BOOKMARK_BTN_STYLE}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
@@ -166,18 +157,7 @@ interface ProgramCardProps {
 function ProgramCard({ p, index, onUnsave, isInitial }: ProgramCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const bmkRef  = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el || isInitial) return;
-    const delay = `${Math.min(index ?? 0, 6) * 0.03}s`;
-    observeCard(el, () => {
-      el.style.setProperty('--card-delay', delay);
-      el.classList.remove('card-before-reveal');
-      el.classList.add('card-entrance');
-    });
-    return () => unobserveCard(el);
-  }, [index, isInitial]);
+  useCardEntrance(cardRef, index, isInitial);
 
   function handleUnsave() {
     const el = cardRef.current;
@@ -212,28 +192,13 @@ function ProgramCard({ p, index, onUnsave, isInitial }: ProgramCardProps) {
         <button
           ref={bmkRef}
           onClick={() => {
-            bmkRef.current?.animate(
-              [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
-              { duration: 380, easing: 'ease-out' }
-            );
+            bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
             navigator.vibrate?.(12);
             showToast('Removed from saved');
             handleUnsave();
           }}
           aria-label="Remove bookmark"
-          style={{
-            width: 44, flexShrink: 0, alignSelf: 'stretch', borderRadius: 10,
-            background: 'rgba(34,211,165,0.12)',
-            backdropFilter: 'blur(16px) saturate(2)',
-            WebkitBackdropFilter: 'blur(16px) saturate(2)',
-            border: '0.5px solid rgba(34,211,165,0.4)',
-            boxShadow: 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)',
-            color: '#22d3a5',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer',
-            transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',
-            WebkitTapHighlightColor: 'transparent',
-          }}
+          style={BOOKMARK_BTN_STYLE}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>

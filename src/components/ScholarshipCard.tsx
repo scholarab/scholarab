@@ -1,9 +1,9 @@
-import { useRef, useEffect, memo } from 'react';
+import { useRef, memo } from 'react';
 import { track } from '@vercel/analytics';
 import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.ts';
 import { getStatus } from '../hooks/useScholarships.ts';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
-import { observeCard, unobserveCard } from '../lib/cardObserver.ts';
+import { useCardEntrance } from '../hooks/useCardEntrance.ts';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 
 interface ScholarshipCardProps {
@@ -22,55 +22,28 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
     ? Math.ceil((new Date(scholarship.deadline! + 'T00:00:00').getTime() - getToday().getTime()) / 86400000)
     : null;
   const deadlineSoon = daysLeft !== null && daysLeft <= 30;
-  const accentColor  = (CATEGORY_BADGE[scholarship.category ?? ''] || DEFAULT_BADGE).color;
+  const badge        = CATEGORY_BADGE[scholarship.category ?? ''] || DEFAULT_BADGE;
   const isUpcoming   = status === 'future';
   const amountColor  = isClosed ? 'text-gray-300 dark:text-white/20' : 'text-[#22d3a5]';
   const slug         = scholarship._slug ?? generateSlug(scholarship.title);
   const cardRef = useRef<HTMLDivElement>(null);
   const bmkRef  = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    const delay = `${Math.min(index ?? 0, 6) * 0.03}s`;
-    if (isInitial) {
-      if (isFiltered) {
-        el.style.setProperty('--card-delay', delay);
-        el.classList.add('card-entrance-filter');
-      }
-      return;
-    }
-    observeCard(el, () => {
-      el.style.setProperty('--card-delay', delay);
-      el.classList.remove('card-before-reveal');
-      el.classList.add(isFiltered ? 'card-entrance-filter' : 'card-entrance');
-    });
-    return () => unobserveCard(el);
-  }, [index, isFiltered, isInitial]);
+  useCardEntrance(cardRef, index, isInitial, isFiltered);
 
   return (
     <div
       ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card p-5`}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        height: '100%',
-        minHeight: 280,
-        opacity: isClosed ? 0.45 : isUpcoming ? 0.75 : undefined,
-        borderTop: `2px solid ${accentColor}`,
-      }}
+      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col justify-between h-full`}
+      style={{ minHeight: 280, opacity: isClosed ? 0.45 : isUpcoming ? 0.75 : undefined, borderTop: `2px solid ${badge.color}` }}
     >
-      {/* TOP SECTION */}
-      <div style={{ flexGrow: 1 }}>
-        {/* Category badge */}
+      <div className="grow">
         <div className="flex items-start justify-between gap-2 mb-3">
-          {scholarship.category ? (() => { const badge = CATEGORY_BADGE[scholarship.category] || DEFAULT_BADGE; return (
+          {scholarship.category ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
               <span style={{ fontSize: 16 }}>{badge.emoji}</span>
               {scholarship.category}
             </span>
-          ); })() : <span />}
+          ) : <span />}
         </div>
 
         {/* Title + audience */}
@@ -108,8 +81,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
         </div>
       </div>
 
-      {/* BOTTOM SECTION */}
-      <div style={{ paddingTop: 16, display: 'flex', gap: 8 }}>
+      <div className="pt-4 flex gap-2">
         <a href={`/scholarships/${slug}`}
           className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:border-white/[0.18] dark:text-white/60 dark:hover:border-white/30 dark:hover:text-white/80 transition-colors">
           View Details

@@ -91,23 +91,7 @@ const {
     <SpeedInsights />
     <Analytics />
     <script>
-      // ── Slow connection animation kill ─────────────────────
-      const conn = (navigator as any).connection;
-      const effectiveType = conn?.effectiveType;
-      const hardwareConcurrency = navigator.hardwareConcurrency ?? 4;
-      const deviceMemory = (navigator as any).deviceMemory ?? 4;
-
-      if (effectiveType === '2g' || effectiveType === 'slow-2g') {
-        document.body.classList.add('no-animations');
-      } else if (
-        effectiveType === '3g' ||
-        hardwareConcurrency <= 2 ||
-        deviceMemory <= 1
-      ) {
-        document.body.classList.add('animation-reduced');
-      }
-
-      // ── Prevent same-page navigation (causes black flash) ──
+      // Prevent same-page navigation (causes black flash)
       document.addEventListener('click', (e) => {
         const a = (e.target as HTMLElement).closest('a');
         if (!a) return;
@@ -121,97 +105,7 @@ const {
         } catch {}
       }, { capture: true });
 
-      // ── Prefetch on hover / touchstart ─────────────────────
-      const prefetched = new Set();
-
-      function prefetch(href: string) {
-        if (!href || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('#')) return;
-        if (prefetched.has(href)) return;
-        prefetched.add(href);
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = href;
-        document.head.appendChild(link);
-      }
-
-      document.addEventListener('mousedown', (e) => {
-        const a = (e.target as HTMLElement).closest('a');
-        if (a) prefetch(a.getAttribute('href') ?? '');
-      }, { passive: true });
-
-      document.addEventListener('touchstart', (e) => {
-        const a = (e.target as HTMLElement).closest('a');
-        if (a) prefetch(a.getAttribute('href') ?? '');
-      }, { passive: true });
-
-      // Preload key pages once on first load
-      document.addEventListener('astro:page-load', () => {
-        const pagesToPreload = ['/', '/scholarships', '/programs', '/saved', '/about'];
-        pagesToPreload.forEach(href => {
-          if (prefetched.has(href)) return;
-          prefetched.add(href);
-          const link = document.createElement('link');
-          link.rel = 'prefetch';
-          link.href = href;
-          document.head.appendChild(link);
-        });
-      }, { once: true });
-
-      // ── Navigation progress bar ────────────────────────────
-      const bar = document.createElement('div');
-      bar.id = 'nav-progress';
-      bar.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: #22d3a5;
-        z-index: 999999;
-        transform: scaleX(0);
-        transform-origin: left center;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        pointer-events: none;
-        opacity: 0;
-      `;
-      document.body.appendChild(bar);
-
-      let progressT1: number | null = null;
-      let progressT2: number | null = null;
-      let progressT3: number | null = null;
-
-      function startProgress() {
-        if (progressT1 !== null) { clearTimeout(progressT1); progressT1 = null; }
-        if (progressT2 !== null) { clearTimeout(progressT2); progressT2 = null; }
-        if (progressT3 !== null) { clearTimeout(progressT3); progressT3 = null; }
-        bar.style.opacity = '1';
-        bar.style.transform = 'scaleX(0)';
-        requestAnimationFrame(() => {
-          bar.style.transition = 'transform 0.15s ease, opacity 0.3s ease';
-          bar.style.transform = 'scaleX(0.85)';
-          progressT1 = window.setTimeout(() => {
-            progressT1 = null;
-            bar.style.transition = 'transform 1s ease, opacity 0.3s ease';
-            bar.style.transform = 'scaleX(0.95)';
-          }, 150);
-        });
-      }
-
-      function finishProgress() {
-        if (progressT1 !== null) { clearTimeout(progressT1); progressT1 = null; }
-        bar.style.transition = 'transform 0.08s ease, opacity 0.3s ease';
-        bar.style.transform = 'scaleX(1)';
-        progressT2 = window.setTimeout(() => {
-          progressT2 = null;
-          bar.style.opacity = '0';
-          progressT3 = window.setTimeout(() => {
-            progressT3 = null;
-            bar.style.transform = 'scaleX(0)';
-          }, 300);
-        }, 80);
-      }
-
-      // Phase 1 — Ripple + haptic on teal buttons
+      // Ripple + haptic on teal buttons
       document.addEventListener('click', (e) => {
         const btn = (e.target as HTMLElement).closest('.btn-teal');
         if (!btn) return;
@@ -231,28 +125,13 @@ const {
         ).onfinish = () => ripple.remove();
       }, { passive: true });
 
-      // Phase 1 — Haptic on filter/sort pills
+      // Haptic on filter/sort pills
       document.addEventListener('click', (e) => {
         const pill = (e.target as HTMLElement).closest('.sort-pill, .tab-pill, .bn-tab');
         if (pill) navigator.vibrate?.(6);
       }, { passive: true });
 
-      // Use Astro ViewTransitions lifecycle events
-      document.addEventListener('astro:before-preparation', startProgress);
-      document.addEventListener('astro:page-load', finishProgress);
-
-      // ── will-change cleanup after card entrance ────────────
-      // GPU layers stay promoted forever if will-change is never removed,
-      // wasting VRAM. Release each card's compositor layer as soon as its
-      // entrance animation finishes. (Telegram Web principle: clean up layers)
-      document.addEventListener('animationend', (e) => {
-        const el = e.target as HTMLElement;
-        if (el.classList.contains('card-entrance') || el.classList.contains('card-entrance-filter')) {
-          el.style.willChange = 'auto';
-        }
-      }, { passive: true });
-
-      // ── Service worker registration ─────────────────────────
+      // Service worker registration
       document.addEventListener('astro:page-load', () => {
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('/sw.js');

@@ -1,10 +1,9 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { track } from '@vercel/analytics';
-import { formatDeadline, generateSlug, showToast, showConfetti } from '../lib/utils.ts';
+import { formatDeadline, generateSlug, showToast, showConfetti, getToday } from '../lib/utils.ts';
 import { getStatus } from '../hooks/usePrograms.ts';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
-import { getToday } from '../lib/utils.ts';
-import { observeCard, unobserveCard } from '../lib/cardObserver.ts';
+import { useCardEntrance } from '../hooks/useCardEntrance.ts';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 
 interface ProgramCardProps {
@@ -26,7 +25,7 @@ function isWithin30Days(deadlineStr: string | null | undefined): boolean {
 export default function ProgramCard({ program, index, isSaved, onToggleSave, isFiltered, isInitial }: ProgramCardProps) {
   const status      = getStatus(program);
   const isClosed    = status === 'closed';
-  const accentColor = (CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE).color;
+  const badge       = CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE;
 
   const deadlineUrgent = !isClosed && status !== 'tba' && isWithin30Days(program.deadline);
   const deadlineColor = isClosed
@@ -39,48 +38,20 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
 
   const cardRef = useRef<HTMLDivElement>(null);
   const bmkRef  = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    const delay = `${Math.min(index ?? 0, 6) * 0.03}s`;
-    if (isInitial) {
-      if (isFiltered) {
-        el.style.setProperty('--card-delay', delay);
-        el.classList.add('card-entrance-filter');
-      }
-      return;
-    }
-    observeCard(el, () => {
-      el.style.setProperty('--card-delay', delay);
-      el.classList.remove('card-before-reveal');
-      el.classList.add(isFiltered ? 'card-entrance-filter' : 'card-entrance');
-    });
-    return () => unobserveCard(el);
-  }, [index, isFiltered, isInitial]);
+  useCardEntrance(cardRef, index, isInitial, isFiltered);
 
   return (
     <div
       ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card p-5`}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        minHeight: 320,
-        opacity: isClosed ? 0.45 : undefined,
-        borderTop: `2px solid ${accentColor}`,
-      }}
+      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col justify-between`}
+      style={{ minHeight: 320, opacity: isClosed ? 0.45 : undefined, borderTop: `2px solid ${badge.color}` }}
     >
-      {/* TOP SECTION */}
       <div>
-        {/* Category badge */}
         <div className="flex items-start justify-between gap-2 mb-3">
-          {(() => { const badge = CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE; return (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
-              <span style={{ fontSize: 16 }}>{badge.emoji}</span>
-              {program.category}
-            </span>
-          ); })()}
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
+            <span style={{ fontSize: 16 }}>{badge.emoji}</span>
+            {program.category}
+          </span>
         </div>
 
         {/* Name + provider + meta + description + stipend */}
@@ -124,8 +95,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
         </div>
       </div>
 
-      {/* BOTTOM SECTION */}
-      <div style={{ paddingTop: 16, display: 'flex', gap: 8 }}>
+      <div className="pt-4 flex gap-2">
         <a href={`/programs/${generateSlug(program.name)}`}
           className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:border-white/[0.18] dark:text-white/60 dark:hover:border-white/30 dark:hover:text-white/80 transition-colors">
           View Details

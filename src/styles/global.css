@@ -31,12 +31,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Isolate main content stacking context ────────────────────
-   Cards with transform: scale create new stacking contexts. Without
-   isolation, a card's stacking context can escape above the fixed/sticky
-   nav (z-index: 500). isolation: isolate creates a top-level stacking
-   context for #main-content at z-index: auto, which always sits below
-   the nav's explicit z-index: 500 in the root stacking context.      */
+/* Isolate main content so card stacking contexts don't escape above the nav */
 #main-content {
   isolation: isolate;
 }
@@ -108,12 +103,7 @@ h1, h2 {
   letter-spacing: -0.02em;
 }
 
-/* ── Stretched card link (Bootstrap pattern) ─────────────── */
-/* The <a class="card-nav-link"> title link sits at z-index:0. Card
-   navigation is handled by a JS onClick on the card div; this ::after
-   is kept for cursor/hover affordance only and must NOT intercept
-   pointer events (buttons use data-no-card-nav to opt out of the JS
-   handler, no z-index fighting needed). */
+/* Stretched card link — ::after is for cursor affordance only, not pointer events */
 .card-nav-link {
   color: inherit;
   text-decoration: none;
@@ -139,9 +129,7 @@ h1, h2 {
   background: rgba(255, 255, 255, 0.04);
   border: 0.5px solid rgba(255, 255, 255, 0.08);
 }
-/* Hover glow via ::after opacity — box-shadow on the element itself forces
-   a repaint every animation frame. An ::after with opacity:0→1 is
-   compositor-only: zero paint cost on hover. (Telegram Web principle #1) */
+/* Hover glow via ::after opacity — compositor-only, zero repaint cost */
 .card-interactive {
   transition: transform var(--t-standard) var(--spring);
   -webkit-tap-highlight-color: transparent;
@@ -155,12 +143,7 @@ h1, h2 {
   opacity: 0;
   transition: opacity var(--t-standard) ease;
   pointer-events: none;
-  /* z-index: -1 places ::after below ALL card content in the stacking context.
-     Firefox has a known quirk where pointer-events: none on a positioned
-     pseudo-element at opacity:1 (hover) doesn't reliably pass clicks through.
-     Below z-index 0, it's physically unreachable by pointer events. The
-     box-shadow still extends outside the card and is visible as the glow. */
-  z-index: -1;
+  z-index: -1; /* below card content so pointer events pass through */
 }
 .dark .card-interactive::after {
   box-shadow: 0 0 0 2px var(--card-glow, rgba(var(--brand-rgb), 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
@@ -205,9 +188,6 @@ h1, h2 {
   background: rgba(150,150,150,0.07) !important;
   border-color: rgba(150,150,150,0.1) !important;
   border-top-color: rgba(150,150,150,0.1) !important;
-  /* GPU-promote the card before its entrance animation starts so the
-     compositor layer exists by the time cardEntrance fires.
-     (Telegram Web principle: promote layers before they animate) */
   will-change: transform;
 }
 .card.card-before-reveal::before {
@@ -223,7 +203,6 @@ h1, h2 {
   transform: translateX(-100%);
   animation: shimmer 1.5s ease-in-out infinite;
   pointer-events: none;
-  /* GPU-promote the shimmer sweep so it never triggers a repaint */
   will-change: transform;
 }
 .card-before-reveal * { opacity: 0 !important; }
@@ -437,38 +416,3 @@ h1, h2 {
   transform: scale(0);
 }
 
-/* ── Slow connection animation kill switch ───────────────────────
-   Applied via JS when navigator.connection.effectiveType is 2g/slow-2g.
-   TO REVERT: delete from this comment to the closing } below         */
-.no-animations *,
-.no-animations *::before,
-.no-animations *::after {
-  animation: none !important;
-  animation-duration: 0.001ms !important;
-  animation-delay: 0ms !important;
-  animation-iteration-count: 1 !important;
-  transition: none !important;
-  transition-duration: 0.001ms !important;
-  transition-delay: 0ms !important;
-  scroll-behavior: auto !important;
-}
-.no-animations {
-  --t-card: 0.001ms !important;
-  --t-press: 0.001ms !important;
-  --t-nav: 0.001ms !important;
-  --t-standard: 0.001ms !important;
-}
-
-.animation-reduced body {
-  animation: none;
-}
-.animation-reduced {
-  --t-card: 0.15s;
-  --t-press: 0.05s;
-  --t-nav: 150ms;
-  --t-standard: 0.1s;
-}
-.animation-reduced .card-entrance,
-.animation-reduced .card-entrance-filter {
-  --card-delay: 0s !important;
-}
