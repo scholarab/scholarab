@@ -19,7 +19,6 @@ const GRADE_OPTIONS = [
   { value: '10', label: 'Grade 10' },
   { value: '11', label: 'Grade 11' },
   { value: '12', label: 'Grade 12 — in high school' },
-  { value: 'post-secondary', label: 'First year — university or college' },
 ]
 
 const CITY_OPTIONS = [
@@ -322,14 +321,6 @@ export default function EligibilityQuiz({ scholarships }: Props) {
             <Chip label="Female" active={identifiesAsFemale === true} onClick={() => setIdentifiesAsFemale(prev => prev === true ? null : true)} />
             <Chip label="Indigenous (First Nations, Métis, Inuit)" active={identifiesAsIndigenous === true} onClick={() => toggleIdentity(identifiesAsIndigenous, setIdentifiesAsIndigenous)} />
             <Chip label="Person of colour" active={identifiesAsBIPOC === true} onClick={() => toggleIdentity(identifiesAsBIPOC, setIdentifiesAsBIPOC)} />
-          </div>
-        </div>
-
-        <div className="mb-5">
-          <p className="text-sm text-gray-700 dark:text-white/60 mb-2.5 font-medium">My situation</p>
-          <div className="flex flex-wrap gap-2">
-            <Chip label="In apprenticeship (RAP / CTS)" active={inApprenticeship === true} onClick={() => toggleIdentity(inApprenticeship, setInApprenticeship)} />
-            <Chip label="In foster / government care" active={inFosterCare === true} onClick={() => toggleIdentity(inFosterCare, setInFosterCare)} />
           </div>
         </div>
 
