@@ -166,24 +166,22 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
       transform: translateZ(0);
     }
     .glass-nav {
-      -webkit-backdrop-filter: blur(48px) saturate(160%) brightness(110%);
-      backdrop-filter: blur(48px) saturate(160%) brightness(110%);
-      background: rgba(255, 255, 255, 0.30);
-      border: 0.5px solid rgba(255, 255, 255, 0.70);
+      -webkit-backdrop-filter: blur(40px) saturate(150%);
+      backdrop-filter: blur(40px) saturate(150%);
+      /* Very low opacity — let blur do the work, avoid grey wash */
+      background: rgba(255, 255, 255, 0.12);
+      border: 0.5px solid rgba(255, 255, 255, 0.60);
+      /* Inset specular only — no outer shadows that cast onto content */
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.95),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.04),
-        0 8px 32px rgba(0, 0, 0, 0.10),
-        0 2px 8px rgba(0, 0, 0, 0.06);
+        inset 0 1px 0 rgba(255, 255, 255, 0.90),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.04);
     }
     .dark .glass-nav {
-      background: rgba(255, 255, 255, 0.07);
-      border: 0.5px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.05);
+      border: 0.5px solid rgba(255, 255, 255, 0.13);
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.18),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.20),
-        0 8px 32px rgba(0, 0, 0, 0.45),
-        0 2px 8px rgba(0, 0, 0, 0.25);
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.15);
     }
     .glass-nav.scrolled::after {
       opacity: 0 !important;
