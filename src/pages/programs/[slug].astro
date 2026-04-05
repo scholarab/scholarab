@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import DetailLayout from '../../components/DetailLayout.astro';
-import SchemaLD from '../../components/SchemaLD.astro';
 import programs from '../../data/research-programs.json';
 import { generateSlug } from '../../lib/utils.ts';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.ts';
@@ -71,8 +70,8 @@ const breadcrumbJson = {
   currentPath="/programs"
   containerClass="max-w-2xl"
 >
-  <SchemaLD schema={ldJson} slot="head" />
-  <SchemaLD schema={breadcrumbJson} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
 
   <DetailLayout
     badge={badge}
@@ -88,7 +87,6 @@ const breadcrumbJson = {
     ctaLabel="Learn More →"
     itemId={program.id}
     itemType="program"
-    pageUrl={canonical}
   >
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-gray-100 dark:border-white/[0.07] pt-6">
       <div>
