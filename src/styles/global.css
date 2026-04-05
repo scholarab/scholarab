@@ -61,8 +61,13 @@ body {
 }
 
 /* Disable iOS Safari rubber-band bounce at scroll boundaries */
+/* Background on html (not just body) prevents dark flash during view transitions */
 html {
   overscroll-behavior: none;
+  background-color: #f5f5fa;
+}
+html.dark {
+  background-color: #0a0a0f;
 }
 
 @keyframes orbs-drift {
