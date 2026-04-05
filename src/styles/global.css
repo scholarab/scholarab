@@ -366,6 +366,15 @@ h1, h2 {
 ::view-transition-new(root) {
   animation: page-in 0.28s cubic-bezier(0, 0, 0.2, 1) both;
 }
+/* Mobile: instant navigation — eliminates flash/jerk from View Transitions API on iOS Safari */
+@media (max-width: 768px) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none; }
