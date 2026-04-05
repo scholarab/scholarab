@@ -103,6 +103,20 @@ const {
         document.body.classList.add('animation-reduced');
       }
 
+      // ── Prevent same-page navigation (causes black flash) ──
+      document.addEventListener('click', (e) => {
+        const a = (e.target as HTMLElement).closest('a');
+        if (!a) return;
+        const href = a.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
+        try {
+          const target = new URL(href, window.location.href);
+          if (target.pathname === window.location.pathname && target.search === window.location.search) {
+            e.preventDefault();
+          }
+        } catch {}
+      }, { capture: true });
+
       // ── Prefetch on hover / touchstart ─────────────────────
       const prefetched = new Set();
 
