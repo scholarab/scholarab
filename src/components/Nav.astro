@@ -24,7 +24,7 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
         <a href="/programs" aria-current={currentPath.startsWith('/programs') ? 'page' : undefined} class={navClsStart('/programs')}>Programs</a>
         <a href="/saved" aria-current={currentPath === '/saved' ? 'page' : undefined} class={navCls('/saved')}>Saved</a>
         <a href="/about" aria-current={currentPath === '/about' ? 'page' : undefined} class={navCls('/about')}>About</a>
-        <button id="theme-toggle" aria-label="Toggle color theme" class="w-8 h-8 flex items-center justify-center rounded-lg text-lg leading-none text-gray-500 hover:text-gray-800 hover:bg-black/5 dark:text-white/40 dark:hover:text-white/80 dark:hover:bg-white/5 transition-colors">🌙</button>
+        <button id="theme-toggle" aria-label="Toggle color theme" class="hidden md:flex w-8 h-8 items-center justify-center rounded-lg text-lg leading-none text-gray-500 hover:text-gray-800 hover:bg-black/5 dark:text-white/40 dark:hover:text-white/80 dark:hover:bg-white/5 transition-colors">🌙</button>
       </div>
     </nav>
   </div>
@@ -32,6 +32,10 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
 
 <script>
   function applyTheme() {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      document.documentElement.classList.add('dark');
+      return;
+    }
     const theme = localStorage.getItem('theme') ?? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', theme === 'dark');
     const btn = document.getElementById('theme-toggle');
@@ -39,6 +43,7 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
   }
 
   function handleToggle() {
+    if (window.matchMedia('(max-width: 768px)').matches) return;
     const isDark = document.documentElement.classList.contains('dark');
     const next = isDark ? 'light' : 'dark';
     const overlay = document.createElement('div');

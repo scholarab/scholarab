@@ -60,8 +60,12 @@ const {
     <script is:inline>
       (function () {
         try {
-          var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          document.documentElement.classList.toggle('dark', t === 'dark');
+          if (window.innerWidth <= 768) {
+            document.documentElement.classList.add('dark');
+          } else {
+            var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.classList.toggle('dark', t === 'dark');
+          }
         } catch (e) {
           document.documentElement.classList.add('dark');
         }
