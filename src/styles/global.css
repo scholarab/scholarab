@@ -60,11 +60,13 @@ body {
     radial-gradient(ellipse at center, rgba(167,139,250,0.09) 0%, transparent 70%);
 }
 
-/* Disable iOS Safari rubber-band bounce at scroll boundaries */
+/* Disable iOS Safari rubber-band bounce at scroll boundaries (desktop only) */
 /* Background on html (not just body) prevents dark flash during view transitions */
 html {
-  overscroll-behavior: none;
   background-color: #f5f5fa;
+}
+@media (min-width: 769px) {
+  html { overscroll-behavior: none; }
 }
 html.dark {
   background-color: #0a0a0f;
