@@ -1,23 +1,33 @@
 import { useRef, useEffect, memo } from 'react';
 import { track } from '@vercel/analytics';
-import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.jsx';
-import { getStatus } from '../hooks/useScholarships.js';
-import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
-import { observeCard, unobserveCard } from '../lib/cardObserver.js';
+import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.ts';
+import { getStatus } from '../hooks/useScholarships.ts';
+import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
+import { observeCard, unobserveCard } from '../lib/cardObserver.ts';
+import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 
-function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }) {
+interface ScholarshipCardProps {
+  scholarship: ScholarshipWithMeta;
+  index: number;
+  isSaved: boolean;
+  onToggleSave: () => void;
+  isFiltered: boolean;
+  isInitial: boolean;
+}
+
+function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }: ScholarshipCardProps) {
   const status       = getStatus(scholarship);
   const isClosed     = status === 'closed';
   const daysLeft     = status === 'active'
-    ? Math.ceil((new Date(scholarship.deadline + 'T00:00:00') - getToday()) / 86400000)
+    ? Math.ceil((new Date(scholarship.deadline! + 'T00:00:00').getTime() - getToday().getTime()) / 86400000)
     : null;
   const deadlineSoon = daysLeft !== null && daysLeft <= 30;
-  const accentColor  = (CATEGORY_BADGE[scholarship.category] || DEFAULT_BADGE).color;
+  const accentColor  = (CATEGORY_BADGE[scholarship.category ?? ''] || DEFAULT_BADGE).color;
   const isUpcoming   = status === 'future';
   const amountColor  = isClosed ? 'text-gray-300 dark:text-white/20' : 'text-[#22d3a5]';
   const slug         = generateSlug(scholarship.title);
-  const cardRef = useRef(null);
-  const bmkRef  = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const bmkRef  = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;

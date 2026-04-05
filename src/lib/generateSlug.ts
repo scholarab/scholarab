@@ -1,5 +1,5 @@
 /** Shared by Astro pages, React, and scripts/generate-sitemap.js — keep single source of truth. */
-export function generateSlug(title) {
+export function generateSlug(title: string): string {
   return String(title)
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '')

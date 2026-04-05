@@ -3,8 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import DetailLayout from '../../components/DetailLayout.astro';
 import SchemaLD from '../../components/SchemaLD.astro';
 import programs from '../../data/research-programs.json';
-import { generateSlug } from '../../lib/utils.jsx';
-import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.js';
+import { generateSlug } from '../../lib/utils.ts';
+import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.ts';
 
 export async function getStaticPaths() {
   return programs.map(p => ({

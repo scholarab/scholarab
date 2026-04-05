@@ -6,7 +6,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { generateSlug } from '../src/lib/generateSlug.js';
+import { generateSlug } from '../src/lib/generateSlug.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

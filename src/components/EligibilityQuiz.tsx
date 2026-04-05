@@ -2,8 +2,8 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import type { Scholarship } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll } from '../lib/eligibility-matcher'
-import { getSaved, toggleSaved } from '../lib/tracker.js'
-import { generateSlug } from '../lib/generateSlug.js'
+import { getSaved, toggleSaved } from '../lib/tracker.ts'
+import { generateSlug } from '../lib/generateSlug.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 

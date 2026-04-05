@@ -366,14 +366,6 @@ h1, h2 {
 ::view-transition-new(root) {
   animation: page-in 0.28s cubic-bezier(0, 0, 0.2, 1) both;
 }
-/* Mobile: disable view-transition animations — JS handles fade instead */
-@media (max-width: 768px) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none !important;
-    opacity: 1 !important;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none; }

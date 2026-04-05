@@ -1,22 +1,32 @@
 import { useRef, useEffect } from 'react';
 import { track } from '@vercel/analytics';
-import { formatDeadline, generateSlug, showToast, showConfetti } from '../lib/utils.jsx';
-import { getStatus } from '../hooks/usePrograms.js';
-import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.js';
-import { getToday } from '../lib/utils.jsx';
-import { observeCard, unobserveCard } from '../lib/cardObserver.js';
+import { formatDeadline, generateSlug, showToast, showConfetti } from '../lib/utils.ts';
+import { getStatus } from '../hooks/usePrograms.ts';
+import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
+import { getToday } from '../lib/utils.ts';
+import { observeCard, unobserveCard } from '../lib/cardObserver.ts';
+import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 
-function isWithin30Days(deadlineStr) {
+interface ProgramCardProps {
+  program: ProgramWithMeta;
+  index: number;
+  isSaved: boolean;
+  onToggleSave: () => void;
+  isFiltered: boolean;
+  isInitial: boolean;
+}
+
+function isWithin30Days(deadlineStr: string | null | undefined): boolean {
   if (!deadlineStr || deadlineStr === 'TBA' || deadlineStr === 'Ongoing') return false;
   const deadline = new Date(deadlineStr + 'T00:00:00');
-  const diff = (deadline - getToday()) / (1000 * 60 * 60 * 24);
+  const diff = (deadline.getTime() - getToday().getTime()) / (1000 * 60 * 60 * 24);
   return diff >= 0 && diff <= 30;
 }
 
-export default function ProgramCard({ program, index, isSaved, onToggleSave, isFiltered, isInitial }) {
+export default function ProgramCard({ program, index, isSaved, onToggleSave, isFiltered, isInitial }: ProgramCardProps) {
   const status      = getStatus(program);
   const isClosed    = status === 'closed';
-  const accentColor = (CATEGORY_BADGE[program.category] || DEFAULT_BADGE).color;
+  const accentColor = (CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE).color;
 
   const deadlineUrgent = !isClosed && status !== 'tba' && isWithin30Days(program.deadline);
   const deadlineColor = isClosed
@@ -27,8 +37,8 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
     ? ''
     : 'text-gray-500 dark:text-white/40';
 
-  const cardRef = useRef(null);
-  const bmkRef  = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const bmkRef  = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
@@ -65,7 +75,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
       <div>
         {/* Category badge */}
         <div className="flex items-start justify-between gap-2 mb-3">
-          {(() => { const badge = CATEGORY_BADGE[program.category] || DEFAULT_BADGE; return (
+          {(() => { const badge = CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE; return (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
               <span style={{ fontSize: 16 }}>{badge.emoji}</span>
               {program.category}

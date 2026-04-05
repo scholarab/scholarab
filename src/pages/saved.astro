@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
-import SavedList from '../components/SavedList.jsx';
+import SavedList from '../components/SavedList.tsx';
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
 ---

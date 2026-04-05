@@ -2,7 +2,7 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { generateSlug } from '../src/lib/generateSlug.js';
+import { generateSlug } from '../src/lib/generateSlug.ts';
 import parseJson from 'secure-json-parse';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

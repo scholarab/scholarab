@@ -1,12 +1,19 @@
 import { useState } from 'react';
 
+interface ShareButtonsProps {
+  title?: string;
+  pageUrl?: string;
+}
+
+type ShareState = 'idle' | 'ready' | 'missing';
+
 const btnClass =
   'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors text-gray-500 dark:text-white/40 border-gray-200 dark:border-white/10 hover:border-[#22d3a5] hover:text-[#22d3a5] dark:hover:border-[#22d3a5] dark:hover:text-[#22d3a5]';
 
-function useAppShare(appScheme) {
-  const [state, setState] = useState('idle'); // 'idle' | 'ready' | 'missing'
+function useAppShare(appScheme: string) {
+  const [state, setState] = useState<ShareState>('idle');
 
-  function share(url) {
+  function share(url: string) {
     navigator.clipboard.writeText(url).catch(() => {});
 
     // Detect if the app opened by listening for the page becoming hidden.
@@ -36,7 +43,7 @@ function useAppShare(appScheme) {
   return { state, share };
 }
 
-export default function ShareButtons({ title, pageUrl }) {
+export default function ShareButtons({ title, pageUrl }: ShareButtonsProps) {
   const url = pageUrl ?? (typeof window !== 'undefined' ? window.location.href : '');
   const ig  = useAppShare('instagram://direct/inbox');
   const sc  = useAppShare('snapchat://');

@@ -3,8 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import DetailLayout from '../../components/DetailLayout.astro';
 import SchemaLD from '../../components/SchemaLD.astro';
 import { loadScholarships } from '../../lib/data-loader';
-import { generateSlug } from '../../lib/utils.jsx';
-import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.js';
+import { generateSlug } from '../../lib/utils.ts';
+import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.ts';
 
 export async function getStaticPaths() {
   const scholarships = await loadScholarships();

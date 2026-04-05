@@ -1,12 +1,18 @@
-export default function Pagination({ page, totalPages, onPageChange }) {
+interface PaginationProps {
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
+export default function Pagination({ page, totalPages, onPageChange }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   // Build page number list with ellipsis for large page counts
-  function getPageNumbers() {
+  function getPageNumbers(): (number | '…')[] {
     if (totalPages <= 7) {
       return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
-    const pages = [1];
+    const pages: (number | '…')[] = [1];
     if (page > 3) pages.push('…');
     for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
       pages.push(i);
@@ -43,7 +49,7 @@ export default function Pagination({ page, totalPages, onPageChange }) {
         ) : (
           <button
             key={p}
-            onClick={() => onPageChange(p)}
+            onClick={() => onPageChange(p as number)}
             aria-current={p === page ? 'page' : undefined}
             aria-label={`Page ${p}`}
             className={`${btnPage} ${p === page ? btnActive : btnInactive}`}

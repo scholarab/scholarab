@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships } from '../lib/data-loader';
-import ScholarshipList from '../components/ScholarshipList.jsx';
+import ScholarshipList from '../components/ScholarshipList.tsx';
 const raw = await loadScholarships();
 // Enrich at build time — avoids regex/Date parsing on every user's device
 const scholarships = raw.map(s => ({

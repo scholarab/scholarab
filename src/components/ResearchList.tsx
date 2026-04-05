@@ -1,30 +1,20 @@
 import { useMemo } from 'react';
 import { Drawer } from 'vaul';
-import { useScholarships, PAGE_SIZE } from '../hooks/useScholarships.js';
-import ScholarshipCard from './ScholarshipCard.jsx';
-import Pagination from './Pagination.jsx';
+import { usePrograms, PAGE_SIZE } from '../hooks/usePrograms.ts';
+import ProgramCard from './ProgramCard.tsx';
+import Pagination from './Pagination.tsx';
+import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 
-const REGION_DOT_COLORS = {
-  'Medicine Hat': '#f97316',
-  'Alberta-wide':  '#22d3a5',
-  'National':      '#3b82f6',
-};
-
-const REGION_PILLS = [
-  { value: null,           label: 'All',          iconKey: null },
-  { value: 'Medicine Hat', label: 'Medicine Hat',  iconKey: 'Medicine Hat' },
-  { value: 'Alberta-wide', label: 'Alberta',       iconKey: 'Alberta-wide' },
-  { value: 'National',     label: 'National',      iconKey: 'National' },
-];
+interface ResearchListProps {
+  programs: ProgramWithMeta[];
+}
 
 const SORT_OPTIONS = [
   { value: 'featured',    label: 'Featured' },
   { value: 'closest_due', label: 'Earliest Deadline' },
-  { value: 'highest_pay', label: 'Highest Amount' },
-  { value: 'lowest_pay',  label: 'Lowest Amount' },
-];
+] as const;
 
-export default function ScholarshipList({ initialScholarships }) {
+export default function ResearchList({ programs }: ResearchListProps) {
   const {
     filtered,
     visibleItems,
@@ -33,18 +23,23 @@ export default function ScholarshipList({ initialScholarships }) {
     handlePageChange,
     sortBy,
     setSort,
-    selectedRegion,
-    setRegion,
+    selectedCategory,
+    setCategory,
     sheetOpen,
     setSheetOpen,
     hasActiveFilters,
-    regionKey,
+    categoryKey,
     savedIds,
     handleToggleSave,
     isFiltered,
-  } = useScholarships(initialScholarships);
+  } = usePrograms(programs);
 
   const savedSet = useMemo(() => new Set(savedIds), [savedIds]);
+
+  const categories = useMemo(
+    () => ['all', ...[...new Set(programs.map(p => p.category))].sort()],
+    [programs]
+  );
 
   const sheetBg  = 'bg-white dark:bg-[#141418]';
   const pillBase = 'flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
@@ -54,7 +49,7 @@ export default function ScholarshipList({ initialScholarships }) {
   return (
     <div>
       <span className="sr-only" aria-live="polite" aria-atomic="true">
-        {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''} shown
+        {filtered.length} program{filtered.length !== 1 ? 's' : ''} shown
       </span>
 
       {/* ── MOBILE: Filter button row ── */}
@@ -64,7 +59,7 @@ export default function ScholarshipList({ initialScholarships }) {
             key={filtered.length}
             style={{ display: 'inline-block', animation: 'countPop 0.3s cubic-bezier(0.34,1.56,0.64,1) both' }}
           >
-            {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
+            {filtered.length} program{filtered.length !== 1 ? 's' : ''}
           </span>
         </p>
         <button
@@ -85,13 +80,12 @@ export default function ScholarshipList({ initialScholarships }) {
         </button>
       </div>
 
-
-      {/* ── Region pills row (mobile + desktop) ── */}
+      {/* ── Category pills (mobile + desktop) ── */}
       <div className="flex chips-row mb-5 gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
-        {REGION_PILLS.map(({ value, label, iconKey }) => {
-          const selected = selectedRegion === value;
+        {categories.map(cat => {
+          const selected = selectedCategory === cat;
           return (
-            <button key={label} onClick={() => setRegion(value)}
+            <button key={cat} onClick={() => setCategory(cat)}
               aria-pressed={selected}
               className={`flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${
                 selected
@@ -99,8 +93,7 @@ export default function ScholarshipList({ initialScholarships }) {
                   : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-400 dark:bg-white/[0.03] dark:text-white/45 dark:border-white/10 dark:hover:border-white/20'
               }`}
               style={selected ? { background: 'rgba(34,211,165,0.1)', border: '0.5px solid rgba(34,211,165,0.3)' } : undefined}>
-              {iconKey && <span style={{ width: 7, height: 7, borderRadius: '50%', background: REGION_DOT_COLORS[value], display: 'inline-block', marginRight: 4, flexShrink: 0 }} />}
-              {label}
+              {cat === 'all' ? 'All' : cat}
             </button>
           );
         })}
@@ -113,7 +106,7 @@ export default function ScholarshipList({ initialScholarships }) {
             key={filtered.length}
             style={{ display: 'inline-block', animation: 'countPop 0.3s cubic-bezier(0.34,1.56,0.64,1) both' }}
           >
-            {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
+            {filtered.length} program{filtered.length !== 1 ? 's' : ''}
           </span>
         </p>
         <div className="flex items-center gap-1.5">
@@ -180,15 +173,15 @@ export default function ScholarshipList({ initialScholarships }) {
       </Drawer.Root>
 
       {/* Card grid */}
-      <div key={`${regionKey}-${sortBy}-${page}`}
+      <div key={`${categoryKey}-${sortBy}-${page}`}
         className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
-        {visibleItems.map((s, i) => (
-          <ScholarshipCard
-            key={s.id}
-            scholarship={s}
+        {visibleItems.map((p, i) => (
+          <ProgramCard
+            key={p.id}
+            program={p}
             index={i}
-            isSaved={savedSet.has(s.id)}
-            onToggleSave={() => handleToggleSave(s.id)}
+            isSaved={savedSet.has(p.id)}
+            onToggleSave={() => handleToggleSave(p.id)}
             isFiltered={isFiltered}
             isInitial={!isFiltered && page === 1 && i < PAGE_SIZE}
           />
@@ -200,9 +193,9 @@ export default function ScholarshipList({ initialScholarships }) {
       {/* Empty state */}
       {filtered.length === 0 && (
         <p className="text-center py-16 text-gray-400 dark:text-white/25">
-          {selectedRegion !== null
-            ? 'No scholarships match your filters.'
-            : 'No scholarships to show.'}
+          {selectedCategory !== 'all'
+            ? 'No programs match your filters.'
+            : 'No programs to show.'}
         </p>
       )}
     </div>

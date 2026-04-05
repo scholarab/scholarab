@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { loadPrograms } from '../lib/data-loader';
-import ResearchList from '../components/ResearchList.jsx';
+import ResearchList from '../components/ResearchList.tsx';
 const raw = await loadPrograms();
 // Enrich at build time — avoids Date parsing on every user's device
 const programs = raw.map(p => ({

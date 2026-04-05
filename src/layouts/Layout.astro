@@ -213,38 +213,6 @@ const {
       document.addEventListener('astro:before-preparation', startProgress);
       document.addEventListener('astro:page-load', finishProgress);
 
-      // ── Mobile: bypass View Transitions API entirely ────────
-      // iOS Safari's view transition DOM-swap causes a black flash that
-      // CSS on ::view-transition cannot reliably prevent. Instead we:
-      // 1. Hide html instantly before swap (user sees #f5f5fa / #0a0a0f bg)
-      // 2. Disable view-transition animations via CSS on mobile
-      // 3. After swap, fade html back in with a plain CSS transition
-      const isMobile = () => window.innerWidth <= 768;
-      const el = document.documentElement;
-
-      document.addEventListener('astro:before-preparation', () => {
-        if (!isMobile()) return;
-        el.style.opacity = '0';
-        el.style.transition = 'none';
-      });
-
-      document.addEventListener('astro:after-swap', () => {
-        if (!isMobile()) return;
-        requestAnimationFrame(() => {
-          el.style.transition = 'opacity 0.22s ease-out';
-          el.style.opacity = '1';
-        });
-      });
-
-      document.addEventListener('astro:page-load', () => {
-        if (!isMobile()) return;
-        // Cleanup after transition completes
-        setTimeout(() => {
-          el.style.transition = '';
-          el.style.opacity = '';
-        }, 280);
-      });
-
       // ── will-change cleanup after card entrance ────────────
       // GPU layers stay promoted forever if will-change is never removed,
       // wasting VRAM. Release each card's compositor layer as soon as its

@@ -1,18 +1,30 @@
-export { generateSlug } from './generateSlug.js';
+export { generateSlug } from './generateSlug.ts';
 
-export function getToday() {
+export function getToday(): Date {
   const d = new Date();
   d.setHours(0, 0, 0, 0);
   return d;
 }
 
-export function formatDeadline(str) {
+export function formatDeadline(str: string | null | undefined): string | null | undefined {
   if (!str || str === 'TBA' || str === 'Ongoing') return str;
   const d = new Date(str + 'T00:00:00');
   return d.toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-export function showConfetti(originEl) {
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  w: number;
+  h: number;
+  rot: number;
+  rotV: number;
+  color: string;
+}
+
+export function showConfetti(originEl?: Element | null): void {
   document.getElementById('sa-confetti')?.remove();
   const rect = originEl?.getBoundingClientRect();
   const ox = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
@@ -25,9 +37,9 @@ export function showConfetti(originEl) {
   canvas.height = window.innerHeight;
   document.body.appendChild(canvas);
 
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d')!;
   const COLORS = ['#22d3a5', '#5ee8c4', '#ffffff', '#fbbf24', '#a78bfa', '#f472b6'];
-  const particles = Array.from({ length: 65 }, () => {
+  const particles: Particle[] = Array.from({ length: 65 }, () => {
     const angle = Math.random() * Math.PI * 2;
     const speed = Math.random() * 9 + 4;
     return {
@@ -43,8 +55,8 @@ export function showConfetti(originEl) {
   });
 
   const start = performance.now();
-  let rafId;
-  function tick(now) {
+  let rafId: number;
+  function tick(now: number) {
     const elapsed = now - start;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let alive = false;
@@ -69,7 +81,7 @@ export function showConfetti(originEl) {
   rafId = requestAnimationFrame(tick);
 }
 
-export function showToast(message) {
+export function showToast(message: string): void {
   const TOAST_ID = 'sa-toast';
   document.getElementById(TOAST_ID)?.remove();
   const el = document.createElement('div');

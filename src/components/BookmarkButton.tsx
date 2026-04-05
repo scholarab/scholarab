@@ -1,10 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
-import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.js';
-import { showToast, showConfetti } from '../lib/utils.jsx';
+import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
+import { showToast, showConfetti } from '../lib/utils.ts';
 
-export default function BookmarkButton({ id, type }) {
+interface BookmarkButtonProps {
+  id: number;
+  type?: 'scholarship' | 'program';
+}
+
+export default function BookmarkButton({ id, type }: BookmarkButtonProps) {
   const [saved, setSaved] = useState(false);
-  const btnRef = useRef(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const list = type === 'program' ? getSavedPrograms() : getSaved();

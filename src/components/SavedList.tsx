@@ -1,18 +1,31 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.js';
-import { formatDeadline, showToast } from '../lib/utils.jsx';
-import { getStatus } from '../hooks/useScholarships.js';
-import { observeCard, unobserveCard } from '../lib/cardObserver.js';
+import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
+import { formatDeadline, showToast } from '../lib/utils.ts';
+import { getStatus } from '../hooks/useScholarships.ts';
+import { observeCard, unobserveCard } from '../lib/cardObserver.ts';
+import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
+import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 
-const REGION_DOT_COLORS = {
+interface SavedListProps {
+  initialScholarships: ScholarshipWithMeta[];
+  initialPrograms: ProgramWithMeta[];
+}
+
+const REGION_DOT_COLORS: Record<string, string> = {
   'Medicine Hat': '#f97316',
   'Alberta':      '#22d3a5',
   'Alberta-wide': '#22d3a5',
   'National':     '#3b82f6',
 };
 
-function RemovableItem({ onRemove, onWillRemove, children }) {
-  const wrapperRef = useRef(null);
+interface RemovableItemProps {
+  onRemove: () => void;
+  onWillRemove?: () => void;
+  children: (triggerRemove: () => void) => React.ReactNode;
+}
+
+function RemovableItem({ onRemove, onWillRemove, children }: RemovableItemProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   function remove() {
     const el = wrapperRef.current;
@@ -21,7 +34,7 @@ function RemovableItem({ onRemove, onWillRemove, children }) {
     el.style.overflow = 'hidden';
     el.style.transformOrigin = 'top';
     el.animate(
-      [{ transform: 'scaleY(1)', opacity: 1 }, { transform: 'scaleY(0)', opacity: 0 }],
+      [{ transform: 'scaleY(1)', opacity: '1' }, { transform: 'scaleY(0)', opacity: '0' }],
       { duration: 220, easing: 'ease-in', fill: 'forwards' }
     ).onfinish = () => {
       el.style.height = '0';
@@ -34,12 +47,19 @@ function RemovableItem({ onRemove, onWillRemove, children }) {
   return <div ref={wrapperRef} className="h-full">{children(remove)}</div>;
 }
 
-function ScholarshipCard({ s, index, onUnsave, isInitial }) {
+interface ScholarshipCardProps {
+  s: ScholarshipWithMeta;
+  index: number;
+  onUnsave: () => void;
+  isInitial: boolean;
+}
+
+function ScholarshipCard({ s, index, onUnsave, isInitial }: ScholarshipCardProps) {
   const status   = getStatus(s);
   const isClosed = status === 'closed';
   const isFuture = status === 'future';
-  const cardRef  = useRef(null);
-  const bmkRef   = useRef(null);
+  const cardRef  = useRef<HTMLDivElement>(null);
+  const bmkRef   = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const el = cardRef.current;
@@ -57,7 +77,7 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }) {
     const el = cardRef.current;
     if (!el) { onUnsave(); return; }
     el.animate(
-      [{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(0.95)', opacity: 0 }],
+      [{ transform: 'scale(1)', opacity: '1' }, { transform: 'scale(0.95)', opacity: '0' }],
       { duration: 200, easing: 'ease-out', fill: 'forwards' }
     ).onfinish = onUnsave;
   }
@@ -136,9 +156,16 @@ function ScholarshipCard({ s, index, onUnsave, isInitial }) {
   );
 }
 
-function ProgramCard({ p, index, onUnsave, isInitial }) {
-  const cardRef = useRef(null);
-  const bmkRef  = useRef(null);
+interface ProgramCardProps {
+  p: ProgramWithMeta;
+  index: number;
+  onUnsave: () => void;
+  isInitial: boolean;
+}
+
+function ProgramCard({ p, index, onUnsave, isInitial }: ProgramCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const bmkRef  = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const el = cardRef.current;
@@ -156,7 +183,7 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
     const el = cardRef.current;
     if (!el) { onUnsave(); return; }
     el.animate(
-      [{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(0.95)', opacity: 0 }],
+      [{ transform: 'scale(1)', opacity: '1' }, { transform: 'scale(0.95)', opacity: '0' }],
       { duration: 200, easing: 'ease-out', fill: 'forwards' }
     ).onfinish = onUnsave;
   }
@@ -218,7 +245,7 @@ function ProgramCard({ p, index, onUnsave, isInitial }) {
 }
 
 
-function SectionEmptyState({ href, label }) {
+function SectionEmptyState({ href, label }: { href: string; label: string }) {
   return (
     <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-gray-300 dark:border-white/20 text-sm text-gray-600 dark:text-white/50">
       <span>None saved yet.</span>
@@ -232,16 +259,16 @@ function SectionEmptyState({ href, label }) {
   );
 }
 
-export default function SavedList({ initialScholarships, initialPrograms }) {
-  const [savedScholarshipIds, setSavedScholarshipIds] = useState([]);
-  const [savedProgramIds, setSavedProgramIds] = useState([]);
+export default function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
+  const [savedScholarshipIds, setSavedScholarshipIds] = useState<number[]>([]);
+  const [savedProgramIds, setSavedProgramIds] = useState<number[]>([]);
 
   useEffect(() => {
     setSavedScholarshipIds([...getSaved()]);
     setSavedProgramIds([...getSavedPrograms()]);
 
     // Sync state when another tab saves/removes items
-    function handleStorage(e) {
+    function handleStorage(e: StorageEvent) {
       if (e.key === 'scholarab_saved')          setSavedScholarshipIds([...getSaved()]);
       if (e.key === 'scholarab_saved_programs') setSavedProgramIds([...getSavedPrograms()]);
     }
@@ -258,15 +285,13 @@ export default function SavedList({ initialScholarships, initialPrograms }) {
     const idSet = new Set(savedProgramIds);
     return initialPrograms.filter(p => idSet.has(p.id));
   }, [initialPrograms, savedProgramIds]);
-  const totalSaved = savedScholarships.length + savedPrograms.length;
 
-
-  function unsaveScholarship(id) {
+  function unsaveScholarship(id: number) {
     const next = toggleSaved(id);
     setSavedScholarshipIds([...next]);
   }
 
-  function unsaveProgram(id) {
+  function unsaveProgram(id: number) {
     const next = toggleSavedProgram(id);
     setSavedProgramIds([...next]);
   }
