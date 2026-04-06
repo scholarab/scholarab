@@ -66,6 +66,85 @@ describe('loadPrograms — JSON fallback', () => {
   })
 })
 
+describe('loadPrograms — DB path', () => {
+  function programRow(overrides: Record<string, unknown> = {}) {
+    return {
+      id: 1, name: 'Test Program', emoji: '🔬', category: 'Science',
+      provider: 'U of A', grades: '10-12', duration: '6 weeks',
+      paid: true, stipend: '$500/week', location: 'Edmonton',
+      eligibility: 'Grade 10-12 students', deadline: '2026-06-01',
+      url: 'https://test.com', description: 'A cool program',
+      lastVerified: '2026-03-01', active: true,
+      ...overrides,
+    }
+  }
+
+  beforeEach(() => {
+    process.env.DATABASE_URL = 'postgresql://mock'
+    vi.resetModules()
+  })
+
+  afterEach(() => {
+    delete process.env.DATABASE_URL
+    vi.resetModules()
+  })
+
+  it('returns programs from DB when DATABASE_URL is set', async () => {
+    vi.doMock('./db/client', () => ({
+      db: { select: () => ({ from: async () => [programRow()] }) },
+    }))
+    vi.doMock('./db/schema', () => ({ researchPrograms: 'research_programs_table' }))
+
+    const { loadPrograms } = await import('./data-loader')
+    const result = await loadPrograms()
+    expect(result.length).toBe(1)
+    expect(result[0]?.name).toBe('Test Program')
+    expect(result[0]?.paid).toBe(true)
+  })
+
+  it('excludes inactive programs (active === false)', async () => {
+    vi.doMock('./db/client', () => ({
+      db: { select: () => ({ from: async () => [
+        programRow({ id: 1, active: true }),
+        programRow({ id: 2, active: false }),
+      ] }) },
+    }))
+    vi.doMock('./db/schema', () => ({ researchPrograms: 'research_programs_table' }))
+
+    const { loadPrograms } = await import('./data-loader')
+    const result = await loadPrograms()
+    expect(result.map(p => p.id)).toContain(1)
+    expect(result.map(p => p.id)).not.toContain(2)
+  })
+
+  it('normalises nullable fields to null', async () => {
+    vi.doMock('./db/client', () => ({
+      db: { select: () => ({ from: async () => [programRow({
+        emoji: undefined, category: undefined, provider: undefined,
+        stipend: undefined, location: undefined, description: undefined,
+        lastVerified: undefined,
+      })] }) },
+    }))
+    vi.doMock('./db/schema', () => ({ researchPrograms: 'research_programs_table' }))
+
+    const { loadPrograms } = await import('./data-loader')
+    const result = await loadPrograms()
+    expect(result[0]?.emoji).toBeNull()
+    expect(result[0]?.category).toBeNull()
+  })
+
+  it('falls back to JSON when DB throws', async () => {
+    vi.doMock('./db/client', () => ({
+      db: { select: () => ({ from: async () => { throw new Error('db down') } }) },
+    }))
+    vi.doMock('./db/schema', () => ({ researchPrograms: 'research_programs_table' }))
+
+    const { loadPrograms } = await import('./data-loader')
+    const result = await loadPrograms()
+    expect(result.length).toBeGreaterThan(0)
+  })
+})
+
 // ── parseEligibility (Zod schema) via DB path ─────────────────────────────────
 //
 // We use vi.doMock (not vi.mock) so mocks are not hoisted — each test

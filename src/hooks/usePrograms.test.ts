@@ -199,4 +199,35 @@ describe('usePrograms', () => {
     const { result } = renderHook(() => usePrograms(many))
     expect(result.current.visibleItems.length).toBeLessThanOrEqual(PAGE_SIZE)
   })
+
+  it('handleToggleSave updates savedIds', async () => {
+    const { usePrograms } = await import('./usePrograms')
+    const { result } = renderHook(() => usePrograms(allItems))
+    expect(result.current.savedIds).toEqual([])
+    act(() => result.current.handleToggleSave(1))
+    expect(result.current.savedIds).toContain(1)
+  })
+
+  it('sorts active programs by closest deadline in featured sort', async () => {
+    const { usePrograms } = await import('./usePrograms')
+    const earlier = makeProgram({ id: 10, deadline: '2026-11-01', _deadline_ms: FUTURE_MS - 2592000000 })
+    const later   = makeProgram({ id: 11, deadline: '2026-12-01', _deadline_ms: FUTURE_MS })
+    const { result } = renderHook(() => usePrograms([later, earlier]))
+    const ids = result.current.filtered.map(p => p.id)
+    expect(ids.indexOf(10)).toBeLessThan(ids.indexOf(11))
+  })
+
+  it('categoryKey reflects current selected category', async () => {
+    const { usePrograms } = await import('./usePrograms')
+    const { result } = renderHook(() => usePrograms(allItems))
+    act(() => result.current.setCategory('Health'))
+    expect(result.current.categoryKey).toBe('Health')
+  })
+
+  it('hasActiveFilters is true when sort is not featured', async () => {
+    const { usePrograms } = await import('./usePrograms')
+    const { result } = renderHook(() => usePrograms(allItems))
+    act(() => result.current.setSort('closest_due'))
+    expect(result.current.hasActiveFilters).toBe(true)
+  })
 })

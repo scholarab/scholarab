@@ -261,4 +261,38 @@ describe('useScholarships', () => {
     const page2Ids = result.current.visibleItems.map(s => s.id)
     expect(page1Ids).not.toEqual(page2Ids)
   })
+
+  it('handleToggleSave updates savedIds', async () => {
+    const { useScholarships } = await import('./useScholarships')
+    const { result } = renderHook(() => useScholarships(allItems))
+    expect(result.current.savedIds).toEqual([])
+    act(() => result.current.handleToggleSave(1))
+    expect(result.current.savedIds).toContain(1)
+  })
+
+  it('regionKey is empty string when no region selected', async () => {
+    const { useScholarships } = await import('./useScholarships')
+    const { result } = renderHook(() => useScholarships(allItems))
+    expect(result.current.regionKey).toBe('')
+  })
+
+  it('regionKey reflects selected region', async () => {
+    const { useScholarships } = await import('./useScholarships')
+    const { result } = renderHook(() => useScholarships(allItems))
+    act(() => result.current.setRegion('National'))
+    expect(result.current.regionKey).toBe('National')
+  })
+
+  it('featured sort puts active scholarships before future ones', async () => {
+    const futureOpen = makeScholarship({
+      id: 10,
+      openDate: '2027-01-01',
+      _open_ms: new Date('2027-01-01T00:00:00').getTime(),
+      _deadline_ms: FUTURE_MS + 9999999,
+    })
+    const { useScholarships } = await import('./useScholarships')
+    const { result } = renderHook(() => useScholarships([futureOpen, active1]))
+    const ids = result.current.filtered.map(s => s.id)
+    expect(ids.indexOf(1)).toBeLessThan(ids.indexOf(10))
+  })
 })

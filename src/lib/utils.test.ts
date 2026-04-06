@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { generateSlug, getToday, formatDeadline } from './utils'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { generateSlug, getToday, formatDeadline, showConfetti, showToast } from './utils'
 
 // ── generateSlug ─────────────────────────────────────────────────────────────
 
@@ -123,5 +123,112 @@ describe('formatDeadline', () => {
     const result = formatDeadline('2026-12-31')
     expect(result).toContain('Dec')
     expect(result).toContain('31')
+  })
+})
+
+// ── showConfetti ──────────────────────────────────────────────────────────────
+
+function makeCanvasMock() {
+  return {
+    clearRect: vi.fn(),
+    save: vi.fn(),
+    restore: vi.fn(),
+    translate: vi.fn(),
+    rotate: vi.fn(),
+    fillRect: vi.fn(),
+    globalAlpha: 1,
+    fillStyle: '',
+  }
+}
+
+describe('showConfetti', () => {
+  beforeEach(() => {
+    vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(makeCanvasMock() as any)
+    // Run rAF once synchronously so the animation tick fires, then stop
+    let calls = 0
+    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
+      if (calls++ === 0) cb(0)
+      return calls
+    })
+    vi.stubGlobal('performance', { now: () => 0 })
+  })
+
+  afterEach(() => {
+    vi.restoreAllMocks()
+    vi.unstubAllGlobals()
+    document.getElementById('sa-confetti')?.remove()
+  })
+
+  it('appends a canvas element to the body', () => {
+    showConfetti()
+    expect(document.getElementById('sa-confetti')).not.toBeNull()
+  })
+
+  it('removes any existing canvas before creating a new one', () => {
+    showConfetti()
+    showConfetti()
+    expect(document.querySelectorAll('#sa-confetti').length).toBe(1)
+  })
+
+  it('does not throw when called with no element (uses window center)', () => {
+    expect(() => showConfetti()).not.toThrow()
+  })
+
+  it('does not throw when called with null', () => {
+    expect(() => showConfetti(null)).not.toThrow()
+  })
+
+  it('does not throw when called with a real element', () => {
+    const el = document.createElement('button')
+    document.body.appendChild(el)
+    expect(() => showConfetti(el)).not.toThrow()
+    el.remove()
+  })
+
+  it('canvas has pointer-events none and fixed position', () => {
+    showConfetti()
+    const canvas = document.getElementById('sa-confetti') as HTMLCanvasElement
+    expect(canvas.style.pointerEvents).toBe('none')
+    expect(canvas.style.position).toBe('fixed')
+  })
+})
+
+// ── showToast ─────────────────────────────────────────────────────────────────
+
+describe('showToast', () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => { cb(0); return 1 })
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+    vi.unstubAllGlobals()
+    document.getElementById('sa-toast')?.remove()
+  })
+
+  it('creates a toast element with the correct message', () => {
+    showToast('Saved!')
+    const el = document.getElementById('sa-toast')
+    expect(el).not.toBeNull()
+    expect(el?.textContent).toBe('Saved!')
+  })
+
+  it('removes existing toast before creating a new one', () => {
+    showToast('First')
+    showToast('Second')
+    expect(document.querySelectorAll('#sa-toast').length).toBe(1)
+    expect(document.getElementById('sa-toast')?.textContent).toBe('Second')
+  })
+
+  it('toast is removed from DOM after timeout elapses', () => {
+    showToast('Gone soon')
+    expect(document.getElementById('sa-toast')).not.toBeNull()
+    vi.advanceTimersByTime(2800 + 300 + 50)
+    expect(document.getElementById('sa-toast')).toBeNull()
+  })
+
+  it('does not throw for empty string message', () => {
+    expect(() => showToast('')).not.toThrow()
   })
 })
