@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { GET, POST } from './index'
-import { GET as getById, PUT, DELETE } from './[id]'
+import { GET, POST } from '../../pages/admin/api/scholarships/index'
+import { GET as getById, PUT, DELETE } from '../../pages/admin/api/scholarships/[id]'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 // vi.hoisted ensures these are initialised before the hoisted vi.mock factories run.
@@ -13,11 +13,11 @@ const { mockGetSession, mockSelect, mockInsert, mockUpdate, mockDelete } = vi.ho
   mockDelete:     vi.fn(),
 }))
 
-vi.mock('../../../../lib/auth', () => ({
+vi.mock('../../lib/auth', () => ({
   auth: { api: { getSession: mockGetSession } },
 }))
 
-vi.mock('../../../../lib/db/client', () => ({
+vi.mock('../../lib/db/client', () => ({
   db: {
     select: (...a: any[]) => mockSelect(...a),
     insert: (...a: any[]) => mockInsert(...a),
@@ -26,7 +26,7 @@ vi.mock('../../../../lib/db/client', () => ({
   },
 }))
 
-vi.mock('../../../../lib/db/schema', () => ({
+vi.mock('../../lib/db/schema', () => ({
   scholarships: { id: 'id', title: 'title', updatedAt: 'updatedAt' },
 }))
 

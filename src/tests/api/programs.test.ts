@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { POST } from './index'
-import { PUT, DELETE } from './[id]'
+import { POST } from '../../pages/admin/api/programs/index'
+import { PUT, DELETE } from '../../pages/admin/api/programs/[id]'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
@@ -11,11 +11,11 @@ const { mockGetSession, mockInsert, mockUpdate, mockDelete } = vi.hoisted(() => 
   mockDelete:     vi.fn(),
 }))
 
-vi.mock('../../../../lib/auth', () => ({
+vi.mock('../../lib/auth', () => ({
   auth: { api: { getSession: mockGetSession } },
 }))
 
-vi.mock('../../../../lib/db/client', () => ({
+vi.mock('../../lib/db/client', () => ({
   db: {
     insert: (...a: any[]) => mockInsert(...a),
     update: (...a: any[]) => mockUpdate(...a),
@@ -23,7 +23,7 @@ vi.mock('../../../../lib/db/client', () => ({
   },
 }))
 
-vi.mock('../../../../lib/db/schema', () => ({
+vi.mock('../../lib/db/schema', () => ({
   researchPrograms: { id: 'id', updatedAt: 'updatedAt' },
 }))
 
