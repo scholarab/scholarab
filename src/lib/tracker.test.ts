@@ -59,6 +59,15 @@ describe('getSaved', () => {
     localStorage.setItem('scholarab_saved', JSON.stringify([99]))     // mutate storage after caching
     expect(getSaved()).toEqual([])                                     // still returns cached []
   })
+
+  it('invalidates cache when another tab fires a storage event', async () => {
+    localStorage.setItem('scholarab_saved', JSON.stringify([1, 2]))
+    const { getSaved } = await import('./tracker')
+    getSaved()                                                         // primes cache with [1, 2]
+    localStorage.setItem('scholarab_saved', JSON.stringify([3, 4]))   // simulate other-tab write
+    window.dispatchEvent(new StorageEvent('storage', { key: 'scholarab_saved' }))
+    expect(getSaved()).toEqual([3, 4])                                 // cache invalidated, re-reads
+  })
 })
 
 // ── toggleSaved ───────────────────────────────────────────────────────────────

@@ -4,6 +4,7 @@ import { db } from '../../../../lib/db/client'
 import { researchPrograms } from '../../../../lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
+import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 
 export const prerender = false
 
@@ -28,6 +29,7 @@ const UpdateSchema = z.object({
 export const PUT: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  if (!checkMutationRateLimit(session.user.id)) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
 
   const id = parseInt(params.id!)
   if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
@@ -50,6 +52,7 @@ export const PUT: APIRoute = async ({ request, params }) => {
 export const DELETE: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  if (!checkMutationRateLimit(session.user.id)) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
 
   const id = parseInt(params.id!)
   if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
