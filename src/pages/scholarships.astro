@@ -1,9 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships } from '../lib/data-loader';
-import ScholarshipList from '../components/ScholarshipList.tsx';
-import { generateSlug } from '../lib/generateSlug';
-import { formatDeadline } from '../lib/utils';
+import ItemList from '../components/ItemList.tsx';
+import { generateSlug, formatDeadline } from '../lib/utils';
 const raw = await loadScholarships();
 // Enrich at build time — avoids regex/Date parsing on every user's device
 const scholarships = raw.map(s => ({
@@ -33,6 +32,6 @@ const scholarships = raw.map(s => ({
       </a>
     </div>
     <p class="text-sm text-gray-500 dark:text-white/45 mb-6">Open scholarships for Alberta high school students, verified by hand and updated regularly.</p>
-    <ScholarshipList initialScholarships={scholarships} client:idle />
+    <ItemList mode="scholarship" items={scholarships} client:idle />
   </main>
 </Layout>

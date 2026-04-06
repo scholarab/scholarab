@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { loadPrograms } from '../lib/data-loader';
-import ResearchList from '../components/ResearchList.tsx';
-import { generateSlug } from '../lib/generateSlug';
+import ItemList from '../components/ItemList.tsx';
+import { generateSlug } from '../lib/utils';
 const raw = await loadPrograms();
 // Enrich at build time — avoids Date parsing on every user's device
 const programs = raw.map(p => ({
@@ -25,6 +25,6 @@ const programs = raw.map(p => ({
   <main>
     <h1 class="font-bold text-gray-900 dark:text-white mb-1" style="font-size: clamp(22px, 3vw, 32px);">Research Programs</h1>
     <p class="text-sm text-gray-500 dark:text-white/45 mb-6">University-run summer programs, labs, and competitions open to Alberta high school students.</p>
-    <ResearchList programs={programs} client:idle />
+    <ItemList mode="program" items={programs} client:idle />
   </main>
 </Layout>
