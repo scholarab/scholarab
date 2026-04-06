@@ -115,11 +115,6 @@ export function matchScholarship(
     return { match: false, confidence: 0, reasons }
   }
 
-  // ── Age ───────────────────────────────────────────────────────────────────
-  if (eligibility.maxAge !== null && profile.averagePercent !== null) {
-    // age field not always present; skip if not provided
-  }
-
   // ── Family income cap (hard filter only if student answered) ──────────────
   if (eligibility.maxFamilyIncome !== null && profile.familyIncome !== null) {
     if (profile.familyIncome > eligibility.maxFamilyIncome) {

@@ -1,4 +1,6 @@
-export { generateSlug } from './generateSlug.ts';
+export function generateSlug(title: string): string {
+  return String(title).toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+}
 
 export function getToday(): Date {
   const d = new Date();

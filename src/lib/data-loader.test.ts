@@ -91,7 +91,7 @@ describe('loadPrograms — DB path', () => {
 
   it('returns programs from DB when DATABASE_URL is set', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => [programRow()] }) },
+      db: { select: () => ({ from: () => ({ where: async () => [programRow()] }) }) },
     }))
     vi.doMock('./db/schema', () => ({ researchPrograms: 'research_programs_table' }))
 
@@ -102,28 +102,24 @@ describe('loadPrograms — DB path', () => {
     expect(result[0]?.paid).toBe(true)
   })
 
-  it('excludes inactive programs (active === false)', async () => {
+  it('returns only the rows the DB provides (active filtering is done at DB level)', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => [
-        programRow({ id: 1, active: true }),
-        programRow({ id: 2, active: false }),
-      ] }) },
+      db: { select: () => ({ from: () => ({ where: async () => [programRow({ id: 1, active: true })] }) }) },
     }))
     vi.doMock('./db/schema', () => ({ researchPrograms: 'research_programs_table' }))
 
     const { loadPrograms } = await import('./data-loader')
     const result = await loadPrograms()
-    expect(result.map(p => p.id)).toContain(1)
-    expect(result.map(p => p.id)).not.toContain(2)
+    expect(result.map(p => p.id)).toEqual([1])
   })
 
   it('normalises nullable fields to null', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => [programRow({
+      db: { select: () => ({ from: () => ({ where: async () => [programRow({
         emoji: undefined, category: undefined, provider: undefined,
         stipend: undefined, location: undefined, description: undefined,
         lastVerified: undefined,
-      })] }) },
+      })] }) }) },
     }))
     vi.doMock('./db/schema', () => ({ researchPrograms: 'research_programs_table' }))
 
@@ -135,7 +131,7 @@ describe('loadPrograms — DB path', () => {
 
   it('falls back to JSON when DB throws', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => { throw new Error('db down') } }) },
+      db: { select: () => ({ from: () => ({ where: async () => { throw new Error('db down') } }) }) },
     }))
     vi.doMock('./db/schema', () => ({ researchPrograms: 'research_programs_table' }))
 
@@ -172,14 +168,14 @@ describe('parseEligibility — Zod schema via DB path', () => {
 
   it('parses a fully valid eligibility object', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => [dbRow({
+      db: { select: () => ({ from: () => ({ where: async () => [dbRow({
         grades: ['12'], schoolBoards: ['MHPSD'], specificSchools: [],
         targetInstitutions: ['University of Calgary'], fields: ['STEM'],
         minAverage: 80, minAge: null, maxAge: null, genderRequired: 'female',
         indigenousRequired: false, bipocRequired: false, financialNeed: false,
         maxFamilyIncome: 65000, fosterCare: false, citizenship: 'canadian',
         apprenticeship: false, extracurriculars: [],
-      })] }) },
+      })] }) }) },
     }))
     vi.doMock('./db/schema', () => ({ scholarships: 'scholarships_table' }))
 
@@ -195,7 +191,7 @@ describe('parseEligibility — Zod schema via DB path', () => {
 
   it('applies Zod defaults when eligibility fields are omitted', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => [dbRow({})] }) },
+      db: { select: () => ({ from: () => ({ where: async () => [dbRow({})] }) }) },
     }))
     vi.doMock('./db/schema', () => ({ scholarships: 'scholarships_table' }))
 
@@ -210,7 +206,7 @@ describe('parseEligibility — Zod schema via DB path', () => {
 
   it('returns null for eligibility with invalid citizenship enum value', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => [dbRow({ citizenship: 'martian' })] }) },
+      db: { select: () => ({ from: () => ({ where: async () => [dbRow({ citizenship: 'martian' })] }) }) },
     }))
     vi.doMock('./db/schema', () => ({ scholarships: 'scholarships_table' }))
 
@@ -221,7 +217,7 @@ describe('parseEligibility — Zod schema via DB path', () => {
 
   it('returns null when eligibility field is null in DB row', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => [dbRow(null)] }) },
+      db: { select: () => ({ from: () => ({ where: async () => [dbRow(null)] }) }) },
     }))
     vi.doMock('./db/schema', () => ({ scholarships: 'scholarships_table' }))
 
@@ -232,7 +228,7 @@ describe('parseEligibility — Zod schema via DB path', () => {
 
   it('falls back to JSON when DB throws', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => { throw new Error('connection refused') } }) },
+      db: { select: () => ({ from: () => ({ where: async () => { throw new Error('connection refused') } }) }) },
     }))
     vi.doMock('./db/schema', () => ({ scholarships: 'scholarships_table' }))
 
@@ -242,18 +238,14 @@ describe('parseEligibility — Zod schema via DB path', () => {
     expect(result.every(s => s.eligibility === null)).toBe(true)
   })
 
-  it('excludes inactive rows (active === false)', async () => {
+  it('returns only the rows the DB provides (active filtering is done at DB level)', async () => {
     vi.doMock('./db/client', () => ({
-      db: { select: () => ({ from: async () => [
-        { ...dbRow(null), id: 1, active: true },
-        { ...dbRow(null), id: 2, active: false },
-      ] }) },
+      db: { select: () => ({ from: () => ({ where: async () => [{ ...dbRow(null), id: 1, active: true }] }) }) },
     }))
     vi.doMock('./db/schema', () => ({ scholarships: 'scholarships_table' }))
 
     const { loadScholarships } = await import('./data-loader')
     const result = await loadScholarships()
-    expect(result.map(s => s.id)).toContain(1)
-    expect(result.map(s => s.id)).not.toContain(2)
+    expect(result.map(s => s.id)).toEqual([1])
   })
 })

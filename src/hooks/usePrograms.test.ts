@@ -230,4 +230,28 @@ describe('usePrograms', () => {
     act(() => result.current.setSort('closest_due'))
     expect(result.current.hasActiveFilters).toBe(true)
   })
+
+  it('closest_due sort orders programs by ascending deadline regardless of status', async () => {
+    const { usePrograms } = await import('./usePrograms')
+    const early  = makeProgram({ id: 10, deadline: '2026-05-01', _deadline_ms: new Date('2026-05-01T00:00:00').getTime() })
+    const mid    = makeProgram({ id: 11, deadline: '2026-08-01', _deadline_ms: new Date('2026-08-01T00:00:00').getTime() })
+    const late   = makeProgram({ id: 12, deadline: '2026-12-01', _deadline_ms: new Date('2026-12-01T00:00:00').getTime() })
+    const { result } = renderHook(() => usePrograms([late, early, mid]))
+    act(() => result.current.setSort('closest_due'))
+    const ids = result.current.filtered.map(p => p.id)
+    expect(ids.indexOf(10)).toBeLessThan(ids.indexOf(11))
+    expect(ids.indexOf(11)).toBeLessThan(ids.indexOf(12))
+  })
+
+  it('closest_due differs from featured sort order', async () => {
+    const { usePrograms } = await import('./usePrograms')
+    // tba program has no deadline — in featured sort it trails actives; in closest_due it sorts last (Infinity)
+    const withDeadline = makeProgram({ id: 20, deadline: '2026-12-01', _deadline_ms: FUTURE_MS })
+    const tba          = makeProgram({ id: 21, deadline: null })
+    const { result } = renderHook(() => usePrograms([tba, withDeadline]))
+    act(() => result.current.setSort('closest_due'))
+    const ids = result.current.filtered.map(p => p.id)
+    // program with deadline should sort before tba (Infinity)
+    expect(ids.indexOf(20)).toBeLessThan(ids.indexOf(21))
+  })
 })

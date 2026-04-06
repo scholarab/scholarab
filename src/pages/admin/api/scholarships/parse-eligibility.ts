@@ -9,6 +9,20 @@ import { EMPTY_ELIGIBILITY } from '../../../../lib/eligibility-types'
 
 export const prerender = false
 
+// Per-user rate limit: max 20 AI parse requests per hour
+const parseRateLimit = new Map<string, { count: number; reset: number }>()
+function checkParseRateLimit(userId: string): boolean {
+  const now = Date.now()
+  const entry = parseRateLimit.get(userId)
+  if (!entry || now > entry.reset) {
+    parseRateLimit.set(userId, { count: 1, reset: now + 3_600_000 })
+    return true
+  }
+  if (entry.count >= 20) return false
+  entry.count++
+  return true
+}
+
 const SCHEMA_DESC = `{
   grades: string[],              // Only grades explicitly mentioned. Values: "10","11","12","post-secondary"
   schoolBoards: string[],        // Only if a specific board is mentioned. Values: "MHPSD","CBE","CCSD","Edmonton Public Schools","Edmonton Catholic Schools","Lethbridge School Division"
@@ -53,6 +67,10 @@ Rules:
 export const POST: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+
+  if (!checkParseRateLimit(session.user.id)) {
+    return new Response(JSON.stringify({ error: 'Rate limit exceeded — max 20 AI parses per hour' }), { status: 429 })
+  }
 
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) {

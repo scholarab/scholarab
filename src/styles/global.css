@@ -79,9 +79,7 @@ html {
   --brand-rgb: 34, 211, 165;
   --brand-dim: rgba(34, 211, 165, 0.10);
   --brand-border: rgba(34, 211, 165, 0.35);
-  --t-card: 0.35s;
   --t-press: 0.1s;
-  --t-nav: 380ms;
   --t-standard: 0.22s;
 }
 
@@ -250,7 +248,3 @@ h1, h2 {
   .glass-nav { transition: none !important; }
 }
 
-@keyframes countPop {
-  from { opacity: 0; transform: translateY(-8px) scale(0.85); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}

@@ -73,9 +73,9 @@ export async function loadScholarships(): Promise<Scholarship[]> {
     try {
       const { db } = await import('./db/client')
       const { scholarships } = await import('./db/schema')
-      const rows = await db.select().from(scholarships)
+      const { eq } = await import('drizzle-orm')
+      const rows = await db.select().from(scholarships).where(eq(scholarships.active, true))
       return rows
-        .filter(r => r.active !== false)
         .map(r => ({
           id: r.id,
           title: r.title,
@@ -105,9 +105,9 @@ export async function loadPrograms(): Promise<Program[]> {
     try {
       const { db } = await import('./db/client')
       const { researchPrograms } = await import('./db/schema')
-      const rows = await db.select().from(researchPrograms)
+      const { eq } = await import('drizzle-orm')
+      const rows = await db.select().from(researchPrograms).where(eq(researchPrograms.active, true))
       return rows
-        .filter(r => r.active !== false)
         .map(r => ({
           id: r.id,
           name: r.name,

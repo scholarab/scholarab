@@ -4,8 +4,7 @@ import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved } from '../lib/tracker.ts'
 import { showConfetti } from '../lib/utils.ts'
-import { generateSlug } from '../lib/generateSlug.ts'
-import { useQuizState } from '../hooks/useQuizState.ts'
+import { generateSlug } from '../lib/utils.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -107,21 +106,25 @@ function parseAmount(amount: string): number {
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function EligibilityQuiz({ scholarships }: Props) {
-  const {
-    step, setStep,
-    grade, setGrade,
-    city, setCity,
-    targetInstitution, setTargetInstitution,
-    fields, setFields,
-    averageBracket, setAverageBracket,
-    identifiesAsFemale, setIdentifiesAsFemale,
-    identifiesAsIndigenous, setIdentifiesAsIndigenous,
-    identifiesAsBIPOC, setIdentifiesAsBIPOC,
-    inFosterCare, setInFosterCare,
-    inApprenticeship, setInApprenticeship,
-    citizenship, setCitizenship,
-    reset,
-  } = useQuizState()
+  const [step, setStep] = useState<1 | 2 | 3 | 'results'>(1)
+  const [grade, setGrade] = useState<StudentProfile['grade'] | ''>('')
+  const [city, setCity] = useState('')
+  const [targetInstitution, setTargetInstitution] = useState('')
+  const [fields, setFields] = useState<string[]>([])
+  const [averageBracket, setAverageBracket] = useState<number | null>(null)
+  const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(null)
+  const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(null)
+  const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(null)
+  const [inFosterCare, setInFosterCare] = useState<boolean | null>(null)
+  const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(null)
+  const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(null)
+
+  function reset() {
+    setStep(1); setGrade(''); setCity(''); setTargetInstitution('')
+    setFields([]); setAverageBracket(null)
+    setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null)
+    setInFosterCare(null); setInApprenticeship(null); setCitizenship(null)
+  }
 
   const profile = useMemo((): StudentProfile | null => {
     if (!grade || !city) return null
