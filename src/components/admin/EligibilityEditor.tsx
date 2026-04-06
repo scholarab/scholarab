@@ -55,7 +55,7 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
           <input
             type="number"
             value={value.minAverage ?? ''}
-            onChange={e => set({ minAverage: e.target.value ? parseInt(e.target.value) : null })}
+            onChange={e => set({ minAverage: e.target.value ? parseInt(e.target.value, 10) : null })}
             placeholder="e.g. 75"
             min={0} max={100}
             className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-white text-xs focus:outline-none focus:border-[#22d3a5]/50"
@@ -66,7 +66,7 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
           <input
             type="number"
             value={value.maxFamilyIncome ?? ''}
-            onChange={e => set({ maxFamilyIncome: e.target.value ? parseInt(e.target.value) : null })}
+            onChange={e => set({ maxFamilyIncome: e.target.value ? parseInt(e.target.value, 10) : null })}
             placeholder="e.g. 65000"
             min={0}
             className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-white text-xs focus:outline-none focus:border-[#22d3a5]/50"

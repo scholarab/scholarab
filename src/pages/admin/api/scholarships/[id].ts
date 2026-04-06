@@ -28,7 +28,7 @@ export const GET: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
 
-  const id = parseInt(params.id!)
+  const id = parseInt(params.id!, 10)
   if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
 
   const [item] = await db.select().from(scholarships).where(eq(scholarships.id, id))
@@ -41,7 +41,7 @@ export const PUT: APIRoute = async ({ request, params }) => {
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
   if (!(await checkMutationRateLimit(session.user.id))) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
 
-  const id = parseInt(params.id!)
+  const id = parseInt(params.id!, 10)
   if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
 
   try {
@@ -84,7 +84,7 @@ export const DELETE: APIRoute = async ({ request, params }) => {
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
   if (!(await checkMutationRateLimit(session.user.id))) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
 
-  const id = parseInt(params.id!)
+  const id = parseInt(params.id!, 10)
   if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
 
   try {

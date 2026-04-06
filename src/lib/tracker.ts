@@ -54,10 +54,14 @@ export function toggleSaved(id: number): number[] {
 
 export function getSavedPrograms(): number[] {
   if (_savedPrograms === null) {
-    const raw = JSON.parse(localStorage.getItem('scholarab_saved_programs') || '[]') as unknown[];
-    _savedPrograms = normalizeIdList(raw);
-    if (JSON.stringify(raw) !== JSON.stringify(_savedPrograms)) {
-      localStorage.setItem('scholarab_saved_programs', JSON.stringify(_savedPrograms));
+    try {
+      const raw = JSON.parse(localStorage.getItem('scholarab_saved_programs') || '[]') as unknown[];
+      _savedPrograms = normalizeIdList(raw);
+      if (JSON.stringify(raw) !== JSON.stringify(_savedPrograms)) {
+        localStorage.setItem('scholarab_saved_programs', JSON.stringify(_savedPrograms));
+      }
+    } catch {
+      _savedPrograms = [];
     }
   }
   return _savedPrograms;

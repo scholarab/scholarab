@@ -146,6 +146,12 @@ describe('getSavedPrograms', () => {
     const stored = JSON.parse(localStorage.getItem('scholarab_saved_programs')!)
     expect(stored).toEqual([3, 7])
   })
+
+  it('handles corrupted JSON gracefully', async () => {
+    localStorage.setItem('scholarab_saved_programs', 'not-valid-json{{')
+    const { getSavedPrograms } = await import('./tracker')
+    expect(getSavedPrograms()).toEqual([])
+  })
 })
 
 // ── toggleSavedProgram ────────────────────────────────────────────────────────
