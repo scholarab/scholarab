@@ -5,16 +5,21 @@ import { GET as getById, PUT, DELETE } from '../../pages/admin/api/scholarships/
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 // vi.hoisted ensures these are initialised before the hoisted vi.mock factories run.
 
-const { mockGetSession, mockSelect, mockInsert, mockUpdate, mockDelete } = vi.hoisted(() => ({
+const { mockGetSession, mockSelect, mockInsert, mockUpdate, mockDelete, mockRateLimit } = vi.hoisted(() => ({
   mockGetSession: vi.fn(),
   mockSelect:     vi.fn(),
   mockInsert:     vi.fn(),
   mockUpdate:     vi.fn(),
   mockDelete:     vi.fn(),
+  mockRateLimit:  vi.fn(),
 }))
 
 vi.mock('../../lib/auth', () => ({
   auth: { api: { getSession: mockGetSession } },
+}))
+
+vi.mock('../../lib/adminRateLimit', () => ({
+  checkMutationRateLimit: mockRateLimit,
 }))
 
 vi.mock('../../lib/db/client', () => ({
@@ -83,7 +88,10 @@ const STORED_ROW = {
   updatedAt: new Date('2026-04-05T10:00:00Z'),
 }
 
-beforeEach(() => vi.clearAllMocks())
+beforeEach(() => {
+  vi.clearAllMocks()
+  mockRateLimit.mockResolvedValue(true)
+})
 
 // ── GET /admin/api/scholarships ───────────────────────────────────────────────
 
@@ -121,6 +129,14 @@ describe('POST /admin/api/scholarships', () => {
     mockGetSession.mockResolvedValue(null)
     const res = await POST({ request: req('POST', VALID_BODY) } as any)
     expect(res.status).toBe(401)
+  })
+
+  it('returns 429 when rate limit exceeded', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockRateLimit.mockResolvedValue(false)
+    const res = await POST({ request: req('POST', VALID_BODY) } as any)
+    expect(res.status).toBe(429)
+    expect(await res.json()).toMatchObject({ error: 'Rate limit exceeded' })
   })
 
   it('returns 400 when title is missing', async () => {
@@ -221,6 +237,13 @@ describe('PUT /admin/api/scholarships/[id]', () => {
     expect(res.status).toBe(401)
   })
 
+  it('returns 429 when rate limit exceeded', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockRateLimit.mockResolvedValue(false)
+    const res = await PUT({ request: reqWithId('PUT', '1', UPDATE_BODY), params: { id: '1' } } as any)
+    expect(res.status).toBe(429)
+  })
+
   it('returns 400 for non-numeric id', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
     const res = await PUT({ request: reqWithId('PUT', 'abc', UPDATE_BODY), params: { id: 'abc' } } as any)
@@ -304,6 +327,13 @@ describe('DELETE /admin/api/scholarships/[id]', () => {
     mockGetSession.mockResolvedValue(null)
     const res = await DELETE({ request: reqWithId('DELETE', '1'), params: { id: '1' } } as any)
     expect(res.status).toBe(401)
+  })
+
+  it('returns 429 when rate limit exceeded', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockRateLimit.mockResolvedValue(false)
+    const res = await DELETE({ request: reqWithId('DELETE', '1'), params: { id: '1' } } as any)
+    expect(res.status).toBe(429)
   })
 
   it('returns 400 for non-numeric id', async () => {

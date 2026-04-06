@@ -3,6 +3,7 @@ import { auth } from '../../../../lib/auth'
 import { db } from '../../../../lib/db/client'
 import { researchPrograms } from '../../../../lib/db/schema'
 import { z } from 'zod'
+import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 
 export const prerender = false
 
@@ -27,6 +28,7 @@ const CreateSchema = z.object({
 export const POST: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  if (!(await checkMutationRateLimit(session.user.id))) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
 
   try {
     const body = await request.json()
@@ -34,6 +36,6 @@ export const POST: APIRoute = async ({ request }) => {
     const [created] = await db.insert(researchPrograms).values(data).returning()
     return new Response(JSON.stringify(created), { status: 201 })
   } catch (e) {
-    return new Response(JSON.stringify({ error: String(e) }), { status: 400 })
+    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
   }
 }

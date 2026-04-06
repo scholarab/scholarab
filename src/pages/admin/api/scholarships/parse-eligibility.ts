@@ -2,24 +2,22 @@ import type { APIRoute } from 'astro'
 import Anthropic from '@anthropic-ai/sdk'
 import { auth } from '../../../../lib/auth'
 import { db } from '../../../../lib/db/client'
-import { scholarships } from '../../../../lib/db/schema'
-import { eq } from 'drizzle-orm'
+import { scholarships, parseLog } from '../../../../lib/db/schema'
+import { eq, gte, and, sql } from 'drizzle-orm'
 import type { EligibilityCriteria } from '../../../../lib/eligibility-types'
 import { EMPTY_ELIGIBILITY } from '../../../../lib/eligibility-types'
 
 export const prerender = false
 
-// Per-user rate limit: max 20 AI parse requests per hour
-const parseRateLimit = new Map<string, { count: number; reset: number }>()
-function checkParseRateLimit(userId: string): boolean {
-  const now = Date.now()
-  const entry = parseRateLimit.get(userId)
-  if (!entry || now > entry.reset) {
-    parseRateLimit.set(userId, { count: 1, reset: now + 3_600_000 })
-    return true
-  }
-  if (entry.count >= 20) return false
-  entry.count++
+// DB-persisted rate limit: max 20 AI parse requests per user per hour (cross-instance safe)
+async function checkAndLogParseRateLimit(userId: string): Promise<boolean> {
+  const oneHourAgo = new Date(Date.now() - 3_600_000)
+  const [{ count }] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(parseLog)
+    .where(and(eq(parseLog.userId, userId), gte(parseLog.createdAt, oneHourAgo)))
+  if (Number(count) >= 20) return false
+  await db.insert(parseLog).values({ userId })
   return true
 }
 
@@ -68,7 +66,7 @@ export const POST: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
 
-  if (!checkParseRateLimit(session.user.id)) {
+  if (!(await checkAndLogParseRateLimit(session.user.id))) {
     return new Response(JSON.stringify({ error: 'Rate limit exceeded — max 20 AI parses per hour' }), { status: 429 })
   }
 
@@ -121,6 +119,6 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({ eligibility }), { status: 200 })
   } catch (e) {
-    return new Response(JSON.stringify({ error: String(e) }), { status: 500 })
+    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 })
   }
 }

@@ -95,3 +95,15 @@ export const deployLog = pgTable('deploy_log', {
   vercelResponse: jsonb('vercel_response'),
   createdAt: timestamp('created_at').defaultNow(),
 })
+
+export const parseLog = pgTable('parse_log', {
+  id: serial('id').primaryKey(),
+  userId: text('user_id').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, t => [index('parse_log_userId_idx').on(t.userId)])
+
+export const mutationLog = pgTable('mutation_log', {
+  id: serial('id').primaryKey(),
+  userId: text('user_id').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, t => [index('mutation_log_userId_idx').on(t.userId)])

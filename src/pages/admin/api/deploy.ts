@@ -37,6 +37,6 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({ success: true, ...result }), { status: 200 })
   } catch (e) {
-    return new Response(JSON.stringify({ error: String(e) }), { status: 500 })
+    return new Response(JSON.stringify({ error: 'Failed to trigger deployment' }), { status: 500 })
   }
 }

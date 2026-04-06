@@ -29,7 +29,7 @@ const UpdateSchema = z.object({
 export const PUT: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
-  if (!checkMutationRateLimit(session.user.id)) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
+  if (!(await checkMutationRateLimit(session.user.id))) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
 
   const id = parseInt(params.id!)
   if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
@@ -45,14 +45,14 @@ export const PUT: APIRoute = async ({ request, params }) => {
     if (!updated) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
     return new Response(JSON.stringify(updated), { status: 200 })
   } catch (e) {
-    return new Response(JSON.stringify({ error: String(e) }), { status: 400 })
+    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
   }
 }
 
 export const DELETE: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
-  if (!checkMutationRateLimit(session.user.id)) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
+  if (!(await checkMutationRateLimit(session.user.id))) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
 
   const id = parseInt(params.id!)
   if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
@@ -61,6 +61,6 @@ export const DELETE: APIRoute = async ({ request, params }) => {
     await db.delete(researchPrograms).where(eq(researchPrograms.id, id))
     return new Response(null, { status: 204 })
   } catch (e) {
-    return new Response(JSON.stringify({ error: String(e) }), { status: 400 })
+    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
   }
 }
