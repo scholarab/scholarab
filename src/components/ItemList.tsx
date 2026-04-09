@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Drawer } from 'vaul';
 import { useScholarships } from '../hooks/useScholarships.ts';
 import { usePrograms } from '../hooks/usePrograms.ts';
@@ -48,6 +48,14 @@ export default function ItemList(props: Props) {
   const { filtered, visibleItems, page, totalPages, handlePageChange,
           sortBy, setSort, sheetOpen, setSheetOpen, hasActiveFilters, savedIds, handleToggleSave }
     = isScholarship ? sch : prg;
+
+  // Close the drawer before Astro navigates — prevents Radix from leaving
+  // body.style.pointerEvents='none' stuck on the next page.
+  useEffect(() => {
+    const close = () => setSheetOpen(false);
+    document.addEventListener('astro:before-preparation', close);
+    return () => document.removeEventListener('astro:before-preparation', close);
+  }, [setSheetOpen]);
 
   const savedSet   = useMemo(() => new Set(savedIds), [savedIds]);
   const label      = isScholarship ? 'scholarship' : 'program';

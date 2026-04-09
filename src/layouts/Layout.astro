@@ -81,6 +81,12 @@ const {
         if (pill) navigator.vibrate?.(6);
       }, { passive: true });
 
+      // Radix/Vaul sets body pointer-events:'none' when a modal/drawer is open.
+      // If navigation happens before cleanup, the body stays blocked. Reset it on every swap.
+      document.addEventListener('astro:before-swap', () => {
+        document.body.style.pointerEvents = '';
+      });
+
       // Service worker registration
       document.addEventListener('astro:page-load', () => {
         if ('serviceWorker' in navigator) {
