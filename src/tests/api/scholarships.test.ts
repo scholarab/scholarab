@@ -120,6 +120,15 @@ describe('GET /admin/api/scholarships', () => {
     expect(res.status).toBe(200)
     expect(await res.json()).toEqual([])
   })
+
+  it('applies limit to the query (safety cap)', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    const rows = Array.from({ length: 5 }, (_, i) => ({ ...STORED_ROW, id: i + 1 }))
+    mockSelect.mockReturnValue(chain(rows))
+    const res = await GET({ request: req('GET') } as any)
+    expect(res.status).toBe(200)
+    expect(await res.json()).toHaveLength(5)
+  })
 })
 
 // ── POST /admin/api/scholarships ──────────────────────────────────────────────

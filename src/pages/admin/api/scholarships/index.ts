@@ -31,7 +31,7 @@ export const GET: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
 
-  const all = await db.select().from(scholarships).orderBy(desc(scholarships.updatedAt))
+  const all = await db.select().from(scholarships).orderBy(desc(scholarships.updatedAt)).limit(1000)
   return new Response(JSON.stringify(all), { status: 200 })
 }
 

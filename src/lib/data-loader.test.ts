@@ -248,4 +248,15 @@ describe('parseEligibility — Zod schema via DB path', () => {
     const result = await loadScholarships()
     expect(result.map(s => s.id)).toEqual([1])
   })
+
+  it('always returns notes as null on public path (admin-only field not fetched)', async () => {
+    vi.doMock('./db/client', () => ({
+      db: { select: () => ({ from: () => ({ where: async () => [{ ...dbRow(null), notes: 'Admin note: contact sponsor directly' }] }) }) },
+    }))
+    vi.doMock('./db/schema', () => ({ scholarships: 'scholarships_table' }))
+
+    const { loadScholarships } = await import('./data-loader')
+    const result = await loadScholarships()
+    expect(result[0]?.notes).toBeNull()
+  })
 })

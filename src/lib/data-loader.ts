@@ -80,7 +80,21 @@ export async function loadScholarships(): Promise<Scholarship[]> {
       const { db } = await import('./db/client')
       const { scholarships } = await import('./db/schema')
       const { eq } = await import('drizzle-orm')
-      const rows = await db.select().from(scholarships).where(eq(scholarships.active, true))
+      const rows = await db.select({
+        id: scholarships.id,
+        title: scholarships.title,
+        amount: scholarships.amount,
+        deadline: scholarships.deadline,
+        openDate: scholarships.openDate,
+        audience: scholarships.audience,
+        url: scholarships.url,
+        category: scholarships.category,
+        lastVerified: scholarships.lastVerified,
+        region: scholarships.region,
+        applyViaGuidance: scholarships.applyViaGuidance,
+        active: scholarships.active,
+        eligibility: scholarships.eligibility,
+      }).from(scholarships).where(eq(scholarships.active, true))
       const result = rows.map(r => ({
         id: r.id,
         title: r.title,
@@ -92,7 +106,7 @@ export async function loadScholarships(): Promise<Scholarship[]> {
         category: r.category ?? null,
         lastVerified: r.lastVerified ?? null,
         region: r.region ?? null,
-        notes: r.notes ?? null,
+        notes: null, // admin-only field — not fetched on public path
         applyViaGuidance: r.applyViaGuidance ?? false,
         active: r.active ?? true,
         eligibility: parseEligibility(r.eligibility),
@@ -114,7 +128,24 @@ export async function loadPrograms(): Promise<Program[]> {
       const { db } = await import('./db/client')
       const { researchPrograms } = await import('./db/schema')
       const { eq } = await import('drizzle-orm')
-      const rows = await db.select().from(researchPrograms).where(eq(researchPrograms.active, true))
+      const rows = await db.select({
+        id: researchPrograms.id,
+        name: researchPrograms.name,
+        emoji: researchPrograms.emoji,
+        category: researchPrograms.category,
+        provider: researchPrograms.provider,
+        grades: researchPrograms.grades,
+        duration: researchPrograms.duration,
+        paid: researchPrograms.paid,
+        stipend: researchPrograms.stipend,
+        location: researchPrograms.location,
+        eligibility: researchPrograms.eligibility,
+        deadline: researchPrograms.deadline,
+        url: researchPrograms.url,
+        description: researchPrograms.description,
+        lastVerified: researchPrograms.lastVerified,
+        active: researchPrograms.active,
+      }).from(researchPrograms).where(eq(researchPrograms.active, true))
       const result = rows.map(r => ({
         id: r.id,
         name: r.name,

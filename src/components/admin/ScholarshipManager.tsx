@@ -229,7 +229,9 @@ export default function ScholarshipManager({ initialData }: Props) {
     setBulkProgress({ done: 0, total: untagged.length })
     let done = 0
     let failed = 0
-    for (const s of untagged) {
+    for (let i = 0; i < untagged.length; i++) {
+      if (i > 0) await new Promise(r => setTimeout(r, 500))
+      const s = untagged[i]!
       try {
         const res = await fetch('/admin/api/scholarships/parse-eligibility', {
           method: 'POST',
