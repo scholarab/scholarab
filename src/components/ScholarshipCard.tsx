@@ -1,6 +1,6 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import { track } from '@vercel/analytics';
-import { getToday, generateSlug, formatDeadline, showToast } from '../lib/utils.ts';
+import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.ts';
 import { getStatus } from '../hooks/useScholarships.ts';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
@@ -12,6 +12,7 @@ interface ScholarshipCardProps {
 }
 
 function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCardProps) {
+  const saveBtnRef   = useRef<HTMLButtonElement>(null);
   const status       = getStatus(scholarship);
   const isClosed     = status === 'closed';
   const daysLeft     = status === 'active'
@@ -91,7 +92,8 @@ function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCard
           </button>
         )}
         <button
-          onClick={() => { showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
+          ref={saveBtnRef}
+          onClick={() => { if (!isSaved) showConfetti(saveBtnRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
           className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-[#22d3a5] border border-[#22d3a5]/40' : 'text-white/50 border border-white/[0.18]'}`}
           style={{ width: 44, background: isSaved ? 'rgba(34,211,165,0.12)' : undefined }}

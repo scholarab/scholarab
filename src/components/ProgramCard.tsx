@@ -1,5 +1,6 @@
+import { useRef } from 'react';
 import { track } from '@vercel/analytics';
-import { formatDeadline, generateSlug, showToast, getToday } from '../lib/utils.ts';
+import { formatDeadline, generateSlug, showToast, showConfetti, getToday } from '../lib/utils.ts';
 import { getStatus } from '../hooks/usePrograms.ts';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
@@ -18,6 +19,7 @@ function isWithin30Days(deadlineStr: string | null | undefined): boolean {
 }
 
 export default function ProgramCard({ program, isSaved, onToggleSave }: ProgramCardProps) {
+  const saveBtnRef  = useRef<HTMLButtonElement>(null);
   const status      = getStatus(program);
   const isClosed    = status === 'closed';
   const badge       = CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE;
@@ -88,7 +90,8 @@ export default function ProgramCard({ program, isSaved, onToggleSave }: ProgramC
           </a>
         )}
         <button
-          onClick={() => { showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
+          ref={saveBtnRef}
+          onClick={() => { if (!isSaved) showConfetti(saveBtnRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save program'}
           className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-[#22d3a5] border border-[#22d3a5]/40' : 'text-white/50 border border-white/[0.18]'}`}
           style={{ width: 44, background: isSaved ? 'rgba(34,211,165,0.12)' : undefined }}
