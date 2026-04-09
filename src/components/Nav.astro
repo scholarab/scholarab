@@ -16,7 +16,6 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
             <tspan x="74" y="38" class="logo-scholar">Scholar</tspan><tspan fill="#22d3a5">AB</tspan>
           </text>
         </svg>
-        <span class="beta-badge">BETA</span>
       </a>
       <div class="flex items-center gap-5 text-sm font-medium">
         <a href="/" aria-current={currentPath === '/' ? 'page' : undefined} class={navCls('/')}>Home</a>
@@ -51,19 +50,6 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
 
 <style is:global>
   .logo-scholar { fill: #ffffff; }
-  .beta-badge {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #22d3a5;
-    background: rgba(34, 211, 165, 0.12);
-    border: 0.5px solid rgba(34, 211, 165, 0.35);
-    border-radius: 4px;
-    padding: 2px 5px;
-    line-height: 1;
-    align-self: flex-start;
-    margin-top: 4px;
-  }
   .glass-nav a {
     -webkit-tap-highlight-color: transparent;
   }

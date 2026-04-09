@@ -37,6 +37,8 @@ const REGION_MATCH: Record<RegionKey, (s: ScholarshipWithMeta) => boolean> = {
 
 type SortValue = 'featured' | 'closest_due' | 'highest_pay' | 'lowest_pay';
 
+const STATUS_ORDER: Record<string, number> = { active: 0, future: 1 };
+
 export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [sortBy,         setSortBy        ] = useState<SortValue>('featured');
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | null>(null);
@@ -89,12 +91,11 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       : withoutClosed.filter(REGION_MATCH[selectedRegion]);
 
     return [...afterRegion].sort((a, b) => {
-      if (sortBy === 'closest_due') return (a._deadline_ms ?? 0) - (b._deadline_ms ?? 0);
+      if (sortBy === 'closest_due') return (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity);
       if (sortBy === 'highest_pay') return (b._amount_cents ?? 0) - (a._amount_cents ?? 0);
       if (sortBy === 'lowest_pay')  return (a._amount_cents ?? 0) - (b._amount_cents ?? 0);
       const sa = statusCache.get(a.id), sb = statusCache.get(b.id);
-      const ORDER: Record<string, number> = { active: 0, future: 1 };
-      if ((ORDER[sa!] ?? 2) !== (ORDER[sb!] ?? 2)) return (ORDER[sa!] ?? 2) - (ORDER[sb!] ?? 2);
+      if ((STATUS_ORDER[sa!] ?? 2) !== (STATUS_ORDER[sb!] ?? 2)) return (STATUS_ORDER[sa!] ?? 2) - (STATUS_ORDER[sb!] ?? 2);
       if (sa === 'active') return (a._deadline_ms ?? 0) - (b._deadline_ms ?? 0);
       return 0;
     });

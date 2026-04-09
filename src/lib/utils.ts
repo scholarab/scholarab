@@ -78,6 +78,7 @@ export function showConfetti(originEl?: Element | null): void {
   rafId = requestAnimationFrame(tick);
 }
 
+// Intentionally imperative DOM injection — avoids a toast library dependency for a single UI pattern.
 export function showToast(message: string): void {
   const TOAST_ID = 'sa-toast';
   document.getElementById(TOAST_ID)?.remove();
