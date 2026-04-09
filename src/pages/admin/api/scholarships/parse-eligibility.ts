@@ -111,7 +111,7 @@ export const POST: APIRoute = async ({ request }) => {
     try {
       parsed = JSON.parse(cleaned)
     } catch {
-      return new Response(JSON.stringify({ error: 'AI returned invalid JSON', raw: cleaned }), { status: 502 })
+      return new Response(JSON.stringify({ error: 'AI returned invalid JSON' }), { status: 502 })
     }
 
     // Merge with defaults to ensure all keys are present

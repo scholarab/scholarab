@@ -7,21 +7,23 @@ import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 
 export const prerender = false
 
+const httpsUrl = z.string().url().max(2048).refine(u => u.startsWith('https://'), 'URL must use HTTPS')
+
 const CreateSchema = z.object({
-  name: z.string().min(1),
-  emoji: z.string().optional().nullable(),
-  category: z.string().optional().nullable(),
-  provider: z.string().optional().nullable(),
-  grades: z.string().optional().nullable(),
-  duration: z.string().optional().nullable(),
+  name: z.string().min(1).max(500),
+  emoji: z.string().max(10).optional().nullable(),
+  category: z.string().max(100).optional().nullable(),
+  provider: z.string().max(200).optional().nullable(),
+  grades: z.string().max(200).optional().nullable(),
+  duration: z.string().max(200).optional().nullable(),
   paid: z.boolean().default(false),
-  stipend: z.string().optional().nullable(),
-  location: z.string().optional().nullable(),
-  eligibility: z.string().optional().nullable(),
-  deadline: z.string().optional().nullable(),
-  url: z.string().url(),
-  description: z.string().optional().nullable(),
-  lastVerified: z.string().optional().nullable(),
+  stipend: z.string().max(200).optional().nullable(),
+  location: z.string().max(500).optional().nullable(),
+  eligibility: z.string().max(10000).optional().nullable(),
+  deadline: z.string().max(50).optional().nullable(),
+  url: httpsUrl,
+  description: z.string().max(5000).optional().nullable(),
+  lastVerified: z.string().max(50).optional().nullable(),
   active: z.boolean().default(true),
 })
 
@@ -36,6 +38,9 @@ export const POST: APIRoute = async ({ request }) => {
     const [created] = await db.insert(researchPrograms).values(data).returning()
     return new Response(JSON.stringify(created), { status: 201 })
   } catch (e) {
+    if (e instanceof z.ZodError) {
+      return new Response(JSON.stringify({ error: 'Invalid request data' }), { status: 400 })
+    }
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
   }
 }

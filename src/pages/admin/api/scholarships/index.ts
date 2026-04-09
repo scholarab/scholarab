@@ -8,17 +8,19 @@ import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 
 export const prerender = false
 
+const httpsUrl = z.string().url().max(2048).refine(u => u.startsWith('https://'), 'URL must use HTTPS')
+
 const CreateSchema = z.object({
-  title: z.string().min(1),
-  amount: z.string().min(1),
-  deadline: z.string().optional().nullable(),
-  openDate: z.string().optional().nullable(),
-  audience: z.string().optional().nullable(),
-  url: z.string().url(),
-  category: z.string().optional().nullable(),
-  lastVerified: z.string().optional().nullable(),
-  region: z.string().optional().nullable(),
-  notes: z.string().optional().nullable(),
+  title: z.string().min(1).max(500),
+  amount: z.string().min(1).max(100),
+  deadline: z.string().max(50).optional().nullable(),
+  openDate: z.string().max(50).optional().nullable(),
+  audience: z.string().max(5000).optional().nullable(),
+  url: httpsUrl,
+  category: z.string().max(100).optional().nullable(),
+  lastVerified: z.string().max(50).optional().nullable(),
+  region: z.string().max(100).optional().nullable(),
+  notes: z.string().max(5000).optional().nullable(),
   applyViaGuidance: z.boolean().default(false),
   active: z.boolean().default(true),
   eligibility: z.unknown().optional().nullable(),
@@ -57,6 +59,9 @@ export const POST: APIRoute = async ({ request }) => {
     const [created] = await db.insert(scholarships).values(data).returning()
     return new Response(JSON.stringify(created), { status: 201 })
   } catch (e) {
+    if (e instanceof z.ZodError) {
+      return new Response(JSON.stringify({ error: 'Invalid request data' }), { status: 400 })
+    }
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
   }
 }

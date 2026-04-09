@@ -107,3 +107,9 @@ export const mutationLog = pgTable('mutation_log', {
   userId: text('user_id').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, t => [index('mutation_log_userId_idx').on(t.userId)])
+
+export const authRateLimit = pgTable('auth_rate_limit', {
+  id: serial('id').primaryKey(),
+  ip: text('ip').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, t => [index('auth_rate_limit_ip_idx').on(t.ip)])

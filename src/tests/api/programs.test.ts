@@ -120,6 +120,18 @@ describe('POST /admin/api/programs', () => {
     expect(res.status).toBe(400)
   })
 
+  it('returns 400 when URL uses HTTP instead of HTTPS', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    const res = await POST({ request: req('POST', null, { name: 'Test', url: 'http://example.com' }) } as any)
+    expect(res.status).toBe(400)
+  })
+
+  it('returns 400 when name exceeds max length', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    const res = await POST({ request: req('POST', null, { name: 'x'.repeat(501), url: 'https://example.com' }) } as any)
+    expect(res.status).toBe(400)
+  })
+
   it('returns 201 with created program on success', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
     mockInsert.mockReturnValue(chain([STORED_ROW]))
@@ -176,6 +188,15 @@ describe('PUT /admin/api/programs/[id]', () => {
     mockGetSession.mockResolvedValue(AUTHED)
     const res = await PUT({
       request: req('PUT', '1', { url: 'not-a-url' }),
+      params: { id: '1' },
+    } as any)
+    expect(res.status).toBe(400)
+  })
+
+  it('returns 400 when URL uses HTTP instead of HTTPS', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    const res = await PUT({
+      request: req('PUT', '1', { url: 'http://example.com' }),
       params: { id: '1' },
     } as any)
     expect(res.status).toBe(400)

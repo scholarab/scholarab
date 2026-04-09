@@ -8,17 +8,19 @@ import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 
 export const prerender = false
 
+const httpsUrl = z.string().url().max(2048).refine(u => u.startsWith('https://'), 'URL must use HTTPS')
+
 const UpdateSchema = z.object({
-  title: z.string().min(1).optional(),
-  amount: z.string().min(1).optional(),
-  deadline: z.string().optional().nullable(),
-  openDate: z.string().optional().nullable(),
-  audience: z.string().optional().nullable(),
-  url: z.string().url().optional(),
-  category: z.string().optional().nullable(),
-  lastVerified: z.string().optional().nullable(),
-  region: z.string().optional().nullable(),
-  notes: z.string().optional().nullable(),
+  title: z.string().min(1).max(500).optional(),
+  amount: z.string().min(1).max(100).optional(),
+  deadline: z.string().max(50).optional().nullable(),
+  openDate: z.string().max(50).optional().nullable(),
+  audience: z.string().max(5000).optional().nullable(),
+  url: httpsUrl.optional(),
+  category: z.string().max(100).optional().nullable(),
+  lastVerified: z.string().max(50).optional().nullable(),
+  region: z.string().max(100).optional().nullable(),
+  notes: z.string().max(5000).optional().nullable(),
   applyViaGuidance: z.boolean().optional(),
   active: z.boolean().optional(),
   eligibility: z.unknown().optional().nullable(),
@@ -57,8 +59,8 @@ export const PUT: APIRoute = async ({ request, params }) => {
         .where(eq(scholarships.id, id))
       if (!current) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
 
-      const dbTs = Math.floor(new Date(current.updatedAt).getTime() / 1000)
-      const clientTs = Math.floor(new Date(clientUpdatedAt).getTime() / 1000)
+      const dbTs = new Date(current.updatedAt).getTime()
+      const clientTs = new Date(clientUpdatedAt).getTime()
       if (dbTs !== clientTs) {
         return new Response(
           JSON.stringify({ error: 'conflict', message: 'This record was modified by someone else. Please refresh and try again.' }),
@@ -75,6 +77,9 @@ export const PUT: APIRoute = async ({ request, params }) => {
     if (!updated) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
     return new Response(JSON.stringify(updated), { status: 200 })
   } catch (e) {
+    if (e instanceof z.ZodError) {
+      return new Response(JSON.stringify({ error: 'Invalid request data' }), { status: 400 })
+    }
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
   }
 }
