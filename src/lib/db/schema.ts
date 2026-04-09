@@ -1,4 +1,4 @@
-import { pgTable, serial, text, boolean, timestamp, jsonb, index } from 'drizzle-orm/pg-core'
+import { pgTable, serial, text, boolean, timestamp, jsonb, index, uniqueIndex } from 'drizzle-orm/pg-core'
 
 // ── Better Auth tables ────────────────────────────────────────────────────────
 
@@ -65,7 +65,12 @@ export const scholarships = pgTable('scholarships', {
   eligibility: jsonb('eligibility'),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
-})
+}, t => [
+  uniqueIndex('scholarships_title_unique').on(t.title),
+  index('scholarships_active_idx').on(t.active),
+  index('scholarships_region_idx').on(t.region),
+  index('scholarships_category_idx').on(t.category),
+])
 
 export const researchPrograms = pgTable('research_programs', {
   id: serial('id').primaryKey(),
@@ -86,7 +91,10 @@ export const researchPrograms = pgTable('research_programs', {
   active: boolean('active').default(true),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
-})
+}, t => [
+  index('research_programs_active_idx').on(t.active),
+  index('research_programs_category_idx').on(t.category),
+])
 
 export const deployLog = pgTable('deploy_log', {
   id: serial('id').primaryKey(),

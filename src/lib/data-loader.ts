@@ -2,7 +2,7 @@ import { z } from 'zod'
 import type { EligibilityCriteria } from './eligibility-types'
 
 // ── Zod schema for EligibilityCriteria ───────────────────────────────────────
-const eligibilitySchema = z.object({
+export const eligibilitySchema = z.object({
   grades: z.array(z.string()).default([]),
   schoolBoards: z.array(z.string()).default([]),
   specificSchools: z.array(z.string()).default([]),
@@ -68,30 +68,37 @@ export type Program = {
   active: boolean
 }
 
+const CACHE_TTL = 5 * 60_000 // 5 minutes
+
+let scholarshipCache: { data: Scholarship[]; exp: number } | null = null
+let programCache:     { data: Program[];     exp: number } | null = null
+
 export async function loadScholarships(): Promise<Scholarship[]> {
+  if (scholarshipCache && Date.now() < scholarshipCache.exp) return scholarshipCache.data
   if (process.env.DATABASE_URL) {
     try {
       const { db } = await import('./db/client')
       const { scholarships } = await import('./db/schema')
       const { eq } = await import('drizzle-orm')
       const rows = await db.select().from(scholarships).where(eq(scholarships.active, true))
-      return rows
-        .map(r => ({
-          id: r.id,
-          title: r.title,
-          amount: r.amount,
-          deadline: r.deadline ?? null,
-          openDate: r.openDate ?? null,
-          audience: r.audience ?? null,
-          url: r.url,
-          category: r.category ?? null,
-          lastVerified: r.lastVerified ?? null,
-          region: r.region ?? null,
-          notes: r.notes ?? null,
-          applyViaGuidance: r.applyViaGuidance ?? false,
-          active: r.active ?? true,
-          eligibility: parseEligibility(r.eligibility),
-        }))
+      const result = rows.map(r => ({
+        id: r.id,
+        title: r.title,
+        amount: r.amount,
+        deadline: r.deadline ?? null,
+        openDate: r.openDate ?? null,
+        audience: r.audience ?? null,
+        url: r.url,
+        category: r.category ?? null,
+        lastVerified: r.lastVerified ?? null,
+        region: r.region ?? null,
+        notes: r.notes ?? null,
+        applyViaGuidance: r.applyViaGuidance ?? false,
+        active: r.active ?? true,
+        eligibility: parseEligibility(r.eligibility),
+      }))
+      scholarshipCache = { data: result, exp: Date.now() + CACHE_TTL }
+      return result
     } catch (e) {
       console.error('DB load failed, falling back to JSON:', e)
     }
@@ -101,31 +108,33 @@ export async function loadScholarships(): Promise<Scholarship[]> {
 }
 
 export async function loadPrograms(): Promise<Program[]> {
+  if (programCache && Date.now() < programCache.exp) return programCache.data
   if (process.env.DATABASE_URL) {
     try {
       const { db } = await import('./db/client')
       const { researchPrograms } = await import('./db/schema')
       const { eq } = await import('drizzle-orm')
       const rows = await db.select().from(researchPrograms).where(eq(researchPrograms.active, true))
-      return rows
-        .map(r => ({
-          id: r.id,
-          name: r.name,
-          emoji: r.emoji ?? null,
-          category: r.category ?? null,
-          provider: r.provider ?? null,
-          grades: r.grades ?? null,
-          duration: r.duration ?? null,
-          paid: r.paid ?? false,
-          stipend: r.stipend ?? null,
-          location: r.location ?? null,
-          eligibility: r.eligibility ?? null,
-          deadline: r.deadline ?? null,
-          url: r.url,
-          description: r.description ?? null,
-          lastVerified: r.lastVerified ?? null,
-          active: r.active ?? true,
-        }))
+      const result = rows.map(r => ({
+        id: r.id,
+        name: r.name,
+        emoji: r.emoji ?? null,
+        category: r.category ?? null,
+        provider: r.provider ?? null,
+        grades: r.grades ?? null,
+        duration: r.duration ?? null,
+        paid: r.paid ?? false,
+        stipend: r.stipend ?? null,
+        location: r.location ?? null,
+        eligibility: r.eligibility ?? null,
+        deadline: r.deadline ?? null,
+        url: r.url,
+        description: r.description ?? null,
+        lastVerified: r.lastVerified ?? null,
+        active: r.active ?? true,
+      }))
+      programCache = { data: result, exp: Date.now() + CACHE_TTL }
+      return result
     } catch (e) {
       console.error('DB load failed, falling back to JSON:', e)
     }

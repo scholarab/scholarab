@@ -5,6 +5,7 @@ import { scholarships } from '../../../../lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
+import { eligibilitySchema } from '../../../../lib/data-loader'
 
 export const prerender = false
 
@@ -23,7 +24,7 @@ const UpdateSchema = z.object({
   notes: z.string().max(5000).optional().nullable(),
   applyViaGuidance: z.boolean().optional(),
   active: z.boolean().optional(),
-  eligibility: z.unknown().optional().nullable(),
+  eligibility: eligibilitySchema.optional().nullable(),
 })
 
 export const GET: APIRoute = async ({ request, params }) => {

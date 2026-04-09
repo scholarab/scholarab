@@ -196,6 +196,21 @@ describe('POST /admin/api/scholarships', () => {
     expect(body.id).toBe(1)
   })
 
+  it('returns 400 when eligibility has wrong shape', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    const res = await POST({ request: req('POST', { ...VALID_BODY, eligibility: { grades: 'not-an-array' } }) } as any)
+    expect(res.status).toBe(400)
+  })
+
+  it('accepts valid eligibility object', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValueOnce(chain([]))
+    mockInsert.mockReturnValue(chain([STORED_ROW]))
+    const validEligibility = { grades: ['11', '12'], financialNeed: true }
+    const res = await POST({ request: req('POST', { ...VALID_BODY, eligibility: validEligibility }) } as any)
+    expect(res.status).toBe(201)
+  })
+
   it('applies default applyViaGuidance=false when omitted', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
     mockSelect.mockReturnValueOnce(chain([]))

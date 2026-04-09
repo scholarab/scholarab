@@ -1,11 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { POST } from '../../pages/admin/api/programs/index'
-import { PUT, DELETE } from '../../pages/admin/api/programs/[id]'
+import { GET, PUT, DELETE } from '../../pages/admin/api/programs/[id]'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-const { mockGetSession, mockInsert, mockUpdate, mockDelete, mockRateLimit } = vi.hoisted(() => ({
+const { mockGetSession, mockSelect, mockInsert, mockUpdate, mockDelete, mockRateLimit } = vi.hoisted(() => ({
   mockGetSession: vi.fn(),
+  mockSelect:     vi.fn(),
   mockInsert:     vi.fn(),
   mockUpdate:     vi.fn(),
   mockDelete:     vi.fn(),
@@ -22,6 +23,7 @@ vi.mock('../../lib/adminRateLimit', () => ({
 
 vi.mock('../../lib/db/client', () => ({
   db: {
+    select: (...a: any[]) => mockSelect(...a),
     insert: (...a: any[]) => mockInsert(...a),
     update: (...a: any[]) => mockUpdate(...a),
     delete: (...a: any[]) => mockDelete(...a),
@@ -29,16 +31,15 @@ vi.mock('../../lib/db/client', () => ({
 }))
 
 vi.mock('../../lib/db/schema', () => ({
-  researchPrograms: { id: 'id', updatedAt: 'updatedAt' },
+  researchPrograms: { id: 'id', name: 'name', updatedAt: 'updatedAt' },
 }))
 
 vi.mock('drizzle-orm', () => ({
-  eq: vi.fn(() => 'eq'),
+  ilike: vi.fn(() => 'ilike'),
+  eq:    vi.fn(() => 'eq'),
 }))
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-
-// (no select mock needed — programs API doesn't use db.select)
 
 const AUTHED = { user: { id: '1', email: 'admin@test.com' } }
 
@@ -132,9 +133,20 @@ describe('POST /admin/api/programs', () => {
     expect(res.status).toBe(400)
   })
 
+  it('returns 409 with duplicate error when name already exists', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValue(chain([{ id: 1, name: 'Test Program' }]))
+    const res = await POST({ request: req('POST', null, VALID_BODY) } as any)
+    expect(res.status).toBe(409)
+    const body = await res.json()
+    expect(body.error).toBe('duplicate')
+    expect(body.existing).toBe('Test Program')
+  })
+
   it('returns 201 with created program on success', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
-    mockInsert.mockReturnValue(chain([STORED_ROW]))
+    mockSelect.mockReturnValueOnce(chain([]))       // duplicate check: none found
+    mockInsert.mockReturnValue(chain([STORED_ROW])) // insert: returns new row
     const res = await POST({ request: req('POST', null, VALID_BODY) } as any)
     expect(res.status).toBe(201)
     const body = await res.json()
@@ -144,6 +156,7 @@ describe('POST /admin/api/programs', () => {
 
   it('applies default paid=false when omitted', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValueOnce(chain([]))
     mockInsert.mockReturnValue(chain([STORED_ROW]))
     const res = await POST({ request: req('POST', null, { name: 'Test', url: 'https://example.com' }) } as any)
     expect(res.status).toBe(201)
@@ -151,11 +164,46 @@ describe('POST /admin/api/programs', () => {
 
   it('returns 400 when DB throws', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValueOnce(chain([]))
     mockInsert.mockReturnValue({
       values: () => ({ returning: () => Promise.reject(new Error('DB error')) }),
     })
     const res = await POST({ request: req('POST', null, VALID_BODY) } as any)
     expect(res.status).toBe(400)
+  })
+})
+
+// ── GET /admin/api/programs/[id] ──────────────────────────────────────────────
+
+describe('GET /admin/api/programs/[id]', () => {
+  it('returns 401 when unauthenticated', async () => {
+    mockGetSession.mockResolvedValue(null)
+    const res = await GET({ request: req('GET', '1'), params: { id: '1' } } as any)
+    expect(res.status).toBe(401)
+  })
+
+  it('returns 400 for non-numeric id', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    const res = await GET({ request: req('GET', 'abc'), params: { id: 'abc' } } as any)
+    expect(res.status).toBe(400)
+    expect(await res.json()).toMatchObject({ error: 'Invalid ID' })
+  })
+
+  it('returns 404 when program not found', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValue(chain([]))
+    const res = await GET({ request: req('GET', '999'), params: { id: '999' } } as any)
+    expect(res.status).toBe(404)
+  })
+
+  it('returns 200 with program when found', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValue(chain([STORED_ROW]))
+    const res = await GET({ request: req('GET', '1'), params: { id: '1' } } as any)
+    expect(res.status).toBe(200)
+    const body = await res.json()
+    expect(body.id).toBe(1)
+    expect(body.name).toBe('Test Program')
   })
 })
 
@@ -202,20 +250,60 @@ describe('PUT /admin/api/programs/[id]', () => {
     expect(res.status).toBe(400)
   })
 
-  it('returns 404 when program not found', async () => {
+  it('returns 409 conflict when optimistic lock timestamp differs', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
-    mockUpdate.mockReturnValue(chain([]))   // update returns empty → not found
-    const res = await PUT({ request: req('PUT', '1', UPDATE_BODY), params: { id: '1' } } as any)
+    mockSelect.mockReturnValue(chain([{ updatedAt: new Date('2026-04-05T11:00:00Z') }]))
+    const bodyWithStaleTimestamp = { ...UPDATE_BODY, updatedAt: '2026-04-05T10:00:00Z' }
+    const res = await PUT({
+      request: req('PUT', '1', bodyWithStaleTimestamp),
+      params: { id: '1' },
+    } as any)
+    expect(res.status).toBe(409)
+    const body = await res.json()
+    expect(body.error).toBe('conflict')
+  })
+
+  it('returns 404 when record not found during optimistic lock check', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValue(chain([]))
+    const bodyWithTimestamp = { ...UPDATE_BODY, updatedAt: '2026-04-05T10:00:00Z' }
+    const res = await PUT({
+      request: req('PUT', '1', bodyWithTimestamp),
+      params: { id: '1' },
+    } as any)
     expect(res.status).toBe(404)
   })
 
-  it('returns 200 with updated program on success', async () => {
+  it('returns 200 with updated program when timestamps match', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
+    const ts = '2026-04-05T10:00:00Z'
+    mockSelect.mockReturnValue(chain([{ updatedAt: new Date(ts) }]))
     mockUpdate.mockReturnValue(chain([{ ...STORED_ROW, name: 'Updated Program' }]))
-    const res = await PUT({ request: req('PUT', '1', UPDATE_BODY), params: { id: '1' } } as any)
+    const bodyWithTimestamp = { ...UPDATE_BODY, updatedAt: ts }
+    const res = await PUT({
+      request: req('PUT', '1', bodyWithTimestamp),
+      params: { id: '1' },
+    } as any)
     expect(res.status).toBe(200)
     const body = await res.json()
     expect(body.name).toBe('Updated Program')
+  })
+
+  it('returns 200 without optimistic lock check when no updatedAt provided', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockUpdate.mockReturnValue(chain([{ ...STORED_ROW, name: 'Updated Program' }]))
+    const res = await PUT({
+      request: req('PUT', '1', UPDATE_BODY),
+      params: { id: '1' },
+    } as any)
+    expect(res.status).toBe(200)
+  })
+
+  it('returns 404 when update finds no record', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockUpdate.mockReturnValue(chain([]))
+    const res = await PUT({ request: req('PUT', '1', UPDATE_BODY), params: { id: '1' } } as any)
+    expect(res.status).toBe(404)
   })
 
   it('returns 400 when DB throws', async () => {

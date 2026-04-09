@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro'
 import { auth } from '../../../../lib/auth'
 import { db } from '../../../../lib/db/client'
 import { researchPrograms } from '../../../../lib/db/schema'
+import { ilike } from 'drizzle-orm'
 import { z } from 'zod'
 import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 
@@ -35,6 +36,20 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json()
     const data = CreateSchema.parse(body)
+
+    // Server-side duplicate check (case-insensitive)
+    const existing = await db
+      .select({ id: researchPrograms.id, name: researchPrograms.name })
+      .from(researchPrograms)
+      .where(ilike(researchPrograms.name, data.name.trim()))
+      .limit(1)
+    if (existing.length > 0) {
+      return new Response(
+        JSON.stringify({ error: 'duplicate', existing: existing[0].name }),
+        { status: 409 }
+      )
+    }
+
     const [created] = await db.insert(researchPrograms).values(data).returning()
     return new Response(JSON.stringify(created), { status: 201 })
   } catch (e) {
