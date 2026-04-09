@@ -114,6 +114,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({ eligibility }), { status: 200 })
   } catch (e) {
+    console.error('[POST /admin/api/scholarships/parse-eligibility]', e)
     return jsonError('Internal server error', 500)
   }
 }

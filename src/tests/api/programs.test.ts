@@ -199,14 +199,15 @@ describe('POST /admin/api/programs', () => {
     expect(res.status).toBe(201)
   })
 
-  it('returns 400 when DB throws', async () => {
+  it('returns 500 when DB throws', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
     mockSelect.mockReturnValueOnce(chain([]))
     mockInsert.mockReturnValue({
       values: () => ({ returning: () => Promise.reject(new Error('DB error')) }),
     })
     const res = await POST({ request: req('POST', null, VALID_BODY) } as any)
-    expect(res.status).toBe(400)
+    expect(res.status).toBe(500)
+    expect(await res.json()).toMatchObject({ error: 'Internal server error' })
   })
 })
 
@@ -344,13 +345,14 @@ describe('PUT /admin/api/programs/[id]', () => {
     expect(res.status).toBe(404)
   })
 
-  it('returns 400 when DB throws', async () => {
+  it('returns 500 when DB throws', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
     mockUpdate.mockReturnValue({
       set: () => ({ where: () => ({ returning: () => Promise.reject(new Error('DB error')) }) }),
     })
     const res = await PUT({ request: req('PUT', '1', UPDATE_BODY), params: { id: '1' } } as any)
-    expect(res.status).toBe(400)
+    expect(res.status).toBe(500)
+    expect(await res.json()).toMatchObject({ error: 'Internal server error' })
   })
 })
 
@@ -385,12 +387,13 @@ describe('DELETE /admin/api/programs/[id]', () => {
     expect(mockLogAudit).toHaveBeenCalledWith('1', 'DELETE', 'program', 1)
   })
 
-  it('returns 400 when DB throws during deletion', async () => {
+  it('returns 500 when DB throws during deletion', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
     mockDelete.mockReturnValue({
       where: () => Promise.reject(new Error('constraint violation')),
     })
     const res = await DELETE({ request: req('DELETE', '1'), params: { id: '1' } } as any)
-    expect(res.status).toBe(400)
+    expect(res.status).toBe(500)
+    expect(await res.json()).toMatchObject({ error: 'Internal server error' })
   })
 })

@@ -61,6 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonOk(created, 201)
   } catch (e) {
     if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)
-    return jsonError(e instanceof Error ? e.message : 'Internal server error', 400)
+    console.error('[POST /admin/api/programs]', e)
+    return jsonError('Internal server error', 500)
   }
 }

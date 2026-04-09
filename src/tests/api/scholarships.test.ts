@@ -403,12 +403,13 @@ describe('DELETE /admin/api/scholarships/[id]', () => {
     expect(mockLogAudit).toHaveBeenCalledWith('1', 'DELETE', 'scholarship', 1)
   })
 
-  it('returns 400 when DB throws during deletion', async () => {
+  it('returns 500 when DB throws during deletion', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
     mockDelete.mockReturnValue({
       where: () => Promise.reject(new Error('DB error')),
     })
     const res = await DELETE({ request: reqWithId('DELETE', '1'), params: { id: '1' } } as any)
-    expect(res.status).toBe(400)
+    expect(res.status).toBe(500)
+    expect(await res.json()).toMatchObject({ error: 'Internal server error' })
   })
 })

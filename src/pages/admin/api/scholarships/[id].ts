@@ -78,7 +78,8 @@ export const PUT: APIRoute = async ({ request, params }) => {
     return jsonOk(updated)
   } catch (e) {
     if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)
-    return jsonError(e instanceof Error ? e.message : 'Internal server error', 400)
+    console.error('[PUT /admin/api/scholarships/:id]', e)
+    return jsonError('Internal server error', 500)
   }
 }
 
@@ -95,6 +96,7 @@ export const DELETE: APIRoute = async ({ request, params }) => {
     logAudit(session.user.id, 'DELETE', 'scholarship', id).catch(() => {})
     return new Response(null, { status: 204 })
   } catch (e) {
-    return jsonError(e instanceof Error ? e.message : 'Internal server error', 400)
+    console.error('[DELETE /admin/api/scholarships/:id]', e)
+    return jsonError('Internal server error', 500)
   }
 }
