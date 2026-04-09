@@ -81,6 +81,7 @@ html {
   --brand-border: rgba(34, 211, 165, 0.35);
   --t-press: 0.1s;
   --t-standard: 0.22s;
+  --t-card: 0.35s;
 }
 
 h1, h2 {

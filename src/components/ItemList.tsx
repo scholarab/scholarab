@@ -46,7 +46,7 @@ export default function ItemList(props: Props) {
   const prg = usePrograms(!isScholarship ? props.items as ProgramWithMeta[] : []);
 
   const { filtered, visibleItems, page, totalPages, handlePageChange,
-          sortBy, setSort, sheetOpen, setSheetOpen, hasActiveFilters, savedIds, handleToggleSave }
+          sortBy, setSort, sheetOpen, setSheetOpen, hasActiveFilters, savedIds, handleToggleSave, isFiltered }
     = isScholarship ? sch : prg;
 
   // Close the drawer before Astro navigates — prevents Radix from leaving
@@ -173,11 +173,11 @@ export default function ItemList(props: Props) {
       {/* Card grid */}
       <div key={`${filterKey}-${sortBy}-${page}`} className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
         {isScholarship
-          ? (visibleItems as ScholarshipWithMeta[]).map(s => (
-              <ScholarshipCard key={s.id} scholarship={s} isSaved={savedSet.has(s.id)} onToggleSave={() => handleToggleSave(s.id)} />
+          ? (visibleItems as ScholarshipWithMeta[]).map((s, i) => (
+              <ScholarshipCard key={s.id} scholarship={s} index={i} isSaved={savedSet.has(s.id)} onToggleSave={() => handleToggleSave(s.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
             ))
-          : (visibleItems as ProgramWithMeta[]).map(p => (
-              <ProgramCard key={p.id} program={p} isSaved={savedSet.has(p.id)} onToggleSave={() => handleToggleSave(p.id)} />
+          : (visibleItems as ProgramWithMeta[]).map((p, i) => (
+              <ProgramCard key={p.id} program={p} index={i} isSaved={savedSet.has(p.id)} onToggleSave={() => handleToggleSave(p.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
             ))
         }
       </div>

@@ -3,12 +3,16 @@ import { track } from '@vercel/analytics';
 import { formatDeadline, generateSlug, showToast, showConfetti, getToday } from '../lib/utils.ts';
 import { getStatus } from '../hooks/usePrograms.ts';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
+import { useCardEntrance } from '../hooks/useCardEntrance.ts';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 
 interface ProgramCardProps {
   program: ProgramWithMeta;
+  index: number;
   isSaved: boolean;
   onToggleSave: () => void;
+  isFiltered: boolean;
+  isInitial: boolean;
 }
 
 function isWithin30Days(deadlineStr: string | null | undefined): boolean {
@@ -18,8 +22,10 @@ function isWithin30Days(deadlineStr: string | null | undefined): boolean {
   return diff >= 0 && diff <= 30;
 }
 
-export default function ProgramCard({ program, isSaved, onToggleSave }: ProgramCardProps) {
+export default function ProgramCard({ program, index, isSaved, onToggleSave, isFiltered, isInitial }: ProgramCardProps) {
+  const cardRef     = useRef<HTMLDivElement>(null);
   const saveBtnRef  = useRef<HTMLButtonElement>(null);
+  useCardEntrance(cardRef, index, isInitial, isFiltered);
   const status      = getStatus(program);
   const isClosed    = status === 'closed';
   const badge       = CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE;
@@ -35,7 +41,8 @@ export default function ProgramCard({ program, isSaved, onToggleSave }: ProgramC
 
   return (
     <div
-      className="card p-5 flex flex-col justify-between"
+      ref={cardRef}
+      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col justify-between`}
       style={{ minHeight: 320, opacity: isClosed ? 0.45 : undefined, borderTop: `2px solid ${badge.color}` }}
     >
       <div>

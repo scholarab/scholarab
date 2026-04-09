@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { track } from '@vercel/analytics';
 import { getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
 import { getToday } from '../lib/utils.ts';
@@ -30,6 +30,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
   const [page,             setPage            ] = useState(1);
   const [sheetOpen,        setSheetOpen        ] = useState(false);
   const [savedIds,         setSavedIds         ] = useState<number[]>([]);
+  const hasFiltered = useRef(false);
 
   useEffect(() => {
     setSavedIds([...getSavedPrograms()]);
@@ -43,18 +44,21 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
 
   const handleSetCategory = useCallback((cat: string) => {
     const next = cat === 'all' ? 'all' : (selectedCategory === cat ? 'all' : cat);
+    hasFiltered.current = true;
     setSelectedCategory(next);
     setPage(1);
     if (next !== 'all') track('filter_category', { category: next, page: 'programs' });
   }, [selectedCategory]);
 
   const handleSetSort = useCallback((value: SortValue) => {
+    hasFiltered.current = true;
     setSortBy(value);
     setPage(1);
     track('filter_sort', { sort: value, page: 'programs' });
   }, []);
 
   const handlePageChange = useCallback((newPage: number) => {
+    hasFiltered.current = true;
     setPage(newPage);
     requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' })));
   }, []);
@@ -101,5 +105,6 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     categoryKey:      selectedCategory,
     savedIds,
     handleToggleSave,
+    isFiltered:       hasFiltered.current,
   };
 }

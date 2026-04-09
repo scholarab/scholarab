@@ -3,16 +3,19 @@ import { track } from '@vercel/analytics';
 import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.ts';
 import { getStatus } from '../hooks/useScholarships.ts';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
+import { useCardEntrance } from '../hooks/useCardEntrance.ts';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 
 interface ScholarshipCardProps {
   scholarship: ScholarshipWithMeta;
+  index: number;
   isSaved: boolean;
   onToggleSave: () => void;
+  isFiltered: boolean;
+  isInitial: boolean;
 }
 
-function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCardProps) {
-  const saveBtnRef   = useRef<HTMLButtonElement>(null);
+function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered, isInitial }: ScholarshipCardProps) {
   const status       = getStatus(scholarship);
   const isClosed     = status === 'closed';
   const daysLeft     = status === 'active'
@@ -23,10 +26,14 @@ function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCard
   const isUpcoming   = status === 'future';
   const amountColor  = isClosed ? 'text-white/20' : 'text-[#22d3a5]';
   const slug         = scholarship._slug ?? generateSlug(scholarship.title);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const saveBtnRef   = useRef<HTMLButtonElement>(null);
+  useCardEntrance(cardRef, index, isInitial, isFiltered);
 
   return (
     <div
-      className="card p-5 flex flex-col justify-between h-full"
+      ref={cardRef}
+      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col justify-between h-full`}
       style={{ minHeight: 280, opacity: isClosed ? 0.45 : isUpcoming ? 0.75 : undefined, borderTop: `2px solid ${badge.color}` }}
     >
       <div className="grow">
