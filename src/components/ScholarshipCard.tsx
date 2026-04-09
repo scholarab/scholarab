@@ -20,7 +20,7 @@ function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCard
   const deadlineSoon = daysLeft !== null && daysLeft <= 30;
   const badge        = CATEGORY_BADGE[scholarship.category ?? ''] || DEFAULT_BADGE;
   const isUpcoming   = status === 'future';
-  const amountColor  = isClosed ? 'text-gray-300 dark:text-white/20' : 'text-[#22d3a5]';
+  const amountColor  = isClosed ? 'text-white/20' : 'text-[#22d3a5]';
   const slug         = scholarship._slug ?? generateSlug(scholarship.title);
 
   return (
@@ -38,14 +38,14 @@ function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCard
           ) : <span />}
         </div>
 
-        <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-gray-400 dark:text-white/25' : 'text-gray-900 dark:text-white'}`}>
+        <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-white/25' : 'text-white'}`}>
           {scholarship.title}
         </h2>
-        <p className="text-sm line-clamp-2 mb-2 text-gray-500 dark:text-white/45">
+        <p className="text-sm line-clamp-2 mb-2 text-white/45">
           {scholarship.audience}
         </p>
 
-        <div className="pt-4 grid grid-cols-2 gap-2 border-t border-gray-100 dark:border-white/[0.06]">
+        <div className="pt-4 grid grid-cols-2 gap-2 border-t border-white/[0.06]">
           <div>
             <p className={`${amountColor}`} style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.1 }}>
               {scholarship.amount}
@@ -58,7 +58,7 @@ function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCard
             <p style={{
               fontSize: 12, fontWeight: 700,
               color: isClosed ? undefined : status === 'future' ? undefined : deadlineSoon ? '#f87171' : undefined,
-            }} className={isClosed ? 'text-gray-300 dark:text-white/20' : status === 'future' ? 'text-blue-500 dark:text-blue-400' : deadlineSoon ? '' : 'text-gray-600 dark:text-white/50'}>
+            }} className={isClosed ? 'text-white/20' : status === 'future' ? 'text-blue-400' : deadlineSoon ? '' : 'text-white/50'}>
               {status === 'future' ? (formatDeadline(scholarship.openDate) || 'TBA') : formatDeadline(scholarship.deadline)}
             </p>
             {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
@@ -73,7 +73,7 @@ function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCard
       <div className="pt-4 flex gap-2">
         <a href={`/scholarships/${slug}`}
           aria-label={`View details for ${scholarship.title}`}
-          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:border-white/[0.18] dark:text-white/60 dark:hover:border-white/30 dark:hover:text-white/80 transition-colors">
+          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-white/[0.18] text-white/60 hover:border-white/30 hover:text-white/80 transition-colors">
           View Details
         </a>
         {status === 'active' && (
@@ -86,14 +86,14 @@ function ScholarshipCard({ scholarship, isSaved, onToggleSave }: ScholarshipCard
           </a>
         )}
         {status === 'future' && (
-          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
+          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-500/[0.08] text-blue-400">
             Opening Soon
           </button>
         )}
         <button
           onClick={() => { showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
-          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-[#22d3a5] border border-[#22d3a5]/40' : 'text-gray-400 border border-gray-200 dark:border-white/[0.18] dark:text-white/50'}`}
+          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-[#22d3a5] border border-[#22d3a5]/40' : 'text-white/50 border border-white/[0.18]'}`}
           style={{ width: 44, background: isSaved ? 'rgba(34,211,165,0.12)' : undefined }}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

@@ -39,7 +39,7 @@ const {
 <main class="py-6">
   <a
     href={backHref}
-    class="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-white/40 hover:text-[#22d3a5] dark:hover:text-[#22d3a5] transition-colors mb-6"
+    class="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#22d3a5] transition-colors mb-6"
   >
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -57,12 +57,12 @@ const {
       {badge.label}
     </span>
 
-    <h1 class={`font-bold text-gray-900 dark:text-white ${titleMb} leading-tight`} style="font-size: clamp(20px, 4vw, 30px);">
+    <h1 class={`font-bold text-white ${titleMb} leading-tight`} style="font-size: clamp(20px, 4vw, 30px);">
       {title}
     </h1>
 
     {subtitle && (
-      <p class="text-sm text-gray-400 dark:text-white/35 mb-6">{subtitle}</p>
+      <p class="text-sm text-white/35 mb-6">{subtitle}</p>
     )}
 
     {amount && (
@@ -75,11 +75,11 @@ const {
 
     <div class="pt-2 flex gap-2">
       {status === 'closed' ? (
-        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
+        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-white/5 text-white/20">
           Closed
         </button>
       ) : status === 'future' ? (
-        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
+        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-blue-500/[0.08] text-blue-400">
           Opening Soon{openDate ? ` — ${openDate}` : ''}
         </button>
       ) : (
@@ -102,7 +102,7 @@ const {
 
     <div class="flex flex-wrap gap-2 pt-3">
       <button id="copy-link-btn" aria-label="Copy link"
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors text-gray-500 dark:text-white/40 border-gray-200 dark:border-white/10 hover:border-[#22d3a5] hover:text-[#22d3a5] dark:hover:border-[#22d3a5] dark:hover:text-[#22d3a5]">
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors text-white/40 border-white/10 hover:border-[#22d3a5] hover:text-[#22d3a5]">
         <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
           <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/>

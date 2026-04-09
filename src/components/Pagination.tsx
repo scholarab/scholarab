@@ -25,8 +25,8 @@ export default function Pagination({ page, totalPages, onPageChange }: Paginatio
   const btnBase = 'inline-flex items-center justify-center min-w-[36px] h-9 px-2 rounded-lg text-sm font-medium transition-colors select-none';
   const btnPage = `${btnBase} border`;
   const btnActive = 'text-[#22d3a5] border-[rgba(34,211,165,0.35)] bg-[rgba(34,211,165,0.08)]';
-  const btnInactive = 'text-gray-500 border-gray-200 bg-white hover:border-gray-400 dark:text-white/45 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/25';
-  const btnNav = `${btnBase} border text-gray-400 border-gray-200 bg-white hover:border-gray-400 dark:text-white/30 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/25 disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none`;
+  const btnInactive = 'text-white/45 border-white/10 bg-white/[0.03] hover:border-white/25';
+  const btnNav = `${btnBase} border text-white/30 border-white/10 bg-white/[0.03] hover:border-white/25 disabled:opacity-30 disabled:cursor-not-allowed disabled:pointer-events-none`;
 
   return (
     <nav className="flex items-center justify-center gap-1.5 mt-8" aria-label="Pagination">
@@ -43,7 +43,7 @@ export default function Pagination({ page, totalPages, onPageChange }: Paginatio
 
       {getPageNumbers().map((p, i) =>
         p === '…' ? (
-          <span key={`ellipsis-${i}`} className="inline-flex items-center justify-center min-w-[36px] h-9 text-sm text-gray-400 dark:text-white/25 select-none">
+          <span key={`ellipsis-${i}`} className="inline-flex items-center justify-center min-w-[36px] h-9 text-sm text-white/25 select-none">
             …
           </span>
         ) : (

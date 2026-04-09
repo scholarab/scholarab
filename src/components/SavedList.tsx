@@ -91,15 +91,15 @@ function ScholarshipCard({ s, onUnsave }: ScholarshipCardProps) {
       style={{ opacity: isClosed ? 0.45 : isFuture ? 0.75 : undefined }}
     >
       <div className="flex items-start gap-2">
-        <h3 className="font-semibold text-sm text-gray-900 dark:text-white leading-snug">{s.title}</h3>
+        <h3 className="font-semibold text-sm text-white leading-snug">{s.title}</h3>
       </div>
       <p className="font-bold text-lg leading-none" style={{ color: '#22d3a5' }}>{s.amount}</p>
       <div className="flex items-center gap-2 flex-wrap">
         {s.deadline && (
-          <span className="text-xs text-gray-400 dark:text-white/35">{formatDeadline(s.deadline)}</span>
+          <span className="text-xs text-white/35">{formatDeadline(s.deadline)}</span>
         )}
         {s.region && (
-          <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md bg-gray-100 text-gray-500 border border-gray-200 dark:bg-white/[0.07] dark:text-white/50 dark:border-white/10">
+          <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md bg-white/[0.07] text-white/50 border border-white/10">
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: REGION_DOT_COLORS[s.region] || '#888', display: 'inline-block', flexShrink: 0 }} />
             {s.region}
           </span>
@@ -107,11 +107,11 @@ function ScholarshipCard({ s, onUnsave }: ScholarshipCardProps) {
       </div>
       <div className="mt-auto" style={{ display: 'flex', gap: 8, position: 'relative', zIndex: 1 }}>
         {isClosed ? (
-          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-gray-100 text-gray-400 dark:bg-white/5 dark:text-white/20">
+          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-white/5 text-white/20">
             Closed
           </button>
         ) : isFuture ? (
-          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-50 text-blue-400 dark:bg-blue-500/[0.08] dark:text-blue-400">
+          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-500/[0.08] text-blue-400">
             Opening Soon
           </button>
         ) : (
@@ -164,15 +164,15 @@ function ProgramCard({ p, onUnsave }: ProgramCardProps) {
   return (
     <div ref={cardRef} className="card card-interactive p-5 flex flex-col gap-3 h-full">
       <div className="flex items-start gap-2">
-        <h3 className="font-semibold text-sm text-gray-900 dark:text-white leading-snug">{p.name}</h3>
+        <h3 className="font-semibold text-sm text-white leading-snug">{p.name}</h3>
       </div>
       {p.category && (
-        <span className="self-start text-xs font-medium px-2 py-0.5 rounded-md bg-gray-100 text-gray-500 border border-gray-200 dark:bg-white/[0.07] dark:text-white/50 dark:border-white/10">
+        <span className="self-start text-xs font-medium px-2 py-0.5 rounded-md bg-white/[0.07] text-white/50 border border-white/10">
           {p.category}
         </span>
       )}
       {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && (
-        <span className="text-xs text-gray-400 dark:text-white/35">{formatDeadline(p.deadline)}</span>
+        <span className="text-xs text-white/35">{formatDeadline(p.deadline)}</span>
       )}
       <div className="mt-auto" style={{ display: 'flex', gap: 8, position: 'relative', zIndex: 1 }}>
         <a
@@ -205,7 +205,7 @@ function ProgramCard({ p, onUnsave }: ProgramCardProps) {
 
 function SectionEmptyState({ href, label }: { href: string; label: string }) {
   return (
-    <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-gray-300 dark:border-white/20 text-sm text-gray-600 dark:text-white/50">
+    <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-white/20 text-sm text-white/50">
       <span>None saved yet.</span>
       <a
         href={href}
@@ -257,7 +257,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
   return (
     <div className="saved-list space-y-10">
       <section>
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-600 dark:text-white/40 mb-4">Scholarships</h2>
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">Scholarships</h2>
         {savedScholarships.length === 0 ? (
           <SectionEmptyState href="/scholarships" label="Find scholarships" />
         ) : (
@@ -277,7 +277,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
       </section>
 
       <section>
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-600 dark:text-white/40 mb-4">Research Programs</h2>
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">Research Programs</h2>
         {savedPrograms.length === 0 ? (
           <SectionEmptyState href="/programs" label="Find programs" />
         ) : (

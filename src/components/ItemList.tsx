@@ -31,11 +31,11 @@ const PROGRAM_SORT = [
   { value: 'closest_due', label: 'Earliest Deadline' },
 ] as const;
 
-const sheetBg  = 'bg-white dark:bg-[#141418]';
+const sheetBg  = 'bg-[#141418]';
 const pillBase = 'flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
 const pillOn   = 'text-[#22d3a5]';
-const pillOff  = 'bg-white text-gray-600 border-gray-200 dark:bg-white/[0.03] dark:text-white/45 dark:border-white/10';
-const chipCls  = (selected: boolean) => `flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${selected ? 'text-[#22d3a5]' : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-400 dark:bg-white/[0.03] dark:text-white/45 dark:border-white/10 dark:hover:border-white/20'}`;
+const pillOff  = 'bg-white/[0.03] text-white/45 border-white/10';
+const chipCls  = (selected: boolean) => `flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${selected ? 'text-[#22d3a5]' : 'bg-white/[0.03] text-white/45 border border-white/10 hover:border-white/20'}`;
 const chipStyle = (selected: boolean) => selected ? { background: 'rgba(34,211,165,0.1)', border: '0.5px solid rgba(34,211,165,0.3)' } : undefined;
 
 export default function ItemList(props: Props) {
@@ -67,7 +67,7 @@ export default function ItemList(props: Props) {
 
       {/* Mobile: count + sort button */}
       <div className="md:hidden mb-5 flex items-center justify-between gap-3">
-        <p className="text-sm text-gray-400 dark:text-white/25 flex-shrink-0">
+        <p className="text-sm text-white/25 flex-shrink-0">
           {filtered.length} {label}{filtered.length !== 1 ? 's' : ''}
         </p>
         <button onClick={() => setSheetOpen(true)} aria-expanded={sheetOpen} aria-label="Open sort options"
@@ -109,7 +109,7 @@ export default function ItemList(props: Props) {
 
       {/* Desktop: count + sort pills */}
       <div className="hidden md:flex mb-5 items-center justify-between gap-4">
-        <p className="text-sm text-gray-400 dark:text-white/25 flex-shrink-0">
+        <p className="text-sm text-white/25 flex-shrink-0">
           {filtered.length} {label}{filtered.length !== 1 ? 's' : ''}
         </p>
         <div className="flex items-center gap-1.5">
@@ -129,10 +129,10 @@ export default function ItemList(props: Props) {
           <Drawer.Content aria-label="Sort options"
             className={`fixed left-0 right-0 z-50 md:hidden rounded-t-2xl ${sheetBg} flex flex-col outline-none`}
             style={{ bottom: 64, boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
-            <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-black/[0.06] dark:border-white/[0.07] flex-shrink-0">
-              <span className="font-semibold text-gray-900 dark:text-white text-base">Sort</span>
+            <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-white/[0.07] flex-shrink-0">
+              <span className="font-semibold text-white text-base">Sort</span>
               <button onClick={() => setSheetOpen(false)} aria-label="Close"
-                className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 dark:text-white/40 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                className="w-8 h-8 flex items-center justify-center rounded-full text-white/40 hover:bg-white/5 transition-colors">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -152,7 +152,7 @@ export default function ItemList(props: Props) {
                 })}
               </div>
             </div>
-            <div className="flex-shrink-0 px-5 py-4 border-t border-black/[0.06] dark:border-white/[0.07]"
+            <div className="flex-shrink-0 px-5 py-4 border-t border-white/[0.07]"
               style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
               <button onClick={() => setSheetOpen(false)}
                 className="w-full py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
@@ -177,7 +177,7 @@ export default function ItemList(props: Props) {
       <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
 
       {filtered.length === 0 && (
-        <p className="text-center py-16 text-gray-400 dark:text-white/25">
+        <p className="text-center py-16 text-white/25">
           {(isScholarship ? sch.selectedRegion !== null : prg.selectedCategory !== 'all')
             ? `No ${label}s match your filters.`
             : `No ${label}s to show.`}
