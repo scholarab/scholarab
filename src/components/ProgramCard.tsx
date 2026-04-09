@@ -74,6 +74,7 @@ export default function ProgramCard({ program, isSaved, onToggleSave }: ProgramC
 
       <div className="pt-4 flex gap-2">
         <a href={`/programs/${generateSlug(program.name)}`}
+          aria-label={`View details for ${program.name}`}
           className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:border-white/[0.18] dark:text-white/60 dark:hover:border-white/30 dark:hover:text-white/80 transition-colors">
           View Details
         </a>

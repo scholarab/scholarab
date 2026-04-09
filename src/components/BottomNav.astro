@@ -59,7 +59,11 @@
   function setActive(tabId: string) {
     IDS.forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.style.color = id === `bn-${tabId}` ? TEAL : '';
+      if (el) {
+        const isActive = id === `bn-${tabId}`;
+        el.style.color = isActive ? TEAL : '';
+        el.setAttribute('aria-current', isActive ? 'page' : 'false');
+      }
     });
   }
 
