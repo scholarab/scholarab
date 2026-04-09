@@ -2,9 +2,10 @@ import type { APIRoute } from 'astro'
 import { auth } from '../../../../lib/auth'
 import { db } from '../../../../lib/db/client'
 import { researchPrograms } from '../../../../lib/db/schema'
-import { ilike } from 'drizzle-orm'
+import { ilike, desc } from 'drizzle-orm'
 import { z } from 'zod'
 import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
+import { logAudit } from '../../../../lib/audit'
 
 export const prerender = false
 
@@ -27,6 +28,14 @@ const CreateSchema = z.object({
   lastVerified: z.string().max(50).optional().nullable(),
   active: z.boolean().default(true),
 })
+
+export const GET: APIRoute = async ({ request }) => {
+  const session = await auth.api.getSession({ headers: request.headers })
+  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+
+  const all = await db.select().from(researchPrograms).orderBy(desc(researchPrograms.updatedAt)).limit(1000)
+  return new Response(JSON.stringify(all), { status: 200 })
+}
 
 export const POST: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
@@ -51,6 +60,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const [created] = await db.insert(researchPrograms).values(data).returning()
+    logAudit(session.user.id, 'CREATE', 'program', created!.id).catch(() => {})
     return new Response(JSON.stringify(created), { status: 201 })
   } catch (e) {
     if (e instanceof z.ZodError) {

@@ -6,6 +6,7 @@ import { ilike, desc } from 'drizzle-orm'
 import { z } from 'zod'
 import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 import { eligibilitySchema } from '../../../../lib/data-loader'
+import { logAudit } from '../../../../lib/audit'
 
 export const prerender = false
 
@@ -58,6 +59,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const [created] = await db.insert(scholarships).values(data).returning()
+    logAudit(session.user.id, 'CREATE', 'scholarship', created!.id).catch(() => {})
     return new Response(JSON.stringify(created), { status: 201 })
   } catch (e) {
     if (e instanceof z.ZodError) {

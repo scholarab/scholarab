@@ -1,16 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { POST } from '../../pages/admin/api/programs/index'
+import { GET as listPrograms, POST } from '../../pages/admin/api/programs/index'
 import { GET, PUT, DELETE } from '../../pages/admin/api/programs/[id]'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-const { mockGetSession, mockSelect, mockInsert, mockUpdate, mockDelete, mockRateLimit } = vi.hoisted(() => ({
+const { mockGetSession, mockSelect, mockInsert, mockUpdate, mockDelete, mockRateLimit, mockLogAudit } = vi.hoisted(() => ({
   mockGetSession: vi.fn(),
   mockSelect:     vi.fn(),
   mockInsert:     vi.fn(),
   mockUpdate:     vi.fn(),
   mockDelete:     vi.fn(),
   mockRateLimit:  vi.fn(),
+  mockLogAudit:   vi.fn(),
 }))
 
 vi.mock('../../lib/auth', () => ({
@@ -19,6 +20,10 @@ vi.mock('../../lib/auth', () => ({
 
 vi.mock('../../lib/adminRateLimit', () => ({
   checkMutationRateLimit: mockRateLimit,
+}))
+
+vi.mock('../../lib/audit', () => ({
+  logAudit: mockLogAudit,
 }))
 
 vi.mock('../../lib/db/client', () => ({
@@ -37,6 +42,7 @@ vi.mock('../../lib/db/schema', () => ({
 vi.mock('drizzle-orm', () => ({
   ilike: vi.fn(() => 'ilike'),
   eq:    vi.fn(() => 'eq'),
+  desc:  vi.fn(() => 'desc'),
 }))
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -83,6 +89,36 @@ const STORED_ROW = {
 beforeEach(() => {
   vi.clearAllMocks()
   mockRateLimit.mockResolvedValue(true)
+  mockLogAudit.mockResolvedValue(undefined)
+})
+
+// ── GET /admin/api/programs ───────────────────────────────────────────────────
+
+describe('GET /admin/api/programs', () => {
+  it('returns 401 when unauthenticated', async () => {
+    mockGetSession.mockResolvedValue(null)
+    const res = await listPrograms({ request: req('GET', null) } as any)
+    expect(res.status).toBe(401)
+    expect(await res.json()).toMatchObject({ error: 'Unauthorized' })
+  })
+
+  it('returns 200 with array of programs', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValue(chain([STORED_ROW]))
+    const res = await listPrograms({ request: req('GET', null) } as any)
+    expect(res.status).toBe(200)
+    const body = await res.json()
+    expect(body).toHaveLength(1)
+    expect(body[0].name).toBe('Test Program')
+  })
+
+  it('returns 200 with empty array when no programs', async () => {
+    mockGetSession.mockResolvedValue(AUTHED)
+    mockSelect.mockReturnValue(chain([]))
+    const res = await listPrograms({ request: req('GET', null) } as any)
+    expect(res.status).toBe(200)
+    expect(await res.json()).toEqual([])
+  })
 })
 
 // ── POST /admin/api/programs ──────────────────────────────────────────────────
@@ -152,6 +188,7 @@ describe('POST /admin/api/programs', () => {
     const body = await res.json()
     expect(body.name).toBe('Test Program')
     expect(body.id).toBe(1)
+    expect(mockLogAudit).toHaveBeenCalledWith('1', 'CREATE', 'program', 1)
   })
 
   it('applies default paid=false when omitted', async () => {
@@ -287,6 +324,7 @@ describe('PUT /admin/api/programs/[id]', () => {
     expect(res.status).toBe(200)
     const body = await res.json()
     expect(body.name).toBe('Updated Program')
+    expect(mockLogAudit).toHaveBeenCalledWith('1', 'UPDATE', 'program', 1)
   })
 
   it('returns 200 without optimistic lock check when no updatedAt provided', async () => {
@@ -344,6 +382,7 @@ describe('DELETE /admin/api/programs/[id]', () => {
     mockDelete.mockReturnValue(chain(undefined))
     const res = await DELETE({ request: req('DELETE', '1'), params: { id: '1' } } as any)
     expect(res.status).toBe(204)
+    expect(mockLogAudit).toHaveBeenCalledWith('1', 'DELETE', 'program', 1)
   })
 
   it('returns 400 when DB throws during deletion', async () => {

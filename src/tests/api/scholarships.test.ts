@@ -5,13 +5,14 @@ import { GET as getById, PUT, DELETE } from '../../pages/admin/api/scholarships/
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 // vi.hoisted ensures these are initialised before the hoisted vi.mock factories run.
 
-const { mockGetSession, mockSelect, mockInsert, mockUpdate, mockDelete, mockRateLimit } = vi.hoisted(() => ({
+const { mockGetSession, mockSelect, mockInsert, mockUpdate, mockDelete, mockRateLimit, mockLogAudit } = vi.hoisted(() => ({
   mockGetSession: vi.fn(),
   mockSelect:     vi.fn(),
   mockInsert:     vi.fn(),
   mockUpdate:     vi.fn(),
   mockDelete:     vi.fn(),
   mockRateLimit:  vi.fn(),
+  mockLogAudit:   vi.fn(),
 }))
 
 vi.mock('../../lib/auth', () => ({
@@ -20,6 +21,10 @@ vi.mock('../../lib/auth', () => ({
 
 vi.mock('../../lib/adminRateLimit', () => ({
   checkMutationRateLimit: mockRateLimit,
+}))
+
+vi.mock('../../lib/audit', () => ({
+  logAudit: mockLogAudit,
 }))
 
 vi.mock('../../lib/db/client', () => ({
@@ -91,6 +96,7 @@ const STORED_ROW = {
 beforeEach(() => {
   vi.clearAllMocks()
   mockRateLimit.mockResolvedValue(true)
+  mockLogAudit.mockResolvedValue(undefined)
 })
 
 // ── GET /admin/api/scholarships ───────────────────────────────────────────────
@@ -203,6 +209,7 @@ describe('POST /admin/api/scholarships', () => {
     const body = await res.json()
     expect(body.title).toBe('Test Scholarship')
     expect(body.id).toBe(1)
+    expect(mockLogAudit).toHaveBeenCalledWith('1', 'CREATE', 'scholarship', 1)
   })
 
   it('returns 400 when eligibility has wrong shape', async () => {
@@ -342,6 +349,7 @@ describe('PUT /admin/api/scholarships/[id]', () => {
     expect(res.status).toBe(200)
     const body = await res.json()
     expect(body.title).toBe('Updated Title')
+    expect(mockLogAudit).toHaveBeenCalledWith('1', 'UPDATE', 'scholarship', 1)
   })
 
   it('returns 200 without optimistic lock check when no updatedAt provided', async () => {
@@ -392,6 +400,7 @@ describe('DELETE /admin/api/scholarships/[id]', () => {
     mockDelete.mockReturnValue(chain(undefined))
     const res = await DELETE({ request: reqWithId('DELETE', '1'), params: { id: '1' } } as any)
     expect(res.status).toBe(204)
+    expect(mockLogAudit).toHaveBeenCalledWith('1', 'DELETE', 'scholarship', 1)
   })
 
   it('returns 400 when DB throws during deletion', async () => {

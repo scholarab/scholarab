@@ -5,6 +5,7 @@ import { researchPrograms } from '../../../../lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
+import { logAudit } from '../../../../lib/audit'
 
 export const prerender = false
 
@@ -77,6 +78,7 @@ export const PUT: APIRoute = async ({ request, params }) => {
       .where(eq(researchPrograms.id, id))
       .returning()
     if (!updated) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
+    logAudit(session.user.id, 'UPDATE', 'program', id).catch(() => {})
     return new Response(JSON.stringify(updated), { status: 200 })
   } catch (e) {
     if (e instanceof z.ZodError) {
@@ -96,6 +98,7 @@ export const DELETE: APIRoute = async ({ request, params }) => {
 
   try {
     await db.delete(researchPrograms).where(eq(researchPrograms.id, id))
+    logAudit(session.user.id, 'DELETE', 'program', id).catch(() => {})
     return new Response(null, { status: 204 })
   } catch (e) {
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })

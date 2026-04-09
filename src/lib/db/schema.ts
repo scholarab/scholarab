@@ -1,4 +1,4 @@
-import { pgTable, serial, text, boolean, timestamp, jsonb, index, uniqueIndex } from 'drizzle-orm/pg-core'
+import { pgTable, serial, text, boolean, timestamp, jsonb, index, uniqueIndex, integer } from 'drizzle-orm/pg-core'
 
 // ── Better Auth tables ────────────────────────────────────────────────────────
 
@@ -121,3 +121,12 @@ export const authRateLimit = pgTable('auth_rate_limit', {
   ip: text('ip').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, t => [index('auth_rate_limit_ip_idx').on(t.ip)])
+
+export const auditLog = pgTable('audit_log', {
+  id: serial('id').primaryKey(),
+  userId: text('user_id').notNull(),
+  action: text('action').notNull(),        // 'CREATE' | 'UPDATE' | 'DELETE'
+  resourceType: text('resource_type').notNull(), // 'scholarship' | 'program'
+  resourceId: integer('resource_id').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, t => [index('audit_log_userId_idx').on(t.userId)])

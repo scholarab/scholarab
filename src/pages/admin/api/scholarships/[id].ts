@@ -6,6 +6,7 @@ import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 import { eligibilitySchema } from '../../../../lib/data-loader'
+import { logAudit } from '../../../../lib/audit'
 
 export const prerender = false
 
@@ -76,6 +77,7 @@ export const PUT: APIRoute = async ({ request, params }) => {
       .where(eq(scholarships.id, id))
       .returning()
     if (!updated) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
+    logAudit(session.user.id, 'UPDATE', 'scholarship', id).catch(() => {})
     return new Response(JSON.stringify(updated), { status: 200 })
   } catch (e) {
     if (e instanceof z.ZodError) {
@@ -95,6 +97,7 @@ export const DELETE: APIRoute = async ({ request, params }) => {
 
   try {
     await db.delete(scholarships).where(eq(scholarships.id, id))
+    logAudit(session.user.id, 'DELETE', 'scholarship', id).catch(() => {})
     return new Response(null, { status: 204 })
   } catch (e) {
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
