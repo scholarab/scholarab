@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro'
 import { auth } from '../../../lib/auth'
 import { db } from '../../../lib/db/client'
 import { deployLog } from '../../../lib/db/schema'
+import { jsonOk, jsonError } from '../../../lib/api-response'
 
 export const prerender = false
 
@@ -13,17 +14,13 @@ const ALLOWED_ORIGINS = [
 
 export const POST: APIRoute = async ({ request }) => {
   const origin = request.headers.get('origin')
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
-    return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 })
-  }
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) return jsonError('Forbidden', 403)
 
   const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  if (!session) return jsonError('Unauthorized', 401)
 
   const hookUrl = process.env.VERCEL_DEPLOY_HOOK_URL
-  if (!hookUrl) {
-    return new Response(JSON.stringify({ error: 'Deploy hook not configured' }), { status: 500 })
-  }
+  if (!hookUrl) return jsonError('Deploy hook not configured', 500)
 
   try {
     const response = await fetch(hookUrl, { method: 'POST' })
@@ -35,8 +32,8 @@ export const POST: APIRoute = async ({ request }) => {
       vercelResponse: result,
     })
 
-    return new Response(JSON.stringify({ success: true, ...result }), { status: 200 })
+    return jsonOk({ success: true, ...result })
   } catch (e) {
-    return new Response(JSON.stringify({ error: 'Failed to trigger deployment' }), { status: 500 })
+    return jsonError('Failed to trigger deployment', 500)
   }
 }

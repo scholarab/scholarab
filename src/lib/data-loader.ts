@@ -1,26 +1,7 @@
-import { z } from 'zod'
 import type { EligibilityCriteria } from './eligibility-types'
+import { eligibilitySchema } from './eligibility-types'
 
-// ── Zod schema for EligibilityCriteria ───────────────────────────────────────
-export const eligibilitySchema = z.object({
-  grades: z.array(z.string()).default([]),
-  schoolBoards: z.array(z.string()).default([]),
-  specificSchools: z.array(z.string()).default([]),
-  targetInstitutions: z.array(z.string()).default([]),
-  fields: z.array(z.string()).default([]),
-  minAverage: z.number().nullable().default(null),
-  minAge: z.number().nullable().default(null),
-  maxAge: z.number().nullable().default(null),
-  genderRequired: z.literal('female').nullable().default(null),
-  indigenousRequired: z.coerce.boolean().default(false),
-  bipocRequired: z.coerce.boolean().default(false),
-  financialNeed: z.coerce.boolean().default(false),
-  maxFamilyIncome: z.number().nullable().default(null),
-  fosterCare: z.coerce.boolean().default(false),
-  citizenship: z.enum(['canadian', 'permanent_resident', 'any']).default('any'),
-  apprenticeship: z.coerce.boolean().default(false),
-  extracurriculars: z.array(z.string()).default([]),
-})
+export { eligibilitySchema } from './eligibility-types'
 
 function parseEligibility(raw: unknown): EligibilityCriteria | null {
   if (raw === null || raw === undefined) return null

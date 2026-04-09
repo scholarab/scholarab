@@ -6,6 +6,7 @@ import { scholarships, parseLog } from '../../../../lib/db/schema'
 import { eq, gte, and, sql } from 'drizzle-orm'
 import type { EligibilityCriteria } from '../../../../lib/eligibility-types'
 import { EMPTY_ELIGIBILITY } from '../../../../lib/eligibility-types'
+import { jsonError } from '../../../../lib/api-response'
 
 export const prerender = false
 
@@ -64,32 +65,26 @@ Rules:
 
 export const POST: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  if (!session) return jsonError('Unauthorized', 401)
 
   if (!(await checkAndLogParseRateLimit(session.user.id))) {
-    return new Response(JSON.stringify({ error: 'Rate limit exceeded — max 20 AI parses per hour' }), { status: 429 })
+    return jsonError('Rate limit exceeded — max 20 AI parses per hour', 429)
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY
-  if (!apiKey) {
-    return new Response(JSON.stringify({ error: 'ANTHROPIC_API_KEY not configured' }), { status: 500 })
-  }
+  if (!apiKey) return jsonError('ANTHROPIC_API_KEY not configured', 500)
 
   try {
     const { id } = await request.json()
-    if (typeof id !== 'number') {
-      return new Response(JSON.stringify({ error: 'id must be a number' }), { status: 400 })
-    }
+    if (typeof id !== 'number') return jsonError('id must be a number', 400)
 
     const [scholarship] = await db
       .select({ id: scholarships.id, title: scholarships.title, audience: scholarships.audience, category: scholarships.category, region: scholarships.region })
       .from(scholarships)
       .where(eq(scholarships.id, id))
-    if (!scholarship) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
+    if (!scholarship) return jsonError('Not found', 404)
 
-    if (!scholarship.audience?.trim()) {
-      return new Response(JSON.stringify({ error: 'No audience text to parse' }), { status: 400 })
-    }
+    if (!scholarship.audience?.trim()) return jsonError('No audience text to parse', 400)
 
     const client = new Anthropic({ apiKey })
     const message = await client.messages.create({
@@ -111,7 +106,7 @@ export const POST: APIRoute = async ({ request }) => {
     try {
       parsed = JSON.parse(cleaned)
     } catch {
-      return new Response(JSON.stringify({ error: 'AI returned invalid JSON' }), { status: 502 })
+      return jsonError('AI returned invalid JSON', 502)
     }
 
     // Merge with defaults to ensure all keys are present
@@ -119,6 +114,6 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({ eligibility }), { status: 200 })
   } catch (e) {
-    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 })
+    return jsonError('Internal server error', 500)
   }
 }

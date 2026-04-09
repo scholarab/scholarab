@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 // Structured eligibility criteria stored per scholarship (parsed from audience text by AI, admin-side only)
 export type EligibilityCriteria = {
   grades: string[]              // "10" | "11" | "12" | "post-secondary"
@@ -18,6 +20,26 @@ export type EligibilityCriteria = {
   apprenticeship: boolean          // requires RAP / CTS apprenticeship enrollment
   extracurriculars: string[]       // "volunteer" | "music" | "sports" | "4-H" | "science_fair" | "RAP"
 }
+
+export const eligibilitySchema = z.object({
+  grades: z.array(z.string()).default([]),
+  schoolBoards: z.array(z.string()).default([]),
+  specificSchools: z.array(z.string()).default([]),
+  targetInstitutions: z.array(z.string()).default([]),
+  fields: z.array(z.string()).default([]),
+  minAverage: z.number().nullable().default(null),
+  minAge: z.number().nullable().default(null),
+  maxAge: z.number().nullable().default(null),
+  genderRequired: z.literal('female').nullable().default(null),
+  indigenousRequired: z.coerce.boolean().default(false),
+  bipocRequired: z.coerce.boolean().default(false),
+  financialNeed: z.coerce.boolean().default(false),
+  maxFamilyIncome: z.number().nullable().default(null),
+  fosterCare: z.coerce.boolean().default(false),
+  citizenship: z.enum(['canadian', 'permanent_resident', 'any']).default('any'),
+  apprenticeship: z.coerce.boolean().default(false),
+  extracurriculars: z.array(z.string()).default([]),
+})
 
 export const EMPTY_ELIGIBILITY: EligibilityCriteria = {
   grades: [],

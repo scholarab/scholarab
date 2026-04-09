@@ -7,10 +7,10 @@ import { z } from 'zod'
 import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 import { eligibilitySchema } from '../../../../lib/data-loader'
 import { logAudit } from '../../../../lib/audit'
+import { httpsUrl } from '../../../../lib/validators'
+import { jsonOk, jsonError } from '../../../../lib/api-response'
 
 export const prerender = false
-
-const httpsUrl = z.string().url().max(2048).refine(u => u.startsWith('https://'), 'URL must use HTTPS')
 
 const UpdateSchema = z.object({
   title: z.string().min(1).max(500).optional(),
@@ -30,23 +30,23 @@ const UpdateSchema = z.object({
 
 export const GET: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  if (!session) return jsonError('Unauthorized', 401)
 
   const id = parseInt(params.id!, 10)
-  if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
+  if (isNaN(id)) return jsonError('Invalid ID', 400)
 
   const [item] = await db.select().from(scholarships).where(eq(scholarships.id, id))
-  if (!item) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
-  return new Response(JSON.stringify(item), { status: 200 })
+  if (!item) return jsonError('Not found', 404)
+  return jsonOk(item)
 }
 
 export const PUT: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
-  if (!(await checkMutationRateLimit(session.user.id))) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
+  if (!session) return jsonError('Unauthorized', 401)
+  if (!(await checkMutationRateLimit(session.user.id))) return jsonError('Rate limit exceeded', 429)
 
   const id = parseInt(params.id!, 10)
-  if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
+  if (isNaN(id)) return jsonError('Invalid ID', 400)
 
   try {
     const body = await request.json()
@@ -59,15 +59,12 @@ export const PUT: APIRoute = async ({ request, params }) => {
         .select({ updatedAt: scholarships.updatedAt })
         .from(scholarships)
         .where(eq(scholarships.id, id))
-      if (!current) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
+      if (!current) return jsonError('Not found', 404)
 
       const dbTs = new Date(current.updatedAt).getTime()
       const clientTs = new Date(clientUpdatedAt).getTime()
       if (dbTs !== clientTs) {
-        return new Response(
-          JSON.stringify({ error: 'conflict', message: 'This record was modified by someone else. Please refresh and try again.' }),
-          { status: 409 }
-        )
+        return jsonOk({ error: 'conflict', message: 'This record was modified by someone else. Please refresh and try again.' }, 409)
       }
     }
 
@@ -76,30 +73,28 @@ export const PUT: APIRoute = async ({ request, params }) => {
       .set({ ...data, updatedAt: new Date() })
       .where(eq(scholarships.id, id))
       .returning()
-    if (!updated) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404 })
+    if (!updated) return jsonError('Not found', 404)
     logAudit(session.user.id, 'UPDATE', 'scholarship', id).catch(() => {})
-    return new Response(JSON.stringify(updated), { status: 200 })
+    return jsonOk(updated)
   } catch (e) {
-    if (e instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: 'Invalid request data' }), { status: 400 })
-    }
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
+    if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)
+    return jsonError(e instanceof Error ? e.message : 'Internal server error', 400)
   }
 }
 
 export const DELETE: APIRoute = async ({ request, params }) => {
   const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
-  if (!(await checkMutationRateLimit(session.user.id))) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
+  if (!session) return jsonError('Unauthorized', 401)
+  if (!(await checkMutationRateLimit(session.user.id))) return jsonError('Rate limit exceeded', 429)
 
   const id = parseInt(params.id!, 10)
-  if (isNaN(id)) return new Response(JSON.stringify({ error: 'Invalid ID' }), { status: 400 })
+  if (isNaN(id)) return jsonError('Invalid ID', 400)
 
   try {
     await db.delete(scholarships).where(eq(scholarships.id, id))
     logAudit(session.user.id, 'DELETE', 'scholarship', id).catch(() => {})
     return new Response(null, { status: 204 })
   } catch (e) {
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
+    return jsonError(e instanceof Error ? e.message : 'Internal server error', 400)
   }
 }

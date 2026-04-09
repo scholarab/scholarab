@@ -7,10 +7,10 @@ import { z } from 'zod'
 import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 import { eligibilitySchema } from '../../../../lib/data-loader'
 import { logAudit } from '../../../../lib/audit'
+import { httpsUrl } from '../../../../lib/validators'
+import { jsonOk, jsonError } from '../../../../lib/api-response'
 
 export const prerender = false
-
-const httpsUrl = z.string().url().max(2048).refine(u => u.startsWith('https://'), 'URL must use HTTPS')
 
 const CreateSchema = z.object({
   title: z.string().min(1).max(500),
@@ -30,16 +30,16 @@ const CreateSchema = z.object({
 
 export const GET: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  if (!session) return jsonError('Unauthorized', 401)
 
   const all = await db.select().from(scholarships).orderBy(desc(scholarships.updatedAt)).limit(1000)
-  return new Response(JSON.stringify(all), { status: 200 })
+  return jsonOk(all)
 }
 
 export const POST: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
-  if (!(await checkMutationRateLimit(session.user.id))) return new Response(JSON.stringify({ error: 'Rate limit exceeded' }), { status: 429 })
+  if (!session) return jsonError('Unauthorized', 401)
+  if (!(await checkMutationRateLimit(session.user.id))) return jsonError('Rate limit exceeded', 429)
 
   try {
     const body = await request.json()
@@ -52,19 +52,14 @@ export const POST: APIRoute = async ({ request }) => {
       .where(ilike(scholarships.title, data.title.trim()))
       .limit(1)
     if (existing.length > 0) {
-      return new Response(
-        JSON.stringify({ error: 'duplicate', existing: existing[0].title }),
-        { status: 409 }
-      )
+      return jsonOk({ error: 'duplicate', existing: existing[0].title }, 409)
     }
 
     const [created] = await db.insert(scholarships).values(data).returning()
     logAudit(session.user.id, 'CREATE', 'scholarship', created!.id).catch(() => {})
-    return new Response(JSON.stringify(created), { status: 201 })
+    return jsonOk(created, 201)
   } catch (e) {
-    if (e instanceof z.ZodError) {
-      return new Response(JSON.stringify({ error: 'Invalid request data' }), { status: 400 })
-    }
-    return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Internal server error' }), { status: 400 })
+    if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)
+    return jsonError(e instanceof Error ? e.message : 'Internal server error', 400)
   }
 }
