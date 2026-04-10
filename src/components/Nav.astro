@@ -24,7 +24,7 @@ const navClsStart = (p) => `hidden md:block transition-colors ${currentPath.star
         <a href="/saved" aria-current={currentPath === '/saved' ? 'page' : undefined} class={navCls('/saved')}>Saved</a>
         <a href="/about" aria-current={currentPath === '/about' ? 'page' : undefined} class={navCls('/about')}>About</a>
         <button id="theme-toggle" aria-label="Toggle theme"
-          class="hidden md:flex items-center justify-center rounded-full transition-colors"
+          class="flex items-center justify-center rounded-full transition-colors"
           style="width:34px;height:34px;border:0.5px solid var(--border-medium);background:var(--bg-subtle);color:var(--text-secondary);">
           <svg id="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
