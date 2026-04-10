@@ -118,12 +118,13 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   const [inFosterCare, setInFosterCare] = useState<boolean | null>(null)
   const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(null)
   const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(null)
+  const [hasFinancialNeed, setHasFinancialNeed] = useState<boolean | null>(null)
 
   function reset() {
     setStep(1); setGrade(''); setCity(''); setTargetInstitution('')
     setFields([]); setAverageBracket(null)
     setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null)
-    setInFosterCare(null); setInApprenticeship(null); setCitizenship(null)
+    setInFosterCare(null); setInApprenticeship(null); setCitizenship(null); setHasFinancialNeed(null)
   }
 
   const profile = useMemo((): StudentProfile | null => {
@@ -139,7 +140,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       identifiesAsFemale,
       identifiesAsIndigenous,
       identifiesAsBIPOC,
-      hasFinancialNeed: null,
+      hasFinancialNeed,
       familyIncome: null,
       inFosterCare,
       inApprenticeship,
@@ -148,7 +149,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     }
   }, [grade, city, targetInstitution, fields, averageBracket,
       identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
-      inFosterCare, inApprenticeship, citizenship])
+      hasFinancialNeed, inFosterCare, inApprenticeship, citizenship])
 
   const results = useMemo(() => {
     if (!profile) return null
@@ -303,6 +304,14 @@ export default function EligibilityQuiz({ scholarships }: Props) {
             <Chip label="Female" active={identifiesAsFemale === true} onClick={() => setIdentifiesAsFemale(prev => prev === true ? null : true)} />
             <Chip label="Indigenous (First Nations, Métis, Inuit)" active={identifiesAsIndigenous === true} onClick={() => toggleIdentity(identifiesAsIndigenous, setIdentifiesAsIndigenous)} />
             <Chip label="Person of colour" active={identifiesAsBIPOC === true} onClick={() => toggleIdentity(identifiesAsBIPOC, setIdentifiesAsBIPOC)} />
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <p className="text-sm text-secondary mb-2.5 font-medium">Financial need</p>
+          <div className="flex flex-wrap gap-2">
+            <Chip label="Yes, I have financial need" active={hasFinancialNeed === true} onClick={() => setHasFinancialNeed(prev => prev === true ? null : true)} />
+            <Chip label="No" active={hasFinancialNeed === false} onClick={() => setHasFinancialNeed(prev => prev === false ? null : false)} />
           </div>
         </div>
 
