@@ -78,9 +78,9 @@ export default function ItemList(props: Props) {
         {filtered.length} {label}{filtered.length !== 1 ? 's' : ''} shown
       </span>
 
-      {/* Category chips */}
+      {/* Category chips — desktop only */}
       {isScholarship && scholarshipCategories.length > 0 && (
-        <div className="flex chips-row mb-4 gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+        <div className="hidden md:flex chips-row mb-4 gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
           <button onClick={() => sch.setCategory('all')} aria-pressed={sch.selectedCategory === 'all'}
             className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
             style={sch.selectedCategory === 'all'
@@ -110,20 +110,19 @@ export default function ItemList(props: Props) {
         <p className="text-sm text-faint flex-shrink-0">
           {filtered.length} {label}{filtered.length !== 1 ? 's' : ''}
         </p>
-        <button onClick={() => setSheetOpen(true)} aria-expanded={sheetOpen} aria-label="Open sort options"
+        <button onClick={() => setSheetOpen(true)} aria-expanded={sheetOpen} aria-label="Open filters"
           className="relative flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium border transition-colors"
           style={{ borderColor: hasActiveFilters ? 'var(--brand-border)' : 'var(--border-medium)', color: hasActiveFilters ? 'var(--brand)' : 'var(--text-secondary)', background: hasActiveFilters ? 'var(--brand-dim)' : 'transparent' }}>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M2 3h12M2 8h8M2 13h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            <path d="M13 6v7M11 11l2 2 2-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M2 3h12M5 8h6M7 13h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
           </svg>
-          Sort
+          Filter
           {hasActiveFilters && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--brand)', position: 'absolute', top: 4, right: 4 }} />}
         </button>
       </div>
 
-      {/* Filter pills */}
-      <div className="flex chips-row mb-5 gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+      {/* Filter pills — desktop only */}
+      <div className="hidden md:flex chips-row mb-5 gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
         {isScholarship
           ? REGION_PILLS.map(({ value, label: lbl, dot }) => {
               const sel = sch.selectedRegion === value;
@@ -168,11 +167,11 @@ export default function ItemList(props: Props) {
       <Drawer.Root open={sheetOpen} onOpenChange={setSheetOpen}>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 z-40 md:hidden bg-black/[0.45]" />
-          <Drawer.Content aria-label="Sort options"
+          <Drawer.Content aria-label="Filter and sort options"
             className="fixed left-0 right-0 z-50 md:hidden rounded-t-2xl flex flex-col outline-none"
             style={{ bottom: 64, backgroundColor: 'var(--bg-card)', boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
             <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-subtle flex-shrink-0">
-              <span className="font-semibold text-primary text-base">Sort</span>
+              <span className="font-semibold text-primary text-base">Filter & Sort</span>
               <button onClick={() => setSheetOpen(false)} aria-label="Close"
                 className="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-subtle transition-colors">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -180,18 +179,89 @@ export default function ItemList(props: Props) {
                 </svg>
               </button>
             </div>
-            <div className="px-5 pt-5 pb-2">
-              <div className="flex flex-wrap" style={{ gap: 8 }}>
-                {sortOpts.map(({ value, label: lbl }) => {
-                  const sel = sortBy === value;
-                  return (
-                    <button key={value} onClick={() => setSort(value as any)} aria-pressed={sel}
-                      className={`${pillBase} ${sel ? pillOn : pillOff}`}
-                      style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
-                      {lbl}
+            <div className="overflow-y-auto flex-1 px-5 py-5 space-y-6">
+              {/* Category section */}
+              {isScholarship && scholarshipCategories.length > 0 && (
+                <div>
+                  <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Category</p>
+                  <div className="flex flex-wrap" style={{ gap: 8 }}>
+                    <button onClick={() => sch.setCategory('all')} aria-pressed={sch.selectedCategory === 'all'}
+                      className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
+                      style={sch.selectedCategory === 'all'
+                        ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
+                        : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
+                      All
                     </button>
-                  );
-                })}
+                    {scholarshipCategories.map(cat => {
+                      const badge = SCHOLARSHIP_BADGES[cat];
+                      const sel = sch.selectedCategory === cat;
+                      return (
+                        <button key={cat} onClick={() => sch.setCategory(sel ? 'all' : cat)} aria-pressed={sel}
+                          className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
+                          style={sel
+                            ? { background: badge ? badge.bg : 'var(--brand-dim)', borderColor: badge ? badge.border : 'var(--brand-border)', color: badge ? badge.color : 'var(--brand)' }
+                            : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
+                          {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
+                          {cat}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+              {!isScholarship && programCategories.length > 1 && (
+                <div>
+                  <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Category</p>
+                  <div className="flex flex-wrap" style={{ gap: 8 }}>
+                    {programCategories.map(cat => {
+                      const badge = cat !== 'all' ? PROGRAM_BADGES[cat] : undefined;
+                      const sel = prg.selectedCategory === cat;
+                      return (
+                        <button key={cat} onClick={() => prg.setCategory(cat)} aria-pressed={sel}
+                          className={`${pillBase} ${sel ? pillOn : pillOff}`}
+                          style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
+                          {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
+                          {cat === 'all' ? 'All' : cat}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+              {/* Region section — scholarships only */}
+              {isScholarship && (
+                <div>
+                  <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Region</p>
+                  <div className="flex flex-wrap" style={{ gap: 8 }}>
+                    {REGION_PILLS.map(({ value, label: lbl, dot }) => {
+                      const sel = sch.selectedRegion === value;
+                      return (
+                        <button key={lbl} onClick={() => sch.setRegion(value)} aria-pressed={sel}
+                          className={`${pillBase} ${sel ? pillOn : pillOff}`}
+                          style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
+                          {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', flexShrink: 0 }} />}
+                          {lbl}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+              {/* Sort section */}
+              <div>
+                <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Sort</p>
+                <div className="flex flex-wrap" style={{ gap: 8 }}>
+                  {sortOpts.map(({ value, label: lbl }) => {
+                    const sel = sortBy === value;
+                    return (
+                      <button key={value} onClick={() => setSort(value as any)} aria-pressed={sel}
+                        className={`${pillBase} ${sel ? pillOn : pillOff}`}
+                        style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
+                        {lbl}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
             <div className="flex-shrink-0 px-5 py-4 border-t border-subtle"
