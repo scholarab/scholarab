@@ -80,17 +80,23 @@ export default function ItemList(props: Props) {
 
       {/* Category chips */}
       {isScholarship && scholarshipCategories.length > 0 && (
-        <div className="flex chips-row mb-4 gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+        <div className="flex chips-row mb-4 gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
           <button onClick={() => sch.setCategory('all')} aria-pressed={sch.selectedCategory === 'all'}
-            className={chipCls(sch.selectedCategory === 'all')} style={chipStyle(sch.selectedCategory === 'all')}>
-            All Categories
+            className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
+            style={sch.selectedCategory === 'all'
+              ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
+              : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
+            All
           </button>
           {scholarshipCategories.map(cat => {
             const badge = SCHOLARSHIP_BADGES[cat];
             const sel = sch.selectedCategory === cat;
             return (
               <button key={cat} onClick={() => sch.setCategory(sel ? 'all' : cat)} aria-pressed={sel}
-                className={chipCls(sel)} style={chipStyle(sel)}>
+                className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
+                style={sel
+                  ? { background: badge ? badge.bg : 'var(--brand-dim)', borderColor: badge ? badge.border : 'var(--brand-border)', color: badge ? badge.color : 'var(--brand)' }
+                  : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
                 {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
                 {cat}
               </button>

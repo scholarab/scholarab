@@ -15,6 +15,7 @@ export const SCHOLARSHIP_BADGES: Record<string, BadgeStyle> = {
   'Health':        { emoji: '🏥', bg: 'rgba(244,114,182,0.15)', color: '#f472b6', border: 'rgba(244,114,182,0.3)' },
   'Engineering':   { emoji: '⚙️', bg: 'rgba(251,146,60,0.15)',  color: '#fb923c', border: 'rgba(251,146,60,0.3)' },
   'Environmental': { emoji: '🌿', bg: 'rgba(52,211,153,0.15)',  color: '#34d399', border: 'rgba(52,211,153,0.3)' },
+  'General':       { emoji: '✨', bg: 'rgba(148,163,184,0.15)', color: '#94a3b8', border: 'rgba(148,163,184,0.3)' },
 };
 
 export const PROGRAM_BADGES: Record<string, BadgeStyle> = {
