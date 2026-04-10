@@ -40,15 +40,28 @@ type SortValue = 'closest_due' | 'highest_pay' | 'lowest_pay';
 export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [sortBy,         setSortBy        ] = useState<SortValue>('closest_due');
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | null>(null);
-  const [query,          setQueryRaw      ] = useState('');
+  const [tags,           setTagsRaw       ] = useState<string[]>([]);
   const [page,           setPage          ] = useState(1);
   const [sheetOpen,      setSheetOpen     ] = useState(false);
   const [savedIds,       setSavedIds      ] = useState<number[]>([]);
   const hasFiltered = useRef(false);
 
-  const setQuery = useCallback((q: string) => {
+  const addTag = useCallback((tag: string) => {
+    const t = tag.trim().toLowerCase();
+    if (!t) return;
     hasFiltered.current = true;
-    setQueryRaw(q);
+    setTagsRaw(prev => prev.includes(t) ? prev : [...prev, t]);
+    setPage(1);
+  }, []);
+
+  const removeTag = useCallback((tag: string) => {
+    hasFiltered.current = true;
+    setTagsRaw(prev => prev.filter(t => t !== tag));
+    setPage(1);
+  }, []);
+
+  const clearTags = useCallback(() => {
+    setTagsRaw([]);
     setPage(1);
   }, []);
 
@@ -95,18 +108,19 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   );
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    const afterQuery = q === ''
+    const afterTags = tags.length === 0
       ? withoutClosed
       : withoutClosed.filter(s =>
-          (s.title      ?? '').toLowerCase().includes(q) ||
-          (s.audience   ?? '').toLowerCase().includes(q) ||
-          (s.notes      ?? '').toLowerCase().includes(q) ||
-          (s.category   ?? '').toLowerCase().includes(q)
+          tags.every(t =>
+            (s.title    ?? '').toLowerCase().includes(t) ||
+            (s.audience ?? '').toLowerCase().includes(t) ||
+            (s.notes    ?? '').toLowerCase().includes(t) ||
+            (s.category ?? '').toLowerCase().includes(t)
+          )
         );
     const afterRegion = selectedRegion === null
-      ? afterQuery
-      : afterQuery.filter(REGION_MATCH[selectedRegion]);
+      ? afterTags
+      : afterTags.filter(REGION_MATCH[selectedRegion]);
 
     return [...afterRegion].sort((a, b) => {
       if (sortBy === 'closest_due') return (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity);
@@ -114,7 +128,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       if (sortBy === 'lowest_pay')  return (a._amount_cents ?? 0) - (b._amount_cents ?? 0);
       return 0;
     });
-  }, [withoutClosed, selectedRegion, sortBy, statusCache, query]);
+  }, [withoutClosed, selectedRegion, sortBy, statusCache, tags]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
@@ -132,9 +146,11 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     setRegion:        toggleRegion,
     sheetOpen,
     setSheetOpen,
-    query,
-    setQuery,
-    hasActiveFilters: sortBy !== 'closest_due' || selectedRegion !== null || query !== '',
+    tags,
+    addTag,
+    removeTag,
+    clearTags,
+    hasActiveFilters: sortBy !== 'closest_due' || selectedRegion !== null || tags.length > 0,
     regionKey:        selectedRegion ?? '',
     savedIds,
     handleToggleSave,

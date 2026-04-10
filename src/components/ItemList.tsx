@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useState, useRef } from 'react';
 import { Drawer } from 'vaul';
 import { useScholarships } from '../hooks/useScholarships.ts';
 import { usePrograms } from '../hooks/usePrograms.ts';
@@ -44,8 +44,11 @@ export default function ItemList(props: Props) {
 
   const { filtered, visibleItems, page, totalPages, handlePageChange,
           sortBy, setSort, sheetOpen, setSheetOpen, hasActiveFilters, savedIds, handleToggleSave, isFiltered,
-          query, setQuery }
+          tags, addTag, removeTag }
     = isScholarship ? sch : prg;
+
+  const [inputVal, setInputVal] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Close the drawer before Astro navigates — prevents Radix from leaving
   // body.style.pointerEvents='none' stuck on the next page.
@@ -71,28 +74,44 @@ export default function ItemList(props: Props) {
         {filtered.length} {label}{filtered.length !== 1 ? 's' : ''} shown
       </span>
 
-      {/* Search input */}
-      <div className="relative mb-4">
-        <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-tertiary" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      {/* Tag search input */}
+      <div
+        className="flex flex-wrap items-center gap-1.5 rounded-xl px-3 py-2 mb-4 cursor-text"
+        style={{ background: 'var(--bg-subtle)', border: '0.5px solid var(--border-medium)', minHeight: 42 }}
+        onClick={() => inputRef.current?.focus()}
+      >
+        <svg className="flex-shrink-0 text-tertiary" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
+        {tags.map(tag => (
+          <span key={tag} className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium text-brand border border-brand-border" style={{ background: 'var(--brand-dim)' }}>
+            {tag}
+            <button onClick={e => { e.stopPropagation(); removeTag(tag); }} aria-label={`Remove ${tag}`} className="hover:opacity-70 transition-opacity leading-none">
+              <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </span>
+        ))}
         <input
-          type="search"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder={`Search ${label}s…`}
-          aria-label={`Search ${label}s`}
-          className="w-full rounded-xl pl-10 pr-9 py-2.5 text-sm text-primary placeholder:text-tertiary outline-none"
-          style={{ background: 'var(--bg-subtle)', border: '0.5px solid var(--border-medium)' }}
+          ref={inputRef}
+          type="text"
+          value={inputVal}
+          onChange={e => setInputVal(e.target.value)}
+          onKeyDown={e => {
+            if ((e.key === 'Enter' || e.key === ',') && inputVal.trim()) {
+              e.preventDefault();
+              addTag(inputVal.trim().replace(/,$/, ''));
+              setInputVal('');
+            } else if (e.key === 'Backspace' && !inputVal && tags.length > 0) {
+              removeTag(tags[tags.length - 1]);
+            }
+          }}
+          placeholder={tags.length === 0 ? `Filter by keyword…` : ''}
+          aria-label={`Filter ${label}s by keyword`}
+          className="flex-1 min-w-[120px] text-sm text-primary placeholder:text-tertiary bg-transparent outline-none"
+          style={{ minWidth: tags.length === 0 ? '100%' : 120 }}
         />
-        {query && (
-          <button onClick={() => setQuery('')} aria-label="Clear search"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-tertiary hover:text-secondary transition-colors">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </button>
-        )}
       </div>
 
       {/* Mobile: count + sort button */}
@@ -193,7 +212,7 @@ export default function ItemList(props: Props) {
       </Drawer.Root>
 
       {/* Card grid */}
-      <div key={`${filterKey}-${sortBy}-${query}-${page}`} className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
+      <div key={`${filterKey}-${sortBy}-${tags.join(',')}-${page}`} className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
         {isScholarship
           ? (visibleItems as ScholarshipWithMeta[]).map((s, i) => (
               <ScholarshipCard key={s.id} scholarship={s} index={i} isSaved={savedSet.has(s.id)} onToggleSave={() => handleToggleSave(s.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
@@ -208,7 +227,7 @@ export default function ItemList(props: Props) {
 
       {filtered.length === 0 && (
         <p className="text-center py-16 text-faint">
-          {query ? `No ${label}s match "${query}".` : `No ${label}s match your filters.`}
+          {tags.length > 0 ? `No ${label}s match your keywords.` : `No ${label}s match your filters.`}
         </p>
       )}
     </div>

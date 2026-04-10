@@ -25,15 +25,28 @@ type SortValue = typeof SORT_VALUES[number];
 export function usePrograms(initialPrograms: ProgramWithMeta[]) {
   const [sortBy,           setSortBy          ] = useState<SortValue>('closest_due');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [query,            setQueryRaw        ] = useState('');
+  const [tags,             setTagsRaw          ] = useState<string[]>([]);
   const [page,             setPage            ] = useState(1);
   const [sheetOpen,        setSheetOpen        ] = useState(false);
   const [savedIds,         setSavedIds         ] = useState<number[]>([]);
   const hasFiltered = useRef(false);
 
-  const setQuery = useCallback((q: string) => {
+  const addTag = useCallback((tag: string) => {
+    const t = tag.trim().toLowerCase();
+    if (!t) return;
     hasFiltered.current = true;
-    setQueryRaw(q);
+    setTagsRaw(prev => prev.includes(t) ? prev : [...prev, t]);
+    setPage(1);
+  }, []);
+
+  const removeTag = useCallback((tag: string) => {
+    hasFiltered.current = true;
+    setTagsRaw(prev => prev.filter(t => t !== tag));
+    setPage(1);
+  }, []);
+
+  const clearTags = useCallback(() => {
+    setTagsRaw([]);
     setPage(1);
   }, []);
 
@@ -76,21 +89,22 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
 
   const filtered = useMemo(() => {
     const nonClosed = initialPrograms.filter(p => statusCache.get(p.id) !== 'closed');
-    const q = query.trim().toLowerCase();
-    const afterQuery = q === ''
+    const afterTags = tags.length === 0
       ? nonClosed
       : nonClosed.filter(p =>
-          (p.name        ?? '').toLowerCase().includes(q) ||
-          (p.description ?? '').toLowerCase().includes(q) ||
-          (p.provider    ?? '').toLowerCase().includes(q) ||
-          (p.category    ?? '').toLowerCase().includes(q)
+          tags.every(t =>
+            (p.name        ?? '').toLowerCase().includes(t) ||
+            (p.description ?? '').toLowerCase().includes(t) ||
+            (p.provider    ?? '').toLowerCase().includes(t) ||
+            (p.category    ?? '').toLowerCase().includes(t)
+          )
         );
     const afterCategory = selectedCategory === 'all'
-      ? afterQuery
-      : afterQuery.filter(p => p.category === selectedCategory);
+      ? afterTags
+      : afterTags.filter(p => p.category === selectedCategory);
 
     return [...afterCategory].sort((a, b) => (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity));
-  }, [initialPrograms, selectedCategory, sortBy, statusCache, query]);
+  }, [initialPrograms, selectedCategory, sortBy, statusCache, tags]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
@@ -108,9 +122,11 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     setCategory:      handleSetCategory,
     sheetOpen,
     setSheetOpen,
-    query,
-    setQuery,
-    hasActiveFilters: selectedCategory !== 'all' || query !== '',
+    tags,
+    addTag,
+    removeTag,
+    clearTags,
+    hasActiveFilters: selectedCategory !== 'all' || tags.length > 0,
     categoryKey:      selectedCategory,
     savedIds,
     handleToggleSave,
