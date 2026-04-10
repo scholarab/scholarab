@@ -80,7 +80,8 @@ export default function ItemList(props: Props) {
 
       {/* Category chips — desktop only */}
       {isScholarship && scholarshipCategories.length > 0 && (
-        <div className="hidden md:flex chips-row mb-4 gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+        <div className="hidden md:block">
+        <div className="flex chips-row mb-4 gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
           <button onClick={() => sch.setCategory('all')} aria-pressed={sch.selectedCategory === 'all'}
             className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
             style={sch.selectedCategory === 'all'
@@ -103,6 +104,7 @@ export default function ItemList(props: Props) {
             );
           })}
         </div>
+        </div>
       )}
 
       {/* Mobile: count + sort button */}
@@ -122,7 +124,8 @@ export default function ItemList(props: Props) {
       </div>
 
       {/* Filter pills — desktop only */}
-      <div className="hidden md:flex chips-row mb-5 gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+      <div className="hidden md:block">
+      <div className="flex chips-row mb-5 gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
         {isScholarship
           ? REGION_PILLS.map(({ value, label: lbl, dot }) => {
               const sel = sch.selectedRegion === value;
@@ -146,6 +149,7 @@ export default function ItemList(props: Props) {
               );
             })
         }
+      </div>
       </div>
 
       {/* Desktop: count + sort pills */}
