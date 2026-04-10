@@ -404,12 +404,20 @@ h1, h2 {
   from { opacity: 0; transform: translate3d(20px, 0, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
+@keyframes page-in-reverse {
+  from { opacity: 0; transform: translate3d(-20px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
 ::view-transition-old(root) {
   animation: none;
   opacity: 0;
 }
 ::view-transition-new(root) {
   animation: page-in 0.28s cubic-bezier(0, 0, 0.2, 1) both;
+}
+/* Swipe right → previous page slides in from left */
+html[data-swipe-dir="right"] ::view-transition-new(root) {
+  animation: page-in-reverse 0.28s cubic-bezier(0, 0, 0.2, 1) both;
 }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),

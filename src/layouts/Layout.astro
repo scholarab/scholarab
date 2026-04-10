@@ -136,6 +136,81 @@ const {
           navigator.serviceWorker.register('/sw.js');
         }
       }, { once: true });
+
+      // ── Swipe navigation (Web K pattern) ────────────────────
+      // Clean swipe direction flag after every transition
+      document.addEventListener('astro:after-swap', () => {
+        delete (document.documentElement.dataset as any).swipeDir;
+      });
+
+      (function initSwipeNav() {
+        const PAGES = ['/', '/scholarships', '/programs', '/saved', '/about'];
+        const THRESHOLD = 50;   // px — commit distance (Web K uses 50px)
+        const EDGE_GUARD = 20;  // px — ignore touches near screen edge (iOS back gesture)
+
+        let startX = 0, startY = 0;
+        let cancelled = false;
+        let locked = false;     // true once horizontal intent is confirmed
+
+        // Don't intercept touches on horizontally scrollable elements (filter chips, etc.)
+        function isHorizontalScroller(el: Element | null): boolean {
+          while (el && el !== document.body) {
+            const ox = getComputedStyle(el).overflowX;
+            if (ox === 'auto' || ox === 'scroll') return true;
+            el = el.parentElement;
+          }
+          return false;
+        }
+
+        // Don't fire while a Vaul drawer is open
+        function isDrawerOpen(): boolean {
+          return document.body.style.pointerEvents === 'none' ||
+            !!document.querySelector('[vaul-drawer][data-state="open"]');
+        }
+
+        document.addEventListener('touchstart', (e) => {
+          const t = e.touches[0];
+          startX = t.pageX;
+          startY = t.pageY;
+          cancelled = false;
+          locked = false;
+          if (startX <= EDGE_GUARD || startX >= window.innerWidth - EDGE_GUARD) { cancelled = true; return; }
+          if (isHorizontalScroller(e.target as Element)) { cancelled = true; return; }
+          if (isDrawerOpen()) { cancelled = true; }
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+          if (cancelled) return;
+          const dx = e.touches[0].pageX - startX;
+          const dy = e.touches[0].pageY - startY;
+          if (!locked) {
+            // Vertical intent detected — cancel horizontal swipe
+            if (Math.abs(dy) > 20 && Math.abs(dy) > Math.abs(dx)) { cancelled = true; return; }
+            if (Math.abs(dx) > 10) locked = true;
+          }
+        }, { passive: true });
+
+        document.addEventListener('touchend', async (e) => {
+          if (cancelled || !locked) return;
+          const dx = e.changedTouches[0].pageX - startX;
+          if (Math.abs(dx) < THRESHOLD) return;
+
+          const path = window.location.pathname;
+          const idx = PAGES.findIndex(p => p === '/' ? path === '/' : path.startsWith(p));
+          if (idx === -1) return;
+
+          const nextIdx = dx < 0 ? idx + 1 : idx - 1;
+          if (nextIdx < 0 || nextIdx >= PAGES.length) return;
+
+          navigator.vibrate?.(6);
+
+          // Tag direction so CSS can flip the transition animation
+          document.documentElement.dataset.swipeDir = dx < 0 ? 'left' : 'right';
+
+          const { navigate } = await import('astro:transitions/client');
+          navigate(PAGES[nextIdx]);
+        }, { passive: true });
+      })();
     </script>
   </body>
 </html>
