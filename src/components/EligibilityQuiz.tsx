@@ -206,7 +206,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           {(grade === '10' || grade === '11') && (
             <div className="mt-3 p-3 rounded-lg border border-amber-400/30 bg-amber-400/8 text-xs text-amber-400/80">
               Most scholarships are for Grade 12 students — results here will be limited.{' '}
-              <a href="/programs" className="underline font-medium">Browse research & mentorship programs</a>{' '}
+              <a href="/programs" className="underline font-medium">Browse research programs</a>{' '}
               instead — many are open to Grade 10 and 11.
             </div>
           )}
