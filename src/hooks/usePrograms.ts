@@ -25,10 +25,17 @@ type SortValue = typeof SORT_VALUES[number];
 export function usePrograms(initialPrograms: ProgramWithMeta[]) {
   const [sortBy,           setSortBy          ] = useState<SortValue>('closest_due');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [query,            setQueryRaw        ] = useState('');
   const [page,             setPage            ] = useState(1);
   const [sheetOpen,        setSheetOpen        ] = useState(false);
   const [savedIds,         setSavedIds         ] = useState<number[]>([]);
   const hasFiltered = useRef(false);
+
+  const setQuery = useCallback((q: string) => {
+    hasFiltered.current = true;
+    setQueryRaw(q);
+    setPage(1);
+  }, []);
 
   useEffect(() => {
     setSavedIds([...getSavedPrograms()]);
@@ -69,12 +76,21 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
 
   const filtered = useMemo(() => {
     const nonClosed = initialPrograms.filter(p => statusCache.get(p.id) !== 'closed');
-    const afterCategory = selectedCategory === 'all'
+    const q = query.trim().toLowerCase();
+    const afterQuery = q === ''
       ? nonClosed
-      : nonClosed.filter(p => p.category === selectedCategory);
+      : nonClosed.filter(p =>
+          (p.name        ?? '').toLowerCase().includes(q) ||
+          (p.description ?? '').toLowerCase().includes(q) ||
+          (p.provider    ?? '').toLowerCase().includes(q) ||
+          (p.category    ?? '').toLowerCase().includes(q)
+        );
+    const afterCategory = selectedCategory === 'all'
+      ? afterQuery
+      : afterQuery.filter(p => p.category === selectedCategory);
 
     return [...afterCategory].sort((a, b) => (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity));
-  }, [initialPrograms, selectedCategory, sortBy, statusCache]);
+  }, [initialPrograms, selectedCategory, sortBy, statusCache, query]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
@@ -92,7 +108,9 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     setCategory:      handleSetCategory,
     sheetOpen,
     setSheetOpen,
-    hasActiveFilters: selectedCategory !== 'all',
+    query,
+    setQuery,
+    hasActiveFilters: selectedCategory !== 'all' || query !== '',
     categoryKey:      selectedCategory,
     savedIds,
     handleToggleSave,

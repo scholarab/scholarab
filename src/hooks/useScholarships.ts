@@ -40,10 +40,17 @@ type SortValue = 'closest_due' | 'highest_pay' | 'lowest_pay';
 export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [sortBy,         setSortBy        ] = useState<SortValue>('closest_due');
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | null>(null);
+  const [query,          setQueryRaw      ] = useState('');
   const [page,           setPage          ] = useState(1);
   const [sheetOpen,      setSheetOpen     ] = useState(false);
   const [savedIds,       setSavedIds      ] = useState<number[]>([]);
   const hasFiltered = useRef(false);
+
+  const setQuery = useCallback((q: string) => {
+    hasFiltered.current = true;
+    setQueryRaw(q);
+    setPage(1);
+  }, []);
 
   useEffect(() => {
     setSavedIds([...getSaved()]);
@@ -88,9 +95,18 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   );
 
   const filtered = useMemo(() => {
-    const afterRegion = selectedRegion === null
+    const q = query.trim().toLowerCase();
+    const afterQuery = q === ''
       ? withoutClosed
-      : withoutClosed.filter(REGION_MATCH[selectedRegion]);
+      : withoutClosed.filter(s =>
+          (s.title      ?? '').toLowerCase().includes(q) ||
+          (s.audience   ?? '').toLowerCase().includes(q) ||
+          (s.notes      ?? '').toLowerCase().includes(q) ||
+          (s.category   ?? '').toLowerCase().includes(q)
+        );
+    const afterRegion = selectedRegion === null
+      ? afterQuery
+      : afterQuery.filter(REGION_MATCH[selectedRegion]);
 
     return [...afterRegion].sort((a, b) => {
       if (sortBy === 'closest_due') return (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity);
@@ -98,7 +114,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       if (sortBy === 'lowest_pay')  return (a._amount_cents ?? 0) - (b._amount_cents ?? 0);
       return 0;
     });
-  }, [withoutClosed, selectedRegion, sortBy, statusCache]);
+  }, [withoutClosed, selectedRegion, sortBy, statusCache, query]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
@@ -116,7 +132,9 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     setRegion:        toggleRegion,
     sheetOpen,
     setSheetOpen,
-    hasActiveFilters: sortBy !== 'closest_due' || selectedRegion !== null,
+    query,
+    setQuery,
+    hasActiveFilters: sortBy !== 'closest_due' || selectedRegion !== null || query !== '',
     regionKey:        selectedRegion ?? '',
     savedIds,
     handleToggleSave,
