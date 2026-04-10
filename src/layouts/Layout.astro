@@ -111,7 +111,7 @@ const {
       });
 
       // Keep theme in sync with OS preference changes (only if user hasn't overridden)
-      matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      matchMedia('(prefers-color-scheme: dark)').addEventListener('change', async (e) => {
         try {
           if (!localStorage.getItem('theme')) {
             const { applyTheme } = await import('../lib/themeClient.ts');
