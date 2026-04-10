@@ -435,30 +435,6 @@ describe('matchScholarship', () => {
       expect(result.confidence).toBeCloseTo(0.75)
     })
 
-    it('hard fails when scholarship requires financial need and student said no', () => {
-      const p = { ...baseProfile, hasFinancialNeed: false }
-      const result = matchScholarship(p, sch({ financialNeed: true }))
-      expect(result.match).toBe(false)
-    })
-
-    it('passes when scholarship requires financial need and student said yes', () => {
-      const p = { ...baseProfile, hasFinancialNeed: true }
-      const result = matchScholarship(p, sch({ financialNeed: true, fields: [], targetInstitutions: [] }))
-      expect(result.match).toBe(true)
-    })
-
-    it('+0.10 for confirmed financial need match', () => {
-      const p = { ...baseProfile, hasFinancialNeed: true }
-      const result = matchScholarship(p, sch({ financialNeed: true, fields: [], targetInstitutions: [] }))
-      // 0.50 + 0.10 + 0.10 + 0.10 = 0.80
-      expect(result.confidence).toBeCloseTo(0.80)
-    })
-
-    it('skips financial need filter when student did not answer', () => {
-      const p = { ...baseProfile, hasFinancialNeed: null }
-      const result = matchScholarship(p, sch({ financialNeed: true }))
-      expect(result.match).toBe(true)
-    })
 
     it('confidence clamped to max 1.0', () => {
       const p = { ...baseProfile, schoolBoard: 'MHPSD', fields: ['STEM'], targetInstitution: 'U of C' }

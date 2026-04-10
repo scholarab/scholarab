@@ -115,12 +115,6 @@ export function matchScholarship(
     return { match: false, confidence: 0, reasons }
   }
 
-  // ── Financial need (hard filter only if student answered) ────────────────
-  if (eligibility.financialNeed && profile.hasFinancialNeed === false) {
-    reasons.push('Requires demonstrated financial need')
-    return { match: false, confidence: 0, reasons }
-  }
-
   // ── Family income cap (hard filter only if student answered) ──────────────
   if (eligibility.maxFamilyIncome !== null && profile.familyIncome !== null) {
     if (profile.familyIncome > eligibility.maxFamilyIncome) {
@@ -148,11 +142,6 @@ export function matchScholarship(
   } else if (profile.targetInstitution) {
     if (eligibility.targetInstitutions.includes(profile.targetInstitution)) confidence += 0.20
     else confidence -= 0.10
-  }
-
-  // Financial need confirmed match
-  if (eligibility.financialNeed && profile.hasFinancialNeed === true) {
-    confidence += 0.10
   }
 
   // Grade specificity bonus (exactly specified)
