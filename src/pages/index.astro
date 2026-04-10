@@ -150,7 +150,7 @@ const closingSoon = scholarships
 
     function step(now: number) {
       const t = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
+      const eased = t * t * t;
       const value = Math.round(eased * target);
       el!.textContent = '$' + value.toLocaleString('en-CA') + '+ open right now';
       if (t < 1) requestAnimationFrame(step);
