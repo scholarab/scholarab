@@ -5,6 +5,69 @@ import { getStatus } from '../hooks/useScholarships.ts';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 
+function buildICS(scholarships: ScholarshipWithMeta[], programs: ProgramWithMeta[]): string {
+  const lines: string[] = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//ScholarAB//scholarab.ca//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+  ];
+  const now = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z';
+
+  for (const s of scholarships) {
+    if (!s.deadline || s.deadline === 'TBA') continue;
+    const dateStr = s.deadline.replace(/-/g, '');
+    const end = new Date(s.deadline + 'T00:00:00');
+    end.setDate(end.getDate() + 1);
+    const endStr = end.toISOString().slice(0, 10).replace(/-/g, '');
+    lines.push(
+      'BEGIN:VEVENT',
+      `UID:scholarab-sch-${s.id}@scholarab.ca`,
+      `DTSTAMP:${now}`,
+      `DTSTART;VALUE=DATE:${dateStr}`,
+      `DTEND;VALUE=DATE:${endStr}`,
+      `SUMMARY:Deadline: ${s.title}`,
+      `DESCRIPTION:${s.title} — ${s.amount}\\nApply at: ${s.url}`,
+      `URL:${s.url}`,
+      'END:VEVENT',
+    );
+  }
+
+  for (const p of programs) {
+    if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') continue;
+    const dateStr = p.deadline.replace(/-/g, '');
+    const end = new Date(p.deadline + 'T00:00:00');
+    end.setDate(end.getDate() + 1);
+    const endStr = end.toISOString().slice(0, 10).replace(/-/g, '');
+    lines.push(
+      'BEGIN:VEVENT',
+      `UID:scholarab-prg-${p.id}@scholarab.ca`,
+      `DTSTAMP:${now}`,
+      `DTSTART;VALUE=DATE:${dateStr}`,
+      `DTEND;VALUE=DATE:${endStr}`,
+      `SUMMARY:Deadline: ${p.name}`,
+      `DESCRIPTION:${p.name}\\nLearn more: ${p.url}`,
+      `URL:${p.url}`,
+      'END:VEVENT',
+    );
+  }
+
+  lines.push('END:VCALENDAR');
+  return lines.join('\r\n');
+}
+
+function downloadICS(scholarships: ScholarshipWithMeta[], programs: ProgramWithMeta[]) {
+  const content = buildICS(scholarships, programs);
+  const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'scholarab-deadlines.ics';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 interface SavedListProps {
   initialScholarships: ScholarshipWithMeta[];
   initialPrograms: ProgramWithMeta[];
@@ -243,6 +306,12 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
     return initialPrograms.filter(p => idSet.has(p.id));
   }, [initialPrograms, savedProgramIds]);
 
+  const hasDeadlines = useMemo(() =>
+    savedScholarships.some(s => s.deadline && s.deadline !== 'TBA') ||
+    savedPrograms.some(p => p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'),
+    [savedScholarships, savedPrograms]
+  );
+
   function unsaveScholarship(id: number) {
     const next = toggleSaved(id);
     setSavedScholarshipIds([...next]);
@@ -255,6 +324,20 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
 
   return (
     <div className="saved-list space-y-10">
+      {hasDeadlines && (
+        <div className="flex justify-end">
+          <button
+            onClick={() => downloadICS(savedScholarships, savedPrograms)}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-secondary hover:text-primary"
+            style={{ background: 'var(--bg-subtle)', border: '0.5px solid var(--border-card)' }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Export to Calendar
+          </button>
+        </div>
+      )}
       <section>
         <h2 className="text-xs font-semibold uppercase tracking-widest text-tertiary mb-4">Scholarships</h2>
         {savedScholarships.length === 0 ? (
