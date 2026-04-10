@@ -228,7 +228,7 @@ describe('useScholarships', () => {
     expect(result.current.hasActiveFilters).toBe(true)
   })
 
-  it('hasActiveFilters is true when sort is not featured', async () => {
+  it('hasActiveFilters is true when sort is not default', async () => {
     const { useScholarships } = await import('./useScholarships')
     const { result } = renderHook(() => useScholarships(allItems))
     act(() => result.current.setSort('highest_pay'))
@@ -283,7 +283,7 @@ describe('useScholarships', () => {
     expect(result.current.regionKey).toBe('National')
   })
 
-  it('featured sort puts active scholarships before future ones', async () => {
+  it('default sort puts active scholarships before future ones', async () => {
     const futureOpen = makeScholarship({
       id: 10,
       openDate: '2027-01-01',

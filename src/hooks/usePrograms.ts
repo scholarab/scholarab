@@ -19,13 +19,11 @@ export function getStatus(p: ProgramWithMeta): ProgramStatus {
   return 'active';
 }
 
-const SORT_VALUES = ['featured', 'closest_due'] as const;
+const SORT_VALUES = ['closest_due'] as const;
 type SortValue = typeof SORT_VALUES[number];
 
-const STATUS_ORDER: Record<ProgramStatus, number> = { active: 0, tba: 1, closed: 2 };
-
 export function usePrograms(initialPrograms: ProgramWithMeta[]) {
-  const [sortBy,           setSortBy          ] = useState<SortValue>('featured');
+  const [sortBy,           setSortBy          ] = useState<SortValue>('closest_due');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [page,             setPage            ] = useState(1);
   const [sheetOpen,        setSheetOpen        ] = useState(false);
@@ -75,14 +73,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
       ? nonClosed
       : nonClosed.filter(p => p.category === selectedCategory);
 
-    return [...afterCategory].sort((a, b) => {
-      if (sortBy === 'closest_due') return (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity);
-      const sa = statusCache.get(a.id)!;
-      const sb = statusCache.get(b.id)!;
-      if (STATUS_ORDER[sa] !== STATUS_ORDER[sb]) return STATUS_ORDER[sa] - STATUS_ORDER[sb];
-      if (sa === 'active') return (a._deadline_ms ?? 0) - (b._deadline_ms ?? 0);
-      return 0;
-    });
+    return [...afterCategory].sort((a, b) => (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity));
   }, [initialPrograms, selectedCategory, sortBy, statusCache]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
@@ -101,7 +92,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     setCategory:      handleSetCategory,
     sheetOpen,
     setSheetOpen,
-    hasActiveFilters: sortBy !== 'featured' || selectedCategory !== 'all',
+    hasActiveFilters: selectedCategory !== 'all',
     categoryKey:      selectedCategory,
     savedIds,
     handleToggleSave,

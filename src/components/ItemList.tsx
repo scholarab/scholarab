@@ -20,14 +20,12 @@ const REGION_PILLS = [
 ] as const;
 
 const SCHOLARSHIP_SORT = [
-  { value: 'featured',    label: 'Featured' },
   { value: 'closest_due', label: 'Earliest Deadline' },
   { value: 'highest_pay', label: 'Highest Amount' },
   { value: 'lowest_pay',  label: 'Lowest Amount' },
 ] as const;
 
 const PROGRAM_SORT = [
-  { value: 'featured',    label: 'Featured' },
   { value: 'closest_due', label: 'Earliest Deadline' },
 ] as const;
 
