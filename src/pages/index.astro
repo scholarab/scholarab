@@ -145,12 +145,12 @@ const closingSoon = scholarships
     const target = parseInt((el as HTMLElement).dataset.target ?? '0', 10);
     if (!target) return;
 
-    const duration = 1200;
+    const duration = 2500;
     const startTime = performance.now();
 
     function step(now: number) {
       const t = Math.min((now - startTime) / duration, 1);
-      const eased = t * t * t;
+      const eased = t * t * t * t * t;
       const value = Math.round(eased * target);
       el!.textContent = '$' + value.toLocaleString('en-CA') + '+ open right now';
       if (t < 1) requestAnimationFrame(step);
