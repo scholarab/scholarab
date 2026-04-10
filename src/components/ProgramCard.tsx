@@ -32,12 +32,12 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
 
   const deadlineUrgent = !isClosed && status !== 'tba' && isWithin30Days(program.deadline);
   const deadlineColor = isClosed
-    ? 'text-white/20'
+    ? 'text-faint'
     : status === 'tba'
-    ? 'text-white/35'
+    ? 'text-tertiary'
     : deadlineUrgent
     ? ''
-    : 'text-white/40';
+    : 'text-tertiary';
 
   return (
     <div
@@ -53,27 +53,27 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
           </span>
         </div>
 
-        <h2 className={`font-bold text-base leading-snug mb-1 ${isClosed ? 'text-white/25' : 'text-white'}`}>
+        <h2 className={`font-bold text-base leading-snug mb-1 ${isClosed ? 'text-faint' : 'text-primary'}`}>
           {program.name}
         </h2>
-        <p className="text-xs mb-2 text-white/30">{program.provider}</p>
+        <p className="text-xs mb-2 text-tertiary">{program.provider}</p>
         <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3">
-          <span className="text-xs text-white/40">📅 {program.duration}</span>
-          <span className="text-xs text-white/40">🎓 {program.grades}</span>
-          <span className="text-xs text-white/40">📍 {program.location}</span>
+          <span className="text-xs text-secondary">📅 {program.duration}</span>
+          <span className="text-xs text-secondary">🎓 {program.grades}</span>
+          <span className="text-xs text-secondary">📍 {program.location}</span>
         </div>
-        <p className="text-sm mb-2 text-white/45">{program.description}</p>
+        <p className="text-sm mb-2 text-secondary">{program.description}</p>
         {program.paid && program.stipend && (
-          <p className="mb-2" style={{ color: '#22d3a5', fontSize: 20, fontWeight: 800 }}>{program.stipend}</p>
+          <p className="mb-2 text-brand" style={{ fontSize: 20, fontWeight: 800 }}>{program.stipend}</p>
         )}
 
-        <div className="pt-4 grid grid-cols-2 gap-2 border-t border-white/[0.06]">
+        <div className="pt-4 grid grid-cols-2 gap-2 border-t border-subtle">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-white/30">Eligibility</p>
-            <p className="text-xs leading-snug text-white/40">{program.eligibility}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Eligibility</p>
+            <p className="text-xs leading-snug text-secondary">{program.eligibility}</p>
           </div>
           <div className="text-right flex flex-col items-end overflow-hidden">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-white/30">Deadline</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Deadline</p>
             <p className={`text-sm font-medium ${deadlineColor}`} style={deadlineUrgent ? { color: '#f87171' } : undefined}>
               {program.deadline === 'Ongoing' ? 'Ongoing' : formatDeadline(program.deadline)}
             </p>
@@ -84,7 +84,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
       <div className="pt-4 flex gap-2">
         <a href={`/programs/${generateSlug(program.name)}`}
           aria-label={`View details for ${program.name}`}
-          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-white/[0.18] text-white/60 hover:border-white/30 hover:text-white/80 transition-colors">
+          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-strong text-secondary hover:border-medium hover:text-primary transition-colors">
           View Details
         </a>
         {!isClosed && (
@@ -92,7 +92,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
             aria-label={`Learn more about ${program.name} (opens in new tab)`}
             onClick={() => track('learn_more', { id: program.id, name: program.name })}
             className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
-            style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            style={{ background: 'var(--brand)', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             Learn More
           </a>
         )}
@@ -100,8 +100,8 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
           ref={saveBtnRef}
           onClick={() => { if (!isSaved) showConfetti(saveBtnRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save program'}
-          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-[#22d3a5] border border-[#22d3a5]/40' : 'text-white/50 border border-white/[0.18]'}`}
-          style={{ width: 44, background: isSaved ? 'rgba(34,211,165,0.12)' : undefined }}
+          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-brand border border-[rgba(var(--brand-rgb),0.4)]' : 'text-secondary border border-strong'}`}
+          style={{ width: 44, background: isSaved ? 'var(--brand-dim)' : undefined }}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>

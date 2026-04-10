@@ -31,28 +31,130 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Isolate main content so card stacking contexts don't escape above the nav */
-#main-content {
-  isolation: isolate;
+/* ── Theme tokens ──────────────────────────────────────────── */
+:root,
+html.theme-dark {
+  color-scheme: dark;
+
+  /* Brand */
+  --brand:        #22d3a5;
+  --brand-rgb:    34, 211, 165;
+  --brand-dim:    rgba(34, 211, 165, 0.10);
+  --brand-border: rgba(34, 211, 165, 0.35);
+
+  /* Page & card surfaces */
+  --bg-page:    #0a0a0f;
+  --bg-card:    rgba(255, 255, 255, 0.04);
+  --bg-subtle:  rgba(255, 255, 255, 0.05);
+  --card-shadow: none;
+
+  /* Borders */
+  --border-card:   rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.18);
+
+  /* Text */
+  --text-primary:   #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.45);
+  --text-tertiary:  rgba(255, 255, 255, 0.30);
+  --text-faint:     rgba(255, 255, 255, 0.20);
+
+  /* Navigation */
+  --nav-glass-bg:      rgba(10, 10, 15, 0.8);
+  --nav-bg-desktop:    rgba(255, 255, 255, 0.05);
+  --nav-bg-mobile:     #1c1c28;
+  --nav-border-mobile: rgba(255, 255, 255, 0.07);
+  --bottom-nav-bg:     #0a0a0f;
+  --bottom-nav-border: rgba(255, 255, 255, 0.08);
+  --bn-tab-color:      rgba(255, 255, 255, 0.30);
+
+  /* Footer */
+  --footer-border: rgba(255, 255, 255, 0.06);
+
+  /* Card glow on hover */
+  --card-glow: rgba(34, 211, 165, 0.4);
+
+  /* Orb gradients */
+  --orb-1: rgba(34, 211, 165, 0.14);
+  --orb-2: rgba(59, 130, 246, 0.10);
+  --orb-3: rgba(167, 139, 250, 0.09);
+
+  /* Animation timing */
+  --spring:       cubic-bezier(0.34, 1.56, 0.64, 1);
+  --spring-snappy: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --t-press:      0.1s;
+  --t-standard:   0.22s;
+  --t-card:       0.35s;
 }
 
-/* ── Background orbs ───────────────────────────────────────── */
+html.theme-light {
+  color-scheme: light;
+
+  /* Brand — slightly darker for legibility on white */
+  --brand:        #16a37f;
+  --brand-rgb:    22, 163, 127;
+  --brand-dim:    rgba(22, 163, 127, 0.10);
+  --brand-border: rgba(22, 163, 127, 0.35);
+
+  /* Page & card surfaces */
+  --bg-page:    #f5f5f7;
+  --bg-card:    rgba(255, 255, 255, 0.90);
+  --bg-subtle:  rgba(0, 0, 0, 0.04);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  /* Borders */
+  --border-card:   rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-medium: rgba(0, 0, 0, 0.10);
+  --border-strong: rgba(0, 0, 0, 0.15);
+
+  /* Text */
+  --text-primary:   #0a0a0f;
+  --text-secondary: rgba(0, 0, 0, 0.50);
+  --text-tertiary:  rgba(0, 0, 0, 0.35);
+  --text-faint:     rgba(0, 0, 0, 0.20);
+
+  /* Navigation */
+  --nav-glass-bg:      rgba(245, 245, 247, 0.85);
+  --nav-bg-desktop:    rgba(255, 255, 255, 0.75);
+  --nav-bg-mobile:     #ffffff;
+  --nav-border-mobile: rgba(0, 0, 0, 0.08);
+  --bottom-nav-bg:     #f5f5f7;
+  --bottom-nav-border: rgba(0, 0, 0, 0.08);
+  --bn-tab-color:      rgba(0, 0, 0, 0.35);
+
+  /* Footer */
+  --footer-border: rgba(0, 0, 0, 0.08);
+
+  /* Card glow on hover */
+  --card-glow: rgba(22, 163, 127, 0.3);
+
+  /* Orb gradients */
+  --orb-1: rgba(22, 163, 127, 0.08);
+  --orb-2: rgba(59, 130, 246, 0.07);
+  --orb-3: rgba(167, 139, 250, 0.06);
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+html {
+  background-color: var(--bg-page);
+}
+@media (min-width: 769px) {
+  html { overscroll-behavior: none; }
+}
+
 body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   background-image:
-    radial-gradient(ellipse at center, rgba(var(--brand-rgb),0.14) 0%, transparent 70%),
-    radial-gradient(ellipse at center, rgba(59,130,246,0.10) 0%, transparent 70%),
-    radial-gradient(ellipse at center, rgba(167,139,250,0.09) 0%, transparent 70%);
+    radial-gradient(ellipse at center, var(--orb-1) 0%, transparent 70%),
+    radial-gradient(ellipse at center, var(--orb-2) 0%, transparent 70%),
+    radial-gradient(ellipse at center, var(--orb-3) 0%, transparent 70%);
   background-size: 65% 55%, 58% 48%, 62% 52%;
   background-position: 4% -2%, 96% -2%, 50% 102%;
   background-repeat: no-repeat;
   animation: orbs-drift 22s ease-in-out infinite alternate;
-}
-
-html {
-  background-color: #0a0a0f;
-}
-@media (min-width: 769px) {
-  html { overscroll-behavior: none; }
 }
 
 @keyframes orbs-drift {
@@ -64,6 +166,11 @@ html {
   body { animation: none; }
 }
 
+/* ── Isolate main content ──────────────────────────────────── */
+#main-content {
+  isolation: isolate;
+}
+
 /* ── Focus ring ────────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--brand);
@@ -71,18 +178,32 @@ html {
   border-radius: 4px;
 }
 
-/* ── Spring easing variables ──────────────────────────────── */
-:root {
-  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --spring-snappy: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --brand: #22d3a5;
-  --brand-rgb: 34, 211, 165;
-  --brand-dim: rgba(34, 211, 165, 0.10);
-  --brand-border: rgba(34, 211, 165, 0.35);
-  --t-press: 0.1s;
-  --t-standard: 0.22s;
-  --t-card: 0.35s;
-}
+/* ── Semantic color utilities ──────────────────────────────── */
+.text-primary   { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary  { color: var(--text-tertiary); }
+.text-faint     { color: var(--text-faint); }
+.text-brand     { color: var(--brand); }
+
+.hover\:text-primary:hover   { color: var(--text-primary); }
+.hover\:text-secondary:hover { color: var(--text-secondary); }
+.hover\:text-brand:hover     { color: var(--brand); }
+
+.bg-card   { background-color: var(--bg-card); }
+.bg-subtle { background-color: var(--bg-subtle); }
+.bg-brand-dim { background-color: var(--brand-dim); }
+
+.hover\:bg-subtle:hover { background-color: var(--bg-subtle); }
+
+.border-card        { border-color: var(--border-card); }
+.border-subtle      { border-color: var(--border-subtle); }
+.border-medium      { border-color: var(--border-medium); }
+.border-strong      { border-color: var(--border-strong); }
+.border-brand-border{ border-color: var(--brand-border); }
+
+.hover\:border-medium:hover { border-color: var(--border-medium); }
+.hover\:border-strong:hover { border-color: var(--border-strong); }
+.hover\:border-brand:hover  { border-color: var(--brand); }
 
 h1, h2 {
   letter-spacing: -0.02em;
@@ -104,10 +225,11 @@ h1, h2 {
 /* ── Card ─────────────────────────────────────────────────── */
 .card {
   position: relative;
-  background: rgba(255, 255, 255, 0.04);
-  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  border: 0.5px solid var(--border-card);
   border-radius: 16px;
   contain: layout style;
+  box-shadow: var(--card-shadow);
 }
 .card-interactive {
   transition: transform var(--t-standard) var(--spring);
@@ -118,7 +240,7 @@ h1, h2 {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: 0 0 0 2px var(--card-glow, rgba(var(--brand-rgb), 0.4)), 0 4px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 2px var(--card-glow), 0 4px 32px rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity var(--t-standard) ease;
   pointer-events: none;
@@ -159,9 +281,9 @@ h1, h2 {
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-medium);
   background: transparent;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-tertiary);
   transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.25s var(--spring);
   -webkit-tap-highlight-color: transparent;
 }
@@ -169,8 +291,8 @@ h1, h2 {
   transform: scale(0.91);
 }
 .tab-pill.active {
-  background: rgba(var(--brand-rgb), 0.1);
-  border-color: rgba(var(--brand-rgb), 0.3);
+  background: var(--brand-dim);
+  border-color: var(--brand-border);
   color: var(--brand);
 }
 
@@ -180,9 +302,9 @@ h1, h2 {
   padding: 5px 14px;
   font-size: 11px;
   cursor: pointer;
-  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border: 0.5px solid var(--border-medium);
   background: transparent;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-tertiary);
   transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.25s var(--spring);
   -webkit-tap-highlight-color: transparent;
 }
@@ -190,9 +312,9 @@ h1, h2 {
   transform: scale(0.89);
 }
 .sort-pill.active {
-  border-color: rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  border-color: var(--border-strong);
+  background: var(--bg-subtle);
+  color: var(--text-primary);
 }
 
 /* ── Teal CTA button ──────────────────────────────────────── */
@@ -210,7 +332,7 @@ h1, h2 {
 .glass-nav.scrolled {
   backdrop-filter: blur(32px) saturate(200%);
   -webkit-backdrop-filter: blur(32px) saturate(200%);
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
 }
 
 /* ── Saved page empty state bounce ───────────────────────── */
@@ -230,6 +352,53 @@ h1, h2 {
   transform: scale(1.015);
 }
 
+/* ── Card entrance animations ─────────────────────────────── */
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes cardEntranceFilter {
+  from { opacity: 0; transform: translateX(-14px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+.card-entrance-filter {
+  animation: cardEntranceFilter 0.3s var(--spring) both;
+  animation-delay: var(--card-delay, 0s);
+}
+@keyframes shimmer {
+  to { transform: translateX(200%); }
+}
+.card.card-before-reveal {
+  opacity: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-subtle) !important;
+  border-color: var(--border-card) !important;
+  border-top-color: var(--border-card) !important;
+  will-change: transform;
+}
+.card.card-before-reveal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--bg-subtle) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: shimmer 1.5s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform;
+}
+.card-before-reveal * { opacity: 0 !important; }
+.card-entrance {
+  animation: cardEntrance var(--t-card) var(--spring) both;
+  animation-delay: var(--card-delay, 0s);
+}
+.card-entrance * { opacity: 1 !important; }
+
 /* ── Page view transitions ────────────────────────────────── */
 @keyframes page-in {
   from { opacity: 0; transform: translate3d(20px, 0, 0); }
@@ -248,4 +417,3 @@ h1, h2 {
   .empty-bounce { animation: none !important; }
   .glass-nav { transition: none !important; }
 }
-

@@ -53,15 +53,19 @@
 </nav>
 
 <script lang="ts">
-  const TEAL = '#22d3a5';
   const IDS = ['bn-home', 'bn-scholarships', 'bn-programs', 'bn-saved', 'bn-about'];
 
+  function getBrandColor(): string {
+    return getComputedStyle(document.documentElement).getPropertyValue('--brand').trim() || '#22d3a5';
+  }
+
   function setActive(tabId: string) {
+    const brand = getBrandColor();
     IDS.forEach(id => {
       const el = document.getElementById(id);
       if (el) {
         const isActive = id === `bn-${tabId}`;
-        el.style.color = isActive ? TEAL : '';
+        el.style.color = isActive ? brand : '';
         el.setAttribute('aria-current', isActive ? 'page' : 'false');
       }
     });
@@ -81,13 +85,13 @@
 
 <style is:global>
   .bottom-nav-bar {
-    background: #0a0a0f;
-    border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+    background: var(--bottom-nav-bg);
+    border-top: 0.5px solid var(--bottom-nav-border);
     pointer-events: auto;
     will-change: transform;
   }
   .bn-tab {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--bn-tab-color);
     background: none;
     border: none;
     cursor: pointer;

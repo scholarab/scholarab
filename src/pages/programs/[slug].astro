@@ -88,33 +88,33 @@ const breadcrumbJson = {
     itemId={program.id}
     itemType="program"
   >
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-white/[0.07] pt-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-subtle pt-6">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Duration</p>
-        <p class="text-sm font-medium text-white/80">{program.duration}</p>
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Duration</p>
+        <p class="text-sm font-medium text-primary">{program.duration}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Grades</p>
-        <p class="text-sm font-medium text-white/80">{program.grades}</p>
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Grades</p>
+        <p class="text-sm font-medium text-primary">{program.grades}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Location</p>
-        <p class="text-sm font-medium text-white/80">{program.location}</p>
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Location</p>
+        <p class="text-sm font-medium text-primary">{program.location}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Deadline</p>
-        <p class="text-sm font-medium text-white/80">{formatDate(program.deadline)}</p>
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Deadline</p>
+        <p class="text-sm font-medium text-primary">{formatDate(program.deadline)}</p>
       </div>
     </div>
 
-    <div class="mb-6 p-4 rounded-xl bg-white/[0.04] border border-white/[0.07]">
-      <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Eligibility</p>
-      <p class="text-sm text-white/60">{program.eligibility}</p>
+    <div class="mb-6 p-4 rounded-xl bg-subtle border border-subtle">
+      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Eligibility</p>
+      <p class="text-sm text-secondary">{program.eligibility}</p>
     </div>
 
     <div class="mb-6">
-      <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-2">About</p>
-      <p class="text-sm leading-relaxed text-white/60">{program.description}</p>
+      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-2">About</p>
+      <p class="text-sm leading-relaxed text-secondary">{program.description}</p>
     </div>
   </DetailLayout>
 </Layout>

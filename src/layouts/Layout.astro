@@ -32,6 +32,19 @@ const {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- Flash-prevention: set theme class synchronously before any CSS loads -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') ||
+            (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.add('theme-' + t);
+        } catch (e) {
+          document.documentElement.classList.add('theme-dark');
+        }
+      })();
+    </script>
+    <meta name="color-scheme" content="dark light" />
     <meta name="google-site-verification" content="nhpc-sXNyJgfEMBonhftRYTiJpQMP0NDTVRDsIy2Yk4" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
@@ -58,17 +71,17 @@ const {
     <ClientRouter />
     <slot name="head" />
   </head>
-  <body class="bg-[#0a0a0f] text-white min-h-screen min-h-[100svh] flex flex-col overflow-x-clip md:overscroll-none">
+  <body class="min-h-screen min-h-[100svh] flex flex-col overflow-x-clip md:overscroll-none">
 
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#22d3a5;color:#0a0a0f;">Skip to content</a>
     <Nav currentPath={currentPath} />
     <main id="main-content" class={`${containerClass} mx-auto w-full flex-1 px-4 pb-24 md:pb-8 md:px-8`}>
       <slot />
     </main>
-    <footer class="hidden md:block border-t border-white/[0.06] mt-8 relative" style="z-index:1;">
-      <div class="max-w-6xl mx-auto px-4 pt-6 pb-24 md:py-6 md:px-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm text-white/25 text-center sm:text-left">
-        <span>© 2026 ScholarAB &nbsp;·&nbsp; Created by a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="hover:text-white/50 transition-colors">Medicine Hat High School</a> student.</span>
-        <a href="mailto:contact.scholarab@gmail.com" class="hover:text-white/50 transition-colors">Know a scholarship we're missing?</a>
+    <footer class="hidden md:block mt-8 relative" style="z-index:1; border-top: 0.5px solid var(--footer-border);">
+      <div class="max-w-6xl mx-auto px-4 pt-6 pb-24 md:py-6 md:px-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm text-center sm:text-left text-faint">
+        <span>© 2026 ScholarAB &nbsp;·&nbsp; Created by a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="hover:text-secondary transition-colors">Medicine Hat High School</a> student.</span>
+        <a href="mailto:contact.scholarab@gmail.com" class="hover:text-secondary transition-colors">Know a scholarship we're missing?</a>
       </div>
     </footer>
     <BottomNav />
@@ -85,6 +98,26 @@ const {
       // If navigation happens before cleanup, the body stays blocked. Reset it on every swap.
       document.addEventListener('astro:before-swap', () => {
         document.body.style.pointerEvents = '';
+      });
+
+      // Re-apply theme class after every Astro page transition (ClientRouter replaces <html>)
+      document.addEventListener('astro:after-swap', () => {
+        try {
+          const t = localStorage.getItem('theme') ||
+            (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.remove('theme-dark', 'theme-light');
+          document.documentElement.classList.add('theme-' + t);
+        } catch (e) {}
+      });
+
+      // Keep theme in sync with OS preference changes (only if user hasn't overridden)
+      matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        try {
+          if (!localStorage.getItem('theme')) {
+            const { applyTheme } = await import('../lib/themeClient.ts');
+            applyTheme(e.matches ? 'dark' : 'light');
+          }
+        } catch (e) {}
       });
 
       // Service worker registration

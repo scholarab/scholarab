@@ -24,7 +24,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
   const deadlineSoon = daysLeft !== null && daysLeft <= 30;
   const badge        = CATEGORY_BADGE[scholarship.category ?? ''] || DEFAULT_BADGE;
   const isUpcoming   = status === 'future';
-  const amountColor  = isClosed ? 'text-white/20' : 'text-[#22d3a5]';
+  const amountColor  = isClosed ? 'text-faint' : 'text-brand';
   const slug         = scholarship._slug ?? generateSlug(scholarship.title);
   const cardRef = useRef<HTMLDivElement>(null);
   const saveBtnRef   = useRef<HTMLButtonElement>(null);
@@ -46,14 +46,14 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           ) : <span />}
         </div>
 
-        <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-white/25' : 'text-white'}`}>
+        <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-faint' : 'text-primary'}`}>
           {scholarship.title}
         </h2>
-        <p className="text-sm line-clamp-2 mb-2 text-white/45">
+        <p className="text-sm line-clamp-2 mb-2 text-secondary">
           {scholarship.audience}
         </p>
 
-        <div className="pt-4 grid grid-cols-2 gap-2 border-t border-white/[0.06]">
+        <div className="pt-4 grid grid-cols-2 gap-2 border-t border-subtle">
           <div>
             <p className={`${amountColor}`} style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.1 }}>
               {scholarship.amount}
@@ -66,11 +66,11 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
             <p style={{
               fontSize: 12, fontWeight: 700,
               color: isClosed ? undefined : status === 'future' ? undefined : deadlineSoon ? '#f87171' : undefined,
-            }} className={isClosed ? 'text-white/20' : status === 'future' ? 'text-blue-400' : deadlineSoon ? '' : 'text-white/50'}>
+            }} className={isClosed ? 'text-faint' : status === 'future' ? 'text-blue-400' : deadlineSoon ? '' : 'text-tertiary'}>
               {status === 'future' ? (formatDeadline(scholarship.openDate) || 'TBA') : formatDeadline(scholarship.deadline)}
             </p>
             {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
-              <span style={{ fontSize: 9, marginTop: 2, color: daysLeft <= 30 ? '#f87171' : 'rgba(128,128,128,0.45)' }}>
+              <span style={{ fontSize: 9, marginTop: 2, color: daysLeft <= 30 ? '#f87171' : 'var(--text-faint)' }}>
                 {daysLeft === 0 ? 'Ends today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`}
               </span>
             )}
@@ -81,7 +81,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
       <div className="pt-4 flex gap-2">
         <a href={`/scholarships/${slug}`}
           aria-label={`View details for ${scholarship.title}`}
-          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-white/[0.18] text-white/60 hover:border-white/30 hover:text-white/80 transition-colors">
+          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-strong text-secondary hover:border-medium hover:text-primary transition-colors">
           View Details
         </a>
         {status === 'active' && (
@@ -89,7 +89,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
             aria-label={`Apply to ${scholarship.title} (opens in new tab)`}
             onClick={() => track('apply_now', { id: scholarship.id, title: scholarship.title })}
             className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
-            style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            style={{ background: 'var(--brand)', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             Apply Now
           </a>
         )}
@@ -102,8 +102,8 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           ref={saveBtnRef}
           onClick={() => { if (!isSaved) showConfetti(saveBtnRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
-          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-[#22d3a5] border border-[#22d3a5]/40' : 'text-white/50 border border-white/[0.18]'}`}
-          style={{ width: 44, background: isSaved ? 'rgba(34,211,165,0.12)' : undefined }}
+          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-brand border border-[rgba(var(--brand-rgb),0.4)]' : 'text-secondary border border-strong'}`}
+          style={{ width: 44, background: isSaved ? 'var(--brand-dim)' : undefined }}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>

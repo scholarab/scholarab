@@ -39,14 +39,11 @@ export default function BookmarkButton({ id, type }: BookmarkButtonProps) {
         flexShrink: 0,
         alignSelf: 'stretch',
         borderRadius: 12,
-        background: saved ? 'rgba(34,211,165,0.12)' : 'rgba(255,255,255,0.07)',
+        background: saved ? 'var(--brand-dim)' : 'var(--bg-subtle)',
         backdropFilter: 'blur(16px) saturate(2)',
         WebkitBackdropFilter: 'blur(16px) saturate(2)',
-        border: `0.5px solid ${saved ? 'rgba(34,211,165,0.4)' : 'rgba(255,255,255,0.18)'}`,
-        boxShadow: saved
-          ? 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)'
-          : 'inset 0 1px 0 rgba(255,255,255,0.1), 0 1px 4px rgba(0,0,0,0.12)',
-        color: saved ? '#22d3a5' : 'rgba(200,200,210,0.7)',
+        border: `0.5px solid ${saved ? 'var(--brand-border)' : 'var(--border-strong)'}`,
+        color: saved ? 'var(--brand)' : 'var(--text-secondary)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         cursor: 'pointer',
         transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',

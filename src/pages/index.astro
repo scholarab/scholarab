@@ -41,27 +41,27 @@ const scholarshipCount = scholarships.filter(s => {
 
     <!-- Hero -->
     <div class="max-w-2xl mx-auto text-center pt-8 md:pt-12 pb-2">
-      <p class="font-semibold text-white/70 mb-2" style="font-size: clamp(18px, 2.5vw, 28px);">
+      <p class="font-semibold text-secondary mb-2" style="font-size: clamp(18px, 2.5vw, 28px);">
         Alberta's student opportunity directory.
       </p>
-      <p class="mb-4 md:mb-8 font-bold" style="font-size: clamp(22px, 3vw, 38px); color: #22d3a5; letter-spacing: -0.02em;">{'$' + activeTotal.toLocaleString('en-CA') + '+ open right now'}</p>
+      <p class="mb-4 md:mb-8 font-bold text-brand" style="font-size: clamp(22px, 3vw, 38px); letter-spacing: -0.02em;">{'$' + activeTotal.toLocaleString('en-CA') + '+ open right now'}</p>
       <div class="flex flex-col items-center gap-3">
         <div class="flex flex-row gap-3 justify-center">
-          <a href="/scholarships" class="inline-flex items-center justify-center whitespace-nowrap px-5 py-3.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-85" style="background: #22d3a5; color: #0a0a0f;">
+          <a href="/scholarships" class="inline-flex items-center justify-center whitespace-nowrap px-5 py-3.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-85" style="background: var(--brand); color: #0a0a0f;">
             Find Scholarships
           </a>
-          <a href="/programs" class="inline-flex items-center justify-center whitespace-nowrap px-5 py-3.5 rounded-full text-sm font-semibold transition-colors border" style="background: rgba(34,211,165,0.15); border-color: rgba(34,211,165,0.6); color: #22d3a5;">
+          <a href="/programs" class="inline-flex items-center justify-center whitespace-nowrap px-5 py-3.5 rounded-full text-sm font-semibold transition-colors border" style="background: var(--brand-dim); border-color: var(--brand-border); color: var(--brand);">
             Research Programs
           </a>
         </div>
-        <a href="/match" class="inline-flex items-center gap-2 text-sm font-medium text-white/50 hover:text-white transition-colors">
+        <a href="/match" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
           Find scholarships for me →
         </a>
       </div>
 
       <!-- Stats row -->
-      <div class="flex items-center justify-center sm:justify-center gap-2 mt-6 text-xs text-white/30 flex-wrap">
+      <div class="flex items-center justify-center sm:justify-center gap-2 mt-6 text-xs text-tertiary flex-wrap">
         <span>{scholarshipCount} scholarships</span>
         <span aria-hidden="true">·</span>
         <span>{researchCount} research programs</span>
@@ -70,22 +70,22 @@ const scholarshipCount = scholarships.filter(s => {
 
     <!-- How it works -->
     <div class="max-w-2xl mx-auto mt-16">
-      <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-6 text-center">How it works</p>
+      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-6 text-center">How it works</p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl" style="color: #22d3a5;">1</span>
-          <p class="font-semibold text-sm text-white">Browse</p>
-          <p class="text-sm text-white/40">Browse {scholarshipCount}+ scholarships and research programs across Alberta</p>
+          <span class="font-bold text-2xl text-brand">1</span>
+          <p class="font-semibold text-sm text-primary">Browse</p>
+          <p class="text-sm text-secondary">Browse {scholarshipCount}+ scholarships and research programs across Alberta</p>
         </div>
         <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl" style="color: #22d3a5;">2</span>
-          <p class="font-semibold text-sm text-white">Filter</p>
-          <p class="text-sm text-white/40">Filter by region, category, or deadline to find what fits you</p>
+          <span class="font-bold text-2xl text-brand">2</span>
+          <p class="font-semibold text-sm text-primary">Filter</p>
+          <p class="text-sm text-secondary">Filter by region, category, or deadline to find what fits you</p>
         </div>
         <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl" style="color: #22d3a5;">3</span>
-          <p class="font-semibold text-sm text-white">Apply</p>
-          <p class="text-sm text-white/40">Click Apply Now and go straight to the official application</p>
+          <span class="font-bold text-2xl text-brand">3</span>
+          <p class="font-semibold text-sm text-primary">Apply</p>
+          <p class="text-sm text-secondary">Click Apply Now and go straight to the official application</p>
         </div>
       </div>
     </div>

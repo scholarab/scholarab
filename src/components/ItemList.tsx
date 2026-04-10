@@ -31,12 +31,11 @@ const PROGRAM_SORT = [
   { value: 'closest_due', label: 'Earliest Deadline' },
 ] as const;
 
-const sheetBg  = 'bg-[#141418]';
 const pillBase = 'flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
-const pillOn   = 'text-[#22d3a5]';
-const pillOff  = 'bg-white/[0.03] text-white/45 border-white/10';
-const chipCls  = (selected: boolean) => `flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${selected ? 'text-[#22d3a5]' : 'bg-white/[0.03] text-white/45 border border-white/10 hover:border-white/20'}`;
-const chipStyle = (selected: boolean) => selected ? { background: 'rgba(34,211,165,0.1)', border: '0.5px solid rgba(34,211,165,0.3)' } : undefined;
+const pillOn   = 'text-brand border-brand-border bg-brand-dim';
+const pillOff  = 'bg-subtle text-secondary border-card';
+const chipCls  = (selected: boolean) => `flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${selected ? 'text-brand' : 'bg-subtle text-secondary border border-card hover:border-medium'}`;
+const chipStyle = (selected: boolean) => selected ? { background: 'var(--brand-dim)', border: '0.5px solid var(--brand-border)' } : undefined;
 
 export default function ItemList(props: Props) {
   const isScholarship = props.mode === 'scholarship';
@@ -75,18 +74,18 @@ export default function ItemList(props: Props) {
 
       {/* Mobile: count + sort button */}
       <div className="md:hidden mb-5 flex items-center justify-between gap-3">
-        <p className="text-sm text-white/25 flex-shrink-0">
+        <p className="text-sm text-faint flex-shrink-0">
           {filtered.length} {label}{filtered.length !== 1 ? 's' : ''}
         </p>
         <button onClick={() => setSheetOpen(true)} aria-expanded={sheetOpen} aria-label="Open sort options"
           className="relative flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium border transition-colors"
-          style={{ borderColor: hasActiveFilters ? 'rgba(34,211,165,0.45)' : 'rgba(128,128,128,0.25)', color: hasActiveFilters ? '#22d3a5' : 'rgba(128,128,128,0.7)', background: hasActiveFilters ? 'rgba(34,211,165,0.07)' : 'transparent' }}>
+          style={{ borderColor: hasActiveFilters ? 'var(--brand-border)' : 'var(--border-medium)', color: hasActiveFilters ? 'var(--brand)' : 'var(--text-secondary)', background: hasActiveFilters ? 'var(--brand-dim)' : 'transparent' }}>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M2 3h12M2 8h8M2 13h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             <path d="M13 6v7M11 11l2 2 2-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           Sort
-          {hasActiveFilters && <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22d3a5', position: 'absolute', top: 4, right: 4 }} />}
+          {hasActiveFilters && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--brand)', position: 'absolute', top: 4, right: 4 }} />}
         </button>
       </div>
 
@@ -117,7 +116,7 @@ export default function ItemList(props: Props) {
 
       {/* Desktop: count + sort pills */}
       <div className="hidden md:flex mb-5 items-center justify-between gap-4">
-        <p className="text-sm text-white/25 flex-shrink-0">
+        <p className="text-sm text-faint flex-shrink-0">
           {filtered.length} {label}{filtered.length !== 1 ? 's' : ''}
         </p>
         <div className="flex items-center gap-1.5">
@@ -135,12 +134,12 @@ export default function ItemList(props: Props) {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 z-40 md:hidden bg-black/[0.45]" />
           <Drawer.Content aria-label="Sort options"
-            className={`fixed left-0 right-0 z-50 md:hidden rounded-t-2xl ${sheetBg} flex flex-col outline-none`}
-            style={{ bottom: 64, boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
-            <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-white/[0.07] flex-shrink-0">
-              <span className="font-semibold text-white text-base">Sort</span>
+            className="fixed left-0 right-0 z-50 md:hidden rounded-t-2xl flex flex-col outline-none"
+            style={{ bottom: 64, backgroundColor: 'var(--bg-card)', boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
+            <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-subtle flex-shrink-0">
+              <span className="font-semibold text-primary text-base">Sort</span>
               <button onClick={() => setSheetOpen(false)} aria-label="Close"
-                className="w-8 h-8 flex items-center justify-center rounded-full text-white/40 hover:bg-white/5 transition-colors">
+                className="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-subtle transition-colors">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                 </svg>
@@ -153,18 +152,18 @@ export default function ItemList(props: Props) {
                   return (
                     <button key={value} onClick={() => setSort(value as any)} aria-pressed={sel}
                       className={`${pillBase} ${sel ? pillOn : pillOff}`}
-                      style={sel ? { background: 'rgba(34,211,165,0.1)', borderColor: 'rgba(34,211,165,0.35)' } : undefined}>
+                      style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
                       {lbl}
                     </button>
                   );
                 })}
               </div>
             </div>
-            <div className="flex-shrink-0 px-5 py-4 border-t border-white/[0.07]"
+            <div className="flex-shrink-0 px-5 py-4 border-t border-subtle"
               style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
               <button onClick={() => setSheetOpen(false)}
                 className="w-full py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
-                style={{ background: '#22d3a5', color: '#0a0a0f' }}>Done</button>
+                style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Done</button>
             </div>
           </Drawer.Content>
         </Drawer.Portal>
@@ -185,7 +184,7 @@ export default function ItemList(props: Props) {
       <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
 
       {filtered.length === 0 && (
-        <p className="text-center py-16 text-white/25">
+        <p className="text-center py-16 text-faint">
           {(isScholarship ? sch.selectedRegion !== null : prg.selectedCategory !== 'all')
             ? `No ${label}s match your filters.`
             : `No ${label}s to show.`}

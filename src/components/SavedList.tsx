@@ -19,12 +19,11 @@ const REGION_DOT_COLORS: Record<string, string> = {
 
 const BOOKMARK_BTN_STYLE: React.CSSProperties = {
   width: 44, flexShrink: 0, alignSelf: 'stretch', borderRadius: 10,
-  background: 'rgba(34,211,165,0.12)',
+  background: 'var(--brand-dim)',
   backdropFilter: 'blur(16px) saturate(2)',
   WebkitBackdropFilter: 'blur(16px) saturate(2)',
-  border: '0.5px solid rgba(34,211,165,0.4)',
-  boxShadow: 'inset 0 1px 0 rgba(34,211,165,0.15), 0 1px 6px rgba(34,211,165,0.12)',
-  color: '#22d3a5', display: 'flex', alignItems: 'center', justifyContent: 'center',
+  border: '0.5px solid var(--brand-border)',
+  color: 'var(--brand)', display: 'flex', alignItems: 'center', justifyContent: 'center',
   cursor: 'pointer', transition: 'color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s',
   WebkitTapHighlightColor: 'transparent',
 };
@@ -91,15 +90,15 @@ function ScholarshipCard({ s, onUnsave }: ScholarshipCardProps) {
       style={{ opacity: isClosed ? 0.45 : isFuture ? 0.75 : undefined }}
     >
       <div className="flex items-start gap-2">
-        <h3 className="font-semibold text-sm text-white leading-snug">{s.title}</h3>
+        <h3 className="font-semibold text-sm text-primary leading-snug">{s.title}</h3>
       </div>
-      <p className="font-bold text-lg leading-none" style={{ color: '#22d3a5' }}>{s.amount}</p>
+      <p className="font-bold text-lg leading-none text-brand">{s.amount}</p>
       <div className="flex items-center gap-2 flex-wrap">
         {s.deadline && (
-          <span className="text-xs text-white/35">{formatDeadline(s.deadline)}</span>
+          <span className="text-xs text-tertiary">{formatDeadline(s.deadline)}</span>
         )}
         {s.region && (
-          <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md bg-white/[0.07] text-white/50 border border-white/10">
+          <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-md bg-subtle text-secondary border border-card">
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: REGION_DOT_COLORS[s.region] || '#888', display: 'inline-block', flexShrink: 0 }} />
             {s.region}
           </span>
@@ -107,7 +106,7 @@ function ScholarshipCard({ s, onUnsave }: ScholarshipCardProps) {
       </div>
       <div className="mt-auto" style={{ display: 'flex', gap: 8, position: 'relative', zIndex: 1 }}>
         {isClosed ? (
-          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-white/5 text-white/20">
+          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-subtle text-faint">
             Closed
           </button>
         ) : isFuture ? (
@@ -118,7 +117,7 @@ function ScholarshipCard({ s, onUnsave }: ScholarshipCardProps) {
           <a
             href={s.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
             className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
-            style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ background: 'var(--brand)', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
             Apply Now
           </a>
@@ -164,21 +163,21 @@ function ProgramCard({ p, onUnsave }: ProgramCardProps) {
   return (
     <div ref={cardRef} className="card card-interactive p-5 flex flex-col gap-3 h-full">
       <div className="flex items-start gap-2">
-        <h3 className="font-semibold text-sm text-white leading-snug">{p.name}</h3>
+        <h3 className="font-semibold text-sm text-primary leading-snug">{p.name}</h3>
       </div>
       {p.category && (
-        <span className="self-start text-xs font-medium px-2 py-0.5 rounded-md bg-white/[0.07] text-white/50 border border-white/10">
+        <span className="self-start text-xs font-medium px-2 py-0.5 rounded-md bg-subtle text-secondary border border-card">
           {p.category}
         </span>
       )}
       {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && (
-        <span className="text-xs text-white/35">{formatDeadline(p.deadline)}</span>
+        <span className="text-xs text-tertiary">{formatDeadline(p.deadline)}</span>
       )}
       <div className="mt-auto" style={{ display: 'flex', gap: 8, position: 'relative', zIndex: 1 }}>
         <a
           href={p.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
           className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
-          style={{ background: '#22d3a5', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          style={{ background: 'var(--brand)', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
           Learn More
         </a>
@@ -205,11 +204,11 @@ function ProgramCard({ p, onUnsave }: ProgramCardProps) {
 
 function SectionEmptyState({ href, label }: { href: string; label: string }) {
   return (
-    <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-white/20 text-sm text-white/50">
+    <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-medium text-sm text-secondary">
       <span>None saved yet.</span>
       <a
         href={href}
-        className="text-xs font-semibold text-[#22d3a5] hover:opacity-75 transition-opacity"
+        className="text-xs font-semibold text-brand hover:opacity-75 transition-opacity"
       >
         {label} →
       </a>
@@ -257,7 +256,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
   return (
     <div className="saved-list space-y-10">
       <section>
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">Scholarships</h2>
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-tertiary mb-4">Scholarships</h2>
         {savedScholarships.length === 0 ? (
           <SectionEmptyState href="/scholarships" label="Find scholarships" />
         ) : (
@@ -277,7 +276,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
       </section>
 
       <section>
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">Research Programs</h2>
+        <h2 className="text-xs font-semibold uppercase tracking-widest text-tertiary mb-4">Research Programs</h2>
         {savedPrograms.length === 0 ? (
           <SectionEmptyState href="/programs" label="Find programs" />
         ) : (

@@ -59,9 +59,9 @@ const AVERAGE_BRACKETS = [
 ]
 
 const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
-  strong:   { badge: 'bg-[#22d3a5]/15 text-[#22d3a5] border-[#22d3a5]/30', label: 'Strong match' },
+  strong:   { badge: 'bg-brand-dim text-brand border-brand-border', label: 'Strong match' },
   good:     { badge: 'bg-blue-500/15 text-blue-400 border-blue-500/30', label: 'Good match' },
-  possible: { badge: 'bg-white/10 text-white/40 border-white/15', label: 'Possible match' },
+  possible: { badge: 'bg-subtle text-tertiary border-card', label: 'Possible match' },
 }
 
 // ── Helper components ─────────────────────────────────────────────────────────
@@ -73,10 +73,10 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
       onClick={onClick}
       className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border ${
         active
-          ? 'border-[#22d3a5]/40 text-[#22d3a5]'
-          : 'bg-white/[0.04] border-white/10 text-white/50 hover:border-white/20'
+          ? 'border-brand-border text-brand'
+          : 'bg-subtle border-card text-secondary hover:border-medium'
       }`}
-      style={active ? { background: 'rgba(34,211,165,0.12)' } : undefined}
+      style={active ? { background: 'var(--brand-dim)' } : undefined}
     >
       {label}
     </button>
@@ -92,7 +92,7 @@ function ProgressBar({ step }: { step: Step }) {
         <div
           key={s}
           className="h-1 flex-1 rounded-full transition-all duration-300"
-          style={{ background: s <= current ? '#22d3a5' : 'rgba(255,255,255,0.1)' }}
+          style={{ background: s <= current ? 'var(--brand)' : 'var(--bg-subtle)' }}
         />
       ))}
     </div>
@@ -193,11 +193,11 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     return (
       <div>
         <ProgressBar step={1} />
-        <h2 className="text-xl font-bold mb-1 text-white">Where are you at?</h2>
-        <p className="text-sm text-white/40 mb-6">We'll use this to filter scholarships by grade and location.</p>
+        <h2 className="text-xl font-bold mb-1 text-primary">Where are you at?</h2>
+        <p className="text-sm text-secondary mb-6">We'll use this to filter scholarships by grade and location.</p>
 
         <div className="mb-6">
-          <p className="text-sm text-white/60 mb-2.5 font-medium">Your grade</p>
+          <p className="text-sm text-secondary mb-2.5 font-medium">Your grade</p>
           <div className="flex flex-wrap gap-2">
             {GRADE_OPTIONS.map(({ value, label }) => (
               <Chip key={value} label={label} active={grade === value} onClick={() => setGrade(value as StudentProfile['grade'])} />
@@ -213,7 +213,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </div>
 
         <div className="mb-6">
-          <p className="text-sm text-white/60 mb-2.5 font-medium">Your city</p>
+          <p className="text-sm text-secondary mb-2.5 font-medium">Your city</p>
           <div className="flex flex-wrap gap-2">
             {CITY_OPTIONS.map(c => (
               <Chip key={c} label={c} active={city === c} onClick={() => setCity(c)} />
@@ -222,7 +222,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </div>
 
         <div className="mb-8">
-          <p className="text-sm text-white/60 mb-2.5 font-medium">Where are you planning to study? <span className="text-white/25 font-normal">(optional)</span></p>
+          <p className="text-sm text-secondary mb-2.5 font-medium">Where are you planning to study? <span className="text-tertiary font-normal">(optional)</span></p>
           <div className="flex flex-wrap gap-2">
             {INSTITUTIONS.map(inst => (
               <Chip key={inst} label={inst} active={targetInstitution === inst} onClick={() => setTargetInstitution(prev => prev === inst ? '' : inst)} />
@@ -234,7 +234,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           onClick={() => setStep(2)}
           disabled={grade === '' || city === ''}
           className="w-full py-3 rounded-xl text-sm font-semibold transition disabled:opacity-30"
-          style={{ background: '#22d3a5', color: '#0a0a0f' }}
+          style={{ background: 'var(--brand)', color: '#0a0a0f' }}
         >
           Next →
         </button>
@@ -248,11 +248,11 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     return (
       <div>
         <ProgressBar step={2} />
-        <h2 className="text-xl font-bold mb-1 text-white">What do you want to study?</h2>
-        <p className="text-sm text-white/40 mb-6">Optional — helps surface scholarships specific to your field.</p>
+        <h2 className="text-xl font-bold mb-1 text-primary">What do you want to study?</h2>
+        <p className="text-sm text-secondary mb-6">Optional — helps surface scholarships specific to your field.</p>
 
         <div className="mb-6">
-          <p className="text-sm text-white/60 mb-2.5 font-medium">Field of study</p>
+          <p className="text-sm text-secondary mb-2.5 font-medium">Field of study</p>
           <div className="flex flex-wrap gap-2">
             {FIELDS.map(({ value, label }) => (
               <Chip key={value} label={label} active={fields.includes(value)} onClick={() => toggleField(value)} />
@@ -261,7 +261,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </div>
 
         <div className="mb-8">
-          <p className="text-sm text-white/60 mb-2.5 font-medium">Academic average</p>
+          <p className="text-sm text-secondary mb-2.5 font-medium">Academic average</p>
           <div className="flex flex-wrap gap-2">
             {AVERAGE_BRACKETS.map(({ value, label }) => (
               <Chip key={value} label={label} active={averageBracket === value} onClick={() => setAverageBracket(prev => prev === value ? null : value)} />
@@ -270,10 +270,10 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </div>
 
         <div className="flex gap-3">
-          <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-white/10 text-white/50 transition">
+          <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-card text-secondary transition">
             ← Back
           </button>
-          <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: '#22d3a5', color: '#0a0a0f' }}>
+          <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>
             Next →
           </button>
         </div>
@@ -287,9 +287,9 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     return (
       <div>
         <ProgressBar step={3} />
-        <h2 className="text-xl font-bold mb-1 text-white">About you</h2>
-        <p className="text-sm text-white/40 mb-1">All optional. Helps surface scholarships made for you specifically.</p>
-        <p className="text-xs text-white/25 mb-6 flex items-center gap-1.5">
+        <h2 className="text-xl font-bold mb-1 text-primary">About you</h2>
+        <p className="text-sm text-secondary mb-1">All optional. Helps surface scholarships made for you specifically.</p>
+        <p className="text-xs text-faint mb-6 flex items-center gap-1.5">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
@@ -297,7 +297,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </p>
 
         <div className="mb-5">
-          <p className="text-sm text-white/60 mb-2.5 font-medium">I identify as</p>
+          <p className="text-sm text-secondary mb-2.5 font-medium">I identify as</p>
           <div className="flex flex-wrap gap-2">
             <Chip label="Male" active={identifiesAsFemale === false} onClick={() => setIdentifiesAsFemale(prev => prev === false ? null : false)} />
             <Chip label="Female" active={identifiesAsFemale === true} onClick={() => setIdentifiesAsFemale(prev => prev === true ? null : true)} />
@@ -307,7 +307,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </div>
 
         <div className="mb-8">
-          <p className="text-sm text-white/60 mb-2.5 font-medium">Citizenship</p>
+          <p className="text-sm text-secondary mb-2.5 font-medium">Citizenship</p>
           <div className="flex flex-wrap gap-2">
             {([
               { value: 'canadian_citizen', label: 'Canadian citizen' },
@@ -325,13 +325,13 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </div>
 
         <div className="flex gap-3">
-          <button onClick={() => setStep(2)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-white/10 text-white/50 transition">
+          <button onClick={() => setStep(2)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-card text-secondary transition">
             ← Back
           </button>
           <button
             onClick={() => setStep('results')}
             className="flex-1 py-3 rounded-xl text-sm font-semibold transition"
-            style={{ background: '#22d3a5', color: '#0a0a0f' }}
+            style={{ background: 'var(--brand)', color: '#0a0a0f' }}
           >
             Find my scholarships →
           </button>
@@ -351,23 +351,23 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   return (
     <div>
       <div className="mb-8">
-        <p className="text-sm text-white/40 mb-1">Based on your profile</p>
-        <h2 className="text-2xl font-bold text-white mb-1">
+        <p className="text-sm text-secondary mb-1">Based on your profile</p>
+        <h2 className="text-2xl font-bold text-primary mb-1">
           {results.length} scholarship{results.length !== 1 ? 's' : ''} found
         </h2>
         {totalAmount > 0 && (
-          <p className="font-bold" style={{ fontSize: 28, color: '#22d3a5', letterSpacing: '-0.02em' }}>
+          <p className="font-bold text-brand" style={{ fontSize: 28, letterSpacing: '-0.02em' }}>
             Up to ${totalAmount.toLocaleString('en-CA')} available
           </p>
         )}
-        <p className="text-xs text-white/25 mt-1">
+        <p className="text-xs text-faint mt-1">
           Strong + good matches only. Always verify eligibility on the official site.
         </p>
       </div>
 
       <div className="flex gap-3 mb-6 flex-wrap">
         {strong.length > 0 && (
-          <span className="text-xs px-3 py-1 rounded-full border bg-[#22d3a5]/10 text-[#22d3a5] border-[#22d3a5]/30">
+          <span className="text-xs px-3 py-1 rounded-full border bg-brand-dim text-brand border-brand-border">
             {strong.length} strong match{strong.length !== 1 ? 'es' : ''}
           </span>
         )}
@@ -377,7 +377,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           </span>
         )}
         {possible.length > 0 && (
-          <span className="text-xs px-3 py-1 rounded-full border bg-white/5 text-white/35 border-white/10">
+          <span className="text-xs px-3 py-1 rounded-full border bg-subtle text-tertiary border-card">
             {possible.length} possible
           </span>
         )}
@@ -389,19 +389,19 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           return (
             <div
               key={s.id}
-              className="p-4 rounded-xl border border-white/[0.07] bg-white/[0.025]"
+              className="p-4 rounded-xl border border-subtle bg-subtle"
             >
               <div className="flex items-start justify-between gap-3 mb-2">
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-white text-sm leading-snug">{s.title}</p>
+                  <p className="font-semibold text-primary text-sm leading-snug">{s.title}</p>
                   {s.audience && (
-                    <p className="text-xs text-white/35 mt-0.5 line-clamp-1">{s.audience}</p>
+                    <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{s.audience}</p>
                   )}
                 </div>
                 <div className="flex-shrink-0 text-right">
-                  <p className="font-bold text-[#22d3a5]" style={{ fontSize: 18 }}>{s.amount}</p>
+                  <p className="font-bold text-brand" style={{ fontSize: 18 }}>{s.amount}</p>
                   {s.deadline && (
-                    <p className="text-xs text-white/30 mt-0.5">Due {s.deadline}</p>
+                    <p className="text-xs text-faint mt-0.5">Due {s.deadline}</p>
                   )}
                 </div>
               </div>
@@ -414,7 +414,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                     href={`/scholarships/${generateSlug(s.title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-white/40 hover:text-white transition"
+                    className="text-xs text-secondary hover:text-primary transition"
                   >
                     Details
                   </a>
@@ -422,8 +422,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-medium transition"
-                    style={{ color: '#22d3a5' }}
+                    className="text-xs font-medium text-brand transition hover:opacity-80"
                   >
                     Apply →
                   </a>
@@ -432,10 +431,10 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                     aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
                     className={`flex items-center justify-center flex-shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${
                       savedIds.has(s.id)
-                        ? 'text-[#22d3a5] border border-[#22d3a5]/40'
-                        : 'text-white/40 border border-white/15'
+                        ? 'text-brand border border-brand-border'
+                        : 'text-secondary border border-card'
                     }`}
-                    style={{ width: 28, height: 28, background: savedIds.has(s.id) ? 'rgba(34,211,165,0.12)' : undefined }}
+                    style={{ width: 28, height: 28, background: savedIds.has(s.id) ? 'var(--brand-dim)' : undefined }}
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill={savedIds.has(s.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
@@ -451,31 +450,31 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       {results.length === 0 && (
         <div className="text-center py-12 px-4">
           <p className="text-3xl mb-4">🔍</p>
-          <p className="font-semibold text-white mb-2">No scholarships matched your profile</p>
-          <p className="text-sm text-white/40 mb-6 max-w-sm mx-auto">
+          <p className="font-semibold text-primary mb-2">No scholarships matched your profile</p>
+          <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">
             Try leaving optional fields blank — average and identity answers narrow results significantly.
           </p>
           <button
             onClick={reset}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition"
-            style={{ background: '#22d3a5', color: '#0a0a0f' }}
+            style={{ background: 'var(--brand)', color: '#0a0a0f' }}
           >
             Try again
           </button>
         </div>
       )}
 
-      <div className="mt-8 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row gap-3">
+      <div className="mt-8 pt-6 border-t border-subtle flex flex-col sm:flex-row gap-3">
         <button
           onClick={reset}
-          className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-white/10 text-white/50 transition"
+          className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-card text-secondary transition"
         >
           Start over
         </button>
         <a
           href="/scholarships"
           className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition"
-          style={{ background: '#22d3a5', color: '#0a0a0f' }}
+          style={{ background: 'var(--brand)', color: '#0a0a0f' }}
         >
           Browse all scholarships
         </a>

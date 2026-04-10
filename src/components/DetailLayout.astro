@@ -39,7 +39,7 @@ const {
 <main class="py-6">
   <a
     href={backHref}
-    class="inline-flex items-center gap-2 text-sm text-white/40 hover:text-[#22d3a5] transition-colors mb-6"
+    class="inline-flex items-center gap-2 text-sm text-secondary hover:text-brand transition-colors mb-6"
   >
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -57,16 +57,16 @@ const {
       {badge.label}
     </span>
 
-    <h1 class={`font-bold text-white ${titleMb} leading-tight`} style="font-size: clamp(20px, 4vw, 30px);">
+    <h1 class={`font-bold text-primary ${titleMb} leading-tight`} style="font-size: clamp(20px, 4vw, 30px);">
       {title}
     </h1>
 
     {subtitle && (
-      <p class="text-sm text-white/35 mb-6">{subtitle}</p>
+      <p class="text-sm text-tertiary mb-6">{subtitle}</p>
     )}
 
     {amount && (
-      <p class="font-extrabold mb-6 text-[#22d3a5]" style={`font-size: ${amountStyle}; line-height: 1.1;`}>
+      <p class="font-extrabold mb-6 text-brand" style={`font-size: ${amountStyle}; line-height: 1.1;`}>
         {amount}
       </p>
     )}
@@ -75,7 +75,7 @@ const {
 
     <div class="pt-2 flex gap-2">
       {status === 'closed' ? (
-        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-white/5 text-white/20">
+        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-subtle text-faint">
           Closed
         </button>
       ) : status === 'future' ? (
@@ -90,7 +90,7 @@ const {
           referrerpolicy="no-referrer"
           onclick="window.va?.('event',{name:'apply_detail'})"
           class="btn-teal flex-1 text-center py-3 px-4 rounded-xl text-sm font-semibold transition-opacity hover:opacity-85"
-          style="background: #22d3a5; color: #0a0a0f; display: flex; align-items: center; justify-content: center;"
+          style="background: var(--brand); color: #0a0a0f; display: flex; align-items: center; justify-content: center;"
         >
           {ctaLabel}
         </a>
@@ -102,7 +102,7 @@ const {
 
     <div class="flex flex-wrap gap-2 pt-3">
       <button id="copy-link-btn" aria-label="Copy link"
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors text-white/40 border-white/10 hover:border-[#22d3a5] hover:text-[#22d3a5]">
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors text-secondary border-card hover:border-brand hover:text-brand">
         <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
           <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/>
@@ -115,7 +115,7 @@ const {
       const txt = document.getElementById('copy-link-text');
       btn?.addEventListener('click', () => {
         navigator.clipboard.writeText(window.location.href).then(() => {
-          if (txt) { txt.textContent = 'Copied!'; (txt as HTMLElement).style.color = '#22d3a5'; }
+          if (txt) { txt.textContent = 'Copied!'; (txt as HTMLElement).style.color = 'var(--brand)'; }
           setTimeout(() => { if (txt) { txt.textContent = 'Copy link'; (txt as HTMLElement).style.color = ''; } }, 2500);
         });
       });

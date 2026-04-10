@@ -85,37 +85,37 @@ const breadcrumbJson = {
     itemId={scholarship.id}
     itemType="scholarship"
   >
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-white/[0.07] pt-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-subtle pt-6">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Deadline</p>
-        <p class="text-sm font-medium text-white/80">{formatDate(scholarship.deadline)}</p>
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Deadline</p>
+        <p class="text-sm font-medium text-primary">{formatDate(scholarship.deadline)}</p>
       </div>
       <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Opens</p>
-        <p class="text-sm font-medium text-white/80">{formatDate(scholarship.openDate)}</p>
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Opens</p>
+        <p class="text-sm font-medium text-primary">{formatDate(scholarship.openDate)}</p>
       </div>
       {scholarship.region && (
         <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Region</p>
-          <p class="text-sm font-medium text-white/80">{scholarship.region}</p>
+          <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Region</p>
+          <p class="text-sm font-medium text-primary">{scholarship.region}</p>
         </div>
       )}
       <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Eligibility</p>
-        <p class="text-sm font-medium text-white/80">{scholarship.audience}</p>
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Eligibility</p>
+        <p class="text-sm font-medium text-primary">{scholarship.audience}</p>
       </div>
     </div>
 
     {scholarship.notes && (
-      <div class="mb-6 p-4 rounded-xl bg-white/[0.04] border border-white/[0.07]">
-        <p class="text-xs font-semibold uppercase tracking-widest text-white/30 mb-1">Notes</p>
-        <p class="text-sm text-white/60">{scholarship.notes}</p>
+      <div class="mb-6 p-4 rounded-xl bg-subtle border border-subtle">
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Notes</p>
+        <p class="text-sm text-secondary">{scholarship.notes}</p>
       </div>
     )}
 
     {scholarship.applyViaGuidance && (
-      <div class="mb-6 p-4 rounded-xl border" style="background: rgba(34,211,165,0.06); border-color: rgba(34,211,165,0.2);">
-        <p class="text-sm text-[#22d3a5]">
+      <div class="mb-6 p-4 rounded-xl border bg-brand-dim border-brand-border">
+        <p class="text-sm text-brand">
           <span class="font-semibold">How to apply:</span> Contact your school guidance counsellor to apply for this scholarship.
         </p>
       </div>
