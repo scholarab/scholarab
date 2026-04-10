@@ -55,7 +55,7 @@ const closingSoon = scholarships
       <p class="font-semibold text-secondary mb-2" style="font-size: clamp(18px, 2.5vw, 28px);">
         Alberta's student opportunity directory.
       </p>
-      <p class="mb-4 md:mb-8 font-bold text-brand" style="font-size: clamp(22px, 3vw, 38px); letter-spacing: -0.02em;">{'$' + activeTotal.toLocaleString('en-CA') + '+ open right now'}</p>
+      <p id="hero-amount" data-target={activeTotal} class="mb-4 md:mb-8 font-bold text-brand" style="font-size: clamp(22px, 3vw, 38px); letter-spacing: -0.02em;">$0+ open right now</p>
       <div class="flex flex-col items-center gap-3">
         <div class="flex flex-row gap-3 justify-center">
           <a href="/scholarships" class="inline-flex items-center justify-center whitespace-nowrap px-5 py-3.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-85" style="background: var(--brand); color: #0a0a0f;">
@@ -137,3 +137,28 @@ const closingSoon = scholarships
     </div>
   </div>
 </Layout>
+
+<script>
+  function startCounter() {
+    const el = document.getElementById('hero-amount');
+    if (!el) return;
+    const target = parseInt((el as HTMLElement).dataset.target ?? '0', 10);
+    if (!target) return;
+
+    const duration = 1200;
+    const startTime = performance.now();
+
+    function step(now: number) {
+      const t = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const value = Math.round(eased * target);
+      el!.textContent = '$' + value.toLocaleString('en-CA') + '+ open right now';
+      if (t < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  startCounter();
+  document.addEventListener('astro:page-load', startCounter);
+</script>
