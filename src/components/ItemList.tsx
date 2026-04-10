@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState, useRef } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Drawer } from 'vaul';
 import { useScholarships } from '../hooks/useScholarships.ts';
 import { usePrograms } from '../hooks/usePrograms.ts';
@@ -7,6 +7,7 @@ import ProgramCard from './ProgramCard.tsx';
 import Pagination from './Pagination.tsx';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
+import { SCHOLARSHIP_BADGES, PROGRAM_BADGES } from '../lib/badges.ts';
 
 type Props =
   | { mode: 'scholarship'; items: ScholarshipWithMeta[] }
@@ -43,12 +44,8 @@ export default function ItemList(props: Props) {
   const prg = usePrograms(!isScholarship ? props.items as ProgramWithMeta[] : []);
 
   const { filtered, visibleItems, page, totalPages, handlePageChange,
-          sortBy, setSort, sheetOpen, setSheetOpen, hasActiveFilters, savedIds, handleToggleSave, isFiltered,
-          tags, addTag, removeTag }
+          sortBy, setSort, sheetOpen, setSheetOpen, hasActiveFilters, savedIds, handleToggleSave, isFiltered }
     = isScholarship ? sch : prg;
-
-  const [inputVal, setInputVal] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // Close the drawer before Astro navigates — prevents Radix from leaving
   // body.style.pointerEvents='none' stuck on the next page.
@@ -61,9 +58,16 @@ export default function ItemList(props: Props) {
   const savedSet   = useMemo(() => new Set(savedIds), [savedIds]);
   const label      = isScholarship ? 'scholarship' : 'program';
   const sortOpts   = isScholarship ? SCHOLARSHIP_SORT : PROGRAM_SORT;
-  const filterKey  = isScholarship ? sch.regionKey : prg.categoryKey;
+  const filterKey  = isScholarship ? `${sch.regionKey}-${sch.categoryKey}` : prg.categoryKey;
 
-  const categories = useMemo(
+  const scholarshipCategories = useMemo(
+    () => isScholarship
+      ? [...new Set((props.items as ScholarshipWithMeta[]).map(s => s.category).filter(Boolean) as string[])].sort()
+      : [],
+    [isScholarship, props.items]
+  );
+
+  const programCategories = useMemo(
     () => !isScholarship ? ['all', ...[...new Set((props.items as ProgramWithMeta[]).map(p => p.category))].sort()] : [],
     [isScholarship, props.items]
   );
@@ -74,45 +78,26 @@ export default function ItemList(props: Props) {
         {filtered.length} {label}{filtered.length !== 1 ? 's' : ''} shown
       </span>
 
-      {/* Tag search input */}
-      <div
-        className="flex flex-wrap items-center gap-1.5 rounded-xl px-3 py-2 mb-4 cursor-text"
-        style={{ background: 'var(--bg-subtle)', border: '0.5px solid var(--border-medium)', minHeight: 42 }}
-        onClick={() => inputRef.current?.focus()}
-      >
-        <svg className="flex-shrink-0 text-tertiary" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        {tags.map(tag => (
-          <span key={tag} className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium text-brand border border-brand-border" style={{ background: 'var(--brand-dim)' }}>
-            {tag}
-            <button onClick={e => { e.stopPropagation(); removeTag(tag); }} aria-label={`Remove ${tag}`} className="hover:opacity-70 transition-opacity leading-none">
-              <svg width="10" height="10" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </button>
-          </span>
-        ))}
-        <input
-          ref={inputRef}
-          type="text"
-          value={inputVal}
-          onChange={e => setInputVal(e.target.value)}
-          onKeyDown={e => {
-            if ((e.key === 'Enter' || e.key === ',') && inputVal.trim()) {
-              e.preventDefault();
-              addTag(inputVal.trim().replace(/,$/, ''));
-              setInputVal('');
-            } else if (e.key === 'Backspace' && !inputVal && tags.length > 0) {
-              removeTag(tags[tags.length - 1]);
-            }
-          }}
-          placeholder={tags.length === 0 ? `Filter by keyword…` : ''}
-          aria-label={`Filter ${label}s by keyword`}
-          className="flex-1 min-w-[120px] text-sm text-primary placeholder:text-tertiary bg-transparent outline-none"
-          style={{ minWidth: tags.length === 0 ? '100%' : 120 }}
-        />
-      </div>
+      {/* Category chips */}
+      {isScholarship && scholarshipCategories.length > 0 && (
+        <div className="flex chips-row mb-4 gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+          <button onClick={() => sch.setCategory('all')} aria-pressed={sch.selectedCategory === 'all'}
+            className={chipCls(sch.selectedCategory === 'all')} style={chipStyle(sch.selectedCategory === 'all')}>
+            All Categories
+          </button>
+          {scholarshipCategories.map(cat => {
+            const badge = SCHOLARSHIP_BADGES[cat];
+            const sel = sch.selectedCategory === cat;
+            return (
+              <button key={cat} onClick={() => sch.setCategory(sel ? 'all' : cat)} aria-pressed={sel}
+                className={chipCls(sel)} style={chipStyle(sel)}>
+                {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {/* Mobile: count + sort button */}
       <div className="md:hidden mb-5 flex items-center justify-between gap-3">
@@ -144,11 +129,13 @@ export default function ItemList(props: Props) {
                 </button>
               );
             })
-          : categories.map(cat => {
+          : programCategories.map(cat => {
+              const badge = cat !== 'all' ? PROGRAM_BADGES[cat] : undefined;
               const sel = prg.selectedCategory === cat;
               return (
                 <button key={cat} onClick={() => prg.setCategory(cat)} aria-pressed={sel}
                   className={chipCls(sel)} style={chipStyle(sel)}>
+                  {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
                   {cat === 'all' ? 'All' : cat}
                 </button>
               );
@@ -212,7 +199,7 @@ export default function ItemList(props: Props) {
       </Drawer.Root>
 
       {/* Card grid */}
-      <div key={`${filterKey}-${sortBy}-${tags.join(',')}-${page}`} className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
+      <div key={`${filterKey}-${sortBy}-${page}`} className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
         {isScholarship
           ? (visibleItems as ScholarshipWithMeta[]).map((s, i) => (
               <ScholarshipCard key={s.id} scholarship={s} index={i} isSaved={savedSet.has(s.id)} onToggleSave={() => handleToggleSave(s.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
@@ -227,7 +214,7 @@ export default function ItemList(props: Props) {
 
       {filtered.length === 0 && (
         <p className="text-center py-16 text-faint">
-          {tags.length > 0 ? `No ${label}s match your keywords.` : `No ${label}s match your filters.`}
+          {`No ${label}s match your filters.`}
         </p>
       )}
     </div>
