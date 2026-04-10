@@ -170,7 +170,7 @@ export default function ItemList(props: Props) {
       {/* Mobile bottom sheet */}
       <Drawer.Root open={sheetOpen} onOpenChange={setSheetOpen}>
         <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 z-40 md:hidden bg-black/[0.45]" />
+          <Drawer.Overlay className="fixed inset-0 z-40 md:hidden bg-black/[0.45] backdrop-blur-sm" />
           <Drawer.Content aria-label="Filter and sort options"
             className="fixed left-0 right-0 z-50 md:hidden rounded-t-2xl flex flex-col outline-none"
             style={{ bottom: 64, backgroundColor: 'var(--bg-card)', boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
