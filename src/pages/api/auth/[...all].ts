@@ -7,7 +7,7 @@ export const ALL: APIRoute = async (ctx) => {
     const ip = ctx.request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
       ?? ctx.request.headers.get('x-real-ip')
       ?? 'unknown'
-    if (!(await checkSignInRateLimit(ip))) {
+    if (!(await checkSignInRateLimit(ip).catch(() => true))) {
       return new Response(JSON.stringify({ error: 'Too many sign-in attempts. Try again later.' }), {
         status: 429,
         headers: { 'Content-Type': 'application/json' },
