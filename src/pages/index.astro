@@ -145,6 +145,14 @@ const closingSoon = scholarships
     const target = parseInt((el as HTMLElement).dataset.target ?? '0', 10);
     if (!target) return;
 
+    const final = '$' + target.toLocaleString('en-CA') + '+ open right now';
+
+    if (sessionStorage.getItem('hero-animated')) {
+      el.textContent = final;
+      return;
+    }
+
+    sessionStorage.setItem('hero-animated', '1');
     const duration = 2500;
     const startTime = performance.now();
 
