@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import type { Scholarship } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll } from '../lib/eligibility-matcher'
@@ -64,6 +64,34 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
   possible: { badge: 'bg-subtle text-tertiary border-card', label: 'Possible match' },
 }
 
+// ── Quiz persistence ───────────────────────────────────────────────────────────
+
+const QUIZ_STORAGE_KEY = 'scholarab_quiz_draft'
+
+type QuizDraft = {
+  step: 1 | 2 | 3
+  grade: string
+  city: string
+  targetInstitution: string
+  fields: string[]
+  averageBracket: number | null
+  identifiesAsFemale: boolean | null
+  identifiesAsIndigenous: boolean | null
+  identifiesAsBIPOC: boolean | null
+  inFosterCare: boolean | null
+  inApprenticeship: boolean | null
+  citizenship: string | null
+}
+
+function loadDraft(): QuizDraft | null {
+  try {
+    const raw = localStorage.getItem(QUIZ_STORAGE_KEY)
+    return raw ? (JSON.parse(raw) as QuizDraft) : null
+  } catch {
+    return null
+  }
+}
+
 // ── Helper components ─────────────────────────────────────────────────────────
 
 function Chip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
@@ -106,20 +134,22 @@ function parseAmount(amount: string): number {
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function EligibilityQuiz({ scholarships }: Props) {
-  const [step, setStep] = useState<1 | 2 | 3 | 'results'>(1)
-  const [grade, setGrade] = useState<StudentProfile['grade'] | ''>('')
-  const [city, setCity] = useState('')
-  const [targetInstitution, setTargetInstitution] = useState('')
-  const [fields, setFields] = useState<string[]>([])
-  const [averageBracket, setAverageBracket] = useState<number | null>(null)
-  const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(null)
-  const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(null)
-  const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(null)
-  const [inFosterCare, setInFosterCare] = useState<boolean | null>(null)
-  const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(null)
-  const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(null)
+  const _d = loadDraft()
+  const [step, setStep] = useState<1 | 2 | 3 | 'results'>(_d?.step ?? 1)
+  const [grade, setGrade] = useState<StudentProfile['grade'] | ''>(_d?.grade ?? '')
+  const [city, setCity] = useState(_d?.city ?? '')
+  const [targetInstitution, setTargetInstitution] = useState(_d?.targetInstitution ?? '')
+  const [fields, setFields] = useState<string[]>(_d?.fields ?? [])
+  const [averageBracket, setAverageBracket] = useState<number | null>(_d?.averageBracket ?? null)
+  const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(_d?.identifiesAsFemale ?? null)
+  const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(_d?.identifiesAsIndigenous ?? null)
+  const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(_d?.identifiesAsBIPOC ?? null)
+  const [inFosterCare, setInFosterCare] = useState<boolean | null>(_d?.inFosterCare ?? null)
+  const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(_d?.inApprenticeship ?? null)
+  const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(_d?.citizenship ?? null)
 
   function reset() {
+    try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch {}
     setStep(1); setGrade(''); setCity(''); setTargetInstitution('')
     setFields([]); setAverageBracket(null)
     setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null)
@@ -186,6 +216,21 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     if (next.has(id)) showConfetti(el)
     setSavedIds(next)
   }, [])
+
+  // Persist quiz state so navigating away and back restores progress
+  useEffect(() => {
+    if (step === 'results') return
+    try {
+      const draft: QuizDraft = {
+        step, grade, city, targetInstitution, fields, averageBracket,
+        identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
+        inFosterCare, inApprenticeship, citizenship,
+      }
+      localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(draft))
+    } catch {}
+  }, [step, grade, city, targetInstitution, fields, averageBracket,
+      identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
+      inFosterCare, inApprenticeship, citizenship])
 
   // ── Step 1 — Where are you at? ──────────────────────────────────────────────
 

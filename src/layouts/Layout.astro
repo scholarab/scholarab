@@ -145,6 +145,34 @@ const {
         }
       }, { once: true });
 
+      // ── Scroll position restore (listing pages only) ────────
+      const SCROLL_PAGES = ['/scholarships', '/programs'];
+
+      let scrollSaveTimer: ReturnType<typeof setTimeout> | null = null;
+      window.addEventListener('scroll', () => {
+        if (scrollSaveTimer) return;
+        scrollSaveTimer = setTimeout(() => {
+          scrollSaveTimer = null;
+          const path = window.location.pathname;
+          if (SCROLL_PAGES.some(p => path === p)) {
+            try {
+              sessionStorage.setItem('scrollRestore', JSON.stringify({ path, y: window.scrollY }));
+            } catch {}
+          }
+        }, 100);
+      }, { passive: true });
+
+      document.addEventListener('astro:page-load', () => {
+        try {
+          const raw = sessionStorage.getItem('scrollRestore');
+          if (!raw) return;
+          const { path, y } = JSON.parse(raw) as { path: string; y: number };
+          if (path === window.location.pathname && y > 0) {
+            requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' }));
+          }
+        } catch {}
+      });
+
       // ── Swipe navigation (Web K pattern) ────────────────────
       // Clean swipe direction flag after every transition
       document.addEventListener('astro:after-swap', () => {

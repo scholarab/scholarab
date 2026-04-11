@@ -71,6 +71,7 @@ beforeEach(() => {
   vi.clearAllMocks()
   mockGetSaved.mockReturnValue([])
   mockMatchAll.mockReturnValue([])
+  localStorage.clear()
 })
 
 // ── Step 1 ─────────────────────────────────────────────────────────────────────
