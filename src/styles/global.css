@@ -148,12 +148,6 @@ body {
   position: relative;
   background-color: var(--bg-page);
   color: var(--text-primary);
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
   background-image:
     radial-gradient(ellipse at center, var(--orb-1) 0%, transparent 70%),
     radial-gradient(ellipse at center, var(--orb-2) 0%, transparent 70%),
@@ -161,19 +155,16 @@ body::before {
   background-size: 65% 55%, 58% 48%, 62% 52%;
   background-position: 4% -2%, 96% -2%, 50% 102%;
   background-repeat: no-repeat;
-  will-change: transform;
   animation: orbs-drift 22s ease-in-out infinite alternate;
-  pointer-events: none;
-  z-index: -1;
 }
 
 @keyframes orbs-drift {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(4%, 8%, 0); }
+  from { background-position: 4% -2%,  96% -2%,  50% 102%; }
+  to   { background-position: 8%  6%,  90%  6%,  54%  96%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body::before { animation: none; }
+  body { animation: none; }
 }
 
 /* ── Isolate main content ──────────────────────────────────── */
