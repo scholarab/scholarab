@@ -4,6 +4,11 @@ import { loadScholarships } from '../lib/data-loader';
 import ItemList from '../components/ItemList.tsx';
 import { generateSlug, formatDeadline } from '../lib/utils';
 const raw = await loadScholarships();
+const mostRecentVerified = raw
+  .map(s => s.lastVerified).filter(Boolean).sort().at(-1) ?? null;
+const freshnessLabel = mostRecentVerified
+  ? new Date(mostRecentVerified + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
+  : null;
 // Enrich at build time — avoids regex/Date parsing on every user's device
 const scholarships = raw.map(s => ({
   ...s,
@@ -44,7 +49,8 @@ const scholarships = raw.map(s => ({
         Check Eligibility
       </a>
     </div>
-    <p class="text-sm text-secondary mb-6">Open scholarships for Alberta high school students, verified by hand and updated regularly.</p>
+    <p class="text-sm text-secondary mb-1">Open scholarships for Alberta high school students, verified by hand and updated regularly.</p>
+    {freshnessLabel && <p class="text-xs text-faint mb-6">Last verified: {freshnessLabel}</p>}
     <ItemList mode="scholarship" items={scholarships} client:idle />
   </div>
 </Layout>

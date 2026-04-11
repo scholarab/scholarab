@@ -233,11 +233,16 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         <button
           onClick={() => setStep(2)}
           disabled={grade === '' || city === ''}
-          className="w-full py-3 rounded-xl text-sm font-semibold transition disabled:opacity-30"
+          className="w-full py-3 rounded-xl text-sm font-semibold transition disabled:opacity-30 disabled:cursor-not-allowed"
           style={{ background: 'var(--brand)', color: '#0a0a0f' }}
         >
           Next →
         </button>
+        {(grade === '' || city === '') && (
+          <p className="text-center text-xs text-faint mt-2">
+            {grade === '' && city === '' ? 'Select a grade and city to continue.' : grade === '' ? 'Select a grade to continue.' : 'Select a city to continue.'}
+          </p>
+        )}
       </div>
     )
   }

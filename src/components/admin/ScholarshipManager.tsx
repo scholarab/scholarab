@@ -186,6 +186,11 @@ export default function ScholarshipManager({ initialData }: Props) {
         body: JSON.stringify(body),
       })
 
+      if (res.status === 429) {
+        toast.error('Too many requests — wait a moment and try again.')
+        return
+      }
+
       if (res.status === 409) {
         const err = await res.json()
         if (err.error === 'duplicate') {
@@ -220,6 +225,7 @@ export default function ScholarshipManager({ initialData }: Props) {
     setSaving(true)
     try {
       const res = await fetch(`/admin/api/scholarships/${modal.item.id}`, { method: 'DELETE' })
+      if (res.status === 429) { toast.error('Too many requests — wait a moment and try again.'); return }
       if (!res.ok) throw new Error()
       setItems(prev => prev.filter(s => s.id !== modal.item!.id))
       toast.success('Scholarship deleted')

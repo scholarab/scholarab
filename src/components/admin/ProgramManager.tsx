@@ -77,6 +77,7 @@ export default function ProgramManager({ initialData }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
+      if (res.status === 429) { toast.error('Too many requests — wait a moment and try again.'); return }
       if (!res.ok) throw new Error(await res.text())
       const saved: Program = await res.json()
       setItems(prev => isEdit
@@ -97,6 +98,7 @@ export default function ProgramManager({ initialData }: Props) {
     setSaving(true)
     try {
       const res = await fetch(`/admin/api/programs/${modal.item.id}`, { method: 'DELETE' })
+      if (res.status === 429) { toast.error('Too many requests — wait a moment and try again.'); return }
       if (!res.ok) throw new Error()
       setItems(prev => prev.filter(p => p.id !== modal.item!.id))
       toast.success('Program deleted')
