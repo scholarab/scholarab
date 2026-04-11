@@ -245,6 +245,14 @@ const BOUNCE_KEYFRAMES = [
   { transform: 'scale(1.05)' }, { transform: 'scale(1)' },
 ];
 
+function animateCardRemove(el: HTMLElement | null, onDone: () => void) {
+  if (!el) { onDone(); return; }
+  el.animate(
+    [{ transform: 'scale(1)', opacity: '1' }, { transform: 'scale(0.95)', opacity: '0' }],
+    { duration: 200, easing: 'ease-out', fill: 'forwards' }
+  ).onfinish = onDone;
+}
+
 interface RemovableItemProps {
   onRemove: () => void;
   onWillRemove?: () => void;
@@ -287,12 +295,7 @@ function ScholarshipCard({ s, onUnsave }: ScholarshipCardProps) {
   const bmkRef   = useRef<HTMLButtonElement>(null);
 
   function handleUnsave() {
-    const el = cardRef.current;
-    if (!el) { onUnsave(); return; }
-    el.animate(
-      [{ transform: 'scale(1)', opacity: '1' }, { transform: 'scale(0.95)', opacity: '0' }],
-      { duration: 200, easing: 'ease-out', fill: 'forwards' }
-    ).onfinish = onUnsave;
+    animateCardRemove(cardRef.current, onUnsave);
   }
 
   return (
@@ -364,12 +367,7 @@ function ProgramCard({ p, onUnsave }: ProgramCardProps) {
   const bmkRef  = useRef<HTMLButtonElement>(null);
 
   function handleUnsave() {
-    const el = cardRef.current;
-    if (!el) { onUnsave(); return; }
-    el.animate(
-      [{ transform: 'scale(1)', opacity: '1' }, { transform: 'scale(0.95)', opacity: '0' }],
-      { duration: 200, easing: 'ease-out', fill: 'forwards' }
-    ).onfinish = onUnsave;
+    animateCardRemove(cardRef.current, onUnsave);
   }
 
   return (

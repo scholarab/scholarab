@@ -72,6 +72,35 @@ export default function ItemList(props: Props) {
     [isScholarship, props.items]
   );
 
+  const renderScholarshipCategoryChips = (mobile: boolean) => {
+    const btnCls = `flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 ${mobile ? 'py-1.5' : 'py-1'} text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border`;
+    return (
+      <>
+        <button onClick={() => sch.setCategory('all')} aria-pressed={sch.selectedCategory === 'all'}
+          className={btnCls}
+          style={sch.selectedCategory === 'all'
+            ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
+            : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
+          All
+        </button>
+        {scholarshipCategories.map(cat => {
+          const badge = SCHOLARSHIP_BADGES[cat];
+          const sel = sch.selectedCategory === cat;
+          return (
+            <button key={cat} onClick={() => sch.setCategory(sel ? 'all' : cat)} aria-pressed={sel}
+              className={btnCls}
+              style={sel
+                ? { background: badge ? badge.bg : 'var(--brand-dim)', borderColor: badge ? badge.border : 'var(--brand-border)', color: badge ? badge.color : 'var(--brand)' }
+                : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
+              {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
+              {cat}
+            </button>
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <div>
       <span className="sr-only" aria-live="polite" aria-atomic="true">
@@ -82,27 +111,7 @@ export default function ItemList(props: Props) {
       {isScholarship && scholarshipCategories.length > 0 && (
         <div className="hidden md:block">
         <div className="flex chips-row mb-4 gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
-          <button onClick={() => sch.setCategory('all')} aria-pressed={sch.selectedCategory === 'all'}
-            className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
-            style={sch.selectedCategory === 'all'
-              ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
-              : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
-            All
-          </button>
-          {scholarshipCategories.map(cat => {
-            const badge = SCHOLARSHIP_BADGES[cat];
-            const sel = sch.selectedCategory === cat;
-            return (
-              <button key={cat} onClick={() => sch.setCategory(sel ? 'all' : cat)} aria-pressed={sel}
-                className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
-                style={sel
-                  ? { background: badge ? badge.bg : 'var(--brand-dim)', borderColor: badge ? badge.border : 'var(--brand-border)', color: badge ? badge.color : 'var(--brand)' }
-                  : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
-                {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
-                {cat}
-              </button>
-            );
-          })}
+          {renderScholarshipCategoryChips(false)}
         </div>
         </div>
       )}
@@ -159,7 +168,7 @@ export default function ItemList(props: Props) {
         </p>
         <div className="flex items-center gap-1.5">
           {sortOpts.map(({ value, label: lbl }) => (
-            <button key={value} onClick={() => setSort(value as any)} aria-pressed={sortBy === value}
+            <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={sortBy === value}
               className={`sort-pill whitespace-nowrap flex-shrink-0${sortBy === value ? ' active' : ''}`}>
               {lbl}
             </button>
@@ -189,27 +198,7 @@ export default function ItemList(props: Props) {
                 <div>
                   <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Category</p>
                   <div className="flex flex-wrap" style={{ gap: 8 }}>
-                    <button onClick={() => sch.setCategory('all')} aria-pressed={sch.selectedCategory === 'all'}
-                      className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
-                      style={sch.selectedCategory === 'all'
-                        ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
-                        : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
-                      All
-                    </button>
-                    {scholarshipCategories.map(cat => {
-                      const badge = SCHOLARSHIP_BADGES[cat];
-                      const sel = sch.selectedCategory === cat;
-                      return (
-                        <button key={cat} onClick={() => sch.setCategory(sel ? 'all' : cat)} aria-pressed={sel}
-                          className="flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border"
-                          style={sel
-                            ? { background: badge ? badge.bg : 'var(--brand-dim)', borderColor: badge ? badge.border : 'var(--brand-border)', color: badge ? badge.color : 'var(--brand)' }
-                            : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
-                          {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
-                          {cat}
-                        </button>
-                      );
-                    })}
+                    {renderScholarshipCategoryChips(true)}
                   </div>
                 </div>
               )}
@@ -258,7 +247,7 @@ export default function ItemList(props: Props) {
                   {sortOpts.map(({ value, label: lbl }) => {
                     const sel = sortBy === value;
                     return (
-                      <button key={value} onClick={() => setSort(value as any)} aria-pressed={sel}
+                      <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={sel}
                         className={`${pillBase} ${sel ? pillOn : pillOff}`}
                         style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
                         {lbl}

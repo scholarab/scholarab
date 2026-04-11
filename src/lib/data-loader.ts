@@ -100,7 +100,7 @@ export async function loadScholarships(): Promise<Scholarship[]> {
     }
   }
   const data = await import('../data/scholarships.json')
-  return (data.default as any[]).map(s => ({ ...s, openDate: s.openDate ?? null, eligibility: null }))
+  return (data.default as Array<Omit<Scholarship, 'eligibility'>>).map(s => ({ ...s, openDate: s.openDate ?? null, eligibility: null }))
 }
 
 export async function loadPrograms(): Promise<Program[]> {
