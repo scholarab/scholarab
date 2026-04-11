@@ -166,9 +166,9 @@ export default function ProgramManager({ initialData }: Props) {
                   {p.emoji && <span className="mr-1.5">{p.emoji}</span>}
                   {p.name}
                 </td>
-                <td className="px-4 py-3 text-white/60">{p.provider || '—'}</td>
-                <td className="px-4 py-3 text-white/60">{p.grades || '—'}</td>
-                <td className="px-4 py-3 text-white/60">{p.location || '—'}</td>
+                <td className="px-4 py-3 text-white/60">{p.provider || '-'}</td>
+                <td className="px-4 py-3 text-white/60">{p.grades || '-'}</td>
+                <td className="px-4 py-3 text-white/60">{p.location || '-'}</td>
                 <td className="px-4 py-3">
                   {p.paid ? (
                     <span className="text-xs px-2 py-0.5 rounded-full bg-[#22d3a5]/15 text-[#22d3a5]">Paid</span>
@@ -299,7 +299,7 @@ export default function ProgramManager({ initialData }: Props) {
                   <label className="block text-xs text-white/50 mb-1">Category</label>
                   <select value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
                     className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50">
-                    <option value="">—</option>
+                    <option value="">Select</option>
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>

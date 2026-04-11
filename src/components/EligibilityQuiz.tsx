@@ -205,9 +205,9 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           </div>
           {(grade === '10' || grade === '11') && (
             <div className="mt-3 p-3 rounded-lg border border-amber-400/30 bg-amber-400/8 text-xs text-amber-400/80">
-              Most scholarships are for Grade 12 students — results here will be limited.{' '}
+              Most scholarships are for Grade 12 students - results here will be limited.{' '}
               <a href="/programs" className="underline font-medium">Browse research programs</a>{' '}
-              instead — many are open to Grade 10 and 11.
+              instead - many are open to Grade 10 and 11.
             </div>
           )}
         </div>
@@ -249,7 +249,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       <div>
         <ProgressBar step={2} />
         <h2 className="text-xl font-bold mb-1 text-primary">What do you want to study?</h2>
-        <p className="text-sm text-secondary mb-6">Optional — helps surface scholarships specific to your field.</p>
+        <p className="text-sm text-secondary mb-6">Optional - helps surface scholarships specific to your field.</p>
 
         <div className="mb-6">
           <p className="text-sm text-secondary mb-2.5 font-medium">Field of study</p>
@@ -293,7 +293,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          Processed on this device only — never sent anywhere.
+          Processed on this device only - never sent anywhere.
         </p>
 
         <div className="mb-5">
@@ -452,7 +452,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <p className="text-3xl mb-4">🔍</p>
           <p className="font-semibold text-primary mb-2">No scholarships matched your profile</p>
           <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">
-            Try leaving optional fields blank — average and identity answers narrow results significantly.
+            Try leaving optional fields blank - average and identity answers narrow results significantly.
           </p>
           <button
             onClick={reset}

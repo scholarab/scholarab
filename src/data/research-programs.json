@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Alberta Innovates HYRS — University of Alberta",
+    "name": "Alberta Innovates HYRS - University of Alberta",
     "emoji": "🔬",
     "category": "Health Research",
     "provider": "Alberta Innovates + University of Alberta",
@@ -18,7 +18,7 @@
   },
   {
     "id": 2,
-    "name": "Alberta Innovates HYRS — University of Calgary",
+    "name": "Alberta Innovates HYRS - University of Calgary",
     "emoji": "🔬",
     "category": "Health Research",
     "provider": "Alberta Innovates + University of Calgary",
@@ -35,7 +35,7 @@
   },
   {
     "id": 3,
-    "name": "Alberta Innovates HYRS — University of Lethbridge",
+    "name": "Alberta Innovates HYRS - University of Lethbridge",
     "emoji": "🔬",
     "category": "Health Research",
     "provider": "Alberta Innovates + University of Lethbridge",
@@ -179,7 +179,7 @@
     "duration": "8 weeks (July 2 – August 20, 2026)",
     "paid": true,
     "stipend": "Paid (hourly rate in offer letter)",
-    "location": "Toronto (in-person) — open to Alberta students",
+    "location": "Toronto (in-person) - open to Alberta students",
     "eligibility": "Canadian students in grades 11-12 with interest in coding and technology",
     "deadline": "2026-03-01",
     "url": "https://www.rbc.com/en/future-launch/resource-type/programs-services/rbc-summer-tech-labs/",
@@ -281,7 +281,7 @@
     "duration": "~5 months (Jan–May)",
     "paid": false,
     "stipend": null,
-    "location": "National (AB, BC, SK, MB, ON, QC, NB) — in-person events in Alberta",
+    "location": "National (AB, BC, SK, MB, ON, QC, NB) - in-person events in Alberta",
     "eligibility": "Students in grades 7–12 from participating provinces; self-organized teams",
     "deadline": "TBA",
     "url": "https://mindfuel.ca/tfc/",

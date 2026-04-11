@@ -30,9 +30,9 @@ export default function AdminShell({ user, page, data }: Props) {
         const now = new Date().toLocaleTimeString()
         setLastDeployed(now)
         localStorage.setItem('lastDeployed', now)
-        toast.success('Deploy triggered — site will be live in ~90 seconds')
+        toast.success('Deploy triggered - site will be live in ~90 seconds')
       } else {
-        toast.error('Deploy failed — check Vercel settings')
+        toast.error('Deploy failed - check Vercel settings')
       }
     } catch {
       toast.error('Deploy failed')

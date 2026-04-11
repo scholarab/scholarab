@@ -18,7 +18,7 @@ const slug = generateSlug(scholarship.title);
 
 
 function formatDate(str: string): string {
-  if (!str) return '—';
+  if (!str) return 'N/A';
   const d = new Date(str + 'T00:00:00');
   return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 }
@@ -34,7 +34,7 @@ const badge    = { ...rawBadge, label: scholarship.category || '' };
 
 const description  = `The ${scholarship.title} offers ${scholarship.amount} to ${scholarship.audience}${scholarship.region ? ` in ${scholarship.region}` : ''}. Deadline: ${formatDate(scholarship.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
 const canonical    = `https://www.scholarab.ca/scholarships/${slug}`;
-const pageTitle    = `${scholarship.title} | ScholarAB — Alberta Scholarships`;
+const pageTitle    = `${scholarship.title} | ScholarAB - Alberta Scholarships`;
 const parsedAmount = (() => { const n = parseInt(scholarship.amount.replace(/[$,]/g, '')); return isNaN(n) ? null : n; })();
 
 const ldJson = {

@@ -80,7 +80,7 @@ const {
         </button>
       ) : status === 'future' ? (
         <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-blue-500/[0.08] text-blue-400">
-          Opening Soon{openDate ? ` — ${openDate}` : ''}
+          Opening Soon{openDate ? `: ${openDate}` : ''}
         </button>
       ) : (
         <a

@@ -28,7 +28,7 @@ function buildICS(scholarships: ScholarshipWithMeta[], programs: ProgramWithMeta
       `DTSTART;VALUE=DATE:${dateStr}`,
       `DTEND;VALUE=DATE:${endStr}`,
       `SUMMARY:Deadline: ${s.title}`,
-      `DESCRIPTION:${s.title} — ${s.amount}\\nApply at: ${s.url}`,
+      `DESCRIPTION:${s.title} - ${s.amount}\\nApply at: ${s.url}`,
       `URL:${s.url}`,
       'END:VEVENT',
     );
