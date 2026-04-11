@@ -35,7 +35,7 @@ const badge    = { ...rawBadge, emoji: program.emoji || rawBadge.emoji, label: p
 const desc = program.description ?? '';
 const metaDescription = desc.length > 160 ? desc.slice(0, 157) + '...' : desc;
 const canonical = `https://www.scholarab.ca/programs/${slug}`;
-const pageTitle = `${program.name} | ScholarAB - Alberta Research Programs`;
+const pageTitle = `${program.name} | ScholarAB | Alberta Research Programs`;
 
 const ldJson = {
   '@context': 'https://schema.org',

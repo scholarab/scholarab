@@ -34,7 +34,7 @@ const badge    = { ...rawBadge, label: scholarship.category || '' };
 
 const description  = `The ${scholarship.title} offers ${scholarship.amount} to ${scholarship.audience}${scholarship.region ? ` in ${scholarship.region}` : ''}. Deadline: ${formatDate(scholarship.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
 const canonical    = `https://www.scholarab.ca/scholarships/${slug}`;
-const pageTitle    = `${scholarship.title} | ScholarAB - Alberta Scholarships`;
+const pageTitle    = `${scholarship.title} | ScholarAB | Alberta Scholarships`;
 const parsedAmount = (() => { const n = parseInt(scholarship.amount.replace(/[$,]/g, '')); return isNaN(n) ? null : n; })();
 
 const ldJson = {

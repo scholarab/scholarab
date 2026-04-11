@@ -166,9 +166,9 @@ export default function ProgramManager({ initialData }: Props) {
                   {p.emoji && <span className="mr-1.5">{p.emoji}</span>}
                   {p.name}
                 </td>
-                <td className="px-4 py-3 text-white/60">{p.provider || '-'}</td>
-                <td className="px-4 py-3 text-white/60">{p.grades || '-'}</td>
-                <td className="px-4 py-3 text-white/60">{p.location || '-'}</td>
+                <td className="px-4 py-3 text-white/60">{p.provider || ''}</td>
+                <td className="px-4 py-3 text-white/60">{p.grades || ''}</td>
+                <td className="px-4 py-3 text-white/60">{p.location || ''}</td>
                 <td className="px-4 py-3">
                   {p.paid ? (
                     <span className="text-xs px-2 py-0.5 rounded-full bg-[#22d3a5]/15 text-[#22d3a5]">Paid</span>

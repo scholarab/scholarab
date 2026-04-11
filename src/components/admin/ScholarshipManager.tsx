@@ -153,7 +153,7 @@ export default function ScholarshipManager({ initialData }: Props) {
       const { eligibility } = await res.json()
       setForm(f => ({ ...f, eligibility }))
       setShowEligibility(true)
-      toast.success('Eligibility parsed - review and save')
+      toast.success('Eligibility parsed. Review and save.')
     } catch (e) {
       toast.error('Parse failed: ' + String(e))
     } finally {
@@ -258,7 +258,7 @@ export default function ScholarshipManager({ initialData }: Props) {
     }
     setBulkProgress(null)
     if (failed === 0) toast.success(`Tagged ${done} scholarship${done !== 1 ? 's' : ''}`)
-    else toast.success(`Tagged ${done - failed}/${done} - ${failed} failed`)
+    else toast.success(`Tagged ${done - failed}/${done}, ${failed} failed`)
   }
 
   const ALL_TABS = ['All', ...REGIONS, 'No region']
@@ -342,8 +342,8 @@ export default function ScholarshipManager({ initialData }: Props) {
               <tr key={s.id} className={`border-b border-white/[0.04] hover:bg-white/[0.02] transition ${i % 2 === 0 ? '' : 'bg-white/[0.01]'}`}>
                 <td className="px-4 py-3 font-medium max-w-xs truncate">{s.title}</td>
                 <td className="px-4 py-3 text-white/60">{s.amount}</td>
-                <td className="px-4 py-3 text-white/60">{s.deadline || '-'}</td>
-                <td className="px-4 py-3 text-white/60">{s.region || '-'}</td>
+                <td className="px-4 py-3 text-white/60">{s.deadline || ''}</td>
+                <td className="px-4 py-3 text-white/60">{s.region || ''}</td>
                 <td className="px-4 py-3">
                   <span className={`text-xs px-2 py-0.5 rounded-full ${s.active ? 'bg-[#22d3a5]/15 text-[#22d3a5]' : 'bg-white/10 text-white/40'}`}>
                     {s.active ? 'Active' : 'Inactive'}
