@@ -74,7 +74,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
       : nonClosed.filter(p => p.category === selectedCategory);
 
     return [...afterCategory].sort((a, b) => (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity));
-  }, [initialPrograms, selectedCategory, sortBy, statusCache]);
+  }, [initialPrograms, selectedCategory, statusCache]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);

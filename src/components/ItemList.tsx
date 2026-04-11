@@ -68,7 +68,7 @@ export default function ItemList(props: Props) {
   );
 
   const programCategories = useMemo(
-    () => !isScholarship ? ['all', ...[...new Set((props.items as ProgramWithMeta[]).map(p => p.category))].sort()] : [],
+    () => !isScholarship ? ['all', ...[...new Set((props.items as ProgramWithMeta[]).map(p => p.category).filter((c): c is string => c !== null))].sort()] : [],
     [isScholarship, props.items]
   );
 
