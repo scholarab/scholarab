@@ -25,7 +25,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
     context.locals.user = session.user
     context.locals.session = session.session
-  } catch {
+  } catch (e) {
+    console.error('[auth] session check failed:', e)
     return context.redirect('/admin/login')
   }
 

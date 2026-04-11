@@ -13,7 +13,7 @@ export const auth = betterAuth({
   },
   session: {
     cookieName: 'admin_session',
-    expiresIn: 60 * 60 * 24, // 24 hours
+    expiresIn: 60 * 60 * 8, // 8 hours
   },
   trustedOrigins: [
     'http://localhost:4321',
