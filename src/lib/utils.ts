@@ -38,7 +38,7 @@ export function showConfetti(originEl?: Element | null): void {
 
   const ctx = canvas.getContext('2d')!;
   const COLORS = ['#22d3a5', '#5ee8c4', '#ffffff', '#fbbf24', '#a78bfa', '#f472b6'];
-  const particles: Particle[] = Array.from({ length: 65 }, () => {
+  const particles: Particle[] = Array.from({ length: 30 }, () => {
     const angle = Math.random() * Math.PI * 2;
     const speed = Math.random() * 9 + 4;
     return {
@@ -77,7 +77,7 @@ export function showConfetti(originEl?: Element | null): void {
   requestAnimationFrame(tick);
 }
 
-// Intentionally imperative DOM injection — avoids a toast library dependency for a single UI pattern.
+// Intentionally imperative DOM injection — works outside the React tree, zero bundle cost on public pages.
 export function showToast(message: string): void {
   const TOAST_ID = 'sa-toast';
   document.getElementById(TOAST_ID)?.remove();

@@ -1,6 +1,25 @@
 import { useEffect } from 'react';
 import type { RefObject } from 'react';
-import { observeCard, unobserveCard } from '../lib/cardObserver.ts';
+
+// Shared IntersectionObserver — all cards share one native observer instance.
+let sharedObserver: IntersectionObserver | null = null;
+const callbacks = new Map<Element, () => void>();
+
+function getObserver(): IntersectionObserver {
+  if (sharedObserver) return sharedObserver;
+  sharedObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const cb = callbacks.get(entry.target);
+      if (cb) {
+        cb();
+        callbacks.delete(entry.target);
+        sharedObserver!.unobserve(entry.target);
+      }
+    }
+  }, { threshold: 0.05 });
+  return sharedObserver;
+}
 
 export function useCardEntrance(
   ref: RefObject<HTMLDivElement | null>,
@@ -19,11 +38,15 @@ export function useCardEntrance(
       }
       return;
     }
-    observeCard(el, () => {
+    callbacks.set(el, () => {
       el.style.setProperty('--card-delay', delay);
       el.classList.remove('card-before-reveal');
       el.classList.add(isFiltered ? 'card-entrance-filter' : 'card-entrance');
     });
-    return () => unobserveCard(el);
+    getObserver().observe(el);
+    return () => {
+      callbacks.delete(el);
+      if (sharedObserver) sharedObserver.unobserve(el);
+    };
   }, [index, isFiltered, isInitial]);
 }
