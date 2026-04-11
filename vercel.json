@@ -24,7 +24,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(?:ico|svg|png|webp|jpg|jpeg)",
+      "source": "/favicon.ico",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]
