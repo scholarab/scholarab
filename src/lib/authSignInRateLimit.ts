@@ -5,9 +5,10 @@
 import { db } from './db/client'
 import { authRateLimit } from './db/schema'
 import { eq, gte, and, sql } from 'drizzle-orm'
+import { SIGN_IN_ATTEMPT_LIMIT, SIGN_IN_WINDOW_MS } from './constants'
 
-const MAX_ATTEMPTS = 10
-const WINDOW_MS = 15 * 60_000
+const MAX_ATTEMPTS = SIGN_IN_ATTEMPT_LIMIT
+const WINDOW_MS = SIGN_IN_WINDOW_MS
 
 export async function checkSignInRateLimit(ip: string): Promise<boolean> {
   const windowStart = new Date(Date.now() - WINDOW_MS)

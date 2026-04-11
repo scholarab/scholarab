@@ -36,10 +36,10 @@ const {
     <script is:inline>
       (function () {
         try {
-          var t = localStorage.getItem('theme') ||
+          const t = localStorage.getItem('theme') ||
             (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
           document.documentElement.classList.add('theme-' + t);
-        } catch (e) {
+        } catch {
           document.documentElement.classList.add('theme-dark');
         }
       })();
@@ -117,7 +117,7 @@ const {
             (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
           document.documentElement.classList.remove('theme-dark', 'theme-light');
           document.documentElement.classList.add('theme-' + t);
-        } catch (e) {}
+        } catch { /* localStorage unavailable */ }
       });
 
       // Keep theme in sync with OS preference changes (only if user hasn't overridden)
@@ -127,7 +127,7 @@ const {
             const { applyTheme } = await import('../lib/themeClient.ts');
             applyTheme(e.matches ? 'dark' : 'light');
           }
-        } catch (e) {}
+        } catch { /* localStorage unavailable */ }
       });
 
       // Service worker registration

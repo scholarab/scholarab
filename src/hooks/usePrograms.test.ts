@@ -151,8 +151,8 @@ describe('usePrograms', () => {
   it('active programs sort before tba programs by default', async () => {
     const { usePrograms } = await import('./usePrograms')
     const { result } = renderHook(() => usePrograms(allItems))
-    const active = result.current.filtered.filter(p => p.deadline !== null)
-    const tba    = result.current.filtered.filter(p => p.deadline === null)
+    const _active = result.current.filtered.filter(p => p.deadline !== null)
+    const _tba    = result.current.filtered.filter(p => p.deadline === null)
     // All active should appear before tba in the list
     const filtered = result.current.filtered
     const firstTbaIndex = filtered.findIndex(p => p.deadline === null)

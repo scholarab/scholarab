@@ -497,7 +497,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
           <SectionEmptyState href="/scholarships" label="Find scholarships" />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {savedScholarships.map((s, i) => (
+            {savedScholarships.map((s) => (
               <RemovableItem
                 key={s.id}
                 onRemove={() => unsaveScholarship(s.id)}
@@ -517,7 +517,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
           <SectionEmptyState href="/programs" label="Find programs" />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {savedPrograms.map((p, i) => (
+            {savedPrograms.map((p) => (
               <RemovableItem
                 key={p.id}
                 onRemove={() => unsaveProgram(p.id)}

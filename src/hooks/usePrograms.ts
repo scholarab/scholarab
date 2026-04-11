@@ -10,7 +10,8 @@ export interface ProgramWithMeta extends Program {
 
 export type ProgramStatus = 'active' | 'tba' | 'closed';
 
-export const PAGE_SIZE = 16;
+import { PUBLIC_PAGE_SIZE } from '../lib/constants';
+export const PAGE_SIZE = PUBLIC_PAGE_SIZE;
 
 export function getStatus(p: ProgramWithMeta): ProgramStatus {
   if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') return 'tba';
@@ -19,8 +20,7 @@ export function getStatus(p: ProgramWithMeta): ProgramStatus {
   return 'active';
 }
 
-const SORT_VALUES = ['closest_due'] as const;
-type SortValue = typeof SORT_VALUES[number];
+type SortValue = 'closest_due';
 
 export function usePrograms(initialPrograms: ProgramWithMeta[]) {
   const [sortBy,           setSortBy          ] = useState<SortValue>('closest_due');

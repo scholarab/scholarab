@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
     })
 
     return jsonOk({ success: true, ...result })
-  } catch (e) {
+  } catch {
     return jsonError('Failed to trigger deployment', 500)
   }
 }

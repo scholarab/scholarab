@@ -7,17 +7,18 @@ import { eq, gte, and, sql } from 'drizzle-orm'
 import type { EligibilityCriteria } from '../../../../lib/eligibility-types'
 import { EMPTY_ELIGIBILITY } from '../../../../lib/eligibility-types'
 import { jsonError } from '../../../../lib/api-response'
+import { AI_PARSE_LIMIT, AI_PARSE_WINDOW_MS } from '../../../../lib/constants'
 
 export const prerender = false
 
-// DB-persisted rate limit: max 20 AI parse requests per user per hour (cross-instance safe)
+// DB-persisted rate limit: max AI parse requests per user per hour (cross-instance safe)
 async function checkAndLogParseRateLimit(userId: string): Promise<boolean> {
-  const oneHourAgo = new Date(Date.now() - 3_600_000)
+  const windowStart = new Date(Date.now() - AI_PARSE_WINDOW_MS)
   const [{ count }] = await db
     .select({ count: sql<number>`count(*)::int` })
     .from(parseLog)
-    .where(and(eq(parseLog.userId, userId), gte(parseLog.createdAt, oneHourAgo)))
-  if (Number(count) >= 20) return false
+    .where(and(eq(parseLog.userId, userId), gte(parseLog.createdAt, windowStart)))
+  if (Number(count) >= AI_PARSE_LIMIT) return false
   await db.insert(parseLog).values({ userId })
   return true
 }

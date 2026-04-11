@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug } from '../lib/utils';
+import { CLOSING_SOON_MS } from '../lib/constants';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -21,7 +22,7 @@ const scholarshipCount = scholarships.filter(s => {
   return new Date(s.deadline + 'T00:00:00') >= today;
 }).length;
 
-const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const ONE_WEEK_MS = CLOSING_SOON_MS;
 const closingSoon = scholarships
   .filter(s => {
     if (!s.deadline || !s.active) return false;

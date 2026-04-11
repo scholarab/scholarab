@@ -3,8 +3,7 @@ import { toast } from 'sonner'
 import type { EligibilityCriteria } from '../../lib/eligibility-types'
 import { EMPTY_ELIGIBILITY } from '../../lib/eligibility-types'
 import { EligibilityEditor } from './EligibilityEditor'
-
-const PAGE_SIZE = 25
+import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 const REFRESH_INTERVAL = 60_000 // 60 seconds
 
 type Scholarship = {

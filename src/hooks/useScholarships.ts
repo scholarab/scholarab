@@ -23,7 +23,8 @@ export function getStatus(s: ScholarshipWithMeta): ScholarshipStatus {
   return 'active';
 }
 
-export const PAGE_SIZE = 16;
+import { PUBLIC_PAGE_SIZE } from '../lib/constants';
+export const PAGE_SIZE = PUBLIC_PAGE_SIZE;
 
 const PROVINCIAL_REGIONS = new Set(['Alberta', 'Alberta-wide', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat']);
 

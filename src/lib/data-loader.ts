@@ -1,5 +1,6 @@
 import type { EligibilityCriteria } from './eligibility-types'
 import { eligibilitySchema } from './eligibility-types'
+import { CACHE_TTL_MS } from './constants'
 
 export { eligibilitySchema } from './eligibility-types'
 
@@ -49,7 +50,7 @@ export type Program = {
   active: boolean
 }
 
-const CACHE_TTL = 5 * 60_000 // 5 minutes
+const CACHE_TTL = CACHE_TTL_MS
 
 let scholarshipCache: { data: Scholarship[]; exp: number } | null = null
 let programCache:     { data: Program[];     exp: number } | null = null

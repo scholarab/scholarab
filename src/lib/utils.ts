@@ -54,7 +54,6 @@ export function showConfetti(originEl?: Element | null): void {
   });
 
   const start = performance.now();
-  let rafId: number;
   function tick(now: number) {
     const elapsed = now - start;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -72,10 +71,10 @@ export function showConfetti(originEl?: Element | null): void {
       ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
       ctx.restore();
     }
-    if (alive && elapsed < 1800) rafId = requestAnimationFrame(tick);
+    if (alive && elapsed < 1800) requestAnimationFrame(tick);
     else canvas.remove();
   }
-  rafId = requestAnimationFrame(tick);
+  requestAnimationFrame(tick);
 }
 
 // Intentionally imperative DOM injection — avoids a toast library dependency for a single UI pattern.

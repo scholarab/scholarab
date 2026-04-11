@@ -1,0 +1,7 @@
+dist/
+.vercel/
+node_modules/
+coverage/
+public/
+src/lib/db/migrations/
+src/data/

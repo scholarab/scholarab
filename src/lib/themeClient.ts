@@ -24,5 +24,5 @@ export function applyTheme(theme: Theme): void {
   document.documentElement.classList.add(`theme-${theme}`);
   document.querySelector('meta[name="color-scheme"]')?.setAttribute('content', theme);
 
-  try { localStorage.setItem('theme', theme); } catch {}
+  try { localStorage.setItem('theme', theme); } catch { /* localStorage unavailable */ }
 }

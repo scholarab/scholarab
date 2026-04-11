@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react'
 import { toast } from 'sonner'
-
-const PAGE_SIZE = 25
+import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 
 type Program = {
   id: number
@@ -101,18 +100,6 @@ export default function ProgramManager({ initialData }: Props) {
       setSaving(false)
     }
   }
-
-  const field = (key: keyof Program, label: string, type = 'text') => (
-    <div key={key}>
-      <label className="block text-xs text-white/50 mb-1">{label}</label>
-      <input
-        type={type}
-        value={(form[key] as string) ?? ''}
-        onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
-        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition"
-      />
-    </div>
-  )
 
   const textarea = (key: keyof Program, label: string) => (
     <div key={key}>

@@ -5,9 +5,10 @@
 import { db } from './db/client'
 import { mutationLog } from './db/schema'
 import { eq, gte, and, sql } from 'drizzle-orm'
+import { ADMIN_MUTATION_LIMIT, ADMIN_MUTATION_WINDOW_MS } from './constants'
 
-const MAX_MUTATIONS = 100
-const WINDOW_MS = 5 * 60_000
+const MAX_MUTATIONS = ADMIN_MUTATION_LIMIT
+const WINDOW_MS = ADMIN_MUTATION_WINDOW_MS
 
 export async function checkMutationRateLimit(userId: string): Promise<boolean> {
   const windowStart = new Date(Date.now() - WINDOW_MS)
