@@ -23,6 +23,19 @@ const scholarships = raw.map(s => ({
   ogUrl="https://www.scholarab.ca/scholarships"
   currentPath="/scholarships"
 >
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Alberta High School Scholarships 2026",
+    "description": "Find and filter Alberta scholarships for high school students. Browse awards by region, amount, and deadline. Free, updated, no account needed.",
+    "url": "https://www.scholarab.ca/scholarships",
+    "provider": { "@type": "Organization", "name": "ScholarAB", "url": "https://www.scholarab.ca" },
+    "hasPart": raw.slice(0, 10).map(s => ({
+      "@type": "EducationalOccupationalProgram",
+      "name": s.title,
+      "url": `https://www.scholarab.ca/scholarships/${generateSlug(s.title)}`,
+    })),
+  })} slot="head" />
   <div>
     <div class="flex items-center justify-between gap-4 mb-1 flex-wrap">
       <h1 class="font-bold text-primary" style="font-size: clamp(22px, 3vw, 32px);">Scholarships</h1>

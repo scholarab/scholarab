@@ -40,7 +40,6 @@ const lines: string[] = [
   urlEntry(`${BASE}/`, '1.0'),
   urlEntry(`${BASE}/scholarships`, '0.9'),
   urlEntry(`${BASE}/programs`, '0.9'),
-  urlEntry(`${BASE}/saved`, '0.7'),
   urlEntry(`${BASE}/about`, '0.8'),
   ...scholarships.map((s) => urlEntry(`${BASE}/scholarships/${generateSlug(s.title)}`, '0.85')),
   ...programs.map((p) => urlEntry(`${BASE}/programs/${generateSlug(p.name)}`, '0.85')),
