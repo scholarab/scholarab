@@ -86,16 +86,13 @@ const closingSoon = scholarships
           <p class="text-xs font-semibold uppercase tracking-widest text-tertiary">Closing this week</p>
           <a href="/scholarships" class="text-xs text-secondary hover:text-primary transition-colors">View all →</a>
         </div>
-        <div class="flex flex-col gap-2.5">
+        <div class="flex flex-col gap-2.5" id="closing-soon-list">
           {closingSoon.map(s => {
-            const deadlineMs = new Date(s.deadline! + 'T00:00:00').getTime();
-            const daysLeft = Math.round((deadlineMs - today.getTime()) / (1000 * 60 * 60 * 24));
-            const urgency = daysLeft === 0 ? 'Today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`;
-            const isUrgent = daysLeft <= 2;
             return (
               <a
                 href={`/scholarships/${generateSlug(s.title)}`}
                 class="card card-interactive flex items-center justify-between gap-4 px-4 py-3.5"
+                data-deadline={s.deadline}
               >
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-semibold text-primary truncate">{s.title}</p>
@@ -103,8 +100,8 @@ const closingSoon = scholarships
                 </div>
                 <div class="flex items-center gap-3 flex-shrink-0">
                   <p class="text-sm font-bold text-brand">{s.amount}</p>
-                  <span class={`text-xs font-semibold px-2.5 py-1 rounded-full border ${isUrgent ? 'bg-red-500/10 text-red-400 border-red-500/25' : 'bg-amber-400/10 text-amber-400 border-amber-400/25'}`}>
-                    {urgency}
+                  <span class="closing-soon-badge text-xs font-semibold px-2.5 py-1 rounded-full border bg-amber-400/10 text-amber-400 border-amber-400/25">
+                    &hellip;
                   </span>
                 </div>
               </a>
@@ -169,4 +166,42 @@ const closingSoon = scholarships
 
   startCounter();
   document.addEventListener('astro:page-load', startCounter);
+
+  function updateClosingSoon() {
+    const list = document.getElementById('closing-soon-list');
+    if (!list) return;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayMs = today.getTime();
+    const cards = list.querySelectorAll<HTMLElement>('a[data-deadline]');
+    let visible = 0;
+    cards.forEach(card => {
+      const deadline = card.dataset.deadline;
+      if (!deadline) return;
+      const deadlineMs = new Date(deadline + 'T00:00:00').getTime();
+      if (deadlineMs < todayMs) {
+        card.style.display = 'none';
+        return;
+      }
+      visible++;
+      const daysLeft = Math.round((deadlineMs - todayMs) / (1000 * 60 * 60 * 24));
+      const urgency = daysLeft === 0 ? 'Today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`;
+      const badge = card.querySelector('.closing-soon-badge');
+      if (badge) {
+        badge.textContent = urgency;
+        if (daysLeft <= 2) {
+          badge.className = 'closing-soon-badge text-xs font-semibold px-2.5 py-1 rounded-full border bg-red-500/10 text-red-400 border-red-500/25';
+        } else {
+          badge.className = 'closing-soon-badge text-xs font-semibold px-2.5 py-1 rounded-full border bg-amber-400/10 text-amber-400 border-amber-400/25';
+        }
+      }
+    });
+    if (visible === 0) {
+      const section = list.closest('.max-w-2xl') as HTMLElement | null;
+      if (section) section.style.display = 'none';
+    }
+  }
+
+  updateClosingSoon();
+  document.addEventListener('astro:page-load', updateClosingSoon);
 </script>
