@@ -72,6 +72,15 @@ export default function ScholarshipManager({ initialData }: Props) {
     modalOpenRef.current = modal !== null
   }, [modal])
 
+  useEffect(() => {
+    if (!modal) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { setModal(null); setFetching(false); setParsing(false) }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [modal])
+
   // Duplicate detection: only active when adding, checks local state for instant feedback
   const localDuplicate = useMemo(() => {
     if (modal?.type !== 'add' || !form.title?.trim()) return null
@@ -293,6 +302,7 @@ export default function ScholarshipManager({ initialData }: Props) {
       {/* Search */}
       <input
         type="search"
+        aria-label="Search scholarships"
         placeholder="Search scholarships…"
         value={search}
         onChange={handleSearch}
@@ -385,9 +395,9 @@ export default function ScholarshipManager({ initialData }: Props) {
       {/* Edit/Add Modal */}
       {(modal?.type === 'edit' || modal?.type === 'add') && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={closeModal}>
-          <div className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+          <div role="dialog" aria-modal="true" aria-labelledby="sm-dialog-title" className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-1">
-              <h2 className="text-lg font-semibold">{modal.type === 'edit' ? 'Edit Scholarship' : 'Add Scholarship'}</h2>
+              <h2 id="sm-dialog-title" className="text-lg font-semibold">{modal.type === 'edit' ? 'Edit Scholarship' : 'Add Scholarship'}</h2>
               {fetching && <span className="text-xs text-white/30 animate-pulse">Loading latest…</span>}
             </div>
             <p className="text-xs text-white/30 mb-5">Fields marked * are required</p>
@@ -551,8 +561,8 @@ export default function ScholarshipManager({ initialData }: Props) {
       {/* Delete Modal */}
       {modal?.type === 'delete' && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={closeModal}>
-          <div className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
-            <h2 className="text-lg font-semibold mb-2">Delete scholarship?</h2>
+          <div role="dialog" aria-modal="true" aria-labelledby="sm-delete-title" className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
+            <h2 id="sm-delete-title" className="text-lg font-semibold mb-2">Delete scholarship?</h2>
             <p className="text-white/50 text-sm mb-6">"{modal.item?.title}" will be permanently removed.</p>
             <div className="flex gap-3 justify-end">
               <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>

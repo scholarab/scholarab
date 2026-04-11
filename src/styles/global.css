@@ -56,9 +56,9 @@ html.theme-dark {
 
   /* Text */
   --text-primary:   #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.45);
-  --text-tertiary:  rgba(255, 255, 255, 0.30);
-  --text-faint:     rgba(255, 255, 255, 0.20);
+  --text-secondary: rgba(255, 255, 255, 0.60);
+  --text-tertiary:  rgba(255, 255, 255, 0.45);
+  --text-faint:     rgba(255, 255, 255, 0.30);
 
   /* Navigation */
   --nav-glass-bg:      rgba(10, 10, 15, 0.8);
@@ -67,7 +67,7 @@ html.theme-dark {
   --nav-border-mobile: rgba(255, 255, 255, 0.07);
   --bottom-nav-bg:     #0a0a0f;
   --bottom-nav-border: rgba(255, 255, 255, 0.08);
-  --bn-tab-color:      rgba(255, 255, 255, 0.30);
+  --bn-tab-color:      rgba(255, 255, 255, 0.45);
 
   /* Footer */
   --footer-border: rgba(255, 255, 255, 0.06);
@@ -111,9 +111,9 @@ html.theme-light {
 
   /* Text */
   --text-primary:   #0a0a0f;
-  --text-secondary: rgba(0, 0, 0, 0.50);
-  --text-tertiary:  rgba(0, 0, 0, 0.35);
-  --text-faint:     rgba(0, 0, 0, 0.20);
+  --text-secondary: rgba(0, 0, 0, 0.65);
+  --text-tertiary:  rgba(0, 0, 0, 0.50);
+  --text-faint:     rgba(0, 0, 0, 0.35);
 
   /* Navigation */
   --nav-glass-bg:      rgba(245, 245, 247, 0.85);
@@ -122,7 +122,7 @@ html.theme-light {
   --nav-border-mobile: rgba(0, 0, 0, 0.08);
   --bottom-nav-bg:     #f5f5f7;
   --bottom-nav-border: rgba(0, 0, 0, 0.08);
-  --bn-tab-color:      rgba(0, 0, 0, 0.35);
+  --bn-tab-color:      rgba(0, 0, 0, 0.50);
 
   /* Footer */
   --footer-border: rgba(0, 0, 0, 0.08);

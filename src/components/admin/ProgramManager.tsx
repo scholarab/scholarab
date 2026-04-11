@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { toast } from 'sonner'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 
@@ -53,6 +53,13 @@ export default function ProgramManager({ initialData }: Props) {
     setSearch(e.target.value)
     setPage(0)
   }
+
+  useEffect(() => {
+    if (!modal) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setModal(null) }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [modal])
 
   const openAdd = () => { setForm(emptyForm()); setShowAdvanced(false); setModal({ type: 'add' }) }
   const openEdit = (item: Program) => { setForm({ ...item }); setShowAdvanced(false); setModal({ type: 'edit', item }) }
@@ -127,6 +134,7 @@ export default function ProgramManager({ initialData }: Props) {
 
       <input
         type="search"
+        aria-label="Search programs"
         placeholder="Search programs…"
         value={search}
         onChange={handleSearch}
@@ -206,8 +214,8 @@ export default function ProgramManager({ initialData }: Props) {
       {/* Edit/Add Modal */}
       {(modal?.type === 'edit' || modal?.type === 'add') && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={closeModal}>
-          <div className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <h2 className="text-lg font-semibold mb-1">{modal.type === 'edit' ? 'Edit Program' : 'Add Program'}</h2>
+          <div role="dialog" aria-modal="true" aria-labelledby="pm-dialog-title" className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <h2 id="pm-dialog-title" className="text-lg font-semibold mb-1">{modal.type === 'edit' ? 'Edit Program' : 'Add Program'}</h2>
             <p className="text-xs text-white/30 mb-5">Fields marked * are required</p>
 
             {/* ── Essential fields ── */}
@@ -324,8 +332,8 @@ export default function ProgramManager({ initialData }: Props) {
       {/* Delete Modal */}
       {modal?.type === 'delete' && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={closeModal}>
-          <div className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
-            <h2 className="text-lg font-semibold mb-2">Delete program?</h2>
+          <div role="dialog" aria-modal="true" aria-labelledby="pm-delete-title" className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
+            <h2 id="pm-delete-title" className="text-lg font-semibold mb-2">Delete program?</h2>
             <p className="text-white/50 text-sm mb-6">"{modal.item?.name}" will be permanently removed.</p>
             <div className="flex gap-3 justify-end">
               <button onClick={closeModal} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
