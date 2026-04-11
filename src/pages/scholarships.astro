@@ -32,6 +32,6 @@ const scholarships = raw.map(s => ({
       </a>
     </div>
     <p class="text-sm text-secondary mb-6">Open scholarships for Alberta high school students, verified by hand and updated regularly.</p>
-    <ItemList mode="scholarship" items={scholarships} client:load />
+    <ItemList mode="scholarship" items={scholarships} client:idle />
   </div>
 </Layout>
