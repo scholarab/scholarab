@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ComponentProps } from 'react'
 import { authClient } from '../../lib/auth-client'
 import { Toaster, toast } from 'sonner'
 import ScholarshipManager from './ScholarshipManager'
@@ -103,9 +103,9 @@ export default function AdminShell({ user, page, data }: Props) {
       {/* Main content */}
       <main className="ml-56 flex-1 p-8">
         {page === 'scholarships' ? (
-          <ScholarshipManager initialData={parsedData} />
+          <ScholarshipManager initialData={parsedData as ComponentProps<typeof ScholarshipManager>['initialData']} />
         ) : (
-          <ProgramManager initialData={parsedData} />
+          <ProgramManager initialData={parsedData as ComponentProps<typeof ProgramManager>['initialData']} />
         )}
       </main>
     </div>

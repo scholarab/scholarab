@@ -1,13 +1,14 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
 import EligibilityQuiz from '../components/EligibilityQuiz'
+import type { ConfidenceTier } from '../lib/eligibility-types'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
 const { mockMatchAll, mockMatchProgram, mockGetSaved, mockToggleSaved, mockGetSavedPrograms, mockToggleSavedProgram, mockShowConfetti } = vi.hoisted(() => ({
-  mockMatchAll:            vi.fn(() => []),
+  mockMatchAll:            vi.fn(() => [] as Array<{ id: number; confidence: number; tier: ConfidenceTier }>),
   mockMatchProgram:        vi.fn(() => true),
-  mockGetSaved:            vi.fn(() => []),
+  mockGetSaved:            vi.fn(() => [] as number[]),
   mockToggleSaved:         vi.fn(),
   mockGetSavedPrograms:    vi.fn(() => []),
   mockToggleSavedProgram:  vi.fn(),
@@ -289,8 +290,8 @@ describe('Results', () => {
     const s1 = makeScholarship({ id: 1, title: 'Test Scholarship 1' })
     const s2 = makeScholarship({ id: 2, title: 'Test Scholarship 2' })
     mockMatchAll.mockReturnValue([
-      { id: 1, tier: 'strong', score: 10, matchedRules: [] },
-      { id: 2, tier: 'good',   score: 7,  matchedRules: [] },
+      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 },
+      { id: 2, tier: 'good'   as ConfidenceTier, confidence: 0.7 },
     ])
     render(<EligibilityQuiz scholarships={[s1 as any, s2 as any]} />)
     advanceToResults()
@@ -299,7 +300,7 @@ describe('Results', () => {
 
   it('shows "1 scholarship found" with singular form', () => {
     const s1 = makeScholarship({ id: 1, title: 'Lone Scholarship' })
-    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong', score: 10, matchedRules: [] }])
+    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 }])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
     expect(screen.getByText('1 scholarship found')).toBeTruthy()
@@ -307,7 +308,7 @@ describe('Results', () => {
 
   it('renders scholarship titles in results', () => {
     const s1 = makeScholarship({ id: 1, title: 'Amazing Bursary' })
-    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong', score: 10, matchedRules: [] }])
+    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 }])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
     expect(screen.getByText('Amazing Bursary')).toBeTruthy()
@@ -315,7 +316,7 @@ describe('Results', () => {
 
   it('renders "Strong match" tier badge', () => {
     const s1 = makeScholarship({ id: 1 })
-    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong', score: 10, matchedRules: [] }])
+    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 }])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
     expect(screen.getByText('Strong match')).toBeTruthy()
@@ -323,7 +324,7 @@ describe('Results', () => {
 
   it('renders "Good match" tier badge', () => {
     const s1 = makeScholarship({ id: 1 })
-    mockMatchAll.mockReturnValue([{ id: 1, tier: 'good', score: 7, matchedRules: [] }])
+    mockMatchAll.mockReturnValue([{ id: 1, tier: 'good' as ConfidenceTier, confidence: 0.7 }])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
     expect(screen.getByText('Good match')).toBeTruthy()
@@ -331,7 +332,7 @@ describe('Results', () => {
 
   it('renders "Possible match" tier badge', () => {
     const s1 = makeScholarship({ id: 1 })
-    mockMatchAll.mockReturnValue([{ id: 1, tier: 'possible', score: 3, matchedRules: [] }])
+    mockMatchAll.mockReturnValue([{ id: 1, tier: 'possible' as ConfidenceTier, confidence: 0.5 }])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
     expect(screen.getByText('Possible match')).toBeTruthy()
@@ -359,7 +360,7 @@ describe('Results', () => {
 
   it('save button calls toggleSaved and updates aria-label', () => {
     const s1 = makeScholarship({ id: 1, title: 'Save Test Scholarship' })
-    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong', score: 10, matchedRules: [] }])
+    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 }])
     // After toggleSaved, getSaved returns [1]
     mockGetSaved.mockReturnValueOnce([]).mockReturnValue([1])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
@@ -372,7 +373,7 @@ describe('Results', () => {
 
   it('showConfetti is called when saving a scholarship', () => {
     const s1 = makeScholarship({ id: 1 })
-    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong', score: 10, matchedRules: [] }])
+    mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 }])
     mockGetSaved.mockReturnValueOnce([]).mockReturnValue([1])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
@@ -385,8 +386,8 @@ describe('Results', () => {
     const s1 = makeScholarship({ id: 1 })
     const s2 = makeScholarship({ id: 2 })
     mockMatchAll.mockReturnValue([
-      { id: 1, tier: 'strong', score: 10, matchedRules: [] },
-      { id: 2, tier: 'good',   score: 7,  matchedRules: [] },
+      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 },
+      { id: 2, tier: 'good'   as ConfidenceTier, confidence: 0.7 },
     ])
     render(<EligibilityQuiz scholarships={[s1 as any, s2 as any]} />)
     advanceToResults()

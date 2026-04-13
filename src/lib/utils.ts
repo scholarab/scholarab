@@ -49,7 +49,7 @@ export function showConfetti(originEl?: Element | null): void {
       h: Math.random() * 4 + 2,
       rot: Math.random() * Math.PI * 2,
       rotV: (Math.random() - 0.5) * 0.26,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      color: COLORS[Math.floor(Math.random() * COLORS.length)]!,
     };
   });
 

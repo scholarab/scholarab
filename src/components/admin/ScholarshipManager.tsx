@@ -108,8 +108,8 @@ export default function ScholarshipManager({ initialData }: Props) {
     const counts: Record<string, number> = { All: items.length, 'No region': 0 }
     for (const r of REGIONS) counts[r] = 0
     for (const s of items) {
-      if (s.region && counts[s.region] !== undefined) counts[s.region]++
-      else if (!s.region) counts['No region']++
+      if (s.region && counts[s.region] !== undefined) counts[s.region] = (counts[s.region] ?? 0) + 1
+      else if (!s.region) counts['No region'] = (counts['No region'] ?? 0) + 1
     }
     return counts
   }, [items])

@@ -61,7 +61,7 @@ export const PUT: APIRoute = async ({ request, params }) => {
         .where(eq(scholarships.id, id))
       if (!current) return jsonError('Not found', 404)
 
-      const dbTs = new Date(current.updatedAt).getTime()
+      const dbTs = current.updatedAt?.getTime() ?? 0
       const clientTs = new Date(clientUpdatedAt).getTime()
       if (dbTs !== clientTs) {
         return jsonOk({ error: 'conflict', message: 'This record was modified by someone else. Please refresh and try again.' }, 409)

@@ -2,5 +2,6 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "noUncheckedIndexedAccess": true
-  }
+  },
+  "exclude": ["scripts", "dist"]
 }

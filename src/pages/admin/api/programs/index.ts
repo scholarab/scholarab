@@ -53,7 +53,7 @@ export const POST: APIRoute = async ({ request }) => {
       .where(ilike(researchPrograms.name, data.name.trim()))
       .limit(1)
     if (existing.length > 0) {
-      return jsonOk({ error: 'duplicate', existing: existing[0].name }, 409)
+      return jsonOk({ error: 'duplicate', existing: existing[0]!.name }, 409)
     }
 
     const [created] = await db.insert(researchPrograms).values(data).returning()

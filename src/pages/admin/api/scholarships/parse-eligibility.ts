@@ -14,11 +14,12 @@ export const prerender = false
 // DB-persisted rate limit: max AI parse requests per user per hour (cross-instance safe)
 async function checkAndLogParseRateLimit(userId: string): Promise<boolean> {
   const windowStart = new Date(Date.now() - AI_PARSE_WINDOW_MS)
-  const [{ count }] = await db
+  const rows = await db
     .select({ count: sql<number>`count(*)::int` })
     .from(parseLog)
     .where(and(eq(parseLog.userId, userId), gte(parseLog.createdAt, windowStart)))
-  if (Number(count) >= AI_PARSE_LIMIT) return false
+  const count = rows[0]?.count ?? 0
+  if (count >= AI_PARSE_LIMIT) return false
   await db.insert(parseLog).values({ userId })
   return true
 }
@@ -99,7 +100,8 @@ export const POST: APIRoute = async ({ request }) => {
       ],
     })
 
-    const text = message.content[0].type === 'text' ? message.content[0].text.trim() : ''
+    const first = message.content[0]
+    const text = first?.type === 'text' ? first.text.trim() : ''
     // Strip markdown code fences if present
     const cleaned = text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim()
 

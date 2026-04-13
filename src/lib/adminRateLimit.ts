@@ -12,11 +12,12 @@ const WINDOW_MS = ADMIN_MUTATION_WINDOW_MS
 
 export async function checkMutationRateLimit(userId: string): Promise<boolean> {
   const windowStart = new Date(Date.now() - WINDOW_MS)
-  const [{ count }] = await db
+  const rows = await db
     .select({ count: sql<number>`count(*)::int` })
     .from(mutationLog)
     .where(and(eq(mutationLog.userId, userId), gte(mutationLog.createdAt, windowStart)))
-  if (Number(count) >= MAX_MUTATIONS) return false
+  const count = rows[0]?.count ?? 0
+  if (count >= MAX_MUTATIONS) return false
   await db.insert(mutationLog).values({ userId })
   return true
 }

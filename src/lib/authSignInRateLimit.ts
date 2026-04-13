@@ -12,11 +12,12 @@ const WINDOW_MS = SIGN_IN_WINDOW_MS
 
 export async function checkSignInRateLimit(ip: string): Promise<boolean> {
   const windowStart = new Date(Date.now() - WINDOW_MS)
-  const [{ count }] = await db
+  const rows = await db
     .select({ count: sql<number>`count(*)::int` })
     .from(authRateLimit)
     .where(and(eq(authRateLimit.ip, ip), gte(authRateLimit.createdAt, windowStart)))
-  if (Number(count) >= MAX_ATTEMPTS) return false
+  const count = rows[0]?.count ?? 0
+  if (count >= MAX_ATTEMPTS) return false
   await db.insert(authRateLimit).values({ ip })
   return true
 }

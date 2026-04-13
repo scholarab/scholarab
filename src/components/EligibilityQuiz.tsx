@@ -88,7 +88,7 @@ const QUIZ_STORAGE_KEY = 'scholarab_quiz_draft'
 
 type QuizDraft = {
   step: 1 | 2 | 3
-  grade: string
+  grade: StudentProfile['grade'] | ''
   city: string
   schoolBoard: string | null
   targetInstitution: string
@@ -99,7 +99,7 @@ type QuizDraft = {
   identifiesAsBIPOC: boolean | null
   inFosterCare: boolean | null
   inApprenticeship: boolean | null
-  citizenship: string | null
+  citizenship: StudentProfile['citizenship']
   hasFinancialNeed: boolean | null
 }
 

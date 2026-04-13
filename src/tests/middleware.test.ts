@@ -29,7 +29,7 @@ function makeCtx(pathname: string) {
   return { ctx, redirectFn }
 }
 
-const next = vi.fn(() => new Response('OK', { status: 200 }))
+const next = vi.fn(() => Promise.resolve(new Response('OK', { status: 200 })))
 const AUTHED_SESSION = {
   user: { id: '1', email: 'admin@test.com' },
   session: { id: 'sess1' },
@@ -37,7 +37,7 @@ const AUTHED_SESSION = {
 
 beforeEach(() => {
   vi.clearAllMocks()
-  next.mockReturnValue(new Response('OK', { status: 200 }))
+  next.mockReturnValue(Promise.resolve(new Response('OK', { status: 200 })))
 })
 
 // ── Public routes (no auth required) ─────────────────────────────────────────

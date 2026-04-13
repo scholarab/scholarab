@@ -60,8 +60,8 @@ export default function ProgramManager({ initialData }: Props) {
     const counts: Record<string, number> = { All: items.length, 'No category': 0 }
     for (const c of CATEGORIES) counts[c] = 0
     for (const p of items) {
-      if (p.category && counts[p.category] !== undefined) counts[p.category]++
-      else if (!p.category) counts['No category']++
+      if (p.category && counts[p.category] !== undefined) counts[p.category] = (counts[p.category] ?? 0) + 1
+      else if (!p.category) counts['No category'] = (counts['No category'] ?? 0) + 1
     }
     return counts
   }, [items])
