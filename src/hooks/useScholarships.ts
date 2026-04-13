@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { track } from '@vercel/analytics';
 import { getSaved, toggleSaved } from '../lib/tracker.ts';
 import { getToday } from '../lib/utils.ts';
@@ -45,16 +45,17 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [page,           setPage          ] = useState(1);
   const [sheetOpen,      setSheetOpen     ] = useState(false);
   const [savedIds,       setSavedIds      ] = useState<number[]>([]);
-  const hasFiltered = useRef(false);
+  const [hasFiltered,    setHasFiltered   ] = useState(false);
 
   const setCategory = useCallback((cat: string) => {
     const next = cat === 'all' ? 'all' : cat;
-    hasFiltered.current = true;
+    setHasFiltered(true);
     setSelectedCategoryRaw(next);
     setPage(1);
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSavedIds([...getSaved()]);
   }, []);
 
@@ -66,21 +67,21 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
 
   const toggleRegion = useCallback((region: RegionKey | null) => {
     const next = region === null ? null : (selectedRegion === region ? null : region);
-    hasFiltered.current = true;
+    setHasFiltered(true);
     setSelectedRegion(next);
     setPage(1);
     if (next) track('filter_region', { region: next });
   }, [selectedRegion]);
 
   const handleSetSort = useCallback((value: SortValue) => {
-    hasFiltered.current = true;
+    setHasFiltered(true);
     setSortBy(value);
     setPage(1);
     track('filter_sort', { sort: value, page: 'scholarships' });
   }, []);
 
   const handlePageChange = useCallback((newPage: number) => {
-    hasFiltered.current = true;
+    setHasFiltered(true);
     setPage(newPage);
     requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' })));
   }, []);
@@ -110,7 +111,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       if (sortBy === 'lowest_pay')  return (a._amount_cents ?? 0) - (b._amount_cents ?? 0);
       return 0;
     });
-  }, [withoutClosed, selectedRegion, selectedCategory, sortBy, statusCache]);
+  }, [withoutClosed, selectedRegion, selectedCategory, sortBy]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
@@ -135,6 +136,6 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     categoryKey:      selectedCategory,
     savedIds,
     handleToggleSave,
-    isFiltered:       hasFiltered.current,
+    isFiltered:       hasFiltered,
   };
 }

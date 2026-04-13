@@ -13,6 +13,7 @@ export default function BookmarkButton({ id, type }: BookmarkButtonProps) {
 
   useEffect(() => {
     const list = type === 'program' ? getSavedPrograms() : getSaved();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSaved(list.includes(id));
   }, [id, type]);
 

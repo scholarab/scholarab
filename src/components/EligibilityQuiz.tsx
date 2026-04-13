@@ -149,7 +149,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(_d?.citizenship ?? null)
 
   function reset() {
-    try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch {}
+    try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
     setStep(1); setGrade(''); setCity(''); setTargetInstitution('')
     setFields([]); setAverageBracket(null)
     setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null)
@@ -227,7 +227,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         inFosterCare, inApprenticeship, citizenship,
       }
       localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(draft))
-    } catch {}
+    } catch { /* ignore */ }
   }, [step, grade, city, targetInstitution, fields, averageBracket,
       identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
       inFosterCare, inApprenticeship, citizenship])

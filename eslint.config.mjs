@@ -20,6 +20,13 @@ export default [
     },
   },
   {
+    // Test files use `any` extensively for mock typing — suppress there only
+    files: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
     ignores: ['dist/', '.vercel/', 'node_modules/', 'coverage/', 'src/lib/db/migrations/', 'src/env.d.ts'],
   },
 ]

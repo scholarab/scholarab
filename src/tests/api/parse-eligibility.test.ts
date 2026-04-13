@@ -123,7 +123,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — auth & rate limit',
 
   it('returns 429 when parse rate limit is exceeded', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
-    mockSelect.mockReturnValue(selectChain([{ count: 20 }])) // count >= 20
+    mockSelect.mockReturnValue(selectChain([{ count: 150 }])) // count >= 150
     const res = await POST({ request: req({ id: 1 }) } as any)
     expect(res.status).toBe(429)
     const body = await res.json()
@@ -132,7 +132,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — auth & rate limit',
 
   it('returns 429 when count exceeds limit', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
-    mockSelect.mockReturnValue(selectChain([{ count: 50 }]))
+    mockSelect.mockReturnValue(selectChain([{ count: 200 }]))
     const res = await POST({ request: req({ id: 1 }) } as any)
     expect(res.status).toBe(429)
   })

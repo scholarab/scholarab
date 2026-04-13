@@ -157,7 +157,7 @@ const {
           if (SCROLL_PAGES.some(p => path === p)) {
             try {
               sessionStorage.setItem('scrollRestore', JSON.stringify({ path, y: window.scrollY }));
-            } catch {}
+            } catch { /* ignore */ }
           }
         }, 100);
       }, { passive: true });
@@ -170,13 +170,13 @@ const {
           if (path === window.location.pathname && y > 0) {
             requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' }));
           }
-        } catch {}
+        } catch { /* ignore */ }
       });
 
       // ── Swipe navigation (Web K pattern) ────────────────────
       // Clean swipe direction flag after every transition
       document.addEventListener('astro:after-swap', () => {
-        delete (document.documentElement.dataset as any).swipeDir;
+        delete (document.documentElement.dataset as Record<string, string>).swipeDir;
       });
 
       (function initSwipeNav() {

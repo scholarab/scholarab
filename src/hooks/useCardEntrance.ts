@@ -48,5 +48,5 @@ export function useCardEntrance(
       callbacks.delete(el);
       if (sharedObserver) sharedObserver.unobserve(el);
     };
-  }, [index, isFiltered, isInitial]);
+  }, [ref, index, isFiltered, isInitial]);
 }

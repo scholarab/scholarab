@@ -69,7 +69,7 @@ export const POST: APIRoute = async ({ request }) => {
   if (!session) return jsonError('Unauthorized', 401)
 
   if (!(await checkAndLogParseRateLimit(session.user.id))) {
-    return jsonError('Rate limit exceeded — max 20 AI parses per hour', 429)
+    return jsonError(`Rate limit exceeded — max ${AI_PARSE_LIMIT} AI parses per hour`, 429)
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY

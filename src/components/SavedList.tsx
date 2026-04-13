@@ -69,6 +69,7 @@ function RemovableItem({ onRemove, onWillRemove, children }: RemovableItemProps)
     };
   }
 
+  // eslint-disable-next-line react-hooks/refs
   return <div ref={wrapperRef} className="h-full">{children(remove)}</div>;
 }
 
@@ -221,6 +222,7 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
   const [savedProgramIds, setSavedProgramIds] = useState<number[]>([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSavedScholarshipIds([...getSaved()]);
     setSavedProgramIds([...getSavedPrograms()]);
 
