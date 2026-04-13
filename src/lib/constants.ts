@@ -27,7 +27,7 @@ export const ADMIN_MUTATION_LIMIT = 100;
 export const ADMIN_MUTATION_WINDOW_MS = 5 * 60_000; // 5 minutes
 
 /** Max AI eligibility parses per user per hour. */
-export const AI_PARSE_LIMIT = 20;
+export const AI_PARSE_LIMIT = 150;
 
 /** AI parse rate-limit window (ms). */
 export const AI_PARSE_WINDOW_MS = 60 * 60_000; // 1 hour
