@@ -180,19 +180,23 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
       inFosterCare, inApprenticeship, citizenship])
 
+  const scholarshipInputs = useMemo(
+    () => scholarships.map(s => ({ id: s.id, region: s.region, eligibility: s.eligibility })),
+    [scholarships]
+  )
+
+  const scholarshipMap = useMemo(
+    () => new Map(scholarships.map(s => [s.id, s])),
+    [scholarships]
+  )
+
   const results = useMemo(() => {
     if (!profile) return null
-    const matched = matchAll(profile, scholarships.map(s => ({
-      id: s.id,
-      region: s.region,
-      eligibility: s.eligibility,
-    })))
-    const scholarshipMap = new Map(scholarships.map(s => [s.id, s]))
-    return matched.map(m => ({
+    return matchAll(profile, scholarshipInputs).map(m => ({
       ...m,
       scholarship: scholarshipMap.get(m.id)!,
     })).filter(m => m.scholarship)
-  }, [profile, scholarships])
+  }, [profile, scholarshipInputs, scholarshipMap])
 
   const totalAmount = useMemo(() => {
     if (!results) return 0

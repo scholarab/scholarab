@@ -5,6 +5,13 @@ import type { RefObject } from 'react';
 let sharedObserver: IntersectionObserver | null = null;
 const callbacks = new Map<Element, () => void>();
 
+function releaseIfEmpty() {
+  if (callbacks.size === 0 && sharedObserver) {
+    sharedObserver.disconnect();
+    sharedObserver = null;
+  }
+}
+
 function getObserver(): IntersectionObserver {
   if (sharedObserver) return sharedObserver;
   sharedObserver = new IntersectionObserver((entries) => {
@@ -15,6 +22,7 @@ function getObserver(): IntersectionObserver {
         cb();
         callbacks.delete(entry.target);
         sharedObserver!.unobserve(entry.target);
+        releaseIfEmpty();
       }
     }
   }, { threshold: 0.05 });
@@ -47,6 +55,7 @@ export function useCardEntrance(
     return () => {
       callbacks.delete(el);
       if (sharedObserver) sharedObserver.unobserve(el);
+      releaseIfEmpty();
     };
   }, [ref, index, isFiltered, isInitial]);
 }

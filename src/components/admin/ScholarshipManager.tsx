@@ -60,7 +60,10 @@ export default function ScholarshipManager({ initialData }: Props) {
         const res = await fetch('/admin/api/scholarships')
         if (!res.ok) return
         const fresh: Scholarship[] = await res.json()
-        setItems(fresh)
+        setItems(prev => {
+          if (prev.length === fresh.length && prev[0]?.updatedAt === fresh[0]?.updatedAt) return prev
+          return fresh
+        })
       } catch {
         // silent — don't bother user if refresh fails
       }
@@ -252,6 +255,11 @@ export default function ScholarshipManager({ initialData }: Props) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id: s.id }),
         })
+        if (res.status === 429) {
+          toast.error('Rate limit hit — bulk parse stopped. Try again in an hour.')
+          setBulkProgress(null)
+          return
+        }
         if (res.ok) {
           const { eligibility } = await res.json()
           // Save immediately
