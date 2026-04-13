@@ -1,8 +1,8 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
-import type { Scholarship } from '../lib/data-loader'
+import type { Scholarship, Program } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
-import { matchAll } from '../lib/eligibility-matcher'
-import { getSaved, toggleSaved } from '../lib/tracker.ts'
+import { matchAll, matchProgram } from '../lib/eligibility-matcher'
+import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti } from '../lib/utils.ts'
 import { generateSlug } from '../lib/utils.ts'
 
@@ -12,6 +12,7 @@ type Step = 1 | 2 | 3 | 'results'
 
 interface Props {
   scholarships: Scholarship[]
+  programs?: Program[]
 }
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -53,7 +54,7 @@ const FIELDS = [
 ]
 
 const AVERAGE_BRACKETS = [
-  { value: 72, label: 'Below 80%' },
+  { value: 79, label: 'Below 80%' },
   { value: 85, label: '80 – 89%' },
   { value: 93, label: '90% or higher' },
 ]
@@ -81,6 +82,7 @@ type QuizDraft = {
   inFosterCare: boolean | null
   inApprenticeship: boolean | null
   citizenship: string | null
+  hasFinancialNeed: boolean | null
 }
 
 function loadDraft(): QuizDraft | null {
@@ -133,7 +135,7 @@ function parseAmount(amount: string): number {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export default function EligibilityQuiz({ scholarships }: Props) {
+export default function EligibilityQuiz({ scholarships, programs = [] }: Props) {
   const _d = loadDraft()
   const [step, setStep] = useState<1 | 2 | 3 | 'results'>(_d?.step ?? 1)
   const [grade, setGrade] = useState<StudentProfile['grade'] | ''>(_d?.grade ?? '')
@@ -147,13 +149,14 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   const [inFosterCare, setInFosterCare] = useState<boolean | null>(_d?.inFosterCare ?? null)
   const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(_d?.inApprenticeship ?? null)
   const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(_d?.citizenship ?? null)
+  const [hasFinancialNeed, setHasFinancialNeed] = useState<boolean | null>(_d?.hasFinancialNeed ?? null)
 
   function reset() {
     try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
     setStep(1); setGrade(''); setCity(''); setTargetInstitution('')
     setFields([]); setAverageBracket(null)
     setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null)
-    setInFosterCare(null); setInApprenticeship(null); setCitizenship(null)
+    setInFosterCare(null); setInApprenticeship(null); setCitizenship(null); setHasFinancialNeed(null)
   }
 
   const profile = useMemo((): StudentProfile | null => {
@@ -169,7 +172,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       identifiesAsFemale,
       identifiesAsIndigenous,
       identifiesAsBIPOC,
-      hasFinancialNeed: null,
+      hasFinancialNeed,
       familyIncome: null,
       inFosterCare,
       inApprenticeship,
@@ -178,7 +181,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     }
   }, [grade, city, targetInstitution, fields, averageBracket,
       identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
-      inFosterCare, inApprenticeship, citizenship])
+      inFosterCare, inApprenticeship, citizenship, hasFinancialNeed])
 
   const scholarshipInputs = useMemo(
     () => scholarships.map(s => ({ id: s.id, region: s.region, eligibility: s.eligibility })),
@@ -197,6 +200,11 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       scholarship: scholarshipMap.get(m.id)!,
     })).filter(m => m.scholarship)
   }, [profile, scholarshipInputs, scholarshipMap])
+
+  const programResults = useMemo(() => {
+    if (!profile) return []
+    return programs.filter(p => p.active && matchProgram(profile.grade, p))
+  }, [profile, programs])
 
   const totalAmount = useMemo(() => {
     if (!results) return 0
@@ -221,6 +229,14 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     setSavedIds(next)
   }, [])
 
+  const [savedProgramIds, setSavedProgramIds] = useState<Set<number>>(() => new Set(getSavedPrograms()))
+  const handleToggleSaveProgram = useCallback((id: number, el?: Element | null) => {
+    toggleSavedProgram(id)
+    const next = new Set(getSavedPrograms())
+    if (next.has(id)) showConfetti(el)
+    setSavedProgramIds(next)
+  }, [])
+
   // Persist quiz state so navigating away and back restores progress
   useEffect(() => {
     if (step === 'results') return
@@ -228,13 +244,13 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       const draft: QuizDraft = {
         step, grade, city, targetInstitution, fields, averageBracket,
         identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
-        inFosterCare, inApprenticeship, citizenship,
+        inFosterCare, inApprenticeship, citizenship, hasFinancialNeed,
       }
       localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(draft))
     } catch { /* ignore */ }
   }, [step, grade, city, targetInstitution, fields, averageBracket,
       identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
-      inFosterCare, inApprenticeship, citizenship])
+      inFosterCare, inApprenticeship, citizenship, hasFinancialNeed])
 
   // ── Step 1 — Where are you at? ──────────────────────────────────────────────
 
@@ -357,6 +373,14 @@ export default function EligibilityQuiz({ scholarships }: Props) {
             <Chip label="Female" active={identifiesAsFemale === true} onClick={() => setIdentifiesAsFemale(prev => prev === true ? null : true)} />
             <Chip label="Indigenous (First Nations, Métis, Inuit)" active={identifiesAsIndigenous === true} onClick={() => toggleIdentity(identifiesAsIndigenous, setIdentifiesAsIndigenous)} />
             <Chip label="Person of colour" active={identifiesAsBIPOC === true} onClick={() => toggleIdentity(identifiesAsBIPOC, setIdentifiesAsBIPOC)} />
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <p className="text-sm text-secondary mb-2.5 font-medium">Financial situation</p>
+          <div className="flex flex-wrap gap-2">
+            <Chip label="I have financial need" active={hasFinancialNeed === true} onClick={() => setHasFinancialNeed(prev => prev === true ? null : true)} />
+            <Chip label="No financial need" active={hasFinancialNeed === false} onClick={() => setHasFinancialNeed(prev => prev === false ? null : false)} />
           </div>
         </div>
 
@@ -515,6 +539,68 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           >
             Try again
           </button>
+        </div>
+      )}
+
+      {programResults.length > 0 && (
+        <div className="mt-8 pt-6 border-t border-subtle">
+          <p className="text-sm font-semibold text-primary mb-1">Research programs for you</p>
+          <p className="text-xs text-faint mb-4">Matched by grade. Check each program for full eligibility details.</p>
+          <div className="space-y-3">
+            {programResults.map(p => (
+              <div key={p.id} className="p-4 rounded-xl border border-subtle bg-subtle">
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-primary text-sm leading-snug">
+                      {p.emoji && <span className="mr-1">{p.emoji}</span>}{p.name}
+                    </p>
+                    {p.provider && <p className="text-xs text-tertiary mt-0.5">{p.provider}</p>}
+                  </div>
+                  <div className="flex-shrink-0 text-right">
+                    {p.paid && <p className="text-xs font-semibold text-brand">Paid</p>}
+                    {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && (
+                      <p className="text-xs text-faint mt-0.5">Due {p.deadline}</p>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs px-2 py-0.5 rounded-full border bg-subtle text-tertiary border-card">
+                    {p.grades ?? 'All grades'}
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={`/programs/${generateSlug(p.name)}`}
+                      className="text-xs text-secondary hover:text-primary transition"
+                    >
+                      Details
+                    </a>
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-brand transition hover:opacity-80"
+                    >
+                      Apply →
+                    </a>
+                    <button
+                      onClick={(e) => handleToggleSaveProgram(p.id, e.currentTarget)}
+                      aria-label={savedProgramIds.has(p.id) ? 'Remove from saved' : 'Save program'}
+                      className={`flex items-center justify-center flex-shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${
+                        savedProgramIds.has(p.id)
+                          ? 'text-brand border border-brand-border'
+                          : 'text-secondary border border-card'
+                      }`}
+                      style={{ width: 28, height: 28, background: savedProgramIds.has(p.id) ? 'var(--brand-dim)' : undefined }}
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill={savedProgramIds.has(p.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

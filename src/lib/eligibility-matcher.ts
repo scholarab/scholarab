@@ -109,6 +109,12 @@ export function matchScholarship(
     return { match: false, confidence: 0, reasons }
   }
 
+  // ── Financial need (hard filter only if student explicitly said no) ────────
+  if (eligibility.financialNeed && profile.hasFinancialNeed === false) {
+    reasons.push('Requires demonstrated financial need')
+    return { match: false, confidence: 0, reasons }
+  }
+
   // ── Citizenship ───────────────────────────────────────────────────────────
   if (eligibility.citizenship !== 'any' && profile.citizenship === 'other') {
     reasons.push('Requires Canadian citizenship or permanent residency')
@@ -153,6 +159,11 @@ export function matchScholarship(
     confidence += 0.05
   }
 
+  // Financial need confirmed match
+  if (eligibility.financialNeed && profile.hasFinancialNeed === true) {
+    confidence += 0.10
+  }
+
   confidence = Math.max(0.1, Math.min(1, confidence))
   return { match: true, confidence, reasons }
 }
@@ -161,6 +172,24 @@ export function getConfidenceTier(confidence: number): ConfidenceTier {
   if (confidence >= 0.85) return 'strong'
   if (confidence >= 0.60) return 'good'
   return 'possible'
+}
+
+/**
+ * Match a student's grade against a program's grades string (e.g. "Grade 11", "Grades 10–12").
+ * Returns true if the grade is in range, or if the program has no grade restriction.
+ */
+export function matchProgram(
+  studentGrade: string,
+  program: { grades: string | null },
+): boolean {
+  if (!program.grades) return true
+  const nums = program.grades.match(/\d+/g)?.map(Number) ?? []
+  if (nums.length === 0) return true
+  const grade = Number(studentGrade)
+  if (isNaN(grade)) return true
+  const min = Math.min(...nums)
+  const max = Math.max(...nums)
+  return grade >= min && grade <= max
 }
 
 /**

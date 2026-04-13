@@ -4,20 +4,26 @@ import EligibilityQuiz from '../components/EligibilityQuiz'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-const { mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti } = vi.hoisted(() => ({
-  mockMatchAll:     vi.fn(() => []),
-  mockGetSaved:     vi.fn(() => []),
-  mockToggleSaved:  vi.fn(),
-  mockShowConfetti: vi.fn(),
+const { mockMatchAll, mockMatchProgram, mockGetSaved, mockToggleSaved, mockGetSavedPrograms, mockToggleSavedProgram, mockShowConfetti } = vi.hoisted(() => ({
+  mockMatchAll:            vi.fn(() => []),
+  mockMatchProgram:        vi.fn(() => true),
+  mockGetSaved:            vi.fn(() => []),
+  mockToggleSaved:         vi.fn(),
+  mockGetSavedPrograms:    vi.fn(() => []),
+  mockToggleSavedProgram:  vi.fn(),
+  mockShowConfetti:        vi.fn(),
 }))
 
 vi.mock('../lib/eligibility-matcher', () => ({
-  matchAll: mockMatchAll,
+  matchAll:     mockMatchAll,
+  matchProgram: mockMatchProgram,
 }))
 
 vi.mock('../lib/tracker.ts', () => ({
-  getSaved:     mockGetSaved,
-  toggleSaved:  mockToggleSaved,
+  getSaved:             mockGetSaved,
+  toggleSaved:          mockToggleSaved,
+  getSavedPrograms:     mockGetSavedPrograms,
+  toggleSavedProgram:   mockToggleSavedProgram,
 }))
 
 vi.mock('../lib/utils.ts', () => ({
