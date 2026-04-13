@@ -191,7 +191,7 @@
     "name": "VJKF Indigenous Science and Engineering Program",
     "emoji": "🌿",
     "category": "STEM",
-    "provider": "University of Alberta",
+    "provider": "Verna J. Kirkness Foundation (multiple Canadian universities)",
     "grades": "10-12",
     "duration": "1 week (May)",
     "paid": false,
@@ -454,7 +454,7 @@
     "location": "Edmonton and Calgary areas (also national)",
     "eligibility": "Youth aged 15–18 with interest in conservation and the outdoors",
     "deadline": "Ongoing",
-    "url": "https://cwf-fcf.org/en/resources/encyclopaedia/what/wild-outside.html",
+    "url": "https://cwf-fcf.org/",
     "description": "Free conservation research and leadership program connecting youth 15–18 with nature through hands-on environmental research and conservation projects. Active programming available in Edmonton and Calgary areas.",
     "lastVerified": "2026-04"
   },
@@ -488,13 +488,13 @@
     "location": "Waterloo, Ontario (in-person)",
     "eligibility": "Grade 11–12 Canadian and international students; highly competitive selection",
     "deadline": "TBA",
-    "url": "https://perimeterinstitute.ca/outreach/students/international-summer-school-young-physicists",
+    "url": "https://perimeterinstitute.ca/education/students/",
     "description": "Highly competitive 2-week fully funded summer school at Perimeter Institute for exceptional Grade 11/12 physics students. Features lectures by world-leading theoretical physicists and hands-on research exposure.",
     "lastVerified": "2026-04"
   },
   {
     "id": 32,
-    "name": "Quantum Cryptography School for Young Students (QCSYS)",
+    "name": "Quantum School for Young Students (QSYS)",
     "emoji": "🔐",
     "category": "Computer Science",
     "provider": "Institute for Quantum Computing, University of Waterloo",
@@ -506,7 +506,7 @@
     "eligibility": "Grade 11–12 Canadian students with strong math and physics background",
     "deadline": "TBA",
     "url": "https://uwaterloo.ca/institute-for-quantum-computing/programs/qcsys",
-    "description": "Intensive week-long dive into quantum information science and cryptography at IQC, Waterloo. Combines lectures, hands-on labs, and direct interaction with leading quantum computing researchers.",
+    "description": "Intensive week-long dive into quantum information science and cryptography at IQC, University of Waterloo (formerly known as QCSYS, now rebranded QSYS). Combines lectures, hands-on labs, and direct interaction with quantum computing researchers.",
     "lastVerified": "2026-04"
   },
   {
@@ -539,7 +539,7 @@
     "location": "Virtual (accessible to Alberta students)",
     "eligibility": "High school students interested in medicine and health research",
     "deadline": "TBA",
-    "url": "https://medicine.utoronto.ca/",
+    "url": "https://temertymedicine.utoronto.ca/",
     "description": "Four-week virtual modules exploring medical research, diagnostics, and human anatomy. Hosted by UofT and available online to students across Canada including Albertans.",
     "lastVerified": "2026-04"
   },
@@ -556,7 +556,7 @@
     "location": "Calgary and Edmonton",
     "eligibility": "Alberta high school students",
     "deadline": "TBA",
-    "url": "https://www.can-acn.org/brain-bee",
+    "url": "https://www.neuroscience.ca/en/brain-bee",
     "description": "Regional neuroscience knowledge competitions for high school students in Calgary and Edmonton. Winners advance to the national Brain Bee where competitors analyze brain tissue and patient diagnoses. Top finishers represent Canada internationally.",
     "lastVerified": "2026-04"
   },
@@ -595,23 +595,6 @@
     "lastVerified": "2026-04"
   },
   {
-    "id": 38,
-    "name": "Alberta Envirothon",
-    "emoji": "🌿",
-    "category": "Environmental Science",
-    "provider": "Alberta Conservation Association / Envirothon Alberta",
-    "grades": "High school",
-    "duration": "Several months (fall–spring) + competition day",
-    "paid": false,
-    "stipend": null,
-    "location": "Alberta-wide (field-based)",
-    "eligibility": "Alberta high school students; teams of 5",
-    "deadline": "TBA",
-    "url": "https://www.albertaenvirothon.ca/",
-    "description": "Hands-on, field-based environmental science competition. Teams study aquatic ecology, forestry, soils, and wildlife, then conduct field research and present solutions to industry professionals. Top Alberta teams advance to the North American Envirothon.",
-    "lastVerified": "2026-04"
-  },
-  {
     "id": 39,
     "name": "Technovation Girls – Alberta",
     "emoji": "📱",
@@ -633,7 +616,7 @@
     "name": "HOSA Canada – Future Health Professionals",
     "emoji": "🩻",
     "category": "Health Research",
-    "provider": "HOSA Canada",
+    "provider": "HOSA – Future Health Professionals (International)",
     "grades": "High school",
     "duration": "Year-long (with regional and national competitions)",
     "paid": false,
@@ -642,7 +625,7 @@
     "eligibility": "Alberta high school students interested in health sciences; students can start a chapter at their own school",
     "deadline": "Ongoing",
     "url": "https://hosa.org/",
-    "description": "Canadian branch of Health Occupations Students of America. Students conduct deep research to compete in events spanning biomedical laboratory science, epidemiology, and medical law. Students can form local chapters at their own high schools.",
+    "description": "International organization supporting health science students (no separate Canadian entity). Students conduct deep research to compete in events spanning biomedical laboratory science, epidemiology, and medical law. Canadian students can form local chapters at their own high schools and compete at HOSA international levels.",
     "lastVerified": "2026-04"
   },
   {
@@ -748,23 +731,6 @@
     "lastVerified": "2026-04"
   },
   {
-    "id": 47,
-    "name": "UCalgary Minds in Motion – High School Programs",
-    "emoji": "🧪",
-    "category": "STEM Enrichment",
-    "provider": "University of Calgary",
-    "grades": "High school",
-    "duration": "Multi-week (during academic year)",
-    "paid": false,
-    "stipend": null,
-    "location": "Calgary (in-person, university facilities)",
-    "eligibility": "High school students interested in STEM; Calgary area",
-    "deadline": "TBA",
-    "url": "https://www.ucalgary.ca/",
-    "description": "Specialized multi-week high school programs during the academic year focusing on advanced STEM applications, coding, and engineering design projects using UCalgary's university facilities. Distinct from the elementary-level Minds in Motion camps.",
-    "lastVerified": "2026-04"
-  },
-  {
     "id": 48,
     "name": "APEGA Science Olympics",
     "emoji": "⚙️",
@@ -777,7 +743,7 @@
     "location": "Alberta-wide (multiple regional sites)",
     "eligibility": "Alberta high school students; teams of 4–6",
     "deadline": "TBA",
-    "url": "https://www.apega.ca/about-apega/outreach/science-olympics",
+    "url": "https://www.apega.ca/about-apega/outreach",
     "description": "Province-wide engineering and geoscience competition where high school teams design innovative solutions to real-world STEM challenges, applying physics and engineering principles under timed conditions. Regional events feed into the provincial finals.",
     "lastVerified": "2026-04"
   },
@@ -813,23 +779,6 @@
     "deadline": "TBA",
     "url": "https://www.cybertitan.ca/",
     "description": "Canada's national cybersecurity education initiative. Teams are placed in simulated, real-time cyber defense scenarios where they research vulnerabilities, secure operating systems, and defend networks against attacks. Alberta teams regularly compete at nationals.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 51,
-    "name": "CanSat Canada Design Challenge",
-    "emoji": "🛰️",
-    "category": "Engineering",
-    "provider": "Canadian Aeronautics and Space Institute (CASI) / CanSat Canada",
-    "grades": "Grades 9–12",
-    "duration": "Several months (design + launch)",
-    "paid": false,
-    "stipend": null,
-    "location": "Virtual (design phase) + in-person launch event",
-    "eligibility": "Canadian high school students; teams of 4–10",
-    "deadline": "TBA",
-    "url": "https://www.cansatcanada.ca/",
-    "description": "National aerospace competition where high school teams design, build, and launch a miniature satellite (the size of a soda can). Requires applied research in physics, coding, and telemetry systems. Teams present technical reports alongside their launches.",
     "lastVerified": "2026-04"
   },
   {
@@ -896,7 +845,7 @@
     "location": "Virtual (fully online, open to Alberta students)",
     "eligibility": "High school students aged 13–17 worldwide; competitive application",
     "deadline": "TBA",
-    "url": "https://www.nyas.org/programs/global-stem-alliance/junior-academy/",
+    "url": "https://www.nyas.org/programs/junior-academy/",
     "description": "Prestigious fully virtual global program. Accepted students join an international peer network and are mentored by STEM professionals to research and design solutions for real global challenges over a 10-week sprint. Certificate awarded upon completion.",
     "lastVerified": "2026-04"
   },
@@ -918,23 +867,6 @@
     "lastVerified": "2026-04"
   },
   {
-    "id": 57,
-    "name": "UAlberta High School Model United Nations (HSMUN)",
-    "emoji": "🌍",
-    "category": "Social Sciences",
-    "provider": "University of Alberta",
-    "grades": "High school",
-    "duration": "Multi-day conference (annual)",
-    "paid": false,
-    "stipend": null,
-    "location": "Edmonton (University of Alberta campus, in-person)",
-    "eligibility": "Alberta high school students; teams register through their school",
-    "deadline": "TBA",
-    "url": "https://www.hsmun.ca/",
-    "description": "One of Alberta's largest academic simulations. Students conduct deep independent research into global policy, economics, and international law, then debate and draft resolutions at a multi-day conference on the UAlberta campus.",
-    "lastVerified": "2026-04"
-  },
-  {
     "id": 58,
     "name": "CMHF Discovery Days in Health Sciences",
     "emoji": "🏥",
@@ -947,7 +879,7 @@
     "location": "University of Alberta (Edmonton) and University of Calgary",
     "eligibility": "High school students; apply through CMHF or school",
     "deadline": "TBA",
-    "url": "https://cdnmedhall.ca/education/discovery-days",
+    "url": "https://cdnmedhall.ca/education/",
     "description": "Full-day immersive experience in university health science labs and clinical settings. Students attend workshops and interact directly with health researchers at UAlberta or UCalgary, exploring careers in medicine and the health sciences.",
     "lastVerified": "2026-04"
   },
@@ -998,25 +930,8 @@
     "location": "Edmonton (in-person) + province-wide virtual",
     "eligibility": "Alberta high school students interested in AI and data science",
     "deadline": "Ongoing",
-    "url": "https://www.amii.ca/outreach/",
+    "url": "https://www.amii.ca/",
     "description": "Specialized bootcamps, workshops, and AI literacy programs from the Alberta Machine Intelligence Institute. Students explore machine learning and data science research through hands-on projects. Reach extends province-wide via virtual programming.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 62,
-    "name": "Quantum City High School Initiatives – UCalgary",
-    "emoji": "⚛️",
-    "category": "Computer Science",
-    "provider": "Quantum City / University of Calgary",
-    "grades": "High school",
-    "duration": "Varies (workshops and events)",
-    "paid": false,
-    "stipend": null,
-    "location": "Calgary (in-person + virtual)",
-    "eligibility": "High school students interested in quantum computing",
-    "deadline": "TBA",
-    "url": "https://quantumcity.ca/",
-    "description": "Introductory quantum computing initiative through UCalgary's Quantum City. Students engage with foundational quantum mechanics, algorithms, and tech-driven problem-solving through workshops and university-hosted events.",
     "lastVerified": "2026-04"
   },
   {
@@ -1049,42 +964,8 @@
     "location": "Medicine Hat and Southeastern Alberta (in-person)",
     "eligibility": "Grade 11–12 students in Southeastern Alberta; school counsellor referral typically required",
     "deadline": "TBA",
-    "url": "https://www.mhc.ab.ca/FutureStudents/DualCredit",
+    "url": "https://www.mhc.ab.ca/",
     "description": "Dual credit program allowing Grade 11/12 students in Southeastern Alberta to enroll in college-level courses while still in high school. Provides early access to college labs, technical equipment, and applied research in fields ranging from kinesiology to IT.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 65,
-    "name": "Alberta High School Mathematics Competition (AHSMC)",
-    "emoji": "📐",
-    "category": "Mathematics",
-    "provider": "University of Alberta / SNAP (Special and Numerically Adept Persons)",
-    "grades": "High school",
-    "duration": "Two-part competition (fall + winter)",
-    "paid": false,
-    "stipend": null,
-    "location": "Alberta-wide (school-based)",
-    "eligibility": "Alberta high school students; administered through participating schools",
-    "deadline": "TBA",
-    "url": "https://snap.math.ualberta.ca/",
-    "description": "Rigorous two-part provincial competition that goes far beyond standard curriculum. Part II requires extensive independent study and mathematical proof-based problem solving. Top scorers are recognized provincially and may advance to national olympiad streams.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 66,
-    "name": "Junior Achievement (JA) Alberta Company Program",
-    "emoji": "💼",
-    "category": "Social Sciences",
-    "provider": "Junior Achievement Alberta",
-    "grades": "Grades 10–12",
-    "duration": "18 weeks (during school year)",
-    "paid": false,
-    "stipend": null,
-    "location": "Alberta-wide (school-based)",
-    "eligibility": "High school students grades 10–12; delivered through participating schools",
-    "deadline": "Ongoing",
-    "url": "https://jaalberta.ca/programs/company-program/",
-    "description": "Immersive 18-week entrepreneurship program where high school teams act as founders — conducting market research, prototyping a product, managing financials, and pitching a real micro-enterprise to investors and community mentors.",
     "lastVerified": "2026-04"
   },
   {
@@ -1151,7 +1032,7 @@
     "location": "School-based (must be in a participating school district)",
     "eligibility": "High school students at participating schools; teams of 3–6",
     "deadline": "TBA",
-    "url": "https://ssep.ncesse.org/",
+    "url": "http://ssep.ncesse.org/",
     "description": "Participating school districts allow high school teams to design real microgravity experiments. Winning proposals are flown to the International Space Station and conducted by astronauts. Requires a school district to opt into the program.",
     "lastVerified": "2026-04"
   },
@@ -1168,7 +1049,7 @@
     "location": "Province-wide (school-based); national training camp for finalists",
     "eligibility": "Canadian high school students; grades 11–12 recommended",
     "deadline": "TBA",
-    "url": "https://www.cheminst.ca/national-chemistry-olympiad/",
+    "url": "https://cheminst.ca/national-chemistry-olympiad/",
     "description": "Highest level of chemistry competition for Canadian youth. Preparation requires deep independent study in organic, inorganic, and physical chemistry far beyond the high school curriculum. Top students represent Canada at the International Chemistry Olympiad (IChO).",
     "lastVerified": "2026-04"
   },
@@ -1185,7 +1066,7 @@
     "location": "School-based across Alberta (national exam)",
     "eligibility": "High school students at participating Alberta schools",
     "deadline": "TBA",
-    "url": "https://cemc.uwaterloo.ca/contests/sir-isaac-newton.html",
+    "url": "https://cemc.uwaterloo.ca/contests/sir-isaac-newton/",
     "description": "Complex physics exam hosted by the University of Waterloo. The open-ended, challenging problems encourage months of independent study into advanced mechanics and theoretical physics. Top Alberta scorers are recognized nationally.",
     "lastVerified": "2026-04"
   },
@@ -1208,10 +1089,10 @@
   },
   {
     "id": 74,
-    "name": "genAG – Agriculture in the Classroom Alberta",
+    "name": "Agriculture in the Classroom Canada (AITC)",
     "emoji": "🌱",
     "category": "Environmental Science",
-    "provider": "Agriculture in the Classroom Foundation (Alberta)",
+    "provider": "Agriculture in the Classroom Canada (AITC)",
     "grades": "High school",
     "duration": "Varies (project-based, school year)",
     "paid": false,
@@ -1219,7 +1100,7 @@
     "location": "Alberta-wide (school-based)",
     "eligibility": "Alberta high school students interested in agriculture and food systems",
     "deadline": "TBA",
-    "url": "https://www.aitc.ca/",
+    "url": "https://www.aitc-canada.ca/",
     "description": "Challenges high school students to research global food security, agricultural technology, and sustainability. Students work with industry mentors to pitch innovative ideas that solve real-world agricultural problems.",
     "lastVerified": "2026-04"
   },
@@ -1238,40 +1119,6 @@
     "deadline": "TBA",
     "url": "https://www.historicacanada.ca/programs",
     "description": "Students conduct rigorous primary and secondary source research into a specific aspect of Canadian history, culture, or sociology, then produce a short documentary or comprehensive project judged at regional heritage fairs. Top projects advance nationally.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 76,
-    "name": "League of Innovators (LOI) Foundations",
-    "emoji": "💡",
-    "category": "Social Sciences",
-    "provider": "League of Innovators",
-    "grades": "Grades 9–12",
-    "duration": "Several months (virtual cohort)",
-    "paid": false,
-    "stipend": null,
-    "location": "Virtual (national, open to Alberta students)",
-    "eligibility": "High school students grades 9–12 with an idea for a startup, non-profit, or tech platform",
-    "deadline": "TBA",
-    "url": "https://www.leagueofinnovators.org/",
-    "description": "National virtual youth incubator guiding high school students through market research, user testing, and validation phases to launch a startup, non-profit, or tech initiative. Mentored by entrepreneurs and investors.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 77,
-    "name": "Ignite Fair – Calgary/Edmonton",
-    "emoji": "✨",
-    "category": "STEM Research",
-    "provider": "Ignite Fair (student-run initiative)",
-    "grades": "High school",
-    "duration": "1 day (annual exhibition)",
-    "paid": false,
-    "stipend": null,
-    "location": "Calgary and Edmonton (in-person)",
-    "eligibility": "High school students who have completed an independent passion project or research in any field",
-    "deadline": "TBA",
-    "url": "https://www.ignitefair.ca/",
-    "description": "Student-run exhibition platform providing a venue for high school students to present independent research or passion projects to academics, peers, and industry professionals. Covers STEM, arts, social sciences, and entrepreneurship.",
     "lastVerified": "2026-04"
   },
   {
@@ -1394,40 +1241,6 @@
     "lastVerified": "2026-04"
   },
   {
-    "id": 85,
-    "name": "Youth Innovation Showcase",
-    "emoji": "🏅",
-    "category": "STEM Research",
-    "provider": "Youth Innovation Showcase Canada",
-    "grades": "High school",
-    "duration": "Self-paced (video submission competition)",
-    "paid": false,
-    "stipend": null,
-    "location": "Virtual (open to Alberta students)",
-    "eligibility": "Canadian youth with an innovative tech prototype, app, or applied research project",
-    "deadline": "TBA",
-    "url": "https://www.youthinnovationshowcase.ca/",
-    "description": "Virtual STEM competition where students pitch an innovative tech prototype, app, or applied research project via video submission to industry leaders for evaluation, funding, and mentorship. Goes beyond traditional science fair formats.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 86,
-    "name": "Atlas Fellowship",
-    "emoji": "🌐",
-    "category": "STEM Research",
-    "provider": "Atlas Fellowship",
-    "grades": "Grades 10–12",
-    "duration": "Intensive virtual program + summer retreat",
-    "paid": false,
-    "stipend": "Fellowship funding provided (covers retreat and project costs)",
-    "location": "Virtual (open to Alberta students) + in-person retreat",
-    "eligibility": "High school students grades 10–12 worldwide; highly competitive application",
-    "deadline": "TBA",
-    "url": "https://www.atlasfellowship.org/",
-    "description": "Prestigious global program providing high schoolers with funding and intensive virtual mentorship to conduct research into complex systemic topics: AI safety, rationality, and global catastrophic risk mitigation. Fellowship covers costs for accepted students.",
-    "lastVerified": "2026-04"
-  },
-  {
     "id": 87,
     "name": "TELUS Spark Youth Council – Calgary",
     "emoji": "⚡",
@@ -1442,23 +1255,6 @@
     "deadline": "TBA",
     "url": "https://www.sparkscience.ca/",
     "description": "High-level volunteer and research program where high school students work with STEM educators and museum curators to co-design, research, and test new tech-focused programming and exhibits for the public at TELUS Spark Science Centre.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 88,
-    "name": "CAREERS: The Next Generation – ICT Internships",
-    "emoji": "💼",
-    "category": "Computer Science",
-    "provider": "CAREERS: The Next Generation",
-    "grades": "Grades 10–12",
-    "duration": "Varies (paid, credit-earning internship blocks)",
-    "paid": true,
-    "stipend": "Paid internship (credit-earning)",
-    "location": "Alberta-wide (placements across the province)",
-    "eligibility": "Alberta high school students grades 10–12 interested in ICT",
-    "deadline": "Ongoing",
-    "url": "https://careers-next-gen.com/",
-    "description": "Provincial initiative placing high school students into paid, credit-earning internships in coding, networking, and digital roles across Alberta's tech sector. One of the largest work-integrated learning programs in the province.",
     "lastVerified": "2026-04"
   },
   {
@@ -1581,23 +1377,6 @@
     "lastVerified": "2026-04"
   },
   {
-    "id": 96,
-    "name": "APEX Youth Innovation Pitch Competitions",
-    "emoji": "🏆",
-    "category": "Social Sciences",
-    "provider": "APEX / Southeast Alberta School Divisions",
-    "grades": "High school",
-    "duration": "Several months (project development + pitch event)",
-    "paid": false,
-    "stipend": null,
-    "location": "Southeast Alberta (Medicine Hat and area)",
-    "eligibility": "High school students in Southeast Alberta school divisions",
-    "deadline": "TBA",
-    "url": "https://www.hat.ca/",
-    "description": "Pitch competitions run in partnership with local Southeast Alberta school divisions, fostering tech development, business entrepreneurship, and product research. Students develop and present innovative ideas to community judges.",
-    "lastVerified": "2026-04"
-  },
-  {
     "id": 97,
     "name": "Medicine Hat College Summer STEM & Tech Camps",
     "emoji": "🧪",
@@ -1629,23 +1408,6 @@
     "deadline": "TBA",
     "url": "https://youthscience.ca/science-fairs/find-a-fair/",
     "description": "The official regional science fair qualifier hosted at Medicine Hat College for Southeast Alberta. Top projects advance to the Canada-Wide Science Fair (CWSF). Distinct from the CWSF national event already in the directory.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 99,
-    "name": "CAREERS: RAP & Work Experience – Southeast Alberta",
-    "emoji": "🔧",
-    "category": "STEM Enrichment",
-    "provider": "CAREERS: The Next Generation / Regional School Boards",
-    "grades": "Grades 10–12",
-    "duration": "Varies (credit-earning placements)",
-    "paid": true,
-    "stipend": "Paid work experience (credit-earning)",
-    "location": "Southeast Alberta (trades, agriculture, and IT placements)",
-    "eligibility": "High school students in Southeast Alberta grades 10–12",
-    "deadline": "Ongoing",
-    "url": "https://careers-next-gen.com/rap/",
-    "description": "Registered Apprenticeship Program and work experience placements managed through regional Southeast Alberta school boards. Students earn high school credits and hands-on paid experience in trades, agriculture, and IT.",
     "lastVerified": "2026-04"
   },
   {
@@ -1695,25 +1457,8 @@
     "location": "Alberta-wide including South Zone hospitals and clinics",
     "eligibility": "High school students 15+; application through local AHS facility",
     "deadline": "Ongoing",
-    "url": "https://www.albertahealthservices.ca/volunteers/volunteers.aspx",
+    "url": "https://www.albertahealthservices.ca/volunteers.asp",
     "description": "Volunteer placements in AHS regional hospitals and clinics offering direct exposure to clinical environments, health administration, and medical technology. South Zone placements available for students in Lethbridge, Medicine Hat, and surrounding communities.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 103,
-    "name": "HYRS – Digital Health Research Track",
-    "emoji": "💊",
-    "category": "Health Research",
-    "provider": "Alberta Innovates + University of Alberta",
-    "grades": "Grade 11",
-    "duration": "6 weeks (summer, July–August)",
-    "paid": true,
-    "stipend": "Paid research placement",
-    "location": "Edmonton (in-person)",
-    "eligibility": "Grade 11, north of Red Deer, 85%+ average; placed based on interest during HYRS application",
-    "deadline": "2026-03-13",
-    "url": "https://www.ualberta.ca/en/current-students/undergraduate-research-initiative/opportunities-for-high-school-students/high-school-youth-researcher-summer-program/index.html",
-    "description": "Specialized placements within the UAlberta HYRS program focusing on data-driven health research, bioinformatics, and medical software development. Students are matched to digital health labs based on interests indicated in the main HYRS application.",
     "lastVerified": "2026-04"
   },
   {
@@ -1731,23 +1476,6 @@
     "deadline": "TBA",
     "url": "https://cms.math.ca/competitions/comc/",
     "description": "Canada's premier high school math competition. Top Alberta scorers receive university networking opportunities and invitations to the Canadian Mathematical Olympiad (CMO) and exclusive summer math research camps.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 105,
-    "name": "Caribou Mathematics Competition",
-    "emoji": "🦌",
-    "category": "Mathematics",
-    "provider": "Caribou Mathematics",
-    "grades": "Grades 3–12",
-    "duration": "6 contests per year (online, monthly)",
-    "paid": false,
-    "stipend": null,
-    "location": "Virtual (school-based, open to Alberta students)",
-    "eligibility": "Alberta students at participating schools; grades 3–12",
-    "deadline": "Ongoing",
-    "url": "https://cariboutests.com/",
-    "description": "Interactive online math contests blending traditional logic with computer science and complex algorithmic problem-solving. Six rounds per year allow students to track progress and improve throughout the school year.",
     "lastVerified": "2026-04"
   },
   {
@@ -1780,7 +1508,7 @@
     "location": "Vancouver, BC (in-person); open to Alberta applicants",
     "eligibility": "Grade 11–12 students across Canada; highly competitive; strong physics and math background",
     "deadline": "TBA",
-    "url": "https://www.triumf.ca/outreach/high-school-programs",
+    "url": "https://triumf.ca/education/k-12/",
     "description": "Highly prestigious 6-week summer research experience at Canada's particle accelerator centre. Students work alongside physicists on cutting-edge nuclear and particle physics research. Located in BC but accepts highly competitive Alberta applications.",
     "lastVerified": "2026-04"
   },
@@ -1814,7 +1542,7 @@
     "location": "Virtual (open to Alberta students)",
     "eligibility": "High school students interested in data science and environmental research",
     "deadline": "TBA",
-    "url": "https://www.oceannetworks.ca/learning/for-students/",
+    "url": "https://www.oceannetworks.ca/learning/",
     "description": "Open to Albertans interested in data science and the environment. Students analyze massive open-source data sets relating to marine biology, ocean chemistry, and climate from ONC's global sensor network. Virtual participation accessible from anywhere in Canada.",
     "lastVerified": "2026-04"
   },
@@ -1867,23 +1595,6 @@
     "deadline": "TBA",
     "url": "https://www.auarts.ca/",
     "description": "Calgary-based intensive design and digital media bootcamps for high schoolers building portfolios in UI/UX design, graphic design, and digital arts. Taught by AUArts faculty in professional studio environments.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 113,
-    "name": "Alberta Youth Parliament (AYP)",
-    "emoji": "🏛️",
-    "category": "Social Sciences",
-    "provider": "Alberta Youth Parliament",
-    "grades": "High school",
-    "duration": "Week-long annual session + monthly committee meetings",
-    "paid": false,
-    "stipend": null,
-    "location": "Edmonton (Alberta Legislature) + virtual committee work",
-    "eligibility": "Alberta high school students; competitive application",
-    "deadline": "TBA",
-    "url": "https://www.albertayouthparliament.com/",
-    "description": "Immersive model parliament where high schoolers debate provincial policy, research legislation, and draft mock bills inside the actual Alberta Legislature building. Year-round committee work builds research and public speaking skills.",
     "lastVerified": "2026-04"
   },
   {

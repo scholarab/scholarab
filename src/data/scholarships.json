@@ -81,7 +81,7 @@
     "amount": "$500",
     "deadline": "2026-04-15",
     "audience": "MHPSD students needing financial assistance",
-    "url": "https://mhpsd.simplication.com/WLSBLogin.aspx",
+    "url": "https://mhpsd.ca/",
     "category": "Academic",
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
@@ -322,10 +322,10 @@
   },
   {
     "id": 35,
-    "title": "Belcourt Brosseau M\u00e9tis Awards",
+    "title": "Belcourt Brosseau Métis Awards",
     "amount": "$10,000",
     "deadline": "2026-03-31",
-    "audience": "M\u00e9tis students in Alberta pursuing post-secondary education",
+    "audience": "Métis students in Alberta pursuing post-secondary education",
     "url": "https://ecf.ca/student-awards/belcourt-brosseau-metis-awards/",
     "category": "Indigenous",
     "lastVerified": "2026-03",
@@ -527,18 +527,19 @@
   {
     "id": 54,
     "title": "WorldSkills Provincial Champion Scholarship",
-    "amount": "$5,000",
+    "amount": "$1,200",
     "deadline": "2026-06-30",
     "audience": "Top 2 Grade 12 podium finishers at the Provincial Skills Canada Competition",
     "url": "https://studentaid.alberta.ca/scholarships/worldskills-legacy-scholarships-and-awards/",
     "category": "Trades",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": true
+    "active": true,
+    "notes": "Awarded to Alberta students who win a WorldSkills provincial championship. Apply through your school or Alberta Student Aid. Amount is $1,200."
   },
   {
     "id": 55,
-    "title": "First Nations, M\u00e9tis and Inuit Bursary",
+    "title": "First Nations, Métis and Inuit Bursary",
     "amount": "$11,500",
     "deadline": "2026-07-31",
     "audience": "Indigenous students pursuing post-secondary education, return-of-service in northern Alberta",
@@ -565,7 +566,7 @@
     "title": "Loran Scholarship",
     "amount": "$100,000",
     "deadline": "2026-10-15",
-    "audience": "Canadian high school students \u2014 each school may nominate up to 3 students",
+    "audience": "Canadian high school students — each school may nominate up to 3 students",
     "url": "https://loranscholar.ca/becoming-a-scholar/",
     "category": "Academic",
     "lastVerified": "2026-03",
@@ -578,7 +579,7 @@
     "title": "Schulich Leader Scholarships",
     "amount": "$100,000",
     "deadline": "2026-01-27",
-    "audience": "Canadian high school students entering STEM at one of 20 selected universities \u2014 school nominates 1 student",
+    "audience": "Canadian high school students entering STEM at one of 20 selected universities — school nominates 1 student",
     "url": "https://www.schulichleaders.com/apply",
     "category": "STEM",
     "lastVerified": "2026-03",
@@ -613,24 +614,11 @@
     "active": false
   },
   {
-    "id": 61,
-    "title": "NSERC STEAM Horizon Award",
-    "amount": "$25,000",
-    "deadline": "2026-01-15",
-    "audience": "Canadian students aged 16\u201318 with 85%+ average entering STEAM at post-secondary",
-    "url": "https://steamhorizonawards.ca/",
-    "category": "STEM",
-    "lastVerified": "2026-03",
-    "status": "Closed",
-    "region": "National",
-    "active": false
-  },
-  {
     "id": 62,
     "title": "Advancing Futures Bursary",
     "amount": "$40,000",
     "deadline": "2026-06-01",
-    "audience": "Alberta youth aged 18\u201324 who have been in government care (foster care) at any point",
+    "audience": "Alberta youth aged 18–24 who have been in government care (foster care) at any point",
     "url": "https://www.alberta.ca/advancing-futures",
     "category": "Community",
     "lastVerified": "2026-03",
@@ -641,7 +629,7 @@
   {
     "id": 63,
     "title": "UCalgary Pathways to Medicine Scholarship",
-    "amount": "$27,000",
+    "amount": "up to $20,000",
     "deadline": "2026-03-01",
     "audience": "High school students applying to University of Calgary undergraduate programs",
     "url": "https://cumming.ucalgary.ca/pathways",
@@ -649,11 +637,12 @@
     "lastVerified": "2026-03",
     "status": "Closed",
     "region": "Alberta",
-    "active": false
+    "active": false,
+    "notes": "For low-income, rural, and Indigenous applicants to UCalgary undergraduate programs. Award is $5,000/year renewable for up to 4 years (up to $20,000 total). Apply through UCalgary Awards Hub."
   },
   {
     "id": 64,
-    "title": "Keyera Energy \u2014 Peter J. Renton Memorial Scholarship",
+    "title": "Keyera Energy — Peter J. Renton Memorial Scholarship",
     "amount": "$6,000",
     "deadline": "2026-05-01",
     "audience": "Alberta residents entering first year of an oil & gas related degree or diploma at an AB institution",
@@ -695,7 +684,7 @@
     "title": "Premier's Citizenship Award",
     "amount": "$7,005",
     "deadline": "2026-06-01",
-    "audience": "Alberta high school students \u2014 each school nominates ONE student per year",
+    "audience": "Alberta high school students — each school nominates ONE student per year",
     "url": "https://www.alberta.ca/premiers-citizenship-award",
     "category": "Community",
     "lastVerified": "2026-03",
@@ -717,25 +706,11 @@
     "active": false
   },
   {
-    "id": 69,
-    "title": "Stacey Levitt Memorial Award",
-    "amount": "$2,500",
-    "deadline": "2026-03-01",
-    "audience": "Canadian high school students grades 10\u201312 pursuing education, sports, or travel",
-    "url": "https://parachute.ca/",
-    "category": "Community",
-    "lastVerified": "2026-03",
-    "notes": "Program permanently ended in 2022. Final award given to Mairi Brydon.",
-    "status": "Closed",
-    "region": "National",
-    "active": false
-  },
-  {
     "id": 70,
     "title": "ASAA Alberta Milk Scholarship",
     "amount": "$1,000",
     "deadline": "2026-06-30",
-    "audience": "Grade 12 ASAA member school students \u2014 school nominates 1 male + 1 female student",
+    "audience": "Grade 12 ASAA member school students — school nominates 1 male + 1 female student",
     "url": "https://schoolsportalberta.ca/association/recognition/awards",
     "category": "Academic",
     "lastVerified": "2026-03",
@@ -813,7 +788,7 @@
     "title": "Dr. Ernest and Minnie Mehl Scholarship",
     "amount": "$3,500",
     "deadline": "2026-12-31",
-    "audience": "Alberta students \u2014 automatically considered when applying for the Alexander Rutherford Scholarship",
+    "audience": "Alberta students — automatically considered when applying for the Alexander Rutherford Scholarship",
     "url": "https://studentaid.alberta.ca/scholarships/",
     "category": "Academic",
     "lastVerified": "2026-03",
@@ -934,12 +909,13 @@
     "title": "Mah Society of Edmonton Centennial Scholarship",
     "amount": "$1,000",
     "deadline": "2026-04-17",
-    "audience": "Edmonton high school students of Chinese heritage",
+    "audience": "Students with the surname \"Mah\" entering post-secondary in Canada",
     "url": "https://edmontonmahsociety.com/scholarships/",
     "category": "Community",
     "region": "Edmonton",
     "lastVerified": "2026-03",
-    "active": true
+    "active": true,
+    "notes": "Open to students with the surname \"Mah\" of any background. Offered by the Mah Society of Edmonton. Contact the Society directly for application details."
   },
   {
     "id": 87,
@@ -982,7 +958,7 @@
     "title": "University of Lethbridge Board of Governors Award",
     "amount": "$1,000",
     "deadline": "2026-12-15",
-    "audience": "Grade 12 students applying to University of Lethbridge \u2014 automatic consideration with admission application",
+    "audience": "Grade 12 students applying to University of Lethbridge — automatic consideration with admission application",
     "url": "https://www.ulethbridge.ca/future-student/high-school-student-awards",
     "category": "Academic",
     "region": "Lethbridge",
@@ -995,7 +971,7 @@
     "title": "University of Lethbridge Grade 11 Merit Award",
     "amount": "$800",
     "deadline": "2026-06-30",
-    "audience": "Grade 11 students planning to attend ULethbridge \u2014 75% average and above",
+    "audience": "Grade 11 students planning to attend ULethbridge — 75% average and above",
     "url": "https://www.ulethbridge.ca/future-student/high-school-student-awards",
     "category": "Academic",
     "region": "Lethbridge",
@@ -1073,7 +1049,7 @@
     "category": "Trades",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "notes": "No application required \u2014 consent to be considered in MyTradesecrets. Recipients notified by November 1.",
+    "notes": "No application required — consent to be considered in MyTradesecrets. Recipients notified by November 1.",
     "active": true
   },
   {
@@ -1086,7 +1062,7 @@
     "category": "Trades",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "notes": "No application required \u2014 consent to be considered in MyTradesecrets. Higher award for students completing both RAP and CTS pathway.",
+    "notes": "No application required — consent to be considered in MyTradesecrets. Higher award for students completing both RAP and CTS pathway.",
     "active": true
   },
   {
@@ -1171,7 +1147,7 @@
     "title": "Alberta Blue Cross Indigenous Scholarship",
     "amount": "$1,500",
     "deadline": "2027-01-31",
-    "audience": "Indigenous (First Nations, M\u00e9tis, or Inuit) Alberta residents enrolled full-time in a post-secondary program of at least 2 years",
+    "audience": "Indigenous (First Nations, Métis, or Inuit) Alberta residents enrolled full-time in a post-secondary program of at least 2 years",
     "url": "https://www.community.ab.bluecross.ca/programs/indigenous-scholarships.php",
     "category": "Indigenous",
     "lastVerified": "2026-03",
@@ -1185,7 +1161,7 @@
     "title": "Indspire Building Brighter Futures Bursaries and Scholarships",
     "amount": "$3,000",
     "deadline": "2026-03-01",
-    "audience": "First Nations, Inuit, and M\u00e9tis students across Canada pursuing post-secondary education including trades and apprenticeships",
+    "audience": "First Nations, Inuit, and Métis students across Canada pursuing post-secondary education including trades and apprenticeships",
     "url": "https://indspire.ca/for-students/bursaries-scholarships/",
     "category": "Indigenous",
     "lastVerified": "2026-03",
@@ -1259,19 +1235,6 @@
     "openDate": "2026-08-01"
   },
   {
-    "id": 115,
-    "title": "Jo-Anne Koch for Bright Children Society Scholarship",
-    "amount": "$1,500",
-    "deadline": "2026-10-31",
-    "audience": "Alberta students enrolled full-time in second or subsequent year of a Bachelor of Science in Chemical Engineering, Nursing or Social Work at an Alberta post-secondary institution",
-    "url": "https://studentaid.alberta.ca/scholarships/",
-    "category": "STEM",
-    "lastVerified": "2026-03",
-    "region": "Alberta",
-    "active": false,
-    "openDate": "2026-08-01"
-  },
-  {
     "id": 116,
     "title": "UCalgary President's Admission Scholarship",
     "amount": "$5,000",
@@ -1280,7 +1243,7 @@
     "category": "Academic",
     "lastVerified": "2026-04",
     "region": "Alberta",
-    "notes": "No separate application required \u2014 awarded automatically upon admission with a 95%+ average. Any faculty, any citizenship.",
+    "notes": "No separate application required — awarded automatically upon admission with a 95%+ average. Any faculty, any citizenship.",
     "active": true
   },
   {
@@ -1293,7 +1256,7 @@
     "category": "Academic",
     "lastVerified": "2026-04",
     "region": "Alberta",
-    "notes": "No separate application \u2014 automatically considered upon admission. Amount scales with average: up to $14,000 (95\u2013100%), $9,999 (90\u201395%), $5,999 (85\u201390%), $2,999 (80\u201385%). Renewable with GPA maintained.",
+    "notes": "No separate application — automatically considered upon admission. Amount scales with average: up to $14,000 (95–100%), $9,999 (90–95%), $5,999 (85–90%), $2,999 (80–85%). Renewable with GPA maintained.",
     "active": false,
     "openDate": "2026-11-01"
   },
@@ -1307,7 +1270,7 @@
     "category": "Academic",
     "lastVerified": "2026-04",
     "region": "Alberta",
-    "notes": "Over $5.5 million awarded annually across all faculties. One application covers all MRU awards. Application window: November 1 \u2013 March 1.",
+    "notes": "Over $5.5 million awarded annually across all faculties. One application covers all MRU awards. Application window: November 1 – March 1.",
     "active": false,
     "openDate": "2026-11-01"
   },
@@ -1316,12 +1279,12 @@
     "title": "ATCO Indigenous Education High School Merit Award",
     "amount": "$750",
     "deadline": "2026-09-30",
-    "audience": "Self-identified First Nations, Inuit, or M\u00e9tis students enrolled full-time in Grades 10\u201312 in Canada",
+    "audience": "Self-identified First Nations, Inuit, or Métis students enrolled full-time in Grades 10–12 in Canada",
     "url": "https://atcoeducationawards.smapply.ca/",
     "category": "Indigenous",
     "lastVerified": "2026-04",
     "region": "National",
-    "notes": "One of the few merit awards specifically for current high school students (Grades 10\u201312). Must reapply annually. Not open to children of ATCO employees.",
+    "notes": "One of the few merit awards specifically for current high school students (Grades 10–12). Must reapply annually. Not open to children of ATCO employees.",
     "active": true
   },
   {
@@ -1342,12 +1305,12 @@
     "title": "RBC Ignite Scholarship",
     "amount": "$1,500",
     "deadline": "2026-09-17",
-    "audience": "Canadians ages 16\u201320 taking a job-ready skills course or certification in Canada",
+    "audience": "Canadians ages 16–20 taking a job-ready skills course or certification in Canada",
     "url": "https://www.rbc.com/dms/enterprise/scholarships.html",
     "category": "Community",
     "lastVerified": "2026-04",
     "region": "National",
-    "notes": "Covers certifications and skills courses \u2014 lifeguarding, first aid, coding, language, graphic design, coach certification, and more. Open to current high school students. Closes when 500 applications are reached.",
+    "notes": "Covers certifications and skills courses — lifeguarding, first aid, coding, language, graphic design, coach certification, and more. Open to current high school students. Closes when 500 applications are reached.",
     "active": true
   },
   {
@@ -1368,7 +1331,7 @@
     "title": "Cenovus Energy Indigenous Scholarship",
     "amount": "$5,000",
     "deadline": "2026-08-01",
-    "audience": "Indigenous students (First Nations, M\u00e9tis, Inuit) residing near Cenovus operating areas in Canada pursuing post-secondary education",
+    "audience": "Indigenous students (First Nations, Métis, Inuit) residing near Cenovus operating areas in Canada pursuing post-secondary education",
     "url": "https://www.cenovus.com/Careers/Students-and-new-grads/Indigenous-Scholarship",
     "category": "Indigenous",
     "lastVerified": "2026-04",
@@ -1398,7 +1361,7 @@
     "category": "Trades",
     "lastVerified": "2026-04",
     "region": "Alberta",
-    "notes": "No application required \u2014 automatically awarded to the highest-scoring Alberta secondary student at Skills Canada Nationals. Worth $5,000/year for up to 4 years ($20,000 total). Separate from the WorldSkills Provincial Champion Scholarship.",
+    "notes": "No application required — automatically awarded to the highest-scoring Alberta secondary student at Skills Canada Nationals. Worth $5,000/year for up to 4 years ($20,000 total). Separate from the WorldSkills Provincial Champion Scholarship.",
     "active": true
   },
   {
@@ -1411,14 +1374,14 @@
     "category": "General",
     "lastVerified": "2026-04",
     "region": "National",
-    "notes": "Annual giveaway \u2014 no essay or grades required. Prize bundle includes rent for a year, $2,000 in groceries, a trip for two to the Galapagos, and a $20,000 cheque. Enter for free in ~2 minutes. Earlier entries earn more entries in the draw.",
+    "notes": "Annual giveaway — no essay or grades required. Prize bundle includes rent for a year, $2,000 in groceries, a trip for two to the Galapagos, and a $20,000 cheque. Enter for free in ~2 minutes. Earlier entries earn more entries in the draw.",
     "active": true
   },
   {
     "id": 127,
     "title": "Wolf Scholars Program",
     "amount": "$80,000",
-    "audience": "Canadian citizens or permanent residents entering U of T Faculty of Arts & Science (St. George) with 90\u2013100% average",
+    "audience": "Canadian citizens or permanent residents entering U of T Faculty of Arts & Science (St. George) with 90–100% average",
     "url": "https://www.wolfscholars.com/apply",
     "category": "Academic",
     "lastVerified": "2026-04",
@@ -1432,7 +1395,7 @@
     "title": "Electronic Recycling Association Scholarship",
     "amount": "$10,000",
     "audience": "Full-time or part-time students in Canada",
-    "url": "https://www.era.ca/electronic-recycling-association-era-2026-scholarship-competition/",
+    "url": "https://www.era.ca/",
     "category": "Community",
     "lastVerified": "2026-04",
     "region": "National",
@@ -1584,20 +1547,6 @@
     "url": "https://aaaf.ab.ca/"
   },
   {
-    "id": 139,
-    "title": "Alberta Federation of Shooting Sports Scholarship",
-    "amount": "$1,000",
-    "deadline": "2026-06-30",
-    "audience": "Alberta students with strong academics and active involvement in shooting sports",
-    "category": "Sports",
-    "region": "Alberta",
-    "active": true,
-    "lastVerified": "2026-04",
-    "applyViaGuidance": false,
-    "notes": "2 scholarships of $1,000 awarded annually. Selection based on academic achievement and demonstrated commitment through active participation in shooting sport competitions.",
-    "url": "https://www.afss.com/"
-  },
-  {
     "id": 140,
     "title": "AHSRA Scholarships",
     "amount": "Varies",
@@ -1670,20 +1619,6 @@
     "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/index.html"
   },
   {
-    "id": 145,
-    "title": "Leonard Foundation Financial Assistance Program",
-    "amount": "Varies",
-    "deadline": "2027-03-31",
-    "audience": "Canadian students with demonstrated financial need entering post-secondary",
-    "category": "Academic",
-    "region": "National",
-    "active": false,
-    "lastVerified": "2026-04",
-    "applyViaGuidance": false,
-    "notes": "One of Canada's longest-running private scholarship programs, established in 1962. Open to all students with financial need. Annual application cycle.",
-    "url": "https://www.leonardfoundation.org/"
-  },
-  {
     "id": 146,
     "title": "Beyond the North Scholarship",
     "amount": "Varies",
@@ -1709,7 +1644,7 @@
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
     "notes": "Must demonstrate financial need and knowledge of sign language. School and community leadership considered. Apply through the Edmonton Community Foundation.",
-    "url": "https://ecf.getopenfield.com/charmaine-letourneau/"
+    "url": "https://www.ecf.ca/"
   },
   {
     "id": 149,
@@ -1865,7 +1800,7 @@
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
     "notes": "Not restricted to Mensa members. Selection is entirely essay-based. No GPA requirement. Essay topic changes annually. Apply at canada.mensa.org. Multiple awards ranging from $1,000 to $2,500.",
-    "url": "https://canada.mensa.org/activities-and-awards/scholarships/"
+    "url": "https://canada.mensa.org/scholarship/"
   },
   {
     "id": 160,
@@ -1883,20 +1818,6 @@
     "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/"
   },
   {
-    "id": 161,
-    "title": "Dr. Martha Kostuch Memorial Scholarship",
-    "amount": "$2,500",
-    "deadline": "2026-08-01",
-    "audience": "Alberta students demonstrating outstanding service and leadership in environmental stewardship",
-    "category": "Environmental",
-    "region": "Alberta",
-    "active": true,
-    "lastVerified": "2026-04",
-    "applyViaGuidance": false,
-    "notes": "Offered by PAMZ (Pollution Awareness through Media in the Zone). Named in honour of Dr. Martha Kostuch, a pioneering Alberta environmental advocate. Based on demonstrated environmental leadership and commitment to future stewardship.",
-    "url": "https://www.pamz.ca/"
-  },
-  {
     "id": 162,
     "title": "Harvey Northcott Memorial Scholarship",
     "amount": "$1,000",
@@ -1909,19 +1830,5 @@
     "applyViaGuidance": false,
     "notes": "Two scholarships of $1,000 each. Funded by the Leduc Black Gold Rodeo & Exhibition Association in memory of Harvey Northcott. Apply at blackgoldrodeo.com. 2026 deadline has passed — note for next cycle.",
     "url": "https://www.blackgoldrodeo.com/scholarship"
-  },
-  {
-    "id": 163,
-    "title": "Central Alberta Co-op Scholarship",
-    "amount": "up to 75% tuition",
-    "deadline": "2026-06-30",
-    "audience": "Students who have worked for Central Alberta Co-op for at least one year and are entering post-secondary",
-    "category": "Community",
-    "region": "Red Deer",
-    "active": true,
-    "lastVerified": "2026-04",
-    "applyViaGuidance": false,
-    "notes": "Reimburses up to 75% of tuition for employees entering any post-secondary program. Must have completed at least one year of employment with Central Alberta Co-op. Contact HR at your Co-op location for the application.",
-    "url": "https://www.centralalbertacoop.ca/"
   }
 ]
