@@ -36,21 +36,43 @@ const emptyForm = (): Partial<Program> => ({
 export default function ProgramManager({ initialData }: Props) {
   const [items, setItems] = useState<Program[]>(initialData)
   const [search, setSearch] = useState('')
+  const [categoryTab, setCategoryTab] = useState<string>('All')
   const [page, setPage] = useState(0)
   const [modal, setModal] = useState<{ type: 'edit' | 'add' | 'delete'; item?: Program } | null>(null)
   const [form, setForm] = useState<Partial<Program>>(emptyForm())
   const [saving, setSaving] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
 
-  const filtered = useMemo(() =>
-    items.filter(p => p.name.toLowerCase().includes(search.toLowerCase())),
-    [items, search]
-  )
+  const filtered = useMemo(() => {
+    let list = items.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+    if (categoryTab !== 'All') {
+      list = categoryTab === 'No category'
+        ? list.filter(p => !p.category)
+        : list.filter(p => p.category === categoryTab)
+    }
+    return list
+  }, [items, search, categoryTab])
+
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
   const paginated = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: items.length, 'No category': 0 }
+    for (const c of CATEGORIES) counts[c] = 0
+    for (const p of items) {
+      if (p.category && counts[p.category] !== undefined) counts[p.category]++
+      else if (!p.category) counts['No category']++
+    }
+    return counts
+  }, [items])
+
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value)
+    setPage(0)
+  }
+
+  function handleCategoryTab(c: string) {
+    setCategoryTab(c)
     setPage(0)
   }
 
@@ -142,6 +164,29 @@ export default function ProgramManager({ initialData }: Props) {
         onChange={handleSearch}
         className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-none focus:border-[#22d3a5]/50 transition"
       />
+
+      {/* Category tabs */}
+      <div className="flex gap-1.5 flex-wrap mb-4">
+        {(['All', ...CATEGORIES, 'No category'] as string[]).map(c => {
+          const count = categoryCounts[c] ?? 0
+          const active = categoryTab === c
+          return (
+            <button
+              key={c}
+              onClick={() => handleCategoryTab(c)}
+              className="px-3 py-1 rounded-full text-xs font-medium transition"
+              style={{
+                background: active ? 'rgba(34,211,165,0.15)' : 'rgba(255,255,255,0.05)',
+                border: active ? '1px solid rgba(34,211,165,0.35)' : '1px solid rgba(255,255,255,0.08)',
+                color: active ? '#22d3a5' : 'rgba(255,255,255,0.4)',
+              }}
+            >
+              {c}
+              <span className="ml-1.5 opacity-60">{count}</span>
+            </button>
+          )
+        })}
+      </div>
 
       <div className="border border-white/[0.06] rounded-xl overflow-hidden">
         <table className="w-full text-sm">
