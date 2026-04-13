@@ -53,6 +53,23 @@ const FIELDS = [
   { value: 'music', label: 'Music / Performing Arts' },
 ]
 
+const SCHOOL_BOARDS_BY_CITY: Record<string, { value: string; label: string }[]> = {
+  Calgary: [
+    { value: 'CBE', label: 'Calgary Board of Education (CBE)' },
+    { value: 'CCSD', label: 'Calgary Catholic (CCSD)' },
+  ],
+  Edmonton: [
+    { value: 'Edmonton Public Schools', label: 'Edmonton Public Schools' },
+    { value: 'Edmonton Catholic Schools', label: 'Edmonton Catholic Schools' },
+  ],
+  'Medicine Hat': [
+    { value: 'MHPSD', label: 'Medicine Hat Public School District' },
+  ],
+  Lethbridge: [
+    { value: 'Lethbridge School Division', label: 'Lethbridge School Division' },
+  ],
+}
+
 const AVERAGE_BRACKETS = [
   { value: 79, label: 'Below 80%' },
   { value: 85, label: '80 – 89%' },
@@ -73,6 +90,7 @@ type QuizDraft = {
   step: 1 | 2 | 3
   grade: string
   city: string
+  schoolBoard: string | null
   targetInstitution: string
   fields: string[]
   averageBracket: number | null
@@ -140,6 +158,7 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
   const [step, setStep] = useState<1 | 2 | 3 | 'results'>(_d?.step ?? 1)
   const [grade, setGrade] = useState<StudentProfile['grade'] | ''>(_d?.grade ?? '')
   const [city, setCity] = useState(_d?.city ?? '')
+  const [schoolBoard, setSchoolBoard] = useState<string | null>(_d?.schoolBoard ?? null)
   const [targetInstitution, setTargetInstitution] = useState(_d?.targetInstitution ?? '')
   const [fields, setFields] = useState<string[]>(_d?.fields ?? [])
   const [averageBracket, setAverageBracket] = useState<number | null>(_d?.averageBracket ?? null)
@@ -153,7 +172,7 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
 
   function reset() {
     try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
-    setStep(1); setGrade(''); setCity(''); setTargetInstitution('')
+    setStep(1); setGrade(''); setCity(''); setSchoolBoard(null); setTargetInstitution('')
     setFields([]); setAverageBracket(null)
     setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null)
     setInFosterCare(null); setInApprenticeship(null); setCitizenship(null); setHasFinancialNeed(null)
@@ -164,7 +183,7 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
     return {
       grade: grade as StudentProfile['grade'],
       city,
-      schoolBoard: null,
+      schoolBoard,
       specificSchool: null,
       targetInstitution: targetInstitution && targetInstitution !== 'Not sure yet' ? targetInstitution : null,
       fields,
@@ -179,7 +198,7 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
       extracurriculars: [],
       citizenship,
     }
-  }, [grade, city, targetInstitution, fields, averageBracket,
+  }, [grade, city, schoolBoard, targetInstitution, fields, averageBracket,
       identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
       inFosterCare, inApprenticeship, citizenship, hasFinancialNeed])
 
@@ -242,13 +261,13 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
     if (step === 'results') return
     try {
       const draft: QuizDraft = {
-        step, grade, city, targetInstitution, fields, averageBracket,
+        step, grade, city, schoolBoard, targetInstitution, fields, averageBracket,
         identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
         inFosterCare, inApprenticeship, citizenship, hasFinancialNeed,
       }
       localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(draft))
     } catch { /* ignore */ }
-  }, [step, grade, city, targetInstitution, fields, averageBracket,
+  }, [step, grade, city, schoolBoard, targetInstitution, fields, averageBracket,
       identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
       inFosterCare, inApprenticeship, citizenship, hasFinancialNeed])
 
@@ -281,10 +300,21 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
           <p className="text-sm text-secondary mb-2.5 font-medium">Your city</p>
           <div className="flex flex-wrap gap-2">
             {CITY_OPTIONS.map(c => (
-              <Chip key={c} label={c} active={city === c} onClick={() => setCity(c)} />
+              <Chip key={c} label={c} active={city === c} onClick={() => { setCity(c); setSchoolBoard(null) }} />
             ))}
           </div>
         </div>
+
+        {city && SCHOOL_BOARDS_BY_CITY[city] && SCHOOL_BOARDS_BY_CITY[city].length > 0 && (
+          <div className="mb-6">
+            <p className="text-sm text-secondary mb-2.5 font-medium">Your school board <span className="text-tertiary font-normal">(optional)</span></p>
+            <div className="flex flex-wrap gap-2">
+              {SCHOOL_BOARDS_BY_CITY[city].map(({ value, label }) => (
+                <Chip key={value} label={label} active={schoolBoard === value} onClick={() => setSchoolBoard(prev => prev === value ? null : value)} />
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mb-8">
           <p className="text-sm text-secondary mb-2.5 font-medium">Where are you planning to study? <span className="text-tertiary font-normal">(optional)</span></p>

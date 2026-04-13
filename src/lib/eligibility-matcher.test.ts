@@ -327,9 +327,11 @@ describe('matchScholarship', () => {
       expect(matchScholarship(p, sch({ citizenship: 'canadian' })).match).toBe(true)
     })
 
-    it('canadian required passes for permanent_resident', () => {
+    it('canadian required fails for permanent_resident', () => {
       const p = { ...baseProfile, citizenship: 'permanent_resident' as const }
-      expect(matchScholarship(p, sch({ citizenship: 'canadian' })).match).toBe(true)
+      const result = matchScholarship(p, sch({ citizenship: 'canadian' }))
+      expect(result.match).toBe(false)
+      expect(result.reasons[0]).toContain('citizenship')
     })
 
     it('skips when profile.citizenship is null', () => {

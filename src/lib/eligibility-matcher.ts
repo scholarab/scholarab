@@ -116,7 +116,11 @@ export function matchScholarship(
   }
 
   // ── Citizenship ───────────────────────────────────────────────────────────
-  if (eligibility.citizenship !== 'any' && profile.citizenship === 'other') {
+  if (eligibility.citizenship === 'canadian' && profile.citizenship !== null && profile.citizenship !== 'canadian_citizen') {
+    reasons.push('Requires Canadian citizenship')
+    return { match: false, confidence: 0, reasons }
+  }
+  if (eligibility.citizenship === 'permanent_resident' && profile.citizenship === 'other') {
     reasons.push('Requires Canadian citizenship or permanent residency')
     return { match: false, confidence: 0, reasons }
   }
