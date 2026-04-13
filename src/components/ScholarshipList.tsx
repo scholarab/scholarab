@@ -89,8 +89,10 @@ export default function ScholarshipList({ items }: Props) {
       {/* Category chips — desktop only */}
       {categories.length > 0 && (
         <div className="hidden md:block">
-          <div className="flex chips-row mb-4 gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
-            {renderCategoryChips(false)}
+          <div className="chips-row-wrap mb-4">
+            <div className="flex chips-row gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+              {renderCategoryChips(false)}
+            </div>
           </div>
         </div>
       )}
@@ -113,17 +115,19 @@ export default function ScholarshipList({ items }: Props) {
 
       {/* Region pills — desktop only */}
       <div className="hidden md:block">
-        <div className="flex chips-row mb-5 gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
-          {REGION_PILLS.map(({ value, label, dot }) => {
-            const sel = selectedRegion === value;
-            return (
-              <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                className={chipCls(sel)} style={chipStyle(sel)}>
-                {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', marginRight: 4, flexShrink: 0 }} />}
-                {label}
-              </button>
-            );
-          })}
+        <div className="chips-row-wrap mb-5">
+          <div className="flex chips-row gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+            {REGION_PILLS.map(({ value, label, dot }) => {
+              const sel = selectedRegion === value;
+              return (
+                <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
+                  className={chipCls(sel)} style={chipStyle(sel)}>
+                  {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', marginRight: 4, flexShrink: 0 }} />}
+                  {label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 

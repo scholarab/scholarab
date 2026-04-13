@@ -259,11 +259,25 @@ h1, h2 {
 }
 
 /* ── Region chip scroll row ───────────────────────────────── */
+.chips-row-wrap {
+  position: relative;
+}
+.chips-row-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, var(--bg-page));
+}
 .chips-row {
   -ms-overflow-style: none;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
+  padding-right: 48px;
 }
 .chips-row::-webkit-scrollbar { display: none; }
 
