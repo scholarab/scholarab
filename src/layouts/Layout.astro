@@ -1,8 +1,6 @@
 ---
 import Nav from '../components/Nav.astro';
 import BottomNav from '../components/BottomNav.astro';
-import SpeedInsights from '@vercel/speed-insights/astro';
-import Analytics from '@vercel/analytics/astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
@@ -70,8 +68,6 @@ const {
     <link rel="apple-touch-icon" href="/favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#22d3a5" />
-    <link rel="preconnect" href="https://vitals.vercel-insights.com" />
-    <link rel="preconnect" href="https://va.vercel-scripts.com" />
     <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high" />
     <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin />
@@ -103,8 +99,6 @@ const {
       </div>
     </footer>
     <BottomNav />
-    <SpeedInsights />
-    <Analytics />
     <script>
       // Haptic on filter/sort pills and bn-tabs
       document.addEventListener('click', (e) => {

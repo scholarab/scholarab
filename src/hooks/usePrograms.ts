@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { track } from '@vercel/analytics';
 import { getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
 import { getToday } from '../lib/utils.ts';
 import type { Program } from '../lib/data-loader.ts';
@@ -38,7 +37,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
   const handleToggleSave = useCallback((id: number) => {
     const newSaved = toggleSavedProgram(id);
     setSavedIds([...newSaved]);
-    track('save_toggle', { id, saved: newSaved.includes(id) });
+
   }, []);
 
   const handleSetCategory = useCallback((cat: string) => {
@@ -46,14 +45,14 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     setHasFiltered(true);
     setSelectedCategory(next);
     setPage(1);
-    if (next !== 'all') track('filter_category', { category: next, page: 'programs' });
+
   }, [selectedCategory]);
 
   const handleSetSort = useCallback((value: SortValue) => {
     setHasFiltered(true);
     setSortBy(value);
     setPage(1);
-    track('filter_sort', { sort: value, page: 'programs' });
+
   }, []);
 
   const handlePageChange = useCallback((newPage: number) => {

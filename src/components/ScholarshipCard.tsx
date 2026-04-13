@@ -1,5 +1,4 @@
 import { memo, useRef } from 'react';
-import { track } from '@vercel/analytics';
 import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.ts';
 import { getStatus } from '../hooks/useScholarships.ts';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
@@ -87,7 +86,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
         {status === 'active' && (
           <a href={scholarship.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
             aria-label={`Apply to ${scholarship.title} (opens in new tab)`}
-            onClick={() => track('apply_now', { id: scholarship.id, title: scholarship.title })}
+            onClick={() => {}}
             className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
             style={{ background: 'var(--brand)', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             Apply Now

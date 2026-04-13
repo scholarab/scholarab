@@ -5,7 +5,6 @@ import type { ScholarshipWithMeta } from './useScholarships'
 
 // ── Mocks ────────────────────────────────────────────────────────────────────
 
-vi.mock('@vercel/analytics', () => ({ track: vi.fn() }))
 vi.mock('../lib/tracker.ts', () => ({
   getSaved: vi.fn(() => []),
   toggleSaved: vi.fn((id: number) => [id]),

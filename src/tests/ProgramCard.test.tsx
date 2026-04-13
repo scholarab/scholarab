@@ -5,7 +5,6 @@ import type { ProgramWithMeta } from '../hooks/usePrograms'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-vi.mock('@vercel/analytics', () => ({ track: vi.fn() }))
 vi.mock('../hooks/useCardEntrance.ts', () => ({ useCardEntrance: vi.fn() }))
 
 const { mockShowToast, mockShowConfetti } = vi.hoisted(() => ({

@@ -55,9 +55,9 @@ describe('POST /admin/api/deploy', () => {
     expect(await res.json()).toMatchObject({ error: 'Unauthorized' })
   })
 
-  it('returns 500 when VERCEL_DEPLOY_HOOK_URL is not configured', async () => {
+  it('returns 500 when DEPLOY_HOOK_URL is not configured', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
-    delete process.env.VERCEL_DEPLOY_HOOK_URL
+    delete process.env.DEPLOY_HOOK_URL
     const res = await POST({ request: req('https://www.scholarab.ca') } as any)
     expect(res.status).toBe(500)
     expect(await res.json()).toMatchObject({ error: 'Deploy hook not configured' })
@@ -65,7 +65,7 @@ describe('POST /admin/api/deploy', () => {
 
   it('returns 200 and logs deployment when deploy hook succeeds', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
-    process.env.VERCEL_DEPLOY_HOOK_URL = 'https://api.vercel.com/deploy/hook'
+    process.env.DEPLOY_HOOK_URL = 'https://api.vercel.com/deploy/hook'
     const mockFetch = vi.fn().mockResolvedValue(
       new Response(JSON.stringify({ job: { id: 'abc123' } }), { status: 200 })
     )
@@ -81,7 +81,7 @@ describe('POST /admin/api/deploy', () => {
 
   it('returns 500 when fetch throws', async () => {
     mockGetSession.mockResolvedValue(AUTHED)
-    process.env.VERCEL_DEPLOY_HOOK_URL = 'https://api.vercel.com/deploy/hook'
+    process.env.DEPLOY_HOOK_URL = 'https://api.vercel.com/deploy/hook'
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network error')))
 
     const res = await POST({ request: req('https://www.scholarab.ca') } as any)

@@ -19,7 +19,7 @@ export const POST: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return jsonError('Unauthorized', 401)
 
-  const hookUrl = process.env.VERCEL_DEPLOY_HOOK_URL
+  const hookUrl = process.env.DEPLOY_HOOK_URL
   if (!hookUrl) return jsonError('Deploy hook not configured', 500)
 
   try {

@@ -5,7 +5,6 @@ import type { ScholarshipWithMeta } from '../hooks/useScholarships'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-vi.mock('@vercel/analytics', () => ({ track: vi.fn() }))
 vi.mock('../hooks/useCardEntrance.ts', () => ({ useCardEntrance: vi.fn() }))
 
 const { mockShowToast, mockShowConfetti } = vi.hoisted(() => ({

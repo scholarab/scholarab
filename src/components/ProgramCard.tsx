@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { track } from '@vercel/analytics';
 import { formatDeadline, generateSlug, showToast, showConfetti, getToday } from '../lib/utils.ts';
 import { getStatus } from '../hooks/usePrograms.ts';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../lib/badges.ts';
@@ -90,7 +89,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
         {!isClosed && (
           <a href={program.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
             aria-label={`Learn more about ${program.name} (opens in new tab)`}
-            onClick={() => track('learn_more', { id: program.id, name: program.name })}
+            onClick={() => {}}
             className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
             style={{ background: 'var(--brand)', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             Learn More

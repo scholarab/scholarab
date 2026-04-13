@@ -5,7 +5,6 @@ import type { ProgramWithMeta } from './usePrograms'
 
 // ── Mocks ────────────────────────────────────────────────────────────────────
 
-vi.mock('@vercel/analytics', () => ({ track: vi.fn() }))
 vi.mock('../lib/tracker.ts', () => ({
   getSavedPrograms: vi.fn(() => []),
   toggleSavedProgram: vi.fn((id: number) => [id]),

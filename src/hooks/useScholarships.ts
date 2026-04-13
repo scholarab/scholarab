@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { track } from '@vercel/analytics';
 import { getSaved, toggleSaved } from '../lib/tracker.ts';
 import { getToday } from '../lib/utils.ts';
 import type { Scholarship } from '../lib/data-loader.ts';
@@ -62,7 +61,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const handleToggleSave = useCallback((id: number) => {
     const newSaved = toggleSaved(id);
     setSavedIds([...newSaved]);
-    track('save_toggle', { id, saved: newSaved.includes(id) });
+
   }, []);
 
   const toggleRegion = useCallback((region: RegionKey | null) => {
@@ -70,14 +69,14 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     setHasFiltered(true);
     setSelectedRegion(next);
     setPage(1);
-    if (next) track('filter_region', { region: next });
+
   }, [selectedRegion]);
 
   const handleSetSort = useCallback((value: SortValue) => {
     setHasFiltered(true);
     setSortBy(value);
     setPage(1);
-    track('filter_sort', { sort: value, page: 'scholarships' });
+
   }, []);
 
   const handlePageChange = useCallback((newPage: number) => {
