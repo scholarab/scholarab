@@ -20,8 +20,8 @@ export const auth = betterAuth({
     'https://www.scholarab.ca',
     'https://scholarab.ca',
   ],
-  secret: process.env.BETTER_AUTH_SECRET!,
-  baseURL: process.env.BETTER_AUTH_URL!,
+  secret: (import.meta as unknown as Record<string, Record<string, string>>).env?.BETTER_AUTH_SECRET ?? process.env.BETTER_AUTH_SECRET!,
+  baseURL: (import.meta as unknown as Record<string, Record<string, string>>).env?.BETTER_AUTH_URL ?? process.env.BETTER_AUTH_URL!,
 })
 
 export type Session = typeof auth.$Infer.Session
