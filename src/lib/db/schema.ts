@@ -100,7 +100,7 @@ export const deployLog = pgTable('deploy_log', {
   id: serial('id').primaryKey(),
   triggeredBy: text('triggered_by'),
   triggerReason: text('trigger_reason'),
-  vercelResponse: jsonb('vercel_response'),
+  deployResponse: jsonb('deploy_response'),
   createdAt: timestamp('created_at').defaultNow(),
 })
 

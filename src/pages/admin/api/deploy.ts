@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
     await db.insert(deployLog).values({
       triggeredBy: session.user.email,
       triggerReason: 'Manual publish from admin panel',
-      vercelResponse: result,
+      deployResponse: result,
     })
 
     return jsonOk({ success: true, ...result })
