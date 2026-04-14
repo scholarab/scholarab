@@ -57,7 +57,7 @@ let programCache:     { data: Program[];     exp: number } | null = null
 
 export async function loadScholarships(): Promise<Scholarship[]> {
   if (scholarshipCache && Date.now() < scholarshipCache.exp) return scholarshipCache.data
-  if (process.env.DATABASE_URL) {
+  if ((import.meta as unknown as Record<string, Record<string, string>>).env?.DATABASE_URL ?? process.env.DATABASE_URL) {
     try {
       const { db } = await import('./db/client')
       const { scholarships } = await import('./db/schema')
@@ -105,7 +105,7 @@ export async function loadScholarships(): Promise<Scholarship[]> {
 
 export async function loadPrograms(): Promise<Program[]> {
   if (programCache && Date.now() < programCache.exp) return programCache.data
-  if (process.env.DATABASE_URL) {
+  if ((import.meta as unknown as Record<string, Record<string, string>>).env?.DATABASE_URL ?? process.env.DATABASE_URL) {
     try {
       const { db } = await import('./db/client')
       const { researchPrograms } = await import('./db/schema')
