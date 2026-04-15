@@ -12,14 +12,15 @@ const ALLOWED_ORIGINS = [
   'http://localhost:4321',
 ]
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   const origin = request.headers.get('origin')
   if (origin && !ALLOWED_ORIGINS.includes(origin)) return jsonError('Forbidden', 403)
 
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return jsonError('Unauthorized', 401)
 
-  const hookUrl = (import.meta as unknown as Record<string, Record<string, string>>).env?.DEPLOY_HOOK_URL ?? process.env.DEPLOY_HOOK_URL
+  const runtimeEnv = (locals as { runtime?: { env?: Record<string, string> } } | undefined)?.runtime?.env
+  const hookUrl = runtimeEnv?.DEPLOY_HOOK_URL ?? import.meta.env.DEPLOY_HOOK_URL ?? process.env.DEPLOY_HOOK_URL
   if (!hookUrl) return jsonError('Deploy hook not configured', 500)
 
   try {
