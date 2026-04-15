@@ -32,7 +32,7 @@ export default function AdminShell({ user, page, data }: Props) {
         localStorage.setItem('lastDeployed', now)
         toast.success('Deploy triggered. Site will be live in ~90 seconds.')
       } else {
-        toast.error('Deploy failed. Check Vercel settings.')
+        toast.error('Deploy failed. Check Cloudflare settings.')
       }
     } catch {
       toast.error('Deploy failed')

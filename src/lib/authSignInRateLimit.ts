@@ -1,5 +1,5 @@
 // DB-persisted rate limit for sign-in attempts per IP.
-// Cross-instance safe (works correctly across Vercel serverless instances).
+// Cross-instance safe (works correctly across Cloudflare Workers instances).
 // 10 attempts per 15-minute window per IP.
 
 import { db } from './db/client'

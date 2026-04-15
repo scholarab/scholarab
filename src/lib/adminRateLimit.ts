@@ -1,5 +1,5 @@
 // DB-persisted rate limit for admin mutation routes (POST/PUT/DELETE).
-// Cross-instance safe (works correctly across Vercel serverless instances).
+// Cross-instance safe (works correctly across Cloudflare Workers instances).
 // 100 mutations per 5-minute window per user.
 
 import { db } from './db/client'
