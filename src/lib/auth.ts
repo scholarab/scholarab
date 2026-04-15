@@ -29,6 +29,7 @@ function createAuth() {
     }),
     emailAndPassword: {
       enabled: true,
+      disableSignUp: true,
     },
     session: {
       cookieName: 'admin_session',
