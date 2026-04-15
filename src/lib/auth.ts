@@ -3,6 +3,7 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { getEnv } from 'astro/env/runtime'
 import { getDb } from './db/client'
 import * as schema from './db/schema'
+import { hashPassword, verifyPassword } from './password'
 
 function createAuth() {
   const secret =
@@ -30,6 +31,7 @@ function createAuth() {
     emailAndPassword: {
       enabled: true,
       disableSignUp: true,
+      password: { hash: hashPassword, verify: verifyPassword },
     },
     session: {
       cookieName: 'admin_session',
