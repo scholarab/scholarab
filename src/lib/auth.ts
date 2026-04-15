@@ -1,18 +1,8 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
+import { getEnv } from 'astro/env/runtime'
 import { getDb } from './db/client'
 import * as schema from './db/schema'
-
-let _runtimeSecret: string | undefined
-let _runtimeBaseURL: string | undefined
-
-// Called by middleware to inject CF Pages runtime env vars
-export function setRuntimeAuthConfig(secret: string, baseURL: string) {
-  if (_runtimeSecret === secret && _runtimeBaseURL === baseURL) return
-  _runtimeSecret = secret
-  _runtimeBaseURL = baseURL
-  _auth = null // reset so next access reinitializes with new values
-}
 
 function createAuth() {
   return betterAuth({
@@ -32,8 +22,8 @@ function createAuth() {
       'https://www.scholarab.ca',
       'https://scholarab.ca',
     ],
-    secret: _runtimeSecret ?? import.meta.env.BETTER_AUTH_SECRET ?? process.env.BETTER_AUTH_SECRET!,
-    baseURL: _runtimeBaseURL ?? import.meta.env.BETTER_AUTH_URL ?? process.env.BETTER_AUTH_URL!,
+    secret: getEnv('BETTER_AUTH_SECRET') ?? import.meta.env.BETTER_AUTH_SECRET ?? process.env.BETTER_AUTH_SECRET!,
+    baseURL: getEnv('BETTER_AUTH_URL') ?? import.meta.env.BETTER_AUTH_URL ?? process.env.BETTER_AUTH_URL!,
   })
 }
 

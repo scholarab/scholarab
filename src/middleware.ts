@@ -1,14 +1,7 @@
 import { defineMiddleware } from 'astro/middleware'
-import { auth, setRuntimeAuthConfig } from './lib/auth'
-import { setRuntimeDatabaseUrl } from './lib/db/client'
+import { auth } from './lib/auth'
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  // Inject CF Pages runtime env vars into module-level singletons.
-  // Must run before any return next() so auth/DB routes get the values too.
-  const env = (context.locals as { runtime?: { env?: Record<string, string> } }).runtime?.env
-  if (env?.DATABASE_URL) setRuntimeDatabaseUrl(env.DATABASE_URL)
-  if (env?.BETTER_AUTH_SECRET) setRuntimeAuthConfig(env.BETTER_AUTH_SECRET, env.BETTER_AUTH_URL ?? '')
-
   const path = context.url.pathname
 
   // Only protect /admin/* routes

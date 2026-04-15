@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro'
 import Anthropic from '@anthropic-ai/sdk'
+import { getEnv } from 'astro/env/runtime'
 import { auth } from '../../../../lib/auth'
 import { db } from '../../../../lib/db/client'
 import { scholarships, parseLog } from '../../../../lib/db/schema'
@@ -65,7 +66,7 @@ Rules:
 - Return only valid JSON, no explanation, no markdown`
 }
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   const session = await auth.api.getSession({ headers: request.headers })
   if (!session) return jsonError('Unauthorized', 401)
 
@@ -73,8 +74,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return jsonError(`Rate limit exceeded — max ${AI_PARSE_LIMIT} AI parses per hour`, 429)
   }
 
-  const runtimeEnv = (locals as { runtime?: { env?: Record<string, string> } } | undefined)?.runtime?.env
-  const apiKey = runtimeEnv?.ANTHROPIC_API_KEY ?? import.meta.env.ANTHROPIC_API_KEY ?? process.env.ANTHROPIC_API_KEY
+  const apiKey = getEnv('ANTHROPIC_API_KEY') ?? import.meta.env.ANTHROPIC_API_KEY ?? process.env.ANTHROPIC_API_KEY
   if (!apiKey) return jsonError('ANTHROPIC_API_KEY not configured', 500)
 
   try {
