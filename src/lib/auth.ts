@@ -5,6 +5,23 @@ import { getDb } from './db/client'
 import * as schema from './db/schema'
 
 function createAuth() {
+  const secret =
+    getEnv('BETTER_AUTH_SECRET') ??
+    import.meta.env.BETTER_AUTH_SECRET ??
+    process.env.BETTER_AUTH_SECRET
+
+  if (!secret) {
+    throw new Error(
+      'BETTER_AUTH_SECRET is not set. Add it as a runtime secret in the Cloudflare Pages dashboard (Settings → Environment Variables).'
+    )
+  }
+
+  const baseURL =
+    getEnv('BETTER_AUTH_URL') ??
+    import.meta.env.BETTER_AUTH_URL ??
+    process.env.BETTER_AUTH_URL ??
+    'https://scholarab.ca'
+
   return betterAuth({
     database: drizzleAdapter(getDb(), {
       provider: 'pg',
@@ -22,8 +39,8 @@ function createAuth() {
       'https://www.scholarab.ca',
       'https://scholarab.ca',
     ],
-    secret: getEnv('BETTER_AUTH_SECRET') ?? import.meta.env.BETTER_AUTH_SECRET ?? process.env.BETTER_AUTH_SECRET!,
-    baseURL: getEnv('BETTER_AUTH_URL') ?? import.meta.env.BETTER_AUTH_URL ?? process.env.BETTER_AUTH_URL!,
+    secret,
+    baseURL,
   })
 }
 

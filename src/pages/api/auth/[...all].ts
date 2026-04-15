@@ -14,7 +14,16 @@ export const ALL: APIRoute = async (ctx) => {
       })
     }
   }
-  return auth.handler(ctx.request)
+  try {
+    return await auth.handler(ctx.request)
+  } catch (e) {
+    console.error('[auth] handler threw unexpectedly:', e)
+    const message = e instanceof Error ? e.message : 'Auth service error'
+    return new Response(JSON.stringify({ message, code: 'INTERNAL_SERVER_ERROR' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
 }
 
 export const prerender = false
