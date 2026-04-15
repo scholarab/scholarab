@@ -6,11 +6,6 @@ import Pagination from './Pagination.tsx';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 import { PROGRAM_BADGES } from '../lib/badges.ts';
 
-const pillBase  = 'flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
-const pillOn    = 'text-brand border-brand-border bg-brand-dim';
-const pillOff   = 'bg-subtle text-secondary border-card';
-const chipCls   = (sel: boolean) => `flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? 'text-brand' : 'bg-subtle text-secondary border border-card hover:border-medium'}`;
-const chipStyle = (sel: boolean) => sel ? { background: 'var(--brand-dim)', border: '0.5px solid var(--brand-border)' } : undefined;
 
 interface Props {
   items: ProgramWithMeta[];
@@ -36,27 +31,34 @@ export default function ProgramList({ items }: Props) {
     [items]
   );
 
-  const renderCategoryChips = (mobile: boolean) => categories.map(cat => {
-    const badge = cat !== 'all' ? PROGRAM_BADGES[cat] : undefined;
-    const sel = selectedCategory === cat;
-    if (mobile) {
-      return (
-        <button key={cat} onClick={() => setCategory(cat)} aria-pressed={sel}
-          className={`${pillBase} ${sel ? pillOn : pillOff}`}
-          style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
-          {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
-          {cat === 'all' ? 'All' : cat}
-        </button>
-      );
-    }
+  const renderCategoryChips = (mobile: boolean) => {
+    const btnCls = `flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 ${mobile ? 'py-1.5' : 'py-1'} text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border`;
     return (
-      <button key={cat} onClick={() => setCategory(cat)} aria-pressed={sel}
-        className={chipCls(sel)} style={chipStyle(sel)}>
-        {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
-        {cat === 'all' ? 'All' : cat}
-      </button>
+      <>
+        <button onClick={() => setCategory('all')} aria-pressed={selectedCategory === 'all'}
+          className={btnCls}
+          style={selectedCategory === 'all'
+            ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
+            : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
+          All
+        </button>
+        {categories.filter(c => c !== 'all').map(cat => {
+          const badge = PROGRAM_BADGES[cat];
+          const sel = selectedCategory === cat;
+          return (
+            <button key={cat} onClick={() => setCategory(sel ? 'all' : cat)} aria-pressed={sel}
+              className={btnCls}
+              style={sel
+                ? { background: badge ? badge.bg : 'var(--brand-dim)', borderColor: badge ? badge.border : 'var(--brand-border)', color: badge ? badge.color : 'var(--brand)' }
+                : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
+              {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
+              {cat}
+            </button>
+          );
+        })}
+      </>
     );
-  });
+  };
 
   return (
     <div>
@@ -66,8 +68,8 @@ export default function ProgramList({ items }: Props) {
 
       {/* Category chips — desktop only */}
       <div className="hidden md:block">
-        <div className="chips-row-wrap mb-5">
-          <div className="flex chips-row gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+        <div className="chips-row-wrap mb-4">
+          <div className="flex chips-row gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
             {renderCategoryChips(false)}
           </div>
         </div>
@@ -90,8 +92,8 @@ export default function ProgramList({ items }: Props) {
       </div>
 
       {/* Desktop: count */}
-      <div className="hidden md:flex mb-5">
-        <p className="text-sm text-faint">{filtered.length} program{filtered.length !== 1 ? 's' : ''}</p>
+      <div className="hidden md:flex mb-5 items-center justify-between gap-4">
+        <p className="text-sm text-faint flex-shrink-0">{filtered.length} program{filtered.length !== 1 ? 's' : ''}</p>
       </div>
 
       {/* Mobile bottom sheet */}
