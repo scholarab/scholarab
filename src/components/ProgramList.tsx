@@ -69,7 +69,7 @@ export default function ProgramList({ items }: Props) {
       {/* Category chips — desktop only */}
       <div className="hidden md:block">
         <div className="chips-row-wrap mb-4">
-          <div className="flex chips-row gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
+          <div className="flex chips-row gap-1.5" style={{ flexWrap: 'wrap' }}>
             {renderCategoryChips(false)}
           </div>
         </div>
