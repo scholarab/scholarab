@@ -5,26 +5,20 @@ import type { ConfidenceTier } from '../lib/eligibility-types'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-const { mockMatchAll, mockMatchProgram, mockGetSaved, mockToggleSaved, mockGetSavedPrograms, mockToggleSavedProgram, mockShowConfetti } = vi.hoisted(() => ({
-  mockMatchAll:            vi.fn(() => [] as Array<{ id: number; confidence: number; tier: ConfidenceTier }>),
-  mockMatchProgram:        vi.fn(() => true),
-  mockGetSaved:            vi.fn(() => [] as number[]),
-  mockToggleSaved:         vi.fn(),
-  mockGetSavedPrograms:    vi.fn(() => []),
-  mockToggleSavedProgram:  vi.fn(),
-  mockShowConfetti:        vi.fn(),
+const { mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti } = vi.hoisted(() => ({
+  mockMatchAll:    vi.fn(() => [] as Array<{ id: number; confidence: number; tier: ConfidenceTier }>),
+  mockGetSaved:    vi.fn(() => [] as number[]),
+  mockToggleSaved: vi.fn(),
+  mockShowConfetti: vi.fn(),
 }))
 
 vi.mock('../lib/eligibility-matcher', () => ({
-  matchAll:     mockMatchAll,
-  matchProgram: mockMatchProgram,
+  matchAll: mockMatchAll,
 }))
 
 vi.mock('../lib/tracker.ts', () => ({
-  getSaved:             mockGetSaved,
-  toggleSaved:          mockToggleSaved,
-  getSavedPrograms:     mockGetSavedPrograms,
-  toggleSavedProgram:   mockToggleSavedProgram,
+  getSaved:     mockGetSaved,
+  toggleSaved:  mockToggleSaved,
 }))
 
 vi.mock('../lib/utils.ts', () => ({

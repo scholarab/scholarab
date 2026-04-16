@@ -1,8 +1,8 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
-import type { Scholarship, Program } from '../lib/data-loader'
+import type { Scholarship } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
-import { matchAll, matchProgram } from '../lib/eligibility-matcher'
-import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
+import { matchAll } from '../lib/eligibility-matcher'
+import { getSaved, toggleSaved } from '../lib/tracker.ts'
 import { showConfetti } from '../lib/utils.ts'
 import { generateSlug } from '../lib/utils.ts'
 
@@ -12,7 +12,6 @@ type Step = 1 | 2 | 3 | 'results'
 
 interface Props {
   scholarships: Scholarship[]
-  programs?: Program[]
 }
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -153,7 +152,7 @@ function parseAmount(amount: string): number {
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export default function EligibilityQuiz({ scholarships, programs = [] }: Props) {
+export default function EligibilityQuiz({ scholarships }: Props) {
   const _d = loadDraft()
   const [step, setStep] = useState<1 | 2 | 3 | 'results'>(_d?.step ?? 1)
   const [grade, setGrade] = useState<StudentProfile['grade'] | ''>(_d?.grade ?? '')
@@ -220,11 +219,6 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
     })).filter(m => m.scholarship)
   }, [profile, scholarshipInputs, scholarshipMap])
 
-  const programResults = useMemo(() => {
-    if (!profile) return []
-    return programs.filter(p => p.active && matchProgram(profile.grade, p))
-  }, [profile, programs])
-
   const totalAmount = useMemo(() => {
     if (!results) return 0
     return results
@@ -246,14 +240,6 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
     const next = new Set(getSaved())
     if (next.has(id)) showConfetti(el)
     setSavedIds(next)
-  }, [])
-
-  const [savedProgramIds, setSavedProgramIds] = useState<Set<number>>(() => new Set(getSavedPrograms()))
-  const handleToggleSaveProgram = useCallback((id: number, el?: Element | null) => {
-    toggleSavedProgram(id)
-    const next = new Set(getSavedPrograms())
-    if (next.has(id)) showConfetti(el)
-    setSavedProgramIds(next)
   }, [])
 
   // Persist quiz state so navigating away and back restores progress
@@ -569,68 +555,6 @@ export default function EligibilityQuiz({ scholarships, programs = [] }: Props) 
           >
             Try again
           </button>
-        </div>
-      )}
-
-      {programResults.length > 0 && (
-        <div className="mt-8 pt-6 border-t border-subtle">
-          <p className="text-sm font-semibold text-primary mb-1">Research programs for you</p>
-          <p className="text-xs text-faint mb-4">Matched by grade. Check each program for full eligibility details.</p>
-          <div className="space-y-3">
-            {programResults.map(p => (
-              <div key={p.id} className="p-4 rounded-xl border border-subtle bg-subtle">
-                <div className="flex items-start justify-between gap-3 mb-2">
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-primary text-sm leading-snug">
-                      {p.emoji && <span className="mr-1">{p.emoji}</span>}{p.name}
-                    </p>
-                    {p.provider && <p className="text-xs text-tertiary mt-0.5">{p.provider}</p>}
-                  </div>
-                  <div className="flex-shrink-0 text-right">
-                    {p.paid && <p className="text-xs font-semibold text-brand">Paid</p>}
-                    {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && (
-                      <p className="text-xs text-faint mt-0.5">Due {p.deadline}</p>
-                    )}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs px-2 py-0.5 rounded-full border bg-subtle text-tertiary border-card">
-                    {p.grades ?? 'All grades'}
-                  </span>
-                  <div className="flex items-center gap-3">
-                    <a
-                      href={`/programs/${generateSlug(p.name)}`}
-                      className="text-xs text-secondary hover:text-primary transition"
-                    >
-                      Details
-                    </a>
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-medium text-brand transition hover:opacity-80"
-                    >
-                      Apply →
-                    </a>
-                    <button
-                      onClick={(e) => handleToggleSaveProgram(p.id, e.currentTarget)}
-                      aria-label={savedProgramIds.has(p.id) ? 'Remove from saved' : 'Save program'}
-                      className={`flex items-center justify-center flex-shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${
-                        savedProgramIds.has(p.id)
-                          ? 'text-brand border border-brand-border'
-                          : 'text-secondary border border-card'
-                      }`}
-                      style={{ width: 28, height: 28, background: savedProgramIds.has(p.id) ? 'var(--brand-dim)' : undefined }}
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill={savedProgramIds.has(p.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       )}
 

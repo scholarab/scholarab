@@ -1,10 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { loadScholarships, loadPrograms } from '../lib/data-loader'
+import { loadScholarships } from '../lib/data-loader'
 import EligibilityQuiz from '../components/EligibilityQuiz'
 
 const scholarships = await loadScholarships()
-const programs = await loadPrograms()
 ---
 
 <Layout
@@ -40,7 +39,7 @@ const programs = await loadPrograms()
 
       <!-- Quiz -->
       <div class="card p-6 md:p-8">
-        <EligibilityQuiz scholarships={scholarships} programs={programs} client:load />
+        <EligibilityQuiz scholarships={scholarships} client:load />
       </div>
 
     </div>
