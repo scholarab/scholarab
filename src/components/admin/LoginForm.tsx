@@ -14,7 +14,7 @@ export default function LoginForm({ next }: { next: string }) {
 
     const { error } = await authClient.signIn.email({ email, password })
     if (error) {
-      setError(error.message || 'Invalid credentials')
+      setError(error.message || (error as unknown as Record<string, string>).error || 'Invalid credentials')
       setLoading(false)
     } else {
       window.location.href = next
