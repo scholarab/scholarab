@@ -18,6 +18,7 @@ const researchCount = programs.filter(p => {
 }).length;
 
 const scholarshipCount = scholarships.filter(s => {
+  if (!s.active) return false;
   if (!s.deadline) return true;
   return new Date(s.deadline + 'T00:00:00') >= today;
 }).length;
