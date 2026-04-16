@@ -18,9 +18,10 @@ const researchCount = programs.filter(p => {
 }).length;
 
 const scholarshipCount = scholarships.filter(s => {
-  if (!s.active) return false;
-  if (!s.deadline) return true;
-  return new Date(s.deadline + 'T00:00:00') >= today;
+  const openMs = s.openDate ? new Date(s.openDate + 'T00:00:00').getTime() : 0;
+  if (today.getTime() < openMs) return true; // future — not yet open, still counted
+  const deadMs = s.deadline ? new Date(s.deadline + 'T00:00:00').getTime() : 0;
+  return today.getTime() <= deadMs; // active — deadline not yet passed
 }).length;
 
 const ONE_WEEK_MS = CLOSING_SOON_MS;
