@@ -1,10 +1,9 @@
 import type { APIRoute } from 'astro'
-import { auth } from '../../../../lib/auth'
+import { isAdminRequest } from '../../../../lib/adminAuth'
 import { db } from '../../../../lib/db/client'
 import { scholarships } from '../../../../lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
-import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 import { eligibilitySchema } from '../../../../lib/data-loader'
 import { logAudit } from '../../../../lib/audit'
 import { httpsUrl } from '../../../../lib/validators'
@@ -29,22 +28,16 @@ const UpdateSchema = z.object({
 })
 
 export const GET: APIRoute = async ({ request, params }) => {
-  const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return jsonError('Unauthorized', 401)
-
+  if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
   const id = parseInt(params.id!, 10)
   if (isNaN(id)) return jsonError('Invalid ID', 400)
-
   const [item] = await db.select().from(scholarships).where(eq(scholarships.id, id))
   if (!item) return jsonError('Not found', 404)
   return jsonOk(item)
 }
 
 export const PUT: APIRoute = async ({ request, params }) => {
-  const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return jsonError('Unauthorized', 401)
-  if (!(await checkMutationRateLimit(session.user.id))) return jsonError('Rate limit exceeded', 429)
-
+  if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
   const id = parseInt(params.id!, 10)
   if (isNaN(id)) return jsonError('Invalid ID', 400)
 
@@ -53,14 +46,12 @@ export const PUT: APIRoute = async ({ request, params }) => {
     const { updatedAt: clientUpdatedAt, ...rest } = body
     const data = UpdateSchema.parse(rest)
 
-    // Optimistic locking: check if record was modified since client loaded it
     if (clientUpdatedAt) {
       const [current] = await db
         .select({ updatedAt: scholarships.updatedAt })
         .from(scholarships)
         .where(eq(scholarships.id, id))
       if (!current) return jsonError('Not found', 404)
-
       const dbTs = current.updatedAt?.getTime() ?? 0
       const clientTs = new Date(clientUpdatedAt).getTime()
       if (dbTs !== clientTs) {
@@ -74,7 +65,7 @@ export const PUT: APIRoute = async ({ request, params }) => {
       .where(eq(scholarships.id, id))
       .returning()
     if (!updated) return jsonError('Not found', 404)
-    logAudit(session.user.id, 'UPDATE', 'scholarship', id).catch(() => {})
+    logAudit('admin', 'UPDATE', 'scholarship', id).catch(() => {})
     return jsonOk(updated)
   } catch (e) {
     if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)
@@ -84,16 +75,12 @@ export const PUT: APIRoute = async ({ request, params }) => {
 }
 
 export const DELETE: APIRoute = async ({ request, params }) => {
-  const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return jsonError('Unauthorized', 401)
-  if (!(await checkMutationRateLimit(session.user.id))) return jsonError('Rate limit exceeded', 429)
-
+  if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
   const id = parseInt(params.id!, 10)
   if (isNaN(id)) return jsonError('Invalid ID', 400)
-
   try {
     await db.delete(scholarships).where(eq(scholarships.id, id))
-    logAudit(session.user.id, 'DELETE', 'scholarship', id).catch(() => {})
+    logAudit('admin', 'DELETE', 'scholarship', id).catch(() => {})
     return new Response(null, { status: 204 })
   } catch (e) {
     console.error('[DELETE /admin/api/scholarships/:id]', e)

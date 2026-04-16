@@ -1,10 +1,9 @@
 import type { APIRoute } from 'astro'
-import { auth } from '../../../../lib/auth'
+import { isAdminRequest } from '../../../../lib/adminAuth'
 import { db } from '../../../../lib/db/client'
 import { scholarships } from '../../../../lib/db/schema'
 import { ilike, desc } from 'drizzle-orm'
 import { z } from 'zod'
-import { checkMutationRateLimit } from '../../../../lib/adminRateLimit'
 import { eligibilitySchema } from '../../../../lib/data-loader'
 import { logAudit } from '../../../../lib/audit'
 import { httpsUrl } from '../../../../lib/validators'
@@ -29,23 +28,18 @@ const CreateSchema = z.object({
 })
 
 export const GET: APIRoute = async ({ request }) => {
-  const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return jsonError('Unauthorized', 401)
-
+  if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
   const all = await db.select().from(scholarships).orderBy(desc(scholarships.updatedAt)).limit(1000)
   return jsonOk(all)
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return jsonError('Unauthorized', 401)
-  if (!(await checkMutationRateLimit(session.user.id))) return jsonError('Rate limit exceeded', 429)
+  if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
 
   try {
     const body = await request.json()
     const data = CreateSchema.parse(body)
 
-    // Server-side duplicate check (case-insensitive)
     const existing = await db
       .select({ id: scholarships.id, title: scholarships.title })
       .from(scholarships)
@@ -56,7 +50,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const [created] = await db.insert(scholarships).values(data).returning()
-    logAudit(session.user.id, 'CREATE', 'scholarship', created!.id).catch(() => {})
+    logAudit('admin', 'CREATE', 'scholarship', created!.id).catch(() => {})
     return jsonOk(created, 201)
   } catch (e) {
     if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)

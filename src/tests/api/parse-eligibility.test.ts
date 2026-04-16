@@ -3,15 +3,15 @@ import { POST } from '../../pages/admin/api/scholarships/parse-eligibility'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-const { mockGetSession, mockSelect, mockInsert, mockCreate } = vi.hoisted(() => ({
-  mockGetSession: vi.fn(),
-  mockSelect:     vi.fn(),
-  mockInsert:     vi.fn(),
-  mockCreate:     vi.fn(),
+const { mockIsAdmin, mockSelect, mockInsert, mockCreate } = vi.hoisted(() => ({
+  mockIsAdmin: vi.fn(),
+  mockSelect:  vi.fn(),
+  mockInsert:  vi.fn(),
+  mockCreate:  vi.fn(),
 }))
 
-vi.mock('../../lib/auth', () => ({
-  auth: { api: { getSession: mockGetSession } },
+vi.mock('../../lib/adminAuth', () => ({
+  isAdminRequest: mockIsAdmin,
 }))
 
 vi.mock('../../lib/db/client', () => ({
@@ -34,15 +34,12 @@ vi.mock('drizzle-orm', () => ({
 }))
 
 vi.mock('@anthropic-ai/sdk', () => ({
-  // Must use regular function (not arrow) so `new Anthropic()` works correctly
   default: vi.fn(function (this: any) {
     this.messages = { create: mockCreate }
   }),
 }))
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-
-const AUTHED = { user: { id: 'user-1', email: 'admin@test.com' } }
 
 const STORED_SCHOLARSHIP = {
   id: 1,
@@ -75,10 +72,10 @@ const VALID_ELIGIBILITY_JSON = JSON.stringify({
 function selectChain(value: unknown) {
   const resolve = () => Promise.resolve(value)
   const c: Record<string, any> = {
-    from:    () => c,
-    where:   () => c,
-    then:    (ok: any, fail: any) => resolve().then(ok, fail),
-    catch:   (fail: any) => resolve().catch(fail),
+    from:  () => c,
+    where: () => c,
+    then:  (ok: any, fail: any) => resolve().then(ok, fail),
+    catch: (fail: any) => resolve().catch(fail),
   }
   return c
 }
@@ -91,14 +88,10 @@ function req(body: object) {
   })
 }
 
-/** Set up the two select calls needed for a successful parse:
- *  1. Rate limit check → count=0
- *  2. Scholarship lookup → stored row
- */
 function setupHappyPath() {
   mockSelect
-    .mockReturnValueOnce(selectChain([{ count: 0 }]))    // rate limit: not exceeded
-    .mockReturnValueOnce(selectChain([STORED_SCHOLARSHIP])) // scholarship found
+    .mockReturnValueOnce(selectChain([{ count: 0 }]))
+    .mockReturnValueOnce(selectChain([STORED_SCHOLARSHIP]))
   mockInsert.mockReturnValue({ values: () => Promise.resolve() })
   mockCreate.mockResolvedValue({
     content: [{ type: 'text', text: VALID_ELIGIBILITY_JSON }],
@@ -115,15 +108,15 @@ beforeEach(() => {
 
 describe('POST /admin/api/scholarships/parse-eligibility — auth & rate limit', () => {
   it('returns 401 when unauthenticated', async () => {
-    mockGetSession.mockResolvedValue(null)
+    mockIsAdmin.mockResolvedValue(false)
     const res = await POST({ request: req({ id: 1 }) } as any)
     expect(res.status).toBe(401)
     expect(await res.json()).toMatchObject({ error: 'Unauthorized' })
   })
 
   it('returns 429 when parse rate limit is exceeded', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
-    mockSelect.mockReturnValue(selectChain([{ count: 150 }])) // count >= 150
+    mockIsAdmin.mockResolvedValue(true)
+    mockSelect.mockReturnValue(selectChain([{ count: 150 }]))
     const res = await POST({ request: req({ id: 1 }) } as any)
     expect(res.status).toBe(429)
     const body = await res.json()
@@ -131,7 +124,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — auth & rate limit',
   })
 
   it('returns 429 when count exceeds limit', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect.mockReturnValue(selectChain([{ count: 200 }]))
     const res = await POST({ request: req({ id: 1 }) } as any)
     expect(res.status).toBe(429)
@@ -142,7 +135,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — auth & rate limit',
 
 describe('POST /admin/api/scholarships/parse-eligibility — validation', () => {
   it('returns 500 when ANTHROPIC_API_KEY is not configured', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect.mockReturnValueOnce(selectChain([{ count: 0 }]))
     mockInsert.mockReturnValue({ values: () => Promise.resolve() })
     delete process.env.ANTHROPIC_API_KEY
@@ -153,7 +146,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — validation', () => 
   })
 
   it('returns 400 when id is not a number', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect.mockReturnValueOnce(selectChain([{ count: 0 }]))
     mockInsert.mockReturnValue({ values: () => Promise.resolve() })
     process.env.ANTHROPIC_API_KEY = 'sk-ant-test-key'
@@ -163,10 +156,10 @@ describe('POST /admin/api/scholarships/parse-eligibility — validation', () => 
   })
 
   it('returns 404 when scholarship is not found', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect
       .mockReturnValueOnce(selectChain([{ count: 0 }]))
-      .mockReturnValueOnce(selectChain([]))   // no scholarship
+      .mockReturnValueOnce(selectChain([]))
     mockInsert.mockReturnValue({ values: () => Promise.resolve() })
     process.env.ANTHROPIC_API_KEY = 'sk-ant-test-key'
 
@@ -176,7 +169,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — validation', () => 
   })
 
   it('returns 400 when scholarship has no audience text', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect
       .mockReturnValueOnce(selectChain([{ count: 0 }]))
       .mockReturnValueOnce(selectChain([{ ...STORED_SCHOLARSHIP, audience: '' }]))
@@ -189,7 +182,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — validation', () => 
   })
 
   it('returns 400 when scholarship audience is null', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect
       .mockReturnValueOnce(selectChain([{ count: 0 }]))
       .mockReturnValueOnce(selectChain([{ ...STORED_SCHOLARSHIP, audience: null }]))
@@ -205,7 +198,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — validation', () => 
 
 describe('POST /admin/api/scholarships/parse-eligibility — AI parsing', () => {
   it('returns 200 with parsed eligibility when AI returns valid JSON', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     setupHappyPath()
 
     const res = await POST({ request: req({ id: 1 }) } as any)
@@ -218,7 +211,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — AI parsing', () => 
   })
 
   it('strips markdown code fences from AI response', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect
       .mockReturnValueOnce(selectChain([{ count: 0 }]))
       .mockReturnValueOnce(selectChain([STORED_SCHOLARSHIP]))
@@ -235,7 +228,7 @@ describe('POST /admin/api/scholarships/parse-eligibility — AI parsing', () => 
   })
 
   it('returns 502 when AI returns invalid JSON', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect
       .mockReturnValueOnce(selectChain([{ count: 0 }]))
       .mockReturnValueOnce(selectChain([STORED_SCHOLARSHIP]))
@@ -249,13 +242,11 @@ describe('POST /admin/api/scholarships/parse-eligibility — AI parsing', () => 
     expect(res.status).toBe(502)
     const body = await res.json()
     expect(body.error).toBe('AI returned invalid JSON')
-    // raw AI output must NOT be exposed
     expect(body.raw).toBeUndefined()
   })
 
   it('merges AI output with EMPTY_ELIGIBILITY defaults', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
-    // AI returns only a partial object — missing keys should get defaults
+    mockIsAdmin.mockResolvedValue(true)
     const partialJson = JSON.stringify({ grades: ['11'], financialNeed: true })
     mockSelect
       .mockReturnValueOnce(selectChain([{ count: 0 }]))
@@ -269,20 +260,17 @@ describe('POST /admin/api/scholarships/parse-eligibility — AI parsing', () => 
     const res = await POST({ request: req({ id: 1 }) } as any)
     expect(res.status).toBe(200)
     const body = await res.json()
-    // Provided fields
     expect(body.eligibility.grades).toEqual(['11'])
     expect(body.eligibility.financialNeed).toBe(true)
-    // Defaulted fields from EMPTY_ELIGIBILITY
     expect(Array.isArray(body.eligibility.schoolBoards)).toBe(true)
     expect(body.eligibility.indigenousRequired).toBe(false)
   })
 
   it('returns 500 when the DB throws during the operation', async () => {
-    mockGetSession.mockResolvedValue(AUTHED)
+    mockIsAdmin.mockResolvedValue(true)
     mockSelect.mockReturnValueOnce(selectChain([{ count: 0 }]))
     mockInsert.mockReturnValue({ values: () => Promise.resolve() })
     process.env.ANTHROPIC_API_KEY = 'sk-ant-test-key'
-    // Second select (scholarship lookup) throws
     mockSelect.mockReturnValueOnce({
       from: () => ({ where: () => Promise.reject(new Error('DB error')) }),
     })

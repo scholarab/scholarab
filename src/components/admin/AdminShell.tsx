@@ -1,5 +1,4 @@
 import { useState, type ComponentProps } from 'react'
-import { authClient } from '../../lib/auth-client'
 import { Toaster, toast } from 'sonner'
 import ScholarshipManager from './ScholarshipManager'
 import ProgramManager from './ProgramManager'
@@ -42,27 +41,8 @@ export default function AdminShell({ user, page, data }: Props) {
   }
 
   const handleLogout = async () => {
-    await authClient.signOut()
+    await fetch('/admin/api/logout', { method: 'POST' })
     window.location.href = '/admin/login'
-  }
-
-  const handleClearRateLimit = async () => {
-    const ip = window.prompt('Enter the IP address to unblock:')?.trim()
-    if (!ip) return
-    try {
-      const res = await fetch('/admin/api/clear-rate-limit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ip }),
-      })
-      if (res.ok) {
-        toast.success(`Unblocked ${ip}`)
-      } else {
-        toast.error('Failed to clear rate limit')
-      }
-    } catch {
-      toast.error('Failed to clear rate limit')
-    }
   }
 
   let parsedData: unknown[]
@@ -99,12 +79,6 @@ export default function AdminShell({ user, page, data }: Props) {
         </nav>
 
         <div className="border-t border-white/[0.06] pt-4 space-y-3">
-          <button
-            onClick={handleClearRateLimit}
-            className="w-full py-2 px-3 rounded-lg text-sm font-medium transition text-white/60 hover:text-white border border-white/10 hover:border-white/20"
-          >
-            Unblock login IP
-          </button>
           <button
             onClick={handleDeploy}
             disabled={deploying}

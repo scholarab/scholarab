@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro'
 import Anthropic from '@anthropic-ai/sdk'
 import { getEnv } from 'astro/env/runtime'
-import { auth } from '../../../../lib/auth'
+import { isAdminRequest } from '../../../../lib/adminAuth'
 import { db } from '../../../../lib/db/client'
 import { scholarships, parseLog } from '../../../../lib/db/schema'
 import { eq, gte, and, sql } from 'drizzle-orm'
@@ -12,16 +12,15 @@ import { AI_PARSE_LIMIT, AI_PARSE_WINDOW_MS } from '../../../../lib/constants'
 
 export const prerender = false
 
-// DB-persisted rate limit: max AI parse requests per user per hour (cross-instance safe)
-async function checkAndLogParseRateLimit(userId: string): Promise<boolean> {
+async function checkAndLogParseRateLimit(): Promise<boolean> {
   const windowStart = new Date(Date.now() - AI_PARSE_WINDOW_MS)
   const rows = await db
     .select({ count: sql<number>`count(*)::int` })
     .from(parseLog)
-    .where(and(eq(parseLog.userId, userId), gte(parseLog.createdAt, windowStart)))
+    .where(and(eq(parseLog.userId, 'admin'), gte(parseLog.createdAt, windowStart)))
   const count = rows[0]?.count ?? 0
   if (count >= AI_PARSE_LIMIT) return false
-  await db.insert(parseLog).values({ userId })
+  await db.insert(parseLog).values({ userId: 'admin' })
   return true
 }
 
@@ -67,10 +66,9 @@ Rules:
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const session = await auth.api.getSession({ headers: request.headers })
-  if (!session) return jsonError('Unauthorized', 401)
+  if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
 
-  if (!(await checkAndLogParseRateLimit(session.user.id))) {
+  if (!(await checkAndLogParseRateLimit())) {
     return jsonError(`Rate limit exceeded — max ${AI_PARSE_LIMIT} AI parses per hour`, 429)
   }
 
@@ -93,17 +91,11 @@ export const POST: APIRoute = async ({ request }) => {
     const message = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 1024,
-      messages: [
-        {
-          role: 'user',
-          content: buildPrompt(scholarship.title, scholarship.audience, scholarship.category, scholarship.region),
-        },
-      ],
+      messages: [{ role: 'user', content: buildPrompt(scholarship.title, scholarship.audience, scholarship.category, scholarship.region) }],
     })
 
     const first = message.content[0]
     const text = first?.type === 'text' ? first.text.trim() : ''
-    // Strip markdown code fences if present
     const cleaned = text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim()
 
     let parsed: EligibilityCriteria
@@ -113,9 +105,7 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonError('AI returned invalid JSON', 502)
     }
 
-    // Merge with defaults to ensure all keys are present
     const eligibility: EligibilityCriteria = { ...EMPTY_ELIGIBILITY, ...parsed }
-
     return new Response(JSON.stringify({ eligibility }), { status: 200 })
   } catch (e) {
     console.error('[POST /admin/api/scholarships/parse-eligibility]', e)

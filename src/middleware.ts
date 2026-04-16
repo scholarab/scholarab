@@ -1,34 +1,16 @@
 import { defineMiddleware } from 'astro/middleware'
-import { auth } from './lib/auth'
+import { verifySessionCookie, getSessionToken } from './lib/adminAuth'
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const path = context.url.pathname
-
-  // Only protect /admin/* routes
   if (!path.startsWith('/admin')) return next()
+  if (path === '/admin/login' || path === '/admin/api/login') return next()
 
-  // Allow login page through
-  if (path === '/admin/login') return next()
-
-  // Allow better-auth API routes through
-  if (path.startsWith('/api/auth')) return next()
-
-  try {
-    const session = await auth.api.getSession({
-      headers: context.request.headers,
-    })
-
-    if (!session) {
-      const next_url = encodeURIComponent(path)
-      return context.redirect(`/admin/login?next=${next_url}`)
-    }
-
-    context.locals.user = session.user
-    context.locals.session = session.session
-  } catch (e) {
-    console.error('[auth] session check failed:', e)
-    return context.redirect('/admin/login')
+  const token = getSessionToken(context.request)
+  if (!(await verifySessionCookie(token))) {
+    return context.redirect(`/admin/login?next=${encodeURIComponent(path)}`)
   }
 
+  context.locals.user = { id: 'admin', email: 'admin@scholarab.ca', name: 'Admin' }
   return next()
 })

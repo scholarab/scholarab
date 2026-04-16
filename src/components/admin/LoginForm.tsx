@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import { authClient } from '../../lib/auth-client'
 
 export default function LoginForm({ next }: { next: string }) {
-  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -11,13 +9,22 @@ export default function LoginForm({ next }: { next: string }) {
     e.preventDefault()
     setLoading(true)
     setError('')
-
-    const { error } = await authClient.signIn.email({ email, password })
-    if (error) {
-      setError(error.message || (error as unknown as Record<string, string>).error || 'Invalid credentials')
+    try {
+      const res = await fetch('/admin/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      })
+      if (res.ok) {
+        window.location.href = next
+      } else {
+        const data = await res.json().catch(() => ({}))
+        setError((data as { error?: string }).error || 'Invalid credentials')
+        setLoading(false)
+      }
+    } catch {
+      setError('Network error — try again')
       setLoading(false)
-    } else {
-      window.location.href = next
     }
   }
 
@@ -33,23 +40,13 @@ export default function LoginForm({ next }: { next: string }) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm text-white/70 mb-1.5">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 focus:ring-1 focus:ring-[#22d3a5]/50 transition"
-            placeholder="counsellor@school.ca"
-          />
-        </div>
-        <div>
           <label className="block text-sm text-white/70 mb-1.5">Password</label>
           <input
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
+            autoFocus
             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 focus:ring-1 focus:ring-[#22d3a5]/50 transition"
             placeholder="••••••••"
           />
