@@ -8,7 +8,7 @@ import { generateSlug } from '../lib/utils.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type Step = 1 | 2 | 3 | 'results'
+type Step = 1 | 2 | 'results'
 
 interface Props {
   scholarships: Scholarship[]
@@ -86,20 +86,13 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
 const QUIZ_STORAGE_KEY = 'scholarab_quiz_draft'
 
 type QuizDraft = {
-  step: 1 | 2 | 3
+  step: 1 | 2
   grade: StudentProfile['grade'] | ''
   city: string
   schoolBoard: string | null
   targetInstitution: string
   fields: string[]
   averageBracket: number | null
-  identifiesAsFemale: boolean | null
-  identifiesAsIndigenous: boolean | null
-  identifiesAsBIPOC: boolean | null
-  inFosterCare: boolean | null
-  inApprenticeship: boolean | null
-  citizenship: StudentProfile['citizenship']
-  hasFinancialNeed: boolean | null
 }
 
 function loadDraft(): QuizDraft | null {
@@ -131,8 +124,8 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
 }
 
 function ProgressBar({ step }: { step: Step }) {
-  const steps = [1, 2, 3]
-  const current = step === 'results' ? 3 : (step as number)
+  const steps = [1, 2]
+  const current = step === 'results' ? 2 : (step as number)
   return (
     <div className="flex gap-1.5 mb-8">
       {steps.map(s => (
@@ -154,27 +147,18 @@ function parseAmount(amount: string): number {
 
 export default function EligibilityQuiz({ scholarships }: Props) {
   const _d = loadDraft()
-  const [step, setStep] = useState<1 | 2 | 3 | 'results'>(_d?.step ?? 1)
+  const [step, setStep] = useState<1 | 2 | 'results'>(_d?.step ?? 1)
   const [grade, setGrade] = useState<StudentProfile['grade'] | ''>(_d?.grade ?? '')
   const [city, setCity] = useState(_d?.city ?? '')
   const [schoolBoard, setSchoolBoard] = useState<string | null>(_d?.schoolBoard ?? null)
   const [targetInstitution, setTargetInstitution] = useState(_d?.targetInstitution ?? '')
   const [fields, setFields] = useState<string[]>(_d?.fields ?? [])
   const [averageBracket, setAverageBracket] = useState<number | null>(_d?.averageBracket ?? null)
-  const [identifiesAsFemale, setIdentifiesAsFemale] = useState<boolean | null>(_d?.identifiesAsFemale ?? null)
-  const [identifiesAsIndigenous, setIdentifiesAsIndigenous] = useState<boolean | null>(_d?.identifiesAsIndigenous ?? null)
-  const [identifiesAsBIPOC, setIdentifiesAsBIPOC] = useState<boolean | null>(_d?.identifiesAsBIPOC ?? null)
-  const [inFosterCare, setInFosterCare] = useState<boolean | null>(_d?.inFosterCare ?? null)
-  const [inApprenticeship, setInApprenticeship] = useState<boolean | null>(_d?.inApprenticeship ?? null)
-  const [citizenship, setCitizenship] = useState<StudentProfile['citizenship']>(_d?.citizenship ?? null)
-  const [hasFinancialNeed, setHasFinancialNeed] = useState<boolean | null>(_d?.hasFinancialNeed ?? null)
 
   function reset() {
     try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
     setStep(1); setGrade(''); setCity(''); setSchoolBoard(null); setTargetInstitution('')
     setFields([]); setAverageBracket(null)
-    setIdentifiesAsFemale(null); setIdentifiesAsIndigenous(null); setIdentifiesAsBIPOC(null)
-    setInFosterCare(null); setInApprenticeship(null); setCitizenship(null); setHasFinancialNeed(null)
   }
 
   const profile = useMemo((): StudentProfile | null => {
@@ -187,19 +171,17 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       targetInstitution: targetInstitution && targetInstitution !== 'Not sure yet' ? targetInstitution : null,
       fields,
       averagePercent: averageBracket,
-      identifiesAsFemale,
-      identifiesAsIndigenous,
-      identifiesAsBIPOC,
-      hasFinancialNeed,
+      identifiesAsFemale: null,
+      identifiesAsIndigenous: null,
+      identifiesAsBIPOC: null,
+      hasFinancialNeed: null,
       familyIncome: null,
-      inFosterCare,
-      inApprenticeship,
+      inFosterCare: null,
+      inApprenticeship: null,
       extracurriculars: [],
-      citizenship,
+      citizenship: null,
     }
-  }, [grade, city, schoolBoard, targetInstitution, fields, averageBracket,
-      identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
-      inFosterCare, inApprenticeship, citizenship, hasFinancialNeed])
+  }, [grade, city, schoolBoard, targetInstitution, fields, averageBracket])
 
   const scholarshipInputs = useMemo(
     () => scholarships.map(s => ({ id: s.id, region: s.region, eligibility: s.eligibility })),
@@ -230,10 +212,6 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     setFields(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f])
   }
 
-  function toggleIdentity(current: boolean | null, setter: (v: boolean | null) => void) {
-    setter(current === true ? null : true)
-  }
-
   const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
   const handleToggleSave = useCallback((id: number, el?: Element | null) => {
     toggleSaved(id)
@@ -248,14 +226,10 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     try {
       const draft: QuizDraft = {
         step, grade, city, schoolBoard, targetInstitution, fields, averageBracket,
-        identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
-        inFosterCare, inApprenticeship, citizenship, hasFinancialNeed,
       }
       localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(draft))
     } catch { /* ignore */ }
-  }, [step, grade, city, schoolBoard, targetInstitution, fields, averageBracket,
-      identifiesAsFemale, identifiesAsIndigenous, identifiesAsBIPOC,
-      inFosterCare, inApprenticeship, citizenship, hasFinancialNeed])
+  }, [step, grade, city, schoolBoard, targetInstitution, fields, averageBracket])
 
   // ── Step 1 — Where are you at? ──────────────────────────────────────────────
 
@@ -359,74 +333,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-card text-secondary transition">
             ← Back
           </button>
-          <button onClick={() => setStep(3)} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>
-            Next →
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  // ── Step 3 — About you ─────────────────────────────────────────────────────
-
-  if (step === 3) {
-    return (
-      <div>
-        <ProgressBar step={3} />
-        <h2 className="text-xl font-bold mb-1 text-primary">About you</h2>
-        <p className="text-sm text-secondary mb-1">All optional. Helps surface scholarships made for you specifically.</p>
-        <p className="text-xs text-faint mb-6 flex items-center gap-1.5">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-          Processed on this device only. Never sent anywhere.
-        </p>
-
-        <div className="mb-5">
-          <p className="text-sm text-secondary mb-2.5 font-medium">I identify as</p>
-          <div className="flex flex-wrap gap-2">
-            <Chip label="Male" active={identifiesAsFemale === false} onClick={() => setIdentifiesAsFemale(prev => prev === false ? null : false)} />
-            <Chip label="Female" active={identifiesAsFemale === true} onClick={() => setIdentifiesAsFemale(prev => prev === true ? null : true)} />
-            <Chip label="Indigenous (First Nations, Métis, Inuit)" active={identifiesAsIndigenous === true} onClick={() => toggleIdentity(identifiesAsIndigenous, setIdentifiesAsIndigenous)} />
-            <Chip label="Person of colour" active={identifiesAsBIPOC === true} onClick={() => toggleIdentity(identifiesAsBIPOC, setIdentifiesAsBIPOC)} />
-          </div>
-        </div>
-
-        <div className="mb-5">
-          <p className="text-sm text-secondary mb-2.5 font-medium">Financial situation</p>
-          <div className="flex flex-wrap gap-2">
-            <Chip label="I have financial need" active={hasFinancialNeed === true} onClick={() => setHasFinancialNeed(prev => prev === true ? null : true)} />
-            <Chip label="No financial need" active={hasFinancialNeed === false} onClick={() => setHasFinancialNeed(prev => prev === false ? null : false)} />
-          </div>
-        </div>
-
-        <div className="mb-8">
-          <p className="text-sm text-secondary mb-2.5 font-medium">Citizenship</p>
-          <div className="flex flex-wrap gap-2">
-            {([
-              { value: 'canadian_citizen', label: 'Canadian citizen' },
-              { value: 'permanent_resident', label: 'Permanent resident' },
-              { value: 'other', label: 'Other / International' },
-            ] as { value: StudentProfile['citizenship']; label: string }[]).map(({ value, label }) => (
-              <Chip
-                key={value as string}
-                label={label}
-                active={citizenship === value}
-                onClick={() => setCitizenship(prev => prev === value ? null : value)}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="flex gap-3">
-          <button onClick={() => setStep(2)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-card text-secondary transition">
-            ← Back
-          </button>
-          <button
-            onClick={() => setStep('results')}
-            className="flex-1 py-3 rounded-xl text-sm font-semibold transition"
-            style={{ background: 'var(--brand)', color: '#0a0a0f' }}
-          >
+          <button onClick={() => setStep('results')} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>
             Find my scholarships →
           </button>
         </div>

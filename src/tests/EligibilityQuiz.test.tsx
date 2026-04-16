@@ -54,15 +54,9 @@ function advanceToStep2() {
   fireEvent.click(screen.getByRole('button', { name: /next/i }))
 }
 
-/** Advance quiz to step 3. */
-function advanceToStep3() {
-  advanceToStep2()
-  fireEvent.click(screen.getByRole('button', { name: /next/i }))
-}
-
 /** Advance quiz to results with no match results. */
 function advanceToResults() {
-  advanceToStep3()
+  advanceToStep2()
   fireEvent.click(screen.getByRole('button', { name: /find my scholarships/i }))
 }
 
@@ -199,11 +193,11 @@ describe('Step 2 — What do you want to study?', () => {
     // Clicked same bracket twice — should toggle off (no error)
   })
 
-  it('Next advances to step 3', () => {
+  it('Find my scholarships advances to results', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     advanceToStep2()
-    fireEvent.click(screen.getByRole('button', { name: /next/i }))
-    expect(screen.getByText('About you')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: /find my scholarships/i }))
+    expect(screen.getByText(/scholarships? found/i)).toBeTruthy()
   })
 
   it('all FIELDS chips are rendered', () => {
@@ -212,62 +206,6 @@ describe('Step 2 — What do you want to study?', () => {
     expect(screen.getByText('STEM')).toBeTruthy()
     expect(screen.getByText('Health & Medicine')).toBeTruthy()
     expect(screen.getByText('Trades')).toBeTruthy()
-  })
-})
-
-// ── Step 3 ─────────────────────────────────────────────────────────────────────
-
-describe('Step 3 — About you', () => {
-  it('renders step 3 heading', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep3()
-    expect(screen.getByText('About you')).toBeTruthy()
-  })
-
-  it('Back button returns to step 2', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep3()
-    fireEvent.click(screen.getByRole('button', { name: /back/i }))
-    expect(screen.getByText('What do you want to study?')).toBeTruthy()
-  })
-
-  it('identity chips are rendered', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep3()
-    expect(screen.getByText('Female')).toBeTruthy()
-    expect(screen.getByText('Male')).toBeTruthy()
-    expect(screen.getByText(/indigenous/i)).toBeTruthy()
-    expect(screen.getByText(/person of colour/i)).toBeTruthy()
-  })
-
-  it('citizenship chips are rendered', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep3()
-    expect(screen.getByText('Canadian citizen')).toBeTruthy()
-    expect(screen.getByText('Permanent resident')).toBeTruthy()
-    expect(screen.getByText(/other/i)).toBeTruthy()
-  })
-
-  it('clicking Female chip selects it', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep3()
-    fireEvent.click(screen.getByText('Female'))
-    // No error = works; toggling twice deselects
-    fireEvent.click(screen.getByText('Female'))
-  })
-
-  it('clicking citizenship chip toggles selection', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep3()
-    fireEvent.click(screen.getByText('Canadian citizen'))
-    fireEvent.click(screen.getByText('Canadian citizen'))
-  })
-
-  it('"Find my scholarships" advances to results', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep3()
-    fireEvent.click(screen.getByRole('button', { name: /find my scholarships/i }))
-    expect(screen.getByText(/scholarships? found/i)).toBeTruthy()
   })
 })
 
