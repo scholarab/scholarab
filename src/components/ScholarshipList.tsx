@@ -1,8 +1,8 @@
 import { useMemo, useEffect } from 'react';
-import { Drawer } from 'vaul';
 import { useScholarships } from '../hooks/useScholarships.ts';
 import ScholarshipCard from './ScholarshipCard.tsx';
 import Pagination from './Pagination.tsx';
+import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 import { SCHOLARSHIP_BADGES } from '../lib/badges.ts';
 
@@ -51,35 +51,6 @@ export default function ScholarshipList({ items }: Props) {
     [items]
   );
 
-  const renderCategoryChips = (mobile: boolean) => {
-    const btnCls = `flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 ${mobile ? 'py-1.5' : 'py-1'} text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border`;
-    return (
-      <>
-        <button onClick={() => setCategory('all')} aria-pressed={selectedCategory === 'all'}
-          className={btnCls}
-          style={selectedCategory === 'all'
-            ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
-            : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
-          All
-        </button>
-        {categories.map(cat => {
-          const badge = SCHOLARSHIP_BADGES[cat];
-          const sel = selectedCategory === cat;
-          return (
-            <button key={cat} onClick={() => setCategory(sel ? 'all' : cat)} aria-pressed={sel}
-              className={btnCls}
-              style={sel
-                ? { background: badge ? badge.bg : 'var(--brand-dim)', borderColor: badge ? badge.border : 'var(--brand-border)', color: badge ? badge.color : 'var(--brand)' }
-                : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>
-              {badge?.emoji && <span aria-hidden="true">{badge.emoji}</span>}
-              {cat}
-            </button>
-          );
-        })}
-      </>
-    );
-  };
-
   return (
     <div>
       <span className="sr-only" aria-live="polite" aria-atomic="true">
@@ -91,27 +62,14 @@ export default function ScholarshipList({ items }: Props) {
         <div className="hidden md:block">
           <div className="chips-row-wrap mb-4">
             <div className="flex chips-row gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
-              {renderCategoryChips(false)}
+              <CategoryChips categories={categories} selected={selectedCategory} onSelect={setCategory} badges={SCHOLARSHIP_BADGES} mobile={false} />
             </div>
           </div>
         </div>
       )}
 
       {/* Mobile: count + filter button */}
-      <div className="md:hidden mb-5 flex items-center justify-between gap-3">
-        <p className="text-sm text-faint flex-shrink-0">
-          {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
-        </p>
-        <button onClick={() => setSheetOpen(true)} aria-expanded={sheetOpen} aria-label="Open filters"
-          className="relative flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium border transition-colors"
-          style={{ borderColor: hasActiveFilters ? 'var(--brand-border)' : 'var(--border-medium)', color: hasActiveFilters ? 'var(--brand)' : 'var(--text-secondary)', background: hasActiveFilters ? 'var(--brand-dim)' : 'transparent' }}>
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M2 3h12M5 8h6M7 13h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-          </svg>
-          Filter
-          {hasActiveFilters && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--brand)', position: 'absolute', top: 4, right: 4 }} />}
-        </button>
-      </div>
+      <FilterButton count={filtered.length} label="scholarship" hasActiveFilters={hasActiveFilters} open={sheetOpen} onOpen={() => setSheetOpen(true)} />
 
       {/* Region pills — desktop only */}
       <div className="hidden md:block">
@@ -147,71 +105,47 @@ export default function ScholarshipList({ items }: Props) {
       </div>
 
       {/* Mobile bottom sheet */}
-      <Drawer.Root open={sheetOpen} onOpenChange={setSheetOpen}>
-        <Drawer.Portal>
-          <Drawer.Overlay className="fixed inset-0 z-40 md:hidden bg-black/[0.45] backdrop-blur-sm" />
-          <Drawer.Content aria-label="Filter and sort options"
-            className="fixed left-0 right-0 z-50 md:hidden rounded-t-2xl flex flex-col outline-none"
-            style={{ bottom: 64, backgroundColor: 'var(--bg-card)', boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
-            <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-subtle flex-shrink-0">
-              <span className="font-semibold text-primary text-base">Filter & Sort</span>
-              <button onClick={() => setSheetOpen(false)} aria-label="Close"
-                className="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-subtle transition-colors">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-              </button>
+      <FilterSheet open={sheetOpen} onOpenChange={setSheetOpen}>
+        {categories.length > 0 && (
+          <div>
+            <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Category</p>
+            <div className="flex flex-wrap" style={{ gap: 8 }}>
+              <CategoryChips categories={categories} selected={selectedCategory} onSelect={setCategory} badges={SCHOLARSHIP_BADGES} mobile={true} />
             </div>
-            <div className="overflow-y-auto flex-1 px-5 py-5 space-y-6">
-              {categories.length > 0 && (
-                <div>
-                  <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Category</p>
-                  <div className="flex flex-wrap" style={{ gap: 8 }}>
-                    {renderCategoryChips(true)}
-                  </div>
-                </div>
-              )}
-              <div>
-                <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Region</p>
-                <div className="flex flex-wrap" style={{ gap: 8 }}>
-                  {REGION_PILLS.map(({ value, label, dot }) => {
-                    const sel = selectedRegion === value;
-                    return (
-                      <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                        className={`${pillBase} ${sel ? pillOn : pillOff}`}
-                        style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
-                        {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', flexShrink: 0 }} />}
-                        {label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Sort</p>
-                <div className="flex flex-wrap" style={{ gap: 8 }}>
-                  {SORT_OPTIONS.map(({ value, label }) => {
-                    const sel = sortBy === value;
-                    return (
-                      <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={sel}
-                        className={`${pillBase} ${sel ? pillOn : pillOff}`}
-                        style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
-                        {label}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <div className="flex-shrink-0 px-5 py-4 border-t border-subtle"
-              style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
-              <button onClick={() => setSheetOpen(false)}
-                className="w-full py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
-                style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Done</button>
-            </div>
-          </Drawer.Content>
-        </Drawer.Portal>
-      </Drawer.Root>
+          </div>
+        )}
+        <div>
+          <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Region</p>
+          <div className="flex flex-wrap" style={{ gap: 8 }}>
+            {REGION_PILLS.map(({ value, label, dot }) => {
+              const sel = selectedRegion === value;
+              return (
+                <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
+                  className={`${pillBase} ${sel ? pillOn : pillOff}`}
+                  style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
+                  {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', flexShrink: 0 }} />}
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div>
+          <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Sort</p>
+          <div className="flex flex-wrap" style={{ gap: 8 }}>
+            {SORT_OPTIONS.map(({ value, label }) => {
+              const sel = sortBy === value;
+              return (
+                <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={sel}
+                  className={`${pillBase} ${sel ? pillOn : pillOff}`}
+                  style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </FilterSheet>
 
       {/* Card grid */}
       <div key={`${regionKey}-${categoryKey}-${sortBy}-${page}`} className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
