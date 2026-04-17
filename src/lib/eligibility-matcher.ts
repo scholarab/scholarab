@@ -32,9 +32,9 @@ export function matchScholarship(
 ): MatchResult {
   const { eligibility, region } = scholarship
 
-  // No eligibility data yet → show as possible match for everyone
+  // No eligibility data yet → show as possible match, but with low confidence
   if (!eligibility) {
-    return { match: true, confidence: 0.4, reasons: [] }
+    return { match: true, confidence: 0.20, reasons: [] }
   }
 
   const reasons: string[] = []
@@ -135,32 +135,40 @@ export function matchScholarship(
     }
   }
 
-  // ── Confidence scoring (soft signals) ─────────────────────────────────────
-  let confidence = 0.50 // base: passed all hard filters
+  // ── Confidence scoring (specificity signals) ──────────────────────────────
+  let confidence = 0.35 // base: passed all hard filters
 
-  // Field of study
-  if (eligibility.fields.length === 0) {
-    confidence += 0.10 // no restriction = more universally eligible
-  } else if (profile.fields.length > 0) {
-    if (profile.fields.some(f => eligibility.fields.includes(f))) confidence += 0.20
-    else confidence -= 0.10 // field specified but doesn't match
+  // City-specific match — scholarship is for this exact city (not national/provincial)
+  if (region && region !== 'National' && region !== 'Alberta' && region !== 'Alberta-wide') {
+    confidence += 0.25
   }
 
-  // Target institution
-  if (eligibility.targetInstitutions.length === 0 || eligibility.targetInstitutions.includes('any')) {
-    confidence += 0.10
-  } else if (profile.targetInstitution) {
-    if (eligibility.targetInstitutions.includes(profile.targetInstitution)) confidence += 0.20
-    else confidence -= 0.10
-  }
-
-  // Grade specificity bonus (exactly specified)
-  if (eligibility.grades.length > 0) confidence += 0.05
+  // Grade restriction confirmed match
+  if (eligibility.grades.length > 0) confidence += 0.15
 
   // School board confirmed match
   if (eligibility.schoolBoards.length > 0 && profile.schoolBoard &&
       eligibility.schoolBoards.includes(profile.schoolBoard)) {
-    confidence += 0.05
+    confidence += 0.15
+  }
+
+  // Field of study
+  if (eligibility.fields.length > 0 && profile.fields.length > 0) {
+    if (profile.fields.some(f => eligibility.fields.includes(f))) confidence += 0.20
+    else confidence -= 0.15
+  }
+
+  // Target institution
+  if (eligibility.targetInstitutions.length > 0 && !eligibility.targetInstitutions.includes('any')) {
+    if (profile.targetInstitution) {
+      if (eligibility.targetInstitutions.includes(profile.targetInstitution)) confidence += 0.15
+      else confidence -= 0.10
+    }
+  }
+
+  // Average confirmed — student provided their average and it clears the bar
+  if (eligibility.minAverage !== null && profile.averagePercent !== null) {
+    confidence += 0.10
   }
 
   // Financial need confirmed match
@@ -173,8 +181,8 @@ export function matchScholarship(
 }
 
 export function getConfidenceTier(confidence: number): ConfidenceTier {
-  if (confidence >= 0.85) return 'strong'
-  if (confidence >= 0.60) return 'good'
+  if (confidence >= 0.80) return 'strong'
+  if (confidence >= 0.55) return 'good'
   return 'possible'
 }
 

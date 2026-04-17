@@ -231,10 +231,17 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
   const results = useMemo(() => {
     if (!profile) return null
-    return matchAll(profile, scholarshipInputs).map(m => ({
+    const all = matchAll(profile, scholarshipInputs).map(m => ({
       ...m,
       scholarship: scholarshipMap.get(m.id)!,
     })).filter(m => m.scholarship)
+
+    // Show top 10: prioritise strong+good; only fill with possible if fewer than 5 quality matches
+    const quality  = all.filter(r => r.tier !== 'possible')
+    const possible = all.filter(r => r.tier === 'possible')
+    return quality.length >= 5
+      ? quality.slice(0, 10)
+      : [...quality, ...possible].slice(0, 10)
   }, [profile, scholarshipInputs, scholarshipMap])
 
   const totalAmount = useMemo(() => {

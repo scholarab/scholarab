@@ -36,9 +36,9 @@ function sch(
 describe('matchScholarship', () => {
 
   describe('null eligibility', () => {
-    it('returns match:true, confidence:0.4, empty reasons', () => {
+    it('returns match:true, confidence:0.20, empty reasons', () => {
       expect(matchScholarship(baseProfile, { region: null, eligibility: null }))
-        .toEqual({ match: true, confidence: 0.4, reasons: [] })
+        .toEqual({ match: true, confidence: 0.20, reasons: [] })
     })
   })
 
@@ -370,62 +370,79 @@ describe('matchScholarship', () => {
 
   // ── Confidence scoring ────────────────────────────────────────────────────
   describe('confidence scoring', () => {
-    it('base score 0.50 + no-field-restriction +0.10 + no-institution +0.10 = 0.70', () => {
+    it('base score 0.35 with no restrictions and null region', () => {
       const result = matchScholarship(baseProfile, sch({
         fields: [],
         targetInstitutions: [],
         grades: [],
         schoolBoards: [],
       }))
-      expect(result.confidence).toBeCloseTo(0.70)
+      expect(result.confidence).toBeCloseTo(0.35)
+    })
+
+    it('+0.25 for city-specific region match', () => {
+      // scholarship region === student city → city-specific bonus
+      const result = matchScholarship(baseProfile, sch({ fields: [], targetInstitutions: [] }, 'Medicine Hat'))
+      // 0.35 + 0.25 = 0.60
+      expect(result.confidence).toBeCloseTo(0.60)
+    })
+
+    it('no city bonus for National region', () => {
+      const result = matchScholarship(baseProfile, sch({ fields: [], targetInstitutions: [] }, 'National'))
+      expect(result.confidence).toBeCloseTo(0.35)
+    })
+
+    it('no city bonus for Alberta-wide region', () => {
+      const result = matchScholarship(baseProfile, sch({ fields: [], targetInstitutions: [] }, 'Alberta'))
+      expect(result.confidence).toBeCloseTo(0.35)
     })
 
     it('+0.20 for field match', () => {
       const p = { ...baseProfile, fields: ['STEM'] }
       const result = matchScholarship(p, sch({ fields: ['STEM'], targetInstitutions: [] }))
-      // 0.50 + 0.20 (field match) + 0.10 (no institution) = 0.80
-      expect(result.confidence).toBeCloseTo(0.80)
+      // 0.35 + 0.20 (field match) = 0.55
+      expect(result.confidence).toBeCloseTo(0.55)
     })
 
-    it('-0.10 for field mismatch (profile has field, none match)', () => {
+    it('-0.15 for field mismatch (profile has field, none match)', () => {
       const p = { ...baseProfile, fields: ['arts'] }
       const result = matchScholarship(p, sch({ fields: ['STEM'], targetInstitutions: [] }))
-      // 0.50 - 0.10 (field mismatch) + 0.10 (no institution) = 0.50
-      expect(result.confidence).toBeCloseTo(0.50)
+      // 0.35 - 0.15 (field mismatch) = 0.20
+      expect(result.confidence).toBeCloseTo(0.20)
     })
 
     it('no field adjustment when profile has no fields and eligibility has restrictions', () => {
       // profile.fields = [] → neither branch applies for field scoring
       const result = matchScholarship(baseProfile, sch({ fields: ['STEM'], targetInstitutions: [] }))
-      // 0.50 + 0 (no profile fields to match) + 0.10 (no institution) = 0.60
-      expect(result.confidence).toBeCloseTo(0.60)
+      // 0.35 + 0 (no profile fields) = 0.35
+      expect(result.confidence).toBeCloseTo(0.35)
     })
 
-    it('+0.20 for institution match', () => {
+    it('+0.15 for institution match', () => {
       const p = { ...baseProfile, targetInstitution: 'University of Calgary' }
       const result = matchScholarship(p, sch({ fields: [], targetInstitutions: ['University of Calgary'] }))
-      // 0.50 + 0.10 (no field restriction) + 0.20 (institution match) = 0.80
-      expect(result.confidence).toBeCloseTo(0.80)
+      // 0.35 + 0.15 (institution match) = 0.50
+      expect(result.confidence).toBeCloseTo(0.50)
     })
 
     it('-0.10 for institution mismatch', () => {
       const p = { ...baseProfile, targetInstitution: 'University of Alberta' }
       const result = matchScholarship(p, sch({ fields: [], targetInstitutions: ['University of Calgary'] }))
-      // 0.50 + 0.10 (no field) + -0.10 (institution mismatch) = 0.50
-      expect(result.confidence).toBeCloseTo(0.50)
+      // 0.35 - 0.10 (institution mismatch) = 0.25
+      expect(result.confidence).toBeCloseTo(0.25)
     })
 
-    it('+0.05 for grade specificity bonus', () => {
+    it('+0.15 for grade restriction confirmed match', () => {
       const result = matchScholarship(baseProfile, sch({
         grades: ['12'],
         fields: [],
         targetInstitutions: [],
       }))
-      // 0.50 + 0.10 + 0.10 + 0.05 = 0.75
-      expect(result.confidence).toBeCloseTo(0.75)
+      // 0.35 + 0.15 = 0.50
+      expect(result.confidence).toBeCloseTo(0.50)
     })
 
-    it('+0.05 for confirmed school board match', () => {
+    it('+0.15 for confirmed school board match', () => {
       const p = { ...baseProfile, schoolBoard: 'MHPSD' }
       const result = matchScholarship(p, sch({
         grades: [],
@@ -433,19 +450,34 @@ describe('matchScholarship', () => {
         targetInstitutions: [],
         schoolBoards: ['MHPSD'],
       }))
-      // 0.50 + 0.10 + 0.10 + 0.05 = 0.75
-      expect(result.confidence).toBeCloseTo(0.75)
+      // 0.35 + 0.15 = 0.50
+      expect(result.confidence).toBeCloseTo(0.50)
     })
 
+    it('+0.10 for confirmed average meets requirement', () => {
+      const p = { ...baseProfile, averagePercent: 85 }
+      const result = matchScholarship(p, sch({ minAverage: 75, fields: [], targetInstitutions: [] }))
+      // 0.35 + 0.10 = 0.45
+      expect(result.confidence).toBeCloseTo(0.45)
+    })
+
+    it('city + grade + field stacks to strong tier', () => {
+      const p = { ...baseProfile, fields: ['STEM'] }
+      const result = matchScholarship(p, sch({ grades: ['12'], fields: ['STEM'], targetInstitutions: [] }, 'Medicine Hat'))
+      // 0.35 + 0.25 (city) + 0.15 (grade) + 0.20 (field) = 0.95
+      expect(result.confidence).toBeCloseTo(0.95)
+      expect(getConfidenceTier(result.confidence)).toBe('strong')
+    })
 
     it('confidence clamped to max 1.0', () => {
-      const p = { ...baseProfile, schoolBoard: 'MHPSD', fields: ['STEM'], targetInstitution: 'U of C' }
+      const p = { ...baseProfile, schoolBoard: 'MHPSD', fields: ['STEM'], targetInstitution: 'U of C', averagePercent: 90 }
       const result = matchScholarship(p, sch({
         grades: ['12'],
         fields: ['STEM'],
         targetInstitutions: ['U of C'],
         schoolBoards: ['MHPSD'],
-      }))
+        minAverage: 80,
+      }, 'Medicine Hat'))
       expect(result.confidence).toBeLessThanOrEqual(1.0)
     })
 
@@ -492,13 +524,15 @@ describe('matchScholarship', () => {
 
 describe('getConfidenceTier', () => {
   it('1.0 → strong', () => expect(getConfidenceTier(1.0)).toBe('strong'))
-  it('0.85 → strong (boundary)', () => expect(getConfidenceTier(0.85)).toBe('strong'))
   it('0.90 → strong', () => expect(getConfidenceTier(0.90)).toBe('strong'))
-  it('0.84 → good', () => expect(getConfidenceTier(0.84)).toBe('good'))
+  it('0.85 → strong', () => expect(getConfidenceTier(0.85)).toBe('strong'))
+  it('0.80 → strong (boundary)', () => expect(getConfidenceTier(0.80)).toBe('strong'))
+  it('0.79 → good', () => expect(getConfidenceTier(0.79)).toBe('good'))
   it('0.75 → good', () => expect(getConfidenceTier(0.75)).toBe('good'))
-  it('0.60 → good (boundary)', () => expect(getConfidenceTier(0.60)).toBe('good'))
-  it('0.59 → possible', () => expect(getConfidenceTier(0.59)).toBe('possible'))
-  it('0.4 → possible', () => expect(getConfidenceTier(0.4)).toBe('possible'))
+  it('0.60 → good', () => expect(getConfidenceTier(0.60)).toBe('good'))
+  it('0.55 → good (boundary)', () => expect(getConfidenceTier(0.55)).toBe('good'))
+  it('0.54 → possible', () => expect(getConfidenceTier(0.54)).toBe('possible'))
+  it('0.35 → possible', () => expect(getConfidenceTier(0.35)).toBe('possible'))
   it('0.1 → possible', () => expect(getConfidenceTier(0.1)).toBe('possible'))
 })
 
@@ -538,8 +572,8 @@ describe('matchAll', () => {
   it('assigns tier consistent with confidence', () => {
     const results = matchAll(baseProfile, [nullElig, mhOpen, national])
     for (const r of results) {
-      if (r.confidence >= 0.85) expect(r.tier).toBe('strong')
-      else if (r.confidence >= 0.60) expect(r.tier).toBe('good')
+      if (r.confidence >= 0.80) expect(r.tier).toBe('strong')
+      else if (r.confidence >= 0.55) expect(r.tier).toBe('good')
       else expect(r.tier).toBe('possible')
     }
   })
@@ -548,9 +582,9 @@ describe('matchAll', () => {
     expect(matchAll(baseProfile, [calgaryOnly])).toEqual([])
   })
 
-  it('null eligibility scholarship has confidence 0.4 (possible tier)', () => {
+  it('null eligibility scholarship has confidence 0.20 (possible tier)', () => {
     const results = matchAll(baseProfile, [nullElig])
-    expect(results[0]?.confidence).toBe(0.4)
+    expect(results[0]?.confidence).toBe(0.20)
     expect(results[0]?.tier).toBe('possible')
   })
 
