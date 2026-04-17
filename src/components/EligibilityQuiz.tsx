@@ -163,7 +163,14 @@ function ProgressBar({ step }: { step: Step }) {
   const steps = [1, 2]
   const current = step === 'results' ? 2 : (step as number)
   return (
-    <div className="flex gap-1.5 mb-8">
+    <div
+      role="progressbar"
+      aria-label="Quiz progress"
+      aria-valuenow={current}
+      aria-valuemin={0}
+      aria-valuemax={steps.length}
+      className="flex gap-1.5 mb-8"
+    >
       {steps.map(s => (
         <div
           key={s}

@@ -4,6 +4,15 @@ import { loadScholarships } from '../lib/data-loader'
 import EligibilityQuiz from '../components/EligibilityQuiz'
 
 const scholarships = await loadScholarships()
+
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    { '@type': 'ListItem', 'position': 1, 'name': 'ScholarAB', 'item': 'https://www.scholarab.ca' },
+    { '@type': 'ListItem', 'position': 2, 'name': 'Find Your Scholarships', 'item': 'https://www.scholarab.ca/match' },
+  ],
+};
 ---
 
 <Layout
@@ -14,6 +23,7 @@ const scholarships = await loadScholarships()
   ogUrl="https://www.scholarab.ca/match"
   currentPath="/match"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <div class="pb-16">
     <div class="max-w-xl mx-auto pt-8 md:pt-12">
 

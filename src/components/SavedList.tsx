@@ -264,7 +264,29 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
   return (
     <div className="saved-list space-y-10">
       {hasDeadlines && (
-        <Suspense fallback={<div className="card p-5" style={{ minHeight: 280 }} />}>
+        <Suspense fallback={
+          <div className="card p-5">
+            <div className="flex items-center justify-between mb-5">
+              <div className="h-3 w-32 rounded-full bg-subtle animate-pulse" />
+              <div className="h-7 w-28 rounded-lg bg-subtle animate-pulse" />
+            </div>
+            <div className="flex items-center justify-between mb-5">
+              <div className="w-8 h-8 rounded-full bg-subtle animate-pulse" />
+              <div className="h-3 w-24 rounded-full bg-subtle animate-pulse" />
+              <div className="w-8 h-8 rounded-full bg-subtle animate-pulse" />
+            </div>
+            <div className="grid grid-cols-7 mb-1">
+              {['S','M','T','W','T','F','S'].map((d, i) => (
+                <div key={i} className="h-3 mx-auto w-5 rounded-full bg-subtle animate-pulse" />
+              ))}
+            </div>
+            <div className="grid grid-cols-7 gap-y-3 mt-3">
+              {Array.from({ length: 35 }).map((_, i) => (
+                <div key={i} className="h-5 w-5 mx-auto rounded-full bg-subtle animate-pulse" style={{ opacity: 0.4 + (i % 3) * 0.2 }} />
+              ))}
+            </div>
+          </div>
+        }>
           <DeadlineCalendar scholarships={savedScholarships} programs={savedPrograms} />
         </Suspense>
       )}
