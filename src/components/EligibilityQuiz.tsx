@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState, useReducer, useMemo, useCallback, useEffect } from 'react'
 import type { Scholarship } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll } from '../lib/eligibility-matcher'
@@ -12,6 +12,50 @@ type Step = 1 | 2 | 'results'
 
 interface Props {
   scholarships: Scholarship[]
+}
+
+interface QuizState {
+  step: Step
+  grade: StudentProfile['grade'] | ''
+  city: string
+  schoolBoard: string | null
+  targetInstitution: string
+  fields: string[]
+  averageBracket: number | null
+}
+
+type QuizAction =
+  | { type: 'SET_STEP'; payload: Step }
+  | { type: 'SET_GRADE'; payload: StudentProfile['grade'] }
+  | { type: 'SET_CITY'; payload: string }
+  | { type: 'SET_SCHOOL_BOARD'; payload: string }
+  | { type: 'TOGGLE_INSTITUTION'; payload: string }
+  | { type: 'TOGGLE_FIELD'; payload: string }
+  | { type: 'TOGGLE_AVERAGE'; payload: number }
+  | { type: 'RESET' }
+
+const INITIAL_STATE: QuizState = {
+  step: 1,
+  grade: '',
+  city: '',
+  schoolBoard: null,
+  targetInstitution: '',
+  fields: [],
+  averageBracket: null,
+}
+
+function quizReducer(state: QuizState, action: QuizAction): QuizState {
+  switch (action.type) {
+    case 'SET_STEP':            return { ...state, step: action.payload }
+    case 'SET_GRADE':           return { ...state, grade: action.payload }
+    case 'SET_CITY':            return { ...state, city: action.payload, schoolBoard: null }
+    case 'SET_SCHOOL_BOARD':    return { ...state, schoolBoard: state.schoolBoard === action.payload ? null : action.payload }
+    case 'TOGGLE_INSTITUTION':  return { ...state, targetInstitution: state.targetInstitution === action.payload ? '' : action.payload }
+    case 'TOGGLE_FIELD':        return { ...state, fields: state.fields.includes(action.payload) ? state.fields.filter(f => f !== action.payload) : [...state.fields, action.payload] }
+    case 'TOGGLE_AVERAGE':      return { ...state, averageBracket: state.averageBracket === action.payload ? null : action.payload }
+    case 'RESET':               return { ...INITIAL_STATE }
+    default:                    return state
+  }
 }
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -85,22 +129,14 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
 
 const QUIZ_STORAGE_KEY = 'scholarab_quiz_draft'
 
-type QuizDraft = {
-  step: 1 | 2
-  grade: StudentProfile['grade'] | ''
-  city: string
-  schoolBoard: string | null
-  targetInstitution: string
-  fields: string[]
-  averageBracket: number | null
-}
-
-function loadDraft(): QuizDraft | null {
+function initState(): QuizState {
   try {
     const raw = localStorage.getItem(QUIZ_STORAGE_KEY)
-    return raw ? (JSON.parse(raw) as QuizDraft) : null
+    if (!raw) return { ...INITIAL_STATE }
+    const draft = JSON.parse(raw) as Partial<QuizState>
+    return { ...INITIAL_STATE, ...draft }
   } catch {
-    return null
+    return { ...INITIAL_STATE }
   }
 }
 
@@ -146,19 +182,12 @@ function parseAmount(amount: string): number {
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function EligibilityQuiz({ scholarships }: Props) {
-  const _d = loadDraft()
-  const [step, setStep] = useState<1 | 2 | 'results'>(_d?.step ?? 1)
-  const [grade, setGrade] = useState<StudentProfile['grade'] | ''>(_d?.grade ?? '')
-  const [city, setCity] = useState(_d?.city ?? '')
-  const [schoolBoard, setSchoolBoard] = useState<string | null>(_d?.schoolBoard ?? null)
-  const [targetInstitution, setTargetInstitution] = useState(_d?.targetInstitution ?? '')
-  const [fields, setFields] = useState<string[]>(_d?.fields ?? [])
-  const [averageBracket, setAverageBracket] = useState<number | null>(_d?.averageBracket ?? null)
+  const [state, dispatch] = useReducer(quizReducer, null, initState)
+  const { step, grade, city, schoolBoard, targetInstitution, fields, averageBracket } = state
 
   function reset() {
     try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
-    setStep(1); setGrade(''); setCity(''); setSchoolBoard(null); setTargetInstitution('')
-    setFields([]); setAverageBracket(null)
+    dispatch({ type: 'RESET' })
   }
 
   const profile = useMemo((): StudentProfile | null => {
@@ -208,9 +237,6 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       .reduce((sum, r) => sum + parseAmount(r.scholarship.amount), 0)
   }, [results])
 
-  function toggleField(f: string) {
-    setFields(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f])
-  }
 
   const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
   const handleToggleSave = useCallback((id: number, el?: Element | null) => {
@@ -222,14 +248,11 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
   // Persist quiz state so navigating away and back restores progress
   useEffect(() => {
-    if (step === 'results') return
+    if (state.step === 'results') return
     try {
-      const draft: QuizDraft = {
-        step, grade, city, schoolBoard, targetInstitution, fields, averageBracket,
-      }
-      localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(draft))
+      localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(state))
     } catch { /* ignore */ }
-  }, [step, grade, city, schoolBoard, targetInstitution, fields, averageBracket])
+  }, [state])
 
   // ── Step 1 — Where are you at? ──────────────────────────────────────────────
 
@@ -244,7 +267,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <p className="text-sm text-secondary mb-2.5 font-medium">Your grade</p>
           <div className="flex flex-wrap gap-2">
             {GRADE_OPTIONS.map(({ value, label }) => (
-              <Chip key={value} label={label} active={grade === value} onClick={() => setGrade(value as StudentProfile['grade'])} />
+              <Chip key={value} label={label} active={grade === value} onClick={() => dispatch({ type: 'SET_GRADE', payload: value as StudentProfile['grade'] })} />
             ))}
           </div>
           {(grade === '10' || grade === '11') && (
@@ -260,7 +283,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <p className="text-sm text-secondary mb-2.5 font-medium">Your city</p>
           <div className="flex flex-wrap gap-2">
             {CITY_OPTIONS.map(c => (
-              <Chip key={c} label={c} active={city === c} onClick={() => { setCity(c); setSchoolBoard(null) }} />
+              <Chip key={c} label={c} active={city === c} onClick={() => dispatch({ type: 'SET_CITY', payload: c })} />
             ))}
           </div>
         </div>
@@ -270,7 +293,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
             <p className="text-sm text-secondary mb-2.5 font-medium">Your school board <span className="text-tertiary font-normal">(optional)</span></p>
             <div className="flex flex-wrap gap-2">
               {SCHOOL_BOARDS_BY_CITY[city].map(({ value, label }) => (
-                <Chip key={value} label={label} active={schoolBoard === value} onClick={() => setSchoolBoard(prev => prev === value ? null : value)} />
+                <Chip key={value} label={label} active={schoolBoard === value} onClick={() => dispatch({ type: 'SET_SCHOOL_BOARD', payload: value })} />
               ))}
             </div>
           </div>
@@ -280,13 +303,13 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <p className="text-sm text-secondary mb-2.5 font-medium">Where are you planning to study? <span className="text-tertiary font-normal">(optional)</span></p>
           <div className="flex flex-wrap gap-2">
             {INSTITUTIONS.map(inst => (
-              <Chip key={inst} label={inst} active={targetInstitution === inst} onClick={() => setTargetInstitution(prev => prev === inst ? '' : inst)} />
+              <Chip key={inst} label={inst} active={targetInstitution === inst} onClick={() => dispatch({ type: 'TOGGLE_INSTITUTION', payload: inst })} />
             ))}
           </div>
         </div>
 
         <button
-          onClick={() => setStep(2)}
+          onClick={() => dispatch({ type: 'SET_STEP', payload: 2 })}
           disabled={grade === '' || city === ''}
           className="w-full py-3 rounded-xl text-sm font-semibold transition disabled:opacity-30 disabled:cursor-not-allowed"
           style={{ background: 'var(--brand)', color: '#0a0a0f' }}
@@ -315,7 +338,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <p className="text-sm text-secondary mb-2.5 font-medium">Field of study</p>
           <div className="flex flex-wrap gap-2">
             {FIELDS.map(({ value, label }) => (
-              <Chip key={value} label={label} active={fields.includes(value)} onClick={() => toggleField(value)} />
+              <Chip key={value} label={label} active={fields.includes(value)} onClick={() => dispatch({ type: 'TOGGLE_FIELD', payload: value })} />
             ))}
           </div>
         </div>
@@ -324,16 +347,16 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           <p className="text-sm text-secondary mb-2.5 font-medium">Academic average</p>
           <div className="flex flex-wrap gap-2">
             {AVERAGE_BRACKETS.map(({ value, label }) => (
-              <Chip key={value} label={label} active={averageBracket === value} onClick={() => setAverageBracket(prev => prev === value ? null : value)} />
+              <Chip key={value} label={label} active={averageBracket === value} onClick={() => dispatch({ type: 'TOGGLE_AVERAGE', payload: value })} />
             ))}
           </div>
         </div>
 
         <div className="flex gap-3">
-          <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-card text-secondary transition">
+          <button onClick={() => dispatch({ type: 'SET_STEP', payload: 1 })} className="flex-1 py-3 rounded-xl text-sm font-semibold border border-card text-secondary transition">
             ← Back
           </button>
-          <button onClick={() => setStep('results')} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>
+          <button onClick={() => dispatch({ type: 'SET_STEP', payload: 'results' })} className="flex-1 py-3 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>
             Find my scholarships →
           </button>
         </div>
