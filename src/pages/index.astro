@@ -137,11 +137,11 @@ const closingSoon = scholarships
       <h2 style="margin:0 0 16px;font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">Browse by field</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {[
-          { name: 'STEM & Engineering', count: 'Science, tech, math, engineering', color: 'var(--brand)', href: '/scholarships' },
-          { name: 'Humanities & Arts', count: 'English, history, music, fine arts', color: '#a78bfa', href: '/scholarships' },
-          { name: 'Business & Econ', count: 'Commerce, accounting, finance', color: '#3b82f6', href: '/scholarships' },
-          { name: 'Indigenous & Equity', count: 'Identity-based scholarships', color: '#f5b14a', href: '/scholarships' },
-          { name: 'Need-based', count: 'Financial assistance awards', color: 'var(--brand)', href: '/scholarships' },
+          { name: 'STEM & Engineering', count: 'Science, tech, math, engineering', color: 'var(--brand)', href: '/scholarships?category=STEM' },
+          { name: 'Humanities & Arts', count: 'English, history, music, fine arts', color: '#a78bfa', href: '/scholarships?category=Arts' },
+          { name: 'Business & Econ', count: 'Commerce, accounting, finance', color: '#3b82f6', href: '/scholarships?category=Academic' },
+          { name: 'Indigenous & Equity', count: 'Identity-based scholarships', color: '#f5b14a', href: '/scholarships?category=Indigenous' },
+          { name: 'Need-based', count: 'Financial assistance awards', color: 'var(--brand)', href: '/scholarships?category=Community' },
           { name: 'Research programs', count: `${researchCount} programs open`, color: '#a78bfa', href: '/programs' },
         ].map(f => (
           <a href={f.href} class="card card-interactive" style="padding:18px;text-decoration:none;display:block;">

@@ -42,7 +42,10 @@ export type StatusFilter = 'all' | 'active' | 'opening' | 'closed';
 export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [sortBy,         setSortBy        ] = useState<SortValue>('closest_due');
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | null>(null);
-  const [selectedCategory, setSelectedCategoryRaw] = useState('all');
+  const [selectedCategory, setSelectedCategoryRaw] = useState(() => {
+    if (typeof window === 'undefined') return 'all';
+    return new URLSearchParams(window.location.search).get('category') ?? 'all';
+  });
   const [statusFilter,   setStatusFilterRaw] = useState<StatusFilter>('all');
   const [searchQuery,    setSearchQueryRaw] = useState('');
   const [page,           setPage          ] = useState(1);
