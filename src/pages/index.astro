@@ -165,6 +165,29 @@ const closingSoon = scholarships
       </div>
     </div>
 
+    <!-- Browse by field -->
+    <div class="max-w-2xl mx-auto mt-16 md:mt-20">
+      <h2 style="margin:0 0 16px;font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">Browse by field</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {[
+          { name: 'STEM & Engineering', count: 'Science, tech, math, engineering', color: 'var(--brand)', href: '/scholarships' },
+          { name: 'Humanities & Arts', count: 'English, history, music, fine arts', color: '#a78bfa', href: '/scholarships' },
+          { name: 'Business & Econ', count: 'Commerce, accounting, finance', color: '#3b82f6', href: '/scholarships' },
+          { name: 'Indigenous & Equity', count: 'Identity-based scholarships', color: '#f5b14a', href: '/scholarships' },
+          { name: 'Need-based', count: 'Financial assistance awards', color: 'var(--brand)', href: '/scholarships' },
+          { name: 'Research programs', count: `${researchCount} programs open`, color: '#a78bfa', href: '/programs' },
+        ].map(f => (
+          <a href={f.href} class="card card-interactive" style="padding:18px;text-decoration:none;display:block;">
+            <div style={`width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,${f.color}26,${f.color}0d);border:1px solid ${f.color}33;display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:${f.color};`}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-4 9 4-9 4-9-4z"/><path d="M6 11v5c2 2 4 3 6 3s4-1 6-3v-5"/></svg>
+            </div>
+            <p style="font-size:14px;font-weight:600;letter-spacing:-0.015em;color:var(--text-primary);margin-bottom:3px;">{f.name}</p>
+            <p style="font-size:11px;color:var(--text-secondary);">{f.count}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+
     <!-- How it works -->
     <div class="max-w-2xl mx-auto mt-16 md:mt-20">
       <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-6 text-center md:text-left">How it works</p>

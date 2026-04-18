@@ -32,6 +32,10 @@ const status = todayDate < openDate ? 'future' : (deadlineDate && todayDate > de
 const rawBadge = CATEGORY_BADGE[scholarship.category] || DEFAULT_BADGE;
 const badge    = { ...rawBadge, label: scholarship.category || '' };
 
+const daysLeft = status === 'active' && deadlineDate
+  ? Math.ceil((deadlineDate.getTime() - todayDate.getTime()) / 86400000)
+  : null;
+
 const description  = `The ${scholarship.title} offers ${scholarship.amount} to ${scholarship.audience}${scholarship.region ? ` in ${scholarship.region}` : ''}. Deadline: ${formatDate(scholarship.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
 const canonical    = `https://www.scholarab.ca/scholarships/${slug}`;
 const pageTitle    = `${scholarship.title} | ScholarAB | Alberta Scholarships`;
@@ -75,50 +79,39 @@ const breadcrumbJson = {
   <DetailLayout
     badge={badge}
     title={scholarship.title}
+    subtitle={scholarship.audience}
+    audience={scholarship.audience}
     amount={scholarship.amount}
     url={scholarship.url}
     status={status}
     openDate={scholarship.openDate ? formatDate(scholarship.openDate) : undefined}
     backHref="/scholarships"
     backLabel="Back to Scholarships"
-    ctaLabel="Apply Now →"
     itemId={scholarship.id}
     itemType="scholarship"
+    deadlineFormatted={formatDate(scholarship.deadline)}
+    daysLeft={daysLeft}
+    region={scholarship.region}
+    notes={scholarship.notes}
+    applyViaGuidance={scholarship.applyViaGuidance}
   >
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-subtle pt-6">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Deadline</p>
-        <p class="text-sm font-medium text-primary">{formatDate(scholarship.deadline)}</p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Opens</p>
-        <p class="text-sm font-medium text-primary">{formatDate(scholarship.openDate)}</p>
-      </div>
-      {scholarship.region && (
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Region</p>
-          <p class="text-sm font-medium text-primary">{scholarship.region}</p>
+    <!-- Detail rows inside glass card -->
+    {[
+      { icon: 'grad', label: 'Eligibility', value: scholarship.audience },
+      { icon: 'location', label: 'Region', value: scholarship.region || 'Alberta-wide' },
+      { icon: 'calendar', label: 'Opens', value: formatDate(scholarship.openDate) },
+      ...(scholarship.applyViaGuidance ? [{ icon: 'info', label: 'How to apply', value: 'Via your school guidance counsellor' }] : []),
+    ].map((row, i, arr) => (
+      <div style={`display:grid;grid-template-columns:28px 120px 1fr;align-items:start;gap:12px;padding:14px 20px;${i < arr.length - 1 ? 'border-bottom:1px solid var(--border-subtle);' : ''}`}>
+        <div style="color:var(--text-faint);display:flex;margin-top:1px;">
+          {row.icon === 'grad' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-4 9 4-9 4-9-4z"/><path d="M6 11v5c2 2 4 3 6 3s4-1 6-3v-5"/></svg>}
+          {row.icon === 'location' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-8-7-13a7 7 0 0114 0c0 5-7 13-7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>}
+          {row.icon === 'calendar' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>}
+          {row.icon === 'info' && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>}
         </div>
-      )}
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Eligibility</p>
-        <p class="text-sm font-medium text-primary">{scholarship.audience}</p>
+        <div style="font-size:12px;font-weight:500;color:var(--text-secondary);letter-spacing:-0.01em;">{row.label}</div>
+        <div style="font-size:13px;font-weight:500;color:var(--text-primary);letter-spacing:-0.01em;">{row.value}</div>
       </div>
-    </div>
-
-    {scholarship.notes && (
-      <div class="mb-6 p-4 rounded-xl bg-subtle border border-subtle">
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Notes</p>
-        <p class="text-sm text-secondary"><!--email_off-->{scholarship.notes}<!--/email_off--></p>
-      </div>
-    )}
-
-    {scholarship.applyViaGuidance && (
-      <div class="mb-6 p-4 rounded-xl border bg-brand-dim border-brand-border">
-        <p class="text-sm text-brand">
-          <span class="font-semibold">How to apply:</span> Contact your school guidance counsellor to apply for this scholarship.
-        </p>
-      </div>
-    )}
+    ))}
   </DetailLayout>
 </Layout>

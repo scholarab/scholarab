@@ -5,9 +5,10 @@ import { showToast, showConfetti } from '../lib/utils.ts';
 interface BookmarkButtonProps {
   id: number;
   type?: 'scholarship' | 'program';
+  fullWidth?: boolean;
 }
 
-export default function BookmarkButton({ id, type }: BookmarkButtonProps) {
+export default function BookmarkButton({ id, type, fullWidth }: BookmarkButtonProps) {
   const [saved, setSaved] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -28,6 +29,33 @@ export default function BookmarkButton({ id, type }: BookmarkButtonProps) {
     setSaved(nowSaved);
     if (nowSaved) showConfetti(btnRef.current);
     showToast(nowSaved ? 'Saved ✓' : 'Removed from saved');
+  }
+
+  if (fullWidth) {
+    return (
+      <button
+        ref={btnRef}
+        onClick={handleClick}
+        aria-label={saved ? 'Remove bookmark' : 'Save for later'}
+        style={{
+          width: '100%',
+          padding: '14px 20px',
+          borderRadius: 16,
+          background: saved ? 'var(--brand-dim)' : 'var(--bg-subtle)',
+          border: `0.5px solid ${saved ? 'var(--brand-border)' : 'var(--border-strong)'}`,
+          color: saved ? 'var(--brand)' : 'var(--text-secondary)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+          cursor: 'pointer', fontSize: 15, fontWeight: 600, fontFamily: 'inherit',
+          transition: 'color 0.15s, background 0.15s, border-color 0.15s',
+          WebkitTapHighlightColor: 'transparent',
+        }}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill={saved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+        </svg>
+        {saved ? 'Saved' : 'Save for later'}
+      </button>
+    );
   }
 
   return (

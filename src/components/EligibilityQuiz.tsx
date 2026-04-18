@@ -162,22 +162,37 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
 function ProgressBar({ step }: { step: Step }) {
   const steps = [1, 2]
   const current = step === 'results' ? 2 : (step as number)
+  const pct = (current / steps.length) * 100
   return (
-    <div
-      role="progressbar"
-      aria-label="Quiz progress"
-      aria-valuenow={current}
-      aria-valuemin={0}
-      aria-valuemax={steps.length}
-      className="flex gap-1.5 mb-8"
-    >
-      {steps.map(s => (
-        <div
-          key={s}
-          className="h-1 flex-1 rounded-full transition-all duration-300"
-          style={{ background: s <= current ? 'var(--brand)' : 'var(--bg-subtle)' }}
-        />
-      ))}
+    <div className="mb-6">
+      <div className="flex items-center gap-3 mb-4">
+        <span style={{
+          display: 'inline-flex', alignItems: 'center', gap: 6,
+          padding: '3px 10px', borderRadius: 999,
+          background: 'rgba(167,139,250,0.12)', border: '1px solid rgba(167,139,250,0.3)',
+          fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const,
+          color: '#a78bfa',
+        }}>Beta · Match</span>
+        <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+          Question {current} of {steps.length}
+        </span>
+      </div>
+      <div
+        role="progressbar"
+        aria-label="Quiz progress"
+        aria-valuenow={current}
+        aria-valuemin={0}
+        aria-valuemax={steps.length}
+        style={{ height: 2, background: 'var(--border-subtle)', borderRadius: 2, overflow: 'hidden' }}
+      >
+        <div style={{
+          width: `${pct}%`, height: '100%',
+          background: 'var(--brand)',
+          boxShadow: '0 0 10px var(--brand)',
+          borderRadius: 2,
+          transition: 'width 500ms cubic-bezier(0.22, 1, 0.36, 1)',
+        }} />
+      </div>
     </div>
   )
 }
@@ -274,8 +289,8 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     return (
       <div>
         <ProgressBar step={1} />
-        <h2 className="text-xl font-bold mb-1 text-primary">Where are you at?</h2>
-        <p className="text-sm text-secondary mb-6">We'll use this to filter scholarships by grade and location.</p>
+        <h2 className="text-primary" style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 8 }}>Where are you at?</h2>
+        <p className="text-secondary mb-6" style={{ fontSize: 14 }}>We'll use this to filter scholarships by grade and location.</p>
 
         <div className="mb-6">
           <p className="text-sm text-secondary mb-2.5 font-medium">Your grade</p>
@@ -345,8 +360,8 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     return (
       <div>
         <ProgressBar step={2} />
-        <h2 className="text-xl font-bold mb-1 text-primary">What do you want to study?</h2>
-        <p className="text-sm text-secondary mb-6">Optional: helps surface scholarships specific to your field.</p>
+        <h2 className="text-primary" style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 8 }}>What do you want to study?</h2>
+        <p className="text-secondary mb-6" style={{ fontSize: 14 }}>Optional: helps surface scholarships specific to your field.</p>
 
         <div className="mb-6">
           <p className="text-sm text-secondary mb-2.5 font-medium">Field of study</p>

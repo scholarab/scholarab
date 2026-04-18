@@ -16,6 +16,13 @@ interface Props {
   ctaLabel?: string;
   itemId?: number;
   itemType?: 'scholarship' | 'program';
+  // Premium detail fields
+  deadlineFormatted?: string;
+  daysLeft?: number | null;
+  region?: string;
+  audience?: string;
+  applyViaGuidance?: boolean;
+  notes?: string;
 }
 
 const {
@@ -33,92 +40,222 @@ const {
   ctaLabel = 'Apply Now →',
   itemId,
   itemType,
+  deadlineFormatted,
+  daysLeft,
+  region,
+  audience,
+  applyViaGuidance,
+  notes,
 } = Astro.props;
+
+// Derive org name for apply button label from subtitle
+const orgFirstWord = subtitle ? subtitle.split(' ')[0] : null;
+const applyLabel = orgFirstWord ? `Apply on ${orgFirstWord}'s site` : ctaLabel;
+
+const statusColor = status === 'active' ? 'var(--brand)' : status === 'future' ? '#3b82f6' : 'var(--text-faint)';
+const statusLabel = status === 'active' ? 'Active' : status === 'future' ? 'Opening Soon' : 'Closed';
+const statusDotClass = status === 'active' ? 'status-dot status-dot-active' : status === 'future' ? 'status-dot' : 'status-dot status-dot-closed';
+
+const isClosingSoon = typeof daysLeft === 'number' && daysLeft !== null && daysLeft <= 30 && status === 'active';
+const deadlineColor = isClosingSoon ? '#f5b14a' : 'var(--text-primary)';
+const daysLeftColor = typeof daysLeft === 'number' && daysLeft <= 7 ? '#ef5a5a' : typeof daysLeft === 'number' && daysLeft <= 30 ? '#f5b14a' : 'var(--text-secondary)';
+
+// Use premium layout when scholarship-specific data is provided
+const isPremium = deadlineFormatted !== undefined;
 ---
 
-<main class="py-6">
-  <a
-    href={backHref}
-    class="inline-flex items-center gap-2 text-sm text-secondary hover:text-brand transition-colors mb-6"
-  >
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    {backLabel}
-  </a>
+{isPremium ? (
+  <main class="py-6" style="position: relative;">
+    <!-- Ambient header gradient -->
+    <div aria-hidden="true" style={`position:absolute;top:0;left:-32px;right:-32px;height:360px;z-index:0;background:radial-gradient(ellipse 70% 50% at 20% 0%, ${statusColor}28 0%, transparent 60%),radial-gradient(ellipse 50% 40% at 90% 10%, rgba(59,130,246,0.14) 0%, transparent 60%);filter:blur(40px);pointer-events:none;`}></div>
 
+    <div style="position:relative;z-index:1;">
+      <!-- Back button — pill style -->
+      <a href={backHref} class="inline-flex items-center gap-2 text-sm text-secondary hover:text-primary transition-colors mb-6"
+        style="padding:6px 12px 6px 8px;border-radius:999px;border:1px solid var(--border-card);background:var(--bg-card);backdrop-filter:blur(12px);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        {backLabel}
+      </a>
 
-  <div class="card p-6 md:p-8" style={`border-top: 2px solid ${badge.color};`}>
-    <span
-      class="inline-flex items-center gap-1.5 rounded-full text-xs font-semibold mb-4"
-      style={`padding: 3px 10px; background: ${badge.bg}; color: ${badge.color}; border: 1px solid ${badge.border};`}
-    >
-      <span style="font-size: 15px;">{badge.emoji}</span>
-      {badge.label}
-    </span>
+      <!-- Status metadata row -->
+      <div class="flex items-center gap-2 flex-wrap mb-3" style="font-size:12px;">
+        <span class="flex items-center gap-1.5 font-semibold" style={`letter-spacing:0.04em;text-transform:uppercase;color:${statusColor};`}>
+          <span class={statusDotClass} aria-hidden="true" style="flex-shrink:0;"></span>
+          {statusLabel}
+        </span>
+        {badge.label && <>
+          <span style="color:var(--text-faint);">·</span>
+          <span style="color:var(--text-secondary);">{badge.label}</span>
+        </>}
+        {region && <>
+          <span style="color:var(--text-faint);">·</span>
+          <span style="color:var(--text-secondary);">{region}</span>
+        </>}
+      </div>
 
-    <h1 class={`font-bold text-primary ${titleMb} leading-tight`} style="font-size: clamp(20px, 4vw, 30px);">
-      {title}
-    </h1>
+      <!-- Title -->
+      <h1 class="text-primary" style="font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-0.04em;line-height:1.05;margin:0 0 8px;">
+        {title}
+      </h1>
 
-    {subtitle && (
-      <p class="text-sm text-tertiary mb-6">{subtitle}</p>
-    )}
+      <!-- Org / subtitle -->
+      {subtitle && <p class="text-secondary mb-4" style="font-size:15px;letter-spacing:-0.01em;">{subtitle}</p>}
 
-    {amount && (
-      <p class="font-extrabold mb-6 text-brand" style={`font-size: ${amountStyle}; line-height: 1.1;`}>
-        {amount}
-      </p>
-    )}
+      <!-- Description / audience -->
+      {audience && <p class="text-primary mb-6" style="font-size:15px;line-height:1.55;letter-spacing:-0.01em;opacity:0.82;">{audience}</p>}
 
-    <slot />
-
-    <div class="pt-2 flex gap-2">
-      {status === 'closed' ? (
-        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-subtle text-faint">
-          Closed
-        </button>
-      ) : status === 'future' ? (
-        <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-blue-500/[0.08] text-blue-400">
-          Opening Soon{openDate ? `: ${openDate}` : ''}
-        </button>
-      ) : (
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          referrerpolicy="no-referrer"
-          onclick="window.va?.('event',{name:'apply_detail'})"
-          class="btn-teal flex-1 text-center py-3 px-4 rounded-xl text-sm font-semibold transition-opacity hover:opacity-85"
-          style="background: var(--brand); color: #0a0a0f; display: flex; align-items: center; justify-content: center;"
-        >
-          {ctaLabel}
-        </a>
+      <!-- Award + Deadline glass cards -->
+      {(amount || deadlineFormatted) && (
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          {amount && (
+            <div class="card" style="padding:18px 20px;">
+              <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:6px;">Award Amount</p>
+              <p class="text-primary" style={`font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;`}>{amount}</p>
+            </div>
+          )}
+          {deadlineFormatted && (
+            <div class="card" style="padding:18px 20px;">
+              <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:6px;">Deadline</p>
+              <p style={`font-size:clamp(16px,3vw,22px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;font-variant-numeric:tabular-nums;color:${deadlineColor};`}>
+                {status === 'future' ? (openDate || 'TBA') : deadlineFormatted}
+              </p>
+              {typeof daysLeft === 'number' && daysLeft !== null && status === 'active' && (
+                <p style={`font-size:11px;font-weight:600;margin-top:4px;color:${daysLeftColor};`}>
+                  {daysLeft === 0 ? 'Ends today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`}
+                </p>
+              )}
+              {status === 'closed' && <p style="font-size:11px;color:var(--text-faint);margin-top:4px;">Closed</p>}
+            </div>
+          )}
+        </div>
       )}
-      {itemId !== undefined && itemType && (
-        <BookmarkButton id={itemId} type={itemType} client:load />
-      )}
-    </div>
 
-    <div class="flex flex-wrap gap-2 pt-3">
-      <button id="copy-link-btn" aria-label="Copy link"
-        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors text-secondary border-card hover:border-brand hover:text-brand">
-        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/>
-        </svg>
-        <span id="copy-link-text">Copy link</span>
-      </button>
+      <!-- Apply button — large, full width -->
+      <div class="flex flex-col gap-2 mb-6">
+        {status === 'closed' ? (
+          <button disabled class="w-full py-4 rounded-2xl text-sm font-semibold cursor-not-allowed" style="background:var(--bg-subtle);color:var(--text-faint);">
+            Closed
+          </button>
+        ) : status === 'future' ? (
+          <button disabled class="w-full py-4 rounded-2xl text-sm font-semibold cursor-not-allowed" style="background:rgba(59,130,246,0.08);color:#3b82f6;">
+            Opening Soon{openDate ? `: ${openDate}` : ''}
+          </button>
+        ) : applyViaGuidance ? (
+          <div class="w-full py-4 px-5 rounded-2xl text-sm font-semibold text-center" style="background:var(--brand-dim);border:1px solid var(--brand-border);color:var(--brand);">
+            Apply via your guidance counsellor
+          </div>
+        ) : (
+          <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+            onclick="window.va?.('event',{name:'apply_detail'})"
+            class="btn-teal w-full py-4 rounded-2xl text-base font-semibold flex items-center justify-center gap-2"
+            style="background:var(--brand);color:#0a0a0f;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M10 4H5a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1v-5"/></svg>
+            {applyLabel}
+          </a>
+        )}
+
+        {itemId !== undefined && itemType && (
+          <div class="w-full">
+            <BookmarkButton id={itemId} type={itemType} fullWidth client:load />
+          </div>
+        )}
+      </div>
+
+      <!-- Notes / guidance -->
+      {notes && (
+        <div class="mb-5 p-4 rounded-xl" style="background:var(--bg-subtle);border:1px solid var(--border-subtle);">
+          <p style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:4px;">Notes</p>
+          <p class="text-secondary" style="font-size:13px;line-height:1.5;"><!--email_off-->{notes}<!--/email_off--></p>
+        </div>
+      )}
+
+      <!-- Details section -->
+      <div>
+        <p style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:12px;">Details</p>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <slot />
+        </div>
+      </div>
+
+      <!-- Copy link -->
+      <div class="mt-4">
+        <button id="copy-link-btn" aria-label="Copy link"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors text-secondary border-card hover:border-brand hover:text-brand">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span id="copy-link-text">Copy link</span>
+        </button>
+      </div>
     </div>
-    <script>
-      const btn = document.getElementById('copy-link-btn');
-      const txt = document.getElementById('copy-link-text');
-      btn?.addEventListener('click', () => {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          if (txt) { txt.textContent = 'Copied!'; (txt as HTMLElement).style.color = 'var(--brand)'; }
-          setTimeout(() => { if (txt) { txt.textContent = 'Copy link'; (txt as HTMLElement).style.color = ''; } }, 2500);
-        });
-      });
-    </script>
-  </div>
-</main>
+  </main>
+) : (
+  <main class="py-6">
+    <a href={backHref} class="inline-flex items-center gap-2 text-sm text-secondary hover:text-brand transition-colors mb-6">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      {backLabel}
+    </a>
+
+    <div class="card p-6 md:p-8" style={`border-top: 2px solid ${badge.color};`}>
+      <span class="inline-flex items-center gap-1.5 rounded-full text-xs font-semibold mb-4"
+        style={`padding: 3px 10px; background: ${badge.bg}; color: ${badge.color}; border: 1px solid ${badge.border};`}>
+        <span style="font-size: 15px;">{badge.emoji}</span>
+        {badge.label}
+      </span>
+
+      <h1 class={`font-bold text-primary ${titleMb} leading-tight`} style="font-size: clamp(20px, 4vw, 30px);">
+        {title}
+      </h1>
+
+      {subtitle && <p class="text-sm text-tertiary mb-6">{subtitle}</p>}
+      {amount && <p class="font-extrabold mb-6 text-brand" style={`font-size: ${amountStyle}; line-height: 1.1;`}>{amount}</p>}
+
+      <slot />
+
+      <div class="pt-2 flex gap-2">
+        {status === 'closed' ? (
+          <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-subtle text-faint">Closed</button>
+        ) : status === 'future' ? (
+          <button disabled class="flex-1 py-3 rounded-xl text-sm font-semibold cursor-not-allowed bg-blue-500/[0.08] text-blue-400">
+            Opening Soon{openDate ? `: ${openDate}` : ''}
+          </button>
+        ) : (
+          <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+            onclick="window.va?.('event',{name:'apply_detail'})"
+            class="btn-teal flex-1 text-center py-3 px-4 rounded-xl text-sm font-semibold"
+            style="background: var(--brand); color: #0a0a0f; display: flex; align-items: center; justify-content: center;">
+            {ctaLabel}
+          </a>
+        )}
+        {itemId !== undefined && itemType && (
+          <BookmarkButton id={itemId} type={itemType} client:load />
+        )}
+      </div>
+
+      <div class="flex flex-wrap gap-2 pt-3">
+        <button id="copy-link-btn" aria-label="Copy link"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors text-secondary border-card hover:border-brand hover:text-brand">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span id="copy-link-text">Copy link</span>
+        </button>
+      </div>
+    </div>
+  </main>
+)}
+
+<script>
+  const btn = document.getElementById('copy-link-btn');
+  const txt = document.getElementById('copy-link-text');
+  btn?.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      if (txt) { txt.textContent = 'Copied!'; (txt as HTMLElement).style.color = 'var(--brand)'; }
+      setTimeout(() => { if (txt) { txt.textContent = 'Copy link'; (txt as HTMLElement).style.color = ''; } }, 2500);
+    });
+  });
+</script>
