@@ -37,7 +37,7 @@ const REGION_MATCH: Record<RegionKey, (s: ScholarshipWithMeta) => boolean> = {
 
 type SortValue = 'closest_due' | 'highest_pay' | 'lowest_pay';
 
-export type StatusFilter = 'all' | 'active' | 'closing' | 'closed';
+export type StatusFilter = 'all' | 'active' | 'opening' | 'closed';
 
 export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [sortBy,         setSortBy        ] = useState<SortValue>('closest_due');
@@ -113,13 +113,8 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     // Base pool depends on statusFilter
     const pool = statusFilter === 'closed'
       ? initialScholarships.filter(s => statusCache.get(s.id) === 'closed')
-      : statusFilter === 'closing'
-        ? initialScholarships.filter(s => {
-            if (statusCache.get(s.id) !== 'active') return false;
-            const deadMs = s._deadline_ms ?? 0;
-            const days = Math.ceil((deadMs - todayMs) / 86_400_000);
-            return days >= 0 && days <= 30;
-          })
+      : statusFilter === 'opening'
+        ? initialScholarships.filter(s => statusCache.get(s.id) === 'future')
         : statusFilter === 'active'
           ? initialScholarships.filter(s => {
               if (statusCache.get(s.id) !== 'active') return false;
