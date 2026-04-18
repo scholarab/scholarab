@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { loadScholarships } from '../lib/data-loader'
+import { loadScholarships, loadPrograms } from '../lib/data-loader'
 import EligibilityQuiz from '../components/EligibilityQuiz'
 
-const scholarships = await loadScholarships()
+const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()])
 
 const breadcrumbJson = {
   '@context': 'https://schema.org',
@@ -26,7 +26,7 @@ const breadcrumbJson = {
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <div class="pb-16">
     <div class="max-w-2xl mx-auto pt-8 md:pt-14 px-4">
-      <EligibilityQuiz scholarships={scholarships} client:load />
+      <EligibilityQuiz scholarships={scholarships} programs={programs} client:load />
     </div>
   </div>
 </Layout>

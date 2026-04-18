@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
-import type { Scholarship } from '../lib/data-loader'
+import type { Scholarship, Program } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved } from '../lib/tracker.ts'
@@ -10,6 +10,7 @@ import { generateSlug } from '../lib/utils.ts'
 
 interface Props {
   scholarships: Scholarship[]
+  programs: Program[]
 }
 
 // ── Questions ─────────────────────────────────────────────────────────────────
@@ -21,6 +22,15 @@ interface QuizQuestion {
 }
 
 const QUESTIONS: QuizQuestion[] = [
+  {
+    key: 'searchType',
+    q: "What are you looking for?",
+    opts: [
+      { label: 'Scholarships', value: 'scholarships' },
+      { label: 'Research Programs', value: 'programs' },
+      { label: 'Both', value: 'both' },
+    ],
+  },
   {
     key: 'city',
     q: "Where are you based?",
@@ -76,7 +86,31 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
   possible: { badge: 'bg-subtle text-tertiary border-card', label: 'Possible match' },
 }
 
-const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v2'
+const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v3'
+
+// ── Programs matching ─────────────────────────────────────────────────────────
+
+const FIELD_KEYWORDS: Record<string, string[]> = {
+  STEM:     ['stem', 'science', 'engineering', 'technology', 'math', 'research', 'computer', 'physics', 'chemistry'],
+  health:   ['health', 'medicine', 'medical', 'biology', 'nursing', 'life science', 'biomedical'],
+  business: ['business', 'commerce', 'economics', 'finance', 'entrepreneurship', 'management'],
+  arts:     ['arts', 'humanities', 'english', 'social', 'history', 'music', 'fine art', 'writing'],
+  trades:   ['trades', 'apprenticeship', 'technical', 'vocational', 'skilled'],
+}
+
+function matchPrograms(programs: Program[], answers: Record<string, string>): Program[] {
+  let filtered = programs.filter(p => p.active)
+  const field = answers.field
+  if (field && FIELD_KEYWORDS[field]) {
+    const keywords = FIELD_KEYWORDS[field]
+    const byField = filtered.filter(p => {
+      const text = ((p.category ?? '') + ' ' + (p.description ?? '')).toLowerCase()
+      return keywords.some(kw => text.includes(kw))
+    })
+    if (byField.length > 0) filtered = byField
+  }
+  return filtered.slice(0, 10)
+}
 
 // ── Tile button ───────────────────────────────────────────────────────────────
 
@@ -146,7 +180,7 @@ function parseAmount(amount: string): number {
   return parseInt(String(amount).replace(/[$,]/g, ''), 10) || 0
 }
 
-export default function EligibilityQuiz({ scholarships }: Props) {
+export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const [step, setStep] = useState(() => {
     try {
       const raw = localStorage.getItem(QUIZ_STORAGE_KEY)
@@ -234,8 +268,12 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     [scholarships]
   )
 
-  const results = useMemo(() => {
-    if (!profile || step < QUESTIONS.length) return null
+  const searchType = answers.searchType ?? 'scholarships'
+  const showScholarships = searchType === 'scholarships' || searchType === 'both'
+  const showPrograms = searchType === 'programs' || searchType === 'both'
+
+  const scholarshipResults = useMemo(() => {
+    if (!profile || step < QUESTIONS.length || !showScholarships) return null
     const all = matchAll(profile, scholarshipInputs).map(m => ({
       ...m,
       scholarship: scholarshipMap.get(m.id)!,
@@ -243,12 +281,17 @@ export default function EligibilityQuiz({ scholarships }: Props) {
     const quality  = all.filter(r => r.tier !== 'possible')
     const possible = all.filter(r => r.tier === 'possible')
     return quality.length >= 5 ? quality.slice(0, 10) : [...quality, ...possible].slice(0, 10)
-  }, [profile, step, scholarshipInputs, scholarshipMap])
+  }, [profile, step, scholarshipInputs, scholarshipMap, showScholarships])
+
+  const programResults = useMemo(() => {
+    if (step < QUESTIONS.length || !showPrograms) return null
+    return matchPrograms(programs, answers)
+  }, [programs, answers, step, showPrograms])
 
   const totalAmount = useMemo(() => {
-    if (!results) return 0
-    return results.filter(r => r.tier !== 'possible').reduce((sum, r) => sum + parseAmount(r.scholarship.amount), 0)
-  }, [results])
+    if (!scholarshipResults) return 0
+    return scholarshipResults.filter(r => r.tier !== 'possible').reduce((sum, r) => sum + parseAmount(r.scholarship.amount), 0)
+  }, [scholarshipResults])
 
   const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
   const handleToggleSave = useCallback((id: number, el?: Element | null) => {
@@ -263,9 +306,22 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   // ── Results ────────────────────────────────────────────────────────────────
 
   if (step >= QUESTIONS.length) {
-    const strong   = results?.filter(r => r.tier === 'strong') ?? []
-    const good     = results?.filter(r => r.tier === 'good') ?? []
-    const possible = results?.filter(r => r.tier === 'possible') ?? []
+    const strong   = scholarshipResults?.filter(r => r.tier === 'strong') ?? []
+    const good     = scholarshipResults?.filter(r => r.tier === 'good') ?? []
+    const possible = scholarshipResults?.filter(r => r.tier === 'possible') ?? []
+
+    const scholarshipCount = scholarshipResults?.length ?? 0
+    const programCount = programResults?.length ?? 0
+    const hasAnyResults = scholarshipCount > 0 || programCount > 0
+
+    let headline = ''
+    if (showScholarships && showPrograms) {
+      headline = `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} and ${programCount} program${programCount !== 1 ? 's' : ''} for you.`
+    } else if (showPrograms) {
+      headline = `We found ${programCount} program${programCount !== 1 ? 's' : ''} matching your profile.`
+    } else {
+      headline = `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} you qualify for.`
+    }
 
     return (
       <div>
@@ -281,10 +337,10 @@ export default function EligibilityQuiz({ scholarships }: Props) {
         </div>
 
         <h2 className="text-primary" style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.05, marginBottom: 20 }}>
-          We found {results?.length ?? 0} scholarship{(results?.length ?? 0) !== 1 ? 's' : ''}<br/>you qualify for.
+          {headline}
         </h2>
 
-        {totalAmount > 0 && (
+        {showScholarships && totalAmount > 0 && (
           <div style={{ marginBottom: 28, padding: 'clamp(16px, 3vw, 24px)', borderRadius: 20, background: 'linear-gradient(135deg, rgba(34,211,165,0.1), rgba(59,130,246,0.06), rgba(167,139,250,0.08))', border: '1px solid rgba(34,211,165,0.2)', backdropFilter: 'blur(20px)' }}>
             <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-secondary)', marginBottom: 6 }}>Combined award value</p>
             <p className="text-brand" style={{ fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
@@ -294,7 +350,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           </div>
         )}
 
-        {(strong.length > 0 || good.length > 0 || possible.length > 0) && (
+        {showScholarships && (strong.length > 0 || good.length > 0 || possible.length > 0) && (
           <div className="flex gap-2 mb-5 flex-wrap">
             {strong.length > 0 && <span className="text-xs px-3 py-1 rounded-full border bg-brand-dim text-brand border-brand-border">{strong.length} strong match{strong.length !== 1 ? 'es' : ''}</span>}
             {good.length > 0 && <span className="text-xs px-3 py-1 rounded-full border bg-blue-500/10 text-blue-400 border-blue-500/30">{good.length} good match{good.length !== 1 ? 'es' : ''}</span>}
@@ -302,44 +358,85 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           </div>
         )}
 
-        <div className="space-y-2.5">
-          {(results ?? []).map(({ scholarship: s, tier }, index) => {
-            const style = TIER_STYLES[tier]
-            const rankNum = String(index + 1).padStart(2, '0')
-            return (
-              <div key={s.id} className="card flex items-center gap-4 p-4" style={{ paddingLeft: 20 }}>
-                <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.03em', color: index === 0 ? 'var(--brand)' : 'var(--text-faint)', width: 36, flexShrink: 0, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>{rankNum}</span>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p className="font-semibold text-primary text-sm leading-snug">{s.title}</p>
-                  {s.audience && <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{s.audience}</p>}
-                  <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                    <span className={`text-xs px-2 py-0.5 rounded-full border ${style.badge}`}>{style.label}</span>
-                    {s.deadline && <span className="text-xs text-faint">Due {s.deadline}</span>}
+        {/* Scholarship cards */}
+        {showScholarships && scholarshipResults && scholarshipResults.length > 0 && (
+          <>
+            {showPrograms && (
+              <p className="text-xs font-semibold text-secondary uppercase tracking-widest mb-3" style={{ letterSpacing: '0.08em' }}>Scholarships</p>
+            )}
+            <div className="space-y-2.5">
+              {scholarshipResults.map(({ scholarship: s, tier }, index) => {
+                const style = TIER_STYLES[tier]
+                const rankNum = String(index + 1).padStart(2, '0')
+                return (
+                  <div key={s.id} className="card flex items-center gap-4 p-4" style={{ paddingLeft: 20 }}>
+                    <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.03em', color: index === 0 ? 'var(--brand)' : 'var(--text-faint)', width: 36, flexShrink: 0, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>{rankNum}</span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p className="font-semibold text-primary text-sm leading-snug">{s.title}</p>
+                      {s.audience && <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{s.audience}</p>}
+                      <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                        <span className={`text-xs px-2 py-0.5 rounded-full border ${style.badge}`}>{style.label}</span>
+                        {s.deadline && <span className="text-xs text-faint">Due {s.deadline}</span>}
+                      </div>
+                    </div>
+                    <div style={{ flexShrink: 0, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
+                      <p className="font-bold text-primary" style={{ fontSize: 17, letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>{s.amount}</p>
+                      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                        <a href={`/scholarships/${generateSlug(s.title)}`} className="text-xs text-secondary hover:text-primary transition">Details</a>
+                        <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-brand transition hover:opacity-80">Apply →</a>
+                        <button
+                          onClick={(e) => handleToggleSave(s.id, e.currentTarget)}
+                          aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
+                          className={`flex items-center justify-center flex-shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${savedIds.has(s.id) ? 'text-brand border border-brand-border' : 'text-secondary border border-card'}`}
+                          style={{ width: 28, height: 28, background: savedIds.has(s.id) ? 'var(--brand-dim)' : undefined }}
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill={savedIds.has(s.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div style={{ flexShrink: 0, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
-                  <p className="font-bold text-primary" style={{ fontSize: 17, letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>{s.amount}</p>
-                  <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                    <a href={`/scholarships/${generateSlug(s.title)}`} className="text-xs text-secondary hover:text-primary transition">Details</a>
-                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-brand transition hover:opacity-80">Apply →</a>
-                    <button
-                      onClick={(e) => handleToggleSave(s.id, e.currentTarget)}
-                      aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
-                      className={`flex items-center justify-center flex-shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${savedIds.has(s.id) ? 'text-brand border border-brand-border' : 'text-secondary border border-card'}`}
-                      style={{ width: 28, height: 28, background: savedIds.has(s.id) ? 'var(--brand-dim)' : undefined }}
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill={savedIds.has(s.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )
-          })}
-        </div>
+                )
+              })}
+            </div>
+          </>
+        )}
 
-        {(results?.length ?? 0) === 0 && (
+        {/* Programs cards */}
+        {showPrograms && programResults && programResults.length > 0 && (
+          <div style={{ marginTop: showScholarships && scholarshipResults && scholarshipResults.length > 0 ? 32 : 0 }}>
+            {showScholarships && (
+              <p className="text-xs font-semibold text-secondary uppercase tracking-widest mb-3" style={{ letterSpacing: '0.08em' }}>Research Programs</p>
+            )}
+            <div className="space-y-2.5">
+              {programResults.map((p, index) => (
+                <div key={p.id} className="card flex items-center gap-4 p-4" style={{ paddingLeft: 20 }}>
+                  <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.03em', color: index === 0 && !showScholarships ? 'var(--brand)' : 'var(--text-faint)', width: 36, flexShrink: 0, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>{String(index + 1).padStart(2, '0')}</span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p className="font-semibold text-primary text-sm leading-snug">{p.name}</p>
+                    {p.provider && <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{p.provider}</p>}
+                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                      {p.category && <span className="text-xs px-2 py-0.5 rounded-full border bg-subtle text-tertiary border-card">{p.category}</span>}
+                      {p.deadline && <span className="text-xs text-faint">Due {p.deadline}</span>}
+                    </div>
+                  </div>
+                  <div style={{ flexShrink: 0, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
+                    {p.paid && p.stipend
+                      ? <p className="font-bold text-primary" style={{ fontSize: 17, letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>{p.stipend}</p>
+                      : p.paid
+                        ? <p className="font-bold text-primary" style={{ fontSize: 14 }}>Paid</p>
+                        : <p className="text-xs text-faint">Unpaid</p>
+                    }
+                    <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-brand transition hover:opacity-80">Apply →</a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!hasAnyResults && (
           <div className="text-center py-12 px-4">
-            <p className="font-semibold text-primary mb-2">No scholarships matched your profile</p>
+            <p className="font-semibold text-primary mb-2">No matches found for your profile</p>
             <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">Try leaving optional fields blank. Average and institution answers narrow results significantly.</p>
             <button onClick={reset} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Try again</button>
           </div>
@@ -347,7 +444,12 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
         <div className="mt-8 pt-6 border-t border-subtle flex flex-col sm:flex-row gap-3">
           <button onClick={reset} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-card text-secondary transition">Retake quiz</button>
-          <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all scholarships</a>
+          {showScholarships && (
+            <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all scholarships</a>
+          )}
+          {showPrograms && !showScholarships && (
+            <a href="/programs" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all programs</a>
+          )}
         </div>
       </div>
     )
