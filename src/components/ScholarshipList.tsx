@@ -9,7 +9,7 @@ import { SCHOLARSHIP_BADGES } from '../lib/badges.ts';
 const REGION_PILLS = [
   { value: null,           label: 'All',         dot: undefined,   color: undefined,   bg: undefined,                    border: undefined },
   { value: 'Medicine Hat', label: 'Medicine Hat', dot: '#f97316',   color: '#f97316',   bg: 'rgba(249,115,22,0.15)',       border: 'rgba(249,115,22,0.35)' },
-  { value: 'Alberta-wide', label: 'Alberta',      dot: '#22d3a5',   color: '#22d3a5',   bg: 'rgba(34,211,165,0.15)',       border: 'rgba(34,211,165,0.35)' },
+  { value: 'Alberta-wide', label: 'Alberta',      dot: '#4ade80',   color: '#4ade80',   bg: 'rgba(74,222,128,0.15)',       border: 'rgba(74,222,128,0.35)' },
   { value: 'National',     label: 'National',     dot: '#3b82f6',   color: '#60a5fa',   bg: 'rgba(59,130,246,0.15)',       border: 'rgba(59,130,246,0.35)' },
 ] as const;
 
