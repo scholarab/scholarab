@@ -1,52 +1,57 @@
 ---
 ---
 
-<nav id="bottom-nav" class="bottom-nav-bar md:hidden fixed bottom-0 left-0 right-0" style="z-index: 9999;">
-  <div class="flex h-16 relative">
+<nav id="bottom-nav" class="bottom-nav-bar md:hidden fixed" style="z-index: 9999; bottom: 24px; left: 50%; transform: translateX(-50%); width: max-content;">
+  <div class="flex relative" style="padding: 6px; gap: 2px;">
 
     <!-- Home -->
-    <a href="/" id="bn-home" class="bn-tab flex-1 flex flex-col items-center justify-center gap-[3px]" style="z-index:1;" aria-label="Home">
+    <a href="/" id="bn-home" class="bn-tab flex flex-col items-center justify-center gap-[3px]" style="z-index:1;padding:8px 14px 10px;border-radius:22px;position:relative;" aria-label="Home">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
         <path d="M9 21V12h6v9"/>
       </svg>
-      <span class="text-[10px] font-medium leading-none">Home</span>
+      <span class="text-[10px] font-semibold leading-none">Home</span>
+      <span class="bn-dot" aria-hidden="true"></span>
     </a>
 
     <!-- Scholarships -->
-    <a href="/scholarships" id="bn-scholarships" class="bn-tab flex-1 flex flex-col items-center justify-center gap-[3px]" style="z-index:1;" aria-label="Scholarships">
+    <a href="/scholarships" id="bn-scholarships" class="bn-tab flex flex-col items-center justify-center gap-[3px]" style="z-index:1;padding:8px 14px 10px;border-radius:22px;position:relative;" aria-label="Scholarships">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
         <path d="M6 12v5c3.33 2 8.67 2 12 0v-5"/>
       </svg>
-      <span class="text-[10px] font-medium leading-none">Scholarships</span>
+      <span class="text-[10px] font-semibold leading-none">Scholarships</span>
+      <span class="bn-dot" aria-hidden="true"></span>
     </a>
 
     <!-- Programs -->
-    <a href="/programs" id="bn-programs" class="bn-tab flex-1 flex flex-col items-center justify-center gap-[3px]" style="z-index:1;" aria-label="Programs">
+    <a href="/programs" id="bn-programs" class="bn-tab flex flex-col items-center justify-center gap-[3px]" style="z-index:1;padding:8px 14px 10px;border-radius:22px;position:relative;" aria-label="Programs">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M9 3h6M9 3v7l-4 8a1 1 0 0 0 .9 1.5h12.2a1 1 0 0 0 .9-1.5l-4-8V3"/>
         <line x1="6.5" y1="14" x2="17.5" y2="14"/>
       </svg>
-      <span class="text-[10px] font-medium leading-none">Programs</span>
+      <span class="text-[10px] font-semibold leading-none">Programs</span>
+      <span class="bn-dot" aria-hidden="true"></span>
     </a>
 
     <!-- Saved -->
-    <a href="/saved" id="bn-saved" class="bn-tab flex-1 flex flex-col items-center justify-center gap-[3px]" style="z-index:1;" aria-label="Saved">
+    <a href="/saved" id="bn-saved" class="bn-tab flex flex-col items-center justify-center gap-[3px]" style="z-index:1;padding:8px 14px 10px;border-radius:22px;position:relative;" aria-label="Saved">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
       </svg>
-      <span class="text-[10px] font-medium leading-none">Saved</span>
+      <span class="text-[10px] font-semibold leading-none">Saved</span>
+      <span class="bn-dot" aria-hidden="true"></span>
     </a>
 
     <!-- About -->
-    <a href="/about" id="bn-about" class="bn-tab flex-1 flex flex-col items-center justify-center gap-[3px]" style="z-index:1;" aria-label="About">
+    <a href="/about" id="bn-about" class="bn-tab flex flex-col items-center justify-center gap-[3px]" style="z-index:1;padding:8px 14px 10px;border-radius:22px;position:relative;" aria-label="About">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="10"/>
         <line x1="12" y1="16" x2="12" y2="12"/>
         <line x1="12" y1="8" x2="12.01" y2="8"/>
       </svg>
-      <span class="text-[10px] font-medium leading-none">About</span>
+      <span class="text-[10px] font-semibold leading-none">About</span>
+      <span class="bn-dot" aria-hidden="true"></span>
     </a>
 
   </div>
@@ -67,6 +72,12 @@
         const isActive = id === `bn-${tabId}`;
         el.style.color = isActive ? brand : '';
         el.setAttribute('aria-current', isActive ? 'page' : 'false');
+        const dot = el.querySelector('.bn-dot') as HTMLElement | null;
+        if (dot) {
+          dot.style.opacity = isActive ? '1' : '0';
+          dot.style.background = brand;
+          dot.style.boxShadow = isActive ? `0 0 6px ${brand}` : 'none';
+        }
       }
     });
   }
@@ -85,10 +96,17 @@
 
 <style is:global>
   .bottom-nav-bar {
-    background: var(--bottom-nav-bg);
-    border-top: 0.5px solid var(--bottom-nav-border);
+    background: var(--nav-glass-bg);
+    border: 1px solid var(--bottom-nav-border);
+    border-radius: 28px;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.08) inset;
     pointer-events: auto;
     will-change: transform;
+  }
+  html.theme-light .bottom-nav-bar {
+    box-shadow: 0 12px 32px rgba(10,10,15,0.15), 0 1px 0 rgba(255,255,255,0.9) inset;
   }
   .bn-tab {
     color: var(--bn-tab-color);
@@ -104,6 +122,17 @@
   .bn-tab:active {
     transform: scale(0.85);
     transition: transform 0.1s ease, color 0.2s ease;
+  }
+  .bn-dot {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
   }
   @media (max-height: 500px) and (orientation: landscape) {
     .bottom-nav-bar { padding-top: 4px !important; padding-bottom: 4px !important; }

@@ -23,53 +23,72 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
   const deadlineSoon = daysLeft !== null && daysLeft <= 30;
   const badge        = CATEGORY_BADGE[scholarship.category ?? ''] || DEFAULT_BADGE;
   const isUpcoming   = status === 'future';
-  const amountColor  = isClosed ? 'text-faint' : 'text-brand';
   const slug         = scholarship._slug ?? generateSlug(scholarship.title);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef      = useRef<HTMLDivElement>(null);
   const saveBtnRef   = useRef<HTMLButtonElement>(null);
   useCardEntrance(cardRef, index, isInitial, isFiltered);
+
+  const statusBarClass = isClosed ? 'status-bar status-bar-closed' : isUpcoming ? 'status-bar' : deadlineSoon ? 'status-bar status-bar-closing' : 'status-bar status-bar-active';
+  const statusDotClass = isClosed ? 'status-dot status-dot-closed' : isUpcoming ? 'status-dot' : deadlineSoon ? 'status-dot status-dot-closing' : 'status-dot status-dot-active';
+
+  const statusLabel = isClosed ? 'Closed' : isUpcoming ? 'Coming Soon' : deadlineSoon ? 'Closing Soon' : 'Active';
+  const statusColor = isClosed ? 'var(--text-faint)' : isUpcoming ? '#3b82f6' : deadlineSoon ? '#f5b14a' : 'var(--brand)';
 
   return (
     <div
       ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card p-5 flex flex-col justify-between h-full`}
-      style={{ minHeight: 280, opacity: isClosed ? 0.45 : isUpcoming ? 0.75 : undefined, borderTop: `2px solid ${badge.color}` }}
+      className={`${isInitial ? '' : 'card-before-reveal '}card card-interactive flex flex-col justify-between h-full`}
+      style={{
+        minHeight: 280,
+        opacity: isClosed ? 0.5 : isUpcoming ? 0.8 : undefined,
+        paddingLeft: 22, paddingRight: 20, paddingTop: 18, paddingBottom: 18,
+      }}
     >
+      {/* Left status bar */}
+      <div className={statusBarClass} />
+
       <div className="grow">
-        <div className="flex items-start justify-between gap-2 mb-3">
-          {scholarship.category ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
-              <span style={{ fontSize: 16 }}>{badge.emoji}</span>
+        {/* Status row */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: statusColor }}>
+            <span className={statusDotClass} />
+            {statusLabel}
+          </span>
+          {scholarship.category && (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
+              <span style={{ fontSize: 13 }}>{badge.emoji}</span>
               {scholarship.category}
             </span>
-          ) : <span />}
+          )}
         </div>
 
-        <h2 className={`font-bold text-base leading-snug mb-2 ${isClosed ? 'text-faint' : 'text-primary'}`}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.25, marginBottom: 6 }} className={isClosed ? 'text-faint' : 'text-primary'}>
           {scholarship.title}
         </h2>
-        <p className="text-sm line-clamp-2 mb-2 text-secondary">
+        <p className="text-sm mb-3 text-secondary" style={{ lineHeight: 1.45 }}>
           {scholarship.audience}
         </p>
 
-        <div className="pt-4 grid grid-cols-2 gap-2 border-t border-subtle">
+        {/* Amount + deadline — dominant data */}
+        <div className="grid grid-cols-2 gap-3 pt-4 border-t border-subtle">
           <div>
-            <p className={`${amountColor}`} style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.1 }}>
+            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }} className="text-faint">Award</p>
+            <p style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, fontVariantNumeric: 'tabular-nums' }} className={isClosed ? 'text-faint' : 'text-brand'}>
               {scholarship.amount}
             </p>
           </div>
-          <div className="text-right flex flex-col items-end overflow-hidden">
-            {status === 'future' && (
-              <span style={{ fontSize: 9, fontWeight: 600, marginBottom: 2 }} className="text-blue-400 uppercase tracking-wide">Opens</span>
-            )}
+          <div className="text-right flex flex-col items-end">
+            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }} className="text-faint">
+              {status === 'future' ? 'Opens' : 'Deadline'}
+            </p>
             <p style={{
-              fontSize: 12, fontWeight: 700,
-              color: isClosed ? undefined : status === 'future' ? undefined : deadlineSoon ? '#f87171' : undefined,
-            }} className={isClosed ? 'text-faint' : status === 'future' ? 'text-blue-400' : deadlineSoon ? '' : 'text-tertiary'}>
+              fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em', fontVariantNumeric: 'tabular-nums',
+              color: isClosed ? undefined : status === 'future' ? '#3b82f6' : deadlineSoon ? '#f5b14a' : undefined,
+            }} className={isClosed ? 'text-faint' : status === 'future' ? '' : deadlineSoon ? '' : 'text-secondary'}>
               {status === 'future' ? (formatDeadline(scholarship.openDate) || 'TBA') : formatDeadline(scholarship.deadline)}
             </p>
             {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
-              <span style={{ fontSize: 9, marginTop: 2, color: daysLeft <= 30 ? '#f87171' : 'var(--text-faint)' }}>
+              <span style={{ fontSize: 10, marginTop: 3, fontWeight: 600, color: daysLeft <= 7 ? '#ef5a5a' : daysLeft <= 30 ? '#f5b14a' : 'var(--text-faint)' }}>
                 {daysLeft === 0 ? 'Ends today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`}
               </span>
             )}
@@ -86,8 +105,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
         {status === 'active' && (
           <a href={scholarship.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
             aria-label={`Apply to ${scholarship.title} (opens in new tab)`}
-            onClick={() => {}}
-            className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
+            className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold"
             style={{ background: 'var(--brand)', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             Apply Now
           </a>

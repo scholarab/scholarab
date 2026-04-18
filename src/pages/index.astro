@@ -19,9 +19,9 @@ const researchCount = programs.filter(p => {
 
 const scholarshipCount = scholarships.filter(s => {
   const openMs = s.openDate ? new Date(s.openDate + 'T00:00:00').getTime() : 0;
-  if (today.getTime() < openMs) return true; // future — not yet open, still counted
+  if (today.getTime() < openMs) return true;
   const deadMs = s.deadline ? new Date(s.deadline + 'T00:00:00').getTime() : 0;
-  return today.getTime() <= deadMs; // active — deadline not yet passed
+  return today.getTime() <= deadMs;
 }).length;
 
 const ONE_WEEK_MS = CLOSING_SOON_MS;
@@ -56,58 +56,85 @@ const closingSoon = scholarships
       "query-input": "required name=search_term_string",
     },
   })} slot="head" />
+
   <div class="pb-8">
 
     <!-- Hero -->
-    <div class="max-w-2xl mx-auto text-center pt-8 md:pt-12 pb-2">
-      <p class="font-semibold text-secondary mb-2" style="font-size: clamp(18px, 2.5vw, 28px);">
-        Alberta's student opportunity directory.
+    <div class="max-w-2xl mx-auto pt-8 md:pt-14 pb-4">
+
+      <!-- Live status pill -->
+      <div class="flex justify-center md:justify-start mb-6">
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid var(--border-card);background:var(--bg-card);backdrop-filter:blur(12px);font-size:12px;font-weight:500;color:var(--text-secondary);">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 8px var(--brand);display:inline-block;animation:statusPulse 2s ease-in-out infinite;" aria-hidden="true"></span>
+          Alberta's student opportunity directory
+        </div>
+      </div>
+
+      <!-- H1 — large, bold, gradient on key phrase -->
+      <h1 class="text-center md:text-left" style="margin:0 0 20px;font-size:clamp(40px,7vw,72px);font-weight:800;letter-spacing:-0.045em;line-height:0.98;color:var(--text-primary);">
+        Every Alberta<br/>scholarship, <span style="background:linear-gradient(120deg,var(--brand) 0%,#3b82f6 50%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">in one place.</span>
+      </h1>
+
+      <p class="text-center md:text-left text-secondary mb-8" style="font-size:clamp(15px,2vw,18px);line-height:1.55;max-width:480px;letter-spacing:-0.01em;">
+        A free directory built by a high school student, for high school students. No ads, no logins — just scholarships.
       </p>
-      <p id="hero-amount" data-target={activeTotal} class="mb-4 md:mb-8 font-bold text-brand" style="font-size: clamp(22px, 3vw, 38px); letter-spacing: -0.02em;">$0+ open right now</p>
-      <div class="flex flex-col items-center gap-3">
-        <div class="flex flex-row gap-3 justify-center">
-          <a href="/scholarships" class="inline-flex items-center justify-center whitespace-nowrap px-5 py-3.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-85" style="background: var(--brand); color: #0a0a0f;">
-            Find Scholarships
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col items-center md:items-start gap-3">
+        <div class="flex flex-row gap-3">
+          <a href="/scholarships" class="btn-teal inline-flex items-center justify-center gap-2 whitespace-nowrap px-6 py-3.5 rounded-full text-sm font-semibold" style="background:var(--brand);color:#0a0a0f;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            Browse scholarships
           </a>
-          <a href="/programs" class="inline-flex items-center justify-center whitespace-nowrap px-5 py-3.5 rounded-full text-sm font-semibold transition-colors border" style="background: var(--brand-dim); border-color: var(--brand-border); color: var(--brand);">
+          <a href="/programs" class="inline-flex items-center justify-center whitespace-nowrap px-6 py-3.5 rounded-full text-sm font-semibold transition-colors border" style="background:var(--brand-dim);border-color:var(--brand-border);color:var(--brand);">
             Research Programs
           </a>
         </div>
         <a href="/match" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/></svg>
           Find scholarships for me →
         </a>
       </div>
 
-      <!-- Stats row -->
-      <div class="flex items-center justify-center sm:justify-center gap-2 mt-6 text-xs text-tertiary flex-wrap">
-        <span>{scholarshipCount} scholarships</span>
-        <span aria-hidden="true">·</span>
-        <span>{researchCount} research programs</span>
+      <!-- Ticker counter panel -->
+      <div class="mt-10 md:mt-14" style="padding:20px 24px;border-radius:20px;background:linear-gradient(135deg,rgba(34,211,165,0.08) 0%,rgba(59,130,246,0.04) 50%,rgba(167,139,250,0.06) 100%);border:1px solid var(--border-card);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(255,255,255,0.05) inset;">
+        <p style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:6px;">Total awards available</p>
+        <div class="flex items-baseline gap-2">
+          <span style="font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">$</span>
+          <span id="hero-amount" data-target={activeTotal} style="font-size:clamp(40px,7vw,64px);font-weight:800;letter-spacing:-0.045em;color:var(--text-primary);font-variant-numeric:tabular-nums;line-height:1;">0</span>
+        </div>
+        <p style="margin-top:6px;font-size:13px;color:var(--text-secondary);">across <strong style="color:var(--text-primary);font-variant-numeric:tabular-nums;">{scholarshipCount}</strong> open opportunities · <strong style="color:var(--text-primary);">{researchCount}</strong> research programs</p>
       </div>
     </div>
 
-    <!-- Closing this week -->
+    <!-- Closing this week — horizontal scroll carousel -->
     {closingSoon.length > 0 && (
-      <div class="max-w-2xl mx-auto mt-14">
-        <div class="flex items-center justify-between mb-4">
-          <p class="text-xs font-semibold uppercase tracking-widest text-tertiary">Closing this week</p>
-          <a href="/scholarships" class="text-xs text-secondary hover:text-primary transition-colors">View all →</a>
+      <div class="mt-14 md:mt-20">
+        <div class="max-w-2xl mx-auto flex items-baseline justify-between mb-5 px-0">
+          <div>
+            <p style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#f5b14a;margin-bottom:6px;">⚡ Time sensitive</p>
+            <h2 style="margin:0;font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">Closing this week</h2>
+          </div>
+          <a href="/scholarships" class="text-sm text-secondary hover:text-primary transition-colors flex items-center gap-1">View all →</a>
         </div>
-        <div class="flex flex-col gap-2.5" id="closing-soon-list">
+
+        <!-- Horizontal scroll on mobile, stacked on desktop -->
+        <div id="closing-soon-list" class="flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible pb-3 md:pb-0 max-w-2xl mx-auto" style="scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;">
           {closingSoon.map(s => {
             return (
               <a
                 href={`/scholarships/${generateSlug(s.title)}`}
-                class="card card-interactive flex items-center justify-between gap-4 px-4 py-3.5"
+                class="card card-interactive flex items-center justify-between gap-4 px-4 py-3.5 flex-shrink-0 md:flex-shrink"
+                style="min-width:280px;scroll-snap-align:start;padding-left:18px;position:relative;"
                 data-deadline={s.deadline}
               >
+                <div style="position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 2px 2px 0;background:#f5b14a;box-shadow:0 0 8px rgba(245,177,74,0.4);" aria-hidden="true"></div>
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-semibold text-primary truncate">{s.title}</p>
                   {s.audience && <p class="text-xs text-tertiary mt-0.5 truncate">{s.audience}</p>}
                 </div>
                 <div class="flex items-center gap-3 flex-shrink-0">
-                  <p class="text-sm font-bold text-brand">{s.amount}</p>
+                  <p class="text-sm font-bold text-brand" style="font-variant-numeric:tabular-nums;">{s.amount}</p>
                   <span class="closing-soon-badge text-xs font-semibold px-2.5 py-1 rounded-full border bg-amber-400/10 text-amber-400 border-amber-400/25">
                     &hellip;
                   </span>
@@ -119,27 +146,47 @@ const closingSoon = scholarships
       </div>
     )}
 
+    <!-- Stats — large tabular numbers with teal line dividers -->
+    <div class="max-w-2xl mx-auto mt-16 md:mt-20 pt-10" style="border-top:1px solid var(--border-subtle);">
+      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-8 text-center md:text-left">By the numbers</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {[
+          { v: `${scholarshipCount}+`, l: 'Scholarships tracked' },
+          { v: researchCount.toString(), l: 'Research programs' },
+          { v: 'Free', l: 'Always — no ads, no fees' },
+          { v: '0', l: 'Data collected' },
+        ].map(stat => (
+          <div style="position:relative;padding-top:16px;">
+            <div style="position:absolute;top:0;left:0;right:20%;height:2px;background:linear-gradient(90deg,var(--brand),transparent);border-radius:2px;" aria-hidden="true"></div>
+            <span style="display:block;font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-0.04em;color:var(--text-primary);line-height:1;font-variant-numeric:tabular-nums;">{stat.v}</span>
+            <span style="display:block;margin-top:6px;font-size:13px;color:var(--text-secondary);letter-spacing:-0.01em;">{stat.l}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
     <!-- How it works -->
-    <div class="max-w-2xl mx-auto mt-16">
-      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-6 text-center">How it works</p>
+    <div class="max-w-2xl mx-auto mt-16 md:mt-20">
+      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-6 text-center md:text-left">How it works</p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl text-brand">1</span>
+          <span class="font-bold text-2xl text-brand" style="font-variant-numeric:tabular-nums;">01</span>
           <p class="font-semibold text-sm text-primary">Browse</p>
           <p class="text-sm text-secondary">Browse scholarships and research programs across Alberta</p>
         </div>
         <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl text-brand">2</span>
+          <span class="font-bold text-2xl text-brand" style="font-variant-numeric:tabular-nums;">02</span>
           <p class="font-semibold text-sm text-primary">Filter</p>
           <p class="text-sm text-secondary">Filter by region, category, or deadline to find what fits you</p>
         </div>
         <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl text-brand">3</span>
+          <span class="font-bold text-2xl text-brand" style="font-variant-numeric:tabular-nums;">03</span>
           <p class="font-semibold text-sm text-primary">Apply</p>
           <p class="text-sm text-secondary">Click Apply Now and go straight to the official application</p>
         </div>
       </div>
     </div>
+
   </div>
 </Layout>
 
@@ -150,7 +197,7 @@ const closingSoon = scholarships
     const target = parseInt((el as HTMLElement).dataset.target ?? '0', 10);
     if (!target) return;
 
-    const final = '$' + target.toLocaleString('en-CA') + '+ open right now';
+    const final = target.toLocaleString('en-CA');
 
     if (sessionStorage.getItem('hero-animated')) {
       el.textContent = final;
@@ -158,14 +205,14 @@ const closingSoon = scholarships
     }
 
     sessionStorage.setItem('hero-animated', '1');
-    const duration = 2500;
+    const duration = 2200;
     const startTime = performance.now();
 
     function step(now: number) {
       const t = Math.min((now - startTime) / duration, 1);
-      const eased = t * t * t * t * t;
+      const eased = 1 - Math.pow(1 - t, 4);
       const value = Math.round(eased * target);
-      el!.textContent = '$' + value.toLocaleString('en-CA') + '+ open right now';
+      el!.textContent = value.toLocaleString('en-CA');
       if (t < 1) requestAnimationFrame(step);
     }
 
@@ -205,7 +252,7 @@ const closingSoon = scholarships
       }
     });
     if (visible === 0) {
-      const section = list.closest('.max-w-2xl') as HTMLElement | null;
+      const section = list.closest('.mt-14') as HTMLElement | null;
       if (section) section.style.display = 'none';
     }
   }
@@ -213,3 +260,7 @@ const closingSoon = scholarships
   updateClosingSoon();
   document.addEventListener('astro:page-load', updateClosingSoon);
 </script>
+
+<style>
+  #closing-soon-list::-webkit-scrollbar { display: none; }
+</style>
