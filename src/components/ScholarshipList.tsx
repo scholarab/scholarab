@@ -179,13 +179,26 @@ export default function ScholarshipList({ items }: Props) {
             })}
           </div>
         </div>
-        <div className="flex items-center gap-1.5 flex-shrink-0">
-          {SORT_OPTIONS.map(({ value, label }) => (
-            <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={sortBy === value}
-              className={`sort-pill whitespace-nowrap flex-shrink-0${sortBy === value ? ' active' : ''}`}>
-              {label}
-            </button>
-          ))}
+        <div style={{ display: 'inline-flex', padding: 3, borderRadius: 10, border: '1px solid var(--border-card)', background: 'var(--bg-card)', flexShrink: 0 }}>
+          {SORT_OPTIONS.map(({ value, label }) => {
+            const active = sortBy === value;
+            const icon = active ? (value === 'closest_due' ? '◆' : value === 'highest_pay' ? '↑' : '↓') : null;
+            return (
+              <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={active}
+                style={{
+                  padding: '5px 11px', fontSize: 12, fontWeight: active ? 600 : 500,
+                  letterSpacing: '-0.01em', fontFamily: 'inherit',
+                  border: 'none', borderRadius: 7, cursor: 'pointer', whiteSpace: 'nowrap',
+                  background: active ? 'var(--bg-subtle)' : 'transparent',
+                  color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  transition: 'all 180ms',
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                }}>
+                {icon && <span style={{ color: 'var(--brand)', fontSize: 10 }}>{icon}</span>}
+                {label}
+              </button>
+            );
+          })}
         </div>
       </div>
 

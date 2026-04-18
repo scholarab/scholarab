@@ -29,103 +29,114 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
   useCardEntrance(cardRef, index, isInitial, isFiltered);
 
   const statusBarClass = isClosed ? 'status-bar status-bar-closed' : isUpcoming ? 'status-bar' : deadlineSoon ? 'status-bar status-bar-closing' : 'status-bar status-bar-active';
-  const statusDotClass = isClosed ? 'status-dot status-dot-closed' : isUpcoming ? 'status-dot' : deadlineSoon ? 'status-dot status-dot-closing' : 'status-dot status-dot-active';
 
   const statusLabel = isClosed ? 'Closed' : isUpcoming ? 'Coming Soon' : deadlineSoon ? 'Closing Soon' : 'Active';
   const statusColor = isClosed ? 'var(--text-faint)' : isUpcoming ? '#3b82f6' : deadlineSoon ? '#f5b14a' : 'var(--brand)';
+  const statusDotBg = isClosed ? 'rgba(255,255,255,0.2)' : isUpcoming ? '#3b82f6' : deadlineSoon ? '#f5b14a' : 'var(--brand)';
+
+  const deadlineLabel = status === 'future' ? 'Opens' : 'Deadline';
+  const deadlineValue = status === 'future' ? (formatDeadline(scholarship.openDate) || 'TBA') : formatDeadline(scholarship.deadline);
+  const deadlineColor = isClosed ? undefined : status === 'future' ? '#3b82f6' : deadlineSoon ? '#f5b14a' : undefined;
 
   return (
     <div
       ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card card-interactive flex flex-col justify-between h-full`}
+      className={`${isInitial ? '' : 'card-before-reveal '}card card-interactive h-full`}
       style={{
-        minHeight: 280,
         opacity: isClosed ? 0.5 : isUpcoming ? 0.8 : undefined,
-        paddingLeft: 22, paddingRight: 20, paddingTop: 18, paddingBottom: 18,
+        paddingLeft: 22, paddingRight: 18, paddingTop: 18, paddingBottom: 18,
+        position: 'relative',
       }}
     >
+      {/* Full-card link overlay */}
+      <a
+        href={`/scholarships/${slug}`}
+        aria-label={`View details for ${scholarship.title}`}
+        style={{ position: 'absolute', inset: 0, zIndex: 0, borderRadius: 16 }}
+      />
+
       {/* Left status bar */}
       <div className={statusBarClass} />
 
-      <div className="grow">
-        {/* Status row */}
-        <div className="flex items-center justify-between gap-2 mb-3">
+      {/* Card body — above the link overlay */}
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
+
+        {/* Header: status chip + bookmark */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 10 }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: statusColor }}>
-            <span className={statusDotClass} />
+            <span style={{
+              width: 6, height: 6, borderRadius: '50%', background: statusDotBg, flexShrink: 0,
+              animation: status === 'active' ? 'statusPulse 2s ease-in-out infinite' : 'none',
+              boxShadow: status === 'active' ? `0 0 6px ${statusDotBg}` : 'none',
+            }} />
             {statusLabel}
           </span>
-          {scholarship.category && (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '2px 8px', borderRadius: 999, fontSize: 11, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
-              <span style={{ fontSize: 13 }}>{badge.emoji}</span>
-              {scholarship.category}
-            </span>
-          )}
+          <button
+            ref={saveBtnRef}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (!isSaved) showConfetti(saveBtnRef.current);
+              showToast(isSaved ? 'Removed from saved' : 'Saved ✓');
+              onToggleSave();
+            }}
+            aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
+            style={{
+              position: 'relative', zIndex: 2,
+              width: 34, height: 34, borderRadius: 10, flexShrink: 0,
+              border: `1px solid ${isSaved ? 'rgba(var(--brand-rgb),0.4)' : 'var(--border-strong)'}`,
+              background: isSaved ? 'var(--brand-dim)' : 'transparent',
+              color: isSaved ? 'var(--brand)' : 'var(--text-secondary)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', transition: 'all 150ms',
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
         </div>
 
-        <h2 style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.25, marginBottom: 6 }} className={isClosed ? 'text-faint' : 'text-primary'}>
-          {scholarship.title}
-        </h2>
-        <p className="text-sm mb-3 text-secondary" style={{ lineHeight: 1.45 }}>
-          {scholarship.audience}
-        </p>
+        {/* Title + org */}
+        <div style={{ flex: 1 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.25, marginBottom: 5, color: isClosed ? 'var(--text-faint)' : 'var(--text-primary)' }}>
+            {scholarship.title}
+          </h2>
+          <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: 0 }}>
+            {scholarship.audience}
+          </p>
+        </div>
 
         {/* Amount + deadline — dominant data */}
-        <div className="grid grid-cols-2 gap-3 pt-4 border-t border-subtle">
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 14, paddingTop: 14, borderTop: '1px solid var(--border-subtle)' }}>
           <div>
-            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }} className="text-faint">Award</p>
-            <p style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, fontVariantNumeric: 'tabular-nums' }} className={isClosed ? 'text-faint' : 'text-brand'}>
+            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3, color: 'var(--text-faint)' }}>Award</p>
+            <p style={{ fontSize: 22, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, fontVariantNumeric: 'tabular-nums', color: isClosed ? 'var(--text-faint)' : 'var(--brand)' }}>
               {scholarship.amount}
             </p>
           </div>
-          <div className="text-right flex flex-col items-end">
-            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }} className="text-faint">
-              {status === 'future' ? 'Opens' : 'Deadline'}
-            </p>
-            <p style={{
-              fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em', fontVariantNumeric: 'tabular-nums',
-              color: isClosed ? undefined : status === 'future' ? '#3b82f6' : deadlineSoon ? '#f5b14a' : undefined,
-            }} className={isClosed ? 'text-faint' : status === 'future' ? '' : deadlineSoon ? '' : 'text-secondary'}>
-              {status === 'future' ? (formatDeadline(scholarship.openDate) || 'TBA') : formatDeadline(scholarship.deadline)}
+          <div>
+            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3, color: 'var(--text-faint)' }}>{deadlineLabel}</p>
+            <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em', fontVariantNumeric: 'tabular-nums', color: isClosed ? 'var(--text-faint)' : deadlineColor || 'var(--text-secondary)' }}>
+              {deadlineValue}
             </p>
             {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
-              <span style={{ fontSize: 10, marginTop: 3, fontWeight: 600, color: daysLeft <= 7 ? '#ef5a5a' : daysLeft <= 30 ? '#f5b14a' : 'var(--text-faint)' }}>
+              <span style={{ fontSize: 10, marginTop: 3, display: 'block', fontWeight: 600, color: daysLeft <= 7 ? '#ef5a5a' : daysLeft <= 30 ? '#f5b14a' : 'var(--text-faint)' }}>
                 {daysLeft === 0 ? 'Ends today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`}
               </span>
             )}
           </div>
         </div>
-      </div>
 
-      <div className="pt-4 flex gap-2">
-        <a href={`/scholarships/${slug}`}
-          aria-label={`View details for ${scholarship.title}`}
-          className="flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold flex items-center justify-center border border-strong text-secondary hover:border-medium hover:text-primary transition-colors">
-          View Details
-        </a>
-        {status === 'active' && (
-          <a href={scholarship.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
-            aria-label={`Apply to ${scholarship.title} (opens in new tab)`}
-            className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold"
-            style={{ background: 'var(--brand)', color: '#0a0a0f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            Apply Now
-          </a>
+        {/* Category tag */}
+        {scholarship.category && (
+          <div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
+              <span style={{ fontSize: 12 }}>{badge.emoji}</span>
+              {scholarship.category}
+            </span>
+          </div>
         )}
-        {status === 'future' && (
-          <button disabled className="flex-1 py-2.5 rounded-[10px] text-sm font-semibold cursor-not-allowed bg-blue-500/[0.08] text-blue-400">
-            Opening Soon
-          </button>
-        )}
-        <button
-          ref={saveBtnRef}
-          onClick={() => { if (!isSaved) showConfetti(saveBtnRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
-          aria-label={isSaved ? 'Remove from saved' : 'Save scholarship'}
-          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-brand border border-[rgba(var(--brand-rgb),0.4)]' : 'text-secondary border border-strong'}`}
-          style={{ width: 44, background: isSaved ? 'var(--brand-dim)' : undefined }}
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-          </svg>
-        </button>
       </div>
     </div>
   );

@@ -98,16 +98,18 @@ describe('ScholarshipCard — rendering', () => {
 })
 
 describe('ScholarshipCard — status', () => {
-  it('shows Apply Now for active scholarship', () => {
+  it('card links to detail page for active scholarship', () => {
     // deadline in future, openDate null → active
     renderCard({ id: 1, deadline: '2025-12-31', openDate: null })
-    expect(screen.getByRole('link', { name: /apply/i })).toBeTruthy()
+    const link = screen.getByRole('link', { name: /view details/i }) as HTMLAnchorElement
+    expect(link).toBeTruthy()
+    expect(link.getAttribute('href')).toContain('/scholarships/')
   })
 
-  it('shows Opening Soon for future scholarship', () => {
+  it('shows Coming Soon status for future scholarship', () => {
     // openDate in future → future
     renderCard({ id: 1, openDate: '2025-09-01' })
-    expect(screen.getByText('Opening Soon')).toBeTruthy()
+    expect(screen.getByText('Coming Soon')).toBeTruthy()
     expect(screen.queryByRole('link', { name: /apply/i })).toBeNull()
   })
 
@@ -118,11 +120,11 @@ describe('ScholarshipCard — status', () => {
     expect(screen.queryByText('Opening Soon')).toBeNull()
   })
 
-  it('Apply Now link opens in a new tab', () => {
+  it('detail link navigates to scholarship page (not external)', () => {
     renderCard({ id: 1, deadline: '2025-12-31', url: 'https://apply.example.com' })
-    const link = screen.getByRole('link', { name: /apply/i }) as HTMLAnchorElement
-    expect(link.getAttribute('target')).toBe('_blank')
-    expect(link.getAttribute('href')).toBe('https://apply.example.com')
+    const link = screen.getByRole('link', { name: /view details/i }) as HTMLAnchorElement
+    expect(link.getAttribute('href')).toMatch(/^\/scholarships\//)
+    expect(link.getAttribute('target')).not.toBe('_blank')
   })
 })
 

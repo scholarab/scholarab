@@ -305,23 +305,15 @@ html.theme-light .status-dot-closed { background: rgba(0,0,0,0.2); }
 /* ── Region chip scroll row ───────────────────────────────── */
 .chips-row-wrap {
   position: relative;
-}
-.chips-row-wrap::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 48px;
-  pointer-events: none;
-  background: linear-gradient(to right, transparent, var(--bg-page));
+  -webkit-mask: linear-gradient(90deg, transparent, black 20px, black calc(100% - 20px), transparent);
+  mask: linear-gradient(90deg, transparent, black 20px, black calc(100% - 20px), transparent);
 }
 .chips-row {
   -ms-overflow-style: none;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
-  padding-right: 48px;
+  padding-inline: 4px;
 }
 .chips-row::-webkit-scrollbar { display: none; }
 
