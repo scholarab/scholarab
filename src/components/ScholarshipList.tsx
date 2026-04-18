@@ -7,10 +7,10 @@ import type { ScholarshipWithMeta, StatusFilter } from '../hooks/useScholarships
 import { SCHOLARSHIP_BADGES } from '../lib/badges.ts';
 
 const REGION_PILLS = [
-  { value: null,           label: 'All',         dot: undefined },
-  { value: 'Medicine Hat', label: 'Medicine Hat', dot: '#f97316' },
-  { value: 'Alberta-wide', label: 'Alberta',      dot: '#22d3a5' },
-  { value: 'National',     label: 'National',     dot: '#3b82f6' },
+  { value: null,           label: 'All',         dot: undefined,   color: undefined,   bg: undefined,                    border: undefined },
+  { value: 'Medicine Hat', label: 'Medicine Hat', dot: '#f97316',   color: '#f97316',   bg: 'rgba(249,115,22,0.15)',       border: 'rgba(249,115,22,0.35)' },
+  { value: 'Alberta-wide', label: 'Alberta',      dot: '#22d3a5',   color: '#22d3a5',   bg: 'rgba(34,211,165,0.15)',       border: 'rgba(34,211,165,0.35)' },
+  { value: 'National',     label: 'National',     dot: '#3b82f6',   color: '#60a5fa',   bg: 'rgba(59,130,246,0.15)',       border: 'rgba(59,130,246,0.35)' },
 ] as const;
 
 const SORT_OPTIONS = [
@@ -83,11 +83,13 @@ export default function ScholarshipList({ items }: Props) {
       <div className="hidden md:block">
         <div className="chips-row-wrap mb-5">
           <div className="flex chips-row gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
-            {REGION_PILLS.map(({ value, label, dot }) => {
+            {REGION_PILLS.map(({ value, label, dot, color, bg, border }) => {
               const sel = selectedRegion === value;
+              const selStyle = sel && color ? { background: bg, border: `0.5px solid ${border}`, color } : undefined;
               return (
                 <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                  className={chipCls(sel)} style={chipStyle(sel)}>
+                  className={`flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? '' : 'bg-subtle text-secondary border border-card hover:border-medium'}`}
+                  style={selStyle}>
                   {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', marginRight: 4, flexShrink: 0 }} />}
                   {label}
                 </button>
@@ -159,12 +161,13 @@ export default function ScholarshipList({ items }: Props) {
         <div>
           <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Region</p>
           <div className="flex flex-wrap" style={{ gap: 8 }}>
-            {REGION_PILLS.map(({ value, label, dot }) => {
+            {REGION_PILLS.map(({ value, label, dot, color, bg, border }) => {
               const sel = selectedRegion === value;
+              const selStyle = sel && color ? { background: bg, borderColor: border, color } : undefined;
               return (
                 <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                  className={`${pillBase} ${sel ? pillOn : pillOff}`}
-                  style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
+                  className={`${pillBase} ${sel ? '' : pillOff}`}
+                  style={selStyle}>
                   {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', flexShrink: 0 }} />}
                   {label}
                 </button>
