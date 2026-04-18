@@ -133,7 +133,13 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
         );
 
     return [...afterSearch].sort((a, b) => {
-      if (sortBy === 'closest_due') return (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity);
+      if (sortBy === 'closest_due') {
+        const aStatus = statusCache.get(a.id);
+        const bStatus = statusCache.get(b.id);
+        if (aStatus === 'future' && bStatus !== 'future') return 1;
+        if (bStatus === 'future' && aStatus !== 'future') return -1;
+        return (a._deadline_ms || Infinity) - (b._deadline_ms || Infinity);
+      }
       if (sortBy === 'highest_pay') return (b._amount_cents ?? 0) - (a._amount_cents ?? 0);
       if (sortBy === 'lowest_pay')  return (a._amount_cents ?? 0) - (b._amount_cents ?? 0);
       return 0;
