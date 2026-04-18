@@ -32,7 +32,7 @@ interface Props {
 const STATUS_CHIPS: { value: StatusFilter; label: string; dot?: string }[] = [
   { value: 'all',     label: 'All' },
   { value: 'active',  label: 'Active',  dot: '#22d3a5' },
-  { value: 'opening', label: 'Opening', dot: '#3b82f6' },
+  { value: 'opening', label: 'Coming', dot: '#3b82f6' },
   { value: 'closed',  label: 'Closed',  dot: '#ef5a5a' },
 ];
 
