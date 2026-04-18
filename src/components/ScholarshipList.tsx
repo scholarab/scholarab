@@ -85,7 +85,11 @@ export default function ScholarshipList({ items }: Props) {
           <div className="flex chips-row gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
             {REGION_PILLS.map(({ value, label, dot, color, bg, border }) => {
               const sel = selectedRegion === value;
-              const selStyle = sel && color ? { background: bg, border: `0.5px solid ${border}`, color } : undefined;
+              const selStyle = sel
+                ? color
+                  ? { background: bg, border: `0.5px solid ${border}`, color }
+                  : { background: 'var(--brand-dim)', border: '0.5px solid var(--brand-border)', color: 'var(--brand)' }
+                : undefined;
               return (
                 <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
                   className={`flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? '' : 'bg-subtle text-secondary border border-card hover:border-medium'}`}
@@ -163,7 +167,11 @@ export default function ScholarshipList({ items }: Props) {
           <div className="flex flex-wrap" style={{ gap: 8 }}>
             {REGION_PILLS.map(({ value, label, dot, color, bg, border }) => {
               const sel = selectedRegion === value;
-              const selStyle = sel && color ? { background: bg, borderColor: border, color } : undefined;
+              const selStyle = sel
+                ? color
+                  ? { background: bg, borderColor: border, color }
+                  : { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
+                : undefined;
               return (
                 <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
                   className={`${pillBase} ${sel ? '' : pillOff}`}
