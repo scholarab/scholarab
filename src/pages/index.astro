@@ -131,24 +131,6 @@ const closingSoon = scholarships
       </div>
     )}
 
-    <!-- Stats — large tabular numbers with teal line dividers -->
-    <div class="max-w-2xl mx-auto mt-16 md:mt-20 pt-10" style="border-top:1px solid var(--border-subtle);">
-      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-8 text-center md:text-left">By the numbers</p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        {[
-          { v: `${scholarshipCount}+`, l: 'Scholarships tracked' },
-          { v: researchCount.toString(), l: 'Research programs' },
-          { v: 'Free', l: 'Always — no ads, no fees' },
-          { v: '0', l: 'Data collected' },
-        ].map(stat => (
-          <div style="position:relative;padding-top:16px;">
-            <div style="position:absolute;top:0;left:0;right:20%;height:2px;background:linear-gradient(90deg,var(--brand),transparent);border-radius:2px;" aria-hidden="true"></div>
-            <span style="display:block;font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-0.04em;color:var(--text-primary);line-height:1;font-variant-numeric:tabular-nums;">{stat.v}</span>
-            <span style="display:block;margin-top:6px;font-size:13px;color:var(--text-secondary);letter-spacing:-0.01em;">{stat.l}</span>
-          </div>
-        ))}
-      </div>
-    </div>
 
     <!-- Browse by field -->
     <div class="max-w-2xl mx-auto mt-16 md:mt-20">
