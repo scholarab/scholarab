@@ -34,15 +34,6 @@
       <span class="bn-dot" aria-hidden="true"></span>
     </a>
 
-    <!-- Match -->
-    <a href="/match" id="bn-match" class="bn-tab flex flex-col items-center justify-center gap-[3px]" style="z-index:1;padding:8px 12px 10px;border-radius:22px;position:relative;" aria-label="Find my match">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 2L9.09 8.26 2 9.27l5 4.87L5.82 21 12 17.77 18.18 21 17 14.14l5-4.87-7.09-1.01L12 2z"/>
-      </svg>
-      <span class="text-[10px] font-semibold leading-none">Match</span>
-      <span class="bn-dot" aria-hidden="true"></span>
-    </a>
-
     <!-- Saved -->
     <a href="/saved" id="bn-saved" class="bn-tab flex flex-col items-center justify-center gap-[3px]" style="z-index:1;padding:8px 12px 10px;border-radius:22px;position:relative;" aria-label="Saved">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -65,7 +56,7 @@
 </nav>
 
 <script lang="ts">
-  const IDS = ['bn-home', 'bn-scholarships', 'bn-programs', 'bn-match', 'bn-saved', 'bn-about'];
+  const IDS = ['bn-home', 'bn-scholarships', 'bn-programs', 'bn-saved', 'bn-about'];
 
   function getBrandColor(): string {
     return getComputedStyle(document.documentElement).getPropertyValue('--brand').trim() || '#22d3a5';
@@ -91,7 +82,6 @@
 
   function resolveActive() {
     const path = window.location.pathname;
-    if (path.startsWith('/match'))        return setActive('match');
     if (path.startsWith('/saved'))        return setActive('saved');
     if (path.startsWith('/scholarships')) return setActive('scholarships');
     if (path.startsWith('/programs'))     return setActive('programs');
