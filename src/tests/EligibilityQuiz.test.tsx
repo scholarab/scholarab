@@ -39,13 +39,12 @@ function clickTile(label: string) {
   act(() => { vi.runAllTimers() })
 }
 
-/** Go through all 5 questions and reach the results screen. */
+/** Go through all 4 questions and reach the results screen. */
 function advanceToResults() {
-  clickTile('Grade 12')               // Q1 grade
-  clickTile('Medicine Hat')           // Q2 city
-  clickTile('Still figuring it out')  // Q3 field
-  clickTile("I'd rather not say")     // Q4 average
-  clickTile('Not sure yet')           // Q5 institution
+  clickTile('Medicine Hat')           // Q1 city
+  clickTile('Still figuring it out')  // Q2 field
+  clickTile("I'd rather not say")     // Q3 average
+  clickTile('Not sure yet')           // Q4 institution
 }
 
 afterEach(() => cleanup())
@@ -63,76 +62,38 @@ afterEach(() => {
   cleanup()
 })
 
-// ── Question 1 — Grade ─────────────────────────────────────────────────────────
+// ── Question 1 — City ─────────────────────────────────────────────────────────
 
-describe('Question 1 — Grade', () => {
+describe('Question 1 — City', () => {
   it('renders first question heading', () => {
     render(<EligibilityQuiz scholarships={[]} />)
-    expect(screen.getByText('What grade are you in?')).toBeTruthy()
-  })
-
-  it('renders all grade options', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    expect(screen.getByText('Grade 10')).toBeTruthy()
-    expect(screen.getByText('Grade 11')).toBeTruthy()
-    expect(screen.getByText('Grade 12')).toBeTruthy()
-  })
-
-  it('shows Beta · Match pill', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    expect(screen.getByText(/beta.*match/i)).toBeTruthy()
-  })
-
-  it('shows Question 1 of 5', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    expect(screen.getByText(/question 1 of 5/i)).toBeTruthy()
-  })
-
-  it('clicking Grade 12 advances to question 2', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    clickTile('Grade 12')
     expect(screen.getByText('Where are you based?')).toBeTruthy()
   })
-})
 
-// ── Question 2 — City ─────────────────────────────────────────────────────────
-
-describe('Question 2 — City', () => {
   it('renders city options', () => {
     render(<EligibilityQuiz scholarships={[]} />)
-    clickTile('Grade 12')
     expect(screen.getByText('Medicine Hat')).toBeTruthy()
     expect(screen.getByText('Calgary')).toBeTruthy()
     expect(screen.getByText('Edmonton')).toBeTruthy()
   })
 
-  it('shows Question 2 of 5', () => {
+  it('shows Question 1 of 4', () => {
     render(<EligibilityQuiz scholarships={[]} />)
-    clickTile('Grade 12')
-    expect(screen.getByText(/question 2 of 5/i)).toBeTruthy()
+    expect(screen.getByText(/question 1 of 4/i)).toBeTruthy()
   })
 
-  it('Previous button returns to question 1', () => {
+  it('clicking a city advances to question 2', () => {
     render(<EligibilityQuiz scholarships={[]} />)
-    clickTile('Grade 12')
-    fireEvent.click(screen.getByRole('button', { name: /previous/i }))
-    expect(screen.getByText('What grade are you in?')).toBeTruthy()
-  })
-
-  it('clicking a city advances to question 3', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    clickTile('Grade 12')
     clickTile('Medicine Hat')
     expect(screen.getByText("What's your academic focus?")).toBeTruthy()
   })
 })
 
-// ── Question 3 — Field ────────────────────────────────────────────────────────
+// ── Question 2 — Field ────────────────────────────────────────────────────────
 
-describe('Question 3 — Field', () => {
+describe('Question 2 — Field', () => {
   beforeEach(() => {
     render(<EligibilityQuiz scholarships={[]} />)
-    clickTile('Grade 12')
     clickTile('Medicine Hat')
   })
 
@@ -143,22 +104,26 @@ describe('Question 3 — Field', () => {
     expect(screen.getByText('Still figuring it out')).toBeTruthy()
   })
 
-  it('shows Question 3 of 5', () => {
-    expect(screen.getByText(/question 3 of 5/i)).toBeTruthy()
+  it('shows Question 2 of 4', () => {
+    expect(screen.getByText(/question 2 of 4/i)).toBeTruthy()
   })
 
-  it('clicking a field advances to question 4', () => {
+  it('Previous button returns to question 1', () => {
+    fireEvent.click(screen.getByRole('button', { name: /previous/i }))
+    expect(screen.getByText('Where are you based?')).toBeTruthy()
+  })
+
+  it('clicking a field advances to question 3', () => {
     clickTile('Still figuring it out')
     expect(screen.getByText("What's your academic average?")).toBeTruthy()
   })
 })
 
-// ── Question 4 — Average ──────────────────────────────────────────────────────
+// ── Question 3 — Average ──────────────────────────────────────────────────────
 
-describe('Question 4 — Average', () => {
+describe('Question 3 — Average', () => {
   beforeEach(() => {
     render(<EligibilityQuiz scholarships={[]} />)
-    clickTile('Grade 12')
     clickTile('Medicine Hat')
     clickTile('Still figuring it out')
   })
@@ -170,22 +135,21 @@ describe('Question 4 — Average', () => {
     expect(screen.getByText("I'd rather not say")).toBeTruthy()
   })
 
-  it('shows Question 4 of 5', () => {
-    expect(screen.getByText(/question 4 of 5/i)).toBeTruthy()
+  it('shows Question 3 of 4', () => {
+    expect(screen.getByText(/question 3 of 4/i)).toBeTruthy()
   })
 
-  it('clicking an average advances to question 5', () => {
+  it('clicking an average advances to question 4', () => {
     clickTile("I'd rather not say")
     expect(screen.getByText("Where are you planning to study?")).toBeTruthy()
   })
 })
 
-// ── Question 5 — Institution ──────────────────────────────────────────────────
+// ── Question 4 — Institution ──────────────────────────────────────────────────
 
-describe('Question 5 — Institution', () => {
+describe('Question 4 — Institution', () => {
   beforeEach(() => {
     render(<EligibilityQuiz scholarships={[]} />)
-    clickTile('Grade 12')
     clickTile('Medicine Hat')
     clickTile('Still figuring it out')
     clickTile("I'd rather not say")
@@ -197,8 +161,8 @@ describe('Question 5 — Institution', () => {
     expect(screen.getByText('Not sure yet')).toBeTruthy()
   })
 
-  it('shows Question 5 of 5', () => {
-    expect(screen.getByText(/question 5 of 5/i)).toBeTruthy()
+  it('shows Question 4 of 4', () => {
+    expect(screen.getByText(/question 4 of 4/i)).toBeTruthy()
   })
 
   it('clicking an institution advances to results', () => {
@@ -272,7 +236,7 @@ describe('Results', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     advanceToResults()
     fireEvent.click(screen.getByRole('button', { name: /retake quiz/i }))
-    expect(screen.getByText('What grade are you in?')).toBeTruthy()
+    expect(screen.getByText('Where are you based?')).toBeTruthy()
   })
 
   it('shows empty state message when no scholarships matched', () => {
@@ -285,7 +249,7 @@ describe('Results', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     advanceToResults()
     fireEvent.click(screen.getByRole('button', { name: /try again/i }))
-    expect(screen.getByText('What grade are you in?')).toBeTruthy()
+    expect(screen.getByText('Where are you based?')).toBeTruthy()
   })
 
   it('save button calls toggleSaved', () => {

@@ -22,15 +22,6 @@ interface QuizQuestion {
 
 const QUESTIONS: QuizQuestion[] = [
   {
-    key: 'grade',
-    q: "What grade are you in?",
-    opts: [
-      { label: 'Grade 10', value: '10' },
-      { label: 'Grade 11', value: '11' },
-      { label: 'Grade 12', value: '12' },
-    ],
-  },
-  {
     key: 'city',
     q: "Where are you based?",
     opts: [
@@ -210,13 +201,12 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
   // Build profile from answers
   const profile = useMemo((): StudentProfile | null => {
-    const grade = answers.grade as StudentProfile['grade'] | undefined
     const city = answers.city
-    if (!grade || !city) return null
+    if (!city) return null
     const fieldVal = answers.field
     const avgVal = answers.average
     return {
-      grade,
+      grade: '12',
       city,
       schoolBoard: null,
       specificSchool: null,
@@ -381,13 +371,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
       </div>
 
       {/* Header row */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-        <span style={{
-          display: 'inline-flex', alignItems: 'center', padding: '3px 10px', borderRadius: 999,
-          background: 'rgba(167,139,250,0.12)', border: '1px solid rgba(167,139,250,0.3)',
-          fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const,
-          color: '#a78bfa',
-        }}>Beta · Match</span>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
         <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
           Question {step + 1} of {QUESTIONS.length}
         </span>
