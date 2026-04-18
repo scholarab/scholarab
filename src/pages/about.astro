@@ -4,82 +4,102 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="About ScholarAB | Free Alberta Scholarship Directory"
-  description="ScholarAB is a free scholarship directory built by Ilia Ivanov, a Medicine Hat high school student. No ads, no login, no data sold."
+  description="ScholarAB is a free, open-source scholarship directory built for Alberta high school students. No ads, no login, no data sold."
   ogTitle="About ScholarAB | Free Alberta Scholarship Directory"
-  ogDescription="ScholarAB is a free scholarship directory built by Ilia Ivanov, a Medicine Hat high school student. No ads, no login, no data sold."
+  ogDescription="ScholarAB is a free, open-source scholarship directory built for Alberta high school students. No ads, no login, no data sold."
   ogUrl="https://www.scholarab.ca/about"
   currentPath="/about"
 >
-  <div class="max-w-2xl">
+  <div class="max-w-3xl">
+    <header class="mb-12 pt-4">
+<h1 class="font-extrabold leading-[1.1] tracking-[-0.03em] text-primary mb-3" style="font-size: clamp(28px, 4vw, 48px);">
+        Built by a student,<br><span class="text-brand">for students.</span>
+      </h1>
+      <p class="text-sm text-secondary mt-3">There was a problem. Now it's fixed.</p>
+    </header>
 
-    <div class="mb-8 pt-2">
-      <span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;background:var(--bg-card);border:1px solid var(--border-card);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-secondary);">About</span>
-    </div>
+    <div class="space-y-14">
 
-    <h1 class="text-primary font-extrabold leading-[1.05] tracking-[-0.04em] mb-6" style="font-size:clamp(28px,5vw,48px);">
-      Built by a student,<br><span class="text-brand">for students.</span>
-    </h1>
+      <section>
+        <h2 class="font-bold text-xl text-primary mb-4" style="border-left: 3px solid var(--brand-border); padding-left: 10px;">The problem</h2>
+        <p class="text-sm leading-relaxed text-secondary">
+          Scholarship information in Alberta was scattered across dozens of websites and school bulletin
+          boards. There was no single place to find what was open, what was closing, or what you actually
+          qualified for.
+        </p>
+      </section>
 
-    <div class="space-y-4 mb-10" style="font-size:clamp(14px,1.5vw,16px);line-height:1.65;color:var(--text-secondary);letter-spacing:-0.005em;">
-      <p>
-        Last year I spent three weekends trying to find scholarships. Every list was out of date. Every aggregator wanted my email before it'd show me anything useful. Most required signup, and half the links were broken.
-      </p>
-      <p>
-        So I built what I wished existed. ScholarAB is a directory — not a platform. There's no login, no ad tracking, no newsletter. Just Canadian scholarships and research programs, kept current by hand.
-      </p>
-      <p>
-        The Match quiz is in beta — it uses your grade, city, and interests to rank opportunities you're likely to qualify for. It's not magic; it's a filter. It'll get better as more students try it.
-      </p>
-      <p>
-        If you find something broken or missing, email me. I read every one.
-      </p>
-    </div>
-
-    <!-- Principles glass card -->
-    <div class="card p-5 mb-5">
-      <p style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:14px;">How this works</p>
-      <div class="space-y-3">
-        <div class="flex gap-3 items-center">
-          <span style="font-size:16px;flex-shrink:0;">🚫</span>
-          <p class="text-sm text-secondary">No ads or sponsored listings.</p>
+      <section>
+        <h2 class="font-bold text-xl text-primary mb-4" style="border-left: 3px solid var(--brand-border); padding-left: 10px;">The fix</h2>
+        <div class="space-y-3 text-sm leading-relaxed text-secondary">
+          <p>
+            ScholarAB is a free scholarship directory for Alberta high school students. Every listing is
+            verified by hand. Deadlines are tracked. Nothing is scraped or auto-generated.
+          </p>
         </div>
-        <div class="flex gap-3 items-center">
-          <span style="font-size:16px;flex-shrink:0;">🔒</span>
-          <p class="text-sm text-secondary">No data collected. Bookmarks stay on your device.</p>
-        </div>
-        <div class="flex gap-3 items-center">
-          <span style="font-size:16px;flex-shrink:0;">👤</span>
-          <p class="text-sm text-secondary">No account required. Ever.</p>
-        </div>
-      </div>
-    </div>
+        <p class="text-sm text-secondary mt-3">
+          Created by <a href="https://www.linkedin.com/in/iliaivanov/" target="_blank" rel="noopener noreferrer" class="font-medium text-primary hover:opacity-70 transition-opacity">Ilia Ivanov</a>, a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" class="hover:opacity-70 transition-opacity">Medicine Hat High School</a> student.
+        </p>
+      </section>
 
-    <!-- Open source + contact -->
-    <div class="flex flex-wrap gap-3 mb-8">
-      <a
-        href="https://github.com/scholarab/scholarab"
-        target="_blank" rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-secondary hover:text-primary"
-        style="background:var(--bg-subtle);border:0.5px solid var(--border-card);"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true">
-          <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-        </svg>
-        GitHub
-      </a>
-      <!--email_off--><a
-        href="mailto:contact.scholarab@gmail.com"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-secondary hover:text-primary"
-        style="background:var(--bg-subtle);border:0.5px solid var(--border-card);"
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        contact.scholarab@gmail.com
-      </a><!--/email_off-->
-    </div>
+      <section>
+        <h2 class="font-bold text-xl text-primary mb-5" style="border-left: 3px solid var(--brand-border); padding-left: 10px;">Our principles</h2>
+        <div class="space-y-3">
+          <div class="card flex gap-4 p-5">
+            <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#fce7f3;font-size:22px;flex-shrink:0;">🚫</span>
+            <div>
+              <p class="font-semibold text-primary mb-1 text-sm">No ads.</p>
+              <p class="text-sm text-secondary">ScholarAB does not show ads. No sponsored listings, no paid placement.</p>
+            </div>
+          </div>
+          <div class="card flex gap-4 p-5">
+            <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#dbeafe;font-size:22px;flex-shrink:0;">🔒</span>
+            <div>
+              <p class="font-semibold text-primary mb-1 text-sm">No data collection.</p>
+              <p class="text-sm text-secondary">ScholarAB does not collect your name, email, or location. No personal data or tracking of any kind. Anonymous aggregate traffic analytics are used solely to improve the site.</p>
+            </div>
+          </div>
+          <div class="card flex gap-4 p-5">
+            <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#d1fae5;font-size:22px;flex-shrink:0;">👤</span>
+            <div>
+              <p class="font-semibold text-primary mb-1 text-sm">No login required.</p>
+              <p class="text-sm text-secondary">No account needed. Everything is public and works on any device.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <p class="text-xs text-faint">
-      Created by <a href="https://www.linkedin.com/in/iliaivanov/" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-primary transition-colors font-medium">Ilia Ivanov</a>, a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" class="hover:opacity-70 transition-opacity">Medicine Hat High School</a> student.
-    </p>
+      <section>
+        <h2 class="font-bold text-xl text-primary mb-4">Open source</h2>
+        <p class="text-sm leading-relaxed text-secondary mb-5">
+          The code is open source under AGPL-3.0. Any use or modification must also be released under the same license.
+        </p>
+        <a
+          href="https://github.com/scholarab/scholarab"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-colors text-secondary hover:text-primary bg-subtle hover:bg-subtle"
+          style="border: 0.5px solid var(--border-card);"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+          </svg>
+          View on GitHub
+        </a>
+      </section>
+
+      <section>
+        <h2 class="font-bold text-xl text-primary mb-4">Contact</h2>
+        <p class="text-sm leading-relaxed text-secondary mb-4">
+          Broken link? Have feedback? Want to contribute?
+        </p>
+        <!--email_off--><a
+          href="mailto:contact.scholarab@gmail.com"
+          class="text-sm text-brand underline underline-offset-4 hover:opacity-80 transition-opacity"
+        >
+          contact.scholarab@gmail.com
+        </a><!--/email_off-->
+      </section>
+
+    </div>
 
   </div>
 </Layout>
