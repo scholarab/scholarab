@@ -41,7 +41,6 @@ export default function ScholarshipList({ items }: Props) {
     sortBy, setSort, selectedRegion, setRegion,
     selectedCategory, setCategory,
     statusFilter, setStatusFilter,
-    setSearchQuery,
     sheetOpen, setSheetOpen, hasActiveFilters,
     savedIds, handleToggleSave, isFiltered,
     regionKey, categoryKey,
@@ -122,15 +121,6 @@ export default function ScholarshipList({ items }: Props) {
                 </button>
               );
             })}
-            {hasActiveFilters && (
-              <button
-                onClick={() => { setCategory('all'); setRegion(null); setStatusFilter('all'); setSort('closest_due'); setSearchQuery(''); }}
-                className="ml-1 text-brand underline underline-offset-2"
-                style={{ fontSize: 12, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
-              >
-                Clear filters
-              </button>
-            )}
           </div>
         </div>
         <div style={{ display: 'inline-flex', padding: 3, borderRadius: 10, border: '1px solid var(--border-card)', background: 'var(--bg-card)', flexShrink: 0 }}>
@@ -197,15 +187,6 @@ export default function ScholarshipList({ items }: Props) {
             })}
           </div>
         </div>
-        {hasActiveFilters && (
-          <button
-            onClick={() => { setCategory('all'); setRegion(null); setStatusFilter('all'); setSort('closest_due'); setSearchQuery(''); setSheetOpen(false); }}
-            className="w-full text-brand underline underline-offset-2 text-sm"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'center', padding: '4px 0' }}
-          >
-            Clear filters
-          </button>
-        )}
       </FilterSheet>
 
       {/* Card grid */}
