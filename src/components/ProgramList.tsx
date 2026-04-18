@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from 'react';
-import { usePrograms } from '../hooks/usePrograms.ts';
+import { usePrograms, getStatus } from '../hooks/usePrograms.ts';
 import ProgramCard from './ProgramCard.tsx';
 import Pagination from './Pagination.tsx';
 import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
@@ -26,7 +26,7 @@ export default function ProgramList({ items }: Props) {
 
   const savedSet   = useMemo(() => new Set(savedIds), [savedIds]);
   const categories = useMemo(
-    () => [...new Set(items.map(p => p.category).filter((c): c is string => c !== null))].sort(),
+    () => [...new Set(items.filter(p => getStatus(p) !== 'closed').map(p => p.category).filter((c): c is string => c !== null))].sort(),
     [items]
   );
 
