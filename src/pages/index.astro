@@ -68,11 +68,9 @@ const closingSoon = scholarships
       </p>
 
       <!-- Hero amount -->
-      <div class="flex items-baseline gap-2 mb-10">
-        <span style="font-size:clamp(44px,8vw,80px);font-weight:800;letter-spacing:-0.045em;color:var(--brand);line-height:1;">$</span>
-        <span id="hero-amount" data-target={activeTotal} style="font-size:clamp(44px,8vw,80px);font-weight:800;letter-spacing:-0.045em;color:var(--brand);font-variant-numeric:tabular-nums;line-height:1;">0</span>
-        <span style="font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.03em;color:var(--brand);line-height:1;">+ open right now</span>
-      </div>
+      <p class="mb-10" style="font-size:clamp(36px,6vw,72px);font-weight:800;letter-spacing:-0.04em;color:var(--brand);line-height:1.1;">
+        $<span id="hero-amount" data-target={activeTotal} style="font-variant-numeric:tabular-nums;">0</span>+ open right now
+      </p>
 
       <!-- CTA buttons -->
       <div class="flex flex-col items-center gap-3">
