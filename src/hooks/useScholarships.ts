@@ -115,7 +115,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
         ? initialScholarships.filter(s => statusCache.get(s.id) === 'future')
         : statusFilter === 'active'
           ? initialScholarships.filter(s => statusCache.get(s.id) === 'active')
-          : initialScholarships.filter(s => statusCache.get(s.id) !== 'closed');
+          : initialScholarships;
 
     const afterCategory = selectedCategory === 'all'
       ? pool

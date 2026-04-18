@@ -116,11 +116,11 @@ describe('useScholarships', () => {
     vi.clearAllMocks()
   })
 
-  it('excludes closed scholarships by default', async () => {
+  it('includes closed scholarships by default (All shows everything)', async () => {
     const { useScholarships } = await import('./useScholarships')
     const { result } = renderHook(() => useScholarships(allItems))
     const ids = result.current.filtered.map(s => s.id)
-    expect(ids).not.toContain(4)
+    expect(ids).toContain(4)
   })
 
   it('includes all non-closed scholarships with no region filter', async () => {
