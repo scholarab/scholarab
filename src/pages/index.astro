@@ -60,50 +60,37 @@ const closingSoon = scholarships
   <div class="pb-8">
 
     <!-- Hero -->
-    <div class="max-w-2xl mx-auto pt-8 md:pt-14 pb-4">
+    <div class="max-w-2xl mx-auto pt-8 md:pt-14 pb-4 flex flex-col items-center text-center">
 
-      <!-- Live status pill -->
-      <div class="flex justify-center md:justify-start mb-6">
-        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid var(--border-card);background:var(--bg-card);backdrop-filter:blur(12px);font-size:12px;font-weight:500;color:var(--text-secondary);">
-          <span style="width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 8px var(--brand);display:inline-block;animation:statusPulse 2s ease-in-out infinite;" aria-hidden="true"></span>
-          Alberta's student opportunity directory
-        </div>
-      </div>
-
-      <!-- H1 — large, bold, gradient on key phrase -->
-      <h1 class="text-center md:text-left" style="margin:0 0 20px;font-size:clamp(40px,7vw,72px);font-weight:800;letter-spacing:-0.045em;line-height:0.98;color:var(--text-primary);">
-        Every Alberta scholarship, <span style="background:linear-gradient(120deg,var(--brand) 0%,#3b82f6 50%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">in one place.</span>
-      </h1>
-
-      <p class="text-center md:text-left text-secondary mb-8" style="font-size:clamp(15px,2vw,18px);line-height:1.55;max-width:480px;letter-spacing:-0.01em;">
-        A free directory built by a high school student, for high school students. No ads, no logins — just scholarships.
+      <!-- Tagline -->
+      <p style="font-size:clamp(18px,2.5vw,24px);font-weight:600;letter-spacing:-0.02em;color:var(--text-secondary);margin-bottom:16px;">
+        Alberta's student opportunity directory.
       </p>
 
+      <!-- Hero amount -->
+      <div class="flex items-baseline gap-2 mb-10">
+        <span style="font-size:clamp(44px,8vw,80px);font-weight:800;letter-spacing:-0.045em;color:var(--brand);line-height:1;">$</span>
+        <span id="hero-amount" data-target={activeTotal} style="font-size:clamp(44px,8vw,80px);font-weight:800;letter-spacing:-0.045em;color:var(--brand);font-variant-numeric:tabular-nums;line-height:1;">0</span>
+        <span style="font-size:clamp(24px,4vw,48px);font-weight:800;letter-spacing:-0.03em;color:var(--brand);line-height:1;">+ open right now</span>
+      </div>
+
       <!-- CTA buttons -->
-      <div class="flex flex-col items-center md:items-start gap-3">
+      <div class="flex flex-col items-center gap-3">
         <div class="flex flex-row gap-3">
-          <a href="/scholarships" class="btn-teal inline-flex items-center justify-center gap-2 whitespace-nowrap px-6 py-3.5 rounded-full text-sm font-semibold" style="background:var(--brand);color:#0a0a0f;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-            Browse scholarships
+          <a href="/scholarships" class="inline-flex items-center justify-center whitespace-nowrap px-6 py-3.5 rounded-full text-sm font-semibold" style="background:var(--brand);color:#0a0a0f;">
+            Find Scholarships
           </a>
-          <a href="/programs" class="inline-flex items-center justify-center whitespace-nowrap px-6 py-3.5 rounded-full text-sm font-semibold transition-colors border" style="background:var(--brand-dim);border-color:var(--brand-border);color:var(--brand);">
+          <a href="/programs" class="inline-flex items-center justify-center whitespace-nowrap px-6 py-3.5 rounded-full text-sm font-semibold border" style="background:var(--brand-dim);border-color:var(--brand-border);color:var(--brand);">
             Research Programs
           </a>
         </div>
         <a href="/match" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
           Find scholarships for me →
         </a>
-      </div>
-
-      <!-- Ticker counter panel -->
-      <div class="mt-10 md:mt-14" style="padding:20px 24px;border-radius:20px;background:linear-gradient(135deg,rgba(34,211,165,0.08) 0%,rgba(59,130,246,0.04) 50%,rgba(167,139,250,0.06) 100%);border:1px solid var(--border-card);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(255,255,255,0.05) inset;">
-        <p style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:6px;">Total awards available</p>
-        <div class="flex items-baseline gap-2">
-          <span style="font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">$</span>
-          <span id="hero-amount" data-target={activeTotal} style="font-size:clamp(40px,7vw,64px);font-weight:800;letter-spacing:-0.045em;color:var(--text-primary);font-variant-numeric:tabular-nums;line-height:1;">0</span>
-        </div>
-        <p style="margin-top:6px;font-size:13px;color:var(--text-secondary);">across <strong style="color:var(--text-primary);font-variant-numeric:tabular-nums;">{scholarshipCount}</strong> open opportunities · <strong style="color:var(--text-primary);">{researchCount}</strong> research programs</p>
+        <p style="font-size:13px;color:var(--text-tertiary);margin-top:4px;">
+          {scholarshipCount} scholarships · {researchCount} research programs
+        </p>
       </div>
     </div>
 
