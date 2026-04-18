@@ -104,15 +104,6 @@ export default function ScholarshipList({ items }: Props) {
         <div className="flex items-center gap-3 flex-shrink-0 flex-wrap">
           <p className="text-sm text-faint flex-shrink-0">
             {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
-            {hasActiveFilters && (
-              <button
-                onClick={() => { setCategory('all'); setRegion(null); setStatusFilter('all'); setSort('closest_due'); setSearchQuery(''); }}
-                className="ml-2 text-brand underline underline-offset-2"
-                style={{ fontSize: 12, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
-              >
-                Clear filters
-              </button>
-            )}
           </p>
           <div className="flex items-center gap-1">
             {STATUS_CHIPS.map(({ value, label, dot }) => {
@@ -132,6 +123,15 @@ export default function ScholarshipList({ items }: Props) {
                 </button>
               );
             })}
+            {hasActiveFilters && (
+              <button
+                onClick={() => { setCategory('all'); setRegion(null); setStatusFilter('all'); setSort('closest_due'); setSearchQuery(''); }}
+                className="ml-1 text-brand underline underline-offset-2"
+                style={{ fontSize: 12, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
+              >
+                Clear filters
+              </button>
+            )}
           </div>
         </div>
         <div style={{ display: 'inline-flex', padding: 3, borderRadius: 10, border: '1px solid var(--border-card)', background: 'var(--bg-card)', flexShrink: 0 }}>
@@ -198,6 +198,15 @@ export default function ScholarshipList({ items }: Props) {
             })}
           </div>
         </div>
+        {hasActiveFilters && (
+          <button
+            onClick={() => { setCategory('all'); setRegion(null); setStatusFilter('all'); setSort('closest_due'); setSearchQuery(''); setSheetOpen(false); }}
+            className="w-full text-brand underline underline-offset-2 text-sm"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'center', padding: '4px 0' }}
+          >
+            Clear filters
+          </button>
+        )}
       </FilterSheet>
 
       {/* Card grid */}
