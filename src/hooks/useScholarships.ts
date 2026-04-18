@@ -37,10 +37,14 @@ const REGION_MATCH: Record<RegionKey, (s: ScholarshipWithMeta) => boolean> = {
 
 type SortValue = 'closest_due' | 'highest_pay' | 'lowest_pay';
 
+export type StatusFilter = 'all' | 'active' | 'closing' | 'closed';
+
 export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [sortBy,         setSortBy        ] = useState<SortValue>('closest_due');
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | null>(null);
   const [selectedCategory, setSelectedCategoryRaw] = useState('all');
+  const [statusFilter,   setStatusFilterRaw] = useState<StatusFilter>('all');
+  const [searchQuery,    setSearchQueryRaw] = useState('');
   const [page,           setPage          ] = useState(1);
   const [sheetOpen,      setSheetOpen     ] = useState(false);
   const [savedIds,       setSavedIds      ] = useState<number[]>([]);
@@ -50,6 +54,18 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     const next = cat === 'all' ? 'all' : cat;
     setHasFiltered(true);
     setSelectedCategoryRaw(next);
+    setPage(1);
+  }, []);
+
+  const setStatusFilter = useCallback((s: StatusFilter) => {
+    setHasFiltered(true);
+    setStatusFilterRaw(s);
+    setPage(1);
+  }, []);
+
+  const setSearchQuery = useCallback((q: string) => {
+    setHasFiltered(true);
+    setSearchQueryRaw(q);
     setPage(1);
   }, []);
 
@@ -85,32 +101,56 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' })));
   }, []);
 
+  const todayMs = useMemo(() => getToday().getTime(), []);
+
   const statusCache = useMemo(() => {
     const m = new Map<number, ScholarshipStatus>();
     for (const s of initialScholarships) m.set(s.id, getStatus(s));
     return m;
   }, [initialScholarships]);
 
-  const withoutClosed = useMemo(
-    () => initialScholarships.filter(s => statusCache.get(s.id) !== 'closed'),
-    [initialScholarships, statusCache]
-  );
-
   const filtered = useMemo(() => {
+    // Base pool depends on statusFilter
+    const pool = statusFilter === 'closed'
+      ? initialScholarships.filter(s => statusCache.get(s.id) === 'closed')
+      : statusFilter === 'closing'
+        ? initialScholarships.filter(s => {
+            if (statusCache.get(s.id) !== 'active') return false;
+            const deadMs = s._deadline_ms ?? 0;
+            const days = Math.ceil((deadMs - todayMs) / 86_400_000);
+            return days >= 0 && days <= 30;
+          })
+        : statusFilter === 'active'
+          ? initialScholarships.filter(s => {
+              if (statusCache.get(s.id) !== 'active') return false;
+              const deadMs = s._deadline_ms ?? 0;
+              const days = Math.ceil((deadMs - todayMs) / 86_400_000);
+              return days > 30;
+            })
+          : initialScholarships.filter(s => statusCache.get(s.id) !== 'closed');
+
     const afterCategory = selectedCategory === 'all'
-      ? withoutClosed
-      : withoutClosed.filter(s => s.category === selectedCategory);
+      ? pool
+      : pool.filter(s => s.category === selectedCategory);
     const afterRegion = selectedRegion === null
       ? afterCategory
       : afterCategory.filter(REGION_MATCH[selectedRegion]);
+    const q = searchQuery.trim().toLowerCase();
+    const afterSearch = q === ''
+      ? afterRegion
+      : afterRegion.filter(s =>
+          (s.title?.toLowerCase().includes(q)) ||
+          (s.organization?.toLowerCase().includes(q)) ||
+          (s.audience?.toLowerCase().includes(q))
+        );
 
-    return [...afterRegion].sort((a, b) => {
+    return [...afterSearch].sort((a, b) => {
       if (sortBy === 'closest_due') return (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity);
       if (sortBy === 'highest_pay') return (b._amount_cents ?? 0) - (a._amount_cents ?? 0);
       if (sortBy === 'lowest_pay')  return (a._amount_cents ?? 0) - (b._amount_cents ?? 0);
       return 0;
     });
-  }, [withoutClosed, selectedRegion, selectedCategory, sortBy]);
+  }, [initialScholarships, statusCache, statusFilter, selectedRegion, selectedCategory, searchQuery, sortBy, todayMs]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
@@ -130,9 +170,13 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     setSheetOpen,
     selectedCategory,
     setCategory,
-    hasActiveFilters: sortBy !== 'closest_due' || selectedRegion !== null || selectedCategory !== 'all',
+    hasActiveFilters: sortBy !== 'closest_due' || selectedRegion !== null || selectedCategory !== 'all' || statusFilter !== 'all' || searchQuery !== '',
     regionKey:        selectedRegion ?? '',
     categoryKey:      selectedCategory,
+    statusFilter,
+    setStatusFilter,
+    searchQuery,
+    setSearchQuery,
     savedIds,
     handleToggleSave,
     isFiltered:       hasFiltered,

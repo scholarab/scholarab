@@ -1,9 +1,9 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { useScholarships } from '../hooks/useScholarships.ts';
 import ScholarshipCard from './ScholarshipCard.tsx';
 import Pagination from './Pagination.tsx';
 import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
-import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
+import type { ScholarshipWithMeta, StatusFilter } from '../hooks/useScholarships.ts';
 import { SCHOLARSHIP_BADGES } from '../lib/badges.ts';
 
 const REGION_PILLS = [
@@ -29,11 +29,21 @@ interface Props {
   items: ScholarshipWithMeta[];
 }
 
+const STATUS_CHIPS: { value: StatusFilter; label: string; dot?: string }[] = [
+  { value: 'all',     label: 'All' },
+  { value: 'active',  label: 'Active',  dot: '#22d3a5' },
+  { value: 'closing', label: 'Closing', dot: '#f5b14a' },
+  { value: 'closed',  label: 'Closed',  dot: '#ef5a5a' },
+];
+
 export default function ScholarshipList({ items }: Props) {
+  const [searchFocused, setSearchFocused] = useState(false);
   const {
     filtered, visibleItems, page, totalPages, handlePageChange,
     sortBy, setSort, selectedRegion, setRegion,
     selectedCategory, setCategory,
+    statusFilter, setStatusFilter,
+    searchQuery, setSearchQuery,
     sheetOpen, setSheetOpen, hasActiveFilters,
     savedIds, handleToggleSave, isFiltered,
     regionKey, categoryKey,
@@ -56,6 +66,51 @@ export default function ScholarshipList({ items }: Props) {
       <span className="sr-only" aria-live="polite" aria-atomic="true">
         {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''} shown
       </span>
+
+      {/* Search — desktop only */}
+      <div className="hidden md:block mb-4">
+        <div style={{ position: 'relative', borderRadius: 12 }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 10, padding: '0 14px',
+            height: 42,
+            background: 'var(--bg-card)',
+            border: `1px solid ${searchFocused ? 'var(--brand-border)' : 'var(--border-card)'}`,
+            borderRadius: 12,
+            transition: 'border-color 200ms',
+            boxShadow: searchFocused ? '0 0 0 3px rgba(34,211,165,0.12)' : 'none',
+            position: 'relative', overflow: 'hidden',
+          }}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={searchFocused ? 'var(--brand)' : 'var(--text-tertiary)'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0, transition: 'stroke 200ms' }}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setSearchFocused(false)}
+              placeholder="Search by name or organization…"
+              style={{
+                flex: 1, border: 'none', background: 'transparent',
+                color: 'var(--text-primary)', fontSize: 14, fontFamily: 'inherit',
+                outline: 'none', letterSpacing: '-0.01em',
+              }}
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery('')} aria-label="Clear search"
+                style={{ width: 22, height: 22, borderRadius: 11, border: 'none', background: 'var(--bg-subtle)', color: 'var(--text-tertiary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 4L4 12M4 4l8 8"/></svg>
+              </button>
+            )}
+            {searchFocused && (
+              <div style={{
+                position: 'absolute', left: 0, top: 0, bottom: 0, width: 2,
+                background: `linear-gradient(180deg, transparent, var(--brand), transparent)`,
+                animation: 'scanLine 1.8s ease-in-out infinite',
+                boxShadow: '0 0 6px var(--brand)',
+              }} />
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* Category chips — desktop only */}
       {categories.length > 0 && (
@@ -89,12 +144,42 @@ export default function ScholarshipList({ items }: Props) {
         </div>
       </div>
 
-      {/* Desktop: count + sort pills */}
-      <div className="hidden md:flex mb-5 items-center justify-between gap-4">
-        <p className="text-sm text-faint flex-shrink-0">
-          {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
-        </p>
-        <div className="flex items-center gap-1.5">
+      {/* Desktop: count + status chips + sort pills */}
+      <div className="hidden md:flex mb-5 items-center justify-between gap-4 flex-wrap">
+        <div className="flex items-center gap-3 flex-shrink-0 flex-wrap">
+          <p className="text-sm text-faint flex-shrink-0">
+            {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
+            {hasActiveFilters && (
+              <button
+                onClick={() => { setCategory('all'); setRegion(null); setStatusFilter('all'); setSort('closest_due'); setSearchQuery(''); }}
+                className="ml-2 text-brand underline underline-offset-2"
+                style={{ fontSize: 12, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
+              >
+                Clear filters
+              </button>
+            )}
+          </p>
+          <div className="flex items-center gap-1">
+            {STATUS_CHIPS.map(({ value, label, dot }) => {
+              const active = statusFilter === value;
+              return (
+                <button key={value} onClick={() => setStatusFilter(value)} aria-pressed={active}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-150 border"
+                  style={{
+                    background: active ? (dot ? `${dot}18` : 'var(--bg-subtle)') : 'transparent',
+                    borderColor: active ? (dot ? `${dot}44` : 'var(--border-card)') : 'transparent',
+                    color: active ? (dot || 'var(--text-primary)') : 'var(--text-tertiary)',
+                    cursor: 'pointer',
+                    fontFamily: 'inherit',
+                  }}>
+                  {dot && <span style={{ width: 6, height: 6, borderRadius: '50%', background: dot, flexShrink: 0, boxShadow: active ? `0 0 5px ${dot}` : 'none' }} />}
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex items-center gap-1.5 flex-shrink-0">
           {SORT_OPTIONS.map(({ value, label }) => (
             <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={sortBy === value}
               className={`sort-pill whitespace-nowrap flex-shrink-0${sortBy === value ? ' active' : ''}`}>

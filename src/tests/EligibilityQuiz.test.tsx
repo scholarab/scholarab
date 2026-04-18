@@ -197,7 +197,7 @@ describe('Step 2 — What do you want to study?', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     advanceToStep2()
     fireEvent.click(screen.getByRole('button', { name: /find my scholarships/i }))
-    expect(screen.getByText(/scholarships? found/i)).toBeTruthy()
+    expect(screen.getByText(/we found/i)).toBeTruthy()
   })
 
   it('all FIELDS chips are rendered', () => {
@@ -215,7 +215,7 @@ describe('Results', () => {
   it('shows "0 scholarships found" when matchAll returns empty', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     advanceToResults()
-    expect(screen.getByText('0 scholarships found')).toBeTruthy()
+    expect(screen.getByText(/we found 0 scholarships/i)).toBeTruthy()
   })
 
   it('shows scholarship count from matchAll results', () => {
@@ -227,7 +227,7 @@ describe('Results', () => {
     ])
     render(<EligibilityQuiz scholarships={[s1 as any, s2 as any]} />)
     advanceToResults()
-    expect(screen.getByText('2 scholarships found')).toBeTruthy()
+    expect(screen.getByText(/we found 2 scholarships/i)).toBeTruthy()
   })
 
   it('shows "1 scholarship found" with singular form', () => {
@@ -235,7 +235,7 @@ describe('Results', () => {
     mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 }])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
-    expect(screen.getByText('1 scholarship found')).toBeTruthy()
+    expect(screen.getByText(/we found 1 scholarship/i)).toBeTruthy()
   })
 
   it('renders scholarship titles in results', () => {
@@ -270,10 +270,10 @@ describe('Results', () => {
     expect(screen.getByText('Possible match')).toBeTruthy()
   })
 
-  it('"Start over" button resets to step 1', () => {
+  it('"Retake quiz" button resets to step 1', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     advanceToResults()
-    fireEvent.click(screen.getByRole('button', { name: /start over/i }))
+    fireEvent.click(screen.getByRole('button', { name: /retake quiz/i }))
     expect(screen.getByText('Where are you at?')).toBeTruthy()
   })
 

@@ -403,70 +403,90 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
   return (
     <div>
-      <div className="mb-8">
-        <p className="text-sm text-secondary mb-1">Based on your profile</p>
-        <h2 className="text-2xl font-bold text-primary mb-1">
-          {results.length} scholarship{results.length !== 1 ? 's' : ''} found
-        </h2>
-        {totalAmount > 0 && (
-          <p className="font-bold text-brand" style={{ fontSize: 28, letterSpacing: '-0.02em' }}>
-            Up to ${totalAmount.toLocaleString('en-CA')} available
+      {/* Full progress bar */}
+      <div style={{ height: 2, background: 'var(--border-subtle)', borderRadius: 2, marginBottom: 28, overflow: 'hidden' }}>
+        <div style={{ width: '100%', height: '100%', background: 'var(--brand)', boxShadow: '0 0 12px var(--brand)', borderRadius: 2 }} />
+      </div>
+
+      {/* "Your matches" pill */}
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'rgba(34,211,165,0.1)', border: '1px solid rgba(34,211,165,0.3)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' as const, color: 'var(--brand)', marginBottom: 14 }}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2L9.09 8.26 2 9.27l5 4.87L5.82 21 12 17.77 18.18 21 17 14.14l5-4.87-7.09-1.01L12 2z"/></svg>
+        Your matches
+      </div>
+
+      {/* Big heading */}
+      <h2 className="text-primary" style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.05, marginBottom: 20 }}>
+        We found {results.length} scholarship{results.length !== 1 ? 's' : ''}<br/>you qualify for.
+      </h2>
+
+      {/* Combined award value glass card */}
+      {totalAmount > 0 && (
+        <div style={{ marginBottom: 28, padding: 'clamp(16px, 3vw, 24px)', borderRadius: 20, background: 'linear-gradient(135deg, rgba(34,211,165,0.1), rgba(59,130,246,0.06), rgba(167,139,250,0.08))', border: '1px solid rgba(34,211,165,0.2)', backdropFilter: 'blur(20px)' }}>
+          <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-secondary)', marginBottom: 6 }}>Combined award value</p>
+          <p className="text-brand" style={{ fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
+            ${totalAmount.toLocaleString('en-CA')}
           </p>
-        )}
-        <p className="text-xs text-faint mt-1">
-          Strong + good matches only. Always verify eligibility on the official site.
-        </p>
-      </div>
+          <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 6 }}>Strong + good matches · always verify eligibility on the official site.</p>
+        </div>
+      )}
 
-      <div className="flex gap-3 mb-6 flex-wrap">
-        {strong.length > 0 && (
-          <span className="text-xs px-3 py-1 rounded-full border bg-brand-dim text-brand border-brand-border">
-            {strong.length} strong match{strong.length !== 1 ? 'es' : ''}
-          </span>
-        )}
-        {good.length > 0 && (
-          <span className="text-xs px-3 py-1 rounded-full border bg-blue-500/10 text-blue-400 border-blue-500/30">
-            {good.length} good match{good.length !== 1 ? 'es' : ''}
-          </span>
-        )}
-        {possible.length > 0 && (
-          <span className="text-xs px-3 py-1 rounded-full border bg-subtle text-tertiary border-card">
-            {possible.length} possible
-          </span>
-        )}
-      </div>
+      {/* Match tier summary badges */}
+      {(strong.length > 0 || good.length > 0 || possible.length > 0) && (
+        <div className="flex gap-2 mb-5 flex-wrap">
+          {strong.length > 0 && (
+            <span className="text-xs px-3 py-1 rounded-full border bg-brand-dim text-brand border-brand-border">
+              {strong.length} strong match{strong.length !== 1 ? 'es' : ''}
+            </span>
+          )}
+          {good.length > 0 && (
+            <span className="text-xs px-3 py-1 rounded-full border bg-blue-500/10 text-blue-400 border-blue-500/30">
+              {good.length} good match{good.length !== 1 ? 'es' : ''}
+            </span>
+          )}
+          {possible.length > 0 && (
+            <span className="text-xs px-3 py-1 rounded-full border bg-subtle text-tertiary border-card">
+              {possible.length} possible
+            </span>
+          )}
+        </div>
+      )}
 
-      <div className="space-y-3">
-        {results.map(({ scholarship: s, tier }) => {
+      {/* Ranked list */}
+      <div className="space-y-2.5">
+        {results.map(({ scholarship: s, tier }, index) => {
           const style = TIER_STYLES[tier]
+          const rankNum = String(index + 1).padStart(2, '0')
           return (
             <div
               key={s.id}
-              className="p-4 rounded-xl border border-subtle bg-subtle"
+              className="card flex items-center gap-4 p-4"
+              style={{ paddingLeft: 20 }}
             >
-              <div className="flex items-start justify-between gap-3 mb-2">
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-primary text-sm leading-snug">{s.title}</p>
-                  {s.audience && (
-                    <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{s.audience}</p>
-                  )}
-                </div>
-                <div className="flex-shrink-0 text-right">
-                  <p className="font-bold text-brand" style={{ fontSize: 18 }}>{s.amount}</p>
+              {/* Rank number */}
+              <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.03em', color: index === 0 ? 'var(--brand)' : 'var(--text-faint)', width: 36, flexShrink: 0, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>
+                {rankNum}
+              </span>
+              {/* Info */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p className="font-semibold text-primary text-sm leading-snug">{s.title}</p>
+                {s.audience && (
+                  <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{s.audience}</p>
+                )}
+                <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                  <span className={`text-xs px-2 py-0.5 rounded-full border ${style.badge}`}>
+                    {style.label}
+                  </span>
                   {s.deadline && (
-                    <p className="text-xs text-faint mt-0.5">Due {s.deadline}</p>
+                    <span className="text-xs text-faint">Due {s.deadline}</span>
                   )}
                 </div>
               </div>
-              <div className="flex items-center justify-between gap-2">
-                <span className={`text-xs px-2 py-0.5 rounded-full border ${style.badge}`}>
-                  {style.label}
-                </span>
-                <div className="flex items-center gap-3">
+              {/* Amount + actions */}
+              <div style={{ flexShrink: 0, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
+                <p className="font-bold text-primary" style={{ fontSize: 17, letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>{s.amount}</p>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                   <a
                     href={`/scholarships/${generateSlug(s.title)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-xs text-secondary hover:text-primary transition"
                   >
                     Details
@@ -475,7 +495,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
                     href={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-medium text-brand transition hover:opacity-80"
+                    className="text-xs font-semibold text-brand transition hover:opacity-80"
                   >
                     Apply →
                   </a>
@@ -502,7 +522,6 @@ export default function EligibilityQuiz({ scholarships }: Props) {
 
       {results.length === 0 && (
         <div className="text-center py-12 px-4">
-          <p className="text-3xl mb-4">🔍</p>
           <p className="font-semibold text-primary mb-2">No scholarships matched your profile</p>
           <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">
             Try leaving optional fields blank. Average and identity answers narrow results significantly.
@@ -522,7 +541,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
           onClick={reset}
           className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-card text-secondary transition"
         >
-          Start over
+          Retake quiz
         </button>
         <a
           href="/scholarships"
