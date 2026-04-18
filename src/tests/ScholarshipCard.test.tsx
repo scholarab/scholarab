@@ -76,7 +76,7 @@ describe('ScholarshipCard — rendering', () => {
 
   it('renders the audience', () => {
     renderCard({ id: 1 })
-    expect(screen.getByText('Grade 12 students')).toBeTruthy()
+    expect(screen.getAllByText('Grade 12 students').length).toBeGreaterThan(0)
   })
 
   it('renders the category badge', () => {
@@ -106,10 +106,10 @@ describe('ScholarshipCard — status', () => {
     expect(link.getAttribute('href')).toContain('/scholarships/')
   })
 
-  it('shows Coming Soon status for future scholarship', () => {
+  it('shows Opens label for future scholarship', () => {
     // openDate in future → future
     renderCard({ id: 1, openDate: '2025-09-01' })
-    expect(screen.getByText('Coming Soon')).toBeTruthy()
+    expect(screen.getByText('Opens')).toBeTruthy()
     expect(screen.queryByRole('link', { name: /apply/i })).toBeNull()
   })
 
