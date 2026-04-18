@@ -101,8 +101,6 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'instant' })));
   }, []);
 
-  const todayMs = useMemo(() => getToday().getTime(), []);
-
   const statusCache = useMemo(() => {
     const m = new Map<number, ScholarshipStatus>();
     for (const s of initialScholarships) m.set(s.id, getStatus(s));
@@ -116,12 +114,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       : statusFilter === 'opening'
         ? initialScholarships.filter(s => statusCache.get(s.id) === 'future')
         : statusFilter === 'active'
-          ? initialScholarships.filter(s => {
-              if (statusCache.get(s.id) !== 'active') return false;
-              const deadMs = s._deadline_ms ?? 0;
-              const days = Math.ceil((deadMs - todayMs) / 86_400_000);
-              return days > 30;
-            })
+          ? initialScholarships.filter(s => statusCache.get(s.id) === 'active')
           : initialScholarships.filter(s => statusCache.get(s.id) !== 'closed');
 
     const afterCategory = selectedCategory === 'all'
@@ -145,7 +138,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       if (sortBy === 'lowest_pay')  return (a._amount_cents ?? 0) - (b._amount_cents ?? 0);
       return 0;
     });
-  }, [initialScholarships, statusCache, statusFilter, selectedRegion, selectedCategory, searchQuery, sortBy, todayMs]);
+  }, [initialScholarships, statusCache, statusFilter, selectedRegion, selectedCategory, searchQuery, sortBy]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
