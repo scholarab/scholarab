@@ -15,9 +15,9 @@ export type ScholarshipStatus = 'active' | 'future' | 'closed';
 
 export function getStatus(s: ScholarshipWithMeta): ScholarshipStatus {
   const todayMs = getToday().getTime();
-  const openMs  = s._open_ms     ?? new Date((s.openDate || '1970-01-01') + 'T00:00:00').getTime();
-  const deadMs  = s._deadline_ms ?? new Date((s.deadline ?? '') + 'T00:00:00').getTime();
+  const openMs  = s._open_ms ?? new Date((s.openDate || '1970-01-01') + 'T00:00:00').getTime();
   if (todayMs < openMs) return 'future';
+  const deadMs  = s._deadline_ms || (s.deadline ? new Date(s.deadline + 'T00:00:00').getTime() : Infinity);
   if (todayMs > deadMs) return 'closed';
   return 'active';
 }
@@ -132,7 +132,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       : afterRegion.filter(s =>
           (s.title?.toLowerCase().includes(q)) ||
           (s.audience?.toLowerCase().includes(q)) ||
-          (s.audience?.toLowerCase().includes(q))
+          (s.category?.toLowerCase().includes(q))
         );
 
     return [...afterSearch].sort((a, b) => {
