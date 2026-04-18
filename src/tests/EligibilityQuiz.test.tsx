@@ -1,29 +1,22 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, fireEvent, cleanup } from '@testing-library/react'
+import { render, screen, fireEvent, act, cleanup } from '@testing-library/react'
 import EligibilityQuiz from '../components/EligibilityQuiz'
 import type { ConfidenceTier } from '../lib/eligibility-types'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
 const { mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti } = vi.hoisted(() => ({
-  mockMatchAll:    vi.fn(() => [] as Array<{ id: number; confidence: number; tier: ConfidenceTier }>),
-  mockGetSaved:    vi.fn(() => [] as number[]),
-  mockToggleSaved: vi.fn(),
+  mockMatchAll:     vi.fn(() => [] as Array<{ id: number; confidence: number; tier: ConfidenceTier }>),
+  mockGetSaved:     vi.fn(() => [] as number[]),
+  mockToggleSaved:  vi.fn(),
   mockShowConfetti: vi.fn(),
 }))
 
-vi.mock('../lib/eligibility-matcher', () => ({
-  matchAll: mockMatchAll,
-}))
-
-vi.mock('../lib/tracker.ts', () => ({
-  getSaved:     mockGetSaved,
-  toggleSaved:  mockToggleSaved,
-}))
-
-vi.mock('../lib/utils.ts', () => ({
-  showConfetti:  mockShowConfetti,
-  generateSlug:  (s: string) => s.toLowerCase().replace(/\s+/g, '-'),
+vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll }))
+vi.mock('../lib/tracker.ts',          () => ({ getSaved: mockGetSaved, toggleSaved: mockToggleSaved }))
+vi.mock('../lib/utils.ts',            () => ({
+  showConfetti: mockShowConfetti,
+  generateSlug: (s: string) => s.toLowerCase().replace(/\s+/g, '-'),
 }))
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -33,183 +26,188 @@ function makeScholarship(overrides: { id: number; title?: string; amount?: strin
     title: `Scholarship ${overrides.id}`,
     amount: '$1,000',
     url: 'https://example.com',
-    region: null,
-    eligibility: null,
-    deadline: null,
-    openDate: null,
-    audience: null,
-    category: null,
-    lastVerified: null,
-    notes: null,
-    applyViaGuidance: false,
-    active: true,
+    region: null, eligibility: null, deadline: null, openDate: null,
+    audience: null, category: null, lastVerified: null, notes: null,
+    applyViaGuidance: false, active: true,
     ...overrides,
   }
 }
 
-/** Advance quiz from step 1 to step 2 by selecting grade + city and clicking Next. */
-function advanceToStep2() {
-  fireEvent.click(screen.getByText('Grade 12'))
-  fireEvent.click(screen.getByText('Medicine Hat'))
-  fireEvent.click(screen.getByRole('button', { name: /next/i }))
+/** Click a tile and flush the 240 ms setTimeout so the step advances. */
+function clickTile(label: string) {
+  fireEvent.click(screen.getByText(label))
+  act(() => { vi.runAllTimers() })
 }
 
-/** Advance quiz to results with no match results. */
+/** Go through all 5 questions and reach the results screen. */
 function advanceToResults() {
-  advanceToStep2()
-  fireEvent.click(screen.getByRole('button', { name: /find my scholarships/i }))
+  clickTile('Grade 12')               // Q1 grade
+  clickTile('Medicine Hat')           // Q2 city
+  clickTile('Still figuring it out')  // Q3 field
+  clickTile("I'd rather not say")     // Q4 average
+  clickTile('Not sure yet')           // Q5 institution
 }
 
 afterEach(() => cleanup())
 
 beforeEach(() => {
+  vi.useFakeTimers()
   vi.clearAllMocks()
   mockGetSaved.mockReturnValue([])
   mockMatchAll.mockReturnValue([])
   localStorage.clear()
 })
 
-// ── Step 1 ─────────────────────────────────────────────────────────────────────
+afterEach(() => {
+  vi.useRealTimers()
+  cleanup()
+})
 
-describe('Step 1 — Where are you at?', () => {
-  it('renders step 1 heading', () => {
+// ── Question 1 — Grade ─────────────────────────────────────────────────────────
+
+describe('Question 1 — Grade', () => {
+  it('renders first question heading', () => {
     render(<EligibilityQuiz scholarships={[]} />)
-    expect(screen.getByText('Where are you at?')).toBeTruthy()
+    expect(screen.getByText('What grade are you in?')).toBeTruthy()
   })
 
-  it('Next button is disabled when grade and city are not selected', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    const btn = screen.getByRole('button', { name: /next/i })
-    expect((btn as HTMLButtonElement).disabled).toBe(true)
-  })
-
-  it('Next button is disabled when only grade is selected', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    fireEvent.click(screen.getByText('Grade 12'))
-    const btn = screen.getByRole('button', { name: /next/i })
-    expect((btn as HTMLButtonElement).disabled).toBe(true)
-  })
-
-  it('Next button is disabled when only city is selected', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    fireEvent.click(screen.getByText('Medicine Hat'))
-    const btn = screen.getByRole('button', { name: /next/i })
-    expect((btn as HTMLButtonElement).disabled).toBe(true)
-  })
-
-  it('Next button is enabled when both grade and city are selected', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    fireEvent.click(screen.getByText('Grade 12'))
-    fireEvent.click(screen.getByText('Medicine Hat'))
-    const btn = screen.getByRole('button', { name: /next/i })
-    expect((btn as HTMLButtonElement).disabled).toBe(false)
-  })
-
-  it('clicking Next advances to step 2', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep2()
-    expect(screen.getByText('What do you want to study?')).toBeTruthy()
-  })
-
-  it('shows Grade 10/11 warning when Grade 10 is selected', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    fireEvent.click(screen.getByText('Grade 10'))
-    expect(screen.getByText(/most scholarships are for grade 12/i)).toBeTruthy()
-  })
-
-  it('shows Grade 10/11 warning when Grade 11 is selected', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    fireEvent.click(screen.getByText('Grade 11'))
-    expect(screen.getByText(/most scholarships are for grade 12/i)).toBeTruthy()
-  })
-
-  it('does not show Grade 10/11 warning for Grade 12', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    fireEvent.click(screen.getByText('Grade 12'))
-    expect(screen.queryByText(/most scholarships are for grade 12/i)).toBeNull()
-  })
-
-  it('institution chip toggles off when clicked again', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    const chip = screen.getByText('Medicine Hat College')
-    fireEvent.click(chip)
-    // chip should be active — clicking again deselects
-    fireEvent.click(chip)
-    // No error = toggle worked; active state is on the button className which we don't assert
-  })
-
-  it('all grade chips are rendered', () => {
+  it('renders all grade options', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     expect(screen.getByText('Grade 10')).toBeTruthy()
     expect(screen.getByText('Grade 11')).toBeTruthy()
     expect(screen.getByText('Grade 12')).toBeTruthy()
   })
 
-  it('all city chips are rendered', () => {
+  it('shows Beta · Match pill', () => {
     render(<EligibilityQuiz scholarships={[]} />)
+    expect(screen.getByText(/beta.*match/i)).toBeTruthy()
+  })
+
+  it('shows Question 1 of 5', () => {
+    render(<EligibilityQuiz scholarships={[]} />)
+    expect(screen.getByText(/question 1 of 5/i)).toBeTruthy()
+  })
+
+  it('clicking Grade 12 advances to question 2', () => {
+    render(<EligibilityQuiz scholarships={[]} />)
+    clickTile('Grade 12')
+    expect(screen.getByText('Where are you based?')).toBeTruthy()
+  })
+})
+
+// ── Question 2 — City ─────────────────────────────────────────────────────────
+
+describe('Question 2 — City', () => {
+  it('renders city options', () => {
+    render(<EligibilityQuiz scholarships={[]} />)
+    clickTile('Grade 12')
     expect(screen.getByText('Medicine Hat')).toBeTruthy()
     expect(screen.getByText('Calgary')).toBeTruthy()
     expect(screen.getByText('Edmonton')).toBeTruthy()
   })
+
+  it('shows Question 2 of 5', () => {
+    render(<EligibilityQuiz scholarships={[]} />)
+    clickTile('Grade 12')
+    expect(screen.getByText(/question 2 of 5/i)).toBeTruthy()
+  })
+
+  it('Previous button returns to question 1', () => {
+    render(<EligibilityQuiz scholarships={[]} />)
+    clickTile('Grade 12')
+    fireEvent.click(screen.getByRole('button', { name: /previous/i }))
+    expect(screen.getByText('What grade are you in?')).toBeTruthy()
+  })
+
+  it('clicking a city advances to question 3', () => {
+    render(<EligibilityQuiz scholarships={[]} />)
+    clickTile('Grade 12')
+    clickTile('Medicine Hat')
+    expect(screen.getByText("What's your academic focus?")).toBeTruthy()
+  })
 })
 
-// ── Step 2 ─────────────────────────────────────────────────────────────────────
+// ── Question 3 — Field ────────────────────────────────────────────────────────
 
-describe('Step 2 — What do you want to study?', () => {
-  it('renders step 2 heading', () => {
+describe('Question 3 — Field', () => {
+  beforeEach(() => {
     render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep2()
-    expect(screen.getByText('What do you want to study?')).toBeTruthy()
+    clickTile('Grade 12')
+    clickTile('Medicine Hat')
   })
 
-  it('Back button returns to step 1', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep2()
-    fireEvent.click(screen.getByRole('button', { name: /back/i }))
-    expect(screen.getByText('Where are you at?')).toBeTruthy()
-  })
-
-  it('field chips are multi-select (selecting two keeps both active)', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep2()
-    fireEvent.click(screen.getByText('STEM'))
-    fireEvent.click(screen.getByText('Business'))
-    // Both were clicked — no error means multi-select works
-  })
-
-  it('clicking same field chip twice deselects it', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep2()
-    fireEvent.click(screen.getByText('STEM'))
-    fireEvent.click(screen.getByText('STEM'))
-    // No error; chip toggled off
-  })
-
-  it('average bracket is single-select toggle', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep2()
-    fireEvent.click(screen.getByText('90% or higher'))
-    fireEvent.click(screen.getByText('90% or higher'))
-    // Clicked same bracket twice — should toggle off (no error)
-  })
-
-  it('Find my scholarships advances to results', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep2()
-    fireEvent.click(screen.getByRole('button', { name: /find my scholarships/i }))
-    expect(screen.getByText(/we found/i)).toBeTruthy()
-  })
-
-  it('all FIELDS chips are rendered', () => {
-    render(<EligibilityQuiz scholarships={[]} />)
-    advanceToStep2()
-    expect(screen.getByText('STEM')).toBeTruthy()
+  it('renders field options', () => {
+    expect(screen.getByText('STEM & Engineering')).toBeTruthy()
     expect(screen.getByText('Health & Medicine')).toBeTruthy()
     expect(screen.getByText('Trades')).toBeTruthy()
+    expect(screen.getByText('Still figuring it out')).toBeTruthy()
+  })
+
+  it('shows Question 3 of 5', () => {
+    expect(screen.getByText(/question 3 of 5/i)).toBeTruthy()
+  })
+
+  it('clicking a field advances to question 4', () => {
+    clickTile('Still figuring it out')
+    expect(screen.getByText("What's your academic average?")).toBeTruthy()
   })
 })
 
-// ── Results ────────────────────────────────────────────────────────────────────
+// ── Question 4 — Average ──────────────────────────────────────────────────────
+
+describe('Question 4 — Average', () => {
+  beforeEach(() => {
+    render(<EligibilityQuiz scholarships={[]} />)
+    clickTile('Grade 12')
+    clickTile('Medicine Hat')
+    clickTile('Still figuring it out')
+  })
+
+  it('renders average options', () => {
+    expect(screen.getByText('90% or higher')).toBeTruthy()
+    expect(screen.getByText('80 – 89%')).toBeTruthy()
+    expect(screen.getByText('Below 80%')).toBeTruthy()
+    expect(screen.getByText("I'd rather not say")).toBeTruthy()
+  })
+
+  it('shows Question 4 of 5', () => {
+    expect(screen.getByText(/question 4 of 5/i)).toBeTruthy()
+  })
+
+  it('clicking an average advances to question 5', () => {
+    clickTile("I'd rather not say")
+    expect(screen.getByText("Where are you planning to study?")).toBeTruthy()
+  })
+})
+
+// ── Question 5 — Institution ──────────────────────────────────────────────────
+
+describe('Question 5 — Institution', () => {
+  beforeEach(() => {
+    render(<EligibilityQuiz scholarships={[]} />)
+    clickTile('Grade 12')
+    clickTile('Medicine Hat')
+    clickTile('Still figuring it out')
+    clickTile("I'd rather not say")
+  })
+
+  it('renders institution options', () => {
+    expect(screen.getByText('University of Calgary')).toBeTruthy()
+    expect(screen.getByText('University of Alberta')).toBeTruthy()
+    expect(screen.getByText('Not sure yet')).toBeTruthy()
+  })
+
+  it('shows Question 5 of 5', () => {
+    expect(screen.getByText(/question 5 of 5/i)).toBeTruthy()
+  })
+
+  it('clicking an institution advances to results', () => {
+    clickTile('Not sure yet')
+    expect(screen.getByText(/we found/i)).toBeTruthy()
+  })
+})
+
+// ── Results ───────────────────────────────────────────────────────────────────
 
 describe('Results', () => {
   it('shows "0 scholarships found" when matchAll returns empty', () => {
@@ -270,11 +268,11 @@ describe('Results', () => {
     expect(screen.getByText('Possible match')).toBeTruthy()
   })
 
-  it('"Retake quiz" button resets to step 1', () => {
+  it('"Retake quiz" button resets to question 1', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     advanceToResults()
     fireEvent.click(screen.getByRole('button', { name: /retake quiz/i }))
-    expect(screen.getByText('Where are you at?')).toBeTruthy()
+    expect(screen.getByText('What grade are you in?')).toBeTruthy()
   })
 
   it('shows empty state message when no scholarships matched', () => {
@@ -283,23 +281,20 @@ describe('Results', () => {
     expect(screen.getByText(/no scholarships matched your profile/i)).toBeTruthy()
   })
 
-  it('"Try again" button in empty state resets to step 1', () => {
+  it('"Try again" button in empty state resets to question 1', () => {
     render(<EligibilityQuiz scholarships={[]} />)
     advanceToResults()
     fireEvent.click(screen.getByRole('button', { name: /try again/i }))
-    expect(screen.getByText('Where are you at?')).toBeTruthy()
+    expect(screen.getByText('What grade are you in?')).toBeTruthy()
   })
 
-  it('save button calls toggleSaved and updates aria-label', () => {
+  it('save button calls toggleSaved', () => {
     const s1 = makeScholarship({ id: 1, title: 'Save Test Scholarship' })
     mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9 }])
-    // After toggleSaved, getSaved returns [1]
     mockGetSaved.mockReturnValueOnce([]).mockReturnValue([1])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
-
-    const saveBtn = screen.getByRole('button', { name: /save scholarship/i })
-    fireEvent.click(saveBtn)
+    fireEvent.click(screen.getByRole('button', { name: /save scholarship/i }))
     expect(mockToggleSaved).toHaveBeenCalledWith(1)
   })
 
@@ -309,7 +304,6 @@ describe('Results', () => {
     mockGetSaved.mockReturnValueOnce([]).mockReturnValue([1])
     render(<EligibilityQuiz scholarships={[s1 as any]} />)
     advanceToResults()
-
     fireEvent.click(screen.getByRole('button', { name: /save scholarship/i }))
     expect(mockShowConfetti).toHaveBeenCalledTimes(1)
   })
