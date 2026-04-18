@@ -77,7 +77,7 @@ function SavedScholarshipCard({ s, onUnsave }: SavedScholarshipCardProps) {
     : isUpcoming
       ? '#3b82f6'
       : deadlineSoon
-        ? '#f5b14a'
+        ? 'var(--color-warning)'
         : 'var(--brand)';
 
   const deadlineLabel = isUpcoming ? 'Opens' : 'Deadline';
@@ -89,7 +89,7 @@ function SavedScholarshipCard({ s, onUnsave }: SavedScholarshipCardProps) {
     : isUpcoming
       ? '#3b82f6'
       : deadlineSoon
-        ? '#f5b14a'
+        ? 'var(--color-warning)'
         : 'var(--text-secondary)';
 
   const statusBarBg = isClosed
@@ -97,7 +97,7 @@ function SavedScholarshipCard({ s, onUnsave }: SavedScholarshipCardProps) {
     : isUpcoming
       ? '#3b82f6'
       : deadlineSoon
-        ? '#f5b14a'
+        ? 'var(--color-warning)'
         : 'var(--brand)';
 
   return (
@@ -195,7 +195,7 @@ function SavedScholarshipCard({ s, onUnsave }: SavedScholarshipCardProps) {
             {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
               <span style={{
                 fontSize: 10, marginTop: 3, display: 'block', fontWeight: 600,
-                color: daysLeft <= 7 ? '#ef5a5a' : daysLeft <= 30 ? '#f5b14a' : 'var(--text-faint)',
+                color: daysLeft <= 7 ? 'var(--color-urgent)' : daysLeft <= 30 ? 'var(--color-warning)' : 'var(--text-faint)',
               }}>
                 {daysLeft === 0 ? 'Ends today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`}
               </span>

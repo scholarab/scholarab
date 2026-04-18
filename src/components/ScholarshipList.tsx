@@ -92,7 +92,7 @@ export default function ScholarshipList({ items }: Props) {
                 : undefined;
               return (
                 <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                  className={`flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? '' : 'bg-subtle text-secondary border border-card hover:border-medium'}`}
+                  className={`flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? (color ? 'region-pill-active' : '') : 'bg-subtle text-secondary border border-card hover:border-medium'}`}
                   style={selStyle}>
                   {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', marginRight: 4, flexShrink: 0 }} />}
                   {label}
@@ -174,7 +174,7 @@ export default function ScholarshipList({ items }: Props) {
                 : undefined;
               return (
                 <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                  className={`${pillBase} ${sel ? '' : pillOff}`}
+                  className={`${pillBase} ${sel ? (color ? 'region-pill-active' : pillOn) : pillOff}`}
                   style={selStyle}>
                   {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', flexShrink: 0 }} />}
                   {label}

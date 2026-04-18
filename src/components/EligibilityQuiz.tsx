@@ -135,7 +135,7 @@ function MatchTile({
         width: '100%',
         padding: '18px 22px',
         borderRadius: 14,
-        border: `1px solid ${selected ? 'var(--brand)' : hovered ? 'rgba(34,211,165,0.4)' : 'var(--border-card)'}`,
+        border: `1px solid ${selected ? 'var(--brand)' : hovered ? 'var(--brand-border)' : 'var(--border-card)'}`,
         background: selected
           ? 'linear-gradient(180deg, var(--brand) 0%, #1cc195 100%)'
           : hovered
@@ -331,7 +331,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         </div>
 
         {/* "Your matches" pill */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'rgba(34,211,165,0.1)', border: '1px solid rgba(34,211,165,0.3)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' as const, color: 'var(--brand)', marginBottom: 14 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'var(--brand-dim)', border: '1px solid var(--brand-border)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' as const, color: 'var(--brand)', marginBottom: 14 }}>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2L9.09 8.26 2 9.27l5 4.87L5.82 21 12 17.77 18.18 21 17 14.14l5-4.87-7.09-1.01L12 2z"/></svg>
           Your matches
         </div>
@@ -341,7 +341,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         </h2>
 
         {showScholarships && totalAmount > 0 && (
-          <div style={{ marginBottom: 28, padding: 'clamp(16px, 3vw, 24px)', borderRadius: 20, background: 'linear-gradient(135deg, rgba(34,211,165,0.1), rgba(59,130,246,0.06), rgba(167,139,250,0.08))', border: '1px solid rgba(34,211,165,0.2)', backdropFilter: 'blur(20px)' }}>
+          <div style={{ marginBottom: 28, padding: 'clamp(16px, 3vw, 24px)', borderRadius: 20, background: 'linear-gradient(135deg, var(--brand-dim), rgba(59,130,246,0.06), rgba(167,139,250,0.08))', border: '1px solid var(--brand-border)', backdropFilter: 'blur(20px)' }}>
             <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-secondary)', marginBottom: 6 }}>Combined award value</p>
             <p className="text-brand" style={{ fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
               ${totalAmount.toLocaleString('en-CA')}

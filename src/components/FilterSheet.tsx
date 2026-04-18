@@ -60,7 +60,7 @@ export function CategoryChips({ categories, selected, onSelect, badges, mobile }
         const sel = selected === cat;
         return (
           <button key={cat} onClick={() => onSelect(sel ? 'all' : cat)} aria-pressed={sel}
-            className={btnCls}
+            className={sel ? `${btnCls} badge-chip` : btnCls}
             style={sel
               ? { background: badge ? badge.bg : 'var(--brand-dim)', borderColor: badge ? badge.border : 'var(--brand-border)', color: badge ? badge.color : 'var(--brand)' }
               : { background: 'var(--bg-subtle)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}>

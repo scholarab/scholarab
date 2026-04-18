@@ -57,8 +57,8 @@ const statusLabel = status === 'active' ? 'Active' : status === 'future' ? 'Open
 const statusDotClass = status === 'active' ? 'status-dot status-dot-active' : status === 'future' ? 'status-dot' : 'status-dot status-dot-closed';
 
 const isClosingSoon = typeof daysLeft === 'number' && daysLeft !== null && daysLeft <= 30 && status === 'active';
-const deadlineColor = isClosingSoon ? '#f5b14a' : 'var(--text-primary)';
-const daysLeftColor = typeof daysLeft === 'number' && daysLeft <= 7 ? '#ef5a5a' : typeof daysLeft === 'number' && daysLeft <= 30 ? '#f5b14a' : 'var(--text-secondary)';
+const deadlineColor = isClosingSoon ? 'var(--color-warning)' : 'var(--text-primary)';
+const daysLeftColor = typeof daysLeft === 'number' && daysLeft <= 7 ? 'var(--color-urgent)' : typeof daysLeft === 'number' && daysLeft <= 30 ? 'var(--color-warning)' : 'var(--text-secondary)';
 
 // Use premium layout when scholarship-specific data is provided
 const isPremium = deadlineFormatted !== undefined;

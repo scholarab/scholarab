@@ -40,7 +40,7 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
     >
       <div>
         <div className="flex items-start justify-between gap-2 mb-3">
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
+          <span className="badge-chip" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
             <span style={{ fontSize: 16 }}>{badge.emoji}</span>
             {scholarship.category}
           </span>
@@ -64,11 +64,11 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
           </div>
           <div className="text-right flex flex-col items-end overflow-hidden">
             <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">{deadlineLabel}</p>
-            <p className={`text-sm font-medium ${deadlineColor}`} style={deadlineSoon && !isClosed ? { color: daysLeft !== null && daysLeft <= 7 ? '#f87171' : '#f5b14a' } : undefined}>
+            <p className={`text-sm font-medium ${deadlineColor}`} style={deadlineSoon && !isClosed ? { color: daysLeft !== null && daysLeft <= 7 ? 'var(--color-urgent)' : 'var(--color-warning)' } : undefined}>
               {deadlineValue}
             </p>
             {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
-              <span style={{ fontSize: 10, marginTop: 2, fontWeight: 600, color: daysLeft <= 7 ? '#ef5a5a' : daysLeft <= 30 ? '#f5b14a' : 'var(--text-faint)' }}>
+              <span style={{ fontSize: 10, marginTop: 2, fontWeight: 600, color: daysLeft <= 7 ? 'var(--color-urgent)' : daysLeft <= 30 ? 'var(--color-warning)' : 'var(--text-faint)' }}>
                 {daysLeft === 0 ? 'Ends today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`}
               </span>
             )}

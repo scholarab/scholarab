@@ -46,7 +46,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
     >
       <div>
         <div className="flex items-start justify-between gap-2 mb-3">
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
+          <span className="badge-chip" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: badge.bg, color: badge.color, border: `1px solid ${badge.border}` }}>
             <span style={{ fontSize: 16 }}>{badge.emoji}</span>
             {program.category}
           </span>
@@ -73,7 +73,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
           </div>
           <div className="text-right flex flex-col items-end overflow-hidden">
             <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Deadline</p>
-            <p className={`text-sm font-medium ${deadlineColor}`} style={deadlineUrgent ? { color: '#f87171' } : undefined}>
+            <p className={`text-sm font-medium ${deadlineColor}`} style={deadlineUrgent ? { color: 'var(--color-urgent)' } : undefined}>
               {program.deadline === 'Ongoing' ? 'Ongoing' : formatDeadline(program.deadline)}
             </p>
           </div>
