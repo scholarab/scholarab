@@ -76,7 +76,7 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
   possible: { badge: 'bg-subtle text-tertiary border-card', label: 'Possible match' },
 }
 
-const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers'
+const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v2'
 
 // ── Tile button ───────────────────────────────────────────────────────────────
 
@@ -356,6 +356,7 @@ export default function EligibilityQuiz({ scholarships }: Props) {
   // ── Question step ──────────────────────────────────────────────────────────
 
   const current = QUESTIONS[step]
+  if (!current) return null
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: 400 }}>

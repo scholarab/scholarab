@@ -128,7 +128,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       ? afterRegion
       : afterRegion.filter(s =>
           (s.title?.toLowerCase().includes(q)) ||
-          (s.organization?.toLowerCase().includes(q)) ||
+          (s.audience?.toLowerCase().includes(q)) ||
           (s.audience?.toLowerCase().includes(q))
         );
 

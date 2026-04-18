@@ -101,6 +101,12 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
 </script>
 
 <style is:global>
+  /* Theme toggle — initial state (dark default: moon visible) */
+  #theme-icon-moon-wrap { transform: rotate(0deg) scale(1); opacity: 1; }
+  #theme-icon-sun-wrap  { transform: rotate(180deg) scale(0); opacity: 0; }
+  html.theme-light #theme-icon-moon-wrap { transform: rotate(-180deg) scale(0); opacity: 0; }
+  html.theme-light #theme-icon-sun-wrap  { transform: rotate(0deg) scale(1); opacity: 1; }
+
   .logo-scholar { fill: var(--text-primary); }
   .glass-nav a {
     -webkit-tap-highlight-color: transparent;
