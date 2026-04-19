@@ -6,7 +6,7 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
 
 <div id="top-nav-wrapper" class="sticky top-2 z-[500] mb-10" style="padding: 0 16px;">
   <div class="nav-wrapper mx-auto" style="max-width: 900px; position: relative;">
-    <nav class="glass-nav flex justify-between items-center px-6 py-3" style="border-radius: 9999px; overflow: visible;">
+    <nav class="glass-nav flex justify-between items-center px-6 py-3" aria-label="Site navigation" style="border-radius: 9999px; overflow: visible;">
       <!-- gradient rainbow underline -->
       <div aria-hidden="true" style="position:absolute;bottom:-1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,211,165,0.6),rgba(59,130,246,0.5),rgba(167,139,250,0.4),transparent);border-radius:1px;pointer-events:none;"></div>
       <a href="/" onclick="if(window.location.pathname==='/'){event.preventDefault()}" class="hover:opacity-80 transition-opacity flex items-center gap-2" aria-label="ScholarAB home">

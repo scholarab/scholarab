@@ -1,5 +1,5 @@
 ---
-import BookmarkButton from './BookmarkButton.tsx';
+import BookmarkIsland from './BookmarkIsland.astro';
 
 interface Props {
   badge: { emoji: string; label: string; color: string; bg: string; border: string };
@@ -164,7 +164,7 @@ const isPremium = deadlineFormatted !== undefined;
 
         {itemId !== undefined && itemType && (
           <div class="w-full">
-            <BookmarkButton id={itemId} type={itemType} fullWidth client:load />
+            <BookmarkIsland id={itemId} type={itemType} fullWidth />
           </div>
         )}
       </div>
@@ -246,7 +246,7 @@ const isPremium = deadlineFormatted !== undefined;
           </a>
         )}
         {itemId !== undefined && itemType && (
-          <BookmarkButton id={itemId} type={itemType} client:load />
+          <BookmarkIsland id={itemId} type={itemType} />
         )}
       </div>
 

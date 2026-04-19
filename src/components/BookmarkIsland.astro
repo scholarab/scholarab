@@ -1,0 +1,80 @@
+---
+interface Props {
+  id: number;
+  type: 'scholarship' | 'program';
+  fullWidth?: boolean;
+}
+const { id, type, fullWidth = false } = Astro.props;
+---
+
+{fullWidth ? (
+  <button
+    data-bookmark-id={id}
+    data-bookmark-type={type}
+    aria-label="Save for later"
+    style="width:100%;padding:14px 20px;border-radius:16px;background:var(--bg-subtle);border:0.5px solid var(--border-strong);color:var(--text-secondary);display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-size:15px;font-weight:600;font-family:inherit;transition:color 0.15s,background 0.15s,border-color 0.15s;-webkit-tap-highlight-color:transparent;"
+  >
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+    </svg>
+    <span data-bookmark-label>Save for later</span>
+  </button>
+) : (
+  <button
+    data-bookmark-id={id}
+    data-bookmark-type={type}
+    aria-label="Save"
+    style="width:44px;flex-shrink:0;align-self:stretch;border-radius:12px;background:var(--bg-subtle);backdrop-filter:blur(16px) saturate(2);-webkit-backdrop-filter:blur(16px) saturate(2);border:0.5px solid var(--border-strong);color:var(--text-secondary);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color 0.15s,background 0.15s,border-color 0.15s;-webkit-tap-highlight-color:transparent;"
+  >
+    <svg data-bookmark-svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+)}
+
+<script>
+  import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker';
+  import { showToast, showConfetti } from '../lib/utils';
+
+  function applyState(btn: HTMLElement, saved: boolean) {
+    const label = btn.querySelector<HTMLElement>('[data-bookmark-label]');
+    const svg   = btn.querySelector<SVGElement>('svg');
+    if (saved) {
+      btn.style.background    = 'var(--brand-dim)';
+      btn.style.borderColor   = 'var(--brand-border)';
+      btn.style.color         = 'var(--brand)';
+      btn.setAttribute('aria-label', label ? 'Remove bookmark' : 'Remove bookmark');
+      if (svg) svg.setAttribute('fill', 'currentColor');
+      if (label) label.textContent = 'Saved';
+    } else {
+      btn.style.background    = 'var(--bg-subtle)';
+      btn.style.borderColor   = 'var(--border-strong)';
+      btn.style.color         = 'var(--text-secondary)';
+      btn.setAttribute('aria-label', label ? 'Save for later' : 'Save');
+      if (svg) svg.setAttribute('fill', 'none');
+      if (label) label.textContent = 'Save for later';
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-bookmark-id]').forEach(btn => {
+    const id   = parseInt(btn.dataset.bookmarkId!);
+    const type = btn.dataset.bookmarkType as 'scholarship' | 'program';
+
+    // Set initial state from localStorage
+    const list = type === 'program' ? getSavedPrograms() : getSaved();
+    applyState(btn, list.includes(id));
+
+    btn.addEventListener('click', () => {
+      btn.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
+        { duration: 380, easing: 'ease-out' }
+      );
+      navigator.vibrate?.(12);
+      const next    = type === 'program' ? toggleSavedProgram(id) : toggleSaved(id);
+      const nowSaved = next.includes(id);
+      applyState(btn, nowSaved);
+      if (nowSaved) showConfetti(btn);
+      showToast(nowSaved ? 'Saved ✓' : 'Removed from saved');
+    });
+  });
+</script>
