@@ -4,6 +4,7 @@ import { formatDeadline, showToast, getToday } from '../lib/utils.ts';
 import { getStatus } from '../hooks/useScholarships.ts';
 import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
+import ErrorBoundary from './ErrorBoundary.tsx';
 
 const DeadlineCalendar = lazy(() => import('./DeadlineCalendar.tsx'));
 
@@ -306,13 +307,31 @@ function EmptyState({ href, label }: { href: string; label: string }) {
   );
 }
 
-export default function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
+function SavedListSkeleton() {
+  return (
+    <div>
+      <div style={{ height: 52, width: 120, borderRadius: 8, background: 'var(--bg-subtle)', marginBottom: 8 }} className="animate-pulse" />
+      <div style={{ height: 18, width: 100, borderRadius: 6, background: 'var(--bg-subtle)', marginBottom: 24 }} className="animate-pulse" />
+      <div style={{ height: 38, width: 160, borderRadius: 10, background: 'var(--bg-subtle)', marginBottom: 28 }} className="animate-pulse" />
+      <div style={{ height: 14, width: 90, borderRadius: 4, background: 'var(--bg-subtle)', marginBottom: 16 }} className="animate-pulse" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[0, 1].map(i => (
+          <div key={i} className="card animate-pulse" style={{ height: 180 }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
+  const [mounted, setMounted] = useState(false);
   const [savedScholarshipIds, setSavedScholarshipIds] = useState<number[]>([]);
   const [savedProgramIds, setSavedProgramIds] = useState<number[]>([]);
   const [view, setView] = useState<'list' | 'calendar'>('list');
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
     setSavedScholarshipIds([...getSaved()]);
     setSavedProgramIds([...getSavedPrograms()]);
 
@@ -335,6 +354,8 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
   }, [initialPrograms, savedProgramIds]);
 
   const totalCount = savedScholarships.length + savedPrograms.length;
+
+  if (!mounted) return <SavedListSkeleton />;
 
   function unsaveScholarship(id: number) {
     const next = toggleSaved(id);
@@ -440,4 +461,8 @@ export default function SavedList({ initialScholarships, initialPrograms }: Save
       )}
     </div>
   );
+}
+
+export default function SavedListWithBoundary(props: SavedListProps) {
+  return <ErrorBoundary><SavedList {...props} /></ErrorBoundary>;
 }
