@@ -1,0 +1,26 @@
+name: Email Deadline Alerts
+
+on:
+  schedule:
+    - cron: '0 14 * * *'   # Daily at 2pm UTC (8am MT)
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Send deadline reminders
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SITE_URL: https://www.scholarab.ca
+        run: npx tsx scripts/send-alerts.ts

@@ -1,4 +1,4 @@
-import { pgTable, serial, text, boolean, timestamp, jsonb, index, uniqueIndex } from 'drizzle-orm/pg-core'
+import { pgTable, serial, integer, text, boolean, timestamp, jsonb, index, uniqueIndex } from 'drizzle-orm/pg-core'
 
 export const scholarships = pgTable('scholarships', {
   id: serial('id').primaryKey(),
@@ -46,6 +46,17 @@ export const researchPrograms = pgTable('research_programs', {
 }, t => [
   index('research_programs_active_idx').on(t.active),
   index('research_programs_category_idx').on(t.category),
+])
+
+export const subscribers = pgTable('subscribers', {
+  id: serial('id').primaryKey(),
+  email: text('email').notNull(),
+  scholarshipId: integer('scholarship_id').notNull(),
+  token: text('token').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, t => [
+  uniqueIndex('subscribers_email_scholarship_unique').on(t.email, t.scholarshipId),
+  uniqueIndex('subscribers_token_unique').on(t.token),
 ])
 
 export const parseLog = pgTable('parse_log', {

@@ -1,0 +1,73 @@
+---
+interface Props {
+  scholarshipId: number
+  deadline: string | null | undefined
+}
+const { scholarshipId, deadline } = Astro.props
+
+const today = new Date()
+today.setHours(0, 0, 0, 0)
+const deadlineDate = deadline ? new Date(deadline + 'T00:00:00') : null
+const isFuture = deadlineDate && deadlineDate > today
+---
+
+{isFuture && (
+  <div class="mt-6 p-4 rounded-xl border border-subtle bg-subtle">
+    <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-3">Get a deadline reminder</p>
+    <form id="alert-form" class="flex gap-2">
+      <input
+        type="email"
+        id="alert-email"
+        placeholder="your@email.com"
+        required
+        autocomplete="email"
+        class="flex-1 min-w-0 bg-transparent border border-subtle rounded-lg px-3 py-2 text-sm text-primary placeholder:text-tertiary focus:outline-none focus:border-[#22d3a5] transition"
+      />
+      <button
+        type="submit"
+        id="alert-btn"
+        class="shrink-0 px-4 py-2 rounded-lg text-sm font-semibold transition"
+        style="background:#22d3a5;color:#0a0a0f"
+      >
+        Remind me
+      </button>
+    </form>
+    <p id="alert-msg" class="text-xs text-tertiary mt-2" style="display:none"></p>
+  </div>
+)}
+
+<script define:vars={{ scholarshipId }}>
+  const form = document.getElementById('alert-form')
+  const msg  = document.getElementById('alert-msg')
+  const btn  = document.getElementById('alert-btn')
+  if (!form) return
+  form.addEventListener('submit', async e => {
+    e.preventDefault()
+    const email = document.getElementById('alert-email').value
+    btn.disabled = true
+    btn.textContent = 'Saving…'
+    try {
+      const res  = await fetch('/api/alert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, scholarshipId }),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        form.style.display = 'none'
+        msg.textContent = "You'll get an email reminder before the deadline."
+        msg.style.display = 'block'
+      } else {
+        btn.disabled = false
+        btn.textContent = 'Remind me'
+        msg.textContent = data.error || 'Something went wrong.'
+        msg.style.display = 'block'
+      }
+    } catch {
+      btn.disabled = false
+      btn.textContent = 'Remind me'
+      msg.textContent = 'Something went wrong. Try again.'
+      msg.style.display = 'block'
+    }
+  })
+</script>

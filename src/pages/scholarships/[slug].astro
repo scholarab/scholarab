@@ -4,6 +4,7 @@ import DetailLayout from '../../components/DetailLayout.astro';
 import { loadScholarships } from '../../lib/data-loader';
 import { generateSlug } from '../../lib/utils.ts';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.ts';
+import DeadlineAlert from '../../components/DeadlineAlert.astro';
 
 export async function getStaticPaths() {
   const scholarships = await loadScholarships();
@@ -128,5 +129,7 @@ const ctaLabel = scholarship.applyViaGuidance ? 'Learn More â†’' : 'Apply Now â†
         <p class="text-sm leading-relaxed text-secondary">Via your school guidance counsellor</p>
       </div>
     )}
+
+    <DeadlineAlert scholarshipId={scholarship.id} deadline={scholarship.deadline} />
   </DetailLayout>
 </Layout>
