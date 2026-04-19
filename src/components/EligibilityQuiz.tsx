@@ -314,14 +314,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const programCount = programResults?.length ?? 0
     const hasAnyResults = scholarshipCount > 0 || programCount > 0
 
-    let headline = ''
-    if (showScholarships && showPrograms) {
-      headline = `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} and ${programCount} program${programCount !== 1 ? 's' : ''} for you.`
-    } else if (showPrograms) {
-      headline = `We found ${programCount} program${programCount !== 1 ? 's' : ''} matching your profile.`
-    } else {
-      headline = `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} you qualify for.`
-    }
+    const headline = showScholarships && showPrograms
+      ? `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} and ${programCount} program${programCount !== 1 ? 's' : ''} for you.`
+      : showPrograms
+        ? `We found ${programCount} program${programCount !== 1 ? 's' : ''} matching your profile.`
+        : `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} you qualify for.`
 
     return (
       <div>
