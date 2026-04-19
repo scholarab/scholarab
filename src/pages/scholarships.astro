@@ -56,7 +56,7 @@ const scholarships = raw.map(s => ({
       </a>
     </div>
     <p class="text-sm text-secondary mb-1">Open scholarships for Alberta high school students, verified by hand and updated regularly.</p>
-    {freshnessLabel && <p class="text-xs text-faint mb-6">Last verified: {freshnessLabel}</p>}
+    {freshnessLabel && <p class="text-xs text-faint mb-6">Data last reviewed: {freshnessLabel}</p>}
     {loadError ? (
       <div class="text-center py-20">
         <p class="text-sm font-semibold text-primary mb-2">Couldn't load scholarships</p>
