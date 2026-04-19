@@ -5,6 +5,7 @@ import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { neon } from '@neondatabase/serverless'
+import { generateSlug } from '../src/lib/utils.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -24,7 +25,7 @@ const programs: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/re
 const sql = neon(DATABASE_URL)
 const today = new Date()
 today.setHours(0, 0, 0, 0)
-const MILESTONES = [30, 14, 3]
+const MILESTONES = process.env.TEST_DAYS ? [parseInt(process.env.TEST_DAYS)] : [30, 14, 3]
 
 function daysUntil(deadline: string): number {
   return Math.round((new Date(deadline + 'T00:00:00').getTime() - today.getTime()) / 86_400_000)
@@ -72,8 +73,8 @@ let sent = 0
 let errors = 0
 
 const allItems = [
-  ...scholarships.filter(s => s.active && s.deadline).map(s => ({ ...s, itemType: 'scholarship', label: s.title! })),
-  ...programs.filter(p => p.active && p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing').map(p => ({ ...p, itemType: 'program', label: p.name! })),
+  ...scholarships.filter(s => s.active && s.deadline).map(s => ({ ...s, itemType: 'scholarship', label: s.title!, detailUrl: `${BASE_URL}/scholarships/${generateSlug(s.title!)}` })),
+  ...programs.filter(p => p.active && p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing').map(p => ({ ...p, itemType: 'program', label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}` })),
 ]
 
 for (const milestone of MILESTONES) {
@@ -87,7 +88,7 @@ for (const milestone of MILESTONES) {
 
     for (const { email, token } of rows) {
       const subject = `${milestone} days left: ${item.label} closes ${formatDate(item.deadline!)}`
-      const html = emailHtml(item.label, item.amount, item.deadline!, item.url, `${BASE_URL}/api/unsubscribe?token=${token}`, milestone)
+      const html = emailHtml(item.label, item.amount, item.deadline!, item.detailUrl, `${BASE_URL}/api/unsubscribe?token=${token}`, milestone)
       try {
         await sendEmail(email, subject, html)
         sent++
