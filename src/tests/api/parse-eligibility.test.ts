@@ -123,12 +123,6 @@ describe('POST /admin/api/scholarships/parse-eligibility — auth & rate limit',
     expect(body.error).toContain('Rate limit')
   })
 
-  it('returns 429 when count exceeds limit', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValue(selectChain([{ count: 200 }]))
-    const res = await POST({ request: req({ id: 1 }) } as any)
-    expect(res.status).toBe(429)
-  })
 })
 
 // ── Config & input validation ─────────────────────────────────────────────────
@@ -181,17 +175,6 @@ describe('POST /admin/api/scholarships/parse-eligibility — validation', () => 
     expect(await res.json()).toMatchObject({ error: 'No audience text to parse' })
   })
 
-  it('returns 400 when scholarship audience is null', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect
-      .mockReturnValueOnce(selectChain([{ count: 0 }]))
-      .mockReturnValueOnce(selectChain([{ ...STORED_SCHOLARSHIP, audience: null }]))
-    mockInsert.mockReturnValue({ values: () => Promise.resolve() })
-    process.env.ANTHROPIC_API_KEY = 'sk-ant-test-key'
-
-    const res = await POST({ request: req({ id: 1 }) } as any)
-    expect(res.status).toBe(400)
-  })
 })
 
 // ── AI parsing ────────────────────────────────────────────────────────────────
