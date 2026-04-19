@@ -4,6 +4,7 @@ import DetailLayout from '../../components/DetailLayout.astro';
 import { loadPrograms } from '../../lib/data-loader';
 import { generateSlug } from '../../lib/utils.ts';
 import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.ts';
+import DeadlineAlert from '../../components/DeadlineAlert.astro';
 
 export async function getStaticPaths() {
   const programs = await loadPrograms();
@@ -119,5 +120,7 @@ const breadcrumbJson = {
       <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-2">About</p>
       <p class="text-sm leading-relaxed text-secondary">{program.description}</p>
     </div>
+
+    <DeadlineAlert itemType="program" itemId={program.id} deadline={program.deadline} />
   </DetailLayout>
 </Layout>

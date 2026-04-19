@@ -3,7 +3,7 @@ import { getEnv } from 'astro/env/runtime'
 export const SESSION_COOKIE = 'admin_session'
 
 function getSecret(): string {
-  return getEnv('BETTER_AUTH_SECRET') ?? import.meta.env.BETTER_AUTH_SECRET ?? process.env.BETTER_AUTH_SECRET ?? ''
+  return getEnv('SESSION_SECRET') ?? import.meta.env.SESSION_SECRET ?? process.env.SESSION_SECRET ?? ''
 }
 
 function getPassword(): string {

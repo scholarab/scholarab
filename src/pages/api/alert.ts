@@ -3,7 +3,7 @@ export const prerender = false
 import type { APIRoute } from 'astro'
 import { db } from '../../lib/db/client'
 import { subscribers } from '../../lib/db/schema'
-import { loadScholarships } from '../../lib/data-loader'
+import { loadScholarships, loadPrograms } from '../../lib/data-loader'
 import { jsonOk, jsonError } from '../../lib/api-response'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -12,24 +12,36 @@ export const POST: APIRoute = async ({ request }) => {
   let body: unknown
   try { body = await request.json() } catch { return jsonError('Invalid JSON', 400) }
 
-  const { email, scholarshipId } = body as Record<string, unknown>
+  const { email, itemType = 'scholarship', itemId } = body as Record<string, unknown>
 
-  if (!email || typeof email !== 'string' || !EMAIL_RE.test(email)) {
+  if (!email || typeof email !== 'string' || !EMAIL_RE.test(email))
     return jsonError('Valid email required', 400)
-  }
-  if (!scholarshipId || typeof scholarshipId !== 'number' || !Number.isInteger(scholarshipId)) {
-    return jsonError('Valid scholarshipId required', 400)
-  }
-
-  const scholarships = await loadScholarships()
-  const scholarship = scholarships.find(s => s.id === scholarshipId)
-  if (!scholarship) return jsonError('Scholarship not found', 404)
-  if (!scholarship.deadline) return jsonError('This scholarship has no deadline', 400)
+  if (itemType !== 'scholarship' && itemType !== 'program')
+    return jsonError('itemType must be scholarship or program', 400)
+  if (!itemId || typeof itemId !== 'number' || !Number.isInteger(itemId))
+    return jsonError('Valid itemId required', 400)
 
   const today = new Date()
   today.setHours(0, 0, 0, 0)
-  const deadline = new Date(scholarship.deadline + 'T00:00:00')
-  if (deadline <= today) return jsonError('This scholarship deadline has passed', 400)
+
+  let deadline: string
+  if (itemType === 'scholarship') {
+    const scholarships = await loadScholarships()
+    const s = scholarships.find(x => x.id === itemId)
+    if (!s) return jsonError('Scholarship not found', 404)
+    if (!s.deadline) return jsonError('This scholarship has no deadline', 400)
+    deadline = s.deadline
+  } else {
+    const programs = await loadPrograms()
+    const p = programs.find(x => x.id === itemId)
+    if (!p) return jsonError('Program not found', 404)
+    if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing')
+      return jsonError('This program has no fixed deadline', 400)
+    deadline = p.deadline
+  }
+
+  if (new Date(deadline + 'T00:00:00') <= today)
+    return jsonError('Deadline has already passed', 400)
 
   const token = Array.from(crypto.getRandomValues(new Uint8Array(24)))
     .map(b => b.toString(16).padStart(2, '0')).join('')
@@ -37,7 +49,8 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     await db.insert(subscribers).values({
       email: email.toLowerCase().trim(),
-      scholarshipId,
+      itemType: itemType as string,
+      itemId,
       token,
     }).onConflictDoNothing()
   } catch {

@@ -16,41 +16,27 @@ const BASE_URL = process.env.SITE_URL ?? 'https://www.scholarab.ca'
 if (!DATABASE_URL) { console.error('DATABASE_URL not set'); process.exit(1) }
 if (!RESEND_API_KEY) { console.error('RESEND_API_KEY not set'); process.exit(1) }
 
-interface Scholarship {
-  id: number
-  title: string
-  amount: string
-  deadline?: string
-  url: string
-  active: boolean
-}
+interface Item { id: number; title?: string; name?: string; amount?: string; deadline?: string; url: string; active: boolean }
 
-const scholarships: Scholarship[] = JSON.parse(
-  readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8')
-)
+const scholarships: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8'))
+const programs: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8'))
 
 const sql = neon(DATABASE_URL)
-
 const today = new Date()
 today.setHours(0, 0, 0, 0)
-
 const MILESTONES = [30, 14, 3]
 
 function daysUntil(deadline: string): number {
-  const d = new Date(deadline + 'T00:00:00')
-  return Math.round((d.getTime() - today.getTime()) / 86_400_000)
+  return Math.round((new Date(deadline + 'T00:00:00').getTime() - today.getTime()) / 86_400_000)
 }
 
 function formatDate(str: string): string {
-  return new Date(str + 'T00:00:00').toLocaleDateString('en-CA', {
-    year: 'numeric', month: 'long', day: 'numeric',
-  })
+  return new Date(str + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
-function emailHtml(title: string, amount: string, deadline: string, applyUrl: string, unsubscribeUrl: string, daysLeft: number): string {
+function emailHtml(label: string, amount: string | undefined, deadline: string, applyUrl: string, unsubscribeUrl: string, daysLeft: number): string {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${daysLeft} days left: ${title}</title></head>
+<meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f4f4f5;font-family:Inter,system-ui,sans-serif">
 <div style="max-width:560px;margin:32px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
   <div style="background:#0a0a0f;padding:24px 32px">
@@ -58,8 +44,8 @@ function emailHtml(title: string, amount: string, deadline: string, applyUrl: st
   </div>
   <div style="padding:32px">
     <p style="margin:0 0 4px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#888">${daysLeft} day${daysLeft === 1 ? '' : 's'} left to apply</p>
-    <h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#0a0a0f;line-height:1.3">${title}</h1>
-    <p style="margin:0 0 4px;font-size:18px;font-weight:600;color:#0c8060">${amount}</p>
+    <h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#0a0a0f;line-height:1.3">${label}</h1>
+    ${amount ? `<p style="margin:0 0 4px;font-size:18px;font-weight:600;color:#0c8060">${amount}</p>` : ''}
     <p style="margin:0 0 24px;font-size:14px;color:#666">Deadline: ${formatDate(deadline)}</p>
     <a href="${applyUrl}" style="display:inline-block;background:#0c8060;color:#fff;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px">Apply Now →</a>
   </div>
@@ -76,42 +62,39 @@ function emailHtml(title: string, amount: string, deadline: string, applyUrl: st
 async function sendEmail(to: string, subject: string, html: string): Promise<void> {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ from: FROM, to: [to], subject, html }),
   })
-  if (!res.ok) {
-    const err = await res.text()
-    throw new Error(`Resend ${res.status}: ${err}`)
-  }
+  if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`)
 }
 
 let sent = 0
 let errors = 0
 
-for (const milestone of MILESTONES) {
-  const targets = scholarships.filter(s =>
-    s.active && s.deadline && daysUntil(s.deadline) === milestone
-  )
+const allItems = [
+  ...scholarships.filter(s => s.active && s.deadline).map(s => ({ ...s, itemType: 'scholarship', label: s.title! })),
+  ...programs.filter(p => p.active && p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing').map(p => ({ ...p, itemType: 'program', label: p.name! })),
+]
 
-  for (const s of targets) {
+for (const milestone of MILESTONES) {
+  const targets = allItems.filter(item => daysUntil(item.deadline!) === milestone)
+
+  for (const item of targets) {
     const rows = await sql`
-      SELECT email, token FROM subscribers WHERE scholarship_id = ${s.id}
+      SELECT email, token FROM subscribers
+      WHERE item_type = ${item.itemType} AND item_id = ${item.id}
     ` as { email: string; token: string }[]
 
     for (const { email, token } of rows) {
-      const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${token}`
-      const subject = `${milestone} days left: ${s.title} closes ${formatDate(s.deadline!)}`
-      const html = emailHtml(s.title, s.amount, s.deadline!, s.url, unsubscribeUrl, milestone)
+      const subject = `${milestone} days left: ${item.label} closes ${formatDate(item.deadline!)}`
+      const html = emailHtml(item.label, item.amount, item.deadline!, item.url, `${BASE_URL}/api/unsubscribe?token=${token}`, milestone)
       try {
         await sendEmail(email, subject, html)
         sent++
-        console.log(`  sent ${milestone}d reminder → ${email} (scholarship ${s.id})`)
+        console.log(`  sent ${milestone}d → ${email} (${item.itemType} ${item.id})`)
       } catch (e) {
         errors++
-        console.error(`  failed ${email} (scholarship ${s.id}):`, e)
+        console.error(`  failed ${email} (${item.itemType} ${item.id}):`, e)
       }
     }
   }

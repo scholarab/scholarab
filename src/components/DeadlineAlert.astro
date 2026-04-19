@@ -1,13 +1,16 @@
 ---
 interface Props {
-  scholarshipId: number
+  itemType: 'scholarship' | 'program'
+  itemId: number
   deadline: string | null | undefined
 }
-const { scholarshipId, deadline } = Astro.props
+const { itemType, itemId, deadline } = Astro.props
 
 const today = new Date()
 today.setHours(0, 0, 0, 0)
-const deadlineDate = deadline ? new Date(deadline + 'T00:00:00') : null
+const deadlineDate = deadline && deadline !== 'TBA' && deadline !== 'Ongoing'
+  ? new Date(deadline + 'T00:00:00')
+  : null
 const isFuture = deadlineDate && deadlineDate > today
 ---
 
@@ -36,7 +39,7 @@ const isFuture = deadlineDate && deadlineDate > today
   </div>
 )}
 
-<script define:vars={{ scholarshipId }}>
+<script define:vars={{ itemType, itemId }}>
   const form = document.getElementById('alert-form')
   const msg  = document.getElementById('alert-msg')
   const btn  = document.getElementById('alert-btn')
@@ -50,7 +53,7 @@ const isFuture = deadlineDate && deadlineDate > today
       const res  = await fetch('/api/alert', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, scholarshipId }),
+        body: JSON.stringify({ email, itemType, itemId }),
       })
       const data = await res.json()
       if (res.ok) {

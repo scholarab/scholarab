@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [react()],
   env: {
     schema: {
-      BETTER_AUTH_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
+      SESSION_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
       DATABASE_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       DEPLOY_HOOK_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       ANTHROPIC_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),

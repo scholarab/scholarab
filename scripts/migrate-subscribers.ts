@@ -10,16 +10,17 @@ const sql = neon(url)
 
 await sql`
   CREATE TABLE IF NOT EXISTS subscribers (
-    id          serial PRIMARY KEY,
-    email       text NOT NULL,
-    scholarship_id integer NOT NULL,
-    token       text NOT NULL,
-    created_at  timestamptz NOT NULL DEFAULT now(),
-    CONSTRAINT subscribers_email_scholarship_unique UNIQUE (email, scholarship_id),
+    id        serial PRIMARY KEY,
+    email     text NOT NULL,
+    item_type text NOT NULL DEFAULT 'scholarship',
+    item_id   integer NOT NULL,
+    token     text NOT NULL,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    CONSTRAINT subscribers_email_item_unique UNIQUE (email, item_type, item_id),
     CONSTRAINT subscribers_token_unique UNIQUE (token)
   )
 `
 
-await sql`CREATE INDEX IF NOT EXISTS subscribers_scholarship_idx ON subscribers (scholarship_id)`
+await sql`CREATE INDEX IF NOT EXISTS subscribers_item_idx ON subscribers (item_type, item_id)`
 
 console.log('subscribers table ready')

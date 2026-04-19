@@ -51,11 +51,12 @@ export const researchPrograms = pgTable('research_programs', {
 export const subscribers = pgTable('subscribers', {
   id: serial('id').primaryKey(),
   email: text('email').notNull(),
-  scholarshipId: integer('scholarship_id').notNull(),
+  itemType: text('item_type').notNull().default('scholarship'),
+  itemId: integer('item_id').notNull(),
   token: text('token').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, t => [
-  uniqueIndex('subscribers_email_scholarship_unique').on(t.email, t.scholarshipId),
+  uniqueIndex('subscribers_email_item_unique').on(t.email, t.itemType, t.itemId),
   uniqueIndex('subscribers_token_unique').on(t.token),
 ])
 

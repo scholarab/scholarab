@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { loadScholarships, loadPrograms } from '../lib/data-loader';
+
+const scholarships = await loadScholarships();
+const programs = await loadPrograms();
+const activeScholarships = scholarships.filter(s => s.active).length;
+const activePrograms = programs.filter(p => p.active).length;
+
+const pageTitle = 'For Educators | ScholarAB';
+const description = 'A free Alberta scholarship directory for high school counsellors. Help your students find and apply for scholarships in Medicine Hat, Calgary, Edmonton, Lethbridge, and across Alberta.';
+const canonical = 'https://www.scholarab.ca/educators';
+---
+
+<Layout
+  title={pageTitle}
+  description={description}
+  ogTitle={pageTitle}
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+  currentPath="/educators"
+  containerClass="max-w-2xl"
+>
+  <div class="py-10">
+
+    <div class="mb-10">
+      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-3">For Educators</p>
+      <h1 class="text-3xl font-bold text-primary mb-4 leading-tight">
+        Help your students find scholarships they actually qualify for.
+      </h1>
+      <p class="text-base text-secondary leading-relaxed">
+        ScholarAB is a free, ad-free directory of Alberta scholarships and research programs built specifically for high school students. Share it with your class, post it in your guidance office, or send it directly to Grade 11 and 12 students.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-4 mb-10">
+      <div class="p-4 rounded-xl bg-subtle border border-subtle text-center">
+        <p class="text-2xl font-bold text-primary">{activeScholarships}+</p>
+        <p class="text-xs text-tertiary mt-1">Alberta scholarships</p>
+      </div>
+      <div class="p-4 rounded-xl bg-subtle border border-subtle text-center">
+        <p class="text-2xl font-bold text-primary">{activePrograms}+</p>
+        <p class="text-xs text-tertiary mt-1">Research programs</p>
+      </div>
+      <div class="p-4 rounded-xl bg-subtle border border-subtle text-center">
+        <p class="text-2xl font-bold text-primary">Free</p>
+        <p class="text-xs text-tertiary mt-1">No ads, no accounts</p>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="mb-10 space-y-4">
+      <h2 class="text-lg font-semibold text-primary">What students can do</h2>
+
+      <div class="p-4 rounded-xl border border-subtle">
+        <p class="text-sm font-semibold text-primary mb-1">Take a 6-question match quiz</p>
+        <p class="text-sm text-secondary">Students answer questions about their grade, region, interests, and background. ScholarAB shows the scholarships they're most likely to qualify for — no account required.</p>
+      </div>
+
+      <div class="p-4 rounded-xl border border-subtle">
+        <p class="text-sm font-semibold text-primary mb-1">Browse by region and category</p>
+        <p class="text-sm text-secondary">Scholarships are tagged by region — Medicine Hat, Calgary, Edmonton, Lethbridge, Red Deer, and Alberta-wide — so students only see what's relevant to them.</p>
+      </div>
+
+      <div class="p-4 rounded-xl border border-subtle">
+        <p class="text-sm font-semibold text-primary mb-1">Save scholarships and get reminders</p>
+        <p class="text-sm text-secondary">Students can bookmark scholarships and sign up for email reminders 30, 14, and 3 days before the deadline — no account required, just an email address.</p>
+      </div>
+
+      <div class="p-4 rounded-xl border border-subtle">
+        <p class="text-sm font-semibold text-primary mb-1">Explore research programs</p>
+        <p class="text-sm text-secondary">Beyond scholarships, ScholarAB lists paid and unpaid research opportunities for high school students across Canada.</p>
+      </div>
+    </div>
+
+    <!-- How to share -->
+    <div class="mb-10">
+      <h2 class="text-lg font-semibold text-primary mb-4">How to share it</h2>
+      <div class="space-y-3">
+        <div class="flex gap-3 items-start">
+          <span class="text-[#22d3a5] font-bold text-sm mt-0.5">1.</span>
+          <p class="text-sm text-secondary">Post <strong class="text-primary">scholarab.ca</strong> on your classroom board or guidance office bulletin.</p>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="text-[#22d3a5] font-bold text-sm mt-0.5">2.</span>
+          <p class="text-sm text-secondary">Tell Grade 11 and 12 students to take the Match quiz — it takes 2 minutes and finds scholarships they qualify for.</p>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="text-[#22d3a5] font-bold text-sm mt-0.5">3.</span>
+          <p class="text-sm text-secondary">Remind students to sign up for deadline reminders so they don't miss applications they've saved.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="p-6 rounded-xl border border-[#22d3a5]/30 bg-[#22d3a5]/5 text-center">
+      <p class="text-sm font-semibold text-primary mb-1">Share with your students</p>
+      <p class="text-2xl font-bold text-[#22d3a5] mb-4">scholarab.ca</p>
+      <div class="flex gap-3 justify-center flex-wrap">
+        <a
+          href="/scholarships"
+          class="px-5 py-2.5 rounded-lg text-sm font-semibold transition"
+          style="background:#22d3a5;color:#0a0a0f"
+        >
+          Browse Scholarships
+        </a>
+        <a
+          href="/match"
+          class="px-5 py-2.5 rounded-lg text-sm font-semibold border border-subtle text-primary hover:bg-subtle transition"
+        >
+          Try the Quiz
+        </a>
+      </div>
+    </div>
+
+  </div>
+</Layout>
