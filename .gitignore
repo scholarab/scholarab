@@ -9,3 +9,8 @@ dist
 .vercel/
 .vercel
 coverage/
+.wrangler/
+.cursor/
+test-results/
+scholarab-overview.html
+scholarab-overview.pdf
