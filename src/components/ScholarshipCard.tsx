@@ -59,11 +59,11 @@ function ScholarshipCard({ scholarship, index, isSaved, onToggleSave, isFiltered
 
         <div className="pt-4 grid grid-cols-2 gap-2 border-t border-subtle">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Eligibility</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Eligibility</p>
             <p className="text-xs leading-snug text-secondary">{scholarship.audience}</p>
           </div>
           <div className="text-right flex flex-col items-end overflow-hidden">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">{deadlineLabel}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">{deadlineLabel}</p>
             <p className={`text-sm font-medium ${deadlineColor}`} style={deadlineSoon && !isClosed ? { color: daysLeft !== null && daysLeft <= 7 ? 'var(--color-urgent)' : 'var(--color-warning)' } : undefined}>
               {deadlineValue}
             </p>

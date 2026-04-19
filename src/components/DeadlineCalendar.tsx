@@ -221,7 +221,7 @@ export default function DeadlineCalendar({ scholarships, programs }: Props) {
         )}
 
         {!monthHasDeadline && (
-          <p className="text-center text-xs text-faint mt-4">No deadlines this month</p>
+          <p className="text-center text-xs text-tertiary mt-4">No deadlines this month</p>
         )}
       </div>
     </div>

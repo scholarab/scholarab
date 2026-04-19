@@ -393,7 +393,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       {s.audience && <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{s.audience}</p>}
                       <div className="flex items-center gap-2 mt-1.5 flex-wrap">
                         <span className={`text-xs px-2 py-0.5 rounded-full border ${style.badge}`}>{style.label}</span>
-                        {s.deadline && <span className="text-xs text-faint">Due {s.deadline}</span>}
+                        {s.deadline && <span className="text-xs text-tertiary">Due {s.deadline}</span>}
                       </div>
                     </div>
                     <div style={{ flexShrink: 0, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
@@ -433,7 +433,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     {p.provider && <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{p.provider}</p>}
                     <div className="flex items-center gap-2 mt-1.5 flex-wrap">
                       {p.category && <span className="text-xs px-2 py-0.5 rounded-full border bg-subtle text-tertiary border-card">{p.category}</span>}
-                      {p.deadline && <span className="text-xs text-faint">Due {p.deadline}</span>}
+                      {p.deadline && <span className="text-xs text-tertiary">Due {p.deadline}</span>}
                     </div>
                   </div>
                   <div style={{ flexShrink: 0, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
@@ -441,7 +441,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       ? <p className="font-bold text-primary" style={{ fontSize: 17, letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>{p.stipend}</p>
                       : p.paid
                         ? <p className="font-bold text-primary" style={{ fontSize: 14 }}>Paid</p>
-                        : <p className="text-xs text-faint">Unpaid</p>
+                        : <p className="text-xs text-tertiary">Unpaid</p>
                     }
                     <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-brand transition hover:opacity-80">Apply →</a>
                   </div>

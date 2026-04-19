@@ -68,11 +68,11 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
 
         <div className="pt-4 grid grid-cols-2 gap-2 border-t border-subtle">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Eligibility</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Eligibility</p>
             <p className="text-xs leading-snug text-secondary">{program.eligibility}</p>
           </div>
           <div className="text-right flex flex-col items-end overflow-hidden">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Deadline</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Deadline</p>
             <p className={`text-sm font-medium ${deadlineColor}`} style={deadlineUrgent ? { color: 'var(--color-urgent)' } : undefined}>
               {program.deadline === 'Ongoing' ? 'Ongoing' : formatDeadline(program.deadline)}
             </p>
