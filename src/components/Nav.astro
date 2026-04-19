@@ -10,12 +10,14 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
       <!-- gradient rainbow underline -->
       <div aria-hidden="true" style="position:absolute;bottom:-1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,211,165,0.6),rgba(59,130,246,0.5),rgba(167,139,250,0.4),transparent);border-radius:1px;pointer-events:none;"></div>
       <a href="/" onclick="if(window.location.pathname==='/'){event.preventDefault()}" class="hover:opacity-80 transition-opacity flex items-center gap-2" aria-label="ScholarAB home">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" fill="none" height="36" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 56" fill="none" height="36" aria-hidden="true">
           <path d="M10 42 L22 20 L34 42Z" fill="#22d3a5" opacity="0.35"/><path d="M26 42 L42 14 L58 42Z" fill="#22d3a5" opacity="0.6"/>
           <path d="M18 42 L34 6 L50 42Z" fill="#22d3a5"/><path d="M34 6 L39 18 L29 18Z" fill="white" opacity="0.9"/>
           <line x1="6" y1="42" x2="62" y2="42" stroke="#22d3a5" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+          <text font-family="Inter, sans-serif" font-weight="700" font-size="28" letter-spacing="-0.8">
+            <tspan x="74" y="38" class="logo-scholar">Scholar</tspan><tspan fill="#22d3a5">AB</tspan>
+          </text>
         </svg>
-        <span class="logo-text font-bold text-primary" style="font-family:Inter,sans-serif;font-size:1.25rem;letter-spacing:-0.03em">Scholar<span style="color:#22d3a5">AB</span></span>
 
       </a>
       <div class="flex items-center gap-5 text-sm font-medium">
@@ -104,6 +106,8 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
   #theme-icon-sun-wrap  { transform: rotate(180deg) scale(0); opacity: 0; }
   html.theme-light #theme-icon-moon-wrap { transform: rotate(-180deg) scale(0); opacity: 0; }
   html.theme-light #theme-icon-sun-wrap  { transform: rotate(0deg) scale(1); opacity: 1; }
+
+  .logo-scholar { fill: var(--text-primary); }
 
   .glass-nav a {
     -webkit-tap-highlight-color: transparent;
