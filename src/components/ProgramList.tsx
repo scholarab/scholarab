@@ -5,12 +5,13 @@ import Pagination from './Pagination.tsx';
 import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
 import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
 import { PROGRAM_BADGES } from '../lib/badges.ts';
+import ErrorBoundary from './ErrorBoundary.tsx';
 
 interface Props {
   items: ProgramWithMeta[];
 }
 
-export default function ProgramList({ items }: Props) {
+function ProgramList({ items }: Props) {
   const {
     filtered, visibleItems, page, totalPages, handlePageChange,
     selectedCategory, setCategory,
@@ -79,4 +80,8 @@ export default function ProgramList({ items }: Props) {
       )}
     </div>
   );
+}
+
+export default function ProgramListWithBoundary(props: Props) {
+  return <ErrorBoundary><ProgramList {...props} /></ErrorBoundary>;
 }

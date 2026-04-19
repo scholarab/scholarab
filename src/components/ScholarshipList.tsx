@@ -5,6 +5,7 @@ import Pagination from './Pagination.tsx';
 import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
 import type { ScholarshipWithMeta, StatusFilter } from '../hooks/useScholarships.ts';
 import { SCHOLARSHIP_BADGES } from '../lib/badges.ts';
+import ErrorBoundary from './ErrorBoundary.tsx';
 
 const REGION_PILLS = [
   { value: null,           label: 'All',         dot: undefined,   color: undefined,   bg: undefined,                    border: undefined },
@@ -33,7 +34,7 @@ const STATUS_CHIPS: { value: StatusFilter; label: string; dot?: string }[] = [
   { value: 'opening', label: 'Coming',  dot: '#3b82f6' },
 ];
 
-export default function ScholarshipList({ items }: Props) {
+function ScholarshipList({ items }: Props) {
   const {
     filtered, visibleItems, page, totalPages, handlePageChange,
     sortBy, setSort, selectedRegion, setRegion,
@@ -212,4 +213,8 @@ export default function ScholarshipList({ items }: Props) {
       )}
     </div>
   );
+}
+
+export default function ScholarshipListWithBoundary(props: Props) {
+  return <ErrorBoundary><ScholarshipList {...props} /></ErrorBoundary>;
 }
