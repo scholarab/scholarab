@@ -21,12 +21,12 @@ test('programs page - list hydrates and shows count', async ({ page }) => {
   await expect(page.locator('text=/\\d+ program/').first()).toBeVisible({ timeout: 10_000 });
 });
 
-test('match quiz - completes full 5-question flow', async ({ page }) => {
+test('match quiz - completes full 6-question flow', async ({ page }) => {
   await page.goto('/match/');
   // Wait for React client:load hydration
-  await expect(page.locator('text=Question 1 of 5')).toBeVisible({ timeout: 15_000 });
+  await expect(page.locator('text=Question 1 of 6')).toBeVisible({ timeout: 15_000 });
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     // Scope to main content to avoid nav buttons; skip the Previous back button
     const tile = page.locator('#main-content button').filter({ hasNotText: /^Previous$/ }).first();
     await tile.click();

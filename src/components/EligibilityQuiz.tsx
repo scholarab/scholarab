@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import type { Scholarship, Program } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
-import { matchAll } from '../lib/eligibility-matcher'
+import { matchAll, matchProgram } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved } from '../lib/tracker.ts'
 import { showConfetti } from '../lib/utils.ts'
 import { generateSlug } from '../lib/utils.ts'
@@ -29,6 +29,16 @@ const QUESTIONS: QuizQuestion[] = [
       { label: 'Scholarships', value: 'scholarships' },
       { label: 'Research Programs', value: 'programs' },
       { label: 'Both', value: 'both' },
+    ],
+  },
+  {
+    key: 'grade',
+    q: "What grade are you in?",
+    opts: [
+      { label: 'Grade 10', value: '10' },
+      { label: 'Grade 11', value: '11' },
+      { label: 'Grade 12', value: '12' },
+      { label: 'Already in post-secondary', value: 'post-secondary' },
     ],
   },
   {
@@ -86,7 +96,7 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
   possible: { badge: 'bg-subtle text-tertiary border-card', label: 'Possible match' },
 }
 
-const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v3'
+const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v4'
 
 // ── Programs matching ─────────────────────────────────────────────────────────
 
@@ -99,7 +109,8 @@ const FIELD_KEYWORDS: Record<string, string[]> = {
 }
 
 function matchPrograms(programs: Program[], answers: Record<string, string>): Program[] {
-  let filtered = programs.filter(p => p.active)
+  const grade = answers.grade ?? '12'
+  let filtered = programs.filter(p => p.active && matchProgram(grade, p))
   const field = answers.field
   if (field && FIELD_KEYWORDS[field]) {
     const keywords = FIELD_KEYWORDS[field]
@@ -247,8 +258,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     if (!city) return null
     const fieldVal = answers.field
     const avgVal = answers.average
+    const gradeVal = answers.grade ?? '12'
     return {
-      grade: '12',
+      grade: gradeVal as StudentProfile['grade'],
       city,
       schoolBoard: null,
       specificSchool: null,
