@@ -9,7 +9,6 @@ export default defineConfig({
   env: {
     schema: {
       BETTER_AUTH_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
-      BETTER_AUTH_URL: envField.string({ context: 'server', access: 'public', optional: true }),
       DATABASE_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       DEPLOY_HOOK_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       ANTHROPIC_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),

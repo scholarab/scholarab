@@ -14,8 +14,6 @@ export default defineConfig({
         'src/lib/utils.ts',
         'src/lib/tracker.ts',
         'src/lib/data-loader.ts',
-        'src/lib/adminRateLimit.ts',
-        'src/lib/authSignInRateLimit.ts',
         'src/lib/constants.ts',
         'src/hooks/useScholarships.ts',
         'src/hooks/usePrograms.ts',
