@@ -1,5 +1,5 @@
-const CACHE_NAME = 'scholarab-v4';
-const PAGES_TO_CACHE = ['/', '/scholarships', '/programs', '/saved', '/about'];
+const CACHE_NAME = 'scholarab-v5';
+const PAGES_TO_CACHE = ['/', '/scholarships', '/programs', '/saved', '/about', '/offline.html'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -29,6 +29,8 @@ self.addEventListener('fetch', (event) => {
   // Never cache API or admin routes — auth state and data mutations must always be fresh
   if (pathname.startsWith('/api/') || pathname.startsWith('/admin/')) return;
 
+  const isNavigation = event.request.mode === 'navigate';
+
   event.respondWith(
     fetch(event.request)
       .then((response) => {
@@ -38,6 +40,11 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() =>
+        caches.match(event.request).then((cached) => {
+          if (cached) return cached;
+          if (isNavigation) return caches.match('/offline.html');
+        })
+      )
   );
 });

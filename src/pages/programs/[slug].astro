@@ -33,7 +33,9 @@ const rawBadge = CATEGORY_BADGE[program.category] || DEFAULT_BADGE;
 const badge    = { ...rawBadge, emoji: program.emoji || rawBadge.emoji, label: program.category };
 
 const desc = program.description ?? '';
-const metaDescription = desc.length > 160 ? desc.slice(0, 157) + '...' : desc;
+const metaDescription = desc.length > 160
+  ? desc.slice(0, 157) + '...'
+  : desc || `${program.name} is a research program offered by ${program.provider}. Discover and apply through ScholarAB, Alberta's free scholarship and program directory for high school students.`;
 const canonical = `https://www.scholarab.ca/programs/${slug}`;
 const pageTitle = `${program.name} | ScholarAB | Alberta Research Programs`;
 

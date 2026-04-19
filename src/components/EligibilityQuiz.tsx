@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import type { Scholarship, Program } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll } from '../lib/eligibility-matcher'
@@ -202,6 +202,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     return {}
   })
   const [animKey, setAnimKey] = useState(0)
+  const questionHeadingRef = useRef<HTMLHeadingElement>(null)
+
+  // Focus question heading on step change for screen reader navigation
+  useEffect(() => {
+    if (step < QUESTIONS.length) {
+      questionHeadingRef.current?.focus()
+    }
+  }, [animKey, step])
 
   // Persist
   useEffect(() => {
@@ -479,7 +487,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
       {/* Question + tiles — animated on step change */}
       <div key={`${animKey}-${step}`} style={{ animation: 'sabSlideUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both' }}>
-        <h2 className="text-primary" style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 24 }}>
+        <h2 ref={questionHeadingRef} tabIndex={-1} className="text-primary" style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 24, outline: 'none' }}>
           {current.q}
         </h2>
 
