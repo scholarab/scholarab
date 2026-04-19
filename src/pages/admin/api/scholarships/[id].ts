@@ -5,7 +5,6 @@ import { scholarships } from '../../../../lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { eligibilitySchema } from '../../../../lib/data-loader'
-import { logAudit } from '../../../../lib/audit'
 import { httpsUrl } from '../../../../lib/validators'
 import { jsonOk, jsonError } from '../../../../lib/api-response'
 
@@ -65,7 +64,6 @@ export const PUT: APIRoute = async ({ request, params }) => {
       .where(eq(scholarships.id, id))
       .returning()
     if (!updated) return jsonError('Not found', 404)
-    logAudit('admin', 'UPDATE', 'scholarship', id).catch(() => {})
     return jsonOk(updated)
   } catch (e) {
     if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)
@@ -80,7 +78,6 @@ export const DELETE: APIRoute = async ({ request, params }) => {
   if (isNaN(id)) return jsonError('Invalid ID', 400)
   try {
     await db.delete(scholarships).where(eq(scholarships.id, id))
-    logAudit('admin', 'DELETE', 'scholarship', id).catch(() => {})
     return new Response(null, { status: 204 })
   } catch (e) {
     console.error('[DELETE /admin/api/scholarships/:id]', e)

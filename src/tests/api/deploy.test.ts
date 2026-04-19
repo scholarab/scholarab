@@ -1,21 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { POST } from '../../pages/admin/api/deploy'
 
-const { mockIsAdmin, mockInsert } = vi.hoisted(() => ({
+const { mockIsAdmin } = vi.hoisted(() => ({
   mockIsAdmin: vi.fn(),
-  mockInsert:  vi.fn(),
 }))
 
 vi.mock('../../lib/adminAuth', () => ({
   isAdminRequest: mockIsAdmin,
-}))
-
-vi.mock('../../lib/db/client', () => ({
-  db: { insert: (...a: any[]) => mockInsert(...a) },
-}))
-
-vi.mock('../../lib/db/schema', () => ({
-  deployLog: 'deploy_log',
 }))
 
 function req() {
@@ -25,7 +16,6 @@ function req() {
 beforeEach(() => {
   vi.clearAllMocks()
   vi.unstubAllEnvs()
-  mockInsert.mockReturnValue({ values: () => Promise.resolve() })
 })
 
 describe('POST /admin/api/deploy', () => {
@@ -56,7 +46,6 @@ describe('POST /admin/api/deploy', () => {
     expect(res.status).toBe(200)
     const body = await res.json()
     expect(body.success).toBe(true)
-    expect(mockInsert).toHaveBeenCalled()
     expect(mockFetch).toHaveBeenCalledWith('https://api.cloudflare.com/deploy/hook', { method: 'POST' })
   })
 

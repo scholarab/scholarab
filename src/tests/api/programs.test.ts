@@ -4,21 +4,16 @@ import { GET, PUT, DELETE } from '../../pages/admin/api/programs/[id]'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-const { mockIsAdmin, mockSelect, mockInsert, mockUpdate, mockDelete, mockLogAudit } = vi.hoisted(() => ({
+const { mockIsAdmin, mockSelect, mockInsert, mockUpdate, mockDelete } = vi.hoisted(() => ({
   mockIsAdmin:  vi.fn(),
   mockSelect:   vi.fn(),
   mockInsert:   vi.fn(),
   mockUpdate:   vi.fn(),
   mockDelete:   vi.fn(),
-  mockLogAudit: vi.fn(),
 }))
 
 vi.mock('../../lib/adminAuth', () => ({
   isAdminRequest: mockIsAdmin,
-}))
-
-vi.mock('../../lib/audit', () => ({
-  logAudit: mockLogAudit,
 }))
 
 vi.mock('../../lib/db/client', () => ({
@@ -81,7 +76,6 @@ const STORED_ROW = {
 
 beforeEach(() => {
   vi.clearAllMocks()
-  mockLogAudit.mockResolvedValue(undefined)
 })
 
 // ── GET /admin/api/programs ───────────────────────────────────────────────────
@@ -172,7 +166,6 @@ describe('POST /admin/api/programs', () => {
     const body = await res.json()
     expect(body.name).toBe('Test Program')
     expect(body.id).toBe(1)
-    expect(mockLogAudit).toHaveBeenCalledWith('admin', 'CREATE', 'program', 1)
   })
 
   it('applies default paid=false when omitted', async () => {
@@ -287,7 +280,6 @@ describe('PUT /admin/api/programs/[id]', () => {
     expect(res.status).toBe(200)
     const body = await res.json()
     expect(body.name).toBe('Updated Program')
-    expect(mockLogAudit).toHaveBeenCalledWith('admin', 'UPDATE', 'program', 1)
   })
 
   it('returns 200 without optimistic lock check when no updatedAt provided', async () => {
@@ -336,7 +328,6 @@ describe('DELETE /admin/api/programs/[id]', () => {
     mockDelete.mockReturnValue(chain(undefined))
     const res = await DELETE({ request: req('DELETE', '1'), params: { id: '1' } } as any)
     expect(res.status).toBe(204)
-    expect(mockLogAudit).toHaveBeenCalledWith('admin', 'DELETE', 'program', 1)
   })
 
   it('returns 500 when DB throws during deletion', async () => {

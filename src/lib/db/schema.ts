@@ -1,4 +1,4 @@
-import { pgTable, serial, text, boolean, timestamp, jsonb, index, uniqueIndex, integer } from 'drizzle-orm/pg-core'
+import { pgTable, serial, text, boolean, timestamp, jsonb, index, uniqueIndex } from 'drizzle-orm/pg-core'
 
 export const scholarships = pgTable('scholarships', {
   id: serial('id').primaryKey(),
@@ -48,25 +48,9 @@ export const researchPrograms = pgTable('research_programs', {
   index('research_programs_category_idx').on(t.category),
 ])
 
-export const deployLog = pgTable('deploy_log', {
-  id: serial('id').primaryKey(),
-  triggeredBy: text('triggered_by'),
-  triggerReason: text('trigger_reason'),
-  deployResponse: jsonb('deploy_response'),
-  createdAt: timestamp('created_at').defaultNow(),
-})
-
 export const parseLog = pgTable('parse_log', {
   id: serial('id').primaryKey(),
   userId: text('user_id').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, t => [index('parse_log_userId_idx').on(t.userId)])
 
-export const auditLog = pgTable('audit_log', {
-  id: serial('id').primaryKey(),
-  userId: text('user_id').notNull(),
-  action: text('action').notNull(),        // 'CREATE' | 'UPDATE' | 'DELETE'
-  resourceType: text('resource_type').notNull(), // 'scholarship' | 'program'
-  resourceId: integer('resource_id').notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-}, t => [index('audit_log_userId_idx').on(t.userId)])

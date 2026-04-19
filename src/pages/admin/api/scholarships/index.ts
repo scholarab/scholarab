@@ -5,7 +5,6 @@ import { scholarships } from '../../../../lib/db/schema'
 import { ilike, desc } from 'drizzle-orm'
 import { z } from 'zod'
 import { eligibilitySchema } from '../../../../lib/data-loader'
-import { logAudit } from '../../../../lib/audit'
 import { httpsUrl } from '../../../../lib/validators'
 import { jsonOk, jsonError } from '../../../../lib/api-response'
 
@@ -50,7 +49,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const [created] = await db.insert(scholarships).values(data).returning()
-    logAudit('admin', 'CREATE', 'scholarship', created!.id).catch(() => {})
     return jsonOk(created, 201)
   } catch (e) {
     if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)

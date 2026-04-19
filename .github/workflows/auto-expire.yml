@@ -21,7 +21,7 @@ jobs:
           node-version: '20'
 
       - name: Run auto-expire script
-        run: node scripts/auto-expire.js
+        run: npx tsx scripts/auto-expire.ts
 
       - name: Commit and push if changed
         run: |
