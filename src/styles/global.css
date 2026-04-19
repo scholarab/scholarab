@@ -57,8 +57,8 @@ html.theme-dark {
   /* Text */
   --text-primary:   #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.45);
-  --text-tertiary:  rgba(255, 255, 255, 0.30);
-  --text-faint:     rgba(255, 255, 255, 0.20);
+  --text-tertiary:  rgba(255, 255, 255, 0.40);
+  --text-faint:     rgba(255, 255, 255, 0.30);
 
   /* Navigation */
   --nav-glass-bg:      rgba(10, 10, 15, 0.8);
