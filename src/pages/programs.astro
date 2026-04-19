@@ -3,7 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import { loadPrograms } from '../lib/data-loader';
 import ProgramList from '../components/ProgramList.tsx';
 import { generateSlug } from '../lib/utils';
-const raw = await loadPrograms();
+let raw: Awaited<ReturnType<typeof loadPrograms>> = [];
+let loadError = false;
+try {
+  raw = await loadPrograms();
+} catch {
+  loadError = true;
+}
 const mostRecentVerified = raw
   .map(p => p.lastVerified).filter(Boolean).sort().at(-1) ?? null;
 const freshnessLabel = mostRecentVerified
@@ -44,6 +50,14 @@ const programs = raw.map(p => ({
     <h1 class="font-bold text-primary mb-1" style="font-size: clamp(22px, 3vw, 32px);">Research Programs</h1>
     <p class="text-sm text-secondary mb-1">University-run summer programs, labs, and competitions open to Alberta high school students.</p>
     {freshnessLabel && <p class="text-xs text-faint mb-6">Last verified: {freshnessLabel}</p>}
-    <ProgramList items={programs} client:idle />
+    {loadError ? (
+      <div class="text-center py-20">
+        <p class="text-sm font-semibold text-primary mb-2">Couldn't load programs</p>
+        <p class="text-sm text-secondary mb-5">The database may be temporarily unavailable.</p>
+        <a href="/programs" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold" style="background:var(--brand);color:#0a0a0f;">Try again</a>
+      </div>
+    ) : (
+      <ProgramList items={programs} client:idle />
+    )}
   </div>
 </Layout>

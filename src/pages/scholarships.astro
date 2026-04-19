@@ -3,7 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import { loadScholarships } from '../lib/data-loader';
 import ScholarshipList from '../components/ScholarshipList.tsx';
 import { generateSlug, formatDeadline } from '../lib/utils';
-const raw = await loadScholarships();
+let raw: Awaited<ReturnType<typeof loadScholarships>> = [];
+let loadError = false;
+try {
+  raw = await loadScholarships();
+} catch {
+  loadError = true;
+}
 const mostRecentVerified = raw
   .map(s => s.lastVerified).filter(Boolean).sort().at(-1) ?? null;
 const freshnessLabel = mostRecentVerified
@@ -51,6 +57,14 @@ const scholarships = raw.map(s => ({
     </div>
     <p class="text-sm text-secondary mb-1">Open scholarships for Alberta high school students, verified by hand and updated regularly.</p>
     {freshnessLabel && <p class="text-xs text-faint mb-6">Last verified: {freshnessLabel}</p>}
-    <ScholarshipList items={scholarships} client:idle />
+    {loadError ? (
+      <div class="text-center py-20">
+        <p class="text-sm font-semibold text-primary mb-2">Couldn't load scholarships</p>
+        <p class="text-sm text-secondary mb-5">The database may be temporarily unavailable.</p>
+        <a href="/scholarships" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold" style="background:var(--brand);color:#0a0a0f;">Try again</a>
+      </div>
+    ) : (
+      <ScholarshipList items={scholarships} client:idle />
+    )}
   </div>
 </Layout>
