@@ -463,6 +463,12 @@ export default function ScholarshipManager({ initialData }: Props) {
                   type="url"
                   value={form.url ?? ''}
                   onChange={e => setForm(f => ({ ...f, url: e.target.value }))}
+                  onBlur={e => {
+                    const v = e.target.value.trim()
+                    if (v && !v.startsWith('http://') && !v.startsWith('https://')) {
+                      setForm(f => ({ ...f, url: 'https://' + v }))
+                    }
+                  }}
                   placeholder="https://..."
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition"
                 />
