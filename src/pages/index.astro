@@ -10,7 +10,11 @@ const programs = await loadPrograms();
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
-const activeScholarships = scholarships.filter(s => s.active === true);
+const activeScholarships = scholarships.filter(s => {
+  if (!s.active) return false;
+  if (!s.deadline) return true;
+  return new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime();
+});
 const activeTotal = activeScholarships.reduce((sum, s) => { const m = s.amount.match(/\$?([\d,]+)/); const n = m ? parseInt(m[1].replace(/,/g, ''), 10) : NaN; return sum + (isNaN(n) ? 0 : n); }, 0);
 const researchCount = programs.filter(p => {
   if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') return true;
