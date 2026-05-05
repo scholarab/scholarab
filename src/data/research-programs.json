@@ -388,7 +388,8 @@
     "deadline": "TBA",
     "url": "https://schulich.ucalgary.ca/about/outreach/cybermentors",
     "description": "Program connecting high school girls with women in science and engineering at UCalgary. Fosters research and tech-focused development through mentorship, networking, and industry exposure.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-04",
+    "active": false
   },
   {
     "id": 26,
@@ -405,7 +406,8 @@
     "deadline": "TBA",
     "url": "https://www.ulethbridge.ca/future-students/high-school/destination-exploration",
     "description": "Intensive summer STEM camps and programs at ULethbridge that introduce high school students to university-level research facilities and methodologies. Covers science, technology, and campus life.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-04",
+    "active": false
   },
   {
     "id": 27,
@@ -439,7 +441,8 @@
     "deadline": "TBA",
     "url": "https://www.alberta.ca/junior-forest-rangers",
     "description": "Paid 7-week summer field work experience focusing on environmental science, forestry management, and conservation research. Work in Alberta's forests and wildlands under provincial supervision.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-04",
+    "active": false
   },
   {
     "id": 29,
@@ -488,9 +491,9 @@
     "location": "Waterloo, Ontario (in-person)",
     "eligibility": "Grade 11–12 Canadian and international students; highly competitive selection",
     "deadline": "TBA",
-    "url": "https://perimeterinstitute.ca/education/students/",
+    "url": "https://perimeterinstitute.ca/outreach/students",
     "description": "Highly competitive 2-week fully funded summer school at Perimeter Institute for exceptional Grade 11/12 physics students. Features lectures by world-leading theoretical physicists and hands-on research exposure.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-05"
   },
   {
     "id": 32,
@@ -590,9 +593,9 @@
     "location": "Province-wide (school-based, Alberta)",
     "eligibility": "Alberta high school students with interest in physics",
     "deadline": "TBA",
-    "url": "https://www.cap.ca/programs/medals-and-awards/awards-student/cap-high-school-prize-exam/",
+    "url": "https://cap.ca/programs/recognitions/high-school-students/cegep-prize-exam/cap-hs-prize-exam/",
     "description": "Annual national physics exam where top regional performers earn recognition and networking opportunities with university physics labs. Preparation involves deep independent physics research. Top Alberta students often receive connections to university physics programs.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-05"
   },
   {
     "id": 39,
@@ -743,9 +746,9 @@
     "location": "Alberta-wide (multiple regional sites)",
     "eligibility": "Alberta high school students; teams of 4–6",
     "deadline": "TBA",
-    "url": "https://www.apega.ca/about-apega/outreach",
+    "url": "https://www.apega.ca/educators-students/k-12/science-olympics",
     "description": "Province-wide engineering and geoscience competition where high school teams design innovative solutions to real-world STEM challenges, applying physics and engineering principles under timed conditions. Regional events feed into the provincial finals.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-05"
   },
   {
     "id": 49,
@@ -879,9 +882,9 @@
     "location": "University of Alberta (Edmonton) and University of Calgary",
     "eligibility": "High school students; apply through CMHF or school",
     "deadline": "TBA",
-    "url": "https://cdnmedhall.ca/education/",
+    "url": "https://cdnmedhall.ca/discoverydays",
     "description": "Full-day immersive experience in university health science labs and clinical settings. Students attend workshops and interact directly with health researchers at UAlberta or UCalgary, exploring careers in medicine and the health sciences.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-05"
   },
   {
     "id": 59,
@@ -1051,7 +1054,8 @@
     "deadline": "TBA",
     "url": "https://cheminst.ca/national-chemistry-olympiad/",
     "description": "Highest level of chemistry competition for Canadian youth. Preparation requires deep independent study in organic, inorganic, and physical chemistry far beyond the high school curriculum. Top students represent Canada at the International Chemistry Olympiad (IChO).",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-04",
+    "active": false
   },
   {
     "id": 72,
@@ -1066,9 +1070,9 @@
     "location": "School-based across Alberta (national exam)",
     "eligibility": "High school students at participating Alberta schools",
     "deadline": "TBA",
-    "url": "https://cemc.uwaterloo.ca/contests/sir-isaac-newton/",
+    "url": "https://uwaterloo.ca/sir-isaac-newton-exam/",
     "description": "Complex physics exam hosted by the University of Waterloo. The open-ended, challenging problems encourage months of independent study into advanced mechanics and theoretical physics. Top Alberta scorers are recognized nationally.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-05"
   },
   {
     "id": 73,
@@ -1406,9 +1410,9 @@
     "location": "Medicine Hat (in-person, MHC campus)",
     "eligibility": "Students in Southeast Alberta grades 7–12",
     "deadline": "TBA",
-    "url": "https://youthscience.ca/science-fairs/find-a-fair/",
+    "url": "https://youthscience.ca/science-fairs/regional-fairs/",
     "description": "The official regional science fair qualifier hosted at Medicine Hat College for Southeast Alberta. Top projects advance to the Canada-Wide Science Fair (CWSF). Distinct from the CWSF national event already in the directory.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-05"
   },
   {
     "id": 100,
@@ -1508,9 +1512,9 @@
     "location": "Vancouver, BC (in-person); open to Alberta applicants",
     "eligibility": "Grade 11–12 students across Canada; highly competitive; strong physics and math background",
     "deadline": "TBA",
-    "url": "https://triumf.ca/education/k-12/",
+    "url": "https://triumf.ca/education/",
     "description": "Highly prestigious 6-week summer research experience at Canada's particle accelerator centre. Students work alongside physicists on cutting-edge nuclear and particle physics research. Located in BC but accepts highly competitive Alberta applications.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-05"
   },
   {
     "id": 108,

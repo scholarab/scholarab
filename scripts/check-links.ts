@@ -11,8 +11,8 @@ const scholarships: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/dat
 const programs: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8'))
 
 const items = [
-  ...scholarships.map(s => ({ id: s.id, label: s.title ?? String(s.id), url: s.url })),
-  ...programs.map(p => ({ id: p.id, label: p.name ?? String(p.id), url: p.url })),
+  ...scholarships.filter(s => (s as Item & { active?: boolean }).active !== false).map(s => ({ id: s.id, label: s.title ?? String(s.id), url: s.url })),
+  ...programs.filter(p => (p as Item & { active?: boolean }).active !== false).map(p => ({ id: p.id, label: p.name ?? String(p.id), url: p.url })),
 ]
 
 type BrokenLink = { id: unknown; name: string; url: string; error: string }
