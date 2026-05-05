@@ -52,7 +52,11 @@ export const POST: APIRoute = async ({ request }) => {
     const [created] = await db.insert(researchPrograms).values(data).returning()
     return jsonOk(created, 201)
   } catch (e) {
-    if (e instanceof z.ZodError) return jsonError('Invalid request data', 400)
+    if (e instanceof z.ZodError) {
+      const detail = e.issues.map(i => `${i.path.join('.') || 'root'}: ${i.message}`).join('; ')
+      console.error('[POST /admin/api/programs] ZodError:', detail)
+      return jsonError(`Invalid request data — ${detail}`, 400)
+    }
     console.error('[POST /admin/api/programs]', e)
     return jsonError('Internal server error', 500)
   }
