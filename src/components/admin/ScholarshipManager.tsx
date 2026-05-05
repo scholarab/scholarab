@@ -442,6 +442,10 @@ export default function ScholarshipManager({ initialData }: Props) {
                   type="text"
                   value={form.amount ?? ''}
                   onChange={e => setForm(f => ({ ...f, amount: e.target.value }))}
+                  onBlur={e => {
+                    const v = e.target.value.trim()
+                    if (v && /^\d/.test(v)) setForm(f => ({ ...f, amount: '$' + v }))
+                  }}
                   placeholder="e.g. $2,500 or Varies"
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition"
                 />
