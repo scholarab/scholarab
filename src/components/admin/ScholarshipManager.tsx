@@ -24,7 +24,7 @@ type Scholarship = {
   updatedAt: string
 }
 
-const CATEGORIES = ['Arts', 'Business', 'Community', 'Engineering', 'General', 'Health', 'Indigenous', 'Science', 'Sports', 'Trades', 'Other']
+const CATEGORIES = ['Academic', 'Arts', 'Community', 'Environmental', 'General', 'Indigenous', 'STEM', 'Sports', 'Trades']
 const REGIONS = ['National', 'Alberta', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']
 
 interface Props {

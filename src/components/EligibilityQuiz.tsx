@@ -188,7 +188,8 @@ function MatchTile({
 // ── Main component ────────────────────────────────────────────────────────────
 
 function parseAmount(amount: string): number {
-  return parseInt(String(amount).replace(/[$,]/g, ''), 10) || 0
+  const m = String(amount).match(/\$[\d,]+/)
+  return m ? parseInt(m[0].replace(/[$,]/g, ''), 10) || 0 : 0
 }
 
 export default function EligibilityQuiz({ scholarships, programs }: Props) {
