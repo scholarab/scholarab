@@ -4,8 +4,16 @@ import type { APIRoute } from 'astro'
 import { db } from '../../lib/db/client'
 import { subscribers } from '../../lib/db/schema'
 import { eq } from 'drizzle-orm'
+import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
 
 export const GET: APIRoute = async ({ request }) => {
+  const ip = getClientIp(request)
+  try {
+    if (await isRateLimited(`unsub:${ip}`, 10, 15 * 60 * 1000))
+      return new Response('Too many requests — try again later', { status: 429 })
+    await recordHit(`unsub:${ip}`)
+  } catch { /* fail open if rate_limit table not yet migrated */ }
+
   const token = new URL(request.url).searchParams.get('token')
   if (!token) return new Response('Missing token', { status: 400 })
 

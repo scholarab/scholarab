@@ -5,10 +5,16 @@ import { db } from '../../lib/db/client'
 import { subscribers } from '../../lib/db/schema'
 import { loadScholarships, loadPrograms } from '../../lib/data-loader'
 import { jsonOk, jsonError } from '../../lib/api-response'
+import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export const POST: APIRoute = async ({ request }) => {
+  const ip = getClientIp(request)
+  try {
+    if (await isRateLimited(`alert:${ip}`, 20, 15 * 60 * 1000))
+      return jsonError('Too many requests — try again later', 429)
+  } catch { /* fail open if rate_limit table not yet migrated */ }
   let body: unknown
   try { body = await request.json() } catch { return jsonError('Invalid JSON', 400) }
 
@@ -57,5 +63,6 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonError('Internal server error', 500)
   }
 
+  recordHit(`alert:${ip}`).catch(() => {})
   return jsonOk({ ok: true })
 }

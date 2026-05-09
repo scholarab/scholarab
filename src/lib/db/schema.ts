@@ -60,6 +60,12 @@ export const subscribers = pgTable('subscribers', {
   uniqueIndex('subscribers_token_unique').on(t.token),
 ])
 
+export const rateLimit = pgTable('rate_limit', {
+  id: serial('id').primaryKey(),
+  key: text('key').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, t => [index('rate_limit_key_idx').on(t.key)])
+
 export const authRateLimit = pgTable('auth_rate_limit', {
   id: serial('id').primaryKey(),
   ip: text('ip').notNull(),
