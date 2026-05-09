@@ -20,6 +20,6 @@ if (isMobile) {
   <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
 </head>
 <body class="bg-[#0a0a0f] text-white min-h-screen flex items-center justify-center p-4">
-  <LoginForm client:load next={Astro.url.searchParams.get('next') || '/admin/scholarships'} />
+  <LoginForm client:load next={(() => { const v = Astro.url.searchParams.get('next') ?? ''; return v.startsWith('/admin') && !v.includes('://') ? v : '/admin/scholarships'; })()} />
 </body>
 </html>

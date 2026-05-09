@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.82.0",
-    "@astrojs/cloudflare": "^12.0.0",
+    "@astrojs/cloudflare": "^12.6.13",
     "@astrojs/react": "^5.0.1",
     "@neondatabase/serverless": "^1.0.2",
     "astro": "^6.0.8",
