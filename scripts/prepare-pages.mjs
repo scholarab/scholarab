@@ -1,15 +1,31 @@
-// Restructure v13 @astrojs/cloudflare output for CF Pages advanced mode.
+// Bundle the v13 @astrojs/cloudflare Worker into a single _worker.mjs for
+// CF Pages advanced mode, which requires a self-contained entry file.
 //
 // v13 generates:
 //   dist/client/  — static assets (served by ASSETS binding)
-//   dist/server/  — Worker (entry.mjs + chunks/)
+//   dist/server/  — Worker split into entry.mjs + chunks/
 //
-// CF Pages advanced mode needs _worker.mjs inside the deploy directory.
-// We copy the Worker entry + its dependencies into dist/client/ so that
-// `wrangler pages deploy dist/client` finds and uses _worker.mjs.
+// CF Pages advanced mode needs a single-file _worker.mjs in the deploy dir.
+// esbuild bundles entry.mjs (and all its chunk imports) into one file.
 
-import { copyFile, cp } from 'fs/promises'
+import { build } from 'esbuild'
 
-await copyFile('dist/server/entry.mjs', 'dist/client/_worker.mjs')
-await copyFile('dist/server/virtual_astro_middleware.mjs', 'dist/client/virtual_astro_middleware.mjs')
-await cp('dist/server/chunks', 'dist/client/chunks', { recursive: true, force: true })
+await build({
+  entryPoints: ['dist/server/entry.mjs'],
+  bundle: true,
+  outfile: 'dist/client/_worker.mjs',
+  format: 'esm',
+  platform: 'browser',  // Cloudflare Workers run in a browser-like environment
+  target: 'es2022',
+  // These are CF Workers / Node-compat built-ins — leave them as-is
+  external: [
+    'cloudflare:workers',
+    'cloudflare:sockets',
+    'node:*',
+    '__STATIC_CONTENT_MANIFEST',
+  ],
+  // Keep dynamic imports lazy (avoids bundling everything eagerly)
+  splitting: false,
+  minify: false,
+  logLevel: 'info',
+})
