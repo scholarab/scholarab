@@ -24,8 +24,8 @@ const researchCount = programs.filter(p => {
 const scholarshipCount = scholarships.filter(s => {
   const openMs = s.openDate ? new Date(s.openDate + 'T00:00:00').getTime() : 0;
   if (today.getTime() < openMs) return true;
-  const deadMs = s.deadline ? new Date(s.deadline + 'T00:00:00').getTime() : 0;
-  return today.getTime() <= deadMs;
+  if (!s.deadline) return true;
+  return today.getTime() <= new Date(s.deadline + 'T00:00:00').getTime();
 }).length;
 
 const ONE_WEEK_MS = CLOSING_SOON_MS;
