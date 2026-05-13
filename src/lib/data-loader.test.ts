@@ -26,10 +26,10 @@ describe('loadScholarships — JSON fallback', () => {
     }
   })
 
-  it('sets eligibility to null for all JSON items', async () => {
+  it('parses eligibility from JSON items (not null)', async () => {
     const { loadScholarships } = await import('./data-loader')
     const result = await loadScholarships()
-    expect(result.every(s => s.eligibility === null)).toBe(true)
+    expect(result.some(s => s.eligibility !== null)).toBe(true)
   })
 
   it('openDate is null or string for all items', async () => {
@@ -235,7 +235,7 @@ describe('parseEligibility — Zod schema via DB path', () => {
     const { loadScholarships } = await import('./data-loader')
     const result = await loadScholarships()
     expect(result.length).toBeGreaterThan(0)
-    expect(result.every(s => s.eligibility === null)).toBe(true)
+    expect(result.some(s => s.eligibility !== null)).toBe(true)
   })
 
   it('returns only the rows the DB provides (active filtering is done at DB level)', async () => {
