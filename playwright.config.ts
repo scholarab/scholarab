@@ -17,7 +17,7 @@ export default defineConfig({
   ],
   webServer: {
     // Requires dist/ to be built first: npm run build
-    command: 'npx wrangler pages dev dist --port 4321',
+    command: 'npx wrangler dev --config dist/server/wrangler.json --port 4321',
     url: 'http://localhost:4321',
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
