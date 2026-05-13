@@ -30,11 +30,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build
-          # Include .wrangler/deploy/ so wrangler can find dist/server/wrangler.json
-          # at deploy time (v13 @astrojs/cloudflare generates this redirect config)
-          path: |
-            dist/
-            .wrangler/deploy/
+          path: dist/
           retention-days: 1
 
   e2e:
@@ -54,7 +50,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build
-          path: .
+          path: dist
 
       - name: Install Playwright
         run: npx playwright install chromium --with-deps
@@ -79,7 +75,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build
-          path: .
+          path: dist
 
       - uses: cloudflare/wrangler-action@v3
         with:
