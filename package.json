@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "tsx scripts/validate-data.ts && tsx scripts/generate-sitemap.ts && astro build",
+    "build": "tsx scripts/validate-data.ts && tsx scripts/generate-sitemap.ts && astro build && node scripts/prepare-pages.mjs",
     "preview": "astro preview",
     "auto-expire": "tsx scripts/auto-expire.ts",
     "sitemap": "tsx scripts/generate-sitemap.ts",
