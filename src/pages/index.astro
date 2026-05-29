@@ -91,7 +91,7 @@ const closingSoon = scholarships
           Find my match →
         </a>
         <p style="font-size:13px;color:var(--text-tertiary);margin-top:4px;">
-          <span id="hero-count">{scholarshipCount}</span> scholarships · {researchCount} research programs
+          <span id="hero-count" data-deadlines={JSON.stringify(scholarships.map(s => ({ d: s.deadline, o: s.openDate })))}>{scholarshipCount}</span> scholarships · {researchCount} research programs
         </p>
       </div>
     </div>
@@ -190,12 +190,10 @@ const closingSoon = scholarships
   </div>
 </Layout>
 
-<script id="schol-deadlines" type="application/json" set:text={JSON.stringify(scholarships.map(s => ({ d: s.deadline, o: s.openDate })))} />
-
 <script>
   function updateScholarshipCount() {
-    const el = document.getElementById('hero-count');
-    const raw = document.getElementById('schol-deadlines')?.textContent;
+    const el = document.getElementById('hero-count') as HTMLElement | null;
+    const raw = el?.dataset.deadlines;
     if (!el || !raw) return;
     const data: { d: string | null; o: string | null }[] = JSON.parse(raw);
     const today = new Date();
