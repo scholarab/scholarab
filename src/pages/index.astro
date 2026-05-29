@@ -91,7 +91,7 @@ const closingSoon = scholarships
           Find my match →
         </a>
         <p style="font-size:13px;color:var(--text-tertiary);margin-top:4px;">
-          {scholarshipCount} scholarships · {researchCount} research programs
+          <span id="hero-count">{scholarshipCount}</span> scholarships · {researchCount} research programs
         </p>
       </div>
     </div>
@@ -190,7 +190,29 @@ const closingSoon = scholarships
   </div>
 </Layout>
 
+<script id="schol-deadlines" type="application/json" set:text={JSON.stringify(scholarships.map(s => ({ d: s.deadline, o: s.openDate })))} />
+
 <script>
+  function updateScholarshipCount() {
+    const el = document.getElementById('hero-count');
+    const raw = document.getElementById('schol-deadlines')?.textContent;
+    if (!el || !raw) return;
+    const data: { d: string | null; o: string | null }[] = JSON.parse(raw);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayMs = today.getTime();
+    const count = data.filter(s => {
+      const openMs = s.o ? new Date(s.o + 'T00:00:00').getTime() : 0;
+      if (todayMs < openMs) return true;
+      if (!s.d) return true;
+      return todayMs <= new Date(s.d + 'T00:00:00').getTime();
+    }).length;
+    el.textContent = String(count);
+  }
+
+  updateScholarshipCount();
+  document.addEventListener('astro:page-load', updateScholarshipCount);
+
   function startCounter() {
     const el = document.getElementById('hero-amount');
     if (!el) return;
