@@ -504,16 +504,28 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           {current.q}
         </h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {current.opts.map((opt, i) => (
-            <MatchTile
-              key={opt.value + i}
-              label={opt.label}
-              delay={i * 50}
-              onClick={() => answer(current.key, opt.value)}
-            />
-          ))}
-        </div>
+        {(() => {
+          const useGrid = current.opts.length >= 4;
+          return (
+            <div style={useGrid
+              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10 }
+              : { display: 'flex', flexDirection: 'column', gap: 10 }
+            }>
+              {current.opts.map((opt, i) => {
+                const spanFull = useGrid && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
+                return (
+                  <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1' } : undefined}>
+                    <MatchTile
+                      label={opt.label}
+                      delay={i * 50}
+                      onClick={() => answer(current.key, opt.value)}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })()}
       </div>
 
       {/* Back button */}
