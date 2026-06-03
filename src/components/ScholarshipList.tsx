@@ -1,9 +1,9 @@
 import { useMemo, useEffect } from 'react';
-import { useScholarships } from '../hooks/useScholarships.ts';
-import ScholarshipCard from './ScholarshipCard.tsx';
+import { useScholarships } from '../hooks/useItems.ts';
+import { ScholarshipCard } from './ItemCard.tsx';
 import Pagination from './Pagination.tsx';
 import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
-import type { ScholarshipWithMeta, StatusFilter } from '../hooks/useScholarships.ts';
+import type { ScholarshipWithMeta, StatusFilter } from '../hooks/useItems.ts';
 import { SCHOLARSHIP_BADGES } from '../lib/badges.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
 

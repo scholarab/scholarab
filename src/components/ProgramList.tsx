@@ -1,9 +1,9 @@
 import { useMemo, useEffect } from 'react';
-import { usePrograms, getStatus } from '../hooks/usePrograms.ts';
-import ProgramCard from './ProgramCard.tsx';
+import { usePrograms, getProgramStatus as getStatus } from '../hooks/useItems.ts';
+import { ProgramCard } from './ItemCard.tsx';
 import Pagination from './Pagination.tsx';
 import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
-import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
+import type { ProgramWithMeta } from '../hooks/useItems.ts';
 import { PROGRAM_BADGES } from '../lib/badges.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
 

@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
-import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
-import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
+import type { ScholarshipWithMeta, ProgramWithMeta } from '../hooks/useItems.ts';
 
 type DeadlineItem = { title: string; url: string; amount?: string; type: 'scholarship' | 'program' };
 

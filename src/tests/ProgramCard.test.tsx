@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest'
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
-import ProgramCard from '../components/ProgramCard'
-import type { ProgramWithMeta } from '../hooks/usePrograms'
+import { ProgramCard } from '../components/ItemCard'
+import type { ProgramWithMeta } from '../hooks/useItems'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 

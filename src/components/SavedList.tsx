@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect, useMemo, lazy, Suspense } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
 import { formatDeadline, showToast, getToday } from '../lib/utils.ts';
-import { getStatus } from '../hooks/useScholarships.ts';
-import type { ScholarshipWithMeta } from '../hooks/useScholarships.ts';
-import type { ProgramWithMeta } from '../hooks/usePrograms.ts';
+import { getScholarshipStatus as getStatus } from '../hooks/useItems.ts';
+import type { ScholarshipWithMeta, ProgramWithMeta } from '../hooks/useItems.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
 
 const DeadlineCalendar = lazy(() => import('./DeadlineCalendar.tsx'));

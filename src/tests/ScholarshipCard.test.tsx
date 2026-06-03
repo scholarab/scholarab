@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest'
 import { render, screen, fireEvent, cleanup } from '@testing-library/react'
-import ScholarshipCard from '../components/ScholarshipCard'
-import type { ScholarshipWithMeta } from '../hooks/useScholarships'
+import { ScholarshipCard } from '../components/ItemCard'
+import type { ScholarshipWithMeta } from '../hooks/useItems'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
