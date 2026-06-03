@@ -40,7 +40,9 @@ const lines: string[] = [
   urlEntry(`${BASE}/`, '1.0'),
   urlEntry(`${BASE}/scholarships`, '0.9'),
   urlEntry(`${BASE}/programs`, '0.9'),
+  urlEntry(`${BASE}/match`, '0.9'),
   urlEntry(`${BASE}/about`, '0.8'),
+  urlEntry(`${BASE}/educators`, '0.7'),
   ...scholarships.map((s) => urlEntry(`${BASE}/scholarships/${generateSlug(s.title)}`, '0.85')),
   ...programs.map((p) => urlEntry(`${BASE}/programs/${generateSlug(p.name)}`, '0.85')),
   '</urlset>',
@@ -48,5 +50,5 @@ const lines: string[] = [
 
 const outPath = join(__dirname, '../public/sitemap.xml');
 writeFileSync(outPath, `${lines.join('\n')}\n`, 'utf8');
-const n = 5 + scholarships.length + programs.length;
+const n = 7 + scholarships.length + programs.length;
 console.log(`Wrote ${outPath} (${n} URLs)`);

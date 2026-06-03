@@ -51,8 +51,6 @@ export type Program = {
   active: boolean
 }
 
-const CACHE_TTL = CACHE_TTL_MS
-
 let scholarshipCache: { data: Scholarship[]; exp: number } | null = null
 let programCache:     { data: Program[];     exp: number } | null = null
 
@@ -94,7 +92,7 @@ export async function loadScholarships(): Promise<Scholarship[]> {
         active: r.active ?? true,
         eligibility: parseEligibility(r.eligibility),
       }))
-      scholarshipCache = { data: result, exp: Date.now() + CACHE_TTL }
+      scholarshipCache = { data: result, exp: Date.now() + CACHE_TTL_MS }
       return result
     } catch (e) {
       console.error('DB load failed, falling back to JSON:', e)
@@ -147,7 +145,7 @@ export async function loadPrograms(): Promise<Program[]> {
         lastVerified: r.lastVerified ?? null,
         active: r.active ?? true,
       }))
-      programCache = { data: result, exp: Date.now() + CACHE_TTL }
+      programCache = { data: result, exp: Date.now() + CACHE_TTL_MS }
       return result
     } catch (e) {
       console.error('DB load failed, falling back to JSON:', e)

@@ -28,12 +28,11 @@ const scholarshipCount = scholarships.filter(s => {
   return today.getTime() <= new Date(s.deadline + 'T00:00:00').getTime();
 }).length;
 
-const ONE_WEEK_MS = CLOSING_SOON_MS;
 const closingSoon = scholarships
   .filter(s => {
     if (!s.deadline || !s.active) return false;
     const deadlineMs = new Date(s.deadline + 'T00:00:00').getTime();
-    return deadlineMs >= today.getTime() && deadlineMs <= today.getTime() + ONE_WEEK_MS;
+    return deadlineMs >= today.getTime() && deadlineMs <= today.getTime() + CLOSING_SOON_MS;
   })
   .sort((a, b) => new Date(a.deadline! + 'T00:00:00').getTime() - new Date(b.deadline! + 'T00:00:00').getTime())
   .slice(0, 5);
