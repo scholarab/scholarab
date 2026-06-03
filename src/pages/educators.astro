@@ -2,8 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 
-const scholarships = await loadScholarships();
-const programs = await loadPrograms();
+const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
 const activeScholarships = scholarships.filter(s => s.active).length;
 const activePrograms = programs.filter(p => p.active).length;
 

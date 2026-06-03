@@ -51,6 +51,13 @@
     font-display: swap;
     src: url('/fonts/inter-700.woff2') format('woff2');
   }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/fonts/inter-800.woff2') format('woff2');
+  }
 }
 
 /* ── Theme tokens ──────────────────────────────────────────── */
@@ -207,10 +214,6 @@ body {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%       { opacity: 0.5; transform: scale(1.5); }
 }
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 @keyframes sabSlideUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -274,8 +277,6 @@ h1, h2 {
   border: 0.5px solid var(--border-card);
   border-radius: 16px;
   contain: layout style;
-  box-shadow: var(--card-shadow);
-  /* inner highlight */
   box-shadow: var(--card-shadow), 0 1px 0 rgba(255,255,255,0.05) inset;
 }
 html.theme-light .card {
