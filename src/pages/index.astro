@@ -112,7 +112,7 @@ const closingSoon = scholarships
             return (
               <a
                 href={`/scholarships/${generateSlug(s.title)}`}
-                class="card card-interactive flex items-center justify-between gap-4 px-4 py-3.5 flex-shrink-0 md:flex-shrink"
+                class="card card-interactive flex items-center justify-between gap-4 px-4 py-3.5 shrink-0 md:shrink"
                 style="min-width:280px;scroll-snap-align:start;padding-left:18px;position:relative;"
                 data-deadline={s.deadline}
               >
@@ -121,7 +121,7 @@ const closingSoon = scholarships
                   <p class="text-sm font-semibold text-primary truncate">{s.title}</p>
                   {s.audience && <p class="text-xs text-tertiary mt-0.5 truncate">{s.audience}</p>}
                 </div>
-                <div class="flex items-center gap-3 flex-shrink-0">
+                <div class="flex items-center gap-3 shrink-0">
                   <p class="text-sm font-bold text-brand" style="font-variant-numeric:tabular-nums;">{s.amount}</p>
                   <span class="closing-soon-badge text-xs font-semibold px-2.5 py-1 rounded-full border bg-amber-400/10 text-amber-400 border-amber-400/25">
                     &hellip;

@@ -139,7 +139,7 @@ export default function ProgramManager({ initialData }: Props) {
         value={(form[key] as string) ?? ''}
         onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
         rows={3}
-        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition resize-none"
+        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition resize-none"
       />
     </div>
   )
@@ -162,7 +162,7 @@ export default function ProgramManager({ initialData }: Props) {
         placeholder="Search programs…"
         value={search}
         onChange={handleSearch}
-        className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-none focus:border-[#22d3a5]/50 transition"
+        className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
       />
 
       {/* Category tabs */}
@@ -188,10 +188,10 @@ export default function ProgramManager({ initialData }: Props) {
         })}
       </div>
 
-      <div className="border border-white/[0.06] rounded-xl overflow-hidden">
+      <div className="border border-white/6 rounded-xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/[0.06] text-white/40 text-xs uppercase">
+            <tr className="border-b border-white/6 text-white/40 text-xs uppercase">
               <th className="text-left px-4 py-3 font-medium">Name</th>
               <th className="text-left px-4 py-3 font-medium">Provider</th>
               <th className="text-left px-4 py-3 font-medium">Grades</th>
@@ -203,7 +203,7 @@ export default function ProgramManager({ initialData }: Props) {
           </thead>
           <tbody>
             {paginated.map((p, i) => (
-              <tr key={p.id} className={`border-b border-white/[0.04] hover:bg-white/[0.02] transition ${i % 2 === 0 ? '' : 'bg-white/[0.01]'}`}>
+              <tr key={p.id} className={`border-b border-white/4 hover:bg-white/2 transition ${i % 2 === 0 ? '' : 'bg-white/1'}`}>
                 <td className="px-4 py-3 font-medium max-w-xs truncate">
                   {p.emoji && <span className="mr-1.5">{p.emoji}</span>}
                   {p.name}
@@ -271,14 +271,14 @@ export default function ProgramManager({ initialData }: Props) {
                 <label className="block text-sm text-white/70 mb-1.5">Program name *</label>
                 <input type="text" value={form.name ?? ''} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   placeholder="e.g. SHAD Canada"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               </div>
 
               <div>
                 <label className="block text-sm text-white/70 mb-1.5">Organization / Institution</label>
                 <input type="text" value={form.provider ?? ''} onChange={e => setForm(f => ({ ...f, provider: e.target.value }))}
                   placeholder="e.g. University of Alberta"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               </div>
 
               <div>
@@ -291,20 +291,20 @@ export default function ProgramManager({ initialData }: Props) {
                     }
                   }}
                   placeholder="https://..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-sm text-white/70 mb-1.5">Application deadline</label>
                   <input type="date" value={form.deadline ?? ''} onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <div>
                   <label className="block text-sm text-white/70 mb-1.5">Grade levels</label>
                   <input type="text" value={form.grades ?? ''} onChange={e => setForm(f => ({ ...f, grades: e.target.value }))}
                     placeholder="e.g. Grade 10–12"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
               </div>
 
@@ -312,7 +312,7 @@ export default function ProgramManager({ initialData }: Props) {
                 <label className="block text-sm text-white/70 mb-1.5">Location</label>
                 <input type="text" value={form.location ?? ''} onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
                   placeholder="e.g. Edmonton, AB or Online"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               </div>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -322,7 +322,7 @@ export default function ProgramManager({ initialData }: Props) {
               {form.paid && (
                 <input type="text" value={form.stipend ?? ''} onChange={e => setForm(f => ({ ...f, stipend: e.target.value }))}
                   placeholder="Stipend amount (e.g. $5,000)"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               )}
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -342,11 +342,11 @@ export default function ProgramManager({ initialData }: Props) {
             </button>
 
             {showAdvanced && (
-              <div className="mt-3 space-y-3 border-t border-white/[0.06] pt-4">
+              <div className="mt-3 space-y-3 border-t border-white/6 pt-4">
                 <div>
                   <label className="block text-xs text-white/50 mb-1">Category</label>
                   <select value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50">
+                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
                     <option value="">Select</option>
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
@@ -355,19 +355,19 @@ export default function ProgramManager({ initialData }: Props) {
                   <label className="block text-xs text-white/50 mb-1">Duration</label>
                   <input type="text" value={form.duration ?? ''} onChange={e => setForm(f => ({ ...f, duration: e.target.value }))}
                     placeholder="e.g. 4 weeks"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <div>
                   <label className="block text-xs text-white/50 mb-1">Eligibility requirements</label>
                   <input type="text" value={form.eligibility ?? ''} onChange={e => setForm(f => ({ ...f, eligibility: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 {textarea('description', 'Description')}
                 <div>
                   <label className="block text-xs text-white/50 mb-1">Emoji icon</label>
                   <input type="text" value={form.emoji ?? ''} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))}
                     placeholder="e.g. 🔬"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
               </div>
             )}

@@ -57,10 +57,10 @@ export default function AdminShell({ user, page, data }: Props) {
       <Toaster richColors position="top-right" />
 
       {/* Sidebar */}
-      <aside className="w-56 bg-[#0a0a0f] border-r border-white/[0.06] flex flex-col p-4 gap-2 fixed h-full z-10">
+      <aside className="w-56 bg-[#0a0a0f] border-r border-white/6 flex flex-col p-4 gap-2 fixed h-full z-10">
         <div className="mb-4 px-2">
           <span className="text-lg font-bold">Scholar<span style={{color:'#22d3a5'}}>AB</span></span>
-          <span className="ml-2 text-xs text-white/30 border border-white/10 rounded px-1.5 py-0.5">Admin</span>
+          <span className="ml-2 text-xs text-white/30 border border-white/10 rounded-sm px-1.5 py-0.5">Admin</span>
         </div>
 
         <nav className="flex flex-col gap-1 flex-1">
@@ -78,7 +78,7 @@ export default function AdminShell({ user, page, data }: Props) {
           </a>
         </nav>
 
-        <div className="border-t border-white/[0.06] pt-4 space-y-3">
+        <div className="border-t border-white/6 pt-4 space-y-3">
           <button
             onClick={handleDeploy}
             disabled={deploying}

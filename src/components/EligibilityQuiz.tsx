@@ -405,7 +405,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                         <button
                           onClick={(e) => handleToggleSave(s.id, e.currentTarget)}
                           aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
-                          className={`flex items-center justify-center flex-shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${savedIds.has(s.id) ? 'text-brand border border-brand-border' : 'text-secondary border border-card'}`}
+                          className={`flex items-center justify-center shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${savedIds.has(s.id) ? 'text-brand border border-brand-border' : 'text-secondary border border-card'}`}
                           style={{ width: 28, height: 28, background: savedIds.has(s.id) ? 'var(--brand-dim)' : undefined }}
                         >
                           <svg width="12" height="12" viewBox="0 0 24 24" fill={savedIds.has(s.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>

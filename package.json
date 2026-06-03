@@ -18,17 +18,17 @@
     "type-check": "astro check"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.95.1",
-    "@astrojs/cloudflare": "^12.6.13",
+    "@anthropic-ai/sdk": "^0.100.1",
+    "@astrojs/cloudflare": "^13.6.1",
     "@astrojs/react": "^5.0.1",
     "@neondatabase/serverless": "^1.0.2",
+    "@tailwindcss/postcss": "^4.3.0",
     "astro": "^6.0.8",
-    "autoprefixer": "^10.4.27",
     "drizzle-orm": "^0.45.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sonner": "^2.0.7",
-    "tailwindcss": "^3.4.15",
+    "tailwindcss": "^4.3.0",
     "vaul": "^1.1.2",
     "zod": "^4.3.6"
   },

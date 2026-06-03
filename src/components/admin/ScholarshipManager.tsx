@@ -320,7 +320,7 @@ export default function ScholarshipManager({ initialData }: Props) {
         placeholder="Search scholarships…"
         value={search}
         onChange={handleSearch}
-        className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-none focus:border-[#22d3a5]/50 transition"
+        className="w-full max-w-sm bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm text-white mb-4 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
       />
 
       {/* Region tabs */}
@@ -347,10 +347,10 @@ export default function ScholarshipManager({ initialData }: Props) {
       </div>
 
       {/* Table */}
-      <div className="border border-white/[0.06] rounded-xl overflow-hidden">
+      <div className="border border-white/6 rounded-xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/[0.06] text-white/40 text-xs uppercase">
+            <tr className="border-b border-white/6 text-white/40 text-xs uppercase">
               <th className="text-left px-4 py-3 font-medium">Title</th>
               <th className="text-left px-4 py-3 font-medium">Amount</th>
               <th className="text-left px-4 py-3 font-medium">Deadline</th>
@@ -362,7 +362,7 @@ export default function ScholarshipManager({ initialData }: Props) {
           </thead>
           <tbody>
             {paginated.map((s, i) => (
-              <tr key={s.id} className={`border-b border-white/[0.04] hover:bg-white/[0.02] transition ${i % 2 === 0 ? '' : 'bg-white/[0.01]'}`}>
+              <tr key={s.id} className={`border-b border-white/4 hover:bg-white/2 transition ${i % 2 === 0 ? '' : 'bg-white/1'}`}>
                 <td className="px-4 py-3 font-medium max-w-xs truncate">{s.title}</td>
                 <td className="px-4 py-3 text-white/60">{s.amount}</td>
                 <td className="px-4 py-3 text-white/60">{s.deadline || ''}</td>
@@ -432,7 +432,7 @@ export default function ScholarshipManager({ initialData }: Props) {
                   value={form.title ?? ''}
                   onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
                   placeholder="e.g. Alexander Rutherford Scholarship"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
                 />
               </div>
 
@@ -447,7 +447,7 @@ export default function ScholarshipManager({ initialData }: Props) {
                     if (v && /^\d/.test(v)) setForm(f => ({ ...f, amount: '$' + v }))
                   }}
                   placeholder="e.g. $2,500 or Varies"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
                 />
               </div>
 
@@ -457,7 +457,7 @@ export default function ScholarshipManager({ initialData }: Props) {
                   type="date"
                   value={form.deadline ?? ''}
                   onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition"
                 />
               </div>
 
@@ -474,7 +474,7 @@ export default function ScholarshipManager({ initialData }: Props) {
                     }
                   }}
                   placeholder="https://..."
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition"
                 />
               </div>
 
@@ -482,7 +482,7 @@ export default function ScholarshipManager({ initialData }: Props) {
                 <div>
                   <label className="block text-sm text-white/70 mb-1.5">Category</label>
                   <select value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50">
+                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
                     <option value="">Select</option>
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
@@ -490,7 +490,7 @@ export default function ScholarshipManager({ initialData }: Props) {
                 <div>
                   <label className="block text-sm text-white/70 mb-1.5">Region</label>
                   <select value={form.region ?? ''} onChange={e => setForm(f => ({ ...f, region: e.target.value }))}
-                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50">
+                    className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
                     <option value="">Select</option>
                     {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
                   </select>
@@ -514,22 +514,22 @@ export default function ScholarshipManager({ initialData }: Props) {
             </button>
 
             {showAdvanced && (
-              <div className="mt-3 space-y-3 border-t border-white/[0.06] pt-4">
+              <div className="mt-3 space-y-3 border-t border-white/6 pt-4">
                 <div>
                   <label className="block text-xs text-white/50 mb-1">Who can apply? (Audience)</label>
                   <input type="text" value={form.audience ?? ''} onChange={e => setForm(f => ({ ...f, audience: e.target.value }))}
                     placeholder="e.g. Grade 12 students, First Nations youth"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <div>
                   <label className="block text-xs text-white/50 mb-1">Notes</label>
                   <input type="text" value={form.notes ?? ''} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <div>
                   <label className="block text-xs text-white/50 mb-1">Applications open date</label>
                   <input type="date" value={form.openDate ?? ''} onChange={e => setForm(f => ({ ...f, openDate: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#22d3a5]/50 transition" />
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <label className="flex items-center gap-2 text-sm cursor-pointer">
                   <input type="checkbox" checked={form.applyViaGuidance ?? false} onChange={e => setForm(f => ({ ...f, applyViaGuidance: e.target.checked }))} className="accent-[#22d3a5]" />
@@ -539,7 +539,7 @@ export default function ScholarshipManager({ initialData }: Props) {
             )}
 
             {/* ── Eligibility toggle ── */}
-            <div className="mt-4 border-t border-white/[0.06] pt-4">
+            <div className="mt-4 border-t border-white/6 pt-4">
               <div className="flex items-center justify-between">
                 <button
                   type="button"
@@ -548,7 +548,7 @@ export default function ScholarshipManager({ initialData }: Props) {
                 >
                   <span>{showEligibility ? '▾' : '▸'}</span>
                   {showEligibility ? 'Hide eligibility criteria' : 'Show eligibility criteria'}
-                  {form.eligibility && <span className="ml-2 px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400">Tagged</span>}
+                  {form.eligibility && <span className="ml-2 px-1.5 py-0.5 rounded-sm bg-blue-500/15 text-blue-400">Tagged</span>}
                 </button>
                 {modal?.type === 'edit' && modal.item?.audience && (
                   <button
@@ -563,7 +563,7 @@ export default function ScholarshipManager({ initialData }: Props) {
               </div>
 
               {showEligibility && (
-                <div className="mt-3 space-y-3 p-3 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                <div className="mt-3 space-y-3 p-3 rounded-lg bg-white/2 border border-white/6">
                   <EligibilityEditor
                     value={form.eligibility ?? EMPTY_ELIGIBILITY}
                     onChange={e => setForm(f => ({ ...f, eligibility: e }))}

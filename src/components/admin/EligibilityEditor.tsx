@@ -58,7 +58,7 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
             onChange={e => set({ minAverage: e.target.value ? parseInt(e.target.value, 10) : null })}
             placeholder="e.g. 75"
             min={0} max={100}
-            className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-white text-xs focus:outline-none focus:border-[#22d3a5]/50"
+            className="w-full bg-white/5 border border-white/10 rounded-sm px-2 py-1 text-white text-xs focus:outline-hidden focus:border-[#22d3a5]/50"
           />
         </div>
         <div>
@@ -69,7 +69,7 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
             onChange={e => set({ maxFamilyIncome: e.target.value ? parseInt(e.target.value, 10) : null })}
             placeholder="e.g. 65000"
             min={0}
-            className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-white text-xs focus:outline-none focus:border-[#22d3a5]/50"
+            className="w-full bg-white/5 border border-white/10 rounded-sm px-2 py-1 text-white text-xs focus:outline-hidden focus:border-[#22d3a5]/50"
           />
         </div>
       </div>
@@ -115,7 +115,7 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
         <select
           value={value.citizenship}
           onChange={e => set({ citizenship: e.target.value as EligibilityCriteria['citizenship'] })}
-          className="bg-[#1a1a24] border border-white/10 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-[#22d3a5]/50"
+          className="bg-[#1a1a24] border border-white/10 rounded-sm px-2 py-1 text-xs text-white focus:outline-hidden focus:border-[#22d3a5]/50"
         >
           <option value="any">Any</option>
           <option value="canadian">Canadian citizens</option>

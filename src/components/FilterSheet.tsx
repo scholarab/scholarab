@@ -15,14 +15,14 @@ interface FilterButtonProps {
 export function FilterButton({ count, label, hasActiveFilters, open, onOpen }: FilterButtonProps) {
   return (
     <div className="md:hidden mb-5 flex items-center justify-between gap-3">
-      <p className="text-sm text-faint flex-shrink-0">
+      <p className="text-sm text-faint shrink-0">
         {count} {label}{count !== 1 ? 's' : ''}
       </p>
       <button
         onClick={onOpen}
         aria-expanded={open}
         aria-label="Open filters"
-        className="relative flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium border transition-colors"
+        className="relative shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium border transition-colors"
         style={{ borderColor: hasActiveFilters ? 'var(--brand-border)' : 'var(--border-medium)', color: hasActiveFilters ? 'var(--brand)' : 'var(--text-secondary)', background: hasActiveFilters ? 'var(--brand-dim)' : 'transparent' }}>
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M2 3h12M5 8h6M7 13h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
@@ -45,7 +45,7 @@ interface CategoryChipsProps {
 }
 
 export function CategoryChips({ categories, selected, onSelect, badges, mobile }: CategoryChipsProps) {
-  const btnCls = `flex-shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 ${mobile ? 'py-1.5' : 'py-1'} text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border`;
+  const btnCls = `shrink-0 inline-flex items-center gap-1 rounded-lg px-2.5 ${mobile ? 'py-1.5' : 'py-1'} text-xs font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border`;
   return (
     <>
       <button onClick={() => onSelect('all')} aria-pressed={selected === 'all'}
@@ -85,12 +85,12 @@ export function FilterSheet({ open, onOpenChange, children }: FilterSheetProps) 
   return (
     <Drawer.Root open={open} onOpenChange={onOpenChange}>
       <Drawer.Portal>
-        <Drawer.Overlay className="fixed inset-0 z-40 md:hidden bg-black/[0.45] backdrop-blur-sm" />
+        <Drawer.Overlay className="fixed inset-0 z-40 md:hidden bg-black/45 backdrop-blur-xs" />
         <Drawer.Content
           aria-label="Filter and sort options"
-          className="fixed left-0 right-0 z-50 md:hidden rounded-t-2xl flex flex-col outline-none"
+          className="fixed left-0 right-0 z-50 md:hidden rounded-t-2xl flex flex-col outline-hidden"
           style={{ bottom: 64, backgroundColor: 'var(--bg-card)', boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
-          <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-subtle flex-shrink-0">
+          <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-subtle shrink-0">
             <span className="font-semibold text-primary text-base">Filter & Sort</span>
             <button onClick={() => onOpenChange(false)} aria-label="Close"
               className="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-subtle transition-colors">
@@ -102,7 +102,7 @@ export function FilterSheet({ open, onOpenChange, children }: FilterSheetProps) 
           <div className="overflow-y-auto flex-1 px-5 py-5 space-y-6">
             {children}
           </div>
-          <div className="flex-shrink-0 px-5 py-4 border-t border-subtle"
+          <div className="shrink-0 px-5 py-4 border-t border-subtle"
             style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
             <button onClick={() => onOpenChange(false)}
               className="w-full py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"

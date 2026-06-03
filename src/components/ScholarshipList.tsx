@@ -20,7 +20,7 @@ const SORT_OPTIONS = [
   { value: 'lowest_pay',  label: 'Lowest Amount' },
 ] as const;
 
-const pillBase  = 'flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
+const pillBase  = 'shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
 const pillOn    = 'text-brand border-brand-border bg-brand-dim';
 const pillOff   = 'bg-subtle text-secondary border-card';
 
@@ -91,7 +91,7 @@ function ScholarshipList({ items }: Props) {
                 : undefined;
               return (
                 <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                  className={`flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? (color ? 'region-pill-active' : '') : 'bg-subtle text-secondary border border-card hover:border-medium'}`}
+                  className={`shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? (color ? 'region-pill-active' : '') : 'bg-subtle text-secondary border border-card hover:border-medium'}`}
                   style={selStyle}>
                   {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', marginRight: 4, flexShrink: 0 }} />}
                   {label}
@@ -104,8 +104,8 @@ function ScholarshipList({ items }: Props) {
 
       {/* Desktop: count + status chips + sort pills */}
       <div className="hidden md:flex mb-5 items-center justify-between gap-4 flex-wrap">
-        <div className="flex items-center gap-3 flex-shrink-0 flex-wrap">
-          <p className="text-sm text-faint flex-shrink-0">
+        <div className="flex items-center gap-3 shrink-0 flex-wrap">
+          <p className="text-sm text-faint shrink-0">
             {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
           </p>
           <div className="flex items-center gap-1">

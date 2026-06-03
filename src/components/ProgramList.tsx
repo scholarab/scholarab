@@ -51,7 +51,7 @@ function ProgramList({ items }: Props) {
 
       {/* Desktop: count */}
       <div className="hidden md:flex mb-5 items-center justify-between gap-4">
-        <p className="text-sm text-faint flex-shrink-0">{filtered.length} program{filtered.length !== 1 ? 's' : ''}</p>
+        <p className="text-sm text-faint shrink-0">{filtered.length} program{filtered.length !== 1 ? 's' : ''}</p>
       </div>
 
       {/* Mobile bottom sheet */}

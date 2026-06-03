@@ -68,11 +68,11 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
 
         <div className="pt-4 grid grid-cols-2 gap-2 border-t border-subtle">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Eligibility</p>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-1 text-tertiary">Eligibility</p>
             <p className="text-xs leading-snug text-secondary">{program.eligibility}</p>
           </div>
           <div className="text-right flex flex-col items-end overflow-hidden">
-            <p className="text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-tertiary">Deadline</p>
+            <p className="text-xs font-semibold uppercase tracking-widest mb-1 text-tertiary">Deadline</p>
             <p className={`text-sm font-medium ${deadlineColor}`} style={deadlineUrgent ? { color: 'var(--color-urgent)' } : undefined}>
               {program.deadline === 'Ongoing' ? 'Ongoing' : formatDeadline(program.deadline)}
             </p>
@@ -99,7 +99,7 @@ export default function ProgramCard({ program, index, isSaved, onToggleSave, isF
           ref={saveBtnRef}
           onClick={() => { if (!isSaved) showConfetti(saveBtnRef.current); showToast(isSaved ? 'Removed from saved' : 'Saved ✓'); onToggleSave(); }}
           aria-label={isSaved ? 'Remove from saved' : 'Save program'}
-          className={`flex items-center justify-center flex-shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-brand border border-[rgba(var(--brand-rgb),0.4)]' : 'text-secondary border border-strong'}`}
+          className={`flex items-center justify-center shrink-0 rounded-[10px] cursor-pointer transition-all duration-150 ${isSaved ? 'text-brand border border-[rgba(var(--brand-rgb),0.4)]' : 'text-secondary border border-strong'}`}
           style={{ width: 44, background: isSaved ? 'var(--brand-dim)' : undefined }}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
