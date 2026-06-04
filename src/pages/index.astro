@@ -72,7 +72,7 @@ const closingSoon = scholarships
 
         <!-- Hero amount -->
         <p class="hero-amount tnum mb-10">
-          $<span id="hero-amount" data-target={activeTotal}>0</span>+ open right now
+          ${activeTotal.toLocaleString('en-CA')}+ open right now
         </p>
 
         <!-- CTA buttons -->
@@ -203,37 +203,6 @@ const closingSoon = scholarships
 
   updateScholarshipCount();
   document.addEventListener('astro:page-load', updateScholarshipCount);
-
-  function startCounter() {
-    const el = document.getElementById('hero-amount');
-    if (!el) return;
-    const target = parseInt((el as HTMLElement).dataset.target ?? '0', 10);
-    if (!target) return;
-
-    const final = target.toLocaleString('en-CA');
-
-    if (sessionStorage.getItem('hero-animated')) {
-      el.textContent = final;
-      return;
-    }
-
-    sessionStorage.setItem('hero-animated', '1');
-    const duration = 2200;
-    const startTime = performance.now();
-
-    function step(now: number) {
-      const t = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 4);
-      const value = Math.round(eased * target);
-      el!.textContent = value.toLocaleString('en-CA');
-      if (t < 1) requestAnimationFrame(step);
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  startCounter();
-  document.addEventListener('astro:page-load', startCounter);
 
   function updateClosingSoon() {
     const list = document.getElementById('closing-soon-list');
