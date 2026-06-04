@@ -76,7 +76,16 @@ function ProgramList({ items }: Props) {
       <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
 
       {filtered.length === 0 && (
-        <p className="text-center py-16 text-faint">No programs match your filters.</p>
+        <div className="empty-state">
+          <span className="ico" aria-hidden="true">🔬</span>
+          <p className="font-semibold text-primary mb-2">No programs match your filters</p>
+          <p className="text-sm text-secondary mb-6">Try a different category.</p>
+          {hasActiveFilters && (
+            <button className="empty-clear" onClick={() => setCategory(null)}>
+              Clear filters
+            </button>
+          )}
+        </div>
       )}
     </div>
   );

@@ -569,3 +569,135 @@ html.theme-light .bg-blue-500\/15 {
 html.theme-light .border-blue-500\/30 {
   border-color: rgba(29, 78, 216, 0.35) !important;
 }
+
+/* ── Card bloom — top color gradient tint ─────────────────────── */
+.card-bloom::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 44px;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(to bottom, var(--bloom-color, transparent) 0%, transparent 100%);
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* ── Meta label (Eligibility / Deadline headers in cards) ───────── */
+.meta-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+
+/* ── Countdown with colored dot ──────────────────────────────────── */
+.countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.countdown .cdot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Bookmark pop micro-animation ────────────────────────────────── */
+@keyframes bmkPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+.bmk-btn.pop {
+  animation: bmkPop 150ms ease;
+}
+
+/* ── Stipend pill ────────────────────────────────────────────────── */
+.stipend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--brand-dim);
+  border: 1px solid var(--brand-border);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--brand);
+  letter-spacing: -0.02em;
+}
+
+/* ── Eyebrow section label ───────────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.eyebrow .ebdot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--brand);
+  flex-shrink: 0;
+}
+
+/* ── Freshness indicator ─────────────────────────────────────────── */
+.freshness {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+/* ── Empty state (no results) ────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 64px 16px;
+}
+.empty-state .ico {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 14px;
+  line-height: 1;
+}
+.empty-clear {
+  display: inline-flex;
+  align-items: center;
+  background: var(--brand);
+  color: #0a0a0f;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+.empty-clear:hover { opacity: 0.85; }
+
+/* ── Segmented quiz progress dots ────────────────────────────────── */
+.seg-progress {
+  display: flex;
+  gap: 5px;
+}
+.seg-progress .seg {
+  flex: 1;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--border-subtle);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.seg-progress .seg.filled {
+  background: var(--brand);
+  box-shadow: 0 0 8px rgba(var(--brand-rgb), 0.5);
+}

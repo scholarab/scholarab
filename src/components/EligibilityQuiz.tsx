@@ -343,9 +343,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
     return (
       <div>
-        {/* Full progress bar */}
-        <div style={{ height: 2, background: 'var(--border-subtle)', borderRadius: 2, marginBottom: 28, overflow: 'hidden' }}>
-          <div style={{ width: '100%', height: '100%', background: 'var(--brand)', boxShadow: '0 0 12px var(--brand)', borderRadius: 2 }} />
+        {/* Segmented progress — all filled */}
+        <div className="seg-progress" style={{ marginBottom: 28, width: 200 }}>
+          {QUESTIONS.map((_, i) => (
+            <div key={i} className="seg filled" />
+          ))}
         </div>
 
         {/* "Your matches" pill */}
@@ -480,15 +482,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: 400 }}>
-      {/* Progress bar */}
-      <div style={{ height: 2, background: 'var(--border-subtle)', borderRadius: 2, marginBottom: 28, overflow: 'hidden' }}>
-        <div style={{
-          width: `${progress * 100}%`, height: '100%',
-          background: 'var(--brand)',
-          boxShadow: '0 0 10px var(--brand)',
-          borderRadius: 2,
-          transition: 'width 500ms cubic-bezier(0.22, 1, 0.36, 1)',
-        }} />
+      {/* Segmented progress dots */}
+      <div className="seg-progress" style={{ marginBottom: 22, width: 200 }}>
+        {QUESTIONS.map((_, i) => (
+          <div key={i} className={`seg${i < step ? ' filled' : ''}`} />
+        ))}
       </div>
 
       {/* Header row */}

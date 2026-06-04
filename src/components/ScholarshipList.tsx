@@ -209,7 +209,16 @@ function ScholarshipList({ items }: Props) {
       <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
 
       {filtered.length === 0 && (
-        <p className="text-center py-16 text-faint">No scholarships match your filters.</p>
+        <div className="empty-state">
+          <span className="ico" aria-hidden="true">🔍</span>
+          <p className="font-semibold text-primary mb-2">No scholarships match your filters</p>
+          <p className="text-sm text-secondary mb-6">Try a different region, category, or status.</p>
+          {hasActiveFilters && (
+            <button className="empty-clear" onClick={() => { setRegion(null); setCategory(null); setStatusFilter('all'); }}>
+              Clear filters
+            </button>
+          )}
+        </div>
       )}
     </div>
   );

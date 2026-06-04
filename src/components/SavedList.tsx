@@ -424,7 +424,10 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
       ) : (
         <div className="space-y-10">
           <section>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-tertiary mb-4">Scholarships</h2>
+            <h2 className="eyebrow mb-4">
+              <span className="ebdot" aria-hidden="true" />
+              Scholarships
+            </h2>
             {savedScholarships.length === 0 ? (
               <EmptyState href="/scholarships" label="Find scholarships" />
             ) : (
@@ -441,7 +444,10 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
           </section>
 
           <section>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-tertiary mb-4">Research Programs</h2>
+            <h2 className="eyebrow mb-4">
+              <span className="ebdot" aria-hidden="true" />
+              Research Programs
+            </h2>
             {savedPrograms.length === 0 ? (
               <EmptyState href="/programs" label="Find programs" />
             ) : (
