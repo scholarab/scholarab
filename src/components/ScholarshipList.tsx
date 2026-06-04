@@ -93,7 +93,7 @@ function ScholarshipList({ items }: Props) {
                 <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
                   className={`shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? (color ? 'region-pill-active' : '') : 'bg-subtle text-secondary border border-card hover:border-medium'}`}
                   style={selStyle}>
-                  {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', marginRight: 4, flexShrink: 0 }} />}
+                  {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', marginRight: 4, flexShrink: 0, boxShadow: sel ? `0 0 0 2px var(--bg-page), 0 0 0 4px ${dot}` : 'none' }} />}
                   {label}
                 </button>
               );
@@ -142,9 +142,11 @@ function ScholarshipList({ items }: Props) {
                   color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
                   transition: 'all 180ms',
                   display: 'inline-flex', alignItems: 'center', gap: 4,
+                  position: 'relative',
                 }}>
                 {icon && <span style={{ color: 'var(--brand)', fontSize: 10 }}>{icon}</span>}
                 {label}
+                {active && <span style={{ position: 'absolute', left: 11, right: 11, bottom: 2, height: 1, background: 'var(--brand)', borderRadius: 1 }} aria-hidden="true" />}
               </button>
             );
           })}

@@ -85,9 +85,9 @@ const closingSoon = scholarships
             Research Programs
           </a>
         </div>
-        <a href="/match" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
+        <a href="/match" class="find-match inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          Find my match →
+          Find my match <span class="find-match-arrow">→</span>
         </a>
         <p style="font-size:13px;color:var(--text-tertiary);margin-top:4px;">
           <span id="hero-count" data-deadlines={JSON.stringify(scholarships.map(s => ({ d: s.deadline, o: s.openDate })))}>{scholarshipCount}</span> scholarships · {researchCount} research programs
@@ -282,4 +282,11 @@ const closingSoon = scholarships
 
 <style>
   #closing-soon-list::-webkit-scrollbar { display: none; }
+  .find-match-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .find-match:hover .find-match-arrow {
+    transform: translateX(3px);
+  }
 </style>
