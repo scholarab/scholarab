@@ -19,7 +19,7 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
           </text>
         </svg>
       </a>
-      <div id="nav-links-container" class="flex items-center gap-5 text-sm font-medium" style="position:relative;">
+      <div id="nav-links-container" class="flex items-center gap-7 text-sm font-medium" style="position:relative;">
         <a href="/" aria-current={currentPath === '/' ? 'page' : undefined} class={navCls('/')}>Home</a>
         <a href="/scholarships" aria-current={currentPath.startsWith('/scholarships') ? 'page' : undefined} class={navClsStart('/scholarships')}>Scholarships</a>
         <a href="/programs" aria-current={currentPath.startsWith('/programs') ? 'page' : undefined} class={navClsStart('/programs')}>Programs</a>
@@ -131,11 +131,8 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
 
   /* Theme toggle hover — subtle rotate */
   #theme-toggle:hover { border-color: var(--border-strong); }
-  #theme-toggle:hover #theme-icon-moon-wrap svg,
-  #theme-toggle:hover #theme-icon-sun-wrap svg {
-    transform: rotate(20deg);
-    transition: transform 200ms ease;
-  }
+  #theme-toggle svg { transition: transform 200ms ease; }
+  #theme-toggle:hover svg { transform: rotate(20deg); }
 
   .logo-scholar { fill: #0a0a0f; }
   html.theme-light .logo-scholar { fill: #0a0a0f; }
