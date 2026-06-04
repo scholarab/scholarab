@@ -322,8 +322,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     setSavedIds(next)
   }, [])
 
-  const progress = step / QUESTIONS.length
-
   // ── Results ────────────────────────────────────────────────────────────────
 
   if (step >= QUESTIONS.length) {
