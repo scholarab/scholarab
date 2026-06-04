@@ -578,7 +578,7 @@ html.theme-light .border-blue-500\/30 {
   height: 44px;
   border-radius: 16px 16px 0 0;
   background: linear-gradient(to bottom, var(--bloom-color, transparent) 0%, transparent 100%);
-  opacity: 0.06;
+  opacity: 0.04;
   pointer-events: none;
 }
 
