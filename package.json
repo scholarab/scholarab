@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",
-    "@astrojs/cloudflare": "^13.6.1",
+    "@astrojs/cloudflare": "^12.6.13",
     "@astrojs/react": "^5.0.1",
     "@neondatabase/serverless": "^1.0.2",
     "@tailwindcss/postcss": "^4.3.0",
@@ -56,6 +56,6 @@
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1",
     "vitest": "^4.1.2",
-    "wrangler": "^4.83.0"
+    "wrangler": "4.83.0"
   }
 }
