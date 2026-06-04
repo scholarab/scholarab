@@ -392,13 +392,7 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
           <button
             key={k}
             onClick={() => setView(k)}
-            className={view === k ? 'saved-view-toggle saved-view-toggle--active' : 'saved-view-toggle'}
-            style={{
-              padding: '6px 16px', fontSize: 13, fontWeight: 500,
-              borderRadius: 7, border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-              color: view === k ? 'var(--text-primary)' : 'var(--text-secondary)',
-              transition: 'all 200ms',
-            }}
+            className={`saved-tab${view === k ? ' active' : ''}`}
           >
             {k.charAt(0).toUpperCase() + k.slice(1)}
           </button>
@@ -445,7 +439,7 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
 
           <section>
             <h2 className="eyebrow mb-4">
-              <span className="ebdot" aria-hidden="true" />
+              <span className="ebdot" style={{ background: '#a78bfa' }} aria-hidden="true" />
               Research Programs
             </h2>
             {savedPrograms.length === 0 ? (

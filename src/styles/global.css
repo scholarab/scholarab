@@ -535,6 +535,18 @@ html.theme-light .saved-view-toggle--active {
   background: rgba(10, 10, 15, 0.06);
 }
 
+/* ── Saved tabs (design 2.0 teal underline style) ────────────── */
+.saved-tab {
+  position: relative; padding: 7px 20px; font-size: 13px; font-weight: 500;
+  border-radius: 7px; border: none; cursor: pointer; background: transparent;
+  color: var(--text-secondary); font-family: inherit; transition: color 0.2s ease;
+}
+.saved-tab.active { color: var(--text-primary); }
+.saved-tab.active::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 1px;
+  height: 2px; background: var(--brand); border-radius: 2px;
+}
+
 /* ── Light theme: badge & region pill color correction ─────── */
 /* Darken neon badge colors (designed for dark bg) for light bg readability */
 html.theme-light .badge-chip {
@@ -575,7 +587,7 @@ html.theme-light .border-blue-500\/30 {
   content: '';
   position: absolute;
   left: 0; right: 0; top: 0;
-  height: 44px;
+  height: 40px;
   border-radius: 16px 16px 0 0;
   background: linear-gradient(to bottom, var(--bloom-color, transparent) 0%, transparent 100%);
   opacity: 0.04;
@@ -609,11 +621,11 @@ html.theme-light .border-blue-500\/30 {
 /* ── Bookmark pop micro-animation ────────────────────────────────── */
 @keyframes bmkPop {
   0%   { transform: scale(1); }
-  40%  { transform: scale(1.25); }
+  40%  { transform: scale(1.2); }
   100% { transform: scale(1); }
 }
 .bmk-btn.pop {
-  animation: bmkPop 150ms ease;
+  animation: bmkPop 120ms ease;
 }
 
 /* ── Stipend pill ────────────────────────────────────────────────── */
@@ -701,3 +713,98 @@ html.theme-light .border-blue-500\/30 {
   background: var(--brand);
   box-shadow: 0 0 8px rgba(var(--brand-rgb), 0.5);
 }
+
+/* ── Hero typography ─────────────────────────────────────────────── */
+.hero-tagline {
+  font-size: clamp(18px, 2.5vw, 25px); font-weight: 600; letter-spacing: -0.02em;
+  color: var(--text-secondary); margin: 0 0 18px;
+}
+.hero-amount {
+  font-size: clamp(28px, 6vw, 60px);
+  font-weight: 800; letter-spacing: -0.04em; color: var(--brand);
+  line-height: 1.05; white-space: nowrap; margin: 0 0 40px;
+}
+
+/* ── Hero glow ───────────────────────────────────────────────────── */
+.hero-glow {
+  position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
+  width: 760px; height: 520px; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse at center, rgba(var(--brand-rgb), 0.06) 0%, transparent 70%);
+}
+
+/* ── Hero stat number/separator ──────────────────────────────────── */
+.hero-stat .num { font-weight: 600; color: var(--text-secondary); }
+.hero-stat .sep { color: var(--brand); padding: 0 4px; }
+
+/* ── Hero CTA pill buttons ───────────────────────────────────────── */
+.btn-pill-filled {
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  padding: 14px 34px; border-radius: 999px; font-size: 14px; font-weight: 700;
+  background: var(--brand); color: #0a0a0f; text-decoration: none; cursor: pointer; border: none;
+  transition: transform 0.25s var(--spring), box-shadow 0.25s ease;
+}
+.btn-pill-filled:hover { box-shadow: 0 8px 28px rgba(var(--brand-rgb), 0.4); }
+
+.btn-pill-outline {
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  padding: 14px 26px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  background: var(--brand-dim); border: 1.5px solid var(--brand-border); color: var(--brand);
+  text-decoration: none; cursor: pointer; transition: border-color 0.2s ease;
+}
+.btn-pill-outline:hover { border-color: var(--brand); }
+
+/* ── Find my match — label underline + arrow nudge ───────────────── */
+.find-match {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500;
+  color: var(--text-secondary); text-decoration: none; cursor: pointer; background: none; border: none;
+  transition: color 0.2s ease;
+}
+.find-match:hover { color: var(--text-primary); }
+.find-match .label { position: relative; }
+.find-match .label::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform 0.2s ease;
+}
+.find-match:hover .label::after { transform: scaleX(1); }
+.find-match .arrow { display: inline-block; transition: transform 0.2s ease; }
+.find-match:hover .arrow { transform: translateX(3px); }
+
+/* ── Pulse animations ────────────────────────────────────────────── */
+@keyframes softPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.pulse-soft { animation: softPulse 2s ease-in-out infinite; }
+
+/* ── Check eligibility button ────────────────────────────────────── */
+.check-elig {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;
+  background: var(--brand-dim); border: 1px solid var(--brand-border); color: var(--brand);
+  cursor: pointer; text-decoration: none; font-family: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.check-elig:hover { background: rgba(var(--brand-rgb), 0.18); border-color: var(--brand); }
+
+/* ── Closing-this-week rows ──────────────────────────────────────── */
+.closing-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 14px 18px; padding-left: 18px; position: relative; text-decoration: none;
+  border-radius: 14px; background: var(--bg-card);
+  border: 0.5px solid var(--border-card);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.closing-row::before {
+  content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px;
+  border-radius: 0 2px 2px 0; background: #f5b14a; box-shadow: 0 0 8px rgba(245,177,74,0.4);
+}
+.closing-row:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+html.theme-dark .closing-row:hover { box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
+
+/* ── Deadline badge (closing-this-week) ──────────────────────────── */
+.deadline-badge {
+  font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid;
+  white-space: nowrap;
+}
+.badge-amber { color: #92400e; background: rgba(146,64,14,0.10); border-color: rgba(146,64,14,0.25); }
+.badge-red   { color: #b91c1c; background: rgba(185,28,28,0.10); border-color: rgba(185,28,28,0.25); }
+html.theme-dark .badge-amber { color: #f5b14a; background: rgba(245,177,74,0.12); border-color: rgba(245,177,74,0.28); }
+html.theme-dark .badge-red   { color: #f87171; background: rgba(248,113,113,0.12); border-color: rgba(248,113,113,0.28); }

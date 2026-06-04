@@ -47,9 +47,9 @@ const programs = raw.map(p => ({
     })),
   })} slot="head" />
   <div>
-    <h1 class="font-bold text-primary mb-1" style="font-size: clamp(22px, 3vw, 32px);">Research Programs</h1>
-    <p class="text-sm text-secondary mb-1">University-run summer programs, labs, and competitions open to Alberta high school students.</p>
-    {freshnessLabel && <p class="text-xs text-faint mb-6">Last verified: {freshnessLabel}</p>}
+    <h1 style="font-weight:800;font-size:clamp(26px,3.4vw,40px);margin:0 0 6px;">Research Programs</h1>
+    <p style="font-size:14px;color:var(--text-secondary);margin:0 0 4px;line-height:1.65;">University-run summer programs, labs, and competitions open to Alberta high school students.</p>
+    {freshnessLabel && <p class="freshness" style="margin-bottom:24px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Last verified: {freshnessLabel}</p>}
     {loadError ? (
       <div class="text-center py-20">
         <p class="text-sm font-semibold text-primary mb-2">Couldn't load programs</p>

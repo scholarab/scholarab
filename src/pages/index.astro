@@ -63,35 +63,32 @@ const closingSoon = scholarships
   <div class="pb-8">
 
     <!-- Hero -->
-    <div class="max-w-2xl mx-auto pt-8 md:pt-14 pb-4 flex flex-col items-center text-center">
+    <div class="hero max-w-2xl mx-auto pt-8 md:pt-14 pb-4 flex flex-col items-center text-center" style="position:relative;">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
 
-      <!-- Tagline -->
-      <p style="font-size:clamp(18px,2.5vw,24px);font-weight:600;letter-spacing:-0.02em;color:var(--text-secondary);margin-bottom:16px;">
-        Alberta's student opportunity directory.
-      </p>
+        <!-- Tagline -->
+        <p class="hero-tagline">Alberta's student opportunity directory.</p>
 
-      <!-- Hero amount -->
-      <p class="mb-10" style="font-size:clamp(20px,5vw,48px);font-weight:800;letter-spacing:-0.04em;color:var(--brand);line-height:1.1;white-space:nowrap;">
-        $<span id="hero-amount" data-target={activeTotal} style="font-variant-numeric:tabular-nums;">0</span>+ open right now
-      </p>
-
-      <!-- CTA buttons -->
-      <div class="flex flex-col items-center gap-3">
-        <div class="flex flex-row gap-3">
-          <a href="/scholarships" class="inline-flex items-center justify-center whitespace-nowrap px-6 py-3.5 rounded-full text-sm font-semibold" style="background:var(--brand);color:#0a0a0f;">
-            Find Scholarships
-          </a>
-          <a href="/programs" class="inline-flex items-center justify-center whitespace-nowrap px-6 py-3.5 rounded-full text-sm font-semibold border" style="background:var(--brand-dim);border-color:var(--brand-border);color:var(--brand);">
-            Research Programs
-          </a>
-        </div>
-        <a href="/match" class="find-match inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          Find my match <span class="find-match-arrow">→</span>
-        </a>
-        <p style="font-size:13px;color:var(--text-tertiary);margin-top:4px;">
-          <span id="hero-count" data-deadlines={JSON.stringify(scholarships.map(s => ({ d: s.deadline, o: s.openDate })))}>{scholarshipCount}</span> scholarships · {researchCount} research programs
+        <!-- Hero amount -->
+        <p class="hero-amount tnum mb-10">
+          $<span id="hero-amount" data-target={activeTotal}>0</span>+ open right now
         </p>
+
+        <!-- CTA buttons -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="flex flex-row gap-3">
+            <a href="/scholarships" class="btn-pill-filled">Find Scholarships</a>
+            <a href="/programs" class="btn-pill-outline">Research Programs</a>
+          </div>
+          <a href="/match" class="find-match">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <span class="label">Find my match</span><span class="arrow">→</span>
+          </a>
+          <p class="hero-stat" style="font-size:13px;margin-top:4px;">
+            <span class="num"><span id="hero-count" data-deadlines={JSON.stringify(scholarships.map(s => ({ d: s.deadline, o: s.openDate })))}>{scholarshipCount}</span></span> scholarships <span class="sep">·</span> <span class="num">{researchCount}</span> research programs
+          </p>
+        </div>
       </div>
     </div>
 
@@ -103,7 +100,7 @@ const closingSoon = scholarships
             <p style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#f5b14a;margin-bottom:6px;">⚡ Time sensitive</p>
             <h2 style="margin:0;font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">Closing this week</h2>
           </div>
-          <a href="/scholarships" class="text-sm text-secondary hover:text-primary transition-colors flex items-center gap-1">View all →</a>
+          <a href="/scholarships" class="find-match"><span class="label">View all</span><span class="arrow">→</span></a>
         </div>
 
         <!-- Horizontal scroll on mobile, stacked on desktop -->
@@ -112,20 +109,17 @@ const closingSoon = scholarships
             return (
               <a
                 href={`/scholarships/${generateSlug(s.title)}`}
-                class="card card-interactive flex items-center justify-between gap-4 px-4 py-3.5 shrink-0 md:shrink"
-                style="min-width:280px;scroll-snap-align:start;padding-left:18px;position:relative;"
+                class="closing-row shrink-0 md:shrink"
+                style="min-width:280px;scroll-snap-align:start;"
                 data-deadline={s.deadline}
               >
-                <div style="position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 2px 2px 0;background:#f5b14a;box-shadow:0 0 8px rgba(245,177,74,0.4);" aria-hidden="true"></div>
-                <div class="flex-1 min-w-0">
-                  <p class="text-sm font-semibold text-primary truncate">{s.title}</p>
-                  {s.audience && <p class="text-xs text-tertiary mt-0.5 truncate">{s.audience}</p>}
+                <div class="flex-1 min-w-0" style="min-width:0;">
+                  <p style="font-size:14px;font-weight:600;margin:0;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{s.title}</p>
+                  {s.audience && <p style="font-size:12px;color:var(--text-tertiary);margin:2px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{s.audience}</p>}
                 </div>
                 <div class="flex items-center gap-3 shrink-0">
-                  <p class="text-sm font-bold text-brand" style="font-variant-numeric:tabular-nums;">{s.amount}</p>
-                  <span class="closing-soon-badge text-xs font-semibold px-2.5 py-1 rounded-full border bg-amber-400/10 text-amber-400 border-amber-400/25">
-                    &hellip;
-                  </span>
+                  <p class="tnum" style="font-size:14px;font-weight:700;color:var(--brand);margin:0;">{s.amount}</p>
+                  <span class="deadline-badge badge-amber closing-soon-badge">&hellip;</span>
                 </div>
               </a>
             );
@@ -264,9 +258,9 @@ const closingSoon = scholarships
       if (badge) {
         badge.textContent = urgency;
         if (daysLeft <= 2) {
-          badge.className = 'closing-soon-badge text-xs font-semibold px-2.5 py-1 rounded-full border bg-red-500/10 text-red-400 border-red-500/25';
+          badge.className = 'deadline-badge badge-red closing-soon-badge' + (daysLeft === 0 ? ' pulse-soft' : '');
         } else {
-          badge.className = 'closing-soon-badge text-xs font-semibold px-2.5 py-1 rounded-full border bg-amber-400/10 text-amber-400 border-amber-400/25';
+          badge.className = 'deadline-badge badge-amber closing-soon-badge';
         }
       }
     });
@@ -282,11 +276,4 @@ const closingSoon = scholarships
 
 <style>
   #closing-soon-list::-webkit-scrollbar { display: none; }
-  .find-match-arrow {
-    display: inline-block;
-    transition: transform 0.2s ease;
-  }
-  .find-match:hover .find-match-arrow {
-    transform: translateX(3px);
-  }
 </style>
