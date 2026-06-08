@@ -218,14 +218,20 @@ describe('useScholarships', () => {
     }
   })
 
-  it('sorts by closest_due ascending', async () => {
+  it('sorts by closest_due: active before closed, active group ascending by deadline', async () => {
     const { useScholarships } = await import('./useItems')
     const { result } = renderHook(() => useScholarships(allItems))
     act(() => result.current.setSort('closest_due'))
-    const deadlines = result.current.filtered.map(s => s._deadline_ms ?? 0)
-    for (let i = 0; i < deadlines.length - 1; i++) {
-      expect(deadlines[i]!).toBeLessThanOrEqual(deadlines[i + 1]!)
-    }
+    const items = result.current.filtered
+    const activeItems = items.filter(s => (s._deadline_ms ?? 0) > Date.now())
+    const closedItems = items.filter(s => (s._deadline_ms ?? Infinity) < Date.now())
+    // all active items appear before all closed items
+    const lastActiveIdx = Math.max(...activeItems.map(s => items.indexOf(s)))
+    const firstClosedIdx = Math.min(...closedItems.map(s => items.indexOf(s)))
+    expect(lastActiveIdx).toBeLessThan(firstClosedIdx)
+    // active group is ascending by deadline
+    const activeDl = activeItems.map(s => s._deadline_ms ?? 0)
+    for (let i = 0; i < activeDl.length - 1; i++) expect(activeDl[i]!).toBeLessThanOrEqual(activeDl[i + 1]!)
   })
 
   it('resets to page 1 when region changes', async () => {

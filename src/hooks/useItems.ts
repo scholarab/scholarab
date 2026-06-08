@@ -133,8 +133,13 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       if (sortBy === 'closest_due') {
         const aStatus = statusCache.get(a.id);
         const bStatus = statusCache.get(b.id);
-        if (aStatus === 'future' && bStatus !== 'future') return 1;
-        if (bStatus === 'future' && aStatus !== 'future') return -1;
+        // active first → future → closed (so expired entries don't bury open ones)
+        const rank = { active: 0, future: 1, closed: 2 } as Record<string, number>;
+        const aRank = rank[aStatus ?? 'active'] ?? 0;
+        const bRank = rank[bStatus ?? 'active'] ?? 0;
+        if (aRank !== bRank) return aRank - bRank;
+        // within closed: most recently expired first
+        if (aStatus === 'closed') return (b._deadline_ms || 0) - (a._deadline_ms || 0);
         return (a._deadline_ms || Infinity) - (b._deadline_ms || Infinity);
       }
       if (sortBy === 'highest_pay') return (b._amount_cents ?? 0) - (a._amount_cents ?? 0);
