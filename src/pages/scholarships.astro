@@ -16,7 +16,7 @@ const freshnessLabel = mostRecentVerified
   ? new Date(mostRecentVerified + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
   : null;
 // Enrich at build time — avoids regex/Date parsing on every user's device
-const scholarships = raw.filter(s => s.active !== false).map(s => ({
+const scholarships = raw.map(s => ({
   ...s,
   _amount_cents: (() => { const m = String(s.amount || '').match(/\$[\d,]+/); return m ? parseInt(m[0].replace(/[$,]/g, ''), 10) || 0 : 0 })(),
   _deadline_ms:  s.deadline  ? new Date(s.deadline  + 'T00:00:00').getTime() : 0,
