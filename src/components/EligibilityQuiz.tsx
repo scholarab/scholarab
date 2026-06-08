@@ -81,7 +81,7 @@ const QUESTIONS: QuizQuestion[] = [
     opts: [
       { label: 'University of Calgary', value: 'University of Calgary' },
       { label: 'University of Alberta', value: 'University of Alberta' },
-      { label: 'MacEwan University', value: 'MacEwan University' },
+      { label: 'Other', value: '', emoji: '🏫' },
       { label: 'Mount Royal University', value: 'Mount Royal University' },
       { label: 'Medicine Hat College', value: 'Medicine Hat College' },
       { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', emoji: '🔨' },
@@ -126,8 +126,8 @@ function matchPrograms(programs: Program[], answers: Record<string, string>): Pr
 // ── Tile button ───────────────────────────────────────────────────────────────
 
 function MatchTile({
-  label, emoji, delay, onClick,
-}: { label: string; emoji?: string; delay: number; onClick: () => void }) {
+  label, emoji, delay, onClick, minHeight,
+}: { label: string; emoji?: string; delay: number; onClick: () => void; minHeight?: number }) {
   const [selected, setSelected] = useState(false)
 
   function handleClick() {
@@ -141,6 +141,7 @@ function MatchTile({
       className="quiz-opt"
       style={{
         animation: `sabSlideUp 500ms ${delay}ms cubic-bezier(0.22, 1, 0.36, 1) both`,
+        ...(minHeight ? { minHeight } : undefined),
         ...(selected ? {
           background: 'linear-gradient(180deg, var(--brand) 0%, #1cc195 100%)',
           color: '#05130d',
@@ -485,13 +486,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       </div>
 
       {/* Question + tiles — animated on step change */}
-      <div key={`${animKey}-${step}`} style={{ animation: 'sabSlideUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both', minHeight: 300 }}>
+      <div key={`${animKey}-${step}`} style={{ animation: 'sabSlideUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both' }}>
         <h2 ref={questionHeadingRef} tabIndex={-1} className="text-primary" style={{ fontSize: 'clamp(22px, 3.5vw, 36px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 16, outline: 'none' }}>
           {current.q}
         </h2>
 
         {(() => {
           const useGrid = current.opts.length >= 4;
+          const tileMinHeight = current.opts.length <= 3 ? 80 : current.opts.length <= 4 ? 72 : undefined;
           return (
             <div style={useGrid
               ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8, alignContent: 'start' }
@@ -506,6 +508,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       emoji={opt.emoji}
                       delay={i * 50}
                       onClick={() => answer(current.key, opt.value)}
+                      minHeight={tileMinHeight}
                     />
                   </div>
                 );
