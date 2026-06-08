@@ -494,8 +494,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           const useGrid = current.opts.length >= 4;
           return (
             <div style={useGrid
-              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8 }
-              : { display: 'flex', flexDirection: 'column', gap: 8 }
+              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8, minHeight: 240 }
+              : { display: 'flex', flexDirection: 'column', gap: 8, minHeight: 240 }
             }>
               {current.opts.map((opt, i) => {
                 const spanFull = useGrid && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
