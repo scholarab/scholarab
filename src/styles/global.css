@@ -485,7 +485,7 @@ html.theme-dark .glass-nav.scrolled {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    var(--bg-subtle) 50%,
+    rgba(var(--brand-rgb), 0.05) 50%,
     transparent 100%
   );
   transform: translateX(-100%);
@@ -710,12 +710,50 @@ html.theme-light .border-blue-500\/30 {
   height: 3px;
   border-radius: 99px;
   background: var(--border-subtle);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.4s var(--spring), box-shadow 0.4s var(--spring);
 }
 .seg-progress .seg.filled {
   background: var(--brand);
   box-shadow: 0 0 8px rgba(var(--brand-rgb), 0.5);
 }
+
+/* ── Smart matching pill — ✦ §5 ─────────────────────────────────── */
+.smart-pill {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px;
+  border-radius: 100px; white-space: nowrap;
+  background: linear-gradient(135deg, rgba(var(--brand-rgb), 0.25) 0%, rgba(var(--brand-rgb), 0.10) 100%);
+  border: 1px solid var(--brand-border); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--brand); text-transform: uppercase;
+}
+
+/* ── Quiz divider — ✦ §5 centered 80% ──────────────────────────── */
+.quiz-divider {
+  height: 0.5px; width: 80%; margin: 0 auto 36px;
+  background: var(--border-subtle); border: none;
+}
+
+/* ── Quiz option rows — ✦ §5 ────────────────────────────────────── */
+.quiz-opt {
+  position: relative; text-align: left; width: 100%;
+  padding: 18px 22px; border-radius: 14px;
+  border: 1px solid var(--border-card); background: var(--bg-card);
+  color: var(--text-primary); font-size: 16px; font-weight: 600;
+  letter-spacing: -0.015em; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  transition: background 0.12s ease, border-color 0.12s ease, transform 0.22s var(--spring);
+  font-family: inherit;
+}
+.quiz-opt::before {
+  content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 2px;
+  border-radius: 0 2px 2px 0; background: var(--brand); opacity: 0;
+  transition: opacity 0.12s ease;
+}
+.quiz-opt:hover { background: var(--bg-subtle); }
+.quiz-opt:hover::before { opacity: 1; }
+.quiz-opt .opt-left { display: flex; align-items: center; gap: 12px; }
+.quiz-opt .opt-emoji { font-size: 18px; }
+.quiz-opt .chev { flex-shrink: 0; opacity: 0.3; transition: opacity 0.2s ease, transform 0.12s ease; }
+.quiz-opt:hover .chev { opacity: 1; transform: translateX(4px); }
 
 /* ── Hero typography ─────────────────────────────────────────────── */
 .hero-tagline {

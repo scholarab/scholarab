@@ -27,10 +27,10 @@ const breadcrumbJson = {
   <div class="pb-16">
     <div class="max-w-2xl mx-auto pt-8 md:pt-14 px-4">
       <div class="mb-10">
-        <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:100px;background:var(--brand-dim);border:1px solid var(--brand-border);font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--brand);text-transform:uppercase;margin-bottom:14px;">
+        <span class="smart-pill" style="margin-bottom:14px;">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           Smart matching
-        </div>
+        </span>
         <h1 style="font-size:clamp(32px,5vw,48px);font-weight:800;letter-spacing:-0.04em;line-height:1.05;margin-bottom:12px;color:var(--text-primary);">
           Find your <span style="color:var(--brand);">match</span>
         </h1>
@@ -48,6 +48,7 @@ const breadcrumbJson = {
           </span>
         </div>
       </div>
+      <hr class="quiz-divider" />
       <EligibilityQuiz scholarships={scholarships} programs={programs} client:load />
     </div>
   </div>

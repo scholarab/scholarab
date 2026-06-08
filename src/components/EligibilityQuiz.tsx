@@ -18,7 +18,7 @@ interface Props {
 interface QuizQuestion {
   key: string
   q: string
-  opts: { label: string; value: string }[]
+  opts: { label: string; value: string; emoji?: string }[]
 }
 
 const QUESTIONS: QuizQuestion[] = [
@@ -26,53 +26,53 @@ const QUESTIONS: QuizQuestion[] = [
     key: 'searchType',
     q: "What are you looking for?",
     opts: [
-      { label: 'Scholarships', value: 'scholarships' },
-      { label: 'Research Programs', value: 'programs' },
-      { label: 'Both', value: 'both' },
+      { label: 'Scholarships', value: 'scholarships', emoji: '🎓' },
+      { label: 'Research Programs', value: 'programs', emoji: '🔬' },
+      { label: 'Both', value: 'both', emoji: '✨' },
     ],
   },
   {
     key: 'grade',
     q: "What grade are you in?",
     opts: [
-      { label: 'Grade 10', value: '10' },
-      { label: 'Grade 11', value: '11' },
-      { label: 'Grade 12', value: '12' },
-      { label: 'Already in post-secondary', value: 'post-secondary' },
+      { label: 'Grade 10', value: '10', emoji: '📗' },
+      { label: 'Grade 11', value: '11', emoji: '📘' },
+      { label: 'Grade 12', value: '12', emoji: '📕' },
+      { label: 'Already in post-secondary', value: 'post-secondary', emoji: '🏛️' },
     ],
   },
   {
     key: 'city',
     q: "Where are you based?",
     opts: [
-      { label: 'Medicine Hat', value: 'Medicine Hat' },
-      { label: 'Calgary', value: 'Calgary' },
-      { label: 'Edmonton', value: 'Edmonton' },
-      { label: 'Lethbridge', value: 'Lethbridge' },
-      { label: 'Red Deer', value: 'Red Deer' },
-      { label: 'Other Alberta', value: 'Other Alberta' },
+      { label: 'Medicine Hat', value: 'Medicine Hat', emoji: '🏔️' },
+      { label: 'Calgary', value: 'Calgary', emoji: '🌆' },
+      { label: 'Edmonton', value: 'Edmonton', emoji: '🏙️' },
+      { label: 'Lethbridge', value: 'Lethbridge', emoji: '🌾' },
+      { label: 'Red Deer', value: 'Red Deer', emoji: '🦌' },
+      { label: 'Other Alberta', value: 'Other Alberta', emoji: '🗺️' },
     ],
   },
   {
     key: 'field',
     q: "What's your academic focus?",
     opts: [
-      { label: 'STEM & Engineering', value: 'STEM' },
-      { label: 'Health & Medicine', value: 'health' },
-      { label: 'Business & Commerce', value: 'business' },
-      { label: 'Arts & Humanities', value: 'arts' },
-      { label: 'Trades', value: 'trades' },
-      { label: 'Still figuring it out', value: '' },
+      { label: 'STEM & Engineering', value: 'STEM', emoji: '⚡' },
+      { label: 'Health & Medicine', value: 'health', emoji: '🧬' },
+      { label: 'Business & Commerce', value: 'business', emoji: '💼' },
+      { label: 'Arts & Humanities', value: 'arts', emoji: '🎨' },
+      { label: 'Trades', value: 'trades', emoji: '🔧' },
+      { label: 'Still figuring it out', value: '', emoji: '💭' },
     ],
   },
   {
     key: 'average',
     q: "What's your academic average?",
     opts: [
-      { label: '90% or higher', value: '93' },
-      { label: '80 – 89%', value: '85' },
-      { label: 'Below 80%', value: '79' },
-      { label: "I'd rather not say", value: '' },
+      { label: '90% or higher', value: '93', emoji: '🌟' },
+      { label: '80 – 89%', value: '85', emoji: '📊' },
+      { label: 'Below 80%', value: '79', emoji: '✏️' },
+      { label: "I'd rather not say", value: '', emoji: '🤫' },
     ],
   },
   {
@@ -84,8 +84,8 @@ const QUESTIONS: QuizQuestion[] = [
       { label: 'MacEwan University', value: 'MacEwan University' },
       { label: 'Mount Royal University', value: 'Mount Royal University' },
       { label: 'Medicine Hat College', value: 'Medicine Hat College' },
-      { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program' },
-      { label: "Not sure yet", value: '' },
+      { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', emoji: '🔨' },
+      { label: "Not sure yet", value: '', emoji: '🤷' },
     ],
   },
 ]
@@ -126,9 +126,8 @@ function matchPrograms(programs: Program[], answers: Record<string, string>): Pr
 // ── Tile button ───────────────────────────────────────────────────────────────
 
 function MatchTile({
-  label, delay, onClick,
-}: { label: string; delay: number; onClick: () => void }) {
-  const [hovered, setHovered] = useState(false)
+  label, emoji, delay, onClick,
+}: { label: string; emoji?: string; delay: number; onClick: () => void }) {
   const [selected, setSelected] = useState(false)
 
   function handleClick() {
@@ -138,46 +137,28 @@ function MatchTile({
 
   return (
     <button
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       onClick={handleClick}
+      className="quiz-opt"
       style={{
-        textAlign: 'left',
-        width: '100%',
-        padding: '18px 22px',
-        borderRadius: 14,
-        border: `1px solid ${selected ? 'var(--brand)' : hovered ? 'var(--brand-border)' : 'var(--border-card)'}`,
-        background: selected
-          ? 'linear-gradient(180deg, var(--brand) 0%, #1cc195 100%)'
-          : hovered
-            ? 'var(--bg-card)'
-            : 'var(--bg-card)',
-        color: selected ? '#05130d' : 'var(--text-primary)',
-        fontSize: 16,
-        fontWeight: 600,
-        letterSpacing: '-0.015em',
-        fontFamily: 'inherit',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: 12,
-        transform: selected ? 'scale(0.98)' : hovered ? 'translateX(4px)' : 'translateX(0)',
-        boxShadow: selected
-          ? '0 8px 32px rgba(34,211,165,0.3)'
-          : hovered
-            ? '0 0 0 3px rgba(34,211,165,0.08)'
-            : 'none',
-        transition: 'all 220ms cubic-bezier(0.34, 1.56, 0.64, 1)',
         animation: `sabSlideUp 500ms ${delay}ms cubic-bezier(0.22, 1, 0.36, 1) both`,
+        ...(selected ? {
+          background: 'linear-gradient(180deg, var(--brand) 0%, #1cc195 100%)',
+          color: '#05130d',
+          borderColor: 'var(--brand)',
+          transform: 'scale(0.98)',
+          boxShadow: '0 8px 32px rgba(34,211,165,0.3)',
+        } : undefined),
       }}
     >
-      <span>{label}</span>
+      <span className="opt-left">
+        {emoji && <span className="opt-emoji" aria-hidden="true">{emoji}</span>}
+        <span>{label}</span>
+      </span>
       <svg
         width="16" height="16" viewBox="0 0 16 16" fill="none"
         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
         aria-hidden="true"
-        style={{ flexShrink: 0, opacity: hovered || selected ? 1 : 0.3, transition: 'opacity 200ms' }}
+        className="chev"
       >
         <path d="M6 12l4-4-4-4"/>
       </svg>
@@ -513,6 +494,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1' } : undefined}>
                     <MatchTile
                       label={opt.label}
+                      emoji={opt.emoji}
                       delay={i * 50}
                       onClick={() => answer(current.key, opt.value)}
                     />
