@@ -140,20 +140,24 @@ describe('useScholarships', () => {
     vi.clearAllMocks()
   })
 
-  it('excludes closed scholarships by default', async () => {
-    const { useScholarships } = await import('./useItems')
-    const { result } = renderHook(() => useScholarships(allItems))
-    const ids = result.current.filtered.map(s => s.id)
-    expect(ids).not.toContain(4)
-  })
-
-  it('includes all non-closed scholarships with no region filter', async () => {
+  it('includes all scholarships (including closed) by default', async () => {
     const { useScholarships } = await import('./useItems')
     const { result } = renderHook(() => useScholarships(allItems))
     const ids = result.current.filtered.map(s => s.id)
     expect(ids).toContain(1)
     expect(ids).toContain(2)
     expect(ids).toContain(3)
+    expect(ids).toContain(4)
+  })
+
+  it('includes all scholarships with no region filter', async () => {
+    const { useScholarships } = await import('./useItems')
+    const { result } = renderHook(() => useScholarships(allItems))
+    const ids = result.current.filtered.map(s => s.id)
+    expect(ids).toContain(1)
+    expect(ids).toContain(2)
+    expect(ids).toContain(3)
+    expect(ids).toContain(4)
   })
 
   it('filters to Medicine Hat region', async () => {
