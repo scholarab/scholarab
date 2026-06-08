@@ -485,7 +485,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       </div>
 
       {/* Question + tiles — animated on step change */}
-      <div key={`${animKey}-${step}`} style={{ animation: 'sabSlideUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both' }}>
+      <div key={`${animKey}-${step}`} style={{ animation: 'sabSlideUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both', minHeight: 300 }}>
         <h2 ref={questionHeadingRef} tabIndex={-1} className="text-primary" style={{ fontSize: 'clamp(22px, 3.5vw, 36px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 16, outline: 'none' }}>
           {current.q}
         </h2>
@@ -494,8 +494,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           const useGrid = current.opts.length >= 4;
           return (
             <div style={useGrid
-              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8, minHeight: 240 }
-              : { display: 'flex', flexDirection: 'column', gap: 8, minHeight: 240 }
+              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8, alignContent: 'start' }
+              : { display: 'flex', flexDirection: 'column', gap: 8 }
             }>
               {current.opts.map((opt, i) => {
                 const spanFull = useGrid && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
