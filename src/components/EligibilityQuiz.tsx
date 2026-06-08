@@ -365,6 +365,16 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           </div>
         )}
 
+        <div className="mb-6 pt-2 flex flex-col sm:flex-row gap-3">
+          <button onClick={reset} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-card text-secondary transition">Retake quiz</button>
+          {showScholarships && (
+            <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all scholarships</a>
+          )}
+          {showPrograms && !showScholarships && (
+            <a href="/programs" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all programs</a>
+          )}
+        </div>
+
         {/* Scholarship cards */}
         {showScholarships && scholarshipResults && scholarshipResults.length > 0 && (
           <>
@@ -449,15 +459,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           </div>
         )}
 
-        <div className="mt-8 pt-6 border-t border-subtle flex flex-col sm:flex-row gap-3">
-          <button onClick={reset} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-card text-secondary transition">Retake quiz</button>
-          {showScholarships && (
-            <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all scholarships</a>
-          )}
-          {showPrograms && !showScholarships && (
-            <a href="/programs" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all programs</a>
-          )}
-        </div>
       </div>
     )
   }
