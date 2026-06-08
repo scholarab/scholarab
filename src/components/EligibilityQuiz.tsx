@@ -126,8 +126,8 @@ function matchPrograms(programs: Program[], answers: Record<string, string>): Pr
 // ── Tile button ───────────────────────────────────────────────────────────────
 
 function MatchTile({
-  label, emoji, delay, onClick, minHeight,
-}: { label: string; emoji?: string; delay: number; onClick: () => void; minHeight?: number }) {
+  label, emoji, delay, onClick,
+}: { label: string; emoji?: string; delay: number; onClick: () => void }) {
   const [selected, setSelected] = useState(false)
 
   function handleClick() {
@@ -141,7 +141,7 @@ function MatchTile({
       className="quiz-opt"
       style={{
         animation: `sabSlideUp 500ms ${delay}ms cubic-bezier(0.22, 1, 0.36, 1) both`,
-        ...(minHeight ? { minHeight } : undefined),
+        height: '100%',
         ...(selected ? {
           background: 'linear-gradient(180deg, var(--brand) 0%, #1cc195 100%)',
           color: '#05130d',
@@ -493,22 +493,20 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
         {(() => {
           const useGrid = current.opts.length >= 4;
-          const tileMinHeight = current.opts.length <= 3 ? 80 : current.opts.length <= 4 ? 72 : undefined;
           return (
             <div style={useGrid
-              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8, alignContent: 'start' }
-              : { display: 'flex', flexDirection: 'column', gap: 8 }
+              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gridAutoRows: '1fr', gap: 8, height: 230 }
+              : { display: 'flex', flexDirection: 'column', gap: 8, height: 230 }
             }>
               {current.opts.map((opt, i) => {
                 const spanFull = useGrid && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
                 return (
-                  <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1' } : undefined}>
+                  <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1', height: '100%' } : { height: '100%' }}>
                     <MatchTile
                       label={opt.label}
                       emoji={opt.emoji}
                       delay={i * 50}
                       onClick={() => answer(current.key, opt.value)}
-                      minHeight={tileMinHeight}
                     />
                   </div>
                 );
