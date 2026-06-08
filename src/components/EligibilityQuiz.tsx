@@ -303,6 +303,12 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     setSavedIds(next)
   }, [])
 
+  // Hide the static match-page intro when results are shown
+  useEffect(() => {
+    document.body.classList.toggle('quiz-results', step >= QUESTIONS.length)
+    return () => document.body.classList.remove('quiz-results')
+  }, [step])
+
   // ── Results ────────────────────────────────────────────────────────────────
 
   if (step >= QUESTIONS.length) {
@@ -323,34 +329,36 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     return (
       <div>
         {/* Segmented progress — all filled */}
-        <div className="seg-progress" style={{ marginBottom: 28, width: 200 }}>
+        <div className="seg-progress" style={{ marginBottom: 14, width: 200 }}>
           {QUESTIONS.map((_, i) => (
             <div key={i} className="seg filled" />
           ))}
         </div>
 
         {/* "Your matches" pill */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'var(--brand-dim)', border: '1px solid var(--brand-border)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' as const, color: 'var(--brand)', marginBottom: 14 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'var(--brand-dim)', border: '1px solid var(--brand-border)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' as const, color: 'var(--brand)', marginBottom: 10 }}>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2L9.09 8.26 2 9.27l5 4.87L5.82 21 12 17.77 18.18 21 17 14.14l5-4.87-7.09-1.01L12 2z"/></svg>
           Your matches
         </div>
 
-        <h2 className="text-primary" style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.05, marginBottom: 20 }}>
+        <h2 className="text-primary" style={{ fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 12 }}>
           {headline}
         </h2>
 
         {showScholarships && totalAmount > 0 && (
-          <div style={{ marginBottom: 28, padding: 'clamp(16px, 3vw, 24px)', borderRadius: 20, background: 'linear-gradient(135deg, var(--brand-dim), rgba(59,130,246,0.06), rgba(167,139,250,0.08))', border: '1px solid var(--brand-border)', backdropFilter: 'blur(20px)' }}>
-            <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-secondary)', marginBottom: 6 }}>Combined award value</p>
-            <p className="text-brand" style={{ fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
-              ${totalAmount.toLocaleString('en-CA')}
-            </p>
-            <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 6 }}>Strong + good matches. Always verify eligibility on the official site.</p>
+          <div style={{ marginBottom: 14, padding: '14px 18px', borderRadius: 16, background: 'linear-gradient(135deg, var(--brand-dim), rgba(59,130,246,0.06), rgba(167,139,250,0.08))', border: '1px solid var(--brand-border)', backdropFilter: 'blur(20px)', display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div>
+              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-secondary)', marginBottom: 2 }}>Combined award value</p>
+              <p className="text-brand" style={{ fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums', margin: 0 }}>
+                ${totalAmount.toLocaleString('en-CA')}
+              </p>
+            </div>
+            <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: 0, flex: 1 }}>Strong + good matches. Always verify on the official site.</p>
           </div>
         )}
 
         {showScholarships && (strong.length > 0 || good.length > 0 || possible.length > 0) && (
-          <div className="flex gap-2 mb-5 flex-wrap">
+          <div className="flex gap-2 mb-3 flex-wrap">
             {strong.length > 0 && <span className="text-xs px-3 py-1 rounded-full border bg-brand-dim text-brand border-brand-border">{strong.length} strong match{strong.length !== 1 ? 'es' : ''}</span>}
             {good.length > 0 && <span className="text-xs px-3 py-1 rounded-full border bg-blue-500/10 text-blue-400 border-blue-500/30">{good.length} good match{good.length !== 1 ? 'es' : ''}</span>}
             {possible.length > 0 && <span className="text-xs px-3 py-1 rounded-full border bg-subtle text-tertiary border-card">{possible.length} possible</span>}

@@ -811,6 +811,12 @@ html.theme-light .border-blue-500\/30 {
 .find-match .arrow { display: inline-block; transition: transform 0.2s ease; }
 .find-match:hover .arrow { transform: translateX(3px); }
 
+/* ── Hide match intro when results are visible ───────────────────── */
+body.quiz-results #match-intro,
+body.quiz-results #match-divider {
+  display: none !important;
+}
+
 /* ── Pulse animations ────────────────────────────────────────────── */
 @keyframes softPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 .pulse-soft { animation: softPulse 2s ease-in-out infinite; }

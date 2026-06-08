@@ -26,7 +26,7 @@ const breadcrumbJson = {
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <div class="pb-16">
     <div class="max-w-2xl mx-auto pt-4 md:pt-6 px-4">
-      <div class="mb-4 md:mb-5">
+      <div class="mb-4 md:mb-5" id="match-intro">
         <span class="smart-pill" style="margin-bottom:10px;">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           Smart matching
@@ -48,7 +48,7 @@ const breadcrumbJson = {
           </span>
         </div>
       </div>
-      <hr class="quiz-divider" style="margin-bottom:20px;" />
+      <hr class="quiz-divider" id="match-divider" style="margin-bottom:20px;" />
       <EligibilityQuiz scholarships={scholarships} programs={programs} client:load />
     </div>
   </div>
