@@ -21,12 +21,7 @@ const researchCount = programs.filter(p => {
   return new Date(p.deadline + 'T00:00:00') >= today;
 }).length;
 
-const scholarshipCount = scholarships.filter(s => {
-  const openMs = s.openDate ? new Date(s.openDate + 'T00:00:00').getTime() : 0;
-  if (today.getTime() < openMs) return true;
-  if (!s.deadline) return true;
-  return today.getTime() <= new Date(s.deadline + 'T00:00:00').getTime();
-}).length;
+const scholarshipCount = scholarships.length;
 
 const closingSoon = scholarships
   .filter(s => {
@@ -86,7 +81,7 @@ const closingSoon = scholarships
             <span class="label">Find my match</span><span class="arrow">→</span>
           </a>
           <p class="hero-stat" style="font-size:13px;margin-top:4px;">
-            <span class="num"><span id="hero-count" data-deadlines={JSON.stringify(scholarships.map(s => ({ d: s.deadline, o: s.openDate, a: s.active !== false })))}>{scholarshipCount}</span></span> scholarships <span class="sep">·</span> <span class="num">{researchCount}</span> research programs
+            <span class="num">{scholarshipCount}</span> scholarships <span class="sep">·</span> <span class="num">{researchCount}</span> research programs
           </p>
           <p style="font-size:11px;color:var(--text-tertiary);margin-top:10px;letter-spacing:0.02em;">No login &nbsp;·&nbsp; No ads &nbsp;·&nbsp; No data collection</p>
         </div>
@@ -185,26 +180,6 @@ const closingSoon = scholarships
 </Layout>
 
 <script>
-  function updateScholarshipCount() {
-    const el = document.getElementById('hero-count') as HTMLElement | null;
-    const raw = el?.dataset.deadlines;
-    if (!el || !raw) return;
-    const data: { d: string | null; o: string | null; a?: boolean }[] = JSON.parse(raw);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const todayMs = today.getTime();
-    const count = data.filter(s => {
-      const openMs = s.o ? new Date(s.o + 'T00:00:00').getTime() : 0;
-      if (todayMs < openMs) return true;
-      if (!s.d) return true;
-      return todayMs <= new Date(s.d + 'T00:00:00').getTime();
-    }).length;
-    el.textContent = String(count);
-  }
-
-  updateScholarshipCount();
-  document.addEventListener('astro:page-load', updateScholarshipCount);
-
   function updateClosingSoon() {
     const list = document.getElementById('closing-soon-list');
     if (!list) return;
