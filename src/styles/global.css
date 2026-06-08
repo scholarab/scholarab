@@ -735,16 +735,16 @@ html.theme-light .border-blue-500\/30 {
 /* ── Quiz option rows — ✦ §5 ────────────────────────────────────── */
 .quiz-opt {
   position: relative; text-align: left; width: 100%;
-  padding: 18px 22px; border-radius: 14px;
+  padding: 14px 20px; border-radius: 12px;
   border: 1px solid var(--border-card); background: var(--bg-card);
-  color: var(--text-primary); font-size: 16px; font-weight: 600;
+  color: var(--text-primary); font-size: 15px; font-weight: 600;
   letter-spacing: -0.015em; cursor: pointer;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   transition: background 0.12s ease, border-color 0.12s ease, transform 0.22s var(--spring);
   font-family: inherit;
 }
 .quiz-opt::before {
-  content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 2px;
+  content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px;
   border-radius: 0 2px 2px 0; background: var(--brand); opacity: 0;
   transition: opacity 0.12s ease;
 }

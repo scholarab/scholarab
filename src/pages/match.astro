@@ -25,16 +25,16 @@ const breadcrumbJson = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <div class="pb-16">
-    <div class="max-w-2xl mx-auto pt-8 md:pt-14 px-4">
-      <div class="mb-10">
-        <span class="smart-pill" style="margin-bottom:14px;">
+    <div class="max-w-2xl mx-auto pt-4 md:pt-6 px-4">
+      <div class="mb-4 md:mb-5">
+        <span class="smart-pill" style="margin-bottom:10px;">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           Smart matching
         </span>
-        <h1 style="font-size:clamp(32px,5vw,48px);font-weight:800;letter-spacing:-0.04em;line-height:1.05;margin-bottom:12px;color:var(--text-primary);">
+        <h1 style="font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-0.04em;line-height:1.05;margin-bottom:8px;color:var(--text-primary);">
           Find your <span style="color:var(--brand);">match</span>
         </h1>
-        <p style="font-size:15px;color:var(--text-secondary);line-height:1.55;margin-bottom:16px;">
+        <p style="font-size:14px;color:var(--text-secondary);line-height:1.5;margin-bottom:10px;">
           6 questions. Instant results. Every Alberta opportunity available to you.
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:10px;">
@@ -48,7 +48,7 @@ const breadcrumbJson = {
           </span>
         </div>
       </div>
-      <hr class="quiz-divider" />
+      <hr class="quiz-divider" style="margin-bottom:20px;" />
       <EligibilityQuiz scholarships={scholarships} programs={programs} client:load />
     </div>
   </div>

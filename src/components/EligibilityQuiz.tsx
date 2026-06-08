@@ -460,16 +460,16 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   if (!current) return null
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: 400 }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Segmented progress dots */}
-      <div className="seg-progress" style={{ marginBottom: 22, width: 200 }}>
+      <div className="seg-progress" style={{ marginBottom: 14, width: 200 }}>
         {QUESTIONS.map((_, i) => (
           <div key={i} className={`seg${i < step ? ' filled' : ''}`} />
         ))}
       </div>
 
       {/* Header row */}
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
         <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
           Question {step + 1} of {QUESTIONS.length}
         </span>
@@ -477,7 +477,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
       {/* Question + tiles — animated on step change */}
       <div key={`${animKey}-${step}`} style={{ animation: 'sabSlideUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both' }}>
-        <h2 ref={questionHeadingRef} tabIndex={-1} className="text-primary" style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 24, outline: 'none' }}>
+        <h2 ref={questionHeadingRef} tabIndex={-1} className="text-primary" style={{ fontSize: 'clamp(22px, 3.5vw, 36px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 16, outline: 'none' }}>
           {current.q}
         </h2>
 
@@ -485,8 +485,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           const useGrid = current.opts.length >= 4;
           return (
             <div style={useGrid
-              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10 }
-              : { display: 'flex', flexDirection: 'column', gap: 10 }
+              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 8 }
+              : { display: 'flex', flexDirection: 'column', gap: 8 }
             }>
               {current.opts.map((opt, i) => {
                 const spanFull = useGrid && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
@@ -511,7 +511,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         <button
           onClick={back}
           style={{
-            marginTop: 32, background: 'none', border: 'none',
+            marginTop: 20, background: 'none', border: 'none',
             color: 'var(--text-secondary)', fontSize: 13, cursor: 'pointer',
             display: 'inline-flex', alignItems: 'center', gap: 6,
             fontFamily: 'inherit', alignSelf: 'flex-start', padding: 0,
