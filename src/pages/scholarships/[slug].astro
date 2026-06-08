@@ -32,7 +32,8 @@ const status = todayDate < openDate ? 'future' : (deadlineDate && todayDate > de
 const rawBadge = CATEGORY_BADGE[scholarship.category] || DEFAULT_BADGE;
 const badge    = { ...rawBadge, label: scholarship.category || '' };
 
-const description  = `The ${scholarship.title} offers ${scholarship.amount} to ${scholarship.audience}${scholarship.region ? ` in ${scholarship.region}` : ''}. Deadline: ${formatDate(scholarship.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
+const regionStr    = !scholarship.region || scholarship.region === 'National' ? '' : ` in ${scholarship.region}`;
+const description  = `The ${scholarship.title} offers ${scholarship.amount} to ${scholarship.audience}${regionStr}. Deadline: ${formatDate(scholarship.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
 const canonical    = `https://www.scholarab.ca/scholarships/${slug}`;
 const pageTitle    = `${scholarship.title} | ScholarAB | Alberta Scholarships`;
 const parsedAmount = (() => { const n = parseInt(scholarship.amount.replace(/[$,]/g, '')); return isNaN(n) ? null : n; })();
@@ -99,10 +100,12 @@ const ctaLabel = scholarship.applyViaGuidance ? 'Learn More â†’' : 'Apply Now â†
         <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Deadline</p>
         <p class="text-sm font-medium text-primary">{formatDate(scholarship.deadline)}</p>
       </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Opens</p>
-        <p class="text-sm font-medium text-primary">{formatDate(scholarship.openDate)}</p>
-      </div>
+      {scholarship.openDate && (
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Opens</p>
+          <p class="text-sm font-medium text-primary">{formatDate(scholarship.openDate)}</p>
+        </div>
+      )}
       <div>
         <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Category</p>
         <p class="text-sm font-medium text-primary">{scholarship.category || 'General'}</p>
@@ -116,10 +119,28 @@ const ctaLabel = scholarship.applyViaGuidance ? 'Learn More â†’' : 'Apply Now â†
       </div>
     )}
 
-    {scholarship.notes && (
+    {scholarship.notes ? (
       <div class="mb-6">
         <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-2">Notes</p>
         <p class="text-sm leading-relaxed text-secondary"><!--email_off-->{scholarship.notes}<!--/email_off--></p>
+      </div>
+    ) : (
+      <div class="mb-6">
+        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-2">About</p>
+        <p class="text-sm leading-relaxed text-secondary">
+          {scholarship.region === 'National'
+            ? `${scholarship.title} is a national award open to eligible students across Canada, including Alberta.`
+            : scholarship.region === 'Alberta-wide'
+              ? `${scholarship.title} is an Alberta-wide award available to eligible high school students across the province.`
+              : scholarship.region
+                ? `${scholarship.title} is a ${scholarship.region}-based award for local high school students.`
+                : `${scholarship.title} is an Alberta award for high school students.`
+          }
+          {' '}
+          {scholarship.applyViaGuidance
+            ? 'Applications go through your school guidance counsellor â€” ask about internal school deadlines.'
+            : 'Applications are submitted directly through the official website.'}
+        </p>
       </div>
     )}
 
