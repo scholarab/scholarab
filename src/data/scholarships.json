@@ -5867,5 +5867,37 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 178,
+    "title": "Breakthrough Junior Challenge",
+    "amount": "$250,000",
+    "deadline": "2026-09-15",
+    "audience": "Students ages 13–18 worldwide",
+    "url": "https://breakthroughjuniorchallenge.org/",
+    "category": "STEM",
+    "lastVerified": "2026-06",
+    "region": "International",
+    "active": true,
+    "description": "Create a short video (2 minutes or less) explaining a big idea from life sciences, physics, or math. The winner receives a $250,000 scholarship, their teacher receives $50,000, and their school receives a $100,000 science lab. Winners are celebrated at the Breakthrough Prize Ceremony.",
+    "eligibility": {
+      "grades": ["10", "11", "12"],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": ["STEM"],
+      "minAverage": null,
+      "minAge": 13,
+      "maxAge": 18,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
