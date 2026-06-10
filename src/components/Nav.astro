@@ -127,7 +127,16 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
   }
 
   document.addEventListener('astro:page-load', initNav);
-  document.addEventListener('astro:after-swap', syncThemeIcon);
+  document.addEventListener('astro:after-swap', () => {
+    syncThemeIcon();
+    // Apply scroll-state classes before the new-page snapshot is taken,
+    // so a restored scroll position doesn't make the nav pop after the swap
+    const nav = document.querySelector('.glass-nav');
+    if (nav) {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+      nav.classList.toggle('shrunk', window.scrollY > 60);
+    }
+  });
 </script>
 
 <style is:global>

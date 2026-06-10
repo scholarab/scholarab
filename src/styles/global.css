@@ -511,25 +511,26 @@ html.theme-dark .glass-nav.scrolled {
   from { opacity: 1; }
   to   { opacity: 0; }
 }
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 /* Old page fades under the incoming one — no flash to the page background */
 ::view-transition-old(root) {
   animation: page-out 0.14s ease both;
 }
+/* Default (clicks): fast crossfade. Identical chrome (nav, bottom bar) reads
+   as perfectly still — no snapshot geometry to morph or misplace. */
 ::view-transition-new(root) {
+  animation: page-fade-in 0.18s ease both;
+}
+/* Swipe gestures slide the whole page in the gesture direction */
+html[data-swipe-dir="left"] ::view-transition-new(root) {
   animation: page-in 0.2s cubic-bezier(0, 0, 0.2, 1) both;
 }
-/* Swipe right → previous page slides in from left */
 html[data-swipe-dir="right"] ::view-transition-new(root) {
   animation: page-in-reverse 0.2s cubic-bezier(0, 0, 0.2, 1) both;
 }
-
-/* Nav bars persist across page swaps — only the content animates */
-#top-nav-wrapper { view-transition-name: site-nav; }
-#bottom-nav      { view-transition-name: bottom-nav; }
-::view-transition-old(site-nav),
-::view-transition-new(site-nav),
-::view-transition-old(bottom-nav),
-::view-transition-new(bottom-nav) { animation: none; }
 
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
