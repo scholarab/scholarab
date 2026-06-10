@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useMemo, lazy, Suspense } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
-import { formatDeadline, showToast, getToday } from '../lib/utils.ts';
+import { formatDeadline, showToast, getToday, prefersReducedMotion } from '../lib/utils.ts';
 import { getScholarshipStatus as getStatus } from '../hooks/useItems.ts';
 import type { ScholarshipWithMeta, ProgramWithMeta } from '../hooks/useItems.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
@@ -17,12 +17,22 @@ const BOUNCE_KEYFRAMES = [
   { transform: 'scale(1.05)' }, { transform: 'scale(1)' },
 ];
 
+/** Run onDone when the animation settles — including if it's cancelled (unmount, page swap). */
+function animateThen(anim: Animation | undefined, onDone: () => void) {
+  if (anim?.finished?.then) anim.finished.then(onDone, onDone);
+  else onDone();
+}
+
 function animateCardRemove(el: HTMLElement | null, onDone: () => void) {
   if (!el) { onDone(); return; }
-  el.animate(
+  if (el.dataset.removing) return;
+  el.dataset.removing = 'true';
+  if (prefersReducedMotion()) { onDone(); return; }
+  const anim = el.animate(
     [{ transform: 'scale(1)', opacity: '1' }, { transform: 'scale(0.95)', opacity: '0' }],
     { duration: 200, easing: 'ease-out', fill: 'forwards' }
-  ).onfinish = onDone;
+  );
+  animateThen(anim, onDone);
 }
 
 interface RemovableItemProps {
@@ -36,17 +46,20 @@ function RemovableItem({ onRemove, children }: RemovableItemProps) {
   function remove() {
     const el = wrapperRef.current;
     if (!el) { onRemove(); return; }
-    el.style.overflow = 'hidden';
-    el.style.transformOrigin = 'top';
-    el.animate(
-      [{ transform: 'scaleY(1)', opacity: '1' }, { transform: 'scaleY(0)', opacity: '0' }],
-      { duration: 220, easing: 'ease-in', fill: 'forwards' }
-    ).onfinish = () => {
+    const finish = () => {
       el.style.height = '0';
       el.style.margin = '0';
       el.style.padding = '0';
       onRemove();
     };
+    if (prefersReducedMotion()) { finish(); return; }
+    el.style.overflow = 'hidden';
+    el.style.transformOrigin = 'top';
+    const anim = el.animate(
+      [{ transform: 'scaleY(1)', opacity: '1' }, { transform: 'scaleY(0)', opacity: '0' }],
+      { duration: 220, easing: 'ease-in', fill: 'forwards' }
+    );
+    animateThen(anim, finish);
   }
 
   // eslint-disable-next-line react-hooks/refs
@@ -126,10 +139,9 @@ function SavedScholarshipCard({ s, onUnsave }: SavedScholarshipCardProps) {
             fontSize: 11, fontWeight: 600, letterSpacing: '0.04em',
             textTransform: 'uppercase', color: statusColor,
           }}>
-            <span style={{
+            <span className={status === 'active' ? 'status-dot-active' : undefined} style={{
               width: 6, height: 6, borderRadius: '50%',
               background: statusColor, flexShrink: 0,
-              animation: status === 'active' ? 'statusPulse 2s ease-in-out infinite' : 'none',
               boxShadow: status === 'active' ? `0 0 6px ${statusColor}` : 'none',
             }} />
             {statusLabel}
@@ -137,7 +149,10 @@ function SavedScholarshipCard({ s, onUnsave }: SavedScholarshipCardProps) {
           <button
             ref={bmkRef}
             onClick={() => {
-              bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
+              if (cardRef.current?.dataset.removing) return;
+              if (!prefersReducedMotion()) {
+                bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
+              }
               navigator.vibrate?.(12);
               showToast('Removed from saved');
               animateCardRemove(cardRef.current, onUnsave);
@@ -251,7 +266,10 @@ function SavedProgramCard({ p, onUnsave }: SavedProgramCardProps) {
           <button
             ref={bmkRef}
             onClick={() => {
-              bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
+              if (cardRef.current?.dataset.removing) return;
+              if (!prefersReducedMotion()) {
+                bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
+              }
               navigator.vibrate?.(12);
               showToast('Removed from saved');
               animateCardRemove(cardRef.current, onUnsave);

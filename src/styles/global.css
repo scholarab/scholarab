@@ -214,10 +214,6 @@ body {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%       { opacity: 0.5; transform: scale(1.4); }
 }
-@keyframes sabSlideUp {
-  from { transform: translateY(14px); }
-  to   { transform: translateY(0); }
-}
 
 /* ── Focus ring ────────────────────────────────────────────── */
 :focus-visible {
@@ -871,6 +867,17 @@ body.quiz-results #match-divider {
 /* ── Pulse animations ────────────────────────────────────────────── */
 @keyframes softPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 .pulse-soft { animation: softPulse 2s ease-in-out infinite; }
+
+/* ── Reduced motion — entrance + looping animations ──────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card-entrance,
+  .card-entrance-filter,
+  .card-before-reveal::before,
+  .pulse-soft,
+  .status-dot-active,
+  .bmk-btn.pop { animation: none !important; }
+  #nav-underline { transition: opacity 0.2s ease; }
+}
 
 /* ── Check eligibility button ────────────────────────────────────── */
 .check-elig {

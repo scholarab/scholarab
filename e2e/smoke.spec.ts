@@ -30,7 +30,10 @@ test('match quiz - completes full 6-question flow', async ({ page }) => {
     // Scope to main content to avoid nav buttons; skip the Previous back button
     const tile = page.locator('#main-content button').filter({ hasNotText: /^Previous$/ }).first();
     await tile.click();
-    await page.waitForTimeout(350); // 240ms tile animation + buffer
+    // Deterministic step advance — no fixed sleep racing the transition window
+    if (i < 5) {
+      await expect(page.locator(`text=Question ${i + 2} of 6`)).toBeVisible({ timeout: 10_000 });
+    }
   }
 
   await expect(page.locator('text=/We found/')).toBeVisible({ timeout: 10_000 });

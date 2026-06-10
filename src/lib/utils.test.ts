@@ -135,6 +135,7 @@ function makeCanvasMock() {
     restore: vi.fn(),
     translate: vi.fn(),
     rotate: vi.fn(),
+    scale: vi.fn(),
     fillRect: vi.fn(),
     globalAlpha: 1,
     fillStyle: '',

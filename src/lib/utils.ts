@@ -23,20 +23,31 @@ interface Particle {
   color: string;
 }
 
+export function prefersReducedMotion(): boolean {
+  return typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 export function showConfetti(originEl?: Element | null): void {
+  if (prefersReducedMotion()) return;
   document.getElementById('sa-confetti')?.remove();
   const rect = originEl?.getBoundingClientRect();
-  const ox = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
-  const oy = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const ox = rect ? rect.left + rect.width / 2 : vw / 2;
+  const oy = rect ? rect.top + rect.height / 2 : vh / 2;
 
   const canvas = document.createElement('canvas');
   canvas.id = 'sa-confetti';
   canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:999999998;';
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  // Render at device resolution so particles stay sharp on HiDPI screens
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = vw * dpr;
+  canvas.height = vh * dpr;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  ctx.scale(dpr, dpr);
   document.body.appendChild(canvas);
 
-  const ctx = canvas.getContext('2d')!;
   const COLORS = ['#22d3a5', '#5ee8c4', '#ffffff', '#fbbf24', '#a78bfa', '#f472b6'];
   const particles: Particle[] = Array.from({ length: 30 }, () => {
     const angle = Math.random() * Math.PI * 2;
@@ -54,22 +65,27 @@ export function showConfetti(originEl?: Element | null): void {
   });
 
   const start = performance.now();
+  let last = start;
   function tick(now: number) {
     const elapsed = now - start;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Physics tuned at 60fps; dt scales them to the actual refresh rate
+    // (120Hz phones, throttled tabs). Capped so a background tab doesn't teleport particles.
+    const dt = Math.min((now - last) / 16.667, 3);
+    last = now;
+    ctx!.clearRect(0, 0, vw, vh);
     let alive = false;
     for (const p of particles) {
-      p.vy += 0.4; p.vx *= 0.98;
-      p.x += p.vx; p.y += p.vy;
-      p.rot += p.rotV;
-      if (p.y < canvas.height + 20) alive = true;
-      ctx.save();
-      ctx.globalAlpha = Math.max(0, 1 - elapsed / 1600);
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rot);
-      ctx.fillStyle = p.color;
-      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-      ctx.restore();
+      p.vy += 0.4 * dt; p.vx *= Math.pow(0.98, dt);
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      p.rot += p.rotV * dt;
+      if (p.y < vh + 20) alive = true;
+      ctx!.save();
+      ctx!.globalAlpha = Math.max(0, 1 - elapsed / 1600);
+      ctx!.translate(p.x, p.y);
+      ctx!.rotate(p.rot);
+      ctx!.fillStyle = p.color;
+      ctx!.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx!.restore();
     }
     if (alive && elapsed < 1800) requestAnimationFrame(tick);
     else canvas.remove();
@@ -103,10 +119,11 @@ export function showToast(message: string): void {
   });
   el.textContent = message;
   document.body.appendChild(el);
-  requestAnimationFrame(() => {
-    el.style.opacity = '1';
-    el.style.transform = 'translateX(-50%) translateY(0)';
-  });
+  // Force a style flush so the entrance transition reliably fires
+  // (a single rAF can land in the same frame as the append and skip it)
+  void el.offsetHeight;
+  el.style.opacity = '1';
+  el.style.transform = 'translateX(-50%) translateY(0)';
   setTimeout(() => {
     el.style.opacity = '0';
     el.style.transform = 'translateX(-50%) translateY(-8px)';

@@ -105,7 +105,15 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
 
     if (resizeAbort) resizeAbort.abort();
     resizeAbort = new AbortController();
-    window.addEventListener('resize', positionUnderline, { passive: true, signal: resizeAbort.signal });
+    // rAF-throttled: positionUnderline reads layout, so once per frame at most
+    let resizeRaf = 0;
+    window.addEventListener('resize', () => {
+      if (resizeRaf) return;
+      resizeRaf = requestAnimationFrame(() => {
+        resizeRaf = 0;
+        positionUnderline();
+      });
+    }, { passive: true, signal: resizeAbort.signal });
 
     const btn = document.getElementById('theme-toggle');
     if (btn) {
