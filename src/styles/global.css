@@ -775,6 +775,37 @@ html.theme-light .border-blue-500\/30 {
   .tile-col { min-height: 0; }
 }
 
+/* ── Quiz step motion ─────────────────────────────────────────────── */
+@keyframes quizStepIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes quizStepInBack {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes quizStepOut {
+  0%, 30% { opacity: 1; transform: translateY(0); }
+  100%    { opacity: 0; transform: translateY(-12px); }
+}
+@keyframes quizTileIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.quiz-step-in      { animation: quizStepIn 420ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.quiz-step-in-back { animation: quizStepInBack 360ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.quiz-step-out     { animation: quizStepOut 260ms ease-in both; pointer-events: none; }
+.quiz-tile-in      { animation: quizTileIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.quiz-opt-dim      { opacity: 0.35; transform: scale(0.99); transition: opacity 180ms ease, transform 180ms ease; }
+.quiz-results-in   { animation: quizStepIn 460ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.quiz-card-in      { animation: quizTileIn 460ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-step-in, .quiz-step-in-back, .quiz-step-out,
+  .quiz-tile-in, .quiz-results-in, .quiz-card-in { animation: none !important; }
+  .quiz-opt-dim { transition: none !important; }
+}
+
 /* ── Hero typography ─────────────────────────────────────────────── */
 .hero-tagline {
   font-size: clamp(18px, 2.5vw, 25px); font-weight: 600; letter-spacing: -0.02em;

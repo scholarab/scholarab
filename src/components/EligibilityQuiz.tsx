@@ -102,11 +102,17 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
   try {
     const raw = localStorage.getItem(QUIZ_STORAGE_KEY)
     if (raw) {
-      const parsed = JSON.parse(raw) as { step: number; answers: Record<string, string> }
-      return {
-        step: typeof parsed.step === 'number' && parsed.step >= 0 ? parsed.step : 0,
-        answers: parsed.answers ?? {},
+      const parsed = JSON.parse(raw) as { step?: unknown; answers?: unknown }
+      const step = typeof parsed.step === 'number' && Number.isFinite(parsed.step)
+        ? Math.min(Math.max(Math.trunc(parsed.step), 0), QUESTIONS.length)
+        : 0
+      const answers: Record<string, string> = {}
+      if (parsed.answers && typeof parsed.answers === 'object') {
+        for (const [k, v] of Object.entries(parsed.answers as Record<string, unknown>)) {
+          if (typeof v === 'string') answers[k] = v
+        }
       }
+      return { step, answers }
     }
   } catch { /* ignore */ }
   return { step: 0, answers: {} }
@@ -114,24 +120,24 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
 
 // ── Tile button ───────────────────────────────────────────────────────────────
 
+// Selection state lives in the parent so only one tile can ever be selected
+// and clicks during the step transition are ignored.
 function MatchTile({
-  label, emoji, delay, onClick,
-}: { label: string; emoji?: string; delay: number; onClick: () => void }) {
-  const [selected, setSelected] = useState(false)
-
-  function handleClick() {
-    setSelected(true)
-    setTimeout(onClick, 240)
-  }
-
+  label, emoji, delay, state, animateIn, onClick,
+}: {
+  label: string
+  emoji?: string
+  delay: number
+  state: 'idle' | 'selected' | 'dim'
+  animateIn: boolean
+  onClick: () => void
+}) {
   return (
     <button
-      onClick={handleClick}
-      className={`quiz-opt${selected ? ' quiz-opt-selected' : ''}`}
-      style={{
-        animation: `sabSlideUp 500ms ${delay}ms cubic-bezier(0.22, 1, 0.36, 1)`,
-        height: '100%',
-      }}
+      type="button"
+      onClick={onClick}
+      className={`quiz-opt${state === 'selected' ? ' quiz-opt-selected' : ''}${state === 'dim' ? ' quiz-opt-dim' : ''}${state === 'idle' && animateIn ? ' quiz-tile-in' : ''}`}
+      style={{ animationDelay: `${delay}ms`, height: '100%' }}
     >
       <span className="opt-left">
         {emoji && <span className="opt-emoji" aria-hidden="true">{emoji}</span>}
@@ -152,7 +158,7 @@ function MatchTile({
 // ── Result card ───────────────────────────────────────────────────────────────
 
 function ResultCard({
-  rank, highlight, title, subtitle, tags, rightTop, rightBottom,
+  rank, highlight, title, subtitle, tags, rightTop, rightBottom, delay,
 }: {
   rank: number
   highlight: boolean
@@ -161,9 +167,10 @@ function ResultCard({
   tags: ReactNode
   rightTop: ReactNode
   rightBottom: ReactNode
+  delay: number
 }) {
   return (
-    <div className="card flex items-center gap-4 p-4" style={{ paddingLeft: 20 }}>
+    <div className="card flex items-center gap-4 p-4 quiz-card-in" style={{ paddingLeft: 20, animationDelay: `${delay}ms` }}>
       <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.03em', color: highlight ? 'var(--brand)' : 'var(--text-faint)', width: 36, flexShrink: 0, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>{String(rank).padStart(2, '0')}</span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <p className="font-semibold text-primary text-sm leading-snug">{title}</p>
@@ -192,43 +199,61 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const [step, setStep] = useState(initial.step)
   const [answers, setAnswers] = useState<Record<string, string>>(initial.answers)
   const [animKey, setAnimKey] = useState(0)
+  // Index of the tile just clicked; non-null while the step is animating out
+  const [pendingTile, setPendingTile] = useState<number | null>(null)
+  const [enterDir, setEnterDir] = useState<'fwd' | 'back'>('fwd')
+  const transitionTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const mountedOnce = useRef(false)
   const questionHeadingRef = useRef<HTMLHeadingElement>(null)
 
-  // Focus question heading on step change for screen reader navigation
+  useEffect(() => () => {
+    if (transitionTimeout.current) clearTimeout(transitionTimeout.current)
+  }, [])
+
+  // Focus question heading on step change for screen reader navigation.
+  // Skipped on first render so hydration doesn't steal focus from the page.
   useEffect(() => {
+    if (!mountedOnce.current) {
+      mountedOnce.current = true
+      return
+    }
     if (step < QUESTIONS.length) {
-      questionHeadingRef.current?.focus()
+      questionHeadingRef.current?.focus({ preventScroll: true })
     }
   }, [animKey, step])
 
-  // Persist
+  // Persist — including the completed state, so results survive a reload
   useEffect(() => {
-    if (step < QUESTIONS.length) {
-      try { localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step, answers })) } catch { /* ignore */ }
-    }
+    try { localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step, answers })) } catch { /* ignore */ }
   }, [step, answers])
 
-  function answer(key: string, value: string) {
-    const next = { ...answers, [key]: value }
-    setAnswers(next)
-    setAnimKey(k => k + 1)
-    if (step + 1 >= QUESTIONS.length) {
-      setStep(QUESTIONS.length)
-    } else {
-      setStep(s => s + 1)
-    }
+  function answer(key: string, value: string, index: number) {
+    if (pendingTile !== null) return
+    setPendingTile(index)
+    transitionTimeout.current = setTimeout(() => {
+      setPendingTile(null)
+      setAnswers(a => ({ ...a, [key]: value }))
+      setEnterDir('fwd')
+      setAnimKey(k => k + 1)
+      setStep(s => Math.min(s + 1, QUESTIONS.length))
+    }, 260)
   }
 
   function reset() {
     try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
+    if (transitionTimeout.current) clearTimeout(transitionTimeout.current)
+    setPendingTile(null)
     setAnswers({})
+    setEnterDir('fwd')
     setStep(0)
     setAnimKey(k => k + 1)
   }
 
   function back() {
+    if (pendingTile !== null) return
+    setEnterDir('back')
     setAnimKey(k => k + 1)
-    setStep(s => s - 1)
+    setStep(s => Math.max(s - 1, 0))
   }
 
   // Build profile from answers
@@ -324,7 +349,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         : `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} you qualify for.`
 
     return (
-      <div>
+      <div className="quiz-results-in">
         {/* Segmented progress — all filled */}
         <div className="seg-progress" style={{ marginBottom: 14, width: 260 }}>
           {QUESTIONS.map((_, i) => (
@@ -385,6 +410,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   <ResultCard
                     key={s.id}
                     rank={index + 1}
+                    delay={Math.min(index * 40, 320)}
                     highlight={index === 0}
                     title={s.title}
                     subtitle={s.audience}
@@ -425,6 +451,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 <ResultCard
                   key={p.id}
                   rank={index + 1}
+                  delay={Math.min(index * 40, 320)}
                   highlight={index === 0 && !showScholarships}
                   title={p.name}
                   subtitle={p.provider}
@@ -471,15 +498,17 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         ))}
       </div>
 
-      {/* Header row */}
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
-        <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
-          Question {step + 1} of {QUESTIONS.length}
-        </span>
-      </div>
+      {/* Question + tiles — exit animates out, next step animates in directionally */}
+      <div
+        key={`${animKey}-${step}`}
+        className={pendingTile !== null ? 'quiz-step-out' : enterDir === 'back' ? 'quiz-step-in-back' : 'quiz-step-in'}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
+          <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
+            Question {step + 1} of {QUESTIONS.length}
+          </span>
+        </div>
 
-      {/* Question + tiles — animated on step change */}
-      <div key={`${animKey}-${step}`} style={{ animation: 'sabSlideUp 420ms cubic-bezier(0.22, 1, 0.36, 1) both' }}>
         <h2 ref={questionHeadingRef} tabIndex={-1} className="text-primary" style={{ fontSize: 'clamp(22px, 3.5vw, 36px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 16, outline: 'none' }}>
           {current.q}
         </h2>
@@ -496,7 +525,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       label={opt.label}
                       emoji={opt.emoji}
                       delay={i * 50}
-                      onClick={() => answer(current.key, opt.value)}
+                      state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : 'idle'}
+                      animateIn={enterDir === 'fwd'}
+                      onClick={() => answer(current.key, opt.value, i)}
                     />
                   </div>
                 );
