@@ -81,7 +81,6 @@ const QUESTIONS: QuizQuestion[] = [
     opts: [
       { label: 'University of Calgary', value: 'University of Calgary' },
       { label: 'University of Alberta', value: 'University of Alberta' },
-      { label: 'Other', value: '', emoji: '🏫' },
       { label: 'Mount Royal University', value: 'Mount Royal University' },
       { label: 'Medicine Hat College', value: 'Medicine Hat College' },
       { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', emoji: '🔨' },
