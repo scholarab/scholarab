@@ -56,7 +56,7 @@ function ScholarshipCardInner({ scholarship, index, isSaved, onToggleSave, isFil
   return (
     <div
       ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card card-bloom card-interactive p-5 flex flex-col justify-between`}
+      className="card card-bloom card-interactive p-5 flex flex-col justify-between"
       style={{ minHeight: 280, opacity: isClosed ? 0.45 : isUpcoming ? 0.8 : undefined, borderTop: `3px solid ${badge.color}`, '--bloom-color': badge.color } as React.CSSProperties}
     >
       <div>
@@ -180,7 +180,7 @@ export function ProgramCard({ program, index, isSaved, onToggleSave, isFiltered,
   return (
     <div
       ref={cardRef}
-      className={`${isInitial ? '' : 'card-before-reveal '}card card-bloom card-interactive p-5 flex flex-col justify-between`}
+      className="card card-bloom card-interactive p-5 flex flex-col justify-between"
       style={{ minHeight: 320, opacity: isClosed ? 0.45 : undefined, borderTop: `3px solid ${badge.color}`, '--bloom-color': badge.color } as React.CSSProperties}
     >
       <div>

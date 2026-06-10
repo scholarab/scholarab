@@ -40,10 +40,7 @@ type ScholarshipSort = 'closest_due' | 'highest_pay' | 'lowest_pay';
 export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [sortBy,         setSortBy        ] = useState<ScholarshipSort>('closest_due');
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | null>(null);
-  const [selectedCategory, setSelectedCategoryRaw] = useState(() => {
-    if (typeof window === 'undefined') return 'all';
-    return new URLSearchParams(window.location.search).get('category') ?? 'all';
-  });
+  const [selectedCategory, setSelectedCategoryRaw] = useState('all');
   const [statusFilter,   setStatusFilterRaw] = useState<StatusFilter>('all');
   const [searchQuery,    setSearchQueryRaw] = useState('');
   const [page,           setPage          ] = useState(1);
@@ -81,6 +78,17 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSavedIds([...getSaved()]);
+  }, []);
+
+  // Apply ?category= after mount instead of in the initial state: the page is
+  // prerendered unfiltered, so reading the URL during init makes hydration
+  // tear the cards over to the filtered set. Applying it here keeps first
+  // paint identical to the HTML, then animates into the filter.
+  useEffect(() => {
+    const cat = new URLSearchParams(window.location.search).get('category');
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (cat) setCategory(cat);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleToggleSave = useCallback((id: number) => {

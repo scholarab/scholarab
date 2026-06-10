@@ -451,11 +451,7 @@ html.theme-dark .glass-nav.scrolled {
   transform: translateY(-2px);
 }
 
-/* ── Card entrance animations ─────────────────────────────── */
-@keyframes cardEntrance {
-  from { opacity: 0; transform: translateY(14px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
+/* ── Card entrance on filter change ───────────────────────── */
 @keyframes cardEntranceFilter {
   from { opacity: 0; transform: translateX(-14px) scale(0.97); }
   to   { opacity: 1; transform: translateX(0) scale(1); }
@@ -464,39 +460,6 @@ html.theme-dark .glass-nav.scrolled {
   animation: cardEntranceFilter 0.3s var(--spring) both;
   animation-delay: var(--card-delay, 0s);
 }
-@keyframes shimmer {
-  to { transform: translateX(200%); }
-}
-.card.card-before-reveal {
-  opacity: 1;
-  position: relative;
-  overflow: hidden;
-  background: var(--bg-subtle) !important;
-  border-color: var(--border-card) !important;
-  border-top-color: var(--border-card) !important;
-  will-change: transform;
-}
-.card.card-before-reveal::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(var(--brand-rgb), 0.05) 50%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  animation: shimmer 1.5s ease-in-out infinite;
-  pointer-events: none;
-  will-change: transform;
-}
-.card-before-reveal * { opacity: 0 !important; }
-.card-entrance {
-  animation: cardEntrance var(--t-card) var(--spring) both;
-  animation-delay: var(--card-delay, 0s);
-}
-.card-entrance * { opacity: 1 !important; }
 
 /* ── Page view transitions ────────────────────────────────── */
 @keyframes page-in {
@@ -886,9 +849,7 @@ body.quiz-results #match-divider {
 
 /* ── Reduced motion — entrance + looping animations ──────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .card-entrance,
   .card-entrance-filter,
-  .card-before-reveal::before,
   .pulse-soft,
   .status-dot-active,
   .bmk-btn.pop { animation: none !important; }

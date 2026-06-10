@@ -89,7 +89,7 @@ export function FilterSheet({ open, onOpenChange, children }: FilterSheetProps) 
         <Drawer.Content
           aria-label="Filter and sort options"
           className="fixed left-0 right-0 z-50 md:hidden rounded-t-2xl flex flex-col outline-hidden"
-          style={{ bottom: 64, backgroundColor: 'var(--bg-card)', boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
+          style={{ bottom: 'calc(64px + env(safe-area-inset-bottom, 0px))', backgroundColor: 'var(--bg-card)', boxShadow: '0 -8px 40px rgba(0,0,0,0.18)', maxHeight: 'calc(85vh - 64px)' }}>
           <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-subtle shrink-0">
             <span className="font-semibold text-primary text-base">Filter & Sort</span>
             <button onClick={() => onOpenChange(false)} aria-label="Close"

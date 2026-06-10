@@ -8,8 +8,8 @@ const activeTab = currentPath.startsWith('/saved') ? 'saved'
   : 'home';
 ---
 
-<nav id="bottom-nav" aria-label="Mobile navigation" class="bottom-nav-bar md:hidden fixed" style="z-index: 9999; bottom: max(12px, env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); width: max-content;">
-  <div class="flex relative" style="padding: 6px; gap: 2px;">
+<nav id="bottom-nav" aria-label="Mobile navigation" class="bottom-nav-bar md:hidden fixed" style="z-index: 9999; bottom: 0; left: 0; right: 0;">
+  <div class="flex relative" style="padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px)); gap: 2px; justify-content: space-around; max-width: 560px; margin: 0 auto;">
 
     <!-- Home -->
     <a href="/" id="bn-home" class="bn-tab flex flex-col items-center justify-center gap-[3px]" style="z-index:1;padding:8px 12px 10px;border-radius:22px;position:relative;" aria-label="Home" aria-current={activeTab === 'home' ? 'page' : 'false'}>
@@ -102,16 +102,11 @@ const activeTab = currentPath.startsWith('/saved') ? 'saved'
 <style is:global>
   .bottom-nav-bar {
     background: var(--nav-glass-bg);
-    border: 1px solid var(--bottom-nav-border);
-    border-radius: 28px;
+    border-top: 1px solid var(--bottom-nav-border);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset;
     pointer-events: auto;
     will-change: transform;
-  }
-  html.theme-light .bottom-nav-bar {
-    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset;
   }
   .bn-tab {
     color: var(--bn-tab-color);
