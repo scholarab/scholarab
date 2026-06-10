@@ -1,14 +1,3 @@
-let _saved: number[] | null = null;
-let _savedPrograms: number[] | null = null;
-
-// Invalidate in-memory caches when another tab writes to localStorage
-if (typeof window !== 'undefined') {
-  window.addEventListener('storage', (e: StorageEvent) => {
-    if (e.key === 'scholarab_saved')          _saved = null;
-    if (e.key === 'scholarab_saved_programs') _savedPrograms = null;
-  });
-}
-
 /** Coerce legacy string ids to numbers, dedupe, drop garbage (matches numeric ids in JSON). */
 function normalizeIdList(raw: unknown[]): number[] {
   if (!Array.isArray(raw)) return [];
@@ -28,50 +17,47 @@ function normalizeIdList(raw: unknown[]): number[] {
   return out;
 }
 
-export function getSaved(): number[] {
-  if (_saved === null) {
-    try {
-      const raw = JSON.parse(localStorage.getItem('scholarab_saved') || '[]') as unknown[];
-      _saved = normalizeIdList(raw);
-      if (JSON.stringify(raw) !== JSON.stringify(_saved)) {
-        localStorage.setItem('scholarab_saved', JSON.stringify(_saved));
-      }
-    } catch {
-      _saved = [];
-    }
+function makeTracker(key: string) {
+  let cache: number[] | null = null;
+
+  // Invalidate the in-memory cache when another tab writes to localStorage
+  if (typeof window !== 'undefined') {
+    window.addEventListener('storage', (e: StorageEvent) => {
+      if (e.key === key) cache = null;
+    });
   }
-  return _saved;
-}
 
-export function toggleSaved(id: number): number[] {
-  const saved = getSaved();
-  const idx = saved.findIndex((s) => s === id);
-  if (idx > -1) saved.splice(idx, 1);
-  else saved.push(id);
-  localStorage.setItem('scholarab_saved', JSON.stringify(saved));
-  return saved;
-}
-
-export function getSavedPrograms(): number[] {
-  if (_savedPrograms === null) {
-    try {
-      const raw = JSON.parse(localStorage.getItem('scholarab_saved_programs') || '[]') as unknown[];
-      _savedPrograms = normalizeIdList(raw);
-      if (JSON.stringify(raw) !== JSON.stringify(_savedPrograms)) {
-        localStorage.setItem('scholarab_saved_programs', JSON.stringify(_savedPrograms));
+  function get(): number[] {
+    if (cache === null) {
+      try {
+        const raw = JSON.parse(localStorage.getItem(key) || '[]') as unknown[];
+        cache = normalizeIdList(raw);
+        if (JSON.stringify(raw) !== JSON.stringify(cache)) {
+          localStorage.setItem(key, JSON.stringify(cache));
+        }
+      } catch {
+        cache = [];
       }
-    } catch {
-      _savedPrograms = [];
     }
+    return cache;
   }
-  return _savedPrograms;
+
+  function toggle(id: number): number[] {
+    const saved = get();
+    const idx = saved.findIndex((s) => s === id);
+    if (idx > -1) saved.splice(idx, 1);
+    else saved.push(id);
+    localStorage.setItem(key, JSON.stringify(saved));
+    return saved;
+  }
+
+  return { get, toggle };
 }
 
-export function toggleSavedProgram(id: number): number[] {
-  const saved = getSavedPrograms();
-  const idx = saved.findIndex((s) => s === id);
-  if (idx > -1) saved.splice(idx, 1);
-  else saved.push(id);
-  localStorage.setItem('scholarab_saved_programs', JSON.stringify(saved));
-  return saved;
-}
+const scholarshipTracker = makeTracker('scholarab_saved');
+const programTracker     = makeTracker('scholarab_saved_programs');
+
+export const getSaved           = (): number[] => scholarshipTracker.get();
+export const toggleSaved        = (id: number): number[] => scholarshipTracker.toggle(id);
+export const getSavedPrograms   = (): number[] => programTracker.get();
+export const toggleSavedProgram = (id: number): number[] => programTracker.toggle(id);

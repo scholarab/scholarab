@@ -4,6 +4,7 @@ import type {
   MatchResult,
   ConfidenceTier,
 } from './eligibility-types'
+import type { Program } from './data-loader'
 
 // Alberta cities recognised for region matching
 const ALBERTA_CITIES = new Set([
@@ -15,6 +16,18 @@ function regionMatches(city: string, scholarshipRegion: string | null): boolean 
   if (scholarshipRegion === 'Alberta') return ALBERTA_CITIES.has(city)
   return scholarshipRegion === city
 }
+
+// Confidence scoring weights (specificity signals)
+const BASE_CONFIDENCE              = 0.35
+const CITY_SPECIFIC_BOOST          = 0.25
+const GRADE_MATCH_BOOST            = 0.15
+const BOARD_MATCH_BOOST            = 0.15
+const FIELD_MATCH_BOOST            = 0.20
+const FIELD_MISMATCH_PENALTY       = 0.15
+const INSTITUTION_MATCH_BOOST      = 0.15
+const INSTITUTION_MISMATCH_PENALTY = 0.10
+const AVERAGE_CLEARED_BOOST        = 0.10
+const FINANCIAL_NEED_BOOST         = 0.10
 
 /**
  * Determine whether a student profile matches a scholarship.
@@ -136,44 +149,44 @@ export function matchScholarship(
   }
 
   // ── Confidence scoring (specificity signals) ──────────────────────────────
-  let confidence = 0.35 // base: passed all hard filters
+  let confidence = BASE_CONFIDENCE // passed all hard filters
 
   // City-specific match — scholarship is for this exact city (not national/provincial)
   if (region && region !== 'National' && region !== 'Alberta' && region !== 'Alberta-wide') {
-    confidence += 0.25
+    confidence += CITY_SPECIFIC_BOOST
   }
 
   // Grade restriction confirmed match
-  if (eligibility.grades.length > 0) confidence += 0.15
+  if (eligibility.grades.length > 0) confidence += GRADE_MATCH_BOOST
 
   // School board confirmed match
   if (eligibility.schoolBoards.length > 0 && profile.schoolBoard &&
       eligibility.schoolBoards.includes(profile.schoolBoard)) {
-    confidence += 0.15
+    confidence += BOARD_MATCH_BOOST
   }
 
   // Field of study
   if (eligibility.fields.length > 0 && profile.fields.length > 0) {
-    if (profile.fields.some(f => eligibility.fields.includes(f))) confidence += 0.20
-    else confidence -= 0.15
+    if (profile.fields.some(f => eligibility.fields.includes(f))) confidence += FIELD_MATCH_BOOST
+    else confidence -= FIELD_MISMATCH_PENALTY
   }
 
   // Target institution
   if (eligibility.targetInstitutions.length > 0 && !eligibility.targetInstitutions.includes('any')) {
     if (profile.targetInstitution) {
-      if (eligibility.targetInstitutions.includes(profile.targetInstitution)) confidence += 0.15
-      else confidence -= 0.10
+      if (eligibility.targetInstitutions.includes(profile.targetInstitution)) confidence += INSTITUTION_MATCH_BOOST
+      else confidence -= INSTITUTION_MISMATCH_PENALTY
     }
   }
 
   // Average confirmed — student provided their average and it clears the bar
   if (eligibility.minAverage !== null && profile.averagePercent !== null) {
-    confidence += 0.10
+    confidence += AVERAGE_CLEARED_BOOST
   }
 
   // Financial need confirmed match
   if (eligibility.financialNeed && profile.hasFinancialNeed === true) {
-    confidence += 0.10
+    confidence += FINANCIAL_NEED_BOOST
   }
 
   confidence = Math.max(0.1, Math.min(1, confidence))
@@ -202,6 +215,33 @@ export function matchProgram(
   const min = Math.min(...nums)
   const max = Math.max(...nums)
   return grade >= min && grade <= max
+}
+
+const FIELD_KEYWORDS: Record<string, string[]> = {
+  STEM:     ['stem', 'science', 'engineering', 'technology', 'math', 'research', 'computer', 'physics', 'chemistry'],
+  health:   ['health', 'medicine', 'medical', 'biology', 'nursing', 'life science', 'biomedical'],
+  business: ['business', 'commerce', 'economics', 'finance', 'entrepreneurship', 'management'],
+  arts:     ['arts', 'humanities', 'english', 'social', 'history', 'music', 'fine art', 'writing'],
+  trades:   ['trades', 'apprenticeship', 'technical', 'vocational', 'skilled'],
+}
+
+/**
+ * Filter active programs by the student's grade, narrow by field keywords when
+ * that doesn't empty the list, and return the top 10.
+ */
+export function matchPrograms(programs: Program[], answers: Record<string, string>): Program[] {
+  const grade = answers.grade ?? '12'
+  let filtered = programs.filter(p => p.active && matchProgram(grade, p))
+  const field = answers.field
+  if (field && FIELD_KEYWORDS[field]) {
+    const keywords = FIELD_KEYWORDS[field]
+    const byField = filtered.filter(p => {
+      const text = ((p.category ?? '') + ' ' + (p.description ?? '')).toLowerCase()
+      return keywords.some(kw => text.includes(kw))
+    })
+    if (byField.length > 0) filtered = byField
+  }
+  return filtered.slice(0, 10)
 }
 
 /**

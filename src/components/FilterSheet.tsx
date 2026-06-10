@@ -106,7 +106,7 @@ export function FilterSheet({ open, onOpenChange, children }: FilterSheetProps) 
             style={{ paddingBottom: 'max(16px, env(safe-area-inset-bottom))' }}>
             <button onClick={() => onOpenChange(false)}
               className="w-full py-3 rounded-xl text-sm font-semibold transition-opacity hover:opacity-90"
-              style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Done</button>
+              style={{ background: 'var(--brand)', color: 'var(--bg-page)' }}>Done</button>
           </div>
         </Drawer.Content>
       </Drawer.Portal>
