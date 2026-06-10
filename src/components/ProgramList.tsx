@@ -67,7 +67,7 @@ function ProgramList({ items }: Props) {
       </FilterSheet>
 
       {/* Card grid */}
-      <div key={`${categoryKey}-${page}`} className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
+      <div key={`${categoryKey}-${page}`} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" style={{ alignItems: 'stretch' }}>
         {visibleItems.map((p, i) => (
           <ProgramCard key={p.id} program={p} index={i} isSaved={savedSet.has(p.id)} onToggleSave={() => handleToggleSave(p.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
         ))}

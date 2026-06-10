@@ -203,7 +203,7 @@ function ScholarshipList({ items }: Props) {
       </FilterSheet>
 
       {/* Card grid */}
-      <div key={`${regionKey}-${categoryKey}-${sortBy}-${page}`} className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ alignItems: 'stretch' }}>
+      <div key={`${regionKey}-${categoryKey}-${sortBy}-${page}`} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" style={{ alignItems: 'stretch' }}>
         {visibleItems.map((s, i) => (
           <ScholarshipCard key={s.id} scholarship={s} index={i} isSaved={savedSet.has(s.id)} onToggleSave={() => handleToggleSave(s.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
         ))}

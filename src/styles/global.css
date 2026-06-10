@@ -498,24 +498,37 @@ html.theme-dark .glass-nav.scrolled {
 
 /* ── Page view transitions ────────────────────────────────── */
 @keyframes page-in {
-  from { opacity: 0; transform: translate3d(20px, 0, 0); }
+  from { opacity: 0; transform: translate3d(16px, 0, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 @keyframes page-in-reverse {
-  from { opacity: 0; transform: translate3d(-20px, 0, 0); }
+  from { opacity: 0; transform: translate3d(-16px, 0, 0); }
   to   { opacity: 1; transform: translate3d(0, 0, 0); }
 }
+@keyframes page-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+/* Old page fades under the incoming one — no flash to the page background */
 ::view-transition-old(root) {
-  animation: none;
-  opacity: 0;
+  animation: page-out 0.14s ease both;
 }
 ::view-transition-new(root) {
-  animation: page-in 0.28s cubic-bezier(0, 0, 0.2, 1) both;
+  animation: page-in 0.2s cubic-bezier(0, 0, 0.2, 1) both;
 }
 /* Swipe right → previous page slides in from left */
 html[data-swipe-dir="right"] ::view-transition-new(root) {
-  animation: page-in-reverse 0.28s cubic-bezier(0, 0, 0.2, 1) both;
+  animation: page-in-reverse 0.2s cubic-bezier(0, 0, 0.2, 1) both;
 }
+
+/* Nav bars persist across page swaps — only the content animates */
+#top-nav-wrapper { view-transition-name: site-nav; }
+#bottom-nav      { view-transition-name: bottom-nav; }
+::view-transition-old(site-nav),
+::view-transition-new(site-nav),
+::view-transition-old(bottom-nav),
+::view-transition-new(bottom-nav) { animation: none; }
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none; }

@@ -67,10 +67,9 @@ function ScholarshipCardInner({ scholarship, index, isSaved, onToggleSave, isFil
           </span>
         </div>
 
-        <h2 className={`font-bold text-base leading-snug mb-1 ${isClosed ? 'text-faint' : 'text-primary'}`}>
+        <h2 className={`font-bold text-base leading-snug mb-3 ${isClosed ? 'text-faint' : 'text-primary'}`}>
           {scholarship.title}
         </h2>
-        <p className="text-xs mb-3 text-tertiary">{scholarship.audience}</p>
 
         {scholarship.amount && (
           <p className="mb-2" style={{ fontSize: 20, fontWeight: 800, color: isClosed ? 'var(--text-faint)' : 'var(--brand)', letterSpacing: '-0.03em' }}>

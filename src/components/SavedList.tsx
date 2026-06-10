@@ -331,7 +331,7 @@ function SavedListSkeleton() {
       <div style={{ height: 18, width: 100, borderRadius: 6, background: 'var(--bg-subtle)', marginBottom: 24 }} className="animate-pulse" />
       <div style={{ height: 38, width: 160, borderRadius: 10, background: 'var(--bg-subtle)', marginBottom: 28 }} className="animate-pulse" />
       <div style={{ height: 14, width: 90, borderRadius: 4, background: 'var(--bg-subtle)', marginBottom: 16 }} className="animate-pulse" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
         {[0, 1].map(i => (
           <div key={i} className="card animate-pulse" style={{ height: 180 }} />
         ))}
@@ -433,6 +433,16 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
         }>
           <DeadlineCalendar scholarships={savedScholarships} programs={savedPrograms} />
         </Suspense>
+      ) : savedScholarships.length === 0 && savedPrograms.length === 0 ? (
+        <div className="empty-state">
+          <span className="ico empty-bounce" aria-hidden="true">🔖</span>
+          <p className="font-semibold text-primary mb-2">Nothing saved yet</p>
+          <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">Bookmark scholarships and programs to track their deadlines in one place.</p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a href="/scholarships" className="empty-clear" style={{ textDecoration: 'none' }}>Browse scholarships</a>
+            <a href="/programs" className="empty-clear" style={{ textDecoration: 'none', background: 'var(--brand-dim)', color: 'var(--brand)', border: '1px solid var(--brand-border)' }}>Browse programs</a>
+          </div>
+        </div>
       ) : (
         <div className="space-y-10">
           <section>
@@ -443,7 +453,7 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
             {savedScholarships.length === 0 ? (
               <EmptyState href="/scholarships" label="Find scholarships" />
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {savedScholarships.map((s) => (
                   <RemovableItem key={s.id} onRemove={() => unsaveScholarship(s.id)}>
                     {(triggerRemove) => (
@@ -463,7 +473,7 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
             {savedPrograms.length === 0 ? (
               <EmptyState href="/programs" label="Find programs" />
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                 {savedPrograms.map((p) => (
                   <RemovableItem key={p.id} onRemove={() => unsaveProgram(p.id)}>
                     {(triggerRemove) => (
