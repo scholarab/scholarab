@@ -8,7 +8,7 @@ const activeTab = currentPath.startsWith('/saved') ? 'saved'
   : 'home';
 ---
 
-<nav id="bottom-nav" aria-label="Mobile navigation" class="bottom-nav-bar md:hidden fixed" style="z-index: 9999; bottom: 24px; left: 50%; transform: translateX(-50%); width: max-content;">
+<nav id="bottom-nav" aria-label="Mobile navigation" class="bottom-nav-bar md:hidden fixed" style="z-index: 9999; bottom: max(12px, env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); width: max-content;">
   <div class="flex relative" style="padding: 6px; gap: 2px;">
 
     <!-- Home -->
@@ -106,12 +106,12 @@ const activeTab = currentPath.startsWith('/saved') ? 'saved'
     border-radius: 28px;
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.08) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset;
     pointer-events: auto;
     will-change: transform;
   }
   html.theme-light .bottom-nav-bar {
-    box-shadow: 0 12px 32px rgba(10,10,15,0.15), 0 1px 0 rgba(255,255,255,0.9) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset;
   }
   .bn-tab {
     color: var(--bn-tab-color);
