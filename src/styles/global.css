@@ -70,6 +70,7 @@ html.theme-dark {
   --brand-rgb:    34, 211, 165;
   --brand-dim:    rgba(34, 211, 165, 0.10);
   --brand-border: rgba(34, 211, 165, 0.35);
+  --text-on-brand: #0a0a0f;
 
   /* Page & card surfaces */
   --bg-page:    #0a0a0f;
@@ -129,6 +130,7 @@ html.theme-light {
   --brand-rgb:    12, 128, 96;
   --brand-dim:    rgba(12, 128, 96, 0.10);
   --brand-border: rgba(12, 128, 96, 0.35);
+  --text-on-brand: #ffffff;
 
   /* Page & card surfaces */
   --bg-page:    #f5f5f7;
@@ -697,7 +699,7 @@ html.theme-light .border-blue-500\/30 {
   display: inline-flex;
   align-items: center;
   background: var(--brand);
-  color: #0a0a0f;
+  color: var(--text-on-brand);
   font-size: 13px;
   font-weight: 600;
   padding: 9px 20px;
@@ -841,7 +843,7 @@ html.theme-light .border-blue-500\/30 {
 .btn-pill-filled {
   display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
   padding: 14px 34px; border-radius: 999px; font-size: 14px; font-weight: 700;
-  background: var(--brand); color: #0a0a0f; text-decoration: none; cursor: pointer; border: none;
+  background: var(--brand); color: var(--text-on-brand); text-decoration: none; cursor: pointer; border: none;
   transition: transform 0.25s var(--spring), box-shadow 0.25s ease;
 }
 .btn-pill-filled:hover { box-shadow: 0 8px 28px rgba(var(--brand-rgb), 0.4); }

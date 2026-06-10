@@ -156,7 +156,7 @@ const isPremium = deadlineFormatted !== undefined;
           <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
             onclick="window.va?.('event',{name:'apply_detail'})"
             class="btn-teal w-full py-4 rounded-2xl text-base font-semibold flex items-center justify-center gap-2"
-            style="background:var(--brand);color:#0a0a0f;">
+            style="background:var(--brand);color:var(--text-on-brand);">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M10 4H5a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1v-5"/></svg>
             {applyLabel}
           </a>
@@ -241,7 +241,7 @@ const isPremium = deadlineFormatted !== undefined;
           <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
             onclick="window.va?.('event',{name:'apply_detail'})"
             class="btn-teal flex-1 text-center py-3 px-4 rounded-xl text-sm font-semibold"
-            style="background: var(--brand); color: #0a0a0f; display: flex; align-items: center; justify-content: center;">
+            style="background: var(--brand); color: var(--text-on-brand); display: flex; align-items: center; justify-content: center;">
             {ctaLabel}
           </a>
         )}

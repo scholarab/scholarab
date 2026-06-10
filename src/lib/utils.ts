@@ -104,8 +104,8 @@ export function showToast(message: string): void {
     top: '72px',
     left: '50%',
     transform: 'translateX(-50%) translateY(-8px)',
-    background: '#22d3a5',
-    color: '#0a0a0f',
+    background: 'var(--brand)',
+    color: 'var(--text-on-brand)',
     padding: '10px 22px',
     borderRadius: '999px',
     fontSize: '13px',
@@ -115,7 +115,7 @@ export function showToast(message: string): void {
     opacity: '0',
     pointerEvents: 'none',
     transition: 'opacity 0.25s ease, transform 0.25s ease',
-    boxShadow: '0 4px 20px rgba(34,211,165,0.35)',
+    boxShadow: '0 4px 20px rgba(var(--brand-rgb), 0.35)',
   });
   el.textContent = message;
   document.body.appendChild(el);

@@ -389,10 +389,10 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         <div className="mb-6 pt-2 flex flex-col sm:flex-row gap-3">
           <button onClick={reset} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-card text-secondary transition">Retake quiz</button>
           {showScholarships && (
-            <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#fff' }}>Browse all scholarships</a>
+            <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: 'var(--text-on-brand)' }}>Browse all scholarships</a>
           )}
           {showPrograms && !showScholarships && (
-            <a href="/programs" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#fff' }}>Browse all programs</a>
+            <a href="/programs" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: 'var(--text-on-brand)' }}>Browse all programs</a>
           )}
         </div>
 
@@ -475,7 +475,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <div className="text-center py-12 px-4">
             <p className="font-semibold text-primary mb-2">No matches found for your profile</p>
             <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">Try leaving optional fields blank. Average and institution answers narrow results significantly.</p>
-            <button onClick={reset} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#fff' }}>Try again</button>
+            <button onClick={reset} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: 'var(--text-on-brand)' }}>Try again</button>
           </div>
         )}
 

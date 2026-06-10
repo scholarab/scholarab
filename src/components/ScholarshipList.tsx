@@ -39,7 +39,7 @@ function ScholarshipList({ items }: Props) {
   const {
     filtered, visibleItems, page, totalPages, handlePageChange,
     sortBy, setSort, selectedRegion, setRegion,
-    selectedCategory, setCategory,
+    selectedCategory, setCategory, clearFilters,
     statusFilter, setStatusFilter,
     sheetOpen, setSheetOpen, hasActiveFilters,
     savedIds, handleToggleSave, isFiltered,
@@ -217,7 +217,7 @@ function ScholarshipList({ items }: Props) {
           <p className="font-semibold text-primary mb-2">No scholarships match your filters</p>
           <p className="text-sm text-secondary mb-6">Try a different region, category, or status.</p>
           {hasActiveFilters && (
-            <button className="empty-clear" onClick={() => { setRegion(null); setCategory(null); setStatusFilter('all'); }}>
+            <button className="empty-clear" onClick={clearFilters}>
               Clear filters
             </button>
           )}

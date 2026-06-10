@@ -70,6 +70,14 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     setPage(1);
   }, []);
 
+  const clearFilters = useCallback(() => {
+    setSelectedRegion(null);
+    setSelectedCategoryRaw('all');
+    setStatusFilterRaw('all');
+    setSearchQueryRaw('');
+    setPage(1);
+  }, []);
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSavedIds([...getSaved()]);
@@ -166,6 +174,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     setSheetOpen,
     selectedCategory,
     setCategory,
+    clearFilters,
     hasActiveFilters: sortBy !== 'closest_due' || selectedRegion !== null || selectedCategory !== 'all' || statusFilter !== 'all' || searchQuery !== '',
     regionKey:        selectedRegion ?? '',
     categoryKey:      selectedCategory,
@@ -221,6 +230,11 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     setPage(1);
   }, [selectedCategory]);
 
+  const clearFilters = useCallback(() => {
+    setSelectedCategory('all');
+    setPage(1);
+  }, []);
+
   const handleSetSort = useCallback((value: ProgramSort) => {
     setHasFiltered(true);
     setSortBy(value);
@@ -262,6 +276,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     setSort:          handleSetSort,
     selectedCategory,
     setCategory:      handleSetCategory,
+    clearFilters,
     sheetOpen,
     setSheetOpen,
     hasActiveFilters: selectedCategory !== 'all',

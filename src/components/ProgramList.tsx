@@ -14,7 +14,7 @@ interface Props {
 function ProgramList({ items }: Props) {
   const {
     filtered, visibleItems, page, totalPages, handlePageChange,
-    selectedCategory, setCategory,
+    selectedCategory, setCategory, clearFilters,
     sheetOpen, setSheetOpen, hasActiveFilters,
     savedIds, handleToggleSave, isFiltered, categoryKey,
   } = usePrograms(items);
@@ -81,7 +81,7 @@ function ProgramList({ items }: Props) {
           <p className="font-semibold text-primary mb-2">No programs match your filters</p>
           <p className="text-sm text-secondary mb-6">Try a different category.</p>
           {hasActiveFilters && (
-            <button className="empty-clear" onClick={() => setCategory(null)}>
+            <button className="empty-clear" onClick={clearFilters}>
               Clear filters
             </button>
           )}
