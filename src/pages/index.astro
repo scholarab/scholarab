@@ -226,6 +226,11 @@ const closingSoon = scholarships
     const el = document.getElementById('hero-amount-count');
     if (!el || el.dataset.counted) return;
     el.dataset.counted = 'true';
+    // Count up once per visit — returning to Home through the site shows the static value
+    try {
+      if (sessionStorage.getItem('sab_hero_counted')) return;
+      sessionStorage.setItem('sab_hero_counted', '1');
+    } catch { /* storage unavailable — animate anyway */ }
     const total = parseInt(el.dataset.total || '', 10);
     if (!Number.isFinite(total) || total <= 0) return;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
