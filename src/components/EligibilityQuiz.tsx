@@ -138,17 +138,10 @@ function MatchTile({
   return (
     <button
       onClick={handleClick}
-      className="quiz-opt"
+      className={`quiz-opt${selected ? ' quiz-opt-selected' : ''}`}
       style={{
-        animation: `sabSlideUp 500ms ${delay}ms cubic-bezier(0.22, 1, 0.36, 1) both`,
+        animation: `sabSlideUp 500ms ${delay}ms cubic-bezier(0.22, 1, 0.36, 1)`,
         height: '100%',
-        ...(selected ? {
-          background: 'linear-gradient(180deg, var(--brand) 0%, #1cc195 100%)',
-          color: '#05130d',
-          borderColor: 'var(--brand)',
-          transform: 'scale(0.98)',
-          boxShadow: '0 8px 32px rgba(34,211,165,0.3)',
-        } : undefined),
       }}
     >
       <span className="opt-left">
@@ -330,7 +323,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     return (
       <div>
         {/* Segmented progress — all filled */}
-        <div className="seg-progress" style={{ marginBottom: 14, width: 200 }}>
+        <div className="seg-progress" style={{ marginBottom: 14, width: 260 }}>
           {QUESTIONS.map((_, i) => (
             <div key={i} className="seg filled" />
           ))}
@@ -369,10 +362,10 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         <div className="mb-6 pt-2 flex flex-col sm:flex-row gap-3">
           <button onClick={reset} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-card text-secondary transition">Retake quiz</button>
           {showScholarships && (
-            <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all scholarships</a>
+            <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#fff' }}>Browse all scholarships</a>
           )}
           {showPrograms && !showScholarships && (
-            <a href="/programs" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Browse all programs</a>
+            <a href="/programs" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: '#fff' }}>Browse all programs</a>
           )}
         </div>
 
@@ -456,7 +449,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <div className="text-center py-12 px-4">
             <p className="font-semibold text-primary mb-2">No matches found for your profile</p>
             <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">Try leaving optional fields blank. Average and institution answers narrow results significantly.</p>
-            <button onClick={reset} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#0a0a0f' }}>Try again</button>
+            <button onClick={reset} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: '#fff' }}>Try again</button>
           </div>
         )}
 
@@ -472,7 +465,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Segmented progress dots */}
-      <div className="seg-progress" style={{ marginBottom: 14, width: 200 }}>
+      <div className="seg-progress" style={{ marginBottom: 14, width: 260 }}>
         {QUESTIONS.map((_, i) => (
           <div key={i} className={`seg${i < step ? ' filled' : ''}`} />
         ))}
@@ -494,10 +487,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         {(() => {
           const useGrid = current.opts.length >= 4;
           return (
-            <div style={useGrid
-              ? { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gridAutoRows: '1fr', gap: 8, height: 230 }
-              : { display: 'flex', flexDirection: 'column', gap: 8, height: 230 }
-            }>
+            <div className={useGrid ? 'tile-grid' : 'tile-col'}>
               {current.opts.map((opt, i) => {
                 const spanFull = useGrid && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
                 return (
