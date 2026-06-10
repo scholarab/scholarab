@@ -65,9 +65,9 @@ const closingSoon = scholarships
         <!-- Tagline -->
         <p class="hero-tagline">Alberta's student opportunity directory.</p>
 
-        <!-- Hero amount -->
+        <!-- Hero amount — server-rendered final value; count-up enhances on load -->
         <p class="hero-amount tnum mb-10">
-          ${activeTotal.toLocaleString('en-CA')}+ open right now
+          <span id="hero-amount-count" data-total={activeTotal}>${activeTotal.toLocaleString('en-CA')}</span>+ open right now
         </p>
 
         <!-- CTA buttons -->
@@ -217,6 +217,37 @@ const closingSoon = scholarships
 
   updateClosingSoon();
   document.addEventListener('astro:page-load', updateClosingSoon);
+
+  // ── Hero amount count-up ────────────────────────────────
+  // The final value is server-rendered; this only animates toward it.
+  // Counting starts from a value with the same digit count, so tabular
+  // numerals keep the line width constant — no layout shift while counting.
+  function animateHeroAmount() {
+    const el = document.getElementById('hero-amount-count');
+    if (!el || el.dataset.counted) return;
+    el.dataset.counted = 'true';
+    const total = parseInt(el.dataset.total || '', 10);
+    if (!Number.isFinite(total) || total <= 0) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const sameDigitFloor = Math.pow(10, String(total).length - 1);
+    const start = Math.max(sameDigitFloor, Math.round(total * 0.35));
+    const DURATION = 1100;
+    let t0: number | null = null;
+    let lastText = '';
+    function tick(now: number) {
+      if (t0 === null) t0 = now;
+      const p = Math.min((now - t0) / DURATION, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const text = '$' + Math.round(start + (total - start) * eased).toLocaleString('en-CA');
+      if (text !== lastText) { el!.textContent = text; lastText = text; }
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  animateHeroAmount();
+  document.addEventListener('astro:page-load', animateHeroAmount);
 </script>
 
 <style>
