@@ -2,7 +2,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import parseJson from 'secure-json-parse';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const filePath = join(__dirname, '../src/data/scholarships.json');
@@ -17,7 +16,7 @@ interface Scholarship {
   [key: string]: unknown;
 }
 
-const scholarships: Scholarship[] = parseJson(readFileSync(filePath, 'utf8'));
+const scholarships: Scholarship[] = JSON.parse(readFileSync(filePath, 'utf8'));
 
 const today = new Date();
 today.setUTCHours(0, 0, 0, 0);
