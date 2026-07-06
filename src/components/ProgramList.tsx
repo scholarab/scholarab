@@ -3,7 +3,7 @@ import { usePrograms, getProgramStatus as getStatus } from '../hooks/useItems.ts
 import { ProgramCard } from './ItemCard.tsx';
 import Pagination from './Pagination.tsx';
 import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
-import type { ProgramWithMeta } from '../hooks/useItems.ts';
+import type { ProgramWithMeta, ProgramSort } from '../hooks/useItems.ts';
 import { PROGRAM_BADGES } from '../lib/badges.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
 
@@ -11,9 +11,20 @@ interface Props {
   items: ProgramWithMeta[];
 }
 
+const SORT_OPTIONS: { value: ProgramSort; label: string }[] = [
+  { value: 'closest_due', label: 'Earliest Deadline' },
+  { value: 'paid_first',  label: 'Paid First' },
+  { value: 'name',        label: 'A–Z' },
+];
+
+const pillBase = 'shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
+const pillOn   = 'text-brand border-brand-border bg-brand-dim';
+const pillOff  = 'bg-subtle text-secondary border-card';
+
 function ProgramList({ items }: Props) {
   const {
     filtered, visibleItems, page, totalPages, handlePageChange,
+    sortBy, setSort,
     selectedCategory, setCategory, clearFilters,
     sheetOpen, setSheetOpen, hasActiveFilters,
     savedIds, handleToggleSave, isFiltered, categoryKey,
@@ -49,9 +60,32 @@ function ProgramList({ items }: Props) {
       {/* Mobile: count + filter button */}
       <FilterButton count={filtered.length} label="program" hasActiveFilters={hasActiveFilters} open={sheetOpen} onOpen={() => setSheetOpen(true)} />
 
-      {/* Desktop: count */}
-      <div className="hidden md:flex mb-5 items-center justify-between gap-4">
+      {/* Desktop: count + sort pills */}
+      <div className="hidden md:flex mb-5 items-center justify-between gap-4 flex-wrap">
         <p className="text-sm text-faint shrink-0">{filtered.length} program{filtered.length !== 1 ? 's' : ''}</p>
+        <div style={{ display: 'inline-flex', padding: 3, borderRadius: 10, border: '1px solid var(--border-card)', background: 'var(--bg-card)', flexShrink: 0 }}>
+          {SORT_OPTIONS.map(({ value, label }) => {
+            const active = sortBy === value;
+            const icon = active ? (value === 'closest_due' ? '◆' : value === 'paid_first' ? '🪙' : '↓') : null;
+            return (
+              <button key={value} onClick={() => setSort(value)} aria-pressed={active}
+                style={{
+                  padding: '5px 11px', fontSize: 12, fontWeight: active ? 600 : 500,
+                  letterSpacing: '-0.01em', fontFamily: 'inherit',
+                  border: 'none', borderRadius: 7, cursor: 'pointer', whiteSpace: 'nowrap',
+                  background: active ? 'var(--bg-subtle)' : 'transparent',
+                  color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                  transition: 'all 180ms',
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                  position: 'relative',
+                }}>
+                {icon && <span style={{ color: 'var(--brand)', fontSize: 10 }}>{icon}</span>}
+                {label}
+                {active && <span style={{ position: 'absolute', left: 11, right: 11, bottom: 2, height: 1, background: 'var(--brand)', borderRadius: 1 }} aria-hidden="true" />}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Mobile bottom sheet */}
@@ -64,10 +98,25 @@ function ProgramList({ items }: Props) {
             </div>
           </div>
         )}
+        <div>
+          <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Sort</p>
+          <div className="flex flex-wrap" style={{ gap: 8 }}>
+            {SORT_OPTIONS.map(({ value, label }) => {
+              const sel = sortBy === value;
+              return (
+                <button key={value} onClick={() => setSort(value)} aria-pressed={sel}
+                  className={`${pillBase} ${sel ? pillOn : pillOff}`}
+                  style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </FilterSheet>
 
       {/* Card grid */}
-      <div key={`${categoryKey}-${page}`} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" style={{ alignItems: 'stretch' }}>
+      <div key={`${categoryKey}-${sortBy}-${page}`} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" style={{ alignItems: 'stretch' }}>
         {visibleItems.map((p, i) => (
           <ProgramCard key={p.id} program={p} index={i} isSaved={savedSet.has(p.id)} onToggleSave={() => handleToggleSave(p.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
         ))}

@@ -198,24 +198,84 @@ describe('useScholarships', () => {
     expect(result.current.selectedRegion).toBeNull()
   })
 
-  it('sorts by highest_pay descending', async () => {
+  it('sorts by highest_pay descending within open scholarships, closed last', async () => {
     const { useScholarships } = await import('./useItems')
     const { result } = renderHook(() => useScholarships(allItems))
     act(() => result.current.setSort('highest_pay'))
-    const amounts = result.current.filtered.map(s => s._amount_cents ?? 0)
-    for (let i = 0; i < amounts.length - 1; i++) {
-      expect(amounts[i]!).toBeGreaterThanOrEqual(amounts[i + 1]!)
+    const items = result.current.filtered
+    // closed items rank after all open ones regardless of amount
+    expect(items[items.length - 1]!.id).toBe(4)
+    const openAmounts = items.filter(s => s.id !== 4).map(s => s._amount_cents ?? 0)
+    for (let i = 0; i < openAmounts.length - 1; i++) {
+      expect(openAmounts[i]!).toBeGreaterThanOrEqual(openAmounts[i + 1]!)
     }
   })
 
-  it('sorts by lowest_pay ascending', async () => {
+  it('sorts by lowest_pay ascending within open scholarships, closed last', async () => {
     const { useScholarships } = await import('./useItems')
     const { result } = renderHook(() => useScholarships(allItems))
     act(() => result.current.setSort('lowest_pay'))
-    const amounts = result.current.filtered.map(s => s._amount_cents ?? 0)
-    for (let i = 0; i < amounts.length - 1; i++) {
-      expect(amounts[i]!).toBeLessThanOrEqual(amounts[i + 1]!)
+    const items = result.current.filtered
+    expect(items[items.length - 1]!.id).toBe(4)
+    const openAmounts = items.filter(s => s.id !== 4).map(s => s._amount_cents ?? 0)
+    for (let i = 0; i < openAmounts.length - 1; i++) {
+      expect(openAmounts[i]!).toBeLessThanOrEqual(openAmounts[i + 1]!)
     }
+  })
+
+  it('amount sorts put unparseable amounts ("Varies" → 0) last within their group', async () => {
+    const { useScholarships } = await import('./useItems')
+    const varies = makeScholarship({ id: 20, amount: 'Varies', _amount_cents: 0, _deadline_ms: FUTURE_MS })
+    const { result } = renderHook(() => useScholarships([varies, active1, active2]))
+    act(() => result.current.setSort('lowest_pay'))
+    const ids = result.current.filtered.map(s => s.id)
+    expect(ids[ids.length - 1]).toBe(20)
+  })
+
+  it('filters Alberta-wide includes Red Deer', async () => {
+    const { useScholarships } = await import('./useItems')
+    const redDeer = makeScholarship({ id: 30, region: 'Red Deer', _deadline_ms: FUTURE_MS })
+    const { result } = renderHook(() => useScholarships([redDeer, national]))
+    act(() => result.current.setRegion('Alberta-wide'))
+    const ids = result.current.filtered.map(s => s.id)
+    expect(ids).toContain(30)
+    expect(ids).not.toContain(3)
+  })
+
+  it('clearFilters resets sort to default', async () => {
+    const { useScholarships } = await import('./useItems')
+    const { result } = renderHook(() => useScholarships(allItems))
+    act(() => result.current.setSort('highest_pay'))
+    act(() => result.current.clearFilters())
+    expect(result.current.sortBy).toBe('closest_due')
+    expect(result.current.hasActiveFilters).toBe(false)
+  })
+
+  it('category toggles off when selected twice', async () => {
+    const { useScholarships } = await import('./useItems')
+    const stem = makeScholarship({ id: 40, category: 'STEM', _deadline_ms: FUTURE_MS })
+    const { result } = renderHook(() => useScholarships([stem, active1]))
+    act(() => result.current.setCategory('STEM'))
+    expect(result.current.selectedCategory).toBe('STEM')
+    act(() => result.current.setCategory('STEM'))
+    expect(result.current.selectedCategory).toBe('all')
+  })
+
+  it('closest_due sorts future scholarships by open date, not deadline', async () => {
+    const { useScholarships } = await import('./useItems')
+    const opensLater = makeScholarship({
+      id: 50, openDate: '2026-10-01',
+      _open_ms: new Date('2026-10-01T00:00:00').getTime(),
+      _deadline_ms: new Date('2026-11-01T00:00:00').getTime(),
+    })
+    const opensSooner = makeScholarship({
+      id: 51, openDate: '2026-08-01',
+      _open_ms: new Date('2026-08-01T00:00:00').getTime(),
+      _deadline_ms: new Date('2026-12-31T00:00:00').getTime(), // later deadline
+    })
+    const { result } = renderHook(() => useScholarships([opensLater, opensSooner]))
+    const ids = result.current.filtered.map(s => s.id)
+    expect(ids.indexOf(51)).toBeLessThan(ids.indexOf(50))
   })
 
   it('sorts by closest_due: active before closed, active group ascending by deadline', async () => {
@@ -522,5 +582,46 @@ describe('usePrograms', () => {
     const { result } = renderHook(() => usePrograms([tba, withDeadline]))
     const ids = result.current.filtered.map(p => p.id)
     expect(ids.indexOf(20)).toBeLessThan(ids.indexOf(21))
+  })
+
+  it('ongoing programs sort before tba but after dated deadlines', async () => {
+    const { usePrograms } = await import('./useItems')
+    const dated   = makeProgram({ id: 30, deadline: '2026-12-01', _deadline_ms: FUTURE_MS })
+    const ongoing = makeProgram({ id: 31, deadline: 'Ongoing' })
+    const tba     = makeProgram({ id: 32, deadline: 'TBA' })
+    const { result } = renderHook(() => usePrograms([tba, ongoing, dated]))
+    const ids = result.current.filtered.map(p => p.id)
+    expect(ids).toEqual([30, 31, 32])
+  })
+
+  it('paid_first sort puts paid programs first, then by deadline', async () => {
+    const { usePrograms } = await import('./useItems')
+    const unpaidEarly = makeProgram({ id: 40, paid: false, deadline: '2026-08-01', _deadline_ms: new Date('2026-08-01T00:00:00').getTime() })
+    const paidLate    = makeProgram({ id: 41, paid: true,  deadline: '2026-12-01', _deadline_ms: FUTURE_MS })
+    const paidEarly   = makeProgram({ id: 42, paid: true,  deadline: '2026-09-01', _deadline_ms: new Date('2026-09-01T00:00:00').getTime() })
+    const { result } = renderHook(() => usePrograms([unpaidEarly, paidLate, paidEarly]))
+    act(() => result.current.setSort('paid_first'))
+    const ids = result.current.filtered.map(p => p.id)
+    expect(ids).toEqual([42, 41, 40])
+  })
+
+  it('name sort orders programs alphabetically', async () => {
+    const { usePrograms } = await import('./useItems')
+    const b = makeProgram({ id: 50, name: 'Beta Program' })
+    const a = makeProgram({ id: 51, name: 'Alpha Program' })
+    const { result } = renderHook(() => usePrograms([b, a]))
+    act(() => result.current.setSort('name'))
+    const ids = result.current.filtered.map(p => p.id)
+    expect(ids).toEqual([51, 50])
+  })
+
+  it('clearFilters resets program sort to default', async () => {
+    const { usePrograms } = await import('./useItems')
+    const { result } = renderHook(() => usePrograms(allItems))
+    act(() => result.current.setSort('name'))
+    expect(result.current.hasActiveFilters).toBe(true)
+    act(() => result.current.clearFilters())
+    expect(result.current.sortBy).toBe('closest_due')
+    expect(result.current.hasActiveFilters).toBe(false)
   })
 })

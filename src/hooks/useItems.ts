@@ -28,7 +28,8 @@ export function getScholarshipStatus(s: ScholarshipWithMeta): ScholarshipStatus 
   return 'active';
 }
 
-const PROVINCIAL_REGIONS = new Set(['Alberta', 'Alberta-wide', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat']);
+// Everything except National/International counts as provincial — keep in sync with data regions.
+const PROVINCIAL_REGIONS = new Set(['Alberta', 'Alberta-wide', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']);
 type RegionKey = 'Alberta-wide' | 'Medicine Hat' | 'National';
 const REGION_MATCH: Record<RegionKey, (s: ScholarshipWithMeta) => boolean> = {
   'Alberta-wide': s => PROVINCIAL_REGIONS.has(s.region ?? ''),
@@ -49,9 +50,9 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   const [hasFiltered,    setHasFiltered   ] = useState(false);
 
   const setCategory = useCallback((cat: string) => {
-    const next = cat === 'all' ? 'all' : cat;
     setHasFiltered(true);
-    setSelectedCategoryRaw(next);
+    // Clicking the selected category toggles it off (matches Programs behaviour)
+    setSelectedCategoryRaw(prev => (cat !== 'all' && prev === cat ? 'all' : cat));
     setPage(1);
   }, []);
 
@@ -68,6 +69,7 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
   }, []);
 
   const clearFilters = useCallback(() => {
+    setSortBy('closest_due');
     setSelectedRegion(null);
     setSelectedCategoryRaw('all');
     setStatusFilterRaw('all');
@@ -145,22 +147,27 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
           (s.category?.toLowerCase().includes(q))
         );
 
+    const rank = { active: 0, future: 1, closed: 2 } as Record<string, number>;
     return [...afterSearch].sort((a, b) => {
-      if (sortBy === 'closest_due') {
-        const aStatus = statusCache.get(a.id);
-        const bStatus = statusCache.get(b.id);
-        // active first → future → closed (so expired entries don't bury open ones)
-        const rank = { active: 0, future: 1, closed: 2 } as Record<string, number>;
-        const aRank = rank[aStatus ?? 'active'] ?? 0;
-        const bRank = rank[bStatus ?? 'active'] ?? 0;
-        if (aRank !== bRank) return aRank - bRank;
-        // within closed: most recently expired first
-        if (aStatus === 'closed') return (b._deadline_ms || 0) - (a._deadline_ms || 0);
+      const aStatus = statusCache.get(a.id) ?? 'active';
+      const bStatus = statusCache.get(b.id) ?? 'active';
+      // active first → future → closed, for every sort (so expired entries don't bury open ones)
+      const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
+      if (statusDiff !== 0) return statusDiff;
+
+      if (sortBy === 'highest_pay' || sortBy === 'lowest_pay') {
+        const aAmt = a._amount_cents ?? 0;
+        const bAmt = b._amount_cents ?? 0;
+        // unparseable amounts ("Varies") go last within their status group
+        if ((aAmt === 0) !== (bAmt === 0)) return aAmt === 0 ? 1 : -1;
+        if (aAmt !== bAmt) return sortBy === 'highest_pay' ? bAmt - aAmt : aAmt - bAmt;
         return (a._deadline_ms || Infinity) - (b._deadline_ms || Infinity);
       }
-      if (sortBy === 'highest_pay') return (b._amount_cents ?? 0) - (a._amount_cents ?? 0);
-      if (sortBy === 'lowest_pay')  return (a._amount_cents ?? 0) - (b._amount_cents ?? 0);
-      return 0;
+
+      // closest_due
+      if (aStatus === 'closed') return (b._deadline_ms || 0) - (a._deadline_ms || 0); // most recently expired first
+      if (aStatus === 'future') return (a._open_ms || Infinity) - (b._open_ms || Infinity); // opening soonest first
+      return (a._deadline_ms || Infinity) - (b._deadline_ms || Infinity);
     });
   }, [initialScholarships, statusCache, statusFilter, selectedRegion, selectedCategory, searchQuery, sortBy]);
 
@@ -211,7 +218,17 @@ export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
   return 'active';
 }
 
-type ProgramSort = 'closest_due';
+export type ProgramSort = 'closest_due' | 'paid_first' | 'name';
+
+// dated deadlines first (soonest), then Ongoing (actionable any time), then TBA
+function programDeadlineOrder(p: ProgramWithMeta): number {
+  if (typeof p._deadline_ms === 'number') return p._deadline_ms;
+  if (p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing') {
+    const ms = new Date(p.deadline + 'T00:00:00').getTime();
+    if (!Number.isNaN(ms)) return ms;
+  }
+  return p.deadline === 'Ongoing' ? Number.MAX_SAFE_INTEGER - 1 : Number.MAX_SAFE_INTEGER;
+}
 
 export function usePrograms(initialPrograms: ProgramWithMeta[]) {
   const [sortBy,           setSortBy          ] = useState<ProgramSort>('closest_due');
@@ -239,6 +256,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
   }, [selectedCategory]);
 
   const clearFilters = useCallback(() => {
+    setSortBy('closest_due');
     setSelectedCategory('all');
     setPage(1);
   }, []);
@@ -267,8 +285,15 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
       ? nonClosed
       : nonClosed.filter(p => p.category === selectedCategory);
 
-    return [...afterCategory].sort((a, b) => (a._deadline_ms ?? Infinity) - (b._deadline_ms ?? Infinity));
-  }, [initialPrograms, selectedCategory, statusCache]);
+    return [...afterCategory].sort((a, b) => {
+      if (sortBy === 'name') return a.name.localeCompare(b.name);
+      if (sortBy === 'paid_first') {
+        const paidDiff = (b.paid ? 1 : 0) - (a.paid ? 1 : 0);
+        if (paidDiff !== 0) return paidDiff;
+      }
+      return programDeadlineOrder(a) - programDeadlineOrder(b);
+    });
+  }, [initialPrograms, selectedCategory, statusCache, sortBy]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
@@ -287,7 +312,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     clearFilters,
     sheetOpen,
     setSheetOpen,
-    hasActiveFilters: selectedCategory !== 'all',
+    hasActiveFilters: selectedCategory !== 'all' || sortBy !== 'closest_due',
     categoryKey:      selectedCategory,
     savedIds,
     handleToggleSave,

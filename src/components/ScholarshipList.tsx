@@ -41,6 +41,7 @@ function ScholarshipList({ items }: Props) {
     sortBy, setSort, selectedRegion, setRegion,
     selectedCategory, setCategory, clearFilters,
     statusFilter, setStatusFilter,
+    searchQuery, setSearchQuery,
     sheetOpen, setSheetOpen, hasActiveFilters,
     savedIds, handleToggleSave, isFiltered,
     regionKey, categoryKey,
@@ -51,6 +52,24 @@ function ScholarshipList({ items }: Props) {
     document.addEventListener('astro:before-preparation', close);
     return () => document.removeEventListener('astro:before-preparation', close);
   }, [setSheetOpen]);
+
+  const searchInput = (mobile: boolean) => (
+    <div style={{ position: 'relative' }} className={mobile ? '' : 'shrink-0'}>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"
+        style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-tertiary)', pointerEvents: 'none' }}>
+        <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+      </svg>
+      <input
+        type="search"
+        value={searchQuery}
+        onChange={e => setSearchQuery(e.target.value)}
+        placeholder="Search scholarships…"
+        aria-label="Search scholarships by name, eligibility, or category"
+        className="bg-subtle text-secondary border border-card rounded-full text-sm"
+        style={{ padding: '7px 14px 7px 34px', width: mobile ? '100%' : 220, outline: 'none', fontFamily: 'inherit' }}
+      />
+    </div>
+  );
 
   const savedSet   = useMemo(() => new Set(savedIds), [savedIds]);
   const categories = useMemo(
@@ -129,6 +148,8 @@ function ScholarshipList({ items }: Props) {
             })}
           </div>
         </div>
+        <div className="flex items-center gap-3 flex-wrap">
+        {searchInput(false)}
         <div style={{ display: 'inline-flex', padding: 3, borderRadius: 10, border: '1px solid var(--border-card)', background: 'var(--bg-card)', flexShrink: 0 }}>
           {SORT_OPTIONS.map(({ value, label }) => {
             const active = sortBy === value;
@@ -152,10 +173,15 @@ function ScholarshipList({ items }: Props) {
             );
           })}
         </div>
+        </div>
       </div>
 
       {/* Mobile bottom sheet */}
       <FilterSheet open={sheetOpen} onOpenChange={setSheetOpen}>
+        <div>
+          <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Search</p>
+          {searchInput(true)}
+        </div>
         {categories.length > 0 && (
           <div>
             <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Category</p>
