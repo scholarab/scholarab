@@ -41,10 +41,40 @@ for (const s of scholarships) {
   }
 }
 
-if (changed === 0) {
-  console.log('No scholarships to sync.');
-  process.exit(0);
+if (changed > 0) {
+  writeFileSync(filePath, JSON.stringify(scholarships, null, 2) + '\n', 'utf8');
+  console.log(`\nSynced ${changed} scholarship(s). JSON written.`);
+} else {
+  console.log('No JSON scholarships to sync.');
 }
 
-writeFileSync(filePath, JSON.stringify(scholarships, null, 2) + '\n', 'utf8');
-console.log(`\nSynced ${changed} scholarship(s). JSON written.`);
+// ── Sync the database too (production source of truth), when configured ──────
+const dbUrl = process.env.DATABASE_URL;
+if (dbUrl) {
+  const { neon } = await import('@neondatabase/serverless');
+  const sql = neon(dbUrl);
+  const todayISO = today.toISOString().slice(0, 10);
+
+  const expired = await sql`
+    UPDATE scholarships SET active = false
+    WHERE active = true
+      AND deadline IS NOT NULL
+      AND deadline ~ '^\\d{4}-\\d{2}-\\d{2}$'
+      AND deadline::date < ${todayISO}::date
+    RETURNING id, title, deadline`;
+  for (const r of expired) console.log(`DB expired: [${r.id}] ${r.title} (deadline: ${r.deadline})`);
+
+  const opened = await sql`
+    UPDATE scholarships SET active = true
+    WHERE active = false
+      AND open_date IS NOT NULL
+      AND open_date ~ '^\\d{4}-\\d{2}-\\d{2}$'
+      AND open_date::date <= ${todayISO}::date
+      AND (deadline IS NULL OR deadline !~ '^\\d{4}-\\d{2}-\\d{2}$' OR deadline::date >= ${todayISO}::date)
+    RETURNING id, title, open_date`;
+  for (const r of opened) console.log(`DB opened: [${r.id}] ${r.title} (open_date: ${r.open_date})`);
+
+  console.log(`DB sync: ${expired.length} expired, ${opened.length} opened.`);
+} else {
+  console.log('DATABASE_URL not set — skipped DB sync.');
+}

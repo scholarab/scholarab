@@ -3,6 +3,9 @@ name: Deploy
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '30 0 * * *'   # Daily rebuild (after auto-sync at 00:00) so deadlines/counts stay fresh
+  workflow_dispatch:
 
 concurrency:
   group: deploy-main
@@ -29,6 +32,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Typecheck
         run: npx tsc --noEmit
