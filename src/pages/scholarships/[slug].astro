@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import DetailLayout from '../../components/DetailLayout.astro';
 import { loadScholarships } from '../../lib/data-loader';
-import { generateSlug } from '../../lib/utils.ts';
+import { generateSlug, parseAmount } from '../../lib/utils.ts';
 import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.ts';
 import DeadlineAlert from '../../components/DeadlineAlert.astro';
 
@@ -36,7 +36,7 @@ const regionStr    = !scholarship.region || scholarship.region === 'National' ? 
 const description  = `The ${scholarship.title} offers ${scholarship.amount} to ${scholarship.audience}${regionStr}. Deadline: ${formatDate(scholarship.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
 const canonical    = `https://www.scholarab.ca/scholarships/${slug}`;
 const pageTitle    = `${scholarship.title} | ScholarAB | Alberta Scholarships`;
-const parsedAmount = (() => { const n = parseInt(scholarship.amount.replace(/[$,]/g, '')); return isNaN(n) ? null : n; })();
+const parsedAmount = parseAmount(scholarship.amount) || null;
 
 const ldJson = {
   '@context': 'https://schema.org',

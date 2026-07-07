@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
-import { generateSlug } from '../lib/utils';
+import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 
 const scholarships = await loadScholarships();
@@ -15,7 +15,7 @@ const activeScholarships = scholarships.filter(s => {
   if (!s.deadline) return true;
   return new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime();
 });
-const activeTotal = activeScholarships.reduce((sum, s) => { const v = s.amount.match(/\$?([\d,]+)/)?.[1]; const n = v ? parseInt(v.replace(/,/g, ''), 10) : NaN; return sum + (isNaN(n) ? 0 : n); }, 0);
+const activeTotal = activeScholarships.reduce((sum, s) => sum + parseAmount(s.amount), 0);
 const researchCount = programs.filter(p => {
   if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') return true;
   return new Date(p.deadline + 'T00:00:00') >= today;

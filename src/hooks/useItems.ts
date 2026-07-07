@@ -11,7 +11,7 @@ export const PAGE_SIZE = PUBLIC_PAGE_SIZE;
 export interface ScholarshipWithMeta extends Scholarship {
   _open_ms?: number;
   _deadline_ms?: number;
-  _amount_cents?: number;
+  _amount?: number;
   _slug?: string;
   _deadline_formatted?: string | null;
 }
@@ -156,8 +156,8 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
       if (statusDiff !== 0) return statusDiff;
 
       if (sortBy === 'highest_pay' || sortBy === 'lowest_pay') {
-        const aAmt = a._amount_cents ?? 0;
-        const bAmt = b._amount_cents ?? 0;
+        const aAmt = a._amount ?? 0;
+        const bAmt = b._amount ?? 0;
         // unparseable amounts ("Varies") go last within their status group
         if ((aAmt === 0) !== (bAmt === 0)) return aAmt === 0 ? 1 : -1;
         if (aAmt !== bAmt) return sortBy === 'highest_pay' ? bAmt - aAmt : aAmt - bAmt;

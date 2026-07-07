@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { loadScholarships } from '../lib/data-loader';
 import ScholarshipList from '../components/ScholarshipList.tsx';
-import { generateSlug, formatDeadline } from '../lib/utils';
+import { generateSlug, formatDeadline, parseAmount } from '../lib/utils';
 let raw: Awaited<ReturnType<typeof loadScholarships>> = [];
 let loadError = false;
 try {
@@ -18,7 +18,7 @@ const freshnessLabel = mostRecentVerified
 // Enrich at build time — avoids regex/Date parsing on every user's device
 const scholarships = raw.map(s => ({
   ...s,
-  _amount_cents: (() => { const m = String(s.amount || '').match(/\$[\d,]+/); return m ? parseInt(m[0].replace(/[$,]/g, ''), 10) || 0 : 0 })(),
+  _amount: parseAmount(s.amount),
   _deadline_ms:  s.deadline  ? new Date(s.deadline  + 'T00:00:00').getTime() : 0,
   _open_ms:      s.openDate ? new Date(s.openDate + 'T00:00:00').getTime() : 0,
   _slug:         generateSlug(s.title),

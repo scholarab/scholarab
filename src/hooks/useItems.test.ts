@@ -43,7 +43,7 @@ function makeScholarship(
     active: true,
     eligibility: null,
     _deadline_ms: 0,
-    _amount_cents: 1000,
+    _amount: 1000,
     ...overrides,
   }
 }
@@ -128,10 +128,10 @@ describe('useScholarships', () => {
   const FUTURE_MS = new Date('2026-12-01T00:00:00').getTime()
   const PAST_MS   = new Date('2025-01-01T00:00:00').getTime()
 
-  const active1 = makeScholarship({ id: 1, region: 'Medicine Hat', _deadline_ms: FUTURE_MS, _amount_cents: 2000 })
-  const active2 = makeScholarship({ id: 2, region: 'Alberta',      _deadline_ms: FUTURE_MS + 86400000, _amount_cents: 500 })
-  const national = makeScholarship({ id: 3, region: 'National',    _deadline_ms: FUTURE_MS + 172800000, _amount_cents: 5000 })
-  const closed   = makeScholarship({ id: 4, region: null,           _deadline_ms: PAST_MS, _amount_cents: 1000 })
+  const active1 = makeScholarship({ id: 1, region: 'Medicine Hat', _deadline_ms: FUTURE_MS, _amount: 2000 })
+  const active2 = makeScholarship({ id: 2, region: 'Alberta',      _deadline_ms: FUTURE_MS + 86400000, _amount: 500 })
+  const national = makeScholarship({ id: 3, region: 'National',    _deadline_ms: FUTURE_MS + 172800000, _amount: 5000 })
+  const closed   = makeScholarship({ id: 4, region: null,           _deadline_ms: PAST_MS, _amount: 1000 })
   const allItems = [active1, active2, national, closed]
 
   beforeEach(() => {
@@ -203,7 +203,7 @@ describe('useScholarships', () => {
     const items = result.current.filtered
     // closed items rank after all open ones regardless of amount
     expect(items[items.length - 1]!.id).toBe(4)
-    const openAmounts = items.filter(s => s.id !== 4).map(s => s._amount_cents ?? 0)
+    const openAmounts = items.filter(s => s.id !== 4).map(s => s._amount ?? 0)
     for (let i = 0; i < openAmounts.length - 1; i++) {
       expect(openAmounts[i]!).toBeGreaterThanOrEqual(openAmounts[i + 1]!)
     }
@@ -215,7 +215,7 @@ describe('useScholarships', () => {
     act(() => result.current.setSort('lowest_pay'))
     const items = result.current.filtered
     expect(items[items.length - 1]!.id).toBe(4)
-    const openAmounts = items.filter(s => s.id !== 4).map(s => s._amount_cents ?? 0)
+    const openAmounts = items.filter(s => s.id !== 4).map(s => s._amount ?? 0)
     for (let i = 0; i < openAmounts.length - 1; i++) {
       expect(openAmounts[i]!).toBeLessThanOrEqual(openAmounts[i + 1]!)
     }
@@ -223,7 +223,7 @@ describe('useScholarships', () => {
 
   it('amount sorts put unparseable amounts ("Varies" → 0) last within their group', async () => {
     const { useScholarships } = await import('./useItems')
-    const varies = makeScholarship({ id: 20, amount: 'Varies', _amount_cents: 0, _deadline_ms: FUTURE_MS })
+    const varies = makeScholarship({ id: 20, amount: 'Varies', _amount: 0, _deadline_ms: FUTURE_MS })
     const { result } = renderHook(() => useScholarships([varies, active1, active2]))
     act(() => result.current.setSort('lowest_pay'))
     const ids = result.current.filtered.map(s => s.id)

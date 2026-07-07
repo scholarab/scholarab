@@ -14,7 +14,8 @@ const { mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti } = vi.hoi
 
 vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll, matchProgram: vi.fn(() => true) }))
 vi.mock('../lib/tracker.ts',          () => ({ getSaved: mockGetSaved, toggleSaved: mockToggleSaved }))
-vi.mock('../lib/utils.ts',            () => ({
+vi.mock('../lib/utils.ts',            async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../lib/utils')>()),
   showConfetti: mockShowConfetti,
   generateSlug: (s: string) => s.toLowerCase().replace(/\s+/g, '-'),
 }))

@@ -3,8 +3,7 @@ import type { Scholarship, Program } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved } from '../lib/tracker.ts'
-import { showConfetti } from '../lib/utils.ts'
-import { generateSlug } from '../lib/utils.ts'
+import { showConfetti, generateSlug, parseAmount } from '../lib/utils.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -187,11 +186,6 @@ function ResultCard({
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
-
-function parseAmount(amount: string): number {
-  const m = String(amount).match(/\$[\d,]+/)
-  return m ? parseInt(m[0].replace(/[$,]/g, ''), 10) || 0 : 0
-}
 
 export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const [initial] = useState(loadStoredQuiz)

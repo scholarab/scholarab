@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { generateSlug, getToday, formatDeadline, showConfetti, showToast } from './utils'
+import { generateSlug, getToday, formatDeadline, parseAmount, showConfetti, showToast } from './utils'
 
 // ── generateSlug ─────────────────────────────────────────────────────────────
 
@@ -231,5 +231,34 @@ describe('showToast', () => {
 
   it('does not throw for empty string message', () => {
     expect(() => showToast('')).not.toThrow()
+  })
+})
+
+// ── parseAmount ──────────────────────────────────────────────────────────────
+
+describe('parseAmount', () => {
+  it('parses a plain dollar amount', () => {
+    expect(parseAmount('$2,500')).toBe(2500)
+  })
+
+  it('parses the dollar figure out of surrounding text', () => {
+    expect(parseAmount('up to $8,000')).toBe(8000)
+  })
+
+  it('takes the first figure of a range', () => {
+    expect(parseAmount('$4,000\u2013$5,000')).toBe(4000)
+  })
+
+  it('ignores bare numbers without a dollar sign', () => {
+    expect(parseAmount('2 awards of $500')).toBe(500)
+  })
+
+  it('returns 0 for unparseable amounts', () => {
+    expect(parseAmount('Varies')).toBe(0)
+  })
+
+  it('returns 0 for null and undefined', () => {
+    expect(parseAmount(null)).toBe(0)
+    expect(parseAmount(undefined)).toBe(0)
   })
 })

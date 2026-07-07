@@ -14,6 +14,13 @@ export function formatDeadline(str: string | null | undefined): string | null | 
   return d.toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
+// First dollar figure in the string: "$2,500" → 2500, "up to $8,000" → 8000,
+// "$4,000–$5,000" → 4000, "Varies" → 0
+export function parseAmount(amount: string | null | undefined): number {
+  const m = String(amount ?? '').match(/\$[\d,]+/);
+  return m ? parseInt(m[0].replace(/[$,]/g, ''), 10) || 0 : 0;
+}
+
 
 interface Particle {
   x: number; y: number;

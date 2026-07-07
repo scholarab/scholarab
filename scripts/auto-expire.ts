@@ -12,7 +12,6 @@ interface Scholarship {
   active: boolean;
   deadline?: string;
   openDate?: string;
-  pendingReview?: boolean;
   [key: string]: unknown;
 }
 
@@ -31,7 +30,7 @@ for (const s of scholarships) {
       changed++;
       console.log(`Expired: [${s.id}] ${s.title} (deadline: ${s.deadline})`);
     }
-  } else if (s.active === false && s.pendingReview !== true && s.openDate) {
+  } else if (s.active === false && s.openDate) {
     const openDate = new Date(s.openDate + 'T00:00:00Z');
     const deadline = s.deadline ? new Date(s.deadline + 'T00:00:00Z') : null;
     if (openDate <= today && !(deadline && deadline < today)) {
