@@ -33,13 +33,13 @@ try {
     .from(events)
     .where(and(
       gte(events.ts, d30),
-      sql`${events.event} in ('apply_click', 'save', 'alert_subscribe')`,
+      sql`${events.event} in ('detail_view', 'apply_click', 'save', 'alert_subscribe')`,
       sql`${events.itemId} is not null`,
     ))
     .groupBy(events.event, events.itemType, events.itemId)
 
   const quizDaily = await db
-    .select({ day: sql<string>`to_char(${events.ts}, 'YYYY-MM-DD')`, n: count() })
+    .select({ day: sql<string>`to_char(${events.ts} AT TIME ZONE 'UTC' AT TIME ZONE 'America/Edmonton', 'YYYY-MM-DD')`, n: count() })
     .from(events)
     .where(and(eq(events.event, 'quiz_complete'), gte(events.ts, d14)))
     .groupBy(sql`1`)

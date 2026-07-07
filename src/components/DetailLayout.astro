@@ -73,7 +73,7 @@ const isPremium = deadlineFormatted !== undefined;
 ---
 
 {isPremium ? (
-  <main class="py-6" style="position: relative;">
+  <main class="py-6" style="position: relative;" data-detail-view data-item-type={itemType} data-item-id={itemId}>
     <!-- Ambient header gradient -->
     <div aria-hidden="true" style={`position:absolute;top:0;left:-32px;right:-32px;height:360px;z-index:0;background:radial-gradient(ellipse 70% 50% at 20% 0%, ${statusColor}28 0%, transparent 60%),radial-gradient(ellipse 50% 40% at 90% 10%, rgba(59,130,246,0.14) 0%, transparent 60%);filter:blur(40px);pointer-events:none;`}></div>
 
@@ -206,7 +206,7 @@ const isPremium = deadlineFormatted !== undefined;
     </div>
   </main>
 ) : (
-  <main class="py-6">
+  <main class="py-6" data-detail-view data-item-type={itemType} data-item-id={itemId}>
     <a href={backHref} class="inline-flex items-center gap-2 text-sm text-secondary hover:text-brand transition-colors mb-6">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -274,17 +274,26 @@ const isPremium = deadlineFormatted !== undefined;
 <script>
   import { sendEvent } from '../lib/events.ts';
 
+  function itemAttrs(el: Element): ['scholarship' | 'program' | undefined, number | undefined] {
+    const type = el.getAttribute('data-item-type');
+    const id = Number(el.getAttribute('data-item-id'));
+    return [
+      type === 'scholarship' || type === 'program' ? type : undefined,
+      Number.isInteger(id) ? id : undefined,
+    ];
+  }
+
   // Delegated so it survives view-transition swaps between detail pages
   document.addEventListener('click', (e) => {
     const el = (e.target as Element).closest?.('[data-track="apply"]');
-    if (!el) return;
-    const type = el.getAttribute('data-item-type');
-    const id = Number(el.getAttribute('data-item-id'));
-    sendEvent(
-      'apply_click',
-      type === 'scholarship' || type === 'program' ? type : undefined,
-      Number.isInteger(id) ? id : undefined,
-    );
+    if (el) sendEvent('apply_click', ...itemAttrs(el));
+  });
+
+  // Per-item views — the denominator that makes apply counts meaningful.
+  // astro:page-load fires on first load and after every view-transition swap.
+  document.addEventListener('astro:page-load', () => {
+    const el = document.querySelector('[data-detail-view]');
+    if (el) sendEvent('detail_view', ...itemAttrs(el));
   });
 
   const btn = document.getElementById('copy-link-btn');

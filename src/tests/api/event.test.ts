@@ -112,11 +112,23 @@ describe('POST /api/event', () => {
     expect(res.status).toBe(400)
   })
 
-  it('accepts meta for search_empty, trimmed and truncated', async () => {
-    const res = await call({ event: 'search_empty', meta: '  ' + 'x'.repeat(300) })
+  it('accepts detail_view with item fields', async () => {
+    const res = await call({ event: 'detail_view', itemType: 'program', itemId: 7 })
+    expect(res.status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({
+      event: 'detail_view',
+      itemType: 'program',
+      itemId: 7,
+      meta: null,
+    })
+  })
+
+  it('accepts meta for search_empty, trimmed, lowercased, and truncated', async () => {
+    const res = await call({ event: 'search_empty', meta: '  RoTaRy ' + 'x'.repeat(300) })
     expect(res.status).toBe(204)
     const inserted = mockValues.mock.calls[0]![0] as { meta: string | null }
     expect(inserted.meta).not.toBeNull()
+    expect(inserted.meta!.startsWith('rotary')).toBe(true)
     expect(inserted.meta!.length).toBeLessThanOrEqual(120)
   })
 

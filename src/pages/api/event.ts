@@ -7,7 +7,7 @@ import { jsonError } from '../../lib/api-response'
 import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
-const ALLOWED_EVENTS = new Set(['apply_click', 'save', 'quiz_complete', 'search_empty'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_complete', 'search_empty'])
 const BOT_UA = /bot|crawler|spider|curl|wget|python|httpclient|headless/i
 const META_MAX = 120
 
@@ -20,7 +20,9 @@ export const POST: APIRoute = async ({ request }) => {
 
   const ip = getClientIp(request)
   try {
-    if (await isRateLimited(`event:${ip}`, 60, 15 * 60 * 1000))
+    // Generous limit: school computer labs share one NAT IP, and a classroom
+    // burst is exactly the traffic we most want to measure
+    if (await isRateLimited(`event:${ip}`, 300, 15 * 60 * 1000))
       return jsonError('Too many requests — try again later', 429)
   } catch { /* fail open if rate_limit table not yet migrated */ }
 
@@ -44,7 +46,8 @@ export const POST: APIRoute = async ({ request }) => {
       event,
       itemType: (itemType as string) ?? null,
       itemId: (itemId as number) ?? null,
-      meta: typeof meta === 'string' ? meta.trim().slice(0, META_MAX) || null : null,
+      // lowercased so "Rotary" and "rotary" aggregate as one search gap
+      meta: typeof meta === 'string' ? meta.trim().toLowerCase().slice(0, META_MAX) || null : null,
     })
   } catch { /* analytics must never surface errors to the page */ }
 

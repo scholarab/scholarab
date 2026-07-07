@@ -1,8 +1,9 @@
-import { useState, type ComponentProps } from 'react'
+import { useState, useEffect, type ComponentProps } from 'react'
 import { Toaster, toast } from 'sonner'
 import ScholarshipManager from './ScholarshipManager'
 import ProgramManager from './ProgramManager'
 import AnalyticsPanel, { type AnalyticsData } from './AnalyticsPanel'
+import { optOutOfEvents } from '../../lib/events'
 
 interface User {
   id: string
@@ -17,6 +18,9 @@ interface Props {
 }
 
 export default function AdminShell({ user, page, data }: Props) {
+  // Anyone using the admin panel is the owner - stop counting their browsing
+  useEffect(() => { optOutOfEvents() }, [])
+
   const [deploying, setDeploying] = useState(false)
   const [lastDeployed, setLastDeployed] = useState<string | null>(
     typeof localStorage !== 'undefined' ? localStorage.getItem('lastDeployed') : null

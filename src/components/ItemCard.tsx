@@ -1,5 +1,6 @@
 import { memo, useRef, useCallback } from 'react';
 import { getToday, generateSlug, formatDeadline, showToast, showConfetti } from '../lib/utils.ts';
+import { sendEvent } from '../lib/events.ts';
 import { getScholarshipStatus, getProgramStatus } from '../hooks/useItems.ts';
 import { SCHOLARSHIP_BADGES, PROGRAM_BADGES, DEFAULT_BADGE } from '../lib/badges.ts';
 import { useCardEntrance } from '../hooks/useCardEntrance.ts';
@@ -109,6 +110,7 @@ function ScholarshipCardInner({ scholarship, index, isSaved, onToggleSave, isFil
         </a>
         {!isClosed && !isUpcoming && scholarship.url && (
           <a href={scholarship.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
+            onClick={() => sendEvent('apply_click', 'scholarship', scholarship.id)}
             aria-label={`Apply for ${scholarship.title} (opens in new tab)`}
             className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
             style={{ background: 'var(--brand)', color: 'var(--text-on-brand)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -232,6 +234,7 @@ export function ProgramCard({ program, index, isSaved, onToggleSave, isFiltered,
         </a>
         {!isClosed && (
           <a href={program.url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer"
+            onClick={() => sendEvent('apply_click', 'program', program.id)}
             aria-label={`Learn more about ${program.name} (opens in new tab)`}
             className="btn-teal flex-1 text-center py-2.5 px-4 rounded-[10px] text-sm font-semibold transition-opacity hover:opacity-85"
             style={{ background: 'var(--brand)', color: 'var(--text-on-brand)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

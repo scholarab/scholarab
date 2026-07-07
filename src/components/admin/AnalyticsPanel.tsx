@@ -12,6 +12,7 @@ interface Props {
 }
 
 const EVENT_LABELS: Record<string, string> = {
+  detail_view: 'Detail views',
   apply_click: 'Apply clicks',
   save: 'Saves',
   quiz_complete: 'Quiz completions',
@@ -23,6 +24,7 @@ interface ItemRow {
   key: string
   title: string
   itemType: string
+  views30: number
   applies7: number
   applies30: number
   saves30: number
@@ -41,15 +43,16 @@ function buildItemRows(data: AnalyticsData): ItemRow[] {
         key,
         title: titles[e.itemId] ?? `#${e.itemId}`,
         itemType: e.itemType,
-        applies7: 0, applies30: 0, saves30: 0, alerts30: 0,
+        views30: 0, applies7: 0, applies30: 0, saves30: 0, alerts30: 0,
       }
       map.set(key, row)
     }
-    if (e.event === 'apply_click') { row.applies30 += e.n30; row.applies7 += e.n7 }
+    if (e.event === 'detail_view') row.views30 += e.n30
+    else if (e.event === 'apply_click') { row.applies30 += e.n30; row.applies7 += e.n7 }
     else if (e.event === 'save') row.saves30 += e.n30
     else if (e.event === 'alert_subscribe') row.alerts30 += e.n30
   }
-  return [...map.values()].sort((a, b) => b.applies30 - a.applies30 || b.saves30 - a.saves30)
+  return [...map.values()].sort((a, b) => b.applies30 - a.applies30 || b.views30 - a.views30)
 }
 
 export default function AnalyticsPanel({ data }: Props) {
@@ -76,7 +79,7 @@ export default function AnalyticsPanel({ data }: Props) {
       </div>
 
       {/* Totals */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-8">
         {Object.entries(EVENT_LABELS).map(([event, label]) => {
           const n = data.totals.find(t => t.event === event)?.n ?? 0
           return (
@@ -96,22 +99,28 @@ export default function AnalyticsPanel({ data }: Props) {
             <tr className="border-b border-white/6 text-white/40 text-xs uppercase">
               <th className="text-left px-4 py-3 font-medium">Item</th>
               <th className="text-left px-4 py-3 font-medium">Type</th>
+              <th className="text-right px-4 py-3 font-medium">Views 30d</th>
               <th className="text-right px-4 py-3 font-medium">Applies 7d</th>
               <th className="text-right px-4 py-3 font-medium">Applies 30d</th>
+              <th className="text-right px-4 py-3 font-medium">Apply rate</th>
               <th className="text-right px-4 py-3 font-medium">Saves 30d</th>
               <th className="text-right px-4 py-3 font-medium">Alerts 30d</th>
             </tr>
           </thead>
           <tbody>
             {itemRows.length === 0 && (
-              <tr><td colSpan={6} className="px-4 py-6 text-white/30 text-center">No events yet. Data appears as students use the site.</td></tr>
+              <tr><td colSpan={8} className="px-4 py-6 text-white/30 text-center">No events yet. Data appears as students use the site.</td></tr>
             )}
             {itemRows.slice(0, 50).map(row => (
               <tr key={row.key} className="border-b border-white/4">
                 <td className="px-4 py-2.5">{row.title}</td>
                 <td className="px-4 py-2.5 text-white/40">{row.itemType}</td>
+                <td className="px-4 py-2.5 text-right">{row.views30}</td>
                 <td className="px-4 py-2.5 text-right">{row.applies7}</td>
                 <td className="px-4 py-2.5 text-right">{row.applies30}</td>
+                <td className="px-4 py-2.5 text-right text-white/60">
+                  {row.views30 > 0 ? `${Math.round((row.applies30 / row.views30) * 100)}%` : '·'}
+                </td>
                 <td className="px-4 py-2.5 text-right">{row.saves30}</td>
                 <td className="px-4 py-2.5 text-right">{row.alerts30}</td>
               </tr>
@@ -119,6 +128,9 @@ export default function AnalyticsPanel({ data }: Props) {
           </tbody>
         </table>
       </div>
+      <p className="text-xs text-white/30 -mt-6 mb-8">
+        Applies include clicks from list cards, which skip the detail page, so rates above 100% are possible.
+      </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Quiz completions per day */}
