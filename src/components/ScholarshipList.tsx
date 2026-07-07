@@ -6,6 +6,7 @@ import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
 import type { ScholarshipWithMeta, StatusFilter } from '../hooks/useItems.ts';
 import { SCHOLARSHIP_BADGES } from '../lib/badges.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
+import { sendEvent } from '../lib/events.ts';
 
 const REGION_PILLS = [
   { value: null,           label: 'All',         dot: undefined,   color: undefined,   bg: undefined,                    border: undefined },
@@ -52,6 +53,15 @@ function ScholarshipList({ items }: Props) {
     document.addEventListener('astro:before-preparation', close);
     return () => document.removeEventListener('astro:before-preparation', close);
   }, [setSheetOpen]);
+
+  // A search that settles on zero results for a second is a content gap worth
+  // knowing about. The timeout cancels while the user is still typing.
+  useEffect(() => {
+    const q = searchQuery.trim();
+    if (q.length < 3 || filtered.length > 0) return;
+    const t = setTimeout(() => sendEvent('search_empty', undefined, undefined, q), 1000);
+    return () => clearTimeout(t);
+  }, [searchQuery, filtered.length]);
 
   const searchInput = (mobile: boolean) => (
     <div style={{ position: 'relative' }} className={mobile ? '' : 'shrink-0'}>

@@ -78,3 +78,13 @@ export const parseLog = pgTable('parse_log', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, t => [index('parse_log_userId_idx').on(t.userId)])
 
+
+// Anonymous event counters — no IP, no user id, no session. See /api/event.
+export const events = pgTable('events', {
+  id: serial('id').primaryKey(),
+  ts: timestamp('ts').defaultNow().notNull(),
+  event: text('event').notNull(),
+  itemType: text('item_type'),
+  itemId: integer('item_id'),
+  meta: text('meta'),
+}, t => [index('events_event_ts_idx').on(t.event, t.ts)])

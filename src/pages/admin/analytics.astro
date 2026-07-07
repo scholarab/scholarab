@@ -1,0 +1,93 @@
+---
+export const prerender = false
+import { db } from '../../lib/db/client'
+import { events, scholarships, researchPrograms } from '../../lib/db/schema'
+import { sql, and, eq, gte, desc, count } from 'drizzle-orm'
+import AdminShell from '../../components/admin/AdminShell'
+import type { AnalyticsData } from '../../components/admin/AnalyticsPanel'
+import '../../styles/global.css'
+
+const user = Astro.locals.user!
+
+const DAY = 24 * 60 * 60 * 1000
+const d7  = new Date(Date.now() - 7 * DAY)
+const d14 = new Date(Date.now() - 14 * DAY)
+const d30 = new Date(Date.now() - 30 * DAY)
+
+let data: AnalyticsData = { totals: [], perItem: [], quizDaily: [], emptySearches: [], titles: { scholarship: {}, program: {} } }
+try {
+  const totals = await db
+    .select({ event: events.event, n: count() })
+    .from(events)
+    .where(gte(events.ts, d30))
+    .groupBy(events.event)
+
+  const perItem = await db
+    .select({
+      event: events.event,
+      itemType: events.itemType,
+      itemId: events.itemId,
+      n30: count(),
+      n7: sql<number>`(count(*) filter (where ${events.ts} >= ${d7}))::int`,
+    })
+    .from(events)
+    .where(and(
+      gte(events.ts, d30),
+      sql`${events.event} in ('apply_click', 'save', 'alert_subscribe')`,
+      sql`${events.itemId} is not null`,
+    ))
+    .groupBy(events.event, events.itemType, events.itemId)
+
+  const quizDaily = await db
+    .select({ day: sql<string>`to_char(${events.ts}, 'YYYY-MM-DD')`, n: count() })
+    .from(events)
+    .where(and(eq(events.event, 'quiz_complete'), gte(events.ts, d14)))
+    .groupBy(sql`1`)
+    .orderBy(sql`1`)
+
+  const emptySearches = await db
+    .select({ q: events.meta, n: count() })
+    .from(events)
+    .where(and(eq(events.event, 'search_empty'), gte(events.ts, d30), sql`${events.meta} is not null`))
+    .groupBy(events.meta)
+    .orderBy(desc(count()))
+    .limit(20)
+
+  const sTitles = await db.select({ id: scholarships.id, title: scholarships.title }).from(scholarships)
+  const pTitles = await db.select({ id: researchPrograms.id, title: researchPrograms.name }).from(researchPrograms)
+
+  data = {
+    totals,
+    perItem,
+    quizDaily,
+    emptySearches,
+    titles: {
+      scholarship: Object.fromEntries(sTitles.map(r => [r.id, r.title])),
+      program: Object.fromEntries(pTitles.map(r => [r.id, r.title])),
+    },
+  }
+} catch (e) {
+  console.error('DB error:', e)
+  data.error = true
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytics | ScholarAB Admin</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0a0a0f] text-white min-h-screen">
+  <AdminShell
+    client:load
+    user={user}
+    page="analytics"
+    data={JSON.stringify(data)}
+  />
+</body>
+</html>

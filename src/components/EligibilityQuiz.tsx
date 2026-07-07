@@ -4,6 +4,7 @@ import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved } from '../lib/tracker.ts'
 import { showConfetti, generateSlug, parseAmount } from '../lib/utils.ts'
+import { sendEvent } from '../lib/events.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -228,6 +229,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       setAnswers(a => ({ ...a, [key]: value }))
       setEnterDir('fwd')
       setAnimKey(k => k + 1)
+      // Answering the final question = one completed run. Counted here, not on
+      // the results screen, so restored sessions don't recount.
+      if (step === QUESTIONS.length - 1) sendEvent('quiz_complete')
       setStep(s => Math.min(s + 1, QUESTIONS.length))
     }, 260)
   }

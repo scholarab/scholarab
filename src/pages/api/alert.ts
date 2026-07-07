@@ -2,7 +2,7 @@ export const prerender = false
 
 import type { APIRoute } from 'astro'
 import { db } from '../../lib/db/client'
-import { subscribers } from '../../lib/db/schema'
+import { subscribers, events } from '../../lib/db/schema'
 import { loadScholarships, loadPrograms } from '../../lib/data-loader'
 import { jsonOk, jsonError } from '../../lib/api-response'
 import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
@@ -64,5 +64,6 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   recordHit(`alert:${ip}`).catch(() => {})
+  db.insert(events).values({ event: 'alert_subscribe', itemType: itemType as string, itemId }).catch(() => {})
   return jsonOk({ ok: true })
 }

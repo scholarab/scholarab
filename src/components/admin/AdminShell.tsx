@@ -2,6 +2,7 @@ import { useState, type ComponentProps } from 'react'
 import { Toaster, toast } from 'sonner'
 import ScholarshipManager from './ScholarshipManager'
 import ProgramManager from './ProgramManager'
+import AnalyticsPanel, { type AnalyticsData } from './AnalyticsPanel'
 
 interface User {
   id: string
@@ -11,7 +12,7 @@ interface User {
 
 interface Props {
   user: User
-  page: 'scholarships' | 'programs'
+  page: 'scholarships' | 'programs' | 'analytics'
   data: string
 }
 
@@ -45,11 +46,11 @@ export default function AdminShell({ user, page, data }: Props) {
     window.location.href = '/admin/login'
   }
 
-  let parsedData: unknown[]
+  let parsedData: unknown
   try {
     parsedData = JSON.parse(data)
   } catch {
-    parsedData = []
+    parsedData = page === 'analytics' ? { error: true } : []
   }
 
   return (
@@ -75,6 +76,12 @@ export default function AdminShell({ user, page, data }: Props) {
             className={`px-3 py-2 rounded-lg text-sm transition ${page === 'programs' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5'}`}
           >
             Research Programs
+          </a>
+          <a
+            href="/admin/analytics"
+            className={`px-3 py-2 rounded-lg text-sm transition ${page === 'analytics' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5'}`}
+          >
+            Analytics
           </a>
         </nav>
 
@@ -103,8 +110,10 @@ export default function AdminShell({ user, page, data }: Props) {
       <main className="ml-56 flex-1 p-8">
         {page === 'scholarships' ? (
           <ScholarshipManager initialData={parsedData as ComponentProps<typeof ScholarshipManager>['initialData']} />
-        ) : (
+        ) : page === 'programs' ? (
           <ProgramManager initialData={parsedData as ComponentProps<typeof ProgramManager>['initialData']} />
+        ) : (
+          <AnalyticsPanel data={parsedData as AnalyticsData} />
         )}
       </main>
     </div>
