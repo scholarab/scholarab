@@ -39,7 +39,7 @@ const isFuture = deadlineDate && deadlineDate > today
   </div>
 )}
 
-<script define:vars={{ itemType, itemId }}>
+<script is:inline define:vars={{ itemType, itemId }}>
   const form = document.getElementById('alert-form')
   const msg  = document.getElementById('alert-msg')
   const btn  = document.getElementById('alert-btn')

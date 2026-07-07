@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 const { scholarship } = Astro.props;
 const slug = generateSlug(scholarship.title);
 
-function formatDate(str: string): string {
+function formatDate(str: string | null): string {
   if (!str) return 'N/A';
   const d = new Date(str + 'T00:00:00');
   return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -29,7 +29,7 @@ const openDate     = new Date((scholarship.openDate || '1970-01-01') + 'T00:00:0
 const deadlineDate = scholarship.deadline ? new Date(scholarship.deadline + 'T00:00:00') : null;
 const status = todayDate < openDate ? 'future' : (deadlineDate && todayDate > deadlineDate) ? 'closed' : 'active';
 
-const rawBadge = CATEGORY_BADGE[scholarship.category] || DEFAULT_BADGE;
+const rawBadge = CATEGORY_BADGE[scholarship.category ?? ''] || DEFAULT_BADGE;
 const badge    = { ...rawBadge, label: scholarship.category || '' };
 
 const regionStr    = !scholarship.region || scholarship.region === 'National' ? '' : ` in ${scholarship.region}`;
@@ -72,8 +72,8 @@ const ctaLabel = scholarship.applyViaGuidance ? 'Learn More â†’' : 'Apply Now â†
   currentPath="/scholarships"
   containerClass="max-w-2xl"
 >
-  <script type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
 
   <DetailLayout
     badge={badge}

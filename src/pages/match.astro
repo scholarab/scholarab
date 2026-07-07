@@ -23,7 +23,7 @@ const breadcrumbJson = {
   ogUrl="https://www.scholarab.ca/match"
   currentPath="/match"
 >
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <div class="pb-16">
     <div class="max-w-2xl mx-auto pt-4 md:pt-6 px-4">
       <div class="mb-4 md:mb-5" id="match-intro">

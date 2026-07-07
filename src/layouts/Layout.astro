@@ -75,7 +75,7 @@ const {
     <link rel="preload" href="/fonts/inter-800.woff2" as="font" type="font/woff2" crossorigin />
     <ClientRouter />
     <slot name="head" />
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "bda47a2a06b543d7be56420c5efb42ff"}'></script>
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "bda47a2a06b543d7be56420c5efb42ff"}'></script>
   </head>
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
 
@@ -200,6 +200,7 @@ const {
 
         document.addEventListener('touchstart', (e) => {
           const t = e.touches[0];
+          if (!t) { cancelled = true; return; }
           startX = t.pageX;
           startY = t.pageY;
           cancelled = false;
@@ -211,8 +212,10 @@ const {
 
         document.addEventListener('touchmove', (e) => {
           if (cancelled) return;
-          const dx = e.touches[0].pageX - startX;
-          const dy = e.touches[0].pageY - startY;
+          const t = e.touches[0];
+          if (!t) return;
+          const dx = t.pageX - startX;
+          const dy = t.pageY - startY;
           if (!locked) {
             // Vertical intent detected — cancel horizontal swipe
             if (Math.abs(dy) > 20 && Math.abs(dy) > Math.abs(dx)) { cancelled = true; return; }
@@ -222,15 +225,17 @@ const {
 
         document.addEventListener('touchend', async (e) => {
           if (cancelled || !locked) return;
-          const dx = e.changedTouches[0].pageX - startX;
+          const t = e.changedTouches[0];
+          if (!t) return;
+          const dx = t.pageX - startX;
           if (Math.abs(dx) < THRESHOLD) return;
 
           const path = window.location.pathname;
           const idx = PAGES.findIndex(p => p === '/' ? path === '/' : path.startsWith(p));
           if (idx === -1) return;
 
-          const nextIdx = dx < 0 ? idx + 1 : idx - 1;
-          if (nextIdx < 0 || nextIdx >= PAGES.length) return;
+          const nextPage = PAGES[dx < 0 ? idx + 1 : idx - 1];
+          if (!nextPage) return;
 
           navigator.vibrate?.(6);
 
@@ -238,7 +243,7 @@ const {
           document.documentElement.dataset.swipeDir = dx < 0 ? 'left' : 'right';
 
           const { navigate } = await import('astro:transitions/client');
-          navigate(PAGES[nextIdx]);
+          navigate(nextPage);
         }, { passive: true });
       })();
     </script>

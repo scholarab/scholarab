@@ -1,7 +1,7 @@
 ---
 const { currentPath } = Astro.props;
-const navCls = (p) => `hidden md:inline-flex items-center relative transition-colors nav-link ${currentPath === p ? 'text-brand nav-link-active' : 'text-secondary hover:text-primary'}`;
-const navClsStart = (p) => `hidden md:inline-flex items-center relative transition-colors nav-link ${currentPath.startsWith(p) ? 'text-brand nav-link-active' : 'text-secondary hover:text-primary'}`;
+const navCls = (p: string) => `hidden md:inline-flex items-center relative transition-colors nav-link ${currentPath === p ? 'text-brand nav-link-active' : 'text-secondary hover:text-primary'}`;
+const navClsStart = (p: string) => `hidden md:inline-flex items-center relative transition-colors nav-link ${currentPath.startsWith(p) ? 'text-brand nav-link-active' : 'text-secondary hover:text-primary'}`;
 ---
 
 <div id="top-nav-wrapper" class="sticky top-2 z-500 mb-10" style="padding: 0 16px;">
@@ -9,7 +9,7 @@ const navClsStart = (p) => `hidden md:inline-flex items-center relative transiti
     <nav class="glass-nav flex justify-between items-center px-6 py-3" aria-label="Site navigation" style="border-radius: 9999px; overflow: visible;">
       <!-- gradient rainbow underline -->
       <div aria-hidden="true" style="position:absolute;bottom:-1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,211,165,0.6),rgba(59,130,246,0.5),rgba(167,139,250,0.4),transparent);border-radius:1px;pointer-events:none;"></div>
-      <a href="/" onclick="if(window.location.pathname==='/'){event.preventDefault()}" class="logo-link flex items-center gap-2" aria-label="ScholarAB home">
+      <a href="/" onclick="return window.location.pathname!=='/'" class="logo-link flex items-center gap-2" aria-label="ScholarAB home">
         <svg class="logo-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 56" fill="none" height="36" aria-hidden="true">
           <path d="M10 42 L22 20 L34 42Z" fill="#0c8060" opacity="0.35"/><path d="M26 42 L42 14 L58 42Z" fill="#0c8060" opacity="0.6"/>
           <path d="M18 42 L34 6 L50 42Z" fill="#0c8060"/><path d="M34 6 L39 18 L29 18Z" fill="white" opacity="0.9"/>

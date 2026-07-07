@@ -11,7 +11,7 @@ interface Scholarship {
   title: string;
   active: boolean;
   deadline?: string;
-  open_date?: string;
+  openDate?: string;
   pendingReview?: boolean;
   [key: string]: unknown;
 }
@@ -31,12 +31,13 @@ for (const s of scholarships) {
       changed++;
       console.log(`Expired: [${s.id}] ${s.title} (deadline: ${s.deadline})`);
     }
-  } else if (s.active === false && s.pendingReview !== true && s.open_date) {
-    const openDate = new Date(s.open_date + 'T00:00:00Z');
-    if (openDate <= today) {
+  } else if (s.active === false && s.pendingReview !== true && s.openDate) {
+    const openDate = new Date(s.openDate + 'T00:00:00Z');
+    const deadline = s.deadline ? new Date(s.deadline + 'T00:00:00Z') : null;
+    if (openDate <= today && !(deadline && deadline < today)) {
       s.active = true;
       changed++;
-      console.log(`Opened: [${s.id}] ${s.title} (open_date: ${s.open_date})`);
+      console.log(`Opened: [${s.id}] ${s.title} (openDate: ${s.openDate})`);
     }
   }
 }

@@ -25,8 +25,6 @@ vi.mock('../lib/utils.ts', async (importOriginal) => {
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-const _TODAY_MS = new Date('2026-04-05T00:00:00').setHours(0, 0, 0, 0)
-
 function makeScholarship(
   overrides: Partial<ScholarshipWithMeta> & { id: number },
 ): ScholarshipWithMeta {

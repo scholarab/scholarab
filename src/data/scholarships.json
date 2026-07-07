@@ -418,7 +418,7 @@
     "category": "Indigenous",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": false,
+    "active": true,
     "openDate": "2026-05-01",
     "description": "ATB Financial awards $1,500 annually to Indigenous students pursuing business or finance studies in Alberta. This award recognizes and supports Indigenous learners as they advance their education in these fields. Applicants must be Indigenous and enrolled or planning to enroll in post-secondary business or finance programs.",
     "eligibility": {

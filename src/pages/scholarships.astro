@@ -34,7 +34,7 @@ const scholarships = raw.map(s => ({
   ogUrl="https://www.scholarab.ca/scholarships"
   currentPath="/scholarships"
 >
-  <script type="application/ld+json" set:html={JSON.stringify({
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Alberta High School Scholarships 2026",

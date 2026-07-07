@@ -20,7 +20,7 @@ const programs = raw.map(p => ({
   ...p,
   _deadline_ms: p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
     ? new Date(p.deadline + 'T00:00:00').getTime()
-    : null,
+    : undefined,
   _slug: generateSlug(p.name),
 }));
 ---
@@ -33,7 +33,7 @@ const programs = raw.map(p => ({
   ogUrl="https://www.scholarab.ca/programs"
   currentPath="/programs"
 >
-  <script type="application/ld+json" set:html={JSON.stringify({
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Alberta Student Research Programs 2026",

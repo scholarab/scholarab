@@ -15,7 +15,7 @@ const activeScholarships = scholarships.filter(s => {
   if (!s.deadline) return true;
   return new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime();
 });
-const activeTotal = activeScholarships.reduce((sum, s) => { const m = s.amount.match(/\$?([\d,]+)/); const n = m ? parseInt(m[1].replace(/,/g, ''), 10) : NaN; return sum + (isNaN(n) ? 0 : n); }, 0);
+const activeTotal = activeScholarships.reduce((sum, s) => { const v = s.amount.match(/\$?([\d,]+)/)?.[1]; const n = v ? parseInt(v.replace(/,/g, ''), 10) : NaN; return sum + (isNaN(n) ? 0 : n); }, 0);
 const researchCount = programs.filter(p => {
   if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') return true;
   return new Date(p.deadline + 'T00:00:00') >= today;
@@ -42,7 +42,7 @@ const closingSoon = scholarships
   ogUrl="https://www.scholarab.ca"
   currentPath="/"
 >
-  <script type="application/ld+json" set:html={JSON.stringify({
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "ScholarAB",

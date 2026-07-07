@@ -18,8 +18,9 @@ const { program } = Astro.props;
 const slug = generateSlug(program.name);
 
 
-function formatDate(str: string): string {
-  if (!str || str === 'TBA' || str === 'Ongoing') return str;
+function formatDate(str: string | null): string {
+  if (!str) return 'TBA';
+  if (str === 'TBA' || str === 'Ongoing') return str;
   const d = new Date(str + 'T00:00:00');
   return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 }
@@ -30,8 +31,8 @@ const isClosed = program.deadline && program.deadline !== 'TBA' && program.deadl
   ? todayDate > new Date(program.deadline + 'T00:00:00')
   : false;
 
-const rawBadge = CATEGORY_BADGE[program.category] || DEFAULT_BADGE;
-const badge    = { ...rawBadge, emoji: program.emoji || rawBadge.emoji, label: program.category };
+const rawBadge = CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE;
+const badge    = { ...rawBadge, emoji: program.emoji || rawBadge.emoji, label: program.category ?? '' };
 
 const desc = program.description ?? '';
 const metaDescription = desc.length > 160
@@ -73,14 +74,14 @@ const breadcrumbJson = {
   currentPath="/programs"
   containerClass="max-w-2xl"
 >
-  <script type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
 
   <DetailLayout
     badge={badge}
     title={program.name}
     titleMb="mb-1"
-    subtitle={program.provider}
+    subtitle={program.provider ?? undefined}
     amount={program.paid && program.stipend ? program.stipend : undefined}
     amountStyle="clamp(20px, 3vw, 28px)"
     url={program.url}
