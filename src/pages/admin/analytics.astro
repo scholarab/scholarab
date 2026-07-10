@@ -14,10 +14,14 @@ const d7  = new Date(Date.now() - 7 * DAY)
 const d14 = new Date(Date.now() - 14 * DAY)
 const d30 = new Date(Date.now() - 30 * DAY)
 
-let data: AnalyticsData = { totals: [], perItem: [], quizDaily: [], emptySearches: [], titles: { scholarship: {}, program: {} } }
+let data: AnalyticsData = { totals: [], perItem: [], daily: [], emptySearches: [], titles: { scholarship: {}, program: {} } }
 try {
   const totals = await db
-    .select({ event: events.event, n: count() })
+    .select({
+      event: events.event,
+      n30: count(),
+      n7: sql<number>`(count(*) filter (where ${events.ts} >= ${d7}))::int`,
+    })
     .from(events)
     .where(gte(events.ts, d30))
     .groupBy(events.event)
@@ -38,10 +42,11 @@ try {
     ))
     .groupBy(events.event, events.itemType, events.itemId)
 
-  const quizDaily = await db
+  // All events per day (Alberta time) — overall pulse of the site
+  const daily = await db
     .select({ day: sql<string>`to_char(${events.ts} AT TIME ZONE 'UTC' AT TIME ZONE 'America/Edmonton', 'YYYY-MM-DD')`, n: count() })
     .from(events)
-    .where(and(eq(events.event, 'quiz_complete'), gte(events.ts, d14)))
+    .where(gte(events.ts, d14))
     .groupBy(sql`1`)
     .orderBy(sql`1`)
 
@@ -59,7 +64,7 @@ try {
   data = {
     totals,
     perItem,
-    quizDaily,
+    daily,
     emptySearches,
     titles: {
       scholarship: Object.fromEntries(sTitles.map(r => [r.id, r.title])),
