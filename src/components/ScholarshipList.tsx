@@ -1,58 +1,73 @@
-import { useMemo, useEffect } from 'react';
-import { useScholarships } from '../hooks/useItems.ts';
-import { ScholarshipCard } from './ItemCard.tsx';
-import Pagination from './Pagination.tsx';
-import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
+import { useEffect, useMemo } from 'react';
+import { useScholarships, getScholarshipStatus } from '../hooks/useItems.ts';
 import type { ScholarshipWithMeta, StatusFilter } from '../hooks/useItems.ts';
-import { SCHOLARSHIP_BADGES } from '../lib/badges.ts';
-import ErrorBoundary from './ErrorBoundary.tsx';
+import { generateSlug, parseAmount } from '../lib/utils.ts';
 import { sendEvent } from '../lib/events.ts';
+import ErrorBoundary from './ErrorBoundary.tsx';
 
-const REGION_PILLS = [
-  { value: null,           label: 'All',         dot: undefined,   color: undefined,   bg: undefined,                    border: undefined },
-  { value: 'Medicine Hat', label: 'Medicine Hat', dot: '#f97316',   color: '#f97316',   bg: 'rgba(249,115,22,0.15)',       border: 'rgba(249,115,22,0.35)' },
-  { value: 'Alberta-wide', label: 'Alberta',      dot: '#4ade80',   color: '#4ade80',   bg: 'rgba(74,222,128,0.15)',       border: 'rgba(74,222,128,0.35)' },
-  { value: 'National',     label: 'National',     dot: '#3b82f6',   color: '#60a5fa',   bg: 'rgba(59,130,246,0.15)',       border: 'rgba(59,130,246,0.35)' },
+// Region keys must line up with REGION_MATCH in useItems
+const REGION_CHIPS = [
+  { value: null,           label: 'All' },
+  { value: 'Medicine Hat', label: 'Medicine Hat' },
+  { value: 'Alberta-wide', label: 'Alberta' },
+  { value: 'National',     label: 'National' },
 ] as const;
 
-const SORT_OPTIONS = [
-  { value: 'closest_due', label: 'Earliest Deadline' },
-  { value: 'highest_pay', label: 'Highest Amount' },
-  { value: 'lowest_pay',  label: 'Lowest Amount' },
+const SORT_CHIPS = [
+  { value: 'closest_due', label: 'Earliest deadline' },
+  { value: 'highest_pay', label: 'Highest $' },
+  { value: 'lowest_pay',  label: 'Lowest $' },
 ] as const;
 
-const pillBase  = 'shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
-const pillOn    = 'text-brand border-brand-border bg-brand-dim';
-const pillOff   = 'bg-subtle text-secondary border-card';
+const STATUS_CHIPS: { value: StatusFilter; label: string }[] = [
+  { value: 'all',     label: 'All' },
+  { value: 'active',  label: 'Open' },
+  { value: 'opening', label: 'Opening soon' },
+  { value: 'closed',  label: 'Closed' },
+];
 
 interface Props {
   items: ScholarshipWithMeta[];
 }
 
-const STATUS_CHIPS: { value: StatusFilter; label: string; dot?: string }[] = [
-  { value: 'all',     label: 'All' },
-  { value: 'active',  label: 'Active',  dot: '#22d3a5' },
-  { value: 'opening', label: 'Coming',  dot: '#3b82f6' },
-  { value: 'closed',  label: 'Closed',  dot: '#ef4444' },
-];
+function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; children: string }) {
+  return (
+    <button type="button" className={`sabl-chip${on ? ' on' : ''}`} onClick={onClick} aria-pressed={on}>
+      {children}
+    </button>
+  );
+}
+
+function shortDate(iso: string): string {
+  return new Date(iso + 'T00:00:00')
+    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })
+    .toUpperCase();
+}
+
+function DaysChip({ s }: { s: ScholarshipWithMeta }) {
+  const status = getScholarshipStatus(s);
+  if (status === 'closed') return <span className="sabl-days neutral">CLOSED</span>;
+  if (status === 'future') {
+    return <span className="sabl-days neutral">{s.openDate ? `OPENS ${shortDate(s.openDate)}` : 'OPENING SOON'}</span>;
+  }
+  if (!s.deadline) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const days = Math.max(0, Math.round((new Date(s.deadline + 'T00:00:00').getTime() - today.getTime()) / 86400000));
+  const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
+  return <span className={`sabl-days${days <= 7 ? ' urgent' : ''}`}>{label}</span>;
+}
 
 function ScholarshipList({ items }: Props) {
   const {
-    filtered, visibleItems, page, totalPages, handlePageChange,
-    sortBy, setSort, selectedRegion, setRegion,
+    filtered,
+    sortBy, setSort,
+    selectedRegion, setRegion,
     selectedCategory, setCategory, clearFilters,
     statusFilter, setStatusFilter,
     searchQuery, setSearchQuery,
-    sheetOpen, setSheetOpen, hasActiveFilters,
-    savedIds, handleToggleSave, isFiltered,
-    regionKey, categoryKey,
+    savedIds, handleToggleSave,
   } = useScholarships(items);
-
-  useEffect(() => {
-    const close = () => setSheetOpen(false);
-    document.addEventListener('astro:before-preparation', close);
-    return () => document.removeEventListener('astro:before-preparation', close);
-  }, [setSheetOpen]);
 
   // A search that settles on zero results for a second is a content gap worth
   // knowing about. The timeout cancels while the user is still typing.
@@ -63,200 +78,138 @@ function ScholarshipList({ items }: Props) {
     return () => clearTimeout(t);
   }, [searchQuery, filtered.length]);
 
-  const searchInput = (mobile: boolean) => (
-    <div style={{ position: 'relative' }} className={mobile ? '' : 'shrink-0'}>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"
-        style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-tertiary)', pointerEvents: 'none' }}>
-        <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-      </svg>
-      <input
-        type="search"
-        value={searchQuery}
-        onChange={e => setSearchQuery(e.target.value)}
-        placeholder="Search scholarships…"
-        aria-label="Search scholarships by name, eligibility, or category"
-        className="bg-subtle text-secondary border border-card rounded-full text-sm"
-        style={{ padding: '7px 14px 7px 34px', width: mobile ? '100%' : 220, outline: 'none', fontFamily: 'inherit' }}
-      />
-    </div>
-  );
+  const categories = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const s of items) if (s.category) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]) => name);
+  }, [items]);
 
-  const savedSet   = useMemo(() => new Set(savedIds), [savedIds]);
-  const categories = useMemo(
-    () => [...new Set(items.map(s => s.category).filter(Boolean) as string[])].sort(),
-    [items]
+  // "$X open across these listings" — active money only, follows the filters
+  const totalOpen = useMemo(
+    () => filtered.reduce((sum, s) => sum + (getScholarshipStatus(s) === 'active' ? (s._amount ?? parseAmount(s.amount)) : 0), 0),
+    [filtered],
   );
 
   return (
-    <div>
-      <span className="sr-only" aria-live="polite" aria-atomic="true">
-        {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''} shown
-      </span>
-
-
-      {/* Category chips — desktop only */}
-      {categories.length > 0 && (
-        <div className="hidden md:block">
-          <div className="chips-row-wrap mb-4">
-            <div className="flex chips-row gap-1.5 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
-              <CategoryChips categories={categories} selected={selectedCategory} onSelect={setCategory} badges={SCHOLARSHIP_BADGES} mobile={false} />
-            </div>
-          </div>
+    <div className="sabl-page">
+      {/* Title row */}
+      <div className="sabl-title-row">
+        <div>
+          <div className="sabl-mono sabl-eyebrow">THE DIRECTORY — {items.length} LISTINGS</div>
+          <h1 className="sabl-h1">Scholarships</h1>
+          <p className="sabl-desc">
+            Open scholarships for Alberta high school students — verified by hand, updated weekly. If it's listed here, it's real and it's open.
+          </p>
         </div>
-      )}
-
-      {/* Mobile: count + filter button */}
-      <FilterButton count={filtered.length} label="scholarship" hasActiveFilters={hasActiveFilters} open={sheetOpen} onOpen={() => setSheetOpen(true)} />
-
-      {/* Region pills — desktop only */}
-      <div className="hidden md:block">
-        <div className="chips-row-wrap mb-5">
-          <div className="flex chips-row gap-2 overflow-x-auto" style={{ flexWrap: 'nowrap' }}>
-            {REGION_PILLS.map(({ value, label, dot, color, bg, border }) => {
-              const sel = selectedRegion === value;
-              const selStyle = sel
-                ? color
-                  ? { background: bg, border: `0.5px solid ${border}`, color }
-                  : { background: 'var(--brand-dim)', border: '0.5px solid var(--brand-border)', color: 'var(--brand)' }
-                : undefined;
-              return (
-                <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                  className={`shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none ${sel ? (color ? 'region-pill-active' : '') : 'bg-subtle text-secondary border border-card hover:border-medium'}`}
-                  style={selStyle}>
-                  {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', marginRight: 4, flexShrink: 0, boxShadow: sel ? `0 0 0 2px var(--bg-page), 0 0 0 4px ${dot}` : 'none' }} />}
-                  {label}
-                </button>
-              );
-            })}
-          </div>
+        <div className="sabl-stat">
+          <div className="sabl-stat-value tnum">${totalOpen.toLocaleString('en-CA')}</div>
+          <div className="sabl-mono sabl-stat-label">OPEN ACROSS THESE LISTINGS</div>
         </div>
       </div>
 
-      {/* Desktop: count + status chips + sort pills */}
-      <div className="hidden md:flex mb-5 items-center justify-between gap-4 flex-wrap">
-        <div className="flex items-center gap-3 shrink-0 flex-wrap">
-          <p className="text-sm text-faint shrink-0">
-            {filtered.length} scholarship{filtered.length !== 1 ? 's' : ''}
-          </p>
-          <div className="flex items-center gap-1">
-            {STATUS_CHIPS.map(({ value, label, dot }) => {
-              const active = statusFilter === value;
-              return (
-                <button key={value} onClick={() => setStatusFilter(value)} aria-pressed={active}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-150 border"
-                  style={{
-                    background: active ? (dot ? `${dot}18` : 'var(--bg-subtle)') : 'transparent',
-                    borderColor: active ? (dot ? `${dot}44` : 'var(--border-card)') : 'transparent',
-                    color: active ? (dot || 'var(--text-primary)') : 'var(--text-tertiary)',
-                    cursor: 'pointer',
-                    fontFamily: 'inherit',
-                  }}>
-                  {dot && <span style={{ width: 6, height: 6, borderRadius: '50%', background: dot, flexShrink: 0, boxShadow: active ? `0 0 5px ${dot}` : 'none' }} />}
-                  {label}
-                </button>
-              );
-            })}
-          </div>
+      {/* Toolbar: search + sort */}
+      <div className="sabl-toolbar">
+        <div className="sabl-search">
+          <span className="sabl-search-icon" aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Search by name or keyword…"
+            aria-label="Search scholarships by name or keyword"
+          />
         </div>
-        <div className="flex items-center gap-3 flex-wrap">
-        {searchInput(false)}
-        <div style={{ display: 'inline-flex', padding: 3, borderRadius: 10, border: '1px solid var(--border-card)', background: 'var(--bg-card)', flexShrink: 0 }}>
-          {SORT_OPTIONS.map(({ value, label }) => {
-            const active = sortBy === value;
-            const icon = active ? (value === 'closest_due' ? '◆' : value === 'highest_pay' ? '↑' : '↓') : null;
+        <div className="sabl-sort">
+          <span className="sabl-mono sabl-row-label">SORT</span>
+          {SORT_CHIPS.map(s => (
+            <Chip key={s.value} on={sortBy === s.value} onClick={() => setSort(s.value)}>{s.label}</Chip>
+          ))}
+        </div>
+      </div>
+
+      {/* Filter rows */}
+      <div className="sabl-filters">
+        <div className="sabl-filter-row">
+          <span className="sabl-mono sabl-row-label">TRACK</span>
+          <Chip on={selectedCategory === 'all'} onClick={() => setCategory('all')}>All</Chip>
+          {categories.map(c => (
+            <Chip key={c} on={selectedCategory === c} onClick={() => setCategory(c)}>{c}</Chip>
+          ))}
+        </div>
+        <div className="sabl-filter-row">
+          <span className="sabl-mono sabl-row-label">REGION</span>
+          {REGION_CHIPS.map(r => (
+            <Chip
+              key={r.label}
+              on={selectedRegion === r.value}
+              onClick={() => setRegion(r.value as Parameters<typeof setRegion>[0])}
+            >{r.label}</Chip>
+          ))}
+        </div>
+        <div className="sabl-filter-row">
+          <span className="sabl-mono sabl-row-label">STATUS</span>
+          {STATUS_CHIPS.map(s => (
+            <Chip key={s.value} on={statusFilter === s.value} onClick={() => setStatusFilter(s.value)}>{s.label}</Chip>
+          ))}
+        </div>
+      </div>
+
+      <div className="sabl-mono sabl-result-line">
+        {filtered.length} OF {items.length} LISTINGS SHOWN — EVERY ONE CHECKED BY HAND
+      </div>
+
+      {/* Results */}
+      {filtered.length > 0 ? (
+        <div className="sabl-grid">
+          {filtered.map(s => {
+            const status = getScholarshipStatus(s);
+            const saved = savedIds.includes(s.id);
             return (
-              <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={active}
-                style={{
-                  padding: '5px 11px', fontSize: 12, fontWeight: active ? 600 : 500,
-                  letterSpacing: '-0.01em', fontFamily: 'inherit',
-                  border: 'none', borderRadius: 7, cursor: 'pointer', whiteSpace: 'nowrap',
-                  background: active ? 'var(--bg-subtle)' : 'transparent',
-                  color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                  transition: 'all 180ms',
-                  display: 'inline-flex', alignItems: 'center', gap: 4,
-                  position: 'relative',
-                }}>
-                {icon && <span style={{ color: 'var(--brand)', fontSize: 10 }}>{icon}</span>}
-                {label}
-                {active && <span style={{ position: 'absolute', left: 11, right: 11, bottom: 2, height: 1, background: 'var(--brand)', borderRadius: 1 }} aria-hidden="true" />}
-              </button>
+              <div key={s.id} className="sabl-card">
+                <div className="sabl-card-top">
+                  <span className="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
+                  <DaysChip s={s} />
+                </div>
+                <a href={`/scholarships/${s._slug ?? generateSlug(s.title)}`} className="sabl-name">{s.title}</a>
+                <div className="sabl-amount">{s.amount}</div>
+                {s.audience && <div className="sabl-blurb">{s.audience}</div>}
+                <div className="sabl-card-foot">
+                  <span className="sabl-due">
+                    {s.deadline ? `DUE ${shortDate(s.deadline)}` : 'NO FIXED DEADLINE'}
+                  </span>
+                  <div className="sabl-card-actions">
+                    <button
+                      type="button"
+                      className={`sabl-save${saved ? ' on' : ''}`}
+                      onClick={() => handleToggleSave(s.id)}
+                      aria-label={saved ? `Remove ${s.title} from saved` : `Save ${s.title}`}
+                      aria-pressed={saved}
+                    >
+                      {saved ? '★' : '☆'}
+                    </button>
+                    {status === 'active' && s.url && (
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        referrerPolicy="no-referrer"
+                        className="sabl-apply"
+                        onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
+                      >
+                        Apply →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
-        </div>
-      </div>
-
-      {/* Mobile bottom sheet */}
-      <FilterSheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        <div>
-          <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Search</p>
-          {searchInput(true)}
-        </div>
-        {categories.length > 0 && (
-          <div>
-            <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Category</p>
-            <div className="flex flex-wrap" style={{ gap: 8 }}>
-              <CategoryChips categories={categories} selected={selectedCategory} onSelect={setCategory} badges={SCHOLARSHIP_BADGES} mobile={true} />
-            </div>
-          </div>
-        )}
-        <div>
-          <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Region</p>
-          <div className="flex flex-wrap" style={{ gap: 8 }}>
-            {REGION_PILLS.map(({ value, label, dot, color, bg, border }) => {
-              const sel = selectedRegion === value;
-              const selStyle = sel
-                ? color
-                  ? { background: bg, borderColor: border, color }
-                  : { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)', color: 'var(--brand)' }
-                : undefined;
-              return (
-                <button key={label} onClick={() => setRegion(value)} aria-pressed={sel}
-                  className={`${pillBase} ${sel ? (color ? 'region-pill-active' : pillOn) : pillOff}`}
-                  style={selStyle}>
-                  {dot && <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block', flexShrink: 0 }} />}
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Sort</p>
-          <div className="flex flex-wrap" style={{ gap: 8 }}>
-            {SORT_OPTIONS.map(({ value, label }) => {
-              const sel = sortBy === value;
-              return (
-                <button key={value} onClick={() => setSort(value as 'closest_due' | 'highest_pay' | 'lowest_pay')} aria-pressed={sel}
-                  className={`${pillBase} ${sel ? pillOn : pillOff}`}
-                  style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </FilterSheet>
-
-      {/* Card grid */}
-      <div key={`${regionKey}-${categoryKey}-${sortBy}-${page}`} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" style={{ alignItems: 'stretch' }}>
-        {visibleItems.map((s, i) => (
-          <ScholarshipCard key={s.id} scholarship={s} index={i} isSaved={savedSet.has(s.id)} onToggleSave={() => handleToggleSave(s.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
-        ))}
-      </div>
-
-      <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
-
-      {filtered.length === 0 && (
-        <div className="empty-state">
-          <span className="ico" aria-hidden="true">🔍</span>
-          <p className="font-semibold text-primary mb-2">No scholarships match your filters</p>
-          <p className="text-sm text-secondary mb-6">Try a different region, category, or status.</p>
-          {hasActiveFilters && (
-            <button className="empty-clear" onClick={clearFilters}>
-              Clear filters
-            </button>
-          )}
+      ) : (
+        <div className="sabl-empty">
+          <div className="sabl-empty-title">Nothing matches that.</div>
+          <div className="sabl-empty-sub">Try clearing a filter or searching something broader.</div>
+          <button type="button" className="sabl-empty-btn" onClick={clearFilters}>Clear all filters</button>
         </div>
       )}
     </div>
@@ -264,5 +217,9 @@ function ScholarshipList({ items }: Props) {
 }
 
 export default function ScholarshipListWithBoundary(props: Props) {
-  return <ErrorBoundary><ScholarshipList {...props} /></ErrorBoundary>;
+  return (
+    <ErrorBoundary>
+      <ScholarshipList {...props} />
+    </ErrorBoundary>
+  );
 }

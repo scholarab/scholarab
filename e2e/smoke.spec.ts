@@ -10,8 +10,8 @@ test('homepage loads with hero content', async ({ page }) => {
 test('scholarships page - list hydrates and shows count', async ({ page }) => {
   await page.goto('/scholarships');
   await expect(page).toHaveTitle(/Scholarship/i);
-  // React list hydrates and shows count
-  await expect(page.locator('text=/\\d+ scholarship/').first()).toBeVisible({ timeout: 10_000 });
+  // React list hydrates and shows the result line
+  await expect(page.locator('text=/\\d+ OF \\d+ LISTINGS/i').first()).toBeVisible({ timeout: 10_000 });
 });
 
 test('programs page - list hydrates and shows count', async ({ page }) => {
