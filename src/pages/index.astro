@@ -23,6 +23,13 @@ const researchCount = programs.filter(p => {
 
 const scholarshipCount = scholarships.length;
 
+// Provenance: newest lastVerified across both datasets (YYYY-MM) → "July 2026"
+const newestVerified = [...scholarships, ...programs]
+  .map(x => x.lastVerified).filter(Boolean).sort().at(-1);
+const verifiedLabel = newestVerified
+  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
+  : null;
+
 const closingSoon = scholarships
   .filter(s => {
     if (!s.deadline || !s.active) return false;
@@ -49,6 +56,7 @@ const closingSoon = scholarships
     "url": "https://www.scholarab.ca",
     "description": "Free Alberta scholarship and research program directory for high school students.",
   })} slot="head" />
+  <link rel="preload" href="/fonts/syne-800.woff2" as="font" type="font/woff2" crossorigin slot="head" />
 
   <div class="pb-8">
 
@@ -57,39 +65,41 @@ const closingSoon = scholarships
       <div class="hero-glow" aria-hidden="true"></div>
       <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
 
-        <!-- Tagline -->
-        <p class="hero-tagline">Alberta's student opportunity directory.</p>
+        <!-- Headline: identity first, money second -->
+        <h1 class="hero-h1 font-display">Every scholarship an Alberta high school student can actually get.</h1>
 
-        <!-- Hero amount — server-rendered final value; count-up enhances on load -->
-        <p class="hero-amount tnum mb-10">
-          <span id="hero-amount-count" data-total={activeTotal}>${activeTotal.toLocaleString('en-CA')}</span>+ open right now
+        <!-- Stat line — server-rendered final value; count-up enhances on load -->
+        <p class="hero-stat-line tnum">
+          <span class="amount"><span id="hero-amount-count" data-total={activeTotal}>${activeTotal.toLocaleString('en-CA')}</span> open right now</span>
+          <span class="sep">·</span>{scholarshipCount} scholarships
+          <span class="sep">·</span>{researchCount} research programs
         </p>
 
         <!-- CTA buttons -->
         <div class="flex flex-col items-center gap-3">
           <div class="flex flex-row gap-3">
-            <a href="/scholarships" class="btn-pill-filled">Find Scholarships</a>
-            <a href="/programs" class="btn-pill-outline">Research Programs</a>
+            <a href="/scholarships" class="btn-pill-filled">Browse {scholarshipCount} scholarships</a>
+            <a href="/programs" class="btn-pill-outline">Explore programs</a>
           </div>
           <a href="/match" class="find-match">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
             <span class="label">Find my match</span><span class="arrow">→</span>
           </a>
-          <p class="hero-stat" style="font-size:13px;margin-top:4px;">
-            <span class="num">{scholarshipCount}</span> scholarships <span class="sep">·</span> <span class="num">{researchCount}</span> research programs
+          <p class="hero-provenance">
+            Hand-checked by a Medicine Hat high school student{verifiedLabel && <> <span style="color:var(--brand);">·</span> Last verified {verifiedLabel}</>}
           </p>
-          <p style="font-size:11px;color:var(--text-tertiary);margin-top:10px;letter-spacing:0.02em;">No login &nbsp;·&nbsp; No ads &nbsp;·&nbsp; No data collection</p>
+          <p style="font-size:11px;color:var(--text-tertiary);margin-top:2px;letter-spacing:0.02em;">No login &nbsp;·&nbsp; No ads &nbsp;·&nbsp; No data collection</p>
         </div>
       </div>
     </div>
 
     <!-- Closing this week — horizontal scroll carousel -->
     {closingSoon.length > 0 && (
-      <div class="mt-10 md:mt-14" data-closing-section>
+      <div class="mt-8 md:mt-12" data-closing-section>
         <div class="max-w-2xl mx-auto flex items-baseline justify-between mb-5 px-0">
           <div>
             <p style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#f5b14a;margin-bottom:6px;">⚡ Time sensitive</p>
-            <h2 style="margin:0;font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">Closing this week</h2>
+            <h2 class="font-display" style="margin:0;font-size:clamp(22px,4vw,32px);letter-spacing:-0.02em;color:var(--text-primary);">Closing this week</h2>
           </div>
           <a href="/scholarships" class="find-match"><span class="label">View all</span><span class="arrow">→</span></a>
         </div>

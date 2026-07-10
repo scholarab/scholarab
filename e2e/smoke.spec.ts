@@ -3,9 +3,8 @@ import { test, expect } from '@playwright/test';
 test('homepage loads with hero content', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveTitle(/ScholarAB/);
-  // Hero tagline is a <p>, not <h1>
-  await expect(page.locator("text=Alberta's student opportunity directory.")).toBeVisible();
-  await expect(page.getByRole('link', { name: /Find Scholarships/i })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: /Every scholarship/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Browse \d+ scholarships/i })).toBeVisible();
 });
 
 test('scholarships page - list hydrates and shows count', async ({ page }) => {
