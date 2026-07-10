@@ -23,7 +23,7 @@ const researchCount = programs.filter(p => {
 
 const scholarshipCount = scholarships.length;
 
-// Provenance: newest lastVerified across both datasets (YYYY-MM) → "July 2026"
+// Provenance: newest lastVerified across both datasets (YYYY-MM) → "June 2026"
 const newestVerified = [...scholarships, ...programs]
   .map(x => x.lastVerified).filter(Boolean).sort().at(-1);
 const verifiedLabel = newestVerified
@@ -39,6 +39,64 @@ const closingSoon = scholarships
   .sort((a, b) => new Date(a.deadline! + 'T00:00:00').getTime() - new Date(b.deadline! + 'T00:00:00').getTime())
   .slice(0, 5);
 
+// Ticker: biggest active awards, "Title — $Amount"
+const tickerItems = [...activeScholarships]
+  .sort((a, b) => parseAmount(b.amount) - parseAmount(a.amount))
+  .slice(0, 8)
+  .map(s => `${s.title} — ${s.amount}`);
+
+// Categories: real counts from the data, top 8 tracks
+const categoryCounts = new Map<string, number>();
+for (const s of scholarships) {
+  if (s.category) categoryCounts.set(s.category, (categoryCounts.get(s.category) ?? 0) + 1);
+}
+const CATEGORY_DESCS: Record<string, string> = {
+  'Academic':   'Merit, entrance, and general academic awards.',
+  'Community':  'Volunteering hours that actually pay off.',
+  'Arts':       'Portfolios, performances, film, and writing.',
+  'STEM':       'Science fairs, labs, and research awards.',
+  'Trades':     'Apprenticeships, RAP, and skilled-trade awards.',
+  'Indigenous': 'Awards for First Nations, Métis, and Inuit students.',
+  'Sports':     'For athletes at every level — not just varsity.',
+  'General':    'Open eligibility — no niche required.',
+};
+const categories = [...categoryCounts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 8)
+  .map(([name, count]) => ({ name, count, desc: CATEGORY_DESCS[name] ?? 'Awards for Alberta high school students.' }));
+
+const navItems = [
+  { label: 'Scholarships', href: '/scholarships' },
+  { label: 'Programs', href: '/programs' },
+  { label: 'Match', href: '/match' },
+  { label: 'Saved', href: '/saved' },
+  { label: 'About', href: '/about' },
+];
+
+const footerCols = [
+  { title: 'EXPLORE', links: [
+    { label: 'All scholarships', href: '/scholarships' },
+    { label: 'Research programs', href: '/programs' },
+    { label: 'Closing soon', href: '#closing' },
+    { label: 'Find my match', href: '/match' },
+  ]},
+  { title: 'ABOUT', links: [
+    { label: 'The story', href: '/about' },
+    { label: 'How listings are verified', href: '/about' },
+    { label: 'Suggest a scholarship', href: 'mailto:contact.scholarab@gmail.com' },
+  ]},
+  { title: 'CONTACT', links: [
+    { label: 'Email', href: 'mailto:contact.scholarab@gmail.com' },
+    { label: 'Instagram', href: 'https://www.instagram.com/scholar.ab' },
+    { label: 'TikTok', href: 'https://www.tiktok.com/@scholar.ab' },
+  ]},
+];
+
+const matchGroups = [
+  { key: 'grade',    label: 'YOUR GRADE',  opts: ['Grade 10', 'Grade 11', 'Grade 12'] },
+  { key: 'region',   label: 'YOUR REGION', opts: ['Calgary', 'Edmonton', 'Rural / small town', 'Anywhere in AB'] },
+  { key: 'interest', label: "YOU'RE INTO", opts: ['STEM', 'Trades', 'Arts', 'Sports', 'Volunteering'] },
+];
 ---
 
 <Layout
@@ -48,6 +106,7 @@ const closingSoon = scholarships
   ogDescription={`Browse ${scholarshipCount}+ free scholarships and research programs for Alberta high school students. No login, no ads, no data collection. Updated for 2026.`}
   ogUrl="https://www.scholarab.ca"
   currentPath="/"
+  hideChrome
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -56,126 +115,250 @@ const closingSoon = scholarships
     "url": "https://www.scholarab.ca",
     "description": "Free Alberta scholarship and research program directory for high school students.",
   })} slot="head" />
+  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
 
-  <div class="pb-8">
+  <div id="sab-home">
 
-    <!-- Hero -->
-    <div class="hero max-w-2xl mx-auto pt-6 md:pt-10 pb-4 flex flex-col items-center text-center" style="position:relative;">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;">
+    <!-- ============ DARK HERO ============ -->
+    <div class="sab-hero">
 
-        <!-- Headline: identity first, money second -->
-        <h1 class="hero-h1">Every scholarship an Alberta high school student can actually get.</h1>
+      <!-- top annotation bar -->
+      <div class="sab-annotation sab-mono">
+        <span>A student-run project — Medicine Hat, Alberta</span>
+        <span class="sab-annotation-right">{verifiedLabel ? `Last verified ${verifiedLabel} · ` : ''}100% free</span>
+      </div>
 
-        <!-- Stat line — server-rendered final value; count-up enhances on load -->
-        <p class="hero-stat-line tnum">
-          <span class="amount"><span id="hero-amount-count" data-total={activeTotal}>${activeTotal.toLocaleString('en-CA')}</span> open right now</span>
-          <span class="sep">·</span>{scholarshipCount} scholarships
-          <span class="sep">·</span>{researchCount} research programs
-        </p>
-
-        <!-- CTA buttons -->
-        <div class="flex flex-col items-center gap-3">
-          <div class="flex flex-row gap-3">
-            <a href="/scholarships" class="btn-pill-filled">Browse {scholarshipCount} scholarships</a>
-            <a href="/programs" class="btn-pill-outline">Explore programs</a>
-          </div>
-          <a href="/match" class="find-match">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-            <span class="label">Find my match</span><span class="arrow">→</span>
-          </a>
-          <p class="hero-provenance">
-            Hand-checked by a Medicine Hat high school student{verifiedLabel && <> <span style="color:var(--brand);">·</span> Last verified {verifiedLabel}</>}
-          </p>
-          <p style="font-size:11px;color:var(--text-tertiary);margin-top:2px;letter-spacing:0.02em;">No login &nbsp;·&nbsp; No ads &nbsp;·&nbsp; No data collection</p>
+      <!-- nav -->
+      <div class="sab-nav">
+        <a href="/" class="sab-logo" aria-label="ScholarAB home">
+          <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+          </svg>
+          <span class="sab-logo-word">Scholar<span class="sab-accent-text">AB</span></span>
+        </a>
+        <div class="sab-nav-links">
+          {navItems.map(n => <a href={n.href} class="sab-nav-link">{n.label}</a>)}
+          <a href="/match" class="sab-nav-cta">Find my match</a>
         </div>
       </div>
-    </div>
 
-    <!-- Closing this week — horizontal scroll carousel -->
-    {closingSoon.length > 0 && (
-      <div class="mt-8 md:mt-12" data-closing-section>
-        <div class="max-w-2xl mx-auto flex items-baseline justify-between mb-5 px-0">
-          <div>
-            <p style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#f5b14a;margin-bottom:6px;">⚡ Time sensitive</p>
-            <h2 style="margin:0;font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">Closing this week</h2>
-          </div>
-          <a href="/scholarships" class="find-match"><span class="label">View all</span><span class="arrow">→</span></a>
+      <!-- hero body -->
+      <div class="sab-container sab-hero-body">
+        <div class="sab-kicker sab-mono">
+          <span class="sab-kicker-dot" aria-hidden="true"></span>
+          <span>BUILT BY A STUDENT, FOR STUDENTS</span>
         </div>
 
-        <!-- Horizontal scroll on mobile, stacked on desktop -->
-        <div id="closing-soon-list" class="flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible pb-3 md:pb-0 max-w-2xl mx-auto" style="scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;">
-          {closingSoon.map(s => {
-            return (
-              <a
-                href={`/scholarships/${generateSlug(s.title)}`}
-                class="closing-row shrink-0 md:shrink"
-                style="min-width:280px;scroll-snap-align:start;"
-                data-deadline={s.deadline}
-              >
-                <div class="flex-1 min-w-0" style="min-width:0;">
-                  <p style="font-size:14px;font-weight:600;margin:0;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{s.title}</p>
-                  {s.audience && <p style="font-size:12px;color:var(--text-tertiary);margin:2px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{s.audience}</p>}
-                </div>
-                <div class="flex items-center gap-3 shrink-0">
-                  <p class="tnum" style="font-size:14px;font-weight:700;color:var(--brand);margin:0;">{s.amount}</p>
-                  <span class="deadline-badge badge-amber closing-soon-badge">&hellip;</span>
-                </div>
+        <h1 class="sab-h1">
+          Every scholarship an Alberta high school student can <em>actually</em> get.
+        </h1>
+
+        <div class="sab-hero-bottom">
+          <div class="sab-hero-copy">
+            <p>
+              One directory. Every listing checked by hand, every deadline tracked. Nothing scraped, nothing auto-generated, nothing behind a login.
+            </p>
+            <div class="sab-hero-ctas">
+              <a href="/scholarships" class="sab-btn-accent">
+                Browse {scholarshipCount} scholarships <span style="font-size:18px;">→</span>
               </a>
-            );
-          })}
+              <a href="/programs" class="sab-btn-outline">
+                Explore programs
+              </a>
+            </div>
+          </div>
+
+          <!-- stat block, ledger style -->
+          <div class="sab-stats">
+            <div class="sab-stat">
+              <div class="sab-stat-value tnum"><span id="hero-amount-count" data-total={activeTotal}>${activeTotal.toLocaleString('en-CA')}</span></div>
+              <div class="sab-stat-label sab-mono">OPEN RIGHT NOW</div>
+            </div>
+            <div class="sab-stat">
+              <div class="sab-stat-value tnum">{scholarshipCount}</div>
+              <div class="sab-stat-label sab-mono">SCHOLARSHIPS</div>
+            </div>
+            <div class="sab-stat">
+              <div class="sab-stat-value tnum">{researchCount}</div>
+              <div class="sab-stat-label sab-mono">RESEARCH PROGRAMS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ticker -->
+      {tickerItems.length > 0 && (
+        <div class="sab-ticker-band">
+          <div class="sab-ticker sab-mono">
+            {[false, true].map(hidden => (
+              <span class="sab-ticker-half" aria-hidden={hidden || undefined}>
+                {tickerItems.map(t => (
+                  <span class="sab-ticker-item">
+                    <span>{t}</span>
+                    <span class="sab-accent-text" aria-hidden="true">✦</span>
+                  </span>
+                ))}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+
+    <!-- ============ CLOSING THIS WEEK ============ -->
+    {closingSoon.length > 0 && (
+      <div class="sab-container sab-closing" id="closing" data-closing-section>
+        <div class="sab-section-head">
+          <div>
+            <div class="sab-mono sab-eyebrow-urgent">⏳ TIME-SENSITIVE</div>
+            <h2 class="sab-h2">Closing this week</h2>
+          </div>
+          <a href="/scholarships" class="sab-view-all">View all deadlines →</a>
+        </div>
+
+        <div class="sab-closing-table" id="closing-soon-list">
+          {closingSoon.map((s, i) => (
+            <a href={`/scholarships/${generateSlug(s.title)}`} class="sab-closing-row" data-deadline={s.deadline}>
+              <div class="sab-row-num sab-mono">{String(i + 1).padStart(2, '0')}</div>
+              <div class="sab-row-main">
+                <div class="sab-row-name">{s.title}</div>
+                {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
+              </div>
+              <div class="sab-row-amount tnum">{s.amount}</div>
+              <div class="sab-row-chip sab-mono closing-soon-badge">&hellip;</div>
+            </a>
+          ))}
         </div>
       </div>
     )}
 
+    <!-- ============ PROBLEM / FIX ============ -->
+    <div class="sab-container sab-pf">
+      <div class="sab-pf-grid">
+        <div class="sab-pf-panel sab-pf-problem">
+          <div class="sab-mono sab-pf-eyebrow">01 — THE PROBLEM</div>
+          <h3 class="sab-h3">There was a problem.</h3>
+          <p>
+            Scholarship information in Alberta was scattered across dozens of websites and school bulletin boards. There was no single place to find what was open, what was closing, or what you actually qualified for.
+          </p>
+          <div class="sab-tags">
+            {['9 different websites', 'expired PDFs', 'bulletin boards', 'missed deadlines'].map(t => (
+              <span class="sab-tag sab-tag-problem sab-mono">{t}</span>
+            ))}
+          </div>
+        </div>
+        <div class="sab-pf-panel sab-pf-fix">
+          <div class="sab-mono sab-pf-eyebrow sab-accent-text">02 — THE FIX</div>
+          <h3 class="sab-h3">Now it's fixed.</h3>
+          <p>
+            ScholarAB is a free scholarship directory for Alberta high school students. Every listing is verified by hand. Deadlines are tracked. Nothing is scraped or auto-generated.
+          </p>
+          <div class="sab-tags">
+            {['one directory', 'verified by hand', 'deadlines tracked', 'always free'].map(t => (
+              <span class="sab-tag sab-tag-fix sab-mono">✓ {t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Browse by field -->
-    <div class="max-w-2xl mx-auto mt-12 md:mt-16">
-      <h2 style="margin:0 0 16px;font-size:clamp(22px,4vw,32px);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">Browse by field</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {[
-          { name: 'STEM & Engineering', count: 'Science, tech, math, engineering', color: '#22d3ee', href: '/scholarships?category=STEM',
-            icon: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>' },
-          { name: 'Humanities & Arts', count: 'English, history, music, fine arts', color: '#a78bfa', href: '/scholarships?category=Arts',
-            icon: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>' },
-          { name: 'Business & Econ', count: 'Commerce, accounting, finance', color: '#60a5fa', href: '/scholarships?category=Academic',
-            icon: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>' },
-          { name: 'Indigenous & Equity', count: 'Identity-based scholarships', color: '#fb923c', href: '/scholarships?category=Indigenous',
-            icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
-          { name: 'Need-based', count: 'Financial assistance awards', color: '#34d399', href: '/scholarships?category=Community',
-            icon: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>' },
-          { name: 'Research programs', count: `${researchCount} programs open`, color: '#818cf8', href: '/programs',
-            icon: '<path d="M10 2v6.5L4.5 19.5A2 2 0 0 0 6.3 22h11.4a2 2 0 0 0 1.8-2.5L14 8.5V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/>' },
-        ].map(f => (
-          <a href={f.href} class="card card-interactive" style="padding:18px;text-decoration:none;display:block;">
-            <div style={`width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,${f.color}26,${f.color}0d);border:1px solid ${f.color}33;display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:${f.color};`}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={f.icon} />
-            </div>
-            <p style="font-size:14px;font-weight:600;letter-spacing:-0.015em;color:var(--text-primary);margin-bottom:3px;">{f.name}</p>
-            <p style="font-size:11px;color:var(--text-secondary);">{f.count}</p>
-          </a>
+    <!-- ============ TRUST MANIFESTO ============ -->
+    <div class="sab-container sab-manifesto">
+      <p class="sab-manifesto-line">
+        No login. No ads. No data collection. Just a kid from Medicine Hat who got tired of <em>checking nine websites</em> before homeroom.
+      </p>
+      <div class="sab-trust-row sab-mono">
+        {['Every listing hand-checked', 'Updated weekly', 'Zero cost, zero catch'].map(t => (
+          <span><span class="sab-check">✓</span> {t}</span>
         ))}
       </div>
     </div>
 
-    <!-- How it works -->
-    <div class="max-w-2xl mx-auto mt-12 md:mt-16">
-      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-6 text-center md:text-left">How it works</p>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl text-brand" style="font-variant-numeric:tabular-nums;">01</span>
-          <p class="font-semibold text-sm text-primary">Browse</p>
-          <p class="text-sm text-secondary">Browse scholarships and research programs across Alberta</p>
+    <!-- ============ BROWSE BY CATEGORY ============ -->
+    <div class="sab-cat-band">
+      <div class="sab-container sab-cats">
+        <div class="sab-section-head">
+          <h2 class="sab-h2">Start where you are</h2>
+          <span class="sab-mono sab-cats-meta">{scholarshipCount} scholarships · {categories.length} tracks</span>
         </div>
-        <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl text-brand" style="font-variant-numeric:tabular-nums;">02</span>
-          <p class="font-semibold text-sm text-primary">Filter</p>
-          <p class="text-sm text-secondary">Filter by region, category, or deadline to find what fits you</p>
+        <div class="sab-cat-grid">
+          {categories.map(c => (
+            <a href={`/scholarships?category=${encodeURIComponent(c.name)}`} class="sab-cat-card">
+              <div class="sab-cat-top">
+                <span class="sab-cat-name">{c.name}</span>
+                <span class="sab-cat-count sab-mono">{c.count}</span>
+              </div>
+              <div class="sab-cat-desc">{c.desc}</div>
+            </a>
+          ))}
         </div>
-        <div class="flex flex-col gap-2">
-          <span class="font-bold text-2xl text-brand" style="font-variant-numeric:tabular-nums;">03</span>
-          <p class="font-semibold text-sm text-primary">Apply</p>
-          <p class="text-sm text-secondary">Click Apply Now and go straight to the official application</p>
+      </div>
+    </div>
+
+    <!-- ============ MATCH TEASER ============ -->
+    <div class="sab-container sab-match">
+      <div class="sab-match-grid">
+        <div>
+          <div class="sab-mono sab-match-eyebrow">MATCH — 60 SECONDS</div>
+          <h2 class="sab-h2 sab-match-h2">Tell us three things. We'll shortlist for you.</h2>
+          <p class="sab-match-copy">
+            Grade, region, and what you're into. No account, no email — your answers never leave the page.
+          </p>
+        </div>
+        <div class="sab-match-card" id="match-teaser">
+          {matchGroups.map(g => (
+            <div class="sab-match-group" data-match-group={g.key}>
+              <div class="sab-mono sab-match-label">{g.label}</div>
+              <div class="sab-match-opts">
+                {g.opts.map(o => (
+                  <button type="button" class="sab-match-opt">{o}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+          <button type="button" class="sab-match-cta" id="match-teaser-cta">Pick 3 more to see matches</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FOOTER ============ -->
+    <div class="sab-footer">
+      <div class="sab-container sab-footer-inner">
+        <div class="sab-footer-top">
+          <div>
+            <div class="sab-logo" style="margin-bottom:16px;">
+              <svg width="24" height="24" viewBox="0 0 40 40" aria-hidden="true">
+                <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+                <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+              </svg>
+              <span class="sab-logo-word" style="font-size:17px;">Scholar<span class="sab-accent-text">AB</span></span>
+            </div>
+            <p class="sab-footer-blurb">Built by a student, for students. Free forever — if a listing looks wrong, email me and I'll fix it the same day.</p>
+          </div>
+          <div class="sab-footer-cols">
+            {footerCols.map(col => (
+              <div>
+                <div class="sab-mono sab-footer-col-title">{col.title}</div>
+                <div class="sab-footer-links">
+                  {col.links.map(l => (
+                    <a
+                      href={l.href}
+                      rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      target={l.href.startsWith('http') ? '_blank' : undefined}
+                    >{l.label}</a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="sab-footer-bottom sab-mono">
+          <span>© 2026 ScholarAB — Medicine Hat, Alberta</span>
+          <span>Hand-checked.{verifiedLabel ? ` Last verified ${verifiedLabel}.` : ''}</span>
         </div>
       </div>
     </div>
@@ -184,34 +367,37 @@ const closingSoon = scholarships
 </Layout>
 
 <script>
+  // ── Closing-this-week day chips (client-side so a stale static build never lies) ──
   function updateClosingSoon() {
     const list = document.getElementById('closing-soon-list');
     if (!list) return;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const todayMs = today.getTime();
-    const cards = list.querySelectorAll<HTMLElement>('a[data-deadline]');
+    const rows = list.querySelectorAll<HTMLElement>('a[data-deadline]');
     let visible = 0;
-    cards.forEach(card => {
-      const deadline = card.dataset.deadline;
+    rows.forEach(row => {
+      const deadline = row.dataset.deadline;
       if (!deadline) return;
       const deadlineMs = new Date(deadline + 'T00:00:00').getTime();
       if (deadlineMs < todayMs) {
-        card.style.display = 'none';
+        row.style.display = 'none';
         return;
       }
       visible++;
-      const daysLeft = Math.round((deadlineMs - todayMs) / (1000 * 60 * 60 * 24));
-      const urgency = daysLeft === 0 ? 'Today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`;
-      const badge = card.querySelector('.closing-soon-badge');
-      if (badge) {
-        badge.textContent = urgency;
-        if (daysLeft <= 2) {
-          badge.className = 'deadline-badge badge-red closing-soon-badge' + (daysLeft === 0 ? ' pulse-soft' : '');
-        } else {
-          badge.className = 'deadline-badge badge-amber closing-soon-badge';
-        }
+      const daysLeft = Math.round((deadlineMs - todayMs) / 86400000);
+      const chip = row.querySelector('.closing-soon-badge');
+      if (chip) {
+        chip.textContent = daysLeft === 0 ? 'DUE TODAY' : `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`;
+        chip.classList.toggle('sab-chip-urgent', daysLeft <= 4);
       }
+    });
+    // Renumber the visible rows so hidden expired entries don't leave gaps
+    let n = 0;
+    rows.forEach(row => {
+      if (row.style.display === 'none') return;
+      const num = row.querySelector('.sab-row-num');
+      if (num) num.textContent = String(++n).padStart(2, '0');
     });
     if (visible === 0) {
       const section = list.closest('[data-closing-section]') as HTMLElement | null;
@@ -222,15 +408,11 @@ const closingSoon = scholarships
   updateClosingSoon();
   document.addEventListener('astro:page-load', updateClosingSoon);
 
-  // ── Hero amount count-up ────────────────────────────────
-  // The final value is server-rendered; this only animates toward it.
-  // Counting starts from a value with the same digit count, so tabular
-  // numerals keep the line width constant — no layout shift while counting.
+  // ── Hero amount count-up (kept from previous hero; final value is server-rendered) ──
   function animateHeroAmount() {
     const el = document.getElementById('hero-amount-count');
     if (!el || el.dataset.counted) return;
     el.dataset.counted = 'true';
-    // Count up once per visit — returning to Home through the site shows the static value
     try {
       if (sessionStorage.getItem('sab_hero_counted')) return;
       sessionStorage.setItem('sab_hero_counted', '1');
@@ -257,8 +439,315 @@ const closingSoon = scholarships
 
   animateHeroAmount();
   document.addEventListener('astro:page-load', animateHeroAmount);
+
+  // ── Match teaser: local chip picks, CTA goes to the real quiz ──
+  function initMatchTeaser() {
+    const card = document.getElementById('match-teaser');
+    const cta = document.getElementById('match-teaser-cta');
+    if (!card || !cta || card.dataset.init) return;
+    card.dataset.init = 'true';
+
+    const groups = Array.from(card.querySelectorAll<HTMLElement>('[data-match-group]'));
+    const update = () => {
+      const chosen = groups.filter(g => g.querySelector('.sab-match-opt.on')).length;
+      cta.textContent = chosen === groups.length ? 'Show my matches →' : `Pick ${groups.length - chosen} more to see matches`;
+    };
+    groups.forEach(g => {
+      g.querySelectorAll<HTMLElement>('.sab-match-opt').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const wasOn = btn.classList.contains('on');
+          g.querySelectorAll('.sab-match-opt').forEach(b => b.classList.remove('on'));
+          if (!wasOn) btn.classList.add('on');
+          update();
+        });
+      });
+    });
+    cta.addEventListener('click', async () => {
+      const { navigate } = await import('astro:transitions/client');
+      navigate('/match');
+    });
+    update();
+  }
+
+  initMatchTeaser();
+  document.addEventListener('astro:page-load', initMatchTeaser);
 </script>
 
+<style is:global>
+  /* The home design is fixed light regardless of site theme */
+  body:has(#sab-home) { background: #FAF7F0; }
+</style>
+
 <style>
-  #closing-soon-list::-webkit-scrollbar { display: none; }
+  /* ════ ScholarAB Home — claude.ai/design "ScholarAB Home.dc.html" ════
+     Palette: canvas #FAF7F0 · alt band #F2EEE4 · ink #141915 · hero/footer #0B1512
+     accent #2FD3A0 (soft: 40% alpha) · link #0E8C64 · urgency #B8541F
+     Type: Instrument Serif (display) · Archivo (UI/body) · IBM Plex Mono (labels) */
+
+  #sab-home {
+    background: #FAF7F0;
+    color: #141915;
+    font-family: 'Archivo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #sab-home ::selection { background: #2FD3A0; color: #0B1512; }
+  .sab-mono { font-family: 'IBM Plex Mono', monospace; }
+  .sab-accent-text { color: #2FD3A0; }
+  .sab-container { max-width: 1180px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
+
+  @keyframes sab-tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── Dark hero ── */
+  .sab-hero { background: #0B1512; color: #F2F0E9; position: relative; overflow: hidden; }
+
+  .sab-annotation {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 48px; border-bottom: 1px solid rgba(242,240,233,0.12);
+    font-size: 12px; letter-spacing: 0.04em; color: rgba(242,240,233,0.55);
+  }
+
+  .sab-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; }
+  .sab-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .sab-logo-word { font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
+  .sab-nav-links { display: flex; align-items: center; gap: 34px; }
+  .sab-nav-link { font-size: 14.5px; font-weight: 500; color: rgba(242,240,233,0.75); text-decoration: none; }
+  .sab-nav-link:hover { color: #F2F0E9; }
+  .sab-nav-cta {
+    font-size: 14px; font-weight: 600; background: #2FD3A0; color: #0B1512;
+    padding: 10px 20px; border-radius: 100px; text-decoration: none;
+  }
+  .sab-nav-cta:hover { background: #F2F0E9; color: #0B1512; }
+
+  .sab-hero-body { padding-top: 76px; position: relative; }
+  .sab-kicker {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 30px;
+    font-size: 13px; color: #2FD3A0; letter-spacing: 0.06em;
+  }
+  .sab-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
+
+  .sab-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(42px, 8.2vw, 96px); line-height: 0.98; letter-spacing: -0.015em;
+    margin: 0; max-width: 1050px; text-wrap: balance;
+    animation: sab-rise 0.7s ease both;
+  }
+  .sab-h1 em { font-style: italic; color: #2FD3A0; }
+
+  .sab-hero-bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 40px; margin-top: 52px; padding-bottom: 64px;
+  }
+  .sab-hero-copy { max-width: 460px; }
+  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 0 0 30px; }
+  .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .sab-btn-accent {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #2FD3A0; color: #0B1512; font-weight: 700; font-size: 16px;
+    padding: 16px 28px; border-radius: 100px; text-decoration: none; white-space: nowrap;
+  }
+  .sab-btn-accent:hover { background: #F2F0E9; color: #0B1512; }
+  .sab-btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: #F2F0E9; font-weight: 600; font-size: 16px;
+    padding: 16px 24px; border-radius: 100px; border: 1px solid rgba(242,240,233,0.3);
+    text-decoration: none; white-space: nowrap;
+  }
+  .sab-btn-outline:hover { border-color: #F2F0E9; color: #F2F0E9; }
+
+  .sab-stats { display: flex; border-left: 1px solid rgba(242,240,233,0.18); }
+  .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(242,240,233,0.18); }
+  .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; }
+  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); margin-top: 6px; white-space: nowrap; }
+
+  .sab-ticker-band { border-top: 1px solid rgba(242,240,233,0.12); background: rgba(0,0,0,0.25); overflow: hidden; }
+  .sab-ticker {
+    display: inline-flex; white-space: nowrap; padding: 13px 0;
+    font-size: 13px; letter-spacing: 0.03em; color: rgba(242,240,233,0.7);
+    animation: sab-tick 36s linear infinite; will-change: transform;
+  }
+  .sab-ticker-half { display: inline-flex; }
+  .sab-ticker-item { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; }
+
+  /* ── Closing this week ── */
+  .sab-closing { padding-top: 96px; padding-bottom: 40px; }
+  .sab-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px; gap: 20px; }
+  .sab-eyebrow-urgent { font-size: 13px; letter-spacing: 0.06em; color: #B8541F; margin-bottom: 14px; }
+  .sab-h2 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.01em; margin: 0;
+  }
+  .sab-view-all {
+    font-weight: 600; font-size: 15px; color: #141915; text-decoration: none;
+    border-bottom: 2px solid #2FD3A0; padding-bottom: 3px; white-space: nowrap;
+  }
+  .sab-view-all:hover { color: #0E8C64; }
+
+  .sab-closing-table { border-top: 2px solid #141915; }
+  .sab-closing-row {
+    display: grid; grid-template-columns: 64px 1fr auto auto; gap: 28px; align-items: center;
+    padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
+    cursor: pointer; color: inherit; text-decoration: none;
+  }
+  .sab-closing-row:hover { background: rgba(47,211,160,0.07); color: inherit; }
+  .sab-row-num { font-size: 14px; color: rgba(20,25,21,0.4); }
+  .sab-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
+  .sab-row-blurb {
+    font-size: 14.5px; color: rgba(20,25,21,0.55); margin-top: 5px;
+    display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .sab-row-amount { font-family: 'Instrument Serif', serif; font-size: 28px; text-align: right; }
+  .sab-row-chip {
+    font-size: 12.5px; font-weight: 500; padding: 7px 14px; border-radius: 100px;
+    background: rgba(184,84,31,0.12); color: #B8541F; white-space: nowrap;
+  }
+  .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #FAF7F0; }
+
+  /* ── Problem / fix ── */
+  .sab-pf { padding-top: 88px; padding-bottom: 88px; }
+  .sab-pf-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border: 2px solid #141915; border-radius: 20px; overflow: hidden;
+  }
+  .sab-pf-panel { padding: 56px 52px; }
+  .sab-pf-panel p { font-size: 17px; line-height: 1.65; margin: 0; }
+  .sab-pf-problem { background: #F2EEE4; border-right: 2px solid #141915; }
+  .sab-pf-problem p { color: rgba(20,25,21,0.7); }
+  .sab-pf-fix { background: #0B1512; color: #F2F0E9; }
+  .sab-pf-fix p { color: rgba(242,240,233,0.75); }
+  .sab-pf-eyebrow { font-size: 13px; letter-spacing: 0.06em; color: rgba(20,25,21,0.5); margin-bottom: 22px; }
+  .sab-h3 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(32px, 3.5vw, 40px); line-height: 1.1; margin: 0 0 22px;
+  }
+  .sab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .sab-tag { font-size: 12px; padding: 6px 12px; border-radius: 100px; }
+  .sab-tag-problem { border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.55); text-decoration: line-through; }
+  .sab-tag-fix { border: 1px solid #2FD3A0; color: #2FD3A0; }
+
+  /* ── Manifesto ── */
+  .sab-manifesto { padding-top: 24px; padding-bottom: 96px; text-align: center; }
+  .sab-manifesto-line {
+    font-family: 'Instrument Serif', serif; font-size: clamp(30px, 3.8vw, 44px);
+    line-height: 1.25; max-width: 880px; margin: 0 auto; text-wrap: balance;
+  }
+  .sab-manifesto-line em {
+    font-style: italic;
+    background: linear-gradient(transparent 62%, rgba(47,211,160,0.4) 62%);
+  }
+  .sab-trust-row {
+    display: flex; justify-content: center; gap: 44px; margin-top: 44px; flex-wrap: wrap;
+    font-size: 13px; letter-spacing: 0.05em; color: rgba(20,25,21,0.55);
+  }
+  .sab-trust-row span { display: flex; align-items: center; gap: 9px; }
+  .sab-check { color: #0E8C64; }
+
+  /* ── Categories ── */
+  .sab-cat-band { background: #F2EEE4; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
+  .sab-cats { padding-top: 88px; padding-bottom: 88px; }
+  .sab-cats .sab-section-head { margin-bottom: 44px; }
+  .sab-cats-meta { font-size: 13px; color: rgba(20,25,21,0.5); white-space: nowrap; }
+  .sab-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sab-cat-card {
+    display: block; background: #FAF7F0; border: 1.5px solid rgba(20,25,21,0.85);
+    border-radius: 14px; padding: 24px 22px; color: #141915; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sab-cat-card:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #2FD3A0; color: #141915; }
+  .sab-cat-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .sab-cat-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .sab-cat-count { font-size: 12px; color: rgba(20,25,21,0.45); }
+  .sab-cat-desc { font-size: 13.5px; color: rgba(20,25,21,0.55); margin-top: 8px; line-height: 1.45; }
+
+  /* ── Match teaser ── */
+  .sab-match { padding-top: 96px; padding-bottom: 96px; }
+  .sab-match-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: center; }
+  .sab-match-eyebrow { font-size: 13px; letter-spacing: 0.06em; color: #0E8C64; margin-bottom: 16px; }
+  .sab-match-h2 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.05; margin-bottom: 20px; }
+  .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.65); margin: 0; }
+  .sab-match-card {
+    background: #FAF7F0; border: 2px solid #141915; border-radius: 20px; padding: 36px;
+    box-shadow: 8px 8px 0 rgba(47,211,160,0.4);
+  }
+  .sab-match-group { margin-bottom: 22px; }
+  .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); margin-bottom: 10px; }
+  .sab-match-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sab-match-opt {
+    font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 600;
+    padding: 9px 16px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
+    background: transparent; color: #141915; cursor: pointer;
+  }
+  .sab-match-opt:hover { border-color: #141915; }
+  .sab-match-opt.on { background: #141915; color: #F2F0E9; border-color: #141915; }
+  .sab-match-cta {
+    width: 100%; margin-top: 6px; font-family: 'Archivo', sans-serif;
+    background: #141915; color: #F2F0E9; font-weight: 700; font-size: 16px;
+    padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+  }
+  .sab-match-cta:hover { background: #0E8C64; }
+
+  /* ── Footer ── */
+  .sab-footer { background: #0B1512; color: rgba(242,240,233,0.65); }
+  .sab-footer-inner { padding-top: 64px; padding-bottom: 40px; }
+  .sab-footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+  .sab-footer-blurb { font-size: 14px; line-height: 1.6; max-width: 340px; margin: 0; }
+  .sab-footer-cols { display: flex; gap: 64px; flex-wrap: wrap; }
+  .sab-footer-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,240,233,0.4); margin-bottom: 14px; }
+  .sab-footer-links { display: flex; flex-direction: column; gap: 10px; }
+  .sab-footer-links a { font-size: 14px; color: rgba(242,240,233,0.7); text-decoration: none; }
+  .sab-footer-links a:hover { color: #F2F0E9; }
+  .sab-footer-bottom {
+    display: flex; justify-content: space-between; margin-top: 56px; padding-top: 24px;
+    border-top: 1px solid rgba(242,240,233,0.12);
+    font-size: 12px; color: rgba(242,240,233,0.4); gap: 12px; flex-wrap: wrap;
+  }
+
+  /* ── Motion safety ── */
+  @media (prefers-reduced-motion: reduce) {
+    .sab-h1 { animation: none; }
+    .sab-ticker { animation: none; }
+    .sab-cat-card, .sab-cat-card:hover { transform: none; transition: none; }
+  }
+
+  /* ── Responsive (the design specifies ≥1080px; below is adapted) ── */
+  @media (max-width: 900px) {
+    .sab-container { padding-left: 20px; padding-right: 20px; }
+    .sab-annotation { padding: 12px 20px; gap: 12px; }
+    .sab-annotation-right { display: none; }
+    .sab-nav { padding: 18px 20px; }
+    .sab-nav-links .sab-nav-link { display: none; } /* bottom tab bar covers navigation on mobile */
+    .sab-hero-body { padding-top: 44px; }
+    .sab-hero-bottom { flex-direction: column; align-items: flex-start; margin-top: 36px; padding-bottom: 44px; }
+    .sab-stats { border-left: none; width: 100%; }
+    .sab-stat { padding: 6px 24px 6px 0; border-right: none; }
+    .sab-stat + .sab-stat { padding-left: 24px; border-left: 1px solid rgba(242,240,233,0.18); }
+    .sab-stat-value { font-size: 32px; }
+    .sab-stat-label { font-size: 10.5px; }
+    .sab-closing { padding-top: 56px; }
+    .sab-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .sab-closing-row { grid-template-columns: 1fr auto; gap: 6px 16px; padding: 20px 4px; }
+    .sab-row-num { display: none; }
+    .sab-row-main { grid-column: 1; }
+    .sab-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; }
+    .sab-row-chip { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+    .sab-pf { padding-top: 56px; padding-bottom: 56px; }
+    .sab-pf-grid { grid-template-columns: 1fr; }
+    .sab-pf-problem { border-right: none; border-bottom: 2px solid #141915; }
+    .sab-pf-panel { padding: 36px 28px; }
+    .sab-manifesto { padding-bottom: 56px; }
+    .sab-trust-row { gap: 14px 28px; }
+    .sab-cats { padding-top: 56px; padding-bottom: 56px; }
+    .sab-cat-grid { grid-template-columns: 1fr 1fr; }
+    .sab-match { padding-top: 56px; padding-bottom: 56px; }
+    .sab-match-grid { grid-template-columns: 1fr; gap: 36px; }
+    .sab-match-card { padding: 26px 22px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
+    .sab-footer-top { flex-direction: column; }
+    .sab-footer-cols { gap: 36px; }
+    /* clearance for the fixed bottom tab bar, inside the dark footer */
+    .sab-footer-inner { padding-bottom: 110px; }
+  }
+  @media (max-width: 480px) {
+    .sab-cat-grid { grid-template-columns: 1fr; }
+    .sab-nav-cta { padding: 8px 16px; font-size: 13px; }
+  }
 </style>

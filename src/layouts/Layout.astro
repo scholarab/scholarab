@@ -14,6 +14,8 @@ interface Props {
   currentPath: string;
   containerClass?: string;
   robots?: string;
+  /** Full-bleed design pages: skip the shared Nav and desktop footer (BottomNav stays for mobile). */
+  hideChrome?: boolean;
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   currentPath,
   containerClass = 'max-w-6xl',
   robots,
+  hideChrome = false,
 } = Astro.props;
 ---
 
@@ -81,11 +84,11 @@ const {
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
 
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-9999 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:var(--brand);color:var(--text-on-brand);">Skip to content</a>
-    <Nav currentPath={currentPath} />
-    <main id="main-content" class={`${containerClass} mx-auto w-full flex-1 px-4 pb-28 md:pb-8 md:px-8`}>
+    {!hideChrome && <Nav currentPath={currentPath} />}
+    <main id="main-content" class={hideChrome ? 'w-full flex-1' : `${containerClass} mx-auto w-full flex-1 px-4 pb-28 md:pb-8 md:px-8`}>
       <slot />
     </main>
-    <footer class="hidden md:block mt-8 relative" style="z-index:1; border-top: 0.5px solid var(--footer-border);">
+    {!hideChrome && <footer class="hidden md:block mt-8 relative" style="z-index:1; border-top: 0.5px solid var(--footer-border);">
       <!-- Desktop footer -->
       <div class="flex max-w-6xl mx-auto px-4 py-6 md:px-8 justify-center items-center gap-4 text-sm text-faint">
         <span>© 2026 ScholarAB</span>
@@ -98,7 +101,7 @@ const {
           </a>
         </div>
       </div>
-    </footer>
+    </footer>}
     <BottomNav currentPath={currentPath} />
     <script>
       // Haptic on filter/sort pills and bn-tabs
