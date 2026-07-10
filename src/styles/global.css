@@ -1069,3 +1069,37 @@ html.theme-dark .badge-red   { color: #f87171; background: rgba(248,113,113,0.12
 @media (max-width: 640px) {
   .sabl-grid { grid-template-columns: 1fr; }
 }
+
+/* Program-card extras for the "ScholarAB Programs" design */
+.sabl-org { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(20,25,21,0.5); margin-top: 6px; }
+.sabl-meta-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.sabl-meta { font-size: 12.5px; font-weight: 600; padding: 5px 10px; border-radius: 6px; background: #F2EEE4; color: rgba(20,25,21,0.7); }
+.sabl-paid {
+  font-size: 11.5px; font-weight: 500; padding: 5px 11px; border-radius: 100px;
+  background: rgba(14,140,100,0.12); color: #0E8C64; white-space: nowrap;
+}
+.sabl-due-chip {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+  padding: 5px 11px; border-radius: 100px; white-space: nowrap;
+}
+.sabl-due-chip.dated { background: rgba(184,84,31,0.12); color: #B8541F; }
+.sabl-due-chip.ongoing { background: rgba(14,140,100,0.12); color: #0E8C64; }
+.sabl-due-chip.neutral { border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6); }
+
+/* Directory-page shell (scholarships + programs design pages) */
+.sabp { background: #FAF7F0; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
+.sabp-header { background: #0B1512; color: #F2F0E9; }
+.sabp-body { max-width: 1180px; margin: 0 auto; padding: 72px 48px 96px; }
+.sabp-footer { background: #0B1512; color: rgba(242,240,233,0.65); }
+.sabp-footer-inner {
+  max-width: 1180px; margin: 0 auto; padding: 48px;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.sabp-footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; color: #F2F0E9; }
+.sabp-footer-note { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(242,240,233,0.4); }
+.sabp-footer-note a { color: rgba(242,240,233,0.65); text-decoration: none; }
+.sabp-footer-note a:hover { color: #F2F0E9; }
+@media (max-width: 900px) {
+  .sabp-body { padding: 40px 20px 64px; }
+  .sabp-footer-inner { padding: 32px 20px 110px; } /* clearance for the fixed bottom tab bar */
+}

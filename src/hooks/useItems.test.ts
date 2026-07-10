@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
-import { getScholarshipStatus, getProgramStatus, PAGE_SIZE } from './useItems'
+import { getScholarshipStatus, getProgramStatus, programMatchesGrade, PAGE_SIZE } from './useItems'
 import type { ScholarshipWithMeta, ProgramWithMeta } from './useItems'
 
 // ── Mocks ────────────────────────────────────────────────────────────────────
@@ -621,5 +621,75 @@ describe('usePrograms', () => {
     act(() => result.current.clearFilters())
     expect(result.current.sortBy).toBe('closest_due')
     expect(result.current.hasActiveFilters).toBe(false)
+  })
+
+  it('search filters by name, provider, and description', async () => {
+    const { usePrograms } = await import('./useItems')
+    const items = [
+      makeProgram({ id: 60, name: 'Youreka Canada', provider: 'Youreka', description: 'Citizen science research' }),
+      makeProgram({ id: 61, name: 'Botball Robotics', provider: 'KISS Institute', description: 'Autonomous robots' }),
+    ]
+    const { result } = renderHook(() => usePrograms(items))
+    act(() => result.current.setSearchQuery('robot'))
+    expect(result.current.filtered.map(p => p.id)).toEqual([61])
+    act(() => result.current.setSearchQuery('youreka'))
+    expect(result.current.filtered.map(p => p.id)).toEqual([60])
+    act(() => result.current.setSearchQuery(''))
+    expect(result.current.filtered.length).toBe(2)
+  })
+
+  it('grade filter matches ranges and toggles off on repeat click', async () => {
+    const { usePrograms } = await import('./useItems')
+    const items = [
+      makeProgram({ id: 70, grades: 'Grades 11–12' }),
+      makeProgram({ id: 71, grades: 'Grade 9' }),
+      makeProgram({ id: 72, grades: 'High school' }),
+    ]
+    const { result } = renderHook(() => usePrograms(items))
+    act(() => result.current.setGradeFilter(11))
+    // range match + inclusive "High school", but not Grade 9
+    expect(result.current.filtered.map(p => p.id).sort()).toEqual([70, 72])
+    act(() => result.current.setGradeFilter(11))
+    expect(result.current.gradeFilter).toBeNull()
+    expect(result.current.filtered.length).toBe(3)
+  })
+
+  it('clearFilters resets grade and search', async () => {
+    const { usePrograms } = await import('./useItems')
+    const { result } = renderHook(() => usePrograms(allItems))
+    act(() => result.current.setGradeFilter(12))
+    act(() => result.current.setSearchQuery('xyz'))
+    expect(result.current.hasActiveFilters).toBe(true)
+    act(() => result.current.clearFilters())
+    expect(result.current.gradeFilter).toBeNull()
+    expect(result.current.searchQuery).toBe('')
+    expect(result.current.hasActiveFilters).toBe(false)
+  })
+})
+
+// ── programMatchesGrade ───────────────────────────────────────────────────────
+
+describe('programMatchesGrade', () => {
+  it('matches en-dash and hyphen ranges', () => {
+    expect(programMatchesGrade('Grades 9–12', 10)).toBe(true)
+    expect(programMatchesGrade('9-12', 9)).toBe(true)
+    expect(programMatchesGrade('Grades 10–12', 9)).toBe(false)
+  })
+
+  it('matches single grades', () => {
+    expect(programMatchesGrade('Grade 11', 11)).toBe(true)
+    expect(programMatchesGrade('Grade 11', 12)).toBe(false)
+    expect(programMatchesGrade('Grade 12 (graduating)', 12)).toBe(true)
+  })
+
+  it('treats non-grade text as inclusive', () => {
+    expect(programMatchesGrade('High school', 9)).toBe(true)
+    expect(programMatchesGrade('Ages 15–22', 10)).toBe(true)
+    expect(programMatchesGrade(null, 12)).toBe(true)
+  })
+
+  it('prefers the grade range over a trailing age range', () => {
+    expect(programMatchesGrade('Grades 9–12 (ages 13–18)', 9)).toBe(true)
+    expect(programMatchesGrade('Grades 10–11 (ages 15–17)', 12)).toBe(false)
   })
 })

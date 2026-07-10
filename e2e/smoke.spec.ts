@@ -17,7 +17,8 @@ test('scholarships page - list hydrates and shows count', async ({ page }) => {
 test('programs page - list hydrates and shows count', async ({ page }) => {
   await page.goto('/programs');
   await expect(page).toHaveTitle(/Program/i);
-  await expect(page.locator('text=/\\d+ program/').first()).toBeVisible({ timeout: 10_000 });
+  // React list hydrates and shows the result line
+  await expect(page.locator('text=/\\d+ OF \\d+ PROGRAMS/i').first()).toBeVisible({ timeout: 10_000 });
 });
 
 test('match quiz - completes full 6-question flow', async ({ page }) => {

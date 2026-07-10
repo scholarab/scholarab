@@ -196,10 +196,9 @@ const {
           return false;
         }
 
-        // Don't fire while a Vaul drawer is open
+        // Don't fire while a modal/drawer has locked the page
         function isDrawerOpen(): boolean {
-          return document.body.style.pointerEvents === 'none' ||
-            !!document.querySelector('[vaul-drawer][data-state="open"]');
+          return document.body.style.pointerEvents === 'none';
         }
 
         document.addEventListener('touchstart', (e) => {

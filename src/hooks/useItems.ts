@@ -207,6 +207,26 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
 
 export interface ProgramWithMeta extends Program {
   _deadline_ms?: number;
+  _slug?: string;
+}
+
+// "Grades 9–12", "9-12", "Grade 11", "Grade 12 (graduating)" → range/single match.
+// "High school", "Ages 13–18", and anything unparseable count as inclusive —
+// better to show a listing the student can rule out than to hide one they can't see.
+export function programMatchesGrade(gradesText: string | null, grade: number): boolean {
+  if (!gradesText) return true;
+  const range = gradesText.match(/(\d{1,2})\s*[–-]\s*(\d{1,2})/);
+  if (range) {
+    const lo = parseInt(range[1]!, 10);
+    const hi = parseInt(range[2]!, 10);
+    if (hi <= 12) return grade >= lo && grade <= hi; // grades, not ages
+  }
+  const single = gradesText.match(/grade\s*(\d{1,2})/i);
+  if (single && !range) {
+    const g = parseInt(single[1]!, 10);
+    if (g <= 12) return grade === g;
+  }
+  return true;
 }
 
 export type ProgramStatus = 'active' | 'tba' | 'closed';
@@ -233,6 +253,8 @@ function programDeadlineOrder(p: ProgramWithMeta): number {
 export function usePrograms(initialPrograms: ProgramWithMeta[]) {
   const [sortBy,           setSortBy          ] = useState<ProgramSort>('closest_due');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [gradeFilter,      setGradeFilterRaw  ] = useState<number | null>(null);
+  const [searchQuery,      setSearchQueryRaw  ] = useState('');
   const [page,             setPage            ] = useState(1);
   const [sheetOpen,        setSheetOpen        ] = useState(false);
   const [savedIds,         setSavedIds         ] = useState<number[]>([]);
@@ -255,9 +277,24 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     setPage(1);
   }, [selectedCategory]);
 
+  const setGradeFilter = useCallback((g: number | null) => {
+    setHasFiltered(true);
+    // Clicking the selected grade toggles it off (matches category behaviour)
+    setGradeFilterRaw(prev => (g !== null && prev === g ? null : g));
+    setPage(1);
+  }, []);
+
+  const setSearchQuery = useCallback((q: string) => {
+    setHasFiltered(true);
+    setSearchQueryRaw(q);
+    setPage(1);
+  }, []);
+
   const clearFilters = useCallback(() => {
     setSortBy('closest_due');
     setSelectedCategory('all');
+    setGradeFilterRaw(null);
+    setSearchQueryRaw('');
     setPage(1);
   }, []);
 
@@ -284,8 +321,20 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     const afterCategory = selectedCategory === 'all'
       ? nonClosed
       : nonClosed.filter(p => p.category === selectedCategory);
+    const afterGrade = gradeFilter === null
+      ? afterCategory
+      : afterCategory.filter(p => programMatchesGrade(p.grades, gradeFilter));
+    const q = searchQuery.trim().toLowerCase();
+    const afterSearch = q === ''
+      ? afterGrade
+      : afterGrade.filter(p =>
+          p.name.toLowerCase().includes(q) ||
+          (p.provider?.toLowerCase().includes(q)) ||
+          (p.description?.toLowerCase().includes(q)) ||
+          (p.category?.toLowerCase().includes(q))
+        );
 
-    return [...afterCategory].sort((a, b) => {
+    return [...afterSearch].sort((a, b) => {
       if (sortBy === 'name') return a.name.localeCompare(b.name);
       if (sortBy === 'paid_first') {
         const paidDiff = (b.paid ? 1 : 0) - (a.paid ? 1 : 0);
@@ -293,7 +342,7 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
       }
       return programDeadlineOrder(a) - programDeadlineOrder(b);
     });
-  }, [initialPrograms, selectedCategory, statusCache, sortBy]);
+  }, [initialPrograms, selectedCategory, gradeFilter, searchQuery, statusCache, sortBy]);
 
   const totalPages   = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage     = Math.min(page, totalPages);
@@ -312,8 +361,12 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     clearFilters,
     sheetOpen,
     setSheetOpen,
-    hasActiveFilters: selectedCategory !== 'all' || sortBy !== 'closest_due',
+    hasActiveFilters: selectedCategory !== 'all' || sortBy !== 'closest_due' || gradeFilter !== null || searchQuery !== '',
     categoryKey:      selectedCategory,
+    gradeFilter,
+    setGradeFilter,
+    searchQuery,
+    setSearchQuery,
     savedIds,
     handleToggleSave,
     isFiltered:       hasFiltered,

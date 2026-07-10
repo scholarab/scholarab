@@ -1,139 +1,169 @@
-import { useMemo, useEffect } from 'react';
-import { usePrograms, getProgramStatus as getStatus } from '../hooks/useItems.ts';
-import { ProgramCard } from './ItemCard.tsx';
-import Pagination from './Pagination.tsx';
-import { FilterButton, CategoryChips, FilterSheet } from './FilterSheet.tsx';
-import type { ProgramWithMeta, ProgramSort } from '../hooks/useItems.ts';
-import { PROGRAM_BADGES } from '../lib/badges.ts';
+import { useEffect, useMemo } from 'react';
+import { usePrograms } from '../hooks/useItems.ts';
+import type { ProgramWithMeta } from '../hooks/useItems.ts';
+import { generateSlug } from '../lib/utils.ts';
+import { sendEvent } from '../lib/events.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
+
+const SORT_CHIPS = [
+  { value: 'closest_due', label: 'Earliest deadline' },
+  { value: 'paid_first',  label: 'Paid first' },
+  { value: 'name',        label: 'A–Z' },
+] as const;
+
+const GRADE_CHIPS = [9, 10, 11, 12];
 
 interface Props {
   items: ProgramWithMeta[];
 }
 
-const SORT_OPTIONS: { value: ProgramSort; label: string }[] = [
-  { value: 'closest_due', label: 'Earliest Deadline' },
-  { value: 'paid_first',  label: 'Paid First' },
-  { value: 'name',        label: 'A–Z' },
-];
+function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; children: string }) {
+  return (
+    <button type="button" className={`sabl-chip${on ? ' on' : ''}`} onClick={onClick} aria-pressed={on}>
+      {children}
+    </button>
+  );
+}
 
-const pillBase = 'shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium cursor-pointer transition-all duration-150 active:scale-95 select-none border';
-const pillOn   = 'text-brand border-brand-border bg-brand-dim';
-const pillOff  = 'bg-subtle text-secondary border-card';
+function DueChip({ p }: { p: ProgramWithMeta }) {
+  if (p.deadline === 'Ongoing') return <span className="sabl-mono sabl-due-chip ongoing">ONGOING — JOIN ANYTIME</span>;
+  if (!p.deadline || p.deadline === 'TBA') return <span className="sabl-mono sabl-due-chip neutral">DEADLINE TBA</span>;
+  const label = new Date(p.deadline + 'T00:00:00')
+    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })
+    .toUpperCase();
+  return <span className="sabl-mono sabl-due-chip dated">DUE {label}</span>;
+}
 
 function ProgramList({ items }: Props) {
   const {
-    filtered, visibleItems, page, totalPages, handlePageChange,
+    filtered,
     sortBy, setSort,
     selectedCategory, setCategory, clearFilters,
-    sheetOpen, setSheetOpen, hasActiveFilters,
-    savedIds, handleToggleSave, isFiltered, categoryKey,
+    gradeFilter, setGradeFilter,
+    searchQuery, setSearchQuery,
+    savedIds, handleToggleSave,
   } = usePrograms(items);
 
+  // Same content-gap signal as the scholarships directory
   useEffect(() => {
-    const close = () => setSheetOpen(false);
-    document.addEventListener('astro:before-preparation', close);
-    return () => document.removeEventListener('astro:before-preparation', close);
-  }, [setSheetOpen]);
+    const q = searchQuery.trim();
+    if (q.length < 3 || filtered.length > 0) return;
+    const t = setTimeout(() => sendEvent('search_empty', undefined, undefined, q), 1000);
+    return () => clearTimeout(t);
+  }, [searchQuery, filtered.length]);
 
-  const savedSet   = useMemo(() => new Set(savedIds), [savedIds]);
-  const categories = useMemo(
-    () => [...new Set(items.filter(p => getStatus(p) !== 'closed').map(p => p.category).filter((c): c is string => c !== null))].sort(),
-    [items]
-  );
+  const categories = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const p of items) if (p.category) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]) => name);
+  }, [items]);
+
+  const paidCount = useMemo(() => filtered.filter(p => p.paid).length, [filtered]);
 
   return (
-    <div>
-      <span className="sr-only" aria-live="polite" aria-atomic="true">
-        {filtered.length} program{filtered.length !== 1 ? 's' : ''} shown
-      </span>
-
-      {/* Category chips — desktop only */}
-      <div className="hidden md:block">
-        <div className="chips-row-wrap mb-4">
-          <div className="flex chips-row gap-1.5" style={{ flexWrap: 'wrap' }}>
-            <CategoryChips categories={categories} selected={selectedCategory} onSelect={setCategory} badges={PROGRAM_BADGES} mobile={false} />
-          </div>
+    <div className="sabl-page">
+      {/* Title row */}
+      <div className="sabl-title-row">
+        <div>
+          <div className="sabl-mono sabl-eyebrow">BEYOND THE CLASSROOM — {items.length} PROGRAMS</div>
+          <h1 className="sabl-h1">Research programs</h1>
+          <p className="sabl-desc">
+            University-run summer programs, labs, and competitions open to Alberta high school students. Some even pay you.
+          </p>
+        </div>
+        <div className="sabl-stat">
+          <div className="sabl-stat-value tnum">{paidCount}</div>
+          <div className="sabl-mono sabl-stat-label">PAID POSITIONS IN THIS LIST</div>
         </div>
       </div>
 
-      {/* Mobile: count + filter button */}
-      <FilterButton count={filtered.length} label="program" hasActiveFilters={hasActiveFilters} open={sheetOpen} onOpen={() => setSheetOpen(true)} />
+      {/* Toolbar: search + sort */}
+      <div className="sabl-toolbar">
+        <div className="sabl-search">
+          <span className="sabl-search-icon" aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Search programs, universities, fields…"
+            aria-label="Search programs by name, university, or field"
+          />
+        </div>
+        <div className="sabl-sort">
+          <span className="sabl-mono sabl-row-label">SORT</span>
+          {SORT_CHIPS.map(s => (
+            <Chip key={s.value} on={sortBy === s.value} onClick={() => setSort(s.value)}>{s.label}</Chip>
+          ))}
+        </div>
+      </div>
 
-      {/* Desktop: count + sort pills */}
-      <div className="hidden md:flex mb-5 items-center justify-between gap-4 flex-wrap">
-        <p className="text-sm text-faint shrink-0">{filtered.length} program{filtered.length !== 1 ? 's' : ''}</p>
-        <div style={{ display: 'inline-flex', padding: 3, borderRadius: 10, border: '1px solid var(--border-card)', background: 'var(--bg-card)', flexShrink: 0 }}>
-          {SORT_OPTIONS.map(({ value, label }) => {
-            const active = sortBy === value;
-            const icon = active ? (value === 'closest_due' ? '◆' : value === 'paid_first' ? '🪙' : '↓') : null;
+      {/* Filter rows */}
+      <div className="sabl-filters">
+        <div className="sabl-filter-row">
+          <span className="sabl-mono sabl-row-label">FIELD</span>
+          <Chip on={selectedCategory === 'all'} onClick={() => setCategory('all')}>All</Chip>
+          {categories.map(c => (
+            <Chip key={c} on={selectedCategory === c} onClick={() => setCategory(c)}>{c}</Chip>
+          ))}
+        </div>
+        <div className="sabl-filter-row">
+          <span className="sabl-mono sabl-row-label">GRADE</span>
+          <Chip on={gradeFilter === null} onClick={() => setGradeFilter(null)}>All</Chip>
+          {GRADE_CHIPS.map(g => (
+            <Chip key={g} on={gradeFilter === g} onClick={() => setGradeFilter(g)}>{`Gr ${g}`}</Chip>
+          ))}
+        </div>
+      </div>
+
+      <div className="sabl-mono sabl-result-line">
+        {filtered.length} OF {items.length} PROGRAMS SHOWN — EVERY ONE CHECKED BY HAND
+      </div>
+
+      {/* Results */}
+      {filtered.length > 0 ? (
+        <div className="sabl-grid">
+          {filtered.map(p => {
+            const saved = savedIds.includes(p.id);
+            const slug = p._slug ?? generateSlug(p.name);
+            const meta = [p.duration, p.grades, p.location].filter(Boolean) as string[];
             return (
-              <button key={value} onClick={() => setSort(value)} aria-pressed={active}
-                style={{
-                  padding: '5px 11px', fontSize: 12, fontWeight: active ? 600 : 500,
-                  letterSpacing: '-0.01em', fontFamily: 'inherit',
-                  border: 'none', borderRadius: 7, cursor: 'pointer', whiteSpace: 'nowrap',
-                  background: active ? 'var(--bg-subtle)' : 'transparent',
-                  color: active ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                  transition: 'all 180ms',
-                  display: 'inline-flex', alignItems: 'center', gap: 4,
-                  position: 'relative',
-                }}>
-                {icon && <span style={{ color: 'var(--brand)', fontSize: 10 }}>{icon}</span>}
-                {label}
-                {active && <span style={{ position: 'absolute', left: 11, right: 11, bottom: 2, height: 1, background: 'var(--brand)', borderRadius: 1 }} aria-hidden="true" />}
-              </button>
+              <div key={p.id} className="sabl-card">
+                <div className="sabl-card-top">
+                  <span className="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
+                  {p.paid && <span className="sabl-mono sabl-paid">$ PAID</span>}
+                </div>
+                <a href={`/programs/${slug}`} className="sabl-name">{p.name}</a>
+                {p.provider && <div className="sabl-org">{p.provider}</div>}
+                {meta.length > 0 && (
+                  <div className="sabl-meta-row">
+                    {meta.map(m => <span key={m} className="sabl-meta">{m}</span>)}
+                  </div>
+                )}
+                {p.description && <div className="sabl-blurb">{p.description}</div>}
+                <div className="sabl-card-foot">
+                  <DueChip p={p} />
+                  <div className="sabl-card-actions">
+                    <button
+                      type="button"
+                      className={`sabl-save${saved ? ' on' : ''}`}
+                      onClick={() => handleToggleSave(p.id)}
+                      aria-label={saved ? `Remove ${p.name} from saved` : `Save ${p.name}`}
+                      aria-pressed={saved}
+                    >
+                      {saved ? '★' : '☆'}
+                    </button>
+                    <a href={`/programs/${slug}`} className="sabl-apply">Details →</a>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
-      </div>
-
-      {/* Mobile bottom sheet */}
-      <FilterSheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        {categories.length > 0 && (
-          <div>
-            <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Category</p>
-            <div className="flex flex-wrap" style={{ gap: 8 }}>
-              <CategoryChips categories={categories} selected={selectedCategory} onSelect={setCategory} badges={PROGRAM_BADGES} mobile={true} />
-            </div>
-          </div>
-        )}
-        <div>
-          <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">Sort</p>
-          <div className="flex flex-wrap" style={{ gap: 8 }}>
-            {SORT_OPTIONS.map(({ value, label }) => {
-              const sel = sortBy === value;
-              return (
-                <button key={value} onClick={() => setSort(value)} aria-pressed={sel}
-                  className={`${pillBase} ${sel ? pillOn : pillOff}`}
-                  style={sel ? { background: 'var(--brand-dim)', borderColor: 'var(--brand-border)' } : undefined}>
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </FilterSheet>
-
-      {/* Card grid */}
-      <div key={`${categoryKey}-${sortBy}-${page}`} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4" style={{ alignItems: 'stretch' }}>
-        {visibleItems.map((p, i) => (
-          <ProgramCard key={p.id} program={p} index={i} isSaved={savedSet.has(p.id)} onToggleSave={() => handleToggleSave(p.id)} isFiltered={isFiltered} isInitial={!isFiltered && page === 1 && i < 16} />
-        ))}
-      </div>
-
-      <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
-
-      {filtered.length === 0 && (
-        <div className="empty-state">
-          <span className="ico" aria-hidden="true">🔬</span>
-          <p className="font-semibold text-primary mb-2">No programs match your filters</p>
-          <p className="text-sm text-secondary mb-6">Try a different category.</p>
-          {hasActiveFilters && (
-            <button className="empty-clear" onClick={clearFilters}>
-              Clear filters
-            </button>
-          )}
+      ) : (
+        <div className="sabl-empty">
+          <div className="sabl-empty-title">Nothing matches that.</div>
+          <div className="sabl-empty-sub">Try clearing a filter or searching something broader.</div>
+          <button type="button" className="sabl-empty-btn" onClick={clearFilters}>Clear all filters</button>
         </div>
       )}
     </div>
@@ -141,5 +171,9 @@ function ProgramList({ items }: Props) {
 }
 
 export default function ProgramListWithBoundary(props: Props) {
-  return <ErrorBoundary><ProgramList {...props} /></ErrorBoundary>;
+  return (
+    <ErrorBoundary>
+      <ProgramList {...props} />
+    </ErrorBoundary>
+  );
 }

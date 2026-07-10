@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
 import { loadPrograms } from '../lib/data-loader';
 import ProgramList from '../components/ProgramList.tsx';
 import { generateSlug } from '../lib/utils';
@@ -10,10 +11,9 @@ try {
 } catch {
   loadError = true;
 }
-const mostRecentVerified = raw
-  .map(p => p.lastVerified).filter(Boolean).sort().at(-1) ?? null;
-const freshnessLabel = mostRecentVerified
-  ? new Date(mostRecentVerified + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
+const newestVerified = raw.map(p => p.lastVerified).filter(Boolean).sort().at(-1);
+const verifiedLabel = newestVerified
+  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
   : null;
 // Enrich at build time — avoids Date parsing on every user's device
 const programs = raw.map(p => ({
@@ -32,6 +32,7 @@ const programs = raw.map(p => ({
   ogDescription="Discover research programs and summer opportunities for Alberta high school students. Science, health, engineering, arts and more."
   ogUrl="https://www.scholarab.ca/programs"
   currentPath="/programs"
+  hideChrome
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -46,18 +47,45 @@ const programs = raw.map(p => ({
       "url": `https://www.scholarab.ca/programs/${generateSlug(p.name)}`,
     })),
   })} slot="head" />
-  <div>
-    <h1 style="font-weight:800;font-size:clamp(26px,3.4vw,40px);margin:0 0 6px;">Research Programs</h1>
-    <p style="font-size:14px;color:var(--text-secondary);margin:0 0 4px;line-height:1.65;">University-run summer programs, labs, and competitions open to Alberta high school students.</p>
-    {freshnessLabel && <p class="freshness" style="margin-bottom:24px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Last verified: {freshnessLabel}</p>}
-    {loadError ? (
-      <div class="text-center py-20">
-        <p class="text-sm font-semibold text-primary mb-2">Couldn't load programs</p>
-        <p class="text-sm text-secondary mb-5">The database may be temporarily unavailable.</p>
-        <a href="/programs" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold" style="background:var(--brand);color:var(--text-on-brand);">Try again</a>
+  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+
+  <div id="sab-programs" class="sabp">
+    <div class="sabp-header">
+      <SabHeader currentPath="/programs" />
+    </div>
+
+    <div class="sabp-body">
+      {loadError ? (
+        <div class="sabl-empty" style="margin-top:64px;">
+          <div class="sabl-empty-title">Couldn't load programs.</div>
+          <div class="sabl-empty-sub">The database may be temporarily unavailable.</div>
+          <a href="/programs" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
+        </div>
+      ) : (
+        <ProgramList items={programs} client:idle />
+      )}
+    </div>
+
+    <!-- Slim dark footer -->
+    <div class="sabp-footer">
+      <div class="sabp-footer-inner">
+        <div class="sabp-footer-logo">
+          <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+          </svg>
+          <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
+        </div>
+        <span class="sabp-footer-note">Hand-checked.{verifiedLabel ? ` Last verified ${verifiedLabel}.` : ''} · <a href="/">Back home</a></span>
       </div>
-    ) : (
-      <ProgramList items={programs} client:idle />
-    )}
+    </div>
   </div>
 </Layout>
+
+<style is:global>
+  /* The directory design is fixed light regardless of site theme */
+  body:has(#sab-programs) { background: #FAF7F0; }
+</style>
