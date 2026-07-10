@@ -30,10 +30,12 @@ jobs:
       - name: Test
         run: npm run test -- --run
 
+      # No DATABASE_URL here on purpose: builds must use the committed JSON.
+      # The DB path only returns active rows (~28) and has null eligibility,
+      # which shrinks the site and breaks quiz matching. Freshness comes from
+      # auto-sync committing JSON + the daily rebuild cron.
       - name: Build
         run: npm run build
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Typecheck
         run: npx tsc --noEmit
