@@ -210,48 +210,6 @@ const matchGroups = [
       </div>
     )}
 
-    <!-- ============ PROBLEM / FIX ============ -->
-    <div class="sab-container sab-pf">
-      <div class="sab-pf-grid">
-        <div class="sab-pf-panel sab-pf-problem">
-          <div class="sab-mono sab-pf-eyebrow">01 — THE PROBLEM</div>
-          <h3 class="sab-h3">There was a problem.</h3>
-          <p>
-            Scholarship information in Alberta was scattered across dozens of websites and school bulletin boards. There was no single place to find what was open, what was closing, or what you actually qualified for.
-          </p>
-          <div class="sab-tags">
-            {['9 different websites', 'expired PDFs', 'bulletin boards', 'missed deadlines'].map(t => (
-              <span class="sab-tag sab-tag-problem sab-mono">{t}</span>
-            ))}
-          </div>
-        </div>
-        <div class="sab-pf-panel sab-pf-fix">
-          <div class="sab-mono sab-pf-eyebrow sab-accent-text">02 — THE FIX</div>
-          <h3 class="sab-h3">Now it's fixed.</h3>
-          <p>
-            ScholarAB is a free scholarship directory for Alberta high school students. Every listing is verified by hand. Deadlines are tracked. Nothing is scraped or auto-generated.
-          </p>
-          <div class="sab-tags">
-            {['one directory', 'verified by hand', 'deadlines tracked', 'always free'].map(t => (
-              <span class="sab-tag sab-tag-fix sab-mono">✓ {t}</span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ TRUST MANIFESTO ============ -->
-    <div class="sab-container sab-manifesto">
-      <p class="sab-manifesto-line">
-        No login. No ads. No data collection. Just a kid from Medicine Hat who got tired of <em>checking nine websites</em> before homeroom.
-      </p>
-      <div class="sab-trust-row sab-mono">
-        {['Every listing hand-checked', 'Updated weekly', 'Zero cost, zero catch'].map(t => (
-          <span><span class="sab-check">✓</span> {t}</span>
-        ))}
-      </div>
-    </div>
-
     <!-- ============ BROWSE BY CATEGORY ============ -->
     <div class="sab-cat-band">
       <div class="sab-container sab-cats">
@@ -562,45 +520,6 @@ const matchGroups = [
   }
   .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #FAF7F0; }
 
-  /* ── Problem / fix ── */
-  .sab-pf { padding-top: 88px; padding-bottom: 88px; }
-  .sab-pf-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    border: 2px solid #141915; border-radius: 20px; overflow: hidden;
-  }
-  .sab-pf-panel { padding: 56px 52px; }
-  .sab-pf-panel p { font-size: 17px; line-height: 1.65; margin: 0; }
-  .sab-pf-problem { background: #F2EEE4; border-right: 2px solid #141915; }
-  .sab-pf-problem p { color: rgba(20,25,21,0.7); }
-  .sab-pf-fix { background: #0B1512; color: #F2F0E9; }
-  .sab-pf-fix p { color: rgba(242,240,233,0.75); }
-  .sab-pf-eyebrow { font-size: 13px; letter-spacing: 0.06em; color: rgba(20,25,21,0.5); margin-bottom: 22px; }
-  .sab-h3 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(32px, 3.5vw, 40px); line-height: 1.1; margin: 0 0 22px;
-  }
-  .sab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-  .sab-tag { font-size: 12px; padding: 6px 12px; border-radius: 100px; }
-  .sab-tag-problem { border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.55); text-decoration: line-through; }
-  .sab-tag-fix { border: 1px solid #2FD3A0; color: #2FD3A0; }
-
-  /* ── Manifesto ── */
-  .sab-manifesto { padding-top: 24px; padding-bottom: 96px; text-align: center; }
-  .sab-manifesto-line {
-    font-family: 'Instrument Serif', serif; font-size: clamp(30px, 3.8vw, 44px);
-    line-height: 1.25; max-width: 880px; margin: 0 auto; text-wrap: balance;
-  }
-  .sab-manifesto-line em {
-    font-style: italic;
-    background: linear-gradient(transparent 62%, rgba(47,211,160,0.4) 62%);
-  }
-  .sab-trust-row {
-    display: flex; justify-content: center; gap: 44px; margin-top: 44px; flex-wrap: wrap;
-    font-size: 13px; letter-spacing: 0.05em; color: rgba(20,25,21,0.55);
-  }
-  .sab-trust-row span { display: flex; align-items: center; gap: 9px; }
-  .sab-check { color: #0E8C64; }
-
   /* ── Categories ── */
   .sab-cat-band { background: #F2EEE4; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
   .sab-cats { padding-top: 88px; padding-bottom: 88px; }
@@ -685,12 +604,6 @@ const matchGroups = [
     .sab-row-main { grid-column: 1; }
     .sab-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; }
     .sab-row-chip { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
-    .sab-pf { padding-top: 56px; padding-bottom: 56px; }
-    .sab-pf-grid { grid-template-columns: 1fr; }
-    .sab-pf-problem { border-right: none; border-bottom: 2px solid #141915; }
-    .sab-pf-panel { padding: 36px 28px; }
-    .sab-manifesto { padding-bottom: 56px; }
-    .sab-trust-row { gap: 14px 28px; }
     .sab-cats { padding-top: 56px; padding-bottom: 56px; }
     .sab-cat-grid { grid-template-columns: 1fr 1fr; }
     .sab-match { padding-top: 56px; padding-bottom: 56px; }
