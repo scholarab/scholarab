@@ -40,12 +40,6 @@ const closingSoon = scholarships
   .sort((a, b) => new Date(a.deadline! + 'T00:00:00').getTime() - new Date(b.deadline! + 'T00:00:00').getTime())
   .slice(0, 5);
 
-// Ticker: biggest active awards, "Title — $Amount"
-const tickerItems = [...activeScholarships]
-  .sort((a, b) => parseAmount(b.amount) - parseAmount(a.amount))
-  .slice(0, 8)
-  .map(s => `${s.title} — ${s.amount}`);
-
 // Categories: real counts from the data, top 8 tracks
 const categoryCounts = new Map<string, number>();
 for (const s of scholarships) {
@@ -164,23 +158,6 @@ const matchGroups = [
         </div>
       </div>
 
-      <!-- ticker -->
-      {tickerItems.length > 0 && (
-        <div class="sab-ticker-band">
-          <div class="sab-ticker sab-mono">
-            {[false, true].map(hidden => (
-              <span class="sab-ticker-half" aria-hidden={hidden || undefined}>
-                {tickerItems.map(t => (
-                  <span class="sab-ticker-item">
-                    <span>{t}</span>
-                    <span class="sab-accent-text" aria-hidden="true">✦</span>
-                  </span>
-                ))}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
 
     <!-- ============ CLOSING THIS WEEK ============ -->
@@ -427,7 +404,6 @@ const matchGroups = [
   .sab-accent-text { color: #2FD3A0; }
   .sab-container { max-width: 1180px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
 
-  @keyframes sab-tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ── Dark hero ── */
@@ -476,15 +452,6 @@ const matchGroups = [
   .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(242,240,233,0.18); }
   .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; }
   .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); margin-top: 6px; white-space: nowrap; }
-
-  .sab-ticker-band { border-top: 1px solid rgba(242,240,233,0.12); background: rgba(0,0,0,0.25); overflow: hidden; }
-  .sab-ticker {
-    display: inline-flex; white-space: nowrap; padding: 13px 0;
-    font-size: 13px; letter-spacing: 0.03em; color: rgba(242,240,233,0.7);
-    animation: sab-tick 36s linear infinite; will-change: transform;
-  }
-  .sab-ticker-half { display: inline-flex; }
-  .sab-ticker-item { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; }
 
   /* ── Closing this week ── */
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
@@ -583,7 +550,6 @@ const matchGroups = [
   /* ── Motion safety ── */
   @media (prefers-reduced-motion: reduce) {
     .sab-h1 { animation: none; }
-    .sab-ticker { animation: none; }
     .sab-cat-card, .sab-cat-card:hover { transform: none; transition: none; }
   }
 
