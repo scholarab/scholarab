@@ -5,12 +5,6 @@ import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import SavedList from '../components/SavedList.tsx';
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
-
-const newestVerified = [...scholarships, ...programs]
-  .map(x => x.lastVerified).filter(Boolean).sort().at(-1);
-const verifiedLabel = newestVerified
-  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
-  : null;
 ---
 
 <Layout
@@ -47,7 +41,7 @@ const verifiedLabel = newestVerified
           </svg>
           <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
         </div>
-        <span class="sabp-footer-note">Hand-checked.{verifiedLabel ? ` Last verified ${verifiedLabel}.` : ''} · <a href="/">Back home</a></span>
+        <span class="sabp-footer-note"><a href="/">Back home</a></span>
       </div>
     </div>
   </div>

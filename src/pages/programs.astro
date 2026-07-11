@@ -11,10 +11,6 @@ try {
 } catch {
   loadError = true;
 }
-const newestVerified = raw.map(p => p.lastVerified).filter(Boolean).sort().at(-1);
-const verifiedLabel = newestVerified
-  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
-  : null;
 // Enrich at build time — avoids Date parsing on every user's device
 const programs = raw.map(p => ({
   ...p,
@@ -79,7 +75,7 @@ const programs = raw.map(p => ({
           </svg>
           <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
         </div>
-        <span class="sabp-footer-note">Hand-checked.{verifiedLabel ? ` Last verified ${verifiedLabel}.` : ''} · <a href="/">Back home</a></span>
+        <span class="sabp-footer-note"><a href="/">Back home</a></span>
       </div>
     </div>
   </div>

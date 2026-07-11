@@ -24,13 +24,6 @@ const researchCount = programs.filter(p => {
 
 const scholarshipCount = scholarships.length;
 
-// Provenance: newest lastVerified across both datasets (YYYY-MM) → "June 2026"
-const newestVerified = [...scholarships, ...programs]
-  .map(x => x.lastVerified).filter(Boolean).sort().at(-1);
-const verifiedLabel = newestVerified
-  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
-  : null;
-
 const closingSoon = scholarships
   .filter(s => {
     if (!s.deadline || !s.active) return false;
@@ -267,7 +260,6 @@ const matchGroups = [
         </div>
         <div class="sab-footer-bottom sab-mono">
           <span>© 2026 ScholarAB — Medicine Hat, Alberta</span>
-          <span>Hand-checked.{verifiedLabel ? ` Last verified ${verifiedLabel}.` : ''}</span>
         </div>
       </div>
     </div>

@@ -6,12 +6,6 @@ import EligibilityQuiz from '../components/EligibilityQuiz'
 
 const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()])
 
-const newestVerified = [...scholarships, ...programs]
-  .map(x => x.lastVerified).filter(Boolean).sort().at(-1)
-const verifiedLabel = newestVerified
-  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
-  : null
-
 const breadcrumbJson = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -72,7 +66,7 @@ const breadcrumbJson = {
           </svg>
           <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
         </div>
-        <span class="sabp-footer-note">Hand-checked.{verifiedLabel ? ` Last verified ${verifiedLabel}.` : ''} · <a href="/">Back home</a></span>
+        <span class="sabp-footer-note"><a href="/">Back home</a></span>
       </div>
     </div>
   </div>
