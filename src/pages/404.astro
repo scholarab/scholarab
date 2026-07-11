@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+---
+
+<Layout
+  title="Page Not Found | ScholarAB"
+  description="This page does not exist. Browse Alberta scholarships and research programs on ScholarAB."
+  ogTitle="Page Not Found | ScholarAB"
+  ogDescription="This page does not exist. Browse Alberta scholarships and research programs on ScholarAB."
+  ogUrl="https://www.scholarab.ca/404"
+  currentPath="/404"
+  robots="noindex, follow"
+  hideChrome
+>
+  <div id="sab-404" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabp-header">
+      <SabHeader currentPath="/404" />
+    </div>
+
+    <div class="sabp-body" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <div class="sab404-code">404</div>
+      <h1 class="sab404-h1">This page doesn't exist.</h1>
+      <p class="sab404-copy">The link may be old, or the address was mistyped. Everything real lives one click away.</p>
+      <div class="sab404-actions">
+        <a href="/" class="sab404-btn-accent">Back home</a>
+        <a href="/scholarships" class="sab404-btn-outline">Browse scholarships</a>
+      </div>
+    </div>
+
+    <div class="sabp-footer">
+      <div class="sabp-footer-inner">
+        <div class="sabp-footer-logo">
+          <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+          </svg>
+          <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
+        </div>
+        <span class="sabp-footer-note">Hand-checked. · <a href="/">Back home</a></span>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  body:has(#sab-404) { background: #FAF7F0; }
+</style>
+
+<style>
+  .sab404-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; letter-spacing: 0.06em; color: #B8541F; margin-bottom: 14px;
+  }
+  .sab404-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(44px, 6vw, 68px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
+  }
+  .sab404-copy { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.65); margin: 20px 0 0; max-width: 480px; }
+  .sab404-actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+  .sab404-btn-accent {
+    display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;
+    background: #2FD3A0; color: #0B1512; padding: 13px 24px; border-radius: 100px; text-decoration: none;
+  }
+  .sab404-btn-accent:hover { background: #141915; color: #FAF7F0; }
+  .sab404-btn-outline {
+    display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;
+    color: #141915; padding: 13px 24px; border-radius: 100px;
+    border: 1.5px solid rgba(20,25,21,0.3); text-decoration: none;
+  }
+  .sab404-btn-outline:hover { border-color: #141915; color: #141915; }
+</style>
