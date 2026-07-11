@@ -20,6 +20,14 @@ const navItems = [
 
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+
+// Scrolling announcement band (fishback2026.com-style): a short pair of
+// linked CTAs repeated to fill the loop.
+const tickerPair = [
+  { label: 'Find your match', rest: 'in 60 seconds', href: '/match' },
+  { label: 'Browse scholarships', rest: 'open right now', href: '/scholarships' },
+];
+const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
 ---
 
 <div class="sabh-nav">
@@ -41,6 +49,20 @@ const isActive = (href: string) =>
     <a href="/match" class="sabh-cta">Find my match</a>
   </div>
 </div>
+<div class="sabh-ticker-band">
+  <div class="sabh-ticker">
+    {[false, true].map(hidden => (
+      <span class="sabh-ticker-half" aria-hidden={hidden || undefined}>
+        {tickerItems.map(t => (
+          <span class="sabh-ticker-item">
+            <a href={t.href}>{t.label}</a>
+            <span>{t.rest}</span>
+          </span>
+        ))}
+      </span>
+    ))}
+  </div>
+</div>
 
 <style>
   .sabh-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; }
@@ -58,6 +80,30 @@ const isActive = (href: string) =>
     padding: 10px 20px; border-radius: 100px; text-decoration: none;
   }
   .sabh-cta:hover { background: #F2F0E9; color: #0B1512; }
+
+  .sabh-ticker-band {
+    border-top: 1px solid rgba(242,240,233,0.12);
+    background: rgba(0,0,0,0.25);
+    overflow: hidden;
+  }
+  .sabh-ticker {
+    display: inline-flex; white-space: nowrap; padding: 12px 0;
+    font-size: 14px; color: rgba(242,240,233,0.75);
+    animation: sabh-tick 32s linear infinite; will-change: transform;
+  }
+  .sabh-ticker-half { display: inline-flex; }
+  .sabh-ticker-item { display: inline-flex; gap: 6px; padding-right: 64px; }
+  .sabh-ticker-item a {
+    color: #2FD3A0; font-weight: 600; text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .sabh-ticker-item a:hover { color: #F2F0E9; }
+  @keyframes sabh-tick {
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sabh-ticker { animation: none; }
+  }
 
   @media (max-width: 900px) {
     .sabh-nav { padding: 18px 20px; }
