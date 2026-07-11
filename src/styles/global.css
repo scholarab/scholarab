@@ -1089,7 +1089,10 @@ html.theme-dark .badge-red   { color: #f87171; background: rgba(248,113,113,0.12
 /* Directory-page shell (scholarships + programs design pages) */
 .sabp { background: #FAF7F0; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
 .sabp-header { background: #0B1512; color: #F2F0E9; }
-.sabp-body { max-width: 1180px; margin: 0 auto; padding: 72px 48px 96px; }
+/* width:100% — inside the .sabp column flexbox, margin:0 auto alone makes this
+   shrink-to-fit its content, so page width would vary with content (e.g. the
+   deadline calendar changed size month to month). */
+.sabp-body { max-width: 1180px; width: 100%; box-sizing: border-box; margin: 0 auto; padding: 72px 48px 96px; }
 .sabp-footer { background: #0B1512; color: rgba(242,240,233,0.65); }
 .sabp-footer-inner {
   max-width: 1180px; margin: 0 auto; padding: 48px;
@@ -1268,7 +1271,7 @@ html.theme-dark .badge-red   { color: #f87171; background: rgba(248,113,113,0.12
   width: 38px; height: 38px; cursor: pointer; color: #141915;
 }
 .sabs-cal-nav:hover { border-color: #141915; }
-.sabs-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.sabs-cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
 .sabs-cal-wd { text-align: center; font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); padding: 6px 0; }
 .sabs-cal-cell {
   min-height: 58px; border-radius: 12px; padding: 8px 10px; box-sizing: border-box;

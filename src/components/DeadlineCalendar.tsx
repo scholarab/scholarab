@@ -106,7 +106,8 @@ export default function DeadlineCalendar({ scholarships, programs }: Props) {
     const days = new Date(year, mon + 1, 0).getDate();
     const arr: (number | null)[] = Array(firstDow).fill(null);
     for (let d = 1; d <= days; d++) arr.push(d);
-    while (arr.length % 7 !== 0) arr.push(null);
+    // Always 6 weeks so the calendar height doesn't change month to month
+    while (arr.length < 42) arr.push(null);
     return arr;
   }, [year, mon]);
 
