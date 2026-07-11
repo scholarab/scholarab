@@ -1,5 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import { loadScholarships, loadPrograms } from '../lib/data-loader';
+
+const scholarships = await loadScholarships();
+const programs = await loadPrograms();
+const newestVerified = [...scholarships, ...programs]
+  .map(x => x.lastVerified).filter(Boolean).sort().at(-1);
+const verifiedLabel = newestVerified
+  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
+  : null;
+
+const principles = [
+  {
+    num: '01',
+    title: 'No ads, no sponsored listings.',
+    body: 'Nothing is paid placement. Listings are ranked by deadline, not by who paid.',
+  },
+  {
+    num: '02',
+    title: 'No personal data collected.',
+    body: 'No name, email, or location. Bookmarks are stored locally on your device and never leave it. We count anonymous totals, like which scholarships get the most clicks, with no cookies and no IP addresses stored.',
+  },
+  {
+    num: '03',
+    title: 'No account required.',
+    body: 'Everything is public and works on any device, instantly.',
+  },
+];
 ---
 
 <Layout
@@ -9,91 +37,180 @@ import Layout from '../layouts/Layout.astro';
   ogDescription="ScholarAB is a free scholarship directory built by Ilia Ivanov, a Medicine Hat high school student. No ads, no login, no data sold."
   ogUrl="https://www.scholarab.ca/about"
   currentPath="/about"
+  hideChrome
 >
-  <div class="max-w-2xl mx-auto">
+  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/instrument-serif-400i.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
 
-    <h1 class="text-primary font-extrabold leading-[1.05] tracking-[-0.04em] mb-6" style="font-size:clamp(28px,5vw,48px);">
-      Built by a student,<br><span class="text-brand">for students.</span>
-    </h1>
-
-    <p style="font-size:clamp(13px,1.4vw,15px);color:var(--text-secondary);letter-spacing:-0.005em;margin-bottom:24px;">There was a problem. Now it's fixed.</p>
-
-    <div class="space-y-6 mb-10">
-      <div>
-        <h2 style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-tertiary);padding-left:10px;border-left:3px solid var(--brand-border);margin-bottom:10px;">The problem</h2>
-        <p style="font-size:clamp(14px,1.5vw,16px);line-height:1.65;color:var(--text-secondary);letter-spacing:-0.005em;">
-          Scholarship information in Alberta was scattered across dozens of websites and school bulletin
-          boards. There was no single place to find what was open, what was closing, or what you actually
-          qualified for.
-        </p>
-      </div>
-      <div>
-        <h2 style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-tertiary);padding-left:10px;border-left:3px solid var(--brand-border);margin-bottom:10px;">The fix</h2>
-        <p style="font-size:clamp(14px,1.5vw,16px);line-height:1.65;color:var(--text-secondary);letter-spacing:-0.005em;">
-          ScholarAB is a free scholarship directory for Alberta high school students. Every listing is
-          verified by hand. Deadlines are tracked. Nothing is scraped or auto-generated.
-        </p>
-      </div>
+  <div id="sab-about" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabp-header">
+      <SabHeader currentPath="/about" />
     </div>
 
-    <!-- Principles glass card -->
-    <div class="card p-6 mb-6">
-      <p style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px;">How this works</p>
-      <div class="space-y-4">
-        <div class="flex gap-3 items-start">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--bg-subtle);font-size:16px;flex-shrink:0;">🚫</span>
-          <div>
-            <p class="text-sm font-semibold text-primary mb-0.5">No ads, no sponsored listings.</p>
-            <p class="text-xs text-secondary">Nothing is paid placement. Listings are ranked by deadline, not by who paid.</p>
+    <div class="saba-body" style="flex:1;">
+      <!-- Title -->
+      <div class="saba-eyebrow">ABOUT SCHOLARAB</div>
+      <h1 class="saba-h1">Built by a student,<br /><span class="saba-h1-accent">for students.</span></h1>
+      <p class="saba-lede">There was a problem. Now it's fixed.</p>
+
+      <!-- Problem / fix -->
+      <div class="saba-cols">
+        <div class="saba-col">
+          <div class="saba-col-label">
+            <span class="saba-dot" style="background:#B8541F;"></span>
+            <span>THE PROBLEM</span>
           </div>
+          <p class="saba-col-body">
+            Scholarship information in Alberta was scattered across dozens of websites and school bulletin
+            boards. There was no single place to find what was open, what was closing, or what you actually
+            qualified for.
+          </p>
         </div>
-        <div class="flex gap-3 items-start">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--bg-subtle);font-size:16px;flex-shrink:0;">🔒</span>
-          <div>
-            <p class="text-sm font-semibold text-primary mb-0.5">No personal data collected.</p>
-            <p class="text-xs text-secondary">No name, email, or location. Bookmarks are stored locally on your device and never leave it. We count anonymous totals, like which scholarships get the most clicks, with no cookies and no IP addresses stored.</p>
+        <div class="saba-col">
+          <div class="saba-col-label">
+            <span class="saba-dot" style="background:#2FD3A0;"></span>
+            <span>THE FIX</span>
           </div>
-        </div>
-        <div class="flex gap-3 items-start">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:var(--bg-subtle);font-size:16px;flex-shrink:0;">👤</span>
-          <div>
-            <p class="text-sm font-semibold text-primary mb-0.5">No account required.</p>
-            <p class="text-xs text-secondary">Everything is public and works on any device, instantly.</p>
-          </div>
+          <p class="saba-col-body">
+            ScholarAB is a free scholarship directory for Alberta high school students. Every listing is
+            verified by hand. Deadlines are tracked. Nothing is scraped or auto-generated.
+          </p>
         </div>
       </div>
-    </div>
 
-    <!-- Open source -->
-    <div class="mb-8">
-      <p style="font-size:14px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:16px;">Open source under AGPL-3.0</p>
-      <div class="flex flex-wrap gap-3">
+      <!-- How this works -->
+      <div class="saba-card">
+        <div class="saba-card-label">HOW THIS WORKS</div>
+        {principles.map((p, i) => (
+          <div class="saba-principle" style={i === 0 ? 'border-top-color:transparent;' : undefined}>
+            <div class="saba-principle-num">{p.num}</div>
+            <div>
+              <div class="saba-principle-title">{p.title}</div>
+              <div class="saba-principle-body">{p.body}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Open source + creator -->
+      <div class="saba-os-label">
+        <span class="saba-dot" style="background:#2FD3A0;"></span>
+        <span>OPEN SOURCE UNDER AGPL-3.0</span>
+      </div>
+      <div class="saba-actions">
         <a
           href="https://github.com/scholarab/scholarab"
           target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-lg font-medium transition-colors text-secondary hover:text-primary"
-          style="padding:12px 20px;font-size:16px;background:var(--bg-subtle);border:0.5px solid var(--border-card);"
+          class="saba-btn saba-btn-solid"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-          </svg>
-          View on GitHub
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+          <span>View on GitHub</span>
         </a>
-        <!--email_off--><a
-          href="mailto:contact.scholarab@gmail.com"
-          class="inline-flex items-center gap-2 rounded-lg font-medium transition-colors text-secondary hover:text-primary"
-          style="padding:12px 20px;font-size:16px;background:var(--bg-subtle);border:0.5px solid var(--border-card);"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          contact.scholarab@gmail.com
-        </a><!--/email_off-->
+        <!--email_off--><a href="mailto:contact.scholarab@gmail.com" class="saba-btn saba-btn-outline">contact.scholarab@gmail.com</a><!--/email_off-->
       </div>
+      <p class="saba-creator">
+        Created by <a href="https://www.linkedin.com/in/iliaivanov/" target="_blank" rel="noopener noreferrer" class="saba-creator-name">Ilia Ivanov</a>, a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" class="saba-creator-link">Medicine Hat High School</a> student.
+      </p>
     </div>
 
-    <!-- Creator credit -->
-    <p style="font-size:16px;color:var(--text-secondary);">
-      Created by <a href="https://www.linkedin.com/in/iliaivanov/" target="_blank" rel="noopener noreferrer" class="text-primary hover:opacity-70 transition-opacity font-medium">Ilia Ivanov</a>, a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" class="hover:opacity-70 transition-opacity">Medicine Hat High School</a> student.
-    </p>
-
+    <!-- Slim dark footer -->
+    <div class="sabp-footer">
+      <div class="sabp-footer-inner">
+        <div class="sabp-footer-logo">
+          <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+          </svg>
+          <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
+        </div>
+        <span class="sabp-footer-note">Hand-checked.{verifiedLabel ? ` Last verified ${verifiedLabel}.` : ''} · <a href="/">Back home</a></span>
+      </div>
+    </div>
   </div>
 </Layout>
+
+<style is:global>
+  /* The about design is fixed light regardless of site theme */
+  body:has(#sab-about) { background: #FAF7F0; }
+</style>
+
+<style>
+  .saba-body { max-width: 1180px; margin: 0 auto; padding: 72px 48px 110px; width: 100%; box-sizing: border-box; }
+
+  .saba-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; letter-spacing: 0.06em; color: #0E8C64; margin-bottom: 14px;
+  }
+  .saba-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(44px, 7vw, 76px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
+  }
+  .saba-h1-accent { color: #0E8C64; font-style: italic; }
+  .saba-lede { font-size: 18px; line-height: 1.55; color: rgba(20,25,21,0.65); margin: 24px 0 0; max-width: 560px; }
+
+  .saba-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 64px; }
+  .saba-col { border-top: 2px solid #141915; padding-top: 20px; }
+  .saba-col-label {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6); margin-bottom: 16px;
+  }
+  .saba-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+  .saba-col-body { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.75); margin: 0; }
+
+  .saba-card {
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 20px;
+    padding: 36px 40px 20px; margin-top: 64px;
+  }
+  .saba-card-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6); margin-bottom: 8px;
+  }
+  .saba-principle {
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px;
+    padding: 22px 0; border-top: 1px solid rgba(20,25,21,0.12); align-items: start;
+  }
+  .saba-principle-num {
+    width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid rgba(20,25,21,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Instrument Serif', serif; font-size: 20px; color: #0E8C64;
+  }
+  .saba-principle-title { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .saba-principle-body { font-size: 15px; line-height: 1.6; color: rgba(20,25,21,0.6); max-width: 720px; }
+
+  .saba-os-label {
+    display: flex; align-items: center; gap: 10px; padding: 14px 0;
+    border-top: 2px solid #141915; margin-top: 64px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6);
+  }
+  .saba-actions { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+  .saba-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: #141915; font-weight: 600; font-size: 15px;
+    padding: 13px 24px; border-radius: 100px; text-decoration: none;
+    transition: box-shadow 160ms ease, border-color 160ms ease;
+  }
+  .saba-btn-solid { border: 1.5px solid rgba(20,25,21,0.85); background: #FFFFFF; }
+  .saba-btn-solid:hover { box-shadow: 3px 3px 0 #2FD3A0; color: #141915; }
+  .saba-btn-outline { border: 1.5px solid rgba(20,25,21,0.3); }
+  .saba-btn-outline:hover { border-color: #141915; color: #141915; }
+
+  .saba-creator { font-size: 16px; line-height: 1.6; color: rgba(20,25,21,0.65); margin: 40px 0 0; }
+  .saba-creator-name { color: #141915; font-weight: 700; }
+  .saba-creator-name:hover, .saba-creator-link:hover { color: #0A6B4D; }
+  .saba-creator-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(20,25,21,0.3); }
+
+  /* The design specifies >=1080px only; below is our adaptation. */
+  @media (max-width: 900px) {
+    .saba-body { padding: 40px 20px 72px; }
+    .saba-cols { grid-template-columns: 1fr; gap: 32px; margin-top: 48px; }
+    .saba-card { padding: 24px 20px 12px; margin-top: 48px; }
+    .saba-principle { grid-template-columns: 44px 1fr; gap: 14px; }
+    .saba-os-label { margin-top: 48px; }
+    .saba-actions .saba-btn { font-size: 14px; padding: 12px 20px; }
+  }
+</style>
