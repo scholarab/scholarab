@@ -18,81 +18,90 @@ interface Props {
 interface QuizQuestion {
   key: string
   q: string
-  opts: { label: string; value: string; emoji?: string }[]
+  opts: { label: string; value: string; hint?: string }[]
 }
 
+// Mono hints come from the "ScholarAB Match" design; keys/values/labels are the
+// real matching-engine inputs and must not change without updating the matcher.
 const QUESTIONS: QuizQuestion[] = [
   {
     key: 'searchType',
     q: "What are you looking for?",
     opts: [
-      { label: 'Scholarships', value: 'scholarships', emoji: '🎓' },
-      { label: 'Research Programs', value: 'programs', emoji: '🔬' },
-      { label: 'Both', value: 'both', emoji: '✨' },
+      { label: 'Scholarships', value: 'scholarships', hint: 'AWARDS AND BURSARIES' },
+      { label: 'Research Programs', value: 'programs', hint: 'SUMMER AND ENRICHMENT' },
+      { label: 'Both', value: 'both', hint: 'SHOW ME EVERYTHING' },
     ],
   },
   {
     key: 'grade',
     q: "What grade are you in?",
     opts: [
-      { label: 'Grade 10', value: '10', emoji: '📗' },
-      { label: 'Grade 11', value: '11', emoji: '📘' },
-      { label: 'Grade 12', value: '12', emoji: '📕' },
-      { label: 'Already in post-secondary', value: 'post-secondary', emoji: '🏛️' },
+      { label: 'Grade 10', value: '10', hint: 'TWO YEARS TO PLAN' },
+      { label: 'Grade 11', value: '11', hint: 'PRIME PREP TIME' },
+      { label: 'Grade 12', value: '12', hint: 'DEADLINES MATTER NOW' },
+      { label: 'Already in post-secondary', value: 'post-secondary', hint: 'CONTINUING AWARDS' },
     ],
   },
   {
     key: 'city',
     q: "Where are you based?",
     opts: [
-      { label: 'Medicine Hat', value: 'Medicine Hat', emoji: '🏔️' },
-      { label: 'Calgary', value: 'Calgary', emoji: '🌆' },
-      { label: 'Edmonton', value: 'Edmonton', emoji: '🏙️' },
-      { label: 'Lethbridge', value: 'Lethbridge', emoji: '🌾' },
-      { label: 'Red Deer', value: 'Red Deer', emoji: '🦌' },
-      { label: 'Other Alberta', value: 'Other Alberta', emoji: '🗺️' },
+      { label: 'Medicine Hat', value: 'Medicine Hat', hint: 'THE GAS CITY' },
+      { label: 'Calgary', value: 'Calgary', hint: 'AND AREA' },
+      { label: 'Edmonton', value: 'Edmonton', hint: 'AND AREA' },
+      { label: 'Lethbridge', value: 'Lethbridge', hint: 'AND AREA' },
+      { label: 'Red Deer', value: 'Red Deer', hint: 'AND AREA' },
+      { label: 'Other Alberta', value: 'Other Alberta', hint: 'EVERYWHERE ELSE' },
     ],
   },
   {
     key: 'field',
     q: "What's your academic focus?",
     opts: [
-      { label: 'STEM & Engineering', value: 'STEM', emoji: '⚡' },
-      { label: 'Health & Medicine', value: 'health', emoji: '🧬' },
-      { label: 'Business & Commerce', value: 'business', emoji: '💼' },
-      { label: 'Arts & Humanities', value: 'arts', emoji: '🎨' },
-      { label: 'Trades', value: 'trades', emoji: '🔧' },
-      { label: 'Still figuring it out', value: '', emoji: '💭' },
+      { label: 'STEM & Engineering', value: 'STEM', hint: 'SCIENCE, TECH, MATH' },
+      { label: 'Health & Medicine', value: 'health', hint: 'PRE-MED, NURSING, KIN' },
+      { label: 'Business & Commerce', value: 'business', hint: 'FINANCE, MANAGEMENT' },
+      { label: 'Arts & Humanities', value: 'arts', hint: 'FINE ARTS, SOCIAL SCIENCE' },
+      { label: 'Trades', value: 'trades', hint: 'RAP AND APPRENTICESHIPS' },
+      { label: 'Still figuring it out', value: '', hint: 'TOTALLY FINE' },
     ],
   },
   {
     key: 'average',
     q: "What's your academic average?",
     opts: [
-      { label: '90% or higher', value: '93', emoji: '🌟' },
-      { label: '80 – 89%', value: '85', emoji: '📊' },
-      { label: 'Below 80%', value: '79', emoji: '✏️' },
-      { label: "I'd rather not say", value: '', emoji: '🤫' },
+      { label: '90% or higher', value: '93', hint: 'MERIT AWARDS OPEN UP' },
+      { label: '80 – 89%', value: '85', hint: 'PLENTY QUALIFY' },
+      { label: 'Below 80%', value: '79', hint: "GRADES AREN'T EVERYTHING" },
+      { label: "I'd rather not say", value: '', hint: 'NO PROBLEM' },
     ],
   },
   {
     key: 'institution',
     q: "Where are you planning to study?",
     opts: [
-      { label: 'University of Calgary', value: 'University of Calgary' },
-      { label: 'University of Alberta', value: 'University of Alberta' },
-      { label: 'Mount Royal University', value: 'Mount Royal University' },
-      { label: 'Medicine Hat College', value: 'Medicine Hat College' },
-      { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', emoji: '🔨' },
-      { label: "Not sure yet", value: '', emoji: '🤷' },
+      { label: 'University of Calgary', value: 'University of Calgary', hint: 'CALGARY' },
+      { label: 'University of Alberta', value: 'University of Alberta', hint: 'EDMONTON' },
+      { label: 'Mount Royal University', value: 'Mount Royal University', hint: 'CALGARY' },
+      { label: 'Medicine Hat College', value: 'Medicine Hat College', hint: 'MEDICINE HAT' },
+      { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', hint: 'SAIT, NAIT AND MORE' },
+      { label: "Not sure yet", value: '', hint: 'KEEP OPTIONS OPEN' },
     ],
   },
 ]
 
+// DOM text stays sentence-case (tests and E2E match on it); the chips render
+// uppercase via CSS text-transform.
 const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
-  strong:   { badge: 'bg-brand-dim text-brand border-brand-border', label: 'Strong match' },
-  good:     { badge: 'bg-blue-500/15 text-blue-400 border-blue-500/30', label: 'Good match' },
-  possible: { badge: 'bg-subtle text-tertiary border-card', label: 'Possible match' },
+  strong:   { badge: 'sabm-tier sabm-tier-strong', label: 'Strong match' },
+  good:     { badge: 'sabm-tier sabm-tier-good', label: 'Good match' },
+  possible: { badge: 'sabm-tier sabm-tier-possible', label: 'Possible match' },
+}
+
+function formatDue(iso: string): string {
+  return new Date(iso + 'T00:00:00')
+    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v4'
@@ -122,10 +131,10 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
 // Selection state lives in the parent so only one tile can ever be selected
 // and clicks during the step transition are ignored.
 function MatchTile({
-  label, emoji, delay, state, animateIn, onClick,
+  label, hint, delay, state, animateIn, onClick,
 }: {
   label: string
-  emoji?: string
+  hint?: string
   delay: number
   state: 'idle' | 'selected' | 'dim'
   animateIn: boolean
@@ -135,53 +144,42 @@ function MatchTile({
     <button
       type="button"
       onClick={onClick}
-      className={`quiz-opt${state === 'selected' ? ' quiz-opt-selected' : ''}${state === 'dim' ? ' quiz-opt-dim' : ''}${state === 'idle' && animateIn ? ' quiz-tile-in' : ''}`}
+      className={`sabm-opt${state === 'selected' ? ' sabm-opt-selected' : ''}${state === 'dim' ? ' sabm-opt-dim' : ''}${state === 'idle' && animateIn ? ' quiz-tile-in' : ''}`}
       style={{ animationDelay: `${delay}ms`, height: '100%' }}
     >
-      <span className="opt-left">
-        {emoji && <span className="opt-emoji" aria-hidden="true">{emoji}</span>}
-        <span>{label}</span>
+      <span className="sabm-opt-text">
+        <span className="sabm-opt-label">{label}</span>
+        {hint && <span className="sabm-opt-hint sabl-mono">{hint}</span>}
       </span>
-      <svg
-        width="16" height="16" viewBox="0 0 16 16" fill="none"
-        stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-        aria-hidden="true"
-        className="chev"
-      >
-        <path d="M6 12l4-4-4-4"/>
-      </svg>
+      <span className="sabm-opt-arrow" aria-hidden="true">→</span>
     </button>
   )
 }
 
-// ── Result card ───────────────────────────────────────────────────────────────
+// ── Result row (design table style) ──────────────────────────────────────────
 
-function ResultCard({
-  rank, highlight, title, subtitle, tags, rightTop, rightBottom, delay,
+function ResultRow({
+  rank, title, titleHref, subtitle, tags, amount, actions, delay,
 }: {
   rank: number
-  highlight: boolean
   title: string
+  titleHref: string
   subtitle?: string | null
   tags: ReactNode
-  rightTop: ReactNode
-  rightBottom: ReactNode
+  amount: ReactNode
+  actions: ReactNode
   delay: number
 }) {
   return (
-    <div className="card flex items-center gap-4 p-4 quiz-card-in" style={{ paddingLeft: 20, animationDelay: `${delay}ms` }}>
-      <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: '-0.03em', color: highlight ? 'var(--brand)' : 'var(--text-faint)', width: 36, flexShrink: 0, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>{String(rank).padStart(2, '0')}</span>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <p className="font-semibold text-primary text-sm leading-snug">{title}</p>
-        {subtitle && <p className="text-xs text-tertiary mt-0.5 line-clamp-1">{subtitle}</p>}
-        <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-          {tags}
-        </div>
+    <div className="sabm-row quiz-card-in" style={{ animationDelay: `${delay}ms` }}>
+      <div className="sabm-row-num sabl-mono">{String(rank).padStart(2, '0')}</div>
+      <div className="sabm-row-main">
+        <a href={titleHref} className="sabm-row-name">{title}</a>
+        {subtitle && <div className="sabm-row-blurb">{subtitle}</div>}
+        <div className="sabm-row-tags">{tags}</div>
       </div>
-      <div style={{ flexShrink: 0, textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 }}>
-        {rightTop}
-        {rightBottom}
-      </div>
+      <div className="sabm-row-amount">{amount}</div>
+      <div className="sabm-row-actions">{actions}</div>
     </div>
   )
 }
@@ -348,132 +346,132 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     return (
       <div className="quiz-results-in">
         {/* Segmented progress — all filled */}
-        <div className="seg-progress" style={{ marginBottom: 14, width: 260 }}>
+        <div className="sabm-progress" style={{ marginTop: 40 }}>
           {QUESTIONS.map((_, i) => (
-            <div key={i} className="seg filled" />
+            <div key={i} className="sabm-seg done" />
           ))}
         </div>
 
-        {/* "Your matches" pill */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'var(--brand-dim)', border: '1px solid var(--brand-border)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' as const, color: 'var(--brand)', marginBottom: 10 }}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2L9.09 8.26 2 9.27l5 4.87L5.82 21 12 17.77 18.18 21 17 14.14l5-4.87-7.09-1.01L12 2z"/></svg>
-          Your matches
+        <div className="sabm-kicker sabl-mono" style={{ marginTop: 28 }}>
+          <span className="sabm-kicker-dot" aria-hidden="true"></span>
+          <span>YOUR MATCHES</span>
         </div>
 
-        <h2 className="text-primary" style={{ fontSize: 'clamp(20px, 3vw, 30px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 12 }}>
+        <h2 className="sabm-results-h1">
           {headline}
         </h2>
 
         {showScholarships && totalAmount > 0 && (
-          <div style={{ marginBottom: 14, padding: '14px 18px', borderRadius: 16, background: 'linear-gradient(135deg, var(--brand-dim), rgba(59,130,246,0.06), rgba(167,139,250,0.08))', border: '1px solid var(--brand-border)', backdropFilter: 'blur(20px)', display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div>
-              <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-secondary)', marginBottom: 2 }}>Combined award value</p>
-              <p className="text-brand" style={{ fontSize: 'clamp(22px, 4vw, 36px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1, fontVariantNumeric: 'tabular-nums', margin: 0 }}>
-                ${totalAmount.toLocaleString('en-CA')}
-              </p>
+          <div className="sabm-value-card">
+            <div style={{ flex: 'none' }}>
+              <div className="sabm-value-label sabl-mono">COMBINED AWARD VALUE</div>
+              <div className="sabm-value-amount tnum">${totalAmount.toLocaleString('en-CA')}</div>
             </div>
-            <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: 0, flex: 1 }}>Strong + good matches. Always verify on the official site.</p>
+            <div className="sabm-value-note">
+              Strong and good matches based on your answers. Always verify eligibility on the official site before applying.
+            </div>
           </div>
         )}
 
-        {showScholarships && (strong.length > 0 || good.length > 0 || possible.length > 0) && (
-          <div className="flex gap-2 mb-3 flex-wrap">
-            {strong.length > 0 && <span className="text-xs px-3 py-1 rounded-full border bg-brand-dim text-brand border-brand-border">{strong.length} strong match{strong.length !== 1 ? 'es' : ''}</span>}
-            {good.length > 0 && <span className="text-xs px-3 py-1 rounded-full border bg-blue-500/10 text-blue-400 border-blue-500/30">{good.length} good match{good.length !== 1 ? 'es' : ''}</span>}
-            {possible.length > 0 && <span className="text-xs px-3 py-1 rounded-full border bg-subtle text-tertiary border-card">{possible.length} possible</span>}
+        <div className="sabm-results-bar">
+          {showScholarships && (strong.length > 0 || good.length > 0 || possible.length > 0) ? (
+            <div className="sabm-count-chips">
+              {strong.length > 0 && <span className="sabl-mono sabm-count-chip solid">{strong.length} strong match{strong.length !== 1 ? 'es' : ''}</span>}
+              {good.length > 0 && <span className="sabl-mono sabm-count-chip">{good.length} good match{good.length !== 1 ? 'es' : ''}</span>}
+              {possible.length > 0 && <span className="sabl-mono sabm-count-chip">{possible.length} possible</span>}
+            </div>
+          ) : <div />}
+          <div className="sabm-results-actions">
+            <button onClick={reset} className="sabm-btn-outline">Retake quiz</button>
+            {showScholarships && (
+              <a href="/scholarships" className="sabm-btn-accent">Browse all scholarships →</a>
+            )}
+            {showPrograms && !showScholarships && (
+              <a href="/programs" className="sabm-btn-accent">Browse all programs →</a>
+            )}
           </div>
-        )}
-
-        <div className="mb-6 pt-2 flex flex-col sm:flex-row gap-3">
-          <button onClick={reset} className="flex-1 py-2.5 rounded-xl text-sm font-medium border border-card text-secondary transition">Retake quiz</button>
-          {showScholarships && (
-            <a href="/scholarships" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: 'var(--text-on-brand)' }}>Browse all scholarships</a>
-          )}
-          {showPrograms && !showScholarships && (
-            <a href="/programs" className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center transition" style={{ background: 'var(--brand)', color: 'var(--text-on-brand)' }}>Browse all programs</a>
-          )}
         </div>
 
-        {/* Scholarship cards */}
+        {/* Scholarship rows */}
         {showScholarships && scholarshipResults && scholarshipResults.length > 0 && (
-          <>
-            {showPrograms && (
-              <p className="text-xs font-semibold text-secondary uppercase tracking-widest mb-3" style={{ letterSpacing: '0.08em' }}>Scholarships</p>
-            )}
-            <div className="space-y-2.5">
-              {scholarshipResults.map(({ scholarship: s, tier }, index) => {
-                const style = TIER_STYLES[tier]
-                return (
-                  <ResultCard
-                    key={s.id}
-                    rank={index + 1}
-                    delay={Math.min(index * 40, 320)}
-                    highlight={index === 0}
-                    title={s.title}
-                    subtitle={s.audience}
-                    tags={<>
-                      <span className={`text-xs px-2 py-0.5 rounded-full border ${style.badge}`}>{style.label}</span>
-                      {s.deadline && <span className="text-xs text-tertiary">Due {s.deadline}</span>}
-                    </>}
-                    rightTop={<p className="font-bold text-primary" style={{ fontSize: 17, letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>{s.amount}</p>}
-                    rightBottom={
-                      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                        <a href={`/scholarships/${generateSlug(s.title)}`} className="text-xs text-secondary hover:text-primary transition">Details</a>
-                        <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-brand transition hover:opacity-80">Apply →</a>
-                        <button
-                          onClick={(e) => handleToggleSave(s.id, e.currentTarget)}
-                          aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
-                          className={`flex items-center justify-center shrink-0 transition-all duration-150 rounded-lg cursor-pointer ${savedIds.has(s.id) ? 'text-brand border border-brand-border' : 'text-secondary border border-card'}`}
-                          style={{ width: 28, height: 28, background: savedIds.has(s.id) ? 'var(--brand-dim)' : undefined }}
-                        >
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill={savedIds.has(s.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-                        </button>
-                      </div>
-                    }
-                  />
-                )
-              })}
-            </div>
-          </>
-        )}
-
-        {/* Programs cards */}
-        {showPrograms && programResults && programResults.length > 0 && (
-          <div style={{ marginTop: showScholarships && scholarshipResults && scholarshipResults.length > 0 ? 32 : 0 }}>
-            {showScholarships && (
-              <p className="text-xs font-semibold text-secondary uppercase tracking-widest mb-3" style={{ letterSpacing: '0.08em' }}>Research Programs</p>
-            )}
-            <div className="space-y-2.5">
-              {programResults.map((p, index) => (
-                <ResultCard
-                  key={p.id}
+          <div className="sabm-table">
+            {showPrograms && <p className="sabl-mono sabm-table-label">SCHOLARSHIPS</p>}
+            {scholarshipResults.map(({ scholarship: s, tier }, index) => {
+              const style = TIER_STYLES[tier]
+              return (
+                <ResultRow
+                  key={s.id}
                   rank={index + 1}
                   delay={Math.min(index * 40, 320)}
-                  highlight={index === 0 && !showScholarships}
-                  title={p.name}
-                  subtitle={p.provider}
+                  title={s.title}
+                  titleHref={`/scholarships/${generateSlug(s.title)}`}
+                  subtitle={s.audience}
                   tags={<>
-                    {p.category && <span className="text-xs px-2 py-0.5 rounded-full border bg-subtle text-tertiary border-card">{p.category}</span>}
-                    {p.deadline && <span className="text-xs text-tertiary">Due {p.deadline}</span>}
+                    <span className={style.badge}>{style.label}</span>
+                    {s.deadline && <span className="sabm-tier sabm-due">Due {formatDue(s.deadline)}</span>}
                   </>}
-                  rightTop={p.paid && p.stipend
-                    ? <p className="font-bold text-primary" style={{ fontSize: 17, letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}>{p.stipend}</p>
-                    : p.paid
-                      ? <p className="font-bold text-primary" style={{ fontSize: 14 }}>Paid</p>
-                      : <p className="text-xs text-tertiary">Unpaid</p>
-                  }
-                  rightBottom={<a href={p.url} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-brand transition hover:opacity-80">Apply →</a>}
+                  amount={s.amount}
+                  actions={<>
+                    <button
+                      onClick={(e) => handleToggleSave(s.id, e.currentTarget)}
+                      aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
+                      aria-pressed={savedIds.has(s.id)}
+                      className={`sabl-save${savedIds.has(s.id) ? ' on' : ''}`}
+                    >
+                      {savedIds.has(s.id) ? '★' : '☆'}
+                    </button>
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      referrerPolicy="no-referrer"
+                      className="sabl-apply"
+                      onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
+                    >Apply →</a>
+                  </>}
                 />
-              ))}
-            </div>
+              )
+            })}
+          </div>
+        )}
+
+        {/* Program rows */}
+        {showPrograms && programResults && programResults.length > 0 && (
+          <div className="sabm-table" style={{ marginTop: showScholarships && scholarshipResults && scholarshipResults.length > 0 ? 40 : 0 }}>
+            {showScholarships && <p className="sabl-mono sabm-table-label">RESEARCH PROGRAMS</p>}
+            {programResults.map((p, index) => (
+              <ResultRow
+                key={p.id}
+                rank={index + 1}
+                delay={Math.min(index * 40, 320)}
+                title={p.name}
+                titleHref={`/programs/${generateSlug(p.name)}`}
+                subtitle={p.provider}
+                tags={<>
+                  {p.category && <span className="sabm-tier sabm-due">{p.category}</span>}
+                  {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && <span className="sabm-tier sabm-due">Due {formatDue(p.deadline)}</span>}
+                </>}
+                amount={p.paid ? (p.stipend ?? 'Paid') : <span className="sabm-amount-muted">Unpaid</span>}
+                actions={
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    referrerPolicy="no-referrer"
+                    className="sabl-apply"
+                    onClick={() => sendEvent('apply_click', 'program', p.id)}
+                  >Apply →</a>
+                }
+              />
+            ))}
           </div>
         )}
 
         {!hasAnyResults && (
-          <div className="text-center py-12 px-4">
-            <p className="font-semibold text-primary mb-2">No matches found for your profile</p>
-            <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">Try leaving optional fields blank. Average and institution answers narrow results significantly.</p>
-            <button onClick={reset} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition" style={{ background: 'var(--brand)', color: 'var(--text-on-brand)' }}>Try again</button>
+          <div className="sabl-empty" style={{ marginTop: 32 }}>
+            <div className="sabl-empty-title">No matches found for your profile.</div>
+            <div className="sabl-empty-sub">Try leaving optional fields blank. Average and institution answers narrow results significantly.</div>
+            <button onClick={reset} className="sabl-empty-btn">Try again</button>
           </div>
         )}
 
@@ -488,11 +486,16 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* Segmented progress dots */}
-      <div className="seg-progress" style={{ marginBottom: 14, width: 260 }}>
-        {QUESTIONS.map((_, i) => (
-          <div key={i} className={`seg${i < step ? ' filled' : ''}`} />
-        ))}
+      {/* Segmented progress */}
+      <div className="sabm-progress-wrap">
+        <div className="sabm-progress">
+          {QUESTIONS.map((_, i) => (
+            <div key={i} className={`sabm-seg${i < step ? ' done' : i === step ? ' current' : ''}`} />
+          ))}
+        </div>
+        <div className="sabl-mono sabm-step-label">
+          Question {step + 1} of {QUESTIONS.length}
+        </div>
       </div>
 
       {/* Question + tiles — exit animates out, next step animates in directionally */}
@@ -500,54 +503,32 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         key={`${animKey}-${step}`}
         className={pendingTile !== null ? 'quiz-step-out' : enterDir === 'back' ? 'quiz-step-in-back' : 'quiz-step-in'}
       >
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
-          <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>
-            Question {step + 1} of {QUESTIONS.length}
-          </span>
-        </div>
-
-        <h2 ref={questionHeadingRef} tabIndex={-1} className="text-primary" style={{ fontSize: 'clamp(22px, 3.5vw, 36px)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.1, marginBottom: 16, outline: 'none' }}>
+        <h2 ref={questionHeadingRef} tabIndex={-1} className="sabm-question">
           {current.q}
         </h2>
 
-        {(() => {
-          const useGrid = current.opts.length >= 4;
-          return (
-            <div className={useGrid ? 'tile-grid' : 'tile-col'}>
-              {current.opts.map((opt, i) => {
-                const spanFull = useGrid && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
-                return (
-                  <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1', height: '100%' } : { height: '100%' }}>
-                    <MatchTile
-                      label={opt.label}
-                      emoji={opt.emoji}
-                      delay={i * 50}
-                      state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : 'idle'}
-                      animateIn={enterDir === 'fwd'}
-                      onClick={() => answer(current.key, opt.value, i)}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })()}
+        <div className="sabm-opts">
+          {current.opts.map((opt, i) => {
+            const spanFull = current.opts.length % 2 !== 0 && i === current.opts.length - 1;
+            return (
+              <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1', height: '100%' } : { height: '100%' }}>
+                <MatchTile
+                  label={opt.label}
+                  hint={opt.hint}
+                  delay={i * 50}
+                  state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : 'idle'}
+                  animateIn={enterDir === 'fwd'}
+                  onClick={() => answer(current.key, opt.value, i)}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Back button */}
       {step > 0 && (
-        <button
-          onClick={back}
-          style={{
-            marginTop: 20, background: 'none', border: 'none',
-            color: 'var(--text-secondary)', fontSize: 13, cursor: 'pointer',
-            display: 'inline-flex', alignItems: 'center', gap: 6,
-            fontFamily: 'inherit', alignSelf: 'flex-start', padding: 0,
-          }}
-        >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M10 12L6 8l4-4"/></svg>
-          Previous
-        </button>
+        <button onClick={back} className="sabm-prev">← Previous</button>
       )}
     </div>
   )
