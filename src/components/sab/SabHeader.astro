@@ -1,22 +1,14 @@
 ---
 // Dark header band from the claude.ai/design "ScholarAB" pages:
-// mono annotation bar + nav with accent underline on the active link.
-import { loadScholarships, loadPrograms } from '../../lib/data-loader';
+// nav with accent underline on the active link.
+// (The mono annotation bar and the home-page Home-item omission from the
+// design were both removed at Ilia's request, 2026-07-11.)
 
 interface Props {
   currentPath: string;
 }
 const { currentPath } = Astro.props;
 
-const scholarships = await loadScholarships();
-const programs = await loadPrograms();
-const newestVerified = [...scholarships, ...programs]
-  .map(x => x.lastVerified).filter(Boolean).sort().at(-1);
-const verifiedLabel = newestVerified
-  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
-  : null;
-
-// The home design's nav omits the Home item; every other page includes it.
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Scholarships', href: '/scholarships' },
@@ -24,16 +16,12 @@ const navItems = [
   { label: 'Match', href: '/match' },
   { label: 'Saved', href: '/saved' },
   { label: 'About', href: '/about' },
-].filter(n => !(currentPath === '/' && n.href === '/'));
+];
 
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
 
-<div class="sabh-annotation">
-  <span>A student-run project — Medicine Hat, Alberta</span>
-  <span class="sabh-annotation-right">{verifiedLabel ? `Last verified ${verifiedLabel} · ` : ''}100% free</span>
-</div>
 <div class="sabh-nav">
   <a href="/" class="sabh-logo" aria-label="ScholarAB home">
     <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true">
@@ -55,12 +43,6 @@ const isActive = (href: string) =>
 </div>
 
 <style>
-  .sabh-annotation {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 14px 48px; border-bottom: 1px solid rgba(242,240,233,0.12);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px; letter-spacing: 0.04em; color: rgba(242,240,233,0.55);
-  }
   .sabh-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; }
   .sabh-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
@@ -78,8 +60,6 @@ const isActive = (href: string) =>
   .sabh-cta:hover { background: #F2F0E9; color: #0B1512; }
 
   @media (max-width: 900px) {
-    .sabh-annotation { padding: 12px 20px; }
-    .sabh-annotation-right { display: none; }
     .sabh-nav { padding: 18px 20px; }
     .sabh-link { display: none; } /* bottom tab bar covers navigation on mobile */
   }
