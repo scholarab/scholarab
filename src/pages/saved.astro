@@ -1,9 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import SavedList from '../components/SavedList.tsx';
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
+
+const newestVerified = [...scholarships, ...programs]
+  .map(x => x.lastVerified).filter(Boolean).sort().at(-1);
+const verifiedLabel = newestVerified
+  ? new Date(newestVerified + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })
+  : null;
 ---
 
 <Layout
@@ -14,8 +21,39 @@ const programs = await loadPrograms();
   ogUrl="https://www.scholarab.ca/saved"
   currentPath="/saved"
   robots="noindex, follow"
+  hideChrome
 >
-  <div>
-    <SavedList initialScholarships={scholarships} initialPrograms={programs} client:load />
+  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+
+  <div id="sab-saved" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabp-header">
+      <SabHeader currentPath="/saved" />
+    </div>
+
+    <div class="sabp-body" style="flex:1;">
+      <SavedList initialScholarships={scholarships} initialPrograms={programs} client:load />
+    </div>
+
+    <!-- Slim dark footer -->
+    <div class="sabp-footer">
+      <div class="sabp-footer-inner">
+        <div class="sabp-footer-logo">
+          <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+          </svg>
+          <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
+        </div>
+        <span class="sabp-footer-note">Hand-checked.{verifiedLabel ? ` Last verified ${verifiedLabel}.` : ''} · <a href="/">Back home</a></span>
+      </div>
+    </div>
   </div>
 </Layout>
+
+<style is:global>
+  /* The saved design is fixed light regardless of site theme */
+  body:has(#sab-saved) { background: #FAF7F0; }
+</style>

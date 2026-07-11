@@ -42,6 +42,6 @@ test('match quiz - completes full 6-question flow', async ({ page }) => {
 test('saved page - hydrates and shows item count', async ({ page }) => {
   await page.goto('/saved');
   await expect(page.getByRole('heading', { name: 'Saved' })).toBeVisible({ timeout: 10_000 });
-  // Skeleton clears and count is shown (0 items if nothing saved)
-  await expect(page.locator('text=/\\d+ item/').first()).toBeVisible({ timeout: 10_000 });
+  // Skeleton clears and count line is shown (0 items if nothing saved)
+  await expect(page.locator('text=/\\d+ item(s)? bookmarked/').first()).toBeVisible({ timeout: 10_000 });
 });

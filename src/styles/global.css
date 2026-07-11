@@ -1222,3 +1222,78 @@ html.theme-dark .badge-red   { color: #f87171; background: rgba(248,113,113,0.12
   .sabm-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; }
   .sabm-row-actions { grid-column: 1 / -1; justify-content: flex-start; margin-top: 4px; }
 }
+
+/* ══ "ScholarAB Saved" design (claude.ai/design) — shortlist + calendar ══ */
+.sabs-toggle {
+  display: flex; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 100px;
+  overflow: hidden; flex: none; margin-bottom: 6px;
+}
+.sabs-toggle-btn {
+  font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 11px 24px; border: none; cursor: pointer; background: transparent; color: #141915;
+}
+.sabs-toggle-btn + .sabs-toggle-btn { border-left: 1.5px solid rgba(20,25,21,0.85); }
+.sabs-toggle-btn:hover { opacity: 0.85; }
+.sabs-toggle-btn.on { background: #141915; color: #F2F0E9; }
+
+.sabs-empty-count { font-size: 13px; letter-spacing: 0.06em; color: rgba(20,25,21,0.45); margin-bottom: 18px; }
+
+.sabs-section-head {
+  display: flex; align-items: center; gap: 10px; padding: 14px 0;
+  border-top: 2px solid #141915;
+  font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6);
+}
+.sabs-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+.sabs-cal-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; border-top: 2px solid #141915; gap: 16px; flex-wrap: wrap;
+}
+.sabs-cal-add {
+  font-family: 'Archivo', sans-serif; font-size: 13.5px; font-weight: 600;
+  padding: 9px 18px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
+  background: transparent; color: #141915; cursor: pointer;
+}
+.sabs-cal-add:hover { border-color: #141915; }
+
+.sabs-cal-card {
+  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 20px;
+  padding: 32px 36px 28px; margin-top: 10px;
+}
+.sabs-cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
+.sabs-cal-month { font-family: 'Instrument Serif', serif; font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.01em; }
+.sabs-cal-nav {
+  font-family: 'Archivo', sans-serif; font-size: 16px; background: none;
+  border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+  width: 38px; height: 38px; cursor: pointer; color: #141915;
+}
+.sabs-cal-nav:hover { border-color: #141915; }
+.sabs-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.sabs-cal-wd { text-align: center; font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); padding: 6px 0; }
+.sabs-cal-cell {
+  min-height: 58px; border-radius: 12px; padding: 8px 10px; box-sizing: border-box;
+  background: transparent; border: 1.5px solid rgba(20,25,21,0.08);
+}
+.sabs-cal-cell.blank { border-color: transparent; }
+.sabs-cal-cell.has-due { background: rgba(47,211,160,0.16); border-color: rgba(14,140,100,0.4); }
+.sabs-cal-cell.today { border-color: #141915; }
+.sabs-cal-day { font-size: 13.5px; color: #141915; }
+.sabs-cal-cell.has-due .sabs-cal-day, .sabs-cal-cell.today .sabs-cal-day { font-weight: 700; }
+.sabs-cal-due { font-size: 10px; letter-spacing: 0.03em; color: #0A6B4D; margin-top: 4px; line-height: 1.3; }
+.sabs-cal-list { border-top: 1px solid rgba(20,25,21,0.12); margin-top: 24px; }
+.sabs-cal-row {
+  display: grid; grid-template-columns: 110px 1fr auto; gap: 24px; align-items: center;
+  padding: 18px 4px; border-bottom: 1px solid rgba(20,25,21,0.1);
+}
+.sabs-cal-date { font-size: 12.5px; letter-spacing: 0.04em; color: #B8541F; }
+.sabs-cal-name { font-weight: 700; font-size: 16px; }
+.sabs-cal-kind { font-size: 11.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); margin-top: 3px; }
+.sabs-cal-none { text-align: center; font-size: 13px; color: rgba(20,25,21,0.45); padding: 28px 0 8px; }
+
+@media (max-width: 900px) {
+  .sabs-cal-card { padding: 20px 14px 18px; }
+  .sabs-cal-cell { min-height: 44px; padding: 5px 6px; }
+  .sabs-cal-due { font-size: 9px; }
+  .sabs-cal-row { grid-template-columns: 1fr auto; }
+  .sabs-cal-date { grid-column: 1 / -1; }
+}

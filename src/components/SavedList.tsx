@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect, useMemo, lazy, Suspense } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
-import { formatDeadline, showToast, getToday, prefersReducedMotion } from '../lib/utils.ts';
+import { showToast, getToday, prefersReducedMotion, generateSlug } from '../lib/utils.ts';
 import { getScholarshipStatus as getStatus } from '../hooks/useItems.ts';
 import type { ScholarshipWithMeta, ProgramWithMeta } from '../hooks/useItems.ts';
+import { sendEvent } from '../lib/events.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
 
 const DeadlineCalendar = lazy(() => import('./DeadlineCalendar.tsx'));
@@ -66,260 +67,116 @@ function RemovableItem({ onRemove, children }: RemovableItemProps) {
   return <div ref={wrapperRef} className="h-full">{children(remove)}</div>;
 }
 
-interface SavedScholarshipCardProps {
-  s: ScholarshipWithMeta;
+/** Filled-star remove button shared by both card types. */
+function RemoveButton({ cardRef, onUnsave, label }: {
+  cardRef: React.RefObject<HTMLDivElement | null>;
   onUnsave: () => void;
-}
-
-function SavedScholarshipCard({ s, onUnsave }: SavedScholarshipCardProps) {
-  const status = getStatus(s);
-  const isClosed = status === 'closed';
-  const isUpcoming = status === 'future';
-  const cardRef = useRef<HTMLDivElement>(null);
+  label: string;
+}) {
   const bmkRef = useRef<HTMLButtonElement>(null);
-
-  const today = getToday();
-  const daysLeft = status === 'active' && s.deadline
-    ? Math.ceil((new Date(s.deadline + 'T00:00:00').getTime() - today.getTime()) / 86400000)
-    : null;
-  const deadlineSoon = daysLeft !== null && daysLeft <= 30;
-
-  const statusLabel = isClosed ? 'Closed' : isUpcoming ? 'Coming Soon' : deadlineSoon ? 'Closing Soon' : 'Active';
-  const statusColor = isClosed
-    ? 'var(--text-faint)'
-    : isUpcoming
-      ? '#3b82f6'
-      : deadlineSoon
-        ? 'var(--color-warning)'
-        : 'var(--brand)';
-
-  const deadlineLabel = isUpcoming ? 'Opens' : 'Deadline';
-  const deadlineValue = isUpcoming
-    ? (formatDeadline(s.openDate) || 'TBA')
-    : formatDeadline(s.deadline);
-  const deadlineColor = isClosed
-    ? 'var(--text-faint)'
-    : isUpcoming
-      ? '#3b82f6'
-      : deadlineSoon
-        ? 'var(--color-warning)'
-        : 'var(--text-secondary)';
-
-  const statusBarBg = isClosed
-    ? 'var(--text-faint)'
-    : isUpcoming
-      ? '#3b82f6'
-      : deadlineSoon
-        ? 'var(--color-warning)'
-        : 'var(--brand)';
-
   return (
-    <div
-      ref={cardRef}
-      className="card h-full"
-      style={{
-        opacity: isClosed ? 0.5 : isUpcoming ? 0.8 : undefined,
-        paddingLeft: 22, paddingRight: 18, paddingTop: 18, paddingBottom: 18,
-        position: 'relative',
+    <button
+      ref={bmkRef}
+      type="button"
+      onClick={() => {
+        if (cardRef.current?.dataset.removing) return;
+        if (!prefersReducedMotion()) {
+          bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
+        }
+        navigator.vibrate?.(12);
+        showToast('Removed from saved');
+        animateCardRemove(cardRef.current, onUnsave);
       }}
+      aria-label={label}
+      className="sabl-save on"
     >
-      {/* Left status bar */}
-      <div style={{
-        position: 'absolute', left: 0, top: 12, bottom: 12, width: 3,
-        borderRadius: 2, background: statusBarBg,
-        boxShadow: status === 'active' ? `0 0 8px ${statusBarBg}` : 'none',
-      }} />
-
-      {/* Card body */}
-      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        {/* Header: status chip + bookmark */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 10 }}>
-          <span style={{
-            display: 'inline-flex', alignItems: 'center', gap: 6,
-            fontSize: 11, fontWeight: 600, letterSpacing: '0.04em',
-            textTransform: 'uppercase', color: statusColor,
-          }}>
-            <span className={status === 'active' ? 'status-dot-active' : undefined} style={{
-              width: 6, height: 6, borderRadius: '50%',
-              background: statusColor, flexShrink: 0,
-              boxShadow: status === 'active' ? `0 0 6px ${statusColor}` : 'none',
-            }} />
-            {statusLabel}
-          </span>
-          <button
-            ref={bmkRef}
-            onClick={() => {
-              if (cardRef.current?.dataset.removing) return;
-              if (!prefersReducedMotion()) {
-                bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
-              }
-              navigator.vibrate?.(12);
-              showToast('Removed from saved');
-              animateCardRemove(cardRef.current, onUnsave);
-            }}
-            aria-label="Remove bookmark"
-            style={{
-              width: 34, height: 34, borderRadius: 10, flexShrink: 0,
-              border: '1px solid rgba(var(--brand-rgb),0.4)',
-              background: 'var(--brand-dim)',
-              color: 'var(--brand)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', transition: 'all 150ms',
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-            </svg>
-          </button>
-        </div>
-
-        {/* Title + org */}
-        <div style={{ flex: 1 }}>
-          <h3 style={{
-            fontSize: 16, fontWeight: 700, letterSpacing: '-0.02em',
-            lineHeight: 1.25, marginBottom: 4,
-            color: isClosed ? 'var(--text-faint)' : 'var(--text-primary)',
-          }}>
-            {s.title}
-          </h3>
-          <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.4, marginBottom: 0 }}>
-            {s.audience}
-          </p>
-        </div>
-
-        {/* Amount + deadline */}
-        <div style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12,
-          marginTop: 14, paddingTop: 14, borderTop: '1px solid var(--border-subtle)',
-        }}>
-          <div>
-            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3, color: 'var(--text-faint)' }}>Award</p>
-            <p style={{
-              fontSize: 22, fontWeight: 800, letterSpacing: '-0.03em',
-              lineHeight: 1.1, fontVariantNumeric: 'tabular-nums',
-              color: isClosed ? 'var(--text-faint)' : 'var(--brand)',
-            }}>
-              {s.amount}
-            </p>
-          </div>
-          <div>
-            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3, color: 'var(--text-faint)' }}>{deadlineLabel}</p>
-            <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em', fontVariantNumeric: 'tabular-nums', color: deadlineColor }}>
-              {deadlineValue}
-            </p>
-            {status === 'active' && daysLeft !== null && daysLeft <= 60 && (
-              <span style={{
-                fontSize: 10, marginTop: 3, display: 'block', fontWeight: 600,
-                color: daysLeft <= 7 ? 'var(--color-urgent)' : daysLeft <= 30 ? 'var(--color-warning)' : 'var(--text-faint)',
-              }}>
-                {daysLeft === 0 ? 'Ends today' : daysLeft === 1 ? '1 day left' : `${daysLeft} days left`}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Category tag */}
-        {s.category && (
-          <div style={{ marginTop: 12 }}>
-            <span style={{
-              display: 'inline-flex', padding: '3px 8px', borderRadius: 6,
-              fontSize: 11, fontWeight: 600,
-              background: 'var(--bg-subtle)', color: 'var(--text-secondary)',
-              border: '0.5px solid var(--border-card)',
-            }}>
-              {s.category}
-            </span>
-          </div>
-        )}
-      </div>
-    </div>
+      ★
+    </button>
   );
 }
 
-interface SavedProgramCardProps {
-  p: ProgramWithMeta;
-  onUnsave: () => void;
+function shortDate(iso: string): string {
+  return new Date(iso + 'T00:00:00')
+    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-function SavedProgramCard({ p, onUnsave }: SavedProgramCardProps) {
+function ScholarshipDaysChip({ s }: { s: ScholarshipWithMeta }) {
+  const status = getStatus(s);
+  if (status === 'closed') return <span className="sabl-days neutral">CLOSED</span>;
+  if (status === 'future') {
+    return <span className="sabl-days neutral">{s.openDate ? `OPENS ${shortDate(s.openDate).toUpperCase()}` : 'OPENING SOON'}</span>;
+  }
+  if (!s.deadline) return <span className="sabl-days neutral">ROLLING</span>;
+  const days = Math.max(0, Math.round((new Date(s.deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
+  const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
+  return <span className={`sabl-days${days <= 7 ? ' urgent' : ''}`}>{label}</span>;
+}
+
+function ProgramDaysChip({ p }: { p: ProgramWithMeta }) {
+  if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') {
+    return <span className="sabl-days neutral">ROLLING</span>;
+  }
+  const days = Math.max(0, Math.round((new Date(p.deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
+  const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
+  return <span className={`sabl-days${days <= 7 ? ' urgent' : ''}`}>{label}</span>;
+}
+
+function SavedScholarshipCard({ s, onUnsave }: { s: ScholarshipWithMeta; onUnsave: () => void }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const bmkRef = useRef<HTMLButtonElement>(null);
-
+  const status = getStatus(s);
   return (
-    <div ref={cardRef} className="card h-full" style={{ paddingLeft: 22, paddingRight: 18, paddingTop: 18, paddingBottom: 18, position: 'relative' }}>
-      <div style={{
-        position: 'absolute', left: 0, top: 12, bottom: 12, width: 3,
-        borderRadius: 2, background: '#a78bfa',
-      }} />
-      <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8, marginBottom: 10 }}>
-          {p.category && (
-            <span style={{
-              display: 'inline-flex', padding: '2px 8px', borderRadius: 6,
-              fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
-              background: 'rgba(167,139,250,0.12)', color: '#a78bfa',
-              border: '0.5px solid rgba(167,139,250,0.3)',
-            }}>
-              {p.category}
-            </span>
-          )}
-          <button
-            ref={bmkRef}
-            onClick={() => {
-              if (cardRef.current?.dataset.removing) return;
-              if (!prefersReducedMotion()) {
-                bmkRef.current?.animate(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
-              }
-              navigator.vibrate?.(12);
-              showToast('Removed from saved');
-              animateCardRemove(cardRef.current, onUnsave);
-            }}
-            aria-label="Remove bookmark"
-            style={{
-              width: 34, height: 34, borderRadius: 10, flexShrink: 0,
-              border: '1px solid rgba(var(--brand-rgb),0.4)',
-              background: 'var(--brand-dim)', color: 'var(--brand)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', transition: 'all 150ms', marginLeft: 'auto',
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-            </svg>
-          </button>
-        </div>
-
-        <div style={{ flex: 1 }}>
-          <h3 style={{ fontSize: 16, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.25, marginBottom: 4, color: 'var(--text-primary)' }}>
-            {p.name}
-          </h3>
-          {p.provider && (
-            <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-              {p.provider}
-            </p>
+    <div ref={cardRef} className="sabl-card h-full">
+      <div className="sabl-card-top">
+        <span className="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
+        <ScholarshipDaysChip s={s} />
+      </div>
+      <a href={`/scholarships/${generateSlug(s.title)}`} className="sabl-name">{s.title}</a>
+      <div className="sabl-amount">{s.amount}</div>
+      {s.audience && <div className="sabl-blurb">{s.audience}</div>}
+      <div className="sabl-card-foot">
+        <span className="sabl-due">
+          {s.deadline ? `DUE ${shortDate(s.deadline).toUpperCase()}` : 'NO FIXED DEADLINE'}
+        </span>
+        <div className="sabl-card-actions">
+          <RemoveButton cardRef={cardRef} onUnsave={onUnsave} label="Remove bookmark" />
+          {status === 'active' && s.url && (
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
+              className="sabl-apply"
+              onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
+            >Apply →</a>
           )}
         </div>
-
-        {(p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing') && (
-          <div style={{ marginTop: 14, paddingTop: 14, borderTop: '1px solid var(--border-subtle)' }}>
-            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3, color: 'var(--text-faint)' }}>Deadline</p>
-            <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-secondary)', fontVariantNumeric: 'tabular-nums' }}>
-              {formatDeadline(p.deadline)}
-            </p>
-          </div>
-        )}
       </div>
     </div>
   );
 }
 
-function EmptyState({ href, label }: { href: string; label: string }) {
+function SavedProgramCard({ p, onUnsave }: { p: ProgramWithMeta; onUnsave: () => void }) {
+  const cardRef = useRef<HTMLDivElement>(null);
   return (
-    <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-medium text-sm text-secondary">
-      <span>None saved yet.</span>
-      <a href={href} className="text-xs font-semibold text-brand hover:opacity-75 transition-opacity">
-        {label} →
-      </a>
+    <div ref={cardRef} className="sabl-card h-full">
+      <div className="sabl-card-top">
+        <span className="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
+        <ProgramDaysChip p={p} />
+      </div>
+      <a href={`/programs/${generateSlug(p.name)}`} className="sabl-name">{p.name}</a>
+      {p.provider && <div className="sabl-org" style={{ margin: '10px 0 0' }}>{p.provider.toUpperCase()}</div>}
+      {p.description && <div className="sabl-blurb" style={{ marginTop: 14 }}>{p.description}</div>}
+      <div className="sabl-card-foot">
+        <span className="sabl-due">
+          {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
+            ? `DUE ${shortDate(p.deadline).toUpperCase()}`
+            : p.deadline === 'Ongoing' ? 'ROLLING INTAKE' : 'DEADLINE TBA'}
+        </span>
+        <div className="sabl-card-actions">
+          <RemoveButton cardRef={cardRef} onUnsave={onUnsave} label="Remove bookmark" />
+          <a href={`/programs/${generateSlug(p.name)}`} className="sabl-apply">Details →</a>
+        </div>
+      </div>
     </div>
   );
 }
@@ -327,13 +184,12 @@ function EmptyState({ href, label }: { href: string; label: string }) {
 function SavedListSkeleton() {
   return (
     <div>
-      <div style={{ height: 52, width: 120, borderRadius: 8, background: 'var(--bg-subtle)', marginBottom: 8 }} className="animate-pulse" />
-      <div style={{ height: 18, width: 100, borderRadius: 6, background: 'var(--bg-subtle)', marginBottom: 24 }} className="animate-pulse" />
-      <div style={{ height: 38, width: 160, borderRadius: 10, background: 'var(--bg-subtle)', marginBottom: 28 }} className="animate-pulse" />
-      <div style={{ height: 14, width: 90, borderRadius: 4, background: 'var(--bg-subtle)', marginBottom: 16 }} className="animate-pulse" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        {[0, 1].map(i => (
-          <div key={i} className="card animate-pulse" style={{ height: 180 }} />
+      <div style={{ height: 16, width: 130, borderRadius: 6, background: 'rgba(20,25,21,0.08)', marginBottom: 16 }} className="animate-pulse" />
+      <div style={{ height: 64, width: 220, borderRadius: 10, background: 'rgba(20,25,21,0.08)', marginBottom: 20 }} className="animate-pulse" />
+      <div style={{ height: 16, width: 260, borderRadius: 6, background: 'rgba(20,25,21,0.08)', marginBottom: 40 }} className="animate-pulse" />
+      <div className="sabl-grid">
+        {[0, 1, 2].map(i => (
+          <div key={i} className="animate-pulse" style={{ height: 220, borderRadius: 16, background: 'rgba(20,25,21,0.06)' }} />
         ))}
       </div>
     </div>
@@ -371,8 +227,9 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
   }, [initialPrograms, savedProgramIds]);
 
   const totalCount = savedScholarships.length + savedPrograms.length;
+  const empty = totalCount === 0;
 
-  if (!mounted) return <SavedListSkeleton />;
+  if (!mounted) return <div className="sabl-page"><SavedListSkeleton /></div>;
 
   function unsaveScholarship(id: number) {
     const next = toggleSaved(id);
@@ -384,106 +241,92 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
     setSavedProgramIds([...next]);
   }
 
-  return (
-    <div>
-      {/* Page header */}
-      <h1 style={{
-        margin: '0 0 6px',
-        fontSize: 'clamp(30px, 5vw, 52px)',
-        fontWeight: 800, letterSpacing: '-0.04em',
-        color: 'var(--text-primary)', lineHeight: 1,
-      }}>
-        Saved
-      </h1>
-      <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 20, fontVariantNumeric: 'tabular-nums' }}>
-        {totalCount} {totalCount === 1 ? 'item' : 'items'} bookmarked
-      </p>
+  const countLine = empty
+    ? '0 items bookmarked — your shortlist lives here.'
+    : `${totalCount} ${totalCount === 1 ? 'item' : 'items'} bookmarked — ${savedScholarships.length} scholarship${savedScholarships.length === 1 ? '' : 's'}, ${savedPrograms.length} program${savedPrograms.length === 1 ? '' : 's'}.`;
 
-      {/* View toggle */}
-      <div style={{
-        display: 'flex', gap: 4, padding: 3, borderRadius: 10,
-        border: '1px solid var(--border-card)',
-        width: 'fit-content', marginBottom: 28,
-        background: 'var(--bg-subtle)',
-      }}>
-        {(['list', 'calendar'] as const).map((k) => (
-          <button
-            key={k}
-            onClick={() => setView(k)}
-            className={`saved-tab${view === k ? ' active' : ''}`}
-          >
-            {k.charAt(0).toUpperCase() + k.slice(1)}
-          </button>
-        ))}
+  return (
+    <div className="sabl-page">
+      {/* Title row */}
+      <div className="sabl-title-row">
+        <div>
+          <div className="sabl-mono sabl-eyebrow">YOUR SHORTLIST</div>
+          <h1 className="sabl-h1">Saved</h1>
+          <p className="sabl-desc tnum">{countLine}</p>
+        </div>
+        <div className="sabs-toggle" role="group" aria-label="View">
+          {(['list', 'calendar'] as const).map(k => (
+            <button
+              key={k}
+              type="button"
+              onClick={() => setView(k)}
+              className={`sabs-toggle-btn${view === k ? ' on' : ''}`}
+              aria-pressed={view === k}
+            >
+              {k.charAt(0).toUpperCase() + k.slice(1)}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {view === 'calendar' ? (
+      {empty ? (
+        <div className="sabl-empty" style={{ marginTop: 56 }}>
+          <div className="sabl-mono sabs-empty-count">◦ 0 BOOKMARKS</div>
+          <div className="sabl-empty-title">Nothing saved yet.</div>
+          <div className="sabl-empty-sub" style={{ maxWidth: 420, margin: '0 auto 30px' }}>
+            Bookmark scholarships and programs to track their deadlines in one place.
+          </div>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="/scholarships" className="sabm-btn-accent">Browse scholarships</a>
+            <a href="/programs" className="sabm-btn-outline" style={{ textDecoration: 'none', display: 'inline-block' }}>Browse programs</a>
+          </div>
+        </div>
+      ) : view === 'calendar' ? (
         <Suspense fallback={
-          <div className="card p-5">
-            <div className="flex items-center justify-between mb-5">
-              <div className="h-3 w-32 rounded-full bg-subtle animate-pulse" />
-              <div className="h-7 w-28 rounded-lg bg-subtle animate-pulse" />
-            </div>
-            <div className="grid grid-cols-7 gap-y-3 mt-3">
+          <div className="sabs-cal-card" style={{ marginTop: 48 }}>
+            <div className="animate-pulse" style={{ height: 34, width: 180, borderRadius: 8, background: 'rgba(20,25,21,0.08)', margin: '0 auto 26px' }} />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6 }}>
               {Array.from({ length: 35 }).map((_, i) => (
-                <div key={i} className="h-5 w-5 mx-auto rounded-full bg-subtle animate-pulse" style={{ opacity: 0.4 + (i % 3) * 0.2 }} />
+                <div key={i} className="animate-pulse" style={{ height: 58, borderRadius: 12, background: 'rgba(20,25,21,0.05)', opacity: 0.4 + (i % 3) * 0.2 }} />
               ))}
             </div>
           </div>
         }>
           <DeadlineCalendar scholarships={savedScholarships} programs={savedPrograms} />
         </Suspense>
-      ) : savedScholarships.length === 0 && savedPrograms.length === 0 ? (
-        <div className="empty-state">
-          <span className="ico empty-bounce" aria-hidden="true">🔖</span>
-          <p className="font-semibold text-primary mb-2">Nothing saved yet</p>
-          <p className="text-sm text-secondary mb-6 max-w-sm mx-auto">Bookmark scholarships and programs to track their deadlines in one place.</p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <a href="/scholarships" className="empty-clear" style={{ textDecoration: 'none' }}>Browse scholarships</a>
-            <a href="/programs" className="empty-clear" style={{ textDecoration: 'none', background: 'var(--brand-dim)', color: 'var(--brand)', border: '1px solid var(--brand-border)' }}>Browse programs</a>
-          </div>
-        </div>
       ) : (
-        <div className="space-y-10">
-          <section>
-            <h2 className="eyebrow mb-4">
-              <span className="ebdot" aria-hidden="true" />
-              Scholarships
-            </h2>
-            {savedScholarships.length === 0 ? (
-              <EmptyState href="/scholarships" label="Find scholarships" />
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                {savedScholarships.map((s) => (
+        <div style={{ marginTop: 48 }}>
+          {savedScholarships.length > 0 && (
+            <>
+              <div className="sabs-section-head sabl-mono">
+                <span className="sabs-dot" style={{ background: '#2FD3A0' }} aria-hidden="true" />
+                <span>SCHOLARSHIPS — {savedScholarships.length}</span>
+              </div>
+              <div className="sabl-grid" style={{ marginBottom: 56, paddingTop: 0 }}>
+                {savedScholarships.map(s => (
                   <RemovableItem key={s.id} onRemove={() => unsaveScholarship(s.id)}>
-                    {(triggerRemove) => (
-                      <SavedScholarshipCard s={s} onUnsave={triggerRemove} />
-                    )}
+                    {(triggerRemove) => <SavedScholarshipCard s={s} onUnsave={triggerRemove} />}
                   </RemovableItem>
                 ))}
               </div>
-            )}
-          </section>
+            </>
+          )}
 
-          <section>
-            <h2 className="eyebrow mb-4">
-              <span className="ebdot" style={{ background: '#a78bfa' }} aria-hidden="true" />
-              Research Programs
-            </h2>
-            {savedPrograms.length === 0 ? (
-              <EmptyState href="/programs" label="Find programs" />
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                {savedPrograms.map((p) => (
+          {savedPrograms.length > 0 && (
+            <>
+              <div className="sabs-section-head sabl-mono">
+                <span className="sabs-dot" style={{ background: '#B8541F' }} aria-hidden="true" />
+                <span>RESEARCH PROGRAMS — {savedPrograms.length}</span>
+              </div>
+              <div className="sabl-grid" style={{ paddingTop: 0 }}>
+                {savedPrograms.map(p => (
                   <RemovableItem key={p.id} onRemove={() => unsaveProgram(p.id)}>
-                    {(triggerRemove) => (
-                      <SavedProgramCard p={p} onUnsave={triggerRemove} />
-                    )}
+                    {(triggerRemove) => <SavedProgramCard p={p} onUnsave={triggerRemove} />}
                   </RemovableItem>
                 ))}
               </div>
-            )}
-          </section>
+            </>
+          )}
         </div>
       )}
     </div>

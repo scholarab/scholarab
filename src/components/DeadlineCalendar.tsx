@@ -79,7 +79,7 @@ export default function DeadlineCalendar({ scholarships, programs }: Props) {
   }, []);
 
   const [month, setMonth] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
-  const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [added, setAdded] = useState(false);
 
   const deadlineMap = useMemo(() => {
     const map = new Map<string, DeadlineItem[]>();
@@ -119,108 +119,107 @@ export default function DeadlineCalendar({ scholarships, programs }: Props) {
     return `${year}-${String(mon+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
   }
 
-  const selectedItems: DeadlineItem[] = selectedDay ? (deadlineMap.get(selectedDay) ?? []) : [];
   const monthLabel = month.toLocaleString('en-CA', { month: 'long', year: 'numeric' });
-  const monthHasDeadline = cells.some(d => d !== null && deadlineMap.has(dayStr(d)));
+
+  // Every deadline in the displayed month, in day order
+  const monthDeadlines = useMemo(() => {
+    const out: { date: string; item: DeadlineItem }[] = [];
+    for (const d of cells) {
+      if (d === null) continue;
+      const ds = dayStr(d);
+      for (const item of deadlineMap.get(ds) ?? []) out.push({ date: ds, item });
+    }
+    return out;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cells, deadlineMap, year, mon]);
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-xs font-semibold uppercase tracking-widest text-tertiary">Deadline Calendar</h2>
+    <div style={{ marginTop: 48 }}>
+      {/* Toolbar */}
+      <div className="sabs-cal-toolbar">
+        <div className="sabs-section-head sabl-mono" style={{ borderTop: 'none', padding: 0 }}>
+          <span className="sabs-dot" style={{ background: '#2FD3A0' }} aria-hidden="true" />
+          <span>DEADLINE CALENDAR</span>
+        </div>
         <button
-          onClick={() => downloadICS(scholarships, programs)}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors text-secondary hover:text-primary"
-          style={{ background: 'var(--bg-subtle)', border: '0.5px solid var(--border-card)' }}
+          type="button"
+          onClick={() => { downloadICS(scholarships, programs); setAdded(true); }}
+          className="sabs-cal-add"
         >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-          Add to Calendar
+          {added ? '✓ Added to calendar' : 'Add to calendar'}
         </button>
       </div>
 
-      <div className="card p-5">
-        <div className="flex items-center justify-between mb-5">
+      <div className="sabs-cal-card">
+        <div className="sabs-cal-head">
           <button
-            onClick={() => { setMonth(new Date(year, mon - 1, 1)); setSelectedDay(null); }}
-            className="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-subtle transition-colors"
+            type="button"
+            onClick={() => setMonth(new Date(year, mon - 1, 1))}
+            className="sabs-cal-nav"
             aria-label="Previous month"
-          >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M10 12L6 8l4-4"/></svg>
-          </button>
-          <span className="text-sm font-semibold text-primary">{monthLabel}</span>
+          >←</button>
+          <div className="sabs-cal-month">{monthLabel}</div>
           <button
-            onClick={() => { setMonth(new Date(year, mon + 1, 1)); setSelectedDay(null); }}
-            className="w-8 h-8 flex items-center justify-center rounded-full text-secondary hover:bg-subtle transition-colors"
+            type="button"
+            onClick={() => setMonth(new Date(year, mon + 1, 1))}
+            className="sabs-cal-nav"
             aria-label="Next month"
-          >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 12l4-4-4-4"/></svg>
-          </button>
+          >→</button>
         </div>
 
-        <div className="grid grid-cols-7 mb-1">
-          {['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => (
-            <div key={d} className="text-center text-xs font-medium text-tertiary py-1">{d}</div>
+        <div className="sabs-cal-grid" style={{ marginBottom: 8 }}>
+          {['SUN','MON','TUE','WED','THU','FRI','SAT'].map(d => (
+            <div key={d} className="sabl-mono sabs-cal-wd">{d}</div>
           ))}
         </div>
 
-        <div className="grid grid-cols-7 gap-y-1">
+        <div className="sabs-cal-grid">
           {cells.map((d, i) => {
-            if (d === null) return <div key={i} />;
+            if (d === null) return <div key={i} className="sabs-cal-cell blank" />;
             const ds = dayStr(d);
             const items = deadlineMap.get(ds);
-            const isToday    = ds === todayStr;
-            const isSelected = ds === selectedDay;
-            const isPast     = new Date(ds + 'T00:00:00') < today;
+            const isToday = ds === todayStr;
             return (
-              <button
+              <div
                 key={i}
-                onClick={() => items && setSelectedDay(isSelected ? null : ds)}
-                className="flex flex-col items-center gap-0.5 py-1 rounded-lg transition-colors"
-                style={{
-                  cursor: items ? 'pointer' : 'default',
-                  background: isSelected ? 'var(--brand-dim)' : isToday ? 'var(--bg-subtle)' : undefined,
-                  outline: isToday ? '1px solid var(--brand-border)' : undefined,
-                }}
+                className={`sabs-cal-cell${items ? ' has-due' : ''}${isToday ? ' today' : ''}`}
                 aria-label={items ? `${ds}: ${items.length} deadline${items.length > 1 ? 's' : ''}` : undefined}
               >
-                <span className="text-xs font-medium"
-                  style={{ color: isSelected ? 'var(--brand)' : isPast ? 'var(--text-faint)' : 'var(--text-primary)' }}>
-                  {d}
-                </span>
+                <div className="sabs-cal-day">{d}</div>
                 {items && (
-                  <span style={{
-                    width: 5, height: 5, borderRadius: '50%', flexShrink: 0,
-                    background: 'var(--brand)',
-                    opacity: isPast ? 0.4 : 1,
-                  }} />
+                  <div className="sabl-mono sabs-cal-due">{items.length} DUE</div>
                 )}
-              </button>
+              </div>
             );
           })}
         </div>
 
-        {selectedDay && selectedItems.length > 0 && (
-          <div className="mt-4 pt-4 border-t border-subtle space-y-2">
-            <p className="text-xs font-semibold text-tertiary uppercase tracking-widest mb-3">
-              {new Date(selectedDay + 'T00:00:00').toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' })}
-            </p>
-            {selectedItems.map((item, i) => (
-              <a key={i} href={item.url} target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg transition-colors hover:bg-subtle"
-                style={{ border: '0.5px solid var(--border-card)' }}>
-                <div className="min-w-0">
-                  <p className="text-sm font-medium text-primary truncate">{item.title}</p>
-                  <p className="text-xs text-tertiary mt-0.5">{item.type === 'scholarship' ? item.amount : 'Research Program'}</p>
+        {monthDeadlines.length > 0 ? (
+          <div className="sabs-cal-list">
+            {monthDeadlines.map(({ date, item }, i) => (
+              <div key={i} className="sabs-cal-row">
+                <div className="sabl-mono sabs-cal-date">
+                  {new Date(date + 'T00:00:00').toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric' }).toUpperCase()}
                 </div>
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 12l4-4-4-4"/></svg>
-              </a>
+                <div>
+                  <div className="sabs-cal-name">{item.title}</div>
+                  <div className="sabl-mono sabs-cal-kind">
+                    {item.type === 'scholarship' ? `SCHOLARSHIP${item.amount ? ' — ' + item.amount.toUpperCase() : ''}` : 'RESEARCH PROGRAM'}
+                  </div>
+                </div>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  referrerPolicy="no-referrer"
+                  className="sabl-apply"
+                  style={{ fontSize: 13.5 }}
+                >Apply →</a>
+              </div>
             ))}
           </div>
-        )}
-
-        {!monthHasDeadline && (
-          <p className="text-center text-xs text-tertiary mt-4">No deadlines this month</p>
+        ) : (
+          <div className="sabl-mono sabs-cal-none">No deadlines this month.</div>
         )}
       </div>
     </div>
