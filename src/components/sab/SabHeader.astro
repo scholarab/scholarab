@@ -81,21 +81,23 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
   }
   .sabh-cta:hover { background: #F2F0E9; color: #0B1512; }
 
+  /* fishback2026.com campaign-ticker parity: Manrope 600 14px, solid band,
+     45px tall, 60px between items, 30s linear loop, 1px underline offset 3px */
   .sabh-ticker-band {
-    border-top: 1px solid rgba(242,240,233,0.12);
-    background: rgba(0,0,0,0.25);
+    background: #0E2A20;
     overflow: hidden;
   }
   .sabh-ticker {
-    display: inline-flex; white-space: nowrap; padding: 12px 0;
-    font-size: 14px; color: rgba(242,240,233,0.75);
-    animation: sabh-tick 32s linear infinite; will-change: transform;
+    display: flex; white-space: nowrap; align-items: center; height: 45px;
+    font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600;
+    color: #FFFFFF;
+    animation: sabh-tick 30s linear infinite; will-change: transform;
   }
   .sabh-ticker-half { display: inline-flex; }
-  .sabh-ticker-item { display: inline-flex; gap: 6px; padding-right: 64px; }
+  .sabh-ticker-item { display: inline-flex; gap: 5px; padding-right: 60px; }
   .sabh-ticker-item a {
-    color: #2FD3A0; font-weight: 600; text-decoration: underline;
-    text-underline-offset: 3px;
+    color: #2FD3A0; text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 3px;
   }
   .sabh-ticker-item a:hover { color: #F2F0E9; }
   @keyframes sabh-tick {
