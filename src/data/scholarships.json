@@ -5890,5 +5890,41 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 179,
+    "title": "China-Alberta Award for Excellence in Chinese",
+    "amount": "$500",
+    "deadline": "2026-04-30",
+    "audience": "Alberta Grade 12 students who have completed Chinese Language and Culture 10 and 20",
+    "url": "https://www.alberta.ca/china-alberta-award-for-excellence-in-chinese",
+    "category": "Academic",
+    "lastVerified": "2026-07",
+    "region": "Alberta",
+    "active": false,
+    "description": "The China-Alberta Award for Excellence in Chinese recognizes Alberta Grade 12 students who excel in the Chinese Language and Culture Program. Applicants must have completed Chinese Language and Culture 10 and 20 and be currently enrolled in or have completed level 30, with a minimum 80% average across all courses and a minimum 90% average in Chinese Language and Culture 10 and 20. The application includes a two-paragraph essay on how the program will apply to the student's future studies or career. Only Canadian citizens, permanent residents, or protected persons who are Alberta residents (with at least one parent residing in Alberta) are eligible; visa students do not qualify.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "language"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
