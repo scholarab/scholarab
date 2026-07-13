@@ -1,24 +1,34 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import DetailLayout from '../../components/DetailLayout.astro';
+import SabHeader from '../../components/sab/SabHeader.astro';
+import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships } from '../../lib/data-loader';
 import { generateSlug, parseAmount } from '../../lib/utils.ts';
-import { SCHOLARSHIP_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.ts';
-import DeadlineAlert from '../../components/DeadlineAlert.astro';
 
 export async function getStaticPaths() {
   const scholarships = await loadScholarships();
-  return scholarships.map(s => ({
+  // Neighbor order matches the directory's default sort: earliest deadline first
+  const ordered = [...scholarships].sort((a, b) => {
+    const am = a.deadline ? new Date(a.deadline + 'T00:00:00').getTime() : Infinity;
+    const bm = b.deadline ? new Date(b.deadline + 'T00:00:00').getTime() : Infinity;
+    return am - bm || a.id - b.id;
+  });
+  return ordered.map((s, i) => ({
     params: { slug: generateSlug(s.title) },
-    props: { scholarship: s },
+    props: {
+      scholarship: s,
+      position: `LISTING ${i + 1} OF ${ordered.length}`,
+      prevSlug: generateSlug(ordered[(i - 1 + ordered.length) % ordered.length]!.title),
+      nextSlug: generateSlug(ordered[(i + 1) % ordered.length]!.title),
+    },
   }));
 }
 
-const { scholarship } = Astro.props;
+const { scholarship, position, prevSlug, nextSlug } = Astro.props;
 const slug = generateSlug(scholarship.title);
 
 function formatDate(str: string | null): string {
-  if (!str) return 'N/A';
+  if (!str) return 'TBA';
   const d = new Date(str + 'T00:00:00');
   return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 }
@@ -27,10 +37,14 @@ const todayDate = new Date();
 todayDate.setHours(0, 0, 0, 0);
 const openDate     = new Date((scholarship.openDate || '1970-01-01') + 'T00:00:00');
 const deadlineDate = scholarship.deadline ? new Date(scholarship.deadline + 'T00:00:00') : null;
-const status = todayDate < openDate ? 'future' : (deadlineDate && todayDate > deadlineDate) ? 'closed' : 'active';
-
-const rawBadge = CATEGORY_BADGE[scholarship.category ?? ''] || DEFAULT_BADGE;
-const badge    = { ...rawBadge, label: scholarship.category || '' };
+const status = todayDate < openDate
+  ? 'future'
+  : (deadlineDate && todayDate > deadlineDate)
+    ? 'closed'
+    : deadlineDate ? 'active' : 'tba';
+const daysLeft = status === 'active' && deadlineDate
+  ? Math.max(0, Math.ceil((deadlineDate.getTime() - todayDate.getTime()) / 86400000))
+  : null;
 
 const regionStr    = !scholarship.region || scholarship.region === 'National' ? '' : ` in ${scholarship.region}`;
 const description  = `The ${scholarship.title} offers ${scholarship.amount} to ${scholarship.audience}${regionStr}. Deadline: ${formatDate(scholarship.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
@@ -59,7 +73,32 @@ const breadcrumbJson = {
   ],
 };
 
-const ctaLabel = scholarship.applyViaGuidance ? 'Learn More →' : 'Apply Now →';
+const facts = [
+  { label: 'REGION', value: scholarship.region || 'Alberta-wide' },
+  { label: 'DEADLINE', value: formatDate(scholarship.deadline) },
+  { label: 'CATEGORY', value: scholarship.category || 'General' },
+  { label: 'AMOUNT', value: scholarship.amount },
+  ...(scholarship.openDate ? [{ label: 'OPENS', value: formatDate(scholarship.openDate) }] : []),
+];
+
+// The data has no per-listing application steps; these stay generic and true.
+const deadlineClause = scholarship.deadline ? ` before ${formatDate(scholarship.deadline)}` : '';
+const steps = scholarship.applyViaGuidance
+  ? [
+      'Talk to your school guidance counsellor about this award.',
+      'Ask about internal school deadlines, which can be earlier than the listed one.',
+      `Submit your application through your school${deadlineClause}.`,
+    ]
+  : [
+      'Read the full requirements on the official website.',
+      'Prepare your documents and any references it asks for.',
+      `Submit through the official website${deadlineClause}.`,
+    ];
+
+// About text mirrors the data description; scholarship.description exists in the
+// JSON but not in the Scholarship type, so read it defensively.
+const about = (scholarship as { description?: string }).description
+  ?? `${scholarship.title} is an Alberta award for high school students.`;
 ---
 
 <Layout
@@ -70,87 +109,67 @@ const ctaLabel = scholarship.applyViaGuidance ? 'Learn More →' : 'Apply Now �
   ogUrl={canonical}
   canonical={canonical}
   currentPath="/scholarships"
-  containerClass="max-w-2xl"
+  hideChrome
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
 
-  <DetailLayout
-    badge={badge}
-    title={scholarship.title}
-    titleMb="mb-1"
-    amount={scholarship.amount}
-    amountStyle="clamp(20px, 3vw, 28px)"
-    url={scholarship.url}
-    status={status}
-    openDate={scholarship.openDate ? formatDate(scholarship.openDate) : undefined}
-    backHref="/scholarships"
-    backLabel="Back to Scholarships"
-    ctaLabel={ctaLabel}
-    itemId={scholarship.id}
-    itemType="scholarship"
-    lastVerified={scholarship.lastVerified}
-  >
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-subtle pt-6">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Region</p>
-        <p class="text-sm font-medium text-primary">{scholarship.region || 'Alberta-wide'}</p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Deadline</p>
-        <p class="text-sm font-medium text-primary">{formatDate(scholarship.deadline)}</p>
-      </div>
-      {scholarship.openDate && (
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Opens</p>
-          <p class="text-sm font-medium text-primary">{formatDate(scholarship.openDate)}</p>
-        </div>
-      )}
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Category</p>
-        <p class="text-sm font-medium text-primary">{scholarship.category || 'General'}</p>
-      </div>
+  <div id="sab-detail" class="sabp">
+    <div class="sabp-header">
+      <SabHeader currentPath="/scholarships" />
     </div>
 
-    {scholarship.audience && (
-      <div class="mb-6 p-4 rounded-xl bg-subtle border border-subtle">
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Eligibility</p>
-        <p class="text-sm text-secondary">{scholarship.audience}</p>
-      </div>
-    )}
+    <SabDetail
+      itemType="scholarship"
+      itemId={scholarship.id}
+      typeLabel="SCHOLARSHIP"
+      tag={scholarship.category ? scholarship.category.toUpperCase() : null}
+      name={scholarship.title}
+      subline={`${(scholarship.region || 'Alberta').toUpperCase()} · VERIFIED BY HAND`}
+      status={status}
+      daysLeft={daysLeft}
+      dueLong={formatDate(scholarship.deadline)}
+      opensLabel={scholarship.openDate ? formatDate(scholarship.openDate) : null}
+      backHref="/scholarships"
+      backLabel="Back to Scholarships"
+      position={position}
+      prevHref={`/scholarships/${prevSlug}`}
+      nextHref={`/scholarships/${nextSlug}`}
+      facts={facts}
+      eligibility={scholarship.audience}
+      about={about}
+      notes={scholarship.notes}
+      steps={steps}
+      valueLabel="AWARD VALUE"
+      valueBig={scholarship.amount}
+      valueNote={scholarship.applyViaGuidance ? 'Applications go through your school.' : null}
+      ctaLabel={scholarship.applyViaGuidance ? 'Learn more' : 'Apply now'}
+      url={scholarship.url}
+      canRemind={status === 'active' && daysLeft !== null && daysLeft > 0}
+      canonical={canonical}
+    />
 
-    {scholarship.notes ? (
-      <div class="mb-6">
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-2">Notes</p>
-        <p class="text-sm leading-relaxed text-secondary"><!--email_off-->{scholarship.notes}<!--/email_off--></p>
+    <!-- Slim dark footer -->
+    <div class="sabp-footer">
+      <div class="sabp-footer-inner">
+        <div class="sabp-footer-logo">
+          <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+          </svg>
+          <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
+        </div>
+        <span class="sabp-footer-note"><a href="/">Back home</a></span>
       </div>
-    ) : (
-      <div class="mb-6">
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-2">About</p>
-        <p class="text-sm leading-relaxed text-secondary">
-          {scholarship.region === 'National'
-            ? `${scholarship.title} is a national award open to eligible students across Canada, including Alberta.`
-            : scholarship.region === 'Alberta-wide'
-              ? `${scholarship.title} is an Alberta-wide award available to eligible high school students across the province.`
-              : scholarship.region
-                ? `${scholarship.title} is a ${scholarship.region}-based award for local high school students.`
-                : `${scholarship.title} is an Alberta award for high school students.`
-          }
-          {' '}
-          {scholarship.applyViaGuidance
-            ? 'Applications go through your school guidance counsellor — ask about internal school deadlines.'
-            : 'Applications are submitted directly through the official website.'}
-        </p>
-      </div>
-    )}
-
-    {scholarship.applyViaGuidance && (
-      <div class="mb-6">
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-2">How to Apply</p>
-        <p class="text-sm leading-relaxed text-secondary">Via your school guidance counsellor</p>
-      </div>
-    )}
-
-    <DeadlineAlert itemType="scholarship" itemId={scholarship.id} deadline={scholarship.deadline} />
-  </DetailLayout>
+    </div>
+  </div>
 </Layout>
+
+<style is:global>
+  /* The detail design is fixed light regardless of site theme */
+  body:has(#sab-detail) { background: #FAF7F0; }
+</style>

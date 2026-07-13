@@ -1,22 +1,30 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import DetailLayout from '../../components/DetailLayout.astro';
+import SabHeader from '../../components/sab/SabHeader.astro';
+import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadPrograms } from '../../lib/data-loader';
 import { generateSlug } from '../../lib/utils.ts';
-import { PROGRAM_BADGES as CATEGORY_BADGE, DEFAULT_BADGE } from '../../lib/badges.ts';
-import DeadlineAlert from '../../components/DeadlineAlert.astro';
 
 export async function getStaticPaths() {
   const programs = await loadPrograms();
-  return programs.map(p => ({
+  // Neighbor order matches the directory's default sort: earliest deadline
+  // first, then TBA / Ongoing at the end
+  const ms = (d: string | null) =>
+    d && d !== 'TBA' && d !== 'Ongoing' ? new Date(d + 'T00:00:00').getTime() : Infinity;
+  const ordered = [...programs].sort((a, b) => ms(a.deadline) - ms(b.deadline) || a.id - b.id);
+  return ordered.map((p, i) => ({
     params: { slug: generateSlug(p.name) },
-    props: { program: p },
+    props: {
+      program: p,
+      position: `LISTING ${i + 1} OF ${ordered.length}`,
+      prevSlug: generateSlug(ordered[(i - 1 + ordered.length) % ordered.length]!.name),
+      nextSlug: generateSlug(ordered[(i + 1) % ordered.length]!.name),
+    },
   }));
 }
 
-const { program } = Astro.props;
+const { program, position, prevSlug, nextSlug } = Astro.props;
 const slug = generateSlug(program.name);
-
 
 function formatDate(str: string | null): string {
   if (!str) return 'TBA';
@@ -27,12 +35,14 @@ function formatDate(str: string | null): string {
 
 const todayDate = new Date();
 todayDate.setHours(0, 0, 0, 0);
-const isClosed = program.deadline && program.deadline !== 'TBA' && program.deadline !== 'Ongoing'
-  ? todayDate > new Date(program.deadline + 'T00:00:00')
-  : false;
-
-const rawBadge = CATEGORY_BADGE[program.category ?? ''] || DEFAULT_BADGE;
-const badge    = { ...rawBadge, emoji: program.emoji || rawBadge.emoji, label: program.category ?? '' };
+const hasDate = !!program.deadline && program.deadline !== 'TBA' && program.deadline !== 'Ongoing';
+const deadlineDate = hasDate ? new Date(program.deadline + 'T00:00:00') : null;
+const status = deadlineDate
+  ? (todayDate > deadlineDate ? 'closed' : 'active')
+  : program.deadline === 'Ongoing' ? 'ongoing' : 'tba';
+const daysLeft = status === 'active' && deadlineDate
+  ? Math.max(0, Math.ceil((deadlineDate.getTime() - todayDate.getTime()) / 86400000))
+  : null;
 
 const desc = program.description ?? '';
 const metaDescription = desc.length > 160
@@ -47,9 +57,7 @@ const ldJson = {
   'name': program.name,
   'description': metaDescription,
   'url': canonical,
-  ...(program.deadline && program.deadline !== 'TBA' && program.deadline !== 'Ongoing'
-    ? { 'applicationDeadline': program.deadline }
-    : {}),
+  ...(hasDate ? { 'applicationDeadline': program.deadline } : {}),
   'provider': { '@type': 'Organization', 'name': program.provider },
 };
 
@@ -62,6 +70,29 @@ const breadcrumbJson = {
     { '@type': 'ListItem', 'position': 3, 'name': program.name, 'item': canonical },
   ],
 };
+
+const dueLong = status === 'ongoing' ? 'Ongoing — join anytime' : formatDate(program.deadline);
+
+const facts = [
+  { label: 'DURATION', value: program.duration || 'Varies' },
+  { label: 'GRADES', value: program.grades || 'High school' },
+  { label: 'LOCATION', value: program.location || 'Alberta' },
+  { label: 'DEADLINE', value: dueLong },
+];
+
+// The data has no per-listing application steps; these stay generic and true.
+const deadlineClause = hasDate ? ` before ${formatDate(program.deadline)}` : '';
+const steps = [
+  'Review the details and eligibility on the official program site.',
+  'Prepare the application materials it asks for.',
+  status === 'ongoing'
+    ? 'Apply or sign up on the official site. You can join anytime.'
+    : `Apply on the official site${deadlineClause}.`,
+];
+
+const valueNote = program.paid && program.stipend
+  ? program.stipend
+  : [program.duration, program.grades].filter(Boolean).join(' · ') || null;
 ---
 
 <Layout
@@ -72,56 +103,65 @@ const breadcrumbJson = {
   ogUrl={canonical}
   canonical={canonical}
   currentPath="/programs"
-  containerClass="max-w-2xl"
+  hideChrome
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
 
-  <DetailLayout
-    badge={badge}
-    title={program.name}
-    titleMb="mb-1"
-    subtitle={program.provider ?? undefined}
-    amount={program.paid && program.stipend ? program.stipend : undefined}
-    amountStyle="clamp(20px, 3vw, 28px)"
-    url={program.url}
-    status={isClosed ? 'closed' : 'active'}
-    backHref="/programs"
-    backLabel="Back to Programs"
-    ctaLabel="Learn More →"
-    itemId={program.id}
-    itemType="program"
-    lastVerified={program.lastVerified}
-  >
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 border-t border-subtle pt-6">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Duration</p>
-        <p class="text-sm font-medium text-primary">{program.duration}</p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Grades</p>
-        <p class="text-sm font-medium text-primary">{program.grades}</p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Location</p>
-        <p class="text-sm font-medium text-primary">{program.location}</p>
-      </div>
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Deadline</p>
-        <p class="text-sm font-medium text-primary">{formatDate(program.deadline)}</p>
-      </div>
+  <div id="sab-detail" class="sabp">
+    <div class="sabp-header">
+      <SabHeader currentPath="/programs" />
     </div>
 
-    <div class="mb-6 p-4 rounded-xl bg-subtle border border-subtle">
-      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-1">Eligibility</p>
-      <p class="text-sm text-secondary">{program.eligibility}</p>
-    </div>
+    <SabDetail
+      itemType="program"
+      itemId={program.id}
+      typeLabel="PROGRAM"
+      tag={program.category ? program.category.toUpperCase() : null}
+      name={program.name}
+      subline={program.provider ? `RUN BY ${program.provider.toUpperCase()}` : 'ALBERTA · VERIFIED BY HAND'}
+      status={status}
+      daysLeft={daysLeft}
+      dueLong={dueLong}
+      backHref="/programs"
+      backLabel="Back to Programs"
+      position={position}
+      prevHref={`/programs/${prevSlug}`}
+      nextHref={`/programs/${nextSlug}`}
+      facts={facts}
+      eligibility={program.eligibility}
+      about={program.description}
+      steps={steps}
+      valueLabel="THIS PROGRAM IS"
+      valueBig={program.paid ? 'Paid' : 'Free'}
+      valueNote={valueNote}
+      ctaLabel="Learn more"
+      url={program.url}
+      canRemind={status === 'active' && daysLeft !== null && daysLeft > 0}
+      canonical={canonical}
+    />
 
-    <div class="mb-6">
-      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-2">About</p>
-      <p class="text-sm leading-relaxed text-secondary">{program.description}</p>
+    <!-- Slim dark footer -->
+    <div class="sabp-footer">
+      <div class="sabp-footer-inner">
+        <div class="sabp-footer-logo">
+          <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+          </svg>
+          <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
+        </div>
+        <span class="sabp-footer-note"><a href="/">Back home</a></span>
+      </div>
     </div>
-
-    <DeadlineAlert itemType="program" itemId={program.id} deadline={program.deadline} />
-  </DetailLayout>
+  </div>
 </Layout>
+
+<style is:global>
+  /* The detail design is fixed light regardless of site theme */
+  body:has(#sab-detail) { background: #FAF7F0; }
+</style>
