@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts';
-import { getToday } from '../lib/utils.ts';
+import { getToday, showConfetti } from '../lib/utils.ts';
 import type { Scholarship, Program } from '../lib/data-loader.ts';
 import { PUBLIC_PAGE_SIZE } from '../lib/constants';
 
@@ -93,8 +93,9 @@ export function useScholarships(initialScholarships: ScholarshipWithMeta[]) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleToggleSave = useCallback((id: number) => {
+  const handleToggleSave = useCallback((id: number, originEl?: Element | null) => {
     const newSaved = toggleSaved(id);
+    if (newSaved.includes(id)) showConfetti(originEl);
     setSavedIds([...newSaved]);
   }, []);
 
@@ -265,8 +266,9 @@ export function usePrograms(initialPrograms: ProgramWithMeta[]) {
     setSavedIds([...getSavedPrograms()]);
   }, []);
 
-  const handleToggleSave = useCallback((id: number) => {
+  const handleToggleSave = useCallback((id: number, originEl?: Element | null) => {
     const newSaved = toggleSavedProgram(id);
+    if (newSaved.includes(id)) showConfetti(originEl);
     setSavedIds([...newSaved]);
   }, []);
 

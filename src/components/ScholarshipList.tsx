@@ -180,7 +180,7 @@ function ScholarshipList({ items }: Props) {
                     <button
                       type="button"
                       className={`sabl-save${saved ? ' on' : ''}`}
-                      onClick={() => handleToggleSave(s.id)}
+                      onClick={e => handleToggleSave(s.id, e.currentTarget)}
                       aria-label={saved ? `Remove ${s.title} from saved` : `Save ${s.title}`}
                       aria-pressed={saved}
                     >

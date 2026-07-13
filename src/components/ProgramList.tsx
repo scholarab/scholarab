@@ -145,7 +145,7 @@ function ProgramList({ items }: Props) {
                     <button
                       type="button"
                       className={`sabl-save${saved ? ' on' : ''}`}
-                      onClick={() => handleToggleSave(p.id)}
+                      onClick={e => handleToggleSave(p.id, e.currentTarget)}
                       aria-label={saved ? `Remove ${p.name} from saved` : `Save ${p.name}`}
                       aria-pressed={saved}
                     >
