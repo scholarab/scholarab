@@ -65,7 +65,6 @@ function ProgramList({ items }: Props) {
       {/* Title row */}
       <div className="sabl-title-row">
         <div>
-          <div className="sabl-mono sabl-eyebrow">BEYOND THE CLASSROOM — {items.length} PROGRAMS</div>
           <h1 className="sabl-h1">Research programs</h1>
           <p className="sabl-desc">
             University-run summer programs, labs, and competitions open to Alberta high school students. Some even pay you.

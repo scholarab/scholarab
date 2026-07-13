@@ -250,7 +250,6 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
       {/* Title row */}
       <div className="sabl-title-row">
         <div>
-          <div className="sabl-mono sabl-eyebrow">YOUR SHORTLIST</div>
           <h1 className="sabl-h1">Saved</h1>
           <p className="sabl-desc tnum">{countLine}</p>
         </div>

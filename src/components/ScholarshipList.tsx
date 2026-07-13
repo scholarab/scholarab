@@ -95,7 +95,6 @@ function ScholarshipList({ items }: Props) {
       {/* Title row */}
       <div className="sabl-title-row">
         <div>
-          <div className="sabl-mono sabl-eyebrow">THE DIRECTORY — {items.length} LISTINGS</div>
           <h1 className="sabl-h1">Scholarships</h1>
           <p className="sabl-desc">
             Open scholarships for Alberta high school students — verified by hand, updated weekly. If it's listed here, it's real and it's open.
