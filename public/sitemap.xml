@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.scholarab.ca/</loc><lastmod>2026-06-01</lastmod><priority>1.0</priority></url>
-  <url><loc>https://www.scholarab.ca/scholarships</loc><lastmod>2026-06-01</lastmod><priority>0.9</priority></url>
-  <url><loc>https://www.scholarab.ca/programs</loc><lastmod>2026-06-01</lastmod><priority>0.9</priority></url>
-  <url><loc>https://www.scholarab.ca/match</loc><lastmod>2026-06-01</lastmod><priority>0.9</priority></url>
-  <url><loc>https://www.scholarab.ca/about</loc><lastmod>2026-06-01</lastmod><priority>0.8</priority></url>
-  <url><loc>https://www.scholarab.ca/educators</loc><lastmod>2026-06-01</lastmod><priority>0.7</priority></url>
+  <url><loc>https://www.scholarab.ca/</loc><lastmod>2026-07-01</lastmod><priority>1.0</priority></url>
+  <url><loc>https://www.scholarab.ca/scholarships</loc><lastmod>2026-07-01</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.scholarab.ca/programs</loc><lastmod>2026-07-01</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.scholarab.ca/match</loc><lastmod>2026-07-01</lastmod><priority>0.9</priority></url>
+  <url><loc>https://www.scholarab.ca/about</loc><lastmod>2026-07-01</lastmod><priority>0.8</priority></url>
+  <url><loc>https://www.scholarab.ca/educators</loc><lastmod>2026-07-01</lastmod><priority>0.7</priority></url>
   <url><loc>https://www.scholarab.ca/scholarships/community-foundation-of-southeastern-alberta-award</loc><lastmod>2026-03-01</lastmod><priority>0.85</priority></url>
   <url><loc>https://www.scholarab.ca/scholarships/medicine-hat-college-entrance-scholarship</loc><lastmod>2026-03-01</lastmod><priority>0.85</priority></url>
   <url><loc>https://www.scholarab.ca/scholarships/kinsmen-club-of-medicine-hat-grant</loc><lastmod>2026-03-01</lastmod><priority>0.85</priority></url>
@@ -162,6 +162,7 @@
   <url><loc>https://www.scholarab.ca/scholarships/valour-canada-history-and-heritage-scholarship</loc><lastmod>2026-05-01</lastmod><priority>0.85</priority></url>
   <url><loc>https://www.scholarab.ca/scholarships/communication-contest-for-the-deaf-and-hard-of-hearing</loc><lastmod>2026-05-01</lastmod><priority>0.85</priority></url>
   <url><loc>https://www.scholarab.ca/scholarships/breakthrough-junior-challenge</loc><lastmod>2026-06-01</lastmod><priority>0.85</priority></url>
+  <url><loc>https://www.scholarab.ca/scholarships/china-alberta-award-for-excellence-in-chinese</loc><lastmod>2026-07-01</lastmod><priority>0.85</priority></url>
   <url><loc>https://www.scholarab.ca/programs/alberta-innovates-hyrs-university-of-alberta</loc><lastmod>2026-03-01</lastmod><priority>0.85</priority></url>
   <url><loc>https://www.scholarab.ca/programs/alberta-innovates-hyrs-university-of-calgary</loc><lastmod>2026-03-01</lastmod><priority>0.85</priority></url>
   <url><loc>https://www.scholarab.ca/programs/alberta-innovates-hyrs-university-of-lethbridge</loc><lastmod>2026-03-01</lastmod><priority>0.85</priority></url>

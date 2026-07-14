@@ -48,6 +48,6 @@ const programs = await loadPrograms();
 </Layout>
 
 <style is:global>
-  /* The saved design is fixed light regardless of site theme */
-  body:has(#sab-saved) { background: #FAF7F0; }
+  /* Canvas follows the theme (--sab-* tokens) */
+  body:has(#sab-saved) { background: var(--sab-canvas); }
 </style>

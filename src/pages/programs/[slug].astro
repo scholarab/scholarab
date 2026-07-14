@@ -162,6 +162,6 @@ const valueNote = program.paid && program.stipend
 </Layout>
 
 <style is:global>
-  /* The detail design is fixed light regardless of site theme */
-  body:has(#sab-detail) { background: #FAF7F0; }
+  /* Canvas follows the theme (--sab-* tokens) */
+  body:has(#sab-detail) { background: var(--sab-canvas); }
 </style>

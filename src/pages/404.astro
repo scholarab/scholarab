@@ -44,29 +44,29 @@ import SabHeader from '../components/sab/SabHeader.astro';
 </Layout>
 
 <style is:global>
-  body:has(#sab-404) { background: #FAF7F0; }
+  body:has(#sab-404) { background: var(--sab-canvas); }
 </style>
 
 <style>
   .sab404-code {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px; letter-spacing: 0.06em; color: #B8541F; margin-bottom: 14px;
+    font-size: 13px; letter-spacing: 0.06em; color: var(--sab-urgent); margin-bottom: 14px;
   }
   .sab404-h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(44px, 6vw, 68px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
-  .sab404-copy { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.65); margin: 20px 0 0; max-width: 480px; }
+  .sab404-copy { font-size: 17px; line-height: 1.6; color: rgba(var(--sab-ink-rgb),0.65); margin: 20px 0 0; max-width: 480px; }
   .sab404-actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
   .sab404-btn-accent {
     display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;
     background: #2FD3A0; color: #0B1512; padding: 13px 24px; border-radius: 100px; text-decoration: none;
   }
-  .sab404-btn-accent:hover { background: #141915; color: #FAF7F0; }
+  .sab404-btn-accent:hover { background: var(--sab-ink); color: var(--sab-on-ink); }
   .sab404-btn-outline {
     display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;
-    color: #141915; padding: 13px 24px; border-radius: 100px;
-    border: 1.5px solid rgba(20,25,21,0.3); text-decoration: none;
+    color: var(--sab-ink); padding: 13px 24px; border-radius: 100px;
+    border: 1.5px solid rgba(var(--sab-ink-rgb),0.3); text-decoration: none;
   }
-  .sab404-btn-outline:hover { border-color: #141915; color: #141915; }
+  .sab404-btn-outline:hover { border-color: var(--sab-ink); color: var(--sab-ink); }
 </style>

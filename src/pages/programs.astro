@@ -82,6 +82,6 @@ const programs = raw.map(p => ({
 </Layout>
 
 <style is:global>
-  /* The directory design is fixed light regardless of site theme */
-  body:has(#sab-programs) { background: #FAF7F0; }
+  /* Canvas follows the theme (--sab-* tokens) */
+  body:has(#sab-programs) { background: var(--sab-canvas); }
 </style>

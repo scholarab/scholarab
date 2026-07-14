@@ -69,6 +69,6 @@ const breadcrumbJson = {
 </Layout>
 
 <style is:global>
-  /* The match design is fixed light regardless of site theme */
-  body:has(#sab-match) { background: #FAF7F0; }
+  /* Canvas follows the theme (--sab-* tokens) */
+  body:has(#sab-match) { background: var(--sab-canvas); }
 </style>

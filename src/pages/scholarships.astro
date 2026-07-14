@@ -83,7 +83,7 @@ const scholarships = raw.map(s => ({
 </Layout>
 
 <style is:global>
-  /* The directory design is fixed light regardless of site theme */
-  body:has(#sab-scholarships) { background: #FAF7F0; }
+  /* Canvas follows the theme (--sab-* tokens) */
+  body:has(#sab-scholarships) { background: var(--sab-canvas); }
 </style>
 
