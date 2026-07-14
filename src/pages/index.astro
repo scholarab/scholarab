@@ -399,12 +399,23 @@ const matchGroups = [
   @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ── Dark hero ── */
-  .sab-hero { background: var(--sab-dark-band); color: #F2F0E9; position: relative; overflow: hidden; }
+  /* Fills the first viewport so no canvas sliver peeks below the fold on
+     tall/fullscreen windows; on short viewports it grows past 100svh. */
+  .sab-hero {
+    background: var(--sab-dark-band); color: #F2F0E9; position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    min-height: 100vh; min-height: 100svh;
+  }
 
   .sab-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .sab-logo-word { font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
 
-  .sab-hero-body { padding-top: 76px; position: relative; }
+  .sab-hero-body {
+    padding-top: 76px; position: relative;
+    /* Center the copy in the space left under the header/ticker */
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    width: 100%; box-sizing: border-box;
+  }
   .sab-kicker {
     display: flex; align-items: center; gap: 10px; margin-bottom: 30px;
     font-size: 13px; color: #2FD3A0; letter-spacing: 0.06em;
