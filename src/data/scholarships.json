@@ -12,7 +12,7 @@
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "The Community Foundation of Southeastern Alberta Award provides $1,000 to graduating high school seniors in Medicine Hat who demonstrate community involvement and academic achievement. This award recognizes students who have made meaningful contributions to their local community. Applicants should contact their school guidance counselor to apply.",
+    "description": "The Community Foundation of Southeastern Alberta gives $1,000 to a graduating Medicine Hat senior with a record of community involvement and solid grades. Apply through your school's guidance counsellor.",
     "eligibility": {
       "grades": [
         "12"
@@ -48,7 +48,7 @@
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
     "active": false,
-    "description": "This scholarship is awarded by Medicine Hat College to support first-year students entering the college. The $2,500 award recognizes academic achievement and helps students succeed in their post-secondary studies.",
+    "description": "Medicine Hat College's entrance scholarship for first-year students, worth $2,500 and awarded on academic standing.",
     "eligibility": {
       "grades": [
         "12"
@@ -85,7 +85,7 @@
     "region": "Medicine Hat",
     "active": false,
     "openDate": "2026-04-01",
-    "description": "The Kinsmen Club of Medicine Hat offers a $500 grant to high school students who demonstrate a strong commitment to community service and volunteerism. This award recognizes students who make a positive impact in their local community through active participation in service initiatives.",
+    "description": "A $500 grant from the Kinsmen Club of Medicine Hat for students with a real record of volunteering and service work in the city.",
     "eligibility": {
       "grades": [
         "10",
@@ -124,7 +124,7 @@
     "region": "Medicine Hat",
     "active": true,
     "notes": "Family must be a South Country Co-op member with minimum $2,000 in purchases. Apply by mail or email to j.doll@sccoop.ca.",
-    "description": "South Country Co-op offers a $1,000 scholarship to high school students whose families are members of South Country Co-op with at least $2,000 in purchases. This award recognizes student achievement within the Co-op's trading area in the Medicine Hat region. Applicants should contact j.doll@sccoop.ca or apply by mail for more information.",
+    "description": "For students whose family holds a South Country Co-op membership with at least $2,000 in purchases: a $1,000 scholarship covering the Co-op's trading area around Medicine Hat. Questions go to j.doll@sccoop.ca, and applications can be mailed in.",
     "eligibility": {
       "grades": [
         "10",
@@ -196,7 +196,7 @@
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
     "active": false,
-    "description": "RE/MAX Quest for Excellence is a $1,000 scholarship awarded by RE/MAX to graduating high school students in the Medicine Hat region who demonstrate strong leadership qualities. This award recognizes students who show promise in their community and are preparing to enter post-secondary education.",
+    "description": "RE/MAX gives $1,000 to graduating students in the Medicine Hat region heading to post-secondary, with selection weighted toward leadership.",
     "eligibility": {
       "grades": [
         "12"
@@ -233,7 +233,7 @@
     "region": "Medicine Hat",
     "active": false,
     "openDate": "2026-04-01",
-    "description": "The Medicine Hat Public School District (MHPSD) offers this $500 financial assistance award to support graduating high school students demonstrating financial need. This scholarship helps eligible MHPSD students transition to post-secondary education by providing direct financial support.",
+    "description": "A $500 award from the Medicine Hat Public School District for graduating students in the division, given on financial need.",
     "eligibility": {
       "grades": [
         "12"
@@ -269,7 +269,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": true,
-    "description": "The Alexander Rutherford Scholarship is offered to Alberta high school students who demonstrate strong academic achievement. This $2,500 award recognizes graduating seniors based on their academic averages and supports their transition to post-secondary education.",
+    "description": "Alberta's flagship high school scholarship, worth up to $2,500 depending on your averages in Grades 10 through 12. If you only apply for one thing on this site, apply for this.",
     "eligibility": {
       "grades": [
         "12"
@@ -304,7 +304,7 @@
     "region": "Medicine Hat",
     "active": false,
     "openDate": "2026-04-01",
-    "description": "This $1,000 scholarship supports high school students from Cypress County who are pursuing agriculture-related studies. It recognizes students committed to advancing their skills in the agricultural trades sector. Applicants should demonstrate interest in agriculture and be eligible to enter post-secondary agricultural programs.",
+    "description": "Cypress County puts up $1,000 for a local student entering an agriculture-related post-secondary program. A demonstrated interest in the field matters more than marks here.",
     "eligibility": {
       "grades": [
         "12"
@@ -342,7 +342,7 @@
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "The Medicine Hat Exhibition & Stampede provides this $1,000 scholarship to support local high school students pursuing careers in agriculture, trades, or who have a passion for western heritage. This award recognizes students committed to these fields and is open to graduates entering post-secondary education. Interested applicants should contact their school guidance counsellor to learn more about applying.",
+    "description": "$1,000 from the Medicine Hat Exhibition & Stampede for local graduates going into agriculture, trades, or anything tied to western heritage. Ask your guidance counsellor about applying.",
     "eligibility": {
       "grades": [
         "12"
@@ -420,7 +420,7 @@
     "region": "Alberta",
     "active": true,
     "openDate": "2026-05-01",
-    "description": "ATB Financial awards $1,500 annually to Indigenous students pursuing business or finance studies in Alberta. This award recognizes and supports Indigenous learners as they advance their education in these fields. Applicants must be Indigenous and enrolled or planning to enroll in post-secondary business or finance programs.",
+    "description": "ATB Financial awards $1,500 a year to Indigenous students in Alberta enrolled in, or heading into, post-secondary business or finance programs.",
     "eligibility": {
       "grades": [
         "12"
@@ -458,7 +458,7 @@
     "notes": "Contact ATA Local 21 at atalocal21@gmail.com to apply. For children of Elk Island Catholic Schools educators only.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "The ATA Local 21 Scholarship, offered by the Alberta Teachers' Association Local 21, provides $1,000 to recognize academic achievement. This scholarship is exclusively for children of educators employed by Elk Island Catholic Schools in the Sherwood Park, Fort Saskatchewan, Camrose, and Vegreville areas.",
+    "description": "A $1,000 scholarship from Alberta Teachers' Association Local 21, only for children of Elk Island Catholic Schools staff in the Sherwood Park, Fort Saskatchewan, Camrose, and Vegreville areas. Awarded on academic standing.",
     "eligibility": {
       "grades": [
         "12"
@@ -577,7 +577,7 @@
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "This $1,000 award is offered by Hat High School alumni to recognize graduating students from Medicine Hat High School. The scholarship celebrates academic achievement and supports students as they transition to post-secondary education. Interested applicants should contact their school guidance counsellor for application details.",
+    "description": "Hat High alumni fund this $1,000 award for a graduating MHHS student. Details come through the school, so ask your guidance counsellor.",
     "eligibility": {
       "grades": [
         "12"
@@ -655,7 +655,7 @@
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "Monsignor McCoy Catholic High School offers the Faith in Action Award to recognize graduating students who exemplify community service and faith-based values. This $500 award celebrates students who demonstrate a commitment to serving their community and living out their faith. Students should contact their school guidance counsellor to apply.",
+    "description": "Monsignor McCoy's own $500 award for a graduate whose community service reflects the school's faith values. Apply through the guidance office.",
     "eligibility": {
       "grades": [
         "12"
@@ -694,7 +694,7 @@
     "applyViaGuidance": true,
     "active": false,
     "openDate": "2026-04-01",
-    "description": "Saamis Memorial Funeral Chapel offers this $1,000 scholarship to local Medicine Hat high school students pursuing healthcare or mortuary science at the post-secondary level. This award recognizes academic achievement and commitment to caring professions. Apply through your school's guidance counsellor.",
+    "description": "Saamis Memorial Funeral Chapel funds $1,000 for a Medicine Hat graduate entering healthcare or mortuary science. Applications go through your school's guidance counsellor.",
     "eligibility": {
       "grades": [
         "12"
@@ -735,7 +735,7 @@
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "The Medicine Hat Rotary Club offers this $500 award to recognize musical talent and achievement among participants in the local Rotary Music Festival. This award celebrates students' dedication to the arts and supports their continued musical pursuits.",
+    "description": "A $500 prize from the Medicine Hat Rotary Club, awarded to a standout performer at the local Rotary Music Festival.",
     "eligibility": {
       "grades": [
         "10",
@@ -777,7 +777,7 @@
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
     "active": false,
-    "description": "The Medicine Hat Lions Club awards this $1,000 community grant to recognize students who have demonstrated a strong commitment to volunteer work in the Medicine Hat area. This award celebrates local youth who give back to their community through service and engagement.",
+    "description": "The Medicine Hat Lions Club gives $1,000 to a student with a strong volunteer record in the city.",
     "eligibility": {
       "grades": [
         "12"
@@ -850,7 +850,7 @@
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
     "active": false,
-    "description": "This $500 award recognizes top student projects at the Southeastern Alberta Regional (SEAR) Science Fair in Medicine Hat. It supports high school students pursuing excellence in STEM fields and showcasing innovative scientific research.",
+    "description": "A $500 prize for top high school projects at the Southeastern Alberta Regional Science Fair in Medicine Hat.",
     "eligibility": {
       "grades": [
         "12"
@@ -965,7 +965,7 @@
     "lastVerified": "2026-03",
     "region": "Calgary",
     "active": false,
-    "description": "This $25,000 memorial scholarship honours Kermet Archibald and Jacoba Van den Brink by supporting graduating high school students from Calgary's CBE and CCSD boards who are pursuing studies in science, health, engineering, or trades. Applicants must be entering a post-secondary institution and demonstrate commitment to these fields of study.",
+    "description": "One of the largest awards on this list: $25,000 for a graduating CBE or CCSD student in Calgary entering science, health, engineering, or trades.",
     "eligibility": {
       "grades": [
         "12"
@@ -1047,7 +1047,7 @@
     "lastVerified": "2026-03",
     "region": "Calgary",
     "active": false,
-    "description": "The Bill Gibson Bursary is a $10,000 award for graduating high school students from the Calgary area who are entering post-secondary studies. This bursary recognizes and supports students as they transition from secondary to post-secondary education.",
+    "description": "A $10,000 bursary for graduating Calgary-area students entering post-secondary studies.",
     "eligibility": {
       "grades": [
         "12"
@@ -1086,7 +1086,7 @@
     "lastVerified": "2026-03",
     "region": "Calgary",
     "active": false,
-    "description": "The Optimist Club William J. Cummer Scholarship awards $2,500 to graduating Calgary high school students who demonstrate strong community involvement. This award recognizes the value of youth engagement in their local community and is offered by the Optimist Club to support students as they transition to post-secondary education.",
+    "description": "The Optimist Club awards $2,500 to a graduating Calgary student with strong community involvement.",
     "eligibility": {
       "grades": [
         "12"
@@ -1125,7 +1125,7 @@
     "lastVerified": "2026-03",
     "region": "Calgary",
     "active": false,
-    "description": "The Calgary Flames Foundation awards $2,000 to Grade 12 students from Calgary CBE and CCSD schools who demonstrate strong leadership through community volunteering. This scholarship recognizes students committed to making a positive impact in their community.",
+    "description": "The Calgary Flames Foundation gives $2,000 to Grade 12 students at Calgary CBE and CCSD schools who lead through volunteer work.",
     "eligibility": {
       "grades": [
         "12"
@@ -1203,7 +1203,7 @@
     "lastVerified": "2026-03",
     "region": "Calgary",
     "active": false,
-    "description": "Big Brothers Big Sisters Society of Calgary offers this $1,000 scholarship to graduating high school students who demonstrate involvement in their community. This award recognizes students from Calgary's CBE and CCSD who exemplify the values of mentorship and civic engagement.",
+    "description": "$1,000 from Big Brothers Big Sisters of Calgary for graduating CBE and CCSD students active in their community. Mentorship experience counts for a lot here.",
     "eligibility": {
       "grades": [
         "12"
@@ -1242,7 +1242,7 @@
     "lastVerified": "2026-03",
     "region": "Calgary",
     "active": false,
-    "description": "The Eimer Scholarship Fund Award for Health Care supports graduating high school students in Calgary who are pursuing post-secondary education in health care fields. This $2,000 award recognizes students' commitment to careers in health and is available to eligible students from Calgary Board of Education and Calgary Catholic School District schools.",
+    "description": "The Eimer Scholarship Fund awards $2,000 to Calgary CBE and CCSD graduates entering a health care program.",
     "eligibility": {
       "grades": [
         "12"
@@ -1281,7 +1281,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "The Alex Tutschek FCPA Award recognizes Indigenous students from Alberta who demonstrate excellence and are pursuing business education at the post-secondary level. This $1,500 award celebrates Indigenous student achievement in business and supports their academic journey.",
+    "description": "A $1,500 CPA Alberta award for an Indigenous student from Alberta entering post-secondary business studies.",
     "eligibility": {
       "grades": [
         "12"
@@ -1317,7 +1317,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "CPA Alberta presents this $1,500 award to Grade 12 students across Alberta who demonstrate exceptional professionalism, integrity, and leadership. The award recognizes students who embody values important to the accounting profession and are preparing to enter post-secondary education.",
+    "description": "CPA Alberta's $1,500 award for Grade 12 students across the province, judged on professionalism, integrity, and leadership: the traits the accounting body looks for in future members.",
     "eligibility": {
       "grades": [
         "12"
@@ -1351,7 +1351,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "The David Bentley FCPA and Janet Bentley High School Excellence Award recognizes academic achievement among graduating Grade 12 students in Alberta. This $2,500 award is presented to students who demonstrate excellence in their studies, with preference given to those planning to pursue post-secondary education within Alberta.",
+    "description": "$2,500 from CPA Alberta for a graduating Grade 12 student with top marks. Preference goes to applicants staying in Alberta for post-secondary.",
     "eligibility": {
       "grades": [
         "12"
@@ -1387,7 +1387,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "CPA Alberta offers this $2,000 award to recognize and empower young women pursuing post-secondary education. The award is available to Grade 12 students in Alberta who identify as girls or women and demonstrate academic excellence. This award celebrates the achievements of female students as they transition to post-secondary studies.",
+    "description": "CPA Alberta's $2,000 award for Grade 12 students in Alberta who identify as girls or women, judged on academic standing.",
     "eligibility": {
       "grades": [
         "12"
@@ -1423,7 +1423,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "This $2,000 award recognizes Grade 12 Alberta students who demonstrate exceptional leadership and commitment to their communities through volunteer service. The Kelly & Creaghan Stepping Up in the Community Award celebrates young people making a positive difference through civic engagement and helping others.",
+    "description": "$2,000 for a Grade 12 Albertan with a serious volunteer record. The award is specifically about stepping up in your community, and the application should show it.",
     "eligibility": {
       "grades": [
         "12"
@@ -1459,7 +1459,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "The Michael Burnyeat FCPA Sparking Great Careers High School Award is offered to Grade 12 Alberta high school students entering business-focused post-secondary programs. This $1,250 award recognizes students pursuing Bachelor of Business Administration (BBA), Bachelor of Management (B.Mgmt), or Bachelor of Commerce (B.Comm) degrees at Alberta institutions. The award aims to spark great careers for aspiring business professionals.",
+    "description": "A $1,250 CPA Alberta award for Grade 12 students entering a BBA, B.Mgmt, or B.Comm program at an Alberta institution.",
     "eligibility": {
       "grades": [
         "12"
@@ -1497,7 +1497,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "The Paula Weiss & Spencer Weiss BIPOC Success Award recognizes Grade 12 students from Black, Indigenous, and People of Color backgrounds across Alberta who demonstrate strong character and leadership qualities. This $2,500 award supports BIPOC students as they transition to post-secondary education or other pursuits.",
+    "description": "$2,500 for a Grade 12 student in Alberta from a Black, Indigenous, or People of Colour background, judged on character and leadership.",
     "eligibility": {
       "grades": [
         "12"
@@ -1531,7 +1531,7 @@
     "lastVerified": "2026-03",
     "region": "National",
     "active": true,
-    "description": "The Horatio Alger Association of Canada provides scholarships to recognize students who overcome adversity and demonstrate outstanding character. Alberta high school graduating seniors with demonstrated financial need (family income under $65,000) and a minimum 65% average are eligible to apply. This award supports Canadian students entering post-secondary education.",
+    "description": "Horatio Alger Canada funds students who have come through real adversity. You need a family income under $65,000, at least a 65% average, and a story of pushing through hard circumstances. Open to graduating seniors across Canada.",
     "eligibility": {
       "grades": [
         "12"
@@ -1640,7 +1640,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": true,
-    "description": "The New Beginnings Bursary supports Alberta high school graduates as they transition to post-secondary education. This $5,000 bursary is available to students who are eligible for full-time student loan funding. It recognizes the financial needs of students beginning their post-secondary journey.",
+    "description": "A $5,000 bursary for Alberta graduates who qualify for full-time student loan funding. If you're eligible for loans, you're eligible to apply.",
     "eligibility": {
       "grades": [
         "12"
@@ -1677,7 +1677,7 @@
     "region": "National",
     "active": true,
     "openDate": "2026-09-04",
-    "description": "The Loran Scholarship is a prestigious national award recognizing academic excellence, offering $100,000 to outstanding Canadian high school students. Each school may nominate up to 3 graduating students entering post-secondary education. This award celebrates leadership and achievement among Canada's top high school performers.",
+    "description": "The Loran is Canada's largest undergraduate merit award: $100,000 over four years. Each high school can nominate up to three graduating students, and selection weighs character and leadership as heavily as marks. The interview process runs multiple rounds.",
     "eligibility": {
       "grades": [
         "12"
@@ -1750,7 +1750,7 @@
     "region": "National",
     "active": true,
     "openDate": "2026-09-03",
-    "description": "TD Scholarships for Community Leadership is offered by TD Bank to recognize Canadian high school students who demonstrate exceptional academic achievement and significant involvement in their communities. This $70,000 scholarship supports graduating seniors with a 75% or higher GPA who have made meaningful contributions through community service and leadership activities.",
+    "description": "TD's community leadership scholarship pays up to $70,000 to graduating Canadian students with at least a 75% average and a serious record of community work. One of the few big awards where what you've done matters more than your marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -1786,7 +1786,7 @@
     "lastVerified": "2026-03",
     "region": "National",
     "active": false,
-    "description": "The Terry Fox Humanitarian Award recognizes Canadian high school students who demonstrate exceptional commitment to humanitarian work and community service. This prestigious award provides up to $28,000 in funding over four years to support recipients' post-secondary education. Students are selected based on their humanitarian contributions and dedication to making a positive impact in their communities.",
+    "description": "Up to $28,000 over four years for Canadian students with a sustained record of humanitarian work. The selection committee looks for years of service, not a single project.",
     "eligibility": {
       "grades": [
         "12"
@@ -1824,7 +1824,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "The Advancing Futures Bursary provides up to $40,000 in financial support to Alberta youth aged 18–24 who have experienced government care (foster care). This award recognizes the challenges faced by young people who have been in the care system and aims to help them pursue post-secondary education and achieve their goals.",
+    "description": "Alberta pays up to $40,000 toward post-secondary for youth aged 18 to 24 who have been in government care. If you've been in foster care, this is the largest source of funding available to you in the province.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -1857,7 +1857,7 @@
     "region": "Alberta",
     "active": false,
     "notes": "For low-income, rural, and Indigenous applicants to UCalgary undergraduate programs. Award is $5,000/year renewable for up to 4 years (up to $20,000 total). Apply through UCalgary Awards Hub.",
-    "description": "The University of Calgary offers this renewable scholarship of up to $5,000 per year (up to $20,000 total over four years) to support low-income, rural, and Indigenous high school students entering UCalgary's undergraduate programs. This award recognizes the potential of students from underrepresented backgrounds pursuing STEM fields and helps make post-secondary education more accessible.",
+    "description": "UCalgary's renewable award for low-income, rural, and Indigenous students entering its undergraduate programs: up to $5,000 a year, to a maximum of $20,000 over four years, with an eye toward students headed for medicine.",
     "eligibility": {
       "grades": [
         "12"
@@ -1895,7 +1895,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "Keyera Energy offers this $6,000 scholarship to Alberta residents pursuing an oil and gas-related degree or diploma at an Alberta post-secondary institution. Named after Peter J. Renton, this award recognizes students entering their first year of study in STEM fields related to the energy sector. Applicants must be graduating high school seniors planning to attend an Alberta institution.",
+    "description": "Keyera's $6,000 scholarship, in memory of Peter J. Renton, goes to a graduating Albertan starting an oil and gas related degree or diploma at an Alberta institution.",
     "eligibility": {
       "grades": [
         "12"
@@ -1967,7 +1967,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "MindFuel Science Scholarships support Alberta high school graduates who are pursuing first-year studies in science or science education at an Alberta post-secondary institution. This $5,000 award recognizes students committed to advancing scientific knowledge and education in the province.",
+    "description": "MindFuel awards $5,000 to Alberta graduates starting first-year science or science education at an Alberta post-secondary institution.",
     "eligibility": {
       "grades": [
         "12"
@@ -2039,7 +2039,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "The Calgary Stampede awards this $2,000 scholarship to Grade 12 students in Southern Alberta who demonstrate excellence in western art. This award celebrates artistic talent inspired by the traditions and culture of the Canadian West, supporting students as they prepare for post-secondary education.",
+    "description": "The Calgary Stampede gives $2,000 to a Grade 12 student in Southern Alberta for western art: work rooted in the culture and traditions of the Canadian West.",
     "eligibility": {
       "grades": [
         "12"
@@ -2111,7 +2111,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "The Anna & John Kolesar Memorial Scholarship supports Alberta high school graduates who are first-generation university students pursuing an Education degree. This $1,500 award recognizes students committed to becoming educators and opening doors for their families through higher education.",
+    "description": "$1,500 for an Alberta graduate who would be the first in their family to attend university and is entering an Education degree.",
     "eligibility": {
       "grades": [
         "12"
@@ -2183,7 +2183,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "This $1,000 scholarship supports Alberta high school students pursuing a career in the trades through enrollment in the Registered Apprenticeship Program (RAP) or CTS apprenticeship pathway. The award recognizes students committed to developing skilled trades expertise and preparing for a rewarding apprenticeship career.",
+    "description": "$1,000 for Alberta students in the Registered Apprenticeship Program or a CTS apprenticeship pathway. Money for students already working toward a trade ticket while still in high school.",
     "eligibility": {
       "grades": [
         "11",
@@ -2221,7 +2221,7 @@
     "region": "Alberta",
     "active": true,
     "openDate": "2026-11-10",
-    "description": "Canadian Natural Resources offers a $3,000 scholarship to support students pursuing technical or trades training in the oil and gas sector at accredited Alberta institutions. This award recognizes students committed to careers in this essential industry and helps offset the costs of specialized training programs.",
+    "description": "Canadian Natural Resources puts $3,000 toward technical or trades training in the oil and gas sector at an accredited Alberta institution.",
     "eligibility": {
       "grades": [
         "12"
@@ -2259,7 +2259,7 @@
     "lastVerified": "2026-03",
     "region": "National",
     "active": false,
-    "description": "The Bayer Fund offers this scholarship to Canadian high school graduates pursuing agriculture, food science, or culinary programs at post-secondary institutions. This $1,500 award recognizes students entering these fields and supports their transition to higher education in these important industries.",
+    "description": "The Bayer Fund's $1,500 award for Canadian graduates entering agriculture, food science, or culinary programs.",
     "eligibility": {
       "grades": [
         "12"
@@ -2331,7 +2331,7 @@
     "region": "Edmonton",
     "lastVerified": "2026-03",
     "active": false,
-    "description": "This $1,500 scholarship is awarded to Grade 12 students from Edmonton Public Schools who demonstrate honours standing and have received conditional acceptance to the University of Alberta. The Catherine and Robert Povaschuk Scholarship recognizes academic excellence and supports students as they transition to post-secondary education.",
+    "description": "$1,500 for an Edmonton Public Schools Grade 12 student with honours standing and conditional acceptance to the University of Alberta.",
     "eligibility": {
       "grades": [
         "12"
@@ -2405,7 +2405,7 @@
     "region": "Edmonton",
     "lastVerified": "2026-03",
     "active": false,
-    "description": "The Esther and Peter Cunliffe Scholarship awards $1,000 to graduating Grade 12 students in Edmonton Public Schools who demonstrate academic excellence. This award supports students as they transition to post-secondary education.",
+    "description": "One of several Edmonton Public Schools awards for graduating students: $1,000, based on academic standing.",
     "eligibility": {
       "grades": [
         "12"
@@ -2441,7 +2441,7 @@
     "region": "Edmonton",
     "lastVerified": "2026-03",
     "active": false,
-    "description": "The Grace Elaine Campbell Scholarship recognizes academic achievement among graduating high school students in Edmonton. This $1,000 award is available to Grade 12 students enrolled in Edmonton Public Schools who demonstrate excellence in their studies.",
+    "description": "$1,000 for a Grade 12 student in Edmonton Public Schools with strong marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -2513,7 +2513,7 @@
     "region": "Edmonton",
     "lastVerified": "2026-03",
     "active": false,
-    "description": "This $1,000 scholarship, offered through the Edmonton Public Schools community, recognizes Grade 12 students who demonstrate strong educational commitment. It aims to support graduating students as they transition to post-secondary education.",
+    "description": "$1,000 through the Edmonton Public Schools community for a Grade 12 student whose record shows genuine commitment to their education.",
     "eligibility": {
       "grades": [
         "12"
@@ -2549,7 +2549,7 @@
     "region": "Edmonton",
     "lastVerified": "2026-03",
     "active": false,
-    "description": "LeRoy Warden & Associates offers this $1,000 scholarship to graduating Grade 12 students in Edmonton Public Schools. This award recognizes academic achievement and supports students as they transition to post-secondary education.",
+    "description": "LeRoy Warden & Associates funds $1,000 for a graduating Edmonton Public Schools student, awarded on academics.",
     "eligibility": {
       "grades": [
         "12"
@@ -2585,7 +2585,7 @@
     "region": "Edmonton",
     "lastVerified": "2026-03",
     "active": false,
-    "description": "The Winspear Fund provides scholarships to support students from Edmonton and Northern Alberta who are pursuing advanced study in classical music. These awards are designed to help talented musicians continue their arts education at a post-secondary level. Applicants should demonstrate serious commitment to classical music study.",
+    "description": "Winspear Fund money for advanced classical music study, open to students from Edmonton and Northern Alberta. A serious performance background is expected.",
     "eligibility": {
       "grades": [
         "12"
@@ -2623,7 +2623,7 @@
     "region": "Edmonton",
     "lastVerified": "2026-03",
     "active": false,
-    "description": "The Ranald and Vera Shean Memorial Scholarships support students aged 12 and older in Edmonton and Northern Alberta who are pursuing violin or piano study. These $8,000 awards recognize dedication to musical excellence in classical string and keyboard instruments. Applicants should demonstrate commitment to their musical development and a passion for performance.",
+    "description": "The Shean Memorial awards, worth $8,000, go to violin and piano students aged 12 and older in Edmonton and Northern Alberta with a serious classical background.",
     "eligibility": {
       "grades": [
         "10",
@@ -2664,7 +2664,7 @@
     "lastVerified": "2026-03",
     "active": false,
     "notes": "Open to students with the surname \"Mah\" of any background. Offered by the Mah Society of Edmonton. Contact the Society directly for application details.",
-    "description": "The Mah Society of Edmonton offers this $1,000 centennial scholarship to students entering post-secondary education in Canada who carry the surname \"Mah.\" This award celebrates the contributions of the Mah community and is open to students of any background and academic achievement level.",
+    "description": "The Mah Society of Edmonton gives $1,000 to a student entering post-secondary anywhere in Canada who carries the surname Mah. That is the whole requirement: any background, no minimum average.",
     "eligibility": {
       "grades": [
         "12"
@@ -2737,7 +2737,7 @@
     "region": "Lethbridge",
     "lastVerified": "2026-03",
     "active": false,
-    "description": "The Lethbridge School Division offers this $1,000 scholarship to recognize and support students who demonstrate innovation, creativity, and entrepreneurial thinking. This award celebrates students who show initiative and original problem-solving within their school community. Eligible applicants must be students attending schools within the Lethbridge School Division.",
+    "description": "Lethbridge School Division's ICE award (innovation, creativity, entrepreneurship) pays $1,000 to a division student who shows initiative and original problem-solving.",
     "eligibility": {
       "grades": [
         "10",
@@ -2958,7 +2958,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "This $3,000 scholarship recognizes Alberta youth curlers who demonstrate academic excellence and competitive curling participation. It is awarded to students eligible to compete in U20 sanctioned curling competitions during the academic year.",
+    "description": "$3,000 for an Alberta youth curler with strong marks who is eligible for U20 sanctioned competition during the academic year. Named after Hec Gervais, one of Alberta curling's greats.",
     "eligibility": {
       "grades": [
         "12"
@@ -2995,7 +2995,7 @@
     "region": "Lethbridge",
     "notes": "Three bursaries of $1,500 each. Financial need considered. Only for students entering first year of studies.",
     "active": false,
-    "description": "The Lethbridge County Bursary Program offers three awards of $1,500 each to support first-year post-secondary students from Lethbridge County. This bursary considers financial need as part of its selection process. Students must be residents of Lethbridge County and entering their first year of post-secondary studies to be eligible.",
+    "description": "Lethbridge County gives out three $1,500 bursaries a year to county residents entering their first year of post-secondary. Financial need is part of the selection.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -3029,7 +3029,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "active": false,
-    "description": "The MindFuel Scholarship supports Alberta students entering their first year of an undergraduate applied science or science education program. This $2,500 award recognizes students pursuing STEM fields and preparing for careers in science and technology. Eligible applicants must be graduating high school seniors preparing to enroll in a post-secondary institution.",
+    "description": "MindFuel's $2,500 award for graduating Alberta seniors entering first-year applied science or science education.",
     "eligibility": {
       "grades": [
         "12"
@@ -3185,7 +3185,7 @@
     "region": "Alberta",
     "notes": "One scholarship awarded annually. Created in legacy of author and former Lieutenant Governor Dr. Grant MacEwan.",
     "active": false,
-    "description": "This annual $3,000 scholarship honours the legacy of Dr. Grant MacEwan, a renowned author and former Lieutenant Governor of Alberta. It recognizes Alberta high school students aged 25 or younger who demonstrate exceptional talent and clear aspirations in literary arts. One award is given each year to a deserving student pursuing their passion in writing and literature.",
+    "description": "$3,000 a year for an Alberta writer aged 25 or under, named for Grant MacEwan, author and former Lieutenant Governor of Alberta. One award is given annually, and the jury wants to see real literary ambition.",
     "eligibility": {
       "grades": [
         "12"
@@ -3222,7 +3222,7 @@
     "region": "Alberta",
     "notes": "One scholarship awarded annually by the Alberta Foundation for the Arts.",
     "active": false,
-    "description": "The Alberta Foundation for the Arts awards an annual $7,000 scholarship to Alberta students who demonstrate exceptional talent and commitment to film and video arts. Open to students aged 25 or younger, this award recognizes emerging artists pursuing goals in visual storytelling and multimedia creation.",
+    "description": "The Alberta Foundation for the Arts gives $7,000 annually to an Alberta student aged 25 or under working in film and video.",
     "eligibility": {
       "grades": [
         "12"
@@ -3409,7 +3409,7 @@
     "region": "National",
     "notes": "Canada's largest non-governmental funder of Indigenous post-secondary students. Multiple award streams available.",
     "active": false,
-    "description": "Indspire offers bursaries and scholarships for First Nations, Inuit, and Métis students pursuing post-secondary education across Canada, including trades and apprenticeships. As Canada's largest non-governmental funder of Indigenous post-secondary students, Indspire supports multiple award streams designed to help Indigenous students achieve their educational goals. Eligible students should connect with Indspire to learn more about specific award opportunities and application requirements.",
+    "description": "Indspire is the largest non-governmental funder of Indigenous post-secondary students in Canada, with multiple bursary and scholarship streams for First Nations, Inuit, and Métis students, including trades and apprenticeships. Worth applying to more than one stream.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -3555,7 +3555,7 @@
     "region": "Alberta",
     "active": false,
     "openDate": "2026-08-01",
-    "description": "The Mildred Rowe Weston Memorial Scholarship awards $1,000 to Alberta high school students who have completed at least three courses through ADLC (Alberta Distance Learning Centre). This scholarship recognizes academic achievement among students utilizing distance learning education in Alberta.",
+    "description": "$1,000 for an Alberta student who has completed at least three courses through the Alberta Distance Learning Centre.",
     "eligibility": {
       "grades": [
         "12"
@@ -3590,7 +3590,7 @@
     "region": "Alberta",
     "active": false,
     "openDate": "2026-08-01",
-    "description": "The Tiessen Foundation Broadcast Scholarship provides $750 to Alberta high school graduates pursuing full-time post-secondary studies in broadcasting. This award recognizes students committed to careers in the broadcast media field.",
+    "description": "The Tiessen Foundation gives $750 to an Alberta graduate entering full-time post-secondary studies in broadcasting.",
     "eligibility": {
       "grades": [
         "12"
@@ -3741,7 +3741,7 @@
     "region": "National",
     "notes": "One of the few merit awards specifically for current high school students (Grades 10–12). Must reapply annually. Not open to children of ATCO employees.",
     "active": true,
-    "description": "ATCO offers this $750 merit award annually to self-identified First Nations, Inuit, or Métis high school students in Canada who demonstrate academic excellence. Open to students currently enrolled full-time in Grades 10–12, this award recognizes Indigenous student achievement and requires annual reapplication. Children of ATCO employees are not eligible.",
+    "description": "ATCO's $750 merit award for self-identified First Nations, Inuit, or Métis students in Grades 10 to 12 anywhere in Canada, based on marks. You can win it in more than one year, but you have to reapply each time. Children of ATCO employees can't enter.",
     "eligibility": {
       "grades": [
         "10",
@@ -3818,7 +3818,7 @@
     "region": "National",
     "notes": "Covers certifications and skills courses — lifeguarding, first aid, coding, language, graphic design, coach certification, and more. Open to current high school students. Closes when 500 applications are reached.",
     "active": true,
-    "description": "RBC Ignite offers $1,500 to support Canadians ages 16–20 pursuing job-ready skills and certifications. This award covers a wide range of practical courses including lifeguarding, first aid, coding, language training, graphic design, and coaching certification. Current high school students are eligible to apply.",
+    "description": "RBC Ignite pays $1,500 toward job-ready skills and certifications for Canadians aged 16 to 20: lifeguarding, first aid, coding, language training, graphic design, coaching certification, and more. Current high school students can apply.",
     "eligibility": {
       "grades": [
         "10",
@@ -4039,7 +4039,7 @@
     "notes": "Up to 16 scholars selected per year. Fully funded: tuition, fees, living stipend, travel, internships, mentorship, and seminars. Open to 400+ Arts & Science programs (excluding Commerce). Applications open September 11, 2026.",
     "active": true,
     "openDate": "2026-09-11",
-    "description": "The Wolf Scholars Program is a fully funded national scholarship for outstanding students entering the University of Toronto's Faculty of Arts & Science (St. George campus). Selected scholars receive comprehensive support including tuition, fees, living stipend, travel, internships, mentorship, and seminars. Up to 16 scholars are selected annually from Canadian citizens and permanent residents with a 90–100% average across 400+ Arts & Science programs (excluding Commerce).",
+    "description": "A fully funded route through U of T's Faculty of Arts & Science on the St. George campus: tuition, fees, living stipend, travel, internships, mentorship, and seminars. Up to 16 scholars a year, drawn from Canadian citizens and permanent residents with a 90 to 100% average. Commerce is excluded.",
     "eligibility": {
       "grades": [
         "12"
@@ -4113,7 +4113,7 @@
     "applyViaGuidance": false,
     "notes": "30 bursaries of $6,000 awarded annually. Based on financial need and scholastic ability. First-year students given priority. Deadline is Feb 1 at noon.",
     "url": "https://amhebf.com/",
-    "description": "The Alberta Masonic Higher Education Bursary is awarded by the Alberta Masonic Foundation to support first-year students entering post-secondary education. Worth $6,000, this bursary recognizes both scholastic ability and demonstrated financial need, with 30 awards distributed annually to Alberta and NWT residents.",
+    "description": "The Alberta Masonic Foundation gives out 30 bursaries of $6,000 each year to first-year post-secondary students from Alberta and the NWT, weighing both marks and financial need.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -4231,7 +4231,7 @@
     "applyViaGuidance": false,
     "notes": "8 scholarships of $2,000 each. Recipients must be registered full-time at an accredited Alberta post-secondary institution and actively participating on a university or junior football team.",
     "url": "https://footballalberta.ab.ca/",
-    "description": "Football Alberta offers eight $2,000 scholarships annually to graduating Grade 12 tackle football players who are continuing their athletic career at the post-secondary level. Recipients must be registered full-time at an accredited Alberta post-secondary institution and actively playing on a university or junior football team. This award recognizes student-athletes who have demonstrated excellence in high school football and are committed to advancing their sport in Alberta.",
+    "description": "Eight $2,000 scholarships a year for graduating Grade 12 tackle football players continuing to play at an accredited Alberta post-secondary institution. You need to be registered full-time and on a university or junior roster.",
     "eligibility": {
       "grades": [
         "12"
@@ -4271,7 +4271,7 @@
     "applyViaGuidance": true,
     "notes": "One award per ASAA zone (8 zones total). Must have participated in at least one ASAA-sanctioned sport and coached or officiated during high school. Contact your school's career centre.",
     "url": "https://schoolsportalberta.ca/association/recognition/awards",
-    "description": "The ASAA Pay It Forward Scholarship recognizes Grade 12 Alberta student-athletes who have given back to their school and community by coaching or officiating sports. With one award of $500 available per ASAA zone, this scholarship celebrates students who have participated in ASAA-sanctioned sports while contributing to others' athletic development.",
+    "description": "For Grade 12 student-athletes who coach or officiate: one $500 award per ASAA zone, for students who played ASAA-sanctioned sports and gave time back to younger athletes.",
     "eligibility": {
       "grades": [
         "12"
@@ -4352,7 +4352,7 @@
     "applyViaGuidance": true,
     "notes": "25 awards of $2,005 each. Eligibility flows from the Premier's Citizenship Award nomination — only nominated students can apply. Contact your school administration.",
     "url": "https://www.alberta.ca/premiers-citizenship-award",
-    "description": "The Alberta Centennial Award provides $2,005 to Alberta high school graduates who have been nominated for the Premier's Citizenship Award and are enrolling in post-secondary education. This award recognizes exceptional citizenship and community contribution among graduating high school students across the province. Eligible students must be nominated through the Premier's Citizenship Award program; applicants should contact their school administration for nomination details.",
+    "description": "An oddly specific $2,005 (the award marks Alberta's 2005 centennial) for graduates nominated for the Premier's Citizenship Award who are enrolling in post-secondary. Nomination comes through your school, so start with your administration.",
     "eligibility": {
       "grades": [
         "12"
@@ -4433,7 +4433,7 @@
     "applyViaGuidance": false,
     "notes": "Multiple large awards: 1 × $20,000, 1 × $15,000, 1 × $10,000, 7 × $5,000. Applicants must be Alberta rural farm young persons who have not previously started or completed any post-secondary program. Applications open in May.",
     "url": "https://studentaid.alberta.ca/scholarships/elmer-and-ona-hansen-memorial-fund/",
-    "description": "The Elmer and Ona Hansen Memorial Fund provides substantial scholarships for Alberta rural farm youth pursuing their first year of post-secondary education. With awards ranging from $5,000 to $20,000, this program supports students from farming backgrounds who are beginning their post-secondary journey. Applicants must be from rural Alberta farms and have no prior post-secondary education.",
+    "description": "Between $5,000 and $20,000 for rural Alberta farm youth entering their first year of post-secondary. You must come from a farm and have no prior post-secondary education. Among the largest awards available to rural students in the province.",
     "eligibility": {
       "grades": [
         "12"
@@ -4624,7 +4624,7 @@
     "applyViaGuidance": false,
     "notes": "Offered by the P.E.O. Sisterhood. Contact your nearest Alberta P.E.O. chapter to apply. First and second year students preferred. Financial need considered.",
     "url": "https://www.peointernational.org/",
-    "description": "The P.E.O. Sisterhood offers the Florence E. Taylor Charitable Scholarship Fund to support female Alberta students pursuing post-secondary education. This award is available to first- and second-year students attending institutions in Alberta or Saskatchewan, with financial need considered in the selection process. Interested applicants should contact their nearest Alberta P.E.O. chapter for application details.",
+    "description": "The P.E.O. Sisterhood funds female students from Alberta in their first or second year at an Alberta or Saskatchewan institution, with financial need part of the selection. There is no central application; contact your nearest Alberta P.E.O. chapter.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -4699,7 +4699,7 @@
     "applyViaGuidance": false,
     "notes": "Established in 2021 by alumni from the Fairview, Alberta area. Open to any Canadian post-secondary institution. Administered through Calgary Foundation.",
     "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
-    "description": "The Beyond the North Scholarship, established in 2021 by Fairview area alumni and administered through the Calgary Foundation, supports Grade 12 graduates from Fairview area high schools in northern Alberta as they pursue first-year post-secondary studies. This award is open to Canadian students entering any Canadian post-secondary institution.",
+    "description": "Started in 2021 by Fairview area alumni and run through the Calgary Foundation, this award funds Grade 12 graduates from Fairview area high schools in northern Alberta entering first-year studies at any Canadian post-secondary institution.",
     "eligibility": {
       "grades": [
         "12"
@@ -5209,7 +5209,7 @@
     "applyViaGuidance": false,
     "notes": "Must demonstrate community involvement through a Birdies for Kids participating charity and provide a reference letter from a charity representative. Minimum 70% GPA. Administered by Calgary Foundation.",
     "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
-    "description": "The Calgary Foundation offers this scholarship to recognize graduating Grade 12 students who demonstrate meaningful community involvement through a Rogers Birdies for Kids presented by AltaLink participating charity. Applicants must maintain a minimum 70% GPA and provide a reference letter from a charity representative. This award supports students entering their first year of post-secondary education.",
+    "description": "Through the Calgary Foundation, for Grade 12 graduates involved with a participating charity in the Rogers Birdies for Kids presented by AltaLink program. You need a 70% average and a reference letter from someone at the charity.",
     "eligibility": {
       "grades": [
         "12"
@@ -5249,7 +5249,7 @@
     "applyViaGuidance": false,
     "notes": "Two scholarships of $1,000 each. Funded by the Leduc Black Gold Rodeo & Exhibition Association in memory of Harvey Northcott. Apply at blackgoldrodeo.com. 2026 deadline has passed — note for next cycle.",
     "url": "https://www.blackgoldrodeo.com/scholarship",
-    "description": "The Leduc Black Gold Rodeo & Exhibition Association offers two $1,000 scholarships annually in memory of Harvey Northcott, supporting Alberta high school students with a connection to agriculture, rodeo, or the Leduc community. This award recognizes students who embody the spirit of ranching, agricultural pursuits, or community involvement in the rodeo tradition.",
+    "description": "The Leduc Black Gold Rodeo & Exhibition Association gives two $1,000 scholarships a year in Harvey Northcott's memory, for Alberta students with a connection to agriculture, rodeo, or the Leduc community.",
     "eligibility": {
       "grades": [
         "12"
@@ -5330,7 +5330,7 @@
     "notes": "Minimum 5 awards annually; renewable for up to 4 years. In memory of a Red Deer High School graduate who died in WWI. Contact your school guidance counsellor.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "The William Arthur Bower Memorial Scholarship honours the legacy of a Red Deer High School graduate who died in World War I. This $5,000 award recognizes academic achievement among graduating students from Red Deer Public or Catholic school divisions. With a minimum of 5 awards given annually and renewable for up to 4 years, this scholarship supports students as they transition to post-secondary education.",
+    "description": "Named for a Red Deer High School graduate who died in the First World War, this award gives at least five graduating Red Deer Public and Catholic students $5,000 each, renewable for up to four years.",
     "eligibility": {
       "grades": [
         "12"
@@ -5410,7 +5410,7 @@
     "region": "Red Deer",
     "notes": "For students continuing music education at post-secondary level. Must reside in Red Deer or Central Alberta.",
     "active": false,
-    "description": "The Red Deer Arts Council offers this $1,000 scholarship to support secondary music students in Red Deer and Central Alberta who are continuing their music education at the post-secondary level. This award recognizes students' commitment to pursuing music in higher education and values the importance of arts in our community.",
+    "description": "$1,000 from the Red Deer Arts Council for a secondary music student in Red Deer or Central Alberta continuing music at the post-secondary level.",
     "eligibility": {
       "grades": [
         "12"
@@ -5492,7 +5492,7 @@
     "region": "Lethbridge",
     "notes": "Reference letter required. Must enroll full-time in both Fall and Spring semesters immediately following the award.",
     "active": false,
-    "description": "The University of Lethbridge offers the Chinook Scholarship to support graduating high school students who demonstrate academic excellence and strong leadership qualities. This $5,000 award is for students entering the University of Lethbridge full-time and maintaining enrollment through both fall and spring semesters. Applicants must have a minimum 85% average and provide a reference letter.",
+    "description": "The University of Lethbridge's Chinook Scholarship pays $5,000 to entering students with at least an 85% average, a reference letter, and full-time enrollment through both fall and spring semesters.",
     "eligibility": {
       "grades": [
         "12"
