@@ -184,12 +184,12 @@ function SavedProgramCard({ p, onUnsave }: { p: ProgramWithMeta; onUnsave: () =>
 function SavedListSkeleton() {
   return (
     <div>
-      <div style={{ height: 16, width: 130, borderRadius: 6, background: 'rgba(var(--sab-ink-rgb),0.08)', marginBottom: 16 }} className="animate-pulse" />
-      <div style={{ height: 64, width: 220, borderRadius: 10, background: 'rgba(var(--sab-ink-rgb),0.08)', marginBottom: 20 }} className="animate-pulse" />
-      <div style={{ height: 16, width: 260, borderRadius: 6, background: 'rgba(var(--sab-ink-rgb),0.08)', marginBottom: 40 }} className="animate-pulse" />
+      <div style={{ height: 16, width: 130, borderRadius: 6, background: 'rgba(20,25,21,0.08)', marginBottom: 16 }} className="animate-pulse" />
+      <div style={{ height: 64, width: 220, borderRadius: 10, background: 'rgba(20,25,21,0.08)', marginBottom: 20 }} className="animate-pulse" />
+      <div style={{ height: 16, width: 260, borderRadius: 6, background: 'rgba(20,25,21,0.08)', marginBottom: 40 }} className="animate-pulse" />
       <div className="sabl-grid">
         {[0, 1, 2].map(i => (
-          <div key={i} className="animate-pulse" style={{ height: 220, borderRadius: 16, background: 'rgba(var(--sab-ink-rgb),0.06)' }} />
+          <div key={i} className="animate-pulse" style={{ height: 220, borderRadius: 16, background: 'rgba(20,25,21,0.06)' }} />
         ))}
       </div>
     </div>
@@ -283,10 +283,10 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
       ) : view === 'calendar' ? (
         <Suspense fallback={
           <div className="sabs-cal-card" style={{ marginTop: 48 }}>
-            <div className="animate-pulse" style={{ height: 34, width: 180, borderRadius: 8, background: 'rgba(var(--sab-ink-rgb),0.08)', margin: '0 auto 26px' }} />
+            <div className="animate-pulse" style={{ height: 34, width: 180, borderRadius: 8, background: 'rgba(20,25,21,0.08)', margin: '0 auto 26px' }} />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6 }}>
               {Array.from({ length: 35 }).map((_, i) => (
-                <div key={i} className="animate-pulse" style={{ height: 58, borderRadius: 12, background: 'rgba(var(--sab-ink-rgb),0.05)', opacity: 0.4 + (i % 3) * 0.2 }} />
+                <div key={i} className="animate-pulse" style={{ height: 58, borderRadius: 12, background: 'rgba(20,25,21,0.05)', opacity: 0.4 + (i % 3) * 0.2 }} />
               ))}
             </div>
           </div>
@@ -314,7 +314,7 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
           {savedPrograms.length > 0 && (
             <>
               <div className="sabs-section-head sabl-mono">
-                <span className="sabs-dot" style={{ background: 'var(--sab-urgent)' }} aria-hidden="true" />
+                <span className="sabs-dot" style={{ background: '#B8541F' }} aria-hidden="true" />
                 <span>RESEARCH PROGRAMS — {savedPrograms.length}</span>
               </div>
               <div className="sabl-grid" style={{ paddingTop: 0 }}>

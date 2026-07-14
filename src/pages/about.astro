@@ -49,7 +49,7 @@ const principles = [
       <div class="saba-cols">
         <div class="saba-col">
           <div class="saba-col-label">
-            <span class="saba-dot" style="background:var(--sab-urgent);"></span>
+            <span class="saba-dot" style="background:#B8541F;"></span>
             <span>THE PROBLEM</span>
           </div>
           <p class="saba-col-body">
@@ -122,8 +122,8 @@ const principles = [
 </Layout>
 
 <style is:global>
-  /* Canvas follows the theme (--sab-* tokens) */
-  body:has(#sab-about) { background: var(--sab-canvas); }
+  /* The about design is fixed light regardless of site theme */
+  body:has(#sab-about) { background: #FAF7F0; }
 </style>
 
 <style>
@@ -133,61 +133,61 @@ const principles = [
     font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(44px, 7vw, 76px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
-  .saba-h1-accent { color: var(--sab-link); font-style: italic; }
-  .saba-lede { font-size: 18px; line-height: 1.55; color: rgba(var(--sab-ink-rgb),0.65); margin: 24px 0 0; max-width: 560px; }
+  .saba-h1-accent { color: #0E8C64; font-style: italic; }
+  .saba-lede { font-size: 18px; line-height: 1.55; color: rgba(20,25,21,0.65); margin: 24px 0 0; max-width: 560px; }
 
   .saba-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 64px; }
-  .saba-col { border-top: 2px solid var(--sab-ink); padding-top: 20px; }
+  .saba-col { border-top: 2px solid #141915; padding-top: 20px; }
   .saba-col-label {
     display: flex; align-items: center; gap: 10px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(var(--sab-ink-rgb),0.6); margin-bottom: 16px;
+    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6); margin-bottom: 16px;
   }
   .saba-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
-  .saba-col-body { font-size: 17px; line-height: 1.6; color: rgba(var(--sab-ink-rgb),0.75); margin: 0; }
+  .saba-col-body { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.75); margin: 0; }
 
   .saba-card {
-    background: var(--sab-card); border: 1.5px solid var(--sab-border-strong); border-radius: 20px;
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 20px;
     padding: 36px 40px 20px; margin-top: 64px;
   }
   .saba-card-label {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(var(--sab-ink-rgb),0.6); margin-bottom: 8px;
+    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6); margin-bottom: 8px;
   }
   .saba-principle {
     display: grid; grid-template-columns: 48px 1fr; gap: 20px;
-    padding: 22px 0; border-top: 1px solid rgba(var(--sab-ink-rgb),0.12); align-items: start;
+    padding: 22px 0; border-top: 1px solid rgba(20,25,21,0.12); align-items: start;
   }
   .saba-principle-num {
-    width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid rgba(var(--sab-ink-rgb),0.25);
+    width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid rgba(20,25,21,0.25);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--sab-link);
+    font-family: 'Instrument Serif', serif; font-size: 20px; color: #0E8C64;
   }
   .saba-principle-title { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; margin-bottom: 6px; }
-  .saba-principle-body { font-size: 15px; line-height: 1.6; color: rgba(var(--sab-ink-rgb),0.6); max-width: 720px; }
+  .saba-principle-body { font-size: 15px; line-height: 1.6; color: rgba(20,25,21,0.6); max-width: 720px; }
 
   .saba-os-label {
     display: flex; align-items: center; gap: 10px; padding: 14px 0;
-    border-top: 2px solid var(--sab-ink); margin-top: 64px;
+    border-top: 2px solid #141915; margin-top: 64px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(var(--sab-ink-rgb),0.6);
+    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6);
   }
   .saba-actions { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
   .saba-btn {
     display: inline-flex; align-items: center; gap: 10px;
-    color: var(--sab-ink); font-weight: 600; font-size: 15px;
+    color: #141915; font-weight: 600; font-size: 15px;
     padding: 13px 24px; border-radius: 100px; text-decoration: none;
     transition: box-shadow 160ms ease, border-color 160ms ease;
   }
-  .saba-btn-solid { border: 1.5px solid var(--sab-border-strong); background: var(--sab-card); }
-  .saba-btn-solid:hover { box-shadow: 3px 3px 0 #2FD3A0; color: var(--sab-ink); }
-  .saba-btn-outline { border: 1.5px solid rgba(var(--sab-ink-rgb),0.3); }
-  .saba-btn-outline:hover { border-color: var(--sab-ink); color: var(--sab-ink); }
+  .saba-btn-solid { border: 1.5px solid rgba(20,25,21,0.85); background: #FFFFFF; }
+  .saba-btn-solid:hover { box-shadow: 3px 3px 0 #2FD3A0; color: #141915; }
+  .saba-btn-outline { border: 1.5px solid rgba(20,25,21,0.3); }
+  .saba-btn-outline:hover { border-color: #141915; color: #141915; }
 
-  .saba-creator { font-size: 16px; line-height: 1.6; color: rgba(var(--sab-ink-rgb),0.65); margin: 40px 0 0; }
-  .saba-creator-name { color: var(--sab-ink); font-weight: 700; }
-  .saba-creator-name:hover, .saba-creator-link:hover { color: var(--sab-deep); }
-  .saba-creator-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(var(--sab-ink-rgb),0.3); }
+  .saba-creator { font-size: 16px; line-height: 1.6; color: rgba(20,25,21,0.65); margin: 40px 0 0; }
+  .saba-creator-name { color: #141915; font-weight: 700; }
+  .saba-creator-name:hover, .saba-creator-link:hover { color: #0A6B4D; }
+  .saba-creator-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(20,25,21,0.3); }
 
   /* The design specifies >=1080px only; below is our adaptation. */
   @media (max-width: 900px) {
