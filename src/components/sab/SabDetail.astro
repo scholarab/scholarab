@@ -59,7 +59,7 @@ const urgent = status === 'active' && typeof daysLeft === 'number' && daysLeft <
 const chip =
   status === 'closed' ? { text: 'CLOSED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
   : status === 'future' ? { text: opensLabel ? `OPENS ${opensLabel.toUpperCase()}` : 'OPENING SOON', bg: 'rgba(14,140,100,0.12)', fg: '#0E8C64' }
-  : status === 'ongoing' ? { text: 'ONGOING — JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0E8C64' }
+  : status === 'ongoing' ? { text: 'ONGOING · JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0E8C64' }
   : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
   : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#B8541F', fg: '#FAF7F0' }
   : typeof daysLeft === 'number'

@@ -26,7 +26,7 @@ function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; chi
 }
 
 function DueChip({ p }: { p: ProgramWithMeta }) {
-  if (p.deadline === 'Ongoing') return <span className="sabl-mono sabl-due-chip ongoing">ONGOING — JOIN ANYTIME</span>;
+  if (p.deadline === 'Ongoing') return <span className="sabl-mono sabl-due-chip ongoing">ONGOING · JOIN ANYTIME</span>;
   if (!p.deadline || p.deadline === 'TBA') return <span className="sabl-mono sabl-due-chip neutral">DEADLINE TBA</span>;
   const label = new Date(p.deadline + 'T00:00:00')
     .toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })
@@ -115,7 +115,7 @@ function ProgramList({ items }: Props) {
       </div>
 
       <div className="sabl-mono sabl-result-line">
-        {filtered.length} OF {items.length} PROGRAMS SHOWN — EVERY ONE CHECKED BY HAND
+        {filtered.length} OF {items.length} PROGRAMS SHOWN · EVERY ONE CHECKED BY HAND
       </div>
 
       {/* Results */}

@@ -1670,7 +1670,7 @@
     "title": "Loran Scholarship",
     "amount": "$100,000",
     "deadline": "2026-10-15",
-    "audience": "Canadian high school students — each school may nominate up to 3 students",
+    "audience": "Canadian high school students; each school may nominate up to 3 students",
     "url": "https://loranscholar.ca/becoming-a-scholar/",
     "category": "Academic",
     "lastVerified": "2026-03",
@@ -1707,7 +1707,7 @@
     "title": "Schulich Leader Scholarships",
     "amount": "$100,000",
     "deadline": "2026-01-27",
-    "audience": "Canadian high school students entering STEM at one of 20 selected universities — school nominates 1 student",
+    "audience": "Canadian high school students entering STEM at one of 20 selected universities; school nominates 1 student",
     "url": "https://www.schulichleaders.com/apply",
     "category": "STEM",
     "lastVerified": "2026-03",
@@ -1886,7 +1886,7 @@
   },
   {
     "id": 64,
-    "title": "Keyera Energy — Peter J. Renton Memorial Scholarship",
+    "title": "Keyera Energy: Peter J. Renton Memorial Scholarship",
     "amount": "$6,000",
     "deadline": "2026-05-01",
     "audience": "Alberta residents entering first year of an oil & gas related degree or diploma at an AB institution",
@@ -1999,7 +1999,7 @@
     "title": "Premier's Citizenship Award",
     "amount": "$7,005",
     "deadline": "2026-06-01",
-    "audience": "Alberta high school students — each school nominates ONE student per year",
+    "audience": "Alberta high school students; each school nominates ONE student per year",
     "url": "https://www.alberta.ca/premiers-citizenship-award",
     "category": "Community",
     "lastVerified": "2026-03",
@@ -2071,7 +2071,7 @@
     "title": "ASAA Alberta Milk Scholarship",
     "amount": "$1,000",
     "deadline": "2026-06-30",
-    "audience": "Grade 12 ASAA member school students — school nominates 1 male + 1 female student",
+    "audience": "Grade 12 ASAA member school students; school nominates 1 male + 1 female student",
     "url": "https://schoolsportalberta.ca/association/recognition/awards",
     "category": "Academic",
     "lastVerified": "2026-03",
@@ -2291,7 +2291,7 @@
     "title": "Dr. Ernest and Minnie Mehl Scholarship",
     "amount": "$3,500",
     "deadline": "2026-12-31",
-    "audience": "Alberta students — automatically considered when applying for the Alexander Rutherford Scholarship",
+    "audience": "Alberta students; automatically considered when applying for the Alexander Rutherford Scholarship",
     "url": "https://studentaid.alberta.ca/scholarships/",
     "category": "Academic",
     "lastVerified": "2026-03",
@@ -2805,7 +2805,7 @@
     "title": "University of Lethbridge Board of Governors Award",
     "amount": "$1,000",
     "deadline": "2026-12-15",
-    "audience": "Grade 12 students applying to University of Lethbridge — automatic consideration with admission application",
+    "audience": "Grade 12 students applying to University of Lethbridge; automatic consideration with admission application",
     "url": "https://www.ulethbridge.ca/future-student/high-school-student-awards",
     "category": "Academic",
     "region": "Lethbridge",
@@ -2842,7 +2842,7 @@
     "title": "University of Lethbridge Grade 11 Merit Award",
     "amount": "$800",
     "deadline": "2026-06-30",
-    "audience": "Grade 11 students planning to attend ULethbridge — 75% average and above",
+    "audience": "Grade 11 students planning to attend ULethbridge; 75% average and above",
     "url": "https://www.ulethbridge.ca/future-student/high-school-student-awards",
     "category": "Academic",
     "region": "Lethbridge",
@@ -3066,7 +3066,7 @@
     "category": "Trades",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "notes": "No application required — consent to be considered in MyTradesecrets. Recipients notified by November 1.",
+    "notes": "No application required, just consent to be considered in MyTradesecrets. Recipients notified by November 1.",
     "active": true,
     "description": "This $1,000 scholarship is awarded to Alberta high school students enrolled in the Registered Apprenticeship Program (RAP) or Career and Technology Studies (CTS) apprenticeship pathway. Students are automatically considered for the award through MyTradesecrets with no application required, and recipients are notified by November 1st.",
     "eligibility": {
@@ -3103,9 +3103,9 @@
     "category": "Trades",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "notes": "No application required — consent to be considered in MyTradesecrets. Higher award for students completing both RAP and CTS pathway.",
+    "notes": "No application required, just consent to be considered in MyTradesecrets. Higher award for students completing both RAP and CTS pathway.",
     "active": true,
-    "description": "This $2,000 scholarship rewards Alberta high school students who are registered in both the Registered Apprenticeship Program (RAP) and a CTS Apprenticeship Pathway. No application is required—students are automatically considered through MyTradesecrets based on their enrollment. Students who successfully complete both the RAP and CTS pathway qualify for an enhanced award amount.",
+    "description": "This $2,000 scholarship rewards Alberta high school students who are registered in both the Registered Apprenticeship Program (RAP) and a CTS Apprenticeship Pathway. No application is required; students are automatically considered through MyTradesecrets based on their enrollment. Students who successfully complete both the RAP and CTS pathway qualify for an enhanced award amount.",
     "eligibility": {
       "grades": [
         "12"
@@ -3626,9 +3626,9 @@
     "category": "Academic",
     "lastVerified": "2026-04",
     "region": "Alberta",
-    "notes": "No separate application required — awarded automatically upon admission with a 95%+ average. Any faculty, any citizenship.",
+    "notes": "No separate application required. Awarded automatically upon admission with a 95%+ average. Any faculty, any citizenship.",
     "active": true,
-    "description": "The University of Calgary awards this $5,000 scholarship automatically to first-year students admitted with a 95% or higher average. No separate application is required—eligible students receive the award upon admission to any faculty at the University of Calgary.",
+    "description": "The University of Calgary awards this $5,000 scholarship automatically to first-year students admitted with a 95% or higher average. No separate application is required; eligible students receive the award upon admission to any faculty at the University of Calgary.",
     "eligibility": {
       "grades": [
         "12"
@@ -3663,7 +3663,7 @@
     "category": "Academic",
     "lastVerified": "2026-04",
     "region": "Alberta",
-    "notes": "No separate application — automatically considered upon admission. Amount scales with average: up to $14,000 (95–100%), $9,999 (90–95%), $5,999 (85–90%), $2,999 (80–85%). Renewable with GPA maintained.",
+    "notes": "No separate application; automatically considered upon admission. Amount scales with average: up to $14,000 (95–100%), $9,999 (90–95%), $5,999 (85–90%), $2,999 (80–85%). Renewable with GPA maintained.",
     "active": false,
     "openDate": "2026-11-01",
     "description": "MacEwan University awards this competitive scholarship to Canadian citizens and permanent residents entering a MacEwan degree program from high school with strong academic performance. The award is automatically considered upon admission and ranges from $2,999 to $14,000 depending on your admission average, with the potential to be renewed each year as long as you maintain your GPA.",
@@ -3816,7 +3816,7 @@
     "category": "Community",
     "lastVerified": "2026-04",
     "region": "National",
-    "notes": "Covers certifications and skills courses — lifeguarding, first aid, coding, language, graphic design, coach certification, and more. Open to current high school students. Closes when 500 applications are reached.",
+    "notes": "Covers certifications and skills courses: lifeguarding, first aid, coding, language, graphic design, coach certification, and more. Open to current high school students. Closes when 500 applications are reached.",
     "active": true,
     "description": "RBC Ignite pays $1,500 toward job-ready skills and certifications for Canadians aged 16 to 20: lifeguarding, first aid, coding, language training, graphic design, coaching certification, and more. Current high school students can apply.",
     "eligibility": {
@@ -3857,7 +3857,7 @@
     "region": "National",
     "notes": "Top award (Louise Joanne Twerdy Award) is $10,000. Eligibility is specific to those personally affected by impaired driving. Must enrol full-time in an approved post-secondary program.",
     "active": false,
-    "description": "MADD Canada's Youth Bursary Fund supports young Canadians who have been personally affected by impaired driving—whether through serious injury or the loss of an immediate family member. This $10,000 award (top prize: Louise Joanne Twerdy Award) helps recipients pursue full-time studies at an approved post-secondary institution. Applicants must demonstrate their commitment to education while carrying the impact of an impaired driving tragedy.",
+    "description": "MADD Canada's Youth Bursary Fund supports young Canadians who have been personally affected by impaired driving, whether through serious injury or the loss of an immediate family member. This $10,000 award (top prize: Louise Joanne Twerdy Award) helps recipients pursue full-time studies at an approved post-secondary institution. Applicants must demonstrate their commitment to education while carrying the impact of an impaired driving tragedy.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -3963,9 +3963,9 @@
     "category": "Trades",
     "lastVerified": "2026-04",
     "region": "Alberta",
-    "notes": "No application required — automatically awarded to the highest-scoring Alberta secondary student at Skills Canada Nationals. Worth $5,000/year for up to 4 years ($20,000 total). Separate from the WorldSkills Provincial Champion Scholarship.",
+    "notes": "No application required. Automatically awarded to the highest-scoring Alberta secondary student at Skills Canada Nationals. Worth $5,000/year for up to 4 years ($20,000 total). Separate from the WorldSkills Provincial Champion Scholarship.",
     "active": true,
-    "description": "Skills Canada Alberta automatically awards this $20,000 scholarship to the highest-scoring Alberta secondary school student competing at the Skills Canada National Competition. The award is worth $5,000 per year for up to four years and recognizes outstanding achievement in trades and technical skills. No application is required—winners are selected based on their competition performance.",
+    "description": "Skills Canada Alberta automatically awards this $20,000 scholarship to the highest-scoring Alberta secondary school student competing at the Skills Canada National Competition. The award is worth $5,000 per year for up to four years and recognizes outstanding achievement in trades and technical skills. No application is required; winners are selected based on their competition performance.",
     "eligibility": {
       "grades": [
         "12"
@@ -4002,7 +4002,7 @@
     "category": "General",
     "lastVerified": "2026-04",
     "region": "National",
-    "notes": "Annual giveaway — no essay or grades required. Prize bundle includes rent for a year, $2,000 in groceries, a trip for two to the Galapagos, and a $20,000 cheque. Enter for free in ~2 minutes. Earlier entries earn more entries in the draw.",
+    "notes": "Annual giveaway, no essay or grades required. Prize bundle includes rent for a year, $2,000 in groceries, a trip for two to the Galapagos, and a $20,000 cheque. Enter for free in ~2 minutes. Earlier entries earn more entries in the draw.",
     "active": false,
     "description": "Canada's Luckiest Student is an annual giveaway open to all students in Canada, with no essay or grades required to enter. The prize bundle includes a year of rent, $2,000 in groceries, a trip for two to the Galapagos, and a $20,000 cheque. Entries are free and take about 2 minutes to complete, with earlier submissions receiving more chances to win.",
     "eligibility": {
@@ -4303,13 +4303,13 @@
     "title": "Queen's Platinum Jubilee Scholarship for Performing Arts",
     "amount": "$7,000",
     "deadline": "2027-03-02",
-    "audience": "Alberta students with exceptional talent in performing arts — rotating annually between music, theatre, and dance",
+    "audience": "Alberta students with exceptional talent in performing arts, rotating annually between music, theatre, and dance",
     "category": "Arts",
     "region": "Alberta",
     "active": false,
     "lastVerified": "2026-04",
     "applyViaGuidance": true,
-    "notes": "One scholarship per year. 2026 cycle was dance; 2027 cycle is music. School nomination required. Contact your guidance counsellor early — internal deadlines precede the provincial one.",
+    "notes": "One scholarship per year. 2026 cycle was dance; 2027 cycle is music. School nomination required. Contact your guidance counsellor early; internal deadlines precede the provincial one.",
     "url": "https://studentaid.alberta.ca/scholarships/",
     "description": "The Queen's Platinum Jubilee Scholarship for Performing Arts awards $7,000 annually to Alberta high school students demonstrating exceptional talent in performing arts. The award rotates yearly among music, theatre, and dance disciplines, requiring school nomination and guidance counsellor involvement. Eligible students should contact their guidance counsellor early, as internal school deadlines precede the provincial application deadline.",
     "eligibility": {
@@ -4350,7 +4350,7 @@
     "active": false,
     "lastVerified": "2026-04",
     "applyViaGuidance": true,
-    "notes": "25 awards of $2,005 each. Eligibility flows from the Premier's Citizenship Award nomination — only nominated students can apply. Contact your school administration.",
+    "notes": "25 awards of $2,005 each. Eligibility flows from the Premier's Citizenship Award nomination; only nominated students can apply. Contact your school administration.",
     "url": "https://www.alberta.ca/premiers-citizenship-award",
     "description": "An oddly specific $2,005 (the award marks Alberta's 2005 centennial) for graduates nominated for the Premier's Citizenship Award who are enrolling in post-secondary. Nomination comes through your school, so start with your administration.",
     "eligibility": {
@@ -4514,7 +4514,7 @@
     "applyViaGuidance": false,
     "notes": "One application covers all AHSRA awards: Merit Awards, NHSRA Merit Awards, Canadian Finals Scholarships, Presidents Award, Teskey Top Hand Award, and Raffle Scholarship. Submit by mail to the AHSRA Scholarship Coordinator.",
     "url": "https://albertahsrodeo.com/become-a-member/scholarships/",
-    "description": "The Alberta High School Rodeo Association (AHSRA) offers multiple scholarships for Grade 12 students who are active members or volunteers in the association. These awards—including Merit Awards, NHSRA Merit Awards, Canadian Finals Scholarships, Presidents Award, Teskey Top Hand Award, and Raffle Scholarship—recognize both athletic achievement and community involvement. A single application covers all available AHSRA scholarships.",
+    "description": "The Alberta High School Rodeo Association (AHSRA) offers multiple scholarships for Grade 12 students who are active members or volunteers in the association. The list includes Merit Awards, NHSRA Merit Awards, Canadian Finals Scholarships, the Presidents Award, the Teskey Top Hand Award, and the Raffle Scholarship, covering both athletic achievement and community involvement. A single application covers all available AHSRA scholarships.",
     "eligibility": {
       "grades": [
         "12"
@@ -4812,7 +4812,7 @@
     "active": true,
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
-    "notes": "18 scholarships of $1,000 allocated nationally by region. Does not require top grades — enrollment and passion for learning are the main criteria. Apply online at ufcw.ca. Parent or guardian must be an active UFCW Canada member in good standing.",
+    "notes": "18 scholarships of $1,000 allocated nationally by region. Does not require top grades; enrollment and passion for learning are the main criteria. Apply online at ufcw.ca. Parent or guardian must be an active UFCW Canada member in good standing.",
     "url": "https://www.ufcw.ca/index.php?option=com_scholarship&view=sform&id=2&Itemid=138&lang=en",
     "description": "UFCW Canada offers this $1,000 scholarship to members in good standing or their dependents and spouses who are entering full-time post-secondary studies in Canada. The scholarship recognizes enrollment and passion for learning rather than top grades. Applicants must have a parent or guardian who is an active UFCW Canada member to be eligible.",
     "eligibility": {
@@ -4852,7 +4852,7 @@
     "applyViaGuidance": false,
     "notes": "Two separate scholarships: the Robert McWilliams Memorial Scholarship and the Grant Notley Memorial Scholarship. Parent or guardian must be a UFCW Local 401 member. Up to $2,500 available. Apply through gounion.ca.",
     "url": "https://gounion.ca/edu/scholarships/",
-    "description": "UFCW Local 401 offers two separate scholarships—the Robert McWilliams Memorial Scholarship and the Grant Notley Memorial Scholarship—worth up to $2,500 to support members' dependents as they enter post-secondary education. To be eligible, your parent or guardian must be a UFCW Local 401 member in Alberta. Applications are submitted through gounion.ca.",
+    "description": "UFCW Local 401 offers two separate scholarships, the Robert McWilliams Memorial Scholarship and the Grant Notley Memorial Scholarship, worth up to $2,500 to support members' dependents as they enter post-secondary education. To be eligible, your parent or guardian must be a UFCW Local 401 member in Alberta. Applications are submitted through gounion.ca.",
     "eligibility": {
       "grades": [
         "12"
@@ -4891,7 +4891,7 @@
     "applyViaGuidance": false,
     "notes": "Four scholarship streams: Diversity, Financial Wellness, Future Women Leaders, and STEM. One winner per stream guaranteed per region (Alberta is grouped with MB, SK, NT, NU). 16 winners nationally at $3,750 each. Two-phase process: short application, then video submission for finalists. Access via your school's myBlueprint account.",
     "url": "https://education.myblueprint.ca/scotia/",
-    "description": "Scotiabank offers four scholarship streams—Diversity, Financial Wellness, Future Women Leaders, and STEM—through myBlueprint for Grade 12 students across Canada. One winner per stream is guaranteed per region (Alberta grouped with MB, SK, NT, NU), with 16 national winners at $3,750 each. Eligible students apply through a two-phase process: an initial short application followed by a video submission for selected finalists, accessed via their school's myBlueprint account.",
+    "description": "Scotiabank offers four scholarship streams (Diversity, Financial Wellness, Future Women Leaders, and STEM) through myBlueprint for Grade 12 students across Canada. One winner per stream is guaranteed per region (Alberta grouped with MB, SK, NT, NU), with 16 national winners at $3,750 each. Eligible students apply through a two-phase process: an initial short application followed by a video submission for selected finalists, accessed via their school's myBlueprint account.",
     "eligibility": {
       "grades": [
         "12"
@@ -4927,7 +4927,7 @@
     "active": false,
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
-    "notes": "Email your transcript or detailed academic report to the RDP Student Connect Centre along with an up-to-date email address and phone number. Limited awards — apply early. Applies to any credit program at Red Deer Polytechnic.",
+    "notes": "Email your transcript or detailed academic report to the RDP Student Connect Centre along with an up-to-date email address and phone number. Limited awards, so apply early. Applies to any credit program at Red Deer Polytechnic.",
     "url": "https://rdpolytech.ca/admissions/tuition-financial-aid/awards-scholarships",
     "description": "Red Deer Polytechnic offers this $1,000 scholarship to high school students with an 80%+ average in five 5-credit grade 11 or 12 subjects who are planning to attend RDP. The award applies to any credit program at Red Deer Polytechnic and recognizes strong academic achievement among incoming students.",
     "eligibility": {
@@ -5247,7 +5247,7 @@
     "active": false,
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
-    "notes": "Two scholarships of $1,000 each. Funded by the Leduc Black Gold Rodeo & Exhibition Association in memory of Harvey Northcott. Apply at blackgoldrodeo.com. 2026 deadline has passed — note for next cycle.",
+    "notes": "Two scholarships of $1,000 each. Funded by the Leduc Black Gold Rodeo & Exhibition Association in memory of Harvey Northcott. Apply at blackgoldrodeo.com. 2026 deadline has passed; note for next cycle.",
     "url": "https://www.blackgoldrodeo.com/scholarship",
     "description": "The Leduc Black Gold Rodeo & Exhibition Association gives two $1,000 scholarships a year in Harvey Northcott's memory, for Alberta students with a connection to agriculture, rodeo, or the Leduc community.",
     "eligibility": {
@@ -5449,7 +5449,7 @@
     "category": "Community",
     "lastVerified": "2026-04",
     "region": "Red Deer",
-    "notes": "Two streams: (1) CESD/Red Deer County students on a working farm/ranch — deadline May 31; (2) AHSRA members in good standing — deadline April 1. Amounts differ by stream.",
+    "notes": "Two streams: (1) CESD/Red Deer County students on a working farm/ranch, deadline May 31; (2) AHSRA members in good standing, deadline April 1. Amounts differ by stream.",
     "active": false,
     "description": "The Trey Purdie Memorial Scholarship supports graduating high school students from Red Deer County and Chinook's Edge School Division who are actively involved in agriculture. The scholarship has two streams: one for students living and working on a farm or ranch, and another for members in good standing with the Alberta High School Rodeo Association.",
     "eligibility": {
@@ -5527,9 +5527,9 @@
     "category": "Academic",
     "lastVerified": "2026-04",
     "region": "Lethbridge",
-    "notes": "Pool of named entrance awards. Criteria vary by award — some consider academic average, others leadership, financial need, or artistic ability. Apply via the Bridge student portal.",
+    "notes": "Pool of named entrance awards. Criteria vary by award: some consider academic average, others leadership, financial need, or artistic ability. Apply via the Bridge student portal.",
     "active": false,
-    "description": "The University of Lethbridge offers entrance awards of up to $6,000 for graduating high school students entering the university. These awards are available through a pool of named entrance scholarships with varying criteria—some consider academic average, others focus on leadership, financial need, or artistic ability. Students apply through the Bridge student portal.",
+    "description": "The University of Lethbridge offers entrance awards of up to $6,000 for graduating high school students entering the university. These awards are available through a pool of named entrance scholarships with varying criteria; some consider academic average, others focus on leadership, financial need, or artistic ability. Students apply through the Bridge student portal.",
     "eligibility": {
       "grades": [
         "12"

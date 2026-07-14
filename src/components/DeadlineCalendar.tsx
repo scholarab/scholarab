@@ -205,7 +205,7 @@ export default function DeadlineCalendar({ scholarships, programs }: Props) {
                 <div>
                   <div className="sabs-cal-name">{item.title}</div>
                   <div className="sabl-mono sabs-cal-kind">
-                    {item.type === 'scholarship' ? `SCHOLARSHIP${item.amount ? ' — ' + item.amount.toUpperCase() : ''}` : 'RESEARCH PROGRAM'}
+                    {item.type === 'scholarship' ? `SCHOLARSHIP${item.amount ? ' · ' + item.amount.toUpperCase() : ''}` : 'RESEARCH PROGRAM'}
                   </div>
                 </div>
                 <a

@@ -97,7 +97,7 @@ function ScholarshipList({ items }: Props) {
         <div>
           <h1 className="sabl-h1">Scholarships</h1>
           <p className="sabl-desc">
-            Open scholarships for Alberta high school students — verified by hand, updated weekly. If it's listed here, it's real and it's open.
+            Open scholarships for Alberta high school students, verified by hand and updated weekly. If it's listed here, it's real and it's open.
           </p>
         </div>
         <div className="sabl-stat">
@@ -154,7 +154,7 @@ function ScholarshipList({ items }: Props) {
       </div>
 
       <div className="sabl-mono sabl-result-line">
-        {filtered.length} OF {items.length} LISTINGS SHOWN — EVERY ONE CHECKED BY HAND
+        {filtered.length} OF {items.length} LISTINGS SHOWN · EVERY ONE CHECKED BY HAND
       </div>
 
       {/* Results */}

@@ -242,8 +242,8 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
   }
 
   const countLine = empty
-    ? '0 items bookmarked — your shortlist lives here.'
-    : `${totalCount} ${totalCount === 1 ? 'item' : 'items'} bookmarked — ${savedScholarships.length} scholarship${savedScholarships.length === 1 ? '' : 's'}, ${savedPrograms.length} program${savedPrograms.length === 1 ? '' : 's'}.`;
+    ? '0 items bookmarked. Your shortlist lives here.'
+    : `${totalCount} ${totalCount === 1 ? 'item' : 'items'} bookmarked: ${savedScholarships.length} scholarship${savedScholarships.length === 1 ? '' : 's'}, ${savedPrograms.length} program${savedPrograms.length === 1 ? '' : 's'}.`;
 
   return (
     <div className="sabl-page">
@@ -299,7 +299,7 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
             <>
               <div className="sabs-section-head sabl-mono">
                 <span className="sabs-dot" style={{ background: '#2FD3A0' }} aria-hidden="true" />
-                <span>SCHOLARSHIPS — {savedScholarships.length}</span>
+                <span>SCHOLARSHIPS · {savedScholarships.length}</span>
               </div>
               <div className="sabl-grid" style={{ marginBottom: 56, paddingTop: 0 }}>
                 {savedScholarships.map(s => (
@@ -315,7 +315,7 @@ function SavedList({ initialScholarships, initialPrograms }: SavedListProps) {
             <>
               <div className="sabs-section-head sabl-mono">
                 <span className="sabs-dot" style={{ background: '#B8541F' }} aria-hidden="true" />
-                <span>RESEARCH PROGRAMS — {savedPrograms.length}</span>
+                <span>RESEARCH PROGRAMS · {savedPrograms.length}</span>
               </div>
               <div className="sabl-grid" style={{ paddingTop: 0 }}>
                 {savedPrograms.map(p => (

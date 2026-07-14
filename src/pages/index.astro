@@ -45,8 +45,8 @@ const CATEGORY_DESCS: Record<string, string> = {
   'STEM':       'Science fairs, labs, and research awards.',
   'Trades':     'Apprenticeships, RAP, and skilled-trade awards.',
   'Indigenous': 'Awards for First Nations, Métis, and Inuit students.',
-  'Sports':     'For athletes at every level — not just varsity.',
-  'General':    'Open eligibility — no niche required.',
+  'Sports':     'For athletes at every level, not just varsity.',
+  'General':    'Open eligibility, no niche required.',
 };
 const categories = [...categoryCounts.entries()]
   .sort((a, b) => b[1] - a[1])
@@ -121,7 +121,7 @@ const matchGroups = [
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
             <p>
-              One directory. Every listing checked by hand, every deadline tracked. Nothing scraped, nothing auto-generated, nothing behind a login.
+              One directory. Every listing checked by hand, every deadline tracked. None of it is scraped, and none of it sits behind a login.
             </p>
             <div class="sab-hero-ctas">
               <a href="/scholarships" class="sab-btn-accent">
@@ -205,10 +205,10 @@ const matchGroups = [
     <div class="sab-container sab-match">
       <div class="sab-match-grid">
         <div>
-          <div class="sab-mono sab-match-eyebrow">MATCH — 60 SECONDS</div>
+          <div class="sab-mono sab-match-eyebrow">MATCH · 60 SECONDS</div>
           <h2 class="sab-h2 sab-match-h2">Tell us three things. We'll shortlist for you.</h2>
           <p class="sab-match-copy">
-            Grade, region, and what you're into. No account, no email — your answers never leave the page.
+            Grade, region, and what you're into. No account, no email. Your answers never leave the page.
           </p>
         </div>
         <div class="sab-match-card" id="match-teaser">
@@ -239,7 +239,7 @@ const matchGroups = [
               </svg>
               <span class="sab-logo-word" style="font-size:17px;">Scholar<span class="sab-accent-text">AB</span></span>
             </div>
-            <p class="sab-footer-blurb">Built by a student, for students. Free forever — if a listing looks wrong, email me and I'll fix it the same day.</p>
+            <p class="sab-footer-blurb">Built by a student, for students. Free forever. If a listing looks wrong, email me and I'll fix it the same day.</p>
           </div>
           <div class="sab-footer-cols">
             {footerCols.map(col => (
@@ -259,7 +259,7 @@ const matchGroups = [
           </div>
         </div>
         <div class="sab-footer-bottom sab-mono">
-          <span>© 2026 ScholarAB — Medicine Hat, Alberta</span>
+          <span>© 2026 ScholarAB · Medicine Hat, Alberta</span>
         </div>
       </div>
     </div>
