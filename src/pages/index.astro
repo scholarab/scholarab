@@ -381,7 +381,7 @@ const matchGroups = [
 
 <style>
   /* ════ ScholarAB Home — claude.ai/design "ScholarAB Home.dc.html" ════
-     Palette: canvas var(--sab-canvas) · alt band var(--sab-band) · ink var(--sab-ink) · hero/footer #0B1512
+     Palette: canvas var(--sab-canvas) · alt band var(--sab-band) · ink var(--sab-ink) · hero/footer var(--sab-dark-band)
      accent #2FD3A0 (soft: 40% alpha) · link var(--sab-link) · urgency var(--sab-urgent)
      Type: Instrument Serif (display) · Archivo (UI/body) · IBM Plex Mono (labels) */
 
@@ -393,22 +393,22 @@ const matchGroups = [
   }
   #sab-home ::selection { background: #2FD3A0; color: #0B1512; }
   .sab-mono { font-family: 'IBM Plex Mono', monospace; }
-  .sab-accent-text { color: #2FD3A0; }
+  .sab-accent-text { color: var(--sab-band-accent); }
   .sab-container { max-width: 1180px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
 
   @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ── Dark hero ── */
+  /* ── Hero band (white in light theme, green-black in dark) ── */
   /* Fills the first viewport so no canvas sliver peeks below the fold on
      tall/fullscreen windows; on short viewports it grows past 100svh. */
   .sab-hero {
-    background: var(--sab-dark-band); color: #F2F0E9; position: relative; overflow: hidden;
+    background: var(--sab-dark-band); color: var(--sab-band-ink); position: relative; overflow: hidden;
     display: flex; flex-direction: column;
     min-height: 100vh; min-height: 100svh;
   }
 
   .sab-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .sab-logo-word { font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
+  .sab-logo-word { font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: var(--sab-band-ink); }
 
   .sab-hero-body {
     padding-top: 76px; position: relative;
@@ -418,9 +418,9 @@ const matchGroups = [
   }
   .sab-kicker {
     display: flex; align-items: center; gap: 10px; margin-bottom: 30px;
-    font-size: 13px; color: #2FD3A0; letter-spacing: 0.06em;
+    font-size: 13px; color: var(--sab-band-accent); letter-spacing: 0.06em;
   }
-  .sab-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
+  .sab-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--sab-band-accent); }
 
   .sab-h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
@@ -428,33 +428,33 @@ const matchGroups = [
     margin: 0; max-width: 1050px; text-wrap: balance;
     animation: sab-rise 0.7s ease both;
   }
-  .sab-h1 em { font-style: italic; color: #2FD3A0; }
+  .sab-h1 em { font-style: italic; color: var(--sab-band-accent); }
 
   .sab-hero-bottom {
     display: flex; align-items: flex-end; justify-content: space-between;
     gap: 40px; margin-top: 52px; padding-bottom: 64px;
   }
   .sab-hero-copy { max-width: 460px; }
-  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 0 0 30px; }
+  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(var(--sab-band-ink-rgb),0.72); margin: 0 0 30px; }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   .sab-btn-accent {
     display: inline-flex; align-items: center; gap: 10px;
     background: #2FD3A0; color: #0B1512; font-weight: 700; font-size: 16px;
     padding: 16px 28px; border-radius: 100px; text-decoration: none; white-space: nowrap;
   }
-  .sab-btn-accent:hover { background: #F2F0E9; color: #0B1512; }
+  .sab-btn-accent:hover { background: var(--sab-band-ink); color: var(--sab-dark-band); }
   .sab-btn-outline {
     display: inline-flex; align-items: center; gap: 10px;
-    color: #F2F0E9; font-weight: 600; font-size: 16px;
-    padding: 16px 24px; border-radius: 100px; border: 1px solid rgba(242,240,233,0.3);
+    color: var(--sab-band-ink); font-weight: 600; font-size: 16px;
+    padding: 16px 24px; border-radius: 100px; border: 1px solid rgba(var(--sab-band-ink-rgb),0.3);
     text-decoration: none; white-space: nowrap;
   }
-  .sab-btn-outline:hover { border-color: #F2F0E9; color: #F2F0E9; }
+  .sab-btn-outline:hover { border-color: var(--sab-band-ink); color: var(--sab-band-ink); }
 
-  .sab-stats { display: flex; border-left: 1px solid rgba(242,240,233,0.18); }
-  .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(242,240,233,0.18); }
-  .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; }
-  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); margin-top: 6px; white-space: nowrap; }
+  .sab-stats { display: flex; border-left: 1px solid rgba(var(--sab-band-ink-rgb),0.18); }
+  .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(var(--sab-band-ink-rgb),0.18); }
+  .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: var(--sab-band-ink); }
+  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(var(--sab-band-ink-rgb),0.55); margin-top: 6px; white-space: nowrap; }
 
   /* ── Closing this week ── */
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
@@ -535,19 +535,19 @@ const matchGroups = [
   .sab-match-cta:hover { background: var(--sab-link); }
 
   /* ── Footer ── */
-  .sab-footer { background: var(--sab-dark-band); color: rgba(242,240,233,0.65); }
+  .sab-footer { background: var(--sab-dark-band); color: rgba(var(--sab-band-ink-rgb),0.65); }
   .sab-footer-inner { padding-top: 64px; padding-bottom: 40px; }
   .sab-footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
   .sab-footer-blurb { font-size: 14px; line-height: 1.6; max-width: 340px; margin: 0; }
   .sab-footer-cols { display: flex; gap: 64px; flex-wrap: wrap; }
-  .sab-footer-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,240,233,0.4); margin-bottom: 14px; }
+  .sab-footer-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(var(--sab-band-ink-rgb),0.4); margin-bottom: 14px; }
   .sab-footer-links { display: flex; flex-direction: column; gap: 10px; }
-  .sab-footer-links a { font-size: 14px; color: rgba(242,240,233,0.7); text-decoration: none; }
-  .sab-footer-links a:hover { color: #F2F0E9; }
+  .sab-footer-links a { font-size: 14px; color: rgba(var(--sab-band-ink-rgb),0.7); text-decoration: none; }
+  .sab-footer-links a:hover { color: var(--sab-band-ink); }
   .sab-footer-bottom {
     display: flex; justify-content: space-between; margin-top: 56px; padding-top: 24px;
-    border-top: 1px solid rgba(242,240,233,0.12);
-    font-size: 12px; color: rgba(242,240,233,0.4); gap: 12px; flex-wrap: wrap;
+    border-top: 1px solid rgba(var(--sab-band-ink-rgb),0.12);
+    font-size: 12px; color: rgba(var(--sab-band-ink-rgb),0.4); gap: 12px; flex-wrap: wrap;
   }
 
   /* ── Motion safety ── */
@@ -563,7 +563,7 @@ const matchGroups = [
     .sab-hero-bottom { flex-direction: column; align-items: flex-start; margin-top: 36px; padding-bottom: 44px; }
     .sab-stats { border-left: none; width: 100%; }
     .sab-stat { padding: 6px 24px 6px 0; border-right: none; }
-    .sab-stat + .sab-stat { padding-left: 24px; border-left: 1px solid rgba(242,240,233,0.18); }
+    .sab-stat + .sab-stat { padding-left: 24px; border-left: 1px solid rgba(var(--sab-band-ink-rgb),0.18); }
     .sab-stat-value { font-size: 32px; }
     .sab-stat-label { font-size: 10.5px; }
     .sab-closing { padding-top: 56px; }

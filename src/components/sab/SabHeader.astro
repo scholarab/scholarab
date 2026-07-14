@@ -36,7 +36,7 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
       <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
       <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
     </svg>
-    <span class="sabh-logo-word">Scholar<span style="color:#2FD3A0;">AB</span></span>
+    <span class="sabh-logo-word">Scholar<span style="color:var(--sab-band-accent);">AB</span></span>
   </a>
   <div class="sabh-links">
     {navItems.map(n => (
@@ -79,19 +79,19 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
 <style>
   .sabh-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; }
   .sabh-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
+  .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: var(--sab-band-ink); }
   .sabh-links { display: flex; align-items: center; gap: 34px; }
   .sabh-link {
-    font-size: 14.5px; font-weight: 500; color: rgba(242,240,233,0.75);
+    font-size: 14.5px; font-weight: 500; color: rgba(var(--sab-band-ink-rgb),0.75);
     text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 4px;
   }
-  .sabh-link:hover { color: #F2F0E9; }
-  .sabh-link-active { color: #F2F0E9; border-bottom-color: #2FD3A0; }
+  .sabh-link:hover { color: var(--sab-band-ink); }
+  .sabh-link-active { color: var(--sab-band-ink); border-bottom-color: #2FD3A0; }
   .sabh-cta {
     font-size: 14px; font-weight: 600; background: #2FD3A0; color: #0B1512;
     padding: 10px 20px; border-radius: 100px; text-decoration: none;
   }
-  .sabh-cta:hover { background: #F2F0E9; color: #0B1512; }
+  .sabh-cta:hover { background: var(--sab-band-ink); color: var(--sab-dark-band); }
 
   /* fishback2026.com campaign-ticker parity: Manrope 600 14px, solid band,
      45px tall, 60px between items, 30s linear loop, 1px underline offset 3px */
@@ -127,14 +127,14 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
     .sabh-cta { padding: 8px 16px; font-size: 13px; }
   }
 
-  /* Theme toggle — always on the dark header band, so colors are constant */
+  /* Theme toggle — follows the header band's ink color */
   #sabh-theme {
     position: relative; width: 36px; height: 36px; flex: none;
-    border-radius: 100px; border: 1px solid rgba(242,240,233,0.3);
-    background: transparent; color: #F2F0E9; cursor: pointer; overflow: hidden;
+    border-radius: 100px; border: 1px solid rgba(var(--sab-band-ink-rgb),0.3);
+    background: transparent; color: var(--sab-band-ink); cursor: pointer; overflow: hidden;
     margin-left: -12px; /* tuck closer to the CTA than the 34px link gap */
   }
-  #sabh-theme:hover { border-color: #F2F0E9; }
+  #sabh-theme:hover { border-color: var(--sab-band-ink); }
   .sabh-theme-moon, .sabh-theme-sun {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     transition: transform 400ms cubic-bezier(0.34,1.56,0.64,1), opacity 400ms cubic-bezier(0.34,1.56,0.64,1);
