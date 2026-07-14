@@ -1095,13 +1095,10 @@ html.theme-dark .badge-red   { color: #f87171; background: rgba(248,113,113,0.12
 /* Directory-page shell (scholarships + programs design pages) */
 .sabp { background: #FAF7F0; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
 .sabp-header { background: #0B1512; color: #F2F0E9; }
-/* width:100% — inside the .sabp column flexbox, margin:0 auto alone makes this
-   shrink-to-fit its content, so page width would vary with content (e.g. the
-   deadline calendar changed size month to month). */
-.sabp-body { max-width: 1180px; width: 100%; box-sizing: border-box; margin: 0 auto; padding: 72px 48px 96px; }
+.sabp-body { width: 100%; box-sizing: border-box; padding: 72px 48px 96px; }
 .sabp-footer { background: #0B1512; color: rgba(242,240,233,0.65); }
 .sabp-footer-inner {
-  max-width: 1180px; margin: 0 auto; padding: 48px;
+  padding: 48px;
   display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
 }
 .sabp-footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; color: #F2F0E9; }
@@ -1114,7 +1111,7 @@ html.theme-dark .badge-red   { color: #f87171; background: rgba(248,113,113,0.12
 }
 
 /* ══ "ScholarAB Match" design (claude.ai/design) — quiz island ══ */
-.sabm-body { max-width: 980px; margin: 0 auto; padding: 72px 48px 110px; width: 100%; }
+.sabm-body { padding: 72px 48px 110px; width: 100%; box-sizing: border-box; }
 .sabm-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 13px; color: #0E8C64; letter-spacing: 0.06em; }
 .sabm-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
 .sabm-h1 {
