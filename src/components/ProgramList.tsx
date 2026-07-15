@@ -131,7 +131,10 @@ function ProgramList({ items }: Props) {
                   <span className="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
                   {p.paid && <span className="sabl-mono sabl-paid">$ PAID</span>}
                 </div>
-                <a href={`/programs/${slug}`} className="sabl-name">{p.name}</a>
+                <a href={`/programs/${slug}`} className="sabl-name">
+                  {p.emoji && <span className="sabl-name-emoji" aria-hidden="true">{p.emoji} </span>}
+                  {p.name}
+                </a>
                 {p.provider && <div className="sabl-org">{p.provider}</div>}
                 {meta.length > 0 && (
                   <div className="sabl-meta-row">

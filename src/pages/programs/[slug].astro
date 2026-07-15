@@ -121,6 +121,7 @@ const valueNote = program.paid && program.stipend
       itemType="program"
       itemId={program.id}
       typeLabel="PROGRAM"
+      emoji={program.emoji}
       tag={program.category ? program.category.toUpperCase() : null}
       name={program.name}
       subline={program.provider ? `RUN BY ${program.provider.toUpperCase()}` : 'ALBERTA · VERIFIED BY HAND'}

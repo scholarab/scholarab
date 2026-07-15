@@ -4,6 +4,7 @@ import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships } from '../../lib/data-loader';
 import { generateSlug, parseAmount } from '../../lib/utils.ts';
+import { categoryEmoji } from '../../lib/category-emoji.ts';
 
 export async function getStaticPaths() {
   const scholarships = await loadScholarships();
@@ -127,6 +128,7 @@ const about = (scholarship as { description?: string }).description
       itemType="scholarship"
       itemId={scholarship.id}
       typeLabel="SCHOLARSHIP"
+      emoji={categoryEmoji(scholarship.category)}
       tag={scholarship.category ? scholarship.category.toUpperCase() : null}
       name={scholarship.title}
       subline={`${(scholarship.region || 'Alberta').toUpperCase()} · VERIFIED BY HAND`}

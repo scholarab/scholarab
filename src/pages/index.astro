@@ -4,6 +4,7 @@ import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
+import { categoryEmoji } from '../lib/category-emoji';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -120,6 +121,7 @@ const matchGroups = [
 
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
+            <span class="sab-sticker sab-mono">🍁 FREE FOREVER · MADE IN MEDICINE HAT</span>
             <p>
               One directory. Every listing checked by hand, every deadline tracked. None of it is scraped, and none of it sits behind a login.
             </p>
@@ -191,7 +193,9 @@ const matchGroups = [
           {categories.map(c => (
             <a href={`/scholarships?category=${encodeURIComponent(c.name)}`} class="sab-cat-card">
               <div class="sab-cat-top">
-                <span class="sab-cat-name">{c.name}</span>
+                <span class="sab-cat-name">
+                  {categoryEmoji(c.name) && <span class="sab-cat-emoji" aria-hidden="true">{categoryEmoji(c.name)} </span>}{c.name}
+                </span>
                 <span class="sab-cat-count sab-mono">{c.count}</span>
               </div>
               <div class="sab-cat-desc">{c.desc}</div>
@@ -437,6 +441,13 @@ const matchGroups = [
   .sab-hero-copy { max-width: 460px; }
   .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 0 0 30px; }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .sab-sticker {
+    display: inline-block; margin-bottom: 22px; padding: 8px 16px;
+    background: #2FD3A0; color: #0B1512; font-size: 11.5px; letter-spacing: 0.06em;
+    border-radius: 100px; border: 2px solid #0B1512;
+    box-shadow: 3px 3px 0 rgba(242,240,233,0.25);
+    transform: rotate(-2.5deg);
+  }
   .sab-btn-accent {
     display: inline-flex; align-items: center; gap: 10px;
     background: #2FD3A0; color: #0B1512; font-weight: 700; font-size: 16px;
@@ -504,6 +515,7 @@ const matchGroups = [
   .sab-cat-card:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #2FD3A0; color: #141915; }
   .sab-cat-top { display: flex; justify-content: space-between; align-items: baseline; }
   .sab-cat-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .sab-cat-emoji { font-size: 15px; margin-right: 2px; }
   .sab-cat-count { font-size: 12px; color: rgba(20,25,21,0.45); }
   .sab-cat-desc { font-size: 13.5px; color: rgba(20,25,21,0.55); margin-top: 8px; line-height: 1.45; }
 

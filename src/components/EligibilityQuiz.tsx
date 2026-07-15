@@ -18,7 +18,7 @@ interface Props {
 interface QuizQuestion {
   key: string
   q: string
-  opts: { label: string; value: string; hint?: string }[]
+  opts: { label: string; value: string; hint?: string; emoji?: string }[]
 }
 
 // Mono hints come from the "ScholarAB Match" design; keys/values/labels are the
@@ -28,9 +28,9 @@ const QUESTIONS: QuizQuestion[] = [
     key: 'searchType',
     q: "What are you looking for?",
     opts: [
-      { label: 'Scholarships', value: 'scholarships', hint: 'AWARDS AND BURSARIES' },
-      { label: 'Research Programs', value: 'programs', hint: 'SUMMER AND ENRICHMENT' },
-      { label: 'Both', value: 'both', hint: 'SHOW ME EVERYTHING' },
+      { label: 'Scholarships', value: 'scholarships', hint: 'AWARDS AND BURSARIES', emoji: '🎓' },
+      { label: 'Research Programs', value: 'programs', hint: 'SUMMER AND ENRICHMENT', emoji: '🔬' },
+      { label: 'Both', value: 'both', hint: 'SHOW ME EVERYTHING', emoji: '✨' },
     ],
   },
   {
@@ -59,12 +59,12 @@ const QUESTIONS: QuizQuestion[] = [
     key: 'field',
     q: "What's your academic focus?",
     opts: [
-      { label: 'STEM & Engineering', value: 'STEM', hint: 'SCIENCE, TECH, MATH' },
-      { label: 'Health & Medicine', value: 'health', hint: 'PRE-MED, NURSING, KIN' },
-      { label: 'Business & Commerce', value: 'business', hint: 'FINANCE, MANAGEMENT' },
-      { label: 'Arts & Humanities', value: 'arts', hint: 'FINE ARTS, SOCIAL SCIENCE' },
-      { label: 'Trades', value: 'trades', hint: 'RAP AND APPRENTICESHIPS' },
-      { label: 'Still figuring it out', value: '', hint: 'TOTALLY FINE' },
+      { label: 'STEM & Engineering', value: 'STEM', hint: 'SCIENCE, TECH, MATH', emoji: '🔬' },
+      { label: 'Health & Medicine', value: 'health', hint: 'PRE-MED, NURSING, KIN', emoji: '🩺' },
+      { label: 'Business & Commerce', value: 'business', hint: 'FINANCE, MANAGEMENT', emoji: '💼' },
+      { label: 'Arts & Humanities', value: 'arts', hint: 'FINE ARTS, SOCIAL SCIENCE', emoji: '🎨' },
+      { label: 'Trades', value: 'trades', hint: 'RAP AND APPRENTICESHIPS', emoji: '🔧' },
+      { label: 'Still figuring it out', value: '', hint: 'TOTALLY FINE', emoji: '🤷' },
     ],
   },
   {
@@ -131,10 +131,11 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
 // Selection state lives in the parent so only one tile can ever be selected
 // and clicks during the step transition are ignored.
 function MatchTile({
-  label, hint, delay, state, animateIn, onClick,
+  label, hint, emoji, delay, state, animateIn, onClick,
 }: {
   label: string
   hint?: string
+  emoji?: string
   delay: number
   state: 'idle' | 'selected' | 'dim'
   animateIn: boolean
@@ -148,7 +149,10 @@ function MatchTile({
       style={{ animationDelay: `${delay}ms`, height: '100%' }}
     >
       <span className="sabm-opt-text">
-        <span className="sabm-opt-label">{label}</span>
+        <span className="sabm-opt-label">
+          {emoji && <span className="sabm-opt-emoji" aria-hidden="true">{emoji} </span>}
+          {label}
+        </span>
         {hint && <span className="sabm-opt-hint sabl-mono">{hint}</span>}
       </span>
       <span className="sabm-opt-arrow" aria-hidden="true">→</span>
@@ -515,6 +519,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 <MatchTile
                   label={opt.label}
                   hint={opt.hint}
+                  emoji={opt.emoji}
                   delay={i * 50}
                   state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : 'idle'}
                   animateIn={enterDir === 'fwd'}

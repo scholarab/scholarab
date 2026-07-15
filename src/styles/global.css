@@ -1146,6 +1146,9 @@ html.theme-dark .badge-red   { color: #f87171; background: rgba(248,113,113,0.12
 .sabm-opt-dim { opacity: 0.45; }
 .sabm-opt-text { display: flex; flex-direction: column; gap: 5px; }
 .sabm-opt-label { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: #141915; }
+.sabm-opt-emoji { margin-right: 7px; }
+.sabl-name-emoji { margin-right: 5px; }
+.sabl-tag-emoji { margin-right: 3px; }
 .sabm-opt-hint { font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); }
 .sabm-opt-arrow { font-size: 18px; color: #0E8C64; flex: none; }
 .sabm-prev {

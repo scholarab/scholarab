@@ -4,6 +4,7 @@ import { showToast, getToday, prefersReducedMotion, generateSlug } from '../lib/
 import { getScholarshipStatus as getStatus } from '../hooks/useItems.ts';
 import type { ScholarshipWithMeta, ProgramWithMeta } from '../hooks/useItems.ts';
 import { sendEvent } from '../lib/events.ts';
+import { categoryEmoji } from '../lib/category-emoji.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
 
 const DeadlineCalendar = lazy(() => import('./DeadlineCalendar.tsx'));
@@ -127,7 +128,10 @@ function SavedScholarshipCard({ s, onUnsave }: { s: ScholarshipWithMeta; onUnsav
   return (
     <div ref={cardRef} className="sabl-card h-full">
       <div className="sabl-card-top">
-        <span className="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
+        <span className="sabl-mono sabl-tag">
+          {categoryEmoji(s.category) && <span className="sabl-tag-emoji" aria-hidden="true">{categoryEmoji(s.category)} </span>}
+          {(s.category ?? 'GENERAL').toUpperCase()}
+        </span>
         <ScholarshipDaysChip s={s} />
       </div>
       <a href={`/scholarships/${generateSlug(s.title)}`} className="sabl-name">{s.title}</a>
@@ -163,7 +167,10 @@ function SavedProgramCard({ p, onUnsave }: { p: ProgramWithMeta; onUnsave: () =>
         <span className="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
         <ProgramDaysChip p={p} />
       </div>
-      <a href={`/programs/${generateSlug(p.name)}`} className="sabl-name">{p.name}</a>
+      <a href={`/programs/${generateSlug(p.name)}`} className="sabl-name">
+        {p.emoji && <span className="sabl-name-emoji" aria-hidden="true">{p.emoji} </span>}
+        {p.name}
+      </a>
       {p.provider && <div className="sabl-org" style={{ margin: '10px 0 0' }}>{p.provider.toUpperCase()}</div>}
       {p.description && <div className="sabl-blurb" style={{ marginTop: 14 }}>{p.description}</div>}
       <div className="sabl-card-foot">

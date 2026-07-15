@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { useScholarships, getScholarshipStatus } from '../hooks/useItems.ts';
 import type { ScholarshipWithMeta, StatusFilter } from '../hooks/useItems.ts';
 import { generateSlug, parseAmount } from '../lib/utils.ts';
+import { categoryEmoji } from '../lib/category-emoji.ts';
 import { sendEvent } from '../lib/events.ts';
 import ErrorBoundary from './ErrorBoundary.tsx';
 
@@ -166,7 +167,10 @@ function ScholarshipList({ items }: Props) {
             return (
               <div key={s.id} className="sabl-card">
                 <div className="sabl-card-top">
-                  <span className="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
+                  <span className="sabl-mono sabl-tag">
+                    {categoryEmoji(s.category) && <span className="sabl-tag-emoji" aria-hidden="true">{categoryEmoji(s.category)} </span>}
+                    {(s.category ?? 'GENERAL').toUpperCase()}
+                  </span>
                   <DaysChip s={s} />
                 </div>
                 <a href={`/scholarships/${s._slug ?? generateSlug(s.title)}`} className="sabl-name">{s.title}</a>
