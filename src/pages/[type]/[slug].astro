@@ -1,0 +1,298 @@
+---
+// One route for both detail-page types: /scholarships/<slug> and
+// /programs/<slug>. The two pages share this template verbatim; only the
+// frontmatter prep differs, so it branches on `kind` below. The merge was
+// verified byte-identical against the previous per-type pages' built HTML.
+import Layout from '../../layouts/Layout.astro';
+import SabHeader from '../../components/sab/SabHeader.astro';
+import SabDetail from '../../components/sab/SabDetail.astro';
+import { loadScholarships, loadPrograms } from '../../lib/data-loader';
+import { generateSlug, parseAmount } from '../../lib/utils.ts';
+import { categoryEmoji } from '../../lib/category-emoji.ts';
+import type { Scholarship, Program } from '../../lib/data-loader';
+
+export async function getStaticPaths() {
+  // Neighbor order matches each directory's default sort: earliest deadline
+  // first (programs put TBA / Ongoing at the end)
+  const ms = (d: string | null | undefined) =>
+    d && d !== 'TBA' && d !== 'Ongoing' ? new Date(d + 'T00:00:00').getTime() : Infinity;
+
+  const scholarships = [...await loadScholarships()]
+    .sort((a, b) => ms(a.deadline) - ms(b.deadline) || a.id - b.id);
+  const programs = [...await loadPrograms()]
+    .sort((a, b) => ms(a.deadline) - ms(b.deadline) || a.id - b.id);
+
+  return [
+    ...scholarships.map((s, i) => ({
+      params: { type: 'scholarships', slug: generateSlug(s.title) },
+      props: {
+        kind: 'scholarship' as const,
+        scholarship: s,
+        program: undefined as Program | undefined,
+        position: `LISTING ${i + 1} OF ${scholarships.length}`,
+        prevSlug: generateSlug(scholarships[(i - 1 + scholarships.length) % scholarships.length]!.title),
+        nextSlug: generateSlug(scholarships[(i + 1) % scholarships.length]!.title),
+      },
+    })),
+    ...programs.map((p, i) => ({
+      params: { type: 'programs', slug: generateSlug(p.name) },
+      props: {
+        kind: 'program' as const,
+        scholarship: undefined as Scholarship | undefined,
+        program: p,
+        position: `LISTING ${i + 1} OF ${programs.length}`,
+        prevSlug: generateSlug(programs[(i - 1 + programs.length) % programs.length]!.name),
+        nextSlug: generateSlug(programs[(i + 1) % programs.length]!.name),
+      },
+    })),
+  ];
+}
+
+const { kind, scholarship, program, position, prevSlug, nextSlug } = Astro.props;
+
+function formatDate(str: string | null): string {
+  if (!str) return 'TBA';
+  if (str === 'TBA' || str === 'Ongoing') return str;
+  const d = new Date(str + 'T00:00:00');
+  return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const todayDate = new Date();
+todayDate.setHours(0, 0, 0, 0);
+const daysUntil = (d: Date) => Math.max(0, Math.ceil((d.getTime() - todayDate.getTime()) / 86400000));
+
+// Everything the template needs, computed per kind.
+let d;
+if (kind === 'scholarship') {
+  const s = scholarship!;
+  const slug = generateSlug(s.title);
+  const openDate     = new Date((s.openDate || '1970-01-01') + 'T00:00:00');
+  const deadlineDate = s.deadline ? new Date(s.deadline + 'T00:00:00') : null;
+  const status = todayDate < openDate
+    ? 'future'
+    : (deadlineDate && todayDate > deadlineDate)
+      ? 'closed'
+      : deadlineDate ? 'active' : 'tba';
+  const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
+
+  const regionStr    = !s.region || s.region === 'National' ? '' : ` in ${s.region}`;
+  const description  = `The ${s.title} offers ${s.amount} to ${s.audience}${regionStr}. Deadline: ${formatDate(s.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
+  const canonical    = `https://www.scholarab.ca/scholarships/${slug}`;
+  const parsedAmount = parseAmount(s.amount) || null;
+  const deadlineClause = s.deadline ? ` before ${formatDate(s.deadline)}` : '';
+
+  d = {
+    currentPath: '/scholarships',
+    pageTitle: `${s.title} | ScholarAB | Alberta Scholarships`,
+    description,
+    canonical,
+    ldJson: {
+      '@context': 'https://schema.org',
+      '@type': 'EducationalOccupationalProgram',
+      'name': s.title,
+      'description': description,
+      'url': canonical,
+      ...(s.deadline ? { 'applicationDeadline': s.deadline } : {}),
+      ...(parsedAmount !== null ? { 'offers': { '@type': 'Offer', 'price': parsedAmount, 'priceCurrency': 'CAD' } } : {}),
+      'provider': { '@type': 'Organization', 'name': 'ScholarAB', 'url': 'https://www.scholarab.ca' },
+    },
+    breadcrumbName: 'Scholarships',
+    itemName: s.title,
+    itemId: s.id,
+    itemType: 'scholarship',
+    typeLabel: 'SCHOLARSHIP',
+    emoji: categoryEmoji(s.category),
+    tag: s.category ? s.category.toUpperCase() : null,
+    subline: `${(s.region || 'Alberta').toUpperCase()} · VERIFIED BY HAND`,
+    status,
+    daysLeft,
+    dueLong: formatDate(s.deadline),
+    opensLabel: s.openDate ? formatDate(s.openDate) : null,
+    facts: [
+      { label: 'REGION', value: s.region || 'Alberta-wide' },
+      { label: 'DEADLINE', value: formatDate(s.deadline) },
+      { label: 'CATEGORY', value: s.category || 'General' },
+      { label: 'AMOUNT', value: s.amount },
+      ...(s.openDate ? [{ label: 'OPENS', value: formatDate(s.openDate) }] : []),
+    ],
+    eligibility: s.audience,
+    // About text mirrors the data description; scholarship.description exists
+    // in the JSON but not in the Scholarship type, so read it defensively.
+    about: (s as { description?: string }).description
+      ?? `${s.title} is an Alberta award for high school students.`,
+    notes: s.notes,
+    // The data has no per-listing application steps; these stay generic and true.
+    steps: s.applyViaGuidance
+      ? [
+          'Talk to your school guidance counsellor about this award.',
+          'Ask about internal school deadlines, which can be earlier than the listed one.',
+          `Submit your application through your school${deadlineClause}.`,
+        ]
+      : [
+          'Read the full requirements on the official website.',
+          'Prepare your documents and any references it asks for.',
+          `Submit through the official website${deadlineClause}.`,
+        ],
+    valueLabel: 'AWARD VALUE',
+    valueBig: s.amount,
+    valueNote: s.applyViaGuidance ? 'Applications go through your school.' : null,
+    ctaLabel: s.applyViaGuidance ? 'Learn more' : 'Apply now',
+    url: s.url,
+    canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
+  };
+} else {
+  const p = program!;
+  const slug = generateSlug(p.name);
+  const hasDate = !!p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing';
+  const deadlineDate = hasDate ? new Date(p.deadline + 'T00:00:00') : null;
+  const status = deadlineDate
+    ? (todayDate > deadlineDate ? 'closed' : 'active')
+    : p.deadline === 'Ongoing' ? 'ongoing' : 'tba';
+  const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
+
+  const desc = p.description ?? '';
+  const metaDescription = desc.length > 160
+    ? desc.slice(0, 157) + '...'
+    : desc || `${p.name} is a research program offered by ${p.provider}. Discover and apply through ScholarAB, Alberta's free scholarship and program directory for high school students.`;
+  const canonical = `https://www.scholarab.ca/programs/${slug}`;
+  const dueLong = status === 'ongoing' ? 'Ongoing, join anytime' : formatDate(p.deadline);
+  const deadlineClause = hasDate ? ` before ${formatDate(p.deadline)}` : '';
+
+  d = {
+    currentPath: '/programs',
+    pageTitle: `${p.name} | ScholarAB | Alberta Research Programs`,
+    description: metaDescription,
+    canonical,
+    ldJson: {
+      '@context': 'https://schema.org',
+      '@type': 'EducationalOccupationalProgram',
+      'name': p.name,
+      'description': metaDescription,
+      'url': canonical,
+      ...(hasDate ? { 'applicationDeadline': p.deadline } : {}),
+      'provider': { '@type': 'Organization', 'name': p.provider },
+    },
+    breadcrumbName: 'Research Programs',
+    itemName: p.name,
+    itemId: p.id,
+    itemType: 'program',
+    typeLabel: 'PROGRAM',
+    emoji: p.emoji,
+    tag: p.category ? p.category.toUpperCase() : null,
+    subline: p.provider ? `RUN BY ${p.provider.toUpperCase()}` : 'ALBERTA · VERIFIED BY HAND',
+    status,
+    daysLeft,
+    dueLong,
+    opensLabel: undefined,
+    facts: [
+      { label: 'DURATION', value: p.duration || 'Varies' },
+      { label: 'GRADES', value: p.grades || 'High school' },
+      { label: 'LOCATION', value: p.location || 'Alberta' },
+      { label: 'DEADLINE', value: dueLong },
+    ],
+    eligibility: p.eligibility,
+    about: p.description,
+    notes: undefined,
+    // The data has no per-listing application steps; these stay generic and true.
+    steps: [
+      'Review the details and eligibility on the official program site.',
+      'Prepare the application materials it asks for.',
+      status === 'ongoing'
+        ? 'Apply or sign up on the official site. You can join anytime.'
+        : `Apply on the official site${deadlineClause}.`,
+    ],
+    valueLabel: 'THIS PROGRAM IS',
+    valueBig: p.paid ? 'Paid' : 'Free',
+    valueNote: p.paid && p.stipend
+      ? p.stipend
+      : [p.duration, p.grades].filter(Boolean).join(' · ') || null,
+    ctaLabel: 'Learn more',
+    url: p.url,
+    canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
+  };
+}
+
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    { '@type': 'ListItem', 'position': 1, 'name': 'ScholarAB', 'item': 'https://www.scholarab.ca' },
+    { '@type': 'ListItem', 'position': 2, 'name': d.breadcrumbName, 'item': `https://www.scholarab.ca${d.currentPath}` },
+    { '@type': 'ListItem', 'position': 3, 'name': d.itemName, 'item': d.canonical },
+  ],
+};
+---
+
+<Layout
+  title={d.pageTitle}
+  description={d.description}
+  ogTitle={d.pageTitle}
+  ogDescription={d.description}
+  ogUrl={d.canonical}
+  canonical={d.canonical}
+  currentPath={d.currentPath}
+  hideChrome
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(d.ldJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+
+  <div id="sab-detail" class="sabp">
+    <div class="sabp-header">
+      <SabHeader currentPath={d.currentPath} />
+    </div>
+
+    <SabDetail
+      itemType={d.itemType}
+      itemId={d.itemId}
+      typeLabel={d.typeLabel}
+      emoji={d.emoji}
+      tag={d.tag}
+      name={d.itemName}
+      subline={d.subline}
+      status={d.status}
+      daysLeft={d.daysLeft}
+      dueLong={d.dueLong}
+      opensLabel={d.opensLabel}
+      backHref={d.currentPath}
+      backLabel={`Back to ${d.breadcrumbName === 'Research Programs' ? 'Programs' : 'Scholarships'}`}
+      position={position}
+      prevHref={`${d.currentPath}/${prevSlug}`}
+      nextHref={`${d.currentPath}/${nextSlug}`}
+      facts={d.facts}
+      eligibility={d.eligibility}
+      about={d.about}
+      notes={d.notes}
+      steps={d.steps}
+      valueLabel={d.valueLabel}
+      valueBig={d.valueBig}
+      valueNote={d.valueNote}
+      ctaLabel={d.ctaLabel}
+      url={d.url}
+      canRemind={d.canRemind}
+      canonical={d.canonical}
+    />
+
+    <!-- Slim dark footer -->
+    <div class="sabp-footer">
+      <div class="sabp-footer-inner">
+        <div class="sabp-footer-logo">
+          <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true">
+            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
+            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
+          </svg>
+          <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
+        </div>
+        <span class="sabp-footer-note"><a href="/">Back home</a></span>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  /* The detail design is fixed light regardless of site theme */
+  body:has(#sab-detail) { background: #FAF7F0; }
+</style>
