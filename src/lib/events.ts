@@ -1,6 +1,6 @@
 // Anonymous event counting — fire-and-forget, no cookies, no ids, no payload
 // beyond the event name and which item it concerns. Must never break the page.
-export type AppEvent = 'detail_view' | 'apply_click' | 'save' | 'quiz_complete' | 'search_empty'
+export type AppEvent = 'detail_view' | 'apply_click' | 'save' | 'quiz_start' | 'quiz_complete' | 'search_empty'
 
 const OPT_OUT_KEY = 'sa_no_track'
 

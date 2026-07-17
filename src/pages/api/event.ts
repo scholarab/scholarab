@@ -7,7 +7,7 @@ import { jsonError } from '../../lib/api-response'
 import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_complete', 'search_empty'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty'])
 // Real browser UAs never contain a URL, a script-runtime name, or an HTTP
 // library name — bots and fetch libraries almost always do. JS-executing
 // crawlers (Googlebot, Bytespider) all match one of the generic terms.
@@ -16,12 +16,22 @@ const META_MAX = 120
 // Someone pasted an email (or their name@school) into search — never store it
 const EMAIL_LIKE = /\S+@\S+\.\S+/
 
+// Students browse from residential/school networks, never from cloud hosts.
+// Catches JS-executing bots with flawless browser UAs. Checked, never stored.
+const DATACENTER_ORG = /amazon|aws|google[- ]cloud|azure|microsoft[- ]corp|hetzner|digital[- ]?ocean|ovh|linode|akamai|vultr|alibaba|tencent|oracle|leaseweb|contabo|m247|datacamp|choopa|fly\.io|huawei[- ]cloud|scaleway/i
+
+type CfLocals = { runtime?: { cf?: { asOrganization?: string } } }
+
 const accepted = () => new Response(null, { status: 204 })
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   // Drop bots silently — a 204 gives them nothing to retry against
   const ua = request.headers.get('user-agent') ?? ''
   if (!ua || BOT_UA.test(ua)) return accepted()
+
+  // Cloudflare tells us which network the request came from
+  const asOrg = (locals as CfLocals | undefined)?.runtime?.cf?.asOrganization
+  if (asOrg && DATACENTER_ORG.test(asOrg)) return accepted()
 
   // Only our own pages send events. Browsers set Origin on POST and
   // Sec-Fetch-Site on same-origin requests; if either is present and wrong,

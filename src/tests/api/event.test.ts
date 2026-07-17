@@ -144,6 +144,32 @@ describe('POST /api/event', () => {
     expect(mockInsert).toHaveBeenCalled()
   })
 
+  it('silently drops requests from datacenter networks', async () => {
+    for (const org of ['AMAZON-02', 'GOOGLE-CLOUD-PLATFORM', 'Hetzner Online GmbH', 'DIGITALOCEAN-ASN', 'MICROSOFT-CORP-MSN-AS-BLOCK']) {
+      const res = await POST({
+        request: makeRequest({ event: 'quiz_complete' }),
+        locals: { runtime: { cf: { asOrganization: org } } },
+      } as unknown as Parameters<typeof POST>[0])
+      expect(res.status).toBe(204)
+    }
+    expect(mockInsert).not.toHaveBeenCalled()
+  })
+
+  it('accepts requests from residential networks', async () => {
+    const res = await POST({
+      request: makeRequest({ event: 'quiz_complete' }),
+      locals: { runtime: { cf: { asOrganization: 'TELUS Communications Inc.' } } },
+    } as unknown as Parameters<typeof POST>[0])
+    expect(res.status).toBe(204)
+    expect(mockInsert).toHaveBeenCalled()
+  })
+
+  it('accepts quiz_start', async () => {
+    const res = await call({ event: 'quiz_start' })
+    expect(res.status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'quiz_start', itemType: null, itemId: null, meta: null })
+  })
+
   it('rejects out-of-range itemId', async () => {
     expect((await call({ event: 'save', itemType: 'scholarship', itemId: 0 })).status).toBe(400)
     expect((await call({ event: 'save', itemType: 'scholarship', itemId: -5 })).status).toBe(400)

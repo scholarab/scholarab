@@ -17,6 +17,7 @@ const EVENT_LABELS: Record<string, string> = {
   detail_view: 'Detail views',
   apply_click: 'Apply clicks',
   save: 'Saves',
+  quiz_start: 'Quiz starts',
   quiz_complete: 'Quiz completions',
   search_empty: 'Empty searches',
   alert_subscribe: 'Alert signups',
@@ -131,18 +132,27 @@ export default function AnalyticsPanel({ data }: Props) {
           <p className="text-sm text-white/40">
             Anonymous event counts. One count per person per visit. No cookies, no IPs, no user ids.
           </p>
+          <p className="text-xs text-white/30 mt-1">
+            Detail views require 2.5s on the page since Jul 16, 2026 — earlier view counts ran hotter, so don&apos;t compare across that date.
+          </p>
         </div>
       </div>
 
       {/* Totals: 30d big, 7d small */}
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mb-8">
         {Object.entries(EVENT_LABELS).map(([event, label]) => {
           const t = data.totals.find(x => x.event === event)
+          const starts30 = data.totals.find(x => x.event === 'quiz_start')?.n30 ?? 0
+          const completionRate = event === 'quiz_complete' && starts30 > 0
+            ? `${Math.round(((t?.n30 ?? 0) / starts30) * 100)}% of starts`
+            : null
           return (
             <div key={event} className="border border-white/6 rounded-xl p-4">
               <p className="text-2xl font-semibold" style={{ color: '#22d3a5' }}>{(t?.n30 ?? 0).toLocaleString()}</p>
               <p className="text-xs text-white/40 mt-1">{label}</p>
-              <p className="text-xs text-white/25 mt-0.5">{(t?.n7 ?? 0).toLocaleString()} last 7d</p>
+              <p className="text-xs text-white/25 mt-0.5">
+                {(t?.n7 ?? 0).toLocaleString()} last 7d{completionRate ? ` · ${completionRate}` : ''}
+              </p>
             </div>
           )
         })}

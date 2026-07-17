@@ -1,0 +1,25 @@
+name: Prune analytics tables
+
+on:
+  schedule:
+    - cron: '0 8 1 * *'   # 1st of every month, 8am UTC
+  workflow_dispatch:
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Prune events and rate_limit tables
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx tsx scripts/prune-events.ts

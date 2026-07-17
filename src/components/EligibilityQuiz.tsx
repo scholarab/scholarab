@@ -231,6 +231,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       setAnswers(a => ({ ...a, [key]: value }))
       setEnterDir('fwd')
       setAnimKey(k => k + 1)
+      // Answering the first question = one started run; with quiz_complete
+      // this gives a drop-off rate. Session-deduped like every event.
+      if (step === 0) sendEvent('quiz_start')
       // Answering the final question = one completed run. Counted here, not on
       // the results screen, so restored sessions don't recount.
       if (step === QUESTIONS.length - 1) sendEvent('quiz_complete')
