@@ -130,10 +130,7 @@ export default function AnalyticsPanel({ data }: Props) {
         <div>
           <h1 className="text-xl font-semibold">Analytics</h1>
           <p className="text-sm text-white/40">
-            Anonymous event counts. One count per person per visit. No cookies, no IPs, no user ids.
-          </p>
-          <p className="text-xs text-white/30 mt-1">
-            Detail views require 2.5s on the page since Jul 16, 2026 — earlier view counts ran hotter, so don&apos;t compare across that date.
+            Anonymous event counts. One count per person per visit. No cookies, no IPs, no user ids. Counting since Jul 16, 2026.
           </p>
         </div>
       </div>
