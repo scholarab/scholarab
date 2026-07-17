@@ -10,5 +10,9 @@
   {
     "host": "forum.ca",
     "reason": "WAF returns 403 to automated requests; site verified live 2026-07-16"
+  },
+  {
+    "host": "technovationchallenge.org",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs; site verified live 2026-07-16"
   }
 ]
