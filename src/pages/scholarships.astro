@@ -1,4 +1,6 @@
 ---
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships } from '../lib/data-loader';
@@ -44,10 +46,7 @@ const scholarships = raw.map(s => ({
       "url": `https://www.scholarab.ca/scholarships/${generateSlug(s.title)}`,
     })),
   })} slot="head" />
-  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
-  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
-  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
-  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <SabFonts slot="head" />
 
   <div id="sab-scholarships" class="sabp">
     <div class="sabp-header">
@@ -66,19 +65,7 @@ const scholarships = raw.map(s => ({
       )}
     </div>
 
-    <!-- Slim dark footer -->
-    <div class="sabp-footer">
-      <div class="sabp-footer-inner">
-        <div class="sabp-footer-logo">
-          <svg width="22" height="22" viewBox="0 0 40 40" aria-hidden="true">
-            <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
-            <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
-          </svg>
-          <span>Scholar<span style="color:#2FD3A0;">AB</span></span>
-        </div>
-        <span class="sabp-footer-note"><a href="/">Back home</a></span>
-      </div>
-    </div>
+    <SabFooter />
   </div>
 </Layout>
 

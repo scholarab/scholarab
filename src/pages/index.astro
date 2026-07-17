@@ -1,4 +1,5 @@
 ---
+import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
@@ -96,10 +97,7 @@ const matchGroups = [
     "url": "https://www.scholarab.ca",
     "description": "Free Alberta scholarship and research program directory for high school students.",
   })} slot="head" />
-  <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
-  <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
-  <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin slot="head" />
-  <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin slot="head" />
+  <SabFonts slot="head" />
 
   <div id="sab-home">
 

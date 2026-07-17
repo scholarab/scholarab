@@ -282,7 +282,6 @@ body {
   isolation: isolate;
 }
 
-
 /* ── Focus ring ────────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--brand);
@@ -320,15 +319,6 @@ h1, h2 {
   letter-spacing: -0.02em;
 }
 
-
-
-
-
-
-
-
-
-
 /* ── Navbar scroll shadow ─────────────────────────────────── */
 .glass-nav.scrolled {
   backdrop-filter: blur(32px) saturate(200%);
@@ -338,9 +328,6 @@ h1, h2 {
 html.theme-dark .glass-nav.scrolled {
   box-shadow: 0 6px 32px rgba(0,0,0,0.5);
 }
-
-
-
 
 /* ── Page view transitions ────────────────────────────────── */
 @keyframes page-in {
@@ -382,10 +369,6 @@ html[data-swipe-dir="right"] ::view-transition-new(root) {
   .glass-nav { transition: none !important; }
 }
 
-
-
-
-
 /* ── Light theme: blue-400 overrides (quiz "good match" badge) ─ */
 html.theme-light .text-blue-400 {
   color: #1d4ed8 !important;
@@ -399,19 +382,6 @@ html.theme-light .bg-blue-500\/15 {
 html.theme-light .border-blue-500\/30 {
   border-color: rgba(29, 78, 216, 0.35) !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ── Quiz step motion ─────────────────────────────────────────────── */
 @keyframes quizStepIn {
@@ -442,23 +412,16 @@ html.theme-light .border-blue-500\/30 {
   .quiz-tile-in, .quiz-results-in, .quiz-card-in { animation: none !important; }
 }
 
-
-
-
 /* ── Hide match intro when results are visible ───────────────────── */
 body.quiz-results #match-intro,
 body.quiz-results #match-divider {
   display: none !important;
 }
 
-
 /* ── Reduced motion — entrance + looping animations ──────────────── */
 @media (prefers-reduced-motion: reduce) {
   #nav-underline { transition: opacity 0.2s ease; }
 }
-
-
-
 
 /* ══ "ScholarAB Scholarships" design (claude.ai/design) — list-page island ══
    Fixed light palette, independent of the theme toggle. */
