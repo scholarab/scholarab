@@ -44,13 +44,23 @@ function ProgramList({ items }: Props) {
     savedIds, handleToggleSave,
   } = usePrograms(items);
 
-  // Same content-gap signal as the scholarships directory
+  // Same content-gap signal as the scholarships directory: only report a
+  // query that matches nothing in the FULL directory, not one starved by
+  // an active category/grade filter.
   useEffect(() => {
     const q = searchQuery.trim();
     if (q.length < 3 || filtered.length > 0) return;
+    const ql = q.toLowerCase();
+    const matchesAnywhere = items.some(p =>
+      p.name.toLowerCase().includes(ql) ||
+      (p.provider?.toLowerCase().includes(ql)) ||
+      (p.description?.toLowerCase().includes(ql)) ||
+      (p.category?.toLowerCase().includes(ql))
+    );
+    if (matchesAnywhere) return;
     const t = setTimeout(() => sendEvent('search_empty', undefined, undefined, q), 1000);
     return () => clearTimeout(t);
-  }, [searchQuery, filtered.length]);
+  }, [searchQuery, filtered.length, items]);
 
   const categories = useMemo(() => {
     const counts = new Map<string, number>();

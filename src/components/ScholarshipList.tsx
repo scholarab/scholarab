@@ -71,13 +71,22 @@ function ScholarshipList({ items }: Props) {
   } = useScholarships(items);
 
   // A search that settles on zero results for a second is a content gap worth
-  // knowing about. The timeout cancels while the user is still typing.
+  // knowing about. The timeout cancels while the user is still typing. Only a
+  // query that matches nothing in the FULL directory counts — zero results
+  // caused by an active category/region/status filter is not a content gap.
   useEffect(() => {
     const q = searchQuery.trim();
     if (q.length < 3 || filtered.length > 0) return;
+    const ql = q.toLowerCase();
+    const matchesAnywhere = items.some(s =>
+      s.title?.toLowerCase().includes(ql) ||
+      s.audience?.toLowerCase().includes(ql) ||
+      s.category?.toLowerCase().includes(ql)
+    );
+    if (matchesAnywhere) return;
     const t = setTimeout(() => sendEvent('search_empty', undefined, undefined, q), 1000);
     return () => clearTimeout(t);
-  }, [searchQuery, filtered.length]);
+  }, [searchQuery, filtered.length, items]);
 
   const categories = useMemo(() => {
     const counts = new Map<string, number>();

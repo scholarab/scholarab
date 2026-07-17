@@ -296,7 +296,7 @@ const chip =
 </style>
 
 <script>
-  import { sendEvent } from '../../lib/events.ts';
+  import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
   import { showToast, showConfetti } from '../../lib/utils';
 
@@ -387,7 +387,8 @@ const chip =
   // astro:page-load fires on first load and after every view-transition swap.
   document.addEventListener('astro:page-load', () => {
     const view = document.querySelector('[data-detail-view]');
-    if (view) sendEvent('detail_view', ...itemAttrs(view));
+    // Dwell-gated: an instant back/misclick shouldn't count as a view
+    if (view) sendEventAfterDwell('detail_view', ...itemAttrs(view));
 
     document.querySelectorAll<HTMLElement>('[data-sabd-save]').forEach(btn => {
       const id = parseInt(btn.dataset.bookmarkId!);
