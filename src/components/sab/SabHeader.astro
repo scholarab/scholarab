@@ -100,6 +100,12 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
     text-decoration-thickness: 1px; text-underline-offset: 3px;
   }
   .sabh-ticker-item a:hover { color: #F2F0E9; }
+  /* Pause while hovered (or keyboard-focused) so the text can be read,
+     selected, and copied — same behaviour as the fishback2026.com ticker. */
+  .sabh-ticker-band:hover .sabh-ticker,
+  .sabh-ticker-band:focus-within .sabh-ticker {
+    animation-play-state: paused;
+  }
   @keyframes sabh-tick {
     to { transform: translateX(-50%); }
   }
