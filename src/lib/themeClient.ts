@@ -9,7 +9,7 @@ export function getStoredTheme(): Theme {
   }
 }
 
-export function getSystemTheme(): Theme {
+function getSystemTheme(): Theme {
   return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 

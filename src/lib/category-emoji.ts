@@ -1,6 +1,6 @@
 // One emoji per scholarship category, used on cards, chips, and the home
 // category grid. Programs carry their own per-listing emoji in the data.
-export const CATEGORY_EMOJI: Record<string, string> = {
+const CATEGORY_EMOJI: Record<string, string> = {
   Academic: '🎓',
   Arts: '🎨',
   Community: '🤝',

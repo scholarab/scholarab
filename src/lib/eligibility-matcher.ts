@@ -203,7 +203,7 @@ export function getConfidenceTier(confidence: number): ConfidenceTier {
  * Match a student's grade against a program's grades string (e.g. "Grade 11", "Grades 10–12").
  * Returns true if the grade is in range, or if the program has no grade restriction.
  */
-export function matchProgram(
+function matchProgram(
   studentGrade: string,
   program: { grades: string | null },
 ): boolean {
