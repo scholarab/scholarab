@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
-import SavedList from '../components/SavedList.tsx';
+import SavedDirectory from '../components/sab/SavedDirectory.astro';
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
 ---
@@ -28,7 +28,7 @@ const programs = await loadPrograms();
     </div>
 
     <div class="sabp-body" style="flex:1;">
-      <SavedList initialScholarships={scholarships} initialPrograms={programs} client:load />
+      <SavedDirectory initialScholarships={scholarships} initialPrograms={programs} />
     </div>
 
     <!-- Slim dark footer -->

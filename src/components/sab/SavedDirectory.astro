@@ -1,0 +1,165 @@
+---
+// Server-rendered replacement for the old SavedList React island. All cards
+// ship hidden in the HTML; lib/saved-client.ts unhides the bookmarked ones
+// from localStorage and drives the view toggle, remove flow, and calendar.
+import { savedScholarshipChip, savedProgramChip, savedShortDate } from '../../lib/saved-client.ts';
+import { getScholarshipStatus } from '../../lib/list-core.ts';
+import { generateSlug } from '../../lib/utils.ts';
+import { categoryEmoji } from '../../lib/category-emoji.ts';
+import type { Scholarship, Program } from '../../lib/data-loader.ts';
+
+interface Props {
+  initialScholarships: Scholarship[];
+  initialPrograms: Program[];
+}
+const { initialScholarships, initialPrograms } = Astro.props;
+---
+
+<!-- Same skeleton the React island used to show before hydration -->
+<div class="sabl-page" data-sv-skeleton>
+  <div>
+    <div style="height:16px;width:130px;border-radius:6px;background:rgba(20,25,21,0.08);margin-bottom:16px" class="animate-pulse"></div>
+    <div style="height:64px;width:220px;border-radius:10px;background:rgba(20,25,21,0.08);margin-bottom:20px" class="animate-pulse"></div>
+    <div style="height:16px;width:260px;border-radius:6px;background:rgba(20,25,21,0.08);margin-bottom:40px" class="animate-pulse"></div>
+    <div class="sabl-grid">
+      {[0, 1, 2].map(() => (
+        <div class="animate-pulse" style="height:220px;border-radius:16px;background:rgba(20,25,21,0.06)"></div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<div class="sabl-page" data-sv-content hidden>
+  <div class="sabl-title-row">
+    <div>
+      <h1 class="sabl-h1">Saved</h1>
+      <p class="sabl-desc tnum" data-sv-count>0 items bookmarked. Your shortlist lives here.</p>
+    </div>
+    <div class="sabs-toggle" role="group" aria-label="View">
+      <button type="button" class="sabs-toggle-btn on" data-sv-view="list" aria-pressed="true">List</button>
+      <button type="button" class="sabs-toggle-btn" data-sv-view="calendar" aria-pressed="false">Calendar</button>
+    </div>
+  </div>
+
+  <div class="sabl-empty" style="margin-top:56px" data-sv-empty hidden>
+    <div class="sabl-mono sabs-empty-count">◦ 0 BOOKMARKS</div>
+    <div class="sabl-empty-title">Nothing saved yet.</div>
+    <div class="sabl-empty-sub" style="max-width:420px;margin:0 auto 30px">
+      Bookmark scholarships and programs to track their deadlines in one place.
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="/scholarships" class="sabm-btn-accent">Browse scholarships</a>
+      <a href="/programs" class="sabm-btn-outline" style="text-decoration:none;display:inline-block">Browse programs</a>
+    </div>
+  </div>
+
+  <div style="margin-top:48px" data-sv-list hidden>
+    <div data-sv-sh-section hidden>
+      <div class="sabs-section-head sabl-mono">
+        <span class="sabs-dot" style="background:#2FD3A0" aria-hidden="true"></span>
+        <span data-sv-sh-label>SCHOLARSHIPS · 0</span>
+      </div>
+      <div class="sabl-grid" style="margin-bottom:56px;padding-top:0">
+        {initialScholarships.map(s => {
+          const chip = savedScholarshipChip({ deadline: s.deadline, openDate: s.openDate });
+          const status = getScholarshipStatus(s);
+          const emoji = categoryEmoji(s.category);
+          return (
+            <div class="h-full" data-sv-wrap data-type="scholarship" data-id={s.id} hidden>
+              <div
+                class="sabl-card h-full"
+                data-id={s.id}
+                data-name={s.title}
+                data-deadline={s.deadline ?? undefined}
+                data-open-date={s.openDate ?? undefined}
+                data-amount={s.amount}
+                data-url={s.url}
+              >
+                <div class="sabl-card-top">
+                  <span class="sabl-mono sabl-tag">
+                    {emoji && <span class="sabl-tag-emoji" aria-hidden="true">{`${emoji} `}</span>}
+                    {(s.category ?? 'GENERAL').toUpperCase()}
+                  </span>
+                  <span class={chip.cls} data-sv-chip>{chip.label}</span>
+                </div>
+                <a href={`/scholarships/${generateSlug(s.title)}`} class="sabl-name">{s.title}</a>
+                <div class="sabl-amount">{s.amount}</div>
+                {s.audience && <div class="sabl-blurb">{s.audience}</div>}
+                <div class="sabl-card-foot">
+                  <span class="sabl-due">
+                    {s.deadline ? `DUE ${savedShortDate(s.deadline).toUpperCase()}` : 'NO FIXED DEADLINE'}
+                  </span>
+                  <div class="sabl-card-actions">
+                    <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
+                    {s.url && (
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        referrerpolicy="no-referrer"
+                        class="sabl-apply"
+                        data-sv-apply
+                      >{status === 'active' ? 'Apply →' : 'Visit →'}</a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <div data-sv-pr-section hidden>
+      <div class="sabs-section-head sabl-mono">
+        <span class="sabs-dot" style="background:#B8541F" aria-hidden="true"></span>
+        <span data-sv-pr-label>RESEARCH PROGRAMS · 0</span>
+      </div>
+      <div class="sabl-grid" style="padding-top:0">
+        {initialPrograms.map(p => {
+          const chip = savedProgramChip({ deadline: p.deadline });
+          return (
+            <div class="h-full" data-sv-wrap data-type="program" data-id={p.id} hidden>
+              <div
+                class="sabl-card h-full"
+                data-id={p.id}
+                data-name={p.name}
+                data-deadline={p.deadline ?? undefined}
+                data-url={p.url}
+              >
+                <div class="sabl-card-top">
+                  <span class="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
+                  <span class={chip.cls} data-sv-chip>{chip.label}</span>
+                </div>
+                <a href={`/programs/${generateSlug(p.name)}`} class="sabl-name">
+                  {p.emoji && <span class="sabl-name-emoji" aria-hidden="true">{`${p.emoji} `}</span>}
+                  {p.name}
+                </a>
+                {p.provider && <div class="sabl-org" style="margin:10px 0 0">{p.provider.toUpperCase()}</div>}
+                {p.description && <div class="sabl-blurb" style="margin-top:14px">{p.description}</div>}
+                <div class="sabl-card-foot">
+                  <span class="sabl-due">
+                    {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
+                      ? `DUE ${savedShortDate(p.deadline).toUpperCase()}`
+                      : p.deadline === 'Ongoing' ? 'ROLLING INTAKE' : 'DEADLINE TBA'}
+                  </span>
+                  <div class="sabl-card-actions">
+                    <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
+                    <a href={`/programs/${generateSlug(p.name)}`} class="sabl-apply">Details →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+
+  <div data-sv-cal hidden></div>
+</div>
+
+<script>
+  import { initSaved } from '../../lib/saved-client.ts';
+  initSaved();
+</script>

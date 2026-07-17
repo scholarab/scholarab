@@ -1,5 +1,5 @@
 // Framework-free filtering/sorting/status logic for the public directories.
-// Shared by the React hooks (useItems) and any vanilla page scripts.
+// Shared by the directory page scripts and the eligibility quiz.
 import { getToday } from './utils.ts';
 import type { Scholarship, Program } from './data-loader.ts';
 
