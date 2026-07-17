@@ -159,6 +159,11 @@ const chip =
         <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
           class="sabd-save" title="Save" aria-label="Save">☆</button>
       </div>
+      {status !== 'active' && url && (
+        <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+          data-track="apply" data-item-type={itemType} data-item-id={itemId}
+          class="sabd-mono sabd-visit">VISIT OFFICIAL SITE →</a>
+      )}
       <button data-sabd-copy data-copy-url={canonical} class="sabd-mono sabd-copy">COPY LINK</button>
     </div>
 
@@ -260,6 +265,15 @@ const chip =
   }
   .sabd-save:hover { border-color: #141915; }
   .sabd-save[data-saved] { color: #0E8C64; background: rgba(47,211,160,0.15); }
+  /* Official-site link shown when the CTA pill is Closed/Opens-soon, so the
+     source page stays reachable for every listing. */
+  .sabd-visit {
+    display: block; text-align: center; text-decoration: none;
+    font-size: 12.5px; letter-spacing: 0.03em; width: 100%; margin-top: 12px;
+    border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+    padding: 11px 0; color: rgba(20,25,21,0.7);
+  }
+  .sabd-visit:hover { border-color: #0E8C64; color: #0E8C64; }
   .sabd-copy {
     font-size: 12.5px; letter-spacing: 0.03em; width: 100%; margin-top: 12px;
     background: transparent; border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;

@@ -143,7 +143,7 @@ function SavedScholarshipCard({ s, onUnsave }: { s: ScholarshipWithMeta; onUnsav
         </span>
         <div className="sabl-card-actions">
           <RemoveButton cardRef={cardRef} onUnsave={onUnsave} label="Remove bookmark" />
-          {status === 'active' && s.url && (
+          {s.url && (
             <a
               href={s.url}
               target="_blank"
@@ -151,7 +151,7 @@ function SavedScholarshipCard({ s, onUnsave }: { s: ScholarshipWithMeta; onUnsav
               referrerPolicy="no-referrer"
               className="sabl-apply"
               onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
-            >Apply →</a>
+            >{status === 'active' ? 'Apply →' : 'Visit →'}</a>
           )}
         </div>
       </div>

@@ -199,7 +199,7 @@ function ScholarshipList({ items }: Props) {
                     >
                       {saved ? '★' : '☆'}
                     </button>
-                    {status === 'active' && s.url && (
+                    {s.url && (
                       <a
                         href={s.url}
                         target="_blank"
@@ -208,7 +208,7 @@ function ScholarshipList({ items }: Props) {
                         className="sabl-apply"
                         onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
                       >
-                        Apply →
+                        {status === 'active' ? 'Apply →' : 'Visit →'}
                       </a>
                     )}
                   </div>
