@@ -68,7 +68,7 @@ if (kind === 'scholarship') {
   const slug = generateSlug(s.title);
   const openDate     = new Date((s.openDate || '1970-01-01') + 'T00:00:00');
   const deadlineDate = s.deadline ? new Date(s.deadline + 'T00:00:00') : null;
-  const status = todayDate < openDate
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = todayDate < openDate
     ? 'future'
     : (deadlineDate && todayDate > deadlineDate)
       ? 'closed'
@@ -99,7 +99,7 @@ if (kind === 'scholarship') {
     breadcrumbName: 'Scholarships',
     itemName: s.title,
     itemId: s.id,
-    itemType: 'scholarship',
+    itemType: 'scholarship' as const,
     typeLabel: 'SCHOLARSHIP',
     emoji: categoryEmoji(s.category),
     tag: s.category ? s.category.toUpperCase() : null,
@@ -145,7 +145,7 @@ if (kind === 'scholarship') {
   const slug = generateSlug(p.name);
   const hasDate = !!p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing';
   const deadlineDate = hasDate ? new Date(p.deadline + 'T00:00:00') : null;
-  const status = deadlineDate
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = deadlineDate
     ? (todayDate > deadlineDate ? 'closed' : 'active')
     : p.deadline === 'Ongoing' ? 'ongoing' : 'tba';
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
@@ -175,7 +175,7 @@ if (kind === 'scholarship') {
     breadcrumbName: 'Research Programs',
     itemName: p.name,
     itemId: p.id,
-    itemType: 'program',
+    itemType: 'program' as const,
     typeLabel: 'PROGRAM',
     emoji: p.emoji,
     tag: p.category ? p.category.toUpperCase() : null,

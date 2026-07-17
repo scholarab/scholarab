@@ -1,28 +1,14 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
-import type { EligibilityCriteria } from '../../lib/eligibility-types'
 import { EMPTY_ELIGIBILITY } from '../../lib/eligibility-types'
 import { EligibilityEditor } from './EligibilityEditor'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 const REFRESH_INTERVAL = 60_000 // 60 seconds
 
-type Scholarship = {
-  id: number
-  title: string
-  amount: string
-  deadline: string | null
-  openDate: string | null
-  audience: string | null
-  url: string
-  category: string | null
-  lastVerified: string | null
-  region: string | null
-  notes: string | null
-  applyViaGuidance: boolean
-  active: boolean
-  eligibility: EligibilityCriteria | null
-  updatedAt: string
-}
+import type { Scholarship as BaseScholarship } from '../../lib/data-loader'
+
+// Admin rows carry updatedAt for optimistic locking; the public type doesn't.
+type Scholarship = BaseScholarship & { updatedAt: string }
 
 const CATEGORIES = ['Academic', 'Arts', 'Community', 'Environmental', 'General', 'Indigenous', 'STEM', 'Sports', 'Trades']
 const REGIONS = ['National', 'Alberta', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']

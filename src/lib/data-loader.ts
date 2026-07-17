@@ -54,10 +54,34 @@ export type Program = {
 let scholarshipCache: { data: Scholarship[]; exp: number } | null = null
 let programCache:     { data: Program[];     exp: number } | null = null
 
-export async function loadScholarships(): Promise<Scholarship[]> {
-  if (scholarshipCache && Date.now() < scholarshipCache.exp) return scholarshipCache.data
-  if (getEnv('DATABASE_URL') ?? import.meta.env.DATABASE_URL ?? process.env.DATABASE_URL) {
+const hasDbUrl = () =>
+  getEnv('DATABASE_URL') ?? import.meta.env.DATABASE_URL ?? process.env.DATABASE_URL
+
+// Shared cache + DB-with-JSON-fallback skeleton for both loaders.
+async function loadItems<T>(
+  cache: { data: T[]; exp: number } | null,
+  setCache: (c: { data: T[]; exp: number }) => void,
+  fromDb: () => Promise<T[]>,
+  fromJson: () => Promise<T[]>,
+): Promise<T[]> {
+  if (cache && Date.now() < cache.exp) return cache.data
+  if (hasDbUrl()) {
     try {
+      const result = await fromDb()
+      setCache({ data: result, exp: Date.now() + CACHE_TTL_MS })
+      return result
+    } catch (e) {
+      console.error('DB load failed, falling back to JSON:', e)
+    }
+  }
+  return fromJson()
+}
+
+export function loadScholarships(): Promise<Scholarship[]> {
+  return loadItems(
+    scholarshipCache,
+    c => { scholarshipCache = c },
+    async () => {
       const { db } = await import('./db/client')
       const { scholarships } = await import('./db/schema')
       const { eq } = await import('drizzle-orm')
@@ -76,7 +100,7 @@ export async function loadScholarships(): Promise<Scholarship[]> {
         active: scholarships.active,
         eligibility: scholarships.eligibility,
       }).from(scholarships).where(eq(scholarships.active, true))
-      const result = rows.map(r => ({
+      return rows.map(r => ({
         id: r.id,
         title: r.title,
         amount: r.amount,
@@ -92,20 +116,19 @@ export async function loadScholarships(): Promise<Scholarship[]> {
         active: r.active ?? true,
         eligibility: parseEligibility(r.eligibility),
       }))
-      scholarshipCache = { data: result, exp: Date.now() + CACHE_TTL_MS }
-      return result
-    } catch (e) {
-      console.error('DB load failed, falling back to JSON:', e)
-    }
-  }
-  const data = await import('../data/scholarships.json')
-  return (data.default as Array<Record<string, unknown>>).map(s => ({ ...(s as Omit<Scholarship, 'eligibility'>), openDate: (s.openDate as string | null) ?? null, eligibility: parseEligibility(s.eligibility) }))
+    },
+    async () => {
+      const data = await import('../data/scholarships.json')
+      return (data.default as Array<Record<string, unknown>>).map(s => ({ ...(s as Omit<Scholarship, 'eligibility'>), openDate: (s.openDate as string | null) ?? null, eligibility: parseEligibility(s.eligibility) }))
+    },
+  )
 }
 
-export async function loadPrograms(): Promise<Program[]> {
-  if (programCache && Date.now() < programCache.exp) return programCache.data
-  if (getEnv('DATABASE_URL') ?? import.meta.env.DATABASE_URL ?? process.env.DATABASE_URL) {
-    try {
+export function loadPrograms(): Promise<Program[]> {
+  return loadItems(
+    programCache,
+    c => { programCache = c },
+    async () => {
       const { db } = await import('./db/client')
       const { researchPrograms } = await import('./db/schema')
       const { eq } = await import('drizzle-orm')
@@ -127,7 +150,7 @@ export async function loadPrograms(): Promise<Program[]> {
         lastVerified: researchPrograms.lastVerified,
         active: researchPrograms.active,
       }).from(researchPrograms).where(eq(researchPrograms.active, true))
-      const result = rows.map(r => ({
+      return rows.map(r => ({
         id: r.id,
         name: r.name,
         emoji: r.emoji ?? null,
@@ -145,12 +168,10 @@ export async function loadPrograms(): Promise<Program[]> {
         lastVerified: r.lastVerified ?? null,
         active: r.active ?? true,
       }))
-      programCache = { data: result, exp: Date.now() + CACHE_TTL_MS }
-      return result
-    } catch (e) {
-      console.error('DB load failed, falling back to JSON:', e)
-    }
-  }
-  const data = await import('../data/research-programs.json')
-  return data.default as Program[]
+    },
+    async () => {
+      const data = await import('../data/research-programs.json')
+      return data.default as Program[]
+    },
+  )
 }

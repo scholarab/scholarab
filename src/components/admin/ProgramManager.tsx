@@ -2,24 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { toast } from 'sonner'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 
-type Program = {
-  id: number
-  name: string
-  emoji: string | null
-  category: string | null
-  provider: string | null
-  grades: string | null
-  duration: string | null
-  paid: boolean
-  stipend: string | null
-  location: string | null
-  eligibility: string | null
-  deadline: string | null
-  url: string
-  description: string | null
-  lastVerified: string | null
-  active: boolean
-}
+import type { Program } from '../../lib/data-loader'
 
 const CATEGORIES = ['Biology', 'Chemistry', 'Computer Science', 'Engineering', 'Environmental', 'Math', 'Medicine', 'Physics', 'Social Science', 'Multidisciplinary', 'Other']
 

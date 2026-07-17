@@ -3,7 +3,7 @@
 // and which column is checked for duplicates.
 import type { APIRoute } from 'astro'
 import { eq, ilike, desc } from 'drizzle-orm'
-import type { Column } from 'drizzle-orm'
+import type { AnyPgColumn } from 'drizzle-orm/pg-core'
 import { z } from 'zod'
 import { isAdminRequest } from './adminAuth'
 import { db } from './db/client'
@@ -14,9 +14,9 @@ export interface AdminCrudConfig {
   // use the columns passed explicitly below, so the table itself stays loose.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   table: any
-  idColumn: Column
-  updatedAtColumn: Column
-  dupColumn: Column
+  idColumn: AnyPgColumn
+  updatedAtColumn: AnyPgColumn
+  dupColumn: AnyPgColumn
   /** Field name checked for duplicates on create ('title' / 'name'). */
   dupField: string
   createSchema: z.ZodType<Record<string, unknown>>
@@ -53,7 +53,7 @@ export function makeAdminCollectionRoutes(cfg: AdminCrudConfig): { GET: APIRoute
         return jsonOk({ error: 'duplicate', existing: existing[0]![cfg.dupField] }, 409)
       }
 
-      const [created] = await db.insert(cfg.table).values(data).returning()
+      const [created] = (await db.insert(cfg.table).values(data).returning()) as Record<string, unknown>[]
       return jsonOk(created, 201)
     } catch (e) {
       if (e instanceof z.ZodError) {

@@ -181,7 +181,8 @@ const totalOpen = initial.reduce(
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
   import { sendEvent } from '../../lib/events.ts';
 
-  type Item = ScholarshipWithMeta & { el: HTMLElement; search: string };
+  // `name` mirrors the card title for the DirectoryItem contract (save labels)
+  type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string };
   type State = { sort: string; category: string; region: string; status: string };
 
   initDirectory<Item, State>('#sab-scholarships', {
@@ -193,6 +194,7 @@ const totalOpen = initial.reduce(
         el,
         search: d.search ?? '',
         id: Number(d.id),
+        name: d.name ?? '',
         title: d.name ?? '',
         category: d.category ?? null,
         region: d.region ?? null,
