@@ -301,9 +301,10 @@
     "location": "Edmonton (in-person)",
     "eligibility": "High school students (Grade 11–12) with strong interest in computing; open to all genders",
     "deadline": "TBA",
-    "url": "https://www.ualberta.ca/en/computing-science/explore/high-school-internship-program/index.html",
-    "description": "Paid 6-week summer internship in UAlberta's Computing Science department. Projects span AI, game development, and machine learning. Students work alongside graduate researchers and faculty.",
-    "lastVerified": "2026-04"
+    "url": "https://www.ualberta.ca/en/computing-science/explore/hs-internships/index.html",
+    "description": "No longer offered: UAlberta discontinued HIP from summer 2025 onward. Was a paid 6-week summer internship in the Computing Science department spanning AI, game development, and machine learning.",
+    "lastVerified": "2026-07",
+    "active": false
   },
   {
     "id": 21,
@@ -369,9 +370,9 @@
     "location": "Virtual (project materials shipped to home)",
     "eligibility": "High school students interested in engineering; open to all",
     "deadline": "TBA",
-    "url": "https://www.ualberta.ca/en/engineering/community-giving/discovere-camps/future-creators.html",
+    "url": "https://www.essualberta.ca/studentgroups/ieeeuofa-lc666",
     "description": "Free program connecting high school students with UAlberta engineering students for virtual mentorship. Project materials are shipped to participants' homes for hands-on engineering projects guided remotely.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 25,
@@ -525,9 +526,9 @@
     "location": "Virtual/online (open to Alberta students)",
     "eligibility": "Black high school students in grades 10–11 interested in engineering and applied research",
     "deadline": "TBA",
-    "url": "https://blueprint.engineering.utoronto.ca/",
+    "url": "https://outreach.engineering.utoronto.ca/pre-university-programs/high-school-program/blueprint/",
     "description": "Free summer program with year-long engagement for Black high school students in grades 10–11. Builds engineering and applied research skills through mentorship by UofT faculty and senior students.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 34,
@@ -559,9 +560,9 @@
     "location": "Calgary and Edmonton",
     "eligibility": "Alberta high school students",
     "deadline": "TBA",
-    "url": "https://www.neuroscience.ca/en/brain-bee",
+    "url": "https://brainbee.ca/",
     "description": "Regional neuroscience knowledge competitions for high school students in Calgary and Edmonton. Winners advance to the national Brain Bee where competitors analyze brain tissue and patient diagnoses. Top finishers represent Canada internationally.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 36,
@@ -593,9 +594,9 @@
     "location": "Province-wide (school-based, Alberta)",
     "eligibility": "Alberta high school students with interest in physics",
     "deadline": "TBA",
-    "url": "https://cap.ca/programs/recognitions/high-school-students/cegep-prize-exam/cap-hs-prize-exam/",
+    "url": "https://cap.phas.ubc.ca/",
     "description": "Annual national physics exam where top regional performers earn recognition and networking opportunities with university physics labs. Preparation involves deep independent physics research. Top Alberta students often receive connections to university physics programs.",
-    "lastVerified": "2026-05"
+    "lastVerified": "2026-07"
   },
   {
     "id": 39,
@@ -629,7 +630,7 @@
     "deadline": "Ongoing",
     "url": "https://hosa.org/",
     "description": "International organization supporting health science students (no separate Canadian entity). Students conduct deep research to compete in events spanning biomedical laboratory science, epidemiology, and medical law. Canadian students can form local chapters at their own high schools and compete at HOSA international levels.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 41,
@@ -678,9 +679,9 @@
     "location": "Virtual (fully accessible to Alberta students)",
     "eligibility": "High school students ages 13–18; teams of 2–5",
     "deadline": "TBA",
-    "url": "https://www.conradchallenge.org/",
+    "url": "https://conrad.spacecenter.org/",
     "description": "International innovation competition where student teams research and develop science and technology solutions for global issues in Aerospace, Cyber-Technology, Health, and Energy categories. Fully virtual, making it highly accessible to Alberta students.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 44,
@@ -916,9 +917,9 @@
     "location": "Alberta-wide (club and regional events)",
     "eligibility": "Alberta high school students enrolled in 4-H; open to non-farm youth",
     "deadline": "Ongoing",
-    "url": "https://www.4halberta.com/",
+    "url": "https://4hab.com/",
     "description": "Senior-level 4-H streams involve rigorous, independent, multi-month research projects in veterinary science, agribusiness, and environmental stewardship. Projects culminate in regional and provincial presentations judged by industry professionals.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 61,
@@ -1138,9 +1139,9 @@
     "location": "Alberta-wide (local tournaments across the province)",
     "eligibility": "High school students; join or start a school or community team",
     "deadline": "Ongoing",
-    "url": "https://www.vexrobotics.com/vrc",
+    "url": "https://www.vexrobotics.com/competition",
     "description": "Applied engineering challenge where student teams research, design, build, and program autonomous and driver-controlled robots to compete in game-based tournaments. Highly accessible with events hosted locally across Alberta's regional school districts.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 79,
@@ -1223,9 +1224,9 @@
     "location": "Toronto, Ontario (in-person); open to Alberta students; tuition fee applies",
     "eligibility": "High school students grades 10–12; strong academic record; bursaries available",
     "deadline": "TBA",
-    "url": "https://www.deepacademy.ca/",
+    "url": "https://outreach.engineering.utoronto.ca/pre-university-programs/high-school-program/deep/",
     "description": "Prestigious enrichment program taught by PhD candidates. High schoolers from across Canada dive into advanced university-level research topics including artificial intelligence, nanotechnology, and biomedical engineering. Need-based bursaries available.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 84,
@@ -1359,9 +1360,9 @@
     "location": "Virtual + in-person events in Alberta (Calgary, Edmonton)",
     "eligibility": "Young women in grades 6–12",
     "deadline": "Ongoing",
-    "url": "https://hackergal.com/",
+    "url": "https://hackergal.org/",
     "description": "National hackathons and virtual coding clubs where young women build their first web and software projects. No coding experience required.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 95,
@@ -1444,9 +1445,9 @@
     "location": "Calgary (in-person, CSIC facilities)",
     "eligibility": "High school students interested in sports science and elite athletics",
     "deadline": "TBA",
-    "url": "https://csicalgary.ca/",
+    "url": "https://csialberta.ca/en/",
     "description": "Exposure to Olympic-level sports science, biometric tracking, and physiological recovery research at state-of-the-art testing facilities used by Canada's national athletes. Students learn how elite performance data is collected and analyzed.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-07"
   },
   {
     "id": 102,

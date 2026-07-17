@@ -1,0 +1,14 @@
+[
+  {
+    "host": "hosa.org",
+    "reason": "TLS chain incomplete for non-browser clients; site verified live 2026-07-16"
+  },
+  {
+    "host": "vexrobotics.com",
+    "reason": "WAF returns 403 to automated requests; site verified live 2026-07-16"
+  },
+  {
+    "host": "forum.ca",
+    "reason": "WAF returns 403 to automated requests; site verified live 2026-07-16"
+  }
+]
