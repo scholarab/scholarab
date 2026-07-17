@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadPrograms } from '../lib/data-loader';
-import ProgramList from '../components/ProgramList.tsx';
+import ProgramDirectory from '../components/sab/ProgramDirectory.astro';
 import { generateSlug } from '../lib/utils';
 let raw: Awaited<ReturnType<typeof loadPrograms>> = [];
 let loadError = false;
@@ -61,7 +61,7 @@ const programs = raw.map(p => ({
           <a href="/programs" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
         </div>
       ) : (
-        <ProgramList items={programs} client:idle />
+        <ProgramDirectory items={programs} />
       )}
     </div>
 
