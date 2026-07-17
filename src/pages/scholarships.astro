@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships } from '../lib/data-loader';
-import ScholarshipList from '../components/ScholarshipList.tsx';
+import ScholarshipDirectory from '../components/sab/ScholarshipDirectory.astro';
 import { generateSlug, formatDeadline, parseAmount } from '../lib/utils';
 let raw: Awaited<ReturnType<typeof loadScholarships>> = [];
 let loadError = false;
@@ -62,7 +62,7 @@ const scholarships = raw.map(s => ({
           <a href="/scholarships" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
         </div>
       ) : (
-        <ScholarshipList items={scholarships} client:idle />
+        <ScholarshipDirectory items={scholarships} />
       )}
     </div>
 

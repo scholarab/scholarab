@@ -102,6 +102,27 @@ export function filterSortScholarships(
   });
 }
 
+export function shortDate(iso: string): string {
+  return new Date(iso + 'T00:00:00')
+    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })
+    .toUpperCase();
+}
+
+// The corner chip on a scholarship card ("14 DAYS LEFT" / "OPENS SEP 1" /
+// "CLOSED"); null means no chip (open listing with no fixed deadline).
+// Clock-dependent, so the client recomputes it on every page load.
+export function scholarshipDayChip(s: ScholarshipWithMeta): { label: string; cls: string } | null {
+  const status = getScholarshipStatus(s);
+  if (status === 'closed') return { label: 'CLOSED', cls: 'sabl-days neutral' };
+  if (status === 'future') {
+    return { label: s.openDate ? `OPENS ${shortDate(s.openDate)}` : 'OPENING SOON', cls: 'sabl-days neutral' };
+  }
+  if (!s.deadline) return null;
+  const days = Math.max(0, Math.round((new Date(s.deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
+  const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
+  return { label, cls: `sabl-days${days <= 7 ? ' urgent' : ''}` };
+}
+
 // ── Programs ──────────────────────────────────────────────────────────────────
 
 export interface ProgramWithMeta extends Program {

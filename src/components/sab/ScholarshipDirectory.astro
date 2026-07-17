@@ -1,0 +1,254 @@
+---
+// Server-rendered replacement for the old ScholarshipList React island.
+// Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
+// them and recomputes the clock-dependent bits on load, so no React ships.
+import { filterSortScholarships, getScholarshipStatus, scholarshipDayChip, shortDate } from '../../lib/list-core.ts';
+import type { ScholarshipWithMeta } from '../../lib/list-core.ts';
+import { generateSlug } from '../../lib/utils.ts';
+import { categoryEmoji } from '../../lib/category-emoji.ts';
+
+interface Props {
+  items: ScholarshipWithMeta[];
+}
+const { items } = Astro.props;
+
+// Region keys must line up with REGION_MATCH in list-core
+const REGION_CHIPS = [
+  { value: '',             label: 'All' },
+  { value: 'Medicine Hat', label: 'Medicine Hat' },
+  { value: 'Alberta-wide', label: 'Alberta' },
+  { value: 'National',     label: 'National' },
+] as const;
+
+const SORT_CHIPS = [
+  { value: 'closest_due', label: 'Earliest deadline' },
+  { value: 'highest_pay', label: 'Highest $' },
+  { value: 'lowest_pay',  label: 'Lowest $' },
+] as const;
+
+const STATUS_CHIPS = [
+  { value: 'all',     label: 'All' },
+  { value: 'active',  label: 'Open' },
+  { value: 'opening', label: 'Opening soon' },
+  { value: 'closed',  label: 'Closed' },
+] as const;
+
+const counts = new Map<string, number>();
+for (const s of items) if (s.category) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
+const categories = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]) => name);
+
+const initial = filterSortScholarships(items, {
+  statusFilter: 'all', selectedCategory: 'all', selectedRegion: null, searchQuery: '', sortBy: 'closest_due',
+});
+
+// "$X open across these listings" — active money only, follows the filters
+const totalOpen = initial.reduce(
+  (sum, s) => sum + (getScholarshipStatus(s) === 'active' ? (s._amount ?? 0) : 0), 0,
+);
+---
+
+<div class="sabl-page">
+  <div class="sabl-title-row">
+    <div>
+      <h1 class="sabl-h1">Scholarships</h1>
+      <p class="sabl-desc">
+        Open scholarships for Alberta high school students, verified by hand and updated weekly. If it's listed here, it's real and it's open.
+      </p>
+    </div>
+    <div class="sabl-stat">
+      <div class="sabl-stat-value tnum" data-dir-stat>${totalOpen.toLocaleString('en-CA')}</div>
+      <div class="sabl-mono sabl-stat-label">OPEN ACROSS THESE LISTINGS</div>
+    </div>
+  </div>
+
+  <div class="sabl-toolbar">
+    <div class="sabl-search">
+      <span class="sabl-search-icon" aria-hidden="true">⌕</span>
+      <input
+        type="search"
+        data-dir-search
+        placeholder="Search by name or keyword…"
+        aria-label="Search scholarships by name or keyword"
+      />
+    </div>
+    <div class="sabl-sort">
+      <span class="sabl-mono sabl-row-label">SORT</span>
+      {SORT_CHIPS.map(s => (
+        <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
+      ))}
+    </div>
+  </div>
+
+  <div class="sabl-filters">
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">TRACK</span>
+      <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All</button>
+      {categories.map(c => (
+        <button type="button" class="sabl-chip" data-fkey="category" data-fval={c} aria-pressed="false">{c}</button>
+      ))}
+    </div>
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">REGION</span>
+      {REGION_CHIPS.map(r => (
+        <button type="button" class={`sabl-chip${r.value === '' ? ' on' : ''}`} data-fkey="region" data-fval={r.value} aria-pressed={r.value === '' ? 'true' : 'false'}>{r.label}</button>
+      ))}
+    </div>
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">STATUS</span>
+      {STATUS_CHIPS.map(s => (
+        <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}</button>
+      ))}
+    </div>
+  </div>
+
+  <div class="sabl-mono sabl-result-line" data-dir-count>
+    {initial.length} OF {items.length} LISTINGS SHOWN · EVERY ONE CHECKED BY HAND
+  </div>
+
+  <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
+    {initial.map(s => {
+      const status = getScholarshipStatus(s);
+      const chip = scholarshipDayChip(s);
+      const emoji = categoryEmoji(s.category);
+      return (
+        <div
+          class="sabl-card"
+          data-dir-card
+          data-id={s.id}
+          data-name={s.title}
+          data-category={s.category ?? undefined}
+          data-region={s.region ?? undefined}
+          data-amount={String(s._amount ?? 0)}
+          data-dl-ms={String(s._deadline_ms ?? 0)}
+          data-open-ms={String(s._open_ms ?? 0)}
+          data-deadline={s.deadline ?? undefined}
+          data-open-date={s.openDate ?? undefined}
+          data-search={[s.title, s.audience, s.category].filter(Boolean).join('\n').toLowerCase()}
+        >
+          <div class="sabl-card-top">
+            <span class="sabl-mono sabl-tag">
+              {emoji && <span class="sabl-tag-emoji" aria-hidden="true">{`${emoji} `}</span>}
+              {(s.category ?? 'GENERAL').toUpperCase()}
+            </span>
+            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
+          </div>
+          <a href={`/scholarships/${s._slug ?? generateSlug(s.title)}`} class="sabl-name">{s.title}</a>
+          <div class="sabl-amount">{s.amount}</div>
+          {s.audience && <div class="sabl-blurb">{s.audience}</div>}
+          <div class="sabl-card-foot">
+            <span class="sabl-due">
+              {s.deadline ? `DUE ${shortDate(s.deadline)}` : 'NO FIXED DEADLINE'}
+            </span>
+            <div class="sabl-card-actions">
+              <button
+                type="button"
+                class="sabl-save"
+                data-dir-save
+                data-id={s.id}
+                data-name={s.title}
+                aria-label={`Save ${s.title}`}
+                aria-pressed="false"
+              >☆</button>
+              {s.url && (
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  referrerpolicy="no-referrer"
+                  class="sabl-apply"
+                  data-track="apply"
+                  data-item-id={s.id}
+                >{status === 'active' ? 'Apply →' : 'Visit →'}</a>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
+    <div class="sabl-empty-title">Nothing matches that.</div>
+    <div class="sabl-empty-sub">Try clearing a filter or searching something broader.</div>
+    <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
+  </div>
+</div>
+
+<script>
+  import { initDirectory } from '../../lib/directory-client.ts';
+  import { filterSortScholarships, getScholarshipStatus, scholarshipDayChip } from '../../lib/list-core.ts';
+  import type { ScholarshipWithMeta, ScholarshipSort, StatusFilter, RegionKey } from '../../lib/list-core.ts';
+  import { getSaved, toggleSaved } from '../../lib/tracker.ts';
+  import { sendEvent } from '../../lib/events.ts';
+
+  type Item = ScholarshipWithMeta & { el: HTMLElement; search: string };
+  type State = { sort: string; category: string; region: string; status: string };
+
+  initDirectory<Item, State>('#sab-scholarships', {
+    defaultState: { sort: 'closest_due', category: 'all', region: '', status: 'all' },
+    toggleKeys: ['category', 'region'],
+    parseCard(el) {
+      const d = el.dataset;
+      return {
+        el,
+        search: d.search ?? '',
+        id: Number(d.id),
+        title: d.name ?? '',
+        category: d.category ?? null,
+        region: d.region ?? null,
+        deadline: d.deadline ?? null,
+        openDate: d.openDate ?? null,
+        _amount: Number(d.amount ?? 0),
+        _deadline_ms: Number(d.dlMs ?? 0),
+        _open_ms: Number(d.openMs ?? 0),
+        amount: '', audience: null, url: '', lastVerified: null, notes: null,
+        applyViaGuidance: false, active: true, eligibility: null,
+      };
+    },
+    select(items, state, q) {
+      const sorted = filterSortScholarships(items, {
+        statusFilter: state.status as StatusFilter,
+        selectedCategory: state.category,
+        selectedRegion: (state.region || null) as RegionKey | null,
+        searchQuery: '',
+        sortBy: state.sort as ScholarshipSort,
+      }) as Item[];
+      return q ? sorted.filter(it => it.search.includes(q)) : sorted;
+    },
+    countLine: (shown, total) => `${shown} OF ${total} LISTINGS SHOWN · EVERY ONE CHECKED BY HAND`,
+    stat: visible => '$' + visible
+      .reduce((sum, s) => sum + (getScholarshipStatus(s) === 'active' ? (s._amount ?? 0) : 0), 0)
+      .toLocaleString('en-CA'),
+    getSavedIds: () => [...getSaved()],
+    toggleSave: id => [...toggleSaved(id)],
+    saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),
+    // Day chips and Apply/Visit labels depend on the clock, not just the data:
+    // recompute them on every load so CDN-cached HTML never shows stale text.
+    onCardsParsed(items) {
+      for (const s of items) {
+        const status = getScholarshipStatus(s);
+        const chipEl = s.el.querySelector<HTMLElement>('[data-days-chip]');
+        if (chipEl) {
+          const chip = scholarshipDayChip(s);
+          chipEl.hidden = !chip;
+          if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
+        }
+        const apply = s.el.querySelector<HTMLElement>('[data-track="apply"]');
+        if (apply) apply.textContent = status === 'active' ? 'Apply →' : 'Visit →';
+      }
+    },
+    // Deep links like /scholarships?category=STEM pre-select that track chip
+    initialState(state) {
+      const cat = new URLSearchParams(window.location.search).get('category');
+      return cat ? { ...state, category: cat } : state;
+    },
+  });
+
+  // Outbound apply clicks are an analytics event (same as the old React list)
+  document.addEventListener('click', e => {
+    const link = (e.target as Element | null)?.closest?.('[data-track="apply"]');
+    if (link && link.closest('#sab-scholarships')) {
+      sendEvent('apply_click', 'scholarship', Number((link as HTMLElement).dataset.itemId));
+    }
+  });
+</script>
