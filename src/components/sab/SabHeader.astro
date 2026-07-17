@@ -55,7 +55,7 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
       <span class="sabh-ticker-half" aria-hidden={hidden || undefined}>
         {tickerItems.map(t => (
           <span class="sabh-ticker-item">
-            <a href={t.href}>{t.label}</a>{' '}<span>{t.rest}</span>
+            <a href={t.href} draggable="false">{t.label}</a>{' '}<span>{t.rest}</span>
           </span>
         ))}
       </span>
@@ -101,12 +101,18 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
     text-decoration-thickness: 1px; text-underline-offset: 3px;
   }
   .sabh-ticker-item a:hover { color: #F2F0E9; }
-  /* Pause while hovered (or keyboard-focused) so the text can be read,
-     selected, and copied — same behaviour as the fishback2026.com ticker. */
+  /* Pause while hovered, touched, or keyboard-focused so the text can be
+     read, selected, and copied — same behaviour as the fishback2026.com
+     ticker. :active covers touch devices, where hover doesn't exist and a
+     long-press would otherwise fight a moving target. */
   .sabh-ticker-band:hover .sabh-ticker,
+  .sabh-ticker-band:active .sabh-ticker,
   .sabh-ticker-band:focus-within .sabh-ticker {
     animation-play-state: paused;
   }
+  /* The duplicate half exists only to make the loop seamless; keep it out
+     of selections so a long drag or select-all can't copy messages twice. */
+  .sabh-ticker-half[aria-hidden] { user-select: none; }
   @keyframes sabh-tick {
     to { transform: translateX(-50%); }
   }
