@@ -55,8 +55,7 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
       <span class="sabh-ticker-half" aria-hidden={hidden || undefined}>
         {tickerItems.map(t => (
           <span class="sabh-ticker-item">
-            <a href={t.href}>{t.label}</a>
-            <span>{t.rest}</span>
+            <a href={t.href}>{t.label}</a>{' '}<span>{t.rest}</span>
           </span>
         ))}
       </span>
@@ -94,7 +93,9 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
     animation: sabh-tick 30s linear infinite; will-change: transform;
   }
   .sabh-ticker-half { display: inline-flex; }
-  .sabh-ticker-item { display: inline-flex; gap: 5px; padding-right: 60px; }
+  /* Plain inline text (not flex children) so a drag or triple-click selects
+     the whole message, link included, and copies with real spaces. */
+  .sabh-ticker-item { display: inline-block; padding-right: 60px; }
   .sabh-ticker-item a {
     color: #2FD3A0; text-decoration: underline;
     text-decoration-thickness: 1px; text-underline-offset: 3px;
