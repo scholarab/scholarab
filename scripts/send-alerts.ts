@@ -96,6 +96,12 @@ for (const { item, days } of targets) {
   ` as { email: string; token: string }[]
 
   for (const { email, token } of rows) {
+    // Resend rejects reserved test domains with a 422, which would fail the
+    // whole run — skip them rather than count them as errors.
+    if (/@example\.(com|org|net)$/i.test(email)) {
+      console.log(`  skipped test address ${email} (${item.itemType} ${item.id})`)
+      continue
+    }
     const subject = `${days} day${days === 1 ? '' : 's'} left: ${item.label} closes ${formatDate(item.deadline!)}`
     const html = emailHtml(item.label, item.amount, item.deadline!, item.detailUrl, `${BASE_URL}/api/unsubscribe?token=${token}`, days)
     if (DRY_RUN) {
