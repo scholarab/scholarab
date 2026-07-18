@@ -11,10 +11,10 @@
     "stipend": "~$15/hr (30–35 hrs/week)",
     "location": "Edmonton (in-person)",
     "eligibility": "Grade 11, north of Red Deer, 85%+ in Math 20, Bio 20, and one other science",
-    "deadline": "2026-03-13",
+    "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/current-students/undergraduate-research-initiative/opportunities-for-high-school-students/high-school-youth-researcher-summer-program/index.html",
     "description": "Paid 6-week summer research placement in health sciences. Work alongside UofA researchers. ~20 spots from ~175 applicants.",
-    "lastVerified": "2026-03"
+    "lastVerified": "2026-07"
   },
   {
     "id": 2,
@@ -28,10 +28,10 @@
     "stipend": "$3,000 stipend",
     "location": "Calgary (in-person)",
     "eligibility": "Grade 11, south of Red Deer to north of Claresholm, 85%+ in Math 20, Bio 20, and one other science",
-    "deadline": "2026-03-16",
+    "deadline": "TBA",
     "url": "https://research.ucalgary.ca/research-services/alberta-innovates-HYRS",
     "description": "Paid summer research in biomedical and health sciences at UCalgary. Cohort programming, guest lectures, poster symposium.",
-    "lastVerified": "2026-03"
+    "lastVerified": "2026-07"
   },
   {
     "id": 3,
@@ -45,10 +45,10 @@
     "stipend": "$3,000 stipend",
     "location": "Lethbridge (in-person)",
     "eligibility": "Grade 11, in or south of Claresholm, 85%+ in Math 20, Bio 20, and one other science",
-    "deadline": "2026-03-22",
+    "deadline": "TBA",
     "url": "https://www.ulethbridge.ca/artsci/hyrs-applications",
     "description": "Paid summer health research at ULethbridge. Guest lectures, panel discussions, poster showcase on Aug 13.",
-    "lastVerified": "2026-03"
+    "lastVerified": "2026-07"
   },
   {
     "id": 4,
@@ -62,10 +62,10 @@
     "stipend": "Paid research assistantship",
     "location": "Edmonton (in-person)",
     "eligibility": "Grade 11 students; focus on underrepresented groups in STEM, open to all genders",
-    "deadline": "2026-03-23",
+    "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/women-in-scholarship-engineering-science-technology/programs/summer-research-program/index.html",
     "description": "6-week paid STEM research internship. ~40 spots. Lab or field work with UofA researchers. Running since 1984.",
-    "lastVerified": "2026-03"
+    "lastVerified": "2026-07"
   },
   {
     "id": 6,
@@ -147,10 +147,11 @@
     "stipend": null,
     "location": "Alberta-wide (mentor-based, in-person regional competition)",
     "eligibility": "Alberta high school students grades 9-12 interested in life sciences research",
-    "deadline": "2026-03-01",
+    "deadline": "TBA",
     "url": "https://biogenius.ca/",
-    "description": "Students are paired with professional scientist mentors to develop an original research project in life sciences. Projects culminate in a manuscript and poster presentation at regional and national competitions. Top competitors advance to the national Biogenius Challenge.",
-    "lastVerified": "2026-03"
+    "description": "Students are paired with professional scientist mentors to develop an original research project in life sciences. Projects culminate in a manuscript and poster presentation at regional and national competitions. Top competitors advance to the national Biogenius Challenge. Program paused since 2025 pending a Sanofi program review.",
+    "lastVerified": "2026-07",
+    "active": false
   },
   {
     "id": 12,
@@ -179,12 +180,13 @@
     "duration": "8 weeks (July 2 – August 20, 2026)",
     "paid": true,
     "stipend": "Paid (hourly rate in offer letter)",
-    "location": "Toronto (in-person), open to Alberta students",
-    "eligibility": "Canadian students in grades 11-12 with interest in coding and technology",
-    "deadline": "2026-03-01",
+    "location": "Toronto (in-person)",
+    "eligibility": "Grades 11-12 at an Ontario-based high school (no longer open to Alberta students)",
+    "deadline": "TBA",
     "url": "https://www.rbc.com/en/future-launch/resource-type/programs-services/rbc-summer-tech-labs/",
     "description": "An 8-week paid internship where students collaborate in small teams to build working prototypes solving real RBC business problems. Students use coding languages like JavaScript and React, attend tech talks, and receive mentorship from RBC engineers.",
-    "lastVerified": "2026-03"
+    "lastVerified": "2026-07",
+    "active": false
   },
   {
     "id": 14,
@@ -198,10 +200,10 @@
     "stipend": null,
     "location": "University of Alberta, Edmonton",
     "eligibility": "Indigenous (First Nation, Métis, and Inuit) high school students in grades 10-12",
-    "deadline": "2026-04-01",
+    "deadline": "TBA",
     "url": "https://www.vernajkirkness.org/vjfk-program/",
     "description": "A one-week program where Indigenous high school students conduct research in science and engineering alongside university professors and graduate students. Students explore STEM fields and university life at the U of A campus.",
-    "lastVerified": "2026-03"
+    "lastVerified": "2026-07"
   },
   {
     "id": 15,
@@ -387,9 +389,9 @@
     "location": "Calgary",
     "eligibility": "High school girls/young women interested in science and engineering",
     "deadline": "TBA",
-    "url": "https://schulich.ucalgary.ca/about/outreach/cybermentors",
+    "url": "https://www.cybermentor.ca/",
     "description": "Program connecting high school girls with women in science and engineering at UCalgary. Fosters research and tech-focused development through mentorship, networking, and industry exposure.",
-    "lastVerified": "2026-04",
+    "lastVerified": "2026-07",
     "active": false
   },
   {
@@ -405,9 +407,9 @@
     "location": "Lethbridge (in-person)",
     "eligibility": "High school students; southern Alberta focus",
     "deadline": "TBA",
-    "url": "https://www.ulethbridge.ca/future-students/high-school/destination-exploration",
+    "url": "https://www.ulethbridge.ca/destination-exploration",
     "description": "Intensive summer STEM camps and programs at ULethbridge that introduce high school students to university-level research facilities and methodologies. Covers science, technology, and campus life.",
-    "lastVerified": "2026-04",
+    "lastVerified": "2026-07",
     "active": false
   },
   {
@@ -440,9 +442,9 @@
     "location": "Various Alberta locations (field-based)",
     "eligibility": "Ages 16–18, Canadian citizen or permanent resident, physically fit",
     "deadline": "TBA",
-    "url": "https://www.alberta.ca/junior-forest-rangers",
+    "url": "https://alis.alberta.ca/junior-forest-rangers/",
     "description": "Paid 7-week summer field work experience focusing on environmental science, forestry management, and conservation research. Work in Alberta's forests and wildlands under provincial supervision.",
-    "lastVerified": "2026-04",
+    "lastVerified": "2026-07",
     "active": false
   },
   {
@@ -1053,9 +1055,9 @@
     "location": "Province-wide (school-based); national training camp for finalists",
     "eligibility": "Canadian high school students; grades 11–12 recommended",
     "deadline": "TBA",
-    "url": "https://cheminst.ca/national-chemistry-olympiad/",
+    "url": "https://cco-occ.ca/",
     "description": "Highest level of chemistry competition for Canadian youth. Preparation requires deep independent study in organic, inorganic, and physical chemistry far beyond the high school curriculum. Top students represent Canada at the International Chemistry Olympiad (IChO).",
-    "lastVerified": "2026-04",
+    "lastVerified": "2026-07",
     "active": false
   },
   {
