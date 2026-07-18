@@ -52,7 +52,7 @@ const totalOpen = initial.reduce(
     <div>
       <h1 class="sabl-h1">Scholarships</h1>
       <p class="sabl-desc">
-        Open scholarships for Alberta high school students, verified by hand and updated weekly. If it's listed here, it's real and it's open.
+        All available scholarships for Alberta high school students, updated weekly.
       </p>
     </div>
     <div class="sabl-stat">
@@ -102,7 +102,7 @@ const totalOpen = initial.reduce(
   </div>
 
   <div class="sabl-mono sabl-result-line" data-dir-count>
-    {initial.length} OF {items.length} LISTINGS SHOWN · EVERY ONE CHECKED BY HAND
+    {initial.length} OF {items.length} LISTINGS SHOWN
   </div>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
@@ -217,7 +217,7 @@ const totalOpen = initial.reduce(
       }) as Item[];
       return q ? sorted.filter(it => it.search.includes(q)) : sorted;
     },
-    countLine: (shown, total) => `${shown} OF ${total} LISTINGS SHOWN · EVERY ONE CHECKED BY HAND`,
+    countLine: (shown, total) => `${shown} OF ${total} LISTINGS SHOWN`,
     stat: visible => '$' + visible
       .reduce((sum, s) => sum + (getScholarshipStatus(s) === 'active' ? (s._amount ?? 0) : 0), 0)
       .toLocaleString('en-CA'),
