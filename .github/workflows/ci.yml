@@ -1,18 +1,24 @@
-name: Deploy
+name: CI
+
+# Deploys are done by Cloudflare Pages' git integration (it builds every push
+# to main; wrangler.toml's pages_build_output_dir is its config). This workflow
+# is validation + the daily data sync. The old wrangler-action deploy step was
+# removed 2026-07-17: it had never once succeeded (0 green runs in 884) and CF
+# was the real deploy path all along.
 
 on:
   push:
     branches: [main]
   schedule:
-    - cron: '0 0 * * *'   # Daily: sync scholarship active flags, then rebuild so deadlines/counts stay fresh
+    - cron: '0 0 * * *'   # Daily: sync scholarship active flags; a data commit triggers the CF Pages deploy
   workflow_dispatch:
 
 concurrency:
-  group: deploy-main
+  group: ci-main
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  ci:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -33,13 +39,15 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx tsx scripts/auto-expire.ts
 
+      # [skip actions] skips GitHub Actions only — Cloudflare Pages still sees
+      # the push and deploys the fresh data. Do NOT use [skip ci]: CF honors
+      # that one too and the deploy would be silently skipped.
       - name: Commit synced data
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
           git add src/data/scholarships.json
-          # [skip ci] so this push doesn't trigger a second run; this run builds the fresh JSON itself
-          git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip ci]" && git push; }
+          git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip actions]" && git push; }
 
       - name: Lint
         run: npm run lint
@@ -49,16 +57,9 @@ jobs:
 
       # No DATABASE_URL here on purpose: builds must use the committed JSON.
       # The DB path only returns active rows (~28) and has null eligibility,
-      # which shrinks the site and breaks quiz matching. Freshness comes from
-      # the sync step above + this workflow's daily cron.
+      # which shrinks the site and breaks quiz matching.
       - name: Build
         run: npm run build
 
       - name: Typecheck
         run: npx tsc --noEmit
-
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=scholarab
