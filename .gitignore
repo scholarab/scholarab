@@ -17,3 +17,6 @@ scholarab-overview.html
 scholarab-overview.pdf
 ScholarAB_Overview.md
 ScholarAB_Overview.pdf
+
+# generated on every build by scripts/generate-sitemap.ts
+public/sitemap.xml
