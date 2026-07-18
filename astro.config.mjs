@@ -31,7 +31,9 @@ export default defineConfig({
       },
     ],
     resolve: {
-      alias: {
+      // Only alias in builds: the edge build is CJS and crashes Vite's dev
+      // module runner with "require is not defined".
+      alias: import.meta.env.PROD && {
         'react-dom/server': 'react-dom/server.edge',
       },
     },
