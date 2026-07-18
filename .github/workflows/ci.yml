@@ -68,5 +68,5 @@ jobs:
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-          git add src/data/scholarships.json
+          git add src/data/scholarships.json src/data/research-programs.json
           git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip actions]" && git push; }

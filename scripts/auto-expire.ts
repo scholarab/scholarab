@@ -48,6 +48,39 @@ if (changed > 0) {
   console.log('No JSON scholarships to sync.');
 }
 
+// ── Research programs: passed dated deadlines reset to TBA (between cycles) ──
+// Programs stay listed between cycles with deadline 'TBA' (70 of 97 entries).
+// A passed date means the cycle closed; next-cycle dates get filled in by hand
+// once announced. The weekly link checker catches programs that actually die.
+interface Program {
+  id: number | string;
+  name: string;
+  active?: boolean;
+  deadline: string;
+  [key: string]: unknown;
+}
+
+const programsPath = join(__dirname, '../src/data/research-programs.json');
+const programs: Program[] = JSON.parse(readFileSync(programsPath, 'utf8'));
+
+let programsChanged = 0;
+for (const p of programs) {
+  if (p.active === false || p.deadline === 'TBA' || p.deadline === 'Ongoing') continue;
+  const deadline = new Date(p.deadline + 'T00:00:00Z');
+  if (!Number.isNaN(deadline.getTime()) && deadline < today) {
+    console.log(`Cycle closed: [${p.id}] ${p.name} (deadline: ${p.deadline}) -> TBA`);
+    p.deadline = 'TBA';
+    programsChanged++;
+  }
+}
+
+if (programsChanged > 0) {
+  writeFileSync(programsPath, JSON.stringify(programs, null, 2) + '\n', 'utf8');
+  console.log(`Synced ${programsChanged} program(s). JSON written.`);
+} else {
+  console.log('No JSON programs to sync.');
+}
+
 // ── Sync the database too (production source of truth), when configured ──────
 const dbUrl = process.env.DATABASE_URL;
 if (dbUrl) {
