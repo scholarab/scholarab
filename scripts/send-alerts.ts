@@ -73,8 +73,10 @@ let sent = 0
 let errors = 0
 
 const allItems = [
-  ...scholarships.filter(s => s.active && s.deadline).map(s => ({ ...s, itemType: 'scholarship', label: s.title!, detailUrl: `${BASE_URL}/scholarships/${generateSlug(s.title!)}` })),
-  ...programs.filter(p => p.active && p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing').map(p => ({ ...p, itemType: 'program', label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}` })),
+  // `active !== false`: most program entries don't carry the field at all —
+  // requiring truthy `active` silently excluded them from alerts.
+  ...scholarships.filter(s => s.active !== false && s.deadline).map(s => ({ ...s, itemType: 'scholarship', label: s.title!, detailUrl: `${BASE_URL}/scholarships/${generateSlug(s.title!)}` })),
+  ...programs.filter(p => p.active !== false && p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing').map(p => ({ ...p, itemType: 'program', label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}` })),
 ]
 
 for (const milestone of MILESTONES) {

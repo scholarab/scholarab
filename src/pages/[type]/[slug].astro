@@ -233,6 +233,7 @@ const breadcrumbJson = {
   ogUrl={d.canonical}
   canonical={d.canonical}
   currentPath={d.currentPath}
+  robots={d.status === 'closed' ? 'noindex' : undefined}
   hideChrome
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(d.ldJson)} slot="head" />

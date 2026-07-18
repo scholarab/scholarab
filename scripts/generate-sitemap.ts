@@ -13,12 +13,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 interface Scholarship {
   title: string;
   lastVerified?: string | null;
+  active?: boolean;
   [key: string]: unknown;
 }
 
 interface Program {
   name: string;
   lastVerified?: string | null;
+  active?: boolean;
   [key: string]: unknown;
 }
 
@@ -52,13 +54,15 @@ const lines: string[] = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   urlEntry(`${BASE}/`, '1.0'),
-  urlEntry(`${BASE}/scholarships`, '0.9'),
-  urlEntry(`${BASE}/programs`, '0.9'),
-  urlEntry(`${BASE}/match`, '0.9'),
-  urlEntry(`${BASE}/about`, '0.8'),
-  urlEntry(`${BASE}/educators`, '0.7'),
-  ...scholarships.map((s) => urlEntry(`${BASE}/scholarships/${generateSlug(s.title)}`, '0.85', toLastmod(s.lastVerified) ?? siteLastmod)),
-  ...programs.map((p) => urlEntry(`${BASE}/programs/${generateSlug(p.name)}`, '0.85', toLastmod(p.lastVerified) ?? siteLastmod)),
+  urlEntry(`${BASE}/scholarships/`, '0.9'),
+  urlEntry(`${BASE}/programs/`, '0.9'),
+  urlEntry(`${BASE}/match/`, '0.9'),
+  urlEntry(`${BASE}/about/`, '0.8'),
+  urlEntry(`${BASE}/educators/`, '0.7'),
+  // Closed listings (active: false) stay out of the sitemap — Google flags
+  // expired-offer pages as Soft 404. Missing `active` counts as open.
+  ...scholarships.filter((s) => s.active !== false).map((s) => urlEntry(`${BASE}/scholarships/${generateSlug(s.title)}/`, '0.85', toLastmod(s.lastVerified) ?? siteLastmod)),
+  ...programs.filter((p) => p.active !== false).map((p) => urlEntry(`${BASE}/programs/${generateSlug(p.name)}/`, '0.85', toLastmod(p.lastVerified) ?? siteLastmod)),
   '</urlset>',
 ];
 
