@@ -5,6 +5,12 @@ name: CI
 # is validation + the daily data sync. The old wrangler-action deploy step was
 # removed 2026-07-17: it had never once succeeded (0 green runs in 884) and CF
 # was the real deploy path all along.
+#
+# The job is named "validate" to match the branch-protection ruleset's required
+# status check. NOTE: the daily sync push below is still rejected by that
+# ruleset (github-actions[bot] has no bypass) — the repo admin must either add
+# the bot to the ruleset bypass list or drop the required check for the sync
+# to ever land. Every historical auto-sync push failed this way.
 
 on:
   push:
@@ -18,7 +24,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci:
+  validate:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -39,16 +45,6 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx tsx scripts/auto-expire.ts
 
-      # [skip actions] skips GitHub Actions only — Cloudflare Pages still sees
-      # the push and deploys the fresh data. Do NOT use [skip ci]: CF honors
-      # that one too and the deploy would be silently skipped.
-      - name: Commit synced data
-        run: |
-          git config user.email "action@github.com"
-          git config user.name "GitHub Action"
-          git add src/data/scholarships.json
-          git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip actions]" && git push; }
-
       - name: Lint
         run: npm run lint
 
@@ -63,3 +59,14 @@ jobs:
 
       - name: Typecheck
         run: npx tsc --noEmit
+
+      # Last so a rejected push can't hide validation results. The commit tag
+      # skips GitHub Actions only — Cloudflare Pages still sees the push and
+      # deploys the fresh data. Do NOT tag it to skip "ci": Cloudflare honors
+      # that form too and the deploy would be silently skipped.
+      - name: Commit synced data
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add src/data/scholarships.json
+          git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip actions]" && git push; }

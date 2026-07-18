@@ -2146,7 +2146,7 @@
     "category": "Academic",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": true,
+    "active": false,
     "description": "The IODE (Imperial Order Daughters of the Empire) Coronation Bursary supports Alberta high school students who demonstrate financial need and plan to pursue any degree program at an Alberta post-secondary institution. Applicants must have been Alberta residents for at least three years. This $1,000 bursary helps make higher education more accessible for deserving students.",
     "eligibility": {
       "grades": [
@@ -4185,7 +4185,7 @@
     "audience": "Alberta golfers entering post-secondary",
     "category": "Sports",
     "region": "Alberta",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
     "notes": "50+ awards annually totalling roughly $50,000. Criteria include academic performance, financial need, volunteer involvement, and golf participation.",
@@ -5600,7 +5600,7 @@
     "lastVerified": "2026-04",
     "region": "Lethbridge",
     "notes": "One application covers 400+ awards worth over $800,000 total. Application opens March 1; notifications in early August. Alberta residents may also access Jason Lang and Louise McKinney provincial scholarships through the same application.",
-    "active": true,
+    "active": false,
     "description": "Lethbridge Polytechnic offers entrance awards to students admitted to full-time programs at the institution. With over 400 awards worth $800,000+ available through a single application, this is a major scholarship opportunity for qualifying students. Alberta residents can also apply for provincial scholarships (Jason Lang and Louise McKinney) using the same application.",
     "eligibility": {
       "grades": [
