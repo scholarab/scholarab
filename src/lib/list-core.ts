@@ -44,7 +44,7 @@ export interface ScholarshipFilterState {
   sortBy: ScholarshipSort;
 }
 
-export function buildScholarshipStatusCache(items: ScholarshipWithMeta[]): Map<number, ScholarshipStatus> {
+function buildScholarshipStatusCache(items: ScholarshipWithMeta[]): Map<number, ScholarshipStatus> {
   const m = new Map<number, ScholarshipStatus>();
   for (const s of items) m.set(s.id, getScholarshipStatus(s));
   return m;
@@ -161,7 +161,7 @@ export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
 export type ProgramSort = 'closest_due' | 'paid_first' | 'name';
 
 // dated deadlines first (soonest), then Ongoing (actionable any time), then TBA
-export function programDeadlineOrder(p: ProgramWithMeta): number {
+function programDeadlineOrder(p: ProgramWithMeta): number {
   if (typeof p._deadline_ms === 'number') return p._deadline_ms;
   if (p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing') {
     const ms = new Date(p.deadline + 'T00:00:00').getTime();
@@ -177,7 +177,7 @@ export interface ProgramFilterState {
   sortBy: ProgramSort;
 }
 
-export function buildProgramStatusCache(items: ProgramWithMeta[]): Map<number, ProgramStatus> {
+function buildProgramStatusCache(items: ProgramWithMeta[]): Map<number, ProgramStatus> {
   const m = new Map<number, ProgramStatus>();
   for (const p of items) m.set(p.id, getProgramStatus(p));
   return m;

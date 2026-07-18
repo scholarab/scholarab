@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '30 0 * * *'   # Daily rebuild (after auto-sync at 00:00) so deadlines/counts stay fresh
+    - cron: '0 0 * * *'   # Daily: sync scholarship active flags, then rebuild so deadlines/counts stay fresh
   workflow_dispatch:
 
 concurrency:
@@ -14,6 +14,9 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -24,6 +27,20 @@ jobs:
 
       - run: npm ci
 
+      # DATABASE_URL is scoped to this step only — the build below must never see it.
+      - name: Sync scholarship active flags
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx tsx scripts/auto-expire.ts
+
+      - name: Commit synced data
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add src/data/scholarships.json
+          # [skip ci] so this push doesn't trigger a second run; this run builds the fresh JSON itself
+          git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip ci]" && git push; }
+
       - name: Lint
         run: npm run lint
 
@@ -33,7 +50,7 @@ jobs:
       # No DATABASE_URL here on purpose: builds must use the committed JSON.
       # The DB path only returns active rows (~28) and has null eligibility,
       # which shrinks the site and breaks quiz matching. Freshness comes from
-      # auto-sync committing JSON + the daily rebuild cron.
+      # the sync step above + this workflow's daily cron.
       - name: Build
         run: npm run build
 
