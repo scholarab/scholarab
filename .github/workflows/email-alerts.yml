@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 14 * * *'   # Daily at 2pm UTC (8am MT)
   workflow_dispatch:
+    inputs:
+      catch_up:
+        description: 'Catch-up send: remind every subscriber with a future deadline now (ignores 30/14/3 milestones)'
+        type: boolean
+        default: false
 
 jobs:
   send:
@@ -23,4 +28,5 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           SITE_URL: https://www.scholarab.ca
+          CATCH_UP: ${{ inputs.catch_up == true && '1' || '' }}
         run: npx tsx scripts/send-alerts.ts

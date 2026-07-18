@@ -26,6 +26,12 @@ const sql = neon(DATABASE_URL)
 const today = new Date()
 today.setHours(0, 0, 0, 0)
 const MILESTONES = process.env.TEST_DAYS ? [parseInt(process.env.TEST_DAYS)] : [30, 14, 3]
+// CATCH_UP=1: one-off mode — remind every subscriber whose item still has a
+// future deadline, using the real days-left count instead of milestone days.
+// Used to catch everyone up after the alert pipeline was down. DRY_RUN=1
+// prints the plan without sending.
+const CATCH_UP = process.env.CATCH_UP === '1'
+const DRY_RUN = process.env.DRY_RUN === '1'
 
 function daysUntil(deadline: string): number {
   return Math.round((new Date(deadline + 'T00:00:00').getTime() - today.getTime()) / 86_400_000)
@@ -79,26 +85,31 @@ const allItems = [
   ...programs.filter(p => p.active !== false && p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing').map(p => ({ ...p, itemType: 'program', label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}` })),
 ]
 
-for (const milestone of MILESTONES) {
-  const targets = allItems.filter(item => daysUntil(item.deadline!) === milestone)
+const targets = CATCH_UP
+  ? allItems.map(item => ({ item, days: daysUntil(item.deadline!) })).filter(t => t.days > 0)
+  : MILESTONES.flatMap(m => allItems.filter(item => daysUntil(item.deadline!) === m).map(item => ({ item, days: m })))
 
-  for (const item of targets) {
-    const rows = await sql`
-      SELECT email, token FROM subscribers
-      WHERE item_type = ${item.itemType} AND item_id = ${item.id}
-    ` as { email: string; token: string }[]
+for (const { item, days } of targets) {
+  const rows = await sql`
+    SELECT email, token FROM subscribers
+    WHERE item_type = ${item.itemType} AND item_id = ${item.id}
+  ` as { email: string; token: string }[]
 
-    for (const { email, token } of rows) {
-      const subject = `${milestone} days left: ${item.label} closes ${formatDate(item.deadline!)}`
-      const html = emailHtml(item.label, item.amount, item.deadline!, item.detailUrl, `${BASE_URL}/api/unsubscribe?token=${token}`, milestone)
-      try {
-        await sendEmail(email, subject, html)
-        sent++
-        console.log(`  sent ${milestone}d → ${email} (${item.itemType} ${item.id})`)
-      } catch (e) {
-        errors++
-        console.error(`  failed ${email} (${item.itemType} ${item.id}):`, e)
-      }
+  for (const { email, token } of rows) {
+    const subject = `${days} day${days === 1 ? '' : 's'} left: ${item.label} closes ${formatDate(item.deadline!)}`
+    const html = emailHtml(item.label, item.amount, item.deadline!, item.detailUrl, `${BASE_URL}/api/unsubscribe?token=${token}`, days)
+    if (DRY_RUN) {
+      sent++
+      console.log(`  would send ${days}d → ${email} (${item.itemType} ${item.id}: ${item.label})`)
+      continue
+    }
+    try {
+      await sendEmail(email, subject, html)
+      sent++
+      console.log(`  sent ${days}d → ${email} (${item.itemType} ${item.id})`)
+    } catch (e) {
+      errors++
+      console.error(`  failed ${email} (${item.itemType} ${item.id}):`, e)
     }
   }
 }
