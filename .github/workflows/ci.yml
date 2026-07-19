@@ -6,11 +6,11 @@ name: CI
 # removed 2026-07-17: it had never once succeeded (0 green runs in 884) and CF
 # was the real deploy path all along.
 #
-# The job is named "validate" to match the branch-protection ruleset's required
-# status check. NOTE: the daily sync push below is still rejected by that
-# ruleset (github-actions[bot] has no bypass) — the repo admin must either add
-# the bot to the ruleset bypass list or drop the required check for the sync
-# to ever land. Every historical auto-sync push failed this way.
+# The daily sync push below was rejected by the "main" ruleset's required
+# "validate" status check for the repo's entire history (github-actions[bot]
+# cannot be a ruleset bypass actor). Ilia removed the required check on
+# 2026-07-17, so bot data pushes can land now — if sync commits ever stop
+# appearing on data-change days, check the ruleset first.
 
 on:
   push:
