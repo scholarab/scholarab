@@ -1,0 +1,92 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+
+const guide = getGuide('alexander-rutherford-scholarship-guide');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'How much is the Alexander Rutherford Scholarship worth?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Up to $2,500 total. Each grade is assessed separately: Grade 10 pays $300 (75 to 79.9% average) or $400 (80%+), Grade 11 pays $500 or $800, and Grade 12 pays $700 or $1,300.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When is the Alexander Rutherford Scholarship deadline?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'There is no fixed deadline. You apply through Alberta Student Aid any time after you are enrolled full-time in a designated post-secondary program and your final high school transcripts are available.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do I need a 75% average in every grade to get the Rutherford scholarship?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. Each grade is assessed on its own. If you only had a 75%+ five-course average in Grade 12, you still receive the Grade 12 portion.',
+      },
+    },
+  ],
+};
+---
+
+<SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
+  <p>
+    The <a href="/scholarships/alexander-rutherford-scholarship/">Alexander Rutherford Scholarship</a> is the one scholarship almost every Alberta student should apply for. There is no essay, no interview, and no competition. If your marks meet the bar and you go on to post-secondary, the money is yours. Every year students leave it unclaimed because they assume it must be harder than it is.
+  </p>
+
+  <h2>How much it pays</h2>
+  <p>
+    Each grade is assessed separately, based on your average in five designated courses. You can qualify for one, two, or all three grades:
+  </p>
+  <table>
+    <thead>
+      <tr><th>GRADE</th><th>75.0% TO 79.9%</th><th>80% OR HIGHER</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Grade 10</td><td>$300</td><td>$400</td></tr>
+      <tr><td>Grade 11</td><td>$500</td><td>$800</td></tr>
+      <tr><td>Grade 12</td><td>$700</td><td>$1,300</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Qualify at 80%+ in all three grades and you get the full <strong>$2,500</strong>. A rough Grade 10 does not disqualify you: if you only hit the bar in Grade 12, you still get that grade's portion.
+  </p>
+
+  <h2>Who qualifies</h2>
+  <ul>
+    <li>You have a five-course average of at least 75% in Grade 10, 11, or 12. The five courses must include English (or French) plus other designated academic courses. The full course list is on the <a href="https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/" rel="noopener noreferrer" target="_blank">Alberta Student Aid page</a>.</li>
+    <li>You are a Canadian citizen, permanent resident, or protected person.</li>
+    <li>You are an Alberta resident, or one of your parents or legal guardians is.</li>
+    <li>You enrol full-time (at least 60% of a full course load) in a designated post-secondary program or apprenticeship.</li>
+  </ul>
+  <div class="sabg-note">
+    <strong>The catch most students miss:</strong> you cannot apply while you are still in high school. The application opens once you are actually enrolled in post-secondary. Put a reminder in your phone for your first month of college or university.
+  </div>
+
+  <h2>How to apply</h2>
+  <ol>
+    <li>Finish high school and enrol full-time in a designated post-secondary program. Trades and apprenticeships count.</li>
+    <li>Create an Alberta Student Aid account at <a href="https://studentaid.alberta.ca" rel="noopener noreferrer" target="_blank">studentaid.alberta.ca</a>. This is the same account used for student loans, but applying for the scholarship does not mean taking a loan.</li>
+    <li>Submit the Rutherford application. Alberta Student Aid pulls your transcripts and assesses all three grades automatically. It takes about half an hour.</li>
+  </ol>
+  <p>
+    There is no fixed deadline, but do not sit on it. Apply in your first semester so the money arrives while tuition still hurts.
+  </p>
+
+  <h2>What it means for you right now</h2>
+  <p>
+    If you are in Grade 10 or 11, this scholarship is the clearest reason to protect your average. The difference between a 74.9% and a 75% five-course average in one grade is worth hundreds of dollars, and the difference between 79.9% and 80% in Grade 12 is worth $600. Few things you do in high school have such a direct price tag.
+  </p>
+  <p>
+    The Rutherford also stacks with everything else. Winning it does not reduce what you can get from <a href="/scholarships/">other Alberta scholarships</a>, so treat it as the floor, not the ceiling.
+  </p>
+</SabGuide>

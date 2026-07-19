@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { generateSlug } from '../src/lib/utils.ts';
+import { guides } from '../src/lib/guides.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -59,6 +60,8 @@ const lines: string[] = [
   urlEntry(`${BASE}/match/`, '0.9'),
   urlEntry(`${BASE}/about/`, '0.8'),
   urlEntry(`${BASE}/educators/`, '0.7'),
+  urlEntry(`${BASE}/guides/`, '0.8'),
+  ...guides.map((g) => urlEntry(`${BASE}/guides/${g.slug}/`, '0.8', g.dateModified)),
   // Closed listings (active: false) stay out of the sitemap — Google flags
   // expired-offer pages as Soft 404. Missing `active` counts as open.
   ...scholarships.filter((s) => s.active !== false).map((s) => urlEntry(`${BASE}/scholarships/${generateSlug(s.title)}/`, '0.85', toLastmod(s.lastVerified) ?? siteLastmod)),
