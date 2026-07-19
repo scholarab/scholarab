@@ -13,6 +13,8 @@ import { generateSlug, parseAmount } from '../../lib/utils.ts';
 import { categoryEmoji } from '../../lib/category-emoji.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
+type RelatedItem = { href: string; title: string; value: string; tag: string };
+
 export async function getStaticPaths() {
   // Neighbor order matches each directory's default sort: earliest deadline
   // first (programs put TBA / Ongoing at the end)
@@ -24,6 +26,53 @@ export async function getStaticPaths() {
   const programs = [...await loadPrograms()]
     .sort((a, b) => ms(a.deadline) - ms(b.deadline) || a.id - b.id);
 
+  // "More like this": up to 4 listings sharing category (or region for
+  // scholarships), open ones first, then by soonest deadline. Computed here
+  // because only getStaticPaths has the full lists in scope.
+  const buildTime = Date.now();
+  const isOpen = (deadline: string | null | undefined) =>
+    !deadline || deadline === 'TBA' || deadline === 'Ongoing' || ms(deadline) >= buildTime;
+
+  const relatedScholarships = (self: Scholarship): RelatedItem[] =>
+    scholarships
+      .filter(s => s.id !== self.id)
+      .map(s => ({
+        s,
+        score:
+          (s.category && s.category === self.category ? 2 : 0) +
+          (s.region && s.region === self.region ? 1 : 0) +
+          (isOpen(s.deadline) ? 2 : 0),
+      }))
+      .filter(x => x.score > 2 || (x.score > 0 && isOpen(x.s.deadline)))
+      .sort((a, b) => b.score - a.score || ms(a.s.deadline) - ms(b.s.deadline))
+      .slice(0, 4)
+      .map(({ s }) => ({
+        href: `/scholarships/${generateSlug(s.title)}/`,
+        title: s.title,
+        value: s.amount,
+        tag: s.region || 'Alberta',
+      }));
+
+  const relatedPrograms = (self: Program): RelatedItem[] =>
+    programs
+      .filter(p => p.id !== self.id)
+      .map(p => ({
+        p,
+        score:
+          (p.category && p.category === self.category ? 2 : 0) +
+          (p.provider && p.provider === self.provider ? 1 : 0) +
+          (isOpen(p.deadline) ? 1 : 0),
+      }))
+      .filter(x => x.score > 1)
+      .sort((a, b) => b.score - a.score || ms(a.p.deadline) - ms(b.p.deadline))
+      .slice(0, 4)
+      .map(({ p }) => ({
+        href: `/programs/${generateSlug(p.name)}/`,
+        title: p.name,
+        value: p.duration || 'Varies',
+        tag: p.category || 'Program',
+      }));
+
   return [
     ...scholarships.map((s, i) => ({
       params: { type: 'scholarships', slug: generateSlug(s.title) },
@@ -32,6 +81,7 @@ export async function getStaticPaths() {
         scholarship: s,
         program: undefined as Program | undefined,
         position: `LISTING ${i + 1} OF ${scholarships.length}`,
+        related: relatedScholarships(s),
         prevSlug: generateSlug(scholarships[(i - 1 + scholarships.length) % scholarships.length]!.title),
         nextSlug: generateSlug(scholarships[(i + 1) % scholarships.length]!.title),
       },
@@ -43,6 +93,7 @@ export async function getStaticPaths() {
         scholarship: undefined as Scholarship | undefined,
         program: p,
         position: `LISTING ${i + 1} OF ${programs.length}`,
+        related: relatedPrograms(p),
         prevSlug: generateSlug(programs[(i - 1 + programs.length) % programs.length]!.name),
         nextSlug: generateSlug(programs[(i + 1) % programs.length]!.name),
       },
@@ -50,7 +101,7 @@ export async function getStaticPaths() {
   ];
 }
 
-const { kind, scholarship, program, position, prevSlug, nextSlug } = Astro.props;
+const { kind, scholarship, program, position, prevSlug, nextSlug, related } = Astro.props;
 
 function formatDate(str: string | null): string {
   if (!str) return 'TBA';
@@ -276,6 +327,24 @@ const breadcrumbJson = {
       canonical={d.canonical}
     />
 
+    {related.length > 0 && (
+      <div class="sabd-related">
+        <div class="sabd-related-head">
+          <span class="sabdr-mono sabd-related-title">MORE LIKE THIS</span>
+          <a href={d.currentPath} class="sabdr-mono sabd-related-all">VIEW ALL →</a>
+        </div>
+        <div class="sabd-related-grid">
+          {related.map(r => (
+            <a href={r.href} class="sabd-related-card">
+              <span class="sabdr-mono sabd-related-tag">{r.tag.toUpperCase()}</span>
+              <span class="sabd-related-name">{r.title}</span>
+              <span class="sabd-related-value">{r.value}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
     <SabFooter />
   </div>
 </Layout>
@@ -283,4 +352,32 @@ const breadcrumbJson = {
 <style is:global>
   /* The detail design is fixed light regardless of site theme */
   body:has(#sab-detail) { background: #FAF7F0; }
+</style>
+
+<style>
+  .sabdr-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .sabd-related { padding: 0 48px 96px; box-sizing: border-box; }
+  .sabd-related-head {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid #141915; padding-top: 20px; margin-bottom: 18px;
+  }
+  .sabd-related-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(20,25,21,0.5); }
+  .sabd-related-all { font-size: 12px; letter-spacing: 0.05em; color: #0E8C64; text-decoration: none; }
+  .sabd-related-all:hover { color: #141915; }
+  .sabd-related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .sabd-related-card {
+    display: flex; flex-direction: column; gap: 10px; background: #FFFFFF;
+    border: 1.5px solid rgba(20,25,21,0.85); border-radius: 14px; padding: 20px;
+    text-decoration: none; color: #141915; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sabd-related-card:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 #2FD3A0; }
+  .sabd-related-tag { font-size: 10.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); }
+  .sabd-related-name { font-weight: 700; font-size: 15px; line-height: 1.35; letter-spacing: -0.01em; flex: 1; }
+  .sabd-related-value { font-family: 'Instrument Serif', serif; font-size: 20px; color: #0E8C64; }
+
+  @media (max-width: 900px) {
+    .sabd-related { padding: 0 20px 72px; }
+    .sabd-related-grid { grid-template-columns: 1fr 1fr; }
+  }
 </style>
