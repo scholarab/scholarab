@@ -29,7 +29,7 @@ const scholarships = raw.map(s => ({
   description="Find and filter Alberta scholarships for high school students. Browse awards by region, amount, and deadline. Free, updated, no account needed."
   ogTitle="Alberta High School Scholarships 2026 | ScholarAB"
   ogDescription="Find and filter Alberta scholarships for high school students. Browse awards by region, amount, and deadline. Free, updated, no account needed."
-  ogUrl="https://www.scholarab.ca/scholarships"
+  ogUrl="https://www.scholarab.ca/scholarships/"
   currentPath="/scholarships"
   hideChrome
 >
@@ -38,12 +38,12 @@ const scholarships = raw.map(s => ({
     "@type": "CollectionPage",
     "name": "Alberta High School Scholarships 2026",
     "description": "Find and filter Alberta scholarships for high school students. Browse awards by region, amount, and deadline. Free, updated, no account needed.",
-    "url": "https://www.scholarab.ca/scholarships",
+    "url": "https://www.scholarab.ca/scholarships/",
     "provider": { "@type": "Organization", "name": "ScholarAB", "url": "https://www.scholarab.ca" },
     "hasPart": raw.slice(0, 10).map(s => ({
       "@type": "EducationalOccupationalProgram",
       "name": s.title,
-      "url": `https://www.scholarab.ca/scholarships/${generateSlug(s.title)}`,
+      "url": `https://www.scholarab.ca/scholarships/${generateSlug(s.title)}/`,
     })),
   })} slot="head" />
   <SabFonts slot="head" />

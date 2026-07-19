@@ -79,7 +79,7 @@ if (kind === 'scholarship') {
 
   const regionStr    = !s.region || s.region === 'National' ? '' : ` in ${s.region}`;
   const description  = `The ${s.title} offers ${s.amount} to ${s.audience}${regionStr}. Deadline: ${formatDate(s.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
-  const canonical    = `https://www.scholarab.ca/scholarships/${slug}`;
+  const canonical    = `https://www.scholarab.ca/scholarships/${slug}/`;
   const parsedAmount = parseAmount(s.amount) || null;
   const deadlineClause = s.deadline ? ` before ${formatDate(s.deadline)}` : '';
 
@@ -156,7 +156,7 @@ if (kind === 'scholarship') {
   const metaDescription = desc.length > 160
     ? desc.slice(0, 157) + '...'
     : desc || `${p.name} is a research program offered by ${p.provider}. Discover and apply through ScholarAB, Alberta's free scholarship and program directory for high school students.`;
-  const canonical = `https://www.scholarab.ca/programs/${slug}`;
+  const canonical = `https://www.scholarab.ca/programs/${slug}/`;
   const dueLong = status === 'ongoing' ? 'Ongoing, join anytime' : formatDate(p.deadline);
   const deadlineClause = hasDate ? ` before ${formatDate(p.deadline)}` : '';
 
@@ -219,7 +219,7 @@ const breadcrumbJson = {
   '@type': 'BreadcrumbList',
   'itemListElement': [
     { '@type': 'ListItem', 'position': 1, 'name': 'ScholarAB', 'item': 'https://www.scholarab.ca' },
-    { '@type': 'ListItem', 'position': 2, 'name': d.breadcrumbName, 'item': `https://www.scholarab.ca${d.currentPath}` },
+    { '@type': 'ListItem', 'position': 2, 'name': d.breadcrumbName, 'item': `https://www.scholarab.ca${d.currentPath}/` },
     { '@type': 'ListItem', 'position': 3, 'name': d.itemName, 'item': d.canonical },
   ],
 };

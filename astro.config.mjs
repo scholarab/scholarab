@@ -3,6 +3,7 @@ import { defineConfig, envField } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://www.scholarab.ca',
   output: 'static',
   adapter: cloudflare({ imageService: 'compile' }),
   integrations: [react()],
