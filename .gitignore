@@ -20,3 +20,5 @@ ScholarAB_Overview.pdf
 
 # generated on every build by scripts/generate-sitemap.ts
 public/sitemap.xml
+# per-listing OG images are generated at build (scripts/generate-og-images.ts)
+public/og/

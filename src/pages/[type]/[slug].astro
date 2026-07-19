@@ -139,6 +139,9 @@ if (kind === 'scholarship') {
     pageTitle: `${s.title} | ScholarAB | Alberta Scholarships`,
     description,
     canonical,
+    // Per-listing OG images exist only for open scholarships (see
+    // scripts/generate-og-images.ts, which mirrors this condition).
+    ogImage: s.active !== false ? `https://www.scholarab.ca/og/scholarships/${slug}.png` : undefined,
     ldJson: {
       '@context': 'https://schema.org',
       '@type': 'EducationalOccupationalProgram',
@@ -283,6 +286,7 @@ const breadcrumbJson = {
   ogDescription={d.description}
   ogUrl={d.canonical}
   canonical={d.canonical}
+  ogImage={'ogImage' in d ? d.ogImage : undefined}
   currentPath={d.currentPath}
   robots={d.status === 'closed' ? 'noindex' : undefined}
   hideChrome
