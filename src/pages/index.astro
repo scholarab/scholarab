@@ -237,7 +237,10 @@ const matchGroups = [
           <div>
             <div class="sab-logo sab-footer-logo">
               <SabLogoMark size={56} id="home-footer" />
-              <span class="sab-logo-word sab-footer-logo-word">Scholar<span class="sab-accent-text">AB</span></span>
+              <div class="sab-footer-lockup">
+                <span class="sab-logo-word sab-footer-logo-word">Scholar<span class="sab-accent-text">AB</span></span>
+                <span class="sab-mono sab-footer-tagline">FIND YOUR SCHOLARSHIP</span>
+              </div>
             </div>
             <p class="sab-footer-blurb">The best website for scholarships and research programs for Alberta high school students, with deadlines tracked. Free, no account needed.</p>
           </div>
@@ -547,7 +550,9 @@ const matchGroups = [
   .sab-footer-inner { padding-top: 64px; padding-bottom: 40px; }
   .sab-footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
   .sab-footer-logo { gap: 16px; margin-bottom: 16px; }
-  .sab-footer-logo-word { font-size: clamp(36px, 5vw, 52px); }
+  .sab-footer-lockup { display: flex; flex-direction: column; gap: 6px; }
+  .sab-footer-logo-word { font-size: clamp(36px, 5vw, 52px); line-height: 1; }
+  .sab-footer-tagline { font-size: 12px; letter-spacing: 0.24em; color: rgba(242,240,233,0.6); }
   .sab-footer-blurb { font-size: 14px; line-height: 1.6; max-width: 340px; margin: 0; }
   .sab-footer-cols { display: flex; gap: 64px; flex-wrap: wrap; }
   .sab-footer-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,240,233,0.4); margin-bottom: 14px; }
