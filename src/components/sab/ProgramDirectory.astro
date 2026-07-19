@@ -107,7 +107,6 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
           data-grades={p.grades ?? undefined}
           data-paid={p.paid ? '1' : undefined}
           data-deadline={p.deadline ?? undefined}
-          data-dl-ms={p._deadline_ms !== undefined ? String(p._deadline_ms) : undefined}
           data-search={[p.name, p.provider, p.description, p.category].filter(Boolean).join('\n').toLowerCase()}
           hidden={!initialIds.has(p.id)}
         >
@@ -176,7 +175,11 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
         grades: d.grades ?? null,
         paid: d.paid === '1',
         deadline: d.deadline ?? null,
-        _deadline_ms: d.dlMs ? Number(d.dlMs) : undefined,
+        // Visitor-timezone ms from the ISO string; a serialized build-time
+        // value would be UTC-midnight and close listings a day early here.
+        _deadline_ms: d.deadline && d.deadline !== 'TBA' && d.deadline !== 'Ongoing'
+          ? new Date(d.deadline + 'T00:00:00').getTime()
+          : undefined,
         emoji: null, provider: null, duration: null, stipend: null, location: null,
         eligibility: null, url: '', description: null, lastVerified: null, active: true,
       };

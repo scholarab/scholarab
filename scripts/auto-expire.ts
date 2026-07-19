@@ -17,23 +17,22 @@ interface Scholarship {
 
 const scholarships: Scholarship[] = JSON.parse(readFileSync(filePath, 'utf8'));
 
-const today = new Date();
-today.setUTCHours(0, 0, 0, 0);
+// "Today" is Alberta's calendar date, not the runner's (CI is UTC — its
+// midnight is 5-6pm in Edmonton, which would expire listings on the evening
+// OF their deadline day). ISO strings compare correctly as strings.
+const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Edmonton' }).format(new Date());
 
 let changed = 0;
 
 for (const s of scholarships) {
   if (s.active === true) {
-    const deadline = new Date(s.deadline + 'T00:00:00Z');
-    if (deadline < today) {
+    if (s.deadline && s.deadline < today) {
       s.active = false;
       changed++;
       console.log(`Expired: [${s.id}] ${s.title} (deadline: ${s.deadline})`);
     }
   } else if (s.active === false && s.openDate) {
-    const openDate = new Date(s.openDate + 'T00:00:00Z');
-    const deadline = s.deadline ? new Date(s.deadline + 'T00:00:00Z') : null;
-    if (openDate <= today && !(deadline && deadline < today)) {
+    if (s.openDate <= today && !(s.deadline && s.deadline < today)) {
       s.active = true;
       changed++;
       console.log(`Opened: [${s.id}] ${s.title} (openDate: ${s.openDate})`);
@@ -66,8 +65,7 @@ const programs: Program[] = JSON.parse(readFileSync(programsPath, 'utf8'));
 let programsChanged = 0;
 for (const p of programs) {
   if (p.active === false || p.deadline === 'TBA' || p.deadline === 'Ongoing') continue;
-  const deadline = new Date(p.deadline + 'T00:00:00Z');
-  if (!Number.isNaN(deadline.getTime()) && deadline < today) {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(p.deadline) && p.deadline < today) {
     console.log(`Cycle closed: [${p.id}] ${p.name} (deadline: ${p.deadline}) -> TBA`);
     p.deadline = 'TBA';
     programsChanged++;
@@ -86,7 +84,7 @@ const dbUrl = process.env.DATABASE_URL;
 if (dbUrl) {
   const { neon } = await import('@neondatabase/serverless');
   const sql = neon(dbUrl);
-  const todayISO = today.toISOString().slice(0, 10);
+  const todayISO = today;
 
   const expired = await sql`
     UPDATE scholarships SET active = false

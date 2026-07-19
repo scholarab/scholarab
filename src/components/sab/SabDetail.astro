@@ -25,6 +25,11 @@ interface Props {
   subline: string;
   status: 'active' | 'closed' | 'future' | 'ongoing' | 'tba';
   daysLeft: number | null;
+  // ISO dates for the client-side chip recompute: the page is prerendered, so
+  // the SSR chip is only as fresh as the last build. null = not clock-driven.
+  deadlineIso?: string | null;
+  openDateIso?: string | null;
+  inactive?: boolean; // curator-closed next-cycle listing (open date unknown)
   dueLong: string; // 'July 15, 2026' / 'Ongoing' / 'TBA'
   opensLabel?: string | null; // formatted open date, for status 'future'
   backHref: string;
@@ -48,7 +53,7 @@ interface Props {
 
 const {
   itemType, itemId, typeLabel, emoji, tag, name, subline,
-  status, daysLeft, dueLong, opensLabel,
+  status, daysLeft, deadlineIso, openDateIso, inactive, dueLong, opensLabel,
   backHref, backLabel, position, prevHref, nextHref,
   facts, eligibility, about, notes, steps,
   valueLabel, valueBig, valueNote,
@@ -81,7 +86,14 @@ const chip =
   <div class="sabd-chips">
     <span class="sabd-mono sabd-chip sabd-chip-type">{typeLabel}</span>
     {tag && <span class="sabd-mono sabd-chip sabd-chip-tag">{tag}</span>}
-    <span class="sabd-mono sabd-chip" style={`background:${chip.bg};color:${chip.fg};`}>{chip.text}</span>
+    <span
+      class="sabd-mono sabd-chip"
+      style={`background:${chip.bg};color:${chip.fg};`}
+      data-status-chip
+      data-deadline={deadlineIso ?? undefined}
+      data-open-date={openDateIso ?? undefined}
+      data-inactive={inactive ? '' : undefined}
+    >{chip.text}</span>
   </div>
   <h1 class="sabd-h1">
     {emoji && <span class="sabd-h1-emoji" aria-hidden="true">{emoji} </span>}{name}
@@ -397,9 +409,47 @@ const chip =
     }
   }, true);
 
+  // The page is prerendered, so the SSR status chip is only as fresh as the
+  // last build. Re-derive it from the ISO dates in the visitor's timezone
+  // (mirrors getScholarshipStatus / scholarshipDayChip in list-core).
+  function refreshStatusChip() {
+    const el = document.querySelector<HTMLElement>('[data-status-chip]');
+    if (!el) return;
+    const { deadline, openDate } = el.dataset;
+    const inactive = el.dataset.inactive !== undefined;
+    if (!deadline && !openDate && !inactive) return; // tba/ongoing: not clock-driven
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayMs = today.getTime();
+    const paint = (text: string, bg: string, fg: string) => {
+      el.textContent = text;
+      el.style.background = bg;
+      el.style.color = fg;
+    };
+    const fmtLong = (iso: string) =>
+      new Date(iso + 'T00:00:00')
+        .toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
+        .toUpperCase();
+
+    if (openDate && todayMs < new Date(openDate + 'T00:00:00').getTime()) {
+      paint(`OPENS ${fmtLong(openDate)}`, 'rgba(14,140,100,0.12)', '#0E8C64');
+    } else if (deadline && todayMs > new Date(deadline + 'T00:00:00').getTime()) {
+      paint('CLOSED', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.55)');
+    } else if (inactive) {
+      paint('OPENING SOON', 'rgba(14,140,100,0.12)', '#0E8C64');
+    } else if (deadline) {
+      const days = Math.max(0, Math.ceil((new Date(deadline + 'T00:00:00').getTime() - todayMs) / 86400000));
+      if (days === 0) paint('DUE TODAY', '#B8541F', '#FAF7F0');
+      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#B8541F', '#FAF7F0');
+      else paint(`${days} DAYS LEFT`, 'rgba(184,84,31,0.12)', '#B8541F');
+    }
+  }
+
   // Per-item views + initial save-state paint.
   // astro:page-load fires on first load and after every view-transition swap.
   document.addEventListener('astro:page-load', () => {
+    refreshStatusChip();
     const view = document.querySelector('[data-detail-view]');
     // Dwell-gated: an instant back/misclick shouldn't count as a view
     if (view) sendEventAfterDwell('detail_view', ...itemAttrs(view));

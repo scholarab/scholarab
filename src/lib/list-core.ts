@@ -23,6 +23,9 @@ export function getScholarshipStatus(s: ScholarshipWithMeta): ScholarshipStatus 
   // `||` on purpose: _deadline_ms of 0 means "no deadline" → Infinity, never a 1970 cutoff
   const deadMs  = s._deadline_ms || (s.deadline ? new Date(s.deadline + 'T00:00:00').getTime() : Infinity);
   if (todayMs > deadMs) return 'closed';
+  // Curator-closed (active: false) with a future deadline is a next-cycle
+  // listing whose open date isn't known yet — not accepting applications now.
+  if (s.active === false) return 'future';
   return 'active';
 }
 
@@ -32,7 +35,9 @@ export type RegionKey = 'Alberta-wide' | 'Medicine Hat' | 'National';
 export const REGION_MATCH: Record<RegionKey, (s: ScholarshipWithMeta) => boolean> = {
   'Alberta-wide': s => PROVINCIAL_REGIONS.has(s.region ?? ''),
   'Medicine Hat': s => s.region === 'Medicine Hat',
-  'National':     s => s.region === 'National',
+  // International awards open to Canadians live under the National chip —
+  // without this they'd be unreachable from any region filter.
+  'National':     s => s.region === 'National' || s.region === 'International',
 };
 export type ScholarshipSort = 'closest_due' | 'highest_pay' | 'lowest_pay';
 

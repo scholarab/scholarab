@@ -125,6 +125,9 @@ if (kind === 'scholarship') {
     ? 'future'
     : (deadlineDate && todayDate > deadlineDate)
       ? 'closed'
+      // Curator-closed with a future deadline = next cycle, open date unknown
+      // yet — show as upcoming, not accepting (mirrors getScholarshipStatus).
+      : s.active === false ? 'future'
       : deadlineDate ? 'active' : 'tba';
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
 
@@ -162,6 +165,11 @@ if (kind === 'scholarship') {
     subline: `${(s.region || 'Alberta').toUpperCase()} · VERIFIED BY HAND`,
     status,
     daysLeft,
+    // ISO dates for the client-side chip recompute (SabDetail): the page is
+    // prerendered, so days-left/closed state must be re-derived on load.
+    deadlineIso: s.deadline,
+    openDateIso: s.active === false && !s.openDate ? null : s.openDate,
+    inactive: s.active === false,
     dueLong: formatDate(s.deadline),
     opensLabel: s.openDate ? formatDate(s.openDate) : null,
     facts: [
@@ -238,6 +246,9 @@ if (kind === 'scholarship') {
     subline: p.provider ? `RUN BY ${p.provider.toUpperCase()}` : 'ALBERTA · VERIFIED BY HAND',
     status,
     daysLeft,
+    deadlineIso: hasDate ? p.deadline : null,
+    openDateIso: null,
+    inactive: false,
     dueLong,
     opensLabel: undefined,
     facts: [
@@ -310,6 +321,9 @@ const breadcrumbJson = {
       subline={d.subline}
       status={d.status}
       daysLeft={d.daysLeft}
+      deadlineIso={d.deadlineIso}
+      openDateIso={d.openDateIso}
+      inactive={d.inactive}
       dueLong={d.dueLong}
       opensLabel={d.opensLabel}
       backHref={d.currentPath}

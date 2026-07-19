@@ -119,10 +119,9 @@ const totalOpen = initial.reduce(
           data-category={s.category ?? undefined}
           data-region={s.region ?? undefined}
           data-amount={String(s._amount ?? 0)}
-          data-dl-ms={String(s._deadline_ms ?? 0)}
-          data-open-ms={String(s._open_ms ?? 0)}
           data-deadline={s.deadline ?? undefined}
           data-open-date={s.openDate ?? undefined}
+          data-inactive={s.active === false ? '' : undefined}
           data-search={[s.title, s.audience, s.category].filter(Boolean).join('\n').toLowerCase()}
         >
           <div class="sabl-card-top">
@@ -201,10 +200,13 @@ const totalOpen = initial.reduce(
         deadline: d.deadline ?? null,
         openDate: d.openDate ?? null,
         _amount: Number(d.amount ?? 0),
-        _deadline_ms: Number(d.dlMs ?? 0),
-        _open_ms: Number(d.openMs ?? 0),
+        // Recomputed here, in the visitor's timezone, from the ISO strings.
+        // Never serialize these from the server: the build runs in UTC, which
+        // shifts every deadline 6-7h early for Alberta visitors.
+        _deadline_ms: d.deadline ? new Date(d.deadline + 'T00:00:00').getTime() : 0,
+        _open_ms: d.openDate ? new Date(d.openDate + 'T00:00:00').getTime() : 0,
         amount: '', audience: null, url: '', lastVerified: null, notes: null,
-        applyViaGuidance: false, active: true, eligibility: null,
+        applyViaGuidance: false, active: d.inactive === undefined, eligibility: null,
       };
     },
     select(items, state, q) {

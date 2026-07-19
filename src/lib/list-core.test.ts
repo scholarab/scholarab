@@ -119,6 +119,16 @@ describe('getScholarshipStatus', () => {
     const s = makeScholarship({ id: 1, deadline: null, _deadline_ms: 0 })
     expect(getScholarshipStatus(s)).toBe('active')
   })
+
+  it('returns future for curator-closed listings with a future deadline (next cycle, open date unknown)', () => {
+    const s = makeScholarship({ id: 1, deadline: '2026-12-01', _deadline_ms: FUTURE_MS, active: false })
+    expect(getScholarshipStatus(s)).toBe('future')
+  })
+
+  it('still returns closed for curator-closed listings whose deadline has passed', () => {
+    const s = makeScholarship({ id: 1, deadline: '2026-03-01', _deadline_ms: PAST_MS, active: false })
+    expect(getScholarshipStatus(s)).toBe('closed')
+  })
 })
 
 // ── getProgramStatus ──────────────────────────────────────────────────────────
@@ -223,15 +233,16 @@ describe('filterSortScholarships', () => {
     expect(ids(filterSortScholarships(items, state({ statusFilter: 'closed' })))).toEqual([1])
   })
 
-  it('region filters: Medicine Hat exact, Alberta-wide includes provincial cities, National exact', () => {
+  it('region filters: Medicine Hat exact, Alberta-wide includes provincial cities, National includes International', () => {
     const items = [
       makeScholarship({ id: 1, region: 'Medicine Hat', _deadline_ms: FUTURE_MS }),
       makeScholarship({ id: 2, region: 'Red Deer', _deadline_ms: FUTURE_MS }),
       makeScholarship({ id: 3, region: 'National', _deadline_ms: FUTURE_MS }),
+      makeScholarship({ id: 4, region: 'International', _deadline_ms: FUTURE_MS }),
     ]
     expect(ids(filterSortScholarships(items, state({ selectedRegion: 'Medicine Hat' })))).toEqual([1])
     expect(ids(filterSortScholarships(items, state({ selectedRegion: 'Alberta-wide' })))).toEqual([1, 2])
-    expect(ids(filterSortScholarships(items, state({ selectedRegion: 'National' })))).toEqual([3])
+    expect(ids(filterSortScholarships(items, state({ selectedRegion: 'National' })))).toEqual([3, 4])
   })
 
   it('search matches title, audience, and category', () => {
