@@ -1,10 +1,32 @@
 ---
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 
 const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
 const activeScholarships = scholarships.filter(s => s.active).length;
 const activePrograms = programs.filter(p => p.active).length;
+
+const stats = [
+  { value: `${activeScholarships}`, label: 'SCHOLARSHIPS' },
+  { value: `${activePrograms}`, label: 'RESEARCH PROGRAMS' },
+  { value: '$0', label: 'NO ADS, NO ACCOUNTS' },
+];
+
+const features = [
+  { num: '01', tag: '2 MINUTES', title: 'Take the 6-question match quiz', body: 'Students answer questions about their grade, region, interests, and background. ScholarAB shows the scholarships they’re most likely to qualify for. No account required.' },
+  { num: '02', tag: 'REGION-AWARE', title: 'Browse by region and category', body: 'Scholarships are tagged by region (Medicine Hat, Calgary, Edmonton, Lethbridge, Red Deer, and Alberta-wide) so students only see what’s relevant to them.' },
+  { num: '03', tag: 'DEADLINE ALERTS', title: 'Save scholarships and get reminders', body: 'Students can bookmark scholarships and sign up for email reminders 30, 14, and 3 days before the deadline. No account required, just an email address.' },
+  { num: '04', tag: 'BEYOND AWARDS', title: 'Explore research programs', body: 'Beyond scholarships, ScholarAB lists paid and unpaid research opportunities for high school students across Canada.' },
+];
+
+const steps = [
+  { num: '1.', body: 'Post scholarab.ca on your classroom board or guidance office bulletin.' },
+  { num: '2.', body: 'Tell Grade 11 and 12 students to take the Match quiz; it takes 2 minutes and finds scholarships they qualify for.' },
+  { num: '3.', body: 'Remind students to sign up for deadline reminders so they don’t miss applications they’ve saved.' },
+];
 
 const pageTitle = 'For Educators | ScholarAB';
 const description = 'A free Alberta scholarship directory for high school counsellors. Help your students find and apply for scholarships in Medicine Hat, Calgary, Edmonton, Lethbridge, and across Alberta.';
@@ -19,106 +41,198 @@ const canonical = 'https://www.scholarab.ca/educators';
   ogUrl={canonical}
   canonical={canonical}
   currentPath="/educators"
-  containerClass="max-w-2xl"
+  hideChrome
 >
-  <div class="py-10">
+  <SabFonts italic slot="head" />
 
-    <div class="mb-10">
-      <p class="text-xs font-semibold uppercase tracking-widest text-tertiary mb-3">For Educators</p>
-      <h1 class="text-3xl font-bold text-primary mb-4 leading-tight">
-        Help your students find scholarships they actually qualify for.
-      </h1>
-      <p class="text-base text-secondary leading-relaxed">
-        ScholarAB is a free, ad-free directory of Alberta scholarships and research programs built specifically for high school students. Share it with your class, post it in your guidance office, or send it directly to Grade 11 and 12 students.
-      </p>
-    </div>
-
-    <!-- Stats -->
-    <div class="grid grid-cols-3 gap-4 mb-10">
-      <div class="p-4 rounded-xl bg-subtle border border-subtle text-center">
-        <p class="text-2xl font-bold text-primary">{activeScholarships}+</p>
-        <p class="text-xs text-tertiary mt-1">Alberta scholarships</p>
-      </div>
-      <div class="p-4 rounded-xl bg-subtle border border-subtle text-center">
-        <p class="text-2xl font-bold text-primary">{activePrograms}+</p>
-        <p class="text-xs text-tertiary mt-1">Research programs</p>
-      </div>
-      <div class="p-4 rounded-xl bg-subtle border border-subtle text-center">
-        <p class="text-2xl font-bold text-primary">Free</p>
-        <p class="text-xs text-tertiary mt-1">No ads, no accounts</p>
-      </div>
-    </div>
-
-    <!-- Features -->
-    <div class="mb-10 space-y-4">
-      <h2 class="text-lg font-semibold text-primary">What students can do</h2>
-
-      <div class="p-4 rounded-xl border border-subtle">
-        <p class="text-sm font-semibold text-primary mb-1">Take a 6-question match quiz</p>
-        <p class="text-sm text-secondary">Students answer questions about their grade, region, interests, and background. ScholarAB shows the scholarships they're most likely to qualify for. No account required.</p>
-      </div>
-
-      <div class="p-4 rounded-xl border border-subtle">
-        <p class="text-sm font-semibold text-primary mb-1">Browse by region and category</p>
-        <p class="text-sm text-secondary">Scholarships are tagged by region (Medicine Hat, Calgary, Edmonton, Lethbridge, Red Deer, and Alberta-wide) so students only see what's relevant to them.</p>
-      </div>
-
-      <div class="p-4 rounded-xl border border-subtle">
-        <p class="text-sm font-semibold text-primary mb-1">Save scholarships and get reminders</p>
-        <p class="text-sm text-secondary">Students can bookmark scholarships and sign up for email reminders 30, 14, and 3 days before the deadline. No account required, just an email address.</p>
-      </div>
-
-      <div class="p-4 rounded-xl border border-subtle">
-        <p class="text-sm font-semibold text-primary mb-1">Explore research programs</p>
-        <p class="text-sm text-secondary">Beyond scholarships, ScholarAB lists paid and unpaid research opportunities for high school students across Canada.</p>
-      </div>
-    </div>
-
-    <!-- How to share -->
-    <div class="mb-10">
-      <h2 class="text-lg font-semibold text-primary mb-4">How to share it</h2>
-      <div class="space-y-3">
-        <div class="flex gap-3 items-start">
-          <span class="text-brand font-bold text-sm mt-0.5">1.</span>
-          <p class="text-sm text-secondary">Post <strong class="text-primary">scholarab.ca</strong> on your classroom board or guidance office bulletin.</p>
+  <div id="sab-educators" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <!-- ============ DARK HERO ============ -->
+    <div class="sabp-header">
+      <SabHeader currentPath="/educators" />
+      <div class="sabe-hero">
+        <div class="sabe-kicker sabe-mono">
+          <span class="sabe-kicker-dot"></span>
+          <span>FOR EDUCATORS</span>
         </div>
-        <div class="flex gap-3 items-start">
-          <span class="text-brand font-bold text-sm mt-0.5">2.</span>
-          <p class="text-sm text-secondary">Tell Grade 11 and 12 students to take the Match quiz; it takes 2 minutes and finds scholarships they qualify for.</p>
-        </div>
-        <div class="flex gap-3 items-start">
-          <span class="text-brand font-bold text-sm mt-0.5">3.</span>
-          <p class="text-sm text-secondary">Remind students to sign up for deadline reminders so they don't miss applications they've saved.</p>
+        <h1 class="sabe-h1">Help your students find scholarships they <em>actually</em> qualify for.</h1>
+        <div class="sabe-hero-bottom">
+          <p class="sabe-lede">
+            ScholarAB is a free, ad-free directory of Alberta scholarships and research programs built specifically for high school students. Share it with your class, post it in your guidance office, or send it directly to Grade 11 and 12 students.
+          </p>
+          <div class="sabe-stats">
+            {stats.map(s => (
+              <div class="sabe-stat">
+                <div class="sabe-stat-value">{s.value}</div>
+                <div class="sabe-stat-label sabe-mono">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- CTA -->
-    <div class="p-6 rounded-xl border border-brand-border bg-brand-dim text-center">
-      <p class="text-sm font-semibold text-primary mb-1">Share with your students</p>
-      <p class="text-2xl font-bold text-brand mb-4">scholarab.ca</p>
-      <div class="flex gap-3 justify-center flex-wrap">
-        <a
-          href="/scholarships"
-          class="px-5 py-2.5 rounded-lg text-sm font-semibold transition"
-          style="background:var(--brand);color:var(--text-on-brand)"
-        >
-          Browse Scholarships
-        </a>
-        <a
-          href="/match"
-          class="px-5 py-2.5 rounded-lg text-sm font-semibold border border-subtle text-primary hover:bg-subtle transition"
-        >
-          Try the Quiz
-        </a>
+    <!-- ============ WHAT STUDENTS CAN DO ============ -->
+    <div class="sabe-section">
+      <div class="sabe-section-head">
+        <h2 class="sabe-h2">What students can do</h2>
+        <span class="sabe-mono sabe-head-note">No accounts · no ads · nothing to install</span>
+      </div>
+      <div class="sabe-feature-grid">
+        {features.map(f => (
+          <div class="sabe-card">
+            <div class="sabe-card-top">
+              <div class="sabe-card-num">{f.num}</div>
+              <span class="sabe-mono sabe-card-tag">{f.tag}</span>
+            </div>
+            <div class="sabe-card-title">{f.title}</div>
+            <div class="sabe-card-body">{f.body}</div>
+          </div>
+        ))}
       </div>
     </div>
 
-    <!-- Built by / contact -->
-    <div class="mt-8 pt-6 border-t border-subtle text-center">
-      <p class="text-sm text-secondary">Built by a high school student in Alberta. Questions or feedback?</p>
-      <p class="text-sm mt-1"><!--email_off--><a href="mailto:contact.scholarab@gmail.com" class="text-brand hover:underline">contact.scholarab@gmail.com</a><!--/email_off--></p>
+    <!-- ============ HOW TO SHARE IT ============ -->
+    <div class="sabe-section">
+      <div class="sabe-share-grid">
+        <div>
+          <div class="sabe-mono sabe-share-kicker">THREE MINUTES, TOPS</div>
+          <h2 class="sabe-h2 sabe-share-h2">How to share it</h2>
+          <p class="sabe-share-lede">No sign-up forms, no school licences, no IT tickets. It's a public website; sharing the link is the whole job.</p>
+        </div>
+        <div class="sabe-steps">
+          {steps.map(st => (
+            <div class="sabe-step">
+              <div class="sabe-step-num">{st.num}</div>
+              <p class="sabe-step-body">{st.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
 
+    <!-- ============ SHARE CTA ============ -->
+    <div class="sabe-section sabe-cta-section" style="flex:1;">
+      <div class="sabe-cta">
+        <div class="sabe-mono sabe-cta-kicker">SHARE WITH YOUR STUDENTS</div>
+        <div class="sabe-cta-domain">scholarab<span class="sabe-cta-tld">.ca</span></div>
+        <div class="sabe-cta-actions">
+          <a href="/scholarships" class="sabe-btn sabe-btn-solid">Browse scholarships <span class="sabe-btn-arrow">→</span></a>
+          <a href="/match" class="sabe-btn sabe-btn-outline">Try the quiz</a>
+        </div>
+        <p class="sabe-cta-contact">Built by a high school student in Alberta. Questions or feedback? <!--email_off--><a href="mailto:contact.scholarab@gmail.com" class="sabe-cta-email">contact.scholarab@gmail.com</a><!--/email_off--></p>
+      </div>
+    </div>
+
+    <SabFooter />
   </div>
 </Layout>
+
+<style is:global>
+  /* The educators design is fixed light regardless of site theme */
+  body:has(#sab-educators) { background: #FAF7F0; }
+</style>
+
+<style>
+  .sabe-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── Dark hero ── */
+  .sabe-hero { max-width: 1180px; margin: 0 auto; padding: 72px 48px 0; width: 100%; box-sizing: border-box; }
+  .sabe-kicker {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 26px;
+    font-size: 13px; color: #2FD3A0; letter-spacing: 0.06em;
+  }
+  .sabe-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
+  .sabe-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;
+    margin: 0; max-width: 900px; text-wrap: balance;
+    animation: sabe-rise 0.7s ease both;
+  }
+  .sabe-h1 em { font-style: italic; color: #2FD3A0; }
+  @keyframes sabe-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .sabe-hero-bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 40px; margin-top: 44px; padding-bottom: 64px;
+  }
+  .sabe-lede { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 0; max-width: 520px; }
+  .sabe-stats { display: flex; border-left: 1px solid rgba(242,240,233,0.18); }
+  .sabe-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(242,240,233,0.18); }
+  .sabe-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; }
+  .sabe-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); margin-top: 6px; }
+
+  /* ── Shared section shell ── */
+  .sabe-section { max-width: 1180px; margin: 0 auto; padding: 88px 48px 0; width: 100%; box-sizing: border-box; }
+  .sabe-h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(38px, 4.5vw, 58px); letter-spacing: -0.01em; margin: 0; }
+  .sabe-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; gap: 20px; }
+  .sabe-head-note { font-size: 13px; color: rgba(20,25,21,0.5); }
+
+  /* ── Feature cards ── */
+  .sabe-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .sabe-card {
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
+    padding: 30px 30px 32px; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sabe-card:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #2FD3A0; }
+  .sabe-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .sabe-card-num {
+    width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid rgba(20,25,21,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Instrument Serif', serif; font-size: 20px; color: #0E8C64;
+  }
+  .sabe-card-tag { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); }
+  .sabe-card-title { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .sabe-card-body { font-size: 15px; line-height: 1.6; color: rgba(20,25,21,0.6); }
+
+  /* ── How to share ── */
+  .sabe-share-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: start; }
+  .sabe-share-kicker { font-size: 13px; letter-spacing: 0.06em; color: #0E8C64; margin-bottom: 16px; }
+  .sabe-share-h2 { font-size: clamp(38px, 4.4vw, 56px); line-height: 1.05; }
+  .sabe-share-lede { font-size: 16px; line-height: 1.6; color: rgba(20,25,21,0.6); margin: 20px 0 0; }
+  .sabe-steps { border-top: 2px solid #141915; }
+  .sabe-step {
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 24px 0;
+    border-bottom: 1px solid rgba(20,25,21,0.14); align-items: start;
+  }
+  .sabe-step-num { font-family: 'Instrument Serif', serif; font-size: 28px; color: #0E8C64; line-height: 1.1; }
+  .sabe-step-body { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.75); margin: 0; }
+
+  /* ── Share CTA ── */
+  .sabe-cta-section { padding-bottom: 110px; }
+  .sabe-cta {
+    background: #0B1512; color: #F2F0E9; border-radius: 20px; padding: 64px 48px;
+    text-align: center; box-shadow: 8px 8px 0 rgba(47,211,160,0.4);
+  }
+  .sabe-cta-kicker { font-size: 13px; letter-spacing: 0.06em; color: #2FD3A0; margin-bottom: 18px; }
+  .sabe-cta-domain { font-family: 'Instrument Serif', serif; font-size: clamp(44px, 6vw, 72px); line-height: 1; letter-spacing: -0.01em; color: #F2F0E9; }
+  .sabe-cta-tld { color: #2FD3A0; }
+  .sabe-cta-actions { display: flex; justify-content: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .sabe-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 16px; border-radius: 100px; text-decoration: none; transition: all 0.15s ease;
+  }
+  .sabe-btn-solid { background: #2FD3A0; color: #0B1512; font-weight: 700; padding: 15px 28px; }
+  .sabe-btn-solid:hover { background: #F2F0E9; color: #0B1512; }
+  .sabe-btn-arrow { font-size: 18px; }
+  .sabe-btn-outline { color: #F2F0E9; font-weight: 600; padding: 15px 26px; border: 1px solid rgba(242,240,233,0.3); }
+  .sabe-btn-outline:hover { border-color: #F2F0E9; color: #F2F0E9; }
+  .sabe-cta-contact { font-size: 14.5px; line-height: 1.6; color: rgba(242,240,233,0.55); margin: 32px auto 0; max-width: 440px; }
+  .sabe-cta-email { color: #2FD3A0; text-decoration: none; }
+  .sabe-cta-email:hover { color: #F2F0E9; }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .sabe-hero { padding: 44px 20px 0; }
+    .sabe-hero-bottom { flex-direction: column; align-items: flex-start; margin-top: 36px; padding-bottom: 44px; }
+    .sabe-stats { border-left: none; width: 100%; }
+    .sabe-stat { padding: 6px 24px 6px 0; border-right: none; }
+    .sabe-stat + .sabe-stat { padding-left: 24px; border-left: 1px solid rgba(242,240,233,0.18); }
+    .sabe-stat-value { font-size: 32px; }
+    .sabe-stat-label { font-size: 10.5px; }
+    .sabe-section { padding: 56px 20px 0; }
+    .sabe-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .sabe-feature-grid { grid-template-columns: 1fr; }
+    .sabe-share-grid { grid-template-columns: 1fr; gap: 36px; }
+    .sabe-cta-section { padding-bottom: 90px; }
+    .sabe-cta { padding: 48px 24px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
+  }
+</style>
