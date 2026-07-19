@@ -65,6 +65,26 @@ export const guides: GuideMeta[] = [
     dateModified: '2026-07-19',
   },
   {
+    slug: 'scholarships-for-medicine-hat-students',
+    title: 'Scholarships for Medicine Hat students',
+    description:
+      'Every scholarship pool a Medicine Hat student can draw from: local service clubs, city and county awards, school-specific funds, and how to work through them.',
+    kicker: 'MEDICINE HAT',
+    minutes: 6,
+    datePublished: '2026-07-19',
+    dateModified: '2026-07-19',
+  },
+  {
+    slug: 'trades-scholarships-rap-alberta',
+    title: 'Trades scholarships and RAP in Alberta',
+    description:
+      'How the Registered Apprenticeship Program works in Alberta high schools, the scholarships attached to it, and where trades students find money nobody else applies for.',
+    kicker: 'TRADES',
+    minutes: 6,
+    datePublished: '2026-07-19',
+    dateModified: '2026-07-19',
+  },
+  {
     slug: 'local-scholarships-better-odds',
     title: 'Local scholarships: smaller awards, much better odds',
     description:
