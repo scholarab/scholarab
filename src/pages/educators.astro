@@ -6,12 +6,10 @@ import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 
 const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
-const activeScholarships = scholarships.filter(s => s.active).length;
-const activePrograms = programs.filter(p => p.active).length;
 
 const stats = [
-  { value: `${activeScholarships}`, label: 'SCHOLARSHIPS' },
-  { value: `${activePrograms}`, label: 'RESEARCH PROGRAMS' },
+  { value: `${scholarships.length}`, label: 'SCHOLARSHIPS' },
+  { value: `${programs.length}`, label: 'RESEARCH PROGRAMS' },
   { value: '$0', label: 'NO ADS, NO ACCOUNTS' },
 ];
 
