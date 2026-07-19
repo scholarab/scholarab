@@ -556,18 +556,8 @@ body.quiz-results #match-divider {
 .sabp { background: #FAF7F0; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
 .sabp-header { background: #0B1512; color: #F2F0E9; }
 .sabp-body { width: 100%; box-sizing: border-box; padding: 72px 48px 96px; }
-.sabp-footer { background: #0B1512; color: rgba(242,240,233,0.65); }
-.sabp-footer-inner {
-  padding: 48px;
-  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
-}
-.sabp-footer-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16px; color: #F2F0E9; }
-.sabp-footer-note { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(242,240,233,0.4); }
-.sabp-footer-note a { color: rgba(242,240,233,0.65); text-decoration: none; }
-.sabp-footer-note a:hover { color: #F2F0E9; }
 @media (max-width: 900px) {
   .sabp-body { padding: 40px 20px 64px; }
-  .sabp-footer-inner { padding: 32px 20px 110px; } /* clearance for the fixed bottom tab bar */
 }
 
 /* ══ "ScholarAB Match" design (claude.ai/design) — quiz island ══ */

@@ -2,7 +2,7 @@
 import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
-import SabLogoMark from '../components/sab/SabLogoMark.astro';
+import SabFooter from '../components/sab/SabFooter.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
@@ -55,25 +55,6 @@ const categories = [...categoryCounts.entries()]
   .sort((a, b) => b[1] - a[1])
   .slice(0, 8)
   .map(([name, count]) => ({ name, count, desc: CATEGORY_DESCS[name] ?? 'Awards for Alberta high school students.' }));
-
-const footerCols = [
-  { title: 'EXPLORE', links: [
-    { label: 'All scholarships', href: '/scholarships' },
-    { label: 'Research programs', href: '/programs' },
-    { label: 'Closing soon', href: '#closing' },
-    { label: 'Find my match', href: '/match' },
-  ]},
-  { title: 'ABOUT', links: [
-    { label: 'The story', href: '/about' },
-    { label: 'How listings are verified', href: '/about' },
-    { label: 'Suggest a scholarship', href: 'mailto:contact.scholarab@gmail.com' },
-  ]},
-  { title: 'CONTACT', links: [
-    { label: 'Email', href: 'mailto:contact.scholarab@gmail.com' },
-    { label: 'Instagram', href: 'https://www.instagram.com/scholar.ab' },
-    { label: 'TikTok', href: 'https://www.tiktok.com/@scholar.ab' },
-  ]},
-];
 
 const matchGroups = [
   { key: 'grade',    label: 'YOUR GRADE',  opts: ['Grade 10', 'Grade 11', 'Grade 12'] },
@@ -231,41 +212,7 @@ const matchGroups = [
     </div>
 
     <!-- ============ FOOTER ============ -->
-    <div class="sab-footer">
-      <div class="sab-container sab-footer-inner">
-        <div class="sab-footer-top">
-          <div>
-            <div class="sab-logo sab-footer-logo">
-              <SabLogoMark size={56} id="home-footer" />
-              <div class="sab-footer-lockup">
-                <span class="sab-logo-word sab-footer-logo-word">Scholar<span class="sab-accent-text">AB</span></span>
-                <span class="sab-mono sab-footer-tagline">FIND YOUR SCHOLARSHIP</span>
-              </div>
-            </div>
-            <p class="sab-footer-blurb">The best website for scholarships and research programs for Alberta high school students, with deadlines tracked. Free, no account needed.</p>
-          </div>
-          <div class="sab-footer-cols">
-            {footerCols.map(col => (
-              <div>
-                <div class="sab-mono sab-footer-col-title">{col.title}</div>
-                <div class="sab-footer-links">
-                  {col.links.map(l => (
-                    <a
-                      href={l.href}
-                      rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      target={l.href.startsWith('http') ? '_blank' : undefined}
-                    >{l.label}</a>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div class="sab-footer-bottom sab-mono">
-          <span>© 2026 ScholarAB · Medicine Hat, Alberta</span>
-        </div>
-      </div>
-    </div>
+    <SabFooter />
 
   </div>
 </Layout>
@@ -396,7 +343,6 @@ const matchGroups = [
   }
   #sab-home ::selection { background: #2FD3A0; color: #0B1512; }
   .sab-mono { font-family: 'IBM Plex Mono', monospace; }
-  .sab-accent-text { color: #2FD3A0; }
   .sab-container { padding-left: 48px; padding-right: 48px; }
 
   @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
@@ -409,9 +355,6 @@ const matchGroups = [
     display: flex; flex-direction: column;
     min-height: 100vh; min-height: 100svh;
   }
-
-  .sab-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .sab-logo-word { font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
 
   .sab-hero-body {
     padding-top: 76px; position: relative;
@@ -545,26 +488,6 @@ const matchGroups = [
   }
   .sab-match-cta:hover { background: #0E8C64; }
 
-  /* ── Footer ── */
-  .sab-footer { background: #0B1512; color: rgba(242,240,233,0.65); }
-  .sab-footer-inner { padding-top: 64px; padding-bottom: 40px; }
-  .sab-footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
-  .sab-footer-logo { gap: 16px; margin-bottom: 16px; }
-  .sab-footer-lockup { display: flex; flex-direction: column; gap: 6px; }
-  .sab-footer-logo-word { font-size: clamp(36px, 5vw, 52px); line-height: 1; }
-  .sab-footer-tagline { font-size: 12px; letter-spacing: 0.24em; color: rgba(242,240,233,0.6); }
-  .sab-footer-blurb { font-size: 14px; line-height: 1.6; max-width: 340px; margin: 0; }
-  .sab-footer-cols { display: flex; gap: 64px; flex-wrap: wrap; }
-  .sab-footer-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,240,233,0.4); margin-bottom: 14px; }
-  .sab-footer-links { display: flex; flex-direction: column; gap: 10px; }
-  .sab-footer-links a { font-size: 14px; color: rgba(242,240,233,0.7); text-decoration: none; }
-  .sab-footer-links a:hover { color: #F2F0E9; }
-  .sab-footer-bottom {
-    display: flex; justify-content: space-between; margin-top: 56px; padding-top: 24px;
-    border-top: 1px solid rgba(242,240,233,0.12);
-    font-size: 12px; color: rgba(242,240,233,0.4); gap: 12px; flex-wrap: wrap;
-  }
-
   /* ── Motion safety ── */
   @media (prefers-reduced-motion: reduce) {
     .sab-h1 { animation: none; }
@@ -593,10 +516,6 @@ const matchGroups = [
     .sab-match { padding-top: 56px; padding-bottom: 56px; }
     .sab-match-grid { grid-template-columns: 1fr; gap: 36px; }
     .sab-match-card { padding: 26px 22px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
-    .sab-footer-top { flex-direction: column; }
-    .sab-footer-cols { gap: 36px; }
-    /* clearance for the fixed bottom tab bar, inside the dark footer */
-    .sab-footer-inner { padding-bottom: 110px; }
   }
   @media (max-width: 480px) {
     .sab-cat-grid { grid-template-columns: 1fr; }
