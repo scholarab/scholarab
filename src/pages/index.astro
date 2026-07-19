@@ -2,6 +2,7 @@
 import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
+import SabLogoMark from '../components/sab/SabLogoMark.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
@@ -235,10 +236,7 @@ const matchGroups = [
         <div class="sab-footer-top">
           <div>
             <div class="sab-logo sab-footer-logo">
-              <svg width="56" height="56" viewBox="0 0 40 40" aria-hidden="true">
-                <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
-                <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
-              </svg>
+              <SabLogoMark size={56} id="home-footer" />
               <span class="sab-logo-word sab-footer-logo-word">Scholar<span class="sab-accent-text">AB</span></span>
             </div>
             <p class="sab-footer-blurb">The best website for scholarships and research programs for Alberta high school students, with deadlines tracked. Free, no account needed.</p>

@@ -11,11 +11,22 @@ const navClsStart = (p: string) => `hidden md:inline-flex items-center relative 
       <div aria-hidden="true" style="position:absolute;bottom:-1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,211,165,0.6),rgba(59,130,246,0.5),rgba(167,139,250,0.4),transparent);border-radius:1px;pointer-events:none;"></div>
       <a href="/" onclick="return window.location.pathname!=='/'" class="logo-link flex items-center gap-2" aria-label="ScholarAB home">
         <svg class="logo-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 56" fill="none" height="36" aria-hidden="true">
-          <path d="M10 42 L22 20 L34 42Z" fill="#0c8060" opacity="0.35"/><path d="M26 42 L42 14 L58 42Z" fill="#0c8060" opacity="0.6"/>
-          <path d="M18 42 L34 6 L50 42Z" fill="#0c8060"/><path d="M34 6 L39 18 L29 18Z" fill="white" opacity="0.9"/>
-          <line x1="6" y1="42" x2="62" y2="42" stroke="#22d3a5" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+          <g transform="translate(6,4) scale(0.48)">
+            <defs><clipPath id="nav-mark-clip"><circle cx="50" cy="50" r="38.5"/></clipPath></defs>
+            <circle cx="50" cy="50" r="38.5" fill="#10231B"/>
+            <g clip-path="url(#nav-mark-clip)">
+              <polygon points="6,92 28,60 41,72 37,92" fill="#0E8C64"/>
+              <polygon points="53,92 68,58 96,92" fill="#0E8C64"/>
+              <polygon points="14,92 46,37 78,92" fill="#2FD3A0"/>
+              <polygon points="30,44 46,34 62,44 46,54" fill="#141915" stroke="#F2F0E9" stroke-width="2.3" stroke-linejoin="round"/>
+              <path d="M 62 44 Q 66 50 64.8 58" fill="none" stroke="#FFC94A" stroke-width="2.1" stroke-linecap="round"/>
+              <circle cx="64.6" cy="61" r="2.9" fill="#FFC94A"/>
+            </g>
+            <path d="M 85.32 31.22 A 40 40 0 1 1 68.78 14.68" fill="none" stroke="#2FD3A0" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="78.28" cy="21.72" r="8.5" fill="#FFC94A"/>
+          </g>
           <text font-family="Syne, sans-serif" font-weight="800" font-size="28" letter-spacing="-0.8">
-            <tspan x="74" y="38" class="logo-scholar">Scholar</tspan><tspan fill="#0c8060">AB</tspan>
+            <tspan x="70" y="38" class="logo-scholar">Scholar</tspan><tspan class="logo-ab">AB</tspan>
           </text>
         </svg>
       </a>
@@ -154,6 +165,8 @@ const navClsStart = (p: string) => `hidden md:inline-flex items-center relative 
   .logo-scholar { fill: #0a0a0f; }
   html.theme-light .logo-scholar { fill: #0a0a0f; }
   html.theme-dark .logo-scholar { fill: #ffffff; }
+  .logo-ab { fill: #0E8C64; }
+  html.theme-dark .logo-ab { fill: #2FD3A0; }
 
   /* Logo hover scale */
   .logo-link { -webkit-tap-highlight-color: transparent; opacity: 1; transition: opacity 0.15s; }

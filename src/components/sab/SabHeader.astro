@@ -4,6 +4,8 @@
 // (The mono annotation bar and the home-page Home-item omission from the
 // design were both removed at Ilia's request, 2026-07-11.)
 
+import SabLogoMark from './SabLogoMark.astro';
+
 interface Props {
   currentPath: string;
 }
@@ -32,10 +34,7 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
 
 <div class="sabh-nav">
   <a href="/" class="sabh-logo" aria-label="ScholarAB home">
-    <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true">
-      <polygon points="20,4 37,37 3,37" fill="#2FD3A0"></polygon>
-      <polygon points="20,4 24.5,13 15.5,13" fill="#F2F0E9"></polygon>
-    </svg>
+    <SabLogoMark size={32} id="header" />
     <span class="sabh-logo-word">Scholar<span style="color:#2FD3A0;">AB</span></span>
   </a>
   <div class="sabh-links">
