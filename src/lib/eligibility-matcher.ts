@@ -5,6 +5,7 @@ import type {
   ConfidenceTier,
 } from './eligibility-types'
 import type { Program } from './data-loader'
+import { programMatchesGrade } from './list-core'
 
 // Alberta cities recognised for region matching
 const ALBERTA_CITIES = new Set([
@@ -207,14 +208,12 @@ function matchProgram(
   studentGrade: string,
   program: { grades: string | null },
 ): boolean {
-  if (!program.grades) return true
-  const nums = program.grades.match(/\d+/g)?.map(Number) ?? []
-  if (nums.length === 0) return true
   const grade = Number(studentGrade)
   if (isNaN(grade)) return true
-  const min = Math.min(...nums)
-  const max = Math.max(...nums)
-  return grade >= min && grade <= max
+  // programMatchesGrade ignores age ranges ("Ages 13–18") and unparseable
+  // text as inclusive — a bare min/max over every number in the string would
+  // read ages as grades and exclude the program for all real grades.
+  return programMatchesGrade(program.grades, grade)
 }
 
 const FIELD_KEYWORDS: Record<string, string[]> = {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { matchScholarship, getConfidenceTier, matchAll } from './eligibility-matcher'
+import { matchScholarship, getConfidenceTier, matchAll, matchPrograms } from './eligibility-matcher'
 import { EMPTY_ELIGIBILITY } from './eligibility-types'
 import type { StudentProfile, EligibilityCriteria } from './eligibility-types'
 
@@ -591,5 +591,46 @@ describe('matchAll', () => {
   it('includes the id in each result', () => {
     const results = matchAll(baseProfile, [mhOpen])
     expect(results[0]?.id).toBe(3)
+  })
+})
+
+describe('matchPrograms', () => {
+  function prog(overrides: Record<string, unknown> = {}) {
+    return {
+      id: 1, name: 'Test Program', emoji: null, category: null, provider: null,
+      grades: null, duration: null, paid: false, stipend: null, location: null,
+      eligibility: null, deadline: null, url: 'https://x.example',
+      description: null, lastVerified: null, active: true,
+      ...overrides,
+    }
+  }
+
+  it('treats age ranges as inclusive, not as grade ranges', () => {
+    // "Ages 13–18" once parsed as grades 13–18 and excluded every real student
+    const programs = [
+      prog({ id: 1, grades: 'Ages 13–18' }),
+      prog({ id: 2, grades: 'High school (under 18 eligible)' }),
+      prog({ id: 3, grades: 'High school (ages 14–17)' }),
+    ]
+    const result = matchPrograms(programs, { grade: '10' })
+    expect(result.map(p => p.id)).toEqual([1, 2, 3])
+  })
+
+  it('still enforces real grade ranges and singles', () => {
+    const programs = [
+      prog({ id: 1, grades: 'Grades 11–12' }),
+      prog({ id: 2, grades: 'Grade 12 (graduating)' }),
+      prog({ id: 3, grades: 'Grades 9–12 (ages 13–18)' }),
+    ]
+    expect(matchPrograms(programs, { grade: '10' }).map(p => p.id)).toEqual([3])
+    expect(matchPrograms(programs, { grade: '12' }).map(p => p.id)).toEqual([1, 2, 3])
+  })
+
+  it('excludes inactive programs and includes actives regardless of field filter', () => {
+    const programs = [
+      prog({ id: 1, active: false }),
+      prog({ id: 2 }),
+    ]
+    expect(matchPrograms(programs, { grade: '11' }).map(p => p.id)).toEqual([2])
   })
 })

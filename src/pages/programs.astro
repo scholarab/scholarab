@@ -9,7 +9,9 @@ import { generateSlug } from '../lib/utils';
 let raw: Awaited<ReturnType<typeof loadPrograms>> = [];
 let loadError = false;
 try {
-  raw = await loadPrograms();
+  // Retired programs (active: false) keep their detail pages for old links
+  // but stay out of the directory, matching the sitemap and the quiz.
+  raw = (await loadPrograms()).filter(p => p.active !== false);
 } catch {
   loadError = true;
 }

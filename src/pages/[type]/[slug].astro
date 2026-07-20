@@ -55,7 +55,7 @@ export async function getStaticPaths() {
 
   const relatedPrograms = (self: Program): RelatedItem[] =>
     programs
-      .filter(p => p.id !== self.id)
+      .filter(p => p.id !== self.id && p.active !== false)
       .map(p => ({
         p,
         score:
@@ -112,7 +112,9 @@ function formatDate(str: string | null): string {
 
 const todayDate = new Date();
 todayDate.setHours(0, 0, 0, 0);
-const daysUntil = (d: Date) => Math.max(0, Math.ceil((d.getTime() - todayDate.getTime()) / 86400000));
+// round, not ceil: the diff is midnight-to-midnight so it's a whole number of
+// days except across a DST change, where ceil would overcount by one.
+const daysUntil = (d: Date) => Math.max(0, Math.round((d.getTime() - todayDate.getTime()) / 86400000));
 
 // Everything the template needs, computed per kind.
 let d;

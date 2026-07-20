@@ -171,7 +171,12 @@ export function loadPrograms(): Promise<Program[]> {
     },
     async () => {
       const data = await import('../data/research-programs.json')
-      return data.default as Program[]
+      // Most JSON entries omit `active` entirely (only retired programs carry
+      // active: false) — default it to true so `p.active` checks don't drop them.
+      return (data.default as Array<Record<string, unknown>>).map(p => ({
+        ...(p as unknown as Program),
+        active: (p.active as boolean | undefined) ?? true,
+      }))
     },
   )
 }

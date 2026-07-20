@@ -64,6 +64,15 @@ describe('loadPrograms — JSON fallback', () => {
       expect(typeof p.paid).toBe('boolean')
     }
   })
+
+  // Most JSON entries omit `active`; an undefined value made every
+  // `p.active` check falsy and emptied the quiz's program results.
+  it('defaults missing active to true (JSON omits it on live programs)', async () => {
+    const { loadPrograms } = await import('./data-loader')
+    const result = await loadPrograms()
+    for (const p of result) expect(typeof p.active).toBe('boolean')
+    expect(result.filter(p => p.active).length).toBeGreaterThan(0)
+  })
 })
 
 describe('loadPrograms — DB path', () => {

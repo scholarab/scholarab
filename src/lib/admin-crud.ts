@@ -44,10 +44,13 @@ export function makeAdminCollectionRoutes(cfg: AdminCrudConfig): { GET: APIRoute
       const data = cfg.createSchema.parse(body)
 
       const dupValue = String(data[cfg.dupField] ?? '').trim()
+      // Escape LIKE wildcards — a literal % or _ in a title would otherwise
+      // pattern-match unrelated rows and report a false duplicate.
+      const dupPattern = dupValue.replace(/([\\%_])/g, '\\$1')
       const existing = await db
         .select({ id: cfg.idColumn, [cfg.dupField]: cfg.dupColumn })
         .from(cfg.table)
-        .where(ilike(cfg.dupColumn, dupValue))
+        .where(ilike(cfg.dupColumn, dupPattern))
         .limit(1)
       if (existing.length > 0) {
         return jsonOk({ error: 'duplicate', existing: existing[0]![cfg.dupField] }, 409)

@@ -12,7 +12,9 @@ const { mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti } = vi.hoi
   mockShowConfetti: vi.fn(),
 }))
 
-vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll, matchProgram: vi.fn(() => true) }))
+// matchPrograms (plural) is what the component actually imports — a mock named
+// matchProgram would leave it undefined and crash any program-results path.
+vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll, matchPrograms: vi.fn(() => []) }))
 vi.mock('../lib/tracker.ts',          () => ({ getSaved: mockGetSaved, toggleSaved: mockToggleSaved }))
 vi.mock('../lib/utils.ts',            async (importOriginal) => ({
   ...(await importOriginal<typeof import('../lib/utils')>()),
