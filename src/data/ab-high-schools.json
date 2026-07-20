@@ -1,8 +1,8 @@
 {
   "source": "Alberta Education School Information Report (open.alberta.ca/opendata/alberta-education-schools-and-authorities)",
   "extracted": "2026-07-19",
-  "criteria": "Senior High Taught = Y; conventional permanent Sept-June schools only. Excluded: outreach/storefront, online/virtual/distance, Hutterite colony, summer, home-ed, adult/college/upgrading, hospital/treatment/day programs, alternate programs, weekend heritage-language schools. Cross-checked against 2025/26 enrolment data.",
-  "count": 531,
+  "criteria": "Senior High Taught = Y; conventional permanent Sept-June schools only. Excluded: outreach/storefront, online/virtual/distance, Hutterite colony, summer, home-ed, adult/college/upgrading, hospital/treatment/day programs, alternate programs, weekend heritage-language schools. Cross-checked against 2025/26 enrolment data. Medicine Hat schools excluded (already contacted).",
+  "count": 524,
   "schools": [
     {
       "code": "5601",
@@ -3713,76 +3713,6 @@
       "website": "http://mayerthorpehigh.ca",
       "authority": "The Northern Gateway School Division",
       "authority_type": "Public"
-    },
-    {
-      "code": "1021",
-      "name": "Coulee Collegiate",
-      "city": "Medicine Hat",
-      "email": null,
-      "phone": "(403) 526-4156",
-      "website": "https://couleecollegiate.myprps.com/",
-      "authority": "The Prairie Rose School Division",
-      "authority_type": "Public"
-    },
-    {
-      "code": "6844",
-      "name": "Crescent Heights High School",
-      "city": "Medicine Hat",
-      "email": "chhs@sd76.ab.ca",
-      "phone": "(403) 527-6641",
-      "website": "http://chhs.mhpsd.ca",
-      "authority": "The Medicine Hat School Division",
-      "authority_type": "Public"
-    },
-    {
-      "code": "6849",
-      "name": "Herald School",
-      "city": "Medicine Hat",
-      "email": null,
-      "phone": "(403) 526-4477",
-      "website": "http://herald.mhpsd.ca/",
-      "authority": "The Medicine Hat School Division",
-      "authority_type": "Public"
-    },
-    {
-      "code": "6850",
-      "name": "Medicine Hat High School",
-      "city": "Medicine Hat",
-      "email": "mhhs@sd76.ab.ca",
-      "phone": "(403) 527-3371",
-      "website": "http://mhhs.mhpsd.ca/",
-      "authority": "The Medicine Hat School Division",
-      "authority_type": "Public"
-    },
-    {
-      "code": "6870",
-      "name": "Monsignor McCoy High School",
-      "city": "Medicine Hat",
-      "email": "robert.burzminski@mhcbe.ab.ca",
-      "phone": "(403) 527-8161",
-      "website": "http://www.mccoyhighschool.ca",
-      "authority": "The Medicine Hat Roman Catholic Separate School Division",
-      "authority_type": "Separate"
-    },
-    {
-      "code": "2200",
-      "name": "South Alberta High School",
-      "city": "Medicine Hat",
-      "email": "coreysteeves@prrd8.ca",
-      "phone": "(403) 526-3186",
-      "website": "https://southalbertahighschool.com/",
-      "authority": "The Prairie Rose School Division",
-      "authority_type": "Public"
-    },
-    {
-      "code": "0520",
-      "name": "École Les Cyprès",
-      "city": "Medicine Hat",
-      "email": null,
-      "phone": "(403) 528-2881",
-      "website": "http://www.lescypres.francosud.ca",
-      "authority": "The Southern Francophone Education Region",
-      "authority_type": "Francophone"
     },
     {
       "code": "6504",
