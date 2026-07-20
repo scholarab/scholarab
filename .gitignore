@@ -22,3 +22,4 @@ ScholarAB_Overview.pdf
 public/sitemap.xml
 # per-listing OG images are generated at build (scripts/generate-og-images.ts)
 public/og/
+outreach/
