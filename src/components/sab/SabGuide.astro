@@ -16,9 +16,6 @@ const { guide } = Astro.props;
 const canonical = `https://www.scholarab.ca/guides/${guide.slug}/`;
 const pageTitle = `${guide.title} | ScholarAB`;
 
-const fmtDate = (iso: string) =>
-  new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
-
 const articleJson = {
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -72,8 +69,6 @@ const keepReading = guides.filter(g => g.slug !== guide.slug).slice(0, 3);
         <h1 class="sabg-h1">{guide.title}</h1>
         <div class="sabg-meta sabg-mono">
           <span>{guide.minutes} MIN READ</span>
-          <span class="sabg-meta-dot"></span>
-          <span>UPDATED {fmtDate(guide.dateModified).toUpperCase()}</span>
         </div>
       </div>
     </div>
