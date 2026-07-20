@@ -94,10 +94,27 @@ describe('middleware — protected admin routes', () => {
 
   it('encodes special characters in next_url redirect param', async () => {
     mockVerify.mockResolvedValue(false)
-    const { ctx, redirectFn } = makeCtx('/admin/api/scholarships/edit?id=1&tab=2')
+    const { ctx, redirectFn } = makeCtx('/admin/scholarships/edit?id=1&tab=2')
     await onRequest(ctx as any, next)
     const url = redirectFn.mock.calls[0]?.[0] ?? ''
     expect(url).toContain('/admin/login?next=')
     expect(url).not.toContain('?id=1&tab=2')
+  })
+
+  it('returns 401 JSON (not a redirect) for unauthenticated API calls', async () => {
+    mockVerify.mockResolvedValue(false)
+    const { ctx, redirectFn } = makeCtx('/admin/api/scholarships/3')
+    const res = (await onRequest(ctx as any, next)) as Response
+    expect(next).not.toHaveBeenCalled()
+    expect(redirectFn).not.toHaveBeenCalled()
+    expect(res.status).toBe(401)
+    expect(res.headers.get('Content-Type')).toBe('application/json')
+  })
+
+  it('does not treat /adminfoo as an admin route', async () => {
+    const { ctx } = makeCtx('/adminfoo')
+    await onRequest(ctx as any, next)
+    expect(mockVerify).not.toHaveBeenCalled()
+    expect(next).toHaveBeenCalled()
   })
 })

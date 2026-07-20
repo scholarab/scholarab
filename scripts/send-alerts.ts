@@ -41,7 +41,13 @@ function formatDate(str: string): string {
   return new Date(str + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
-function emailHtml(label: string, amount: string | undefined, deadline: string, applyUrl: string, unsubscribeUrl: string, daysLeft: number): string {
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+}
+
+function emailHtml(rawLabel: string, rawAmount: string | undefined, deadline: string, applyUrl: string, unsubscribeUrl: string, daysLeft: number): string {
+  const label = escapeHtml(rawLabel)
+  const amount = rawAmount ? escapeHtml(rawAmount) : undefined
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f4f4f5;font-family:Inter,system-ui,sans-serif">
