@@ -16,6 +16,9 @@ today.setHours(0, 0, 0, 0);
 
 const activeScholarships = scholarships.filter(s => {
   if (!s.active) return false;
+  // Not open yet ≠ open right now (Loran/TD/Wolf open in September — the
+  // directory shows them as OPENS SEP; the hero total must agree).
+  if (s.openDate && new Date(s.openDate + 'T00:00:00').getTime() > today.getTime()) return false;
   if (!s.deadline) return true;
   return new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime();
 });

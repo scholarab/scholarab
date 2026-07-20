@@ -285,13 +285,22 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     }
   }, [answers])
 
+  // Expired listings never belong in results (the data ships every listing,
+  // open or closed, and the page is prerendered — so filter by the visitor's
+  // clock, not the build's). Not-yet-open listings stay: their dated deadline
+  // is honest and they're worth preparing for.
+  const openScholarships = useMemo(() => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    return scholarships.filter(s => !s.deadline || new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime())
+  }, [scholarships])
   const scholarshipInputs = useMemo(
-    () => scholarships.map(s => ({ id: s.id, region: s.region, eligibility: s.eligibility })),
-    [scholarships]
+    () => openScholarships.map(s => ({ id: s.id, region: s.region, eligibility: s.eligibility })),
+    [openScholarships]
   )
   const scholarshipMap = useMemo(
-    () => new Map(scholarships.map(s => [s.id, s])),
-    [scholarships]
+    () => new Map(openScholarships.map(s => [s.id, s])),
+    [openScholarships]
   )
 
   const searchType = answers.searchType ?? 'scholarships'

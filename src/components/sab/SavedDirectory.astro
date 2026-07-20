@@ -61,7 +61,7 @@ const { initialScholarships, initialPrograms } = Astro.props;
       </div>
       <div class="sabl-grid" style="margin-bottom:56px;padding-top:0">
         {initialScholarships.map(s => {
-          const chip = savedScholarshipChip({ deadline: s.deadline, openDate: s.openDate });
+          const chip = savedScholarshipChip({ deadline: s.deadline, openDate: s.openDate, active: s.active });
           const status = getScholarshipStatus(s);
           const emoji = categoryEmoji(s.category);
           return (
@@ -72,6 +72,7 @@ const { initialScholarships, initialPrograms } = Astro.props;
                 data-name={s.title}
                 data-deadline={s.deadline ?? undefined}
                 data-open-date={s.openDate ?? undefined}
+                data-inactive={s.active === false ? '' : undefined}
                 data-amount={s.amount}
                 data-url={s.url}
               >

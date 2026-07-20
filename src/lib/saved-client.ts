@@ -22,8 +22,8 @@ function daysChip(deadline: string): { label: string; cls: string } {
   return { label, cls: `sabl-days${days <= 7 ? ' urgent' : ''}` };
 }
 
-export function savedScholarshipChip(s: { deadline: string | null; openDate: string | null }): { label: string; cls: string } {
-  const status = getScholarshipStatus({ id: 0, deadline: s.deadline, openDate: s.openDate } as Parameters<typeof getScholarshipStatus>[0]);
+export function savedScholarshipChip(s: { deadline: string | null; openDate: string | null; active?: boolean }): { label: string; cls: string } {
+  const status = getScholarshipStatus({ id: 0, deadline: s.deadline, openDate: s.openDate, active: s.active ?? true } as Parameters<typeof getScholarshipStatus>[0]);
   if (status === 'closed') return { label: 'CLOSED', cls: 'sabl-days neutral' };
   if (status === 'future') {
     return { label: s.openDate ? `OPENS ${savedShortDate(s.openDate).toUpperCase()}` : 'OPENING SOON', cls: 'sabl-days neutral' };
@@ -76,12 +76,12 @@ export function initSaved() {
       const d = card.dataset;
       const chipEl = card.querySelector<HTMLElement>('[data-sv-chip]');
       const chip = w.dataset.type === 'scholarship'
-        ? savedScholarshipChip({ deadline: d.deadline ?? null, openDate: d.openDate ?? null })
+        ? savedScholarshipChip({ deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined })
         : savedProgramChip({ deadline: d.deadline ?? null });
       if (chipEl) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
       const apply = card.querySelector<HTMLElement>('[data-sv-apply]');
       if (apply) {
-        const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null } as Parameters<typeof getScholarshipStatus>[0]);
+        const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined } as Parameters<typeof getScholarshipStatus>[0]);
         apply.textContent = status === 'active' ? 'Apply →' : 'Visit →';
       }
     }
