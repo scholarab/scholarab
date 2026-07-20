@@ -1,0 +1,5552 @@
+{
+  "source": "Alberta Education School Information Report (open.alberta.ca/opendata/alberta-education-schools-and-authorities)",
+  "extracted": "2026-07-19",
+  "criteria": "Senior High Taught = Y (grades 10-12 offered)",
+  "count": 792,
+  "schools": [
+    {
+      "code": "5601",
+      "name": "Acme School",
+      "city": "Acme",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5197",
+      "name": "Airdrie Christian Academy",
+      "city": "Airdrie",
+      "authority": "Airdrie Christian Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0404",
+      "name": "Airdrie Learning Connection",
+      "city": "Airdrie",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5228",
+      "name": "Bert Church High School",
+      "city": "Airdrie",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2646",
+      "name": "Footprints for Learning Charter Academy",
+      "city": "Airdrie",
+      "authority": "Footprints for Learning Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "5201",
+      "name": "George McDougall High School",
+      "city": "Airdrie",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0346",
+      "name": "St. Martin De Porres High School",
+      "city": "Airdrie",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1735",
+      "name": "Summit Trails Online High School",
+      "city": "Airdrie",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1764",
+      "name": "W.H. Croxford High School",
+      "city": "Airdrie",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1269",
+      "name": "École des Hautes-Plaines",
+      "city": "Airdrie",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "4301",
+      "name": "Alix (Mirror and Alix Central)",
+      "city": "Alix",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4801",
+      "name": "Altario School",
+      "city": "Altario",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2672",
+      "name": "Andrew Rural Academy",
+      "city": "Andrew",
+      "authority": "Andrew Rural Academy Foundation",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "1544",
+      "name": "Bill Woodward School",
+      "city": "Anzac",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3301",
+      "name": "Ardrossan Junior Senior High School",
+      "city": "Ardrossan",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2800",
+      "name": "Ashmont School",
+      "city": "Ashmont",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1546",
+      "name": "Centre for Alternative and Virtual Education",
+      "city": "Athabasca",
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2601",
+      "name": "Edwin Parr Composite Community School",
+      "city": "Athabasca",
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1802",
+      "name": "Whitefish Lake First Nation School",
+      "city": "Atikameg",
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5235",
+      "name": "Banff Community High School",
+      "city": "Banff",
+      "authority": "The Canadian Rockies School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2301",
+      "name": "Barrhead Composite High School",
+      "city": "Barrhead",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2316",
+      "name": "Barrhead Outreach",
+      "city": "Barrhead",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4502",
+      "name": "Bashaw School",
+      "city": "Bashaw",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6702",
+      "name": "Bassano School",
+      "city": "Bassano",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4503",
+      "name": "Bawlf School",
+      "city": "Bawlf",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3000",
+      "name": "Black Gold Home-Based School",
+      "city": "Beaumont",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1689",
+      "name": "Black Gold Outreach - Beaumont",
+      "city": "Beaumont",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3231",
+      "name": "Ecole Secondaire Beaumont Composite High School",
+      "city": "Beaumont",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1786",
+      "name": "École Quatre-Saisons",
+      "city": "Beaumont",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1101",
+      "name": "Beaverlodge Regional High School",
+      "city": "Beaverlodge",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5205",
+      "name": "Beiseker Community School",
+      "city": "Beiseker",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4302",
+      "name": "Bentley School",
+      "city": "Bentley",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1501",
+      "name": "Lloyd Garrison School",
+      "city": "Berwyn",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2563",
+      "name": "Iron Ridge Secondary Campus",
+      "city": "Blackfalds",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1632",
+      "name": "Doe River Colony School",
+      "city": "Bonanza",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2950",
+      "name": "Bonnyville Centralized High School",
+      "city": "Bonnyville",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2720",
+      "name": "Bonnyville Outreach",
+      "city": "Bonnyville",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2973",
+      "name": "Ecole Notre Dame High",
+      "city": "Bonnyville",
+      "authority": "The Lakeland Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2763",
+      "name": "Trades Exposure Centre",
+      "city": "Bonnyville",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2876",
+      "name": "École des Beaux-Lacs",
+      "city": "Bonnyville",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "6990",
+      "name": "Cherry Coulee Christian Academy",
+      "city": "Bow Island",
+      "authority": "40-Mile Christian Education Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6902",
+      "name": "Senator Gershaw School",
+      "city": "Bow Island",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4402",
+      "name": "Bowden (Grandview) School",
+      "city": "Bowden",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2604",
+      "name": "Boyle School",
+      "city": "Boyle",
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5492",
+      "name": "Brant Christian School",
+      "city": "Brant",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2350",
+      "name": "Peigan Board of Education Outreach School",
+      "city": "Brocket",
+      "authority": "Peigan Board of Education Society",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "6190",
+      "name": "Piikani Nation Secondary School",
+      "city": "Brocket",
+      "authority": "Peigan Board of Education Society",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "6740",
+      "name": "Brooks Composite High School",
+      "city": "Brooks",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6796",
+      "name": "Newell Christian School",
+      "city": "Brooks",
+      "authority": "Newell Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0439",
+      "name": "St. Joseph's Collegiate",
+      "city": "Brooks",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1431",
+      "name": "St. Luke's Outreach Centre Brooks",
+      "city": "Brooks",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6718",
+      "name": "Sunrise School",
+      "city": "Brooks",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1247",
+      "name": "École Le Ruisseau",
+      "city": "Brooks",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3102",
+      "name": "Buck Mountain Central School",
+      "city": "Buck Lake",
+      "authority": "The Wetaskiwin School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1713",
+      "name": "Blue Hills Community School",
+      "city": "Buffalo Head Prairie",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2658",
+      "name": "Cadotte Lake Learning Centre",
+      "city": "Cadotte Lake",
+      "authority": "Woodland Cree First Nation",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1803",
+      "name": "Cadotte Lake School",
+      "city": "Cadotte Lake",
+      "authority": "Woodland Cree First Nation",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1823",
+      "name": "Little Buffalo School",
+      "city": "Cadotte Lake",
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2648",
+      "name": "Access Academy",
+      "city": "Calgary",
+      "authority": "Access Academy Inc.",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1271",
+      "name": "Access International College",
+      "city": "Calgary",
+      "authority": "Access International College (Calgary) Incorporated",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1749",
+      "name": "Adolescent Day Treatment Program",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9512",
+      "name": "Adolescent Mental Health Services",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2561",
+      "name": "Al-Amal Online Academy",
+      "city": "Calgary",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2458",
+      "name": "Al-Qaim International School",
+      "city": "Calgary",
+      "authority": "Al-Zahra Islamic Research Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1598",
+      "name": "Alberta Ballet School",
+      "city": "Calgary",
+      "authority": "The Alberta Ballet Company",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1020",
+      "name": "Alberta Chung Wah School",
+      "city": "Calgary",
+      "authority": "Alberta Chung Wah School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2175",
+      "name": "All Saints School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "9863",
+      "name": "Alternative High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2533",
+      "name": "Arise Christian Academy",
+      "city": "Calgary",
+      "authority": "Arise Calgary Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1397",
+      "name": "Aurora Learning Calgary",
+      "city": "Calgary",
+      "authority": "Aurora Learning Foundation (Calgary)",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2286",
+      "name": "BCS@Home",
+      "city": "Calgary",
+      "authority": "Bearspaw Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2614",
+      "name": "Banbury Crossroads Academy",
+      "city": "Calgary",
+      "authority": "Banbury Crossroads School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9935",
+      "name": "Banbury Crossroads School",
+      "city": "Calgary",
+      "authority": "Banbury Crossroads School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9927",
+      "name": "Bearspaw Christian School & College",
+      "city": "Calgary",
+      "authority": "Bearspaw Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "8905",
+      "name": "Bishop Carroll High School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8907",
+      "name": "Bishop McNally High School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0581",
+      "name": "Bishop O'Byrne High School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "9995",
+      "name": "Bow Valley College - Main Campus",
+      "city": "Calgary",
+      "authority": "Bow Valley College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "9847",
+      "name": "Bowness High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1064",
+      "name": "CBe-learn",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9908",
+      "name": "Calgary Academy",
+      "city": "Calgary",
+      "authority": "Calgary Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1015",
+      "name": "Calgary Academy Collegiate",
+      "city": "Calgary",
+      "authority": "Calgary Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1126",
+      "name": "Calgary Arts Academy",
+      "city": "Calgary",
+      "authority": "Calgary Arts Academy Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "2631",
+      "name": "Calgary Charter School Hub – Almadina Campus",
+      "city": "Calgary",
+      "authority": "Almadina School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "5001",
+      "name": "Calgary Chinese Alliance School",
+      "city": "Calgary",
+      "authority": "Calgary Chinese Alliance School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9963",
+      "name": "Calgary Chinese Private School",
+      "city": "Calgary",
+      "authority": "The Calgary Chinese Public School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9978",
+      "name": "Calgary Christian High School",
+      "city": "Calgary",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2498",
+      "name": "Calgary Classical Academy Currie Campus",
+      "city": "Calgary",
+      "authority": "Alberta Classical Academy Ltd.",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "0796",
+      "name": "Calgary French & International School",
+      "city": "Calgary",
+      "authority": "Calgary French & International School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9925",
+      "name": "Calgary German Language School Society",
+      "city": "Calgary",
+      "authority": "Calgary German Language School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9425",
+      "name": "Calgary Home Education",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2739",
+      "name": "Calgary Islamic School, Akram Jomaa Campus",
+      "city": "Calgary",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2285",
+      "name": "Calgary Mandarin School",
+      "city": "Calgary",
+      "authority": "Calgary Mandarin School Association",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5398",
+      "name": "Calgary Quest School",
+      "city": "Calgary",
+      "authority": "Calgary Quest Children's Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1224",
+      "name": "Centennial High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9823",
+      "name": "Central Memorial High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9817",
+      "name": "Chinook Learning Services",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9916",
+      "name": "Chinook Winds Adventist Academy",
+      "city": "Calgary",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9037",
+      "name": "Christine Meikle School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7976",
+      "name": "Clear Water Academy",
+      "city": "Calgary",
+      "authority": "Clear Water Academy Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9964",
+      "name": "Columbia College",
+      "city": "Calgary",
+      "authority": "Columbia College Calgary ",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0335",
+      "name": "Connect Charter School",
+      "city": "Calgary",
+      "authority": "Connect Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "9815",
+      "name": "Crescent Heights High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9972",
+      "name": "Delta West Academy",
+      "city": "Calgary",
+      "authority": "Delta West Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9868",
+      "name": "Discovering Choices",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1161",
+      "name": "Discovering Choices II",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9858",
+      "name": "Dr. E. P. Scarlett High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9886",
+      "name": "Dr. Gordon Townsend School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0428",
+      "name": "Edge School",
+      "city": "Calgary",
+      "authority": "The Edge School For Athletes Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9826",
+      "name": "Ernest Manning High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0012",
+      "name": "FFCA High School Campus",
+      "city": "Calgary",
+      "authority": "Foundations for the Future Charter Academy Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "2343",
+      "name": "FFCA South High School Campus",
+      "city": "Calgary",
+      "authority": "Foundations for the Future Charter Academy Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "8903",
+      "name": "Father Lacombe School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1440",
+      "name": "Filipino Language and Cultural School of Calgary",
+      "city": "Calgary",
+      "authority": "Philippine Cultural Center Foundation (Calgary)",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9917",
+      "name": "Foothills Academy",
+      "city": "Calgary",
+      "authority": "Foothills Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9813",
+      "name": "Forest Lawn High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1525",
+      "name": "Fresh Start Outreach Program",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2486",
+      "name": "Fusion Collegiate",
+      "city": "Calgary",
+      "authority": "Fusion Education Association",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "2479",
+      "name": "Gobind Sarvar School Guru Nanak Gate Campus",
+      "city": "Calgary",
+      "authority": "Gobind Marg Charitable Trust Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9957",
+      "name": "Greek Community School",
+      "city": "Calgary",
+      "authority": "Hellenic Society of Calgary and District",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9836",
+      "name": "Henry Wise Wood High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9906",
+      "name": "Heritage Christian Academy",
+      "city": "Calgary",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1913",
+      "name": "Horizon Heritage Arabic School",
+      "city": "Calgary",
+      "authority": "Horizon Academy Institute",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1316",
+      "name": "I'm For Kids Team",
+      "city": "Calgary",
+      "authority": "I'm For Kids Team Ltd.",
+      "authority_type": "ECS Private Operator"
+    },
+    {
+      "code": "9926",
+      "name": "Italian School of Calgary",
+      "city": "Calgary",
+      "authority": "Centro Linguistico E Culturale Italiano Calgary",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9856",
+      "name": "Jack James High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9825",
+      "name": "James Fowler High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1323",
+      "name": "Janus Academy Junior/Senior High School",
+      "city": "Calgary",
+      "authority": "Janus Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2180",
+      "name": "Joane Cardinal-Schubert High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9860",
+      "name": "John G. Diefenbaker High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2528",
+      "name": "Lady Fatima Academy",
+      "city": "Calgary",
+      "authority": "Lady Fatima Academy Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9865",
+      "name": "Lester B. Pearson High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9850",
+      "name": "Lord Beaverbrook High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9626",
+      "name": "Louise Dean School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9919",
+      "name": "Lycée international de Calgary",
+      "city": "Calgary",
+      "authority": "Lycee Louis Pasteur Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1562",
+      "name": "Master's College",
+      "city": "Calgary",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0308",
+      "name": "Mountain View Academy",
+      "city": "Calgary",
+      "authority": "Mountain View Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2410",
+      "name": "National Sport School",
+      "city": "Calgary",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1989",
+      "name": "Nelson Mandela High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0432",
+      "name": "New Heights School and Learning Services",
+      "city": "Calgary",
+      "authority": "New Heights School and Learning Services Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2448",
+      "name": "North Point School",
+      "city": "Calgary",
+      "authority": "North Point Schools",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1982",
+      "name": "North Point School - DSEPS",
+      "city": "Calgary",
+      "authority": "North Point Schools",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2475",
+      "name": "North Trail High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1275",
+      "name": "Notre Dame High School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8901",
+      "name": "Our Lady of the Rockies High School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1264",
+      "name": "Phoenix Education Foundation",
+      "city": "Calgary",
+      "authority": "Phoenix Education Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9806",
+      "name": "Queen Elizabeth High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1747",
+      "name": "Renert School",
+      "city": "Calgary",
+      "authority": "The Renert School Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0249",
+      "name": "Renfrew Educational Services-Janice McTighe Centre",
+      "city": "Calgary",
+      "authority": "Renfrew Educational Services Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0250",
+      "name": "Renfrew Thomas W. Buchanan Centre",
+      "city": "Calgary",
+      "authority": "Renfrew Educational Services Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1679",
+      "name": "Robert Thirsk High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5297",
+      "name": "Rundle College Academy",
+      "city": "Calgary",
+      "authority": "Rundle College Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9952",
+      "name": "Rundle College Junior Senior High",
+      "city": "Calgary",
+      "authority": "Rundle College Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5002",
+      "name": "Rundle Studio",
+      "city": "Calgary",
+      "authority": "Rundle College Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2372",
+      "name": "SCcyber E-Learning Institute",
+      "city": "Calgary",
+      "authority": "SCcyber ELearning Institute",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1246",
+      "name": "SCcyber E-learning Community",
+      "city": "Calgary",
+      "authority": "SCcyber ELearning Institute",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2449",
+      "name": "STEM Innovation Academy High School",
+      "city": "Calgary",
+      "authority": "STEM Innovation Academy Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "9857",
+      "name": "Sir Winston Churchill High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5223",
+      "name": "Springbank Community High School",
+      "city": "Calgary",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8906",
+      "name": "St. Anne Academic Centre",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8515",
+      "name": "St. Anthony",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8902",
+      "name": "St. Francis High School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2489",
+      "name": "St. Gemma Outreach High School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2344",
+      "name": "St. Isidore Online School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8904",
+      "name": "St. Mary's High School",
+      "city": "Calgary",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1232",
+      "name": "Start Outreach",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9958",
+      "name": "Swedish Language School",
+      "city": "Calgary",
+      "authority": "Swedish Society of Calgary",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0013",
+      "name": "The Chinese Academy",
+      "city": "Calgary",
+      "authority": "The Chinese Academy Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2338",
+      "name": "The Gilbertine Academy",
+      "city": "Calgary",
+      "authority": "The Gilbertine Institute of Catholic Studies",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9984",
+      "name": "Tyndale Christian School",
+      "city": "Calgary",
+      "authority": "The Canadian Reformed School Society of Calgary",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2320",
+      "name": "URSA",
+      "city": "Calgary",
+      "authority": "Third Academy International Ltd.",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2317",
+      "name": "Vista Virtual School",
+      "city": "Calgary",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0021",
+      "name": "Webber Academy",
+      "city": "Calgary",
+      "authority": "Webber Academy Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9913",
+      "name": "West Island College",
+      "city": "Calgary",
+      "authority": "West Island College Society of Alberta",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9687",
+      "name": "West View School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1260",
+      "name": "Westbrook Outreach",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9816",
+      "name": "Western Canada High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6002",
+      "name": "Westmount Mid/High School",
+      "city": "Calgary",
+      "authority": "Westmount Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "9829",
+      "name": "William Aberhart High School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9033",
+      "name": "William Roper Hull School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9035",
+      "name": "Wood's Homes School",
+      "city": "Calgary",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1048",
+      "name": "Yufeng Chinese School",
+      "city": "Calgary",
+      "authority": "Yufeng Chinese School Centre",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9228",
+      "name": "École de la Rose sauvage",
+      "city": "Calgary",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2662",
+      "name": "École secondaire Le Phare",
+      "city": "Calgary",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1804",
+      "name": "Calling Lake School",
+      "city": "Calling Lake",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3206",
+      "name": "Calmar Secondary School",
+      "city": "Calmar",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4504",
+      "name": "Battle River Alternative Centre For Education (BRACE)",
+      "city": "Camrose",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1780",
+      "name": "Battle River Summer School",
+      "city": "Camrose",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4545",
+      "name": "Camrose Composite High School",
+      "city": "Camrose",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2660",
+      "name": "St. Carlo Acutis Catholic High School",
+      "city": "Camrose",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1907",
+      "name": "École des Sentiers",
+      "city": "Camrose",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1322",
+      "name": "Canadian Rockies Education Outreach",
+      "city": "Canmore",
+      "authority": "The Canadian Rockies School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5243",
+      "name": "Canmore Collegiate",
+      "city": "Canmore",
+      "authority": "The Canadian Rockies School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0594",
+      "name": "Our Lady of the Snows Catholic Academy",
+      "city": "Canmore",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1060",
+      "name": "École Notre-Dame des Monts",
+      "city": "Canmore",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "6201",
+      "name": "Cardston High School",
+      "city": "Cardston",
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6290",
+      "name": "Kainai High School",
+      "city": "Cardston",
+      "authority": "Kainai Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "6296",
+      "name": "Red Crow Community College",
+      "city": "Cardston",
+      "authority": "Red Crow Community College",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0576",
+      "name": "Westwind Alternate School",
+      "city": "Cardston",
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1538",
+      "name": "Carmangay School",
+      "city": "Carmangay",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4101",
+      "name": "Caroline School",
+      "city": "Caroline",
+      "authority": "The Wild Rose School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5101",
+      "name": "Hugh Sutherland School",
+      "city": "Carstairs",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1242",
+      "name": "Crossroads Outreach School",
+      "city": "Caslan",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4822",
+      "name": "Gus Wetter School",
+      "city": "Castor",
+      "authority": "The Clearview School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5314",
+      "name": "Cayley Colony School",
+      "city": "Cayley",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5802",
+      "name": "Berry Creek Community School",
+      "city": "Cessford",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1790",
+      "name": "Dene Tha' Community School",
+      "city": "Chateh",
+      "authority": "Dene Tha' Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "3902",
+      "name": "Dr. Folkins Community School",
+      "city": "Chauvin",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1029",
+      "name": "St. Gabriel the Archangel",
+      "city": "Chestermere",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6302",
+      "name": "Willow Creek Composite High School",
+      "city": "Claresholm",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1825",
+      "name": "Menno-Simons Community School",
+      "city": "Cleardale",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6494",
+      "name": "Coaldale Christian School",
+      "city": "Coaldale",
+      "authority": "Coaldale Canadian Reformed School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2596",
+      "name": "Coaldale Prairie Winds Secondary",
+      "city": "Coaldale",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6403",
+      "name": "John Davidson School Program",
+      "city": "Coaldale",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1772",
+      "name": "Palliser Beyond Borders",
+      "city": "Coaldale",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0340",
+      "name": "Palliser Beyond Borders at Coaldale",
+      "city": "Coaldale",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6496",
+      "name": "Calvin Christian School",
+      "city": "Coalhurst",
+      "authority": "Calvin Christian School Society of the Netherlands Reformed Congregations",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6405",
+      "name": "Coalhurst High School",
+      "city": "Coalhurst",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0444",
+      "name": "Bow Valley High School",
+      "city": "Cochrane",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5209",
+      "name": "Cochrane High School",
+      "city": "Cochrane",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1225",
+      "name": "St. Timothy",
+      "city": "Cochrane",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1189",
+      "name": "École Notre-Dame des Vallées",
+      "city": "Cochrane",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2971",
+      "name": "Assumption Junior Senior High School",
+      "city": "Cold Lake",
+      "authority": "The Lakeland Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2906",
+      "name": "Cold Lake High School",
+      "city": "Cold Lake",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2726",
+      "name": "Cold Lake Outreach",
+      "city": "Cold Lake",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2986",
+      "name": "Lakeland Christian Academy",
+      "city": "Cold Lake",
+      "authority": "Lakeland Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0381",
+      "name": "Portage College-Cold Lake Campus",
+      "city": "Cold Lake",
+      "authority": "Portage College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "2985",
+      "name": "École Voyageur",
+      "city": "Cold Lake",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "6106",
+      "name": "Crowsnest Consolidated High School",
+      "city": "Coleman",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1806",
+      "name": "Conklin Community School",
+      "city": "Conklin",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4802",
+      "name": "Consort School",
+      "city": "Consort",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4824",
+      "name": "Coronation School",
+      "city": "Coronation",
+      "authority": "The Clearview School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2390",
+      "name": "Covenant Canadian Reformed School",
+      "city": "County of Barrhead",
+      "authority": "Canadian Reformed School Society of Neerlandia",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5103",
+      "name": "Cremona School",
+      "city": "Cremona",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1203",
+      "name": "Ridgevalley School",
+      "city": "Crooked Creek",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5225",
+      "name": "W. G. Murdoch School",
+      "city": "Crossfield",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4702",
+      "name": "Daysland School",
+      "city": "Daysland",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4403",
+      "name": "Delburne Centralized School",
+      "city": "Delburne",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5702",
+      "name": "Delia School",
+      "city": "Delia",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2469",
+      "name": "Villa Spiritus",
+      "city": "Derwent",
+      "authority": "The Gilbertine Institute of Catholic Studies",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7925",
+      "name": "German Language School Society of Edmonton",
+      "city": "Devon",
+      "authority": "German Language School Society of Edmonton",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "3235",
+      "name": "John Maland High School",
+      "city": "Devon",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3803",
+      "name": "Dewberry School",
+      "city": "Dewberry",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5310",
+      "name": "Oilfields High School",
+      "city": "Diamond Valley",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4419",
+      "name": "Didsbury Career High School",
+      "city": "Didsbury",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5105",
+      "name": "Didsbury High School",
+      "city": "Didsbury",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1602",
+      "name": "Georges P Vanier School",
+      "city": "Donnelly",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1017",
+      "name": "Drayton Valley Community Outreach School",
+      "city": "Drayton Valley",
+      "authority": "The Wild Rose School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2201",
+      "name": "Frank Maddock High School",
+      "city": "Drayton Valley",
+      "authority": "The Wild Rose School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1328",
+      "name": "Holy Trinity Academy",
+      "city": "Drayton Valley",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division ",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2744",
+      "name": "Roots of Resilience Charter School",
+      "city": "Drayton Valley",
+      "authority": "Roots of Resilience Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "2345",
+      "name": "Mihtatakaw Sipiy Outreach/Alternate School",
+      "city": "Driftpile",
+      "authority": "Driftpile Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5526",
+      "name": "Drumheller Outreach",
+      "city": "Drumheller",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5725",
+      "name": "Drumheller Valley Secondary School",
+      "city": "Drumheller",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0064",
+      "name": "Hilltop Education Centre",
+      "city": "Drumheller",
+      "authority": "The Government of Canada as represented by Correctional Service Canada",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "5770",
+      "name": "St. Anthony's School",
+      "city": "Drumheller",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6703",
+      "name": "Duchess School",
+      "city": "Duchess",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5905",
+      "name": "Eagle Butte High School",
+      "city": "Dunmore",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2131",
+      "name": "Hutterian Brethren Church School of Murray Lake",
+      "city": "Dunmore",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6919",
+      "name": "Prairie Rose Regional Division Home Education",
+      "city": "Dunmore",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1468",
+      "name": "Birch Meadows Colony School",
+      "city": "Eaglesham",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1303",
+      "name": "Eaglesham School",
+      "city": "Eaglesham",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4306",
+      "name": "Eckville Junior Senior High School",
+      "city": "Eckville",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5390",
+      "name": "Chief Jacob Bearspaw School",
+      "city": "Eden Valley",
+      "authority": "Stoney Tribal Administration",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "3904",
+      "name": "Edgerton Public School",
+      "city": "Edgerton",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2176",
+      "name": "Al Mustafa North Location",
+      "city": "Edmonton",
+      "authority": "Al Mustafa Academy & Humanitarian Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1912",
+      "name": "Al-Mustafa Academy",
+      "city": "Edmonton",
+      "authority": "Al Mustafa Academy & Humanitarian Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2173",
+      "name": "AlBaqir Academy",
+      "city": "Edmonton",
+      "authority": "AlBaqir Academy Association",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2751",
+      "name": "Alberta Advance Academy",
+      "city": "Edmonton",
+      "authority": "Alberta Advance Academy",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "1576",
+      "name": "Alberta Health Services Day Program",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2494",
+      "name": "Alberta Heritage Language School",
+      "city": "Edmonton",
+      "authority": "Alberta Chinese Cultural Education Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7730",
+      "name": "Alberta School for the Deaf",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8412",
+      "name": "Alternative Education",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0484",
+      "name": "Amiskwaciy Academy",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8403",
+      "name": "Archbishop MacDonald Catholic High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8404",
+      "name": "Archbishop O’Leary Catholic High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0349",
+      "name": "Argyll Home School Centre",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7707",
+      "name": "Aspen Program",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2439",
+      "name": "Aurora Academic Charter School Alberta Avenue Campus",
+      "city": "Edmonton",
+      "authority": "Aurora School Ltd.",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "8402",
+      "name": "Austin O’Brien Catholic High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2767",
+      "name": "Bloom Islamic Academy",
+      "city": "Edmonton",
+      "authority": "Edmonton Islamic School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6003",
+      "name": "Boyle Street Education Centre",
+      "city": "Edmonton",
+      "authority": "Boyle Street Education Centre",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "7704",
+      "name": "Braemar School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1745",
+      "name": "Canadian Collegiate Institute",
+      "city": "Edmonton",
+      "authority": "Canadian Collegiate Institute",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2385",
+      "name": "Cardinal Collins Catholic Academic Centre - City Centre",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2382",
+      "name": "Cardinal Collins Catholic Academic Centre - Clareview",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2383",
+      "name": "Cardinal Collins Catholic Academic Centre - Mill Woods",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2384",
+      "name": "Cardinal Collins Catholic Academic Centre - Westmount",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0017",
+      "name": "Centre High",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1363",
+      "name": "Centre francophone d'éducation à distance",
+      "city": "Edmonton",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "0577",
+      "name": "Columbus Academy",
+      "city": "Edmonton",
+      "authority": "Unlimited Potential Community Services Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7936",
+      "name": "Coralwood Adventist Academy",
+      "city": "Edmonton",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7918",
+      "name": "Dante Alighieri Italian School",
+      "city": "Edmonton",
+      "authority": "The Dante Alighieri Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2249",
+      "name": "Dr. Anne Anderson School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1983",
+      "name": "E2 Academy",
+      "city": "Edmonton",
+      "authority": "E2 Society for Twice-Exceptional Learners",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7051",
+      "name": "Eastglen School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7953",
+      "name": "Edmonton Academy",
+      "city": "Edmonton",
+      "authority": "Edmonton Academy Society for Learning Disabled",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7905",
+      "name": "Edmonton Christian High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7901",
+      "name": "Edmonton Islamic Academy",
+      "city": "Edmonton",
+      "authority": "Edmonton Islamic School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2566",
+      "name": "Elder Dr. Francis Whiskeyjack School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0655",
+      "name": "Elves Adult & Youth Centre",
+      "city": "Edmonton",
+      "authority": "Elves Special Needs Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2436",
+      "name": "Father Michael McCaffery Catholic High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1357",
+      "name": "Filipino Language & Cultural School",
+      "city": "Edmonton",
+      "authority": "The Filipino Canadian Saranay Association of Alberta",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1039",
+      "name": "Fireweed Education Centre",
+      "city": "Edmonton",
+      "authority": "The Government of Canada as represented by Correctional Service Canada",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "1626",
+      "name": "Grierson Education Centre",
+      "city": "Edmonton",
+      "authority": "The Government of Canada as represented by Correctional Service Canada",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "7059",
+      "name": "Harry Ainlay School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1008",
+      "name": "Headway School Society of Alberta",
+      "city": "Edmonton",
+      "authority": "Headway School Society of Alberta",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2284",
+      "name": "Hellenic Academia Institute",
+      "city": "Edmonton",
+      "authority": "Hellenic Academia Institute",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2470",
+      "name": "Holy House of Our Lady and St. Benedict",
+      "city": "Edmonton",
+      "authority": "The Gilbertine Institute of Catholic Studies",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "8411",
+      "name": "Holy Trinity Catholic High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7701",
+      "name": "Hospital School Campuses",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2749",
+      "name": "Ignite Nightwind",
+      "city": "Edmonton",
+      "authority": "Ignite Alberta Institute for Learning",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1163",
+      "name": "Inner City High School",
+      "city": "Edmonton",
+      "authority": "Inner City Youth Development Association",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7706",
+      "name": "Institutional Services Schools",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7914",
+      "name": "Ivan Franko Ukrainian School",
+      "city": "Edmonton",
+      "authority": "The Society of Ukrainian Studies of Alberta",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7075",
+      "name": "J Percy Page School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8410",
+      "name": "J. H. Picard Catholic Elementary/Junior/Senior High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7071",
+      "name": "Jasper Place School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7702",
+      "name": "L Y Cairns School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1022",
+      "name": "Learning Store West Edmonton",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7724",
+      "name": "Learning Store at Blue Quill",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7722",
+      "name": "Learning Store at Londonderry",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0386",
+      "name": "Learning Store on Whyte",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1344",
+      "name": "Lillian Osborne High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8409",
+      "name": "Louis St. Laurent",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7063",
+      "name": "M. E. LaZerte School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2655",
+      "name": "MIS Junior and Senior High Campus",
+      "city": "Edmonton",
+      "authority": "Muslim Association of Canada",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "3399",
+      "name": "Manning Adult Learning Centre",
+      "city": "Edmonton",
+      "authority": "The Government of Canada as represented by Correctional Service Canada",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "7058",
+      "name": "McNally School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7090",
+      "name": "Metro Continuing Education",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7909",
+      "name": "Millwoods Christian School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1430",
+      "name": "Mother Margaret Mary Catholic High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7995",
+      "name": "NorQuest College Edmonton",
+      "city": "Edmonton",
+      "authority": "NorQuest College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "7066",
+      "name": "Old Scona School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2293",
+      "name": "Parkland Immanuel Christian School",
+      "city": "Edmonton",
+      "authority": "Canadian Reformed School Society of Edmonton",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0028",
+      "name": "Phoenix Academy",
+      "city": "Edmonton",
+      "authority": "Unlimited Potential Community Services Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1096",
+      "name": "Polish Sienkiewicz School",
+      "city": "Edmonton",
+      "authority": "Canadian Polish Language and Culture Parent Association ",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7938",
+      "name": "Progressive Academy",
+      "city": "Edmonton",
+      "authority": "Progressive Academy Education Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7052",
+      "name": "Queen Elizabeth School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7729",
+      "name": "Rosecrest School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7053",
+      "name": "Ross Sheppard School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1621",
+      "name": "Russian Education Centre",
+      "city": "Edmonton",
+      "authority": "Alberta Interscience Association",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2440",
+      "name": "STEM Collegiate",
+      "city": "Edmonton",
+      "authority": "STEM Collegiate Canada Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "7986",
+      "name": "Solomon College",
+      "city": "Edmonton",
+      "authority": "Solomon College",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "8405",
+      "name": "St. Francis Xavier",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8217",
+      "name": "St. Gabriel",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8407",
+      "name": "St. Joseph",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1028",
+      "name": "St. Oscar Romero Catholic High School",
+      "city": "Edmonton",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7054",
+      "name": "Strathcona School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7951",
+      "name": "Tempo School",
+      "city": "Edmonton",
+      "authority": "Tempo School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0018",
+      "name": "The Academy at King Edward",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1219",
+      "name": "The Chinese Cultural Promotion Society",
+      "city": "Edmonton",
+      "authority": "Chinese Cultural Promotion Society (CCPS)",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0483",
+      "name": "Thomas More Academy",
+      "city": "Edmonton",
+      "authority": "Unlimited Potential Community Services Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0325",
+      "name": "Transitions at the Y",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7055",
+      "name": "Victoria School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7050",
+      "name": "Vimy Ridge",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7057",
+      "name": "W P Wagner School",
+      "city": "Edmonton",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2298",
+      "name": "Yellowhead Tribal Education Centre",
+      "city": "Edmonton",
+      "authority": "Yellowhead Tribal Council",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "8098",
+      "name": "École Maurice-Lavallée",
+      "city": "Edmonton",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2125",
+      "name": "École Michaëlle-Jean",
+      "city": "Edmonton",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2379",
+      "name": "Ignite Centre for eLearning",
+      "city": "Edmonton ",
+      "authority": "Ignite Alberta Institute for Learning",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1132",
+      "name": "Holy Redeemer Catholic Junior/Senior High School",
+      "city": "Edson",
+      "authority": "The Living Waters Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2002",
+      "name": "Parkland Composite High School",
+      "city": "Edson",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2027",
+      "name": "The Learning Connection - Edson",
+      "city": "Edson",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0323",
+      "name": "Yellowhead Christian School",
+      "city": "Edson",
+      "authority": "Yellowhead Christian School Fellowship",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1381",
+      "name": "Elk Point Outreach",
+      "city": "Elk Point",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2802",
+      "name": "F.G. Miller Junior Senior High School",
+      "city": "Elk Point",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2326",
+      "name": "North Campus School",
+      "city": "Enoch",
+      "authority": "Kitaskinaw Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2423",
+      "name": "kaya Pomeh Adult Education School",
+      "city": "Enoch",
+      "authority": "Kitaskinaw Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2008",
+      "name": "Grand Trunk High School",
+      "city": "Evansburg",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1731",
+      "name": "The Learning Connection - Evansburg",
+      "city": "Evansburg",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1402",
+      "name": "Fairview High School",
+      "city": "Fairview",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1542",
+      "name": "Fairview and Area Learning Store",
+      "city": "Fairview",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2652",
+      "name": "St. Thomas More",
+      "city": "Fairview",
+      "authority": "The Holy Family Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1550",
+      "name": "École Héritage",
+      "city": "Falher",
+      "authority": "The Northwest Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3104",
+      "name": "Pigeon Lake Regional",
+      "city": "Falun",
+      "authority": "The Wetaskiwin School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5393",
+      "name": "Edison School",
+      "city": "Foothills",
+      "authority": "Edison School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2371",
+      "name": "STAND School",
+      "city": "Foothills",
+      "authority": "Strathcona-Tweedsmuir School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9922",
+      "name": "Strathcona-Tweedsmuir School",
+      "city": "Foothills",
+      "authority": "Strathcona-Tweedsmuir School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6907",
+      "name": "Foremost School",
+      "city": "Foremost",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4703",
+      "name": "Forestburg School",
+      "city": "Forestburg",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1810",
+      "name": "Athabasca Delta Community School",
+      "city": "Fort Chipewyan",
+      "authority": "The Parkland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2283",
+      "name": "Therese Tuccaro Secondary School",
+      "city": "Fort Chipewyan",
+      "authority": "Mikisew Cree First Nation Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "6306",
+      "name": "F. P. Walshe School",
+      "city": "Fort Macleod",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1996",
+      "name": "Livingstone Range School Division Virtual School",
+      "city": "Fort Macleod",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1067",
+      "name": "Livingstone Range Summer School",
+      "city": "Fort Macleod",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2768",
+      "name": "PEAKS Collegiate Campus",
+      "city": "Fort Macleod",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1445",
+      "name": "Walshe Crossroads Campus",
+      "city": "Fort Macleod",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1899",
+      "name": "Father Patrick Mercredi Community School",
+      "city": "Fort McMurray",
+      "authority": "The Fort McMurray Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2260",
+      "name": "Fort McKay First Nation E-Learning School",
+      "city": "Fort McMurray",
+      "authority": "Fort McKay First Nation",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1845",
+      "name": "Fort McMurray Composite High School",
+      "city": "Fort McMurray",
+      "authority": "The Fort McMurray School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1858",
+      "name": "Frank Spragins High School",
+      "city": "Fort McMurray",
+      "authority": "The Fort McMurray School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1564",
+      "name": "Holy Trinity High School",
+      "city": "Fort McMurray",
+      "authority": "The Fort McMurray Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2388",
+      "name": "Immaculate Heart of Mary Catholic School",
+      "city": "Fort McMurray",
+      "authority": "The Fort McMurray Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1857",
+      "name": "Westwood Community High School",
+      "city": "Fort McMurray",
+      "authority": "The Fort McMurray School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1870",
+      "name": "École Boréale",
+      "city": "Fort McMurray",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1559",
+      "name": "École McTavish Public High School",
+      "city": "Fort McMurray",
+      "authority": "The Fort McMurray School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3311",
+      "name": "Fort Saskatchewan High School",
+      "city": "Fort Saskatchewan",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3310",
+      "name": "Fort Saskatchewan Next Step II Outreach School",
+      "city": "Fort Saskatchewan",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7946",
+      "name": "Norquest College Tricentre",
+      "city": "Fort Saskatchewan",
+      "authority": "NorQuest College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "2184",
+      "name": "St. André Bessette Catholic High School",
+      "city": "Fort Saskatchewan",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1702",
+      "name": "Fort Vermilion Public School",
+      "city": "Fort Vermilion",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1706",
+      "name": "Rocky Lane School",
+      "city": "Fort Vermilion",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1202",
+      "name": "Fox Creek School",
+      "city": "Fox Creek",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1389",
+      "name": "Gateway Academy Fox Creek",
+      "city": "Fox Creek",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1815",
+      "name": "Jean Baptiste Sewepagaham School",
+      "city": "Fox Lake",
+      "authority": "Little Red River Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2138",
+      "name": "Frog Lake Oskayak Outreach School",
+      "city": "Frog Lake",
+      "authority": "Frog Lake Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2348",
+      "name": "Tus-tuk-ee-skaws School",
+      "city": "Frog Lake",
+      "authority": "Frog Lake Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1793",
+      "name": "Chief Tallcree School North",
+      "city": "Ft. Vermilion",
+      "authority": "Tallcree Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1816",
+      "name": "Sister Gloria School",
+      "city": "Garden River",
+      "authority": "Little Red River Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2516",
+      "name": "Sturgeon Learning Centre",
+      "city": "Gibbons",
+      "authority": "The Sturgeon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1817",
+      "name": "Gift Lake School",
+      "city": "Gift Lake",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2905",
+      "name": "Glendon School",
+      "city": "Glendon",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2190",
+      "name": "Wakâ Mne Elementary",
+      "city": "Glenevis",
+      "authority": "Alexis Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2042",
+      "name": "Grande Cache Community High School",
+      "city": "Grande Cache",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0334",
+      "name": "Lightning Ridge Education Centre",
+      "city": "Grande Cache",
+      "authority": "The Government of Canada as represented by Correctional Service Canada",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "0327",
+      "name": "The Learning Connection - Grande Cache",
+      "city": "Grande Cache",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1153",
+      "name": "Bridge Network",
+      "city": "Grande Prairie",
+      "authority": "The Grande Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1761",
+      "name": "Charles Spencer High School",
+      "city": "Grande Prairie",
+      "authority": "The Grande Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1141",
+      "name": "Grande Prairie Composite High School",
+      "city": "Grande Prairie",
+      "authority": "The Grande Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1194",
+      "name": "Hillcrest Christian School",
+      "city": "Grande Prairie",
+      "authority": "Hillcrest Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1055",
+      "name": "Horizon Group Care",
+      "city": "Grande Prairie",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0319",
+      "name": "Peace Academy of Virtual Education",
+      "city": "Grande Prairie",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0590",
+      "name": "Peace Wapiti Academy",
+      "city": "Grande Prairie",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2239",
+      "name": "Peace Wapiti Enterprise Centre",
+      "city": "Grande Prairie",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1138",
+      "name": "St. John Bosco Catholic School",
+      "city": "Grande Prairie",
+      "authority": "The Grande Prairie Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2157",
+      "name": "St. John Paul II Catholic School / Faculté St. Jean-Paul II",
+      "city": "Grande Prairie",
+      "authority": "The Grande Prairie Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1178",
+      "name": "St. Joseph Catholic High School",
+      "city": "Grande Prairie",
+      "authority": "The Grande Prairie Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0367",
+      "name": "École Nouvelle Frontière",
+      "city": "Grande Prairie",
+      "authority": "The Northwest Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1473",
+      "name": "Arden T. Litt Centre for Learning",
+      "city": "Grassy Lake",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1505",
+      "name": "Grimshaw Public School",
+      "city": "Grimshaw",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2337",
+      "name": "Peace Learning Connection",
+      "city": "Grimshaw",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2351",
+      "name": "Kapawe'no First Nation School",
+      "city": "Grouard",
+      "authority": "Kapawe'no First Nation",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2488",
+      "name": "Gwynne Valley Rural Academy",
+      "city": "Gwynne",
+      "authority": "Gwynne Valley Rural Education Association",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "5844",
+      "name": "J. C. Charyk Hanna School",
+      "city": "Hanna",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2373",
+      "name": "Prairie Land Online Academy",
+      "city": "Hanna",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0486",
+      "name": "Prairie Land Outreach School",
+      "city": "Hanna",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4507",
+      "name": "Hay Lakes School",
+      "city": "Hay Lakes",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2804",
+      "name": "Heinsburg Community School",
+      "city": "Heinsburg",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1703",
+      "name": "High Level Public School",
+      "city": "High Level",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2454",
+      "name": "Pathways School",
+      "city": "High Level",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1791",
+      "name": "Upper Hay River School",
+      "city": "High Level",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1606",
+      "name": "E W Pratt High School",
+      "city": "High Prairie",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0435",
+      "name": "Prairie View Outreach School",
+      "city": "High Prairie",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1670",
+      "name": "St. Andrew's School",
+      "city": "High Prairie",
+      "authority": "The Holy Family Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "5322",
+      "name": "Ecole Secondaire Highwood High School",
+      "city": "High River",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0519",
+      "name": "Notre Dame Collegiate",
+      "city": "High River",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1471",
+      "name": "St. Luke's Outreach Centre High River",
+      "city": "High River",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1405",
+      "name": "Hines Creek Composite School",
+      "city": "Hines Creek",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2030",
+      "name": "Father Gerard Redmond Community Catholic School",
+      "city": "Hinton",
+      "authority": "The Evergreen Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2011",
+      "name": "Harry Collinge High School",
+      "city": "Hinton",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2028",
+      "name": "The Learning Connection - Hinton",
+      "city": "Hinton",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2441",
+      "name": "Holden Rural Academy",
+      "city": "Holden",
+      "authority": "Holden Rural Academy Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "4905",
+      "name": "Hughenden Public School",
+      "city": "Hughenden",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4487",
+      "name": "Buffalo Creek Learning Center",
+      "city": "Innisfail",
+      "authority": "The Government of Canada as represented by Correctional Service Canada",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "4418",
+      "name": "Chinook's Edge Summer School",
+      "city": "Innisfail",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4421",
+      "name": "Innisfail Career High School",
+      "city": "Innisfail",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4405",
+      "name": "Innisfail High School",
+      "city": "Innisfail",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2358",
+      "name": "May City Hutterite Colony School",
+      "city": "Innisfail ",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3602",
+      "name": "Delnorte School",
+      "city": "Innisfree",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3906",
+      "name": "Irma School",
+      "city": "Irma",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6409",
+      "name": "Huntsville School",
+      "city": "Iron Springs",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5219",
+      "name": "Fairview Colony School",
+      "city": "Irricana",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5220",
+      "name": "Tschetter Colony School",
+      "city": "Irricana",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2035",
+      "name": "Jasper Junior Senior High School",
+      "city": "Jasper",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2163",
+      "name": "The Learning Connection - Jasper",
+      "city": "Jasper",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1050",
+      "name": "École Desrochers",
+      "city": "Jasper",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1821",
+      "name": "John D'or Prairie School",
+      "city": "John D'or Prairie",
+      "authority": "Little Red River Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "0441",
+      "name": "Kayas Cultural College",
+      "city": "John D'or Prairie",
+      "authority": "Kayas Cultural College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "2989",
+      "name": "Kehewin Community Education Centre",
+      "city": "Kehewin",
+      "authority": "Kehewin Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1443",
+      "name": "Journeys Learning Academy",
+      "city": "Kikino",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4595",
+      "name": "Cornerstone Christian Academy",
+      "city": "Kingman",
+      "authority": "The Cornerstone Christian Academy of Camrose",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2443",
+      "name": "Education Unlimited Academy",
+      "city": "Kingman",
+      "authority": "Education Unlimited Network",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1611",
+      "name": "Kinuso School",
+      "city": "Kinuso",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2278",
+      "name": "Swan River School",
+      "city": "Kinuso",
+      "authority": "Swan River First Nation",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "3806",
+      "name": "Kitscoty Junior Senior High School",
+      "city": "Kitscoty",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1704",
+      "name": "La Crete Public School",
+      "city": "La Crete",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1742",
+      "name": "Northern Outreach Center",
+      "city": "La Crete",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2795",
+      "name": "Amisk Community School",
+      "city": "Lac La Biche",
+      "authority": "Beaver Lake Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2716",
+      "name": "Elk Lodge School",
+      "city": "Lac La Biche",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2793",
+      "name": "Heart Lake Kohls School",
+      "city": "Lac La Biche",
+      "authority": "Heart Lake Band #469",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2702",
+      "name": "J A Williams High School",
+      "city": "Lac La Biche",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2719",
+      "name": "Lac La Biche Outreach",
+      "city": "Lac La Biche",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2124",
+      "name": "Light of Christ Catholic School",
+      "city": "Lac La Biche",
+      "authority": "The Lakeland Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1898",
+      "name": "Portage College Lac La Biche",
+      "city": "Lac La Biche",
+      "authority": "Portage College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "4466",
+      "name": "Central Alberta Christian High School",
+      "city": "Lacombe",
+      "authority": "Central Alberta Christian High School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4390",
+      "name": "College Heights Christian School",
+      "city": "Lacombe",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4307",
+      "name": "Ecole Secondaire Lacombe Composite High School",
+      "city": "Lacombe",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4322",
+      "name": "Lacombe Outreach School",
+      "city": "Lacombe",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1633",
+      "name": "Prairie Adventist Christian eSchool",
+      "city": "Lacombe",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2159",
+      "name": "Wolf Creek Summer School",
+      "city": "Lacombe",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3404",
+      "name": "Lamont High School",
+      "city": "Lamont",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2590",
+      "name": "Horseshoe Crossing High School",
+      "city": "Langdon",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3238",
+      "name": "Black Gold Outreach School",
+      "city": "Leduc",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3272",
+      "name": "Christ the King School",
+      "city": "Leduc",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division ",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3212",
+      "name": "Leduc Composite High School",
+      "city": "Leduc",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2564",
+      "name": "Ohpaho Secondary School",
+      "city": "Leduc",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1075",
+      "name": "STAR Catholic Outreach School",
+      "city": "Leduc",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division ",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2536",
+      "name": "École Citadelle",
+      "city": "Legal",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "4102",
+      "name": "David Thompson School",
+      "city": "Leslieville",
+      "authority": "The Wild Rose School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6420",
+      "name": "Allenby Colony",
+      "city": "Lethbridge",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6476",
+      "name": "Catholic Central High School",
+      "city": "Lethbridge",
+      "authority": "The Holy Spirit Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1465",
+      "name": "Chinook High School",
+      "city": "Lethbridge",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6421",
+      "name": "Gold Ridge Colony School",
+      "city": "Lethbridge",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6491",
+      "name": "Immanuel Christian Secondary School",
+      "city": "Lethbridge",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5436",
+      "name": "Keho Lake Colony School",
+      "city": "Lethbridge",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6446",
+      "name": "Lethbridge Collegiate Institute",
+      "city": "Lethbridge",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6453",
+      "name": "Lethbridge Regional Hospital School",
+      "city": "Lethbridge",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6456",
+      "name": "Pitawani School",
+      "city": "Lethbridge",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1541",
+      "name": "Shadow Ranch Colony School",
+      "city": "Lethbridge",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2630",
+      "name": "Southern Alberta Collegiate Institute",
+      "city": "Lethbridge",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6670",
+      "name": "St. Mary's Roman Catholic Separate School",
+      "city": "Lethbridge",
+      "authority": "The Holy Spirit Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1380",
+      "name": "Stafford Ridge School",
+      "city": "Lethbridge",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0020",
+      "name": "Trinity Learning Centre",
+      "city": "Lethbridge",
+      "authority": "The Holy Spirit Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6449",
+      "name": "Victoria Park High School",
+      "city": "Lethbridge",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6466",
+      "name": "Winston Churchill High School",
+      "city": "Lethbridge",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2539",
+      "name": "École La Vérendrye",
+      "city": "Lethbridge",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3860",
+      "name": "Avery Outreach School",
+      "city": "Lloydminster",
+      "authority": "Lloydminster Public School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3852",
+      "name": "Holy Rosary High School",
+      "city": "Lloydminster",
+      "authority": "Lloydminster Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2341",
+      "name": "LCSD Home School",
+      "city": "Lloydminster",
+      "authority": "Lloydminster Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3840",
+      "name": "Lloydminster Comprehensive High School",
+      "city": "Lloydminster",
+      "authority": "Lloydminster Public School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2347",
+      "name": "Lloydminster SD99 Home School",
+      "city": "Lloydminster",
+      "authority": "Lloydminster Public School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1959",
+      "name": "École Sans-Frontières",
+      "city": "Lloydminster",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "5405",
+      "name": "Lomond Community School",
+      "city": "Lomond",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6121",
+      "name": "Livingstone School",
+      "city": "Lundbreck",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6210",
+      "name": "Magrath Junior Senior High School",
+      "city": "Magrath",
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2806",
+      "name": "Ecole Mallaig Community School",
+      "city": "Mallaig",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1507",
+      "name": "Manning Aurora Composite School",
+      "city": "Manning",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3604",
+      "name": "Mannville School",
+      "city": "Mannville",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3808",
+      "name": "Marwayne Jubilee School",
+      "city": "Marwayne",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1222",
+      "name": "Ehpewapahk Alternate School",
+      "city": "Maskwacis",
+      "authority": "Maskwacis Education Schools Commission",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "4289",
+      "name": "Maskwachees Cultural School",
+      "city": "Maskwacis",
+      "authority": "Maskwachees Cultural College Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1629",
+      "name": "Maskwacis Outreach School",
+      "city": "Maskwacis",
+      "authority": "Maskwacis Education Schools Commission",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "4288",
+      "name": "Maskwacîs Cree High School",
+      "city": "Maskwacis",
+      "authority": "Maskwacis Education Schools Commission",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1625",
+      "name": "Roland Little Poplar Learning Center",
+      "city": "Maskwacis",
+      "authority": "The Government of Canada as represented by Correctional Service Canada",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "2104",
+      "name": "Mayerthorpe Junior Senior High School",
+      "city": "Mayerthorpe",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1021",
+      "name": "Coulee Collegiate",
+      "city": "Medicine Hat",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6844",
+      "name": "Crescent Heights High School",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6849",
+      "name": "Herald School",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6809",
+      "name": "Hutterian Brethren Church School of Elkwater",
+      "city": "Medicine Hat",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6850",
+      "name": "Medicine Hat High School",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1648",
+      "name": "Medicine Hat School District No.76 Summer School",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6870",
+      "name": "Monsignor McCoy High School",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6864",
+      "name": "PAS",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1239",
+      "name": "Pathways School",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2391",
+      "name": "St. Joseph’s Education Centre",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2389",
+      "name": "The Hub: Online Community School",
+      "city": "Medicine Hat",
+      "authority": "The Medicine Hat School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0520",
+      "name": "École Les Cyprès",
+      "city": "Medicine Hat",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2200",
+      "name": "South Alberta High School",
+      "city": "Medicine Hat ",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6504",
+      "name": "Milk River Ridge School",
+      "city": "Milk River",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1474",
+      "name": "Living Truth Christian School",
+      "city": "Mirror",
+      "authority": "Living Truth Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9986",
+      "name": "Providence Christian School",
+      "city": "Monarch",
+      "authority": "Providence Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2591",
+      "name": "Kipohtakaw Education Centre",
+      "city": "Morinville",
+      "authority": "Alexander First Nation Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2594",
+      "name": "Morinville Community High School",
+      "city": "Morinville",
+      "authority": "The Greater St. Albert Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2593",
+      "name": "The Father’s House Christian School",
+      "city": "Morinville",
+      "authority": "The Father's House Christian Fellowship-Sturgeon County",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1919",
+      "name": "Chiniki Community College",
+      "city": "Morley",
+      "authority": "Chiniki Community College",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5290",
+      "name": "Morley Community School",
+      "city": "Morley",
+      "authority": "Stoney Tribal Administration",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5705",
+      "name": "Morrin School",
+      "city": "Morrin",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5198",
+      "name": "Olds Mountain View Christian School",
+      "city": "Mountain View County",
+      "authority": "Olds Mountain View Christian School Association",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2238",
+      "name": "Myrnam Outreach Program",
+      "city": "Myrnam",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3703",
+      "name": "New Myrnam School",
+      "city": "Myrnam",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6310",
+      "name": "J. T. Foster School",
+      "city": "Nanton",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4510",
+      "name": "New Norway School",
+      "city": "New Norway",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3220",
+      "name": "New Sarepta Community High School",
+      "city": "New Sarepta",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6410",
+      "name": "Noble Central School",
+      "city": "Nobleford",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4190",
+      "name": "Taotha School",
+      "city": "Nordegg",
+      "authority": "Stoney Tribal Administration",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5323",
+      "name": "Alberta High School of Fine Arts",
+      "city": "Okotoks",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5326",
+      "name": "Cameron Crossing School",
+      "city": "Okotoks",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2495",
+      "name": "Centre For Learning@Home Summer School",
+      "city": "Okotoks",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "5319",
+      "name": "Foothills Composite High School",
+      "city": "Okotoks",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1724",
+      "name": "Foothills Digital School",
+      "city": "Okotoks",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5371",
+      "name": "Holy Trinity Academy",
+      "city": "Okotoks",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1482",
+      "name": "Okotoks Home Schooling",
+      "city": "Okotoks",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1375",
+      "name": "St. Luke's Outreach Centre Okotoks",
+      "city": "Okotoks",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "5369",
+      "name": "St. Paul's Academy",
+      "city": "Okotoks",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1984",
+      "name": "Summit West Independent School",
+      "city": "Okotoks",
+      "authority": "Independent School Authority Ltd.",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5372",
+      "name": "The Centre for Learning@HOME",
+      "city": "Okotoks",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1297",
+      "name": "École Beausoleil",
+      "city": "Okotoks",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "5191",
+      "name": "Horizon Alternate Program",
+      "city": "Olds",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4425",
+      "name": "Olds Career High School",
+      "city": "Olds",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5193",
+      "name": "Olds Koinonia Christian School",
+      "city": "Olds",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5115",
+      "name": "École Olds High School",
+      "city": "Olds",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1551",
+      "name": "Gateway Academy Onoway",
+      "city": "Onoway",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2105",
+      "name": "Onoway Junior Senior High School",
+      "city": "Onoway",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5910",
+      "name": "South Central High School",
+      "city": "Oyen",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1827",
+      "name": "Paddle Prairie School",
+      "city": "Paddle Prairie",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3811",
+      "name": "E. H. Walter School",
+      "city": "Paradise Valley",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1573",
+      "name": "Glenmary School",
+      "city": "Peace River",
+      "authority": "The Holy Family Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0311",
+      "name": "Holy Family Cyber High School",
+      "city": "Peace River",
+      "authority": "The Holy Family Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2381",
+      "name": "Northland Online School",
+      "city": "Peace River",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1376",
+      "name": "Peace Regional Outreach Campus",
+      "city": "Peace River",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1511",
+      "name": "Peace River High School",
+      "city": "Peace River",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0067",
+      "name": "Peace River Learning Centre",
+      "city": "Peace River",
+      "authority": "Northern Lakes College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "0434",
+      "name": "École des Quatre-Vents",
+      "city": "Peace River",
+      "authority": "The Northwest Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "4416",
+      "name": "Penhold Career High School",
+      "city": "Penhold",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1771",
+      "name": "Penhold Crossing Secondary School",
+      "city": "Penhold",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1472",
+      "name": "Albion Ridge Colony School",
+      "city": "Picture Butte",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6411",
+      "name": "Picture Butte High School",
+      "city": "Picture Butte",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1076",
+      "name": "MHHS Gateway School",
+      "city": "Pincher Creek",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6122",
+      "name": "Matthew Halton High School",
+      "city": "Pincher Creek",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6170",
+      "name": "St. Michael's School",
+      "city": "Pincher Creek",
+      "authority": "The Holy Spirit Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2706",
+      "name": "Ecole Plamondon School",
+      "city": "Plamondon",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2718",
+      "name": "École Beauséjour",
+      "city": "Plamondon",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3193",
+      "name": "Mamawi Atosketan Native School",
+      "city": "Ponoka",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4205",
+      "name": "Ponoka Secondary Campus",
+      "city": "Ponoka",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4270",
+      "name": "St. Augustine School",
+      "city": "Ponoka",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division ",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4203",
+      "name": "The Brick Learning Centre",
+      "city": "Ponoka",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4299",
+      "name": "Wolf Creek Education Centre",
+      "city": "Ponoka",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4907",
+      "name": "Provost Public School",
+      "city": "Provost",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4970",
+      "name": "St. Thomas Aquinas School",
+      "city": "Provost",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1705",
+      "name": "Rainbow Lake School",
+      "city": "Rainbow Lake",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2257",
+      "name": "Raymond Alternate School",
+      "city": "Raymond",
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6506",
+      "name": "Raymond High School",
+      "city": "Raymond",
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4464",
+      "name": "Aurora Treatment Centre",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2366",
+      "name": "Creekside Creative Academy",
+      "city": "Red Deer",
+      "authority": "Creekside Creative Academy",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4471",
+      "name": "Ecole Secondaire Notre Dame High School",
+      "city": "Red Deer",
+      "authority": "The Red Deer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2447",
+      "name": "Emmaus Learning Community - DSEPS",
+      "city": "Red Deer",
+      "authority": "Koinonia Christian School - Red Deer Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4491",
+      "name": "Gateway Christian School",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4433",
+      "name": "Hunting Hills High School",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2446",
+      "name": "Koinonia @ Home",
+      "city": "Red Deer",
+      "authority": "Koinonia Christian School - Red Deer Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5195",
+      "name": "Koinonia Christian School (Red Deer)",
+      "city": "Red Deer",
+      "authority": "Koinonia Christian School - Red Deer Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4444",
+      "name": "Lindsay Thurber Comprehensive High School",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4465",
+      "name": "North Cottage High School",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1016",
+      "name": "NorthStar Academy",
+      "city": "Red Deer",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4435",
+      "name": "Outreach School Centre",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4493",
+      "name": "Parkland School Special Education",
+      "city": "Red Deer",
+      "authority": "Parkland Community Living and Supports Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4461",
+      "name": "Quest, Assessment",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4457",
+      "name": "Quest, Stabilization and Secure",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2444",
+      "name": "RTD Math Academy",
+      "city": "Red Deer",
+      "authority": "RTD Math Academy Ltd",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1781",
+      "name": "Red Deer Catholic Online Summer School",
+      "city": "Red Deer",
+      "authority": "The Red Deer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0574",
+      "name": "Red Deer Regional Hospital Education Program",
+      "city": "Red Deer",
+      "authority": "The Red Deer School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1253",
+      "name": "St. John Paul II Catholic Outreach School",
+      "city": "Red Deer",
+      "authority": "The Red Deer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1923",
+      "name": "St. Joseph High School",
+      "city": "Red Deer",
+      "authority": "The Red Deer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2538",
+      "name": "École La Prairie",
+      "city": "Red Deer",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1824",
+      "name": "Clarence Jaycox School",
+      "city": "Red Earth Creek",
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2365",
+      "name": "KTCEA Outreach School",
+      "city": "Red Earth Creek",
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "0339",
+      "name": "Red Earth Creek School",
+      "city": "Red Earth Creek",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1785",
+      "name": "Redcliff Mennonite Alternative Program",
+      "city": "Redcliff",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2623",
+      "name": "Redwater School",
+      "city": "Redwater",
+      "authority": "The Sturgeon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4209",
+      "name": "Rimbey Junior Senior High School",
+      "city": "Rimbey",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0488",
+      "name": "West Country Outreach School",
+      "city": "Rimbey",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1361",
+      "name": "Kisiko Awasis Kiskinahamawin at Mountain Cree Camp",
+      "city": "Robb",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4111",
+      "name": "Kootenay School",
+      "city": "Rocky Mountain House",
+      "authority": "The Wild Rose School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4191",
+      "name": "O'Chiese School",
+      "city": "Rocky Mountain House",
+      "authority": "O'Chiese Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1272",
+      "name": "St. Dominic High School",
+      "city": "Rocky Mountain House",
+      "authority": "The Red Deer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4395",
+      "name": "Sunchild First Nation School",
+      "city": "Rocky Mountain House",
+      "authority": "Sunchild First Nation Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "0531",
+      "name": "Visions West School",
+      "city": "Rocky Mountain House",
+      "authority": "The Wild Rose School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4105",
+      "name": "West Central High School",
+      "city": "Rocky Mountain House",
+      "authority": "The Wild Rose School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5208",
+      "name": "Chestermere High School",
+      "city": "Rocky View County",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1446",
+      "name": "Third Academy Calgary South",
+      "city": "Rocky View County",
+      "authority": "Third Academy International Ltd.",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6708",
+      "name": "Rosemary School",
+      "city": "Rosemary",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2797",
+      "name": "Kihew Asiniy Education Centre",
+      "city": "Saddle Lake",
+      "authority": "Saddle Lake Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "4710",
+      "name": "Central High School Sedgewick",
+      "city": "Sedgewick",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1108",
+      "name": "Sexsmith Secondary School",
+      "city": "Sexsmith",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2041",
+      "name": "Archbishop Jordan Catholic High School",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1387",
+      "name": "Aurora Learning Foundation",
+      "city": "Sherwood Park",
+      "authority": "Aurora Learning Foundation (Calgary)",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "3340",
+      "name": "Bev Facey Community High School",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2735",
+      "name": "Campus EIPS",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1599",
+      "name": "Elk Island Youth Ranch Learning Centre",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3339",
+      "name": "Salisbury Composite (Evening)",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3322",
+      "name": "Salisbury Composite High School",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2399",
+      "name": "Salisbury STEPS Junior/Senior High school",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3307",
+      "name": "Sherwood Park Next Step I Outreach School",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2185",
+      "name": "St. Isidore Learning Centre",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3395",
+      "name": "Strathcona Christian Academy",
+      "city": "Sherwood Park",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1986",
+      "name": "École Claudette-et-Denis-Tardif",
+      "city": "Sherwood Park",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "5595",
+      "name": "Chief Old Sun Elementary School",
+      "city": "Siksika",
+      "authority": "Siksika Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5591",
+      "name": "Old Sun Community College",
+      "city": "Siksika",
+      "authority": "The Old Sun Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5596",
+      "name": "Siksika Nation High School",
+      "city": "Siksika",
+      "authority": "Siksika Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1425",
+      "name": "Siksika Storefront School",
+      "city": "Siksika",
+      "authority": "Siksika Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1305",
+      "name": "Savanna School",
+      "city": "Silver Valley",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1903",
+      "name": "Distance Learning High School",
+      "city": "Slave Lake",
+      "authority": "Northern Lakes College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "0375",
+      "name": "Lakeside Outreach School",
+      "city": "Slave Lake",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1616",
+      "name": "Roland Michener Secondary School",
+      "city": "Slave Lake",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1696",
+      "name": "Slave Lake Christian Academy",
+      "city": "Slave Lake",
+      "authority": "Slave Lake Christian Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1585",
+      "name": "St. Francis of Assisi Catholic Academy",
+      "city": "Slave Lake",
+      "authority": "The Living Waters Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2722",
+      "name": "H. A. Kostash School",
+      "city": "Smoky Lake",
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1306",
+      "name": "Spirit River Regional Academy",
+      "city": "Spirit River",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2235",
+      "name": "Connections for Learning",
+      "city": "Spruce Grove",
+      "authority": "The Parkland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0098",
+      "name": "Harvest Baptist Academy",
+      "city": "Spruce Grove",
+      "authority": "Independent Baptist Christian Education Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2299",
+      "name": "Living Waters Christian Academy",
+      "city": "Spruce Grove",
+      "authority": "Living Waters Christian Academy",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2208",
+      "name": "Spruce Grove Composite High School",
+      "city": "Spruce Grove",
+      "authority": "The Parkland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1684",
+      "name": "St. Peter the Apostle Catholic High School",
+      "city": "Spruce Grove",
+      "authority": "The Evergreen Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1444",
+      "name": "St. Teresa Catholic Learning Centre",
+      "city": "Spruce Grove",
+      "authority": "The Evergreen Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4410",
+      "name": "Spruce View School",
+      "city": "Spruce View",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2556",
+      "name": "Bellerose Composite High School",
+      "city": "St. Albert",
+      "authority": "The St. Albert School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2574",
+      "name": "Greater St. Albert Catholic Summer School",
+      "city": "St. Albert",
+      "authority": "The Greater St. Albert Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2541",
+      "name": "Paul Kane High School",
+      "city": "St. Albert",
+      "authority": "The St. Albert School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2558",
+      "name": "St. Albert Public Outreach",
+      "city": "St. Albert",
+      "authority": "The St. Albert School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2442",
+      "name": "St. Albert Public Schools’ Summer School",
+      "city": "St. Albert",
+      "authority": "The St. Albert School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0378",
+      "name": "St. Gabriel Education Centre",
+      "city": "St. Albert",
+      "authority": "The Greater St. Albert Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1467",
+      "name": "École Alexandre-Taché",
+      "city": "St. Albert",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2577",
+      "name": "École Secondaire St. Albert Catholic High School",
+      "city": "St. Albert",
+      "authority": "The Greater St. Albert Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2820",
+      "name": "Ecole Regionale St. Paul Regional High School",
+      "city": "St. Paul",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0380",
+      "name": "Portage College - St. Paul Campus",
+      "city": "St. Paul",
+      "authority": "Portage College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "2808",
+      "name": "St. Paul Alternate Education Centre",
+      "city": "St. Paul",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2892",
+      "name": "École du Sommet",
+      "city": "St. Paul",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1326",
+      "name": "Kainai Alternate Academy",
+      "city": "Stand Off",
+      "authority": "Kainai Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2071",
+      "name": "Wheatland Crossing School",
+      "city": "Standard",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4616",
+      "name": "Stettler Outreach School",
+      "city": "Stettler",
+      "authority": "The Clearview School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4644",
+      "name": "William E Hay Composite High School",
+      "city": "Stettler",
+      "authority": "The Clearview School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6535",
+      "name": "Stirling School",
+      "city": "Stirling",
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2209",
+      "name": "Memorial Composite High School",
+      "city": "Stony Plain",
+      "authority": "The Parkland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0384",
+      "name": "Golden Hills Learning Academy",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1231",
+      "name": "Holy Cross Collegiate",
+      "city": "Strathmore",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "5615",
+      "name": "Huxley Colony School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5520",
+      "name": "Poplar Row School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5516",
+      "name": "Rising Sun School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5522",
+      "name": "Rosebud Creek School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2670",
+      "name": "Rural Route Agriculture Academy",
+      "city": "Strathmore",
+      "authority": "Agriculture Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "5512",
+      "name": "Sandhills School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5511",
+      "name": "Sayre School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0660",
+      "name": "Strathmore High School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5527",
+      "name": "Strathmore Store Front School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5513",
+      "name": "Towers School",
+      "city": "Strathmore",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2508",
+      "name": "Morinville Colony School",
+      "city": "Sturgeon County",
+      "authority": "The Sturgeon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2510",
+      "name": "Sturgeon Composite High School",
+      "city": "Sturgeon County",
+      "authority": "The Sturgeon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2354",
+      "name": "Sturgeon Public Summer School",
+      "city": "Sturgeon County",
+      "authority": "The Sturgeon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5112",
+      "name": "Sundre High School",
+      "city": "Sundre",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4420",
+      "name": "Sundre Learning Centre",
+      "city": "Sundre",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2335",
+      "name": "Swan Hills School",
+      "city": "Swan Hills",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4394",
+      "name": "Lighthouse Christian School",
+      "city": "Sylvan Lake",
+      "authority": "Lighthouse Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4417",
+      "name": "Sylvan Lake Career High School",
+      "city": "Sylvan Lake",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4411",
+      "name": "École H.J. Cody High School",
+      "city": "Sylvan Lake",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6523",
+      "name": "ACE Place Learning Centre",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1100",
+      "name": "Armada Colony School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6493",
+      "name": "Cameron Farms School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1479",
+      "name": "Copperfield Farms Colony School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6617",
+      "name": "Enchant Colony School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6619",
+      "name": "Hillridge Colony School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1377",
+      "name": "Kingsland Colony School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5415",
+      "name": "Lomond Colony School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2333",
+      "name": "Taber Christian High School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0022",
+      "name": "Tween Valley Christian School",
+      "city": "Taber",
+      "authority": "Tween Valley Fellowship/Tween Valley Christian School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6606",
+      "name": "W. R. Myers High School",
+      "city": "Taber",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2624",
+      "name": "Thorhild Central School",
+      "city": "Thorhild",
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3222",
+      "name": "Thorsby Junior Senior High School",
+      "city": "Thorsby",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5691",
+      "name": "Prairie Christian Academy",
+      "city": "Three Hills",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5610",
+      "name": "Three Hills School",
+      "city": "Three Hills",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1553",
+      "name": "Northstar Outreach",
+      "city": "Tofield",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3508",
+      "name": "Tofield School",
+      "city": "Tofield",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5612",
+      "name": "Trochu Valley School",
+      "city": "Trochu",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1832",
+      "name": "Kateri School",
+      "city": "Trout Lake",
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5296",
+      "name": "Many Horses High School",
+      "city": "Tsuut'ina",
+      "authority": "Tsuut'ina Nation Education Department",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5299",
+      "name": "Tsuu T'ina Bullhead Adult Education Centre",
+      "city": "Tsuutina Nation",
+      "authority": "Tsuut'ina Nation Education Department",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "3711",
+      "name": "Plain Lake Colony School",
+      "city": "Two Hills",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0532",
+      "name": "Two Hills Mennonite School",
+      "city": "Two Hills",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3707",
+      "name": "Two Hills School",
+      "city": "Two Hills",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1157",
+      "name": "Gateway Academy Valleyview",
+      "city": "Valleyview",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1206",
+      "name": "Hillside Junior Senior High School",
+      "city": "Valleyview",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1294",
+      "name": "Sturgeon Lake School",
+      "city": "Valleyview",
+      "authority": "Sturgeon Lake First Nation, Band #154",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1210",
+      "name": "Valleyview Ranches Colony School",
+      "city": "Valleyview",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1129",
+      "name": "Horizon MAP School",
+      "city": "Vauxhall",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6611",
+      "name": "Vauxhall Junior Senior High School",
+      "city": "Vauxhall",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3671",
+      "name": "St. Mary's Catholic High School",
+      "city": "Vegreville",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3610",
+      "name": "Vegreville Composite High School",
+      "city": "Vegreville",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0401",
+      "name": "Vegreville Next Step III Outreach School",
+      "city": "Vegreville",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3971",
+      "name": "Hope Home Schooling",
+      "city": "Vermilion",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3815",
+      "name": "J. R. Robson School",
+      "city": "Vermilion",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3972",
+      "name": "School of Hope",
+      "city": "Vermilion",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3870",
+      "name": "St. Jerome's School",
+      "city": "Vermilion",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0533",
+      "name": "Vermilion Outreach School",
+      "city": "Vermilion",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3510",
+      "name": "Viking School",
+      "city": "Viking",
+      "authority": "The Battle River School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1547",
+      "name": "Vilna Off-Campus Achievement Academy",
+      "city": "Vilna",
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2724",
+      "name": "Vilna School",
+      "city": "Vilna",
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5410",
+      "name": "County Central High School",
+      "city": "Vulcan",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5491",
+      "name": "Hope Christian School",
+      "city": "Vulcan",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2499",
+      "name": "Bigstone Cree Nation High School",
+      "city": "Wabasca",
+      "authority": "Bigstone Education Authority Society",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1543",
+      "name": "Mistassiniy Outreach Program",
+      "city": "Wabasca",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1807",
+      "name": "Mistassiniy School",
+      "city": "Wabasca",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0433",
+      "name": "Blessed Sacrament Outreach School",
+      "city": "Wainwright",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3970",
+      "name": "Blessed Sacrament School",
+      "city": "Wainwright",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3909",
+      "name": "Wainwright High School",
+      "city": "Wainwright",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0438",
+      "name": "École Saint-Christophe",
+      "city": "Wainwright",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3202",
+      "name": "Breton High School",
+      "city": "Warburg",
+      "authority": "The Wild Rose School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3226",
+      "name": "Warburg School",
+      "city": "Warburg",
+      "authority": "The Black Gold School Division ",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6509",
+      "name": "Warner School",
+      "city": "Warner",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1121",
+      "name": "Holy Family Catholic School",
+      "city": "Waskatenau",
+      "authority": "The Lakeland Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2411",
+      "name": "Richard F Staples Secondary School",
+      "city": "Westlock",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2471",
+      "name": "St. Mary Catholic School",
+      "city": "Westlock",
+      "authority": "The Evergreen Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0019",
+      "name": "Westlock Outreach",
+      "city": "Westlock",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3194",
+      "name": "NorQuest College (Wetaskiwin)",
+      "city": "Wetaskiwin",
+      "authority": "NorQuest College",
+      "authority_type": "Provincial"
+    },
+    {
+      "code": "3170",
+      "name": "Sacred Heart School",
+      "city": "Wetaskiwin",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division ",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3144",
+      "name": "Wetaskiwin Composite High School",
+      "city": "Wetaskiwin",
+      "authority": "The Wetaskiwin School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3148",
+      "name": "Wetaskiwin Outreach",
+      "city": "Wetaskiwin",
+      "authority": "The Wetaskiwin School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2237",
+      "name": "Across the Waters Outreach",
+      "city": "Whitecourt",
+      "authority": "The Living Waters Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1552",
+      "name": "Gateway Academy Whitecourt",
+      "city": "Whitecourt",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2108",
+      "name": "Hilltop High School",
+      "city": "Whitecourt",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2170",
+      "name": "École St. Joseph School",
+      "city": "Whitecourt",
+      "authority": "The Living Waters Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1407",
+      "name": "Worsley Central School",
+      "city": "Worsley",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5827",
+      "name": "Youngstown School",
+      "city": "Youngstown",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2421",
+      "name": "Peace Christian Academy",
+      "city": "grimshaw",
+      "authority": "Lakeland Christian School Society",
+      "authority_type": "Private School"
+    }
+  ]
+}
