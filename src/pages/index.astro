@@ -77,10 +77,37 @@ const matchGroups = [
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "ScholarAB",
-    "url": "https://www.scholarab.ca",
-    "description": "Free Alberta scholarship and research program directory for high school students.",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.scholarab.ca/#organization",
+        "name": "ScholarAB",
+        "alternateName": ["Scholar AB", "ScholarAB.ca", "scholarab"],
+        "url": "https://www.scholarab.ca",
+        "logo": "https://www.scholarab.ca/icon-512.png",
+        "description": "Free Alberta scholarship and research program directory for high school students.",
+        "areaServed": { "@type": "AdministrativeArea", "name": "Alberta, Canada" },
+        "founder": {
+          "@type": "Person",
+          "name": "Ilia Ivanov",
+          "sameAs": "https://www.linkedin.com/in/iliaivanov/",
+        },
+        "sameAs": [
+          "https://www.instagram.com/scholar.ab",
+          "https://www.tiktok.com/@scholar.ab",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.scholarab.ca/#website",
+        "name": "ScholarAB",
+        "alternateName": ["Scholar AB", "scholarab"],
+        "url": "https://www.scholarab.ca",
+        "description": "Free Alberta scholarship and research program directory for high school students.",
+        "publisher": { "@id": "https://www.scholarab.ca/#organization" },
+        "inLanguage": "en-CA",
+      },
+    ],
   })} slot="head" />
   <SabFonts slot="head" />
 
