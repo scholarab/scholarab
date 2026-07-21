@@ -346,8 +346,15 @@ const chip =
   document.addEventListener('click', (e) => {
     const target = e.target as Element;
 
+    // Scoped to this page's CTA card. The directory's cards use the same
+    // data-track="apply" hook, and this listener outlives view transitions —
+    // unscoped, it fired a second, type-less apply_click on every directory
+    // click made after any detail page had been opened in the tab.
     const apply = target.closest?.('[data-track="apply"]');
-    if (apply) sendEvent('apply_click', ...itemAttrs(apply));
+    if (apply?.closest('.sabd-card')) {
+      const [applyType, applyId] = itemAttrs(apply);
+      if (applyType && applyId) sendEvent('apply_click', applyType, applyId);
+    }
 
     const save = target.closest?.('[data-sabd-save]') as HTMLElement | null;
     if (save) {

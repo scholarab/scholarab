@@ -5,9 +5,14 @@ import { events, scholarships, researchPrograms } from '../../lib/db/schema'
 import { sql, and, eq, gte, desc, count } from 'drizzle-orm'
 import AdminShell from '../../components/admin/AdminShell'
 import type { AnalyticsData } from '../../components/admin/AnalyticsPanel'
+import scholarshipsJson from '../../data/scholarships.json'
+import programsJson from '../../data/research-programs.json'
 import '../../styles/global.css'
 
 const user = Astro.locals.user!
+
+const titleMap = (rows: { id: number; title: string }[]): Record<number, string> =>
+  Object.fromEntries(rows.map(r => [r.id, r.title]))
 
 const DAY = 24 * 60 * 60 * 1000
 const d7  = new Date(Date.now() - 7 * DAY)
@@ -61,14 +66,22 @@ try {
   const sTitles = await db.select({ id: scholarships.id, title: scholarships.title }).from(scholarships)
   const pTitles = await db.select({ id: researchPrograms.id, title: researchPrograms.name }).from(researchPrograms)
 
+  // The public site is built from the committed JSON, so events can name ids
+  // the DB has never seen (it lags behind and drops inactive rows) — those
+  // used to render as a bare "#178". JSON is the source of truth, so it wins
+  // the spread; the DB fills in anything added via the admin panel since.
+  const sJson = scholarshipsJson as unknown as { id: number; title: string }[]
+  const pJson = (programsJson as unknown as { id: number; name: string }[])
+    .map(p => ({ id: p.id, title: p.name }))
+
   data = {
     totals,
     perItem,
     daily,
     emptySearches,
     titles: {
-      scholarship: Object.fromEntries(sTitles.map(r => [r.id, r.title])),
-      program: Object.fromEntries(pTitles.map(r => [r.id, r.title])),
+      scholarship: { ...titleMap(sTitles), ...titleMap(sJson) },
+      program: { ...titleMap(pTitles), ...titleMap(pJson) },
     },
   }
 } catch (e) {
