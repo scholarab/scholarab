@@ -70,3 +70,40 @@ jobs:
           git config user.name "GitHub Action"
           git add src/data/scholarships.json src/data/research-programs.json
           git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip actions]" && git push; }
+
+  # Playwright smoke tests against the built dist/, served the same way local
+  # runs serve it (wrangler pages dev). This is a post-push signal, not a deploy
+  # gate — Cloudflare Pages deploys in parallel and cannot wait on it — so a red
+  # run here means "prod just shipped something the smoke tests don't like, go
+  # look", not "the deploy was blocked". Skipped on the cron data-sync run,
+  # where there's no code change to exercise.
+  e2e:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Both Playwright projects (Desktop Chrome + Pixel 7) run on the Chromium
+      # engine, so only that browser is needed.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      # No DATABASE_URL — same as the validate build. The E2E specs assert on the
+      # committed-JSON site (listing counts, quiz flow), which the DB path breaks.
+      - name: Build
+        run: npm run build
+
+      # playwright.config.ts starts `wrangler pages dev dist` itself and waits on
+      # it; CI-mode retries/workers/forbidOnly are already gated on $CI there.
+      - name: E2E
+        run: npm run test:e2e
