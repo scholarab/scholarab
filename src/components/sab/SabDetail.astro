@@ -62,6 +62,14 @@ const {
 
 const urgent = status === 'active' && typeof daysLeft === 'number' && daysLeft <= 7;
 
+// A note is bracketed with Cloudflare's email_off comment so its obfuscator
+// leaves any address in the text alone (a note can read "…at x@y.com"). The
+// markers are literal HTML comments, which can't live as raw <!-- --> inside a
+// JSX expression, so the paragraph is emitted via set:html. escapeHtml matches
+// what `{notes}` did before (& < > → entities); nothing else here is dynamic.
+const escapeHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const notesHtml = notes ? `<!--email_off-->${escapeHtml(notes)}<!--/email_off-->` : '';
+
 const chip =
   status === 'closed' ? { text: 'CLOSED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
   : status === 'future' ? { text: opensLabel ? `OPENS ${opensLabel.toUpperCase()}` : 'OPENING SOON', bg: 'rgba(14,140,100,0.12)', fg: '#0E8C64' }
@@ -127,7 +135,7 @@ const chip =
         <div class="sabd-mono sabd-section-label">ABOUT THIS {typeLabel}</div>
         <div class="sabd-about">
           <p>{about}</p>
-          {notes && <p><!--email_off-->{notes}<!--/email_off--></p>}
+          {notes && <p set:html={notesHtml} />}
         </div>
       </div>
     )}
