@@ -460,9 +460,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           </div>
         )}
 
-        {/* Program rows */}
+        {/* Program rows. Extra gap only when this table follows the
+            scholarship one; otherwise keep the stylesheet's gap so the top
+            rule never sits flush against the Retake / Browse buttons. */}
         {showPrograms && programResults && programResults.length > 0 && (
-          <div className="sabm-table" style={{ marginTop: showScholarships && scholarshipResults && scholarshipResults.length > 0 ? 40 : 0 }}>
+          <div
+            className="sabm-table"
+            style={showScholarships && scholarshipResults && scholarshipResults.length > 0 ? { marginTop: 48 } : undefined}
+          >
             {showScholarships && <p className="sabl-mono sabm-table-label">RESEARCH PROGRAMS</p>}
             {programResults.map((p, index) => (
               <ResultRow
