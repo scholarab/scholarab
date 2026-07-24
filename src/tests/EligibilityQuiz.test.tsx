@@ -5,17 +5,30 @@ import type { ConfidenceTier } from '../lib/eligibility-types'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
-const { mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti } = vi.hoisted(() => ({
+const {
+  mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti,
+  mockGetSavedPrograms, mockToggleSavedProgram, mockMatchPrograms,
+} = vi.hoisted(() => ({
   mockMatchAll:     vi.fn(() => [] as Array<{ id: number; confidence: number; tier: ConfidenceTier }>),
   mockGetSaved:     vi.fn(() => [] as number[]),
   mockToggleSaved:  vi.fn(),
   mockShowConfetti: vi.fn(),
+  mockGetSavedPrograms:   vi.fn(() => [] as number[]),
+  mockToggleSavedProgram: vi.fn(),
+  mockMatchPrograms:      vi.fn(() => [] as Array<Record<string, unknown>>),
 }))
 
 // matchPrograms (plural) is what the component actually imports — a mock named
 // matchProgram would leave it undefined and crash any program-results path.
-vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll, matchPrograms: vi.fn(() => []) }))
-vi.mock('../lib/tracker.ts',          () => ({ getSaved: mockGetSaved, toggleSaved: mockToggleSaved }))
+vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll, matchPrograms: mockMatchPrograms }))
+// Programs use the separate saved-programs key — mock both pairs or the
+// component's useState initialiser calls undefined and every render crashes.
+vi.mock('../lib/tracker.ts',          () => ({
+  getSaved: mockGetSaved,
+  toggleSaved: mockToggleSaved,
+  getSavedPrograms: mockGetSavedPrograms,
+  toggleSavedProgram: mockToggleSavedProgram,
+}))
 vi.mock('../lib/utils.ts',            async (importOriginal) => ({
   ...(await importOriginal<typeof import('../lib/utils')>()),
   showConfetti: mockShowConfetti,
@@ -43,8 +56,8 @@ function clickTile(label: string) {
 }
 
 /** Go through all 6 questions and reach the results screen. */
-function advanceToResults() {
-  clickTile('Scholarships')            // Q1 searchType
+function advanceToResults(searchType: 'Scholarships' | 'Research Programs' | 'Both' = 'Scholarships') {
+  clickTile(searchType)                // Q1 searchType
   clickTile('Grade 12')                // Q2 grade
   clickTile('Medicine Hat')            // Q3 city
   clickTile('Still figuring it out')   // Q4 field
@@ -58,7 +71,9 @@ beforeEach(() => {
   vi.useFakeTimers()
   vi.clearAllMocks()
   mockGetSaved.mockReturnValue([])
+  mockGetSavedPrograms.mockReturnValue([])
   mockMatchAll.mockReturnValue([])
+  mockMatchPrograms.mockReturnValue([])
   localStorage.clear()
 })
 
@@ -321,6 +336,29 @@ describe('Results', () => {
     advanceToResults()
     fireEvent.click(screen.getByRole('button', { name: /save scholarship/i }))
     expect(mockToggleSaved).toHaveBeenCalledWith(1)
+  })
+
+  it('program save button calls toggleSavedProgram, not toggleSaved', () => {
+    mockMatchPrograms.mockReturnValue([{
+      id: 42, name: 'Save Test Program', provider: 'U of A', url: 'https://example.com',
+      paid: true, stipend: '$3,000 stipend', category: 'STEM research', deadline: null,
+    }])
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    advanceToResults('Research Programs')
+    fireEvent.click(screen.getByRole('button', { name: /save program/i }))
+    expect(mockToggleSavedProgram).toHaveBeenCalledWith(42)
+    expect(mockToggleSaved).not.toHaveBeenCalled()
+  })
+
+  it('shows a paid chip and stipend note for paid programs', () => {
+    mockMatchPrograms.mockReturnValue([{
+      id: 43, name: 'Paid Program', provider: 'U of C', url: 'https://example.com',
+      paid: true, stipend: '$3,000 stipend', category: null, deadline: null,
+    }])
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    advanceToResults('Research Programs')
+    expect(screen.getByText('$ PAID')).toBeTruthy()
+    expect(screen.getByText('$3,000 stipend')).toBeTruthy()
   })
 
   it('showConfetti is called when saving a scholarship', () => {

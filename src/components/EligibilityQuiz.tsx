@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback, useEffect, useRef, type ReactNode } fro
 import type { Scholarship, Program } from '../lib/data-loader'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
-import { getSaved, toggleSaved } from '../lib/tracker.ts'
+import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti, generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
 
@@ -336,6 +336,15 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     setSavedIds(next)
   }, [])
 
+  // Programs have their own shortlist key, read by the /saved page
+  const [savedProgramIds, setSavedProgramIds] = useState<Set<number>>(() => new Set(getSavedPrograms()))
+  const handleToggleSaveProgram = useCallback((id: number, el?: Element | null) => {
+    toggleSavedProgram(id)
+    const next = new Set(getSavedPrograms())
+    if (next.has(id)) showConfetti(el)
+    setSavedProgramIds(next)
+  }, [])
+
   // Hide the static match-page intro when results are shown
   useEffect(() => {
     document.body.classList.toggle('quiz-results', step >= QUESTIONS.length)
@@ -362,13 +371,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     return (
       <div className="quiz-results-in">
         {/* Segmented progress — all filled */}
-        <div className="sabm-progress" style={{ marginTop: 40 }}>
+        <div className="sabm-progress" style={{ marginTop: 4 }}>
           {QUESTIONS.map((_, i) => (
             <div key={i} className="sabm-seg done" />
           ))}
         </div>
 
-        <div className="sabm-kicker sabl-mono" style={{ marginTop: 28 }}>
+        <div className="sabm-kicker sabl-mono" style={{ marginTop: 24 }}>
           <span className="sabm-kicker-dot" aria-hidden="true"></span>
           <span>YOUR MATCHES</span>
         </div>
@@ -467,8 +476,28 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   {p.category && <span className="sabm-tier sabm-due">{p.category}</span>}
                   {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && <span className="sabm-tier sabm-due">Due {formatDue(p.deadline)}</span>}
                 </>}
-                amount={p.paid ? (p.stipend ?? 'Paid') : <span className="sabm-amount-muted">Unpaid</span>}
-                actions={
+                amount={
+                  // Stipends are free text ("Paid internship", "$3,000 stipend"),
+                  // so they get a chip plus a small note instead of the serif
+                  // dollar treatment scholarship amounts use.
+                  <div className="sabm-amount-cell">
+                    {p.paid
+                      ? <>
+                          <span className="sabl-mono sabm-paid-chip">$ PAID</span>
+                          {p.stipend && <span className="sabm-paid-note" title={p.stipend}>{p.stipend}</span>}
+                        </>
+                      : <span className="sabm-amount-muted">Unpaid</span>}
+                  </div>
+                }
+                actions={<>
+                  <button
+                    onClick={(e) => handleToggleSaveProgram(p.id, e.currentTarget)}
+                    aria-label={savedProgramIds.has(p.id) ? 'Remove from saved' : 'Save program'}
+                    aria-pressed={savedProgramIds.has(p.id)}
+                    className={`sabl-save${savedProgramIds.has(p.id) ? ' on' : ''}`}
+                  >
+                    {savedProgramIds.has(p.id) ? '★' : '☆'}
+                  </button>
                   <a
                     href={p.url}
                     target="_blank"
@@ -477,7 +506,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     className="sabl-apply"
                     onClick={() => sendEvent('apply_click', 'program', p.id)}
                   >Apply →</a>
-                }
+                </>}
               />
             ))}
           </div>

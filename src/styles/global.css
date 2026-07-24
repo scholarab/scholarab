@@ -561,7 +561,7 @@ body.quiz-results #match-divider {
 }
 
 /* ══ "ScholarAB Match" design (claude.ai/design) — quiz island ══ */
-.sabm-body { padding: 72px 48px 110px; width: 100%; box-sizing: border-box; }
+.sabm-body { padding: 36px 48px 110px; width: 100%; box-sizing: border-box; }
 .sabm-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 13px; color: #0E8C64; letter-spacing: 0.06em; }
 .sabm-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
 .sabm-h1 {
@@ -572,7 +572,7 @@ body.quiz-results #match-divider {
 .sabm-sub { font-size: 17px; line-height: 1.55; color: rgba(20,25,21,0.65); margin: 18px 0 0; max-width: 560px; }
 .sabm-trust { display: flex; gap: 26px; margin-top: 16px; font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); flex-wrap: wrap; }
 
-.sabm-progress-wrap { margin-top: 52px; padding-top: 28px; border-top: 2px solid #141915; }
+.sabm-progress-wrap { margin-top: 34px; padding-top: 24px; border-top: 2px solid #141915; }
 .sabm-progress { display: flex; gap: 8px; max-width: 420px; }
 .sabm-seg { flex: 1; height: 5px; border-radius: 100px; background: rgba(20,25,21,0.12); }
 .sabm-seg.done { background: #0E8C64; }
@@ -646,8 +646,10 @@ body.quiz-results #match-divider {
 
 .sabm-table { border-top: 2px solid #141915; margin-top: 32px; }
 .sabm-table-label { font-size: 12px; letter-spacing: 0.06em; color: rgba(20,25,21,0.5); padding: 14px 0 0; margin: 0; }
+/* Fixed amount + action tracks so every row lines up, including across the
+   scholarship and program tables (each row is its own grid) */
 .sabm-row {
-  display: grid; grid-template-columns: 64px 1fr auto auto; gap: 28px; align-items: center;
+  display: grid; grid-template-columns: 64px minmax(0, 1fr) 152px 108px; gap: 24px; align-items: center;
   padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
 }
 .sabm-row:hover { background: rgba(47,211,160,0.07); }
@@ -663,22 +665,32 @@ body.quiz-results #match-divider {
 .sabm-tier-strong { background: rgba(47,211,160,0.18); color: #0A6B4D; }
 .sabm-tier-good { background: rgba(20,25,21,0.07); color: rgba(20,25,21,0.7); }
 .sabm-tier-possible, .sabm-due { border: 1px solid rgba(20,25,21,0.2); color: rgba(20,25,21,0.55); }
-.sabm-row-amount { font-family: 'Instrument Serif', serif; font-size: 28px; text-align: right; color: #0E8C64; }
+.sabm-row-amount { font-family: 'Instrument Serif', serif; font-size: 28px; line-height: 1.15; text-align: right; color: #0E8C64; }
 .sabm-amount-muted { font-family: 'Archivo', sans-serif; font-size: 13px; color: rgba(20,25,21,0.45); }
-.sabm-row-actions { display: flex; align-items: center; gap: 14px; }
+.sabm-amount-cell { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+.sabm-paid-chip {
+  font-size: 11.5px; letter-spacing: 0.05em; padding: 5px 11px; border-radius: 100px;
+  background: rgba(14,140,100,0.12); color: #0E8C64; white-space: nowrap;
+}
+.sabm-paid-note {
+  font-family: 'Archivo', sans-serif; font-size: 12.5px; line-height: 1.35;
+  color: rgba(20,25,21,0.5); text-align: right;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.sabm-row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
 
 @media (prefers-reduced-motion: reduce) {
   .sabm-opt, .sabm-opt:hover, .sabm-opt-selected { transform: none; transition: none; }
 }
 @media (max-width: 900px) {
-  .sabm-body { padding: 40px 20px 64px; }
+  .sabm-body { padding: 24px 20px 64px; }
   .sabm-opts { grid-template-columns: 1fr; }
   .sabm-value-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
   .sabm-value-note { border-left: none; padding-left: 0; border-top: 1px solid rgba(242,240,233,0.18); padding-top: 20px; }
-  .sabm-row { grid-template-columns: 1fr auto; gap: 6px 16px; padding: 20px 4px; }
+  .sabm-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; padding: 20px 4px; }
   .sabm-row-num { display: none; }
   .sabm-row-main { grid-column: 1; }
-  .sabm-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; }
+  .sabm-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; max-width: 140px; }
   .sabm-row-actions { grid-column: 1 / -1; justify-content: flex-start; margin-top: 4px; }
 }
 
