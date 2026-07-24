@@ -22,17 +22,27 @@ const scholarships: Scholarship[] = JSON.parse(readFileSync(filePath, 'utf8'));
 // OF their deadline day). ISO strings compare correctly as strings.
 const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Edmonton' }).format(new Date());
 
+// Only compare deadlines that are actually dates. A bare `deadline < today`
+// string compare treats anything sorting below "2026-..." as expired, so a
+// value like "15 May 2026" or "01-05-2026" would silently delist the entry
+// (letters sort above digits, which is the only reason "TBA"/"Ongoing" were
+// safe). validate-data enforces ISO for scholarships, so this guards the gap
+// between a hand edit and the build that rejects it — and matches the guards
+// the programs loop and the SQL below already have.
+const isDated = (d?: string): boolean => !!d && /^\d{4}-\d{2}-\d{2}$/.test(d);
+const isPast = (d?: string): boolean => isDated(d) && d! < today;
+
 let changed = 0;
 
 for (const s of scholarships) {
   if (s.active === true) {
-    if (s.deadline && s.deadline < today) {
+    if (isPast(s.deadline)) {
       s.active = false;
       changed++;
       console.log(`Expired: [${s.id}] ${s.title} (deadline: ${s.deadline})`);
     }
   } else if (s.active === false && s.openDate) {
-    if (s.openDate <= today && !(s.deadline && s.deadline < today)) {
+    if (s.openDate <= today && !isPast(s.deadline)) {
       s.active = true;
       changed++;
       console.log(`Opened: [${s.id}] ${s.title} (openDate: ${s.openDate})`);

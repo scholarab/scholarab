@@ -43,7 +43,11 @@ async function limited(request: Request): Promise<boolean> {
   try {
     if (await isRateLimited(`unsub:${ip}`, 10, 15 * 60 * 1000)) return true
     await recordHit(`unsub:${ip}`)
-  } catch { /* fail open if rate_limit table not yet migrated */ }
+  } catch (e) {
+    // Fail open if the rate_limit table isn't migrated yet — but say so, or
+    // the limiter can stop working here and nothing anywhere reports it.
+    console.error('[rate-limit] unsubscribe check failed, allowing request:', e)
+  }
   return false
 }
 

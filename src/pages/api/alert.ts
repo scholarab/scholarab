@@ -14,7 +14,11 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     if (await isRateLimited(`alert:${ip}`, 20, 15 * 60 * 1000))
       return jsonError('Too many requests — try again later', 429)
-  } catch { /* fail open if rate_limit table not yet migrated */ }
+  } catch (e) {
+    // Fail open if the rate_limit table isn't migrated yet — but say so, or
+    // the limiter can stop working here and nothing anywhere reports it.
+    console.error('[rate-limit] alert check failed, allowing request:', e)
+  }
   let body: unknown
   try { body = await request.json() } catch { return jsonError('Invalid JSON', 400) }
 

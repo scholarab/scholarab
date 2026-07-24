@@ -60,6 +60,12 @@ jobs:
       - name: Typecheck
         run: npx tsc --noEmit
 
+      # tsconfig.json excludes "scripts", so the line above never covered the
+      # build/automation scripts — including the ones that email subscribers
+      # and prune tables. tsconfig.scripts.json picks them up.
+      - name: Typecheck scripts
+        run: npm run type-check:scripts
+
       # Last so a rejected push can't hide validation results. The commit tag
       # skips GitHub Actions only — Cloudflare Pages still sees the push and
       # deploys the fresh data. Do NOT tag it to skip "ci": Cloudflare honors
