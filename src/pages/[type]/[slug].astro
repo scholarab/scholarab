@@ -302,7 +302,6 @@ const breadcrumbJson = {
   ogImage={'ogImage' in d ? d.ogImage : undefined}
   currentPath={d.currentPath}
   robots={d.status === 'closed' ? 'noindex' : undefined}
-  hideChrome
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(d.ldJson)} slot="head" />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />

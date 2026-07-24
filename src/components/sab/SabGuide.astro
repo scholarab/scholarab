@@ -50,7 +50,6 @@ const keepReading = guides.filter(g => g.slug !== guide.slug).slice(0, 3);
   ogUrl={canonical}
   canonical={canonical}
   currentPath="/guides"
-  hideChrome
 >
   <SabFonts italic slot="head" />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleJson)} slot="head" />

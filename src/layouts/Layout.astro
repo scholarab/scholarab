@@ -1,5 +1,4 @@
 ---
-import Nav from '../components/Nav.astro';
 import BottomNav from '../components/BottomNav.astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
@@ -12,12 +11,9 @@ interface Props {
   ogUrl?: string;
   canonical?: string;
   currentPath: string;
-  containerClass?: string;
   robots?: string;
   /** Absolute URL of a page-specific OG image; falls back to the site-wide one. */
   ogImage?: string;
-  /** Full-bleed design pages: skip the shared Nav and desktop footer (BottomNav stays for mobile). */
-  hideChrome?: boolean;
 }
 
 const {
@@ -28,29 +24,15 @@ const {
   ogUrl,
   canonical,
   currentPath,
-  containerClass = 'max-w-6xl',
   robots,
   ogImage = 'https://www.scholarab.ca/og-image.png',
-  hideChrome = false,
 } = Astro.props;
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <!-- Flash-prevention: set theme class synchronously before any CSS loads -->
-    <script is:inline>
-      (function () {
-        try {
-          const t = localStorage.getItem('theme') ||
-            (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-          document.documentElement.classList.add('theme-' + t);
-        } catch {
-          document.documentElement.classList.add('theme-dark');
-        }
-      })();
-    </script>
-    <meta name="color-scheme" content="dark light" />
+    <meta name="color-scheme" content="light" />
     <meta name="google-site-verification" content="nhpc-sXNyJgfEMBonhftRYTiJpQMP0NDTVRDsIy2Yk4" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
@@ -87,25 +69,10 @@ const {
   </head>
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
 
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-9999 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:var(--brand);color:var(--text-on-brand);">Skip to content</a>
-    {!hideChrome && <Nav currentPath={currentPath} />}
-    <main id="main-content" class={hideChrome ? 'w-full flex-1' : `${containerClass} mx-auto w-full flex-1 px-4 pb-28 md:pb-8 md:px-8`}>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-9999 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#141915;color:#FAF7F0;">Skip to content</a>
+    <main id="main-content" class="w-full flex-1">
       <slot />
     </main>
-    {!hideChrome && <footer class="hidden md:block mt-8 relative" style="z-index:1; border-top: 0.5px solid var(--footer-border);">
-      {/* Desktop footer */}
-      <div class="flex max-w-6xl mx-auto px-4 py-6 md:px-8 justify-center items-center gap-4 text-sm text-faint">
-        <span>© 2026 ScholarAB</span>
-        <div class="flex items-center gap-4">
-          <a href="https://www.instagram.com/scholarab.ca" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="ScholarAB on Instagram" class="flex items-center hover:text-secondary transition-colors">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="https://www.tiktok.com/@scholarab" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="ScholarAB on TikTok" class="flex items-center hover:text-secondary transition-colors">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
-          </a>
-        </div>
-      </div>
-    </footer>}
     <BottomNav currentPath={currentPath} />
     <script>
       // Haptic on filter/sort pills and bn-tabs
@@ -118,26 +85,6 @@ const {
       // If navigation happens before cleanup, the body stays blocked. Reset it on every swap.
       document.addEventListener('astro:before-swap', () => {
         document.body.style.pointerEvents = '';
-      });
-
-      // Re-apply theme class after every Astro page transition (ClientRouter replaces <html>)
-      document.addEventListener('astro:after-swap', () => {
-        try {
-          const t = localStorage.getItem('theme') ||
-            (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-          document.documentElement.classList.remove('theme-dark', 'theme-light');
-          document.documentElement.classList.add('theme-' + t);
-        } catch { /* localStorage unavailable */ }
-      });
-
-      // Keep theme in sync with OS preference changes (only if user hasn't overridden)
-      matchMedia('(prefers-color-scheme: dark)').addEventListener('change', async (e) => {
-        try {
-          if (!localStorage.getItem('theme')) {
-            const { applyTheme } = await import('../lib/themeClient.ts');
-            applyTheme(e.matches ? 'dark' : 'light');
-          }
-        } catch { /* localStorage unavailable */ }
       });
 
       // Service worker registration
@@ -254,5 +201,15 @@ const {
         }, { passive: true });
       })();
     </script>
+
+    <style is:global>
+      /* Every page under this layout is the fixed editorial palette, so the
+         canvas is pinned here rather than left to global.css's themeable
+         `html { background: var(--bg-page) }`. Pages already pin `body` via
+         `body:has(#sab-*)`; `html` is what shows through on overscroll.
+         global.css keeps its token rule for /admin, which does not use this
+         layout. */
+      html { background-color: #FAF7F0; }
+    </style>
   </body>
 </html>

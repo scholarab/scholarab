@@ -65,12 +65,14 @@ const activeTab = currentPath.startsWith('/saved') ? 'saved'
 <script>
   const IDS = ['bn-home', 'bn-scholarships', 'bn-programs', 'bn-saved', 'bn-about'];
 
-  function getBrandColor(): string {
-    return getComputedStyle(document.documentElement).getPropertyValue('--brand').trim() || '#22d3a5';
-  }
+  // The editorial deep green, not the bright #2FD3A0 mint: the bar is cream,
+  // and mint on #FAF7F0 is ~1.7:1. #0E8C64 is the palette's own light-surface
+  // green (SabDetail uses it for chips on cream) and clears 4.5:1. Formerly
+  // read from var(--brand), which flipped with the OS theme.
+  const ACTIVE = '#0E8C64';
 
   function setActive(tabId: string) {
-    const brand = getBrandColor();
+    const brand = ACTIVE;
     IDS.forEach(id => {
       const el = document.getElementById(id);
       if (el) {
@@ -100,16 +102,21 @@ const activeTab = currentPath.startsWith('/saved') ? 'saved'
 </script>
 
 <style is:global>
+  /* Pinned to the editorial palette, not the legacy theme tokens. These used
+     to be var(--nav-glass-bg)/(--bottom-nav-border)/(--bn-tab-color), which
+     still flipped with the visitor's OS theme long after the pages stopped
+     doing so — a light-mode phone got a #f5f5f7 grey bar under the cream
+     canvas and the #0B1512 footer band. */
   .bottom-nav-bar {
-    background: var(--nav-glass-bg);
-    border-top: 1px solid var(--bottom-nav-border);
+    background: rgba(250, 247, 240, 0.92);
+    border-top: 1px solid rgba(20, 25, 21, 0.12);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     pointer-events: auto;
     will-change: transform;
   }
   .bn-tab {
-    color: var(--bn-tab-color);
+    color: rgba(20, 25, 21, 0.55);
     background: none;
     border: none;
     cursor: pointer;
