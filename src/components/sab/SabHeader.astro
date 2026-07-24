@@ -48,13 +48,20 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
     <a href="/match" class="sabh-cta">Find my match</a>
   </div>
 </div>
-<div class="sabh-ticker-band">
+{/*
+  The band is decorative: both destinations are already in navItems above, so
+  hiding it costs assistive tech nothing. It is aria-hidden AND its links are
+  tabindex="-1" — aria-hidden alone leaves elements in the tab order, which
+  would strand a keyboard user on a link screen readers report as absent
+  (WCAG 4.1.2). Without both, each half put 8 duplicate stops on all 270 pages.
+*/}
+<div class="sabh-ticker-band" aria-hidden="true">
   <div class="sabh-ticker">
-    {[false, true].map(hidden => (
-      <span class="sabh-ticker-half" aria-hidden={hidden || undefined}>
+    {[false, true].map(dup => (
+      <span class="sabh-ticker-half" data-dup={dup || undefined}>
         {tickerItems.map(t => (
           <span class="sabh-ticker-item">
-            <a href={t.href} draggable="false">{t.label}</a>{' '}<span>{t.rest}</span>
+            <a href={t.href} draggable="false" tabindex="-1">{t.label}</a>{' '}<span>{t.rest}</span>
           </span>
         ))}
       </span>
@@ -110,8 +117,10 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
     animation-play-state: paused;
   }
   /* The duplicate half exists only to make the loop seamless; keep it out
-     of selections so a long drag or select-all can't copy messages twice. */
-  .sabh-ticker-half[aria-hidden] { user-select: none; }
+     of selections so a long drag or select-all can't copy messages twice.
+     Keyed off data-dup rather than aria-hidden: that attribute now sits on
+     the whole band, so it no longer distinguishes the two halves. */
+  .sabh-ticker-half[data-dup] { user-select: none; }
   @keyframes sabh-tick {
     to { transform: translateX(-50%); }
   }
