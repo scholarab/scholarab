@@ -57,7 +57,7 @@ const scholarships = raw.map(s => ({
         <div class="sabl-empty" style="margin-top:64px;">
           <div class="sabl-empty-title">Couldn't load scholarships.</div>
           <div class="sabl-empty-sub">The database may be temporarily unavailable.</div>
-          <a href="/scholarships" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
+          <a href="/scholarships/" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
         </div>
       ) : (
         <ScholarshipDirectory items={scholarships} />

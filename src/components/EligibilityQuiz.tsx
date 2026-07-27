@@ -409,10 +409,10 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <div className="sabm-results-actions">
             <button onClick={reset} className="sabm-btn-outline">Retake quiz</button>
             {showScholarships && (
-              <a href="/scholarships" className="sabm-btn-accent">Browse all scholarships →</a>
+              <a href="/scholarships/" className="sabm-btn-accent">Browse all scholarships →</a>
             )}
             {showPrograms && !showScholarships && (
-              <a href="/programs" className="sabm-btn-accent">Browse all programs →</a>
+              <a href="/programs/" className="sabm-btn-accent">Browse all programs →</a>
             )}
           </div>
         </div>
@@ -429,7 +429,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   rank={index + 1}
                   delay={Math.min(index * 40, 320)}
                   title={s.title}
-                  titleHref={`/scholarships/${generateSlug(s.title)}`}
+                  titleHref={`/scholarships/${generateSlug(s.title)}/`}
                   subtitle={s.audience}
                   tags={<>
                     <span className={style.badge}>{style.label}</span>
@@ -475,7 +475,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 rank={index + 1}
                 delay={Math.min(index * 40, 320)}
                 title={p.name}
-                titleHref={`/programs/${generateSlug(p.name)}`}
+                titleHref={`/programs/${generateSlug(p.name)}/`}
                 subtitle={p.provider}
                 tags={<>
                   {p.category && <span className="sabm-tier sabm-due">{p.category}</span>}

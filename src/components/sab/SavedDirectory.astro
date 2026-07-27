@@ -48,8 +48,8 @@ const { initialScholarships, initialPrograms } = Astro.props;
       Bookmark scholarships and programs to track their deadlines in one place.
     </div>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-      <a href="/scholarships" class="sabm-btn-accent">Browse scholarships</a>
-      <a href="/programs" class="sabm-btn-outline" style="text-decoration:none;display:inline-block">Browse programs</a>
+      <a href="/scholarships/" class="sabm-btn-accent">Browse scholarships</a>
+      <a href="/programs/" class="sabm-btn-outline" style="text-decoration:none;display:inline-block">Browse programs</a>
     </div>
   </div>
 
@@ -83,7 +83,7 @@ const { initialScholarships, initialPrograms } = Astro.props;
                   </span>
                   <span class={chip.cls} data-sv-chip>{chip.label}</span>
                 </div>
-                <a href={`/scholarships/${generateSlug(s.title)}`} class="sabl-name">{s.title}</a>
+                <a href={`/scholarships/${generateSlug(s.title)}/`} class="sabl-name">{s.title}</a>
                 <div class="sabl-amount">{s.amount}</div>
                 {s.audience && <div class="sabl-blurb">{s.audience}</div>}
                 <div class="sabl-card-foot">
@@ -132,7 +132,7 @@ const { initialScholarships, initialPrograms } = Astro.props;
                   <span class="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
                   <span class={chip.cls} data-sv-chip>{chip.label}</span>
                 </div>
-                <a href={`/programs/${generateSlug(p.name)}`} class="sabl-name">
+                <a href={`/programs/${generateSlug(p.name)}/`} class="sabl-name">
                   {p.emoji && <span class="sabl-name-emoji" aria-hidden="true">{`${p.emoji} `}</span>}
                   {p.name}
                 </a>
@@ -146,7 +146,7 @@ const { initialScholarships, initialPrograms } = Astro.props;
                   </span>
                   <div class="sabl-card-actions">
                     <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
-                    <a href={`/programs/${generateSlug(p.name)}`} class="sabl-apply">Details →</a>
+                    <a href={`/programs/${generateSlug(p.name)}/`} class="sabl-apply">Details →</a>
                   </div>
                 </div>
               </div>

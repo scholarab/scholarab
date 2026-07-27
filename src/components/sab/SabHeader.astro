@@ -13,21 +13,26 @@ const { currentPath } = Astro.props;
 
 const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'Scholarships', href: '/scholarships' },
-  { label: 'Programs', href: '/programs' },
-  { label: 'Match', href: '/match' },
-  { label: 'Saved', href: '/saved' },
-  { label: 'About', href: '/about' },
+  { label: 'Scholarships', href: '/scholarships/' },
+  { label: 'Programs', href: '/programs/' },
+  { label: 'Match', href: '/match/' },
+  { label: 'Saved', href: '/saved/' },
+  { label: 'About', href: '/about/' },
 ];
 
+// Compare with a normalized trailing slash on both sides. The nav hrefs carry
+// one (bare paths 308-redirect in production, so linking to them split every
+// page across two indexed URLs), but callers pass currentPath either way —
+// a bare '/scholarships' must still light up the '/scholarships/' tab.
+const withSlash = (p: string) => (p.endsWith('/') ? p : p + '/');
 const isActive = (href: string) =>
-  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+  href === '/' ? currentPath === '/' : withSlash(currentPath).startsWith(withSlash(href));
 
 // Scrolling announcement band (fishback2026.com-style): a short pair of
 // linked CTAs repeated to fill the loop.
 const tickerPair = [
-  { label: 'Find your match', rest: 'in 60 seconds', href: '/match' },
-  { label: 'Browse scholarships', rest: 'open right now', href: '/scholarships' },
+  { label: 'Find your match', rest: 'in 60 seconds', href: '/match/' },
+  { label: 'Browse scholarships', rest: 'open right now', href: '/scholarships/' },
 ];
 const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
 ---
@@ -45,7 +50,7 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
         aria-current={isActive(n.href) ? 'page' : undefined}
       >{n.label}</a>
     ))}
-    <a href="/match" class="sabh-cta">Find my match</a>
+    <a href="/match/" class="sabh-cta">Find my match</a>
   </div>
 </div>
 {/*

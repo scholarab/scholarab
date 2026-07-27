@@ -58,7 +58,7 @@ const programs = raw.map(p => ({
         <div class="sabl-empty" style="margin-top:64px;">
           <div class="sabl-empty-title">Couldn't load programs.</div>
           <div class="sabl-empty-sub">The database may be temporarily unavailable.</div>
-          <a href="/programs" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
+          <a href="/programs/" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
         </div>
       ) : (
         <ProgramDirectory items={programs} />

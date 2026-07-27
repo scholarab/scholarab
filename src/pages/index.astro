@@ -135,10 +135,10 @@ const matchGroups = [
               ScholarAB tracks scholarships and research programs for Alberta high school students, with every deadline checked by hand. Free, no account needed.
             </p>
             <div class="sab-hero-ctas">
-              <a href="/scholarships" class="sab-btn-accent">
+              <a href="/scholarships/" class="sab-btn-accent">
                 Browse {scholarshipCount} scholarships <span style="font-size:18px;">→</span>
               </a>
-              <a href="/programs" class="sab-btn-outline">
+              <a href="/programs/" class="sab-btn-outline">
                 Explore programs
               </a>
             </div>
@@ -172,12 +172,12 @@ const matchGroups = [
             <div class="sab-mono sab-eyebrow-urgent">⏳ TIME-SENSITIVE</div>
             <h2 class="sab-h2">Closing this week</h2>
           </div>
-          <a href="/scholarships" class="sab-view-all">View all deadlines →</a>
+          <a href="/scholarships/" class="sab-view-all">View all deadlines →</a>
         </div>
 
         <div class="sab-closing-table" id="closing-soon-list">
           {closingSoon.map((s, i) => (
-            <a href={`/scholarships/${generateSlug(s.title)}`} class="sab-closing-row" data-deadline={s.deadline}>
+            <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-closing-row" data-deadline={s.deadline}>
               <div class="sab-row-num sab-mono">{String(i + 1).padStart(2, '0')}</div>
               <div class="sab-row-main">
                 <div class="sab-row-name">{s.title}</div>
@@ -200,7 +200,7 @@ const matchGroups = [
         </div>
         <div class="sab-cat-grid">
           {categories.map(c => (
-            <a href={`/scholarships?category=${encodeURIComponent(c.name)}`} class="sab-cat-card">
+            <a href={`/scholarships/?category=${encodeURIComponent(c.name)}`} class="sab-cat-card">
               <div class="sab-cat-top">
                 <span class="sab-cat-name">
                   {categoryEmoji(c.name) && <span class="sab-cat-emoji" aria-hidden="true">{categoryEmoji(c.name)} </span>}{c.name}

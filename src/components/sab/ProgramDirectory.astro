@@ -114,7 +114,7 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
             <span class="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
             {p.paid && <span class="sabl-mono sabl-paid">$ PAID</span>}
           </div>
-          <a href={`/programs/${slug}`} class="sabl-name">
+          <a href={`/programs/${slug}/`} class="sabl-name">
             {p.emoji && <span class="sabl-name-emoji" aria-hidden="true">{`${p.emoji} `}</span>}
             {p.name}
           </a>
@@ -137,7 +137,7 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
                 aria-label={`Save ${p.name}`}
                 aria-pressed="false"
               >☆</button>
-              <a href={`/programs/${slug}`} class="sabl-apply">Details →</a>
+              <a href={`/programs/${slug}/`} class="sabl-apply">Details →</a>
             </div>
           </div>
         </div>

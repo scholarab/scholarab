@@ -131,7 +131,7 @@ const totalOpen = initial.reduce(
             </span>
             <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
           </div>
-          <a href={`/scholarships/${s._slug ?? generateSlug(s.title)}`} class="sabl-name">{s.title}</a>
+          <a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a>
           <div class="sabl-amount">{s.amount}</div>
           {s.audience && <div class="sabl-blurb">{s.audience}</div>}
           <div class="sabl-card-foot">

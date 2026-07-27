@@ -140,7 +140,7 @@ if (kind === 'scholarship') {
   const deadlineClause = s.deadline ? ` before ${formatDate(s.deadline)}` : '';
 
   d = {
-    currentPath: '/scholarships',
+    currentPath: '/scholarships/',
     pageTitle: `${s.title} | ScholarAB | Alberta Scholarships`,
     description,
     canonical,
@@ -225,7 +225,7 @@ if (kind === 'scholarship') {
   const deadlineClause = hasDate ? ` before ${formatDate(p.deadline)}` : '';
 
   d = {
-    currentPath: '/programs',
+    currentPath: '/programs/',
     pageTitle: `${p.name} | ScholarAB | Alberta Research Programs`,
     description: metaDescription,
     canonical,
@@ -286,7 +286,7 @@ const breadcrumbJson = {
   '@type': 'BreadcrumbList',
   'itemListElement': [
     { '@type': 'ListItem', 'position': 1, 'name': 'ScholarAB', 'item': 'https://www.scholarab.ca' },
-    { '@type': 'ListItem', 'position': 2, 'name': d.breadcrumbName, 'item': `https://www.scholarab.ca${d.currentPath}/` },
+    { '@type': 'ListItem', 'position': 2, 'name': d.breadcrumbName, 'item': `https://www.scholarab.ca${d.currentPath}` },
     { '@type': 'ListItem', 'position': 3, 'name': d.itemName, 'item': d.canonical },
   ],
 };
@@ -330,8 +330,8 @@ const breadcrumbJson = {
       backHref={d.currentPath}
       backLabel={`Back to ${d.breadcrumbName === 'Research Programs' ? 'Programs' : 'Scholarships'}`}
       position={position}
-      prevHref={`${d.currentPath}/${prevSlug}`}
-      nextHref={`${d.currentPath}/${nextSlug}`}
+      prevHref={`${d.currentPath}${prevSlug}/`}
+      nextHref={`${d.currentPath}${nextSlug}/`}
       facts={d.facts}
       eligibility={d.eligibility}
       about={d.about}
