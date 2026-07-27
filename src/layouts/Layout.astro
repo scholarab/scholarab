@@ -14,6 +14,8 @@ interface Props {
   robots?: string;
   /** Absolute URL of a page-specific OG image; falls back to the site-wide one. */
   ogImage?: string;
+  /** og:type — 'article' for the guides, 'website' everywhere else. */
+  ogType?: string;
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   currentPath,
   robots,
   ogImage = 'https://www.scholarab.ca/og-image.png',
+  ogType = 'website',
 } = Astro.props;
 ---
 
@@ -38,7 +41,7 @@ const {
     <meta name="description" content={description} />
     <meta property="og:title" content={ogTitle ?? title} />
     <meta property="og:description" content={ogDescription ?? description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     {ogUrl && <meta property="og:url" content={ogUrl} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
