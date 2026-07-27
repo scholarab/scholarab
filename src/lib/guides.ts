@@ -18,11 +18,11 @@ export const guides: GuideMeta[] = [
     slug: 'alexander-rutherford-scholarship-guide',
     title: 'The Alexander Rutherford Scholarship, explained',
     description:
-      'Who qualifies for the Alexander Rutherford Scholarship, exactly how much each grade is worth, and how to apply through Alberta Student Aid.',
+      'Up to $2,500 for your Grade 10, 11 and 12 marks. Who qualifies, what each grade pays, when the August 1 application opens, and how to apply through Alberta Student Aid.',
     kicker: 'THE BIG ONE',
     minutes: 6,
     datePublished: '2026-07-19',
-    dateModified: '2026-07-19',
+    dateModified: '2026-07-27',
   },
   {
     slug: 'scholarships-for-grade-12-students-alberta',
