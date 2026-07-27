@@ -262,16 +262,18 @@
     "id": 14,
     "title": "Alexander Rutherford Scholarship",
     "amount": "$2,500",
-    "deadline": "2026-08-31",
+    "deadline": null,
     "audience": "Alberta high school students based on academic averages",
     "url": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
     "category": "Academic",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-07",
     "region": "Alberta",
     "active": true,
     "description": "Alberta's flagship high school scholarship, worth up to $2,500 depending on your averages in Grades 10 through 12. If you only apply for one thing on this site, apply for this.",
     "eligibility": {
       "grades": [
+        "10",
+        "11",
         "12"
       ],
       "schoolBoards": [],
