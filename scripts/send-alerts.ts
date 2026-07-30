@@ -12,6 +12,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const DATABASE_URL = process.env.DATABASE_URL
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 const FROM = process.env.ALERT_FROM_EMAIL ?? 'ScholarAB <alerts@scholarab.ca>'
+// scholarab.ca has no MX record, so replies to the From address bounce.
+const REPLY_TO = process.env.ALERT_REPLY_TO ?? 'contact.scholarab@gmail.com'
 const BASE_URL = process.env.SITE_URL ?? 'https://www.scholarab.ca'
 
 if (!DATABASE_URL) { console.error('DATABASE_URL not set'); process.exit(1) }
@@ -76,7 +78,7 @@ async function sendEmail(to: string, subject: string, html: string): Promise<voi
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: FROM, to: [to], subject, html }),
+    body: JSON.stringify({ from: FROM, to: [to], reply_to: REPLY_TO, subject, html }),
   })
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`)
 }
