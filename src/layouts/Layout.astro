@@ -61,11 +61,12 @@ const {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#2FD3A0" />
-    <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high" />
-    <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/inter-700.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/inter-800.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- No Inter preloads here. Inter is the admin panel's font, and the admin
+         pages build their own <head> rather than using this layout, so these
+         preloaded four unused weights on every public page (500/600/700/800
+         report `unloaded` in document.fonts) and spent a fetchpriority="high"
+         slot racing the Instrument Serif and Archivo faces that actually
+         render. Public pages preload their real faces via SabFonts. -->
     <ClientRouter />
     <slot name="head" />
     <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "bda47a2a06b543d7be56420c5efb42ff"}'></script>
