@@ -153,7 +153,11 @@ export function chipFor(l: Listing, today: Date): Chip {
   if (!l.deadline) {
     return { text: 'OPEN · NO FIXED DATE', bg: 'rgba(14,140,100,0.12)', fg: '#0E8C64', feedBg: 'rgba(47,211,160,0.18)', feedFg: '#2FD3A0', urgent: false }
   }
-  const days = daysUntil(l.deadline, today)
+  return dueChip(daysUntil(l.deadline, today))
+}
+
+/** Shared urgency chip for anything active with a dated deadline. */
+function dueChip(days: number): Chip {
   if (days === 0) {
     return { text: 'CLOSES TODAY', bg: 'rgba(184,84,31,0.14)', fg: RUST, feedBg: 'rgba(184,84,31,0.9)', feedFg: CREAM_ON_RUST, urgent: true }
   }
@@ -294,6 +298,68 @@ export function nearbyListings(items: Listing[], city: string | null): Listing[]
   return items.filter(l => l.region === 'Alberta' || (city !== null && l.region === city))
 }
 
+// ── Research programs (saved-tab support) ─────────────────────────────────────
+// Program deadlines are looser than scholarship ones: the column holds an ISO
+// date, "TBA", "Ongoing", or null. Only a real date is clock-driven.
+
+export interface WireProgram {
+  i: number                 // id
+  n: string                 // name
+  d?: string | null         // deadline: ISO | 'TBA' | 'Ongoing' | null
+  u: string                 // official url
+  c?: string | null         // category
+  pr?: string | null        // provider
+  p?: boolean               // paid
+}
+
+export interface ProgramItem {
+  id: number
+  name: string
+  deadline: string | null
+  url: string
+  category: string | null
+  provider: string | null
+  paid: boolean
+  slug: string
+}
+
+export function expandProgram(w: WireProgram): ProgramItem {
+  return {
+    id: w.i,
+    name: w.n,
+    deadline: w.d ?? null,
+    url: w.u,
+    category: w.c ?? null,
+    provider: w.pr ?? null,
+    paid: w.p === true,
+    slug: slugify(w.n),
+  }
+}
+
+export function isDatedIso(s: string | null | undefined): s is string {
+  return !!s && /^\d{4}-\d{2}-\d{2}$/.test(s)
+}
+
+export type ProgramStatus = 'active' | 'tba' | 'closed'
+
+/** Mirrors list-core.getProgramStatus on the app's own program shape. */
+export function programStatusOf(p: { deadline: string | null }, today: Date): ProgramStatus {
+  if (!isDatedIso(p.deadline)) return 'tba'
+  return today.getTime() > isoToMs(p.deadline) ? 'closed' : 'active'
+}
+
+export function programChipFor(p: { deadline: string | null }, today: Date): Chip {
+  const status = programStatusOf(p, today)
+  if (status === 'closed') {
+    return { text: 'CLOSED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)', feedBg: 'rgba(242,240,233,0.15)', feedFg: '#F2F0E9', urgent: false }
+  }
+  if (status === 'tba') {
+    // "ROLLING" is what the site's saved page calls TBA/Ongoing/no-date
+    return { text: 'ROLLING', bg: 'rgba(14,140,100,0.12)', fg: '#0E8C64', feedBg: 'rgba(47,211,160,0.18)', feedFg: '#2FD3A0', urgent: false }
+  }
+  return dueChip(daysUntil(p.deadline!, today))
+}
+
 // ── Deep links ────────────────────────────────────────────────────────────────
 
 export type AppTab = 'feed' | 'due' | 'match' | 'saved' | 'me'
@@ -410,10 +476,11 @@ export function deadlineWeeks(today: Date, deadlines: string[]): boolean[] {
 /**
  * How much of the run-up to a deadline is already gone, as a 0–100 percentage.
  * Replaces the design's per-item "3 / 4 steps" progress, which the site has no
- * application tracking to back. Assumes a 60-day working window.
+ * application tracking to back. Assumes a 60-day working window. Accepts any
+ * saved item; program "TBA"/"Ongoing" pseudo-deadlines count as undated.
  */
-export function timePressure(l: Listing, today: Date): number {
-  if (!l.deadline) return 0
+export function timePressure(l: { deadline: string | null }, today: Date): number {
+  if (!isDatedIso(l.deadline)) return 0
   const days = daysUntil(l.deadline, today)
   const WINDOW = 60
   return Math.max(4, Math.min(100, Math.round(((WINDOW - Math.min(days, WINDOW)) / WINDOW) * 100)))

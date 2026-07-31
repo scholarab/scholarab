@@ -19,6 +19,19 @@ const programs = await loadPrograms();
   robots="noindex, follow"
 >
   <SabFonts slot="head" />
+  <script is:inline slot="head">
+    // Phones get the app's Saved tab (same guard as the homepage redirect;
+    // /saved is already noindex, so no alternate/canonical pairing needed).
+    (function () {
+      try {
+        if (navigator.webdriver) return;
+        const touch = navigator.maxTouchPoints > 0 || matchMedia('(pointer: coarse)').matches;
+        if (touch && matchMedia('(max-width: 767px)').matches) {
+          location.replace('/app/#saved');
+        }
+      } catch { /* never block the page */ }
+    })();
+  </script>
 
   <div id="sab-saved" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabp-header">

@@ -4,6 +4,7 @@ import {
   initialsOf, orgLine, hashTags, feedStamp, applySteps, shortMoney, moneyTotal,
   openListings, byDeadline, searchListings, filterCategory, categoryKeys, nearbyListings,
   profileFromAnswers, profileChips, weekStrip, deadlineWeeks, timePressure, midnight, tabFromHash,
+  expandProgram, programStatusOf, programChipFor, isDatedIso,
   type WireItem, type Listing,
 } from './app-core'
 import { EMPTY_ELIGIBILITY } from './eligibility-types'
@@ -272,6 +273,44 @@ describe('nearbyListings', () => {
   it('never includes National or out-of-city awards', () => {
     expect(nearbyListings(pool, 'Medicine Hat').map(l => l.region)).not.toContain('National')
     expect(nearbyListings(pool, 'Medicine Hat').map(l => l.region)).not.toContain('Calgary')
+  })
+})
+
+describe('programs', () => {
+  it('expands the compact program wire shape', () => {
+    const p = expandProgram({ i: 3, n: 'TRIUMF High School Fellowship', d: '2026-08-10', u: 'https://x.test', pr: 'TRIUMF', p: true })
+    expect(p).toMatchObject({
+      id: 3, name: 'TRIUMF High School Fellowship', deadline: '2026-08-10',
+      provider: 'TRIUMF', paid: true, slug: 'triumf-high-school-fellowship',
+    })
+    expect(expandProgram({ i: 4, n: 'A', u: 'https://x.test' }).paid).toBe(false)
+  })
+
+  it('only treats real ISO dates as dated', () => {
+    expect(isDatedIso('2026-08-10')).toBe(true)
+    expect(isDatedIso('TBA')).toBe(false)
+    expect(isDatedIso('Ongoing')).toBe(false)
+    expect(isDatedIso(null)).toBe(false)
+  })
+
+  it('maps TBA/Ongoing/null to tba status, dates to active or closed', () => {
+    expect(programStatusOf({ deadline: 'TBA' }, TODAY)).toBe('tba')
+    expect(programStatusOf({ deadline: 'Ongoing' }, TODAY)).toBe('tba')
+    expect(programStatusOf({ deadline: null }, TODAY)).toBe('tba')
+    expect(programStatusOf({ deadline: '2026-08-10' }, TODAY)).toBe('active')
+    expect(programStatusOf({ deadline: '2026-07-01' }, TODAY)).toBe('closed')
+  })
+
+  it('chips programs like the saved page does', () => {
+    expect(programChipFor({ deadline: 'Ongoing' }, TODAY).text).toBe('ROLLING')
+    expect(programChipFor({ deadline: '2026-07-01' }, TODAY).text).toBe('CLOSED')
+    expect(programChipFor({ deadline: '2026-07-31' }, TODAY).text).toBe('CLOSES TOMORROW')
+  })
+
+  it('keeps timePressure at zero for pseudo-deadlines', () => {
+    expect(timePressure({ deadline: 'TBA' }, TODAY)).toBe(0)
+    expect(timePressure({ deadline: 'Ongoing' }, TODAY)).toBe(0)
+    expect(timePressure({ deadline: '2026-08-29' }, TODAY)).toBe(50)
   })
 })
 

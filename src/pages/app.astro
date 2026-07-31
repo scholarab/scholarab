@@ -8,14 +8,16 @@
 // this page canonicals back to "/" so the pair indexes as one page.
 import Layout from '../layouts/Layout.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
-import { loadScholarships } from '../lib/data-loader';
-import type { WireItem } from '../lib/app-core';
+import { loadScholarships, loadPrograms } from '../lib/data-loader';
+import type { WireItem, WireProgram } from '../lib/app-core';
 import '../styles/app.css';
 
 let raw: Awaited<ReturnType<typeof loadScholarships>> = [];
+let rawPrograms: Awaited<ReturnType<typeof loadPrograms>> = [];
 let loadError = false;
 try {
   raw = await loadScholarships();
+  rawPrograms = await loadPrograms();
 } catch {
   loadError = true;
 }
@@ -53,6 +55,19 @@ const wire: WireItem[] = raw.map(s => omitEmpty({
   x: s.active === false || undefined,
   e: compactEligibility(s.eligibility),
 }) as unknown as WireItem);
+
+// Programs ride along only for the Saved tab — the tracker stores program ids
+// too, and hiding a student's saved programs would lose data the site's own
+// /saved page shows.
+const wirePrograms: WireProgram[] = rawPrograms.filter(p => p.active).map(p => omitEmpty({
+  i: p.id,
+  n: p.name,
+  d: p.deadline,
+  u: p.url,
+  c: p.category,
+  pr: p.provider,
+  p: p.paid || undefined,
+}) as unknown as WireProgram);
 ---
 
 <Layout
@@ -118,7 +133,7 @@ const wire: WireItem[] = raw.map(s => omitEmpty({
        ever contain a literal </script> and truncate the data block.
        JSON.parse reads the escape back as plain "<". -->
   {!loadError && (
-    <script id="sabx-data" type="application/json" is:inline set:html={JSON.stringify(wire).replace(/</g, '\\u003c')} />
+    <script id="sabx-data" type="application/json" is:inline set:html={JSON.stringify({ s: wire, p: wirePrograms }).replace(/</g, '\\u003c')} />
   )}
 </Layout>
 

@@ -7,7 +7,7 @@
 // serialized into the page, `saved` is the site's existing localStorage
 // tracker (so the app and /saved and every detail page stay in sync), and the
 // Match screen runs the real eligibility matcher over the stored quiz answers.
-import { getSaved, toggleSaved } from './tracker.ts'
+import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts'
 import { sendEvent } from './events.ts'
 import { matchAll } from './eligibility-matcher.ts'
 import { downloadICS } from './ics.ts'
@@ -17,7 +17,8 @@ import {
   feedStamp, applySteps, shortMoney, moneyTotal, openListings, byDeadline, searchListings,
   filterCategory, categoryKeys, nearbyListings, profileFromAnswers, profileChips,
   weekStrip, deadlineWeeks, timePressure, longDate, shortDate, tabFromHash,
-  QUIZ_STORAGE_KEY, type WireItem, type Listing, type StoredQuiz, type AppTab,
+  expandProgram, programStatusOf, programChipFor, isDatedIso, QUIZ_STORAGE_KEY,
+  type WireItem, type WireProgram, type Listing, type ProgramItem, type StoredQuiz, type AppTab,
 } from './app-core.ts'
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -69,6 +70,7 @@ function readQuiz(): Record<string, string> | null {
 export function initApp(): void {
   let root: HTMLElement | null = null
   let items: Listing[] = []
+  let programs: ProgramItem[] = []
   let today = midnight()
 
   let tab: Tab = 'feed'
@@ -89,11 +91,22 @@ export function initApp(): void {
   let renderedKey = ''
 
   const byId = new Map<number, Listing>()
+  const byPid = new Map<number, ProgramItem>()
 
   // ── Derived data ────────────────────────────────────────────────────────────
 
   const savedIds = (): number[] => getSaved().filter(id => byId.has(id))
+  const savedPrgIds = (): number[] => getSavedPrograms().filter(id => byPid.has(id))
   const isSaved = (id: number): boolean => getSaved().includes(id)
+
+  /** Saved programs, dated ones first (soonest), rolling ones after. */
+  function savedProgramItems(): ProgramItem[] {
+    return savedPrgIds().map(id => byPid.get(id)!).sort((a, b) => {
+      const am = isDatedIso(a.deadline) ? new Date(a.deadline + 'T00:00:00').getTime() : Infinity
+      const bm = isDatedIso(b.deadline) ? new Date(b.deadline + 'T00:00:00').getTime() : Infinity
+      return am - bm || a.name.localeCompare(b.name)
+    })
+  }
 
   function open(): Listing[] {
     return openListings(items, today)
@@ -211,7 +224,7 @@ export function initApp(): void {
   function paintBadge(): void {
     const badge = root?.querySelector<HTMLElement>('[data-sabx-badge]')
     if (!badge) return
-    const n = savedIds().length
+    const n = savedIds().length + savedPrgIds().length
     badge.textContent = String(n)
     badge.hidden = n === 0
   }
@@ -454,11 +467,25 @@ export function initApp(): void {
 
   function renderSaved(): string {
     const list = savedIds().map(id => byId.get(id)!).sort(byDeadline)
-    const deadlines = list.map(l => l.deadline).filter((d): d is string => !!d)
+    const prgList = savedProgramItems()
+    const total = list.length + prgList.length
+    const deadlines = [
+      ...list.map(l => l.deadline).filter((d): d is string => !!d),
+      ...prgList.map(p => p.deadline).filter(isDatedIso),
+    ]
     const week = weekStrip(today, new Set(deadlines))
     const weeks = deadlineWeeks(today, deadlines)
-    const next = list.find(l => l.deadline && statusOf(l, today) === 'active')
-    const nextDays = next?.deadline ? daysUntil(next.deadline, today) : null
+
+    // Next deadline across both kinds
+    const nextSch = list.find(l => l.deadline && statusOf(l, today) === 'active')
+    const nextPrg = prgList.find(p => programStatusOf(p, today) === 'active')
+    const cand = [
+      nextSch?.deadline ? { name: nextSch.title, deadline: nextSch.deadline } : null,
+      nextPrg?.deadline ? { name: nextPrg.name, deadline: nextPrg.deadline } : null,
+    ].filter((c): c is { name: string; deadline: string } => c !== null)
+      .sort((a, b) => new Date(a.deadline + 'T00:00:00').getTime() - new Date(b.deadline + 'T00:00:00').getTime())
+    const next = cand[0] ?? null
+    const nextDays = next ? daysUntil(next.deadline, today) : null
 
     const weekHtml = week.map(d => `
       <div class="sabx-week-day ${d.kind}">
@@ -488,12 +515,33 @@ export function initApp(): void {
         </div>`
     }).join('')
 
+    const prgHtml = prgList.map(p => {
+      const chip = programChipFor(p, today)
+      const pct = timePressure(p, today)
+      const days = programStatusOf(p, today) === 'active' ? daysUntil(p.deadline!, today) : null
+      return `
+        <div class="sabx-sv-card">
+          <a class="sabx-sv-top" href="/programs/${esc(p.slug)}/">
+            <span style="flex:1">
+              <span class="sabx-sv-name">${esc(p.name)}</span>
+              <span class="sabx-sv-meta">${isDatedIso(p.deadline) ? `DUE ${esc(shortDate(p.deadline))}` : 'ROLLING'}${p.provider ? ` · ${esc(p.provider.toUpperCase())}` : ''}</span>
+            </span>
+            <span class="sabx-sv-amount">${p.paid ? 'Paid' : 'Free'}</span>
+          </a>
+          <div class="sabx-sv-foot">
+            <div class="sabx-sv-track"><div class="sabx-sv-fill" style="width:${pct}%"></div></div>
+            <span class="sabx-sv-steps">${days === null ? esc(chip.text) : `${days}D LEFT`}</span>
+            <button class="sabx-sv-remove" data-psave-id="${p.id}">Remove</button>
+          </div>
+        </div>`
+    }).join('')
+
     return `
       <section class="sabx-screen sabx-saved">
         <div class="sabx-scroll">
           <div class="sabx-saved-head">
             <h2 class="sabx-saved-h1">Saved</h2>
-            <span class="sabx-saved-count">${list.length === 1 ? '1 BOOKMARK' : `${list.length} BOOKMARKS`}</span>
+            <span class="sabx-saved-count">${total === 1 ? '1 BOOKMARK' : `${total} BOOKMARKS`}</span>
           </div>
           <div class="sabx-week">${weekHtml}</div>
           <div class="sabx-pace">
@@ -503,12 +551,18 @@ export function initApp(): void {
             </div>
             <div class="sabx-pace-bars">${weeks.map(on => `<i class="${on ? 'on' : ''}"></i>`).join('')}</div>
             <div class="sabx-pace-note">${next
-              ? `${esc(next.title)} closes ${esc(longDate(next.deadline!))}. Filled bars are the next five weeks with a saved deadline in them.`
+              ? `${esc(next.name)} closes ${esc(longDate(next.deadline))}. Filled bars are the next five weeks with a saved deadline in them.`
               : 'Save a listing and its deadline shows up across the next five weeks.'}</div>
           </div>
           ${list.length > 0 ? `
-            <div class="sabx-section-label">YOUR SHORTLIST</div>
+            <div class="sabx-section-label">SCHOLARSHIPS · ${list.length}</div>
             ${cardsHtml}
+          ` : ''}
+          ${prgList.length > 0 ? `
+            <div class="sabx-section-label" style="margin-top:${list.length > 0 ? '10px' : '0'}">RESEARCH PROGRAMS · ${prgList.length}</div>
+            ${prgHtml}
+          ` : ''}
+          ${total > 0 ? `
             <button class="sabx-btn-ink" data-export-ics style="width:100%;box-sizing:border-box;margin-top:6px">Add these deadlines to my calendar</button>
           ` : `
             <div class="sabx-empty-big">
@@ -527,8 +581,12 @@ export function initApp(): void {
     const answers = readQuiz()
     const chips = profileChips(answers)
     const saved = savedIds().map(id => byId.get(id)!)
+    const savedPrg = savedProgramItems()
+    // Money in play is scholarship amounts only — programs have no dollar value.
     const inPlay = saved.reduce((a, l) => a + l.amountValue, 0)
-    const closing = saved.filter(l => l.deadline && statusOf(l, today) === 'active' && daysUntil(l.deadline, today) <= 7).length
+    const closing =
+      saved.filter(l => l.deadline && statusOf(l, today) === 'active' && daysUntil(l.deadline, today) <= 7).length +
+      savedPrg.filter(p => programStatusOf(p, today) === 'active' && daysUntil(p.deadline!, today) <= 7).length
 
     const rows: [string, string, string][] = [
       // In-app hash, not /scholarships/: the Due tab IS the browse experience
@@ -565,7 +623,7 @@ export function initApp(): void {
           </div>
 
           <div class="sabx-stats">
-            <button class="sabx-stat" data-go="saved"><b>${saved.length}</b><span>SAVED</span></button>
+            <button class="sabx-stat" data-go="saved"><b>${saved.length + savedPrg.length}</b><span>SAVED</span></button>
             <div class="sabx-stat"><b>${closing}</b><span>CLOSING ≤7D</span></div>
             <div class="sabx-stat green"><b>${moneyTotal(inPlay)}</b><span>IN PLAY</span></div>
           </div>
@@ -670,7 +728,7 @@ export function initApp(): void {
 
   function renderTabBar(): string {
     const dark = tab === 'feed'
-    const n = savedIds().length
+    const n = savedIds().length + savedPrgIds().length
     const t = (id: Tab, icon: string, label: string, extra = '') => `
       <button class="sabx-tab${id === 'match' ? ' match' : ''}" data-go="${id}" aria-current="${tab === id ? 'page' : 'false'}">
         ${icon}
@@ -698,8 +756,8 @@ export function initApp(): void {
       case 'due':   return `due:${query}:${category}`
       // Not keyed on `picks` — those are patched in place by paintSaveAll.
       case 'match': return `match:${matchListings().length}`
-      case 'saved': return `saved:${savedIds().join(',')}`
-      case 'me':    return `me:${savedIds().join(',')}`
+      case 'saved': return `saved:${savedIds().join(',')}:${savedPrgIds().join(',')}`
+      case 'me':    return `me:${savedIds().join(',')}:${savedPrgIds().join(',')}`
     }
   }
 
@@ -759,6 +817,15 @@ export function initApp(): void {
     const saveBtn = t.closest<HTMLElement>('[data-save-id]')
     if (saveBtn) { save(Number(saveBtn.dataset.saveId)); return }
 
+    const pBtn = t.closest<HTMLElement>('[data-psave-id]')
+    if (pBtn) {
+      toggleSavedProgram(Number(pBtn.dataset.psaveId))
+      navigator.vibrate?.(12)
+      say('Removed from saved')
+      render()
+      return
+    }
+
     const pickBtn = t.closest<HTMLElement>('[data-pick]')
     if (pickBtn) {
       const id = Number(pickBtn.dataset.pick)
@@ -809,7 +876,10 @@ export function initApp(): void {
 
     if (t.closest('[data-export-ics]')) {
       const list = savedIds().map(id => byId.get(id)!)
-      downloadICS(list.map(l => ({ id: l.id, title: l.title, amount: l.amount, url: l.url, deadline: l.deadline })), [])
+      downloadICS(
+        list.map(l => ({ id: l.id, title: l.title, amount: l.amount, url: l.url, deadline: l.deadline })),
+        savedProgramItems().map(p => ({ id: p.id, name: p.name, url: p.url, deadline: p.deadline })),
+      )
       say('Calendar file downloaded')
       return
     }
@@ -905,7 +975,7 @@ export function initApp(): void {
   document.addEventListener('submit', e => void onSubmit(e), true)
   document.addEventListener('keydown', onKeyDown)
   window.addEventListener('storage', e => {
-    if (e.key === 'scholarab_saved') { renderedKey = ''; render() }
+    if (e.key === 'scholarab_saved' || e.key === 'scholarab_saved_programs') { renderedKey = ''; render() }
   })
 
   document.addEventListener('astro:page-load', () => {
@@ -914,9 +984,13 @@ export function initApp(): void {
 
     const payload = document.getElementById('sabx-data')?.textContent
     if (!payload) return
-    items = (JSON.parse(payload) as WireItem[]).map(expandItem)
+    const parsed = JSON.parse(payload) as { s: WireItem[]; p: WireProgram[] }
+    items = parsed.s.map(expandItem)
+    programs = (parsed.p ?? []).map(expandProgram)
     byId.clear()
     for (const l of items) byId.set(l.id, l)
+    byPid.clear()
+    for (const p of programs) byPid.set(p.id, p)
 
     // Re-derive from the visitor's clock, not the build's: the page is
     // prerendered and served from a CDN, so every day chip here would
