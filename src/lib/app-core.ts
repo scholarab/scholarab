@@ -283,12 +283,15 @@ export function categoryKeys(items: Listing[]): string[] {
   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(e => e[0])
 }
 
-// Regions that count as "near you" for a given quiz city. Alberta-wide and
-// National awards are open to the student too, but the Nearby feed is about
-// the local ones with the better odds, so it stays city-only plus Alberta.
+/**
+ * Regions that count as "near you". National awards are open to the student
+ * too, but the Nearby feed is about the local ones with the better odds, so it
+ * is the student's own city plus everything Alberta-wide. "Other Alberta" is
+ * not a region any listing carries, so those students get the Alberta-wide set
+ * — dropping it left them with a permanently empty Nearby feed.
+ */
 export function nearbyListings(items: Listing[], city: string | null): Listing[] {
-  if (!city) return items.filter(l => l.region === 'Alberta')
-  return items.filter(l => l.region === city || (city !== 'Other Alberta' && l.region === 'Alberta'))
+  return items.filter(l => l.region === 'Alberta' || (city !== null && l.region === city))
 }
 
 // ── Quiz profile ──────────────────────────────────────────────────────────────

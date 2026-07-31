@@ -263,8 +263,15 @@ describe('nearbyListings', () => {
     expect(nearbyListings(pool, null).map(l => l.id)).toEqual([2])
   })
 
-  it('does not double-count Other Alberta', () => {
-    expect(nearbyListings(pool, 'Other Alberta').map(l => l.id)).toEqual([])
+  it('still gives Other Alberta students the Alberta-wide set', () => {
+    // No listing carries region "Other Alberta", so a city-only rule would
+    // leave these students with a permanently empty Nearby feed.
+    expect(nearbyListings(pool, 'Other Alberta').map(l => l.id)).toEqual([2])
+  })
+
+  it('never includes National or out-of-city awards', () => {
+    expect(nearbyListings(pool, 'Medicine Hat').map(l => l.region)).not.toContain('National')
+    expect(nearbyListings(pool, 'Medicine Hat').map(l => l.region)).not.toContain('Calgary')
   })
 })
 

@@ -114,8 +114,11 @@ const wire: WireItem[] = raw.map(s => omitEmpty({
     </div>
   </div>
 
+  <!-- "<" is <-escaped so no field value (a title, an audience line) can
+       ever contain a literal </script> and truncate the data block.
+       JSON.parse reads the escape back as plain "<". -->
   {!loadError && (
-    <script id="sabx-data" type="application/json" is:inline set:html={JSON.stringify(wire)} />
+    <script id="sabx-data" type="application/json" is:inline set:html={JSON.stringify(wire).replace(/</g, '\\u003c')} />
   )}
 </Layout>
 

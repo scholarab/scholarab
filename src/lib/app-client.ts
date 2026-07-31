@@ -81,6 +81,10 @@ export function initApp(): void {
   let picksSeeded = false
   let toastTimer: ReturnType<typeof setTimeout> | null = null
   let toast = ''
+  /** Debounce for the search_empty content-gap event (matches directory-client). */
+  let emptyTimer: ReturnType<typeof setTimeout> | null = null
+  /** Dwell gate for detail_view — an instant open/close isn't a view. */
+  let viewTimer: ReturnType<typeof setTimeout> | null = null
   /** Bumped whenever something re-renders the active screen from scratch. */
   let renderedKey = ''
 
@@ -144,8 +148,22 @@ export function initApp(): void {
 
   function go(next: Tab): void {
     tab = next
-    openId = null
+    closeSheet(false)
     render()
+  }
+
+  // Dwell-gated like SabDetail's page views: the event only counts if the
+  // sheet is still open 2.5s later, so a misclick-and-close isn't a "view".
+  function openSheet(id: number): void {
+    openId = id
+    if (viewTimer) clearTimeout(viewTimer)
+    viewTimer = setTimeout(() => sendEvent('detail_view', 'scholarship', id), 2500)
+  }
+
+  function closeSheet(repaint = true): void {
+    openId = null
+    if (viewTimer) { clearTimeout(viewTimer); viewTimer = null }
+    if (repaint) render()
   }
 
   // ── Save ────────────────────────────────────────────────────────────────────
@@ -559,7 +577,7 @@ export function initApp(): void {
 
           <div class="sabx-me-rows">
             ${rows.map(([label, sub, href]) => `
-              <a class="sabx-me-row" href="${esc(href)}"${href.startsWith('mailto:') ? '' : ''}>
+              <a class="sabx-me-row" href="${esc(href)}">
                 <span class="sabx-me-row-body">
                   <span class="sabx-me-row-label">${esc(label)}</span>
                   <span class="sabx-me-row-sub">${esc(sub)}</span>
@@ -726,13 +744,12 @@ export function initApp(): void {
 
     const openBtn = t.closest<HTMLElement>('[data-open]')
     if (openBtn) {
-      openId = Number(openBtn.dataset.open)
-      sendEvent('detail_view', 'scholarship', openId)
+      openSheet(Number(openBtn.dataset.open))
       render()
       return
     }
 
-    if (t.closest('[data-close-sheet]')) { openId = null; render(); return }
+    if (t.closest('[data-close-sheet]')) { closeSheet(); return }
 
     const saveBtn = t.closest<HTMLElement>('[data-save-id]')
     if (saveBtn) { save(Number(saveBtn.dataset.saveId)); return }
@@ -818,7 +835,23 @@ export function initApp(): void {
       fresh.focus()
       if (start !== null) fresh.setSelectionRange(start, start)
     }
-    if (query.trim().length >= 3 && dueListings().length === 0) sendEvent('search_empty', undefined, undefined, query.trim().toLowerCase())
+
+    // Content-gap signal, matching directory-client: debounced so a word isn't
+    // reported once per keystroke, and measured against the FULL open list so a
+    // query merely starved by the active category chip doesn't look like a gap.
+    if (emptyTimer) clearTimeout(emptyTimer)
+    const q = query.trim().toLowerCase()
+    if (q.length >= 3 && searchListings(open(), q).length === 0) {
+      emptyTimer = setTimeout(() => sendEvent('search_empty', undefined, undefined, q), 1000)
+    }
+  }
+
+  function onKeyDownSearch(e: KeyboardEvent): void {
+    // Filtering is live, so Enter has nothing left to submit — blur instead so
+    // the on-screen keyboard gets out of the way of the results.
+    if (e.key !== 'Enter') return
+    const input = (e.target as Element).closest<HTMLInputElement>('[data-sabx-query]')
+    if (input) { e.preventDefault(); input.blur() }
   }
 
   // Capture phase + stopPropagation: Astro's ClientRouter listens for submit at
@@ -858,7 +891,8 @@ export function initApp(): void {
   }
 
   function onKeyDown(e: KeyboardEvent): void {
-    if (e.key === 'Escape' && openId !== null) { openId = null; render() }
+    if (e.key === 'Escape' && openId !== null) { closeSheet(); return }
+    onKeyDownSearch(e)
   }
 
   document.addEventListener('click', onClick)
@@ -888,7 +922,7 @@ export function initApp(): void {
     feedMode = 'foryou'
     query = ''
     category = 'ALL'
-    openId = null
+    closeSheet(false)
     picks = {}
     picksSeeded = false
     renderedKey = ''
