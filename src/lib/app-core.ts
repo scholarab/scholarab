@@ -294,6 +294,16 @@ export function nearbyListings(items: Listing[], city: string | null): Listing[]
   return items.filter(l => l.region === 'Alberta' || (city !== null && l.region === city))
 }
 
+// ── Deep links ────────────────────────────────────────────────────────────────
+
+export type AppTab = 'feed' | 'due' | 'match' | 'saved' | 'me'
+
+/** "/app/#due" style deep links; anything unrecognized lands on the feed. */
+export function tabFromHash(hash: string): AppTab {
+  const h = hash.replace(/^#/, '')
+  return h === 'due' || h === 'match' || h === 'saved' || h === 'me' ? h : 'feed'
+}
+
 // ── Quiz profile ──────────────────────────────────────────────────────────────
 
 export const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v4'

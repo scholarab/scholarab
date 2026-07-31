@@ -16,8 +16,8 @@ import {
   expandItem, chipFor, statusOf, daysUntil, midnight, initialsOf, orgLine, hashTags,
   feedStamp, applySteps, shortMoney, moneyTotal, openListings, byDeadline, searchListings,
   filterCategory, categoryKeys, nearbyListings, profileFromAnswers, profileChips,
-  weekStrip, deadlineWeeks, timePressure, longDate, shortDate,
-  QUIZ_STORAGE_KEY, type WireItem, type Listing, type StoredQuiz,
+  weekStrip, deadlineWeeks, timePressure, longDate, shortDate, tabFromHash,
+  QUIZ_STORAGE_KEY, type WireItem, type Listing, type StoredQuiz, type AppTab,
 } from './app-core.ts'
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -25,7 +25,7 @@ import {
 const SITE = 'https://www.scholarab.ca'
 const FEED_LIMIT = 10
 
-type Tab = 'feed' | 'due' | 'match' | 'saved' | 'me'
+type Tab = AppTab
 type FeedMode = 'foryou' | 'closing' | 'nearby'
 
 // The design's three feed palettes, cycled card to card.
@@ -531,7 +531,9 @@ export function initApp(): void {
     const closing = saved.filter(l => l.deadline && statusOf(l, today) === 'active' && daysUntil(l.deadline, today) <= 7).length
 
     const rows: [string, string, string][] = [
-      ['Browse every scholarship', `All ${open().length} open listings, filterable`, '/scholarships/'],
+      // In-app hash, not /scholarships/: the Due tab IS the browse experience
+      // here, and bouncing phones back to the old list defeats the point.
+      ['Browse every scholarship', `All ${open().length} open listings, filterable`, '#due'],
       ['Research programs', 'Summer and enrichment placements', '/programs/'],
       ['Suggest a scholarship', 'Found one we missed? Send it in', 'mailto:contact.scholarab@gmail.com?subject=Scholarship%20suggestion'],
       ['How listings get checked', 'Every deadline verified by hand', '/about/'],
@@ -576,14 +578,17 @@ export function initApp(): void {
           </div>
 
           <div class="sabx-me-rows">
-            ${rows.map(([label, sub, href]) => `
-              <a class="sabx-me-row" href="${esc(href)}">
+            ${rows.map(([label, sub, href]) => {
+              const body = `
                 <span class="sabx-me-row-body">
                   <span class="sabx-me-row-label">${esc(label)}</span>
                   <span class="sabx-me-row-sub">${esc(sub)}</span>
                 </span>
-                <span class="sabx-me-row-arrow">›</span>
-              </a>`).join('')}
+                <span class="sabx-me-row-arrow">›</span>`
+              return href.startsWith('#')
+                ? `<button class="sabx-me-row" data-go="${esc(href.slice(1))}">${body}</button>`
+                : `<a class="sabx-me-row" href="${esc(href)}">${body}</a>`
+            }).join('')}
             <div class="sabx-me-foot">MADE IN MEDICINE HAT · FREE FOREVER</div>
           </div>
         </div>
@@ -918,7 +923,8 @@ export function initApp(): void {
     // otherwise be as stale as the last deploy.
     today = midnight()
 
-    tab = 'feed'
+    // "/app/#due" style deep links pick the opening tab; default is the feed.
+    tab = tabFromHash(location.hash)
     feedMode = 'foryou'
     query = ''
     category = 'ALL'

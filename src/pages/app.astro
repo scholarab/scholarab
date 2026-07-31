@@ -3,9 +3,9 @@
 // "ScholarAB Mobile App". Five tabs (feed, due, match, saved, me), a detail
 // sheet and a toast, all driven by src/lib/app-client.ts.
 //
-// noindex on purpose: every listing here already has an indexable detail page
-// and the directories rank on their own. This route is a client-rendered shell
-// over the same rows, so letting it into the index would only compete with them.
+// This is the mobile counterpart of "/" (separate-mobile-URL pattern): the
+// homepage carries rel=alternate pointing here and redirects phones over, and
+// this page canonicals back to "/" so the pair indexes as one page.
 import Layout from '../layouts/Layout.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
 import { loadScholarships } from '../lib/data-loader';
@@ -59,8 +59,8 @@ const wire: WireItem[] = raw.map(s => omitEmpty({
   title="ScholarAB app | Alberta scholarships on your phone"
   description="Swipe through Alberta scholarships you qualify for, save the ones worth applying to, and keep every deadline in one place."
   ogUrl="https://www.scholarab.ca/app/"
+  canonical="https://www.scholarab.ca/"
   currentPath="/app"
-  robots="noindex, follow"
 >
   <SabFonts slot="head" />
 

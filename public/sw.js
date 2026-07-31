@@ -1,5 +1,5 @@
-const CACHE_NAME = 'scholarab-v5';
-const PAGES_TO_CACHE = ['/', '/scholarships', '/programs', '/saved', '/about', '/offline.html'];
+const CACHE_NAME = 'scholarab-v6';
+const PAGES_TO_CACHE = ['/', '/app', '/scholarships', '/programs', '/saved', '/about', '/offline.html'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

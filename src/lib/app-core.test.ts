@@ -3,7 +3,7 @@ import {
   expandEligibility, expandItem, amountValue, slugify, daysUntil, statusOf, chipFor,
   initialsOf, orgLine, hashTags, feedStamp, applySteps, shortMoney, moneyTotal,
   openListings, byDeadline, searchListings, filterCategory, categoryKeys, nearbyListings,
-  profileFromAnswers, profileChips, weekStrip, deadlineWeeks, timePressure, midnight,
+  profileFromAnswers, profileChips, weekStrip, deadlineWeeks, timePressure, midnight, tabFromHash,
   type WireItem, type Listing,
 } from './app-core'
 import { EMPTY_ELIGIBILITY } from './eligibility-types'
@@ -272,6 +272,21 @@ describe('nearbyListings', () => {
   it('never includes National or out-of-city awards', () => {
     expect(nearbyListings(pool, 'Medicine Hat').map(l => l.region)).not.toContain('National')
     expect(nearbyListings(pool, 'Medicine Hat').map(l => l.region)).not.toContain('Calgary')
+  })
+})
+
+describe('tabFromHash', () => {
+  it('maps the four deep-linkable tabs', () => {
+    expect(tabFromHash('#due')).toBe('due')
+    expect(tabFromHash('#match')).toBe('match')
+    expect(tabFromHash('#saved')).toBe('saved')
+    expect(tabFromHash('#me')).toBe('me')
+  })
+
+  it('lands everything else on the feed', () => {
+    expect(tabFromHash('')).toBe('feed')
+    expect(tabFromHash('#feed')).toBe('feed')
+    expect(tabFromHash('#nonsense')).toBe('feed')
   })
 })
 

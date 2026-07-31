@@ -109,6 +109,25 @@ const matchGroups = [
     ],
   })} slot="head" />
   <SabFonts slot="head" />
+  <!-- Separate-mobile-URL pair: this page announces its mobile counterpart,
+       and /app/ canonicals back here, so search engines treat them as one
+       page even though phones get redirected. -->
+  <link rel="alternate" media="only screen and (max-width: 767px)" href="https://www.scholarab.ca/app/" slot="head" />
+  <script is:inline slot="head">
+    // Phones get the app experience. Runs before first paint on cold loads;
+    // ClientRouter re-executes it when a view transition lands back on "/".
+    // webdriver is excluded so Playwright keeps exercising this page, and the
+    // query string rides along so ?s= campaign tags survive the hop.
+    (function () {
+      try {
+        if (navigator.webdriver) return;
+        const touch = navigator.maxTouchPoints > 0 || matchMedia('(pointer: coarse)').matches;
+        if (touch && matchMedia('(max-width: 767px)').matches) {
+          location.replace('/app/' + location.search + location.hash);
+        }
+      } catch { /* never block the page */ }
+    })();
+  </script>
 
   <div id="sab-home">
 
