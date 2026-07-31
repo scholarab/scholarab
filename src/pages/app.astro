@@ -1,0 +1,140 @@
+---
+// /app — the mobile app screen from the claude.ai/design file
+// "ScholarAB Mobile App". Five tabs (feed, due, match, saved, me), a detail
+// sheet and a toast, all driven by src/lib/app-client.ts.
+//
+// noindex on purpose: every listing here already has an indexable detail page
+// and the directories rank on their own. This route is a client-rendered shell
+// over the same rows, so letting it into the index would only compete with them.
+import Layout from '../layouts/Layout.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import { loadScholarships } from '../lib/data-loader';
+import type { WireItem } from '../lib/app-core';
+import '../styles/app.css';
+
+let raw: Awaited<ReturnType<typeof loadScholarships>> = [];
+let loadError = false;
+try {
+  raw = await loadScholarships();
+} catch {
+  loadError = true;
+}
+
+// Compact wire shape: short keys, and every empty/false/default field dropped.
+// The full payload is ~100KB; this is ~60KB before gzip, and app-core's
+// expandItem/expandEligibility put the defaults back before the matcher runs.
+function compactEligibility(e: unknown): Record<string, unknown> | undefined {
+  if (!e || typeof e !== 'object') return undefined;
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(e as Record<string, unknown>)) {
+    if (v === null || v === false || v === '' || (Array.isArray(v) && v.length === 0)) continue;
+    out[k] = v;
+  }
+  return Object.keys(out).length > 0 ? out : undefined;
+}
+
+function omitEmpty<T extends Record<string, unknown>>(o: T): T {
+  for (const k of Object.keys(o)) if (o[k] === undefined || o[k] === null) delete o[k];
+  return o;
+}
+
+const wire: WireItem[] = raw.map(s => omitEmpty({
+  i: s.id,
+  t: s.title,
+  a: s.amount,
+  d: s.deadline,
+  o: s.openDate,
+  c: s.category,
+  r: s.region,
+  b: s.audience,
+  u: s.url,
+  v: s.lastVerified,
+  g: s.applyViaGuidance || undefined,
+  x: s.active === false || undefined,
+  e: compactEligibility(s.eligibility),
+}) as unknown as WireItem);
+---
+
+<Layout
+  title="ScholarAB app | Alberta scholarships on your phone"
+  description="Swipe through Alberta scholarships you qualify for, save the ones worth applying to, and keep every deadline in one place."
+  ogUrl="https://www.scholarab.ca/app/"
+  currentPath="/app"
+  robots="noindex, follow"
+>
+  <SabFonts slot="head" />
+
+  <div id="sabx-app" class="sabx-root">
+    <div class="sabx-intro">
+      <div class="sabx-intro-eyebrow">SCHOLARAB MOBILE</div>
+      <p class="sabx-intro-body">
+        Tap the tab bar to move between screens. Swipe the feed, search the list, save awards,
+        run the match flow. Every listing, deadline and match is the real thing.
+      </p>
+    </div>
+
+    <div class="sabx-device">
+      <div class="sabx-viewport">
+        <div class="sabx-statusbar" data-sabx-status aria-hidden="true">
+          <span>7:41</span>
+          <span class="sabx-sb-right">
+            <span class="sabx-sb-bars"><i></i><i></i><i></i></span>
+            <span class="sabx-sb-5g">5G</span>
+            <span class="sabx-sb-batt"><i></i></span>
+          </span>
+        </div>
+
+        <div data-sabx-screen>
+          {loadError ? (
+            <section class="sabx-screen sabx-due">
+              <div class="sabx-scroll">
+                <div class="sabx-list">
+                  <div class="sabx-empty" style="margin-top:80px">
+                    <div class="sabx-empty-title">Couldn't load listings.</div>
+                    <div class="sabx-empty-sub">The database may be temporarily unavailable.</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          ) : (
+            <section class="sabx-screen sabx-feed" data-sabx-skeleton>
+              <div class="sabx-feed-end">
+                <div class="sabx-feed-end-eyebrow">LOADING YOUR FEED</div>
+                <div class="sabx-feed-end-title">One second.</div>
+              </div>
+            </section>
+          )}
+        </div>
+
+        <div data-sabx-sheet></div>
+        <div data-sabx-toast></div>
+        <div data-sabx-tabbar></div>
+        <div class="sabx-homebar" data-sabx-homebar></div>
+      </div>
+    </div>
+  </div>
+
+  {!loadError && (
+    <script id="sabx-data" type="application/json" is:inline set:html={JSON.stringify(wire)} />
+  )}
+</Layout>
+
+<script>
+  import { initApp } from '../lib/app-client.ts';
+  initApp();
+</script>
+
+<style is:global>
+  /* The app owns the viewport: no page scroll behind it, and the site's own
+     bottom nav would sit on top of the app's tab bar. */
+  html:has(#sabx-app), body:has(#sabx-app) {
+    background: #0E1211;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  body:has(#sabx-app) #bottom-nav { display: none !important; }
+
+  @media (min-width: 768px) {
+    html:has(#sabx-app), body:has(#sabx-app) { overflow: auto; }
+  }
+</style>
