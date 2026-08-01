@@ -54,6 +54,10 @@ export const subscribers = pgTable('subscribers', {
   itemType: text('item_type').notNull().default('scholarship'),
   itemId: integer('item_id').notNull(),
   token: text('token').notNull(),
+  // Comma-separated days before the deadline to mail on — see lib/alerts.ts.
+  // Defaults to the full set so rows written before this column existed, and
+  // any sign-up that does not pick, keep the original behaviour.
+  cadence: text('cadence').notNull().default('30,14,3'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, t => [
   uniqueIndex('subscribers_email_item_unique').on(t.email, t.itemType, t.itemId),

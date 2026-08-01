@@ -6,6 +6,7 @@ import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { neon } from '@neondatabase/serverless'
 import { generateSlug } from '../src/lib/utils.ts'
+import { parseCadence } from '../src/lib/alerts.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -34,6 +35,36 @@ const MILESTONES = process.env.TEST_DAYS ? [parseInt(process.env.TEST_DAYS)] : [
 // prints the plan without sending.
 const CATCH_UP = process.env.CATCH_UP === '1'
 const DRY_RUN = process.env.DRY_RUN === '1'
+// Both of these are manual overrides aimed at a specific day, so honouring a
+// subscriber's chosen milestones would make them send nothing at all.
+const IGNORE_CADENCE = CATCH_UP || !!process.env.TEST_DAYS
+
+interface SubscriberRow { email: string; token: string; cadence: string }
+
+/**
+ * Subscribers for one item, with their cadence. Falls back to a query without
+ * the column so a run that beats 0008_subscriber_cadence.sql still mails on
+ * every milestone rather than failing the whole job.
+ */
+let cadenceColumnMissing = false
+async function subscribersFor(itemType: string, itemId: number): Promise<SubscriberRow[]> {
+  if (!cadenceColumnMissing) {
+    try {
+      return await sql`
+        SELECT email, token, cadence FROM subscribers
+        WHERE item_type = ${itemType} AND item_id = ${itemId}
+      ` as SubscriberRow[]
+    } catch (e) {
+      cadenceColumnMissing = true
+      console.error('[alerts] no cadence column — mailing every milestone. Apply drizzle/migrations/0008_subscriber_cadence.sql:', e)
+    }
+  }
+  const rows = await sql`
+    SELECT email, token FROM subscribers
+    WHERE item_type = ${itemType} AND item_id = ${itemId}
+  ` as { email: string; token: string }[]
+  return rows.map(r => ({ ...r, cadence: '' }))
+}
 
 function daysUntil(deadline: string): number {
   return Math.round((new Date(deadline + 'T00:00:00').getTime() - today.getTime()) / 86_400_000)
@@ -98,12 +129,13 @@ const targets = CATCH_UP
   : MILESTONES.flatMap(m => allItems.filter(item => daysUntil(item.deadline!) === m).map(item => ({ item, days: m })))
 
 for (const { item, days } of targets) {
-  const rows = await sql`
-    SELECT email, token FROM subscribers
-    WHERE item_type = ${item.itemType} AND item_id = ${item.id}
-  ` as { email: string; token: string }[]
+  const rows = await subscribersFor(item.itemType, item.id)
 
-  for (const { email, token } of rows) {
+  for (const { email, token, cadence } of rows) {
+    // Skip anyone who did not pick this milestone. CATCH_UP is a deliberate
+    // one-off sweep after an outage and TEST_DAYS is a manual probe, so both
+    // ignore the cadence — the point there is that everyone hears once.
+    if (!IGNORE_CADENCE && !(parseCadence(cadence) as number[]).includes(days)) continue
     // Resend rejects reserved test domains with a 422, which would fail the
     // whole run — skip them rather than count them as errors.
     if (/@example\.(com|org|net)$/i.test(email)) {

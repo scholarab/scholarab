@@ -6,6 +6,7 @@ import { subscribers, events } from '../../lib/db/schema'
 import { loadScholarships, loadPrograms } from '../../lib/data-loader'
 import { jsonOk, jsonError } from '../../lib/api-response'
 import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
+import { ALERT_MILESTONES, cadenceFromInput, formatCadence } from '../../lib/alerts'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -22,7 +23,7 @@ export const POST: APIRoute = async ({ request }) => {
   let body: unknown
   try { body = await request.json() } catch { return jsonError('Invalid JSON', 400) }
 
-  const { email, itemType = 'scholarship', itemId } = body as Record<string, unknown>
+  const { email, itemType = 'scholarship', itemId, days } = body as Record<string, unknown>
 
   if (!email || typeof email !== 'string' || !EMAIL_RE.test(email))
     return jsonError('Valid email required', 400)
@@ -30,6 +31,12 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonError('itemType must be scholarship or program', 400)
   if (!itemId || typeof itemId !== 'number' || !Number.isInteger(itemId))
     return jsonError('Valid itemId required', 400)
+
+  // `days` is optional: callers that don't pick get the full 30/14/3, which is
+  // what every sign-up did before the picker existed.
+  const cadence = days === undefined ? [...ALERT_MILESTONES] : cadenceFromInput(days)
+  if (cadence === null)
+    return jsonError(`days must be a non-empty list of ${ALERT_MILESTONES.join(', ')}`, 400)
 
   const today = new Date()
   today.setHours(0, 0, 0, 0)
@@ -56,15 +63,31 @@ export const POST: APIRoute = async ({ request }) => {
   const token = Array.from(crypto.getRandomValues(new Uint8Array(24)))
     .map(b => b.toString(16).padStart(2, '0')).join('')
 
+  const row = { email: email.toLowerCase().trim(), itemType: itemType as string, itemId, token }
+  const cadenceValue = formatCadence(cadence)
+
   try {
-    await db.insert(subscribers).values({
-      email: email.toLowerCase().trim(),
-      itemType: itemType as string,
-      itemId,
-      token,
-    }).onConflictDoNothing()
-  } catch {
-    return jsonError('Internal server error', 500)
+    // Re-subscribing used to be a no-op. Now it is how a student changes their
+    // mind about when to be mailed, so the conflict updates the cadence — but
+    // never the token, which is the credential in the unsubscribe link already
+    // sitting in their inbox.
+    await db.insert(subscribers)
+      .values({ ...row, cadence: cadenceValue })
+      .onConflictDoUpdate({
+        target: [subscribers.email, subscribers.itemType, subscribers.itemId],
+        set: { cadence: cadenceValue },
+      })
+  } catch (e) {
+    // Deploys are not ordered against migrations, so this route can go live
+    // before 0008_subscriber_cadence.sql has run. Getting the reminder set at
+    // the default cadence beats refusing the sign-up; the log is how a missing
+    // migration gets noticed rather than silently costing everyone their pick.
+    console.error('[alert] cadence insert failed, retrying without it:', e)
+    try {
+      await db.insert(subscribers).values(row).onConflictDoNothing()
+    } catch {
+      return jsonError('Internal server error', 500)
+    }
   }
 
   recordHit(`alert:${ip}`).catch(() => {})

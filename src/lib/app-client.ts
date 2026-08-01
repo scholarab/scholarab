@@ -12,6 +12,7 @@ import { sendEvent } from './events.ts'
 import { matchAll } from './eligibility-matcher.ts'
 import { downloadICS } from './ics.ts'
 import { prefersReducedMotion } from './utils.ts'
+import { ALERT_MILESTONES, parseCadence, formatCadence, cadenceSentence, type AlertMilestone } from './alerts.ts'
 import {
   expandItem, chipFor, statusOf, daysUntil, midnight, initialsOf, orgLine, hashTags,
   feedStamp, applySteps, shortMoney, moneyTotal, openListings, byDeadline, searchListings,
@@ -101,6 +102,20 @@ function writeQuizState(state: StoredQuiz): void {
 
 const ALERT_EMAIL_KEY = 'scholarab_alert_email'
 const ALERT_SET_KEY = 'scholarab_alerts'
+const ALERT_CADENCE_KEY = 'scholarab_alert_cadence'
+
+/** The milestones this device last picked. Sent with every new subscription. */
+function readCadence(): AlertMilestone[] {
+  try {
+    return parseCadence(localStorage.getItem(ALERT_CADENCE_KEY))
+  } catch {
+    return [...ALERT_MILESTONES]
+  }
+}
+
+function writeCadence(days: AlertMilestone[]): void {
+  try { localStorage.setItem(ALERT_CADENCE_KEY, formatCadence(days)) } catch { /* private mode */ }
+}
 
 function readAlertEmail(): string {
   try { return localStorage.getItem(ALERT_EMAIL_KEY) ?? '' } catch { return '' }
@@ -110,31 +125,43 @@ function writeAlertEmail(email: string): void {
   try { localStorage.setItem(ALERT_EMAIL_KEY, email) } catch { /* private mode */ }
 }
 
-function readAlertSet(): Set<string> {
+/**
+ * Which items this device has set an alert on, and the cadence each was set
+ * with — so the Alerts screen can offer to update the ones that no longer
+ * match the current pick. Reads the legacy array form too; those entries have
+ * an unknown cadence and are offered an update.
+ */
+function readAlertMap(): Map<string, string> {
   try {
-    const raw = JSON.parse(localStorage.getItem(ALERT_SET_KEY) || '[]') as unknown
-    return new Set(Array.isArray(raw) ? raw.filter((v): v is string => typeof v === 'string') : [])
-  } catch {
-    return new Set()
-  }
+    const raw = JSON.parse(localStorage.getItem(ALERT_SET_KEY) || '{}') as unknown
+    if (Array.isArray(raw)) {
+      return new Map(raw.filter((v): v is string => typeof v === 'string').map(k => [k, '']))
+    }
+    if (raw && typeof raw === 'object') {
+      return new Map(Object.entries(raw as Record<string, unknown>)
+        .filter((e): e is [string, string] => typeof e[1] === 'string'))
+    }
+  } catch { /* fall through to empty */ }
+  return new Map()
 }
 
-function markAlertSet(key: string): void {
-  const set = readAlertSet()
-  set.add(key)
-  try { localStorage.setItem(ALERT_SET_KEY, JSON.stringify([...set])) } catch { /* private mode */ }
+function markAlert(key: string, cadence: string): void {
+  const map = readAlertMap()
+  map.set(key, cadence)
+  try { localStorage.setItem(ALERT_SET_KEY, JSON.stringify(Object.fromEntries(map))) } catch { /* private mode */ }
 }
 
 /** POST an alert subscription. Resolves to null on success, or the error text. */
 async function postAlert(email: string, itemType: 'scholarship' | 'program', itemId: number): Promise<string | null> {
+  const cadence = readCadence()
   try {
     const res = await fetch('/api/alert', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, itemType, itemId }),
+      body: JSON.stringify({ email, itemType, itemId, days: cadence }),
     })
     const data = await res.json() as { error?: string }
-    if (res.ok) { markAlertSet(`${itemType}:${itemId}`); return null }
+    if (res.ok) { markAlert(`${itemType}:${itemId}`, formatCadence(cadence)); return null }
     return data.error || 'Something went wrong.'
   } catch {
     return 'Something went wrong. Try again.'
@@ -710,7 +737,7 @@ export function initApp(): void {
       saved.filter(l => l.deadline && statusOf(l, today) === 'active' && daysUntil(l.deadline, today) <= 7).length +
       savedPrg.filter(p => programStatusOf(p, today) === 'active' && daysUntil(p.deadline!, today) <= 7).length
 
-    const alertCount = readAlertSet().size
+    const alertCount = readAlertMap().size
     const closed = reopenStats(items, today).closed
 
     // In-app targets, not site URLs: the app now carries its own programs,
@@ -721,8 +748,8 @@ export function initApp(): void {
       ['Research programs', `${programs.length} summer and enrichment placements`, '>programs'],
       ['Guides', `${guides.length} walkthroughs · Rutherford, essays, references`, '>guides'],
       ['Deadline alerts', alertCount > 0
-        ? `${alertCount} set · email 30, 14 and 3 days before close`
-        : 'Email 30, 14 and 3 days before a deadline', '>alerts'],
+        ? `${alertCount} set · email ${cadenceSentence(readCadence())} before close`
+        : `Email ${cadenceSentence(readCadence())} before a deadline`, '>alerts'],
       // Only when there is something dormant to show: on a database that
       // filters retired rows out, this screen would open on nothing.
       ...(closed > 0
@@ -999,29 +1026,40 @@ export function initApp(): void {
 
   // ── Screen: deadline alerts ─────────────────────────────────────────────────
   // The design draws per-listing switches, a cadence picker and a push toggle.
-  // Only the first of those is real: /api/alert takes an email and one item,
-  // mails at a fixed 30/14/3 days, and there is no account to read the list
-  // back from. So the switches are one-way "remind me" buttons, the cadence is
-  // shown as the fact it is, and push is left out rather than faked.
+  // Two of the three are real. There is no account to read subscriptions back
+  // from, so the per-listing switches are one-way "remind me" buttons rather
+  // than switches you can flip off — the unsubscribe link in every email is
+  // the off switch. Push is left out rather than faked: there is no service
+  // worker and no push channel behind it.
 
   interface AlertRow { key: string; kind: 'scholarship' | 'program'; id: number; name: string; meta: string; eligible: boolean }
 
+  /**
+   * "AUG 15", but "MAR 20 2027" once the year stops being this one — a saved
+   * next-cycle award otherwise reads as a date that has already gone by.
+   */
+  function dueStamp(iso: string): string {
+    const year = Number(iso.slice(0, 4))
+    return year === today.getFullYear() ? shortDate(iso) : `${shortDate(iso)} ${year}`
+  }
+
   function alertRows(): AlertRow[] {
     const rows: AlertRow[] = []
+    // Eligibility is "has a dated deadline still ahead", not "open right now":
+    // a next-cycle award that reopens in the spring is exactly the thing worth
+    // a reminder, and /api/alert accepts it.
     for (const l of savedIds().map(id => byId.get(id)!).sort(byDeadline)) {
-      const eligible = !!l.deadline && statusOf(l, today) === 'active'
       rows.push({
         key: `scholarship:${l.id}`, kind: 'scholarship', id: l.id, name: l.title,
-        meta: l.deadline ? `DUE ${shortDate(l.deadline)} · ${(l.region ?? 'ALBERTA').toUpperCase()}` : 'NO FIXED DATE',
-        eligible,
+        meta: l.deadline ? `DUE ${dueStamp(l.deadline)} · ${(l.region ?? 'ALBERTA').toUpperCase()}` : 'NO FIXED DATE',
+        eligible: isDatedIso(l.deadline) && statusOf(l, today) !== 'closed',
       })
     }
     for (const p of savedProgramItems()) {
-      const eligible = programStatusOf(p, today) === 'active'
       rows.push({
         key: `program:${p.id}`, kind: 'program', id: p.id, name: p.name,
-        meta: isDatedIso(p.deadline) ? `DUE ${shortDate(p.deadline)} · PROGRAM` : 'DATE TBA · PROGRAM',
-        eligible,
+        meta: isDatedIso(p.deadline) ? `DUE ${dueStamp(p.deadline)} · PROGRAM` : 'DATE TBA · PROGRAM',
+        eligible: programStatusOf(p, today) === 'active',
       })
     }
     return rows
@@ -1029,23 +1067,33 @@ export function initApp(): void {
 
   function renderAlerts(): string {
     const rows = alertRows()
-    const set = readAlertSet()
+    const set = readAlertMap()
+    const cadence = readCadence()
+    const picked = formatCadence(cadence)
     const on = rows.filter(r => set.has(r.key)).length
-    const pending = rows.filter(r => r.eligible && !set.has(r.key))
+    // Rows that need a POST: never set, or set at a cadence that is no longer
+    // what the picker says.
+    const pending = rows.filter(r => r.eligible && set.get(r.key) !== picked)
     const email = readAlertEmail()
 
-    const rowHtml = rows.map(r => `
+    const rowHtml = rows.map(r => {
+      const stored = set.get(r.key)
+      const action = stored === undefined
+        ? (r.eligible ? `<button class="sabx-al-set" data-alert-set="${r.key}">Remind me</button>` : '<span class="sabx-al-state">NO DATE</span>')
+        : stored === picked
+          ? '<span class="sabx-al-state on">ON</span>'
+          : `<button class="sabx-al-set ghost" data-alert-set="${r.key}">Update</button>`
+      return `
       <div class="sabx-al-row">
         <div style="flex:1;min-width:0">
           <div class="sabx-al-name">${esc(r.name)}</div>
-          <div class="sabx-al-meta">${esc(r.meta)}</div>
+          <div class="sabx-al-meta">${esc(r.meta)}${stored !== undefined && stored !== picked
+            ? ` · SET FOR ${esc(stored ? stored.split(',').join('/') : 'THE DEFAULT')}`
+            : ''}</div>
         </div>
-        ${set.has(r.key)
-          ? '<span class="sabx-al-state on">ON</span>'
-          : r.eligible
-            ? `<button class="sabx-al-set" data-alert-set="${r.key}">Remind me</button>`
-            : '<span class="sabx-al-state">NO DATE</span>'}
-      </div>`).join('')
+        ${action}
+      </div>`
+    }).join('')
 
     return `
       <section class="sabx-overlay sabx-al">
@@ -1064,9 +1112,10 @@ export function initApp(): void {
 
           <div class="sabx-section-label" style="margin:26px 0 10px">WHEN</div>
           <div class="sabx-al-cadence">
-            <span>30 DAYS</span><span>14 DAYS</span><span>3 DAYS</span>
+            ${ALERT_MILESTONES.map(d => `
+              <button data-cadence="${d}" aria-pressed="${cadence.includes(d)}">${d} DAYS</button>`).join('')}
           </div>
-          <div class="sabx-al-fine">Before each deadline. Nothing else, ever.</div>
+          <div class="sabx-al-fine">${cadenceSentence(cadence)} before each deadline. Nothing else, ever.</div>
 
           <div class="sabx-section-label" style="margin:26px 0 6px">WHAT WE'RE WATCHING</div>
           ${rows.length > 0 ? rowHtml : `
@@ -1078,7 +1127,9 @@ export function initApp(): void {
             </div>`}
 
           ${pending.length > 1 ? `
-            <button class="sabx-btn-ink" data-alert-all style="width:100%;box-sizing:border-box;margin-top:18px">Remind me about all ${pending.length}</button>` : ''}
+            <button class="sabx-btn-ink" data-alert-all style="width:100%;box-sizing:border-box;margin-top:18px">${
+              pending.every(r => set.has(r.key)) ? `Update all ${pending.length}` : `Remind me about all ${pending.length}`
+            }</button>` : ''}
 
           <div class="sabx-al-unsub">Every email has a one-tap unsubscribe link — that is the only way to switch them off, and it works without signing in.</div>
         </div>
@@ -1288,14 +1339,14 @@ export function initApp(): void {
             <div class="sabx-section-label">WHAT YOU NEED</div>
             ${applySteps(l).map(t => `<div class="sabx-step"><i></i><span>${esc(t)}</span></div>`).join('')}
 
-            ${canRemind ? (readAlertSet().has(`scholarship:${l.id}`) ? `
+            ${canRemind ? (readAlertMap().has(`scholarship:${l.id}`) ? `
               <div class="sabx-remind">
                 <div class="sabx-remind-label">REMINDER SET</div>
-                <div class="sabx-remind-sub" style="margin:0">We'll email ${esc(readAlertEmail())} 30, 14 and 3 days before it closes.</div>
+                <div class="sabx-remind-sub" style="margin:0">We'll email ${esc(readAlertEmail())} ${cadenceSentence(readCadence())} before it closes.</div>
               </div>` : `
               <div class="sabx-remind">
                 <div class="sabx-remind-label">GET A DEADLINE REMINDER</div>
-                <div class="sabx-remind-sub">We email you 30, 14 and 3 days before it closes. Nothing else, ever.</div>
+                <div class="sabx-remind-sub">We email you ${cadenceSentence(readCadence())} before it closes. Nothing else, ever. <button class="sabx-remind-when" data-screen="alerts">Change when</button></div>
                 <form class="sabx-remind-form" data-remind-form data-item-id="${l.id}">
                   <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" aria-label="Your email" value="${esc(readAlertEmail())}" />
                   <button type="submit">Remind me</button>
@@ -1359,7 +1410,7 @@ export function initApp(): void {
       case 'saved': return `saved:${savedIds().join(',')}:${savedPrgIds().join(',')}`
       // Alert count too: it changes on the Alerts screen, and the Me row that
       // reports it is behind that screen the whole time.
-      case 'me':    return `me:${savedIds().join(',')}:${savedPrgIds().join(',')}:${readAlertSet().size}`
+      case 'me':    return `me:${savedIds().join(',')}:${savedPrgIds().join(',')}:${readAlertMap().size}:${formatCadence(readCadence())}`
     }
   }
 
@@ -1461,12 +1512,31 @@ export function initApp(): void {
 
     if (t.closest('[data-dismiss-offline]')) { offline = false; render(); return }
 
+    const cadenceBtn = t.closest<HTMLElement>('[data-cadence]')
+    if (cadenceBtn) {
+      const day = Number(cadenceBtn.dataset.cadence) as AlertMilestone
+      const current = readCadence()
+      const next = current.includes(day) ? current.filter(d => d !== day) : [...current, day]
+      // Turning the last one off would mean "mail me never", which is what the
+      // unsubscribe link is for — the API rejects an empty list, so say why
+      // rather than letting the next POST fail.
+      if (next.length === 0) { say('Keep at least one — use the unsubscribe link to stop them'); return }
+      writeCadence(next)
+      overlayBump++
+      render()
+      return
+    }
+
     const alertBtn = t.closest<HTMLElement>('[data-alert-set]')
     if (alertBtn) { void setAlerts([alertBtn.dataset.alertSet!], alertBtn); return }
 
     if (t.closest('[data-alert-all]')) {
       const btn = t.closest<HTMLElement>('[data-alert-all]')!
-      void setAlerts(alertRows().filter(r => r.eligible && !readAlertSet().has(r.key)).map(r => r.key), btn)
+      // Same rule as the button's own label: anything eligible that is not
+      // already set at the cadence currently picked.
+      const picked = formatCadence(readCadence())
+      const set = readAlertMap()
+      void setAlerts(alertRows().filter(r => r.eligible && set.get(r.key) !== picked).map(r => r.key), btn)
       return
     }
 
@@ -1671,14 +1741,14 @@ export function initApp(): void {
       const res = await fetch('/api/alert', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, itemType: 'scholarship', itemId }),
+        body: JSON.stringify({ email, itemType: 'scholarship', itemId, days: readCadence() }),
       })
       const data = await res.json() as { error?: string }
       if (res.ok) {
         // Remembered so the Alerts screen shows this listing as watched and
         // pre-fills the same address next time.
         writeAlertEmail(email.trim())
-        markAlertSet(`scholarship:${itemId}`)
+        markAlert(`scholarship:${itemId}`, formatCadence(readCadence()))
         form.hidden = true
         if (msg) { msg.textContent = "✓ Set — we'll nudge you before the deadline."; msg.hidden = false }
       } else {
