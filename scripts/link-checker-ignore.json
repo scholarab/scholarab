@@ -22,5 +22,9 @@
   {
     "host": "fraserinstitute.org",
     "reason": "WAF returns 403 to automated requests; site verified live in browser 2026-07-17"
+  },
+  {
+    "host": "peointernational.org",
+    "reason": "WAF returns 403 to automated requests; site verified live in browser 2026-07-31"
   }
 ]

@@ -43,7 +43,7 @@ interface SubscriberRow { email: string; token: string; cadence: string }
 
 /**
  * Subscribers for one item, with their cadence. Falls back to a query without
- * the column so a run that beats 0008_subscriber_cadence.sql still mails on
+ * the column so a run that beats 0009_subscriber_cadence.sql still mails on
  * every milestone rather than failing the whole job.
  */
 let cadenceColumnMissing = false
@@ -56,7 +56,7 @@ async function subscribersFor(itemType: string, itemId: number): Promise<Subscri
       ` as SubscriberRow[]
     } catch (e) {
       cadenceColumnMissing = true
-      console.error('[alerts] no cadence column — mailing every milestone. Apply drizzle/migrations/0008_subscriber_cadence.sql:', e)
+      console.error('[alerts] no cadence column — mailing every milestone. Apply drizzle/migrations/0009_subscriber_cadence.sql:', e)
     }
   }
   const rows = await sql`

@@ -79,7 +79,7 @@ export const POST: APIRoute = async ({ request }) => {
       })
   } catch (e) {
     // Deploys are not ordered against migrations, so this route can go live
-    // before 0008_subscriber_cadence.sql has run. Getting the reminder set at
+    // before 0009_subscriber_cadence.sql has run. Getting the reminder set at
     // the default cadence beats refusing the sign-up; the log is how a missing
     // migration gets noticed rather than silently costing everyone their pick.
     console.error('[alert] cadence insert failed, retrying without it:', e)
