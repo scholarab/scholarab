@@ -11,6 +11,12 @@ export type GuideMeta = {
   minutes: number
   datePublished: string
   dateModified: string
+  /**
+   * Three-line "what you need to know" summary, drawn from the guide's own
+   * prose. The /app guide reader shows these above a link through to the full
+   * page — an app-sized version of the guide rather than a copy of it.
+   */
+  takeaways: [string, string, string]
 }
 
 export const guides: GuideMeta[] = [
@@ -23,6 +29,11 @@ export const guides: GuideMeta[] = [
     minutes: 6,
     datePublished: '2026-07-19',
     dateModified: '2026-07-27',
+    takeaways: [
+      'Each grade is assessed on its own: $400 for Grade 10, $800 for Grade 11 and $1,300 for Grade 12 at 80%+.',
+      'There is no essay, no interview and no competition — meet the five-course average and the money is yours.',
+      'Applications open August 1, and you apply once you are enrolled in post-secondary, not while still in high school.',
+    ],
   },
   {
     slug: 'scholarships-for-grade-12-students-alberta',
@@ -33,6 +44,11 @@ export const guides: GuideMeta[] = [
     minutes: 7,
     datePublished: '2026-07-19',
     dateModified: '2026-07-19',
+    takeaways: [
+      'The most valuable awards close earliest — Loran goes in mid-October, before most schools mention scholarships at all.',
+      'November to February is nominated and institutional awards; internal school deadlines are always earlier than published ones.',
+      'March to May is local awards, where the applicant pools are smallest and the odds are best.',
+    ],
   },
   {
     slug: 'how-to-write-a-scholarship-essay',
@@ -43,6 +59,11 @@ export const guides: GuideMeta[] = [
     minutes: 8,
     datePublished: '2026-07-19',
     dateModified: '2026-07-19',
+    takeaways: [
+      'Underline the nouns in the award description — leadership, resilience, community. Those nouns are your marking rubric.',
+      'Open inside one specific moment, show the action you took, then say what changed. Specifics are proof; adjectives are claims.',
+      'Reusing an essay is smart. Reusing it without re-aiming it at the new award is how strong students lose.',
+    ],
   },
   {
     slug: 'grade-11-scholarship-timeline',
@@ -53,6 +74,11 @@ export const guides: GuideMeta[] = [
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-07-19',
+    takeaways: [
+      'Your Grade 11 average has a posted price: $500 at 75–79.9% and $800 at 80%+, straight from Rutherford.',
+      'Two years in one role beats eight one-off activities — Grade 11 is the last year you can start something and still call it sustained.',
+      'The teachers who write your Grade 12 reference letters are the ones who know you from Grade 11.',
+    ],
   },
   {
     slug: 'reference-letters-for-scholarships',
@@ -63,6 +89,11 @@ export const guides: GuideMeta[] = [
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-07-19',
+    takeaways: [
+      'Ask the person who knows you best, not the one with the best title. A teacher who watched you improve beats a principal who knows your name.',
+      'Three weeks before the deadline is the minimum, and the word "strong" in the ask gives a lukewarm referee a graceful exit.',
+      'Hand every referee one page: what the award rewards, the deadline and how to submit, and three specific things they saw you do.',
+    ],
   },
   {
     slug: 'scholarships-for-medicine-hat-students',
@@ -73,6 +104,11 @@ export const guides: GuideMeta[] = [
     minutes: 6,
     datePublished: '2026-07-19',
     dateModified: '2026-07-19',
+    takeaways: [
+      'Take Rutherford first. It pays up to $2,500 for marks you already earned and stacks with everything else.',
+      'Work the pools in order of odds: your own school office, then service clubs, then city, county and community foundations.',
+      'Some school awards are only advertised on a sheet by the counsellor’s door — ask for the local awards list by name.',
+    ],
   },
   {
     slug: 'trades-scholarships-rap-alberta',
@@ -83,6 +119,11 @@ export const guides: GuideMeta[] = [
     minutes: 6,
     datePublished: '2026-07-19',
     dateModified: '2026-07-19',
+    takeaways: [
+      'RAP pays you a wage, gives you high school credits, and banks hours toward the first period of your apprenticeship.',
+      'Being registered unlocks awards nobody competes for: $1,000 High School Apprenticeship and $2,000 Bright Futures.',
+      'Getting in goes through your off-campus education coordinator or guidance counsellor, not an application form.',
+    ],
   },
   {
     slug: 'local-scholarships-better-odds',
@@ -93,6 +134,11 @@ export const guides: GuideMeta[] = [
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-07-19',
+    takeaways: [
+      'A $10,000 national award drawing 10,000 applicants is worth a dollar in expected value. A $1,000 local award drawing 25 is worth forty.',
+      'Local committees know your school, your employers and often your referee — and they read part-time jobs as the point, not as filler.',
+      'They hide in guidance offices, city and county programs, service clubs and community foundations. Ask for the list directly.',
+    ],
   },
 ]
 

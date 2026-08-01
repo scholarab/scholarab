@@ -310,6 +310,12 @@ export interface WireProgram {
   c?: string | null         // category
   pr?: string | null        // provider
   p?: boolean               // paid
+  s?: string | null         // stipend
+  g?: string | null         // grades
+  du?: string | null        // duration
+  lo?: string | null        // location
+  el?: string | null        // eligibility, as prose
+  de?: string | null        // description
 }
 
 export interface ProgramItem {
@@ -320,6 +326,12 @@ export interface ProgramItem {
   category: string | null
   provider: string | null
   paid: boolean
+  stipend: string | null
+  grades: string | null
+  duration: string | null
+  location: string | null
+  eligibility: string | null
+  description: string | null
   slug: string
 }
 
@@ -332,6 +344,12 @@ export function expandProgram(w: WireProgram): ProgramItem {
     category: w.c ?? null,
     provider: w.pr ?? null,
     paid: w.p === true,
+    stipend: w.s ?? null,
+    grades: w.g ?? null,
+    duration: w.du ?? null,
+    location: w.lo ?? null,
+    eligibility: w.el ?? null,
+    description: w.de ?? null,
     slug: slugify(w.n),
   }
 }
@@ -360,14 +378,222 @@ export function programChipFor(p: { deadline: string | null }, today: Date): Chi
   return dueChip(daysUntil(p.deadline!, today))
 }
 
+/**
+ * The design's PAID / PAID · $3,000 / UNPAID pill. Some stipend strings are
+ * already sentences that start with "Paid" ("Paid (hourly rate in offer
+ * letter)"), so prefixing unconditionally reads "PAID · PAID (…)".
+ */
+export function programPayLabel(p: { paid: boolean; stipend: string | null }): string {
+  if (!p.paid) return 'UNPAID'
+  if (!p.stipend) return 'PAID'
+  const stipend = p.stipend.toUpperCase()
+  return stipend.startsWith('PAID') ? stipend : `PAID · ${stipend}`
+}
+
+/**
+ * The design's due pill. Its mock had "DATE TBA" on 96 of 97 rows; the real
+ * column also holds "Ongoing" and dates that have already gone by.
+ */
+export function programDueLabel(p: { deadline: string | null }, today: Date): string {
+  if (isDatedIso(p.deadline)) {
+    return programStatusOf(p, today) === 'closed' ? 'CLOSED' : `DUE ${shortDate(p.deadline)}`
+  }
+  return p.deadline === 'Ongoing' ? 'ONGOING' : 'DATE TBA'
+}
+
+/** Category chips for the programs screen, commonest first. */
+export function programCategoryKeys(programs: ProgramItem[]): string[] {
+  const counts = new Map<string, number>()
+  for (const p of programs) {
+    if (!p.category) continue
+    const k = p.category.toUpperCase()
+    counts.set(k, (counts.get(k) ?? 0) + 1)
+  }
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(e => e[0])
+}
+
+export function filterProgramCategory(programs: ProgramItem[], category: string): ProgramItem[] {
+  return category === 'ALL' ? programs : programs.filter(p => (p.category ?? '').toUpperCase() === category)
+}
+
+/**
+ * Programs you can still apply to first (soonest deadline), then the ones
+ * waiting on a date, then the ones that have closed for this cycle —
+ * alphabetical inside each band.
+ */
+export function sortPrograms(programs: ProgramItem[], today: Date): ProgramItem[] {
+  const band = (p: ProgramItem): number => {
+    const status = programStatusOf(p, today)
+    return status === 'active' ? 0 : status === 'tba' ? 1 : 2
+  }
+  return [...programs].sort((a, b) => {
+    const ba = band(a)
+    const bb = band(b)
+    if (ba !== bb) return ba - bb
+    if (ba === 0) return isoToMs(a.deadline!) - isoToMs(b.deadline!) || a.name.localeCompare(b.name)
+    return a.name.localeCompare(b.name)
+  })
+}
+
+// ── Awards that reopen ────────────────────────────────────────────────────────
+// The design's screen 11, for the listings the rest of the app deliberately
+// hides. Alberta deadlines cluster in spring, so most of the catalog is closed
+// for most of the year and students otherwise see an app that looks empty.
+
+export interface ReopenStats {
+  /** Deadline already gone by — comes back next cycle. */
+  closed: number
+  /**
+   * Everything the app is showing today, open or opening. Counted the same way
+   * `openListings` selects, so this number always equals the Due tab's — a
+   * stricter "accepting right now" count here read as a contradiction.
+   */
+  open: number
+  /** Not open yet but carrying a published open date. */
+  dated: number
+}
+
+export function reopenStats(items: Listing[], today: Date): ReopenStats {
+  const out: ReopenStats = { closed: 0, open: 0, dated: 0 }
+  for (const l of items) {
+    const status = statusOf(l, today)
+    if (status === 'closed') out.closed++
+    else out.open++
+    if (status === 'future' && l.openDate) out.dated++
+  }
+  return out
+}
+
+/**
+ * The design's "July is the quiet month." headline, told by the real split.
+ * Written as a statement about the catalog, never a promise about a date.
+ */
+export function reopenHeadline(stats: ReopenStats, today: Date): string {
+  const month = today.toLocaleDateString('en-CA', { month: 'long' })
+  if (stats.closed === 0) return 'Everything in the catalog is open.'
+  return stats.closed > stats.open
+    ? `${month} is a quiet month.`
+    : `${stats.closed} closed for this cycle.`
+}
+
+export interface ReopenRegion {
+  region: string
+  n: number
+  /** When that region's closed deadlines actually fell — "MOST CLOSED MAR – JUN". */
+  months: string
+}
+
+const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+
+/** Closed listings grouped by region, biggest group first — the design's rows. */
+export function reopenRegions(items: Listing[], today: Date): ReopenRegion[] {
+  const groups = new Map<string, { n: number; months: number[] }>()
+  for (const l of items) {
+    if (statusOf(l, today) !== 'closed') continue
+    const k = l.region ?? 'Alberta'
+    const g = groups.get(k) ?? { n: 0, months: [] }
+    g.n++
+    // Month index straight off the ISO string — no Date, so no timezone shift.
+    if (l.deadline) g.months.push(parseInt(l.deadline.slice(5, 7), 10) - 1)
+    groups.set(k, g)
+  }
+  return [...groups.entries()]
+    .map(([region, g]) => ({ region, n: g.n, months: monthRange(g.months) }))
+    .sort((a, b) => b.n - a.n || a.region.localeCompare(b.region))
+}
+
+/** "MOST CLOSED MAR – JUN", or a single month, or nothing to say. */
+function monthRange(months: number[]): string {
+  if (months.length === 0) return 'DATE NOT PUBLISHED YET'
+  const lo = Math.min(...months)
+  const hi = Math.max(...months)
+  return lo === hi ? `ALL CLOSED IN ${MONTHS[lo]}` : `MOST CLOSED ${MONTHS[lo]} – ${MONTHS[hi]}`
+}
+
+/**
+ * The one card the design gives a confirmed date: the next listing with a
+ * published open date still ahead of us.
+ */
+export function nextToOpen(items: Listing[], today: Date): Listing | null {
+  const dated = items
+    .filter(l => statusOf(l, today) === 'future' && l.openDate)
+    .sort((a, b) => isoToMs(a.openDate!) - isoToMs(b.openDate!))
+  return dated[0] ?? null
+}
+
+/** Closed listings that reopen, soonest-closed first so the freshest are on top. */
+export function closedListings(items: Listing[], today: Date): Listing[] {
+  return items
+    .filter(l => statusOf(l, today) === 'closed')
+    .sort((a, b) => isoToMs(b.deadline!) - isoToMs(a.deadline!) || b.amountValue - a.amountValue)
+}
+
+// ── Guides ────────────────────────────────────────────────────────────────────
+
+/** GuideMeta, trimmed to what the app's guides screens render. */
+export interface WireGuide {
+  s: string                 // slug
+  t: string                 // title
+  k: string                 // kicker
+  d: string                 // description — the design's standfirst
+  m: number                 // minutes
+  u: string                 // dateModified ISO
+  p: string[]               // takeaways
+}
+
+export interface GuideItem {
+  slug: string
+  title: string
+  kicker: string
+  standfirst: string
+  minutes: number
+  updated: string
+  points: string[]
+}
+
+export function expandGuide(w: WireGuide): GuideItem {
+  return {
+    slug: w.s, title: w.t, kicker: w.k, standfirst: w.d,
+    minutes: w.m, updated: w.u, points: w.p,
+  }
+}
+
 // ── Deep links ────────────────────────────────────────────────────────────────
 
 export type AppTab = 'feed' | 'due' | 'match' | 'saved' | 'me'
 
+/**
+ * Screens that sit *over* a tab rather than replacing it — the design's
+ * `state.screen`. Closing one returns to whatever tab is underneath.
+ */
+export type AppScreen = 'quiz' | 'programs' | 'guides' | 'guide' | 'alerts' | 'reopening'
+
+const TABS: AppTab[] = ['feed', 'due', 'match', 'saved', 'me']
+const SCREENS: AppScreen[] = ['quiz', 'programs', 'guides', 'guide', 'alerts', 'reopening']
+
+/** The tab left showing behind each pushed screen when it is deep-linked into. */
+const SCREEN_HOME: Record<AppScreen, AppTab> = {
+  quiz: 'match', guide: 'me', guides: 'me', programs: 'me', alerts: 'me', reopening: 'due',
+}
+
 /** "/app/#due" style deep links; anything unrecognized lands on the feed. */
 export function tabFromHash(hash: string): AppTab {
   const h = hash.replace(/^#/, '')
-  return h === 'due' || h === 'match' || h === 'saved' || h === 'me' ? h : 'feed'
+  return (TABS as string[]).includes(h) ? h as AppTab : 'feed'
+}
+
+/**
+ * Full route for a hash: "#saved" is a tab, "#programs" is a screen pushed over
+ * its home tab, and "#guide/how-to-write-a-scholarship-essay" opens one guide.
+ */
+export function routeFromHash(hash: string): { tab: AppTab; screen: AppScreen | null; slug: string | null } {
+  const h = hash.replace(/^#/, '')
+  const [head = '', ...rest] = h.split('/')
+  if ((SCREENS as string[]).includes(head)) {
+    const screen = head as AppScreen
+    return { tab: SCREEN_HOME[screen], screen, slug: rest.join('/') || null }
+  }
+  return { tab: tabFromHash(h), screen: null, slug: null }
 }
 
 // ── Quiz profile ──────────────────────────────────────────────────────────────
@@ -375,6 +601,87 @@ export function tabFromHash(hash: string): AppTab {
 export const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v4'
 
 export interface StoredQuiz { step: number; answers: Record<string, string> }
+
+export interface QuizOption { label: string; value: string; hint: string; emoji?: string }
+export interface QuizQuestion { key: string; q: string; opts: QuizOption[] }
+
+/**
+ * The one quiz definition, shared by /match's React quiz and /app's in-app one.
+ * Both write the same localStorage key, so a student who answers in the app is
+ * matched identically on the site and vice versa — which only holds if the
+ * option *values* are literally the same objects.
+ *
+ * Mono hints come from the "ScholarAB Match" design; keys, values and labels
+ * are the real matching-engine inputs and must not change without updating
+ * the matcher.
+ */
+export const QUIZ_QUESTIONS: QuizQuestion[] = [
+  {
+    key: 'searchType',
+    q: 'What are you looking for?',
+    opts: [
+      { label: 'Scholarships', value: 'scholarships', hint: 'AWARDS AND BURSARIES', emoji: '🎓' },
+      { label: 'Research Programs', value: 'programs', hint: 'SUMMER AND ENRICHMENT', emoji: '🔬' },
+      { label: 'Both', value: 'both', hint: 'SHOW ME EVERYTHING', emoji: '✨' },
+    ],
+  },
+  {
+    key: 'grade',
+    q: 'What grade are you in?',
+    opts: [
+      { label: 'Grade 10', value: '10', hint: 'TWO YEARS TO PLAN' },
+      { label: 'Grade 11', value: '11', hint: 'PRIME PREP TIME' },
+      { label: 'Grade 12', value: '12', hint: 'DEADLINES MATTER NOW' },
+      { label: 'Already in post-secondary', value: 'post-secondary', hint: 'CONTINUING AWARDS' },
+    ],
+  },
+  {
+    key: 'city',
+    q: 'Where are you based?',
+    opts: [
+      { label: 'Medicine Hat', value: 'Medicine Hat', hint: 'THE GAS CITY' },
+      { label: 'Calgary', value: 'Calgary', hint: 'AND AREA' },
+      { label: 'Edmonton', value: 'Edmonton', hint: 'AND AREA' },
+      { label: 'Lethbridge', value: 'Lethbridge', hint: 'AND AREA' },
+      { label: 'Red Deer', value: 'Red Deer', hint: 'AND AREA' },
+      { label: 'Other Alberta', value: 'Other Alberta', hint: 'EVERYWHERE ELSE' },
+    ],
+  },
+  {
+    key: 'field',
+    q: "What's your academic focus?",
+    opts: [
+      { label: 'STEM & Engineering', value: 'STEM', hint: 'SCIENCE, TECH, MATH', emoji: '🔬' },
+      { label: 'Health & Medicine', value: 'health', hint: 'PRE-MED, NURSING, KIN', emoji: '🩺' },
+      { label: 'Business & Commerce', value: 'business', hint: 'FINANCE, MANAGEMENT', emoji: '💼' },
+      { label: 'Arts & Humanities', value: 'arts', hint: 'FINE ARTS, SOCIAL SCIENCE', emoji: '🎨' },
+      { label: 'Trades', value: 'trades', hint: 'RAP AND APPRENTICESHIPS', emoji: '🔧' },
+      { label: 'Still figuring it out', value: '', hint: 'TOTALLY FINE', emoji: '🤷' },
+    ],
+  },
+  {
+    key: 'average',
+    q: "What's your academic average?",
+    opts: [
+      { label: '90% or higher', value: '93', hint: 'MERIT AWARDS OPEN UP' },
+      { label: '80 – 89%', value: '85', hint: 'PLENTY QUALIFY' },
+      { label: 'Below 80%', value: '79', hint: "GRADES AREN'T EVERYTHING" },
+      { label: "I'd rather not say", value: '', hint: 'NO PROBLEM' },
+    ],
+  },
+  {
+    key: 'institution',
+    q: 'Where are you planning to study?',
+    opts: [
+      { label: 'University of Calgary', value: 'University of Calgary', hint: 'CALGARY' },
+      { label: 'University of Alberta', value: 'University of Alberta', hint: 'EDMONTON' },
+      { label: 'Mount Royal University', value: 'Mount Royal University', hint: 'CALGARY' },
+      { label: 'Medicine Hat College', value: 'Medicine Hat College', hint: 'MEDICINE HAT' },
+      { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', hint: 'SAIT, NAIT AND MORE' },
+      { label: 'Not sure yet', value: '', hint: 'KEEP OPTIONS OPEN' },
+    ],
+  },
+]
 
 /**
  * Rebuild the matcher's StudentProfile from stored quiz answers — the same

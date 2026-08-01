@@ -16,9 +16,13 @@ import {
   expandItem, chipFor, statusOf, daysUntil, midnight, initialsOf, orgLine, hashTags,
   feedStamp, applySteps, shortMoney, moneyTotal, openListings, byDeadline, searchListings,
   filterCategory, categoryKeys, nearbyListings, profileFromAnswers, profileChips,
-  weekStrip, deadlineWeeks, timePressure, longDate, shortDate, tabFromHash,
+  weekStrip, deadlineWeeks, timePressure, longDate, shortDate, routeFromHash,
   expandProgram, programStatusOf, programChipFor, isDatedIso, QUIZ_STORAGE_KEY,
-  type WireItem, type WireProgram, type Listing, type ProgramItem, type StoredQuiz, type AppTab,
+  QUIZ_QUESTIONS, programPayLabel, programDueLabel, programCategoryKeys,
+  filterProgramCategory, sortPrograms, expandGuide, reopenStats, reopenHeadline,
+  reopenRegions, nextToOpen, closedListings,
+  type WireItem, type WireProgram, type WireGuide, type Listing, type ProgramItem,
+  type GuideItem, type StoredQuiz, type AppTab, type AppScreen,
 } from './app-core.ts'
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -65,6 +69,80 @@ function readQuiz(): Record<string, string> | null {
   }
 }
 
+function readQuizState(): StoredQuiz {
+  try {
+    const raw = localStorage.getItem(QUIZ_STORAGE_KEY)
+    if (raw) {
+      const parsed = JSON.parse(raw) as { step?: unknown; answers?: unknown }
+      const step = typeof parsed.step === 'number' && Number.isFinite(parsed.step)
+        ? Math.min(Math.max(Math.trunc(parsed.step), 0), QUIZ_QUESTIONS.length)
+        : 0
+      const answers: Record<string, string> = {}
+      if (parsed.answers && typeof parsed.answers === 'object') {
+        for (const [k, v] of Object.entries(parsed.answers as Record<string, unknown>)) {
+          if (typeof v === 'string') answers[k] = v
+        }
+      }
+      return { step, answers }
+    }
+  } catch { /* fall through to a fresh quiz */ }
+  return { step: 0, answers: {} }
+}
+
+function writeQuizState(state: StoredQuiz): void {
+  try { localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(state)) } catch { /* private mode */ }
+}
+
+// ── Deadline alerts ───────────────────────────────────────────────────────────
+// There is no account, so the server cannot tell the app which alerts a student
+// already has. These two keys are the local echo: the address they last used,
+// and the items they set an alert on from this device. Losing them costs a
+// duplicate POST, which the subscribers table dedupes on conflict.
+
+const ALERT_EMAIL_KEY = 'scholarab_alert_email'
+const ALERT_SET_KEY = 'scholarab_alerts'
+
+function readAlertEmail(): string {
+  try { return localStorage.getItem(ALERT_EMAIL_KEY) ?? '' } catch { return '' }
+}
+
+function writeAlertEmail(email: string): void {
+  try { localStorage.setItem(ALERT_EMAIL_KEY, email) } catch { /* private mode */ }
+}
+
+function readAlertSet(): Set<string> {
+  try {
+    const raw = JSON.parse(localStorage.getItem(ALERT_SET_KEY) || '[]') as unknown
+    return new Set(Array.isArray(raw) ? raw.filter((v): v is string => typeof v === 'string') : [])
+  } catch {
+    return new Set()
+  }
+}
+
+function markAlertSet(key: string): void {
+  const set = readAlertSet()
+  set.add(key)
+  try { localStorage.setItem(ALERT_SET_KEY, JSON.stringify([...set])) } catch { /* private mode */ }
+}
+
+/** POST an alert subscription. Resolves to null on success, or the error text. */
+async function postAlert(email: string, itemType: 'scholarship' | 'program', itemId: number): Promise<string | null> {
+  try {
+    const res = await fetch('/api/alert', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, itemType, itemId }),
+    })
+    const data = await res.json() as { error?: string }
+    if (res.ok) { markAlertSet(`${itemType}:${itemId}`); return null }
+    return data.error || 'Something went wrong.'
+  } catch {
+    return 'Something went wrong. Try again.'
+  }
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 // ── Controller ────────────────────────────────────────────────────────────────
 
 export function initApp(): void {
@@ -73,7 +151,17 @@ export function initApp(): void {
   let programs: ProgramItem[] = []
   let today = midnight()
 
+  let guides: GuideItem[] = []
+
   let tab: Tab = 'feed'
+  /** A pushed screen sitting over the current tab; null means the tab is bare. */
+  let screen: AppScreen | null = null
+  let guideSlug: string | null = null
+  let progCategory = 'ALL'
+  let progId: number | null = null
+  let quizStep = 0
+  let quizAnswers: Record<string, string> = {}
+  let offline = false
   let feedMode: FeedMode = 'foryou'
   let query = ''
   let category = 'ALL'
@@ -89,6 +177,9 @@ export function initApp(): void {
   let viewTimer: ReturnType<typeof setTimeout> | null = null
   /** Bumped whenever something re-renders the active screen from scratch. */
   let renderedKey = ''
+  let renderedOverlayKey = ''
+  /** Turned to force the pushed screen to repaint after an async change. */
+  let overlayBump = 0
 
   const byId = new Map<number, Listing>()
   const byPid = new Map<number, ProgramItem>()
@@ -161,7 +252,32 @@ export function initApp(): void {
 
   function go(next: Tab): void {
     tab = next
+    screen = null
+    progId = null
     closeSheet(false)
+    render()
+  }
+
+  /** Open a screen over the current tab — the design's `push`. */
+  function pushScreen(next: AppScreen, slug: string | null = null): void {
+    screen = next
+    guideSlug = slug
+    progId = null
+    if (next === 'quiz') {
+      const stored = readQuizState()
+      quizAnswers = stored.answers
+      // A finished quiz reopens at the start so "Edit profile" is a real redo,
+      // not a dead-end on the last question.
+      quizStep = stored.step >= QUIZ_QUESTIONS.length ? 0 : stored.step
+    }
+    closeSheet(false)
+    render()
+  }
+
+  function closeScreen(): void {
+    screen = null
+    guideSlug = null
+    progId = null
     render()
   }
 
@@ -284,7 +400,7 @@ export function initApp(): void {
           : 'Every open listing is in the directory. Narrow it down with the match quiz.'}</p>
         <div class="sabx-feed-end-btns">
           <button class="sabx-btn-mint" data-go="due">Browse all ${total} →</button>
-          <a class="sabx-btn-ghost" href="/match/">${matched ? 'Redo my match' : 'Take the match quiz'}</a>
+          <button class="sabx-btn-ghost" data-screen="quiz">${matched ? 'Redo my match' : 'Take the match quiz'}</button>
         </div>
       </div>`
 
@@ -318,6 +434,7 @@ export function initApp(): void {
     const total = open().length
     const rings = [...open()].filter(l => l.deadline && statusOf(l, today) === 'active').sort(byDeadline).slice(0, 5)
     const cats = ['ALL', ...categoryKeys(open())]
+    const closed = reopenStats(items, today).closed
 
     const ringHtml = rings.map(l => {
       const days = daysUntil(l.deadline!, today)
@@ -364,6 +481,11 @@ export function initApp(): void {
             <span class="sabx-wordmark">Scholar<span>AB</span></span>
             <span class="sabx-count-chip">${list.length === total ? `${total} OPEN` : `${list.length} SHOWN`}</span>
           </div>
+          <div class="sabx-segs">
+            <span class="sabx-seg" aria-current="page">OPEN NOW · ${total}</span>
+            ${closed > 0 ? `<button class="sabx-seg" data-screen="reopening">REOPENING · ${closed}</button>` : ''}
+            <button class="sabx-seg" data-screen="programs">PROGRAMS · ${programs.length}</button>
+          </div>
           ${rings.length > 0 ? `<div class="sabx-rings">${ringHtml}</div>` : ''}
           <div class="sabx-search-wrap">
             <div class="sabx-search">
@@ -409,7 +531,7 @@ export function initApp(): void {
               <p>${answers
                 ? 'Listings open and close all year. Browse the full directory in the meantime.'
                 : 'The quiz checks your grade, region and field against every listing so this screen only shows what you can actually win.'}</p>
-              <a class="sabx-btn-ink" href="/match/">${answers ? 'Redo the quiz' : 'Take the quiz'}</a>
+              <button class="sabx-btn-ink" data-screen="quiz">${answers ? 'Redo the quiz' : 'Take the quiz'}</button>
             </div>
           </div>
         </section>`
@@ -445,7 +567,7 @@ export function initApp(): void {
         <div class="sabx-match-scroll">
           <div class="sabx-profile-chips">
             ${chips.map(c => `<span class="sabx-profile-chip">${esc(c)}</span>`).join('')}
-            <a class="sabx-profile-chip edit" href="/match/">+ EDIT</a>
+            <button class="sabx-profile-chip edit" data-screen="quiz">+ EDIT</button>
           </div>
           <div class="sabx-match-total">
             <b>${list.length}</b><span>you actually qualify for</span>
@@ -588,11 +710,25 @@ export function initApp(): void {
       saved.filter(l => l.deadline && statusOf(l, today) === 'active' && daysUntil(l.deadline, today) <= 7).length +
       savedPrg.filter(p => programStatusOf(p, today) === 'active' && daysUntil(p.deadline!, today) <= 7).length
 
+    const alertCount = readAlertSet().size
+    const closed = reopenStats(items, today).closed
+
+    // In-app targets, not site URLs: the app now carries its own programs,
+    // guides and alerts screens, and bouncing phones back out to the desktop
+    // pages is the gap this screen exists to close. `#` prefixes a tab,
+    // `>` a pushed screen; anything else is a real link off the app.
     const rows: [string, string, string][] = [
-      // In-app hash, not /scholarships/: the Due tab IS the browse experience
-      // here, and bouncing phones back to the old list defeats the point.
+      ['Research programs', `${programs.length} summer and enrichment placements`, '>programs'],
+      ['Guides', `${guides.length} walkthroughs · Rutherford, essays, references`, '>guides'],
+      ['Deadline alerts', alertCount > 0
+        ? `${alertCount} set · email 30, 14 and 3 days before close`
+        : 'Email 30, 14 and 3 days before a deadline', '>alerts'],
+      // Only when there is something dormant to show: on a database that
+      // filters retired rows out, this screen would open on nothing.
+      ...(closed > 0
+        ? [['Awards that reopen', `${closed} closed for this cycle · see when they come back`, '>reopening'] as [string, string, string]]
+        : []),
       ['Browse every scholarship', `All ${open().length} open listings, filterable`, '#due'],
-      ['Research programs', 'Summer and enrichment placements', '/programs/'],
       ['Suggest a scholarship', 'Found one we missed? Send it in', 'mailto:contact.scholarab@gmail.com?subject=Scholarship%20suggestion'],
       ['How listings get checked', 'Every deadline verified by hand', '/about/'],
     ]
@@ -614,10 +750,10 @@ export function initApp(): void {
             </div>
             <div class="sabx-me-chips">
               ${chips.map(c => `<span class="sabx-me-chip">${esc(c)}</span>`).join('')}
-              <a class="sabx-me-chip edit" href="/match/">+ EDIT</a>
+              <button class="sabx-me-chip edit" data-screen="quiz">+ EDIT</button>
             </div>
             <div class="sabx-me-btns">
-              <a class="sabx-me-btn" href="/match/">${answers ? 'Edit profile' : 'Take the quiz'}</a>
+              <button class="sabx-me-btn" data-screen="quiz">${answers ? 'Edit profile' : 'Take the quiz'}</button>
               <button class="sabx-me-btn primary" data-share-app>Share ScholarAB</button>
             </div>
           </div>
@@ -628,13 +764,6 @@ export function initApp(): void {
             <div class="sabx-stat green"><b>${moneyTotal(inPlay)}</b><span>IN PLAY</span></div>
           </div>
 
-          <div class="sabx-me-row" style="padding:18px 20px">
-            <div class="sabx-me-row-body">
-              <div class="sabx-me-row-label">Deadline reminders</div>
-              <div class="sabx-me-row-sub">Email 30, 14 and 3 days before a listing closes. Set one from any listing.</div>
-            </div>
-          </div>
-
           <div class="sabx-me-rows">
             ${rows.map(([label, sub, href]) => {
               const body = `
@@ -643,14 +772,480 @@ export function initApp(): void {
                   <span class="sabx-me-row-sub">${esc(sub)}</span>
                 </span>
                 <span class="sabx-me-row-arrow">›</span>`
-              return href.startsWith('#')
-                ? `<button class="sabx-me-row" data-go="${esc(href.slice(1))}">${body}</button>`
-                : `<a class="sabx-me-row" href="${esc(href)}">${body}</a>`
+              if (href.startsWith('>')) return `<button class="sabx-me-row" data-screen="${esc(href.slice(1))}">${body}</button>`
+              if (href.startsWith('#')) return `<button class="sabx-me-row" data-go="${esc(href.slice(1))}">${body}</button>`
+              return `<a class="sabx-me-row" href="${esc(href)}">${body}</a>`
             }).join('')}
             <div class="sabx-me-foot">MADE IN MEDICINE HAT · FREE FOREVER</div>
           </div>
         </div>
       </section>`
+  }
+
+  // ── Screen: quiz ────────────────────────────────────────────────────────────
+  // The design runs the match quiz in-app; the shipped app left /app for
+  // /match/. Same questions and same localStorage key as the React quiz, so
+  // answering in either place matches identically in both.
+
+  function renderQuiz(): string {
+    const q = QUIZ_QUESTIONS[Math.min(quizStep, QUIZ_QUESTIONS.length - 1)]!
+    const bars = QUIZ_QUESTIONS
+      .map((_, i) => `<i class="${i < quizStep ? 'done' : i === quizStep ? 'here' : ''}"></i>`)
+      .join('')
+
+    const opts = q.opts.map((o, i) => {
+      const on = quizAnswers[q.key] === o.value
+      return `
+        <button class="sabx-q-opt" data-quiz-pick="${i}" aria-pressed="${on}">
+          <span class="sabx-q-opt-body">
+            <span class="sabx-q-opt-label">${o.emoji ? `<span class="sabx-q-emoji" aria-hidden="true">${o.emoji}</span>` : ''}${esc(o.label)}</span>
+            <span class="sabx-q-opt-hint">${esc(o.hint)}</span>
+          </span>
+          <span class="sabx-q-dot"></span>
+        </button>`
+    }).join('')
+
+    return `
+      <section class="sabx-overlay sabx-quiz" role="dialog" aria-modal="true" aria-label="Match quiz">
+        <div class="sabx-q-head">
+          <button class="sabx-q-back" data-quiz-back aria-label="Back">‹</button>
+          <div class="sabx-q-bars">${bars}</div>
+          <button class="sabx-q-close" data-close-screen>CLOSE</button>
+        </div>
+        <div class="sabx-q-intro">
+          <div class="sabx-q-step">QUESTION ${quizStep + 1} OF ${QUIZ_QUESTIONS.length}</div>
+          <h2 class="sabx-q-title">${esc(q.q)}</h2>
+        </div>
+        <div class="sabx-q-opts">${opts}</div>
+        <div class="sabx-q-foot">ANSWERS STAY ON THIS DEVICE. NO ACCOUNT, EVER.</div>
+      </section>`
+  }
+
+  function answerQuiz(index: number): void {
+    const q = QUIZ_QUESTIONS[Math.min(quizStep, QUIZ_QUESTIONS.length - 1)]!
+    const opt = q.opts[index]
+    if (!opt) return
+    quizAnswers = { ...quizAnswers, [q.key]: opt.value }
+    const last = quizStep >= QUIZ_QUESTIONS.length - 1
+    quizStep = last ? QUIZ_QUESTIONS.length : quizStep + 1
+    writeQuizState({ step: quizStep, answers: quizAnswers })
+
+    if (!last) { render(); return }
+
+    sendEvent('quiz_complete')
+    screen = null
+    tab = 'match'
+    // The match list is rebuilt from the new profile, so the old tick-boxes
+    // point at listings that may no longer be in it.
+    picks = {}
+    picksSeeded = false
+    renderedKey = ''
+    render()
+    const n = matchListings().length
+    say(n === 0 ? 'Profile saved · nothing open fits it today' : `Profile saved · ${n} match${n === 1 ? '' : 'es'}`)
+  }
+
+  // ── Screen: research programs ───────────────────────────────────────────────
+
+  function programList(): ProgramItem[] {
+    return sortPrograms(filterProgramCategory(programs, progCategory), today)
+  }
+
+  function renderPrograms(): string {
+    const list = programList()
+    const cats = ['ALL', ...programCategoryKeys(programs)]
+    const tba = programs.filter(p => !isDatedIso(p.deadline)).length
+
+    const rows = list.map(p => {
+      const on = getSavedPrograms().includes(p.id)
+      const due = programDueLabel(p, today)
+      const dated = isDatedIso(p.deadline) && programStatusOf(p, today) === 'active'
+      return `
+        <div class="sabx-pg-card">
+          <button class="sabx-pg-top" data-prog="${p.id}">
+            <span style="flex:1;min-width:0">
+              <span class="sabx-pg-cat">${esc((p.category ?? 'RESEARCH PROGRAM').toUpperCase())}</span>
+              <span class="sabx-pg-name">${esc(p.name)}</span>
+              <span class="sabx-pg-provider">${esc(p.provider ?? 'Alberta')}</span>
+            </span>
+            <span class="sabx-me-row-arrow">›</span>
+          </button>
+          <div class="sabx-pg-meta">${esc([p.grades, p.duration].filter(Boolean).join(' · ') || 'Open to Alberta students')}${
+            p.location ? `<br />${esc(p.location)}` : ''}</div>
+          <div class="sabx-pg-pills">
+            <span class="sabx-pg-pill${p.paid ? ' paid' : ''}">${esc(programPayLabel(p))}</span>
+            <span class="sabx-pg-pill${dated ? ' due' : ''}">${esc(due)}</span>
+            <button class="sabx-pg-save" data-psave-id="${p.id}" aria-pressed="${on}">${on ? 'SAVED' : 'SAVE'}</button>
+          </div>
+        </div>`
+    }).join('')
+
+    return `
+      <section class="sabx-overlay sabx-pg">
+        <div class="sabx-ov-head">
+          <button class="sabx-ov-back" data-close-screen aria-label="Back">‹</button>
+          <span class="sabx-ov-title">Research programs</span>
+          <span class="sabx-ov-count">${list.length === programs.length ? `${programs.length} PROGRAMS` : `${list.length} SHOWN`}</span>
+        </div>
+        <div class="sabx-ov-scroll">
+          ${tba > 0 ? `
+            <div class="sabx-note-dark">
+              <div class="sabx-note-dark-label">${tba} OF ${programs.length} DATES ARE TBA</div>
+              <div class="sabx-note-dark-body">Most of these open between October and February. Save one and it sits in your Saved tab — we re-check every program's dates weekly and the date lands there the day it's published.</div>
+            </div>` : ''}
+          <div class="sabx-chips sabx-ov-chips">
+            ${cats.map(c => `<button class="sabx-chip" data-progcat="${esc(c)}" aria-pressed="${progCategory === c}">${c === 'ALL' ? `ALL ${programs.length}` : esc(c)}</button>`).join('')}
+          </div>
+          ${rows}
+          ${list.length === 0 ? `
+            <div class="sabx-empty" style="margin:2px 20px 0">
+              <div class="sabx-empty-title">Nothing in that category yet.</div>
+              <div class="sabx-empty-sub">Clear the filter to see all ${programs.length}.</div>
+            </div>` : ''}
+          <div class="sabx-ov-foot">PROGRAM DATES ARE RE-CHECKED WEEKLY</div>
+        </div>
+      </section>`
+  }
+
+  // ── Screen: guides ──────────────────────────────────────────────────────────
+
+  function renderGuides(): string {
+    const feat = guides[0]
+    const rest = guides.slice(1)
+
+    const featHtml = feat ? `
+      <button class="sabx-gd-feat" data-guide="${esc(feat.slug)}">
+        <span class="sabx-gd-feat-kicker">${esc(feat.kicker)}</span>
+        <span class="sabx-gd-feat-title">${esc(feat.title)}</span>
+        <span class="sabx-gd-feat-stand">${esc(feat.standfirst)}</span>
+        <span class="sabx-gd-feat-foot">
+          <span class="sabx-gd-feat-meta">${feat.minutes} MIN · UPDATED ${esc(shortDate(feat.updated))}</span>
+          <span class="sabx-gd-feat-cta">Read →</span>
+        </span>
+      </button>` : ''
+
+    const rows = rest.map(g => `
+      <button class="sabx-gd-row" data-guide="${esc(g.slug)}">
+        <span style="flex:1;min-width:0">
+          <span class="sabx-gd-row-kicker">${esc(g.kicker)}</span>
+          <span class="sabx-gd-row-title">${esc(g.title)}</span>
+        </span>
+        <span class="sabx-gd-row-min">${g.minutes} MIN</span>
+        <span class="sabx-me-row-arrow">›</span>
+      </button>`).join('')
+
+    return `
+      <section class="sabx-overlay sabx-gd">
+        <div class="sabx-ov-head">
+          <button class="sabx-ov-back" data-close-screen aria-label="Back">‹</button>
+          <span class="sabx-ov-title">Guides</span>
+          <span class="sabx-ov-count">${guides.length} WRITTEN</span>
+        </div>
+        <div class="sabx-ov-scroll pad">
+          ${featHtml}
+          ${rest.length > 0 ? '<div class="sabx-section-label" style="padding:26px 0 4px;margin:0">EVERYTHING ELSE</div>' : ''}
+          ${rows}
+          <div class="sabx-ov-foot">WRITTEN BY STUDENTS WHO APPLIED · NO SPONSORED POSTS</div>
+        </div>
+      </section>`
+  }
+
+  // ── Screen: guide reader ────────────────────────────────────────────────────
+  // An app-sized version of the guide: kicker, standfirst and the three things
+  // it comes down to, then out to the full page. The prose lives on
+  // /guides/<slug>/ and is not duplicated into the app payload.
+
+  function renderGuide(): string {
+    const g = guides.find(x => x.slug === guideSlug) ?? guides[0]
+    if (!g) return renderGuides()
+    const more = guides.filter(x => x.slug !== g.slug).slice(0, 2)
+
+    return `
+      <section class="sabx-overlay sabx-gr">
+        <div class="sabx-ov-head bordered">
+          <button class="sabx-ov-back" data-screen="guides" aria-label="Back to guides">‹</button>
+          <span class="sabx-gr-meta">${g.minutes} MIN READ · UPDATED ${esc(shortDate(g.updated))}</span>
+          <button class="sabx-ov-share" data-share-guide="${esc(g.slug)}" aria-label="Share this guide">↗</button>
+        </div>
+        <div class="sabx-ov-scroll pad">
+          <div class="sabx-gr-kicker">${esc(g.kicker)}</div>
+          <h1 class="sabx-gr-title">${esc(g.title)}</h1>
+          <p class="sabx-gr-stand">${esc(g.standfirst)}</p>
+
+          <div class="sabx-gr-points">
+            <div class="sabx-gr-points-label">WHAT IT COMES DOWN TO</div>
+            ${g.points.map(t => `<div class="sabx-gr-point"><i></i><span>${esc(t)}</span></div>`).join('')}
+          </div>
+
+          <a class="sabx-note-dark sabx-gr-next" href="/guides/${esc(g.slug)}/">
+            <span class="sabx-note-dark-label">NEXT STEP</span>
+            <span class="sabx-gr-next-title">Read the whole thing.</span>
+            <span class="sabx-gr-next-cta">Open the full guide <span>↗</span></span>
+          </a>
+
+          ${more.length > 0 ? `
+            <div class="sabx-section-label" style="padding:26px 0 2px;margin:0">KEEP READING</div>
+            ${more.map(m => `
+              <button class="sabx-gd-row" data-guide="${esc(m.slug)}">
+                <span style="flex:1;min-width:0">
+                  <span class="sabx-gd-row-kicker">${esc(m.kicker)}</span>
+                  <span class="sabx-gd-row-title">${esc(m.title)}</span>
+                </span>
+                <span class="sabx-gd-row-min">${m.minutes} MIN</span>
+              </button>`).join('')}` : ''}
+        </div>
+      </section>`
+  }
+
+  // ── Screen: deadline alerts ─────────────────────────────────────────────────
+  // The design draws per-listing switches, a cadence picker and a push toggle.
+  // Only the first of those is real: /api/alert takes an email and one item,
+  // mails at a fixed 30/14/3 days, and there is no account to read the list
+  // back from. So the switches are one-way "remind me" buttons, the cadence is
+  // shown as the fact it is, and push is left out rather than faked.
+
+  interface AlertRow { key: string; kind: 'scholarship' | 'program'; id: number; name: string; meta: string; eligible: boolean }
+
+  function alertRows(): AlertRow[] {
+    const rows: AlertRow[] = []
+    for (const l of savedIds().map(id => byId.get(id)!).sort(byDeadline)) {
+      const eligible = !!l.deadline && statusOf(l, today) === 'active'
+      rows.push({
+        key: `scholarship:${l.id}`, kind: 'scholarship', id: l.id, name: l.title,
+        meta: l.deadline ? `DUE ${shortDate(l.deadline)} · ${(l.region ?? 'ALBERTA').toUpperCase()}` : 'NO FIXED DATE',
+        eligible,
+      })
+    }
+    for (const p of savedProgramItems()) {
+      const eligible = programStatusOf(p, today) === 'active'
+      rows.push({
+        key: `program:${p.id}`, kind: 'program', id: p.id, name: p.name,
+        meta: isDatedIso(p.deadline) ? `DUE ${shortDate(p.deadline)} · PROGRAM` : 'DATE TBA · PROGRAM',
+        eligible,
+      })
+    }
+    return rows
+  }
+
+  function renderAlerts(): string {
+    const rows = alertRows()
+    const set = readAlertSet()
+    const on = rows.filter(r => set.has(r.key)).length
+    const pending = rows.filter(r => r.eligible && !set.has(r.key))
+    const email = readAlertEmail()
+
+    const rowHtml = rows.map(r => `
+      <div class="sabx-al-row">
+        <div style="flex:1;min-width:0">
+          <div class="sabx-al-name">${esc(r.name)}</div>
+          <div class="sabx-al-meta">${esc(r.meta)}</div>
+        </div>
+        ${set.has(r.key)
+          ? '<span class="sabx-al-state on">ON</span>'
+          : r.eligible
+            ? `<button class="sabx-al-set" data-alert-set="${r.key}">Remind me</button>`
+            : '<span class="sabx-al-state">NO DATE</span>'}
+      </div>`).join('')
+
+    return `
+      <section class="sabx-overlay sabx-al">
+        <div class="sabx-ov-head">
+          <button class="sabx-ov-back" data-close-screen aria-label="Back">‹</button>
+          <span class="sabx-ov-title">Deadline alerts</span>
+          <span class="sabx-ov-count">${on === 1 ? '1 SET' : `${on} SET`}</span>
+        </div>
+        <div class="sabx-ov-scroll pad">
+          <div class="sabx-section-label" style="margin-bottom:10px">WHERE THEY GO</div>
+          <div class="sabx-al-email">
+            <input type="email" data-alert-email value="${esc(email)}" placeholder="your@email.com"
+                   autocomplete="email" inputmode="email" aria-label="Email for deadline alerts" />
+          </div>
+          <div class="sabx-al-fine">Email only — no account, no password. One tap in any email turns everything off.</div>
+
+          <div class="sabx-section-label" style="margin:26px 0 10px">WHEN</div>
+          <div class="sabx-al-cadence">
+            <span>30 DAYS</span><span>14 DAYS</span><span>3 DAYS</span>
+          </div>
+          <div class="sabx-al-fine">Before each deadline. Nothing else, ever.</div>
+
+          <div class="sabx-section-label" style="margin:26px 0 6px">WHAT WE'RE WATCHING</div>
+          ${rows.length > 0 ? rowHtml : `
+            <div class="sabx-empty-big" style="margin-top:8px">
+              <div class="sabx-section-label">NOTHING SAVED</div>
+              <h3>Save something first.</h3>
+              <p>Alerts follow your shortlist — save an award and it shows up here with a reminder you can switch on.</p>
+              <button class="sabx-btn-ink" data-go="feed">Open the feed</button>
+            </div>`}
+
+          ${pending.length > 1 ? `
+            <button class="sabx-btn-ink" data-alert-all style="width:100%;box-sizing:border-box;margin-top:18px">Remind me about all ${pending.length}</button>` : ''}
+
+          <div class="sabx-al-unsub">Every email has a one-tap unsubscribe link — that is the only way to switch them off, and it works without signing in.</div>
+        </div>
+      </section>`
+  }
+
+  // ── Screen: awards that reopen ──────────────────────────────────────────────
+  // Alberta deadlines cluster in spring, so for most of the year the majority
+  // of the catalog is closed and the app looks emptier than the database is.
+  // This is where those listings live.
+
+  function renderReopening(): string {
+    const stats = reopenStats(items, today)
+    const regions = reopenRegions(items, today)
+    const next = nextToOpen(items, today)
+    const biggest = closedListings(items, today)
+      .slice()
+      .sort((a, b) => b.amountValue - a.amountValue)
+      .slice(0, 8)
+
+    const nextHtml = next ? `
+      <div class="sabx-section-label" style="margin:24px 0 10px">CONFIRMED REOPEN DATE</div>
+      <div class="sabx-ro-next">
+        <span class="sabx-ro-next-chip">OPENS ${esc(shortDate(next.openDate!))} · IN ${daysUntil(next.openDate!, today)} DAY${daysUntil(next.openDate!, today) === 1 ? '' : 'S'}</span>
+        <div class="sabx-ro-next-name">${esc(next.title)}</div>
+        <div class="sabx-ro-next-org">${esc(orgLine(next))} · ${esc(next.amount)}</div>
+        <div class="sabx-ro-next-btns">
+          <button class="sabx-btn-ink" data-open="${next.id}">See the listing</button>
+          <button class="sabx-ro-next-link" data-screen="guides">Read the guides</button>
+        </div>
+      </div>` : ''
+
+    const regionHtml = regions.map(r => `
+      <div class="sabx-ro-row">
+        <div class="sabx-ro-n">${r.n}</div>
+        <div style="flex:1;min-width:0">
+          <div class="sabx-ro-label">${esc(r.region)}</div>
+          <div class="sabx-ro-meta">${esc(r.months)}</div>
+        </div>
+      </div>`).join('')
+
+    const biggestHtml = biggest.map(l => `
+      <button class="sabx-ro-award" data-open="${l.id}">
+        <span style="flex:1;min-width:0">
+          <span class="sabx-ro-award-name">${esc(l.title)}</span>
+          <span class="sabx-ro-award-meta">CLOSED ${esc(shortDate(l.deadline!))} · ${esc(orgLine(l))}</span>
+        </span>
+        <span class="sabx-ro-award-amount">${esc(shortMoney(l.amount))}</span>
+      </button>`).join('')
+
+    return `
+      <section class="sabx-overlay sabx-ro">
+        <div class="sabx-ov-head">
+          <button class="sabx-ov-back" data-close-screen aria-label="Back">‹</button>
+          <span class="sabx-ov-title">Awards that reopen</span>
+        </div>
+        <div class="sabx-ov-scroll pad">
+          <h2 class="sabx-ro-h1">${esc(reopenHeadline(stats, today))}</h2>
+          <p class="sabx-ro-lede">Most Alberta deadlines fall between March and June, so a lot of the catalog is closed at any given moment. Nothing here is gone — it comes back next cycle.</p>
+
+          <div class="sabx-ro-stats">
+            <div><b>${stats.closed}</b><span>CLOSED</span></div>
+            <div><b class="green">${stats.open}</b><span>IN THE APP</span></div>
+            <div><b class="rust">${stats.dated}</b><span>WITH A DATE</span></div>
+          </div>
+
+          ${nextHtml}
+
+          ${regions.length > 0 ? `
+            <div class="sabx-section-label" style="margin:26px 0 4px">WAITING ON THE PROVIDER</div>
+            ${regionHtml}` : ''}
+
+          ${biggest.length > 0 ? `
+            <div class="sabx-section-label" style="margin:26px 0 4px">THE BIGGEST ONES</div>
+            ${biggestHtml}` : ''}
+
+          <div class="sabx-ov-foot">PROVIDERS PUBLISH NEXT-CYCLE DATES THROUGH THE SUMMER. WE RE-CHECK WEEKLY AND FLIP EACH AWARD ON THE DAY IT OPENS.</div>
+        </div>
+      </section>`
+  }
+
+  function renderOverlay(): string {
+    switch (screen) {
+      case 'quiz':      return renderQuiz()
+      case 'programs':  return renderPrograms()
+      case 'guides':    return renderGuides()
+      case 'guide':     return renderGuide()
+      case 'alerts':    return renderAlerts()
+      case 'reopening': return renderReopening()
+      default:          return ''
+    }
+  }
+
+  // ── Program sheet ───────────────────────────────────────────────────────────
+
+  function renderProgramSheet(): string {
+    if (progId === null) return ''
+    const p = byPid.get(progId)
+    if (!p) return ''
+    const on = getSavedPrograms().includes(p.id)
+
+    const fact = (label: string, value: string | null) => value
+      ? `<div class="sabx-ps-fact"><div class="sabx-ps-fact-label">${label}</div><div class="sabx-ps-fact-value">${esc(value)}</div></div>`
+      : ''
+
+    return `
+      <div class="sabx-sheet-layer prog" role="dialog" aria-modal="true" aria-label="${esc(p.name)}">
+        <button class="sabx-sheet-scrim" data-close-prog aria-label="Close"></button>
+        <div class="sabx-sheet">
+          <button class="sabx-sheet-grab" data-close-prog aria-label="Close"><i></i></button>
+          <div class="sabx-sheet-body">
+            <div class="sabx-sheet-meta">
+              <span class="sabx-sheet-tag">${esc((p.category ?? 'RESEARCH PROGRAM').toUpperCase())}</span>
+              <span class="sabx-sheet-chip" style="background:rgba(20,25,21,0.07);color:rgba(20,25,21,0.65)">${esc(programDueLabel(p, today))}</span>
+            </div>
+            <div class="sabx-sheet-name" style="margin-top:0">${esc(p.name)}</div>
+            <div class="sabx-sheet-org">${esc(p.provider ?? 'Alberta')}</div>
+            ${p.description ? `<p class="sabx-sheet-blurb">${esc(p.description)}</p>` : ''}
+
+            <div class="sabx-sheet-facts">
+              <div class="sabx-sheet-fact">
+                <div class="sabx-sheet-fact-label">PAY</div>
+                <div class="sabx-sheet-fact-value">${esc(p.paid ? (p.stipend ?? 'Paid') : 'Unpaid')}</div>
+              </div>
+              <div class="sabx-sheet-fact">
+                <div class="sabx-sheet-fact-label">WHO</div>
+                <div class="sabx-sheet-fact-value">${esc(p.grades ?? 'Alberta students')}</div>
+              </div>
+            </div>
+
+            <div class="sabx-section-label">THE DETAILS</div>
+            ${fact('RUNS', p.duration)}
+            ${fact('WHERE', p.location)}
+            ${fact('NEEDS', p.eligibility)}
+
+            ${!isDatedIso(p.deadline) ? `
+              <div class="sabx-verified">
+                <div class="sabx-verified-label">NO DATE YET IS NORMAL</div>
+                <div class="sabx-verified-body">Research programs publish their application window in the fall. Save it and the date appears in your Saved tab the week the provider posts it.</div>
+              </div>` : ''}
+          </div>
+
+          <div class="sabx-sheet-foot">
+            <button class="sabx-ps-save" data-psave-id="${p.id}" aria-pressed="${on}">${on ? 'Saved' : 'Save'}</button>
+            <a class="sabx-sheet-cta" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Program page <span>↗</span></a>
+          </div>
+        </div>
+      </div>`
+  }
+
+  // ── Offline notice ──────────────────────────────────────────────────────────
+  // The design toggles this by hand. Here it is driven by the real connection:
+  // /app is prerendered and the listings are already in the document, so the
+  // app genuinely keeps working — this says so instead of failing silently.
+
+  function renderOffline(): string {
+    if (!offline) return ''
+    return `
+      <div class="sabx-offline-layer" role="status">
+        <button class="sabx-sheet-scrim" data-dismiss-offline aria-label="Dismiss"></button>
+        <div class="sabx-offline-card">
+          <div class="sabx-offline-label">NO CONNECTION</div>
+          <div class="sabx-offline-title">You're offline — the app isn't.</div>
+          <p class="sabx-offline-body">All ${open().length} open listings loaded with this page, so browsing and saving still work. Anything that needs the network — opening an application, setting an alert — waits until you're back.</p>
+          <button class="sabx-btn-mint" data-dismiss-offline style="width:100%">Keep browsing</button>
+        </div>
+      </div>`
   }
 
   // ── Detail sheet ────────────────────────────────────────────────────────────
@@ -693,16 +1288,20 @@ export function initApp(): void {
             <div class="sabx-section-label">WHAT YOU NEED</div>
             ${applySteps(l).map(t => `<div class="sabx-step"><i></i><span>${esc(t)}</span></div>`).join('')}
 
-            ${canRemind ? `
+            ${canRemind ? (readAlertSet().has(`scholarship:${l.id}`) ? `
+              <div class="sabx-remind">
+                <div class="sabx-remind-label">REMINDER SET</div>
+                <div class="sabx-remind-sub" style="margin:0">We'll email ${esc(readAlertEmail())} 30, 14 and 3 days before it closes.</div>
+              </div>` : `
               <div class="sabx-remind">
                 <div class="sabx-remind-label">GET A DEADLINE REMINDER</div>
                 <div class="sabx-remind-sub">We email you 30, 14 and 3 days before it closes. Nothing else, ever.</div>
                 <form class="sabx-remind-form" data-remind-form data-item-id="${l.id}">
-                  <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" aria-label="Your email" />
+                  <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" aria-label="Your email" value="${esc(readAlertEmail())}" />
                   <button type="submit">Remind me</button>
                 </form>
                 <div class="sabx-remind-msg" data-remind-msg hidden></div>
-              </div>` : ''}
+              </div>`) : ''}
 
             <div class="sabx-verified">
               <div class="sabx-verified-label">${l.verified ? `HAND-CHECKED ${esc(shortDate(l.verified))}` : 'HAND-CHECKED'}</div>
@@ -727,7 +1326,8 @@ export function initApp(): void {
   // ── Tab bar ─────────────────────────────────────────────────────────────────
 
   function renderTabBar(): string {
-    const dark = tab === 'feed'
+    // A pushed screen is always light, so the bar under it must be too.
+    const dark = tab === 'feed' && screen === null
     const n = savedIds().length + savedPrgIds().length
     const t = (id: Tab, icon: string, label: string, extra = '') => `
       <button class="sabx-tab${id === 'match' ? ' match' : ''}" data-go="${id}" aria-current="${tab === id ? 'page' : 'false'}">
@@ -757,8 +1357,23 @@ export function initApp(): void {
       // Not keyed on `picks` — those are patched in place by paintSaveAll.
       case 'match': return `match:${matchListings().length}`
       case 'saved': return `saved:${savedIds().join(',')}:${savedPrgIds().join(',')}`
-      case 'me':    return `me:${savedIds().join(',')}:${savedPrgIds().join(',')}`
+      // Alert count too: it changes on the Alerts screen, and the Me row that
+      // reports it is behind that screen the whole time.
+      case 'me':    return `me:${savedIds().join(',')}:${savedPrgIds().join(',')}:${readAlertSet().size}`
     }
+  }
+
+  /**
+   * Same idea for the pushed screen. `overlayBump` is what an alert POST or a
+   * program save turns to force a repaint — the email field is uncontrolled, so
+   * nothing else may rebuild this subtree while the student is typing in it.
+   */
+  function overlayKey(): string {
+    if (screen === null) return ''
+    return [
+      screen, guideSlug ?? '', progCategory, String(quizStep),
+      String(overlayBump), savedPrgIds().join(','),
+    ].join(':')
   }
 
   function render(): void {
@@ -775,16 +1390,30 @@ export function initApp(): void {
         : renderMe()
     }
 
-    root.querySelector<HTMLElement>('[data-sabx-sheet]')!.innerHTML = renderSheet()
+    const overlayHost = root.querySelector<HTMLElement>('[data-sabx-overlay]')!
+    const oKey = overlayKey()
+    if (oKey !== renderedOverlayKey) {
+      renderedOverlayKey = oKey
+      overlayHost.innerHTML = renderOverlay()
+    }
+    // A pushed screen covers the tab beneath it, so nothing under it should be
+    // reachable by keyboard or read out by a screen reader.
+    screenHost.inert = screen !== null
+
+    root.querySelector<HTMLElement>('[data-sabx-sheet]')!.innerHTML = renderSheet() + renderProgramSheet()
+    root.querySelector<HTMLElement>('[data-sabx-offline]')!.innerHTML = renderOffline()
     root.querySelector<HTMLElement>('[data-sabx-tabbar]')!.innerHTML = renderTabBar()
 
-    const chrome = tab === 'feed' ? { fg: '#F2F0E9', dim: 'rgba(242,240,233,0.55)' } : { fg: '#141915', dim: 'rgba(20,25,21,0.45)' }
+    // Chrome follows whatever is actually on top: the dark feed, the dark quiz
+    // takeover, or a light pushed screen sitting over either.
+    const dark = screen === 'quiz' || (tab === 'feed' && screen === null)
+    const chrome = dark ? { fg: '#F2F0E9', dim: 'rgba(242,240,233,0.55)' } : { fg: '#141915', dim: 'rgba(20,25,21,0.45)' }
     const status = root.querySelector<HTMLElement>('[data-sabx-status]')
     if (status) {
       status.style.color = chrome.fg
       status.style.setProperty('--sabx-chrome-dim', chrome.dim)
     }
-    root.querySelector<HTMLElement>('[data-sabx-homebar]')!.className = `sabx-homebar${tab === 'feed' ? ' dark' : ''}`
+    root.querySelector<HTMLElement>('[data-sabx-homebar]')!.className = `sabx-homebar${dark ? ' dark' : ''}`
 
     paintToast()
   }
@@ -797,6 +1426,49 @@ export function initApp(): void {
 
     const goBtn = t.closest<HTMLElement>('[data-go]')
     if (goBtn) { go(goBtn.dataset.go as Tab); return }
+
+    const screenBtn = t.closest<HTMLElement>('[data-screen]')
+    if (screenBtn) { pushScreen(screenBtn.dataset.screen as AppScreen); return }
+
+    const guideBtn = t.closest<HTMLElement>('[data-guide]')
+    if (guideBtn) { pushScreen('guide', guideBtn.dataset.guide!); return }
+
+    if (t.closest('[data-close-screen]')) { closeScreen(); return }
+
+    const quizPick = t.closest<HTMLElement>('[data-quiz-pick]')
+    if (quizPick) { answerQuiz(Number(quizPick.dataset.quizPick)); return }
+
+    if (t.closest('[data-quiz-back]')) {
+      if (quizStep === 0) closeScreen()
+      else { quizStep--; render() }
+      return
+    }
+
+    const progBtn = t.closest<HTMLElement>('[data-prog]')
+    if (progBtn) { progId = Number(progBtn.dataset.prog); render(); return }
+
+    if (t.closest('[data-close-prog]')) { progId = null; render(); return }
+
+    const progCatBtn = t.closest<HTMLElement>('[data-progcat]')
+    if (progCatBtn) { progCategory = progCatBtn.dataset.progcat!; render(); return }
+
+    const shareGuide = t.closest<HTMLElement>('[data-share-guide]')
+    if (shareGuide) {
+      const g = guides.find(x => x.slug === shareGuide.dataset.shareGuide)
+      if (g) void share(g.title, `${SITE}/guides/${g.slug}/`)
+      return
+    }
+
+    if (t.closest('[data-dismiss-offline]')) { offline = false; render(); return }
+
+    const alertBtn = t.closest<HTMLElement>('[data-alert-set]')
+    if (alertBtn) { void setAlerts([alertBtn.dataset.alertSet!], alertBtn); return }
+
+    if (t.closest('[data-alert-all]')) {
+      const btn = t.closest<HTMLElement>('[data-alert-all]')!
+      void setAlerts(alertRows().filter(r => r.eligible && !readAlertSet().has(r.key)).map(r => r.key), btn)
+      return
+    }
 
     const feedBtn = t.closest<HTMLElement>('[data-feed]')
     if (feedBtn) {
@@ -819,9 +1491,12 @@ export function initApp(): void {
 
     const pBtn = t.closest<HTMLElement>('[data-psave-id]')
     if (pBtn) {
-      toggleSavedProgram(Number(pBtn.dataset.psaveId))
+      const id = Number(pBtn.dataset.psaveId)
+      const on = toggleSavedProgram(id).includes(id)
+      if (on) sendEvent('save', 'program', id)
       navigator.vibrate?.(12)
-      say('Removed from saved')
+      say(on ? 'Saved · it shows up in your Saved tab' : 'Removed from saved')
+      renderedKey = ''
       render()
       return
     }
@@ -888,6 +1563,42 @@ export function initApp(): void {
     if (apply) sendEvent('apply_click', 'scholarship', Number(apply.dataset.apply))
   }
 
+  /**
+   * Set one or many alerts from the Alerts screen. Sequential rather than
+   * parallel: /api/alert is rate-limited at 20 per 15 minutes per IP, and a
+   * burst of parallel POSTs is exactly the shape that limiter is there to stop.
+   */
+  async function setAlerts(keys: string[], btn: HTMLElement): Promise<void> {
+    const email = readAlertEmail().trim()
+    if (!EMAIL_RE.test(email)) {
+      say('Add your email at the top first')
+      root?.querySelector<HTMLInputElement>('[data-alert-email]')?.focus()
+      return
+    }
+    const label = btn.textContent ?? 'Remind me'
+    btn.textContent = 'Setting…'
+    if (btn instanceof HTMLButtonElement) btn.disabled = true
+
+    let done = 0
+    let lastError: string | null = null
+    for (const key of keys) {
+      const [kind, rawId] = key.split(':')
+      const err = await postAlert(email, kind as 'scholarship' | 'program', Number(rawId))
+      if (err) lastError = err
+      else done++
+    }
+
+    if (done === 0) {
+      btn.textContent = label
+      if (btn instanceof HTMLButtonElement) btn.disabled = false
+      say(lastError ?? 'Something went wrong.')
+      return
+    }
+    overlayBump++
+    render()
+    say(done === 1 ? "Set — we'll email you before it closes" : `${done} alerts set`)
+  }
+
   async function share(title: string, url: string): Promise<void> {
     try {
       if (navigator.share) { await navigator.share({ title, url }); return }
@@ -899,7 +1610,16 @@ export function initApp(): void {
   }
 
   function onInput(e: Event): void {
-    const input = (e.target as Element).closest<HTMLInputElement>('[data-sabx-query]')
+    const target = e.target as Element
+    const emailInput = target.closest<HTMLInputElement>('[data-alert-email]')
+    if (emailInput) {
+      // Stored, never re-rendered: rebuilding the screen mid-word would take
+      // the field out from under the keyboard.
+      writeAlertEmail(emailInput.value.trim())
+      return
+    }
+
+    const input = target.closest<HTMLInputElement>('[data-sabx-query]')
     if (!input) return
     query = input.value
     const start = input.selectionStart
@@ -955,6 +1675,10 @@ export function initApp(): void {
       })
       const data = await res.json() as { error?: string }
       if (res.ok) {
+        // Remembered so the Alerts screen shows this listing as watched and
+        // pre-fills the same address next time.
+        writeAlertEmail(email.trim())
+        markAlertSet(`scholarship:${itemId}`)
         form.hidden = true
         if (msg) { msg.textContent = "✓ Set — we'll nudge you before the deadline."; msg.hidden = false }
       } else {
@@ -965,8 +1689,14 @@ export function initApp(): void {
     }
   }
 
+  // Escape unwinds one layer at a time, top-down: program sheet, detail sheet,
+  // pushed screen.
   function onKeyDown(e: KeyboardEvent): void {
-    if (e.key === 'Escape' && openId !== null) { closeSheet(); return }
+    if (e.key === 'Escape') {
+      if (progId !== null) { progId = null; render(); return }
+      if (openId !== null) { closeSheet(); return }
+      if (screen !== null) { closeScreen(); return }
+    }
     onKeyDownSearch(e)
   }
 
@@ -977,6 +1707,23 @@ export function initApp(): void {
   window.addEventListener('storage', e => {
     if (e.key === 'scholarab_saved' || e.key === 'scholarab_saved_programs') { renderedKey = ''; render() }
   })
+  // A hash change alone does not fire astro:page-load, so "/app/#saved" links
+  // from elsewhere on the site would otherwise land on whatever was showing.
+  window.addEventListener('hashchange', () => {
+    if (!root) return
+    const route = routeFromHash(location.hash)
+    if (route.screen === 'quiz' && screen !== 'quiz') pushScreen('quiz')
+    else if (route.screen) pushScreen(route.screen, route.slug)
+    else go(route.tab)
+  })
+  // The design toggles its offline card by hand; here the browser says so.
+  window.addEventListener('offline', () => { offline = true; render() })
+  window.addEventListener('online', () => {
+    if (!offline) return
+    offline = false
+    render()
+    say('Back online')
+  })
 
   document.addEventListener('astro:page-load', () => {
     root = document.querySelector<HTMLElement>('#sabx-app')
@@ -984,9 +1731,10 @@ export function initApp(): void {
 
     const payload = document.getElementById('sabx-data')?.textContent
     if (!payload) return
-    const parsed = JSON.parse(payload) as { s: WireItem[]; p: WireProgram[] }
+    const parsed = JSON.parse(payload) as { s: WireItem[]; p: WireProgram[]; g?: WireGuide[] }
     items = parsed.s.map(expandItem)
     programs = (parsed.p ?? []).map(expandProgram)
+    guides = (parsed.g ?? []).map(expandGuide)
     byId.clear()
     for (const l of items) byId.set(l.id, l)
     byPid.clear()
@@ -997,15 +1745,28 @@ export function initApp(): void {
     // otherwise be as stale as the last deploy.
     today = midnight()
 
-    // "/app/#due" style deep links pick the opening tab; default is the feed.
-    tab = tabFromHash(location.hash)
+    // "/app/#due" picks the opening tab, "/app/#programs" a pushed screen, and
+    // "/app/#guide/how-to-write-a-scholarship-essay" one guide. Default is the feed.
+    const route = routeFromHash(location.hash)
+    tab = route.tab
+    screen = route.screen
+    guideSlug = route.slug
+    if (screen === 'quiz') {
+      const stored = readQuizState()
+      quizAnswers = stored.answers
+      quizStep = stored.step >= QUIZ_QUESTIONS.length ? 0 : stored.step
+    }
     feedMode = 'foryou'
     query = ''
     category = 'ALL'
+    progCategory = 'ALL'
+    progId = null
+    offline = navigator.onLine === false
     closeSheet(false)
     picks = {}
     picksSeeded = false
     renderedKey = ''
+    renderedOverlayKey = ''
     render()
 
     const skeleton = root.querySelector<HTMLElement>('[data-sabx-skeleton]')

@@ -5,9 +5,13 @@ import {
   openListings, byDeadline, searchListings, filterCategory, categoryKeys, nearbyListings,
   profileFromAnswers, profileChips, weekStrip, deadlineWeeks, timePressure, midnight, tabFromHash,
   expandProgram, programStatusOf, programChipFor, isDatedIso,
-  type WireItem, type Listing,
+  programPayLabel, programDueLabel, programCategoryKeys, filterProgramCategory, sortPrograms,
+  reopenStats, reopenHeadline, reopenRegions, nextToOpen, closedListings,
+  expandGuide, routeFromHash, QUIZ_QUESTIONS,
+  type WireItem, type Listing, type ProgramItem,
 } from './app-core'
 import { EMPTY_ELIGIBILITY } from './eligibility-types'
+import { guides } from './guides'
 
 const TODAY = midnight(new Date('2026-07-30T09:41:00'))
 
@@ -406,5 +410,269 @@ describe('timePressure', () => {
   it('stays visible for far-off and undated listings', () => {
     expect(timePressure(makeListing({ id: 1, deadline: '2027-07-30' }), TODAY)).toBe(4)
     expect(timePressure(makeListing({ id: 2 }), TODAY)).toBe(0)
+  })
+})
+
+// ── Research programs ─────────────────────────────────────────────────────────
+
+function makeProgram(over: Partial<ProgramItem> & { id: number }): ProgramItem {
+  return {
+    name: `Program ${over.id}`,
+    deadline: null,
+    url: 'https://example.com',
+    category: null,
+    provider: null,
+    paid: false,
+    stipend: null,
+    grades: null,
+    duration: null,
+    location: null,
+    eligibility: null,
+    description: null,
+    slug: `program-${over.id}`,
+    ...over,
+  }
+}
+
+describe('expandProgram', () => {
+  it('carries the detail fields the program sheet renders', () => {
+    const p = expandProgram({
+      i: 7, n: 'HYRS', u: 'https://example.com', d: 'TBA',
+      p: true, s: '$3,000', g: 'Grade 11', du: '6 weeks', lo: 'Calgary',
+      el: '85% in Math 20', de: 'Paid summer research.',
+    })
+    expect(p).toMatchObject({
+      id: 7, paid: true, stipend: '$3,000', grades: 'Grade 11',
+      duration: '6 weeks', location: 'Calgary', eligibility: '85% in Math 20',
+      description: 'Paid summer research.',
+    })
+  })
+
+  it('defaults every optional field so the sheet never prints undefined', () => {
+    const p = expandProgram({ i: 1, n: 'Bare', u: 'https://example.com' })
+    expect(p.stipend).toBeNull()
+    expect(p.grades).toBeNull()
+    expect(p.paid).toBe(false)
+  })
+})
+
+describe('programPayLabel', () => {
+  it('shows the stipend alongside PAID', () => {
+    expect(programPayLabel({ paid: true, stipend: '$3,000' })).toBe('PAID · $3,000')
+  })
+
+  it('does not repeat itself when the stipend already says paid', () => {
+    expect(programPayLabel({ paid: true, stipend: 'Paid (hourly rate in offer letter)' }))
+      .toBe('PAID (HOURLY RATE IN OFFER LETTER)')
+  })
+
+  it('falls back to bare PAID and UNPAID', () => {
+    expect(programPayLabel({ paid: true, stipend: null })).toBe('PAID')
+    expect(programPayLabel({ paid: false, stipend: null })).toBe('UNPAID')
+  })
+})
+
+describe('programDueLabel', () => {
+  it('dates the ones that have a date', () => {
+    expect(programDueLabel({ deadline: '2026-10-01' }, TODAY)).toBe('DUE OCT 1')
+  })
+
+  it('separates TBA, Ongoing and already-closed', () => {
+    expect(programDueLabel({ deadline: 'TBA' }, TODAY)).toBe('DATE TBA')
+    expect(programDueLabel({ deadline: null }, TODAY)).toBe('DATE TBA')
+    expect(programDueLabel({ deadline: 'Ongoing' }, TODAY)).toBe('ONGOING')
+    expect(programDueLabel({ deadline: '2026-01-01' }, TODAY)).toBe('CLOSED')
+  })
+})
+
+describe('programCategoryKeys', () => {
+  it('orders categories by how many programs each holds', () => {
+    const list = [
+      makeProgram({ id: 1, category: 'STEM' }),
+      makeProgram({ id: 2, category: 'Health' }),
+      makeProgram({ id: 3, category: 'STEM' }),
+      makeProgram({ id: 4, category: null }),
+    ]
+    expect(programCategoryKeys(list)).toEqual(['STEM', 'HEALTH'])
+  })
+})
+
+describe('filterProgramCategory', () => {
+  it('matches case-insensitively and passes everything through on ALL', () => {
+    const list = [makeProgram({ id: 1, category: 'Health' }), makeProgram({ id: 2, category: 'STEM' })]
+    expect(filterProgramCategory(list, 'HEALTH').map(p => p.id)).toEqual([1])
+    expect(filterProgramCategory(list, 'ALL')).toHaveLength(2)
+  })
+})
+
+describe('sortPrograms', () => {
+  it('puts what you can still apply to first, then TBA, then closed', () => {
+    const list = [
+      makeProgram({ id: 1, name: 'Closed', deadline: '2026-01-01' }),
+      makeProgram({ id: 2, name: 'Tba', deadline: 'TBA' }),
+      makeProgram({ id: 3, name: 'Later', deadline: '2026-12-01' }),
+      makeProgram({ id: 4, name: 'Sooner', deadline: '2026-09-01' }),
+    ]
+    expect(sortPrograms(list, TODAY).map(p => p.id)).toEqual([4, 3, 2, 1])
+  })
+
+  it('does not mutate the list it is given', () => {
+    const list = [makeProgram({ id: 1, deadline: '2026-12-01' }), makeProgram({ id: 2, deadline: '2026-09-01' })]
+    sortPrograms(list, TODAY)
+    expect(list.map(p => p.id)).toEqual([1, 2])
+  })
+})
+
+// ── Awards that reopen ────────────────────────────────────────────────────────
+
+describe('reopenStats', () => {
+  it('splits the catalog into closed and everything the app still shows', () => {
+    const list = [
+      makeListing({ id: 1, deadline: '2026-05-01' }),                          // closed
+      makeListing({ id: 2, deadline: '2026-06-01' }),                          // closed
+      makeListing({ id: 3, deadline: '2026-09-01' }),                          // open
+      makeListing({ id: 4, deadline: '2026-09-01', openDate: '2026-08-15' }),  // not open yet, dated
+      makeListing({ id: 5, deadline: '2026-12-01', active: false }),           // not open yet, undated
+    ]
+    expect(reopenStats(list, TODAY)).toEqual({ closed: 2, open: 3, dated: 1 })
+  })
+
+  it('agrees with openListings, so the two screens never contradict', () => {
+    const list = [
+      makeListing({ id: 1, deadline: '2026-05-01' }),
+      makeListing({ id: 2, deadline: '2026-09-01' }),
+      makeListing({ id: 3, deadline: '2026-09-01', openDate: '2026-08-15' }),
+    ]
+    expect(reopenStats(list, TODAY).open).toBe(openListings(list, TODAY).length)
+  })
+})
+
+describe('reopenHeadline', () => {
+  it('names the month when most of the catalog is shut', () => {
+    expect(reopenHeadline({ closed: 107, open: 50, dated: 18 }, TODAY)).toBe('July is a quiet month.')
+  })
+
+  it('reports the count instead when more is open than closed', () => {
+    expect(reopenHeadline({ closed: 10, open: 50, dated: 2 }, TODAY)).toBe('10 closed for this cycle.')
+  })
+
+  it('says so when nothing is closed at all', () => {
+    expect(reopenHeadline({ closed: 0, open: 50, dated: 0 }, TODAY)).toBe('Everything in the catalog is open.')
+  })
+})
+
+describe('reopenRegions', () => {
+  it('groups closed listings by region, biggest group first', () => {
+    const list = [
+      makeListing({ id: 1, region: 'Alberta', deadline: '2026-03-01' }),
+      makeListing({ id: 2, region: 'Alberta', deadline: '2026-06-01' }),
+      makeListing({ id: 3, region: 'Medicine Hat', deadline: '2026-05-01' }),
+      makeListing({ id: 4, region: 'Alberta', deadline: '2026-09-01' }), // still open
+    ]
+    expect(reopenRegions(list, TODAY)).toEqual([
+      { region: 'Alberta', n: 2, months: 'MOST CLOSED MAR – JUN' },
+      { region: 'Medicine Hat', n: 1, months: 'ALL CLOSED IN MAY' },
+    ])
+  })
+
+  it('files a region-less listing under Alberta', () => {
+    const list = [makeListing({ id: 1, deadline: '2026-04-15' })]
+    expect(reopenRegions(list, TODAY)[0]!.region).toBe('Alberta')
+  })
+})
+
+describe('nextToOpen', () => {
+  it('picks the soonest published open date still ahead', () => {
+    const list = [
+      makeListing({ id: 1, openDate: '2026-09-01', deadline: '2026-12-01' }),
+      makeListing({ id: 2, openDate: '2026-08-01', deadline: '2026-12-01' }),
+      makeListing({ id: 3, deadline: '2026-12-01', active: false }), // dormant, no date
+    ]
+    expect(nextToOpen(list, TODAY)?.id).toBe(2)
+  })
+
+  it('returns null when nothing has a published date', () => {
+    expect(nextToOpen([makeListing({ id: 1, deadline: '2026-09-01' })], TODAY)).toBeNull()
+  })
+})
+
+describe('closedListings', () => {
+  it('returns only closed listings, most recently closed first', () => {
+    const list = [
+      makeListing({ id: 1, deadline: '2026-03-01' }),
+      makeListing({ id: 2, deadline: '2026-06-01' }),
+      makeListing({ id: 3, deadline: '2026-09-01' }),
+    ]
+    expect(closedListings(list, TODAY).map(l => l.id)).toEqual([2, 1])
+  })
+})
+
+// ── Guides ────────────────────────────────────────────────────────────────────
+
+describe('expandGuide', () => {
+  it('renames the wire keys to what the reader reads', () => {
+    expect(expandGuide({
+      s: 'essay', t: 'Title', k: 'WRITING', d: 'Stand', m: 8, u: '2026-07-19', p: ['a', 'b'],
+    })).toEqual({
+      slug: 'essay', title: 'Title', kicker: 'WRITING', standfirst: 'Stand',
+      minutes: 8, updated: '2026-07-19', points: ['a', 'b'],
+    })
+  })
+})
+
+describe('guide metadata', () => {
+  it('gives every guide exactly three takeaways for the app reader', () => {
+    for (const g of guides) {
+      expect(g.takeaways, g.slug).toHaveLength(3)
+      for (const t of g.takeaways) expect(t.length, g.slug).toBeGreaterThan(20)
+    }
+  })
+})
+
+// ── Deep links ────────────────────────────────────────────────────────────────
+
+describe('routeFromHash', () => {
+  it('reads a bare tab', () => {
+    expect(routeFromHash('#saved')).toEqual({ tab: 'saved', screen: null, slug: null })
+  })
+
+  it('opens a pushed screen over its home tab', () => {
+    expect(routeFromHash('#programs')).toEqual({ tab: 'me', screen: 'programs', slug: null })
+    expect(routeFromHash('#reopening')).toEqual({ tab: 'due', screen: 'reopening', slug: null })
+    expect(routeFromHash('#quiz')).toEqual({ tab: 'match', screen: 'quiz', slug: null })
+  })
+
+  it('carries a guide slug', () => {
+    expect(routeFromHash('#guide/how-to-write-a-scholarship-essay'))
+      .toEqual({ tab: 'me', screen: 'guide', slug: 'how-to-write-a-scholarship-essay' })
+  })
+
+  it('falls back to the feed for anything it does not recognize', () => {
+    expect(routeFromHash('#nonsense')).toEqual({ tab: 'feed', screen: null, slug: null })
+    expect(routeFromHash('')).toEqual({ tab: 'feed', screen: null, slug: null })
+  })
+})
+
+// ── Quiz parity ───────────────────────────────────────────────────────────────
+
+describe('QUIZ_QUESTIONS', () => {
+  it('asks for everything profileFromAnswers needs to build a profile', () => {
+    const answers: Record<string, string> = {}
+    for (const q of QUIZ_QUESTIONS) answers[q.key] = q.opts[0]!.value
+    const profile = profileFromAnswers(answers)
+    expect(profile).not.toBeNull()
+    expect(profile!.city).toBe('Medicine Hat')
+    expect(profile!.grade).toBe('10')
+  })
+
+  it('keeps every option answerable — a label, a hint and a defined value', () => {
+    for (const q of QUIZ_QUESTIONS) {
+      expect(q.opts.length, q.key).toBeGreaterThan(1)
+      for (const o of q.opts) {
+        expect(o.label, q.key).toBeTruthy()
+        expect(o.hint, q.key).toBeTruthy()
+        expect(typeof o.value, q.key).toBe('string')
+      }
+    }
   })
 })
