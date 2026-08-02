@@ -29,7 +29,34 @@ use in association with an online scholarship directory service since March
 - Link to scholarab.ca.
 - Write about, review, or criticize the project by name.
 
+## Pre-approved: schools, districts, and counsellors
+
+You do **not** need to email anyone first. If you are an Alberta school, school
+district, guidance department, counsellor, teacher, library, or non-profit
+serving students, permission is granted here to:
+
+- Use the ScholarAB mark, unmodified, to link to https://www.scholarab.ca from
+  your website, guidance page, student portal, newsletter, or slide deck.
+- Print it on a poster, handout, or bulletin board display.
+- Say that your school "uses" or "recommends" ScholarAB.
+
+The asset is at [`/brand/scholarab-mark.svg`](https://www.scholarab.ca/brand/scholarab-mark.svg).
+
+Three conditions, and they are the whole of it:
+
+1. **Don't alter the mark.** No recolouring, stretching, cropping, rotating, or
+   adding elements. Scale it freely.
+2. **Link it to scholarab.ca**, wherever a link is possible.
+3. **Don't use it as your own logo**, or in a way that suggests ScholarAB
+   produced, endorsed, or is affiliated with your organization.
+
+This permission is revocable, but in practice it will only ever be withdrawn for
+a use that misleads students. If you want to do something adjacent that isn't
+listed, ask, and the answer is very likely yes.
+
 ## What requires written permission
+
+Everything below is outside the pre-approved use above:
 
 - Naming a fork, deployment, product, app, or service "ScholarAB", or anything
   close enough to be confused with it.

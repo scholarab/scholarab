@@ -59,6 +59,12 @@ You can use the code and the data, including commercially. Two conditions: **cre
 
 The ScholarAB name and logo are not covered by either license. A public fork has to be renamed. This isn't a restriction on the open source part, it's how nearly every open source project handles branding, and here it exists so that students who trust the name reach the version whose deadlines are actually being re-checked.
 
+**Schools and counsellors don't need to ask.** Permission to use the ScholarAB mark to link to the site, on a guidance page, newsletter, or poster, is granted up front in [TRADEMARK.md](./TRADEMARK.md). The asset is at [`/brand/scholarab-mark.svg`](https://www.scholarab.ca/brand/scholarab-mark.svg).
+
+### Third-party
+
+The web fonts in `public/fonts/` (Archivo, Inter, Instrument Serif, Manrope, IBM Plex Mono) are the work of their respective authors under the SIL Open Font License 1.1, and are covered by neither license above. Notices and full license text: [`public/fonts/OFL.txt`](./public/fonts/OFL.txt).
+
 If you want to do something these terms don't cover, just ask: contact.scholarab@gmail.com. Permission is usually easy to get.
 
 ## 🔐 Security
