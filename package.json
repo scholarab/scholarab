@@ -9,6 +9,7 @@
     "auto-expire": "tsx scripts/auto-expire.ts",
     "sitemap": "tsx scripts/generate-sitemap.ts",
     "validate-data": "tsx scripts/validate-data.ts",
+    "check-copies": "tsx scripts/check-copies.ts",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "lint": "eslint src",

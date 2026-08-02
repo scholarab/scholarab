@@ -42,3 +42,25 @@ This project is open source! If you know of a local scholarship that isn't on th
    - `lastVerified`: month you confirmed the listing is still active (e.g. `"2026-03"`)
    - `open_date`: omit if unknown; only set when applications open on a future date
 4. Submit a pull request with the scholarship name in the title.
+
+Contributions to the data are accepted under CC BY-SA 4.0; contributions to the code under AGPL-3.0.
+
+## 📄 License
+
+ScholarAB is open source, in two parts:
+
+| Part | License | Terms |
+|---|---|---|
+| **Code** (everything except `src/data/*.json`) | GNU AGPL-3.0 | [LICENSE](./LICENSE) |
+| **Data** (the scholarship and program database) | CC BY-SA 4.0 | [DATA-LICENSE.md](./DATA-LICENSE.md) |
+| **Name and logo** | Not licensed | [TRADEMARK.md](./TRADEMARK.md) |
+
+You can use the code and the data, including commercially. Two conditions: **credit ScholarAB and link back**, and **keep your version open under the same license**. The data cannot be folded into a closed database.
+
+The ScholarAB name and logo are not covered by either license. A public fork has to be renamed. This isn't a restriction on the open source part, it's how nearly every open source project handles branding, and here it exists so that students who trust the name reach the version whose deadlines are actually being re-checked.
+
+If you want to do something these terms don't cover, just ask: contact.scholarab@gmail.com. Permission is usually easy to get.
+
+## 🔐 Security
+
+Vulnerability reports: see [SECURITY.md](./SECURITY.md). Please don't open a public issue for security problems.

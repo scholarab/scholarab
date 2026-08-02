@@ -1,0 +1,36 @@
+# Every change requires review by the project owner.
+# Combined with a branch protection rule that requires Code Owner review,
+# this is what stops an unreviewed change to listing data or redirects
+# from reaching production.
+
+* @scholarab9
+
+# Highest-risk paths, called out explicitly so they are never
+# accidentally excluded by a later, more permissive rule above.
+
+# Listing data: a bad edit here sends students to the wrong application URL.
+/src/data/                 @scholarab9
+
+# Auth, middleware, and API routes.
+/src/middleware.ts         @scholarab9
+/src/lib/adminAuth.ts      @scholarab9
+/src/pages/api/            @scholarab9
+/src/pages/admin/          @scholarab9
+
+# Redirects and headers: a change here can silently reroute traffic
+# off the site or weaken the CSP.
+/public/_redirects         @scholarab9
+/public/_headers           @scholarab9
+/public/robots.txt         @scholarab9
+
+# CI, deploy, and scheduled jobs. Workflow changes can exfiltrate secrets.
+/.github/                  @scholarab9
+
+# Build and sync scripts.
+/scripts/                  @scholarab9
+
+# Licensing and project identity.
+/LICENSE                   @scholarab9
+/DATA-LICENSE.md           @scholarab9
+/TRADEMARK.md              @scholarab9
+/SECURITY.md               @scholarab9

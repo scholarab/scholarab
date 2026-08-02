@@ -55,6 +55,9 @@ const footerCols = [
     </div>
     <div class="sabf-bottom sabf-mono">
       <span>© 2026 ScholarAB · Medicine Hat, Alberta</span>
+      <span class="sabf-legal">
+        Listing data <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license noopener noreferrer" target="_blank">CC BY-SA 4.0</a> · credit ScholarAB and link back · ScholarAB™ name and logo not included
+      </span>
     </div>
   </div>
 </div>
@@ -80,10 +83,14 @@ const footerCols = [
     border-top: 1px solid rgba(242,240,233,0.12);
     font-size: 12px; color: rgba(242,240,233,0.4); gap: 12px; flex-wrap: wrap;
   }
+  .sabf-legal { text-align: right; }
+  .sabf-legal a { color: rgba(242,240,233,0.55); text-decoration: underline; text-underline-offset: 2px; }
+  .sabf-legal a:hover { color: #F2F0E9; }
   @media (max-width: 900px) {
     .sabf-top { flex-direction: column; }
     .sabf-cols { gap: 36px; }
     /* clearance for the fixed bottom tab bar, inside the dark footer */
     .sabf-inner { padding: 64px 20px 110px; }
+    .sabf-legal { text-align: left; }
   }
 </style>

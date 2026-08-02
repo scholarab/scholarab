@@ -23,3 +23,6 @@ public/sitemap.xml
 # per-listing OG images are generated at build (scripts/generate-og-images.ts)
 public/og/
 outreach/
+# copy-detection fingerprints (scripts/check-copies.ts) — a canary published
+# next to the data it protects is not a canary
+private/

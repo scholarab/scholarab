@@ -2,7 +2,9 @@
 
 ## Supported Versions
 
-ScholarAB is a static public directory site. The latest deployed version on [scholarab.ca](https://scholarab.ca) is always the supported version.
+ScholarAB is a public directory site. The latest version deployed to
+[scholarab.ca](https://www.scholarab.ca) is always the supported version. There
+are no maintained release branches.
 
 ## Reporting a Vulnerability
 
@@ -12,35 +14,61 @@ If you discover a security vulnerability, please report it responsibly:
 2. Email **contact.scholarab@gmail.com** with the subject line `[SECURITY] <brief description>`.
 3. Include a description of the vulnerability, steps to reproduce, and potential impact.
 
-You will receive a response within **72 hours** acknowledging the report. We aim to release a fix within **7 days** for critical issues and **30 days** for non-critical ones.
+You will receive a response within **72 hours** acknowledging the report. We aim
+to release a fix within **7 days** for critical issues and **30 days** for
+non-critical ones.
 
 ## Scope
 
-The following are in scope:
+In scope:
 
-- **scholarab.ca** and any subdomains
-- The source code in this repository
+- **scholarab.ca** and its subdomains
+- The source code in this repository, including the admin API routes and the
+  build and sync scripts
 
-The following are out of scope:
+Out of scope:
 
-- Third-party services (Vercel infrastructure, Vercel Analytics)
-- Scholarship/program links pointing to external institutions
-- Social engineering attacks
+- Third-party infrastructure (Cloudflare Pages, Cloudflare Web Analytics, Neon)
+- Scholarship and program links pointing to external institutions. A dead or
+  hijacked third-party link is a data issue, not a vulnerability in ScholarAB;
+  report those to contact.scholarab@gmail.com as a normal correction.
+- Social engineering, physical attacks, and denial of service
+- Missing headers or best practices with no demonstrated impact
 
-## Security Architecture
+## Architecture and attack surface
 
-ScholarAB is a **static site** with no backend, no user accounts, and no server-side processing. This eliminates entire classes of vulnerabilities by design:
+Most of ScholarAB is statically generated at build time from JSON in
+`src/data/`, and the public pages have no server-side processing and no user
+accounts. Public visitors are never asked to register, and no visitor personal
+data is collected or stored.
 
-- No SQL injection (no database)
-- No authentication bypass (no accounts)
-- No server-side code execution
-- No file upload attack surface
+It is **not** a purely static site, and the following surfaces do exist:
 
-User bookmark data is stored exclusively in the browser's `localStorage` and is never transmitted to any server.
+- **Public API routes** (`src/pages/api/`) for deadline alert signup,
+  unsubscribe, and first-party analytics events. These are rate limited.
+- **An authenticated admin area** (`/admin`) for editing listings, protected by
+  an HMAC-signed session cookie and enforced in `src/middleware.ts`. It is
+  single-operator and not open to registration.
+- **A database** (Neon Postgres via Drizzle) backing alert subscriptions and
+  analytics events. Public listing pages do not read from it at request time.
+- **Scheduled GitHub Actions** that sync data, check links, send alerts, and
+  prune events.
+
+Reports touching the admin routes, the alert flow, or the analytics endpoint are
+welcome and in scope.
+
+## Data handling
+
+- No visitor accounts, no tracking of individuals, and no third-party ad or
+  analytics scripts beyond Cloudflare Web Analytics.
+- Saved and bookmarked listings are stored only in the browser's
+  `localStorage` and are never transmitted to any server.
+- Email addresses submitted for deadline alerts are stored solely to send those
+  alerts, and every alert includes a one-click unsubscribe.
 
 ## Security Headers
 
-The following HTTP security headers are configured on all responses:
+Configured for all responses in [`public/_headers`](./public/_headers):
 
 | Header | Value |
 |--------|-------|
@@ -48,9 +76,24 @@ The following HTTP security headers are configured on all responses:
 | `X-Content-Type-Options` | `nosniff` |
 | `X-Frame-Options` | `DENY` |
 | `Referrer-Policy` | `no-referrer` |
-| `Permissions-Policy` | camera, microphone, geolocation, and payment disabled |
-| `Content-Security-Policy` | See `vercel.json` |
+| `Permissions-Policy` | camera, microphone, geolocation, payment disabled |
+| `Cross-Origin-Opener-Policy` | `same-origin` |
+| `Cross-Origin-Resource-Policy` | `same-site` |
+| `Content-Security-Policy` | see [`public/_headers`](./public/_headers) |
+
+Note: the CSP currently allows `'unsafe-inline'` for scripts and styles, which
+is a known and accepted limitation of the current Astro inline-script setup.
+Reports of this on its own, without a demonstrated injection path, are already
+known.
+
+## Project integrity
+
+Reports about the integrity of the project itself are in scope and taken
+seriously: anything that would let a third party alter listing data, redirect
+students to a non-official application URL, or publish under the ScholarAB name
+without authorization.
 
 ## Disclosure Policy
 
-We follow **responsible disclosure**. Once a fix is deployed, we will publicly acknowledge the reporter (with permission) in the release notes.
+We follow **responsible disclosure**. Once a fix is deployed, we will publicly
+acknowledge the reporter, with permission.
