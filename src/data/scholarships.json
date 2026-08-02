@@ -3893,7 +3893,7 @@
     "lastVerified": "2026-04",
     "region": "Alberta",
     "notes": "Administered through Indspire. Renewable up to 4 years ($5,000/year). Three intake windows annually: February 1, August 1, November 1. Cenovus operates extensively across Alberta.",
-    "active": true,
+    "active": false,
     "description": "Cenovus Energy, administered through Indspire, offers this $5,000 renewable scholarship to Indigenous students (First Nations, Métis, and Inuit) who reside near Cenovus operating areas in Canada and are pursuing post-secondary education. The award is renewable annually for up to four years and has three application intake windows each year.",
     "eligibility": {
       "grades": [
