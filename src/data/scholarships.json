@@ -2080,15 +2080,16 @@
     "id": 71,
     "title": "Anna & John Kolesar Memorial Scholarship",
     "amount": "$1,500",
-    "deadline": "2027-07-01",
-    "audience": "Alberta residents pursuing an Education degree, first-generation university student",
-    "url": "https://studentaid.alberta.ca/scholarships/anna-and-john-kolesar-memorial-scholarships/",
+    "deadline": "2026-10-31",
+    "openDate": "2026-08-01",
+    "audience": "Alberta grads entering a Faculty of Education, with no parent holding a university degree",
+    "url": "https://studentaid.alberta.ca/scholarships/anna-and-john-kolesar-memorial-scholarship/",
     "category": "Academic",
     "lastVerified": "2026-08",
     "region": "Alberta",
-    "notes": "Heads up: Alberta Student Aid had not posted the next cycle date when this was checked in August 2026, so this is last year's date rolled forward. Confirm on their site before you plan around it.",
-    "active": false,
-    "description": "$1,500 for an Alberta graduate who would be the first in their family to attend university and is entering an Education degree.",
+    "notes": "Open August 1 to October 31 each year. You submit the form to Alberta Student Aid, and the money is released once they confirm you are enrolled full time in a Faculty of Education.",
+    "active": true,
+    "description": "One award of $1,500 from the Alberta Heritage Scholarship Fund for a student graduating from an Alberta high school this year and heading into a Faculty of Education full time at an Alberta public post-secondary. The catch that rules most people out, and lets others in: neither of your parents can hold a university degree. You also have to be a Canadian citizen, permanent resident or protected person, and an Alberta resident. Visa students are not eligible.",
     "eligibility": {
       "grades": [
         "12"
@@ -2097,7 +2098,7 @@
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [
-        "arts"
+        "education"
       ],
       "minAverage": null,
       "minAge": null,
@@ -5104,7 +5105,7 @@
     "amount": "$1,000",
     "deadline": "2027-02-01",
     "audience": "Canadian students entering post-secondary with demonstrated community and school involvement",
-    "url": "https://kincanada.ca/bursaries",
+    "url": "https://kincanada.ca/EN/Web/Our-Bursaries.aspx",
     "category": "Community",
     "lastVerified": "2026-08",
     "region": "National",
