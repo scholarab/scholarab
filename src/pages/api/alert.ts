@@ -23,9 +23,16 @@ export const POST: APIRoute = async ({ request }) => {
   let body: unknown
   try { body = await request.json() } catch { return jsonError('Invalid JSON', 400) }
 
-  const { email, itemType = 'scholarship', itemId, days } = body as Record<string, unknown>
+  const { email: rawEmail, itemType = 'scholarship', itemId, days } = body as Record<string, unknown>
 
-  if (!email || typeof email !== 'string' || !EMAIL_RE.test(email))
+  // Trim before validating, not after. EMAIL_RE is anchored and excludes \s, so
+  // " a@b.com " failed the check even though the row would have been stored
+  // trimmed anyway. The site's own forms never hit this — `<input type="email">`
+  // strips surrounding whitespace before JS ever reads .value — but this is a
+  // public JSON endpoint, and rejecting an otherwise-valid address for padding
+  // is a trap for anything that isn't one of those forms.
+  const email = typeof rawEmail === 'string' ? rawEmail.trim() : ''
+  if (!email || !EMAIL_RE.test(email))
     return jsonError('Valid email required', 400)
   if (itemType !== 'scholarship' && itemType !== 'program')
     return jsonError('itemType must be scholarship or program', 400)
@@ -63,7 +70,7 @@ export const POST: APIRoute = async ({ request }) => {
   const token = Array.from(crypto.getRandomValues(new Uint8Array(24)))
     .map(b => b.toString(16).padStart(2, '0')).join('')
 
-  const row = { email: email.toLowerCase().trim(), itemType: itemType as string, itemId, token }
+  const row = { email: email.toLowerCase(), itemType: itemType as string, itemId, token }
   const cadenceValue = formatCadence(cadence)
 
   try {

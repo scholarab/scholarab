@@ -3,5 +3,5 @@ dist/
 node_modules/
 coverage/
 public/
-src/lib/db/migrations/
+drizzle/migrations/
 src/data/

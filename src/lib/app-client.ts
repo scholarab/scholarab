@@ -1727,7 +1727,10 @@ export function initApp(): void {
     e.preventDefault()
     e.stopPropagation()
     const itemId = Number(form.dataset.itemId)
-    const email = form.querySelector<HTMLInputElement>('input[name="email"]')!.value
+    // .trim() is belt-and-braces — `type="email"` already sanitizes surrounding
+    // whitespace out of .value — but this feeds writeAlertEmail below, and the
+    // remembered address should not depend on that detail of the input type.
+    const email = form.querySelector<HTMLInputElement>('input[name="email"]')!.value.trim()
     const btn = form.querySelector('button')!
     const msg = form.parentElement?.querySelector<HTMLElement>('[data-remind-msg]')
     btn.disabled = true
@@ -1747,7 +1750,7 @@ export function initApp(): void {
       if (res.ok) {
         // Remembered so the Alerts screen shows this listing as watched and
         // pre-fills the same address next time.
-        writeAlertEmail(email.trim())
+        writeAlertEmail(email)
         markAlert(`scholarship:${itemId}`, formatCadence(readCadence()))
         form.hidden = true
         if (msg) { msg.textContent = "✓ Set — we'll nudge you before the deadline."; msg.hidden = false }

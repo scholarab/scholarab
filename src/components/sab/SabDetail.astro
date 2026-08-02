@@ -397,7 +397,7 @@ const chip =
     e.preventDefault();
     e.stopPropagation();
     const [itemType, itemId] = itemAttrs(form);
-    const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value;
+    const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value.trim();
     const btn = form.querySelector('button') as HTMLButtonElement;
     const msg = form.parentElement?.querySelector('[data-sabd-alert-msg]') as HTMLElement | null;
     btn.disabled = true;
