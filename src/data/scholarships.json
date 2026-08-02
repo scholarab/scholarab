@@ -413,17 +413,18 @@
   },
   {
     "id": 19,
-    "title": "ATB Financial Indigenous Education Award",
-    "amount": "$1,500",
-    "deadline": "2026-08-15",
-    "audience": "Indigenous students studying business or finance in Alberta",
+    "title": "ATB Financial Bursary",
+    "amount": "Varies",
+    "deadline": "2026-11-01",
+    "openDate": "2026-08-02",
+    "audience": "Indigenous students from Alberta in or heading into post-secondary",
     "url": "https://buildingbrighterfutures.ca/atb-financial-2",
     "category": "Indigenous",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
+    "notes": "Part of Indspire's Building Brighter Futures. One application covers every Indspire award you qualify for, and it stays in the running for all three cutoffs: August 1, November 1 and February 1 at 11:59 p.m. EST. Apply at indspire.microsoftcrmportals.com and use one account only.",
     "active": true,
-    "openDate": "2026-05-01",
-    "description": "ATB Financial awards $1,500 a year to Indigenous students in Alberta enrolled in, or heading into, post-secondary business or finance programs.",
+    "description": "ATB Financial funds Indigenous students at colleges, universities, technical colleges and apprenticeship programs across Canada. Demonstrated financial need is the main thing they weigh, then community involvement and academic record. First preference goes to Alberta students entering finance, commerce, technology or Indigenous studies, but other programs are eligible. Indspire does not publish a set dollar amount for this one.",
     "eligibility": {
       "grades": [
         "12"
@@ -432,7 +433,8 @@
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [
-        "business"
+        "business",
+        "STEM"
       ],
       "minAverage": null,
       "minAge": null,
@@ -440,7 +442,7 @@
       "genderRequired": null,
       "indigenousRequired": true,
       "bipocRequired": false,
-      "financialNeed": false,
+      "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
@@ -924,15 +926,17 @@
   {
     "id": 35,
     "title": "Belcourt Brosseau Métis Awards",
-    "amount": "$10,000",
-    "deadline": "2026-03-31",
-    "audience": "Métis students in Alberta pursuing post-secondary education",
+    "amount": "$1,000–$10,000",
+    "deadline": "2027-03-31",
+    "openDate": "2027-01-02",
+    "audience": "Métis students from Alberta entering or continuing post-secondary",
     "url": "https://ecf.ca/student-awards/belcourt-brosseau-metis-awards/",
     "category": "Indigenous",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
+    "notes": "Applications open January 2 and close March 31 at 6:00 p.m. You need proof of Métis citizenship or membership, or a letter confirming your application for it is in progress.",
     "active": false,
-    "description": "The Belcourt Brosseau Métis Awards provide $10,000 to support Métis students in Alberta as they pursue post-secondary education. These awards recognize and celebrate Métis learners transitioning from high school to higher education across the province.",
+    "description": "The Belcourt Brosseau Métis Awards pay between $1,000 and $10,000 a year and have put more than $12 million toward roughly 3,900 Métis students over two decades, which makes them one of the largest non-governmental funders of Métis students in Canada. You need citizenship with the Otipemisiwak Métis Government or membership in a Métis Settlement, Alberta residency, Canadian citizenship, and a place in an eligible program at an eligible post-secondary school.",
     "eligibility": {
       "grades": [
         "12"
@@ -1275,16 +1279,17 @@
   },
   {
     "id": 46,
-    "title": "Alex Tutschek FCPA Award for Indigenous Student Achievement",
+    "title": "Alex Tutschek FCPA, FCA Award for Indigenous Student High School Achievement",
     "amount": "$1,500",
-    "deadline": "2026-05-01",
-    "audience": "Grade 12 Indigenous Alberta students entering a business program",
-    "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
+    "deadline": "2027-05-01",
+    "audience": "Grade 12 Indigenous Albertans accepted into an Alberta business program",
+    "url": "https://www.cpaalberta.ca/Foundation/Scholarships/Indigenous-Scholarships",
     "category": "Indigenous",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "A $1,500 CPA Alberta award for an Indigenous student from Alberta entering post-secondary business studies.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "active": true,
+    "description": "Two $1,500 awards for Grade 12 Indigenous students who are enrolled in or accepted into a business program at an Alberta college, polytechnic or university that offers the prerequisites for the CPA Professional Education Program. You have to be an Alberta resident, self-identify as First Nations (status or non-status), Métis or Inuit, and submit a letter or a two to three minute video on why you are heading into business or accounting, plus recent transcripts and one letter of support from an instructor. Preference goes to students who intend to pursue the CPA designation.",
     "eligibility": {
       "grades": [
         "12"
@@ -1313,14 +1318,15 @@
     "id": 47,
     "title": "CPA Alberta Young Emerging Professional Award",
     "amount": "$1,500",
-    "deadline": "2026-05-01",
+    "deadline": "2027-05-01",
     "audience": "Grade 12 Alberta students demonstrating professionalism, integrity, and leadership",
-    "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
+    "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Academic",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "CPA Alberta's $1,500 award for Grade 12 students across the province, judged on professionalism, integrity, and leadership: the traits the accounting body looks for in future members.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "active": true,
+    "description": "Two $1,500 awards for Alberta high school students, judged on professionalism, integrity, ethics and leadership on top of satisfactory academic standing. You submit a letter or a two to three minute video on the qualities that make a successful business leader, recent transcripts, a letter from a teacher and a second letter from someone who is not a teacher or family member. Preference goes to students interested in the CPA designation.",
     "eligibility": {
       "grades": [
         "12"
@@ -1345,16 +1351,17 @@
   },
   {
     "id": 48,
-    "title": "David Bentley FCPA and Janet Bentley High School Excellence Award",
+    "title": "David Bentley FCPA FCA and Janet Bentley High School Excellence Award",
     "amount": "$2,500",
-    "deadline": "2026-05-01",
-    "audience": "Grade 12 Alberta students, preference for those relocating within AB for post-secondary",
-    "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
+    "deadline": "2027-05-01",
+    "audience": "Grade 12 Albertans, preference for those relocating within Alberta for post-secondary",
+    "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Academic",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "$2,500 from CPA Alberta for a graduating Grade 12 student with top marks. Preference goes to applicants staying in Alberta for post-secondary.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "active": true,
+    "description": "One $2,500 award for a Grade 12 student at any Alberta high school, based on volunteer involvement, satisfactory academic achievement and a stated interest in a professional accounting designation. Your application letter needs to indicate financial need. You must have finished Grades 10 and 11 in Alberta and provide proof of acceptance at an Alberta post-secondary. Preference goes to applicants who have to relocate within Alberta to attend, and to those living outside the major cities.",
     "eligibility": {
       "grades": [
         "12"
@@ -1376,21 +1383,24 @@
       "fosterCare": false,
       "citizenship": "canadian",
       "apprenticeship": false,
-      "extracurriculars": []
+      "extracurriculars": [
+        "volunteer"
+      ]
     }
   },
   {
     "id": 49,
-    "title": "CPA Alberta Empowered Young Woman Award",
+    "title": "Empowered Young Woman Award",
     "amount": "$2,000",
-    "deadline": "2026-05-01",
-    "audience": "Grade 12 Alberta students who identify as a girl/woman",
-    "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
+    "deadline": "2027-05-01",
+    "audience": "Grade 12 Alberta students who identify as a girl or woman",
+    "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Academic",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "CPA Alberta's $2,000 award for Grade 12 students in Alberta who identify as girls or women, judged on academic standing.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "active": true,
+    "description": "One $2,000 award from the CPA Education Foundation for a Grade 12 Alberta student who identifies as a girl or woman, judged on good character and leadership rather than marks. You submit a letter or a two to three minute video on what being an empowered young woman means to you, your post-secondary acceptance letter, and one letter of support that speaks to your character and any obstacles you have had to get past. Preference goes to students interested in the CPA designation.",
     "eligibility": {
       "grades": [
         "12"
@@ -1419,14 +1429,15 @@
     "id": 50,
     "title": "Kelly & Creaghan Stepping Up in the Community Award",
     "amount": "$2,000",
-    "deadline": "2026-05-01",
+    "deadline": "2027-05-01",
     "audience": "Grade 12 Alberta students who demonstrate leadership through volunteering",
-    "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
+    "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Community",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "$2,000 for a Grade 12 Albertan with a serious volunteer record. The award is specifically about stepping up in your community, and the application should show it.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "active": true,
+    "description": "One $2,000 award for a Grade 12 Albertan with a real volunteer record at school or in the community. You submit a letter or a two to three minute video on a volunteer activity you actually do and what giving back has done for you, your post-secondary acceptance letter, and one letter of support. Preference goes to students interested in the CPA designation.",
     "eligibility": {
       "grades": [
         "12"
@@ -1453,16 +1464,17 @@
   },
   {
     "id": 51,
-    "title": "Michael Burnyeat FCPA Sparking Great Careers High School Award",
+    "title": "Michael Burnyeat FCPA, FCA Sparking Great Careers High School Award",
     "amount": "$1,250",
-    "deadline": "2026-05-01",
+    "deadline": "2027-05-01",
     "audience": "Grade 12 Alberta students entering BBA, B.Mgmt, or B.Comm at an Alberta institution",
-    "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
+    "url": "https://www.cpaalberta.ca/Foundation/Scholarships/High-School-Scholarships",
     "category": "Academic",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "A $1,250 CPA Alberta award for Grade 12 students entering a BBA, B.Mgmt, or B.Comm program at an Alberta institution.",
+    "notes": "Apply through the online form on the CPA Education Foundation site, one form per award. CPA has not published the 2027 dates yet. May 1 has been the deadline in recent years, so confirm with cpaef@cpaalberta.ca before you count on it.",
+    "active": true,
+    "description": "Four $1,250 awards for Grade 12 students at Alberta high schools who have been accepted into a Bachelor of Business Administration, Bachelor of Management or Bachelor of Commerce program at an Alberta post-secondary. Your letter has to indicate financial need, show professionalism, integrity, ethics and leadership, and state that you have no immediate family member who is a CPA. You also need proof of acceptance and at least one letter of support from a teacher or community leader.",
     "eligibility": {
       "grades": [
         "12"
@@ -1495,10 +1507,11 @@
     "amount": "$2,500",
     "deadline": "2026-05-01",
     "audience": "Grade 12 Alberta BIPOC students demonstrating good character and leadership",
-    "url": "https://www.cpaalberta.ca/Foundation/Support-Programs-and-Scholarships/Scholarships/High-School-Scholarships",
+    "url": "https://www.cpaalberta.ca/Foundation/Scholarships",
     "category": "Community",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
+    "notes": "CPA Alberta no longer lists this award anywhere on its scholarships pages as of August 2026. Treat it as discontinued and check cpaef@cpaalberta.ca before spending time on it.",
     "active": false,
     "description": "$2,500 for a Grade 12 student in Alberta from a Black, Indigenous, or People of Colour background, judged on character and leadership.",
     "eligibility": {
@@ -3408,16 +3421,17 @@
   {
     "id": 108,
     "title": "Indspire Building Brighter Futures Bursaries and Scholarships",
-    "amount": "$3,000",
-    "deadline": "2026-03-01",
-    "audience": "First Nations, Inuit, and Métis students across Canada pursuing post-secondary education including trades and apprenticeships",
+    "amount": "Varies",
+    "deadline": "2026-11-01",
+    "openDate": "2026-08-02",
+    "audience": "First Nations, Inuit and Métis students in post-secondary, trades or apprenticeships",
     "url": "https://indspire.ca/for-students/bursaries-scholarships/",
     "category": "Indigenous",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "National",
-    "notes": "Canada's largest non-governmental funder of Indigenous post-secondary students. Multiple award streams available.",
-    "active": false,
-    "description": "Indspire is the largest non-governmental funder of Indigenous post-secondary students in Canada, with multiple bursary and scholarship streams for First Nations, Inuit, and Métis students, including trades and apprenticeships. Worth applying to more than one stream.",
+    "notes": "One application covers every Indspire bursary, scholarship and award you qualify for. Cutoffs are August 1, November 1 and February 1 at 11:59 p.m. EST. Have your Indigenous card (front and back), your most recent grades and proof of full-time enrolment ready before you start.",
+    "active": true,
+    "description": "Indspire is the largest non-governmental funder of Indigenous post-secondary students in Canada, with more than $190 million awarded since 1996. First Nations, Inuit and Métis students in college, university, skilled trades, apprenticeship and technology programs all qualify. You need to be studying full time in Canada with at least a 60 percent course load, and you can hold one Indspire award per academic year. Bursaries go on financial need, scholarships on merit. Decisions take three to six weeks and only successful applicants are contacted.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -3741,13 +3755,13 @@
     "id": 119,
     "title": "ATCO Indigenous Education High School Merit Award",
     "amount": "$750",
-    "deadline": "2026-09-30",
+    "deadline": "2026-10-02",
     "audience": "Self-identified First Nations, Inuit, or Métis students enrolled full-time in Grades 10–12 in Canada",
     "url": "https://atcoeducationawards.smapply.ca/",
     "category": "Indigenous",
-    "lastVerified": "2026-04",
+    "lastVerified": "2026-08",
     "region": "National",
-    "notes": "One of the few merit awards specifically for current high school students (Grades 10–12). Must reapply annually. Not open to children of ATCO employees.",
+    "notes": "Closes October 2 at 6:00 p.m. MST. One of the few merit awards open to students who are still in high school (Grades 10 to 12). You have to reapply each year, and children of ATCO employees are not eligible. Preference goes to students from Indigenous communities where ATCO operates.",
     "active": true,
     "description": "ATCO's $750 merit award for self-identified First Nations, Inuit, or Métis students in Grades 10 to 12 anywhere in Canada, based on marks. You can win it in more than one year, but you have to reapply each time. Children of ATCO employees can't enter.",
     "eligibility": {
@@ -3892,15 +3906,16 @@
     "id": 123,
     "title": "Cenovus Energy Indigenous Scholarship",
     "amount": "$5,000",
-    "deadline": "2026-08-01",
-    "audience": "Indigenous students (First Nations, Métis, Inuit) residing near Cenovus operating areas in Canada pursuing post-secondary education",
+    "deadline": "2026-11-01",
+    "openDate": "2026-08-02",
+    "audience": "Indigenous students near Cenovus operating areas, in any full-time program",
     "url": "https://www.cenovus.com/Careers/Students-and-new-grads/Indigenous-Scholarship",
     "category": "Indigenous",
-    "lastVerified": "2026-04",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "notes": "Administered through Indspire. Renewable up to 4 years ($5,000/year). Three intake windows annually: February 1, August 1, November 1. Cenovus operates extensively across Alberta.",
-    "active": false,
-    "description": "Cenovus Energy, administered through Indspire, offers this $5,000 renewable scholarship to Indigenous students (First Nations, Métis, and Inuit) who reside near Cenovus operating areas in Canada and are pursuing post-secondary education. The award is renewable annually for up to four years and has three application intake windows each year.",
+    "notes": "Part of Indspire's Building Brighter Futures. One application covers every Indspire award you qualify for, and it stays in the running for all three cutoffs: August 1, November 1 and February 1 at 11:59 p.m. EST. Apply at indspire.microsoftcrmportals.com and use one account only.",
+    "active": true,
+    "description": "Cenovus pays $5,000 a year to First Nations, Métis and Inuit students living near its operating areas, renewable for up to four years within a five year period. Cenovus lists mechanical, chemical and petroleum engineering, geology, business and accounting, engineering and geoscience technology, power engineering, data science, digital technology and cybersecurity, but any full-time degree, diploma or certified trade is eligible.",
     "eligibility": {
       "grades": [
         "12"
@@ -3910,7 +3925,10 @@
       "targetInstitutions": [
         "any"
       ],
-      "fields": [],
+      "fields": [
+        "STEM",
+        "business"
+      ],
       "minAverage": null,
       "minAge": null,
       "maxAge": null,

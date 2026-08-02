@@ -1,0 +1,10 @@
+# Scholarship detail slugs come from the title, so renaming a listing to its
+# provider's real award name orphans the old URL. Every rename goes here as a
+# 301 so indexed links and student bookmarks keep working.
+
+# 2026-08-02 — corrected to the names the providers actually publish
+/scholarships/atb-financial-indigenous-education-award/ /scholarships/atb-financial-bursary/ 301
+/scholarships/alex-tutschek-fcpa-award-for-indigenous-student-achievement/ /scholarships/alex-tutschek-fcpa-fca-award-for-indigenous-student-high-school-achievement/ 301
+/scholarships/david-bentley-fcpa-and-janet-bentley-high-school-excellence-award/ /scholarships/david-bentley-fcpa-fca-and-janet-bentley-high-school-excellence-award/ 301
+/scholarships/cpa-alberta-empowered-young-woman-award/ /scholarships/empowered-young-woman-award/ 301
+/scholarships/michael-burnyeat-fcpa-sparking-great-careers-high-school-award/ /scholarships/michael-burnyeat-fcpa-fca-sparking-great-careers-high-school-award/ 301
