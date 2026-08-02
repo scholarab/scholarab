@@ -122,7 +122,7 @@
     "category": "Community",
     "lastVerified": "2026-03",
     "region": "Medicine Hat",
-    "active": true,
+    "active": false,
     "notes": "Family must be a South Country Co-op member with minimum $2,000 in purchases. Apply by mail or email to j.doll@sccoop.ca.",
     "description": "For students whose family holds a South Country Co-op membership with at least $2,000 in purchases: a $1,000 scholarship covering the Co-op's trading area around Medicine Hat. Questions go to j.doll@sccoop.ca, and applications can be mailed in.",
     "eligibility": {
@@ -891,7 +891,7 @@
     "region": "Medicine Hat",
     "notes": "Contact your school guidance counsellor to apply.",
     "applyViaGuidance": true,
-    "active": true,
+    "active": false,
     "openDate": "2026-04-01",
     "description": "The City of Medicine Hat offers this $1,000 bursary to support high school students in the Medicine Hat region who are pursuing environmental sciences. This need-based award is for graduating seniors entering post-secondary studies or current high school students with a demonstrated commitment to environmental studies.",
     "eligibility": {
@@ -1605,7 +1605,7 @@
     "category": "Indigenous",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": true,
+    "active": false,
     "description": "This $11,500 bursary supports First Nations, Métis, and Inuit students pursuing post-secondary education in Alberta. Recipients are expected to provide return-of-service in northern Alberta communities. The award recognizes Indigenous students' educational aspirations and commitment to their regions.",
     "eligibility": {
       "grades": [
@@ -1641,7 +1641,7 @@
     "category": "Academic",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": true,
+    "active": false,
     "description": "A $5,000 bursary for Alberta graduates who qualify for full-time student loan funding. If you're eligible for loans, you're eligible to apply.",
     "eligibility": {
       "grades": [
@@ -3069,7 +3069,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "notes": "No application required, just consent to be considered in MyTradesecrets. Recipients notified by November 1.",
-    "active": true,
+    "active": false,
     "description": "This $1,000 scholarship is awarded to Alberta high school students enrolled in the Registered Apprenticeship Program (RAP) or Career and Technology Studies (CTS) apprenticeship pathway. Students are automatically considered for the award through MyTradesecrets with no application required, and recipients are notified by November 1st.",
     "eligibility": {
       "grades": [
@@ -3106,7 +3106,7 @@
     "lastVerified": "2026-03",
     "region": "Alberta",
     "notes": "No application required, just consent to be considered in MyTradesecrets. Higher award for students completing both RAP and CTS pathway.",
-    "active": true,
+    "active": false,
     "description": "This $2,000 scholarship rewards Alberta high school students who are registered in both the Registered Apprenticeship Program (RAP) and a CTS Apprenticeship Pathway. No application is required; students are automatically considered through MyTradesecrets based on their enrollment. Students who successfully complete both the RAP and CTS pathway qualify for an enhanced award amount.",
     "eligibility": {
       "grades": [
@@ -3483,7 +3483,7 @@
     "category": "Arts",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": false,
+    "active": true,
     "openDate": "2026-08-01",
     "description": "This $5,000 scholarship supports Alberta students pursuing full-time studies in Humanities, Social Sciences, or Arts at an Alberta post-secondary institution. The award recognizes academic excellence and commitment to these disciplines that build critical thinking and cultural understanding.",
     "eligibility": {
@@ -3520,7 +3520,7 @@
     "category": "Academic",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": false,
+    "active": true,
     "openDate": "2026-08-01",
     "description": "The Louise McKinney Post-Secondary Scholarship recognizes Alberta students who demonstrate outstanding academic achievement while enrolled at a post-secondary institution within the province. This $2,500 award supports high-performing students pursuing their studies at Alberta's colleges and universities.",
     "eligibility": {
@@ -3555,7 +3555,7 @@
     "category": "Academic",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": false,
+    "active": true,
     "openDate": "2026-08-01",
     "description": "$1,000 for an Alberta student who has completed at least three courses through the Alberta Distance Learning Centre.",
     "eligibility": {
@@ -3590,7 +3590,7 @@
     "category": "Arts",
     "lastVerified": "2026-03",
     "region": "Alberta",
-    "active": false,
+    "active": true,
     "openDate": "2026-08-01",
     "description": "The Tiessen Foundation gives $750 to an Alberta graduate entering full-time post-secondary studies in broadcasting.",
     "eligibility": {
@@ -4587,7 +4587,7 @@
     "audience": "Alberta residents selected to a Team Alberta volleyball program",
     "category": "Sports",
     "region": "Alberta",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
     "notes": "Must be an Alberta resident selected to a Team Alberta Program. Only one application accepted per calendar year.",
