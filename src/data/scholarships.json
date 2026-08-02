@@ -155,14 +155,15 @@
     "id": 7,
     "title": "Alberta Indigenous Careers Award",
     "amount": "$4,000",
-    "deadline": "2026-02-13",
-    "audience": "Indigenous Albertans pursuing in-demand careers",
+    "deadline": null,
+    "audience": "Indigenous students enrolled full-time at an Alberta post-secondary school",
     "url": "https://studentaid.alberta.ca/scholarships/indigenous-careers-award/",
     "category": "Indigenous",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "This $4,000 award supports Indigenous Albertans who are pursuing careers in high-demand sectors. Eligible applicants must be Indigenous (First Nations, Métis, or Inuit) high school graduates or current high school students preparing to enter post-secondary education in Alberta.",
+    "notes": "Apply through the Student Awards office at your post-secondary school. Deadlines vary by school, so ask as soon as you have your acceptance.",
+    "active": true,
+    "description": "Worth $2,000 per term and up to $4,000 an academic year for Indigenous students enrolled full-time in a certificate, diploma, applied degree or bachelor program in Alberta. You need at least a 60 percent course load, or 40 percent with a documented disability, and satisfactory academic standing.",
     "eligibility": {
       "grades": [
         "12"
@@ -1599,14 +1600,16 @@
     "id": 55,
     "title": "First Nations, Métis and Inuit Bursary",
     "amount": "$11,500",
-    "deadline": "2026-07-31",
-    "audience": "Indigenous students pursuing post-secondary education, return-of-service in northern Alberta",
-    "url": "https://studentaid.alberta.ca/scholarships/first-nations-metis-and-inuit-bursary/",
+    "deadline": "2026-11-01",
+    "openDate": "2026-06-05",
+    "audience": "Indigenous students in full-time post-secondary, with return of service in northern Alberta",
+    "url": "https://www.alberta.ca/first-nations-metis-and-inuit-bursary",
     "category": "Indigenous",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "This $11,500 bursary supports First Nations, Métis, and Inuit students pursuing post-secondary education in Alberta. Recipients are expected to provide return-of-service in northern Alberta communities. The award recognizes Indigenous students' educational aspirations and commitment to their regions.",
+    "notes": "Two intakes each year: February 1 to June 1, and June 5 to November 1. Apply in one intake only, late applications are not accepted. You need a verified Alberta.ca Account, which can take up to two weeks to set up.",
+    "active": true,
+    "description": "Up to $11,500 a year for First Nations, Métis and Inuit students in a degree program, or up to $7,000 for a certificate, diploma or pre-apprenticeship program. In exchange you sign a return of service agreement: one year of full-time work in northern Alberta for each year of funding. You reapply every year, to a maximum of four.",
     "eligibility": {
       "grades": [
         "12"
@@ -1635,14 +1638,15 @@
     "id": 56,
     "title": "New Beginnings Bursary",
     "amount": "$5,000",
-    "deadline": "2026-07-31",
-    "audience": "Alberta students eligible for full-time student loan funding entering post-secondary",
+    "deadline": null,
+    "audience": "Alberta students who qualify for full-time student aid and enrol in an eligible high-demand program",
     "url": "https://studentaid.alberta.ca/scholarships/new-beginnings-bursary/",
     "category": "Academic",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
-    "active": false,
-    "description": "A $5,000 bursary for Alberta graduates who qualify for full-time student loan funding. If you're eligible for loans, you're eligible to apply.",
+    "notes": "There is no separate application. Recipients are picked from full-time Alberta Student Aid applications on a first come, first served basis, so apply for student aid as early as you can. Lifetime maximum of two bursaries.",
+    "active": true,
+    "description": "A $5,000 bursary for students from low-income families who qualify for full-time Alberta Student Aid and enrol in an approved high-demand program. Alberta expanded it for 2026-27: 2,400 bursaries instead of 1,000, a $12 million budget, and more eligible programs in technology, health and energy. You do not apply separately, so get your student aid application in early.",
     "eligibility": {
       "grades": [
         "12"
@@ -1925,15 +1929,17 @@
   {
     "id": 65,
     "title": "NADC Northern Alberta Development Council Bursary",
-    "amount": "$12,000",
-    "deadline": "2026-04-30",
-    "audience": "Alberta residents planning to enroll full-time in post-secondary, with return-of-service in northern AB",
-    "url": "https://www.alberta.ca/northern-alberta-development-bursary-program",
+    "amount": "$7,000",
+    "deadline": "2027-05-15",
+    "openDate": "2027-01-02",
+    "audience": "Students in the final two years of a post-secondary program, with return of service in northern Alberta",
+    "url": "https://www.alberta.ca/northern-alberta-development-bursary",
     "category": "Academic",
-    "lastVerified": "2026-03",
+    "lastVerified": "2026-08",
     "region": "Alberta",
+    "notes": "Applications are accepted January 2 to May 15 each year for fall enrolment. Decisions go out by the end of July. You need a verified Alberta.ca Account, which can take up to two weeks to set up.",
     "active": false,
-    "description": "The Northern Alberta Development Council offers this $12,000 bursary to Alberta residents who are planning to enroll full-time in post-secondary education. Recipients are expected to commit to a return-of-service requirement in northern Alberta after completing their studies.",
+    "description": "Up to $7,000 a year, for a maximum of two years, for students training for jobs northern Alberta needs. You commit to one year of full-time work in northern Alberta for each year of funding you receive. You must be 18 or older, an Alberta resident for the past 12 months, and in the last two years of your program.",
     "eligibility": {
       "grades": [
         "12"
