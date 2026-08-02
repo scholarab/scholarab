@@ -17,9 +17,13 @@ const ignoreList: { host: string; reason: string }[] = JSON.parse(
 )
 const ignoredHosts = new Set(ignoreList.map(e => e.host))
 
+// Dormant listings are checked too. They used to be skipped, which is how all
+// seven CPA Education Foundation URLs sat on a dead path from whenever CPA
+// restructured its site until August 2026 — the entries were between cycles, so
+// nothing ever looked at them, and they were still wrong when they reopened.
 const items = [
-  ...scholarships.filter(s => (s as Item & { active?: boolean }).active !== false).map(s => ({ id: s.id, label: s.title ?? String(s.id), url: s.url })),
-  ...programs.filter(p => (p as Item & { active?: boolean }).active !== false).map(p => ({ id: p.id, label: p.name ?? String(p.id), url: p.url })),
+  ...scholarships.map(s => ({ id: s.id, label: s.title ?? String(s.id), url: s.url })),
+  ...programs.map(p => ({ id: p.id, label: p.name ?? String(p.id), url: p.url })),
 ]
 
 type Flagged = { id: unknown; name: string; url: string; error: string }

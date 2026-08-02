@@ -8,3 +8,14 @@
 /scholarships/david-bentley-fcpa-and-janet-bentley-high-school-excellence-award/ /scholarships/david-bentley-fcpa-fca-and-janet-bentley-high-school-excellence-award/ 301
 /scholarships/cpa-alberta-empowered-young-woman-award/ /scholarships/empowered-young-woman-award/ 301
 /scholarships/michael-burnyeat-fcpa-sparking-great-careers-high-school-award/ /scholarships/michael-burnyeat-fcpa-fca-sparking-great-careers-high-school-award/ 301
+
+/scholarships/enmax-environmental-scholarship/ /scholarships/enmax-scholarship/ 301
+
+# Discontinued awards. The provider no longer offers these, so the detail page
+# is gone and the listing index is the closest useful destination.
+/scholarships/paula-weiss-spencer-weiss-bipoc-success-award/ /scholarships/ 301
+
+# Duplicates. Tradesecrets runs exactly two high school apprenticeship
+# scholarships, and we had four rows for them.
+/scholarships/tradesecrets-alberta-apprenticeship-scholarship/ /scholarships/high-school-apprenticeship-scholarship/ 301
+/scholarships/rapcts-apprenticeship-scholarships/ /scholarships/high-school-apprenticeship-scholarship/ 301
