@@ -4088,7 +4088,7 @@
     "region": "Alberta",
     "notes": "Your team coach nominates you, you do not apply on your own. Nominations reach Alberta Student Aid by January 15. Applications reopen in early August. You submit a transcript and an essay on your extracurriculars and goals.",
     "applyViaGuidance": true,
-    "active": false,
+    "active": true,
     "description": "This $800 award recognizes Alberta residents who compete on designated provincial junior sports teams (ACAC and AUAA sanctioned) and are entering post-secondary studies. To qualify, applicants must maintain a minimum 2.0 GPA and apply through Alberta Student Aid.",
     "eligibility": {
       "grades": [
