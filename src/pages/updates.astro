@@ -3,7 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import SabFooter from '../components/sab/SabFooter.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
-import { months, KIND_LABELS, KIND_COLORS, TOTAL_COMMITS, PROJECT_START, FIRST_COMMIT } from '../lib/updates';
+import {
+  months,
+  KIND_LABELS,
+  KIND_COLORS,
+  TOTAL_COMMITS,
+  COUNTED_ON,
+  PROJECT_START,
+  FIRST_COMMIT,
+} from '../lib/updates';
 
 const pageTitle = 'What changed on ScholarAB | Update log';
 const description =
@@ -23,6 +31,7 @@ const longDate = (iso: string) =>
 
 const startLabel = longDate(PROJECT_START);
 const firstCommitLabel = longDate(FIRST_COMMIT);
+const countedOnLabel = longDate(COUNTED_ON);
 ---
 
 <Layout
@@ -51,8 +60,8 @@ const firstCommitLabel = longDate(FIRST_COMMIT);
         </p>
         <div class="sabu-stats">
           <div class="sabu-stat">
-            <div class="sabu-stat-num">{TOTAL_COMMITS}</div>
-            <div class="sabu-mono sabu-stat-label">CHANGES SHIPPED</div>
+            <div class="sabu-stat-num">{TOTAL_COMMITS}+</div>
+            <div class="sabu-mono sabu-stat-label">CHANGES ON RECORD</div>
           </div>
           <div class="sabu-stat">
             <div class="sabu-stat-num">{totalWeeks}</div>
@@ -89,9 +98,10 @@ const firstCommitLabel = longDate(FIRST_COMMIT);
                 <div class="sabu-week-rail">
                   <div class="sabu-mono sabu-week-label">{week.label}</div>
                   <div class="sabu-mono sabu-week-count">
-                    {week.commits === undefined
-                      ? 'before version control'
-                      : `${week.commits} ${week.commits === 1 ? 'change' : 'changes'}`}
+                    {week.railNote
+                      ?? (week.commits === undefined
+                        ? 'before version control'
+                        : `${week.commits} ${week.commits === 1 ? 'change' : 'changes'}`)}
                   </div>
                 </div>
 
@@ -120,12 +130,19 @@ const firstCommitLabel = longDate(FIRST_COMMIT);
       <div class="sabu-footnote">
         <p>
           <strong>How this list was built.</strong> It is reconstructed from the project's own history, not
-          written from memory. The first three weeks, {startLabel} to {firstCommitLabel}, came before the
-          project was under version control, so they are dated from the files on disk rather than from a
-          record of changes. From {firstCommitLabel} to April 19 the changes were all filed under a single
-          repeated placeholder note, so those weeks were rebuilt from what the changes themselves touched.
-          Counts are the number of separate changes recorded in a range, so a week with a hundred of them was
-          a week of many small adjustments, not a hundred new features.
+          written from memory, and the early record is thinner than the later one.
+        </p>
+        <p>
+          The history was tidied up as it went, with early changes merged together and squashed. Everything
+          from {startLabel} to {firstCommitLabel} now survives as one single entry, and the versions it
+          replaced are gone. So those first three weeks are dated from the files on disk instead, which is
+          why they carry no count. From {firstCommitLabel} to April 19, changes were filed under one repeated
+          placeholder note, so those weeks were rebuilt from what the changes themselves touched.
+        </p>
+        <p>
+          That makes {TOTAL_COMMITS}, counted on {countedOnLabel}, a floor rather than a total: it is what
+          remained after the cleanup, not everything that was done. Counts are separate recorded changes, so
+          a week with a hundred was a week of many small adjustments, not a hundred new features.
         </p>
         <p>
           Most recent entry: <strong>{latest.label}</strong>. Something look wrong?

@@ -27,6 +27,11 @@ export type UpdateWeek = {
    * so there is no count to give.
    */
   commits?: number
+  /**
+   * Overrides the count shown in the rail. Used where a raw commit number would
+   * mislead, e.g. the week whose work was squashed into a single commit.
+   */
+  railNote?: string
   /** One-sentence summary of what the week was about. */
   headline: string
   items: UpdateItem[]
@@ -58,10 +63,18 @@ export const KIND_COLORS: Record<UpdateKind, string> = {
   'under-hood': 'rgba(20,25,21,0.45)',
 }
 
+/**
+ * Commits reachable from main when this log was compiled. It is a floor, not a
+ * true count of changes made: the history was tidied up early on, and every
+ * change before 2026-04-03 was squashed into the single commit dated Mar 23.
+ * The originals are no longer in the repository.
+ */
 export const TOTAL_COMMITS = 596
+/** When TOTAL_COMMITS was counted, so a stale number is obvious rather than wrong. */
+export const COUNTED_ON = '2026-08-02'
 /** Date the project folder was created on disk. Work began here. */
 export const PROJECT_START = '2026-03-02'
-/** Date the first commit landed. Everything before it is dated from the files. */
+/** Date on the oldest surviving commit. It is a squash of everything before it. */
 export const FIRST_COMMIT = '2026-03-23'
 
 export const months: UpdateMonth[] = [
@@ -124,6 +137,7 @@ export const months: UpdateMonth[] = [
         label: 'Mar 23 - 29',
         start: '2026-03-23',
         commits: 1,
+        railNote: 'all of the above, squashed into one',
         headline: 'The first version ships, with 115 scholarships and 17 research programs.',
         items: [
           {
