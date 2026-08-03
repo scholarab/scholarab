@@ -55,8 +55,8 @@ const countedOnLabel = longDate(COUNTED_ON);
         </div>
         <h1 class="sabu-h1">Everything that has <em>changed</em>.</h1>
         <p class="sabu-lede">
-          ScholarAB is worked on in the open. This is every change since the project was started on
-          {' '}{startLabel}, grouped by month, then by week, and written for students rather than developers.
+          ScholarAB is built in the open. This is what has changed since {startLabel}, by month and
+          by week, in plain English.
         </p>
         <div class="sabu-stats">
           <div class="sabu-stat">
@@ -147,20 +147,18 @@ const countedOnLabel = longDate(COUNTED_ON);
 
       <div class="sabu-footnote">
         <p>
-          <strong>How this list was built.</strong> It is reconstructed from the project's own history, not
-          written from memory, and the early record is thinner than the later one.
+          <strong>How this list was built.</strong> It comes from the project's own records, not from
+          memory. The early part is thinner than the rest.
         </p>
         <p>
-          The history was tidied up as it went, with early changes merged together and squashed. Everything
-          from {startLabel} to {firstCommitLabel} now survives as one single entry, and the versions it
-          replaced are gone. So those first three weeks are dated from the build logs kept while the work
-          was happening, which is why they carry no count. From {firstCommitLabel} to April 19, changes were filed under one repeated
-          placeholder note, so those weeks were rebuilt from what the changes themselves touched.
+          Everything from {startLabel} to {firstCommitLabel} was later merged into one entry, and the
+          originals are gone — so those three weeks are dated from build logs and carry no count. From
+          {' '}{firstCommitLabel} to April 19, every change was saved under the same placeholder note, so
+          those weeks were worked out from what the changes actually touched.
         </p>
         <p>
-          That makes {TOTAL_COMMITS}, counted on {countedOnLabel}, a floor rather than a total: it is what
-          remained after the cleanup, not everything that was done. Counts are separate recorded changes, so
-          a week with a hundred was a week of many small adjustments, not a hundred new features.
+          So {TOTAL_COMMITS}, counted on {countedOnLabel}, is a floor, not a total. A week with a hundred
+          was a week of many small fixes, not a hundred new features.
         </p>
         <p>
           Most recent entry: <strong>{latest.label}</strong>. Something look wrong?

@@ -12,7 +12,9 @@
 // local (Mountain), matching the days the work was actually done.
 //
 // The wording is deliberately for students, not for developers: say what
-// changed on the site, not which file moved.
+// changed on the site, not which file moved. Kept short on purpose — one plain
+// sentence per line, and only the changes a reader would care about. A week
+// that did ten forgettable things gets three lines, not ten.
 
 /** Category chip shown beside each line. */
 export type UpdateKind = 'new' | 'better' | 'fixed' | 'listings' | 'under-hood'
@@ -52,7 +54,7 @@ export type UpdateWeek = {
  * dimensions so the space can be reserved before the image loads.
  */
 export type UpdateShot = {
-  /** Path under /history, e.g. "/history/2026-03-02-first-page.webp". */
+  /** Path under /history, e.g. "/history/2026-03-02-first-prototype.webp". */
   src: string
   /** ISO date the screenshot was taken. */
   takenAt: string
@@ -116,29 +118,17 @@ export const months: UpdateMonth[] = [
     label: 'March 2026',
     id: 'm-2026-03',
     summary:
-      'Three weeks of building, under two names that did not survive, then the first version goes out the door with 115 scholarships already in it.',
+      'Three weeks of building under two names that did not stick, then launch with 115 scholarships.',
     shots: [
-      {
-        src: '/history/2026-03-02-first-page.webp',
-        takenAt: '2026-03-02',
-        width: 1058,
-        height: 466,
-        shape: 'wide',
-        // Padded with white: the text sits in the very top-left of the page, and
-        // the rounded corner would otherwise clip the first letter.
-        alt: 'An empty white browser window showing the words Hello, World! in small black text.',
-        caption:
-          'March 2, 5:57 pm. The first page the project ever served, three minutes after the folder existed.',
-      },
       {
         src: '/history/2026-03-02-first-prototype.webp',
         takenAt: '2026-03-02',
         width: 1010,
         height: 488,
         shape: 'wide',
-        alt: 'An early version of the site titled Scholarhat, with scholarships split into three columns headed Active, Opening Soon and Closed.',
+        alt: 'An early version of the site called Scholarhat, with scholarships in three columns: Active, Opening Soon and Closed.',
         caption:
-          'Fifty-five minutes later, the first prototype: six scholarships under the original name, already split into open, opening soon and closed.',
+          'March 2, an hour in. The first working version: six scholarships under the original name, already split into open, opening soon and closed.',
       },
     ],
     weeks: [
@@ -149,85 +139,69 @@ export const months: UpdateMonth[] = [
         items: [
           {
             kind: 'under-hood',
-            text: 'The plan came before the code. The version sketched out in the last days of February covered Medicine Hat only, and was going to run off a spreadsheet that guidance counsellors could edit.',
+            text: 'The first plan, from late February, covered Medicine Hat only and ran off a spreadsheet.',
           },
           {
             kind: 'new',
-            text: 'The project folder is created on March 2. The first attempt used a tool that builds a whole site from a written description. What it produced would not run, twice over, so that approach was dropped the same evening and the site was started by hand instead.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'The foundation gets picked in one go: Astro for the pages, Tailwind for the styling, React for the interactive parts, and strict type checking from the very first file.',
+            text: 'Work starts March 2. A tool that builds a site from a description failed twice, so it was written by hand instead.',
           },
           {
             kind: 'new',
-            text: 'On March 6 the four largest Canadian scholarship sites were taken apart page by page to work out what this one should do differently. Five decisions came out of it and all five are still here: no account, cards you can read at a glance, the dollar total on the front page, closing soonest first, and research programs listed beside scholarships.',
+            text: 'March 6: the four biggest Canadian scholarship sites were taken apart to see what to do differently. Five rules came out of it and all five are still here — no account, cards you can skim, the dollar total up front, and closing soonest first.',
           },
           {
             kind: 'under-hood',
-            text: 'The name changes the same day. "ScholarHat" had held for five days, until a search turned up a large training company already using it. Its replacement was built around the 403 area code.',
+            text: 'The name changes that day: "ScholarHat" was already taken by a big training company. The next one used the 403 area code.',
           },
         ],
       },
       {
         label: 'Mar 9 - 15',
         start: '2026-03-09',
-        headline: 'The name settles, and the site gets its first full weekend of building.',
+        headline: 'The name settles, and the first full weekend of building.',
         items: [
           {
             kind: 'new',
-            text: 'The name lands on ScholarAB on March 14, after the area code idea was dropped for the obvious reason: 403 means nothing to a student in Edmonton. It was tested once more the next day against a list of a hundred alternatives, and it stayed.',
+            text: 'ScholarAB on March 14. The 403 idea was dropped because 403 means nothing to a student in Edmonton.',
           },
           {
             kind: 'better',
-            text: 'A single shared layout and one stylesheet arrive, so every page on the site inherits the same header, footer and typography instead of each one being built separately.',
+            text: 'One shared layout, so every page looks the same instead of being built separately.',
           },
           {
             kind: 'fixed',
-            text: 'Scholarship cards on phones would not line up, with the amount and the deadline sitting at a different height on every card. The card had to be rebuilt from scratch before it behaved.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'The first deletion pass. Every feature had to justify itself and anything that could not was removed, including a search box that was doing nothing the filters were not already doing.',
+            text: 'Scholarship cards would not line up on phones. The card had to be rebuilt from scratch.',
           },
         ],
       },
       {
         label: 'Mar 16 - 22',
         start: '2026-03-16',
-        headline: 'A filter, a logo, a licence, and a real address.',
+        headline: 'A filter, a logo, saving, and a real address.',
         items: [
           {
             kind: 'new',
-            text: 'A filter built from nothing on March 16: pick the university you are heading to, and the list narrows to what you can actually apply for.',
+            text: 'A filter on March 16: pick the university you are heading to, and the list narrows to what fits.',
           },
           {
             kind: 'new',
-            text: 'The logo arrives on March 17, and the region icons follow it: a teepee for Medicine Hat, a landmark for each of the other cities, a maple leaf for the national listings.',
+            text: 'The logo arrives March 17, with an icon for each region.',
           },
           {
             kind: 'new',
-            text: 'A teacher who was shown the site pointed out that a student can spend hours going through scholarships and have nothing left to show for it the next day. Saving listings, so the site holds on to what you found, came straight out of that.',
+            text: 'A teacher pointed out that students lose everything they find by the next day. Saving listings came out of that.',
           },
           {
             kind: 'under-hood',
-            text: 'Shared logic gets pulled into one place, so the same scholarship is described identically wherever it appears.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'The robots are written the week before launch: retiring scholarships whose deadlines have passed, checking every link, validating the data, and handling scholarship submissions.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'The code moves out of a personal account and into a home of its own, under a licence that lets anyone read it or learn from it but requires them to keep their own version open too.',
+            text: 'The robots get written: retiring closed scholarships, and checking every link.',
           },
           {
             kind: 'better',
-            text: 'On the evening of March 22 the site is reworked one last time before launch: one plain, highly readable typeface everywhere in place of the display fonts used until then, and a home page that acts as a front door pointing to scholarships and research programs rather than a wall of listings.',
+            text: 'March 22, the night before launch: one plain typeface everywhere, and a home page that points you somewhere instead of dumping the whole list on you.',
           },
           {
             kind: 'new',
-            text: 'scholarab.ca goes live that same evening, and the share image is drawn alongside it so a link posted anywhere shows a proper preview. Until then the site had been sitting on a temporary address.',
+            text: 'scholarab.ca goes live that evening, with a preview picture for shared links.',
           },
         ],
       },
@@ -236,31 +210,27 @@ export const months: UpdateMonth[] = [
         start: '2026-03-23',
         commits: 1,
         railNote: 'all of the above, squashed into one',
-        headline: 'The first version ships, with 115 scholarships and 17 research programs.',
+        headline: 'Launch, with 115 scholarships and 17 research programs.',
         items: [
           {
             kind: 'new',
-            text: 'ScholarAB opens to the public. You can browse every listing, open a page for any single one, and save the ones you care about. No account, no login.',
+            text: 'ScholarAB opens to the public. Browse everything, save what you like. No account, no login.',
           },
           {
             kind: 'new',
-            text: 'Saved listings are kept on your own device, so nothing about you leaves your phone or laptop.',
+            text: 'Saved listings stay on your own device. Nothing about you leaves it.',
           },
           {
             kind: 'new',
-            text: 'A bar along the bottom of the screen on phones, so you can jump between sections with your thumb.',
+            text: 'A bar along the bottom on phones, for jumping between sections.',
           },
           {
             kind: 'new',
-            text: 'The first written guide, on how to apply for scholarships in Alberta, so the site can be found by someone searching for the answer rather than for the site by name.',
-          },
-          {
-            kind: 'better',
-            text: 'Animated transitions between pages were built, broke the bottom bar on phones, and were taken back out. What survived is quieter: the next page starts loading the moment your finger touches a link.',
+            text: 'The first guide: how to apply for scholarships in Alberta.',
           },
           {
             kind: 'under-hood',
-            text: 'Two robots start work on day one: one retires scholarships once their deadline passes, one checks every link on the site to catch pages that have gone dead.',
+            text: 'Two robots start on day one: one retires closed scholarships, one hunts for dead links.',
           },
         ],
       },
@@ -270,7 +240,7 @@ export const months: UpdateMonth[] = [
   {
     label: 'April 2026',
     id: 'm-2026-04',
-    summary: 'The busiest month by far, at 369 changes. The match quiz, the research-program library, and the move to faster hosting all happened here.',
+    summary: 'The busiest month by far, at 369 changes: the match quiz, the program library, faster hosting.',
     shots: [
       {
         src: '/history/2026-04-04-how-it-works.webp',
@@ -278,9 +248,9 @@ export const months: UpdateMonth[] = [
         width: 620,
         height: 1052,
         shape: 'tall',
-        alt: 'The site on a phone, in dark colours, listing three numbered steps: Browse, Filter and Apply.',
+        alt: 'The site on a phone, in dark colours, listing three steps: Browse, Filter and Apply.',
         caption:
-          'April 4. The site explained itself in three steps, and was dark by default — it stayed that way until July.',
+          'April 4. The site explained itself in three steps, and was dark until July.',
       },
       {
         src: '/history/2026-04-25-home.webp',
@@ -288,9 +258,9 @@ export const months: UpdateMonth[] = [
         width: 620,
         height: 1052,
         shape: 'tall',
-        alt: "The home page on a phone, in dark colours, reading Alberta's student opportunity directory and $653,510+ open right now, above a list of scholarships closing this week.",
+        alt: "The home page on a phone, in dark colours, reading Alberta's student opportunity directory and $653,510+ open right now.",
         caption:
-          'April 25, with 95 scholarships and 89 research programs listed. Nothing was changed for the rest of the month.',
+          'April 25: 95 scholarships and 89 research programs. Nothing changed for the rest of the month.',
       },
     ],
     weeks: [
@@ -298,27 +268,19 @@ export const months: UpdateMonth[] = [
         label: 'Mar 30 - Apr 5',
         start: '2026-03-30',
         commits: 123,
-        headline: 'The match quiz arrives, and listings become editable without a code change.',
+        headline: 'The match quiz arrives.',
         items: [
           {
             kind: 'new',
-            text: 'The match quiz. Answer a handful of questions about your grade, school and interests, and get back the scholarships you actually qualify for instead of the full list.',
+            text: 'The match quiz. Answer a few questions and get back only the scholarships you qualify for.',
           },
           {
             kind: 'new',
-            text: 'Long lists get page numbers, so the scholarships page no longer loads a hundred cards at once.',
-          },
-          {
-            kind: 'better',
-            text: 'The scholarship and program cards were redesigned, and the homepage was rebuilt several times over until the numbers at the top read clearly.',
+            text: 'Page numbers on long lists, so the page stops loading a hundred cards at once.',
           },
           {
             kind: 'under-hood',
-            text: 'Listings moved into a proper database with a private admin screen behind it. Before this, correcting a deadline meant editing the site\'s source code.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'The whole codebase was converted to a stricter language (TypeScript) and the first automated tests were written, so mistakes get caught before they reach the site.',
+            text: 'Listings moved into a database with a private admin screen. Before this, fixing a deadline meant editing the site\'s code.',
           },
         ],
       },
@@ -330,23 +292,15 @@ export const months: UpdateMonth[] = [
         items: [
           {
             kind: 'listings',
-            text: 'Research programs went from 17 to 97: summer labs, university programs and student research placements across Alberta and Canada.',
+            text: 'Research programs went from 17 to 97: summer labs and student placements.',
           },
           {
             kind: 'listings',
-            text: 'Scholarships grew from 113 to 140, with duplicates weeded out along the way.',
+            text: 'Scholarships grew from 113 to 140, with duplicates weeded out.',
           },
           {
             kind: 'better',
-            text: 'Scholarships and research programs used to be built from two separate pieces of code that slowly drifted apart. They were merged into one, so filtering, sorting and saving now behave identically on both pages.',
-          },
-          {
-            kind: 'better',
-            text: 'The admin editing screens were reworked so listings could be corrected faster.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'Every admin route got its own test.',
+            text: 'Scholarships and programs ran on two sets of code that had drifted apart. Merged, so filtering, sorting and saving now behave the same on both.',
           },
         ],
       },
@@ -354,35 +308,31 @@ export const months: UpdateMonth[] = [
         label: 'Apr 13 - 19',
         start: '2026-04-13',
         commits: 145,
-        headline: 'Email deadline alerts, an educators page, and a move to faster hosting.',
+        headline: 'Deadline alerts, an educators page, and faster hosting.',
         items: [
           {
             kind: 'new',
-            text: 'Deadline alerts. Give an email address and get a reminder before a scholarship you saved closes. Nothing else is ever sent to that address.',
+            text: 'Deadline alerts. Give an email address, get a reminder before a saved scholarship closes. Nothing else is ever sent.',
           },
           {
             kind: 'new',
-            text: 'A page for teachers and counsellors, with the numbers and links they need to point students here.',
+            text: 'A page for teachers and counsellors.',
           },
           {
             kind: 'new',
-            text: 'An About page explaining who built the site and the rules it runs on: no ads, no sponsored listings, no personal data.',
+            text: 'An About page, and the rules: no ads, no sponsored listings, no personal data.',
           },
           {
             kind: 'listings',
-            text: 'Regional coverage expanded to 148 scholarships, adding awards specific to Red Deer and Lethbridge.',
+            text: '148 scholarships, adding awards for Red Deer and Lethbridge.',
           },
           {
             kind: 'better',
-            text: 'The site moved to Cloudflare, which serves pages from a location near you instead of one far away.',
+            text: 'The site moved to Cloudflare, so pages come from somewhere near you.',
           },
           {
             kind: 'under-hood',
-            text: 'The admin login was hardened: repeated failed attempts are now throttled, and passwords are stored properly.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'Four rounds of cleanup deleted broken automation, dead code and duplicated tests. Link checking and full browser tests now run automatically on every change.',
+            text: 'Link checks and browser tests now run on every change.',
           },
         ],
       },
@@ -392,7 +342,7 @@ export const months: UpdateMonth[] = [
   {
     label: 'May 2026',
     id: 'm-2026-05',
-    summary: 'A quieter month spent on accuracy: dead links, wrong counts, and a deploy that had broken the scholarships page.',
+    summary: 'A quieter month on accuracy: dead links, wrong counts, a broken scholarships page.',
     weeks: [
       {
         label: 'May 1 - 10',
@@ -402,19 +352,15 @@ export const months: UpdateMonth[] = [
         items: [
           {
             kind: 'fixed',
-            text: '38 broken links were repaired: 7 had moved to new addresses, and 5 programs had been discontinued entirely and were retired from the site.',
+            text: '38 broken links repaired. 5 programs had shut down for good and were retired.',
           },
           {
             kind: 'fixed',
-            text: 'The total dollar figure on the homepage was counting scholarships whose deadlines had already passed. It now only counts money you can still apply for.',
+            text: 'The dollar total on the home page was counting closed scholarships. It now counts only money you can still apply for.',
           },
           {
             kind: 'listings',
             text: 'Added the Medicine Hat Firefighters Charitable Foundation Scholarship.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'All known security advisories in the site\'s dependencies were cleared.',
           },
         ],
       },
@@ -422,23 +368,19 @@ export const months: UpdateMonth[] = [
         label: 'May 11 - 17',
         start: '2026-05-11',
         commits: 13,
-        headline: 'The scholarships page comes back from a 404, and six new awards land.',
+        headline: 'The scholarships page comes back from a 404.',
         items: [
           {
             kind: 'fixed',
-            text: 'The main scholarships page had started returning "page not found" after a hosting change. Tracked down and fixed.',
+            text: 'The scholarships page had started showing "page not found" after a hosting change.',
           },
           {
             kind: 'listings',
-            text: 'Six scholarships added: Voice for Animals, Luke Santi Memorial, Stuck at Prom, Fraser Institute, Valour Canada, and the Optimist Deaf/Hard of Hearing award. That brought the site to 155.',
+            text: 'Six scholarships added, bringing the site to 155.',
           },
           {
             kind: 'fixed',
-            text: 'The match quiz was ignoring the eligibility rules on newer listings, so some scholarships never showed up as matches.',
-          },
-          {
-            kind: 'fixed',
-            text: 'The homepage count was leaving out scholarships that have no fixed deadline.',
+            text: 'The match quiz was ignoring the rules on newer listings, so some never matched.',
           },
         ],
       },
@@ -446,19 +388,19 @@ export const months: UpdateMonth[] = [
         label: 'May 18 - 31',
         start: '2026-05-18',
         commits: 7,
-        headline: 'The match page gets a cleaner first impression.',
+        headline: 'A clearer start to the match quiz.',
         items: [
           {
             kind: 'better',
-            text: 'The match page opens with a larger heading and a clearer explanation of what the quiz does before you start it.',
+            text: 'The match page now explains what the quiz does before you start.',
           },
           {
             kind: 'better',
-            text: 'Questions with four or more answers now lay out in two columns instead of one long stack.',
+            text: 'Questions with four or more answers now sit in two columns.',
           },
           {
             kind: 'fixed',
-            text: 'The homepage scholarship count was frozen at whatever it was when the site was last built. It now counts live.',
+            text: 'The home page count was frozen at whatever it was when the site was last built. It now counts live.',
           },
         ],
       },
@@ -468,29 +410,29 @@ export const months: UpdateMonth[] = [
   {
     label: 'June 2026',
     id: 'm-2026-06',
-    summary: 'A design pass across the whole site, then a focused rebuild of the match quiz.',
+    summary: 'A design pass across the whole site, then a rebuild of the match quiz.',
     weeks: [
       {
         label: 'Jun 1 - 7',
         start: '2026-06-01',
         commits: 22,
-        headline: 'Closed scholarships stop hiding, and the site gets a visual refresh.',
+        headline: 'Closed scholarships stop disappearing.',
         items: [
           {
             kind: 'better',
-            text: 'Closed scholarships now carry a red CLOSED chip and stay visible in the All tab, instead of quietly disappearing. If an award exists but has passed, you can still see it and plan for next year.',
+            text: 'Closed scholarships now carry a red CLOSED chip and stay in the All tab, so you can plan for next year.',
           },
           {
             kind: 'better',
-            text: 'Listings sort in a sensible order: open now first, opening later next, closed last, with the most recently closed at the top of that group.',
+            text: 'Listings sort in a sensible order: open now, opening later, then closed.',
           },
           {
             kind: 'better',
-            text: 'A visual refresh across the site: cards glow slightly on hover, the navigation underline slides between sections, award amounts sit in their own pill, and the quiz shows progress dots.',
+            text: 'A visual refresh: cards glow on hover, amounts sit in their own pill, the quiz shows progress dots.',
           },
           {
             kind: 'better',
-            text: 'Empty states now say something useful when a filter returns nothing, instead of showing a blank page.',
+            text: 'A filter that finds nothing now says so instead of going blank.',
           },
         ],
       },
@@ -502,27 +444,23 @@ export const months: UpdateMonth[] = [
         items: [
           {
             kind: 'fixed',
-            text: 'The Previous button used to move down the screen as questions got longer, so you would reach for it and miss. The answer area is now a fixed height and the button stays put.',
+            text: 'The Previous button used to slide down the screen on longer questions, so you would reach for it and miss. It stays put now.',
           },
           {
             kind: 'better',
-            text: 'Answer tiles got taller on short questions, drop a shadow, and lift when you hover them, so it is obvious what you are about to pick.',
+            text: 'Answer tiles lift when you hover them, so it is clear what you are picking.',
           },
           {
             kind: 'better',
-            text: 'On phones, the bottom navigation now sits flush as a proper tab bar, and cards stopped flickering as they loaded.',
-          },
-          {
-            kind: 'better',
-            text: 'Moving between pages crossfades instead of jumping. Swiping left or right on a phone slides, as you would expect.',
+            text: 'Moving between pages crossfades, and swiping left or right on a phone slides.',
           },
           {
             kind: 'listings',
-            text: 'Added the Breakthrough Junior Challenge, worth $250,000 and closing September 15, 2026.',
+            text: 'Added the Breakthrough Junior Challenge, worth $250,000.',
           },
           {
             kind: 'fixed',
-            text: 'The Clear filters button did not always clear everything.',
+            text: 'Clear filters did not always clear everything.',
           },
         ],
       },
@@ -530,11 +468,11 @@ export const months: UpdateMonth[] = [
         label: 'Jun 15 - 30',
         start: '2026-06-15',
         commits: 1,
-        headline: 'A single repair to the nightly data sync.',
+        headline: 'One repair to the nightly data sync.',
         items: [
           {
             kind: 'fixed',
-            text: 'The automation that refreshes listings overnight had stopped running. Restarted.',
+            text: 'The overnight listing refresh had stopped running. Restarted.',
           },
         ],
       },
@@ -544,21 +482,17 @@ export const months: UpdateMonth[] = [
   {
     label: 'July 2026',
     id: 'm-2026-07',
-    summary: 'The biggest month of change since launch: a full editorial redesign, the guides section, a new logo, and a rebuild that made every page noticeably faster.',
+    summary: 'The biggest month since launch: a full redesign, the guides, a new logo, faster pages.',
     weeks: [
       {
         label: 'Jul 1 - 12',
         start: '2026-07-01',
         commits: 28,
-        headline: 'A site-wide redesign, plus a fix for a build that had silently dropped most of the listings.',
+        headline: 'A site-wide redesign, and a build that had dropped most of the listings.',
         items: [
           {
             kind: 'fixed',
-            text: 'The live site had been building with only 28 scholarships instead of the full set. Fixed, along with a JavaScript error that was affecting every page.',
-          },
-          {
-            kind: 'fixed',
-            text: 'Google was showing a generic globe next to ScholarAB in search results instead of the site\'s icon.',
+            text: 'The live site was building with 28 scholarships instead of the full set.',
           },
           {
             kind: 'new',
@@ -566,19 +500,15 @@ export const months: UpdateMonth[] = [
           },
           {
             kind: 'new',
-            text: 'A real 404 page. Before this, a mistyped address quietly served the homepage and pretended nothing was wrong.',
+            text: 'A real 404 page. A mistyped address used to quietly serve the home page instead.',
           },
           {
             kind: 'better',
-            text: 'Every main page (Home, Scholarships, Programs, Match, Saved, About, and the individual listing pages) was redesigned around a single editorial look.',
-          },
-          {
-            kind: 'fixed',
-            text: 'Region filters and sorting on the list pages were returning the wrong results in some combinations.',
+            text: 'Every main page was redesigned around a single look.',
           },
           {
             kind: 'under-hood',
-            text: 'Anonymous counting was added so it is possible to see which listings get opened most. No names, no emails, no cookies, no IP addresses.',
+            text: 'Anonymous counting of which listings get opened. No names, emails, cookies or IP addresses.',
           },
         ],
       },
@@ -586,51 +516,39 @@ export const months: UpdateMonth[] = [
         label: 'Jul 13 - 19',
         start: '2026-07-13',
         commits: 75,
-        headline: 'Guides, a new logo, related listings, and a rewrite of 80 descriptions.',
+        headline: 'Guides, a new logo, and 80 rewritten descriptions.',
         items: [
           {
             kind: 'new',
-            text: 'The Guides section: eight practical write-ups on the Rutherford scholarship, essay writing, reference letters, Grade 11 and 12 timelines, local awards, Medicine Hat awards, and trades and RAP funding.',
+            text: 'The Guides section: eight write-ups on Rutherford, essays, reference letters, Grade 11 and 12 timelines, local awards and trades funding.',
           },
           {
             kind: 'new',
-            text: 'A "More like this" block at the bottom of every listing, so finding the next thing to apply for does not mean going back to the list.',
+            text: 'A "More like this" block at the bottom of every listing, so you do not have to go back to the list.',
           },
           {
             kind: 'new',
-            text: 'A new ScholarAB logo across the site, the browser tab, and the preview image that shows when a link is shared.',
+            text: 'A new logo across the site, the browser tab, and shared links.',
           },
           {
             kind: 'new',
-            text: 'Every open scholarship now generates its own share image, so sending a link to a friend shows the actual award rather than a generic banner.',
+            text: 'Every open scholarship gets its own share picture, so a link shows the actual award.',
           },
           {
             kind: 'better',
-            text: '80 listing descriptions were rewritten by hand to sound like a person wrote them, not a template.',
+            text: '80 listing descriptions rewritten by hand.',
           },
           {
             kind: 'fixed',
-            text: '18 dead links repaired, 12 on research programs and 6 on scholarships, and the link checker was hardened against sites that block automated checks.',
+            text: '18 dead links repaired.',
           },
           {
             kind: 'fixed',
-            text: 'Timezone bugs meant a scholarship could show as closed on its own deadline day, and retired listings could still appear in places. Fixed everywhere, including the homepage total and quiz results.',
+            text: 'A timezone bug could show a scholarship as closed on its own deadline day.',
           },
           {
             kind: 'better',
-            text: 'The pages were rebuilt to send far less code to your browser, which made them load and respond faster, especially on older phones.',
-          },
-          {
-            kind: 'better',
-            text: 'The educators page was redesigned to match the rest of the site, and its numbers now agree with the homepage.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'A security patch for the site framework, and search-engine fixes: correct canonical addresses, a redirect from the bare domain, and explicit permission for AI assistants to read the site.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'A dataset of 531 Alberta high schools and the 171 school authorities behind them was assembled, for reaching counsellors directly.',
+            text: 'Pages send far less code to your browser, so they load faster on older phones.',
           },
         ],
       },
@@ -638,31 +556,19 @@ export const months: UpdateMonth[] = [
         label: 'Jul 20 - 26',
         start: '2026-07-20',
         commits: 21,
-        headline: 'Research programs start showing up in quiz results again.',
+        headline: 'Research programs show up in quiz results again.',
         items: [
           {
             kind: 'fixed',
-            text: 'The match quiz was never returning research programs, only scholarships. Fixed, along with five smaller bugs found in the same sweep.',
+            text: 'The match quiz was returning scholarships only, never research programs. Fixed, with five smaller bugs.',
           },
           {
             kind: 'new',
-            text: 'Research programs can now be saved from the match results, and program rows line up with the scholarship rows above them.',
-          },
-          {
-            kind: 'fixed',
-            text: 'Apply clicks were being counted twice, and some rows in the internal stats had no name attached.',
+            text: 'Research programs can now be saved straight from the match results.',
           },
           {
             kind: 'better',
-            text: 'Unsubscribing from deadline alerts now confirms it worked, instead of leaving you guessing.',
-          },
-          {
-            kind: 'better',
-            text: 'The social handles were updated: Instagram at @scholarab.ca and TikTok at @scholarab.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'Full browser tests now run on every single change, not just occasionally.',
+            text: 'Unsubscribing from deadline alerts now confirms it worked.',
           },
         ],
       },
@@ -670,31 +576,23 @@ export const months: UpdateMonth[] = [
         label: 'Jul 27 - 31',
         start: '2026-07-27',
         commits: 15,
-        headline: 'A mobile app layout, and the Rutherford page stops guessing at a deadline.',
+        headline: 'A phone layout, and a Rutherford deadline that never existed.',
         items: [
           {
             kind: 'fixed',
-            text: 'The Rutherford guide listed a deadline that does not officially exist. It was removed, the eligibility was corrected to Grades 10 and 11, and the guide now answers the question people actually search for: when the application opens.',
+            text: 'The Rutherford guide listed a deadline that does not officially exist. It was removed, and the guide now says when applications open instead.',
           },
           {
             kind: 'fixed',
-            text: 'The Mehl and Wolf award deadlines were corrected against their official pages.',
+            text: 'The Mehl and Wolf deadlines were corrected against their official pages.',
           },
           {
             kind: 'new',
-            text: 'A dedicated app-style layout for phones. Visiting the site on a phone now lands in it, with saved listings and research programs carried across.',
+            text: 'An app-style layout for phones, with your saved listings carried over.',
           },
           {
             kind: 'better',
-            text: 'The alert reminder schedule is now something you choose, rather than a fixed setting.',
-          },
-          {
-            kind: 'better',
-            text: 'The quiz says it takes 30 seconds, because that is how long it actually takes.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'Every internal link was pointed at one consistent address format, which had been splitting each page into two entries in Google.',
+            text: 'You now choose when alert reminders arrive.',
           },
         ],
       },
@@ -704,37 +602,25 @@ export const months: UpdateMonth[] = [
   {
     label: 'August 2026',
     id: 'm-2026-08',
-    summary: 'The 2026-27 cycle refresh: every date checked, every link checked.',
+    summary: 'The 2026-27 refresh: every date checked, every link checked.',
     weeks: [
       {
         label: 'Aug 1 - 2',
         start: '2026-08-01',
         commits: 15,
-        headline: 'Every listing re-dated for the new school year, and nothing on the site reads CLOSED.',
+        headline: 'Every listing re-dated for the new school year.',
         items: [
           {
             kind: 'listings',
-            text: 'Provincial bursaries, national awards, Alberta-wide awards and the city collections were all rolled forward to the 2026-27 cycle. As of August 2, nothing on the site is showing as closed.',
+            text: 'Provincial, national and city awards were all rolled forward to the 2026-27 cycle. As of August 2, nothing on the site reads closed.',
           },
           {
             kind: 'fixed',
-            text: 'The Indspire and CPA Alberta listings were checked against their live pages and corrected.',
-          },
-          {
-            kind: 'fixed',
-            text: 'The last two dead addresses were repaired. All 251 links on the site now resolve.',
-          },
-          {
-            kind: 'better',
-            text: 'Research program fields were simplified so the details row fits on one line instead of wrapping.',
+            text: 'The last two dead addresses were repaired. All 251 links now work.',
           },
           {
             kind: 'under-hood',
-            text: 'The project was formally licensed: the code is open source, the listing data can be reused with credit, and the ScholarAB name and logo stay reserved.',
-          },
-          {
-            kind: 'under-hood',
-            text: 'The alert signup form now cleans up email addresses before storing them, with tests covering it.',
+            text: 'The project was licensed: the code is open source, and the listing data can be reused with credit.',
           },
         ],
       },
