@@ -1,9 +1,15 @@
 // Public changelog for /updates.
 //
-// Every entry below was derived from the repo's own commit history (596
-// commits, 2026-03-23 through 2026-08-02). The first 349 commits all carry the
-// same placeholder message, so that stretch (Mar 23 - Apr 19) was reconstructed
-// from what the diffs actually touched rather than from what they claimed.
+// Entries from Mar 23 onward were derived from the repo's own commit history
+// (596 commits, 2026-03-23 through 2026-08-02). The first 349 commits all carry
+// the same placeholder message, so that stretch (Mar 23 - Apr 19) was
+// reconstructed from what the diffs actually touched rather than from what they
+// claimed.
+//
+// The three weeks before Mar 23 have no surviving commits at all. They were
+// rebuilt in August 2026 from the dated build logs of the sessions that made
+// them, so they carry specific days but no counts. Dates in those weeks are
+// local (Mountain), matching the days the work was actually done.
 //
 // The wording is deliberately for students, not for developers: say what
 // changed on the site, not which file moved.
@@ -23,8 +29,8 @@ export type UpdateWeek = {
   start: string
   /**
    * Number of commits landed in this range. Omitted for the three weeks that
-   * predate the first commit — those are dated from the files on disk instead,
-   * so there is no count to give.
+   * predate the first commit — those are dated from the build logs kept at the
+   * time instead, so there is no count to give.
    */
   commits?: number
   /**
@@ -82,16 +88,20 @@ export const months: UpdateMonth[] = [
     label: 'March 2026',
     id: 'm-2026-03',
     summary:
-      'Three weeks of building, then the first version goes out the door with 115 scholarships already in it.',
+      'Three weeks of building, under two names that did not survive, then the first version goes out the door with 115 scholarships already in it.',
     weeks: [
       {
         label: 'Mar 2 - 8',
         start: '2026-03-02',
-        headline: 'Day one. The project gets created, under a different name.',
+        headline: 'Day one, under a name that lasted five days.',
         items: [
           {
+            kind: 'under-hood',
+            text: 'The plan came before the code. The version sketched out in the last days of February covered Medicine Hat only, and was going to run off a spreadsheet that guidance counsellors could edit.',
+          },
+          {
             kind: 'new',
-            text: 'The ScholarAB folder is created on March 2. The setup script that built it calls the project "scholarhat", so the name it ships under was not the name it started with.',
+            text: 'The project folder is created on March 2. The first attempt used a tool that builds a whole site from a written description. What it produced would not run, twice over, so that approach was dropped the same evening and the site was started by hand instead.',
           },
           {
             kind: 'under-hood',
@@ -99,26 +109,54 @@ export const months: UpdateMonth[] = [
           },
           {
             kind: 'new',
-            text: 'The first pages, the first components, and the file that would hold every scholarship all appear the same evening.',
+            text: 'On March 6 the four largest Canadian scholarship sites were taken apart page by page to work out what this one should do differently. Five decisions came out of it and all five are still here: no account, cards you can read at a glance, the dollar total on the front page, closing soonest first, and research programs listed beside scholarships.',
+          },
+          {
+            kind: 'under-hood',
+            text: 'The name changes the same day. "ScholarHat" had held for five days, until a search turned up a large training company already using it. Its replacement was built around the 403 area code.',
           },
         ],
       },
       {
         label: 'Mar 9 - 15',
         start: '2026-03-09',
-        headline: 'One shared frame for every page.',
+        headline: 'The name settles, and the site gets its first full weekend of building.',
         items: [
+          {
+            kind: 'new',
+            text: 'The name lands on ScholarAB on March 14, after the area code idea was dropped for the obvious reason: 403 means nothing to a student in Edmonton. It was tested once more the next day against a list of a hundred alternatives, and it stayed.',
+          },
           {
             kind: 'better',
             text: 'A single shared layout and one stylesheet arrive, so every page on the site inherits the same header, footer and typography instead of each one being built separately.',
+          },
+          {
+            kind: 'fixed',
+            text: 'Scholarship cards on phones would not line up, with the amount and the deadline sitting at a different height on every card. The card had to be rebuilt from scratch before it behaved.',
+          },
+          {
+            kind: 'under-hood',
+            text: 'The first deletion pass. Every feature had to justify itself and anything that could not was removed, including a search box that was doing nothing the filters were not already doing.',
           },
         ],
       },
       {
         label: 'Mar 16 - 22',
         start: '2026-03-16',
-        headline: 'The automation and the launch prep.',
+        headline: 'A filter, a logo, a licence, and a real address.',
         items: [
+          {
+            kind: 'new',
+            text: 'A filter built from nothing on March 16: pick the university you are heading to, and the list narrows to what you can actually apply for.',
+          },
+          {
+            kind: 'new',
+            text: 'The logo arrives on March 17, and the region icons follow it: a teepee for Medicine Hat, a landmark for each of the other cities, a maple leaf for the national listings.',
+          },
+          {
+            kind: 'new',
+            text: 'A teacher who was shown the site pointed out that a student can spend hours going through scholarships and have nothing left to show for it the next day. Saving listings, so the site holds on to what you found, came straight out of that.',
+          },
           {
             kind: 'under-hood',
             text: 'Shared logic gets pulled into one place, so the same scholarship is described identically wherever it appears.',
@@ -128,8 +166,16 @@ export const months: UpdateMonth[] = [
             text: 'The robots are written the week before launch: retiring scholarships whose deadlines have passed, checking every link, validating the data, and handling scholarship submissions.',
           },
           {
+            kind: 'under-hood',
+            text: 'The code moves out of a personal account and into a home of its own, under a licence that lets anyone read it or learn from it but requires them to keep their own version open too.',
+          },
+          {
+            kind: 'better',
+            text: 'On the evening of March 22 the site is reworked one last time before launch: one plain, highly readable typeface everywhere in place of the display fonts used until then, and a home page that acts as a front door pointing to scholarships and research programs rather than a wall of listings.',
+          },
+          {
             kind: 'new',
-            text: 'The share image is drawn on March 22, the day before launch, so a link posted anywhere shows a proper preview.',
+            text: 'scholarab.ca goes live that same evening, and the share image is drawn alongside it so a link posted anywhere shows a proper preview. Until then the site had been sitting on a temporary address.',
           },
         ],
       },
@@ -151,6 +197,14 @@ export const months: UpdateMonth[] = [
           {
             kind: 'new',
             text: 'A bar along the bottom of the screen on phones, so you can jump between sections with your thumb.',
+          },
+          {
+            kind: 'new',
+            text: 'The first written guide, on how to apply for scholarships in Alberta, so the site can be found by someone searching for the answer rather than for the site by name.',
+          },
+          {
+            kind: 'better',
+            text: 'Animated transitions between pages were built, broke the bottom bar on phones, and were taken back out. What survived is quieter: the next page starts loading the moment your finger touches a link.',
           },
           {
             kind: 'under-hood',
