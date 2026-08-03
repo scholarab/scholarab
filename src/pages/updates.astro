@@ -92,6 +92,24 @@ const countedOnLabel = longDate(COUNTED_ON);
             <p class="sabu-month-summary">{month.summary}</p>
           </div>
 
+          {month.shots && (
+            <div class="sabu-shots">
+              {month.shots.map(shot => (
+                <figure class={`sabu-shot sabu-shot-${shot.shape}`}>
+                  <img
+                    src={shot.src}
+                    width={shot.width}
+                    height={shot.height}
+                    alt={shot.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption>{shot.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+
           <div class="sabu-weeks">
             {month.weeks.map(week => (
               <article class="sabu-week">
@@ -206,6 +224,28 @@ const countedOnLabel = longDate(COUNTED_ON);
     margin: 12px 0 0; max-width: 680px;
   }
 
+  /* Screenshots ------------------------------------------------------- */
+  /* Wraps rather than scrolls: two shots per month is the usual case, and a
+     row that wraps needs no horizontal scrolling on a phone. */
+  .sabu-shots {
+    display: flex; flex-wrap: wrap; gap: 22px;
+    margin: 0 0 26px;
+  }
+  /* Sized by flex-basis rather than by the image: the pictures load lazily, and
+     an item sized by its content collapses to nothing until they arrive. */
+  .sabu-shot { margin: 0; min-width: 0; }
+  .sabu-shot img {
+    display: block; width: 100%; height: auto;
+    border: 1.5px solid rgba(20,25,21,0.85); border-radius: 12px;
+    background: #FFFFFF;
+  }
+  .sabu-shot-wide { flex: 0 1 420px; }
+  .sabu-shot-tall { flex: 0 1 190px; }
+  .sabu-shot figcaption {
+    font-size: 12.5px; line-height: 1.5; color: rgba(20,25,21,0.55);
+    margin-top: 9px;
+  }
+
   /* Week -------------------------------------------------------------- */
   .sabu-weeks { display: flex; flex-direction: column; gap: 14px; }
   .sabu-week {
@@ -250,6 +290,9 @@ const countedOnLabel = longDate(COUNTED_ON);
     .sabu-stat-num { font-size: 36px; }
     .sabu-body { padding: 44px 20px 90px; }
     .sabu-month { padding-top: 44px; }
+    .sabu-shots { gap: 16px; }
+    /* Two across on a phone, whatever the shape, so the strip stays one row. */
+    .sabu-shot-wide, .sabu-shot-tall { flex: 1 1 calc(50% - 8px); max-width: calc(50% - 8px); }
     .sabu-week { grid-template-columns: 1fr; gap: 18px; padding: 24px 22px; }
     .sabu-week-rail {
       border-right: none; border-bottom: 1.5px solid rgba(20,25,21,0.12);

@@ -43,6 +43,29 @@ export type UpdateWeek = {
   items: UpdateItem[]
 }
 
+/**
+ * A screenshot of the site as it looked at a point in time.
+ *
+ * Sources are the real screenshots taken while the work was happening, cropped
+ * to the page itself: no browser tabs, no menu bar, nothing off-site. They are
+ * served from /history as WebP. Width and height are the file's true pixel
+ * dimensions so the space can be reserved before the image loads.
+ */
+export type UpdateShot = {
+  /** Path under /history, e.g. "/history/2026-03-02-first-page.webp". */
+  src: string
+  /** ISO date the screenshot was taken. */
+  takenAt: string
+  width: number
+  height: number
+  /** 'wide' for a desktop window, 'tall' for a phone. Controls the size shown. */
+  shape: 'wide' | 'tall'
+  /** Describes the picture for anyone who cannot see it. */
+  alt: string
+  /** Shown under the picture. Say when it was, and what is worth noticing. */
+  caption: string
+}
+
 export type UpdateMonth = {
   /** e.g. "March 2026" */
   label: string
@@ -50,6 +73,11 @@ export type UpdateMonth = {
   id: string
   /** One line on the shape of the month. */
   summary: string
+  /**
+   * How the site looked during this month. Optional: most months have no
+   * surviving screenshots, and a month with none simply shows no strip.
+   */
+  shots?: UpdateShot[]
   weeks: UpdateWeek[]
 }
 
@@ -89,6 +117,30 @@ export const months: UpdateMonth[] = [
     id: 'm-2026-03',
     summary:
       'Three weeks of building, under two names that did not survive, then the first version goes out the door with 115 scholarships already in it.',
+    shots: [
+      {
+        src: '/history/2026-03-02-first-page.webp',
+        takenAt: '2026-03-02',
+        width: 1058,
+        height: 466,
+        shape: 'wide',
+        // Padded with white: the text sits in the very top-left of the page, and
+        // the rounded corner would otherwise clip the first letter.
+        alt: 'An empty white browser window showing the words Hello, World! in small black text.',
+        caption:
+          'March 2, 5:57 pm. The first page the project ever served, three minutes after the folder existed.',
+      },
+      {
+        src: '/history/2026-03-02-first-prototype.webp',
+        takenAt: '2026-03-02',
+        width: 1010,
+        height: 488,
+        shape: 'wide',
+        alt: 'An early version of the site titled Scholarhat, with scholarships split into three columns headed Active, Opening Soon and Closed.',
+        caption:
+          'Fifty-five minutes later, the first prototype: six scholarships under the original name, already split into open, opening soon and closed.',
+      },
+    ],
     weeks: [
       {
         label: 'Mar 2 - 8',
@@ -219,6 +271,28 @@ export const months: UpdateMonth[] = [
     label: 'April 2026',
     id: 'm-2026-04',
     summary: 'The busiest month by far, at 369 changes. The match quiz, the research-program library, and the move to faster hosting all happened here.',
+    shots: [
+      {
+        src: '/history/2026-04-04-how-it-works.webp',
+        takenAt: '2026-04-04',
+        width: 620,
+        height: 1052,
+        shape: 'tall',
+        alt: 'The site on a phone, in dark colours, listing three numbered steps: Browse, Filter and Apply.',
+        caption:
+          'April 4. The site explained itself in three steps, and was dark by default — it stayed that way until July.',
+      },
+      {
+        src: '/history/2026-04-25-home.webp',
+        takenAt: '2026-04-25',
+        width: 620,
+        height: 1052,
+        shape: 'tall',
+        alt: "The home page on a phone, in dark colours, reading Alberta's student opportunity directory and $653,510+ open right now, above a list of scholarships closing this week.",
+        caption:
+          'April 25, with 95 scholarships and 89 research programs listed. Nothing was changed for the rest of the month.',
+      },
+    ],
     weeks: [
       {
         label: 'Mar 30 - Apr 5',
