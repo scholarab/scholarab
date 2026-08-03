@@ -61,6 +61,7 @@ const lines: string[] = [
   urlEntry(`${BASE}/about/`, '0.8'),
   urlEntry(`${BASE}/educators/`, '0.7'),
   urlEntry(`${BASE}/guides/`, '0.8'),
+  urlEntry(`${BASE}/updates/`, '0.5'),
   ...guides.map((g) => urlEntry(`${BASE}/guides/${g.slug}/`, '0.8', g.dateModified)),
   // Closed listings (active: false) stay out of the sitemap — Google flags
   // expired-offer pages as Soft 404. Missing `active` counts as open.

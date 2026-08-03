@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import { months, KIND_LABELS, KIND_COLORS, TOTAL_COMMITS, FIRST_COMMIT } from '../lib/updates';
+
+const pageTitle = 'What changed on ScholarAB | Update log';
+const description =
+  'Every change made to ScholarAB since it launched in March 2026, grouped by month and week, written in plain English.';
+const canonical = 'https://www.scholarab.ca/updates/';
+
+const totalWeeks = months.reduce((n, m) => n + m.weeks.length, 0);
+const latest = months[months.length - 1].weeks[months[months.length - 1].weeks.length - 1];
+
+const startLabel = new Date(FIRST_COMMIT + 'T12:00:00Z').toLocaleDateString('en-CA', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<Layout
+  title={pageTitle}
+  description={description}
+  ogTitle={pageTitle}
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+  currentPath="/updates"
+>
+  <SabFonts italic slot="head" />
+
+  <div class="sabp" id="sab-updates" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabp-header">
+      <SabHeader currentPath="/updates" />
+      <div class="sabu-hero">
+        <div class="sabu-kicker sabu-mono">
+          <span class="sabu-kicker-dot"></span>
+          <span>UPDATE LOG</span>
+        </div>
+        <h1 class="sabu-h1">Everything that has <em>changed</em>.</h1>
+        <p class="sabu-lede">
+          ScholarAB is worked on in the open. This is every change since the site went live on {startLabel},
+          grouped by month, then by week, and written for students rather than developers.
+        </p>
+        <div class="sabu-stats">
+          <div class="sabu-stat">
+            <div class="sabu-stat-num">{TOTAL_COMMITS}</div>
+            <div class="sabu-mono sabu-stat-label">CHANGES SHIPPED</div>
+          </div>
+          <div class="sabu-stat">
+            <div class="sabu-stat-num">{totalWeeks}</div>
+            <div class="sabu-mono sabu-stat-label">ACTIVE WEEKS</div>
+          </div>
+          <div class="sabu-stat">
+            <div class="sabu-stat-num">{months.length}</div>
+            <div class="sabu-mono sabu-stat-label">MONTHS LIVE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sabu-body" style="flex:1;">
+      <nav class="sabu-jump" aria-label="Jump to month">
+        <span class="sabu-mono sabu-jump-label">JUMP TO</span>
+        <div class="sabu-jump-links">
+          {months.map(m => (
+            <a href={`#${m.id}`} class="sabu-mono sabu-jump-link">{m.label}</a>
+          ))}
+        </div>
+      </nav>
+
+      {months.map(month => (
+        <section class="sabu-month" id={month.id}>
+          <div class="sabu-month-head">
+            <h2 class="sabu-month-title">{month.label}</h2>
+            <p class="sabu-month-summary">{month.summary}</p>
+          </div>
+
+          <div class="sabu-weeks">
+            {month.weeks.map(week => (
+              <article class="sabu-week">
+                <div class="sabu-week-rail">
+                  <div class="sabu-mono sabu-week-label">{week.label}</div>
+                  <div class="sabu-mono sabu-week-count">
+                    {week.commits} {week.commits === 1 ? 'change' : 'changes'}
+                  </div>
+                </div>
+
+                <div class="sabu-week-main">
+                  <h3 class="sabu-week-headline">{week.headline}</h3>
+                  <ul class="sabu-list">
+                    {week.items.map(item => (
+                      <li class="sabu-item">
+                        <span
+                          class="sabu-mono sabu-tag"
+                          style={`color:${KIND_COLORS[item.kind]};border-color:${KIND_COLORS[item.kind]};`}
+                        >
+                          {KIND_LABELS[item.kind]}
+                        </span>
+                        <span class="sabu-item-text">{item.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <div class="sabu-footnote">
+        <p>
+          <strong>How this list was built.</strong> It is reconstructed from the site's own source history,
+          not written from memory. The earliest stretch, {startLabel} through April 19, was recorded under a
+          single repeated placeholder message, so those weeks were rebuilt from what the changes themselves
+          touched. Counts are the number of separate changes recorded in that range, so a week with a hundred
+          of them was a week of many small adjustments, not a hundred new features.
+        </p>
+        <p>
+          Most recent entry: <strong>{latest.label}</strong>. Something look wrong?
+          <a href="mailto:contact.scholarab@gmail.com">Tell me about it.</a>
+        </p>
+      </div>
+    </div>
+
+    <SabFooter />
+  </div>
+</Layout>
+
+<style is:global>
+  body:has(#sab-updates) { background: #FAF7F0; }
+</style>
+
+<style>
+  .sabu-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* Hero -------------------------------------------------------------- */
+  .sabu-hero { max-width: 1180px; margin: 0 auto; padding: 72px 48px 64px; width: 100%; box-sizing: border-box; }
+  .sabu-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; font-size: 13px; color: #2FD3A0; letter-spacing: 0.06em; }
+  .sabu-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
+  .sabu-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;
+    margin: 0; max-width: 900px; text-wrap: balance;
+  }
+  .sabu-h1 em { font-style: italic; color: #2FD3A0; }
+  .sabu-lede { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 28px 0 0; max-width: 620px; }
+
+  .sabu-stats { display: flex; gap: 56px; margin-top: 44px; flex-wrap: wrap; }
+  .sabu-stat-num { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1; color: #2FD3A0; }
+  .sabu-stat-label { font-size: 11px; letter-spacing: 0.06em; color: rgba(242,240,233,0.5); margin-top: 10px; }
+
+  /* Body -------------------------------------------------------------- */
+  .sabu-body { max-width: 1180px; margin: 0 auto; padding: 64px 48px 110px; width: 100%; box-sizing: border-box; }
+
+  .sabu-jump {
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    padding-bottom: 34px; margin-bottom: 20px; border-bottom: 1.5px solid rgba(20,25,21,0.12);
+  }
+  .sabu-jump-label { font-size: 11px; letter-spacing: 0.06em; color: rgba(20,25,21,0.45); }
+  .sabu-jump-links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sabu-jump-link {
+    font-size: 12px; letter-spacing: 0.02em; text-decoration: none; color: #141915;
+    border: 1.5px solid rgba(20,25,21,0.25); border-radius: 999px; padding: 6px 14px;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .sabu-jump-link:hover { border-color: #0E8C64; color: #0E8C64; background: rgba(47,211,160,0.09); }
+
+  /* Month ------------------------------------------------------------- */
+  .sabu-month { padding-top: 56px; scroll-margin-top: 24px; }
+  .sabu-month-head { margin-bottom: 30px; }
+  .sabu-month-title {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(34px, 4.4vw, 50px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
+  }
+  .sabu-month-summary {
+    font-size: 16px; line-height: 1.6; color: rgba(20,25,21,0.6);
+    margin: 12px 0 0; max-width: 680px;
+  }
+
+  /* Week -------------------------------------------------------------- */
+  .sabu-weeks { display: flex; flex-direction: column; gap: 14px; }
+  .sabu-week {
+    display: grid; grid-template-columns: 190px 1fr; gap: 30px;
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
+    padding: 30px 32px;
+  }
+  .sabu-week-rail { border-right: 1.5px solid rgba(20,25,21,0.12); padding-right: 24px; }
+  .sabu-week-label { font-size: 13px; letter-spacing: 0.03em; color: #141915; font-weight: 500; }
+  .sabu-week-count { font-size: 11px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); margin-top: 8px; }
+
+  .sabu-week-headline {
+    font-size: 19px; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em;
+    margin: 0 0 20px; max-width: 640px;
+  }
+
+  .sabu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  /* Fixed-width tag column so every line of text starts on the same edge; the
+     pill itself hugs its label rather than stretching to fill the column. */
+  .sabu-item { display: grid; grid-template-columns: 118px 1fr; gap: 16px; align-items: start; }
+  .sabu-tag {
+    justify-self: start;
+    font-size: 9.5px; letter-spacing: 0.07em; line-height: 1;
+    border: 1.5px solid; border-radius: 999px; padding: 5px 9px;
+    white-space: nowrap; margin-top: 3px;
+  }
+  .sabu-item-text { font-size: 15px; line-height: 1.62; color: rgba(20,25,21,0.72); }
+
+  /* Footnote ---------------------------------------------------------- */
+  .sabu-footnote {
+    margin-top: 64px; padding-top: 30px; border-top: 1.5px solid rgba(20,25,21,0.12);
+    font-size: 14px; line-height: 1.65; color: rgba(20,25,21,0.55); max-width: 760px;
+  }
+  .sabu-footnote p { margin: 0 0 12px; }
+  .sabu-footnote p:last-child { margin-bottom: 0; }
+  .sabu-footnote strong { color: #141915; }
+  .sabu-footnote a { color: #0E8C64; }
+
+  @media (max-width: 900px) {
+    .sabu-hero { padding: 44px 20px 44px; }
+    .sabu-stats { gap: 32px; margin-top: 34px; }
+    .sabu-stat-num { font-size: 36px; }
+    .sabu-body { padding: 44px 20px 90px; }
+    .sabu-month { padding-top: 44px; }
+    .sabu-week { grid-template-columns: 1fr; gap: 18px; padding: 24px 22px; }
+    .sabu-week-rail {
+      border-right: none; border-bottom: 1.5px solid rgba(20,25,21,0.12);
+      padding-right: 0; padding-bottom: 14px;
+      display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    }
+    .sabu-week-count { margin-top: 0; }
+    .sabu-item { grid-template-columns: 1fr; gap: 7px; }
+    .sabu-tag { justify-self: start; text-align: left; }
+  }
+</style>
