@@ -21,8 +21,12 @@ export type UpdateWeek = {
   label: string
   /** ISO date of the first day covered, used for sorting and datetime attrs. */
   start: string
-  /** Number of commits landed in this range. */
-  commits: number
+  /**
+   * Number of commits landed in this range. Omitted for the three weeks that
+   * predate the first commit — those are dated from the files on disk instead,
+   * so there is no count to give.
+   */
+  commits?: number
   /** One-sentence summary of what the week was about. */
   headline: string
   items: UpdateItem[]
@@ -55,19 +59,72 @@ export const KIND_COLORS: Record<UpdateKind, string> = {
 }
 
 export const TOTAL_COMMITS = 596
+/** Date the project folder was created on disk. Work began here. */
+export const PROJECT_START = '2026-03-02'
+/** Date the first commit landed. Everything before it is dated from the files. */
 export const FIRST_COMMIT = '2026-03-23'
 
 export const months: UpdateMonth[] = [
   {
     label: 'March 2026',
     id: 'm-2026-03',
-    summary: 'ScholarAB goes live.',
+    summary:
+      'Three weeks of building, then the first version goes out the door with 115 scholarships already in it.',
     weeks: [
+      {
+        label: 'Mar 2 - 8',
+        start: '2026-03-02',
+        headline: 'Day one. The project gets created, under a different name.',
+        items: [
+          {
+            kind: 'new',
+            text: 'The ScholarAB folder is created on March 2. The setup script that built it calls the project "scholarhat", so the name it ships under was not the name it started with.',
+          },
+          {
+            kind: 'under-hood',
+            text: 'The foundation gets picked in one go: Astro for the pages, Tailwind for the styling, React for the interactive parts, and strict type checking from the very first file.',
+          },
+          {
+            kind: 'new',
+            text: 'The first pages, the first components, and the file that would hold every scholarship all appear the same evening.',
+          },
+        ],
+      },
+      {
+        label: 'Mar 9 - 15',
+        start: '2026-03-09',
+        headline: 'One shared frame for every page.',
+        items: [
+          {
+            kind: 'better',
+            text: 'A single shared layout and one stylesheet arrive, so every page on the site inherits the same header, footer and typography instead of each one being built separately.',
+          },
+        ],
+      },
+      {
+        label: 'Mar 16 - 22',
+        start: '2026-03-16',
+        headline: 'The automation and the launch prep.',
+        items: [
+          {
+            kind: 'under-hood',
+            text: 'Shared logic gets pulled into one place, so the same scholarship is described identically wherever it appears.',
+          },
+          {
+            kind: 'under-hood',
+            text: 'The robots are written the week before launch: retiring scholarships whose deadlines have passed, checking every link, validating the data, and handling scholarship submissions.',
+          },
+          {
+            kind: 'new',
+            text: 'The share image is drawn on March 22, the day before launch, so a link posted anywhere shows a proper preview.',
+          },
+        ],
+      },
       {
         label: 'Mar 23 - 29',
         start: '2026-03-23',
         commits: 1,
-        headline: 'The site launches with 115 scholarships and 17 research programs.',
+        headline: 'The first version ships, with 115 scholarships and 17 research programs.',
         items: [
           {
             kind: 'new',
