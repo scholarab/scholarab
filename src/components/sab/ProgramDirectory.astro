@@ -16,7 +16,7 @@ const SORT_CHIPS = [
   { value: 'paid_first',  label: 'Paid first' },
   { value: 'name',        label: 'A–Z' },
 ] as const;
-const GRADE_CHIPS = [9, 10, 11, 12];
+const GRADE_CHIPS = [10, 11, 12];
 
 const counts = new Map<string, number>();
 for (const p of items) if (p.category) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
