@@ -114,6 +114,32 @@ describe('AnalyticsPanel', () => {
     expect(screen.getByText('No activity in this period.')).toBeTruthy()
   })
 
+  // The real shape as of Aug 2026: events only survive from Jul (the table was
+  // wiped Jul 16) but the email list goes back to April. Basing the month list
+  // on events alone would drop three months of signups off the page while still
+  // counting them in the Total.
+  it('keeps months that only the email list reaches back to', () => {
+    render(<AnalyticsPanel data={{
+      ...data,
+      monthly: [{ month: '2026-07', event: 'detail_view', n: 184 }, { month: '2026-08', event: 'detail_view', n: 46 }],
+      monthlySubs: [
+        { month: '2026-04', people: 2, reminders: 2 },
+        { month: '2026-05', people: 6, reminders: 15 },
+        { month: '2026-06', people: 4, reminders: 6 },
+        { month: '2026-07', people: 5, reminders: 10 },
+      ],
+    }} />)
+
+    const buttons = screen.getAllByRole('button').map(b => b.textContent)
+    expect(buttons.slice(0, 6)).toEqual(
+      ['All time', 'Aug 2026', 'Jul 2026', 'Jun 2026', 'May 2026', 'Apr 2026']
+    )
+    // No events that month, but the signups still show in the last column
+    const may = monthRow('May 2026')
+    expect(may[1]).toBe('0')
+    expect(may[may.length - 1]).toBe('15')
+  })
+
   it('falls back to a clean empty state with no data at all', () => {
     render(<AnalyticsPanel data={{ ...data, monthly: [], perItem: [], monthlySubs: [], perItemSubs: [], daily: [], emptySearches: [] }} />)
     expect(screen.getByText(/No events yet/)).toBeTruthy()
