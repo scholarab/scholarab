@@ -1,7 +1,7 @@
 ---
 export const prerender = false
 import { db } from '../../lib/db/client'
-import { events, scholarships, researchPrograms } from '../../lib/db/schema'
+import { events, scholarships, researchPrograms, subscribers } from '../../lib/db/schema'
 import { sql, and, eq, gte, desc, count } from 'drizzle-orm'
 import AdminShell from '../../components/admin/AdminShell'
 import type { AnalyticsData } from '../../components/admin/AnalyticsPanel'
@@ -19,7 +19,12 @@ const d7  = new Date(Date.now() - 7 * DAY)
 const d14 = new Date(Date.now() - 14 * DAY)
 const d30 = new Date(Date.now() - 30 * DAY)
 
-let data: AnalyticsData = { totals: [], perItem: [], daily: [], emptySearches: [], titles: { scholarship: {}, program: {} } }
+let data: AnalyticsData = {
+  totals: [], perItem: [], daily: [], emptySearches: [],
+  subscribers: { people: 0, reminders: 0, new30: 0, new7: 0 },
+  perItemSubs: [],
+  titles: { scholarship: {}, program: {} },
+}
 try {
   const totals = await db
     .select({
@@ -63,6 +68,24 @@ try {
     .orderBy(desc(count()))
     .limit(20)
 
+  // The email list itself, not the signup events: unsubscribing deletes the
+  // row, so these are live reminders. One person can track several deadlines,
+  // hence people (distinct emails) alongside the row count. Only the counts
+  // leave the server — the addresses never reach the panel.
+  const [subTotals] = await db
+    .select({
+      people: sql<number>`count(distinct ${subscribers.email})::int`,
+      reminders: count(),
+      new30: sql<number>`(count(*) filter (where ${subscribers.createdAt} >= ${d30}))::int`,
+      new7: sql<number>`(count(*) filter (where ${subscribers.createdAt} >= ${d7}))::int`,
+    })
+    .from(subscribers)
+
+  const perItemSubs = await db
+    .select({ itemType: subscribers.itemType, itemId: subscribers.itemId, n: count() })
+    .from(subscribers)
+    .groupBy(subscribers.itemType, subscribers.itemId)
+
   const sTitles = await db.select({ id: scholarships.id, title: scholarships.title }).from(scholarships)
   const pTitles = await db.select({ id: researchPrograms.id, title: researchPrograms.name }).from(researchPrograms)
 
@@ -79,6 +102,8 @@ try {
     perItem,
     daily,
     emptySearches,
+    subscribers: subTotals ?? { people: 0, reminders: 0, new30: 0, new7: 0 },
+    perItemSubs,
     titles: {
       scholarship: { ...titleMap(sTitles), ...titleMap(sJson) },
       program: { ...titleMap(pTitles), ...titleMap(pJson) },

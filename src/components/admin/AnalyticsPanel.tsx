@@ -5,6 +5,9 @@ export interface AnalyticsData {
   perItem: { event: string; itemType: string | null; itemId: number | null; n30: number; n7: number }[]
   daily: { day: string; n: number }[]
   emptySearches: { q: string | null; n: number }[]
+  /** Live email list: people = distinct addresses, reminders = rows. */
+  subscribers: { people: number; reminders: number; new30: number; new7: number }
+  perItemSubs: { itemType: string; itemId: number; n: number }[]
   titles: { scholarship: Record<number, string>; program: Record<number, string> }
   error?: boolean
 }
@@ -33,9 +36,10 @@ interface ItemRow {
   rate: number | null
   saves30: number
   alerts30: number
+  onList: number
 }
 
-type SortKey = keyof Pick<ItemRow, 'title' | 'itemType' | 'views30' | 'applies7' | 'applies30' | 'rate' | 'saves30' | 'alerts30'>
+type SortKey = keyof Pick<ItemRow, 'title' | 'itemType' | 'views30' | 'applies7' | 'applies30' | 'rate' | 'saves30' | 'alerts30' | 'onList'>
 type TypeFilter = 'all' | 'scholarship' | 'program'
 
 const COLUMNS: { key: SortKey; label: string; numeric: boolean }[] = [
@@ -47,22 +51,24 @@ const COLUMNS: { key: SortKey; label: string; numeric: boolean }[] = [
   { key: 'rate',      label: 'Apply rate',  numeric: true },
   { key: 'saves30',   label: 'Saves 30d',   numeric: true },
   { key: 'alerts30',  label: 'Alerts 30d',  numeric: true },
+  { key: 'onList',    label: 'On list',     numeric: true },
 ]
 
 function buildItemRows(data: AnalyticsData): ItemRow[] {
   const map = new Map<string, ItemRow>()
+  const blank = (itemType: string, itemId: number): ItemRow => ({
+    key: `${itemType}:${itemId}`,
+    title: (itemType === 'program' ? data.titles.program : data.titles.scholarship)[itemId] ?? `#${itemId}`,
+    itemType,
+    views30: 0, applies7: 0, applies30: 0, rate: null, saves30: 0, alerts30: 0, onList: 0,
+  })
+
   for (const e of data.perItem) {
     if (e.itemId == null || !e.itemType) continue
     const key = `${e.itemType}:${e.itemId}`
     let row = map.get(key)
     if (!row) {
-      const titles = e.itemType === 'program' ? data.titles.program : data.titles.scholarship
-      row = {
-        key,
-        title: titles[e.itemId] ?? `#${e.itemId}`,
-        itemType: e.itemType,
-        views30: 0, applies7: 0, applies30: 0, rate: null, saves30: 0, alerts30: 0,
-      }
+      row = blank(e.itemType, e.itemId)
       map.set(key, row)
     }
     if (e.event === 'detail_view') row.views30 += e.n30
@@ -70,6 +76,20 @@ function buildItemRows(data: AnalyticsData): ItemRow[] {
     else if (e.event === 'save') row.saves30 += e.n30
     else if (e.event === 'alert_subscribe') row.alerts30 += e.n30
   }
+
+  // An item can have live reminders without a single event in the window —
+  // signups from before it, and everything lost while the event write was
+  // being dropped. Those items still belong in the table.
+  for (const s of data.perItemSubs) {
+    const key = `${s.itemType}:${s.itemId}`
+    let row = map.get(key)
+    if (!row) {
+      row = blank(s.itemType, s.itemId)
+      map.set(key, row)
+    }
+    row.onList += s.n
+  }
+
   for (const row of map.values()) {
     row.rate = row.views30 > 0 ? row.applies30 / row.views30 : null
   }
@@ -136,7 +156,7 @@ export default function AnalyticsPanel({ data }: Props) {
       </div>
 
       {/* Totals: 30d big, 7d small */}
-      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
         {Object.entries(EVENT_LABELS).map(([event, label]) => {
           const t = data.totals.find(x => x.event === event)
           const starts30 = data.totals.find(x => x.event === 'quiz_start')?.n30 ?? 0
@@ -153,6 +173,19 @@ export default function AnalyticsPanel({ data }: Props) {
             </div>
           )
         })}
+
+        {/* Live list, not a windowed event count: unsubscribing removes the
+            row, so this is who is actually on email right now. */}
+        <div className="border rounded-xl p-4" style={{ borderColor: 'rgba(34,211,165,0.25)' }}>
+          <p className="text-2xl font-semibold" style={{ color: '#22d3a5' }}>
+            {data.subscribers.people.toLocaleString()}
+          </p>
+          <p className="text-xs text-white/40 mt-1">People on email</p>
+          <p className="text-xs text-white/25 mt-0.5">
+            {data.subscribers.reminders.toLocaleString()} reminder{data.subscribers.reminders === 1 ? '' : 's'} set
+            {data.subscribers.new7 > 0 ? ` · ${data.subscribers.new7} new 7d` : ''}
+          </p>
+        </div>
       </div>
 
       {/* Per-item engagement */}
@@ -198,7 +231,7 @@ export default function AnalyticsPanel({ data }: Props) {
           </thead>
           <tbody>
             {rows.length === 0 && (
-              <tr><td colSpan={8} className="px-4 py-6 text-white/30 text-center">
+              <tr><td colSpan={COLUMNS.length} className="px-4 py-6 text-white/30 text-center">
                 {allRows.length === 0 ? 'No events yet. Data appears as students use the site.' : 'Nothing matches this filter.'}
               </td></tr>
             )}
@@ -214,6 +247,7 @@ export default function AnalyticsPanel({ data }: Props) {
                 </td>
                 <td className="px-4 py-2.5 text-right">{row.saves30}</td>
                 <td className="px-4 py-2.5 text-right">{row.alerts30}</td>
+                <td className="px-4 py-2.5 text-right">{row.onList}</td>
               </tr>
             ))}
           </tbody>
@@ -222,6 +256,7 @@ export default function AnalyticsPanel({ data }: Props) {
       <div className="flex items-center justify-between mb-8">
         <p className="text-xs text-white/30">
           Applies include clicks from list cards, which skip the detail page, so rates above 100% are possible.
+          On list is live email reminders for that item, all time, not a 30 day window.
         </p>
         {rows.length > 25 && (
           <button onClick={() => setShowAll(s => !s)} className="text-xs text-white/40 hover:text-white transition cursor-pointer">
