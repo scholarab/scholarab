@@ -185,6 +185,7 @@ const totalOpen = initial.reduce(
   type State = { sort: string; category: string; region: string; status: string };
 
   initDirectory<Item, State>('#sab-scholarships', {
+    itemType: 'scholarship',
     defaultState: { sort: 'closest_due', category: 'all', region: '', status: 'all' },
     toggleKeys: ['category', 'region'],
     parseCard(el) {

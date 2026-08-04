@@ -376,7 +376,8 @@ const chip =
       const next = type === 'program' ? toggleSavedProgram(id) : toggleSaved(id);
       const nowSaved = next.includes(id);
       applySaveState(save, nowSaved);
-      if (nowSaved) showConfetti(save);
+      // Saves count, un-saves don't — the metric is "people who shortlisted it"
+      if (nowSaved) { showConfetti(save); sendEvent('save', type, id); }
       showToast(nowSaved ? 'Saved ✓' : 'Removed from saved');
     }
 

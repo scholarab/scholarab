@@ -5,6 +5,7 @@ import { db } from '../../lib/db/client'
 import { events } from '../../lib/db/schema'
 import { jsonError } from '../../lib/api-response'
 import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
+import { defer } from '../../lib/defer'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
 const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty'])
@@ -91,6 +92,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
     })
   } catch { /* analytics must never surface errors to the page */ }
 
-  recordHit(`event:${ip}`).catch(() => {})
+  // Deferred, not fired-and-forgotten: without waitUntil the Worker cancels
+  // this write, and a limiter whose hits never get recorded never limits.
+  await defer(locals, recordHit(`event:${ip}`))
   return accepted()
 }

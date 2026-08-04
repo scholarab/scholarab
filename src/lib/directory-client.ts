@@ -13,6 +13,8 @@ export interface DirectoryItem {
 }
 
 export interface DirectoryConfig<T extends DirectoryItem, S extends Record<string, string>> {
+  /** What these cards are — the `save` event needs it to name the item. */
+  itemType: 'scholarship' | 'program';
   defaultState: S;
   /** Chip keys where re-clicking the active (non-default) value toggles it back off. */
   toggleKeys: string[];
@@ -101,7 +103,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const next = config.toggleSave(id);
       const nowSaved = next.includes(id);
       setSaveState(save, nowSaved);
-      if (nowSaved) showConfetti(save);
+      // Only the save counts, not the un-save: the metric is "people who
+      // shortlisted this", and sendEvent dedupes it per item per tab session.
+      if (nowSaved) { showConfetti(save); sendEvent('save', config.itemType, id); }
       return;
     }
 

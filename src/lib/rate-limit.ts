@@ -23,7 +23,12 @@ export async function isRateLimited(key: string, limit: number, windowMs: number
 export async function recordHit(key: string): Promise<void> {
   const db = getDb()
   await db.insert(rateLimit).values({ key })
-  db.delete(rateLimit)
-    .where(lt(rateLimit.createdAt, new Date(Date.now() - 24 * 60 * 60 * 1000)))
-    .catch(() => {})
+  // Awaited, not fire-and-forget: on Workers the un-awaited version was
+  // cancelled with the request and never swept anything. Sampled at ~5% so a
+  // busy endpoint isn't paying for a DELETE on every single hit.
+  if (Math.random() < 0.05) {
+    await db.delete(rateLimit)
+      .where(lt(rateLimit.createdAt, new Date(Date.now() - 24 * 60 * 60 * 1000)))
+      .catch(() => {})
+  }
 }

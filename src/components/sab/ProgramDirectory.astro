@@ -162,6 +162,7 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
   type State = { sort: string; category: string; grade: string };
 
   initDirectory<Item, State>('#sab-programs', {
+    itemType: 'program',
     defaultState: { sort: 'closest_due', category: 'all', grade: '' },
     toggleKeys: ['category', 'grade'],
     parseCard(el) {

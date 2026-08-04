@@ -259,7 +259,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const handleToggleSave = useCallback((id: number, el?: Element | null) => {
     toggleSaved(id)
     const next = new Set(getSaved())
-    if (next.has(id)) showConfetti(el)
+    // Saves count, un-saves don't — the metric is "people who shortlisted it"
+    if (next.has(id)) { showConfetti(el); sendEvent('save', 'scholarship', id) }
     setSavedIds(next)
   }, [])
 
@@ -268,7 +269,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const handleToggleSaveProgram = useCallback((id: number, el?: Element | null) => {
     toggleSavedProgram(id)
     const next = new Set(getSavedPrograms())
-    if (next.has(id)) showConfetti(el)
+    if (next.has(id)) { showConfetti(el); sendEvent('save', 'program', id) }
     setSavedProgramIds(next)
   }, [])
 

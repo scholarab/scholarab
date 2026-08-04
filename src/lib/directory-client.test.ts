@@ -58,6 +58,7 @@ function setup() {
   }
   initialized = true
   initDirectory<Item, State>('#dir-root', {
+    itemType: 'scholarship',
     defaultState: { sort: 'order', category: 'all' },
     toggleKeys: ['category'],
     parseCard(el) {
@@ -169,12 +170,15 @@ describe('initDirectory', () => {
     expect(btn.getAttribute('aria-pressed')).toBe('true')
     expect(btn.getAttribute('aria-label')).toBe('Remove Alpha Camp from saved')
     expect(showConfetti).toHaveBeenCalledTimes(1)
+    expect(sendEvent).toHaveBeenCalledWith('save', 'scholarship', 2)
 
     click(btn)
     expect(btn.classList.contains('on')).toBe(false)
     expect(btn.textContent).toBe('☆')
     expect(btn.getAttribute('aria-label')).toBe('Save Alpha Camp')
     expect(showConfetti).toHaveBeenCalledTimes(1)
+    // Un-saving is not an event: the metric counts people who shortlisted it
+    expect(sendEvent).toHaveBeenCalledTimes(1)
   })
 
   it('paints previously saved ids on load', () => {

@@ -202,6 +202,7 @@ export function initApp(): void {
   let emptyTimer: ReturnType<typeof setTimeout> | null = null
   /** Dwell gate for detail_view — an instant open/close isn't a view. */
   let viewTimer: ReturnType<typeof setTimeout> | null = null
+  let progViewTimer: ReturnType<typeof setTimeout> | null = null
   /** Bumped whenever something re-renders the active screen from scratch. */
   let renderedKey = ''
   let renderedOverlayKey = ''
@@ -280,7 +281,7 @@ export function initApp(): void {
   function go(next: Tab): void {
     tab = next
     screen = null
-    progId = null
+    setProgId(null)
     closeSheet(false)
     render()
   }
@@ -289,7 +290,7 @@ export function initApp(): void {
   function pushScreen(next: AppScreen, slug: string | null = null): void {
     screen = next
     guideSlug = slug
-    progId = null
+    setProgId(null)
     if (next === 'quiz') {
       const stored = readQuizState()
       quizAnswers = stored.answers
@@ -304,7 +305,7 @@ export function initApp(): void {
   function closeScreen(): void {
     screen = null
     guideSlug = null
-    progId = null
+    setProgId(null)
     render()
   }
 
@@ -320,6 +321,17 @@ export function initApp(): void {
     openId = null
     if (viewTimer) { clearTimeout(viewTimer); viewTimer = null }
     if (repaint) render()
+  }
+
+  /**
+   * Every progId change goes through here so program sheets get the same
+   * dwell-gated view count the scholarship sheets have had all along — without
+   * it, /app was the only surface where opening a program counted as nothing.
+   */
+  function setProgId(id: number | null): void {
+    progId = id
+    if (progViewTimer) { clearTimeout(progViewTimer); progViewTimer = null }
+    if (id !== null) progViewTimer = setTimeout(() => sendEvent('detail_view', 'program', id), 2500)
   }
 
   // ── Save ────────────────────────────────────────────────────────────────────
@@ -853,6 +865,9 @@ export function initApp(): void {
     const opt = q.opts[index]
     if (!opt) return
     quizAnswers = { ...quizAnswers, [q.key]: opt.value }
+    // Answering question one = one started run, same rule as /match. Without
+    // it /app only ever reported completions, so the funnel read as 100%.
+    if (quizStep === 0) sendEvent('quiz_start')
     const last = quizStep >= QUIZ_QUESTIONS.length - 1
     quizStep = last ? QUIZ_QUESTIONS.length : quizStep + 1
     writeQuizState({ step: quizStep, answers: quizAnswers })
@@ -1496,9 +1511,9 @@ export function initApp(): void {
     }
 
     const progBtn = t.closest<HTMLElement>('[data-prog]')
-    if (progBtn) { progId = Number(progBtn.dataset.prog); render(); return }
+    if (progBtn) { setProgId(Number(progBtn.dataset.prog)); render(); return }
 
-    if (t.closest('[data-close-prog]')) { progId = null; render(); return }
+    if (t.closest('[data-close-prog]')) { setProgId(null); render(); return }
 
     const progCatBtn = t.closest<HTMLElement>('[data-progcat]')
     if (progCatBtn) { progCategory = progCatBtn.dataset.progcat!; render(); return }
@@ -1766,7 +1781,7 @@ export function initApp(): void {
   // pushed screen.
   function onKeyDown(e: KeyboardEvent): void {
     if (e.key === 'Escape') {
-      if (progId !== null) { progId = null; render(); return }
+      if (progId !== null) { setProgId(null); render(); return }
       if (openId !== null) { closeSheet(); return }
       if (screen !== null) { closeScreen(); return }
     }
@@ -1833,7 +1848,7 @@ export function initApp(): void {
     query = ''
     category = 'ALL'
     progCategory = 'ALL'
-    progId = null
+    setProgId(null)
     offline = navigator.onLine === false
     closeSheet(false)
     picks = {}

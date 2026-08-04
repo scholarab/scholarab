@@ -6,11 +6,12 @@ import { subscribers, events } from '../../lib/db/schema'
 import { loadScholarships, loadPrograms } from '../../lib/data-loader'
 import { jsonOk, jsonError } from '../../lib/api-response'
 import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
+import { defer } from '../../lib/defer'
 import { ALERT_MILESTONES, cadenceFromInput, formatCadence } from '../../lib/alerts'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   const ip = getClientIp(request)
   try {
     if (await isRateLimited(`alert:${ip}`, 20, 15 * 60 * 1000))
@@ -97,7 +98,10 @@ export const POST: APIRoute = async ({ request }) => {
     }
   }
 
-  recordHit(`alert:${ip}`).catch(() => {})
-  db.insert(events).values({ event: 'alert_subscribe', itemType: itemType as string, itemId }).catch(() => {})
+  // Both writes are deferred rather than fired-and-forgotten: the Worker
+  // cancels un-awaited I/O at return, which is why every signup between the
+  // Jul 16 wipe and now recorded a subscriber row but no alert_subscribe event.
+  await defer(locals, recordHit(`alert:${ip}`))
+  await defer(locals, db.insert(events).values({ event: 'alert_subscribe', itemType: itemType as string, itemId }))
   return jsonOk({ ok: true })
 }
