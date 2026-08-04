@@ -8,9 +8,7 @@ import {
   KIND_LABELS,
   KIND_COLORS,
   TOTAL_COMMITS,
-  COUNTED_ON,
   PROJECT_START,
-  FIRST_COMMIT,
 } from '../lib/updates';
 
 const pageTitle = 'What changed on ScholarAB | Update log';
@@ -19,7 +17,6 @@ const description =
 const canonical = 'https://www.scholarab.ca/updates/';
 
 const totalWeeks = months.reduce((n, m) => n + m.weeks.length, 0);
-const latest = months[months.length - 1].weeks[months[months.length - 1].weeks.length - 1];
 
 const longDate = (iso: string) =>
   new Date(iso + 'T12:00:00Z').toLocaleDateString('en-CA', {
@@ -30,8 +27,6 @@ const longDate = (iso: string) =>
   });
 
 const startLabel = longDate(PROJECT_START);
-const firstCommitLabel = longDate(FIRST_COMMIT);
-const countedOnLabel = longDate(COUNTED_ON);
 ---
 
 <Layout
@@ -145,26 +140,6 @@ const countedOnLabel = longDate(COUNTED_ON);
         </section>
       ))}
 
-      <div class="sabu-footnote">
-        <p>
-          <strong>How this list was built.</strong> It comes from the project's own records, not from
-          memory. The early part is thinner than the rest.
-        </p>
-        <p>
-          Everything from {startLabel} to {firstCommitLabel} was later merged into one entry, and the
-          originals are gone — so those three weeks are dated from build logs and carry no count. From
-          {' '}{firstCommitLabel} to April 19, every change was saved under the same placeholder note, so
-          those weeks were worked out from what the changes actually touched.
-        </p>
-        <p>
-          So {TOTAL_COMMITS}, counted on {countedOnLabel}, is a floor, not a total. A week with a hundred
-          was a week of many small fixes, not a hundred new features.
-        </p>
-        <p>
-          Most recent entry: <strong>{latest.label}</strong>. Something look wrong?
-          <a href="mailto:contact.scholarab@gmail.com">Tell me about it.</a>
-        </p>
-      </div>
     </div>
 
     <SabFooter />
@@ -271,16 +246,6 @@ const countedOnLabel = longDate(COUNTED_ON);
     white-space: nowrap; margin-top: 3px;
   }
   .sabu-item-text { font-size: 15px; line-height: 1.62; color: rgba(20,25,21,0.72); }
-
-  /* Footnote ---------------------------------------------------------- */
-  .sabu-footnote {
-    margin-top: 64px; padding-top: 30px; border-top: 1.5px solid rgba(20,25,21,0.12);
-    font-size: 14px; line-height: 1.65; color: rgba(20,25,21,0.55); max-width: 760px;
-  }
-  .sabu-footnote p { margin: 0 0 12px; }
-  .sabu-footnote p:last-child { margin-bottom: 0; }
-  .sabu-footnote strong { color: #141915; }
-  .sabu-footnote a { color: #0E8C64; }
 
   @media (max-width: 900px) {
     .sabu-hero { padding: 44px 20px 44px; }
