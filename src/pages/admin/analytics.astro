@@ -2,7 +2,7 @@
 export const prerender = false
 import { db } from '../../lib/db/client'
 import { events, scholarships, researchPrograms, subscribers } from '../../lib/db/schema'
-import { sql, and, eq, gte, desc, count } from 'drizzle-orm'
+import { sql, and, eq, desc, count } from 'drizzle-orm'
 import AdminShell from '../../components/admin/AdminShell'
 import type { AnalyticsData } from '../../components/admin/AnalyticsPanel'
 import scholarshipsJson from '../../data/scholarships.json'
@@ -14,59 +14,54 @@ const user = Astro.locals.user!
 const titleMap = (rows: { id: number; title: string }[]): Record<number, string> =>
   Object.fromEntries(rows.map(r => [r.id, r.title]))
 
-const DAY = 24 * 60 * 60 * 1000
-const d7  = new Date(Date.now() - 7 * DAY)
-const d14 = new Date(Date.now() - 14 * DAY)
-const d30 = new Date(Date.now() - 30 * DAY)
+// Everything is bucketed by Alberta calendar month, never UTC: a 6pm event on
+// the 31st is still that month locally. `events.ts` is timestamp-without-zone
+// holding UTC, so it needs the UTC hop first; `subscribers.created_at` is
+// already timestamptz and must not get it, or it shifts by six hours.
+const EVENT_MONTH = sql<string>`to_char(${events.ts} AT TIME ZONE 'UTC' AT TIME ZONE 'America/Edmonton', 'YYYY-MM')`
+const SUB_MONTH = sql<string>`to_char(${subscribers.createdAt} AT TIME ZONE 'America/Edmonton', 'YYYY-MM')`
 
 let data: AnalyticsData = {
-  totals: [], perItem: [], daily: [], emptySearches: [],
-  subscribers: { people: 0, reminders: 0, new30: 0, new7: 0 },
-  perItemSubs: [],
+  monthly: [], perItem: [], daily: [], emptySearches: [],
+  subscribers: { people: 0, reminders: 0 },
+  monthlySubs: [], perItemSubs: [],
   titles: { scholarship: {}, program: {} },
 }
 try {
-  const totals = await db
-    .select({
-      event: events.event,
-      n30: count(),
-      n7: sql<number>`(count(*) filter (where ${events.ts} >= ${d7}))::int`,
-    })
+  const monthly = await db
+    .select({ month: EVENT_MONTH, event: events.event, n: count() })
     .from(events)
-    .where(gte(events.ts, d30))
-    .groupBy(events.event)
+    .groupBy(sql`1`, events.event)
 
   const perItem = await db
     .select({
+      month: EVENT_MONTH,
       event: events.event,
       itemType: events.itemType,
       itemId: events.itemId,
-      n30: count(),
-      n7: sql<number>`(count(*) filter (where ${events.ts} >= ${d7}))::int`,
+      n: count(),
     })
     .from(events)
     .where(and(
-      gte(events.ts, d30),
       sql`${events.event} in ('detail_view', 'apply_click', 'save', 'alert_subscribe')`,
       sql`${events.itemId} is not null`,
     ))
-    .groupBy(events.event, events.itemType, events.itemId)
+    .groupBy(sql`1`, events.event, events.itemType, events.itemId)
 
-  // All events per day (Alberta time) — overall pulse of the site
+  // Every day the site has ever recorded, Alberta time. One row per active day
+  // is small enough to ship whole, and the panel slices it to the chosen month.
   const daily = await db
     .select({ day: sql<string>`to_char(${events.ts} AT TIME ZONE 'UTC' AT TIME ZONE 'America/Edmonton', 'YYYY-MM-DD')`, n: count() })
     .from(events)
-    .where(gte(events.ts, d14))
     .groupBy(sql`1`)
     .orderBy(sql`1`)
 
   const emptySearches = await db
-    .select({ q: events.meta, n: count() })
+    .select({ month: EVENT_MONTH, q: events.meta, n: count() })
     .from(events)
-    .where(and(eq(events.event, 'search_empty'), gte(events.ts, d30), sql`${events.meta} is not null`))
-    .groupBy(events.meta)
+    .where(and(eq(events.event, 'search_empty'), sql`${events.meta} is not null`))
+    .groupBy(sql`1`, events.meta)
     .orderBy(desc(count()))
-    .limit(20)
 
   // The email list itself, not the signup events: unsubscribing deletes the
   // row, so these are live reminders. One person can track several deadlines,
@@ -76,15 +71,22 @@ try {
     .select({
       people: sql<number>`count(distinct ${subscribers.email})::int`,
       reminders: count(),
-      new30: sql<number>`(count(*) filter (where ${subscribers.createdAt} >= ${d30}))::int`,
-      new7: sql<number>`(count(*) filter (where ${subscribers.createdAt} >= ${d7}))::int`,
     })
     .from(subscribers)
 
-  const perItemSubs = await db
-    .select({ itemType: subscribers.itemType, itemId: subscribers.itemId, n: count() })
+  const monthlySubs = await db
+    .select({
+      month: SUB_MONTH,
+      people: sql<number>`count(distinct ${subscribers.email})::int`,
+      reminders: count(),
+    })
     .from(subscribers)
-    .groupBy(subscribers.itemType, subscribers.itemId)
+    .groupBy(sql`1`)
+
+  const perItemSubs = await db
+    .select({ month: SUB_MONTH, itemType: subscribers.itemType, itemId: subscribers.itemId, n: count() })
+    .from(subscribers)
+    .groupBy(sql`1`, subscribers.itemType, subscribers.itemId)
 
   const sTitles = await db.select({ id: scholarships.id, title: scholarships.title }).from(scholarships)
   const pTitles = await db.select({ id: researchPrograms.id, title: researchPrograms.name }).from(researchPrograms)
@@ -98,11 +100,12 @@ try {
     .map(p => ({ id: p.id, title: p.name }))
 
   data = {
-    totals,
+    monthly,
     perItem,
     daily,
     emptySearches,
-    subscribers: subTotals ?? { people: 0, reminders: 0, new30: 0, new7: 0 },
+    subscribers: subTotals ?? { people: 0, reminders: 0 },
+    monthlySubs,
     perItemSubs,
     titles: {
       scholarship: { ...titleMap(sTitles), ...titleMap(sJson) },
