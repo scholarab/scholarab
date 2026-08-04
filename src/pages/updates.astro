@@ -16,7 +16,7 @@ const description =
   'Every change made to ScholarAB since it launched in March 2026, grouped by month and week, written in plain English.';
 const canonical = 'https://www.scholarab.ca/updates/';
 
-const totalWeeks = months.reduce((n, m) => n + m.weeks.length, 0);
+const totalEntries = months.reduce((n, m) => n + m.items.length, 0);
 
 const longDate = (iso: string) =>
   new Date(iso + 'T12:00:00Z').toLocaleDateString('en-CA', {
@@ -50,8 +50,8 @@ const startLabel = longDate(PROJECT_START);
         </div>
         <h1 class="sabu-h1">Everything that has <em>changed</em>.</h1>
         <p class="sabu-lede">
-          ScholarAB is built in the open. This is what has changed since {startLabel}, by month and
-          by week, in plain English.
+          ScholarAB is built in the open. This is what has changed since {startLabel}, month by
+          month, in plain English.
         </p>
         <div class="sabu-stats">
           <div class="sabu-stat">
@@ -59,8 +59,8 @@ const startLabel = longDate(PROJECT_START);
             <div class="sabu-mono sabu-stat-label">CHANGES ON RECORD</div>
           </div>
           <div class="sabu-stat">
-            <div class="sabu-stat-num">{totalWeeks}</div>
-            <div class="sabu-mono sabu-stat-label">ACTIVE WEEKS</div>
+            <div class="sabu-stat-num">{totalEntries}</div>
+            <div class="sabu-mono sabu-stat-label">ENTRIES LOGGED</div>
           </div>
           <div class="sabu-stat">
             <div class="sabu-stat-num">{months.length}</div>
@@ -83,6 +83,9 @@ const startLabel = longDate(PROJECT_START);
       {months.map(month => (
         <section class="sabu-month" id={month.id}>
           <div class="sabu-month-head">
+            {month.commits !== undefined && (
+              <div class="sabu-mono sabu-month-count">{month.commits} CHANGES</div>
+            )}
             <h2 class="sabu-month-title">{month.label}</h2>
             <p class="sabu-month-summary">{month.summary}</p>
           </div>
@@ -105,37 +108,20 @@ const startLabel = longDate(PROJECT_START);
             </div>
           )}
 
-          <div class="sabu-weeks">
-            {month.weeks.map(week => (
-              <article class="sabu-week">
-                <div class="sabu-week-rail">
-                  <div class="sabu-mono sabu-week-label">{week.label}</div>
-                  <div class="sabu-mono sabu-week-count">
-                    {week.railNote
-                      ?? (week.commits === undefined
-                        ? 'before version control'
-                        : `${week.commits} ${week.commits === 1 ? 'change' : 'changes'}`)}
-                  </div>
-                </div>
-
-                <div class="sabu-week-main">
-                  <h3 class="sabu-week-headline">{week.headline}</h3>
-                  <ul class="sabu-list">
-                    {week.items.map(item => (
-                      <li class="sabu-item">
-                        <span
-                          class="sabu-mono sabu-tag"
-                          style={`color:${KIND_COLORS[item.kind]};border-color:${KIND_COLORS[item.kind]};`}
-                        >
-                          {KIND_LABELS[item.kind]}
-                        </span>
-                        <span class="sabu-item-text">{item.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
+          <div class="sabu-month-card">
+            <ul class="sabu-list">
+              {month.items.map(item => (
+                <li class="sabu-item">
+                  <span
+                    class="sabu-mono sabu-tag"
+                    style={`color:${KIND_COLORS[item.kind]};border-color:${KIND_COLORS[item.kind]};`}
+                  >
+                    {KIND_LABELS[item.kind]}
+                  </span>
+                  <span class="sabu-item-text">{item.text}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       ))}
@@ -188,6 +174,9 @@ const startLabel = longDate(PROJECT_START);
   /* Month ------------------------------------------------------------- */
   .sabu-month { padding-top: 56px; scroll-margin-top: 24px; }
   .sabu-month-head { margin-bottom: 30px; }
+  .sabu-month-count {
+    font-size: 11px; letter-spacing: 0.06em; color: rgba(20,25,21,0.45); margin-bottom: 14px;
+  }
   .sabu-month-title {
     font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(34px, 4.4vw, 50px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
@@ -219,20 +208,10 @@ const startLabel = longDate(PROJECT_START);
     margin-top: 9px;
   }
 
-  /* Week -------------------------------------------------------------- */
-  .sabu-weeks { display: flex; flex-direction: column; gap: 14px; }
-  .sabu-week {
-    display: grid; grid-template-columns: 190px 1fr; gap: 30px;
+  /* Entries ----------------------------------------------------------- */
+  .sabu-month-card {
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
     padding: 30px 32px;
-  }
-  .sabu-week-rail { border-right: 1.5px solid rgba(20,25,21,0.12); padding-right: 24px; }
-  .sabu-week-label { font-size: 13px; letter-spacing: 0.03em; color: #141915; font-weight: 500; }
-  .sabu-week-count { font-size: 11px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); margin-top: 8px; }
-
-  .sabu-week-headline {
-    font-size: 19px; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em;
-    margin: 0 0 20px; max-width: 640px;
   }
 
   .sabu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
@@ -256,13 +235,7 @@ const startLabel = longDate(PROJECT_START);
     .sabu-shots { gap: 16px; }
     /* Two across on a phone, whatever the shape, so the strip stays one row. */
     .sabu-shot-wide, .sabu-shot-tall { flex: 1 1 calc(50% - 8px); max-width: calc(50% - 8px); }
-    .sabu-week { grid-template-columns: 1fr; gap: 18px; padding: 24px 22px; }
-    .sabu-week-rail {
-      border-right: none; border-bottom: 1.5px solid rgba(20,25,21,0.12);
-      padding-right: 0; padding-bottom: 14px;
-      display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
-    }
-    .sabu-week-count { margin-top: 0; }
+    .sabu-month-card { padding: 24px 22px; }
     .sabu-item { grid-template-columns: 1fr; gap: 7px; }
     .sabu-tag { justify-self: start; text-align: left; }
   }
