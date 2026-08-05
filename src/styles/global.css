@@ -476,6 +476,9 @@ body.quiz-results #match-divider {
 }
 .sabl-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0; }
 .sabl-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 8px; }
+/* Programs carry a $ PAID badge beside the tag; the right slot stays reserved
+   for the day chip so program and scholarship cards line up. */
+.sabl-card-top-left { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
 .sabl-tag {
   font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.05em;
   padding: 5px 11px; border-radius: 100px; border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6);
@@ -544,13 +547,6 @@ body.quiz-results #match-divider {
   font-size: 11.5px; font-weight: 500; padding: 5px 11px; border-radius: 100px;
   background: rgba(14,140,100,0.12); color: #0E8C64; white-space: nowrap;
 }
-.sabl-due-chip {
-  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
-  padding: 5px 11px; border-radius: 100px; white-space: nowrap;
-}
-.sabl-due-chip.dated { background: rgba(184,84,31,0.12); color: #B8541F; }
-.sabl-due-chip.ongoing { background: rgba(14,140,100,0.12); color: #0E8C64; }
-.sabl-due-chip.neutral { border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6); }
 
 /* Directory-page shell (scholarships + programs design pages) */
 .sabp { background: #FAF7F0; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }

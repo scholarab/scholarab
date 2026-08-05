@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import {
   getScholarshipStatus, getProgramStatus, programMatchesGrade,
-  filterSortScholarships, filterSortPrograms, scholarshipDayChip,
+  filterSortScholarships, filterSortPrograms, scholarshipDayChip, programDayChip,
 } from './list-core'
 import type { ScholarshipWithMeta, ProgramWithMeta, ScholarshipFilterState, ProgramFilterState } from './list-core'
 
@@ -316,6 +316,34 @@ describe('scholarshipDayChip', () => {
   })
 })
 
+// ── programDayChip ────────────────────────────────────────────────────────────
+
+describe('programDayChip', () => {
+  it('returns CLOSED for expired programs', () => {
+    const p = makeProgram({ id: 1, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime() })
+    expect(programDayChip(p)).toEqual({ label: 'CLOSED', cls: 'sabl-days neutral' })
+  })
+
+  it('distinguishes Ongoing from an undated intake', () => {
+    expect(programDayChip(makeProgram({ id: 1, deadline: 'Ongoing' })))
+      .toEqual({ label: 'ONGOING', cls: 'sabl-days neutral' })
+    expect(programDayChip(makeProgram({ id: 2, deadline: 'TBA' })))
+      .toEqual({ label: 'DEADLINE TBA', cls: 'sabl-days neutral' })
+    expect(programDayChip(makeProgram({ id: 3, deadline: null })))
+      .toEqual({ label: 'DEADLINE TBA', cls: 'sabl-days neutral' })
+  })
+
+  it('counts days down and marks the last week urgent', () => {
+    // getToday mock = 2026-04-05
+    const soon = makeProgram({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })
+    expect(programDayChip(soon)).toEqual({ label: '3 DAYS LEFT', cls: 'sabl-days urgent' })
+    const later = makeProgram({ id: 2, deadline: '2026-06-01', _deadline_ms: new Date('2026-06-01T00:00:00').getTime() })
+    expect(programDayChip(later)).toEqual({ label: '57 DAYS LEFT', cls: 'sabl-days' })
+    const today = makeProgram({ id: 3, deadline: '2026-04-05', _deadline_ms: new Date('2026-04-05T00:00:00').getTime() })
+    expect(programDayChip(today)).toEqual({ label: 'DUE TODAY', cls: 'sabl-days urgent' })
+  })
+})
+
 // ── filterSortPrograms ────────────────────────────────────────────────────────
 
 describe('filterSortPrograms', () => {
@@ -335,6 +363,26 @@ describe('filterSortPrograms', () => {
       makeProgram({ id: 3, deadline: 'TBA' }),
     ]
     expect(ids(filterSortPrograms(items, state()))).toEqual([2, 3])
+  })
+
+  it('statusFilter "all" keeps closed programs but sinks them below open ones', () => {
+    const items = [
+      makeProgram({ id: 1, deadline: '2026-01-01', _deadline_ms: PAST_MS }),
+      makeProgram({ id: 2, deadline: '2026-12-01', _deadline_ms: FUTURE_MS }),
+      makeProgram({ id: 3, deadline: 'TBA' }),
+    ]
+    expect(ids(filterSortPrograms(items, state({ statusFilter: 'all' })))).toEqual([2, 3, 1])
+  })
+
+  it('statusFilter narrows to a single program status', () => {
+    const items = [
+      makeProgram({ id: 1, deadline: '2026-01-01', _deadline_ms: PAST_MS }),
+      makeProgram({ id: 2, deadline: '2026-12-01', _deadline_ms: FUTURE_MS }),
+      makeProgram({ id: 3, deadline: 'Ongoing' }),
+    ]
+    expect(ids(filterSortPrograms(items, state({ statusFilter: 'active' })))).toEqual([2])
+    expect(ids(filterSortPrograms(items, state({ statusFilter: 'tba' })))).toEqual([3])
+    expect(ids(filterSortPrograms(items, state({ statusFilter: 'closed' })))).toEqual([1])
   })
 
   it('closest_due orders dated asc, then Ongoing, then TBA', () => {

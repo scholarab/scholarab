@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ProgramList React island.
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
-import { filterSortPrograms } from '../../lib/list-core.ts';
+import { filterSortPrograms, programDayChip, shortDate } from '../../lib/list-core.ts';
 import type { ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 
@@ -18,25 +18,24 @@ const SORT_CHIPS = [
 ] as const;
 const GRADE_CHIPS = [10, 11, 12];
 
+// Mirrors the scholarship STATUS row: 'tba' covers Ongoing and undated intakes.
+const STATUS_CHIPS = [
+  { value: 'all',    label: 'All' },
+  { value: 'active', label: 'Open' },
+  { value: 'tba',    label: 'Ongoing' },
+  { value: 'closed', label: 'Closed' },
+] as const;
+
 const counts = new Map<string, number>();
 for (const p of items) if (p.category) counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
 const categories = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]) => name);
 
-// Initial view = default filter state at build time; cards closed by then are
-// rendered hidden so the client can still re-check them against the user's clock.
-const initial = filterSortPrograms(items, { selectedCategory: 'all', gradeFilter: null, searchQuery: '', sortBy: 'closest_due' });
-const initialIds = new Set(initial.map(p => p.id));
-const ordered = [...initial, ...items.filter(p => !initialIds.has(p.id))];
+// Initial view = the default STATUS filter ('all'), matching /scholarships:
+// closed programs stay in the list wearing a CLOSED chip instead of vanishing.
+const initial = filterSortPrograms(items, {
+  selectedCategory: 'all', gradeFilter: null, searchQuery: '', sortBy: 'closest_due', statusFilter: 'all',
+});
 const paidCount = initial.filter(p => p.paid).length;
-
-function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
-  if (p.deadline === 'Ongoing') return { cls: 'ongoing', label: 'ONGOING · JOIN ANYTIME' };
-  if (!p.deadline || p.deadline === 'TBA') return { cls: 'neutral', label: 'DEADLINE TBA' };
-  const date = new Date(p.deadline + 'T00:00:00')
-    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })
-    .toUpperCase();
-  return { cls: 'dated', label: `DUE ${date}` };
-}
 ---
 
 <div class="sabl-page">
@@ -86,6 +85,12 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
         <button type="button" class="sabl-chip" data-fkey="grade" data-fval={String(g)} aria-pressed="false">{`Gr ${g}`}</button>
       ))}
     </div>
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">STATUS</span>
+      {STATUS_CHIPS.map(s => (
+        <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}</button>
+      ))}
+    </div>
   </div>
 
   <div class="sabl-mono sabl-result-line" data-dir-count>
@@ -93,10 +98,10 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
   </div>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
-    {ordered.map(p => {
+    {initial.map(p => {
       const slug = p._slug ?? generateSlug(p.name);
       const meta = [p.duration, p.grades, p.location].filter(Boolean) as string[];
-      const due = dueChip(p);
+      const chip = programDayChip(p);
       return (
         <div
           class="sabl-card"
@@ -108,11 +113,13 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
           data-paid={p.paid ? '1' : undefined}
           data-deadline={p.deadline ?? undefined}
           data-search={[p.name, p.provider, p.description, p.category].filter(Boolean).join('\n').toLowerCase()}
-          hidden={!initialIds.has(p.id)}
         >
           <div class="sabl-card-top">
-            <span class="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
-            {p.paid && <span class="sabl-mono sabl-paid">$ PAID</span>}
+            <span class="sabl-card-top-left">
+              <span class="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
+              {p.paid && <span class="sabl-mono sabl-paid">$ PAID</span>}
+            </span>
+            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
           </div>
           <a href={`/programs/${slug}/`} class="sabl-name">
             {p.emoji && <span class="sabl-name-emoji" aria-hidden="true">{`${p.emoji} `}</span>}
@@ -126,7 +133,11 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
           )}
           {p.description && <div class="sabl-blurb">{p.description}</div>}
           <div class="sabl-card-foot">
-            <span class={`sabl-mono sabl-due-chip ${due.cls}`}>{due.label}</span>
+            <span class="sabl-due">
+              {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
+                ? `DUE ${shortDate(p.deadline)}`
+                : 'NO FIXED DEADLINE'}
+            </span>
             <div class="sabl-card-actions">
               <button
                 type="button"
@@ -154,16 +165,16 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { filterSortPrograms } from '../../lib/list-core.ts';
-  import type { ProgramWithMeta, ProgramSort } from '../../lib/list-core.ts';
+  import { filterSortPrograms, programDayChip } from '../../lib/list-core.ts';
+  import type { ProgramWithMeta, ProgramSort, ProgramStatusFilter } from '../../lib/list-core.ts';
   import { getSavedPrograms, toggleSavedProgram } from '../../lib/tracker.ts';
 
   type Item = ProgramWithMeta & { el: HTMLElement; search: string };
-  type State = { sort: string; category: string; grade: string };
+  type State = { sort: string; category: string; grade: string; status: string };
 
   initDirectory<Item, State>('#sab-programs', {
     itemType: 'program',
-    defaultState: { sort: 'closest_due', category: 'all', grade: '' },
+    defaultState: { sort: 'closest_due', category: 'all', grade: '', status: 'all' },
     toggleKeys: ['category', 'grade'],
     parseCard(el) {
       const d = el.dataset;
@@ -191,6 +202,7 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
         gradeFilter: state.grade ? Number(state.grade) : null,
         searchQuery: '',
         sortBy: state.sort as ProgramSort,
+        statusFilter: state.status as ProgramStatusFilter,
       }) as Item[];
       return q ? sorted.filter(it => it.search.includes(q)) : sorted;
     },
@@ -199,5 +211,16 @@ function dueChip(p: ProgramWithMeta): { cls: string; label: string } {
     getSavedIds: () => [...getSavedPrograms()],
     toggleSave: id => [...toggleSavedProgram(id)],
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),
+    // Day chips depend on the clock, not just the data: recompute them on every
+    // load so CDN-cached HTML never shows a stale countdown.
+    onCardsParsed(items) {
+      for (const p of items) {
+        const chipEl = p.el.querySelector<HTMLElement>('[data-days-chip]');
+        if (!chipEl) continue;
+        const chip = programDayChip(p);
+        chipEl.hidden = !chip;
+        if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
+      }
+    },
   });
 </script>

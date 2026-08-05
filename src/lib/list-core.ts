@@ -163,6 +163,23 @@ export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
   return 'active';
 }
 
+// The corner chip on a program card — the scholarship chip's twin, so both
+// directories read the same. Clock-dependent, so the client recomputes it on
+// every page load rather than trusting CDN-cached HTML.
+export function programDayChip(p: ProgramWithMeta): { label: string; cls: string } | null {
+  const status = getProgramStatus(p);
+  if (status === 'closed') return { label: 'CLOSED', cls: 'sabl-days neutral' };
+  if (status === 'tba') {
+    return p.deadline === 'Ongoing'
+      ? { label: 'ONGOING', cls: 'sabl-days neutral' }
+      : { label: 'DEADLINE TBA', cls: 'sabl-days neutral' };
+  }
+  const deadMs = p._deadline_ms ?? new Date(p.deadline! + 'T00:00:00').getTime();
+  const days = Math.max(0, Math.round((deadMs - getToday().getTime()) / 86400000));
+  const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
+  return { label, cls: `sabl-days${days <= 7 ? ' urgent' : ''}` };
+}
+
 export type ProgramSort = 'closest_due' | 'paid_first' | 'name';
 
 // dated deadlines first (soonest), then Ongoing (actionable any time), then TBA
@@ -175,11 +192,16 @@ function programDeadlineOrder(p: ProgramWithMeta): number {
   return p.deadline === 'Ongoing' ? Number.MAX_SAFE_INTEGER - 1 : Number.MAX_SAFE_INTEGER;
 }
 
+// 'open' is the historical behaviour (closed programs never surface); the
+// directory passes an explicit value so its STATUS chips can reach them.
+export type ProgramStatusFilter = 'all' | 'open' | 'active' | 'tba' | 'closed';
+
 export interface ProgramFilterState {
   selectedCategory: string;
   gradeFilter: number | null;
   searchQuery: string;
   sortBy: ProgramSort;
+  statusFilter?: ProgramStatusFilter;
 }
 
 function buildProgramStatusCache(items: ProgramWithMeta[]): Map<number, ProgramStatus> {
@@ -190,13 +212,18 @@ function buildProgramStatusCache(items: ProgramWithMeta[]): Map<number, ProgramS
 
 export function filterSortPrograms(
   initialPrograms: ProgramWithMeta[],
-  { selectedCategory, gradeFilter, searchQuery, sortBy }: ProgramFilterState,
+  { selectedCategory, gradeFilter, searchQuery, sortBy, statusFilter = 'open' }: ProgramFilterState,
   statusCache: Map<number, ProgramStatus> = buildProgramStatusCache(initialPrograms),
 ): ProgramWithMeta[] {
-  const nonClosed = initialPrograms.filter(p => statusCache.get(p.id) !== 'closed');
+  const afterStatus = statusFilter === 'all'
+    ? initialPrograms
+    : initialPrograms.filter(p => {
+        const status = statusCache.get(p.id);
+        return statusFilter === 'open' ? status !== 'closed' : status === statusFilter;
+      });
   const afterCategory = selectedCategory === 'all'
-    ? nonClosed
-    : nonClosed.filter(p => p.category === selectedCategory);
+    ? afterStatus
+    : afterStatus.filter(p => p.category === selectedCategory);
   const afterGrade = gradeFilter === null
     ? afterCategory
     : afterCategory.filter(p => programMatchesGrade(p.grades, gradeFilter));
@@ -210,7 +237,21 @@ export function filterSortPrograms(
         (p.category?.toLowerCase().includes(q))
       );
 
+  const rank = { active: 0, tba: 1, closed: 2 } as Record<string, number>;
   return [...afterSearch].sort((a, b) => {
+    const aStatus = statusCache.get(a.id) ?? 'active';
+    const bStatus = statusCache.get(b.id) ?? 'active';
+    // Closed programs sink below open ones in every sort — same rule as
+    // scholarships, so a past deadline can never head the list.
+    if (aStatus === 'closed' || bStatus === 'closed') {
+      const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
+      if (statusDiff !== 0) return statusDiff;
+      // within the closed group: most recently expired first
+      if (aStatus === 'closed' && sortBy === 'closest_due') {
+        return programDeadlineOrder(b) - programDeadlineOrder(a);
+      }
+    }
+
     if (sortBy === 'name') return a.name.localeCompare(b.name);
     if (sortBy === 'paid_first') {
       const paidDiff = (b.paid ? 1 : 0) - (a.paid ? 1 : 0);

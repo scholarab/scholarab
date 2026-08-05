@@ -23,7 +23,10 @@ const activeScholarships = scholarships.filter(s => {
   return new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime();
 });
 const activeTotal = activeScholarships.reduce((sum, s) => sum + parseAmount(s.amount), 0);
+// Retired programs (active: false) are out of the directory, so they must be
+// out of this total too — otherwise the hero promises more than /programs shows.
 const researchCount = programs.filter(p => {
+  if (p.active === false) return false;
   if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') return true;
   return new Date(p.deadline + 'T00:00:00') >= today;
 }).length;
