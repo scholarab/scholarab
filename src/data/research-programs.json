@@ -2062,5 +2062,22 @@
     "url": "https://capitalregion.albertacf.com/services/business-training-programs/yeti",
     "description": "Alberta's own youth business program: four days of hands-on training, then you actually run the business over the summer with weekly coaching. Started by Community Futures Capital Region in 2015 and now delivered by four Community Futures offices, serving communities around Stony Plain, Spruce Grove, Leduc, Devon, Drayton Valley, Drumheller, Lac La Biche and the Lakeland region. Participants get $500 in startup funding and can earn another $500 for hitting their milestones, and some school divisions grant high school credit for it.",
     "lastVerified": "2026-08"
+  },
+  {
+    "id": 141,
+    "name": "Alberta Student Leadership Conference (ASLC)",
+    "emoji": "🎤",
+    "category": "Social Sciences",
+    "provider": "Alberta Association of Students' Councils and Advisors (AASCA)",
+    "grades": "Junior and senior high students on student council or in a leadership class",
+    "duration": "3 days each May, Friday after school through Sunday noon",
+    "paid": false,
+    "stipend": null,
+    "location": "A different Alberta host school each year (2026: École Olds High School)",
+    "eligibility": "Students attend as part of a school delegation with a staff advisor. Schools register the delegation; individual students cannot enter on their own.",
+    "deadline": "TBA",
+    "url": "https://albertastudentleadership.ca/conferences/",
+    "description": "The provincial student leadership conference, run since 1988 by a volunteer association of student council advisors and hosted by a different Alberta school every year. Three days of keynote speakers, around 14 breakout sessions, a service project and a dance, built around meeting student leaders from across the province. Useful for building a community leadership record rather than a competitive one. ASLC 2026 ran May 1 to 3 at École Olds High School; the 2027 host had not been announced as of August 2026. Ask your student council advisor to enter a delegation.",
+    "lastVerified": "2026-08"
   }
 ]
