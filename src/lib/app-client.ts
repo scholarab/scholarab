@@ -757,7 +757,7 @@ export function initApp(): void {
     // pages is the gap this screen exists to close. `#` prefixes a tab,
     // `>` a pushed screen; anything else is a real link off the app.
     const rows: [string, string, string][] = [
-      ['Research programs', `${programs.length} summer and enrichment placements`, '>programs'],
+      ['Research programs', `${programs.length} placements, competitions and apprenticeships`, '>programs'],
       ['Guides', `${guides.length} walkthroughs · Rutherford, essays, references`, '>guides'],
       ['Deadline alerts', alertCount > 0
         ? `${alertCount} set · email ${cadenceSentence(readCadence())} before close`
@@ -896,7 +896,11 @@ export function initApp(): void {
   function renderPrograms(): string {
     const list = programList()
     const cats = ['ALL', ...programCategoryKeys(programs)]
-    const tba = programs.filter(p => !isDatedIso(p.deadline)).length
+    // "Ongoing" programs (apprenticeships, internships, dual credit) have no
+    // date because they take students year round, not because one is pending.
+    // Counting them as TBA overstated the wait and mis-described the reason.
+    const tba = programs.filter(p => !isDatedIso(p.deadline) && p.deadline !== 'Ongoing').length
+    const ongoing = programs.filter(p => p.deadline === 'Ongoing').length
 
     const rows = list.map(p => {
       const on = getSavedPrograms().includes(p.id)
@@ -933,7 +937,8 @@ export function initApp(): void {
           ${tba > 0 ? `
             <div class="sabx-note-dark">
               <div class="sabx-note-dark-label">${tba} OF ${programs.length} DATES ARE TBA</div>
-              <div class="sabx-note-dark-body">Most of these open between October and February. Save one and it sits in your Saved tab — we re-check every program's dates weekly and the date lands there the day it's published.</div>
+              <div class="sabx-note-dark-body">Most of these open between October and February. Save one and it sits in your Saved tab. We re-check every program's dates weekly and the date lands there the day it's published.${
+                ongoing > 0 ? ` A further ${ongoing} take students year round, so there is no date to wait for.` : ''}</div>
             </div>` : ''}
           <div class="sabx-chips sabx-ov-chips">
             ${cats.map(c => `<button class="sabx-chip" data-progcat="${esc(c)}" aria-pressed="${progCategory === c}">${c === 'ALL' ? `ALL ${programs.length}` : esc(c)}</button>`).join('')}
@@ -1280,11 +1285,15 @@ export function initApp(): void {
             ${fact('WHERE', p.location)}
             ${fact('NEEDS', p.eligibility)}
 
-            ${!isDatedIso(p.deadline) ? `
+            ${!isDatedIso(p.deadline) ? (p.deadline === 'Ongoing' ? `
+              <div class="sabx-verified">
+                <div class="sabx-verified-label">NO DEADLINE TO MISS</div>
+                <div class="sabx-verified-body">This one takes students year round, so there is no application window to wait for. Save it if you want it in your list, then apply when you are ready.</div>
+              </div>` : `
               <div class="sabx-verified">
                 <div class="sabx-verified-label">NO DATE YET IS NORMAL</div>
                 <div class="sabx-verified-body">Research programs publish their application window in the fall. Save it and the date appears in your Saved tab the week the provider posts it.</div>
-              </div>` : ''}
+              </div>`) : ''}
           </div>
 
           <div class="sabx-sheet-foot">

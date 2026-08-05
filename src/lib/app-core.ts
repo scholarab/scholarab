@@ -621,7 +621,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     q: 'What are you looking for?',
     opts: [
       { label: 'Scholarships', value: 'scholarships', hint: 'AWARDS AND BURSARIES', emoji: '🎓' },
-      { label: 'Research Programs', value: 'programs', hint: 'SUMMER AND ENRICHMENT', emoji: '🔬' },
+      { label: 'Research Programs', value: 'programs', hint: 'SUMMER, TRADES, CONTESTS', emoji: '🔬' },
       { label: 'Both', value: 'both', hint: 'SHOW ME EVERYTHING', emoji: '✨' },
     ],
   },
