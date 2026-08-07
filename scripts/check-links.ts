@@ -59,11 +59,17 @@ async function fetchStatus(url: string): Promise<{ status?: number; error?: stri
 
 type Verdict = { kind: 'ok' } | { kind: 'broken' | 'suspect'; error: string }
 
+const transient = (r: { status?: number; error?: string }) =>
+  !!r.error || (!!r.status && (r.status >= 500 || r.status === 429))
+
 async function checkUrl(url: string): Promise<Verdict> {
+  // Two retries with backoff, not one. A single 2s retry was not enough for
+  // hosts that drop connections under burst — every studentaid.alberta.ca
+  // listing failed the 2026-08-03 run on a connect timeout and every one of
+  // them was live in a browser.
   let result = await fetchStatus(url)
-  // One retry for transient failures: network errors, timeouts, 5xx, 429.
-  if (result.error || (result.status && (result.status >= 500 || result.status === 429))) {
-    await sleep(2_000)
+  for (let attempt = 0; attempt < 2 && transient(result); attempt++) {
+    await sleep(2_000 * (attempt + 1))
     result = await fetchStatus(url)
   }
   if (result.error) {
@@ -78,23 +84,47 @@ async function checkUrl(url: string): Promise<Verdict> {
 
 console.log(`Checking ${items.length} URLs...`)
 
-const CONCURRENCY = 10
-for (let i = 0; i < items.length; i += CONCURRENCY) {
-  const batch = items.slice(i, i + CONCURRENCY)
-  const results = await Promise.all(
-    batch.map(async item => {
-      if (!item.url) return { item, verdict: { kind: 'broken', error: 'missing url' } as Verdict }
-      const host = new URL(item.url).hostname.replace(/^www\./, '')
-      if (ignoredHosts.has(host)) return { item, verdict: { kind: 'ok' } as Verdict, ignored: true }
-      return { item, verdict: await checkUrl(item.url) }
-    })
-  )
-  for (const { item, verdict, ignored } of results) {
-    if (ignored) console.log(`  [${item.id}] ${item.label}: skipped (known bot-blocking host)`)
+// Group by host and walk each host's URLs one at a time. The old flat batch of
+// 10 opened up to 10 sockets against a single host — studentaid.alberta.ca
+// alone owns 16 listings, so a run would routinely fire seven simultaneous
+// connections at it and collect seven connect timeouts from a host that is
+// perfectly healthy in a browser. Hosts still run in parallel with each other,
+// so the wall-clock cost is set by the busiest host, not by the total.
+const hostOf = (url: string) => new URL(url).hostname.replace(/^www\./, '')
+
+const byHost = new Map<string, typeof items>()
+const noUrl: typeof items = []
+for (const item of items) {
+  if (!item.url) { noUrl.push(item); continue }
+  const h = hostOf(item.url)
+  const list = byHost.get(h)
+  if (list) list.push(item); else byHost.set(h, [item])
+}
+
+for (const item of noUrl) {
+  broken.push({ id: item.id, name: item.label, url: '', error: 'missing url' })
+}
+
+const HOST_CONCURRENCY = 8
+const PER_HOST_DELAY_MS = 400
+
+async function checkHost(host: string, hostItems: typeof items): Promise<void> {
+  if (ignoredHosts.has(host)) {
+    for (const item of hostItems) console.log(`  [${item.id}] ${item.label}: skipped (known bot-blocking host)`)
+    return
+  }
+  for (const [i, item] of hostItems.entries()) {
+    if (i > 0) await sleep(PER_HOST_DELAY_MS)
+    const verdict = await checkUrl(item.url!)
     if (verdict.kind === 'ok') continue
     const entry = { id: item.id, name: item.label, url: item.url ?? '', error: verdict.error }
     ;(verdict.kind === 'broken' ? broken : suspect).push(entry)
   }
+}
+
+const hosts = [...byHost.entries()]
+for (let i = 0; i < hosts.length; i += HOST_CONCURRENCY) {
+  await Promise.all(hosts.slice(i, i + HOST_CONCURRENCY).map(([h, list]) => checkHost(h, list)))
 }
 
 if (broken.length > 0) {

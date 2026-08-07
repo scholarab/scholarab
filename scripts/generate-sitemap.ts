@@ -84,7 +84,27 @@ const lines: string[] = [
   '</urlset>',
 ];
 
+// Self-check before writing. The sitemap has to list exactly the scholarship
+// pages [slug].astro serves without a noindex: submitting a noindexed URL is a
+// Search Console error, and omitting an indexable one is how 112 live pages
+// went unlisted for months. This belongs here rather than in a vitest file
+// because the thing being checked is the generated artifact, which is
+// gitignored and does not exist until this script runs.
+const emitted = new Set(lines.flatMap((l) => [...l.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]!)));
+const slugUrl = (title: string) => `${BASE}/scholarships/${generateSlug(title)}/`;
+const missing = scholarships
+  .filter((s) => scholarshipStatusOf(s, getToday()) !== 'closed' && !emitted.has(slugUrl(s.title)))
+  .map((s) => s.title);
+const noindexed = scholarships
+  .filter((s) => scholarshipStatusOf(s, getToday()) === 'closed' && emitted.has(slugUrl(s.title)))
+  .map((s) => s.title);
+if (missing.length || noindexed.length) {
+  if (missing.length) console.error(`Indexable but missing from the sitemap:\n  ${missing.join('\n  ')}`);
+  if (noindexed.length) console.error(`Noindexed but listed in the sitemap:\n  ${noindexed.join('\n  ')}`);
+  process.exit(1);
+}
+
 const outPath = join(__dirname, '../public/sitemap.xml');
 writeFileSync(outPath, `${lines.join('\n')}\n`, 'utf8');
 const n = lines.length - 3; // minus XML declaration and urlset open/close
-console.log(`Wrote ${outPath} (${n} URLs)`);
+console.log(`Wrote ${outPath} (${n} URLs, sitemap/noindex invariant checked)`);

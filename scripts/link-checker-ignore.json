@@ -30,5 +30,25 @@
   {
     "host": "challenge.canadiangeographic.ca",
     "reason": "WAF returns 403 to automated requests; site verified live in browser 2026-08-04"
+  },
+  {
+    "host": "curlingalberta.ca",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs; same headers off-runner return 200, verified 2026-08-07"
+  },
+  {
+    "host": "awionline.org",
+    "reason": "WAF returns 403 to every automated request regardless of IP or headers; page verified live in browser 2026-08-07"
+  },
+  {
+    "host": "dukeofed.org",
+    "reason": "WAF returns 403 to automated requests; site verified live in browser 2026-08-07"
+  },
+  {
+    "host": "maa.org",
+    "reason": "WAF returns 403 to automated requests; AMC registration page verified live in browser 2026-08-07"
+  },
+  {
+    "host": "rotaryottawa.com",
+    "reason": "Cloudflare interstitial; the challenge never resolves for a plain fetch. Page verified live in browser 2026-08-07"
   }
 ]
