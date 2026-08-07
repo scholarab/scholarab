@@ -1016,16 +1016,15 @@
     "category": "Research",
     "provider": "Canadian Society for Chemistry (CSC)",
     "grades": "Grades 11–12",
-    "duration": "Self-study + provincial exam (spring) + national selection",
+    "duration": "Self-study + Canadian Chemistry Contest (April) + national camp for finalists",
     "paid": false,
     "stipend": null,
     "location": "Province-wide (school-based); national training camp for finalists",
     "eligibility": "Canadian high school students; grades 11–12 recommended",
-    "deadline": "TBA",
-    "url": "https://cco-occ.ca/",
-    "description": "Highest level of chemistry competition for Canadian youth. Preparation requires deep independent study in organic, inorganic, and physical chemistry far beyond the high school curriculum. Top students represent Canada at the International Chemistry Olympiad (IChO).",
-    "lastVerified": "2026-07",
-    "active": false
+    "deadline": "2027-03-31",
+    "url": "https://www.cheminst.ca/discover/canadian-chemistry-contest/",
+    "description": "Highest level of chemistry competition for Canadian youth. You enter through the Canadian Chemistry Contest in April, which the Chemical Institute of Canada runs and uses to select for the Olympiad; national-team candidates then work through online problem sets, a take-home exam and a national camp. Preparation goes far beyond the high school curriculum, into organic, inorganic and physical chemistry. Top students represent Canada at the International Chemistry Olympiad.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 72,
