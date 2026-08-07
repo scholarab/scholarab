@@ -32,7 +32,10 @@ const SITE = 'https://www.scholarab.ca'
 const FEED_LIMIT = 10
 
 type Tab = AppTab
-type FeedMode = 'foryou' | 'closing' | 'nearby'
+/** 'start' is not a feed at all — it's the app's own intro screen, sitting in
+ *  the first tab slot where a "Closing" feed used to be. The Due tab already
+ *  sorts by soonest deadline, so nothing was lost by giving the slot away. */
+type FeedMode = 'start' | 'foryou' | 'nearby'
 
 // The design's three feed palettes, cycled card to card.
 interface Palette {
@@ -241,7 +244,6 @@ export function initApp(): void {
 
   function feedListings(): Listing[] {
     const pool = open()
-    if (feedMode === 'closing') return [...pool].sort(byDeadline).slice(0, FEED_LIMIT)
     if (feedMode === 'nearby') {
       const city = readQuiz()?.city ?? null
       return nearbyListings(pool, city).sort(byDeadline).slice(0, FEED_LIMIT)
@@ -423,12 +425,93 @@ export function initApp(): void {
       </article>`
   }
 
+  /** The row of feed tabs, shared by the intro screen and the feed itself. */
+  function feedNav(): string {
+    const modes: [FeedMode, string][] = [['start', 'Start here'], ['foryou', 'For you'], ['nearby', 'Nearby']]
+    return `
+      <div class="sabx-feed-nav" role="tablist" aria-label="Feed">
+        ${modes.map(([m, label]) => `
+          <button class="sabx-feed-tab" role="tab" data-feed="${m}" aria-selected="${feedMode === m}">
+            <span>${label}</span><i></i>
+          </button>`).join('')}
+        <button class="sabx-feed-search" data-go="due" aria-label="Search all listings">⌕</button>
+      </div>`
+  }
+
+  // ── Screen: start ───────────────────────────────────────────────────────────
+  // What ScholarAB is and what's in it, for the phone that just landed here
+  // with no idea. Every number is read from the same data the app runs on, so
+  // this screen can't drift from the directory the way fixed copy would.
+
+  function renderStart(): string {
+    const pool = open()
+    const live = pool.filter(l => statusOf(l, today) === 'active')
+    const inPlay = live.reduce((a, l) => a + l.amountValue, 0)
+    const soon = live.filter(l => l.deadline && daysUntil(l.deadline, today) <= 7).length
+    const tracks = categoryKeys(pool).length
+    const matched = matchedIds() !== null
+
+    const rows: [string, string, string][] = [
+      // `live` is the accepting-now subset of `pool`, which also carries the
+      // ones that haven't opened for the cycle yet — hence two counts.
+      ['Swipe the feed', `${live.length} taking applications now, one card at a time`, 'data-feed="foryou"'],
+      ['Match quiz', matched
+        ? 'Your answers are stored — redo them any time'
+        : 'Three questions, then the feed only shows what you fit', 'data-screen="quiz"'],
+      ['Every listing', `Search and filter all ${pool.length} scholarships, ${tracks} categor${tracks === 1 ? 'y' : 'ies'}`, 'data-go="due"'],
+      ['Research programs', `${programs.length} placements, competitions and apprenticeships`, 'data-screen="programs"'],
+      ['Guides', `${guides.length} walkthroughs · Rutherford, essays, references`, 'data-screen="guides"'],
+      ['Saved + alerts', 'Keep a shortlist, get an email before it closes', 'data-go="saved"'],
+    ]
+
+    return `
+      <section class="sabx-screen sabx-feed sabx-start">
+        ${feedNav()}
+        <div class="sabx-start-scroll">
+          <div class="sabx-start-eyebrow">SCHOLARAB · ALBERTA</div>
+          <h1 class="sabx-start-title">Alberta's student money, in one place.</h1>
+          <p class="sabx-start-body">
+            ScholarAB tracks scholarships and research programs for Alberta high school students.
+            Every deadline is checked by hand. Free, no account, no ads — nothing to sign up for.
+          </p>
+
+          ${soon > 0 ? `<button class="sabx-start-pill" data-go="due">${soon} closing in the next 7 days →</button>` : ''}
+
+          <div class="sabx-start-stats">
+            <div class="sabx-start-stat"><b>${esc(moneyTotal(inPlay))}</b><span>OPEN RIGHT NOW</span></div>
+            <div class="sabx-start-stat"><b>${pool.length}</b><span>SCHOLARSHIPS</span></div>
+            <div class="sabx-start-stat"><b>${programs.length}</b><span>PROGRAMS</span></div>
+          </div>
+
+          <div class="sabx-start-label">WHAT'S IN HERE</div>
+          <div class="sabx-start-rows">
+            ${rows.map(([label, sub, attrs]) => `
+              <button class="sabx-start-row" ${attrs}>
+                <span class="sabx-start-row-body">
+                  <span class="sabx-start-row-label">${esc(label)}</span>
+                  <span class="sabx-start-row-sub">${esc(sub)}</span>
+                </span>
+                <span class="sabx-start-row-arrow">›</span>
+              </button>`).join('')}
+          </div>
+
+          <div class="sabx-start-cta">
+            <button class="sabx-btn-mint" data-feed="foryou">Start swiping →</button>
+            <button class="sabx-btn-ghost" data-screen="quiz">${matched ? 'Redo my match' : 'Take the match quiz'}</button>
+          </div>
+
+          <div class="sabx-start-foot">MADE IN MEDICINE HAT · FREE FOREVER · NOTHING TRACKED</div>
+        </div>
+      </section>`
+  }
+
   function renderFeed(): string {
+    if (feedMode === 'start') return renderStart()
+
     const list = feedListings()
     const total = open().length
     const rest = Math.max(0, total - list.length)
     const matched = matchedIds() !== null
-    const modes: [FeedMode, string][] = [['closing', 'Closing'], ['foryou', 'For you'], ['nearby', 'Nearby']]
 
     const end = `
       <div class="sabx-feed-end">
@@ -454,13 +537,7 @@ export function initApp(): void {
 
     return `
       <section class="sabx-screen sabx-feed">
-        <div class="sabx-feed-nav" role="tablist" aria-label="Feed">
-          ${modes.map(([m, label]) => `
-            <button class="sabx-feed-tab" role="tab" data-feed="${m}" aria-selected="${feedMode === m}">
-              <span>${label}</span><i></i>
-            </button>`).join('')}
-          <button class="sabx-feed-search" data-go="due" aria-label="Search all listings">⌕</button>
-        </div>
+        ${feedNav()}
         <div class="sabx-feed-scroll" data-sabx-feedscroll>${cards}${list.length > 0 ? end : ''}</div>
         ${list.length > 0 ? '<div class="sabx-swipe-hint"><span>↑ SWIPE FOR NEXT AWARD</span></div>' : ''}
       </section>`
