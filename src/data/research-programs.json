@@ -309,40 +309,6 @@
     "active": false
   },
   {
-    "id": 21,
-    "name": "Alberta Innovates Summer Research Studentship – UCalgary",
-    "emoji": "🧫",
-    "category": "Health",
-    "provider": "Alberta Innovates + University of Calgary",
-    "grades": "Grade 12 (graduating)",
-    "duration": "Summer (varies)",
-    "paid": true,
-    "stipend": "Paid studentship",
-    "location": "Calgary (in-person)",
-    "eligibility": "Exceptional graduating Grade 12 students with 85%+ average; normally an undergraduate program but open to high-achieving seniors",
-    "deadline": "TBA",
-    "url": "https://albertainnovates.ca/programs/summer-research-studentships/",
-    "description": "Typically for undergraduates, but high-achieving graduating Grade 12 students (85%+ average) may apply for a paid summer health research position at UCalgary before starting university. Competitive and highly selective.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 22,
-    "name": "Alberta Innovates Summer Research Studentship – UAlberta",
-    "emoji": "🧫",
-    "category": "Health",
-    "provider": "Alberta Innovates + University of Alberta",
-    "grades": "Grade 12 (graduating)",
-    "duration": "Summer (varies)",
-    "paid": true,
-    "stipend": "Paid studentship",
-    "location": "Edmonton (in-person)",
-    "eligibility": "Exceptional graduating Grade 12 students with 85%+ average; normally an undergraduate program but open to high-achieving seniors",
-    "deadline": "TBA",
-    "url": "https://albertainnovates.ca/programs/summer-research-studentships/",
-    "description": "Typically for undergraduates, but high-achieving graduating Grade 12 students (85%+ average) may apply for a paid summer research position at UAlberta before starting university. Competitive and highly selective.",
-    "lastVerified": "2026-04"
-  },
-  {
     "id": 23,
     "name": "STEM Fellowship Research Exploration Program – Edmonton",
     "emoji": "🔭",
@@ -355,9 +321,9 @@
     "location": "Edmonton (University of Alberta labs)",
     "eligibility": "High school students grades 9–12",
     "deadline": "TBA",
-    "url": "https://www.stemfellowship.org/",
+    "url": "https://www.stemfellowship.org/programs/reo",
     "description": "Intensive 5-day spring break research experience hosted in University of Alberta labs. Students are introduced to university-level research methods and academic culture. Distinct from the STEM Fellowship Big Data & AI Challenge.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 24,
@@ -453,16 +419,16 @@
     "emoji": "🦅",
     "category": "Environmental",
     "provider": "Canadian Wildlife Federation",
-    "grades": "Ages 15–18",
+    "grades": "Ages 13–18",
     "duration": "Varies",
     "paid": false,
     "stipend": null,
     "location": "Edmonton and Calgary areas (also national)",
-    "eligibility": "Youth aged 15–18 with interest in conservation and the outdoors",
+    "eligibility": "Youth aged 13–18 with an interest in conservation and the outdoors",
     "deadline": "Ongoing",
-    "url": "https://cwf-fcf.org/",
+    "url": "https://cwf-fcf.org/en/conserve/wild-outside.html",
     "description": "Free conservation research and leadership program connecting youth 15–18 with nature through hands-on environmental research and conservation projects. Active programming available in Edmonton and Calgary areas.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 30,
@@ -511,9 +477,9 @@
     "location": "Waterloo, Ontario (in-person)",
     "eligibility": "Grade 11–12 Canadian students with strong math and physics background",
     "deadline": "TBA",
-    "url": "https://uwaterloo.ca/institute-for-quantum-computing/programs/qcsys",
+    "url": "https://uwaterloo.ca/institute-for-quantum-computing/outreach/qsys",
     "description": "Intensive week-long dive into quantum information science and cryptography at IQC, University of Waterloo (formerly known as QCSYS, now rebranded QSYS). Combines lectures, hands-on labs, and direct interaction with quantum computing researchers.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 33,
@@ -528,26 +494,26 @@
     "location": "Virtual/online (open to Alberta students)",
     "eligibility": "Black high school students in grades 10–11 interested in engineering and applied research",
     "deadline": "TBA",
-    "url": "https://outreach.engineering.utoronto.ca/pre-university-programs/high-school-program/blueprint/",
+    "url": "https://outreach.engineering.utoronto.ca/blueprint/",
     "description": "Free summer program with year-long engagement for Black high school students in grades 10–11. Builds engineering and applied research skills through mentorship by UofT faculty and senior students.",
-    "lastVerified": "2026-07"
+    "lastVerified": "2026-08"
   },
   {
     "id": 34,
-    "name": "Youth Summer Program (YSP) in Medicine – UofT",
+    "name": "Medicine Youth Summer Program (Med YSP) – UofT",
     "emoji": "🩺",
     "category": "Health",
     "provider": "University of Toronto, Faculty of Medicine",
-    "grades": "High school",
-    "duration": "4 weeks (virtual modules, summer)",
+    "grades": "Grades 10–12",
+    "duration": "1 week per module (July)",
     "paid": false,
     "stipend": null,
-    "location": "Virtual (accessible to Alberta students)",
-    "eligibility": "High school students interested in medicine and health research",
+    "location": "Toronto (in-person, UofT St. George campus)",
+    "eligibility": "Grades 10–12 (Grade 9 eligible for the microbiology module); open to students across Canada. Tuition applies (~$1,700 per module)",
     "deadline": "TBA",
-    "url": "https://temertymedicine.utoronto.ca/",
-    "description": "Four-week virtual modules exploring medical research, diagnostics, and human anatomy. Hosted by UofT and available online to students across Canada including Albertans.",
-    "lastVerified": "2026-04"
+    "url": "https://ysp.utoronto.ca/medysp/",
+    "description": "Four standalone one-week modules, each covering a major medical discipline: physiology, pharmacology and toxicology, molecular biology and genetics, and microbiology. Hands-on labs, lectures, and discussions run by the Temerty Faculty of Medicine. This is a paid-tuition program, not a funded placement.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 35,
@@ -647,9 +613,9 @@
     "location": "Alberta (Calgary and Edmonton teams; regional events in AB)",
     "eligibility": "High school students grades 9–12; join or start a team",
     "deadline": "Ongoing",
-    "url": "https://www.firstinspires.org/robotics/frc",
+    "url": "https://www.firstinspires.org/programs/frc/",
     "description": "Rigorous engineering challenge where high school teams design, program, and build industrial-size robots in a 6-week build season. Requires applied research in mechanics, CAD, and control systems. Many Alberta teams compete in the Canadian Rockies regional event.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 42,
@@ -692,15 +658,15 @@
     "category": "Research",
     "provider": "Breakthrough Prize Foundation",
     "grades": "Ages 13–18",
-    "duration": "Self-paced (submissions due late summer)",
+    "duration": "Self-paced (submissions due Sept 15, 2026)",
     "paid": false,
     "stipend": "Grand prize: $250,000 scholarship + lab for school",
     "location": "Virtual (open to Alberta students)",
     "eligibility": "Students aged 13–18 worldwide",
-    "deadline": "TBA",
+    "deadline": "2026-09-15",
     "url": "https://breakthroughjuniorchallenge.org/",
     "description": "Global science and math research competition. Students research a complex concept in life sciences, physics, or mathematics and translate that research into an engaging explanatory video (max 3 min). Grand prize includes a $250,000 scholarship.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 45,
@@ -732,9 +698,9 @@
     "location": "Edmonton and Calgary (in-person)",
     "eligibility": "High school students with strong interest in mathematics",
     "deadline": "TBA",
-    "url": "https://www.pims.math.ca/",
+    "url": "https://www.pims.math.ca/programs/educational",
     "description": "Specialized summer math camps, research workshops, and advanced problem-solving seminars hosted in partnership with UAlberta and UCalgary. Exposes students to university-level mathematical research and connects them with professional mathematicians.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 48,
@@ -783,9 +749,9 @@
     "location": "Virtual + in-person nationals (open to Alberta teams)",
     "eligibility": "Canadian high school students grades 9–12; teams of up to 15",
     "deadline": "TBA",
-    "url": "https://www.cybertitan.ca/",
+    "url": "https://etalentcanada.ca/for-educators/programs/cybertitan",
     "description": "Canada's national cybersecurity education initiative. Teams are placed in simulated, real-time cyber defense scenarios where they research vulnerabilities, secure operating systems, and defend networks against attacks. Alberta teams regularly compete at nationals.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 52,
@@ -794,15 +760,15 @@
     "category": "Computing",
     "provider": "University of Waterloo – Centre for Education in Mathematics and Computing",
     "grades": "High school",
-    "duration": "Single competition day (February)",
+    "duration": "Single competition day (Feb 17, 2027)",
     "paid": false,
     "stipend": null,
     "location": "School-based across Alberta (national competition)",
     "eligibility": "High school students at participating Alberta schools",
-    "deadline": "TBA",
-    "url": "https://cemc.uwaterloo.ca/contests/ccc-cco.html",
+    "deadline": "2027-02-11",
+    "url": "https://cemc.uwaterloo.ca/contests/ccc",
     "description": "Premier Canadian programming and algorithm design challenge hosted by the University of Waterloo. Students apply advanced computer science and algorithmic research to solve complex problems. Top scorers are invited to the Canadian Computing Olympiad (CCO).",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 53,
@@ -851,9 +817,9 @@
     "location": "Virtual (fully online, open to Alberta students)",
     "eligibility": "High school students aged 13–17 worldwide; competitive application",
     "deadline": "TBA",
-    "url": "https://www.nyas.org/programs/junior-academy/",
+    "url": "https://www.nyas.org/learning/high-school-research-programs/the-junior-academy/",
     "description": "Prestigious fully virtual global program. Accepted students join an international peer network and are mentored by STEM professionals to research and design solutions for real global challenges over a 10-week sprint. Certificate awarded upon completion.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 56,
@@ -925,20 +891,20 @@
   },
   {
     "id": 61,
-    "name": "Amii Youth AI Programs",
+    "name": "Amii K-12 AI Literacy",
     "emoji": "🤖",
     "category": "Computing",
     "provider": "Alberta Machine Intelligence Institute (Amii)",
     "grades": "High school",
-    "duration": "Varies (bootcamps, workshops, multi-week programs)",
+    "duration": "Varies (classroom kits and sessions)",
     "paid": false,
     "stipend": null,
-    "location": "Edmonton (in-person) + province-wide virtual",
-    "eligibility": "Alberta high school students interested in AI and data science",
+    "location": "Alberta classrooms (delivered through your school)",
+    "eligibility": "Reached through your school. Amii supplies the kits and sessions to teachers, so ask a science or CTS teacher to request one",
     "deadline": "Ongoing",
-    "url": "https://www.amii.ca/",
-    "description": "Specialized bootcamps, workshops, and AI literacy programs from the Alberta Machine Intelligence Institute. Students explore machine learning and data science research through hands-on projects. Reach extends province-wide via virtual programming.",
-    "lastVerified": "2026-04"
+    "url": "https://www.amii.ca/courses-literacy/k-12-ai-literacy",
+    "description": "Free curriculum-aligned AI learning kits and guest speaker sessions that Amii provides to Alberta schools, including an AI in Junior High stream. Delivered by your teachers rather than applied to directly, so the way in is asking a teacher to bring it into your classroom.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 63,
@@ -953,26 +919,27 @@
     "location": "Alberta (Calgary, Edmonton) + virtual nationally",
     "eligibility": "Teens aged 13–17; no prior coding experience required",
     "deadline": "Ongoing",
-    "url": "https://www.canadalearningcode.ca/teens/",
-    "description": "Project-based, collaborative coding and web development programs where teens work in teams to design, research, and deploy digital solutions with real community impact. Topics include HTML/CSS, Python, data, and AI fundamentals.",
-    "lastVerified": "2026-04"
+    "url": "https://www.canadalearningcode.ca/",
+    "description": "Discontinued. Canada Learning Code wound down its teen programming (the Teen Ambassador Program closed in July 2024) and its current workshops are restricted to adults 18+.",
+    "lastVerified": "2026-08",
+    "active": false
   },
   {
     "id": 64,
-    "name": "Medicine Hat College Dual Credit & Career Pathways",
+    "name": "Dual Credit – Medicine Hat Public School Division",
     "emoji": "🎓",
     "category": "Enrichment",
-    "provider": "Medicine Hat College (MHC)",
-    "grades": "Grades 11–12",
-    "duration": "1–2 semesters (concurrent with high school)",
+    "provider": "MHPSD with Medicine Hat College, Olds College, SAIT and Lethbridge Polytechnic",
+    "grades": "Grades 10–12",
+    "duration": "12–16 weeks per course",
     "paid": false,
     "stipend": null,
     "location": "Medicine Hat and Southeastern Alberta (in-person)",
-    "eligibility": "Grade 11–12 students in Southeastern Alberta; school counsellor referral typically required",
+    "eligibility": "Grade 10–12 students at MHPSD schools; apply through your school",
     "deadline": "TBA",
-    "url": "https://www.mhc.ab.ca/",
-    "description": "Dual credit program allowing Grade 11/12 students in Southeastern Alberta to enroll in college-level courses while still in high school. Provides early access to college labs, technical equipment, and applied research in fields ranging from kinesiology to IT.",
-    "lastVerified": "2026-04"
+    "url": "https://www.mhpsd.ca/dual-credit",
+    "description": "Post-secondary courses taken during high school that earn five Grade 12 credits and three college credits at once. Streams include health care aide, introduction to the trades, and a veterinary technical assistant certificate. MHPSD covers tuition and most supplies.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 67,
@@ -1073,9 +1040,9 @@
     "location": "School-based across Alberta (national exam)",
     "eligibility": "High school students at participating Alberta schools",
     "deadline": "TBA",
-    "url": "https://uwaterloo.ca/sir-isaac-newton-exam/",
+    "url": "https://uwaterloo.ca/centre-advanced-science-education/science-contests/sir-isaac-newton-exam",
     "description": "Complex physics exam hosted by the University of Waterloo. The open-ended, challenging problems encourage months of independent study into advanced mechanics and theoretical physics. Top Alberta scorers are recognized nationally.",
-    "lastVerified": "2026-05"
+    "lastVerified": "2026-08"
   },
   {
     "id": 73,
@@ -1107,9 +1074,9 @@
     "location": "Alberta-wide (school-based)",
     "eligibility": "Alberta high school students interested in agriculture and food systems",
     "deadline": "TBA",
-    "url": "https://www.aitc-canada.ca/",
+    "url": "https://aitc-canada.ca/en-ca/",
     "description": "Students research global food security, agricultural technology, and sustainability, then pitch solutions to real agricultural problems with input from industry mentors.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 75,
@@ -1158,9 +1125,9 @@
     "location": "Alberta (Calgary, Edmonton, and regional events)",
     "eligibility": "Students grades 7–12; join or start a school or community team",
     "deadline": "Ongoing",
-    "url": "https://www.firstinspires.org/robotics/ftc",
+    "url": "https://www.firstinspires.org/programs/ftc/",
     "description": "Distinct from the larger FRC, FTC teams design, build, and program smaller-scale robots using Java and Android-based technology. Requires applied research into control systems and computer vision. More accessible entry point than FRC with lower build costs.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 80,
@@ -1209,9 +1176,9 @@
     "location": "Virtual (CTF events) + in-person nationals (open to Alberta teams)",
     "eligibility": "Canadian high school students; teams or individuals",
     "deadline": "TBA",
-    "url": "https://cybersecuritychallenge.ca/",
+    "url": "https://cybersecuritychallenge.ca/en/",
     "description": "Ethical hacking competition where teams research network vulnerabilities, cryptography, and server security, then compete in simulated real-time Capture the Flag (CTF) events. Regional and national levels with Alberta participation.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 83,
@@ -1249,20 +1216,20 @@
   },
   {
     "id": 87,
-    "name": "TELUS Spark Youth Council – Calgary",
+    "name": "TELUS Spark Science Centre Volunteering – Calgary",
     "emoji": "⚡",
     "category": "Enrichment",
     "provider": "TELUS Spark Science Centre",
-    "grades": "High school",
-    "duration": "Year-long (volunteer commitment)",
+    "grades": "Ages 16+ (14+ for summer camps)",
+    "duration": "Varies (ongoing volunteer shifts)",
     "paid": false,
     "stipend": null,
     "location": "Calgary (in-person, TELUS Spark Science Centre)",
-    "eligibility": "High school students in the Calgary area with interest in STEM education and public programming",
-    "deadline": "TBA",
-    "url": "https://www.sparkscience.ca/",
-    "description": "High-level volunteer and research program where high school students work with STEM educators and museum curators to co-design, research, and test new tech-focused programming and exhibits for the public at TELUS Spark Science Centre.",
-    "lastVerified": "2026-04"
+    "eligibility": "Age 16 and older; 14 and older for summer camp volunteering",
+    "deadline": "Ongoing",
+    "url": "https://www.sparkscience.ca/get-involved/volunteer",
+    "description": "Volunteer alongside science communicators at Calgary's science centre, running workshops, staffing exhibits and supporting summer camps. A steady way into science outreach experience, and one of the few STEM volunteer roles in Calgary open at 14 through the camp stream.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 89,
@@ -1294,9 +1261,9 @@
     "location": "Alberta (delivered through participating school boards)",
     "eligibility": "High school students at participating Alberta schools",
     "deadline": "Ongoing",
-    "url": "https://www.netacad.com/",
+    "url": "https://www.netacad.com/career-paths/high-school",
     "description": "Delivered through Alberta school boards, allowing students to research network vulnerabilities and earn industry-recognized certifications in cybersecurity, networking, and IT fundamentals directly through their high school.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 91,
@@ -1345,9 +1312,10 @@
     "location": "Virtual (open to Alberta students)",
     "eligibility": "Students aged 13–18 worldwide",
     "deadline": "TBA",
-    "url": "https://imaginecup.microsoft.com/junior",
-    "description": "Global competition challenging students aged 13–18 to research and apply AI to solve real-world environmental or social issues. Teams submit a one-page concept poster. Winners receive Microsoft mentorship and global recognition.",
-    "lastVerified": "2026-04"
+    "url": "https://imaginecup.microsoft.com/en-us",
+    "description": "Discontinued. Microsoft no longer runs the junior track, and the remaining Imagine Cup is restricted to enrolled students aged 18 and over, so it is not a high school option.",
+    "lastVerified": "2026-08",
+    "active": false
   },
   {
     "id": 94,
@@ -1396,9 +1364,9 @@
     "location": "Medicine Hat (in-person, MHC campus)",
     "eligibility": "High school students in Southeast Alberta",
     "deadline": "TBA",
-    "url": "https://www.mhc.ab.ca/",
-    "description": "Focused enrichment programs held on the MHC campus utilizing college labs for applied science and technology projects. Provides hands-on access to equipment not typically available in high schools.",
-    "lastVerified": "2026-04"
+    "url": "https://www.mhc.ab.ca/campus-services/summer-camps",
+    "description": "Summer camps run on the Medicine Hat College campus using college labs and equipment. Offerings change year to year, so check the camp list for which ones run at the high school age range.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 98,
@@ -1419,20 +1387,20 @@
   },
   {
     "id": 100,
-    "name": "UCalgary Kinesiology High School Summer Programs",
+    "name": "UCalgary Active Living Summer Camps",
     "emoji": "🏃",
     "category": "Health",
-    "provider": "Faculty of Kinesiology, University of Calgary",
-    "grades": "High school",
-    "duration": "Varies (summer programs)",
+    "provider": "Active Living, Faculty of Kinesiology, University of Calgary",
+    "grades": "Entering grades 4–11 (varies by camp)",
+    "duration": "1 week per camp (summer)",
     "paid": false,
     "stipend": null,
-    "location": "Calgary (in-person, UCalgary)",
-    "eligibility": "High school students interested in exercise science and sports medicine",
+    "location": "Calgary (in-person, UCalgary main campus)",
+    "eligibility": "Camp options run from entering grade 4 up to entering grade 11; registration fee applies",
     "deadline": "TBA",
-    "url": "https://kinesiology.ucalgary.ca/",
-    "description": "Hands-on lab programs involving biomechanics, exercise physiology, and sports science metrics. Students analyze metabolic data, heart rate variability, and recovery metrics in university facilities alongside kinesiology faculty.",
-    "lastVerified": "2026-04"
+    "url": "https://active-living.ucalgary.ca/programs/camps",
+    "description": "Summer camps run by the Faculty of Kinesiology's Active Living unit, including Dinos sport camps, outdoor and river camps, and the Minds in Motion STEM stream. Upper-age camps top out at students entering Grade 11, so check the grade band before registering.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 101,
@@ -1464,9 +1432,9 @@
     "location": "Alberta-wide including South Zone hospitals and clinics",
     "eligibility": "High school students 15+; application through local AHS facility",
     "deadline": "Ongoing",
-    "url": "https://www.albertahealthservices.ca/volunteers.asp",
+    "url": "https://www.albertahealthservices.ca/info/page12616.aspx",
     "description": "Volunteer placements in AHS regional hospitals and clinics offering direct exposure to clinical environments, health administration, and medical technology. South Zone placements available for students in Lethbridge, Medicine Hat, and surrounding communities.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 104,
@@ -1555,37 +1523,20 @@
   },
   {
     "id": 110,
-    "name": "MacEwan University Science Camps",
-    "emoji": "🧪",
+    "name": "MacEwan University Design Summer Camp",
+    "emoji": "🎨",
     "category": "Enrichment",
     "provider": "MacEwan University",
-    "grades": "High school",
-    "duration": "1–2 weeks (summer camps)",
+    "grades": "Grades 9–12",
+    "duration": "5 days (July 27–31, 2026)",
     "paid": false,
     "stipend": null,
     "location": "Edmonton (in-person, MacEwan University campus)",
-    "eligibility": "High school students in the Edmonton area",
+    "eligibility": "Students entering grades 9 to 12; registration fee applies",
     "deadline": "TBA",
-    "url": "https://www.macewan.ca/",
-    "description": "Edmonton-based enrichment camps focusing on applied chemistry, biology, and physics in university lab environments. Students use professional equipment and are mentored by MacEwan faculty and graduate students.",
-    "lastVerified": "2026-04"
-  },
-  {
-    "id": 111,
-    "name": "Concordia University of Edmonton – High School Initiatives",
-    "emoji": "🎓",
-    "category": "Enrichment",
-    "provider": "Concordia University of Edmonton (CUE)",
-    "grades": "Grades 11–12",
-    "duration": "Varies (semester or year-long dual-credit options)",
-    "paid": false,
-    "stipend": null,
-    "location": "Edmonton (in-person, CUE campus)",
-    "eligibility": "Grade 11–12 students interested in science, IT, or business",
-    "deadline": "TBA",
-    "url": "https://concordia.ab.ca/",
-    "description": "Specialized science lab programs and dual-credit IT and business courses for high schoolers at the Concordia University of Edmonton campus. Provides early university experience and transferable post-secondary credits.",
-    "lastVerified": "2026-04"
+    "url": "https://www.macewan.ca/campus-life/opportunities/design-summer-camp/",
+    "description": "Five-day immersive design camp in Allard Hall covering graphic design, app design, illustration, photography and videography, taught by MacEwan Design instructors and working professionals. All materials provided. 2026 registration has closed; the camp runs annually.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 112,
@@ -1593,16 +1544,16 @@
     "emoji": "🎨",
     "category": "Enrichment",
     "provider": "Alberta University of the Arts (AUArts)",
-    "grades": "High school",
-    "duration": "Intensive (summer bootcamps, 1–2 weeks)",
+    "grades": "Ages 16–18 (completed grade 10, 11 or 12)",
+    "duration": "4 weeks (summer)",
     "paid": false,
     "stipend": null,
     "location": "Calgary (in-person, AUArts campus)",
-    "eligibility": "High school students interested in design and digital media; tuition fee applies",
+    "eligibility": "Ages 16–18 who have completed Grade 10, 11 or 12; tuition applies",
     "deadline": "TBA",
-    "url": "https://www.auarts.ca/",
-    "description": "Calgary-based intensive design and digital media bootcamps for high schoolers building portfolios in UI/UX design, graphic design, and digital arts. Taught by AUArts faculty in professional studio environments.",
-    "lastVerified": "2026-04"
+    "url": "https://www.auarts.ca/program-areas/university-prep-programs",
+    "description": "A four-week summer immersive in both fine art and design at university level, worth three AUArts credits toward a first-year elective. You build a portfolio of finished work for post-secondary admission and bursary applications. AUArts is running the long-standing Pre-College program for the final time alongside its new Arts-Bridge Pre-University stream.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 114,
@@ -1617,9 +1568,9 @@
     "location": "Olds, Alberta (in-person)",
     "eligibility": "Alberta high school students grades 10–12 with interest in ag-tech",
     "deadline": "TBA",
-    "url": "https://www.oldscollege.ca/",
+    "url": "https://www.oldscollege.ca/programs/high-school-learning/dual-credit-programs.html",
     "description": "Bootcamps and dual-credit courses focusing on the intersection of agriculture, drone telemetry, precision farming, and data science. Students use Olds College's smart farm and tech facilities.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 115,
@@ -1644,16 +1595,16 @@
     "emoji": "🌎",
     "category": "Social Sciences",
     "provider": "YMCA Canada",
-    "grades": "High school (ages 14–17)",
-    "duration": "2–3 weeks (exchange program)",
+    "grades": "Ages 12–17",
+    "duration": "Minimum 5 days in each community",
     "paid": false,
     "stipend": "Funded (travel and accommodation covered)",
     "location": "Various Canadian provinces (open to Alberta students)",
-    "eligibility": "Alberta youth aged 14–17; school or community nomination",
+    "eligibility": "Youth aged 12–17 travelling as a group of 10–30 with a group leader, not as an individual applicant",
     "deadline": "TBA",
-    "url": "https://www.ymca.ca/",
-    "description": "Funded program supporting groups of Alberta youth to travel and research the cultural, historical, and environmental dynamics of different Canadian communities. Builds cross-cultural research skills and national perspective.",
-    "lastVerified": "2026-04"
+    "url": "https://ymcaexchanges.com/programs/ymca-youth-exchanges-canada-program/",
+    "description": "A funded reciprocal exchange that twins a group of Alberta youth with a group from another province or territory, each hosting the other for at least five days. Groups plan their own travel, budget, itinerary and community project. Applications are made by a group leader, so you need a teacher or community organizer to run it.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 117,

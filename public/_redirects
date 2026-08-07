@@ -34,3 +34,30 @@
 /scholarships/tradesecrets-alberta-apprenticeship-scholarship/ /scholarships/high-school-apprenticeship-scholarship/ 301
 /scholarships/rapcts-apprenticeship-scholarships  /scholarships/high-school-apprenticeship-scholarship/ 301
 /scholarships/rapcts-apprenticeship-scholarships/ /scholarships/high-school-apprenticeship-scholarship/ 301
+
+# 2026-08-07 — programs audit. Renamed to what the provider actually runs:
+# each of these listings was named for a program that did not exist under that
+# name, and pointed at the institution's homepage rather than a program page.
+/programs/youth-summer-program-ysp-in-medicine-uoft  /programs/medicine-youth-summer-program-med-ysp-uoft/ 301
+/programs/youth-summer-program-ysp-in-medicine-uoft/ /programs/medicine-youth-summer-program-med-ysp-uoft/ 301
+/programs/amii-youth-ai-programs  /programs/amii-k-12-ai-literacy/ 301
+/programs/amii-youth-ai-programs/ /programs/amii-k-12-ai-literacy/ 301
+/programs/medicine-hat-college-dual-credit-career-pathways  /programs/dual-credit-medicine-hat-public-school-division/ 301
+/programs/medicine-hat-college-dual-credit-career-pathways/ /programs/dual-credit-medicine-hat-public-school-division/ 301
+/programs/telus-spark-youth-council-calgary  /programs/telus-spark-science-centre-volunteering-calgary/ 301
+/programs/telus-spark-youth-council-calgary/ /programs/telus-spark-science-centre-volunteering-calgary/ 301
+/programs/macewan-university-science-camps  /programs/macewan-university-design-summer-camp/ 301
+/programs/macewan-university-science-camps/ /programs/macewan-university-design-summer-camp/ 301
+/programs/ucalgary-kinesiology-high-school-summer-programs  /programs/ucalgary-active-living-summer-camps/ 301
+/programs/ucalgary-kinesiology-high-school-summer-programs/ /programs/ucalgary-active-living-summer-camps/ 301
+
+# 2026-08-07 — removed. Alberta Innovates restricts the studentship to students
+# already registered in an undergraduate program, so graduating Grade 12s were
+# being sent to a program that would reject them. Concordia University of
+# Edmonton runs no high school program at all.
+/programs/alberta-innovates-summer-research-studentship-ucalgary  /programs/ 301
+/programs/alberta-innovates-summer-research-studentship-ucalgary/ /programs/ 301
+/programs/alberta-innovates-summer-research-studentship-ualberta  /programs/ 301
+/programs/alberta-innovates-summer-research-studentship-ualberta/ /programs/ 301
+/programs/concordia-university-of-edmonton-high-school-initiatives  /programs/ 301
+/programs/concordia-university-of-edmonton-high-school-initiatives/ /programs/ 301
