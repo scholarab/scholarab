@@ -1,6 +1,6 @@
 {
   // The root tsconfig excludes "scripts" so `astro check` stays focused on the
-  // site. That left the five build/automation scripts type-checked by nothing.
+  // site. That left the build/automation scripts type-checked by nothing.
   // This config covers them; `npm run type-check:scripts` runs it in CI.
   "extends": "./tsconfig.json",
   "compilerOptions": {

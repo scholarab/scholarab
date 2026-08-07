@@ -1,7 +1,7 @@
 dist/
-.vercel/
 node_modules/
 coverage/
+test-results/
 public/
 drizzle/migrations/
 src/data/
