@@ -1,6 +1,8 @@
 // Framework-free filtering/sorting/status logic for the public directories.
 // Shared by the directory page scripts and the eligibility quiz.
 import { getToday } from './utils.ts';
+import { scholarshipStatusOf } from './status.ts';
+import type { ScholarshipStatus } from './status.ts';
 import type { Scholarship, Program } from './data-loader.ts';
 
 // ── Scholarships ──────────────────────────────────────────────────────────────
@@ -13,20 +15,11 @@ export interface ScholarshipWithMeta extends Scholarship {
   _deadline_formatted?: string | null;
 }
 
-export type ScholarshipStatus = 'active' | 'future' | 'closed';
+export type { ScholarshipStatus };
 export type StatusFilter = 'all' | 'active' | 'opening' | 'closed';
 
 export function getScholarshipStatus(s: ScholarshipWithMeta): ScholarshipStatus {
-  const todayMs = getToday().getTime();
-  const openMs  = s._open_ms ?? new Date((s.openDate || '1970-01-01') + 'T00:00:00').getTime();
-  if (todayMs < openMs) return 'future';
-  // `||` on purpose: _deadline_ms of 0 means "no deadline" → Infinity, never a 1970 cutoff
-  const deadMs  = s._deadline_ms || (s.deadline ? new Date(s.deadline + 'T00:00:00').getTime() : Infinity);
-  if (todayMs > deadMs) return 'closed';
-  // Curator-closed (active: false) with a future deadline is a next-cycle
-  // listing whose open date isn't known yet — not accepting applications now.
-  if (s.active === false) return 'future';
-  return 'active';
+  return scholarshipStatusOf(s, getToday(), { openMs: s._open_ms, deadlineMs: s._deadline_ms });
 }
 
 // Everything except National/International counts as provincial — keep in sync with data regions.

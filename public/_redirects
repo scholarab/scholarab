@@ -1,21 +1,36 @@
 # Scholarship detail slugs come from the title, so renaming a listing to its
 # provider's real award name orphans the old URL. Every rename goes here as a
 # 301 so indexed links and student bookmarks keep working.
+#
+# Every rule needs BOTH the slash and no-slash source. Cloudflare Pages only
+# 308-normalises a bare path when the slashed page exists as a built asset —
+# a renamed slug has no asset, so /old-slug fell through to a hard 404 while
+# /old-slug/ redirected fine. Google had the no-slash form indexed (it was
+# still earning clicks), so half of every rename below was being thrown away.
 
 # 2026-08-02 — corrected to the names the providers actually publish
+/scholarships/atb-financial-indigenous-education-award  /scholarships/atb-financial-bursary/ 301
 /scholarships/atb-financial-indigenous-education-award/ /scholarships/atb-financial-bursary/ 301
+/scholarships/alex-tutschek-fcpa-award-for-indigenous-student-achievement  /scholarships/alex-tutschek-fcpa-fca-award-for-indigenous-student-high-school-achievement/ 301
 /scholarships/alex-tutschek-fcpa-award-for-indigenous-student-achievement/ /scholarships/alex-tutschek-fcpa-fca-award-for-indigenous-student-high-school-achievement/ 301
+/scholarships/david-bentley-fcpa-and-janet-bentley-high-school-excellence-award  /scholarships/david-bentley-fcpa-fca-and-janet-bentley-high-school-excellence-award/ 301
 /scholarships/david-bentley-fcpa-and-janet-bentley-high-school-excellence-award/ /scholarships/david-bentley-fcpa-fca-and-janet-bentley-high-school-excellence-award/ 301
+/scholarships/cpa-alberta-empowered-young-woman-award  /scholarships/empowered-young-woman-award/ 301
 /scholarships/cpa-alberta-empowered-young-woman-award/ /scholarships/empowered-young-woman-award/ 301
+/scholarships/michael-burnyeat-fcpa-sparking-great-careers-high-school-award  /scholarships/michael-burnyeat-fcpa-fca-sparking-great-careers-high-school-award/ 301
 /scholarships/michael-burnyeat-fcpa-sparking-great-careers-high-school-award/ /scholarships/michael-burnyeat-fcpa-fca-sparking-great-careers-high-school-award/ 301
 
+/scholarships/enmax-environmental-scholarship  /scholarships/enmax-scholarship/ 301
 /scholarships/enmax-environmental-scholarship/ /scholarships/enmax-scholarship/ 301
 
 # Discontinued awards. The provider no longer offers these, so the detail page
 # is gone and the listing index is the closest useful destination.
+/scholarships/paula-weiss-spencer-weiss-bipoc-success-award  /scholarships/ 301
 /scholarships/paula-weiss-spencer-weiss-bipoc-success-award/ /scholarships/ 301
 
 # Duplicates. Tradesecrets runs exactly two high school apprenticeship
 # scholarships, and we had four rows for them.
+/scholarships/tradesecrets-alberta-apprenticeship-scholarship  /scholarships/high-school-apprenticeship-scholarship/ 301
 /scholarships/tradesecrets-alberta-apprenticeship-scholarship/ /scholarships/high-school-apprenticeship-scholarship/ 301
+/scholarships/rapcts-apprenticeship-scholarships  /scholarships/high-school-apprenticeship-scholarship/ 301
 /scholarships/rapcts-apprenticeship-scholarships/ /scholarships/high-school-apprenticeship-scholarship/ 301

@@ -141,12 +141,15 @@ if (kind === 'scholarship') {
 
   d = {
     currentPath: '/scholarships/',
-    pageTitle: `${s.title} | ScholarAB | Alberta Scholarships`,
+    // Award names run long (the median is 41 characters, the longest 76), and
+    // Google truncates titles around 60. A second boilerplate phrase after the
+    // brand only ever pushed the award's own name out of the snippet.
+    pageTitle: `${s.title} | ScholarAB`,
     description,
     canonical,
-    // Per-listing OG images exist only for open scholarships (see
+    // Per-listing OG images exist for every indexable scholarship (see
     // scripts/generate-og-images.ts, which mirrors this condition).
-    ogImage: s.active !== false ? `https://www.scholarab.ca/og/scholarships/${slug}.png` : undefined,
+    ogImage: status !== 'closed' ? `https://www.scholarab.ca/og/scholarships/${slug}.png` : undefined,
     ldJson: {
       '@context': 'https://schema.org',
       '@type': 'EducationalOccupationalProgram',
@@ -155,7 +158,10 @@ if (kind === 'scholarship') {
       'url': canonical,
       ...(s.deadline ? { 'applicationDeadline': s.deadline } : {}),
       ...(parsedAmount !== null ? { 'offers': { '@type': 'Offer', 'price': parsedAmount, 'priceCurrency': 'CAD' } } : {}),
-      'provider': { '@type': 'Organization', 'name': 'ScholarAB', 'url': 'https://www.scholarab.ca' },
+      // No `provider`: ScholarAB lists these awards, it does not fund or award
+      // them, and the data has no provider field to name the real one. Claiming
+      // it here was telling Google we run the Rutherford. Programs, which do
+      // carry a real provider, still declare theirs.
     },
     breadcrumbName: 'Scholarships',
     itemName: s.title,
@@ -226,7 +232,7 @@ if (kind === 'scholarship') {
 
   d = {
     currentPath: '/programs/',
-    pageTitle: `${p.name} | ScholarAB | Alberta Research Programs`,
+    pageTitle: `${p.name} | ScholarAB`,
     description: metaDescription,
     canonical,
     ldJson: {

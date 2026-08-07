@@ -22,13 +22,18 @@ export type GuideMeta = {
 export const guides: GuideMeta[] = [
   {
     slug: 'alexander-rutherford-scholarship-guide',
-    title: 'The Alexander Rutherford Scholarship, explained',
+    // Ranks page 1 for ~600 impressions a month of Rutherford queries and took
+    // zero clicks on the old "…, explained" title. Two thirds of those queries
+    // ask "when does it open" or "how do I apply", so the title and the first
+    // clause of the description answer exactly that — the old description led
+    // with the dollar figure, which is the one thing the SERP already shows.
+    title: 'Alexander Rutherford Scholarship: amounts and how to apply',
     description:
-      'Up to $2,500 for your Grade 10, 11 and 12 marks. Who qualifies, what each grade pays, when the August 1 application opens, and how to apply through Alberta Student Aid.',
+      'Applications open August 1 with no closing deadline. What each grade pays (up to $2,500 total), the 75% five-course average you need, and how to apply through Alberta Student Aid.',
     kicker: 'THE BIG ONE',
     minutes: 6,
     datePublished: '2026-07-19',
-    dateModified: '2026-07-27',
+    dateModified: '2026-08-07',
     takeaways: [
       'Each grade is assessed on its own: $400 for Grade 10, $800 for Grade 11 and $1,300 for Grade 12 at 80%+.',
       'There is no essay, no interview and no competition — meet the five-course average and the money is yours.',

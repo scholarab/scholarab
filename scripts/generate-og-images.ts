@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 /**
- * Generates per-listing OG images (1200x630 PNG) for open scholarships into
- * public/og/scholarships/<slug>.png. Runs before astro build via npm run build.
- * Closed listings (active: false) keep the site-wide og-image.png, mirroring
- * the sitemap's open-listings-only rule; [slug].astro applies the same
- * condition when choosing the og:image URL.
+ * Generates per-listing OG images (1200x630 PNG) for indexable scholarships
+ * into public/og/scholarships/<slug>.png. Runs before astro build via npm run
+ * build. Only closed listings (past deadline, no next open date) fall back to
+ * the site-wide og-image.png, mirroring the sitemap's rule; [slug].astro
+ * applies the same condition when choosing the og:image URL.
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
-import { generateSlug } from '../src/lib/utils.ts';
+import { generateSlug, getToday } from '../src/lib/utils.ts';
+import { scholarshipStatusOf } from '../src/lib/status.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -19,6 +20,7 @@ interface Scholarship {
   title: string;
   amount: string;
   deadline?: string | null;
+  openDate?: string | null;
   region?: string | null;
   active?: boolean;
 }
@@ -78,7 +80,9 @@ function card(s: Scholarship) {
 const outDir = join(__dirname, '../public/og/scholarships');
 mkdirSync(outDir, { recursive: true });
 
-const open = scholarships.filter(s => s.active !== false);
+const open = scholarships.filter(
+  s => scholarshipStatusOf(s, getToday()) !== 'closed'
+);
 for (const s of open) {
   const svg = await satori(card(s) as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts });
   const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
