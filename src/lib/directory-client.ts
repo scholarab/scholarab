@@ -54,7 +54,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const panel = root?.querySelector<HTMLElement>('[data-dir-controls]');
     if (!panel || typeof IntersectionObserver === 'undefined') return;
     stickyObserver = new IntersectionObserver(
-      ([entry]) => panel.classList.toggle('stuck', entry.intersectionRatio < 1),
+      entries => {
+        const entry = entries[0];
+        if (entry) panel.classList.toggle('stuck', entry.intersectionRatio < 1);
+      },
       { threshold: [1] },
     );
     stickyObserver.observe(panel);
