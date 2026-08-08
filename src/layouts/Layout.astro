@@ -81,6 +81,14 @@ const {
     </main>
     <BottomNav currentPath={currentPath} />
     <script>
+      import { syncTrackingOptOut } from '../lib/events.ts';
+
+      // `?nt=1` flags this browser as untracked (`?nt=0` undoes it). sendEvent
+      // checks the URL too, but only pages that fire an event would ever reach
+      // that — running it here means the link works from any page on the site.
+      document.addEventListener('astro:page-load', syncTrackingOptOut);
+      syncTrackingOptOut();
+
       // Haptic on filter/sort pills and bn-tabs
       document.addEventListener('click', (e) => {
         const pill = (e.target as HTMLElement).closest('.sort-pill, .tab-pill, .bn-tab');

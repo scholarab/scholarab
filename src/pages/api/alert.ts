@@ -1,6 +1,7 @@
 export const prerender = false
 
 import type { APIRoute } from 'astro'
+import { sql } from 'drizzle-orm'
 import { db } from '../../lib/db/client'
 import { subscribers, events } from '../../lib/db/schema'
 import { loadScholarships, loadPrograms } from '../../lib/data-loader'
@@ -74,17 +75,27 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const row = { email: email.toLowerCase(), itemType: itemType as string, itemId, token }
   const cadenceValue = formatCadence(cadence)
 
+  // Whether this call created a reminder or just retuned an existing one.
+  // `alert_subscribe` is the signup metric, so a cadence change must not fire
+  // it — otherwise "Alert signups" drifts above "People on email" and the gap
+  // reads as churn that never happened.
+  let isNewReminder: boolean
   try {
     // Re-subscribing used to be a no-op. Now it is how a student changes their
     // mind about when to be mailed, so the conflict updates the cadence — but
     // never the token, which is the credential in the unsubscribe link already
     // sitting in their inbox.
-    await db.insert(subscribers)
+    const [inserted] = await db.insert(subscribers)
       .values({ ...row, cadence: cadenceValue })
       .onConflictDoUpdate({
         target: [subscribers.email, subscribers.itemType, subscribers.itemId],
         set: { cadence: cadenceValue },
       })
+      // Postgres leaves xmax at 0 on a genuine insert and stamps it with the
+      // locking txid on the DO UPDATE path — the only way to tell the two
+      // apart, since both return a row.
+      .returning({ isNew: sql<boolean>`(xmax = 0)` })
+    isNewReminder = inserted?.isNew ?? true
   } catch (e) {
     // Deploys are not ordered against migrations, so this route can go live
     // before 0009_subscriber_cadence.sql has run. Getting the reminder set at
@@ -92,7 +103,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // migration gets noticed rather than silently costing everyone their pick.
     console.error('[alert] cadence insert failed, retrying without it:', e)
     try {
-      await db.insert(subscribers).values(row).onConflictDoNothing()
+      // DO NOTHING returns no row at all on conflict, so the row count is the
+      // same signal xmax gives above.
+      const rows = await db.insert(subscribers).values(row).onConflictDoNothing().returning({ id: subscribers.id })
+      isNewReminder = rows.length > 0
     } catch {
       return jsonError('Internal server error', 500)
     }
@@ -102,6 +116,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // cancels un-awaited I/O at return, which is why every signup between the
   // Jul 16 wipe and now recorded a subscriber row but no alert_subscribe event.
   await defer(locals, recordHit(`alert:${ip}`))
-  await defer(locals, db.insert(events).values({ event: 'alert_subscribe', itemType: itemType as string, itemId }))
+  if (isNewReminder)
+    await defer(locals, db.insert(events).values({ event: 'alert_subscribe', itemType: itemType as string, itemId }))
   return jsonOk({ ok: true })
 }

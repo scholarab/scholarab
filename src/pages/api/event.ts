@@ -69,6 +69,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return jsonError('itemType must be scholarship or program', 400)
   if (itemId !== undefined && (typeof itemId !== 'number' || !Number.isInteger(itemId) || itemId < 1 || itemId > 1_000_000))
     return jsonError('itemId must be a positive integer', 400)
+  // Both or neither. A half-identified row counts in the monthly totals but is
+  // dropped from the per-item table, which is how three July apply_clicks made
+  // those two numbers impossible to reconcile.
+  if ((itemType === undefined) !== (itemId === undefined))
+    return jsonError('itemType and itemId must be sent together', 400)
   // meta carries the query text for search_empty only — nothing else needs free text
   if (meta !== undefined && (event !== 'search_empty' || typeof meta !== 'string'))
     return jsonError('meta not allowed for this event', 400)

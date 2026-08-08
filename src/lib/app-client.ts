@@ -1966,11 +1966,13 @@ export function initApp(): void {
     }
 
     // Content-gap signal, matching directory-client: debounced so a word isn't
-    // reported once per keystroke, and measured against the FULL open list so a
-    // query merely starved by the active category chip doesn't look like a gap.
+    // reported once per keystroke, and measured against every listing we hold —
+    // not `open()`, which this used to search. A gap means "we don't cover
+    // this", so a query that only matches a closed award is a hit, not a gap,
+    // exactly as it is on /scholarships.
     if (emptyTimer) clearTimeout(emptyTimer)
     const q = query.trim().toLowerCase()
-    if (q.length >= 3 && searchListings(open(), q).length === 0) {
+    if (q.length >= 3 && searchListings(items, q).length === 0) {
       emptyTimer = setTimeout(() => sendEvent('search_empty', undefined, undefined, q), 1000)
     }
   }

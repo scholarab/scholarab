@@ -7,16 +7,65 @@ export type AppEvent =
   | 'app_step'
 
 const OPT_OUT_KEY = 'sa_no_track'
+/** `?nt=1` opts this browser out, `?nt=0` opts back in. */
+const OPT_OUT_PARAM = 'nt'
 
 // Fallback dedupe when sessionStorage is unavailable (private mode, blocked
 // storage). Module-level, so it survives view-transition swaps within a tab.
 const sentInMemory = new Set<string>()
 
+/**
+ * Is this a build being served locally rather than the real site?
+ *
+ * The MODE check below only catches `astro dev`. A production bundle served by
+ * `wrangler pages dev dist` reports MODE 'production' and still holds a live
+ * DATABASE_URL, so clicking anything while verifying the real build wrote
+ * straight into the production events table — which is exactly the sort of
+ * self-inflicted row this file exists to keep out.
+ */
+export function isLocalPreview(hostname: string): boolean {
+  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0' ||
+    hostname === '[::1]' || hostname === '::1' || hostname.endsWith('.local')
+}
+
+/**
+ * Honour `?nt=1` / `?nt=0` in the URL.
+ *
+ * The opt-out used to be set only when /admin mounted, so it covered exactly
+ * the browsers where the owner had opened the admin panel — not his phone, not
+ * a fresh profile, not a second laptop. Un-flagged testing then landed in the
+ * table looking exactly like student traffic: 26 of the first 35 `save` rows
+ * came from one 30-minute run down a list of consecutive ids. A URL you can
+ * open anywhere flags a device before it records anything. `nt=0` exists so a
+ * browser flagged by accident isn't silently dead forever.
+ */
+export function syncTrackingOptOut(): void {
+  try {
+    const v = new URLSearchParams(location.search).get(OPT_OUT_PARAM)
+    if (v === null) return
+    // warn, not info: "this browser is no longer being counted" is exactly the
+    // sort of thing that should be hard to miss if it was set by accident.
+    if (v === '0') {
+      localStorage.removeItem(OPT_OUT_KEY)
+      console.warn('[scholarab] analytics re-enabled on this browser')
+    } else {
+      localStorage.setItem(OPT_OUT_KEY, '1')
+      console.warn('[scholarab] analytics disabled on this browser — nothing you do here will be counted')
+    }
+  } catch { /* storage or URL unavailable — nothing to sync */ }
+}
+
 function shouldSkip(dedupeKey: string): boolean {
   // Dev server writes to the production table via .env.local — never count it
   if (import.meta.env.MODE === 'development') return true
+  // Nor does a built bundle served from localhost. Exempt under vitest, whose
+  // happy-dom window is itself served from localhost.
+  if (import.meta.env.MODE !== 'test' && isLocalPreview(location.hostname)) return true
   // Automated browsers (Playwright, etc.)
   if (navigator.webdriver) return true
+  // Before the storage read below, so `?nt=1` takes effect on the very first
+  // event of the page rather than the second
+  syncTrackingOptOut()
   try {
     // Admin opt-out flag (set automatically by the admin panel)
     if (localStorage.getItem(OPT_OUT_KEY)) return true

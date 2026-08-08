@@ -22,6 +22,7 @@ const EVENT_LABELS: Record<string, string> = {
   detail_view: 'Detail views',
   apply_click: 'Apply clicks',
   save: 'Saves',
+  app_step: 'Applications started',
   quiz_start: 'Quiz starts',
   quiz_complete: 'Quiz completions',
   search_empty: 'Empty searches',
@@ -33,6 +34,7 @@ const MONTH_COLUMNS: { key: string; label: string }[] = [
   { key: 'detail_view', label: 'Views' },
   { key: 'apply_click', label: 'Applies' },
   { key: 'save', label: 'Saves' },
+  { key: 'app_step', label: 'Started' },
   { key: 'quiz_start', label: 'Quiz start' },
   { key: 'quiz_complete', label: 'Quiz done' },
   { key: 'search_empty', label: 'No results' },
@@ -58,11 +60,12 @@ interface ItemRow {
   applies: number
   rate: number | null
   saves: number
+  started: number
   alerts: number
   onList: number
 }
 
-type SortKey = keyof Pick<ItemRow, 'title' | 'itemType' | 'views' | 'applies' | 'rate' | 'saves' | 'alerts' | 'onList'>
+type SortKey = keyof Pick<ItemRow, 'title' | 'itemType' | 'views' | 'applies' | 'rate' | 'saves' | 'started' | 'alerts' | 'onList'>
 
 const COLUMNS: { key: SortKey; label: string; numeric: boolean }[] = [
   { key: 'title',    label: 'Item',       numeric: false },
@@ -71,6 +74,7 @@ const COLUMNS: { key: SortKey; label: string; numeric: boolean }[] = [
   { key: 'applies',  label: 'Applies',    numeric: true },
   { key: 'rate',     label: 'Apply rate', numeric: true },
   { key: 'saves',    label: 'Saves',      numeric: true },
+  { key: 'started',  label: 'Started',    numeric: true },
   { key: 'alerts',   label: 'Alerts',     numeric: true },
   { key: 'onList',   label: 'On list',    numeric: true },
 ]
@@ -87,7 +91,7 @@ function buildItemRows(data: AnalyticsData, month: string): ItemRow[] {
         key,
         title: (itemType === 'program' ? data.titles.program : data.titles.scholarship)[itemId] ?? `#${itemId}`,
         itemType,
-        views: 0, applies: 0, rate: null, saves: 0, alerts: 0, onList: 0,
+        views: 0, applies: 0, rate: null, saves: 0, started: 0, alerts: 0, onList: 0,
       }
       map.set(key, row)
     }
@@ -100,6 +104,7 @@ function buildItemRows(data: AnalyticsData, month: string): ItemRow[] {
     if (e.event === 'detail_view') row.views += e.n
     else if (e.event === 'apply_click') row.applies += e.n
     else if (e.event === 'save') row.saves += e.n
+    else if (e.event === 'app_step') row.started += e.n
     else if (e.event === 'alert_subscribe') row.alerts += e.n
   }
 
@@ -231,8 +236,9 @@ export default function AnalyticsPanel({ data }: Props) {
         <div>
           <h1 className="text-xl font-semibold">Analytics</h1>
           <p className="text-sm text-white/40">
-            Anonymous event counts by Alberta calendar month. One count per person per visit.
-            No cookies, no IPs, no user ids.
+            Anonymous event counts by Alberta calendar month. Counted once per item per tab
+            session — so one student shortlisting 26 awards is 26 saves, not 26 students, and
+            the same student on wifi then cellular counts twice. No cookies, no IPs, no user ids.
           </p>
         </div>
       </div>
@@ -335,7 +341,9 @@ export default function AnalyticsPanel({ data }: Props) {
         On email counts signups from that month that are still active, read from the list itself, so the Total is
         the list as it stands today rather than the sum of the months above it. Alerts counts the signup event,
         which was being dropped before Aug 4 2026, so it under-reports every month before that. Months before
-        Jul 2026 predate the events table and carry email signups only.
+        Jul 2026 predate the events table and carry email signups only. Saves only started recording on
+        Aug 4 2026 and Started on Aug 8 2026 — earlier months read 0 because nothing was counting, not
+        because nobody did it.
       </p>
 
       {/* Per-item engagement */}
@@ -395,6 +403,7 @@ export default function AnalyticsPanel({ data }: Props) {
                   {row.rate !== null ? `${Math.round(row.rate * 100)}%` : '·'}
                 </td>
                 <td className="px-4 py-2.5 text-right">{row.saves}</td>
+                <td className="px-4 py-2.5 text-right">{row.started}</td>
                 <td className="px-4 py-2.5 text-right">{row.alerts}</td>
                 <td className="px-4 py-2.5 text-right">{row.onList}</td>
               </tr>
@@ -405,7 +414,8 @@ export default function AnalyticsPanel({ data }: Props) {
       <div className="flex items-center justify-between mb-8 gap-3">
         <p className="text-xs text-white/30">
           Applies include clicks from list cards, which skip the detail page, so rates above 100% are possible.
-          On list counts reminders signed up in this period and still active.
+          Started counts students who ticked at least one application step; ticking also shortlists the award,
+          so every Started is inside Saves too. On list counts reminders signed up in this period and still active.
         </p>
         {rows.length > 25 && (
           <button onClick={() => setShowAll(s => !s)} className="text-xs text-white/40 hover:text-white transition cursor-pointer whitespace-nowrap">

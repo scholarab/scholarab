@@ -4,22 +4,28 @@ import { POST } from '../../pages/api/alert'
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
 const {
-  SUBSCRIBERS, EVENTS,
+  SUBSCRIBERS, EVENTS, returning,
   mockInsert, mockSubValues, mockConflictUpdate, mockConflictNothing, mockEventValues,
   mockIsRateLimited, mockRecordHit, mockLoadScholarships, mockLoadPrograms,
-} = vi.hoisted(() => ({
-  SUBSCRIBERS: { __table: 'subscribers', email: 'email', itemType: 'item_type', itemId: 'item_id' },
-  EVENTS: { __table: 'events' },
-  mockInsert:           vi.fn(),
-  mockSubValues:        vi.fn((_row: Record<string, unknown>) => {}),
-  mockConflictUpdate:   vi.fn((_arg: { set: Record<string, unknown> }) => Promise.resolve()),
-  mockConflictNothing:  vi.fn(() => Promise.resolve()),
-  mockEventValues:      vi.fn((_row: Record<string, unknown>) => {}),
-  mockIsRateLimited:    vi.fn(() => Promise.resolve(false)),
-  mockRecordHit:        vi.fn(() => Promise.resolve()),
-  mockLoadScholarships: vi.fn(),
-  mockLoadPrograms:     vi.fn(),
-}))
+} = vi.hoisted(() => {
+  // The route reads `.returning()` off both conflict branches to tell a fresh
+  // reminder from a cadence change, so the mock chain has to offer one.
+  const returning = <T,>(rows: T[] | Promise<T[]>) => ({ returning: () => Promise.resolve(rows) })
+  return {
+    SUBSCRIBERS: { __table: 'subscribers', email: 'email', itemType: 'item_type', itemId: 'item_id', id: 'id' },
+    EVENTS: { __table: 'events' },
+    returning,
+    mockInsert:           vi.fn(),
+    mockSubValues:        vi.fn((_row: Record<string, unknown>) => {}),
+    mockConflictUpdate:   vi.fn((_arg: { set: Record<string, unknown> }) => returning([{ isNew: true }])),
+    mockConflictNothing:  vi.fn(() => returning([{ id: 1 }])),
+    mockEventValues:      vi.fn((_row: Record<string, unknown>) => {}),
+    mockIsRateLimited:    vi.fn(() => Promise.resolve(false)),
+    mockRecordHit:        vi.fn(() => Promise.resolve()),
+    mockLoadScholarships: vi.fn(),
+    mockLoadPrograms:     vi.fn(),
+  }
+})
 
 vi.mock('../../lib/db/client', () => ({
   db: { insert: (...a: unknown[]) => mockInsert(...a) },
@@ -70,8 +76,8 @@ function conflictArg(): { set: Record<string, unknown> } {
 beforeEach(() => {
   vi.clearAllMocks()
   mockIsRateLimited.mockResolvedValue(false)
-  mockConflictUpdate.mockReturnValue(Promise.resolve())
-  mockConflictNothing.mockReturnValue(Promise.resolve())
+  mockConflictUpdate.mockReturnValue(returning([{ isNew: true }]))
+  mockConflictNothing.mockReturnValue(returning([{ id: 1 }]))
   mockLoadScholarships.mockResolvedValue([{ id: 1, title: 'Test Award', deadline: FUTURE }])
   mockLoadPrograms.mockResolvedValue([{ id: 7, name: 'Test Program', deadline: FUTURE }])
   mockInsert.mockImplementation((table: unknown) => {
@@ -156,12 +162,38 @@ describe('POST /api/alert', () => {
   })
 
   it('falls back to an insert without the cadence column if it is missing', async () => {
-    mockConflictUpdate.mockReturnValue(Promise.reject(new Error('column "cadence" does not exist')))
+    mockConflictUpdate.mockReturnValue({
+      returning: () => Promise.reject(new Error('column "cadence" does not exist')),
+    })
     const res = await call({ email: 'student@example.com', itemId: 1 })
     expect(res.status).toBe(200)
     expect(mockConflictNothing).toHaveBeenCalled()
     // Second attempt drops the column entirely rather than sending a null.
     expect(subRow(1)).not.toHaveProperty('cadence')
+  })
+
+  // alert_subscribe is the signup metric. Firing it on a cadence change pushes
+  // "Alert signups" above "People on email" and the gap looks like churn.
+  it('records an alert_subscribe event for a brand-new reminder', async () => {
+    await call({ email: 'student@example.com', itemId: 1 })
+    expect(mockEventValues).toHaveBeenCalledWith(
+      expect.objectContaining({ event: 'alert_subscribe', itemType: 'scholarship', itemId: 1 }),
+    )
+  })
+
+  it('does not record one when an existing reminder only changes cadence', async () => {
+    mockConflictUpdate.mockReturnValue(returning([{ isNew: false }]))
+    const res = await call({ email: 'student@example.com', itemId: 1, days: [3] })
+    expect(res.status).toBe(200)
+    expect(mockEventValues).not.toHaveBeenCalled()
+  })
+
+  it('does not record one when the fallback insert hits an existing row', async () => {
+    mockConflictUpdate.mockReturnValue({ returning: () => Promise.reject(new Error('no cadence column')) })
+    mockConflictNothing.mockReturnValue(returning([]))
+    const res = await call({ email: 'student@example.com', itemId: 1 })
+    expect(res.status).toBe(200)
+    expect(mockEventValues).not.toHaveBeenCalled()
   })
 
   it('404s an unknown scholarship', async () => {

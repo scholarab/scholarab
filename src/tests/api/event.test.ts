@@ -202,6 +202,28 @@ describe('POST /api/event', () => {
     expect(res.status).toBe(400)
   })
 
+  // A row with an id but no type counted in the monthly totals and vanished
+  // from the per-item table, leaving the two unable to reconcile.
+  it('rejects itemId without itemType', async () => {
+    const res = await call({ event: 'apply_click', itemId: 42 })
+    expect(res.status).toBe(400)
+    expect(mockInsert).not.toHaveBeenCalled()
+  })
+
+  it('rejects itemType without itemId', async () => {
+    const res = await call({ event: 'apply_click', itemType: 'scholarship' })
+    expect(res.status).toBe(400)
+    expect(mockInsert).not.toHaveBeenCalled()
+  })
+
+  it('accepts app_step with item fields', async () => {
+    const res = await call({ event: 'app_step', itemType: 'scholarship', itemId: 12 })
+    expect(res.status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({
+      event: 'app_step', itemType: 'scholarship', itemId: 12, meta: null,
+    })
+  })
+
   it('accepts detail_view with item fields', async () => {
     const res = await call({ event: 'detail_view', itemType: 'program', itemId: 7 })
     expect(res.status).toBe(204)

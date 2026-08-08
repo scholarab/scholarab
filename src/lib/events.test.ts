@@ -1,5 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { sendEvent, sendEventAfterDwell, optOutOfEvents } from './events'
+import { sendEvent, sendEventAfterDwell, optOutOfEvents, syncTrackingOptOut, isLocalPreview } from './events'
+
+/** happy-dom allows navigation via history, which is enough to set a query. */
+const setSearch = (search: string) => history.replaceState(null, '', '/' + search)
 
 // MODE is 'test' under vitest, so the development guard does not trip here.
 
@@ -9,6 +12,7 @@ beforeEach(() => {
   beaconCalls = []
   sessionStorage.clear()
   localStorage.clear()
+  setSearch('')
   Object.defineProperty(navigator, 'sendBeacon', {
     value: (url: string, body: string) => { beaconCalls.push({ url, body }); return true },
     writable: true,
@@ -64,6 +68,30 @@ describe('sendEvent', () => {
     expect(beaconCalls).toHaveLength(0)
   })
 
+  it('opts the browser out from ?nt=1 before the first event is counted', () => {
+    setSearch('?nt=1')
+    sendEvent('apply_click', 'scholarship', 42)
+    expect(beaconCalls).toHaveLength(0)
+    // and it sticks once the param is gone
+    setSearch('')
+    sendEvent('apply_click', 'scholarship', 43)
+    expect(beaconCalls).toHaveLength(0)
+  })
+
+  it('opts back in from ?nt=0', () => {
+    optOutOfEvents()
+    setSearch('?nt=0')
+    sendEvent('apply_click', 'scholarship', 42)
+    expect(beaconCalls).toHaveLength(1)
+    expect(localStorage.getItem('sa_no_track')).toBeNull()
+  })
+
+  it('leaves the flag alone when nt is absent', () => {
+    setSearch('?ref=school')
+    sendEvent('apply_click', 'scholarship', 42)
+    expect(beaconCalls).toHaveLength(1)
+  })
+
   it('still dedupes when sessionStorage throws (private mode)', () => {
     const original = Storage.prototype.setItem
     Storage.prototype.setItem = () => { throw new Error('QuotaExceededError') }
@@ -111,5 +139,36 @@ describe('sendEventAfterDwell', () => {
     cancel()
     vi.advanceTimersByTime(5000)
     expect(beaconCalls).toHaveLength(0)
+  })
+})
+
+describe('syncTrackingOptOut', () => {
+  it('works on pages that never fire an event', () => {
+    setSearch('?nt=1')
+    syncTrackingOptOut()
+    expect(localStorage.getItem('sa_no_track')).toBe('1')
+  })
+
+  it('does not throw when storage is unavailable', () => {
+    const original = Storage.prototype.setItem
+    Storage.prototype.setItem = () => { throw new Error('blocked') }
+    try {
+      setSearch('?nt=1')
+      expect(() => syncTrackingOptOut()).not.toThrow()
+    } finally {
+      Storage.prototype.setItem = original
+    }
+  })
+})
+
+describe('isLocalPreview', () => {
+  it('catches every shape of local host, including a built bundle under wrangler', () => {
+    for (const h of ['localhost', '127.0.0.1', '0.0.0.0', '[::1]', '::1', 'ilia-mac.local'])
+      expect(isLocalPreview(h)).toBe(true)
+  })
+
+  it('lets the real site through', () => {
+    for (const h of ['scholarab.ca', 'www.scholarab.ca', 'scholarab.pages.dev'])
+      expect(isLocalPreview(h)).toBe(false)
   })
 })

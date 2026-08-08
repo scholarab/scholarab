@@ -43,7 +43,7 @@ try {
     })
     .from(events)
     .where(and(
-      sql`${events.event} in ('detail_view', 'apply_click', 'save', 'alert_subscribe')`,
+      sql`${events.event} in ('detail_view', 'apply_click', 'save', 'app_step', 'alert_subscribe')`,
       sql`${events.itemId} is not null`,
     ))
     .groupBy(sql`1`, events.event, events.itemType, events.itemId)
