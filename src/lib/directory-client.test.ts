@@ -28,19 +28,12 @@ function mountFixture() {
   document.body.innerHTML = `
     <div id="dir-root">
       <div class="sabl-stat-value" data-dir-stat>0</div>
-      <div class="sabl-controls" data-dir-controls>
-        <div class="sabl-controls-panel" id="sabl-filter-panel">
-          <input type="search" data-dir-search />
-          <button class="sabl-chip on" data-fkey="sort" data-fval="order" aria-pressed="true">Order</button>
-          <button class="sabl-chip" data-fkey="sort" data-fval="name" aria-pressed="false">A–Z</button>
-          <button class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All</button>
-          <button class="sabl-chip" data-fkey="category" data-fval="Science" aria-pressed="false">Science</button>
-          <button class="sabl-chip" data-fkey="category" data-fval="Arts" aria-pressed="false">Arts</button>
-        </div>
-        <button data-dir-collapse aria-expanded="true" aria-controls="sabl-filter-panel">
-          <span data-dir-collapse-label>Hide filters</span>
-        </button>
-      </div>
+      <input type="search" data-dir-search />
+      <button class="sabl-chip on" data-fkey="sort" data-fval="order" aria-pressed="true">Order</button>
+      <button class="sabl-chip" data-fkey="sort" data-fval="name" aria-pressed="false">A–Z</button>
+      <button class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All</button>
+      <button class="sabl-chip" data-fkey="category" data-fval="Science" aria-pressed="false">Science</button>
+      <button class="sabl-chip" data-fkey="category" data-fval="Arts" aria-pressed="false">Arts</button>
       <div class="sabl-result-line" data-dir-count></div>
       <div class="sabl-grid" data-dir-grid>
         ${card(1, 'Beta Lab', 'Science', true, 2)}
@@ -110,7 +103,6 @@ const click = (el: Element) => el.dispatchEvent(new Event('click', { bubbles: tr
 
 beforeEach(() => {
   savedIds = []
-  localStorage.clear()
   vi.clearAllMocks()
 })
 
@@ -234,36 +226,5 @@ describe('initDirectory', () => {
     document.dispatchEvent(new Event('astro:page-load'))
     expect(visibleCardNames()).toHaveLength(3)
     expect($$('[data-fkey="category"]').find(c => c.dataset.fval === 'all')!.classList.contains('on')).toBe(true)
-  })
-
-  it('collapse button hides the filter panel and updates its label', () => {
-    setup()
-    const controls = $('[data-dir-controls]')
-    const btn = $('[data-dir-collapse]')
-    expect(controls.classList.contains('collapsed')).toBe(false)
-
-    click(btn)
-    expect(controls.classList.contains('collapsed')).toBe(true)
-    expect(btn.getAttribute('aria-expanded')).toBe('false')
-    expect($('[data-dir-collapse-label]').textContent).toBe('Show filters')
-
-    click(btn)
-    expect(controls.classList.contains('collapsed')).toBe(false)
-    expect(btn.getAttribute('aria-expanded')).toBe('true')
-    expect($('[data-dir-collapse-label]').textContent).toBe('Hide filters')
-  })
-
-  it('remembers the collapsed panel across page loads', () => {
-    setup()
-    click($('[data-dir-collapse]'))
-    expect(localStorage.getItem('scholarab_filters_collapsed')).toBe('1')
-
-    setup()
-    expect($('[data-dir-controls]').classList.contains('collapsed')).toBe(true)
-    expect($('[data-dir-collapse-label]').textContent).toBe('Show filters')
-
-    click($('[data-dir-collapse]'))
-    setup()
-    expect($('[data-dir-controls]').classList.contains('collapsed')).toBe(false)
   })
 })

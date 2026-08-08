@@ -61,67 +61,48 @@ const totalOpen = initial.reduce(
     </div>
   </div>
 
-  {/* Sticky so the controls follow the page down; [data-dir-collapse] hides
-      everything above the foot row when the list needs the screen space. */}
-  <div class="sabl-controls" data-dir-controls>
-    <div class="sabl-controls-panel" id="sabl-filter-panel">
-      <div class="sabl-toolbar">
-        <div class="sabl-search">
-          <span class="sabl-search-icon" aria-hidden="true">⌕</span>
-          <input
-            type="search"
-            data-dir-search
-            placeholder="Search by name or keyword…"
-            aria-label="Search scholarships by name or keyword"
-          />
-        </div>
-        <div class="sabl-sort">
-          <span class="sabl-mono sabl-row-label">SORT</span>
-          {SORT_CHIPS.map(s => (
-            <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
-          ))}
-        </div>
-      </div>
-
-      <div class="sabl-filters">
-        <div class="sabl-filter-row">
-          <span class="sabl-mono sabl-row-label">TRACK</span>
-          <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All</button>
-          {categories.map(c => (
-            <button type="button" class="sabl-chip" data-fkey="category" data-fval={c} aria-pressed="false">{c}</button>
-          ))}
-        </div>
-        <div class="sabl-filter-row">
-          <span class="sabl-mono sabl-row-label">REGION</span>
-          {REGION_CHIPS.map(r => (
-            <button type="button" class={`sabl-chip${r.value === '' ? ' on' : ''}`} data-fkey="region" data-fval={r.value} aria-pressed={r.value === '' ? 'true' : 'false'}>{r.label}</button>
-          ))}
-        </div>
-        <div class="sabl-filter-row">
-          <span class="sabl-mono sabl-row-label">STATUS</span>
-          {STATUS_CHIPS.map(s => (
-            <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}</button>
-          ))}
-        </div>
-      </div>
+  <div class="sabl-toolbar">
+    <div class="sabl-search">
+      <span class="sabl-search-icon" aria-hidden="true">⌕</span>
+      <input
+        type="search"
+        data-dir-search
+        placeholder="Search by name or keyword…"
+        aria-label="Search scholarships by name or keyword"
+      />
     </div>
-
-    <div class="sabl-controls-foot">
-      <div class="sabl-mono sabl-result-line" data-dir-count>
-        {initial.length} OF {items.length} LISTINGS SHOWN
-      </div>
-      <button
-        type="button"
-        class="sabl-mono sabl-collapse"
-        data-dir-collapse
-        aria-label="Hide filters"
-        aria-expanded="true"
-        aria-controls="sabl-filter-panel"
-      >
-        <span data-dir-collapse-label>Hide filters</span>
-        <span class="sabl-collapse-caret" aria-hidden="true">▾</span>
-      </button>
+    <div class="sabl-sort">
+      <span class="sabl-mono sabl-row-label">SORT</span>
+      {SORT_CHIPS.map(s => (
+        <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
+      ))}
     </div>
+  </div>
+
+  <div class="sabl-filters">
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">TRACK</span>
+      <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All</button>
+      {categories.map(c => (
+        <button type="button" class="sabl-chip" data-fkey="category" data-fval={c} aria-pressed="false">{c}</button>
+      ))}
+    </div>
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">REGION</span>
+      {REGION_CHIPS.map(r => (
+        <button type="button" class={`sabl-chip${r.value === '' ? ' on' : ''}`} data-fkey="region" data-fval={r.value} aria-pressed={r.value === '' ? 'true' : 'false'}>{r.label}</button>
+      ))}
+    </div>
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">STATUS</span>
+      {STATUS_CHIPS.map(s => (
+        <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}</button>
+      ))}
+    </div>
+  </div>
+
+  <div class="sabl-mono sabl-result-line" data-dir-count>
+    {initial.length} OF {items.length} LISTINGS SHOWN
   </div>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>

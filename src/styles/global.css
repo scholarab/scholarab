@@ -439,35 +439,9 @@ body.quiz-results #match-divider {
 .sabl-stat-value { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 44px); line-height: 1; }
 .sabl-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); margin-top: 6px; }
 
-/* Search + filters + count ride along as one sticky block. The negative
-   margins let the opaque background reach the page gutters, so cards (and
-   their 3px hover offset) scroll under it without peeking out the sides. */
-.sabl-controls {
-  /* top:-1px so an IntersectionObserver at threshold 1 can tell when it has
-     stuck (the standard trick) — it only clips 1px of the rule above it. */
-  position: sticky; top: -1px; z-index: 20;
-  margin: 44px -48px 0; padding: 0 48px;
-  background: #FAF7F0;
-}
-.sabl-controls.stuck { box-shadow: 0 10px 18px -14px rgba(20,25,21,0.55); }
-.sabl-controls.collapsed .sabl-controls-panel { display: none; }
-
-.sabl-controls-foot { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 6px; }
-/* Collapsed, the foot is the whole bar — it takes over the toolbar's rule. */
-.sabl-controls.collapsed .sabl-controls-foot { border-top: 2px solid #141915; }
-.sabl-collapse {
-  display: inline-flex; align-items: center; gap: 7px; flex: none;
-  font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;
-  background: none; border: none; padding: 22px 0 6px; cursor: pointer;
-  color: rgba(20,25,21,0.55);
-}
-.sabl-collapse:hover { color: #141915; }
-.sabl-collapse-caret { font-size: 10px; transition: transform 0.15s ease; }
-.sabl-controls.collapsed .sabl-collapse-caret { transform: rotate(-180deg); }
-
 .sabl-toolbar {
   display: flex; justify-content: space-between; align-items: center; gap: 20px;
-  padding: 14px 0;
+  margin-top: 44px; padding: 14px 0;
   border-top: 2px solid #141915; border-bottom: 1px solid rgba(20,25,21,0.14);
 }
 .sabl-search { display: flex; align-items: center; gap: 10px; flex: 1; max-width: 420px; }
@@ -551,7 +525,6 @@ body.quiz-results #match-divider {
 
 @media (prefers-reduced-motion: reduce) {
   .sabl-card, .sabl-card:hover { transform: none; transition: none; }
-  .sabl-collapse-caret { transition: none; }
 }
 @media (max-width: 1024px) {
   .sabl-grid { grid-template-columns: 1fr 1fr; }
@@ -559,15 +532,11 @@ body.quiz-results #match-divider {
 @media (max-width: 900px) {
   .sabl-title-row { flex-direction: column; align-items: flex-start; gap: 24px; }
   .sabl-stat { text-align: left; }
-  .sabl-controls { margin: 28px -20px 0; padding: 0 20px; }
-  .sabl-toolbar { flex-direction: column; align-items: stretch; }
+  .sabl-toolbar { flex-direction: column; align-items: stretch; margin-top: 28px; }
   .sabl-row-label { width: 100%; }
 }
 @media (max-width: 640px) {
   .sabl-grid { grid-template-columns: 1fr; }
-  /* Open, the panel is over half a phone screen tall — too much to pin there,
-     so on phones it only follows the page down once collapsed. */
-  .sabl-controls:not(.collapsed) { position: static; }
 }
 
 /* Program-card extras for the "ScholarAB Programs" design */
