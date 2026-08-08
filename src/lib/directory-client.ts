@@ -4,6 +4,10 @@
 import { sendEvent } from './events.ts';
 import { showConfetti } from './utils.ts';
 
+// Collapsed/expanded state of the sticky filter panel, shared by /scholarships
+// and /programs so the choice carries across the two pages.
+const FILTERS_KEY = 'scholarab_filters_collapsed';
+
 export interface DirectoryItem {
   el: HTMLElement;
   id: number;
@@ -41,6 +45,34 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   let state: S = { ...config.defaultState };
   let query = '';
   let emptyTimer: ReturnType<typeof setTimeout> | undefined;
+  let stickyObserver: IntersectionObserver | undefined;
+
+  // Drop-shadow under the controls only once they have actually stuck to the
+  // top (paired with `top: -1px` in the stylesheet).
+  function watchSticky() {
+    stickyObserver?.disconnect();
+    const panel = root?.querySelector<HTMLElement>('[data-dir-controls]');
+    if (!panel || typeof IntersectionObserver === 'undefined') return;
+    stickyObserver = new IntersectionObserver(
+      ([entry]) => panel.classList.toggle('stuck', entry.intersectionRatio < 1),
+      { threshold: [1] },
+    );
+    stickyObserver.observe(panel);
+  }
+
+  function applyCollapsed(collapsed: boolean) {
+    if (!root) return;
+    const panel = root.querySelector<HTMLElement>('[data-dir-controls]');
+    const btn = root.querySelector<HTMLElement>('[data-dir-collapse]');
+    if (panel) panel.classList.toggle('collapsed', collapsed);
+    if (btn) {
+      const text = collapsed ? 'Show filters' : 'Hide filters';
+      btn.setAttribute('aria-expanded', String(!collapsed));
+      btn.setAttribute('aria-label', text);
+      const label = btn.querySelector('[data-dir-collapse-label]');
+      if (label) label.textContent = text;
+    }
+  }
 
   function setSaveState(btn: HTMLElement, saved: boolean) {
     btn.classList.toggle('on', saved);
@@ -109,6 +141,14 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
+    if (t.closest('[data-dir-collapse]')) {
+      const panel = root.querySelector<HTMLElement>('[data-dir-controls]');
+      const next = !panel?.classList.contains('collapsed');
+      applyCollapsed(next);
+      try { localStorage.setItem(FILTERS_KEY, next ? '1' : '0'); } catch { /* private mode */ }
+      return;
+    }
+
     const chip = t.closest<HTMLElement>('[data-fkey]');
     if (chip) {
       const k = chip.dataset.fkey as keyof S & string;
@@ -147,6 +187,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
     if (input) input.value = '';
     config.onCardsParsed?.(items);
+    let collapsed = false;
+    try { collapsed = localStorage.getItem(FILTERS_KEY) === '1'; } catch { /* private mode */ }
+    applyCollapsed(collapsed);
+    watchSticky();
     paintSaved();
     render();
   });
