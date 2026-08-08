@@ -521,19 +521,44 @@
 .sabx-chip[aria-pressed='true'] { background: var(--ink); color: var(--cream); border-color: var(--ink); }
 
 .sabx-list { padding: 8px 20px 0; }
-.sabx-row { border-bottom: 1px solid rgba(20, 25, 21, 0.12); padding: 17px 0; display: flex; align-items: flex-start; gap: 14px; }
-.sabx-row-main { flex: 1; min-width: 0; }
+.sabx-row { border-bottom: 1px solid rgba(20, 25, 21, 0.12); padding: 17px 0; display: flex; align-items: center; gap: 14px; }
+.sabx-row-main { flex: 1; min-width: 0; display: flex; align-items: flex-start; gap: 14px; text-align: left; }
+
+/* The countdown, not the amount, is the row's type anchor: every active listing
+   has one, whereas a published amount can be "Varies" — which left a 27px slot
+   holding a word. `tabular-nums` so the column edge doesn't wobble 9 → 10. */
+.sabx-row-when { width: 54px; flex: 0 0 auto; text-align: right; }
+.sabx-row-when-n {
+  display: block; font-family: 'Instrument Serif', serif; font-size: 32px;
+  line-height: 0.92; color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.sabx-row-when-u {
+  display: block; font-family: 'IBM Plex Mono', monospace; font-size: 8.5px;
+  letter-spacing: 0.04em; color: rgba(20, 25, 21, 0.45); margin-top: 4px;
+  white-space: nowrap;
+}
+.sabx-row-when.urgent .sabx-row-when-n { color: var(--rust); }
+.sabx-row-when.undated .sabx-row-when-n { color: rgba(20, 25, 21, 0.35); }
+
+.sabx-row-body { flex: 1; min-width: 0; display: block; }
 .sabx-row-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; flex-wrap: wrap; }
 .sabx-row-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.5); }
-.sabx-row-chip { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.05em; border-radius: 100px; padding: 4px 9px; }
-.sabx-row-name { display: block; font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--ink); }
-.sabx-row-org { display: block; font-size: 13.5px; color: rgba(20, 25, 21, 0.55); margin-top: 5px; }
-.sabx-row-side { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-.sabx-row-amount { font-family: 'Instrument Serif', serif; font-size: 27px; line-height: 1; color: var(--ink); }
+.sabx-row-chip { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.05em; border-radius: 100px; padding: 4px 9px; display: inline-block; margin-top: 8px; }
+.sabx-row-name { display: block; font-size: 15.5px; font-weight: 700; line-height: 1.3; color: var(--ink); }
+.sabx-row-line { display: flex; align-items: baseline; gap: 9px; margin-top: 7px; flex-wrap: wrap; }
+.sabx-row-org { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.45); }
+.sabx-row-amount { font-family: 'Instrument Serif', serif; font-size: 21px; line-height: 1; color: var(--ink); }
+.sabx-row-amount.vague { color: rgba(20, 25, 21, 0.42); }
+.sabx-row-steps { display: flex; align-items: center; gap: 6px; margin-top: 9px; }
+.sabx-row-steps > span {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9.5px;
+  letter-spacing: 0.05em; color: var(--green);
+}
 .sabx-row-save {
   width: 34px; height: 34px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   background: rgba(20, 25, 21, 0.08);
+  flex: 0 0 auto;
 }
 .sabx-row-save .sabx-bookmark { width: 13px; height: 16px; background: rgba(20, 25, 21, 0.45); }
 .sabx-row-save[aria-pressed='true'] { background: var(--green); }
@@ -656,10 +681,64 @@
 .sabx-sv-meta { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.04em; color: rgba(20, 25, 21, 0.55); margin-top: 5px; }
 .sabx-sv-amount { font-family: 'Instrument Serif', serif; font-size: 26px; line-height: 1; color: var(--ink); white-space: nowrap; }
 .sabx-sv-foot { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+/* Kept for saved research programs, whose bar is still time-derived — they have
+   no application steps to tick. Scholarships use .sabx-dots instead. */
 .sabx-sv-track { flex: 1; height: 6px; border-radius: 100px; background: rgba(20, 25, 21, 0.1); overflow: hidden; }
 .sabx-sv-fill { height: 100%; border-radius: 100px; background: var(--green); }
 .sabx-sv-steps { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: rgba(20, 25, 21, 0.6); white-space: nowrap; }
 .sabx-sv-remove { font-size: 12.5px; font-weight: 600; color: var(--rust); }
+
+/* Steps and time, side by side and never the same shape. Discrete pips read as
+   "four things"; the rust day count reads as the clock. One continuous bar fed
+   by elapsed time used to carry both meanings, so a nearly-full bar looked like
+   progress when it meant the opposite. */
+.sabx-sv-progress {
+  display: flex; align-items: center; gap: 9px;
+  margin-top: 14px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(20, 25, 21, 0.08);
+}
+.sabx-sv-progress .sabx-sv-steps { color: var(--green); letter-spacing: 0.05em; }
+.sabx-sv-left {
+  margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
+  letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.55); white-space: nowrap;
+}
+.sabx-sv-left.urgent { color: var(--rust); }
+.sabx-sv-ticks { margin-top: 2px; }
+
+.sabx-dots { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
+.sabx-dots i { width: 15px; height: 4px; border-radius: 100px; background: rgba(20, 25, 21, 0.14); }
+.sabx-dots i.on { background: var(--green); }
+
+/* Tickable step. 44px min target, and the whole row is the hit area — the
+   checkbox alone is too small to aim at one-handed. */
+.sabx-tick {
+  display: flex; align-items: flex-start; gap: 12px;
+  width: 100%; box-sizing: border-box; min-height: 44px;
+  padding: 11px 0; text-align: left;
+  border-bottom: 1px solid rgba(20, 25, 21, 0.08);
+}
+.sabx-tick:last-child { border-bottom: none; }
+.sabx-tick i {
+  width: 22px; height: 22px; border-radius: 7px; box-sizing: border-box;
+  flex: 0 0 auto; margin-top: 1px;
+  border: 2px solid rgba(20, 25, 21, 0.25);
+  color: var(--cream); font-size: 13px; font-weight: 700; font-style: normal;
+  display: flex; align-items: center; justify-content: center;
+}
+.sabx-tick span { flex: 1; font-size: 14.5px; line-height: 1.45; color: var(--ink); }
+.sabx-tick.on i { background: var(--green); border-color: var(--green); }
+.sabx-tick.on span { color: rgba(20, 25, 21, 0.45); text-decoration: line-through; }
+
+.sabx-steps-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.sabx-steps-count { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.05em; color: var(--green); }
+.sabx-steps-note {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.05em;
+  line-height: 1.6; color: rgba(20, 25, 21, 0.42); margin-top: 12px;
+}
+
+.sabx-pace-steps { display: flex; align-items: baseline; gap: 9px; margin: 14px 0 12px; }
+.sabx-pace-steps b { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; line-height: 1; color: var(--accent); }
+.sabx-pace-steps span { font-size: 13px; line-height: 1.4; color: rgba(242, 240, 233, 0.6); }
 
 .sabx-empty-big { border: 1px dashed rgba(20, 25, 21, 0.25); border-radius: 20px; padding: 44px 24px; text-align: center; }
 .sabx-empty-big .sabx-section-label { color: rgba(20, 25, 21, 0.45); margin-bottom: 14px; }
@@ -934,6 +1013,19 @@
   font-family: 'Instrument Serif', serif; font-weight: 400;
   font-size: 42px; line-height: 1.02; color: var(--on-band);
   margin: 14px 0 0; text-wrap: pretty;
+}
+/* Why the question is worth answering. On a first run this is the only thing
+   telling a student the quiz is a filter and not a signup form. */
+.sabx-q-why {
+  font-size: 14px; line-height: 1.5;
+  color: rgba(242, 240, 233, 0.55);
+  margin: 10px 0 0; text-wrap: pretty;
+}
+.sabx-q-more { padding: 4px 22px 0; }
+.sabx-q-more button {
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
+  color: rgba(242, 240, 233, 0.5); text-decoration: underline;
+  text-underline-offset: 3px; min-height: 44px; text-align: left;
 }
 
 .sabx-q-opts {

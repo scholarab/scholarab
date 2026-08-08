@@ -8,7 +8,7 @@ import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
 import { defer } from '../../lib/defer'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'app_step'])
 // Real browser UAs never contain a URL, a script-runtime name, or an HTTP
 // library name — bots and fetch libraries almost always do. JS-executing
 // crawlers (Googlebot, Bytespider) all match one of the generic terms.

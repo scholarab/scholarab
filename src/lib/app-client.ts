@@ -8,6 +8,7 @@
 // tracker (so the app and /saved and every detail page stay in sync), and the
 // Match screen runs the real eligibility matcher over the stored quiz answers.
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts'
+import { getSteps, toggleStep, totalStepsDone, STEPS_KEY } from './steps.ts'
 import { sendEvent } from './events.ts'
 import { matchAll } from './eligibility-matcher.ts'
 import { downloadICS } from './ics.ts'
@@ -15,11 +16,13 @@ import { prefersReducedMotion } from './utils.ts'
 import { ALERT_MILESTONES, parseCadence, formatCadence, cadenceSentence, type AlertMilestone } from './alerts.ts'
 import {
   expandItem, chipFor, statusOf, daysUntil, midnight, initialsOf, orgLine, hashTags,
-  feedStamp, applySteps, shortMoney, moneyTotal, openListings, byDeadline, searchListings,
+  feedStamp, shortMoney, moneyTotal, openListings, byDeadline, searchListings,
   filterCategory, categoryKeys, nearbyListings, profileFromAnswers, profileChips,
   weekStrip, deadlineWeeks, timePressure, longDate, shortDate, routeFromHash,
   expandProgram, programStatusOf, programChipFor, isDatedIso, QUIZ_STORAGE_KEY,
   QUIZ_QUESTIONS, programPayLabel, programDueLabel, programCategoryKeys,
+  acceptingListings, applicationSteps, stepsDone, stepLabel, STEP_COUNT,
+  fastQuizQuestions, hasFastProfile, type QuizQuestion,
   filterProgramCategory, sortPrograms, expandGuide, reopenStats, reopenHeadline,
   reopenRegions, nextToOpen, closedListings,
   type WireItem, type WireProgram, type WireGuide, type Listing, type ProgramItem,
@@ -30,6 +33,17 @@ import {
 
 const SITE = 'https://www.scholarab.ca'
 const FEED_LIMIT = 10
+
+/**
+ * Why each question is worth answering, shown under it. Counted against the
+ * real corpus rather than taken from the design, which guessed "half" for the
+ * grade gate: 138 of 154 listings name the grades they are for.
+ */
+const QUIZ_WHY: Record<string, string> = {
+  grade: 'Nine in ten awards here name the grades they are for. This is the single biggest cut.',
+  city: 'Local awards have the smallest applicant pools, so they are the ones worth your time.',
+  field: 'A rough answer is fine, and "still figuring it out" is a real answer.',
+}
 
 type Tab = AppTab
 /** 'start' is not a feed at all — it's the app's own intro screen, sitting in
@@ -71,6 +85,38 @@ function readQuiz(): Record<string, string> | null {
   } catch {
     return null
   }
+}
+
+/**
+ * Whether the first-run questions have already been put in front of this
+ * student. Separate from whether they answered: someone who taps CLOSE has
+ * said no, and asking again on every visit would be nagging. Reopening the
+ * quiz from the Match or Me screens still works, which is the way back in.
+ */
+const ONBOARDED_KEY = 'scholarab_app_onboarded'
+
+function onboardingSeen(): boolean {
+  try { return localStorage.getItem(ONBOARDED_KEY) === '1' } catch { return false }
+}
+
+function markOnboarded(): void {
+  try { localStorage.setItem(ONBOARDED_KEY, '1') } catch { /* private mode: asks again next visit */ }
+}
+
+/**
+ * Where to pick a run back up: the first question in `set` with no answer, or
+ * the end if every one is answered.
+ *
+ * This is also what gets persisted, and it has to be an index into the *full*
+ * QUIZ_QUESTIONS, because /match's React quiz uses the stored step positionally
+ * (`QUESTIONS[step]`) and treats `step >= 6` as "show results". A three-question
+ * run leaves `searchType` unanswered at index 0, so it stores 0 — /match then
+ * asks all six with the three already-answered ones pre-selected, rather than
+ * jumping to index 3 and silently skipping the question before it.
+ */
+function resumeStep(answers: Record<string, string>, set: QuizQuestion[]): number {
+  const i = set.findIndex(q => answers[q.key] === undefined)
+  return i === -1 ? set.length : i
 }
 
 function readQuizState(): StoredQuiz {
@@ -191,6 +237,12 @@ export function initApp(): void {
   let progId: number | null = null
   let quizStep = 0
   let quizAnswers: Record<string, string> = {}
+  /**
+   * Which question list the quiz screen is walking. The three-question set runs
+   * on first launch and from "Set profile"; the full six stay behind "Redo" and
+   * on /match, so nothing that used to be askable stopped being askable.
+   */
+  let quizSet: QuizQuestion[] = QUIZ_QUESTIONS
   let offline = false
   let feedMode: FeedMode = 'foryou'
   let query = ''
@@ -232,6 +284,11 @@ export function initApp(): void {
 
   function open(): Listing[] {
     return openListings(items, today)
+  }
+
+  /** Taking applications today. What the counts in the UI are allowed to say. */
+  function accepting(): Listing[] {
+    return acceptingListings(items, today)
   }
 
   function matchedIds(): number[] | null {
@@ -296,15 +353,19 @@ export function initApp(): void {
     if (next === 'quiz') {
       const stored = readQuizState()
       quizAnswers = stored.answers
+      // Nobody with a profile yet gets the three that matter; anyone reopening
+      // the quiz on purpose is refining, so they get all six.
+      quizSet = hasFastProfile(stored.answers) ? QUIZ_QUESTIONS : fastQuizQuestions()
       // A finished quiz reopens at the start so "Edit profile" is a real redo,
       // not a dead-end on the last question.
-      quizStep = stored.step >= QUIZ_QUESTIONS.length ? 0 : stored.step
+      quizStep = resumeStep(stored.answers, quizSet)
     }
     closeSheet(false)
     render()
   }
 
   function closeScreen(): void {
+    if (screen === 'quiz') markOnboarded()
     screen = null
     guideSlug = null
     setProgId(null)
@@ -543,11 +604,57 @@ export function initApp(): void {
       </section>`
   }
 
+  // ── Application steps ───────────────────────────────────────────────────────
+
+  /** Four discrete pips. Deliberately unlike the programs' continuous time bar:
+   *  segments read as "things I did", a sliding fill reads as "time passing". */
+  function stepDots(flags: readonly boolean[]): string {
+    return `<span class="sabx-dots" aria-hidden="true">${
+      flags.map(on => `<i class="${on ? 'on' : ''}"></i>`).join('')
+    }</span>`
+  }
+
+  /** The tickable checklist, shared by the sheet and the Saved card. */
+  function stepList(l: Listing): string {
+    const flags = getSteps(l.id)
+    return applicationSteps(l).map((label, i) => `
+      <button class="sabx-tick${flags[i] ? ' on' : ''}" data-step-id="${l.id}" data-step-i="${i}"
+              role="checkbox" aria-checked="${flags[i] === true}">
+        <i aria-hidden="true">${flags[i] ? '✓' : ''}</i>
+        <span>${esc(label)}</span>
+      </button>`).join('')
+  }
+
+  /**
+   * Ticking a step is also an intent to apply, so it saves the award if it
+   * wasn't already — otherwise the ticks live somewhere the student can't get
+   * back to. Untickng the last step does *not* un-save: dropping an award is an
+   * explicit act, and silently removing it under them would lose the row.
+   */
+  function tickStep(id: number, index: number): void {
+    const flags = toggleStep(id, index)
+    const n = stepsDone(flags)
+    if (!isSaved(id)) {
+      toggleSaved(id)
+      sendEvent('save', 'scholarship', id)
+    }
+    sendEvent('app_step', 'scholarship', id)
+    renderedKey = ''
+    renderedOverlayKey = ''
+    render()
+    if (flags[index]) say(n === STEP_COUNT ? 'All four done — go submit it' : `${n} of ${STEP_COUNT} done`)
+  }
+
   // ── Screen: due / browse ────────────────────────────────────────────────────
 
   function renderDue(): string {
     const list = dueListings()
+    // `total` is the browsable set and `live` the applicable one. They differ by
+    // 117 rows today, and every count the student reads is now the second
+    // number: the header used to say "154 OPEN" while 37 took an application.
     const total = open().length
+    const live = accepting().length
+    const waiting = total - live
     const rings = [...open()].filter(l => l.deadline && statusOf(l, today) === 'active').sort(byDeadline).slice(0, 5)
     const cats = ['ALL', ...categoryKeys(open())]
     const closed = reopenStats(items, today).closed
@@ -568,25 +675,39 @@ export function initApp(): void {
         </button>`
     }).join('')
 
+    // Days lead, money rides alongside. The amount used to be the only thing in
+    // the row with its own column, which reads badly for the listings whose
+    // published amount is "Varies" — those rows showed a wide empty slot and no
+    // urgency. A countdown every active listing has is the sturdier anchor.
     const rowHtml = list.map(l => {
       const chip = chipFor(l, today)
       const on = isSaved(l.id)
+      const status = statusOf(l, today)
+      const live = status === 'active' && !!l.deadline
+      const days = live ? daysUntil(l.deadline!, today) : null
+      const done = stepsDone(getSteps(l.id))
       return `
         <div class="sabx-row">
           <button class="sabx-row-main" data-open="${l.id}">
-            <span class="sabx-row-meta">
-              <span class="sabx-row-tag">${esc((l.category ?? 'SCHOLARSHIP').toUpperCase())}</span>
-              <span class="sabx-row-chip" style="background:${chip.bg};color:${chip.fg}">${esc(chip.text)}</span>
+            <span class="sabx-row-when${days !== null && days <= 10 ? ' urgent' : ''}${days === null ? ' undated' : ''}">
+              <span class="sabx-row-when-n">${days === null ? '—' : days}</span>
+              <span class="sabx-row-when-u">${days === null
+                ? esc(status === 'future' ? 'NOT OPEN' : 'NO DATE')
+                : days === 1 ? 'DAY LEFT' : 'DAYS LEFT'}</span>
             </span>
-            <span class="sabx-row-name">${esc(l.title)}</span>
-            <span class="sabx-row-org">${esc(orgLine(l))}</span>
+            <span class="sabx-row-body">
+              <span class="sabx-row-name">${esc(l.title)}</span>
+              <span class="sabx-row-line">
+                <span class="sabx-row-amount${l.amountValue === 0 ? ' vague' : ''}">${esc(shortMoney(l.amount))}</span>
+                <span class="sabx-row-org">${esc(orgLine(l))}</span>
+              </span>
+              ${days === null ? `<span class="sabx-row-chip" style="background:${chip.bg};color:${chip.fg}">${esc(chip.text)}</span>` : ''}
+              ${done > 0 ? `<span class="sabx-row-steps">${stepDots(getSteps(l.id))}<span>${done}/${STEP_COUNT}</span></span>` : ''}
+            </span>
           </button>
-          <div class="sabx-row-side">
-            <div class="sabx-row-amount">${esc(shortMoney(l.amount))}</div>
-            <button class="sabx-row-save" data-save-id="${l.id}" aria-pressed="${on}" aria-label="${on ? 'Remove from saved' : 'Save'}">
-              <i class="sabx-bookmark" data-save-dot></i>
-            </button>
-          </div>
+          <button class="sabx-row-save" data-save-id="${l.id}" aria-pressed="${on}" aria-label="${on ? 'Remove from saved' : 'Save'}">
+            <i class="sabx-bookmark" data-save-dot></i>
+          </button>
         </div>`
     }).join('')
 
@@ -595,10 +716,10 @@ export function initApp(): void {
         <div class="sabx-scroll">
           <div class="sabx-due-head">
             <span class="sabx-wordmark">Scholar<span>AB</span></span>
-            <span class="sabx-count-chip">${list.length === total ? `${total} OPEN` : `${list.length} SHOWN`}</span>
+            <span class="sabx-count-chip">${list.length === total ? `${live} ACCEPTING NOW` : `${list.length} SHOWN`}</span>
           </div>
           <div class="sabx-segs">
-            <span class="sabx-seg" aria-current="page">OPEN NOW · ${total}</span>
+            <span class="sabx-seg" aria-current="page">ACCEPTING NOW · ${live}</span>
             ${closed > 0 ? `<button class="sabx-seg" data-screen="reopening">REOPENING · ${closed}</button>` : ''}
             <button class="sabx-seg" data-screen="programs">PROGRAMS · ${programs.length}</button>
           </div>
@@ -621,6 +742,12 @@ export function initApp(): void {
                 <div class="sabx-empty-sub">Try a shorter word, or clear the filter.</div>
               </div>` : ''}
           </div>
+          ${list.length === total && waiting > 0 ? `
+            <div class="sabx-note-dark">
+              <div class="sabx-note-dark-label">WHY ${live} AND NOT ${total}</div>
+              <div class="sabx-note-dark-body">${live} of the ${total} awards listed here are taking applications today. The other ${waiting} are between cycles — they still have pages worth reading, and they are in this list with the date they reopen, but you cannot apply to one right now.${
+                programs.length > 0 ? ' Research programs keep their own application windows and are counted separately, under Programs.' : ''}</div>
+            </div>` : ''}
         </div>
       </section>`
   }
@@ -732,9 +859,13 @@ export function initApp(): void {
         <span class="sabx-week-dot"></span>
       </div>`).join('')
 
+    // Two separate readings, never the same bar: the pips are the student's own
+    // four steps, and the days are the clock. These used to be one bar fed by
+    // `timePressure`, so a nearly-full bar meant "almost out of time" while
+    // looking exactly like "almost finished".
     const cardsHtml = list.map(l => {
       const chip = chipFor(l, today)
-      const pct = timePressure(l, today)
+      const flags = getSteps(l.id)
       const days = l.deadline && statusOf(l, today) === 'active' ? daysUntil(l.deadline, today) : null
       return `
         <div class="sabx-sv-card">
@@ -745,9 +876,13 @@ export function initApp(): void {
             </span>
             <span class="sabx-sv-amount">${esc(shortMoney(l.amount))}</span>
           </button>
+          <div class="sabx-sv-progress">
+            ${stepDots(flags)}
+            <span class="sabx-sv-steps">${esc(stepLabel(flags))}</span>
+            <span class="sabx-sv-left${days !== null && days <= 10 ? ' urgent' : ''}">${days === null ? esc(chip.text) : `${days}D LEFT`}</span>
+          </div>
+          <div class="sabx-sv-ticks">${stepList(l)}</div>
           <div class="sabx-sv-foot">
-            <div class="sabx-sv-track"><div class="sabx-sv-fill" style="width:${pct}%"></div></div>
-            <span class="sabx-sv-steps">${days === null ? esc(chip.text) : `${days}D LEFT`}</span>
             <button class="sabx-sv-remove" data-save-id="${l.id}" aria-pressed="true">Remove</button>
           </div>
         </div>`
@@ -787,6 +922,11 @@ export function initApp(): void {
               <div class="sabx-pace-label">NEXT DEADLINE</div>
               <div class="sabx-pace-value">${nextDays === null ? '—' : nextDays === 0 ? 'Today' : `${nextDays} day${nextDays === 1 ? '' : 's'}`}</div>
             </div>
+            ${list.length > 0 ? `
+              <div class="sabx-pace-steps">
+                <b>${totalStepsDone(list.map(l => l.id))}</b>
+                <span>of ${list.length * STEP_COUNT} steps ticked ${list.length === 1 ? 'on the award you saved' : `across your ${list.length} awards`}</span>
+              </div>` : ''}
             <div class="sabx-pace-bars">${weeks.map(on => `<i class="${on ? 'on' : ''}"></i>`).join('')}</div>
             <div class="sabx-pace-note">${next
               ? `${esc(next.name)} closes ${esc(longDate(next.deadline))}. Filled bars are the next five weeks with a saved deadline in them.`
@@ -904,10 +1044,12 @@ export function initApp(): void {
   // answering in either place matches identically in both.
 
   function renderQuiz(): string {
-    const q = QUIZ_QUESTIONS[Math.min(quizStep, QUIZ_QUESTIONS.length - 1)]!
-    const bars = QUIZ_QUESTIONS
+    const set = quizSet
+    const q = set[Math.min(quizStep, set.length - 1)]!
+    const bars = set
       .map((_, i) => `<i class="${i < quizStep ? 'done' : i === quizStep ? 'here' : ''}"></i>`)
       .join('')
+    const fast = set.length < QUIZ_QUESTIONS.length
 
     const opts = q.opts.map((o, i) => {
       const on = quizAnswers[q.key] === o.value
@@ -929,29 +1071,33 @@ export function initApp(): void {
           <button class="sabx-q-close" data-close-screen>CLOSE</button>
         </div>
         <div class="sabx-q-intro">
-          <div class="sabx-q-step">QUESTION ${quizStep + 1} OF ${QUIZ_QUESTIONS.length}</div>
+          <div class="sabx-q-step">QUESTION ${quizStep + 1} OF ${set.length}</div>
           <h2 class="sabx-q-title">${esc(q.q)}</h2>
+          ${QUIZ_WHY[q.key] ? `<p class="sabx-q-why">${esc(QUIZ_WHY[q.key]!)}</p>` : ''}
         </div>
         <div class="sabx-q-opts">${opts}</div>
+        ${fast ? '<div class="sabx-q-more"><button data-quiz-full>Answer three more for a tighter match</button></div>' : ''}
         <div class="sabx-q-foot">ANSWERS STAY ON THIS DEVICE. NO ACCOUNT, EVER.</div>
       </section>`
   }
 
   function answerQuiz(index: number): void {
-    const q = QUIZ_QUESTIONS[Math.min(quizStep, QUIZ_QUESTIONS.length - 1)]!
+    const set = quizSet
+    const q = set[Math.min(quizStep, set.length - 1)]!
     const opt = q.opts[index]
     if (!opt) return
     quizAnswers = { ...quizAnswers, [q.key]: opt.value }
     // Answering question one = one started run, same rule as /match. Without
     // it /app only ever reported completions, so the funnel read as 100%.
     if (quizStep === 0) sendEvent('quiz_start')
-    const last = quizStep >= QUIZ_QUESTIONS.length - 1
-    quizStep = last ? QUIZ_QUESTIONS.length : quizStep + 1
-    writeQuizState({ step: quizStep, answers: quizAnswers })
+    const last = quizStep >= set.length - 1
+    quizStep = last ? set.length : quizStep + 1
+    writeQuizState({ step: resumeStep(quizAnswers, QUIZ_QUESTIONS), answers: quizAnswers })
 
     if (!last) { render(); return }
 
     sendEvent('quiz_complete')
+    markOnboarded()
     screen = null
     tab = 'match'
     // The match list is rebuilt from the new profile, so the old tick-boxes
@@ -1437,8 +1583,12 @@ export function initApp(): void {
               </div>
             </div>
 
-            <div class="sabx-section-label">WHAT YOU NEED</div>
-            ${applySteps(l).map(t => `<div class="sabx-step"><i></i><span>${esc(t)}</span></div>`).join('')}
+            <div class="sabx-steps-head">
+              <div class="sabx-section-label" style="margin:0">YOUR FOUR STEPS</div>
+              <div class="sabx-steps-count">${esc(stepLabel(getSteps(l.id)))}</div>
+            </div>
+            ${stepList(l)}
+            <div class="sabx-steps-note">Ticking one keeps this award in Saved and moves its bar. Nothing here is sent anywhere.</div>
 
             ${canRemind ? (readAlertMap().has(`scholarship:${l.id}`) ? `
               <div class="sabx-remind">
@@ -1595,6 +1745,19 @@ export function initApp(): void {
       else { quizStep--; render() }
       return
     }
+
+    // Widen a three-question run to all six without losing the answers already
+    // given: the fast set is a subset, so `resumeStep` lands on the first one
+    // the student hasn't seen.
+    if (t.closest('[data-quiz-full]')) {
+      quizSet = QUIZ_QUESTIONS
+      quizStep = resumeStep(quizAnswers, quizSet)
+      render()
+      return
+    }
+
+    const stepBtn = t.closest<HTMLElement>('[data-step-id]')
+    if (stepBtn) { tickStep(Number(stepBtn.dataset.stepId), Number(stepBtn.dataset.stepI)); return }
 
     const progBtn = t.closest<HTMLElement>('[data-prog]')
     if (progBtn) { setProgId(Number(progBtn.dataset.prog)); render(); return }
@@ -1879,7 +2042,11 @@ export function initApp(): void {
   document.addEventListener('submit', e => void onSubmit(e), true)
   document.addEventListener('keydown', onKeyDown)
   window.addEventListener('storage', e => {
-    if (e.key === 'scholarab_saved' || e.key === 'scholarab_saved_programs') { renderedKey = ''; render() }
+    if (e.key === 'scholarab_saved' || e.key === 'scholarab_saved_programs' || e.key === STEPS_KEY) {
+      renderedKey = ''
+      renderedOverlayKey = ''
+      render()
+    }
   })
   // A hash change alone does not fire astro:page-load, so "/app/#saved" links
   // from elsewhere on the site would otherwise land on whatever was showing.
@@ -1925,10 +2092,19 @@ export function initApp(): void {
     tab = route.tab
     screen = route.screen
     guideSlug = route.slug
+    // Three questions before anything else on a first visit. The app used to
+    // open on a feed it had no profile to order, with the quiz two taps away
+    // behind the Match tab — so the first screen was the least useful one it
+    // could show. Skipped in two cases: a deep link asked for somewhere
+    // specific, and the student has already answered (or dismissed) it.
+    const firstRun = !location.hash && !onboardingSeen() && !hasFastProfile(readQuiz())
+    if (firstRun) screen = 'quiz'
+
     if (screen === 'quiz') {
       const stored = readQuizState()
       quizAnswers = stored.answers
-      quizStep = stored.step >= QUIZ_QUESTIONS.length ? 0 : stored.step
+      quizSet = hasFastProfile(stored.answers) ? QUIZ_QUESTIONS : fastQuizQuestions()
+      quizStep = resumeStep(stored.answers, quizSet)
     }
     feedMode = 'foryou'
     query = ''

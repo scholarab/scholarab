@@ -1,9 +1,11 @@
 import { describe, it, expect } from 'vitest'
 import {
   expandEligibility, expandItem, amountValue, slugify, daysUntil, statusOf, chipFor,
-  initialsOf, orgLine, hashTags, feedStamp, applySteps, shortMoney, moneyTotal,
+  initialsOf, orgLine, hashTags, feedStamp, shortMoney, moneyTotal,
   openListings, byDeadline, searchListings, filterCategory, categoryKeys, nearbyListings,
   profileFromAnswers, profileChips, weekStrip, deadlineWeeks, timePressure, midnight, tabFromHash,
+  acceptingListings, waitingListings, applicationSteps, normalizeStepFlags, stepsDone,
+  stepLabel, STEP_COUNT, fastQuizQuestions, hasFastProfile, FAST_QUIZ_KEYS,
   expandProgram, programStatusOf, programChipFor, isDatedIso,
   programPayLabel, programDueLabel, programCategoryKeys, filterProgramCategory, sortPrograms,
   reopenStats, reopenHeadline, reopenRegions, nextToOpen, closedListings,
@@ -173,16 +175,105 @@ describe('orgLine / hashTags / feedStamp', () => {
   })
 })
 
-describe('applySteps', () => {
+describe('applicationSteps', () => {
   it('routes school-administered awards through the counsellor', () => {
-    const steps = applySteps(makeListing({ id: 1, guidance: true, deadline: '2026-08-15' }))
+    const steps = applicationSteps(makeListing({ id: 1, guidance: true, deadline: '2026-08-15' }))
+    expect(steps).toHaveLength(STEP_COUNT)
     expect(steps[0]).toContain('guidance counsellor')
-    expect(steps[2]).toContain('before Aug 15, 2026')
+    expect(steps[1]).toContain('internal school deadline')
   })
 
-  it('drops the date clause when there is no deadline', () => {
-    const steps = applySteps(makeListing({ id: 1 }))
-    expect(steps[2]).toBe('Submit through the official website.')
+  it('sends direct-apply awards to the official page first', () => {
+    const steps = applicationSteps(makeListing({ id: 1 }))
+    expect(steps).toHaveLength(STEP_COUNT)
+    expect(steps[0]).toContain('official page')
+  })
+
+  // The labels are ticked by index and the ticks are persisted by index, so a
+  // listing that flips `guidance` must not shuffle what an existing tick means
+  // more than necessary: both variants keep "documents ready" in the middle.
+  it('keeps the same number of steps either way', () => {
+    expect(applicationSteps(makeListing({ id: 1, guidance: true })))
+      .toHaveLength(applicationSteps(makeListing({ id: 2 })).length)
+  })
+})
+
+describe('step flags', () => {
+  it('always yields exactly STEP_COUNT booleans', () => {
+    expect(normalizeStepFlags(null)).toEqual([false, false, false, false])
+    expect(normalizeStepFlags([true])).toEqual([true, false, false, false])
+    expect(normalizeStepFlags([true, true, true, true, true])).toHaveLength(STEP_COUNT)
+  })
+
+  it('treats anything that is not a literal true as untouched', () => {
+    // A truthy-but-wrong stored value must not read as done: a spurious tick
+    // tells a student work is finished that isn't.
+    expect(normalizeStepFlags([1, 'yes', {}, []])).toEqual([false, false, false, false])
+  })
+
+  it('counts and labels progress', () => {
+    expect(stepsDone([true, false, true, false])).toBe(2)
+    expect(stepLabel([false, false, false, false])).toBe('0 OF 4 DONE')
+    expect(stepLabel([true, true, false, false])).toBe('2 OF 4 DONE')
+    expect(stepLabel([true, true, true, true])).toBe('ALL FOUR DONE')
+  })
+})
+
+describe('acceptingListings / waitingListings', () => {
+  const corpus = [
+    makeListing({ id: 1, deadline: '2026-09-01' }),                        // taking applications
+    makeListing({ id: 2, deadline: '2026-09-01', openDate: '2026-10-01' }), // not open yet
+    makeListing({ id: 3, deadline: '2026-09-01', active: false }),          // curator-closed
+    makeListing({ id: 4, deadline: '2026-07-01' }),                        // expired
+  ]
+
+  it('counts only what a student can apply to today', () => {
+    expect(acceptingListings(corpus, TODAY).map(l => l.id)).toEqual([1])
+  })
+
+  it('puts not-yet-open and curator-closed in the waiting set', () => {
+    expect(waitingListings(corpus, TODAY).map(l => l.id)).toEqual([2, 3])
+  })
+
+  // The distinction the honest count exists to make: `openListings` is the right
+  // set to browse and the wrong number to label "open".
+  it('is a strict subset of what is browsable', () => {
+    const browsable = openListings(corpus, TODAY)
+    const live = acceptingListings(corpus, TODAY)
+    expect(browsable).toHaveLength(3)
+    expect(live).toHaveLength(1)
+    expect(live.every(l => browsable.includes(l))).toBe(true)
+    expect(live.length + waitingListings(corpus, TODAY).length).toBe(browsable.length)
+  })
+})
+
+describe('fast quiz', () => {
+  it('asks three questions, in profile order', () => {
+    expect(fastQuizQuestions().map(q => q.key)).toEqual(['grade', 'city', 'field'])
+  })
+
+  // The whole point of a subset: same option values, so an answer given in the
+  // fast run is the same answer /match's six-question quiz would have stored.
+  it('reuses the real question objects rather than copying them', () => {
+    for (const q of fastQuizQuestions()) {
+      expect(QUIZ_QUESTIONS).toContain(q)
+    }
+  })
+
+  it('knows when the matcher has enough to work with', () => {
+    expect(hasFastProfile(null)).toBe(false)
+    expect(hasFastProfile({ grade: '12', city: 'Calgary' })).toBe(false)
+    expect(hasFastProfile({ grade: '12', city: 'Calgary', field: 'STEM' })).toBe(true)
+  })
+
+  // "Still figuring it out" stores '' and is a real answer, not a skipped one.
+  it('accepts the empty-string answers as answered', () => {
+    expect(hasFastProfile({ grade: '12', city: 'Calgary', field: '' })).toBe(true)
+  })
+
+  it('produces a profile the matcher accepts', () => {
+    const answers = Object.fromEntries(FAST_QUIZ_KEYS.map(k => [k, k === 'city' ? 'Calgary' : '12']))
+    expect(profileFromAnswers(answers)).not.toBeNull()
   })
 })
 

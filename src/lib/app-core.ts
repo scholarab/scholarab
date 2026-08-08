@@ -214,24 +214,58 @@ export function feedStamp(l: Listing): string {
   return parts.map(p => p.toUpperCase()).join(' · ')
 }
 
+// ── Application steps ─────────────────────────────────────────────────────────
+// The four things a student actually does before submitting. `applySteps` above
+// is prose for the sheet's "WHAT YOU NEED"; these are the tickable version, and
+// the only progress signal in the app the student themselves controls.
+//
+// This is what `timePressure` was standing in for. That number moves on its own
+// whether or not the student has opened the tab, which makes a full-looking bar
+// mean "you are nearly out of time" — the opposite of what a full bar reads as.
+// Ticks are stored per listing by steps.ts; nothing here touches storage.
+
+export const STEP_COUNT = 4
+
 /**
- * The design's "WHAT YOU NEED" checklist. The data has no per-listing
- * requirements, so these stay generic and true — the same wording the
- * detail pages use for "HOW TO APPLY".
+ * Four steps, worded for how this award is actually applied to. School-mediated
+ * awards have an internal deadline and a counsellor in the loop, so "read the
+ * criteria on the official page" is not the first thing that happens.
  */
-export function applySteps(l: Listing): string[] {
-  const when = l.deadline ? ` before ${longDate(l.deadline)}` : ''
+export function applicationSteps(l: Listing): string[] {
   return l.guidance
     ? [
-        'Talk to your school guidance counsellor about this award.',
-        'Ask about internal school deadlines, which can be earlier than the listed one.',
-        `Submit your application through your school${when}.`,
+        'Talked to your guidance counsellor',
+        'Asked about the internal school deadline',
+        'Transcript and documents ready',
+        'Application handed in at school',
       ]
     : [
-        'Read the full requirements on the official website.',
-        'Prepare your documents and any references it asks for.',
-        `Submit through the official website${when}.`,
+        'Read the criteria on the official page',
+        'Transcript and documents ready',
+        'References asked',
+        'Essay or answers drafted',
       ]
+}
+
+/**
+ * Coerce stored ticks to exactly STEP_COUNT booleans. Anything unreadable reads
+ * as untouched: an unticked step is the safe default, since the student can see
+ * at a glance that it is wrong and fix it with one tap, whereas a spuriously
+ * ticked one quietly tells them work is done that isn't.
+ */
+export function normalizeStepFlags(raw: unknown): boolean[] {
+  const arr = Array.isArray(raw) ? raw : []
+  return Array.from({ length: STEP_COUNT }, (_, i) => arr[i] === true)
+}
+
+export function stepsDone(flags: readonly boolean[]): number {
+  return flags.filter(Boolean).length
+}
+
+/** "2 OF 4 DONE", and the one case worth calling out. */
+export function stepLabel(flags: readonly boolean[]): string {
+  const n = stepsDone(flags)
+  return n === STEP_COUNT ? 'ALL FOUR DONE' : `${n} OF ${STEP_COUNT} DONE`
 }
 
 /** "$120,000" → "$120k"; "Varies" stays as written. */
@@ -251,6 +285,24 @@ export function moneyTotal(n: number): string {
 /** Expired listings never belong in the app — same rule as the quiz results. */
 export function openListings(items: Listing[], today: Date): Listing[] {
   return items.filter(l => statusOf(l, today) !== 'closed')
+}
+
+/**
+ * The listings a student can actually apply to right now.
+ *
+ * `openListings` means "not expired", which is the right set to *browse* — a
+ * listing that reopens in October still has a real page worth reading. It is
+ * the wrong number to put next to the word "open", and for a long time the app
+ * did exactly that: 154 rows survive the closed filter today, of which 37 take
+ * an application. The other 117 are curator-closed or not yet open.
+ */
+export function acceptingListings(items: Listing[], today: Date): Listing[] {
+  return items.filter(l => statusOf(l, today) === 'active')
+}
+
+/** Listed and not expired, but not taking applications today — the other 117. */
+export function waitingListings(items: Listing[], today: Date): Listing[] {
+  return items.filter(l => statusOf(l, today) === 'future')
 }
 
 /** Soonest real deadline first; undated listings last. */
@@ -684,6 +736,31 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
 ]
 
 /**
+ * The three answers the matcher leans on hardest: grade gates roughly half the
+ * corpus, city decides the local awards, field only ever adds. Asked on first
+ * run so /app has a profile before the student has to go looking for the quiz.
+ *
+ * Deliberately a *subset* of QUIZ_QUESTIONS rather than its own list — same
+ * keys, same option values, same storage key, so a student who answers three
+ * here and later opens /match finds those three already filled in and is asked
+ * only for the remaining ones. `profileFromAnswers` treats the missing
+ * `average`/`institution` as unset, which widens the match rather than
+ * narrowing it wrongly.
+ */
+export const FAST_QUIZ_KEYS = ['grade', 'city', 'field'] as const
+
+export function fastQuizQuestions(): QuizQuestion[] {
+  return FAST_QUIZ_KEYS
+    .map(k => QUIZ_QUESTIONS.find(q => q.key === k))
+    .filter((q): q is QuizQuestion => q !== undefined)
+}
+
+/** Has the student answered enough for the matcher to say anything useful? */
+export function hasFastProfile(answers: Record<string, string> | null | undefined): boolean {
+  return !!answers && FAST_QUIZ_KEYS.every(k => answers[k] !== undefined)
+}
+
+/**
  * Rebuild the matcher's StudentProfile from stored quiz answers — the same
  * mapping EligibilityQuiz does, so /app and /match agree on who qualifies.
  * Returns null when the quiz has not been taken far enough to know the city.
@@ -782,9 +859,15 @@ export function deadlineWeeks(today: Date, deadlines: string[]): boolean[] {
 
 /**
  * How much of the run-up to a deadline is already gone, as a 0–100 percentage.
- * Replaces the design's per-item "3 / 4 steps" progress, which the site has no
- * application tracking to back. Assumes a 60-day working window. Accepts any
- * saved item; program "TBA"/"Ongoing" pseudo-deadlines count as undated.
+ * Assumes a 60-day working window; program "TBA"/"Ongoing" pseudo-deadlines
+ * count as undated.
+ *
+ * Saved *research programs* only. This used to back the scholarship cards too,
+ * standing in for per-item step progress the site could not track — but a bar
+ * that fills on its own reads as "nearly done" while meaning "nearly too late",
+ * so scholarships now show real ticks (see `applicationSteps`) and programs,
+ * which have no steps to tick, keep the time reading on a visibly different
+ * shape.
  */
 export function timePressure(l: { deadline: string | null }, today: Date): number {
   if (!isDatedIso(l.deadline)) return 0
