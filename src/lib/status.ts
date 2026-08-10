@@ -40,3 +40,43 @@ export function scholarshipStatusOf(
   if (s.active === false) return 'future';
   return 'active';
 }
+
+export type ProgramStatus = 'active' | 'tba' | 'ongoing' | 'closed';
+
+export interface ProgramStatusInput {
+  deadline?: string | null;
+  active?: boolean;
+}
+
+/**
+ * The program twin of scholarshipStatusOf. Programs have no openDate and no
+ * "future" state: between cycles auto-expire rewrites a passed deadline to
+ * 'TBA', so a dated deadline in the past only ever means "this cycle closed
+ * and today's sync hasn't run yet".
+ */
+export function programStatusOf(p: ProgramStatusInput, today: Date): ProgramStatus {
+  const d = p.deadline;
+  if (!d || d === 'TBA') return 'tba';
+  if (d === 'Ongoing') return 'ongoing';
+  return today.getTime() > new Date(d + 'T00:00:00').getTime() ? 'closed' : 'active';
+}
+
+// ── The one definition of "Google may index this detail page" ───────────────
+//
+// [type]/[slug].astro emits <meta name="robots" content="noindex"> for exactly
+// the listings these two return false for, and generate-sitemap.ts lists
+// exactly the ones they return true for. Both sides call these, so they cannot
+// drift: a sitemap URL that serves a noindex is a Search Console error, and an
+// indexable page left out of the sitemap is how 112 live pages went unlisted.
+
+export function scholarshipIsIndexable(s: StatusInput, today: Date, hints: StatusHints = {}): boolean {
+  return scholarshipStatusOf(s, today, hints) !== 'closed';
+}
+
+export function programIsIndexable(p: ProgramStatusInput, today: Date): boolean {
+  // Retired programs (active: false) keep their detail pages so old links stay
+  // alive, but programs.astro drops them from the directory and the quiz. An
+  // orphan page nothing links to is not a page to send Google to.
+  if (p.active === false) return false;
+  return programStatusOf(p, today) !== 'closed';
+}

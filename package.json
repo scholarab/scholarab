@@ -4,10 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "tsx scripts/validate-data.ts && tsx scripts/generate-sitemap.ts && tsx scripts/generate-og-images.ts && DATABASE_URL= TZ=America/Edmonton astro build",
+    "build": "TZ=America/Edmonton tsx scripts/validate-data.ts && TZ=America/Edmonton tsx scripts/generate-sitemap.ts && TZ=America/Edmonton tsx scripts/generate-og-images.ts && DATABASE_URL= TZ=America/Edmonton astro build",
     "preview": "astro preview",
     "auto-expire": "tsx scripts/auto-expire.ts",
-    "sitemap": "tsx scripts/generate-sitemap.ts",
+    "sitemap": "TZ=America/Edmonton tsx scripts/generate-sitemap.ts",
     "validate-data": "tsx scripts/validate-data.ts",
     "check-copies": "tsx scripts/check-copies.ts",
     "test": "vitest run",

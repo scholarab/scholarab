@@ -10,6 +10,7 @@ import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount } from '../../lib/utils.ts';
+import { programStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { categoryEmoji } from '../../lib/category-emoji.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
@@ -172,6 +173,9 @@ if (kind === 'scholarship') {
     tag: s.category ? s.category.toUpperCase() : null,
     subline: `${(s.region || 'Alberta').toUpperCase()} · VERIFIED BY HAND`,
     status,
+    // Not `status === 'closed'` spelled out again: the sitemap has to list the
+    // exact complement of this, so both sides read it from status.ts.
+    noindex: !scholarshipIsIndexable(s, todayDate),
     daysLeft,
     // ISO dates for the client-side chip recompute (SabDetail): the page is
     // prerendered, so days-left/closed state must be re-derived on load.
@@ -217,9 +221,7 @@ if (kind === 'scholarship') {
   const slug = generateSlug(p.name);
   const hasDate = !!p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing';
   const deadlineDate = hasDate ? new Date(p.deadline + 'T00:00:00') : null;
-  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = deadlineDate
-    ? (todayDate > deadlineDate ? 'closed' : 'active')
-    : p.deadline === 'Ongoing' ? 'ongoing' : 'tba';
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = programStatusOf(p, todayDate);
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
 
   const desc = p.description ?? '';
@@ -253,6 +255,9 @@ if (kind === 'scholarship') {
     tag: p.category ? p.category.toUpperCase() : null,
     subline: p.provider ? `RUN BY ${p.provider.toUpperCase()}` : 'ALBERTA · VERIFIED BY HAND',
     status,
+    // Retired programs read as TBA/Ongoing on the page — the copy is honest,
+    // the page just isn't a search result: nothing links to it any more.
+    noindex: !programIsIndexable(p, todayDate),
     daysLeft,
     deadlineIso: hasDate ? p.deadline : null,
     openDateIso: null,
@@ -307,7 +312,7 @@ const breadcrumbJson = {
   canonical={d.canonical}
   ogImage={'ogImage' in d ? d.ogImage : undefined}
   currentPath={d.currentPath}
-  robots={d.status === 'closed' ? 'noindex' : undefined}
+  robots={d.noindex ? 'noindex' : undefined}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(d.ldJson)} slot="head" />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
