@@ -23,11 +23,6 @@
 /scholarships/enmax-environmental-scholarship  /scholarships/enmax-scholarship/ 301
 /scholarships/enmax-environmental-scholarship/ /scholarships/enmax-scholarship/ 301
 
-# Discontinued awards. The provider no longer offers these, so the detail page
-# is gone and the listing index is the closest useful destination.
-/scholarships/paula-weiss-spencer-weiss-bipoc-success-award  /scholarships/ 301
-/scholarships/paula-weiss-spencer-weiss-bipoc-success-award/ /scholarships/ 301
-
 # Duplicates. Tradesecrets runs exactly two high school apprenticeship
 # scholarships, and we had four rows for them.
 /scholarships/tradesecrets-alberta-apprenticeship-scholarship  /scholarships/high-school-apprenticeship-scholarship/ 301
@@ -51,13 +46,39 @@
 /programs/ucalgary-kinesiology-high-school-summer-programs  /programs/ucalgary-active-living-summer-camps/ 301
 /programs/ucalgary-kinesiology-high-school-summer-programs/ /programs/ucalgary-active-living-summer-camps/ 301
 
-# 2026-08-07 — removed. Alberta Innovates restricts the studentship to students
-# already registered in an undergraduate program, so graduating Grade 12s were
-# being sent to a program that would reject them. Concordia University of
-# Edmonton runs no high school program at all.
-/programs/alberta-innovates-summer-research-studentship-ucalgary  /programs/ 301
-/programs/alberta-innovates-summer-research-studentship-ucalgary/ /programs/ 301
-/programs/alberta-innovates-summer-research-studentship-ualberta  /programs/ 301
-/programs/alberta-innovates-summer-research-studentship-ualberta/ /programs/ 301
-/programs/concordia-university-of-edmonton-high-school-initiatives  /programs/ 301
-/programs/concordia-university-of-edmonton-high-school-initiatives/ /programs/ 301
+# 2026-08-09 — slugs that changed only because the title's punctuation did.
+# " - " left a literal "---" in the slug; the em dash and colon that replaced
+# it are stripped, so the same listing moved URL without anyone renaming it.
+/programs/alberta-innovates-hyrs---university-of-alberta  /programs/alberta-innovates-hyrs-university-of-alberta/ 301
+/programs/alberta-innovates-hyrs---university-of-alberta/ /programs/alberta-innovates-hyrs-university-of-alberta/ 301
+/programs/alberta-innovates-hyrs---university-of-calgary  /programs/alberta-innovates-hyrs-university-of-calgary/ 301
+/programs/alberta-innovates-hyrs---university-of-calgary/ /programs/alberta-innovates-hyrs-university-of-calgary/ 301
+/programs/alberta-innovates-hyrs---university-of-lethbridge  /programs/alberta-innovates-hyrs-university-of-lethbridge/ 301
+/programs/alberta-innovates-hyrs---university-of-lethbridge/ /programs/alberta-innovates-hyrs-university-of-lethbridge/ 301
+/scholarships/high-school-apprenticeship-scholarship---bright-futures  /scholarships/high-school-apprenticeship-scholarship-bright-futures/ 301
+/scholarships/high-school-apprenticeship-scholarship---bright-futures/ /scholarships/high-school-apprenticeship-scholarship-bright-futures/ 301
+
+# 2026-08-09 — same program, renamed by its provider (or by us to match them).
+# Each target was confirmed to be the same organisation running the same thing,
+# not merely a listing in the same category.
+/programs/quantum-cryptography-school-for-young-students-qcsys  /programs/quantum-school-for-young-students-qsys/ 301
+/programs/quantum-cryptography-school-for-young-students-qcsys/ /programs/quantum-school-for-young-students-qsys/ 301
+/programs/alberta-youth-parliament-ayp  /programs/alberta-youth-parliament-tuxis-parliament-of-alberta/ 301
+/programs/alberta-youth-parliament-ayp/ /programs/alberta-youth-parliament-tuxis-parliament-of-alberta/ 301
+/programs/league-of-innovators-loi-foundations  /programs/league-of-innovators/ 301
+/programs/league-of-innovators-loi-foundations/ /programs/league-of-innovators/ 301
+/programs/careers-the-next-generation-ict-internships  /programs/careers-the-next-generation-high-school-internships/ 301
+/programs/careers-the-next-generation-ict-internships/ /programs/careers-the-next-generation-high-school-internships/ 301
+
+# Deliberately NOT redirected — these 404, and that is the correct answer.
+# Alberta Innovates' Summer Research Studentship takes registered undergrads
+# only, Concordia University of Edmonton runs no high school program, and the
+# Paula Weiss / Spencer Weiss BIPOC Success Award is not one CPA Alberta
+# offers. They used to 301 to /programs/ and /scholarships/; Google reads a
+# redirect onto a category page as a Soft 404 and logged two of them. A real
+# 404 is the honest signal, and 404.astro already says "the link may be old"
+# and offers the directories — a better landing than a silent bounce.
+#   /programs/alberta-innovates-summer-research-studentship-ucalgary
+#   /programs/alberta-innovates-summer-research-studentship-ualberta
+#   /programs/concordia-university-of-edmonton-high-school-initiatives
+#   /scholarships/paula-weiss-spencer-weiss-bipoc-success-award

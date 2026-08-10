@@ -180,5 +180,70 @@ for (const p of programs) {
   }
 }
 
+// ── public/_redirects ────────────────────────────────────────────────────────
+// Renames are the only reason a detail URL ever moves, so this file is the
+// site's whole memory of its own history. Four ways it silently rots, each of
+// which cost real indexed URLs before this check existed:
+//
+//  1. A target that no longer exists — the rename gets renamed again, and the
+//     301 lands on a 404.
+//  2. A target that is a bare directory. Google reads a redirect onto a
+//     category page as a Soft 404 and drops it, so it buys nothing a real 404
+//     doesn't. Delete the rule and let 404.astro do its job.
+//  3. Only one of the two slash forms. Cloudflare Pages 308-normalises a bare
+//     path only when the slashed page exists as a built asset, and a renamed
+//     slug has no asset — so /old-slug hard-404s while /old-slug/ redirects.
+//  4. A source that is also a live page, which shadows the real listing.
+const STATIC_ROUTES = new Set([
+  '/', '/scholarships/', '/programs/', '/match/', '/about/', '/educators/',
+  '/guides/', '/updates/', '/saved/', '/app/',
+]);
+const livePaths = new Set([
+  ...scholarships.map((s) => `/scholarships/${generateSlug(String(s.title))}/`),
+  ...programs.map((p) => `/programs/${generateSlug(String(p.name))}/`),
+]);
+
+const redirectsPath = join(__dirname, '../public/_redirects');
+const rules = readFileSync(redirectsPath, 'utf8')
+  .split('\n')
+  .map((line, i) => ({ line: line.trim(), n: i + 1 }))
+  .filter((r) => r.line !== '' && !r.line.startsWith('#'))
+  .map((r) => {
+    const [from, to, code] = r.line.split(/\s+/);
+    return { ...r, from: from ?? '', to: to ?? '', code: code ?? '' };
+  });
+
+const sources = new Set(rules.map((r) => r.from));
+for (const r of rules) {
+  const tag = `_redirects:${r.n}`;
+
+  if (r.to.startsWith('/') && !r.to.startsWith('/guides/')) {
+    if (STATIC_ROUTES.has(r.to) && (r.to === '/scholarships/' || r.to === '/programs/')) {
+      console.error(`${tag}: ${r.from} redirects to the ${r.to} index — Google logs that as a Soft 404. Drop the rule and let it 404.`);
+      failed = true;
+    } else if (!livePaths.has(r.to) && !STATIC_ROUTES.has(r.to)) {
+      console.error(`${tag}: ${r.from} redirects to ${r.to}, which is not a page any more`);
+      failed = true;
+    }
+  }
+
+  const twin = r.from.endsWith('/') ? r.from.slice(0, -1) : `${r.from}/`;
+  if (!sources.has(twin)) {
+    console.error(`${tag}: ${r.from} has no ${r.from.endsWith('/') ? 'no-slash' : 'trailing-slash'} twin — half of this rename 404s`);
+    failed = true;
+  }
+
+  const asPage = r.from.endsWith('/') ? r.from : `${r.from}/`;
+  if (livePaths.has(asPage)) {
+    console.error(`${tag}: ${r.from} is a live listing — this rule shadows its own page`);
+    failed = true;
+  }
+
+  if (r.code !== '301') {
+    console.error(`${tag}: ${r.from} is a ${r.code || 'missing'} redirect; renames should be 301 so the target inherits the ranking`);
+    failed = true;
+  }
+}
+
 if (failed) process.exit(1);
-console.log(`validate-data: OK (${scholarships.length} scholarships, ${programs.length} programs)`);
+console.log(`validate-data: OK (${scholarships.length} scholarships, ${programs.length} programs, ${rules.length} redirects)`);
