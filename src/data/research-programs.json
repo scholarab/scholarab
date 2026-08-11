@@ -81,7 +81,7 @@
     "eligibility": "Women high school students interested in engineering",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/engineering/community-giving/discovere-camps/fem-plus-engineering-mentorship-program.html",
-    "description": "Applications for the 2025/26 cohort are closed; the next intake is announced on the DiscoverE site. A mentorship program pairing students with women in engineering at the U of A, with study nights, campus tours and design challenges in the Elko Engineering Garage.",
+    "description": "A seven-month mentorship for female, non-binary and 2SLGBTQ+ high school students, with info sessions, faculty events, campus tours and design challenges in the Elko Engineering Garage. The 2025/26 cohort is closed; watch DiscoverE for the next intake.",
     "lastVerified": "2026-08"
   },
   {
@@ -98,7 +98,7 @@
     "eligibility": "Black youth aged 15–22 interested in STEM",
     "deadline": "TBA",
     "url": "https://www.eliteprogram.ca/apply/",
-    "description": "Paid STEM research internship creating experiential learning opportunities for Black youth in science and innovation.",
+    "description": "Applications are accepted through the DiscoverE form, with separate intern streams in Edmonton and Ottawa. ELITE is a paid summer program for Black youth in innovation, technology and entrepreneurship.",
     "lastVerified": "2026-08"
   },
   {
@@ -304,7 +304,7 @@
     "eligibility": "High school students (Grade 11–12) with strong interest in computing; open to all genders",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/computing-science/explore/hs-internships/index.html",
-    "description": "This program has been discontinued — the University of Alberta states the HIP internship \"will no longer be offered for Summer 2025 and onwards.\" It previously placed high school students in computing science research labs.",
+    "description": "Status unclear: the U of A's HIP page states the program \"will no longer be offered for Summer 2025 and onwards\", while the department's Explore page still says Tate internship applications open in the spring. Confirm with Computing Science before counting on it.",
     "lastVerified": "2026-08",
     "active": false
   },
@@ -322,7 +322,7 @@
     "eligibility": "High school students grades 9–12",
     "deadline": "TBA",
     "url": "https://www.stemfellowship.org/programs/reo",
-    "description": "Intensive 5-day spring break research experience hosted in University of Alberta labs. Students are introduced to university-level research methods and academic culture. Distinct from the STEM Fellowship Big Data & AI Challenge.",
+    "description": "Applications are open now across host universities including UCalgary, UBC, Queens, Guelph, York, TMU and U of T Mississauga. REO places high school students on real research, prioritising Indigenous, rural, refugee, newcomer and first-generation students — though everyone is encouraged to apply.",
     "lastVerified": "2026-08"
   },
   {
@@ -409,7 +409,7 @@
     "eligibility": "Ages 16–18, Canadian citizen or permanent resident, physically fit",
     "deadline": "TBA",
     "url": "https://alis.alberta.ca/junior-forest-rangers/",
-    "description": "Paid 7-week summer field work experience focusing on environmental science, forestry management, and conservation research. Work in Alberta's forests and wildlands under provincial supervision.",
+    "description": "A paid summer job, not a course — full-time high school students aged 16 to 18 join a crew learning forestry, wildfire and conservation work across Alberta. Watch alis.alberta.ca for the intake, which opens over the winter.",
     "lastVerified": "2026-08",
     "active": false
   },
@@ -512,7 +512,7 @@
     "eligibility": "Grades 10–12 (Grade 9 eligible for the microbiology module); open to students across Canada. Tuition applies (~$1,700 per module)",
     "deadline": "TBA",
     "url": "https://ysp.utoronto.ca/medysp/",
-    "description": "Four standalone one-week modules, each covering a major medical discipline: physiology, pharmacology and toxicology, molecular biology and genetics, and microbiology. Hands-on labs, lectures, and discussions run by the Temerty Faculty of Medicine. This is a paid-tuition program, not a funded placement.",
+    "description": "Postponed — U of T states Med YSP is pushed to Summer 2027. The program runs hands-on medical modules (human physiology, microbiology) with labs, lectures and discussions for high school students, open to Canadian and international applicants.",
     "lastVerified": "2026-08"
   },
   {
@@ -631,8 +631,8 @@
     "eligibility": "High school students worldwide; teams of 2–9",
     "deadline": "TBA",
     "url": "https://beamlineforschools.cern/",
-    "description": "International physics competition where high school teams research and propose an original particle physics experiment. Winning teams receive a fully-funded trip to CERN or DESY to actually run their experiment alongside professional physicists.",
-    "lastVerified": "2026-04"
+    "description": "Applications close in mid-March each year — the 2026 round closed 13 March. Teams of high school students propose an experiment to run on a real particle-accelerator beamline at CERN, and winning teams travel to carry it out.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 43,
@@ -750,7 +750,7 @@
     "eligibility": "Canadian high school students grades 9–12; teams of up to 15",
     "deadline": "TBA",
     "url": "https://etalentcanada.ca/for-educators/programs/cybertitan",
-    "description": "Team registration runs April through October each year; the season runs October to February with a national finale in May. Teams defend simulated networks in real-time cyber defence scenarios.",
+    "description": "Your teacher registers the team between April and October; the season runs October to May with a national finale. Teams defend simulated networks in real-time cyber defence scenarios — registration is open to educators, not to students directly.",
     "lastVerified": "2026-08"
   },
   {
@@ -938,7 +938,7 @@
     "eligibility": "Grade 10–12 students at MHPSD schools; apply through your school",
     "deadline": "TBA",
     "url": "https://www.mhpsd.ca/dual-credit",
-    "description": "Post-secondary courses taken during high school that earn five Grade 12 credits and three college credits at once. Streams include health care aide, introduction to the trades, and a veterinary technical assistant certificate. MHPSD covers tuition and most supplies.",
+    "description": "Enrol through your school counsellor rather than applying separately. Dual Credit lets Medicine Hat Public students take real post-secondary courses while in high school, earning 5 to 30-level high school credits plus 3 post-secondary credits per course.",
     "lastVerified": "2026-08"
   },
   {
@@ -972,7 +972,7 @@
     "eligibility": "High school students grades 9–12; competitive application",
     "deadline": "TBA",
     "url": "https://www.tks.world/",
-    "description": "Intensive 10-month innovation program where high school students research emerging technologies (AI, genomics, quantum computing), write technical review articles, and build portfolio projects mentored by industry experts. Tuition fee applies; financial aid available.",
+    "description": "Applications for the 2026-27 cohort are open now. TKS is a 10-month after-school program where students go deep on AI, biotech and robotics and build projects with companies; alumni have reached research labs and startups before 19.",
     "lastVerified": "2026-08"
   },
   {
@@ -989,7 +989,7 @@
     "eligibility": "High school students worldwide; no prior quantum or coding experience required",
     "deadline": "TBA",
     "url": "https://www.qubitbyqubit.org/",
-    "description": "Globally recognized virtual program introducing high school students to quantum mechanics and quantum programming. Students conduct simulated quantum research and run code on real quantum computers via cloud access. Need-based scholarships available.",
+    "description": "Summer research applications are open now, and the signature Introduction to Quantum Computing course runs from October. Qubit by Qubit teaches quantum computing to high school students, taught by PhD researchers with Google Quantum AI.",
     "lastVerified": "2026-08"
   },
   {
@@ -1091,7 +1091,7 @@
     "eligibility": "Canadian students grades 7–12; accessed through school or independently",
     "deadline": "TBA",
     "url": "https://www.historicacanada.ca/programs",
-    "description": "Students dig into primary and secondary sources on a topic in Canadian history, culture, or sociology, then present a project or short documentary at regional heritage fairs. Top projects advance nationally.",
+    "description": "Heritage Fairs and Young Citizens are no longer listed by Historica Canada — they appear on neither the current nor the past programs page, and /heritagefairs returns a 404. Historica now runs the Citizenship Challenge, Heritage Minutes and The Memory Project.",
     "lastVerified": "2026-08"
   },
   {
@@ -1364,7 +1364,7 @@
     "eligibility": "High school students in Southeast Alberta",
     "deadline": "TBA",
     "url": "https://www.mhc.ab.ca/campus-services/summer-camps",
-    "description": "Summer camps run on the Medicine Hat College campus using college labs and equipment. Offerings change year to year, so check the camp list for which ones run at the high school age range.",
+    "description": "These are childrens camps — Rattlers Athletics and the Child Development Centre run them for ages 6-17, with much of the programming aimed at elementary ages rather than senior high school research.",
     "lastVerified": "2026-08"
   },
   {
@@ -1381,7 +1381,7 @@
     "eligibility": "Students in Southeast Alberta grades 7–12",
     "deadline": "TBA",
     "url": "https://youthscience.ca/science-fairs/regional-fairs/",
-    "description": "The official regional science fair qualifier hosted at Medicine Hat College for Southeast Alberta. Top projects advance to the Canada-Wide Science Fair (CWSF). Distinct from the CWSF national event already in the directory.",
+    "description": "Registration opens in the fall, with regional fairs held between February and April. Winning at this regional fair is the only route to the Canada-Wide Science Fair for students in southeastern Alberta.",
     "lastVerified": "2026-08"
   },
   {
@@ -1482,8 +1482,8 @@
     "location": "Vancouver, BC (in-person); open to Alberta applicants",
     "eligibility": "Grade 11–12 students across Canada; highly competitive; strong physics and math background",
     "deadline": "TBA",
-    "url": "https://triumf.ca/education/",
-    "description": "Highly prestigious 6-week summer research experience at Canada's particle accelerator centre. Students work alongside physicists on cutting-edge nuclear and particle physics research. Located in BC but accepts highly competitive Alberta applications.",
+    "url": "https://triumf.ca/people/awards-fellowships/yes-fellowship/",
+    "description": "Open only to graduating secondary students in British Columbia entering first-year post-secondary — Alberta students are not eligible. Now called the YES Fellowship: a six-week paid summer research term at TRIUMF with an award of about $4,500 plus travel and housing.",
     "lastVerified": "2026-08"
   },
   {
@@ -1551,7 +1551,7 @@
     "eligibility": "Ages 16–18 who have completed Grade 10, 11 or 12; tuition applies",
     "deadline": "TBA",
     "url": "https://www.auarts.ca/program-areas/university-prep-programs",
-    "description": "A four-week summer immersive in both fine art and design at university level, worth three AUArts credits toward a first-year elective. You build a portfolio of finished work for post-secondary admission and bursary applications. AUArts is running the long-standing Pre-College program for the final time alongside its new Arts-Bridge Pre-University stream.",
+    "description": "For students aged 16+: Pre-College is a four-week summer immersive covering both Fine Art and Design at university level, and Arts-Bridge is a shorter two-week introduction for students who cannot commit to the full month.",
     "lastVerified": "2026-08"
   },
   {
@@ -2010,7 +2010,7 @@
     "eligibility": "Senior high school students living in a participating Community Futures region. Check with your regional office first, since only four of the Alberta offices run the program.",
     "deadline": "TBA",
     "url": "https://capitalregion.albertacf.com/services/business-training-programs/yeti",
-    "description": "Alberta's own youth business program: four days of hands-on training, then you actually run the business over the summer with weekly coaching. Started by Community Futures Capital Region in 2015 and now delivered by four Community Futures offices, serving communities around Stony Plain, Spruce Grove, Leduc, Devon, Drayton Valley, Drumheller, Lac La Biche and the Lakeland region. Participants get $500 in startup funding and can earn another $500 for hitting their milestones, and some school divisions grant high school credit for it.",
+    "description": "Register through the Community Futures office in your area. YETI is a summer business-training program for senior high school students in the Capital Region — you launch a real business over the summer with startup funding and mentorship, and may earn high school credit.",
     "lastVerified": "2026-08"
   },
   {
