@@ -13,8 +13,8 @@
     "eligibility": "Grade 11, north of Red Deer, 85%+ in Math 20, Bio 20, and one other science",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/current-students/undergraduate-research-initiative/opportunities-for-high-school-students/high-school-youth-researcher-summer-program/index.html",
-    "description": "Paid 6-week summer research placement in health sciences. Work alongside UofA researchers. ~20 spots from ~175 applicants.",
-    "lastVerified": "2026-07"
+    "description": "Applications close in mid-March for the July–August placement. Paid six-week summer health research at the U of A with a ~$3,000 stipend, cohort programming and a closing poster symposium.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 2,
@@ -30,8 +30,8 @@
     "eligibility": "Grade 11, south of Red Deer to north of Claresholm, 85%+ in Math 20, Bio 20, and one other science",
     "deadline": "TBA",
     "url": "https://research.ucalgary.ca/research-services/alberta-innovates-HYRS",
-    "description": "Paid summer research in biomedical and health sciences at UCalgary. Cohort programming, guest lectures, poster symposium.",
-    "lastVerified": "2026-07"
+    "description": "Applications close in mid-March for the July–August placement. Paid summer research in biomedical and health sciences at UCalgary, with cohort programming, guest lectures and a poster symposium.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 3,
@@ -47,8 +47,8 @@
     "eligibility": "Grade 11, in or south of Claresholm, 85%+ in Math 20, Bio 20, and one other science",
     "deadline": "TBA",
     "url": "https://www.ulethbridge.ca/artsci/hyrs-applications",
-    "description": "Paid summer health research at ULethbridge. Guest lectures, panel discussions, poster showcase on Aug 13.",
-    "lastVerified": "2026-07"
+    "description": "Applications close in late March for the July–August placement. Paid six-week health research placement at ULethbridge with cohort programming and a closing poster symposium.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 4,
@@ -65,7 +65,7 @@
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/women-in-scholarship-engineering-science-technology/programs/summer-research-program/index.html",
     "description": "6-week paid STEM research internship. ~40 spots. Lab or field work with UofA researchers. Running since 1984.",
-    "lastVerified": "2026-07"
+    "lastVerified": "2026-08"
   },
   {
     "id": 6,
@@ -99,7 +99,7 @@
     "deadline": "TBA",
     "url": "https://www.eliteprogram.ca/apply/",
     "description": "Paid STEM research internship creating experiential learning opportunities for Black youth in science and innovation.",
-    "lastVerified": "2026-03"
+    "lastVerified": "2026-08"
   },
   {
     "id": 8,
@@ -132,8 +132,8 @@
     "eligibility": "Grades 10–11, strong academics, leadership",
     "deadline": "TBA",
     "url": "https://www.shad.ca/apply/",
-    "description": "Month-long STEAM program on a Canadian university campus. Solve real-world problems in teams. Network with like-minded peers.",
-    "lastVerified": "2026-03"
+    "description": "Applications for SHAD 2027 open in mid-September and close in early January. Month-long STEAM program on a Canadian university campus: solve real-world problems in teams, live in residence, and build a cross-country network.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 11,
@@ -149,8 +149,8 @@
     "eligibility": "Alberta high school students grades 9-12 interested in life sciences research",
     "deadline": "TBA",
     "url": "https://biogenius.ca/",
-    "description": "Students are paired with professional scientist mentors to develop an original research project in life sciences. Projects culminate in a manuscript and poster presentation at regional and national competitions. Top competitors advance to the national Biogenius Challenge. Program paused since 2025 pending a Sanofi program review.",
-    "lastVerified": "2026-07",
+    "description": "Heads up: the Biogenius Canada site is offline — biogenius.ca now redirects to Sanofi’s corporate page. Students are paired with scientist mentors for an original life-sciences research project presented at regional and national competitions.",
+    "lastVerified": "2026-08",
     "active": false
   },
   {
@@ -184,8 +184,8 @@
     "eligibility": "Grades 11-12 at an Ontario-based high school (no longer open to Alberta students)",
     "deadline": "TBA",
     "url": "https://www.rbc.com/en/future-launch/resource-type/programs-services/rbc-summer-tech-labs/",
-    "description": "An 8-week paid internship where students collaborate in small teams to build working prototypes solving real RBC business problems. Students use coding languages like JavaScript and React, attend tech talks, and receive mentorship from RBC engineers.",
-    "lastVerified": "2026-07",
+    "description": "Applications for summer 2027 reopen in spring 2027. An 8-week paid internship building working prototypes for real RBC business problems in JavaScript and React, with tech talks and mentorship.",
+    "lastVerified": "2026-08",
     "active": false
   },
   {
@@ -202,8 +202,8 @@
     "eligibility": "Indigenous (First Nation, Métis, and Inuit) high school students in grades 10-12",
     "deadline": "TBA",
     "url": "https://www.vernajkirkness.org/vjfk-program/",
-    "description": "A one-week program where Indigenous high school students conduct research in science and engineering alongside university professors and graduate students. Students explore STEM fields and university life at the U of A campus.",
-    "lastVerified": "2026-07"
+    "description": "Applications for the 2027 program reopen in fall 2026. A one-week program where Indigenous high school students conduct research alongside university professors and graduate students at the U of A.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 15,
@@ -219,8 +219,8 @@
     "eligibility": "Canadian students in grades 7–12; must first qualify through a regional science fair (e.g., Southeastern Alberta RSF, CYSF)",
     "deadline": "TBA",
     "url": "https://cwsf-espc.ca/",
-    "description": "Canada's largest annual youth STEM event where ~400 top students present original independent research projects across all science disciplines. Alberta students qualify through their regional science fair and compete for awards, scholarships, and international placements.",
-    "lastVerified": "2026-03"
+    "description": "CWSF 2027 runs May 29 – June 5 in Hamilton. There is no direct application: Alberta students qualify by winning at their regional science fair, then present original research against roughly 400 finalists from across Canada.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 16,
@@ -253,8 +253,8 @@
     "eligibility": "Canadian high school students grades 9–12; teams of up to 5; no coding experience required",
     "deadline": "TBA",
     "url": "https://www.stemfellowship.org/programs/hsbdc",
-    "description": "Teams conduct original open-data and AI research on a real-world theme, producing a peer-reviewed manuscript and presenting at a national conference with a finale in Calgary. Builds research writing, data analysis, and academic communication skills.",
-    "lastVerified": "2026-03"
+    "description": "This challenge is not currently running — STEM Fellowship lists no active Big Data & AI Challenge cycle. Teams previously produced a peer-reviewed manuscript from open-data and AI research, with a finale in Calgary.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 18,
@@ -288,7 +288,7 @@
     "deadline": "TBA",
     "url": "https://mindfuel.ca/tfc/",
     "description": "National innovation challenge where youth teams design and prototype STEM solutions to real-world problems. Teams receive access to industry mentors, workshops, and MindFuel's Connect2Innovate platform. 13+ years running with 5,000+ alumni.",
-    "lastVerified": "2026-03"
+    "lastVerified": "2026-08"
   },
   {
     "id": 20,
@@ -356,8 +356,8 @@
     "eligibility": "High school girls/young women interested in science and engineering",
     "deadline": "TBA",
     "url": "https://www.cybermentor.ca/",
-    "description": "Program connecting high school girls with women in science and engineering at UCalgary. Fosters research and tech-focused development through mentorship, networking, and industry exposure.",
-    "lastVerified": "2026-07",
+    "description": "The mentorship program is currently on hiatus at UCalgary. It connected high school girls with women in science and engineering through mentorship, networking and industry exposure.",
+    "lastVerified": "2026-08",
     "active": false
   },
   {
@@ -372,10 +372,10 @@
     "stipend": null,
     "location": "Lethbridge (in-person)",
     "eligibility": "High school students; southern Alberta focus",
-    "deadline": "TBA",
+    "deadline": "Ongoing",
     "url": "https://www.ulethbridge.ca/destination-exploration",
-    "description": "Intensive summer STEM camps and programs at ULethbridge that introduce high school students to university-level research facilities and methodologies. Covers science, technology, and campus life.",
-    "lastVerified": "2026-07",
+    "description": "Registration is rolling — camps, FriYAY STEM clubs and workshops run year-round as space allows. Hands-on STEM programming at ULethbridge that puts high school students into university research facilities.",
+    "lastVerified": "2026-08",
     "active": false
   },
   {
@@ -410,7 +410,7 @@
     "deadline": "TBA",
     "url": "https://alis.alberta.ca/junior-forest-rangers/",
     "description": "Paid 7-week summer field work experience focusing on environmental science, forestry management, and conservation research. Work in Alberta's forests and wildlands under provincial supervision.",
-    "lastVerified": "2026-07",
+    "lastVerified": "2026-08",
     "active": false
   },
   {
@@ -462,7 +462,7 @@
     "deadline": "TBA",
     "url": "https://perimeterinstitute.ca/outreach/students",
     "description": "Highly competitive 2-week fully funded summer school at Perimeter Institute for exceptional Grade 11/12 physics students. Features lectures by world-leading theoretical physicists and hands-on research exposure.",
-    "lastVerified": "2026-05"
+    "lastVerified": "2026-08"
   },
   {
     "id": 32,
@@ -478,7 +478,7 @@
     "eligibility": "Grade 11–12 Canadian students with strong math and physics background",
     "deadline": "TBA",
     "url": "https://uwaterloo.ca/institute-for-quantum-computing/outreach/qsys",
-    "description": "Intensive week-long dive into quantum information science and cryptography at IQC, University of Waterloo (formerly known as QCSYS, now rebranded QSYS). Combines lectures, hands-on labs, and direct interaction with quantum computing researchers.",
+    "description": "Applications typically close in mid-May for the August session. Week-long dive into quantum information science and cryptography at IQC, University of Waterloo (formerly QCSYS), with lectures, labs and direct researcher access.",
     "lastVerified": "2026-08"
   },
   {
@@ -683,7 +683,7 @@
     "deadline": "TBA",
     "url": "https://studentsonice.com/",
     "description": "Fully funded scholarships for high school students to join scientific expeditions to the Arctic or Antarctic. Students conduct hands-on environmental and climate field research alongside polar scientists, Indigenous knowledge holders, and global youth peers.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 46,
@@ -716,8 +716,8 @@
     "eligibility": "Alberta high school students; teams of 4–6",
     "deadline": "TBA",
     "url": "https://www.apega.ca/educators-students/k-12/science-olympics",
-    "description": "Province-wide engineering and geoscience competition: high school teams solve timed, hands-on STEM challenges built around physics and engineering principles. Regional events feed the provincial finals.",
-    "lastVerified": "2026-05"
+    "description": "The 2025–26 season has concluded; next year's events are posted in the fall. Province-wide engineering and geoscience competition where high school teams solve timed, hands-on STEM challenges. Regionals feed the provincial finals.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 49,
@@ -750,7 +750,7 @@
     "eligibility": "Canadian high school students grades 9–12; teams of up to 15",
     "deadline": "TBA",
     "url": "https://etalentcanada.ca/for-educators/programs/cybertitan",
-    "description": "Canada's national cybersecurity education initiative. Teams are placed in simulated, real-time cyber defense scenarios where they research vulnerabilities, secure operating systems, and defend networks against attacks. Alberta teams regularly compete at nationals.",
+    "description": "Team registration runs April through October each year; the season runs October to February with a national finale in May. Teams defend simulated networks in real-time cyber defence scenarios.",
     "lastVerified": "2026-08"
   },
   {
@@ -785,7 +785,7 @@
     "deadline": "TBA",
     "url": "https://www.canadianbiologyolympiad.ca/",
     "description": "Premier biology competition for Canadian high schoolers requiring university-level reading, physiological data analysis, and laboratory knowledge. Top-scoring students are selected to represent Canada at the International Biology Olympiad (IBO).",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 54,
@@ -801,8 +801,8 @@
     "eligibility": "Alberta students who qualify through a regional science fair (e.g., CYSF, SARSF); top projects advance to CWSF, then ISEF selection",
     "deadline": "TBA",
     "url": "https://www.societyforscience.org/isef/",
-    "description": "Students submit independent STEM research for a chance to join Team Canada at the world's largest pre-college science competition. Distinct from the regional science fair track; the ISEF selection process is highly competitive and evaluates original, publication-quality research.",
-    "lastVerified": "2026-04"
+    "description": "No direct application — Canadian students qualify for Regeneron ISEF through a Society-affiliated regional science fair. The world’s largest pre-college science competition; Team Canada selection is highly competitive.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 55,
@@ -990,7 +990,7 @@
     "deadline": "TBA",
     "url": "https://www.qubitbyqubit.org/",
     "description": "Globally recognized virtual program introducing high school students to quantum mechanics and quantum programming. Students conduct simulated quantum research and run code on real quantum computers via cloud access. Need-based scholarships available.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 70,
@@ -1040,7 +1040,7 @@
     "eligibility": "High school students at participating Alberta schools",
     "deadline": "TBA",
     "url": "https://uwaterloo.ca/centre-advanced-science-education/science-contests/sir-isaac-newton-exam",
-    "description": "Complex physics exam hosted by the University of Waterloo. The open-ended, challenging problems encourage months of independent study into advanced mechanics and theoretical physics. Top Alberta scorers are recognized nationally.",
+    "description": "Registration opens in mid-March; the exam is written at your school on the first Thursday of May. A demanding open-ended physics exam from the University of Waterloo that rewards months of independent study.",
     "lastVerified": "2026-08"
   },
   {
@@ -1160,7 +1160,7 @@
     "deadline": "TBA",
     "url": "https://hackthenorth.com/",
     "description": "Canada's largest hackathon hosted by the University of Waterloo. High school developers, designers, and innovators research a problem and build a functional tech product or web platform in 36 hours. Travel grants available. Highly competitive national application.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 82,
@@ -1296,7 +1296,7 @@
     "deadline": "TBA",
     "url": "https://developer.apple.com/swift-student-challenge/",
     "description": "Premier global coding competition where high school app developers design, research, and submit an original Swift playground or iOS app. Winners receive exclusive Apple development tools, WWDC access, and global recognition.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 93,
@@ -1447,10 +1447,10 @@
     "stipend": null,
     "location": "School-based across Alberta (national competition)",
     "eligibility": "Canadian high school students; administered through participating schools",
-    "deadline": "TBA",
+    "deadline": "2026-10-22",
     "url": "https://cms.math.ca/competitions/comc/",
-    "description": "Canada's premier high school math competition. Top Alberta scorers receive university networking opportunities and invitations to the Canadian Mathematical Olympiad (CMO) and exclusive summer math research camps.",
-    "lastVerified": "2026-04"
+    "description": "Registration for the 2026 COMC closes October 22 (October 15 for shipped exams), with the contest written October 29. Canada's premier high school math competition; top Alberta scorers earn invitations to the Canadian Mathematical Olympiad and summer math research camps.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 106,
@@ -1484,7 +1484,7 @@
     "deadline": "TBA",
     "url": "https://triumf.ca/education/",
     "description": "Highly prestigious 6-week summer research experience at Canada's particle accelerator centre. Students work alongside physicists on cutting-edge nuclear and particle physics research. Located in BC but accepts highly competitive Alberta applications.",
-    "lastVerified": "2026-05"
+    "lastVerified": "2026-08"
   },
   {
     "id": 108,
