@@ -64,7 +64,7 @@
     "eligibility": "Grade 11 students; focus on underrepresented groups in STEM, open to all genders",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/women-in-scholarship-engineering-science-technology/programs/summer-research-program/index.html",
-    "description": "6-week paid STEM research internship. ~40 spots. Lab or field work with UofA researchers. Running since 1984.",
+    "description": "Student applications open in early March and close in early April for the July-August placement. Paid summer research at the U of A for students underrepresented in STEM, ending with a celebration event in August.",
     "lastVerified": "2026-08"
   },
   {
@@ -81,8 +81,8 @@
     "eligibility": "Women high school students interested in engineering",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/engineering/community-giving/discovere-camps/fem-plus-engineering-mentorship-program.html",
-    "description": "7-month mentorship pairing high school students with UofA engineering students. Info sessions and social events included.",
-    "lastVerified": "2026-03"
+    "description": "Applications for the 2025/26 cohort are closed; the next intake is announced on the DiscoverE site. A mentorship program pairing students with women in engineering at the U of A, with study nights, campus tours and design challenges in the Elko Engineering Garage.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 7,
@@ -236,8 +236,8 @@
     "eligibility": "High school students worldwide; requires a school or community lab sponsor and a teacher or faculty PI",
     "deadline": "TBA",
     "url": "https://competition.igem.org/",
-    "description": "The world's premier synthetic biology competition for students. Teams design, build, and test an original biological engineering project over several months, presenting at the annual Grand Jamboree. Alberta has had teams from Edmonton and Calgary.",
-    "lastVerified": "2026-03"
+    "description": "Team registration for the 2026 season is closed. iGEM's High School Competition is entered as a school team under a teacher acting as PI, not by individual students; teams design a synthetic biology project across the season for the international jamboree.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 17,
@@ -304,8 +304,8 @@
     "eligibility": "High school students (Grade 11–12) with strong interest in computing; open to all genders",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/computing-science/explore/hs-internships/index.html",
-    "description": "No longer offered: UAlberta discontinued HIP from summer 2025 onward. Was a paid 6-week summer internship in the Computing Science department spanning AI, game development, and machine learning.",
-    "lastVerified": "2026-07",
+    "description": "This program has been discontinued — the University of Alberta states the HIP internship \"will no longer be offered for Summer 2025 and onwards.\" It previously placed high school students in computing science research labs.",
+    "lastVerified": "2026-08",
     "active": false
   },
   {
@@ -372,9 +372,9 @@
     "stipend": null,
     "location": "Lethbridge (in-person)",
     "eligibility": "High school students; southern Alberta focus",
-    "deadline": "Ongoing",
+    "deadline": "TBA",
     "url": "https://www.ulethbridge.ca/destination-exploration",
-    "description": "Registration is rolling — camps, FriYAY STEM clubs and workshops run year-round as space allows. Hands-on STEM programming at ULethbridge that puts high school students into university research facilities.",
+    "description": "The high-school stream is InSRA, a six-week paid Indigenous Summer Research Academy ($3,000 award, plus a $500 travel bursary) for students who have completed Grade 11, running alongside HYRS at ULethbridge. There is also a 3-week paid summer intern role for Gr 9+. Dates for the next cycle are not yet posted.",
     "lastVerified": "2026-08",
     "active": false
   },
@@ -495,7 +495,7 @@
     "eligibility": "Black high school students in grades 10–11 interested in engineering and applied research",
     "deadline": "TBA",
     "url": "https://outreach.engineering.utoronto.ca/blueprint/",
-    "description": "Free summer program with year-long engagement for Black high school students in grades 10–11. Builds engineering and applied research skills through mentorship by UofT faculty and senior students.",
+    "description": "Applications open in late November and close in mid-April for the following summer. A free U of T engineering program: a July intensive on the St. George campus, followed by biweekly events from October through February.",
     "lastVerified": "2026-08"
   },
   {
@@ -530,7 +530,7 @@
     "deadline": "TBA",
     "url": "https://brainbee.ca/",
     "description": "Regional neuroscience knowledge competitions for high school students in Calgary and Edmonton. Winners advance to the national Brain Bee where competitors analyze brain tissue and patient diagnoses. Top finishers represent Canada internationally.",
-    "lastVerified": "2026-07"
+    "lastVerified": "2026-08"
   },
   {
     "id": 36,
@@ -547,7 +547,7 @@
     "deadline": "TBA",
     "url": "https://www.immerse.education/",
     "description": "Online academic program where students work directly with university tutors to research and draft a university-level paper. Research tracks available in medicine, computer science, engineering, and more. Builds academic writing and independent research skills.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 37,
@@ -646,10 +646,10 @@
     "stipend": null,
     "location": "Virtual (fully accessible to Alberta students)",
     "eligibility": "High school students ages 13–18; teams of 2–5",
-    "deadline": "TBA",
+    "deadline": "2026-10-30",
     "url": "https://conrad.spacecenter.org/",
-    "description": "International innovation competition where student teams research and develop science and technology solutions for global issues in Aerospace, Cyber-Technology, Health, and Energy categories. Fully virtual, making it highly accessible to Alberta students.",
-    "lastVerified": "2026-07"
+    "description": "Phase 1 (Activation) of the 2026-27 Conrad Challenge runs August 27 to October 30, 2026; Phase 2 (Innovation) closes January 8, 2027, with the Innovation Summit April 21-24, 2027. Student teams pitch a commercially viable solution to a real-world problem.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 44,
@@ -734,7 +734,7 @@
     "deadline": "TBA",
     "url": "https://www.insideeducation.ca/",
     "description": "Fully-funded regional summits covering themes like Energy, Water, and Agriculture. High school teams attend expert workshops, conduct environmental field research, and develop action plans to implement back in their local communities.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 50,
@@ -784,7 +784,7 @@
     "eligibility": "Canadian high school students; grades 11–12 recommended",
     "deadline": "TBA",
     "url": "https://www.canadianbiologyolympiad.ca/",
-    "description": "Premier biology competition for Canadian high schoolers requiring university-level reading, physiological data analysis, and laboratory knowledge. Top-scoring students are selected to represent Canada at the International Biology Olympiad (IBO).",
+    "description": "The national exam is written in early April, with a training camp at UBC Okanagan for those selected. The Canadian Biology Olympiad is the qualifying route toward Canada's International Biology Olympiad team.",
     "lastVerified": "2026-08"
   },
   {
@@ -818,7 +818,7 @@
     "eligibility": "High school students aged 13–17 worldwide; competitive application",
     "deadline": "TBA",
     "url": "https://www.nyas.org/learning/high-school-research-programs/the-junior-academy/",
-    "description": "Prestigious fully virtual global program. Accepted students join an international peer network and are mentored by STEM professionals to research and design solutions for real global challenges over a 10-week sprint. Certificate awarded upon completion.",
+    "description": "Applications open April 1 and close in early July, with decisions by August 31. A free online research program from the New York Academy of Sciences where students team up on industry-set challenges with a mentor.",
     "lastVerified": "2026-08"
   },
   {
@@ -836,7 +836,7 @@
     "deadline": "TBA",
     "url": "https://www.pioneeracademics.com/",
     "description": "Rigorous virtual research institute for high school students. Accepted students work one-on-one with university professors across disciplines, from neuroscience to computer science, to produce a peer-reviewed research paper over 8 weeks.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 58,
@@ -852,8 +852,8 @@
     "eligibility": "High school students; apply through CMHF or school",
     "deadline": "TBA",
     "url": "https://cdnmedhall.ca/discoverydays",
-    "description": "Full-day immersive experience in university health science labs and clinical settings. Students attend workshops and interact directly with health researchers at UAlberta or UCalgary, exploring careers in medicine and the health sciences.",
-    "lastVerified": "2026-05"
+    "description": "Student registration opens roughly six weeks before each event and is handled through your school's contact teacher. Discovery Days bring students onto a medical campus for hands-on health-science workshops and career panels with clinicians and researchers.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 59,
@@ -870,7 +870,7 @@
     "deadline": "TBA",
     "url": "https://www.caringforourwatersheds.com/",
     "description": "Environmental research and proposal competition. Students research a local watershed issue, write a detailed solution proposal, and compete for funding to implement their project in their community. Top Alberta entries advance to regional and national judging.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 60,
@@ -973,7 +973,7 @@
     "deadline": "TBA",
     "url": "https://www.tks.world/",
     "description": "Intensive 10-month innovation program where high school students research emerging technologies (AI, genomics, quantum computing), write technical review articles, and build portfolio projects mentored by industry experts. Tuition fee applies; financial aid available.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 69,
@@ -1006,8 +1006,8 @@
     "eligibility": "High school students at participating schools; teams of 3–6",
     "deadline": "TBA",
     "url": "http://ssep.ncesse.org/",
-    "description": "Participating school districts allow high school teams to design real microgravity experiments. Winning proposals are flown to the International Space Station and conducted by astronauts. Requires a school district to opt into the program.",
-    "lastVerified": "2026-04"
+    "description": "Open only where your school or district has joined SSEP as a community — those teams design flight experiments from September 1 to November 3, 2026, with community submissions to NCESSE by November 12 for Mission 22 to the International Space Station.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 71,
@@ -1092,7 +1092,7 @@
     "deadline": "TBA",
     "url": "https://www.historicacanada.ca/programs",
     "description": "Students dig into primary and secondary sources on a topic in Canadian history, culture, or sociology, then present a project or short documentary at regional heritage fairs. Top projects advance nationally.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 78,
@@ -1143,7 +1143,7 @@
     "deadline": "TBA",
     "url": "https://www.stemracing.ca/",
     "description": "Multidisciplinary engineering competition where teams use CAD and CAM software to research aerodynamics, design, and race miniature compressed-air powered F1 cars. Alberta teams actively compete at national championships. Builds skills in design, manufacturing, and project management.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 81,
@@ -1159,7 +1159,7 @@
     "eligibility": "High school students (and undergraduate); competitive application",
     "deadline": "TBA",
     "url": "https://hackthenorth.com/",
-    "description": "Canada's largest hackathon hosted by the University of Waterloo. High school developers, designers, and innovators research a problem and build a functional tech product or web platform in 36 hours. Travel grants available. Highly competitive national application.",
+    "description": "Hacker applications for the September 18-20, 2026 event are closed; the next cycle opens the following summer. Canada's largest hackathon brings 1,000+ students to Waterloo for 36 hours of building, with travel, food and lodging covered.",
     "lastVerified": "2026-08"
   },
   {
@@ -1193,8 +1193,8 @@
     "eligibility": "High school students grades 10–12; strong academic record; bursaries available",
     "deadline": "TBA",
     "url": "https://outreach.engineering.utoronto.ca/pre-university-programs/high-school-program/deep/",
-    "description": "Prestigious enrichment program taught by PhD candidates. High schoolers from across Canada dive into advanced university-level research topics including artificial intelligence, nanotechnology, and biomedical engineering. Need-based bursaries available.",
-    "lastVerified": "2026-07"
+    "description": "Applications open in early March in two rounds — an early-bird round at a lower fee, then a second round through mid-April. DEEP is a paid U of T engineering summer academy running July to mid-August on the St. George campus.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 84,
@@ -1211,7 +1211,7 @@
     "deadline": "TBA",
     "url": "https://launchx.com/",
     "description": "Rigorous global entrepreneurship program where high schoolers form teams to conduct deep market research, prototype a digital or physical tech product, and pitch a fully functioning startup to a panel of investors. MIT-affiliated curriculum.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 87,
@@ -1348,7 +1348,7 @@
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/computing-science/explore/index.html",
     "description": "Specialized enrichment bootcamps run by UAlberta's Computing Science department focusing on applying machine learning algorithms to game design and logic. Students explore AI concepts through hands-on programming projects.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 97,
@@ -1382,7 +1382,7 @@
     "deadline": "TBA",
     "url": "https://youthscience.ca/science-fairs/regional-fairs/",
     "description": "The official regional science fair qualifier hosted at Medicine Hat College for Southeast Alberta. Top projects advance to the Canada-Wide Science Fair (CWSF). Distinct from the CWSF national event already in the directory.",
-    "lastVerified": "2026-05"
+    "lastVerified": "2026-08"
   },
   {
     "id": 100,
@@ -1398,7 +1398,7 @@
     "eligibility": "Camp options run from entering grade 4 up to entering grade 11; registration fee applies",
     "deadline": "TBA",
     "url": "https://active-living.ucalgary.ca/programs/camps",
-    "description": "Summer camps run by the Faculty of Kinesiology's Active Living unit, including Dinos sport camps, outdoor and river camps, and the Minds in Motion STEM stream. Upper-age camps top out at students entering Grade 11, so check the grade band before registering.",
+    "description": "Registration is closed — UCalgary states the camp form \"is no longer available\" while the service is being updated. Active Living runs multi-sport and recreation summer camps on campus; sign up for their notification list for the next intake.",
     "lastVerified": "2026-08"
   },
   {
@@ -1416,7 +1416,7 @@
     "deadline": "TBA",
     "url": "https://csialberta.ca/en/",
     "description": "Exposure to Olympic-level sports science, biometric tracking, and physiological recovery research at state-of-the-art testing facilities used by Canada's national athletes. Students learn how elite performance data is collected and analyzed.",
-    "lastVerified": "2026-07"
+    "lastVerified": "2026-08"
   },
   {
     "id": 102,
@@ -1449,7 +1449,7 @@
     "eligibility": "Canadian high school students; administered through participating schools",
     "deadline": "2026-10-22",
     "url": "https://cms.math.ca/competitions/comc/",
-    "description": "Registration for the 2026 COMC closes October 22 (October 15 for shipped exams), with the contest written October 29. Canada's premier high school math competition; top Alberta scorers earn invitations to the Canadian Mathematical Olympiad and summer math research camps.",
+    "description": "Your teacher registers the school by October 22 (October 15 for shipped exams); the contest is written October 29, 2026. Independent registration opens around September 16 only if your school is not participating. Top scorers are invited to the Canadian Mathematical Olympiad.",
     "lastVerified": "2026-08"
   },
   {
@@ -1501,7 +1501,7 @@
     "deadline": "TBA",
     "url": "https://letstalkscience.ca/",
     "description": "High-level, day-long symposiums run by UAlberta and UCalgary LTS chapters on niche topics like stem cell research, space exploration, and AI ethics. Distinct from the Space Lab/Tomatosphere citizen science programs; these are lecture and lab-based days for high schoolers.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 109,
@@ -1518,7 +1518,7 @@
     "deadline": "TBA",
     "url": "https://www.oceannetworks.ca/learning/",
     "description": "Open to Albertans interested in data science and the environment. Students analyze massive open-source data sets relating to marine biology, ocean chemistry, and climate from ONC's global sensor network. Virtual participation accessible from anywhere in Canada.",
-    "lastVerified": "2026-04"
+    "lastVerified": "2026-08"
   },
   {
     "id": 110,
@@ -1534,7 +1534,7 @@
     "eligibility": "Students entering grades 9 to 12; registration fee applies",
     "deadline": "TBA",
     "url": "https://www.macewan.ca/campus-life/opportunities/design-summer-camp/",
-    "description": "Five-day immersive design camp in Allard Hall covering graphic design, app design, illustration, photography and videography, taught by MacEwan Design instructors and working professionals. All materials provided. 2026 registration has closed; the camp runs annually.",
+    "description": "The camp runs the last week of July, with registration closing in mid-July. A five-day MacEwan design camp covering graphic design, app design, illustration, photography and videography.",
     "lastVerified": "2026-08"
   },
   {
@@ -1585,8 +1585,8 @@
     "eligibility": "Canadian high school students grades 10–12; school nomination or independent application",
     "deadline": "TBA",
     "url": "https://www.forum.ca/",
-    "description": "Program where Alberta students travel to Ottawa to research and simulate federal public policy and international trade negotiations. Students visit Parliament Hill, meet with MPs and diplomats, and participate in legislative debates.",
-    "lastVerified": "2026-04"
+    "description": "Applications for Forum 2027 open soon, for sessions running February 7-12, February 28 - March 5, and April 18-23, 2027. Three hundred students aged 15-18 spend a week in Ottawa meeting MPs and Senators; travel, meals and accommodation are covered, with bursaries against the $995 fee.",
+    "lastVerified": "2026-08"
   },
   {
     "id": 116,
@@ -1653,7 +1653,7 @@
     "eligibility": "Alberta secondary students, entering through a Regional Skills Canada Competition, an online qualifier, or in-school selection where a skill is not offered regionally",
     "deadline": "TBA",
     "url": "https://skillsalberta.com/competition-progression/",
-    "description": "Hands-on competition across more than 40 trade and technology areas, including welding, carpentry, electrical, culinary, baking, web and graphic design, robotics, animation, photography and hairstyling. Regional and qualifying rounds feed the Provincial Skills Canada Competition (May 5–6, 2027), and the highest scorers are invited to join Team Alberta at nationals. Registration usually opens in January.",
+    "description": "Registration for the regional qualifiers opens in early January. Alberta students compete in trades and technology contests at regionals, with winners advancing to the provincial competition and on to Skills Canada nationals.",
     "lastVerified": "2026-08"
   },
   {
@@ -1806,7 +1806,7 @@
     "eligibility": "Students who apply to UCalgary engineering with high school biology are automatically considered, with no separate application. Attendance is a condition of the admission offer.",
     "deadline": "TBA",
     "url": "https://schulich.ucalgary.ca/future-students/undergraduate/admissions/bioengineering-summer-institute",
-    "description": "Four-week summer institute of lectures, labs and field trips at the Schulich School of Engineering, for students entering UCalgary engineering from a high school biology background. Runs daily through late July and August. Students pay a $50 fee and the university covers the rest.",
+    "description": "Runs as a full-time summer course from late July to late August. The UCalgary Bioengineering Summer Institute gives high school students lab exposure to biomedical engineering ahead of a Schulich application.",
     "lastVerified": "2026-08"
   },
   {
@@ -1840,7 +1840,7 @@
     "eligibility": "Any Alberta youth aged 15 to 21. No school nomination and no debate experience required. The parliament is non-denominational and open to members of any belief system.",
     "deadline": "TBA",
     "url": "https://abyp.ca/",
-    "description": "The longest continuously operating youth parliament in Canada, formed in 1920 and still sitting inside the Alberta Legislature between December 26 and 31. Members write their own resolutions and debate them under Westminster rules, with a government side, an opposition and a Speaker moderating. Strong practice for parliamentary procedure, impromptu speaking and public policy. Now known as the Alberta Youth Parliament. The website was still being rebuilt in August 2026, so watch abyp.ca for the next session dates.",
+    "description": "The Alberta Youth Parliament website is currently down — abyp.ca shows only an \"under construction\" placeholder, with no session dates or application details posted. TUXIS Parliament has historically run a winter sitting for youth delegates.",
     "lastVerified": "2026-08"
   },
   {
@@ -1857,7 +1857,7 @@
     "eligibility": "Alberta and Northwest Territories students. Part I is open to every eligible student; the top 50 scorers, plus the top five Grade 10 students, are invited to Part II. Schools register students with the A.H.S.M.C. Board.",
     "deadline": "TBA",
     "url": "https://www.ualberta.ca/en/mathematical-and-statistical-sciences/outreach/alberta-high-school-math-competition/index.html",
-    "description": "The provincial math contest written only by Alberta and NWT students, which makes the field far smaller than the national contests. Part I is 16 multiple-choice questions in 80 minutes, normally the morning of the third Tuesday of November. Part II is five full-solution proof problems over three hours, normally the first Wednesday of February, and fellowships are awarded on those results. No calculators. Ask a math teacher to enter the school. The 2025/26 rounds were November 18 and February 4; the board publishes exact dates each fall.",
+    "description": "Part I is written in November and Part II in early February; your school registers you. The Alberta High School Mathematics Competition is the province's longest-running math contest, run by the U of A.",
     "lastVerified": "2026-08"
   },
   {
@@ -1925,7 +1925,7 @@
     "eligibility": "Any high school physics student. The exam must be proctored by someone holding at least a two-year degree who is not related to a participant, and five students are needed to score as a school team.",
     "deadline": "TBA",
     "url": "https://www.aapt.org/Programs/PhysicsBowl/index.cfm",
-    "description": "An international physics exam written by more than 10,000 students, split into Division I for first-year physics and Division II for second-year. Forty multiple-choice questions in 45 minutes across mechanics, thermodynamics, waves and electromagnetism, scored individually and by school team. The pace is the real difficulty. Ask a science teacher to register the school. The 2026 contest closed February 23 and was written between March 18 and April 3, and AAPT posts the next cycle over the winter.",
+    "description": "Your teacher registers the school by late February; the exam is written between mid-March and early April. A 40-question multiple-choice physics contest run by the American Association of Physics Teachers, open to schools worldwide.",
     "lastVerified": "2026-08"
   },
   {
@@ -1959,7 +1959,7 @@
     "eligibility": "Canadian citizens or permanent residents aged 16 to 18 who are leaders in their community. Students are sponsored by a local Rotary club rather than applying centrally, so start with the Rotary club in your own town.",
     "deadline": "TBA",
     "url": "https://rotaryottawa.com/page/welcome-to-the-rotary-adventure-in-citizenship-program",
-    "description": "Running since 1951, this brings over 150 senior high school students from across Canada to Ottawa for four days. The program normally includes a presentation by the Speaker of the House of Commons and a visit to the Chamber, a special sitting of a Citizenship Court, meetings with political leaders and senior officials, and a visit to the Canadian War Museum. Alumni include Adrienne Clarkson, Joe Clark and Ed Broadbent. Participants may also apply for three $1,000 post-secondary scholarships from the Young Citizens Foundation. The 2026 intake has closed, so ask your local Rotary club about 2027.",
+    "description": "Apply through your local Rotary club — selection is run by clubs, not centrally, so ask yours about timing. Since 1951 the program has brought 150+ students aged 16-18 to Ottawa for four days of meetings with parliamentarians, plus access to three $1,000 scholarships.",
     "lastVerified": "2026-08"
   },
   {
@@ -2078,7 +2078,7 @@
     "eligibility": "Canadian citizen or permanent resident who has been a student for at least one term in the current school year, or took part in Odyssey in the last two years. No French level is required, from beginner up. Places are awarded by a randomized computer draw, not on merit, and applicants who miss the first draw go into a wait pool for institutional draws from March to July.",
     "deadline": "TBA",
     "url": "https://englishfrench.ca/explore/",
-    "description": "A federally funded French immersion program that sends you to another part of Canada for about five weeks of classes, workshops and cultural activities, living in residence or with a host family. The bursary covers tuition, meals, lodging and activities; you pay a non-refundable registration fee, your travel and your spending money. Useful groundwork if you are aiming at federal public service, diplomacy or the House of Commons Page Program, all of which test spoken French. Application portals open September 14, 2026 for the 2027 sessions. The site does not publish a dollar value for the bursary, so ignore the figures quoted second-hand elsewhere.",
+    "description": "Application portals open September 14, 2026 for the 2027 sessions. Explore is a federally funded bursary covering tuition, accommodation and meals for a spring or summer French immersion session in another province, for students aged 16 and up.",
     "lastVerified": "2026-08"
   },
   {
