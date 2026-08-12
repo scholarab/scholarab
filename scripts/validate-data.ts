@@ -196,7 +196,7 @@ for (const p of programs) {
 //  4. A source that is also a live page, which shadows the real listing.
 const STATIC_ROUTES = new Set([
   '/', '/scholarships/', '/programs/', '/match/', '/about/', '/educators/',
-  '/guides/', '/updates/', '/saved/', '/app/',
+  '/guides/', '/updates/', '/saved/',
 ]);
 const livePaths = new Set([
   ...scholarships.map((s) => `/scholarships/${generateSlug(String(s.title))}/`),

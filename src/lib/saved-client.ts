@@ -267,7 +267,6 @@ export function initSaved() {
     if (!prefersReducedMotion()) {
       btn.animate?.(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
     }
-    navigator.vibrate?.(12);
     showToast('Removed from saved');
     card.dataset.removing = 'true';
 

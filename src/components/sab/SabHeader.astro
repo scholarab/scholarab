@@ -144,11 +144,17 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
     .sabh-ticker { animation: none; }
   }
 
+  /* The links used to be `display: none` here, because the bottom tab bar
+     carried navigation at these widths. That bar is gone, so hiding them
+     would leave a narrow window with no way off the page but the logo. They
+     wrap onto their own row instead. */
   @media (max-width: 900px) {
-    .sabh-nav { padding: 18px 20px; }
-    .sabh-link { display: none; } /* bottom tab bar covers navigation on mobile */
+    .sabh-nav { padding: 18px 20px; flex-wrap: wrap; gap: 14px 0; }
+    .sabh-links { flex-wrap: wrap; gap: 14px 22px; width: 100%; }
+    .sabh-link { font-size: 14px; padding-bottom: 2px; }
   }
   @media (max-width: 480px) {
+    .sabh-links { gap: 12px 18px; }
     .sabh-cta { padding: 8px 16px; font-size: 13px; }
   }
 </style>

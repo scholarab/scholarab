@@ -5,9 +5,29 @@
 // writes), but the value is a map rather than an id list: a listing's ticks
 // have to outlive un-saving and re-saving it. Someone who ticks three steps,
 // removes the award, then puts it back should not lose the three ticks.
-import { STEP_COUNT, normalizeStepFlags, stepsDone } from './app-core.ts'
+//
+// STEP_COUNT and the two flag helpers below came from app-core.ts, which was
+// deleted with /app. This is the only module that reads them.
 
 export const STEPS_KEY = 'scholarab_app_steps'
+
+/** The four things a student does before submitting. */
+export const STEP_COUNT = 4
+
+/**
+ * Coerce stored ticks to exactly STEP_COUNT booleans. Anything unreadable reads
+ * as untouched: an unticked step is the safe default, since the student can see
+ * at a glance that it is wrong and fix it with one tap, whereas a spuriously
+ * ticked one quietly tells them work is done that isn't.
+ */
+export function normalizeStepFlags(raw: unknown): boolean[] {
+  const arr = Array.isArray(raw) ? raw : []
+  return Array.from({ length: STEP_COUNT }, (_, i) => arr[i] === true)
+}
+
+export function stepsDone(flags: readonly boolean[]): number {
+  return flags.filter(Boolean).length
+}
 
 /** id → exactly STEP_COUNT booleans. Ids with nothing ticked are not stored. */
 export type StepMap = Record<number, boolean[]>

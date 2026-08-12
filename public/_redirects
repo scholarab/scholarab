@@ -70,6 +70,14 @@
 /programs/careers-the-next-generation-ict-internships  /programs/careers-the-next-generation-high-school-internships/ 301
 /programs/careers-the-next-generation-ict-internships/ /programs/careers-the-next-generation-high-school-internships/ 301
 
+# 2026-08-12 — the mobile app screen was deleted. "/" is the honest target, not
+# a category page: /app/ already carried <link rel=canonical> to "/", so search
+# engines were treating the two as one page and this just makes that the real
+# response. Bookmarks and any installed home-screen shortcut land on the home
+# page rather than a 404.
+/app  / 301
+/app/ / 301
+
 # Deliberately NOT redirected — these 404, and that is the correct answer.
 # Alberta Innovates' Summer Research Studentship takes registered undergrads
 # only, Concordia University of Edmonton runs no high school program, and the

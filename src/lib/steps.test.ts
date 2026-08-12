@@ -144,6 +144,31 @@ describe('cross-tab writes', () => {
   })
 })
 
+// Moved here from app-core.test.ts when /app was deleted and the helpers
+// came with it.
+describe('step flags', () => {
+  it('always yields exactly STEP_COUNT booleans', async () => {
+    const { normalizeStepFlags, STEP_COUNT } = await import('./steps')
+    expect(normalizeStepFlags(null)).toEqual([false, false, false, false])
+    expect(normalizeStepFlags([true])).toEqual([true, false, false, false])
+    expect(normalizeStepFlags([true, true, true, true, true])).toHaveLength(STEP_COUNT)
+  })
+
+  it('treats anything that is not a literal true as untouched', async () => {
+    const { normalizeStepFlags } = await import('./steps')
+    // A truthy-but-wrong stored value must not read as done: a spurious tick
+    // tells a student work is finished that isn't.
+    expect(normalizeStepFlags([1, 'yes', {}, []])).toEqual([false, false, false, false])
+  })
+
+  it('counts progress', async () => {
+    const { stepsDone } = await import('./steps')
+    expect(stepsDone([true, false, true, false])).toBe(2)
+    expect(stepsDone([false, false, false, false])).toBe(0)
+    expect(stepsDone([true, true, true, true])).toBe(4)
+  })
+})
+
 describe('unwritable storage', () => {
   it('keeps ticks for the session when persisting throws', async () => {
     const { toggleStep, getSteps } = await import('./steps')

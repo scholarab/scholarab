@@ -311,7 +311,6 @@ const breadcrumbJson = {
   ogUrl={d.canonical}
   canonical={d.canonical}
   ogImage={'ogImage' in d ? d.ogImage : undefined}
-  currentPath={d.currentPath}
   robots={d.noindex ? 'noindex' : undefined}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(d.ldJson)} slot="head" />

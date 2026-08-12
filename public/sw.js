@@ -1,5 +1,8 @@
-const CACHE_NAME = 'scholarab-v6';
-const PAGES_TO_CACHE = ['/', '/app', '/scholarships', '/programs', '/saved', '/about', '/offline.html'];
+// v7: /app was deleted. The bump matters — activate() drops every cache whose
+// key isn't this one, which is what evicts the stale /app page from browsers
+// that already have it.
+const CACHE_NAME = 'scholarab-v7';
+const PAGES_TO_CACHE = ['/', '/scholarships', '/programs', '/saved', '/about', '/offline.html'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

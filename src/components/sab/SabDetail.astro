@@ -372,7 +372,6 @@ const chip =
         [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
         { duration: 380, easing: 'ease-out' }
       );
-      navigator.vibrate?.(12);
       const next = type === 'program' ? toggleSavedProgram(id) : toggleSaved(id);
       const nowSaved = next.includes(id);
       applySaveState(save, nowSaved);

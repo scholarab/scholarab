@@ -5,7 +5,7 @@ import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti, generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { QUIZ_QUESTIONS, QUIZ_STORAGE_KEY } from '../lib/app-core.ts'
+import { QUIZ_QUESTIONS, QUIZ_STORAGE_KEY } from '../lib/quiz.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -16,8 +16,8 @@ interface Props {
 
 // ── Questions ─────────────────────────────────────────────────────────────────
 
-// Shared with the in-app quiz on /app so both surfaces write identical answers
-// to the same localStorage key. Edit the list in app-core, not here.
+// Edit the list in lib/quiz.ts, not here — the matcher reads the same option
+// values, so the two have to move together.
 const QUESTIONS = QUIZ_QUESTIONS
 
 // DOM text stays sentence-case (tests and E2E match on it); the chips render

@@ -1,6 +1,4 @@
 ---
-import BottomNav from '../components/BottomNav.astro';
-import MobileMaintenance from '../components/MobileMaintenance.astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
@@ -11,7 +9,6 @@ interface Props {
   ogDescription?: string;
   ogUrl?: string;
   canonical?: string;
-  currentPath: string;
   robots?: string;
   /** Absolute URL of a page-specific OG image; falls back to the site-wide one. */
   ogImage?: string;
@@ -26,7 +23,6 @@ const {
   ogDescription,
   ogUrl,
   canonical,
-  currentPath,
   robots,
   ogImage = 'https://www.scholarab.ca/og-image.png',
   ogType = 'website',
@@ -80,8 +76,6 @@ const {
     <main id="main-content" class="w-full flex-1">
       <slot />
     </main>
-    <BottomNav currentPath={currentPath} />
-    <MobileMaintenance />
     <script>
       import { syncTrackingOptOut } from '../lib/events.ts';
 
@@ -90,12 +84,6 @@ const {
       // that — running it here means the link works from any page on the site.
       document.addEventListener('astro:page-load', syncTrackingOptOut);
       syncTrackingOptOut();
-
-      // Haptic on filter/sort pills and bn-tabs
-      document.addEventListener('click', (e) => {
-        const pill = (e.target as HTMLElement).closest('.sort-pill, .tab-pill, .bn-tab');
-        if (pill) navigator.vibrate?.(6);
-      }, { passive: true });
 
       // Radix/Vaul sets body pointer-events:'none' when a modal/drawer is open.
       // If navigation happens before cleanup, the body stays blocked. Reset it on every swap.
@@ -138,89 +126,6 @@ const {
         } catch { /* ignore */ }
       });
 
-      // ── Swipe navigation (Web K pattern) ────────────────────
-      // Clean swipe direction flag after every transition
-      document.addEventListener('astro:after-swap', () => {
-        delete (document.documentElement.dataset as Record<string, string>).swipeDir;
-      });
-
-      (function initSwipeNav() {
-        const PAGES = ['/', '/scholarships', '/programs', '/saved', '/about'];
-        const THRESHOLD = 50;   // px — commit distance (Web K uses 50px)
-        const EDGE_GUARD = 20;  // px — ignore touches near screen edge (iOS back gesture)
-
-        let startX = 0, startY = 0;
-        let cancelled = false;
-        let locked = false;     // true once horizontal intent is confirmed
-
-        // Don't intercept touches on horizontally scrollable elements (filter chips, etc.)
-        function isHorizontalScroller(el: Element | null): boolean {
-          while (el && el !== document.body) {
-            const ox = getComputedStyle(el).overflowX;
-            if (ox === 'auto' || ox === 'scroll') return true;
-            el = el.parentElement;
-          }
-          return false;
-        }
-
-        // Don't fire while a modal/drawer has locked the page
-        function isDrawerOpen(): boolean {
-          return document.body.style.pointerEvents === 'none';
-        }
-
-        // TEMPORARY (2026-08-12): remove with MobileMaintenance. Swipes land on
-        // the maintenance screen, which sits at exactly the widths this runs at.
-        const maintenance = window.matchMedia('(max-width: 767px)');
-
-        document.addEventListener('touchstart', (e) => {
-          if (maintenance.matches) { cancelled = true; return; }
-          const t = e.touches[0];
-          if (!t) { cancelled = true; return; }
-          startX = t.pageX;
-          startY = t.pageY;
-          cancelled = false;
-          locked = false;
-          if (startX <= EDGE_GUARD || startX >= window.innerWidth - EDGE_GUARD) { cancelled = true; return; }
-          if (isHorizontalScroller(e.target as Element)) { cancelled = true; return; }
-          if (isDrawerOpen()) { cancelled = true; }
-        }, { passive: true });
-
-        document.addEventListener('touchmove', (e) => {
-          if (cancelled) return;
-          const t = e.touches[0];
-          if (!t) return;
-          const dx = t.pageX - startX;
-          const dy = t.pageY - startY;
-          if (!locked) {
-            // Vertical intent detected — cancel horizontal swipe
-            if (Math.abs(dy) > 20 && Math.abs(dy) > Math.abs(dx)) { cancelled = true; return; }
-            if (Math.abs(dx) > 10) locked = true;
-          }
-        }, { passive: true });
-
-        document.addEventListener('touchend', async (e) => {
-          if (cancelled || !locked) return;
-          const t = e.changedTouches[0];
-          if (!t) return;
-          const dx = t.pageX - startX;
-          if (Math.abs(dx) < THRESHOLD) return;
-
-          const path = window.location.pathname;
-          const idx = PAGES.findIndex(p => p === '/' ? path === '/' : path.startsWith(p));
-          if (idx === -1) return;
-
-          const nextPage = PAGES[dx < 0 ? idx + 1 : idx - 1];
-          if (!nextPage) return;
-
-          navigator.vibrate?.(6);
-
-          // Tag direction so CSS can flip the transition animation
-          document.documentElement.dataset.swipeDir = dx < 0 ? 'left' : 'right';
-
-          const { navigate } = await import('astro:transitions/client');
-          navigate(nextPage);
-        }, { passive: true });
-      })();
     </script>
 
     <style is:global>
