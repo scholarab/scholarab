@@ -88,8 +88,19 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
   .sabh-cta {
     font-size: 14px; font-weight: 600; background: #2FD3A0; color: #0B1512;
     padding: 10px 20px; border-radius: 100px; text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease,
+                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
-  .sabh-cta:hover { background: #F2F0E9; color: #0B1512; }
+  .sabh-cta:hover, .sabh-cta:focus-visible {
+    background: #F2F0E9; color: #0B1512;
+    transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #2FD3A0;
+  }
+  .sabh-cta:active {
+    transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sabh-cta, .sabh-cta:hover, .sabh-cta:focus-visible, .sabh-cta:active { transform: none; transition: none; }
+  }
 
   /* fishback2026.com campaign-ticker parity: Manrope 600 14px, solid band,
      45px tall, 60px between items, 30s linear loop, 1px underline offset 3px */

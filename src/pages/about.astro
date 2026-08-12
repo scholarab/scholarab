@@ -162,12 +162,22 @@ const principles = [
     display: inline-flex; align-items: center; gap: 10px;
     color: #141915; font-weight: 600; font-size: 15px;
     padding: 13px 24px; border-radius: 100px; text-decoration: none;
-    transition: box-shadow 160ms ease, border-color 160ms ease;
+    transition: border-color 0.18s ease,
+                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
+  .saba-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
   .saba-btn-solid { border: 1.5px solid rgba(20,25,21,0.85); background: #FFFFFF; }
-  .saba-btn-solid:hover { box-shadow: 3px 3px 0 #2FD3A0; color: #141915; }
+  .saba-btn-solid:hover, .saba-btn-solid:focus-visible {
+    color: #141915; transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #2FD3A0;
+  }
   .saba-btn-outline { border: 1.5px solid rgba(20,25,21,0.3); }
-  .saba-btn-outline:hover { border-color: #141915; color: #141915; }
+  .saba-btn-outline:hover, .saba-btn-outline:focus-visible {
+    border-color: #141915; color: #141915;
+    transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #2FD3A0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .saba-btn, .saba-btn:hover, .saba-btn:focus-visible, .saba-btn:active { transform: none; transition: none; }
+  }
 
   .saba-creator { font-size: 16px; line-height: 1.6; color: rgba(20,25,21,0.65); margin: 40px 0 0; }
   .saba-creator-name { color: #141915; font-weight: 700; }
