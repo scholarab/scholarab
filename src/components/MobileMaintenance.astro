@@ -1,0 +1,131 @@
+---
+// TEMPORARY (2026-08-12): mobile is held behind a maintenance screen while work
+// is in progress. Revert this component and its two lines in Layout.astro to
+// bring phones back. Below 768px only, matching BottomNav's `md:hidden`.
+//
+// The page underneath stays in the DOM on purpose: a crawler that does not run
+// CSS still gets the real content, so a day of this does not empty the index.
+---
+
+<div id="sab-maint" role="status" aria-live="polite">
+  <div class="sab-maint-card">
+    <span class="sab-maint-badge">Maintenance</span>
+    <h1>We're working on it</h1>
+    <p class="sab-maint-lead">
+      ScholarAB is temporarily unavailable on phones while we make some fixes.
+      We'll be back in under 24 hours.
+    </p>
+    <p class="sab-maint-note">
+      Everything still works on a laptop or desktop if you need it right now.
+    </p>
+    <span class="sab-maint-mark">ScholarAB</span>
+  </div>
+</div>
+
+<style is:global>
+  #sab-maint { display: none; }
+
+  @media (max-width: 767px) {
+    /* Above BottomNav's 9999. */
+    #sab-maint {
+      display: flex;
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+      padding: 32px 24px calc(32px + env(safe-area-inset-bottom));
+      background-color: #FAF7F0;
+      color: #141915;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* The page underneath must not scroll behind the screen. */
+    html:has(#sab-maint),
+    body:has(#sab-maint) {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
+    .sab-maint-card {
+      max-width: 22rem;
+      text-align: center;
+    }
+
+    .sab-maint-badge {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background-color: #2FD3A0;
+      color: #0B1F18;
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #sab-maint h1 {
+      margin: 0 0 14px;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 2.25rem;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .sab-maint-lead {
+      margin: 0 0 12px;
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.55;
+      color: #3A423C;
+    }
+
+    .sab-maint-note {
+      margin: 0;
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: #6B736C;
+    }
+
+    .sab-maint-mark {
+      display: block;
+      margin-top: 36px;
+      font-family: 'Archivo', system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9AA19A;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Keep the covered page out of reach of the keyboard and screen readers while
+  // the maintenance screen is up. CSS alone only hides it visually.
+  (function () {
+    // ClientRouter re-runs inline scripts on every swap; the listeners below
+    // live on window/document, which survive it, so register them once.
+    if (window.__sabMaintInit) return;
+    window.__sabMaintInit = true;
+
+    const mq = window.matchMedia('(max-width: 767px)');
+    function apply() {
+      const main = document.getElementById('main-content');
+      const nav = document.getElementById('bottom-nav');
+      [main, nav].forEach(function (el) {
+        if (!el) return;
+        if (mq.matches) el.setAttribute('inert', '');
+        else el.removeAttribute('inert');
+      });
+    }
+    apply();
+    mq.addEventListener('change', apply);
+    document.addEventListener('astro:page-load', apply);
+  })();
+</script>

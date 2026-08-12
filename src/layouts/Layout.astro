@@ -1,5 +1,6 @@
 ---
 import BottomNav from '../components/BottomNav.astro';
+import MobileMaintenance from '../components/MobileMaintenance.astro';
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
@@ -80,6 +81,7 @@ const {
       <slot />
     </main>
     <BottomNav currentPath={currentPath} />
+    <MobileMaintenance />
     <script>
       import { syncTrackingOptOut } from '../lib/events.ts';
 
@@ -166,7 +168,12 @@ const {
           return document.body.style.pointerEvents === 'none';
         }
 
+        // TEMPORARY (2026-08-12): remove with MobileMaintenance. Swipes land on
+        // the maintenance screen, which sits at exactly the widths this runs at.
+        const maintenance = window.matchMedia('(max-width: 767px)');
+
         document.addEventListener('touchstart', (e) => {
+          if (maintenance.matches) { cancelled = true; return; }
           const t = e.touches[0];
           if (!t) { cancelled = true; return; }
           startX = t.pageX;
