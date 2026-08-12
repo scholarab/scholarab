@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import {
-  ALERT_MILESTONES, isMilestone, parseCadence, formatCadence, cadenceFromInput, cadenceSentence,
+  ALERT_MILESTONES, isMilestone, parseCadence, formatCadence, cadenceFromInput,
 } from './alerts'
 
 describe('isMilestone', () => {
@@ -76,18 +76,6 @@ describe('cadenceFromInput', () => {
 
   it('deduplicates within the allowed length', () => {
     expect(cadenceFromInput([14, 14])).toEqual([14])
-  })
-})
-
-describe('cadenceSentence', () => {
-  it('reads as a sentence at every length', () => {
-    expect(cadenceSentence([30, 14, 3])).toBe('30, 14 and 3 days')
-    expect(cadenceSentence([30, 3])).toBe('30 and 3 days')
-    expect(cadenceSentence([14])).toBe('14 days')
-  })
-
-  it('does not depend on the order it is given', () => {
-    expect(cadenceSentence([3, 30, 14])).toBe('30, 14 and 3 days')
   })
 })
 

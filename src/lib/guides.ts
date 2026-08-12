@@ -13,8 +13,9 @@ export type GuideMeta = {
   dateModified: string
   /**
    * Three-line "what you need to know" summary, drawn from the guide's own
-   * prose. The /app guide reader shows these above a link through to the full
-   * page — an app-sized version of the guide rather than a copy of it.
+   * prose. Written for the /app guide reader, which was deleted 2026-08-12 —
+   * nothing renders these today. Kept because it is authored content, not
+   * mobile plumbing: a guide-summary block on the web pages would use it as-is.
    */
   takeaways: [string, string, string]
 }
