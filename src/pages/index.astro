@@ -462,7 +462,7 @@ const matchGroups = [
 
   .sab-stats { display: flex; border-left: 1px solid rgba(242,240,233,0.18); }
   .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(242,240,233,0.18); }
-  .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; }
+  .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; font-variant-numeric: tabular-nums; }
   .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); margin-top: 6px; white-space: nowrap; }
 
   /* ── Closing this week ── */
@@ -575,29 +575,88 @@ const matchGroups = [
   }
 
   /* ── Responsive (the design specifies ≥1080px; below is adapted) ── */
+  /* Phone layout: "ScholarAB Mobile Home.dc.html". The whole point of state A
+     is that the hero stops reserving a viewport for itself, so a student
+     lands on the promise, the money, the counts *and* the name of one
+     closing scholarship without scrolling. */
   @media (max-width: 900px) {
     .sab-container { padding-left: 20px; padding-right: 20px; }
-    .sab-hero-body { padding-top: 44px; }
-    .sab-hero-bottom { flex-direction: column; align-items: flex-start; margin-top: 36px; padding-bottom: 44px; }
-    .sab-stats { border-left: none; width: 100%; }
-    .sab-stat { padding: 6px 24px 6px 0; border-right: none; }
-    .sab-stat + .sab-stat { padding-left: 24px; border-left: 1px solid rgba(242,240,233,0.18); }
-    .sab-stat-value { font-size: 32px; }
-    .sab-stat-label { font-size: 10.5px; }
-    .sab-closing { padding-top: 56px; }
+    /* The rule that ate the phone viewport. Nothing else in the hero
+       changes shape; it simply stops padding itself out to 100svh. */
+    .sab-hero { min-height: 0; }
+    .sab-hero-body { padding-top: 22px; }
+    .sab-kicker { font-size: 11px; gap: 9px; margin-bottom: 14px; }
+    .sab-kicker-dot { width: 7px; height: 7px; }
+    /* 44px at 390, 41 at 360, 48 at a Pro Max — where the closing list
+       clears one more row above the fold. */
+    .sab-h1 { font-size: clamp(38px, 11.5vw, 48px); }
+    .sab-hero-bottom { flex-direction: column; align-items: stretch; gap: 0; margin-top: 16px; padding-bottom: 20px; }
+    .sab-hero-copy { max-width: none; }
+    .sab-hero-copy p { font-size: 14.5px; line-height: 1.5; margin: 0 0 16px; }
+    .sab-sticker { margin-bottom: 14px; padding: 7px 14px; font-size: 10.5px; }
+    .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 9px; }
+    .sab-btn-accent, .sab-btn-outline { justify-content: center; padding: 0 20px; }
+    .sab-btn-accent { height: 52px; font-size: 16px; }
+    .sab-btn-outline { height: 46px; font-size: 15px; }
+    /* Ledger row: three columns under one hairline, sized so the dollar
+       figure keeps its line and nothing shrinks below 9.5px. */
+    .sab-stats {
+      border-left: none; width: 100%;
+      margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(242,240,233,0.18);
+    }
+    .sab-stat { flex: 1; min-width: 0; padding: 0 12px 0 0; border-right: none; }
+    .sab-stat + .sab-stat { padding-left: 14px; border-left: 1px solid rgba(242,240,233,0.18); }
+    .sab-stat:first-child { flex: 1.3; }
+    .sab-stat:nth-child(2) { flex: 0.85; }
+    .sab-stat-value { font-size: 27px; }
+    /* "RESEARCH PROGRAMS" wraps at 360 — two lines beats a smaller label. */
+    .sab-stat-label { font-size: 9.5px; margin-top: 5px; white-space: normal; }
+
+    .sab-closing { padding-top: 22px; padding-bottom: 8px; }
     .sab-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
-    .sab-closing-row { grid-template-columns: 1fr auto; gap: 6px 16px; padding: 20px 4px; }
+    .sab-h2 { font-size: 34px; }
+    /* "View all deadlines" belongs under the list it summarizes. Letting the
+       head dissolve into the section's own flex column is what lets the
+       link move without moving it in the markup. */
+    .sab-closing { display: flex; flex-direction: column; }
+    .sab-closing .sab-section-head { display: contents; }
+    .sab-closing .sab-section-head > div { order: 1; }
+    .sab-closing .sab-eyebrow-urgent { font-size: 11.5px; margin-bottom: 8px; }
+    .sab-closing-table { order: 2; margin-top: 12px; }
+    .sab-closing .sab-view-all { order: 3; align-self: flex-start; margin-top: 20px; }
+    .sab-closing-row { grid-template-columns: 1fr auto; gap: 4px 14px; padding: 16px 2px; min-height: 44px; }
     .sab-row-num { display: none; }
-    .sab-row-main { grid-column: 1; }
-    .sab-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; }
-    .sab-row-chip { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
-    .sab-cats { padding-top: 56px; padding-bottom: 56px; }
-    .sab-cat-grid { grid-template-columns: 1fr 1fr; }
-    .sab-match { padding-top: 56px; padding-bottom: 56px; }
-    .sab-match-grid { grid-template-columns: 1fr; gap: 36px; }
-    .sab-match-card { padding: 26px 22px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
+    .sab-row-main { grid-column: 1; min-width: 0; }
+    .sab-row-name { font-size: 16px; line-height: 1.3; }
+    .sab-row-blurb { font-size: 13px; margin-top: 4px; }
+    .sab-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; white-space: nowrap; }
+    .sab-row-chip { grid-column: 1 / -1; justify-self: start; margin-top: 4px; font-size: 11px; padding: 6px 12px; }
+
+    .sab-cats { padding-top: 32px; padding-bottom: 32px; }
+    .sab-cats .sab-section-head { margin-bottom: 22px; }
+    .sab-cats-meta { font-size: 11.5px; }
+    .sab-cat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .sab-cat-card { padding: 16px 14px; min-height: 44px; }
+    .sab-cat-name { font-size: 15px; }
+    .sab-cat-desc { font-size: 12.5px; margin-top: 6px; }
+    .sab-cat-top { gap: 6px; }
+    .sab-cat-count { font-size: 11.5px; }
+
+    .sab-match { padding-top: 34px; padding-bottom: 40px; }
+    .sab-match-grid { grid-template-columns: 1fr; gap: 22px; }
+    .sab-match-eyebrow { font-size: 11.5px; margin-bottom: 12px; }
+    .sab-match-h2 { font-size: 32px; margin-bottom: 12px; }
+    .sab-match-copy { font-size: 15px; }
+    .sab-match-card { padding: 22px 18px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
+    .sab-match-group { margin-bottom: 18px; }
+    .sab-match-label { font-size: 11px; }
+    /* Same chips, taller: 34px was under the tap target minimum. */
+    .sab-match-opt { min-height: 44px; padding: 0 16px; }
+    .sab-match-cta { height: 52px; padding: 0 16px; }
   }
-  @media (max-width: 480px) {
+  /* Two-up survives 390 and 360 — the two-word track names still fit. Below
+     that they don't. */
+  @media (max-width: 359px) {
     .sab-cat-grid { grid-template-columns: 1fr; }
   }
 </style>

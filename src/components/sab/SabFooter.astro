@@ -90,8 +90,11 @@ const footerCols = [
   @media (max-width: 900px) {
     .sabf-top { flex-direction: column; }
     .sabf-cols { gap: 36px; }
-    /* clearance for the fixed bottom tab bar, inside the dark footer */
-    .sabf-inner { padding: 64px 20px 110px; }
+    /* This used to be `padding-bottom: 110px` — clearance for the fixed
+       bottom tab bar. That bar is gone, so it was 70px of dead space at the
+       end of every phone page. */
+    .sabf-inner { padding: 48px 20px 40px; }
+    .sabf-bottom { margin-top: 40px; }
     .sabf-legal { text-align: left; }
   }
 </style>
