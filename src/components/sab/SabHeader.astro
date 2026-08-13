@@ -54,8 +54,6 @@ const withSlash = (p: string) => (p.endsWith('/') ? p : p + '/');
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : withSlash(currentPath).startsWith(withSlash(href));
 
-const isHome = currentPath === '/' || currentPath === '';
-
 // Scrolling announcement band (fishback2026.com-style): a short pair of
 // linked CTAs repeated to fill the loop.
 const tickerPair = [
@@ -113,7 +111,7 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
     would strand a keyboard user on a link screen readers report as absent
     (WCAG 4.1.2). Without both, each half put 8 duplicate stops on all 270 pages.
   */}
-  <div class="sabh-ticker-band" aria-hidden="true" data-home={isHome ? '' : undefined}>
+  <div class="sabh-ticker-band" aria-hidden="true">
     <div class="sabh-ticker">
       {[false, true].map(dup => (
         <span class="sabh-ticker-half" data-dup={dup || undefined}>
@@ -285,12 +283,11 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
       color: rgba(242,240,233,0.4); line-height: 1.6;
     }
 
-    /* 45px is 5% of the viewport. On Home the ticker is the only thing
-       selling the quiz to someone who just landed, so it earns the space;
-       everywhere else the student has already chosen and it competes with
-       what they came for. Decorative and out of the tab order, so hiding
-       it loses nothing. */
-    .sabh-ticker-band:not([data-home]) { display: none; }
+    /* The scrolling band is a desktop-only flourish. On a phone it eats 5%
+       of the viewport, drags the eye away from the content, and can't be
+       read without fighting the motion. Decorative and out of the tab
+       order, so hiding it — Home included — loses nothing. */
+    .sabh-ticker-band { display: none; }
   }
   @media (max-width: 374px) {
     /* Logo + pill + 44px button do not fit at 360 with the full label. */
