@@ -26,3 +26,5 @@ outreach/
 # copy-detection fingerprints (scripts/check-copies.ts) — a canary published
 # next to the data it protects is not a canary
 private/
+# ready-to-post social assets (scripts/generate-social.ts)
+social-out/

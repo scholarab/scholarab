@@ -77,13 +77,18 @@ const {
       <slot />
     </main>
     <script>
-      import { syncTrackingOptOut } from '../lib/events.ts';
+      import { syncTrackingOptOut, recordSourceVisit } from '../lib/events.ts';
 
       // `?nt=1` flags this browser as untracked (`?nt=0` undoes it). sendEvent
       // checks the URL too, but only pages that fire an event would ever reach
       // that — running it here means the link works from any page on the site.
       document.addEventListener('astro:page-load', syncTrackingOptOut);
       syncTrackingOptOut();
+
+      // `?s=ig` etc. records which campaign link the visit came from. Here for
+      // the same reason: a bio link can point at any page on the site.
+      document.addEventListener('astro:page-load', recordSourceVisit);
+      recordSourceVisit();
 
       // Radix/Vaul sets body pointer-events:'none' when a modal/drawer is open.
       // If navigation happens before cleanup, the body stays blocked. Reset it on every swap.

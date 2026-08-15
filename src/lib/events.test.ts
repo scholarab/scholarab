@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { sendEvent, sendEventAfterDwell, optOutOfEvents, syncTrackingOptOut, isLocalPreview } from './events'
+import { sendEvent, sendEventAfterDwell, optOutOfEvents, syncTrackingOptOut, isLocalPreview, parseSource, recordSourceVisit } from './events'
 
 /** happy-dom allows navigation via history, which is enough to set a query. */
 const setSearch = (search: string) => history.replaceState(null, '', '/' + search)
@@ -158,6 +158,67 @@ describe('syncTrackingOptOut', () => {
     } finally {
       Storage.prototype.setItem = original
     }
+  })
+})
+
+describe('parseSource', () => {
+  it('accepts the known campaign codes', () => {
+    for (const s of ['ig', 'tt', 'yt', 'em', 'qr'])
+      expect(parseSource(`?s=${s}`)).toBe(s)
+  })
+
+  it('rejects anything not on the list', () => {
+    // The value comes from a URL anyone can edit, so an unknown code is not a
+    // new channel to start counting — it is someone typing into our database.
+    for (const s of ['', 'IG', 'instagram', 'ig ', 'ilia@example.com', '<script>'])
+      expect(parseSource(`?s=${encodeURIComponent(s)}`)).toBeNull()
+  })
+
+  it('returns null when there is no s param', () => {
+    expect(parseSource('')).toBeNull()
+    expect(parseSource('?nt=1&q=rotary')).toBeNull()
+  })
+
+  it('reads s alongside other params', () => {
+    expect(parseSource('?q=rotary&s=tt')).toBe('tt')
+  })
+})
+
+describe('recordSourceVisit', () => {
+  it('sends the source as meta, with no item attached', () => {
+    setSearch('?s=ig')
+    recordSourceVisit()
+    expect(beaconCalls).toHaveLength(1)
+    expect(JSON.parse(beaconCalls[0]!.body)).toEqual({ event: 'source_visit', meta: 'ig' })
+  })
+
+  it('sends nothing on an untagged visit', () => {
+    setSearch('?q=rotary')
+    recordSourceVisit()
+    expect(beaconCalls).toHaveLength(0)
+  })
+
+  it('counts one visit once, however many pages it touches', () => {
+    setSearch('?s=ig')
+    recordSourceVisit()
+    recordSourceVisit()
+    recordSourceVisit()
+    expect(beaconCalls).toHaveLength(1)
+  })
+
+  it('counts a different source separately', () => {
+    setSearch('?s=ig')
+    recordSourceVisit()
+    setSearch('?s=tt')
+    recordSourceVisit()
+    expect(beaconCalls).toHaveLength(2)
+  })
+
+  it('respects the ?nt=1 opt-out', () => {
+    optOutOfEvents()
+    setSearch('?s=ig')
+    recordSourceVisit()
+    expect(beaconCalls).toHaveLength(0)
   })
 })
 

@@ -8,7 +8,11 @@ import { getClientIp, isRateLimited, recordHit } from '../../lib/rate-limit'
 import { defer } from '../../lib/defer'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'app_step'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'app_step', 'source_visit'])
+// Campaign sources, mirroring SOURCES in src/lib/events.ts. Anyone can type
+// `?s=` into the address bar, so the server keeps its own copy of the list
+// rather than trusting whatever the client sends.
+const ALLOWED_SOURCES = new Set(['ig', 'tt', 'yt', 'em', 'qr'])
 // Real browser UAs never contain a URL, a script-runtime name, or an HTTP
 // library name — bots and fetch libraries almost always do. JS-executing
 // crawlers (Googlebot, Bytespider) all match one of the generic terms.
@@ -74,15 +78,23 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // those two numbers impossible to reconcile.
   if ((itemType === undefined) !== (itemId === undefined))
     return jsonError('itemType and itemId must be sent together', 400)
-  // meta carries the query text for search_empty only — nothing else needs free text
-  if (meta !== undefined && (event !== 'search_empty' || typeof meta !== 'string'))
+  // meta carries the query text for search_empty and the source code for
+  // source_visit — nothing else takes a meta at all
+  const META_EVENTS = new Set(['search_empty', 'source_visit'])
+  if (meta !== undefined && (!META_EVENTS.has(event) || typeof meta !== 'string'))
     return jsonError('meta not allowed for this event', 400)
 
-  // Empty-search queries that can't name a content gap aren't worth a row:
-  // too short to mean anything, no letters, or something email-shaped (PII).
-  // lowercased so "Rotary" and "rotary" aggregate as one search gap.
   let cleanMeta: string | null = null
-  if (typeof meta === 'string') {
+  if (event === 'source_visit') {
+    // A source row with no source is just an untagged visit, which the page
+    // views already count. Reject rather than store a null.
+    if (typeof meta !== 'string' || !ALLOWED_SOURCES.has(meta))
+      return jsonError('unknown source', 400)
+    cleanMeta = meta
+  } else if (typeof meta === 'string') {
+    // Empty-search queries that can't name a content gap aren't worth a row:
+    // too short to mean anything, no letters, or something email-shaped (PII).
+    // lowercased so "Rotary" and "rotary" aggregate as one search gap.
     cleanMeta = meta.trim().toLowerCase().replace(/\s+/g, ' ').slice(0, META_MAX)
     if (cleanMeta.length < 3 || !/\p{L}/u.test(cleanMeta) || EMAIL_LIKE.test(cleanMeta))
       return accepted()

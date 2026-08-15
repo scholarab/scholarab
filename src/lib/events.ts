@@ -5,10 +5,49 @@ export type AppEvent =
   /** First application step ticked on an award. Deduped per item per session,
    *  so it counts students who started something, not ticks. */
   | 'app_step'
+  /** Landed from an off-site campaign link carrying `?s=`. Meta is the source
+   *  code, never free text — see SOURCES. */
+  | 'source_visit'
 
 const OPT_OUT_KEY = 'sa_no_track'
 /** `?nt=1` opts this browser out, `?nt=0` opts back in. */
 const OPT_OUT_PARAM = 'nt'
+
+/** `?s=ig` etc. names which off-site link the visit came from. */
+const SOURCE_PARAM = 's'
+/**
+ * The only source codes that get recorded. A closed set, not free text: the
+ * value arrives from a URL anyone can edit, and an open field would be an
+ * open invitation to write something identifying into the events table.
+ * ig = Instagram, tt = TikTok, yt = YouTube, em = counsellor email, qr = print/QR.
+ */
+export const SOURCES = ['ig', 'tt', 'yt', 'em', 'qr'] as const
+export type Source = (typeof SOURCES)[number]
+
+export function parseSource(search: string): Source | null {
+  try {
+    const v = new URLSearchParams(search).get(SOURCE_PARAM)
+    return v !== null && (SOURCES as readonly string[]).includes(v) ? (v as Source) : null
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Record which campaign link brought this visit, if any.
+ *
+ * Called from the layout on every page load rather than from a landing page,
+ * because a bio link can point at any URL on the site. sendEvent's per-session
+ * dedupe keys on the meta, so one visit counts once per source no matter how
+ * many pages it touches — and a student who arrives from Instagram in the
+ * morning and TikTok at night counts on both.
+ */
+export function recordSourceVisit(): void {
+  try {
+    const source = parseSource(location.search)
+    if (source) sendEvent('source_visit', undefined, undefined, source)
+  } catch { /* never break the page for analytics */ }
+}
 
 // Fallback dedupe when sessionStorage is unavailable (private mode, blocked
 // storage). Module-level, so it survives view-transition swaps within a tab.

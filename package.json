@@ -17,7 +17,8 @@
     "format": "prettier --write src",
     "format:check": "prettier --check src",
     "type-check": "astro check",
-    "type-check:scripts": "tsc -p tsconfig.scripts.json"
+    "type-check:scripts": "tsc -p tsconfig.scripts.json",
+    "social": "TZ=America/Edmonton tsx scripts/generate-social.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",
