@@ -13,8 +13,10 @@ import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 
 interface Props {
   currentPath: string;
+  /** Scrolling announcement band. Home page only (Ilia, 2026-08-19). */
+  ticker?: boolean;
 }
-const { currentPath } = Astro.props;
+const { currentPath, ticker } = Astro.props;
 
 // Counts shown beside two links in the mobile sheet. Same definitions the
 // home hero uses: every scholarship in the directory, and the programs
@@ -61,6 +63,7 @@ const tickerPair = [
   { label: 'Browse scholarships', rest: 'open right now', href: '/scholarships/' },
 ];
 const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
+const showTicker = ticker ?? currentPath === '/';
 ---
 
 <div class="sabh" data-sab-header>
@@ -104,26 +107,30 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
       </button>
     </div>
   </div>
-  {/*
-    The band is decorative: both destinations are already in navItems above, so
-    hiding it costs assistive tech nothing. It is aria-hidden AND its links are
-    tabindex="-1" — aria-hidden alone leaves elements in the tab order, which
-    would strand a keyboard user on a link screen readers report as absent
-    (WCAG 4.1.2). Without both, each half put 8 duplicate stops on all 270 pages.
-  */}
-  <div class="sabh-ticker-band" aria-hidden="true">
-    <div class="sabh-ticker">
-      {[false, true].map(dup => (
-        <span class="sabh-ticker-half" data-dup={dup || undefined}>
-          {tickerItems.map(t => (
-            <span class="sabh-ticker-item">
-              <a href={t.href} draggable="false" tabindex="-1">{t.label}</a>{' '}<span>{t.rest}</span>
+  {showTicker && (
+    <>
+      {/*
+        The band is decorative: both destinations are already in navItems above, so
+        hiding it costs assistive tech nothing. It is aria-hidden AND its links are
+        tabindex="-1" — aria-hidden alone leaves elements in the tab order, which
+        would strand a keyboard user on a link screen readers report as absent
+        (WCAG 4.1.2). Without both, each half put 8 duplicate stops on the page.
+      */}
+      <div class="sabh-ticker-band" aria-hidden="true">
+        <div class="sabh-ticker">
+          {[false, true].map(dup => (
+            <span class="sabh-ticker-half" data-dup={dup || undefined}>
+              {tickerItems.map(t => (
+                <span class="sabh-ticker-item">
+                  <a href={t.href} draggable="false" tabindex="-1">{t.label}</a>{' '}<span>{t.rest}</span>
+                </span>
+              ))}
             </span>
           ))}
-        </span>
-      ))}
-    </div>
-  </div>
+        </div>
+      </div>
+    </>
+  )}
 </div>
 
 <style>
