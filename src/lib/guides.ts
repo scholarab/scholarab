@@ -43,7 +43,7 @@ export const guides: GuideMeta[] = [
     // with the dollar figure, which is the one thing the SERP already shows.
     title: 'Alexander Rutherford Scholarship: amounts and how to apply',
     description:
-      'Applications open August 1 with no closing deadline. What each grade pays (up to $2,500 total), the 75% five-course average you need, and how to apply through Alberta Student Aid.',
+      'Applications open August 1 with no closing deadline. What each grade pays (up to $2,500 total), the 75% five-course average you need, and how to apply.',
     kicker: 'THE BIG ONE',
     minutes: 6,
     datePublished: '2026-07-19',
@@ -119,7 +119,7 @@ export const guides: GuideMeta[] = [
     slug: 'scholarships-for-medicine-hat-students',
     title: 'Scholarships for Medicine Hat students',
     description:
-      'Every scholarship pool a Medicine Hat student can draw from: local service clubs, city and county awards, school-specific funds, and how to work through them.',
+      'Every scholarship pool a Medicine Hat student can draw from: local service clubs, city and county awards, school funds, and how to work through them.',
     kicker: 'MEDICINE HAT',
     minutes: 6,
     datePublished: '2026-07-19',
@@ -134,7 +134,7 @@ export const guides: GuideMeta[] = [
     slug: 'trades-scholarships-rap-alberta',
     title: 'Trades scholarships and RAP in Alberta',
     description:
-      'How the Registered Apprenticeship Program works in Alberta high schools, the scholarships attached to it, and where trades students find money nobody else applies for.',
+      'How the Registered Apprenticeship Program works in Alberta schools, the scholarships attached to it, and the money nobody else applies for.',
     kicker: 'TRADES',
     minutes: 6,
     datePublished: '2026-07-19',

@@ -6,7 +6,7 @@ import SabFonts from '../../components/sab/SabFonts.astro';
 // frontmatter prep differs, so it branches on `kind` below. The merge was
 // verified byte-identical against the previous per-type pages' built HTML.
 import Layout from '../../layouts/Layout.astro';
-import { scholarshipMeta, programMeta } from '../../lib/meta';
+import { scholarshipMetas, programMeta, formatListingDate as formatDate } from '../../lib/meta';
 import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
@@ -35,6 +35,13 @@ export async function getStaticPaths() {
   const buildTime = Date.now();
   const isOpen = (deadline: string | null | undefined) =>
     !deadline || deadline === 'TBA' || deadline === 'Ongoing' || ms(deadline) >= buildTime;
+
+  // Meta descriptions need the whole corpus, not one listing: two awards that
+  // differ only by name generate the same description, and only a pass over
+  // the full list can see that. Same reason "more like this" is computed here.
+  const metaToday = new Date();
+  metaToday.setHours(0, 0, 0, 0);
+  const descriptions = scholarshipMetas(scholarships, (s) => scholarshipStatusOf(s, metaToday), formatDate);
 
   const relatedScholarships = (self: Scholarship): RelatedItem[] =>
     scholarships
@@ -85,6 +92,7 @@ export async function getStaticPaths() {
         program: undefined as Program | undefined,
         position: `LISTING ${i + 1} OF ${scholarships.length}`,
         related: relatedScholarships(s),
+        metaDescription: descriptions[i]!,
         prevSlug: generateSlug(scholarships[(i - 1 + scholarships.length) % scholarships.length]!.title),
         nextSlug: generateSlug(scholarships[(i + 1) % scholarships.length]!.title),
       },
@@ -97,6 +105,7 @@ export async function getStaticPaths() {
         program: p,
         position: `LISTING ${i + 1} OF ${programs.length}`,
         related: relatedPrograms(p),
+        metaDescription: undefined as string | undefined,
         prevSlug: generateSlug(programs[(i - 1 + programs.length) % programs.length]!.name),
         nextSlug: generateSlug(programs[(i + 1) % programs.length]!.name),
       },
@@ -104,14 +113,7 @@ export async function getStaticPaths() {
   ];
 }
 
-const { kind, scholarship, program, position, prevSlug, nextSlug, related } = Astro.props;
-
-function formatDate(str: string | null): string {
-  if (!str) return 'TBA';
-  if (str === 'TBA' || str === 'Ongoing') return str;
-  const d = new Date(str + 'T00:00:00');
-  return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
-}
+const { kind, scholarship, program, position, prevSlug, nextSlug, related, metaDescription } = Astro.props;
 
 const todayDate = new Date();
 todayDate.setHours(0, 0, 0, 0);
@@ -140,7 +142,7 @@ if (kind === 'scholarship') {
   // ("The <title> offers <amount> to <audience>. Deadline: <date>. Browse
   // more…") averaged 221 characters, so the deadline — the thing the query was
   // asking about — was always past the truncation point. See src/lib/meta.ts.
-  const description  = scholarshipMeta(s, scholarshipStatusOf(s, todayDate), formatDate);
+  const description  = metaDescription!;
   const canonical    = `https://www.scholarab.ca/scholarships/${slug}/`;
   const parsedAmount = parseAmount(s.amount) || null;
   const deadlineClause = s.deadline ? ` before ${formatDate(s.deadline)}` : '';
@@ -162,6 +164,11 @@ if (kind === 'scholarship') {
       'name': s.title,
       'description': description,
       'url': canonical,
+      // The site's highest-volume query shape is "when does X open" — five
+      // Rutherford variants alone drew 82 impressions last month — and 59
+      // listings carry an openDate the markup never mentioned. It is a
+      // property of EducationalOccupationalProgram, same as the deadline.
+      ...(s.openDate ? { 'applicationStartDate': s.openDate } : {}),
       ...(s.deadline ? { 'applicationDeadline': s.deadline } : {}),
       ...(parsedAmount !== null ? { 'offers': { '@type': 'Offer', 'price': parsedAmount, 'priceCurrency': 'CAD' } } : {}),
       // No `provider`: ScholarAB lists these awards, it does not fund or award
@@ -231,7 +238,7 @@ if (kind === 'scholarship') {
 
   // Word-boundary clamp, not `slice(0, 157) + '...'`: that cut 123 of the 125
   // program descriptions mid-word. Dated cycles lead with the closing date.
-  const metaDescription = programMeta(p, status, formatDate);
+  const programDescription = programMeta(p, status, formatDate);
   const canonical = `https://www.scholarab.ca/programs/${slug}/`;
   const dueLong = status === 'ongoing' ? 'Ongoing, join anytime' : formatDate(p.deadline);
   const deadlineClause = hasDate ? ` before ${formatDate(p.deadline)}` : '';
@@ -239,13 +246,13 @@ if (kind === 'scholarship') {
   d = {
     currentPath: '/programs/',
     pageTitle: `${p.name} | ScholarAB`,
-    description: metaDescription,
+    description: programDescription,
     canonical,
     ldJson: {
       '@context': 'https://schema.org',
       '@type': 'EducationalOccupationalProgram',
       'name': p.name,
-      'description': metaDescription,
+      'description': programDescription,
       'url': canonical,
       ...(hasDate ? { 'applicationDeadline': p.deadline } : {}),
       'provider': { '@type': 'Organization', 'name': p.provider },

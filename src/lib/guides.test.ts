@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { guides } from './guides.ts';
 import { generateSlug } from './utils.ts';
+import { META_MAX } from './meta.ts';
 import scholarships from '../data/scholarships.json';
 
 // SabGuide builds its keep-reading block from this list. It used to take
@@ -62,5 +63,21 @@ describe('relatedListings', () => {
         seen.set(slug, g.slug);
       }
     }
+  });
+});
+
+describe('meta descriptions', () => {
+  // The generated listing descriptions are clamped by scholarshipMeta; these
+  // are hand-written, so nothing was stopping them from running past the cut.
+  // The Rutherford guide's did, on the highest-impression page on the site.
+  it('fit inside what Google renders', () => {
+    for (const g of guides) {
+      expect(g.description.length, `${g.slug} is ${g.description.length} chars`).toBeLessThanOrEqual(META_MAX);
+    }
+  });
+
+  it('are distinct, so no two guides compete on the same snippet', () => {
+    const seen = new Set(guides.map(g => g.description));
+    expect(seen.size).toBe(guides.length);
   });
 });

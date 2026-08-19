@@ -14,6 +14,25 @@
 // variants alone drew 82 impressions and zero clicks). So the date leads, the
 // money comes second, and the audience takes whatever room is left.
 
+/**
+ * The long-date form both the snippet and the page's visible facts use.
+ *
+ * It lives here rather than in the page's frontmatter because getStaticPaths is
+ * hoisted to module scope while the rest of the frontmatter is the component
+ * body — a function declared there is invisible to getStaticPaths, which is
+ * where the corpus-wide descriptions have to be built.
+ *
+ * 'TBA' and 'Ongoing' are values the program data actually carries in the
+ * deadline field, so they pass through as themselves rather than parsing to
+ * Invalid Date.
+ */
+export function formatListingDate(str: string | null | undefined): string {
+  if (!str) return 'TBA';
+  if (str === 'TBA' || str === 'Ongoing') return str;
+  const d = new Date(str + 'T00:00:00');
+  return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
 /** Google renders roughly this many characters of a description. */
 export const META_MAX = 155;
 
@@ -121,8 +140,8 @@ function whenClause(
 /**
  * Status-aware description for a scholarship detail page, capped at META_MAX.
  *
- * `fmt` is the page's own date formatter, passed in so this module stays free
- * of locale/timezone concerns (the build pins TZ; this file should not care).
+ * `fmt` is injected rather than hardcoded so the tests can pin a formatter;
+ * callers pass formatListingDate above.
  */
 export function scholarshipMeta(
   s: ScholarshipMetaInput,
@@ -168,4 +187,35 @@ export function programMeta(
     : status === 'ongoing' ? 'Open year-round. '
     : '';
   return clampMeta(`${lead}${body}`);
+}
+
+/**
+ * Descriptions for a whole scholarship corpus, parallel to `list`.
+ *
+ * Dropping the award's own name from the description is what buys the room for
+ * the date and the amount, but it assumes the remaining facts identify the
+ * page — and five Edmonton Public Schools awards share an amount, an audience
+ * and both dates, differing only by name. They generated one byte-identical
+ * description five times over, which is a worse signal than the redundancy
+ * removing the name avoided. So the name goes back on exactly the listings
+ * that need it to be distinguishable, and nowhere else.
+ *
+ * Corpus-wide, so it belongs to the caller that has the whole list —
+ * getStaticPaths — rather than to the per-page render.
+ */
+export function scholarshipMetas(
+  list: (ScholarshipMetaInput & { title: string })[],
+  statusOf: (s: ScholarshipMetaInput) => ScholarshipMetaStatus,
+  fmt: (iso: string) => string,
+): string[] {
+  const base = list.map((s) => scholarshipMeta(s, statusOf(s), fmt));
+  const seen = new Map<string, number>();
+  for (const d of base) seen.set(d, (seen.get(d) ?? 0) + 1);
+  return base.map((d, i) => {
+    if ((seen.get(d) ?? 0) < 2) return d;
+    const name = list[i]!.title;
+    // Lowercased so the name reads as the subject of the sentence that follows
+    // rather than as two sentences jammed together.
+    return clampMeta(`${name}: ${d.charAt(0).toLowerCase()}${d.slice(1)}`);
+  });
 }

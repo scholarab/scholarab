@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { clampMeta, scholarshipMeta, programMeta, META_MAX } from './meta.ts'
+import { clampMeta, scholarshipMeta, scholarshipMetas, programMeta, META_MAX } from './meta.ts'
 
 const fmt = (iso: string) =>
   new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -120,5 +120,43 @@ describe('programMeta', () => {
   it('never returns more than Google renders', () => {
     const long = { ...p, description: 'word '.repeat(100), deadline: '2026-03-01' }
     expect(programMeta(long, 'active', fmt).length).toBeLessThanOrEqual(META_MAX)
+  })
+})
+
+describe('scholarshipMetas', () => {
+  const active = () => 'active' as const
+  // The real case: five Edmonton Public Schools awards sharing an amount, an
+  // audience and both dates, differing only by name.
+  const eps = (title: string) => ({
+    title, amount: '$1,000', audience: 'Edmonton Public Schools Grade 12 students',
+    region: 'Alberta', openDate: '2027-02-01', deadline: '2027-04-27',
+  })
+
+  it('names the award when the facts alone would not tell two listings apart', () => {
+    const out = scholarshipMetas([eps('Betty Finch Scholarship'), eps('James P. Jones Scholarship')], active, fmt)
+    expect(new Set(out).size).toBe(2)
+    expect(out[0]).toMatch(/^Betty Finch Scholarship: open/)
+    expect(out[1]).toMatch(/^James P\. Jones Scholarship: open/)
+  })
+
+  it('leaves a listing that is already distinct alone', () => {
+    const out = scholarshipMetas(
+      [eps('Betty Finch Scholarship'), { ...eps('Other Award'), amount: '$9,000' }],
+      active,
+      fmt,
+    )
+    expect(out[0]).not.toContain('Betty Finch Scholarship:')
+    expect(out[1]).not.toContain('Other Award:')
+  })
+
+  it('keeps every disambiguated description inside the cut', () => {
+    const long = 'A'.repeat(60)
+    const out = scholarshipMetas([eps(long), eps(long + 'B')], active, fmt)
+    for (const d of out) expect(d.length).toBeLessThanOrEqual(META_MAX)
+  })
+
+  it('returns one description per listing, in order', () => {
+    const out = scholarshipMetas([eps('A'), eps('B'), eps('C')], active, fmt)
+    expect(out).toHaveLength(3)
   })
 })
