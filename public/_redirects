@@ -70,6 +70,16 @@
 /programs/careers-the-next-generation-ict-internships  /programs/careers-the-next-generation-high-school-internships/ 301
 /programs/careers-the-next-generation-ict-internships/ /programs/careers-the-next-generation-high-school-internships/ 301
 
+# 2026-08-19 — the same competition was listed twice, as a scholarship and as a
+# program, at two URLs with the same provider link and the same deadline. They
+# split the query between them (positions 6.9 and 7.7 for "breakthrough junior
+# challenge") and their descriptions disagreed on the video length. The program
+# record is the one kept: it is a competition you enter, not an award you apply
+# for, and it was the fresher and fuller of the two. The scholarship URL is the
+# one Google ranked higher, so this 301 is what hands that standing over.
+/scholarships/breakthrough-junior-challenge  /programs/breakthrough-junior-challenge/ 301
+/scholarships/breakthrough-junior-challenge/ /programs/breakthrough-junior-challenge/ 301
+
 # 2026-08-12 — the mobile app screen was deleted. "/" is the honest target, not
 # a category page: /app/ already carried <link rel=canonical> to "/", so search
 # engines were treating the two as one page and this just makes that the real

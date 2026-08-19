@@ -134,6 +134,30 @@ for (const [slug, ids] of progSlugs) {
   }
 }
 
+// ── The same thing must not be listed on both sides ─────────────────────────
+//
+// Each dataset checked its own slugs and neither looked across, so Breakthrough
+// Junior Challenge lived as both a scholarship and a program: two indexable
+// pages, one provider URL, one deadline, splitting the same query between them
+// at positions 6.9 and 7.7, with descriptions that disagreed on the video
+// length. Resolving it cost a deleted listing and a permanent redirect, which
+// is the expensive version of a check that costs nothing here.
+//
+// Slug collision rather than exact-name, so "CyberTitan" and "Cybertitan" trip
+// it too. The fix is a curation decision — which side the listing belongs on —
+// so this names both ids and leaves the choice to a human.
+for (const [slug, schIds] of schSlugs) {
+  const progIds = progSlugs.get(slug);
+  if (progIds?.length) {
+    console.error(
+      `"${slug}" is listed as both a scholarship (id ${schIds.join(', ')}) and a program ` +
+      `(id ${progIds.join(', ')}). Two indexable pages for one thing compete with each other — ` +
+      `keep one and add a 301 from the other (both slash forms).`
+    );
+    failed = true;
+  }
+}
+
 // ── Scholarship field checks ─────────────────────────────────────────────────
 for (const s of scholarships) {
   const tag = `Scholarship [${s.id}] "${s.title}"`;
