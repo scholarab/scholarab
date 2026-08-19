@@ -18,6 +18,19 @@ export type GuideMeta = {
    * mobile plumbing: a guide-summary block on the web pages would use it as-is.
    */
   takeaways: [string, string, string]
+  /**
+   * Detail-page slugs this guide is *about*, not merely mentions. The listing
+   * pages named here render a link back to the guide, so Google sees the pair
+   * as a directory entry plus its explainer rather than two thin pages
+   * competing for the same query — which is how the Rutherford listing ended
+   * up as "Duplicate, Google chose different canonical than user".
+   *
+   * Only list a slug when the guide's subject IS that listing. A guide that
+   * cites a scholarship in passing (Loran in the reference-letter guide) is
+   * not an explainer for it, and pointing the listing at it would send
+   * students somewhere that never answers the question they arrived with.
+   */
+  relatedListings?: string[]
 }
 
 export const guides: GuideMeta[] = [
@@ -40,6 +53,7 @@ export const guides: GuideMeta[] = [
       'There is no essay, no interview and no competition — meet the five-course average and the money is yours.',
       'Applications open August 1, and you apply once you are enrolled in post-secondary, not while still in high school.',
     ],
+    relatedListings: ['alexander-rutherford-scholarship'],
   },
   {
     slug: 'scholarships-for-grade-12-students-alberta',

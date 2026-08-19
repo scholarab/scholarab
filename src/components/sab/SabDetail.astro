@@ -49,6 +49,9 @@ interface Props {
   url: string;
   canRemind: boolean;
   canonical: string;
+  /** Link to the guide that explains this listing, when one covers it. */
+  guideHref?: string;
+  guideTitle?: string;
 }
 
 const {
@@ -57,7 +60,7 @@ const {
   backHref, backLabel, position, prevHref, nextHref,
   facts, eligibility, about, notes, steps,
   valueLabel, valueBig, valueNote,
-  ctaLabel, url, canRemind, canonical,
+  ctaLabel, url, canRemind, canonical, guideHref, guideTitle,
 } = Astro.props;
 
 const urgent = status === 'active' && typeof daysLeft === 'number' && daysLeft <= 7;
@@ -187,6 +190,14 @@ const chip =
       <button data-sabd-copy data-copy-url={canonical} class="sabd-mono sabd-copy">COPY LINK</button>
     </div>
 
+    {guideHref && guideTitle && (
+      <a href={guideHref} class="sabd-guide">
+        <span class="sabd-mono sabd-guide-label">READ THE GUIDE</span>
+        <span class="sabd-guide-title">{guideTitle}</span>
+        <span class="sabd-mono sabd-guide-go">OPEN →</span>
+      </a>
+    )}
+
     {canRemind && (
       <div class="sabd-remind">
         <div class="sabd-mono sabd-remind-label">GET A DEADLINE REMINDER</div>
@@ -204,6 +215,25 @@ const chip =
 
 <style>
   .sabd-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .sabd-guide {
+    display: block; margin-top: 16px; padding: 18px 20px;
+    border: 1px solid rgba(20,25,21,0.14); border-radius: 4px;
+    background: #FAF7F0; text-decoration: none; box-sizing: border-box;
+  }
+  .sabd-guide:hover { border-color: #0E8C64; }
+  .sabd-guide-label {
+    display: block; font-size: 11px; letter-spacing: 0.08em;
+    color: rgba(20,25,21,0.5);
+  }
+  .sabd-guide-title {
+    display: block; margin-top: 8px; font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 19px; line-height: 1.25; color: #141915;
+  }
+  .sabd-guide-go {
+    display: block; margin-top: 10px; font-size: 11px;
+    letter-spacing: 0.08em; color: #0E8C64;
+  }
 
   .sabd-crumb-row {
     padding: 40px 48px 0;

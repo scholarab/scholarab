@@ -12,6 +12,7 @@ import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount } from '../../lib/utils.ts';
 import { programStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { categoryEmoji } from '../../lib/category-emoji.ts';
+import { guides } from '../../lib/guides.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
 type RelatedItem = { href: string; title: string; value: string; tag: string };
@@ -292,6 +293,15 @@ if (kind === 'scholarship') {
   };
 }
 
+// The explainer for this listing, when one exists. The link is reciprocal on
+// purpose: the guide already linked down to the listing, so Google saw a rich
+// page pointing at a thin near-duplicate of itself and picked its own
+// canonical for the pair. Linking back marks the listing as the directory
+// entry and the guide as its explainer.
+const guideSlug = kind === 'scholarship'
+  ? guides.find(g => g.relatedListings?.includes(generateSlug(scholarship!.title)))
+  : undefined;
+
 const breadcrumbJson = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -354,6 +364,8 @@ const breadcrumbJson = {
       url={d.url}
       canRemind={d.canRemind}
       canonical={d.canonical}
+      guideHref={guideSlug ? `/guides/${guideSlug.slug}/` : undefined}
+      guideTitle={guideSlug?.title}
     />
 
     {related.length > 0 && (

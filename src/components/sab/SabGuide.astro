@@ -39,7 +39,15 @@ const breadcrumbJson = {
   ],
 };
 
-const keepReading = guides.filter(g => g.slug !== guide.slug).slice(0, 3);
+// Rotate the keep-reading window by the current guide's position rather than
+// taking the first three every time. `.slice(0, 3)` linked guides 1-3 from all
+// eight pages and never linked guides 4-8 from anywhere, so the later half of
+// the section had a single inbound link each (the /guides/ index) and sat in
+// Search Console's "Discovered - currently not indexed". Rotating spreads the
+// links evenly, giving every guide three inbound links from its siblings.
+const others = guides.filter(g => g.slug !== guide.slug);
+const start = guides.findIndex(g => g.slug === guide.slug) % (others.length || 1);
+const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0, 3);
 ---
 
 <Layout
