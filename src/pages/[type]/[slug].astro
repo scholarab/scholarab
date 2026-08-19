@@ -6,11 +6,12 @@ import SabFonts from '../../components/sab/SabFonts.astro';
 // frontmatter prep differs, so it branches on `kind` below. The merge was
 // verified byte-identical against the previous per-type pages' built HTML.
 import Layout from '../../layouts/Layout.astro';
+import { scholarshipMeta, programMeta } from '../../lib/meta';
 import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount } from '../../lib/utils.ts';
-import { programStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
+import { programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { categoryEmoji } from '../../lib/category-emoji.ts';
 import { guides } from '../../lib/guides.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
@@ -135,8 +136,11 @@ if (kind === 'scholarship') {
       : deadlineDate ? 'active' : 'tba';
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
 
-  const regionStr    = !s.region || s.region === 'National' ? '' : ` in ${s.region}`;
-  const description  = `The ${s.title} offers ${s.amount} to ${s.audience}${regionStr}. Deadline: ${formatDate(s.deadline)}. Browse more Alberta scholarships at ScholarAB.`;
+  // Status-aware and capped at Google's ~155-character cut. The old template
+  // ("The <title> offers <amount> to <audience>. Deadline: <date>. Browse
+  // more…") averaged 221 characters, so the deadline — the thing the query was
+  // asking about — was always past the truncation point. See src/lib/meta.ts.
+  const description  = scholarshipMeta(s, scholarshipStatusOf(s, todayDate), formatDate);
   const canonical    = `https://www.scholarab.ca/scholarships/${slug}/`;
   const parsedAmount = parseAmount(s.amount) || null;
   const deadlineClause = s.deadline ? ` before ${formatDate(s.deadline)}` : '';
@@ -225,10 +229,9 @@ if (kind === 'scholarship') {
   const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = programStatusOf(p, todayDate);
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
 
-  const desc = p.description ?? '';
-  const metaDescription = desc.length > 160
-    ? desc.slice(0, 157) + '...'
-    : desc || `${p.name} is a research program offered by ${p.provider}. Discover and apply through ScholarAB, Alberta's free scholarship and program directory for high school students.`;
+  // Word-boundary clamp, not `slice(0, 157) + '...'`: that cut 123 of the 125
+  // program descriptions mid-word. Dated cycles lead with the closing date.
+  const metaDescription = programMeta(p, status, formatDate);
   const canonical = `https://www.scholarab.ca/programs/${slug}/`;
   const dueLong = status === 'ongoing' ? 'Ongoing, join anytime' : formatDate(p.deadline);
   const deadlineClause = hasDate ? ` before ${formatDate(p.deadline)}` : '';

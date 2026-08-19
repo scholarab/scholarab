@@ -104,15 +104,21 @@ const {
       }, { once: true });
 
       // ── Scroll position restore (listing pages only) ────────
-      const SCROLL_PAGES = ['/scholarships', '/programs'];
+      // Compared against the normalized path: every internal link points at the
+      // trailing-slash URL and production 308s the bare form, so
+      // location.pathname on the directories is '/scholarships/', and a bare
+      // '/scholarships' in this list matched nothing — restore had been dead
+      // since the links were switched over.
+      const SCROLL_PAGES = ['/scholarships/', '/programs/'];
+      const normPath = (p) => (p.endsWith('/') ? p : p + '/');
 
       let scrollSaveTimer: ReturnType<typeof setTimeout> | null = null;
       window.addEventListener('scroll', () => {
         if (scrollSaveTimer) return;
         scrollSaveTimer = setTimeout(() => {
           scrollSaveTimer = null;
-          const path = window.location.pathname;
-          if (SCROLL_PAGES.some(p => path === p)) {
+          const path = normPath(window.location.pathname);
+          if (SCROLL_PAGES.includes(path)) {
             try {
               sessionStorage.setItem('scrollRestore', JSON.stringify({ path, y: window.scrollY }));
             } catch { /* ignore */ }
@@ -125,7 +131,7 @@ const {
           const raw = sessionStorage.getItem('scrollRestore');
           if (!raw) return;
           const { path, y } = JSON.parse(raw) as { path: string; y: number };
-          if (path === window.location.pathname && y > 0) {
+          if (path === normPath(window.location.pathname) && y > 0) {
             requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' }));
           }
         } catch { /* ignore */ }
