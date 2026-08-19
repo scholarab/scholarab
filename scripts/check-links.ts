@@ -127,6 +127,25 @@ for (let i = 0; i < hosts.length; i += HOST_CONCURRENCY) {
   await Promise.all(hosts.slice(i, i + HOST_CONCURRENCY).map(([h, list]) => checkHost(h, list)))
 }
 
+// Bare-origin URLs: a 200 proves the host is alive, never that it still
+// describes the award. Alberta Computers for Schools pointed at acfs.org — a
+// Florida safety-day event that answered 200 for months — and the Charmaine
+// Letourneau listing pointed at a foundation homepage that lists dozens of
+// funds. Both passed every status check. This is a report, not a failure:
+// plenty of single-purpose providers (teamupscience.com, technovationchallenge
+// .org) legitimately have nothing deeper to link to, so a human decides.
+const bareOrigin = items.filter(it => {
+  if (!it.url) return false
+  try {
+    const u = new URL(it.url)
+    return (u.pathname === '/' || u.pathname === '') && !u.search && !u.hash
+  } catch { return false }
+})
+if (bareOrigin.length > 0) {
+  console.log(`\n${bareOrigin.length} listing(s) point at a bare homepage — confirm the award is still described there:`)
+  for (const b of bareOrigin) console.log(`  [${b.id}] ${b.label}: ${b.url}`)
+}
+
 if (broken.length > 0) {
   console.log(`\nFound ${broken.length} broken link(s):`)
   for (const b of broken) console.log(`  [${b.id}] ${b.name}: ${b.error}`)

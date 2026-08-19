@@ -4051,7 +4051,7 @@
     "title": "Electronic Recycling Association Scholarship",
     "amount": "$10,000",
     "audience": "Full-time or part-time students in Canada",
-    "url": "https://www.era.ca/",
+    "url": "https://www.era.ca/scholarship-competition/",
     "category": "Community",
     "lastVerified": "2026-04",
     "region": "National",
@@ -4456,7 +4456,7 @@
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
     "notes": "Offered by the Association of Alberta Agricultural Fieldmen. Must submit high school marks and a letter of acceptance from a post-secondary institution. Apply through your local County agricultural office.",
-    "url": "https://aaaf.ab.ca/",
+    "url": "https://aaaf.ab.ca/AAAF-Bursary",
     "description": "The Association of Alberta Agricultural Fieldmen offers this $1,000 bursary to Alberta residents entering agriculture or environmental science programs at post-secondary institutions. Applicants must submit high school marks and a letter of acceptance from their chosen college or university. Apply through your local County agricultural office.",
     "eligibility": {
       "grades": [
@@ -4711,16 +4711,16 @@
   {
     "id": 147,
     "title": "Charmaine Letourneau Scholarship",
-    "amount": "Varies",
-    "deadline": "2026-08-31",
+    "amount": "$2,000–$7,000",
+    "deadline": "2026-09-30",
     "audience": "Alberta residents who are deaf or hard of hearing entering a post-secondary or vocational program",
     "category": "Community",
     "region": "Alberta",
     "active": true,
-    "lastVerified": "2026-04",
+    "lastVerified": "2026-08",
     "applyViaGuidance": false,
     "notes": "Must demonstrate financial need and knowledge of sign language. School and community leadership considered. Apply through the Edmonton Community Foundation.",
-    "url": "https://www.ecf.ca/",
+    "url": "https://ecf.ca/student-awards/charmaine-letourneau-scholarships/",
     "description": "The Edmonton Community Foundation awards the Charmaine Letourneau Scholarship to Alberta residents who are deaf or hard of hearing as they enter a post-secondary or vocational program. Applicants must demonstrate financial need and knowledge of sign language, with school and community leadership also considered in selection.",
     "eligibility": {
       "grades": [
