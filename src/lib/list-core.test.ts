@@ -2,6 +2,8 @@ import { describe, it, expect, vi } from 'vitest'
 import {
   getScholarshipStatus, getProgramStatus, programMatchesGrade,
   filterSortScholarships, filterSortPrograms, scholarshipDayChip, programDayChip,
+  daysLeftClass, URGENT_DAYS, SOON_DAYS, groupRuns, directoryCountLine,
+  scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS,
 } from './list-core'
 import type { ScholarshipWithMeta, ProgramWithMeta, ScholarshipFilterState, ProgramFilterState } from './list-core'
 
@@ -303,7 +305,7 @@ describe('scholarshipDayChip', () => {
     expect(scholarshipDayChip(s)).toEqual({ label: 'OPENS SEP 1', cls: 'sabl-days neutral' })
   })
 
-  it('returns days-left with urgent class inside 7 days', () => {
+  it('returns days-left with urgent class inside two weeks', () => {
     // getToday mock = 2026-04-05; deadline 2026-04-08 → 3 days
     const s = makeScholarship({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })
     expect(scholarshipDayChip(s)).toEqual({ label: '3 DAYS LEFT', cls: 'sabl-days urgent' })
@@ -333,7 +335,7 @@ describe('programDayChip', () => {
       .toEqual({ label: 'DEADLINE TBA', cls: 'sabl-days neutral' })
   })
 
-  it('counts days down and marks the last week urgent', () => {
+  it('counts days down and marks the closest deadlines urgent', () => {
     // getToday mock = 2026-04-05
     const soon = makeProgram({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })
     expect(programDayChip(soon)).toEqual({ label: '3 DAYS LEFT', cls: 'sabl-days urgent' })
@@ -421,5 +423,111 @@ describe('filterSortPrograms', () => {
     ]
     expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Science', gradeFilter: 12 })))).toEqual([2])
     expect(ids(filterSortPrograms(items, state({ searchQuery: 'quantum' })))).toEqual([4])
+  })
+})
+
+// ── deadline tiers ────────────────────────────────────────────────────────────
+
+describe('daysLeftClass', () => {
+  // The tier boundaries are the whole point of having three tiers: an off-by-one
+  // here silently makes a chip a week louder or quieter than it should be.
+  it('fills the chip up to and including the urgent boundary', () => {
+    expect(daysLeftClass(0)).toBe('sabl-days urgent')
+    expect(daysLeftClass(URGENT_DAYS)).toBe('sabl-days urgent')
+  })
+
+  it('warms the chip between the two boundaries', () => {
+    expect(daysLeftClass(URGENT_DAYS + 1)).toBe('sabl-days soon')
+    expect(daysLeftClass(SOON_DAYS)).toBe('sabl-days soon')
+  })
+
+  it('leaves far-off deadlines quiet', () => {
+    expect(daysLeftClass(SOON_DAYS + 1)).toBe('sabl-days')
+    expect(daysLeftClass(300)).toBe('sabl-days')
+  })
+
+  it('drives the real chips at each boundary', () => {
+    // getToday mock = 2026-04-05
+    const at = (iso: string) =>
+      scholarshipDayChip(makeScholarship({ id: 1, deadline: iso, _deadline_ms: new Date(iso + 'T00:00:00').getTime() }))!.cls
+    expect(at('2026-04-19')).toBe('sabl-days urgent') // +14
+    expect(at('2026-04-20')).toBe('sabl-days soon')   // +15
+    expect(at('2026-05-20')).toBe('sabl-days soon')   // +45
+    expect(at('2026-05-21')).toBe('sabl-days')        // +46
+  })
+})
+
+// ── grid grouping ─────────────────────────────────────────────────────────────
+
+describe('groupRuns', () => {
+  const labels = { a: 'A GROUP', b: 'B GROUP' }
+  const keyOf = (x: { k: string }) => x.k
+
+  it('collapses each contiguous run into one labelled header', () => {
+    const items = [{ k: 'a' }, { k: 'a' }, { k: 'b' }]
+    expect(groupRuns(items, keyOf, labels)).toEqual([
+      { key: 'a', label: 'A GROUP', count: 2 },
+      { key: 'b', label: 'B GROUP', count: 1 },
+    ])
+  })
+
+  it('reports a repeated key as two runs rather than merging them', () => {
+    // A caller that groups by something other than the sort's primary key gets
+    // a visibly wrong grid, not a silently wrong count — the header duplicates.
+    const items = [{ k: 'a' }, { k: 'b' }, { k: 'a' }]
+    expect(groupRuns(items, keyOf, labels).map(r => r.key)).toEqual(['a', 'b', 'a'])
+  })
+
+  it('returns nothing for an empty list', () => {
+    expect(groupRuns([], keyOf, labels)).toEqual([])
+  })
+
+  it('falls back to the raw key when it has no label', () => {
+    expect(groupRuns([{ k: 'zzz' }], keyOf, labels)[0]!.label).toBe('ZZZ')
+  })
+})
+
+describe('the directory group keys match the sort order', () => {
+  // If the group key is not the sort's primary key, a group appears twice.
+  it('keeps every scholarship status contiguous under every sort', () => {
+    const items = [
+      makeScholarship({ id: 1, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime(), _amount: 9000 }),
+      makeScholarship({ id: 2, deadline: '2026-05-01', _deadline_ms: new Date('2026-05-01T00:00:00').getTime(), _amount: 500 }),
+      makeScholarship({ id: 3, openDate: '2026-09-01', deadline: '2026-12-01', _open_ms: new Date('2026-09-01T00:00:00').getTime(), _deadline_ms: new Date('2026-12-01T00:00:00').getTime(), _amount: 20000 }),
+      makeScholarship({ id: 4, deadline: null, _deadline_ms: 0, _amount: 0 }),
+    ]
+    for (const sortBy of ['closest_due', 'highest_pay', 'lowest_pay'] as const) {
+      const sorted = filterSortScholarships(items, {
+        statusFilter: 'all', selectedCategory: 'all', selectedRegion: null, searchQuery: '', sortBy,
+      })
+      const runs = groupRuns(sorted, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS)
+      expect(new Set(runs.map(r => r.key)).size, `"${sortBy}" split a group`).toBe(runs.length)
+    }
+  })
+
+  it('keeps closed programs in one run under every sort', () => {
+    const items = [
+      makeProgram({ id: 1, name: 'Zeta', deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime(), paid: true }),
+      makeProgram({ id: 2, name: 'Alpha', deadline: '2026-06-01', _deadline_ms: new Date('2026-06-01T00:00:00').getTime() }),
+      makeProgram({ id: 3, name: 'Mid', deadline: 'Ongoing', paid: true }),
+    ]
+    for (const sortBy of ['closest_due', 'paid_first', 'name'] as const) {
+      const sorted = filterSortPrograms(items, {
+        selectedCategory: 'all', gradeFilter: null, searchQuery: '', sortBy, statusFilter: 'all',
+      })
+      const runs = groupRuns(sorted, programGroupKey, PROGRAM_GROUP_LABELS)
+      expect(new Set(runs.map(r => r.key)).size, `"${sortBy}" split a group`).toBe(runs.length)
+    }
+  })
+})
+
+describe('directoryCountLine', () => {
+  it('says how much of what is shown can be acted on today', () => {
+    expect(directoryCountLine(153, 153, 'LISTINGS', 35)).toBe('153 OF 153 LISTINGS · 35 OPEN NOW')
+  })
+
+  it('drops the clause when it would just repeat the count', () => {
+    expect(directoryCountLine(117, 117, 'PROGRAMS', 117)).toBe('117 OF 117 PROGRAMS')
+    expect(directoryCountLine(0, 117, 'PROGRAMS', 0)).toBe('0 OF 117 PROGRAMS')
   })
 })

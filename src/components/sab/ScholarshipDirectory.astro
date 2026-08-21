@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
-import { filterSortScholarships, getScholarshipStatus, scholarshipDayChip, shortDate } from '../../lib/list-core.ts';
+import { SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipDayChip, scholarshipGroupKey, shortDate } from '../../lib/list-core.ts';
 import type { ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { categoryEmoji } from '../../lib/category-emoji.ts';
@@ -40,6 +40,18 @@ const categories = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]
 const initial = filterSortScholarships(items, {
   statusFilter: 'all', selectedCategory: 'all', selectedRegion: null, searchQuery: '', sortBy: 'closest_due',
 });
+
+// Labelled seams between the open / not-yet-open / closed runs. Emitted
+// server-side so the grid reads the same before hydration; the client reuses
+// these exact nodes and re-splices them as filters change.
+const runs = groupRuns(initial, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS);
+const showGroups = runs.length > 1;
+const headerAt = new Map<number, { label: string; count: number; key: string }>();
+if (showGroups) {
+  let at = 0;
+  for (const r of runs) { headerAt.set(at, r); at += r.count; }
+}
+const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length;
 
 // "$X open across these listings" — active money only, follows the filters
 const totalOpen = initial.reduce(
@@ -102,15 +114,23 @@ const totalOpen = initial.reduce(
   </div>
 
   <div class="sabl-mono sabl-result-line" data-dir-count>
-    {initial.length} OF {items.length} LISTINGS SHOWN
+    {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
   </div>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
-    {initial.map(s => {
+    {initial.map((s, i) => {
       const status = getScholarshipStatus(s);
       const chip = scholarshipDayChip(s);
       const emoji = categoryEmoji(s.category);
+      const head = headerAt.get(i);
       return (
+        <>
+        {head && (
+          <div class="sabl-group" data-dir-group={head.key}>
+            <span class="sabl-group-label">{head.label}</span>
+            <span class="sabl-group-count">{head.count}</span>
+          </div>
+        )}
         <div
           class="sabl-card"
           data-dir-card
@@ -162,6 +182,7 @@ const totalOpen = initial.reduce(
             </div>
           </div>
         </div>
+        </>
       );
     })}
   </div>
@@ -175,7 +196,7 @@ const totalOpen = initial.reduce(
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { filterSortScholarships, getScholarshipStatus, scholarshipDayChip } from '../../lib/list-core.ts';
+  import { SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipDayChip, scholarshipGroupKey } from '../../lib/list-core.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
   import { sendEvent } from '../../lib/events.ts';
@@ -220,7 +241,9 @@ const totalOpen = initial.reduce(
       }) as Item[];
       return q ? sorted.filter(it => it.search.includes(q)) : sorted;
     },
-    countLine: (shown, total) => `${shown} OF ${total} LISTINGS SHOWN`,
+    countLine: (shown, total, visible) =>
+      directoryCountLine(shown, total, 'LISTINGS', visible.filter(s => getScholarshipStatus(s) === 'active').length),
+    groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key },
     stat: visible => '$' + visible
       .reduce((sum, s) => sum + (getScholarshipStatus(s) === 'active' ? (s._amount ?? 0) : 0), 0)
       .toLocaleString('en-CA'),

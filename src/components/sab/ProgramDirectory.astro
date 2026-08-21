@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ProgramList React island.
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
-import { filterSortPrograms, programDayChip, shortDate } from '../../lib/list-core.ts';
+import { PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programDayChip, programGroupKey, shortDate } from '../../lib/list-core.ts';
 import type { ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 
@@ -36,6 +36,18 @@ const initial = filterSortPrograms(items, {
   selectedCategory: 'all', gradeFilter: null, searchQuery: '', sortBy: 'closest_due', statusFilter: 'all',
 });
 const paidCount = initial.filter(p => p.paid).length;
+
+// Only open-vs-closed: unlike scholarships, the program sorts do not keep
+// dated and undated deadlines apart, so a finer split would put the same
+// label on the grid twice. See groupRuns.
+const runs = groupRuns(initial, programGroupKey, PROGRAM_GROUP_LABELS);
+const showGroups = runs.length > 1;
+const headerAt = new Map<number, { label: string; count: number; key: string }>();
+if (showGroups) {
+  let at = 0;
+  for (const r of runs) { headerAt.set(at, r); at += r.count; }
+}
+const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 ---
 
 <div class="sabl-page">
@@ -94,15 +106,23 @@ const paidCount = initial.filter(p => p.paid).length;
   </div>
 
   <div class="sabl-mono sabl-result-line" data-dir-count>
-    {initial.length} OF {items.length} PROGRAMS SHOWN
+    {directoryCountLine(initial.length, items.length, 'PROGRAMS', openNow)}
   </div>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
-    {initial.map(p => {
+    {initial.map((p, i) => {
       const slug = p._slug ?? generateSlug(p.name);
       const meta = [p.duration, p.grades, p.location].filter(Boolean) as string[];
       const chip = programDayChip(p);
+      const head = headerAt.get(i);
       return (
+        <>
+        {head && (
+          <div class="sabl-group" data-dir-group={head.key}>
+            <span class="sabl-group-label">{head.label}</span>
+            <span class="sabl-group-count">{head.count}</span>
+          </div>
+        )}
         <div
           class="sabl-card"
           data-dir-card
@@ -152,6 +172,7 @@ const paidCount = initial.filter(p => p.paid).length;
             </div>
           </div>
         </div>
+        </>
       );
     })}
   </div>
@@ -165,7 +186,7 @@ const paidCount = initial.filter(p => p.paid).length;
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { filterSortPrograms, programDayChip } from '../../lib/list-core.ts';
+  import { PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, programDayChip, programGroupKey } from '../../lib/list-core.ts';
   import type { ProgramWithMeta, ProgramSort, ProgramStatusFilter } from '../../lib/list-core.ts';
   import { getSavedPrograms, toggleSavedProgram } from '../../lib/tracker.ts';
 
@@ -206,7 +227,9 @@ const paidCount = initial.filter(p => p.paid).length;
       }) as Item[];
       return q ? sorted.filter(it => it.search.includes(q)) : sorted;
     },
-    countLine: (shown, total) => `${shown} OF ${total} PROGRAMS SHOWN`,
+    countLine: (shown, total, visible) =>
+      directoryCountLine(shown, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) !== 'closed').length),
+    groups: { key: programGroupKey, label: key => PROGRAM_GROUP_LABELS[key] ?? key },
     stat: visible => String(visible.filter(p => p.paid).length),
     getSavedIds: () => [...getSavedPrograms()],
     toggleSave: id => [...toggleSavedProgram(id)],

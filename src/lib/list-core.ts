@@ -100,6 +100,74 @@ export function filterSortScholarships(
   });
 }
 
+// How loud a "N DAYS LEFT" chip gets. One week was the only tier, which made a
+// 9-day deadline and a 300-day one look identical — on a grid where most
+// listings are months out, everything shouted and nothing did. Two weeks is
+// "start now", six weeks is "on your radar", past that is just information.
+export const URGENT_DAYS = 14;
+export const SOON_DAYS = 45;
+
+export function daysLeftClass(days: number): string {
+  if (days <= URGENT_DAYS) return 'sabl-days urgent';
+  if (days <= SOON_DAYS) return 'sabl-days soon';
+  return 'sabl-days';
+}
+
+// ── Grid grouping ─────────────────────────────────────────────────────────────
+// The directory sorts open listings above ones that have not opened yet and
+// closed ones below both — but nothing marked the seams, so 153 cards read as
+// one undifferentiated wall and the ~75% you cannot act on today looked exactly
+// like the ~25% you can. These labels name the seams.
+//
+// The key MUST be the sort's primary key, or a group would appear twice: every
+// scholarship sort ranks by status first, so status is safe. Programs only
+// guarantee closed-last, so they group open-vs-closed and nothing finer.
+
+export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
+  active: 'OPEN NOW',
+  future: 'OPENING LATER',
+  closed: 'CLOSED',
+};
+
+export const PROGRAM_GROUP_LABELS: Record<string, string> = {
+  open: 'OPEN NOW',
+  closed: 'CLOSED',
+};
+
+export function scholarshipGroupKey(s: ScholarshipWithMeta): string {
+  return getScholarshipStatus(s);
+}
+
+export function programGroupKey(p: ProgramWithMeta): string {
+  return getProgramStatus(p) === 'closed' ? 'closed' : 'open';
+}
+
+/** [{key, label, count}] in display order, for a list already in display order. */
+export function groupRuns<T>(items: T[], keyOf: (item: T) => string, labels: Record<string, string>)
+  : Array<{ key: string; label: string; count: number }> {
+  const runs: Array<{ key: string; label: string; count: number }> = [];
+  for (const it of items) {
+    const key = keyOf(it);
+    const last = runs[runs.length - 1];
+    if (last && last.key === key) last.count++;
+    else runs.push({ key, label: labels[key] ?? key.toUpperCase(), count: 1 });
+  }
+  return runs;
+}
+
+/**
+ * The line above the grid. "153 OF 153 LISTINGS SHOWN" was true and useless —
+ * it counted a wall of cards without saying how much of it a student could act
+ * on today, which on this directory is about a quarter.
+ */
+export function directoryCountLine(shown: number, total: number, noun: string, openNow: number): string {
+  // Suppressed when everything shown is already open — "117 OF 117 PROGRAMS ·
+  // 117 OPEN NOW" is the same number three times. The clause earns its place
+  // only where it contradicts the first one, which is the whole point of it.
+  const line = `${shown} OF ${total} ${noun}`;
+  return openNow === shown ? line : `${line} · ${openNow} OPEN NOW`;
+}
+
 export function shortDate(iso: string): string {
   return new Date(iso + 'T00:00:00')
     .toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })
@@ -118,7 +186,7 @@ export function scholarshipDayChip(s: ScholarshipWithMeta): { label: string; cls
   if (!s.deadline) return null;
   const days = Math.max(0, Math.round((new Date(s.deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
   const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
-  return { label, cls: `sabl-days${days <= 7 ? ' urgent' : ''}` };
+  return { label, cls: daysLeftClass(days) };
 }
 
 // ── Programs ──────────────────────────────────────────────────────────────────
@@ -170,7 +238,7 @@ export function programDayChip(p: ProgramWithMeta): { label: string; cls: string
   const deadMs = p._deadline_ms ?? new Date(p.deadline! + 'T00:00:00').getTime();
   const days = Math.max(0, Math.round((deadMs - getToday().getTime()) / 86400000));
   const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
-  return { label, cls: `sabl-days${days <= 7 ? ' urgent' : ''}` };
+  return { label, cls: daysLeftClass(days) };
 }
 
 export type ProgramSort = 'closest_due' | 'paid_first' | 'name';

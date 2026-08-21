@@ -468,6 +468,21 @@ body.quiz-results #match-divider {
 .sabl-result-line { font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); padding: 22px 0 6px; }
 
 .sabl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-top: 16px; }
+/* Full-width seam between runs of cards. It is a grid item, not a wrapper, so
+   the cards either side stay in one grid and keep their column rhythm. */
+.sabl-group {
+  grid-column: 1 / -1; display: flex; align-items: center; gap: 12px;
+  padding: 20px 0 2px; border-bottom: 1px solid rgba(20,25,21,0.12);
+}
+.sabl-group:first-child { padding-top: 4px; }
+.sabl-group-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; color: #141915;
+}
+.sabl-group-count {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+  color: rgba(20,25,21,0.5);
+}
 .sabl-card {
   display: flex; flex-direction: column; background: #FFFFFF;
   border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px; padding: 26px 24px 22px;
@@ -485,9 +500,16 @@ body.quiz-results #match-divider {
 }
 .sabl-days {
   font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 500;
-  padding: 5px 11px; border-radius: 100px; background: rgba(184,84,31,0.12); color: #B8541F; white-space: nowrap;
+  padding: 5px 11px; border-radius: 100px; white-space: nowrap;
+  /* Three tiers, not two. Every countdown used to wear the same orange, so a
+     grid where most deadlines are months away was uniformly loud and the one
+     closing this week did not stand out. Past six weeks the chip is quiet ink;
+     inside six weeks it warms up; inside two it fills. #A0491A replaces
+     #B8541F, which was 4.13:1 on the card and missed AA. */
+  background: rgba(20,25,21,0.05); color: rgba(20,25,21,0.6);
 }
-.sabl-days.urgent { background: #B8541F; color: #FAF7F0; }
+.sabl-days.soon { background: rgba(160,73,26,0.12); color: #A0491A; }
+.sabl-days.urgent { background: #A0491A; color: #FAF7F0; }
 .sabl-days.neutral { background: transparent; border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6); }
 .sabl-name { font-weight: 700; font-size: 18.5px; letter-spacing: -0.01em; line-height: 1.25; color: #141915; text-decoration: none; display: block; }
 .sabl-name:hover { color: #0E8C64; }
