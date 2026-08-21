@@ -27,9 +27,14 @@ test('match quiz - completes full 6-question flow', async ({ page }) => {
   await expect(page.locator('text=Question 1 of 6')).toBeVisible({ timeout: 15_000 });
 
   for (let i = 0; i < 6; i++) {
-    // Scope to main content to avoid nav buttons; skip the Previous back button
-    const tile = page.locator('#main-content button').filter({ hasNotText: /^Previous$/ }).first();
-    await tile.click();
+    // Target the answer tiles by their own class. Scoping to '#main-content
+    // button' used to pick the mobile menu burger — it is the first button in
+    // main, and its label is whitespace, so the Previous filter kept it. On
+    // mobile that opened the nav sheet instead of answering; the quiz never
+    // advanced and this test failed on every run.
+    const tiles = page.locator('.sabm-opt');
+    await expect(tiles.first()).toBeVisible({ timeout: 10_000 });
+    await tiles.first().click();
     // Deterministic step advance — no fixed sleep racing the transition window
     if (i < 5) {
       await expect(page.locator(`text=Question ${i + 2} of 6`)).toBeVisible({ timeout: 10_000 });

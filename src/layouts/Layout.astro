@@ -110,7 +110,7 @@ const {
       // '/scholarships' in this list matched nothing — restore had been dead
       // since the links were switched over.
       const SCROLL_PAGES = ['/scholarships/', '/programs/'];
-      const normPath = (p) => (p.endsWith('/') ? p : p + '/');
+      const normPath = (p: string) => (p.endsWith('/') ? p : p + '/');
 
       let scrollSaveTimer: ReturnType<typeof setTimeout> | null = null;
       window.addEventListener('scroll', () => {
