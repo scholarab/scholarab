@@ -64,11 +64,17 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <slot name="ld" slot="head" />
 
+  {/* The header band and the hero band are separate elements now — the header
+      is the page's banner and cannot sit inside <main>. Same background, no
+      margins, so the two read as the single dark band they always were. */}
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/guides" />
+  </div>
+
   <div class="sabp" id="sab-guide" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabp-header">
-      <SabHeader currentPath="/guides" />
       <div class="sabg-hero">
-        <div class="sabg-kicker sabg-mono">
+        <div class="sab-kicker sabg-kicker">
           <a href="/guides/" class="sabg-kicker-link">GUIDES</a>
           <span class="sabg-kicker-sep">/</span>
           <span>{guide.kicker}</span>
@@ -104,8 +110,9 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
       </div>
     </div>
 
-    <SabFooter />
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <style is:global>
@@ -115,7 +122,9 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
 
   /* ── Dark hero ── */
   .sabg-hero { max-width: var(--sab-read); margin: 0 auto; padding: 64px 24px 72px; width: 100%; box-sizing: border-box; }
-  .sabg-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; font-size: 13px; letter-spacing: 0.06em; color: #2FD3A0; }
+  /* The shared .sab-kicker plus the one thing this one adds: it is a
+     breadcrumb, so the first segment is a link back to the index. */
+  .sabg-kicker { margin-bottom: 24px; }
   .sabg-kicker-link { color: rgba(242,240,233,0.55); text-decoration: none; }
   .sabg-kicker-link:hover { color: #F2F0E9; }
   .sabg-kicker-sep { color: rgba(242,240,233,0.3); }

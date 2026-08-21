@@ -67,7 +67,7 @@ const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
 const showTicker = ticker ?? currentPath === '/';
 ---
 
-<div class="sabh" data-sab-header>
+<header class="sabh" data-sab-header>
   <div class="sabh-nav">
     <a href="/" class="sabh-logo" aria-label="ScholarAB home">
       <SabLogoMark size={32} id="header" />
@@ -134,26 +134,18 @@ const showTicker = ticker ?? currentPath === '/';
       </div>
     </>
   )}
-</div>
-{/*
-  Where "Skip to content" actually lands. It cannot be #main-content: this
-  header renders *inside* <main>, so skipping there drops you above the nav —
-  the exact block the link exists to bypass (WCAG 2.4.1). This sits after it.
-  tabindex="-1" makes the span focusable by the fragment jump but not by Tab.
-*/}
-<span id="skip-target" tabindex="-1" class="sabh-skip-target"></span>
+</header>
 
 <style>
-  /* Zero-box: it is a scroll/focus anchor, never a visible element. Its own
-     focus ring would flash on every skip, so it opts out. */
-  .sabh-skip-target { display: block; height: 0; }
-  .sabh-skip-target:focus { outline: none; }
   /* Same measure as the page body, so the logo shares the content's left edge
      instead of hugging the window on a wide monitor. The dark band itself
      stays full width. */
   .sabh-nav {
     display: flex; justify-content: space-between; align-items: center;
     padding: 24px 48px; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
+    /* Declared, not content-derived: the home hero subtracts this to fill the
+       fold, and a height that moves with a font metric would move the fold. */
+    height: var(--sab-nav-h);
   }
   .sabh-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
@@ -215,7 +207,7 @@ const showTicker = ticker ?? currentPath === '/';
     overflow: hidden;
   }
   .sabh-ticker {
-    display: flex; white-space: nowrap; align-items: center; height: 45px;
+    display: flex; white-space: nowrap; align-items: center; height: var(--sab-ticker-h);
     font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600;
     color: #FFFFFF;
     animation: sabh-tick 30s linear infinite; will-change: transform;
@@ -252,7 +244,9 @@ const showTicker = ticker ?? currentPath === '/';
 
   /* ══ Phone: bar + sheet ══ */
   @media (max-width: 900px) {
-    .sabh-nav { padding: 12px 16px 12px 20px; gap: 10px; }
+    /* Padding-sized again below 900: the ticker is hidden here and the hero
+       no longer claims the fold, so nothing is subtracting this. */
+    .sabh-nav { padding: 12px 16px 12px 20px; gap: 10px; height: auto; }
     .sabh-logo-word { font-size: 19px; }
     .sabh-actions { gap: 8px; }
     .sabh-cta { font-size: 13px; font-weight: 600; padding: 0 16px; height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }

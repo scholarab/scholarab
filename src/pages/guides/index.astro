@@ -36,14 +36,17 @@ const collectionJson = {
   <SabFonts italic slot="head" />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionJson)} slot="head" />
 
+  {/* The header band and the hero band are separate elements now — the header
+      is the page's banner and cannot sit inside <main>. Same background, no
+      margins, so the two read as the single dark band they always were. */}
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/guides" />
+  </div>
+
   <div class="sabp" id="sab-guides" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabp-header">
-      <SabHeader currentPath="/guides" />
       <div class="sabgi-hero">
-        <div class="sabgi-kicker sabgi-mono">
-          <span class="sabgi-kicker-dot"></span>
-          <span>GUIDES</span>
-        </div>
+        <div class="sab-kicker">GUIDES</div>
         <h1 class="sabgi-h1">How to actually <em>win</em> a scholarship.</h1>
         <p class="sabgi-lede">
           Short, practical guides written for Alberta high school students. No filler, no recycled advice from American sites that doesn't apply here.
@@ -67,8 +70,9 @@ const collectionJson = {
       </div>
     </div>
 
-    <SabFooter />
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <style is:global>
@@ -79,8 +83,6 @@ const collectionJson = {
   .sabgi-mono { font-family: 'IBM Plex Mono', monospace; }
 
   .sabgi-hero { max-width: 1180px; margin: 0 auto; padding: 72px 48px 64px; width: 100%; box-sizing: border-box; }
-  .sabgi-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; font-size: 13px; color: #2FD3A0; letter-spacing: 0.06em; }
-  .sabgi-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
   .sabgi-h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;

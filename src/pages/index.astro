@@ -121,13 +121,19 @@ const matchGroups = TEASER_KEYS.map(key => ({
     ],
   })} slot="head" />
   <SabFonts slot="head" />
+
+  {/* The header is the page's banner and cannot sit inside <main>; it used to
+      be the hero's first flex child. Same dark background either side, so the
+      band still reads as one — but the hero no longer contains the height it
+      has to subtract, hence the calc below. */}
+  <div class="sab-hero-band" slot="header">
+    <SabHeader currentPath="/" />
+  </div>
+
   <div id="sab-home">
 
     <!-- ============ DARK HERO ============ -->
     <div class="sab-hero">
-
-      <SabHeader currentPath="/" />
-
       <!-- hero body -->
       <div class="sab-container sab-hero-body">
         <div class="sab-kicker">BUILT BY A STUDENT, FOR STUDENTS</div>
@@ -248,10 +254,10 @@ const matchGroups = TEASER_KEYS.map(key => ({
       </div>
     </div>
 
-    <!-- ============ FOOTER ============ -->
-    <SabFooter />
 
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <script>
@@ -421,10 +427,14 @@ const matchGroups = TEASER_KEYS.map(key => ({
   /* ── Dark hero ── */
   /* Fills the first viewport so no canvas sliver peeks below the fold on
      tall/fullscreen windows; on short viewports it grows past 100svh. */
+  .sab-hero-band { background: #0B1512; color: #F2F0E9; }
   .sab-hero {
     background: #0B1512; color: #F2F0E9; position: relative; overflow: hidden;
     display: flex; flex-direction: column;
-    min-height: 100vh; min-height: 100svh;
+    /* The header used to be inside this box and counted toward the fold. Now
+       it sits above, so its two bands come off the target instead. */
+    min-height: calc(100vh - var(--sab-nav-h) - var(--sab-ticker-h));
+    min-height: calc(100svh - var(--sab-nav-h) - var(--sab-ticker-h));
   }
 
   .sab-hero-body {

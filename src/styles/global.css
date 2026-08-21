@@ -291,6 +291,14 @@ body {
      wide it is between one nav click and the next. Full-bleed backgrounds are
      unaffected: the cap goes on the inner wrapper, never the band. */
   --sab-measure: 1180px;
+  /* The header's two bands, declared rather than left to content so that
+     something outside the header can subtract them. The home hero is the only
+     thing that needs to: it fills the fold, and the header is no longer inside
+     it to take up part of that itself. Both apply above 900px only — below it
+     the ticker is hidden, the nav is padding-sized, and the hero stops
+     claiming the fold. */
+  --sab-nav-h: 89px;
+  --sab-ticker-h: 45px;
 }
 
 .sabp-header,
@@ -651,7 +659,7 @@ body.quiz-results #match-divider {
 
 /* Directory-page shell (scholarships + programs design pages) */
 .sabp { background: #FAF7F0; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
-.sabp-header { background: #0B1512; color: #F2F0E9; }
+.sabp-header { background: #0B1512; color: #F2F0E9; font-family: 'Archivo', sans-serif; }
 .sabp-body { width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; padding: 72px 48px 96px; }
 @media (max-width: 900px) {
   .sabp-body { padding: 40px 20px 64px; }

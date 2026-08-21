@@ -12,11 +12,11 @@ import SabHeader from '../components/sab/SabHeader.astro';
   ogUrl="https://www.scholarab.ca/404/"
   robots="noindex, follow"
 >
-  <div id="sab-404" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
-    <div class="sabp-header">
-      <SabHeader currentPath="/404" />
-    </div>
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/404" />
+  </div>
 
+  <div id="sab-404" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabp-body" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
       <div class="sab-kicker" style="--kicker:#A0491A;">ERROR 404</div>
       <h1 class="sab404-h1">This page doesn't exist.</h1>
@@ -27,8 +27,9 @@ import SabHeader from '../components/sab/SabHeader.astro';
       </div>
     </div>
 
-    <SabFooter />
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <style is:global>

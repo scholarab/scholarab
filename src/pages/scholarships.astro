@@ -46,11 +46,11 @@ const scholarships = raw.map(s => ({
   })} slot="head" />
   <SabFonts slot="head" />
 
-  <div id="sab-scholarships" class="sabp">
-    <div class="sabp-header">
-      <SabHeader currentPath="/scholarships" />
-    </div>
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/scholarships" />
+  </div>
 
+  <div id="sab-scholarships" class="sabp">
     <div class="sabp-body">
       {loadError ? (
         <div class="sabl-empty" style="margin-top:64px;">
@@ -63,8 +63,9 @@ const scholarships = raw.map(s => ({
       )}
     </div>
 
-    <SabFooter />
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <style is:global>

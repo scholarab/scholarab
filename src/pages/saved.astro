@@ -18,17 +18,18 @@ const programs = await loadPrograms();
   robots="noindex, follow"
 >
   <SabFonts slot="head" />
-  <div id="sab-saved" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
-    <div class="sabp-header">
-      <SabHeader currentPath="/saved" />
-    </div>
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/saved" />
+  </div>
 
+  <div id="sab-saved" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabp-body" style="flex:1;">
       <SavedDirectory initialScholarships={scholarships} initialPrograms={programs} />
     </div>
 
-    <SabFooter />
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <style is:global>

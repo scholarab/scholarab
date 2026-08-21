@@ -29,11 +29,11 @@ const breadcrumbJson = {
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <SabFonts italic slot="head" />
 
-  <div id="sab-match" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
-    <div class="sabp-header">
-      <SabHeader currentPath="/match" />
-    </div>
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/match" />
+  </div>
 
+  <div id="sab-match" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabm-body" style="flex:1;">
       <div id="match-intro">
         <h1 class="sabm-h1">Find your <em>match.</em></h1>
@@ -49,8 +49,9 @@ const breadcrumbJson = {
       <EligibilityQuiz scholarships={scholarships} programs={programs} client:load />
     </div>
 
-    <SabFooter />
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <style is:global>

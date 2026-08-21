@@ -332,10 +332,11 @@ const breadcrumbJson = {
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <SabFonts slot="head" />
 
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath={d.currentPath} />
+  </div>
+
   <div id="sab-detail" class="sabp">
-    <div class="sabp-header">
-      <SabHeader currentPath={d.currentPath} />
-    </div>
 
     <SabDetail
       itemType={d.itemType}
@@ -388,8 +389,9 @@ const breadcrumbJson = {
       </div>
     )}
 
-    <SabFooter />
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <style is:global>

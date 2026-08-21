@@ -47,11 +47,11 @@ const programs = raw.map(p => ({
   })} slot="head" />
   <SabFonts slot="head" />
 
-  <div id="sab-programs" class="sabp">
-    <div class="sabp-header">
-      <SabHeader currentPath="/programs" />
-    </div>
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/programs" />
+  </div>
 
+  <div id="sab-programs" class="sabp">
     <div class="sabp-body">
       {loadError ? (
         <div class="sabl-empty" style="margin-top:64px;">
@@ -64,8 +64,9 @@ const programs = raw.map(p => ({
       )}
     </div>
 
-    <SabFooter />
   </div>
+
+  <SabFooter slot="footer" />
 </Layout>
 
 <style is:global>

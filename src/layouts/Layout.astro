@@ -72,10 +72,22 @@ const {
   </head>
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
 
-    <a href="#skip-target" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-9999 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#141915;color:#FAF7F0;">Skip to content</a>
-    <main id="main-content" class="w-full flex-1">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-9999 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#141915;color:#FAF7F0;">Skip to content</a>
+    {/*
+      The site header renders here, OUTSIDE <main>. It used to render inside
+      it, which meant the page had no banner landmark to offer — a <header>
+      nested in <main> is a plain group, not a banner — and "Skip to content"
+      could not point at #main-content, because that landed the reader above
+      the nav they were trying to skip. Hence the skip-target span this
+      replaces. Named slot rather than a component so each page keeps control
+      of its own header band and background.
+    */}
+    <slot name="header" />
+    {/* tabindex so the skip link can actually move focus here, not just scroll. */}
+    <main id="main-content" class="w-full flex-1" tabindex="-1">
       <slot />
     </main>
+    <slot name="footer" />
     <script>
       import { syncTrackingOptOut, recordSourceVisit } from '../lib/events.ts';
 
