@@ -228,3 +228,77 @@ describe('initDirectory', () => {
     expect($$('[data-fkey="category"]').find(c => c.dataset.fval === 'all')!.classList.contains('on')).toBe(true)
   })
 })
+
+// ── group headers ─────────────────────────────────────────────────────────────
+// Its own root and its own initDirectory: the fixture above has no groups, and
+// the delegated listeners are document-level, so a second root is the cheapest
+// way to exercise the grouped path without disturbing the first.
+
+describe('grouped grids', () => {
+  let groupInit = false
+
+  function gcard(id: number, name: string, group: string) {
+    return `<div class="sabl-card" data-dir-card data-id="${id}" data-name="${name}"
+              data-group="${group}" data-search="${name.toLowerCase()}"></div>`
+  }
+
+  function setupGroups(state = 'all') {
+    document.body.innerHTML = `
+      <div id="grp-root">
+        <button class="sabl-chip" data-fkey="group" data-fval="all">All</button>
+        <button class="sabl-chip" data-fkey="group" data-fval="open">Open</button>
+        <div data-dir-count></div>
+        <div class="sabl-grid" data-dir-grid>
+          ${gcard(1, 'One', 'open')}${gcard(2, 'Two', 'open')}${gcard(3, 'Three', 'closed')}
+        </div>
+        <div data-dir-empty hidden></div>
+      </div>`
+    if (!groupInit) {
+      groupInit = true
+      initDirectory<DirectoryItem & { group: string }, { group: string }>('#grp-root', {
+        itemType: 'scholarship',
+        defaultState: { group: state },
+        toggleKeys: [],
+        parseCard: el => ({
+          el, id: Number(el.dataset.id), name: el.dataset.name ?? '',
+          search: el.dataset.search ?? '', group: el.dataset.group ?? '',
+        }),
+        select: (items, st) => (st.group === 'all' ? items : items.filter(i => i.group === st.group)),
+        countLine: shown => `${shown} SHOWN`,
+        groups: { key: i => i.group, label: k => k.toUpperCase() },
+        getSavedIds: () => [],
+        toggleSave: () => [],
+        saveLabel: n => n,
+      })
+    }
+    document.dispatchEvent(new Event('astro:page-load'))
+  }
+
+  const layout = () =>
+    [...document.querySelectorAll<HTMLElement>('[data-dir-grid] > *')]
+      .filter(el => !el.hidden)
+      .map(el => el.dataset.dirGroup ? `H:${el.dataset.dirGroup}:${el.querySelector('.sabl-group-count')!.textContent}` : el.dataset.name)
+
+  afterEach(() => { document.body.innerHTML = '' })
+
+  it('heads each run with its label and count', () => {
+    setupGroups()
+    expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1', 'Three'])
+  })
+
+  it('drops the headers when a filter leaves one group', () => {
+    setupGroups()
+    click(document.querySelector('[data-fval="open"]')!)
+    expect(layout()).toEqual(['One', 'Two'])
+    // and leaves nothing stranded in the grid, hidden or otherwise
+    expect(document.querySelectorAll('[data-dir-grid] [data-dir-group]').length).toBe(0)
+  })
+
+  it('restores them when the filter is lifted', () => {
+    setupGroups()
+    click(document.querySelector('[data-fval="open"]')!)
+    click(document.querySelector('[data-fval="all"]')!)
+    expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1', 'Three'])
+    expect(document.querySelectorAll('[data-dir-group="open"]').length).toBe(1)
+  })
+})

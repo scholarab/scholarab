@@ -1,6 +1,7 @@
 ---
 import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('scholarships-for-medicine-hat-students');
 ---
@@ -44,6 +45,6 @@ const guide = getGuide('scholarships-for-medicine-hat-students');
     <li><strong>Apply to everything you plausibly qualify for.</strong> The <a href="/guides/local-scholarships-better-odds/">arithmetic on local awards</a> is heavily in your favour, and three $1,000 wins is a semester's tuition.</li>
   </ul>
   <p>
-    Two minutes on <a href="/match/">the match quiz</a> will sort the whole local list by what you're actually eligible for.
+    <a href="/match/">The match quiz</a> takes {QUIZ_DURATION} and sorts the whole local list by what you're actually eligible for.
   </p>
 </SabGuide>

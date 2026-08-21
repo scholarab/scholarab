@@ -13,6 +13,10 @@ interface Props {
 const { items } = Astro.props;
 
 // Region keys must line up with REGION_MATCH in list-core
+// SCOPE, not REGION: these are how far an award reaches, not where the student
+// lives. Labelled REGION, "Alberta" read as "I live in Alberta" — which is true
+// of everyone here — instead of "open province-wide". The data key stays
+// `region`; only the word the student reads changes.
 const REGION_CHIPS = [
   { value: '',             label: 'All' },
   { value: 'Medicine Hat', label: 'Medicine Hat' },
@@ -100,7 +104,7 @@ const totalOpen = initial.reduce(
       ))}
     </div>
     <div class="sabl-filter-row">
-      <span class="sabl-mono sabl-row-label">REGION</span>
+      <span class="sabl-mono sabl-row-label">SCOPE</span>
       {REGION_CHIPS.map(r => (
         <button type="button" class={`sabl-chip${r.value === '' ? ' on' : ''}`} data-fkey="region" data-fval={r.value} aria-pressed={r.value === '' ? 'true' : 'false'}>{r.label}</button>
       ))}

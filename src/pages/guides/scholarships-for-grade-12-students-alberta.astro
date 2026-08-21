@@ -1,6 +1,7 @@
 ---
 import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('scholarships-for-grade-12-students-alberta');
 ---
@@ -15,7 +16,7 @@ const guide = getGuide('scholarships-for-grade-12-students-alberta');
     The most valuable scholarships in Canada close earliest. The <a href="/scholarships/loran-scholarship/">Loran Award</a> (up to $100,000 over four years) typically closes in mid-October, and it needs a real application: essays, references, and activities going back years. If you are reading this in September of Grade 12, start Loran this week.
   </p>
   <ul>
-    <li>Make a list of every award you might apply to. <a href="/match/">The match quiz</a> takes two minutes and builds the list for you.</li>
+    <li>Make a list of every award you might apply to. <a href="/match/">The match quiz</a> takes {QUIZ_DURATION} and builds the list for you.</li>
     <li>Ask two teachers for reference letters now, before the November crush. Our <a href="/guides/reference-letters-for-scholarships/">reference letter guide</a> covers exactly how.</li>
     <li>Write one strong personal essay you can adapt. See <a href="/guides/how-to-write-a-scholarship-essay/">how to write a scholarship essay</a>.</li>
   </ul>

@@ -112,3 +112,22 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
   },
 ]
+
+// ── How the quiz describes itself ─────────────────────────────────────────────
+// The same six taps were sold as "under 30 seconds" on /match, "2 minutes" to
+// counsellors, and "two minutes" in four guides — three numbers for one act,
+// and the length was hard-coded next to a question list that can change. These
+// are the only place any surface may get that copy from.
+//
+// 30 seconds is the honest one: six questions, one tap each, results on the
+// same page. The two-minute figure was really "quiz plus read the results".
+
+export const QUIZ_QUESTION_COUNT = QUIZ_QUESTIONS.length;
+
+/** Spelled form for prose. Pinned to QUIZ_QUESTION_COUNT by a test. */
+export const QUIZ_QUESTION_WORD = 'Six';
+
+export const QUIZ_DURATION = '30 seconds';
+
+/** One sentence, for anywhere that needs the whole claim at once. */
+export const QUIZ_PROMISE = `${QUIZ_QUESTION_WORD} questions, ${QUIZ_DURATION}. No account, no email.`;

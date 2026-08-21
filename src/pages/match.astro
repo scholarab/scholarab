@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro'
 import SabHeader from '../components/sab/SabHeader.astro'
 import { loadScholarships, loadPrograms } from '../lib/data-loader'
 import EligibilityQuiz from '../components/EligibilityQuiz'
+import { QUIZ_DURATION, QUIZ_PROMISE, QUIZ_QUESTION_WORD } from '../lib/quiz'
 
 const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()])
 
@@ -20,9 +21,9 @@ const breadcrumbJson = {
 
 <Layout
   title="Find Your Scholarships | ScholarAB"
-  description="Answer a few questions and instantly see every Alberta scholarship you qualify for. Completely anonymous, no sign-up."
+  description={`${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`}
   ogTitle="Find Your Scholarships | ScholarAB"
-  ogDescription="Answer a few questions and instantly see every Alberta scholarship you qualify for. Completely anonymous, no sign-up."
+  ogDescription={`${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`}
   ogUrl="https://www.scholarab.ca/match/"
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
@@ -37,11 +38,11 @@ const breadcrumbJson = {
       <div id="match-intro">
         <h1 class="sabm-h1">Find your <em>match.</em></h1>
         <p class="sabm-sub">
-          Six questions. Instant results. Every Alberta opportunity available to you.
+          {QUIZ_QUESTION_WORD} questions. Instant results. Every Alberta opportunity available to you.
         </p>
         <div class="sabm-trust sabl-mono">
           <span>◦ Completely anonymous</span>
-          <span>◦ Under 30 seconds</span>
+          <span>◦ Under {QUIZ_DURATION}</span>
         </div>
       </div>
 

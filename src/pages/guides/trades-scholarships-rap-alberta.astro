@@ -1,6 +1,7 @@
 ---
 import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('trades-scholarships-rap-alberta');
 ---
@@ -42,6 +43,6 @@ const guide = getGuide('trades-scholarships-rap-alberta');
     Most scholarship applicants are chasing the same university-track awards, so trades-specific money goes under-applied year after year. And local awards from <a href="/guides/local-scholarships-better-odds/">service clubs and community foundations</a> read a RAP placement exactly the way they read a varsity captaincy: as proof you show up and work. A paying apprenticeship is not a weaker application story than a student council seat — to most committees it's a stronger one.
   </p>
   <p>
-    The <a href="/match/">match quiz</a> asks about apprenticeship status directly, so two minutes there will surface everything you qualify for.
+    The <a href="/match/">match quiz</a> asks about apprenticeship status directly, so {QUIZ_DURATION} there will surface everything you qualify for.
   </p>
 </SabGuide>
