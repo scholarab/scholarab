@@ -660,8 +660,10 @@ describe('match signals', () => {
       .toContain('Open to Grade 12')
     // A student who gave no grade is rejected by the grade filter upstream, so
     // this branch never has to invent a grade to name.
-    expect(matchScholarship({ ...baseProfile, grade: null }, sch({ grades: ['12'] })).match)
-      .toBe(false)
+    // `grade: null` is the shape the quiz produces before that question is
+    // answered; StudentProfile types it narrowly, hence the cast.
+    const noGrade = { ...baseProfile, grade: null as unknown as StudentProfile['grade'] }
+    expect(matchScholarship(noGrade, sch({ grades: ['12'] })).match).toBe(false)
   })
 
   it('names the field that actually hit, not the whole list', () => {
@@ -677,7 +679,7 @@ describe('match signals', () => {
   })
 
   it('reports nothing for a rejection', () => {
-    const res = matchScholarship(baseProfile, sch({ grades: [10] }))
+    const res = matchScholarship(baseProfile, sch({ grades: ['10'] }))
     expect(res.match).toBe(false)
     expect(res.signals).toEqual([])
   })

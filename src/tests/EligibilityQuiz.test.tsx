@@ -2,6 +2,10 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, act, cleanup } from '@testing-library/react'
 import EligibilityQuiz from '../components/EligibilityQuiz'
 import type { ConfidenceTier } from '../lib/eligibility-types'
+// Type-only: erased at runtime, so it does not fight the vi.mock below. The
+// mock's row shape is derived from the real one so the two cannot drift —
+// `signals` was added to matchAll and this stub kept compiling without it.
+import type { matchAll } from '../lib/eligibility-matcher'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
@@ -9,7 +13,7 @@ const {
   mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti,
   mockGetSavedPrograms, mockToggleSavedProgram, mockMatchPrograms,
 } = vi.hoisted(() => ({
-  mockMatchAll:     vi.fn(() => [] as Array<{ id: number; confidence: number; tier: ConfidenceTier }>),
+  mockMatchAll:     vi.fn(() => [] as ReturnType<typeof matchAll>),
   mockGetSaved:     vi.fn(() => [] as number[]),
   mockToggleSaved:  vi.fn(),
   mockShowConfetti: vi.fn(),
