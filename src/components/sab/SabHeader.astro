@@ -73,7 +73,9 @@ const showTicker = ticker ?? currentPath === '/';
       <span class="sabh-logo-word">Scholar<span style="color:#2FD3A0;">AB</span></span>
     </a>
     <div class="sabh-actions">
-      <div class="sabh-links" id="sabh-links">
+      <!-- The site nav is a real landmark: it is the only way to jump past
+           these links, or straight to them, without walking the whole page. -->
+      <nav class="sabh-links" id="sabh-links" aria-label="Main">
         <div class="sabh-sheet-label" aria-hidden="true">GO TO</div>
         {navItems.map(n => (
           <a
@@ -86,7 +88,7 @@ const showTicker = ticker ?? currentPath === '/';
           </a>
         ))}
         <div class="sabh-sheet-foot" aria-hidden="true">FREE FOREVER · NO ACCOUNT<br />MADE IN MEDICINE HAT</div>
-      </div>
+      </nav>
       {/* The one nav item worth permanent rent: the CTA stays in the bar at
           every width and every menu state, so it is never a tap away. */}
       <a href="/match/" class="sabh-cta">
@@ -132,8 +134,19 @@ const showTicker = ticker ?? currentPath === '/';
     </>
   )}
 </div>
+{/*
+  Where "Skip to content" actually lands. It cannot be #main-content: this
+  header renders *inside* <main>, so skipping there drops you above the nav —
+  the exact block the link exists to bypass (WCAG 2.4.1). This sits after it.
+  tabindex="-1" makes the span focusable by the fragment jump but not by Tab.
+*/}
+<span id="skip-target" tabindex="-1" class="sabh-skip-target"></span>
 
 <style>
+  /* Zero-box: it is a scroll/focus anchor, never a visible element. Its own
+     focus ring would flash on every skip, so it opts out. */
+  .sabh-skip-target { display: block; height: 0; }
+  .sabh-skip-target:focus { outline: none; }
   .sabh-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; }
   .sabh-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
