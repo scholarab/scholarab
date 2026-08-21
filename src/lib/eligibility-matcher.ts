@@ -48,7 +48,7 @@ export function matchScholarship(
 
   // No eligibility data yet → show as possible match, but with low confidence
   if (!eligibility) {
-    return { match: true, confidence: 0.20, reasons: [] }
+    return { match: true, confidence: 0.20, reasons: [], signals: [] }
   }
 
   const reasons: string[] = []
@@ -56,20 +56,20 @@ export function matchScholarship(
   // ── Region ────────────────────────────────────────────────────────────────
   if (!regionMatches(profile.city, region)) {
     reasons.push(`Only for students in ${region}`)
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── Grade ─────────────────────────────────────────────────────────────────
   if (eligibility.grades.length > 0 && !eligibility.grades.includes(profile.grade)) {
     reasons.push(`Requires Grade ${eligibility.grades.join(' or ')}`)
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── School board (hard filter only if student provided their board) ───────
   if (eligibility.schoolBoards.length > 0 && profile.schoolBoard) {
     if (!eligibility.schoolBoards.includes(profile.schoolBoard)) {
       reasons.push(`Requires ${eligibility.schoolBoards.join(' or ')} student`)
-      return { match: false, confidence: 0, reasons }
+      return { match: false, confidence: 0, reasons, signals: [] }
     }
   }
 
@@ -81,7 +81,7 @@ export function matchScholarship(
     )
     if (!schoolMatch) {
       reasons.push(`Only for students at ${eligibility.specificSchools.join(' or ')}`)
-      return { match: false, confidence: 0, reasons }
+      return { match: false, confidence: 0, reasons, signals: [] }
     }
   }
 
@@ -89,54 +89,54 @@ export function matchScholarship(
   if (eligibility.minAverage !== null && profile.averagePercent !== null) {
     if (profile.averagePercent < eligibility.minAverage) {
       reasons.push(`Requires ${eligibility.minAverage}%+ average`)
-      return { match: false, confidence: 0, reasons }
+      return { match: false, confidence: 0, reasons, signals: [] }
     }
   }
 
   // ── Gender (hard filter only if student answered) ─────────────────────────
   if (eligibility.genderRequired === 'female' && profile.identifiesAsFemale === false) {
     reasons.push('Open to female-identifying students only')
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── Indigenous (hard filter only if student answered) ─────────────────────
   if (eligibility.indigenousRequired && profile.identifiesAsIndigenous === false) {
     reasons.push('Requires Indigenous identity (First Nations, Métis, or Inuit)')
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── BIPOC (hard filter only if student answered) ──────────────────────────
   if (eligibility.bipocRequired && profile.identifiesAsBIPOC === false) {
     reasons.push('Requires BIPOC identity')
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── Foster care (hard filter only if student answered) ────────────────────
   if (eligibility.fosterCare && profile.inFosterCare === false) {
     reasons.push('Requires history of government care (foster care)')
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── Apprenticeship (hard filter only if student answered) ─────────────────
   if (eligibility.apprenticeship && profile.inApprenticeship === false) {
     reasons.push('Requires RAP or CTS apprenticeship enrollment')
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── Financial need (hard filter only if student explicitly said no) ────────
   if (eligibility.financialNeed && profile.hasFinancialNeed === false) {
     reasons.push('Requires demonstrated financial need')
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── Citizenship ───────────────────────────────────────────────────────────
   if (eligibility.citizenship === 'canadian' && profile.citizenship !== null && profile.citizenship !== 'canadian_citizen') {
     reasons.push('Requires Canadian citizenship')
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
   if (eligibility.citizenship === 'permanent_resident' && profile.citizenship === 'other') {
     reasons.push('Requires Canadian citizenship or permanent residency')
-    return { match: false, confidence: 0, reasons }
+    return { match: false, confidence: 0, reasons, signals: [] }
   }
 
   // ── Family income cap (hard filter only if student answered) ──────────────
@@ -145,53 +145,70 @@ export function matchScholarship(
       reasons.push(
         `Family income must be under $${eligibility.maxFamilyIncome.toLocaleString('en-CA')}`,
       )
-      return { match: false, confidence: 0, reasons }
+      return { match: false, confidence: 0, reasons, signals: [] }
     }
   }
 
   // ── Confidence scoring (specificity signals) ──────────────────────────────
+  // Each boost also records why, in the student's words. The results list used
+  // to rank rows 01..10 and label them "Good match" without ever saying what
+  // the ranking was made of; these are that answer, and they come from the
+  // same branches that move the score so the two can never disagree.
   let confidence = BASE_CONFIDENCE // passed all hard filters
+  const signals: string[] = []
 
   // City-specific match — scholarship is for this exact city (not national/provincial)
   if (region && region !== 'National' && region !== 'Alberta' && region !== 'Alberta-wide') {
     confidence += CITY_SPECIFIC_BOOST
+    signals.push(`Local to ${region}`)
   }
 
   // Grade restriction confirmed match
-  if (eligibility.grades.length > 0) confidence += GRADE_MATCH_BOOST
+  if (eligibility.grades.length > 0) {
+    confidence += GRADE_MATCH_BOOST
+    // Guarded even though the filter above rejects a null grade: the signal
+    // must never read "Open to Grade null" if that filter ever loosens.
+    if (profile.grade) signals.push(`Open to Grade ${profile.grade}`)
+  }
 
   // School board confirmed match
   if (eligibility.schoolBoards.length > 0 && profile.schoolBoard &&
       eligibility.schoolBoards.includes(profile.schoolBoard)) {
     confidence += BOARD_MATCH_BOOST
+    signals.push(`For ${profile.schoolBoard} students`)
   }
 
   // Field of study
   if (eligibility.fields.length > 0 && profile.fields.length > 0) {
-    if (profile.fields.some(f => eligibility.fields.includes(f))) confidence += FIELD_MATCH_BOOST
+    const hit = profile.fields.find(f => eligibility.fields.includes(f))
+    if (hit) { confidence += FIELD_MATCH_BOOST; signals.push(`Matches your ${hit} focus`) }
     else confidence -= FIELD_MISMATCH_PENALTY
   }
 
   // Target institution
   if (eligibility.targetInstitutions.length > 0 && !eligibility.targetInstitutions.includes('any')) {
     if (profile.targetInstitution) {
-      if (eligibility.targetInstitutions.includes(profile.targetInstitution)) confidence += INSTITUTION_MATCH_BOOST
-      else confidence -= INSTITUTION_MISMATCH_PENALTY
+      if (eligibility.targetInstitutions.includes(profile.targetInstitution)) {
+        confidence += INSTITUTION_MATCH_BOOST
+        signals.push(`Tied to ${profile.targetInstitution}`)
+      } else confidence -= INSTITUTION_MISMATCH_PENALTY
     }
   }
 
   // Average confirmed — student provided their average and it clears the bar
   if (eligibility.minAverage !== null && profile.averagePercent !== null) {
     confidence += AVERAGE_CLEARED_BOOST
+    signals.push(`Your average clears its ${eligibility.minAverage}% minimum`)
   }
 
   // Financial need confirmed match
   if (eligibility.financialNeed && profile.hasFinancialNeed === true) {
     confidence += FINANCIAL_NEED_BOOST
+    signals.push('Considers financial need')
   }
 
   confidence = Math.max(0.1, Math.min(1, confidence))
-  return { match: true, confidence, reasons }
+  return { match: true, confidence, reasons, signals }
 }
 
 export function getConfidenceTier(confidence: number): ConfidenceTier {
@@ -249,12 +266,12 @@ export function matchPrograms(programs: Program[], answers: Record<string, strin
 export function matchAll(
   profile: StudentProfile,
   scholarships: Array<{ id: number; region: string | null; eligibility: EligibilityCriteria | null }>,
-): Array<{ id: number; confidence: number; tier: ConfidenceTier }> {
+): Array<{ id: number; confidence: number; tier: ConfidenceTier; signals: string[] }> {
   return scholarships
     .map(s => {
       const result = matchScholarship(profile, s)
       return result.match
-        ? { id: s.id, confidence: result.confidence, tier: getConfidenceTier(result.confidence) }
+        ? { id: s.id, confidence: result.confidence, tier: getConfidenceTier(result.confidence), signals: result.signals }
         : null
     })
     .filter((r): r is NonNullable<typeof r> => r !== null)

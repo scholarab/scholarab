@@ -36,9 +36,9 @@ function sch(
 describe('matchScholarship', () => {
 
   describe('null eligibility', () => {
-    it('returns match:true, confidence:0.20, empty reasons', () => {
+    it('returns match:true, confidence:0.20, and nothing to say either way', () => {
       expect(matchScholarship(baseProfile, { region: null, eligibility: null }))
-        .toEqual({ match: true, confidence: 0.20, reasons: [] })
+        .toEqual({ match: true, confidence: 0.20, reasons: [], signals: [] })
     })
   })
 
@@ -632,5 +632,68 @@ describe('matchPrograms', () => {
       prog({ id: 2 }),
     ]
     expect(matchPrograms(programs, { grade: '11' }).map(p => p.id)).toEqual([2])
+  })
+})
+
+// ── signals ──────────────────────────────────────────────────────────────────
+
+describe('match signals', () => {
+  // The results list shows these as the reason a row ranked where it did, so
+  // each one has to come from the same branch that moved the confidence score.
+  // A signal without its boost is a lie to the student; a boost without its
+  // signal is an unexplained ranking.
+
+  it('names the city for a city-specific award', () => {
+    expect(matchScholarship(baseProfile, sch({}, 'Medicine Hat')).signals)
+      .toContain('Local to Medicine Hat')
+  })
+
+  it('says nothing about locality for a province-wide or national award', () => {
+    for (const region of [null, 'National', 'Alberta', 'Alberta-wide']) {
+      expect(matchScholarship(baseProfile, sch({}, region)).signals.join(' '))
+        .not.toContain('Local to')
+    }
+  })
+
+  it('names the grade the award is open to', () => {
+    expect(matchScholarship(baseProfile, sch({ grades: ['12'] })).signals)
+      .toContain('Open to Grade 12')
+    // A student who gave no grade is rejected by the grade filter upstream, so
+    // this branch never has to invent a grade to name.
+    expect(matchScholarship({ ...baseProfile, grade: null }, sch({ grades: ['12'] })).match)
+      .toBe(false)
+  })
+
+  it('names the field that actually hit, not the whole list', () => {
+    const profile = { ...baseProfile, fields: ['arts', 'STEM'] }
+    expect(matchScholarship(profile, sch({ fields: ['STEM'] })).signals)
+      .toContain('Matches your STEM focus')
+  })
+
+  it('names the average bar it cleared', () => {
+    const profile = { ...baseProfile, averagePercent: 93 }
+    expect(matchScholarship(profile, sch({ minAverage: 85 })).signals)
+      .toContain('Your average clears its 85% minimum')
+  })
+
+  it('reports nothing for a rejection', () => {
+    const res = matchScholarship(baseProfile, sch({ grades: [10] }))
+    expect(res.match).toBe(false)
+    expect(res.signals).toEqual([])
+  })
+
+  it('carries them through matchAll', () => {
+    const [top] = matchAll(baseProfile, [
+      { id: 1, region: 'Medicine Hat', eligibility: { ...EMPTY_ELIGIBILITY, grades: ['12'] } },
+    ])
+    expect(top!.signals).toEqual(['Local to Medicine Hat', 'Open to Grade 12'])
+  })
+
+  it('only claims things the score agrees with', () => {
+    // A plain national award with no criteria beyond the defaults earns no
+    // boosts, so it must earn no signals either.
+    const res = matchScholarship(baseProfile, sch({}, 'National'))
+    expect(res.match).toBe(true)
+    expect(res.signals).toEqual([])
   })
 })

@@ -90,13 +90,15 @@ function MatchTile({
 // ── Result row (design table style) ──────────────────────────────────────────
 
 function ResultRow({
-  rank, title, titleHref, subtitle, tags, amount, actions, delay,
+  rank, title, titleHref, subtitle, tags, why, amount, actions, delay,
 }: {
   rank: number
   title: string
   titleHref: string
   subtitle?: string | null
   tags: ReactNode
+  /** Why this one ranked here, in the student's own answers. */
+  why?: string[]
   amount: ReactNode
   actions: ReactNode
   delay: number
@@ -108,6 +110,11 @@ function ResultRow({
         <a href={titleHref} className="sabm-row-name">{title}</a>
         {subtitle && <div className="sabm-row-blurb">{subtitle}</div>}
         <div className="sabm-row-tags">{tags}</div>
+        {why && why.length > 0 && (
+          <ul className="sabm-row-why sabl-mono">
+            {why.map(w => <li key={w}>{w}</li>)}
+          </ul>
+        )}
       </div>
       <div className="sabm-row-amount">{amount}</div>
       <div className="sabm-row-actions">{actions}</div>
@@ -348,8 +355,12 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         {/* Scholarship rows */}
         {showScholarships && scholarshipResults && scholarshipResults.length > 0 && (
           <div className="sabm-table">
-            {showPrograms && <p className="sabl-mono sabm-table-label">SCHOLARSHIPS</p>}
-            {scholarshipResults.map(({ scholarship: s, tier }, index) => {
+            {/* The rows are numbered 01..10 and were never told what the
+                number meant. It is confidence order, so say so. */}
+            <p className="sabl-mono sabm-table-label">
+              {showPrograms ? 'SCHOLARSHIPS · RANKED BY FIT' : 'RANKED BY FIT'}
+            </p>
+            {scholarshipResults.map(({ scholarship: s, tier, signals }, index) => {
               const style = TIER_STYLES[tier]
               return (
                 <ResultRow
@@ -363,6 +374,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     <span className={style.badge}>{style.label}</span>
                     {s.deadline && <span className="sabm-tier sabm-due">Due {formatDue(s.deadline)}</span>}
                   </>}
+                  // Two at most. The point is to justify the rank at a glance,
+                  // not to reprint the eligibility criteria.
+                  why={signals.slice(0, 2)}
                   amount={s.amount}
                   actions={<>
                     <button
@@ -396,7 +410,12 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             className="sabm-table"
             style={showScholarships && scholarshipResults && scholarshipResults.length > 0 ? { marginTop: 48 } : undefined}
           >
-            {showScholarships && <p className="sabl-mono sabm-table-label">RESEARCH PROGRAMS</p>}
+            {/* Deliberately not "ranked by fit": matchPrograms filters by
+                grade and field and keeps the data's own order — it does not
+                score. The label says what the list actually is. */}
+            <p className="sabl-mono sabm-table-label">
+              {showScholarships ? 'RESEARCH PROGRAMS · YOUR GRADE AND FIELD' : 'MATCHED TO YOUR GRADE AND FIELD'}
+            </p>
             {programResults.map((p, index) => (
               <ResultRow
                 key={p.id}

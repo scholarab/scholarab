@@ -198,6 +198,29 @@ export function initSaved() {
 
     const monthLabel = calMonth.toLocaleString('en-CA', { month: 'long', year: 'numeric' });
 
+    // How many saved deadlines sit either side of this month. Bare ← → arrows
+    // gave no reason to press them, so a student with two saved deadlines
+    // clicked through empty months hoping. The count turns the arrow into a
+    // signpost, and the aria-label says it in words.
+    const monthCount = (y: number, m: number) => {
+      const prefix = `${y}-${String(m + 1).padStart(2, '0')}-`;
+      let n = 0;
+      for (const [ds, items] of byDate) if (ds.startsWith(prefix)) n += items.length;
+      return n;
+    };
+    const navHtml = (dir: -1 | 1) => {
+      const d = new Date(year, mon + dir, 1);
+      const n = monthCount(d.getFullYear(), d.getMonth());
+      const label = d.toLocaleString('en-CA', { month: 'long', year: 'numeric' });
+      const attr = dir < 0 ? 'data-cal-prev' : 'data-cal-next';
+      const aria = `${dir < 0 ? 'Previous' : 'Next'} month, ${label}`
+        + (n > 0 ? `, ${n} deadline${n > 1 ? 's' : ''}` : ', no deadlines');
+      return `<button type="button" class="sabs-cal-nav${n > 0 ? ' has-due' : ''}" ${attr} aria-label="${aria}">`
+        + `<span aria-hidden="true">${dir < 0 ? '←' : '→'}</span>`
+        + (n > 0 ? `<span class="sabl-mono sabs-cal-nav-count" aria-hidden="true">${n}</span>` : '')
+        + '</button>';
+    };
+
     const cellHtml = cells.map(d => {
       if (d === null) return '<div class="sabs-cal-cell blank"></div>';
       const ds = dayStr(d);
@@ -240,9 +263,9 @@ export function initSaved() {
       + '</div>'
       + '<div class="sabs-cal-card">'
       + '<div class="sabs-cal-head">'
-      + '<button type="button" class="sabs-cal-nav" data-cal-prev aria-label="Previous month">←</button>'
+      + navHtml(-1)
       + `<div class="sabs-cal-month">${monthLabel}</div>`
-      + '<button type="button" class="sabs-cal-nav" data-cal-next aria-label="Next month">→</button>'
+      + navHtml(1)
       + '</div>'
       + '<div class="sabs-cal-grid" style="margin-bottom:8px">'
       + ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(d => `<div class="sabl-mono sabs-cal-wd">${d}</div>`).join('')

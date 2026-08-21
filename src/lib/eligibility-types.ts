@@ -89,6 +89,10 @@ export type MatchResult = {
   match: boolean
   confidence: number   // 0–1
   reasons: string[]    // human-readable reasons for non-match
+  /** Human-readable reasons this DID match, in the order they were scored.
+   *  Empty on a rejection, and empty on a match that cleared every filter
+   *  without any specificity signal firing. */
+  signals: string[]
 }
 
 export type ConfidenceTier = 'strong' | 'good' | 'possible'
