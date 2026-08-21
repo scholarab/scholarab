@@ -90,30 +90,24 @@ export async function getStaticPaths() {
         kind: 'scholarship' as const,
         scholarship: s,
         program: undefined as Program | undefined,
-        position: `LISTING ${i + 1} OF ${scholarships.length}`,
         related: relatedScholarships(s),
         metaDescription: descriptions[i]!,
-        prevSlug: generateSlug(scholarships[(i - 1 + scholarships.length) % scholarships.length]!.title),
-        nextSlug: generateSlug(scholarships[(i + 1) % scholarships.length]!.title),
       },
     })),
-    ...programs.map((p, i) => ({
+    ...programs.map(p => ({
       params: { type: 'programs', slug: generateSlug(p.name) },
       props: {
         kind: 'program' as const,
         scholarship: undefined as Scholarship | undefined,
         program: p,
-        position: `LISTING ${i + 1} OF ${programs.length}`,
         related: relatedPrograms(p),
         metaDescription: undefined as string | undefined,
-        prevSlug: generateSlug(programs[(i - 1 + programs.length) % programs.length]!.name),
-        nextSlug: generateSlug(programs[(i + 1) % programs.length]!.name),
       },
     })),
   ];
 }
 
-const { kind, scholarship, program, position, prevSlug, nextSlug, related, metaDescription } = Astro.props;
+const { kind, scholarship, program, related, metaDescription } = Astro.props;
 
 const todayDate = new Date();
 todayDate.setHours(0, 0, 0, 0);
@@ -360,9 +354,6 @@ const breadcrumbJson = {
       opensLabel={d.opensLabel}
       backHref={d.currentPath}
       backLabel={`Back to ${d.breadcrumbName === 'Research Programs' ? 'Programs' : 'Scholarships'}`}
-      position={position}
-      prevHref={`${d.currentPath}${prevSlug}/`}
-      nextHref={`${d.currentPath}${nextSlug}/`}
       facts={d.facts}
       eligibility={d.eligibility}
       about={d.about}

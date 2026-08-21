@@ -253,9 +253,20 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     return matchPrograms(programs, answers)
   }, [programs, answers, step, showPrograms])
 
-  const totalAmount = useMemo(() => {
-    if (!scholarshipResults) return 0
-    return scholarshipResults.filter(r => r.tier !== 'possible').reduce((sum, r) => sum + parseAmount(r.scholarship.amount), 0)
+  // What one of these is worth, not what all of them add up to. The card used
+  // to show a sum — "COMBINED AWARD VALUE $27,500" — which is a number nobody
+  // can win: these are independent competitive awards, most students take home
+  // one or none, and the total moved with an arbitrary 10-result cap. The
+  // range answers the question the student actually has at this point, which
+  // is whether any of this is worth an evening of applications.
+  const awardRange = useMemo(() => {
+    if (!scholarshipResults) return null
+    const amounts = scholarshipResults
+      .filter(r => r.tier !== 'possible')
+      .map(r => parseAmount(r.scholarship.amount))
+      .filter(a => a > 0)
+    if (amounts.length === 0) return null
+    return { low: Math.min(...amounts), high: Math.max(...amounts) }
   }, [scholarshipResults])
 
   const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
@@ -317,14 +328,20 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           {headline}
         </h2>
 
-        {showScholarships && totalAmount > 0 && (
+        {showScholarships && awardRange && (
           <div className="sabm-value-card">
             <div style={{ flex: 'none' }}>
-              <div className="sabm-value-label sabl-mono">COMBINED AWARD VALUE</div>
-              <div className="sabm-value-amount tnum">${totalAmount.toLocaleString('en-CA')}</div>
+              <div className="sabm-value-label sabl-mono">
+                {awardRange.low === awardRange.high ? 'EACH ONE IS WORTH' : 'THESE AWARDS RANGE FROM'}
+              </div>
+              <div className="sabm-value-amount tnum">
+                {awardRange.low === awardRange.high
+                  ? `$${awardRange.high.toLocaleString('en-CA')}`
+                  : `$${awardRange.low.toLocaleString('en-CA')} – $${awardRange.high.toLocaleString('en-CA')}`}
+              </div>
             </div>
             <div className="sabm-value-note">
-              Strong and good matches based on your answers. Always verify eligibility on the official site before applying.
+              Each is a separate application, judged on its own. Always verify eligibility on the official site before applying.
             </div>
           </div>
         )}
@@ -390,7 +407,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       referrerPolicy="no-referrer"
                       className="sabl-apply"
                       onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
-                    >Apply →</a>
+                      aria-label={`Apply for ${s.title} on the sponsor's site (opens in a new tab)`}
+                    >Apply<span className="sabl-ext" aria-hidden="true">↗</span></a>
                   </>}
                 />
               )
@@ -453,7 +471,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     referrerPolicy="no-referrer"
                     className="sabl-apply"
                     onClick={() => sendEvent('apply_click', 'program', p.id)}
-                  >Apply →</a>
+                    aria-label={`Apply for ${p.name} on the provider's site (opens in a new tab)`}
+                  >Apply<span className="sabl-ext" aria-hidden="true">↗</span></a>
                 </>}
               />
             ))}

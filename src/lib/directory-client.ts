@@ -2,6 +2,7 @@
 // The page ships fully server-rendered cards; this module only shows/hides and
 // reorders existing DOM nodes, replicating what the old React islands did.
 import { sendEvent } from './events.ts';
+import { writeListContext } from './list-context.ts';
 import { showConfetti } from './utils.ts';
 
 export interface DirectoryItem {
@@ -127,6 +128,15 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       grid.append(...withGroupHeaders(visible));
       grid.hidden = visible.length === 0;
     }
+
+    // Hand the detail pages the order the reader is actually looking at, so
+    // their ‹ › arrows walk this list instead of the JSON's build order.
+    writeListContext({
+      paths: visible
+        .map(v => v.el.querySelector<HTMLAnchorElement>('.sabl-name')?.getAttribute('href') ?? '')
+        .filter(Boolean),
+      filtered: q !== '' || Object.keys(state).some(k => state[k] !== config.defaultState[k]),
+    });
 
     const count = root.querySelector('[data-dir-count]');
     if (count) count.textContent = config.countLine(visible.length, items.length, visible);

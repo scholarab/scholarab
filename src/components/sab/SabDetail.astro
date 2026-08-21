@@ -34,9 +34,6 @@ interface Props {
   opensLabel?: string | null; // formatted open date, for status 'future'
   backHref: string;
   backLabel: string;
-  position: string; // 'LISTING 4 OF 156'
-  prevHref: string;
-  nextHref: string;
   facts: Fact[];
   eligibility: string | null;
   about: string | null;
@@ -57,7 +54,7 @@ interface Props {
 const {
   itemType, itemId, typeLabel, emoji, tag, name, subline,
   status, daysLeft, deadlineIso, openDateIso, inactive, dueLong, opensLabel,
-  backHref, backLabel, position, prevHref, nextHref,
+  backHref, backLabel,
   facts, eligibility, about, notes, steps,
   valueLabel, valueBig, valueNote,
   ctaLabel, url, canRemind, canonical, guideHref, guideTitle,
@@ -86,10 +83,16 @@ const chip =
 
 <div class="sabd-crumb-row">
   <a href={backHref} class="sabd-mono sabd-back">← {backLabel}</a>
-  <div class="sabd-mono sabd-switcher">
-    <span class="sabd-position">{position}</span>
-    <a href={prevHref} class="sabd-arrow" aria-label="Previous listing">‹</a>
-    <a href={nextHref} class="sabd-arrow" aria-label="Next listing">›</a>
+  {/*
+    Empty until the client can say which list these arrows walk. There is no
+    server-side answer: the build order of the JSON is not a list any reader
+    has seen, and a position in it is a claim about nothing. See
+    lib/list-context.ts.
+  */}
+  <div class="sabd-mono sabd-switcher" data-sabd-switcher hidden>
+    <span class="sabd-position" data-sabd-position></span>
+    <a href="" class="sabd-arrow" data-sabd-prev aria-label="Previous listing">‹</a>
+    <a href="" class="sabd-arrow" data-sabd-next aria-label="Next listing">›</a>
   </div>
 </div>
 
@@ -370,6 +373,24 @@ const chip =
   import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
   import { showToast, showConfetti } from '../../lib/utils';
+  import { placeInList, readListContext } from '../../lib/list-context.ts';
+
+  /** Point the ‹ › arrows at the list the reader came from, or leave them off. */
+  function restoreSwitcher() {
+    const box = document.querySelector<HTMLElement>('[data-sabd-switcher]');
+    if (!box) return;
+    const place = placeInList(readListContext(), location.pathname);
+    if (!place) { box.hidden = true; return; }
+
+    box.querySelector('[data-sabd-position]')!.textContent = place.label;
+    const prev = box.querySelector<HTMLAnchorElement>('[data-sabd-prev]')!;
+    const next = box.querySelector<HTMLAnchorElement>('[data-sabd-next]')!;
+    prev.href = place.prev;
+    next.href = place.next;
+    prev.setAttribute('aria-label', `Previous listing (${place.index} of ${place.total})`);
+    next.setAttribute('aria-label', `Next listing (${((place.index + 1) % place.total) + 1} of ${place.total})`);
+    box.hidden = false;
+  }
 
   function itemAttrs(el: Element): ['scholarship' | 'program' | undefined, number | undefined] {
     const type = el.getAttribute('data-item-type');
@@ -504,6 +525,7 @@ const chip =
   // astro:page-load fires on first load and after every view-transition swap.
   document.addEventListener('astro:page-load', () => {
     refreshStatusChip();
+    restoreSwitcher();
     const view = document.querySelector('[data-detail-view]');
     // Dwell-gated: an instant back/misclick shouldn't count as a view
     if (view) sendEventAfterDwell('detail_view', ...itemAttrs(view));

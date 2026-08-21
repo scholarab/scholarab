@@ -5,6 +5,7 @@ import type { DirectoryItem } from './directory-client'
 vi.mock('./events.ts', () => ({ sendEvent: vi.fn() }))
 vi.mock('./utils.ts', () => ({ showConfetti: vi.fn() }))
 
+import { readListContext } from './list-context.ts'
 import { sendEvent } from './events.ts'
 import { showConfetti } from './utils.ts'
 
@@ -19,6 +20,7 @@ function card(id: number, name: string, category: string, paid: boolean, order: 
     <div class="sabl-card" data-dir-card data-id="${id}" data-name="${name}"
          data-category="${category}" data-paid="${paid ? '1' : ''}" data-order="${order}"
          data-search="${name.toLowerCase()}\n${category.toLowerCase()}">
+      <a class="sabl-name" href="/scholarships/${name.toLowerCase()}/">${name}</a>
       <button type="button" class="sabl-save" data-dir-save data-id="${id}" data-name="${name}"
               aria-label="Save ${name}" aria-pressed="false">☆</button>
     </div>`
@@ -159,6 +161,29 @@ describe('initDirectory', () => {
     expect(visibleCardNames()).toHaveLength(3)
     expect($('[data-dir-empty]').hidden).toBe(true)
     expect(input.value).toBe('')
+  })
+
+  it('hands the detail pages the order actually on screen', () => {
+    setup()
+    // The order the reader sees, not the order the JSON is in — this is the
+    // whole basis of the detail page's ‹ › arrows.
+    expect(readListContext()).toEqual({
+      paths: visibleCardNames().map(n => `/scholarships/${(n ?? "").toLowerCase()}/`),
+      filtered: false,
+    })
+
+    const input = $('[data-dir-search]') as HTMLInputElement
+    input.value = 'alpha'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    const narrowed = readListContext()!
+    expect(narrowed.paths).toEqual(visibleCardNames().map(n => `/scholarships/${(n ?? "").toLowerCase()}/`))
+    expect(narrowed.paths.length).toBeLessThan(3)
+    // The detail page says "FILTERED · 1 OF 1" off this flag; without it the
+    // reader is told they are 1 of 1 in the whole directory.
+    expect(narrowed.filtered).toBe(true)
+
+    click($('[data-dir-clear]'))
+    expect(readListContext()!.filtered).toBe(false)
   })
 
   it('save button toggles state, label, and fires confetti only on save', () => {
