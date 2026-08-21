@@ -148,7 +148,13 @@ const showTicker = ticker ?? currentPath === '/';
      focus ring would flash on every skip, so it opts out. */
   .sabh-skip-target { display: block; height: 0; }
   .sabh-skip-target:focus { outline: none; }
-  .sabh-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; }
+  /* Same measure as the page body, so the logo shares the content's left edge
+     instead of hugging the window on a wide monitor. The dark band itself
+     stays full width. */
+  .sabh-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 48px; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
+  }
   .sabh-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
   /* The CTA used to live inside .sabh-links. It sits beside it now so the

@@ -196,13 +196,12 @@ if (kind === 'scholarship') {
     inactive: s.active === false,
     dueLong: formatDate(s.deadline),
     opensLabel: s.openDate ? formatDate(s.openDate) : null,
-    facts: [
-      { label: 'REGION', value: s.region || 'Alberta-wide' },
-      { label: 'DEADLINE', value: formatDate(s.deadline) },
-      { label: 'CATEGORY', value: s.category || 'General' },
-      { label: 'AMOUNT', value: s.amount },
-      ...(s.openDate ? [{ label: 'OPENS', value: formatDate(s.openDate) }] : []),
-    ],
+    // Empty on purpose. Every one of the five facts this used to list was
+    // already on the page within one screen of itself: REGION is the subline,
+    // CATEGORY is a chip beside the title, DEADLINE and OPENS are the status
+    // chip and the rail, AMOUNT is the 52px number in the rail. A facts table
+    // that repeats the page teaches the reader to skip tables.
+    facts: [],
     eligibility: s.audience,
     // About text mirrors the data description; scholarship.description exists
     // in the JSON but not in the Scholarship type, so read it defensively.
@@ -275,11 +274,12 @@ if (kind === 'scholarship') {
     inactive: false,
     dueLong,
     opensLabel: undefined,
+    // Programs keep the three facts that appear nowhere else on the page.
+    // DEADLINE left with them — the rail already carries it.
     facts: [
       { label: 'DURATION', value: p.duration || 'Varies' },
       { label: 'GRADES', value: p.grades || 'High school' },
       { label: 'LOCATION', value: p.location || 'Alberta' },
-      { label: 'DEADLINE', value: dueLong },
     ],
     eligibility: p.eligibility,
     about: p.description,
@@ -294,9 +294,10 @@ if (kind === 'scholarship') {
     ],
     valueLabel: 'THIS PROGRAM IS',
     valueBig: p.paid ? 'Paid' : 'Free',
-    valueNote: p.paid && p.stipend
-      ? p.stipend
-      : [p.duration, p.grades].filter(Boolean).join(' · ') || null,
+    // The stipend, or nothing. This used to fall back to duration · grades,
+    // which are two of the three facts listed directly to its left — "Free"
+    // needs no footnote, and the footnote it had was a copy.
+    valueNote: p.paid ? p.stipend : null,
     ctaLabel: 'Learn more',
     url: p.url,
     canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,

@@ -65,7 +65,9 @@ const footerCols = [
 
 <style>
   .sabf-footer { background: #0B1512; color: rgba(242,240,233,0.65); font-family: 'Archivo', sans-serif; }
-  .sabf-inner { padding: 64px 48px 40px; }
+  /* Capped to the same measure as the page above it: the band stays full
+     bleed, its contents line up with the content. */
+  .sabf-inner { padding: 64px 48px 40px; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
   .sabf-mono { font-family: 'IBM Plex Mono', monospace; }
   .sabf-accent { color: #2FD3A0; }
   .sabf-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }

@@ -114,7 +114,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-mono { font-family: 'IBM Plex Mono', monospace; }
 
   /* ── Dark hero ── */
-  .sabg-hero { max-width: 780px; margin: 0 auto; padding: 64px 24px 72px; width: 100%; box-sizing: border-box; }
+  .sabg-hero { max-width: var(--sab-read); margin: 0 auto; padding: 64px 24px 72px; width: 100%; box-sizing: border-box; }
   .sabg-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; font-size: 13px; letter-spacing: 0.06em; color: #2FD3A0; }
   .sabg-kicker-link { color: rgba(242,240,233,0.55); text-decoration: none; }
   .sabg-kicker-link:hover { color: #F2F0E9; }
@@ -128,7 +128,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-meta-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(242,240,233,0.35); }
 
   /* ── Prose body ── */
-  .sabg-body { max-width: 780px; margin: 0 auto; padding: 56px 24px 96px; width: 100%; box-sizing: border-box; }
+  .sabg-body { max-width: var(--sab-read); margin: 0 auto; padding: 56px 24px 96px; width: 100%; box-sizing: border-box; }
   .sabg-prose { font-size: 17px; line-height: 1.7; color: rgba(20,25,21,0.85); }
   .sabg-prose h2 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
