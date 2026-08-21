@@ -7,6 +7,7 @@ import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 import { categoryEmoji } from '../lib/category-emoji';
+import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -62,11 +63,20 @@ const categories = [...categoryCounts.entries()]
   .slice(0, 8)
   .map(([name, count]) => ({ name, count, desc: CATEGORY_DESCS[name] ?? 'Awards for Alberta high school students.' }));
 
-const matchGroups = [
-  { key: 'grade',    label: 'YOUR GRADE',  opts: ['Grade 10', 'Grade 11', 'Grade 12'] },
-  { key: 'region',   label: 'YOUR REGION', opts: ['Calgary', 'Edmonton', 'Rural / small town', 'Anywhere in AB'] },
-  { key: 'interest', label: "YOU'RE INTO", opts: ['STEM', 'Trades', 'Arts', 'Sports', 'Volunteering'] },
-];
+// The teaser is the first three questions of the real quiz, not a lookalike:
+// every chip carries the value the matcher expects, so picking here writes a
+// genuine partial answer set and /match resumes at question 4. Options are
+// read from lib/quiz.ts so the two can never drift apart.
+const TEASER_LABELS: Record<string, string> = {
+  grade: 'YOUR GRADE',
+  city:  'YOUR REGION',
+  field: "YOU'RE INTO",
+};
+const matchGroups = TEASER_KEYS.map(key => ({
+  key,
+  label: TEASER_LABELS[key]!,
+  opts: teaserOptions(key),
+}));
 ---
 
 <Layout
@@ -222,7 +232,7 @@ const matchGroups = [
           <div class="sab-mono sab-match-eyebrow">MATCH · 60 SECONDS</div>
           <h2 class="sab-h2 sab-match-h2">Tell us three things. We'll shortlist for you.</h2>
           <p class="sab-match-copy">
-            Pick your grade, region, and interests to see which scholarships fit you. Everything stays in your browser — no account or email needed.
+            Pick your grade, region, and interests to see which scholarships and programs fit you. Everything stays in your browser — no account or email needed.
           </p>
         </div>
         <div class="sab-match-card" id="match-teaser">
@@ -231,12 +241,12 @@ const matchGroups = [
               <div class="sab-mono sab-match-label">{g.label}</div>
               <div class="sab-match-opts">
                 {g.opts.map(o => (
-                  <button type="button" class="sab-match-opt">{o}</button>
+                  <button type="button" class="sab-match-opt" data-value={o.value}>{o.label}</button>
                 ))}
               </div>
             </div>
           ))}
-          <button type="button" class="sab-match-cta" id="match-teaser-cta">Pick 3 more to see matches</button>
+          <button type="button" class="sab-match-cta" id="match-teaser-cta" disabled>Pick 3 more to see matches</button>
         </div>
       </div>
     </div>
@@ -248,6 +258,13 @@ const matchGroups = [
 </Layout>
 
 <script>
+  import { QUIZ_STORAGE_KEY, TEASER_KEYS } from '../lib/quiz';
+  import { sendEvent } from '../lib/events';
+
+  // Questions the teaser answers on the student's behalf: searchType plus the
+  // three it asks. /match resumes at the next unanswered question.
+  const TEASER_STEP = TEASER_KEYS.length + 1;
+
   // ── Closing-this-week day chips (client-side so a stale static build never lies) ──
   function updateClosingSoon() {
     const list = document.getElementById('closing-soon-list');
@@ -329,9 +346,23 @@ const matchGroups = [
     card.dataset.init = 'true';
 
     const groups = Array.from(card.querySelectorAll<HTMLElement>('[data-match-group]'));
+    const picked = () => {
+      const answers: Record<string, string> = {};
+      for (const g of groups) {
+        const on = g.querySelector<HTMLElement>('.sab-match-opt.on');
+        const key = g.dataset.matchGroup;
+        if (on && key) answers[key] = on.dataset.value ?? '';
+      }
+      return answers;
+    };
     const update = () => {
-      const chosen = groups.filter(g => g.querySelector('.sab-match-opt.on')).length;
-      cta.textContent = chosen === groups.length ? 'Show my matches →' : `Pick ${groups.length - chosen} more to see matches`;
+      const chosen = Object.keys(picked()).length;
+      const ready = chosen === groups.length;
+      cta.textContent = ready ? 'Show my matches →' : `Pick ${groups.length - chosen} more to see matches`;
+      // The button navigates; until all three are picked there is nothing to
+      // navigate *with*, so it stays genuinely inert rather than just labelled
+      // as if it were.
+      (cta as HTMLButtonElement).disabled = !ready;
     };
     groups.forEach(g => {
       g.querySelectorAll<HTMLElement>('.sab-match-opt').forEach(btn => {
@@ -344,6 +375,18 @@ const matchGroups = [
       });
     });
     cta.addEventListener('click', async () => {
+      if ((cta as HTMLButtonElement).disabled) return;
+      // Hand the picks to the real quiz instead of dropping them: same storage
+      // key, same option values, so /match resumes at question 5 with the first
+      // four already answered. searchType is seeded to 'both' — the superset,
+      // so the handoff can never hide a result the student would have seen.
+      const answers = { searchType: 'both', ...picked() };
+      try {
+        localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step: TEASER_STEP, answers }));
+      } catch { /* private mode: the quiz just starts from question 1 */ }
+      // The quiz only fires quiz_start when it renders question 1, which a
+      // handoff skips. Fire it here so completions still have a denominator.
+      sendEvent('quiz_start');
       const { navigate } = await import('astro:transitions/client');
       navigate('/match');
     });
@@ -557,6 +600,13 @@ const matchGroups = [
     background: #0E8C64; transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
   }
   .sab-match-cta:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+  /* Inert until all three are picked: the label is an instruction at that
+     point, so the control must not look like it can be obeyed. */
+  .sab-match-cta:disabled {
+    background: transparent; color: rgba(20,25,21,0.45);
+    border: 1.5px dashed rgba(20,25,21,0.25); cursor: default;
+  }
+  .sab-match-cta:disabled:hover { background: transparent; transform: none; box-shadow: none; }
 
   /* ── Motion safety ── */
   @media (prefers-reduced-motion: reduce) {

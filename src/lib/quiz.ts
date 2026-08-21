@@ -11,8 +11,34 @@ export const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v4'
 
 export interface StoredQuiz { step: number; answers: Record<string, string> }
 
-export interface QuizOption { label: string; value: string; hint: string; emoji?: string }
+export interface QuizOption {
+  label: string
+  value: string
+  hint: string
+  emoji?: string
+  /** Chip-length label for the home teaser, which has ~360px to work with.
+   *  Falls back to `label`; only set it where `label` is too long for a chip. */
+  short?: string
+}
 export interface QuizQuestion { key: string; q: string; opts: QuizOption[] }
+
+/** The teaser on the home page seeds these three questions before handing off
+ *  to /match. Named here so the teaser and the quiz cannot drift apart. */
+export const TEASER_KEYS = ['grade', 'city', 'field'] as const
+
+/**
+ * The chips the home teaser renders for one question: real answers only.
+ * "Still figuring it out" and "Already in post-secondary" are escape hatches
+ * that only make sense once the quiz is explaining itself — the teaser asks
+ * for three definite picks, and an empty value would seed a non-answer.
+ */
+export function teaserOptions(key: string): Array<{ label: string; value: string }> {
+  const q = QUIZ_QUESTIONS.find(qq => qq.key === key)
+  if (!q) return []
+  return q.opts
+    .filter(o => o.value !== '' && o.value !== 'post-secondary')
+    .map(o => ({ label: o.short ?? o.label, value: o.value }))
+}
 
 /**
  * Mono hints come from the "ScholarAB Match" design; keys, values and labels
@@ -55,11 +81,11 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     key: 'field',
     q: "What's your academic focus?",
     opts: [
-      { label: 'STEM & Engineering', value: 'STEM', hint: 'SCIENCE, TECH, MATH', emoji: '🔬' },
-      { label: 'Health & Medicine', value: 'health', hint: 'PRE-MED, NURSING, KIN', emoji: '🩺' },
-      { label: 'Business & Commerce', value: 'business', hint: 'FINANCE, MANAGEMENT', emoji: '💼' },
-      { label: 'Arts & Humanities', value: 'arts', hint: 'FINE ARTS, SOCIAL SCIENCE', emoji: '🎨' },
-      { label: 'Trades', value: 'trades', hint: 'RAP AND APPRENTICESHIPS', emoji: '🔧' },
+      { label: 'STEM & Engineering', value: 'STEM', hint: 'SCIENCE, TECH, MATH', emoji: '🔬', short: 'STEM' },
+      { label: 'Health & Medicine', value: 'health', hint: 'PRE-MED, NURSING, KIN', emoji: '🩺', short: 'Health' },
+      { label: 'Business & Commerce', value: 'business', hint: 'FINANCE, MANAGEMENT', emoji: '💼', short: 'Business' },
+      { label: 'Arts & Humanities', value: 'arts', hint: 'FINE ARTS, SOCIAL SCIENCE', emoji: '🎨', short: 'Arts' },
+      { label: 'Trades', value: 'trades', hint: 'RAP AND APPRENTICESHIPS', emoji: '🔧', short: 'Trades' },
       { label: 'Still figuring it out', value: '', hint: 'TOTALLY FINE', emoji: '🤷' },
     ],
   },

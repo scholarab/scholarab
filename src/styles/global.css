@@ -273,8 +273,32 @@ body {
 }
 
 /* ── Focus ring ────────────────────────────────────────────── */
+/* The sab pages are fixed-palette cream, so --brand (#22d3a5, tuned for the
+   dark theme that no longer exists) resolved to 1.8:1 against #FAF7F0 — well
+   under the 3:1 WCAG 2.2 SC 1.4.11 needs for a focus indicator. The ring gets
+   its own token: dark green by default, and mint on the ink surfaces, which
+   inherit it down to every control they contain. */
+:root { --focus-ring: #0E8C64; }
+
+.sabp-header,
+.sab-hero,
+.sabf-footer,
+.sabd-remind,
+.sabm-value-card,
+.sabe-cta { --focus-ring: #2FD3A0; }
+
+/* Accent-filled controls are themselves #2FD3A0, so they must opt back out of
+   whatever surface they sit on — a mint ring on a mint pill is 1:1. */
+.sabh-cta,
+.sab-btn-accent,
+.sabm-btn-accent,
+.sab404-btn-accent,
+.sabd-remind-btn,
+.sabg-cta-btn,
+.sabe-btn-solid { --focus-ring: #0B1512; }
+
 :focus-visible {
-  outline: 2px solid var(--brand);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
   border-radius: 4px;
 }
