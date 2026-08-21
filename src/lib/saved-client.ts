@@ -82,7 +82,8 @@ export function initSaved() {
       const apply = card.querySelector<HTMLElement>('[data-sv-apply]');
       if (apply) {
         const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined } as Parameters<typeof getScholarshipStatus>[0]);
-        apply.textContent = status === 'active' ? 'Apply →' : 'Visit →';
+        const applyLabel = apply.querySelector('[data-apply-label]');
+        if (applyLabel) applyLabel.textContent = status === 'active' ? 'Apply' : 'Visit';
       }
     }
   }
@@ -107,9 +108,11 @@ export function initSaved() {
 
     const countEl = root.querySelector('[data-sv-count]');
     if (countEl) {
-      countEl.textContent = empty
-        ? '0 items bookmarked. Your shortlist lives here.'
-        : `${total} ${total === 1 ? 'item' : 'items'} bookmarked: ${sh.length} scholarship${sh.length === 1 ? '' : 's'}, ${pr.length} program${pr.length === 1 ? '' : 's'}.`;
+      // Just the total. The per-type split used to be spelled out here and
+      // then again 100px below in the two section heads — the same numbers
+      // twice, which is where a mismatch would eventually come from.
+      countEl.textContent =
+        `${total} ${total === 1 ? 'item' : 'items'} bookmarked. Your shortlist lives here.`;
     }
 
     const emptyEl = root.querySelector<HTMLElement>('[data-sv-empty]');

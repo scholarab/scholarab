@@ -66,6 +66,23 @@ describe('quiz option values', () => {
   });
 });
 
+describe('quiz hints', () => {
+  it('never lets one hint cover most of a question', () => {
+    // Four of the six city chips read "AND AREA" — a column that repeats
+    // itself for the majority of its options is not telling you which one to
+    // pick, which is the only job a hint has. Two options sharing one
+    // (both U of C and MRU really are in Calgary) is fine.
+    for (const q of QUIZ_QUESTIONS) {
+      const counts = new Map<string, number>();
+      for (const o of q.opts) counts.set(o.hint, (counts.get(o.hint) ?? 0) + 1);
+      for (const [hint, n] of counts) {
+        expect(n, `"${hint}" is the hint on ${n} of "${q.key}"'s ${q.opts.length} options`)
+          .toBeLessThanOrEqual(q.opts.length / 2);
+      }
+    }
+  });
+});
+
 describe('how the quiz describes itself', () => {
   const NUMERALS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
 

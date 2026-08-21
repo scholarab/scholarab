@@ -130,10 +130,7 @@ const matchGroups = TEASER_KEYS.map(key => ({
 
       <!-- hero body -->
       <div class="sab-container sab-hero-body">
-        <div class="sab-kicker sab-mono">
-          <span class="sab-kicker-dot" aria-hidden="true"></span>
-          <span>BUILT BY A STUDENT, FOR STUDENTS</span>
-        </div>
+        <div class="sab-kicker">BUILT BY A STUDENT, FOR STUDENTS</div>
 
         <h1 class="sab-h1">
           Alberta's student opportunities, in <em>one</em> directory.
@@ -436,11 +433,6 @@ const matchGroups = TEASER_KEYS.map(key => ({
     flex: 1; display: flex; flex-direction: column; justify-content: center;
     width: 100%; box-sizing: border-box;
   }
-  .sab-kicker {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 30px;
-    font-size: 13px; color: #2FD3A0; letter-spacing: 0.06em;
-  }
-  .sab-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
 
   .sab-h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
@@ -635,8 +627,6 @@ const matchGroups = TEASER_KEYS.map(key => ({
        changes shape; it simply stops padding itself out to 100svh. */
     .sab-hero { min-height: 0; }
     .sab-hero-body { padding-top: 22px; }
-    .sab-kicker { font-size: 11px; gap: 9px; margin-bottom: 14px; }
-    .sab-kicker-dot { width: 7px; height: 7px; }
     /* 44px at 390, 41 at 360, 48 at a Pro Max — where the closing list
        clears one more row above the fold. */
     .sab-h1 { font-size: clamp(38px, 11.5vw, 48px); }

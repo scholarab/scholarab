@@ -79,12 +79,22 @@ export const KIND_LABELS: Record<UpdateKind, string> = {
   'under-hood': 'UNDER THE HOOD',
 }
 
+/**
+ * Five categories need five distinguishable marks, so these are the one place
+ * the palette carries hues of its own. All five are measured against the WHITE
+ * month card these sit on — not the cream page, which is the more forgiving
+ * background and the reason the misses went unnoticed. At the badge's 11px:
+ * #B8541F was 4.13:1 (the same orange already retired from the day chips and
+ * /404), the 0.45 grey was 2.9:1, and #0E8C64 — the site's link green, which
+ * does clear AA on cream — is only 4.24:1 here. Their replacements measure
+ * 6.06, 5.08 and 6.52; the blue and purple always cleared it at 5.22 and 5.77.
+ */
 export const KIND_COLORS: Record<UpdateKind, string> = {
-  'new': '#0E8C64',
+  'new': '#0A6B4D',
   'better': '#1F6FB8',
-  'fixed': '#B8541F',
+  'fixed': '#A0491A',
   'listings': '#7A4FB8',
-  'under-hood': 'rgba(20,25,21,0.45)',
+  'under-hood': 'rgba(20,25,21,0.62)',
 }
 
 /**

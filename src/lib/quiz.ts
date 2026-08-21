@@ -15,7 +15,6 @@ export interface QuizOption {
   label: string
   value: string
   hint: string
-  emoji?: string
   /** Chip-length label for the home teaser, which has ~360px to work with.
    *  Falls back to `label`; only set it where `label` is too long for a chip. */
   short?: string
@@ -41,18 +40,22 @@ export function teaserOptions(key: string): Array<{ label: string; value: string
 }
 
 /**
- * Mono hints come from the "ScholarAB Match" design; keys, values and labels
- * are the real matching-engine inputs and must not change without updating
- * the matcher.
+ * Mono hints come from the "ScholarAB Match" design. No emoji: they only ever
+ * reached two of the six questions, and 🔬 was carrying "Research Programs"
+ * and "STEM & Engineering" at once — a symbol that means two things in one
+ * quiz is decoration, and the mono hint already does the labelling work.
+ *
+ * Keys, values and labels are the real matching-engine inputs and must not
+ * change without updating the matcher.
  */
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     key: 'searchType',
     q: 'What are you looking for?',
     opts: [
-      { label: 'Scholarships', value: 'scholarships', hint: 'AWARDS AND BURSARIES', emoji: '🎓' },
-      { label: 'Research Programs', value: 'programs', hint: 'SUMMER, TRADES, CONTESTS', emoji: '🔬' },
-      { label: 'Both', value: 'both', hint: 'SHOW ME EVERYTHING', emoji: '✨' },
+      { label: 'Scholarships', value: 'scholarships', hint: 'AWARDS AND BURSARIES' },
+      { label: 'Research Programs', value: 'programs', hint: 'SUMMER, TRADES, CONTESTS' },
+      { label: 'Both', value: 'both', hint: 'SHOW ME EVERYTHING' },
     ],
   },
   {
@@ -70,10 +73,10 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     q: 'Where are you based?',
     opts: [
       { label: 'Medicine Hat', value: 'Medicine Hat', hint: 'THE GAS CITY' },
-      { label: 'Calgary', value: 'Calgary', hint: 'AND AREA' },
-      { label: 'Edmonton', value: 'Edmonton', hint: 'AND AREA' },
-      { label: 'Lethbridge', value: 'Lethbridge', hint: 'AND AREA' },
-      { label: 'Red Deer', value: 'Red Deer', hint: 'AND AREA' },
+      { label: 'Calgary', value: 'Calgary', hint: 'AND FOOTHILLS' },
+      { label: 'Edmonton', value: 'Edmonton', hint: 'AND CAPITAL REGION' },
+      { label: 'Lethbridge', value: 'Lethbridge', hint: 'AND THE SOUTHWEST' },
+      { label: 'Red Deer', value: 'Red Deer', hint: 'AND CENTRAL ALBERTA' },
       { label: 'Other Alberta', value: 'Other Alberta', hint: 'EVERYWHERE ELSE' },
     ],
   },
@@ -81,12 +84,12 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     key: 'field',
     q: "What's your academic focus?",
     opts: [
-      { label: 'STEM & Engineering', value: 'STEM', hint: 'SCIENCE, TECH, MATH', emoji: '🔬', short: 'STEM' },
-      { label: 'Health & Medicine', value: 'health', hint: 'PRE-MED, NURSING, KIN', emoji: '🩺', short: 'Health' },
-      { label: 'Business & Commerce', value: 'business', hint: 'FINANCE, MANAGEMENT', emoji: '💼', short: 'Business' },
-      { label: 'Arts & Humanities', value: 'arts', hint: 'FINE ARTS, SOCIAL SCIENCE', emoji: '🎨', short: 'Arts' },
-      { label: 'Trades', value: 'trades', hint: 'RAP AND APPRENTICESHIPS', emoji: '🔧', short: 'Trades' },
-      { label: 'Still figuring it out', value: '', hint: 'TOTALLY FINE', emoji: '🤷' },
+      { label: 'STEM & Engineering', value: 'STEM', hint: 'SCIENCE, TECH, MATH', short: 'STEM' },
+      { label: 'Health & Medicine', value: 'health', hint: 'PRE-MED, NURSING, KIN', short: 'Health' },
+      { label: 'Business & Commerce', value: 'business', hint: 'FINANCE, MANAGEMENT', short: 'Business' },
+      { label: 'Arts & Humanities', value: 'arts', hint: 'FINE ARTS, SOCIAL SCIENCE', short: 'Arts' },
+      { label: 'Trades', value: 'trades', hint: 'RAP AND APPRENTICESHIPS', short: 'Trades' },
+      { label: 'Still figuring it out', value: '', hint: 'TOTALLY FINE' },
     ],
   },
   {

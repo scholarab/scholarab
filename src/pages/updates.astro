@@ -16,6 +16,9 @@ const description =
   'Every change made to ScholarAB since it launched in March 2026, grouped by month and week, written in plain English.';
 const canonical = 'https://www.scholarab.ca/updates/';
 
+// 596 and 70 sat side by side as "CHANGES ON RECORD" and "ENTRIES LOGGED",
+// which reads as 526 changes that went unlogged. The entries summarise the
+// commits — several commits to a line — so the labels now say so.
 const totalEntries = months.reduce((n, m) => n + m.items.length, 0);
 
 const longDate = (iso: string) =>
@@ -43,10 +46,7 @@ const startLabel = longDate(PROJECT_START);
     <div class="sabp-header">
       <SabHeader currentPath="/updates" />
       <div class="sabu-hero">
-        <div class="sabu-kicker sabu-mono">
-          <span class="sabu-kicker-dot"></span>
-          <span>UPDATE LOG</span>
-        </div>
+        <div class="sab-kicker">UPDATE LOG</div>
         <h1 class="sabu-h1">Everything that has <em>changed</em>.</h1>
         <p class="sabu-lede">
           ScholarAB is built in the open. This is what has changed since {startLabel}, month by
@@ -55,11 +55,11 @@ const startLabel = longDate(PROJECT_START);
         <div class="sabu-stats">
           <div class="sabu-stat">
             <div class="sabu-stat-num">{TOTAL_COMMITS}+</div>
-            <div class="sabu-mono sabu-stat-label">CHANGES ON RECORD</div>
+            <div class="sabu-mono sabu-stat-label">CODE CHANGES SHIPPED</div>
           </div>
           <div class="sabu-stat">
             <div class="sabu-stat-num">{totalEntries}</div>
-            <div class="sabu-mono sabu-stat-label">ENTRIES LOGGED</div>
+            <div class="sabu-mono sabu-stat-label">WRITTEN UP BELOW</div>
           </div>
           <div class="sabu-stat">
             <div class="sabu-stat-num">{months.length}</div>
@@ -140,8 +140,6 @@ const startLabel = longDate(PROJECT_START);
 
   /* Hero -------------------------------------------------------------- */
   .sabu-hero { max-width: var(--sab-measure); margin: 0 auto; padding: 72px 48px 64px; width: 100%; box-sizing: border-box; }
-  .sabu-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; font-size: 13px; color: #2FD3A0; letter-spacing: 0.06em; }
-  .sabu-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
   .sabu-h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;
@@ -219,7 +217,7 @@ const startLabel = longDate(PROJECT_START);
   .sabu-item { display: grid; grid-template-columns: 118px 1fr; gap: 16px; align-items: start; }
   .sabu-tag {
     justify-self: start;
-    font-size: 9.5px; letter-spacing: 0.07em; line-height: 1;
+    font-size: 11px; letter-spacing: 0.07em; line-height: 1;
     border: 1.5px solid; border-radius: 999px; padding: 5px 9px;
     white-space: nowrap; margin-top: 3px;
   }

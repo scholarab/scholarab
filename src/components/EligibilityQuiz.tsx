@@ -58,11 +58,10 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
 // Selection state lives in the parent so only one tile can ever be selected
 // and clicks during the step transition are ignored.
 function MatchTile({
-  label, hint, emoji, delay, state, animateIn, onClick,
+  label, hint, delay, state, animateIn, onClick,
 }: {
   label: string
   hint?: string
-  emoji?: string
   delay: number
   state: 'idle' | 'selected' | 'dim'
   animateIn: boolean
@@ -76,10 +75,7 @@ function MatchTile({
       style={{ animationDelay: `${delay}ms`, height: '100%' }}
     >
       <span className="sabm-opt-text">
-        <span className="sabm-opt-label">
-          {emoji && <span className="sabm-opt-emoji" aria-hidden="true">{emoji} </span>}
-          {label}
-        </span>
+        <span className="sabm-opt-label">{label}</span>
         {hint && <span className="sabm-opt-hint sabl-mono">{hint}</span>}
       </span>
       <span className="sabm-opt-arrow" aria-hidden="true">→</span>
@@ -512,7 +508,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 <MatchTile
                   label={opt.label}
                   hint={opt.hint}
-                  emoji={opt.emoji}
                   delay={i * 50}
                   state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : 'idle'}
                   animateIn={enterDir === 'fwd'}

@@ -38,10 +38,7 @@ const principles = [
 
     <div class="saba-body" style="flex:1;">
       <!-- Title -->
-      <div class="saba-kicker">
-        <span class="saba-dot" style="background:#2FD3A0;"></span>
-        <span>ABOUT SCHOLARAB</span>
-      </div>
+      <div class="sab-kicker">ABOUT SCHOLARAB</div>
       <h1 class="saba-h1">Built by a student,<br /><span class="saba-h1-accent">for students.</span></h1>
       <p class="saba-lede">There was a problem. Now it's fixed.</p>
 
@@ -116,15 +113,6 @@ const principles = [
 
 <style>
   .saba-body { padding: 72px 48px 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
-
-  /* Every other hero on the site opens kicker → h1 → lede; this one opened on
-     the h1, which read as a page that had lost its first line. The mono green
-     is #0E8C64, not the #2FD3A0 the dark heroes use — mint on cream is 1.8:1. */
-  .saba-kicker {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 26px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px; letter-spacing: 0.06em; color: #0E8C64;
-  }
 
   .saba-h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;

@@ -18,10 +18,7 @@ import SabHeader from '../components/sab/SabHeader.astro';
     </div>
 
     <div class="sabp-body" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="sab404-code">
-        <span class="sab404-dot"></span>
-        <span>ERROR 404</span>
-      </div>
+      <div class="sab-kicker" style="--kicker:#A0491A;">ERROR 404</div>
       <h1 class="sab404-h1">This page doesn't exist.</h1>
       <p class="sab404-copy">The link may be old, or the address was mistyped. Everything real lives one click away.</p>
       <div class="sab404-actions">
@@ -39,14 +36,6 @@ import SabHeader from '../components/sab/SabHeader.astro';
 </style>
 
 <style>
-  /* The dot-plus-mono-label kicker the other heroes use. #B8541F was 4.13:1 on
-     cream, under AA for 13px text; #A0491A clears it. */
-  .sab404-code {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px; letter-spacing: 0.06em; color: #A0491A;
-  }
-  .sab404-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #A0491A; }
   .sab404-h1 {
     font-family: 'Instrument Serif', serif; font-weight: 400;
     font-size: clamp(44px, 6vw, 68px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;

@@ -38,7 +38,7 @@ function schWrap(id: number, title: string, deadline: string | null) {
            ${deadline ? `data-deadline="${deadline}"` : ''} data-amount="$1,000" data-url="https://x.example">
         <span class="sabl-days" data-sv-chip></span>
         <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
-        <a href="https://x.example" class="sabl-apply" data-sv-apply>Apply →</a>
+        <a href="https://x.example" class="sabl-apply" data-sv-apply><span data-apply-label>Apply</span><span class="sabl-ext" aria-hidden="true">↗</span></a>
       </div>
     </div>`
 }
@@ -114,7 +114,8 @@ describe('initSaved', () => {
     expect($('[data-sv-empty]').hidden).toBe(true)
     expect($('[data-sv-list]').hidden).toBe(false)
     expect($$('[data-sv-wrap]').filter(w => !w.hidden).map(w => w.dataset.id)).toEqual(['1', '7'])
-    expect($('[data-sv-count]').textContent).toBe('2 items bookmarked: 1 scholarship, 1 program.')
+    // The per-type split belongs to the section heads, not to this line too.
+    expect($('[data-sv-count]').textContent).toBe('2 items bookmarked. Your shortlist lives here.')
     expect($('[data-sv-sh-label]').textContent).toBe('SCHOLARSHIPS · 1')
     expect($('[data-sv-pr-label]').textContent).toBe('RESEARCH PROGRAMS · 1')
   })
@@ -130,8 +131,10 @@ describe('initSaved', () => {
     expect(chips['1']).toBe('26 DAYS LEFT')
     expect(chips['2']).toBe('CLOSED')
     expect(chips['7']).toBe('71 DAYS LEFT')
+    // The word is recomputed from the clock; the ↗ marking it as a link that
+    // leaves the site is markup and must survive that rewrite.
     const applyTexts = $$('[data-sv-apply]').map(a => a.textContent)
-    expect(applyTexts).toEqual(['Apply →', 'Visit →'])
+    expect(applyTexts).toEqual(['Apply↗', 'Visit↗'])
   })
 
   it('remove button unsaves the item, hides its card, and updates counts', () => {
@@ -142,7 +145,7 @@ describe('initSaved', () => {
     expect(savedSch).toEqual([2])
     expect(wrap.hidden).toBe(true)
     expect(showToast).toHaveBeenCalledWith('Removed from saved')
-    expect($('[data-sv-count]').textContent).toBe('1 item bookmarked: 1 scholarship, 0 programs.')
+    expect($('[data-sv-count]').textContent).toBe('1 item bookmarked. Your shortlist lives here.')
   })
 
   it('removing the last item shows the empty state', () => {

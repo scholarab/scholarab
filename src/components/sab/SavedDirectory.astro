@@ -32,6 +32,7 @@ const { initialScholarships, initialPrograms } = Astro.props;
 <div class="sabl-page" data-sv-content hidden>
   <div class="sabl-title-row">
     <div>
+      <div class="sab-kicker">YOUR SHORTLIST</div>
       <h1 class="sabl-h1">Saved</h1>
       <p class="sabl-desc tnum" data-sv-count>0 items bookmarked. Your shortlist lives here.</p>
     </div>
@@ -100,7 +101,8 @@ const { initialScholarships, initialPrograms } = Astro.props;
                         referrerpolicy="no-referrer"
                         class="sabl-apply"
                         data-sv-apply
-                      >{status === 'active' ? 'Apply →' : 'Visit →'}</a>
+                        aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
+                      ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span><span class="sabl-ext" aria-hidden="true">↗</span></a>
                     )}
                   </div>
                 </div>

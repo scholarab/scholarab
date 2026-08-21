@@ -53,14 +53,15 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 <div class="sabl-page">
   <div class="sabl-title-row">
     <div>
+      <div class="sab-kicker">PROGRAMS AND PLACEMENTS</div>
       <h1 class="sabl-h1">Research programs</h1>
       <p class="sabl-desc">
         Labs, competitions, apprenticeships, and summer placements open to Alberta high school students. Some even pay you.
       </p>
     </div>
     <div class="sabl-stat">
-      <div class="sabl-stat-value tnum" data-dir-stat>{paidCount}</div>
-      <div class="sabl-mono sabl-stat-label">PAID POSITIONS IN THIS LIST</div>
+      <div class="sabl-stat-value tnum" data-dir-stat>{paidCount} / {initial.length}</div>
+      <div class="sabl-mono sabl-stat-label">PAID ACROSS THESE LISTINGS</div>
     </div>
   </div>
 
@@ -230,7 +231,10 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     countLine: (shown, total, visible) =>
       directoryCountLine(shown, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) !== 'closed').length),
     groups: { key: programGroupKey, label: key => PROGRAM_GROUP_LABELS[key] ?? key },
-    stat: visible => String(visible.filter(p => p.paid).length),
+    // The sibling page puts a dollar figure in this exact slot, so a bare
+    // numeral in 44px serif reads as money. The denominator makes it a
+    // proportion, which is what it always was.
+    stat: visible => `${visible.filter(p => p.paid).length} / ${visible.length}`,
     getSavedIds: () => [...getSavedPrograms()],
     toggleSave: id => [...toggleSavedProgram(id)],
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),

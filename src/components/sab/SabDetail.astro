@@ -179,7 +179,7 @@ const chip =
         ) : (
           <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
             data-track="apply" data-item-type={itemType} data-item-id={itemId}
-            class="sabd-cta">{ctaLabel} →</a>
+            class="sabd-cta">{ctaLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
         )}
         <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
           class="sabd-save" title="Save" aria-label="Save">☆</button>
@@ -187,7 +187,7 @@ const chip =
       {status !== 'active' && url && (
         <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
           data-track="apply" data-item-type={itemType} data-item-id={itemId}
-          class="sabd-mono sabd-visit">VISIT OFFICIAL SITE →</a>
+          class="sabd-mono sabd-visit">VISIT OFFICIAL SITE<span class="sabl-ext" aria-hidden="true">↗</span></a>
       )}
       <button data-sabd-copy data-copy-url={canonical} class="sabd-mono sabd-copy">COPY LINK</button>
     </div>

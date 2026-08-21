@@ -66,6 +66,7 @@ const totalOpen = initial.reduce(
 <div class="sabl-page">
   <div class="sabl-title-row">
     <div>
+      <div class="sab-kicker">ALBERTA SCHOLARSHIPS</div>
       <h1 class="sabl-h1">Scholarships</h1>
       <p class="sabl-desc">
         All available scholarships for Alberta high school students, updated weekly.
@@ -181,7 +182,8 @@ const totalOpen = initial.reduce(
                   class="sabl-apply"
                   data-track="apply"
                   data-item-id={s.id}
-                >{status === 'active' ? 'Apply →' : 'Visit →'}</a>
+                  aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
+                ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span><span class="sabl-ext" aria-hidden="true">↗</span></a>
               )}
             </div>
           </div>
@@ -266,7 +268,10 @@ const totalOpen = initial.reduce(
           if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
         }
         const apply = s.el.querySelector<HTMLElement>('[data-track="apply"]');
-        if (apply) apply.textContent = status === 'active' ? 'Apply →' : 'Visit →';
+        // Only the word: the ↗ beside it is a sibling span, and overwriting
+        // the anchor's textContent would take the arrow with it.
+        const applyLabel = apply?.querySelector('[data-apply-label]');
+        if (applyLabel) applyLabel.textContent = status === 'active' ? 'Apply' : 'Visit';
       }
     },
     // Deep links like /scholarships?category=STEM pre-select that track chip

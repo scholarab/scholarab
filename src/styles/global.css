@@ -441,6 +441,29 @@ body.quiz-results #match-divider {
 .sabl-page ::selection { background: #2FD3A0; color: #0B1512; }
 .sabl-mono { font-family: 'IBM Plex Mono', monospace; }
 
+/* ── Page kicker ─────────────────────────────────────────────────────────────
+   Every hero opens dot → mono label → h1. That opening was written four times
+   (about, educators, updates, 404) with identical geometry and four different
+   margins, while the three directory pages did not open with one at all — so
+   /scholarships began mid-sentence next to /about. One rule; the dot is a
+   pseudo-element in currentColor so a hero only has to set the colour once. */
+.sab-kicker {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 26px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px; letter-spacing: 0.06em;
+  color: var(--kicker, #0E8C64);
+}
+.sab-kicker::before {
+  content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%;
+  background: currentColor;
+}
+/* Mint is 1.8:1 on cream, so it is only ever a dark hero's kicker colour. */
+.sabp-header .sab-kicker, .sab-hero .sab-kicker { --kicker: #2FD3A0; }
+@media (max-width: 640px) {
+  .sab-kicker { font-size: 11px; gap: 9px; margin-bottom: 14px; }
+  .sab-kicker::before { width: 7px; height: 7px; }
+}
+
 .sabl-title-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
 .sabl-h1 {
   font-family: 'Instrument Serif', serif; font-weight: 400;
@@ -457,12 +480,23 @@ body.quiz-results #match-divider {
   border-top: 2px solid #141915; border-bottom: 1px solid rgba(20,25,21,0.14);
 }
 .sabl-search { display: flex; align-items: center; gap: 10px; flex: 1; max-width: 420px; }
-.sabl-search-icon { font-size: 16px; color: rgba(20,25,21,0.45); }
+.sabl-search-icon { font-size: 16px; color: rgba(20,25,21,0.62); }
 .sabl-search input {
   font-family: 'Archivo', sans-serif; font-size: 15px; border: none; outline: none;
   background: transparent; width: 100%; color: #141915;
 }
-.sabl-search input::placeholder { color: rgba(20,25,21,0.4); }
+/* The field carries no visible label, so the placeholder is the only thing
+   saying what to type — 0.4 alpha put it at 2.6:1. 0.62 clears AA. */
+.sabl-search input::placeholder { color: rgba(20,25,21,0.62); }
+/* WebKit's own clear affordance is a pale grey ✕ we cannot recolour, on a
+   control whose whole job is to be findable once you have typed. Replaced
+   with our own ink glyph at a 24px target. */
+.sabl-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none; appearance: none;
+  width: 24px; height: 24px; cursor: pointer; opacity: 0.62;
+  background: center / 11px 11px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M1 1l10 10M11 1L1 11' stroke='%23141915' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+.sabl-search input::-webkit-search-cancel-button:hover { opacity: 1; }
 .sabl-sort { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .sabl-row-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); width: 72px; flex: none; }
 .sabl-sort .sabl-row-label { width: auto; margin-right: 4px; }
@@ -604,6 +638,12 @@ body.quiz-results #match-divider {
   background: #F2EEE4; color: rgba(20,25,21,0.7);
   max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+/* Arrow convention: → stays on ScholarAB, ↗ leaves for the sponsor's site.
+   Two cards that look alike had buttons that did categorically different
+   things — "Details →" opened our page, "Apply →" left the site — with
+   nothing to tell them apart until you were gone. */
+.sabl-ext { margin-left: 0.4em; }
+
 .sabl-paid {
   font-size: 11.5px; font-weight: 500; padding: 5px 11px; border-radius: 100px;
   background: rgba(14,140,100,0.12); color: #0E8C64; white-space: nowrap;
@@ -653,7 +693,6 @@ body.quiz-results #match-divider {
 .sabm-opt-dim { opacity: 0.45; }
 .sabm-opt-text { display: flex; flex-direction: column; gap: 5px; }
 .sabm-opt-label { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: #141915; }
-.sabm-opt-emoji { margin-right: 7px; }
 .sabl-name-emoji { margin-right: 5px; }
 .sabl-tag-emoji { margin-right: 3px; }
 .sabm-opt-hint { font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); }
