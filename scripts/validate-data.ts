@@ -13,6 +13,8 @@ interface Scholarship {
   url?: string;
   deadline?: string;
   openDate?: string;
+  description?: string;
+  notes?: string | null;
   [key: string]: unknown;
 }
 
@@ -266,6 +268,39 @@ for (const r of rules) {
   if (r.code !== '301') {
     console.error(`${tag}: ${r.from} is a ${r.code || 'missing'} redirect; renames should be 301 so the target inherits the ranking`);
     failed = true;
+  }
+}
+
+// ── notes must add to the description, not repeat it ─────────────────────────
+// Both render as adjacent paragraphs under "ABOUT THIS SCHOLARSHIP". The
+// descriptions were rewritten into prose at some point and absorbed what the
+// notes said, but the notes stayed — so 17 listings printed the same sentence
+// twice, a few lines apart. A sentence is a repeat when nearly every word it
+// carries already appears in one description sentence.
+const NOISE = new Set(
+  "a an the of to and or in for from with on at by is are be as this that their they you your it its must apply applicants students student who".split(' '),
+);
+const sentencesOf = (t: string): string[] =>
+  t.split(/(?<=[.!?])\s+/).map(x => x.trim()).filter(Boolean);
+const contentWords = (t: string): Set<string> =>
+  new Set((t.toLowerCase().match(/[a-z0-9']+/g) ?? []).filter(w => !NOISE.has(w)));
+
+for (const s of scholarships) {
+  if (!s.notes || !s.description) continue;
+  const descSentences = sentencesOf(s.description).map(contentWords);
+  for (const sentence of sentencesOf(s.notes)) {
+    const words = contentWords(sentence);
+    if (words.size === 0) continue;
+    const covered = Math.max(
+      0,
+      ...descSentences.map(d => [...words].filter(w => d.has(w)).length / words.size),
+    );
+    if (covered >= 0.7) {
+      console.error(
+        `notes: "${s.title}" repeats its description — "${sentence}" is ${Math.round(covered * 100)}% already said above`,
+      );
+      failed = true;
+    }
   }
 }
 

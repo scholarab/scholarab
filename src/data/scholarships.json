@@ -3345,7 +3345,7 @@
     "category": "Indigenous",
     "lastVerified": "2026-07",
     "region": "Alberta",
-    "notes": "9 scholarships awarded annually. Applications open October 5, 2026. Cannot have received this scholarship previously.",
+    "notes": "Applications open October 5, 2026.",
     "active": false,
     "openDate": "2026-10-05",
     "description": "Alberta Blue Cross awards this $1,500 scholarship to Indigenous (First Nations, Métis, or Inuit) students who are enrolled full-time in post-secondary programs of at least 2 years in duration. Nine scholarships are awarded annually to recognize and support Indigenous learners pursuing their education. Applicants cannot have previously received this award.",
@@ -3601,7 +3601,7 @@
     "category": "Academic",
     "lastVerified": "2026-08",
     "region": "Alberta",
-    "notes": "No separate application required. Awarded automatically upon admission with a 95%+ average. Any faculty, any citizenship.",
+    "notes": "Open to students of any citizenship.",
     "active": true,
     "description": "The University of Calgary awards this $5,000 scholarship automatically to first-year students admitted with a 95% or higher average. No separate application is required; eligible students receive the award upon admission to any faculty at the University of Calgary.",
     "eligibility": {
@@ -3792,7 +3792,7 @@
     "category": "Community",
     "lastVerified": "2026-08",
     "region": "National",
-    "notes": "Covers certifications and skills courses: lifeguarding, first aid, coding, language, graphic design, coach certification, and more. Ages 16–20. Cycle 2 runs June 23 to 1 p.m. on October 1, 2026, but RBC closes the portal early once the 500 awards are gone, so treat the date as a ceiling and apply early.",
+    "notes": "Cycle 2 runs June 23 to 1 p.m. on October 1, 2026, but RBC closes the portal early once the 500 awards are gone, so treat the date as a ceiling and apply early.",
     "active": true,
     "description": "RBC Ignite pays $1,500 toward job-ready skills and certifications for Canadians aged 16 to 20: lifeguarding, first aid, coding, language training, graphic design, coaching certification, and more. Current high school students can apply.",
     "eligibility": {
@@ -3944,7 +3944,7 @@
     "category": "Trades",
     "lastVerified": "2026-04",
     "region": "Alberta",
-    "notes": "No application required. Automatically awarded to the highest-scoring Alberta secondary student at Skills Canada Nationals. Worth $5,000/year for up to 4 years ($20,000 total). Separate from the WorldSkills Provincial Champion Scholarship.",
+    "notes": "Separate from the WorldSkills Provincial Champion Scholarship.",
     "active": true,
     "description": "Skills Canada Alberta automatically awards this $20,000 scholarship to the highest-scoring Alberta secondary school student competing at the Skills Canada National Competition. The award is worth $5,000 per year for up to four years and recognizes outstanding achievement in trades and technical skills. No application is required; winners are selected based on their competition performance.",
     "eligibility": {
@@ -4018,7 +4018,7 @@
     "category": "Academic",
     "lastVerified": "2026-08",
     "region": "National",
-    "notes": "Up to 16 scholars selected per year. Fully funded: tuition, fees, living stipend, travel, internships, mentorship, and seminars. Open to 400+ Arts & Science programs (excluding Commerce). Applications open September 11, 2026 and close November 2, 2026.",
+    "notes": "Open to 400+ Arts & Science programs. Applications open September 11, 2026 and close November 2, 2026.",
     "active": true,
     "openDate": "2026-09-01",
     "description": "A fully funded route through U of T's Faculty of Arts & Science on the St. George campus: tuition, fees, living stipend, travel, internships, mentorship, and seminars. Up to 16 scholars a year, drawn from Canadian citizens and permanent residents with a 90 to 100% average. Commerce is excluded.",
@@ -4055,7 +4055,7 @@
     "category": "Community",
     "lastVerified": "2026-04",
     "region": "National",
-    "notes": "Competition-based: create a marketing plan and organize an e-waste collection event in your area. Up to 12 winners of $10,000 each, plus a MacBook Pro. Students outside ERA's main cities (Vancouver, Calgary, Edmonton, Saskatoon, Winnipeg, Toronto, Halifax, Montreal) have adjusted requirements.",
+    "notes": null,
     "active": true,
     "openDate": "2026-04-08",
     "description": "The Electronic Recycling Association offers a $10,000 scholarship and MacBook Pro to full-time or part-time students in Canada who demonstrate initiative in environmental sustainability. Winners are selected through a competition requiring applicants to create a marketing plan and organize an e-waste collection event in their area, with up to 12 awards available. Students in major Canadian cities have standard requirements, while those outside ERA's main cities (Vancouver, Calgary, Edmonton, Saskatoon, Winnipeg, Toronto, Halifax, Montreal) may have adjusted participation requirements.",
@@ -4455,7 +4455,7 @@
     "active": true,
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
-    "notes": "Offered by the Association of Alberta Agricultural Fieldmen. Must submit high school marks and a letter of acceptance from a post-secondary institution. Apply through your local County agricultural office.",
+    "notes": null,
     "url": "https://aaaf.ab.ca/AAAF-Bursary",
     "description": "The Association of Alberta Agricultural Fieldmen offers this $1,000 bursary to Alberta residents entering agriculture or environmental science programs at post-secondary institutions. Applicants must submit high school marks and a letter of acceptance from their chosen college or university. Apply through your local County agricultural office.",
     "eligibility": {
@@ -4496,7 +4496,7 @@
     "active": false,
     "lastVerified": "2026-07",
     "applyViaGuidance": false,
-    "notes": "One application covers all AHSRA awards: Merit Awards, NHSRA Merit Awards, Canadian Finals Scholarships, Presidents Award, Teskey Top Hand Award, and Raffle Scholarship. Submit by mail to the AHSRA Scholarship Coordinator.",
+    "notes": "Submit by mail to the AHSRA Scholarship Coordinator.",
     "url": "https://albertahsrodeo.ca/scholarships/",
     "description": "The Alberta High School Rodeo Association (AHSRA) offers multiple scholarships for Grade 12 students who are active members or volunteers in the association. The list includes Merit Awards, NHSRA Merit Awards, Canadian Finals Scholarships, the Presidents Award, the Teskey Top Hand Award, and the Raffle Scholarship, covering both athletic achievement and community involvement. A single application covers all available AHSRA scholarships.",
     "eligibility": {
@@ -4606,7 +4606,7 @@
     "active": false,
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
-    "notes": "Offered by the P.E.O. Sisterhood. Contact your nearest Alberta P.E.O. chapter to apply. First and second year students preferred. Financial need considered.",
+    "notes": null,
     "url": "https://www.peointernational.org/",
     "description": "The P.E.O. Sisterhood funds female students from Alberta in their first or second year at an Alberta or Saskatchewan institution, with financial need part of the selection. There is no central application; contact your nearest Alberta P.E.O. chapter.",
     "eligibility": {
@@ -4643,7 +4643,7 @@
     "active": false,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
-    "notes": "Up to 20 new students per year. Must have no prior post-secondary coursework. Separate application required via Awards Hub after applying for UAlberta admission. The 2027 intake runs October 1, 2026 to February 15, 2027, with offers from mid-April.",
+    "notes": "Up to 20 new students per year. The 2027 intake runs October 1, 2026 to February 15, 2027, with offers from mid-April.",
     "url": "https://www.ualberta.ca/en/admissions/tuition-and-scholarships/entrance-scholarships/turtle-spirit-pathway-award.html",
     "description": "The University of Alberta offers the Turtle Spirit Pathway Award to support domestic students with demonstrated financial barriers who are entering a UAlberta direct-entry undergraduate program with no prior post-secondary experience. Up to 30 new students are selected each year, and applicants must complete a separate application through the Awards Hub after submitting their UAlberta admission application.",
     "eligibility": {
@@ -4719,7 +4719,7 @@
     "active": true,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
-    "notes": "Must demonstrate financial need and knowledge of sign language. School and community leadership considered. Apply through the Edmonton Community Foundation.",
+    "notes": null,
     "url": "https://ecf.ca/student-awards/charmaine-letourneau-scholarships/",
     "description": "The Edmonton Community Foundation awards the Charmaine Letourneau Scholarship to Alberta residents who are deaf or hard of hearing as they enter a post-secondary or vocational program. Applicants must demonstrate financial need and knowledge of sign language, with school and community leadership also considered in selection.",
     "eligibility": {
@@ -4796,7 +4796,7 @@
     "active": true,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
-    "notes": "18 scholarships of $1,000 allocated nationally by region. Does not require top grades; enrollment and passion for learning are the main criteria. Apply online at ufcw.ca. Parent or guardian must be an active UFCW Canada member in good standing.",
+    "notes": "18 scholarships of $1,000 allocated nationally by region. Apply online at ufcw.ca.",
     "url": "https://www.ufcw.ca/index.php?option=com_scholarship&view=sform&id=2&Itemid=138&lang=en",
     "description": "UFCW Canada offers this $1,000 scholarship to members in good standing or their dependents and spouses who are entering full-time post-secondary studies in Canada. The scholarship recognizes enrollment and passion for learning rather than top grades. Applicants must have a parent or guardian who is an active UFCW Canada member to be eligible.",
     "eligibility": {
@@ -4834,7 +4834,7 @@
     "active": true,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
-    "notes": "Two separate scholarships. The Robert McWilliams Memorial Scholarship pays $2,500 to each of two recipients and closes September 30; the Grant Notley Memorial Scholarship pays $500 to $2,000 and closes December 31. A parent or guardian must be a UFCW Local 401 member.",
+    "notes": "The Robert McWilliams Memorial Scholarship pays $2,500 to each of two recipients and closes September 30; the Grant Notley Memorial Scholarship pays $500 to $2,000 and closes December 31.",
     "url": "https://gounion.ca/edu/scholarships/",
     "description": "UFCW Local 401 offers two separate scholarships, the Robert McWilliams Memorial Scholarship and the Grant Notley Memorial Scholarship, worth up to $2,500 to support members' dependents as they enter post-secondary education. To be eligible, your parent or guardian must be a UFCW Local 401 member in Alberta. Applications are submitted through gounion.ca.",
     "eligibility": {
@@ -4872,7 +4872,7 @@
     "category": "General",
     "lastVerified": "2026-08",
     "region": "National",
-    "notes": "Four scholarship streams: Diversity, Financial Wellness, Future Women Leaders, and STEM. One winner per stream guaranteed per region (Alberta is grouped with MB, SK, NT, NU). 16 winners nationally at $3,750 each. Two-phase process: short application, then video submission for finalists. Access via your school's myBlueprint account.",
+    "notes": null,
     "applyViaGuidance": false,
     "active": false,
     "description": "Scotiabank offers four scholarship streams (Diversity, Financial Wellness, Future Women Leaders, and STEM) through myBlueprint for Grade 12 students across Canada. One winner per stream is guaranteed per region (Alberta grouped with MB, SK, NT, NU), with 16 national winners at $3,750 each. Eligible students apply through a two-phase process: an initial short application followed by a video submission for selected finalists, accessed via their school's myBlueprint account.",
@@ -4911,7 +4911,7 @@
     "active": false,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
-    "notes": "Email your transcript or detailed academic report to the RDP Student Connect Centre along with an up-to-date email address and phone number. Limited awards, so apply early. Applies to any credit program at Red Deer Polytechnic.",
+    "notes": "Email your transcript or detailed academic report to the RDP Student Connect Centre along with an up-to-date email address and phone number. Limited awards, so apply early.",
     "url": "https://rdpolytech.ca/admissions/tuition-financial-aid/awards-scholarships",
     "description": "Red Deer Polytechnic offers this $1,000 scholarship to high school students with an 80%+ average in five 5-credit grade 11 or 12 subjects who are planning to attend RDP. The award applies to any credit program at Red Deer Polytechnic and recognizes strong academic achievement among incoming students.",
     "eligibility": {
@@ -4999,7 +4999,7 @@
     "active": false,
     "lastVerified": "2026-04",
     "applyViaGuidance": false,
-    "notes": "Administered by the Community Foundation of Central Alberta (CFCAB). Funds are disbursed directly to the post-secondary institution. Two signed reference letters required. Application available at cfcab.ca.",
+    "notes": "Application available at cfcab.ca.",
     "url": "https://cfcab.ca/donor/financialawards/",
     "description": "The Community Foundation of Central Alberta (CFCAB) administers this academic scholarship for students from the Red Deer and Central Alberta area. Applicants must be graduating high school seniors entering a post-secondary institution, and the award funds are sent directly to the school. Two signed reference letters are required as part of the application process.",
     "eligibility": {
@@ -5550,7 +5550,7 @@
     "category": "Trades",
     "lastVerified": "2026-08",
     "region": "Medicine Hat",
-    "notes": "One $2,000 scholarship. The 2026 round took submissions between May 1 and July 31. These are those dates rolled forward, so check mhffcharity.com in the spring.",
+    "notes": "The 2026 round took submissions between May 1 and July 31. These are those dates rolled forward, so check mhffcharity.com in the spring.",
     "active": false,
     "description": "The Medicine Hat Firefighters Charitable Foundation Scholarship supports graduating students who are accepted into (or have recently completed) an accredited fire service program. Applicants must reside in Medicine Hat, Redcliff, or Cypress County and demonstrate community involvement, leadership, and financial need. One $2,000 award is given annually, with applications accepted May 1 – June 30 and the winner announced July 1.",
     "eligibility": {
