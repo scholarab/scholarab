@@ -48,10 +48,22 @@ vi.mock('../../lib/confirm-email', () => ({ sendConfirmEmail: mockSendConfirm })
 
 vi.mock('../../lib/db/schema', () => ({ subscribers: SUBSCRIBERS, events: EVENTS }))
 
-vi.mock('../../lib/data-loader', () => ({
-  loadScholarships: mockLoadScholarships,
-  loadPrograms:     mockLoadPrograms,
-}))
+// The route must resolve ids from the committed JSON, not from
+// loadScholarships/loadPrograms: those prefer Postgres whenever DATABASE_URL
+// is bound, and the DB has drifted far behind the JSON the pages are built
+// from, which is how a live listing came to answer "Scholarship not found".
+// The DB-preferring pair throws here so a regression fails loudly instead of
+// passing on an identical mock.
+// Defined inside the factory: vi.mock is hoisted above every top-level const.
+vi.mock('../../lib/data-loader', () => {
+  const dbPathUsed = () => { throw new Error('alert.ts must resolve listings from JSON, not the DB loaders') }
+  return {
+  loadScholarships:         dbPathUsed,
+  loadPrograms:             dbPathUsed,
+  loadScholarshipsFromJson: mockLoadScholarships,
+  loadProgramsFromJson:     mockLoadPrograms,
+  }
+})
 
 vi.mock('../../lib/rate-limit', () => ({
   getClientIp:   () => '1.2.3.4',

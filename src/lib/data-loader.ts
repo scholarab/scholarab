@@ -141,11 +141,23 @@ export function loadScholarships(): Promise<Scholarship[]> {
         metaDetail: null,
       }))
     },
-    async () => {
-      const data = await import('../data/scholarships.json')
-      return (data.default as Array<Record<string, unknown>>).map(s => ({ ...(s as Omit<Scholarship, 'eligibility'>), openDate: (s.openDate as string | null) ?? null, eligibility: parseEligibility(s.eligibility) }))
-    },
+    loadScholarshipsFromJson,
   )
+}
+
+/**
+ * The committed JSON, never the database.
+ *
+ * `loadScholarships` prefers Postgres whenever DATABASE_URL is bound, which is
+ * always true inside the Worker. That is fine for anything that only needs the
+ * currently-active set, but it is wrong for resolving an id that came from a
+ * page: pages are prerendered from this JSON with DATABASE_URL blanked (see
+ * the build script), and the two stores have diverged badly. Callers that must
+ * agree with what the site actually rendered use this instead.
+ */
+export async function loadScholarshipsFromJson(): Promise<Scholarship[]> {
+  const data = await import('../data/scholarships.json')
+  return (data.default as Array<Record<string, unknown>>).map(s => ({ ...(s as Omit<Scholarship, 'eligibility'>), openDate: (s.openDate as string | null) ?? null, eligibility: parseEligibility(s.eligibility) }))
 }
 
 export function loadPrograms(): Promise<Program[]> {
@@ -194,15 +206,18 @@ export function loadPrograms(): Promise<Program[]> {
         active: r.active ?? true,
       }))
     },
-    async () => {
-      const data = await import('../data/research-programs.json')
-      // Most JSON entries omit `active` entirely (only retired programs carry
-      // active: false); default it to true so `p.active` checks don't drop them.
-      return (data.default as Array<Record<string, unknown>>).map(p => ({
-        ...(p as unknown as Program),
-        metaDescription: (p.metaDescription as string | undefined) ?? null,
-        active: (p.active as boolean | undefined) ?? true,
-      }))
-    },
+    loadProgramsFromJson,
   )
+}
+
+/** The committed JSON, never the database. See loadScholarshipsFromJson. */
+export async function loadProgramsFromJson(): Promise<Program[]> {
+  const data = await import('../data/research-programs.json')
+  // Most JSON entries omit `active` entirely (only retired programs carry
+  // active: false); default it to true so `p.active` checks don't drop them.
+  return (data.default as Array<Record<string, unknown>>).map(p => ({
+    ...(p as unknown as Program),
+    metaDescription: (p.metaDescription as string | undefined) ?? null,
+    active: (p.active as boolean | undefined) ?? true,
+  }))
 }

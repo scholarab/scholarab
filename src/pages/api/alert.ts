@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro'
 import { eq, sql } from 'drizzle-orm'
 import { db } from '../../lib/db/client'
 import { subscribers, events } from '../../lib/db/schema'
-import { loadScholarships, loadPrograms } from '../../lib/data-loader'
+import { loadScholarshipsFromJson, loadProgramsFromJson } from '../../lib/data-loader'
 import { jsonOk, jsonError } from '../../lib/api-response'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 import { defer } from '../../lib/defer'
@@ -93,17 +93,29 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   let deadline: string
   let itemLabel: string
+  // Resolve against the committed JSON, not loadScholarships()/loadPrograms().
+  // Those prefer Postgres whenever DATABASE_URL is bound, which it always is
+  // here, while the page that posted this itemId was prerendered from the JSON
+  // with DATABASE_URL blanked. The two stores drifted apart -- the DB stops at
+  // id 174 and marks most of what it does hold inactive -- so the DB path was
+  // answering "Scholarship not found" for 142 of the 151 listings whose pages
+  // show a working reminder form. scripts/send-alerts.ts reads the same JSON,
+  // so this is also what makes sign-up and delivery agree on what exists.
   if (itemType === 'scholarship') {
-    const scholarships = await loadScholarships()
+    const scholarships = await loadScholarshipsFromJson()
     const s = scholarships.find(x => x.id === itemId)
     if (!s) return jsonError('Scholarship not found', 404)
+    if (s.active === false) return jsonError('This scholarship is not open', 400)
     if (!s.deadline) return jsonError('This scholarship has no deadline', 400)
     deadline = s.deadline
     itemLabel = s.title
   } else {
-    const programs = await loadPrograms()
+    const programs = await loadProgramsFromJson()
     const p = programs.find(x => x.id === itemId)
     if (!p) return jsonError('Program not found', 404)
+    // `active !== false` rather than truthy, matching the sender: most program
+    // entries omit the field entirely.
+    if (p.active === false) return jsonError('This program is not open', 400)
     if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing')
       return jsonError('This program has no fixed deadline', 400)
     deadline = p.deadline
