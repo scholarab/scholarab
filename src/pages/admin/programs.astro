@@ -1,0 +1,52 @@
+---
+export const prerender = false
+import { db } from '../../lib/db/client'
+import { researchPrograms } from '../../lib/db/schema'
+import { desc } from 'drizzle-orm'
+import AdminShell from '../../components/admin/AdminShell'
+import '../../styles/global.css'
+
+const user = Astro.locals.user!
+let data: typeof researchPrograms.$inferSelect[] = []
+try {
+  data = await db.select().from(researchPrograms).orderBy(desc(researchPrograms.updatedAt))
+} catch (e) {
+  console.error('DB error:', e)
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs | ScholarAB Admin</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* The one dark surface left on the site. It used to inherit this from
+       global.css's :root, which still carried the deleted theme system's dark
+       palette; now that :root describes the cream public site, admin declares
+       its own canvas. */
+    /* `html:root`, not `html`: global.css sets `:root { color-scheme: light }`
+       for the cream public site, and a bare `html` (0,0,1) loses to `:root`
+       (0,1,0), which left the admin panel's native scrollbars, caret and
+       <select> popups rendering light on a near-black page. */
+    html:root { background-color: #0a0a0f; color-scheme: dark; }
+    /* `html body`, not `body`, and not the Tailwind class on the tag: v4 puts
+       utilities in @layer utilities, and unlayered CSS beats a layer whatever
+       its specificity, so global.css's `body { background: var(--bg-page) }`
+       outranked `.bg-[#0a0a0f]` and painted the admin panel cream while the
+       children kept their white text. Two element selectors clear the
+       unlayered body rule without depending on bundle order. */
+    html body { background-color: #0a0a0f; color: #fff; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0a0a0f] text-white min-h-screen">
+  <AdminShell
+    client:load
+    user={user}
+    page="programs"
+    data={JSON.stringify(data)}
+  />
+</body>
+</html>

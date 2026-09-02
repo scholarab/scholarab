@@ -1,0 +1,52 @@
+name: Social Queue
+
+# Builds next week's post images and captions and leaves them as a downloadable
+# artifact. It deliberately does not post anything: Instagram and TikTok only
+# allow API posting from a Business account behind app review, and an
+# auto-posted deadline is a public mistake with no undo.
+
+on:
+  schedule:
+    - cron: '0 15 * * 0'   # Sundays, 3pm UTC (9am MT)
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'How many posts to generate'
+        type: string
+        default: '5'
+      max_days:
+        description: 'Only include deadlines this many days out or nearer'
+        type: string
+        default: '45'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # outreach/ is gitignored, so the "already posted" log can't ride along in
+      # the checkout. The cache carries it week to week instead; if it ever
+      # misses, the worst case is a repeat post, not a wrong one.
+      - name: Restore posted log
+        uses: actions/cache@v4
+        with:
+          path: outreach/social-log.json
+          key: social-log-${{ github.run_id }}
+          restore-keys: social-log-
+
+      - name: Build the queue
+        run: npm run social -- --count=${{ inputs.count || '5' }} --max-days=${{ inputs.max_days || '45' }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: social-queue
+          path: social-out/
+          retention-days: 30

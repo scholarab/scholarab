@@ -1,0 +1,152 @@
+---
+// The program facet hubs: /programs/research/, /programs/computing/.
+// The scholarship twin, and the same route-precedence hazard applies; see the
+// header comment in src/pages/scholarships/[facet].astro.
+import SabFooter from '../../components/sab/SabFooter.astro';
+import SabFonts from '../../components/sab/SabFonts.astro';
+import Layout from '../../layouts/Layout.astro';
+import SabHeader from '../../components/sab/SabHeader.astro';
+import ProgramDirectory from '../../components/sab/ProgramDirectory.astro';
+import { loadPrograms } from '../../lib/data-loader';
+import { enrichPrograms } from '../../lib/enrich';
+import { PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
+import { DEFAULT_PROGRAM_STATE, filterSortPrograms } from '../../lib/list-core';
+import { itemListJson } from '../../lib/ld';
+import { programStatusOf, programIsListed } from '../../lib/status';
+import { getGuide } from '../../lib/guides';
+
+export async function getStaticPaths() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  // Retired programs keep their detail pages for old links but stay out of the
+  // directory, so they must stay out of the hubs too; same rule as
+  // /programs, and the sitemap agrees with both.
+  const all = enrichPrograms((await loadPrograms()).filter(p => programIsListed(p, today)));
+  return PROGRAM_FACETS
+    .map(facet => ({ facet, items: facetItems(facet, all) }))
+    .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
+    .map(({ facet, items }) => ({ params: { facet: facet.slug }, props: { facet, items, allItems: all } }));
+}
+
+const { facet, items, allItems } = Astro.props;
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const ordered = filterSortPrograms(items, DEFAULT_PROGRAM_STATE);
+const canonical = `https://www.scholarab.ca/programs/${facet.slug}/`;
+
+// Programs have no 'future': auto-expire rewrites a passed deadline to 'TBA',
+// so between cycles a program reads as undated rather than closed. The count
+// line says "open" and "rolling" rather than borrowing the scholarship wording.
+const statuses = items.map(p => programStatusOf(p, today));
+const openNow = statuses.filter(x => x === 'active').length;
+const rolling = statuses.filter(x => x === 'tba' || x === 'ongoing').length;
+const paid = items.filter(p => p.paid).length;
+
+// The hub half of the guide pairing. Only the scholarship facet page read
+// facet.guide, so a programs hub could declare an explainer and never link to
+// it; the same one-sided wiring that kept guides out of /programs/ entirely.
+const guide = facet.guide ? getGuide(facet.guide) : null;
+
+const countLine = [
+  `${items.length} ${items.length === 1 ? 'program' : 'programs'}`,
+  openNow > 0 ? `${openNow} with an open deadline` : null,
+  rolling > 0 ? `${rolling} rolling or undated` : null,
+  paid > 0 ? `${paid} paid` : null,
+].filter(Boolean).join(' · ');
+
+const siblings = PROGRAM_FACETS.filter(f => f.slug !== facet.slug);
+
+const listJson = itemListJson(
+  ordered.map(p => ({ name: p.name, url: `https://www.scholarab.ca/programs/${p._slug}/` })),
+  facet.h1,
+  canonical,
+);
+
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.scholarab.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'Research Programs', item: 'https://www.scholarab.ca/programs/' },
+    { '@type': 'ListItem', position: 3, name: facet.label, item: canonical },
+  ],
+};
+---
+
+<Layout
+  title={`${facet.title} | ScholarAB`}
+  description={facet.description}
+  ogTitle={`${facet.title} | ScholarAB`}
+  ogDescription={facet.description}
+  ogUrl={canonical}
+  canonical={canonical}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(listJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <SabFonts slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/programs" />
+  </div>
+
+  <div id="sab-programs" class="sabp">
+    <div class="sabp-body">
+      <nav class="sabl-crumbs sabl-mono" aria-label="Breadcrumb">
+        <a href="/programs/">All programs</a>
+        <span aria-hidden="true">/</span>
+        <span>{facet.label}</span>
+      </nav>
+
+      <ProgramDirectory
+        items={items}
+        h1={facet.h1}
+        intro={facet.intro}
+        allItems={allItems}
+        currentField={facet.slug}
+      />
+
+      <div class="sabl-hubfoot">
+        <p class="sabl-mono sabl-hubcount">{countLine.toUpperCase()}</p>
+        {guide && (
+          <p>
+            Reading first? <a href={`/guides/${guide.slug}/`}>{guide.title}</a> walks through how to
+            work this list.
+          </p>
+        )}
+        <p class="sabl-hublinks">
+          {siblings.map(f => (
+            <a href={`/programs/${f.slug}/`}>{f.label}</a>
+          ))}
+          <a href="/programs/">All programs</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<style is:global>
+  body:has(#sab-programs) { background: #FAF7F0; }
+
+  .sabl-crumbs {
+    display: flex; gap: 8px; align-items: center;
+    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding-top: 24px; color: #6B7280;
+  }
+  .sabl-crumbs a { color: #6B7280; text-decoration: none; }
+  .sabl-crumbs a:hover { color: #141915; text-decoration: underline; }
+
+  .sabl-hubfoot {
+    border-top: 1px solid #E5E0D5;
+    margin-top: 48px; padding: 28px 0 64px;
+    display: flex; flex-direction: column; gap: 12px;
+    font-size: 15px; color: #4B5563;
+  }
+  .sabl-hubcount { font-size: 12px; letter-spacing: 0.08em; color: #6B7280; margin: 0; }
+  .sabl-hubfoot p { margin: 0; }
+  .sabl-hublinks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .sabl-hublinks a { color: #141915; }
+</style>

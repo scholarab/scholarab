@@ -1,0 +1,111 @@
+---
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import Layout from '../layouts/Layout.astro'
+import SabHeader from '../components/sab/SabHeader.astro'
+import { loadScholarships, loadPrograms } from '../lib/data-loader'
+import EligibilityQuiz from '../components/EligibilityQuiz'
+import { QUIZ_DURATION, QUIZ_PROMISE, QUIZ_QUESTION_WORD, QUIZ_MAX_QUESTION_WORD } from '../lib/quiz'
+
+const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()])
+
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    { '@type': 'ListItem', 'position': 1, 'name': 'ScholarAB', 'item': 'https://www.scholarab.ca' },
+    { '@type': 'ListItem', 'position': 2, 'name': 'Find Your Scholarships', 'item': 'https://www.scholarab.ca/match/' },
+  ],
+};
+---
+
+<Layout
+  title="Find Your Scholarships | ScholarAB"
+  description={`${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`}
+  ogTitle="Find Your Scholarships | ScholarAB"
+  ogDescription={`${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`}
+  ogUrl="https://www.scholarab.ca/match/"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <SabFonts italic slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/match" />
+  </div>
+
+  <div id="sab-match" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabm-body" style="flex:1;">
+      <div id="match-intro">
+        <h1 class="sabm-h1">Find your <em>match.</em></h1>
+        <p class="sabm-sub">
+          {QUIZ_QUESTION_WORD} questions. Instant results. Every Alberta opportunity available to you.
+        </p>
+        <div class="sabm-trust sabl-mono">
+          <span>◦ Completely anonymous</span>
+          <span>◦ Under {QUIZ_DURATION}</span>
+        </div>
+      </div>
+
+      <EligibilityQuiz scholarships={scholarships} programs={programs} client:load />
+
+      {/* The quiz is a React island, so until it hydrates this page has about
+          twenty words on it -- a heading, a subhead, and two trust chips. That
+          is not enough for anything to read, index or rank, and it is not
+          enough for a reader who lands here and wants to know what the tool
+          does before answering questions about themselves. This section is the
+          page's actual prose. It sits below the quiz because the quiz is what
+          the reader came for; it does not get hidden once the quiz starts,
+          because a description of how matching works is most useful next to
+          the results it produced. */}
+      <section class="sabm-about">
+        <h2>How the match works</h2>
+        <p>
+          The quiz asks {QUIZ_QUESTION_WORD.toLowerCase()} things: whether you want scholarships, research programs or both; your grade; your city; the field you are headed into; your average; and where you plan to study. If your city has awards tied to a school board or to particular schools, it asks which board you are with and which school you go to as well, which makes it {QUIZ_MAX_QUESTION_WORD} at most. Nothing else. There is no name field, no email field and no account, and your answers never leave your browser. They are held on your own device for the tab you are in, so the quiz remembers where you were if you reload, and they are gone once you close the tab or leave it sitting for an hour. You can also clear them at any time by starting over.
+        </p>
+        <p>
+          What comes back is the same corpus you can browse on <a href="/scholarships/">the scholarship directory</a> and <a href="/programs/">the research programs list</a>, narrowed to what your answers actually clear. The matching is deliberately cautious in one direction: a question you skip is treated as unknown rather than as a &ldquo;no&rdquo;, so an award restricted to a group you did not tell us about still appears rather than being silently dropped. That is the right way round to be wrong. It does mean the list you get is the set worth checking, not a set you are guaranteed to be eligible for.
+        </p>
+        <p>
+          Each result carries a <strong>strong</strong>, <strong>good</strong> or <strong>possible</strong> badge. Those tiers are about how much of your profile the award's criteria actually spoke to, not about your odds of winning. A local award that names your city and your grade earns a strong badge because it matched on specific things; a province-wide award open to everyone in Alberta is a possible match for the same reason it is open to you: it barely asked. Read them as &ldquo;how well this fits what you told us&rdquo;.
+        </p>
+        <p>
+          Every result links to its full listing, and the criteria on that page come from the provider's own site. Check them there before you apply: rules change mid-cycle, and this quiz is a way to shorten the list, not a ruling on eligibility. If you would rather read than answer, the <a href="/deadlines/">deadline calendar</a> shows the same awards by month and the <a href="/guides/">guides</a> explain the year they sit in.
+        </p>
+      </section>
+    </div>
+
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<style is:global>
+  /* The match design is fixed light regardless of site theme */
+  body:has(#sab-match) { background: #FAF7F0; }
+</style>
+
+<style>
+  /* Quieter than the quiz above it on purpose: this is the page explaining
+     itself, not competing with the thing the reader came to use. */
+  .sabm-about {
+    max-width: 62ch;
+    margin: 72px auto 8px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(20,25,21,0.12);
+    font-family: 'Archivo', sans-serif;
+  }
+  .sabm-about h2 {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+    color: #141915; margin: 0 0 14px;
+  }
+  .sabm-about p {
+    font-size: 16px; line-height: 1.65;
+    color: rgba(20,25,21,0.74); margin: 0 0 16px;
+  }
+  .sabm-about p:last-child { margin-bottom: 0; }
+  .sabm-about a { color: #141915; text-decoration: underline; text-underline-offset: 2px; }
+  .sabm-about strong { color: #141915; font-weight: 600; }
+  @media (max-width: 720px) {
+    .sabm-about { margin-top: 48px; padding-top: 24px; }
+  }
+</style>

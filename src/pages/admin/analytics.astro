@@ -1,0 +1,176 @@
+---
+export const prerender = false
+import { db } from '../../lib/db/client'
+import { events, scholarships, researchPrograms, subscribers } from '../../lib/db/schema'
+import { sql, and, eq, desc, count } from 'drizzle-orm'
+import AdminShell from '../../components/admin/AdminShell'
+import type { AnalyticsData } from '../../components/admin/AnalyticsPanel'
+import scholarshipsJson from '../../data/scholarships.json'
+import programsJson from '../../data/research-programs.json'
+import searchMonths from '../../data/search-months.json'
+import '../../styles/global.css'
+
+const user = Astro.locals.user!
+
+const titleMap = (rows: { id: number; title: string }[]): Record<number, string> =>
+  Object.fromEntries(rows.map(r => [r.id, r.title]))
+
+// Everything is bucketed by Alberta calendar month, never UTC: a 6pm event on
+// the 31st is still that month locally. `events.ts` is timestamp-without-zone
+// holding UTC, so it needs the UTC hop first; `subscribers.created_at` is
+// already timestamptz and must not get it, or it shifts by six hours.
+const EVENT_MONTH = sql<string>`to_char(${events.ts} AT TIME ZONE 'UTC' AT TIME ZONE 'America/Edmonton', 'YYYY-MM')`
+const SUB_MONTH = sql<string>`to_char(${subscribers.createdAt} AT TIME ZONE 'America/Edmonton', 'YYYY-MM')`
+
+// The month list is built from the data, so a month nobody has done anything
+// in yet does not exist as far as the panel is concerned -- on the first of
+// September the newest tab still said August. This is the clock half of it,
+// taken here rather than in the browser because the server is the same
+// authority the rows came from, and formatted the same way the buckets are.
+const currentMonth = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'America/Edmonton', year: 'numeric', month: '2-digit',
+}).format(new Date()).slice(0, 7)
+
+// Search Console figures are a committed snapshot, not a live query: the
+// service-account key is gitignored and must never reach the Worker, and the
+// numbers only move once a day. Refresh with `npm run gsc-months`. They sit
+// outside the try below because they are a file, so they survive a DB outage.
+const search = (searchMonths as { generated: string; months: AnalyticsData['search'] })
+
+let data: AnalyticsData = {
+  monthly: [], perItem: [], daily: [], emptySearches: [],
+  search: search.months, searchGenerated: search.generated,
+  subscribers: { people: 0, reminders: 0 },
+  monthlySubs: [], perItemSubs: [],
+  titles: { scholarship: {}, program: {} },
+  currentMonth,
+}
+try {
+  const monthly = await db
+    .select({ month: EVENT_MONTH, event: events.event, n: count() })
+    .from(events)
+    .groupBy(sql`1`, events.event)
+
+  const perItem = await db
+    .select({
+      month: EVENT_MONTH,
+      event: events.event,
+      itemType: events.itemType,
+      itemId: events.itemId,
+      n: count(),
+    })
+    .from(events)
+    .where(and(
+      sql`${events.event} in ('detail_view', 'apply_click', 'save', 'app_step', 'alert_subscribe')`,
+      sql`${events.itemId} is not null`,
+    ))
+    .groupBy(sql`1`, events.event, events.itemType, events.itemId)
+
+  // Every day the site has ever recorded, Alberta time. One row per active day
+  // is small enough to ship whole, and the panel slices it to the chosen month.
+  const daily = await db
+    .select({ day: sql<string>`to_char(${events.ts} AT TIME ZONE 'UTC' AT TIME ZONE 'America/Edmonton', 'YYYY-MM-DD')`, n: count() })
+    .from(events)
+    .groupBy(sql`1`)
+    .orderBy(sql`1`)
+
+  const emptySearches = await db
+    .select({ month: EVENT_MONTH, q: events.meta, n: count() })
+    .from(events)
+    .where(and(eq(events.event, 'search_empty'), sql`${events.meta} is not null`))
+    .groupBy(sql`1`, events.meta)
+    .orderBy(desc(count()))
+
+  // The email list itself, not the signup events: unsubscribing deletes the
+  // row, so these are live reminders. One person can track several deadlines,
+  // hence people (distinct emails) alongside the row count. Only the counts
+  // leave the server; the addresses never reach the panel.
+  const [subTotals] = await db
+    .select({
+      people: sql<number>`count(distinct ${subscribers.email})::int`,
+      reminders: count(),
+    })
+    .from(subscribers)
+
+  const monthlySubs = await db
+    .select({
+      month: SUB_MONTH,
+      people: sql<number>`count(distinct ${subscribers.email})::int`,
+      reminders: count(),
+    })
+    .from(subscribers)
+    .groupBy(sql`1`)
+
+  const perItemSubs = await db
+    .select({ month: SUB_MONTH, itemType: subscribers.itemType, itemId: subscribers.itemId, n: count() })
+    .from(subscribers)
+    .groupBy(sql`1`, subscribers.itemType, subscribers.itemId)
+
+  const sTitles = await db.select({ id: scholarships.id, title: scholarships.title }).from(scholarships)
+  const pTitles = await db.select({ id: researchPrograms.id, title: researchPrograms.name }).from(researchPrograms)
+
+  // The public site is built from the committed JSON, so events can name ids
+  // the DB has never seen (it lags behind and drops inactive rows); those
+  // used to render as a bare "#178". JSON is the source of truth, so it wins
+  // the spread; the DB fills in anything added via the admin panel since.
+  const sJson = scholarshipsJson as unknown as { id: number; title: string }[]
+  const pJson = (programsJson as unknown as { id: number; name: string }[])
+    .map(p => ({ id: p.id, title: p.name }))
+
+  data = {
+    monthly,
+    perItem,
+    daily,
+    emptySearches,
+    subscribers: subTotals ?? { people: 0, reminders: 0 },
+    monthlySubs,
+    perItemSubs,
+    search: search.months,
+    searchGenerated: search.generated,
+    titles: {
+      scholarship: { ...titleMap(sTitles), ...titleMap(sJson) },
+      program: { ...titleMap(pTitles), ...titleMap(pJson) },
+    },
+    currentMonth,
+  }
+} catch (e) {
+  console.error('DB error:', e)
+  data.error = true
+}
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytics | ScholarAB Admin</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* The one dark surface left on the site. It used to inherit this from
+       global.css's :root, which still carried the deleted theme system's dark
+       palette; now that :root describes the cream public site, admin declares
+       its own canvas. */
+    /* `html:root`, not `html`: global.css sets `:root { color-scheme: light }`
+       for the cream public site, and a bare `html` (0,0,1) loses to `:root`
+       (0,1,0), which left the admin panel's native scrollbars, caret and
+       <select> popups rendering light on a near-black page. */
+    html:root { background-color: #0a0a0f; color-scheme: dark; }
+    /* `html body`, not `body`, and not the Tailwind class on the tag: v4 puts
+       utilities in @layer utilities, and unlayered CSS beats a layer whatever
+       its specificity, so global.css's `body { background: var(--bg-page) }`
+       outranked `.bg-[#0a0a0f]` and painted the admin panel cream while the
+       children kept their white text. Two element selectors clear the
+       unlayered body rule without depending on bundle order. */
+    html body { background-color: #0a0a0f; color: #fff; }
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0a0a0f] text-white min-h-screen">
+  <AdminShell
+    client:load
+    user={user}
+    page="analytics"
+    data={JSON.stringify(data)}
+  />
+</body>
+</html>

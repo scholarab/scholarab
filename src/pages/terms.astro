@@ -1,0 +1,192 @@
+---
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import { webPageJson } from '../lib/ld';
+
+// Same rule as the privacy page: this date is the only thing telling a reader
+// whether the document still matches the site. Bump it when the terms change.
+const LAST_UPDATED = 'August 22, 2026';
+
+const title = 'Terms of Use | ScholarAB';
+const description = 'How to use ScholarAB, what the listings are and are not, and the limits of what a free student-built directory can promise.';
+const ldJson = webPageJson({ name: 'Terms of Use', description, path: '/terms/' });
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogTitle={title}
+  ogDescription={description}
+  ogUrl="https://www.scholarab.ca/terms/"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
+  <SabFonts italic slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/terms" />
+  </div>
+
+  <div id="sab-terms" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabtm-body" style="flex:1;">
+      <div class="sab-kicker">TERMS</div>
+      <h1 class="sabtm-h1">Free to use,<br /><span class="sabtm-h1-accent">worth double-checking.</span></h1>
+      <p class="sabtm-lede">
+        ScholarAB is a free directory of Alberta scholarships and research programs, built and
+        maintained by one high school student. There is no account to create and nothing to pay.
+        These terms exist to be honest about what that means. Mostly, that a deadline listed here
+        is a copy of someone else's deadline, and the provider's own page always wins.
+      </p>
+      <p class="sabtm-updated">Last updated {LAST_UPDATED}</p>
+
+      <h2 class="sabtm-h2">Always confirm with the provider</h2>
+      <p class="sabtm-p">
+        Every listing is checked by hand against the provider's page, and the month it was last
+        checked is printed on it. Even so: deadlines move, awards get discontinued, eligibility rules
+        change quietly, and a listing can be wrong or out of date between one check and the next.
+      </p>
+      <p class="sabtm-p">
+        <strong>Before you apply, open the provider's own page and confirm the deadline, the amount,
+        and whether you're eligible.</strong> Every listing links to it. Treat what you read here as a
+        starting point for finding awards, never as the authoritative version of one.
+      </p>
+
+      <h2 class="sabtm-h2">No affiliation</h2>
+      <p class="sabtm-p">
+        ScholarAB is not affiliated with, endorsed by, or sponsored by any of the scholarship
+        providers, universities, foundations, school divisions, or government programs it lists. We
+        don't administer any award, don't receive or forward applications, don't sit on any selection
+        committee, and have no say in who wins anything. Names and trademarks belonging to those
+        organizations are used only to identify what a listing refers to.
+      </p>
+
+      <h2 class="sabtm-h2">The match quiz is a filter, not a ruling</h2>
+      <p class="sabtm-p">
+        The match tool narrows the directory using the eligibility rules recorded for each listing. It
+        can be wrong in both directions, either hiding something you'd have qualified for, or showing
+        something you wouldn't. Your answers never leave your browser, which also means we can't
+        check them for you. If an award looks close, apply anyway and let the provider decide.
+      </p>
+
+      <h2 class="sabtm-h2">What we can't promise</h2>
+      <p class="sabtm-p">
+        ScholarAB is provided as-is, with no warranty of any kind. We can't promise the site will be
+        available, that the information on it is complete, current, or accurate, or that using it will
+        get you a scholarship. To the fullest extent the law allows, ScholarAB and its maintainer
+        aren't liable for any loss that comes from using the site, including a missed deadline, a
+        deadline listed wrong, an award that turns out not to exist, or a rejected application.
+      </p>
+      <p class="sabtm-p">
+        This isn't an attempt to dodge responsibility for the work: mistakes get fixed quickly, and
+        <!--email_off--><a href="mailto:contact.scholarab@gmail.com">telling us about one</a><!--/email_off--> is genuinely welcome. It is
+        an acknowledgement that a free directory maintained by one person cannot carry the risk of
+        your application, and that the provider's page is the record that counts.
+      </p>
+
+      <h2 class="sabtm-h2">Using the site</h2>
+      <ul class="sabtm-list">
+        <li>Browse, search, save, share, print, and hand the whole thing to your students. That's what it's for.</li>
+        <li>Don't sign anyone else up for deadline reminders. Every sign-up is confirmed by email for exactly this reason.</li>
+        <li>Don't hammer the site with automated requests, or try to break, overload, or get into parts of it that aren't public.</li>
+        <li>Don't republish the listings as your own. See the licenses below for what reuse is allowed.</li>
+      </ul>
+
+      <h2 class="sabtm-h2">Reusing the code and the data</h2>
+      <p class="sabtm-p">
+        The site's source code is licensed under the GNU AGPL-3.0. The scholarship and program
+        database is licensed separately under Creative Commons Attribution-ShareAlike 4.0. You may
+        reuse it, including commercially, if you credit ScholarAB with a link and release your version
+        under the same terms. Individual facts, like a deadline or a dollar amount, belong to nobody;
+        what's licensed is the written descriptions and the selection and arrangement of the database.
+        The name <strong>ScholarAB</strong> and the logo are not covered by either license.
+      </p>
+      <p class="sabtm-p">
+        Full text: <a href="https://github.com/scholarab/scholarab/blob/main/LICENSE">LICENSE</a>,
+        <a href="https://github.com/scholarab/scholarab/blob/main/DATA-LICENSE.md">DATA-LICENSE</a>,
+        <a href="https://github.com/scholarab/scholarab/blob/main/TRADEMARK.md">TRADEMARK</a>.
+      </p>
+
+      <h2 class="sabtm-h2">Privacy</h2>
+      <p class="sabtm-p">
+        What the site collects, why, how long it's kept, and how to delete it are all set out on the
+        <a href="/privacy/">privacy policy</a>. The short version: you can use the entire site without
+        giving us anything, and the only personal information we ever hold is an email address you
+        asked us to remind you at.
+      </p>
+
+      <h2 class="sabtm-h2">Changes, and which law applies</h2>
+      <p class="sabtm-p">
+        These terms can change; the date at the top moves when they do, and every version is in the
+        site's public source history. They're governed by the laws of Alberta and of Canada.
+      </p>
+
+      <h2 class="sabtm-h2">If you run one of these programs</h2>
+      <p class="sabtm-p">
+        If you administer an award or program listed here and something about the listing is wrong,
+        out of date, or you'd rather not be listed at all, email
+        <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off--> and say so. A
+        correction gets made as soon as it's read, and a request to be removed is honoured without
+        argument, no explanation needed, and nothing has to be escalated to get it done. The same
+        goes for anything you believe infringes your copyright: tell us what and where, and it comes
+        down while we sort it out.
+      </p>
+
+      <h2 class="sabtm-h2">Changes to these terms</h2>
+      <p class="sabtm-p">
+        These terms can change. When they do, the date at the top of this page moves, and every
+        earlier version stays in the site's public source history so you can see what changed.
+        Continuing to use the site after a change means the new version applies.
+      </p>
+
+      <h2 class="sabtm-h2">Governing law</h2>
+      <p class="sabtm-p">
+        These terms are governed by the laws of the Province of Alberta and the federal laws of
+        Canada that apply in it, and the courts of Alberta are where any dispute about them belongs.
+        Nothing here takes away consumer rights that Alberta or Canadian law gives you and does not
+        let you sign away. If a court finds any part of these terms unenforceable, that part is
+        severed and the rest stays in force.
+      </p>
+
+      <h2 class="sabtm-h2">Contact</h2>
+      <p class="sabtm-p">
+        ScholarAB · Medicine Hat, Alberta, Canada<br />
+        <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off-->
+      </p>
+    </div>
+    <SabFooter />
+  </div>
+</Layout>
+
+<style>
+  .sabtm-body { padding: 72px 48px 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
+
+  .sabtm-h1 {
+    font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+    font-size: clamp(40px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.02em;
+    color: #141915; margin: 12px 0 24px;
+  }
+  .sabtm-h1-accent { color: #0A6B4D; font-style: italic; }
+
+  .sabtm-lede { font-size: 19px; line-height: 1.65; color: #3A403B; max-width: 62ch; margin: 0 0 12px; }
+  .sabtm-updated {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: #8A8F8B; margin: 0 0 56px;
+  }
+
+  .sabtm-h2 {
+    font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+    font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.01em; color: #141915;
+    margin: 56px 0 20px; padding-top: 24px; border-top: 1px solid #E4E0D5;
+  }
+
+  .sabtm-p { font-size: 16px; line-height: 1.7; color: #3A403B; max-width: 68ch; margin: 0 0 18px; }
+  .sabtm-p a, .sabtm-list a { color: #0A6B4D; }
+
+  .sabtm-list { margin: 0; padding-left: 20px; max-width: 68ch; }
+  .sabtm-list li { font-size: 16px; line-height: 1.7; color: #3A403B; margin-bottom: 12px; }
+
+  @media (max-width: 760px) {
+    .sabtm-body { padding: 48px 20px 80px; }
+  }
+</style>

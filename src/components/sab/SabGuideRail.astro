@@ -1,0 +1,100 @@
+---
+// A short rail of guide cards, for the foot of a directory page.
+//
+// /scholarships/ and /programs/ are the two highest-authority pages on the
+// site -- 8,530 of 11,548 impressions in the 2026-08-25 export between them --
+// and neither linked to a single guide. The guides section took 2,715
+// impressions at 0.59% CTR with 5 of its 11 pages unindexed, on 5 to 13
+// inbound internal links each out of 322 pages. This is the missing edge:
+// the hub that already ranks pointing at the explainer that does not.
+//
+// Slugs are passed in rather than derived, because which guides belong under
+// which directory is an editorial call, not a category match. getGuide throws
+// on an unknown slug, so a renamed guide fails the build here rather than
+// shipping a dead internal link.
+import { getGuide } from '../../lib/guides';
+
+interface Props {
+  /** Guide slugs to show, in the order they should appear. */
+  slugs: string[];
+  /** Mono kicker above the heading. */
+  kicker: string;
+  /** The heading itself. */
+  heading: string;
+}
+
+const { slugs, kicker, heading } = Astro.props;
+const items = slugs.map(getGuide);
+---
+
+<section class="sabgr" aria-labelledby="sabgr-heading">
+  <div class="sabgr-inner">
+    <div class="sabgr-top">
+      <div>
+        <div class="sabgr-mono sabgr-kicker">{kicker}</div>
+        <h2 class="sabgr-heading" id="sabgr-heading">{heading}</h2>
+      </div>
+      <a class="sabgr-mono sabgr-all" href="/guides/">ALL GUIDES &rarr;</a>
+    </div>
+
+    <div class="sabgr-grid">
+      {items.map(g => (
+        <a class="sabgr-card" href={`/guides/${g.slug}/`}>
+          <span class="sabgr-mono sabgr-tag">{g.kicker}</span>
+          <span class="sabgr-title">{g.title}</span>
+          <span class="sabgr-desc">{g.description}</span>
+          <span class="sabgr-mono sabgr-meta">{g.minutes} MIN READ</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sabgr-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .sabgr { border-top: 1px solid rgba(20, 25, 21, 0.12); margin-top: 64px; }
+  .sabgr-inner {
+    max-width: 1180px; margin: 0 auto; width: 100%; box-sizing: border-box;
+    padding: 56px 48px 88px;
+  }
+
+  .sabgr-top {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 24px; margin-bottom: 28px;
+  }
+  .sabgr-kicker { font-size: 11px; letter-spacing: 0.08em; color: rgba(20, 25, 21, 0.5); }
+  .sabgr-heading {
+    font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+    font-size: clamp(26px, 3.4vw, 34px); line-height: 1.15; letter-spacing: -0.01em;
+    margin: 10px 0 0; color: #141915;
+  }
+  .sabgr-all { font-size: 11px; letter-spacing: 0.08em; color: #0A6B4D; text-decoration: none; white-space: nowrap; }
+  .sabgr-all:hover { text-decoration: underline; }
+
+  .sabgr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+
+  .sabgr-card {
+    display: flex; flex-direction: column; background: #FFFFFF;
+    border: 1px solid rgba(20, 25, 21, 0.14); border-radius: 4px;
+    padding: 22px 24px; text-decoration: none; color: #141915;
+    transition: border-color 0.15s ease;
+  }
+  .sabgr-card:hover { border-color: #0E8C64; }
+
+  .sabgr-tag { font-size: 11px; letter-spacing: 0.08em; color: rgba(20, 25, 21, 0.5); }
+  .sabgr-title {
+    margin-top: 10px; font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 20px; line-height: 1.25;
+  }
+  .sabgr-desc {
+    margin-top: 10px; font-size: 14px; line-height: 1.6;
+    color: rgba(20, 25, 21, 0.62); flex: 1;
+  }
+  .sabgr-meta { margin-top: 16px; font-size: 11px; letter-spacing: 0.08em; color: #0A6B4D; }
+
+  @media (max-width: 720px) {
+    .sabgr-inner { padding: 44px 20px 64px; }
+    .sabgr-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>

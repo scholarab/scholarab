@@ -1,0 +1,76 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
+
+const guide = getGuide('high-school-research-programs-alberta');
+---
+
+<SabGuide guide={guide}>
+  <p>
+    Most Alberta students find out that high school research programs exist about a year after they stopped being eligible for the best one. The paid placements want you in Grade 11, they close in March, and they are advertised almost entirely through science teachers who happen to know about them. This is the map: who takes you, what they ask for, and what to do if you have already missed the window.
+  </p>
+
+  <h2>The paid ones, and the geography rule nobody mentions</h2>
+  <p>
+    Alberta Innovates runs the <strong>High School Youth Researcher Summer</strong> program, universally called HYRS, and it is the one worth building a spring around. You spend about six weeks over July and August working in a real university lab, and you are paid for it.
+  </p>
+  <p>
+    Here is the part that catches people out. HYRS is not one application with a campus preference. It runs as three separate intakes, and <strong>where you live decides which one you apply to</strong>:
+  </p>
+  <ul>
+    <li><strong>North of Red Deer</strong> → <a href="/programs/alberta-innovates-hyrs-university-of-alberta/">HYRS at the University of Alberta</a>, in Edmonton.</li>
+    <li><strong>South of Red Deer, down to north of Claresholm</strong> → <a href="/programs/alberta-innovates-hyrs-university-of-calgary/">HYRS at the University of Calgary</a>.</li>
+    <li><strong>Claresholm and south</strong> → <a href="/programs/alberta-innovates-hyrs-university-of-lethbridge/">HYRS at the University of Lethbridge</a>.</li>
+  </ul>
+  <p>
+    Applying to the wrong campus is not a tie-break in your favour; it is the wrong form. Check the line your town falls on before you start writing.
+  </p>
+  <p>
+    The bar is specific and published: <strong>Grade 11, with at least 85% in Math 20-1 or 20-2, Biology 20, and one other Grade 11 science.</strong> Alberta Innovates does note that a strong equity justification can be considered, so if your marks are close and your circumstances explain the gap, it is worth asking rather than assuming. Each campus sets its own deadline and posts it on its own page, and in practice they land in March for a July start.
+  </p>
+  <p>
+    The other paid Edmonton option is the <a href="/programs/wisest-summer-research-program/">WISEST Summer Research Program</a> at the University of Alberta, also six weeks, also Grade 11, and also a paid research assistantship. WISEST is built around students underrepresented in STEM and is open to all genders. If you are a Grade 11 student in the Edmonton area, there is no reason to apply to only one of these.
+  </p>
+
+  <h2>What Grade 11 actually looks like on this timeline</h2>
+  <p>
+    Working backwards from a July start, the year is tighter than it looks:
+  </p>
+  <ul>
+    <li><strong>Fall of Grade 11.</strong> Make sure Biology 20 and a second Grade 11 science are actually on your timetable. This is the single most common way students disqualify themselves without noticing, and by March it cannot be fixed.</li>
+    <li><strong>January and February.</strong> Ask the teacher who will write your reference. Marks are the gate, but a teacher who can describe how you think is what separates two transcripts that look the same.</li>
+    <li><strong>March.</strong> Applications close. Check your campus page for the exact date rather than trusting a date you read somewhere in the fall.</li>
+    <li><strong>July and August.</strong> Six weeks in the lab, ending in a poster symposium at every campus.</li>
+  </ul>
+  <p>
+    Our <a href="/guides/grade-11-scholarship-timeline/">Grade 11 timeline</a> covers the scholarship side of the same year, and the two overlap more than you would expect: the teacher writing your HYRS reference is usually the right person to ask again in Grade 12.
+  </p>
+
+  <h2>If you are not in Grade 11, or the marks are not there</h2>
+  <p>
+    Neither of those closes the door, and this is where most guides stop being useful.
+  </p>
+  <ul>
+    <li><strong><a href="/programs/youreka-canada/">Youreka Canada</a></strong> takes Grades 9 to 12 and pairs you with an undergraduate mentor for a ten-week citizen-science project ending at a symposium. There is no marks gate. If you want a research project on your record and you are in Grade 9 or 10, start here.</li>
+    <li><strong><a href="/programs/historica-canada-heritage-fairs-young-citizens/">Heritage Fairs</a></strong> are the humanities answer, Grades 7 to 12, and they are genuinely under-applied by high schoolers who assume they aged out.</li>
+    <li><strong><a href="/programs/international-summer-school-for-young-physicists-issyp/">ISSYP</a></strong> at Perimeter Institute takes Grade 11 and 12 students for two fully funded weeks, travel and meals included. It is competitive, but the cost is not the barrier.</li>
+    <li><strong><a href="/programs/shad-canada/">SHAD</a></strong> runs a month on a university campus for Grades 10 and 11, with financial aid available. It is enrichment rather than a lab placement, but it is the closest thing to a research summer that Grade 10 students can get into.</li>
+  </ul>
+
+  <h2>A word about the ones you pay for</h2>
+  <p>
+    <a href="/programs/polygence-research-program/">Polygence</a> and <a href="/programs/pioneer-academics-research-program/">Pioneer Academics</a> are real, and both will pair you with an academic mentor for a project you can point at. Both are also <strong>tuition-based</strong>, with need-based aid available. That is a legitimate choice, but it is a different kind of thing from HYRS, and it is worth being clear-eyed about the difference: one pays you to work in a lab because they want the labour, the other charges you for mentorship. Neither is a scam. Only one of them is a job.
+  </p>
+  <p>
+    If money is the constraint, exhaust the paid and free list above before you look at the tuition list.
+  </p>
+
+  <h2>Why any of this is worth the spring</h2>
+  <p>
+    A research placement is the rare line on an application that cannot be produced by a good weekend. It shows six weeks of showing up, a supervisor who can speak to your work, and usually a poster with your name on it. Selection committees for the awards in our <a href="/scholarships/stem/">STEM scholarships</a> list read that the way they read nothing else on a Grade 12 application.
+  </p>
+  <p>
+    The full list, with what each one pays and who it takes, is on the <a href="/programs/research/">research programs page</a>. The <a href="/match/">match quiz</a> takes {QUIZ_DURATION} and will tell you which of these your grade and region actually qualify you for.
+  </p>
+</SabGuide>

@@ -1,0 +1,30 @@
+.claude/
+node_modules
+dist
+.astro
+.env
+.env.local
+.npm-cache
+.DS_Store
+**/.DS_Store
+.vercel/
+.vercel
+coverage/
+.wrangler/
+.cursor/
+test-results/
+scholarab-overview.html
+scholarab-overview.pdf
+ScholarAB_Overview.md
+ScholarAB_Overview.pdf
+
+# generated on every build by scripts/generate-sitemap.ts
+public/sitemap.xml
+# per-listing OG images are generated at build (scripts/generate-og-images.ts)
+public/og/
+outreach/
+# copy-detection fingerprints (scripts/check-copies.ts): a canary published
+# next to the data it protects is not a canary
+private/
+# ready-to-post social assets (scripts/generate-social.ts)
+social-out/

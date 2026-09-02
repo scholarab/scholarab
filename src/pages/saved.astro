@@ -1,0 +1,38 @@
+---
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import { loadScholarships, loadPrograms } from '../lib/data-loader';
+import SavedDirectory from '../components/sab/SavedDirectory.astro';
+const scholarships = await loadScholarships();
+const programs = await loadPrograms();
+---
+
+<Layout
+  title="Saved Scholarships | ScholarAB"
+  description="Your saved Alberta scholarships and research programs. Bookmark opportunities and track deadlines in one place."
+  ogTitle="Saved Scholarships | ScholarAB"
+  ogDescription="Your saved Alberta scholarships and research programs. Bookmark opportunities and track deadlines in one place."
+  ogUrl="https://www.scholarab.ca/saved/"
+  robots="noindex, follow"
+>
+  <SabFonts slot="head" />
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/saved" />
+  </div>
+
+  <div id="sab-saved" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabp-body" style="flex:1;">
+      <SavedDirectory initialScholarships={scholarships} initialPrograms={programs} />
+    </div>
+
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<style is:global>
+  /* The saved design is fixed light regardless of site theme */
+  body:has(#sab-saved) { background: #FAF7F0; }
+</style>

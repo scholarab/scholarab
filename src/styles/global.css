@@ -1,0 +1,931 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Archivo, not Inter. Inter is the admin panel's face and it declares it
+     itself; naming it here made the AI-default sans look like ScholarAB's
+     own. Nothing consumes the token today, so this is about what the next
+     page to reach for `font-sans` inherits. */
+  --font-sans: Archivo, system-ui, -apple-system, sans-serif;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/inter-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/inter-500.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/inter-600.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/inter-700.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/fonts/inter-800.woff2') format('woff2');
+  }
+  /* ── Home design faces (claude.ai/design "ScholarAB Home", 2026-07-09) ── */
+  @font-face {
+    font-family: 'Instrument Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/instrument-serif-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Instrument Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/instrument-serif-400i.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/archivo-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/archivo-500.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/archivo-600.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/archivo-700.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/fonts/archivo-800.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/fonts/manrope-600.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/plex-mono-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/fonts/plex-mono-500.woff2') format('woff2');
+  }
+}
+
+/* ── Theme tokens ──────────────────────────────────────────── */
+/* There used to be two of these: a dark palette on `:root` and a light one on
+   `html.theme-light`, from the theme system deleted 2026-07-24. Nothing has
+   added that class since, so the light block never applied and the DARK block
+   was the one live on every public page; `color-scheme: dark` (which the
+   <meta> tag cannot override, so native scrollbars, carets and <select>
+   popups rendered dark on a cream site) and `body { color: #fff }`, white
+   text that stayed invisible only because every page pins its own
+   colour on `.sabp`. One block now, matching what the site actually is.
+
+   Only the five tokens with real consumers survived; the rest fed a set of
+   utility classes (.text-primary, .bg-subtle, .border-card …) that no .astro
+   or .tsx had referenced in months, and the orb gradients fed a 22s infinite
+   animation on a background-image that resolved to `none`. */
+:root {
+  color-scheme: light;
+
+  /* Consumed only by showToast() in src/lib/utils.ts, which builds its pill
+     with inline styles. Was #22d3a5; the old dark-theme mint, which made
+     the toast the one public element rendering off-palette. These are the
+     editorial accent pair, the same two colours every mint CTA already uses. */
+  --brand:         #2FD3A0;
+  --brand-rgb:     47, 211, 160;
+  --text-on-brand: #0B1512;
+
+  /* The canvas behind everything. Layout.astro pins `html` to the same value
+     for pages it owns; this is what /admin and any future page outside that
+     layout fall back to. */
+  --bg-page:      #FAF7F0;
+  --text-primary: #141915;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+html {
+  background-color: var(--bg-page);
+}
+@media (min-width: 769px) {
+  html { overscroll-behavior: none; }
+}
+
+body {
+  position: relative;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
+
+/* ── Isolate main content ──────────────────────────────────── */
+#main-content {
+  isolation: isolate;
+}
+
+/* ── Focus ring ────────────────────────────────────────────── */
+/* The ring gets its own token rather than borrowing the accent: mint on cream
+   is 1.8:1, well under the 3:1 WCAG 2.2 SC 1.4.11 needs for a focus
+   indicator. Dark green by default, mint on the ink surfaces, which inherit
+   it down to every control they contain. */
+:root {
+  --focus-ring: #0A6B4D;
+  /* Reading measure for long-form prose; narrower than --sab-measure, which
+     is for grids and dashboards. 17px over ~610px of text is about 78
+     characters a line; the guides were running past 95. */
+  --sab-read: 660px;
+  /* One content measure for every sab page. /educators and /updates already
+     capped at 1180px; the home page, both directories, the detail pages, the
+     quiz and /about were fluid, so on a wide monitor they ran edge to edge
+     while those two stayed put; the same site changing its mind about how
+     wide it is between one nav click and the next. Full-bleed backgrounds are
+     unaffected: the cap goes on the inner wrapper, never the band. */
+  --sab-measure: 1180px;
+  /* The header's two bands, declared rather than left to content so that
+     something outside the header can subtract them. The home hero is the only
+     thing that needs to: it fills the fold, and the header is no longer inside
+     it to take up part of that itself. Both apply above 900px only; below it
+     the ticker is hidden, the nav is padding-sized, and the hero stops
+     claiming the fold. */
+  --sab-nav-h: 89px;
+  --sab-ticker-h: 45px;
+}
+
+.sabp-header,
+.sab-hero,
+.sabf-footer,
+.sabd-remind,
+.sabm-value-card,
+.sabe-cta { --focus-ring: #2FD3A0; }
+
+/* Accent-filled controls are themselves #2FD3A0, so they must opt back out of
+   whatever surface they sit on; a mint ring on a mint pill is 1:1. */
+.sabh-cta,
+.sab-btn-accent,
+.sabm-btn-accent,
+.sab404-btn-accent,
+.sabd-remind-btn,
+.sabg-cta-btn,
+.sabe-btn-solid { --focus-ring: #0B1512; }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Button press language ─────────────────────────────────── */
+/* Buttons lift onto a hard mint shadow on hover or keyboard focus, then snap
+   flush into it while held. That behaviour was written out longhand six times
+   across five files, and four buttons had ended up without it entirely;
+   `transition-duration: 0s`, no lift, no press, including .sabd-cta, the
+   Apply button on all 278 listing pages, whose hover was an instant colour
+   flip. Behaviour only: size, padding and colour stay with each button,
+   because the design files specify different metrics per surface and that is
+   deliberate. Add `sab-btn` alongside the existing class; do not fold the
+   metrics in here. */
+.sab-btn {
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease,
+              transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1),
+              box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.sab-btn:hover, .sab-btn:focus-visible {
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 var(--sab-btn-shadow, #2FD3A0);
+}
+.sab-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 var(--sab-btn-shadow, #2FD3A0);
+  transition-duration: 0.07s;
+}
+/* A control that cannot be pressed must not answer to being pressed. */
+.sab-btn:disabled, .sab-btn[aria-disabled='true'], .sab-btn.sabd-cta-disabled {
+  transform: none;
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sab-btn, .sab-btn:hover, .sab-btn:focus-visible, .sab-btn:active {
+    transform: none; transition: none;
+  }
+}
+
+h1, h2 {
+  letter-spacing: -0.02em;
+}
+
+/* ── Page view transitions ────────────────────────────────── */
+@keyframes page-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* Old page fades under the incoming one; no flash to the page background */
+::view-transition-old(root) {
+  animation: page-out 0.14s ease both;
+}
+/* Fast crossfade. Identical chrome (nav) reads as perfectly still; no
+   snapshot geometry to morph or misplace. */
+::view-transition-new(root) {
+  animation: page-fade-in 0.18s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+}
+
+/* ── Quiz step motion ─────────────────────────────────────────────── */
+@keyframes quizStepIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes quizStepInBack {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes quizStepOut {
+  0%, 30% { opacity: 1; transform: translateY(0); }
+  100%    { opacity: 0; transform: translateY(-12px); }
+}
+@keyframes quizTileIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.quiz-step-in      { animation: quizStepIn 420ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.quiz-step-in-back { animation: quizStepInBack 360ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.quiz-step-out     { animation: quizStepOut 260ms ease-in both; pointer-events: none; }
+.quiz-tile-in      { animation: quizTileIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.quiz-results-in   { animation: quizStepIn 460ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.quiz-card-in      { animation: quizTileIn 460ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-step-in, .quiz-step-in-back, .quiz-step-out,
+  .quiz-tile-in, .quiz-results-in, .quiz-card-in { animation: none !important; }
+}
+
+/* ── Hide match intro when results are visible ───────────────────── */
+body.quiz-results #match-intro,
+body.quiz-results #match-divider {
+  display: none !important;
+}
+
+/* ── Reduced motion; entrance + looping animations ──────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #nav-underline { transition: opacity 0.2s ease; }
+}
+
+/* ══ "ScholarAB Scholarships" design (claude.ai/design); list-page island ══
+   Fixed light palette, independent of the theme toggle. */
+.sabl-page { font-family: 'Archivo', sans-serif; color: #141915; -webkit-font-smoothing: antialiased; }
+.sabl-page ::selection { background: #2FD3A0; color: #0B1512; }
+.sabl-mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* ── Page kicker ─────────────────────────────────────────────────────────────
+   Every hero opens dot → mono label → h1. That opening was written four times
+   (about, educators, updates, 404) with identical geometry and four different
+   margins, while the three directory pages did not open with one at all, so
+   /scholarships began mid-sentence next to /about. One rule; the dot is a
+   pseudo-element in currentColor so a hero only has to set the colour once. */
+.sab-kicker {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 26px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px; letter-spacing: 0.06em;
+  color: var(--kicker, #0A6B4D);
+}
+.sab-kicker::before {
+  content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%;
+  background: currentColor;
+}
+/* Mint is 1.8:1 on cream, so it is only ever a dark hero's kicker colour. */
+.sabp-header .sab-kicker, .sab-hero .sab-kicker { --kicker: #2FD3A0; }
+@media (max-width: 640px) {
+  .sab-kicker { font-size: 11px; gap: 9px; margin-bottom: 14px; }
+  .sab-kicker::before { width: 7px; height: 7px; }
+}
+
+/* The stat block hangs from the top of the row, not the bottom of it. Bottom
+   alignment tied its position to how long the intro happened to be: two lines
+   on /scholarships/ put it beside the heading, six lines on every facet hub
+   dropped it most of a paragraph lower, so the same component looked like two
+   different layouts depending on the page. Top alignment is the only version
+   whose geometry is the same on all of them. */
+.sabl-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+.sabl-h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(48px, 6.5vw, 76px); line-height: 1; letter-spacing: -0.015em; margin: 0;
+}
+/* The standfirst is the only part of the header whose height varies, and the
+   toolbar and the three chip rows sit directly under it. Left to size itself,
+   every hop between scopes moved the chips up or down by a line, so the reader
+   aims at a button that is no longer there. Three lines is reserved for it on
+   every page: it is what all but the shortest intro already needs, and
+   facets.test.ts caps intro length so none of them runs past it. */
+.sabl-desc {
+  font-size: 17px; line-height: 1.55; color: rgba(20,25,21,0.65);
+  margin: 20px 0 0; max-width: 560px; min-height: calc(1.55em * 3);
+}
+
+/* The other half of that: a hub carries a breadcrumb and /scholarships does
+   not, which put its h1 42px higher than every scope it links to. The root
+   pages reserve the row instead of closing it up. 42px is the 24px padding-top
+   in .sabl-crumbs plus its 18px line. */
+.sabl-crumb-gap { height: 42px; }
+.sabl-stat { text-align: right; flex: none; padding-top: 10px; }
+.sabl-stat-value { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 44px); line-height: 1; }
+.sabl-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); margin-top: 6px; }
+.sabl-stat-soon { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.38); margin-top: 3px; }
+.sabl-stat-soon[hidden] { display: none; }
+
+.sabl-toolbar {
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  margin-top: 44px; padding: 14px 0;
+  border-top: 2px solid #141915; border-bottom: 1px solid rgba(20,25,21,0.14);
+}
+/* No box, no fill, no hover state: an icon and a caret on the page's own
+   background, which is the whole design. The padding is only there to hold the
+   keyboard underline off the text, and the negative margin cancels it so the
+   toolbar keeps its height and the chip rows below do not move. */
+.sabl-search {
+  display: flex; align-items: center; gap: 10px; flex: 1; max-width: 420px;
+  padding-bottom: 7px; margin-bottom: -7px;
+}
+/* This was the ⌕ character, which is a text glyph: it inherits the font's own
+   weight and baseline, so it sat light and low next to 15px Archivo and looked
+   like a stray mark rather than a control. Drawn instead, at the weight of the
+   placeholder beside it. */
+.sabl-search-icon { display: flex; color: rgba(20,25,21,0.55); flex: none; }
+.sabl-search input {
+  font-family: 'Archivo', sans-serif; font-size: 15px; border: none;
+  background: transparent; width: 100%; color: #141915;
+}
+/* This used to carry a bare `outline: none`, which outranks the global
+   :focus-visible rule on specificity, so tabbing into the site's search box
+   showed nothing at all. The plain ring collides with the toolbar's own
+   borders, so the field takes a ring around the whole search group instead of
+   the bare input. */
+.sabl-search input:focus { outline: none; }
+/* Clicking into the field shows nothing but the caret, which is the point. A
+   keyboard user gets no caret to follow, though, and an input with no visible
+   indicator at all fails 2.4.7 outright, so :focus-visible draws a rule under
+   the field: a line, not a box, and it never appears for a mouse. */
+.sabl-search:has(input:focus-visible) {
+  box-shadow: inset 0 -2px 0 rgba(20,25,21,0.75);
+}
+/* The field carries no visible label, so the placeholder is the only thing
+   saying what to type; 0.4 alpha put it at 2.6:1. 0.62 clears AA. */
+.sabl-search input::placeholder { color: rgba(20,25,21,0.62); }
+/* WebKit's own clear affordance is a pale grey ✕ we cannot recolour, on a
+   control whose whole job is to be findable once you have typed. Replaced
+   with our own ink glyph at a 24px target. */
+.sabl-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none; appearance: none;
+  width: 24px; height: 24px; cursor: pointer; opacity: 0.62;
+  background: center / 11px 11px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M1 1l10 10M11 1L1 11' stroke='%23141915' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+.sabl-search input::-webkit-search-cancel-button:hover { opacity: 1; }
+.sabl-sort { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sabl-row-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); width: 72px; flex: none; }
+.sabl-sort .sabl-row-label { width: auto; margin-right: 4px; }
+
+.sabl-chip {
+  font-family: 'Archivo', sans-serif; font-size: 13.5px; font-weight: 600;
+  padding: 8px 15px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
+  background: transparent; color: #141915; cursor: pointer;
+}
+.sabl-chip:hover { border-color: #141915; }
+.sabl-chip.on { background: #141915; color: #F2F0E9; border-color: #141915; }
+
+/* City chips are links to that city's hub, so they need the padding and
+   baseline an inline anchor does not get on its own, and no underline. */
+.sabl-chip-link { display: inline-flex; align-items: center; text-decoration: none; }
+/* margin rather than a flex gap, because most chips carrying a count are plain
+   buttons and only the city ones are inline-flex links. */
+.sabl-chip-count { font-size: 11.5px; margin-left: 6px; color: rgba(20,25,21,0.45); }
+/* A filter that would leave nothing behind. Still clickable (the empty state
+   explains itself and offers a way out), just not presented as an equal
+   offer beside a chip holding forty listings. */
+.sabl-chip.is-empty { opacity: 0.45; }
+/* The current city's chip is filled dark, so its count needs the light ink or
+   it renders dark on dark and disappears. */
+.sabl-chip.on .sabl-chip-count { color: rgba(242,240,233,0.6); }
+.sabl-chip-link:hover .sabl-chip-count { color: rgba(20,25,21,0.7); }
+
+.sabl-filters { display: flex; flex-direction: column; gap: 12px; padding: 20px 0 0; }
+.sabl-filter-row { display: flex; align-items: center; gap: 8px; }
+
+/* One row per filter, always.
+ *
+ * These rows used to wrap, which put "Environmental 1" on a line of its own
+ * under nine siblings: it read as a stray rather than as the smallest track,
+ * and the block stopped looking like three rows of controls. Adding counts to
+ * every chip pushed both directories over the same edge at once.
+ *
+ * So the chips live in their own scroller instead. A row that does not fit
+ * scrolls sideways rather than growing a second line, which keeps TRACK, SCOPE
+ * and STATUS at a fixed rhythm no matter how many tracks the data grows.
+ * flex:none on the children because a chip squeezed to fit is worse than a
+ * chip you have to scroll to; min-width:0 on the scroller because a flex item
+ * floors at its content width otherwise and would push the page wide.
+ *
+ * The scrollbar is deliberately not hidden. It is the only thing telling a
+ * mouse user that there is more row to the right. */
+.sabl-chips {
+  display: flex; align-items: center; gap: 8px;
+  flex: 1; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain;
+  padding-bottom: 2px;
+  /* Thin and quiet rather than hidden: on a row that does overflow (FIELD on
+     /programs) this bar is the only thing telling a mouse user the row keeps
+     going. macOS shows it only while scrolling anyway. */
+  scrollbar-width: thin; scrollbar-color: rgba(20,25,21,0.25) transparent;
+}
+.sabl-chips > * { flex: none; }
+
+/* Tighter chip metrics for the block carrying the most chips. /programs has
+   nine FIELD categories, and at the default metrics they run well past the
+   1012px measure. Since the rows scroll rather than wrap, this no longer
+   prevents a broken layout -- it just buys enough room that the widest row
+   fits on a desktop measure and nobody has to scroll it. Padding 15 -> 10 and
+   gap 8 -> 5, plus eight off the label column, lands FIELD at 995px in a
+   1020px measure. That is 25px of headroom on nine chips, so a category
+   renamed to anything longer needs re-measuring rather than eyeballing. Applied to the whole block, never to one row, or
+   FIELD would sit at a different rhythm from GRADE and STATUS beneath it.
+   Behind a min-width, and not only because the problem is a desktop one: the
+   phone layout gives .sabl-row-label the full row width, and these selectors
+   carry more specificity than that rule, so an unguarded label width here
+   would win inside that media query and put FIELD back beside its chips on a
+   375px screen. */
+@media (min-width: 901px) {
+  .sabl-filters-dense .sabl-chips { gap: 5px; }
+  .sabl-filters-dense .sabl-chip { padding: 8px 10px; }
+  .sabl-filters-dense .sabl-row-label { width: 56px; }
+}
+
+.sabl-result-line { font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); padding: 22px 0 6px; }
+
+/* minmax(0,...), not 1fr: a plain 1fr floors at the track's min-content, and a
+   card holds nowrap chips like "School-based across Alberta (national
+   competition)". One long chip widened its column past the page and pushed the
+   next column's cards off the right edge of the viewport, cutting off their
+   Details buttons. Zero floor lets the chips ellipsize as they were told to. */
+.sabl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 16px; }
+/* Full-width seam between runs of cards. It is a grid item, not a wrapper, so
+   the cards either side stay in one grid and keep their column rhythm. */
+.sabl-group {
+  grid-column: 1 / -1; display: flex; align-items: center; gap: 12px;
+  padding: 20px 0 2px; border-bottom: 1px solid rgba(20,25,21,0.12);
+}
+.sabl-group:first-child { padding-top: 4px; }
+.sabl-group-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; color: #141915;
+}
+.sabl-group-count {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+  color: rgba(20,25,21,0.5);
+}
+.sabl-card {
+  display: flex; flex-direction: column; background: #FFFFFF;
+  border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px; padding: 26px 24px 22px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.sabl-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0; }
+.sabl-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 8px; }
+/* Programs carry a $ PAID badge beside the tag; the right slot stays reserved
+   for the day chip so program and scholarship cards line up. */
+.sabl-card-top-left { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
+.sabl-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.05em;
+  padding: 5px 11px; border-radius: 100px; border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6);
+  white-space: nowrap;
+}
+.sabl-days {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 500;
+  padding: 5px 11px; border-radius: 100px; white-space: nowrap;
+  /* Three tiers, not two. Every countdown used to wear the same orange, so a
+     grid where most deadlines are months away was uniformly loud and the one
+     closing this week did not stand out. Past six weeks the chip is quiet ink;
+     inside six weeks it warms up; inside two it fills. #A0491A replaces
+     #B8541F, which was 4.13:1 on the card and missed AA. */
+  background: rgba(20,25,21,0.05); color: rgba(20,25,21,0.6);
+}
+.sabl-days.soon { background: rgba(160,73,26,0.12); color: #A0491A; }
+.sabl-days.urgent { background: #A0491A; color: #FAF7F0; }
+.sabl-days.neutral { background: transparent; border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6); }
+.sabl-name { font-weight: 700; font-size: 18.5px; letter-spacing: -0.01em; line-height: 1.25; color: #141915; text-decoration: none; display: block; }
+.sabl-name:hover { color: #0A6B4D; }
+.sabl-amount { font-family: 'Instrument Serif', serif; font-size: 36px; line-height: 1.1; margin: 12px 0 14px; color: #0A6B4D; }
+/* Clamped at three lines. Program descriptions are free text and run from one
+   line to eight, and because the cards share a grid row, the longest one in a
+   row set the height for all three; a single verbose listing opened a band of
+   dead space across the page. The full text is one click away on the detail
+   page, which is where it belongs. */
+.sabl-blurb {
+  font-size: 14px; line-height: 1.55; color: rgba(20,25,21,0.6); flex: 1;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3;
+  overflow: hidden;
+}
+.sabl-card-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(20,25,21,0.12); gap: 10px;
+}
+.sabl-due { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(20,25,21,0.5); }
+.sabl-card-actions { display: flex; align-items: center; gap: 14px; }
+.sabl-save {
+  font-family: 'Archivo', sans-serif; font-size: 15px; background: none;
+  border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+  width: 34px; height: 34px; cursor: pointer; color: rgba(20,25,21,0.55);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.sabl-save:hover { border-color: #141915; }
+.sabl-save.on { color: #0A6B4D; background: rgba(47,211,160,0.15); }
+.sabl-apply {
+  font-size: 14px; font-weight: 700; color: #141915; text-decoration: none;
+  border-bottom: 2px solid #2FD3A0; padding-bottom: 2px; white-space: nowrap;
+}
+.sabl-apply:hover { color: #0A6B4D; }
+
+.sabl-empty { text-align: center; padding: 80px 0; border: 2px dashed rgba(20,25,21,0.2); border-radius: 20px; margin-top: 16px; }
+.sabl-empty-title { font-family: 'Instrument Serif', serif; font-size: 34px; margin-bottom: 10px; }
+.sabl-empty-sub { font-size: 15px; color: rgba(20,25,21,0.55); margin-bottom: 24px; }
+.sabl-empty-btn {
+  font-family: 'Archivo', sans-serif; background: #141915; color: #F2F0E9;
+  font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 100px; border: none; cursor: pointer;
+  transition: background 0.18s ease,
+              transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.sabl-empty-btn:hover, .sabl-empty-btn:focus-visible {
+  background: #0A6B4D; transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+}
+.sabl-empty-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sabl-card, .sabl-card:hover { transform: none; transition: none; }
+  .sabl-empty-btn, .sabl-empty-btn:hover, .sabl-empty-btn:focus-visible, .sabl-empty-btn:active {
+    transform: none; transition: none;
+  }
+}
+@media (max-width: 1024px) {
+  .sabl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .sabl-title-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+  /* The column layout already has its own 24px gap; the optical nudge that
+     settles the stat against the h1 side by side is just extra space here. */
+  .sabl-stat { text-align: left; padding-top: 0; }
+  .sabl-toolbar { flex-direction: column; align-items: stretch; margin-top: 28px; }
+  .sabl-row-label { width: 100%; }
+  /* The label takes the full width here, which a nowrap row cannot give it:
+     the row becomes a column, and the chips keep their own line underneath. */
+  .sabl-filter-row { flex-direction: column; align-items: stretch; gap: 6px; }
+}
+@media (max-width: 640px) {
+  .sabl-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Program-card extras for the "ScholarAB Programs" design */
+.sabl-org { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(20,25,21,0.5); margin-top: 6px; }
+.sabl-meta-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+/* One line each. duration/grades/location are free text, and a listing whose
+   duration reads "45-minute exam, written on one day inside a two-week window
+   in late March" turned a row of chips into a 155px paragraph wearing chip
+   styling, which drove the height of every card beside it. A chip that cannot
+   fit its text is a chip that should be truncated; the detail page has the
+   sentence. */
+.sabl-meta {
+  font-size: 12.5px; font-weight: 600; padding: 5px 10px; border-radius: 6px;
+  background: #F2EEE4; color: rgba(20,25,21,0.7);
+  max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* Arrow convention: → stays on ScholarAB, ↗ leaves for the sponsor's site.
+   Two cards that look alike had buttons that did categorically different
+   things; "Details →" opened our page, "Apply →" left the site, with
+   nothing to tell them apart until you were gone. */
+.sabl-ext { margin-left: 0.4em; }
+
+.sabl-paid {
+  font-size: 11.5px; font-weight: 500; padding: 5px 11px; border-radius: 100px;
+  background: rgba(14,140,100,0.12); color: #0A6B4D; white-space: nowrap;
+}
+
+/* Directory-page shell (scholarships + programs design pages) */
+.sabp { background: #FAF7F0; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
+.sabp-header { background: #0B1512; color: #F2F0E9; font-family: 'Archivo', sans-serif; }
+.sabp-body { width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; padding: 72px 48px 96px; }
+@media (max-width: 900px) {
+  .sabp-body { padding: 40px 20px 64px; }
+}
+
+/* ══ "ScholarAB Match" design (claude.ai/design); quiz island ══ */
+.sabm-body { padding: 36px 48px 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
+.sabm-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 13px; color: #0A6B4D; letter-spacing: 0.06em; }
+.sabm-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
+.sabm-h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(44px, 7vw, 72px); line-height: 1; letter-spacing: -0.015em; margin: 0; color: #141915;
+}
+.sabm-h1 em { font-style: italic; color: #0A6B4D; }
+.sabm-sub { font-size: 17px; line-height: 1.55; color: rgba(20,25,21,0.65); margin: 18px 0 0; max-width: 560px; }
+.sabm-trust { display: flex; gap: 26px; margin-top: 16px; font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); flex-wrap: wrap; }
+
+.sabm-progress-wrap { margin-top: 34px; padding-top: 24px; border-top: 2px solid #141915; }
+.sabm-progress { display: flex; gap: 8px; max-width: 420px; }
+.sabm-seg { flex: 1; height: 5px; border-radius: 100px; background: rgba(20,25,21,0.12); }
+.sabm-seg.done { background: #0E8C64; }
+.sabm-seg.current { background: #2FD3A0; }
+.sabm-step-label { font-size: 12.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); margin-top: 14px; text-transform: uppercase; }
+
+.sabm-question {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(34px, 5vw, 54px); letter-spacing: -0.01em; margin: 18px 0 0;
+  color: #141915; outline: none;
+}
+.sabm-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 36px; }
+.sabm-opt {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  width: 100%; text-align: left; font-family: 'Archivo', sans-serif;
+  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
+  padding: 24px 26px; cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+/* Hover and selected used to be one rule, so an option you were merely
+   pointing at looked exactly like one you had chosen. Selection keeps the
+   lift and adds the green border; one property, no layout shift, and the
+   two states stop being the same picture. */
+.sabm-opt:hover, .sabm-opt-selected { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0; }
+.sabm-opt-selected { border-color: #0A6B4D; }
+.sabm-opt-dim { opacity: 0.45; }
+.sabm-opt-text { display: flex; flex-direction: column; gap: 5px; }
+.sabm-opt-label { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: #141915; }
+.sabm-opt-hint { font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); }
+.sabm-opt-arrow { font-size: 18px; color: #0A6B4D; flex: none; }
+.sabm-prev {
+  margin-top: 36px; align-self: flex-start; background: none; border: none; padding: 0;
+  font-family: 'Archivo', sans-serif; font-size: 15px; font-weight: 600;
+  color: rgba(20,25,21,0.6); cursor: pointer;
+}
+.sabm-prev:hover { color: #141915; }
+
+.sabm-results-h1 {
+  font-family: 'Instrument Serif', serif; font-weight: 400;
+  font-size: clamp(38px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.015em;
+  margin: 18px 0 0; color: #141915;
+}
+.sabm-value-card {
+  display: flex; align-items: center; gap: 36px; margin-top: 36px;
+  background: #0B1512; color: #F2F0E9; border-radius: 20px; padding: 30px 36px;
+}
+.sabm-value-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); }
+.sabm-value-amount { font-family: 'Instrument Serif', serif; font-size: clamp(40px, 6vw, 56px); line-height: 1.1; color: #2FD3A0; }
+.sabm-value-note {
+  border-left: 1px solid rgba(242,240,233,0.18); padding-left: 36px;
+  font-size: 15px; line-height: 1.55; color: rgba(242,240,233,0.72); max-width: 420px;
+}
+
+.sabm-results-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 28px; flex-wrap: wrap; }
+.sabm-count-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.sabm-count-chip {
+  font-size: 12px; letter-spacing: 0.05em; padding: 7px 14px; border-radius: 100px;
+  border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6); text-transform: uppercase; white-space: nowrap;
+}
+.sabm-count-chip.solid { background: #141915; color: #F2F0E9; border-color: #141915; }
+.sabm-results-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.sabm-btn-outline {
+  font-family: 'Archivo', sans-serif; font-size: 14.5px; font-weight: 600;
+  padding: 12px 22px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
+  background: transparent; color: #141915; cursor: pointer;
+  transition: border-color 0.18s ease,
+              transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.sabm-btn-outline:hover, .sabm-btn-outline:focus-visible {
+  border-color: #141915; transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #2FD3A0;
+}
+.sabm-btn-outline:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+.sabm-btn-accent {
+  font-size: 14.5px; font-weight: 700; background: #2FD3A0; color: #0B1512;
+  padding: 12px 22px; border-radius: 100px; text-decoration: none; display: inline-block;
+  transition: background 0.18s ease, color 0.18s ease,
+              transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.sabm-btn-accent:hover, .sabm-btn-accent:focus-visible {
+  background: #141915; color: #F2F0E9;
+  transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #2FD3A0;
+}
+.sabm-btn-accent:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sabm-btn-outline, .sabm-btn-outline:hover, .sabm-btn-outline:focus-visible, .sabm-btn-outline:active,
+  .sabm-btn-accent, .sabm-btn-accent:hover, .sabm-btn-accent:focus-visible, .sabm-btn-accent:active {
+    transform: none; transition: none;
+  }
+}
+
+.sabm-table { border-top: 2px solid #141915; margin-top: 40px; }
+.sabm-table-label { font-size: 12px; letter-spacing: 0.06em; color: rgba(20,25,21,0.5); padding: 14px 0 0; margin: 0; }
+/* Fixed amount + action tracks so every row lines up, including across the
+   scholarship and program tables (each row is its own grid) */
+.sabm-row {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr) 152px 108px; gap: 24px; align-items: center;
+  padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
+}
+.sabm-row:hover { background: rgba(47,211,160,0.07); }
+.sabm-row-num { font-size: 14px; color: rgba(20,25,21,0.4); }
+.sabm-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; color: #141915; text-decoration: none; }
+.sabm-row-name:hover { color: #0A6B4D; }
+.sabm-row-blurb { font-size: 14.5px; color: rgba(20,25,21,0.55); margin-top: 5px; }
+.sabm-row-tags { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+/* Why this row ranked where it did; drawn from the same branches that scored
+   it. Two at most, set quietly: they justify the order without competing with
+   the award name. */
+.sabm-row-why {
+  list-style: none; margin: 10px 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 4px 14px;
+  font-size: 11.5px; letter-spacing: 0.02em; color: rgba(20,25,21,0.5);
+}
+.sabm-row-why li { display: flex; align-items: center; gap: 6px; }
+.sabm-row-why li::before {
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: #2FD3A0; flex: none;
+}
+.sabm-tier {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em;
+  padding: 4px 10px; border-radius: 100px; text-transform: uppercase; white-space: nowrap;
+}
+.sabm-tier-strong { background: rgba(47,211,160,0.18); color: #0A6B4D; }
+.sabm-tier-good { background: rgba(20,25,21,0.07); color: rgba(20,25,21,0.7); }
+.sabm-tier-possible, .sabm-due { border: 1px solid rgba(20,25,21,0.2); color: rgba(20,25,21,0.55); }
+.sabm-row-amount { font-family: 'Instrument Serif', serif; font-size: 28px; line-height: 1.15; text-align: right; color: #0A6B4D; }
+.sabm-amount-muted { font-family: 'Archivo', sans-serif; font-size: 13px; color: rgba(20,25,21,0.45); }
+.sabm-amount-cell { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+.sabm-paid-chip {
+  font-size: 11.5px; letter-spacing: 0.05em; padding: 5px 11px; border-radius: 100px;
+  background: rgba(14,140,100,0.12); color: #0A6B4D; white-space: nowrap;
+}
+.sabm-paid-note {
+  font-family: 'Archivo', sans-serif; font-size: 12.5px; line-height: 1.35;
+  color: rgba(20,25,21,0.5); text-align: right;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.sabm-row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sabm-opt, .sabm-opt:hover, .sabm-opt-selected { transform: none; transition: none; }
+}
+@media (max-width: 900px) {
+  .sabm-body { padding: 24px 20px 64px; }
+  .sabm-opts { grid-template-columns: 1fr; }
+  .sabm-value-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
+  .sabm-value-note { border-left: none; padding-left: 0; border-top: 1px solid rgba(242,240,233,0.18); padding-top: 20px; }
+  .sabm-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; padding: 20px 4px; }
+  .sabm-row-num { display: none; }
+  .sabm-row-main { grid-column: 1; }
+  .sabm-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; max-width: 140px; }
+  .sabm-row-actions { grid-column: 1 / -1; justify-content: flex-start; margin-top: 4px; }
+}
+
+/* ══ "ScholarAB Saved" design (claude.ai/design); shortlist + calendar ══ */
+.sabs-toggle {
+  display: flex; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 100px;
+  overflow: hidden; flex: none; margin-bottom: 6px;
+}
+.sabs-toggle-btn {
+  font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 11px 24px; border: none; cursor: pointer; background: transparent; color: #141915;
+}
+.sabs-toggle-btn + .sabs-toggle-btn { border-left: 1.5px solid rgba(20,25,21,0.85); }
+.sabs-toggle-btn:hover { opacity: 0.85; }
+.sabs-toggle-btn.on { background: #141915; color: #F2F0E9; }
+
+.sabs-empty-count { font-size: 13px; letter-spacing: 0.06em; color: rgba(20,25,21,0.45); margin-bottom: 18px; }
+
+.sabs-section-head {
+  display: flex; align-items: center; gap: 10px; padding: 14px 0;
+  border-top: 2px solid #141915;
+  font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6);
+}
+.sabs-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+.sabs-cal-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; border-top: 2px solid #141915; gap: 16px; flex-wrap: wrap;
+}
+.sabs-cal-add {
+  font-family: 'Archivo', sans-serif; font-size: 13.5px; font-weight: 600;
+  padding: 9px 18px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
+  background: transparent; color: #141915; cursor: pointer;
+}
+.sabs-cal-add:hover { border-color: #141915; }
+
+.sabs-cal-card {
+  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 20px;
+  padding: 32px 36px 28px; margin-top: 10px;
+}
+.sabs-cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
+.sabs-cal-month { font-family: 'Instrument Serif', serif; font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.01em; }
+.sabs-cal-nav {
+  font-family: 'Archivo', sans-serif; font-size: 16px; background: none;
+  border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+  min-width: 38px; height: 38px; padding: 0 12px; cursor: pointer; color: #141915;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+}
+/* An arrow with something behind it looks different from one without. */
+.sabs-cal-nav.has-due { border-color: rgba(20,25,21,0.55); }
+.sabs-cal-nav-count {
+  font-size: 11px; font-weight: 500; line-height: 1;
+  background: #2FD3A0; color: #0B1512; border-radius: 100px; padding: 3px 6px;
+}
+.sabs-cal-nav:hover { border-color: #141915; }
+.sabs-cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.sabs-cal-wd { text-align: center; font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); padding: 6px 0; }
+.sabs-cal-cell {
+  min-height: 58px; border-radius: 12px; padding: 8px 10px; box-sizing: border-box;
+  background: transparent; border: 1.5px solid rgba(20,25,21,0.08);
+}
+.sabs-cal-cell.blank { border-color: transparent; }
+.sabs-cal-cell.has-due { background: rgba(47,211,160,0.16); border-color: rgba(14,140,100,0.4); }
+.sabs-cal-cell.today { border-color: #141915; }
+.sabs-cal-day { font-size: 13.5px; color: #141915; }
+.sabs-cal-cell.has-due .sabs-cal-day, .sabs-cal-cell.today .sabs-cal-day { font-weight: 700; }
+.sabs-cal-due { font-size: 10px; letter-spacing: 0.03em; color: #0A6B4D; margin-top: 4px; line-height: 1.3; }
+.sabs-cal-list { border-top: 1px solid rgba(20,25,21,0.12); margin-top: 24px; }
+.sabs-cal-row {
+  display: grid; grid-template-columns: 110px 1fr auto; gap: 24px; align-items: center;
+  padding: 18px 4px; border-bottom: 1px solid rgba(20,25,21,0.1);
+}
+.sabs-cal-date { font-size: 12.5px; letter-spacing: 0.04em; color: #B8541F; }
+.sabs-cal-name { font-weight: 700; font-size: 16px; }
+.sabs-cal-kind { font-size: 11.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); margin-top: 3px; }
+.sabs-cal-none { text-align: center; font-size: 13px; color: rgba(20,25,21,0.45); padding: 28px 0 8px; }
+
+@media (max-width: 900px) {
+  .sabs-cal-card { padding: 20px 14px 18px; }
+  .sabs-cal-cell { min-height: 44px; padding: 5px 6px; }
+  .sabs-cal-due { font-size: 9px; }
+  .sabs-cal-row { grid-template-columns: 1fr auto; }
+  .sabs-cal-date { grid-column: 1 / -1; }
+}

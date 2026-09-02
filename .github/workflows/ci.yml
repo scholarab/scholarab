@@ -1,0 +1,162 @@
+name: CI
+
+# Deploys are done by Cloudflare Pages' git integration (it builds every push
+# to main; wrangler.toml's pages_build_output_dir is its config). This workflow
+# is validation + the daily data sync. The old wrangler-action deploy step was
+# removed 2026-07-17: it had never once succeeded (0 green runs in 884) and CF
+# was the real deploy path all along.
+#
+# The daily sync push below was rejected by the "main" ruleset's required
+# "validate" status check for the repo's entire history (github-actions[bot]
+# cannot be a ruleset bypass actor). Ilia removed the required check on
+# 2026-07-17, so bot data pushes can land now. If sync commits ever stop
+# appearing on data-change days, check the ruleset first.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * *'   # Daily: sync scholarship active flags; a data commit triggers the CF Pages deploy
+  workflow_dispatch:
+
+concurrency:
+  group: ci-main
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # DATABASE_URL is scoped to this step only; the build below must never see it.
+      - name: Sync scholarship active flags
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx tsx scripts/auto-expire.ts
+
+      # These five steps are `npm run ci` unrolled, so each gets its own line in
+      # the GitHub UI. Keep the two in sync: the script exists so a local run
+      # can be the same gate as this job, and the scripts typecheck below is
+      # the one that got skipped locally and broke main for five commits.
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test -- --run
+
+      # No DATABASE_URL here on purpose: builds must use the committed JSON.
+      # The DB path only returns active rows (~28) and has null eligibility,
+      # which shrinks the site and breaks quiz matching.
+      - name: Build
+        run: npm run build
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      # tsconfig.json excludes "scripts", so the line above never covered the
+      # build/automation scripts, including the ones that email subscribers
+      # and prune tables. tsconfig.scripts.json picks them up.
+      - name: Typecheck scripts
+        run: npm run type-check:scripts
+
+      # Last so a rejected push can't hide validation results. The commit tag
+      # skips GitHub Actions only; Cloudflare Pages still sees the push and
+      # deploys the fresh data. Do NOT tag it to skip "ci": Cloudflare honors
+      # that form too and the deploy would be silently skipped.
+      - name: Commit synced data
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          # lastmod.json is restamped by the build step above; without it the
+          # sitemap would re-announce every synced listing on the next deploy.
+          git add src/data/scholarships.json src/data/research-programs.json src/data/lastmod.json
+          git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip actions]" && git push; }
+
+      # IndexNow announces the pages that changed today to Bing/Copilot/Yandex.
+      # Google ignores the protocol entirely, so this is not the fix for the
+      # Google indexing backlog -- it is the coverage we had none of.
+      #
+      # It waits on the Cloudflare deploy first: announcing a URL before Pages
+      # has published it just buys a crawl of the stale page. The gate is prod's
+      # own sitemap carrying today's date, which is exactly what this build
+      # stamped. Ten minutes, then give up quietly -- a missed announcement
+      # costs a slower Bing crawl and nothing else, so it must never fail CI.
+      #
+      # The browser User-Agent is load-bearing: our own Cloudflare edge answers
+      # a bare curl from an Actions runner IP with 403, so the gate spent forty
+      # attempts failing on a page that was already live. Same UA the link
+      # checker and copy checker send.
+      - name: Announce changed URLs (IndexNow)
+        continue-on-error: true
+        run: |
+          today=$(TZ=America/Edmonton date +%F)
+          UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+          for i in $(seq 1 40); do
+            body=$(curl -sS -A "$UA" -w '\n%{http_code}' https://www.scholarab.ca/sitemap.xml || echo $'\n000')
+            code=${body##*$'\n'}
+            if [ "$code" = "200" ]; then
+              if printf '%s' "$body" | grep -q "<lastmod>$today</lastmod>"; then
+                echo "Deploy is live (sitemap carries $today)."
+                npm run indexnow
+                exit 0
+              fi
+            else
+              # A blocked or erroring edge will not unblock itself in ten
+              # minutes, so say so once instead of burning the whole budget.
+              echo "sitemap.xml returned HTTP $code (attempt $i)."
+              if [ "$i" -ge 3 ]; then
+                echo "Cannot read prod sitemap; skipping IndexNow."
+                exit 0
+              fi
+            fi
+            sleep 15
+          done
+          echo "Deploy did not go live within 10 minutes; skipping IndexNow."
+
+  # Playwright smoke tests against the built dist/, served the same way local
+  # runs serve it (wrangler pages dev). This is a post-push signal, not a deploy
+  # gate (Cloudflare Pages deploys in parallel and cannot wait on it), so a red
+  # run here means "prod just shipped something the smoke tests don't like, go
+  # look", not "the deploy was blocked". Skipped on the cron data-sync run,
+  # where there's no code change to exercise.
+  e2e:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Both Playwright projects (Desktop Chrome + Pixel 7) run on the Chromium
+      # engine, so only that browser is needed.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      # No DATABASE_URL, same as the validate build. The E2E specs assert on the
+      # committed-JSON site (listing counts, quiz flow), which the DB path breaks.
+      - name: Build
+        run: npm run build
+
+      # playwright.config.ts starts `wrangler pages dev dist` itself and waits on
+      # it; CI-mode retries/workers/forbidOnly are already gated on $CI there.
+      - name: E2E
+        run: npm run test:e2e

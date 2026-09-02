@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SabHeader from '../../components/sab/SabHeader.astro';
+import SabFooter from '../../components/sab/SabFooter.astro';
+import SabFonts from '../../components/sab/SabFonts.astro';
+import { guides } from '../../lib/guides';
+
+const pageTitle = 'Scholarship Guides for Alberta Students | ScholarAB';
+const description =
+  'Practical guides for Alberta high school students: the Rutherford scholarship, essays, reference letters, timelines, research programs and contests.';
+const canonical = 'https://www.scholarab.ca/guides/';
+
+const collectionJson = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': 'Scholarship Guides for Alberta Students',
+  'description': description,
+  'url': canonical,
+  'provider': { '@type': 'Organization', 'name': 'ScholarAB', 'url': 'https://www.scholarab.ca' },
+  'hasPart': guides.map(g => ({
+    '@type': 'Article',
+    'headline': g.title,
+    'url': `https://www.scholarab.ca/guides/${g.slug}/`,
+  })),
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={description}
+  ogTitle={pageTitle}
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+>
+  <SabFonts italic slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(collectionJson)} slot="head" />
+
+  {/* The header band and the hero band are separate elements now; the header
+      is the page's banner and cannot sit inside <main>. Same background, no
+      margins, so the two read as the single dark band they always were. */}
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/guides" />
+  </div>
+
+  <div class="sabp" id="sab-guides" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabp-header">
+      <div class="sabgi-hero">
+        <div class="sab-kicker">GUIDES</div>
+        <h1 class="sabgi-h1">How to actually <em>win</em> a scholarship.</h1>
+        <p class="sabgi-lede">
+          Short, practical guides written for Alberta high school students. No filler, no recycled advice from American sites that doesn't apply here.
+        </p>
+      </div>
+    </div>
+
+    <div class="sabgi-body" style="flex:1;">
+      <div class="sabgi-grid">
+        {guides.map((g, i) => (
+          <a href={`/guides/${g.slug}/`} class="sabgi-card">
+            <div class="sabgi-card-top">
+              <span class="sabgi-mono sabgi-card-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="sabgi-mono sabgi-card-tag">{g.kicker}</span>
+            </div>
+            <div class="sabgi-card-title">{g.title}</div>
+            <div class="sabgi-card-desc">{g.description}</div>
+            <div class="sabgi-mono sabgi-card-meta">{g.minutes} MIN READ</div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<style is:global>
+  body:has(#sab-guides) { background: #FAF7F0; }
+</style>
+
+<style>
+  .sabgi-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .sabgi-hero { max-width: 1180px; margin: 0 auto; padding: 72px 48px 64px; width: 100%; box-sizing: border-box; }
+  .sabgi-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;
+    margin: 0; max-width: 900px; text-wrap: balance;
+  }
+  .sabgi-h1 em { font-style: italic; color: #2FD3A0; }
+  .sabgi-lede { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 28px 0 0; max-width: 560px; }
+
+  .sabgi-body { max-width: 1180px; margin: 0 auto; padding: 72px 48px 110px; width: 100%; box-sizing: border-box; }
+  .sabgi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .sabgi-card {
+    display: flex; flex-direction: column; background: #FFFFFF;
+    border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px; padding: 28px 30px;
+    text-decoration: none; color: #141915; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sabgi-card:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #2FD3A0; }
+  .sabgi-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .sabgi-card-num {
+    width: 42px; height: 42px; border-radius: 12px; border: 1.5px solid rgba(20,25,21,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Instrument Serif', serif; font-size: 18px; color: #0A6B4D;
+  }
+  .sabgi-card-tag { font-size: 11px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); }
+  .sabgi-card-title { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 10px; }
+  .sabgi-card-desc { font-size: 15px; line-height: 1.6; color: rgba(20,25,21,0.6); flex: 1; }
+  .sabgi-card-meta { font-size: 11px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); margin-top: 18px; }
+
+  @media (max-width: 900px) {
+    .sabgi-hero { padding: 44px 20px 44px; }
+    .sabgi-body { padding: 48px 20px 90px; }
+    .sabgi-grid { grid-template-columns: 1fr; }
+  }
+</style>

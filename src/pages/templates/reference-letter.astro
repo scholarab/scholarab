@@ -1,0 +1,281 @@
+---
+// The site's first linkable asset: a thing a counsellor can send a whole class
+// the URL of, rather than a page that only makes sense after you have read
+// three other pages.
+//
+// Why a page and not a download. A .docx would be shareable and completely
+// invisible -- no title, no snippet, nothing to rank, and no way for a student
+// on a school Chromebook to open it without a detour. A page can be linked,
+// indexed, read on a phone in a hallway, and copied a block at a time. The copy
+// buttons are the whole download story: the text goes to the clipboard and into
+// whatever the student was already writing in.
+//
+// Why /templates/ rather than /guides/. The reference-letter guide explains the
+// thinking; this is the artefact you use once you agree with it. Filing it under
+// guides would put a fill-in-the-blanks worksheet in a list of essays and give
+// it a reading time it does not have.
+import Layout from '../../layouts/Layout.astro';
+import SabHeader from '../../components/sab/SabHeader.astro';
+import SabFooter from '../../components/sab/SabFooter.astro';
+import SabFonts from '../../components/sab/SabFonts.astro';
+
+const canonical = 'https://www.scholarab.ca/templates/reference-letter/';
+const pageTitle = 'Reference Letter Request Template | ScholarAB';
+const description =
+  'Copy-and-fill templates for asking a teacher for a scholarship reference: the ask, the one-page package to hand them, the reminder, and the thank-you.';
+
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    { '@type': 'ListItem', 'position': 1, 'name': 'ScholarAB', 'item': 'https://www.scholarab.ca' },
+    { '@type': 'ListItem', 'position': 2, 'name': 'Reference letter request template', 'item': canonical },
+  ],
+};
+
+// The template bodies live here rather than inline in the markup so the copy
+// button and the rendered <pre> are guaranteed to hand over the same characters.
+// A button that copies something subtly different from what the reader just
+// read is worse than no button.
+const blocks = [
+  {
+    id: 'ask',
+    kicker: 'STEP 01',
+    title: 'The ask',
+    lede: 'Send this three weeks before the deadline, or in September if a big fall award is on your list. Short on purpose: you are asking one question, and the word "strong" is doing the work. It gives a lukewarm referee a graceful way out, and a lukewarm letter is worse than no letter.',
+    text: `Hi [Ms./Mr./Mx. Name],
+
+I'm applying for the [award name], which is for [one sentence on what it rewards]. The deadline is [date].
+
+You taught me [course / coached me in / supervised me at] [context], and you saw me [the specific thing you want the letter to be about]. Would you be comfortable writing me a strong reference?
+
+If yes, I'll send you a one-page summary with the details and everything you'd need to submit it. Completely fine if you're too booked; I'd rather know now.
+
+Thank you,
+[Your name], [grade] at [school]`,
+  },
+  {
+    id: 'package',
+    kicker: 'STEP 02',
+    title: 'The one-page package',
+    lede: 'This is the part almost nobody does, and it is the single biggest upgrade available to you. Your referee wants to help and remembers a fraction of what you did. Hand them the evidence and "a responsible student" becomes "reorganised our bottle-drive logistics and doubled the total": same teacher, same student, different letter. Send it the day they say yes.',
+    text: `REFERENCE PACKAGE: [Your name]
+
+THE AWARD
+[Award name], [amount].
+It rewards: [one sentence].
+Deadline: [date].
+
+HOW TO SUBMIT
+[Portal link / email address / "they will email you a form"].
+Format: [letter on school letterhead / online form / PDF attachment].
+Addressed to: [selection committee / named person / "To whom it may concern"].
+
+THREE THINGS YOU'VE SEEN ME DO
+1. [What happened, when, and what changed because of it.]
+2. [Something that went badly first, and what you did about it.]
+3. [Something ordinary you did consistently for a long time.]
+
+WHAT I'M STUDYING AND WHY
+[Two sentences. Not a mission statement, the actual reason.]
+
+IF IT HELPS
+Average: [number]. Relevant courses: [list].
+Roles: [club / job / team, with rough dates].
+
+I'll send one reminder a few days before the deadline. Thank you, genuinely.
+[Your name] · [your email] · [your phone]`,
+  },
+  {
+    id: 'reminder',
+    kicker: 'STEP 03',
+    title: 'The reminder',
+    lede: 'Three or four days out. Nobody has ever been annoyed by this and plenty of letters have been saved by it. Keep it light and make it easy to say "not yet".',
+    text: `Hi [Name],
+
+Quick reminder that the [award name] reference is due [date], [three days] from now. The submission link is [link], and I've pasted the package below again in case it's easier than digging for the email.
+
+If you need more time or it's not going to work out, just tell me and I'll sort something else. No hard feelings either way.
+
+Thanks again,
+[Your name]`,
+  },
+  {
+    id: 'thanks',
+    kicker: 'STEP 04',
+    title: 'The thank-you',
+    lede: 'Win or lose, and within a week. You will need this person again for the spring round of local awards, and referees remember the students who closed the loop.',
+    text: `Hi [Name],
+
+Thank you for writing the [award name] reference. [I found out this week that I got it / I didn't get this one, but the application was much stronger for having your letter behind it.]
+
+[One line on what you're doing next.]
+
+I really appreciate you taking the time.
+[Your name]`,
+  },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={description}
+  ogTitle={pageTitle}
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+>
+  <SabFonts italic slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/guides" />
+  </div>
+
+  <div class="sabp" id="sab-tpl" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabp-header">
+      <div class="sabt-hero">
+        <div class="sab-kicker sabt-kicker">
+          <a href="/guides/" class="sabt-kicker-link">GUIDES</a>
+          <span class="sabt-kicker-sep">/</span>
+          <span>TEMPLATE</span>
+        </div>
+        <h1 class="sabt-h1">Reference letter request template</h1>
+        <p class="sabt-lede">
+          Four things to send, in order, with the blanks marked. Copy them, fill in the brackets, and delete this sentence if you paste it by accident.
+        </p>
+      </div>
+    </div>
+
+    <div class="sabt-body" style="flex:1;">
+      <p class="sabt-intro">
+        A reference letter is the only part of your application you do not write, which is exactly why committees believe it. The difference between a letter that moves you up the pile and one that quietly sinks you is almost never the referee. It is how you asked. <a href="/guides/reference-letters-for-scholarships/">The guide explains who to ask and why this works</a>. This page is the part you actually use.
+      </p>
+
+      {blocks.map(b => (
+        <section class="sabt-block" id={b.id}>
+          <div class="sabt-block-head">
+            <span class="sabt-mono sabt-step">{b.kicker}</span>
+            <h2 class="sabt-h2">{b.title}</h2>
+          </div>
+          <p class="sabt-note">{b.lede}</p>
+          <div class="sabt-card">
+            <button type="button" class="sabt-copy sabt-mono" data-copy={b.id}>Copy</button>
+            <pre class="sabt-pre" id={`tpl-${b.id}`}>{b.text}</pre>
+          </div>
+        </section>
+      ))}
+
+      <section class="sabt-block">
+        <div class="sabt-block-head">
+          <span class="sabt-mono sabt-step">BEFORE YOU SEND</span>
+          <h2 class="sabt-h2">Three ways this goes wrong</h2>
+        </div>
+        <ul class="sabt-list">
+          <li><strong>You left a bracket in.</strong> Read it once out loud. Every year somebody emails a teacher asking about the [award name].</li>
+          <li><strong>You asked the wrong person.</strong> The teacher who watched you struggle and improve writes a better letter than the principal who knows your name. Check the award's own rules first, too: some require a teacher, some exclude family, and some want two different perspectives.</li>
+          <li><strong>You asked too late.</strong> Three weeks is the floor. Letters written at 11&nbsp;p.m. the night before read like it, and in October every teacher in Alberta is being asked at once.</li>
+        </ul>
+      </section>
+
+      <p class="sabt-outro">
+        Once the letter is handled, the rest is deadlines. The <a href="/deadlines/">deadline calendar</a> shows what closes each month, and you can <a href="/saved/">turn on reminders</a> for the awards you have saved so a reference you worked for does not go unused.
+      </p>
+    </div>
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<script>
+  // Progressive: the <pre> is the real artefact and works with the button
+  // dead. The button reads its text from the DOM rather than a duplicated
+  // string, so it cannot copy something other than what is on screen.
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
+    btn.addEventListener('click', async () => {
+      const pre = document.getElementById(`tpl-${btn.dataset.copy}`);
+      if (!pre?.textContent) return;
+      try {
+        await navigator.clipboard.writeText(pre.textContent);
+        btn.textContent = 'Copied';
+      } catch {
+        // Clipboard is permission-gated and blocked outright in some school
+        // browser profiles. Say so instead of silently doing nothing.
+        btn.textContent = 'Select & copy';
+      }
+      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    });
+  }
+</script>
+
+<style is:global>
+  body:has(#sab-tpl) { background: #FAF7F0; }
+</style>
+
+<style>
+  .sabt-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .sabt-hero { max-width: var(--sab-read); margin: 0 auto; padding: 64px 24px 72px; width: 100%; box-sizing: border-box; }
+  .sabt-kicker { margin-bottom: 24px; }
+  .sabt-kicker-link { color: rgba(242,240,233,0.55); text-decoration: none; }
+  .sabt-kicker-link:hover { color: #F2F0E9; }
+  .sabt-kicker-sep { color: rgba(242,240,233,0.3); }
+  .sabt-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(38px, 5.5vw, 62px); line-height: 1.05; letter-spacing: -0.015em;
+    margin: 0; text-wrap: balance;
+  }
+  .sabt-lede { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(242,240,233,0.7); max-width: 52ch; }
+
+  .sabt-body { max-width: var(--sab-read); margin: 0 auto; padding: 56px 24px 96px; width: 100%; box-sizing: border-box; }
+  .sabt-intro, .sabt-outro { font-size: 17px; line-height: 1.7; color: rgba(20,25,21,0.85); margin: 0 0 8px; }
+  .sabt-outro { margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(20,25,21,0.14); }
+  .sabt-intro a, .sabt-outro a, .sabt-list a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
+  .sabt-intro a:hover, .sabt-outro a:hover { color: #141915; }
+
+  .sabt-block { margin-top: 48px; }
+  .sabt-block-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .sabt-step { font-size: 12px; letter-spacing: 0.09em; color: rgba(20,25,21,0.45); }
+  .sabt-h2 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(26px, 3.2vw, 34px); line-height: 1.15; letter-spacing: -0.01em;
+    margin: 0; color: #141915;
+  }
+  .sabt-note { font-size: 16px; line-height: 1.65; color: rgba(20,25,21,0.72); margin: 12px 0 18px; }
+  .sabt-list { margin: 14px 0 0; padding-left: 22px; font-size: 16px; line-height: 1.65; color: rgba(20,25,21,0.78); }
+  .sabt-list li { margin-bottom: 12px; }
+  .sabt-list strong, .sabt-note strong { color: #141915; }
+
+  /* The template itself. Monospaced and boxed because it is a thing to be
+     lifted whole, not read as prose -- the fixed pitch is what makes the
+     [brackets] scan as blanks rather than as punctuation. */
+  .sabt-card {
+    position: relative; background: #FFFFFF;
+    border: 1.5px solid rgba(20,25,21,0.85); border-radius: 14px;
+    padding: 22px 22px 20px;
+  }
+  .sabt-pre {
+    margin: 0; font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px; line-height: 1.75; color: #141915;
+    white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+  .sabt-copy {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 7px 13px; border-radius: 999px; cursor: pointer;
+    background: #141915; color: #F2F0E9; border: none;
+    min-width: 84px;
+  }
+  .sabt-copy:hover { background: #0A6B4D; }
+  .sabt-copy:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+  @media (max-width: 720px) {
+    .sabt-hero { padding: 48px 20px 56px; }
+    .sabt-body { padding: 40px 20px 72px; }
+    /* At this width the pill sits over the first line of the template. Above
+       it instead, in flow, where it cannot cover the thing it copies. */
+    .sabt-card { padding: 56px 16px 18px; }
+    .sabt-copy { top: 14px; left: 16px; right: auto; }
+    .sabt-pre { font-size: 12.5px; }
+  }
+</style>

@@ -1,0 +1,180 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+
+const guide = getGuide('alexander-rutherford-scholarship-guide');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'How much is the Alexander Rutherford Scholarship worth?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Up to $2,500 total. Each grade is assessed separately: Grade 10 pays $300 (75 to 79.9% average) or $400 (80%+), Grade 11 pays $500 or $800, and Grade 12 pays $700 or $1,300.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When does the Alexander Rutherford Scholarship open?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Alberta Student Aid scholarship applications open August 1 each year. Use the form for the year your studies begin: if your first term starts on or after August 1, 2026, you apply on the 2026-27 application.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When is the Alexander Rutherford Scholarship deadline?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'There is no closing deadline. The application opens August 1, and you submit it any time after you are enrolled full-time in a designated post-secondary program and your final high school transcripts are available.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which courses count toward the Rutherford five-course average?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Five courses per grade: one core English or Français course at that grade level, plus at least two designated option courses from the Alberta Student Aid list for that grade. In Grade 12 the options include Mathematics 30-1, 30-2 or 31, Biology 30, Chemistry 30, Physics 30, Science 30, Social Studies 30-1 or 30-2, and second languages.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can you get the Alexander Rutherford Scholarship twice?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. Alberta Student Aid states you may only be awarded the Alexander Rutherford Scholarship once. All three grades are assessed on the single application and paid as one amount, up to $2,500.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do I need a 75% average in every grade to get the Rutherford scholarship?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. Each grade is assessed on its own. If you only had a 75%+ five-course average in Grade 12, you still receive the Grade 12 portion.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can I upgrade or rewrite a course to qualify for the Rutherford scholarship?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, within limits. Alberta Student Aid permits retakes and rewrites as long as they are completed before you take the higher-level course in that subject and before you start post-secondary studies.',
+      },
+    },
+  ],
+};
+---
+
+<SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
+  <p>
+    The <a href="/scholarships/alexander-rutherford-scholarship/">Alexander Rutherford Scholarship</a> is the one scholarship almost every Alberta student should apply for. There is no essay, no interview, and no competition. If your marks meet the bar and you go on to post-secondary, the money is yours. Every year students leave it unclaimed because they assume it must be harder than it is.
+  </p>
+
+  <h2>How much it pays</h2>
+  <p>
+    Each grade is assessed separately, based on your average in five designated courses. You can qualify for one, two, or all three grades:
+  </p>
+  <table>
+    <thead>
+      <tr><th>GRADE</th><th>75.0% TO 79.9%</th><th>80% OR HIGHER</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Grade 10</td><td>$300</td><td>$400</td></tr>
+      <tr><td>Grade 11</td><td>$500</td><td>$800</td></tr>
+      <tr><td>Grade 12</td><td>$700</td><td>$1,300</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Qualify at 80%+ in all three grades and you get the full <strong>$2,500</strong>. A rough Grade 10 does not disqualify you: if you only hit the bar in Grade 12, you still get that grade's portion.
+  </p>
+
+  <h2>Which five courses actually count</h2>
+  <p>
+    This is where most of the confusion lives, and it is worth getting right, because the average that matters is almost never your report-card average. Rutherford looks at <strong>five specific courses per grade</strong>, not your whole timetable. The structure is the same in each grade: one core literacy course, then designated options.
+  </p>
+  <p>
+    The core is English or Français at that grade level: English 10-1 or 10-2 in Grade 10, and the equivalent 20- and 30-level courses after that. At least two of the remaining courses have to come from the designated option list for that grade:
+  </p>
+  <table>
+    <thead>
+      <tr><th>GRADE</th><th>DESIGNATED OPTIONS INCLUDE</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Grade 10</td><td>Mathematics 10C, Science 10, Social Studies 10-1 or 10-2, second languages</td></tr>
+      <tr><td>Grade 11</td><td>Mathematics 20-1 or 20-2, Biology 20, Chemistry 20, Physics 20, Science 20, Social Studies 20-1 or 20-2, second languages</td></tr>
+      <tr><td>Grade 12</td><td>Mathematics 30-1, 30-2 or 31, Biology 30, Chemistry 30, Physics 30, Science 30, Social Studies 30-1 or 30-2, second languages</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Two things follow from this that catch people out. First, a strong mark in an option course that is not on the list does not help your Rutherford average, however much work it took. Second, the dash matters: -1 and -2 streams both appear on the list, so taking Math 30-2 rather than 30-1 does not cost you the scholarship. Check your own five against the course lists on the <a href="https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/" rel="noopener noreferrer" target="_blank">Alberta Student Aid page</a> before you assume anything, because the lists are the authority and they do get revised.
+  </p>
+  <p>
+    International Baccalaureate courses count, as either core or option courses, in all three grades. If you are in an AP or dual-credit stream, ask Student Aid directly how your specific courses are recorded on your transcript rather than assuming they map across.
+  </p>
+
+  <h2>Who qualifies</h2>
+  <ul>
+    <li>You have a five-course average of at least 75% in Grade 10, 11, or 12, made up of the designated courses above.</li>
+    <li>You are a Canadian citizen, permanent resident, or protected person.</li>
+    <li>You are an Alberta resident, or one of your parents or legal guardians is.</li>
+    <li>You enrol in a full course load in a designated undergraduate post-secondary or apprenticeship program of at least one semester in length. Student Aid uses your own school's definition of a full course load; the 60% figure you may have seen applies to Open Studies courses, not to the general rule.</li>
+    <li>You completed high school on or after September 30, 1980.</li>
+  </ul>
+  <p>
+    Graduate and professional programs (medicine, veterinary medicine, optometry and the like) are not eligible. Rutherford is an undergraduate and apprenticeship award, which is the point: it is meant to land on the first tuition bill.
+  </p>
+  <div class="sabg-note">
+    <strong>The catch most students miss:</strong> you cannot apply while you are still in high school. You submit it once you are actually enrolled in post-secondary. Put a reminder in your phone for your first month of college or university.
+  </div>
+
+  <h2>You only get it once</h2>
+  <p>
+    Alberta Student Aid is explicit that you may only be awarded the Rutherford once. That single sentence answers a question a lot of students ask the wrong way round: the three grades are not three scholarships you collect one per year. They are three components of one assessment, added together and paid out once, to a maximum of $2,500.
+  </p>
+  <p>
+    So there is no reason to hold the application back, and no version of this where applying early costs you a later payment. You apply once, in your first year of post-secondary, and Student Aid works out every grade you qualified for at the same time.
+  </p>
+
+  <h2>When the application opens</h2>
+  <p>
+    Alberta Student Aid opens its scholarship applications on <strong>August 1</strong> every year. The form you need is the one for the year your studies start in: if your first term begins on or after August 1, 2026, you apply on the 2026-27 application.
+  </p>
+  <p>
+    There is no closing deadline, so nothing is lost by applying in October instead of August. Nothing is gained by waiting either. Two things have to be true before you can submit: your official high school transcript marks are available, and you are enrolled full-time in post-secondary. Because it has no deadline, Rutherford sits in the no-fixed-date section of our <a href="/deadlines/">deadline calendar</a> rather than in a month, which is exactly why it is so easy to forget.
+  </p>
+
+  <h2>How to apply</h2>
+  <ol>
+    <li>Finish high school and enrol in a full course load in a designated post-secondary program. Trades and apprenticeships count.</li>
+    <li>Create an Alberta Student Aid account at <a href="https://studentaid.alberta.ca" rel="noopener noreferrer" target="_blank">studentaid.alberta.ca</a>. This is the same account used for student loans, but applying for the scholarship does not mean taking a loan.</li>
+    <li>Submit the Rutherford application. Alberta Student Aid pulls your transcripts and assesses all three grades automatically. It takes about half an hour.</li>
+    <li>Wait for your institution to confirm your enrolment. That confirmation, not your application date, is what starts the clock.</li>
+  </ol>
+  <p>
+    Once your school confirms you are attending, Alberta Student Aid mails a cheque within about a month. Apply in your first semester and the money arrives while tuition still hurts.
+  </p>
+
+  <h2>If your average is short</h2>
+  <p>
+    A five-course average that lands at 74 point something is the most frustrating result there is, and it is sometimes fixable. Retakes and rewrites are permitted, with one significant condition: they have to be finished <strong>before you take the higher-level course in that subject, and before you start post-secondary studies</strong>. A Chemistry 20 rewrite in the summer after Grade 11 is fair game; the same rewrite after you have already sat Chemistry 30 is not.
+  </p>
+  <p>
+    That condition is what turns Rutherford from a Grade 12 problem into a Grade 10 and 11 one. The window to repair a grade closes when you move up a level in that subject, which for most students is the following September. If you are reading this in Grade 11 with a borderline Grade 10 average, this summer is the window.
+  </p>
+  <p>
+    And if it is not fixable, it is not fatal. Each grade stands alone, so a missed Grade 10 costs you $300 or $400 and nothing else.
+  </p>
+
+  <h2>What it means for you right now</h2>
+  <p>
+    If you are in Grade 10 or 11, this scholarship is the clearest reason to protect your average. The difference between a 74.9% and a 75% five-course average in one grade is worth hundreds of dollars, and the difference between 79.9% and 80% in Grade 12 is worth $600. Few things you do in high school have such a direct price tag, and unlike almost every other award, the price is posted in advance and nobody else is competing with you for it.
+  </p>
+  <p>
+    The Rutherford also stacks with everything else. Winning it does not reduce what you can get from <a href="/scholarships/">other Alberta scholarships</a>, so treat it as the floor, not the ceiling. The awards that actually decide what your first year costs are the ones with essays and deadlines attached, and those are the ones worth spending your fall on; see the <a href="/guides/scholarships-for-grade-12-students-alberta/">Grade 12 timeline</a> for when each of them lands.
+  </p>
+</SabGuide>

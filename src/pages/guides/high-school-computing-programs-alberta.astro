@@ -1,0 +1,78 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
+
+const guide = getGuide('high-school-computing-programs-alberta');
+---
+
+<SabGuide guide={guide}>
+  <p>
+    Computing is the one field where the strongest things a high school student can put on an application cost nothing to enter. It is also the field where the most valuable of them are registered by a teacher rather than by you, which means that for about half this list, the first move is a conversation in a staff room, not a form. Students who do not know that spend the year looking for summer programs to pay for and miss the contest their own school could have entered them in for free.
+  </p>
+
+  <h2>The ones a teacher signs you up for</h2>
+  <p>
+    Nobody tells you this, and it is the difference between competing and not:
+  </p>
+  <ul>
+    <li>
+      <strong><a href="/programs/canadian-computing-competition-ccc/">The Canadian Computing Competition</a></strong> is the one that counts. Waterloo's CEMC runs it, it is written at your school on February 17, 2027, and registration closes February 11. Top scorers are invited to the Canadian Computing Olympiad. If your school has never run it, a teacher can register; the barrier is awareness, not cost or capacity.
+    </li>
+    <li>
+      <strong><a href="/programs/cybertitan-national-cybersecurity-competition/">CyberTitan</a></strong> is a national cyber defence competition for teams of up to fifteen, running October to May. Teachers register the team between April and October. That window closes before most students start thinking about the school year, which is why so few Alberta teams enter.
+    </li>
+    <li>
+      <strong><a href="/programs/amii-k-12-ai-literacy/">Amii's K–12 AI literacy kits</a></strong> are free, curriculum-aligned, and delivered to Alberta classrooms by the province's own machine intelligence institute. You cannot apply. A science or CTS teacher requests one, so asking is the entire mechanism.
+    </li>
+    <li>
+      <strong><a href="/programs/cisco-networking-academy-high-school-stream/">The Cisco Networking Academy</a></strong> runs through participating Alberta school boards as a semester or year-long course, and it ends in industry-recognised certifications in networking and IT fundamentals. A certification earned in Grade 11 is a rare thing to be able to name on an application.
+    </li>
+  </ul>
+  <p>
+    If the answer is that your school does not do any of these, that is worth knowing in September rather than in April. All four are things one teacher can start.
+  </p>
+
+  <h2>The ones you enter yourself</h2>
+  <p>
+    No gatekeeper, no school registration, and in three of these four cases no money either.
+  </p>
+  <ul>
+    <li>
+      <strong><a href="/programs/nasa-international-space-apps-challenge/">NASA's International Space Apps Challenge</a></strong> is the largest hackathon in the world and it is free. The 2026 edition runs November 14–15, registration opens August 26, and Alberta hubs ran in both Calgary and Edmonton last year. Challenges are written by NASA staff and span software, data science, hardware and design, so a team does not have to be all programmers.
+    </li>
+    <li>
+      <strong><a href="/programs/apple-swift-student-challenge/">The Swift Student Challenge</a></strong> asks for one thing: an original Swift playground you built. It is open to under-18s, it is judged on the work rather than on your record, and winners get WWDC access and developer tools. It is the most portfolio-like item on this page.
+    </li>
+    <li>
+      <strong><a href="/programs/cybersci-cyber-security-challenge-canada-high-school/">CyberSci</a></strong> runs capture-the-flag events (network vulnerabilities, cryptography, server security) at regional and national levels, open to teams or individuals. If CyberTitan's teacher window has already closed, this is the way into the same skill set this year.
+    </li>
+    <li>
+      <strong><a href="/programs/hack-the-north-high-school-track/">Hack the North</a></strong> is Canada's largest hackathon, 36 hours at Waterloo with more than a thousand students, and travel, food and lodging are covered for those accepted. The application is competitive and it reopens in the summer.
+    </li>
+  </ul>
+
+  <h2>The year-long ones you can do from anywhere</h2>
+  <p>
+    <a href="/programs/qubit-by-qubit-high-school-quantum-computing/">Qubit by Qubit</a> teaches quantum computing to high school students over a full academic year, taught by PhD researchers working with Google Quantum AI, with need-based aid available and no prior quantum or coding experience assumed. The signature introductory course starts in October. <a href="/programs/ibm-skillsbuild-for-high-school/">IBM SkillsBuild</a> is self-paced and free, and issues badges in AI, web development and cloud computing that you can point at.
+  </p>
+  <p>
+    If your maths and physics are strong, <a href="/programs/quantum-school-for-young-students-qsys/">QSYS</a> at Waterloo's Institute for Quantum Computing takes Grade 11 and 12 students for a week in August, with applications typically closing in mid-May. It is a small, in-person, research-adjacent program of the kind this province has very few of.
+  </p>
+
+  <h2>If you are a girl or a gender-diverse student</h2>
+  <p>
+    Two programs exist specifically for you and both are underused in Alberta. <a href="/programs/technovation-girls-alberta/">Technovation Girls</a> runs January to May for ages 13 to 18: your team finds a community problem, does the user research, builds a mobile app or an AI solution, and pitches it to industry judges. It works remotely or through a local Alberta hub.
+  </p>
+  <p>
+    <a href="/programs/hackergal-national-ambassador-program/">Hackergal's National Ambassador Program</a> is the high school half of an organisation most students meet in junior high; its hackathon stops at Grade 9, and the ambassador program is where Grades 9 to 12 continue. Ambassadors run their own clubs and workshops and move through four yearly stages. Taking part also qualifies you for Hackergal's scholarship for graduating students, which reopens in November 2026. The intake is closed at the moment with no reopening date posted, so this one is a calendar reminder rather than an application.
+  </p>
+
+  <h2>Why a free contest outranks a paid course</h2>
+  <p>
+    A tuition-based summer program proves you could afford it. A contest result, a certification or a shipped app proves you did something under a constraint somebody else set, which is what a selection committee is trying to establish. That is also why these turn into money later: the awards in our <a href="/scholarships/stem/">STEM scholarships</a> list are read by people looking for exactly this kind of evidence.
+  </p>
+  <p>
+    If what you actually want is a lab rather than a contest, the paid research placements are covered in <a href="/guides/high-school-research-programs-alberta/">research programs for Alberta students</a>. Otherwise the full list is on the <a href="/programs/computing/">computing and CS programs page</a>, and the <a href="/match/">match quiz</a> takes {QUIZ_DURATION} and will tell you which of these your grade actually qualifies you for.
+  </p>
+</SabGuide>

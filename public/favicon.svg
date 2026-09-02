@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><clipPath id="favClip"><circle cx="50" cy="50" r="42"/></clipPath></defs>
+  <circle cx="50" cy="50" r="42" fill="#0B1512"/>
+  <g clip-path="url(#favClip)">
+    <polygon points="10,96 48,30 86,96" fill="#2FD3A0"/>
+    <polygon points="30,39 48,27 66,39 48,51" fill="#141915" stroke="#F2F0E9" stroke-width="3.4" stroke-linejoin="round"/>
+  </g>
+  <path d="M 91.07 34.23 A 44 44 0 1 1 65.77 8.93" fill="none" stroke="#2FD3A0" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="81.11" cy="18.89" r="10" fill="#FFC94A"/>
+</svg>

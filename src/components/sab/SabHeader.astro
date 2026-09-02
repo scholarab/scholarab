@@ -1,0 +1,405 @@
+---
+// Dark header band from the claude.ai/design "ScholarAB" pages:
+// nav with accent underline on the active link.
+// (The mono annotation bar and the home-page Home-item omission from the
+// design were both removed at Ilia's request, 2026-07-11.)
+//
+// Below 900px the same six anchors become a full-screen sheet behind a
+// 44×44 button ("ScholarAB Mobile Home.dc.html", state B); one nav, two
+// layouts, so there is no second link list to keep in sync.
+
+import SabLogoMark from './SabLogoMark.astro';
+import { loadScholarships, loadPrograms } from '../../lib/data-loader';
+import { QUIZ_DURATION } from '../../lib/quiz';
+import { programIsListed } from '../../lib/status';
+
+interface Props {
+  currentPath: string;
+  /**
+   * Scrolling announcement band. Every page on desktop (Ilia, 2026-08-26);
+   * it was home-only from 2026-08-19 until then. Desktop is enforced in CSS,
+   * not here: the band is display:none below 900px, so a page that opts in
+   * still shows nothing on a phone.
+   */
+  ticker?: boolean;
+}
+const { currentPath, ticker } = Astro.props;
+
+// Counts shown beside two links in the mobile sheet. Same definitions the
+// home hero uses: every scholarship in the directory, and the programs
+// /programs actually lists. Both loaders are cached, so this is free after
+// the first page of a build, if the data is unreachable the counts simply
+// do not render.
+let scholarshipCount: number | null = null;
+let programCount: number | null = null;
+try {
+  const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  scholarshipCount = scholarships.length;
+  programCount = programs.filter(p => programIsListed(p, today)).length;
+} catch {
+  /* counts are decoration; the nav works without them */
+}
+
+const navItems = [
+  { label: 'Home', href: '/', count: null as number | null },
+  { label: 'Scholarships', href: '/scholarships/', count: scholarshipCount },
+  { label: 'Programs', href: '/programs/', count: programCount },
+  { label: 'Match', href: '/match/', count: null as number | null },
+  { label: 'Saved', href: '/saved/', count: null as number | null },
+  { label: 'About', href: '/about/', count: null as number | null },
+];
+
+// Compare with a normalized trailing slash on both sides. The nav hrefs carry
+// one (bare paths 308-redirect in production, so linking to them split every
+// page across two indexed URLs), but callers pass currentPath either way;
+// a bare '/scholarships' must still light up the '/scholarships/' tab.
+const withSlash = (p: string) => (p.endsWith('/') ? p : p + '/');
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : withSlash(currentPath).startsWith(withSlash(href));
+
+// Scrolling announcement band (fishback2026.com-style): a short pair of
+// linked CTAs repeated to fill the loop.
+const tickerPair = [
+  { label: 'Find your match', rest: `in ${QUIZ_DURATION}`, href: '/match/' },
+  { label: 'Browse scholarships', rest: 'open right now', href: '/scholarships/' },
+];
+const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
+// Default on. The two destinations it points at, /match and /scholarships,
+// are the two things a reader on any page is most likely to want next, and
+// the band was already doing that work on exactly one page.
+const showTicker = ticker ?? true;
+---
+
+<header class="sabh" data-sab-header>
+  <div class="sabh-nav">
+    <a href="/" class="sabh-logo" aria-label="ScholarAB home">
+      <SabLogoMark size={32} id="header" />
+      <span class="sabh-logo-word">Scholar<span style="color:#2FD3A0;">AB</span></span>
+    </a>
+    <div class="sabh-actions">
+      <!-- The site nav is a real landmark: it is the only way to jump past
+           these links, or straight to them, without walking the whole page. -->
+      <nav class="sabh-links" id="sabh-links" aria-label="Main">
+        <div class="sabh-sheet-label" aria-hidden="true">GO TO</div>
+        {navItems.map(n => (
+          <a
+            href={n.href}
+            class={`sabh-link${isActive(n.href) ? ' sabh-link-active' : ''}`}
+            aria-current={isActive(n.href) ? 'page' : undefined}
+          >
+            <span class="sabh-link-label">{n.label}</span>
+            {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count}</span>}
+          </a>
+        ))}
+        <div class="sabh-sheet-foot" aria-hidden="true">FREE · NO ACCOUNT<br />MADE IN MEDICINE HAT</div>
+      </nav>
+      {/* The one nav item worth permanent rent: the CTA stays in the bar at
+          every width and every menu state, so it is never a tap away. */}
+      <a href="/match/" class="sabh-cta">
+        <span class="sabh-cta-long">Find my match</span>
+        <span class="sabh-cta-short" aria-hidden="true">Match</span>
+      </a>
+      <button
+        type="button"
+        class="sabh-burger"
+        id="sabh-burger"
+        aria-controls="sabh-links"
+        aria-expanded="false"
+        aria-label="Open menu"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+  {showTicker && (
+    <>
+      {/*
+        The band is decorative: both destinations are already in navItems above, so
+        hiding it costs assistive tech nothing. It is aria-hidden AND its links are
+        tabindex="-1"; aria-hidden alone leaves elements in the tab order, which
+        would strand a keyboard user on a link screen readers report as absent
+        (WCAG 4.1.2). Without both, each half put 8 duplicate stops on the page.
+      */}
+      <div class="sabh-ticker-band" aria-hidden="true">
+        <div class="sabh-ticker">
+          {[false, true].map(dup => (
+            <span class="sabh-ticker-half" data-dup={dup || undefined}>
+              {tickerItems.map(t => (
+                <span class="sabh-ticker-item">
+                  <a href={t.href} draggable="false" tabindex="-1">{t.label}</a>{' '}<span>{t.rest}</span>
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+    </>
+  )}
+</header>
+
+<style>
+  /* Same measure as the page body, so the logo shares the content's left edge
+     instead of hugging the window on a wide monitor. The dark band itself
+     stays full width. */
+  .sabh-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 48px; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
+    /* Declared, not content-derived: the home hero subtracts this to fill the
+       fold, and a height that moves with a font metric would move the fold.
+       min-, not a fixed height: if this row ever needs more room it should
+       take it and leave the fold slightly off, rather than clip the nav. */
+    min-height: var(--sab-nav-h);
+  }
+  .sabh-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
+  /* The CTA used to live inside .sabh-links. It sits beside it now so the
+     link list alone can become the mobile sheet; the desktop row is the
+     same 34px rhythm it always was. */
+  .sabh-actions { display: flex; align-items: center; gap: 34px; }
+  .sabh-links { display: flex; align-items: center; gap: 34px; }
+  .sabh-link {
+    font-size: 14.5px; font-weight: 500; color: rgba(242,240,233,0.75);
+    text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 4px;
+  }
+  .sabh-link:hover { color: #F2F0E9; }
+  .sabh-link-active { color: #F2F0E9; border-bottom-color: #2FD3A0; }
+  /* Sheet-only furniture: the section label, the per-link counts and the
+     footnote are all invisible on desktop. */
+  .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count { display: none; }
+  .sabh-cta {
+    font-size: 14px; font-weight: 600; background: #2FD3A0; color: #0B1512;
+    padding: 10px 20px; border-radius: 100px; text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease,
+                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .sabh-cta:hover, .sabh-cta:focus-visible {
+    background: #F2F0E9; color: #0B1512;
+    transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #2FD3A0;
+  }
+  .sabh-cta:active {
+    transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s;
+  }
+  .sabh-cta-short { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .sabh-cta, .sabh-cta:hover, .sabh-cta:focus-visible, .sabh-cta:active { transform: none; transition: none; }
+  }
+
+  /* ── Menu button: three bars that fold into an ✕ while the sheet is open ── */
+  .sabh-burger {
+    display: none; width: 44px; height: 44px; flex: none; padding: 0;
+    border: 1px solid rgba(242,240,233,0.28); border-radius: 100px; background: transparent;
+    flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    cursor: pointer; transition: background 0.18s ease;
+  }
+  .sabh-burger span {
+    display: block; width: 16px; height: 1.5px; background: #F2F0E9;
+    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 0.12s linear;
+  }
+  .sabh-burger[aria-expanded='true'] { background: rgba(242,240,233,0.08); }
+  .sabh-burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .sabh-burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .sabh-burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+  @media (prefers-reduced-motion: reduce) {
+    .sabh-burger span { transition: none; }
+  }
+
+  /* fishback2026.com campaign-ticker parity: Manrope 600 14px, solid band,
+     45px tall, 60px between items, 30s linear loop, 1px underline offset 3px */
+  .sabh-ticker-band {
+    background: #0E2A20;
+    overflow: hidden;
+  }
+  .sabh-ticker {
+    display: flex; white-space: nowrap; align-items: center; height: var(--sab-ticker-h);
+    font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600;
+    color: #FFFFFF;
+    animation: sabh-tick 30s linear infinite; will-change: transform;
+  }
+  .sabh-ticker-half { display: inline-flex; }
+  /* Plain inline text (not flex children) so a drag or triple-click selects
+     the whole message, link included, and copies with real spaces. */
+  .sabh-ticker-item { display: inline-block; padding-right: 60px; }
+  .sabh-ticker-item a {
+    color: #2FD3A0; text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 3px;
+  }
+  .sabh-ticker-item a:hover { color: #F2F0E9; }
+  /* Pause while hovered, touched, or keyboard-focused so the text can be
+     read, selected, and copied; same behaviour as the fishback2026.com
+     ticker. :active covers touch devices, where hover doesn't exist and a
+     long-press would otherwise fight a moving target. */
+  .sabh-ticker-band:hover .sabh-ticker,
+  .sabh-ticker-band:active .sabh-ticker,
+  .sabh-ticker-band:focus-within .sabh-ticker {
+    animation-play-state: paused;
+  }
+  /* The duplicate half exists only to make the loop seamless; keep it out
+     of selections so a long drag or select-all can't copy messages twice.
+     Keyed off data-dup rather than aria-hidden: that attribute now sits on
+     the whole band, so it no longer distinguishes the two halves. */
+  .sabh-ticker-half[data-dup] { user-select: none; }
+  @keyframes sabh-tick {
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sabh-ticker { animation: none; }
+  }
+
+  /* ══ Phone: bar + sheet ══ */
+  @media (max-width: 900px) {
+    /* Padding-sized again below 900: the ticker is hidden here and the hero
+       no longer claims the fold, so nothing is subtracting this. */
+    .sabh-nav { padding: 12px 16px 12px 20px; gap: 10px; min-height: 0; }
+    .sabh-logo-word { font-size: 19px; }
+    .sabh-actions { gap: 8px; }
+    .sabh-cta { font-size: 13px; font-weight: 600; padding: 0 16px; height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
+    .sabh-burger { display: flex; }
+
+    /* Same six anchors, same order, same active class; just a column that
+       owns the screen. Nothing to keep in sync with the desktop row. */
+    .sabh-links {
+      display: none;
+      /* The sheet is a descendant of the bar, so the two are ordered inside
+         the bar's own stacking context: sheet 1, bar backdrop 2, bar
+         contents 3. */
+      position: fixed; inset: 0; z-index: 1;
+      background: #0B1512;
+      flex-direction: column; align-items: stretch; gap: 0;
+      padding: 68px 20px 24px; box-sizing: border-box;
+      overflow-y: auto; overscroll-behavior: contain;
+    }
+    .sabh[data-open] .sabh-links { display: flex; }
+    /* The bar rides above the sheet so the logo and the CTA stay reachable
+       and the button that opened the menu is the button that closes it. */
+    .sabh[data-open] .sabh-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: #0B1512;
+    }
+    .sabh[data-open] .sabh-nav::before {
+      content: ''; position: absolute; inset: 0; background: #0B1512; z-index: 2;
+    }
+    .sabh[data-open] .sabh-logo,
+    .sabh[data-open] .sabh-cta,
+    .sabh[data-open] .sabh-burger { position: relative; z-index: 3; }
+
+    .sabh-sheet-label {
+      display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
+      letter-spacing: 0.06em; color: rgba(242,240,233,0.45);
+      padding: 14px 0 6px; border-top: 1px solid rgba(242,240,233,0.18);
+    }
+    .sabh-link {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      min-height: 56px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
+      padding-bottom: 0; border-bottom: 1px solid rgba(242,240,233,0.12);
+    }
+    /* The accent underline becomes the accent dot; restyled, not remarked. */
+    .sabh-link-active { border-bottom-color: rgba(242,240,233,0.12); }
+    .sabh-link-active .sabh-link-label::after {
+      content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: #2FD3A0; margin-left: 10px; vertical-align: middle;
+    }
+    .sabh-link-count {
+      display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+      color: rgba(242,240,233,0.4);
+    }
+    .sabh-sheet-foot {
+      display: block; margin-top: 26px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em;
+      color: rgba(242,240,233,0.4); line-height: 1.6;
+    }
+
+    /* The scrolling band is a desktop-only flourish. On a phone it eats 5%
+       of the viewport, drags the eye away from the content, and can't be
+       read without fighting the motion. Decorative and out of the tab
+       order, so hiding it; Home included; loses nothing. */
+    .sabh-ticker-band { display: none; }
+  }
+  @media (max-width: 374px) {
+    /* Logo + pill + 44px button do not fit at 360 with the full label. */
+    .sabh-cta-long { display: none; }
+    .sabh-cta-short { display: inline; }
+  }
+</style>
+
+<script>
+  // The ClientRouter swaps in fresh header markup on every navigation, so the
+  // element handles are re-resolved per page while the document-level
+  // listeners below are bound exactly once.
+  let header: HTMLElement | null = null;
+  let burger: HTMLElement | null = null;
+  let sheet: HTMLElement | null = null;
+
+  const isOpen = () => !!header?.hasAttribute('data-open');
+
+  function openMenu() {
+    if (!header || !burger || !sheet) return;
+    header.setAttribute('data-open', '');
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Close menu');
+    document.documentElement.style.overflow = 'hidden';
+    sheet.querySelector<HTMLElement>('a')?.focus();
+  }
+
+  function closeMenu({ restoreFocus = false } = {}) {
+    header?.removeAttribute('data-open');
+    burger?.setAttribute('aria-expanded', 'false');
+    burger?.setAttribute('aria-label', 'Open menu');
+    document.documentElement.style.overflow = '';
+    if (restoreFocus) burger?.focus();
+  }
+
+  function initSabHeader() {
+    header = document.querySelector<HTMLElement>('[data-sab-header]');
+    burger = document.getElementById('sabh-burger');
+    sheet = document.getElementById('sabh-links');
+    if (!header || !burger || !sheet || header.dataset.init) return;
+    header.dataset.init = 'true';
+
+    burger.addEventListener('click', () => (isOpen() ? closeMenu({ restoreFocus: true }) : openMenu()));
+
+    // Tapping a destination closes the sheet. The ClientRouter swaps the page
+    // without a reload, so nothing else would.
+    sheet.addEventListener('click', e => {
+      if ((e.target as HTMLElement).closest('a')) closeMenu();
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!isOpen() || !sheet || !burger) return;
+    if (e.key === 'Escape') {
+      closeMenu({ restoreFocus: true });
+      return;
+    }
+    if (e.key !== 'Tab') return;
+    // Keep Tab inside the sheet and its button while the sheet covers
+    // everything else on screen.
+    const stops = [...sheet.querySelectorAll<HTMLElement>('a[href]'), burger];
+    const first = stops[0];
+    const last = stops[stops.length - 1];
+    if (!first || !last) return;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  // A sheet left open across a rotation to landscape would be a fixed panel
+  // with no visible way out; the button it belongs to is hidden above 900px.
+  window.matchMedia('(max-width: 900px)').addEventListener('change', ev => {
+    if (!ev.matches && isOpen()) closeMenu();
+  });
+
+  // Never leave the scroll lock behind on a client-side navigation.
+  document.addEventListener('astro:before-swap', () => {
+    document.documentElement.style.overflow = '';
+  });
+
+  initSabHeader();
+  document.addEventListener('astro:page-load', initSabHeader);
+</script>

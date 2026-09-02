@@ -1,0 +1,531 @@
+---
+import SabFooter from '../../components/sab/SabFooter.astro';
+import SabFonts from '../../components/sab/SabFonts.astro';
+// One route for both detail-page types: /scholarships/<slug> and
+// /programs/<slug>. The two pages share this template verbatim; only the
+// frontmatter prep differs, so it branches on `kind` below. The merge was
+// verified byte-identical against the previous per-type pages' built HTML.
+import Layout from '../../layouts/Layout.astro';
+import { scholarshipMetas, programMeta, brandedTitle, listingTitle, formatListingDate as formatDate } from '../../lib/meta';
+import { balancedRelated, balancedCross } from '../../lib/related';
+import { scoreProgramForScholarship, scoreScholarshipForProgram } from '../../lib/cross-links';
+import SabHeader from '../../components/sab/SabHeader.astro';
+import SabDetail from '../../components/sab/SabDetail.astro';
+import { loadScholarships, loadPrograms } from '../../lib/data-loader';
+import { generateSlug, parseAmount, formatVerifiedMonth } from '../../lib/utils.ts';
+import { programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
+import { guides } from '../../lib/guides.ts';
+import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, facetForListing } from '../../lib/facets.ts';
+import type { Scholarship, Program } from '../../lib/data-loader';
+
+/** "2026-08" → "VERIFIED AUG 2026"; undated listings keep the bare claim. */
+function verifiedLabel(lastVerified: string | null | undefined): string {
+  const month = formatVerifiedMonth(lastVerified);
+  return month ? `VERIFIED ${month}` : 'VERIFIED BY HAND';
+}
+
+type RelatedItem = { href: string; title: string; value: string; tag: string };
+
+export async function getStaticPaths() {
+  // Neighbor order matches each directory's default sort: earliest deadline
+  // first (programs put TBA / Ongoing at the end)
+  const ms = (d: string | null | undefined) =>
+    d && d !== 'TBA' && d !== 'Ongoing' ? new Date(d + 'T00:00:00').getTime() : Infinity;
+
+  const scholarships = [...await loadScholarships()]
+    .sort((a, b) => ms(a.deadline) - ms(b.deadline) || a.id - b.id);
+  const programs = [...await loadPrograms()]
+    .sort((a, b) => ms(a.deadline) - ms(b.deadline) || a.id - b.id);
+
+  // "More like this": up to 4 listings sharing category (or region for
+  // scholarships), open ones first, then by soonest deadline. Computed here
+  // because only getStaticPaths has the full lists in scope.
+  const buildTime = Date.now();
+  const isOpen = (deadline: string | null | undefined) =>
+    !deadline || deadline === 'TBA' || deadline === 'Ongoing' || ms(deadline) >= buildTime;
+
+  // Meta descriptions need the whole corpus, not one listing: two awards that
+  // differ only by name generate the same description, and only a pass over
+  // the full list can see that. Same reason "more like this" is computed here.
+  const metaToday = new Date();
+  metaToday.setHours(0, 0, 0, 0);
+  // The ISO form as well as the Date: scholarshipMetas needs it to decide which
+  // open dates are near enough to lead the snippet with. toLocaleDateString
+  // en-CA is the calendar date in the pinned TZ, which is the comparison the
+  // horizon wants; toISOString would be the UTC one and lands a day out.
+  const metaTodayIso = metaToday.toLocaleDateString('en-CA');
+  const descriptions = scholarshipMetas(
+    scholarships,
+    (s) => scholarshipStatusOf(s, metaToday),
+    formatDate,
+    metaTodayIso,
+  );
+
+  // Score gates what gets shown FIRST, not whether anything is shown at all.
+  //
+  // The gate used to be a filter, and a listing in an unusual category with a
+  // passed deadline cleared neither branch of it and rendered zero neighbours.
+  // That was the main reason 117 of 287 pages sat on two or fewer inbound
+  // internal links: the directory, and sometimes one lucky related slot.
+  //
+  // Fixing that guaranteed every page four links OUT and still said nothing
+  // about links IN, and with a deterministic score over a shared corpus the
+  // same listings won the slots everywhere: 68 of 117 program pages ended up
+  // with no inbound link from any peer while one collected 27. So the picks are
+  // made for the whole corpus at once (see lib/related.ts), which is also why
+  // the tie-break is no longer corpus order.
+  const relatedScholarshipsFor = balancedRelated(scholarships, {
+    score: (self, s) =>
+      (s.category && s.category === self.category ? 2 : 0) +
+      (s.region && s.region === self.region ? 1 : 0) +
+      (isOpen(s.deadline) ? 2 : 0),
+    qualifies: (score, s) => score > 2 || (score > 0 && isOpen(s.deadline)),
+    prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
+  });
+
+  const relatedProgramsFor = balancedRelated(programs, {
+    // Retired programs are hidden from the directory, so nothing should link to
+    // one; their own pages still show neighbours.
+    eligible: p => p.active !== false,
+    score: (self, p) =>
+      (p.category && p.category === self.category ? 2 : 0) +
+      (p.provider && p.provider === self.provider ? 1 : 0) +
+      (isOpen(p.deadline) ? 1 : 0),
+    qualifies: score => score > 1,
+    prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
+  });
+
+  // The other half of the site. Nothing crossed between the two datasets:
+  // scholarship pages linked to zero programs and programs to zero
+  // scholarships, in both median and max, which left the directory as two
+  // disconnected components and buried the one thing no competitor offers.
+  const crossProgramsFor = balancedCross(scholarships, programs, {
+    eligible: p => p.active !== false,
+    score: scoreProgramForScholarship,
+    qualifies: score => score > 0,
+    prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
+  });
+
+  const crossScholarshipsFor = balancedCross(programs, scholarships, {
+    score: (self, s) => scoreScholarshipForProgram(self, s),
+    qualifies: score => score > 0,
+    prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
+  });
+
+  const asScholarshipCards = (list: Scholarship[]): RelatedItem[] =>
+    list.map(s => ({
+      href: `/scholarships/${generateSlug(s.title)}/`,
+      title: s.title,
+      value: s.amount,
+      tag: s.region || 'Alberta',
+    }));
+
+  const asProgramCards = (list: Program[]): RelatedItem[] =>
+    list.map(p => ({
+      href: `/programs/${generateSlug(p.name)}/`,
+      title: p.name,
+      value: p.duration || 'Varies',
+      tag: p.category || 'Program',
+    }));
+
+  return [
+    ...scholarships.map((s, i) => ({
+      params: { type: 'scholarships', slug: generateSlug(s.title) },
+      props: {
+        kind: 'scholarship' as const,
+        scholarship: s,
+        program: undefined as Program | undefined,
+        related: asScholarshipCards(relatedScholarshipsFor[i]!),
+        crossRelated: asProgramCards(crossProgramsFor[i]!),
+        metaDescription: descriptions[i]!,
+      },
+    })),
+    ...programs.map((p, i) => ({
+      params: { type: 'programs', slug: generateSlug(p.name) },
+      props: {
+        kind: 'program' as const,
+        scholarship: undefined as Scholarship | undefined,
+        program: p,
+        related: asProgramCards(relatedProgramsFor[i]!),
+        crossRelated: asScholarshipCards(crossScholarshipsFor[i]!),
+        metaDescription: undefined as string | undefined,
+      },
+    })),
+  ];
+}
+
+const { kind, scholarship, program, related, crossRelated, metaDescription } = Astro.props;
+
+const todayDate = new Date();
+todayDate.setHours(0, 0, 0, 0);
+// round, not ceil: the diff is midnight-to-midnight so it's a whole number of
+// days except across a DST change, where ceil would overcount by one.
+const daysUntil = (d: Date) => Math.max(0, Math.round((d.getTime() - todayDate.getTime()) / 86400000));
+
+// Everything the template needs, computed per kind.
+let d;
+if (kind === 'scholarship') {
+  const s = scholarship!;
+  const slug = generateSlug(s.title);
+  const openDate     = new Date((s.openDate || '1970-01-01') + 'T00:00:00');
+  const deadlineDate = s.deadline ? new Date(s.deadline + 'T00:00:00') : null;
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = todayDate < openDate
+    ? 'future'
+    : (deadlineDate && todayDate > deadlineDate)
+      ? 'closed'
+      // Curator-closed with a future deadline = next cycle, open date unknown
+      // yet; show as upcoming, not accepting (mirrors getScholarshipStatus).
+      : s.active === false ? 'future'
+      : deadlineDate ? 'active' : 'tba';
+  const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
+
+  // Status-aware and capped at Google's ~155-character cut. The old template
+  // ("The <title> offers <amount> to <audience>. Deadline: <date>. Browse
+  // more…") averaged 221 characters, so the deadline; the thing the query was
+  // asking about; was always past the truncation point. See src/lib/meta.ts.
+  const description  = metaDescription!;
+  const canonical    = `https://www.scholarab.ca/scholarships/${slug}/`;
+  const parsedAmount = parseAmount(s.amount) || null;
+  const deadlineClause = s.deadline ? ` before ${formatDate(s.deadline)}` : '';
+
+  d = {
+    currentPath: '/scholarships/',
+    crossLabel: 'RESEARCH PROGRAMS TO MATCH',
+    crossPath: '/programs/',
+    // Award names run long (the median is 41 characters, the longest 76), and
+    // Google truncates titles around 60. A second boilerplate phrase after the
+    // brand only ever pushed the award's own name out of the snippet, and past
+    // a point the brand itself does the same; brandedTitle drops it rather than
+    // spend the award's own name on it. What is left over goes to the award
+    // value, which is the fact that tells a student whether to click; see
+    // listingTitle for why it is the amount and not the year.
+    pageTitle: listingTitle(s.title, s.amount),
+    description,
+    canonical,
+    // Per-listing OG images exist for every indexable scholarship (see
+    // scripts/generate-og-images.ts, which mirrors this condition).
+    ogImage: status !== 'closed' ? `https://www.scholarab.ca/og/scholarships/${slug}.png` : undefined,
+    ldJson: {
+      '@context': 'https://schema.org',
+      '@type': 'EducationalOccupationalProgram',
+      'name': s.title,
+      'description': description,
+      'url': canonical,
+      // The site's highest-volume query shape is "when does X open"; five
+      // Rutherford variants alone drew 82 impressions last month, and 59
+      // listings carry an openDate the markup never mentioned. It is a
+      // property of EducationalOccupationalProgram, same as the deadline.
+      ...(s.openDate ? { 'applicationStartDate': s.openDate } : {}),
+      ...(s.deadline ? { 'applicationDeadline': s.deadline } : {}),
+      ...(parsedAmount !== null ? { 'offers': { '@type': 'Offer', 'price': parsedAmount, 'priceCurrency': 'CAD' } } : {}),
+      // No `provider`: ScholarAB lists these awards, it does not fund or award
+      // them, and the data has no provider field to name the real one. Claiming
+      // it here was telling Google we run the Rutherford. Programs, which do
+      // carry a real provider, still declare theirs.
+    },
+    breadcrumbName: 'Scholarships',
+    itemName: s.title,
+    itemId: s.id,
+    itemType: 'scholarship' as const,
+    typeLabel: 'SCHOLARSHIP',
+    tag: s.category ? s.category.toUpperCase() : null,
+    // /terms says "the month it was last checked is printed on it", so print
+    // it. Listings with no stamp fall back to the undated wording rather than
+    // claiming a month the data does not have.
+    subline: `${(s.region || 'Alberta').toUpperCase()} · ${verifiedLabel(s.lastVerified)}`,
+    status,
+    // Not `status === 'closed'` spelled out again: the sitemap has to list the
+    // exact complement of this, so both sides read it from status.ts.
+    noindex: !scholarshipIsIndexable(s, todayDate),
+    daysLeft,
+    // ISO dates for the client-side chip recompute (SabDetail): the page is
+    // prerendered, so days-left/closed state must be re-derived on load.
+    deadlineIso: s.deadline,
+    openDateIso: s.active === false && !s.openDate ? null : s.openDate,
+    inactive: s.active === false,
+    dueLong: formatDate(s.deadline),
+    opensLabel: s.openDate ? formatDate(s.openDate) : null,
+    // Empty on purpose. Every one of the five facts this used to list was
+    // already on the page within one screen of itself: REGION is the subline,
+    // CATEGORY is a chip beside the title, DEADLINE and OPENS are the status
+    // chip and the rail, AMOUNT is the 52px number in the rail. A facts table
+    // that repeats the page teaches the reader to skip tables.
+    facts: [],
+    eligibility: s.audience,
+    // About text mirrors the data description; scholarship.description exists
+    // in the JSON but not in the Scholarship type, so read it defensively.
+    about: (s as { description?: string }).description
+      ?? `${s.title} is an Alberta award for high school students.`,
+    notes: s.notes,
+    // The data has no per-listing application steps; these stay generic and true.
+    steps: s.applyViaGuidance
+      ? [
+          'Talk to your school guidance counsellor about this award.',
+          'Ask about internal school deadlines, which can be earlier than the listed one.',
+          `Submit your application through your school${deadlineClause}.`,
+        ]
+      : [
+          'Read the full requirements on the official website.',
+          'Prepare your documents and any references it asks for.',
+          `Submit through the official website${deadlineClause}.`,
+        ],
+    valueLabel: 'AWARD VALUE',
+    valueBig: s.amount,
+    valueNote: s.applyViaGuidance ? 'Applications go through your school.' : null,
+    ctaLabel: s.applyViaGuidance ? 'Learn more' : 'Apply now',
+    url: s.url,
+    canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
+  };
+} else {
+  const p = program!;
+  const slug = generateSlug(p.name);
+  const hasDate = !!p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing';
+  const deadlineDate = hasDate ? new Date(p.deadline + 'T00:00:00') : null;
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = programStatusOf(p, todayDate);
+  const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
+
+  // Word-boundary clamp, not `slice(0, 157) + '...'`: that cut 123 of the 125
+  // program descriptions mid-word. Dated cycles lead with the closing date.
+  const programDescription = programMeta(p, status, formatDate);
+  const canonical = `https://www.scholarab.ca/programs/${slug}/`;
+  const dueLong = status === 'ongoing' ? 'Ongoing, join anytime' : formatDate(p.deadline);
+  const deadlineClause = hasDate ? ` before ${formatDate(p.deadline)}` : '';
+
+  d = {
+    currentPath: '/programs/',
+    crossLabel: 'SCHOLARSHIPS TO MATCH',
+    crossPath: '/scholarships/',
+    pageTitle: brandedTitle(p.name),
+    description: programDescription,
+    canonical,
+    ldJson: {
+      '@context': 'https://schema.org',
+      '@type': 'EducationalOccupationalProgram',
+      'name': p.name,
+      'description': programDescription,
+      'url': canonical,
+      ...(hasDate ? { 'applicationDeadline': p.deadline } : {}),
+      'provider': { '@type': 'Organization', 'name': p.provider },
+    },
+    breadcrumbName: 'Research Programs',
+    itemName: p.name,
+    itemId: p.id,
+    itemType: 'program' as const,
+    typeLabel: 'PROGRAM',
+    tag: p.category ? p.category.toUpperCase() : null,
+    subline: p.provider ? `RUN BY ${p.provider.toUpperCase()}` : `ALBERTA · ${verifiedLabel(p.lastVerified)}`,
+    status,
+    // Retired programs read as TBA/Ongoing on the page; the copy is honest,
+    // the page just isn't a search result: nothing links to it any more.
+    noindex: !programIsIndexable(p, todayDate),
+    daysLeft,
+    deadlineIso: hasDate ? p.deadline : null,
+    openDateIso: null,
+    inactive: false,
+    dueLong,
+    opensLabel: undefined,
+    // Programs keep the three facts that appear nowhere else on the page.
+    // DEADLINE left with them; the rail already carries it.
+    facts: [
+      { label: 'DURATION', value: p.duration || 'Varies' },
+      { label: 'GRADES', value: p.grades || 'High school' },
+      { label: 'LOCATION', value: p.location || 'Alberta' },
+    ],
+    eligibility: p.eligibility,
+    about: p.description,
+    notes: undefined,
+    // The data has no per-listing application steps; these stay generic and true.
+    steps: [
+      'Review the details and eligibility on the official program site.',
+      'Prepare the application materials it asks for.',
+      status === 'ongoing'
+        ? 'Apply or sign up on the official site. You can join anytime.'
+        : `Apply on the official site${deadlineClause}.`,
+    ],
+    valueLabel: 'THIS PROGRAM IS',
+    valueBig: p.paid ? 'Paid' : 'Free',
+    // The stipend, or nothing. This used to fall back to duration · grades,
+    // which are two of the three facts listed directly to its left; "Free"
+    // needs no footnote, and the footnote it had was a copy.
+    valueNote: p.paid ? p.stipend : null,
+    ctaLabel: 'Learn more',
+    url: p.url,
+    canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
+  };
+}
+
+// The explainer for this listing, when one exists. The link is reciprocal on
+// purpose: the guide already linked down to the listing, so Google saw a rich
+// page pointing at a thin near-duplicate of itself and picked its own
+// canonical for the pair. Linking back marks the listing as the directory
+// entry and the guide as its explainer.
+//
+// Both kinds qualify. This used to resolve only for scholarships, which meant
+// a guide about a research program had no way to earn its reciprocal card;
+// combined with every guide being scholarship-side, /programs/ received no
+// editorial links at all.
+const listingSlug = kind === 'scholarship'
+  ? generateSlug(scholarship!.title)
+  : generateSlug(program!.name);
+const guideSlug = guides.find(g => g.relatedListings?.includes(listingSlug));
+
+// The hub this listing sits under, if it has one. Academic awards and
+// Alberta-wide regions deliberately have no hub, so null is a normal result and
+// the trail simply stays two deep for them.
+const facet = kind === 'scholarship'
+  ? facetForListing(scholarship!, SCHOLARSHIP_FACETS)
+  : facetForListing(program!, PROGRAM_FACETS);
+const facetHref = facet ? `${d.currentPath}${facet.slug}/` : null;
+
+// Positions have to be contiguous, so the facet crumb is spliced in rather
+// than written as a fixed fourth entry: a breadcrumb that jumps 2 -> 4 is
+// invalid markup, and the trail is two, three or four deep depending on the
+// listing.
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    { name: 'ScholarAB', item: 'https://www.scholarab.ca' },
+    { name: d.breadcrumbName, item: `https://www.scholarab.ca${d.currentPath}` },
+    ...(facet ? [{ name: facet.label, item: `https://www.scholarab.ca${facetHref}` }] : []),
+    { name: d.itemName, item: d.canonical },
+  ].map((entry, i) => ({ '@type': 'ListItem', 'position': i + 1, ...entry })),
+};
+---
+
+<Layout
+  title={d.pageTitle}
+  description={d.description}
+  ogTitle={d.pageTitle}
+  ogDescription={d.description}
+  ogUrl={d.canonical}
+  canonical={d.canonical}
+  ogImage={'ogImage' in d ? d.ogImage : undefined}
+  robots={d.noindex ? 'noindex' : undefined}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(d.ldJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <SabFonts slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath={d.currentPath} />
+  </div>
+
+  <div id="sab-detail" class="sabp">
+
+    <SabDetail
+      itemType={d.itemType}
+      itemId={d.itemId}
+      typeLabel={d.typeLabel}
+      tag={d.tag}
+      name={d.itemName}
+      subline={d.subline}
+      status={d.status}
+      daysLeft={d.daysLeft}
+      deadlineIso={d.deadlineIso}
+      openDateIso={d.openDateIso}
+      inactive={d.inactive}
+      dueLong={d.dueLong}
+      opensLabel={d.opensLabel}
+      facetHref={facetHref}
+      facetLabel={facet?.label ?? null}
+      backHref={d.currentPath}
+      backLabel={`Back to ${d.breadcrumbName === 'Research Programs' ? 'Programs' : 'Scholarships'}`}
+      facts={d.facts}
+      eligibility={d.eligibility}
+      about={d.about}
+      notes={d.notes}
+      steps={d.steps}
+      valueLabel={d.valueLabel}
+      valueBig={d.valueBig}
+      valueNote={d.valueNote}
+      ctaLabel={d.ctaLabel}
+      url={d.url}
+      canRemind={d.canRemind}
+      canonical={d.canonical}
+      guideHref={guideSlug ? `/guides/${guideSlug.slug}/` : undefined}
+      guideTitle={guideSlug?.title}
+    />
+
+    {related.length > 0 && (
+      <div class:list={['sabd-related', crossRelated.length > 0 && 'sabd-related-paired']}>
+        <div class="sabd-related-head">
+          <span class="sabdr-mono sabd-related-title">MORE LIKE THIS</span>
+          <a href={d.currentPath} class="sabdr-mono sabd-related-all">VIEW ALL →</a>
+        </div>
+        <div class="sabd-related-grid">
+          {related.map(r => (
+            <a href={r.href} class="sabd-related-card">
+              <span class="sabdr-mono sabd-related-tag">{r.tag.toUpperCase()}</span>
+              <span class="sabd-related-name">{r.title}</span>
+              <span class="sabd-related-value">{r.value}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {/* The other dataset. A student reading about a trades bursary has no way
+        from here to the trades programs that would strengthen the application,
+        which is the site's own differentiator left off its own pages. Three
+        cards rather than four, so it reads as a secondary suggestion. */}
+    {crossRelated.length > 0 && (
+      <div class="sabd-related sabd-cross">
+        <div class="sabd-related-head">
+          <span class="sabdr-mono sabd-related-title">{d.crossLabel}</span>
+          <a href={d.crossPath} class="sabdr-mono sabd-related-all">VIEW ALL →</a>
+        </div>
+        <div class="sabd-related-grid sabd-cross-grid">
+          {crossRelated.map(r => (
+            <a href={r.href} class="sabd-related-card">
+              <span class="sabdr-mono sabd-related-tag">{r.tag.toUpperCase()}</span>
+              <span class="sabd-related-name">{r.title}</span>
+              <span class="sabd-related-value">{r.value}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<style is:global>
+  /* The detail design is fixed light regardless of site theme */
+  body:has(#sab-detail) { background: #FAF7F0; }
+</style>
+
+<style>
+  .sabdr-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .sabd-related { padding: 0 48px 96px; box-sizing: border-box; }
+  .sabd-related-head {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid #141915; padding-top: 20px; margin-bottom: 18px;
+  }
+  .sabd-related-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(20,25,21,0.5); }
+  .sabd-related-all { font-size: 12px; letter-spacing: 0.05em; color: #0A6B4D; text-decoration: none; }
+  .sabd-related-all:hover { color: #141915; }
+  .sabd-related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  /* The two related blocks are one pair, so the full 96px section rhythm
+     between them would read as two unrelated sections. Applied from the first
+     block only when a second actually follows it. */
+  .sabd-related-paired { padding-bottom: 40px; }
+  .sabd-cross-grid { grid-template-columns: repeat(3, 1fr); }
+  .sabd-related-card {
+    display: flex; flex-direction: column; gap: 10px; background: #FFFFFF;
+    border: 1.5px solid rgba(20,25,21,0.85); border-radius: 14px; padding: 20px;
+    text-decoration: none; color: #141915; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sabd-related-card:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0 #2FD3A0; }
+  .sabd-related-tag { font-size: 10.5px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); }
+  .sabd-related-name { font-weight: 700; font-size: 15px; line-height: 1.35; letter-spacing: -0.01em; flex: 1; }
+  .sabd-related-value { font-family: 'Instrument Serif', serif; font-size: 20px; color: #0A6B4D; }
+
+  @media (max-width: 900px) {
+    .sabd-related { padding: 0 20px 72px; }
+    .sabd-related-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>

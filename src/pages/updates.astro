@@ -1,0 +1,243 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import {
+  months,
+  KIND_LABELS,
+  KIND_COLORS,
+  PROJECT_START,
+} from '../lib/updates';
+import { webPageJson } from '../lib/ld';
+
+const pageTitle = 'What changed on ScholarAB | Update log';
+const description =
+  'Every change made to ScholarAB since it launched in March 2026, grouped by month, written in plain English.';
+const canonical = 'https://www.scholarab.ca/updates/';
+const ldJson = webPageJson({ name: 'What changed on ScholarAB', description, path: '/updates/' });
+
+// One number, not two. A commit total used to sit beside the entry count, which
+// invited the reader to subtract one from the other and conclude that most
+// changes went unrecorded. What a reader can actually use is how much is
+// written up and how long the site has been running.
+const totalEntries = months.reduce((n, m) => n + m.items.length, 0);
+
+const longDate = (iso: string) =>
+  new Date(iso + 'T12:00:00Z').toLocaleDateString('en-CA', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+
+const startLabel = longDate(PROJECT_START);
+---
+
+<Layout
+  title={pageTitle}
+  description={description}
+  ogTitle={pageTitle}
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
+  <SabFonts italic slot="head" />
+
+  {/* The header band and the hero band are separate elements now; the header
+      is the page's banner and cannot sit inside <main>. Same background, no
+      margins, so the two read as the single dark band they always were. */}
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/updates" />
+  </div>
+
+  <div class="sabp" id="sab-updates" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabp-header">
+      <div class="sabu-hero">
+        <div class="sab-kicker">UPDATE LOG</div>
+        <h1 class="sabu-h1">Everything that has <em>changed</em>.</h1>
+        <p class="sabu-lede">
+          ScholarAB is built in the open. This is what has changed since {startLabel}, month by
+          month, in plain English.
+        </p>
+        <div class="sabu-stats">
+          <div class="sabu-stat">
+            <div class="sabu-stat-num">{totalEntries}</div>
+            <div class="sabu-mono sabu-stat-label">CHANGES WRITTEN UP</div>
+          </div>
+          <div class="sabu-stat">
+            <div class="sabu-stat-num">{months.length}</div>
+            <div class="sabu-mono sabu-stat-label">MONTHS IN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sabu-body" style="flex:1;">
+      <nav class="sabu-jump" aria-label="Jump to month">
+        <span class="sabu-mono sabu-jump-label">JUMP TO</span>
+        <div class="sabu-jump-links">
+          {months.map(m => (
+            <a href={`#${m.id}`} class="sabu-mono sabu-jump-link">{m.label}</a>
+          ))}
+        </div>
+      </nav>
+
+      {months.map(month => (
+        <section class="sabu-month" id={month.id}>
+          <div class="sabu-month-head">
+            <div class="sabu-mono sabu-month-count">{month.items.length} CHANGES</div>
+            <h2 class="sabu-month-title">{month.label}</h2>
+            <p class="sabu-month-summary">{month.summary}</p>
+          </div>
+
+          {month.shots && (
+            <div class="sabu-shots">
+              {month.shots.map(shot => (
+                <figure class={`sabu-shot sabu-shot-${shot.shape}`}>
+                  <img
+                    src={shot.src}
+                    width={shot.width}
+                    height={shot.height}
+                    alt={shot.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption>{shot.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+
+          <div class="sabu-month-card">
+            <ul class="sabu-list">
+              {month.items.map(item => (
+                <li class="sabu-item">
+                  <span
+                    class="sabu-mono sabu-tag"
+                    style={`color:${KIND_COLORS[item.kind]};border-color:${KIND_COLORS[item.kind]};`}
+                  >
+                    {KIND_LABELS[item.kind]}
+                  </span>
+                  <span class="sabu-item-text">{item.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ))}
+
+    </div>
+
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<style is:global>
+  body:has(#sab-updates) { background: #FAF7F0; }
+</style>
+
+<style>
+  .sabu-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* Hero -------------------------------------------------------------- */
+  .sabu-hero { max-width: var(--sab-measure); margin: 0 auto; padding: 72px 48px 64px; width: 100%; box-sizing: border-box; }
+  .sabu-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;
+    margin: 0; max-width: 900px; text-wrap: balance;
+  }
+  .sabu-h1 em { font-style: italic; color: #2FD3A0; }
+  .sabu-lede { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 28px 0 0; max-width: 620px; }
+
+  .sabu-stats { display: flex; gap: 56px; margin-top: 44px; flex-wrap: wrap; }
+  .sabu-stat-num { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1; color: #2FD3A0; }
+  .sabu-stat-label { font-size: 11px; letter-spacing: 0.06em; color: rgba(242,240,233,0.5); margin-top: 10px; }
+
+  /* Body -------------------------------------------------------------- */
+  .sabu-body { max-width: var(--sab-measure); margin: 0 auto; padding: 64px 48px 110px; width: 100%; box-sizing: border-box; }
+
+  .sabu-jump {
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    padding-bottom: 34px; margin-bottom: 20px; border-bottom: 1.5px solid rgba(20,25,21,0.12);
+  }
+  .sabu-jump-label { font-size: 11px; letter-spacing: 0.06em; color: rgba(20,25,21,0.45); }
+  .sabu-jump-links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sabu-jump-link {
+    font-size: 12px; letter-spacing: 0.02em; text-decoration: none; color: #141915;
+    border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px; padding: 6px 14px;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+  .sabu-jump-link:hover { border-color: #0E8C64; color: #0A6B4D; background: rgba(47,211,160,0.09); }
+
+  /* Month ------------------------------------------------------------- */
+  .sabu-month { padding-top: 56px; scroll-margin-top: 24px; }
+  .sabu-month-head { margin-bottom: 30px; }
+  .sabu-month-count {
+    font-size: 11px; letter-spacing: 0.06em; color: rgba(20,25,21,0.45); margin-bottom: 14px;
+  }
+  .sabu-month-title {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(34px, 4.4vw, 50px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
+  }
+  .sabu-month-summary {
+    font-size: 16px; line-height: 1.6; color: rgba(20,25,21,0.6);
+    margin: 12px 0 0; max-width: 680px;
+  }
+
+  /* Screenshots ------------------------------------------------------- */
+  /* Wraps rather than scrolls: two shots per month is the usual case, and a
+     row that wraps needs no horizontal scrolling on a phone. */
+  .sabu-shots {
+    display: flex; flex-wrap: wrap; gap: 22px;
+    margin: 0 0 26px;
+  }
+  /* Sized by flex-basis rather than by the image: the pictures load lazily, and
+     an item sized by its content collapses to nothing until they arrive. */
+  .sabu-shot { margin: 0; min-width: 0; }
+  .sabu-shot img {
+    display: block; width: 100%; height: auto;
+    border: 1.5px solid rgba(20,25,21,0.85); border-radius: 12px;
+    background: #FFFFFF;
+  }
+  .sabu-shot-wide { flex: 0 1 420px; }
+  .sabu-shot-tall { flex: 0 1 190px; }
+  .sabu-shot figcaption {
+    font-size: 12.5px; line-height: 1.5; color: rgba(20,25,21,0.55);
+    margin-top: 9px;
+  }
+
+  /* Entries ----------------------------------------------------------- */
+  .sabu-month-card {
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
+    padding: 30px 32px;
+  }
+
+  .sabu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  /* Fixed-width tag column so every line of text starts on the same edge; the
+     pill itself hugs its label rather than stretching to fill the column. */
+  .sabu-item { display: grid; grid-template-columns: 118px 1fr; gap: 16px; align-items: start; }
+  .sabu-tag {
+    justify-self: start;
+    font-size: 11px; letter-spacing: 0.07em; line-height: 1;
+    border: 1.5px solid; border-radius: 100px; padding: 5px 9px;
+    white-space: nowrap; margin-top: 3px;
+  }
+  .sabu-item-text { font-size: 15px; line-height: 1.62; color: rgba(20,25,21,0.72); }
+
+  @media (max-width: 900px) {
+    .sabu-hero { padding: 44px 20px 44px; }
+    .sabu-stats { gap: 32px; margin-top: 34px; }
+    .sabu-stat-num { font-size: 36px; }
+    .sabu-body { padding: 44px 20px 90px; }
+    .sabu-month { padding-top: 44px; }
+    .sabu-shots { gap: 16px; }
+    /* Two across on a phone, whatever the shape, so the strip stays one row. */
+    .sabu-shot-wide, .sabu-shot-tall { flex: 1 1 calc(50% - 8px); max-width: calc(50% - 8px); }
+    .sabu-month-card { padding: 24px 22px; }
+    .sabu-item { grid-template-columns: 1fr; gap: 7px; }
+    .sabu-tag { justify-self: start; text-align: left; }
+  }
+</style>

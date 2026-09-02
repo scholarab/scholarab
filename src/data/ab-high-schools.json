@@ -1,0 +1,4725 @@
+{
+  "source": "Alberta Education School Information Report (open.alberta.ca/opendata/alberta-education-schools-and-authorities)",
+  "extracted": "2026-07-19",
+  "criteria": "Senior High Taught = Y; conventional permanent Sept-June schools only. Excluded: outreach/storefront, online/virtual/distance, Hutterite colony, summer, home-ed, adult/college/upgrading, hospital/treatment/day programs, alternate programs, weekend heritage-language schools. Cross-checked against 2025/26 enrolment data. Medicine Hat schools excluded (already contacted).",
+  "count": 524,
+  "schools": [
+    {
+      "code": "5601",
+      "name": "Acme School",
+      "city": "Acme",
+      "phone": "(403) 546-3845",
+      "website": "http://www.acmeschool.ca",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5197",
+      "name": "Airdrie Christian Academy",
+      "city": "Airdrie",
+      "phone": "(403) 948-5100",
+      "website": "https://www.airdriechristian.com/",
+      "authority": "Airdrie Christian Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5228",
+      "name": "Bert Church High School",
+      "city": "Airdrie",
+      "phone": "(403) 948-3800",
+      "website": "http://bertchurch.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2646",
+      "name": "Footprints for Learning Charter Academy",
+      "city": "Airdrie",
+      "phone": "(587) 775-9303",
+      "website": "https://www.flcacademy.org/",
+      "authority": "Footprints for Learning Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "5201",
+      "name": "George McDougall High School",
+      "city": "Airdrie",
+      "phone": "(403) 948-5935",
+      "website": "http://mcdougall.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0346",
+      "name": "St. Martin De Porres High School",
+      "city": "Airdrie",
+      "phone": "(403) 500-2041",
+      "website": "http://www.cssd.ab.ca/schools/stmartin",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1764",
+      "name": "W.H. Croxford High School",
+      "city": "Airdrie",
+      "phone": "(587) 775-3521",
+      "website": "http://whcroxford.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1269",
+      "name": "École des Hautes-Plaines",
+      "city": "Airdrie",
+      "phone": "(403) 948-6995",
+      "website": "https://hautesplaines.francosud.ca/",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "4301",
+      "name": "Alix (Mirror and Alix Central)",
+      "city": "Alix",
+      "phone": "(403) 747-2778",
+      "website": "http://www.alix.wolfcreek.ab.ca",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4801",
+      "name": "Altario School",
+      "city": "Altario",
+      "phone": "(403) 552-3828",
+      "website": "http://altario.plrd.ab.ca/",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2672",
+      "name": "Andrew Rural Academy",
+      "city": "Andrew",
+      "phone": "(780) 365-7836",
+      "website": "http://www.andrewruralacademy.ca",
+      "authority": "Andrew Rural Academy Foundation",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "1544",
+      "name": "Bill Woodward School",
+      "city": "Anzac",
+      "phone": "(780) 334-0818",
+      "website": "http://www.nsd61.ca",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3301",
+      "name": "Ardrossan Junior Senior High School",
+      "city": "Ardrossan",
+      "phone": "(780) 922-2228",
+      "website": "http://www.ardrossan.ca",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2800",
+      "name": "Ashmont School",
+      "city": "Ashmont",
+      "phone": "(780) 726-3777",
+      "website": "http://www.ashmontschool.ca",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2601",
+      "name": "Edwin Parr Composite Community School",
+      "city": "Athabasca",
+      "phone": "(780) 675-2285",
+      "website": null,
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1802",
+      "name": "Whitefish Lake First Nation School",
+      "city": "Atikameg",
+      "phone": "(780) 767-3797",
+      "website": "http://www.ktcea.ca",
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5235",
+      "name": "Banff Community High School",
+      "city": "Banff",
+      "phone": "(403) 762-4411",
+      "website": "http://bchs.crps.ca",
+      "authority": "The Canadian Rockies School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2301",
+      "name": "Barrhead Composite High School",
+      "city": "Barrhead",
+      "phone": "(780) 674-8522",
+      "website": "https://www.barrheadcomposite.ca/",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4502",
+      "name": "Bashaw School",
+      "city": "Bashaw",
+      "phone": "(780) 372-3800",
+      "website": "https://bashaw.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6702",
+      "name": "Bassano School",
+      "city": "Bassano",
+      "phone": "(403) 641-3577",
+      "website": "http://www.grasslands.ab.ca",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4503",
+      "name": "Bawlf School",
+      "city": "Bawlf",
+      "phone": "(780) 373-3784",
+      "website": "https://bawlf.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3000",
+      "name": "Black Gold Home-Based School",
+      "city": "Beaumont",
+      "phone": "(780) 929-5784",
+      "website": "http://www.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3231",
+      "name": "Ecole Secondaire Beaumont Composite High School",
+      "city": "Beaumont",
+      "phone": "(780) 929-6282",
+      "website": "http://www.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1786",
+      "name": "École Quatre-Saisons",
+      "city": "Beaumont",
+      "phone": "(780) 929-1183",
+      "website": "http://www.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1101",
+      "name": "Beaverlodge Regional High School",
+      "city": "Beaverlodge",
+      "phone": "(780) 354-2189",
+      "website": null,
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5205",
+      "name": "Beiseker Community School",
+      "city": "Beiseker",
+      "phone": "(403) 947-3883",
+      "website": "http://beiseker.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4302",
+      "name": "Bentley School",
+      "city": "Bentley",
+      "phone": "(403) 748-3770",
+      "website": "http://www.bentley.wolfcreek.ab.ca",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1501",
+      "name": "Lloyd Garrison School",
+      "city": "Berwyn",
+      "phone": "(780) 338-3971",
+      "website": "http://www.lloydgarrisonschool.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2563",
+      "name": "Iron Ridge Secondary Campus",
+      "city": "Blackfalds",
+      "phone": "(587) 621-1159",
+      "website": "https://irsc.wolfcreek.ab.ca/",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2950",
+      "name": "Bonnyville Centralized High School",
+      "city": "Bonnyville",
+      "phone": "(780) 826-3366",
+      "website": "https://bonnyvillecentralizedhigh.ca/",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2973",
+      "name": "Ecole Notre Dame High",
+      "city": "Bonnyville",
+      "phone": "(780) 826-3245",
+      "website": "https://ndh.lrcssd.ca/o/ndh",
+      "authority": "The Lakeland Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2876",
+      "name": "École des Beaux-Lacs",
+      "city": "Bonnyville",
+      "phone": "(780) 826-1890",
+      "website": "http://www.centreest.ca/beaux-lacs",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "6990",
+      "name": "Cherry Coulee Christian Academy",
+      "city": "Bow Island",
+      "phone": "(403) 545-2107",
+      "website": "http://cherrycoulee.ca",
+      "authority": "40-Mile Christian Education Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6902",
+      "name": "Senator Gershaw School",
+      "city": "Bow Island",
+      "phone": "(403) 545-6822",
+      "website": "https://senatorgershaw.ca/",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4402",
+      "name": "Bowden (Grandview) School",
+      "city": "Bowden",
+      "phone": "(403) 224-3250",
+      "website": "http://www.bowdengrandview.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2604",
+      "name": "Boyle School",
+      "city": "Boyle",
+      "phone": "(780) 689-3647",
+      "website": "http://www.aspenview.org/schools/boyle/index.htm",
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5492",
+      "name": "Brant Christian School",
+      "city": "Brant",
+      "phone": "(403) 684-3752",
+      "website": "http://www.brantchristianschool.com",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6190",
+      "name": "Piikani Nation Secondary School",
+      "city": "Brocket",
+      "phone": "(403) 965-2121",
+      "website": "http://www.piikani.ca/",
+      "authority": "Peigan Board of Education Society",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "6740",
+      "name": "Brooks Composite High School",
+      "city": "Brooks",
+      "phone": "(403) 362-4814",
+      "website": "http://www.grasslands.ab.ca",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6796",
+      "name": "Newell Christian School",
+      "city": "Brooks",
+      "phone": "(403) 378-4448",
+      "website": "http://www.newellchristianschool.com",
+      "authority": "Newell Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0439",
+      "name": "St. Joseph's Collegiate",
+      "city": "Brooks",
+      "phone": "(403) 362-5989",
+      "website": "http://www.redeemer.ab.ca",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6718",
+      "name": "Sunrise School",
+      "city": "Brooks",
+      "phone": null,
+      "website": "http://www.grasslands.ab.ca",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1247",
+      "name": "École Le Ruisseau",
+      "city": "Brooks",
+      "phone": "(403) 362-2010",
+      "website": "http://www.leruisseau.francosud.ca",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3102",
+      "name": "Buck Mountain Central School",
+      "city": "Buck Lake",
+      "phone": "(780) 388-3900",
+      "website": "http://buckmountain.ca/",
+      "authority": "The Wetaskiwin School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1713",
+      "name": "Blue Hills Community School",
+      "city": "Buffalo Head Prairie",
+      "phone": "(780) 928-3632",
+      "website": "http://bhcs.fvsd.ab.ca/",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1803",
+      "name": "Cadotte Lake School",
+      "city": "Cadotte Lake",
+      "phone": "(780) 629-3767",
+      "website": null,
+      "authority": "Woodland Cree First Nation",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1823",
+      "name": "Little Buffalo School",
+      "city": "Cadotte Lake",
+      "phone": "(780) 629-3950",
+      "website": "http://www.ktcea.ca",
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2648",
+      "name": "Access Academy",
+      "city": "Calgary",
+      "phone": "(403) 455-3033",
+      "website": "http://www.AccessAcademy.ca",
+      "authority": "Access Academy Inc.",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2458",
+      "name": "Al-Qaim International School",
+      "city": "Calgary",
+      "phone": "(825) 540-3220",
+      "website": "http://alqaimschool.ca",
+      "authority": "Al-Zahra Islamic Research Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1598",
+      "name": "Alberta Ballet School",
+      "city": "Calgary",
+      "phone": "(403) 245-2274",
+      "website": "http://www.albertaballetschool.com",
+      "authority": "The Alberta Ballet Company",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2175",
+      "name": "All Saints School",
+      "city": "Calgary",
+      "phone": "(403) 500-2133",
+      "website": "http://www.cssd.ab.ca/schools/allsaints",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2533",
+      "name": "Arise Christian Academy",
+      "city": "Calgary",
+      "phone": "(403) 973-8171",
+      "website": "http://arisechristianacademy.ca",
+      "authority": "Arise Calgary Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2286",
+      "name": "BCS@Home",
+      "city": "Calgary",
+      "phone": "(403) 295-2566",
+      "website": null,
+      "authority": "Bearspaw Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2614",
+      "name": "Banbury Crossroads Academy",
+      "city": "Calgary",
+      "phone": "(403) 270-7787",
+      "website": "http://www.banburycrossroads.com",
+      "authority": "Banbury Crossroads School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9935",
+      "name": "Banbury Crossroads School",
+      "city": "Calgary",
+      "phone": "(403) 270-7787",
+      "website": null,
+      "authority": "Banbury Crossroads School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9927",
+      "name": "Bearspaw Christian School & College",
+      "city": "Calgary",
+      "phone": "(403) 295-2566",
+      "website": "http://www.bearspawschool.com",
+      "authority": "Bearspaw Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "8905",
+      "name": "Bishop Carroll High School",
+      "city": "Calgary",
+      "phone": "(403) 500-2056",
+      "website": "http://www.cssd.ab.ca/schools/bishopcarroll",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8907",
+      "name": "Bishop McNally High School",
+      "city": "Calgary",
+      "phone": "(403) 500-2091",
+      "website": "http://www.cssd.ab.ca/schools/bishopmcnally",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0581",
+      "name": "Bishop O'Byrne High School",
+      "city": "Calgary",
+      "phone": "(403) 500-2103",
+      "website": "http://www.cssd.ab.ca/schools/bishopobyrne",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "9847",
+      "name": "Bowness High School",
+      "city": "Calgary",
+      "phone": "(403) 286-5092",
+      "website": "http://school.cbe.ab.ca/school/bowness/Pages/defau",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1064",
+      "name": "CBe-learn",
+      "city": "Calgary",
+      "phone": "(403) 777-7971",
+      "website": "http://www.cbelearn.ca",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9908",
+      "name": "Calgary Academy",
+      "city": "Calgary",
+      "phone": "(403) 686-6444",
+      "website": "http://www.calgaryacademy.com",
+      "authority": "Calgary Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1015",
+      "name": "Calgary Academy Collegiate",
+      "city": "Calgary",
+      "phone": "(403) 686-6444",
+      "website": "http://www.calgaryacademy.com",
+      "authority": "Calgary Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1126",
+      "name": "Calgary Arts Academy",
+      "city": "Calgary",
+      "phone": "(403) 532-3020",
+      "website": "http://www.caaschool.com",
+      "authority": "Calgary Arts Academy Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "2631",
+      "name": "Calgary Charter School Hub – Almadina Campus",
+      "city": "Calgary",
+      "phone": "(825) 801-5825",
+      "website": "https://www.alca-calgary.com/",
+      "authority": "Almadina School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "9978",
+      "name": "Calgary Christian High School",
+      "city": "Calgary",
+      "phone": "(403) 242-2896",
+      "website": "http://www.calgarychristianschool.com",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2498",
+      "name": "Calgary Classical Academy Currie Campus",
+      "city": "Calgary",
+      "phone": "(587) 885-3688",
+      "website": null,
+      "authority": "Alberta Classical Academy Ltd.",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "0796",
+      "name": "Calgary French & International School",
+      "city": "Calgary",
+      "phone": "(403) 240-1500",
+      "website": "http://www.cfis.com",
+      "authority": "Calgary French & International School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2739",
+      "name": "Calgary Islamic School, Akram Jomaa Campus",
+      "city": "Calgary",
+      "phone": "(403) 248-2773",
+      "website": "https://www.akramjomaa.ca/",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5398",
+      "name": "Calgary Quest School",
+      "city": "Calgary",
+      "phone": "(403) 253-0003",
+      "website": "http://www.calgaryquestschool.com",
+      "authority": "Calgary Quest Children's Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1224",
+      "name": "Centennial High School",
+      "city": "Calgary",
+      "phone": "(403) 256-8140",
+      "website": "http://school.cbe.ab.ca/school/centennial/Pages/de",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9823",
+      "name": "Central Memorial High School",
+      "city": "Calgary",
+      "phone": "(403) 243-8880",
+      "website": "http://www.cbe.ab.ca/b823",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9817",
+      "name": "Chinook Learning Services",
+      "city": "Calgary",
+      "phone": "(403) 817-3340",
+      "website": "http://www.chinooklearningservices.com/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9916",
+      "name": "Chinook Winds Adventist Academy",
+      "city": "Calgary",
+      "phone": "(403) 286-5686",
+      "website": "http://cwaa.net",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9037",
+      "name": "Christine Meikle School",
+      "city": "Calgary",
+      "phone": "(403) 817-3524",
+      "website": "http://school.cbe.ab.ca/school/christinemeikle/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7976",
+      "name": "Clear Water Academy",
+      "city": "Calgary",
+      "phone": "(403) 217-8448",
+      "website": null,
+      "authority": "Clear Water Academy Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0335",
+      "name": "Connect Charter School",
+      "city": "Calgary",
+      "phone": "(403) 282-2890",
+      "website": "http://www.connectcharter.ca",
+      "authority": "Connect Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "9815",
+      "name": "Crescent Heights High School",
+      "city": "Calgary",
+      "phone": "(403) 276-5521",
+      "website": "https://school.cbe.ab.ca/school/CrescentHeights/Pa",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9972",
+      "name": "Delta West Academy",
+      "city": "Calgary",
+      "phone": "(403) 290-0767",
+      "website": null,
+      "authority": "Delta West Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9858",
+      "name": "Dr. E. P. Scarlett High School",
+      "city": "Calgary",
+      "phone": "(403) 281-3366",
+      "website": "http://school.cbe.ab.ca/school/drepscarlett",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0428",
+      "name": "Edge School",
+      "city": "Calgary",
+      "phone": "(403) 246-6432",
+      "website": "http://edgeschool.com",
+      "authority": "The Edge School For Athletes Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9826",
+      "name": "Ernest Manning High School",
+      "city": "Calgary",
+      "phone": "(403) 249-3131",
+      "website": "https://ernestmanning.cbe.ab.ca/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0012",
+      "name": "FFCA High School Campus",
+      "city": "Calgary",
+      "phone": "(403) 243-3316",
+      "website": "https://nhs.ffca-calgary.com/",
+      "authority": "Foundations for the Future Charter Academy Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "2343",
+      "name": "FFCA South High School Campus",
+      "city": "Calgary",
+      "phone": "(587) 794-4250",
+      "website": "http://www.ffca-calgary.com",
+      "authority": "Foundations for the Future Charter Academy Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "8903",
+      "name": "Father Lacombe School",
+      "city": "Calgary",
+      "phone": "(403) 500-2066",
+      "website": "http://www.cssd.ab.ca/schools/fatherlacombe",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "9917",
+      "name": "Foothills Academy",
+      "city": "Calgary",
+      "phone": "(403) 270-9400",
+      "website": "http://www.foothillsacademy.org",
+      "authority": "Foothills Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9813",
+      "name": "Forest Lawn High School",
+      "city": "Calgary",
+      "phone": "(403) 272-6665",
+      "website": "http://schools.cbe.ab.ca/b813/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2486",
+      "name": "Fusion Collegiate",
+      "city": "Calgary",
+      "phone": "(587) 333-7772",
+      "website": "https://fusioncollegiate.ca",
+      "authority": "Fusion Education Association",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "2479",
+      "name": "Gobind Sarvar School Guru Nanak Gate Campus",
+      "city": "Calgary",
+      "phone": "(403) 805-1822",
+      "website": "http://www.gscalgary.com",
+      "authority": "Gobind Marg Charitable Trust Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9836",
+      "name": "Henry Wise Wood High School",
+      "city": "Calgary",
+      "phone": "(403) 253-2261",
+      "website": "https://henrywisewood.cbe.ab.ca/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9906",
+      "name": "Heritage Christian Academy",
+      "city": "Calgary",
+      "phone": "(403) 219-3201",
+      "website": "http://www.heritagechristianacademy.com",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9856",
+      "name": "Jack James High School",
+      "city": "Calgary",
+      "phone": "(403) 248-4054",
+      "website": "https://jackjames.cbe.ab.ca/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9825",
+      "name": "James Fowler High School",
+      "city": "Calgary",
+      "phone": "(403) 230-4743",
+      "website": "http://www.cbe.ab.ca/b825",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1323",
+      "name": "Janus Academy Junior/Senior High School",
+      "city": "Calgary",
+      "phone": "(403) 262-3333",
+      "website": "http://www.janusacademy.org",
+      "authority": "Janus Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2180",
+      "name": "Joane Cardinal-Schubert High School",
+      "city": "Calgary",
+      "phone": "(403) 817-3600",
+      "website": "http://school.cbe.ab.ca/school/JoaneCardinalSchube",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9860",
+      "name": "John G. Diefenbaker High School",
+      "city": "Calgary",
+      "phone": "(403) 274-2240",
+      "website": "http://school.cbe.ab.ca/school/johngdiefenbaker/Pa",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2528",
+      "name": "Lady Fatima Academy",
+      "city": "Calgary",
+      "phone": "(587) 437-0083",
+      "website": "http://www.ladyfatimaacademy.ca",
+      "authority": "Lady Fatima Academy Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9865",
+      "name": "Lester B. Pearson High School",
+      "city": "Calgary",
+      "phone": "(403) 280-6565",
+      "website": "http://schools.cbe.ab.ca/b865",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9850",
+      "name": "Lord Beaverbrook High School",
+      "city": "Calgary",
+      "phone": "(403) 259-5585",
+      "website": "http://schools.cbe.ab.ca/b850",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9626",
+      "name": "Louise Dean School",
+      "city": "Calgary",
+      "phone": "(403) 777-7630",
+      "website": "https://louisedean.cbe.ab.ca/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9919",
+      "name": "Lycée international de Calgary",
+      "city": "Calgary",
+      "phone": "(403) 243-5420",
+      "website": "http://www.lycee.ca",
+      "authority": "Lycee Louis Pasteur Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1562",
+      "name": "Master's College",
+      "city": "Calgary",
+      "phone": "(403) 242-7034",
+      "website": "http://www.masters.ab.ca",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0308",
+      "name": "Mountain View Academy",
+      "city": "Calgary",
+      "phone": "(403) 217-4346",
+      "website": null,
+      "authority": "Mountain View Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2410",
+      "name": "National Sport School",
+      "city": "Calgary",
+      "phone": "(403) 777-7329",
+      "website": "http://www.nationalsportschool.com",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1989",
+      "name": "Nelson Mandela High School",
+      "city": "Calgary",
+      "phone": "(403) 817-3500",
+      "website": "https://nelsonmandela.cbe.ab.ca/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0432",
+      "name": "New Heights School and Learning Services",
+      "city": "Calgary",
+      "phone": "(403) 240-1312",
+      "website": "http://www.newheightscalgary.com",
+      "authority": "New Heights School and Learning Services Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2448",
+      "name": "North Point School",
+      "city": "Calgary",
+      "phone": "(567) 393-6699",
+      "website": "http://www.northpointschools.ca",
+      "authority": "North Point Schools",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1982",
+      "name": "North Point School - DSEPS",
+      "city": "Calgary",
+      "phone": "(403) 744-5214",
+      "website": "http://www.northpointschools.ca",
+      "authority": "North Point Schools",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2475",
+      "name": "North Trail High School",
+      "city": "Calgary",
+      "phone": "(403) 817-3700",
+      "website": "https://northtrail.cbe.ab.ca/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1275",
+      "name": "Notre Dame High School",
+      "city": "Calgary",
+      "phone": "(403) 500-2109",
+      "website": "http://www.cssd.ab.ca/schools/notredame",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8901",
+      "name": "Our Lady of the Rockies High School",
+      "city": "Calgary",
+      "phone": "(403) 500-2047",
+      "website": "http://ourladyoftherockies.cssd.ab.ca",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1264",
+      "name": "Phoenix Education Foundation",
+      "city": "Calgary",
+      "phone": "(403) 265-7701",
+      "website": "http://www.phoenixfoundation.ca",
+      "authority": "Phoenix Education Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9806",
+      "name": "Queen Elizabeth High School",
+      "city": "Calgary",
+      "phone": "(403) 777-6380",
+      "website": "http://school.cbe.ab.ca/school/queenelizabethhs/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1747",
+      "name": "Renert School",
+      "city": "Calgary",
+      "phone": "(587) 353-1053",
+      "website": "http://www.renertschool.ca",
+      "authority": "The Renert School Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1679",
+      "name": "Robert Thirsk High School",
+      "city": "Calgary",
+      "phone": null,
+      "website": "http://schools.cbe.ab.ca/b880/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5297",
+      "name": "Rundle College Academy",
+      "city": "Calgary",
+      "phone": "(403) 250-2965",
+      "website": "http://www.rundle.ab.ca",
+      "authority": "Rundle College Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9952",
+      "name": "Rundle College Junior Senior High",
+      "city": "Calgary",
+      "phone": "(403) 250-7180",
+      "website": "http://www.rundle.ab.ca",
+      "authority": "Rundle College Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5002",
+      "name": "Rundle Studio",
+      "city": "Calgary",
+      "phone": "(403) 291-3866",
+      "website": "http://www.rundle.ab.ca",
+      "authority": "Rundle College Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2449",
+      "name": "STEM Innovation Academy High School",
+      "city": "Calgary",
+      "phone": "(587) 943-2499",
+      "website": "http://www.steminnovationacademy.com",
+      "authority": "STEM Innovation Academy Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "9857",
+      "name": "Sir Winston Churchill High School",
+      "city": "Calgary",
+      "phone": "(403) 289-9241",
+      "website": "https://school.cbe.ab.ca/school/SirWinstonChurchil",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5223",
+      "name": "Springbank Community High School",
+      "city": "Calgary",
+      "phone": "(403) 246-4771",
+      "website": "http://springhs.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8515",
+      "name": "St. Anthony",
+      "city": "Calgary",
+      "phone": "(403) 500-2013",
+      "website": "http://www.cssd.ab.ca/schools/stanthony",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8902",
+      "name": "St. Francis High School",
+      "city": "Calgary",
+      "phone": "(403) 500-2026",
+      "website": "http://www.cssd.ab.ca/stfrancis",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8904",
+      "name": "St. Mary's High School",
+      "city": "Calgary",
+      "phone": "(403) 500-2024",
+      "website": "https://stmarys.cssd.ab.ca/",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2338",
+      "name": "The Gilbertine Academy",
+      "city": "Calgary",
+      "phone": "(866) 361-3650",
+      "website": "http://gilbertineacademy.com",
+      "authority": "The Gilbertine Institute of Catholic Studies",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9984",
+      "name": "Tyndale Christian School",
+      "city": "Calgary",
+      "phone": "(403) 590-5881",
+      "website": "http://www.tyndalecalgary.ca",
+      "authority": "The Canadian Reformed School Society of Calgary",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2320",
+      "name": "URSA",
+      "city": "Calgary",
+      "phone": "(403) 288-5335",
+      "website": "http://www.goursa.education",
+      "authority": "Third Academy International Ltd.",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0021",
+      "name": "Webber Academy",
+      "city": "Calgary",
+      "phone": "(403) 277-4700",
+      "website": null,
+      "authority": "Webber Academy Foundation",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9913",
+      "name": "West Island College",
+      "city": "Calgary",
+      "phone": "(403) 255-5300",
+      "website": "http://www.westislandcollege.ab.ca",
+      "authority": "West Island College Society of Alberta",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9687",
+      "name": "West View School",
+      "city": "Calgary",
+      "phone": "(403) 662-3547",
+      "website": null,
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9816",
+      "name": "Western Canada High School",
+      "city": "Calgary",
+      "phone": "(403) 228-5363",
+      "website": "https://westerncanada.cbe.ab.ca/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6002",
+      "name": "Westmount Mid/High School",
+      "city": "Calgary",
+      "phone": null,
+      "website": "http://www.westmountcharter.com",
+      "authority": "Westmount Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "9829",
+      "name": "William Aberhart High School",
+      "city": "Calgary",
+      "phone": "(403) 289-2551",
+      "website": "https://williamaberhart.cbe.ab.ca/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9033",
+      "name": "William Roper Hull School",
+      "city": "Calgary",
+      "phone": "(403) 251-8022",
+      "website": "http://schools.cbe.ab.ca/b033/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9035",
+      "name": "Wood's Homes School",
+      "city": "Calgary",
+      "phone": "(403) 270-1751",
+      "website": "http://schools.cbe.ab.ca/b035/",
+      "authority": "The Calgary School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "9228",
+      "name": "École de la Rose sauvage",
+      "city": "Calgary",
+      "phone": "(403) 230-3112",
+      "website": "http://www.larosesauvage.francosud.ca",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2662",
+      "name": "École secondaire Le Phare",
+      "city": "Calgary",
+      "phone": "(403) 906-3444",
+      "website": "https://silverado.francosud.ca",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1804",
+      "name": "Calling Lake School",
+      "city": "Calling Lake",
+      "phone": "(780) 331-3774",
+      "website": "http://www.nsd61.ca",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3206",
+      "name": "Calmar Secondary School",
+      "city": "Calmar",
+      "phone": "(780) 985-3515",
+      "website": "http://www.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4545",
+      "name": "Camrose Composite High School",
+      "city": "Camrose",
+      "phone": "(780) 672-4416",
+      "website": "https://cchs.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2660",
+      "name": "St. Carlo Acutis Catholic High School",
+      "city": "Camrose",
+      "phone": "(587) 769-1500",
+      "website": "https://bca.eics.ab.ca/",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1907",
+      "name": "École des Sentiers",
+      "city": "Camrose",
+      "phone": "(587) 769-0144",
+      "website": "http://www.df.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "5243",
+      "name": "Canmore Collegiate",
+      "city": "Canmore",
+      "phone": "(403) 678-6192",
+      "website": "http://cchs.crps.ca",
+      "authority": "The Canadian Rockies School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0594",
+      "name": "Our Lady of the Snows Catholic Academy",
+      "city": "Canmore",
+      "phone": "(403) 609-3699",
+      "website": "http://www.redeemer.ab.ca",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1060",
+      "name": "École Notre-Dame des Monts",
+      "city": "Canmore",
+      "phone": "(403) 609-0002",
+      "website": "http://www.ndm.francosud.ca",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "6201",
+      "name": "Cardston High School",
+      "city": "Cardston",
+      "phone": "(403) 653-4951",
+      "website": null,
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6290",
+      "name": "Kainai High School",
+      "city": "Cardston",
+      "phone": "(403) 737-3963",
+      "website": "https://khs.kainaied.ca/",
+      "authority": "Kainai Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1538",
+      "name": "Carmangay School",
+      "city": "Carmangay",
+      "phone": "(403) 643-2576",
+      "website": "https://carmangay.prs26.ca/",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4101",
+      "name": "Caroline School",
+      "city": "Caroline",
+      "phone": "(403) 722-3833",
+      "website": "http://www.caroline.wrsd.ca",
+      "authority": "The Wild Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5101",
+      "name": "Hugh Sutherland School",
+      "city": "Carstairs",
+      "phone": "(403) 337-3326",
+      "website": "http://www.hughsutherlandschool.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4822",
+      "name": "Gus Wetter School",
+      "city": "Castor",
+      "phone": "(403) 882-3242",
+      "website": "http://guswetter.clearview.ab.ca",
+      "authority": "The Clearview School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5802",
+      "name": "Berry Creek Community School",
+      "city": "Cessford",
+      "phone": "(403) 566-3736",
+      "website": "http://bccs.plrd.ab.ca/",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1790",
+      "name": "Dene Tha' Community School",
+      "city": "Chateh",
+      "phone": "(780) 321-3940",
+      "website": "https://denetha.ca/programs/education/community-sc",
+      "authority": "Dene Tha' Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "3902",
+      "name": "Dr. Folkins Community School",
+      "city": "Chauvin",
+      "phone": "(780) 858-3744",
+      "website": "http://drfolkins.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1029",
+      "name": "St. Gabriel the Archangel",
+      "city": "Chestermere",
+      "phone": "(403) 500-2110",
+      "website": "http://www.cssd.ab.ca/schools/stgabriel",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6302",
+      "name": "Willow Creek Composite High School",
+      "city": "Claresholm",
+      "phone": "(403) 625-3387",
+      "website": "http://www.willowcreekhighschool.ca/",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1825",
+      "name": "Menno-Simons Community School",
+      "city": "Cleardale",
+      "phone": "(780) 685-2340",
+      "website": "http://www.mennosimonsschool.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6494",
+      "name": "Coaldale Christian School",
+      "city": "Coaldale",
+      "phone": "(403) 345-4055",
+      "website": null,
+      "authority": "Coaldale Canadian Reformed School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2596",
+      "name": "Coaldale Prairie Winds Secondary",
+      "city": "Coaldale",
+      "phone": "(403) 328-4111",
+      "website": null,
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1772",
+      "name": "Palliser Beyond Borders",
+      "city": "Coaldale",
+      "phone": "(403) 345-4421",
+      "website": "http://www.palliserbeyondborders.com",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6496",
+      "name": "Calvin Christian School",
+      "city": "Coalhurst",
+      "phone": "(403) 381-3030",
+      "website": null,
+      "authority": "Calvin Christian School Society of the Netherlands Reformed Congregations",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6405",
+      "name": "Coalhurst High School",
+      "city": "Coalhurst",
+      "phone": "(403) 381-4812",
+      "website": "http://www.pallisersd.ab.ca/sites/chs/index.html",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0444",
+      "name": "Bow Valley High School",
+      "city": "Cochrane",
+      "phone": "(403) 932-9005",
+      "website": "http://bowvalley.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5209",
+      "name": "Cochrane High School",
+      "city": "Cochrane",
+      "phone": "(403) 932-2542",
+      "website": "http://cochrane.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1225",
+      "name": "St. Timothy",
+      "city": "Cochrane",
+      "phone": "(403) 500-2106",
+      "website": "http://sttimothy.cssd.ab.ca",
+      "authority": "The Calgary Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1189",
+      "name": "École Notre-Dame des Vallées",
+      "city": "Cochrane",
+      "phone": "(403) 851-0244",
+      "website": "http://ndv.francosud.ca",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2971",
+      "name": "Assumption Junior Senior High School",
+      "city": "Cold Lake",
+      "phone": "(780) 594-4050",
+      "website": "https://ajsh.lrcssd.ca/o/ajsh",
+      "authority": "The Lakeland Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2906",
+      "name": "Cold Lake High School",
+      "city": "Cold Lake",
+      "phone": "(780) 639-0039",
+      "website": "http://www.coldlakehighschool.ca/",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2986",
+      "name": "Lakeland Christian Academy",
+      "city": "Cold Lake",
+      "phone": "(780) 639-2077",
+      "website": null,
+      "authority": "Lakeland Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2985",
+      "name": "École Voyageur",
+      "city": "Cold Lake",
+      "phone": null,
+      "website": "http://www.centreest.ca/voyageur",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "6106",
+      "name": "Crowsnest Consolidated High School",
+      "city": "Coleman",
+      "phone": "(403) 563-5651",
+      "website": "http://www.crowsnesthighschool.ca/",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1806",
+      "name": "Conklin Community School",
+      "city": "Conklin",
+      "phone": "(780) 559-2228",
+      "website": "http://www.nsd61.ca",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4802",
+      "name": "Consort School",
+      "city": "Consort",
+      "phone": "(403) 577-3654",
+      "website": "http://consort.plrd.ab.ca",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4824",
+      "name": "Coronation School",
+      "city": "Coronation",
+      "phone": "(403) 578-3661",
+      "website": "http://coronation.clearview.ab.ca",
+      "authority": "The Clearview School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2390",
+      "name": "Covenant Canadian Reformed School",
+      "city": "County of Barrhead",
+      "phone": "(780) 674-4774",
+      "website": "http://www.covenantschool.ca/",
+      "authority": "Canadian Reformed School Society of Neerlandia",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5103",
+      "name": "Cremona School",
+      "city": "Cremona",
+      "phone": "(403) 637-3856",
+      "website": "http://www.cremonaschool.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1203",
+      "name": "Ridgevalley School",
+      "city": "Crooked Creek",
+      "phone": "(780) 957-3995",
+      "website": null,
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5225",
+      "name": "W. G. Murdoch School",
+      "city": "Crossfield",
+      "phone": "(403) 946-5665",
+      "website": "http://murdoch.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4702",
+      "name": "Daysland School",
+      "city": "Daysland",
+      "phone": "(780) 374-3676",
+      "website": "https://daysland.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4403",
+      "name": "Delburne Centralized School",
+      "city": "Delburne",
+      "phone": "(403) 749-3838",
+      "website": "http://www.delburneschool.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5702",
+      "name": "Delia School",
+      "city": "Delia",
+      "phone": "(403) 364-3777",
+      "website": "https://delia.plrd.ab.ca",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2469",
+      "name": "Villa Spiritus",
+      "city": "Derwent",
+      "phone": "(866) 361-3650",
+      "website": "http://villaspiritus.ca",
+      "authority": "The Gilbertine Institute of Catholic Studies",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "3235",
+      "name": "John Maland High School",
+      "city": "Devon",
+      "phone": "(780) 987-3709",
+      "website": "http://www.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3803",
+      "name": "Dewberry School",
+      "city": "Dewberry",
+      "phone": "(780) 847-3051",
+      "website": "http://dewberry.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5310",
+      "name": "Oilfields High School",
+      "city": "Diamond Valley",
+      "phone": "(403) 938-4973",
+      "website": "http://oilfields.fsd38.ab.ca",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5105",
+      "name": "Didsbury High School",
+      "city": "Didsbury",
+      "phone": "(403) 335-3356",
+      "website": "http://www.didsburyhigh.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1602",
+      "name": "Georges P Vanier School",
+      "city": "Donnelly",
+      "phone": "(780) 925-3959",
+      "website": "http://gpv.hpsd.ca",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2201",
+      "name": "Frank Maddock High School",
+      "city": "Drayton Valley",
+      "phone": "(780) 542-4401",
+      "website": "http://www.fmhigh.wrsd.ca",
+      "authority": "The Wild Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1328",
+      "name": "Holy Trinity Academy",
+      "city": "Drayton Valley",
+      "phone": "(780) 621-5735",
+      "website": "https://ht.starcatholic.ab.ca/",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2744",
+      "name": "Roots of Resilience Charter School",
+      "city": "Drayton Valley",
+      "phone": "(587) 464-1882",
+      "website": "http://rootsed.ca",
+      "authority": "Roots of Resilience Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "5725",
+      "name": "Drumheller Valley Secondary School",
+      "city": "Drumheller",
+      "phone": "(403) 823-5171",
+      "website": "http://www.drumvss.ca",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5770",
+      "name": "St. Anthony's School",
+      "city": "Drumheller",
+      "phone": "(403) 823-3485",
+      "website": "http://www.redeemer.ab.ca",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6703",
+      "name": "Duchess School",
+      "city": "Duchess",
+      "phone": "(403) 378-4948",
+      "website": "http://www.grasslands.ab.ca",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5905",
+      "name": "Eagle Butte High School",
+      "city": "Dunmore",
+      "phone": "(403) 528-1996",
+      "website": "https://eaglebutte.myprps.com/",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1303",
+      "name": "Eaglesham School",
+      "city": "Eaglesham",
+      "phone": "(780) 359-3792",
+      "website": "https://eaglesham.pwpsd.ca",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4306",
+      "name": "Eckville Junior Senior High School",
+      "city": "Eckville",
+      "phone": null,
+      "website": "http://www.ehs.wolfcreek.ab.ca",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5390",
+      "name": "Chief Jacob Bearspaw School",
+      "city": "Eden Valley",
+      "phone": "(403) 558-2480",
+      "website": null,
+      "authority": "Stoney Tribal Administration",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "3904",
+      "name": "Edgerton Public School",
+      "city": "Edgerton",
+      "phone": "(780) 755-3810",
+      "website": "http://edgerton.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2176",
+      "name": "Al Mustafa North Location",
+      "city": "Edmonton",
+      "phone": "(780) 477-7085",
+      "website": "http://almustafaacademy.ca",
+      "authority": "Al Mustafa Academy & Humanitarian Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1912",
+      "name": "Al-Mustafa Academy",
+      "city": "Edmonton",
+      "phone": "(587) 454-0260",
+      "website": null,
+      "authority": "Al Mustafa Academy & Humanitarian Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2173",
+      "name": "AlBaqir Academy",
+      "city": "Edmonton",
+      "phone": "(780) 432-7020",
+      "website": "http://www.albaqiracademy.com",
+      "authority": "AlBaqir Academy Association",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2751",
+      "name": "Alberta Advance Academy",
+      "city": "Edmonton",
+      "phone": "(780) 951-6677",
+      "website": null,
+      "authority": "Alberta Advance Academy",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "7730",
+      "name": "Alberta School for the Deaf",
+      "city": "Edmonton",
+      "phone": "(780) 439-3323",
+      "website": "http://asd.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0484",
+      "name": "Amiskwaciy Academy",
+      "city": "Edmonton",
+      "phone": null,
+      "website": "http://amiskwaciy.epsb.net",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8403",
+      "name": "Archbishop MacDonald Catholic High School",
+      "city": "Edmonton",
+      "phone": "(780) 451-1470",
+      "website": "http://www.archbishopmacdonald.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8404",
+      "name": "Archbishop O’Leary Catholic High School",
+      "city": "Edmonton",
+      "phone": "(780) 476-6251",
+      "website": "http://www.archbishopoleary.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2439",
+      "name": "Aurora Academic Charter School Alberta Avenue Campus",
+      "city": "Edmonton",
+      "phone": "(780) 540-9400",
+      "website": "http://www.auroraschool.ca",
+      "authority": "Aurora School Ltd.",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "8402",
+      "name": "Austin O’Brien Catholic High School",
+      "city": "Edmonton",
+      "phone": "(780) 466-3161",
+      "website": "http://www.austinobrien.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2767",
+      "name": "Bloom Islamic Academy",
+      "city": "Edmonton",
+      "phone": "(780) 454-4573",
+      "website": "http://www.islamicacademy.ca",
+      "authority": "Edmonton Islamic School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7704",
+      "name": "Braemar School",
+      "city": "Edmonton",
+      "phone": "(780) 468-3000",
+      "website": "http://braemar.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0017",
+      "name": "Centre High",
+      "city": "Edmonton",
+      "phone": "(780) 425-6753",
+      "website": "http://centrehigh.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7936",
+      "name": "Coralwood Adventist Academy",
+      "city": "Edmonton",
+      "phone": "(780) 454-2173",
+      "website": "http://coralwood.org",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2249",
+      "name": "Dr. Anne Anderson School",
+      "city": "Edmonton",
+      "phone": "(587) 489-4738",
+      "website": null,
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1983",
+      "name": "E2 Academy",
+      "city": "Edmonton",
+      "phone": "(780) 438-0824",
+      "website": "http://www.e2academy.com",
+      "authority": "E2 Society for Twice-Exceptional Learners",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7051",
+      "name": "Eastglen School",
+      "city": "Edmonton",
+      "phone": "(780) 479-1991",
+      "website": "http://eastglen.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7953",
+      "name": "Edmonton Academy",
+      "city": "Edmonton",
+      "phone": "(780) 482-5449",
+      "website": "http://www.edmontonacademy.com",
+      "authority": "Edmonton Academy Society for Learning Disabled",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7905",
+      "name": "Edmonton Christian High School",
+      "city": "Edmonton",
+      "phone": "(780) 408-7945",
+      "website": "http://edmchristian.net",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7901",
+      "name": "Edmonton Islamic Academy",
+      "city": "Edmonton",
+      "phone": "(780) 454-4573",
+      "website": "http://www.islamicacademy.ca",
+      "authority": "Edmonton Islamic School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2566",
+      "name": "Elder Dr. Francis Whiskeyjack School",
+      "city": "Edmonton",
+      "phone": "(587) 489-4730",
+      "website": "http://www.elderfranciswhishkeyjack.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2436",
+      "name": "Father Michael McCaffery Catholic High School",
+      "city": "Edmonton",
+      "phone": "(780) 670-2945",
+      "website": null,
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7059",
+      "name": "Harry Ainlay School",
+      "city": "Edmonton",
+      "phone": "(780) 413-2700",
+      "website": "http://https://harryainlay.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1008",
+      "name": "Headway School Society of Alberta",
+      "city": "Edmonton",
+      "phone": "(780) 757-3456",
+      "website": "http://www.headwayschool.org",
+      "authority": "Headway School Society of Alberta",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2470",
+      "name": "Holy House of Our Lady and St. Benedict",
+      "city": "Edmonton",
+      "phone": "(866) 361-3650",
+      "website": "http://holyhouse.ca",
+      "authority": "The Gilbertine Institute of Catholic Studies",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "8411",
+      "name": "Holy Trinity Catholic High School",
+      "city": "Edmonton",
+      "phone": "(780) 462-5777",
+      "website": "http://www.holytrinity.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1163",
+      "name": "Inner City High School",
+      "city": "Edmonton",
+      "phone": "(780) 424-9425",
+      "website": null,
+      "authority": "Inner City Youth Development Association",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7706",
+      "name": "Institutional Services Schools",
+      "city": "Edmonton",
+      "phone": "(780) 408-8209",
+      "website": null,
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7075",
+      "name": "J Percy Page School",
+      "city": "Edmonton",
+      "phone": "(780) 462-3322",
+      "website": "http://jpercypage.com",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8410",
+      "name": "J. H. Picard Catholic Elementary/Junior/Senior High School",
+      "city": "Edmonton",
+      "phone": "(780) 433-4251",
+      "website": "http://www.jhpicard.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7071",
+      "name": "Jasper Place School",
+      "city": "Edmonton",
+      "phone": "(780) 408-9000",
+      "website": "http://jasperplace.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7702",
+      "name": "L Y Cairns School",
+      "city": "Edmonton",
+      "phone": "(780) 434-9561",
+      "website": "http://lycairns.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1344",
+      "name": "Lillian Osborne High School",
+      "city": "Edmonton",
+      "phone": "(780) 391-2450",
+      "website": "http://lillianosborne.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8409",
+      "name": "Louis St. Laurent",
+      "city": "Edmonton",
+      "phone": "(780) 435-3964",
+      "website": "http://www.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7063",
+      "name": "M. E. LaZerte School",
+      "city": "Edmonton",
+      "phone": "(780) 408-9800",
+      "website": "http://https://melazerte.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2655",
+      "name": "MIS Junior and Senior High Campus",
+      "city": "Edmonton",
+      "phone": "(587) 635-5437",
+      "website": "https://schools.macnet.ca/edmontonmacislamicschool",
+      "authority": "Muslim Association of Canada",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7058",
+      "name": "McNally School",
+      "city": "Edmonton",
+      "phone": "(780) 469-0442",
+      "website": "http://mcnallyhigh.com",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7090",
+      "name": "Metro Continuing Education",
+      "city": "Edmonton",
+      "phone": "(780) 428-1111",
+      "website": "http://metrocontinuingeducation.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7909",
+      "name": "Millwoods Christian School",
+      "city": "Edmonton",
+      "phone": "(780) 462-2627",
+      "website": "http://mcs.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1430",
+      "name": "Mother Margaret Mary Catholic High School",
+      "city": "Edmonton",
+      "phone": "(780) 988-2279",
+      "website": "http://mothermargaretmary.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7066",
+      "name": "Old Scona School",
+      "city": "Edmonton",
+      "phone": "(780) 433-0627",
+      "website": "http://oldscona.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2293",
+      "name": "Parkland Immanuel Christian School",
+      "city": "Edmonton",
+      "phone": "(780) 444-6443",
+      "website": "http://www.parklandimmanuel.ca",
+      "authority": "Canadian Reformed School Society of Edmonton",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7938",
+      "name": "Progressive Academy",
+      "city": "Edmonton",
+      "phone": "(780) 455-8344",
+      "website": null,
+      "authority": "Progressive Academy Education Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "7052",
+      "name": "Queen Elizabeth School",
+      "city": "Edmonton",
+      "phone": "(780) 476-8671",
+      "website": "http://queene.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7053",
+      "name": "Ross Sheppard School",
+      "city": "Edmonton",
+      "phone": "(780) 448-5000",
+      "website": "http://shep.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2440",
+      "name": "STEM Collegiate",
+      "city": "Edmonton",
+      "phone": "(587) 921-6866",
+      "website": "http://stemcollegiate.ca",
+      "authority": "STEM Collegiate Canada Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "8405",
+      "name": "St. Francis Xavier",
+      "city": "Edmonton",
+      "phone": "(780) 489-2571",
+      "website": "http://www.stfrancisxavier.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8217",
+      "name": "St. Gabriel",
+      "city": "Edmonton",
+      "phone": "(780) 466-0220",
+      "website": "http://www.stgabriel.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "8407",
+      "name": "St. Joseph",
+      "city": "Edmonton",
+      "phone": "(780) 426-2010",
+      "website": "http://www.stjoseph.ecsd.net",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1028",
+      "name": "St. Oscar Romero Catholic High School",
+      "city": "Edmonton",
+      "phone": "(780) 428-2705",
+      "website": "https://www.ecsd.net/schools/1028",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "7054",
+      "name": "Strathcona School",
+      "city": "Edmonton",
+      "phone": "(780) 439-3957",
+      "website": "http://strathconaschool.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7951",
+      "name": "Tempo School",
+      "city": "Edmonton",
+      "phone": "(780) 434-1190",
+      "website": "http://www.temposchool.org",
+      "authority": "Tempo School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0018",
+      "name": "The Academy at King Edward",
+      "city": "Edmonton",
+      "phone": "(780) 439-1368",
+      "website": "http://kingedward.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7055",
+      "name": "Victoria School",
+      "city": "Edmonton",
+      "phone": "(780) 426-3010",
+      "website": "http://victoria-school.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7050",
+      "name": "Vimy Ridge",
+      "city": "Edmonton",
+      "phone": "(780) 465-5461",
+      "website": "http://vimyridge.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "7057",
+      "name": "W P Wagner School",
+      "city": "Edmonton",
+      "phone": "(780) 469-1315",
+      "website": "http://wpwagner.epsb.ca",
+      "authority": "The Edmonton School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "8098",
+      "name": "École Maurice-Lavallée",
+      "city": "Edmonton",
+      "phone": "(780) 465-6457",
+      "website": "http://www.ml.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2125",
+      "name": "École Michaëlle-Jean",
+      "city": "Edmonton",
+      "phone": "(587) 463-0257",
+      "website": "http://www.mj.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1132",
+      "name": "Holy Redeemer Catholic Junior/Senior High School",
+      "city": "Edson",
+      "phone": "(780) 723-7437",
+      "website": "http://www.holyredeemerhigh.ca",
+      "authority": "The Living Waters Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2002",
+      "name": "Parkland Composite High School",
+      "city": "Edson",
+      "phone": "(780) 723-6035",
+      "website": "https://parklandcomposite.gypsd.ca/",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0323",
+      "name": "Yellowhead Christian School",
+      "city": "Edson",
+      "phone": "(780) 723-3850",
+      "website": null,
+      "authority": "Yellowhead Christian School Fellowship",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2802",
+      "name": "F.G. Miller Junior Senior High School",
+      "city": "Elk Point",
+      "phone": "(780) 724-3966",
+      "website": "http://www.fgmiller.ca",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2326",
+      "name": "North Campus School",
+      "city": "Enoch",
+      "phone": "(780) 470-5657",
+      "website": null,
+      "authority": "Kitaskinaw Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2008",
+      "name": "Grand Trunk High School",
+      "city": "Evansburg",
+      "phone": "(780) 727-3925",
+      "website": "https://grandtrunkhighschool.gypsd.ca",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1402",
+      "name": "Fairview High School",
+      "city": "Fairview",
+      "phone": "(780) 835-5421",
+      "website": "http://www.fairviewhigh.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2652",
+      "name": "St. Thomas More",
+      "city": "Fairview",
+      "phone": "(780) 835-2245",
+      "website": "https://www.hfcrd.ab.ca/st-thomas-more-school",
+      "authority": "The Holy Family Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1550",
+      "name": "École Héritage",
+      "city": "Falher",
+      "phone": "(780) 837-3266",
+      "website": "http://www.heritage.csno.ab.ca",
+      "authority": "The Northwest Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3104",
+      "name": "Pigeon Lake Regional",
+      "city": "Falun",
+      "phone": "(780) 352-4916",
+      "website": "http://plrs.ca/",
+      "authority": "The Wetaskiwin School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5393",
+      "name": "Edison School",
+      "city": "Foothills",
+      "phone": "(403) 938-7670",
+      "website": null,
+      "authority": "Edison School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2371",
+      "name": "STAND School",
+      "city": "Foothills",
+      "phone": "(403) 938-4431",
+      "website": "http://www.strathconatweedsmuir.com",
+      "authority": "Strathcona-Tweedsmuir School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9922",
+      "name": "Strathcona-Tweedsmuir School",
+      "city": "Foothills",
+      "phone": "(403) 938-4431",
+      "website": "http://www.strathconatweedsmuir.com",
+      "authority": "Strathcona-Tweedsmuir School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6907",
+      "name": "Foremost School",
+      "city": "Foremost",
+      "phone": "(403) 867-3843",
+      "website": "https://foremostschool.ca/",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4703",
+      "name": "Forestburg School",
+      "city": "Forestburg",
+      "phone": "(780) 582-3792",
+      "website": "https://forestburg.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1810",
+      "name": "Athabasca Delta Community School",
+      "city": "Fort Chipewyan",
+      "phone": "(780) 697-3933",
+      "website": "https://adcs.psd.ca/",
+      "authority": "The Parkland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2283",
+      "name": "Therese Tuccaro Secondary School",
+      "city": "Fort Chipewyan",
+      "phone": "(780) 697-3767",
+      "website": null,
+      "authority": "Mikisew Cree First Nation Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "6306",
+      "name": "F. P. Walshe School",
+      "city": "Fort Macleod",
+      "phone": "(403) 553-4411",
+      "website": "http://www.fpwalsheschool.ca/",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2768",
+      "name": "PEAKS Collegiate Campus",
+      "city": "Fort Macleod",
+      "phone": "(403) 625-3356",
+      "website": "https://peakscampus.ca/",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1899",
+      "name": "Father Patrick Mercredi Community School",
+      "city": "Fort McMurray",
+      "phone": "(780) 799-5725",
+      "website": "http://www.fmcsd.ab.ca",
+      "authority": "The Fort McMurray Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1845",
+      "name": "Fort McMurray Composite High School",
+      "city": "Fort McMurray",
+      "phone": "(780) 743-5800",
+      "website": null,
+      "authority": "The Fort McMurray School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1858",
+      "name": "Frank Spragins High School",
+      "city": "Fort McMurray",
+      "phone": null,
+      "website": null,
+      "authority": "The Fort McMurray School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1564",
+      "name": "Holy Trinity High School",
+      "city": "Fort McMurray",
+      "phone": "(780) 792-0012",
+      "website": "http://www.fmcsd.ab.ca",
+      "authority": "The Fort McMurray Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2388",
+      "name": "Immaculate Heart of Mary Catholic School",
+      "city": "Fort McMurray",
+      "phone": "(587) 960-4121",
+      "website": "https://fmcschools.ca/fmcsd-outreach/",
+      "authority": "The Fort McMurray Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1857",
+      "name": "Westwood Community High School",
+      "city": "Fort McMurray",
+      "phone": "(780) 791-1986",
+      "website": null,
+      "authority": "The Fort McMurray School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1870",
+      "name": "École Boréale",
+      "city": "Fort McMurray",
+      "phone": "(780) 791-0200",
+      "website": null,
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1559",
+      "name": "École McTavish Public High School",
+      "city": "Fort McMurray",
+      "phone": "(780) 790-1100",
+      "website": "http://www.fmpsd.ab.ca",
+      "authority": "The Fort McMurray School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3311",
+      "name": "Fort Saskatchewan High School",
+      "city": "Fort Saskatchewan",
+      "phone": "(780) 998-3751",
+      "website": "http://www.forthigh.ca",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2184",
+      "name": "St. André Bessette Catholic High School",
+      "city": "Fort Saskatchewan",
+      "phone": "(587) 744-0750",
+      "website": "https://sab.eics.ab.ca/",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1702",
+      "name": "Fort Vermilion Public School",
+      "city": "Fort Vermilion",
+      "phone": "(780) 927-3706",
+      "website": "http://fvps.fvsd.ab.ca/",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1706",
+      "name": "Rocky Lane School",
+      "city": "Fort Vermilion",
+      "phone": "(780) 927-3297",
+      "website": "http://rlns.fvsd.ab.ca/",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1202",
+      "name": "Fox Creek School",
+      "city": "Fox Creek",
+      "phone": "(780) 622-3742",
+      "website": "http://foxcreekschool.ca",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1815",
+      "name": "Jean Baptiste Sewepagaham School",
+      "city": "Fox Lake",
+      "phone": "(780) 659-3820",
+      "website": "http://www.lrrbe.ab.ca",
+      "authority": "Little Red River Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2348",
+      "name": "Tus-tuk-ee-skaws School",
+      "city": "Frog Lake",
+      "phone": "(780) 943-3916",
+      "website": "http://www.fleat6.com",
+      "authority": "Frog Lake Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1793",
+      "name": "Chief Tallcree School North",
+      "city": "Ft. Vermilion",
+      "phone": "(780) 927-4381",
+      "website": null,
+      "authority": "Tallcree Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1816",
+      "name": "Sister Gloria School",
+      "city": "Garden River",
+      "phone": "(780) 659-3644",
+      "website": "http://www.lrrbe.ab.ca/Sister_Gloria_School",
+      "authority": "Little Red River Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1817",
+      "name": "Gift Lake School",
+      "city": "Gift Lake",
+      "phone": "(780) 767-3935",
+      "website": "http://www.nsd61.ca",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2905",
+      "name": "Glendon School",
+      "city": "Glendon",
+      "phone": "(780) 635-3881",
+      "website": "https://glendonschool.ca/",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2190",
+      "name": "Wakâ Mne Elementary",
+      "city": "Glenevis",
+      "phone": "(780) 967-0282",
+      "website": "https://alexised.ca/school/",
+      "authority": "Alexis Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2042",
+      "name": "Grande Cache Community High School",
+      "city": "Grande Cache",
+      "phone": "(780) 827-3502",
+      "website": "https://grandecacheschool.gypsd.ca/",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1761",
+      "name": "Charles Spencer High School",
+      "city": "Grande Prairie",
+      "phone": "(780) 513-3200",
+      "website": "http://www.gppsd.ab.ca/school/charlesspencer",
+      "authority": "The Grande Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1141",
+      "name": "Grande Prairie Composite High School",
+      "city": "Grande Prairie",
+      "phone": "(780) 532-7721",
+      "website": "https://www.gppsd.ab.ca/school/gpcomposite",
+      "authority": "The Grande Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1194",
+      "name": "Hillcrest Christian School",
+      "city": "Grande Prairie",
+      "phone": "(780) 539-9161",
+      "website": null,
+      "authority": "Hillcrest Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "0590",
+      "name": "Peace Wapiti Academy",
+      "city": "Grande Prairie",
+      "phone": "(780) 513-9504",
+      "website": "https://pwa.pwpsd.ca/",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1138",
+      "name": "St. John Bosco Catholic School",
+      "city": "Grande Prairie",
+      "phone": "(780) 532-7779",
+      "website": "http://stjohnbosco.gpcsd.ca/",
+      "authority": "The Grande Prairie Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2157",
+      "name": "St. John Paul II Catholic School / Faculté St. Jean-Paul II",
+      "city": "Grande Prairie",
+      "phone": "(780) 832-4000",
+      "website": "http://stjohnpaul.gpcsd.ca",
+      "authority": "The Grande Prairie Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1178",
+      "name": "St. Joseph Catholic High School",
+      "city": "Grande Prairie",
+      "phone": "(780) 532-7779",
+      "website": "http://stjoseph.gpcsd.ca",
+      "authority": "The Grande Prairie Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "0367",
+      "name": "École Nouvelle Frontière",
+      "city": "Grande Prairie",
+      "phone": "(780) 814-7945",
+      "website": "http://www.nouvellefrontiere.csno.ab.ca",
+      "authority": "The Northwest Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1505",
+      "name": "Grimshaw Public School",
+      "city": "Grimshaw",
+      "phone": "(780) 332-4075",
+      "website": "http://www.grimshawpublic.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2351",
+      "name": "Kapawe'no First Nation School",
+      "city": "Grouard",
+      "phone": "(780) 751-0008",
+      "website": "http://www.kfnlearning.com",
+      "authority": "Kapawe'no First Nation",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2488",
+      "name": "Gwynne Valley Rural Academy",
+      "city": "Gwynne",
+      "phone": "(780) 312-5939",
+      "website": "https://www.gvra.school",
+      "authority": "Gwynne Valley Rural Education Association",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "5844",
+      "name": "J. C. Charyk Hanna School",
+      "city": "Hanna",
+      "phone": "(403) 854-3642",
+      "website": "http://jcc.plrd.ab.ca/",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4507",
+      "name": "Hay Lakes School",
+      "city": "Hay Lakes",
+      "phone": "(780) 878-3368",
+      "website": "https://haylakes.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2804",
+      "name": "Heinsburg Community School",
+      "city": "Heinsburg",
+      "phone": "(780) 943-3913",
+      "website": "http://www.heinsburgschool.ca",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1703",
+      "name": "High Level Public School",
+      "city": "High Level",
+      "phone": "(780) 926-3706",
+      "website": "http://hlps.fvsd.ab.ca/",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1791",
+      "name": "Upper Hay River School",
+      "city": "High Level",
+      "phone": "(780) 535-2220",
+      "website": "http://uhrs.fvsd.ab.ca/",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1606",
+      "name": "E W Pratt High School",
+      "city": "High Prairie",
+      "phone": "(780) 523-3813",
+      "website": "http://ewp.hpsd.ca",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1670",
+      "name": "St. Andrew's School",
+      "city": "High Prairie",
+      "phone": "(780) 523-4595",
+      "website": "http://www.hfcrd.ab.ca/standrews/index.html",
+      "authority": "The Holy Family Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "5322",
+      "name": "Ecole Secondaire Highwood High School",
+      "city": "High River",
+      "phone": "(403) 652-5500",
+      "website": "http://highwood.fsd38.ab.ca",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0519",
+      "name": "Notre Dame Collegiate",
+      "city": "High River",
+      "phone": "(403) 652-2231",
+      "website": "http://www.redeemer.ab.ca",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1405",
+      "name": "Hines Creek Composite School",
+      "city": "Hines Creek",
+      "phone": "(780) 494-3510",
+      "website": "http://www.hinescreekcomposite.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2030",
+      "name": "Father Gerard Redmond Community Catholic School",
+      "city": "Hinton",
+      "phone": "(780) 865-2820",
+      "website": "http://www.grccs.ca",
+      "authority": "The Evergreen Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2011",
+      "name": "Harry Collinge High School",
+      "city": "Hinton",
+      "phone": "(780) 865-3714",
+      "website": "https://harrycollinge.gypsd.ca/",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2441",
+      "name": "Holden Rural Academy",
+      "city": "Holden",
+      "phone": "(780) 688-0232",
+      "website": "http://holdenra.ca",
+      "authority": "Holden Rural Academy Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "4905",
+      "name": "Hughenden Public School",
+      "city": "Hughenden",
+      "phone": "(780) 856-3640",
+      "website": "http://hughenden.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4405",
+      "name": "Innisfail High School",
+      "city": "Innisfail",
+      "phone": "(403) 227-3244",
+      "website": "http://www.innisfailhigh.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3602",
+      "name": "Delnorte School",
+      "city": "Innisfree",
+      "phone": "(780) 592-3963",
+      "website": "http://delnorte.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3906",
+      "name": "Irma School",
+      "city": "Irma",
+      "phone": "(780) 754-3746",
+      "website": "http://irma.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6409",
+      "name": "Huntsville School",
+      "city": "Iron Springs",
+      "phone": "(403) 738-4522",
+      "website": "http://www.huntsvilleschool.ca",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2035",
+      "name": "Jasper Junior Senior High School",
+      "city": "Jasper",
+      "phone": "(780) 852-3316",
+      "website": "https://jasperhigh.gypsd.ca/",
+      "authority": "The Grande Yellowhead School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1050",
+      "name": "École Desrochers",
+      "city": "Jasper",
+      "phone": "(780) 852-1119",
+      "website": "http://www.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1821",
+      "name": "John D'or Prairie School",
+      "city": "John D'or Prairie",
+      "phone": "(780) 759-3772",
+      "website": "http://www.lrrbe.ab.ca",
+      "authority": "Little Red River Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2989",
+      "name": "Kehewin Community Education Centre",
+      "city": "Kehewin",
+      "phone": "(780) 826-6200",
+      "website": "http://www.kcec.ca",
+      "authority": "Kehewin Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "4595",
+      "name": "Cornerstone Christian Academy",
+      "city": "Kingman",
+      "phone": "(780) 672-7197",
+      "website": "http://www.cornerstonekingman.ca",
+      "authority": "The Cornerstone Christian Academy of Camrose",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2443",
+      "name": "Education Unlimited Academy",
+      "city": "Kingman",
+      "phone": "(780) 662-3634",
+      "website": "http://www.educationunlimited.ca",
+      "authority": "Education Unlimited Network",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1611",
+      "name": "Kinuso School",
+      "city": "Kinuso",
+      "phone": "(780) 775-3694",
+      "website": "http://kin.hpsd.ca",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2278",
+      "name": "Swan River School",
+      "city": "Kinuso",
+      "phone": "(780) 775-2177",
+      "website": null,
+      "authority": "Swan River First Nation",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "3806",
+      "name": "Kitscoty Junior Senior High School",
+      "city": "Kitscoty",
+      "phone": "(780) 846-2121",
+      "website": "http://khs.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1704",
+      "name": "La Crete Public School",
+      "city": "La Crete",
+      "phone": "(780) 928-3913",
+      "website": "http://lcps.fvsd.ab.ca/",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2795",
+      "name": "Amisk Community School",
+      "city": "Lac La Biche",
+      "phone": "(780) 623-4548",
+      "website": "https://beaverlakecreenation.ca/amisk-community-sc",
+      "authority": "Beaver Lake Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2793",
+      "name": "Heart Lake Kohls School",
+      "city": "Lac La Biche",
+      "phone": "(780) 623-2330",
+      "website": "https://www.facebook.com/p/Kohls-School-Heart-Lake",
+      "authority": "Heart Lake Band #469",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2702",
+      "name": "J A Williams High School",
+      "city": "Lac La Biche",
+      "phone": "(780) 623-4271",
+      "website": "http://jawilliamsschool.ca/",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2124",
+      "name": "Light of Christ Catholic School",
+      "city": "Lac La Biche",
+      "phone": "(780) 623-3667",
+      "website": "https://lcc.lrcssd.ca/o/lcc",
+      "authority": "The Lakeland Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4466",
+      "name": "Central Alberta Christian High School",
+      "city": "Lacombe",
+      "phone": "(403) 782-4535",
+      "website": null,
+      "authority": "Central Alberta Christian High School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4390",
+      "name": "College Heights Christian School",
+      "city": "Lacombe",
+      "phone": null,
+      "website": "http://www.collegeheightschristianschool.ca",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4307",
+      "name": "Ecole Secondaire Lacombe Composite High School",
+      "city": "Lacombe",
+      "phone": "(403) 782-6615",
+      "website": "http://www.elchs.wolfcreek.ab.ca",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1633",
+      "name": "Prairie Adventist Christian eSchool",
+      "city": "Lacombe",
+      "phone": null,
+      "website": "http://pacescanada.org",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "3404",
+      "name": "Lamont High School",
+      "city": "Lamont",
+      "phone": "(780) 895-2228",
+      "website": "http://www.lamonthigh.ca",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2590",
+      "name": "Horseshoe Crossing High School",
+      "city": "Langdon",
+      "phone": "(403) 945-4000",
+      "website": "https://horseshoecrossing.rockyview.ab.ca/",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3272",
+      "name": "Christ the King School",
+      "city": "Leduc",
+      "phone": "(780) 986-6859",
+      "website": "https://ctk.starcatholic.ab.ca/",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3212",
+      "name": "Leduc Composite High School",
+      "city": "Leduc",
+      "phone": "(780) 986-2248",
+      "website": "http://www.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2564",
+      "name": "Ohpaho Secondary School",
+      "city": "Leduc",
+      "phone": "(587) 671-0331",
+      "website": "http://oss.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2536",
+      "name": "École Citadelle",
+      "city": "Legal",
+      "phone": "(780) 961-3557",
+      "website": "http://www.cd.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "4102",
+      "name": "David Thompson School",
+      "city": "Leslieville",
+      "phone": "(403) 729-3930",
+      "website": "http://www.davidthompson.wrsd.ca",
+      "authority": "The Wild Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6476",
+      "name": "Catholic Central High School",
+      "city": "Lethbridge",
+      "phone": "(403) 327-4596",
+      "website": "http://www.holyspirit.ab.ca/cch",
+      "authority": "The Holy Spirit Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1465",
+      "name": "Chinook High School",
+      "city": "Lethbridge",
+      "phone": "(403) 320-7565",
+      "website": "http://chs.lethsd.ab.ca",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6491",
+      "name": "Immanuel Christian Secondary School",
+      "city": "Lethbridge",
+      "phone": "(403) 328-4783",
+      "website": "http://icss.lethsd.ab.ca",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6446",
+      "name": "Lethbridge Collegiate Institute",
+      "city": "Lethbridge",
+      "phone": "(403) 328-9606",
+      "website": "http://www.lethsd.ab.ca/lci",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2630",
+      "name": "Southern Alberta Collegiate Institute",
+      "city": "Lethbridge",
+      "phone": "(403) 328-4111",
+      "website": null,
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6670",
+      "name": "St. Mary's Roman Catholic Separate School",
+      "city": "Lethbridge",
+      "phone": "(403) 327-9555",
+      "website": "https://www.holyspirit.ab.ca/",
+      "authority": "The Holy Spirit Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "6449",
+      "name": "Victoria Park High School",
+      "city": "Lethbridge",
+      "phone": "(403) 327-3945",
+      "website": "http://www.lasp.lethsd.ab.ca",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6466",
+      "name": "Winston Churchill High School",
+      "city": "Lethbridge",
+      "phone": "(403) 328-4723",
+      "website": "http://www.lethsd.ab.ca/churchill",
+      "authority": "The Lethbridge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2539",
+      "name": "École La Vérendrye",
+      "city": "Lethbridge",
+      "phone": "(403) 320-2287",
+      "website": "http://www.laverendrye.francosud.ca",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3852",
+      "name": "Holy Rosary High School",
+      "city": "Lloydminster",
+      "phone": "(780) 875-3600",
+      "website": null,
+      "authority": "Lloydminster Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3840",
+      "name": "Lloydminster Comprehensive High School",
+      "city": "Lloydminster",
+      "phone": "(780) 875-5513",
+      "website": null,
+      "authority": "Lloydminster Public School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1959",
+      "name": "École Sans-Frontières",
+      "city": "Lloydminster",
+      "phone": "(780) 875-0251",
+      "website": "http://www.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "5405",
+      "name": "Lomond Community School",
+      "city": "Lomond",
+      "phone": "(403) 792-3620",
+      "website": "http://lomond.horizon.ab.ca/",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6121",
+      "name": "Livingstone School",
+      "city": "Lundbreck",
+      "phone": "(403) 628-3897",
+      "website": "http://www.livingstoneschool.ca/",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6210",
+      "name": "Magrath Junior Senior High School",
+      "city": "Magrath",
+      "phone": "(403) 758-3366",
+      "website": null,
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2806",
+      "name": "Ecole Mallaig Community School",
+      "city": "Mallaig",
+      "phone": "(780) 635-3858",
+      "website": "http://www.mallaigschool.ca",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1507",
+      "name": "Manning Aurora Composite School",
+      "city": "Manning",
+      "phone": "(780) 836-3532",
+      "website": "http://www.manningauroracomp.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3604",
+      "name": "Mannville School",
+      "city": "Mannville",
+      "phone": "(780) 763-3615",
+      "website": "http://mannville.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3808",
+      "name": "Marwayne Jubilee School",
+      "city": "Marwayne",
+      "phone": "(780) 847-3930",
+      "website": "http://marwayne.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4288",
+      "name": "Maskwacîs Cree High School",
+      "city": "Maskwacis",
+      "phone": "(780) 585-4449",
+      "website": "https://nss.maskwacised.ca/",
+      "authority": "Maskwacis Education Schools Commission",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2104",
+      "name": "Mayerthorpe Junior Senior High School",
+      "city": "Mayerthorpe",
+      "phone": "(780) 786-2624",
+      "website": "http://mayerthorpehigh.ca",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6504",
+      "name": "Milk River Ridge School",
+      "city": "Milk River",
+      "phone": "(403) 647-3747",
+      "website": "http://mre.horizon.ab.ca/",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1474",
+      "name": "Living Truth Christian School",
+      "city": "Mirror",
+      "phone": "(403) 788-2444",
+      "website": "http://livingtruthchristianschool.ca",
+      "authority": "Living Truth Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "9986",
+      "name": "Providence Christian School",
+      "city": "Monarch",
+      "phone": "(403) 381-4418",
+      "website": "http://pcsmonarch.com",
+      "authority": "Providence Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2591",
+      "name": "Kipohtakaw Education Centre",
+      "city": "Morinville",
+      "phone": "(780) 939-3868",
+      "website": "https://afneducation.com/index.php",
+      "authority": "Alexander First Nation Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "2594",
+      "name": "Morinville Community High School",
+      "city": "Morinville",
+      "phone": "(780) 939-6891",
+      "website": "http://www.mchs.gsacrd.ab.ca",
+      "authority": "The Greater St. Albert Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2593",
+      "name": "The Father’s House Christian School",
+      "city": "Morinville",
+      "phone": "(780) 939-2987",
+      "website": null,
+      "authority": "The Father's House Christian Fellowship-Sturgeon County",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5290",
+      "name": "Morley Community School",
+      "city": "Morley",
+      "phone": "(403) 881-2755",
+      "website": null,
+      "authority": "Stoney Tribal Administration",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5705",
+      "name": "Morrin School",
+      "city": "Morrin",
+      "phone": "(403) 772-3838",
+      "website": "http://morrin.plrd.ab.ca/",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5198",
+      "name": "Olds Mountain View Christian School",
+      "city": "Mountain View County",
+      "phone": "(403) 556-1551",
+      "website": "http://www.omvcs.ca",
+      "authority": "Olds Mountain View Christian School Association",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "3703",
+      "name": "New Myrnam School",
+      "city": "Myrnam",
+      "phone": "(780) 366-3801",
+      "website": "http://www.newmyrnamschool.ca",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6310",
+      "name": "J. T. Foster School",
+      "city": "Nanton",
+      "phone": "(403) 646-2264",
+      "website": "http://www.jtfosterhighschool.ca",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4510",
+      "name": "New Norway School",
+      "city": "New Norway",
+      "phone": "(780) 855-3936",
+      "website": "https://nnorway.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3220",
+      "name": "New Sarepta Community High School",
+      "city": "New Sarepta",
+      "phone": "(780) 941-3924",
+      "website": "http://www.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6410",
+      "name": "Noble Central School",
+      "city": "Nobleford",
+      "phone": "(403) 824-3817",
+      "website": "http://www.noblecentralschool.ca",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4190",
+      "name": "Taotha School",
+      "city": "Nordegg",
+      "phone": "(403) 721-3989",
+      "website": "http://www.stoneyeducation.ca",
+      "authority": "Stoney Tribal Administration",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5323",
+      "name": "Alberta High School of Fine Arts",
+      "city": "Okotoks",
+      "phone": null,
+      "website": "https://www.foothillsschooldivision.ca/foothillsco",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5326",
+      "name": "Cameron Crossing School",
+      "city": "Okotoks",
+      "phone": "(403) 938-6072",
+      "website": null,
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5319",
+      "name": "Foothills Composite High School",
+      "city": "Okotoks",
+      "phone": null,
+      "website": "http://fchs.fsd38.ab.ca",
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1724",
+      "name": "Foothills Digital School",
+      "city": "Okotoks",
+      "phone": null,
+      "website": null,
+      "authority": "The Foothills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5371",
+      "name": "Holy Trinity Academy",
+      "city": "Okotoks",
+      "phone": "(403) 938-2477",
+      "website": "http://www.redeemer.ab.ca",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "5369",
+      "name": "St. Paul's Academy",
+      "city": "Okotoks",
+      "phone": "(403) 938-4119",
+      "website": "http://www.stpaulsacademy.ca",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1984",
+      "name": "Summit West Independent School",
+      "city": "Okotoks",
+      "phone": "(587) 885-2343",
+      "website": "http://www.summitwestschool.ca",
+      "authority": "Independent School Authority Ltd.",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1297",
+      "name": "École Beausoleil",
+      "city": "Okotoks",
+      "phone": "(403) 995-1160",
+      "website": "http://www.beausoleil.francosud.ca",
+      "authority": "The Southern Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "5193",
+      "name": "Olds Koinonia Christian School",
+      "city": "Olds",
+      "phone": "(403) 556-4038",
+      "website": "http://www.oldskoinonia.com",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5115",
+      "name": "École Olds High School",
+      "city": "Olds",
+      "phone": "(403) 556-3391",
+      "website": "http://www.oldshigh.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2105",
+      "name": "Onoway Junior Senior High School",
+      "city": "Onoway",
+      "phone": "(780) 967-2271",
+      "website": "http://onowayhigh.ca",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5910",
+      "name": "South Central High School",
+      "city": "Oyen",
+      "phone": "(403) 664-3644",
+      "website": "https://southcentral.ca/",
+      "authority": "The Prairie Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1827",
+      "name": "Paddle Prairie School",
+      "city": "Paddle Prairie",
+      "phone": "(780) 981-2124",
+      "website": "http://www.nsd61.ca",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3811",
+      "name": "E. H. Walter School",
+      "city": "Paradise Valley",
+      "phone": "(780) 745-2277",
+      "website": "http://ehwalter.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1573",
+      "name": "Glenmary School",
+      "city": "Peace River",
+      "phone": "(780) 624-5656",
+      "website": "http://gms.hfcrd.ab.ca",
+      "authority": "The Holy Family Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1511",
+      "name": "Peace River High School",
+      "city": "Peace River",
+      "phone": "(780) 624-4221",
+      "website": "http://www.peaceriverhigh.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0434",
+      "name": "École des Quatre-Vents",
+      "city": "Peace River",
+      "phone": "(780) 624-3015",
+      "website": "http://www.quatrevents.csno.ab.ca",
+      "authority": "The Northwest Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1771",
+      "name": "Penhold Crossing Secondary School",
+      "city": "Penhold",
+      "phone": "(403) 866-8604",
+      "website": "http://www.penholdcrossing.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6411",
+      "name": "Picture Butte High School",
+      "city": "Picture Butte",
+      "phone": "(403) 732-4404",
+      "website": "http://www.pbhs.ca",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6122",
+      "name": "Matthew Halton High School",
+      "city": "Pincher Creek",
+      "phone": "(403) 627-4414",
+      "website": "http://www.matthewhaltonhighschool.ca/",
+      "authority": "The Livingstone Range School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6170",
+      "name": "St. Michael's School",
+      "city": "Pincher Creek",
+      "phone": "(403) 627-3488",
+      "website": "http://www.holyspirit.ab.ca/st.michael",
+      "authority": "The Holy Spirit Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2706",
+      "name": "Ecole Plamondon School",
+      "city": "Plamondon",
+      "phone": "(780) 798-3840",
+      "website": "http://ecoleplamondonschool.ca/",
+      "authority": "The Northern Lights School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2718",
+      "name": "École Beauséjour",
+      "city": "Plamondon",
+      "phone": "(780) 798-2045",
+      "website": "http://www.centreest.ca/beausejour",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3193",
+      "name": "Mamawi Atosketan Native School",
+      "city": "Ponoka",
+      "phone": "(403) 783-4362",
+      "website": "https://an6440.adventistschoolconnect.org/",
+      "authority": "Alberta Conference of 7th Day Adventist Church",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4205",
+      "name": "Ponoka Secondary Campus",
+      "city": "Ponoka",
+      "phone": "(403) 783-4411",
+      "website": "http://www.psc.wolfcreek.ab.ca/",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4270",
+      "name": "St. Augustine School",
+      "city": "Ponoka",
+      "phone": "(403) 704-1155",
+      "website": "https://staug.starcatholic.ab.ca/",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4907",
+      "name": "Provost Public School",
+      "city": "Provost",
+      "phone": "(780) 753-6824",
+      "website": "http://provost.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4970",
+      "name": "St. Thomas Aquinas School",
+      "city": "Provost",
+      "phone": "(780) 753-6838",
+      "website": "https://sta.ecacs.ca/",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1705",
+      "name": "Rainbow Lake School",
+      "city": "Rainbow Lake",
+      "phone": "(780) 956-3851",
+      "website": "http://rlks.fvsd.ab.ca/",
+      "authority": "The Fort Vermilion School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6506",
+      "name": "Raymond High School",
+      "city": "Raymond",
+      "phone": "(403) 752-3381",
+      "website": null,
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2366",
+      "name": "Creekside Creative Academy",
+      "city": "Red Deer",
+      "phone": "(403) 350-8420",
+      "website": "http://www.creeksidecreativeacademy.ca",
+      "authority": "Creekside Creative Academy",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4471",
+      "name": "Ecole Secondaire Notre Dame High School",
+      "city": "Red Deer",
+      "phone": "(403) 342-4800",
+      "website": "http://notredamehigh.ca/",
+      "authority": "The Red Deer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2447",
+      "name": "Emmaus Learning Community - DSEPS",
+      "city": "Red Deer",
+      "phone": "(403) 346-1818",
+      "website": "http://www.koinonia.ca",
+      "authority": "Koinonia Christian School - Red Deer Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4491",
+      "name": "Gateway Christian School",
+      "city": "Red Deer",
+      "phone": "(403) 346-5795",
+      "website": "http://gateway.rdpsd.ab.ca",
+      "authority": "The Red Deer School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4433",
+      "name": "Hunting Hills High School",
+      "city": "Red Deer",
+      "phone": "(403) 342-6655",
+      "website": "http://huntinghills.rdpsd.ab.ca",
+      "authority": "The Red Deer School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2446",
+      "name": "Koinonia @ Home",
+      "city": "Red Deer",
+      "phone": "(403) 346-1818",
+      "website": "http://www.koinonia.ca",
+      "authority": "Koinonia Christian School - Red Deer Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "5195",
+      "name": "Koinonia Christian School (Red Deer)",
+      "city": "Red Deer",
+      "phone": "(403) 346-1818",
+      "website": null,
+      "authority": "Koinonia Christian School - Red Deer Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4444",
+      "name": "Lindsay Thurber Comprehensive High School",
+      "city": "Red Deer",
+      "phone": "(403) 347-1171",
+      "website": "http://lindsaythurber.rdpsd.ab.ca",
+      "authority": "The Red Deer School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4465",
+      "name": "North Cottage High School",
+      "city": "Red Deer",
+      "phone": "(403) 342-2170",
+      "website": "http://asc.rdpsd.ab.ca",
+      "authority": "The Red Deer School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1016",
+      "name": "NorthStar Academy",
+      "city": "Red Deer",
+      "phone": "(403) 335-9587",
+      "website": "http://www.nsaschool.ca",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2444",
+      "name": "RTD Math Academy",
+      "city": "Red Deer",
+      "phone": "(403) 351-0896",
+      "website": "http://rtdacademy.com",
+      "authority": "RTD Math Academy Ltd",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1923",
+      "name": "St. Joseph High School",
+      "city": "Red Deer",
+      "phone": "(403) 341-4423",
+      "website": "http://stjosephhigh.ca",
+      "authority": "The Red Deer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2538",
+      "name": "École La Prairie",
+      "city": "Red Deer",
+      "phone": "(403) 343-0060",
+      "website": "http://lp.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "1824",
+      "name": "Clarence Jaycox School",
+      "city": "Red Earth Creek",
+      "phone": "(780) 649-2942",
+      "website": null,
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "0339",
+      "name": "Red Earth Creek School",
+      "city": "Red Earth Creek",
+      "phone": "(780) 649-3898",
+      "website": "http://www.redearthcreekschool.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2623",
+      "name": "Redwater School",
+      "city": "Redwater",
+      "phone": "(780) 942-3625",
+      "website": "http://www.redwaterschool.ca",
+      "authority": "The Sturgeon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4209",
+      "name": "Rimbey Junior Senior High School",
+      "city": "Rimbey",
+      "phone": null,
+      "website": "http://www.rhs.wolfcreek.ab.ca",
+      "authority": "The Wolf Creek School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1361",
+      "name": "Kisiko Awasis Kiskinahamawin at Mountain Cree Camp",
+      "city": "Robb",
+      "phone": "(780) 664-9077",
+      "website": "https://www.ecsd.net/Programs/Overview/AboriginalL",
+      "authority": "The Edmonton Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4191",
+      "name": "O'Chiese School",
+      "city": "Rocky Mountain House",
+      "phone": "(587) 798-0425",
+      "website": "http://www.ochiese.ca/education",
+      "authority": "O'Chiese Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1272",
+      "name": "St. Dominic High School",
+      "city": "Rocky Mountain House",
+      "phone": "(403) 845-5313",
+      "website": "http://stdominicschool.ca/",
+      "authority": "The Red Deer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4395",
+      "name": "Sunchild First Nation School",
+      "city": "Rocky Mountain House",
+      "phone": "(403) 989-3476",
+      "website": "http://www.sunchildschool.com",
+      "authority": "Sunchild First Nation Band",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "4105",
+      "name": "West Central High School",
+      "city": "Rocky Mountain House",
+      "phone": "(403) 845-3711",
+      "website": "http://www.wrsd.ca/wchs/",
+      "authority": "The Wild Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5208",
+      "name": "Chestermere High School",
+      "city": "Rocky View County",
+      "phone": "(403) 272-8868",
+      "website": "http://chestermerehg.rockyview.ab.ca",
+      "authority": "The Rocky View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1446",
+      "name": "Third Academy Calgary South",
+      "city": "Rocky View County",
+      "phone": "(403) 288-5335",
+      "website": "http://www.thirdacademy.ca",
+      "authority": "Third Academy International Ltd.",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6708",
+      "name": "Rosemary School",
+      "city": "Rosemary",
+      "phone": "(403) 378-4493",
+      "website": "http://www.grasslands.ab.ca",
+      "authority": "The Grasslands School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2797",
+      "name": "Kihew Asiniy Education Centre",
+      "city": "Saddle Lake",
+      "phone": "(780) 726-2000",
+      "website": "https://sites.google.com/kihewasiniy.com/kihewasin",
+      "authority": "Saddle Lake Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "4710",
+      "name": "Central High School Sedgewick",
+      "city": "Sedgewick",
+      "phone": "(780) 384-3817",
+      "website": "https://chsp.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1108",
+      "name": "Sexsmith Secondary School",
+      "city": "Sexsmith",
+      "phone": "(780) 568-3642",
+      "website": "https://sss.pwpsd.ca/",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2041",
+      "name": "Archbishop Jordan Catholic High School",
+      "city": "Sherwood Park",
+      "phone": "(780) 467-2121",
+      "website": "https://abj.eics.ab.ca",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3340",
+      "name": "Bev Facey Community High School",
+      "city": "Sherwood Park",
+      "phone": "(780) 467-0044",
+      "website": "http://www.bevfacey.ca",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3322",
+      "name": "Salisbury Composite High School",
+      "city": "Sherwood Park",
+      "phone": "(780) 467-8816",
+      "website": "http://www.salcomp.ca",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3395",
+      "name": "Strathcona Christian Academy",
+      "city": "Sherwood Park",
+      "phone": "(780) 464-7127",
+      "website": "http://www.scasecondary.ca",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1986",
+      "name": "École Claudette-et-Denis-Tardif",
+      "city": "Sherwood Park",
+      "phone": "(587) 745-0404",
+      "website": "http://www.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "5595",
+      "name": "Chief Old Sun Elementary School",
+      "city": "Siksika",
+      "phone": "(403) 734-5300",
+      "website": "https://siksikaed.com/",
+      "authority": "Siksika Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5596",
+      "name": "Siksika Nation High School",
+      "city": "Siksika",
+      "phone": "(403) 734-5400",
+      "website": "https://siksikaed.com/",
+      "authority": "Siksika Board of Education",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1305",
+      "name": "Savanna School",
+      "city": "Silver Valley",
+      "phone": "(780) 351-3771",
+      "website": "http://www.pwsd76.ab.ca/schools/savanna/Pages/defa",
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1616",
+      "name": "Roland Michener Secondary School",
+      "city": "Slave Lake",
+      "phone": "(780) 849-3064",
+      "website": "http://rms.hpsd.ca",
+      "authority": "The High Prairie School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1696",
+      "name": "Slave Lake Christian Academy",
+      "city": "Slave Lake",
+      "phone": "(780) 849-5400",
+      "website": null,
+      "authority": "Slave Lake Christian Academy Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "1585",
+      "name": "St. Francis of Assisi Catholic Academy",
+      "city": "Slave Lake",
+      "phone": "(780) 849-5245",
+      "website": "http://www.stfrancisassisi.ca",
+      "authority": "The Living Waters Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2722",
+      "name": "H. A. Kostash School",
+      "city": "Smoky Lake",
+      "phone": "(780) 656-3820",
+      "website": null,
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1306",
+      "name": "Spirit River Regional Academy",
+      "city": "Spirit River",
+      "phone": "(780) 864-3696",
+      "website": null,
+      "authority": "The Peace Wapiti School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2235",
+      "name": "Connections for Learning",
+      "city": "Spruce Grove",
+      "phone": "(780) 963-0507",
+      "website": "https://cfl.psd.ca",
+      "authority": "The Parkland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0098",
+      "name": "Harvest Baptist Academy",
+      "city": "Spruce Grove",
+      "phone": "(780) 699-4449",
+      "website": "http://harvestbaptist.academy",
+      "authority": "Independent Baptist Christian Education Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2299",
+      "name": "Living Waters Christian Academy",
+      "city": "Spruce Grove",
+      "phone": "(780) 962-3331",
+      "website": "http://lwca.ab.ca",
+      "authority": "Living Waters Christian Academy",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "2208",
+      "name": "Spruce Grove Composite High School",
+      "city": "Spruce Grove",
+      "phone": "(780) 962-0800",
+      "website": "https://sgchs.psd.ca",
+      "authority": "The Parkland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1684",
+      "name": "St. Peter the Apostle Catholic High School",
+      "city": "Spruce Grove",
+      "phone": "(780) 962-6618",
+      "website": "http://www.spachs.ca",
+      "authority": "The Evergreen Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "4410",
+      "name": "Spruce View School",
+      "city": "Spruce View",
+      "phone": "(403) 728-3459",
+      "website": "http://www.spruceviewschool.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2556",
+      "name": "Bellerose Composite High School",
+      "city": "St. Albert",
+      "phone": "(780) 460-8490",
+      "website": "https://bchs.spschools.org",
+      "authority": "The St. Albert School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2541",
+      "name": "Paul Kane High School",
+      "city": "St. Albert",
+      "phone": "(780) 459-4405",
+      "website": "https://pkhs.spschools.org",
+      "authority": "The St. Albert School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1467",
+      "name": "École Alexandre-Taché",
+      "city": "St. Albert",
+      "phone": "(780) 458-4878",
+      "website": "http://www.centrenord.ab.ca",
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2577",
+      "name": "École Secondaire St. Albert Catholic High School",
+      "city": "St. Albert",
+      "phone": "(780) 459-7781",
+      "website": "http://www.sachs.ab.ca",
+      "authority": "The Greater St. Albert Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2820",
+      "name": "Ecole Regionale St. Paul Regional High School",
+      "city": "St. Paul",
+      "phone": "(780) 645-4491",
+      "website": "http://www.sprhs.ca",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2892",
+      "name": "École du Sommet",
+      "city": "St. Paul",
+      "phone": "(780) 645-1949",
+      "website": "http://centreest.ca/sommet",
+      "authority": "The East Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "2071",
+      "name": "Wheatland Crossing School",
+      "city": "Standard",
+      "phone": "(403) 644-3791",
+      "website": "http://wheatlandcrossing.ghsd75.ca",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4644",
+      "name": "William E Hay Composite High School",
+      "city": "Stettler",
+      "phone": "(403) 742-3466",
+      "website": "http://wmehay.clearview.ab.ca",
+      "authority": "The Clearview School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6535",
+      "name": "Stirling School",
+      "city": "Stirling",
+      "phone": "(403) 756-3355",
+      "website": null,
+      "authority": "The Westwind School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2209",
+      "name": "Memorial Composite High School",
+      "city": "Stony Plain",
+      "phone": "(780) 963-2255",
+      "website": "https://mchs.psd.ca",
+      "authority": "The Parkland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1231",
+      "name": "Holy Cross Collegiate",
+      "city": "Strathmore",
+      "phone": "(403) 901-2050",
+      "website": "http://www.redeemer.ab.ca",
+      "authority": "The Christ the Redeemer Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2670",
+      "name": "Rural Route Agriculture Academy",
+      "city": "Strathmore",
+      "phone": "(587) 848-4200",
+      "website": "http://www.rragacademy.ca",
+      "authority": "Agriculture Charter School Society",
+      "authority_type": "Charter"
+    },
+    {
+      "code": "0660",
+      "name": "Strathmore High School",
+      "city": "Strathmore",
+      "phone": "(403) 934-3135",
+      "website": "http://www.strathmorehighschool.com",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2510",
+      "name": "Sturgeon Composite High School",
+      "city": "Sturgeon County",
+      "phone": "(780) 973-3301",
+      "website": "http://www.sturgeoncomp.ca",
+      "authority": "The Sturgeon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5112",
+      "name": "Sundre High School",
+      "city": "Sundre",
+      "phone": "(403) 638-4545",
+      "website": "http://www.sundrehigh.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2335",
+      "name": "Swan Hills School",
+      "city": "Swan Hills",
+      "phone": "(780) 333-4471",
+      "website": "http://www.swanhillsschool.ca/",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "4394",
+      "name": "Lighthouse Christian School",
+      "city": "Sylvan Lake",
+      "phone": "(403) 887-2166",
+      "website": "http://www.lcafamily.ca",
+      "authority": "Lighthouse Christian School Society",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "4411",
+      "name": "École H.J. Cody High School",
+      "city": "Sylvan Lake",
+      "phone": "(403) 887-2412",
+      "website": "http://www.hjcody.ca",
+      "authority": "The Chinook's Edge School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2333",
+      "name": "Taber Christian High School",
+      "city": "Taber",
+      "phone": "(403) 359-3835",
+      "website": "http://tchs/horizon.ab.ca",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0022",
+      "name": "Tween Valley Christian School",
+      "city": "Taber",
+      "phone": "(403) 223-9571",
+      "website": null,
+      "authority": "Tween Valley Fellowship/Tween Valley Christian School",
+      "authority_type": "Private School"
+    },
+    {
+      "code": "6606",
+      "name": "W. R. Myers High School",
+      "city": "Taber",
+      "phone": "(403) 223-2292",
+      "website": "http://wrmyers.horizon.ab.ca/",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2624",
+      "name": "Thorhild Central School",
+      "city": "Thorhild",
+      "phone": "(780) 398-3610",
+      "website": null,
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3222",
+      "name": "Thorsby Junior Senior High School",
+      "city": "Thorsby",
+      "phone": "(780) 789-3983",
+      "website": "http://tjshs.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5691",
+      "name": "Prairie Christian Academy",
+      "city": "Three Hills",
+      "phone": "(403) 443-4220",
+      "website": "http://www.pca3hills.ca",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5610",
+      "name": "Three Hills School",
+      "city": "Three Hills",
+      "phone": "(403) 443-5335",
+      "website": "http://www.threehillsschool.ca",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3508",
+      "name": "Tofield School",
+      "city": "Tofield",
+      "phone": "(780) 662-3133",
+      "website": "https://tofield.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5612",
+      "name": "Trochu Valley School",
+      "city": "Trochu",
+      "phone": "(403) 442-3872",
+      "website": "http://trochuvalley.ghsd75.ca",
+      "authority": "The Golden Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1832",
+      "name": "Kateri School",
+      "city": "Trout Lake",
+      "phone": "(780) 869-3990",
+      "website": "http://www.ktcea.ca",
+      "authority": "Kee Tas Kee Now Tribal Council Education Authority",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "5296",
+      "name": "Many Horses High School",
+      "city": "Tsuut'ina",
+      "phone": "(403) 258-4826",
+      "website": "http://www.tsuutinaeducation.com",
+      "authority": "Tsuut'ina Nation Education Department",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "0532",
+      "name": "Two Hills Mennonite School",
+      "city": "Two Hills",
+      "phone": "(780) 657-2434",
+      "website": "http://www.twohillsmennoniteschool.ca",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3707",
+      "name": "Two Hills School",
+      "city": "Two Hills",
+      "phone": "(780) 657-3383",
+      "website": "http://www.twohillsschool.ca",
+      "authority": "The St. Paul School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1206",
+      "name": "Hillside Junior Senior High School",
+      "city": "Valleyview",
+      "phone": "(780) 524-3277",
+      "website": "http://hillsidehigh.ca",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1294",
+      "name": "Sturgeon Lake School",
+      "city": "Valleyview",
+      "phone": "(780) 524-4590",
+      "website": null,
+      "authority": "Sturgeon Lake First Nation, Band #154",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "6611",
+      "name": "Vauxhall Junior Senior High School",
+      "city": "Vauxhall",
+      "phone": "(403) 654-2145",
+      "website": "http://vhs.horizon.ab.ca/",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3671",
+      "name": "St. Mary's Catholic High School",
+      "city": "Vegreville",
+      "phone": "(780) 632-3934",
+      "website": "https://stmy.eics.ab.ca",
+      "authority": "The Elk Island Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3610",
+      "name": "Vegreville Composite High School",
+      "city": "Vegreville",
+      "phone": "(780) 632-3341",
+      "website": "http://www.vegcomp.ca",
+      "authority": "The Elk Island School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3815",
+      "name": "J. R. Robson School",
+      "city": "Vermilion",
+      "phone": "(780) 853-4177",
+      "website": "http://jrrobson.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3972",
+      "name": "School of Hope",
+      "city": "Vermilion",
+      "phone": "(780) 853-2188",
+      "website": "https://soh.ecacs.ca",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3870",
+      "name": "St. Jerome's School",
+      "city": "Vermilion",
+      "phone": "(780) 853-5251",
+      "website": "https://stj.ecacs.ca/",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3510",
+      "name": "Viking School",
+      "city": "Viking",
+      "phone": "(780) 336-3352",
+      "website": "https://viking.brsd.ab.ca/",
+      "authority": "The Battle River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2724",
+      "name": "Vilna School",
+      "city": "Vilna",
+      "phone": "(780) 636-3651",
+      "website": null,
+      "authority": "The Aspen View School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5410",
+      "name": "County Central High School",
+      "city": "Vulcan",
+      "phone": null,
+      "website": "http://www.countycentral.ca/",
+      "authority": "The Palliser School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5491",
+      "name": "Hope Christian School",
+      "city": "Vulcan",
+      "phone": "(403) 897-3019",
+      "website": "https://hopechristian.plrd.ab.ca",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2499",
+      "name": "Bigstone Cree Nation High School",
+      "city": "Wabasca",
+      "phone": "(780) 891-2727",
+      "website": "http://www.bigstoneeducation.ca",
+      "authority": "Bigstone Education Authority Society",
+      "authority_type": "Federal First Nations"
+    },
+    {
+      "code": "1807",
+      "name": "Mistassiniy School",
+      "city": "Wabasca",
+      "phone": "(780) 891-3949",
+      "website": "http://www.nsd61.ca",
+      "authority": "The Northland School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3970",
+      "name": "Blessed Sacrament School",
+      "city": "Wainwright",
+      "phone": "(780) 842-3808",
+      "website": "https://bss.ecacs.ca/",
+      "authority": "The East Central Alberta Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3909",
+      "name": "Wainwright High School",
+      "city": "Wainwright",
+      "phone": "(780) 842-4481",
+      "website": "http://whs.btps.ca",
+      "authority": "The Buffalo Trail School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "0438",
+      "name": "École Saint-Christophe",
+      "city": "Wainwright",
+      "phone": "(780) 842-2827",
+      "website": null,
+      "authority": "The Greater North Central Francophone Education Region",
+      "authority_type": "Francophone"
+    },
+    {
+      "code": "3202",
+      "name": "Breton High School",
+      "city": "Warburg",
+      "phone": "(780) 696-3633",
+      "website": "http://www.bretonhs.wrsd.ca",
+      "authority": "The Wild Rose School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "3226",
+      "name": "Warburg School",
+      "city": "Warburg",
+      "phone": "(780) 848-2822",
+      "website": "http://www.blackgold.ca",
+      "authority": "The Black Gold School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "6509",
+      "name": "Warner School",
+      "city": "Warner",
+      "phone": "(403) 642-3931",
+      "website": "http://warner.horizon.ab.ca/",
+      "authority": "The Horizon School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "1121",
+      "name": "Holy Family Catholic School",
+      "city": "Waskatenau",
+      "phone": "(780) 358-2332",
+      "website": "https://hfs.lrcssd.ca/o/hfs",
+      "authority": "The Lakeland Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "2411",
+      "name": "Richard F Staples Secondary School",
+      "city": "Westlock",
+      "phone": "(780) 349-4454",
+      "website": "http://www.rfstaples.ca",
+      "authority": "The Pembina Hills School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2471",
+      "name": "St. Mary Catholic School",
+      "city": "Westlock",
+      "phone": "(780) 349-3644",
+      "website": "http://www.smschool.ca",
+      "authority": "The Evergreen Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3170",
+      "name": "Sacred Heart School",
+      "city": "Wetaskiwin",
+      "phone": "(780) 352-5533",
+      "website": "https://sh.starcatholic.ab.ca/",
+      "authority": "The St. Thomas Aquinas Roman Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "3144",
+      "name": "Wetaskiwin Composite High School",
+      "city": "Wetaskiwin",
+      "phone": "(780) 352-2295",
+      "website": "http://wetaskiwincomp.ca/",
+      "authority": "The Wetaskiwin School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2108",
+      "name": "Hilltop High School",
+      "city": "Whitecourt",
+      "phone": "(780) 778-2446",
+      "website": "http://hilltophigh.ca",
+      "authority": "The Northern Gateway School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2170",
+      "name": "École St. Joseph School",
+      "city": "Whitecourt",
+      "phone": "(780) 778-2345",
+      "website": "http://www.livingwaters.ab.ca/stjoseph",
+      "authority": "The Living Waters Catholic Separate School Division",
+      "authority_type": "Separate"
+    },
+    {
+      "code": "1407",
+      "name": "Worsley Central School",
+      "city": "Worsley",
+      "phone": "(780) 685-3842",
+      "website": "http://www.worsleycentralschool.ca",
+      "authority": "The Peace River School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "5827",
+      "name": "Youngstown School",
+      "city": "Youngstown",
+      "phone": "(403) 779-3822",
+      "website": "http://youngstown.plrd.ab.ca/",
+      "authority": "The Prairie Land School Division",
+      "authority_type": "Public"
+    },
+    {
+      "code": "2421",
+      "name": "Peace Christian Academy",
+      "city": "grimshaw",
+      "phone": "(780) 625-5423",
+      "website": null,
+      "authority": "Lakeland Christian School Society",
+      "authority_type": "Private School"
+    }
+  ],
+  "contact_note": "Contact emails were removed from this file on 2026-08-22 and are not redistributed. These records are published under CC BY-SA, and a licence inviting commercial reuse should not hand anyone a mailing list of named educators. Outreach contacts live in the gitignored CSVs in outreach/."
+}

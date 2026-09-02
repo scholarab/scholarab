@@ -1,0 +1,66 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
+
+const guide = getGuide('medical-experience-high-school-alberta');
+---
+
+<SabGuide guide={guide}>
+  <p>
+    Almost every Alberta student who wants medicine asks the same question, and almost always means the same thing by it: how do I shadow a doctor. The honest answer is that shadowing is the hardest thing on this list to arrange and the least likely to happen, and it is not what the routes in this province are built around. What exists instead is a hospital volunteer program that opens at 15, a one-day event on a medical campus that your school signs you up for, and a set of competitions you can enter from your own classroom. All three are real, all three are free, and none of them require knowing somebody.
+  </p>
+
+  <h2>The one that puts you inside a hospital</h2>
+  <p>
+    <a href="/programs/ahs-youth-volunteer-research-programs/">Alberta Health Services youth volunteering</a> is the only route on this page that puts you in a clinical building on a regular schedule. You have to be 15, you apply through your local facility rather than through a provincial form, and placements run a semester or a year. Placements exist in the South Zone as well as the cities, which matters: students in Lethbridge and Medicine Hat are usually told the good opportunities are all in Edmonton and Calgary, and for this one that is not true.
+  </p>
+  <p>
+    Apply early and apply to your nearest site. Intake is ongoing rather than deadline-driven, so the constraint is how many placements that facility has, not what date it is.
+  </p>
+
+  <h2>A day on a medical campus</h2>
+  <p>
+    <a href="/programs/cmhf-discovery-days-in-health-sciences/">Discovery Days in Health Sciences</a>, run by the Canadian Medical Hall of Fame, is a single day of hands-on health-science workshops and career panels with practising clinicians, held at the University of Alberta and the University of Calgary. Your school registers, roughly six weeks ahead, which is the part that decides whether you go. If nobody at your school has heard of it, that is the conversation to have in September rather than the week the event is announced.
+  </p>
+
+  <h2>The competitions you can enter without leaving your school</h2>
+  <p>
+    These are the closest thing to a credential a high school student can earn in health sciences, and all three are decided on what you know rather than on who has room for you.
+  </p>
+  <ul>
+    <li>
+      <strong><a href="/programs/hosa-canada-future-health-professionals/">HOSA Canada</a></strong> is the largest of them: about thirty events, from medical terminology to veterinary science to medical law, with the top three in each earning a place at the International Leadership Conference. It runs through school chapters, so if your school does not have one, starting it takes five registered students, a student president and a teacher advisor. The 2027 Student Leadership Conference is in Toronto, March 1–3, and registration closes January 21, 2027.
+    </li>
+    <li>
+      <strong><a href="/programs/calgaryedmonton-brain-bee/">The Brain Bee</a></strong> holds regional neuroscience competitions in both Calgary and Edmonton. Winners advance to the national round, where the questions move from recall to analysing brain tissue and patient diagnoses, and the top finishers represent Canada internationally. It is one day, and the preparation is self-directed.
+    </li>
+    <li>
+      <strong><a href="/programs/canadian-biology-olympiad-cbo/">The Canadian Biology Olympiad</a></strong> is written online in early April, is aimed at Grades 11 and 12, and leads to a training camp at UBC Okanagan for those selected. It is the qualifying route toward Canada's International Biology Olympiad team, and it is self-study, which means it is available to you whatever your school offers.
+    </li>
+  </ul>
+
+  <h2>The paid research route, and why it is a different article</h2>
+  <p>
+    Alberta's paid health research placements (the <a href="/programs/alberta-innovates-hyrs-university-of-alberta/">HYRS program</a> and the campuses that run it) take Grade 11 students with at least 85% in Math 20, Biology 20 and one more science, and which campus you apply to is decided by where you live rather than by preference. That is enough of a rule set to need its own page, so it has one: <a href="/guides/high-school-research-programs-alberta/">research programs for Alberta students</a> covers the geography rule, the marks, and the March deadlines.
+  </p>
+  <p>
+    Worth knowing while you are in Grade 10: HYRS is a Grade 11 program, and the science courses it requires have to already be on your timetable by then. That is the single most common way students remove themselves from it without noticing.
+  </p>
+
+  <h2>Be careful with the ones you pay for</h2>
+  <p>
+    There is a market in summer medical programs that charge tuition, and some of them are excellent. <a href="/programs/medicine-youth-summer-program-med-ysp-uoft/">Med YSP at the University of Toronto</a> runs week-long modules in human physiology and microbiology with real labs, and it costs about $1,700 per module, and the university has postponed it to Summer 2027, which is exactly the kind of detail that is easy to miss when you are planning a year ahead.
+  </p>
+  <p>
+    The distinction that matters is not price, it is what the program can honestly claim. A paid course teaches you material. A volunteer placement or a research assistantship puts you somewhere that a person can later write a letter about. Both are worth doing; only one of them is scarce, and it is the free one.
+  </p>
+
+  <h2>What to do this month</h2>
+  <p>
+    If you are 15 or older, the AHS application is the thing to start today, because it is the only one whose timing depends on you rather than on a calendar. Then ask a science teacher two questions: whether the school has ever registered for Discovery Days, and whether anyone has looked at starting a HOSA chapter. Both questions are cheap and both have historically been answered with "nobody asked".
+  </p>
+  <p>
+    The full list, with what each one takes and who runs it, is on the <a href="/programs/health/">health and medicine programs page</a>. Awards that reward this kind of work sit in our <a href="/scholarships/stem/">STEM scholarships</a> list, and the <a href="/match/">match quiz</a> takes {QUIZ_DURATION} and will narrow both lists to what your grade and region actually qualify you for.
+  </p>
+</SabGuide>

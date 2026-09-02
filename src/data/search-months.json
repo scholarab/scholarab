@@ -1,0 +1,47 @@
+{
+  "generated": "2026-09-01",
+  "months": [
+    {
+      "month": "2026-03",
+      "clicks": 14,
+      "impressions": 70,
+      "position": 3.5,
+      "days": 10
+    },
+    {
+      "month": "2026-04",
+      "clicks": 26,
+      "impressions": 622,
+      "position": 6.3,
+      "days": 30
+    },
+    {
+      "month": "2026-05",
+      "clicks": 63,
+      "impressions": 1952,
+      "position": 11.4,
+      "days": 31
+    },
+    {
+      "month": "2026-06",
+      "clicks": 91,
+      "impressions": 2673,
+      "position": 12.1,
+      "days": 30
+    },
+    {
+      "month": "2026-07",
+      "clicks": 144,
+      "impressions": 6809,
+      "position": 12.1,
+      "days": 31
+    },
+    {
+      "month": "2026-08",
+      "clicks": 204,
+      "impressions": 14120,
+      "position": 10.6,
+      "days": 30
+    }
+  ]
+}

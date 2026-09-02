@@ -1,0 +1,164 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogUrl?: string;
+  canonical?: string;
+  robots?: string;
+  /** Absolute URL of a page-specific OG image; falls back to the site-wide one. */
+  ogImage?: string;
+  /** og:type; 'article' for the guides, 'website' everywhere else. */
+  ogType?: string;
+}
+
+const {
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  ogUrl,
+  canonical,
+  robots,
+  ogImage = 'https://www.scholarab.ca/og-image.png',
+  ogType = 'website',
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light" />
+    <meta name="google-site-verification" content="nhpc-sXNyJgfEMBonhftRYTiJpQMP0NDTVRDsIy2Yk4" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={ogTitle ?? title} />
+    <meta property="og:description" content={ogDescription ?? description} />
+    <meta property="og:type" content={ogType} />
+    {ogUrl && <meta property="og:url" content={ogUrl} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="ScholarAB" />
+    <meta property="og:locale" content="en_CA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle ?? title} />
+    <meta name="twitter:description" content={ogDescription ?? description} />
+    <meta name="twitter:image" content={ogImage} />
+    {robots && <meta name="robots" content={robots} />}
+    <link rel="canonical" href={canonical ?? ogUrl ?? Astro.url.href} />
+    {/* Listing data is CC BY-SA 4.0; see /DATA-LICENSE.md in the repo. */}
+    <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="icon" type="image/x-icon" sizes="48x48" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#2FD3A0" />
+    <!-- No Inter preloads here. Inter is the admin panel's font, and the admin
+         pages build their own <head> rather than using this layout, so these
+         preloaded four unused weights on every public page (500/600/700/800
+         report `unloaded` in document.fonts) and spent a fetchpriority="high"
+         slot racing the Instrument Serif and Archivo faces that actually
+         render. Public pages preload their real faces via SabFonts. -->
+    <ClientRouter />
+    <slot name="head" />
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "bda47a2a06b543d7be56420c5efb42ff"}'></script>
+  </head>
+  <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-9999 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#141915;color:#FAF7F0;">Skip to content</a>
+    {/*
+      The site header renders here, OUTSIDE <main>. It used to render inside
+      it, which meant the page had no banner landmark to offer; a <header>
+      nested in <main> is a plain group, not a banner, and "Skip to content"
+      could not point at #main-content, because that landed the reader above
+      the nav they were trying to skip. Hence the skip-target span this
+      replaces. Named slot rather than a component so each page keeps control
+      of its own header band and background.
+    */}
+    <slot name="header" />
+    {/* tabindex so the skip link can actually move focus here, not just scroll. */}
+    <main id="main-content" class="w-full flex-1" tabindex="-1">
+      <slot />
+    </main>
+    <slot name="footer" />
+    <script>
+      import { syncTrackingOptOut, recordSourceVisit } from '../lib/events.ts';
+
+      // `?nt=1` flags this browser as untracked (`?nt=0` undoes it). sendEvent
+      // checks the URL too, but only pages that fire an event would ever reach
+      // that; running it here means the link works from any page on the site.
+      document.addEventListener('astro:page-load', syncTrackingOptOut);
+      syncTrackingOptOut();
+
+      // `?s=ig` etc. records which campaign link the visit came from. Here for
+      // the same reason: a bio link can point at any page on the site.
+      document.addEventListener('astro:page-load', recordSourceVisit);
+      recordSourceVisit();
+
+      // Radix/Vaul sets body pointer-events:'none' when a modal/drawer is open.
+      // If navigation happens before cleanup, the body stays blocked. Reset it on every swap.
+      document.addEventListener('astro:before-swap', () => {
+        document.body.style.pointerEvents = '';
+      });
+
+      // Service worker registration
+      document.addEventListener('astro:page-load', () => {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js');
+        }
+      }, { once: true });
+
+      // ── Scroll position restore (listing pages only) ────────
+      // Compared against the normalized path: every internal link points at the
+      // trailing-slash URL and production 308s the bare form, so
+      // location.pathname on the directories is '/scholarships/', and a bare
+      // '/scholarships' in this list matched nothing; restore had been dead
+      // since the links were switched over.
+      const SCROLL_PAGES = ['/scholarships/', '/programs/'];
+      const normPath = (p: string) => (p.endsWith('/') ? p : p + '/');
+
+      let scrollSaveTimer: ReturnType<typeof setTimeout> | null = null;
+      window.addEventListener('scroll', () => {
+        if (scrollSaveTimer) return;
+        scrollSaveTimer = setTimeout(() => {
+          scrollSaveTimer = null;
+          const path = normPath(window.location.pathname);
+          if (SCROLL_PAGES.includes(path)) {
+            try {
+              sessionStorage.setItem('scrollRestore', JSON.stringify({ path, y: window.scrollY }));
+            } catch { /* ignore */ }
+          }
+        }, 100);
+      }, { passive: true });
+
+      document.addEventListener('astro:page-load', () => {
+        try {
+          const raw = sessionStorage.getItem('scrollRestore');
+          if (!raw) return;
+          const { path, y } = JSON.parse(raw) as { path: string; y: number };
+          if (path === normPath(window.location.pathname) && y > 0) {
+            requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' }));
+          }
+        } catch { /* ignore */ }
+      });
+
+    </script>
+
+    <style is:global>
+      /* Every page under this layout is the fixed editorial palette, so the
+         canvas is pinned here rather than left to global.css's themeable
+         `html { background: var(--bg-page) }`. Pages already pin `body` via
+         `body:has(#sab-*)`; `html` is what shows through on overscroll.
+         global.css keeps its token rule for /admin, which does not use this
+         layout. */
+      html { background-color: #FAF7F0; }
+    </style>
+  </body>
+</html>

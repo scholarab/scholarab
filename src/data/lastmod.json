@@ -1,0 +1,1854 @@
+{
+  "/about/": {
+    "hash": "7e421bd865f7de25",
+    "date": "2026-09-01"
+  },
+  "/privacy/": {
+    "hash": "bdf99b616739bc22",
+    "date": "2026-08-23"
+  },
+  "/programs/4-h-alberta-senior-program/": {
+    "hash": "a1c87ff7cf923a98",
+    "date": "2026-08-31"
+  },
+  "/programs/aapt-physicsbowl/": {
+    "hash": "b095d88cb6bbd6cf",
+    "date": "2026-08-31"
+  },
+  "/programs/agriculture-in-the-classroom-canada-aitc/": {
+    "hash": "8f330ec6d4645f2d",
+    "date": "2026-09-01"
+  },
+  "/programs/ahs-youth-volunteer-research-programs/": {
+    "hash": "f5f223428fa94e03",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-computers-for-schools-cfs-internship/": {
+    "hash": "e60dad0eb5bc7617",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-debate-and-speech-association-tournaments/": {
+    "hash": "1e65a93a4ce7f367",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-high-school-mathematics-competition-ahsmc/": {
+    "hash": "a95f074b0870b4e8",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-innovates-hyrs-university-of-alberta/": {
+    "hash": "df2c228846453c97",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-innovates-hyrs-university-of-calgary/": {
+    "hash": "6baaa6efec1c8cb8",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-innovates-hyrs-university-of-lethbridge/": {
+    "hash": "4ace410db6f48b0a",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-junior-forest-rangers-jfr/": {
+    "hash": "5880fff8d0e3d42b",
+    "date": "2026-09-01"
+  },
+  "/programs/alberta-student-leadership-conference-aslc/": {
+    "hash": "cb337813c71d46d4",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-university-of-the-arts-pre-college-programs/": {
+    "hash": "3680e43e9e897d77",
+    "date": "2026-08-31"
+  },
+  "/programs/alberta-youth-parliament-tuxis-parliament-of-alberta/": {
+    "hash": "a11486d5c67681fc",
+    "date": "2026-08-31"
+  },
+  "/programs/amc-10-and-amc-12-american-mathematics-competitions/": {
+    "hash": "a96f28d1112e34f4",
+    "date": "2026-09-01"
+  },
+  "/programs/amii-k-12-ai-literacy/": {
+    "hash": "6224b1c0f8783c2f",
+    "date": "2026-08-31"
+  },
+  "/programs/apega-science-olympics/": {
+    "hash": "4abf988e0110e27b",
+    "date": "2026-08-31"
+  },
+  "/programs/apple-swift-student-challenge/": {
+    "hash": "92395b61773f5148",
+    "date": "2026-08-31"
+  },
+  "/programs/bioengineering-summer-institute-university-of-calgary/": {
+    "hash": "1c3818ea79f0c9e3",
+    "date": "2026-08-31"
+  },
+  "/programs/blueprint-university-of-toronto/": {
+    "hash": "e5516084a931bd95",
+    "date": "2026-08-31"
+  },
+  "/programs/breakthrough-junior-challenge/": {
+    "hash": "74655c633c72d3f8",
+    "date": "2026-08-31"
+  },
+  "/programs/calgaryedmonton-brain-bee/": {
+    "hash": "97fc9cb29234bbab",
+    "date": "2026-08-31"
+  },
+  "/programs/canada-wide-science-fair-cwsf/": {
+    "hash": "fd9d74ab649d65c4",
+    "date": "2026-08-31"
+  },
+  "/programs/canadian-biology-olympiad-cbo/": {
+    "hash": "f79d84c200f8174d",
+    "date": "2026-08-31"
+  },
+  "/programs/canadian-chemistry-olympiad-cco/": {
+    "hash": "e72a23fea4297d87",
+    "date": "2026-08-31"
+  },
+  "/programs/canadian-computing-competition-ccc/": {
+    "hash": "ed31451e21158ffd",
+    "date": "2026-08-31"
+  },
+  "/programs/canadian-geographic-challenge/": {
+    "hash": "e9297b1b96c0a252",
+    "date": "2026-08-31"
+  },
+  "/programs/canadian-open-mathematics-challenge-comc/": {
+    "hash": "4568fa8493858b9b",
+    "date": "2026-08-31"
+  },
+  "/programs/canadian-physics-olympiad-cpho/": {
+    "hash": "7d11b5eaed93d75b",
+    "date": "2026-08-31"
+  },
+  "/programs/canadian-sport-institute-calgary-youth-seminars/": {
+    "hash": "a088191695ade727",
+    "date": "2026-08-31"
+  },
+  "/programs/cap-high-school-prize-exam/": {
+    "hash": "e23d2b990c80392e",
+    "date": "2026-08-31"
+  },
+  "/programs/careers-the-next-generation-high-school-internships/": {
+    "hash": "62e237d21f5c1d09",
+    "date": "2026-09-01"
+  },
+  "/programs/caring-for-our-watersheds-alberta/": {
+    "hash": "6ec094e17ce3020c",
+    "date": "2026-09-01"
+  },
+  "/programs/cern-beamline-for-schools-bl4s/": {
+    "hash": "f6ed8d493c103a2a",
+    "date": "2026-08-31"
+  },
+  "/programs/cisco-networking-academy-high-school-stream/": {
+    "hash": "f62b5dfe62f9225f",
+    "date": "2026-08-31"
+  },
+  "/programs/city-of-edmonton-youth-council/": {
+    "hash": "973869cb8c4fffc8",
+    "date": "2026-08-31"
+  },
+  "/programs/cmhf-discovery-days-in-health-sciences/": {
+    "hash": "e76dee08e6f0688f",
+    "date": "2026-08-31"
+  },
+  "/programs/conrad-challenge/": {
+    "hash": "703d6a229f6d1d85",
+    "date": "2026-08-31"
+  },
+  "/programs/cybersci-cyber-security-challenge-canada-high-school/": {
+    "hash": "6ff77a84c16bdf3f",
+    "date": "2026-08-31"
+  },
+  "/programs/cybertitan-national-cybersecurity-competition/": {
+    "hash": "7b1756f539426eb2",
+    "date": "2026-08-31"
+  },
+  "/programs/deep-summer-academy-university-of-toronto/": {
+    "hash": "3473f96f122f7eda",
+    "date": "2026-08-31"
+  },
+  "/programs/destination-exploration-university-of-lethbridge/": {
+    "hash": "5a7f2fd05435cb23",
+    "date": "2026-08-31"
+  },
+  "/programs/dual-credit-medicine-hat-public-school-division/": {
+    "hash": "fc096a33ab980e60",
+    "date": "2026-08-31"
+  },
+  "/programs/elite-program-for-black-youth/": {
+    "hash": "bea264b0e66b624f",
+    "date": "2026-08-31"
+  },
+  "/programs/euclid-mathematics-contest/": {
+    "hash": "36553f1637e9cab5",
+    "date": "2026-08-31"
+  },
+  "/programs/explore-french-immersion-bursary/": {
+    "hash": "9739ca73f393312a",
+    "date": "2026-08-31"
+  },
+  "/programs/fem-engineering-mentorship-program/": {
+    "hash": "64d485595615c392",
+    "date": "2026-09-01"
+  },
+  "/programs/first-robotics-competition-frc-canadian-rockies-region/": {
+    "hash": "ee4d90681747ac3f",
+    "date": "2026-08-31"
+  },
+  "/programs/first-tech-challenge-ftc-alberta/": {
+    "hash": "e931c12e5cc7549d",
+    "date": "2026-08-31"
+  },
+  "/programs/forum-for-young-canadians/": {
+    "hash": "d9aed45ef312ce4d",
+    "date": "2026-08-31"
+  },
+  "/programs/future-creators-university-of-alberta/": {
+    "hash": "9402a856cd01ce77",
+    "date": "2026-08-31"
+  },
+  "/programs/greenlearning-innovation-challenges/": {
+    "hash": "c2cd6124cc82141f",
+    "date": "2026-09-01"
+  },
+  "/programs/hack-the-north-high-school-track/": {
+    "hash": "3c2b8fa0cb78b399",
+    "date": "2026-08-31"
+  },
+  "/programs/hackergal-national-ambassador-program/": {
+    "hash": "39c637fd85ddd506",
+    "date": "2026-08-31"
+  },
+  "/programs/high-school-model-un-university-of-calgary/": {
+    "hash": "3a61e6dd1101c518",
+    "date": "2026-08-31"
+  },
+  "/programs/historica-canada-heritage-fairs-young-citizens/": {
+    "hash": "d52c5bccae72181f",
+    "date": "2026-08-31"
+  },
+  "/programs/hosa-canada-future-health-professionals/": {
+    "hash": "e3313750b3a29931",
+    "date": "2026-08-31"
+  },
+  "/programs/house-of-commons-page-program/": {
+    "hash": "af20260c72dcccbf",
+    "date": "2026-08-31"
+  },
+  "/programs/ibm-skillsbuild-for-high-school/": {
+    "hash": "e9d5d0ec02d04357",
+    "date": "2026-08-31"
+  },
+  "/programs/igem-high-school-competition/": {
+    "hash": "12ef1c24d45842f3",
+    "date": "2026-08-31"
+  },
+  "/programs/immerse-education-virtual-summer-school-research-track/": {
+    "hash": "32befd4966b40ec0",
+    "date": "2026-08-31"
+  },
+  "/programs/inside-education-youth-summits/": {
+    "hash": "202e9100037d9add",
+    "date": "2026-09-01"
+  },
+  "/programs/international-summer-school-for-young-physicists-issyp/": {
+    "hash": "afcc8ba54ee33124",
+    "date": "2026-08-31"
+  },
+  "/programs/ja-northern-alberta-company-program/": {
+    "hash": "543f9db0487faf15",
+    "date": "2026-08-31"
+  },
+  "/programs/ja-southern-alberta-company-program/": {
+    "hash": "20083de7f6bf1ccc",
+    "date": "2026-08-31"
+  },
+  "/programs/launchx-virtual-summer-program/": {
+    "hash": "66e2a20ed397eaf5",
+    "date": "2026-08-31"
+  },
+  "/programs/league-of-innovators/": {
+    "hash": "bcdf9ddeb746a3d1",
+    "date": "2026-08-31"
+  },
+  "/programs/lets-talk-science-tomatosphere/": {
+    "hash": "f1b7438ca16acd9d",
+    "date": "2026-08-31"
+  },
+  "/programs/lets-talk-science-university-chapter-symposia/": {
+    "hash": "e95be4082c1d1d07",
+    "date": "2026-08-31"
+  },
+  "/programs/macewan-university-design-summer-camp/": {
+    "hash": "ce5996c47814504b",
+    "date": "2026-08-31"
+  },
+  "/programs/medicine-hat-college-summer-stem-tech-camps/": {
+    "hash": "f446c3801bfd2ac1",
+    "date": "2026-08-31"
+  },
+  "/programs/medicine-youth-summer-program-med-ysp-uoft/": {
+    "hash": "83c1246612f29c6b",
+    "date": "2026-08-31"
+  },
+  "/programs/mindfuel-tech-futures-challenge/": {
+    "hash": "f1f6e9c193306d1c",
+    "date": "2026-08-31"
+  },
+  "/programs/nasa-international-space-apps-challenge/": {
+    "hash": "30cb639ada58e90d",
+    "date": "2026-08-31"
+  },
+  "/programs/non-trivial-fellowship/": {
+    "hash": "fd9ca80e153edc27",
+    "date": "2026-08-31"
+  },
+  "/programs/oapt-grade-11-physics-contest/": {
+    "hash": "d2bdc9684a0b4c9b",
+    "date": "2026-08-31"
+  },
+  "/programs/ocean-networks-canada-youth-advisory-council/": {
+    "hash": "600846012d453b84",
+    "date": "2026-09-01"
+  },
+  "/programs/olds-college-high-school-ag-tech-programs/": {
+    "hash": "0867e16ad4b3d97b",
+    "date": "2026-09-01"
+  },
+  "/programs/pascal-cayley-and-fermat-mathematics-contests/": {
+    "hash": "74395d94b4492325",
+    "date": "2026-09-01"
+  },
+  "/programs/pims-high-school-programs-ualberta-ucalgary/": {
+    "hash": "209769071d603ce2",
+    "date": "2026-08-31"
+  },
+  "/programs/pioneer-academics-research-program/": {
+    "hash": "0b18ed265704ab85",
+    "date": "2026-08-31"
+  },
+  "/programs/polygence-research-program/": {
+    "hash": "979f87aee8d2888d",
+    "date": "2026-08-31"
+  },
+  "/programs/quantum-school-for-young-students-qsys/": {
+    "hash": "bbf74d3add219625",
+    "date": "2026-08-31"
+  },
+  "/programs/qubit-by-qubit-high-school-quantum-computing/": {
+    "hash": "d47bd8097c513210",
+    "date": "2026-08-31"
+  },
+  "/programs/registered-apprenticeship-program-rap/": {
+    "hash": "15387e5fab871aec",
+    "date": "2026-09-01"
+  },
+  "/programs/rise-for-the-world/": {
+    "hash": "f74367c218a753f5",
+    "date": "2026-08-31"
+  },
+  "/programs/rotary-adventure-in-citizenship/": {
+    "hash": "410e0fed56589a50",
+    "date": "2026-08-31"
+  },
+  "/programs/royal-astronomical-society-of-canada-calgary-youth-group/": {
+    "hash": "db1bfaa724277e5e",
+    "date": "2026-08-31"
+  },
+  "/programs/sait-dual-credit-programs/": {
+    "hash": "0109687b1f586226",
+    "date": "2026-09-01"
+  },
+  "/programs/shad-canada/": {
+    "hash": "2a40e128363d6fe9",
+    "date": "2026-08-31"
+  },
+  "/programs/sir-isaac-newton-sin-physics-exam/": {
+    "hash": "0064cada43f9f83f",
+    "date": "2026-08-31"
+  },
+  "/programs/skills-canada-alberta-provincial-skills-competition/": {
+    "hash": "1162967dbf2df530",
+    "date": "2026-09-01"
+  },
+  "/programs/southeast-alberta-regional-science-fair-searsf/": {
+    "hash": "903f655b7505198a",
+    "date": "2026-08-31"
+  },
+  "/programs/stem-fellowship-big-data-ai-challenge/": {
+    "hash": "6ed4aae32c8f3b42",
+    "date": "2026-08-31"
+  },
+  "/programs/stem-fellowship-research-exploration-program-edmonton/": {
+    "hash": "cfb8c5ceb94ba17d",
+    "date": "2026-08-31"
+  },
+  "/programs/stem-racing-canada-f1-in-schools/": {
+    "hash": "c8f91b0da4f55f02",
+    "date": "2026-08-31"
+  },
+  "/programs/student-spaceflight-experiments-program-ssep/": {
+    "hash": "2631cfd59924ac6a",
+    "date": "2026-08-31"
+  },
+  "/programs/students-on-ice-soi-foundation-expeditions/": {
+    "hash": "eacccb2b8887d144",
+    "date": "2026-09-01"
+  },
+  "/programs/team-canada-regeneron-isef/": {
+    "hash": "e696641a06ef58c9",
+    "date": "2026-08-31"
+  },
+  "/programs/teamup-science/": {
+    "hash": "52f1302b2c14e330",
+    "date": "2026-08-31"
+  },
+  "/programs/technovation-girls-alberta/": {
+    "hash": "b2fc67d9cfa5d0a2",
+    "date": "2026-08-31"
+  },
+  "/programs/telus-spark-science-centre-volunteering-calgary/": {
+    "hash": "14b4598888f32ea7",
+    "date": "2026-08-31"
+  },
+  "/programs/the-duke-of-edinburghs-international-award/": {
+    "hash": "6199589dc7f4c2ec",
+    "date": "2026-08-31"
+  },
+  "/programs/the-junior-academy-new-york-academy-of-sciences/": {
+    "hash": "1bf821194b4b42da",
+    "date": "2026-08-31"
+  },
+  "/programs/the-knowledge-society-tks/": {
+    "hash": "d4c94467ffed556a",
+    "date": "2026-08-31"
+  },
+  "/programs/triumf-high-school-fellowship/": {
+    "hash": "42c2fe157093bf5e",
+    "date": "2026-08-31"
+  },
+  "/programs/ualberta-game-ai-bootcamps/": {
+    "hash": "4ecd9600f7f6bff5",
+    "date": "2026-08-31"
+  },
+  "/programs/ucalgary-active-living-summer-camps/": {
+    "hash": "1189f9cc99fa462b",
+    "date": "2026-08-31"
+  },
+  "/programs/vex-robotics-competition-alberta-leagues/": {
+    "hash": "ccc8e89c1b994e4b",
+    "date": "2026-08-31"
+  },
+  "/programs/vimy-pilgrimage-award/": {
+    "hash": "179e94006413d19f",
+    "date": "2026-08-31"
+  },
+  "/programs/vjkf-indigenous-science-and-engineering-program/": {
+    "hash": "58d28efac98949af",
+    "date": "2026-08-31"
+  },
+  "/programs/wild-outside-canadian-wildlife-federation/": {
+    "hash": "00da79c55e26972e",
+    "date": "2026-09-01"
+  },
+  "/programs/wisest-summer-research-program/": {
+    "hash": "830f645d60a1dd1a",
+    "date": "2026-08-31"
+  },
+  "/programs/yeti-young-entrepreneurs-training-initiative/": {
+    "hash": "6f63b98892b88afb",
+    "date": "2026-08-31"
+  },
+  "/programs/ymca-youth-exchanges-canada/": {
+    "hash": "d7096e9f171bdc04",
+    "date": "2026-08-31"
+  },
+  "/programs/youreka-canada/": {
+    "hash": "442631ea3e42f23f",
+    "date": "2026-08-31"
+  },
+  "/programs/youth-parliament-of-canada/": {
+    "hash": "02f88426f56b0d3f",
+    "date": "2026-08-31"
+  },
+  "/scholarships/4-h-canada-scholarships/": {
+    "hash": "0e6de0b2ed4e4133",
+    "date": "2026-08-07"
+  },
+  "/scholarships/a-bernard-mary-b-dixon-memorial-scholarship/": {
+    "hash": "74a6aad6e1dc412d",
+    "date": "2026-08-22"
+  },
+  "/scholarships/aaaf-memorial-bursary/": {
+    "hash": "888760bbd386bf3e",
+    "date": "2026-08-22"
+  },
+  "/scholarships/aaron-family-scholarship/": {
+    "hash": "7170e13f73a0381a",
+    "date": "2026-09-01"
+  },
+  "/scholarships/aaron-harben-vocal-music-prize/": {
+    "hash": "89361eb07b32b6ad",
+    "date": "2026-09-01"
+  },
+  "/scholarships/accomplished-angels-student-award/": {
+    "hash": "e6d4920cff8c1ddb",
+    "date": "2026-08-28"
+  },
+  "/scholarships/advancing-futures-bursary/": {
+    "hash": "c4892d8720d92712",
+    "date": "2026-08-02"
+  },
+  "/scholarships/ahsra-scholarships/": {
+    "hash": "4ce1e9ee6bcb5d13",
+    "date": "2026-08-22"
+  },
+  "/scholarships/airdrie-and-district-agricultural-society-scholarship/": {
+    "hash": "6754309cb01ed319",
+    "date": "2026-08-30"
+  },
+  "/scholarships/airdrie-rotary-festival-of-performing-arts-scholarships/": {
+    "hash": "9460979dbd7c0340",
+    "date": "2026-09-01"
+  },
+  "/scholarships/al-hamilton-scholarship-award/": {
+    "hash": "35655e53428f659e",
+    "date": "2026-08-28"
+  },
+  "/scholarships/alberta-blue-cross-50th-anniversary-bursary-for-students-with-special-needs/": {
+    "hash": "f6e02b1973fb23b6",
+    "date": "2026-08-29"
+  },
+  "/scholarships/alberta-blue-cross-50th-anniversary-entrance-bursary/": {
+    "hash": "cb1dc270cf533191",
+    "date": "2026-08-29"
+  },
+  "/scholarships/alberta-blue-cross-50th-anniversary-nursing-bursary/": {
+    "hash": "1dcb906d01b10f94",
+    "date": "2026-08-29"
+  },
+  "/scholarships/alberta-blue-cross-indigenous-scholarship/": {
+    "hash": "85e2af1a389078dd",
+    "date": "2026-08-22"
+  },
+  "/scholarships/alberta-centennial-award/": {
+    "hash": "2a1d8980ad9013ff",
+    "date": "2026-08-07"
+  },
+  "/scholarships/alberta-foundation-for-the-arts-film-and-video-arts-scholarship/": {
+    "hash": "d48846bff63bc792",
+    "date": "2026-08-02"
+  },
+  "/scholarships/alberta-foundation-for-the-arts-performing-arts-scholarship/": {
+    "hash": "9aeb411a42b2d2cf",
+    "date": "2026-08-02"
+  },
+  "/scholarships/alberta-foundation-for-the-arts-visual-arts-scholarship/": {
+    "hash": "62f78ed7141227ba",
+    "date": "2026-08-02"
+  },
+  "/scholarships/alberta-golf-association-foundation-scholarships/": {
+    "hash": "80221de752126d46",
+    "date": "2026-08-25"
+  },
+  "/scholarships/alberta-indigenous-careers-award/": {
+    "hash": "4fca96ce6899cf39",
+    "date": "2026-09-01"
+  },
+  "/scholarships/alberta-junior-athletic-award/": {
+    "hash": "90424b69d462a78c",
+    "date": "2026-08-02"
+  },
+  "/scholarships/alberta-masonic-higher-education-bursary/": {
+    "hash": "53e4ff4d7193d75c",
+    "date": "2026-08-22"
+  },
+  "/scholarships/alberta-moose-association-youth-awareness-scholarship/": {
+    "hash": "f4a2b0d882a827c7",
+    "date": "2026-08-02"
+  },
+  "/scholarships/alex-tutschek-fcpa-fca-award-for-indigenous-student-high-school-achievement/": {
+    "hash": "70b39277895fb750",
+    "date": "2026-08-02"
+  },
+  "/scholarships/alexander-rutherford-scholarship/": {
+    "hash": "f86715807445fd7d",
+    "date": "2026-09-01"
+  },
+  "/scholarships/alexandra-m-munn-scholarships-and-john-andrea-wallin-awards/": {
+    "hash": "b52251dafd13fa81",
+    "date": "2026-08-28"
+  },
+  "/scholarships/andrew-hyslop-and-barbara-zinter-award-for-lifeguarding/": {
+    "hash": "be5498a5af37711e",
+    "date": "2026-08-28"
+  },
+  "/scholarships/anna-john-kolesar-memorial-scholarship/": {
+    "hash": "0376be68e7788ce1",
+    "date": "2026-08-02"
+  },
+  "/scholarships/anne-beaty-memorial-scholarship/": {
+    "hash": "1aa349b4149c9bd1",
+    "date": "2026-08-30"
+  },
+  "/scholarships/archie-macphail-memorial-scholarship/": {
+    "hash": "5c75b5c62ae23c69",
+    "date": "2026-08-29"
+  },
+  "/scholarships/arrata-family-award-for-new-canadians/": {
+    "hash": "26aa4bc585fafb58",
+    "date": "2026-08-28"
+  },
+  "/scholarships/asaa-alberta-milk-scholarship/": {
+    "hash": "854bea441204f543",
+    "date": "2026-08-02"
+  },
+  "/scholarships/asaa-pay-it-forward-scholarship/": {
+    "hash": "c33d6a7644e1f569",
+    "date": "2026-08-02"
+  },
+  "/scholarships/aspiring-artist-award/": {
+    "hash": "9597556a6df33385",
+    "date": "2026-08-29"
+  },
+  "/scholarships/ata-local-21-scholarship/": {
+    "hash": "2af7c308fd7e5617",
+    "date": "2026-08-28"
+  },
+  "/scholarships/atb-financial-bursary/": {
+    "hash": "30fc603320c4fa9a",
+    "date": "2026-08-02"
+  },
+  "/scholarships/atco-indigenous-education-high-school-merit-award/": {
+    "hash": "d2cff34549dd2ed2",
+    "date": "2026-08-02"
+  },
+  "/scholarships/aufricht-family-fund-student-award/": {
+    "hash": "7cc406706761fed3",
+    "date": "2026-08-29"
+  },
+  "/scholarships/bare-wire-recycling-inc-student-award/": {
+    "hash": "16c3efb6c06e3fb3",
+    "date": "2026-09-01"
+  },
+  "/scholarships/bates-wardle-award-for-lifeguards/": {
+    "hash": "b238ed49c3319708",
+    "date": "2026-08-29"
+  },
+  "/scholarships/bayer-fund-opportunity-scholarship/": {
+    "hash": "7622e142631a173f",
+    "date": "2026-08-02"
+  },
+  "/scholarships/belcourt-brosseau-metis-awards/": {
+    "hash": "ee7d62d78519eee0",
+    "date": "2026-08-02"
+  },
+  "/scholarships/ben-sauve-artstrek-bursary/": {
+    "hash": "6c84e020d2ff91f3",
+    "date": "2026-08-28"
+  },
+  "/scholarships/benjamin-ben-albert-award/": {
+    "hash": "37439c06c0237773",
+    "date": "2026-09-01"
+  },
+  "/scholarships/bennett-jones-scholarship/": {
+    "hash": "0464428ae7414197",
+    "date": "2026-08-28"
+  },
+  "/scholarships/beta-sigma-phi-scholarship/": {
+    "hash": "93a7c9907ed24b79",
+    "date": "2026-08-28"
+  },
+  "/scholarships/bette-joan-rac-piano-scholarship/": {
+    "hash": "ff9544cbcf60cb9e",
+    "date": "2026-08-25"
+  },
+  "/scholarships/betty-finch-scholarship/": {
+    "hash": "6d332a18afc97bdf",
+    "date": "2026-08-28"
+  },
+  "/scholarships/beyond-the-north-scholarship/": {
+    "hash": "f1afb5313279fe12",
+    "date": "2026-08-29"
+  },
+  "/scholarships/big-brothers-big-sisters-society-of-calgary-and-area-scholarship/": {
+    "hash": "be03f84ddf9cbfa8",
+    "date": "2026-08-28"
+  },
+  "/scholarships/bilanes-martinez-memorial-scholarship/": {
+    "hash": "1747dd0dcd139230",
+    "date": "2026-08-28"
+  },
+  "/scholarships/bill-gibson-bursary/": {
+    "hash": "7235631d04a7f596",
+    "date": "2026-08-29"
+  },
+  "/scholarships/bob-neufeld-scholarship/": {
+    "hash": "2c2af40df3905db6",
+    "date": "2026-08-30"
+  },
+  "/scholarships/bradley-hillmo-anderson-memorial-award/": {
+    "hash": "a5116d4c22c284db",
+    "date": "2026-08-29"
+  },
+  "/scholarships/brady-van-der-heide-citizenship-award/": {
+    "hash": "4da594f23b1fbd7b",
+    "date": "2026-08-29"
+  },
+  "/scholarships/breakthrough-opportunity-bursary-for-new-immigrants/": {
+    "hash": "4f96c60a56874b9d",
+    "date": "2026-09-01"
+  },
+  "/scholarships/bree-eriksen-memorial-dance-award/": {
+    "hash": "e5bae23c7d1c959d",
+    "date": "2026-08-28"
+  },
+  "/scholarships/brookes-college-award/": {
+    "hash": "c7e2abe5a12548d8",
+    "date": "2026-08-28"
+  },
+  "/scholarships/bruce-leitl-composition-award/": {
+    "hash": "19a268dfb694ed98",
+    "date": "2026-08-28"
+  },
+  "/scholarships/calgarians-improving-society-award/": {
+    "hash": "a86c56079509cdb2",
+    "date": "2026-08-28"
+  },
+  "/scholarships/calgary-black-chambers-business-scholarship/": {
+    "hash": "1de3905e0cd47615",
+    "date": "2026-08-30"
+  },
+  "/scholarships/calgary-black-chambers-legacy-entrance-scholarship/": {
+    "hash": "76fae9bf438e8d78",
+    "date": "2026-08-31"
+  },
+  "/scholarships/calgary-black-chambers-legacy-scholarship/": {
+    "hash": "310cd899f059b5e4",
+    "date": "2026-08-30"
+  },
+  "/scholarships/calgary-catholic-school-district-kerry-dyte-educational-scholarship/": {
+    "hash": "b6b5323d19f77e82",
+    "date": "2026-08-29"
+  },
+  "/scholarships/calgary-flames-foundation-community-involvement-scholarship/": {
+    "hash": "6c05597f7f82e930",
+    "date": "2026-08-28"
+  },
+  "/scholarships/calgary-stampede-grade-12-western-art-scholarship/": {
+    "hash": "f5ea9b91d5c990bc",
+    "date": "2026-08-02"
+  },
+  "/scholarships/canadas-luckiest-student/": {
+    "hash": "dd227394a6e0e157",
+    "date": "2026-08-25"
+  },
+  "/scholarships/canadian-forces-family-scholarship/": {
+    "hash": "5c63d6dbf2a6c3e8",
+    "date": "2026-08-28"
+  },
+  "/scholarships/canadian-natural-resources-scholarship/": {
+    "hash": "82dbb56b8f8b91e6",
+    "date": "2026-08-22"
+  },
+  "/scholarships/carol-lee-bellam-legacy-award/": {
+    "hash": "fc6b8960042012c3",
+    "date": "2026-08-28"
+  },
+  "/scholarships/carolyn-baxter-memorial-award/": {
+    "hash": "d61e57f892cc9dad",
+    "date": "2026-08-28"
+  },
+  "/scholarships/catherine-and-robert-povaschuk-scholarship/": {
+    "hash": "ac3d8e7351b43800",
+    "date": "2026-08-02"
+  },
+  "/scholarships/cbe-staff-association-scholarship-award/": {
+    "hash": "3d743f5e72fa96c5",
+    "date": "2026-08-28"
+  },
+  "/scholarships/ceea-indigenous-award/": {
+    "hash": "3c143966bf0c9615",
+    "date": "2026-08-29"
+  },
+  "/scholarships/cenovus-energy-indigenous-scholarship/": {
+    "hash": "4a76e3c1668a4c16",
+    "date": "2026-08-07"
+  },
+  "/scholarships/central-alberta-co-op-scholarship/": {
+    "hash": "801e83c1400310dc",
+    "date": "2026-08-29"
+  },
+  "/scholarships/charmaine-letourneau-scholarship/": {
+    "hash": "c8d1be62ad4e807b",
+    "date": "2026-08-20"
+  },
+  "/scholarships/chief-ronald-w-clarke-fund-student-award/": {
+    "hash": "02312d881712fa13",
+    "date": "2026-08-30"
+  },
+  "/scholarships/china-alberta-award-for-excellence-in-chinese/": {
+    "hash": "6ccdd1ec28e25d53",
+    "date": "2026-08-02"
+  },
+  "/scholarships/chris-mcmechan-memorial-award-in-science-and-outdoor-pursuits/": {
+    "hash": "77e1a69539417a18",
+    "date": "2026-09-01"
+  },
+  "/scholarships/chuck-love-memorial-scholarship/": {
+    "hash": "7071cd00e245fbb9",
+    "date": "2026-08-29"
+  },
+  "/scholarships/city-of-calgary-degree-granting-scholarship/": {
+    "hash": "d5333369290b439c",
+    "date": "2026-08-28"
+  },
+  "/scholarships/city-of-calgary-post-secondary-scholarship/": {
+    "hash": "50e33a9c1633de0b",
+    "date": "2026-08-28"
+  },
+  "/scholarships/claire-mccormick-poppitt-award/": {
+    "hash": "042480aba256c972",
+    "date": "2026-08-28"
+  },
+  "/scholarships/clay-riddell-community-hero-scholarship/": {
+    "hash": "f4a358ff4b1f9acc",
+    "date": "2026-08-29"
+  },
+  "/scholarships/colin-mckenna-memorial-scholarship/": {
+    "hash": "361cb1e6df8f0619",
+    "date": "2026-08-30"
+  },
+  "/scholarships/communication-contest-for-the-deaf-and-hard-of-hearing/": {
+    "hash": "17a958e4bf101eab",
+    "date": "2026-08-26"
+  },
+  "/scholarships/cpa-alberta-young-emerging-professional-award/": {
+    "hash": "2da4943ce143d3f5",
+    "date": "2026-08-02"
+  },
+  "/scholarships/cypress-county-agricultural-service-board-bursary/": {
+    "hash": "9c309f4af7bc405f",
+    "date": "2026-08-29"
+  },
+  "/scholarships/cypress-county-scholarship/": {
+    "hash": "89f333673acb719c",
+    "date": "2026-08-29"
+  },
+  "/scholarships/daughters-of-wisdom-social-justice-award/": {
+    "hash": "9775c52ae3c936fb",
+    "date": "2026-08-29"
+  },
+  "/scholarships/david-bentley-fcpa-fca-and-janet-bentley-high-school-excellence-award/": {
+    "hash": "7adc8182a8db6447",
+    "date": "2026-08-02"
+  },
+  "/scholarships/david-e-mitchell-award/": {
+    "hash": "fc8af101111071c0",
+    "date": "2026-08-28"
+  },
+  "/scholarships/david-james-anderson-memorial-award/": {
+    "hash": "569494781d799acb",
+    "date": "2026-08-28"
+  },
+  "/scholarships/david-jon-thomson-scholarship/": {
+    "hash": "4ad3c0c444dfa38f",
+    "date": "2026-08-29"
+  },
+  "/scholarships/dhh-program-potential-award/": {
+    "hash": "59823494168a2723",
+    "date": "2026-08-28"
+  },
+  "/scholarships/don-and-norine-lowry-awards-for-women-of-excellence/": {
+    "hash": "8ef91cd24a33cfaf",
+    "date": "2026-08-28"
+  },
+  "/scholarships/dr-ernest-and-minnie-mehl-scholarship/": {
+    "hash": "0dc292cb62feed6e",
+    "date": "2026-08-22"
+  },
+  "/scholarships/dr-macewan-literary-arts-scholarship/": {
+    "hash": "9d97aa2e50c11d07",
+    "date": "2026-08-02"
+  },
+  "/scholarships/drs-harry-martha-cohen-promising-student-prize/": {
+    "hash": "75f5f0db83aa905c",
+    "date": "2026-09-01"
+  },
+  "/scholarships/durkie-arts-award/": {
+    "hash": "85cf693468deecf1",
+    "date": "2026-09-01"
+  },
+  "/scholarships/dustin-peers-memorial-visual-arts-award/": {
+    "hash": "9c3d18538961ca8c",
+    "date": "2026-08-28"
+  },
+  "/scholarships/e-george-brigden-memorial-science-scholarship/": {
+    "hash": "e3715639f6d91698",
+    "date": "2026-09-01"
+  },
+  "/scholarships/edith-berger-memorial-scholarship/": {
+    "hash": "62ac76760e7dd8d9",
+    "date": "2026-08-28"
+  },
+  "/scholarships/edmonton-catholic-teachers-local-54-scholarships/": {
+    "hash": "5a2e3c3e639b3211",
+    "date": "2026-08-28"
+  },
+  "/scholarships/edmonton-chinese-bilingual-education-association-awards/": {
+    "hash": "004126945b2ca86d",
+    "date": "2026-09-01"
+  },
+  "/scholarships/edmonton-refugee-and-emerging-communities-awards/": {
+    "hash": "02739febdb60ebde",
+    "date": "2026-08-29"
+  },
+  "/scholarships/education-foundation-servant-leader-scholarship/": {
+    "hash": "a8f884c6840fd8bb",
+    "date": "2026-08-29"
+  },
+  "/scholarships/educationmatters-career-pathways-student-award/": {
+    "hash": "07b6d6f9ba0b5398",
+    "date": "2026-09-01"
+  },
+  "/scholarships/educationmatters-future-leaders-award/": {
+    "hash": "b76b1c0dde610fdc",
+    "date": "2026-08-28"
+  },
+  "/scholarships/eimer-scholarship-fund-award-for-health-care/": {
+    "hash": "9343d6c8a705189d",
+    "date": "2026-08-28"
+  },
+  "/scholarships/electronic-recycling-association-scholarship/": {
+    "hash": "96d0aa6ae6d7e33d",
+    "date": "2026-09-01"
+  },
+  "/scholarships/elmer-and-ona-hansen-memorial-fund/": {
+    "hash": "4d0c6a8ecf2a74ff",
+    "date": "2026-08-22"
+  },
+  "/scholarships/elsie-alexander-essay-scholarship/": {
+    "hash": "69d54481faf2eb10",
+    "date": "2026-08-29"
+  },
+  "/scholarships/elsie-alexander-work-and-volunteer-scholarship/": {
+    "hash": "ecaa8aa98fb64212",
+    "date": "2026-08-29"
+  },
+  "/scholarships/emmalee-cherweniuk-award/": {
+    "hash": "5b6379d2f04c301d",
+    "date": "2026-08-28"
+  },
+  "/scholarships/empowered-young-woman-award/": {
+    "hash": "cf3d8a33e2f0e886",
+    "date": "2026-08-25"
+  },
+  "/scholarships/enmax-scholarship/": {
+    "hash": "59c3bbed58b8fc40",
+    "date": "2026-08-28"
+  },
+  "/scholarships/esther-and-peter-cunliffe-scholarship/": {
+    "hash": "4463823dd681a92e",
+    "date": "2026-08-28"
+  },
+  "/scholarships/everett-and-mitchell-code-scholarship/": {
+    "hash": "f49351e20465ea41",
+    "date": "2026-08-28"
+  },
+  "/scholarships/first-nations-metis-and-inuit-bursary/": {
+    "hash": "1664d823ca4d22fe",
+    "date": "2026-08-02"
+  },
+  "/scholarships/fluor-canada-construction-scholarship/": {
+    "hash": "ab91209a5138d05d",
+    "date": "2026-09-01"
+  },
+  "/scholarships/fluor-stem-awards/": {
+    "hash": "9d24e023d6ca4792",
+    "date": "2026-09-01"
+  },
+  "/scholarships/fogolar-furlan-di-calgary-italian-award/": {
+    "hash": "90db49a988b205be",
+    "date": "2026-08-28"
+  },
+  "/scholarships/football-alberta-scholarships/": {
+    "hash": "752d424443878493",
+    "date": "2026-08-02"
+  },
+  "/scholarships/for-four-friends-scholarship/": {
+    "hash": "4bafa61867e9b13d",
+    "date": "2026-08-29"
+  },
+  "/scholarships/ford-family-scholarship/": {
+    "hash": "ddfeab8cb6869613",
+    "date": "2026-08-29"
+  },
+  "/scholarships/forest-lawn-resiliency-scholarship/": {
+    "hash": "c49211b7d8fcf870",
+    "date": "2026-08-28"
+  },
+  "/scholarships/frank-schneider-educational-trust-fund/": {
+    "hash": "3a5ef7fa97299559",
+    "date": "2026-08-28"
+  },
+  "/scholarships/frank-whipple-memorial-bursary/": {
+    "hash": "091ac93a0efd57f1",
+    "date": "2026-08-28"
+  },
+  "/scholarships/fraser-institute-student-essay-contest/": {
+    "hash": "936a9c54371f7223",
+    "date": "2026-08-02"
+  },
+  "/scholarships/fraser-w-lockwood-memorial-scholarship/": {
+    "hash": "ebc2706b9e85818c",
+    "date": "2026-08-29"
+  },
+  "/scholarships/french-bilingual-awards/": {
+    "hash": "c29fd0f1e779d8ce",
+    "date": "2026-08-28"
+  },
+  "/scholarships/friesens-yearbook-award/": {
+    "hash": "1b1a4ad6d0437c57",
+    "date": "2026-08-28"
+  },
+  "/scholarships/garth-worthington-memorial-scholarship/": {
+    "hash": "2aa6faf8d0f287e5",
+    "date": "2026-08-28"
+  },
+  "/scholarships/george-morley-memorial-scholarship/": {
+    "hash": "8818c14c7ae68883",
+    "date": "2026-08-28"
+  },
+  "/scholarships/geraldine-macintosh-memorial-bursary/": {
+    "hash": "6177877597aa3354",
+    "date": "2026-08-28"
+  },
+  "/scholarships/gppsd-career-and-technology-studies-scholarship/": {
+    "hash": "2f022b5359e5a0de",
+    "date": "2026-08-30"
+  },
+  "/scholarships/grace-elaine-campbell-scholarship/": {
+    "hash": "b485b0b32998bd36",
+    "date": "2026-08-28"
+  },
+  "/scholarships/grace-good-fortune-bursary-for-single-mothers/": {
+    "hash": "f8b7b838cea0cf1d",
+    "date": "2026-08-29"
+  },
+  "/scholarships/grande-prairie-and-district-oldtimers-association-scholarship/": {
+    "hash": "3c6340e8029c2ecb",
+    "date": "2026-08-30"
+  },
+  "/scholarships/grande-prairie-auto-group-student-award/": {
+    "hash": "25888e85d2064a7a",
+    "date": "2026-08-30"
+  },
+  "/scholarships/grant-macewan-united-world-college-scholarship/": {
+    "hash": "6f7ff0d481883c43",
+    "date": "2026-09-01"
+  },
+  "/scholarships/green-gold-scholarships/": {
+    "hash": "010233f35441e89a",
+    "date": "2026-08-28"
+  },
+  "/scholarships/greta-marofke-siblings-affected-by-cancer-memorial-scholarship/": {
+    "hash": "6475a4c838c28f6f",
+    "date": "2026-08-28"
+  },
+  "/scholarships/hal-winlaw-health-nutrition-legacy-award/": {
+    "hash": "a09eb85d2b15e7f8",
+    "date": "2026-08-28"
+  },
+  "/scholarships/harvey-northcott-memorial-scholarship/": {
+    "hash": "c8cfb2bce7639979",
+    "date": "2026-08-02"
+  },
+  "/scholarships/haworth-heritage-business-interiors-architectureinterior-design-scholarship/": {
+    "hash": "e93790837adcaf00",
+    "date": "2026-09-01"
+  },
+  "/scholarships/health-care-professionals-of-tomorrow-scholarship/": {
+    "hash": "514293d4d6dd9d2f",
+    "date": "2026-08-29"
+  },
+  "/scholarships/hec-gervais-academic-and-curling-scholarship/": {
+    "hash": "4edc3bc4aa0180e3",
+    "date": "2026-08-07"
+  },
+  "/scholarships/high-school-apprenticeship-scholarship-bright-futures/": {
+    "hash": "005340837a8912c4",
+    "date": "2026-08-02"
+  },
+  "/scholarships/high-school-apprenticeship-scholarship/": {
+    "hash": "ec36481d654307f4",
+    "date": "2026-08-02"
+  },
+  "/scholarships/hilltop-awards-and-bursaries/": {
+    "hash": "929716a969a5d9fe",
+    "date": "2026-08-28"
+  },
+  "/scholarships/horatio-alger-association-of-canada-scholarship/": {
+    "hash": "66a0fb709d5b7bd1",
+    "date": "2026-08-25"
+  },
+  "/scholarships/hpad-student-award/": {
+    "hash": "f45fce5b7e3e80c6",
+    "date": "2026-08-28"
+  },
+  "/scholarships/hugh-robertson-science-prize/": {
+    "hash": "a32368c3e8f37dc4",
+    "date": "2026-09-01"
+  },
+  "/scholarships/indspire-building-brighter-futures-bursaries-and-scholarships/": {
+    "hash": "5e0a8fd2b8bb075b",
+    "date": "2026-08-07"
+  },
+  "/scholarships/inspiring-immigrant-award/": {
+    "hash": "6d246ca619ce5b33",
+    "date": "2026-08-28"
+  },
+  "/scholarships/integro-legacy-post-secondary-scholarships/": {
+    "hash": "073dd626b8e4e97d",
+    "date": "2026-08-28"
+  },
+  "/scholarships/international-science-olympiad-bursary/": {
+    "hash": "c945df9873127a99",
+    "date": "2026-09-01"
+  },
+  "/scholarships/investing-in-the-future-award/": {
+    "hash": "d9811e0ccdb6a089",
+    "date": "2026-08-28"
+  },
+  "/scholarships/iode-coronation-bursary/": {
+    "hash": "e2188064a0d42f1d",
+    "date": "2026-08-02"
+  },
+  "/scholarships/isabella-allen-memorial-award/": {
+    "hash": "bee5a86990095976",
+    "date": "2026-09-01"
+  },
+  "/scholarships/ivy-len-freeston-award/": {
+    "hash": "8d839940edaed44d",
+    "date": "2026-08-28"
+  },
+  "/scholarships/james-fowler-school-award/": {
+    "hash": "84995d260b9d8197",
+    "date": "2026-08-28"
+  },
+  "/scholarships/james-michael-mickey-lynch-memorial-scholarship/": {
+    "hash": "54dbbdf47f594b21",
+    "date": "2026-08-29"
+  },
+  "/scholarships/james-p-jones-scholarship/": {
+    "hash": "0354372aa57517cf",
+    "date": "2026-08-28"
+  },
+  "/scholarships/jason-fasano-spirit-award/": {
+    "hash": "36246eae21b10cab",
+    "date": "2026-08-28"
+  },
+  "/scholarships/joan-ethier-women-in-science-scholarship/": {
+    "hash": "a158d4a254987417",
+    "date": "2026-09-01"
+  },
+  "/scholarships/jobs-daughters-international-scholarship/": {
+    "hash": "c4f7a1346bd206b3",
+    "date": "2026-08-28"
+  },
+  "/scholarships/john-and-ann-scheer-memorial-award/": {
+    "hash": "2fb681e011d1cec3",
+    "date": "2026-08-29"
+  },
+  "/scholarships/john-and-vera-dunnigan-education-scholarship/": {
+    "hash": "304dc8e2b41085e1",
+    "date": "2026-08-28"
+  },
+  "/scholarships/joseph-stroh-memorial-scholarship/": {
+    "hash": "8e9ee1fb8b1229ea",
+    "date": "2026-08-29"
+  },
+  "/scholarships/julia-turnbull-leadership-award/": {
+    "hash": "36534d6d1f1cef32",
+    "date": "2026-08-29"
+  },
+  "/scholarships/juno-beach-parents-society-human-service-scholarship/": {
+    "hash": "53b3bfeffba7ee28",
+    "date": "2026-08-28"
+  },
+  "/scholarships/juno-beach-parents-society-social-studies-scholarship/": {
+    "hash": "f780c883b3dc8946",
+    "date": "2026-08-28"
+  },
+  "/scholarships/kay-krausert-award-fund/": {
+    "hash": "bae4244000b14951",
+    "date": "2026-08-28"
+  },
+  "/scholarships/keith-carswell-memorial-award/": {
+    "hash": "5e0bd74f32db07bc",
+    "date": "2026-08-28"
+  },
+  "/scholarships/keith-yu-memorial-scholarship-in-choral-music/": {
+    "hash": "a899e817f385c368",
+    "date": "2026-09-01"
+  },
+  "/scholarships/keith-yu-memorial-scholarship-in-computer-studies/": {
+    "hash": "43c1ef75c7e91b26",
+    "date": "2026-09-01"
+  },
+  "/scholarships/kelly-creaghan-stepping-up-in-the-community-award/": {
+    "hash": "ceb1cb5db4c96f1c",
+    "date": "2026-08-02"
+  },
+  "/scholarships/kermet-archibald-jacoba-van-den-brink-entrance-bursary/": {
+    "hash": "ac97dddef97e8a9d",
+    "date": "2026-09-01"
+  },
+  "/scholarships/keyera-energy-peter-j-renton-memorial-scholarship/": {
+    "hash": "86740d8aafc3b731",
+    "date": "2026-08-02"
+  },
+  "/scholarships/kids-cancer-care-derek-wandzura-memorial-scholarship/": {
+    "hash": "f3b5d130ac627e39",
+    "date": "2026-08-29"
+  },
+  "/scholarships/kids-come-first-bursary/": {
+    "hash": "c53fad0d6513dc94",
+    "date": "2026-08-28"
+  },
+  "/scholarships/kin-canada-bursary/": {
+    "hash": "c8003688ddb410fb",
+    "date": "2026-08-29"
+  },
+  "/scholarships/kinsey-verbeek-memorial-award/": {
+    "hash": "846ddf0bd141c8fc",
+    "date": "2026-08-28"
+  },
+  "/scholarships/kinsmen-club-of-calgary-foundation-scholarship/": {
+    "hash": "04b4222cbea6a441",
+    "date": "2026-08-28"
+  },
+  "/scholarships/kinsmen-club-of-edmonton-salute-to-youth-scholarship/": {
+    "hash": "bb8bb344253f5ee5",
+    "date": "2026-08-29"
+  },
+  "/scholarships/kirby-morrow-memorial-scholarship/": {
+    "hash": "f1c299fe694dd47f",
+    "date": "2026-08-29"
+  },
+  "/scholarships/ladue-ladies-lunch-scholarship/": {
+    "hash": "d86f7cded15efd45",
+    "date": "2026-08-02"
+  },
+  "/scholarships/lana-hanson-scholarship/": {
+    "hash": "0ae5eaf624cc613b",
+    "date": "2026-08-28"
+  },
+  "/scholarships/lauber-student-award/": {
+    "hash": "bf62f1a55477734e",
+    "date": "2026-09-01"
+  },
+  "/scholarships/laurie-sommerville-scholarship-award/": {
+    "hash": "7cb96c2fa62ff58a",
+    "date": "2026-08-28"
+  },
+  "/scholarships/len-t-wong-associates-scholarship/": {
+    "hash": "7f65a0e5771a886a",
+    "date": "2026-08-28"
+  },
+  "/scholarships/leroy-warden-associates-scholarship/": {
+    "hash": "2c9210839ba4c4c4",
+    "date": "2026-08-28"
+  },
+  "/scholarships/lethbridge-county-bursary-program/": {
+    "hash": "d6b01ea487da7457",
+    "date": "2026-08-02"
+  },
+  "/scholarships/lethbridge-county-community-benefit-scholarship/": {
+    "hash": "84ec5094f5263987",
+    "date": "2026-08-29"
+  },
+  "/scholarships/lethbridge-polytechnic-entrance-award/": {
+    "hash": "a1f786f04d8de1ff",
+    "date": "2026-08-25"
+  },
+  "/scholarships/lethbridge-school-division-ice-scholarship/": {
+    "hash": "1a8d703b4ac4504a",
+    "date": "2026-08-29"
+  },
+  "/scholarships/lions-legacy-scholarship/": {
+    "hash": "9411a8db76e537dc",
+    "date": "2026-08-29"
+  },
+  "/scholarships/lois-hole-humanities-and-social-sciences-scholarship/": {
+    "hash": "529dbf37caa1c238",
+    "date": "2026-08-22"
+  },
+  "/scholarships/loran-scholarship/": {
+    "hash": "70eb27f45f5acfc7",
+    "date": "2026-09-01"
+  },
+  "/scholarships/lorilei-and-arthur-jenkins-collaborative-member-scholarship/": {
+    "hash": "488d155592d3d642",
+    "date": "2026-09-01"
+  },
+  "/scholarships/louise-mckinney-post-secondary-scholarship/": {
+    "hash": "648ef9f8585f9f5f",
+    "date": "2026-08-07"
+  },
+  "/scholarships/luke-santi-memorial-award/": {
+    "hash": "581476be07caba8f",
+    "date": "2026-09-01"
+  },
+  "/scholarships/m-cecil-brownlee-bursary/": {
+    "hash": "eea0d8699b1753c2",
+    "date": "2026-08-28"
+  },
+  "/scholarships/mac-nishiyama-memorial-scholarship/": {
+    "hash": "3d88e92d82e89442",
+    "date": "2026-08-29"
+  },
+  "/scholarships/macewan-university-chancellors-scholarship/": {
+    "hash": "a672e8b5e90ba1e0",
+    "date": "2026-08-02"
+  },
+  "/scholarships/madd-canada-youth-bursary-fund/": {
+    "hash": "d416a1e4f2ac8249",
+    "date": "2026-08-02"
+  },
+  "/scholarships/mah-society-of-edmonton-centennial-scholarship/": {
+    "hash": "cc9569bd7e44adb0",
+    "date": "2026-08-02"
+  },
+  "/scholarships/malwyn-jones-memorial-award/": {
+    "hash": "a9e0f747bbe68ed8",
+    "date": "2026-08-28"
+  },
+  "/scholarships/marguerite-patricia-p-bannister-memorial-degree-awards-at-calgary-foundation/": {
+    "hash": "b497ec3a9e2411c7",
+    "date": "2026-08-28"
+  },
+  "/scholarships/marguerite-patricia-p-bannister-memorial-degree-awards/": {
+    "hash": "a878f43c6d570c51",
+    "date": "2026-08-02"
+  },
+  "/scholarships/marjorie-taylor-memorial-scholarship/": {
+    "hash": "a7712398ad3909eb",
+    "date": "2026-08-28"
+  },
+  "/scholarships/maureen-langston-memorial-award/": {
+    "hash": "f9d057a449cec779",
+    "date": "2026-08-28"
+  },
+  "/scholarships/maxwell-li-memorial-award/": {
+    "hash": "8aa590562404073f",
+    "date": "2026-08-28"
+  },
+  "/scholarships/mckillop-student-awards/": {
+    "hash": "056ca3e522fe8c64",
+    "date": "2026-08-28"
+  },
+  "/scholarships/medicine-hat-college-student-awards/": {
+    "hash": "969dd2f8cbd49c0b",
+    "date": "2026-08-29"
+  },
+  "/scholarships/medicine-hat-firefighters-charitable-foundation-scholarship/": {
+    "hash": "941d98e807c22ef3",
+    "date": "2026-08-29"
+  },
+  "/scholarships/mensa-canada-scholarship-programme/": {
+    "hash": "8287e8c9094d12f2",
+    "date": "2026-08-02"
+  },
+  "/scholarships/michael-a-strembitsky-award-of-excellence/": {
+    "hash": "6859abedfd2dc9ea",
+    "date": "2026-08-28"
+  },
+  "/scholarships/michael-burnyeat-fcpa-fca-sparking-great-careers-high-school-award/": {
+    "hash": "db5f9c472cf7558e",
+    "date": "2026-08-02"
+  },
+  "/scholarships/michael-gee-scholarship-fund-award/": {
+    "hash": "aced47b59acf2b36",
+    "date": "2026-08-29"
+  },
+  "/scholarships/mildred-rowe-weston-memorial-scholarship/": {
+    "hash": "4273d10ecbd487a7",
+    "date": "2026-08-20"
+  },
+  "/scholarships/mindfuel-cdl-rockies-opportunities-scholarship/": {
+    "hash": "094860ada2a6ce78",
+    "date": "2026-08-29"
+  },
+  "/scholarships/mook-and-giesinger-awards/": {
+    "hash": "d5a6220812e4eed7",
+    "date": "2026-08-29"
+  },
+  "/scholarships/mount-royal-university-entrance-scholarship/": {
+    "hash": "f0da05ebe21561e6",
+    "date": "2026-08-02"
+  },
+  "/scholarships/mw-jr-tebo-memorial-journalism-award/": {
+    "hash": "0cdd21d7c74cddfc",
+    "date": "2026-09-01"
+  },
+  "/scholarships/nadc-northern-alberta-development-council-bursary/": {
+    "hash": "4cd26e1dd088c5f6",
+    "date": "2026-08-02"
+  },
+  "/scholarships/nancy-fairley-scholarship/": {
+    "hash": "ff580a9037ff0a61",
+    "date": "2026-08-28"
+  },
+  "/scholarships/nancy-wang-women-in-engineering-scholarship/": {
+    "hash": "bd774cd44932e94b",
+    "date": "2026-09-01"
+  },
+  "/scholarships/nav-ghali-memorial-scholarship/": {
+    "hash": "dccc22f7e357c32a",
+    "date": "2026-08-28"
+  },
+  "/scholarships/new-beginnings-bursary/": {
+    "hash": "4500439bb41a8422",
+    "date": "2026-08-02"
+  },
+  "/scholarships/nickolas-paswisty-memorial-bursary/": {
+    "hash": "df66bbd823467a71",
+    "date": "2026-08-28"
+  },
+  "/scholarships/northern-alberta-rural-physicians-fund/": {
+    "hash": "6209b605a756c3c6",
+    "date": "2026-08-30"
+  },
+  "/scholarships/northwestern-alberta-foundation-student-awards/": {
+    "hash": "ff33b82bf8e064a4",
+    "date": "2026-08-30"
+  },
+  "/scholarships/okotoks-rotary-career-opportunity-awards/": {
+    "hash": "5c36c14c0ef287a5",
+    "date": "2026-08-29"
+  },
+  "/scholarships/olwen-thomas-memorial-award/": {
+    "hash": "3b6aaf3cf8e8de89",
+    "date": "2026-09-01"
+  },
+  "/scholarships/optimist-club-william-j-cummer-scholarship/": {
+    "hash": "5f34eafbfeaafbe2",
+    "date": "2026-08-29"
+  },
+  "/scholarships/optimist-international-essay-contest/": {
+    "hash": "59c7b43d4293c6a6",
+    "date": "2026-08-31"
+  },
+  "/scholarships/optimist-international-oratorical-contest/": {
+    "hash": "cbf20ed054b3cac5",
+    "date": "2026-08-31"
+  },
+  "/scholarships/outstanding-student-merit-award-for-new-bhsc-students/": {
+    "hash": "f6e789ab94cd1de6",
+    "date": "2026-09-01"
+  },
+  "/scholarships/owen-hart-foundation-awards/": {
+    "hash": "23efee8adca4591f",
+    "date": "2026-08-29"
+  },
+  "/scholarships/pamela-jane-hardy-memorial-award/": {
+    "hash": "2170ba44361067e5",
+    "date": "2026-08-28"
+  },
+  "/scholarships/pat-cullen-memorial-scholarship/": {
+    "hash": "718011564a0f18f3",
+    "date": "2026-08-29"
+  },
+  "/scholarships/perky-mccullough-international-excellence-scholarship/": {
+    "hash": "85e0341c74295b41",
+    "date": "2026-08-30"
+  },
+  "/scholarships/premiers-citizenship-award/": {
+    "hash": "028d5e7e4d32293d",
+    "date": "2026-08-02"
+  },
+  "/scholarships/queen-elizabeth-ii-platinum-jubilee-citizenship-award/": {
+    "hash": "fb7ad67c2a906655",
+    "date": "2026-08-31"
+  },
+  "/scholarships/queens-platinum-jubilee-scholarship-for-performing-arts/": {
+    "hash": "0400620194aa556e",
+    "date": "2026-08-31"
+  },
+  "/scholarships/ranald-and-vera-shean-memorial-scholarships/": {
+    "hash": "ea8119bb14311cda",
+    "date": "2026-08-02"
+  },
+  "/scholarships/ray-jolliffe-memorial-scholarship/": {
+    "hash": "213e64363b54aad5",
+    "date": "2026-08-29"
+  },
+  "/scholarships/rbc-ignite-scholarship/": {
+    "hash": "224b783c7463dc4f",
+    "date": "2026-08-20"
+  },
+  "/scholarships/red-deer-arts-council-canada-centennial-secondary-scholarship/": {
+    "hash": "905e6318d4a6c6e7",
+    "date": "2026-08-02"
+  },
+  "/scholarships/red-deer-arts-council-waskasoo-bluegrass-music-scholarship/": {
+    "hash": "989175cf5841015e",
+    "date": "2026-08-02"
+  },
+  "/scholarships/red-deer-catholic-grade-12-scholarship/": {
+    "hash": "218200737b726ef2",
+    "date": "2026-08-29"
+  },
+  "/scholarships/red-deer-golf-and-country-club-centennial-scholarship/": {
+    "hash": "7af9cafb6b2cca70",
+    "date": "2026-08-29"
+  },
+  "/scholarships/red-deer-polytechnic-high-school-entrance-scholarship/": {
+    "hash": "acf6a48548fb530a",
+    "date": "2026-08-20"
+  },
+  "/scholarships/red-deer-polytechnic-regional-access-excellence-scholarship/": {
+    "hash": "10ceadaec49082f7",
+    "date": "2026-08-07"
+  },
+  "/scholarships/red-deer-regional-health-foundation-scholarship/": {
+    "hash": "ec1457db8e43a4f8",
+    "date": "2026-08-02"
+  },
+  "/scholarships/redcliff-scholarship-for-advanced-education/": {
+    "hash": "96930bb52a41cae2",
+    "date": "2026-08-29"
+  },
+  "/scholarships/remax-quest-for-excellence/": {
+    "hash": "63b6a8a887b84c41",
+    "date": "2026-08-29"
+  },
+  "/scholarships/richard-d-tingle-scholarship-award/": {
+    "hash": "bf260207e3295d08",
+    "date": "2026-08-28"
+  },
+  "/scholarships/richard-r-and-linda-a-singleton-education-fund-award/": {
+    "hash": "537c2ae941177fbe",
+    "date": "2026-08-28"
+  },
+  "/scholarships/rick-theriault-outstanding-athletic-contribution-award/": {
+    "hash": "b6d34bd877437f9f",
+    "date": "2026-08-28"
+  },
+  "/scholarships/rising-futures-scholarship/": {
+    "hash": "8b61f36ac2c4cb83",
+    "date": "2026-08-29"
+  },
+  "/scholarships/roane-family-bursary-for-queens-university/": {
+    "hash": "cd3b4f3cc7413c7f",
+    "date": "2026-08-02"
+  },
+  "/scholarships/rocky-view-county-4-h-scholarship/": {
+    "hash": "d9185cd1a9935e7c",
+    "date": "2026-08-30"
+  },
+  "/scholarships/rocky-view-county-agricultural-scholarship-at-olds-college/": {
+    "hash": "cda04310c9817519",
+    "date": "2026-08-30"
+  },
+  "/scholarships/rocky-view-teachers-scholarship/": {
+    "hash": "e8be2e7edeac7ad7",
+    "date": "2026-08-30"
+  },
+  "/scholarships/ron-pfau-memorial-scholarship/": {
+    "hash": "b36ca7dcdd486bd9",
+    "date": "2026-08-30"
+  },
+  "/scholarships/rosalie-szuch-scholarship/": {
+    "hash": "6bd1d8e22fc69afb",
+    "date": "2026-08-28"
+  },
+  "/scholarships/ross-glen-scholarship/": {
+    "hash": "8f36cecdeeddf6dc",
+    "date": "2026-08-28"
+  },
+  "/scholarships/rotary-career-opportunity-award/": {
+    "hash": "5c1336a73900fe9c",
+    "date": "2026-09-01"
+  },
+  "/scholarships/rotary-club-of-grande-prairie-scholarship/": {
+    "hash": "86c9be27317f62ac",
+    "date": "2026-08-30"
+  },
+  "/scholarships/royal-canadian-legion-branch-288-scholarship/": {
+    "hash": "89e18aaac8806861",
+    "date": "2026-08-30"
+  },
+  "/scholarships/royal-canadian-legion-branch-54-bursary/": {
+    "hash": "7c75f5db8b033000",
+    "date": "2026-08-30"
+  },
+  "/scholarships/royal-canadian-legion-ladies-auxiliary-ab-nwt-bursary/": {
+    "hash": "b54cf16abce56ba1",
+    "date": "2026-08-07"
+  },
+  "/scholarships/rudy-berger-memorial-scholarship/": {
+    "hash": "e9b0baa268a98957",
+    "date": "2026-08-28"
+  },
+  "/scholarships/ruth-ursula-leipziger-scholarship/": {
+    "hash": "735e02477ba338b4",
+    "date": "2026-09-01"
+  },
+  "/scholarships/samaritan-club-scholarship-for-discovering-choices/": {
+    "hash": "6c2db9200b4c3e47",
+    "date": "2026-08-28"
+  },
+  "/scholarships/samaritan-club-scholarship/": {
+    "hash": "1b2ac3069357c871",
+    "date": "2026-08-28"
+  },
+  "/scholarships/sandra-b-woitas-opportunity-through-education-scholarship/": {
+    "hash": "b7f93c4fd272456a",
+    "date": "2026-08-02"
+  },
+  "/scholarships/sandra-jeffrey-memorial-scholarship/": {
+    "hash": "aa33abddc66a64b8",
+    "date": "2026-08-28"
+  },
+  "/scholarships/sarah-joan-alward-bursary/": {
+    "hash": "e7ee710ba6add8cc",
+    "date": "2026-08-30"
+  },
+  "/scholarships/schulich-leader-scholarships/": {
+    "hash": "12661261a76fa6ac",
+    "date": "2026-08-02"
+  },
+  "/scholarships/scotiabank-x-myblueprint-scholarships/": {
+    "hash": "ef296dfe2efb9a9d",
+    "date": "2026-08-25"
+  },
+  "/scholarships/sean-smith-memorial-scholarship/": {
+    "hash": "ff237c235b48bec8",
+    "date": "2026-08-30"
+  },
+  "/scholarships/servus-credit-union-young-adult-scholarship/": {
+    "hash": "415caeec6fd24c91",
+    "date": "2026-08-02"
+  },
+  "/scholarships/shea-family-education-award/": {
+    "hash": "08f2d30f4f0ef60a",
+    "date": "2026-08-29"
+  },
+  "/scholarships/shelagh-neary-mikulak-memorial-scholarship-for-leadership-and-innovation-in-library-sciences/": {
+    "hash": "b3ff6e403dc43d91",
+    "date": "2026-08-29"
+  },
+  "/scholarships/sister-joan-burns-memorial-scholarship/": {
+    "hash": "b09132b2f1823755",
+    "date": "2026-08-29"
+  },
+  "/scholarships/skills-canada-alberta-terry-cooke-legacy-scholarship/": {
+    "hash": "192c8b65174c5110",
+    "date": "2026-08-22"
+  },
+  "/scholarships/skipping-stone-foundation-trans-community-award/": {
+    "hash": "fe3ce6e09d2f8f5b",
+    "date": "2026-08-28"
+  },
+  "/scholarships/smiles-thru-lindsey-women-in-aviation-award/": {
+    "hash": "2b7d72ef8952a7ee",
+    "date": "2026-08-29"
+  },
+  "/scholarships/smillie-family-education-award/": {
+    "hash": "15e7758ff9890732",
+    "date": "2026-08-29"
+  },
+  "/scholarships/south-country-co-op-scholarship/": {
+    "hash": "b3271693177b5d36",
+    "date": "2026-08-29"
+  },
+  "/scholarships/southeastern-alberta-regional-science-fair-award/": {
+    "hash": "38c0b00d89de257e",
+    "date": "2026-08-29"
+  },
+  "/scholarships/steven-irving-memorial-music-scholarship/": {
+    "hash": "0033dd68b21a6dfb",
+    "date": "2026-09-01"
+  },
+  "/scholarships/striving-for-nursing-excellence-bursary/": {
+    "hash": "12c429bcc652a6fb",
+    "date": "2026-08-30"
+  },
+  "/scholarships/stuck-at-prom-scholarship/": {
+    "hash": "6df727549e35823d",
+    "date": "2026-09-01"
+  },
+  "/scholarships/tanner-montana-outstanding-human-kindness-award/": {
+    "hash": "5828799d727b7b54",
+    "date": "2026-08-28"
+  },
+  "/scholarships/tc-energy-stem-trades-scholarships/": {
+    "hash": "3029ed741a22aed1",
+    "date": "2026-08-02"
+  },
+  "/scholarships/td-scholarships-for-community-leadership/": {
+    "hash": "87919da26bdb242d",
+    "date": "2026-08-07"
+  },
+  "/scholarships/teenagers-against-drinking-driving-tadd-award/": {
+    "hash": "9b0a03fa2f7d0fab",
+    "date": "2026-08-28"
+  },
+  "/scholarships/terry-allen-leadership-award/": {
+    "hash": "db788e9194931c8c",
+    "date": "2026-08-28"
+  },
+  "/scholarships/terry-fox-humanitarian-award/": {
+    "hash": "532ec1aba1c7131c",
+    "date": "2026-08-02"
+  },
+  "/scholarships/thomas-moore-memorial-bursary/": {
+    "hash": "080fb3418198c542",
+    "date": "2026-08-28"
+  },
+  "/scholarships/thomas-walter-morrish-memorial-scholarship/": {
+    "hash": "8ffad0dce3973769",
+    "date": "2026-08-28"
+  },
+  "/scholarships/thornerjohnstondimarzo-family-new-immigrant-bursary/": {
+    "hash": "1758edcc709abbdf",
+    "date": "2026-08-28"
+  },
+  "/scholarships/tiessen-foundation-broadcast-scholarship/": {
+    "hash": "c4a22d1316c0bac0",
+    "date": "2026-08-07"
+  },
+  "/scholarships/tom-inkster-memorial-scholarship/": {
+    "hash": "2770629c6c660e53",
+    "date": "2026-08-28"
+  },
+  "/scholarships/trey-purdie-memorial-scholarship/": {
+    "hash": "5eb2d6d88ef5b7ab",
+    "date": "2026-08-02"
+  },
+  "/scholarships/tylena-readwin-memorial-award/": {
+    "hash": "f32c3fd0b9b4ea1d",
+    "date": "2026-08-28"
+  },
+  "/scholarships/ucalgary-pathways-to-medicine-scholarship/": {
+    "hash": "c6ec79ee63bad9c5",
+    "date": "2026-08-07"
+  },
+  "/scholarships/ucalgary-presidents-admission-scholarship/": {
+    "hash": "1a5aa3344c0bdc93",
+    "date": "2026-08-20"
+  },
+  "/scholarships/ufcw-canada-beggs-dowling-mathieu-scholarship/": {
+    "hash": "9cf9414db0b813dc",
+    "date": "2026-08-20"
+  },
+  "/scholarships/ufcw-local-401-scholarships/": {
+    "hash": "38de3df07d2570e9",
+    "date": "2026-08-20"
+  },
+  "/scholarships/university-of-alberta-turtle-spirit-pathway-award/": {
+    "hash": "96ae8417a0e22358",
+    "date": "2026-08-20"
+  },
+  "/scholarships/university-of-lethbridge-board-of-governors-award/": {
+    "hash": "d95522fc55739651",
+    "date": "2026-09-01"
+  },
+  "/scholarships/university-of-lethbridge-chinook-scholarship/": {
+    "hash": "98e9e62336f7f962",
+    "date": "2026-08-02"
+  },
+  "/scholarships/university-of-lethbridge-grade-11-merit-award/": {
+    "hash": "5cc57576eba5eff5",
+    "date": "2026-08-02"
+  },
+  "/scholarships/university-of-lethbridge-high-school-entrance-awards/": {
+    "hash": "d621cdc47a691a19",
+    "date": "2026-08-02"
+  },
+  "/scholarships/valour-canada-history-and-heritage-scholarship/": {
+    "hash": "67087eb18b430ad2",
+    "date": "2026-08-02"
+  },
+  "/scholarships/viscount-bennett-band-parents-bursary/": {
+    "hash": "e32c4584f20dea57",
+    "date": "2026-09-01"
+  },
+  "/scholarships/voice-for-animals-high-school-scholarship/": {
+    "hash": "e624f50eea41767b",
+    "date": "2026-08-02"
+  },
+  "/scholarships/volleyball-alberta-hugh-hoyles-scholarship-fund/": {
+    "hash": "5d123ef1f118845c",
+    "date": "2026-08-02"
+  },
+  "/scholarships/warriors-legacy-endowment-scholarship/": {
+    "hash": "91ce75104a3de531",
+    "date": "2026-08-28"
+  },
+  "/scholarships/warriors-science-award/": {
+    "hash": "60151febb57117c4",
+    "date": "2026-09-01"
+  },
+  "/scholarships/wayne-thomas-award/": {
+    "hash": "960a4b66bcf82053",
+    "date": "2026-09-01"
+  },
+  "/scholarships/western-canada-leader-of-tomorrow-award/": {
+    "hash": "b38ea3c6bd8ceb5f",
+    "date": "2026-08-28"
+  },
+  "/scholarships/western-canada-music-camptour-bursary/": {
+    "hash": "26e02bfca1577e69",
+    "date": "2026-09-01"
+  },
+  "/scholarships/weyerhaeuser-grande-prairie-local-scholarship/": {
+    "hash": "d5f73482fd3f9ee7",
+    "date": "2026-08-30"
+  },
+  "/scholarships/william-aberhart-alumni-scholarship/": {
+    "hash": "6ba62e7fba484528",
+    "date": "2026-09-01"
+  },
+  "/scholarships/william-arthur-bower-memorial-scholarship/": {
+    "hash": "e7161eade223ed84",
+    "date": "2026-08-02"
+  },
+  "/scholarships/william-g-davis-scholarship/": {
+    "hash": "5ebf202a0f94ad33",
+    "date": "2026-08-28"
+  },
+  "/scholarships/william-keir-macgougan-memorial-bursary/": {
+    "hash": "8b2eee55ef956282",
+    "date": "2026-08-28"
+  },
+  "/scholarships/winspear-fund-scholarships-for-classical-music/": {
+    "hash": "de95e7ca96b6ff2b",
+    "date": "2026-08-02"
+  },
+  "/scholarships/wolf-scholars-program/": {
+    "hash": "8ef8fdac2e3f2d55",
+    "date": "2026-08-20"
+  },
+  "/scholarships/worldskills-provincial-champion-scholarship/": {
+    "hash": "9b2b847fc0e9d0bc",
+    "date": "2026-08-02"
+  },
+  "/scholarships/youth-climate-activist-prize/": {
+    "hash": "583f1fa40af9f48b",
+    "date": "2026-08-31"
+  },
+  "/templates/reference-letter/": {
+    "hash": "adf30f08fe9a71f1",
+    "date": "2026-08-28"
+  },
+  "/terms/": {
+    "hash": "b22b59f2c673519f",
+    "date": "2026-08-23"
+  }
+}

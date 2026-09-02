@@ -1,0 +1,50 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
+
+const guide = getGuide('scholarships-for-medicine-hat-students');
+---
+
+<SabGuide guide={guide}>
+  <p>
+    If you go to school in Medicine Hat, you have a scholarship advantage most Alberta students don't: a small applicant pool. A community award here might see a dozen applications in a good year, and the committees reading them know your school, your employers, and probably your referee. This guide maps every local pool worth checking, nineteen listings in <a href="/scholarships/">the directory</a> at last count.
+  </p>
+
+  <h2>Start with the money that isn't a competition</h2>
+  <p>
+    Before any local award, take the <a href="/guides/alexander-rutherford-scholarship-guide/">Alexander Rutherford Scholarship</a>. It pays up to $2,500 for the marks you already earned, every qualifying Alberta student who applies gets it, and it stacks with everything below. It is the floor, not the prize.
+  </p>
+
+  <h2>The local pools, in rough order of odds</h2>
+  <h3>Your own school</h3>
+  <p>
+    The Medicine Hat Catholic Board of Education's Education Foundation funds eight named scholarships for its graduating students: the <a href="/scholarships/archie-macphail-memorial-scholarship/">Archie MacPhail</a>, <a href="/scholarships/chuck-love-memorial-scholarship/">Chuck Love</a>, <a href="/scholarships/education-foundation-servant-leader-scholarship/">Servant Leader</a>, <a href="/scholarships/james-michael-mickey-lynch-memorial-scholarship/">Mickey Lynch</a>, <a href="/scholarships/joseph-stroh-memorial-scholarship/">Joseph Stroh</a>, <a href="/scholarships/mook-and-giesinger-awards/">Mook/Giesinger</a>, <a href="/scholarships/pat-cullen-memorial-scholarship/">Pat Cullen</a> and <a href="/scholarships/sister-joan-burns-memorial-scholarship/">Sister Joan Burns</a> awards. The board publishes the names but its application forms are no longer downloadable, so the amounts and deadlines have to come from your counsellor or from foundation@mhcbe.ab.ca. Awards like these often see single-digit applicant counts. Ask for the list by name; some are only advertised on a sheet by the counsellor's door.
+  </p>
+  <h3>Service clubs</h3>
+  <p>
+    The <a href="/scholarships/kin-canada-bursary/">Kin Canada Bursary</a> is worth $1,000 and closes February 1. You apply on Kin Canada's national form and the Medicine Hat club endorses one applicant to send forward, so the first cut is local even though the decision is not. It weighs community involvement and financial need rather than national-level achievement, and you can only win it once.
+  </p>
+  <h3>City, county, and community foundations</h3>
+  <p>
+    If you live in Redcliff, the <a href="/scholarships/redcliff-scholarship-for-advanced-education/">Redcliff Scholarships for Advanced Education</a> are the largest local awards in the region by a wide margin: three separate scholarships worth up to $6,000 each, alongside the <a href="/scholarships/for-four-friends-scholarship/">For Four Friends</a> and <a href="/scholarships/david-jon-thomson-scholarship/">David Jon Thomson</a> funds. In 2026 the committee read eleven applications for three awards, which is the best ratio on this page. Cypress County awards two <a href="/scholarships/cypress-county-agricultural-service-board-bursary/">$1,000 Agricultural Service Board bursaries</a> a year to students going on to an agriculture related program, and the deadline is September 30, later than almost everything else here. If your family farms or you live outside city limits, that pool is especially thin on applicants. The Community Foundation of Southeastern Alberta is often suggested as a source, but it funds charities rather than students and runs no scholarship program.
+  </p>
+  <h3>Employers, co-ops, and local business</h3>
+  <p>
+    <a href="/scholarships/south-country-co-op-scholarship/">South Country Co-op</a> gives $1,000 by July 31 each year, but only if your family holds a membership in good standing and has bought at least $2,000 from the Co-op that fiscal year, so check that before you write the essay. Awards also come from <a href="/scholarships/remax-quest-for-excellence/">local real estate offices</a> and the <a href="/scholarships/medicine-hat-firefighters-charitable-foundation-scholarship/">firefighters' charitable foundation</a>, which funds one $2,000 scholarship a year, though only for someone already accepted into an accredited fire service program. If you or a parent works somewhere with more than a few dozen employees, ask whether there's a staff-family award. There often is, and nobody applies.
+  </p>
+  <h3>Medicine Hat College</h3>
+  <p>
+    If you're staying local for school, <a href="/scholarships/medicine-hat-college-student-awards/">MHC hands out over $400,000 a year</a> in scholarships and bursaries, and one online form enters you for every award you qualify for. Applications for the next round open March 1, 2027. Some are marked on grades, some on need, so it is worth applying either way. That one form is also how you reach the three Alberta Blue Cross bursaries worth $1,000 each: an <a href="/scholarships/alberta-blue-cross-50th-anniversary-entrance-bursary/">entrance bursary</a>, a <a href="/scholarships/alberta-blue-cross-50th-anniversary-nursing-bursary/">nursing bursary</a>, and one <a href="/scholarships/alberta-blue-cross-50th-anniversary-bursary-for-students-with-special-needs/">for students with special needs</a>.
+  </p>
+
+  <h2>How to actually work the list</h2>
+  <ul>
+    <li><strong>Filter the directory to Medicine Hat.</strong> The region filter in <a href="/scholarships/">the listings</a> shows the whole local pool at once, with live deadline status. Most local awards run on a spring cycle and reopen every year.</li>
+    <li><strong>Build one reusable package.</strong> One strong <a href="/guides/how-to-write-a-scholarship-essay/">essay</a> and one <a href="/guides/reference-letters-for-scholarships/">reference letter</a> cover most local applications with light edits.</li>
+    <li><strong>Apply to everything you plausibly qualify for.</strong> The <a href="/guides/local-scholarships-better-odds/">arithmetic on local awards</a> is heavily in your favour, and three $1,000 wins is a semester's tuition.</li>
+  </ul>
+  <p>
+    <a href="/match/">The match quiz</a> takes {QUIZ_DURATION} and sorts the whole local list by what you're actually eligible for.
+  </p>
+</SabGuide>

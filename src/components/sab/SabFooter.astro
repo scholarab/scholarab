@@ -1,0 +1,107 @@
+---
+import SabLogoMark from './SabLogoMark.astro';
+
+// Full dark footer shared by every sab-design page (same design as the home page).
+const footerCols = [
+  { title: 'EXPLORE', links: [
+    { label: 'All scholarships', href: '/scholarships/' },
+    { label: 'Research programs', href: '/programs/' },
+    { label: 'Closing soon', href: '/#closing' },
+    { label: 'Deadline calendar', href: '/deadlines/' },
+    { label: 'Find my match', href: '/match/' },
+    { label: 'Guides', href: '/guides/' },
+    { label: 'Reference letter template', href: '/templates/reference-letter/' },
+  ]},
+  { title: 'ABOUT', links: [
+    { label: 'The story', href: '/about/' },
+    { label: 'For educators', href: '/educators/' },
+    { label: 'How listings are verified', href: '/about/' },
+    { label: 'What changed', href: '/updates/' },
+    { label: 'Privacy', href: '/privacy/' },
+    { label: 'Terms of use', href: '/terms/' },
+    { label: 'Suggest a scholarship', href: 'mailto:contact.scholarab@gmail.com' },
+  ]},
+  { title: 'CONTACT', links: [
+    { label: 'Email', href: 'mailto:contact.scholarab@gmail.com' },
+    { label: 'Instagram', href: 'https://www.instagram.com/scholarab.ca' },
+    { label: 'TikTok', href: 'https://www.tiktok.com/@scholarab' },
+  ]},
+];
+---
+<footer class="sabf-footer">
+  <div class="sabf-inner">
+    <div class="sabf-top">
+      <div>
+        <div class="sabf-logo">
+          <SabLogoMark size={56} id="footer" />
+          <div class="sabf-lockup">
+            <span class="sabf-word">Scholar<span class="sabf-accent">AB</span></span>
+            <span class="sabf-mono sabf-tagline">FIND YOUR SCHOLARSHIP</span>
+          </div>
+        </div>
+        <p class="sabf-blurb">ScholarAB is a free directory of scholarships and research programs for Alberta high school students, with deadlines tracked. No account needed.</p>
+        <p class="sabf-blurb sabf-disclaimer">Listings are checked by hand, but this site can still contain errors and out-of-date information. Deadlines move and rules change. Always confirm the details on the provider's own page before you apply. <a href="/terms/">More in the terms of use</a>.</p>
+      </div>
+      <div class="sabf-cols">
+        {footerCols.map(col => (
+          <div>
+            <div class="sabf-mono sabf-col-title">{col.title}</div>
+            <div class="sabf-links">
+              {col.links.map(l => (
+                l.href.startsWith('mailto:')
+                  ? <Fragment set:html={`<!--email_off--><a href="${l.href}">${l.label}</a><!--/email_off-->`} />
+                  : <a
+                      href={l.href}
+                      rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      target={l.href.startsWith('http') ? '_blank' : undefined}
+                    >{l.label}</a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="sabf-bottom sabf-mono">
+      <span>© 2026 ScholarAB · Medicine Hat, Alberta</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .sabf-footer { background: #0B1512; color: rgba(242,240,233,0.65); font-family: 'Archivo', sans-serif; }
+  /* Capped to the same measure as the page above it: the band stays full
+     bleed, its contents line up with the content. */
+  .sabf-inner { padding: 64px 48px 40px; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
+  .sabf-mono { font-family: 'IBM Plex Mono', monospace; }
+  .sabf-accent { color: #2FD3A0; }
+  .sabf-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
+  .sabf-logo { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .sabf-lockup { display: flex; flex-direction: column; gap: 6px; }
+  .sabf-word { font-weight: 800; letter-spacing: -0.02em; color: #F2F0E9; font-size: clamp(36px, 5vw, 52px); line-height: 1; }
+  .sabf-tagline { font-size: 12px; letter-spacing: 0.24em; color: rgba(242,240,233,0.6); }
+  .sabf-blurb { font-size: 14px; line-height: 1.6; max-width: 340px; margin: 0; }
+  /* The accuracy disclaimer. Deliberately in the footer rather than only in
+     the terms: a student about to miss a deadline is not reading /terms. */
+  .sabf-disclaimer { margin-top: 14px; font-size: 13px; color: rgba(242,240,233,0.5); }
+  .sabf-disclaimer a { color: rgba(242,240,233,0.7); text-decoration: underline; text-underline-offset: 2px; }
+  .sabf-disclaimer a:hover { color: #F2F0E9; }
+  .sabf-cols { display: flex; gap: 64px; flex-wrap: wrap; }
+  .sabf-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(242,240,233,0.4); margin-bottom: 14px; }
+  .sabf-links { display: flex; flex-direction: column; gap: 10px; }
+  .sabf-links a { font-size: 14px; color: rgba(242,240,233,0.7); text-decoration: none; }
+  .sabf-links a:hover { color: #F2F0E9; }
+  .sabf-bottom {
+    display: flex; justify-content: space-between; margin-top: 56px; padding-top: 24px;
+    border-top: 1px solid rgba(242,240,233,0.12);
+    font-size: 12px; color: rgba(242,240,233,0.4); gap: 12px; flex-wrap: wrap;
+  }
+  @media (max-width: 900px) {
+    .sabf-top { flex-direction: column; }
+    .sabf-cols { gap: 36px; }
+    /* This used to be `padding-bottom: 110px`; clearance for the fixed
+       bottom tab bar. That bar is gone, so it was 70px of dead space at the
+       end of every phone page. */
+    .sabf-inner { padding: 48px 20px 40px; }
+    .sabf-bottom { margin-top: 40px; }
+  }
+</style>

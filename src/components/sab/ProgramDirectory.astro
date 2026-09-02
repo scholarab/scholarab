@@ -1,0 +1,322 @@
+---
+// Server-rendered replacement for the old ProgramList React island.
+// All cards are in the HTML (build-time closed ones hidden); directory-client
+// shows/hides/reorders them, so the page ships no React.
+import { DEFAULT_PROGRAM_STATE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programDayChip, programGroupKey, shortDate } from '../../lib/list-core.ts';
+import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
+import { generateSlug } from '../../lib/utils.ts';
+import { emailOff } from '../../lib/email-off';
+import { PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets.ts';
+
+interface Props {
+  items: ProgramWithMeta[];
+  /** Facet hubs supply their own heading and standfirst; /programs keeps these defaults. */
+  h1?: string;
+  intro?: string;
+  /** Set on a field hub: the FIELD row turns into navigation rather than a
+      filter, since filtering a hub by any other field can only empty it. */
+  currentField?: string | null;
+  /** A hub is handed only its own field's programs, and the FIELD row is a map
+      of the whole directory wherever it appears, so it counts against this. */
+  allItems?: ProgramWithMeta[];
+}
+const {
+  items,
+  h1 = 'Research programs',
+  intro = 'Labs, competitions, apprenticeships, and summer placements open to Alberta high school students. Some even pay you.',
+  currentField = null,
+  allItems = items,
+} = Astro.props;
+
+const SORT_CHIPS = [
+  { value: 'closest_due', label: 'Earliest deadline' },
+  { value: 'paid_first',  label: 'Paid first' },
+  { value: 'name',        label: 'A–Z' },
+] as const;
+const GRADE_CHIPS = [10, 11, 12];
+
+// Mirrors the scholarship STATUS row: 'tba' covers Ongoing and undated intakes.
+const STATUS_CHIPS = [
+  { value: 'all',    label: 'All' },
+  { value: 'active', label: 'Open' },
+  { value: 'tba',    label: 'Ongoing' },
+  { value: 'closed', label: 'Closed' },
+] as const;
+
+// FIELD is navigation, not a filter, and it is that on /programs as much as on
+// a hub: the twin of the scholarship SCOPE row, which links to a city's page
+// rather than hiding rows in place. A chip that filtered here and navigated one
+// page deeper would be the same control doing two different things.
+//
+// The chip carries the facet's label, not the raw category value. They are the
+// same word for eight of the nine; "Trades & Tech" is the exception, and the
+// long form is 20px more than the row has to give, which is the scroller this
+// row was rebuilt to be rid of. The data and the admin dropdown keep the full
+// name.
+//
+// Counted against the whole corpus, not the page, so the order and the numbers
+// are identical on /programs and on all eight hubs and a reader crossing the
+// row twice finds the chip where they left it. Every field clears the
+// MIN_FACET_ITEMS floor today; the filter is here so that the day one stops
+// clearing it, the row stops offering a chip whose page no longer exists.
+const fieldChips = PROGRAM_FACETS
+  .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, allItems).length }))
+  .filter(c => c.count >= MIN_FACET_ITEMS)
+  .sort((a, b) => b.count - a.count);
+
+// The scholarship twin of this; see the note on chipCount there. Same rule
+// applies to the GRADE row, where the numbers do real work: a Grade 10 reader
+// can see at a glance which fields are open to them at all.
+const chipCount = (o: Partial<ProgramFilterState>) =>
+  filterSortPrograms(items, { ...DEFAULT_PROGRAM_STATE, ...o }).length;
+
+// Initial view = the default STATUS filter ('all'), matching /scholarships:
+// closed programs stay in the list wearing a CLOSED chip instead of vanishing.
+const initial = filterSortPrograms(items, DEFAULT_PROGRAM_STATE);
+const paidCount = initial.filter(p => p.paid).length;
+
+// Only open-vs-closed: unlike scholarships, the program sorts do not keep
+// dated and undated deadlines apart, so a finer split would put the same
+// label on the grid twice. See groupRuns.
+const runs = groupRuns(initial, programGroupKey, PROGRAM_GROUP_LABELS);
+const showGroups = runs.length > 1;
+const headerAt = new Map<number, { label: string; count: number; key: string }>();
+if (showGroups) {
+  let at = 0;
+  for (const r of runs) { headerAt.set(at, r); at += r.count; }
+}
+const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
+---
+
+<div class="sabl-page">
+  <div class="sabl-title-row">
+    <div>
+      <h1 class="sabl-h1">{h1}</h1>
+      <p class="sabl-desc">{intro}</p>
+    </div>
+    <div class="sabl-stat">
+      <div class="sabl-stat-value tnum" data-dir-stat>{paidCount} / {initial.length}</div>
+      <div class="sabl-mono sabl-stat-label">PAID ACROSS THESE LISTINGS</div>
+    </div>
+  </div>
+
+  <div class="sabl-toolbar">
+    <div class="sabl-search">
+      <span class="sabl-search-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      <input
+        type="search"
+        data-dir-search
+        placeholder="Search programs, universities, fields…"
+        aria-label="Search programs by name, university, or field"
+      />
+    </div>
+    <div class="sabl-sort">
+      <span class="sabl-mono sabl-row-label">SORT</span>
+      {SORT_CHIPS.map(s => (
+        <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
+      ))}
+    </div>
+  </div>
+
+  {/* -dense: FIELD is nine chips wide and only holds one line on the tighter
+      metrics: 995px of the 1020 the measure gives it, where the default chip
+      padding would put it well over. The row was ten and scrolling before
+      Environmental was folded into Research. See the modifier in global.css; it tightens all
+      three rows here, not just FIELD, so the block still reads as one set of
+      controls. */}
+  <div class="sabl-filters sabl-filters-dense">
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">FIELD</span>
+      <div class="sabl-chips">
+        {currentField
+          ? <a href="/programs/" class="sabl-chip sabl-chip-link">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></a>
+          : <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></span>}
+        {fieldChips.map(c => (
+          c.slug === currentField
+            ? <span class="sabl-chip on" aria-current="page">
+                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+              </span>
+            : <a href={`/programs/${c.slug}/`} class="sabl-chip sabl-chip-link">
+                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+              </a>
+        ))}
+      </div>
+    </div>
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">GRADE</span>
+      <div class="sabl-chips">
+        <button type="button" class="sabl-chip on" data-fkey="grade" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
+        {GRADE_CHIPS.map(g => (
+          <button type="button" class="sabl-chip" data-fkey="grade" data-fval={String(g)} aria-pressed="false">{`Gr ${g}`}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ gradeFilter: g })}</span></button>
+        ))}
+      </div>
+    </div>
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">STATUS</span>
+      <div class="sabl-chips">
+        {STATUS_CHIPS.map(s => (
+          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value })}</span></button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* Typing in the search box rewrites this line and nothing else visible
+      changes above the fold, so without a live region a screen-reader user
+      gets no signal that 278 listings just became 4. role="status" is
+      implicitly polite and atomic, which is right: the line is replaced
+      wholesale on every keystroke, not appended to. */}
+  <div class="sabl-mono sabl-result-line" data-dir-count role="status">
+    {directoryCountLine(initial.length, items.length, 'PROGRAMS', openNow)}
+  </div>
+
+  <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
+    {initial.map((p, i) => {
+      const slug = p._slug ?? generateSlug(p.name);
+      const meta = [p.duration, p.grades, p.location].filter(Boolean) as string[];
+      const chip = programDayChip(p);
+      const head = headerAt.get(i);
+      return (
+        <>
+        {head && (
+          <div class="sabl-group" data-dir-group={head.key}>
+            <span class="sabl-group-label">{head.label}</span>
+            <span class="sabl-group-count">{head.count}</span>
+          </div>
+        )}
+        <div
+          class="sabl-card"
+          data-dir-card
+          data-id={p.id}
+          data-name={p.name}
+          data-category={p.category ?? undefined}
+          data-grades={p.grades ?? undefined}
+          data-paid={p.paid ? '1' : undefined}
+          data-deadline={p.deadline ?? undefined}
+          data-search={[p.name, p.provider, p.description, p.category].filter(Boolean).join('\n').toLowerCase()}
+        >
+          <div class="sabl-card-top">
+            <span class="sabl-card-top-left">
+              <span class="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
+              {p.paid && <span class="sabl-mono sabl-paid">$ PAID</span>}
+            </span>
+            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
+          </div>
+          <a href={`/programs/${slug}/`} class="sabl-name">{p.name}</a>
+          {p.provider && <div class="sabl-org">{p.provider}</div>}
+          {meta.length > 0 && (
+            <div class="sabl-meta-row">
+              {meta.map(m => <span class="sabl-meta">{m}</span>)}
+            </div>
+          )}
+          {p.description && <div class="sabl-blurb" set:html={emailOff(p.description)} />}
+          <div class="sabl-card-foot">
+            <span class="sabl-due">
+              {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
+                ? `DUE ${shortDate(p.deadline)}`
+                : 'NO FIXED DEADLINE'}
+            </span>
+            <div class="sabl-card-actions">
+              <button
+                type="button"
+                class="sabl-save"
+                data-dir-save
+                data-id={p.id}
+                data-name={p.name}
+                aria-label={`Save ${p.name}`}
+                aria-pressed="false"
+              >☆</button>
+              <a href={`/programs/${slug}/`} class="sabl-apply">Details →</a>
+            </div>
+          </div>
+        </div>
+        </>
+      );
+    })}
+  </div>
+
+  <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
+    <div class="sabl-empty-title">Nothing matches that.</div>
+    <div class="sabl-empty-sub">Try clearing a filter or searching something broader.</div>
+    <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
+  </div>
+</div>
+
+<script>
+  import { initDirectory } from '../../lib/directory-client.ts';
+  import { PROGRAM_GROUP_LABELS, buildProgramStatusCache, directoryCountLine, filterSortPrograms, getProgramStatus, programDayChip, programGroupKey, selectPrograms } from '../../lib/list-core.ts';
+  import type { ProgramWithMeta, ProgramSort, ProgramStatus, ProgramStatusFilter } from '../../lib/list-core.ts';
+  import { getSavedPrograms, toggleSavedProgram } from '../../lib/tracker.ts';
+
+  type Item = ProgramWithMeta & { el: HTMLElement; search: string };
+  type State = { sort: string; category: string; grade: string; status: string };
+
+  type Cache = Map<number, ProgramStatus>;
+
+  const asFilterState = (state: State) => ({
+    selectedCategory: state.category,
+    gradeFilter: state.grade ? Number(state.grade) : null,
+    searchQuery: '',
+    sortBy: state.sort as ProgramSort,
+    statusFilter: state.status as ProgramStatusFilter,
+  });
+
+  initDirectory<Item, State, Cache>('#sab-programs', {
+    itemType: 'program',
+    defaultState: { sort: 'closest_due', category: 'all', grade: '', status: 'all' },
+    toggleKeys: ['category', 'grade'],
+    countKeys: ['category', 'grade', 'status'],
+    parseCard(el) {
+      const d = el.dataset;
+      return {
+        el,
+        search: d.search ?? '',
+        id: Number(d.id),
+        name: d.name ?? '',
+        category: d.category ?? null,
+        grades: d.grades ?? null,
+        paid: d.paid === '1',
+        deadline: d.deadline ?? null,
+        // Visitor-timezone ms from the ISO string; a serialized build-time
+        // value would be UTC-midnight and close listings a day early here.
+        _deadline_ms: d.deadline && d.deadline !== 'TBA' && d.deadline !== 'Ongoing'
+          ? new Date(d.deadline + 'T00:00:00').getTime()
+          : undefined,
+        emoji: null, provider: null, duration: null, stipend: null, location: null,
+        eligibility: null, url: '', description: null, lastVerified: null, active: true,
+      };
+    },
+    // One pass over the corpus per render, shared by the visible list and all
+    // eighteen chip counts. See the scholarship twin.
+    renderContext: items => buildProgramStatusCache(items),
+    select(items, state, q, cache) {
+      const sorted = filterSortPrograms(items, asFilterState(state), cache) as Item[];
+      return q ? sorted.filter(it => it.search.includes(q)) : sorted;
+    },
+    countFor(items, state, q, cache) {
+      const pool = selectPrograms(items, asFilterState(state), cache) as Item[];
+      return q ? pool.filter(it => it.search.includes(q)).length : pool.length;
+    },
+    countLine: (shown, total, visible) =>
+      directoryCountLine(shown, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) !== 'closed').length),
+    groups: { key: programGroupKey, label: key => PROGRAM_GROUP_LABELS[key] ?? key },
+    // The sibling page puts a dollar figure in this exact slot, so a bare
+    // numeral in 44px serif reads as money. The denominator makes it a
+    // proportion, which is what it always was.
+    stat: visible => `${visible.filter(p => p.paid).length} / ${visible.length}`,
+    getSavedIds: () => [...getSavedPrograms()],
+    toggleSave: id => [...toggleSavedProgram(id)],
+    saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),
+    // Day chips depend on the clock, not just the data: recompute them on every
+    // load so CDN-cached HTML never shows a stale countdown.
+    onCardsParsed(items) {
+      for (const p of items) {
+        const chipEl = p.el.querySelector<HTMLElement>('[data-days-chip]');
+        if (!chipEl) continue;
+        const chip = programDayChip(p);
+        chipEl.hidden = !chip;
+        if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
+      }
+    },
+  });
+</script>

@@ -1,0 +1,71 @@
+{
+  "name": "scholarab",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "TZ=America/Edmonton tsx scripts/validate-data.ts && TZ=America/Edmonton tsx scripts/generate-sitemap.ts && TZ=America/Edmonton tsx scripts/generate-og-images.ts && DATABASE_URL= TZ=America/Edmonton astro build",
+    "preview": "astro preview",
+    "auto-expire": "tsx scripts/auto-expire.ts",
+    "sitemap": "TZ=America/Edmonton tsx scripts/generate-sitemap.ts",
+    "validate-data": "tsx scripts/validate-data.ts",
+    "check-copies": "tsx scripts/check-copies.ts",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "type-check": "astro check",
+    "type-check:scripts": "tsc -p tsconfig.scripts.json",
+    "ci": "npm run lint && npm run test -- --run && npm run build && tsc --noEmit && npm run type-check:scripts",
+    "social": "TZ=America/Edmonton tsx scripts/generate-social.ts",
+    "indexnow": "TZ=America/Edmonton tsx scripts/submit-indexnow.ts",
+    "index-status": "TZ=America/Edmonton tsx scripts/index-status.ts",
+    "gsc-months": "TZ=America/Edmonton tsx scripts/gsc-months.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.100.1",
+    "@astrojs/cloudflare": "^12.6.13",
+    "@astrojs/react": "^5.0.1",
+    "@neondatabase/serverless": "^1.0.2",
+    "@tailwindcss/postcss": "^4.3.0",
+    "astro": "^6.0.8",
+    "drizzle-orm": "^0.45.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sonner": "^2.0.7",
+    "tailwindcss": "^4.3.0",
+    "zod": "^4.3.6"
+  },
+  "overrides": {
+    "esbuild": "^0.25.0",
+    "@esbuild-kit/core-utils": {
+      "esbuild": "^0.25.0"
+    }
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.59.1",
+    "@resvg/resvg-js": "^2.6.2",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.1.2",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^10.2.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "happy-dom": "^20.8.9",
+    "prettier": "^3.8.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "satori": "^0.28.0",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.1",
+    "undici": "^7.24.8",
+    "vitest": "^4.1.2",
+    "wrangler": "4.83.0"
+  }
+}

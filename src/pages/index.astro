@@ -1,0 +1,774 @@
+---
+import SabFonts from '../components/sab/SabFonts.astro';
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import SabFooter from '../components/sab/SabFooter.astro';
+import { loadScholarships, loadPrograms } from '../lib/data-loader';
+import { generateSlug, parseAmount } from '../lib/utils';
+import { CLOSING_SOON_MS } from '../lib/constants';
+import { programIsListed } from '../lib/status';
+import { SCHOLARSHIP_FACETS, facetForCategory } from '../lib/facets';
+import { TEASER_KEYS, teaserOptions, QUIZ_DURATION } from '../lib/quiz';
+
+const scholarships = await loadScholarships();
+const programs = await loadPrograms();
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const activeScholarships = scholarships.filter(s => {
+  if (!s.active) return false;
+  // Not open yet ≠ open right now (Loran/TD/Wolf open in September; the
+  // directory shows them as OPENS SEP; the hero total must agree).
+  if (s.openDate && new Date(s.openDate + 'T00:00:00').getTime() > today.getTime()) return false;
+  if (!s.deadline) return true;
+  return new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime();
+});
+const activeTotal = activeScholarships.reduce((sum, s) => sum + parseAmount(s.amount), 0);
+// Retired programs (active: false) are out of the directory, so they must be
+// out of this total too; otherwise the hero promises more than /programs shows.
+const researchCount = programs.filter(p => programIsListed(p, today)).length;
+
+const scholarshipCount = scholarships.length;
+
+// The next five deadlines, NOT the deadlines inside a fixed window. The window
+// version (deadline <= today + CLOSING_SOON_MS) rendered nothing at all between
+// cycles: on 22 Aug 2026 exactly one of the 39 active awards fell inside seven
+// days, and for most of August none did. The section then disappeared, and
+// SabFooter links every page on the site at /#closing, so the whole site
+// carried a dead anchor for the part of the year counsellors start looking.
+//
+// CLOSING_SOON_MS still decides the urgency badge on each row, which is where
+// "this week" actually belongs; it just no longer decides whether the section
+// exists.
+const closingSoon = scholarships
+  .filter(s => s.active && s.deadline && new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime())
+  .sort((a, b) => new Date(a.deadline! + 'T00:00:00').getTime() - new Date(b.deadline! + 'T00:00:00').getTime())
+  .slice(0, 5);
+
+// The heading follows the list rather than asserting urgency it may not have:
+// "Closing this week" over a row due in November is a claim the page can't keep.
+const anyClosingThisWeek = closingSoon.some(
+  s => new Date(s.deadline! + 'T00:00:00').getTime() <= today.getTime() + CLOSING_SOON_MS,
+);
+const closingHeading = anyClosingThisWeek ? 'Closing this week' : 'Next deadlines';
+const closingEyebrow = anyClosingThisWeek ? '⏳ TIME-SENSITIVE' : '⏳ UPCOMING';
+
+// Categories: real counts from the data, top 8 tracks
+const categoryCounts = new Map<string, number>();
+for (const s of scholarships) {
+  if (s.category) categoryCounts.set(s.category, (categoryCounts.get(s.category) ?? 0) + 1);
+}
+const CATEGORY_DESCS: Record<string, string> = {
+  'Academic':   'Merit, entrance, and general academic awards.',
+  'Community':  'Volunteering hours that actually pay off.',
+  'Arts':       'Portfolios, performances, film, and writing.',
+  'STEM':       'Science fairs, labs, and research awards.',
+  'Trades':     'Apprenticeships, RAP, and skilled-trade awards.',
+  'Indigenous': 'Awards for First Nations, Métis, and Inuit students.',
+  'Sports':     'For athletes at every level, not just varsity.',
+  'General':    'Open eligibility, no niche required.',
+};
+// Each card points at its hub where one exists. Academic (56 listings) and
+// General deliberately have none -- a hub that big would compete with
+// /scholarships for the same queries -- so those keep the query-string filter,
+// which is still a working page, just not a landing one.
+const categories = [...categoryCounts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 8)
+  .map(([name, count]) => {
+    const facet = facetForCategory(name, SCHOLARSHIP_FACETS);
+    return {
+      name,
+      count,
+      desc: CATEGORY_DESCS[name] ?? 'Awards for Alberta high school students.',
+      href: facet ? `/scholarships/${facet.slug}/` : `/scholarships/?category=${encodeURIComponent(name)}`,
+    };
+  });
+
+// The homepage has never linked into geo content, which is the half of the
+// directory the city queries are looking for. Counts come from the data so a
+// card can't advertise a number the hub doesn't show.
+const cityFacets = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region').map(f => ({
+  slug: f.slug,
+  label: f.label,
+  count: scholarships.filter(s => s.region === f.value).length,
+}));
+
+// The teaser is the first three questions of the real quiz, not a lookalike:
+// every chip carries the value the matcher expects, so picking here writes a
+// genuine partial answer set and /match resumes at question 4. Options are
+// read from lib/quiz.ts so the two can never drift apart.
+const TEASER_LABELS: Record<string, string> = {
+  grade: 'YOUR GRADE',
+  city:  'YOUR REGION',
+  field: "YOU'RE INTO",
+};
+const matchGroups = TEASER_KEYS.map(key => ({
+  key,
+  label: TEASER_LABELS[key]!,
+  opts: teaserOptions(key),
+}));
+---
+
+<Layout
+  title="Free Alberta High School Scholarships | ScholarAB"
+  description={`Browse ${scholarshipCount}+ free scholarships and research programs for Alberta high school students. No login, no ads, no data collection. Updated for the 2026-27 cycle.`}
+  ogTitle="Free Alberta High School Scholarships | ScholarAB"
+  ogDescription={`Browse ${scholarshipCount}+ free scholarships and research programs for Alberta high school students. No login, no ads, no data collection. Updated for the 2026-27 cycle.`}
+  ogUrl="https://www.scholarab.ca/"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.scholarab.ca/#organization",
+        "name": "ScholarAB",
+        "alternateName": ["ScholarAB.ca", "scholarab"],
+        "url": "https://www.scholarab.ca",
+        "logo": "https://www.scholarab.ca/icon-512.png",
+        "description": "Free Alberta scholarship and research program directory for high school students.",
+        "areaServed": { "@type": "AdministrativeArea", "name": "Alberta, Canada" },
+        "founder": {
+          "@type": "Person",
+          // Carries an @id so /about/ can describe the same person rather than
+          // declaring a second, unrelated Person with the same name.
+          "@id": "https://www.scholarab.ca/#founder",
+          "name": "Ilia Ivanov",
+          "sameAs": "https://www.linkedin.com/in/iliaivanov/",
+        },
+        "sameAs": [
+          "https://www.instagram.com/scholarab.ca",
+          "https://www.tiktok.com/@scholarab",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.scholarab.ca/#website",
+        "name": "ScholarAB",
+        "alternateName": ["scholarab"],
+        "url": "https://www.scholarab.ca",
+        "description": "Free Alberta scholarship and research program directory for high school students.",
+        "publisher": { "@id": "https://www.scholarab.ca/#organization" },
+        "inLanguage": "en-CA",
+      },
+    ],
+  })} slot="head" />
+  <SabFonts slot="head" />
+
+  {/* The header is the page's banner and cannot sit inside <main>; it used to
+      be the hero's first flex child. Same dark background either side, so the
+      band still reads as one, but the hero no longer contains the height it
+      has to subtract, hence the calc below. */}
+  <div class="sab-hero-band" slot="header">
+    <SabHeader currentPath="/" />
+  </div>
+
+  <div id="sab-home">
+
+    <!-- ============ DARK HERO ============ -->
+    <div class="sab-hero">
+      <!-- hero body -->
+      <div class="sab-container sab-hero-body">
+        <div class="sab-kicker">BUILT BY A STUDENT, FOR STUDENTS</div>
+
+        <h1 class="sab-h1">
+          Alberta's student opportunities, in <em>one</em> directory.
+        </h1>
+
+        <div class="sab-hero-bottom">
+          <div class="sab-hero-copy">
+            <span class="sab-sticker sab-mono">FREE · NO ACCOUNT · MADE IN MEDICINE HAT</span>
+            <p>
+              ScholarAB tracks scholarships and research programs for Alberta high school students, with every deadline checked by hand. Free, no account needed.
+            </p>
+            <div class="sab-hero-ctas">
+              <a href="/scholarships/" class="sab-btn-accent">
+                Browse {scholarshipCount} scholarships <span class="sab-btn-arrow">→</span>
+              </a>
+              <a href="/programs/" class="sab-btn-outline">
+                Explore programs
+              </a>
+            </div>
+          </div>
+
+          <!-- stat block, ledger style -->
+          <div class="sab-stats">
+            <div class="sab-stat">
+              <div class="sab-stat-value tnum"><span id="hero-amount-count" data-total={activeTotal}>${activeTotal.toLocaleString('en-CA')}</span></div>
+              <div class="sab-stat-label sab-mono">OPEN RIGHT NOW</div>
+            </div>
+            <div class="sab-stat">
+              <div class="sab-stat-value tnum">{scholarshipCount}</div>
+              <div class="sab-stat-label sab-mono">SCHOLARSHIPS</div>
+            </div>
+            <div class="sab-stat">
+              <div class="sab-stat-value tnum">{researchCount}</div>
+              <div class="sab-stat-label sab-mono">RESEARCH PROGRAMS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============ CLOSING THIS WEEK ============ -->
+    {closingSoon.length > 0 && (
+      <div class="sab-container sab-closing" id="closing" data-closing-section>
+        <div class="sab-section-head">
+          <div>
+            <div class="sab-mono sab-eyebrow-urgent">{closingEyebrow}</div>
+            <h2 class="sab-h2">{closingHeading}</h2>
+          </div>
+          <a href="/deadlines/" class="sab-view-all">View all deadlines →</a>
+        </div>
+
+        <div class="sab-closing-table" id="closing-soon-list">
+          {closingSoon.map((s, i) => (
+            <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-closing-row" data-deadline={s.deadline}>
+              <div class="sab-row-num sab-mono">{String(i + 1).padStart(2, '0')}</div>
+              <div class="sab-row-main">
+                <div class="sab-row-name">{s.title}</div>
+                {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
+              </div>
+              <div class="sab-row-amount tnum">{s.amount}</div>
+              <div class="sab-row-chip sab-mono closing-soon-badge">&hellip;</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- ============ BROWSE BY CATEGORY ============ -->
+    <div class="sab-cat-band">
+      <div class="sab-container sab-cats">
+        <div class="sab-section-head">
+          <h2 class="sab-h2">Start where you are</h2>
+          <span class="sab-mono sab-cats-meta">{scholarshipCount} scholarships · {categories.length} tracks</span>
+        </div>
+        <div class="sab-cat-grid">
+          {categories.map(c => (
+            <a href={c.href} class="sab-cat-card">
+              <div class="sab-cat-top">
+                <span class="sab-cat-name">{c.name}</span>
+                <span class="sab-cat-count sab-mono">{c.count}</span>
+              </div>
+              <div class="sab-cat-desc">{c.desc}</div>
+            </a>
+          ))}
+        </div>
+
+        <div class="sab-city-row">
+          <span class="sab-mono sab-city-label">OR BY CITY</span>
+          {cityFacets.map(c => (
+            <a href={`/scholarships/${c.slug}/`} class="sab-city-chip">
+              {c.label}<span class="sab-mono sab-city-count">{c.count}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ MATCH TEASER ============ -->
+    <div class="sab-container sab-match">
+      <div class="sab-match-grid">
+        <div>
+          <div class="sab-mono sab-match-eyebrow">MATCH · {QUIZ_DURATION.toUpperCase()}</div>
+          <h2 class="sab-h2 sab-match-h2">Tell us three things. We'll shortlist for you.</h2>
+          <p class="sab-match-copy">
+            Pick your grade, region, and interests to see which scholarships and programs fit you. Everything stays in your browser, with no account or email needed.
+          </p>
+        </div>
+        <div class="sab-match-card" id="match-teaser">
+          {matchGroups.map(g => (
+            <div class="sab-match-group" data-match-group={g.key}>
+              <div class="sab-mono sab-match-label">{g.label}</div>
+              <div class="sab-match-opts">
+                {g.opts.map(o => (
+                  <button type="button" class="sab-match-opt" data-value={o.value}>{o.label}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+          <button type="button" class="sab-match-cta" id="match-teaser-cta" disabled>Pick 3 more to see matches</button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<script>
+  import { QUIZ_STORAGE_KEY, TEASER_KEYS } from '../lib/quiz';
+  import { sendEvent } from '../lib/events';
+
+  // Questions the teaser answers on the student's behalf: searchType plus the
+  // three it asks. /match resumes at the next unanswered question.
+  const TEASER_STEP = TEASER_KEYS.length + 1;
+
+  // ── Closing-this-week day chips (client-side so a stale static build never lies) ──
+  function updateClosingSoon() {
+    const list = document.getElementById('closing-soon-list');
+    if (!list) return;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayMs = today.getTime();
+    const rows = list.querySelectorAll<HTMLElement>('a[data-deadline]');
+    let visible = 0;
+    rows.forEach(row => {
+      const deadline = row.dataset.deadline;
+      if (!deadline) return;
+      const deadlineMs = new Date(deadline + 'T00:00:00').getTime();
+      if (deadlineMs < todayMs) {
+        row.style.display = 'none';
+        return;
+      }
+      visible++;
+      const daysLeft = Math.round((deadlineMs - todayMs) / 86400000);
+      const chip = row.querySelector('.closing-soon-badge');
+      if (chip) {
+        chip.textContent = daysLeft === 0 ? 'DUE TODAY' : `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`;
+        chip.classList.toggle('sab-chip-urgent', daysLeft <= 4);
+      }
+    });
+    // Renumber the visible rows so hidden expired entries don't leave gaps
+    let n = 0;
+    rows.forEach(row => {
+      if (row.style.display === 'none') return;
+      const num = row.querySelector('.sab-row-num');
+      if (num) num.textContent = String(++n).padStart(2, '0');
+    });
+    if (visible === 0) {
+      const section = list.closest('[data-closing-section]') as HTMLElement | null;
+      if (section) section.style.display = 'none';
+    }
+  }
+
+  updateClosingSoon();
+  document.addEventListener('astro:page-load', updateClosingSoon);
+
+  // ── Hero amount count-up (kept from previous hero; final value is server-rendered) ──
+  function animateHeroAmount() {
+    const el = document.getElementById('hero-amount-count');
+    if (!el || el.dataset.counted) return;
+    el.dataset.counted = 'true';
+    try {
+      if (sessionStorage.getItem('sab_hero_counted')) return;
+      sessionStorage.setItem('sab_hero_counted', '1');
+    } catch { /* storage unavailable; animate anyway */ }
+    const total = parseInt(el.dataset.total || '', 10);
+    if (!Number.isFinite(total) || total <= 0) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const sameDigitFloor = Math.pow(10, String(total).length - 1);
+    const start = Math.max(sameDigitFloor, Math.round(total * 0.35));
+    const DURATION = 1100;
+    let t0: number | null = null;
+    let lastText = '';
+    function tick(now: number) {
+      if (t0 === null) t0 = now;
+      const p = Math.min((now - t0) / DURATION, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const text = '$' + Math.round(start + (total - start) * eased).toLocaleString('en-CA');
+      if (text !== lastText) { el!.textContent = text; lastText = text; }
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  animateHeroAmount();
+  document.addEventListener('astro:page-load', animateHeroAmount);
+
+  // ── Match teaser: local chip picks, CTA goes to the real quiz ──
+  function initMatchTeaser() {
+    const card = document.getElementById('match-teaser');
+    const cta = document.getElementById('match-teaser-cta');
+    if (!card || !cta || card.dataset.init) return;
+    card.dataset.init = 'true';
+
+    const groups = Array.from(card.querySelectorAll<HTMLElement>('[data-match-group]'));
+    const picked = () => {
+      const answers: Record<string, string> = {};
+      for (const g of groups) {
+        const on = g.querySelector<HTMLElement>('.sab-match-opt.on');
+        const key = g.dataset.matchGroup;
+        if (on && key) answers[key] = on.dataset.value ?? '';
+      }
+      return answers;
+    };
+    const update = () => {
+      const chosen = Object.keys(picked()).length;
+      const ready = chosen === groups.length;
+      cta.textContent = ready ? 'Show my matches →' : `Pick ${groups.length - chosen} more to see matches`;
+      // The button navigates, until all three are picked there is nothing to
+      // navigate *with*, so it stays genuinely inert rather than just labelled
+      // as if it were.
+      (cta as HTMLButtonElement).disabled = !ready;
+    };
+    groups.forEach(g => {
+      g.querySelectorAll<HTMLElement>('.sab-match-opt').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const wasOn = btn.classList.contains('on');
+          g.querySelectorAll('.sab-match-opt').forEach(b => b.classList.remove('on'));
+          if (!wasOn) btn.classList.add('on');
+          update();
+        });
+      });
+    });
+    cta.addEventListener('click', async () => {
+      if ((cta as HTMLButtonElement).disabled) return;
+      // Hand the picks to the real quiz instead of dropping them: same storage
+      // key, same option values, so /match resumes at question 5 with the first
+      // four already answered. searchType is seeded to 'both'; the superset,
+      // so the handoff can never hide a result the student would have seen.
+      const answers = { searchType: 'both', ...picked() };
+      try {
+        sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step: TEASER_STEP, answers, savedAt: Date.now() }));
+      } catch { /* private mode: the quiz just starts from question 1 */ }
+      // The quiz only fires quiz_start when it renders question 1, which a
+      // handoff skips. Fire it here so completions still have a denominator.
+      sendEvent('quiz_start');
+      const { navigate } = await import('astro:transitions/client');
+      navigate('/match');
+    });
+    update();
+  }
+
+  initMatchTeaser();
+  document.addEventListener('astro:page-load', initMatchTeaser);
+</script>
+
+<style is:global>
+  /* The home design is fixed light regardless of site theme */
+  body:has(#sab-home) { background: #FAF7F0; }
+</style>
+
+<style>
+  /* ════ ScholarAB Home · claude.ai/design "ScholarAB Home.dc.html" ════
+     Palette: canvas #FAF7F0 · alt band #F2EEE4 · ink #141915 · hero/footer #0B1512
+     accent #2FD3A0 (soft: 40% alpha) · green text #0A6B4D (fills/borders
+     may still use the lighter #0E8C64) · urgency #B8541F
+     Type: Instrument Serif (display) · Archivo (UI/body) · IBM Plex Mono (labels) */
+
+  #sab-home {
+    background: #FAF7F0;
+    color: #141915;
+    font-family: 'Archivo', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #sab-home ::selection { background: #2FD3A0; color: #0B1512; }
+  .sab-mono { font-family: 'IBM Plex Mono', monospace; }
+  .sab-container { max-width: var(--sab-measure); margin: 0 auto; width: 100%; box-sizing: border-box; padding-left: 48px; padding-right: 48px; }
+
+  @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes sab-pop { 0% { transform: scale(0.94); } 60% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+  /* ── Dark hero ── */
+  /* Fills the first viewport so no canvas sliver peeks below the fold on
+     tall/fullscreen windows; on short viewports it grows past 100svh. */
+  .sab-hero-band { background: #0B1512; color: #F2F0E9; }
+  .sab-hero {
+    background: #0B1512; color: #F2F0E9; position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    /* The header used to be inside this box and counted toward the fold. Now
+       it sits above, so its two bands come off the target instead. */
+    min-height: calc(100vh - var(--sab-nav-h) - var(--sab-ticker-h));
+    min-height: calc(100svh - var(--sab-nav-h) - var(--sab-ticker-h));
+  }
+
+  .sab-hero-body {
+    padding-top: 76px; position: relative;
+    /* Center the copy in the space left under the header/ticker */
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    width: 100%; box-sizing: border-box;
+  }
+
+  .sab-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(42px, 8.2vw, 96px); line-height: 0.98; letter-spacing: -0.015em;
+    margin: 0; max-width: 1050px; text-wrap: balance;
+    animation: sab-rise 0.7s ease both;
+  }
+  .sab-h1 em { font-style: italic; color: #2FD3A0; }
+
+  .sab-hero-bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 40px; margin-top: 52px; padding-bottom: 64px;
+  }
+  .sab-hero-copy { max-width: 460px; }
+  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 0 0 30px; }
+  .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .sab-sticker {
+    display: inline-block; margin-bottom: 22px; padding: 8px 16px;
+    background: #2FD3A0; color: #0B1512; font-size: 11.5px; letter-spacing: 0.06em;
+    border-radius: 100px; border: 2px solid #0B1512;
+    box-shadow: 3px 3px 0 rgba(242,240,233,0.25);
+    transform: rotate(-2.5deg);
+  }
+  /* Buttons lift onto a hard accent shadow on hover/keyboard focus, then snap
+     flush into it while held; same press language as the category cards. */
+  .sab-btn-accent {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #2FD3A0; color: #0B1512; font-weight: 700; font-size: 16px;
+    padding: 16px 28px; border-radius: 100px; text-decoration: none; white-space: nowrap;
+    transition: background 0.18s ease, color 0.18s ease,
+                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .sab-btn-accent:hover, .sab-btn-accent:focus-visible {
+    background: #F2F0E9; color: #0B1512;
+    transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+  }
+  .sab-btn-accent:active {
+    transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0;
+    transition-duration: 0.07s;
+  }
+  /* The arrow used to slide 4px right on hover. The button already lifts onto
+     its shadow, which is this site's own press language; the slide was a
+     second borrowed one stacked on top of it. Static now, and sized in CSS
+     rather than by an inline style. */
+  .sab-btn-arrow { font-size: 18px; line-height: 1; }
+
+  .sab-btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: #F2F0E9; font-weight: 600; font-size: 16px;
+    padding: 16px 24px; border-radius: 100px; border: 1px solid rgba(242,240,233,0.3);
+    text-decoration: none; white-space: nowrap;
+    transition: border-color 0.18s ease, background 0.18s ease,
+                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .sab-btn-outline:hover, .sab-btn-outline:focus-visible {
+    border-color: #2FD3A0; color: #F2F0E9;
+    transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+  }
+  .sab-btn-outline:active {
+    transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0;
+    transition-duration: 0.07s;
+  }
+
+  .sab-stats { display: flex; border-left: 1px solid rgba(242,240,233,0.18); }
+  .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(242,240,233,0.18); }
+  .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; font-variant-numeric: tabular-nums; }
+  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); margin-top: 6px; white-space: nowrap; }
+
+  /* ── Closing this week ── */
+  .sab-closing { padding-top: 96px; padding-bottom: 40px; }
+  .sab-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px; gap: 20px; }
+  .sab-eyebrow-urgent { font-size: 13px; letter-spacing: 0.06em; color: #B8541F; margin-bottom: 14px; }
+  .sab-h2 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.01em; margin: 0;
+  }
+  .sab-view-all {
+    font-weight: 600; font-size: 15px; color: #141915; text-decoration: none;
+    border-bottom: 2px solid #2FD3A0; padding-bottom: 3px; white-space: nowrap;
+  }
+  .sab-view-all:hover { color: #0A6B4D; }
+
+  .sab-closing-table { border-top: 2px solid #141915; }
+  .sab-closing-row {
+    display: grid; grid-template-columns: 64px 1fr auto auto; gap: 28px; align-items: center;
+    padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
+    cursor: pointer; color: inherit; text-decoration: none;
+  }
+  .sab-closing-row:hover { background: rgba(47,211,160,0.07); color: inherit; }
+  .sab-row-num { font-size: 14px; color: rgba(20,25,21,0.4); }
+  .sab-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
+  .sab-row-blurb {
+    font-size: 14.5px; color: rgba(20,25,21,0.55); margin-top: 5px;
+    display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .sab-row-amount { font-family: 'Instrument Serif', serif; font-size: 28px; text-align: right; }
+  .sab-row-chip {
+    font-size: 12.5px; font-weight: 500; padding: 7px 14px; border-radius: 100px;
+    background: rgba(184,84,31,0.12); color: #B8541F; white-space: nowrap;
+  }
+  .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #FAF7F0; }
+
+  /* ── Categories ── */
+  .sab-cat-band { background: #F2EEE4; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
+  .sab-cats { padding-top: 88px; padding-bottom: 88px; }
+  .sab-cats .sab-section-head { margin-bottom: 44px; }
+  .sab-cats-meta { font-size: 13px; color: rgba(20,25,21,0.5); white-space: nowrap; }
+  .sab-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sab-cat-card {
+    display: block; background: #FAF7F0; border: 1.5px solid rgba(20,25,21,0.85);
+    border-radius: 14px; padding: 24px 22px; color: #141915; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sab-cat-card:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #2FD3A0; color: #141915; }
+  .sab-cat-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .sab-cat-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .sab-cat-count { font-size: 12px; color: rgba(20,25,21,0.45); }
+  .sab-cat-desc { font-size: 13.5px; color: rgba(20,25,21,0.55); margin-top: 8px; line-height: 1.45; }
+
+  /* City row: a quieter chip than the category cards on purpose. Cities are a
+     second axis through the same listings, not eight more tracks.
+     Metrics are tighter than they look like they should be because eight
+     scopes at padding 15 and gap 10 came to 1117px in a 1084px measure, and
+     National dropped onto a line of its own -- one orphan chip under a full
+     row, which reads as a mistake rather than as a wrap. 12 and 8 bring it to
+     1053 with 31px spare. It still wraps, and has to below about 1100px; a
+     ninth scope would need re-measuring rather than eyeballing. */
+  .sab-city-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
+  .sab-city-label { font-size: 11px; letter-spacing: 0.12em; color: rgba(20,25,21,0.45); margin-right: 4px; }
+  .sab-city-chip {
+    display: inline-flex; align-items: baseline; gap: 8px;
+    border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+    padding: 7px 12px; font-size: 14px; font-weight: 600;
+    color: #141915; text-decoration: none; background: #FAF7F0;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sab-city-chip:hover { border-color: #141915; box-shadow: 2px 2px 0 #2FD3A0; color: #141915; }
+  .sab-city-count { font-size: 11px; color: rgba(20,25,21,0.45); }
+
+  /* ── Match teaser ── */
+  .sab-match { padding-top: 96px; padding-bottom: 96px; }
+  .sab-match-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: center; }
+  .sab-match-eyebrow { font-size: 13px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 16px; }
+  .sab-match-h2 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.05; margin-bottom: 20px; }
+  .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.65); margin: 0; }
+  .sab-match-card {
+    background: #FAF7F0; border: 2px solid #141915; border-radius: 20px; padding: 36px;
+    box-shadow: 8px 8px 0 rgba(47,211,160,0.4);
+  }
+  .sab-match-group { margin-bottom: 22px; }
+  .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); margin-bottom: 10px; }
+  .sab-match-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sab-match-opt {
+    font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 600;
+    padding: 9px 16px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
+    background: transparent; color: #141915; cursor: pointer;
+    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease,
+                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .sab-match-opt:hover, .sab-match-opt:focus-visible {
+    border-color: #141915; transform: translate(-2px, -2px); box-shadow: 3px 3px 0 #2FD3A0;
+  }
+  .sab-match-opt:active { transform: translate(0, 0); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+  /* a small pop the moment a chip turns on */
+  .sab-match-opt.on {
+    background: #141915; color: #F2F0E9; border-color: #141915;
+    animation: sab-pop 0.24s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .sab-match-cta {
+    width: 100%; margin-top: 6px; font-family: 'Archivo', sans-serif;
+    background: #141915; color: #F2F0E9; font-weight: 700; font-size: 16px;
+    padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+    transition: background 0.18s ease,
+                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  .sab-match-cta:hover, .sab-match-cta:focus-visible {
+    background: #0A6B4D; transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+  }
+  .sab-match-cta:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+  /* Inert until all three are picked: the label is an instruction at that
+     point, so the control must not look like it can be obeyed. */
+  .sab-match-cta:disabled {
+    background: transparent; color: rgba(20,25,21,0.45);
+    border: 1.5px dashed rgba(20,25,21,0.25); cursor: default;
+  }
+  .sab-match-cta:disabled:hover { background: transparent; transform: none; box-shadow: none; }
+
+  /* ── Motion safety ── */
+  @media (prefers-reduced-motion: reduce) {
+    .sab-h1 { animation: none; }
+    .sab-cat-card, .sab-cat-card:hover { transform: none; transition: none; }
+    /* keep the colour/shadow feedback, drop the movement */
+    .sab-btn-accent, .sab-btn-outline, .sab-match-cta, .sab-match-opt,
+    .sab-btn-accent:hover, .sab-btn-outline:hover, .sab-match-cta:hover, .sab-match-opt:hover,
+    .sab-btn-accent:focus-visible, .sab-btn-outline:focus-visible,
+    .sab-match-cta:focus-visible, .sab-match-opt:focus-visible,
+    .sab-btn-accent:active, .sab-btn-outline:active, .sab-match-cta:active, .sab-match-opt:active {
+      transform: none; transition: none;
+    }
+    .sab-match-opt.on { animation: none; }
+  }
+
+  /* ── Responsive (the design specifies ≥1080px; below is adapted) ── */
+  /* Phone layout: "ScholarAB Mobile Home.dc.html". The whole point of state A
+     is that the hero stops reserving a viewport for itself, so a student
+     lands on the promise, the money, the counts *and* the name of one
+     closing scholarship without scrolling. */
+  @media (max-width: 900px) {
+    .sab-container { padding-left: 20px; padding-right: 20px; }
+    /* The rule that ate the phone viewport. Nothing else in the hero
+       changes shape; it simply stops padding itself out to 100svh. */
+    .sab-hero { min-height: 0; }
+    .sab-hero-body { padding-top: 22px; }
+    /* 44px at 390, 41 at 360, 48 at a Pro Max; where the closing list
+       clears one more row above the fold. */
+    .sab-h1 { font-size: clamp(38px, 11.5vw, 48px); }
+    .sab-hero-bottom { flex-direction: column; align-items: stretch; gap: 0; margin-top: 16px; padding-bottom: 20px; }
+    .sab-hero-copy { max-width: none; }
+    .sab-hero-copy p { font-size: 14.5px; line-height: 1.5; margin: 0 0 16px; }
+    .sab-sticker { margin-bottom: 14px; padding: 7px 14px; font-size: 10.5px; }
+    .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 9px; }
+    .sab-btn-accent, .sab-btn-outline { justify-content: center; padding: 0 20px; }
+    .sab-btn-accent { height: 52px; font-size: 16px; }
+    .sab-btn-outline { height: 46px; font-size: 15px; }
+    /* Ledger row: three columns under one hairline, sized so the dollar
+       figure keeps its line and nothing shrinks below 9.5px. */
+    .sab-stats {
+      border-left: none; width: 100%;
+      margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(242,240,233,0.18);
+    }
+    .sab-stat { flex: 1; min-width: 0; padding: 0 12px 0 0; border-right: none; }
+    .sab-stat + .sab-stat { padding-left: 14px; border-left: 1px solid rgba(242,240,233,0.18); }
+    .sab-stat:first-child { flex: 1.3; }
+    .sab-stat:nth-child(2) { flex: 0.85; }
+    .sab-stat-value { font-size: 27px; }
+    /* "RESEARCH PROGRAMS" wraps at 360; two lines beats a smaller label. */
+    .sab-stat-label { font-size: 9.5px; margin-top: 5px; white-space: normal; }
+
+    .sab-closing { padding-top: 22px; padding-bottom: 8px; }
+    .sab-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .sab-h2 { font-size: 34px; }
+    /* "View all deadlines" belongs under the list it summarizes. Letting the
+       head dissolve into the section's own flex column is what lets the
+       link move without moving it in the markup. */
+    .sab-closing { display: flex; flex-direction: column; }
+    .sab-closing .sab-section-head { display: contents; }
+    .sab-closing .sab-section-head > div { order: 1; }
+    .sab-closing .sab-eyebrow-urgent { font-size: 11.5px; margin-bottom: 8px; }
+    .sab-closing-table { order: 2; margin-top: 12px; }
+    .sab-closing .sab-view-all { order: 3; align-self: flex-start; margin-top: 20px; }
+    .sab-closing-row { grid-template-columns: 1fr auto; gap: 4px 14px; padding: 16px 2px; min-height: 44px; }
+    .sab-row-num { display: none; }
+    .sab-row-main { grid-column: 1; min-width: 0; }
+    .sab-row-name { font-size: 16px; line-height: 1.3; }
+    .sab-row-blurb { font-size: 13px; margin-top: 4px; }
+    .sab-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; white-space: nowrap; }
+    .sab-row-chip { grid-column: 1 / -1; justify-self: start; margin-top: 4px; font-size: 11px; padding: 6px 12px; }
+
+    .sab-cats { padding-top: 32px; padding-bottom: 32px; }
+    .sab-cats .sab-section-head { margin-bottom: 22px; }
+    .sab-cats-meta { font-size: 11.5px; }
+    .sab-cat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .sab-cat-card { padding: 16px 14px; min-height: 44px; }
+    .sab-cat-name { font-size: 15px; }
+    .sab-cat-desc { font-size: 12.5px; margin-top: 6px; }
+    .sab-cat-top { gap: 6px; }
+    .sab-cat-count { font-size: 11.5px; }
+
+    .sab-match { padding-top: 34px; padding-bottom: 40px; }
+    .sab-match-grid { grid-template-columns: 1fr; gap: 22px; }
+    .sab-match-eyebrow { font-size: 11.5px; margin-bottom: 12px; }
+    .sab-match-h2 { font-size: 32px; margin-bottom: 12px; }
+    .sab-match-copy { font-size: 15px; }
+    .sab-match-card { padding: 22px 18px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
+    .sab-match-group { margin-bottom: 18px; }
+    .sab-match-label { font-size: 11px; }
+    /* Same chips, taller: 34px was under the tap target minimum. */
+    .sab-match-opt { min-height: 44px; padding: 0 16px; }
+    .sab-match-cta { height: 52px; padding: 0 16px; }
+  }
+  /* Two-up survives 390 and 360; the two-word track names still fit. Below
+     that they don't. */
+  @media (max-width: 359px) {
+    .sab-cat-grid { grid-template-columns: 1fr; }
+  }
+</style>

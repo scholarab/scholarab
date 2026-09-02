@@ -1,0 +1,427 @@
+---
+// Server-rendered replacement for the old ScholarshipList React island.
+// Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
+// them and recomputes the clock-dependent bits on load, so no React ships.
+import { DEFAULT_SCHOLARSHIP_STATE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipDayChip, scholarshipGroupKey, shortDate } from '../../lib/list-core.ts';
+import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
+import { generateSlug } from '../../lib/utils.ts';
+import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../../lib/facets.ts';
+
+interface Props {
+  items: ScholarshipWithMeta[];
+  /** Facet hubs supply their own heading and standfirst; /scholarships keeps these defaults. */
+  h1?: string;
+  intro?: string;
+  /** Slug of the region hub this is rendering, or null on /scholarships and the
+      category hubs. A region hub used to hide the SCOPE row entirely, because a
+      chip that filtered could only empty a page already narrowed to one city.
+      Now that a city chip navigates, the row is the way across to another city,
+      and hiding it left the reader with the breadcrumb and two clicks. */
+  currentRegion?: string | null;
+  /** The whole corpus, for counting the city chips. A region hub is handed only
+      its own city in `items`, so it must pass this too. */
+  allItems?: ScholarshipWithMeta[];
+  /** A category hub has already applied a track, so TRACK would only offer the
+      reader ways to empty their own page. */
+  hideCategories?: boolean;
+}
+const {
+  items,
+  h1 = 'Scholarships',
+  intro = 'All available scholarships for Alberta high school students. Every listing is checked by hand, and carries the month it was last checked.',
+  currentRegion = null,
+  allItems = items,
+  hideCategories = false,
+} = Astro.props;
+
+// SCOPE, not REGION: these are how far an award reaches, not where the student
+// lives. Labelled REGION, "Alberta" read as "I live in Alberta", which is true
+// of everyone here; instead of "open province-wide". The data key stays
+// `region`; only the word the student reads changes.
+//
+// The city chips are derived from the facet registry rather than listed here,
+// because the two were allowed to drift and did: five cities had hub pages and
+// guide links pointing at them while the chip row offered Medicine Hat alone,
+// leaving forty-one awards with no button that could reach them. The same
+// MIN_FACET_ITEMS floor the hubs and the sitemap use applies here too -- a scope too thin to deserve a page is too thin
+// to deserve a chip, and a chip is a worse version of the failure either way.
+// A region hub is handed only its own city's items, so counting chips against
+// `items` there would print "Medicine Hat 20" beside "Calgary 0" and hide every
+// other city below the MIN_FACET_ITEMS floor. The chip row is a map of the whole
+// directory wherever it appears, so it counts against the whole corpus.
+const chipSource = allItems;
+// Biggest first, the same order TRACK is in. The row used to run in registry
+// order, which is a fact about the file and not about the data: Calgary's 132
+// sat fourth behind three scopes a tenth its size. Counted against the whole
+// corpus rather than the page, so the order is the same on every hub and a
+// reader crossing the row twice finds the chip where they left it.
+const regionChips = SCHOLARSHIP_FACETS
+  .filter(f => f.kind === 'region' && facetItems(f, chipSource).length >= MIN_FACET_ITEMS)
+  .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, chipSource).length }))
+  .sort((a, b) => b.count - a.count);
+
+// A scope chip navigates to that scope's hub rather than filtering in place.
+// The hub is the better page for the same intent: it carries a written intro, a
+// guide link, its own TRACK and STATUS rows, and a URL the reader can send to
+// someone. Filtering produced the same list at a URL that forgot it by the next
+// visit, and the homepage already sent this click to the hub, so the two rows
+// disagreed about what picking a scope means.
+//
+// The province-wide and National chips used to be the exception, filtering
+// because neither had a hub. Both have one now, so the whole row navigates and
+// there is no second kind of chip in it.
+//
+// One thing changed with them: the Alberta chip was the `Alberta-wide` rollup,
+// every provincial region including the six cities. As a hub that would have
+// been a near-copy of this page at a second URL, so the chip is now the
+// province-wide facet -- the awards with no city requirement -- and its count
+// drops accordingly. `regionMatches('Alberta-wide')` stays in list-core for the
+// match flow, which still wants the rollup.
+
+const SORT_CHIPS = [
+  { value: 'closest_due', label: 'Earliest deadline' },
+  { value: 'highest_pay', label: 'Highest $' },
+  { value: 'lowest_pay',  label: 'Lowest $' },
+] as const;
+
+const STATUS_CHIPS = [
+  { value: 'all',     label: 'All' },
+  { value: 'active',  label: 'Open' },
+  { value: 'opening', label: 'Opening soon' },
+  { value: 'closed',  label: 'Closed' },
+] as const;
+
+const counts = new Map<string, number>();
+for (const s of items) if (s.category) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
+const categories = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]) => name);
+
+// Every filter chip carries the size of the list it would leave behind. The
+// row already had counts on the city chips alone, which read as those five
+// being the only measured thing on the page rather than as a general habit.
+//
+// These are the figures for the default state; directory-client recomputes all
+// of them against the live state on the first render, so the numbers a reader
+// with JS sees are always the ones that match their own filters. The
+// server-rendered pass is what a reader without JS gets, and what fills the
+// row before hydration so nothing reflows.
+const chipCount = (o: Partial<ScholarshipFilterState>) =>
+  filterSortScholarships(items, { ...DEFAULT_SCHOLARSHIP_STATE, ...o }).length;
+
+const initial = filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
+
+// Labelled seams between the open / not-yet-open / closed runs. Emitted
+// server-side so the grid reads the same before hydration; the client reuses
+// these exact nodes and re-splices them as filters change.
+const runs = groupRuns(initial, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS);
+const showGroups = runs.length > 1;
+const headerAt = new Map<number, { label: string; count: number; key: string }>();
+if (showGroups) {
+  let at = 0;
+  for (const r of runs) { headerAt.set(at, r); at += r.count; }
+}
+const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length;
+
+// "$X open across these listings"; active money only, follows the filters
+const totalOpen = initial.reduce(
+  (sum, s) => sum + (getScholarshipStatus(s) === 'active' ? (s._amount ?? 0) : 0), 0,
+);
+
+// The money on listings whose cycle has not opened yet. Without this the header
+// is flat for months at a time: an award added in August that opens in March
+// adds nothing to totalOpen, which is correct and reads as a stalled page.
+const totalSoon = initial.reduce(
+  (sum, s) => sum + (getScholarshipStatus(s) === 'future' ? (s._amount ?? 0) : 0), 0,
+);
+
+// A hub can hold nothing open at all: every Calgary award runs on the one
+// EducationMatters cycle, so between June and February the honest open figure
+// is $0. A $0 hero reads as breakage, so the upcoming money is promoted into
+// the headline and the label says which of the two it is.
+const statValue = totalOpen > 0 || totalSoon === 0 ? totalOpen : totalSoon;
+const statLabel = totalOpen > 0 || totalSoon === 0
+  ? 'OPEN ACROSS THESE LISTINGS'
+  : 'OPENING IN A LATER CYCLE';
+const showSoon = totalOpen > 0 && totalSoon > 0;
+---
+
+<div class="sabl-page">
+  <div class="sabl-title-row">
+    <div>
+      <h1 class="sabl-h1">{h1}</h1>
+      <p class="sabl-desc">{intro}</p>
+    </div>
+    <div class="sabl-stat">
+      <div class="sabl-stat-value tnum" data-dir-stat>${statValue.toLocaleString('en-CA')}</div>
+      <div class="sabl-mono sabl-stat-label" data-dir-stat-label>{statLabel}</div>
+      <div class="sabl-mono sabl-stat-soon" data-dir-stat-soon hidden={!showSoon}>
+        {showSoon ? `+$${totalSoon.toLocaleString('en-CA')} OPENING LATER` : ''}
+      </div>
+    </div>
+  </div>
+
+  <div class="sabl-toolbar">
+    <div class="sabl-search">
+      <span class="sabl-search-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      <input
+        type="search"
+        data-dir-search
+        placeholder="Search by name or keyword…"
+        aria-label="Search scholarships by name or keyword"
+      />
+    </div>
+    <div class="sabl-sort">
+      <span class="sabl-mono sabl-row-label">SORT</span>
+      {SORT_CHIPS.map(s => (
+        <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
+      ))}
+    </div>
+  </div>
+
+  {/* -dense: ten TRACK chips now that each carries a count, which is 90px more
+      than the measure holds at the default metrics. The rows scroll rather than
+      wrap, so this is not load-bearing; it just buys back enough width that
+      nobody has to scroll the row on a desktop. See the modifier in global.css. */}
+  <div class="sabl-filters sabl-filters-dense">
+    {!hideCategories && (
+      <div class="sabl-filter-row">
+        <span class="sabl-mono sabl-row-label">TRACK</span>
+        <div class="sabl-chips">
+            <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
+            {categories.map(c => (
+              <button type="button" class="sabl-chip" data-fkey="category" data-fval={c} aria-pressed="false">{c}<span class="sabl-mono sabl-chip-count" data-chip-count>{counts.get(c) ?? 0}</span></button>
+            ))}
+        </div>
+      </div>
+    )}
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">SCOPE</span>
+      <div class="sabl-chips">
+        {currentRegion
+          ? <a href="/scholarships/" class="sabl-chip sabl-chip-link">All</a>
+          : <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>}
+        {regionChips.map(c => (
+          c.slug === currentRegion
+            ? <span class="sabl-chip on" aria-current="page">
+                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+              </span>
+            : <a href={`/scholarships/${c.slug}/`} class="sabl-chip sabl-chip-link">
+                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+              </a>
+        ))}
+      </div>
+    </div>
+    <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">STATUS</span>
+      <div class="sabl-chips">
+        {STATUS_CHIPS.map(s => (
+          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value })}</span></button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* Typing in the search box rewrites this line and nothing else visible
+      changes above the fold, so without a live region a screen-reader user
+      gets no signal that 278 listings just became 4. role="status" is
+      implicitly polite and atomic, which is right: the line is replaced
+      wholesale on every keystroke, not appended to. */}
+  <div class="sabl-mono sabl-result-line" data-dir-count role="status">
+    {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
+  </div>
+
+  <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
+    {initial.map((s, i) => {
+      const status = getScholarshipStatus(s);
+      const chip = scholarshipDayChip(s);
+      const head = headerAt.get(i);
+      return (
+        <>
+        {head && (
+          <div class="sabl-group" data-dir-group={head.key}>
+            <span class="sabl-group-label">{head.label}</span>
+            <span class="sabl-group-count">{head.count}</span>
+          </div>
+        )}
+        <div
+          class="sabl-card"
+          data-dir-card
+          data-id={s.id}
+          data-name={s.title}
+          data-category={s.category ?? undefined}
+          data-region={s.region ?? undefined}
+          data-amount={String(s._amount ?? 0)}
+          data-deadline={s.deadline ?? undefined}
+          data-open-date={s.openDate ?? undefined}
+          data-inactive={s.active === false ? '' : undefined}
+          data-search={[s.title, s.audience, s.category].filter(Boolean).join('\n').toLowerCase()}
+        >
+          <div class="sabl-card-top">
+            <span class="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
+            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
+          </div>
+          <a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a>
+          <div class="sabl-amount">{s.amount}</div>
+          {s.audience && <div class="sabl-blurb">{s.audience}</div>}
+          <div class="sabl-card-foot">
+            <span class="sabl-due">
+              {s.deadline ? `DUE ${shortDate(s.deadline)}` : 'NO FIXED DEADLINE'}
+            </span>
+            <div class="sabl-card-actions">
+              <button
+                type="button"
+                class="sabl-save"
+                data-dir-save
+                data-id={s.id}
+                data-name={s.title}
+                aria-label={`Save ${s.title}`}
+                aria-pressed="false"
+              >☆</button>
+              {s.url && (
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  referrerpolicy="no-referrer"
+                  class="sabl-apply"
+                  data-track="apply"
+                  data-item-id={s.id}
+                  aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
+                ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span><span class="sabl-ext" aria-hidden="true">↗</span></a>
+              )}
+            </div>
+          </div>
+        </div>
+        </>
+      );
+    })}
+  </div>
+
+  <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
+    <div class="sabl-empty-title">Nothing matches that.</div>
+    <div class="sabl-empty-sub">Try clearing a filter or searching something broader.</div>
+    <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
+  </div>
+</div>
+
+<script>
+  import { initDirectory } from '../../lib/directory-client.ts';
+  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipDayChip, scholarshipGroupKey, selectScholarships } from '../../lib/list-core.ts';
+  import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
+  import { getSaved, toggleSaved } from '../../lib/tracker.ts';
+  import { sendEvent } from '../../lib/events.ts';
+
+  // `name` mirrors the card title for the DirectoryItem contract (save labels)
+  type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string };
+  type State = { sort: string; category: string; region: string; status: string };
+
+  /** Open money and not-yet-open money for the rows currently on screen. */
+  function statMoney(visible: Item[]) {
+    let open = 0, soon = 0;
+    for (const s of visible) {
+      const status = getScholarshipStatus(s);
+      if (status === 'active') open += s._amount ?? 0;
+      else if (status === 'future') soon += s._amount ?? 0;
+    }
+    return { open, soon };
+  }
+
+  type Cache = Map<number, ScholarshipStatus>;
+
+  /** The filter state a chip row's key/value pair stands for. */
+  const asFilterState = (state: State) => ({
+    statusFilter: state.status as StatusFilter,
+    selectedCategory: state.category,
+    selectedRegion: (state.region || null) as RegionKey | null,
+    searchQuery: '',
+    sortBy: state.sort as ScholarshipSort,
+  });
+
+  initDirectory<Item, State, Cache>('#sab-scholarships', {
+    itemType: 'scholarship',
+    defaultState: { sort: 'closest_due', category: 'all', region: '', status: 'all' },
+    toggleKeys: ['category', 'region'],
+    countKeys: ['category', 'region', 'status'],
+    parseCard(el) {
+      const d = el.dataset;
+      return {
+        el,
+        search: d.search ?? '',
+        id: Number(d.id),
+        name: d.name ?? '',
+        title: d.name ?? '',
+        category: d.category ?? null,
+        region: d.region ?? null,
+        deadline: d.deadline ?? null,
+        openDate: d.openDate ?? null,
+        _amount: Number(d.amount ?? 0),
+        // Recomputed here, in the visitor's timezone, from the ISO strings.
+        // Never serialize these from the server: the build runs in UTC, which
+        // shifts every deadline 6-7h early for Alberta visitors.
+        _deadline_ms: d.deadline ? new Date(d.deadline + 'T00:00:00').getTime() : 0,
+        _open_ms: d.openDate ? new Date(d.openDate + 'T00:00:00').getTime() : 0,
+        amount: '', audience: null, url: '', lastVerified: null, notes: null,
+        applyViaGuidance: false, active: d.inactive === undefined, eligibility: null,
+      };
+    },
+    // One pass over the corpus per render, shared by the visible list and all
+    // seventeen chip counts.
+    renderContext: items => buildScholarshipStatusCache(items),
+    select(items, state, q, cache) {
+      const sorted = filterSortScholarships(items, asFilterState(state), cache) as Item[];
+      return q ? sorted.filter(it => it.search.includes(q)) : sorted;
+    },
+    countFor(items, state, q, cache) {
+      const pool = selectScholarships(items, asFilterState(state), cache) as Item[];
+      return q ? pool.filter(it => it.search.includes(q)).length : pool.length;
+    },
+    countLine: (shown, total, visible) =>
+      directoryCountLine(shown, total, 'LISTINGS', visible.filter(s => getScholarshipStatus(s) === 'active').length),
+    groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key },
+    stat: visible => {
+      const { open, soon } = statMoney(visible);
+      return '$' + (open > 0 || soon === 0 ? open : soon).toLocaleString('en-CA');
+    },
+    statLabel: visible => {
+      const { open, soon } = statMoney(visible);
+      return open > 0 || soon === 0 ? 'OPEN ACROSS THESE LISTINGS' : 'OPENING IN A LATER CYCLE';
+    },
+    statSoon: visible => {
+      const { open, soon } = statMoney(visible);
+      return open > 0 && soon > 0 ? `+$${soon.toLocaleString('en-CA')} OPENING LATER` : '';
+    },
+    getSavedIds: () => [...getSaved()],
+    toggleSave: id => [...toggleSaved(id)],
+    saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),
+    // Day chips and Apply/Visit labels depend on the clock, not just the data:
+    // recompute them on every load so CDN-cached HTML never shows stale text.
+    onCardsParsed(items) {
+      for (const s of items) {
+        const status = getScholarshipStatus(s);
+        const chipEl = s.el.querySelector<HTMLElement>('[data-days-chip]');
+        if (chipEl) {
+          const chip = scholarshipDayChip(s);
+          chipEl.hidden = !chip;
+          if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
+        }
+        const apply = s.el.querySelector<HTMLElement>('[data-track="apply"]');
+        // Only the word: the ↗ beside it is a sibling span, and overwriting
+        // the anchor's textContent would take the arrow with it.
+        const applyLabel = apply?.querySelector('[data-apply-label]');
+        if (applyLabel) applyLabel.textContent = status === 'active' ? 'Apply' : 'Visit';
+      }
+    },
+    // Deep links like /scholarships?category=STEM pre-select that track chip
+    initialState(state) {
+      const cat = new URLSearchParams(window.location.search).get('category');
+      return cat ? { ...state, category: cat } : state;
+    },
+  });
+
+  // Outbound apply clicks are an analytics event (same as the old React list)
+  document.addEventListener('click', e => {
+    const link = (e.target as Element | null)?.closest?.('[data-track="apply"]');
+    if (link && link.closest('#sab-scholarships')) {
+      sendEvent('apply_click', 'scholarship', Number((link as HTMLElement).dataset.itemId));
+    }
+  });
+</script>

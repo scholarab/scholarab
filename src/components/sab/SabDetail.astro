@@ -1,0 +1,576 @@
+---
+// Editorial detail page from the claude.ai/design "ScholarAB Detail" page,
+// shared by scholarship and program slug pages.
+// Deviations from the design (established site conventions):
+// - SabHeader replaces the design's plain header (the ticker band is on every page
+//   at desktop width); the mono
+//   annotation bar stays removed per Ilia (2026-07-11).
+// - The canvas "PREVIEWING X OF N" switcher is implemented as real prev/next
+//   links between listings ("LISTING X OF N").
+// - No "Hand-checked / Last verified" line (removed site-wide 2026-07-12).
+// - Reminder copy reflects the real send schedule (30/14/3 days out).
+// - Closed and opening-soon states added (the design only shows open listings).
+
+import { emailOff } from '../../lib/email-off';
+
+interface Fact {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  itemType: 'scholarship' | 'program';
+  itemId: number;
+  typeLabel: string; // 'SCHOLARSHIP' | 'PROGRAM'
+  tag: string | null; // category, uppercased
+  name: string;
+  subline: string;
+  status: 'active' | 'closed' | 'future' | 'ongoing' | 'tba';
+  daysLeft: number | null;
+  // ISO dates for the client-side chip recompute: the page is prerendered, so
+  // the SSR chip is only as fresh as the last build. null = not clock-driven.
+  deadlineIso?: string | null;
+  openDateIso?: string | null;
+  inactive?: boolean; // curator-closed next-cycle listing (open date unknown)
+  dueLong: string; // 'July 15, 2026' / 'Ongoing' / 'TBA'
+  opensLabel?: string | null; // formatted open date, for status 'future'
+  backHref: string;
+  backLabel: string;
+  /** The facet hub this listing sits under, when it has one. */
+  facetHref?: string | null;
+  facetLabel?: string | null;
+  facts: Fact[];
+  eligibility: string | null;
+  about: string | null;
+  notes?: string | null;
+  steps: string[];
+  valueLabel: string;
+  valueBig: string;
+  valueNote?: string | null;
+  ctaLabel: string;
+  url: string;
+  canRemind: boolean;
+  canonical: string;
+  /** Link to the guide that explains this listing, when one covers it. */
+  guideHref?: string;
+  guideTitle?: string;
+}
+
+const {
+  itemType, itemId, typeLabel, tag, name, subline,
+  status, daysLeft, deadlineIso, openDateIso, inactive, dueLong, opensLabel,
+  backHref, backLabel, facetHref = null, facetLabel = null,
+  facts, eligibility, about, notes, steps,
+  valueLabel, valueBig, valueNote,
+  ctaLabel, url, canRemind, canonical, guideHref, guideTitle,
+} = Astro.props;
+
+const urgent = status === 'active' && typeof daysLeft === 'number' && daysLeft <= 7;
+
+// Listing prose can carry a provider's own address ("apply to x@y.ca"), so it
+// is bracketed for Cloudflare's obfuscator. See src/lib/email-off.ts.
+const aboutHtml = about ? emailOff(about) : '';
+const notesHtml = notes ? emailOff(notes) : '';
+
+const chip =
+  status === 'closed' ? { text: 'CLOSED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
+  : status === 'future' ? { text: opensLabel ? `OPENS ${opensLabel.toUpperCase()}` : 'OPENING SOON', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
+  : status === 'ongoing' ? { text: 'ONGOING · JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
+  : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
+  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#B8541F', fg: '#FAF7F0' }
+  : typeof daysLeft === 'number'
+    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#B8541F' : 'rgba(184,84,31,0.12)', fg: urgent ? '#FAF7F0' : '#B8541F' }
+    : { text: 'OPEN', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' };
+---
+
+<div class="sabd-crumb-row">
+  <a href={backHref} class="sabd-mono sabd-back">← {backLabel}</a>
+  {facetHref && facetLabel && (
+    <a href={facetHref} class="sabd-mono sabd-back sabd-facet">{facetLabel}</a>
+  )}
+  {/*
+    Empty until the client can say which list these arrows walk. There is no
+    server-side answer: the build order of the JSON is not a list any reader
+    has seen, and a position in it is a claim about nothing. See
+    lib/list-context.ts.
+  */}
+  <div class="sabd-mono sabd-switcher" data-sabd-switcher hidden>
+    <span class="sabd-position" data-sabd-position></span>
+    <a href="" class="sabd-arrow" data-sabd-prev aria-label="Previous listing">‹</a>
+    <a href="" class="sabd-arrow" data-sabd-next aria-label="Next listing">›</a>
+  </div>
+</div>
+
+<div class="sabd-title-block" data-detail-view data-item-type={itemType} data-item-id={itemId}>
+  <div class="sabd-chips">
+    <span class="sabd-mono sabd-chip sabd-chip-type">{typeLabel}</span>
+    {tag && <span class="sabd-mono sabd-chip sabd-chip-tag">{tag}</span>}
+    <span
+      class="sabd-mono sabd-chip"
+      style={`background:${chip.bg};color:${chip.fg};`}
+      data-status-chip
+      data-deadline={deadlineIso ?? undefined}
+      data-open-date={openDateIso ?? undefined}
+      data-inactive={inactive ? '' : undefined}
+    >{chip.text}</span>
+  </div>
+  <h1 class="sabd-h1">
+    {name}
+  </h1>
+  <div class="sabd-mono sabd-subline">{subline}</div>
+</div>
+
+<div class="sabd-grid">
+
+  <!-- left column -->
+  <div class="sabd-left">
+
+    {facts.length > 0 && (
+      <div class="sabd-facts">
+        {facts.map(f => (
+          <div class="sabd-fact">
+            <div class="sabd-mono sabd-fact-label">{f.label}</div>
+            <div class="sabd-fact-value">{f.value}</div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {eligibility && (
+      <div class="sabd-elig">
+        <div class="sabd-mono sabd-elig-label">WHO CAN APPLY</div>
+        <div class="sabd-elig-text" set:html={emailOff(eligibility)} />
+      </div>
+    )}
+
+    {about && (
+      <div>
+        <div class="sabd-mono sabd-section-label">ABOUT THIS {typeLabel}</div>
+        <div class="sabd-about">
+          <p set:html={aboutHtml} />
+          {notes && <p set:html={notesHtml} />}
+        </div>
+      </div>
+    )}
+
+    {steps.length > 0 && (
+      <div>
+        <div class="sabd-mono sabd-section-label">HOW TO APPLY</div>
+        <div class="sabd-steps">
+          {steps.map((text, i) => (
+            <div class="sabd-step">
+              <span class="sabd-step-n">{i + 1}</span>
+              <span class="sabd-step-text">{text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+  </div>
+
+  <!-- right rail -->
+  <div class="sabd-rail">
+    <div class="sabd-card">
+      <div class="sabd-mono sabd-fact-label">{valueLabel}</div>
+      <div class="sabd-value">{valueBig}</div>
+      {valueNote && <div class="sabd-value-note">{valueNote}</div>}
+      <div class="sabd-deadline-row">
+        <span class="sabd-mono sabd-deadline-label">DEADLINE</span>
+        <span class="sabd-deadline-value">{dueLong}</span>
+      </div>
+      <div class="sabd-cta-row">
+        {status === 'closed' ? (
+          <span class="sab-btn sabd-cta sabd-cta-disabled">Closed</span>
+        ) : status === 'future' ? (
+          <span class="sab-btn sabd-cta sabd-cta-disabled">{opensLabel ? `Opens ${opensLabel}` : 'Opening soon'}</span>
+        ) : (
+          <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+            data-track="apply" data-item-type={itemType} data-item-id={itemId}
+            class="sab-btn sabd-cta">{ctaLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
+        )}
+        <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
+          class="sabd-save" title="Save" aria-label="Save">☆</button>
+      </div>
+      {status !== 'active' && url && (
+        <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+          data-track="apply" data-item-type={itemType} data-item-id={itemId}
+          class="sabd-mono sabd-visit">VISIT OFFICIAL SITE<span class="sabl-ext" aria-hidden="true">↗</span></a>
+      )}
+      <button data-sabd-copy data-copy-url={canonical} class="sabd-mono sabd-copy">COPY LINK</button>
+    </div>
+
+    {guideHref && guideTitle && (
+      <a href={guideHref} class="sabd-guide">
+        <span class="sabd-mono sabd-guide-label">READ THE GUIDE</span>
+        <span class="sabd-guide-title">{guideTitle}</span>
+        <span class="sabd-mono sabd-guide-go">OPEN →</span>
+      </a>
+    )}
+
+    {canRemind && (
+      <div class="sabd-remind">
+        <div class="sabd-mono sabd-remind-label">GET A DEADLINE REMINDER</div>
+        <div class="sabd-remind-sub">We email you a link to confirm, then nudge you before it closes. Nothing else, ever.</div>
+        <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form">
+          <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" />
+          <button type="submit" class="sab-btn sabd-remind-btn">Remind me</button>
+        </form>
+        <div data-sabd-alert-msg class="sabd-remind-msg" style="display:none;"></div>
+        <div class="sabd-remind-fine">
+          We store your address only to send these reminders, never sell it, and delete it the
+          moment you unsubscribe. <a href="/privacy/">How this works</a>.
+        </div>
+      </div>
+    )}
+  </div>
+
+</div>
+
+<style>
+  .sabd-mono { font-family: 'IBM Plex Mono', monospace; }
+
+  .sabd-guide {
+    display: block; margin-top: 16px; padding: 18px 20px;
+    border: 1px solid rgba(20,25,21,0.14); border-radius: 4px;
+    background: #FAF7F0; text-decoration: none; box-sizing: border-box;
+  }
+  .sabd-guide:hover { border-color: #0E8C64; }
+
+  /* Collection notice, sits under the sign-up form. Deliberately quiet but
+     always present: the address is the only personal data the site takes, and
+     the moment to say what happens to it is the moment it is asked for. */
+  .sabd-remind-fine { margin-top: 10px; font-size: 12px; line-height: 1.55; color: #6B716C; }
+  .sabd-remind-fine a { color: #6B716C; }
+  .sabd-guide-label {
+    display: block; font-size: 11px; letter-spacing: 0.08em;
+    color: rgba(20,25,21,0.5);
+  }
+  .sabd-guide-title {
+    display: block; margin-top: 8px; font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 19px; line-height: 1.25; color: #141915;
+  }
+  .sabd-guide-go {
+    display: block; margin-top: 10px; font-size: 11px;
+    letter-spacing: 0.08em; color: #0A6B4D;
+  }
+
+  .sabd-crumb-row {
+    padding: 40px 48px 0;
+    display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;
+  }
+  .sabd-back { font-size: 13px; letter-spacing: 0.04em; color: rgba(20,25,21,0.6); text-decoration: none; }
+  .sabd-back:hover { color: #0A6B4D; }
+  /* The facet crumb sits beside the back link with a separator drawn in CSS, so
+     the two read as one trail rather than two competing back-buttons. */
+  .sabd-facet::before { content: '/'; margin-right: 8px; opacity: 0.45; }
+  .sabd-facet { margin-left: 8px; }
+  .sabd-switcher { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.45); }
+  .sabd-arrow {
+    font-size: 13px; border: 1.5px solid rgba(20,25,21,0.3); color: #141915;
+    border-radius: 100px; width: 30px; height: 30px; text-decoration: none;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .sabd-arrow:hover { border-color: #141915; color: #141915; }
+
+  .sabd-title-block { padding: 36px 48px 0; box-sizing: border-box; }
+  .sabd-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .sabd-chip { font-size: 11.5px; letter-spacing: 0.05em; padding: 6px 12px; border-radius: 100px; }
+  .sabd-chip-type { background: #141915; color: #F2F0E9; }
+  .sabd-chip-tag { border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6); }
+  .sabd-h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.015em;
+    margin: 22px 0 0; max-width: 820px;
+  }
+  .sabd-subline { font-size: 13px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); margin-top: 14px; }
+
+  .sabd-grid {
+    padding: 44px 48px 96px; box-sizing: border-box;
+    display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start;
+  }
+  .sabd-left { display: flex; flex-direction: column; gap: 36px; min-width: 0; }
+
+  /* auto-fit rather than a hard 2 columns: with three facts, repeat(2, 1fr)
+     left one alone on its own row with a border running past nothing. */
+  .sabd-facts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    border-top: 2px solid #141915;
+  }
+  .sabd-fact { padding: 20px 24px 20px 0; border-bottom: 1px solid rgba(20,25,21,0.14); }
+  .sabd-fact-label { font-size: 11.5px; letter-spacing: 0.06em; color: rgba(20,25,21,0.5); margin-bottom: 8px; }
+  .sabd-fact-value { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+
+  .sabd-elig { background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px; padding: 28px 30px; }
+  .sabd-elig-label { font-size: 12px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 14px; }
+  .sabd-elig-text { font-size: 16.5px; line-height: 1.6; }
+
+  .sabd-section-label { font-size: 12px; letter-spacing: 0.06em; color: rgba(20,25,21,0.5); margin-bottom: 14px; }
+  .sabd-about { font-size: 16.5px; line-height: 1.65; color: rgba(20,25,21,0.78); max-width: 640px; }
+  .sabd-about p { margin: 0; }
+  .sabd-about p + p { margin-top: 12px; }
+
+  .sabd-steps { display: flex; flex-direction: column; border-top: 1px solid rgba(20,25,21,0.14); max-width: 640px; }
+  .sabd-step { display: flex; gap: 18px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(20,25,21,0.14); }
+  .sabd-step-n { font-family: 'Instrument Serif', serif; font-size: 24px; color: #0A6B4D; flex: none; width: 28px; }
+  .sabd-step-text { font-size: 15.5px; line-height: 1.55; color: rgba(20,25,21,0.8); }
+
+  .sabd-rail { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
+  .sabd-card {
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
+    padding: 28px 26px; box-shadow: 6px 6px 0 #2FD3A0;
+  }
+  .sabd-value { font-family: 'Instrument Serif', serif; font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
+  .sabd-value-note { font-size: 14px; color: rgba(20,25,21,0.6); }
+  .sabd-deadline-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin: 22px 0 0; padding-top: 18px; border-top: 1px solid rgba(20,25,21,0.12);
+  }
+  .sabd-deadline-label { font-size: 12px; color: rgba(20,25,21,0.5); }
+  .sabd-deadline-value { font-size: 15px; font-weight: 700; }
+  .sabd-cta-row { display: flex; gap: 10px; margin-top: 22px; }
+  .sabd-cta {
+    flex: 1; text-align: center; font-size: 15.5px; font-weight: 700;
+    background: #141915; color: #F2F0E9; padding: 15px 0; border-radius: 100px; text-decoration: none;
+  }
+  .sabd-cta:hover { background: #0A6B4D; color: #F2F0E9; }
+  .sabd-cta-disabled { background: rgba(20,25,21,0.08); color: rgba(20,25,21,0.45); cursor: not-allowed; }
+  .sabd-cta-disabled:hover { background: rgba(20,25,21,0.08); color: rgba(20,25,21,0.45); }
+  .sabd-save {
+    font-family: 'Archivo', sans-serif; font-size: 17px; border: 1.5px solid rgba(20,25,21,0.3);
+    border-radius: 100px; width: 50px; height: 50px; cursor: pointer;
+    color: rgba(20,25,21,0.55); background: transparent; flex: none;
+  }
+  .sabd-save:hover { border-color: #141915; }
+  .sabd-save[data-saved] { color: #0A6B4D; background: rgba(47,211,160,0.15); }
+  /* Official-site link shown when the CTA pill is Closed/Opens-soon, so the
+     source page stays reachable for every listing. */
+  .sabd-visit {
+    display: block; text-align: center; text-decoration: none;
+    font-size: 12.5px; letter-spacing: 0.03em; width: 100%; margin-top: 12px;
+    border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+    padding: 11px 0; color: rgba(20,25,21,0.7);
+  }
+  .sabd-visit:hover { border-color: #0E8C64; color: #0A6B4D; }
+  .sabd-copy {
+    font-size: 12.5px; letter-spacing: 0.03em; width: 100%; margin-top: 12px;
+    background: transparent; border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+    padding: 11px 0; cursor: pointer; color: rgba(20,25,21,0.7);
+  }
+  .sabd-copy:hover { border-color: #141915; color: #141915; }
+
+  .sabd-remind { background: #141915; border-radius: 16px; padding: 24px 26px; color: #F2F0E9; }
+  .sabd-remind-label { font-size: 11.5px; letter-spacing: 0.06em; color: #2FD3A0; margin-bottom: 8px; }
+  .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: rgba(242,240,233,0.65); margin-bottom: 16px; }
+  .sabd-remind-form { display: flex; gap: 8px; }
+  .sabd-remind-input {
+    font-family: 'Archivo', sans-serif; font-size: 14px; flex: 1; min-width: 0;
+    background: rgba(242,240,233,0.08); border: 1px solid rgba(242,240,233,0.2);
+    border-radius: 100px; padding: 11px 16px; color: #F2F0E9;
+  }
+  /* Bare `outline: none` here outranked the global :focus-visible rule, so the
+     reminder field had no focus indicator on any of the detail pages. Keeping
+     the outline off for mouse focus, where the border is enough, and putting
+     the ring back for keyboard focus. */
+  .sabd-remind-input:focus { outline: none; }
+  .sabd-remind-input:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .sabd-remind-input::placeholder { color: rgba(242,240,233,0.4); }
+  .sabd-remind-btn {
+    font-family: 'Archivo', sans-serif; font-size: 13.5px; font-weight: 700;
+    background: #2FD3A0; color: #0B1512; border: none; border-radius: 100px;
+    padding: 11px 18px; cursor: pointer; flex: none;
+  }
+  .sabd-remind-btn:hover { background: #F2F0E9; }
+  .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
+  .sabd-remind-msg { font-size: 14.5px; font-weight: 600; color: #2FD3A0; }
+
+  @media (max-width: 900px) {
+    .sabd-crumb-row { padding: 28px 20px 0; }
+    .sabd-title-block { padding: 28px 20px 0; }
+    .sabd-grid { grid-template-columns: 1fr; gap: 32px; padding: 32px 20px 72px; }
+    .sabd-rail { position: static; }
+    .sabd-facts { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
+  import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
+  import { showToast, showConfetti } from '../../lib/utils';
+  import { placeInList, readListContext } from '../../lib/list-context.ts';
+
+  /** Point the ‹ › arrows at the list the reader came from, or leave them off. */
+  function restoreSwitcher() {
+    const box = document.querySelector<HTMLElement>('[data-sabd-switcher]');
+    if (!box) return;
+    const place = placeInList(readListContext(), location.pathname);
+    if (!place) { box.hidden = true; return; }
+
+    box.querySelector('[data-sabd-position]')!.textContent = place.label;
+    const prev = box.querySelector<HTMLAnchorElement>('[data-sabd-prev]')!;
+    const next = box.querySelector<HTMLAnchorElement>('[data-sabd-next]')!;
+    prev.href = place.prev;
+    next.href = place.next;
+    prev.setAttribute('aria-label', `Previous listing (${place.index} of ${place.total})`);
+    next.setAttribute('aria-label', `Next listing (${((place.index + 1) % place.total) + 1} of ${place.total})`);
+    box.hidden = false;
+  }
+
+  function itemAttrs(el: Element): ['scholarship' | 'program' | undefined, number | undefined] {
+    const type = el.getAttribute('data-item-type');
+    const id = Number(el.getAttribute('data-item-id'));
+    return [
+      type === 'scholarship' || type === 'program' ? type : undefined,
+      Number.isInteger(id) ? id : undefined,
+    ];
+  }
+
+  function applySaveState(btn: HTMLElement, saved: boolean) {
+    btn.textContent = saved ? '★' : '☆';
+    if (saved) btn.setAttribute('data-saved', '');
+    else btn.removeAttribute('data-saved');
+    btn.setAttribute('aria-label', saved ? 'Remove from saved' : 'Save');
+  }
+
+  // Delegated so everything survives view-transition swaps between detail pages
+  document.addEventListener('click', (e) => {
+    const target = e.target as Element;
+
+    // Scoped to this page's CTA card. The directory's cards use the same
+    // data-track="apply" hook, and this listener outlives view transitions;
+    // unscoped, it fired a second, type-less apply_click on every directory
+    // click made after any detail page had been opened in the tab.
+    const apply = target.closest?.('[data-track="apply"]');
+    if (apply?.closest('.sabd-card')) {
+      const [applyType, applyId] = itemAttrs(apply);
+      if (applyType && applyId) sendEvent('apply_click', applyType, applyId);
+    }
+
+    const save = target.closest?.('[data-sabd-save]') as HTMLElement | null;
+    if (save) {
+      const id = parseInt(save.dataset.bookmarkId!);
+      const type = save.dataset.bookmarkType as 'scholarship' | 'program';
+      save.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
+        { duration: 380, easing: 'ease-out' }
+      );
+      const next = type === 'program' ? toggleSavedProgram(id) : toggleSaved(id);
+      const nowSaved = next.includes(id);
+      applySaveState(save, nowSaved);
+      // Saves count, un-saves don't; the metric is "people who shortlisted it"
+      if (nowSaved) { showConfetti(save); sendEvent('save', type, id); }
+      showToast(nowSaved ? 'Saved ✓' : 'Removed from saved');
+    }
+
+    const copy = target.closest?.('[data-sabd-copy]') as HTMLElement | null;
+    if (copy) {
+      navigator.clipboard.writeText(copy.dataset.copyUrl || window.location.href).then(() => {
+        copy.textContent = '✓ LINK COPIED';
+        setTimeout(() => { copy.textContent = 'COPY LINK'; }, 2000);
+      });
+    }
+  });
+
+  // Capture phase + stopPropagation so Astro's ClientRouter (which also
+  // listens for submit and would swap the page) never handles this form.
+  document.addEventListener('submit', async (e) => {
+    const form = (e.target as Element).closest?.('[data-sabd-alert-form]') as HTMLFormElement | null;
+    if (!form) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const [itemType, itemId] = itemAttrs(form);
+    const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value.trim();
+    const btn = form.querySelector('button') as HTMLButtonElement;
+    const msg = form.parentElement?.querySelector('[data-sabd-alert-msg]') as HTMLElement | null;
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+    try {
+      const res = await fetch('/api/alert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, itemType, itemId }),
+      });
+      const data = await res.json() as { error?: string; confirmed?: boolean };
+      if (res.ok) {
+        form.style.display = 'none';
+        // Double opt-in: a new sign-up is not on the list until they click the
+        // link, so saying "we'll nudge you" here would promise mail that never
+        // arrives. `confirmed` is true only when this address was already on
+        // file for this listing; a returning student changing their mind.
+        if (msg) {
+          msg.textContent = data.confirmed
+            ? "✓ Set. We'll nudge you before the deadline."
+            : '✓ Check your email, then confirm the link and you\'re on the list.';
+          msg.style.display = 'block';
+        }
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Remind me';
+        if (msg) { msg.textContent = data.error || 'Something went wrong.'; msg.style.color = 'rgba(242,240,233,0.65)'; msg.style.display = 'block'; }
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Remind me';
+      if (msg) { msg.textContent = 'Something went wrong. Try again.'; msg.style.color = 'rgba(242,240,233,0.65)'; msg.style.display = 'block'; }
+    }
+  }, true);
+
+  // The page is prerendered, so the SSR status chip is only as fresh as the
+  // last build. Re-derive it from the ISO dates in the visitor's timezone
+  // (mirrors getScholarshipStatus / scholarshipDayChip in list-core).
+  function refreshStatusChip() {
+    const el = document.querySelector<HTMLElement>('[data-status-chip]');
+    if (!el) return;
+    const { deadline, openDate } = el.dataset;
+    const inactive = el.dataset.inactive !== undefined;
+    if (!deadline && !openDate && !inactive) return; // tba/ongoing: not clock-driven
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayMs = today.getTime();
+    const paint = (text: string, bg: string, fg: string) => {
+      el.textContent = text;
+      el.style.background = bg;
+      el.style.color = fg;
+    };
+    const fmtLong = (iso: string) =>
+      new Date(iso + 'T00:00:00')
+        .toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
+        .toUpperCase();
+
+    if (openDate && todayMs < new Date(openDate + 'T00:00:00').getTime()) {
+      paint(`OPENS ${fmtLong(openDate)}`, 'rgba(14,140,100,0.12)', '#0A6B4D');
+    } else if (deadline && todayMs > new Date(deadline + 'T00:00:00').getTime()) {
+      paint('CLOSED', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.55)');
+    } else if (inactive) {
+      paint('OPENING SOON', 'rgba(14,140,100,0.12)', '#0A6B4D');
+    } else if (deadline) {
+      // round, not ceil: midnight-to-midnight is whole days except across a
+      // DST change, where ceil overcounts by one (and disagrees with the list chips)
+      const days = Math.max(0, Math.round((new Date(deadline + 'T00:00:00').getTime() - todayMs) / 86400000));
+      if (days === 0) paint('DUE TODAY', '#B8541F', '#FAF7F0');
+      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#B8541F', '#FAF7F0');
+      else paint(`${days} DAYS LEFT`, 'rgba(184,84,31,0.12)', '#B8541F');
+    }
+  }
+
+  // Per-item views + initial save-state paint.
+  // astro:page-load fires on first load and after every view-transition swap.
+  document.addEventListener('astro:page-load', () => {
+    refreshStatusChip();
+    restoreSwitcher();
+    const view = document.querySelector('[data-detail-view]');
+    // Dwell-gated: an instant back/misclick shouldn't count as a view
+    if (view) sendEventAfterDwell('detail_view', ...itemAttrs(view));
+
+    document.querySelectorAll<HTMLElement>('[data-sabd-save]').forEach(btn => {
+      const id = parseInt(btn.dataset.bookmarkId!);
+      const type = btn.dataset.bookmarkType as 'scholarship' | 'program';
+      const list = type === 'program' ? getSavedPrograms() : getSaved();
+      applySaveState(btn, list.includes(id));
+    });
+  });
+</script>

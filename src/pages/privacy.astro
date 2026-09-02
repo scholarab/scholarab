@@ -1,0 +1,254 @@
+---
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import { webPageJson } from '../lib/ld';
+
+// Shown in the page and used as the "last updated" line. Bump this whenever
+// what the site actually collects changes; the date is the only thing telling
+// a reader whether this document still describes the code.
+const LAST_UPDATED = 'August 22, 2026';
+
+// One row per thing the site stores. Kept as data rather than prose so it is
+// obvious when a new table or endpoint has no row here yet.
+const collected = [
+  {
+    what: 'Your email address',
+    when: 'Only if you ask for deadline reminders.',
+    why: 'To email you 30, 14 and 3 days before a deadline, whichever of those you picked.',
+    kept: 'Until you unsubscribe, or until 60 days after the deadline passes, whichever comes first. If you never confirm the sign-up, it is deleted within 30 days.',
+  },
+  {
+    what: 'Which scholarship or program the reminder is for',
+    when: 'Stored alongside the email address above.',
+    why: 'A reminder has to know what it is reminding you about.',
+    kept: 'Same as the email address.',
+  },
+  {
+    what: 'A scrambled fingerprint of your IP address',
+    when: 'On requests to the sign-up, confirm, unsubscribe and counter endpoints.',
+    why: 'Rate limiting. It stops someone signing up thousands of addresses or guessing the admin password. The address is put through a salted one-way hash before it is written, so what is stored cannot be turned back into your IP.',
+    kept: 'Swept on a rolling basis, usually within 24 hours, and never past the monthly cleanup.',
+  },
+  {
+    what: 'A cookieless page-view count',
+    when: 'On every page, through Cloudflare Web Analytics.',
+    why: 'To know how many people reach the site at all, which the counts below cannot tell us, because they only fire once you interact with something.',
+    kept: 'By Cloudflare, on their retention schedule. It sets no cookie, stores no identifier, and does not follow you between sites; what it records is the page, the referrer, and rough timing and device information.',
+  },
+  {
+    what: 'The text of a search that finds nothing',
+    when: 'Only when what you typed matches no listing anywhere in the directory, not on searches that find something, and not on anything you type into the match quiz.',
+    why: 'An empty search is the clearest signal that the directory is missing an award someone is looking for. It is what tells us what to go add next.',
+    kept: '180 days, in the same table as the counts below and with the same nothing attached to it: no IP address, no cookie, no session. Anything email-shaped is discarded rather than stored, and only the first 120 characters are kept. Even so, please don’t type anything private into a search box, here or anywhere else.',
+  },
+  {
+    what: 'Anonymous counts of what gets used',
+    when: 'When you open a listing, click through to apply, save something, or run the match quiz, and once per visit if you arrived from one of our own tagged links, such as the one in an Instagram or TikTok bio, which records only which of those it was.',
+    why: 'To know which listings matter and which way of telling people about the site actually works, so the directory gets better. What was searched for is the row above; this row is counts.',
+    kept: '180 days. These rows carry no IP address, no cookie, no account and no session. There is nothing in them that points back to a person, which also means they cannot be traced to you in order to delete them.',
+  },
+];
+
+const notCollected = [
+  'No name, school, or grades. Every answer you give the match quiz, including the questions about family income, Indigenous or BIPOC identity, foster care and gender, stays in your browser and is never sent to us. We are told only that a quiz was started and that one was finished, and nothing whatsoever about what was in it.',
+  'No saved or bookmarked listings: those live in your browser’s local storage, on your device. Your browser also keeps a small note of which counts it has already sent, so one visit is not counted twice; that note stays on your device and is never sent anywhere.',
+  'No accounts, no passwords, no logins for students.',
+  'No advertising cookies, no tracking pixels, no data brokers. The one analytics script on the site is Cloudflare’s, described above, and it is cookieless and identifier-free, and there is nothing else.',
+  'Nothing is ever sold, rented, or shared for marketing. There is no business model here that would want it.',
+];
+
+const processors = [
+  { name: 'Cloudflare', role: 'Serves the site, blocks abuse, and counts page views.', where: 'Global, including the United States' },
+  { name: 'Neon', role: 'Hosts the database holding reminder sign-ups.', where: 'United States' },
+  { name: 'Resend', role: 'Delivers reminder and confirmation emails.', where: 'United States' },
+  { name: 'GitHub', role: 'Runs the scheduled job that works out whose deadline is close and hands those reminders to Resend. Your address passes through it each time that job runs.', where: 'United States' },
+  { name: 'Google', role: 'Carries email sent to our contact address, which is where questions, corrections and deletion requests arrive. If you write to us, Gmail holds that message.', where: 'United States' },
+];
+
+const title = 'Privacy Policy | ScholarAB';
+const description = 'What ScholarAB collects, why, how long it is kept, and how to delete it. No ads, no profiles, nothing sold.';
+const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privacy/' });
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogTitle={title}
+  ogDescription={description}
+  ogUrl="https://www.scholarab.ca/privacy/"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
+  <SabFonts italic slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/privacy" />
+  </div>
+
+  <div id="sab-privacy" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabpv-body" style="flex:1;">
+      <div class="sab-kicker">PRIVACY</div>
+      <h1 class="sabpv-h1">What we keep,<br /><span class="sabpv-h1-accent">and what we don't.</span></h1>
+      <p class="sabpv-lede">
+        ScholarAB is a free directory built by a high school student in Medicine Hat. You can use the
+        entire site without giving us anything. The only personal information we ever hold is an email
+        address, and only if you asked us to remind you about a deadline.
+      </p>
+      <p class="sabpv-updated">Last updated {LAST_UPDATED}</p>
+
+      <h2 class="sabpv-h2">What we collect</h2>
+      <div class="sabpv-table">
+        {collected.map(row => (
+          <div class="sabpv-row">
+            <div class="sabpv-row-what">{row.what}</div>
+            <dl class="sabpv-row-detail">
+              <dt>When</dt><dd>{row.when}</dd>
+              <dt>Why</dt><dd>{row.why}</dd>
+              <dt>How long</dt><dd>{row.kept}</dd>
+            </dl>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="sabpv-h2">What we don't collect</h2>
+      <ul class="sabpv-list">
+        {notCollected.map(item => <li>{item}</li>)}
+      </ul>
+
+      <h2 class="sabpv-h2">Turning the counts off</h2>
+      <p class="sabpv-p">
+        The counts in the last two rows above carry nothing that points back to a person, so there is
+        nothing in them to identify you by. Even so, you can switch them off: visit any page on the site
+        with <code class="sabpv-code">?nt=1</code> on the end of the address, for example
+        <code class="sabpv-code">www.scholarab.ca/?nt=1</code>, and this browser stops sending them.
+        The setting is a single note in your browser's own storage; it never reaches us, so it lasts
+        until you clear your site data, and it has to be set once per browser and device.
+        <code class="sabpv-code">?nt=0</code> turns them back on.
+      </p>
+      <p class="sabpv-p">
+        Cloudflare's page-view count is separate and is not affected by this. If you want that off too,
+        any content blocker that blocks <code class="sabpv-code">static.cloudflareinsights.com</code>
+        will do it, and the site works exactly the same without it.
+      </p>
+
+      <h2 class="sabpv-h2">Reminder emails</h2>
+      <p class="sabpv-p">
+        Reminders are double opt-in. Signing up creates a pending row and sends you one confirmation
+        email; nothing else is ever sent unless you click the confirm button in it. That is deliberate:
+        the sign-up form is a public endpoint, so anyone could type in a stranger's address, and this
+        makes sure only the person who can read the inbox can turn reminders on.
+      </p>
+      <p class="sabpv-p">
+        Every email we send carries an unsubscribe link, including the confirmation email, and also the
+        header your mail app reads to put its own unsubscribe button at the top of the message. Either
+        one deletes the row outright. We don't keep a suppression list of people who left.
+      </p>
+
+      <h2 class="sabpv-h2">Deleting your data</h2>
+      <p class="sabpv-p">
+        The unsubscribe link at the bottom of any ScholarAB email has a <strong>Delete all my data</strong>
+        button next to it. It removes every reminder set up with your address, and the address itself,
+        immediately. That is the whole of what we hold about you, so there is nothing left over.
+      </p>
+      <p class="sabpv-p">
+        You can also email <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off--> to
+        ask what we hold about an address, to correct it, or to have it deleted. Expect a reply within a
+        few days; the legal maximum is 30.
+      </p>
+
+      <h2 class="sabpv-h2">Where your data goes</h2>
+      <p class="sabpv-p">
+        ScholarAB runs on five services. Each one only ever sees what it needs to do its job, and none
+        of them are permitted to use it for anything else. Because they are based in the United States,
+        information stored with them may be subject to US law, including lawful access requests by US
+        authorities.
+      </p>
+      <div class="sabpv-table">
+        {processors.map(p => (
+          <div class="sabpv-row">
+            <div class="sabpv-row-what">{p.name}</div>
+            <dl class="sabpv-row-detail">
+              <dt>Role</dt><dd>{p.role}</dd>
+              <dt>Where</dt><dd>{p.where}</dd>
+            </dl>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="sabpv-h2">If you're under 18</h2>
+      <p class="sabpv-p">
+        Most people using ScholarAB are high school students, and that is who it was built for. We ask for
+        as little as it is possible to ask for: an email address, for a reminder you requested, deleted the
+        moment you say so. We don't build profiles, don't advertise, and don't share anything with anyone.
+        If you're under 13, please ask a parent or guardian before signing up for reminders. And if a
+        parent or guardian wants a sign-up removed, email us and it's done, no questions asked.
+      </p>
+
+      <h2 class="sabpv-h2">Changes</h2>
+      <p class="sabpv-p">
+        If what we collect ever changes, this page changes with it and the date at the top moves. Every
+        version of this page is in the site's public source history, so you can check what it used to say.
+      </p>
+
+      <h2 class="sabpv-h2">Contact</h2>
+      <p class="sabpv-p">
+        ScholarAB · Medicine Hat, Alberta, Canada<br />
+        <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off-->
+      </p>
+    </div>
+    <SabFooter />
+  </div>
+</Layout>
+
+<style>
+  .sabpv-body { padding: 72px 48px 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
+
+  .sabpv-h1 {
+    font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+    font-size: clamp(40px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.02em;
+    color: #141915; margin: 12px 0 24px;
+  }
+  .sabpv-h1-accent { color: #0A6B4D; font-style: italic; }
+
+  .sabpv-lede { font-size: 19px; line-height: 1.65; color: #3A403B; max-width: 62ch; margin: 0 0 12px; }
+  .sabpv-updated {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: #8A8F8B; margin: 0 0 56px;
+  }
+
+  .sabpv-h2 {
+    font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+    font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.01em; color: #141915;
+    margin: 56px 0 20px; padding-top: 24px; border-top: 1px solid #E4E0D5;
+  }
+
+  .sabpv-p { font-size: 16px; line-height: 1.7; color: #3A403B; max-width: 68ch; margin: 0 0 18px; }
+  .sabpv-p a, .sabpv-list a { color: #0A6B4D; }
+  .sabpv-code {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.88em;
+    background: #F2EFE6; border-radius: 4px; padding: 1px 5px; color: #141915;
+  }
+
+  .sabpv-list { margin: 0; padding-left: 20px; max-width: 68ch; }
+  .sabpv-list li { font-size: 16px; line-height: 1.7; color: #3A403B; margin-bottom: 12px; }
+
+  .sabpv-table { display: flex; flex-direction: column; gap: 2px; }
+  .sabpv-row {
+    display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: 32px;
+    padding: 22px 0; border-bottom: 1px solid #EDEAE0;
+  }
+  .sabpv-row-what { font-weight: 600; font-size: 16px; line-height: 1.45; color: #141915; }
+  .sabpv-row-detail { margin: 0; display: grid; grid-template-columns: 88px 1fr; gap: 6px 16px; }
+  .sabpv-row-detail dt {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #8A8F8B; padding-top: 3px;
+  }
+  .sabpv-row-detail dd { margin: 0; font-size: 15px; line-height: 1.6; color: #3A403B; }
+
+  @media (max-width: 760px) {
+    .sabpv-body { padding: 48px 20px 80px; }
+    .sabpv-row { grid-template-columns: 1fr; gap: 12px; }
+    .sabpv-row-detail { grid-template-columns: 72px 1fr; }
+  }
+</style>

@@ -1,0 +1,359 @@
+---
+// The deadline calendar: /deadlines/.
+//
+// Every other surface on the site is organised by WHAT an award is: its
+// region, its category, its provider. This one is organised by WHEN, which is
+// the axis a student in the middle of a semester actually plans on, and the
+// axis the site had no page for. It is also the axis the two directories
+// cannot express: they sort by deadline, but a sorted list has no month
+// headings, no anchors, and nothing for "what closes in March" to land on.
+//
+// Scholarships and programs share the months. A Grade 12 student does not
+// think of them as two systems, and a month showing four awards while hiding
+// the summer research application that closes the same week is lying by
+// omission about that month's workload.
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import { loadScholarships, loadPrograms } from '../lib/data-loader';
+import { generateSlug, getToday } from '../lib/utils';
+import { scholarshipStatusOf, programIsListed } from '../lib/status';
+import { formatListingDate } from '../lib/meta';
+import { itemListJson } from '../lib/ld';
+
+const today = getToday();
+const todayMs = today.getTime();
+const dayMs = (d: string) => new Date(d + 'T00:00:00').getTime();
+
+let scholarships: Awaited<ReturnType<typeof loadScholarships>> = [];
+let programs: Awaited<ReturnType<typeof loadPrograms>> = [];
+let loadError = false;
+try {
+  [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
+} catch {
+  loadError = true;
+}
+
+interface Row {
+  kind: 'scholarship' | 'program';
+  name: string;
+  href: string;
+  deadline: string;
+  meta: string;
+  /** The short status the row prints on the right. */
+  state: string;
+  /** True for "you can apply to this today", which is the only row a student can act on now. */
+  open: boolean;
+}
+
+// ── What earns a place on the calendar ──────────────────────────────────────
+//
+// A dated deadline, still ahead of today. Nothing else: a passed deadline is
+// a closed listing (noindexed on its own page, so linking a crawler to it from
+// an indexable page is worse than useless), and a listing with no date has
+// nothing to file under a month. Both of those get their own section at the
+// foot of the page rather than an invented month.
+const scholarshipRows: Row[] = scholarships
+  .filter(s => s.deadline && dayMs(s.deadline) >= todayMs)
+  .map(s => {
+    const status = scholarshipStatusOf(s, today);
+    return {
+      kind: 'scholarship' as const,
+      name: s.title,
+      href: `/scholarships/${generateSlug(s.title)}/`,
+      deadline: s.deadline!,
+      meta: s.amount || 'Varies',
+      // `active: false` is "next cycle, open date not known yet", not closed;
+      // so the row says when it opens if the data knows, and says only that it
+      // isn't open yet if it doesn't. Never a guessed month.
+      state: status === 'active'
+        ? 'Open now'
+        : s.openDate
+          ? `Opens ${formatListingDate(s.openDate)}`
+          : 'Not open yet',
+      open: status === 'active',
+    };
+  });
+
+const programRows: Row[] = programs
+  .filter(p => programIsListed(p, today))
+  .filter(p => p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && dayMs(p.deadline) >= todayMs)
+  .map(p => ({
+    kind: 'program' as const,
+    name: p.name,
+    href: `/programs/${generateSlug(p.name)}/`,
+    deadline: p.deadline!,
+    meta: p.paid ? 'Paid' : (p.grades || 'Program'),
+    state: 'Open now',
+    open: true,
+  }));
+
+const rows = [...scholarshipRows, ...programRows].sort(
+  (a, b) => dayMs(a.deadline) - dayMs(b.deadline) || a.name.localeCompare(b.name),
+);
+
+// ── Months ──────────────────────────────────────────────────────────────────
+//
+// Derived from the data, not from a fixed twelve-month window: a window would
+// print empty months at both ends every time the corpus shifted, and an empty
+// month heading in a jump nav is a promise the page then breaks.
+const byMonth = new Map<string, Row[]>();
+for (const r of rows) {
+  const key = r.deadline.slice(0, 7);
+  (byMonth.get(key) ?? byMonth.set(key, []).get(key)!).push(r);
+}
+const monthName = (key: string) =>
+  new Date(key + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'long', year: 'numeric' });
+const monthShort = (key: string) =>
+  new Date(key + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'short' }).toUpperCase();
+const dayOf = (d: string) => String(new Date(d + 'T00:00:00').getDate());
+
+const months = [...byMonth.entries()]
+  .sort((a, b) => a[0].localeCompare(b[0]))
+  .map(([key, items]) => ({
+    key,
+    items,
+    name: monthName(key),
+    short: monthShort(key),
+    openCount: items.filter(r => r.open).length,
+  }));
+
+// The two tails. Both are real answers to "why isn't X on this page", so they
+// are on the page rather than left to be discovered as an absence.
+const undated = scholarships
+  .filter(s => !s.deadline)
+  .map(s => ({ name: s.title, href: `/scholarships/${generateSlug(s.title)}/`, meta: s.amount || 'Varies' }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const rollingPrograms = programs.filter(
+  p => programIsListed(p, today) && (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing'),
+).length;
+
+const openNow = rows.filter(r => r.open).length;
+const first = months[0];
+const last = months.at(-1);
+const span = first && last && first.key !== last.key
+  ? `${first.name} through ${last.name}`
+  : first?.name ?? '';
+
+const canonical = 'https://www.scholarab.ca/deadlines/';
+const description =
+  'Every Alberta scholarship and research program deadline we track, month by month. '
+  + `${rows.length} dated deadlines, ${openNow} open to apply today.`;
+
+const listJson = itemListJson(
+  rows.map(r => ({ name: r.name, url: `https://www.scholarab.ca${r.href}` })),
+  'Alberta Scholarship Deadlines',
+  canonical,
+);
+
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.scholarab.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'Deadlines', item: canonical },
+  ],
+};
+---
+
+<Layout
+  title="Alberta Scholarship Deadlines by Month | ScholarAB"
+  description={description}
+  ogTitle="Alberta Scholarship Deadlines by Month | ScholarAB"
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(listJson)} slot="head" />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <SabFonts slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/deadlines" />
+  </div>
+
+  <div id="sab-deadlines" class="sabp">
+    <div class="sabp-body sabd-cal">
+      {loadError ? (
+        <div class="sabcal-empty">
+          <h1 class="sabcal-h1">Deadlines</h1>
+          <p>Couldn't load the calendar. The database may be temporarily unavailable.</p>
+          <p><a href="/scholarships/">Browse all scholarships</a> instead.</p>
+        </div>
+      ) : (
+        <>
+          <nav class="sabl-crumbs sabl-mono" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span aria-hidden="true">/</span>
+            <span>Deadlines</span>
+          </nav>
+
+          <header class="sabcal-head">
+            <h1 class="sabcal-h1">Alberta scholarship deadlines, month by month</h1>
+            <p class="sabcal-intro">
+              Every dated deadline ScholarAB tracks, in the order they arrive: scholarships and
+              research programs together, because they land in the same semester and compete for the
+              same weekends. {span ? `${span}.` : ''} Dates come from each provider's own page and
+              can move; the listing tells you the month it was last checked.
+            </p>
+            <p class="sabl-mono sabcal-stats">
+              {`${rows.length} DATED DEADLINES · ${openNow} OPEN TO APPLY TODAY · ${months.length} MONTHS`}
+            </p>
+          </header>
+
+          <nav class="sabcal-jump" aria-label="Jump to a month">
+            {months.map(m => (
+              <a href={`#${m.key}`} class="sabcal-chip">
+                <span class="sabl-mono sabcal-chip-m">{m.short}</span>
+                <span class="sabcal-chip-n tnum">{m.items.length}</span>
+              </a>
+            ))}
+          </nav>
+
+          {months.map(m => (
+            <section class="sabcal-month" id={m.key}>
+              <div class="sabcal-month-head">
+                <h2 class="sabcal-h2">{m.name}</h2>
+                <span class="sabl-mono sabcal-month-count">
+                  {`${m.items.length} ${m.items.length === 1 ? 'DEADLINE' : 'DEADLINES'}`}
+                  {m.openCount > 0 ? ` · ${m.openCount} OPEN NOW` : ''}
+                </span>
+              </div>
+              <ol class="sabcal-rows">
+                {m.items.map(r => (
+                  <li class="sabcal-row">
+                    <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
+                    <span class="sabcal-name">
+                      <a href={r.href}>{r.name}</a>
+                      {r.kind === 'program' && <span class="sabl-mono sabcal-tag">PROGRAM</span>}
+                    </span>
+                    <span class="sabcal-meta">{r.meta}</span>
+                    <span class:list={['sabl-mono', 'sabcal-state', r.open && 'is-open']}>{r.state}</span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ))}
+
+          <section class="sabcal-tail">
+            <h2 class="sabcal-h2">Awards with no fixed deadline</h2>
+            <p>
+              {undated.length} listings have no date to file under a month; they run until the money
+              is gone, or the provider has never published one. They are worth a look early rather
+              than late.
+            </p>
+            <ul class="sabcal-undated">
+              {undated.map(u => (
+                <li><a href={u.href}>{u.name}</a> <span class="sabcal-meta">{u.meta}</span></li>
+              ))}
+            </ul>
+            <p>
+              A further {rollingPrograms} research programs are rolling or have not announced next
+              year's date yet. Those live on <a href="/programs/">the programs directory</a>, which
+              shows each one's status as it changes.
+            </p>
+          </section>
+        </>
+      )}
+    </div>
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<style is:global>
+  body:has(#sab-deadlines) { background: #FAF7F0; }
+
+  .sabl-crumbs {
+    display: flex; gap: 8px; align-items: center;
+    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding-top: 24px; color: #6B7280;
+  }
+  .sabl-crumbs a { color: #6B7280; text-decoration: none; }
+  .sabl-crumbs a:hover { color: #141915; text-decoration: underline; }
+
+  .sabd-cal { padding-bottom: 72px; }
+  .sabcal-head { padding: 28px 0 8px; }
+  .sabcal-h1 {
+    font-family: 'Archivo', sans-serif; font-weight: 800; letter-spacing: -0.02em;
+    font-size: clamp(32px, 5vw, 52px); line-height: 1.05; color: #141915;
+    margin: 0 0 16px; text-wrap: balance; max-width: 18ch;
+  }
+  .sabcal-intro { font-size: 17px; line-height: 1.65; color: #4B5563; max-width: 62ch; margin: 0; }
+  .sabcal-stats { font-size: 12px; letter-spacing: 0.08em; color: #6B7280; margin: 18px 0 0; }
+
+  /* The jump nav is the page's table of contents and its main internal link
+     block; it sticks because the months below it are long. */
+  .sabcal-jump {
+    position: sticky; top: 0; z-index: 2;
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 28px 0 8px; padding: 12px 0;
+    background: #FAF7F0; border-bottom: 1px solid #E5E0D5;
+  }
+  .sabcal-chip {
+    display: inline-flex; align-items: baseline; gap: 6px;
+    padding: 6px 11px; border: 1px solid #E5E0D5; border-radius: 999px;
+    background: #FFFDF8; text-decoration: none; color: #141915;
+  }
+  .sabcal-chip:hover { border-color: #141915; }
+  .sabcal-chip-m { font-size: 12px; letter-spacing: 0.08em; }
+  .sabcal-chip-n { font-size: 12px; color: #6B7280; }
+
+  .sabcal-month { padding-top: 40px; scroll-margin-top: 72px; }
+  .sabcal-month-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    flex-wrap: wrap; border-bottom: 2px solid #141915; padding-bottom: 8px;
+  }
+  .sabcal-h2 {
+    font-family: 'Archivo', sans-serif; font-weight: 700; letter-spacing: -0.01em;
+    font-size: 24px; color: #141915; margin: 0;
+  }
+  .sabcal-month-count { font-size: 12px; letter-spacing: 0.08em; color: #6B7280; }
+
+  .sabcal-rows { list-style: none; margin: 0; padding: 0; }
+  .sabcal-row {
+    display: grid; grid-template-columns: 40px 1fr auto auto;
+    gap: 8px 18px; align-items: baseline;
+    padding: 13px 0; border-bottom: 1px solid #E5E0D5;
+  }
+  .sabcal-day { font-size: 15px; color: #6B7280; text-align: right; }
+  .sabcal-name a { color: #141915; text-decoration: none; font-size: 16px; line-height: 1.4; }
+  .sabcal-name a:hover { text-decoration: underline; }
+  .sabcal-tag {
+    font-size: 10px; letter-spacing: 0.1em; color: #6B7280;
+    border: 1px solid #E5E0D5; border-radius: 3px; padding: 1px 5px; margin-left: 8px;
+    white-space: nowrap;
+  }
+  .sabcal-meta { font-size: 14px; color: #6B7280; white-space: nowrap; }
+  .sabcal-state { font-size: 11px; letter-spacing: 0.07em; color: #6B7280; text-transform: uppercase; white-space: nowrap; }
+  .sabcal-state.is-open { color: #0B7A5A; }
+
+  .sabcal-tail { padding-top: 56px; font-size: 16px; line-height: 1.65; color: #4B5563; }
+  .sabcal-tail p { max-width: 62ch; }
+  .sabcal-tail .sabcal-h2 { border-bottom: 2px solid #141915; padding-bottom: 8px; margin-bottom: 16px; }
+  .sabcal-undated { list-style: none; margin: 20px 0; padding: 0; }
+  .sabcal-undated li { padding: 9px 0; border-bottom: 1px solid #E5E0D5; display: flex; justify-content: space-between; gap: 18px; }
+  .sabcal-undated a { color: #141915; }
+
+  .sabcal-empty { padding: 64px 0; color: #4B5563; }
+
+  @media (max-width: 720px) {
+    /* Wrapped, the eleven month chips stack three deep and a sticky nav then
+       holds 139px of a 812px phone screen permanently. One scrolling row costs
+       a swipe and gives the months back the space. */
+    .sabcal-jump { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    .sabcal-jump::-webkit-scrollbar { display: none; }
+    .sabcal-chip { flex: 0 0 auto; }
+
+    /* Two columns, and the amount and status share the second row rather than
+       taking one line each: four stacked lines per award made a month of
+       twenty-two deadlines a very long scroll for very little information. */
+    .sabcal-row { grid-template-columns: 30px 1fr; gap: 4px 12px; padding: 11px 0; }
+    .sabcal-meta, .sabcal-state { grid-column: 2; grid-row: 2; }
+    .sabcal-meta { justify-self: start; }
+    .sabcal-state { justify-self: end; }
+    .sabcal-undated li { flex-direction: column; gap: 4px; }
+  }
+</style>

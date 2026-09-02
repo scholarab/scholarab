@@ -1,0 +1,5 @@
+Contact: mailto:contact.scholarab@gmail.com
+Expires: 2027-04-15T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.scholarab.ca/.well-known/security.txt
+Policy: https://github.com/scholarab/scholarab/blob/main/SECURITY.md
