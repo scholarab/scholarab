@@ -136,7 +136,7 @@ const startLabel = longDate(PROJECT_START);
 </Layout>
 
 <style is:global>
-  body:has(#sab-updates) { background: #FAF7F0; }
+  body:has(#sab-updates) { background: #FBF8F2; }
 </style>
 
 <style>
@@ -228,6 +228,8 @@ const startLabel = longDate(PROJECT_START);
   .sabu-item-text { font-size: 15px; line-height: 1.62; color: rgba(20,25,21,0.72); }
 
   @media (max-width: 900px) {
+    /* 33px, under the 44px touch minimum. */
+    .sabu-jump-link { display: inline-flex; align-items: center; min-height: 44px; }
     .sabu-hero { padding: 44px 20px 44px; }
     .sabu-stats { gap: 32px; margin-top: 34px; }
     .sabu-stat-num { font-size: 36px; }

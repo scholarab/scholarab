@@ -162,26 +162,33 @@ const showTicker = ticker ?? true;
   .sabh-actions { display: flex; align-items: center; gap: 34px; }
   .sabh-links { display: flex; align-items: center; gap: 34px; }
   .sabh-link {
-    font-size: 14.5px; font-weight: 500; color: rgba(242,240,233,0.75);
+    font-size: 14.5px; font-weight: 500; color: rgba(242,240,233,0.82);
     text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 4px;
+    transition: color 0.18s ease, border-bottom-color 0.18s ease;
   }
-  .sabh-link:hover { color: #F2F0E9; }
-  .sabh-link-active { color: #F2F0E9; border-bottom-color: #2FD3A0; }
+  /* Hover previews the active underline at 45% rather than only lifting the
+     text colour, so the target of the click is visible before the click. */
+  .sabh-link:hover { color: #F2F0E9; border-bottom-color: rgba(47,211,160,0.45); }
+  /* The current page is the one link carrying weight, which is what tells it
+     apart from the four that only differ by opacity. */
+  .sabh-link-active { color: #F2F0E9; font-weight: 600; border-bottom-color: #2FD3A0; }
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
   .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count { display: none; }
   .sabh-cta {
-    font-size: 14px; font-weight: 600; background: #2FD3A0; color: #0B1512;
-    padding: 10px 20px; border-radius: 100px; text-decoration: none;
+    font-size: 14px; font-weight: 700; background: #2FD3A0; color: #08120E;
+    padding: 11px 22px; border-radius: 100px; text-decoration: none;
+    /* 36px on a phone, where it is the only always-visible action. */
+    display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box;
     transition: background 0.18s ease, color 0.18s ease,
                 transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
   .sabh-cta:hover, .sabh-cta:focus-visible {
-    background: #F2F0E9; color: #0B1512;
-    transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #2FD3A0;
+    background: #4FE0B4; color: #08120E;
+    transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #0E8C64;
   }
   .sabh-cta:active {
-    transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s;
+    transform: translate(1px, 1px); box-shadow: 0 0 0 #0E8C64; transition-duration: 0.07s;
   }
   .sabh-cta-short { display: none; }
   @media (prefers-reduced-motion: reduce) {
@@ -210,13 +217,17 @@ const showTicker = ticker ?? true;
   /* fishback2026.com campaign-ticker parity: Manrope 600 14px, solid band,
      45px tall, 60px between items, 30s linear loop, 1px underline offset 3px */
   .sabh-ticker-band {
-    background: #0E2A20;
+    background: #0F231C;
+    /* A definite height, not one derived from the row inside it: the collapse
+       animation in global.css runs it to 0, and height cannot interpolate
+       from `auto`. The home hero also subtracts this token to size its fold. */
+    height: var(--sab-ticker-h);
     overflow: hidden;
   }
   .sabh-ticker {
-    display: flex; white-space: nowrap; align-items: center; height: var(--sab-ticker-h);
+    display: flex; white-space: nowrap; align-items: center; height: 100%;
     font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600;
-    color: #FFFFFF;
+    color: rgba(242,240,233,0.9);
     animation: sabh-tick 30s linear infinite; will-change: transform;
   }
   .sabh-ticker-half { display: inline-flex; }
@@ -224,7 +235,7 @@ const showTicker = ticker ?? true;
      the whole message, link included, and copies with real spaces. */
   .sabh-ticker-item { display: inline-block; padding-right: 60px; }
   .sabh-ticker-item a {
-    color: #2FD3A0; text-decoration: underline;
+    color: #5CE3BB; text-decoration: underline;
     text-decoration-thickness: 1px; text-underline-offset: 3px;
   }
   .sabh-ticker-item a:hover { color: #F2F0E9; }
@@ -267,7 +278,7 @@ const showTicker = ticker ?? true;
          the bar's own stacking context: sheet 1, bar backdrop 2, bar
          contents 3. */
       position: fixed; inset: 0; z-index: 1;
-      background: #0B1512;
+      background: #0A1310;
       flex-direction: column; align-items: stretch; gap: 0;
       padding: 68px 20px 24px; box-sizing: border-box;
       overflow-y: auto; overscroll-behavior: contain;
@@ -276,10 +287,10 @@ const showTicker = ticker ?? true;
     /* The bar rides above the sheet so the logo and the CTA stay reachable
        and the button that opened the menu is the button that closes it. */
     .sabh[data-open] .sabh-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: #0B1512;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: #0A1310;
     }
     .sabh[data-open] .sabh-nav::before {
-      content: ''; position: absolute; inset: 0; background: #0B1512; z-index: 2;
+      content: ''; position: absolute; inset: 0; background: #0A1310; z-index: 2;
     }
     .sabh[data-open] .sabh-logo,
     .sabh[data-open] .sabh-cta,
@@ -399,6 +410,34 @@ const showTicker = ticker ?? true;
   document.addEventListener('astro:before-swap', () => {
     document.documentElement.style.overflow = '';
   });
+
+  // ── Sticky header collapse ───────────────────────────────────────────────
+  // Flips one attribute on <html>; every property that moves is a transition
+  // in global.css. Hysteresis, so a scroll that hovers on the line cannot make
+  // the header flap: it condenses at 116px down and only opens back up at 36px.
+  // Read inside rAF and never written unless the state actually changes, so a
+  // fast scroll costs one class write, not one per frame.
+  const STICK_DOWN = 116;
+  const STICK_UP = 36;
+  let stuckTicking = false;
+  function readStuck(): void {
+    stuckTicking = false;
+    const root = document.documentElement;
+    const stuck = root.hasAttribute('data-sab-stuck');
+    const y = window.scrollY;
+    if (!stuck && y > STICK_DOWN) root.setAttribute('data-sab-stuck', '');
+    else if (stuck && y < STICK_UP) root.removeAttribute('data-sab-stuck');
+  }
+  function onStickScroll(): void {
+    if (stuckTicking) return;
+    stuckTicking = true;
+    requestAnimationFrame(readStuck);
+  }
+  window.addEventListener('scroll', onStickScroll, { passive: true });
+  // A client-side navigation can land part-way down a page, and a reload
+  // restores the old offset before any scroll event fires.
+  document.addEventListener('astro:page-load', readStuck);
+  readStuck();
 
   initSabHeader();
   document.addEventListener('astro:page-load', initSabHeader);

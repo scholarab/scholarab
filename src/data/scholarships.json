@@ -3912,7 +3912,7 @@
     "audience": "Alberta residents entering an agriculture or environmental science program at a college or university",
     "category": "Academic",
     "region": "Alberta",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
     "notes": null,

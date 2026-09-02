@@ -26,12 +26,14 @@ export function formatDeadline(str: string | null | undefined): string | null | 
 }
 
 /**
- * "2026-08" → "AUG 2026", for the verified stamp on detail pages.
+ * "2026-08" → "AUG 2026".
  *
- * /terms promises that "the month it was last checked is printed on it", so
- * this is the thing that keeps that sentence true. Parsed by hand rather than
- * through Date: a bare "YYYY-MM" is a UTC instant, and in a negative-offset
- * zone new Date("2026-08") lands in July.
+ * Nothing renders this since the verified stamp came off the detail pages: no
+ * page claims a review month any more, because no such review happens on a
+ * cycle. Kept because `last_verified` is still a column and still worth
+ * formatting the day something admin-side wants to show it. Parsed by hand
+ * rather than through Date: a bare "YYYY-MM" is a UTC instant, and in a
+ * negative-offset zone new Date("2026-08") lands in July.
  */
 const VERIFIED_MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
                          'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];

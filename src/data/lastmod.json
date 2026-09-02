@@ -1,7 +1,7 @@
 {
   "/about/": {
-    "hash": "7e421bd865f7de25",
-    "date": "2026-09-01"
+    "hash": "f60a85a2aad69833",
+    "date": "2026-09-02"
   },
   "/privacy/": {
     "hash": "bdf99b616739bc22",
@@ -481,10 +481,6 @@
   },
   "/scholarships/a-bernard-mary-b-dixon-memorial-scholarship/": {
     "hash": "74a6aad6e1dc412d",
-    "date": "2026-08-22"
-  },
-  "/scholarships/aaaf-memorial-bursary/": {
-    "hash": "888760bbd386bf3e",
     "date": "2026-08-22"
   },
   "/scholarships/aaron-family-scholarship/": {
@@ -1844,11 +1840,11 @@
     "date": "2026-08-31"
   },
   "/templates/reference-letter/": {
-    "hash": "adf30f08fe9a71f1",
-    "date": "2026-08-28"
+    "hash": "f32600fa7beed19b",
+    "date": "2026-09-02"
   },
   "/terms/": {
-    "hash": "b22b59f2c673519f",
-    "date": "2026-08-23"
+    "hash": "5c1d67adb5cf0eea",
+    "date": "2026-09-02"
   }
 }

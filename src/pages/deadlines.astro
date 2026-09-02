@@ -196,7 +196,7 @@ const breadcrumbJson = {
               Every dated deadline ScholarAB tracks, in the order they arrive: scholarships and
               research programs together, because they land in the same semester and compete for the
               same weekends. {span ? `${span}.` : ''} Dates come from each provider's own page and
-              can move; the listing tells you the month it was last checked.
+              can move, so confirm there before you plan around one.
             </p>
             <p class="sabl-mono sabcal-stats">
               {`${rows.length} DATED DEADLINES · ${openNow} OPEN TO APPLY TODAY · ${months.length} MONTHS`}
@@ -264,7 +264,7 @@ const breadcrumbJson = {
 </Layout>
 
 <style is:global>
-  body:has(#sab-deadlines) { background: #FAF7F0; }
+  body:has(#sab-deadlines) { background: #FBF8F2; }
 
   .sabl-crumbs {
     display: flex; gap: 8px; align-items: center;
@@ -290,7 +290,7 @@ const breadcrumbJson = {
     position: sticky; top: 0; z-index: 2;
     display: flex; flex-wrap: wrap; gap: 8px;
     margin: 28px 0 8px; padding: 12px 0;
-    background: #FAF7F0; border-bottom: 1px solid #E5E0D5;
+    background: #FBF8F2; border-bottom: 1px solid #E5E0D5;
   }
   .sabcal-chip {
     display: inline-flex; align-items: baseline; gap: 6px;
@@ -345,7 +345,7 @@ const breadcrumbJson = {
        a swipe and gives the months back the space. */
     .sabcal-jump { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
     .sabcal-jump::-webkit-scrollbar { display: none; }
-    .sabcal-chip { flex: 0 0 auto; }
+    .sabcal-chip { flex: 0 0 auto; min-height: 44px; align-items: center; }
 
     /* Two columns, and the amount and status share the second row rather than
        taking one line each: four stacked lines per award made a month of

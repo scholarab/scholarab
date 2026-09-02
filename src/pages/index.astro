@@ -181,7 +181,7 @@ const matchGroups = TEASER_KEYS.map(key => ({
           <div class="sab-hero-copy">
             <span class="sab-sticker sab-mono">FREE · NO ACCOUNT · MADE IN MEDICINE HAT</span>
             <p>
-              ScholarAB tracks scholarships and research programs for Alberta high school students, with every deadline checked by hand. Free, no account needed.
+              ScholarAB tracks scholarships and research programs for Alberta high school students. Every listing is written from the provider's own page, never scraped.<span class="sab-hero-p-tail"> Free, no account needed.</span>
             </p>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
@@ -261,11 +261,13 @@ const matchGroups = TEASER_KEYS.map(key => ({
 
         <div class="sab-city-row">
           <span class="sab-mono sab-city-label">OR BY CITY</span>
-          {cityFacets.map(c => (
-            <a href={`/scholarships/${c.slug}/`} class="sab-city-chip">
-              {c.label}<span class="sab-mono sab-city-count">{c.count}</span>
-            </a>
-          ))}
+          <div class="sab-city-chips">
+            {cityFacets.map(c => (
+              <a href={`/scholarships/${c.slug}/`} class="sab-city-chip">
+                {c.label}<span class="sab-mono sab-city-count">{c.count}</span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -444,23 +446,28 @@ const matchGroups = TEASER_KEYS.map(key => ({
 
 <style is:global>
   /* The home design is fixed light regardless of site theme */
-  body:has(#sab-home) { background: #FAF7F0; }
+  body:has(#sab-home) { background: #FBF8F2; }
 </style>
 
 <style>
   /* ════ ScholarAB Home · claude.ai/design "ScholarAB Home.dc.html" ════
-     Palette: canvas #FAF7F0 · alt band #F2EEE4 · ink #141915 · hero/footer #0B1512
-     accent #2FD3A0 (soft: 40% alpha) · green text #0A6B4D (fills/borders
-     may still use the lighter #0E8C64) · urgency #B8541F
+     Palette: canvas #FBF8F2 · alt band #F1EDE3 · ink #141915 · hero/footer #08120E
+     accent #2FD3A0 · accent hover #4FE0B4 · accent-on-dark text #5CE3BB
+     green #0A6B4D (pressed #08573E) · hard shadows on cream #0E8C64
+     ink-on-accent #08120E · urgency #B8541F
+     Tuned 2026-09-02: mint stays the accent, but it no longer doubles as the
+     drop shadow on cream, where 1.8:1 against the card made the lift read as
+     a smudge. Deep green carries the shadows and the primary action on light
+     surfaces; mint keeps the dark ones.
      Type: Instrument Serif (display) · Archivo (UI/body) · IBM Plex Mono (labels) */
 
   #sab-home {
-    background: #FAF7F0;
+    background: #FBF8F2;
     color: #141915;
     font-family: 'Archivo', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  #sab-home ::selection { background: #2FD3A0; color: #0B1512; }
+  #sab-home ::selection { background: #2FD3A0; color: #08120E; }
   .sab-mono { font-family: 'IBM Plex Mono', monospace; }
   .sab-container { max-width: var(--sab-measure); margin: 0 auto; width: 100%; box-sizing: border-box; padding-left: 48px; padding-right: 48px; }
 
@@ -470,9 +477,14 @@ const matchGroups = TEASER_KEYS.map(key => ({
   /* ── Dark hero ── */
   /* Fills the first viewport so no canvas sliver peeks below the fold on
      tall/fullscreen windows; on short viewports it grows past 100svh. */
-  .sab-hero-band { background: #0B1512; color: #F2F0E9; }
+  .sab-hero-band { background: #0A1310; color: #F2F0E9; }
   .sab-hero {
-    background: #0B1512; color: #F2F0E9; position: relative; overflow: hidden;
+    background: #0A1310; color: #F2F0E9; position: relative; overflow: hidden;
+    /* One low-alpha mint wash off the top right corner. The hero was a flat
+       slab of near-black behind 96px type; this gives the accent somewhere to
+       come from without putting a second colour on the surface. */
+    background-image: radial-gradient(ellipse 760px 620px at calc(100% + 120px) -160px,
+                                      rgba(47,211,160,0.10), rgba(47,211,160,0) 68%);
     display: flex; flex-direction: column;
     /* The header used to be inside this box and counted toward the fold. Now
        it sits above, so its two bands come off the target instead. */
@@ -500,30 +512,31 @@ const matchGroups = TEASER_KEYS.map(key => ({
     gap: 40px; margin-top: 52px; padding-bottom: 64px;
   }
   .sab-hero-copy { max-width: 460px; }
-  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.72); margin: 0 0 30px; }
+  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.8); margin: 0 0 30px; }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   .sab-sticker {
     display: inline-block; margin-bottom: 22px; padding: 8px 16px;
-    background: #2FD3A0; color: #0B1512; font-size: 11.5px; letter-spacing: 0.06em;
-    border-radius: 100px; border: 2px solid #0B1512;
-    box-shadow: 3px 3px 0 rgba(242,240,233,0.25);
+    background: #2FD3A0; color: #08120E; font-size: 11.5px; letter-spacing: 0.06em;
+    border-radius: 100px; border: 2px solid #08120E;
+    box-shadow: 3px 3px 0 rgba(242,240,233,0.22);
     transform: rotate(-2.5deg);
   }
   /* Buttons lift onto a hard accent shadow on hover/keyboard focus, then snap
      flush into it while held; same press language as the category cards. */
   .sab-btn-accent {
     display: inline-flex; align-items: center; gap: 10px;
-    background: #2FD3A0; color: #0B1512; font-weight: 700; font-size: 16px;
-    padding: 16px 28px; border-radius: 100px; text-decoration: none; white-space: nowrap;
+    justify-content: center; box-sizing: border-box;
+    background: #2FD3A0; color: #08120E; font-weight: 700; font-size: 16px;
+    height: 56px; padding: 0 30px; border-radius: 100px; text-decoration: none; white-space: nowrap;
     transition: background 0.18s ease, color 0.18s ease,
                 transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
   .sab-btn-accent:hover, .sab-btn-accent:focus-visible {
-    background: #F2F0E9; color: #0B1512;
-    transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+    background: #4FE0B4; color: #08120E;
+    transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #0E8C64;
   }
   .sab-btn-accent:active {
-    transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0;
+    transform: translate(1px, 1px); box-shadow: 0 0 0 #0E8C64;
     transition-duration: 0.07s;
   }
   /* The arrow used to slide 4px right on hover. The button already lifts onto
@@ -534,25 +547,30 @@ const matchGroups = TEASER_KEYS.map(key => ({
 
   .sab-btn-outline {
     display: inline-flex; align-items: center; gap: 10px;
+    justify-content: center; box-sizing: border-box;
     color: #F2F0E9; font-weight: 600; font-size: 16px;
-    padding: 16px 24px; border-radius: 100px; border: 1px solid rgba(242,240,233,0.3);
+    height: 56px; padding: 0 28px; border-radius: 100px;
+    /* Tinted rather than a bare cream hairline: the outline button had no
+       relationship to the accent beside it, so the pair read as one button
+       and one link. */
+    border: 1.5px solid rgba(92,227,187,0.45); background: rgba(47,211,160,0.07);
     text-decoration: none; white-space: nowrap;
     transition: border-color 0.18s ease, background 0.18s ease,
                 transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
   .sab-btn-outline:hover, .sab-btn-outline:focus-visible {
-    border-color: #2FD3A0; color: #F2F0E9;
-    transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+    border-color: #2FD3A0; color: #F2F0E9; background: rgba(47,211,160,0.14);
+    transform: translate(-3px, -3px); box-shadow: 5px 5px 0 rgba(47,211,160,0.35);
   }
   .sab-btn-outline:active {
-    transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0;
+    transform: translate(1px, 1px); box-shadow: 0 0 0 rgba(47,211,160,0.35);
     transition-duration: 0.07s;
   }
 
-  .sab-stats { display: flex; border-left: 1px solid rgba(242,240,233,0.18); }
-  .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(242,240,233,0.18); }
+  .sab-stats { display: flex; border-left: 1px solid rgba(92,227,187,0.28); }
+  .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(92,227,187,0.28); }
   .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; font-variant-numeric: tabular-nums; }
-  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); margin-top: 6px; white-space: nowrap; }
+  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.62); margin-top: 6px; white-space: nowrap; }
 
   /* ── Closing this week ── */
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
@@ -586,24 +604,27 @@ const matchGroups = TEASER_KEYS.map(key => ({
     font-size: 12.5px; font-weight: 500; padding: 7px 14px; border-radius: 100px;
     background: rgba(184,84,31,0.12); color: #B8541F; white-space: nowrap;
   }
-  .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #FAF7F0; }
+  .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #FBF8F2; }
 
   /* ── Categories ── */
-  .sab-cat-band { background: #F2EEE4; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
+  .sab-cat-band { background: #F1EDE3; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
   .sab-cats { padding-top: 88px; padding-bottom: 88px; }
   .sab-cats .sab-section-head { margin-bottom: 44px; }
-  .sab-cats-meta { font-size: 13px; color: rgba(20,25,21,0.5); white-space: nowrap; }
+  .sab-cats-meta { font-size: 13px; color: rgba(20,25,21,0.55); white-space: nowrap; }
   .sab-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .sab-cat-card {
-    display: block; background: #FAF7F0; border: 1.5px solid rgba(20,25,21,0.85);
+    display: block; background: #FBF8F2; border: 1.5px solid rgba(20,25,21,0.85);
     border-radius: 14px; padding: 24px 22px; color: #141915; text-decoration: none;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
-  .sab-cat-card:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #2FD3A0; color: #141915; }
+  .sab-cat-card:hover {
+    transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #0E8C64;
+    border-color: #0A6B4D; color: #141915;
+  }
   .sab-cat-top { display: flex; justify-content: space-between; align-items: baseline; }
   .sab-cat-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
-  .sab-cat-count { font-size: 12px; color: rgba(20,25,21,0.45); }
-  .sab-cat-desc { font-size: 13.5px; color: rgba(20,25,21,0.55); margin-top: 8px; line-height: 1.45; }
+  .sab-cat-count { font-size: 12px; color: rgba(20,25,21,0.5); }
+  .sab-cat-desc { font-size: 13.5px; color: rgba(20,25,21,0.6); margin-top: 8px; line-height: 1.45; }
 
   /* City row: a quieter chip than the category cards on purpose. Cities are a
      second axis through the same listings, not eight more tracks.
@@ -614,41 +635,45 @@ const matchGroups = TEASER_KEYS.map(key => ({
      1053 with 31px spare. It still wraps, and has to below about 1100px; a
      ninth scope would need re-measuring rather than eyeballing. */
   .sab-city-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
-  .sab-city-label { font-size: 11px; letter-spacing: 0.12em; color: rgba(20,25,21,0.45); margin-right: 4px; }
+  /* The chips moved into their own box so the phone layout can put the label
+     on a line of its own; on a desktop it stays one row, so this box has to
+     carry the wrapping and the gap the row used to. */
+  .sab-city-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+  .sab-city-label { font-size: 11px; letter-spacing: 0.12em; color: rgba(20,25,21,0.5); margin-right: 4px; }
   .sab-city-chip {
     display: inline-flex; align-items: baseline; gap: 8px;
-    border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
+    border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
     padding: 7px 12px; font-size: 14px; font-weight: 600;
-    color: #141915; text-decoration: none; background: #FAF7F0;
+    color: #141915; text-decoration: none; background: #FBF8F2;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
-  .sab-city-chip:hover { border-color: #141915; box-shadow: 2px 2px 0 #2FD3A0; color: #141915; }
-  .sab-city-count { font-size: 11px; color: rgba(20,25,21,0.45); }
+  .sab-city-chip:hover { border-color: #0A6B4D; box-shadow: 2px 2px 0 #0E8C64; color: #141915; }
+  .sab-city-count { font-size: 11px; color: rgba(20,25,21,0.5); }
 
   /* ── Match teaser ── */
   .sab-match { padding-top: 96px; padding-bottom: 96px; }
   .sab-match-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: center; }
   .sab-match-eyebrow { font-size: 13px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 16px; }
   .sab-match-h2 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.05; margin-bottom: 20px; }
-  .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.65); margin: 0; }
+  .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.68); margin: 0; }
   .sab-match-card {
-    background: #FAF7F0; border: 2px solid #141915; border-radius: 20px; padding: 36px;
-    box-shadow: 8px 8px 0 rgba(47,211,160,0.4);
+    background: #FBF8F2; border: 2px solid #141915; border-radius: 20px; padding: 36px;
+    box-shadow: 8px 8px 0 rgba(14,140,100,0.35);
   }
   .sab-match-group { margin-bottom: 22px; }
-  .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); margin-bottom: 10px; }
+  .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.55); margin-bottom: 10px; }
   .sab-match-opts { display: flex; flex-wrap: wrap; gap: 8px; }
   .sab-match-opt {
     font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 600;
-    padding: 9px 16px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
+    padding: 9px 16px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.32);
     background: transparent; color: #141915; cursor: pointer;
     transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease,
                 transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
   .sab-match-opt:hover, .sab-match-opt:focus-visible {
-    border-color: #141915; transform: translate(-2px, -2px); box-shadow: 3px 3px 0 #2FD3A0;
+    border-color: #0A6B4D; transform: translate(-2px, -2px); box-shadow: 3px 3px 0 #0E8C64;
   }
-  .sab-match-opt:active { transform: translate(0, 0); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+  .sab-match-opt:active { transform: translate(0, 0); box-shadow: 0 0 0 #0E8C64; transition-duration: 0.07s; }
   /* a small pop the moment a chip turns on */
   .sab-match-opt.on {
     background: #141915; color: #F2F0E9; border-color: #141915;
@@ -656,13 +681,13 @@ const matchGroups = TEASER_KEYS.map(key => ({
   }
   .sab-match-cta {
     width: 100%; margin-top: 6px; font-family: 'Archivo', sans-serif;
-    background: #141915; color: #F2F0E9; font-weight: 700; font-size: 16px;
-    padding: 16px; border-radius: 100px; border: none; cursor: pointer;
+    background: #0A6B4D; color: #F5FBF8; font-weight: 700; font-size: 16px;
+    height: 56px; padding: 0 16px; border-radius: 100px; border: none; cursor: pointer;
     transition: background 0.18s ease,
                 transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
   .sab-match-cta:hover, .sab-match-cta:focus-visible {
-    background: #0A6B4D; transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+    background: #08573E; transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
   }
   .sab-match-cta:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
   /* Inert until all three are picked: the label is an instruction at that
@@ -705,7 +730,23 @@ const matchGroups = TEASER_KEYS.map(key => ({
     .sab-hero-bottom { flex-direction: column; align-items: stretch; gap: 0; margin-top: 16px; padding-bottom: 20px; }
     .sab-hero-copy { max-width: none; }
     .sab-hero-copy p { font-size: 14.5px; line-height: 1.5; margin: 0 0 16px; }
-    .sab-sticker { margin-bottom: 14px; padding: 7px 14px; font-size: 10.5px; }
+    /* Three separate blocks all said "free, student-built, no account" before
+       the fold. On a phone that reads as a wall, so the two decorative ones
+       go and the sentence keeps the claim. */
+    /* The label shared the first wrapped line with a chip, so "Medicine Hat"
+       started 145px in while every other chip began at the margin: the row
+       read as a mistake rather than as a list. Given its own line, the way
+       the directory's chip rows label themselves. */
+    .sab-city-row { display: block; }
+    .sab-city-label { display: block; margin: 0 0 8px; }
+    .sab-city-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    /* Both came out under the 44px touch minimum: the city chips at 38 and
+       the underlined "View all" link at 28. */
+    .sab-city-chip { min-height: 44px; align-items: center; }
+    .sab-view-all { display: inline-flex; align-items: center; min-height: 44px; }
+    .sab-kicker { display: none; }
+    .sab-sticker { display: none; }
+    .sab-hero-p-tail { display: none; }
     .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 9px; }
     .sab-btn-accent, .sab-btn-outline { justify-content: center; padding: 0 20px; }
     .sab-btn-accent { height: 52px; font-size: 16px; }

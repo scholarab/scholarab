@@ -158,7 +158,7 @@ function caption(p: Post, index: number): string {
     `Deadline: ${fmtDate(p.s.deadline as string)} (${p.days} days)`,
     p.s.region ? `Who: ${p.s.region}` : null,
     '',
-    'Full details and the application link are on ScholarAB; every listing is checked by hand.',
+    'Full details and the application link are on ScholarAB; every listing links to the provider.',
     '',
     `Instagram link: ${link('ig')}`,
     `TikTok link:    ${link('tt')}`,

@@ -112,9 +112,11 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     </div>
     <div class="sabl-sort">
       <span class="sabl-mono sabl-row-label">SORT</span>
+      <div class="sabl-sort-chips">
       {SORT_CHIPS.map(s => (
         <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
       ))}
+      </div>
     </div>
   </div>
 

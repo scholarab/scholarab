@@ -158,12 +158,12 @@
      editorial accent pair, the same two colours every mint CTA already uses. */
   --brand:         #2FD3A0;
   --brand-rgb:     47, 211, 160;
-  --text-on-brand: #0B1512;
+  --text-on-brand: #08120E;
 
   /* The canvas behind everything. Layout.astro pins `html` to the same value
      for pages it owns; this is what /admin and any future page outside that
      layout fall back to. */
-  --bg-page:      #FAF7F0;
+  --bg-page:      #FBF8F2;
   --text-primary: #141915;
 }
 
@@ -212,6 +212,11 @@ body {
      claiming the fold. */
   --sab-nav-h: 89px;
   --sab-ticker-h: 45px;
+  /* The hard shadow a control lifts onto. Mint on cream is 1.8:1, so the lift
+     read as a smudge rather than as a second edge; deep green is the default
+     and the ink surfaces below hand the token back to mint, which is the
+     brighter of the two against near-black. */
+  --sab-btn-shadow: #0E8C64;
 }
 
 .sabp-header,
@@ -219,22 +224,92 @@ body {
 .sabf-footer,
 .sabd-remind,
 .sabm-value-card,
-.sabe-cta { --focus-ring: #2FD3A0; }
+.sabe-cta { --focus-ring: #2FD3A0; --sab-btn-shadow: #2FD3A0; }
 
 /* Accent-filled controls are themselves #2FD3A0, so they must opt back out of
-   whatever surface they sit on; a mint ring on a mint pill is 1:1. */
+   whatever surface they sit on; a mint ring on a mint pill is 1:1, and a mint
+   shadow under a mint button is the same problem one property along. */
 .sabh-cta,
 .sab-btn-accent,
 .sabm-btn-accent,
 .sab404-btn-accent,
 .sabd-remind-btn,
 .sabg-cta-btn,
-.sabe-btn-solid { --focus-ring: #0B1512; }
+.sabe-btn-solid { --focus-ring: #08120E; --sab-btn-shadow: #0E8C64; }
 
 :focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ── Sticky header collapse ────────────────────────────────── */
+/* The header follows you down the page and condenses as it goes: the ticker
+   band folds its own 45px away while the marquee slides 10px up behind it, the
+   nav row tightens from 91px to 67px, and a shadow plus a mint hairline fade in
+   underneath so the bar reads as floating over the page rather than as part of
+   it. Scrolling back up plays the whole thing backwards.
+
+   One threshold on one 0.3s curve, so everything moves as a single condensing
+   motion rather than as four events. The threshold has hysteresis (down at
+   116px, back up at 36px) so a scroll that hovers on the line cannot flap.
+
+   This was first written as a scroll-driven animation, which is the prettier
+   mechanism: `animation-timeline: scroll()` scrubs the whole sequence off the
+   compositor with no listener at all. It went back to a class and a transition
+   because that turned out to do nothing in real browsers that report
+   supporting it, and a header that condenses on every browser beats one that
+   scrubs on some and sits there on the rest.
+
+   The one subtlety is that a shrinking header hands 69px back to the flow,
+   which would drag the page up under it and read as a jump rather than as a
+   collapse. #main-content pays exactly that 69px back as a top margin on the
+   same curve, so nothing below the header moves in the document at all. That
+   margin is only ever exposed above the viewport, behind the bar itself, so it
+   is never visible.
+
+   Sticking is not the animated part and is not conditional on anything: every
+   browser has had position:sticky for a decade, it is not a motion effect, and
+   a header that follows you is the whole point. Every page wraps SabHeader in
+   one of these two, and both are the last element before <main>. */
+.sabp-header, .sab-hero-band {
+  position: sticky; top: 0; z-index: 40;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  border-bottom: 1px solid rgba(92,227,187,0);
+}
+
+/* The condensing half needs a header wide enough to condense: at 900px and
+   below the ticker is already hidden and the nav row is already the tight 12px
+   version, so there is nothing left to take away. 901px, because the header's
+   own mobile query is an inclusive max-width: 900px. */
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .sabp-header, .sab-hero-band, .sabh-nav, .sabh-ticker-band, #main-content {
+    transition: min-height 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
+                padding 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
+                height 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
+                margin-top 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
+                top 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
+                opacity 0.3s ease, box-shadow 0.3s ease, border-bottom-color 0.3s ease;
+  }
+  /* `top`, not `transform`: the marquee is already using transform for its own
+     30s loop, and a transition cannot share that property with an animation. */
+  .sabh-ticker { position: relative; top: 0; transition: top 0.3s cubic-bezier(0.2, 0.8, 0.3, 1); }
+
+  html[data-sab-stuck] .sabp-header,
+  html[data-sab-stuck] .sab-hero-band {
+    box-shadow: 0 10px 30px -12px rgba(0,0,0,0.75);
+    border-bottom-color: rgba(92,227,187,0.18);
+  }
+  html[data-sab-stuck] .sabh-nav { min-height: 64px; padding-top: 12px; padding-bottom: 12px; }
+  html[data-sab-stuck] .sabh-ticker-band { height: 0; opacity: 0; }
+  html[data-sab-stuck] .sabh-ticker { top: -10px; }
+  /* 24px off the nav row's padding, and the ticker's own 45px. The nav row is
+     91px tall rather than its 89px minimum (the CTA pill plus 24px of
+     padding), so what moves is the padding, not the two min-heights. */
+  html[data-sab-stuck] #main-content { margin-top: 69px; }
+  /* The detail-page rail is the one other sticky thing on the site; without
+     this it parks under the collapsed bar instead of below it. */
+  html[data-sab-stuck] .sabd-rail { top: calc(67px + 24px); }
 }
 
 /* ── Button press language ─────────────────────────────────── */
@@ -254,11 +329,11 @@ body {
 }
 .sab-btn:hover, .sab-btn:focus-visible {
   transform: translate(-3px, -3px);
-  box-shadow: 5px 5px 0 var(--sab-btn-shadow, #2FD3A0);
+  box-shadow: 5px 5px 0 var(--sab-btn-shadow, #0E8C64);
 }
 .sab-btn:active {
   transform: translate(1px, 1px);
-  box-shadow: 0 0 0 var(--sab-btn-shadow, #2FD3A0);
+  box-shadow: 0 0 0 var(--sab-btn-shadow, #0E8C64);
   transition-duration: 0.07s;
 }
 /* A control that cannot be pressed must not answer to being pressed. */
@@ -343,7 +418,7 @@ body.quiz-results #match-divider {
 /* ══ "ScholarAB Scholarships" design (claude.ai/design); list-page island ══
    Fixed light palette, independent of the theme toggle. */
 .sabl-page { font-family: 'Archivo', sans-serif; color: #141915; -webkit-font-smoothing: antialiased; }
-.sabl-page ::selection { background: #2FD3A0; color: #0B1512; }
+.sabl-page ::selection { background: #2FD3A0; color: #08120E; }
 .sabl-mono { font-family: 'IBM Plex Mono', monospace; }
 
 /* ── Page kicker ─────────────────────────────────────────────────────────────
@@ -554,7 +629,7 @@ body.quiz-results #match-divider {
   border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px; padding: 26px 24px 22px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.sabl-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0; }
+.sabl-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #0E8C64; }
 .sabl-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 8px; }
 /* Programs carry a $ PAID badge beside the tag; the right slot stays reserved
    for the day chip so program and scholarship cards line up. */
@@ -575,7 +650,7 @@ body.quiz-results #match-divider {
   background: rgba(20,25,21,0.05); color: rgba(20,25,21,0.6);
 }
 .sabl-days.soon { background: rgba(160,73,26,0.12); color: #A0491A; }
-.sabl-days.urgent { background: #A0491A; color: #FAF7F0; }
+.sabl-days.urgent { background: #A0491A; color: #FBF8F2; }
 .sabl-days.neutral { background: transparent; border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6); }
 .sabl-name { font-weight: 700; font-size: 18.5px; letter-spacing: -0.01em; line-height: 1.25; color: #141915; text-decoration: none; display: block; }
 .sabl-name:hover { color: #0A6B4D; }
@@ -614,13 +689,13 @@ body.quiz-results #match-divider {
 .sabl-empty-title { font-family: 'Instrument Serif', serif; font-size: 34px; margin-bottom: 10px; }
 .sabl-empty-sub { font-size: 15px; color: rgba(20,25,21,0.55); margin-bottom: 24px; }
 .sabl-empty-btn {
-  font-family: 'Archivo', sans-serif; background: #141915; color: #F2F0E9;
+  font-family: 'Archivo', sans-serif; background: #0A6B4D; color: #F5FBF8;
   font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 100px; border: none; cursor: pointer;
   transition: background 0.18s ease,
               transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
 .sabl-empty-btn:hover, .sabl-empty-btn:focus-visible {
-  background: #0A6B4D; transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+  background: #08573E; transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
 }
 .sabl-empty-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
 
@@ -634,15 +709,69 @@ body.quiz-results #match-divider {
   .sabl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 900px) {
-  .sabl-title-row { flex-direction: column; align-items: flex-start; gap: 24px; }
-  /* The column layout already has its own 24px gap; the optical nudge that
+  .sabl-title-row { flex-direction: column; align-items: flex-start; gap: 18px; }
+  /* The column layout already has its own gap; the optical nudge that
      settles the stat against the h1 side by side is just extra space here. */
   .sabl-stat { text-align: left; padding-top: 0; }
-  .sabl-toolbar { flex-direction: column; align-items: stretch; margin-top: 28px; }
+  /* 48px is the desktop floor of the clamp, which on a phone spent a third of
+     the viewport on one word. */
+  .sabl-h1 { font-size: 40px; }
+  /* The three reserved lines keep the chip rows from moving as a reader hops
+     between hubs -- a desktop problem, where the intro runs two lines and the
+     rows sit beside the fold. On a phone every intro already fills three lines
+     or more, so the reservation buys nothing and the chips are below the fold
+     regardless. */
+  .sabl-desc { min-height: 0; margin-top: 14px; font-size: 16px; }
+  .sabl-toolbar { flex-direction: column; align-items: stretch; margin-top: 22px; padding: 12px 0; gap: 14px; }
   .sabl-row-label { width: 100%; }
   /* The label takes the full width here, which a nowrap row cannot give it:
      the row becomes a column, and the chips keep their own line underneath. */
   .sabl-filter-row { flex-direction: column; align-items: stretch; gap: 6px; }
+  .sabl-filters { gap: 10px; padding-top: 14px; }
+  .sabl-result-line { padding: 14px 0 6px; }
+  /* Touch targets. The chips came out at 39px and the search field at 23,
+     both under the 44px minimum, and the search box is the primary control on
+     the page. Height only: the padding stays, so the rows keep their metrics. */
+  .sabl-chip {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; box-sizing: border-box;
+  }
+  /* Height on the input itself, not just the row around it: the row is what
+     grew, but the input is what takes the tap. */
+  .sabl-search { min-height: 44px; }
+  .sabl-search input { min-height: 44px; }
+  /* The two controls on every card: the save star at 34px and the Details
+     link, which is text with an underline and was 25px tall. */
+  .sabl-save { width: 44px; height: 44px; }
+  .sabl-apply { display: inline-flex; align-items: center; min-height: 44px; }
+  /* The reserved breadcrumb row keeps a root page's h1 level with a hub's when
+     a reader hops between them. On a phone that hop costs a full page load and
+     nothing is level with anything, so the row is 42px of empty screen above
+     the only heading. */
+  .sabl-crumb-gap { display: none; }
+
+  /* SORT was the one control row that still wrapped, so three chips took two
+     lines and sat at a different rhythm from the three scrolling rows directly
+     beneath it. Given the same shape, the four rows read as one block. */
+  .sabl-sort { flex-direction: column; align-items: stretch; gap: 6px; flex-wrap: nowrap; }
+  .sabl-sort .sabl-row-label { width: 100%; margin-right: 0; }
+  .sabl-sort-chips {
+    display: flex; align-items: center; gap: 8px;
+    min-width: 0; overflow-x: auto; overscroll-behavior-x: contain;
+  }
+  .sabl-sort-chips > * { flex: none; }
+
+  /* The rows scroll, but at a 20px inset the cut landed mid-chip in open page
+     and read as a clipping bug rather than as more row. Bled to the screen
+     edge instead, so a half-chip at the boundary is the ordinary signal that
+     there is more to the right. Matches .sabp-body's phone padding; the
+     padding here restores the alignment the negative margin removes. */
+  .sabl-chips, .sabl-sort-chips {
+    margin-left: -20px; margin-right: -20px;
+    padding-left: 20px; padding-right: 20px;
+    scrollbar-width: none;
+  }
+  .sabl-chips::-webkit-scrollbar, .sabl-sort-chips::-webkit-scrollbar { display: none; }
 }
 @media (max-width: 640px) {
   .sabl-grid { grid-template-columns: minmax(0, 1fr); }
@@ -659,7 +788,7 @@ body.quiz-results #match-divider {
    sentence. */
 .sabl-meta {
   font-size: 12.5px; font-weight: 600; padding: 5px 10px; border-radius: 6px;
-  background: #F2EEE4; color: rgba(20,25,21,0.7);
+  background: #F1EDE3; color: rgba(20,25,21,0.7);
   max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 /* Arrow convention: → stays on ScholarAB, ↗ leaves for the sponsor's site.
@@ -674,11 +803,11 @@ body.quiz-results #match-divider {
 }
 
 /* Directory-page shell (scholarships + programs design pages) */
-.sabp { background: #FAF7F0; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
-.sabp-header { background: #0B1512; color: #F2F0E9; font-family: 'Archivo', sans-serif; }
+.sabp { background: #FBF8F2; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
+.sabp-header { background: #0A1310; color: #F2F0E9; font-family: 'Archivo', sans-serif; }
 .sabp-body { width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; padding: 72px 48px 96px; }
 @media (max-width: 900px) {
-  .sabp-body { padding: 40px 20px 64px; }
+  .sabp-body { padding: 28px 20px 64px; }
 }
 
 /* ══ "ScholarAB Match" design (claude.ai/design); quiz island ══ */
@@ -717,7 +846,7 @@ body.quiz-results #match-divider {
    pointing at looked exactly like one you had chosen. Selection keeps the
    lift and adds the green border; one property, no layout shift, and the
    two states stop being the same picture. */
-.sabm-opt:hover, .sabm-opt-selected { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0; }
+.sabm-opt:hover, .sabm-opt-selected { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #0E8C64; }
 .sabm-opt-selected { border-color: #0A6B4D; }
 .sabm-opt-dim { opacity: 0.45; }
 .sabm-opt-text { display: flex; flex-direction: column; gap: 5px; }
@@ -738,7 +867,7 @@ body.quiz-results #match-divider {
 }
 .sabm-value-card {
   display: flex; align-items: center; gap: 36px; margin-top: 36px;
-  background: #0B1512; color: #F2F0E9; border-radius: 20px; padding: 30px 36px;
+  background: #0A1310; color: #F2F0E9; border-radius: 20px; padding: 30px 36px;
 }
 .sabm-value-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.55); }
 .sabm-value-amount { font-family: 'Instrument Serif', serif; font-size: clamp(40px, 6vw, 56px); line-height: 1.1; color: #2FD3A0; }
@@ -763,20 +892,20 @@ body.quiz-results #match-divider {
               transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
 .sabm-btn-outline:hover, .sabm-btn-outline:focus-visible {
-  border-color: #141915; transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #2FD3A0;
+  border-color: #0A6B4D; transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #0E8C64;
 }
-.sabm-btn-outline:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+.sabm-btn-outline:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #0E8C64; transition-duration: 0.07s; }
 .sabm-btn-accent {
-  font-size: 14.5px; font-weight: 700; background: #2FD3A0; color: #0B1512;
+  font-size: 14.5px; font-weight: 700; background: #2FD3A0; color: #08120E;
   padding: 12px 22px; border-radius: 100px; text-decoration: none; display: inline-block;
   transition: background 0.18s ease, color 0.18s ease,
               transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
 .sabm-btn-accent:hover, .sabm-btn-accent:focus-visible {
-  background: #141915; color: #F2F0E9;
-  transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #2FD3A0;
+  background: #4FE0B4; color: #08120E;
+  transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #0E8C64;
 }
-.sabm-btn-accent:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+.sabm-btn-accent:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #0E8C64; transition-duration: 0.07s; }
 
 @media (prefers-reduced-motion: reduce) {
   .sabm-btn-outline, .sabm-btn-outline:hover, .sabm-btn-outline:focus-visible, .sabm-btn-outline:active,
@@ -897,7 +1026,7 @@ body.quiz-results #match-divider {
 .sabs-cal-nav.has-due { border-color: rgba(20,25,21,0.55); }
 .sabs-cal-nav-count {
   font-size: 11px; font-weight: 500; line-height: 1;
-  background: #2FD3A0; color: #0B1512; border-radius: 100px; padding: 3px 6px;
+  background: #2FD3A0; color: #08120E; border-radius: 100px; padding: 3px 6px;
 }
 .sabs-cal-nav:hover { border-color: #141915; }
 .sabs-cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }

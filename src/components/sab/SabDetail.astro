@@ -77,9 +77,9 @@ const chip =
   : status === 'future' ? { text: opensLabel ? `OPENS ${opensLabel.toUpperCase()}` : 'OPENING SOON', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'ongoing' ? { text: 'ONGOING · JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
-  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#B8541F', fg: '#FAF7F0' }
+  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#B8541F', fg: '#FBF8F2' }
   : typeof daysLeft === 'number'
-    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#B8541F' : 'rgba(184,84,31,0.12)', fg: urgent ? '#FAF7F0' : '#B8541F' }
+    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#B8541F' : 'rgba(184,84,31,0.12)', fg: urgent ? '#FBF8F2' : '#B8541F' }
     : { text: 'OPEN', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' };
 ---
 
@@ -233,7 +233,7 @@ const chip =
   .sabd-guide {
     display: block; margin-top: 16px; padding: 18px 20px;
     border: 1px solid rgba(20,25,21,0.14); border-radius: 4px;
-    background: #FAF7F0; text-decoration: none; box-sizing: border-box;
+    background: #FBF8F2; text-decoration: none; box-sizing: border-box;
   }
   .sabd-guide:hover { border-color: #0E8C64; }
 
@@ -318,12 +318,15 @@ const chip =
   .sabd-rail { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
   .sabd-card {
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
-    padding: 28px 26px; box-shadow: 6px 6px 0 #2FD3A0;
+    padding: 28px 26px; box-shadow: 6px 6px 0 #0E8C64;
   }
   .sabd-value { font-family: 'Instrument Serif', serif; font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
   .sabd-value-note { font-size: 14px; color: rgba(20,25,21,0.6); }
+  /* space-between with no gap only looked safe because the rail was 360px
+     wide. In the phone's single column the label and the date met in the
+     middle and read as one word. */
   .sabd-deadline-row {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; justify-content: space-between; align-items: center; gap: 14px;
     margin: 22px 0 0; padding-top: 18px; border-top: 1px solid rgba(20,25,21,0.12);
   }
   .sabd-deadline-label { font-size: 12px; color: rgba(20,25,21,0.5); }
@@ -331,9 +334,9 @@ const chip =
   .sabd-cta-row { display: flex; gap: 10px; margin-top: 22px; }
   .sabd-cta {
     flex: 1; text-align: center; font-size: 15.5px; font-weight: 700;
-    background: #141915; color: #F2F0E9; padding: 15px 0; border-radius: 100px; text-decoration: none;
+    background: #0A6B4D; color: #F5FBF8; padding: 15px 0; border-radius: 100px; text-decoration: none;
   }
-  .sabd-cta:hover { background: #0A6B4D; color: #F2F0E9; }
+  .sabd-cta:hover { background: #08573E; color: #F5FBF8; }
   .sabd-cta-disabled { background: rgba(20,25,21,0.08); color: rgba(20,25,21,0.45); cursor: not-allowed; }
   .sabd-cta-disabled:hover { background: rgba(20,25,21,0.08); color: rgba(20,25,21,0.45); }
   .sabd-save {
@@ -380,18 +383,35 @@ const chip =
   .sabd-remind-input::placeholder { color: rgba(242,240,233,0.4); }
   .sabd-remind-btn {
     font-family: 'Archivo', sans-serif; font-size: 13.5px; font-weight: 700;
-    background: #2FD3A0; color: #0B1512; border: none; border-radius: 100px;
+    background: #2FD3A0; color: #08120E; border: none; border-radius: 100px;
     padding: 11px 18px; cursor: pointer; flex: none;
   }
-  .sabd-remind-btn:hover { background: #F2F0E9; }
+  .sabd-remind-btn:hover { background: #4FE0B4; }
   .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
   .sabd-remind-msg { font-size: 14.5px; font-weight: 600; color: #2FD3A0; }
 
   @media (max-width: 900px) {
     .sabd-crumb-row { padding: 28px 20px 0; }
     .sabd-title-block { padding: 28px 20px 0; }
-    .sabd-grid { grid-template-columns: 1fr; gap: 32px; padding: 32px 20px 72px; }
-    .sabd-rail { position: static; }
+    /* The rail is a sidebar on a desktop, so the amount, the deadline and the
+       Apply button are beside the first line of prose. Stacked, it landed at
+       967px on an 812px screen: a reader had to scroll past the eligibility
+       box, the description and all three how-to-apply steps to find out what
+       the award is worth, when it closes, or where to apply.
+
+       display:contents dissolves the rail so its children can be ordered
+       against the prose column individually. Only the card moves; the guide
+       link and the reminder form still read better after the description. */
+    /* align-items:start is inherited from the desktop grid, where it stops the
+       rail stretching to the tallest row. On a flex column that is the cross
+       axis, so it sized every block to its own content and left the card at
+       257px in a 335px measure. */
+    .sabd-grid { display: flex; flex-direction: column; align-items: stretch; gap: 32px; padding: 32px 20px 72px; }
+    .sabd-rail { position: static; display: contents; }
+    .sabd-card { order: -1; }
+    .sabd-left { order: 0; }
+    .sabd-guide { order: 1; }
+    .sabd-remind { order: 2; }
     .sabd-facts { grid-template-columns: 1fr; }
   }
 </style>
@@ -551,8 +571,8 @@ const chip =
       // round, not ceil: midnight-to-midnight is whole days except across a
       // DST change, where ceil overcounts by one (and disagrees with the list chips)
       const days = Math.max(0, Math.round((new Date(deadline + 'T00:00:00').getTime() - todayMs) / 86400000));
-      if (days === 0) paint('DUE TODAY', '#B8541F', '#FAF7F0');
-      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#B8541F', '#FAF7F0');
+      if (days === 0) paint('DUE TODAY', '#B8541F', '#FBF8F2');
+      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#B8541F', '#FBF8F2');
       else paint(`${days} DAYS LEFT`, 'rgba(184,84,31,0.12)', '#B8541F');
     }
   }

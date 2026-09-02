@@ -6,6 +6,10 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": ["scripts/**/*.ts"],
+  // src/env.d.ts too: a script that imports anything out of src/lib can pull
+  // data-loader.ts and db/client.ts into the graph with it, and both read
+  // import.meta.env. Without the ambient declaration here they fail to
+  // typecheck in this project while compiling fine in the site's own.
+  "include": ["scripts/**/*.ts", "src/env.d.ts"],
   "exclude": []
 }

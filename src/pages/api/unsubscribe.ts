@@ -22,12 +22,12 @@ const page = (title: string, body: string) =>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
       body{font-family:system-ui,-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;
-        min-height:100vh;margin:0;background:#FAF7F0;color:#141915}
+        min-height:100vh;margin:0;background:#FBF8F2;color:#141915}
       .card{text-align:center;padding:2rem;max-width:420px}
       h1{font-size:1.5rem;margin:0 0 .5rem}
       p{color:#5A605B;font-size:.95rem;line-height:1.5}
       a{color:#141915}
-      button{font:inherit;font-weight:600;background:#2FD3A0;color:#0B1512;border:0;border-radius:100px;
+      button{font:inherit;font-weight:600;background:#2FD3A0;color:#08120E;border:0;border-radius:100px;
         padding:12px 28px;cursor:pointer;margin-top:1.25rem}
       button:hover{background:#28BC8E}
       button.secondary{background:transparent;color:#5A605B;border:1px solid #d8d4c8;font-weight:500;

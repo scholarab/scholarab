@@ -57,6 +57,48 @@ because it is cheap and it is the honest handling:
 | Unsubscribe, readily performed | A link in every footer, plus RFC 8058 one-click headers so mail apps show their own button. |
 | Honoured within 10 business days | Immediately. The row is deleted; there is no suppression list. |
 
+## Counsellor outreach
+
+The site also emails school counsellors and division offices to tell them the
+directory exists. This is a different consent basis from the student reminders
+above, and it used to be written down only in `outreach/outreach_plan.md`,
+which is gitignored. That is the same mistake this file was created to fix, one
+directory over: the operational detail belongs in a file that never gets
+committed, but the legal position has to live where someone would look.
+
+**Position:** implied consent under CASL s.10(9)(b). The address was
+conspicuously published by the recipient, it carries no statement refusing
+unsolicited messages, and a scholarship directory is relevant to the role of a
+guidance counsellor. This is a stronger footing than the non-CEM argument the
+student reminders rest on, and it is available here because the recipients
+publish their addresses in a professional capacity, which students do not.
+
+**The burden of proof is on the sender**, which makes provenance a hard
+requirement rather than good practice. Two years after a send, the page an
+address came from has been redesigned and "it was conspicuously published" is a
+claim with nothing behind it. So every row carries the URL it came from,
+`counselling_page` falling back to `website`, and a row with neither is
+unmailable rather than merely undocumented.
+
+`scripts/check-outreach.ts` enforces that. It exits non-zero on any row holding
+an address with no recorded source, and on any address reachable through more
+than one row, because one inbox receiving seven copies of a message reads as a
+mailing list and not as the individual, role-relevant message the consent basis
+describes. Run `npm run check-outreach` before any wave. It is a gate, not a
+report.
+
+**Counts are representations, not copy.** A cold email to five hundred schools
+gets forwarded, and anything said about the size of the directory falls under
+the Competition Act. Three different numbers exist and have been confused
+before: the catalog total, the Alberta-scoped total, and the number open to
+apply today. `npm run check-outreach` prints all three from the same functions
+the pages call, so the template is filled from output rather than from memory.
+Nothing may claim uptake that has not happened; once a school actually links to
+the site, name that school and no other.
+
+**Opt-outs** are honoured on receipt and recorded against the row, well inside
+CASL's ten business days.
+
 ## PIPEDA and Alberta PIPA
 
 Both bind organizations collecting personal information **in the course of
@@ -70,8 +112,17 @@ What that means in practice:
 - **Limiting collection.** One category of personal information is stored: an
   email address, with the listing it is a reminder for. The match quiz asks
   about family income, Indigenous and BIPOC identity, foster care and gender;
-  none of it is transmitted, stored, or persisted anywhere, not even in the
-  browser. The site is told only that a quiz started and that one finished.
+  none of it is ever transmitted to us or stored on any server. It *is* held
+  in the browser: `EligibilityQuiz.tsx` writes the answers to `sessionStorage`
+  so a reload does not lose them, and clears them on finish or restart. That
+  is what the privacy policy and /match both say; this file used to say "not
+  even in the browser", which was wrong about a sensitive category and is the
+  kind of error that gets repeated into a policy. The site is told only that a
+  quiz started and that one finished.
+
+  Residual risk, accepted: on a shared school computer the answers survive in
+  that tab until it closes. sessionStorage is per-tab and not readable by us
+  or by another site, and the quiz has a visible restart that clears it.
 - **Limiting retention** is enforced by `scripts/prune-events.ts`, monthly:
   events 180 days, subscriptions 60 days past a deadline, unconfirmed sign-ups
   30 days, rate-limit windows 2 days.
@@ -122,3 +173,11 @@ Re-read this file when any of these happen, not on a calendar:
 - A new third-party service touches user data.
 - The site starts targeting students outside Alberta.
 - Anything is added to `/api/event`, especially anything carrying free text.
+- A user-facing claim about how listings are sourced or maintained changes.
+  The "checked by hand" line was removed on 2026-09-02 because nobody re-reads
+  345 listings on a cycle; it had reached the homepage, the scholarships
+  directory, the footer, the about page, the terms, the detail-page badge and
+  the social captions, and no trigger on this list would have caught it. A
+  sentence about maintenance is a representation, and it spreads.
+- An outreach wave is about to send, or its template changes. See the section
+  above; `npm run check-outreach` is the gate.

@@ -10,6 +10,7 @@
     "sitemap": "TZ=America/Edmonton tsx scripts/generate-sitemap.ts",
     "validate-data": "tsx scripts/validate-data.ts",
     "check-copies": "tsx scripts/check-copies.ts",
+    "check-outreach": "TZ=America/Edmonton tsx scripts/check-outreach.ts",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "lint": "eslint src",

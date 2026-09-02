@@ -28,7 +28,7 @@ interface Props {
 const {
   items,
   h1 = 'Scholarships',
-  intro = 'All available scholarships for Alberta high school students. Every listing is checked by hand, and carries the month it was last checked.',
+  intro = "All available scholarships for Alberta high school students. Every listing is written from the provider's own page and links straight back to it.",
   currentRegion = null,
   allItems = items,
   hideCategories = false,
@@ -171,9 +171,11 @@ const showSoon = totalOpen > 0 && totalSoon > 0;
     </div>
     <div class="sabl-sort">
       <span class="sabl-mono sabl-row-label">SORT</span>
+      <div class="sabl-sort-chips">
       {SORT_CHIPS.map(s => (
         <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
       ))}
+      </div>
     </div>
   </div>
 

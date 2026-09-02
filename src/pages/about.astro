@@ -94,7 +94,8 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
           </div>
           <p class="saba-col-body">
             ScholarAB is a free scholarship directory for Alberta high school students. Every listing is
-            verified by hand. Deadlines are tracked. Nothing is scraped or auto-generated.
+            written from the provider's own page and links back to it. Nothing is scraped or
+            auto-generated.
           </p>
         </div>
       </div>
@@ -144,7 +145,7 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
 
 <style is:global>
   /* The about design is fixed light regardless of site theme */
-  body:has(#sab-about) { background: #FAF7F0; }
+  body:has(#sab-about) { background: #FBF8F2; }
 </style>
 
 <style>
@@ -202,15 +203,15 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
     transition: border-color 0.18s ease,
                 transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
-  .saba-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+  .saba-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #0E8C64; transition-duration: 0.07s; }
   .saba-btn-solid { border: 1.5px solid rgba(20,25,21,0.85); background: #FFFFFF; }
   .saba-btn-solid:hover, .saba-btn-solid:focus-visible {
-    color: #141915; transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #2FD3A0;
+    color: #141915; transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #0E8C64;
   }
   .saba-btn-outline { border: 1.5px solid rgba(20,25,21,0.3); }
   .saba-btn-outline:hover, .saba-btn-outline:focus-visible {
-    border-color: #141915; color: #141915;
-    transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #2FD3A0;
+    border-color: #0A6B4D; color: #141915;
+    transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #0E8C64;
   }
   @media (prefers-reduced-motion: reduce) {
     .saba-btn, .saba-btn:hover, .saba-btn:focus-visible, .saba-btn:active { transform: none; transition: none; }

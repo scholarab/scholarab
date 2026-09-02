@@ -72,3 +72,5 @@ If you want to do something these terms don't cover, just ask: contact.scholarab
 Vulnerability reports: see [SECURITY.md](./SECURITY.md). Please don't open a public issue for security problems.
 
 Privacy and anti-spam: what the site collects and why is on [the privacy page](https://www.scholarab.ca/privacy/); the reasoning behind it, and what would have to change if ScholarAB ever earned money, is in [docs/compliance.md](./docs/compliance.md).
+
+Commit history: The history was squashed in September 2026 because it contained hundreds of educator email addresses that were removed from the published data.
