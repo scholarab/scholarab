@@ -1,0 +1,131 @@
+---
+/**
+ * Google Analytics 4, behind an explicit consent gate.
+ *
+ * Renders nothing at all unless PUBLIC_GA_ID is set, so the site is safe to
+ * build and deploy before the property exists, and a fork of this repo does
+ * not silently report into our property.
+ *
+ * The tag is never on the page before a grant. Consent Mode is configured
+ * `denied` first regardless, because gtag queues commands and the order the
+ * queue is drained in is what decides whether the first hit is cookieless.
+ */
+const gaId = import.meta.env.PUBLIC_GA_ID;
+---
+
+{gaId && (
+  <>
+    <script is:inline define:vars={{ gaId }}>
+      // Queue + defaults only. No network request happens here: gtag.js is
+      // injected by the module below, and only after a grant.
+      window.dataLayer = window.dataLayer || [];
+      // `arguments`, not rest parameters, and not by accident: gtag.js reads
+      // the pushed value as an Arguments object, and an Array pushed in its
+      // place is silently ignored. This is Google's own snippet verbatim.
+      // eslint-disable-next-line prefer-rest-params
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+      window.__sabGaId = gaId;
+    </script>
+
+    <div
+      id="sab-consent"
+      class="sab-consent"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="sab-consent-title"
+      hidden
+    >
+      <div class="sab-consent-inner">
+        <div class="sab-consent-copy">
+          <p id="sab-consent-title" class="sab-consent-title">Can we count this visit with Google Analytics?</p>
+          <p class="sab-consent-body">
+            It sets a cookie and gives your browser an ID, which is how we tell a returning
+            visitor from a new one. Saying no changes nothing about the site.
+            <a href="/privacy/">What we collect</a>
+          </p>
+        </div>
+        <div class="sab-consent-actions">
+          <button type="button" data-consent="denied" class="sab-consent-btn sab-consent-no">No thanks</button>
+          <button type="button" data-consent="granted" class="sab-consent-btn sab-consent-yes">Allow</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      import { readConsent, setConsent, analyticsAllowedHere, syncConsentReset } from '../../lib/consent.ts';
+
+      let loaded = false;
+
+      /** Inject gtag.js. Idempotent: ClientRouter fires page-load per navigation. */
+      function loadGa() {
+        const id = (window as unknown as { __sabGaId?: string }).__sabGaId;
+        if (loaded || !id) return;
+        // The environment guard lives here rather than only in apply(), so it
+        // covers the grant path too. Both callers are meant to be gated, and a
+        // choke point that cannot be walked around beats two that agree today.
+        if (!analyticsAllowedHere(location.hostname, navigator.webdriver, import.meta.env.MODE)) return;
+        loaded = true;
+        const gtag = (window as unknown as { gtag: (...a: unknown[]) => void }).gtag;
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        // Views are sent by hand below. With ClientRouter the document never
+        // reloads, so the automatic first-load page_view would be the only one
+        // GA ever saw and every route after it would go unrecorded.
+        gtag('config', id, { send_page_view: false, anonymize_ip: true });
+        sendPageView();
+      }
+
+      function sendPageView() {
+        const w = window as unknown as { gtag?: (...a: unknown[]) => void };
+        if (!loaded || !w.gtag) return;
+        w.gtag('event', 'page_view', {
+          page_location: location.href,
+          page_path: location.pathname + location.search,
+          page_title: document.title,
+        });
+      }
+
+      function banner(): HTMLElement | null {
+        return document.getElementById('sab-consent');
+      }
+
+      function decide(value: 'granted' | 'denied') {
+        setConsent(value);
+        const el = banner();
+        if (el) el.hidden = true;
+        if (value === 'granted') loadGa();
+      }
+
+      function apply() {
+        if (!analyticsAllowedHere(location.hostname, navigator.webdriver, import.meta.env.MODE)) return;
+        syncConsentReset(location.search);
+        const choice = readConsent();
+        if (choice === 'granted') { loadGa(); sendPageView(); return; }
+        const el = banner();
+        if (!el) return;
+        // Only ask when there is no answer on file. A decline is an answer.
+        el.hidden = choice !== null;
+      }
+
+      // Delegated, so it survives ClientRouter swapping the banner's DOM.
+      document.addEventListener('click', e => {
+        const btn = (e.target as HTMLElement | null)?.closest?.('[data-consent]');
+        if (btn) decide(btn.getAttribute('data-consent') === 'granted' ? 'granted' : 'denied');
+      });
+
+      document.addEventListener('astro:page-load', apply);
+      apply();
+    </script>
+  </>
+)}

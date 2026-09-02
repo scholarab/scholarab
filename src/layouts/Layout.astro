@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import Analytics from '../components/sab/Analytics.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -88,6 +89,10 @@ const {
       <slot />
     </main>
     <slot name="footer" />
+    {/* Renders nothing unless PUBLIC_GA_ID is set. Last in the body so the
+        consent banner lands at the end of the tab order rather than between
+        the page and its footer. */}
+    <Analytics />
     <script>
       import { syncTrackingOptOut, recordSourceVisit } from '../lib/events.ts';
 

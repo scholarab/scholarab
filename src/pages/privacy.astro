@@ -8,7 +8,7 @@ import { webPageJson } from '../lib/ld';
 // Shown in the page and used as the "last updated" line. Bump this whenever
 // what the site actually collects changes; the date is the only thing telling
 // a reader whether this document still describes the code.
-const LAST_UPDATED = 'August 22, 2026';
+const LAST_UPDATED = 'September 2, 2026';
 
 // One row per thing the site stores. Kept as data rather than prose so it is
 // obvious when a new table or endpoint has no row here yet.
@@ -38,6 +38,12 @@ const collected = [
     kept: 'By Cloudflare, on their retention schedule. It sets no cookie, stores no identifier, and does not follow you between sites; what it records is the page, the referrer, and rough timing and device information.',
   },
   {
+    what: 'A Google Analytics ID, but only if you allow it',
+    when: 'Never, unless you press Allow on the banner that asks. Until you answer, and forever if you answer no, the Google script is not loaded at all and nothing is sent to them.',
+    why: 'To see which pages people arrive on and where they came from, so the site gets pointed at the students who are actually looking for it. This is the one thing here that involves a company whose business is advertising, which is why it is the one thing we ask permission for.',
+    kept: 'By Google, on their retention schedule. If you allow it, Google sets a cookie on your browser, gives it a randomly generated ID that lasts between visits, and receives your IP address. We have turned off ad personalisation and asked Google to shorten your IP, but we cannot promise you what a company that size does with what it holds, so we are not going to. Press No thanks and none of this happens. Changed your mind either way? Add ?ga=ask to any page here and the question comes back.',
+  },
+  {
     what: 'The text of a search that finds nothing',
     when: 'Only when what you typed matches no listing anywhere in the directory, not on searches that find something, and not on anything you type into the match quiz.',
     why: 'An empty search is the clearest signal that the directory is missing an award someone is looking for. It is what tells us what to go add next.',
@@ -55,7 +61,7 @@ const notCollected = [
   'No name, school, or grades. Every answer you give the match quiz, including the questions about family income, Indigenous or BIPOC identity, foster care and gender, stays in your browser and is never sent to us. We are told only that a quiz was started and that one was finished, and nothing whatsoever about what was in it.',
   'No saved or bookmarked listings: those live in your browser’s local storage, on your device. Your browser also keeps a small note of which counts it has already sent, so one visit is not counted twice; that note stays on your device and is never sent anywhere.',
   'No accounts, no passwords, no logins for students.',
-  'No advertising cookies, no tracking pixels, no data brokers. The one analytics script on the site is Cloudflare’s, described above, and it is cookieless and identifier-free, and there is nothing else.',
+  'No advertising cookies, no tracking pixels, no data brokers. Nothing on this site is a data broker and nothing here advertises to you. Two counting scripts can run: Cloudflare’s, which is cookieless and identifier-free and needs no permission because it identifies nobody, and Google Analytics, which does set a cookie and does identify your browser, and therefore runs only if you press Allow. If you have not answered, or said no, Google Analytics is not on the page.',
   'Nothing is ever sold, rented, or shared for marketing. There is no business model here that would want it.',
 ];
 
@@ -64,7 +70,7 @@ const processors = [
   { name: 'Neon', role: 'Hosts the database holding reminder sign-ups.', where: 'United States' },
   { name: 'Resend', role: 'Delivers reminder and confirmation emails.', where: 'United States' },
   { name: 'GitHub', role: 'Runs the scheduled job that works out whose deadline is close and hands those reminders to Resend. Your address passes through it each time that job runs.', where: 'United States' },
-  { name: 'Google', role: 'Carries email sent to our contact address, which is where questions, corrections and deletion requests arrive. If you write to us, Gmail holds that message.', where: 'United States' },
+  { name: 'Google', role: 'Two separate things. Gmail carries email sent to our contact address, which is where questions, corrections and deletion requests arrive; if you write to us, Gmail holds that message. Google Analytics counts page visits, but only for people who pressed Allow on the banner.', where: 'United States' },
 ];
 
 const title = 'Privacy Policy | ScholarAB';
@@ -130,6 +136,15 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
         Cloudflare's page-view count is separate and is not affected by this. If you want that off too,
         any content blocker that blocks <code class="sabpv-code">static.cloudflareinsights.com</code>
         will do it, and the site works exactly the same without it.
+      </p>
+      <p class="sabpv-p">
+        Google Analytics is separate again, and is the only thing here that asks first. It does not load
+        until you press Allow, so doing nothing is the same as saying no. If you want to change the answer
+        you gave, add <code class="sabpv-code">?ga=ask</code> to any address on the site, for example
+        <code class="sabpv-code">www.scholarab.ca/?ga=ask</code>, and the banner comes back so you can
+        answer again. A browser you have switched the counts off on with
+        <code class="sabpv-code">?nt=1</code> will not load Google Analytics either, whatever it answered
+        before: one switch, both things off.
       </p>
 
       <h2 class="sabpv-h2">Reminder emails</h2>

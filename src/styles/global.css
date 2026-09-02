@@ -1058,3 +1058,40 @@ body.quiz-results #match-divider {
   .sabs-cal-row { grid-template-columns: 1fr auto; }
   .sabs-cal-date { grid-column: 1 / -1; }
 }
+
+/* ── Analytics consent banner ──────────────────────────────── */
+/* Only rendered when PUBLIC_GA_ID is set, and only shown to a visitor who has
+   not answered yet. Deliberately a band at the foot of the page rather than a
+   modal over it: nothing on this site is gated behind the answer, so blocking
+   the page to demand one would misrepresent what is being asked. */
+.sab-consent {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 9998;
+  background: #141915; color: #FBF8F2;
+  border-top: 1.5px solid rgba(251,248,242,0.14);
+  /* Mint on near-black is the readable pairing; the ink surfaces hand the
+     focus ring back to mint for exactly this reason. */
+  --focus-ring: #2FD3A0;
+  padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
+}
+.sab-consent-inner {
+  width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.sab-consent-copy { min-width: 0; }
+.sab-consent-title { font-weight: 700; font-size: 15px; margin: 0; }
+.sab-consent-body { font-size: 13.5px; line-height: 1.5; margin: 4px 0 0; color: rgba(251,248,242,0.72); }
+.sab-consent-body a { color: #2FD3A0; text-underline-offset: 3px; }
+.sab-consent-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.sab-consent-btn {
+  font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer;
+  padding: 10px 18px; border-radius: 999px; white-space: nowrap;
+  /* 44px minimum target: the banner's most likely reader is on a phone. */
+  min-height: 44px;
+}
+.sab-consent-no { background: transparent; color: #FBF8F2; border: 1.5px solid rgba(251,248,242,0.32); }
+.sab-consent-yes { background: #2FD3A0; color: #08120E; border: 1.5px solid #2FD3A0; }
+
+@media (max-width: 700px) {
+  .sab-consent-inner { flex-direction: column; align-items: stretch; gap: 14px; }
+  .sab-consent-actions > .sab-consent-btn { flex: 1; }
+}

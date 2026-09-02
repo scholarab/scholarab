@@ -163,6 +163,42 @@ Adding a sixth means adding a row to the `processors` table in
 `src/pages/privacy.astro` in the same change. A processor the policy does not
 name is the most likely way this document goes stale.
 
+## Google Analytics, and why it is the one thing behind a gate
+
+Added 2026-09-02. It is the only third party here that receives an identifier
+for a visitor, and the only one whose parent company sells advertising, so it
+is the only one this site asks permission for.
+
+The distinction the policy rests on is real and worth keeping straight.
+Cloudflare Web Analytics and the first-party `events` table need no consent
+because they identify nobody: no cookie, no client id, no session, and IPs
+only ever as a salted one-way hash for rate limiting. GA4 fails all three of
+those. It writes `_ga`, mints a client id that persists across visits, and
+sends the raw request IP to Google. Under PIPEDA that is personal information
+about an identifiable individual, and the audience here is mostly minors,
+which is the circumstance where "meaningful consent" is read most strictly.
+Implied consent would not carry it.
+
+So the tag is not on the page until someone presses Allow:
+
+- Consent Mode defaults to `denied` before anything runs, and `gtag.js` is
+  injected only after a grant. Declining, or never answering, means no request
+  to Google at all. This is stronger than the usual banner, which loads the
+  tag first and asks second, and it is what lets the privacy page say "it does
+  not load" rather than "it is configured not to store".
+- `?ga=ask` re-opens the question. `?nt=1` also suppresses GA outright,
+  whatever was answered before, so the site has one off switch rather than two
+  that disagree.
+- `analyticsAllowedHere()` in `src/lib/consent.ts` keeps dev, local preview
+  and Playwright out, mirroring the guards in `events.ts` that exist because
+  the 2026-08-08 audit found the events table dominated by our own testing.
+
+If GA is ever removed, the row in `collected`, the row in `processors`, the
+`notCollected` bullet about counting scripts, the About page's privacy card
+and the `?ga=ask` paragraph all have to come out together. They were written
+as one claim across five places, which is exactly the spread the "checked by
+hand" note below warns about.
+
 ## Review triggers
 
 Re-read this file when any of these happen, not on a calendar:
@@ -171,6 +207,10 @@ Re-read this file when any of these happen, not on a calendar:
 - A new table stores anything about a person, or an existing one gains a
   column that does.
 - A new third-party service touches user data.
+- The consent gate in `src/components/sab/Analytics.astro` changes, or
+  `PUBLIC_GA_ID` gets set on an environment where the banner is not shipping.
+  The policy's claim is that GA does not load without a grant; that is a
+  statement about this code, and only this code keeps it true.
 - The site starts targeting students outside Alberta.
 - Anything is added to `/api/event`, especially anything carrying free text.
 - A user-facing claim about how listings are sourced or maintained changes.
