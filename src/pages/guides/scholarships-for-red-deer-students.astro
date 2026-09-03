@@ -1,0 +1,64 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
+
+const guide = getGuide('scholarships-for-red-deer-students');
+---
+
+<SabGuide guide={guide}>
+  <p>
+    Red Deer sits in the gap that helps you: too small for the national award machine to bother with, big enough that local money keeps getting endowed. Nineteen listings in <a href="/scholarships/">the directory</a> are scoped to Red Deer and Central Alberta, and several of them are open to the graduates of a single high school. That is the whole advantage. Work it in order of odds rather than in order of dollar value.
+  </p>
+
+  <h2>Start with the money that isn't a competition</h2>
+  <p>
+    Before any local award, take the <a href="/guides/alexander-rutherford-scholarship-guide/">Alexander Rutherford Scholarship</a>. It pays up to $2,500 for marks you already earned, every qualifying Alberta student who applies gets it, and it stacks with everything below. It is the floor, not the prize.
+  </p>
+
+  <h2>The local pools, in rough order of odds</h2>
+
+  <h3>Awards tied to one school</h3>
+  <p>
+    These are the best odds in Central Alberta and almost nobody outside the building can apply. Penhold Crossing Secondary School gives three <a href="/scholarships/ford-family-scholarship/">$10,000 Ford Family Scholarships</a> every year, one each for Academic, Citizenship, and Applied or Practical Arts, to students who took the majority of their courses there. The award page does not publish a deadline and directs applicants to the school, so ask the Penhold Crossing office for the date and the form. Lacombe Composite has the <a href="/scholarships/brady-van-der-heide-citizenship-award/">Brady van der Heide Citizenship Award</a>, judged on leadership, volunteering and reliability rather than on marks. H.J. Cody in Sylvan Lake has the <a href="/scholarships/shea-family-education-award/">$3,000 Shea Family Education Award</a>, one student a year, closing at 4:30pm on the deadline day.
+  </p>
+  <p>
+    If you are in Red Deer Catholic, the <a href="/scholarships/red-deer-catholic-grade-12-scholarship/">Grade 12 Scholarship</a> pays $1,000 and is deliberately wide: trades and workplace certification count alongside a university degree. The same division runs the <a href="/scholarships/daughters-of-wisdom-social-justice-award/">Daughters of Wisdom Social Justice Award</a>, which had no posted date or amount when this was checked in August 2026. The foundation page says only that the date is to be announced, so watch it or call the Superintendent office at 403-343-1055.
+  </p>
+
+  <h3>Awards administered through your counsellor</h3>
+  <p>
+    Two of the largest Red Deer awards never appear on a public application form, because your school hands them out. The <a href="/scholarships/william-arthur-bower-memorial-scholarship/">William Arthur Bower Memorial Scholarship</a> gives at least five graduating Red Deer Public and Catholic students $5,000 each, renewable for up to four years, which makes it the biggest recurring award in the city. The <a href="/scholarships/rotary-career-opportunity-award/">Rotary Career Opportunity Award</a> runs up to fifteen $3,000 awards a year for students with financial need. Both dates in the directory are last cycle rolled forward, so ask your counsellor for this year's deadline in the first week of school. Local awards close earlier than the national ones.
+  </p>
+
+  <h3>The Community Foundation of Central Alberta</h3>
+  <p>
+    One portal, several awards, and one account to create. The <a href="/scholarships/a-bernard-mary-b-dixon-memorial-scholarship/">A. Bernard and Mary B. Dixon Memorial Scholarship</a> needs two signed reference letters. <a href="/scholarships/rising-futures-scholarship/">Rising Futures</a> gives at least two students $10,000 each, but only to applicants who have received services from the Sheldon Kennedy Centre of Excellence or the Central Alberta Child Advocacy Centre. The <a href="/scholarships/smiles-thru-lindsey-women-in-aviation-award/">Smiles Thru Lindsey Women in Aviation Award</a> is $5,000 for girls heading into aviation; the page does not spell out a grade requirement, so ask before you build a plan around it. The <a href="/scholarships/red-deer-golf-and-country-club-centennial-scholarship/">Golf and Country Club Centennial Scholarship</a> pays at least $1,000 but needs support letters from two members of a golf club in the eligible area, which is the part to start early. Members of the Red Deer Royals marching show band have the <a href="/scholarships/lorilei-and-arthur-jenkins-collaborative-member-scholarship/">Jenkins Collaborative Member Scholarship</a> at $500.
+  </p>
+
+  <h3>Employers and the co-op</h3>
+  <p>
+    <a href="/scholarships/central-alberta-co-op-scholarship/">Central Alberta Co-op</a> awards ten $1,000 scholarships a year with no restriction on your field of study, and the window is fixed at April 1 to April 30 rather than rolled forward. The membership test is on the household, so a parent's membership counts, but it has to be at least a year old with more than $2,500 in purchases. Budget time for the essay and three reference letters. If a parent works somewhere with more than a few dozen staff, ask whether there is a staff-family award. There often is, and nobody applies.
+  </p>
+
+  <h3>Arts, agriculture, and health</h3>
+  <p>
+    The Red Deer Arts Council runs two $1,000 awards, a <a href="/scholarships/red-deer-arts-council-canada-centennial-secondary-scholarship/">general arts scholarship</a> and the <a href="/scholarships/red-deer-arts-council-waskasoo-bluegrass-music-scholarship/">Waskasoo Bluegrass Music Scholarship</a>, both drawing from roughly Ponoka to Olds and Rocky Mountain House to Stettler. If you farm, the <a href="/scholarships/trey-purdie-memorial-scholarship/">Trey Purdie Memorial Scholarship</a> pays $2,500 through two streams, one for students living and working on a farm or ranch and one for Alberta High School Rodeo Association members. Heading into healthcare, the <a href="/scholarships/red-deer-regional-health-foundation-scholarship/">Red Deer Regional Health Foundation Scholarship</a> is open to Central Alberta residents at any level of healthcare training.
+  </p>
+
+  <h3>Red Deer Polytechnic</h3>
+  <p>
+    Staying local is worth $1,000 twice over. The <a href="/scholarships/red-deer-polytechnic-high-school-entrance-scholarship/">High School Entrance Scholarship</a> wants an 80% average across five 5-credit Grade 11 or 12 subjects, and you claim it by emailing your transcript to the RDP Student Connect Centre. Awards are limited, so apply early. The <a href="/scholarships/red-deer-polytechnic-regional-access-excellence-scholarship/">Regional Access and Excellence Scholarship</a> needs no separate application at all: completing RDP's General Application considers you automatically, if you graduated from one of the qualifying Central Alberta schools such as Lindsay Thurber, Hunting Hills, Notre Dame, Lacombe Composite, Innisfail, Olds, Stettler or Rocky Mountain House.
+  </p>
+
+  <h2>How to actually work the list</h2>
+  <ul>
+    <li><strong>Ask your counsellor first, in September.</strong> The two biggest awards here, Bower and Rotary, are handed out through your school and their published dates are rolled forward from last cycle.</li>
+    <li><strong>Make one Community Foundation account.</strong> Several awards share that portal and two reference letters cover most of them.</li>
+    <li><strong>Filter the directory to Red Deer.</strong> The region filter in <a href="/scholarships/">the listings</a> shows the whole local pool with live deadline status.</li>
+    <li><strong>Apply to everything you plausibly qualify for.</strong> The <a href="/guides/local-scholarships-better-odds/">arithmetic on local awards</a> is heavily in your favour, and a single-school award is the thinnest pool you will ever compete in.</li>
+  </ul>
+  <p>
+    Most dates on this page are last cycle rolled forward, because Central Alberta providers post late. Treat them as a planning guide and confirm before you rely on one. <a href="/match/">The match quiz</a> takes {QUIZ_DURATION} and sorts the local list by what you are actually eligible for.
+  </p>
+</SabGuide>

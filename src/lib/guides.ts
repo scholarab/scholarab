@@ -127,6 +127,23 @@ export const guides: GuideMeta[] = [
     // ask "when does it open" or "how do I apply", so the title and the first
     // clause of the description answer exactly that; the old description led
     // with the dollar figure, which is the one thing the SERP already shows.
+    //
+    // STOP REWRITING THIS SNIPPET. The 2026-08-22 rewrite above was measured on
+    // 2026-09-03 and it did not work: 2026-07-22..08-18 ran 2,985 impressions,
+    // 11 clicks, 0.37% CTR at position 8.4, and 2026-08-19..09-03 ran 2,793
+    // impressions, 6 clicks, 0.21% at position 7.8. Rank improved and CTR
+    // halved. Two further facts say the ceiling is the SERP rather than the
+    // wording: this page drew 178 AI-feature impressions in 28 days, and
+    // Rutherford is a government award whose deadline and GPA cutoff Alberta
+    // Student Aid answers above us. Treat it as a zero-click query shape.
+    //
+    // The trap this leaves behind is measurement, not copy. This one page is
+    // 23% of all site impressions at 0.33% CTR, which drags every site-wide
+    // average: the position 8-10 band reads 0.70% with it and 1.86% without,
+    // below the 2.29% of the 10-15 band, so the site looks like it has a
+    // CTR problem it does not have. Exclude this page before concluding
+    // anything from a site-wide CTR number. Every other guide converts
+    // normally (Medicine Hat 15.38%, Grade 12 6.06%) from the same positions.
     title: 'Alexander Rutherford Scholarship: amounts and how to apply',
     description:
       'Applications open August 1 with no closing deadline. What each grade pays (up to $2,500 total), the 75% five-course average you need, and how to apply.',
@@ -283,6 +300,45 @@ export const guides: GuideMeta[] = [
       'Take Rutherford first. It pays up to $2,500 for marks you already earned and stacks with everything else.',
       'Work the pools in order of odds: your own school office, then service clubs, then city, county and community foundations.',
       'Some school awards are only advertised on a sheet by the counsellor’s door, so ask for the local awards list by name.',
+    ],
+  },
+  {
+    // City guide #2, written 2026-09-03 off measured evidence rather than a
+    // hunch. The Medicine Hat guide is the highest-converting page on the site
+    // at 15.38% CTR from position 5.5, while the Rutherford guide draws 23% of
+    // all site impressions at 0.33% and cannot be rescued: it is a government
+    // award whose deadline and GPA cutoff Google answers directly. Local,
+    // specific, small-pool pages are what convert here, so Red Deer (19 local
+    // listings) and Lethbridge (14) get the same treatment. Grande Prairie was
+    // considered and dropped: the dataset has no listings scoped to it, and a
+    // guide for a region with no verified awards would be invention.
+    slug: 'scholarships-for-red-deer-students',
+    title: 'Scholarships for Red Deer students',
+    description:
+      'Every scholarship pool a Red Deer student can draw from: single-school awards, the two your counsellor hands out, the Community Foundation, and the co-op.',
+    kicker: 'RED DEER',
+    minutes: 6,
+    datePublished: '2026-09-03',
+    dateModified: '2026-09-03',
+    takeaways: [
+      'Take Rutherford first. It pays up to $2,500 for marks you already earned and stacks with everything else.',
+      'The best odds are awards tied to one school: Penhold Crossing alone gives three $10,000 Ford Family scholarships a year.',
+      'Bower and Rotary are the two biggest local awards and both are handed out through your counsellor, so ask in September.',
+    ],
+  },
+  {
+    slug: 'scholarships-for-lethbridge-students',
+    title: 'Scholarships for Lethbridge students',
+    description:
+      'Every scholarship pool a Lethbridge student can draw from: the ULethbridge award calendar, one Polytechnic form worth 400 awards, and the county funds.',
+    kicker: 'LETHBRIDGE',
+    minutes: 6,
+    datePublished: '2026-09-03',
+    dateModified: '2026-09-03',
+    takeaways: [
+      'December 15 is the date that matters: ULethbridge early admission carries the Board of Governors award with it.',
+      'The Health Care Professionals of Tomorrow award needs 40 lifetime volunteer hours at Chinook Regional Hospital, so start in Grade 10 or 11.',
+      'One Lethbridge Polytechnic form reaches over 400 awards and also carries Jason Lang and Louise McKinney.',
     ],
   },
   {
