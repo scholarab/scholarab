@@ -1,3 +1,11 @@
+# CSP note, 2026-09-02: www.google.com is deliberately absent from connect-src.
+# After a consent grant, gtag sends its page_view to www.google-analytics.com
+# (which is allowed, and is the hit that lands in the property) and ALSO pings
+# www.google.com/g/collect with gaf=1, which is the ads-side endpoint. That
+# second one is blocked and logs a CSP violation in the console on every
+# consenting session. It is meant to be: ad_storage is denied anyway, so the
+# ping buys no reporting, and allowing it would widen the policy for nothing.
+# The console error is expected, not a symptom. Verified against production.
 /*
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
