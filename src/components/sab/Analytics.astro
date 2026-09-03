@@ -2,15 +2,17 @@
 /**
  * Google Analytics 4, behind an explicit consent gate.
  *
- * Renders nothing at all unless PUBLIC_GA_ID is set, so the site is safe to
- * build and deploy before the property exists, and a fork of this repo does
- * not silently report into our property.
+ * The measurement ID is committed (GA_MEASUREMENT_ID) because a Cloudflare
+ * Pages secret is not exposed to the build, and Astro inlines import.meta.env
+ * at build time; PUBLIC_GA_ID still overrides it when set. Which hostnames may
+ * report is enforced by GA_HOSTS in lib/consent.ts.
  *
  * The tag is never on the page before a grant. Consent Mode is configured
  * `denied` first regardless, because gtag queues commands and the order the
  * queue is drained in is what decides whether the first hit is cookieless.
  */
-const gaId = import.meta.env.PUBLIC_GA_ID;
+import { GA_MEASUREMENT_ID } from '../../lib/constants';
+const gaId = import.meta.env.PUBLIC_GA_ID ?? GA_MEASUREMENT_ID;
 ---
 
 {gaId && (

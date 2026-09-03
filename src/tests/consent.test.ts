@@ -45,9 +45,16 @@ describe('clearConsent', () => {
 })
 
 describe('analyticsAllowedHere', () => {
-  it('allows the real site', () => {
-    expect(analyticsAllowedHere('www.scholarab.ca', false, 'production')).toBe(true)
+  it.each(['www.scholarab.ca', 'scholarab.ca'])('allows the real site at %s', host => {
+    expect(analyticsAllowedHere(host, false, 'production')).toBe(true)
   })
+
+  // The measurement ID is committed, so the host allowlist is the only thing
+  // keeping preview deployments and forks out of the property.
+  it.each(['scholarab.pages.dev', 'abc123.scholarab.pages.dev', 'scholarab.ca.evil.com', 'someonesfork.dev'])(
+    'blocks %s, which would otherwise report into our property', host => {
+      expect(analyticsAllowedHere(host, false, 'production')).toBe(false)
+    })
 
   // Each of these mirrors a guard in events.ts that exists because the
   // 2026-08-08 audit found our own testing dominating the events table.

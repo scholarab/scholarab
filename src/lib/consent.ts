@@ -54,6 +54,17 @@ export function clearConsent(): void {
 }
 
 /**
+ * The only hostnames allowed to report into the property.
+ *
+ * The measurement ID is committed (see GA_MEASUREMENT_ID), so without this a
+ * fork of the repo, or any Cloudflare preview deployment, would send real
+ * sessions into our reports. Preview builds are the likelier of the two and
+ * would be indistinguishable from students in every report that does not
+ * break out hostname.
+ */
+const GA_HOSTS = ['www.scholarab.ca', 'scholarab.ca']
+
+/**
  * Should GA be loaded at all on this page, before consent is even considered?
  *
  * Mirrors the guards in events.ts. Without them the dev server, `wrangler
@@ -64,9 +75,7 @@ export function clearConsent(): void {
 export function analyticsAllowedHere(hostname: string, webdriver: boolean, mode: string): boolean {
   if (mode === 'development') return false
   if (webdriver) return false
-  const local = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0' ||
-    hostname === '[::1]' || hostname === '::1' || hostname.endsWith('.local')
-  return !local
+  return GA_HOSTS.includes(hostname)
 }
 
 /**
