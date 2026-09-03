@@ -45,6 +45,17 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx tsx scripts/auto-expire.ts
 
+      # Push the JSON files into the admin panel's database. auto-expire above
+      # only flips `active` on rows that already exist, so without this a new
+      # listing never reaches the admin: by 2026-09-03 the panel showed 155
+      # scholarships against 345 in JSON. Runs after auto-expire so it carries
+      # that step's freshly written flags. Scoped to this step for the same
+      # reason as above, and a no-op when nothing has drifted.
+      - name: Sync JSON into the admin database
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx tsx scripts/sync-db.ts
+
       # These five steps are `npm run ci` unrolled, so each gets its own line in
       # the GitHub UI. Keep the two in sync: the script exists so a local run
       # can be the same gate as this job, and the scripts typecheck below is
