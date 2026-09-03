@@ -19,10 +19,21 @@
  *   npx tsx scripts/sync-db.ts             # apply
  *   npx tsx scripts/sync-db.ts --dry-run   # report only
  *
- * Rows in the DB with no JSON counterpart are left alone rather than deleted:
- * they are retired listings and a few pre-existing duplicates, and deciding
- * which of those should come back into JSON is a human call. Run with
- * --report-extras to list them.
+ * Rows in the DB with no JSON counterpart are left alone by default. Run with
+ * --report-extras to list them, or --prune to delete them.
+ *
+ * What those rows are, established 2026-09-03: the 2026-03/04 seed cohort that
+ * the 2026-08-07 content audit deleted from JSON in c6cdb33 ("...pointed at
+ * homepages and inventions") and 0df5cc4, with 301s added to _redirects at the
+ * same time. They were removed because they were wrong rather than stale:
+ * MacEwan ran no science camps, TELUS Spark had no Youth Council, Concordia
+ * ran no high school program, and both Alberta Innovates Summer Research
+ * Studentship rows told graduating Grade 12s to apply to something that
+ * requires undergraduate registration. Nothing propagated those deletions to
+ * the DB, so the admin kept showing all of them.
+ *
+ * --prune is deliberately not in the nightly job. It is a one-way delete keyed
+ * on JSON, so a truncated or unreadable data file would empty the table.
  */
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
@@ -33,6 +44,7 @@ const root = join(__dirname, '..');
 
 const DRY = process.argv.includes('--dry-run');
 const REPORT_EXTRAS = process.argv.includes('--report-extras');
+const PRUNE = process.argv.includes('--prune');
 
 const dbUrl = process.env.DATABASE_URL;
 if (!dbUrl) {
@@ -48,10 +60,10 @@ const sql = neon(dbUrl);
  *
  * Punctuation is stripped rather than compared. The 2026-08-26 em dash purge
  * renamed listings in JSON without touching the DB, so the same award exists
- * as "HYRS — University of Alberta" there and "HYRS: University of Alberta"
- * here. Matching on the raw title treats the new spelling as a new listing and
- * inserts a third copy, which is how the DB ended up with duplicate HYRS rows
- * in the first place.
+ * with an em dash before the campus name there and a colon here: the HYRS
+ * rows are the example. Matching on the raw title treats the new spelling as
+ * a new listing and inserts a third copy, which is how the DB ended up with
+ * duplicate HYRS rows in the first place.
  */
 const key = (s: string): string =>
   (s ?? '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '');
@@ -251,7 +263,7 @@ const label = DRY ? 'would' : 'did';
 console.log(`scholarships: ${label} insert ${s.insert}, update ${s.update}, leave ${s.skip} unchanged (${s.twins} stale twin(s) left alone)`);
 console.log(`programs:     ${label} insert ${p.insert}, update ${p.update}, leave ${p.skip} unchanged (${p.twins} stale twin(s) left alone)`);
 
-if (REPORT_EXTRAS) {
+if (REPORT_EXTRAS || PRUNE) {
   const jsonS = new Set(scholarships.map(x => key(x.title as string)));
   const jsonP = new Set(programs.map(x => key(x.name as string)));
   const extraS = ((await sql`SELECT id, title, active FROM scholarships`) as typeof sRows)
@@ -263,4 +275,19 @@ if (REPORT_EXTRAS) {
   for (const r of extraS) console.log(`    [${r.id}] ${r.active ? 'active  ' : 'inactive'} ${r.title}`);
   console.log(`  programs: ${extraP.length}`);
   for (const r of extraP) console.log(`    [${r.id}] ${r.active ? 'active  ' : 'inactive'} ${r.name}`);
+
+  if (PRUNE) {
+    for (const r of extraS) await sql`DELETE FROM scholarships WHERE id = ${r.id}`;
+    for (const r of extraP) await sql`DELETE FROM research_programs WHERE id = ${r.id}`;
+    // Rename twins survive the check above because they still key-match a JSON
+    // row; the sync updated the survivor and left the dead spelling behind.
+    const twinS = [...group((await sql`SELECT id, title, active FROM scholarships`) as typeof sRows, r => r.title).values()]
+      .filter(v => v.length > 1).flatMap(v => v.filter(r => r.id !== pick(v).id));
+    const twinP = [...group((await sql`SELECT id, name, active FROM research_programs`) as typeof pRows, r => r.name).values()]
+      .filter(v => v.length > 1).flatMap(v => v.filter(r => r.id !== pick(v).id));
+    for (const r of twinS) await sql`DELETE FROM scholarships WHERE id = ${r.id}`;
+    for (const r of twinP) await sql`DELETE FROM research_programs WHERE id = ${r.id}`;
+    console.log(`\npruned ${extraS.length} scholarship row(s) and ${extraP.length} program row(s),`);
+    console.log(`plus ${twinS.length} scholarship and ${twinP.length} program rename twin(s).`);
+  }
 }
