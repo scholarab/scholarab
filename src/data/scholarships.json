@@ -17707,5 +17707,716 @@
       "extracurriculars": []
     },
     "deadline": "2026-10-15"
+  },
+  {
+    "id": 493,
+    "title": "Leduc County Agricultural Service Board Bursary",
+    "amount": "$1,000",
+    "audience": "Leduc County residents in an agriculture-related program",
+    "url": "https://www.leduc-county.com/scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The county's page gives a mailing and email route for this one but prints no closing date, unlike the two scholarships beside it. Ask Agricultural Services in Nisku for the current date rather than assuming it shares their October 31.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Five bursaries of $1,000 each go every year to post-secondary students in an agriculture-related program. You have to be a Leduc County resident or the child of one, and the application is a form, proof of acceptance such as an acceptance letter or course registration, and a 500-word essay on your future aspirations and how your education supports them. Greater consideration goes to applicants who have not received it before, so it is worth applying in a year when you think the field is strong.",
+    "metaDetail": "Five bursaries, and repeat winners are deprioritised.",
+    "eligibility": {
+      "grades": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 494,
+    "title": "Albert and Maria Rimer Memorial Scholarship",
+    "amount": "$1,000",
+    "audience": "Warburg High School graduates entering agriculture or health sciences",
+    "url": "https://www.leduc-county.com/scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "Leduc County takes this one directly rather than through a school, and the successful applicant has to supply a social insurance number and birthdate afterwards. Financial need is weighed alongside the stated criteria.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Bert Rimer gave Leduc County $50,000 in memory of his parents to fund this for Warburg High School graduates. The amount varies year to year but will be at least $1,000. The primary target is a post-secondary major in agriculture or agricultural food, with secondary consideration for applicants in health sciences and medicine, and you cannot have received it before. Warburg is a village of a few hundred people, so the field this competes against is very small.",
+    "metaDetail": "One school, and previous recipients cannot reapply.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture",
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-10-31"
+  },
+  {
+    "id": 495,
+    "title": "George L. Saubak Memorial Fund Scholarship",
+    "amount": "Varies",
+    "audience": "Calmar, Thorsby and Warburg graduates entering a medical field",
+    "url": "https://www.leduc-county.com/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "Leduc County takes this one directly rather than through a school, and the successful applicant has to supply a social insurance number and birthdate afterwards. Financial need is weighed alongside the stated criteria.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Katie Dringenberg left Leduc County $20,000 to start this fund, asking that it go to a graduate of Calmar High School, Thorsby High School or Warburg High School. It is awarded annually to a post-secondary student with a declared major in a medical field, and the county names nursing, dentistry, pharmacy and veterinary medicine as examples rather than limits. Previous recipients are not eligible again.",
+    "metaDetail": "Nursing, dentistry, pharmacy and veterinary all count.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-10-31"
+  },
+  {
+    "id": 496,
+    "title": "Ambassador Scholarship",
+    "amount": "$500",
+    "audience": "Black Gold graduates who finished high school in three years",
+    "url": "https://www.blackgold.ca/student-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "This one closes on September 10 following graduation, which is after most students have already started post-secondary, so it is easy to forget about. Applications go to your principal, who submits the school's candidate to the superintendent by September 15.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by Cory Bablitz, a Calmar Secondary graduate, for a Black Gold graduate continuing to post-secondary. You must have been enrolled at a Black Gold school for your grade twelve year and completed high school in three years, be accepted into a post-secondary program, and show genuine commitment across academics, sports in school or the community, and citizenship or volunteering. The application is a covering letter, a summary of all three areas, and three letters of reference, one for each.",
+    "metaDetail": "Needs three reference letters, one for each criterion.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Athletics",
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-09-10"
+  },
+  {
+    "id": 497,
+    "title": "Greg Sylvester Memorial Scholarship",
+    "amount": "$1,000",
+    "audience": "Black Gold graduates studying history at Bishop's or Queen's",
+    "url": "https://www.blackgold.ca/student-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "Black Gold's own division-managed scholarship summary is where the criteria and the date come from, and the date it gives is a bare day with no year, so it repeats. The summary was last updated in April 2025, so confirm the amount with the division before counting on it.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by the estate of Gregory Garth Sylvester and paid in two halves, $500 in September and $500 in February on continued registration. The requirement is unusually specific: acceptance into Bishop's or Queen's University with history as a major area of study, plus a year at a Black Gold high school including grade twelve. The application is a letter of recommendation from a teacher or principal and a short account of why you are pursuing history. The deadline is July 15 of any year after you finish grade 12, so a student who switches into history later can still apply.",
+    "metaDetail": "You can apply in any year after grade 12, not just the first.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "History"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-07-15"
+  },
+  {
+    "id": 498,
+    "title": "Eric and Agnes Dixon Scholarship",
+    "amount": "$1,000",
+    "audience": "Black Gold graduates majoring in music at an Alberta institution",
+    "url": "https://www.blackgold.ca/student-scholarships",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The deadline is September 15 after you finish grade 12, which lands after most students have moved. If the music award goes unclaimed in a year, the fund instead pays two $500 Scandinavian Studies scholarships the following year, for study of a Scandinavian language.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A music scholarship paid $500 in October and $500 in February on continued registration. You have to be accepted into a post-secondary program in Alberta with music as a major area of study, and to have spent at least a year at a Black Gold high school including grade twelve. The application is a letter of recommendation from a music teacher or principal plus a short account of your musical background and why you are continuing in music.",
+    "metaDetail": "Paid in two halves on continued registration.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-09-15"
+  },
+  {
+    "id": 499,
+    "title": "Kevin Gaetz Award",
+    "amount": "$6,000",
+    "audience": "Black Gold graduates whose finances would otherwise block post-secondary",
+    "url": "https://www.blackgold.ca/student-scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "Black Gold's own division-managed scholarship summary is where the criteria and the date come from, and the date it gives is a bare day with no year, so it repeats. The summary was last updated in April 2025, so confirm the amount with the division before counting on it.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Three recipients a year at $6,000 each, held in perpetuity through the Edmonton Community Foundation and paid in two halves: $3,000 when granted and $3,000 on confirmation of a completed first semester and continued enrolment. The qualifying condition is financial need that would restrict your ability to pursue post-secondary education at all. The application is a form, a letter of introduction addressing the criteria, a reference letter from an authority figure outside your immediate family, a current transcript, and a preliminary acceptance letter. At $6,000 this is the largest locally funded award in the Leduc area by a wide margin.",
+    "metaDetail": "Three awards a year, the largest local award in Leduc.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-30"
+  },
+  {
+    "id": 500,
+    "title": "Richard Anderson Scholarship",
+    "amount": "$2,500",
+    "audience": "John Maland High School graduates in Devon with a 70% GPA",
+    "url": "https://www.blackgold.ca/student-scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "Black Gold's own division-managed scholarship summary is where the criteria and the date come from, and the date it gives is a bare day with no year, so it repeats. The summary was last updated in April 2025, so confirm the amount with the division before counting on it.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Two awards of $2,500 each at John Maland High School in Devon, established in 2024. You need a GPA of 70%, you must meet the entrance requirements for post-secondary study, and you must have financial need that would restrict your ability to go. The application is a form, a letter of introduction, a reference letter from an authority figure outside your immediate family, a transcript, and a preliminary acceptance letter. The selection committee is made up of staff from the school itself.",
+    "metaDetail": "Two awards, decided by the school's own staff.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-30"
+  },
+  {
+    "id": 501,
+    "title": "Bruce and Mary Marsh Education Scholarship",
+    "amount": "$1,200",
+    "audience": "Leduc Composite graduates in their second year of a BEd",
+    "url": "https://www.blackgold.ca/student-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "This is not a graduation award. You apply in September of your second year in the Bachelor of Education program, so a Leduc Composite graduate needs to remember it a full year after leaving. The selection committee meets before October 15.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Mary Marsh established this in Leduc for a graduate of Leduc Composite High School who has reached the second year of a Bachelor of Education program at an Alberta university, preferably with a major in music. It pays $1,200 to a student in an elementary program with musical training and interest, or $1,000 for any other major within a BEd. The application is a personal letter, your grade 12 transcript, and the university transcript for the first year you have just finished.",
+    "metaDetail": "Pays $1,200 for elementary with music, $1,000 otherwise.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Education",
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-09-15"
+  },
+  {
+    "id": 502,
+    "title": "Philip Ki Joon Oh Scholarship",
+    "amount": "$2,000",
+    "audience": "Beaumont Composite grade 12 students with a 70% average or better",
+    "url": "https://esbchs.blackgold.ca/scholarship-awards-1733952184416",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "Beaumont Composite publishes a dated cutoff for this rather than a bare recurring day; the 2026 cycle closed May 8. Shortlisted candidates are interviewed by the awards committee, so budget time for that as well as for the form.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Three scholarships of $2,000 each at Beaumont Composite for outstanding all-round grade 12 students, and it is built in two levels so that a strong record without top marks still has a route in. Level I asks for an academic average of 80% or higher plus active participation on school or community sports teams, leadership and public speaking, and volunteering. Level II asks for a 70 to 79% average with contribution to school and community through service clubs, organisations and community activities, plus the same leadership and public speaking. Both require acceptance into a full-time program of at least two years.",
+    "metaDetail": "Two entry levels, at 80% and at 70 to 79%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 503,
+    "title": "Mathieu Lefevre Memorial Fund for Artists",
+    "amount": "$500",
+    "audience": "Beaumont Composite graduates entering visual or performing arts",
+    "url": "https://esbchs.blackgold.ca/scholarship-awards-1733952184416",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The division lists this one but publishes no criteria document and no date for it, so Beaumont Composite's student services is the only place to get either.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $500 scholarship for École Secondaire Beaumont Composite High School students enrolling in post-secondary study of the visual or performing arts. One school and one field of study is about as narrow as an award gets, which is the reason to look at it: the number of Beaumont graduates going into an arts program in a given year is small.",
+    "metaDetail": "Restricted to one school and one field.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 504,
+    "title": "Leduc Kinsmen Bursary",
+    "amount": "$1,000",
+    "audience": "Graduates of Leduc Composite, Ohpaho Secondary and Christ the King",
+    "url": "https://leduckinsmen.ca/bursary",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The Kinsmen publish a dated cutoff rather than a repeating one; the 2026 round closed June 2. Applications go by email or post to the club directly, and counsellors hold printed copies.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Established in 2020 as a Leduc Kinsmen legacy project and funded by the club's own fundraising. Three bursaries of $1,000 are granted, one each to a student from Leduc Composite High School, Ohpaho Secondary School and Christ the King School, so the three schools do not compete against each other. You need to be registering full time at a recognised post-secondary institution in your graduating year and be a Canadian citizen or permanent resident.",
+    "metaDetail": "One award reserved for each of three schools.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 505,
+    "title": "Leduc Influencers Award",
+    "amount": "$1,000",
+    "audience": "Leduc youth aged 17 to 21 with a community record",
+    "url": "https://www.leduc.ca/government/mayor-council/citizen-recognition-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "This runs through the City's Citizen Recognition Program on nominations rather than applications, so the move is getting someone to nominate you well before the March 31 date. It is a civic award with a bursary attached, not a school award.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The City of Leduc's Influencer awards celebrate the city's youth between the ages of 17 and 21 for outstanding contributions to the community, and winners receive a $1,000 bursary. The age range is what makes it different from everything else on this list: it stays open for several years after high school, so a graduate already at post-secondary is still eligible.",
+    "metaDetail": "Ages 17 to 21, so it reaches past graduation.",
+    "eligibility": {
+      "grades": [
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": 21,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2027-03-31"
+  },
+  {
+    "id": 506,
+    "title": "Leduc Community Hospital Foundation Healthcare Studies Scholarship",
+    "amount": "$1,000",
+    "audience": "Leduc region students entering healthcare studies",
+    "url": "https://www.lchfoundation.ca/campaigns/project/scholarships-awards",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The foundation says applications are accepted in November with recipients announced the following March, but publishes no exact closing date, so watch its site through the fall. Its separate professional development awards are for working healthcare staff, not students.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Leduc Community Hospital Foundation set up this programme in the fall of 2021 for people in the community with a commitment to healthcare through their chosen profession. Two scholarships of $1,000 each go annually to students from the Leduc region pursuing post-secondary healthcare-related studies. It is a small, locally funded programme against a small regional pool, which is the kind of ratio worth an application.",
+    "metaDetail": "Two scholarships a year for the Leduc region.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 507,
+    "title": "Leduc Performing Arts and Cultural Foundation Media Arts Scholarship",
+    "amount": "Up to $1,000",
+    "audience": "Leduc city and county students in media arts",
+    "url": "https://www.leducartsculturalfoundation.ca/media-arts-leduc-cultural-foundation",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The foundation's own site carries the current date and the four streams; the copies of these criteria hosted on the school division's site are older and give a different deadline. Trust the foundation. Money is held in trust and released on proof of tuition or receipt, and it expires August 31, 2029.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "One of four streams the Leduc Performing Arts and Cultural Foundation runs, each with two tiers. The scholarship pays up to $1,000 to a grade 12 student, or one who has finished Media Arts at the 10, 20 and 30 levels, and has to go toward post-secondary study, though continuing in media arts is explicitly not required. The award pays up to $500 to a student from grade 7 up and covers lessons, camps, workshops or equipment instead. You have to attend a City of Leduc or County of Leduc school and be 19 or under. The media submission is a portfolio of your electronic arts work, up to four minutes, sent by email with a teacher or mentor reference. The foundation exists as a legacy of Florence Mackenzie, a Black Gold teacher.",
+    "metaDetail": "Judged on a portfolio of up to four minutes.",
+    "eligibility": {
+      "grades": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 19,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-20"
+  },
+  {
+    "id": 508,
+    "title": "Leduc Performing Arts and Cultural Foundation Visual Arts Scholarship",
+    "amount": "Up to $1,000",
+    "audience": "Leduc city and county students in visual arts",
+    "url": "https://www.leducartsculturalfoundation.ca/visual-arts-leduc-cultural-foundation",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The foundation's own site carries the current date and the four streams; the copies of these criteria hosted on the school division's site are older and give a different deadline. Trust the foundation. Money is held in trust and released on proof of tuition or receipt, and it expires August 31, 2029.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "One of four streams the Leduc Performing Arts and Cultural Foundation runs, each with two tiers. The scholarship pays up to $1,000 to a grade 12 student, or one who has finished Visual Arts at the 10, 20 and 30 levels, and has to go toward post-secondary study, though continuing in visual arts is explicitly not required. The award pays up to $500 to a student from grade 7 up and covers lessons, camps, workshops or equipment instead. You have to attend a City of Leduc or County of Leduc school and be 19 or under. The visual submission is files of your art sent by email against the foundation's art submission guidelines, with a teacher or mentor reference. The foundation exists as a legacy of Florence Mackenzie, a Black Gold teacher.",
+    "metaDetail": "Judged on a portfolio, with a mentor reference.",
+    "eligibility": {
+      "grades": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 19,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-20"
+  },
+  {
+    "id": 509,
+    "title": "Leduc Performing Arts and Cultural Foundation Music Arts Scholarship",
+    "amount": "Up to $1,000",
+    "audience": "Leduc city and county students in music arts",
+    "url": "https://www.leducartsculturalfoundation.ca/music-arts-leduc-cultural-foundation",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The foundation's own site carries the current date and the four streams; the copies of these criteria hosted on the school division's site are older and give a different deadline. Trust the foundation. Money is held in trust and released on proof of tuition or receipt, and it expires August 31, 2029.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "One of four streams the Leduc Performing Arts and Cultural Foundation runs, each with two tiers. The scholarship pays up to $1,000 to a grade 12 student, or one who has finished Music Arts at the 10, 20 and 30 levels, and has to go toward post-secondary study, though continuing in music arts is explicitly not required. The award pays up to $500 to a student from grade 7 up and covers lessons, camps, workshops or equipment instead. You have to attend a City of Leduc or County of Leduc school and be 19 or under. Music is judged live: you perform two or three pieces at the MacLab Centre for Performing Arts, up to fifteen minutes including your introductions. The foundation exists as a legacy of Florence Mackenzie, a Black Gold teacher.",
+    "metaDetail": "Judged by live performance at the MacLab Centre.",
+    "eligibility": {
+      "grades": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 19,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-20"
+  },
+  {
+    "id": 510,
+    "title": "Leduc Performing Arts and Cultural Foundation Performing Arts Scholarship",
+    "amount": "Up to $1,000",
+    "audience": "Leduc city and county students in performing arts",
+    "url": "https://www.leducartsculturalfoundation.ca/performing-arts-leduc-cultural-foundation",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "The foundation's own site carries the current date and the four streams; the copies of these criteria hosted on the school division's site are older and give a different deadline. Trust the foundation. Money is held in trust and released on proof of tuition or receipt, and it expires August 31, 2029.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "One of four streams the Leduc Performing Arts and Cultural Foundation runs, each with two tiers. The scholarship pays up to $1,000 to a grade 12 student, or one who has finished Performing Arts at the 10, 20 and 30 levels, and has to go toward post-secondary study, though continuing in performing arts is explicitly not required. The award pays up to $500 to a student from grade 7 up and covers lessons, camps, workshops or equipment instead. You have to attend a City of Leduc or County of Leduc school and be 19 or under. Performing arts is judged live at the MacLab Centre, up to fifteen minutes including your introduction, and theatre, storytelling, dance and singing all count. The foundation exists as a legacy of Florence Mackenzie, a Black Gold teacher.",
+    "metaDetail": "Theatre, storytelling, dance and singing all count.",
+    "eligibility": {
+      "grades": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 19,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-20"
   }
 ]

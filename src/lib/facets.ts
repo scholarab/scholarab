@@ -178,6 +178,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'The division citizenship scholarships here pay ten students whose average sits between 70 and 79.5 percent, so a strong transcript rules you out and the solid middle of the class is the whole field.',
   },
   {
+    slug: 'leduc',
+    kind: 'region',
+    value: 'Leduc',
+    label: 'Leduc',
+    h1: 'Leduc scholarships',
+    title: 'Leduc High School Scholarships',
+    description:
+      'Scholarships for Leduc, Leduc County, Beaumont and Devon students: county bursaries, Black Gold division awards, arts foundation and hospital money.',
+    intro:
+      'The largest of these pays $6,000 to three Black Gold graduates a year on financial need alone, and several close in September after graduation rather than in the spring.',
+  },
+  {
     slug: 'alberta',
     kind: 'region',
     value: 'Alberta',
