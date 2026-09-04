@@ -3388,7 +3388,8 @@
       "extracurriculars": []
     },
     "alsoOpenTo": [
-      "Airdrie"
+      "Airdrie",
+      "Chestermere"
     ]
   },
   {
@@ -5002,6 +5003,44 @@
     }
   },
   {
+    "id": 170,
+    "title": "Lethbridge Polytechnic Entrance Award",
+    "amount": "Varies",
+    "deadline": "2027-07-15",
+    "audience": "Students admitted to Lethbridge Polytechnic full-time",
+    "url": "https://lethpolytech.ca/departments/student-awards-and-financial-aid/awards-and-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-08",
+    "region": "Lethbridge",
+    "notes": "The provider had not posted a date for the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward. Confirm before you plan around it.",
+    "active": false,
+    "description": "Lethbridge Polytechnic offers entrance awards to students admitted to full-time programs at the institution. With over 400 awards worth $800,000+ available through a single application, this is a major scholarship opportunity for qualifying students. Alberta residents can also apply for provincial scholarships (Jason Lang and Louise McKinney) using the same application.",
+    "metaDetail": "Over 400 awards worth $800,000+ through a single application.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lethbridge Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
     "id": 171,
     "title": "Medicine Hat Firefighters Charitable Foundation Scholarship",
     "amount": "$2,000",
@@ -5040,44 +5079,6 @@
       "extracurriculars": []
     },
     "metaDetail": "For students accepted into a fire service program."
-  },
-  {
-    "id": 170,
-    "title": "Lethbridge Polytechnic Entrance Award",
-    "amount": "Varies",
-    "deadline": "2027-07-15",
-    "audience": "Students admitted to Lethbridge Polytechnic full-time",
-    "url": "https://lethpolytech.ca/departments/student-awards-and-financial-aid/awards-and-scholarships",
-    "category": "Academic",
-    "lastVerified": "2026-08",
-    "region": "Lethbridge",
-    "notes": "The provider had not posted a date for the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward. Confirm before you plan around it.",
-    "active": false,
-    "description": "Lethbridge Polytechnic offers entrance awards to students admitted to full-time programs at the institution. With over 400 awards worth $800,000+ available through a single application, this is a major scholarship opportunity for qualifying students. Alberta residents can also apply for provincial scholarships (Jason Lang and Louise McKinney) using the same application.",
-    "metaDetail": "Over 400 awards worth $800,000+ through a single application.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [],
-      "targetInstitutions": [
-        "Lethbridge Polytechnic"
-      ],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
   },
   {
     "id": 172,
@@ -12655,7 +12656,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": "2026-05-01"
+    "openDate": "2026-05-01",
+    "alsoOpenTo": [
+      "Chestermere"
+    ]
   },
   {
     "id": 363,
@@ -12993,7 +12997,8 @@
     "category": "Academic",
     "region": "Calgary",
     "alsoOpenTo": [
-      "Airdrie"
+      "Airdrie",
+      "Chestermere"
     ],
     "active": false,
     "lastVerified": "2026-08",
@@ -13037,7 +13042,8 @@
     "category": "Academic",
     "region": "Calgary",
     "alsoOpenTo": [
-      "Airdrie"
+      "Airdrie",
+      "Chestermere"
     ],
     "active": false,
     "lastVerified": "2026-08",
@@ -19175,6 +19181,198 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 533,
+    "title": "Chestermere High School Scholarship",
+    "amount": "Varies",
+    "audience": "Chestermere High School graduates with 45 credits earned there",
+    "url": "https://chestermere.rockyview.ab.ca/learning/student-supports/scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Chestermere",
+    "notes": "Two rules here are worth more than the criteria. The deadline is September 1 of your graduating year, months after most school awards close, because it wants proof of registration rather than a letter of acceptance. And in a year when nobody applies, that year's graduates may apply the following year, which is a second chance almost no award offers. Forms come from the guidance office, usually updated in April.",
+    "applyViaGuidance": true,
+    "active": true,
+    "deadline": "2027-09-01",
+    "description": "Started in 1978 by a Chestermere student, Carolyn Tester, who noticed there was nothing for students who were capable of further study and willing to do it but did not have the marks to win the awards that existed. The fund was built by donation to a principal now sitting at $15,000, and the award is paid from the interest, so a committee of five community members and a school representative decides each year both who wins and how much they get. Selection weighs academic proficiency, extracurricular involvement, citizenship, leadership and financial need together.",
+    "metaDetail": "Built for capable students without top marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 534,
+    "title": "Jaydon Sommerfeld Memorial Bursary",
+    "amount": "$500",
+    "audience": "Chestermere High School grade 12 students who played a sport",
+    "url": "https://chestermere.rockyview.ab.ca/learning/student-supports/scholarships",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Chestermere",
+    "notes": "Read the sports rule before you rule yourself out: intramurals count, and so do jiu jitsu, weight lifting and figure skating. The mark rule is stricter than it looks, though, because the 65 per cent has to hold in each grade twelve subject rather than on average. Applications are emailed to Mr. Bates at mbates@rockyview.ab.ca with the subject line the form specifies, and you are asked for a social insurance number.",
+    "applyViaGuidance": true,
+    "active": true,
+    "deadline": "2027-06-22",
+    "description": "In memory of Jaydon Sommerfeld, a Chestermere High student and lacrosse and hockey player who died in a car accident in June 2015 and whose organs went to six strangers. At least four bursaries of $500 are given every year. The criteria say plainly that this is not an academic award and the highest mark does not win it: the committee is looking for kindness, thoughtfulness, personal integrity, love of life and work ethic, the qualities Jaydon showed. The money can go to post-secondary costs or to anything else that gets you to gainful employment.",
+    "metaDetail": "Intramurals count as the sports requirement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 65,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 535,
+    "title": "Jim Cellars Memorial Welding Scholarship",
+    "amount": "$1,000",
+    "audience": "Chestermere High School students who completed FAB10, FAB20 and FAB30",
+    "url": "https://chestermere.rockyview.ab.ca/learning/student-supports/scholarships",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Chestermere",
+    "notes": "The school published a dated June 17, 2026 deadline for the last round and picks a new date each year, so there is no repeating date to carry and you should ask Mr. Dennis for this year's. Step one is a conversation rather than a form: you meet Mr. Dennis and Mr. Wiens first to check you are a strong candidate, then submit the letter. Expect an interview with Brian Cellars, and expect to attend the awards night in the fall, since he presents it in person.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $1,000 award for a grade 12 Chestermere High student who has shown outstanding skill in Fabrication, named for Jim Cellars, a welder his family describe as an artist, inventor and engineer who taught the trade to many. Three things gate it: all three of FAB10, FAB20 and FAB30, proof you have applied to or enrolled in a post-secondary welding program, and a 150-word letter on why you are a strong candidate and how the money advances your career. The letter has to carry your social insurance number, so write it somewhere you can keep private.",
+    "metaDetail": "All three Fabrication levels are required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 536,
+    "title": "Calgary Black Chambers Cavalry FC Athletic Scholarship",
+    "amount": "$5,000",
+    "audience": "Black students on a varsity team at a Calgary post-secondary institution",
+    "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Two awards, with one going to a woman and one to a man, so you are competing inside your own half of a small field. Varsity is the hard requirement: a club or intramural team does not qualify. One application covers every Calgary Black Chambers award, so there is nothing to gain from choosing between them.",
+    "active": false,
+    "deadline": "2027-06-01",
+    "description": "Two awards of $5,000, paid straight to tuition, for Black Canadian citizens or permanent residents who are active student athletes on a varsity women's or men's team at a Calgary post-secondary institution. Any year of a full-time undergraduate degree or diploma qualifies, the bar is a cumulative GPA of 2.7 or 70 per cent, and one reference letter is required.",
+    "metaDetail": "Varsity only, and one award each for women and men.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 537,
+    "title": "Calgary Black Chambers TransAlta STEM Scholarship",
+    "amount": "$7,000",
+    "audience": "Black students in a STEM program at a Calgary post-secondary institution",
+    "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "The list of qualifying fields is unusually long and worth checking against your own program before assuming you are out: biology, chemistry, computer science, data science, engineering, environmental sciences, geology, information systems, mathematics, microbiology, natural sciences, physics, statistics, technology and zoology all count. One application covers every Calgary Black Chambers award.",
+    "active": false,
+    "deadline": "2027-06-01",
+    "description": "A single $7,000 award, paid straight to tuition, for a Black Canadian citizen or permanent resident in second year or beyond of a full-time STEM degree or diploma at a Calgary post-secondary institution. It asks for a cumulative GPA of 2.7 or 70 per cent, school or community involvement that is preferably STEM focused, and one reference letter.",
+    "metaDetail": "Fifteen named fields count as STEM here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
     }

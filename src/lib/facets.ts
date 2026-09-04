@@ -202,6 +202,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'The two largest are funded by a thrift store, at $5,000 each, and they score financial need three times as heavily as they score marks.',
   },
   {
+    slug: 'chestermere',
+    kind: 'region',
+    value: 'Chestermere',
+    label: 'Chestermere',
+    h1: 'Chestermere scholarships',
+    title: 'Chestermere Scholarships',
+    description:
+      'Scholarships for Chestermere students: the three Chestermere High awards, the Rocky View teachers\' scholarship and the Calgary-region awards that name the city.',
+    intro:
+      'The city award here is the unusual one, since it closes on September 1 rather than in the spring and lets the next year\'s graduates apply if nobody did.',
+  },
+  {
     slug: 'alberta',
     kind: 'region',
     value: 'Alberta',

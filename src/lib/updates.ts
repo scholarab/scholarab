@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Five new city pages, for St. Albert, Brooks, Spruce Grove, Leduc and Fort Saskatchewan, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Six new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan and Chestermere, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Chestermere now has a page of its own, built on the three awards Chestermere High collects and the Calgary-region money that names the city.',
+      },
       {
         kind: 'listings',
         text: 'Fort Saskatchewan and the Elk Island schools now have 21 awards and a page of their own, including two worth $5,000 that a thrift store pays for.',
