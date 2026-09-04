@@ -88,20 +88,20 @@
     "date": "2026-08-31"
   },
   "/programs/breakthrough-junior-challenge/": {
-    "hash": "74655c633c72d3f8",
-    "date": "2026-08-31"
+    "hash": "895119912f89bf90",
+    "date": "2026-09-03"
   },
   "/programs/calgaryedmonton-brain-bee/": {
-    "hash": "97fc9cb29234bbab",
-    "date": "2026-08-31"
+    "hash": "3a280efd8869160e",
+    "date": "2026-09-03"
   },
   "/programs/canada-wide-science-fair-cwsf/": {
     "hash": "fd9d74ab649d65c4",
     "date": "2026-08-31"
   },
   "/programs/canadian-biology-olympiad-cbo/": {
-    "hash": "f79d84c200f8174d",
-    "date": "2026-08-31"
+    "hash": "e6f1e3342d14a85f",
+    "date": "2026-09-03"
   },
   "/programs/canadian-chemistry-olympiad-cco/": {
     "hash": "e72a23fea4297d87",
@@ -112,8 +112,8 @@
     "date": "2026-08-31"
   },
   "/programs/canadian-geographic-challenge/": {
-    "hash": "e9297b1b96c0a252",
-    "date": "2026-08-31"
+    "hash": "adf5b6bf487b5fda",
+    "date": "2026-09-03"
   },
   "/programs/canadian-open-mathematics-challenge-comc/": {
     "hash": "4568fa8493858b9b",
@@ -136,12 +136,12 @@
     "date": "2026-09-01"
   },
   "/programs/caring-for-our-watersheds-alberta/": {
-    "hash": "6ec094e17ce3020c",
-    "date": "2026-09-01"
+    "hash": "2321408226936bdf",
+    "date": "2026-09-03"
   },
   "/programs/cern-beamline-for-schools-bl4s/": {
-    "hash": "f6ed8d493c103a2a",
-    "date": "2026-08-31"
+    "hash": "b633e17ba957e25c",
+    "date": "2026-09-03"
   },
   "/programs/cisco-networking-academy-high-school-stream/": {
     "hash": "f62b5dfe62f9225f",
@@ -156,8 +156,8 @@
     "date": "2026-08-31"
   },
   "/programs/conrad-challenge/": {
-    "hash": "703d6a229f6d1d85",
-    "date": "2026-08-31"
+    "hash": "64bcd25e5fa2ec21",
+    "date": "2026-09-03"
   },
   "/programs/cybersci-cyber-security-challenge-canada-high-school/": {
     "hash": "6ff77a84c16bdf3f",
@@ -248,8 +248,8 @@
     "date": "2026-08-31"
   },
   "/programs/immerse-education-virtual-summer-school-research-track/": {
-    "hash": "32befd4966b40ec0",
-    "date": "2026-08-31"
+    "hash": "25853eea8276e971",
+    "date": "2026-09-03"
   },
   "/programs/inside-education-youth-summits/": {
     "hash": "202e9100037d9add",
@@ -260,28 +260,28 @@
     "date": "2026-08-31"
   },
   "/programs/ja-northern-alberta-company-program/": {
-    "hash": "543f9db0487faf15",
-    "date": "2026-08-31"
+    "hash": "144047032392972e",
+    "date": "2026-09-03"
   },
   "/programs/ja-southern-alberta-company-program/": {
     "hash": "20083de7f6bf1ccc",
     "date": "2026-08-31"
   },
   "/programs/launchx-virtual-summer-program/": {
-    "hash": "66e2a20ed397eaf5",
-    "date": "2026-08-31"
+    "hash": "5cd7d488b9f274ef",
+    "date": "2026-09-03"
   },
   "/programs/league-of-innovators/": {
-    "hash": "bcdf9ddeb746a3d1",
-    "date": "2026-08-31"
+    "hash": "56b25f8c6d4d46b5",
+    "date": "2026-09-03"
   },
   "/programs/lets-talk-science-tomatosphere/": {
     "hash": "f1b7438ca16acd9d",
     "date": "2026-08-31"
   },
   "/programs/lets-talk-science-university-chapter-symposia/": {
-    "hash": "e95be4082c1d1d07",
-    "date": "2026-08-31"
+    "hash": "933586e247dc2d11",
+    "date": "2026-09-03"
   },
   "/programs/macewan-university-design-summer-camp/": {
     "hash": "ce5996c47814504b",
@@ -304,8 +304,8 @@
     "date": "2026-08-31"
   },
   "/programs/non-trivial-fellowship/": {
-    "hash": "fd9ca80e153edc27",
-    "date": "2026-08-31"
+    "hash": "a9fa92dc2ae9049f",
+    "date": "2026-09-03"
   },
   "/programs/oapt-grade-11-physics-contest/": {
     "hash": "d2bdc9684a0b4c9b",
@@ -328,8 +328,8 @@
     "date": "2026-08-31"
   },
   "/programs/pioneer-academics-research-program/": {
-    "hash": "0b18ed265704ab85",
-    "date": "2026-08-31"
+    "hash": "dd74fada2dcf9acf",
+    "date": "2026-09-03"
   },
   "/programs/polygence-research-program/": {
     "hash": "979f87aee8d2888d",
@@ -340,8 +340,8 @@
     "date": "2026-08-31"
   },
   "/programs/qubit-by-qubit-high-school-quantum-computing/": {
-    "hash": "d47bd8097c513210",
-    "date": "2026-08-31"
+    "hash": "45069a3812b868e1",
+    "date": "2026-09-03"
   },
   "/programs/registered-apprenticeship-program-rap/": {
     "hash": "15387e5fab871aec",
@@ -388,12 +388,12 @@
     "date": "2026-08-31"
   },
   "/programs/stem-racing-canada-f1-in-schools/": {
-    "hash": "c8f91b0da4f55f02",
-    "date": "2026-08-31"
+    "hash": "0998dcaea1ce0fab",
+    "date": "2026-09-03"
   },
   "/programs/student-spaceflight-experiments-program-ssep/": {
-    "hash": "2631cfd59924ac6a",
-    "date": "2026-08-31"
+    "hash": "16a9934566ce5c32",
+    "date": "2026-09-03"
   },
   "/programs/students-on-ice-soi-foundation-expeditions/": {
     "hash": "eacccb2b8887d144",
@@ -408,8 +408,8 @@
     "date": "2026-08-31"
   },
   "/programs/technovation-girls-alberta/": {
-    "hash": "b2fc67d9cfa5d0a2",
-    "date": "2026-08-31"
+    "hash": "dd309b591b5bdebe",
+    "date": "2026-09-03"
   },
   "/programs/telus-spark-science-centre-volunteering-calgary/": {
     "hash": "14b4598888f32ea7",
@@ -424,8 +424,8 @@
     "date": "2026-08-31"
   },
   "/programs/the-knowledge-society-tks/": {
-    "hash": "d4c94467ffed556a",
-    "date": "2026-08-31"
+    "hash": "2a13c3e9b5aaf422",
+    "date": "2026-09-03"
   },
   "/programs/triumf-high-school-fellowship/": {
     "hash": "42c2fe157093bf5e",
@@ -468,8 +468,8 @@
     "date": "2026-08-31"
   },
   "/programs/youreka-canada/": {
-    "hash": "442631ea3e42f23f",
-    "date": "2026-08-31"
+    "hash": "62de75dd2c649c82",
+    "date": "2026-09-03"
   },
   "/programs/youth-parliament-of-canada/": {
     "hash": "02f88426f56b0d3f",
