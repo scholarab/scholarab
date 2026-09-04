@@ -238,6 +238,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Thirty of these come out of one handbook and one application form, and the school will let you submit that form only once, so which awards you tick matters more here than anywhere else.',
   },
   {
+    slug: 'cold-lake',
+    kind: 'region',
+    value: 'Cold Lake',
+    label: 'Cold Lake',
+    h1: 'Cold Lake scholarships',
+    title: 'Cold Lake Scholarships',
+    description:
+      'Scholarships for Cold Lake and Lakeland students: Cold Lake High awards, the 4 Wing military scholarships, co-op and credit union money, and division awards.',
+    intro:
+      'Four of these have no application at all, since staff pick the winners from the graduating class, and the military scholarships here exist nowhere else in Alberta.',
+  },
+  {
     slug: 'chestermere',
     kind: 'region',
     value: 'Chestermere',

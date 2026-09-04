@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Nine new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster and Camrose, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Ten new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose and Cold Lake, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Cold Lake and the Lakeland now have 22 awards and a page of their own, including three military scholarships for the families serving at 4 Wing.',
+      },
       {
         kind: 'listings',
         text: 'Camrose and Camrose County now have 53 awards and a page of their own, out of the Camrose Composite handbook, the service clubs and the Augustana entrance awards.',
