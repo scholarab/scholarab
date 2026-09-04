@@ -64,7 +64,7 @@ export const GET: APIRoute = async ({ request }) => {
   return page(
     'Confirm reminder',
     `<h1>Confirm your reminder</h1>
-     <p>We'll email you 30, 14 and 3 days before this deadline. Nothing else, ever.</p>
+     <p>We'll email you 30, 14 and 3 days before this deadline.</p>
      <form method="post">
        <input type="hidden" name="token" value="${escapeAttr(token)}">
        <button type="submit">Yes, remind me</button>

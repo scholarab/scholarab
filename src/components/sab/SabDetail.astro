@@ -211,14 +211,14 @@ const chip =
     {canRemind && (
       <div class="sabd-remind">
         <div class="sabd-mono sabd-remind-label">GET A DEADLINE REMINDER</div>
-        <div class="sabd-remind-sub">We email you a link to confirm, then nudge you before it closes. Nothing else, ever.</div>
+        <div class="sabd-remind-sub">We email you a link to confirm, then nudge you before it closes.</div>
         <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form">
           <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" />
           <button type="submit" class="sab-btn sabd-remind-btn">Remind me</button>
         </form>
         <div data-sabd-alert-msg class="sabd-remind-msg" style="display:none;"></div>
         <div class="sabd-remind-fine">
-          We store your address only to send these reminders, never sell it, and delete it the
+          We store your address only to send these reminders, and delete it the
           moment you unsubscribe. <a href="/privacy/">How this works</a>.
         </div>
       </div>
