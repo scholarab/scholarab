@@ -185,7 +185,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     h1: 'Leduc scholarships',
     title: 'Leduc High School Scholarships',
     description:
-      'Scholarships for Leduc, Leduc County, Beaumont and Devon students: county bursaries, Black Gold division awards, arts foundation and hospital money.',
+      'Scholarships for Leduc, Leduc County and Devon students: county bursaries, Black Gold division awards, arts foundation and hospital money.',
     intro:
       'The largest of these pays $6,000 to three Black Gold graduates a year on financial need alone, and several close in September after graduation rather than in the spring.',
   },
@@ -200,6 +200,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Scholarships for Fort Saskatchewan and Elk Island students: Fort High internal awards, division scholarships, industry money and service club bursaries.',
     intro:
       'The two largest are funded by a thrift store, at $5,000 each, and they score financial need three times as heavily as they score marks.',
+  },
+  {
+    slug: 'beaumont',
+    kind: 'region',
+    value: 'Beaumont',
+    label: 'Beaumont',
+    h1: 'Beaumont scholarships',
+    title: 'Beaumont Scholarships',
+    description:
+      'Scholarships for Beaumont students: two Beaumont Composite awards, the Chamber and RCMP scholarship, Black Gold division money and francophone bourses.',
+    intro:
+      'Beaumont is a city rather than part of Leduc County, so the county bursaries here are not open to it, and the awards that are open come from the school division instead.',
   },
   {
     slug: 'chestermere',

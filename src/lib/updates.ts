@@ -562,7 +562,7 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Six new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan and Chestermere, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Seven new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere and Beaumont, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
       {
         kind: 'listings',
@@ -574,7 +574,11 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'listings',
-        text: 'Leduc, Leduc County, Beaumont and Devon now have 18 awards and a page of their own, five of which close between now and the end of October.',
+        text: 'Leduc, Leduc County and Devon now have 16 awards and a page of their own, five of which close between now and the end of October.',
+      },
+      {
+        kind: 'listings',
+        text: 'Beaumont has been split out of the Leduc page into nine awards of its own, since Beaumont is a city rather than part of Leduc County and the county bursaries never applied to it.',
       },
       {
         kind: 'listings',

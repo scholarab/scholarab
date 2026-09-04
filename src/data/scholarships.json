@@ -17798,7 +17798,10 @@
         "Volunteering"
       ]
     },
-    "deadline": "2026-09-10"
+    "deadline": "2026-09-10",
+    "alsoOpenTo": [
+      "Beaumont"
+    ]
   },
   {
     "id": 497,
@@ -17837,7 +17840,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2027-07-15"
+    "deadline": "2027-07-15",
+    "alsoOpenTo": [
+      "Beaumont"
+    ]
   },
   {
     "id": 498,
@@ -17876,7 +17882,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2026-09-15"
+    "deadline": "2026-09-15",
+    "alsoOpenTo": [
+      "Beaumont"
+    ]
   },
   {
     "id": 499,
@@ -17913,7 +17922,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2027-06-30"
+    "deadline": "2027-06-30",
+    "alsoOpenTo": [
+      "Beaumont"
+    ]
   },
   {
     "id": 500,
@@ -18000,7 +18012,7 @@
     "url": "https://esbchs.blackgold.ca/scholarship-awards-1733952184416",
     "category": "Community",
     "lastVerified": "2026-09",
-    "region": "Leduc",
+    "region": "Beaumont",
     "notes": "Beaumont Composite publishes a dated cutoff for this rather than a bare recurring day; the 2026 cycle closed May 8. Shortlisted candidates are interviewed by the awards committee, so budget time for that as well as for the form.",
     "applyViaGuidance": true,
     "active": true,
@@ -18039,7 +18051,7 @@
     "url": "https://esbchs.blackgold.ca/scholarship-awards-1733952184416",
     "category": "Arts",
     "lastVerified": "2026-09",
-    "region": "Leduc",
+    "region": "Beaumont",
     "notes": "The division lists this one but publishes no criteria document and no date for it, so Beaumont Composite's student services is the only place to get either.",
     "applyViaGuidance": true,
     "active": true,
@@ -19373,6 +19385,128 @@
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 538,
+    "title": "Beaumont Chamber of Commerce RCMP Scholarship",
+    "amount": "Varies",
+    "audience": "A Beaumont grade 12 student going on to post-secondary who reflects the RCMP core values",
+    "url": "https://beaumontchamber.ca/Member+Benefits/CustomCtg?pA=C4C295E73E5125543209C402BB5791C4",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Beaumont",
+    "notes": "The Chamber lists this among its member benefits and publishes no amount, no criteria document and no date, so Beaumont Composite student services or info@beaumontchamber.ca is the only way to get any of the three.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "An annual scholarship run by the Beaumont Chamber of Commerce in partnership with the RCMP for one grade 12 student heading to post-secondary. The Chamber describes the winner as a young person recognised for demonstrating the core values of the RCMP, which are honesty, integrity, professionalism, compassion, respect and accountability, so this is a character award rather than a marks award. It is the only scholarship any Beaumont organisation outside the school publishes.",
+    "metaDetail": "Character rather than marks, judged on RCMP core values.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 539,
+    "title": "Prix de l'Ambassadeur du Conseil scolaire Centre-Nord",
+    "amount": "$500",
+    "audience": "Grade 12 students graduating from a Conseil scolaire Centre-Nord francophone school",
+    "url": "https://centrenord.ab.ca/conseil/bourses",
+    "region": "Alberta",
+    "alsoOpenTo": [
+      "Beaumont",
+      "Edmonton",
+      "St. Albert",
+      "Red Deer"
+    ],
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "active": true,
+    "notes": "The deadline is set relative to your own ceremony rather than to a calendar date, at three weeks before graduation, so the school office is the only place that can tell you the real day. In Beaumont the school is Ecole Quatre-Saisons.",
+    "applyViaGuidance": true,
+    "description": "The francophone division gives this to its graduating ambassadors: $500 at a school with one to nineteen graduates, and two awards of $500 where twenty or more graduate. The application is a letter to the principal describing yourself and what you intend to study or do, and candidates who make the shortlist are interviewed by a selection committee at the school. Because it is awarded per school rather than per division, a small francophone school is a much better place to win it from than a large one.",
+    "metaDetail": "Awarded per school, so a small graduating class helps.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 540,
+    "title": "Bourse Paul-Charbonneau",
+    "amount": "$1,000",
+    "audience": "Centre-Nord graduates who have already won the Prix de l'Ambassadeur",
+    "url": "https://centrenord.ab.ca/conseil/bourses",
+    "region": "Alberta",
+    "alsoOpenTo": [
+      "Beaumont",
+      "Edmonton",
+      "St. Albert",
+      "Red Deer"
+    ],
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "active": true,
+    "notes": "You cannot enter this one directly. Winning the Prix de l'Ambassadeur at your own school is the qualifying round, and the principal sets the date for the second letter.",
+    "applyViaGuidance": true,
+    "description": "One $1,000 award a year, chosen from across the whole francophone division but only from students who have already won their school's Prix de l'Ambassadeur. The second stage is a cover letter of no more than 600 words on academic success and community involvement. That two-step shape is worth knowing early, because the work that wins the $500 at your own school is also what puts you in the running for this.",
+    "metaDetail": "Open only to Prix de l'Ambassadeur winners.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
     }

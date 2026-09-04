@@ -596,8 +596,8 @@
     "date": "2026-08-28"
   },
   "/scholarships/ambassador-scholarship/": {
-    "hash": "5afe8dbec5bed755",
-    "date": "2026-09-03"
+    "hash": "88b4e6b5d7efbcd2",
+    "date": "2026-09-04"
   },
   "/scholarships/andrew-hyslop-and-barbara-zinter-award-for-lifeguarding/": {
     "hash": "be5498a5af37711e",
@@ -671,6 +671,10 @@
     "hash": "235a3049b332a6e6",
     "date": "2026-09-03"
   },
+  "/scholarships/beaumont-chamber-of-commerce-rcmp-scholarship/": {
+    "hash": "4cb562cdd227ae1a",
+    "date": "2026-09-04"
+  },
   "/scholarships/belcourt-brosseau-metis-awards/": {
     "hash": "ee7d62d78519eee0",
     "date": "2026-08-02"
@@ -726,6 +730,10 @@
   "/scholarships/border-paving-award/": {
     "hash": "99a1dc0783a4f534",
     "date": "2026-09-03"
+  },
+  "/scholarships/bourse-paul-charbonneau/": {
+    "hash": "04b6c0159318ecfe",
+    "date": "2026-09-04"
   },
   "/scholarships/bradley-hillmo-anderson-memorial-award/": {
     "hash": "a5116d4c22c284db",
@@ -1116,8 +1124,8 @@
     "date": "2026-08-28"
   },
   "/scholarships/eric-and-agnes-dixon-scholarship/": {
-    "hash": "1e5c8d3eb446b42f",
-    "date": "2026-09-03"
+    "hash": "22e75acfeea002aa",
+    "date": "2026-09-04"
   },
   "/scholarships/erin-james-scholarship/": {
     "hash": "90ca45d7f3d48f0c",
@@ -1284,8 +1292,8 @@
     "date": "2026-08-28"
   },
   "/scholarships/greg-sylvester-memorial-scholarship/": {
-    "hash": "b9b0bff04b1bd5dd",
-    "date": "2026-09-03"
+    "hash": "0b5ddd7d50e3bae4",
+    "date": "2026-09-04"
   },
   "/scholarships/greta-marofke-siblings-affected-by-cancer-memorial-scholarship/": {
     "hash": "6475a4c838c28f6f",
@@ -1492,8 +1500,8 @@
     "date": "2026-09-01"
   },
   "/scholarships/kevin-gaetz-award/": {
-    "hash": "566112ae8518b665",
-    "date": "2026-09-03"
+    "hash": "db1e3305a140cf8a",
+    "date": "2026-09-04"
   },
   "/scholarships/kevin-gaetz-scholarship/": {
     "hash": "32a2a9b4432f3fd7",
@@ -1696,8 +1704,8 @@
     "date": "2026-08-28"
   },
   "/scholarships/mathieu-lefevre-memorial-fund-for-artists/": {
-    "hash": "388383969b406e75",
-    "date": "2026-09-03"
+    "hash": "ab410896f17a9dc3",
+    "date": "2026-09-04"
   },
   "/scholarships/maureen-langston-memorial-award/": {
     "hash": "f9d057a449cec779",
@@ -1876,8 +1884,8 @@
     "date": "2026-08-30"
   },
   "/scholarships/philip-ki-joon-oh-scholarship/": {
-    "hash": "242a59583dc6bb23",
-    "date": "2026-09-03"
+    "hash": "6cbee41acac6c027",
+    "date": "2026-09-04"
   },
   "/scholarships/pkhs-character-award/": {
     "hash": "19682c83c694aa86",
@@ -1886,6 +1894,10 @@
   "/scholarships/premiers-citizenship-award/": {
     "hash": "028d5e7e4d32293d",
     "date": "2026-08-02"
+  },
+  "/scholarships/prix-de-lambassadeur-du-conseil-scolaire-centre-nord/": {
+    "hash": "c6a67ca2d7c99985",
+    "date": "2026-09-04"
   },
   "/scholarships/queen-elizabeth-ii-platinum-jubilee-citizenship-award/": {
     "hash": "fb7ad67c2a906655",
