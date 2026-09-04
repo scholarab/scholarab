@@ -142,6 +142,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Read the eligibility line before the amount: some are open to any Airdrie graduate, and others want a Rocky View County address, three years in a 4-H club, or a season spent refereeing minor basketball.',
   },
   {
+    slug: 'brooks',
+    kind: 'region',
+    value: 'Brooks',
+    label: 'Brooks',
+    h1: 'Brooks scholarships',
+    title: 'Brooks High School Scholarships',
+    description:
+      'Scholarships for Brooks and County of Newell students: the Brooks Composite handbook awards, service club money, trades scholarships and health bursaries.',
+    intro:
+      'Almost all of these are collected by the school rather than mailed to a sponsor, and the handbook prints no closing dates, so the date you need is the one your own office sets.',
+  },
+  {
     slug: 'alberta',
     kind: 'region',
     value: 'Alberta',

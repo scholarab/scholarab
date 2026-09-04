@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Brooks gets a page of its own, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Brooks and the County of Newell now have 26 awards and a page of their own, read one at a time out of the Brooks Composite scholarship handbook.',
+      },
       {
         kind: 'new',
         text: 'Three new guides: the Loran Award, chemistry competitions across Canada, and how volunteering hours actually work in Alberta high schools.',

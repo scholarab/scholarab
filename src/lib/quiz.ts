@@ -86,6 +86,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: 'Lethbridge', value: 'Lethbridge', hint: 'AND THE SOUTHWEST' },
       { label: 'Red Deer', value: 'Red Deer', hint: 'AND CENTRAL ALBERTA' },
       { label: 'Airdrie', value: 'Airdrie', hint: 'AND ROCKY VIEW' },
+      { label: 'Brooks', value: 'Brooks', hint: 'AND COUNTY OF NEWELL' },
       { label: 'Other Alberta', value: 'Other Alberta', hint: 'EVERYWHERE ELSE' },
     ],
   },
@@ -195,8 +196,8 @@ export const SCHOOL_BOARD_NAMES: Record<string, string> = {
  * every dropdown, so their filter could never engage. But feeding them to all
  * seven cities put a 17-option question in front of Medicine Hat, Lethbridge
  * and Airdrie students, who had no school question at all, to filter three
- * listings out of 345. A student at one of those schools is in a town that is
- * not one of the six named cities, so "Other Alberta" is the answer they give,
+ * listings out of 371. A student at one of those schools is in a town that is
+ * not one of the seven named cities, so "Other Alberta" is the answer they give,
  * and that is where the question is worth asking.
  */
 function inCityScope(region: string | null | undefined, city: string): boolean {

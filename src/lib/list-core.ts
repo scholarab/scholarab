@@ -23,7 +23,7 @@ export function getScholarshipStatus(s: ScholarshipWithMeta): ScholarshipStatus 
 }
 
 // Everything except National/International counts as provincial; keep in sync with data regions.
-const PROVINCIAL_REGIONS = new Set(['Alberta', 'Alberta-wide', 'Airdrie', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']);
+const PROVINCIAL_REGIONS = new Set(['Alberta', 'Alberta-wide', 'Airdrie', 'Brooks', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']);
 
 /**
  * A scope chip's value. Two of these are rollups; every other key is a literal
