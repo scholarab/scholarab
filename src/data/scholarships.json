@@ -19445,7 +19445,8 @@
       "Beaumont",
       "Edmonton",
       "St. Albert",
-      "Red Deer"
+      "Red Deer",
+      "Camrose"
     ],
     "category": "Community",
     "lastVerified": "2026-09",
@@ -19487,7 +19488,8 @@
       "Beaumont",
       "Edmonton",
       "St. Albert",
-      "Red Deer"
+      "Red Deer",
+      "Camrose"
     ],
     "category": "Community",
     "lastVerified": "2026-09",
@@ -21188,6 +21190,1930 @@
       "fosterCare": false,
       "citizenship": "any",
       "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 585,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Agnes Boness Memorial Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Camrose Composite graduates going anywhere except Augustana",
+    "description": "Several awards of $1,000 for full-time Camrose Composite students in their graduating year, judged on all-round citizenship and service to school and community, with financial need considered. The eligibility carries an exclusion worth reading twice: recipients must be attending a post-secondary institution other than the Augustana Campus of the University of Alberta, so choosing the university in your own town rules you out of this one.",
+    "metaDetail": "Explicitly excludes Augustana, the campus in Camrose.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 586,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Al and Ann Schloss Scholarship",
+    "amount": "$4,500",
+    "category": "Academic",
+    "audience": "Camrose Composite graduates with 80% across five 30-level courses",
+    "description": "The largest single award in the Camrose Composite handbook at $4,500 to one student. It asks for 80% or higher across five 30-level courses, volunteering in the school or community, and a post-secondary plan. Three requirements, one award, and more money than the next four awards on the list combined.",
+    "metaDetail": "The biggest single award at the school by far.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 587,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Alberta Teachers' Association Local #32 Scholarship",
+    "amount": "$300",
+    "category": "Academic",
+    "audience": "Camrose Composite graduates entering a first year of education studies",
+    "description": "One $300 award from the local ATA branch for a graduate enrolled in the initial year of full-time study in education at an accredited university or college, judged on achievement and community or school service. It is one of five separate awards in this handbook for a student heading into teaching, which is an unusual concentration for one school.",
+    "metaDetail": "One of five teaching awards at this one school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 588,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Alice Thom Memorial Scholarship",
+    "amount": "Varies",
+    "category": "Arts",
+    "audience": "Camrose Composite graduates entering fine art, art, drama or music",
+    "description": "One award for a grade 12 student going on to study fine art, art, drama or music. The condition that narrows it is honours standing at the 30 level in your own area of focus, so a strong art or drama mark matters more here than a strong overall transcript, though good overall standing is asked for too. The handbook lists the value as to be determined.",
+    "metaDetail": "Honours in your art form, not across the board.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 589,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Battle River Implements Awards",
+    "amount": "$250",
+    "category": "Community",
+    "audience": "Camrose Composite students judged on character rather than marks",
+    "description": "Two or three awards of $250, given for altruism, empathy, kindness and work ethic. That is the entire criteria: no mark, no program, no post-secondary requirement. It is the plainest character award in the handbook and the one a student with an ordinary transcript should not skip.",
+    "metaDetail": "Altruism, empathy, kindness and work ethic. Nothing else.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 590,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Betty and Henry Goudreau Music Fund",
+    "amount": "$500",
+    "category": "Arts",
+    "audience": "Camrose Composite students with the highest mark in band",
+    "description": "One $500 award to the student with the highest mark in high school band, who must also write an essay on the impact the senior band has had on their school experience. Being in the band is the whole field, and the essay is the only part you can still influence in your final year.",
+    "metaDetail": "Highest band mark, plus an essay about the band.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 591,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Betty and Henry Goudreau Trades Scholarship Fund",
+    "amount": "$500",
+    "category": "Trades",
+    "audience": "Camrose Composite graduates entering a red seal trade",
+    "description": "One $500 award for a student enrolled in a red seal or equivalent post-secondary program who has the highest overall high school grades among the applicants. It is a trades award decided on marks, which is rarer than it sounds and worth applying for if your transcript is stronger than the trades stereotype expects.",
+    "metaDetail": "A trades award decided on marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 592,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Camrose County Scholarship",
+    "amount": "$300",
+    "category": "Community",
+    "audience": "Rural Camrose County residents at Camrose Composite",
+    "description": "One $300 award for a rural resident of Camrose County who is hard-working and dedicated, shows initiative and makes a positive impact in their school or community. Living in the county rather than the city is the gate, which removes most of the graduating class from the running.",
+    "metaDetail": "Rural county residents only, not the city.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 593,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Camrose Tour of Alberta Award",
+    "amount": "$300",
+    "category": "Sports",
+    "audience": "Camrose Composite students in the Fitness and Cross-Training Program",
+    "description": "One $300 award for outstanding commitment to the school's Fitness and Cross-Training Program, given for punctuality, excellent attendance and unwavering support of others. There is no athletic performance standard anywhere in it: showing up and backing other people is the whole criteria.",
+    "metaDetail": "Attendance and supporting others, not performance.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 594,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Chamber of Commerce Jesse Burgess Award",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Camrose Composite grade 12 students who win no other school award",
+    "description": "One award from the Camrose Chamber of Commerce with a condition that inverts how awards normally work: the recipient must NOT receive any other ECCHS award that year, honours excepted. Honours standing is explicitly not necessary, and the recipient is not even required to continue their schooling. Financial need is considered, and applicants are asked to explain how they intend to finance their education and any extenuating circumstances.",
+    "metaDetail": "You are disqualified by winning anything else.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 595,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Charlie and Helen McCleary Endowment Fund",
+    "amount": "$400",
+    "category": "Arts",
+    "audience": "Camrose Composite graduates in music, drama or English literature",
+    "description": "Two awards of $400 for graduates who made an outstanding contribution to music, drama or English literature. The route in has two branches: you may intend to study music or drama, or you may intend to study teacher education or English literature. That second branch quietly makes this an education award as well as an arts one.",
+    "metaDetail": "Teacher education counts as much as drama here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 596,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Don Bailey Memorial Jazz Award",
+    "amount": "$100",
+    "category": "Arts",
+    "audience": "Camrose Composite senior stage band members",
+    "description": "One $100 award to the most deserving student of the senior stage band, decided by the music staff rather than by anything you submit. It is the smallest award in the Camrose Composite handbook and the field is a single ensemble, so the odds on it are better than on anything else in the book.",
+    "metaDetail": "The smallest award in the handbook, and the field is one ensemble.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 597,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Erik and Gunvor Mygind Scholarship",
+    "amount": "$3,225",
+    "category": "Community",
+    "audience": "Camrose Composite graduates with leadership and citizenship records",
+    "description": "A fund of $3,225 divided among two to five recipients, so between roughly $645 and $1,600 each depending on the year. The criteria are simply attending a post-secondary institution and having demonstrated good leadership and citizenship in the school and community.",
+    "metaDetail": "$3,225 split between two and five students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 598,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Errol Moen Memorial Award",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "Camrose Composite graduates with strong marks and community service",
+    "description": "One $500 award for outstanding academic achievement together with contribution to school and community. It is the straightforward combination the whole handbook keeps circling, and it competes directly with several others on the same application form.",
+    "metaDetail": "Marks plus service, the handbook's standard pair.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 599,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Garett Radchenko MacKay Scholarship",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "Camrose Composite graduates interested in business or accounting",
+    "description": "One $1,000 award for a student with strong academic achievement, meaningful involvement in the school and the wider community, and a demonstrated interest in business or accounting. Interest is the word used rather than enrolment, so a student who has not yet committed to a commerce program can still make the case.",
+    "metaDetail": "Interest in business is enough; enrolment is not required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 600,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Glen and Audrey Lett Scholarship",
+    "amount": "$1,000",
+    "category": "Arts",
+    "audience": "Camrose Composite drama and music students going to Augustana or the U of A",
+    "description": "One $1,000 award for a graduate who took part in drama, choral music or vocal music, for credit or outside class, and who is now attending Augustana or the University of Alberta in any field of study. The art gets you in and the institution keeps you in, but your program can be anything, which is the mirror image of how most arts awards are written.",
+    "metaDetail": "Arts record, any program, but only at the U of A.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 601,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Hershita Sainbhee Memorial Scholarship",
+    "amount": "$1,500",
+    "category": "STEM",
+    "audience": "Camrose Composite honour students entering any medical field",
+    "description": "One $1,500 award for an honour student going into any medical field who contributes to life at the school with acts of kindness, warmth and compassion. It is the second largest award in the handbook and the only one that names a medical field.",
+    "metaDetail": "The only medical award in the handbook.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 602,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Marty and Pam Proctor Awards",
+    "amount": "$10,000",
+    "category": "General",
+    "audience": "Camrose Composite graduates who are not receiving other awards",
+    "description": "A fund of $10,000 divided among ten to twenty students, so roughly $500 to $1,000 each, and by far the widest pool at the school. Consideration goes to students who are not receiving other awards, which makes it the natural companion to the Chamber of Commerce award. It looks for a strong work ethic in reaching the grades needed for entry to any post-secondary program, trade schools included, with preference for engineering, especially petroleum engineering at the University of Alberta, and for music, plus extra weight for applicants who would benefit from help overcoming personal circumstances.",
+    "metaDetail": "Ten to twenty awards, for students winning nothing else.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 603,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Mellissa Austrom Endowment Fund",
+    "amount": "$900",
+    "category": "Community",
+    "audience": "Camrose Composite graduates with average marks entering education or children's services",
+    "description": "One to three awards of $900 for a student of average academic standing who has shown service and leadership and is going into education or children's services. Average standing is written into the criteria rather than implied, so a middling transcript is the intended profile, not a handicap.",
+    "metaDetail": "Average academic standing is the stated target.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 604,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Nathan Saby Athletics Scholarship",
+    "amount": "Varies",
+    "category": "Sports",
+    "audience": "Camrose Composite students pursuing athletics at a high level",
+    "description": "One award for a student pursuing athletics at a high level. The handbook gives no value and no further criteria, which makes student services the only source for both.",
+    "metaDetail": "One line of criteria and no published value.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 605,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Norman and Eloise Umbach Scholarship",
+    "amount": "$400",
+    "category": "Community",
+    "audience": "Camrose Composite graduates with average marks entering education or nursing",
+    "description": "One $400 award for a student of average academic standing with demonstrated service and leadership who is pursuing a career in education or nursing. It is the twin of the Austrom fund, differing only in swapping children's services for nursing, and a student who qualifies for one usually qualifies for both.",
+    "metaDetail": "The nursing twin of the Austrom award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 606,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Reynolds Academic Scholarship",
+    "amount": "Varies",
+    "category": "Academic",
+    "audience": "Camrose Composite graduates with honours standing",
+    "description": "One award for a full-time graduating student with honours standing, extracurricular involvement in school and community, and a post-secondary place in the fall. The handbook lists no value. It is paired with a vocational award of the same name that asks for the opposite profile.",
+    "metaDetail": "Paired with a vocational award of the same name.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 607,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Reynolds Vocational Scholarship",
+    "amount": "Varies",
+    "category": "Trades",
+    "audience": "Camrose Composite graduates entering trades, technical school or an apprenticeship",
+    "description": "One award for a graduate with a positive attitude and a strong work ethic entering the trades, technical school or an apprenticeship. The criteria say twice over that the recipient is not necessarily strong academically and not necessarily an honour student. Selection is by recommendation of the CTS department, so the shop teachers decide this one.",
+    "metaDetail": "The CTS department picks the winner.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 608,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Rhine Family Award for Cosmetology",
+    "amount": "$600",
+    "category": "Trades",
+    "audience": "Camrose Composite cosmetology students who improved the most",
+    "description": "One $600 award for the student who has shown the greatest improvement in cosmetology, judged on effort and conduct, and the criteria state plainly that the recipient does not have to have the highest mark. Preference goes to a student continuing in cosmetology. Improvement awards are rare, and this is the only one in the handbook.",
+    "metaDetail": "Greatest improvement, explicitly not the highest mark.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 609,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Ross Huebner Memorial Scholarship",
+    "amount": "$600",
+    "category": "Academic",
+    "audience": "Camrose Composite honours students accepted to post-secondary",
+    "description": "A fund of $1,200 split between two full-time Camrose Composite students, so $600 each, requiring honours standing, acceptance to a post-secondary program and good citizenship in school and community.",
+    "metaDetail": "$1,200 split two ways.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 610,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Sandy and Carl Krenning Culinary Fund",
+    "amount": "$700",
+    "category": "Trades",
+    "audience": "Camrose Composite graduates entering hospitality or culinary arts",
+    "description": "One $700 award for a student entering a hospitality or culinary arts program. The criteria are one sentence long with no mark, no service record and no essay attached, so if this is your plan the award is close to uncontested.",
+    "metaDetail": "One sentence of criteria, one narrow field.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 611,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Sharon Saunders Memorial Award",
+    "amount": "$300",
+    "category": "Community",
+    "audience": "Camrose Composite students named by the teaching staff",
+    "description": "One $300 award to the student who, in the opinion of the teaching staff, has exhibited outstanding personal qualities. There is nothing to apply for beyond the general form and nothing to demonstrate on paper, since the decision is made by the people who have taught you for three years.",
+    "metaDetail": "Decided entirely by the teaching staff.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 612,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Simonson Family Education Fund",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Camrose Composite graduates entering teaching, ideally at Augustana",
+    "description": "One $1,000 award for a student intending to teach, with preference for someone planning to teach children with high needs and for someone starting at the University of Alberta Augustana Campus. Two preferences stack here, and a student who satisfies both is in a very small field.",
+    "metaDetail": "Two preferences stack: high needs, and Augustana.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 613,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Stan and Gladys Hambly Scholarship",
+    "amount": "$1,500",
+    "category": "Community",
+    "audience": "Camrose Composite graduates entering teaching",
+    "description": "One $1,500 award for a good all-round student intending to pursue a career in teaching. It is the largest of the five teaching awards in this handbook, and it attaches no institution and no specialisation, which the other four all do.",
+    "metaDetail": "The largest teaching award, with no strings.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 614,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Every award in the handbook is decided from a single ECCHS Awards Application, and the school says outright that a student may submit only one. The cutoff is a dated one rather than a repeating day, and the 2026 round closed on Monday, June 22, so ask student services for the current date.",
+    "applyViaGuidance": true,
+    "title": "Steven Phillips Sportsmanship Memorial Award",
+    "amount": "Varies",
+    "category": "Sports",
+    "audience": "Camrose Composite students showing sportsmanship across several sports",
+    "description": "One award for a student who displays a consistently high level of sportsmanship and leadership across a number of school and community sports and is going on to post-secondary. Breadth is what it asks for, several sports rather than excellence in one, which is the opposite of most athletic awards.",
+    "metaDetail": "Rewards breadth across sports, not excellence in one.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 615,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "title": "Robyn Gray Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-02",
+    "category": "Community",
+    "audience": "Students who spent a year at a Camrose city or county high school",
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "notes": "Run by the Rotary Club of Camrose Daybreak, and it closes on the first Friday in April, months before the school awards close. A transcript and a reference letter go in with the form.",
+    "description": "One $1,000 award from the Rotary Club of Camrose Daybreak, open to new and continuing post-secondary students who attended at least one year of high school at a Camrose city or county school. It asks for leadership qualities in line with the beliefs of Rotary International, a 75% minimum or 2.7 GPA, a transcript and a reference letter. The renewability is the unusual part: you may win it again in each of four years of study, so it is worth up to $4,000 to someone who keeps applying.",
+    "metaDetail": "Renewable for up to four years, so worth up to $4,000.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 616,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "title": "Battle River Power Coop Scholarship",
+    "amount": "$1,500",
+    "category": "General",
+    "audience": "Dependents of Battle River Power Coop members entering first year",
+    "url": "https://www.brpower.coop/",
+    "applyViaGuidance": true,
+    "notes": "The co-op publishes a dated cutoff rather than a repeating day, and the 2026 round closed on Friday, February 27, which is far earlier than any school award. The tuition receipt is due separately by August 31.",
+    "description": "Five awards of $1,500 for dependents of Battle River Power Coop members entering their first year of post-secondary, chosen by a board committee. Graduates of the previous or current calendar year both qualify. The package is a transcript, proof of registration, an acceptance letter, a reference letter and a letter on need and program, with a tuition receipt to follow by the end of August.",
+    "metaDetail": "Five at $1,500, and it closes in February.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 617,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "title": "Camrose Legion Branch #57 Ladies Auxiliary Bursaries",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Graduating Camrose city and county students at Camrose Composite",
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "applyViaGuidance": true,
+    "notes": "The registration package is not online. It is picked up in person at the Royal Canadian Legion, 6002 50 Avenue in Camrose, and the school posts no amount or date for it.",
+    "description": "Bursaries from the Ladies Auxiliary of Royal Canadian Legion Branch #57 for graduating county and city students of Camrose Composite. The school lists them without a value or a deadline, and the form exists only on paper at the Legion hall, which is the reason most students never see this one.",
+    "metaDetail": "The form exists only on paper, at the Legion hall.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 618,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "title": "Camrose Catholic Women's League Bursary",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Camrose Composite graduating students",
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "applyViaGuidance": true,
+    "notes": "The school links a scanned form and publishes no amount and no date, so student services is the only place to get either.",
+    "description": "A bursary from the Camrose Catholic Women's League for graduating students, listed by the school with a downloadable form but no published value and no deadline. Worth asking about early, since the awards office is the only source of the terms.",
+    "metaDetail": "Listed by the school with no value and no date.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 619,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "title": "W. F. MacDonald Scholarship",
+    "amount": "Varies",
+    "category": "General",
+    "audience": "June graduates who formerly lived in Bashaw, Bawlf, New Norway or Daysland",
+    "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
+    "applyViaGuidance": true,
+    "notes": "Mr. Kendall at Camrose Composite holds this one; there is no online form. The residency condition is historic rather than current, so a family that has since moved into Camrose still qualifies.",
+    "description": "Two awards for students who graduate in June and start a post-secondary program that same fall, one given for academic work and one for trades or technical study. What makes it reachable is the residency rule: it is for former residents of Bashaw, Bawlf, New Norway or Daysland, four small communities around Camrose, which is a much smaller field than the school as a whole.",
+    "metaDetail": "Two awards, one academic and one trades.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 620,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "title": "Linton and Debbie Falk Scholarship",
+    "amount": "Varies",
+    "category": "General",
+    "audience": "Battle River School Division graduates entering agriculture or a supporting field",
+    "url": "https://cchs.brsd.ab.ca/download/418479",
+    "applyViaGuidance": true,
+    "notes": "Administered at the division level rather than by any one school, and the value is set each year by the Battle River Community Foundation from the return on the fund, so no fixed amount is published.",
+    "description": "For a Battle River School Division graduate entering full-time study at an institution in Alberta, British Columbia, Manitoba or Saskatchewan in an agricultural program, or in a program which supports agriculture. The criteria say that second phrase is meant to be read broadly and name veterinary medicine, research, climate, commerce and economics as examples, inviting applicants to present their case. BRACE and the division home school count as division schools.",
+    "metaDetail": "\"Supports agriculture\" is deliberately broad here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 621,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Ryan Henderson Memorial Entrance Award",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "First-year Augustana students, preferably Camrose Composite graduates",
+    "description": "One $1,000 entrance award for a student in the first year of an undergraduate degree at Augustana, with preference given to a student graduating from Camrose Composite High School. It is the only award on the Augustana list that names a single high school, which makes it the closest thing Camrose has to a guaranteed local entrance scholarship.",
+    "metaDetail": "The only Augustana award naming one high school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 622,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Alberta Blue Cross Entrance Scholarship",
+    "amount": "$1,500",
+    "category": "Academic",
+    "audience": "Alberta residents entering first year at Augustana",
+    "description": "One $1,500 entrance scholarship for an Alberta resident starting an undergraduate degree at Augustana, on academic standing and demonstrated financial need. Full-time registration is required, and there is a ceiling that catches people out: recipients may not hold awards totalling more than $3,500.",
+    "metaDetail": "A $3,500 ceiling on your total awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 623,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Camrose County Award",
+    "amount": "$1,500",
+    "category": "Community",
+    "audience": "Rural Camrose County residents at Augustana",
+    "description": "Two awards of $1,500 for rural Camrose County residents in an undergraduate degree at Augustana, judged on demonstrated leadership and academic standing. Living rurally in the county is the gate rather than a preference, so the eligible group is small and mostly knows who it is.",
+    "metaDetail": "Rural county residency is required, not preferred.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 624,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Garnett Radchenko MacKay LLP Award",
+    "amount": "$1,250",
+    "category": "Sports",
+    "audience": "Camrose-area grade 12 graduates on an Augustana Vikings team",
+    "description": "One $1,250 award for a member of any Vikings athletics team who completed grade 12 in Camrose or in the counties of Beaver, Camrose or Flagstaff. Two conditions have to line up, a local high school and a varsity roster spot, but any Vikings team counts rather than one sport.",
+    "metaDetail": "Local grade 12 plus any Vikings team.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 625,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Burgar Funeral Home Scholarship",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "Camrose-area students at Augustana with strong marks",
+    "description": "One $1,000 award for a student from the Camrose area in an undergraduate degree at Augustana, on academic achievement and financial need. Both halves are weighed, so a strong transcript alone does not settle it.",
+    "metaDetail": "Camrose-area students, marks and need together.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 626,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Rotary Club of Camrose Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Camrose-area or international students at Augustana",
+    "description": "One $1,000 award from the Rotary Club of Camrose through the Battle River Community Foundation, for a student from the Camrose area or an international student, selected on leadership, academic achievement and financial need. It is separate from the Robyn Gray scholarship, which the Daybreak club runs, so a Camrose student can hold both.",
+    "metaDetail": "A separate Rotary award from the Robyn Gray one.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 627,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Kinsmen Club of Camrose Bursary",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Augustana students, preferably from the city or county of Camrose",
+    "description": "One $1,000 bursary decided on demonstrated financial need alone, with preference given to a student from the City of Camrose or Camrose County. No mark threshold beyond satisfactory standing and no essay, which makes it one of the shortest applications on the Augustana list.",
+    "metaDetail": "Financial need alone, with a Camrose preference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 628,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Lions Club of Camrose Len Palmer Memorial Award",
+    "amount": "$750",
+    "category": "Community",
+    "audience": "Augustana students with a record of service to school and community",
+    "description": "One $750 award from the Lions Club of Camrose through the Battle River Community Foundation, selected on demonstrated service to school and community alongside academic standing. Service is named first in the criteria, which is where the weight sits.",
+    "metaDetail": "Service to the community is weighed first.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 629,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Drs. Alan and Suna Smith Memorial Scholarship in Science",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Augustana science students, preferably from Camrose city or county",
+    "description": "One $1,000 award for a student with superior academic achievement in any year of a Bachelor of Science at Augustana, with preference given to a student from the City of Camrose or Camrose County. Selection is on academic standing alone, so this is the science award to chase if your marks are your strongest card.",
+    "metaDetail": "Marks alone decide it, with a Camrose preference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 630,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Camrose and District Fish and Game Association Scholarship",
+    "amount": "$1,500",
+    "category": "STEM",
+    "audience": "Augustana biology and environmental studies students from the Camrose area",
+    "description": "One $1,500 award for a student with superior academic achievement majoring or minoring in biology or environmental studies at Augustana, with preference given to a student from the Camrose area. It is the largest of the Camrose-linked Augustana science awards.",
+    "metaDetail": "The largest Camrose-linked science award at Augustana.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 631,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Richardson Pioneer Award",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Augustana Bachelor of Science students, preferably from the Camrose area",
+    "description": "One $1,000 award for a Bachelor of Science student at Augustana, decided on academic standing, with preference given to a student from the Camrose area. Any year of the degree qualifies, first year included.",
+    "metaDetail": "Open from first year, on marks alone.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 632,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Andreassen Borth Sports Award",
+    "amount": "$1,000",
+    "category": "Sports",
+    "audience": "Augustana athletes, preferably Vikings hockey players from the Camrose area",
+    "description": "One $1,000 award for a member of an Augustana athletic team, decided on academic standing, with preference for a member of the Vikings hockey team from the Camrose or Battle River area. Any Augustana team member may hold it, so the preference narrows it without closing it.",
+    "metaDetail": "Any Augustana team, with a local hockey preference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 633,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Feth Family Award",
+    "amount": "$1,000",
+    "category": "Sports",
+    "audience": "Vikings hockey players entering first year at Augustana",
+    "description": "One $1,000 award for a Vikings hockey team member entering the first year of an undergraduate degree at Augustana, decided on academic standing. Both conditions are first-year ones, which makes it one of the few Augustana athletic awards a graduating high school student can win immediately.",
+    "metaDetail": "An athletic award you can win in first year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 634,
+    "region": "Camrose",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
+    "notes": "Augustana awards are administered by the campus rather than applied for at school, and the annual awards list publishes values and criteria but no dates. Ask the Augustana student awards office once you have accepted an offer.",
+    "applyViaGuidance": true,
+    "title": "Dr. George and Mrs. Elaine Nye Augustana Bursary",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Augustana students, preferably first-years from rural Alberta",
+    "description": "One $1,000 bursary on demonstrated financial need, with preference for a first year student from rural Alberta who was involved in high school extracurricular activities. It is the one award on the Augustana list that looks back at what you did in high school rather than at what you are doing now.",
+    "metaDetail": "Your high school extracurriculars still count here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 635,
+    "region": "Alberta",
+    "lastVerified": "2026-09",
+    "active": true,
+    "title": "Federation of Alberta Gas Co-ops Achievement Award",
+    "amount": "$1,000",
+    "deadline": "2026-10-01",
+    "alsoOpenTo": [
+      "Camrose"
+    ],
+    "category": "Trades",
+    "audience": "Children of rural Alberta gas co-op members entering post-secondary",
+    "url": "https://www.fedgas.com/community-programs?mid=947",
+    "notes": "The date is not a submission deadline in the usual sense: the form has to be signed by your local gas co-op, band, town, village or county office no later than October 1 following graduation, so the office you need is a third party with its own hours.",
+    "description": "Four awards of $1,000 handed out at the FedGas annual general meeting to children of co-operative members of gas utilities in the federation, and to children of landowners serviced by member towns, villages, counties or First Nations. The membership must have been in place a full year, and at least 75% in core subjects is required rather than preferred. Preference goes to fields that apply to the natural gas industry, such as gas utility operator, gasfitter, pipefitter, power engineering and heavy equipment technician, or to rural-based programs.",
+    "metaDetail": "75% in core subjects is a hard floor, not a preference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
       "extracurriculars": []
     }
   }

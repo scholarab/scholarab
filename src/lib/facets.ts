@@ -226,6 +226,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Thirty-two of these share one form and one deadline, May 1 in the school Google Classroom, so the work of applying for all of them at once is barely more than applying for one.',
   },
   {
+    slug: 'camrose',
+    kind: 'region',
+    value: 'Camrose',
+    label: 'Camrose',
+    h1: 'Camrose scholarships',
+    title: 'Camrose Scholarships',
+    description:
+      'Scholarships for Camrose and Camrose County students: the Camrose Composite handbook, service club money and the entrance awards at Augustana.',
+    intro:
+      'Thirty of these come out of one handbook and one application form, and the school will let you submit that form only once, so which awards you tick matters more here than anywhere else.',
+  },
+  {
     slug: 'chestermere',
     kind: 'region',
     value: 'Chestermere',
