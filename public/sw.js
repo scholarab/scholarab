@@ -1,8 +1,27 @@
-// v8: the runtime cache is capped. The bump matters; activate() drops every
+// v9: the runtime cache is capped. The bump matters; activate() drops every
 // cache whose key isn't this one, which is what evicts both the stale /app
-// page and any unbounded cache an older worker already filled.
-const CACHE_NAME = 'scholarab-v8';
-const PAGES_TO_CACHE = ['/', '/scholarships', '/programs', '/saved', '/about', '/offline.html'];
+// page and any unbounded cache an older worker already filled. v9 also
+// evicts v8's seeded entries, which were all keyed at the wrong URLs.
+const CACHE_NAME = 'scholarab-v9';
+
+// These MUST be the URLs production actually serves, not the shorter forms.
+// Cloudflare Pages 308s a bare path to its trailing-slash form and strips
+// `.html`, and v8 seeded the pre-redirect spellings, which broke offline mode
+// two separate ways (measured against the live worker on 2026-09-03):
+//
+//   1. Every seeded page was stored under its bare key, e.g.
+//      https://www.scholarab.ca/scholarships. Every internal link and every
+//      canonical points at /scholarships/, so a real offline navigation asked
+//      for a key that was never in the cache and missed all four pages.
+//   2. cache.add('/offline.html') followed the 308 and stored a response with
+//      redirected=true. A navigation request has redirect mode 'manual', so
+//      respondWith() rejects a redirected response with a network error: the
+//      fallback below could not render even when it was found.
+//
+// The net effect was that offline mode did nothing at all. If you add a path
+// here, curl it first and seed whatever URL comes back 200.
+const PAGES_TO_CACHE = ['/', '/scholarships/', '/programs/', '/saved/', '/about/', '/offline'];
+
 
 // Every successful same-origin GET used to be cached and nothing ever removed
 // one, so a reader working through the directory accumulated a cache entry per
@@ -72,7 +91,7 @@ self.addEventListener('fetch', (event) => {
       .catch(() =>
         caches.match(event.request).then((cached) => {
           if (cached) return cached;
-          if (isNavigation) return caches.match('/offline.html');
+          if (isNavigation) return caches.match('/offline');
         })
       )
   );
