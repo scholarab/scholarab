@@ -1,5 +1,6 @@
 import { defineMiddleware } from 'astro/middleware'
 import { verifySessionCookie, getSessionToken } from './lib/adminAuth'
+import { isCrossSiteWrite } from './lib/same-site'
 
 /**
  * The security headers public/_headers sets, repeated here for the routes it
@@ -43,6 +44,13 @@ function harden(response: Response): Response {
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const path = context.url.pathname
+
+  // Stands in for Astro's security.checkOrigin, which is off; see same-site.ts
+  // for why. This has to run before anything else writes.
+  if (isCrossSiteWrite(context.request, context.url)) {
+    return harden(new Response('Cross-site form submissions are forbidden', { status: 403 }))
+  }
+
   if (path !== '/admin' && !path.startsWith('/admin/')) return harden(await next())
   if (path === '/admin/login' || path === '/admin/api/login') return harden(await next())
 

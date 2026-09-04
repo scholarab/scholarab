@@ -5,6 +5,12 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://www.scholarab.ca',
   output: 'static',
+  // Astro's own origin check refuses any unsafe request with no Origin header,
+  // and this site's Referrer-Policy: no-referrer stops Firefox from sending
+  // one on a form POST, which broke /api/confirm for every Firefox user. The
+  // equivalent check lives in src/lib/same-site.ts and leads with
+  // Sec-Fetch-Site instead. Do not switch this back on without reading it.
+  security: { checkOrigin: false },
   adapter: cloudflare({ imageService: 'compile' }),
   integrations: [react()],
   env: {
