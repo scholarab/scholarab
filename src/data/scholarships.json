@@ -4851,7 +4851,10 @@
       "extracurriculars": [
         "arts"
       ]
-    }
+    },
+    "alsoOpenTo": [
+      "Lacombe"
+    ]
   },
   {
     "id": 166,
@@ -4892,7 +4895,10 @@
       "extracurriculars": [
         "music"
       ]
-    }
+    },
+    "alsoOpenTo": [
+      "Lacombe"
+    ]
   },
   {
     "id": 167,
@@ -11315,7 +11321,10 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Lacombe"
+    ]
   },
   {
     "id": 329,
@@ -11351,7 +11360,10 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Lacombe"
+    ]
   },
   {
     "id": 330,
@@ -11465,7 +11477,10 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Lacombe"
+    ]
   },
   {
     "id": 333,
@@ -11628,17 +11643,17 @@
   {
     "id": 337,
     "title": "Brady van der Heide Citizenship Award",
-    "amount": "Varies",
+    "amount": "$1,000",
     "deadline": "2027-05-31",
     "openDate": null,
-    "audience": "Students at Ecole Secondaire Lacombe Composite High School",
-    "url": "https://cfcab.ca/brady-van-der-heide-scholarship/",
+    "audience": "Graduating students at Lacombe Composite",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
     "category": "Community",
-    "region": "Red Deer",
-    "active": false,
-    "lastVerified": "2026-08",
-    "notes": "The provider had not posted a date for the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward. Confirm before you plan around it. The award page does not state the amount.",
-    "description": "A citizenship award for students at Ecole Secondaire Lacombe Composite High School. It looks for leadership, positive relationships with others, consideration for people around you, contribution to the community through volunteering or fundraising, reliability, and responsibility, rather than for marks. The Community Foundation of Central Alberta releases the funds to a post-secondary institution on the recipient behalf.",
+    "region": "Lacombe",
+    "active": true,
+    "lastVerified": "2026-09",
+    "notes": "Lacombe Composite lists this at $1,000 with a May 31 deadline; the Community Foundation of Central Alberta runs the application through its own portal and does not post the amount. Two reference letters, a copy of your marks and proof of family income have to be uploaded.",
+    "description": "A $1,000 citizenship award for a graduating Lacombe Composite student who lived the way Brady van der Heide did: a positive role model in leadership and mentoring, good relationships in school and community, genuine consideration for other people, courtesy, dependability, altruism and sportsmanship. It is not decided on marks. The Community Foundation of Central Alberta releases the money to your post-secondary institution.",
     "eligibility": {
       "grades": [
         "12"
@@ -11663,7 +11678,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "Judged on eight named character traits, not marks."
   },
   {
     "id": 338,
@@ -23944,6 +23960,2265 @@
       "maxAge": null,
       "genderRequired": null,
       "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 658,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The LCHS awards program is for that year's graduates, and where no current graduate applies the school may consider graduates of earlier years. Grade 10 and 11 applicants need 35 credits earned at LCHS; grade 12 applicants need 20. The school also says payment is at the sponsor's discretion. The valedictorian must take the entire grade 12 year at LCHS with at least 25 credits and no courses through another school, and the calculation uses first semester finals and second semester midterms.",
+    "applyViaGuidance": true,
+    "title": "LCHS Alumni Foundation Award for Valedictorian",
+    "amount": "$250",
+    "category": "Academic",
+    "audience": "The Lacombe Composite valedictorian",
+    "description": "A plaque at graduation and $250 in cash the following fall, once the student has started post-secondary. The ranking is not a plain average: it counts English Language Arts 30-1 plus four of Social 30-1, Math 30-1, Math 31, Biology 30, Chemistry 30, Physics 30, Science 30, Études Sociales 30, French Language Arts 30-1 or a second language at the 30 level, taken in grade 11 or 12.",
+    "metaDetail": "The course list, not the average, decides this one.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 659,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The LCHS awards program is for that year's graduates, and where no current graduate applies the school may consider graduates of earlier years. Grade 10 and 11 applicants need 35 credits earned at LCHS; grade 12 applicants need 20. The school also says payment is at the sponsor's discretion.",
+    "applyViaGuidance": true,
+    "title": "LCHS Students' Union Salutatorian Award",
+    "amount": "$250",
+    "category": "Academic",
+    "audience": "The Lacombe Composite salutatorian",
+    "description": "A plaque at graduation and $250 in the fall for the student with the second highest average, ranked on exactly the same course list as the valedictorian award. The Students' Union pays for it.",
+    "metaDetail": "Second place on the valedictorian ranking still pays.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 660,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The form is available at the school and on the LCHS scholarships page.",
+    "applyViaGuidance": true,
+    "title": "Wolf Creek ATA Scholarship",
+    "amount": "$400",
+    "category": "Community",
+    "audience": "Wolf Creek graduates entering a two-year or longer program",
+    "description": "The Wolf Creek Local of the Alberta Teachers' Association gives one award of $400 to a student going on to a diploma or degree of two years or more at a recognised institution. Preference goes to someone entering a faculty of education, but the award is not restricted to future teachers.",
+    "metaDetail": "Preference for education, but open to any program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 661,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Submit the application with your marks and proof of enrolment to the LCHS Career Centre.",
+    "applyViaGuidance": true,
+    "title": "Blackfalds Smiles Scholarship",
+    "amount": "$500",
+    "category": "STEM",
+    "audience": "Grade 12 students at Lacombe Composite headed for healthcare",
+    "description": "A $500 award from a Blackfalds dental practice for a Lacombe Composite grade 12 student aiming at a career in healthcare. The sponsor picks on marks and community volunteering together, and says plainly that the point is the rising cost of training as a healthcare professional.",
+    "metaDetail": "A small business paying down the cost of healthcare training.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 662,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no application. The school's award committee reads the marks and hands this out at the ceremony, so the course you take in grade 11 or 12 is the whole of your entry.",
+    "applyViaGuidance": true,
+    "title": "Borouge International Award in Chemistry",
+    "amount": "$500",
+    "category": "STEM",
+    "audience": "The top Chemistry 30 students at Lacombe Composite",
+    "description": "Two awards of $500 from Borouge International, formerly Nova Chemicals, for the female and male students with the highest marks in Chemistry 30. There is nothing to fill in.",
+    "metaDetail": "Two awards, one mark, no form.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 663,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Nothing is filled in and nothing is submitted. The mark in a single grade 12 course is the entire basis, so the only way to position yourself for it is to take Biology 30 and do well.",
+    "applyViaGuidance": true,
+    "title": "Bower Dental Centre Scholarship",
+    "amount": "$100",
+    "category": "STEM",
+    "audience": "The top Biology 30 student at Lacombe Composite",
+    "description": "One hundred dollars for the graduating student with the highest mark in Biology 30. It is the smallest award on the Lacombe Composite list and the one a student is most likely to be handed without ever having heard of it, because the award committee reads the marks and announces it at the ceremony.",
+    "metaDetail": "The smallest award on the list, and the least work.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 664,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Applications go to the LCHS Career Centre.",
+    "applyViaGuidance": true,
+    "title": "Cando High School Spirit Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Lacombe Composite grade 12 students starting post-secondary in the fall",
+    "description": "A $1,000 award from Cando for a grade 12 student heading to post-secondary in the fall, chosen for leadership, determination and work ethic, an optimistic attitude, a taste for challenge and innovation, and ownership of their own work. Proof of enrolment is required before the cheque is written.",
+    "metaDetail": "Chosen on attitude and work ethic, not marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 665,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "By staff nomination rather than application. The school's advice is to talk to a staff member who knows you well; the Health and Wellness award is nominated by that department.",
+    "applyViaGuidance": true,
+    "title": "Cole Warawa Memorial Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Lacombe Composite graduates nominated by staff",
+    "description": "Three awards of $1,000. Two go to graduates, one male and one female, who showed heart and improvement in academics: students who struggled, worked hard, and asked for and accepted help. The third goes to a Health and Wellness graduate who showed the same thing in sport. Recipients must start post-secondary within twelve months.",
+    "metaDetail": "An award for improvement, not for standing.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-01"
+  },
+  {
+    "id": 666,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no application. The school's award committee reads the marks and hands this out at the ceremony, so the course you take in grade 11 or 12 is the whole of your entry.",
+    "applyViaGuidance": true,
+    "title": "D & M Concrete Scholarship in Construction Technology",
+    "amount": "$200",
+    "category": "Trades",
+    "audience": "The top Construction Technology 30 student at Lacombe Composite",
+    "description": "A $200 award for the highest achievement in Construction Technology 30, decided by the teacher, with ten credits preferred. Preference goes to a student carrying on into construction after graduation.",
+    "metaDetail": "Decided by the shop teacher, not by an average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 667,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no application. The school's award committee reads the marks and hands this out at the ceremony, so the course you take in grade 11 or 12 is the whole of your entry.",
+    "applyViaGuidance": true,
+    "title": "D & M Concrete Scholarship in Fabrication Studies",
+    "amount": "$200",
+    "category": "Trades",
+    "audience": "The top Fabrication Studies 30 student at Lacombe Composite",
+    "description": "A $200 award for the highest achievement in Fabrication Studies 30, decided by the teacher, with ten credits preferred. Preference goes to a student heading into welding.",
+    "metaDetail": "The welding half of the D & M pair of awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 668,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The form is linked from the LCHS scholarships page and goes to the Career Centre.",
+    "applyViaGuidance": true,
+    "title": "Dr. Dalton and Mrs. Kay Deedrick Performing Arts Scholarship",
+    "amount": "$1,500",
+    "category": "Arts",
+    "audience": "Lacombe Composite students going on in the performing arts",
+    "description": "One award of $1,500 for a Lacombe Composite student who takes part in the performing arts and is going on to study them after graduation. At $1,500 it is the largest arts award on the school's list.",
+    "metaDetail": "The largest arts award on the Lacombe Composite list.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-15"
+  },
+  {
+    "id": 669,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no open application. Ask your cosmetology teacher to nominate you.",
+    "applyViaGuidance": true,
+    "title": "Delmar College Scholarship",
+    "amount": "$1,000",
+    "category": "Trades",
+    "audience": "Lacombe Composite cosmetology students entering Delmar College",
+    "description": "Two awards of $1,000 towards tuition at Delmar College for grade 12 students with honours standing in cosmetology, hairstyling or esthetics. The sponsor also weighs attendance, attitude and aptitude for hair or professional esthetics.",
+    "metaDetail": "Tuition credit at one named college, not cash.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 670,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The school does not publish an amount for this one. The form is linked from the LCHS scholarships page and goes to the Career Centre.",
+    "applyViaGuidance": true,
+    "title": "Frank Freeman Educational Scholarship",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Former Blackfalds School students entering a faculty of education",
+    "description": "Given in memory of a former principal of Blackfalds School, this award is for a student who attended Blackfalds School and is enrolling in a faculty of education. Preference goes to applicants majoring in social studies, language arts or elementary education. The amount is not published.",
+    "metaDetail": "The one award that turns on which elementary school you attended.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 671,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The form is linked from the LCHS scholarships page.",
+    "applyViaGuidance": true,
+    "title": "Fred Millar Memorial Award",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Lacombe County residents connected to firefighting",
+    "description": "A $1,000 award in memory of Fred Millar, a fire chief with Lacombe County, for Lacombe County residents. There are three separate ways in: training for a career as a firefighter, volunteering or training with a volunteer fire department, or being the child or dependant of a Lacombe County firefighter who lives in Lacombe.",
+    "metaDetail": "Three separate routes in, only one of them a career plan.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 672,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no application. The school's award committee reads the marks and hands this out at the ceremony, so the course you take in grade 11 or 12 is the whole of your entry.",
+    "applyViaGuidance": true,
+    "title": "Gish Law Scholarship in English 30-1",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "The top English 30-1 student at Lacombe Composite",
+    "description": "Five hundred dollars from Corey L. Gish for the student with the highest mark in English 30-1 each year. If two students tie, the sponsor may weigh financial need and demonstrated passion for English in class, and the choice is expressly the sponsor's. The winner must start post-secondary within sixteen months.",
+    "metaDetail": "A tie is broken on need and classroom passion.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 673,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The form is linked from the LCHS scholarships page and goes to the Career Centre.",
+    "applyViaGuidance": true,
+    "title": "Helen Gordon Newman Memorial Scholarship",
+    "amount": "$1,500",
+    "category": "Academic",
+    "audience": "Lacombe Composite students entering the University of Alberta",
+    "description": "A $1,500 award for a Lacombe Composite student attending the University of Alberta or equivalent, with high academic standing across grades 10, 11 and 12 and extracurricular involvement at the school. It exists to reward the pursuit of knowledge as a lifelong goal.",
+    "metaDetail": "Three years of standing, not just the grade 12 year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 674,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Students entering a field of medicine are expressly not considered. Applications are in the Career Centre or linked from the LCHS scholarships page.",
+    "applyViaGuidance": true,
+    "title": "Henri Forgues Scholarship",
+    "amount": "$10,000",
+    "category": "STEM",
+    "audience": "Lacombe Composite graduates entering STEM at the U of A or U of C",
+    "description": "Either one award of $10,000 or two of $5,000, and by a wide margin the largest award a Lacombe Composite graduate can win. It is funded by two alumni in honour of Henri Forgues, principal of Lacombe High School from 1954 to 1974. Recipients must be entering science, technology, engineering or mathematics at the University of Alberta or the University of Calgary, and engineering is preferred.",
+    "metaDetail": "The biggest award here, and medicine is ruled out.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta",
+        "University of Calgary"
+      ],
+      "fields": [
+        "Engineering",
+        "Science",
+        "Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-05"
+  },
+  {
+    "id": 675,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The school describes the value as the interest on the endowment, about $400, so it moves year to year. Proof of driver training and a current abstract are required, and the LCHS scholarship committee decides.",
+    "applyViaGuidance": true,
+    "title": "Hugh C. McCullough Safe Driver Endowment",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Lacombe Composite graduates with a clean driving record",
+    "description": "The interest on an endowment, roughly $400, for a Lacombe Composite graduate who attended a Blackfalds Wolf Creek school for all or part of their schooling, has completed a recognised driver training program, holds a valid Class 5 licence and has a clean driver's abstract with no current demerits. It is named for a bus driver whose safety record was close to unmatched.",
+    "metaDetail": "A clean driver's abstract is the actual test.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 676,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no application. The school's award committee reads the marks and hands this out at the ceremony, so the course you take in grade 11 or 12 is the whole of your entry.",
+    "applyViaGuidance": true,
+    "title": "IODE Social Studies 30-1 Scholarships",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "The top two Social Studies 30-1 students at Lacombe Composite",
+    "description": "Two awards of $1,000 for the highest marks in Social Studies 30-1. Ties are broken first on the English mark, then on Math, then on the overall average. Recipients must be in their graduating year and attending a degree-granting institution, so a college or trades program does not qualify.",
+    "metaDetail": "Degree-granting only, which rules out college and trades.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 677,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no open application. Students who think they qualify are told to speak to a teacher about the nomination.",
+    "applyViaGuidance": true,
+    "title": "Jared White Memorial Scholarship",
+    "amount": "$1,000",
+    "category": "Arts",
+    "audience": "Lacombe Composite arts and trades students nominated by staff",
+    "description": "A $1,000 award in memory of Jared White, a 2018 Lacombe Composite graduate who went on to film school in Kelowna. Nominations come from an LCHS staff member in the arts or trades, weighed on grades, involvement in trades or arts, leadership in class, awareness of the community, and going the extra mile for other people.",
+    "metaDetail": "Arts or trades, and only by staff nomination.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 678,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Applications and supporting documents go to the Lacombe County office by 3:30pm, not to the school, and this is the earliest deadline in the Lacombe set.",
+    "applyViaGuidance": true,
+    "title": "Lacombe County Mutual Aid Doug Sproule Memorial Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Lacombe Composite graduates writing on emergency preparedness",
+    "description": "One $1,000 award a year to a Lacombe Composite graduate, decided by a committee of the Lacombe County Mutual Aid Organization. Applicants write an essay of 800 to 1,000 words on emergency preparedness and must be registered at a recognised Alberta institution in a program of at least one year. Preference goes to students studying something related to emergency services, or connected to a member of Lacombe County Emergency Services.",
+    "metaDetail": "The essay is the application, and it is 800 words.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-03-31"
+  },
+  {
+    "id": 679,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "A letter of acceptance from a post-secondary institution is required. The current application is linked from the LCHS scholarships page.",
+    "applyViaGuidance": true,
+    "title": "Lacombe & District Chamber of Commerce Annual Scholarship",
+    "amount": "$1,250",
+    "category": "Community",
+    "audience": "Lacombe and Lacombe County students tied to a Chamber member",
+    "description": "Two awards of $1,250 for grade 12 students at a school in the City of Lacombe or Lacombe County who live in Lacombe or the county. The condition most students miss is employment: you must be employed by, or the child of an employee of, a Chamber member in good standing. The Chamber also says it would like recipients to come back and serve the community afterwards.",
+    "metaDetail": "The employment link is what disqualifies most applicants.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-08"
+  },
+  {
+    "id": 680,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Applications are made through kincanada.ca and the window runs October 1 to February 1, which is far earlier than the rest of the Lacombe awards.",
+    "applyViaGuidance": true,
+    "title": "Lacombe Kinsmen Kin Canada Bursary",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Lacombe students entering full-time post-secondary training",
+    "description": "The Lacombe Kinsmen sponsor entries to the Kin Canada bursary, worth $500 locally and $1,000 nationally. Applicants are judged on school and community involvement, knowledge of Kin Canada and financial need, and must be registering full time in university, college, trade school or a technical institute.",
+    "metaDetail": "One form, judged locally first and then nationally.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2027-02-01"
+  },
+  {
+    "id": 681,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no application. The school's award committee reads the marks and hands this out at the ceremony, so the course you take in grade 11 or 12 is the whole of your entry.",
+    "applyViaGuidance": true,
+    "title": "Lacombe Kinsmen Subject Scholarships",
+    "amount": "$500",
+    "category": "Arts",
+    "audience": "Lacombe Composite students topping arts, CTS and phys ed courses",
+    "description": "A set of $500 awards from the Lacombe Kinsmen, one for each of Art 30, Drama 30, Instrumental Music 30 and Physical Education 30 on the highest mark, and one each for Design and Media Studies 30, Fashion Studies 30, Foods 30 and Mechanics 30 on highest achievement as judged by the teacher. Eight courses, eight chances, and nothing to fill in.",
+    "metaDetail": "Eight courses, $500 each, and no application.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 682,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Two reference letters and a Detailed Academic Report are required. There are two dates: April 29 direct to Lacombe Rotary, or April 27 if you hand it in at the LCHS Career Centre. The earlier one is used here so nobody misses it.",
+    "applyViaGuidance": true,
+    "title": "Lacombe Rotary District #5360 Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Graduates of any Lacombe high school",
+    "description": "One $1,000 award for a student graduating from a high school in Lacombe, weighed on leadership and motivation in school and community activities, academic achievement good enough for admission to the institution of their choice, and a need for financial help. Unlike most of the Lacombe awards this one is open to any Lacombe high school, not just Lacombe Composite.",
+    "metaDetail": "Open to any Lacombe high school, not just LCHS.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    },
+    "deadline": "2027-04-27"
+  },
+  {
+    "id": 683,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "If April 1 is not a school day, applications are accepted on the first school day after it.",
+    "applyViaGuidance": true,
+    "title": "Lotus Hope Momentum Scholarship",
+    "amount": "$750",
+    "category": "Community",
+    "audience": "Lacombe Composite students in grades 10 to 12 facing adversity",
+    "description": "A $750 award for a student who has faced adversity and kept going. It is one of only two awards on the Lacombe Composite list open to grade 10 and 11 students as well as graduates, so it can be applied for twice before the graduating year.",
+    "metaDetail": "Open in grade 10 and 11, not only the grad year.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-04-01"
+  },
+  {
+    "id": 684,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no application. The school's award committee reads the marks and hands this out at the ceremony, so the course you take in grade 11 or 12 is the whole of your entry.",
+    "applyViaGuidance": true,
+    "title": "Masonic Lodge Scholarships in English 30-2",
+    "amount": "$200",
+    "category": "Academic",
+    "audience": "The top English 30-2 students at Lacombe Composite",
+    "description": "Two hundred dollars for the graduating student with the highest mark in English 30-2 and $100 for the second highest. If two or more students tie for the top mark the second prize disappears and the full $300 is split between them. It is one of the few awards written for the dash-2 stream rather than the academic route.",
+    "metaDetail": "Written for the 30-2 stream, not the academic route.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 685,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "There is no open application. Ask your cosmetology teacher to nominate you.",
+    "applyViaGuidance": true,
+    "title": "MC College Excellence in Cosmetology Scholarship",
+    "amount": "$1,000",
+    "category": "Trades",
+    "audience": "Lacombe Composite cosmetology students entering MC College",
+    "description": "One thousand dollars towards tuition at MC College for a full-time grade 12 student with honours standing in cosmetology, hairstyling or esthetics, judged on ability and aptitude for the vocation, attendance, and attitude.",
+    "metaDetail": "Tuition credit at MC College, by teacher nomination.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 686,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Essay topics are posted at the Career Centre and on the LCHS scholarships page by April 1. Proper documentation of sources is required.",
+    "applyViaGuidance": true,
+    "title": "Moore Shilleto Social Studies Essay Award",
+    "amount": "$250",
+    "category": "Academic",
+    "audience": "Lacombe Composite students with a Social Studies 30 essay",
+    "description": "First prize of $250 and two honourable mentions of $50, judged on an essay of 800 to 1,000 words. The award honours a vision of Canada as a just society and the public services the province's pioneers built, and the school's own advice is to reuse an essay you already wrote for Social Studies 30 rather than start from nothing.",
+    "metaDetail": "You can enter an essay you already wrote for class.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 687,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Applications are in the Career Centre or linked from the LCHS scholarships page.",
+    "applyViaGuidance": true,
+    "title": "Remarkable Ram Scholarship",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Lacombe Composite students who made the school better",
+    "description": "Five hundred dollars for a Lacombe Composite student whose contributions made the school a better place. There is no subject, no average and no field of study attached to it.",
+    "metaDetail": "No subject, no average, just what you gave the school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 688,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
+    "notes": "Listed on both the Wolf Creek division page and the Lacombe Composite page. The application is linked from either.",
+    "applyViaGuidance": true,
+    "title": "Rental Housing Providers Award",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Students from Alix, Bentley or Lacombe",
+    "description": "A $1,000 award for students from Alix, Bentley or Lacombe, decided on what you can show you know about renting a place to live. Proof of enrolment in a trade school, college or university program in the fall after graduation is required before the money is paid.",
+    "metaDetail": "The subject is renting, and that is the whole test.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-30"
+  },
+  {
+    "id": 689,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "A current member relative must be in good standing. The cheque follows proof of enrolment, and the student has sixteen months from graduation to start.",
+    "applyViaGuidance": true,
+    "title": "Royal Canadian Legion (Lacombe) Award",
+    "amount": "$2,000",
+    "category": "Community",
+    "audience": "Lacombe Composite students descended from a Legion member",
+    "description": "Two awards of $2,000, one to a male and one to a female student, for a Lacombe Composite graduate who is the child, grandchild or great-grandchild of a past or current member of the branch with at least ten continuous years of Legion service. Evidence of the relative's service and of your relationship to them has to go to the committee.",
+    "metaDetail": "Ten years of a relative's Legion service is the test.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-01"
+  },
+  {
+    "id": 690,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Evidence of the relationship is required, such as a copy of the relative's service record or discharge certificate. The information supporting your financial need is shared with both the LCHS scholarship committee and the Legion Poppy Trust Fund, who decide jointly.",
+    "applyViaGuidance": true,
+    "title": "Royal Canadian Legion Bursary (Lacombe)",
+    "amount": "$2,500",
+    "category": "Community",
+    "audience": "Lacombe Composite students descended from service personnel, with financial need",
+    "description": "Two bursaries of $2,500, the largest community awards on the Lacombe Composite list. They are for graduates who are the child, grandchild or great-grandchild of Canadian ex-service personnel, of Merchant Navy personnel awarded campaign stars or decorations, of the RCMP, or of ex-service personnel of Commonwealth or Allied countries. Unlike the Legion's other award, this one is decided on financial need.",
+    "metaDetail": "The largest community award here, and need-based.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-01"
+  },
+  {
+    "id": 691,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The mailing address requirement is checked, and the form is linked from the LCHS scholarships page.",
+    "applyViaGuidance": true,
+    "title": "Sargent Community Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Lacombe Composite students from Alix, Clive, Haynes, Mirror or Tees",
+    "description": "Two awards of $1,000, one for a student going into the trades and one for a student going into an agriculture-related program. Recipients must be Lacombe Composite graduates with a mailing address in Alix, Clive, Haynes, Mirror or Tees, so this one is for the hamlets around Lacombe rather than the city.",
+    "metaDetail": "For the hamlets around Lacombe, not the city itself.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-15"
+  },
+  {
+    "id": 692,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "The form is obtained and submitted at the Career Centre, and this is the latest deadline in the Lacombe set.",
+    "applyViaGuidance": true,
+    "title": "TD Canada Trust LCHS Agriculture Scholarship",
+    "amount": "$200",
+    "category": "Community",
+    "audience": "Lacombe Composite graduates interested in agriculture",
+    "description": "Two hundred dollars for a Lacombe Composite graduate who has shown an interest in the agriculture industry, with preference for a student going on to an agriculture-related program. The interest is enough; the program is only a preference.",
+    "metaDetail": "Interest in agriculture is enough, the program is optional.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-15"
+  },
+  {
+    "id": 693,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Nominations are accepted as well as applications, so a teacher can put your name forward. The recipient must continue their education within fifteen months of graduating.",
+    "applyViaGuidance": true,
+    "title": "Knights of Columbus Triple A Scholarship",
+    "amount": "$1,500",
+    "category": "Community",
+    "audience": "Lacombe Composite students who succeeded despite adversity",
+    "description": "Achievement Against Adversity: $1,500 from the Lacombe branch of the Knights of Columbus for a student who did well in school while facing something hard. The adversity is defined broadly, covering illness or injury, learning disabilities, family challenges, economic hardship and personal problems. Apprenticeship or any other learning counts, not only college and university.",
+    "metaDetail": "Apprenticeship counts, and adversity is defined broadly.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-10"
+  },
+  {
+    "id": 694,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Nominations come from staff, so the school's advice is to raise it with a staff member who knows you well. The student must have attended LCHS for at least two years.",
+    "applyViaGuidance": true,
+    "title": "Tye Friesen Memorial Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Lacombe Composite graduates nominated by staff",
+    "description": "A $1,000 award from the Lacombe Kinsmen for a graduating student who took part in scholastic activities such as sports, clubs or student council, held a solid academic standing and contributed to a school or club activity in a leadership or organising role. The criteria say directly that the honour roll and the principal's list are not required.",
+    "metaDetail": "The criteria say the honour roll is not required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    },
+    "deadline": "2027-05-01"
+  },
+  {
+    "id": 695,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/ecole-secondaire-lacombe-composite-high-school-scholarships",
+    "notes": "Students are nominated by staff and have three years to claim the funds. The school's instruction is to talk to the Career Centre before April 1 if you think you qualify.",
+    "applyViaGuidance": true,
+    "title": "Western Inspirational Bursary Award",
+    "amount": "$750",
+    "category": "Community",
+    "audience": "Lacombe Composite students nominated for perseverance",
+    "description": "A $750 character award, and the sponsor says plainly it is not for high academic achievement. It recognises students who have come through mental health struggles, physical disability, discrimination, financial hardship or family problems and still graduated, whether they go on to post-secondary, trades, online learning or the military. A student prevented from studying further by physical or medical limits can be nominated for a $750 cash award instead, to spend on equipment, training or supplies.",
+    "metaDetail": "Explicitly not an academic award, and pays out either way.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-04-01"
+  },
+  {
+    "id": 696,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
+    "notes": "Six are available at Lacombe. The award is paid once the student enrols at a post-secondary institution within twelve months. Deadlines are set by each school's scholarship committee; the Lacombe page gives June 15.",
+    "applyViaGuidance": true,
+    "title": "Wolf Creek Public Schools Scholarship",
+    "amount": "$300",
+    "category": "Community",
+    "audience": "Wolf Creek students not eligible for the Rutherford",
+    "description": "Six of these $300 awards are set aside for Lacombe alone, out of twenty across the division, given for contribution to school affairs, personal attributes and community involvement. The eligibility is unusual and worth reading: students who qualify for the Rutherford Scholarship in grade 12 cannot apply, which makes this one deliberately aimed at students whose marks fall below the Rutherford line.",
+    "metaDetail": "Rutherford-eligible students are barred from this one.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2027-06-15"
+  },
+  {
+    "id": 697,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
+    "notes": "One is available at Lacombe. Paid on proof of enrolment within twelve months. The Lacombe page gives June 15.",
+    "applyViaGuidance": true,
+    "title": "Wolf Creek Public Schools CTS Scholarship",
+    "amount": "$300",
+    "category": "Trades",
+    "audience": "Wolf Creek students with a heavy CTS, RAP or Green Certificate load",
+    "description": "One $300 award at Lacombe for a student taking a significant part of their program in Career and Technology Studies, the Registered Apprenticeship Program or the Green Certificate, who is going on to a related program. Apprenticeship counts as post-secondary here.",
+    "metaDetail": "Apprenticeship counts as post-secondary for this one.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-15"
+  },
+  {
+    "id": 698,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
+    "notes": "Applications are available at the LCHS Career Centre and linked from the Wolf Creek scholarships page.",
+    "applyViaGuidance": true,
+    "title": "Ellis Nature Centre Environment Scholarship",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Wolf Creek students going on in conservation or natural history",
+    "description": "A $1,000 award to encourage further study in conservation, the environment and natural history. The recipient must start post-secondary in the fall of the year they apply, so it cannot be deferred.",
+    "metaDetail": "No deferral: you start in the fall or you lose it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Environment",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 699,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
+    "notes": "Open to a high school senior accepted at a post-secondary institution or a student already enrolled. The association took applications online and extended the deadline to May 31.",
+    "applyViaGuidance": true,
+    "title": "Lacombe Fish and Game Association Scholarship",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Lacombe and Lacombe County students in conservation fields",
+    "description": "A $1,000 award for students going into conservation, environmental science, wildlife management or a similar field. Residents of Lacombe or Lacombe County may apply with no connection to the association at all. Everyone else needs two years of membership, their own or a parent's or grandparent's. Applicants must show active participation in conservation or outdoor initiatives.",
+    "metaDetail": "Lacombe residents skip the membership requirement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Environment",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 700,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
+    "notes": "Details and the form are linked from the Wolf Creek scholarships page.",
+    "applyViaGuidance": true,
+    "title": "Linda Tee Memorial Scholarship",
+    "amount": "$1,800",
+    "category": "STEM",
+    "audience": "Wolf Creek grade 12 students entering nursing in Alberta",
+    "description": "One thousand eight hundred dollars for a Wolf Creek grade 12 student registered at an Alberta institution in a nursing degree, diploma or certificate. All three levels count, which is not always true of nursing awards.",
+    "metaDetail": "Degree, diploma or certificate all qualify.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Nursing",
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-31"
+  },
+  {
+    "id": 701,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/wolf-creek-scholarships",
+    "notes": "The station describes the award as up to $2,000, so the amount can be less. A current letter of recommendation is helpful but not required. Applications go to the Career Centre or scholarship committee by April 17.",
+    "applyViaGuidance": true,
+    "title": "Sunny 94 Scholarship",
+    "amount": "$2,000",
+    "category": "Arts",
+    "audience": "Wolf Creek students entering music, broadcasting or journalism",
+    "description": "Up to $2,000 from the local radio station, for a student enrolling within twelve months in an accredited music, broadcasting or journalism program. It is one of the few awards in central Alberta that treats broadcasting and journalism as fundable fields in their own right.",
+    "metaDetail": "Broadcasting and journalism count, not just music.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Arts",
+        "Journalism"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-04-17"
+  },
+  {
+    "id": 702,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/central-alberta-scholarships",
+    "notes": "The application is online and is handed in at the Career Centre.",
+    "applyViaGuidance": true,
+    "title": "Bentley Seed Cleaning Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Graduates of Lacombe, Rimbey, Alix, Bentley, Eckville and CACHS",
+    "description": "A $1,000 award for graduating students of Lacombe, Rimbey, Alix-MAC, Bentley, Eckville and CACHS. Applicants need a graduating average of at least 70 per cent, must be registered in a post-secondary program, and must have lived in the area for the past three years. Preference goes to agriculture-related study.",
+    "metaDetail": "Three years of local residence, and a 70 per cent floor.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 703,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/scholarships/entrance/can",
+    "notes": "No application, but the admission average is calculated from at least five approved academic courses on a government-issued grade 12 transcript, and GED students are not eligible. Above 95 per cent, the President's Award for Superior Academic Achievement applies instead. Burman publishes no calendar date for this one. The university's scholarship submission deadline governs it, and that moves each year, so check the Burman deadlines page once you have an offer of admission.",
+    "applyViaGuidance": false,
+    "title": "Burman University Academic Excellence Scholarship",
+    "amount": "$3,500",
+    "category": "Academic",
+    "audience": "First-year students entering Burman University in Lacombe",
+    "description": "A renewable entrance award at Burman University in Lacombe, given automatically on the admission average with no application: $3,500 a year at 90 to 94.9 per cent, $2,000 at 85 to 89.9, $1,000 at 80 to 84.9 and $500 at 75 to 79.9. It can be renewed for up to four years of a four-year degree.",
+    "metaDetail": "Paid on the admission average, with nothing to apply for.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 704,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/centralalbertanew",
+    "notes": "Requires admission to Burman, twelve completed credits excluding PLAR and audits, and Canadian citizenship or permanent residence. Students receiving a second degree discount or a full-tuition scholarship are not eligible. Winter entrants may receive half if funding allows. Burman publishes no calendar date for this one. The university's scholarship submission deadline governs it, and that moves each year, so check the Burman deadlines page once you have an offer of admission.",
+    "applyViaGuidance": false,
+    "title": "Burman University Central Alberta New Students Scholarship",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "New Burman students living within 100km of Lacombe",
+    "description": "One thousand dollars for new students beginning first year at Burman who live within 100 kilometres of the Lacombe campus. The university names Olds, Rocky Mountain House, Leduc and Stettler, and includes the cities along the QE2 corridor between and including Edmonton and Calgary, so the catchment is far wider than the name suggests. Everyone who qualifies is paid.",
+    "metaDetail": "The 100km catchment reaches Edmonton and Calgary.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 705,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/scholarship/eats",
+    "notes": "Transcripts, proof of citizenship, English proficiency scores and the application fee all have to be in by February 1. Students receiving a second degree discount are not eligible, and a student who defers to the winter term may receive $500 instead.",
+    "applyViaGuidance": false,
+    "title": "Burman University Early Admission Tuition Scholarship",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "Students who complete a Burman application by February 1",
+    "description": "One thousand dollars for applicants who complete their Burman application, including every supporting document, by February 1 for the following September. It is the cheapest thousand dollars on this page: the only thing being rewarded is doing the paperwork early.",
+    "metaDetail": "Paid for finishing the application early, nothing else.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-02-01"
+  },
+  {
+    "id": 706,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/valedictorian",
+    "notes": "Requires fifteen academic credits each term, three more than most Burman awards. A confirmation letter from your principal confirming class standing goes to the university. Winter starters may get half. Burman publishes no calendar date for this one. The university's scholarship submission deadline governs it, and that moves each year, so check the Burman deadlines page once you have an offer of admission.",
+    "applyViaGuidance": false,
+    "title": "Burman University President's Award for Valedictorians",
+    "amount": "$3,000",
+    "category": "Academic",
+    "audience": "Valedictorians entering Burman University",
+    "description": "A one-time $3,000 award for the valedictorian of any high school graduating class in Canada, the United States, Bermuda or the Bahamas who comes to Burman in the fall directly after graduation. Everyone who qualifies is paid.",
+    "metaDetail": "Every qualifying valedictorian is paid, not just one.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 707,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/salutatorian",
+    "notes": "A confirmation letter from your principal confirming class standing goes to the university. Winter starters may receive half. Burman publishes no calendar date for this one. The university's scholarship submission deadline governs it, and that moves each year, so check the Burman deadlines page once you have an offer of admission.",
+    "applyViaGuidance": false,
+    "title": "Burman University President's Award for Salutatorians",
+    "amount": "$1,500",
+    "category": "Academic",
+    "audience": "Salutatorians entering Burman University",
+    "description": "A one-time $1,500 award for the salutatorian of any high school graduating class in Canada, the United States, Bermuda or the Bahamas who starts at Burman in the fall after graduation. Twelve credits a term are required, and everyone who qualifies is paid.",
+    "metaDetail": "Second in your class is worth $1,500 at Burman.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 708,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/presidentsawardsuperior",
+    "notes": "Below a 95 per cent average the Academic Excellence Scholarship applies instead. Renewal is not automatic: it requires a full course load and a 3.9 GPA every year.",
+    "applyViaGuidance": false,
+    "title": "Burman University President's Award for Superior Academic Achievement",
+    "amount": "Full tuition",
+    "category": "Academic",
+    "audience": "Burman entrants with a 95 per cent admission average",
+    "description": "A full tuition scholarship, the largest award tied to Lacombe. It goes to first-year students with a Burman admission average of 95 per cent over at least five qualifying academic courses, and covers a minimum of fifteen Burman credits per term. It can be renewed for a further three years on a full course load and a 3.9 GPA each year.",
+    "metaDetail": "Full tuition, but the renewal bar is a 3.9 GPA.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": 95,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-07-01"
+  },
+  {
+    "id": 709,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/athletics/cad",
+    "notes": "Twelve academic credits each term and verification from the athletic director or coach are required. The athletic application deadline is separate from Burman's general scholarship deadline, so check both.",
+    "applyViaGuidance": false,
+    "title": "Burman University Athletic Scholarship",
+    "amount": "$1,250",
+    "category": "Community",
+    "audience": "Burman students playing on an official campus team",
+    "description": "A renewable award starting at $1,250 in the first year of participation and rising to as much as $2,000 in later years on skill, team commitment and a coach's recommendation. You have to try out for and play a full season with an official on-campus team such as basketball, soccer, volleyball or the Acronaires. Intramurals, mini tournaments and clubs do not count.",
+    "metaDetail": "Intramurals do not count, only official teams.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 710,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/music/cad",
+    "notes": "Twelve academic credits each term and verification from the music director are required. The music application deadline is separate from Burman's general scholarship deadline.",
+    "applyViaGuidance": false,
+    "title": "Burman University Music Scholarship",
+    "amount": "$1,250",
+    "category": "Arts",
+    "audience": "Burman students playing in an official campus ensemble",
+    "description": "A renewable award starting at $1,250 in the first year and rising to as much as $2,000 later on skill, commitment and a music director's recommendation. You audition for and take part in an official campus music organisation, such as Choir, Ubuntu, Band or Orchestra, for both the fall and winter semesters. You do not have to be studying music.",
+    "metaDetail": "You do not have to be a music major to hold it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 711,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/orchestralscholarship",
+    "notes": "The award is paid half in the fall and half in the winter, and you must register in the Orchestra, Camerata Ensemble or another approved group each term, for credit or audit. If no submission is good enough the award may not be given at all.",
+    "applyViaGuidance": false,
+    "title": "Burman University Orchestral Scholarship",
+    "amount": "$8,000",
+    "category": "Arts",
+    "audience": "Orchestral instrumentalists entering Burman University",
+    "description": "Up to two awards of $8,000, the largest arts award anywhere in the Lacombe set. You submit a video of yourself playing an approved piece on an orchestral instrument and the Burman music faculty adjudicates. Strings, woodwinds, brass, percussion and keyboard all qualify, and other instruments may be considered case by case. Preference goes to a student entering a music program, but any student who meets the criteria is eligible.",
+    "metaDetail": "You do not need to be a music major to win $8,000.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [
+        "Music",
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-07-01"
+  },
+  {
+    "id": 712,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/leadership/cad",
+    "notes": "References are required to verify every claim of service or leadership, and there is a separate reference form. Open to Canadian citizens and to anyone who previously attended a Canadian or American high school or post-secondary institution. Burman publishes no calendar date for this one. The university's scholarship submission deadline governs it, and that moves each year, so check the Burman deadlines page once you have an offer of admission.",
+    "applyViaGuidance": false,
+    "title": "Burman University Leadership & Service Scholarship",
+    "amount": "$2,000",
+    "category": "Community",
+    "audience": "Burman entrants with two years of leadership or service",
+    "description": "A sliding award of $250 to $2,000 based on leadership and service over the last two years, at school, in the community, at church or elsewhere. Everyone who qualifies receives something; a committee reads the application and the references and sets the amount. One line in the criteria decides most applications: paid positions do not count as service or leadership.",
+    "metaDetail": "Paid positions do not count as service here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 713,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/scholarships/business",
+    "notes": "Twelve credits each term are required. Students receiving a second degree discount or a full-tuition scholarship are not eligible. Burman publishes no calendar date for this one. The university's scholarship submission deadline governs it, and that moves each year, so check the Burman deadlines page once you have an offer of admission.",
+    "applyViaGuidance": false,
+    "title": "Burman University School of Business Scholarship",
+    "amount": "$5,000",
+    "category": "Academic",
+    "audience": "New Burman students in a Bachelor of Business program",
+    "description": "A one-time $5,000 award, limited in number, for newly admitted students starting a Bachelor of Business degree at Burman. It is paid half in the fall term and half in the winter.",
+    "metaDetail": "The largest single-field entrance award at Burman.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 714,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/studentfinancialservices/scholarship/nursing",
+    "notes": "This is competitive and decided partly on speed: the date you apply, the date you clear financially and the date your loan notice of assessment arrives all count, and preference goes to students taking fifteen or more credits. A $150 confirmation fee is required, and a 2.8 GPA in the fall term releases the second half.",
+    "applyViaGuidance": false,
+    "title": "Violet M. Thomas Nursing Scholarship",
+    "amount": "$8,000",
+    "category": "STEM",
+    "audience": "Burman health sciences students continuing into nursing",
+    "description": "Three awards of $8,000 for students admitted to Burman's Certificate in Health Sciences who plan to continue into a nursing degree. It is a need-tested award in practice: you must apply for and receive a Canadian government student loan of at least $8,500 to be eligible at all.",
+    "metaDetail": "You must actually receive an $8,500 student loan.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [
+        "Nursing",
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-08-01"
+  },
+  {
+    "id": 715,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/scholarships/kutzner",
+    "notes": "Recipients are notified by August 15. The renewable award requires twelve credits a term, a cumulative 2.5 GPA and a qualifying student loan every year.",
+    "applyViaGuidance": false,
+    "title": "Richard and Irma Kutzner Entrance Bursaries",
+    "amount": "$6,000",
+    "category": "Community",
+    "audience": "Burman entrants receiving a government student loan",
+    "description": "Four bursaries: three one-time awards of $6,000 and one renewable award worth $2,000 a year, which can reach $8,000 over a four-year degree. You must apply for and receive a Canadian government student loan of at least $8,500, or the American equivalent, and hand the notice of assessment to student financial services. The donors choose the recipients anonymously, on the strength of a short written response and nothing else.",
+    "metaDetail": "The donors pick anonymously, on a short written answer.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-08-01"
+  },
+  {
+    "id": 716,
+    "region": "Lacombe",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.burmanu.ca/scholarships/MANS",
+    "notes": "You must apply for the Alberta Indigenous Careers Award and any other entrance scholarships you are eligible for; this one fills the remainder. Apply or enquire by email to student financial services. It renews each year of a first four-year degree.",
+    "applyViaGuidance": false,
+    "title": "Mamawi Atosketan Native School Scholarship",
+    "amount": "Full tuition",
+    "category": "Indigenous",
+    "audience": "Mamawi Atosketan Native School graduates entering Burman",
+    "description": "A renewable award that covers whatever is left of tuition and mandatory fees at Burman after education authority funding, the Alberta Indigenous Careers Award of $2,000 a term and any other entrance scholarships have been applied. In practice it closes the gap to zero for a graduate of Mamawi Atosketan Native School, the Indigenous school north of Ponoka.",
+    "metaDetail": "It tops up whatever other funding leaves unpaid.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Burman University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
       "bipocRequired": false,
       "financialNeed": false,
       "maxFamilyIncome": null,

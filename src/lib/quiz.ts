@@ -92,6 +92,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: 'Lloydminster', value: 'Lloydminster', hint: 'THE ALBERTA SIDE' },
       { label: 'Camrose', value: 'Camrose', hint: 'AND CAMROSE COUNTY' },
       { label: 'Cold Lake', value: 'Cold Lake', hint: 'AND THE LAKELAND' },
+      { label: 'Lacombe', value: 'Lacombe', hint: 'AND LACOMBE COUNTY' },
       { label: 'St. Albert', value: 'St. Albert', hint: 'AND STURGEON COUNTY' },
       { label: 'Spruce Grove', value: 'Spruce Grove', hint: 'AND STONY PLAIN' },
       { label: 'Leduc', value: 'Leduc', hint: 'AND LEDUC COUNTY' },
@@ -203,10 +204,10 @@ export const SCHOOL_BOARD_NAMES: Record<string, string> = {
  * "Alberta" because they span several communities (Cochrane, Strathmore,
  * Okotoks, Innisfail), and an exact match alone left their 17 schools out of
  * every dropdown, so their filter could never engage. But feeding them to all
- * sixteen cities put a 17-option question in front of Medicine Hat, Lethbridge
+ * seventeen cities put an 18-option question in front of Medicine Hat, Lethbridge
  * and Airdrie students, who had no school question at all, to filter three
- * listings out of 610. A student at one of those schools is in a town that is
- * not one of the sixteen named cities, so "Other Alberta" is the answer they give,
+ * listings out of 669. A student at one of those schools is in a town that is
+ * not one of the seventeen named cities, so "Other Alberta" is the answer they give,
  * and that is where the question is worth asking.
  */
 function inCityScope(region: string | null | undefined, city: string): boolean {

@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Ten new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose and Cold Lake, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Eleven new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake and Lacombe, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Lacombe and Lacombe County now have 60 awards and a page of their own, out of the Lacombe Composite awards list, the Wolf Creek division awards and the entrance awards at Burman University.',
+      },
       {
         kind: 'listings',
         text: 'Cold Lake and the Lakeland now have 22 awards and a page of their own, including three military scholarships for the families serving at 4 Wing.',

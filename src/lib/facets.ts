@@ -226,6 +226,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Thirty-two of these share one form and one deadline, May 1 in the school Google Classroom, so the work of applying for all of them at once is barely more than applying for one.',
   },
   {
+    slug: 'lacombe',
+    kind: 'region',
+    value: 'Lacombe',
+    label: 'Lacombe',
+    h1: 'Lacombe scholarships',
+    title: 'Lacombe Scholarships',
+    description:
+      'Scholarships for Lacombe and Lacombe County students: the Lacombe Composite awards list, service club money and the entrance awards at Burman.',
+    intro:
+      'Eight of these are decided on a grade 12 mark alone with nothing to fill in, and one of the eight covers eight separate courses at $500 each.',
+  },
+  {
     slug: 'camrose',
     kind: 'region',
     value: 'Camrose',
