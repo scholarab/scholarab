@@ -7390,7 +7390,7 @@
     "category": "Academic",
     "lastVerified": "2026-08",
     "region": "Calgary",
-    "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1. Confirm the date on the award page before you rely on it.",
+    "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1. Confirm the date on the award page before you rely on it. EducationMatters lists the value of this award as variable, so no fixed figure exists to quote.",
     "applyViaGuidance": true,
     "active": true,
     "description": "Open to students registered in grade 12 with strong academic merit and a commitment to lifelong learning. To be considered for this award, applicants must: Have hearing loss and have been a student in the Deaf and Hard of Hearing program at Queen Elizabeth High School.",
@@ -8246,7 +8246,7 @@
     "category": "STEM",
     "lastVerified": "2026-08",
     "region": "Calgary",
-    "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1. Confirm the date on the award page before you rely on it.",
+    "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1. Confirm the date on the award page before you rely on it. EducationMatters lists the value of this award as variable, so no fixed figure exists to quote.",
     "applyViaGuidance": false,
     "active": true,
     "description": "Preference will be given to students at Crescent Heights High School, although, in the absence of suitable candidates, the award will be open to all students in the CBE who identify as female. Candidates must be Canadian Citizens or Permanent Residents, registered in grade 12 and completing the requirements of a high school diploma that will qualify them for post‐secondary education.",
@@ -8542,7 +8542,7 @@
     "category": "Trades",
     "lastVerified": "2026-08",
     "region": "Calgary",
-    "notes": "The award page does not publish a fixed date. Ask your school's guidance office or scholarship coordinator for this year's deadline.",
+    "notes": "The award page does not publish a fixed date. Ask your school's guidance office or scholarship coordinator for this year's deadline. EducationMatters lists the value of this award as variable, so no fixed figure exists to quote.",
     "applyViaGuidance": true,
     "active": false,
     "description": "Open to Discovering Choices Outreach programs graduates who apply within two (2) years of graduation. Applicants must have demonstrated academic progress in grade 12 and marks sufficient for entrance to their program of choice. Applicants must demonstrate financial need and be recommended by the Discovering Choices Transition Team.",
@@ -10715,18 +10715,18 @@
   {
     "id": 312,
     "title": "Chuck Love Memorial Scholarship",
-    "amount": "Varies",
-    "deadline": null,
-    "audience": "Graduating students at Medicine Hat Catholic schools",
+    "amount": "Up to $500",
+    "deadline": "2026-09-15",
+    "audience": "Monsignor McCoy High School grade 12 students",
     "url": "https://www.mhcbe.ab.ca/education-foundation/grants-scholarships",
     "category": "Community",
     "lastVerified": "2026-08",
     "region": "Medicine Hat",
-    "notes": "The Education Foundation lists this award by name but its application PDF is no longer reachable on the board's site, so no amount or deadline is published anywhere we can verify. Ask your school's counsellor or the Foundation at foundation@mhcbe.ab.ca for the form and this year's date.",
+    "notes": "Two steps, in this order: the principal proposes candidates to the Foundation, then you send a written request of your own setting out how you qualify and what you plan to do afterwards. Documents are due to the Foundation by September 15 and everyone hears back by September 30.",
     "applyViaGuidance": true,
-    "active": false,
-    "description": "One of the scholarships the Medicine Hat Catholic Board of Education's Education Foundation funds for graduating students in its schools. Applications go through your school rather than a public portal.",
-    "metaDetail": "Apply through your Catholic high school.",
+    "active": true,
+    "description": "Named for Chuck Love, who was vice principal of St. Mary's and of McCoy and later principal of McCoy, Mother Teresa and St. Francis Xavier. It goes to a Grade 12 student at Monsignor McCoy High School who is active in student council and in at least one other school activity, shows strong character and academic perseverance, and leads by doing for others. The Foundation caps the total paid out at $500 in any one year.",
+    "metaDetail": "Student council plus one more activity is the bar.",
     "eligibility": {
       "grades": [
         "12"
@@ -10734,7 +10734,9 @@
       "schoolBoards": [
         "MHCBE"
       ],
-      "specificSchools": [],
+      "specificSchools": [
+        "Monsignor McCoy High School"
+      ],
       "targetInstitutions": [],
       "fields": [],
       "minAverage": null,
@@ -10754,18 +10756,18 @@
   {
     "id": 313,
     "title": "Education Foundation Servant Leader Scholarship",
-    "amount": "Varies",
-    "deadline": null,
+    "amount": "Up to $500",
+    "deadline": "2027-06-15",
     "audience": "Graduating students at Medicine Hat Catholic schools",
     "url": "https://www.mhcbe.ab.ca/education-foundation/grants-scholarships",
     "category": "Community",
     "lastVerified": "2026-08",
     "region": "Medicine Hat",
-    "notes": "The Education Foundation lists this award by name but its application PDF is no longer reachable on the board's site, so no amount or deadline is published anywhere we can verify. Ask your school's counsellor or the Foundation at foundation@mhcbe.ab.ca for the form and this year's date.",
+    "notes": "The application is more work than most awards this size: a cover letter, applicant information, two typed essays on Biblical servant leadership and how your own life demonstrates it, and a reference form that asks someone to rate you on initiative, communication, leadership, influence, character, reliability, cooperation and servanthood. Your principal proposes you first. Documents go to the McCoy Awards Committee by June 15 and decisions come by September 30.",
     "applyViaGuidance": true,
-    "active": false,
-    "description": "One of the scholarships the Medicine Hat Catholic Board of Education's Education Foundation funds for graduating students in its schools. Applications go through your school rather than a public portal.",
-    "metaDetail": "Apply through your Catholic high school.",
+    "active": true,
+    "description": "The Medicine Hat Catholic Education Foundation looks for a student who consistently shows a servant's heart together with the ability to lead others in a service-oriented way. Volunteering in a school, church, mission or social setting all counts. The Foundation may split the money between more than one applicant, but the total cannot exceed $500 in a year.",
+    "metaDetail": "Two typed essays and one reference are the work.",
     "eligibility": {
       "grades": [
         "12"
@@ -10879,84 +10881,6 @@
     "lastVerified": "2026-08",
     "region": "Medicine Hat",
     "notes": "The Education Foundation writes this one as \"Mook/Giesinger Awards\" and lists this award by name but its application PDF is no longer reachable on the board's site, so no amount or deadline is published anywhere we can verify. Ask your school's counsellor or the Foundation at foundation@mhcbe.ab.ca for the form and this year's date.",
-    "applyViaGuidance": true,
-    "active": false,
-    "description": "One of the scholarships the Medicine Hat Catholic Board of Education's Education Foundation funds for graduating students in its schools. Applications go through your school rather than a public portal.",
-    "metaDetail": "Apply through your Catholic high school.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [
-        "MHCBE"
-      ],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
-    "id": 317,
-    "title": "Pat Cullen Memorial Scholarship",
-    "amount": "Varies",
-    "deadline": null,
-    "audience": "Graduating students at Medicine Hat Catholic schools",
-    "url": "https://www.mhcbe.ab.ca/education-foundation/grants-scholarships",
-    "category": "General",
-    "lastVerified": "2026-08",
-    "region": "Medicine Hat",
-    "notes": "The Education Foundation lists this award by name but its application PDF is no longer reachable on the board's site, so no amount or deadline is published anywhere we can verify. Ask your school's counsellor or the Foundation at foundation@mhcbe.ab.ca for the form and this year's date.",
-    "applyViaGuidance": true,
-    "active": false,
-    "description": "One of the scholarships the Medicine Hat Catholic Board of Education's Education Foundation funds for graduating students in its schools. Applications go through your school rather than a public portal.",
-    "metaDetail": "Apply through your Catholic high school.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [
-        "MHCBE"
-      ],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
-  },
-  {
-    "id": 318,
-    "title": "Sister Joan Burns Memorial Scholarship",
-    "amount": "Varies",
-    "deadline": null,
-    "audience": "Graduating students at Medicine Hat Catholic schools",
-    "url": "https://www.mhcbe.ab.ca/education-foundation/grants-scholarships",
-    "category": "Community",
-    "lastVerified": "2026-08",
-    "region": "Medicine Hat",
-    "notes": "The Education Foundation lists this award by name but its application PDF is no longer reachable on the board's site, so no amount or deadline is published anywhere we can verify. Ask your school's counsellor or the Foundation at foundation@mhcbe.ab.ca for the form and this year's date.",
     "applyViaGuidance": true,
     "active": false,
     "description": "One of the scholarships the Medicine Hat Catholic Board of Education's Education Foundation funds for graduating students in its schools. Applications go through your school rather than a public portal.",
@@ -13962,16 +13886,16 @@
   {
     "id": 395,
     "title": "Brooks & District Retired Teachers' Scholarship",
-    "amount": "Varies",
-    "audience": "Grasslands graduates who have already won another division award",
+    "amount": "$750",
+    "audience": "Grasslands Regional Division graduates entering post-secondary",
     "url": "https://sites.google.com/grasslands.ab.ca/scholarship-handbook/home",
     "category": "General",
     "lastVerified": "2026-09",
     "region": "Brooks",
-    "notes": "The handbook publishes no closing date for this award. Applications go through your Grasslands school rather than to the sponsor, and the form is a Google Doc only Grasslands students can open, so ask your school office in the fall for the date it is collecting by.",
+    "notes": "Applications go to the BCHS main office by May 15 rather than to the sponsor. One thing to read carefully: the handbook blurb says the student should already have achieved another system-wide award, but the application form itself sets no such condition, so apply and let the committee decide. The form also asks for a social insurance number.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "Funded by the district's retired teachers and aimed at a graduate of a Grasslands Regional Division high school who is registered at a post-secondary institution. The stated criteria stack: the student should already have achieved another system-wide award, and should be someone with diverse interests and talents and a record of community or extracurricular involvement. Read the first of those literally. This is written as a second award layered on a first, so it rewards a student the division has already recognised.",
+    "description": "Funded by the district's retired teachers for a graduating student from a Grasslands Regional Division high school, meaning Bassano, Brooks, Duchess, Rosemary or Sunrise, who is registered at a post-secondary institution and can attach proof of acceptance. Selection weighs community service and extracurricular involvement, diverse interests and talents, three letters of reference and academic achievement.",
     "eligibility": {
       "grades": [
         "12"
@@ -13993,7 +13917,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Asks for a prior division award."
+    "metaDetail": "Three reference letters and a transcript are required.",
+    "deadline": "2027-05-15"
   },
   {
     "id": 396,
@@ -14597,16 +14522,16 @@
   {
     "id": 412,
     "title": "Jimmy Bonora Memorial Trades Award",
-    "amount": "Varies",
+    "amount": "$1,000",
     "audience": "Grade 12 students enrolled in a certified trades program",
     "url": "https://sites.google.com/grasslands.ab.ca/scholarship-handbook/home",
     "category": "Trades",
     "lastVerified": "2026-09",
     "region": "Brooks",
-    "notes": "The handbook publishes no closing date for this award. Applications are collected by Brooks Composite High School rather than by the sponsor, and the form itself is a Google Doc only Grasslands students can open, so the date you need is the one the school sets. Ask the BCHS office in the fall.",
+    "notes": "Submitted to Student Services at BCHS by May 15, not to the sponsor. Your application has to include at least one letter from a BCHS staff member supporting your enthusiasm for the trades, and the name of the program you are entering. Jimmy Bonora's wife and two children choose the recipient.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "A memorial award for a Grade 12 student with a positive attitude, motivation, and dedication to furthering their education through a trades program. The one hard requirement is enrolment: you must be enrolled in a certified trades program in Canada, or be able to provide proof of enrolment. Everything else is judged on attitude, which is the pattern across the Brooks trades awards.",
+    "description": "A single $1,000 award in memory of Jimmy Bonora, a BCHS graduate who apprenticed with his father as an electrician and went on to run Mario's Electric in Brooks. It goes to a Grade 12 student showing a positive attitude, motivation and dedication to a trades education. The one hard requirement is enrolment: you must be in, or able to prove you are entering, a certified trades program in Canada.",
     "eligibility": {
       "grades": [
         "12"
@@ -14628,7 +14553,8 @@
       "apprenticeship": true,
       "extracurriculars": []
     },
-    "metaDetail": "Proof of trades enrolment is the one hard rule."
+    "metaDetail": "Needs a staff letter backing your trades plan.",
+    "deadline": "2027-05-15"
   },
   {
     "id": 413,
@@ -17021,13 +16947,13 @@
   {
     "id": 475,
     "title": "Constituency of Lac Ste. Anne-Parkland Award for Leadership in Business",
-    "amount": "Varies",
+    "amount": "Gift",
     "audience": "Memorial Composite graduates showing business leadership potential",
     "url": "https://mchs.psd.ca/download/441592",
     "category": "Academic",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
-    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you. Memorial Composite's award table lists the prize for this one as a gift rather than a dollar figure, so treat it as recognition rather than money toward tuition.",
     "applyViaGuidance": true,
     "active": true,
     "description": "Presented by the Constituency of Lac Ste. Anne-Parkland to the student who best demonstrates the potential to be a leader in the business world. The criterion is potential rather than marks or a declared program, which leaves it open to a student who has run something real, whether that is a club budget, a small venture, or a team.",
@@ -17061,13 +16987,13 @@
   {
     "id": 476,
     "title": "Constituency of Spruce Grove-Stony Plain Award for Leadership in Building a Better Community",
-    "amount": "Varies",
+    "amount": "Gift",
     "audience": "Memorial Composite graduates with a record of social activism",
     "url": "https://mchs.psd.ca/download/441592",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
-    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you. Memorial Composite's award table lists the prize for this one as a gift rather than a dollar figure, so treat it as recognition rather than money toward tuition.",
     "applyViaGuidance": true,
     "active": true,
     "description": "Awarded each year by the Constituency of Spruce Grove-Stony Plain to the graduating student who best demonstrates a commitment to social activism. The criteria ask for something ongoing, action oriented, showing leadership, and resulting in greater awareness of a social issue within the school or the community. A single event will not read well here; a campaign you kept going will.",
@@ -17596,13 +17522,13 @@
   {
     "id": 490,
     "title": "Stony Plain TireCraft Mechanics Award",
-    "amount": "Varies",
+    "amount": "Gift",
     "audience": "Memorial Composite students who completed all three mechanics levels",
     "url": "https://mchs.psd.ca/download/441592",
     "category": "Trades",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
-    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you. Memorial Composite's award table lists the prize for this one as a gift rather than a dollar figure, so treat it as recognition rather than money toward tuition.",
     "applyViaGuidance": true,
     "active": true,
     "description": "Tirecraft in Stony Plain present this to a grade 12 student who has completed all three levels of mechanics in high school, shows a passion for the mechanics trade, and is a positive role model for classmates. The three-level requirement means the qualifying work is spread across your whole high school timetable, so it is a grade 10 decision as much as a grade 12 one.",
@@ -18959,7 +18885,7 @@
     "category": "General",
     "lastVerified": "2026-09",
     "region": "Fort Saskatchewan",
-    "notes": "You cannot apply for this one; each Elk Island school nominates up to two students, so the useful move is telling a counsellor you want to be considered. Black Gold School Division runs a separate award from the same Edmonton Community Foundation fund with its own application and a June 30 date, so a student who moves between the divisions is looking at two different routes.",
+    "notes": "You cannot apply for this one; each Elk Island school nominates up to two students, so the useful move is telling a counsellor you want to be considered. Black Gold School Division runs a separate award from the same Edmonton Community Foundation fund with its own application and a June 30 date, so a student who moves between the divisions is looking at two different routes. Elk Island describes the payment only as a monetary amount and publishes no figure.",
     "applyViaGuidance": true,
     "active": true,
     "description": "Paid from the Edmonton Community Foundation, with up to two students at each Elk Island high school receiving an amount to support post-secondary study. The award goes to a student who meets the entrance requirements for the programme to be supported and has financial need that would restrict their ability to pursue it, together with perseverance and commitment to post-secondary education, described in the criteria as the desire and determination to keep learning in an area of interest.",
