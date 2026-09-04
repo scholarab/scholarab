@@ -211,6 +211,17 @@ for (const s of scholarships) {
     console.error(`${tag}: openDate must be YYYY-MM-DD, got: ${s.openDate}`);
     failed = true;
   }
+
+  // An openDate later than the deadline is always a leftover from a corrected
+  // cycle, and it is invisible without this check: scholarshipStatusOf tests
+  // openDate first, so the listing reports "future" forever and the detail page
+  // prints "Opens <spring date>" directly beneath an earlier deadline. That is
+  // exactly how the Cypress County bursary hid a deadline 27 days out. Fix it by
+  // dropping the openDate, never by inventing a new one.
+  if (s.openDate && s.deadline && isValidDate(s.openDate) && isValidDate(s.deadline) && s.openDate > s.deadline) {
+    console.error(`${tag}: openDate ${s.openDate} is after deadline ${s.deadline}`);
+    failed = true;
+  }
 }
 
 // ── Program field checks ─────────────────────────────────────────────────────
