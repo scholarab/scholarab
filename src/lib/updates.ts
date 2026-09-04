@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Seven new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere and Beaumont, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Eight new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont and Lloydminster, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Lloydminster on the Alberta side now has 46 awards and a page of their own, 32 of which share a single application and a single May 1 deadline.',
+      },
       {
         kind: 'listings',
         text: 'Chestermere now has a page of its own, built on the three awards Chestermere High collects and the Calgary-region money that names the city.',

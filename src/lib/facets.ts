@@ -214,6 +214,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Beaumont is a city rather than part of Leduc County, so the county bursaries here are not open to it, and the awards that are open come from the school division instead.',
   },
   {
+    slug: 'lloydminster',
+    kind: 'region',
+    value: 'Lloydminster',
+    label: 'Lloydminster',
+    h1: 'Lloydminster scholarships',
+    title: 'Lloydminster Scholarships',
+    description:
+      'Scholarships for Lloydminster students on the Alberta side: Comprehensive High awards, service club money, trades and engineering awards, and the Rutherford.',
+    intro:
+      'Thirty-two of these share one form and one deadline, May 1 in the school Google Classroom, so the work of applying for all of them at once is barely more than applying for one.',
+  },
+  {
     slug: 'chestermere',
     kind: 'region',
     value: 'Chestermere',
