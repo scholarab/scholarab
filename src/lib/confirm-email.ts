@@ -56,12 +56,12 @@ export function confirmEmailHtml(itemLabel: string, confirmUrl: string, mailingA
   })()
   return `<!doctype html><html><body style="font-family:system-ui,-apple-system,sans-serif;color:#141915;line-height:1.55">
   <p>Someone (hopefully you) asked ScholarAB to send deadline reminders for <strong>${escapeHtml(itemLabel)}</strong>.</p>
-  <p>Confirm and we'll email you 30, 14 and 3 days before it closes. Nothing else, ever.</p>
+  <p>Confirm and we'll email you 30, 14 and 3 days before it closes.</p>
   <p><a href="${escapeHtml(confirmUrl)}"
         style="display:inline-block;background:#2FD3A0;color:#08120E;font-weight:600;
                text-decoration:none;padding:12px 28px;border-radius:100px">Confirm my reminder</a></p>
-  <p style="color:#5A605B;font-size:14px">If this wasn't you, ignore this email. Nothing was set up, and
-  we won't write again. We store your address only to send these reminders, never sell it, and
+  <p style="color:#5A605B;font-size:14px">If this wasn't you, ignore this email.
+  We store your address only to send these reminders, and
   <a href="${escapeHtml(origin)}/privacy/" style="color:#0c8060">explain exactly what we keep</a>.</p>
   <hr style="border:0;border-top:1px solid #eee;margin:24px 0">
   ${senderIdentityHtml({
