@@ -474,7 +474,7 @@ body.quiz-results #match-divider {
 .sabl-stat { text-align: right; flex: none; padding-top: 10px; }
 .sabl-stat-value { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 44px); line-height: 1; }
 .sabl-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); margin-top: 6px; }
-.sabl-stat-soon { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.38); margin-top: 3px; }
+.sabl-stat-soon { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.38); margin-top: 3px; white-space: pre-line; }
 .sabl-stat-soon[hidden] { display: none; }
 
 .sabl-toolbar {

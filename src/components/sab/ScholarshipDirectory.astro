@@ -141,7 +141,24 @@ const statValue = totalOpen > 0 || totalSoon === 0 ? totalOpen : totalSoon;
 const statLabel = totalOpen > 0 || totalSoon === 0
   ? 'OPEN ACROSS THESE LISTINGS'
   : 'OPENING IN A LATER CYCLE';
-const showSoon = totalOpen > 0 && totalSoon > 0;
+// 111 of the 487 listings publish no dollar figure at all (amount "Varies"),
+// and every one of them summed into the two totals above as $0. That is what
+// made a week of research look like it barely moved the header: of the 140
+// listings added in September, 74 carry no published amount. The money is
+// still counted honestly, but the silence is now stated rather than rounded
+// to nothing.
+const unpriced = initial.filter(
+  s => getScholarshipStatus(s) !== 'closed' && !(s._amount ?? 0),
+).length;
+
+// Two short lines, never one long one: the stat block shares a flex row with
+// the h1 and the standfirst, so a wider stat column squeezes the prose into
+// more lines and pushes the toolbar down. e2e/smoke.spec.ts pins every hub's
+// toolbar to the same height and catches exactly that.
+const soonLine = [
+  totalOpen > 0 && totalSoon > 0 ? `+$${totalSoon.toLocaleString('en-CA')} OPENING LATER` : '',
+  unpriced > 0 ? `${unpriced} AMOUNT${unpriced === 1 ? '' : 'S'} NOT PUBLISHED` : '',
+].filter(Boolean).join('\n');
 ---
 
 <div class="sabl-page">
@@ -153,8 +170,8 @@ const showSoon = totalOpen > 0 && totalSoon > 0;
     <div class="sabl-stat">
       <div class="sabl-stat-value tnum" data-dir-stat>${statValue.toLocaleString('en-CA')}</div>
       <div class="sabl-mono sabl-stat-label" data-dir-stat-label>{statLabel}</div>
-      <div class="sabl-mono sabl-stat-soon" data-dir-stat-soon hidden={!showSoon}>
-        {showSoon ? `+$${totalSoon.toLocaleString('en-CA')} OPENING LATER` : ''}
+      <div class="sabl-mono sabl-stat-soon" data-dir-stat-soon hidden={!soonLine}>
+        {soonLine}
       </div>
     </div>
   </div>
@@ -316,15 +333,21 @@ const showSoon = totalOpen > 0 && totalSoon > 0;
   type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string };
   type State = { sort: string; category: string; region: string; status: string };
 
-  /** Open money and not-yet-open money for the rows currently on screen. */
+  /**
+   * Open money, not-yet-open money, and the rows that publish no amount at
+   * all. The third one matters: an unpriced listing adds $0 to both totals,
+   * so without saying how many there are the header reads as a stalled page
+   * every time a batch of school awards lands without dollar figures.
+   */
   function statMoney(visible: Item[]) {
-    let open = 0, soon = 0;
+    let open = 0, soon = 0, unpriced = 0;
     for (const s of visible) {
       const status = getScholarshipStatus(s);
       if (status === 'active') open += s._amount ?? 0;
       else if (status === 'future') soon += s._amount ?? 0;
+      if (status !== 'closed' && !(s._amount ?? 0)) unpriced++;
     }
-    return { open, soon };
+    return { open, soon, unpriced };
   }
 
   type Cache = Map<number, ScholarshipStatus>;
@@ -388,8 +411,11 @@ const showSoon = totalOpen > 0 && totalSoon > 0;
       return open > 0 || soon === 0 ? 'OPEN ACROSS THESE LISTINGS' : 'OPENING IN A LATER CYCLE';
     },
     statSoon: visible => {
-      const { open, soon } = statMoney(visible);
-      return open > 0 && soon > 0 ? `+$${soon.toLocaleString('en-CA')} OPENING LATER` : '';
+      const { open, soon, unpriced } = statMoney(visible);
+      return [
+        open > 0 && soon > 0 ? `+$${soon.toLocaleString('en-CA')} OPENING LATER` : '',
+        unpriced > 0 ? `${unpriced} AMOUNT${unpriced === 1 ? '' : 'S'} NOT PUBLISHED` : '',
+      ].filter(Boolean).join('\n');
     },
     getSavedIds: () => [...getSaved()],
     toggleSave: id => [...toggleSaved(id)],
