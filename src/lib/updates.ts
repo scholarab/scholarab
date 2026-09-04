@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Four new city pages, for St. Albert, Brooks, Spruce Grove and Leduc, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Five new city pages, for St. Albert, Brooks, Spruce Grove, Leduc and Fort Saskatchewan, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Fort Saskatchewan and the Elk Island schools now have 21 awards and a page of their own, including two worth $5,000 that a thrift store pays for.',
+      },
       {
         kind: 'listings',
         text: 'Leduc, Leduc County, Beaumont and Devon now have 18 awards and a page of their own, five of which close between now and the end of October.',

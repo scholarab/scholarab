@@ -190,6 +190,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'The largest of these pays $6,000 to three Black Gold graduates a year on financial need alone, and several close in September after graduation rather than in the spring.',
   },
   {
+    slug: 'fort-saskatchewan',
+    kind: 'region',
+    value: 'Fort Saskatchewan',
+    label: 'Fort Saskatchewan',
+    h1: 'Fort Saskatchewan scholarships',
+    title: 'Fort Saskatchewan Scholarships',
+    description:
+      'Scholarships for Fort Saskatchewan and Elk Island students: Fort High internal awards, division scholarships, industry money and service club bursaries.',
+    intro:
+      'The two largest are funded by a thrift store, at $5,000 each, and they score financial need three times as heavily as they score marks.',
+  },
+  {
     slug: 'alberta',
     kind: 'region',
     value: 'Alberta',

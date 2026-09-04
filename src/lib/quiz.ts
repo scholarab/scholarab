@@ -90,6 +90,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: 'St. Albert', value: 'St. Albert', hint: 'AND STURGEON COUNTY' },
       { label: 'Spruce Grove', value: 'Spruce Grove', hint: 'AND STONY PLAIN' },
       { label: 'Leduc', value: 'Leduc', hint: 'AND LEDUC COUNTY' },
+      { label: 'Fort Saskatchewan', value: 'Fort Saskatchewan', hint: 'AND ELK ISLAND', short: 'Fort Sask' },
       { label: 'Other Alberta', value: 'Other Alberta', hint: 'EVERYWHERE ELSE' },
     ],
   },
