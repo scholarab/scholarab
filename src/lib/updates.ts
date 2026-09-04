@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Brooks gets a page of its own, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'St. Albert and Brooks get pages of their own, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'St. Albert and Sturgeon County now have 46 awards and a page of their own, including the four scholarships the Humboldt Broncos families endowed.',
+      },
       {
         kind: 'listings',
         text: 'Brooks and the County of Newell now have 26 awards and a page of their own, read one at a time out of the Brooks Composite scholarship handbook.',

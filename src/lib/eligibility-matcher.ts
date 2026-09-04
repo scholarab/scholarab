@@ -16,7 +16,8 @@ const QUIZ_FIELDS = new Set(['STEM', 'health', 'business', 'arts', 'trades'])
 
 // Alberta cities recognised for region matching
 const ALBERTA_CITIES = new Set([
-  'Airdrie', 'Brooks', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer', 'Other Alberta',
+  'Airdrie', 'Brooks', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer', 'St. Albert',
+  'Other Alberta',
 ])
 
 function regionMatches(city: string, scholarshipRegion: string | null): boolean {

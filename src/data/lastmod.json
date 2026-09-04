@@ -503,6 +503,10 @@
     "hash": "e6d4920cff8c1ddb",
     "date": "2026-08-28"
   },
+  "/scholarships/adam-stychin-be-positive-award/": {
+    "hash": "86c02b9faf9af7f4",
+    "date": "2026-09-03"
+  },
   "/scholarships/advancing-futures-bursary/": {
     "hash": "c4892d8720d92712",
     "date": "2026-08-02"
@@ -751,6 +755,10 @@
     "hash": "a3972dfd9d2ca1f0",
     "date": "2026-09-03"
   },
+  "/scholarships/brostrom-maltby-memorial-award/": {
+    "hash": "c1a83746ffc252f7",
+    "date": "2026-09-03"
+  },
   "/scholarships/bruce-leitl-composition-award/": {
     "hash": "19a268dfb694ed98",
     "date": "2026-08-28"
@@ -839,6 +847,10 @@
     "hash": "77e1a69539417a18",
     "date": "2026-09-01"
   },
+  "/scholarships/christopher-dennis-scholarship/": {
+    "hash": "3598ecb462479eed",
+    "date": "2026-09-03"
+  },
   "/scholarships/chuck-love-memorial-scholarship/": {
     "hash": "7071cd00e245fbb9",
     "date": "2026-08-29"
@@ -859,6 +871,10 @@
     "hash": "f4a358ff4b1f9acc",
     "date": "2026-08-29"
   },
+  "/scholarships/coach-rowein-alumni-basketball-award/": {
+    "hash": "f3a2b8aedf369019",
+    "date": "2026-09-03"
+  },
   "/scholarships/colin-mckenna-memorial-scholarship/": {
     "hash": "361cb1e6df8f0619",
     "date": "2026-08-30"
@@ -867,12 +883,36 @@
     "hash": "17a958e4bf101eab",
     "date": "2026-08-26"
   },
+  "/scholarships/conner-lukan-tighten-your-skates-award/": {
+    "hash": "43219630878bd9e3",
+    "date": "2026-09-03"
+  },
+  "/scholarships/constable-david-wynn-memorial-award/": {
+    "hash": "57779a7152c66c8a",
+    "date": "2026-09-03"
+  },
   "/scholarships/cpa-alberta-young-emerging-professional-award/": {
     "hash": "2da4943ce143d3f5",
     "date": "2026-08-02"
   },
+  "/scholarships/cpl-jordan-anderson-memorial-award/": {
+    "hash": "087b2510ccc06347",
+    "date": "2026-09-03"
+  },
   "/scholarships/craig-lester-agricultural-travel-bursary/": {
     "hash": "8a5154dc2a86e86f",
+    "date": "2026-09-03"
+  },
+  "/scholarships/cultural-enrichment-award/": {
+    "hash": "2118597252cb274d",
+    "date": "2026-09-03"
+  },
+  "/scholarships/cupe-local-1099-st-albert-public-high-school-scholarship/": {
+    "hash": "2876334cae679869",
+    "date": "2026-09-03"
+  },
+  "/scholarships/curtains-up-scholarship/": {
+    "hash": "9648ad78227d1951",
     "date": "2026-09-03"
   },
   "/scholarships/cypress-county-agricultural-service-board-bursary/": {
@@ -910,6 +950,10 @@
   "/scholarships/don-and-norine-lowry-awards-for-women-of-excellence/": {
     "hash": "8ef91cd24a33cfaf",
     "date": "2026-08-28"
+  },
+  "/scholarships/donna-powell-international-baccalaureate-learner-profile-award/": {
+    "hash": "b597a15871761243",
+    "date": "2026-09-03"
   },
   "/scholarships/dr-ernest-and-minnie-mehl-scholarship/": {
     "hash": "0dc292cb62feed6e",
@@ -999,6 +1043,10 @@
     "hash": "59c3bbed58b8fc40",
     "date": "2026-08-28"
   },
+  "/scholarships/erin-james-scholarship/": {
+    "hash": "90ca45d7f3d48f0c",
+    "date": "2026-09-03"
+  },
   "/scholarships/esther-and-peter-cunliffe-scholarship/": {
     "hash": "4463823dd681a92e",
     "date": "2026-08-28"
@@ -1062,6 +1110,10 @@
   "/scholarships/friesens-yearbook-award/": {
     "hash": "1b1a4ad6d0437c57",
     "date": "2026-08-28"
+  },
+  "/scholarships/gagne-family-music-scholarship/": {
+    "hash": "1b007f12aa4a5783",
+    "date": "2026-09-03"
   },
   "/scholarships/garth-worthington-memorial-scholarship/": {
     "hash": "2aa6faf8d0f287e5",
@@ -1191,6 +1243,10 @@
     "hash": "8d839940edaed44d",
     "date": "2026-08-28"
   },
+  "/scholarships/jackie-heitzman-rose-bowl-award/": {
+    "hash": "7df7aa963a1a55ed",
+    "date": "2026-09-03"
+  },
   "/scholarships/james-fowler-school-award/": {
     "hash": "84995d260b9d8197",
     "date": "2026-08-28"
@@ -1207,6 +1263,10 @@
     "hash": "36246eae21b10cab",
     "date": "2026-08-28"
   },
+  "/scholarships/jaxon-joseph-for-the-love-of-the-game-award/": {
+    "hash": "c50a428b538ca4fc",
+    "date": "2026-09-03"
+  },
   "/scholarships/jimmy-bonora-memorial-trades-award/": {
     "hash": "ae6b9ca8fa71241b",
     "date": "2026-09-03"
@@ -1214,6 +1274,10 @@
   "/scholarships/joan-ethier-women-in-science-scholarship/": {
     "hash": "a158d4a254987417",
     "date": "2026-09-01"
+  },
+  "/scholarships/joan-trettler-award/": {
+    "hash": "4c3024190321b570",
+    "date": "2026-09-03"
   },
   "/scholarships/jobs-daughters-international-scholarship/": {
     "hash": "c4f7a1346bd206b3",
@@ -1226,6 +1290,10 @@
   "/scholarships/john-and-vera-dunnigan-education-scholarship/": {
     "hash": "304dc8e2b41085e1",
     "date": "2026-08-28"
+  },
+  "/scholarships/john-reid-memorial-scholarship/": {
+    "hash": "d3008e0b96b09cb0",
+    "date": "2026-09-03"
   },
   "/scholarships/joseph-stroh-memorial-scholarship/": {
     "hash": "8e9ee1fb8b1229ea",
@@ -1243,9 +1311,17 @@
     "hash": "f780c883b3dc8946",
     "date": "2026-08-28"
   },
+  "/scholarships/katherine-dennis-scholarship/": {
+    "hash": "3e05d3d4348665b3",
+    "date": "2026-09-03"
+  },
   "/scholarships/kay-krausert-award-fund/": {
     "hash": "bae4244000b14951",
     "date": "2026-08-28"
+  },
+  "/scholarships/kdm-helping-hands-community-spirit-award/": {
+    "hash": "10153e9951c3a620",
+    "date": "2026-09-03"
   },
   "/scholarships/keith-carswell-memorial-award/": {
     "hash": "5e0bd74f32db07bc",
@@ -1294,6 +1370,10 @@
   "/scholarships/kinsmen-club-of-edmonton-salute-to-youth-scholarship/": {
     "hash": "bb8bb344253f5ee5",
     "date": "2026-08-29"
+  },
+  "/scholarships/kinsmen-club-of-st-albert-service-award/": {
+    "hash": "5b2d5e69c5c24eae",
+    "date": "2026-09-03"
   },
   "/scholarships/kirby-morrow-memorial-scholarship/": {
     "hash": "f1c299fe694dd47f",
@@ -1350,6 +1430,10 @@
   "/scholarships/lions-legacy-scholarship/": {
     "hash": "9411a8db76e537dc",
     "date": "2026-08-29"
+  },
+  "/scholarships/logan-hunter-youth-leadership-award/": {
+    "hash": "fd9b278a723097d5",
+    "date": "2026-09-03"
   },
   "/scholarships/lois-hole-humanities-and-social-sciences-scholarship/": {
     "hash": "529dbf37caa1c238",
@@ -1543,9 +1627,29 @@
     "hash": "bcac4743fd61f2f0",
     "date": "2026-09-03"
   },
+  "/scholarships/patricia-trudeau-scholarship/": {
+    "hash": "bc8d09e5e5697de0",
+    "date": "2026-09-03"
+  },
+  "/scholarships/paul-kane-global-languages-award/": {
+    "hash": "448ba8307e6e1dd3",
+    "date": "2026-09-03"
+  },
+  "/scholarships/paul-kane-principals-award/": {
+    "hash": "40318aeaa241e61d",
+    "date": "2026-09-03"
+  },
+  "/scholarships/paul-kane-unsung-hero-scholarship/": {
+    "hash": "43c6d5b8c9761a31",
+    "date": "2026-09-03"
+  },
   "/scholarships/perky-mccullough-international-excellence-scholarship/": {
     "hash": "85e0341c74295b41",
     "date": "2026-08-30"
+  },
+  "/scholarships/pkhs-character-award/": {
+    "hash": "19682c83c694aa86",
+    "date": "2026-09-03"
   },
   "/scholarships/premiers-citizenship-award/": {
     "hash": "028d5e7e4d32293d",
@@ -1667,6 +1771,22 @@
     "hash": "86c9be27317f62ac",
     "date": "2026-08-30"
   },
+  "/scholarships/rotary-club-of-st-albert-scholarship/": {
+    "hash": "07b5305bff46fcec",
+    "date": "2026-09-03"
+  },
+  "/scholarships/rotary-club-of-st-albert-service-above-self-award/": {
+    "hash": "f9a66b85319f6d82",
+    "date": "2026-09-03"
+  },
+  "/scholarships/rotary-club-of-st-albert-stephen-barr-memorial-award/": {
+    "hash": "15166dd736d1a402",
+    "date": "2026-09-03"
+  },
+  "/scholarships/rouse-family-relentless-award/": {
+    "hash": "bf761da9bb0e44be",
+    "date": "2026-09-03"
+  },
   "/scholarships/royal-canadian-legion-branch-288-scholarship/": {
     "hash": "89e18aaac8806861",
     "date": "2026-08-30"
@@ -1686,6 +1806,10 @@
   "/scholarships/ruth-ursula-leipziger-scholarship/": {
     "hash": "735e02477ba338b4",
     "date": "2026-09-01"
+  },
+  "/scholarships/ryan-burak-memorial-award/": {
+    "hash": "67e764ae8e040fed",
+    "date": "2026-09-03"
   },
   "/scholarships/ryder-ferguson-memorial-scholarship/": {
     "hash": "972d0440aad7d26d",
@@ -1727,13 +1851,25 @@
     "hash": "415caeec6fd24c91",
     "date": "2026-08-02"
   },
+  "/scholarships/shayne-h-page-memorial-scholarship/": {
+    "hash": "5348560d6306bf36",
+    "date": "2026-09-03"
+  },
   "/scholarships/shea-family-education-award/": {
     "hash": "08f2d30f4f0ef60a",
     "date": "2026-08-29"
   },
+  "/scholarships/shea-lynn-mcgaw-be-strong-never-give-up-award/": {
+    "hash": "2fa922287cece2c5",
+    "date": "2026-09-03"
+  },
   "/scholarships/shelagh-neary-mikulak-memorial-scholarship-for-leadership-and-innovation-in-library-sciences/": {
     "hash": "b3ff6e403dc43d91",
     "date": "2026-08-29"
+  },
+  "/scholarships/shirley-brauer-award-for-women-in-science/": {
+    "hash": "0d999a68a235394b",
+    "date": "2026-09-03"
   },
   "/scholarships/sister-joan-burns-memorial-scholarship/": {
     "hash": "b09132b2f1823755",
@@ -1765,6 +1901,50 @@
   },
   "/scholarships/spirit-of-bchs-citizenship-award/": {
     "hash": "0b3a128a4913623b",
+    "date": "2026-09-03"
+  },
+  "/scholarships/st-albert-breakfast-lions-club-we-serve-award/": {
+    "hash": "4cc83bf51015a242",
+    "date": "2026-09-03"
+  },
+  "/scholarships/st-albert-cosmopolitan-club-art-nixon-construction-and-fabrication-award/": {
+    "hash": "27010f7b1eecdc26",
+    "date": "2026-09-03"
+  },
+  "/scholarships/st-albert-cosmopolitan-club-joe-may-poetry-award-of-excellence/": {
+    "hash": "e15775a049b21b4f",
+    "date": "2026-09-03"
+  },
+  "/scholarships/st-albert-host-lions-club-legacy-award/": {
+    "hash": "41f5d81621b156f1",
+    "date": "2026-09-03"
+  },
+  "/scholarships/st-albert-legion-poppy-fund-bursary/": {
+    "hash": "3a49c3a1881e5f66",
+    "date": "2026-09-03"
+  },
+  "/scholarships/st-albert-minor-hockey-scholarship/": {
+    "hash": "258d6b2ced719733",
+    "date": "2026-09-03"
+  },
+  "/scholarships/st-albert-teachers-association-education-award/": {
+    "hash": "b8088d7dec7104e2",
+    "date": "2026-09-03"
+  },
+  "/scholarships/st-albert-young-artist-legacy-award/": {
+    "hash": "e799979d9f8e5410",
+    "date": "2026-09-03"
+  },
+  "/scholarships/stanley-dennis-we-believe-in-you-award/": {
+    "hash": "3aca951a40790fb5",
+    "date": "2026-09-03"
+  },
+  "/scholarships/stanley-haroun-award/": {
+    "hash": "f9bf057fe509697e",
+    "date": "2026-09-03"
+  },
+  "/scholarships/stephen-wack-confidence-to-follow-your-heart-award/": {
+    "hash": "047cbdd222916ab5",
     "date": "2026-09-03"
   },
   "/scholarships/steven-irving-memorial-music-scholarship/": {
@@ -1934,6 +2114,10 @@
   "/scholarships/wolf-scholars-program/": {
     "hash": "8ef8fdac2e3f2d55",
     "date": "2026-08-20"
+  },
+  "/scholarships/workun-garrick-partnership-award/": {
+    "hash": "b5b4ed1b1a58b158",
+    "date": "2026-09-03"
   },
   "/scholarships/worldskills-provincial-champion-scholarship/": {
     "hash": "9b2b847fc0e9d0bc",

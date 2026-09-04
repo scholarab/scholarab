@@ -154,6 +154,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Almost all of these are collected by the school rather than mailed to a sponsor, and the handbook prints no closing dates, so the date you need is the one your own office sets.',
   },
   {
+    slug: 'st-albert',
+    kind: 'region',
+    value: 'St. Albert',
+    label: 'St. Albert',
+    h1: 'St. Albert scholarships',
+    title: 'St. Albert High School Scholarships',
+    description:
+      'Scholarships for St. Albert and Sturgeon County students: community foundation awards, the Humboldt memorial funds, service club money and school bursaries.',
+    intro:
+      'One award reaches five schools and several run at two with different cutoffs, so the date you are held to is your own school\'s rather than the one the sponsor prints.',
+  },
+  {
     slug: 'alberta',
     kind: 'region',
     value: 'Alberta',
