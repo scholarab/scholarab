@@ -581,6 +581,26 @@ body.quiz-results #match-divider {
 }
 .sabl-chips > * { flex: none; }
 
+/* SCOPE is the one row that outgrew its scroller. TRACK and STATUS have a
+   fixed vocabulary, but SCOPE gains a chip every time a city is researched,
+   and at thirteen it ran well past the measure: the row's own scrollbar was
+   the only way to reach Fort Saskatchewan, and a filter you cannot see is a
+   filter nobody uses. So this row alone wraps onto a second line.
+   Desktop only, on purpose. The phone rules below bleed every chip row to the
+   screen edge and scroll it, which is the right gesture on a touch screen and
+   would become a five-line block if it wrapped instead. */
+@media (min-width: 901px) {
+  .sabl-chips-wrap { flex-wrap: wrap; overflow-x: visible; }
+  /* The label is centred against its chips, which on a two-line row parks it
+     in the gap between the lines and makes it read as a label for the second
+     one. Pinned to the top instead, and pushed down until its centre lines up
+     with the centre of a first-row chip. Measured, not derived: half the
+     difference in box heights lands 5px high, because the mono label's line
+     box sits above its cap height. */
+  .sabl-filter-row-wrap { align-items: flex-start; }
+  .sabl-filter-row-wrap .sabl-row-label { padding-top: 16px; }
+}
+
 /* Tighter chip metrics for the block carrying the most chips. /programs has
    nine FIELD categories, and at the default metrics they run well past the
    1012px measure. Since the rows scroll rather than wrap, this no longer

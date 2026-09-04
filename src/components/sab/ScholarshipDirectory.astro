@@ -212,9 +212,9 @@ const soonLine = [
         </div>
       </div>
     )}
-    <div class="sabl-filter-row">
+    <div class="sabl-filter-row sabl-filter-row-wrap">
       <span class="sabl-mono sabl-row-label">SCOPE</span>
-      <div class="sabl-chips">
+      <div class="sabl-chips sabl-chips-wrap">
         {currentRegion
           ? <a href="/scholarships/" class="sabl-chip sabl-chip-link">All</a>
           : <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>}
