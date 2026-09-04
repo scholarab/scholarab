@@ -16570,5 +16570,1142 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 463,
+    "title": "Spruce Grove Chamber of Commerce Award",
+    "amount": "$200",
+    "audience": "Spruce Grove Composite graduates who served school and community",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Spruce Grove Composite gates all of its grade 12 awards behind one Awards Application Form plus a Teacher Endorsement Form, both filed with Student Services. The 2026 cycle closed on April 17 at 4pm; the school sets a new mid-April date each year rather than reusing the same calendar day, so ask Student Services for this year's.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Spruce Grove Chamber of Commerce funds this for a graduating student who has given service to the school and the community. There is no average requirement, no field of study, and nothing to write beyond the school's standard awards package, which makes it one of the lowest-effort applications in the Parkland set.",
+    "metaDetail": "No marks bar and no field restriction.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 464,
+    "title": "Darren Schellenberger L.I.F.E. Award",
+    "amount": "$500",
+    "audience": "A Spruce Grove Composite graduate chosen by their graduating class",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "This one needs a separate nomination form on top of the school's awards package, and Student Services holds it. Ten classmates and a teacher have to sign, so start collecting signatures well before the April cutoff rather than in the last week.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by the Schellenberger family in memory of Darren Schellenberger, and given to the student who best exemplifies love of life, integrity, friendship and enthusiasm. The route to it is unusual: a nomination form supported by ten graduating classmates and a teacher, after which the graduating class votes to pick the recipient from the nominees. It is decided by the people who have actually watched you for three years rather than by a committee reading forms.",
+    "metaDetail": "Nominated by ten classmates, then decided by class vote.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 465,
+    "title": "Canadian Parents for French FSL Award",
+    "amount": "$100",
+    "audience": "Students who took French to the 30 level without French Immersion",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "This one is offered at both Parkland high schools, and each collects it its own way: Spruce Grove Composite through its April awards package, Memorial Composite in the spring of Semester 2. Neither publishes a fixed calendar date that repeats, so ask your own Student Services.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Canadian Parents for French Parkland Chapter funds this at both Spruce Grove Composite and Memorial Composite for a student who has had no past French Immersion and has completed a 30 level French course. The criteria say plainly that academic marks are not a criterion. What it wants instead is outstanding leadership in promoting French language learning, both personally and in the community, which makes it winnable by a student whose French mark is ordinary but who ran the club.",
+    "metaDetail": "States outright that marks are not a criterion.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 466,
+    "title": "French Immersion Leadership Award",
+    "amount": "$100",
+    "audience": "Spruce Grove French Immersion graduates",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Spruce Grove Composite gates all of its grade 12 awards behind one Awards Application Form plus a Teacher Endorsement Form, both filed with Student Services. The 2026 cycle closed on April 17 at 4pm; the school sets a new mid-April date each year rather than reusing the same calendar day, so ask Student Services for this year's.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The immersion counterpart of the Canadian Parents for French award beside it, also funded by the CPF Parkland Chapter and also explicit that academic marks are not a criterion. It goes to a student who completed French Immersion at the 10, 20 and 30 levels and who has shown outstanding leadership in promoting French language learning personally and in the community.",
+    "metaDetail": "Marks are explicitly not a criterion; leadership in promoting French is.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 467,
+    "title": "George B. Cuff Leadership Award",
+    "amount": "$250",
+    "audience": "Spruce Grove Composite students on Student Council",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Spruce Grove Composite gates all of its grade 12 awards behind one Awards Application Form plus a Teacher Endorsement Form, both filed with Student Services. The 2026 cycle closed on April 17 at 4pm; the school sets a new mid-April date each year rather than reusing the same calendar day, so ask Student Services for this year's.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Sponsored jointly by George B. Cuff and the City of Spruce Grove for a student who exemplifies leadership, service and academic achievement together. Preference is given to a Student Council participant, which is the detail that narrows it: the three qualities are common, the council seat is not.",
+    "metaDetail": "Preference goes to Student Council participants.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Student Council"
+      ]
+    }
+  },
+  {
+    "id": 468,
+    "title": "Kaleb Price Memorial Scholarship",
+    "amount": "$207.11",
+    "audience": "A Spruce Grove Composite graduate chosen by their graduating class",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "This one needs a separate nomination form from Student Services, signed by ten classmates and a teacher, before the graduating class votes on the nominees. Two of the school's awards run that way, so if you are organising signatures, organise them for both at once.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by the Price family for an outstanding grade 12 student who best exemplifies kindness, altruism, light to others, exuberance and benevolence. The amount is $207.11 rather than a round number because Kaleb was born on July 11 and was nicknamed the 7-11 kid. Like the L.I.F.E. Award it runs on a nomination supported by ten graduating classmates and one teacher, with the graduating class voting to choose from the nominees.",
+    "metaDetail": "The odd amount is the point: Kaleb was the 7-11 kid.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 469,
+    "title": "Orest Haydey Connie Archer Panther Auxiliary Award",
+    "amount": "$500",
+    "audience": "Spruce Grove Composite athletes with a 70% average",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Spruce Grove Composite gates all of its grade 12 awards behind one Awards Application Form plus a Teacher Endorsement Form, both filed with Student Services. The 2026 cycle closed on April 17 at 4pm; the school sets a new mid-April date each year rather than reusing the same calendar day, so ask Student Services for this year's.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Panther Auxiliary Association funds two of these, one to a male and one to a female student, each worth $500. You need a minimum 70% average and extensive involvement in the activities the Auxiliary supports, which in practice means athletics. Two awards inside one school is a small field, and the 70% bar is low enough that the involvement record decides it.",
+    "metaDetail": "Two awards, one male and one female.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Athletics"
+      ]
+    }
+  },
+  {
+    "id": 470,
+    "title": "Parkland School Division Citizenship Scholarship",
+    "amount": "$500",
+    "audience": "Parkland students with a 70 to 79.5% average and no other major award",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "This one is offered at both Parkland high schools, and each collects it its own way: Spruce Grove Composite through its April awards package, Memorial Composite in the spring of Semester 2. Neither publishes a fixed calendar date that repeats, so ask your own Student Services.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Ten $500 scholarships across Parkland School Division, and the criteria are worth reading closely because two of them work backwards from what you would expect. The weighted average in all grade 12 courses has to sit between 70 and 79.5%, so a strong transcript rules you out, and you must not have received any other major school-based award or scholarship. Add good citizenship, participation in the local and school communities, an attendance rate above 80%, and enrolment at a post-secondary institution. It is written for the solid middle of the class, which is exactly where scholarship money is usually thinnest.",
+    "metaDetail": "Ten awards, and a high average disqualifies you.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 471,
+    "title": "PEP Award",
+    "amount": "$600",
+    "audience": "Spruce Grove Composite students with a learning disability",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Spruce Grove Composite gates all of its grade 12 awards behind one Awards Application Form plus a Teacher Endorsement Form, both filed with Student Services. The 2026 cycle closed on April 17 at 4pm; the school sets a new mid-April date each year rather than reusing the same calendar day, so ask Student Services for this year's.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by Spruce Grove Composite itself for a student with a learning disability who is going on to further study and who demonstrates performance, effort and persistence. Awards written specifically for students with a learning disability are rare in Alberta, and at $600 this is larger than most of the school's other locally funded awards.",
+    "metaDetail": "One of very few Alberta awards written for this.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 472,
+    "title": "Robert Chamney Memorial Scholarship",
+    "amount": "$500",
+    "audience": "RAP students entering the NAIT electrical apprenticeship",
+    "url": "https://sgchs.psd.ca/students/awards/grade-12",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "This one takes a separate application from Student Services rather than riding on the school's general awards package, so ask for it by name.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "For a graduating student from the Registered Apprenticeship Program who has enrolled in the electrical apprenticeship program at NAIT. Preference goes to students with a learning disability or who have overcome significant obstacles, and enrolment in another trade is treated as a secondary consideration rather than a disqualification. Both of those clauses widen a listing that reads narrow at first, so a RAP student in a different trade should still ask.",
+    "metaDetail": "Preference to students who overcame significant obstacles.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 473,
+    "title": "Border Paving Award",
+    "amount": "$1,000",
+    "audience": "Parkland graduates entering engineering or engineering technology",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "This one is offered at both Parkland high schools, and each collects it its own way: Spruce Grove Composite through its April awards package, Memorial Composite in the spring of Semester 2. Neither publishes a fixed calendar date that repeats, so ask your own Student Services.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Border Paving Ltd. funds this for a graduating student at either Memorial Composite or Spruce Grove Composite who shows academic excellence and is suited to further study in engineering or engineering technology. The measure is specific: the highest average using blended marks in English 30, Math 30 or 31, and Physics 30. Engineering technology sitting alongside engineering means a student heading to a polytechnic diploma is as eligible as one heading to a degree.",
+    "metaDetail": "Decided on blended English, Math and Physics marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 474,
+    "title": "Capital Plumbing and Heating Scholarship",
+    "amount": "$500",
+    "audience": "Graduates apprenticing in a plumbing-related trade",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Capital Plumbing and Heating gives $500 plus tools to a graduating student apprenticing in one of five plumbing-related trades: plumbing, refrigeration, sheet metal, gasfitting, or steamfitting and pipefitting. The tools are the part worth noticing, because a first-year apprentice buying their own kit is facing a real cost that a cash award of this size would barely cover on its own.",
+    "metaDetail": "Comes with tools as well as the money.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 475,
+    "title": "Constituency of Lac Ste. Anne-Parkland Award for Leadership in Business",
+    "amount": "Varies",
+    "audience": "Memorial Composite graduates showing business leadership potential",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Presented by the Constituency of Lac Ste. Anne-Parkland to the student who best demonstrates the potential to be a leader in the business world. The criterion is potential rather than marks or a declared program, which leaves it open to a student who has run something real, whether that is a club budget, a small venture, or a team.",
+    "metaDetail": "Judged on potential rather than on a transcript.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 476,
+    "title": "Constituency of Spruce Grove-Stony Plain Award for Leadership in Building a Better Community",
+    "amount": "Varies",
+    "audience": "Memorial Composite graduates with a record of social activism",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Awarded each year by the Constituency of Spruce Grove-Stony Plain to the graduating student who best demonstrates a commitment to social activism. The criteria ask for something ongoing, action oriented, showing leadership, and resulting in greater awareness of a social issue within the school or the community. A single event will not read well here; a campaign you kept going will.",
+    "metaDetail": "Wants sustained activism, not a single project.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 477,
+    "title": "Decker Award",
+    "amount": "$500",
+    "audience": "Memorial Composite graduates with a 75% average",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Decker Properties Management and Decker Properties Group fund this for a grade twelve student with an average mark of 75% in their grade twelve courses who has shown superior commitment to their school and local communities. The 75% bar sits above the Parkland citizenship scholarships and below the school's honours awards, which puts it in the band where a lot of students stop applying for things.",
+    "metaDetail": "Needs a 75% grade 12 average plus school commitment.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 478,
+    "title": "Dr. Dekterov Health Care Professionals Award",
+    "amount": "$1,000",
+    "audience": "Memorial Composite graduates entering health sciences",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by Dentistry by Dekterov and granted to a graduating Memorial Composite student entering a post-secondary program related to health sciences. The published criteria name nothing beyond the field itself, no average and no service record, which is unusual for an award of this size and means the pool is whoever in the graduating class is heading into health.",
+    "metaDetail": "Field of study is the only stated criterion.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 479,
+    "title": "Elizabeth Spychka Citizenship Scholarship",
+    "amount": "$500",
+    "audience": "Memorial Composite graduates with a 70 to 79.5% average",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by the family of Elizabeth Spychka and built on the same band as the division citizenship scholarships: a weighted average of 70 to 79.5% across grade 12, good citizenship, no other major school-based award, and enrolment at a post-secondary institution. The one thing it adds is a preference for students involved in high school graduation in some capacity, so work on the grad committee counts here in a way it does not elsewhere.",
+    "metaDetail": "Preference to students who helped run graduation.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 480,
+    "title": "Hawkings Tinney LLP Commerce Award",
+    "amount": "$1,000",
+    "audience": "Memorial Composite graduates entering a Bachelor of Commerce",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Hawkings Tinney LLP present this to a graduating student entering a Bachelor of Commerce program at a registered post-secondary institution, and the recipient has to show a high level of success in their grade 12 math course. Two gates, both checkable: the program acceptance and the math mark. Nothing about volunteering, which is rare among the awards at this school.",
+    "metaDetail": "Turns on your grade 12 math mark.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 481,
+    "title": "Laverne & Jack Lewis Award",
+    "amount": "$500",
+    "audience": "Stony Plain area graduates entering agriculture",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Stony Plain Rotary Club funds this for an exemplary grade 12 student pursuing a career in agriculture. To qualify you need to be registered at a post-secondary institution, have prior experience in agricultural endeavours, participate in community programs, and reside in Stony Plain or the surrounding area. The prior experience clause is the real gate, and it is not something you can assemble in your final semester.",
+    "metaDetail": "Wants prior hands-on agricultural experience.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 482,
+    "title": "Meridian Masonic Lodge Bursary",
+    "amount": "$1,000",
+    "audience": "Memorial Composite graduates who need financial help",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Meridian Masonic Lodge No. 129 in Stony Plain fund this for a graduating student with good work habits, citizenship and participation, who shows respect and caring for fellow students, parents and teachers. Three further conditions apply: you can be enrolling in any type of post-secondary education, you must not be receiving any other major award, and you must require financial assistance. The any type wording puts trades and college on equal footing with university here.",
+    "metaDetail": "Any post-secondary type qualifies, and need is weighed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 483,
+    "title": "Parker Tobin Memorial Award",
+    "amount": "$750",
+    "audience": "Memorial Composite student athletes with 80% in Math 30",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by Ed and Rhonda Tobin and Holton Roofing in memory of Parker Tobin, one of the players lost in the 2018 Humboldt Broncos bus crash. It goes to a student who excels at mathematics and has exemplary athletic ability, and the criteria are specific: enrolment in a minimum one-year program at an accredited institution, a grade over 80% in Math 30-1 or 30-2, outstanding overall academic achievement, being a positive role model and a good teammate, and outstanding leadership in sport. Requiring both a math mark and athletic skill narrows the field sharply.",
+    "metaDetail": "Needs 80% in Math 30 plus athletic ability.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Athletics"
+      ]
+    }
+  },
+  {
+    "id": 484,
+    "title": "Rotary Club of Stony Plain Volunteer Award",
+    "amount": "$500",
+    "audience": "Memorial Composite students who volunteer in the community",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Rotary Club of Stony Plain give this to recognise and encourage school and community involvement and service by youth. There is no marks requirement and no field of study attached to it, so the volunteering record is the entire application.",
+    "metaDetail": "Service is the whole criterion.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 485,
+    "title": "Rotary Club of Parkland After Dark Scholarship",
+    "amount": "$1,000",
+    "audience": "Parkland students entering any first year, apprenticeships included",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Rotary Club of Parkland After Dark award this to a student entering their first year of post-secondary education, and they say explicitly that registered apprenticeship programs count. Preference goes to students demonstrating financial need or a strong commitment to good citizenship and volunteerism, which is an either-or rather than a both, so a student with one of the two should still apply.",
+    "metaDetail": "Registered apprenticeships count as post-secondary here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 486,
+    "title": "Shiloh Chiropractic Clinic Sports Medicine Award",
+    "amount": "$500",
+    "audience": "The top Sports Medicine student at Memorial Composite",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Shiloh Chiropractic Clinic fund this for the top student in the Sports Medicine program at Memorial Composite. The recipient has to have completed both the academic and the practicum parts of Sports Medicine 35, so the practicum hours are as much a requirement as the mark is.",
+    "metaDetail": "Needs the practicum as well as the coursework.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 487,
+    "title": "Stony Plain Lions Award for Improvement",
+    "amount": "$250 to $500",
+    "audience": "Parkland students in grades 10 to 12 whose work improved",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Stony Plain Lions Club fund three of these: $500 to a graduating student who has improved in attitude, achievement and citizenship across their high school career, and $250 each to a grade 10 and a grade 11 student who improved over the course of one school year. All three ask for contribution to the community through volunteering and an acceptable level of academic standing. Improvement is the measure, which makes this one of very few awards a student can win precisely because they started badly.",
+    "metaDetail": "Three awards, one each for grades 10, 11 and 12.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 488,
+    "title": "Stony Plain Lions Legacy Scholarship Fund",
+    "amount": "$1,000",
+    "audience": "Students volunteering for humanitarian causes",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Funded by the Stony Plain Lions Club together with the Lions of Alberta Foundation, and presented to a student who demonstrates a commitment to humanitarian causes and exhibits the Lions service-oriented philosophy by actively volunteering in their community. It is the larger of the two Stony Plain Lions awards and the one aimed at sustained service rather than at personal improvement.",
+    "metaDetail": "Backed by the Lions of Alberta Foundation.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 489,
+    "title": "Stony Plain Royal Canadian Legion Bursary",
+    "amount": "$500",
+    "audience": "Memorial Composite students with leadership and work habits",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Royal Canadian Legion Branch 256 in Stony Plain award two of these to students who demonstrate leadership skills and show evidence of good citizenship and strong work habits. Worth noting against the Legion bursaries elsewhere in Alberta: this one carries no requirement to be descended from a veteran, so it is open to any student at the school who meets the three criteria.",
+    "metaDetail": "Two awards, with no veteran descent required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 490,
+    "title": "Stony Plain TireCraft Mechanics Award",
+    "amount": "Varies",
+    "audience": "Memorial Composite students who completed all three mechanics levels",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Tirecraft in Stony Plain present this to a grade 12 student who has completed all three levels of mechanics in high school, shows a passion for the mechanics trade, and is a positive role model for classmates. The three-level requirement means the qualifying work is spread across your whole high school timetable, so it is a grade 10 decision as much as a grade 12 one.",
+    "metaDetail": "Needs all three high school mechanics levels.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 491,
+    "title": "Green and Gold Athletic Scholarships",
+    "amount": "$1,000",
+    "audience": "Memorial Composite athletes with a 70% average and two years on a team",
+    "url": "https://mchs.psd.ca/download/441592",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Memorial Composite fund two of these at $1,000 each for athletes who are well rounded and community minded, with a positive attitude, unselfishness, responsibility, coachability, leadership and goal setting. The hard requirements are an overall average of at least 70% in grade 12, involvement on at least one school athletic team in two high school years with one of them being grade 12, and involvement in Green and Gold fundraising while at the school. That last one is easy to miss and cannot be fixed late.",
+    "metaDetail": "Two awards, and fundraising involvement is required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Athletics"
+      ]
+    }
+  },
+  {
+    "id": 492,
+    "title": "Spruce Grove and District Agricultural Heritage Society Student Scholarship",
+    "amount": "$1,000",
+    "audience": "Tri-Region residents in an agriculture-related program, any year",
+    "url": "https://sprucegroveagsociety.com/scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Spruce Grove",
+    "notes": "Applications go by email to the society rather than through a school, and it says late or incomplete applications will not be considered. Note that the society's own page now says $1,000 each; the $750 figure that appears on a school scholarship page and in older coverage is out of date.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Two scholarships of $1,000 each from the Spruce Grove and District Agricultural Society, for students enrolled in an agriculture-related field of study at an accredited college, university or trade school. Two things make this wider than a typical graduation award: any year of study qualifies, not just first year, and past applicants and recipients are allowed to apply again. You have to be a resident of the Tri-Region, meaning Parkland County, Spruce Grove or Stony Plain.",
+    "metaDetail": "Open to any year of study, and past recipients may reapply.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-10-15"
   }
 ]

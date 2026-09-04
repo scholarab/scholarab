@@ -88,6 +88,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: 'Airdrie', value: 'Airdrie', hint: 'AND ROCKY VIEW' },
       { label: 'Brooks', value: 'Brooks', hint: 'AND COUNTY OF NEWELL' },
       { label: 'St. Albert', value: 'St. Albert', hint: 'AND STURGEON COUNTY' },
+      { label: 'Spruce Grove', value: 'Spruce Grove', hint: 'AND STONY PLAIN' },
       { label: 'Other Alberta', value: 'Other Alberta', hint: 'EVERYWHERE ELSE' },
     ],
   },

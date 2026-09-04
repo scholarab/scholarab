@@ -166,6 +166,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'One award reaches five schools and several run at two with different cutoffs, so the date you are held to is your own school\'s rather than the one the sponsor prints.',
   },
   {
+    slug: 'spruce-grove',
+    kind: 'region',
+    value: 'Spruce Grove',
+    label: 'Spruce Grove',
+    h1: 'Spruce Grove scholarships',
+    title: 'Spruce Grove High School Scholarships',
+    description:
+      'Scholarships for Spruce Grove, Stony Plain and Parkland County students: division citizenship awards, service club money, trades bursaries and employer funds.',
+    intro:
+      'The division citizenship scholarships here pay ten students whose average sits between 70 and 79.5 percent, so a strong transcript rules you out and the solid middle of the class is the whole field.',
+  },
+  {
     slug: 'alberta',
     kind: 'region',
     value: 'Alberta',
