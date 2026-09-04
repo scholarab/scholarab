@@ -19,9 +19,15 @@ on:
     - cron: '0 0 * * *'   # Daily: sync scholarship active flags; a data commit triggers the CF Pages deploy
   workflow_dispatch:
 
+# One group per trigger, so the daily cron cannot cancel a push run. Until
+# 2026-09-04 every trigger shared "ci-main" with cancel-in-progress, and any
+# push still running at 00:00 UTC was cancelled by the schedule, which then
+# showed as a red X on a commit that was fine. Pushes still supersede each
+# other; scheduled and manual runs never cancel, since they can be part way
+# through committing a data sync.
 concurrency:
-  group: ci-main
-  cancel-in-progress: true
+  group: ci-${{ github.event_name }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   validate:
