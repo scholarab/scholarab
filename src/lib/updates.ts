@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Thirteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin and Fort McMurray, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Fourteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray and Grande Prairie, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Grande Prairie finally has the page this changelog claimed it had back in April. Its 33 awards were sitting under the province-wide list, and the entrance awards at Northwestern Polytechnic have been added beside them.',
+      },
       {
         kind: 'listings',
         text: 'Fort McMurray and Wood Buffalo now have 76 awards and a page of their own, most of them out of the Keyano College award book, alongside the Fort McMurray Public School District awards and the municipal youth citizenship award.',

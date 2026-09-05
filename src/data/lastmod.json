@@ -555,6 +555,18 @@
     "hash": "1dcb906d01b10f94",
     "date": "2026-08-29"
   },
+  "/scholarships/alberta-blue-cross-away-from-home-entrance-award/": {
+    "hash": "d8e9f9a6598b4191",
+    "date": "2026-09-04"
+  },
+  "/scholarships/alberta-blue-cross-barrier-free-learning-bursary/": {
+    "hash": "d71f8b13db5223d2",
+    "date": "2026-09-04"
+  },
+  "/scholarships/alberta-blue-cross-entrance-award-northwestern-polytechnic/": {
+    "hash": "d21001b09461fc89",
+    "date": "2026-09-04"
+  },
   "/scholarships/alberta-blue-cross-entrance-award/": {
     "hash": "42ec75e07532614d",
     "date": "2026-09-04"
@@ -650,6 +662,10 @@
   "/scholarships/andy-polanski-leader-of-tomorrow-memorial-scholarship/": {
     "hash": "cb0d54e6bb9f7657",
     "date": "2026-09-03"
+  },
+  "/scholarships/angel-fraser-memorial-bursary/": {
+    "hash": "8f0a33f5e91d0504",
+    "date": "2026-09-04"
   },
   "/scholarships/anna-john-kolesar-memorial-scholarship/": {
     "hash": "0376be68e7788ce1",
@@ -864,8 +880,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/bob-neufeld-scholarship/": {
-    "hash": "2c2af40df3905db6",
-    "date": "2026-08-30"
+    "hash": "7caabd31107b4054",
+    "date": "2026-09-04"
   },
   "/scholarships/border-paving-award/": {
     "hash": "99a1dc0783a4f534",
@@ -942,6 +958,10 @@
   "/scholarships/bruce-leitl-composition-award/": {
     "hash": "19a268dfb694ed98",
     "date": "2026-08-28"
+  },
+  "/scholarships/bunge-scholarship-for-business/": {
+    "hash": "4da090b5f0ab577e",
+    "date": "2026-09-04"
   },
   "/scholarships/bunzl-scholarship/": {
     "hash": "65f335fbca2cce16",
@@ -1168,12 +1188,16 @@
     "date": "2026-09-04"
   },
   "/scholarships/chief-ronald-w-clarke-fund-student-award/": {
-    "hash": "02312d881712fa13",
-    "date": "2026-08-30"
+    "hash": "4b21193215aad1a5",
+    "date": "2026-09-04"
   },
   "/scholarships/china-alberta-award-for-excellence-in-chinese/": {
     "hash": "6ccdd1ec28e25d53",
     "date": "2026-08-02"
+  },
+  "/scholarships/chris-killeen-memorial-bursary/": {
+    "hash": "3a4652f1a5b527fa",
+    "date": "2026-09-04"
   },
   "/scholarships/chris-mcmechan-memorial-award-in-science-and-outdoor-pursuits/": {
     "hash": "77e1a69539417a18",
@@ -1327,6 +1351,10 @@
     "hash": "ce60577f62b716ac",
     "date": "2026-09-04"
   },
+  "/scholarships/daily-herald-tribune-bursary/": {
+    "hash": "692e446832fde8fd",
+    "date": "2026-09-04"
+  },
   "/scholarships/darren-schellenberger-life-award/": {
     "hash": "49575d425288c73d",
     "date": "2026-09-03"
@@ -1401,6 +1429,10 @@
   },
   "/scholarships/dr-malcolm-gray-memorial-scholarship/": {
     "hash": "7e0ae74400bf29af",
+    "date": "2026-09-04"
+  },
+  "/scholarships/dr-phil-and-vi-sunohara-nursing-bursary/": {
+    "hash": "6c513b2bc5290c86",
     "date": "2026-09-04"
   },
   "/scholarships/dr-santokh-singh-first-generation-canadian-scholarship/": {
@@ -1495,6 +1527,10 @@
     "hash": "ecaa8aa98fb64212",
     "date": "2026-08-29"
   },
+  "/scholarships/elsworth-foy-memorial-bursary/": {
+    "hash": "b1c29c178246f4b4",
+    "date": "2026-09-04"
+  },
   "/scholarships/emmalee-cherweniuk-award/": {
     "hash": "5b6379d2f04c301d",
     "date": "2026-08-28"
@@ -1509,6 +1545,10 @@
   },
   "/scholarships/eric-and-agnes-dixon-scholarship/": {
     "hash": "22e75acfeea002aa",
+    "date": "2026-09-04"
+  },
+  "/scholarships/eric-and-nancy-bansgrove-bursary/": {
+    "hash": "544fbc81ff006658",
     "date": "2026-09-04"
   },
   "/scholarships/erik-and-gunvor-mygind-scholarship/": {
@@ -1530,6 +1570,10 @@
   "/scholarships/everett-and-mitchell-code-scholarship/": {
     "hash": "f49351e20465ea41",
     "date": "2026-08-28"
+  },
+  "/scholarships/evy-newton-mcbryan-memorial-award/": {
+    "hash": "e63d0e4dba60c27e",
+    "date": "2026-09-04"
   },
   "/scholarships/famous-5-legacy-student-award/": {
     "hash": "c7d83fd8fcf85ebd",
@@ -1643,6 +1687,10 @@
     "hash": "7718615e213e27f1",
     "date": "2026-09-04"
   },
+  "/scholarships/fred-trotter-memorial-entrance-scholarship/": {
+    "hash": "3c4bd8109e9b4c45",
+    "date": "2026-09-04"
+  },
   "/scholarships/french-bilingual-awards/": {
     "hash": "c29fd0f1e779d8ce",
     "date": "2026-08-28"
@@ -1650,6 +1698,10 @@
   "/scholarships/french-immersion-leadership-award/": {
     "hash": "a29b91176f9044dc",
     "date": "2026-09-03"
+  },
+  "/scholarships/friends-of-the-foundation-scholarship/": {
+    "hash": "672baaeda66e0a74",
+    "date": "2026-09-04"
   },
   "/scholarships/friends-of-the-performing-arts-scholarship/": {
     "hash": "dcb01408b1b6b393",
@@ -1724,8 +1776,12 @@
     "date": "2026-09-04"
   },
   "/scholarships/gppsd-career-and-technology-studies-scholarship/": {
-    "hash": "2f022b5359e5a0de",
-    "date": "2026-08-30"
+    "hash": "3addbcf3122e3c5a",
+    "date": "2026-09-04"
+  },
+  "/scholarships/gppsd-indigenous-scholarship/": {
+    "hash": "3bc5ebd66fb6217d",
+    "date": "2026-09-04"
   },
   "/scholarships/grace-elaine-campbell-scholarship/": {
     "hash": "b485b0b32998bd36",
@@ -1740,12 +1796,12 @@
     "date": "2026-09-04"
   },
   "/scholarships/grande-prairie-and-district-oldtimers-association-scholarship/": {
-    "hash": "3c6340e8029c2ecb",
-    "date": "2026-08-30"
+    "hash": "de3328b28ec1e46f",
+    "date": "2026-09-04"
   },
   "/scholarships/grande-prairie-auto-group-student-award/": {
-    "hash": "25888e85d2064a7a",
-    "date": "2026-08-30"
+    "hash": "f8b8cf8f71d0a7f8",
+    "date": "2026-09-04"
   },
   "/scholarships/grant-macewan-united-world-college-scholarship/": {
     "hash": "6f7ff0d481883c43",
@@ -1817,6 +1873,10 @@
   },
   "/scholarships/henri-forgues-scholarship/": {
     "hash": "b221d7a6e80c8c65",
+    "date": "2026-09-04"
+  },
+  "/scholarships/henrick-solheim-and-andy-haugen-bursary/": {
+    "hash": "5c58814018955895",
     "date": "2026-09-04"
   },
   "/scholarships/hershita-sainbhee-memorial-scholarship/": {
@@ -2307,6 +2367,10 @@
     "hash": "16626f453f043a78",
     "date": "2026-09-04"
   },
+  "/scholarships/lion-bjarne-tangen-memorial-bursary/": {
+    "hash": "a83f748d6cbeae24",
+    "date": "2026-09-04"
+  },
   "/scholarships/lion-don-westman-legacy-scholarship/": {
     "hash": "d3e79da2f326e633",
     "date": "2026-09-03"
@@ -2632,8 +2696,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/northern-alberta-rural-physicians-fund/": {
-    "hash": "6209b605a756c3c6",
-    "date": "2026-08-30"
+    "hash": "2781b6d22fdaf20f",
+    "date": "2026-09-04"
   },
   "/scholarships/northern-lights-aboriginal-achievement-scholarship/": {
     "hash": "a794a9ebc3dd42bc",
@@ -2672,8 +2736,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/northwestern-alberta-foundation-student-awards/": {
-    "hash": "ff33b82bf8e064a4",
-    "date": "2026-08-30"
+    "hash": "2fd2a002b61ac97f",
+    "date": "2026-09-04"
   },
   "/scholarships/northwinds-marching-band-scholarships/": {
     "hash": "0845b27e59b59db1",
@@ -2735,6 +2799,10 @@
     "hash": "bc8d09e5e5697de0",
     "date": "2026-09-03"
   },
+  "/scholarships/pattison-media-visual-arts-scholarship/": {
+    "hash": "56771ef0d634e3b5",
+    "date": "2026-09-04"
+  },
   "/scholarships/paul-kane-global-languages-award/": {
     "hash": "448ba8307e6e1dd3",
     "date": "2026-09-03"
@@ -2752,8 +2820,8 @@
     "date": "2026-09-03"
   },
   "/scholarships/perky-mccullough-international-excellence-scholarship/": {
-    "hash": "85e0341c74295b41",
-    "date": "2026-08-30"
+    "hash": "8f583acef36eabb5",
+    "date": "2026-09-04"
   },
   "/scholarships/philip-ki-joon-oh-scholarship/": {
     "hash": "6cbee41acac6c027",
@@ -2818,6 +2886,10 @@
   "/scholarships/rbc-ignite-scholarship/": {
     "hash": "224b783c7463dc4f",
     "date": "2026-08-20"
+  },
+  "/scholarships/reading-university-alumni-student-award/": {
+    "hash": "fa911ebc0a56b725",
+    "date": "2026-09-04"
   },
   "/scholarships/red-deer-arts-council-canada-centennial-secondary-scholarship/": {
     "hash": "8816bd95adfdc76c",
@@ -2935,13 +3007,21 @@
     "hash": "d299eb659131b8e6",
     "date": "2026-09-04"
   },
+  "/scholarships/rogers-broadcasting-rock-977-music-award/": {
+    "hash": "4e7f12b0a1f06c2d",
+    "date": "2026-09-04"
+  },
   "/scholarships/ron-doreen-brandt-faculty-of-education-scholarship/": {
     "hash": "4450964a6411beef",
     "date": "2026-09-03"
   },
+  "/scholarships/ron-loughlin-memorial-bursary/": {
+    "hash": "d3e64aa16b97df7e",
+    "date": "2026-09-04"
+  },
   "/scholarships/ron-pfau-memorial-scholarship/": {
-    "hash": "b36ca7dcdd486bd9",
-    "date": "2026-08-30"
+    "hash": "cd5fdb54252a94b5",
+    "date": "2026-09-04"
   },
   "/scholarships/rosalie-szuch-scholarship/": {
     "hash": "6bd1d8e22fc69afb",
@@ -2964,8 +3044,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/rotary-club-of-grande-prairie-scholarship/": {
-    "hash": "86c9be27317f62ac",
-    "date": "2026-08-30"
+    "hash": "c3f75e231497a098",
+    "date": "2026-09-04"
   },
   "/scholarships/rotary-club-of-parkland-after-dark-scholarship/": {
     "hash": "d51249e52323082c",
@@ -2996,8 +3076,8 @@
     "date": "2026-08-30"
   },
   "/scholarships/royal-canadian-legion-branch-54-bursary/": {
-    "hash": "7c75f5db8b033000",
-    "date": "2026-08-30"
+    "hash": "4eff1dff041a077e",
+    "date": "2026-09-04"
   },
   "/scholarships/royal-canadian-legion-branch-bursary-wetaskiwin/": {
     "hash": "27f9c7ba9b436cdd",
@@ -3068,8 +3148,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/sarah-joan-alward-bursary/": {
-    "hash": "e7ee710ba6add8cc",
-    "date": "2026-08-30"
+    "hash": "8159215492e6936d",
+    "date": "2026-09-04"
   },
   "/scholarships/sargent-community-scholarship/": {
     "hash": "d9bcc3a9239412fe",
@@ -3268,8 +3348,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/striving-for-nursing-excellence-bursary/": {
-    "hash": "12c429bcc652a6fb",
-    "date": "2026-08-30"
+    "hash": "1729530dd0956bb4",
+    "date": "2026-09-04"
   },
   "/scholarships/stuck-at-prom-scholarship/": {
     "hash": "6df727549e35823d",
@@ -3500,8 +3580,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/weyerhaeuser-grande-prairie-local-scholarship/": {
-    "hash": "d5f73482fd3f9ee7",
-    "date": "2026-08-30"
+    "hash": "5c6d95c69f489dd7",
+    "date": "2026-09-04"
   },
   "/scholarships/william-aberhart-alumni-scholarship/": {
     "hash": "6ba62e7fba484528",

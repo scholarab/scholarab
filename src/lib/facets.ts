@@ -238,6 +238,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Eight of these are decided on a grade 12 mark alone with nothing to fill in, and one of the eight covers eight separate courses at $500 each.',
   },
   {
+    slug: 'grande-prairie',
+    kind: 'region',
+    value: 'Grande Prairie',
+    label: 'Grande Prairie',
+    h1: 'Grande Prairie scholarships',
+    title: 'Grande Prairie Scholarships',
+    description:
+      'Scholarships for Grande Prairie and the Peace Region: Northwestern Polytechnic entrance awards, community foundation funds and the city and county money.',
+    intro:
+      'Northwestern Polytechnic lists 359 awards, but its standard criteria shut almost all of them until you have two semesters behind you, so these are the ones you can win from grade 12.',
+  },
+  {
     slug: 'fort-mcmurray',
     kind: 'region',
     value: 'Fort McMurray',

@@ -813,7 +813,7 @@ describe('the corpus the quiz matches against', () => {
 
   it('leaves no scholarship that no profile can reach', async () => {
     const scholarships = (await import('../data/scholarships.json')).default
-    const cities = ['Airdrie', 'Beaumont', 'Brooks', 'Calgary', 'Camrose', 'Chestermere', 'Cold Lake', 'Edmonton', 'Fort McMurray', 'Fort Saskatchewan', 'Lacombe', 'Leduc', 'Lethbridge', 'Lloydminster', 'Medicine Hat', 'Red Deer', 'Spruce Grove', 'St. Albert', 'Wetaskiwin', 'Other Alberta']
+    const cities = ['Airdrie', 'Beaumont', 'Brooks', 'Calgary', 'Camrose', 'Chestermere', 'Cold Lake', 'Edmonton', 'Fort McMurray', 'Fort Saskatchewan', 'Grande Prairie', 'Lacombe', 'Leduc', 'Lethbridge', 'Lloydminster', 'Medicine Hat', 'Red Deer', 'Spruce Grove', 'St. Albert', 'Wetaskiwin', 'Other Alberta']
     const grades = ['10', '11', '12', 'post-secondary'] as const
     const dead = scholarships.filter(s => {
       for (const city of cities) {

@@ -16,7 +16,7 @@ const QUIZ_FIELDS = new Set(['STEM', 'health', 'business', 'arts', 'trades'])
 
 // Alberta cities recognised for region matching
 const ALBERTA_CITIES = new Set([
-  'Airdrie', 'Beaumont', 'Brooks', 'Calgary', 'Camrose', 'Chestermere', 'Cold Lake', 'Edmonton', 'Fort McMurray', 'Fort Saskatchewan', 'Lacombe', 'Leduc', 'Lethbridge', 'Lloydminster', 'Medicine Hat', 'Red Deer', 'Spruce Grove', 'St. Albert', 'Wetaskiwin',
+  'Airdrie', 'Beaumont', 'Brooks', 'Calgary', 'Camrose', 'Chestermere', 'Cold Lake', 'Edmonton', 'Fort McMurray', 'Fort Saskatchewan', 'Grande Prairie', 'Lacombe', 'Leduc', 'Lethbridge', 'Lloydminster', 'Medicine Hat', 'Red Deer', 'Spruce Grove', 'St. Albert', 'Wetaskiwin',
   'Other Alberta',
 ])
 

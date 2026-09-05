@@ -13111,8 +13111,8 @@
     "audience": "Students from northwestern Alberta entering or continuing post-secondary study",
     "category": "General",
     "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://nafgives.com/studentawards/",
     "notes": "This is the single most useful application in the Peace Country and almost nobody outside Grande Prairie has heard of it. The foundation holds more than forty separate award funds, and one universal form puts you in front of every fund you qualify for, so the work of applying once is spread across dozens of chances. In 2025 it paid out over $60,000 across 100 awards. The window ran from April 16 to August 9 in 2026, so this is that deadline rolled forward a year and the foundation had not posted the new dates when this was checked.",
     "description": "One application to the Northwestern Alberta Foundation is considered for over forty student award funds covering sports, nursing, environmental studies, emergency services, trades, agriculture, fine arts, animal health, education, business, technology, music, tourism and hospitality. Recipients come from Grande Prairie, Peace River, High Level and other communities across the region, and awards follow students to institutions inside and outside Alberta. Decisions are sent in mid-September.",
@@ -13139,7 +13139,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "alsoOpenTo": [
+      "Grande Prairie"
+    ]
   },
   {
     "id": 374,
@@ -13148,9 +13151,9 @@
     "deadline": "2027-08-09",
     "audience": "County of Grande Prairie residents studying business, commerce or public office administration",
     "category": "Academic",
-    "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "region": "Grande Prairie",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://www.countygp.ab.ca/council-administration/grants-and-scholarships/ron-pfau-memorial-scholarship/",
     "notes": "Named for a longtime County administrator, and the residency test is the County of Grande Prairie rather than the City, so a student inside city limits does not qualify on their own address. Your parents' County residence counts if you have moved away for school. County council handed administration to the Northwestern Alberta Foundation in 2024, so it now runs on the foundation's universal application and its August deadline, shown here rolled forward.",
     "description": "A $1,000 scholarship for current or former residents of the County of Grande Prairie who are Canadian citizens or landed immigrants and are entering or enrolled at an Alberta post-secondary institution in business, commerce or public office administration. Applications go through the Northwestern Alberta Foundation portal.",
@@ -13188,9 +13191,9 @@
     "deadline": "2027-08-09",
     "audience": "Grande Prairie city or county residents in an Automotive Service Technician program",
     "category": "Trades",
-    "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "region": "Grande Prairie",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://nafgives.com/grande-prairie-auto-group/",
     "notes": "A single award, but the eligible pool is tiny: you have to live in the City or County of Grande Prairie and be registered specifically as an automotive service technician. If that is you, this is close to the best odds on the site. Five dealership general managers put it together in 2022. It is paid through the Northwestern Alberta Foundation universal application, so the deadline shown is the foundation's, rolled forward a year.",
     "description": "One award of $1,500 for a resident of the City of Grande Prairie or the County of Grande Prairie who is registered in an Automotive Service Technician program. Applications are made through the Northwestern Alberta Foundation.",
@@ -13228,9 +13231,9 @@
     "deadline": "2027-08-09",
     "audience": "County of Grande Prairie residents in an emergency services program",
     "category": "Community",
-    "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "region": "Grande Prairie",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://nafgives.com/chief-ronald-w-clarke-fund/",
     "notes": "The Wembley Fire Department started this in 2012 for a volunteer firefighter with 46 years of service, and the eligible programs are broader than the name suggests: nursing and physician studies count alongside firefighting and paramedicine. The fund is an endowment, so the amount depends on what it earned that year and the foundation does not publish a fixed figure. Applications run through the foundation's universal form and its August deadline, shown here rolled forward.",
     "description": "A student award for a resident of the County of Grande Prairie registered in an emergency services program, including firefighting, emergency medical services, paramedic training, nursing, physician services and enforcement services. Applicants are asked to show commitment or roots in the Peace Country. Applications are made through the Northwestern Alberta Foundation.",
@@ -13269,7 +13272,7 @@
     "deadline": "2027-08-01",
     "audience": "Grande Prairie graduates with veteran ancestry",
     "category": "Community",
-    "region": "Alberta",
+    "region": "Grande Prairie",
     "active": false,
     "lastVerified": "2026-08",
     "url": "https://scholarships.pwpsd.ca/",
@@ -13306,7 +13309,7 @@
     "deadline": "2026-10-01",
     "audience": "Descendants of Grande Prairie district pioneers",
     "category": "Community",
-    "region": "Alberta",
+    "region": "Grande Prairie",
     "active": true,
     "lastVerified": "2026-08",
     "url": "https://scholarships.pwpsd.ca/",
@@ -13343,7 +13346,7 @@
     "deadline": "2026-10-01",
     "audience": "Grande Prairie athletes competing at the international level",
     "category": "Sports",
-    "region": "Alberta",
+    "region": "Grande Prairie",
     "active": true,
     "lastVerified": "2026-08",
     "url": "https://cityofgp.com/perkymccullough",
@@ -13384,7 +13387,7 @@
     "deadline": "2026-10-01",
     "audience": "Grande Prairie athletes, volunteer coaches and sport officials",
     "category": "Sports",
-    "region": "Alberta",
+    "region": "Grande Prairie",
     "active": true,
     "lastVerified": "2026-08",
     "url": "https://cityofgp.com/culture-community/grants-funding-awards/pursuit-excellence-bob-neufeld-scholarship",
@@ -13426,9 +13429,9 @@
     "deadline": "2027-05-15",
     "audience": "Grade 12 students at Grande Prairie high schools",
     "category": "Academic",
-    "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "region": "Grande Prairie",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://gpcomposite.gppsd.ab.ca/our-graduation/awards-scholarships",
     "notes": "One of the awards is set aside for a student heading to trade school rather than university, which is worth knowing because trades applicants often skip Rotary awards assuming they are a poor fit. The application is built around a personal statement on Rotary's core values of service, integrity, leadership and diversity, so write to those four words directly. This is last cycle's May deadline rolled forward a year.",
     "description": "A $2,000 scholarship from the Rotary Club of Grande Prairie for Grade 12 students at local high schools who are completing diploma requirements and are registered for full-time post-secondary study starting the fall after graduation. One award is available for a student entering a trade school program of at least six months. The application requires a personal statement on Rotary's core values and two letters of reference.",
@@ -13463,9 +13466,9 @@
     "deadline": "2027-05-31",
     "audience": "Grande Prairie Public School Division graduates",
     "category": "Academic",
-    "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "region": "Grande Prairie",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://www.gppsd.ab.ca/our-division/education-foundation/scholarships",
     "notes": "Two awards, restricted to graduates of the public division, so Catholic and Peace Wapiti students are out. Certain programs get preference and the application form is where that list lives, so read it before you write anything. Awards are presented at the division's Striving for Excellence dinner in October, months after you graduate. This is last cycle's deadline rolled forward.",
     "description": "Two scholarships of $500 each from Weyerhaeuser for Grande Prairie Public School Division graduates. Preference is given to students entering specific programs identified on the application form.",
@@ -13502,9 +13505,9 @@
     "deadline": null,
     "audience": "Grande Prairie Public School Division students in CTS courses",
     "category": "Trades",
-    "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "region": "Grande Prairie",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://www.gppsd.ab.ca/our-division/education-foundation/scholarships",
     "notes": "The Education Foundation funds two of these at each of the division's two high schools, so four are given out and the pool is only students taking CTS courses at those schools. That is unusually good odds for a $1,000 award. The division's page was still showing an old cycle's dates when this was checked, so confirm the current deadline with your counsellor rather than trusting the posted one.",
     "description": "Scholarships of $1,000 for Grande Prairie Public School Division students studying welding, construction, fashion design, automotive technology, design studies, cosmetology, foods, electronics, communications or business education. Awards are presented at the division's Striving for Excellence Awards Dinner.",
@@ -13544,8 +13547,8 @@
     "audience": "Students in nursing programs in the Grande Prairie region",
     "category": "Academic",
     "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://gphospitalfoundation.ca/bursaries-and-scholarships/",
     "notes": "The range is wide because the committee sizes the award to the applicant, so a strong file is worth applying with even if you only need part of it. Every nursing credential is eligible, from licensed practical nursing through to a doctorate, which makes this unusually open compared to most nursing awards. Applications go by email to the hospital foundation. This is last cycle's May deadline rolled forward a year.",
     "description": "A bursary of between $500 and $5,000 from the Grande Prairie Regional Hospital Foundation for students in licensed practical nursing, nursing, psychiatric nursing, nurse practitioner, master of nursing or nursing doctorate programs. The committee looks for commitment, dedication and growth potential. The application asks for a cover letter, resume, two letters of reference, a course outline and transcripts.",
@@ -13574,7 +13577,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "alsoOpenTo": [
+      "Grande Prairie"
+    ]
   },
   {
     "id": 386,
@@ -13584,8 +13590,8 @@
     "audience": "Health care students who will work in northwestern Alberta",
     "category": "Academic",
     "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://gphospitalfoundation.ca/bursaries-and-scholarships/",
     "notes": "The catch is the return of service agreement: taking this money commits you to a year of work in northwestern Alberta after you finish. If you were planning to come home anyway that is free money, and if you were not, read the agreement before you sign. You also need at least one year of study already completed, so this is not an award to apply for in Grade 12.",
     "description": "A bursary of between $1,000 and $2,500 from the Grande Prairie Regional Hospital Foundation for students in a health care field who have completed at least one year at an accredited institution, are filling an identified occupational need in northwestern Alberta, and will sign a one year return of service agreement.",
@@ -13613,7 +13619,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "alsoOpenTo": [
+      "Grande Prairie"
+    ]
   },
   {
     "id": 387,
@@ -13623,8 +13632,8 @@
     "audience": "Medical students who attended high school in northern Alberta",
     "category": "Academic",
     "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-08",
+    "active": true,
+    "lastVerified": "2026-09",
     "url": "https://gphospitalfoundation.ca/bursaries-and-scholarships/",
     "notes": "The eligibility line is drawn on a map: you had to attend high school in an Alberta community at or north of the 54th parallel, which takes in Grande Prairie, Peace River, High Level, Fort McMurray and Grande Cache. Worth flagging in Grade 12 even though you cannot apply yet, because it is a reason to keep your northern high school records handy years later.",
     "description": "One or more awards totalling up to $10,000 a year from the Grande Prairie Regional Hospital Foundation for medical students accepted at or enrolled in a Canadian medical school who intend to practise in rural northern Alberta at or north of the 54th parallel. Applicants must have attended high school in an Alberta community at or north of that line, and sign a return of service agreement on completion.",
@@ -13652,7 +13661,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "alsoOpenTo": [
+      "Grande Prairie"
+    ]
   },
   {
     "id": 388,
@@ -30612,5 +30624,790 @@
         "Volunteering"
       ]
     }
+  },
+  {
+    "id": 825,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "There is a ceiling most students miss: you are ineligible if you are already receiving more than $3,500 in other awards. Winning big elsewhere can cost you this one. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Alberta Blue Cross Entrance Award (Northwestern Polytechnic)",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "Alberta students entering Northwestern Polytechnic with an 80 per cent average",
+    "description": "One award of $1,000 for an Alberta resident entering post-secondary study immediately after high school with an 80 per cent average in grade 12, carrying a full course load and holding satisfactory standing through the fall semester.",
+    "metaDetail": "An 80 per cent average and a full course load.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 826,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "This is the award for Peace-country students from outside the city, and commuting counts as well as moving. Note the specific mark rule: English 30 plus four other 30-level courses, not an overall average. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Alberta Blue Cross Away From Home Entrance Award",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "Students relocating or commuting more than 100km to Grande Prairie",
+    "description": "One award of $1,000 for a new full-time student entering directly from high school with an average of 80 per cent across English 30 and four other 30-level courses, whose hometown is at least 100 kilometres from Grande Prairie and who either relocates or commutes regularly to attend.",
+    "metaDetail": "For students whose hometown is 100km or more away.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 827,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "What it wants is evidence of money actually spent, so keep receipts for equipment, transport, software or attendant costs. The same $3,500 ceiling on other awards applies here. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Alberta Blue Cross Barrier-Free Learning Bursary",
+    "amount": "$1,000",
+    "category": "General",
+    "audience": "Entering students with a disability at Northwestern Polytechnic",
+    "description": "One bursary of $1,000 for an entering Alberta student in a programme of two or more years who demonstrates financial need and has incurred extra costs to attend college because of a disability. You submit the nature of the disability and proof of the expenses.",
+    "metaDetail": "It pays for the extra costs a disability creates.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 828,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "No marks, no programme, no residency and no need test appear in the criteria. Two of these exist, which makes it one of the least demanding awards on the list. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Angel Fraser Memorial Bursary",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Students entering Northwestern Polytechnic",
+    "description": "Two bursaries of $500 from the Grande Prairie Trumpeter Lions Club. The published criterion is a single line: available for an entering student.",
+    "metaDetail": "Two awards, and the only criterion is that you are new.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 829,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "At $200 this is the smallest award at the polytechnic, which is exactly why fewer students bother. It costs one line on the same application. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Daily Herald-Tribune Bursary",
+    "amount": "$200",
+    "category": "Community",
+    "audience": "Students entering Northwestern Polytechnic",
+    "description": "One bursary of $200 from the Daily Herald-Tribune, Grande Prairie's newspaper. Like the Lions Club bursary, the whole published criterion is that you are an entering student.",
+    "metaDetail": "A small award with a one-line qualification.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 830,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "The two-year window is the useful part: a student who took a gap year is still eligible, where most entrance awards demand you enrol immediately. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Lion Bjarne Tangen Memorial Bursary",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Recent graduates from Alberta, B.C. or the Northwest Territories",
+    "description": "One bursary of $500 from the Grande Prairie Lions Club for any first-year post-secondary student who graduated from high school within the past two years and lives in Alberta, British Columbia or the Northwest Territories.",
+    "metaDetail": "It reaches into B.C. and the Northwest Territories.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 831,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "The farming background and the Peace Region are the real requirements; the programme list is only a second-tier preference, so a student entering anything at all still qualifies on the first tier. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Elsworth Foy Memorial Bursary",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Peace Region students from a farming background",
+    "description": "One bursary of $500 intended for a student from a rural farming background who is from the Peace Region. First priority goes to an entering student, second to a student in Education, Forestry or Nursing.",
+    "metaDetail": "Farming background plus Peace Region residency.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [
+        "Education",
+        "Forestry",
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 832,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "Most polytechnic awards ignore the upgrading classroom entirely. This one says explicitly that upgrading and foundational learning students should be considered, which makes it one of the few open to a student who left high school short of the courses they needed. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Eric and Nancy Bansgrove Bursary",
+    "amount": "$300",
+    "category": "General",
+    "audience": "Northwestern Polytechnic students with demonstrated financial need",
+    "description": "One bursary of $300 for a student with demonstrated need, entering or in any later year of study. Academic upgrading and foundational learning students are named as students who should also be considered.",
+    "metaDetail": "Upgrading and foundational learners are named in it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 833,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "There is no application essay and no need test: it is your grade 12 transcript against everyone else admitted to business that year. One of the two awards is set aside for an Indigenous student where possible. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Bunge Scholarship for Business",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "Students entering business at Northwestern Polytechnic with the top high school average",
+    "description": "Two entrance awards of $1,000 for students admitted to the Business Administration programme with the highest high school averages. Where possible, one of the two goes to an Indigenous student.",
+    "metaDetail": "Decided on your high school average alone.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 834,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "Northwestern Polytechnic runs one of the few veterinary technology programmes in Alberta, so this is a small and specific field to compete in. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Fred Trotter Memorial Entrance Scholarship",
+    "amount": "$500",
+    "category": "STEM",
+    "audience": "Students entering veterinary technology at Northwestern Polytechnic",
+    "description": "Two entrance scholarships of $500 for students entering the Veterinary Technology programme, awarded on academic achievement.",
+    "metaDetail": "Two awards for entering veterinary technology students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [
+        "Veterinary Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 835,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "The fine arts route has to have a visual focus, so a music or drama student is not eligible here and should look at the Rogers award instead. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Pattison Media Visual Arts Scholarship",
+    "amount": "$1,500",
+    "category": "Arts",
+    "audience": "Students entering visual arts or fine arts at Northwestern Polytechnic",
+    "description": "Two scholarships of $1,500 from Pattison Media for students entering Visual Arts, or Fine Arts with a visual art focus. At $1,500 apiece these are the largest entrance awards in the arts at the polytechnic.",
+    "metaDetail": "The largest entrance award in the arts at NWP.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [
+        "Visual Arts",
+        "Fine Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 836,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "Preference goes to a Canadian citizen but the criteria say outright that non-residents are also eligible, which is rare. You must intend to continue the following year. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Evy Newton McBryan Memorial Award",
+    "amount": "$275",
+    "category": "Arts",
+    "audience": "First-year visual and fine arts students at Northwestern Polytechnic",
+    "description": "One award of $275 from the Art Gallery of Grande Prairie for a first-year Visual Arts or Fine Arts student who is continuing full time the following year. Selection weighs academics, portfolio, relevant experience, education and career goals together.",
+    "metaDetail": "Portfolio counts alongside marks and career goals.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [
+        "Visual Arts",
+        "Fine Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 837,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "The full-load requirement is the trap: a music student who drops a course to protect their average disqualifies themselves. The entertainment industry counts alongside performance as a career goal. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Rogers Broadcasting Rock 97.7 Music Award",
+    "amount": "$600",
+    "category": "Arts",
+    "audience": "First-year music students at Northwestern Polytechnic",
+    "description": "Two awards of $600 from Rogers Broadcasting for first-year music students carrying the maximum credits for first year with a GPA of at least 3.0, who intend to continue full time the following year. Selection weighs academics together with education and career goals in music or the entertainment industry.",
+    "metaDetail": "A maximum course load and a 3.0 GPA are both required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 838,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "It is not about your own athletic results. Coaching, officiating or running activities for other students is the evidence the criteria ask for. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Chris Killeen Memorial Bursary",
+    "amount": "$300",
+    "category": "Sports",
+    "audience": "First-year kinesiology and recreation students at Northwestern Polytechnic",
+    "description": "One bursary of $300 for a first-year student in kinesiology, personal training, recreation, sport and tourism or a related programme. Consideration goes to service to fellow students in athletics and recreation alongside a commitment to studies.",
+    "metaDetail": "Service to other students is what it rewards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [
+        "Kinesiology",
+        "Recreation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 839,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "notes": "Pre-law is almost never named in an Alberta entrance award, because law is a second-degree programme here. A student who says plainly that law is the plan has a real advantage on this one. Northwestern Polytechnic's standard award criteria require two full semesters already completed at NWP, which shuts most of its 359 awards to a student coming straight out of grade 12. Entrance awards are the exception and this is one of them. Applications sit in your NWP account document library once you are admitted.",
+    "applyViaGuidance": false,
+    "title": "Henrick Solheim and Andy Haugen Bursary",
+    "amount": "$200",
+    "category": "Academic",
+    "audience": "Commerce and pre-law students at Northwestern Polytechnic",
+    "description": "One bursary of $200 for a Bachelor of Commerce student, with entering pre-law students named as the second priority. If no suitable commerce applicant appears, it may go to a student intending a career in law. Athletics, performing arts and leadership activities are all considered.",
+    "metaDetail": "One of the few awards in Alberta naming pre-law.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [
+        "Commerce",
+        "Law"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 840,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.gppsd.ab.ca/our-division/education-foundation/scholarships",
+    "notes": "This is the foundation's general award, separate from the Weyerhaeuser and Career and Technology Studies scholarships it also administers. All three run on their own forms and you can hold more than one.",
+    "applyViaGuidance": true,
+    "title": "Friends of the Foundation Scholarship",
+    "amount": "$900",
+    "category": "General",
+    "audience": "Grande Prairie Public School Division graduates",
+    "description": "Two scholarships of $900 from the Grande Prairie Public School Division Education Foundation, awarded to graduating students of the division and presented at the Striving for Excellence Awards Dinner in October.",
+    "metaDetail": "Two $900 awards from the division's own foundation.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-30"
+  },
+  {
+    "id": 841,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.gppsd.ab.ca/our-division/education-foundation/scholarships",
+    "notes": "There is a single award for the division rather than one per school, so the field is every Indigenous graduate in Grande Prairie public schools. Ask student services for the form, since the foundation does not publish it separately.",
+    "applyViaGuidance": true,
+    "title": "GPPSD Indigenous Scholarship",
+    "amount": "$500",
+    "category": "Indigenous",
+    "audience": "Indigenous graduates of the Grande Prairie Public School Division",
+    "description": "One scholarship of $500 from the Grande Prairie Public School Division Education Foundation, available to Indigenous students across the whole division and presented at the Striving for Excellence Awards Dinner.",
+    "metaDetail": "One award across the entire public division.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-30"
+  },
+  {
+    "id": 842,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://gpcomposite.gppsd.ab.ca/our-graduation/awards-scholarships",
+    "notes": "Neither the value nor the criteria appear anywhere public. The school's own calendar says to see student services for the application, so this is one you have to ask about in person rather than research.",
+    "applyViaGuidance": true,
+    "title": "Ron Loughlin Memorial Bursary",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Grande Prairie Composite High School graduates",
+    "description": "A memorial bursary administered through student services at Grande Prairie Composite High School. The school lists it on its scholarship calendar with an August 15 deadline but does not publish the amount or the written criteria.",
+    "metaDetail": "The school holds the form; nothing is published online.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Grande Prairie Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-08-15"
+  },
+  {
+    "id": 843,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://readingu.org/stuff-for-students",
+    "notes": "This is a closed pool: the only people eligible are those who went through the programme, often years earlier in elementary school. If you were one of them it is one of the least competitive large awards in the city.",
+    "applyViaGuidance": false,
+    "title": "Reading University Alumni Student Award",
+    "amount": "$2,500",
+    "category": "Community",
+    "audience": "Former Reading University participants in Grande Prairie",
+    "description": "A $2,500 award for former students of Reading University, the Grande Prairie literacy programme, applied for through the programme's own website rather than through a school.",
+    "metaDetail": "Only past Reading University students can apply.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-30"
+  },
+  {
+    "id": 844,
+    "region": "Grande Prairie",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://gphospitalfoundation.ca/bursaries-and-scholarships/",
+    "notes": "You need a completed year of post-secondary study already, so this is a second-step award rather than one to apply for out of grade 12. It also requires a willingness to sign a one-year return of service agreement with Alberta Health Services, waived if the region has no need for you.",
+    "applyViaGuidance": false,
+    "title": "Dr. Phil and Vi Sunohara Nursing Bursary",
+    "amount": "Varies",
+    "category": "STEM",
+    "audience": "Nurses entering orthopedic nursing in northwestern Alberta",
+    "description": "A bursary from the Grande Prairie Regional Hospital Foundation for nurses working in, or wanting to move into, orthopedic nursing that benefits the Grande Prairie Regional Hospital and other health care providers in northwestern Alberta. The board decides how many to award each year.",
+    "metaDetail": "Orthopedic nursing specifically, not nursing generally.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-05-31"
   }
 ]
