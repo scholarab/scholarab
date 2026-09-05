@@ -18821,7 +18821,10 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Sherwood Park"
+    ]
   },
   {
     "id": 522,
@@ -18859,7 +18862,10 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Sherwood Park"
+    ]
   },
   {
     "id": 523,
@@ -18895,7 +18901,10 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Sherwood Park"
+    ]
   },
   {
     "id": 524,
@@ -18933,7 +18942,10 @@
       "extracurriculars": [
         "Volunteering"
       ]
-    }
+    },
+    "alsoOpenTo": [
+      "Sherwood Park"
+    ]
   },
   {
     "id": 525,
@@ -18969,7 +18981,10 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Sherwood Park"
+    ]
   },
   {
     "id": 526,
@@ -19199,7 +19214,8 @@
       ]
     },
     "alsoOpenTo": [
-      "Fort Saskatchewan"
+      "Fort Saskatchewan",
+      "Sherwood Park"
     ]
   },
   {
@@ -23682,7 +23698,10 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Sherwood Park"
+    ]
   },
   {
     "id": 650,
@@ -31409,5 +31428,644 @@
       "extracurriculars": []
     },
     "deadline": "2027-05-31"
+  },
+  {
+    "id": 845,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "The criteria name five things and only two of them are about playing well. Leadership and commitment inside the music programme carry as much weight as your technique. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "Creative Music Award",
+    "amount": "$200",
+    "category": "Arts",
+    "audience": "Bev Facey grade 12 music students",
+    "description": "One award of $200 for a grade 12 music student at Bev Facey who shows outstanding leadership, commitment, performance and technical skill along with creativity. A school staff committee selects the recipient.",
+    "metaDetail": "Creativity is weighed alongside technical skill.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Music"
+      ]
+    }
+  },
+  {
+    "id": 846,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "The word in the criteria is solid rather than outstanding, so this is not a race for the top average. Breadth of involvement is what separates applicants. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "Smart Photography Scholarship",
+    "amount": "$1,000",
+    "category": "General",
+    "audience": "Well-rounded Bev Facey graduates",
+    "description": "One award of $1,000 for a student who consistently maintains solid academics, is actively involved in a variety of school and community activities, and contributes to the positive environment of the school.",
+    "metaDetail": "Solid marks plus a broad range of involvement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 847,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "There is one condition that catches people: the recipient should not be receiving another scholarship. If you expect to win elsewhere, this one may pass you over. Satisfactory standing is the academic bar, not excellence. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "Patricia Gau Science Scholarship",
+    "amount": "$500",
+    "category": "STEM",
+    "audience": "Bev Facey graduates entering science",
+    "description": "One award of $500 for a grade 12 student planning to enrol in a post-secondary science or science-related programme, who shows an exemplary attitude, genuine enthusiasm for science and satisfactory academic standing in the subject.",
+    "metaDetail": "It asks for enthusiasm, not a top science mark.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 848,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "This is written for the student who started badly and finished well, which is the opposite of most academic awards. A vocational rather than academic career plan is what the criteria expect. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "ServiceMaster Clean of Edmonton Community Service Award",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Bev Facey students who improved and served",
+    "description": "One award of $1,000 for a student who has shown significant improvement in overall achievement during high school, has a strong vocational career focus and has served the school or wider community. Financial need must also be demonstrated.",
+    "metaDetail": "Improvement over three years is the qualification.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 849,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "Almost nothing else in this directory rewards having a part-time job. The four published criteria are work-school balance, independence, leadership and financial need, and the first of them is the one most students never think to write about. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "Vivian Koval Memorial Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Bev Facey students balancing a job with school",
+    "description": "One award of $1,000 for a student who balances work and school, is moving toward financial self-sufficiency through budgeting and saving, shows resilience and mentors or volunteers in the school or community. Financial hardship is prioritised.",
+    "metaDetail": "Holding down a job while in school is the point.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 850,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "You need the acceptance letter in hand, not just an intention. Leadership inside the foods programme counts alongside your cooking. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "Battle of the Chefs Scholarship",
+    "amount": "$250",
+    "category": "Trades",
+    "audience": "Bev Facey graduates entering a culinary programme",
+    "description": "One award of $250 for a graduating student accepted into a first-year culinary programme at a Canadian post-secondary institution, who shows outstanding achievement in food or culinary courses and involvement or leadership in the programme.",
+    "metaDetail": "Acceptance into a culinary programme is required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Culinary"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 851,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "Attendance and punctuality are named explicitly, which almost no other award does. This is one where turning up every day for three years is literally the qualification. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "PCL and Local 488 Welding Flame to Fame Scholarship",
+    "amount": "$500",
+    "category": "Trades",
+    "audience": "Bev Facey welding students",
+    "description": "One award of $500 from PCL and Local 488 for the student the committee thinks best represents what a real employer wants: a team player who is punctual, has good attendance, a solid work ethic and a willingness to help others. You must be going into welding.",
+    "metaDetail": "Judged on what an employer would actually want.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Welding"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 852,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "It runs alongside the PCL award in the same programme but judges the opposite thing: where PCL wants employability, this one wants a student whose marks climbed and whose money is tight. Apply for both. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "Kala Fresh Vending Award for Welding",
+    "amount": "Varies",
+    "category": "Trades",
+    "audience": "Bev Facey welding students with financial need",
+    "description": "An award for a student in the welding programme at Bev Facey who has demonstrated financial need and shown significant improvement in overall achievement during high school. The value is set by the sponsor each year.",
+    "metaDetail": "Improvement and need, inside the welding programme.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Welding"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 853,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "This is the largest award of any kind in Sherwood Park and it is not cash: it is the tool kit a first-year apprentice would otherwise have to buy. Automotive 30 is the hard requirement. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "NAPA Top Automotive Student Award",
+    "amount": "$9,000",
+    "category": "Trades",
+    "audience": "Bev Facey automotive students",
+    "description": "A tool box and tools valued at upwards of $9,000 for a student in good standing in automotives who attends regularly, engages in class, shows citizenship, a strong work ethic, initiative and the ability to follow safety procedures. You must have completed or be enrolled in Automotive 30.",
+    "metaDetail": "A toolbox and tools worth more than most cash awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Automotive"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 854,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.bevfacey.ca/student-services/awards-scholarships",
+    "notes": "Art 30 on the transcript is the only gate. It is a small award in dollars but it puts a student into a room of working artists in the county, which is worth more than the fifty dollars. Bev Facey runs one online form for every in-house award: you tick the ones you qualify for and attach a written or video submission saying why. A staff committee decides. The 2026 form closed April 7 and opened on March 16, so watch for it in mid-March.",
+    "applyViaGuidance": true,
+    "title": "Art Society of Strathcona Award",
+    "amount": "Varies",
+    "category": "Arts",
+    "audience": "Bev Facey students who took Art 30",
+    "description": "A free registration in one of the Art Society of Strathcona's workshops, plus a $50 gift card for art supplies, for a grade 12 student who took Art to the 30 level.",
+    "metaDetail": "A workshop place and a supply card rather than cash.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bev Facey Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Art"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 855,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ardrossan.ca/student-services/scholarships/in-house-awards",
+    "notes": "Improvement rather than achievement is the criterion, so a student who climbed from the fifties to the seventies is a stronger candidate than one who sat at ninety throughout. Each school nominates, and recipients attend a Rotary meeting with a staff member. Ardrossan lists five awards across the town; Bev Facey lists six.",
+    "applyViaGuidance": true,
+    "title": "Sherwood Park Rotary Club Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Grade 12 students at every Sherwood Park high school",
+    "description": "Scholarships of $1,000 awarded annually by the Rotary Club of Sherwood Park, one to a student from each Sherwood Park high school. They go to students who have shown significant academic improvement during high school and who have contributed to school or community in line with the Rotary motto, service before self.",
+    "metaDetail": "One award at each Sherwood Park high school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 856,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ardrossan.ca/student-services/scholarships/in-house-awards",
+    "notes": "This one has to be posted to the Elks at their Eastgate box number rather than filed through a school portal, and the deadline is August 31 each year, well after graduation. That timing is why it gets missed. A conditional post-secondary acceptance is required.",
+    "applyViaGuidance": false,
+    "title": "Sherwood Park Elks Scholarship",
+    "amount": "$400",
+    "category": "Community",
+    "audience": "Sherwood Park grade 12 students with financial need",
+    "description": "Two scholarships of $400 from the Sherwood Park Elks for grade 12 students pursuing post-secondary study who are involved in school or community activities and require financial assistance. Applicants are notified in late September or early October.",
+    "metaDetail": "Applications are mailed, not submitted online.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2027-08-31"
+  },
+  {
+    "id": 857,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ardrossan.ca/student-services/scholarships/in-house-awards",
+    "notes": "The third tier is the one to notice: if no teacher's child applies, any grade 12 student accepted into a Faculty of Education is eligible. A separate application is required and the deadline falls in September, after you have graduated.",
+    "applyViaGuidance": false,
+    "title": "Elk Island ATA Local #28 Award",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "Children of Elk Island teachers entering education",
+    "description": "Two annual scholarships from the Elk Island local of the Alberta Teachers' Association for a child of an Elk Island teacher accepted into a Faculty of Education, with a high level of achievement. If nobody qualifies it opens to the child of any teacher, and then to any grade 12 student accepted into education.",
+    "metaDetail": "A three-tier cascade starting with teachers' children.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-09-10"
+  },
+  {
+    "id": 858,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ardrossan.ca/student-services/scholarships/in-house-awards",
+    "notes": "The catchment crosses both school divisions, which is unusual, but you must both live in the boundaries and attend one of their high schools. You need to have already applied to a teacher education programme, not merely intend to. The 2026 deadline was June 15.",
+    "applyViaGuidance": false,
+    "title": "Delta Kappa Gamma Eta Chapter Education Grant",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "Elk Island public and Catholic students entering teacher education",
+    "description": "One grant of $500 from the Sherwood Park Eta Chapter of the Delta Kappa Gamma Society International for a Canadian citizen living within the boundaries of Elk Island Public Schools or Elk Island Catholic Schools, attending one of their high schools, who has applied to a teacher education programme and shows exceptional potential in the field.",
+    "metaDetail": "It covers both the public and the Catholic division.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 859,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ardrossan.ca/student-services/scholarships/in-house-awards",
+    "notes": "There is nothing to fill in, but the requirement is strict: music has to be your declared major, not an elective alongside another degree. Speak to the music teacher rather than student services about this one.",
+    "applyViaGuidance": true,
+    "title": "Ardrossan Music Parents Society Post-Secondary Music Scholarship",
+    "amount": "Varies",
+    "category": "Arts",
+    "audience": "Ardrossan music students entering a music major",
+    "description": "A scholarship from the Ardrossan Music Parents Society for a grade 12 student in the Ardrossan Junior Senior High music programme who has been accepted into a post-secondary programme with music as their major. No application is necessary.",
+    "metaDetail": "No form; the music teacher handles it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Ardrossan Junior Senior High"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Music"
+      ]
+    }
+  },
+  {
+    "id": 860,
+    "region": "Sherwood Park",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.ardrossan.ca/student-services/scholarships/in-house-awards",
+    "notes": "The word in the criteria is effort, not achievement, so the strongest French student in the room is not automatically the winner. Nothing is filled in by the student, so speaking French in class all year is the whole application.",
+    "applyViaGuidance": true,
+    "title": "Canadian Parents for French Ardrossan Chapter Scholarship",
+    "amount": "$250",
+    "category": "Academic",
+    "audience": "Ardrossan students improving in French",
+    "description": "One award of $250 from the Ardrossan chapter of Canadian Parents for French for a grade 12 student who has shown the most effort to improve their French, judged on use of the language in class, work ethic and participation. French language arts teachers nominate; no application is necessary.",
+    "metaDetail": "It rewards effort in French, not the top mark.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Ardrossan Junior Senior High"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "French"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]

@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Fourteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray and Grande Prairie, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Fifteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie and Sherwood Park, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Sherwood Park and Strathcona County now have a page, built out of the two award lists their high schools publish in full. The five Elk Island division awards that were filed under Fort Saskatchewan are open to Sherwood Park students too, and now say so.',
+      },
       {
         kind: 'listings',
         text: 'Grande Prairie finally has the page this changelog claimed it had back in April. Its 33 awards were sitting under the province-wide list, and the entrance awards at Northwestern Polytechnic have been added beside them.',

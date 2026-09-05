@@ -64,7 +64,7 @@ export const EMPTY_ELIGIBILITY: EligibilityCriteria = {
 // Student's self-reported profile; never leaves the browser
 export type StudentProfile = {
   grade: '10' | '11' | '12' | 'post-secondary'
-  city: string                     // "Medicine Hat" | "Calgary" | "Edmonton" | "Lethbridge" | "Red Deer" | "Airdrie" | "Beaumont" | "Brooks" | "Camrose" | "Chestermere" | "Cold Lake" | "St. Albert" | "Spruce Grove" | "Lacombe" | "Leduc" | "Lloydminster" | "Fort Saskatchewan" | "Fort McMurray" | "Grande Prairie" | "Wetaskiwin" | "Other Alberta"
+  city: string                     // "Medicine Hat" | "Calgary" | "Edmonton" | "Lethbridge" | "Red Deer" | "Airdrie" | "Beaumont" | "Brooks" | "Camrose" | "Chestermere" | "Cold Lake" | "St. Albert" | "Spruce Grove" | "Lacombe" | "Leduc" | "Lloydminster" | "Fort Saskatchewan" | "Fort McMurray" | "Grande Prairie" | "Sherwood Park" | "Wetaskiwin" | "Other Alberta"
   schoolBoard: string | null
   specificSchool: string | null
   targetInstitution: string | null

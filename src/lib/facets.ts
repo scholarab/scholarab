@@ -238,6 +238,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Eight of these are decided on a grade 12 mark alone with nothing to fill in, and one of the eight covers eight separate courses at $500 each.',
   },
   {
+    slug: 'sherwood-park',
+    kind: 'region',
+    value: 'Sherwood Park',
+    label: 'Sherwood Park',
+    h1: 'Sherwood Park scholarships',
+    title: 'Sherwood Park Scholarships',
+    description:
+      'Scholarships for Sherwood Park and Strathcona County: the Bev Facey and Ardrossan award lists, the Elk Island division awards and the local service clubs.',
+    intro:
+      'Two of the four high schools here publish what they hand out and two do not, so ask your own student services what else is on their form.',
+  },
+  {
     slug: 'grande-prairie',
     kind: 'region',
     value: 'Grande Prairie',

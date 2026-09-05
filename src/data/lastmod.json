@@ -687,6 +687,10 @@
     "hash": "5c75b5c62ae23c69",
     "date": "2026-08-29"
   },
+  "/scholarships/ardrossan-music-parents-society-post-secondary-music-scholarship/": {
+    "hash": "89d286aceb1456f7",
+    "date": "2026-09-04"
+  },
   "/scholarships/arnup-louis-award/": {
     "hash": "5f5cca9937a42976",
     "date": "2026-09-04"
@@ -694,6 +698,10 @@
   "/scholarships/arrata-family-award-for-new-canadians/": {
     "hash": "26aa4bc585fafb58",
     "date": "2026-08-28"
+  },
+  "/scholarships/art-society-of-strathcona-award/": {
+    "hash": "f65503abfd5f0744",
+    "date": "2026-09-04"
   },
   "/scholarships/arthur-tildesley-scholarship/": {
     "hash": "fa50c9dc5a79334d",
@@ -766,6 +774,10 @@
   "/scholarships/bates-wardle-award-for-lifeguards/": {
     "hash": "b238ed49c3319708",
     "date": "2026-08-29"
+  },
+  "/scholarships/battle-of-the-chefs-scholarship/": {
+    "hash": "0e91703928b80ae8",
+    "date": "2026-09-04"
   },
   "/scholarships/battle-river-implements-awards/": {
     "hash": "fd36c09c8ef28239",
@@ -964,8 +976,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/bunzl-scholarship/": {
-    "hash": "65f335fbca2cce16",
-    "date": "2026-09-03"
+    "hash": "54c659ca6fcf3289",
+    "date": "2026-09-04"
   },
   "/scholarships/burgar-funeral-home-scholarship/": {
     "hash": "fd6aa1122b709777",
@@ -1098,6 +1110,10 @@
   "/scholarships/canadian-natural-resources-scholarship/": {
     "hash": "82dbb56b8f8b91e6",
     "date": "2026-08-22"
+  },
+  "/scholarships/canadian-parents-for-french-ardrossan-chapter-scholarship/": {
+    "hash": "a40230b5c8bc96c2",
+    "date": "2026-09-04"
   },
   "/scholarships/canadian-parents-for-french-fsl-award/": {
     "hash": "99bb3a55fbf8e746",
@@ -1311,6 +1327,10 @@
     "hash": "8a5154dc2a86e86f",
     "date": "2026-09-03"
   },
+  "/scholarships/creative-music-award/": {
+    "hash": "04a543bc5799a41d",
+    "date": "2026-09-04"
+  },
   "/scholarships/cst-jose-agostinho-memorial-scholarship/": {
     "hash": "ae3a00bf91accc56",
     "date": "2026-09-04"
@@ -1389,6 +1409,10 @@
   },
   "/scholarships/delmar-college-scholarship/": {
     "hash": "81276d1e2b58970d",
+    "date": "2026-09-04"
+  },
+  "/scholarships/delta-kappa-gamma-eta-chapter-education-grant/": {
+    "hash": "b7f3dc738c0e1cde",
     "date": "2026-09-04"
   },
   "/scholarships/dhh-program-potential-award/": {
@@ -1510,6 +1534,10 @@
   "/scholarships/elizabeth-spychka-citizenship-scholarship/": {
     "hash": "c3db6e44fea8716f",
     "date": "2026-09-03"
+  },
+  "/scholarships/elk-island-ata-local-28-award/": {
+    "hash": "be5ed934495a39c1",
+    "date": "2026-09-04"
   },
   "/scholarships/ellis-nature-centre-environment-scholarship/": {
     "hash": "3cc4140bbd1a2da0",
@@ -1760,8 +1788,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/glen-hauk-memorial-keyera-scholarship/": {
-    "hash": "1a5bd3955045d9da",
-    "date": "2026-09-03"
+    "hash": "c09e0306162cfb87",
+    "date": "2026-09-04"
   },
   "/scholarships/glyn-davies-scholarship/": {
     "hash": "627c5396a80281dd",
@@ -1940,7 +1968,7 @@
     "date": "2026-08-28"
   },
   "/scholarships/inter-pipeline-discovery-awards-program/": {
-    "hash": "3fa92fd36828e97e",
+    "hash": "0336d8f2195daf99",
     "date": "2026-09-04"
   },
   "/scholarships/international-science-olympiad-bursary/": {
@@ -2068,8 +2096,8 @@
     "date": "2026-08-29"
   },
   "/scholarships/josephburg-ag-society-scholarship/": {
-    "hash": "34dd6d02da51e54f",
-    "date": "2026-09-03"
+    "hash": "c502d84371cabcae",
+    "date": "2026-09-04"
   },
   "/scholarships/julia-turnbull-leadership-award/": {
     "hash": "36534d6d1f1cef32",
@@ -2082,6 +2110,10 @@
   "/scholarships/juno-beach-parents-society-social-studies-scholarship/": {
     "hash": "f780c883b3dc8946",
     "date": "2026-08-28"
+  },
+  "/scholarships/kala-fresh-vending-award-for-welding/": {
+    "hash": "3a760d1cce590c89",
+    "date": "2026-09-04"
   },
   "/scholarships/kaleb-price-memorial-scholarship/": {
     "hash": "95da3e2ee871f705",
@@ -2128,7 +2160,7 @@
     "date": "2026-09-04"
   },
   "/scholarships/kevin-gaetz-scholarship/": {
-    "hash": "32a2a9b4432f3fd7",
+    "hash": "112462b310865c56",
     "date": "2026-09-04"
   },
   "/scholarships/keyano-board-of-governors-award/": {
@@ -2212,8 +2244,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/konica-minolta-award/": {
-    "hash": "a4bde91b750e8b40",
-    "date": "2026-09-03"
+    "hash": "f4447ccceb6ad8f9",
+    "date": "2026-09-04"
   },
   "/scholarships/la-cpa-accounting-scholarship/": {
     "hash": "15edd22f74978624",
@@ -2667,6 +2699,10 @@
     "hash": "bd774cd44932e94b",
     "date": "2026-09-01"
   },
+  "/scholarships/napa-top-automotive-student-award/": {
+    "hash": "1f2043af29db6d90",
+    "date": "2026-09-04"
+  },
   "/scholarships/nathan-saby-athletics-scholarship/": {
     "hash": "84bd48a5a88cad40",
     "date": "2026-09-04"
@@ -2795,6 +2831,10 @@
     "hash": "bcac4743fd61f2f0",
     "date": "2026-09-03"
   },
+  "/scholarships/patricia-gau-science-scholarship/": {
+    "hash": "ee61dc38cea73add",
+    "date": "2026-09-04"
+  },
   "/scholarships/patricia-trudeau-scholarship/": {
     "hash": "bc8d09e5e5697de0",
     "date": "2026-09-03"
@@ -2814,6 +2854,10 @@
   "/scholarships/paul-kane-unsung-hero-scholarship/": {
     "hash": "43c6d5b8c9761a31",
     "date": "2026-09-03"
+  },
+  "/scholarships/pcl-and-local-488-welding-flame-to-fame-scholarship/": {
+    "hash": "dfbf2cb60f5d7ee1",
+    "date": "2026-09-04"
   },
   "/scholarships/pep-award/": {
     "hash": "f462a4463b70a771",
@@ -3187,6 +3231,10 @@
     "hash": "0fc1e4ed964a6c7e",
     "date": "2026-09-03"
   },
+  "/scholarships/servicemaster-clean-of-edmonton-community-service-award/": {
+    "hash": "6456554c442e9665",
+    "date": "2026-09-04"
+  },
   "/scholarships/servus-credit-union-young-adult-scholarship/": {
     "hash": "415caeec6fd24c91",
     "date": "2026-08-02"
@@ -3211,6 +3259,14 @@
     "hash": "b3ff6e403dc43d91",
     "date": "2026-08-29"
   },
+  "/scholarships/sherwood-park-elks-scholarship/": {
+    "hash": "26d2cffb689df5dc",
+    "date": "2026-09-04"
+  },
+  "/scholarships/sherwood-park-rotary-club-scholarship/": {
+    "hash": "8fed98217caa5cac",
+    "date": "2026-09-04"
+  },
   "/scholarships/shiloh-chiropractic-clinic-sports-medicine-award/": {
     "hash": "6ad33d9079d5b247",
     "date": "2026-09-03"
@@ -3230,6 +3286,10 @@
   "/scholarships/skipping-stone-foundation-trans-community-award/": {
     "hash": "fe3ce6e09d2f8f5b",
     "date": "2026-08-28"
+  },
+  "/scholarships/smart-photography-scholarship/": {
+    "hash": "346c67f1a8cce138",
+    "date": "2026-09-04"
   },
   "/scholarships/smiles-thru-lindsey-women-in-aviation-award/": {
     "hash": "4ab1135841bf8f8b",
@@ -3519,6 +3579,10 @@
     "hash": "e32c4584f20dea57",
     "date": "2026-09-01"
   },
+  "/scholarships/vivian-koval-memorial-scholarship/": {
+    "hash": "e23207a2b9bde82d",
+    "date": "2026-09-04"
+  },
   "/scholarships/voice-for-animals-high-school-scholarship/": {
     "hash": "e624f50eea41767b",
     "date": "2026-08-02"
@@ -3548,8 +3612,8 @@
     "date": "2026-09-01"
   },
   "/scholarships/westec-scholarship/": {
-    "hash": "3a7b3cba2dbf2bc7",
-    "date": "2026-09-03"
+    "hash": "5dc977a3ec5ebb38",
+    "date": "2026-09-04"
   },
   "/scholarships/western-canada-leader-of-tomorrow-award/": {
     "hash": "b38ea3c6bd8ceb5f",
