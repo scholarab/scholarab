@@ -125,6 +125,10 @@ export function matchScholarship(
     reasons.push('Open to female-identifying students only')
     return { match: false, confidence: 0, reasons, signals: [] }
   }
+  if (eligibility.genderRequired === 'male' && profile.identifiesAsFemale === true) {
+    reasons.push('Open to male-identifying students only')
+    return { match: false, confidence: 0, reasons, signals: [] }
+  }
 
   // ── Indigenous (hard filter only if student answered) ─────────────────────
   if (eligibility.indigenousRequired && profile.identifiesAsIndigenous === false) {

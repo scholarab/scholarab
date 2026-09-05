@@ -10,7 +10,7 @@ export type EligibilityCriteria = {
   minAverage: number | null     // minimum academic average as integer percentage (65, 75, 80…)
   minAge: number | null
   maxAge: number | null
-  genderRequired: 'female' | null  // null = open to all genders
+  genderRequired: 'female' | 'male' | null  // null = open to all genders
   indigenousRequired: boolean
   bipocRequired: boolean
   financialNeed: boolean
@@ -30,7 +30,7 @@ export const eligibilitySchema = z.object({
   minAverage: z.number().nullable().default(null),
   minAge: z.number().nullable().default(null),
   maxAge: z.number().nullable().default(null),
-  genderRequired: z.literal('female').nullable().default(null),
+  genderRequired: z.enum(['female', 'male']).nullable().default(null),
   indigenousRequired: z.coerce.boolean().default(false),
   bipocRequired: z.coerce.boolean().default(false),
   financialNeed: z.coerce.boolean().default(false),

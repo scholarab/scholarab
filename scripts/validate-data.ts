@@ -5,6 +5,7 @@ import { dirname, join } from 'path';
 import { generateSlug } from '../src/lib/utils.ts';
 import { programMeta, scholarshipMetas, formatListingDate, META_MAX } from '../src/lib/meta.ts';
 import { scholarshipStatusOf } from '../src/lib/status.ts';
+import { eligibilitySchema } from '../src/lib/eligibility-types.ts';
 import {
   RESERVED_SCHOLARSHIP_SLUGS,
   RESERVED_PROGRAM_SLUGS,
@@ -537,6 +538,28 @@ if (emDashHits.length) {
   console.error(
     `validate-data: ${emDashHits.length} em dash(es); use a period, comma, colon, semicolon or parentheses:\n  ${emDashHits
       .map((h) => `${h.rel}:${h.line}`)
+      .join('\n  ')}`,
+  );
+  failed = true;
+}
+
+// -- Eligibility objects the runtime schema would reject ----------------------
+//
+// data-loader's parseEligibility calls safeParse and returns null on failure,
+// which throws away the WHOLE criteria object, not just the bad field. A single
+// out-of-enum value therefore strips a listing's grade, field and school
+// filters and makes it match every student in the quiz. That failure is silent
+// at runtime (a console.warn nobody reads), so it has to be caught here.
+const badEligibility = scholarships
+  .filter((s) => s.eligibility)
+  .map((s) => ({ s, r: eligibilitySchema.safeParse(s.eligibility) }))
+  .filter(({ r }) => !r.success);
+if (badEligibility.length) {
+  console.error(
+    `validate-data: ${badEligibility.length} listing(s) have eligibility the runtime schema rejects, which would blank every criterion on them:\n  ${badEligibility
+      .map(({ s, r }) =>
+        `#${s.id} ${s.title}: ${r.error!.issues.map((i) => `${i.path.join('.')} ${i.message}`).join('; ')}`,
+      )
       .join('\n  ')}`,
   );
   failed = true;

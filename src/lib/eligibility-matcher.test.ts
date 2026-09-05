@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { matchScholarship, getConfidenceTier, matchAll, matchPrograms, programFields } from './eligibility-matcher'
 import { RESULT_LIMIT } from './quiz'
 import scholarshipsJson from '../data/scholarships.json'
-import { EMPTY_ELIGIBILITY } from './eligibility-types'
+import { EMPTY_ELIGIBILITY, eligibilitySchema } from './eligibility-types'
 import type { StudentProfile, EligibilityCriteria } from './eligibility-types'
 
 // ── Fixtures ────────────────────────────────────────────────────────────────
@@ -220,6 +220,31 @@ describe('matchScholarship', () => {
     it('no gender requirement passes for non-female student', () => {
       const p = { ...baseProfile, identifiesAsFemale: false }
       expect(matchScholarship(p, sch({ genderRequired: null })).match).toBe(true)
+    })
+
+    it('male-required fails when student identifies as female', () => {
+      const p = { ...baseProfile, identifiesAsFemale: true }
+      const result = matchScholarship(p, sch({ genderRequired: 'male' }))
+      expect(result.match).toBe(false)
+      expect(result.reasons[0]).toContain('male')
+    })
+
+    it('male-required passes when student is explicitly not female', () => {
+      const p = { ...baseProfile, identifiesAsFemale: false }
+      expect(matchScholarship(p, sch({ genderRequired: 'male' })).match).toBe(true)
+    })
+
+    // Regression: the schema was z.literal('female'), so the one male-only
+    // listing in the corpus failed safeParse and had ALL of its criteria
+    // dropped, not just its gender. It then matched every student.
+    it('accepts male through the schema without discarding the other criteria', () => {
+      const parsed = eligibilitySchema.safeParse({
+        ...EMPTY_ELIGIBILITY,
+        grades: ['12'],
+        genderRequired: 'male',
+      })
+      expect(parsed.success).toBe(true)
+      expect(parsed.success && parsed.data.grades).toEqual(['12'])
     })
   })
 
