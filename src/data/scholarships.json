@@ -3949,7 +3949,10 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Wetaskiwin"
+    ]
   },
   {
     "id": 140,
@@ -4249,7 +4252,10 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "Wetaskiwin"
+    ]
   },
   {
     "id": 150,
@@ -23939,7 +23945,8 @@
     "amount": "$1,000",
     "deadline": "2027-08-29",
     "alsoOpenTo": [
-      "Cold Lake"
+      "Cold Lake",
+      "Wetaskiwin"
     ],
     "category": "Academic",
     "audience": "Residents of rural Alberta municipalities in their first four years of study",
@@ -26227,5 +26234,1280 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 717,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "The multi-sport requirement is the filter. A single-sport specialist is at a disadvantage here no matter how good, and community league play counts the same as a school team. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Austin Williamson Athletic Scholarship",
+    "amount": "$1,000",
+    "category": "Sports",
+    "audience": "Wetaskiwin Composite athletes in more than one sport",
+    "description": "Two awards of $1,000, one to a female athlete and one to a male athlete, for a grade 12 student who competes in more than one sport at school or in the community, leads, mentors younger athletes and keeps their marks up at the same time. Physical Education 30 is preferred but not demanded.",
+    "metaDetail": "Two $1,000 awards, one female and one male.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 718,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Nothing in the criteria mentions performance, so a bench player with a reputation for decency is a real candidate. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Austin Williamson Sportsmanship Award",
+    "amount": "$500",
+    "category": "Sports",
+    "audience": "Wetaskiwin Composite grade 12 athletes",
+    "description": "Two awards of $500, one female and one male, for the grade 12 athlete who best shows cooperativeness, fairness, graciousness, honour and humility. It is the companion award to the athletic scholarship of the same name and it is explicitly not about winning.",
+    "metaDetail": "Two $500 awards for conduct rather than results.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 719,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Being outstanding in only one of the two halves is the usual reason applicants miss. Name both in your paragraph. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Larry Ethier Memorial Scholarship",
+    "amount": "$1,000",
+    "category": "Sports",
+    "audience": "Wetaskiwin Composite students strong in both sport and fine arts",
+    "description": "One award of $1,000 for a graduate who excels in athletics and in fine arts, shows a strong work ethic and is enrolled in post-secondary study. The combination is the point: it is aimed at the student who was on a team and in the band or the play at the same time.",
+    "metaDetail": "It wants an athlete who is also in the arts.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports",
+        "Arts"
+      ]
+    }
+  },
+  {
+    "id": 720,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Tick this one whatever you are studying. It costs nothing extra, because the same paragraph covers every award you select. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Scott MacEachern Memorial Scholarship",
+    "amount": "$600",
+    "category": "General",
+    "audience": "Wetaskiwin Composite graduates entering any post-secondary programme",
+    "description": "One award of $600 for a Wetaskiwin Composite graduate enrolled at a post-secondary institution in any field. There is no subject restriction and no stated academic bar, which makes it one of the few on the school's list with nothing to disqualify you.",
+    "metaDetail": "No field restriction and no stated minimum.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 721,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "The school publishes no amount or criteria for this one. Ask the career centre what the committee is looking for before you write your paragraph. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Weston Pitcher Scholarship",
+    "amount": "Varies",
+    "category": "Sports",
+    "audience": "Wetaskiwin Composite graduates",
+    "description": "A memorial award on the Wetaskiwin Composite in-house list. The school names it on the athletic section of the scholarship form but does not publish an amount or written criteria alongside it, so the selection committee decides the terms each year.",
+    "metaDetail": "Listed with the athletic awards, terms unpublished.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 722,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Another of the school's unrestricted awards, so there is no reason to leave it unticked. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Ray Debaji Memorial Scholarship",
+    "amount": "$500",
+    "category": "General",
+    "audience": "Wetaskiwin Composite graduates entering any post-secondary programme",
+    "description": "One award of $500 for a Wetaskiwin Composite graduate enrolled at a post-secondary institution in any field, with no subject or average restriction published.",
+    "metaDetail": "Open to any field of study.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 723,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Human care is not defined tightly on the form, so say plainly in your paragraph how your programme puts you in front of people who need help. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Independent Order of Oddfellows Scholarship",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Wetaskiwin Composite graduates entering a human care field",
+    "description": "One award of $500 from the Wetaskiwin Oddfellows lodge for a graduate entering what the school calls the human care field. That covers nursing, social work, education, child and youth care and the helping professions generally rather than a single named programme.",
+    "metaDetail": "For students entering a helping profession.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Health",
+        "Social Work",
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 724,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "The preference for aeronautical and mechanical is stated, not hidden, so civil or electrical applicants should still apply but should expect to be second in line. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Edward A. Reynolds Scholarship",
+    "amount": "Varies",
+    "category": "STEM",
+    "audience": "Wetaskiwin Composite graduates entering engineering",
+    "description": "An award for a Wetaskiwin Composite graduate entering an engineering programme, with aeronautical and mechanical engineering preferred and other engineering disciplines considered. The amount is set by the donor each year and the school lists it as to be announced.",
+    "metaDetail": "Aeronautical and mechanical engineering come first.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 725,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Business related is read broadly here, so accounting, marketing, management and commerce all qualify. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "John A. Maude Business Scholarship",
+    "amount": "$2,500",
+    "category": "Academic",
+    "audience": "Wetaskiwin Composite graduates entering business",
+    "description": "At $2,500 this is the largest single business award on the Wetaskiwin Composite list. It goes to a graduate enrolled in a business related field at a post-secondary institution, with no narrower restriction published.",
+    "metaDetail": "The biggest business award on the school's list.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 726,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "No field restriction, so this is one to tick regardless of programme. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Manibhai Patel Scholarship",
+    "amount": "Varies",
+    "category": "General",
+    "audience": "Wetaskiwin Composite graduates entering any post-secondary programme",
+    "description": "An award for a Wetaskiwin Composite graduate enrolled at a post-secondary institution in any field. The school lists the amount as to be announced, so the value is set when the award is made.",
+    "metaDetail": "Any field, amount set each year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 727,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "The three tiers are ranked, not alternatives, so a music student outranks a mathematics student who outranks a University of Alberta science student. If you fit more than one tier, say so. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Harry Lomnes and Family Memorial Scholarship",
+    "amount": "$5,000",
+    "category": "Arts",
+    "audience": "Wetaskiwin Composite graduates in music, mathematics or science",
+    "description": "The largest award on the Wetaskiwin Composite list. In 2025 three students received $5,000 each. Priority goes to a student entering a music programme or taking music as a minor; a student pursuing mathematics comes second; a student attending the University of Alberta in science or engineering comes third. Top academic standing, excellence and financial need are all weighed.",
+    "metaDetail": "Three students received $5,000 each in 2025.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Music",
+        "Mathematics",
+        "Science",
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 728,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Plain science qualifies, which makes this one reachable for students with no farm background at all. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Wetaskiwin Agricultural Society Freda Nelles Memorial Scholarship",
+    "amount": "$500",
+    "category": "STEM",
+    "audience": "Wetaskiwin Composite graduates in agriculture and related sciences",
+    "description": "One award of $500 from the Wetaskiwin Agricultural Society for a graduate enrolled in agriculture, forestry, veterinary medicine, human ecology or science. The list of accepted fields is wider than the society's name suggests.",
+    "metaDetail": "Agriculture, forestry, veterinary, human ecology or science.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture",
+        "Forestry",
+        "Veterinary",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 729,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Do not read this as nursing only. The words health sciences field are in the school's own criteria. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Carol MacEachern Memorial Nursing Scholarship",
+    "amount": "$600",
+    "category": "STEM",
+    "audience": "Wetaskiwin Composite graduates entering nursing or health sciences",
+    "description": "One award of $600 for a Wetaskiwin Composite graduate enrolled in nursing or in a health sciences field. Health sciences is named alongside nursing, so a student entering a laboratory, therapy or paramedic programme is eligible too.",
+    "metaDetail": "Nursing or any health sciences programme.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Nursing",
+        "Health Sciences"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 730,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "An apprenticeship counts here. If your trade has an agricultural side, say so, because that is where the preference sits. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Marvin Ruff Scholarship",
+    "amount": "$500",
+    "category": "Trades",
+    "audience": "Wetaskiwin Composite graduates entering a trade or an agricultural programme",
+    "description": "One award of $500 for a graduate entering post-secondary study or a trade, with preference given to an agricultural field. It is one of the few on the list that names a trade and a degree in the same breath.",
+    "metaDetail": "Trades welcome, agriculture preferred.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 731,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Without Art 30 on your transcript you are out, whatever your portfolio looks like. Check that before you tick it. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Sons of Norway Audrey Frieman Memorial Art Scholarship",
+    "amount": "$250",
+    "category": "Arts",
+    "audience": "Wetaskiwin Composite Art 30 graduates entering an art programme",
+    "description": "One award of $250 from the Sons of Norway for a graduate of Art 30 entering a post-secondary art programme, with a fine arts programme accepted as a second choice. Art 30 is a hard requirement rather than a preference.",
+    "metaDetail": "You must have taken Art 30.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Art",
+        "Fine Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 732,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "You do not need any interest in law to win this. The criteria say business related field and nothing else. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Lawyers of Wetaskiwin Business Award",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "Wetaskiwin Composite graduates entering business",
+    "description": "One award of $500 funded by the lawyers of Wetaskiwin for a graduate enrolled in a business related field at a post-secondary institution. Despite the sponsor it is a business award, not a law award.",
+    "metaDetail": "Funded by local lawyers, awarded for business.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 733,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Community involvement is half the criteria, so an application that lists only marks and a programme is doing half the job. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Planning for Success Engineering Award",
+    "amount": "$1,100",
+    "category": "STEM",
+    "audience": "Wetaskiwin Composite graduates entering engineering",
+    "description": "One award of $1,100 for a graduate enrolled in a post-secondary engineering programme who has also been involved in the community. It is the second engineering award on the school's list and the only one with a published figure.",
+    "metaDetail": "Engineering plus community involvement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 734,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Band membership is the only hard gate and there is no academic bar at all. The rest of the criteria describe a temperament rather than an achievement, so ask a teacher who has seen you with other students to back you up. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Arnup Louis Award",
+    "amount": "$500",
+    "category": "Indigenous",
+    "audience": "Samson Cree Nation members at Wetaskiwin Composite",
+    "description": "One award of $500 for a Samson Cree Nation band member at Wetaskiwin Composite who best shows enthusiasm for tasks both assigned and extracurricular, encourages others, is congenial and sets the tone for a positive atmosphere.",
+    "metaDetail": "For Samson Cree Nation band members.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 735,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "There is no field, average or membership restriction. What it wants is evidence that something in the school or the town is different because you were there. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Wetaskiwin Family Dental Scholarship",
+    "amount": "$750",
+    "category": "Community",
+    "audience": "All Wetaskiwin Composite graduates",
+    "description": "One award of $750 available to every Wetaskiwin Composite graduate, judged on leadership, community involvement and social impact. The school's own wording is available to all graduates, which is rare on this list.",
+    "metaDetail": "Open to every graduate of the school, with leadership and community impact the only things weighed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 736,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Breadth beats depth here. List the school activities and the town ones in the same paragraph rather than picking your strongest. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Cst. Jose Agostinho Memorial Scholarship",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Well-rounded Wetaskiwin Composite graduates",
+    "description": "One award of $1,000 in memory of a Wetaskiwin police constable, for a graduate involved in both the school and the wider community. The criteria call for an all around super student rather than a top mark in any one subject.",
+    "metaDetail": "For the all-round student, not the top mark.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 737,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Four chances rather than one, and healthcare is not narrowed to nursing or medicine on the form. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Health Education Award",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Wetaskiwin Composite graduates entering healthcare",
+    "description": "Up to four awards of up to $1,000 each for Wetaskiwin Composite graduates enrolled at a post-secondary institution in the field of healthcare. Four recipients makes this the widest-spread award on the school's list.",
+    "metaDetail": "Up to four recipients of up to $1,000 each.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 738,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Part-time enrolment does not qualify. The criteria say full-time trade school and nothing else, so confirm your registration status before applying. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Bakshi Family Scholarship",
+    "amount": "Varies",
+    "category": "Trades",
+    "audience": "Wetaskiwin Composite graduates entering full-time trade school",
+    "description": "An award for a graduating Wetaskiwin Composite student enrolled full time at a trade school. It is the only award on the school's list restricted entirely to the trades, with no degree route accepted.",
+    "metaDetail": "Trade school only, no degree route.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 739,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "This is the branch's own award, separate from the national Legion bursary that also appears on the school's form. Neither one rules out the other. One Google Form covers every in-house award at Wetaskiwin Composite. You tick the awards you want to be considered for, write one paragraph on why, and that paragraph is judged against all of them at once. The 2026 form closed June 6 and winners were told by email or text in September, so watch the school's post-secondary page for the next one in the spring.",
+    "applyViaGuidance": true,
+    "title": "Wetaskiwin Legion Branch #86 Award",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Wetaskiwin Composite graduates",
+    "description": "An award from Royal Canadian Legion Branch 86 in Wetaskiwin, offered through the school's in-house scholarship form. The branch sets the amount and the criteria each year and the school lists the award without published terms.",
+    "metaDetail": "Branch 86 sets the amount and the terms fresh each year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 740,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Applications go to the Kinette Club directly, not through the school, and the club asks for a transcript on school letterhead plus proof of Canadian citizenship or landed immigrant status. It also asks you to write about your own experience of the local Kinette Club, and it says outright not to send resumes, clippings or reference letters. The 2026 deadline was June 1, so look for the next form in the spring.",
+    "applyViaGuidance": false,
+    "title": "Leanne Wright Memorial Bursary",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Wetaskiwin students entering full-time post-secondary study",
+    "description": "A $1,000 bursary from the Kinette Club of Wetaskiwin, created in memory of a club member who died in 2004 and whose last motion was to stop sending the club's money to the national Kin Canada fund and keep it for a Wetaskiwin student instead. It rewards high ideals and qualities of citizenship.",
+    "metaDetail": "The club kept this money local on purpose.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 741,
+    "region": "Alberta",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "The family connection reaches further than most veteran awards, as far as great-grandchildren and great nieces and nephews. The catch is age: the auxiliary states this is not intended for mature students over twenty. It is a separate award from the auxiliary's main command bursaries, so you can be considered for both.",
+    "applyViaGuidance": false,
+    "title": "Constance Gowers Memorial Bursary",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Alberta and N.W.T. students connected to veterans, RCMP, reserves or firefighting",
+    "description": "A $500 bursary from the Ladies Auxiliary of the Alberta-N.W.T. Command of the Royal Canadian Legion, for a student entering the first term of a certificate, diploma or degree. It is aimed at the child, grandchild, great-grandchild, niece or nephew of a veteran, at descendants of serving RCMP members, and at reservists and firefighters, paid or volunteer, with a year of service.",
+    "metaDetail": "A Legion Auxiliary bursary with a wide family net.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "alsoOpenTo": [
+      "Wetaskiwin"
+    ]
+  },
+  {
+    "id": 742,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "Two things narrow it. Postgraduate study is not admissible for branch bursaries, and the award is needs-based rather than competitive on marks; the standard is only that you are likely to succeed. A student who finished high school and took a break still qualifies.",
+    "applyViaGuidance": false,
+    "title": "Royal Canadian Legion Branch Bursary (Wetaskiwin)",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Descendants of Canadian and Commonwealth forces members",
+    "description": "A needs-based Legion bursary for students whose parent, grandparent or great-grandparent served or is serving in the Armed Forces of Canada or the British Commonwealth forces. It is meant to bridge the gap between what a student needs and what family, work and government assistance provide.",
+    "metaDetail": "It bridges the gap the loans leave behind.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 743,
+    "region": "Red Deer",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wolfcreek.ab.ca/download/386186",
+    "notes": "The fifteen credit requirement is the one that stops people, and it has to be in the automotive field specifically, evidenced by a transcript. At least one letter of reference is required. The application asks what car you would most like to work on, so the club is reading for genuine enthusiasm rather than marks. The 2026 deadline was May 29.",
+    "applyViaGuidance": false,
+    "title": "Central Alberta Vintage Auto Club Bob and Jean Spencer Scholarship",
+    "amount": "$1,000",
+    "category": "Trades",
+    "audience": "Central Alberta students entering automotive trades",
+    "description": "A $1,000 scholarship from the Central Alberta Vintage Auto Club for a graduating student entering automotive body or mechanical work. You need at least fifteen credits already earned in that field and either a place in an automotive pre-employment programme at an Alberta post-secondary institution or an apprenticeship already arranged.",
+    "metaDetail": "Fifteen automotive credits are the entry price.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Automotive"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "alsoOpenTo": [
+      "Wetaskiwin",
+      "Lacombe"
+    ]
+  },
+  {
+    "id": 744,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "There is no application for this one. The school hands it out at the awards ceremony on the marks and the teachers' reading of the year, so the course you register in is the whole of your entry. Registering in Mathematics 30-1 or 30-2 is what puts you in the running.",
+    "applyViaGuidance": true,
+    "title": "John and Edna Bullock Mathematics Scholarship",
+    "amount": "Varies",
+    "category": "STEM",
+    "audience": "Wetaskiwin Composite mathematics students",
+    "description": "A mathematics scholarship handed out at the Wetaskiwin Composite awards ceremony. It sits on the school's list of awards that require no application at all, alongside the Mathematics 30-1 and 30-2 shields.",
+    "metaDetail": "Mathematics money with no form to fill in.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Mathematics"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 745,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "No form is involved. The award goes out at the ceremony on the strength of the year's work, so registering in Social Studies 30-1 or 30-2 is the entry. Both streams are recognised on the school's award list.",
+    "applyViaGuidance": true,
+    "title": "Loyal Order of Moose Social Studies Scholarship",
+    "amount": "Varies",
+    "category": "Academic",
+    "audience": "Wetaskiwin Composite social studies students",
+    "description": "A social studies scholarship funded by the Loyal Order of Moose and awarded at the Wetaskiwin Composite ceremony. It is one of the school's no-application awards, decided on the year's work in Social Studies 30-1 or 30-2.",
+    "metaDetail": "Decided on your Social Studies 30 year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Social Studies"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 746,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "There is no application for this one. The school hands it out at the awards ceremony on the marks and the teachers' reading of the year, so the course you register in is the whole of your entry. Staying in the music programme through grade 12 is the entry.",
+    "applyViaGuidance": true,
+    "title": "Loyal Order of Moose Music Scholarship",
+    "amount": "Varies",
+    "category": "Arts",
+    "audience": "Wetaskiwin Composite music students",
+    "description": "A music scholarship funded by the Loyal Order of Moose and presented at the Wetaskiwin Composite awards ceremony. Like the lodge's social studies award it needs no application form.",
+    "metaDetail": "Handed out at the awards ceremony with no form to fill in.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 747,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.wetaskiwincomp.ca/students/post-secondary-and-beyond",
+    "notes": "There is no application for this one. The school hands it out at the awards ceremony on the marks and the teachers' reading of the year, so the course you register in is the whole of your entry. Languages are among the easiest courses to drop after grade 11, which is exactly why this one exists.",
+    "applyViaGuidance": true,
+    "title": "Modern Languages Scholarship (Wetaskiwin Composite)",
+    "amount": "Varies",
+    "category": "Academic",
+    "audience": "Wetaskiwin Composite language students",
+    "description": "A scholarship for language study at Wetaskiwin Composite, awarded without an application alongside the French Second Language 30 and French Language Arts shields.",
+    "metaDetail": "For carrying a language through to grade 12.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Wetaskiwin Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 748,
+    "region": "Wetaskiwin",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.county.wetaskiwin.ab.ca/847/Agricultural-Bursary",
+    "notes": "The three year residency window is unusually generous: a student who moved away for work or a first year of study still qualifies. County policy allows you to receive this bursary only once. Participation in 4-H or agricultural fairs is described as desirable rather than required. Applications go to the Director of Agricultural Services and are reviewed by the Agricultural Service Board at its first meeting after the deadline; the county's page still shows the previous year's October 1 date.",
+    "applyViaGuidance": false,
+    "title": "County of Wetaskiwin Agricultural Bursary",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "County of Wetaskiwin residents entering agriculture",
+    "description": "Five bursaries of $1,000 each from the County of Wetaskiwin for students entering a post-secondary faculty relating to agriculture. You must be a current resident of the County of Wetaskiwin No. 10, or have been one within the last three years, and you must send a copy of your acceptance letter with the application.",
+    "metaDetail": "Five awards of $1,000 for county residents.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-10-01"
   }
 ]

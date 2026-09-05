@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Eleven new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake and Lacombe, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Twelve new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe and Wetaskiwin, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Wetaskiwin and Wetaskiwin County now have a page of their own, built out of the one application form that Wetaskiwin Composite High School uses for every award it hands out, plus the county bursaries and the service club money beside it.',
+      },
       {
         kind: 'listings',
         text: 'Lacombe and Lacombe County now have 60 awards and a page of their own, out of the Lacombe Composite awards list, the Wolf Creek division awards and the entrance awards at Burman University.',

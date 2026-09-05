@@ -238,6 +238,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Eight of these are decided on a grade 12 mark alone with nothing to fill in, and one of the eight covers eight separate courses at $500 each.',
   },
   {
+    slug: 'wetaskiwin',
+    kind: 'region',
+    value: 'Wetaskiwin',
+    label: 'Wetaskiwin',
+    h1: 'Wetaskiwin scholarships',
+    title: 'Wetaskiwin Scholarships',
+    description:
+      'Scholarships for Wetaskiwin and Wetaskiwin County students: the Composite High School award list, service club money and the county agricultural bursaries.',
+    intro:
+      'One Google Form covers twenty-three of these at once, so ticking a box you almost qualify for costs you nothing but the box.',
+  },
+  {
     slug: 'camrose',
     kind: 'region',
     value: 'Camrose',
