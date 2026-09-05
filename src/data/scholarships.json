@@ -27509,5 +27509,3108 @@
       "extracurriculars": []
     },
     "deadline": "2026-10-01"
+  },
+  {
+    "id": 749,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/admissions/scholarships-and-bursaries/",
+    "notes": "Two gates and no more: you graduated from a school inside the Regional Municipality of Wood Buffalo, and you carried an 80 per cent average. There is no essay and no reference letter in the criteria. Keyano runs this as a standing programme rather than a one-off competition, so check the admissions page for the current year's application window.",
+    "applyViaGuidance": false,
+    "title": "Keyano College Excellence Award",
+    "amount": "Full tuition",
+    "category": "Academic",
+    "audience": "Wood Buffalo high school graduates with an 80 per cent average",
+    "description": "Free first-year tuition at Keyano College for a student entering from a secondary school inside the Regional Municipality of Wood Buffalo with an average of 80 per cent or better. It is the largest single thing a Fort McMurray graduate can win and it is not a competition against the whole province, only against the region.",
+    "metaDetail": "Free first-year tuition for local grads at 80 per cent.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 750,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://forms.keyano.ca/Registrar/Local-Leaders-Entrance-Award",
+    "notes": "It is a voucher rather than a cheque, so it pays tuition and books rather than rent. Military service counts alongside volunteering, which is unusual. With sixty awards on offer the odds here are better than on almost anything else a Fort McMurray student can apply for.",
+    "applyViaGuidance": false,
+    "title": "Keyano Board of Governors Local Leaders Entrance Award",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Wood Buffalo students entering Keyano who are active in the community",
+    "description": "Sixty awards of $1,000, issued as a voucher against tuition or eligible costs such as books, for students who represent the Wood Buffalo region through extracurricular activity, volunteer work, military service or community initiatives. Sixty recipients makes it the widest award anywhere in this directory.",
+    "metaDetail": "Sixty $1,000 vouchers for local community builders.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 751,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The reach beyond the Huskies is the point. A junior hockey player or a club athlete taking classes at Keyano is as eligible as a varsity one. Marks and community involvement are weighted equally at fifty per cent each.",
+    "applyViaGuidance": false,
+    "title": "Charles Ruigrok Syncrude Canada Athletic Award",
+    "amount": "$1,500",
+    "category": "Sports",
+    "audience": "Keyano students competing for a local team",
+    "description": "Two awards of $1,500, one male and one female, for a full-time Keyano student in good athletic and academic standing. You do not have to play for the college: athletes with the Keyano Huskies, the Fort McMurray Oil Barons or any other local competitive team are eligible.",
+    "metaDetail": "Oil Barons and local club athletes qualify too.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 752,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Being on the Huskies roster is the only athletic requirement. Nothing in the criteria asks about playing time or results, so do not talk yourself out of it after a quiet season.",
+    "applyViaGuidance": false,
+    "title": "MacDonald Island Park Award",
+    "amount": "$1,100",
+    "category": "Sports",
+    "audience": "Keyano College Huskies athletes",
+    "description": "One award of $1,100 from MacDonald Island Park for an athlete on the Keyano College Huskies. It is split evenly between academic achievement and financial need, which makes it one of the few athletic awards where money troubles help rather than hurt your case.",
+    "metaDetail": "Half the score is financial need, not performance.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 753,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Because it runs on nomination rather than application, the only thing you control is what your coach sees. It is judged on leadership and attitude rather than statistics.",
+    "applyViaGuidance": false,
+    "title": "Trak Enterprises Athletic Award",
+    "amount": "$600",
+    "category": "Sports",
+    "audience": "Keyano students playing an ACAC sport",
+    "description": "One award of $600 for a full-time student competing in an ACAC sport who shows strong leadership and a positive attitude. There is no application: coaches nominate and the Athletic Director selects.",
+    "metaDetail": "No application; your coach puts your name forward.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 754,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "No programme restriction and no year restriction, and twenty of them. If you fill in only one Keyano application box, make it this one. Marks and financial need are weighted equally.",
+    "applyViaGuidance": false,
+    "title": "Access to the Future Matching Grant Award",
+    "amount": "$2,000",
+    "category": "General",
+    "audience": "Keyano students in any programme",
+    "description": "Twenty awards of $2,000, funded through the province's Access to the Future matching grant, for full-time Keyano students in any year of any programme. Twenty recipients makes it the largest single pool of money in the college's award book.",
+    "metaDetail": "Twenty awards of $2,000, the biggest pool at Keyano.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 755,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Certificate and degree students are not eligible; it has to be a diploma. Marks and financial need count equally.",
+    "applyViaGuidance": false,
+    "title": "Alberta Blue Cross Entrance Award",
+    "amount": "$1,000",
+    "category": "General",
+    "audience": "Students entering the first year of a Keyano diploma",
+    "description": "One award of $1,000 for a student in the first year of any diploma programme at Keyano. It is one of the few awards in the book restricted to first-year students, which removes the continuing students you would otherwise be competing against.",
+    "metaDetail": "First-year diploma students only, which thins the field.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 756,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The booklet says the Indigenous preference is a preference and not a bar, so everyone else is still considered. What actually narrows the field is that your programme must be one you started this academic year.",
+    "applyViaGuidance": false,
+    "title": "ATCO Award (Keyano)",
+    "amount": "$1,200",
+    "category": "General",
+    "audience": "Students starting a new programme at Keyano",
+    "description": "One award of $1,200 from ATCO for a student in a new post-secondary programme in the current academic year, judged on academic achievement and financial need, with preference given to a student of Indigenous ancestry.",
+    "metaDetail": "For students in their first year of a new programme.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 757,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "One of the genuinely unrestricted awards in the book, and there are three of them rather than one.",
+    "applyViaGuidance": false,
+    "title": "BMO Financial Group Award (Keyano)",
+    "amount": "$1,500",
+    "category": "General",
+    "audience": "Keyano students in any programme or year",
+    "description": "Three awards of $1,500 from BMO for any student in any programme and any year at Keyano, selected on academic success and financial need in equal measure.",
+    "metaDetail": "Three awards, open to every programme and year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 758,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Domestic status is the one filter, so international students should look at the international awards instead. There is a separate Board of Governors award reserved for Indigenous students.",
+    "applyViaGuidance": false,
+    "title": "Keyano Board of Governors Award",
+    "amount": "$1,000",
+    "category": "General",
+    "audience": "Full-time domestic students at Keyano",
+    "description": "One award of $1,000 from the Keyano Board of Governors and Friends of Keyano College for a full-time domestic student, judged half on academic excellence and half on financial need.",
+    "metaDetail": "Open to any programme; domestic students only.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 759,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The preference for female and Indigenous applicants does not close the door on anyone else. At $2,000 across three recipients this is one of the larger general awards.",
+    "applyViaGuidance": false,
+    "title": "Canadian Association of Petroleum Producers Endowed Award",
+    "amount": "$2,000",
+    "category": "General",
+    "audience": "Keyano students, with preference to female and Indigenous applicants",
+    "description": "Three awards of $2,000 from an endowment funded by the Canadian Association of Petroleum Producers, open to any Keyano student and judged on academic achievement and financial need, with preference given to female and Indigenous students.",
+    "metaDetail": "Three $2,000 awards with no programme restriction.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 760,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "If a parent works at CEDA this is close to the best-value application you can make, because the preference thins the field sharply. Without that link you can still apply and be considered.",
+    "applyViaGuidance": false,
+    "title": "CEDA Student Advancement Award",
+    "amount": "$1,350",
+    "category": "General",
+    "audience": "Keyano students, with preference to CEDA employees and their children",
+    "description": "Two awards of $1,350 for Keyano students in any programme and any year who show financial need and effort in their studies. Preference goes to employees of CEDA and to the children of employees, evidenced by a letter on company letterhead.",
+    "metaDetail": "Preference for CEDA employees and their children.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 761,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The residency requirement is a hard three years, which rules out students who arrived for their final year of high school. All three of marks, community service and need are weighed.",
+    "applyViaGuidance": false,
+    "title": "Famous 5 Legacy Student Award",
+    "amount": "$650",
+    "category": "Community",
+    "audience": "Female Keyano students with three years in Wood Buffalo",
+    "description": "One award of $650 from the Famous 5 Foundation for a female student with strong academic standing, demonstrated leadership through community service and financial need, who has lived in the Regional Municipality of Wood Buffalo for at least three years.",
+    "metaDetail": "Three years of Wood Buffalo residency required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 762,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Marks are not part of the criteria at all. This is decided on need and on what you do outside class, which makes it winnable by a student whose transcript is unremarkable.",
+    "applyViaGuidance": false,
+    "title": "Fore the Ladies Classic Female Empowerment Award",
+    "amount": "$4,000",
+    "category": "Community",
+    "audience": "Female Keyano students in any programme",
+    "description": "Three awards of $4,000 for any female student in any programme at Keyano, judged half on financial need and half on community involvement. At $4,000 apiece these are the largest individual awards in the college's book.",
+    "metaDetail": "The largest cash awards in Keyano's award book.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 763,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "This is scored one hundred per cent on academic achievement, so financial need will neither help nor hurt. It is one of the few pure merit awards in the book.",
+    "applyViaGuidance": false,
+    "title": "GKO Entrance Scholarship",
+    "amount": "$1,700",
+    "category": "General",
+    "audience": "First-year Keyano students in a new programme",
+    "description": "One award of $1,700 from GKO Design Consultants for a student entering the first year of a new post-secondary programme, judged entirely on academic performance together with self-motivated and enthusiastic participation in class and student activities.",
+    "metaDetail": "Judged on marks alone, with no financial component.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 764,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "This is one of the few Keyano awards written for someone who has just left high school, so your grade 12 activities are the evidence rather than anything you have done at college. Marks and community involvement split the score evenly.",
+    "applyViaGuidance": false,
+    "title": "Keyano College Community Award",
+    "amount": "$1,100",
+    "category": "Community",
+    "audience": "Students entering first-year full-time study at Keyano",
+    "description": "Two awards of $1,100 for students entering their first year of full-time study, judged on academic merit through high school together with contributions to school and community life showing leadership and interpersonal skills.",
+    "metaDetail": "Explicitly judged on your high school record.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 765,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The letterhead requirement stops people who volunteered informally. Ask the organisation for it early, because a personal reference on plain paper will not do.",
+    "applyViaGuidance": false,
+    "title": "Kirk and Angelle McDougall Award",
+    "amount": "$600",
+    "category": "Community",
+    "audience": "Keyano students with documented volunteer involvement",
+    "description": "One award of $600 for a student in any programme who shows financial need and community involvement, and who is enrolled in the programme immediately following the award. A letter of reference on organisation or company letterhead confirming the amount of volunteer work is required.",
+    "metaDetail": "A letterhead reference for your volunteering is required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 766,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "At $360 this is the smallest award in the Keyano book, which is exactly why fewer people bother with it. The same single application form covers it.",
+    "applyViaGuidance": false,
+    "title": "Lynda Costello Award",
+    "amount": "$360",
+    "category": "General",
+    "audience": "Keyano students starting a new programme",
+    "description": "One award of $360 for a student in a new post-secondary programme in the current academic year, based on academic achievement and financial need, with preference given to a female student.",
+    "metaDetail": "A small award with a light application burden.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 767,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Single parenthood is the whole gate, so the field is small. Degree students are not eligible; it has to be a certificate or a diploma.",
+    "applyViaGuidance": false,
+    "title": "Northlands Empowerment Award",
+    "amount": "$1,300",
+    "category": "Community",
+    "audience": "Single parents in a Keyano certificate or diploma",
+    "description": "One award of $1,300 for a full-time student who is a single parent, enrolled in any certificate or diploma programme at Keyano, judged on financial need and academic achievement.",
+    "metaDetail": "Reserved for full-time students who are single parents.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 768,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "This exists specifically to reward the route through academic upgrading, so a student who did not leave high school with the marks they needed is the intended winner rather than an afterthought.",
+    "applyViaGuidance": false,
+    "title": "Northlands Advancement Award",
+    "amount": "$1,300",
+    "category": "General",
+    "audience": "Keyano College Preparation graduates moving into a credential",
+    "description": "One award of $1,300 for a student who completed the College Preparation programme at Keyano and then enrolled in a certificate, diploma or degree there, judged on academic achievement and financial need.",
+    "metaDetail": "For students who upgraded first, then carried on.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 769,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "This is the strictest of the three Northstar awards and the one with the smallest field, because a decade of residency rules out most of the region's transient workforce and their children. Two shorter-residency versions run alongside it.",
+    "applyViaGuidance": false,
+    "title": "Northstar Ford Lincoln Marty and Dennine Giles Award (A)",
+    "amount": "$1,300",
+    "category": "Community",
+    "audience": "Keyano students with ten years in Wood Buffalo",
+    "description": "One award of $1,300 for a student in any programme with proof of at least ten years of residency in the Wood Buffalo region, judged on community involvement and academic success. A letter of reference on letterhead confirming volunteer hours is required.",
+    "metaDetail": "Ten years of Wood Buffalo residency is the gate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 770,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The five year version of the same family of awards. Marks matter in this one where they do not in version C, so apply for whichever fits your record and tick both if you meet the residency.",
+    "applyViaGuidance": false,
+    "title": "Northstar Ford Lincoln Marty and Dennine Giles Award (B)",
+    "amount": "$1,300",
+    "category": "Community",
+    "audience": "Keyano students with five years in Wood Buffalo",
+    "description": "One award of $1,300 for a student in any programme with proof of at least five years of residency in Wood Buffalo, judged on community involvement and academic success, with a letterhead reference confirming volunteer hours.",
+    "metaDetail": "Five years of residency and marks are what count here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 771,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "This is the sibling of award B with academic achievement swapped out for financial need. A student with modest grades and real money pressure should aim here rather than at B.",
+    "applyViaGuidance": false,
+    "title": "Northstar Ford Lincoln Marty and Dennine Giles Award (C)",
+    "amount": "$1,300",
+    "category": "Community",
+    "audience": "Keyano students with five years in Wood Buffalo and financial need",
+    "description": "One award of $1,300 for a student in any programme with at least five years of Wood Buffalo residency, judged on community involvement and financial need rather than on marks, with a letterhead volunteer reference required.",
+    "metaDetail": "The version of this award that ignores your marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 772,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "A grandparent counts, which is wider than most employee awards and worth checking before you assume you are out. Community involvement carries half the score, with marks and need at a quarter each.",
+    "applyViaGuidance": false,
+    "title": "Suncor Energy Rick George Leadership Award",
+    "amount": "$1,000",
+    "category": "Community",
+    "audience": "Wood Buffalo residents with a Suncor family connection",
+    "description": "One award of $1,000 from the Suncor Energy Foundation for a Wood Buffalo resident in any Keyano programme who is part of the Suncor family, meaning you, a spouse, a parent or a grandparent is employed by Suncor. Proof of residency and of the employment connection are both required.",
+    "metaDetail": "You, a parent or a grandparent must work at Suncor.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 773,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The criteria are unusual: it is not marks and not need but how you behave toward other students in class. Helping the person beside you is literally the qualification.",
+    "applyViaGuidance": false,
+    "title": "Wolf Midstream Award",
+    "amount": "$2,500",
+    "category": "Trades",
+    "audience": "Keyano students in business, environmental or power engineering programmes",
+    "description": "Two awards of $2,500 from Wolf NGL for students in the Business Administration certificate or diploma, Human Resources Management certificate, Environmental Technology diploma or third and fourth class Power Engineering certificate. Selection is on leadership and mentorship in the classroom as judged by the instructors.",
+    "metaDetail": "Your instructors decide this one, not a committee.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Business",
+        "Environmental Technology",
+        "Power Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 774,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Financial need plays no part here, so a strong transcript is the whole case. At $2,500 it is among the largest Indigenous awards in the book.",
+    "applyViaGuidance": false,
+    "title": "Apex Distribution Indigenous Student Achievement Award",
+    "amount": "$2,500",
+    "category": "Indigenous",
+    "audience": "Indigenous students at Keyano College",
+    "description": "One award of $2,500 for a full-time Indigenous student in any year of any programme at Keyano, selected entirely on academic achievement.",
+    "metaDetail": "Scored one hundred per cent on academic achievement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 775,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Unlike the Apex award, need counts for half here, so the two are worth applying for together rather than choosing between.",
+    "applyViaGuidance": false,
+    "title": "Birch Mountain Enterprises Award",
+    "amount": "$2,500",
+    "category": "Indigenous",
+    "audience": "Indigenous students at Keyano College",
+    "description": "One award of $2,500 from Birch Mountain Enterprises for a full-time Indigenous student in any year of any programme, judged half on academic success and half on financial need.",
+    "metaDetail": "No programme or year restriction of any kind.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 776,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Keyano accepts a status card, a band letter, a Metis membership card, a Nunavut Trust or Inuit beneficiary card, or a letter of support from an FNMI organisation as proof.",
+    "applyViaGuidance": false,
+    "title": "Keyano Board of Governors Indigenous Award",
+    "amount": "$1,000",
+    "category": "Indigenous",
+    "audience": "Indigenous students at Keyano College",
+    "description": "One award of $1,000 from the Keyano Board of Governors and Friends of Keyano College for a full-time Indigenous student, based on academic excellence and financial need. Proof of Indigenous ancestry is required.",
+    "metaDetail": "The Indigenous counterpart to the Board of Governors award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 777,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The listed communities include the small settlements, not just the city, so a student from Fort Chipewyan or Janvier is at the front of this queue rather than the back. Preference also goes to CEDA employees and their children.",
+    "applyViaGuidance": false,
+    "title": "CEDA Indigenous Onikaniw Eskwew Award",
+    "amount": "$1,000",
+    "category": "Indigenous",
+    "audience": "Indigenous women from the Wood Buffalo communities",
+    "description": "One award of $1,000 for an Indigenous female student in any Keyano programme who shows strong community leadership and academic excellence. Preference goes to students living in, or living immediately before college in, Fort Chipewyan, Conklin, Janvier, Anzac, Gregoire Lake, Fort McKay or Fort McMurray.",
+    "metaDetail": "Named preference for seven Wood Buffalo communities.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 778,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Marks and money are both irrelevant here. What you have done in the community is the whole application, which makes this one of the most winnable large awards in the book.",
+    "applyViaGuidance": false,
+    "title": "CNOOC International Indigenous Award",
+    "amount": "$2,500",
+    "category": "Indigenous",
+    "audience": "Indigenous students at Keyano who are active in the community",
+    "description": "One award of $2,500 for an Indigenous student at Keyano, scored entirely on community involvement.",
+    "metaDetail": "Community involvement is one hundred per cent of the score.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 779,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Paramedicine is named alongside nursing, which many students miss. Selection is one hundred per cent academic.",
+    "applyViaGuidance": false,
+    "title": "Hines Health Services Indigenous Medical Education Scholarship",
+    "amount": "$1,000",
+    "category": "Indigenous",
+    "audience": "Indigenous nursing and paramedicine students at Keyano",
+    "description": "One award of $1,000 for an Indigenous student enrolled in the Bachelor of Science in Nursing or in the advanced care or primary care paramedic programmes at Keyano, selected on academic success alone.",
+    "metaDetail": "Nursing and both paramedic streams are eligible.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Nursing",
+        "Paramedicine"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 780,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The summer position and mentorship are the real value here, well beyond the $1,500. Nothing else in the Keyano book offers a job alongside the cheque.",
+    "applyViaGuidance": false,
+    "title": "Rally Engineering Indigenous Award",
+    "amount": "$1,500",
+    "category": "Indigenous",
+    "audience": "Indigenous students in business or environmental technology at Keyano",
+    "description": "One award of $1,500 for an Indigenous student in Business Administration or Environmental Technology, judged on financial need and academic excellence. Recipients may also be considered for a paid summer position at Rally Engineering and for career mentorship.",
+    "metaDetail": "It can come with a paid summer job attached.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Business",
+        "Environmental Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 781,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The random selection is unusual and it works in your favour: if you meet the criteria you are in a lottery rather than a ranking, so a weaker transcript does not push you down. Any Indigenous student is eligible if the rural preference cannot be filled.",
+    "applyViaGuidance": false,
+    "title": "Scotiabank Indigenous Education Awards",
+    "amount": "$1,600",
+    "category": "Indigenous",
+    "audience": "Indigenous students from the rural Wood Buffalo communities",
+    "description": "Three awards of $1,600 for Indigenous students in any Keyano programme, with preference to those living in the Indigenous and rural communities of Wood Buffalo now or immediately before starting college. Where more students qualify than there are awards, recipients are chosen at random.",
+    "metaDetail": "Ties are broken by random draw, not by ranking.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 782,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The residency test is province-wide rather than regional, so a student who moved to Fort McMurray from elsewhere in Alberta still qualifies.",
+    "applyViaGuidance": false,
+    "title": "Trans Canada Energy Award",
+    "amount": "$1,500",
+    "category": "Indigenous",
+    "audience": "Indigenous Alberta residents at Keyano",
+    "description": "One award of $1,500 for a student of Indigenous ancestry who has lived in Alberta for at least three years immediately before applying, with strong academic qualifications and demonstrated financial need. Proof of ancestry and of residency are both required.",
+    "metaDetail": "Three years of Alberta residency, not just Wood Buffalo.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 783,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The same seven communities named in the CEDA award appear here, so a student from one of them should apply for both.",
+    "applyViaGuidance": false,
+    "title": "Wood Buffalo Indigenous Achievement Awards",
+    "amount": "$1,650",
+    "category": "Indigenous",
+    "audience": "Indigenous students from the Wood Buffalo communities",
+    "description": "Two awards of $1,650 from an anonymous donor for Indigenous students in their first or second year at Keyano, with preference to students from Fort Chipewyan, Janvier, Conklin, Anzac, Gregoire Lake, Fort McKay or Fort McMurray. Selection is on financial need and academic achievement.",
+    "metaDetail": "First and second year students from the region.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 784,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The year restriction keeps the senior nursing students out, which makes this one of the better bets for a student straight out of high school.",
+    "applyViaGuidance": false,
+    "title": "Phoebe Spice and Ron Wolff Award",
+    "amount": "$600",
+    "category": "STEM",
+    "audience": "First and second year nursing students at Keyano",
+    "description": "One award of $600 from the Northern Lights Regional Health Authority for a nursing student in first or second year, judged on academic achievement and financial need.",
+    "metaDetail": "First and second year nursing students only.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 785,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The academic bar is a floor rather than a competition: clear 65 per cent and your marks stop mattering. Its sister award is scored the opposite way, purely on academics.",
+    "applyViaGuidance": false,
+    "title": "GPM Lynda Oberg Community Involvement Award",
+    "amount": "$1,500",
+    "category": "STEM",
+    "audience": "Keyano nursing students active in the community",
+    "description": "One award of $1,500 for a Bachelor of Science in Nursing student with outstanding community involvement, scored entirely on that involvement. You need satisfactory academic standing, defined as a 2.0 GPA or 65 per cent, and demonstrated financial need.",
+    "metaDetail": "A 65 per cent floor, then community work decides it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 786,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "GPM funds two nursing awards of the same size, one decided on marks and one on community involvement. Apply for both; they are judged separately.",
+    "applyViaGuidance": false,
+    "title": "GPM Lynda Oberg Nursing Scholarship",
+    "amount": "$1,500",
+    "category": "STEM",
+    "audience": "Academically strong Keyano nursing students",
+    "description": "One award of $1,500 for a Bachelor of Science in Nursing student with strong academic standing who also demonstrates financial need. Selection is one hundred per cent on academic achievement.",
+    "metaDetail": "The academic half of a paired nursing award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 787,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Practical nursing rather than the degree, which is a shorter and cheaper route many students overlook. The award exists specifically for someone whose path to the classroom was difficult.",
+    "applyViaGuidance": false,
+    "title": "Lynda O'Quinn Memorial Award",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Practical nursing students at Keyano who have overcome barriers",
+    "description": "One award of $1,000 in memory of a Fort McMurray emergency room nurse, for a practical nursing student who has overcome barriers on the way to becoming a student. It is the only award in the book that treats adversity itself as the qualification.",
+    "metaDetail": "Adversity is the criterion, not a tiebreaker.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Practical Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 788,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Marks play no part. The two documents, a letterhead reference and proof of three years in Alberta, are what actually stop applications here.",
+    "applyViaGuidance": false,
+    "title": "Syncrude Canada Marjorie Sullivan Award",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "Business or University Studies students at Keyano",
+    "description": "One award of $500 for a first or second year student in Business Administration or University Studies with strong community involvement, scored entirely on that involvement. Three years of Alberta residency and a letterhead reference confirming volunteer hours are required.",
+    "metaDetail": "Judged on community involvement alone.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Business",
+        "University Studies"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 789,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "There is nothing else in the criteria. If you are in first-year Business Administration you meet the eligibility in full.",
+    "applyViaGuidance": false,
+    "title": "Three M Shopping Centre Business Administration Program Award",
+    "amount": "$1,350",
+    "category": "Academic",
+    "audience": "First-year business administration students at Keyano",
+    "description": "One award of $1,350 for a student in year one of the Business Administration programme at Keyano, judged equally on academic achievement and financial need.",
+    "metaDetail": "First-year business students, no other conditions.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 790,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The five tiers mean this award almost never goes unclaimed. A Composite graduate is at the front, but by the fifth tier any education student at the college is eligible.",
+    "applyViaGuidance": false,
+    "title": "C.D. MacRae Office Administration Award",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "Fort McMurray graduates in office administration at Keyano",
+    "description": "One award of $1,000 for an Office Administration student, with a cascading preference: first a former student of Fort McMurray Composite High School, then a graduate of any Fort McMurray high school, then any Office Administration student, then a Composite graduate in the Bachelor of Education programme, and finally any Bachelor of Education student.",
+    "metaDetail": "A five-step cascade starting at one high school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Office Administration"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 791,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Marks are not part of the criteria at all, which makes the certificate route a genuinely realistic target rather than a fallback.",
+    "applyViaGuidance": false,
+    "title": "Northeastern Alberta Aboriginal Business Association Office Administration Award",
+    "amount": "$1,000",
+    "category": "Indigenous",
+    "audience": "Indigenous office administration students at Keyano",
+    "description": "One award of $1,000 for an Indigenous student in the Office Administration certificate programme, judged on financial need and community involvement. Proof of Indigenous ancestry and a letterhead volunteer reference are required.",
+    "metaDetail": "Certificate students, judged on need and volunteering.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Office Administration"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 792,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Academic achievement is not scored. Need and volunteering split the decision evenly.",
+    "applyViaGuidance": false,
+    "title": "Keyano Office Administration Certificate Award",
+    "amount": "$1,000",
+    "category": "Academic",
+    "audience": "First-year office administration students at Keyano",
+    "description": "One award of $1,000 from the college's own Office Administration department for a first-year student, judged on demonstrated financial need and community involvement, with a letterhead reference confirming volunteer hours.",
+    "metaDetail": "The department funds this one itself.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Office Administration"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 793,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The criterion is place of birth rather than immigration status, so a Canadian citizen who was born elsewhere qualifies. Three awards rather than one.",
+    "applyViaGuidance": false,
+    "title": "Dr. Vincella Thompson Memorial Scholarship",
+    "amount": "$1,600",
+    "category": "Academic",
+    "audience": "University Studies students at Keyano born outside Canada",
+    "description": "Three awards of $1,600 for students born outside Canada who are enrolled in a University Studies programme at Keyano, judged on academic achievement and financial need.",
+    "metaDetail": "For students born abroad, whatever their status now.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "University Studies"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 794,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "University Studies is the transfer route to a degree elsewhere, so this reaches students who intend to leave Fort McMurray after a year or two.",
+    "applyViaGuidance": false,
+    "title": "Kathy and Bill Fitzgerald Memorial Award",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "First-year University Studies students at Keyano",
+    "description": "One award of $500 for any first-year student enrolled in University Studies at Keyano, selected on academic success and financial need.",
+    "metaDetail": "No condition beyond being in first-year University Studies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "University Studies"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 795,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Both the number of awards and the value change year to year. Since there is nothing to fill in, the way in is to be the person in the upgrading classroom who helps everyone else.",
+    "applyViaGuidance": false,
+    "title": "Northlands Commitment to Excellence Scholarship",
+    "amount": "Varies",
+    "category": "General",
+    "audience": "Keyano College Preparation students",
+    "description": "Scholarships for College Preparation students who show good work ethic, dedication and determination in a self-motivated and responsible way while encouraging others to succeed. The programme faculty select recipients in consultation with the Chair, and no application is required.",
+    "metaDetail": "No application; the upgrading faculty simply choose.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "College Preparation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 796,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "This is aimed at the upgrading classroom rather than a certificate or degree, so it reaches students who left high school without the courses they needed.",
+    "applyViaGuidance": false,
+    "title": "Lawrence and Adele Thomson Adult Education Award",
+    "amount": "$1,600",
+    "category": "Indigenous",
+    "audience": "Indigenous women in academic upgrading at Keyano",
+    "description": "One award of $1,600 for a female Indigenous student enrolled full time and in good standing in the Academic Upgrading programme at Keyano, scored on academic achievement, with preference to students demonstrating financial need.",
+    "metaDetail": "Upgrading rather than a credential programme.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "College Preparation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 797,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The booklet says outright that all students are encouraged to apply despite the Indigenous preference, so do not screen yourself out.",
+    "applyViaGuidance": false,
+    "title": "ATCO Energy and Environmental Technology Award",
+    "amount": "$1,200",
+    "category": "STEM",
+    "audience": "Students entering environmental technology at Keyano",
+    "description": "One award of $1,200 from ATCO for a student entering the Environmental Technology programme, judged on academic achievement and financial need, with preference to a student of Indigenous ancestry although all students are encouraged to apply.",
+    "metaDetail": "For students entering the programme, not continuing.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Environmental Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 798,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Marks and volunteering split the score. The letterhead reference is required rather than optional.",
+    "applyViaGuidance": false,
+    "title": "Canadian Natural Environmental Technology Award",
+    "amount": "$1,500",
+    "category": "STEM",
+    "audience": "Environmental technology students at Keyano",
+    "description": "One award of $1,500 from Canadian Natural for a student in any year of Environmental Technology who shows academic success and proven community involvement, with a letterhead reference confirming volunteer hours.",
+    "metaDetail": "Any year of the programme is eligible.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Environmental Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 799,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Cleanups, conservation groups and stewardship work are what the donor is looking for. General volunteering still counts but ranks below it.",
+    "applyViaGuidance": false,
+    "title": "CNOOC International Environmental Technology Award",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Environmental technology students with volunteer experience",
+    "description": "One award of $1,000 for a full-time Environmental Technology student with demonstrated community involvement, with priority given to involvement in the environmental sector specifically. A letterhead volunteer reference is required.",
+    "metaDetail": "Environmental volunteering counts double here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Environmental Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 800,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The published criteria are a single line, which makes this the least demanding award in the entire Keyano book to qualify for.",
+    "applyViaGuidance": false,
+    "title": "Finning Canada Environmental Studies Award",
+    "amount": "$1,250",
+    "category": "STEM",
+    "audience": "First-year environmental studies students at Keyano",
+    "description": "One award of $1,250 from Finning for a student enrolled in an environmental studies programme at Keyano. The booklet lists no academic or financial condition beyond enrolment.",
+    "metaDetail": "Enrolment appears to be the only stated condition.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Environmental Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 801,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "La Loche is in Saskatchewan and Clearwater River Reserve sits beside it, so this award reaches across the provincial boundary. Where applicants outnumber awards they are ranked on academic success.",
+    "applyViaGuidance": false,
+    "title": "Imperial Environmental Technology Scholarship",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Wood Buffalo residents in environmental technology at Keyano",
+    "description": "Five awards of $1,000 from Imperial for students in year one or two of Environmental Technology who live in the Regional Municipality of Wood Buffalo or the surrounding Indigenous communities, including Clearwater River Reserve and La Loche. Preference goes to local Indigenous applicants, then to local non-Indigenous applicants.",
+    "metaDetail": "Five awards, and the catchment crosses into Saskatchewan.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Environmental Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 802,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Power Engineering is a ticketed trade rather than a degree, and this is the largest award attached to it at Keyano.",
+    "applyViaGuidance": false,
+    "title": "Canadian Natural Power Engineer Award",
+    "amount": "$1,500",
+    "category": "Trades",
+    "audience": "Power engineering students at Keyano",
+    "description": "One award of $1,500 from Canadian Natural for a student in Power Engineering and Process Operations who shows academic success and proven community involvement, with a letterhead reference confirming volunteer hours.",
+    "metaDetail": "Power engineering plus documented volunteering.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Power Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 803,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The academic requirement is a floor and nothing more. Above 1.70 your transcript stops mattering and the decision is entirely about money. The value is set by the foundation each year.",
+    "applyViaGuidance": false,
+    "title": "Fred Arbter Memorial Award",
+    "amount": "Varies",
+    "category": "Trades",
+    "audience": "Power engineering students at Keyano with financial need",
+    "description": "An award from the Wood Buffalo Community Foundation for a student in any year of Power Engineering at Keyano, selected on financial need alone. You need to maintain satisfactory standing, defined as a 1.70 GPA.",
+    "metaDetail": "Decided purely on need, above a 1.70 GPA floor.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Power Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 804,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Syncrude funds four separate awards in this programme area. This is the one reserved for Indigenous students.",
+    "applyViaGuidance": false,
+    "title": "Mark Ward Indigenous Award",
+    "amount": "$1,000",
+    "category": "Indigenous",
+    "audience": "Indigenous power engineering students at Keyano",
+    "description": "One award of $1,000 funded by Syncrude for an Indigenous student in the Power Engineering or Process Operations programme, judged on community involvement and academic success.",
+    "metaDetail": "Process Operations counts as well as Power Engineering.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Power Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 805,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Fourth class is the entry ticket, which a student can reach in a year, so this is not out of reach for someone new to the programme. Community involvement is the whole score.",
+    "applyViaGuidance": false,
+    "title": "Scott Sullivan Endowment Award",
+    "amount": "$500",
+    "category": "Trades",
+    "audience": "Third and fourth class power engineering students",
+    "description": "One award of $500 funded by Syncrude for a third or fourth class student in Power Engineering or Process Operations with strong community involvement, scored entirely on that involvement. A letterhead reference and proof of three years in Alberta are required.",
+    "metaDetail": "Third and fourth class tickets only.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Power Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 806,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Spartan Controls funds two identical awards of $1,000, one open to everyone and one reserved for Indigenous students. An Indigenous applicant should tick both.",
+    "applyViaGuidance": false,
+    "title": "Spartan Controls Indigenous Power Engineering Award",
+    "amount": "$1,000",
+    "category": "Indigenous",
+    "audience": "Indigenous power engineering students at Keyano",
+    "description": "One award of $1,000 for an Indigenous student in any year of Power Engineering, judged on community involvement and academic success, with preference to those living and working in the Wood Buffalo region. A letterhead volunteer reference is required.",
+    "metaDetail": "The Indigenous half of a paired Spartan award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Power Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 807,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The preference for people already living and working in the region rewards students who are doing the ticket while employed at site.",
+    "applyViaGuidance": false,
+    "title": "Spartan Controls Power Engineering Award",
+    "amount": "$1,000",
+    "category": "Trades",
+    "audience": "Power engineering students at Keyano",
+    "description": "One award of $1,000 for a student in any year of Power Engineering, judged on community involvement and academic success, with preference to those living and working in the Wood Buffalo region. A letterhead volunteer reference is required.",
+    "metaDetail": "Open to any power engineering student, any year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Power Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 808,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "With five awards available and a programme far smaller than the college's degree streams, the odds on this one are unusually good.",
+    "applyViaGuidance": false,
+    "title": "Thomas Miller Memorial Award",
+    "amount": "$1,100",
+    "category": "Trades",
+    "audience": "Power engineering and process operator students at Keyano",
+    "description": "Five awards of $1,100 funded by Syncrude for students in Power Engineering or Process Operations, based on academic achievement and financial need. Five recipients makes it the deepest pool of money attached to the trades at Keyano.",
+    "metaDetail": "Five awards, the deepest trades pool at Keyano.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Power Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 809,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The fallback clause means this money rarely goes unspent, so a University Studies student should apply even without a declared arts major.",
+    "applyViaGuidance": false,
+    "title": "Fort McMurray Folk Arts Council Bachelor of Arts Award",
+    "amount": "$1,300",
+    "category": "Arts",
+    "audience": "Bachelor of Arts students at Keyano",
+    "description": "One award of $1,300 from the Fort McMurray Folk Arts Council for a Bachelor of Arts student showing strong academic success and financial need. If no arts student is eligible it opens to all University Studies students.",
+    "metaDetail": "It opens to University Studies if no one applies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 810,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Another award with a fallback tier, so a first-year University Studies student is a legitimate candidate.",
+    "applyViaGuidance": false,
+    "title": "Sally Hansen Memorial Commerce Award",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "First-year commerce students at Keyano",
+    "description": "One award of $500 for a first-year Bachelor of Commerce student, based on academic achievement and financial need, opening to all first-year University Studies students if no commerce student is eligible.",
+    "metaDetail": "It opens to University Studies if commerce is empty.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Commerce",
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 811,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The words recent local high school graduate are in the criteria, which makes this one of the few Keyano awards a student can plan for while still in grade 12. A separate second-year version exists for later.",
+    "applyViaGuidance": false,
+    "title": "Alberta Teachers' Association Local #48 Award",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "Recent Fort McMurray graduates entering education at Keyano",
+    "description": "One award of $500 from the Fort McMurray local of the Alberta Teachers' Association for a recent local high school graduate enrolled in the Bachelor of Education degree at Keyano, based on academic achievement and financial need.",
+    "metaDetail": "Written specifically for a recent local graduate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 812,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Graduating from a Fort McMurray high school is a hard requirement rather than a preference here, and money plays no part in the decision.",
+    "applyViaGuidance": false,
+    "title": "Cotter MacGillivray Memorial Scholarship",
+    "amount": "$1,100",
+    "category": "Academic",
+    "audience": "Fort McMurray graduates entering education at Keyano",
+    "description": "One award of $1,100 for a student entering the Bachelor of Education programme who is a graduate of a Fort McMurray high school. Selection is one hundred per cent on academic achievement.",
+    "metaDetail": "Fort McMurray graduates only, decided on marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 813,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Unlike the other two education awards this one carries no Fort McMurray residency condition, so a student from outside the region qualifies.",
+    "applyViaGuidance": false,
+    "title": "Kim Farrell Memorial Bachelor of Education Award",
+    "amount": "$500",
+    "category": "Academic",
+    "audience": "First-year education students at Keyano",
+    "description": "One award of $500 for a first-year Bachelor of Education student at Keyano, judged on overall academic performance and financial need.",
+    "metaDetail": "First-year education students, no local requirement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 814,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The fallback is what matters for a recent graduate: if no mature student applies, the award is yours to compete for on marks and need like any other.",
+    "applyViaGuidance": false,
+    "title": "Firebag River Award",
+    "amount": "$2,100",
+    "category": "STEM",
+    "audience": "Science students at Keyano",
+    "description": "Two awards of $2,100 from Suncor for students in the University Transfer Bachelor of Science degree with an Environmental Science or General Science designation. Mature students come first, but if none are enrolled the award opens to any student in the programme on academic achievement and financial need.",
+    "metaDetail": "Mature students first, then any science student.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Science",
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 815,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "The award commemorates the fourteen women killed at Ecole Polytechnique in 1989. Marks and extracurricular activity split the score evenly.",
+    "applyViaGuidance": false,
+    "title": "C.I.M. Oil Sands Branch Ecole Polytechnique Memorial Award",
+    "amount": "$1,000",
+    "category": "STEM",
+    "audience": "Permanent Fort McMurray residents entering engineering at Keyano",
+    "description": "One award of $1,000 from the Oil Sands Branch of the Canadian Institute of Mining and Metallurgy for a first-year Bachelor of Science in Engineering student who is a permanent resident of Fort McMurray. Proof of residency and a letterhead volunteer reference are both required.",
+    "metaDetail": "Permanent Fort McMurray residency must be proven.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 816,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Like the Teachers' Association award, the criteria name a recent local graduate, so this is aimed squarely at someone leaving a Fort McMurray high school this year.",
+    "applyViaGuidance": false,
+    "title": "James Carter Sr. Memorial Engineering Award",
+    "amount": "$1,300",
+    "category": "STEM",
+    "audience": "Recent local graduates entering engineering at Keyano",
+    "description": "One award of $1,300 for a recent local high school graduate in the first year of the Bachelor of Science in Engineering programme, based on financial need and academic achievement.",
+    "metaDetail": "Written for a recent local high school graduate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 817,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "One of four engineering awards at Keyano restricted to first year, which is a heavy concentration for a small programme.",
+    "applyViaGuidance": false,
+    "title": "Tony Fullwood Memorial Award",
+    "amount": "$750",
+    "category": "STEM",
+    "audience": "First-year engineering students at Keyano",
+    "description": "One award of $750 from Jacobs Catalytic for a first-year Bachelor of Science in Engineering student, judged on academic achievement and financial need.",
+    "metaDetail": "First-year engineering, no residency condition.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 818,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
+    "notes": "Keyano's engineering intake is small and four separate awards are reserved for its first year, so the odds here are far better than the dollar figure suggests.",
+    "applyViaGuidance": false,
+    "title": "WorleyCord LP Engineering Award",
+    "amount": "$1,400",
+    "category": "STEM",
+    "audience": "First-year engineering students at Keyano",
+    "description": "One award of $1,400 from WorleyCord for a first-year Bachelor of Science in Engineering student, selected on academic standing and financial need.",
+    "metaDetail": "The largest of Keyano's first-year engineering awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2026-12-18"
+  },
+  {
+    "id": 819,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://ecolemctavish.fmpsdschools.ca/students/scholarship-info/district-scholarships",
+    "notes": "Because there is one per school rather than one for the city, your competition is your own graduating class rather than every graduate in Fort McMurray. It honours two educators who helped build the public system from 1975 on. Applications come from student services in late April.",
+    "applyViaGuidance": true,
+    "title": "Jack and Louise Corless Memorial Scholarship",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Graduating students at every Fort McMurray high school",
+    "description": "One award of $500 at each high school in Fort McMurray, recognising leadership and citizenship. The selection committee is told to give particular attention to a student who has overcome personal difficulties or who is in financial need. It is tenable at any accredited post-secondary school.",
+    "metaDetail": "One award at every high school in the city.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 820,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://ecolemctavish.fmpsdschools.ca/students/scholarship-info/district-scholarships",
+    "notes": "Mathematics 31 is the gate and it is the course most students drop. Taking calculus in grade 12 is effectively the application, since without it no one at Westwood is eligible however good their marks.",
+    "applyViaGuidance": true,
+    "title": "AON Scholarship (Westwood)",
+    "amount": "$500",
+    "category": "STEM",
+    "audience": "Westwood students entering a STEM field",
+    "description": "An annual award of $500 for Westwood Community High School students only, who must have completed Mathematics 30-1 and Mathematics 31 and be entering a STEM field. The decision is made at the school and presented at the awards ceremony.",
+    "metaDetail": "Westwood students who took Math 31 and are in STEM.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Westwood Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 821,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://ecolemctavish.fmpsdschools.ca/students/scholarship-info/district-scholarships",
+    "notes": "This is one of very few awards in the province open to a grade 10 or 11 student. Nomination comes from your music teacher, and the only thing you write is a short essay on your interest in music and your band experience.",
+    "applyViaGuidance": true,
+    "title": "Northwinds Marching Band Scholarships",
+    "amount": "$300",
+    "category": "Arts",
+    "audience": "Fort McMurray high school band students in any grade",
+    "description": "Awards of $300 in each of three categories, woodwinds, percussion and brass, recognising three students at each of the three Fort McMurray high schools. You do not have to be in grade 12, and a music teacher nominates you.",
+    "metaDetail": "Nine awards, and grade 12 is not required.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Music"
+      ]
+    }
+  },
+  {
+    "id": 822,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://ecolemctavish.fmpsdschools.ca/students/scholarship-info/district-scholarships",
+    "notes": "The scoring is published in full: one point for an Alberta programme, two for involvement with 4-H or riding clubs or personal riding experience, one for a 70 per cent average. Riding experience is worth twice what your marks are. The third tier opens it to any student in any Alberta programme, so it is worth applying even with no horse in your life. A short essay and proof of acceptance are required, and the winner writes back to the club after first term.",
+    "applyViaGuidance": true,
+    "title": "Clearwater Horse Club Equine Scholarship",
+    "amount": "$500",
+    "category": "Community",
+    "audience": "Fort McMurray graduates entering equine and animal science fields",
+    "description": "One award of $500 from the Clearwater Horse Club for a grade 12 student eligible for a high school diploma. Equine studies come first, then animal science, veterinary and agriculture, and finally any Alberta post-secondary programme at all. Recipients are scored on a four point scale and ties are settled by drawing names.",
+    "metaDetail": "A four-point score, with ties broken by a name draw.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    },
+    "deadline": "2027-04-30"
+  },
+  {
+    "id": 823,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://ecolemctavish.fmpsdschools.ca/students/scholarship-info/district-scholarships",
+    "notes": "At $3,000 this is the biggest thing the public district hands out, and financial need rather than marks is what it turns on. Applications go to student services in March and to the district office in April.",
+    "applyViaGuidance": true,
+    "title": "Lorraine and Doug Demers Scholarship",
+    "amount": "$3,000",
+    "category": "General",
+    "audience": "Fort McMurray Public School District graduates in financial need",
+    "description": "One award of $3,000 for a graduating student of the Fort McMurray Public School District continuing into an accredited Canadian programme, with financial need as the central criterion. If no district student applies, it opens to any student in a Canadian post-secondary programme.",
+    "metaDetail": "The largest local award in the public district.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "deadline": "2027-06-01"
+  },
+  {
+    "id": 824,
+    "region": "Fort McMurray",
+    "lastVerified": "2026-09",
+    "active": true,
+    "url": "https://www.rmwb.ca/",
+    "notes": "The age cap is unusual and it cuts the other way from most awards: turning eighteen makes you ineligible, so a grade 12 student with a late birthday should be nominated early. The municipality sets the value and the nomination window each year.",
+    "applyViaGuidance": true,
+    "title": "RMWB Distinguished Youth Citizenship Award",
+    "amount": "Varies",
+    "category": "Community",
+    "audience": "Wood Buffalo residents under 18",
+    "description": "A municipal award from the Regional Municipality of Wood Buffalo recognising young citizens. Nominees must have lived in the municipality for at least a year and must be under eighteen at the time of nomination.",
+    "metaDetail": "A municipal award for nominees still under eighteen.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
   }
 ]

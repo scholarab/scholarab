@@ -238,6 +238,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Eight of these are decided on a grade 12 mark alone with nothing to fill in, and one of the eight covers eight separate courses at $500 each.',
   },
   {
+    slug: 'fort-mcmurray',
+    kind: 'region',
+    value: 'Fort McMurray',
+    label: 'Fort McMurray',
+    h1: 'Fort McMurray scholarships',
+    title: 'Fort McMurray Scholarships',
+    description:
+      'Scholarships for Fort McMurray and Wood Buffalo students: the Keyano College award book, the public district awards and the industry money behind them.',
+    intro:
+      'One Keyano application covers most of this page, and a local graduate with an 80 per cent average can have their first year of tuition paid outright.',
+  },
+  {
     slug: 'wetaskiwin',
     kind: 'region',
     value: 'Wetaskiwin',

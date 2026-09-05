@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Twelve new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe and Wetaskiwin, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Thirteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin and Fort McMurray, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Fort McMurray and Wood Buffalo now have 76 awards and a page of their own, most of them out of the Keyano College award book, alongside the Fort McMurray Public School District awards and the municipal youth citizenship award.',
+      },
       {
         kind: 'listings',
         text: 'Wetaskiwin and Wetaskiwin County now have a page of their own, built out of the one application form that Wetaskiwin Composite High School uses for every award it hands out, plus the county bursaries and the service club money beside it.',
