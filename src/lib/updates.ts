@@ -562,8 +562,16 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Fifteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie and Sherwood Park, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Fifteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie and Sherwood Park, a much deeper Edmonton page, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Edmonton gained 25 school awards, the first the city page has carried from individual high schools rather than the two divisions. They include a $16,000 mathematics scholarship at Eastglen, seven awards at Jasper Place, and grade 10 and 11 awards at St. Oscar Romero, which almost nothing else in the directory is open to.',
+      },
+      {
+        kind: 'fixed',
+        text: 'A male-only award was matching every student in the quiz. The eligibility schema only accepted female, so the whole criteria object was thrown away on the one listing that did not fit, taking its grade and subject filters with it.',
+      },
       {
         kind: 'listings',
         text: 'Sherwood Park and Strathcona County now have a page, built out of the two award lists their high schools publish in full. The five Elk Island division awards that were filed under Fort Saskatchewan are open to Sherwood Park students too, and now say so.',

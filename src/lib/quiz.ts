@@ -210,7 +210,7 @@ export const SCHOOL_BOARD_NAMES: Record<string, string> = {
  * every dropdown, so their filter could never engage. But feeding them to all
  * twenty-one cities put a 22-option question in front of Medicine Hat, Lethbridge
  * and Airdrie students, who had no school question at all, to filter three
- * listings out of 813. A student at one of those schools is in a town that is
+ * listings out of 838. A student at one of those schools is in a town that is
  * not one of the twenty-one named cities, so "Other Alberta" is the answer they give,
  * and that is where the question is worth asking.
  */

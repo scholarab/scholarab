@@ -32067,5 +32067,1053 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 861,
+    "title": "Chris Judge Award",
+    "amount": "$2,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A Strathcona High School student excelling in both athletics and the visual arts",
+    "url": "https://strathcona.epsb.ca/students/awardsscholarships/chrisjudgeaward/",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Two escape hatches are written into the terms. If no suitable grade 12 candidate is found in visual arts, the award widens to fine arts generally, and if no grade 12 candidate is found at all, grade 10 and 11 students are considered. That makes it worth putting your name forward early.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Strathcona's largest school award goes to a student who has done well in athletics and the visual arts at the same time, while keeping up their academic work. Leadership, sportsmanship and character all count, and the school gives particular attention to a candidate who has overcome adversity or risen to a challenge.",
+    "metaDetail": "The rare award that wants an athlete and an artist.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Strathcona High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Athletics",
+        "Arts"
+      ]
+    }
+  },
+  {
+    "id": 862,
+    "title": "L.G. Hanna Memorial Award",
+    "amount": "Up to $1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A Strathcona High School student showing effort and perseverance",
+    "url": "https://strathcona.epsb.ca/students/awardsscholarships/lghannamemorialaward/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Staff nominate for this one, so there is no form to chase, and it may be split between more than one student in a year, which is why the value is quoted as a ceiling rather than a fixed sum. Students who have overcome adversity get particular attention.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Named for Lewis Gerald Hanna, whose motto was never give up, this award measures diligence rather than ranking. The school looks for a student who achieves to the best of their ability, has taken part in extracurricular activities throughout high school, and shows initiative in bringing others along with them.",
+    "metaDetail": "Judged on effort against ability, not on rank.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Strathcona High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 863,
+    "title": "Griesdorf Trophy",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A female grade 12 Strathcona student who has given exceptional service to the school",
+    "url": "https://strathcona.epsb.ca/students/awardsscholarships/griesdorftrophy/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Marks matter only in that they should be commensurate with your ability, so this is not an academic prize. The male counterpart is the Scarborough Trophy, which carries the same value and nearly identical wording.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Presented since 1949 for outstanding service and leadership to Strathcona through extracurricular activities. The candidate must be in grade 12 and have contributed for at least two years, with her contributions judged on organization, delegation and what she actually built for the school community.",
+    "metaDetail": "Two years of service, judged on what you built.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Strathcona High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 864,
+    "title": "Scarborough Trophy",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A male grade 12 Strathcona student who has given exceptional service to the school",
+    "url": "https://strathcona.epsb.ca/students/awardsscholarships/scarboroughtrophy/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Judged on organization, productive delegation and worthwhile contributions to the school community rather than on marks. Its female counterpart is the Griesdorf Trophy, and the two are handed out side by side.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Established in 1952 in honour of Charlie Scarborough, who left Strathcona to enlist in 1914 and returned to teach mathematics there. It recognizes outstanding service and leadership through extracurricular activities across at least two years of high school.",
+    "metaDetail": "The male twin of the Griesdorf Trophy, same terms.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Strathcona High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "male",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 865,
+    "title": "Elwyn Probert Mathematics Scholarship",
+    "amount": "$16,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "An Eastglen grade 12 student taking Math 30-1 and Math 31 who is going on to study mathematics",
+    "url": "https://docs.google.com/document/d/1xN5JFpBQav9krYHYezsnRrxo986e5-VSfDZPVFi05g0/edit",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Financial need is explicitly not a factor. Marks from a repeated course do not count, and if two students tie the school looks back at the original summative assessments before any rewrites. The school directory quotes the figure as a single sum, while alumni describe it as covering four years of tuition, so confirm how it is paid before budgeting on it.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The largest school award in Edmonton, funded by an alumnus in honour of Elwyn Probert, a mathematics teacher who went on to become principal at Eastglen. It goes to the top mathematics student, judged on first-attempt marks in Math 30-1 and Math 31, who enrols in mathematics, engineering or science with a mathematics major.",
+    "metaDetail": "First-attempt marks only, and a math major required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Eastglen School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Mathematics",
+        "Engineering",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 866,
+    "title": "Eastglen Parent Association Awards",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Graduating Eastglen students nominated by school staff",
+    "url": "https://docs.google.com/document/d/1xN5JFpBQav9krYHYezsnRrxo986e5-VSfDZPVFi05g0/edit",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Because staff nominate rather than students applying, the way to be considered is to be visible to the teachers who sit on the committee. Four awards at one school is a far better ratio than any city-wide competition.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Four awards of $500 each funded by the Eastglen parent association and given to graduating students. A committee of staff members chooses the recipients, so there is no application form to submit.",
+    "metaDetail": "Four awards, chosen by staff, no form to file.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Eastglen School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 867,
+    "title": "MacEwan All in for Youth Bursary",
+    "amount": "$1,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Eastglen students accepted into any MacEwan University program",
+    "url": "https://docs.google.com/document/d/1xN5JFpBQav9krYHYezsnRrxo986e5-VSfDZPVFi05g0/edit",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "This is the closest thing to free money on this page, because it turns on which high school you attended and which university accepted you rather than on marks, essays or references. Confirm with Eastglen student services that the arrangement still runs in your graduating year.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Eastglen is an All in for Youth school, and MacEwan University gives its graduates a one-time bursary on acceptance into any of its programs. There is no competition attached: acceptance to MacEwan from Eastglen is what triggers it.",
+    "metaDetail": "Automatic on acceptance, not a competition.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Eastglen School"
+      ],
+      "targetInstitutions": [
+        "MacEwan University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 868,
+    "title": "Jasper Place Music Society Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Jasper Place music program students going on to study music",
+    "url": "https://sites.google.com/epsb.ca/jpstudentservices/scholarships/jasper-place-student-scholarships",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Music education and music therapy are named alongside performance, which widens the field well past students planning a performing career. All Jasper Place awards are handed out through the school's scholarships Google Classroom, so joining that class is the first step.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Four scholarships of $1,000 from the Jasper Place Music Society for students of the school's music program who are entering an accredited post-secondary program leading to a diploma or degree in music, music education or music therapy.",
+    "metaDetail": "Four awards, and music therapy counts as music.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Jasper Place High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 869,
+    "title": "John Cameron Changing Lives Award",
+    "amount": "$1,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A Jasper Place student who has advocated for mental health",
+    "url": "https://sites.google.com/epsb.ca/jpstudentservices/scholarships/jasper-place-student-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Awards that name mental health advocacy specifically are uncommon, so the applicant pool is smaller than the value suggests. Work with a school club or an outside campaign both count toward the same case.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $1,500 award for a Jasper Place student who has shown a passion for making a difference through mental health initiatives and advocacy, both inside the school and in the wider community.",
+    "metaDetail": "Mental health advocacy is the whole criterion.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Jasper Place High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 870,
+    "title": "Mayfield Rotary Service Above Self Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A Jasper Place student committed to community service",
+    "url": "https://sites.google.com/epsb.ca/jpstudentservices/scholarships/jasper-place-student-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "No academic threshold is attached, which puts it within reach of a student whose marks are ordinary but whose volunteer hours are not. Applications run through the school's scholarships Google Classroom.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Mayfield Rotary Club funds this $1,000 award for a Jasper Place student whose record shows a commitment to community service through volunteering and helping others, in line with the club's focus on youth development.",
+    "metaDetail": "Volunteering is the criterion, not your average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Jasper Place High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 871,
+    "title": "Sunrise Rotary Career Development Scholarship",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Jasper Place students in the Off-Campus Career Development, Work Experience or RAP program",
+    "url": "https://sites.google.com/epsb.ca/jpstudentservices/scholarships/jasper-place-student-scholarships",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "The eligible group here is small by design: you have to already be in the off-campus program, which most students are not. Four awards against that pool is one of the better ratios in Edmonton.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Four awards of $500 for Jasper Place students enrolled in the school's Off-Campus Career Development program, either through Work Experience or the Registered Apprenticeship Program, who are going on to post-secondary study.",
+    "metaDetail": "Four awards, and only RAP or Work Experience count.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Jasper Place High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": [
+        "RAP"
+      ]
+    }
+  },
+  {
+    "id": 872,
+    "title": "Smart Photography Positive Contribution Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A Jasper Place student whose actions have made life better for others",
+    "url": "https://sites.google.com/epsb.ca/jpstudentservices/scholarships/jasper-place-student-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "The wording is deliberately broad and says nothing about grades, programs or planned field of study, so the case you build is entirely about conduct. A teacher who has watched you day to day is the strongest reference here.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $1,000 award recognizing a Jasper Place student who through their actions makes the world a more compassionate place and the lives of others more dignified and meaningful.",
+    "metaDetail": "Judged on how you treat people, not on marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Jasper Place High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 873,
+    "title": "City of Champions Lions Club Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A well-rounded Jasper Place student going on to post-secondary",
+    "url": "https://sites.google.com/epsb.ca/jpstudentservices/scholarships/jasper-place-student-scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "This is the award for the student who is solid across the board rather than exceptional in one thing, since no single criterion carries it. Applications go through the school's scholarships Google Classroom.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The City of Champions Lions Club gives $1,000 to an active member of the Jasper Place school community heading to post-secondary study, weighing school service, academic achievement, community involvement and leadership together.",
+    "metaDetail": "Four criteria weighed together, none of them alone.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Jasper Place High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 874,
+    "title": "BeamCraft Construction Award for Excellence in Carpentry",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Jasper Place students in advanced Construction or Welding",
+    "url": "https://sites.google.com/epsb.ca/jpstudentservices/scholarships/jasper-place-student-scholarships",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Welding qualifies as well as carpentry despite the award's name, which is easy to miss. Because teachers nominate from advanced-level classes, being the student others come to for help is what puts you on the list.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $1,000 award from BeamCraft Construction for a Jasper Place student showing excellence in Construction or Welding along with mentorship of other students. Teachers nominate from their advanced-level classes.",
+    "metaDetail": "Mentoring classmates counts as much as skill.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Jasper Place High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 875,
+    "title": "Austin O'Brien Advanced Placement Scholar Award",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Austin O'Brien students completing three or more AP courses",
+    "url": "https://austinobrien.ecsd.net/awards",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "The requirement is every exam, not an average across them, so a single 2 removes an otherwise qualifying student. Because it is awarded after grade 12 ends, plan the AP course load in grade 11 rather than waiting.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Austin O'Brien gives $500 to students who complete three or more Advanced Placement courses and score 3 or higher on every AP exam they write. It is assessed after the grade 12 year is finished.",
+    "metaDetail": "Three AP courses, and a 3 or better on every exam.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Austin O'Brien Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 876,
+    "title": "Austin O'Brien Rotary Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "An Austin O'Brien student who has overcome a personal obstacle",
+    "url": "https://austinobrien.ecsd.net/awards",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "This rewards the shape of the story rather than the height of the marks, so a transcript with a difficult year in it is not a disadvantage here. It is the largest single award Austin O'Brien publishes.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $1,000 Rotary award for an Austin O'Brien student who has overcome a personal obstacle during high school while continuing to do well. The obstacle and the response to it are the substance of the application.",
+    "metaDetail": "Written for the student who had to get through something.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Austin O'Brien Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 877,
+    "title": "Cando Award",
+    "amount": "$300",
+    "deadline": null,
+    "openDate": null,
+    "audience": "An Austin O'Brien student showing entrepreneurial leadership",
+    "url": "https://austinobrien.ecsd.net/awards",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "The criteria read like a job description rather than a school award, which suits a student who has actually run something: a small business, a fundraiser, or a team. Nothing in the wording requires business courses.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $300 award for the Austin O'Brien student who best shows leadership, determination and work ethic, a willingness to take risks, business conducted with integrity, empowering leadership, employee ownership and an entrepreneurial streak.",
+    "metaDetail": "Six named traits, all about running something.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Austin O'Brien Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 878,
+    "title": "Crusader Service Award",
+    "amount": "$200",
+    "deadline": null,
+    "openDate": null,
+    "audience": "An Austin O'Brien student who shaped the school atmosphere over three years",
+    "url": "https://austinobrien.ecsd.net/awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "The measure is cumulative, so it favours a student who turned up for things consistently from grade 10 rather than one who organized a single memorable event in grade 12.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $200 award for the Austin O'Brien student judged to have contributed the most to the atmosphere of the school across the last three years.",
+    "metaDetail": "Three years of presence, not one big project.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Austin O'Brien Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 879,
+    "title": "Dave Williams Mentorship Award",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "An Austin O'Brien grade 12 student mentoring with Big Brothers Big Sisters",
+    "url": "https://austinobrien.ecsd.net/awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "The school does not publish a value for this one, so ask student services what it has paid recently. The qualifying activity has to be arranged through Big Brothers Big Sisters, which takes months to set up, so this is one to start in grade 11.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Austin O'Brien and Big Brothers Big Sisters recognize the school's most outstanding grade 12 mentor. The mentoring is done outside school hours through the agency rather than through a school club.",
+    "metaDetail": "Requires an outside mentoring commitment.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Austin O'Brien Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 880,
+    "title": "Edmonton Strathcona Youth Leadership Award",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "A graduating Austin O'Brien student with strong marks and leadership in at least two other areas",
+    "url": "https://austinobrien.ecsd.net/awards",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "The two other fields are left undefined, so athletics, the arts, faith life, work and volunteering all count toward the same requirement. Austin O'Brien does not publish the value, so confirm it with student services.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "An annual award for a student finishing high school with excellent academic standing who has also proven to be a leader in at least two other fields of endeavour.",
+    "metaDetail": "Strong marks plus leadership in two other areas.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Austin O'Brien Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 881,
+    "title": "Rick Michielin Monsignor Fee Otterson Music Performing Arts Legacy Award",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "An Austin O'Brien student with three years in the music and performing arts program",
+    "url": "https://austinobrien.ecsd.net/awards",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Supporting the wider program counts alongside performance, so accompanying, running the pit or helping stage the productions all build the case. The value is not published; student services will know it.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Austin O'Brien's legacy award for a student who has completed three years of music at a high level of performance and has actively supported the various parts of the music and performing arts program.",
+    "metaDetail": "Three full years in the program is the gate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Austin O'Brien Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 882,
+    "title": "St. Oscar Romero Grade 10 Student Award",
+    "amount": "$100",
+    "deadline": null,
+    "openDate": null,
+    "audience": "The top grade 10 student at St. Oscar Romero Catholic High School",
+    "url": "https://stoscarromero.ecsd.net/grade-10-student-award",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Extracurricular activity, consistently above average grades, leadership, regular attendance and religious leadership in the school are all named, so a student strong in four of the five is still competitive. Almost every other award in this directory is closed to students below grade 12.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "St. Oscar Romero recognizes its top grade 10 student with a cash award presented at the Academic Awards Ceremony. Applicants submit a biography covering their involvement in the school over the last one year, and grades are only one of five things weighed.",
+    "metaDetail": "A rare grade 10 award, and you apply for it yourself.",
+    "eligibility": {
+      "grades": [
+        "10"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "St. Oscar Romero Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 883,
+    "title": "St. Oscar Romero Grade 11 Student Award",
+    "amount": "$200",
+    "deadline": null,
+    "openDate": null,
+    "audience": "The top grade 11 student at St. Oscar Romero Catholic High School",
+    "url": "https://stoscarromero.ecsd.net/grade-11-student-award",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Extracurricular activity, consistently above average grades, leadership, regular attendance and religious leadership in the school are all named, so a student strong in four of the five is still competitive. Almost every other award in this directory is closed to students below grade 12.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "St. Oscar Romero recognizes its top grade 11 student with a cash award presented at the Academic Awards Ceremony. Applicants submit a biography covering their involvement in the school over the last two years, and grades are only one of five things weighed.",
+    "metaDetail": "A rare grade 11 award, and you apply for it yourself.",
+    "eligibility": {
+      "grades": [
+        "11"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "St. Oscar Romero Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 884,
+    "title": "Grade 12 Mike Carby Award",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "The top grade 12 student at St. Oscar Romero Catholic High School",
+    "url": "https://stoscarromero.ecsd.net/grade-12-mike-carby-award",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Students apply by submitting a biography of their involvement across three years, weighed on extracurricular activity, consistently above average grades, leadership, attendance and religious leadership. The school's posted cutoff is an early June date from a past cycle, so confirm the current one with student services.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Named for the first principal of St. Oscar Romero, this award goes to the school's top grade 12 student and is presented at the Grade 12 Commencement Ceremony, with the winner's name engraved on a plaque kept in the school.",
+    "metaDetail": "Applicants write their own three-year biography.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "St. Oscar Romero Catholic High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 885,
+    "title": "Johnathan Doody Memorial Scholarship",
+    "amount": "$800",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Male students entering their first year at the University of Alberta",
+    "url": "https://www.eafiji.ca/scholarship",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Nothing restricts this to Edmonton students, only to students heading for the University of Alberta, so applicants from anywhere in Alberta qualify. Two Edmonton schools list conflicting September cutoffs and the fraternity publishes none, so check the application form for the current date.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Three awards of $800 each from the Epsilon Alpha chapter of Phi Gamma Delta for male students graduating high school and entering their first year at the University of Alberta, judged on friendship, knowledge, morality, service and excellence.",
+    "metaDetail": "Three awards, and the pool is first-year U of A men.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "male",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "alsoOpenTo": [
+      "Edmonton"
+    ]
   }
 ]

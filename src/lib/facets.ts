@@ -89,9 +89,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     h1: 'Edmonton scholarships',
     title: 'Edmonton High School Scholarships',
     description:
-      'Scholarships open to Edmonton high school students: school division awards, city foundations, union and employer funds, and local bursaries.',
+      'Scholarships for Edmonton high school students: the public and Catholic division awards, the Edmonton Community Foundation funds, and school award lists.',
     intro:
-      'These are restricted to students in and around Edmonton, which cuts the field to a fraction of a province-wide competition, and they run from a $250 award up to tuition coverage worth $10,000.',
+      'Only a handful of Edmonton\'s high schools publish what they hand out, so the awards below range from a $100 grade 10 prize to a $16,000 mathematics scholarship at a single school.',
   },
   {
     slug: 'calgary',
