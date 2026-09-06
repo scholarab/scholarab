@@ -97,6 +97,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: 'Grande Prairie', value: 'Grande Prairie', hint: 'AND THE PEACE REGION' },
       { label: 'Sherwood Park', value: 'Sherwood Park', hint: 'AND STRATHCONA COUNTY' },
       { label: 'Okotoks', value: 'Okotoks', hint: 'AND THE FOOTHILLS' },
+      { label: 'Cochrane', value: 'Cochrane', hint: 'AND ROCKY VIEW COUNTY' },
       { label: 'Wetaskiwin', value: 'Wetaskiwin', hint: 'AND WETASKIWIN COUNTY' },
       { label: 'St. Albert', value: 'St. Albert', hint: 'AND STURGEON COUNTY' },
       { label: 'Spruce Grove', value: 'Spruce Grove', hint: 'AND STONY PLAIN' },
@@ -206,13 +207,13 @@ export const SCHOOL_BOARD_NAMES: Record<string, string> = {
  * An exact city match, plus province-wide listings for "Other Alberta" only.
  *
  * The looser rule was tempting: two school-restricted awards carry region
- * "Alberta" because they span several communities (Cochrane, Strathmore,
- * Innisfail), and an exact match alone left their 12 schools out of
+ * "Alberta" because they span several communities (Strathmore, Innisfail and
+ * the Cochrane schools), and an exact match alone left their 12 schools out of
  * every dropdown, so their filter could never engage. But feeding them to all
- * twenty-two cities put a 23-option question in front of Medicine Hat, Lethbridge
+ * twenty-three cities put a 24-option question in front of Medicine Hat, Lethbridge
  * and Airdrie students, who had no school question at all, to filter two
- * listings out of 889. A student at one of those schools is in a town that is
- * not one of the twenty-two named cities, so "Other Alberta" is the answer they give,
+ * listings out of 903. A student at one of those schools is in a town that is
+ * not one of the twenty-three named cities, so "Other Alberta" is the answer they give,
  * and that is where the question is worth asking.
  */
 function inCityScope(region: string | null | undefined, city: string): boolean {

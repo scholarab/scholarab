@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Sixteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie, Sherwood Park and Okotoks, a much deeper Edmonton page, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Seventeen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie, Sherwood Park, Okotoks and Cochrane, a much deeper Edmonton page, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Cochrane has a page, with the Rotary U-START bursary at $5,000 as the largest award in the town. Thirteen of its listings run through one printed application package at Cochrane High, and six existing Rocky View and Bow Valley awards now say they are open to Cochrane students too.',
+      },
       {
         kind: 'listings',
         text: 'Okotoks has a page, and it arrives with 52 awards. Foothills Composite publishes a handbook naming every award it hands out, from a $100 diploma bonus to a $1,500 yearbook scholarship, which is a level of disclosure almost no other Alberta school matches.',

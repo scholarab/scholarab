@@ -12321,7 +12321,10 @@
         "sports"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "alsoOpenTo": [
+      "Cochrane"
+    ]
   },
   {
     "id": 354,
@@ -12688,7 +12691,8 @@
     },
     "openDate": "2026-05-01",
     "alsoOpenTo": [
-      "Chestermere"
+      "Chestermere",
+      "Cochrane"
     ]
   },
   {
@@ -12729,7 +12733,10 @@
         "4-H"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "alsoOpenTo": [
+      "Cochrane"
+    ]
   },
   {
     "id": 364,
@@ -12906,7 +12913,8 @@
     "category": "Community",
     "region": "Alberta",
     "alsoOpenTo": [
-      "Airdrie"
+      "Airdrie",
+      "Cochrane"
     ],
     "active": false,
     "lastVerified": "2026-08",
@@ -12976,7 +12984,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": "2026-06-17"
+    "openDate": "2026-06-17",
+    "alsoOpenTo": [
+      "Cochrane"
+    ]
   },
   {
     "id": 370,
@@ -23701,6 +23712,7 @@
       "extracurriculars": []
     },
     "alsoOpenTo": [
+      "Cochrane",
       "Sherwood Park"
     ]
   },
@@ -35232,5 +35244,579 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 937,
+    "title": "Rotary Club of Cochrane U-START Bursary",
+    "amount": "$5,000",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "A Cochrane high school student with demonstrated financial need",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Rotary is explicit that a bursary is not a scholarship: the money follows need, not the top transcript. Each school picks its own recipient with the club advising, and Rotary asks that students in the trades be considered alongside academic students. The programme has paid out over $75,000 since 1997.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Rotary Club of Cochrane funds one $5,000 bursary at each of the three Cochrane high schools every year. It is a grant based on clearly demonstrated financial need and satisfactory academic achievement rather than on academic excellence alone.",
+    "metaDetail": "The largest single award in Cochrane, and need-based.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School",
+        "Bow Valley High School",
+        "St. Timothy Jr./Sr. High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 938,
+    "title": "Kiwanis Club of Cochrane Dirk Bannister Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane grade 12 students with leadership and volunteer records",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Two per school is a far better ratio than a single town-wide competition, so the pool you compete in is your own graduating class. The club has posted a May 7 cutoff while the Cochrane High package lists April 1, so file through your school and treat the earlier date as the real one.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Kiwanis Club of Cochrane, with Bow Valley Credit Union, funds six $1,000 scholarships a year, two at each of Cochrane High, Bow Valley High and St. Timothy. They recognise outstanding leadership and a strong commitment to volunteering in the Cochrane community.",
+    "metaDetail": "Six awards, split two to each Cochrane high school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School",
+        "Bow Valley High School",
+        "St. Timothy Jr./Sr. High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 939,
+    "title": "Bearspaw Foundation Bursary",
+    "amount": "Varies",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Cochrane High School graduating students",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "This is the only award in the Cochrane High package that closes on March 1 rather than April 1. The school allows you to submit a package for it and then submit an updated package in April, which replaces the first, so applying early costs you nothing.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A bursary offered to Cochrane High School graduates through the school's scholarship and bursary application package, funded by the Bearspaw Foundation.",
+    "metaDetail": "The one Cochrane award with an earlier deadline.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 940,
+    "title": "Brett Binder Leadership Award",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "A Cochrane High School student who has shown leadership",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "The package asks for a Record of Accomplishments chart that names your role in each activity, whether you led, initiated, participated or organised, and whether it would have happened without you. That chart is what a leadership award is decided on.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A memorial leadership award for a graduating Cochrane High School student, decided from the school's scholarship and bursary application package.",
+    "metaDetail": "Leadership is judged from the accomplishments chart.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 941,
+    "title": "Cochrane Activettes Bursary",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane High School graduating students",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Cochrane High runs almost all of its local awards through one printed application package handed in at the main office, so ticking this box costs you nothing once the package is written. The date shown is the annual cutoff rolled forward from the last posted cycle.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Cochrane Activettes, a local volunteer service group, fund a bursary awarded through Cochrane High School's application package.",
+    "metaDetail": "A local service club award, no separate form.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 942,
+    "title": "Cochrane Home Treasures Award",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane High School graduating students",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Cochrane High runs almost all of its local awards through one printed application package handed in at the main office, so ticking this box costs you nothing once the package is written. The date shown is the annual cutoff rolled forward from the last posted cycle.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "An award funded by Cochrane Home Treasures, the local thrift store whose proceeds go back into the community, given through the Cochrane High School application package.",
+    "metaDetail": "Funded by the town's community thrift store.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 943,
+    "title": "Cochrane High School Class Act Award",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "A graduating Cochrane High School student",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Because it is the school's own award rather than a sponsor's, the essay questions in the package carry the most weight here. Those ask what you are most proud of, what you most need to improve, and what obstacles you have overcome.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Cochrane High School's own Class Act award, decided from the scholarship and bursary application package submitted to the main office.",
+    "metaDetail": "The school's own award, judged on the whole package.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 944,
+    "title": "Cochrane Lions Club Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane High School graduating students",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "The package marks this as requiring a written response, so the general application alone will not put you in the running. Only this and the Meaghan Kate Foley award carry that extra requirement.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Cochrane Lions Club funds a scholarship awarded through the school's application package. It is one of two awards in the package that require an additional written response.",
+    "metaDetail": "Needs a written response beyond the main package.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 945,
+    "title": "Danielle Kendall Memorial Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane High School graduating students",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Cochrane High runs almost all of its local awards through one printed application package handed in at the main office, so ticking this box costs you nothing once the package is written. The date shown is the annual cutoff rolled forward from the last posted cycle.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A memorial scholarship awarded to a graduating Cochrane High School student through the school's scholarship and bursary application package.",
+    "metaDetail": "A memorial award, no separate application needed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 946,
+    "title": "Matt Krol Memorial Fund Award",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane High School graduating students",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Cochrane High runs almost all of its local awards through one printed application package handed in at the main office, so ticking this box costs you nothing once the package is written. The date shown is the annual cutoff rolled forward from the last posted cycle.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "An award from the Matt Krol Memorial Fund, given to a graduating Cochrane High School student through the school's application package.",
+    "metaDetail": "One tick box on the school's single package.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 947,
+    "title": "Meaghan Kate Foley Memorial Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane High School graduating students",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Along with the Cochrane Lions Club award, this is one of only two in the package that ask for a separate written response, which means fewer students bother to complete it.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A memorial scholarship for a graduating Cochrane High School student, requiring a written response in addition to the school's standard application package.",
+    "metaDetail": "The second award needing an extra written response.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 948,
+    "title": "West Fraser Career Development Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane High School students heading into a trade or career program",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "West Fraser funds two separate awards in the same package, this one and a forestry-specific version, and nothing stops you being considered for both. The package asks for your career objective and intended programme of study, which is what this turns on.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "West Fraser, the forestry company with a Cochrane operation, funds a career development scholarship awarded through the Cochrane High School application package.",
+    "metaDetail": "One of two West Fraser awards, so tick both boxes.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 949,
+    "title": "West Fraser Career Development Forestry Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "openDate": null,
+    "audience": "Cochrane High School students entering forestry or a related field",
+    "url": "https://cochrane.rockyview.ab.ca/activities/graduation",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Because it names forestry specifically, the eligible group is much smaller than for the general West Fraser award, so a student heading into forestry, environmental science or a related trade should tick this box as well as the other.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The forestry-specific half of West Fraser's support at Cochrane High School, awarded through the same application package and aimed at students entering forestry or a related programme.",
+    "metaDetail": "The narrower West Fraser award, and less contested.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cochrane High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "Forestry"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 950,
+    "title": "RMA Post-Secondary Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-08-28",
+    "openDate": null,
+    "audience": "Students from rural Alberta municipalities entering post-secondary",
+    "url": "https://www.rockyview.ca/services/agriculture-and-environment/awards-and-scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Rocky View County surfaces this for its residents, and the qualifying residency is a rural municipality rather than a town, so living inside Cochrane's town limits may not count even though the county surrounds it. Check with the county before assuming. The date shown is the annual cutoff rolled forward.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "The Rural Municipalities of Alberta has run this programme since 1995 to encourage young rural Albertans into further education. Six scholarships of $1,500 are awarded each year.",
+    "metaDetail": "Six awards, and rural residency is the real gate.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "alsoOpenTo": [
+      "Cochrane"
+    ]
   }
 ]

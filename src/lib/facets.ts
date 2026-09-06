@@ -238,6 +238,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Eight of these are decided on a grade 12 mark alone with nothing to fill in, and one of the eight covers eight separate courses at $500 each.',
   },
   {
+    slug: 'cochrane',
+    kind: 'region',
+    value: 'Cochrane',
+    label: 'Cochrane',
+    h1: 'Cochrane scholarships',
+    title: 'Cochrane Scholarships',
+    description:
+      "Scholarships for Cochrane students: the Cochrane High award package, the town's Rotary, Kiwanis and Lions awards, and the Rocky View County scholarships.",
+    intro:
+      'Cochrane High collects thirteen local awards behind one printed application package, so a single envelope handed to the main office puts you in the running for all of them.',
+  },
+  {
     slug: 'okotoks',
     kind: 'region',
     value: 'Okotoks',
