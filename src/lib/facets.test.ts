@@ -51,9 +51,16 @@ describe('facet registry', () => {
   });
 
   it('counts agree with a direct filter over the JSON', () => {
+    // A region facet matches `region` OR `alsoOpenTo`, so the direct filter has
+    // to check both. It used to compare against `region` alone, which held only
+    // while nothing outside Medicine Hat was also open to it. The Rotary Club of
+    // Lethbridge East agricultural scholarship broke that: it is a Lethbridge
+    // listing whose southern Alberta catchment names Medicine Hat and Brooks.
     const mh = SCHOLARSHIP_FACETS.find(f => f.slug === 'medicine-hat')!;
     expect(facetItems(mh, allScholarships).length).toBe(
-      allScholarships.filter(s => s.region === 'Medicine Hat').length,
+      allScholarships.filter(
+        s => s.region === 'Medicine Hat' || (s.alsoOpenTo ?? []).includes('Medicine Hat'),
+      ).length,
     );
     const stem = SCHOLARSHIP_FACETS.find(f => f.slug === 'stem')!;
     expect(facetItems(stem, allScholarships).length).toBe(

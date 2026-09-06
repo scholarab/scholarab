@@ -35948,5 +35948,217 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 955,
+    "title": "Rotary Club of Lethbridge East Agricultural Scholarship",
+    "amount": "$10,000",
+    "deadline": "2026-12-01",
+    "openDate": null,
+    "audience": "Southern Alberta students two years into an agriculture programme",
+    "url": "https://rotaryagscholarship.ca/scholarship/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "This is not a grade 12 award, which is the trap: you need two years of post-secondary behind you before you can apply, so a graduating student has to wait. Southern Alberta residency means the counties of Lethbridge, Taber, Warner, Forty Mile, Cardston, Pincher Creek, Ranchlands, Willow Creek, Cypress, Newell and Vulcan and the municipalities inside them, plus Crowsnest Pass and the Blood (Kanai) and Piikani First Nations, or seven of the last ten years lived there. Rotarians and their immediate families are excluded. You submit a letter of intent first and the committee sends back the form with personalised feedback, which is unusual and worth using.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "At least three scholarships of $10,000 each from the Rotary Club of Lethbridge East and Exhibition Park, for undergraduate or graduate students in agriculture or a related field who have already completed the equivalent of two full years, or 60 credit hours, of post-secondary study.",
+    "metaDetail": "The largest award in southern Alberta, and rarely contested.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "alsoOpenTo": [
+      "Brooks",
+      "Medicine Hat"
+    ]
+  },
+  {
+    "id": 956,
+    "title": "YMCA of Lethbridge Lifeguard Certification Scholarship",
+    "amount": "Approximately $1,800",
+    "deadline": "2026-12-01",
+    "openDate": null,
+    "audience": "Lethbridge students aged 16 and over who want to lifeguard",
+    "url": "https://lethbridgeymca.ca/programs/12/ymca-aquatic-leadership-certification-courses/",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "This is training rather than tuition, and it ends with a certification that the YMCA itself hires for, so it is closer to a paid route into a job than to a scholarship. You must be 16 by the first of January, attend every course in the following year with full participation, and agree to have your photo used. Applications go through a Microsoft Forms link rather than the school.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "The YMCA of Lethbridge pays the full cost of the lifeguarding ladder for two applicants each year: Bronze Medallion, Bronze Cross, National Lifeguard, Pool and Waterpark certification, and Standard First Aid with CPR C. The package runs to roughly $1,800 a person.",
+    "metaDetail": "Pays for a qualification, and it leads to a job.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 957,
+    "title": "Kinette Club of Coaldale Bursary",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "openDate": null,
+    "audience": "Students from Coaldale and district heading to post-secondary",
+    "url": "https://cch.holyspirit.ab.ca/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "Community service is the only substantive criterion, with no mark threshold anywhere in it. Applications run through your guidance counsellor rather than the club, so the Kinettes never see a name that student services has not passed along, which is why asking at the office matters more than watching the club's channels.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "A $500 bursary from the Kinette Club of Coaldale for a Canadian citizen registering at a post-secondary institution in the fall who has shown dedication and service to the Coaldale area community.",
+    "metaDetail": "Service to Coaldale is the whole test.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 958,
+    "title": "St. Basil's Catholic Women's League Grade 12 Scholarship",
+    "amount": "$500",
+    "deadline": "2027-07-15",
+    "openDate": null,
+    "audience": "Catholic Central High School graduates active in their faith community",
+    "url": "https://cch.holyspirit.ab.ca/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "One of the few awards in Lethbridge restricted to a single school, and the qualifying pool is smaller still because it wants active faith involvement rather than simply attending a Catholic school. It closes in the middle of July, well after graduation, which is when most students have stopped checking.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Catholic Women's League at St. Basil's parish gives $500 to a graduating Catholic Central High School student who has been actively involved in their faith community and has applied to a post-secondary institution.",
+    "metaDetail": "Parish involvement counts, not just school marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Catholic Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 959,
+    "title": "University of Lethbridge Fine Arts Entrance Scholarships",
+    "amount": "At least $500",
+    "deadline": "2027-03-15",
+    "openDate": null,
+    "audience": "Students entering the University of Lethbridge Faculty of Fine Arts",
+    "url": "https://www.ulethbridge.ca/fine-arts/student-support/fund-your-education/fine-arts-scholarships-awards",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "A music studio audition doubles as the application, so a student auditioning for the BMus or BA Music studio stream is considered automatically as part of admission. For the other departments the portfolio is up to ten recent pieces from the past three years. The March cutoff is the same one that governs the general high school awards application, so both can be handled in one sitting.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Each department in the Faculty of Fine Arts at the University of Lethbridge, meaning Art, Drama, Music and New Media, offers entrance scholarships worth at least $500. They are awarded on a portfolio and personal statement or on an audition, and are conditional on acceptance into the faculty.",
+    "metaDetail": "Four departments, each with its own award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [
+        "Fine Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "art"
+      ]
+    }
   }
 ]

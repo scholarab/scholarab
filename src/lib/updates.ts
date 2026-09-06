@@ -268,6 +268,10 @@ export const months: UpdateMonth[] = [
     summary: 'A quieter month on accuracy: dead links, wrong counts, a broken scholarships page.',
     items: [
       {
+        kind: 'listings',
+        text: 'Lethbridge gained the awards its schools list but nobody else does, including a $10,000 Rotary agricultural scholarship and a YMCA scholarship that pays for a full lifeguard certification rather than tuition.',
+      },
+      {
         kind: 'fixed',
         text: '38 broken links repaired. 5 programs had shut down for good and were retired.',
       },

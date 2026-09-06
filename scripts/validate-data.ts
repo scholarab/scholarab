@@ -565,5 +565,46 @@ if (badEligibility.length) {
   failed = true;
 }
 
+// -- Two listings that may be the same award ------------------------------
+//
+// A warning, not an error, and deliberately weak. The RMA scholarship was
+// added twice six days apart because the existing record used the full name
+// and the new one used the abbreviation, and the two disagreed on both amount
+// and deadline. No title comparison catches that pair, so this does not claim
+// to. What it does catch is the commoner slip of re-adding an award under
+// nearly the same words, and it stays a warning because most near-matches here
+// are genuine: one sponsor funding awards at two institutions is normal, and
+// an award and a bursary from the same Legion branch are two different things.
+// The words award, bursary and scholarship are NOT stripped, because they are
+// exactly what distinguishes those pairs.
+const norm = (t: string): string =>
+  t
+    .toLowerCase()
+    .replace(/[^a-z0-9 ]+/g, ' ')
+    .replace(/\b(the|a|an|of|for|and|memorial|annual|program|programme)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    // Crude singularisation, so "Scholarship" and "Scholarships" collapse. Safe
+    // for the award/bursary distinction above, which is about different words.
+    .split(' ')
+    .map((w: string) => (w.length > 3 && w.endsWith('s') && !w.endsWith('ss') ? w.slice(0, -1) : w))
+    .join(' ');
+const byNorm = new Map<string, typeof scholarships>();
+for (const s of scholarships) {
+  const k = norm(String(s.title));
+  if (!k) continue;
+  const group = byNorm.get(k);
+  if (group) group.push(s);
+  else byNorm.set(k, [s]);
+}
+const dupTitles = [...byNorm.values()].filter((g) => g.length > 1);
+if (dupTitles.length) {
+  console.warn(
+    `validate-data: ${dupTitles.length} title(s) look like the same award listed twice; confirm they are different before adding more:\n  ${dupTitles
+      .map((g) => g.map((x) => `#${x.id} ${x.title} (${x.region}, ${x.amount})`).join('\n     vs '))
+      .join('\n  ')}`,
+  );
+}
+
 if (failed) process.exit(1);
 console.log(`validate-data: OK (${scholarships.length} scholarships, ${programs.length} programs, ${rules.length} redirects)`);

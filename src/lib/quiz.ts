@@ -153,8 +153,8 @@ export const SCHOOL_QUESTION_KEY = 'school';
  * profile carries a school. Without this the quiz cannot fill that field, so
  * every school-only award showed to every student in the city.
  *
- * Asked only where the city actually has school-restricted awards: Lethbridge
- * and Other Alberta have none, and a question whose answer changes
+ * Asked only where the city actually has school-restricted awards: Other
+ * Alberta has none, and a question whose answer changes
  * nothing is a tax on the 30-second promise. `schools` is derived from the
  * listings themselves, so a new school-restricted award adds its school here
  * without anyone remembering to.
@@ -212,7 +212,7 @@ export const SCHOOL_BOARD_NAMES: Record<string, string> = {
  * every dropdown, so their filter could never engage. But feeding them to all
  * twenty-three cities put a 24-option question in front of Medicine Hat, Lethbridge
  * and Airdrie students, who had no school question at all, to filter two
- * listings out of 906. A student at one of those schools is in a town that is
+ * listings out of 911. A student at one of those schools is in a town that is
  * not one of the twenty-three named cities, so "Other Alberta" is the answer they give,
  * and that is where the question is worth asking.
  */
