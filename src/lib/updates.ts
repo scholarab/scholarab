@@ -448,6 +448,10 @@ export const months: UpdateMonth[] = [
       'The 2026-27 refresh, 37 new research programs, a rebuilt phone home page, a privacy and safety pass over the whole site, and a listing count that more than doubled in the last week.',
     items: [
       {
+        kind: 'fixed',
+        text: 'The Rural Municipalities of Alberta scholarship had two entries, one of them added days earlier during the Cochrane pass with the wrong amount and the wrong cutoff. RMA gives six awards of $1,500 closing at the end of August, and the surviving record says so.',
+      },
+      {
         kind: 'listings',
         text: 'Provincial, national and city awards were all rolled forward to the 2026-27 cycle. As of August 2, nothing on the site reads closed.',
       },

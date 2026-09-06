@@ -203,3 +203,10 @@
 # kept its page; this one was added in April and duplicated it.
 /programs/discovere-fem-mentorship-university-of-alberta  /programs/fem-engineering-mentorship-program/ 301
 /programs/discovere-fem-mentorship-university-of-alberta/ /programs/fem-engineering-mentorship-program/ 301
+
+# Duplicate of the Rural Municipalities of Alberta award already in the corpus.
+# Added during the Cochrane pass without spotting the existing record, and it
+# carried the wrong amount ($1,000) and cutoff. RMA's own page gives six awards
+# of $1,500 closing August 28, which the surviving record now uses.
+/scholarships/rma-post-secondary-scholarship  /scholarships/rural-municipalities-of-alberta-post-secondary-scholarship/ 301
+/scholarships/rma-post-secondary-scholarship/ /scholarships/rural-municipalities-of-alberta-post-secondary-scholarship/ 301

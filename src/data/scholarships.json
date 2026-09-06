@@ -12986,6 +12986,7 @@
     },
     "openDate": "2026-06-17",
     "alsoOpenTo": [
+      "Airdrie",
       "Cochrane"
     ]
   },
@@ -13027,7 +13028,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "alsoOpenTo": [
+      "Airdrie"
+    ]
   },
   {
     "id": 371,
@@ -23986,18 +23990,19 @@
     "lastVerified": "2026-09",
     "active": true,
     "title": "Rural Municipalities of Alberta Post-Secondary Scholarship",
-    "amount": "$1,000",
-    "deadline": "2027-08-29",
+    "amount": "$1,500",
+    "deadline": "2027-08-28",
     "alsoOpenTo": [
+      "Cochrane",
       "Cold Lake",
       "Wetaskiwin"
     ],
     "category": "Academic",
     "audience": "Residents of rural Alberta municipalities in their first four years of study",
-    "url": "https://www.nlpsab.ca/students/scholarships/regional-scholarships-and-awards",
-    "notes": "Your municipality has to be a member in good standing of the RMA, which covers municipal districts, counties, specialized municipalities and the Special Areas, so a city address does not qualify.",
-    "description": "A $1,000 award for a resident of an RMA member municipality in the first four years of study, with no previous degree or diploma, pursuing a course of study relevant to local government or rural communities. The criteria say plainly that this is not meant to restrict eligibility and invite you to explain the relevance of your own program in the letter of application, which is a much wider door than the wording first suggests.",
-    "metaDetail": "The relevance test is yours to argue in the letter.",
+    "url": "https://rmalberta.com/about/rma-scholarship-program/",
+    "notes": "Your municipality has to be a member in good standing of the RMA, which covers municipal districts, counties, specialized municipalities and the Special Areas, so a town or city address does not qualify even when a member county surrounds it. Preference goes to applicants studying in Alberta unless the programme is not offered here. The cutoff is the same late-August date each year and the one shown is next year's.",
+    "description": "Six scholarships of $1,500 a year from the Rural Municipalities of Alberta, running since 1995, for a resident of an RMA member municipality in the first four years of study with no previous degree or diploma, taking a programme relevant to local government or rural communities.",
+    "metaDetail": "Six awards, and rural residency is the real gate.",
     "eligibility": {
       "grades": [
         "12"
@@ -35778,21 +35783,149 @@
     }
   },
   {
-    "id": 950,
-    "title": "RMA Post-Secondary Scholarship",
-    "amount": "$1,500",
-    "deadline": "2027-08-28",
+    "id": 951,
+    "title": "Joan MacLeod Fine Arts Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
     "openDate": null,
-    "audience": "Students from rural Alberta municipalities entering post-secondary",
-    "url": "https://www.rockyview.ca/services/agriculture-and-environment/awards-and-scholarships",
+    "audience": "Calgary Catholic students going on in the fine arts",
+    "url": "https://www.cssd.ab.ca/career-planning",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "The district lists this by name but keeps the criteria and the value behind a student login, so the amount here cannot be quoted. Calgary Catholic runs high schools outside Calgary, including St. Martin de Porres in Airdrie and St. Timothy in Cochrane, so students there are eligible for the same district awards.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "One of the district scholarships the Calgary Catholic School District names for its students, awarded in the fine arts. Applications go to the scholarship coordinator in your school's Student Services rather than to the district directly.",
+    "metaDetail": "A district award, not a Calgary-only one.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Fine Arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "alsoOpenTo": [
+      "Airdrie",
+      "Cochrane"
+    ]
+  },
+  {
+    "id": 952,
+    "title": "Mary Ngo Family Bursary",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "openDate": null,
+    "audience": "Calgary Catholic students with financial need",
+    "url": "https://www.cssd.ab.ca/career-planning",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Alberta",
-    "notes": "Rocky View County surfaces this for its residents, and the qualifying residency is a rural municipality rather than a town, so living inside Cochrane's town limits may not count even though the county surrounds it. Check with the county before assuming. The date shown is the annual cutoff rolled forward.",
-    "applyViaGuidance": false,
+    "region": "Calgary",
+    "notes": "Like the district's other awards, the value and full criteria sit behind a student login, so ask your scholarship coordinator what it pays. The same May cutoff to Student Services applies, and students at the district's schools in Airdrie and Cochrane qualify alongside Calgary students.",
+    "applyViaGuidance": true,
     "active": true,
-    "description": "The Rural Municipalities of Alberta has run this programme since 1995 to encourage young rural Albertans into further education. Six scholarships of $1,500 are awarded each year.",
-    "metaDetail": "Six awards, and rural residency is the real gate.",
+    "description": "A family-funded bursary named by the Calgary Catholic School District among its district opportunities. A bursary in this district means a grant based primarily on financial need rather than on academic merit.",
+    "metaDetail": "Need-based, so marks are not the deciding factor.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "alsoOpenTo": [
+      "Airdrie",
+      "Cochrane"
+    ]
+  },
+  {
+    "id": 953,
+    "title": "Calgary Catholic Teachers Association Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-05-01",
+    "openDate": null,
+    "audience": "Graduating Calgary Catholic School District students",
+    "url": "https://www.cssd.ab.ca/career-planning",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "The district names the programme but publishes neither the number of awards nor their value. Its counterparts in other divisions are worth up to $1,000 each, so it is worth asking Student Services rather than assuming it is small.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "The Calgary Catholic Teachers' Association, ATA Local 55, sponsors scholarships for district students every year, funded by the teachers themselves in the same way Edmonton Catholic's Local 54 and Rocky View's Local 35 fund theirs.",
+    "metaDetail": "Funded by the teachers, like the Local 54 awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "alsoOpenTo": [
+      "Airdrie",
+      "Cochrane"
+    ]
+  },
+  {
+    "id": 954,
+    "title": "Airdrie Legion Branch 288 Poppy Fund Bursary",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Airdrie students continuing at college or university",
+    "url": "https://www.airdrielegion.ca/events-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Airdrie",
+    "notes": "This is separate from the branch's University of Calgary scholarship, which is a different award with its own route. The branch publishes no criteria, no form and no closing date on its website, and it asks that applications come in around March so the money is ready for the fall term. Legion poppy bursaries are normally open at any stage of a college or university programme, not just to graduating students, so ask the branch directly.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Royal Canadian Legion Branch 288 distributes bursaries to local students out of the money raised in its annual Poppy Campaign. The branch handed out roughly $30,000 in a single year, spread across a group of recipients rather than concentrated in one award.",
+    "metaDetail": "A $30,000 pot that is advertised almost nowhere.",
     "eligibility": {
       "grades": [
         "12",
@@ -35814,9 +35947,6 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    },
-    "alsoOpenTo": [
-      "Cochrane"
-    ]
+    }
   }
 ]
