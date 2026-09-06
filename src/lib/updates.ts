@@ -562,8 +562,12 @@ export const months: UpdateMonth[] = [
     label: 'September 2026',
     id: 'm-2026-09',
     start: '2026-09-01',
-    summary: 'Fifteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie and Sherwood Park, a much deeper Edmonton page, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
+    summary: 'Sixteen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie, Sherwood Park and Okotoks, a much deeper Edmonton page, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
+      {
+        kind: 'listings',
+        text: 'Okotoks has a page, and it arrives with 52 awards. Foothills Composite publishes a handbook naming every award it hands out, from a $100 diploma bonus to a $1,500 yearbook scholarship, which is a level of disclosure almost no other Alberta school matches.',
+      },
       {
         kind: 'listings',
         text: 'Edmonton gained 25 school awards, the first the city page has carried from individual high schools rather than the two divisions. They include a $16,000 mathematics scholarship at Eastglen, seven awards at Jasper Place, and grade 10 and 11 awards at St. Oscar Romero, which almost nothing else in the directory is open to.',

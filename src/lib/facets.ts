@@ -238,6 +238,18 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'Eight of these are decided on a grade 12 mark alone with nothing to fill in, and one of the eight covers eight separate courses at $500 each.',
   },
   {
+    slug: 'okotoks',
+    kind: 'region',
+    value: 'Okotoks',
+    label: 'Okotoks',
+    h1: 'Okotoks scholarships',
+    title: 'Okotoks Scholarships',
+    description:
+      "Scholarships for Okotoks students: the Foothills Composite awards handbook, the town's service clubs, and the Holy Trinity Academy and Foothills County awards.",
+    intro:
+      'Foothills Composite publishes a 52-award handbook that almost no other Alberta school matches, so a single Okotoks graduate can be eligible for a dozen of these at once.',
+  },
+  {
     slug: 'sherwood-park',
     kind: 'region',
     value: 'Sherwood Park',

@@ -96,6 +96,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: 'Fort McMurray', value: 'Fort McMurray', hint: 'AND WOOD BUFFALO', short: 'Fort Mac' },
       { label: 'Grande Prairie', value: 'Grande Prairie', hint: 'AND THE PEACE REGION' },
       { label: 'Sherwood Park', value: 'Sherwood Park', hint: 'AND STRATHCONA COUNTY' },
+      { label: 'Okotoks', value: 'Okotoks', hint: 'AND THE FOOTHILLS' },
       { label: 'Wetaskiwin', value: 'Wetaskiwin', hint: 'AND WETASKIWIN COUNTY' },
       { label: 'St. Albert', value: 'St. Albert', hint: 'AND STURGEON COUNTY' },
       { label: 'Spruce Grove', value: 'Spruce Grove', hint: 'AND STONY PLAIN' },
@@ -146,13 +147,13 @@ export const SCHOOL_QUESTION_KEY = 'school';
 /**
  * The optional last question: which school the student attends.
  *
- * It exists because 65 Calgary awards are restricted to one named school, and
+ * It exists because 66 Calgary awards are restricted to one named school, and
  * the matcher's school filter at eligibility-matcher.ts only engages when the
  * profile carries a school. Without this the quiz cannot fill that field, so
  * every school-only award showed to every student in the city.
  *
- * Asked only where the city actually has school-restricted awards: Edmonton,
- * Lethbridge and Other Alberta have none, and a question whose answer changes
+ * Asked only where the city actually has school-restricted awards: Lethbridge
+ * and Other Alberta have none, and a question whose answer changes
  * nothing is a tax on the 30-second promise. `schools` is derived from the
  * listings themselves, so a new school-restricted award adds its school here
  * without anyone remembering to.
@@ -204,14 +205,14 @@ export const SCHOOL_BOARD_NAMES: Record<string, string> = {
  *
  * An exact city match, plus province-wide listings for "Other Alberta" only.
  *
- * The looser rule was tempting: three school-restricted awards carry region
+ * The looser rule was tempting: two school-restricted awards carry region
  * "Alberta" because they span several communities (Cochrane, Strathmore,
- * Okotoks, Innisfail), and an exact match alone left their 17 schools out of
+ * Innisfail), and an exact match alone left their 12 schools out of
  * every dropdown, so their filter could never engage. But feeding them to all
- * twenty-one cities put a 22-option question in front of Medicine Hat, Lethbridge
- * and Airdrie students, who had no school question at all, to filter three
- * listings out of 838. A student at one of those schools is in a town that is
- * not one of the twenty-one named cities, so "Other Alberta" is the answer they give,
+ * twenty-two cities put a 23-option question in front of Medicine Hat, Lethbridge
+ * and Airdrie students, who had no school question at all, to filter two
+ * listings out of 889. A student at one of those schools is in a town that is
+ * not one of the twenty-two named cities, so "Other Alberta" is the answer they give,
  * and that is where the question is worth asking.
  */
 function inCityScope(region: string | null | undefined, city: string): boolean {
