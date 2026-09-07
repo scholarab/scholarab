@@ -5038,10 +5038,10 @@
     "category": "Academic",
     "lastVerified": "2026-08",
     "region": "Lethbridge",
-    "notes": "The provider had not posted a date for the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward. Confirm before you plan around it.",
+    "notes": "Confirmed against the polytechnic's own funding calendar, and the distinction matters more than the deadline. Applications open March 1. May 1 closes the continuing, graduating and apprentice awards, which is the date most lists reproduce, but as a grade 12 you are an entrance applicant and your deadline is July 15. Reading the wrong line costs you nothing but reading the wrong deadline costs you the award. One form enters you for every award you qualify for.",
     "active": false,
     "description": "Lethbridge Polytechnic offers entrance awards to students admitted to full-time programs at the institution. With over 400 awards worth $800,000+ available through a single application, this is a major scholarship opportunity for qualifying students. Alberta residents can also apply for provincial scholarships (Jason Lang and Louise McKinney) using the same application.",
-    "metaDetail": "Over 400 awards worth $800,000+ through a single application.",
+    "metaDetail": "Entrance applicants have until July 15, not May 1.",
     "eligibility": {
       "grades": [
         "12"
@@ -5064,7 +5064,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2027-03-01"
   },
   {
     "id": 171,
@@ -39683,6 +39684,127 @@
       "extracurriculars": [
         "sports"
       ]
+    },
+    "active": true
+  },
+  {
+    "id": 1050,
+    "title": "French for the Future National Essay Contest",
+    "amount": "$1,000 to $28,000",
+    "deadline": "2026-12-18",
+    "openDate": "2026-10-14",
+    "audience": "Grade 10 to 12 students writing in French, immersion or first language",
+    "url": "https://french-future.org/programs/essay-contest/",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "This is the highest ratio of money to effort in the corpus: 750 words in French, and 100 scholarships are handed out from a pool of $388,000. Two categories keep the field fair, so immersion and Core French students compete as French Second Language and are not measured against students who speak French at home. You can enter in grade 10, 11 or 12, which means a grade 10 student can enter three times. The scholarship is tied to studying wholly or partly in French at one of 15 partner institutions, so check that list before you write. Registration runs October 14 to December 18 and the theme changes every year.",
+    "description": "A 750-word essay in French for grade 10 to 12 students, with 100 scholarships worth $1,000 to $28,000 shared out of a $388,000 pool at 15 partner universities and colleges.",
+    "metaDetail": "Immersion students compete in their own category.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "French"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1051,
+    "title": "NUPGE Tommy Douglas Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-07-15",
+    "openDate": null,
+    "audience": "Children, grandchildren and foster children of NUPGE union members entering first year",
+    "url": "https://nupge.ca/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Worth checking whether a parent or grandparent is in AUPE, because AUPE is a NUPGE component and that makes you eligible for a national award almost nobody in Alberta applies for. Foster children of members count too, which is unusual and worth knowing. It is decided on a 750 to 1,000 word essay about how Tommy Douglas made Canada a more just and equitable society, so it rewards writing rather than marks. You have to be entering the first year of a Canadian public post-secondary institution full time.",
+    "description": "One of about five $1,500 scholarships the National Union of Public and General Employees awards each year to the children, grandchildren and foster children of its members, decided by essay.",
+    "metaDetail": "AUPE membership in the family makes you eligible.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1052,
+    "title": "NUPGE Terry Fox Memorial Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-07-15",
+    "openDate": null,
+    "audience": "Students with disabilities whose parent or grandparent is a NUPGE member",
+    "url": "https://nupge.ca/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Two filters have to line up, and when they do the field is very small: you have a disability, and a parent, grandparent or foster parent belongs to a NUPGE component union, which in Alberta usually means AUPE. The essay is 750 to 1,000 words on why quality public services matter to the quality of life of people with disabilities, so lived experience is the point rather than a disadvantage. Not to be confused with the Terry Fox Humanitarian Award, which is a separate and much larger national program with no union requirement.",
+    "description": "A $1,500 award for students with disabilities entering first year whose parent, grandparent or foster parent belongs to a NUPGE member union, decided on an essay about public services.",
+    "metaDetail": "A disability award with a union-family requirement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
     },
     "active": true
   }
