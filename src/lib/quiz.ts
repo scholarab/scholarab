@@ -148,7 +148,7 @@ export const SCHOOL_QUESTION_KEY = 'school';
 /**
  * The optional last question: which school the student attends.
  *
- * It exists because 66 Calgary awards are restricted to one named school, and
+ * It exists because 67 Calgary awards are restricted to one named school, and
  * the matcher's school filter at eligibility-matcher.ts only engages when the
  * profile carries a school. Without this the quiz cannot fill that field, so
  * every school-only award showed to every student in the city.
@@ -213,7 +213,7 @@ export const SCHOOL_BOARD_NAMES: Record<string, string> = {
  * every dropdown, so their filter could never engage. But feeding them to all
  * twenty-three cities put a 24-option question in front of Medicine Hat, Lethbridge
  * and Airdrie students, who had no school question at all, to filter two
- * listings out of 936. A student at one of those schools is in a town that is
+ * listings out of 952. A student at one of those schools is in a town that is
  * not one of the twenty-three named cities, so "Other Alberta" is the answer they give,
  * and that is where the question is worth asking.
  */

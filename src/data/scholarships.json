@@ -35872,24 +35872,26 @@
   {
     "id": 953,
     "title": "Calgary Catholic Teachers Association Scholarship",
-    "amount": "Varies",
-    "deadline": "2027-05-01",
-    "openDate": null,
-    "audience": "Graduating Calgary Catholic School District students",
-    "url": "https://www.cssd.ab.ca/career-planning",
+    "amount": "$1,000",
+    "deadline": "2027-05-28",
+    "openDate": "2027-01-19",
+    "audience": "Grade 12 children of Calgary Catholic teachers, ATA Local 55 members",
+    "url": "https://www.atalocal55.ca/scholarships.html",
     "category": "General",
     "lastVerified": "2026-09",
     "region": "Calgary",
-    "notes": "The district names the programme but publishes neither the number of awards nor their value. Its counterparts in other divisions are worth up to $1,000 each, so it is worth asking Student Services rather than assuming it is small.",
+    "notes": "Twelve awards, and the draw is what makes this one worth the fifteen minutes: if more eligible students apply than there are scholarships, the recipients are picked at random rather than ranked, so a middling transcript costs you nothing. One application per student. Winners are announced at the June council meeting.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "The Calgary Catholic Teachers' Association, ATA Local 55, sponsors scholarships for district students every year, funded by the teachers themselves in the same way Edmonton Catholic's Local 54 and Rocky View's Local 35 fund theirs.",
-    "metaDetail": "Funded by the teachers, like the Local 54 awards.",
+    "description": "The Calgary Catholic Teachers’ Association, ATA Local 55, funds these from its own members’ fees, and the parent connection is the hard requirement: your parent must be an active Local 55 certificated teacher.",
+    "metaDetail": "Random draw if applications exceed awards.",
     "eligibility": {
       "grades": [
         "12"
       ],
-      "schoolBoards": [],
+      "schoolBoards": [
+        "CCSD"
+      ],
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [],
@@ -37190,5 +37192,619 @@
         "volunteer"
       ]
     }
+  },
+  {
+    "id": 985,
+    "title": "Burns Memorial Fund High School Bursary Program",
+    "amount": "Varies",
+    "deadline": "2027-04-30",
+    "openDate": null,
+    "audience": "Low-income Calgary students in their final two semesters of grade 12",
+    "url": "https://burnsfund.com/programs/childrens-fund/high-school-students/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Unusually, the money is paid while you are still in high school rather than after it, and attendance and marks are checked every month. You need a referral from your school counsellor and an interview with the Grants Manager, so start with Student Services rather than the form. Applications close April 30 each year.",
+    "description": "A living allowance for Calgary grade 12 students whose finances are getting in the way of finishing, covering everyday costs like rent, food and transportation rather than tuition.",
+    "metaDetail": "Paid during grade 12, not after it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 21,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 986,
+    "title": "Senator Patrick Burns Legacy Scholarship",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Calgary grade 12 students in low-income circumstances",
+    "url": "https://burnsfund.com/programs/childrens-fund/scholarships/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "The fund does not publish a fixed closing date or a fixed value, and both the number of awards and the amounts change year to year. The application asks for grade 10 to 12 transcripts, a letter about your plans, financial documents and a counsellor referral form, so it takes longer to assemble than most.",
+    "description": "The Burns Memorial Fund scholarship for Calgary students who are graduating by June, living on a low income, and heading to post-secondary in September.",
+    "metaDetail": "Value and count change every year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 21,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 987,
+    "title": "Inspiring Futures Scholarship",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Calgary grade 12 students who are parents themselves",
+    "url": "https://burnsfund.com/programs/childrens-fund/scholarships/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "This is the parenting-student twin of the Legacy scholarship at the same fund, with the same documents and the same September start requirement, so a student who qualifies for both should ask which application covers which. Neither the value nor the number of awards is fixed.",
+    "description": "A Burns Memorial Fund award for Calgary students who are raising a child while finishing high school and are going on to post-secondary in the fall.",
+    "metaDetail": "For parenting students, on a low income.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 21,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 988,
+    "title": "Burns Fire Fund Post-Secondary Grant",
+    "amount": "$1,000 per year, up to $4,000",
+    "deadline": "2027-06-30",
+    "openDate": null,
+    "audience": "Children of serving, retired or deceased Calgary firefighters",
+    "url": "https://burnsfund.com/programs/fire-fund/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "You reapply every year, and the cap is four years of funding with the first application made before your 25th birthday. Stepchildren qualify where the firefighter has been financially responsible for at least three years before the child turned 18, but grandchildren never do. The next cycle opens in November 2026.",
+    "description": "An education grant from Senator Patrick Burns’ bequest for the children of Calgary Fire Department members, paid toward full-time study at an accredited post-secondary institution.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 989,
+    "title": "Burns Police Fund Post-Secondary Grant",
+    "amount": "$1,000 per year, up to $4,000",
+    "deadline": "2027-06-30",
+    "openDate": null,
+    "audience": "Children of serving, retired or deceased Calgary police officers",
+    "url": "https://burnsfund.com/programs/police-fund/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Retired counts only after 20 years with the service, or at any length of service if the officer left on a disability. Full-time means at least three credit courses. Late applications are refused outright, so apply by the June date even if you have not settled on a school or a program yet.",
+    "description": "The Calgary Police Service counterpart to the Fire Fund grant, funded by the same bequest and paying the children of officers toward post-secondary study.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 990,
+    "title": "Open Door Bursary",
+    "amount": "Varies",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Low-income Calgary youth aged 16 to 25 with no other funding",
+    "url": "https://burnsfund.com/programs/childrens-fund/young-adult-education-employment-bursary/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "It pays for the things other awards will not touch: application fees, upgrading courses to qualify for a program, supplies, short training tickets such as security or food handling, and even work boots for a first job. Anyone already attending post-secondary is excluded, which is what makes it useful in the gap year.",
+    "description": "A Burns Memorial Fund bursary for Calgary youth who do not meet the criteria of any other bursary, aimed at getting them into education, training or work.",
+    "metaDetail": "For students other bursaries turn away.",
+    "eligibility": {
+      "grades": [
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 16,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 991,
+    "title": "10X Future Founders Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-14",
+    "openDate": null,
+    "audience": "Grade 11 students in Calgary-area high schools interested in tech and startups",
+    "url": "https://www.platformcalgary.com/programs/10x-future-founders-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Two forms are needed and one of them is not yours: a teacher, mentor or principal has to file a nomination before your own application counts. The cash is the smaller half of it. Recipients spend their grade 12 year inside Calgary’s tech community, meeting founders and getting tickets to events like Launch Party. Platform Calgary does not post the new date, so this is last cycle’s cutoff rolled forward.",
+    "description": "Platform Calgary gives ten of these to grade 11 students who are already building things: coding, robotics, an accelerator, or a company they have started or plan to start.",
+    "eligibility": {
+      "grades": [
+        "11"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "STEM"
+      ]
+    },
+    "active": true
+  },
+  {
+    "id": 992,
+    "title": "Local 38 Heritage Scholarship Award",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "openDate": "2027-02-01",
+    "audience": "Children of Calgary Public Teachers, ATA Local 38 members",
+    "url": "https://ata38.smapply.ca/",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "There are two sets of guidelines under one name. The first is the merit stream, which asks for an 80% average across five 5-credit grade 12 courses, or 75% for a student with an Alberta Education identified learning need. The second is for students with developmental disabilities entering a vocational program, and it is judged on its own terms. A retired or deceased member still counts as a member.",
+    "description": "The main award from the union representing Calgary public school teachers, open to the child, stepchild or ward of a current, retired or deceased Local 38 member.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "CBE"
+      ],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 993,
+    "title": "Local 38 2SLGBTQQIA+ Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "2SLGBTQQIA+ students and allies at Calgary Board of Education schools",
+    "url": "https://ata38.smapply.ca/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Allies are named in the criteria alongside students who identify as 2SLGBTQQIA+, which is rarer than it sounds and worth reading twice before you rule yourself out. Local 38 only lists its awards in the portal while they are open, so the value is not posted out of season; ask your scholarship coordinator.",
+    "description": "One of four scholarships funded by Calgary Public Teachers, ATA Local 38, recognising outstanding merit in a 2SLGBTQQIA+ student or ally within the public board.",
+    "metaDetail": "Allies are eligible, not just members.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "CBE"
+      ],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 994,
+    "title": "John Laurie Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Indigenous students at Calgary Board of Education schools",
+    "url": "https://ata38.smapply.ca/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "One award a year, so the field is the whole public board rather than your school. John Laurie taught at Calgary’s Crescent Heights and spent much of his life working alongside Treaty 7 leaders, which is why his name sits on the union’s Indigenous award. The amount is only published in the portal during the application window.",
+    "description": "The Calgary Public Teachers award for an Indigenous student of outstanding merit in the Calgary Board of Education, funded by the union rather than by the district.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "CBE"
+      ],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 995,
+    "title": "Violet King Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Black students at Calgary Board of Education schools",
+    "url": "https://ata38.smapply.ca/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Violet King graduated from Calgary’s Crescent Heights and became the first Black woman called to the bar in Canada, in Alberta in 1954. All four Local 38 awards share one closing date at the end of May and one portal, so a single trip through the site covers whichever of them you qualify for.",
+    "description": "Named for Alberta’s first Black female lawyer, this Local 38 award recognises a Black student of outstanding merit within the Calgary Board of Education.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "CBE"
+      ],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true,
+    "metaDetail": "Alberta’s first Black woman lawyer."
+  },
+  {
+    "id": 996,
+    "title": "Kiwanis Club of Calgary Chinook Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-05-30",
+    "openDate": null,
+    "audience": "Graduating Robert Thirsk High School students headed to post-secondary",
+    "url": "https://robertthirsk.cbe.ab.ca/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "applyViaGuidance": true,
+    "notes": "Volunteering outside the school is what the committee weighs most heavily, alongside marks, financial need and extra-curricular involvement. Forms come from the Success Centre and go by email to the club secretary, and you have to show proof of registration before the money is released.",
+    "description": "Two bursaries the Chinook Kiwanis give each year to Robert Thirsk graduates who have served their wider community, not only their school.",
+    "metaDetail": "Robert Thirsk students only, two awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "CBE"
+      ],
+      "specificSchools": [
+        "Robert Thirsk High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 997,
+    "title": "TIES Founder’s Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-18",
+    "openDate": null,
+    "audience": "Calgary students entering a field that serves newcomers to Canada",
+    "url": "https://www.immigrant-education.ca/community/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Your program has to start within a year of applying, so a grade 12 student can apply on next year’s acceptance. The essay is the whole application: 750 to 1,000 words naming a specific barrier immigrants face and proposing something concrete to fix it. Recent winners have been university students with running non-profits, so a strong idea matters more here than a strong transcript.",
+    "description": "One award a year from The Immigrant Education Society, for a Calgary-area student training in non-profit management, social innovation, international relations, immigrant consultation or a related field.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 998,
+    "title": "CKSF Special Talent Award",
+    "amount": "$1,000",
+    "deadline": "2027-07-31",
+    "openDate": null,
+    "audience": "Korean-Canadian grade 11 and 12 students with a non-academic talent",
+    "url": "https://calgaryksf.org/awards/",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "alsoOpenTo": [
+      "Airdrie",
+      "Lethbridge",
+      "Medicine Hat"
+    ],
+    "notes": "The geography is set by where your parent lives, not your school: anywhere south of and including Airdrie qualifies, which the foundation spells out as reaching Lethbridge and Medicine Hat, while families north of Airdrie are refused. Children of work permit holders may apply. The application instructions on the same page still carry dates from an older cycle, so confirm the July close by email before relying on it.",
+    "description": "The Calgary Korean Scholarship Foundation reserves this one for high school students, judged on talent in music, art or sport rather than on marks.",
+    "metaDetail": "The only CKSF award open before university.",
+    "eligibility": {
+      "grades": [
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "arts",
+        "sports"
+      ]
+    },
+    "active": true
+  },
+  {
+    "id": 999,
+    "title": "CCSPE Indigenous STEM Scholarship",
+    "amount": "$1,000",
+    "deadline": "2026-09-26",
+    "openDate": null,
+    "audience": "Indigenous students starting a STEM program at an Alberta institution",
+    "url": "https://aboriginalfutures.com/scholarships-bursaries/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "A September deadline is unusual and it works in a graduate’s favour: you apply after you have your acceptance, with a confirmation of enrolment letter attached. Open to First Nations status and non-status, Métis and Inuit applicants alike. The society posts only the previous cycle’s form, so email ccspe.scholarship@calgary.ca to confirm this year’s date.",
+    "description": "One award from the City of Calgary Society of Professional Engineers, decided on a 500-word essay about why STEM interests you and how your actions have affected your community.",
+    "metaDetail": "Closes in September, after acceptances land.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1000,
+    "title": "CEEA Energy Industry Award",
+    "amount": "$8,500 to $10,000",
+    "deadline": "2027-06-15",
+    "openDate": null,
+    "audience": "Students entering a petroleum-focused engineering technology diploma",
+    "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The degree stream needs you to be entering second year or beyond, but the diploma stream accepts first year, which is the door a graduate can walk through: petroleum, mechanical, chemical or instrumentation engineering technology all count. It renews for a second year of a diploma and needs a cumulative 80% and one reference.",
+    "description": "The Canadian Energy Executive Association pays $8,500 for a diploma or $10,000 for a degree, applied straight to tuition, for students heading into the petroleum industry.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
   }
 ]

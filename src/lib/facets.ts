@@ -101,7 +101,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     h1: 'Calgary scholarships',
     title: 'Calgary High School Scholarships',
     description:
-      'Scholarships for Calgary high school students: EducationMatters awards for CBE and Calgary Catholic, memorial funds, and local employer scholarships.',
+      "Scholarships for Calgary high school students: EducationMatters and Calgary Foundation awards, teachers' union scholarships and the Burns Memorial Fund.",
     intro:
       'Calgary-restricted awards run from a $100 band bursary up to renewable entrance awards worth $100,000 over four years, against a far smaller field than a national award.',
   },
