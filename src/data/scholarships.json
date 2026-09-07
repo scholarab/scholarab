@@ -36160,5 +36160,990 @@
         "art"
       ]
     }
+  },
+  {
+    "id": 960,
+    "title": "Kinsmen Club of Red Deer General Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Central Alberta residents entering Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11886",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. No single one of the three criteria carries it, so a student who is solid on community involvement and can show need is competitive without a standout transcript.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "The Kinsmen Club of Red Deer funds a $1,000 entrance scholarship for a Central Alberta resident starting full-time studies at Red Deer Polytechnic, weighed on academic achievement, financial need and leadership in the community.",
+    "metaDetail": "Residency, need and leadership weighed together.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 961,
+    "title": "Lampard Family Scholarship for Sciences",
+    "amount": "$2,500",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "First-year Bachelor of Science students at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11916",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Optometry is a preference rather than a condition, so a science student with another career in mind is still eligible. It is the largest science entrance award on the list.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $2,500 award for a student entering the first year of the Bachelor of Science programme at Red Deer Polytechnic, with preference given to a female student planning a career in optometry.",
+    "metaDetail": "Optometry preference, but not a requirement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 962,
+    "title": "Leslie G. Wadey Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Recent high school graduates entering Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12068",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. There is no programme restriction and no residency requirement, which makes this one of the widest-open entrance awards Red Deer Polytechnic lists.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Two awards of $1,000 for recent high school graduates entering full-time studies at Red Deer Polytechnic, judged on academic achievement and leadership.",
+    "metaDetail": "Two awards, and the criteria are deliberately broad.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 963,
+    "title": "Alberta Blue Cross Away from Home Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students relocating at least 100 kilometres to attend Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11676",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The 100 kilometre rule is the whole filter and it is measured from your hometown, so a student from a small central Alberta community may qualify where a Red Deer student never can. Programmes shorter than two years do not count.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,500 award for a recent high school graduate who had to move at least 100 kilometres from their hometown to attend Red Deer Polytechnic full time, in an undergraduate programme of at least two years.",
+    "metaDetail": "Distance from home is the qualifying condition.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 964,
+    "title": "Alberta Blue Cross Entrance Scholarship (Red Deer Polytechnic)",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Alberta residents entering Red Deer Polytechnic from high school",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12316",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Alberta Blue Cross funds separate entrance awards at several institutions, so this is not the same award as the ones at Augustana or Keyano and you would apply through whichever college you are attending.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,500 entrance scholarship for a recent high school graduate who is an Alberta resident, registered full time in an undergraduate programme of at least two years at Red Deer Polytechnic.",
+    "metaDetail": "Alberta Blue Cross funds one of these at each college.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 965,
+    "title": "Barrier Free: An Alberta Blue Cross Bursary",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students with special needs facing extra costs at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12321",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The award is written around the additional cost of attending rather than around the disability itself, so the case to make is a practical one about what your education actually costs you.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,500 bursary for a recent high school graduate entering Red Deer Polytechnic full time who, because of special needs, has to carry extra expenses to attend.",
+    "metaDetail": "For the costs disability adds, not for tuition alone.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 966,
+    "title": "EQUS Business Rural Community Scholarship",
+    "amount": "$750",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Rural students entering business studies at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12093",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The certificate and diploma count alongside the degree, which is unusual: most business entrance awards want a degree student. The rural connection is what the sponsor is looking for.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "EQUS funds a $750 award for a recent high school graduate entering the first year of the Bachelor of Business Administration, the Business Diploma or the Business Certificate at Red Deer Polytechnic.",
+    "metaDetail": "All three business credentials qualify, not just the degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 967,
+    "title": "Ethel Olafson Bachelor of Education Scholarship",
+    "amount": "$800",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering the Bachelor of Education at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11932",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The Olafson endowment funds a second entrance award for science students, so a candidate deciding between education and science should look at both before choosing which to argue for.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An $800 entrance award for a student starting full-time Bachelor of Education studies at Red Deer Polytechnic, on academic achievement and financial need.",
+    "metaDetail": "One of a pair funded by the same endowment.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "Education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 968,
+    "title": "Narfi Olafson Memorial Entrance Scholarship",
+    "amount": "$800",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering the Bachelor of Science at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12287",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The agriculture and environmental conservation preference narrows the real field considerably, because most science entrants at the polytechnic are not in those streams.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An $800 entrance award for a student starting full-time Bachelor of Science studies at Red Deer Polytechnic, with preference for those in agriculture or environmental conservation streams.",
+    "metaDetail": "Agriculture and conservation get the preference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "Science",
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 969,
+    "title": "Wendy Cawson Memorial Engineering Entrance Academic Award",
+    "amount": "$3,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering Bachelor of Science in Engineering at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12213",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Academic achievement is the only stated criterion, with no financial need test, no essay and no leadership requirement, which makes it the most straightforward large award on the list.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $3,000 entrance award for a recent high school graduate starting full-time studies in the Bachelor of Science in Engineering at Red Deer Polytechnic, judged on academic achievement alone.",
+    "metaDetail": "Marks alone decide it, with no essay or reference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "Engineering"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 970,
+    "title": "Ron MacLean Foundation Entrance Scholarship",
+    "amount": "$750",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering Red Deer Polytechnic with a 74 per cent average",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12250",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The 74 per cent minimum is well below the 80 per cent that most entrance scholarships ask for, and community involvement is listed first among the criteria.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Two awards of $750 from the Ron MacLean Foundation for students entering full-time studies at Red Deer Polytechnic with a minimum grade of 74 per cent, weighed on community involvement, academic achievement and financial need.",
+    "metaDetail": "A 74 per cent floor, which is lower than most.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": 74,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 971,
+    "title": "Red Deer Bottling Leadership Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering Red Deer Polytechnic with a record of leadership",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11795",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. No programme is specified and no residency is required, so the deciding factor is the leadership record rather than what you are studying or where you are from.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Two awards of $1,000 for students entering their first year of full-time study at Red Deer Polytechnic, on academic achievement and demonstrated leadership through extracurricular activities and community participation.",
+    "metaDetail": "Extracurricular record carries as much as marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 972,
+    "title": "Norm Jacobs Memorial Bursary",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering the Practical Nurse programme at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11827",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Marks are not mentioned anywhere in the criteria, which is rare for a nursing award and means a student who scraped into the programme is on the same footing as the top of the intake.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,500 bursary for a recent high school graduate entering the first year of the Practical Nurse programme at Red Deer Polytechnic full time, awarded on financial need.",
+    "metaDetail": "Financial need is the only stated criterion.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "Nursing"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 973,
+    "title": "Red Deer Polytechnic Support Staff Legacy Entrance Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "AUPE members and their families entering Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11902",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. This is the kind of award families miss because nobody thinks to check a parent's union. Sponsorship by an AUPE member also qualifies you, so the connection does not have to be a family one.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Two awards of $1,500 for students entering Red Deer Polytechnic full time who are members of the Alberta Union of Provincial Employees, immediate family of an AUPE member, or sponsored by one, with Red Deer Polytechnic support staff first in the order of preference.",
+    "metaDetail": "Check whether a parent is an AUPE member.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 974,
+    "title": "Georgia Belknap Endowment Early Learning and Child Care Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering Early Learning and Child Care at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12034",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Certificate programmes rarely carry dedicated entrance awards, and the applicant pool for a one-year certificate is much smaller than for a degree.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,000 entrance award for a student starting the Early Learning and Childcare Certificate programme at Red Deer Polytechnic, on academic achievement and financial need.",
+    "metaDetail": "A certificate programme with its own entrance award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 975,
+    "title": "Georgia Belknap Endowment Educational Assistant Entrance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering the Educational Assistant programme at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12224",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The same estate funds a matching award for Early Learning and Child Care, so a student choosing between the two programmes has an equivalent award waiting either way.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,000 entrance award for a student starting the Educational Assistant programme at Red Deer Polytechnic, on academic achievement and financial need.",
+    "metaDetail": "The twin of the early learning entrance award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 976,
+    "title": "Northlands Academic Upgrading Scholarship",
+    "amount": "$450",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Students entering Academic Upgrading at Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11756",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Upgrading students are almost invisible in scholarship listings, and Red Deer Polytechnic carries three awards aimed at them. Clearly defined career goals is a stated requirement, so the application is about the plan rather than the transcript.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $450 award for a student entering the first year of the Red Deer Polytechnic Academic Upgrading programme full time who can show clearly defined career goals, awarded on financial need.",
+    "metaDetail": "For upgrading students, who rarely get their own award.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 977,
+    "title": "Ken Cowan Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Upgrading students at Red Deer Polytechnic, with preference for veterans and single parents",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12652",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The two preference groups are unusual to see named together, and neither is a hard requirement, so an upgrading student outside both can still apply.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Two bursaries of $1,000 for students entering the first year of Academic Upgrading at Red Deer Polytechnic full time, with preference for those serving or honourably discharged from the Canadian Forces, or single parents.",
+    "metaDetail": "Preference for Forces members and single parents.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 978,
+    "title": "Red Deer Advocate Adult Re-Entry Bursary",
+    "amount": "$1,600",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Adults returning to study through Academic Upgrading or Open Studies",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11930",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Open Studies qualifies as well as Academic Upgrading, which widens it past students who left school without finishing. Evidence of career planning is what the application turns on.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Three bursaries of $1,600 from the Red Deer Advocate for students entering Academic Upgrading or Open Studies at Red Deer Polytechnic, who can show evidence of career planning and goal setting, awarded on financial need.",
+    "metaDetail": "Three awards, aimed at people coming back to school.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 979,
+    "title": "Nicole McKenzie Memorial Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Rocky Mountain House graduates entering Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12167",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Despite being a polytechnic award it is closed to students from Red Deer itself, and mature students aged 22 and over get preference. At $3,000 drawn from a pool of two small-town schools, the odds here are far better than on any open entrance award.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Two awards of $3,000 for students entering full-time studies at Red Deer Polytechnic who graduated from Confluence Campus in Rocky Mountain House, meaning West Central High School or St. Dominic High School, with preference for mature students.",
+    "metaDetail": "Restricted to two Rocky Mountain House schools.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "West Central High School",
+        "St. Dominic High School"
+      ],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 980,
+    "title": "Meagan Kirstein Memorial Entrance Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-05-31",
+    "openDate": null,
+    "audience": "Rocky Mountain House graduates entering Red Deer Polytechnic",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12386",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Despite being a polytechnic award it is closed to students from Red Deer itself, and mature students aged 22 and over get preference. At $3,000 drawn from a pool of two small-town schools, the odds here are far better than on any open entrance award.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "Two awards of $3,000 for students entering full-time studies at Red Deer Polytechnic who graduated from Confluence Campus in Rocky Mountain House, meaning West Central High School or St. Dominic High School, with preference for mature students.",
+    "metaDetail": "Restricted to two Rocky Mountain House schools.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "West Central High School",
+        "St. Dominic High School"
+      ],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 981,
+    "title": "Rex Turple Memorial Hockey Education Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Post-secondary students playing in the Heritage Junior Hockey League",
+    "url": "https://cfcab.ca/rex-turple-memorial-scholarship/",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Paid against courses you have already completed in the fall and winter terms rather than up front, so it reimburses study rather than funding it. The foundation does not publish a value. As with all its awards the money goes straight to the institution and is credited to your tuition account, never to you.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "The Community Foundation of Central Alberta funds this in memory of Rex Turple, who played for the Red Deer Rustlers and coached in Scotland, England and Austria. It goes to post-secondary students who are part of a team in Alberta's Heritage Junior Hockey League.",
+    "metaDetail": "Playing junior hockey is the qualification.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 982,
+    "title": "Central Alberta Human Resources Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "openDate": null,
+    "audience": "Central Alberta students studying human resources management",
+    "url": "https://cfcab.ca/central-alberta-human-resources-scholarship/",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Human resources is narrow enough that the applicant pool is small for a $1,000 award. You need a resume, confirmation of enrolment, recent marks and documentation of what tuition actually costs you, so gather the paperwork before the June cutoff.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "A $1,000 award, given annually to a Central Alberta resident enrolled in or planning to enrol in a post-secondary programme focused on human resources management.",
+    "metaDetail": "A named field almost nothing else funds.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 983,
+    "title": "Murray Family Career Opportunity Award",
+    "amount": "Varies",
+    "deadline": "2027-06-30",
+    "openDate": null,
+    "audience": "Central Alberta students entering a diploma or degree, with a leaning toward athletics or mechanics",
+    "url": "https://cfcab.ca/murray-family-scholarship/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Technical institutes count equally with universities here, which suits a student heading into the trades. You need two signed and dated reference letters with phone numbers, a grade 11 and 12 transcript, and proof of enrolment, and you can defer if you explain why.",
+    "applyViaGuidance": false,
+    "active": true,
+    "description": "An award from the Murray family for Central Alberta students enrolling at a post-secondary institution or technical institute in a diploma or degree programme, open across fields with a stated preference for athletics or mechanics.",
+    "metaDetail": "Preference for athletics or mechanics, not a rule.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]

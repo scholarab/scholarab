@@ -269,6 +269,10 @@ export const months: UpdateMonth[] = [
     items: [
       {
         kind: 'listings',
+        text: 'Red Deer gained 24 awards, most of them Red Deer Polytechnic entrance scholarships that one May application covers. Its award portal lists 520 opportunities and 519 of them are closed cycles for students already enrolled, so only the entrance awards are here.',
+      },
+      {
+        kind: 'listings',
         text: 'Lethbridge gained the awards its schools list but nobody else does, including a $10,000 Rotary agricultural scholarship and a YMCA scholarship that pays for a full lifeguard certification rather than tuition.',
       },
       {
