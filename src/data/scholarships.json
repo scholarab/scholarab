@@ -2842,11 +2842,11 @@
     "audience": "First Nations, Inuit and Métis students in post-secondary, trades or apprenticeships",
     "url": "https://indspire.ca/programs/students/bursaries-scholarships/",
     "category": "Indigenous",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "National",
-    "notes": "One application covers every Indspire bursary, scholarship and award you qualify for. Cutoffs are August 1, November 1 and February 1 at 11:59 p.m. EST. Have your Indigenous card (front and back), your most recent grades and proof of full-time enrolment ready before you start.",
+    "notes": "There is one application for almost all of Indspire's funding, and it is the single most important thing to know here. The named corporate awards you see elsewhere, such as the AltaLink Indigenous Student Awards, the Syncrude Indigenous Engineering Scholarship and the TD, Suncor and Rogers funds, are sub-funds inside this one application rather than separate programs with their own forms. Applying once considers you for every fund you match, so do not go hunting for individual application pages that do not exist. There are three deadlines a year, August 1, November 1 and February 1, all at 11:59 p.m. Eastern, and you can apply for the September to August academic year. Indspire awarded over $33 million to more than 9,500 students in its most recent year, but it says plainly it cannot fund every applicant, so apply at the earliest deadline you can meet. Wherever possible the money is unrestricted and can go to tuition, childcare, food, cultural support, shelter or travel.",
     "active": true,
-    "description": "Indspire is the largest non-governmental funder of Indigenous post-secondary students in Canada, with more than $190 million awarded since 1996. First Nations, Inuit and Métis students in college, university, skilled trades, apprenticeship and technology programs all qualify. You need to be studying full time in Canada with at least a 60 percent course load, and you can hold one Indspire award per academic year. Bursaries go on financial need, scholarships on merit. Decisions take three to six weeks and only successful applicants are contacted.",
+    "description": "Indspire is the largest non-governmental funder of Indigenous post-secondary students in Canada, with more than $313 million awarded through over 93,000 bursaries and scholarships since 1996. First Nations, Inuit and Métis students in college, university, skilled trades, apprenticeship and technology programs apply once for everything.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -2869,7 +2869,8 @@
       "citizenship": "canadian",
       "apprenticeship": true,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "One application covers every named corporate fund."
   },
   {
     "id": 110,
@@ -39807,5 +39808,287 @@
       "extracurriculars": []
     },
     "active": true
+  },
+  {
+    "id": 1053,
+    "title": "Otipemisiwak Métis Government Community-Based Awards",
+    "amount": "$500 to $2,500",
+    "deadline": "2026-10-15",
+    "openDate": null,
+    "audience": "Métis students registered in post-secondary studies in Alberta",
+    "url": "https://albertametis.com/programs-services/education-scholarships/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "One Google form puts you in for nine named awards at once, so read the list and say which ones fit you. Bruce Gladue, Cecil Bellrose and Marlene Lanz are the three Otipemisiwak Legacy Awards at $2,500. Art L'Hirondelle at $1,000 is for construction and trades, Tom Ghostkeeper at $1,000 is for justice studies, and Gary Pruden at $500 is for music and sports. Delia Gray, Pearl Calahasen and Ernest Poitras are $1,000 and open to any area of study. You need proof of current post-secondary registration, a personal statement about your involvement in the Otipemisiwak Métis community, and a reference letter from a Métis knowledge keeper, leader or active citizen. That registration requirement means you apply in the fall after you start, not while you are still in grade 12. Winners are honoured during Métis Week in November.",
+    "description": "Nine named awards from the Otipemisiwak Métis Government worth $500 to $2,500, covering trades, justice, music and sport as well as any area of study, all through a single application.",
+    "metaDetail": "One form covers all nine awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1054,
+    "title": "Métis Scholar Awards",
+    "amount": "Varies",
+    "deadline": "2026-10-15",
+    "openDate": null,
+    "audience": "Métis citizens in full-time studies at Alberta post-secondary institutions",
+    "url": "https://www.rupertsland.org/education/metis-scholar-awards/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "This is an endowment program, not a single scholarship. The Métis Education Foundation and Rupertsland Institute have negotiated endowments at 22 Alberta institutions including the University of Alberta, University of Calgary, University of Lethbridge, NAIT, SAIT, MacEwan, Mount Royal, Athabasca, Bow Valley, Concordia, Keyano, King's, Lakeland, Lethbridge College, Medicine Hat College, NorQuest, Northern Lakes, Northwestern Polytechnic, Olds, Portage and Red Deer Polytechnic. Each institution administers its own award, sets its own criteria and its own deadline, so apply directly to the school you are attending and ask their awards office. The University of Calgary runs a separate entrance stream, which is the one to look at if you are coming straight out of grade 12. The October 15 deadline here is for the two awards the Foundation holds itself, which are open to Métis citizens at institutions where no endowment exists. You must be a citizen of the Otipemisiwak Métis Government, a registered member of the Otipemisiwak Métis Student Association, enrolled full time and an Alberta resident, and you cannot be receiving other Rupertsland funding.",
+    "description": "Métis Education Foundation endowments at 22 Alberta post-secondary institutions, each administered by the school, plus two awards the Foundation holds for students elsewhere.",
+    "metaDetail": "The University of Calgary runs an entrance stream.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1055,
+    "title": "Modern Métis Woman Scholarship",
+    "amount": "Varies",
+    "deadline": "2026-10-31",
+    "openDate": null,
+    "audience": "Self-identified Métis women entering or attending a Canadian or US university",
+    "url": "https://modernmetiswoman.com/scholarships/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "A small charity award decided on a single essay of 1,000 to 1,500 words, on your definition of the Modern Métis Woman, how your Métis heritage has affected you personally, or any topic you choose that relates to Métis women. Only one award is given each year, so the field is small but so is the prize pool, and the amount is not published. You are eligible if you will be attending university, not only if you already are, so a grade 12 student heading to first year can apply. You must be a Canadian citizen, enrolled full time at a minimum of three courses a semester, and identify as both a woman and Métis. Essays are checked for plagiarism. Submissions go by email.",
+    "description": "A yearly essay award for self-identified Métis women heading to or already at a Canadian or US university, decided on a 1,000 to 1,500 word essay.",
+    "metaDetail": "Open to students who will be attending, not only those enrolled.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1056,
+    "title": "Arctic Institute of North America Jim Bourque Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Canadian Indigenous students in education, environmental studies, Indigenous knowledge or telecommunications",
+    "url": "https://arctic.ucalgary.ca/jim-bourque-scholarship",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "One award a year, administered by the Arctic Institute of North America at the University of Calgary but open to Indigenous students across Canada. It honours James W. Bourque, who was Cree and Métis, born at Wandering River in Alberta, and who founded the Fur Institute of Canada and was sworn into the Privy Council in 1992. Grade 12 students can apply: the application asks for your most recent transcript from college, university or high school, and accepts proof of application to a post-secondary institution rather than proof of enrolment. You need a cover letter, a 500-word description of your intended program, a recommendation from a community leader such as a band or town council, chamber of commerce or Métis local, a statement of financial need, and proof of Indigenous descent. Applications went in by July 8 in the 2026 cycle. The committee weighs financial need heavily.",
+    "description": "A $1,000 award for Indigenous students across Canada entering education, environmental studies, Indigenous knowledge or telecommunications, accepting high school transcripts.",
+    "metaDetail": "Proof of application counts, not just enrolment.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "Education",
+        "Environmental Studies",
+        "Indigenous Knowledge",
+        "Telecommunications"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": false
+  },
+  {
+    "id": 1057,
+    "title": "BioTalent Canada I.D.E.A.L. Scholarship",
+    "amount": "$10,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Students entering first year of a biosciences program who are Indigenous, have a disability, or are newcomers",
+    "url": "https://www.biotalent.ca/the-i-d-e-a-l-scholarship/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Three awards of $10,000, one for each of the three groups: Indigenous students, students with a disability, and newcomers who have been in Canada less than five years. CEGEP students receive $5,000. This is strictly an entrance award and BioTalent says so plainly: students beyond first year or in non-biosciences programs are screened out. Eligible programs are broad and include biotechnology, biochemistry, health sciences, environmental biology and biomedical programs, so anything that leads into the bioeconomy is worth checking. Because it splits three ways by category rather than pooling everyone, the odds are much better than a general national scholarship. You need your acceptance letter. Canadian citizens, permanent residents and newcomers already in Canada qualify, but international students on a visa do not. Applications in the 2026 cycle closed June 8.",
+    "description": "Three $10,000 awards, one each for Indigenous students, students with a disability and newcomers, for students entering first year of a biosciences program.",
+    "metaDetail": "First year only, and one award per category.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "Biosciences"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": false
+  },
+  {
+    "id": 1058,
+    "title": "Merck Canada Indigenous Student Scholarship",
+    "amount": "$5,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Indigenous students under 29 entering or returning to a first bachelor degree",
+    "url": "https://portal.scholarshippartners.ca/welcome/Merck-EN/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Up to eight awards of $5,000, and the program is capped at 60 applications, which makes the odds better than almost anything else at this value. Applying early matters because of that cap. You qualify if you are entering or returning to full-time studies in your first bachelor degree, so a grade 12 student heading into first year is eligible. You must be a Canadian citizen or permanent resident and under 29 at the deadline. In the 2026 cycle the portal opened January 20 and closed March 19, and you have to create a user profile before you can apply. Check the program guidelines on the portal for the list of eligible fields of study.",
+    "description": "Eight $5,000 awards for Indigenous students entering or returning to a first bachelor degree, with applications capped at 60 so the odds are unusually good.",
+    "metaDetail": "The program caps applications at 60.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 28,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": false
+  },
+  {
+    "id": 1059,
+    "title": "IPPC Indigenous Pharmacy Scholarship",
+    "amount": "$10,000 to $20,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "First Nations, Métis or Inuit students accepted to a PharmD or pharmacy technician program",
+    "url": "https://www.pharmacists.ca/pharmacy-in-canada/ippc/indigenous-pharmacy-scholarship/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Run by the Indigenous Pharmacy Professionals of Canada with the Canadian Pharmacists Association. The route worth knowing about from grade 12 is the pharmacy technician stream, funded by the Sobeys National Pharmacy Group at $10,000, because a pharmacy technician diploma is a college program you can enter straight out of high school. The two PharmD scholarships are worth $20,000 a year and matter later, since PharmD programs in Canada generally want undergraduate study first. Being accepted counts, not just being enrolled, so you can apply on an acceptance letter. You must provide verification of ancestry such as a status card, a parent's status card with proof of relationship, or a Métis citizenship card, and you must be a member of IPPC. The application needs a letter of intent of up to 500 words or a three-minute video, plus a reference letter from someone outside your household. Recipients meet annually with IPPC and the sponsor. The 2026 to 2027 cycle has closed.",
+    "description": "Pharmacy awards for First Nations, Métis and Inuit students worth $10,000 for pharmacy technician studies and $20,000 a year for PharmD, open on acceptance.",
+    "metaDetail": "The technician stream is reachable from grade 12.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "Pharmacy"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": false
   }
 ]
