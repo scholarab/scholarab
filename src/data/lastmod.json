@@ -763,14 +763,6 @@
     "hash": "fa50c9dc5a79334d",
     "date": "2026-09-04"
   },
-  "/scholarships/asaa-alberta-milk-scholarship/": {
-    "hash": "854bea441204f543",
-    "date": "2026-08-02"
-  },
-  "/scholarships/asaa-pay-it-forward-scholarship/": {
-    "hash": "c33d6a7644e1f569",
-    "date": "2026-08-02"
-  },
   "/scholarships/ashton-moen-memorial-scholarship/": {
     "hash": "7a912ef6723af04b",
     "date": "2026-09-03"
@@ -802,6 +794,10 @@
   "/scholarships/aufricht-family-fund-student-award/": {
     "hash": "7cc406706761fed3",
     "date": "2026-08-29"
+  },
+  "/scholarships/aupe-members-education-assistance-bursary/": {
+    "hash": "7ccd42f4ae260965",
+    "date": "2026-09-07"
   },
   "/scholarships/austin-obrien-advanced-placement-scholar-award/": {
     "hash": "fb574c9c2c98da99",
@@ -1010,6 +1006,10 @@
   "/scholarships/bree-eriksen-memorial-dance-award/": {
     "hash": "e5bae23c7d1c959d",
     "date": "2026-08-28"
+  },
+  "/scholarships/brent-gawne-memorial-scholarship/": {
+    "hash": "ce95cbe31c34fd4e",
+    "date": "2026-09-07"
   },
   "/scholarships/brett-binder-leadership-award/": {
     "hash": "b09430a0b10cae11",
@@ -2383,6 +2383,10 @@
     "hash": "a213901255749307",
     "date": "2026-09-05"
   },
+  "/scholarships/john-hasselfield-endowment-foundation-scholarship/": {
+    "hash": "c594673b836f0926",
+    "date": "2026-09-07"
+  },
   "/scholarships/john-laurie-scholarship/": {
     "hash": "7bdbae9b9abe6dfc",
     "date": "2026-09-06"
@@ -2779,6 +2783,10 @@
     "hash": "bbf922f0bccedded",
     "date": "2026-09-05"
   },
+  "/scholarships/livingstone-range-ata-local-14-scholarships/": {
+    "hash": "d92796d6d1014a07",
+    "date": "2026-09-07"
+  },
   "/scholarships/lloydminster-and-district-co-op-scholarship/": {
     "hash": "0ddd4edb34cc4bea",
     "date": "2026-09-04"
@@ -2967,6 +2975,10 @@
     "hash": "06d362148e2dd27f",
     "date": "2026-09-05"
   },
+  "/scholarships/mary-kehoe-memorial-scholarship/": {
+    "hash": "bcade779e987a82c",
+    "date": "2026-09-07"
+  },
   "/scholarships/mary-ngo-family-bursary/": {
     "hash": "030a2b7f9a7c7c1a",
     "date": "2026-09-06"
@@ -3062,6 +3074,10 @@
   "/scholarships/michael-gee-scholarship-fund-award/": {
     "hash": "aced47b59acf2b36",
     "date": "2026-08-29"
+  },
+  "/scholarships/michael-vaughan-spirit-of-sport-scholarship/": {
+    "hash": "df5c544849b941db",
+    "date": "2026-09-07"
   },
   "/scholarships/mildred-rowe-weston-memorial-scholarship/": {
     "hash": "4273d10ecbd487a7",
@@ -3314,6 +3330,10 @@
   "/scholarships/patricia-trudeau-scholarship/": {
     "hash": "bc8d09e5e5697de0",
     "date": "2026-09-03"
+  },
+  "/scholarships/pattison-media-equity-scholarship/": {
+    "hash": "686fb9d5900a626a",
+    "date": "2026-09-07"
   },
   "/scholarships/pattison-media-visual-arts-scholarship/": {
     "hash": "56771ef0d634e3b5",
@@ -3734,6 +3754,14 @@
   "/scholarships/scarborough-trophy/": {
     "hash": "5f8ca4cf2ff17f0e",
     "date": "2026-09-05"
+  },
+  "/scholarships/school-sport-alberta-milk-scholarship/": {
+    "hash": "93376d0b0fe2799e",
+    "date": "2026-09-07"
+  },
+  "/scholarships/school-sport-alberta-pay-it-forward-scholarship/": {
+    "hash": "aa7be2928382c651",
+    "date": "2026-09-07"
   },
   "/scholarships/schulich-leader-scholarships/": {
     "hash": "12661261a76fa6ac",

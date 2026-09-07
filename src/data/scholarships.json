@@ -1501,17 +1501,17 @@
   },
   {
     "id": 70,
-    "title": "ASAA Alberta Milk Scholarship",
+    "title": "School Sport Alberta Milk Scholarship",
     "amount": "$1,000",
     "deadline": "2027-04-29",
-    "audience": "Grade 12 ASAA member school students; school nominates 1 male + 1 female student",
+    "audience": "Grade 12 student-athletes nominated by a School Sport Alberta member school",
     "url": "https://schoolsportalberta.ca/association/recognition/awards",
     "category": "Academic",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Deadline is April 29 every year. You have to be registered at a School Sport Alberta member school, take part in athletics, and be heading into post-secondary.",
+    "notes": "Your school nominates, and it may put forward only one male and one female student, so the first hurdle is internal and the principal has to sign the form. You also owe a teacher reference, a reference from someone in the sports community, a two-page resume and a 500-word essay on what sport and healthy eating mean to you.",
     "active": false,
-    "description": "The ASAA Alberta Milk Scholarship recognizes academic achievement among high school students in Alberta. One male and one female student from ASAA member schools are nominated and awarded $1,000 each by their schools.",
+    "description": "Alberta Milk funds two of these a year through School Sport Alberta, the body that was called the ASAA until it renamed itself, for grade 12 athletes heading to post-secondary in Canada.",
     "eligibility": {
       "grades": [
         "12"
@@ -1532,7 +1532,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "One male and one female winner a year."
   },
   {
     "id": 71,
@@ -3712,18 +3713,18 @@
   },
   {
     "id": 133,
-    "title": "ASAA Pay It Forward Scholarship",
+    "title": "School Sport Alberta Pay It Forward Scholarship",
     "amount": "$500",
     "deadline": "2027-04-29",
-    "audience": "Grade 12 Alberta student-athletes who coached or officiated at the school or community level",
+    "audience": "Grade 12 Alberta students who coached or officiated in school or community sport",
     "url": "https://schoolsportalberta.ca/association/recognition/awards",
     "category": "Sports",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Deadline is April 29 every year. Applications go to the School Sport Alberta office and then to your zone. You can include a picture or short video of your volunteer work.",
+    "notes": "The fund is built a dollar at a time: every provincial championship charges each competing student an extra loonie and sends it to the office. Applications are judged by your own zone rather than provincially, by a panel of at least three teachers or zone executives. Volunteering in the community counts equally with volunteering at school, which matters if your school had no opening.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "For Grade 12 student-athletes who coach or officiate: one $500 award per ASAA zone, for students who played ASAA-sanctioned sports and gave time back to younger athletes.",
+    "description": "Also known as the John Paton award, this goes to a graduating student who gave time back as a coach, an official, a team manager, a statistician or a scorekeeper.",
     "eligibility": {
       "grades": [
         "12"
@@ -3748,7 +3749,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "metaDetail": "Judged inside your zone, not province-wide."
   },
   {
     "id": 134,
@@ -38527,6 +38529,270 @@
       "extracurriculars": [
         "sports"
       ]
+    },
+    "active": true
+  },
+  {
+    "id": 1020,
+    "title": "Michael Vaughan Spirit of Sport Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-29",
+    "openDate": null,
+    "audience": "Grade 12 multi-sport athletes at School Sport Alberta member schools",
+    "url": "https://schoolsportalberta.ca/association/recognition/awards",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The third and least-known of School Sport Alberta’s three scholarships, and the criteria are about character rather than results: putting teammates first, enhancing culture, servant leadership. You need three written answers of up to 500 words each and two references, at least one from a teacher or coach in your sport, and neither may be a family member. You must already hold an acceptance. The value is not published.",
+    "description": "For a grade 12 athlete who plays several sports, one of them a School Sport Alberta sport, and who is held up as a role model by the rest of the school.",
+    "metaDetail": "Judged on sportsmanship, not on winning.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    },
+    "active": false
+  },
+  {
+    "id": 1021,
+    "title": "Mary Kehoe Memorial Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-07-15",
+    "openDate": "2027-05-12",
+    "audience": "High school students who are AUPE members or their dependants",
+    "url": "https://www.aupe.org/member-resources/financial-support/bursaries-and-scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The union created this in 2017 specifically so high school students would stop losing to university students in one shared pool, so the two awards here are the whole field. Your parent needs two consecutive years of AUPE service and you must be under 25. The essay is marked by independent adjudicators and has to be formal: title page, footnotes, citations, bibliography.",
+    "description": "Two awards from the Alberta Union of Provincial Employees, ring-fenced for high school students, funded through the Members’ Education Assistance Fund.",
+    "metaDetail": "High school students compete only against each other.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": false
+  },
+  {
+    "id": 1022,
+    "title": "Brent Gawne Memorial Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-07-15",
+    "openDate": "2027-05-12",
+    "audience": "Post-secondary students who are AUPE members or their dependants",
+    "url": "https://www.aupe.org/member-resources/financial-support/bursaries-and-scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Set up at the union’s 2004 convention to raise awareness of the privatization of public services, which is the subject the essay circles. It is the post-secondary half of the pair, so a graduate applying in the summer before first year should check with the education sub-committee which stream they fall into. Same July cutoff and the same formal essay rules.",
+    "description": "Two AUPE awards for students already in post-secondary study, the twin of the high school scholarship the union runs alongside it.",
+    "metaDetail": "The post-secondary half of a matched pair.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": false
+  },
+  {
+    "id": 1023,
+    "title": "AUPE Members’ Education Assistance Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-07-15",
+    "openDate": "2027-05-12",
+    "audience": "AUPE members, their spouses and their dependants in full-time study",
+    "url": "https://www.aupe.org/member-resources/financial-support/bursaries-and-scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Unlike the two scholarships beside it there is no essay, so it is much less work for the same summer deadline. How much is paid out each year depends on the interest the fund earned. First-time applicants may be given preference, and priority goes to students who have not had it before. Dependants of retired and deceased members qualify too.",
+    "description": "A need-based bursary from the interest on the Alberta Union of Provincial Employees education fund, open to members and to the family members they support.",
+    "metaDetail": "No essay, unlike the union’s scholarships.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": false
+  },
+  {
+    "id": 1024,
+    "title": "Livingstone Range ATA Local #14 Scholarships",
+    "amount": "$500",
+    "deadline": "2026-10-31",
+    "openDate": null,
+    "audience": "Livingstone Range School Division graduates and the children of its teachers",
+    "url": "http://www.lrata.com/application.html",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Six awards in two streams, and the streams have different gates. Three entrance scholarships go to students whose parent teaches in the division, and those can be used in any faculty anywhere. The other three go to any Livingstone Range graduate enrolled in a Faculty of Education. The entrance stream is first year only, so it is now or never.",
+    "description": "The teachers of the Livingstone Range division, covering Claresholm, Pincher Creek and the Crowsnest Pass, fund six of these a year out of their own local.",
+    "metaDetail": "Two streams, six awards, one autumn deadline.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1025,
+    "title": "John Hasselfield Endowment Foundation Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Alberta public school students facing obstacles outside their control",
+    "url": "https://www.facebook.com/johnhasselfieldendowment/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The foundation keeps no website of its own and is advertised through school divisions, so your career practitioner is the reliable route in. The essay is about 500 words and asks three specific things: how and when you would use the money, what you have already put toward the goal, and what is standing in the way. Older division lists put the award at $400, which is worth confirming.",
+    "description": "A small Alberta foundation supporting young people whose desire to keep learning, or to keep at sport or music, is blocked by circumstances they did not choose.",
+    "metaDetail": "Advertised only through school divisions.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": false
+  },
+  {
+    "id": 1026,
+    "title": "Pattison Media Equity Scholarship",
+    "amount": "$2,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Western Canadian journalism and broadcast students from under-represented groups",
+    "url": "https://www.pattisonmedia.com/scholarships",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Western Canada only, despite the national scope of the page: recent recipients came from SAIT, Mount Royal, Red River and BCIT. The four named groups are Indigenous people, people with disabilities, members of visible minorities, and women. It used to be called the Prairie Equity Scholarship, which is the name still printed on most school lists. Pattison does not post a closing date; ask the program office at your institution.",
+    "description": "Four awards from the broadcaster behind a large share of western Canadian radio and television, aimed at the groups its own newsrooms are short of.",
+    "metaDetail": "Still listed elsewhere as Prairie Equity.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Journalism",
+        "Broadcasting"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
     },
     "active": true
   }
