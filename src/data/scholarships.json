@@ -39520,5 +39520,127 @@
       "extracurriculars": []
     },
     "active": true
+  },
+  {
+    "id": 1046,
+    "title": "Utility Safety Partners Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-04-30",
+    "openDate": "2027-01-14",
+    "audience": "Alberta students entering trades, safety or engineering programs",
+    "url": "https://utilitysafety.ca/learning-centre/usp-scholarship-program/",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Read the academic bar carefully, because it is written twice: entering students need an 80 percent average, while students already in a program need a 3.0 GPA. That first line is the one that matters to you, and it is the reason this award is worth filing in grade 12 rather than waiting. Utility Safety Partners is the organization formerly called Alberta One-Call, the people behind Click Before You Dig, and they want a letter of recommendation plus evidence you care about safety through work, coursework or volunteering. Only two are given each year and the applications run through the ScholarTree platform rather than their own site.",
+    "description": "A $2,500 award from the organization behind Click Before You Dig, for Alberta students entering skilled trades, power lineperson, health and safety or civil engineering programs.",
+    "metaDetail": "Two awards a year, and entering students qualify at 80 percent.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Trades",
+        "Engineering",
+        "Health"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    },
+    "active": true
+  },
+  {
+    "id": 1047,
+    "title": "UNA Nursing Education Scholarship",
+    "amount": "$1,500",
+    "deadline": "2026-10-15",
+    "openDate": "2026-10-03",
+    "audience": "First-year Alberta nursing students related to a UNA member",
+    "url": "https://www.una.ca/1560/apply-for-a-una-nursing-education-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "This is a relative-of-a-member award, which is the kind almost nobody thinks to check. If a parent, grandparent or guardian is a United Nurses of Alberta member or associate member in good standing, you are eligible and most of the field is not. It is for first-year Registered Nurse or Registered Psychiatric Nurse programs only, so it is an entrance award, and it explicitly excludes postgraduate study. Up to fifteen are awarded plus one funded by the Canadian Federation of Nurses Unions, the essay is a single 300-word answer, and the money is paid the following January once you show proof of full-time first-year registration.",
+    "description": "Sixteen awards of $1,500 for students starting a nursing program in Alberta who are related to a United Nurses of Alberta member in good standing.",
+    "metaDetail": "Applications close at 4:30 p.m. on October 15.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Nursing",
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1048,
+    "title": "Don Moore Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-02-15",
+    "openDate": null,
+    "audience": "Alberta students in recreation facility operations programs",
+    "url": "https://www.aarfp.com/awards/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You do not apply for this one, someone nominates you, and the nomination form takes about twenty minutes. That is worth knowing early because it means telling an instructor or a supervisor at the arena or pool you work at that the award exists. Any year of study counts, including your first, and you do not need to be an AARFP member. Note that several aggregator sites still list this at $750, which is the old value. The association's own awards page says $1,500, and the same page carries the February 15 nomination deadline that applies to every award they hand out.",
+    "description": "A $1,500 nominated award from the Alberta Association of Recreation Facility Personnel for students in recognized recreation services operation programs.",
+    "metaDetail": "Nomination-based, and membership is not required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Recreation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "active": true
   }
 ]
