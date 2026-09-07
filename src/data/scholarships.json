@@ -195,14 +195,14 @@
     "title": "Cypress County Agricultural Service Board Bursary",
     "amount": "$1,000",
     "deadline": "2026-09-30",
-    "audience": "Students entering an agriculture related program at a college or university",
+    "audience": "Cypress County and Medicine Hat students entering agriculture, agri-tech or environmental studies",
     "url": "https://www.cypress.ab.ca/p/agricultural",
     "category": "Trades",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "Medicine Hat",
-    "notes": "The County's page sets the deadline at September 30 each year, not the spring date this listing carried before. Two bursaries are available per calendar year. The same page also points at the separate AAAF Memorial Bursary for agricultural or environmental science students, which is run provincially.",
+    "notes": "The residency rule is wider than the County's name suggests: the application form counts residents of urban areas inside the County's outer boundaries, and names the City of Medicine Hat and the Town of Redcliff outright, so a student living in the city qualifies. That is the opposite of the County Council scholarship that closes the same day, which turns on living in the County itself. Environmental programmes count alongside agriculture, which widens this well past farm kids. You can win it only once, and you need last year's marks plus a letter of acceptance.",
     "active": true,
-    "description": "Cypress County awards two $1,000 bursaries a year to students carrying on to a college or university in an agriculture related program. Applications and supporting documents go to the County's Agricultural Supervisor.",
+    "description": "Cypress County awards two $1,000 bursaries a year to students continuing at a college or university in an in-depth agricultural, agri-tech or environmental programme. Applications and supporting documents go to the County's agricultural fieldman, and the board decides on scholastic standing alongside social and community involvement.",
     "eligibility": {
       "grades": [
         "12"
@@ -211,7 +211,8 @@
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [
-        "agriculture"
+        "Agriculture",
+        "Environmental Science"
       ],
       "minAverage": null,
       "minAge": null,
@@ -37144,6 +37145,50 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
+    }
+  },
+  {
+    "id": 984,
+    "title": "Medicine Hat High School Graduation Awards",
+    "amount": "Varies",
+    "deadline": "2027-05-15",
+    "openDate": null,
+    "audience": "Graduating Medicine Hat High School students",
+    "url": "https://mhhs.mhpsd.ca/graduation",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Medicine Hat",
+    "notes": "Two things decide whether you are considered. The awards information form arrives inside the grad registration package in April and has to be back by May 15, and the package itself is only released to students whose school and grad fees are paid, so an unpaid balance quietly removes you from the whole awards programme. The school also states that it spreads recognition as widely as it can and that a grad is unlikely to receive more than one major award, so winning early does not stack. Cords and the valedictorian title are recognition rather than money.",
+    "applyViaGuidance": true,
+    "active": true,
+    "description": "Medicine Hat High School runs a donor-funded awards programme for its graduates, recognising academic achievement and contribution to the school and community. The school publishes no list of the individual awards or their values, so this one entry stands for the whole programme.",
+    "metaDetail": "One form in the grad package covers the lot.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "MHPSD"
+      ],
+      "specificSchools": [
+        "Medicine Hat High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
     }
   }
 ]

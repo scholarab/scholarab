@@ -268,6 +268,10 @@ export const months: UpdateMonth[] = [
     summary: 'A quieter month on accuracy: dead links, wrong counts, a broken scholarships page.',
     items: [
       {
+        kind: 'fixed',
+        text: 'The Cypress County agricultural bursary said nothing about who may apply. Its form counts urban areas inside the county boundary and names the City of Medicine Hat and Redcliff outright, so city students qualify after all. Its sibling scholarship, closing the same day, does not work that way.',
+      },
+      {
         kind: 'listings',
         text: 'Red Deer gained 24 awards, most of them Red Deer Polytechnic entrance scholarships that one May application covers. Its award portal lists 520 opportunities and 519 of them are closed cycles for students already enrolled, so only the entrance awards are here.',
       },
