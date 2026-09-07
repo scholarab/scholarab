@@ -3412,7 +3412,7 @@
     "category": "Trades",
     "lastVerified": "2026-08",
     "region": "Alberta",
-    "notes": "Separate from the WorldSkills Provincial Champion Scholarship.",
+    "notes": "You do not compete for this one, you qualify by being the top scoring secondary student on Team Alberta at the Skills Canada National Competition, but you do have to claim it. Alberta Student Aid needs an application form and your letter of endorsement from Skills Canada Alberta, and the first payment has to be claimed within two years of that letter. After that you can renew for up to four scholarships in total, as long as each is applied for within ten years of the endorsement. Separate from the WorldSkills Provincial Champion Scholarship, which is the provincial-level award.",
     "active": true,
     "description": "Awarded automatically to the top-scoring secondary student on Team Alberta at the Skills Canada National Competition: $5,000 a year toward post-secondary in their trade, for up to four years. There is no application.",
     "eligibility": {
@@ -3590,7 +3590,7 @@
   {
     "id": 130,
     "title": "Alberta Junior Athletic Award",
-    "amount": "$800",
+    "amount": "$1,000 to $2,000",
     "deadline": "2027-01-15",
     "openDate": "2026-08-01",
     "audience": "Alberta residents competing on a designated provincial junior sport team and entering post-secondary",
@@ -3598,10 +3598,10 @@
     "category": "Sports",
     "lastVerified": "2026-08",
     "region": "Alberta",
-    "notes": "Your team coach nominates you, you do not apply on your own. Nominations reach Alberta Student Aid by January 15. Applications reopen in early August. You submit a transcript and an essay on your extracurriculars and goals.",
+    "notes": "Your team coach nominates you, you do not apply on your own, so the person to talk to is the coach and not a guidance counsellor. Coaches submit nominations to Alberta Student Aid by January 15 and pick their nominees on academic standing, community involvement and athletic achievement, so ask your coach for their own internal deadline because it falls earlier. You send the coach a current official transcript and an essay on your extracurriculars and goals. Seventy awards are shared out each year: 30 through Alberta Junior Football, 30 through the Prairie Baseball Academy and 10 through the Friends of Alberta Junior Hockey Society.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "This $800 award recognizes Alberta residents who compete on designated provincial junior sports teams (ACAC and AUAA sanctioned) and are entering post-secondary studies. To qualify, applicants must maintain a minimum 2.0 GPA and apply through Alberta Student Aid.",
+    "description": "An award of $1,000 to $2,000 for Alberta residents playing on a designated provincial junior team, allocated across Alberta Junior Football, the Friends of Alberta Junior Hockey Society and the Prairie Baseball Academy.",
     "eligibility": {
       "grades": [
         "12"
@@ -3626,7 +3626,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "metaDetail": "Seventy awards a year across football, baseball and hockey."
   },
   {
     "id": 131,
@@ -39640,6 +39641,48 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
+    },
+    "active": true
+  },
+  {
+    "id": 1049,
+    "title": "Alberta Athletic Award",
+    "amount": "$1,800",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Alberta post-secondary athletes competing in ACAC or AUAA sport",
+    "url": "https://studentaid.alberta.ca/scholarships/alberta-athletic-award/",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Worth knowing before you pick a school, because this one is decided inside your institution rather than by a provincial committee. Your athletic department selects the recipients and pays them, so the person to ask is your team coach, not Alberta Student Aid, and there is no public deadline. You need to be in your second or subsequent term, which means a student starting in September can be selected in the winter term of first year. The bar is deliberately low at a 2.0 GPA and 60 percent of a full course load, and selection is split evenly between male and female athletes. Upgrading and college preparation students qualify after one term but only for a single year, and apprentices qualify after one period if they are progressing.",
+    "description": "An $1,800 award from Alberta Student Aid for students competing in a sport sanctioned by the Alberta Colleges Athletic Conference or the Alberta University Athletic Association.",
+    "metaDetail": "Your school's athletic department picks and pays the recipients.",
+    "applyViaGuidance": false,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [],
+      "minAverage": 2,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
     },
     "active": true
   }
