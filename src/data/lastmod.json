@@ -516,8 +516,8 @@
     "date": "2026-09-07"
   },
   "/scholarships/4-h-canada-scholarships/": {
-    "hash": "0e6de0b2ed4e4133",
-    "date": "2026-08-07"
+    "hash": "600503c3ce761dfc",
+    "date": "2026-09-08"
   },
   "/scholarships/a-bernard-mary-b-dixon-memorial-scholarship/": {
     "hash": "74a6aad6e1dc412d",
@@ -578,6 +578,10 @@
   "/scholarships/air-access-bursary/": {
     "hash": "8f6b857b885b3c6e",
     "date": "2026-09-06"
+  },
+  "/scholarships/air-cadet-league-of-canada-national-educational-scholarships/": {
+    "hash": "65aa843c3bcb4f13",
+    "date": "2026-09-08"
   },
   "/scholarships/airdrie-and-district-agricultural-society-scholarship/": {
     "hash": "6754309cb01ed319",
@@ -1474,6 +1478,10 @@
   "/scholarships/clearwater-horse-club-equine-scholarship/": {
     "hash": "ddf027a5e87af03c",
     "date": "2026-09-04"
+  },
+  "/scholarships/cnib-post-secondary-scholarships/": {
+    "hash": "412958151113e8b4",
+    "date": "2026-09-08"
   },
   "/scholarships/cnooc-international-environmental-technology-award/": {
     "hash": "00bf09414d519e68",
@@ -3684,8 +3692,8 @@
     "date": "2026-09-04"
   },
   "/scholarships/remax-quest-for-excellence/": {
-    "hash": "63b6a8a887b84c41",
-    "date": "2026-08-29"
+    "hash": "e1961c2a5550cebd",
+    "date": "2026-09-08"
   },
   "/scholarships/rental-housing-providers-award/": {
     "hash": "6a09b9dcda02172b",
@@ -4371,6 +4379,10 @@
     "hash": "d15d8d90bdf47529",
     "date": "2026-09-07"
   },
+  "/scholarships/unifor-national-and-regional-council-scholarships/": {
+    "hash": "4cf66c5493082b5b",
+    "date": "2026-09-08"
+  },
   "/scholarships/university-of-alberta-turtle-spirit-pathway-award/": {
     "hash": "96ae8417a0e22358",
     "date": "2026-08-20"
@@ -4394,6 +4406,14 @@
   "/scholarships/university-of-lethbridge-high-school-entrance-awards/": {
     "hash": "d621cdc47a691a19",
     "date": "2026-08-02"
+  },
+  "/scholarships/usw-indigenous-post-secondary-scholarships/": {
+    "hash": "b69e449ddf511b8e",
+    "date": "2026-09-08"
+  },
+  "/scholarships/usw-post-secondary-scholarships/": {
+    "hash": "e9b9d2a5ddb2004a",
+    "date": "2026-09-08"
   },
   "/scholarships/utility-safety-partners-scholarship/": {
     "hash": "5fa63405a19df2ea",

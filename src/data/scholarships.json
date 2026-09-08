@@ -119,14 +119,14 @@
     "amount": "$1,000",
     "deadline": "2027-03-15",
     "openDate": "2026-08-24",
-    "audience": "Graduating high school students demonstrating leadership",
+    "audience": "Grade 12 students anywhere in Canada except Quebec",
     "url": "https://blog.remax.ca/quest-official-rules/",
     "category": "Community",
-    "lastVerified": "2026-08",
-    "region": "Medicine Hat",
-    "notes": "Dates confirmed against RE/MAX's own Official Rules on 2026-08-07: the program opens August 24, 2026 and closes March 15, 2027. The old /quest-for-excellence/ landing page 404s between cycles, so this points at the rules page, which stays up year-round.",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Dates and terms confirmed against RE/MAX's own Official Rules on 2026-09-08: the program opens August 24, 2026 and closes March 15, 2027, and forty applicants each receive $1,000. Two things the rules make plain that the marketing does not. Winners are picked by random drawing among entries that clear the essay bar, not ranked on merit, so a strong essay improves nothing beyond eligibility. And residents of Quebec are excluded, as are students finishing through high school equivalency courses. The essay must be at least 500 words on one of three themes: what home means to you, leadership or charity in your community, or a dream you hope to achieve. The /quest-for-excellence/ landing page carries the submission form while a cycle is open and 404s between cycles, so this points at the rules page, which stays up year-round.",
     "active": true,
-    "description": "RE/MAX gives $1,000 to graduating students in the Medicine Hat region heading to post-secondary, with selection weighted toward leadership.",
+    "description": "RE/MAX awards forty $1,000 scholarships to Grade 12 students across Canada who submit an essay on one of three set themes. Recipients are drawn at random from all eligible entries.",
     "eligibility": {
       "grades": [
         "12"
@@ -147,7 +147,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Forty $1,000 awards, drawn at random from eligible entries."
   },
   {
     "id": 14,
@@ -2568,16 +2569,15 @@
   {
     "id": 101,
     "title": "4-H Canada Scholarships",
-    "amount": "$1,000–$4,000",
-    "deadline": "2027-05-31",
-    "audience": "Active 4-H members in Alberta applying to post-secondary or trades programs",
+    "amount": "$1,000 to $4,000",
+    "audience": "Senior 4-H members in Canada heading to post-secondary or a trade",
     "url": "https://4-h-canada.ca/scholarships-awards/scholarships/",
     "category": "Community",
-    "lastVerified": "2026-08",
-    "region": "Alberta",
-    "notes": "Several streams with different amounts and sponsors: MNP ($2,000, business programs), Maizex ($4,000, crop science), Campbellbrook ($2,000, trades and apprenticeship), TD ($3,000, agriculture and agri-business) and John Deere ($1,000). You have to be a senior 4-H member. Deadline is rolled forward from last cycle.",
-    "active": false,
-    "description": "4-H Canada offers scholarships of $3,000 to active and in-good-standing 4-H members in Alberta who are pursuing post-secondary or trades education. Six different scholarship streams are available to support your continued learning. Applicants must demonstrate their commitment to 4-H and meet all membership requirements.",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Six streams, each with its own form at apply.4-h-canada.ca and its own field of study. McDonald's Canada Future of Agriculture, 15 awards of $3,000, for agriculture, food security or food-system programs. John Deere Canada, 15 awards of $1,000, any degree, certificate or trade program, with three of the fifteen allocated to Alberta. TD 4-H Agriculture, 12 awards of $3,000, for agriculture, ag-science or agri-business. Maizex, 5 awards of $4,000, for field crop production or crop science. MNP, 5 awards of $2,000, for business, commerce, accounting, finance, data analytics or public administration. Campbellbrook Fund Trade, 5 awards of $2,000, for a trade or apprenticeship leading to a career supporting agriculture. You must be a current 4-H member in good standing and at least 16 by January 1 of the application year. The 2026 cycle ran April 1 to June 1 and has closed; 4-H Canada has not yet posted 2027 dates, so treat April as the month to check rather than a promise. Verified against the 4-H Canada scholarships page and the MNP, John Deere and Campbellbrook application guidelines on 2026-09-08.",
+    "active": true,
+    "description": "4-H Canada runs six sponsored scholarship streams for senior 4-H members across Canada, worth $1,000 to $4,000 depending on the stream and the field you are heading into. All six are applied for through the same portal.",
     "eligibility": {
       "grades": [
         "12"
@@ -2588,7 +2588,10 @@
         "any"
       ],
       "fields": [
-        "trades"
+        "agriculture",
+        "business",
+        "trades",
+        "Science"
       ],
       "minAverage": null,
       "minAge": null,
@@ -2604,7 +2607,8 @@
       "extracurriculars": [
         "4-H"
       ]
-    }
+    },
+    "metaDetail": "One portal covers all six sponsored streams."
   },
   {
     "id": 102,
@@ -40847,5 +40851,185 @@
     },
     "lastVerified": "2026-09",
     "active": false
+  },
+  {
+    "id": 1081,
+    "title": "USW Post Secondary Scholarships",
+    "amount": "$1,500",
+    "deadline": "2027-06-30",
+    "audience": "United Steelworkers members and their children, age 25 or under",
+    "url": "https://usw.ca/pages/post-secondary/",
+    "category": "General",
+    "region": "National",
+    "description": "The United Steelworkers awards 22 scholarships of $1,500 each year to members and children of members who are heading into post-secondary education.",
+    "notes": "Open to a USW member or the child of a member in good standing who is 25 or younger. The application is a form plus either a three-minute video or a 250-word written statement, in English or French, on one of four set topics. The 22 awards are split across USW Districts 3, 5 and 6 and the national locals; District 3 covers Western Canada including Alberta. You cannot win more than twice. The 2026 cycle closed June 30, 2026 and the date has held to June 30 in recent years, but confirm on the USW page before relying on it. Verified against usw.ca on 2026-09-08.",
+    "metaDetail": "22 awards of $1,500 for USW members and their children.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1082,
+    "title": "USW Indigenous Post-Secondary Scholarships",
+    "amount": "$1,500",
+    "deadline": "2027-06-30",
+    "audience": "First Nations, Inuit or Métis members of USW families",
+    "url": "https://usw.ca/pages/usw-indigenous-scholarships/",
+    "category": "Indigenous",
+    "region": "National",
+    "description": "Six scholarships of $1,500 from the United Steelworkers for First Nations, Inuit and Métis students in USW families who are heading to a Canadian post-secondary institution.",
+    "notes": "Separate from the general USW post-secondary scholarships and judged on its own. Open to active or retired USW members and their children, grandchildren and immediate family who self-identify as First Nations, Inuit or Métis. The six awards are split two apiece across three regions, and Alberta sits in the Western and Northern Canada region. Application is a form plus a three-minute video or a 250-word statement on one of three set topics. The 2026 cycle closed June 30, 2026. Verified against usw.ca on 2026-09-08.",
+    "metaDetail": "Two of the six are set aside for Western Canada.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1083,
+    "title": "Unifor National and Regional Council Scholarships",
+    "amount": "Varies",
+    "audience": "Unifor members and children of members entering first year",
+    "url": "https://www.unifor.org/resources/education/scholarships",
+    "category": "General",
+    "region": "National",
+    "description": "One application to Unifor puts you in the running for 23 named entrance scholarships, awarded to members and children of members starting their first year of full-time post-secondary study.",
+    "notes": "One form, 23 named awards behind it, including the Bob White, Buzz Hargrove, Nelson Mandela, Rosemary Brown and Truth and Reconciliation scholarships. You must be a Unifor member or the child of a member in good standing, a Canadian citizen or permanent resident, and entering your FIRST year of full-time study at a public institution in Canada; these are entrance awards and are not renewable. Children of members also submit a transcript and a letter of recommendation from a teacher, principal or community activist. Quebec residents apply through a separate Quebec Council process. Unifor has not published the award value on its scholarship page, so no amount is claimed here. The 2026 cycle has closed and Unifor's own page says to check back in March 2027 for the awards covering September 2027 entry. Verified against unifor.org on 2026-09-08.",
+    "metaDetail": "Unifor's page says the next details post in March 2027.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1084,
+    "title": "CNIB Post-Secondary Scholarships",
+    "amount": "$1,000 to $8,000",
+    "audience": "Students who are blind, Deafblind or have low vision",
+    "url": "https://www.cnib.ca/en/cnib-post-secondary-scholarships-bursaries",
+    "category": "General",
+    "region": "National",
+    "description": "A single CNIB application considers you for every scholarship you qualify for, worth $1,000 to $8,000, if you are blind, Deafblind or have low vision and heading to post-secondary study anywhere in Canada.",
+    "notes": "One application covers the whole slate: CNIB says submitting it automatically considers you for any scholarship you are eligible for. Graduating high school students can apply, using interim proof of secondary completion. You need best-corrected visual acuity of 20/70 or worse or a visual field of 20 degrees or narrower, and must be a Canadian citizen or have held landed immigrant status for at least a year. Eligible programs include diplomas, degrees, skilled trades certificates and apprenticeships. The 2026/27 cycle has closed; CNIB's page says applications for 2027/28 open in spring 2027. Questions go to scholarships@cnib.ca. Verified against cnib.ca on 2026-09-08.",
+    "metaDetail": "One application covers every CNIB award you qualify for.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1085,
+    "title": "Air Cadet League of Canada National Educational Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "audience": "Air cadets across Canada heading to post-secondary study",
+    "url": "https://aircadetleague.com/description-of-national-education-scholarships/",
+    "category": "General",
+    "region": "National",
+    "description": "A single ACC64 form puts air cadets in the running for the Air Cadet League of Canada's slate of national education scholarships, including engineering and aviation-specific awards.",
+    "notes": "One online form, the ACC64, covers the national slate. The named awards include the Alex Venables Scholarship in Engineering, the Birchall Scholarship, the CAE Limited Scholarships, the Dr. William Weston Scholarship, the KC Lett Scholarships, the Legion National Foundation Scholarship, the Thomas Colfer Scholarship and up to five Royal Canadian Air Force Association Trust awards of $2,500. You must be an air cadet, and the form routes through your Commanding Officer and Squadron Sponsoring Committee Chair, so start with your squadron rather than the website. The League does not publish a per-award amount table, so no single figure is claimed here. The 2026 deadline was April 1, 2026 and April 1 has been the recurring date; confirm with awards@aircadetleague.com before counting on it. Verified against aircadetleague.com on 2026-09-08.",
+    "metaDetail": "One ACC64 form covers the whole national slate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Air Cadets"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
   }
 ]
