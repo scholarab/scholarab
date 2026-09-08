@@ -41759,5 +41759,349 @@
     },
     "lastVerified": "2026-09",
     "active": true
+  },
+  {
+    "id": 1106,
+    "title": "Children's Aid Foundation of Canada Scholarships",
+    "amount": "$5,000 per year",
+    "audience": "Young people who have been in government care",
+    "url": "https://cafdn.org/for-youth/educational-support/",
+    "category": "General",
+    "region": "National",
+    "description": "$5,000 for each academic year until your program is finished, for young people who have been in the care of a child protection authority anywhere in Canada.",
+    "notes": "Until now this site carried exactly one award for youth in or from government care, and it was Alberta-only. This is the national one, and it is the largest of its kind in the country. Eligibility covers anyone who was in temporary or permanent care of the ministry or department responsible for child protection up to their age of majority, OR in permanent care for at least 12 months. You must be under 30, or over 30 with no prior Foundation support. Two things the Foundation says plainly in its own FAQ and that are worth repeating. First, APPLY EVEN IF YOU ARE NOT SURE: you do not need to have applied to schools yet, you fill in the form as best you can and they follow up in the spring. Second, apply even if your marks are not strong, because the decision weighs financial need, persistence and your written answers alongside academic achievement. You reapply every year rather than the award renewing itself. You may need a confirmation of care letter from your child welfare office, though not if you have had Foundation support before. Note that the Foundation is a separate organization from your local Children's Aid Society. The 2026-27 round has closed; the Foundation's page says the 2027-28 application reopens in December 2026. Verified against cafdn.org and the Foundation's scholarship FAQ on 2026-09-08.",
+    "metaDetail": "Apply before you have even picked a school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 30,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": true,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1107,
+    "title": "CIM Taking Flight Grants",
+    "amount": "$5,000",
+    "deadline": "2026-10-30",
+    "audience": "First Nations, Inuit and Métis students heading into mining",
+    "url": "https://cimfoundation.ca/en/brian-and-harold-keevil-endowment-taking-flight-grants",
+    "category": "Indigenous",
+    "region": "National",
+    "description": "Seven grants of $5,000 from the CIM Foundation for First Nations, Inuit and Métis students pursuing a career in mining, and one of the few national awards that takes high school applicants outright.",
+    "notes": "Formally the Brian and Harold Keevil Endowment Taking Flight Grants. Seven grants of $5,000 a year, open to Indigenous students in high school as well as post-secondary, from across Canada, studying at a Canadian school toward a career in mineral extraction or processing. Recipients are judged on community involvement and demonstrated commitment to the mining industry. The CIM Foundation's wider scholarship list is otherwise almost entirely undergraduate and graduate, so this grant is the door in for a Grade 12 student. The deadline is October 30 and a 2026 submission form is posted, so this one is live and close: confirm with the CIM Foundation before counting on the date. Recipients are announced by December 31. Verified against cim.org and cimfoundation.ca on 2026-09-08.",
+    "metaDetail": "One of few national awards open to high school applicants.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Engineering",
+        "Science",
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1108,
+    "title": "Canadian Women in STEM Award",
+    "amount": "$10,000",
+    "audience": "Young women in Canada who have competed in a FIRST robotics program",
+    "url": "https://firstroboticscanada.org/scholarships/",
+    "category": "STEM",
+    "region": "National",
+    "description": "A single $10,000 award from FIRST Robotics Canada for a young woman who has shown leadership and impact through FIRST programs and STEM activities.",
+    "notes": "The largest of the FIRST Canada national scholarships, and a single award, so the field is competitive. You must have taken part in a FIRST program: FIRST LEGO League, FIRST Tech Challenge or the FIRST Robotics Competition. Not renewable. The 2026 deadline was January 31, which is the earliest of the FIRST slate and lands in the middle of Grade 12, so put it in your calendar in the fall rather than the spring. FIRST Canada also runs separate scholarships for skilled trades, Indigenous students, leadership and problem-solving, all listed here, and partner universities in Ontario add their own on top. Verified against firstroboticscanada.org on 2026-09-08.",
+    "metaDetail": "A January deadline, the earliest of the FIRST slate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "FIRST Robotics"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1109,
+    "title": "Don Bossi Leadership and Innovation Canadian Scholarship",
+    "amount": "$5,000",
+    "audience": "FIRST robotics students who have led on their team and in their community",
+    "url": "https://firstroboticscanada.org/scholarships/",
+    "category": "STEM",
+    "region": "National",
+    "description": "A single $5,000 award from FIRST Robotics Canada for a student who has shown outstanding leadership and innovation on their team, at school and in their community.",
+    "notes": "One award, not renewable, and judged on leadership and innovation rather than marks alone. You must have participated in a FIRST program. The 2026 deadline was January 31, the same day as the Canadian Women in STEM Award, so a student eligible for both should prepare one push in January rather than two. Verified against firstroboticscanada.org on 2026-09-08.",
+    "metaDetail": "Shares a January 31 deadline with the Women in STEM award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "FIRST Robotics"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1110,
+    "title": "FIRST Canada Indigenous Scholarship Award",
+    "amount": "$5,000",
+    "audience": "Indigenous students who have taken part in a FIRST robotics program",
+    "url": "https://firstroboticscanada.org/scholarships/",
+    "category": "Indigenous",
+    "region": "National",
+    "description": "A single $5,000 award from FIRST Robotics Canada for an Indigenous student who has participated in a FIRST program and is going on to post-secondary study in any field.",
+    "notes": "Unusually unrestricted on the academic side: your post-secondary program can be in ANY field, not only STEM, so participation in FIRST is the qualifying fact rather than what you intend to study. One award, not renewable. The 2026 deadline was February 15, two weeks later than the other two FIRST scholarships. Verified against firstroboticscanada.org on 2026-09-08.",
+    "metaDetail": "Your program can be in any field, not only STEM.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "FIRST Robotics"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1111,
+    "title": "FIRST Canada Skilled Trade Scholarship",
+    "amount": "$2,500",
+    "audience": "FIRST robotics students heading into a skilled trade or apprenticeship",
+    "url": "https://firstroboticscanada.org/skilledtrades/",
+    "category": "Trades",
+    "region": "National",
+    "description": "Two awards of $2,500 from FIRST Robotics Canada for students who competed on a FIRST team and are heading into a skilled trade or apprenticeship rather than a degree.",
+    "notes": "Aimed squarely at the robotics student who is going into the trades rather than engineering, which most STEM awards quietly exclude. You must have competed on a FIRST Robotics Competition or FIRST Tech Challenge team. Two awards of $2,500, not renewable. The package is a form, a recommendation letter from a high school instructor whose class you actually took, an official high school transcript, and a 500-word essay on your FIRST participation and why you want a trade. Home-schooled applicants should contact the FIRST scholarship committee for substitutes for the letter and transcript. The money is not paid to you: after winning you send FIRST Canada a letter naming the college programme, and it must arrive by the end of the second week of classes. The 2026 deadline was March 15 at 11:59 p.m. ET. Verified against firstroboticscanada.org on 2026-09-08.",
+    "metaDetail": "Built for the robotics student going into a trade.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": [
+        "FIRST Robotics"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1112,
+    "title": "Roly Anderson Memorial Scholarship",
+    "amount": "$1,000",
+    "audience": "FIRST robotics students nominated for hands-on problem solving",
+    "url": "https://firstroboticscanada.org/scholarships/",
+    "category": "STEM",
+    "region": "National",
+    "description": "A $1,000 award from FIRST Robotics Canada for a student who values creative problem solving, likes working with their hands, and leads within their FIRST team.",
+    "notes": "You cannot apply for this one yourself. It runs on a NOMINATION form, so a mentor or team lead has to put your name forward, which means the useful action is to ask your team mentor rather than to fill in an application. One award of $1,000, not renewable. The 2026 nomination deadline was March 15. Verified against firstroboticscanada.org on 2026-09-08.",
+    "metaDetail": "Nomination only; ask your team mentor to put you forward.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "FIRST Robotics"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1113,
+    "title": "Curling Canada Youth Scholarships",
+    "amount": "$2,500 to $3,500",
+    "audience": "Canadian curling student-athletes aged 22 and under",
+    "url": "https://ccfscholarship.ca/",
+    "category": "Sports",
+    "region": "National",
+    "description": "One application covers both the For the Love of Curling and Fran Todd All Heart scholarships, with around twenty awards a year for Canadian curling student-athletes.",
+    "notes": "Two scholarships behind a single application, so there is no reason to pick between them. For the Love of Curling rewards curling performance alongside strong academics and volunteer leadership; the Fran Todd All Heart Scholarship, added in 2025, recognizes student-athletes who give back and share the sport. Curling Canada announced twenty awards in 2026, most at $2,500, with Governor General's Curling Club scholarships at $3,500; the portal itself does not print the amounts, so treat those figures as Curling Canada's own announcement rather than the application terms. Applicants must be 22 or younger as of December 31 of the application year. The window opens May 1 and the 2026 round has closed, with successful candidates notified by August 31. Applications go through the portal at ccfscholarship.ca, which requires creating a profile. Verified against ccfscholarship.ca and Curling Canada's 2026 announcement on 2026-09-08.",
+    "metaDetail": "One application covers both curling scholarships.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 22,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Curling"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1114,
+    "title": "Scouts Canada Scholarship Program",
+    "amount": "Varies",
+    "audience": "Registered Scouts Canada members under 26",
+    "url": "https://www.scouts.ca/programs/scouting-programs/scholarships.html",
+    "category": "General",
+    "region": "National",
+    "description": "Scouts Canada's national scholarship program for registered members entering or continuing full-time study at a Canadian university or college.",
+    "notes": "Listed with a caution: Scouts Canada says it is reviewing the program and intends to relaunch a revised version, and has not published the new amount, award count or deadline. Historic awards ran up to $6,000, one per person, not renewable, but that figure belongs to the old program and is not claimed here. Eligibility as previously published: a currently active and registered Scouts Canada member who has not turned 26 by January 1 of the application year, judged on achievement in academics, community and their Scouting group. The application asked for a 200-word statement on what Scouting has meant to you, two reference letters with only one from inside Scouting, a resume, and a current transcript. Email scholarships@scouts.ca for the relaunch date rather than waiting for the page to change. Verified against scouts.ca on 2026-09-08.",
+    "metaDetail": "Under review; email scholarships@scouts.ca for the relaunch.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 26,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Scouts"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
   }
 ]
