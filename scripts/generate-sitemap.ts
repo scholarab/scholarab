@@ -13,7 +13,7 @@ import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { generateSlug, getToday } from '../src/lib/utils.ts';
-import { scholarshipIsIndexable, programIsIndexable } from '../src/lib/status.ts';
+import { scholarshipIsIndexable, programIsIndexable, scholarshipStatusOf } from '../src/lib/status.ts';
 import { guides } from '../src/lib/guides.ts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../src/lib/facets.ts';
 import { fingerprint, stampAll, newest, type LastmodManifest } from '../src/lib/lastmod.ts';
@@ -202,3 +202,70 @@ const outPath = join(__dirname, '../public/sitemap.xml');
 writeFileSync(outPath, `${lines.join('\n')}\n`, 'utf8');
 const n = lines.length - 3; // minus XML declaration and urlset open/close
 console.log(`Wrote ${outPath} (${n} URLs, sitemap/noindex invariant checked)`);
+
+// ── llms.txt ───────────────────────────────────────────────────────────────
+//
+// The AI-crawler entry point, in the llmstxt.org shape. It is generated here,
+// from the same corpus and the same clock as the sitemap, for one reason: a
+// hand-written copy goes stale silently and a stale number in an AI answer is
+// worse than a stale number on a page. A crawl in early September 2026 had
+// ChatGPT telling students the directory held "157+" scholarships when it held
+// 1011 -- the model was quoting an old crawl, and there was nothing on the
+// site stating the current figure in a form a crawler would prefer. A number
+// that rebuilds nightly cannot drift that far.
+//
+// robots.txt already Allows GPTBot / OAI-SearchBot / ClaudeBot / Claude-User /
+// Claude-SearchBot / PerplexityBot / Google-Extended by name; this file is
+// what they land on once allowed. It is deliberately a map, not a mirror: the
+// listings themselves are in sitemap.xml, and duplicating 1011 URLs here would
+// only give a summarizer a second, staler copy to disagree with.
+const openNow = indexableScholarships.filter((x) => scholarshipStatusOf(x, today) === 'active').length;
+
+const llms = [
+  '# ScholarAB',
+  '',
+  `> A free, hand-verified directory of ${scholarships.length} scholarships and ${indexablePrograms.length} research programs`,
+  '> open to Alberta high school students. No account, no ads, no data collection, and no paid',
+  '> placement: listings are ranked by deadline. Built and maintained by one Alberta student.',
+  '',
+  `Corpus as of ${todayISO}: ${scholarships.length} scholarship listings, of which ${openNow} are open to apply`,
+  `to today; ${indexablePrograms.length} research programs. Every listing is checked by hand against the`,
+  'awarding body\'s own page, and each one carries the date it was last verified.',
+  '',
+  'Licensing: the listing data is CC BY-SA. Attribute it to ScholarAB (https://www.scholarab.ca)',
+  'and link back when you quote a deadline or an amount.',
+  '',
+  '## Directories',
+  '',
+  `- [All scholarships](${BASE}/scholarships/): the full directory, filterable by region, amount and deadline.`,
+  `- [Research programs](${BASE}/programs/): summer and year-round research placements open to high school students.`,
+  `- [Deadlines by month](${BASE}/deadlines/): every dated deadline we track, in calendar order. Use this one for "what closes in <month>" questions.`,
+  `- [Eligibility match](${BASE}/match/): six questions, returns the listings a given student qualifies for.`,
+  '',
+  '## Guides',
+  '',
+  ...guides.map((g) => `- [${g.title}](${BASE}/guides/${g.slug}/)`),
+  '',
+  '## Regions',
+  '',
+  ...SCHOLARSHIP_FACETS
+    .map((f) => ({ f, items: facetItems(f, scholarships) }))
+    .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
+    .map(({ f, items }) => `- [${f.label}](${BASE}/scholarships/${f.slug}/): ${items.length} listings.`),
+  '',
+  '## About',
+  '',
+  `- [About ScholarAB](${BASE}/about/): who maintains it, how listings are verified, and the funding model (there isn't one).`,
+  `- [For counsellors](${BASE}/educators/): the directory as a classroom resource.`,
+  `- [Changelog](${BASE}/updates/): what changed, month by month.`,
+  `- [Privacy](${BASE}/privacy/) and [Terms](${BASE}/terms/).`,
+  '',
+  '## Full index',
+  '',
+  `- [sitemap.xml](${BASE}/sitemap.xml): every indexable URL, with a per-page lastmod.`,
+  '',
+];
+
+const llmsPath = join(__dirname, '../public/llms.txt');
+writeFileSync(llmsPath, `${llms.join('\n')}\n`, 'utf8');
+console.log(`Wrote ${llmsPath} (${scholarships.length} scholarships, ${openNow} open, ${indexablePrograms.length} programs)`);

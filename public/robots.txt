@@ -43,3 +43,6 @@ User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://www.scholarab.ca/sitemap.xml
+
+# https://www.scholarab.ca/llms.txt is the map for the crawlers above: what the
+# corpus holds today, and which page answers which question shape.
