@@ -4,9 +4,66 @@ import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('scholarships-for-lethbridge-students');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'What scholarships are available for Lethbridge students?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Fourteen listings in the directory are scoped to Lethbridge. Most of the money comes from the two post-secondary institutions in the city, with the University of Lethbridge running four separate awards and Lethbridge Polytechnic reaching more than 400 awards worth over $800,000 through a single application.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which Lethbridge scholarships do I need to start preparing for early?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Two. The Health Care Professionals of Tomorrow Scholarship requires you to be a registered AHS volunteer at Chinook Regional Hospital with at least 40 lifetime hours, which cannot be accumulated in your graduating spring, so start in Grade 10 or 11. The Aspiring Artist Award is open from Grade 9 but runs on nominations, so you must ask an art teacher or someone in the local arts community to put you forward.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How do I get the University of Lethbridge Board of Governors Award?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Grade 12 students applying to ULethbridge are automatically considered, with no separate application. It pays $1,000 and runs off the December 15 early admission deadline, which is the earliest date in the Lethbridge cycle.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Are there University of Lethbridge scholarships for Grade 11 students?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes. The Grade 11 Merit Award pays $800 off a 75% average and is submitted before June 30 of your Grade 11 year. Students who wait until Grade 12 to look end up at the Board of Governors Award instead and miss this one entirely.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What is the best return for a single application in Lethbridge?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The Lethbridge Polytechnic form. One application reaches more than 400 awards worth over $800,000, and the same form is how Alberta residents apply for the Jason Lang and Louise McKinney provincial scholarships.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Are the Lethbridge County Community Benefit Scholarship and the Stirling Wind Project scholarship the same award?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes. The county runs it with the Stirling Wind Project and some lists name it the Stirling Wind Project Community Benefit Scholarship, so do not apply twice thinking they are separate. It gives two $2,000 awards to students entering a STEM program, closing June 1.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Lethbridge has a different shape from the rest of southern Alberta: two post-secondary institutions in the city hand out most of the money, and the community awards behind them are small, specific, and thinly applied for. Fourteen listings in <a href="/scholarships/">the directory</a> are scoped here. Two of them need you to have started building a case in Grade 10, so read to the end before you plan your year.
   </p>

@@ -4,9 +4,58 @@ import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('scholarships-for-medicine-hat-students');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'What scholarships are available for Medicine Hat students?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Nineteen listings in the directory are scoped to Medicine Hat. The main pools are the Medicine Hat Catholic Board of Education Foundation\'s six named school awards, the Kin Canada Bursary through the local club, the Redcliff Scholarships for Advanced Education, two Cypress County Agricultural Service Board bursaries, the South Country Co-op scholarship, and Medicine Hat College\'s own awards.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which Medicine Hat scholarship has the best odds?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The Redcliff Scholarships for Advanced Education. In 2026 the committee read eleven applications for three awards worth up to $6,000 each, which is the best ratio in the region. Cypress County\'s two $1,000 agricultural bursaries are also thin on applicants, and their September 30 deadline falls later than almost everything else.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How do I apply for Medicine Hat College scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'One online form enters you for every award you qualify for. MHC hands out over $400,000 a year in scholarships and bursaries, and applications for the next round open March 1, 2027. That same form is how you reach the three Alberta Blue Cross bursaries worth $1,000 each.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What are the requirements for the South Country Co-op scholarship?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'It pays $1,000 by July 31 each year, but your family must hold a membership in good standing and have bought at least $2,000 from the Co-op that fiscal year. Check that before you write the essay.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Does the Community Foundation of Southeastern Alberta give scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. It is often suggested as a source, but it funds charities rather than students and runs no scholarship program.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     If you go to school in Medicine Hat, you have a scholarship advantage most Alberta students don't: a small applicant pool. A community award here might see a dozen applications in a good year, and the committees reading them know your school, your employers, and probably your referee. This guide maps every local pool worth checking, nineteen listings in <a href="/scholarships/">the directory</a> at last count.
   </p>

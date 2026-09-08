@@ -3,9 +3,58 @@ import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
 
 const guide = getGuide('reference-letters-for-scholarships');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'Who should I ask for a scholarship reference letter?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The person who knows you best, not the person with the best title. A teacher who watched you struggle and improve writes a better letter than a principal who knows your name. Coaches, club supervisors, volunteer coordinators and long-term employers are all strong choices. Check the award\'s rules first, since some specify a teacher and some exclude family.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How far in advance should I ask for a reference letter?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Three weeks before the deadline, minimum. Teachers get buried in these requests every October and November, and letters written the night before read like it. If a big fall award like Loran is on your list, ask in September.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How do I ask a teacher for a scholarship reference?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'In person or by a short, direct message: say which award it is, what it rewards, and ask whether they would be comfortable writing you a strong reference. The word "strong" matters, because it gives a lukewarm referee a graceful exit, and a lukewarm letter is worse than none.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What should I give my referee?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'A one-page package: what the award is and what it rewards in one sentence, the deadline and exactly how to submit, three specific things they have watched you do, and two sentences on what you plan to study and why. You are not writing the letter for them, you are handing them the evidence so their letter can be specific.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Why do generic reference letters hurt an application?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Because a reference is the only part of the application you do not write, which makes it the most believable part, and committees know it. A letter saying "responsible student, pleasure to teach" quietly sinks an application. The package you hand your referee is what turns that into a specific, verifiable claim.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     A reference letter is the only part of your application you do not write, which makes it the most believable part. Committees know it. A specific, warm letter moves an application up the pile; a generic one ("responsible student, pleasure to teach") quietly sinks it. The difference is mostly in how you ask.
   </p>

@@ -4,9 +4,58 @@ import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('scholarships-for-red-deer-students');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'What scholarships are available for Red Deer students?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Nineteen listings in the directory are scoped to Red Deer and Central Alberta. They range from single-school awards to the Community Foundation of Central Alberta portal, employer awards through Central Alberta Co-op, and Red Deer Polytechnic entrance scholarships.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which Red Deer scholarships have the best odds?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The ones tied to a single high school, because almost nobody outside the building can apply. Penhold Crossing Secondary School gives three $10,000 Ford Family Scholarships every year, Lacombe Composite has the Brady van der Heide Citizenship Award, and H.J. Cody in Sylvan Lake has the $3,000 Shea Family Education Award for one student a year.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What is the largest recurring scholarship in Red Deer?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The William Arthur Bower Memorial Scholarship, which gives at least five graduating Red Deer Public and Catholic students $5,000 each, renewable for up to four years. It never appears on a public application form because your school hands it out, so ask your counsellor in the first week of September.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How do I apply for Central Alberta Co-op scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Central Alberta Co-op awards ten $1,000 scholarships a year with no restriction on field of study, in a fixed window from April 1 to April 30. The membership test is on the household, so a parent\'s membership counts, but it must be at least a year old with more than $2,500 in purchases. Budget time for the essay and three reference letters.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can I get a Red Deer Polytechnic scholarship without a separate application?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes. The Regional Access and Excellence Scholarship considers you automatically once you complete RDP\'s General Application, if you graduated from a qualifying Central Alberta school such as Lindsay Thurber, Hunting Hills, Notre Dame, Lacombe Composite, Innisfail, Olds, Stettler or Rocky Mountain House.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Red Deer sits in the gap that helps you: too small for the national award machine to bother with, big enough that local money keeps getting endowed. Nineteen listings in <a href="/scholarships/">the directory</a> are scoped to Red Deer and Central Alberta, and several of them are open to the graduates of a single high school. That is the whole advantage. Work it in order of odds rather than in order of dollar value.
   </p>

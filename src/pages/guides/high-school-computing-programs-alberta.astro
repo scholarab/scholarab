@@ -4,9 +4,66 @@ import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('high-school-computing-programs-alberta');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'What computing competitions can Alberta high school students enter?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The Canadian Computing Competition is the one that counts, written at your school on February 17, 2027 with registration closing February 11. Others include CyberTitan, NASA\'s International Space Apps Challenge, the Swift Student Challenge, CyberSci capture-the-flag events, and Hack the North.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which computing programs does a teacher have to register you for?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'About half the list. The Canadian Computing Competition, CyberTitan, Amii\'s K-12 AI literacy kits and the Cisco Networking Academy all run through a teacher or a school board rather than through a student form. If your school does not do any of them, that is worth knowing in September rather than in April, because all four are things one teacher can start.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When does CyberTitan registration close?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Teachers register the team between April and October for a competition that runs October to May. That window closes before most students start thinking about the school year, which is why so few Alberta teams enter.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What computing competitions can I enter without my school?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Four, and three of them are free: NASA\'s International Space Apps Challenge, the Swift Student Challenge for under-18s, CyberSci capture-the-flag events, and Hack the North, which covers travel, food and lodging for accepted students.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Are there computing programs specifically for girls in Alberta?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, and both are underused here. Technovation Girls runs January to May for ages 13 to 18, building and pitching a mobile app or AI solution to industry judges. Hackergal\'s National Ambassador Program covers Grades 9 to 12, and taking part qualifies you for Hackergal\'s scholarship for graduating students.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is a free coding contest better than a paid summer program?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'For an application, generally yes. A tuition-based summer program proves you could afford it. A contest result, a certification or a shipped app proves you did something under a constraint somebody else set, which is what a selection committee is trying to establish.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Computing is the one field where the strongest things a high school student can put on an application cost nothing to enter. It is also the field where the most valuable of them are registered by a teacher rather than by you, which means that for about half this list, the first move is a conversation in a staff room, not a form. Students who do not know that spend the year looking for summer programs to pay for and miss the contest their own school could have entered them in for free.
   </p>

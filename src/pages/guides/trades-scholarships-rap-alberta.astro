@@ -4,9 +4,58 @@ import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('trades-scholarships-rap-alberta');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'What is RAP in Alberta?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The Registered Apprenticeship Program lets Alberta high school students work as paid apprentices while finishing their diploma. You earn a wage, you earn high school credits for your work hours, and those same hours count toward the first period of your apprenticeship after graduation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How do I get into the Registered Apprenticeship Program?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Through your school. Talk to your off-campus education coordinator or guidance counsellor, who connects you with an employer willing to take a registered apprentice. If your school runs trades-related CTS courses, that is the natural on-ramp.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What scholarships are available for RAP and apprenticeship students?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The High School Apprenticeship Scholarship pays $1,000 for Grade 12 students registered as apprentices, and its Bright Futures counterpart pays $2,000. Skills Canada Alberta competition opens a further tier up to the $20,000 Terry Cooke Legacy Scholarship, and energy and construction companies fund trades-specific corporate awards.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can apprentices get the Alexander Rutherford Scholarship?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'It depends on the program. The Rutherford requires full-time enrolment in a post-secondary program at least one semester long. A pre-employment trades certificate or diploma at a college qualifies; the short technical-training blocks inside a standard apprenticeship usually do not. Check your program against Alberta Student Aid\'s rules before counting on it.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Are trades scholarships easier to win than university scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Generally yes, because most applicants chase university-track awards and trades-specific money goes under-applied year after year. Local committees also read a RAP placement the way they read a varsity captaincy: as proof you show up and work.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Scholarship advice in Alberta is written almost entirely for university-bound students, which is strange, because trades students have some of the best-funded and least-competitive money in the province. If you're heading into an apprenticeship, or already earning hours through RAP, this is your map.
   </p>

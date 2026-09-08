@@ -3,9 +3,58 @@ import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
 
 const guide = getGuide('grade-11-scholarship-timeline');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'What is my Grade 11 average worth in scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The Alexander Rutherford Scholarship pays $500 for a Grade 11 five-course average of 75 to 79.9%, and $800 for 80% or higher. That is a posted price rather than a competition. Grade 11 marks also drive early admission and entrance scholarship offers, which are calculated before your Grade 12 finals exist.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can Grade 11 students apply for scholarships in Alberta?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, several. The Horatio Alger Association of Canada Scholarship is open only to Grade 11 students, the University of Lethbridge Grade 11 Merit Award pays on a 75% average, and South Country Co-op takes applicants as early as Grade 10.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is it better to join many clubs or focus on one activity?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Focus on one. Applications reward sustained involvement, not variety: two years of the same volunteer role with growing responsibility beats eight one-off activities. Grade 11 is the last year you can start something and still honestly call it sustained by application season.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What should I do in Grade 11 to prepare for scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Protect your five-course average, go deep on one activity rather than joining many, participate in the classes of teachers you might later ask for a reference, build your award list and turn on deadline reminders, and draft one essay in June while the year is still fresh.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do I need a 90% average to win scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. Most local awards weigh involvement and need over marks, and local awards are where the odds are best. Writing off scholarships because your average is not in the 90s is one of the common Grade 11 mistakes.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Almost every scholarship is paid out in Grade 12, but most of them are won in Grade 11. The marks, the activities, and the relationships that applications ask about are already set by the time senior year starts. Here is what actually matters a year out, and what does not.
   </p>

@@ -3,9 +3,58 @@ import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
 
 const guide = getGuide('volunteering-alberta-high-school');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'Do scholarship committees count volunteer hours?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Not really. Committees read for whether you stayed, not how many hours you logged. One placement held for two years says more than eight things tried once, and it is also less work.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How can Alberta high school students volunteer at a hospital?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Alberta Health Services runs youth volunteer and research placements in regional hospitals and clinics, with direct exposure to clinical environments and health administration. Intake is ongoing rather than a single annual deadline, so the question is whether your site has openings. Placements usually carry a minimum commitment measured in months.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What volunteer placements in Alberta have ongoing intake?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Alberta Health Services hospital placements, TELUS Spark in Calgary, and JA Southern Alberta all take students continuously, so there is no window to wait for. The City of Edmonton Youth Council and the Ocean Networks Canada Youth Advisory Council run on their own terms.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which scholarships reward volunteering?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Community involvement is an explicit criterion on a large share of the directory, at very different scales: TD Scholarships for Community Leadership up to $70,000 nationally, the Clay Riddell Community Hero Scholarship at $8,500 to $10,000 in Calgary, the Calgary Flames Foundation Community Involvement Scholarship at $2,000, the Kelly Creaghan Stepping Up in the Community Award at $2,000 province-wide, and the South Country Co-op Scholarship at $1,000 in Medicine Hat.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is the Duke of Edinburgh Award competitive?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. It is non-competitive and structural: you log hours across physical recreation, a skill, voluntary service and an adventurous journey, and the award is earned rather than won. Nobody is turned down for being a weaker candidate. If you are volunteering anyway, registering means the same hours also produce a recognised international credential.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Most advice about volunteering in high school is about hours. Committees do not count hours; they read for whether you stayed. One placement held for two years says more than eight things tried once, and it is also less work. This is where Alberta students can actually get placed, and which of it is open right now rather than in theory.
   </p>

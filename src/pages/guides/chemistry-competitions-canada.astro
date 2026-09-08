@@ -3,9 +3,66 @@ import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
 
 const guide = getGuide('chemistry-competitions-canada');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'Is there a junior Canadian Chemistry Olympiad?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. The Chemical Institute of Canada, which runs both the contest and the olympiad, publishes no junior division of either, and there is no Grade 9 or Grade 10 track. The eligibility bar is taking chemistry and being under 20, not being in a particular grade, so a Grade 10 student in Chemistry 20 can write the contest.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How do I enter the Canadian Chemistry Olympiad?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'You do not enter it directly. The olympiad runs in conjunction with the Canadian Chemistry Contest and is aimed at the top 5%, so you reach it by doing well on the contest. The only thing you actually have to do is get registered for the contest; everything above it is selection, not application.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When is the Canadian Chemistry Contest?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'For the most recent published cycle it was Wednesday, April 22, 2026, with registration closing at noon EDT on Tuesday, March 31, 2026. The CIC had not published 2027 dates when this was written, but the shape has been stable: register by the end of March, write in late April.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How do I register for the Canadian Chemistry Contest?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'You cannot register yourself. Sign-up runs through a regional or district coordinator, which means a teacher at your school has to enter you. If nobody at your school has heard of the contest, no student there writes it that year, and that is the most common reason an eligible Alberta student never competes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How is selection for the chemistry National Camp scored?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Across three pieces: the problem sets are worth 5%, a take-home exam 15%, and the olympiad exam itself 80%, with the camp taken from roughly the top 10% on the combined score. A student who does not complete the take-home exam is not eligible for the National Camp or the International Chemistry Olympiad at all, regardless of their exam mark.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When are the Canadian biology, chemistry and physics olympiad qualifiers?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'All three cluster in April. The Canadian Chemistry Contest is written in late April, the Canadian Biology Olympiad exam in early April, and you qualify for the Canadian Physics Olympiad by writing the CAP High School Prize Exam in mid-April. That is also when Grade 12 diploma prep starts, so decide in February which ones you are writing.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Chemistry competitions in Canada look like several separate contests and are really one ladder with a confusing set of names. There is one entry point, and if you miss it in April there is no second door that year. This is the whole structure, in the order you meet it.
   </p>

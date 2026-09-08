@@ -3,9 +3,66 @@ import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
 
 const guide = getGuide('loran-award-guide');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'How much is the Loran Award worth?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Loran publishes the award as approximately $150,000 over four years. It is four separate things rather than a cheque: a $12,000 annual stipend paid to you, a full tuition waiver each year at one of Loran\'s partner universities, up to $14,000 for the summer experiential learning program, and one-on-one mentorship from a business or community leader.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What average do you need for the Loran Award?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'An 88% minimum cumulative average, calculated from Grade 10, 11 and 12 courses only. Grade 9 marks are not counted. CEGEP students apply on a separate track with an R score of 29 or higher.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When is the Loran Award deadline?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Applications for the 2027 class open September 9, 2026 and close October 15, 2026 at noon Eastern, a window of roughly five weeks that falls in the first six weeks of Grade 12.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do Loran finalists who do not win get anything?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, and this is the least advertised fact about the award. Up to 54 Loran Finalists receive $6,000 each, and up to 70 Provincial and Territorial Award recipients receive $3,000 each. More than a hundred students get real money beyond the pool who become Loran Scholars.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is a 90% average enough to be competitive for Loran?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. Clearing 88% makes you eligible, not strong. Loran states plainly that it looks beyond grades, and the students who get through have a long, specific record of service and leadership rather than the highest marks.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Who is eligible to apply for the Loran Award?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Loran publishes three pass-or-fail requirements for the high school stream: an 88% cumulative average across Grades 10 to 12, Canadian citizenship or permanent resident status, and entering university for the first time in September 2027, born between January 1, 2005 and September 1, 2011.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     The <a href="/scholarships/loran-scholarship/">Loran Award</a> is the largest undergraduate award a Canadian high school student can win, and it is the one most strong candidates talk themselves out of. Applications for the 2027 class open <strong>September 9, 2026</strong> and close <strong>October 15, 2026 at noon Eastern</strong>, which is roughly five weeks. That is the whole window, and it falls in the first six weeks of Grade 12, before most schools have said the word "scholarship" out loud.
   </p>

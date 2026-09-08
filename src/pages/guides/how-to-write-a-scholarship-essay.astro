@@ -3,9 +3,82 @@ import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
 
 const guide = getGuide('how-to-write-a-scholarship-essay');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'How do I start a scholarship essay?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Inside a specific moment, not your life story. One scene beats any sentence containing the word "passionate". Specifics are proof and adjectives are claims, so open with the afternoon that proves your point rather than a statement about what kind of person you are.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What structure should a scholarship essay follow?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Four parts: start inside a specific moment, show the action you took that someone else in the same spot would not have, say what changed both in the situation and in you, then connect it to what the award\'s money does in one short paragraph.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can I reuse the same essay for multiple scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes, but re-aim it rather than recycling it. You are re-cutting one piece of raw material against a different rubric: the middle stays and the framing moves. Print the award description, underline its nouns, and check that each appears in your essay as an event rather than as a word.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What are the most common scholarship essay mistakes?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Recycling without re-aiming, listing activities instead of showing depth on one or two, writing to sound impressive, ignoring the word limit, and submitting the first draft. Hitting 490 of 500 words shows control; going over shows the opposite.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What should I cut when my scholarship essay is over the word limit?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'In this order: the wind-up (your real first sentence is usually the third or fourth), adverbs and intensifiers, anything the application form already says, the second example if you have two stories, and the closing moral that explains what the story means.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Should I use AI to write my scholarship essay?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Not to write it. An essay generated wholesale reads like one, because it produces the average of everything written on the topic and the average is exactly what committees filter out. Some awards now ask you to attest the work is your own. It does help with the parts that are not the writing: finding the scene, understanding what a committee weighs, or flagging which of your sentences are claims rather than evidence.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What if I have nothing dramatic to write about?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'You do not need a dramatic story. Committees in Alberta read winning essays about coaching a younger sibling\'s hockey team, translating at a parent\'s appointments, and keeping a job through exam season. Ordinary responsibilities described specifically are the material. What sinks essays is vagueness, not a quiet life.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How long does writing a scholarship essay take?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'About four short sittings rather than one long one, spread over roughly a week: 40 minutes to draft the scene badly and completely, two days away from it, 30 minutes to cut to the limit, 15 minutes reading it out loud, then one adult who knows you reads it. Three of those steps are waiting, and waiting cannot be compressed.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Scholarship committees read stacks of essays in one sitting. Most of them open the same way: "I have always been passionate about helping others." The reader's eyes slide off it. Your only job is to be the essay that makes them slow down. That is a structure problem, not a talent problem.
   </p>

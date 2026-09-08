@@ -4,9 +4,66 @@ import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('high-school-research-programs-alberta');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'What research programs are open to Alberta high school students?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The paid ones are HYRS, the High School Youth Researcher Summer program run by Alberta Innovates, and the WISEST Summer Research Program at the University of Alberta. Both are about six weeks, both are Grade 11, and both pay you as a research assistant. Unpaid or open-entry options include Youreka Canada, Heritage Fairs, ISSYP at Perimeter Institute and SHAD.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which HYRS campus do I apply to?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Where you live decides it, not preference. North of Red Deer applies to HYRS at the University of Alberta, south of Red Deer down to north of Claresholm applies to the University of Calgary, and Claresholm and south applies to the University of Lethbridge. Applying to the wrong campus is not a tie-break in your favour, it is the wrong form.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What are the HYRS requirements?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Grade 11, with at least 85% in Math 20-1 or 20-2, Biology 20, and one other Grade 11 science. Alberta Innovates notes that a strong equity justification can be considered, so if your marks are close and your circumstances explain the gap it is worth asking rather than assuming.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When is the HYRS deadline?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Each campus sets its own deadline and posts it on its own page. In practice they land in March for a July start, but check your campus page for the exact date rather than trusting a date you read in the fall.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What research programs take Grade 9 and 10 students?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Youreka Canada takes Grades 9 to 12 and pairs you with an undergraduate mentor for a ten-week citizen-science project, with no marks gate. Heritage Fairs run from Grade 7 to 12 and are under-applied by high schoolers who assume they aged out. SHAD runs a month on a university campus for Grades 10 and 11.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Are paid research programs like Polygence worth it?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'They are real, not scams, and both Polygence and Pioneer Academics pair you with an academic mentor for a project you can point at. But they are a different kind of thing from HYRS: one pays you to work in a lab because they want the labour, the other charges you for mentorship. If money is the constraint, exhaust the paid and free options first.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Most Alberta students find out that high school research programs exist about a year after they stopped being eligible for the best one. The paid placements want you in Grade 11, they close in March, and they are advertised almost entirely through science teachers who happen to know about them. This is the map: who takes you, what they ask for, and what to do if you have already missed the window.
   </p>

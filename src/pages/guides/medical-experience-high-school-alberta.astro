@@ -4,9 +4,66 @@ import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('medical-experience-high-school-alberta');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'How can a high school student in Alberta get medical experience?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Three routes that need no connections: Alberta Health Services youth volunteering, which puts you in a clinical building on a regular schedule from age 15; Discovery Days in Health Sciences, a one-day event on a medical campus that your school registers you for; and health science competitions such as HOSA Canada, the Brain Bee and the Canadian Biology Olympiad that you can enter from your own classroom.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Can high school students shadow a doctor in Alberta?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Shadowing is the hardest thing to arrange and the least likely to happen, and it is not what the routes in this province are built around. The AHS youth volunteer program is the realistic equivalent: it is the only route that puts you in a clinical building on a regular schedule, and it does not require knowing anybody.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What age do you have to be to volunteer at an Alberta hospital?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Fifteen. You apply through your local facility rather than through a provincial form, and placements run a semester or a year. Intake is ongoing rather than deadline-driven, so the constraint is how many placements that facility has. Placements exist in the South Zone as well as the cities.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What health science competitions can Alberta high school students enter?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'HOSA Canada runs about thirty events from medical terminology to veterinary science, through school chapters that take five registered students, a student president and a teacher advisor to start. The Brain Bee holds regional neuroscience competitions in Calgary and Edmonton. The Canadian Biology Olympiad is written online in early April for Grades 11 and 12 and is entirely self-study.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What marks does the HYRS research program require?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'At least 85% in Math 20, Biology 20 and one more science. It is a Grade 11 program, so those courses have to already be on your timetable by Grade 11, which is the most common way students remove themselves from it without noticing. Which campus you apply to is decided by where you live rather than by preference.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Are paid summer medical programs worth it?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Some are excellent, but the distinction that matters is not price, it is what the program can honestly claim. A paid course teaches you material; a volunteer placement or research assistantship puts you somewhere a person can later write a letter about. Both are worth doing, but only one of them is scarce, and it is the free one.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Almost every Alberta student who wants medicine asks the same question, and almost always means the same thing by it: how do I shadow a doctor. The honest answer is that shadowing is the hardest thing on this list to arrange and the least likely to happen, and it is not what the routes in this province are built around. What exists instead is a hospital volunteer program that opens at 15, a one-day event on a medical campus that your school signs you up for, and a set of competitions you can enter from your own classroom. All three are real, all three are free, and none of them require knowing somebody.
   </p>

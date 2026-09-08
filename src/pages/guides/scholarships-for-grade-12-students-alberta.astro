@@ -4,9 +4,74 @@ import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 
 const guide = getGuide('scholarships-for-grade-12-students-alberta');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'When should Grade 12 students start applying for scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Before September. The most valuable national awards close earliest, and the big fall ones are gone by Halloween. Assembling your application kit in August or the first week of September turns each later application from an evening of work into twenty minutes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What scholarships close in the fall in Alberta?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The Loran Award opens September 9 and closes October 15. The Advancing Futures Bursary and the RBC Ignite Scholarship close at the start of October, the ATCO Indigenous Education merit award the day after, and the Keyera Peter J. Renton Memorial, Anna and John Kolesar Memorial and Tiessen Foundation broadcast awards all land on October 31.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What is the densest scholarship deadline day for Alberta students?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'November 1 in the fall, when the First Nations, Metis and Inuit Bursary, the Cenovus Energy Indigenous Scholarship, Indspire Building Brighter Futures and the ATB Financial Bursary all close. February 1 is the winter equivalent, carrying the Alberta Masonic Higher Education Bursary and the Kin Canada Bursary.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How many scholarships should a Grade 12 student apply to?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Somewhere between eight and fifteen real applications across the year, weighted toward awards where the applicant pool is small enough that a good application can win. More than most students think, and far fewer than a list of two hundred.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is it too late to apply for scholarships in March of Grade 12?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No, and what is left is the better half for most students. Spring is when city bursaries, service clubs, community foundations and employer awards close. They are smaller, often $500 to $1,000, but the pools are tiny, and more awards close in May than in any other month.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What is the order of the Grade 12 scholarship year?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Big national awards in the fall, nominated and institutional awards in winter, local awards in spring, and the Alexander Rutherford Scholarship after graduation. The money gets smaller and the odds get better as the year goes on.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Why do internal school deadlines matter for nominated awards?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Because they are always earlier than published ones. For a nominated award like Schulich Leader Scholarships, the date that matters to you may be six weeks before the one published on the award\'s own site. Ask your guidance counsellor which awards your school can nominate for and when its internal deadline falls.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     Grade 12 scholarship season is not one deadline, it is a rolling series of them from September to June. Most students find out about the big fall awards in spring, after they have closed. This is the timeline that prevents that.
   </p>

@@ -3,9 +3,58 @@ import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
 
 const guide = getGuide('local-scholarships-better-odds');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'Are local scholarships easier to win than national ones?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Substantially. A national award paying $10,000 to 10,000 applicants has an expected value of about a dollar; a local award paying $1,000 to 25 applicants is worth about forty. The local one also takes less time, and the same essay and reference letter usually work for several of them.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Where do I find local scholarships in Alberta?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The usual sources are your guidance office (some awards are distributed only through schools), city and county programs, service clubs such as Rotary, Lions, Elks and Legion branches, community foundations that administer many small named funds, and employers and unions, both yours and your parents\'.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Why do local scholarship committees favour ordinary applicants?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'They know your context, including your school and often your referee. Many local awards go under-applied, with pools in single digits some years, so a complete and sincere application can win almost by arriving. They also read part-time jobs, farm work and coaching as the point rather than as filler.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Should I skip national scholarships and only apply locally?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. Apply to national awards where you are genuinely competitive, but stop treating small local awards as the consolation round. Small awards stack, and $1,000 three times is a semester\'s tuition.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do all community foundations fund student scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No, and this catches students out. Plenty of them, including the Community Foundation of Southeastern Alberta, give only to charities rather than to students. Check whether the foundation near you actually funds students before applying.',
+      },
+    },
+  ],
+};
 ---
 
 <SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
   <p>
     A $70,000 national scholarship gets tens of thousands of applicants. A $1,000 award from a Medicine Hat service club might get twenty. Students chase the first kind and ignore the second, which is exactly backwards if the goal is money for school rather than a line for a resume.
   </p>
