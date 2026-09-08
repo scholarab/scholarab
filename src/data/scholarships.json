@@ -40776,5 +40776,76 @@
     },
     "lastVerified": "2026-09",
     "active": false
+  },
+  {
+    "id": 1079,
+    "title": "editing.services Scholarship",
+    "amount": "$1,000 USD",
+    "audience": "Students aged 18 or older attending or about to attend an accredited college, university or trade school",
+    "deadline": "2026-11-29",
+    "url": "https://www.servicescape.com/scholarship",
+    "category": "General",
+    "region": "National",
+    "description": "A $1,000 USD award on a 300 word essay answering how writing impacts today's world. The contest runs a full year, from November 30 to November 29, and past winners are published.",
+    "notes": "Two things to check before you spend time on it. You must be at least 18 on entry, which rules out a good share of Grade 12 students, and the award is in US dollars. This was listed on Alberta counsellor sheets as the ServiceScape scholarship; the company has since rebranded to editing.services and the old name still points at the right page.",
+    "metaDetail": "You must be 18 to enter, which excludes many Grade 12 students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 18,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1080,
+    "title": "Haywood Hunt Annual Scholarship",
+    "amount": "Varies",
+    "audience": "Canadian post-secondary students; the firm publishes its criteria when each cycle opens",
+    "url": "https://www.haywoodhunt.ca/scholarship.html",
+    "category": "General",
+    "region": "National",
+    "description": "An annual award from a Canadian investigations firm. The current cycle has closed and the winner was announced in early September, so the page to watch reopens ahead of the next round.",
+    "notes": "Listed here because the cycle is genuinely current rather than abandoned, but be aware the provider strips the page down to a closure notice between rounds, so the amount and the entry criteria are not published year-round. Check the page before building any plan around it.",
+    "metaDetail": "Criteria are only published while the cycle is open.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": false
   }
 ]
