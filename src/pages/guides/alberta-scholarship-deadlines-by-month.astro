@@ -1,0 +1,180 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+import { QUIZ_DURATION } from '../../lib/quiz';
+
+const guide = getGuide('alberta-scholarship-deadlines-by-month');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'What month do most Alberta scholarships close?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'May, by a wide margin. Of the 644 dated scholarship deadlines in the directory, 259 fall in May. That is more than three times April, the next busiest month, and it is the month most Grade 12 students have stopped looking because they already hold an acceptance letter.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What scholarships close in September and October in Alberta?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'September holds 21 dated deadlines, including the Charmaine Letourneau Scholarship, the UFCW Local 401 Scholarships and the Cypress County Agricultural Service Board Bursary on September 30. October holds 24, and they are the most valuable of the year: the Loran Award closes October 15 at roughly $150,000, the Advancing Futures Bursary at $40,000 closes October 1, and the Alex Decoteau Award of Honour and Keyera Peter J. Renton Memorial both close October 31.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'What scholarships close in November in Alberta?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Only seven dated deadlines, but they carry the largest amounts of the year after Loran. The Wolf Scholars Program at $80,000 closes November 2 and TD Scholarships for Community Leadership at $70,000 closes November 15. November 1 alone carries the First Nations, Metis and Inuit Bursary at $11,500, the Cenovus Energy Indigenous Scholarship at $5,000 and the ATB Financial Bursary.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which single day has the most Alberta scholarship deadlines?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'May 30, with 86 awards closing on it, followed by May 1 with 75 and December 18 with 67. These are not coincidences. Each spike is an administrator booking a whole portfolio on one date: 66 of the December 18 awards belong to a single college, and 75 of the May 30 awards are administered by EducationMatters, the Calgary Board of Education foundation.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Are January and February good months to look for Alberta scholarships?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'They are the two quietest months in the calendar, with 5 and 8 dated deadlines. But the winter awards are heavily nominated ones: Schulich Leader Scholarships at $100,000 closes January 27 and requires a school nomination, and the Terry Fox Humanitarian Award at $28,000 closes February 1. The internal school deadline for a nominated award is always earlier than the published one.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is it too late to apply for scholarships in the spring?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No. Spring is where most of the calendar is. April, May and June together hold 417 of the 644 dated deadlines, which is roughly two out of every three awards in the year. They are smaller and more local than the fall awards, which is exactly why the applicant pools are small enough to win.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'When does the Alexander Rutherford Scholarship close?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'It does not. The Rutherford has no closing deadline, which is why it appears in no month on this calendar. The application opens August 1 and you submit it once you are enrolled full-time in post-secondary and your final transcripts are available.',
+      },
+    },
+  ],
+};
+---
+
+<SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
+  <p>
+    The scholarship year does not run at a steady pace, and almost every piece of advice written about it implies that it does. Of the 644 dated scholarship deadlines in this directory, 259 fall in a single month, and it is not the month anyone expects. This is the calendar as the data actually has it, month by month, with what closes when and why the shape is the way it is.
+  </p>
+
+  <h2>The shape of the year in one table</h2>
+  <p>
+    Every dated scholarship deadline in the directory, counted by the month it falls in:
+  </p>
+  <table>
+    <thead>
+      <tr><th>Month</th><th>What it holds</th><th>Deadlines</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>January</td><td>Nominated awards. Schulich closes the 27th.</td><td>5</td></tr>
+      <tr><td>February</td><td>Terry Fox Humanitarian, Kin Canada, Masonic bursary.</td><td>8</td></tr>
+      <tr><td>March</td><td>Edmonton foundations and the Metis awards.</td><td>31</td></tr>
+      <tr><td>April</td><td>Spring opens. Local and regional awards.</td><td>72</td></tr>
+      <tr><td>May</td><td>The largest month, by more than three times. Local.</td><td>259</td></tr>
+      <tr><td>June</td><td>Second largest. City and county awards.</td><td>86</td></tr>
+      <tr><td>July</td><td>Quiet. A few union and institutional awards.</td><td>19</td></tr>
+      <tr><td>August</td><td>Institutional entrance bursaries.</td><td>38</td></tr>
+      <tr><td>September</td><td>The fall opens. Co-op and county awards.</td><td>21</td></tr>
+      <tr><td>October</td><td>The most valuable month. Loran closes the 15th.</td><td>24</td></tr>
+      <tr><td>November</td><td>Fewest deadlines, largest single awards.</td><td>7</td></tr>
+      <tr><td>December</td><td>Institutional portfolios booked on one date.</td><td>74</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Two things in that column are worth stopping on, because between them they explain most of what students get wrong about timing.
+  </p>
+
+  <h2>May is the whole ballgame, and nobody is looking</h2>
+  <p>
+    259 of 644 deadlines fall in May. April, May and June together hold 417, which is roughly two out of every three dated awards in the year. The spring is not the leftovers of the scholarship calendar. It is the calendar.
+  </p>
+  <p>
+    It is also the stretch students sleepwalk through, and the reason is structural rather than lazy: by May a Grade 12 student has an acceptance letter, the urgency has drained out, and diploma exams are in the way. The awards still open are smaller, usually $500 to $2,000, and local. That combination is exactly what <a href="/guides/local-scholarships-better-odds/">makes them winnable</a>. A May award drawing thirty applicants from your own city is a far better use of an evening than a national award you were never going to place in.
+  </p>
+
+  <h2>The money and the odds run in opposite directions</h2>
+  <p>
+    October and November hold 31 deadlines between them, the two thinnest months of the school year. They also hold almost every large award on the site: the <a href="/guides/loran-award-guide/">Loran Award</a> at roughly $150,000 on October 15, the Wolf Scholars Program at $80,000 on November 2, TD Scholarships for Community Leadership at $70,000 on November 15, and the Advancing Futures Bursary at $40,000 on October 1.
+  </p>
+  <p>
+    So the fall asks for the most work at the moment you have the least time, for the awards you are least likely to win, and it does it in the first ten weeks of Grade 12. That is not an argument for skipping it. The consolation tiers alone make Loran worth five weeks. It is an argument for knowing that the fall is a small number of expensive bets and the spring is a large number of cheap ones, and budgeting your year accordingly rather than treating every deadline as equally urgent.
+  </p>
+
+  <h2>The spikes are administrators, not coincidence</h2>
+  <p>
+    Three single days carry more awards than most whole months:
+  </p>
+  <ul>
+    <li><strong>May 30, 86 awards.</strong> 75 of them are administered by EducationMatters, the Calgary Board of Education's foundation, with another seven through the Calgary Foundation.</li>
+    <li><strong>May 1, 75 awards.</strong> A genuine mix, including 24 more EducationMatters awards and six from CPA Alberta.</li>
+    <li><strong>December 18, 67 awards.</strong> 66 of these are Keyano College awards, published together in one student award booklet.</li>
+  </ul>
+  <p>
+    This matters practically rather than as trivia. When you see dozens of awards sharing a date, you are usually looking at one institution's portfolio, which means one administering body, one set of rules, and often one application that considers you for everything you qualify for. A date that looks like 66 deadlines can be an afternoon's work. Check the administrator before you assume the date is impossible.
+  </p>
+
+  <h2>Month by month, with what to actually do</h2>
+
+  <h3>September and October: the expensive ones</h3>
+  <p>
+    September holds 21 deadlines, and its own awards are quietly some of the least competed on the site: the Charmaine Letourneau Scholarship, the two UFCW awards and the Cypress County Agricultural Service Board Bursary all close September 30. October holds 24 and is the most valuable month of the year. If you are reading this in September of Grade 12, the Loran application is the thing to start this week, and the <a href="/guides/reference-letters-for-scholarships/">reference letters</a> are the thing to ask for before the November crush.
+  </p>
+
+  <h3>November and December: leadership awards, then the institutions</h3>
+  <p>
+    November has the fewest deadlines of any month and the largest amounts. November 1 alone carries the First Nations, Metis and Inuit Bursary, the Cenovus Energy Indigenous Scholarship and the ATB Financial Bursary. December then jumps to 74, almost entirely because institutional portfolios land in it, and it holds the UCalgary Pathways to Medicine Scholarship at up to $20,000 on December 1 and the University of Lethbridge early admission date on December 15 that carries its Board of Governors Award with it.
+  </p>
+
+  <h3>January to March: the nominated round</h3>
+  <p>
+    44 deadlines across three months, the quietest stretch in the year. What is here is disproportionately nominated or institutional: Schulich Leader Scholarships at $100,000 on January 27 needs a school nomination, and the Terry Fox Humanitarian Award at $28,000 closes February 1. For anything nominated, the date that binds you is your school's internal one, which is always earlier than the published one and is sometimes six weeks earlier. Ask your counsellor in January which awards your school can nominate for.
+  </p>
+  <p>
+    March picks up to 31 as the Edmonton foundations open: the Winspear Fund classical music scholarships, the Ranald and Vera Shean Memorial Scholarships and the Belcourt Brosseau Metis Awards all close March 31.
+  </p>
+
+  <h3>April to June: where the awards actually are</h3>
+  <p>
+    417 deadlines. This is the part of the year worth planning properly, and the plan is boring: one strong essay, one reference package, and apply to everything you plausibly qualify for. April 10 and April 1 both carry clusters, May 1 and May 30 are the two biggest days on the calendar, and June 1 carries 42 more. Filter the directory to your own region and work down it.
+  </p>
+
+  <h3>July and August: the ones nobody thinks to check</h3>
+  <p>
+    57 deadlines across the summer, after most students have stopped thinking about it entirely. August is mostly institutional entrance bursaries, and July holds union and community awards including the NUPGE Tommy Douglas and Terry Fox Memorial scholarships on July 15. If you graduated in June and assumed the year was over, it was not.
+  </p>
+
+  <h2>The award that is in no month</h2>
+  <p>
+    The <a href="/guides/alexander-rutherford-scholarship-guide/">Alexander Rutherford Scholarship</a> has no closing deadline, which is why it appears nowhere on this calendar and why students forget it exists. It opens August 1, you apply once you are enrolled in post-secondary with final transcripts available, and it pays up to $2,500 for marks you already earned. It is the one piece of the year with no date attached and no competition, and it is the most commonly missed money in Alberta.
+  </p>
+
+  <h2>How to use the calendar</h2>
+  <ul>
+    <li><strong>Read two months ahead, not twelve.</strong> The <a href="/deadlines/">deadline calendar</a> lists every dated deadline in order with live status. In September, the only rows that matter are September and October.</li>
+    <li><strong>Weight your effort toward spring.</strong> Two thirds of the awards are in April, May and June, and they are the ones with pools you can count.</li>
+    <li><strong>Check the administrator on a crowded date.</strong> Dozens of awards on one day usually means one body and often one application.</li>
+    <li><strong>Do the Rutherford regardless.</strong> It has no deadline to miss and no competition to lose.</li>
+  </ul>
+  <p>
+    Counts on this page are drawn from the 644 scholarship listings in the directory that carry a specific calendar date, and they move as listings are added and cycles roll over. Awards with rolling, ongoing or unannounced dates are not counted here and are not therefore unavailable. The <a href="/scholarships/">full directory</a> shows live status for all of them, and the match quiz takes {QUIZ_DURATION} and narrows the calendar to what your grade and region actually qualify you for.
+  </p>
+</SabGuide>

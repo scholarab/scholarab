@@ -371,6 +371,28 @@ export const guides: GuideMeta[] = [
       'They hide in guidance offices, city and county programs, service clubs and community foundations. Ask for the list directly.',
     ],
   },
+  {
+    slug: 'alberta-scholarship-deadlines-by-month',
+    // Written against a measured gap rather than a guessed one. In September
+    // 2026 a grounded search for "Alberta scholarship deadlines list grade 12"
+    // returned no ScholarAB result at all and closed by recommending
+    // studentaid.alberta.ca; the page that should have won it, /deadlines/, is
+    // a calendar tool with almost no prose for a crawler to rank. This is the
+    // document version of the same corpus, and the one internal link into
+    // /deadlines/ from a page that is all content.
+    title: 'Alberta scholarship deadlines, month by month',
+    description:
+      'When Alberta scholarships actually close: 644 dated deadlines by month, why May carries 259 of them, and the single dates that hide dozens of awards.',
+    kicker: 'THE CALENDAR',
+    minutes: 7,
+    datePublished: '2026-09-07',
+    dateModified: '2026-09-07',
+    takeaways: [
+      'May carries 259 of the 644 dated deadlines, more than three times any other month, and it is the month students stop looking.',
+      'The spikes are administrators, not coincidence: 66 awards share December 18 because one college books them all on one date.',
+      'The money and the odds run in opposite directions. October and November hold the six-figure awards and 31 deadlines between them.',
+    ],
+  },
 ]
 
 export function getGuide(slug: string): GuideMeta {
