@@ -795,6 +795,10 @@
     "hash": "89d286aceb1456f7",
     "date": "2026-09-04"
   },
+  "/scholarships/army-cadet-league-of-canada-awards-and-bursaries/": {
+    "hash": "066671f083cc0775",
+    "date": "2026-09-08"
+  },
   "/scholarships/arnup-louis-award/": {
     "hash": "5f5cca9937a42976",
     "date": "2026-09-04"
@@ -1951,6 +1955,10 @@
     "hash": "a9ad5acfebde1474",
     "date": "2026-09-04"
   },
+  "/scholarships/filipino-canadian-national-scholarship-program/": {
+    "hash": "c196bb11050a48ea",
+    "date": "2026-09-08"
+  },
   "/scholarships/finning-canada-environmental-studies-award/": {
     "hash": "e6dcdb051cb46acc",
     "date": "2026-09-04"
@@ -2142,6 +2150,10 @@
   "/scholarships/geraldine-macintosh-memorial-bursary/": {
     "hash": "6177877597aa3354",
     "date": "2026-08-28"
+  },
+  "/scholarships/girl-guides-of-canada-national-scholarship-program/": {
+    "hash": "274e75a807403f0d",
+    "date": "2026-09-08"
   },
   "/scholarships/gish-law-scholarship-in-english-30-1/": {
     "hash": "89aad3f3a72f9aa2",
@@ -2335,9 +2347,25 @@
     "hash": "ccfa3e94de93df95",
     "date": "2026-09-05"
   },
-  "/scholarships/horatio-alger-association-of-canada-scholarship/": {
-    "hash": "66a0fb709d5b7bd1",
-    "date": "2026-08-25"
+  "/scholarships/horatio-alger-canadian-scholarships/": {
+    "hash": "c5d7391d48ce96fa",
+    "date": "2026-09-08"
+  },
+  "/scholarships/horatio-alger-crown-lift-vocational-and-technical-education-scholarships/": {
+    "hash": "5a0dfd41dd4cb96c",
+    "date": "2026-09-08"
+  },
+  "/scholarships/horatio-alger-indigenous-achievement-scholarships/": {
+    "hash": "84c000ab5c900146",
+    "date": "2026-09-08"
+  },
+  "/scholarships/horatio-alger-national-entrepreneurial-scholarships/": {
+    "hash": "de500518d221ac03",
+    "date": "2026-09-08"
+  },
+  "/scholarships/horatio-alger-vocational-and-technical-education-scholarships/": {
+    "hash": "72c155225ba50705",
+    "date": "2026-09-08"
   },
   "/scholarships/horse-lake-education-fund/": {
     "hash": "a541b2db4fb2632a",
@@ -2474,6 +2502,10 @@
   "/scholarships/jaydon-sommerfeld-memorial-bursary/": {
     "hash": "57491c9aa2d96053",
     "date": "2026-09-07"
+  },
+  "/scholarships/jean-lumb-awards/": {
+    "hash": "fd8d36d89e8c48bb",
+    "date": "2026-09-08"
   },
   "/scholarships/jg-willard-scholarship/": {
     "hash": "e0c598c0c162d2ab",
@@ -2718,6 +2750,10 @@
   "/scholarships/kiwanis-club-of-cochrane-dirk-bannister-scholarship/": {
     "hash": "ffe80bb85e7d5ed9",
     "date": "2026-09-05"
+  },
+  "/scholarships/knights-of-columbus-pro-deo-and-pro-patria-scholarships/": {
+    "hash": "96b9d9a6dfa704d1",
+    "date": "2026-09-08"
   },
   "/scholarships/knights-of-columbus-scholarship/": {
     "hash": "cdf3d67300a755b8",
@@ -3319,6 +3355,10 @@
     "hash": "dccc22f7e357c32a",
     "date": "2026-08-28"
   },
+  "/scholarships/navy-league-of-canada-maritime-affairs-scholarship/": {
+    "hash": "8815da2a3172396b",
+    "date": "2026-09-08"
+  },
   "/scholarships/ncia-scholarship/": {
     "hash": "060ff786e481d669",
     "date": "2026-09-03"
@@ -3595,6 +3635,10 @@
     "hash": "540595326a7e31bd",
     "date": "2026-09-04"
   },
+  "/scholarships/psac-scholarship-program/": {
+    "hash": "656b7efeb78a7335",
+    "date": "2026-09-08"
+  },
   "/scholarships/pwm-steel-scholarship/": {
     "hash": "68bc8971ef2b1a5a",
     "date": "2026-09-04"
@@ -3634,6 +3678,10 @@
   "/scholarships/ray-jolliffe-memorial-scholarship/": {
     "hash": "213e64363b54aad5",
     "date": "2026-08-29"
+  },
+  "/scholarships/rbc-elevate-scholarship/": {
+    "hash": "9e883a03c4b2f65e",
+    "date": "2026-09-08"
   },
   "/scholarships/rbc-ignite-scholarship/": {
     "hash": "224b783c7463dc4f",

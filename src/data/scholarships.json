@@ -973,17 +973,17 @@
   },
   {
     "id": 53,
-    "title": "Horatio Alger Association of Canada Scholarship",
+    "title": "Horatio Alger Canadian Scholarships",
     "amount": "$10,000",
     "deadline": "2027-03-31",
-    "audience": "Grade 11 students across Canada (Grade 12 in Québec)",
+    "audience": "Grade 11 students across Canada facing financial hardship",
     "url": "https://horatioalger.ca/scholarships-and-services/undergraduate-scholarships/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "National",
-    "active": false,
-    "description": "Horatio Alger Canada funds students who have come through real adversity. You need a family income under $65,000, at least a 65% average, and a story of pushing through hard circumstances. Open to graduating seniors across Canada.",
-    "metaDetail": "Needs a family income under $65,000 and a 65% average.",
+    "active": true,
+    "description": "Horatio Alger Canada funds students who have come through real adversity. There are 160 awards of $10,000, and you apply in Grade 11, not Grade 12.",
+    "metaDetail": "You apply in Grade 11, not Grade 12.",
     "eligibility": {
       "grades": [
         "12"
@@ -994,7 +994,7 @@
         "any"
       ],
       "fields": [],
-      "minAverage": 65,
+      "minAverage": 70,
       "minAge": null,
       "maxAge": null,
       "genderRequired": null,
@@ -1008,7 +1008,7 @@
       "extracurriculars": []
     },
     "openDate": "2027-01-01",
-    "notes": "Applies in Grade 11, not Grade 12. There are 160 awards of $10,000, and the window is January 1 to March 31. Household net income must be $80,000 or less. Québec CEGEP students apply on a separate later deadline."
+    "notes": "The Grade 11 timing is the trap that costs Alberta students this award: the window is January 1 to March 31 of your Grade 11 year, for study beginning after you graduate. Household net income must be $80,000 or less and you need a 70 percent average. Horatio Alger Canada runs several programs off related applications, so check the others before you settle on this one: the National Entrepreneurial Scholarships pay $25,000, and the Indigenous Achievement Scholarships take Grade 12 applicants. Quebec CEGEP students apply on a separate stream. Figures corrected against horatioalger.ca on 2026-09-08; an earlier version of this listing understated the income ceiling and the required average."
   },
   {
     "id": 54,
@@ -41028,6 +41028,449 @@
       "extracurriculars": [
         "Air Cadets"
       ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1086,
+    "title": "Horatio Alger National Entrepreneurial Scholarships",
+    "amount": "$25,000",
+    "deadline": "2027-03-31",
+    "openDate": "2027-01-01",
+    "audience": "Grade 11 students across Canada with an entrepreneurial streak",
+    "url": "https://horatioalger.ca/scholarships-and-services/undergraduate-scholarships/",
+    "category": "Academic",
+    "region": "National",
+    "description": "Ten awards of $25,000, the largest Horatio Alger Canada gives, for Grade 11 students across Canada who have overcome adversity and show entrepreneurial drive.",
+    "notes": "Ten awards of $25,000, against 160 at $10,000 in the companion Canadian Scholarships stream, so the odds are longer but the award is worth two and a half times as much. Same gates as the rest of the Horatio Alger slate: apply in GRADE 11, household net income of $80,000 or less, a 70 percent average, and Canadian citizenship or permanent residence. Open in every province and territory. The window is January 1 to March 31. Verified against horatioalger.ca on 2026-09-08.",
+    "metaDetail": "Ten awards; you apply in Grade 11, not Grade 12.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1087,
+    "title": "Horatio Alger Indigenous Achievement Scholarships",
+    "amount": "$10,000",
+    "deadline": "2027-03-31",
+    "openDate": "2027-01-01",
+    "audience": "First Nations, Inuit and Métis students in their final year of high school",
+    "url": "https://horatioalger.ca/scholarships-and-services/undergraduate-scholarships/",
+    "category": "Indigenous",
+    "region": "National",
+    "description": "Five awards of $10,000 for First Nations, Inuit and Métis students, and the one Horatio Alger stream that takes Grade 12 applicants rather than Grade 11.",
+    "notes": "Worth knowing about specifically because it breaks the Grade 11 rule that governs the rest of the Horatio Alger slate: this stream takes Grade 12 students, or CEGEP students in their final year. The academic bar is a 2.0 GPA rather than the 70 percent average the other streams ask for. You must be a Canadian citizen or permanent resident. Open across Canada. Verified against horatioalger.ca on 2026-09-08.",
+    "metaDetail": "The one Horatio Alger stream open to Grade 12 students.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1088,
+    "title": "Horatio Alger Vocational and Technical Education Scholarships",
+    "amount": "$3,000",
+    "audience": "Students starting hands-on trades or technical training, under 35",
+    "url": "https://horatioalger.ca/vte-scholarships/",
+    "category": "Trades",
+    "region": "National",
+    "description": "Twenty-five awards of $3,000 for students across Canada starting hands-on vocational, technical or trades training, aimed at people facing real financial need.",
+    "notes": "A separate application from the Horatio Alger undergraduate scholarships, on a later calendar, and it does NOT have the Grade 11 gate: you need to have finished high school or an equivalency by July 1 of the year you start. Twenty-five awards of $3,000, open in every province and territory, for hands-on vocational, technical or trades training at a public or not-for-profit institution. Household net income must be $80,000 or less and you must be under 35. Two related Horatio Alger trades awards, the Seaspan VTE and the Skills and Trades Scholarship, are British Columbia only and Alberta students cannot apply, whatever a scholarship aggregator tells you. The 2026 round closed June 15, 2026; the page says to come back for 2027 details. Verified against horatioalger.ca on 2026-09-08.",
+    "metaDetail": "No Grade 11 gate here, unlike the undergraduate streams.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 35,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1089,
+    "title": "Horatio Alger Crown Lift Vocational and Technical Education Scholarships",
+    "amount": "$3,000",
+    "audience": "Trades and technical students in specific fields, under 35",
+    "url": "https://horatioalger.ca/vte-scholarships/",
+    "category": "Trades",
+    "region": "National",
+    "description": "Three awards of $3,000 from Crown Lift through Horatio Alger Canada, for certificate or diploma students in a defined set of trades and technical fields.",
+    "notes": "Narrower than the main Horatio Alger trades stream and much smaller: only three awards. Your program has to be a certificate or diploma in business administration, construction trades, engineering, graphic design, manufacturing, production or welding, or sales and marketing. Otherwise the gates match: high school finished by July 1, household net income of $80,000 or less, under 35, Canadian citizen or permanent resident, open in every province and territory. Applied for on the same VTE application, so there is no cost to being considered for both. The 2026 round has closed. Verified against horatioalger.ca on 2026-09-08.",
+    "metaDetail": "Only three awards, and your field of study has to match.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades",
+        "Business",
+        "Engineering",
+        "Welding"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 35,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1090,
+    "title": "RBC Elevate Scholarship",
+    "amount": "Up to $15,000 per year",
+    "audience": "Students aged 17 to 29 entering a degree or diploma program",
+    "url": "https://www.rbc.com/dms/enterprise/scholarships.html",
+    "category": "Academic",
+    "region": "National",
+    "description": "Forty awards a year of up to $15,000 from RBC, administered by Universities Canada, for students aged 17 to 29 who are accepted into a Canadian degree, diploma or certificate program and need the money.",
+    "notes": "The largest of the three RBC Next Step scholarships, and the one a graduating Grade 12 student can actually use: you qualify once you are accepted, not only once enrolled. The value tracks your program: up to $15,000 a year for a bachelor's degree, $8,000 for a diploma, $2,000 for CEGEP technical training. Ages 17 to 29, Canadian citizen or permanent resident, financial need required. Apply EARLY. Universities Canada caps the round at 500 submitted applications and closes the portal once it fills, so the posted deadline is a ceiling, not a plan. The 2026 window ran February 2 to March 26. The companion RBC Ignite Scholarship is listed separately here; the third, RBC Reimagine, is for people 25 and over who have been out of school three years or more. Verified against rbc.com on 2026-09-08.",
+    "metaDetail": "The round closes at 500 applications, so apply early.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": 29,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1091,
+    "title": "PSAC Scholarship Program",
+    "amount": "Varies",
+    "deadline": "2027-06-22",
+    "audience": "PSAC members and their dependent children under 26",
+    "url": "https://psacunion.ca/psacs-2026-scholarship-program-now-open",
+    "category": "General",
+    "region": "National",
+    "description": "Twenty-four scholarships from the Public Service Alliance of Canada, fourteen of them reserved for dependent children of members, awarded on a written or creative submission rather than on grades.",
+    "notes": "Twenty-four awards in four buckets: 14 for dependent children of members heading to full-time study, 3 for members in full-time study, 2 for members part-time, and 5 for members or dependents who self-identify as a woman, Indigenous, a person with a disability, racialized or 2SLGBTQIA+. You must be a member, or the dependent child under 26 of a member, in good standing as of March 31 of the application year. Judged on the merit of a 750 to 850 word essay OR a creative submission: a video, infographic or song, up to five minutes, answering that year's set question. Not limited to first-year students, and past winners cannot win twice. PSAC does not publish the award value in its guidelines, so no figure is claimed here. The 2026 round closed June 22, 2026 and PSAC says the 2027 program opens in April. Verified against psacunion.ca and the PSAC scholarship guidelines on 2026-09-08.",
+    "metaDetail": "A song or video counts as a submission, not just an essay.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 26,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1092,
+    "title": "Knights of Columbus Pro Deo and Pro Patria Scholarships",
+    "amount": "$1,500 per year",
+    "audience": "Knights of Columbus members in Canada and their children",
+    "url": "https://www.kofc.org/resources/scholarships/canadian-undergraduate-scholarships/",
+    "category": "General",
+    "region": "National",
+    "description": "Twelve scholarships of $1,500 a year, renewable for up to four years, for Knights of Columbus members in Canada and their sons and daughters entering first year of a bachelor's degree.",
+    "notes": "Funded by the Fourth Degree but open to the family of ANY Knights of Columbus member in Canada, not just Fourth Degree members, which is the detail most council notices leave out. You must be entering freshman year of a four-year bachelor's degree at a Canadian college or university, and be a member in good standing, or the son or daughter of a member, including a member who died in good standing. Awarded on academic excellence and renewable each year of undergraduate study to a maximum of four. Applications go through the ISTS portal at aim.applyISTS.net/KofC using program key KofC; use a personal email address, not a school one, because school addresses expire at graduation. The Knights do not publish a deadline on this page, so confirm the date through ISTS or your council before relying on it. Verified against kofc.org on 2026-09-08.",
+    "metaDetail": "Open to any Canadian member's family, not only Fourth Degree.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1093,
+    "title": "Girl Guides of Canada National Scholarship Program",
+    "amount": "Varies",
+    "audience": "Girl Guides of Canada members continuing their education",
+    "url": "https://www.girlguides.ca/web/scholarships",
+    "category": "General",
+    "region": "National",
+    "description": "The national scholarship program of Girl Guides of Canada, open to members across the country and awarded on accomplishment in and beyond Guiding.",
+    "notes": "National and separate from the provincial council bursaries, which are administered per province and have their own smaller awards. Named memorial scholarships within the program include the Doris Ingram Memorial Scholarship, the Norma Osler Education National Scholarship and the Miranda Friz Memorial National Scholarship. Girl Guides does not publish the award values or the application window on this page, so no figure or date is claimed here; recipients for the 2026 round were notified in June 2026. Applications were closed as of 2026-09-08. Ask scholarship@girlguides.ca for the next cycle's dates. If you are in Guiding, check your provincial council page too, because those are separate applications. Verified against girlguides.ca on 2026-09-08.",
+    "metaDetail": "Provincial council bursaries are separate applications.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Girl Guides"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1094,
+    "title": "Navy League of Canada Maritime Affairs Scholarship",
+    "amount": "$3,000",
+    "audience": "Active sea cadets entering a maritime post-secondary program",
+    "url": "https://navyleague.ca/awards-and-scholarships",
+    "category": "General",
+    "region": "National",
+    "description": "One $3,000 scholarship a year, formally the Honourable Rear-Admiral Fred Mifflin Memorial Scholarship, for an active sea cadet entering an accredited post-secondary program in the maritime sector.",
+    "notes": "One award a year, so the field is small but so is the pool. You must be an active sea cadet and your program has to sit within the maritime sector, which is the binding constraint for a landlocked Alberta applicant: marine engineering, naval architecture, oceanography, marine biology and the like all count, a general science degree does not. Apply on form NL_LN_55, and attach every supporting document, because the Navy League discards incomplete applications rather than following up. The Navy League also points sea cadets at the Royal Canadian Sea Cadet Education Foundation, which funds separate awards of $1,000 to $5,000, and at a $5,000 Young Citizens Foundation award given to a top sea cadet entering first year. Verified against navyleague.ca and the Navy League's own application form on 2026-09-08.",
+    "metaDetail": "Your program has to sit in the maritime sector.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sea Cadets"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1095,
+    "title": "Army Cadet League of Canada Awards and Bursaries",
+    "amount": "Varies",
+    "audience": "Army cadets across Canada heading to post-secondary study",
+    "url": "https://www.armycadetleague.ca/awards-grants-and-bursaries/",
+    "category": "General",
+    "region": "National",
+    "description": "The Army Cadet League of Canada runs five national awards and bursaries for individual army cadets, each with its own policy document and online application form.",
+    "notes": "Five separate awards for individual cadets: the Gerard Buckley Cadet Fund, the 1st Canadian Parachute Battalion Bursary, the Young Citizens Foundation Scholarship Award, the Major Terence Whitty Memorial Bursary and the Colonel Commandants and National Presidents' Scholarship. Each has its own policy document and its own form, most hosted on formsite.com and reachable from the League's awards page. The League publishes no amounts or deadlines on that page, so nothing is claimed here; ask the national office at 613-725-0220 or ed@aclc-lcac.ca, or go through your corps. Do not confuse these with the corps grants on the same page, which fund the unit rather than the cadet. Verified against armycadetleague.ca on 2026-09-08.",
+    "metaDetail": "Five separate awards, each with its own form.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Army Cadets"
+      ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1096,
+    "title": "Jean Lumb Awards",
+    "amount": "$1,000",
+    "audience": "Students of Chinese heritage in grades 9 through 12",
+    "url": "https://jeanlumbfoundation.ca/",
+    "category": "Community",
+    "region": "National",
+    "description": "Awards of $1,000 for students of Chinese heritage anywhere in Canada, given across a dozen categories from academics and athletics to innovation and overcoming adversity.",
+    "notes": "Unusually open: grades 9 through 12 can apply, not just graduating students, so a Grade 10 student can win and apply again later. Categories have included academics, arts, athletics, community service, defence of the environment, dignity of life, excellence, innovation, innovation in technology, leadership, overcoming adversity, family medicine, and journalism and communication. You may apply to as many categories as you like but can win only one, and each category needs its own application and its own reference letters, written for that category rather than reused. You must be a Canadian citizen or permanent resident of Chinese heritage attending high school in Canada; students on a study permit are not eligible. Heritage is self-certified, with no documentation required. Past winners cannot reapply, unsuccessful applicants can. Winners are notified by August 31. The 29th annual awards are the current cycle; the Foundation does not post the deadline on its home page, so check the application portal or email info@jeanlumbfoundation.ca. Verified against jeanlumbfoundation.ca on 2026-09-08.",
+    "metaDetail": "Grades 9 to 12, so you can win early and apply again.",
+    "eligibility": {
+      "grades": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1097,
+    "title": "Filipino-Canadian National Scholarship Program",
+    "amount": "$1,000 or more",
+    "audience": "Filipino-Canadian students heading to post-secondary study",
+    "url": "https://www.filcannationalscholarship.com/scholarships",
+    "category": "Community",
+    "region": "National",
+    "description": "A national program of scholarships for Filipino-Canadian students, each worth at least $1,000, with categories covering academics, creative arts and volunteer work.",
+    "notes": "Run with the Golden Balangay Foundation and open across Canada. Each scholarship carries a minimum award of $1,000 and typically names at least one recipient per category per year, so the categories matter more than the headline count. You may apply to up to two categories per cycle. You need Filipino heritage plus Canadian citizenship or permanent residence, at least a B average, demonstrated financial need, and you must be attending a Canadian post-secondary institution. The 2026 round closed January 15, 2026 with winners announced February 20, 2026, which puts this on a much earlier calendar than most awards here: a January deadline means starting in the fall of Grade 12. Verified against filcannationalscholarship.com on 2026-09-08.",
+    "metaDetail": "A January deadline, so start in the fall of Grade 12.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
     },
     "lastVerified": "2026-09",
     "active": true
