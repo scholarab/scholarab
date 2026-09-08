@@ -1162,17 +1162,17 @@
   {
     "id": 58,
     "title": "Schulich Leader Scholarships",
-    "amount": "$100,000",
+    "amount": "$100,000 to $120,000",
     "deadline": "2027-01-27",
     "audience": "Canadian high school students entering STEM at one of 20 selected universities; school nominates 1 student",
     "url": "https://www.schulichleaders.com/apply",
     "category": "STEM",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "National",
     "notes": "Your school nominates you, you cannot apply directly. Every Canadian high school can put forward one graduating student, two if the school had a Schulich Leader in 2026. Nomination deadline is January 27, 2027 and nominated students then have until February 17, 2027 to submit the application and reference letters. Talk to your counsellor in the fall, not in January.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "The Schulich Leader Scholarships recognize exceptional Canadian high school students pursuing STEM at one of 20 select Canadian universities. Recipients are nominated by their school and receive $100,000 to support their post-secondary education. Eligible students must be graduating high school seniors planning to enter a STEM program at a participating institution.",
+    "description": "The Schulich Leader Scholarships recognize exceptional Canadian high school students pursuing STEM at one of 20 select Canadian universities. One hundred are awarded each year: fifty at $120,000 for engineering and fifty at $100,000 for science, technology and math.",
     "eligibility": {
       "grades": [
         "12"
@@ -40090,5 +40090,153 @@
       "extracurriculars": []
     },
     "active": false
+  },
+  {
+    "id": 1060,
+    "title": "Ted Rogers Legacy Scholarship",
+    "amount": "$100,000",
+    "audience": "Students entering a technology-focused program at one of six partner universities, including the University of Calgary",
+    "url": "https://about.rogers.com/our-impact/ted-rogers-scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "active": true,
+    "description": "Ten awards a year worth $100,000 over four years, covering full tuition, living expenses and other costs for students in a technology-focused program. Rogers calls it Canada's largest scholarship program. There is no central application: each partner university runs its own selection, and the University of Calgary is one of the six.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "notes": "Do not look for a Rogers application form, because there isn't one. The six partner universities are UBC, the University of Calgary, Waterloo, Toronto Metropolitan, Polytechnique Montreal and UNB, and each handles its own nomination and selection. For an Alberta student the practical route is the University of Calgary's own awards process, so ask their admissions office how the Ted Rogers award is assessed there.",
+    "metaDetail": "Applied for through the partner university, not through Rogers."
+  },
+  {
+    "id": 1061,
+    "title": "Canadian Hearing Services National Scholarship",
+    "amount": "$1,000 to $3,000",
+    "audience": "Deaf, deafblind and hard of hearing Canadians aged 17 or older starting or returning to post-secondary study",
+    "url": "https://www.chs.ca/scholarship-application",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "active": false,
+    "description": "Pays $3,000 to full-time and $1,000 to part-time students, and stays available at the same level for up to four consecutive years. Selection weighs financial and accommodation need alongside community engagement, and Canadian Hearing Services gives additional recognition to Indigenous Deaf and hard of hearing applicants.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "notes": "The medical bar is specific: a documented hearing loss of 50dB or greater in each ear, not just one. Like the Rutherford, this is applied for once you are enrolled rather than while you are still in Grade 12, so a graduating student applies in the year they start post-secondary. The 2027 cycle had not been posted when this was checked; the 2026 round notified winners in July.",
+    "metaDetail": "Renewable at the same level for up to four years."
+  },
+  {
+    "id": 1062,
+    "title": "Burger King Scholars Program",
+    "amount": "$1,000 to $60,000",
+    "audience": "Students graduating from Grade 12 in Canada with a 2.0 GPA or higher, enrolling full-time in post-secondary",
+    "url": "https://scholarshipamerica.org/scholarship/burgerking/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "active": false,
+    "description": "A North American program that has awarded nearly $64 million to over 55,000 students, and it is open to Canadians rather than US-only. The bar is deliberately low: a 2.0 cumulative average on a 4.0 scale, with selection weighing work experience, extracurriculars, community service and financial need alongside marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "notes": "Employment at a Burger King restaurant is not required for the general track. The 2025 cycle ran October 15 to December 15 and the program describes its 2026 details as tentative, so treat the autumn window as the shape to watch rather than a confirmed date. Awards can be used at an accredited college, university or vocational school in Canada or the United States.",
+    "metaDetail": "A 2.0 average clears the academic bar, which is unusually low."
+  },
+  {
+    "id": 1063,
+    "title": "Gloria Barron Prize for Young Heroes",
+    "amount": "$10,000",
+    "deadline": "2027-04-15",
+    "audience": "Canadian residents aged 8 to 18 who have organized and led a service project benefiting people or the planet",
+    "url": "https://barronprize.org/apply/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "active": false,
+    "description": "One of the few national awards open well below Grade 12: applicants must be 8 to 18 and not yet 19 on the April 15 deadline. It rewards a service or research project the applicant started and led themselves, and Canadian residents compete on the same footing as American ones.",
+    "eligibility": {
+      "grades": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 8,
+      "maxAge": 18,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "notes": "There are two deadlines, and missing the first ends it: a pre-application closes March 15 and is not accessible after that date, and only applicants judged eligible are invited to the full application by April 15. Both close at 5 PM Mountain Time, which is Alberta time for once. The project must be one you initiated, not a school assignment.",
+    "metaDetail": "A pre-application closes March 15, a month before the deadline."
   }
 ]
