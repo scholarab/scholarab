@@ -91,13 +91,17 @@
     "hash": "895119912f89bf90",
     "date": "2026-09-03"
   },
+  "/programs/calgary-youth-science-fair-cysf/": {
+    "hash": "394bfa014a225dd4",
+    "date": "2026-09-07"
+  },
   "/programs/calgaryedmonton-brain-bee/": {
     "hash": "3a280efd8869160e",
     "date": "2026-09-03"
   },
   "/programs/canada-wide-science-fair-cwsf/": {
-    "hash": "fd9d74ab649d65c4",
-    "date": "2026-08-31"
+    "hash": "189d1fa92d716c16",
+    "date": "2026-09-07"
   },
   "/programs/canadian-biology-olympiad-cbo/": {
     "hash": "e6f1e3342d14a85f",
@@ -139,6 +143,10 @@
     "hash": "2321408226936bdf",
     "date": "2026-09-03"
   },
+  "/programs/central-alberta-regional-science-fair-carsf/": {
+    "hash": "6f1e552b7d58cfd2",
+    "date": "2026-09-07"
+  },
   "/programs/cern-beamline-for-schools-bl4s/": {
     "hash": "b633e17ba957e25c",
     "date": "2026-09-03"
@@ -178,6 +186,10 @@
   "/programs/dual-credit-medicine-hat-public-school-division/": {
     "hash": "fc096a33ab980e60",
     "date": "2026-08-31"
+  },
+  "/programs/edmonton-regional-science-fair-ersf/": {
+    "hash": "af243f10b2ae7d59",
+    "date": "2026-09-07"
   },
   "/programs/elite-program-for-black-youth/": {
     "hash": "bea264b0e66b624f",
@@ -363,6 +375,10 @@
     "hash": "0109687b1f586226",
     "date": "2026-09-01"
   },
+  "/programs/sci-fusion-lethbridge-regional-science-fair-and-science-olympics/": {
+    "hash": "2499008a52396979",
+    "date": "2026-09-07"
+  },
   "/programs/shad-canada/": {
     "hash": "2a40e128363d6fe9",
     "date": "2026-08-31"
@@ -458,6 +474,10 @@
   "/programs/wisest-summer-research-program/": {
     "hash": "830f645d60a1dd1a",
     "date": "2026-08-31"
+  },
+  "/programs/wood-buffalo-regional-science-fair-wbrsf/": {
+    "hash": "67dcba06f98264ef",
+    "date": "2026-09-07"
   },
   "/programs/yeti-young-entrepreneurs-training-initiative/": {
     "hash": "6f63b98892b88afb",
