@@ -1203,6 +1203,10 @@
     "hash": "8d7f134507b95c26",
     "date": "2026-09-06"
   },
+  "/scholarships/cabef-agricultural-scholarships/": {
+    "hash": "a2f4af96e4de3d83",
+    "date": "2026-09-08"
+  },
   "/scholarships/calgarians-improving-society-award/": {
     "hash": "a86c56079509cdb2",
     "date": "2026-08-28"
@@ -1279,13 +1283,17 @@
     "hash": "699073de7f4a6f47",
     "date": "2026-09-04"
   },
+  "/scholarships/canadian-fallen-firefighters-foundation-education-program/": {
+    "hash": "c1482b145b5fc6f5",
+    "date": "2026-09-08"
+  },
   "/scholarships/canadian-forces-family-scholarship/": {
     "hash": "5c63d6dbf2a6c3e8",
     "date": "2026-08-28"
   },
   "/scholarships/canadian-hearing-services-national-scholarship/": {
-    "hash": "7a633554d8c45713",
-    "date": "2026-09-07"
+    "hash": "157c8c4923b2e6ee",
+    "date": "2026-09-08"
   },
   "/scholarships/canadian-hero-fund-scholarships/": {
     "hash": "fb22c179624c400e",
@@ -1930,6 +1938,10 @@
   "/scholarships/emmalee-cherweniuk-award/": {
     "hash": "5b6379d2f04c301d",
     "date": "2026-08-28"
+  },
+  "/scholarships/emmy-duff-scholarship/": {
+    "hash": "bbdb4c203868f34b",
+    "date": "2026-09-08"
   },
   "/scholarships/empowered-young-woman-award/": {
     "hash": "cf3d8a33e2f0e886",
@@ -3291,6 +3303,10 @@
     "hash": "ed039e697862d082",
     "date": "2026-09-04"
   },
+  "/scholarships/memorial-ribbon-scholarship/": {
+    "hash": "1b2fd97fd44d7570",
+    "date": "2026-09-08"
+  },
   "/scholarships/mensa-canada-scholarship-programme/": {
     "hash": "8287e8c9094d12f2",
     "date": "2026-08-02"
@@ -3666,6 +3682,10 @@
   "/scholarships/planning-for-success-engineering-award/": {
     "hash": "00dde613fa360c5e",
     "date": "2026-09-04"
+  },
+  "/scholarships/plcac-student-award-program/": {
+    "hash": "abcceee8c37f8bc9",
+    "date": "2026-09-08"
   },
   "/scholarships/pre-apprentice-scholarship/": {
     "hash": "5ebd9338dc568e71",

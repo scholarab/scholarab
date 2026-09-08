@@ -40143,7 +40143,7 @@
     "category": "General",
     "lastVerified": "2026-09",
     "region": "National",
-    "active": false,
+    "active": true,
     "description": "Pays $3,000 to full-time and $1,000 to part-time students, and stays available at the same level for up to four consecutive years. Selection weighs financial and accommodation need alongside community engagement, and Canadian Hearing Services gives additional recognition to Indigenous Deaf and hard of hearing applicants.",
     "eligibility": {
       "grades": [
@@ -40166,7 +40166,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "notes": "The medical bar is specific: a documented hearing loss of 50dB or greater in each ear, not just one. Like the Rutherford, this is applied for once you are enrolled rather than while you are still in Grade 12, so a graduating student applies in the year they start post-secondary. The 2027 cycle had not been posted when this was checked; the 2026 round notified winners in July.",
+    "notes": "The medical bar is specific: a documented hearing loss of 50dB or greater in each ear, not just one. Like the Rutherford, this is applied for once you are enrolled rather than while you are still in Grade 12, so a graduating student applies in the year they start post-secondary. It is not a token programme: Canadian Hearing Services awarded 29 scholarships for the 2025-26 year, to both first-time and returning students, and the money can go to tuition, residence or accessibility services rather than tuition alone. The 2026 round closed April 24 and notified winners in July; the 2027 dates were not posted when this was checked, so expect a late-April deadline and confirm. Applicants must be 17 or older. Re-verified against chs.ca on 2026-09-08.",
     "metaDetail": "Renewable at the same level for up to four years."
   },
   {
@@ -42100,6 +42100,186 @@
       "extracurriculars": [
         "Scouts"
       ]
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1115,
+    "title": "Memorial Ribbon Scholarship",
+    "amount": "Up to $50,000",
+    "audience": "Children of Canadian police and peace officers killed in the line of duty",
+    "url": "https://www.memorialribbon.org/scholarships/",
+    "category": "General",
+    "region": "National",
+    "description": "Pays up to 80 per cent of tuition and books for up to four years, to a total of $50,000, for the children of Canadian police and peace officers slain in the line of duty.",
+    "notes": "By total value this is the largest award listed on this site. It covers up to but no more than 80 per cent of tuition and books per year, for no more than four years, capped at $50,000 overall, and it pays for tuition and textbooks only, toward an undergraduate degree or diploma at an approved Canadian post-secondary institution. Any child of a Canadian police or peace officer slain in the line of duty may apply, including a child born outside marriage and an adopted child. Applicants must be between 18 and 26 at the time of applying, though the Society will consider a first-time applicant over 27 case by case, and it also considers support for elementary, middle and high school costs on the same basis. You need evidence of the parent's line-of-duty death; the governing definition sits in the Society's by-laws. Run by the Police and Peace Officers' Memorial Ribbon Society. No deadline is published, so contact the Scholarship Advisory Council rather than waiting for a date to appear. Verified against memorialribbon.org on 2026-09-08.",
+    "metaDetail": "Covers 80 per cent of tuition and books for four years.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 18,
+      "maxAge": 26,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1116,
+    "title": "Canadian Fallen Firefighters Foundation Education Program",
+    "amount": "Up to $3,000",
+    "audience": "Children and spouses of firefighters who died in the line of duty",
+    "url": "https://www.cfff.ca/education-program",
+    "category": "General",
+    "region": "National",
+    "description": "Scholarships and bursaries from the Canadian Fallen Firefighters Foundation for the children and spouses of firefighters whose line-of-duty deaths the Foundation recognizes.",
+    "notes": "Two separate streams with two separate forms: the CFFF / Doug Lock Memorial Scholarship, and bursaries capped at $3,000 with a maximum of six awarded a year, including one funded by the Council of Canadian Fire Marshals and Fire Commissioners. You may apply for a scholarship OR a bursary, not both, so read the CFFFEP policy before choosing. Open to children and to the spouse or common-law partner of a firefighter whose line-of-duty death is recognized by the Foundation, which is the gate to check first. The written policy sets the window as March 1 to July 31 for the academic year starting that September, but the Foundation reserves the right to modify it, and its own page said applications were being accepted as of 2026-09-08, so go by the page rather than the policy dates. Forms download from cfff.ca. Verified against cfff.ca on 2026-09-08.",
+    "metaDetail": "You may apply for a scholarship or a bursary, not both.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1117,
+    "title": "PLCAC Student Award Program",
+    "amount": "Varies",
+    "deadline": "2026-10-19",
+    "openDate": "2026-09-17",
+    "audience": "Children of people whose main income comes from pipeline construction",
+    "url": "https://pipeline.ca/member-services/awards/plcac-student-award-program/",
+    "category": "General",
+    "region": "National",
+    "description": "An award from the Pipe Line Contractors Association of Canada for the sons, daughters and wards of people whose principal income comes from the pipeline construction industry.",
+    "notes": "Directly relevant in Alberta, where pipeline construction employs a lot of parents, and it has helped more than 400 students since 1974. Two conditions do the work: your parent or guardian must draw their principal income from the pipeline construction industry, AND that parent must be employed by, or have a history of employment with, a company that is a member of the PLCAC, so check the association's membership directory before you spend time on the form. Your own program can lead to a diploma or degree in ANY field at a recognized Canadian college or university, and post-graduate students are considered too. The PLCAC does not publish the award value, so none is claimed here. The 2026 window runs September 17 to October 19, 2026. Contact plcac@pipeline.ca or 905-847-9383. Verified against pipeline.ca on 2026-09-08.",
+    "metaDetail": "Check the PLCAC member directory before you apply.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1118,
+    "title": "CABEF Agricultural Scholarships",
+    "amount": "$2,500",
+    "audience": "Students entering first year of an agriculture or agri-food program",
+    "url": "https://www.cabef.org/scholarships/",
+    "category": "General",
+    "region": "National",
+    "description": "Seven scholarships of $2,500 from the Canadian Agri-Business Education Foundation for students entering or early in an agriculture or agri-food program at a Canadian college, university or trade school.",
+    "notes": "Read the regional split before you judge your odds: of the seven awards, only TWO go to Western Canada, which for CABEF means BC, Alberta, the Territories and Yukon combined. Two more go to Central Canada and three to the East. You must be entering first year, or currently in second or third year; students in their FINAL year are not eligible, and neither are graduate or professional programs. You must be at least 16 at the time of applying and enrolled full-time in an agriculture or agri-food related undergraduate program, which includes trade school and apprenticeship routes rather than degrees alone. Past recipients cannot reapply. Judged on leadership plus a written or video answer to a set question about an emerging issue in Canadian agriculture, so a video is a legitimate alternative to an essay here. The 2026 round closed April 30 with winners notified by May 31; winners then send proof of enrolment by September 30 and are paid within 30 days. Verified against cabef.org on 2026-09-08.",
+    "metaDetail": "Only two of the seven awards go to Western Canada.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "agriculture",
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": 16,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "lastVerified": "2026-09",
+    "active": true
+  },
+  {
+    "id": 1119,
+    "title": "Emmy Duff Scholarship",
+    "amount": "$2,000",
+    "audience": "Students who have been treated for cancer and volunteer in their community",
+    "url": "http://www.emmyduffscholarship.org/application-information.html",
+    "category": "General",
+    "region": "National",
+    "description": "A one-time $2,000 award for Canadian students who have been treated for cancer, or are in treatment, and who keep up an ongoing volunteer commitment.",
+    "notes": "Open to students in any year of study, including first year, so a graduating Grade 12 student heading to a Canadian college or university in the fall can apply. You must live in Canada and be attending a Canadian institution. Two requirements make this different from a standard bursary. You need a letter from your oncologist or current physician confirming that you were treated, or are being treated, for a cancer diagnosis. And you need a demonstrated, ongoing volunteer commitment to causes you care about, which the Foundation weighs rather than treating as a nice-to-have. The written piece is a 300 to 500 word letter on your experience, your goals and why you are applying. A letter of acceptance is requested from finalists only, not up front. Everything goes in as a single PDF by email with the subject line the Foundation specifies. The 2026-27 round closed June 3, 2026. Verified against emmyduffscholarship.org on 2026-09-08.",
+    "metaDetail": "Needs an oncologist letter and a volunteering record.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
     },
     "lastVerified": "2026-09",
     "active": true
