@@ -62,5 +62,13 @@
   {
     "host": "saamis.com",
     "reason": "WAF returns 403 to automated requests from every network tried, CI and off-runner alike, and does so in 150ms rather than stalling; the Medicine Hat funeral chapel home page carrying the scholarship was verified live in browser 2026-08-26."
+  },
+  {
+    "host": "ncia.ca",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs; the same URL returns 200 off-runner with both a browser and a plain user agent, and the NCIA scholarship page was verified live in browser 2026-09-08."
+  },
+  {
+    "host": "4hab.com",
+    "reason": "Stalls automated requests from GitHub Actions IPs until the 20s timeout rather than refusing them; two 4-H Alberta URLs timed out in the same run while the host answers in under a second off-runner and loads fine in browser, verified 2026-09-08. Listed on one run's evidence: if 4hab.com starts passing in CI, drop this entry rather than leaving two listings unchecked."
   }
 ]
