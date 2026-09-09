@@ -81,11 +81,15 @@ describe('the real corpus', () => {
   const scholarships = scholarshipData as Item[];
   const programs = programData as Item[];
 
+  // Whole-corpus and superlinear in it: ~1.5s locally at 1072 listings and
+  // 5052ms on a CI runner, which timed out against vitest's 5s default while
+  // nothing was actually wrong. An explicit ceiling, so the next few hundred
+  // listings fail this test for a real reason or not at all.
   it('leaves no scholarship under-linked by its peers', () => {
     const counts = inboundCounts(scholarships, balancedRelated(scholarships, opts));
     const starved = scholarships.filter(s => counts.get(s)! < 3);
     expect(starved.map(s => s.id)).toEqual([]);
-  });
+  }, 30_000);
 
   it('leaves no listed program under-linked by its peers', () => {
     // The section this whole change exists for: 68 of these had zero.
