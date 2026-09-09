@@ -2127,5 +2127,22 @@
     "description": "Fort McMurray's qualifying fair, judged on a Friday with public viewing and awards the Saturday after. Sponsors cover the cost so entry is free to students, and finalists from the junior, intermediate and senior pools advance to the Canada-Wide Science Fair. The 2026 judging ran March 27.",
     "metaDescription": "Fort McMurray's route to the Canada-Wide Science Fair, open to grades 4-12 across the Regional Municipality of Wood Buffalo. Sponsors keep entry free.",
     "lastVerified": "2026-09"
+  },
+  {
+    "id": 153,
+    "name": "Peace Country Regional Science Fair (PCRSF)",
+    "category": "Research",
+    "provider": "Peace Country Regional Science Fair / Youth Science Canada",
+    "grades": "Grades 5-12",
+    "duration": "Year-long project + one fair day in late March",
+    "paid": false,
+    "stipend": null,
+    "location": "Peace River (in-person)",
+    "eligibility": "Students at northwest Alberta schools, judged in grade 5/6, 7/8, 9/10 and 11/12 divisions",
+    "deadline": "TBA",
+    "url": "https://sites.google.com/view/pcrsf/home",
+    "description": "The qualifying fair for northwest Alberta, and the route to the Canada-Wide Science Fair for students around Peace River, Slave Lake and Valleyview. The 42nd fair ran March 25, 2026 with registration closing March 10, and five finalists went on to nationals in Edmonton. Organisers have said they expect a 2027 fair but had not posted its dates when this was checked.",
+    "metaDescription": "Northwest Alberta's route to the Canada-Wide Science Fair, judged in divisions from grade 5 to 12. The 2026 fair sent five finalists to nationals.",
+    "lastVerified": "2026-09"
   }
 ]
