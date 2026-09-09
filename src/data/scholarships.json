@@ -389,7 +389,7 @@
   {
     "id": 35,
     "title": "Belcourt Brosseau Métis Awards",
-    "amount": "$1,000–$10,000",
+    "amount": "$1,000 to $10,000",
     "deadline": "2027-03-31",
     "openDate": "2027-01-02",
     "audience": "Métis students from Alberta entering or continuing post-secondary",
@@ -1294,7 +1294,7 @@
     "title": "Advancing Futures Bursary",
     "amount": "$40,000",
     "deadline": "2026-10-01",
-    "audience": "Alberta youth aged 18–24 who have been in government care (foster care) at any point",
+    "audience": "Alberta youth aged 18 to 24 who have been in government care (foster care) at any point",
     "url": "https://www.alberta.ca/advancing-futures",
     "category": "Community",
     "lastVerified": "2026-08",
@@ -2652,16 +2652,16 @@
   {
     "id": 102,
     "title": "Dr. MacEwan Literary Arts Scholarship",
-    "amount": "$3,000",
+    "amount": "$7,000",
     "deadline": "2027-03-01",
     "audience": "Alberta students 25 or younger demonstrating talent and clear goals in literary arts",
     "url": "https://www.affta.ab.ca/funding/special-programs/awards-and-scholarships",
     "category": "Arts",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Deadline for all four Alberta Foundation for the Arts scholarship programs is March 1 every year.",
+    "notes": "Deadline for all four Alberta Foundation for the Arts scholarship programs is March 1 every year. Verified 2026-09-09 on the Alberta Foundation for the Arts page, which corrected the value: this award is $7,000, not the $3,000 previously listed here. All of the Foundation's arts scholarships are $7,000 and share a March 1 deadline.",
     "active": false,
-    "description": "$3,000 a year for an Alberta writer aged 25 or under, named for Grant MacEwan, author and former Lieutenant Governor of Alberta. One award is given annually, and the jury wants to see real literary ambition.",
+    "description": "$7,000 for an Alberta writer aged 25 or under, named for Grant MacEwan, author and former Lieutenant Governor of Alberta. One award is given annually, and the jury wants to see real literary ambition.",
     "eligibility": {
       "grades": [
         "12"
@@ -2728,54 +2728,16 @@
     "metaDetail": "One award a year, for Albertans 25 and under."
   },
   {
-    "id": 104,
-    "title": "Alberta Foundation for the Arts Performing Arts Scholarship",
-    "amount": "$7,000",
-    "deadline": "2027-03-01",
-    "audience": "Alberta students 25 or younger demonstrating talent and goals in performing arts",
-    "url": "https://www.affta.ab.ca/funding/special-programs/awards-and-scholarships",
-    "category": "Arts",
-    "lastVerified": "2026-08",
-    "region": "Alberta",
-    "notes": "Deadline for all four Alberta Foundation for the Arts scholarship programs is March 1 every year.",
-    "active": false,
-    "description": "Alberta Culture awards this $7,000 scholarship annually to recognize exceptional talent and dedication in the performing arts. It's open to Alberta students aged 25 or younger who are pursuing their passion in dance, theatre, music, and other performing disciplines. Applicants should demonstrate both artistic ability and clear goals in advancing their performing arts career.",
-    "eligibility": {
-      "grades": [],
-      "schoolBoards": [],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [
-        "arts"
-      ],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": 25,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": [
-        "arts"
-      ]
-    },
-    "metaDetail": "Covers dance, theatre and music, for ages 25 and under."
-  },
-  {
     "id": 105,
-    "title": "Alberta Foundation for the Arts Visual Arts Scholarship",
+    "title": "Queen's Platinum Jubilee Scholarship for Visual Arts",
     "amount": "$7,000",
     "deadline": "2027-03-01",
     "audience": "Alberta students 25 or younger demonstrating talent and goals in visual arts",
     "url": "https://www.affta.ab.ca/funding/special-programs/awards-and-scholarships",
     "category": "Arts",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Deadline for all four Alberta Foundation for the Arts scholarship programs is March 1 every year.",
+    "notes": "Deadline for all four Alberta Foundation for the Arts scholarship programs is March 1 every year. Renamed 2026-09-09 to the name the Alberta Foundation for the Arts actually publishes; it was listed here under the older Alberta Foundation for the Arts Visual Arts name. It is not the citizenship award of a similar name.",
     "active": false,
     "description": "Alberta Culture awards this $7,000 scholarship annually to recognize exceptional talent and achievement in visual arts. Open to Alberta students aged 25 or younger who demonstrate strong artistic ability and clear goals in visual arts studies or practice. One award is given each year to a deserving student showing promise in this creative field.",
     "eligibility": {
@@ -3618,9 +3580,9 @@
     "category": "Academic",
     "region": "Alberta",
     "active": false,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "applyViaGuidance": false,
-    "notes": "30 bursaries of $6,000 awarded annually. Based on financial need and scholastic ability. First-year students given priority. Deadline is Feb 1 at noon.",
+    "notes": "30 bursaries of $6,000 awarded annually. Based on financial need and scholastic ability. First-year students given priority. Deadline is Feb 1 at noon. Verified 2026-09-09 on amhebf.com. Applications are accepted from December 1 annually and close February 1 at noon, which this listing already had right. Two qualifiers the headline figure hides. The fund says amounts are 'based on fund financials' and that thirty $6,000 bursaries is the HISTORICAL pattern, not a guarantee. And this is one of five Masonic bursaries, not the only one: the Lauraine Douchet adds two at $7,000 for pharmacy or medicine students, the Mathews Konschak adds ten at $6,000 for the Peace River Regional District, and the Fred and Lilly North takes applicants from named locations in Alberta and Saskatchewan. If you are in Peace River or heading into pharmacy, check those before the general one.",
     "url": "https://amhebf.com/",
     "description": "The Alberta Masonic Foundation gives out 30 bursaries of $6,000 each year to first-year post-secondary students from Alberta and the NWT, weighing both marks and financial need.",
     "eligibility": {
@@ -3734,16 +3696,16 @@
     "id": 132,
     "title": "Football Alberta Scholarships",
     "amount": "$2,000",
-    "deadline": "2027-06-30",
+    "deadline": "2027-06-15",
     "audience": "Graduating Grade 12 ASAA tackle football players continuing to play at the post-secondary level in Alberta",
-    "url": "https://footballalberta.ab.ca/",
+    "url": "https://footballalberta.ab.ca/content/scholarships-amp-forms",
     "category": "Sports",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "The link goes to the Football Alberta home page because the scholarship page moves each year. Look under their programs menu in the spring.",
+    "notes": "Verified 2026-09-09 against Football Alberta's own scholarships page, which corrected two facts this listing had wrong: there are FIVE awards a year totalling $10,000, not eight, and the deadline is June 15 at 4pm, not June 30. The five are split by region: Northern Alberta, Edmonton, Central Alberta, Calgary and Southern Alberta, one each. That regional split is the thing worth knowing, because a region needs a minimum of five applicants to award its scholarship at all; thin regions get pooled with the next smallest, and a vacant zone goes to the region with the most applicants. Your high school program must be a paid Football Alberta member in the year you apply, you must have played within School Sport Alberta, and the post-secondary program must run at least two years. Applications and reference letters go by email to Football Alberta. The 2026 cycle closed June 15; the date here carries that forward and was not published for the new cycle when checked.",
     "applyViaGuidance": false,
     "active": false,
-    "description": "Eight $2,000 scholarships a year for graduating Grade 12 tackle football players continuing to play at an accredited Alberta post-secondary institution. You need to be registered full-time and on a university or junior roster.",
+    "description": "Five $2,000 scholarships a year, one for each Football Alberta region, for graduating Grade 12 tackle football players continuing to play at an accredited Alberta post-secondary institution at the USport, CJFL or WWCFL level.",
     "eligibility": {
       "grades": [
         "12"
@@ -4103,17 +4065,17 @@
   {
     "id": 142,
     "title": "Volleyball Alberta Hugh Hoyles Scholarship Fund",
-    "amount": "$500",
+    "amount": "Up to $750",
     "deadline": "2027-07-31",
     "audience": "Alberta residents selected to a Team Alberta volleyball program",
-    "url": "https://volleyballalberta.ca/",
+    "url": "https://www.volleyballalberta.ca/team-alberta-information/",
     "category": "Sports",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "The link goes to the Volleyball Alberta home page. Look under their programs or awards menu in the spring.",
+    "notes": "Verified 2026-09-09 on Volleyball Alberta's Team Alberta pages. Read what this actually is before applying: it is listed under Financial Assistance beside KidSport and Jumpstart, and it subsidises the cost of participating in a Team Alberta program rather than funding post-secondary study. The amount is up to $750, not the $500 this listing previously carried. You have to be selected to a Team Alberta indoor or beach program first, and then apply on financial need. Volleyball Alberta's public awards page lists Hugh Hoyles only as a Hall of Fame builder; the fund itself is described on the Team Alberta pages, which is why this points there.",
     "applyViaGuidance": false,
     "active": false,
-    "description": "Volleyball Alberta offers the Hugh Hoyles Scholarship Fund to support student-athletes excelling in volleyball. This $500 award recognizes Alberta residents who have been selected to a Team Alberta volleyball program. Applicants may submit only one application per calendar year.",
+    "description": "Need-based help with the cost of playing in a Team Alberta volleyball program, not money for school. It offsets fees such as training, Canada Cup travel, accommodation, meals and gear.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -4135,22 +4097,22 @@
         "sports"
       ]
     },
-    "metaDetail": "One application per calendar year."
+    "metaDetail": null
   },
   {
     "id": 143,
     "title": "PEO Florence E. Taylor Charitable Scholarship Fund",
-    "amount": "Varies",
-    "deadline": "2026-08-15",
-    "audience": "Female Alberta students in their first or second year at an Alberta or Saskatchewan post-secondary institution",
+    "amount": "$2,000",
+    "deadline": "2027-08-15",
+    "audience": "Women entering first or second year at an Alberta or Saskatchewan institution",
     "category": "Academic",
     "region": "Alberta",
-    "active": false,
-    "lastVerified": "2026-04",
+    "active": true,
+    "lastVerified": "2026-09",
     "applyViaGuidance": false,
-    "notes": null,
-    "url": "https://www.peointernational.org/",
-    "description": "The P.E.O. Sisterhood funds female students from Alberta in their first or second year at an Alberta or Saskatchewan institution, with financial need part of the selection. There is no central application; contact your nearest Alberta P.E.O. chapter.",
+    "notes": "Verified on 2026-09-09 against the P.E.O. Alberta-Saskatchewan page, which is the fund's real home; this listing previously pointed at peointernational.org, where the fund is named nowhere. The award was $1,000 from 1997 and rose to $2,000 in 2025. Entering first year counts, so a Grade 12 graduate can apply, but the real gate is sponsorship: a local P.E.O. chapter must submit a recommendation by August 15, and the foundation says to start one or two months earlier because the chapter has to complete its own paperwork. You also need two years of Alberta or Saskatchewan residency, a letter of reference and an official transcript. The foundation is a separate entity from P.E.O. despite the name. Contact the nearest chapter through peoab-sk.ca well before the August cutoff.",
+    "url": "https://www.peoab-sk.ca/florence-e-taylor-charitable-foundation-scholarship-fund/",
+    "description": "The Florence E. Taylor Charitable Foundation funds women entering first or second year of a first degree or diploma at an Alberta or Saskatchewan institution. Selection weighs financial need and commitment to the educational goal.",
     "eligibility": {
       "grades": [],
       "schoolBoards": [],
@@ -4171,7 +4133,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": null
   },
   {
     "id": 144,
@@ -4254,7 +4217,7 @@
   {
     "id": 147,
     "title": "Charmaine Letourneau Scholarship",
-    "amount": "$2,000–$7,000",
+    "amount": "$2,000 to $7,000",
     "deadline": "2026-09-30",
     "audience": "Deaf or hard of hearing Albertans entering post-secondary or vocational study",
     "category": "Community",
@@ -4619,7 +4582,7 @@
     "title": "Alberta Moose Association Youth Awareness Scholarship",
     "amount": "up to $12,000",
     "deadline": "2027-06-01",
-    "audience": "Alberta grade 9–12 students who participated in the AMA Youth Awareness KidsTalks program",
+    "audience": "Alberta grade 9 to 12 students who participated in the AMA Youth Awareness KidsTalks program",
     "url": "https://albertamoose.wixsite.com/amayouthawareness",
     "category": "Community",
     "lastVerified": "2026-08",
@@ -4627,7 +4590,7 @@
     "notes": "The Alberta Moose Association site has not been updated in some time and its listed events are stale, so treat this as unconfirmed and contact them before applying.",
     "applyViaGuidance": false,
     "active": false,
-    "description": "The Alberta Moose Association offers this scholarship to recognize youth who participate in their KidsTalks awareness program. Grade 9–12 students who complete at least three presentations at an Association Student Congress are eligible to win $1,000–$12,000, with top presenters at the International Student Congress earning up to $12,000.",
+    "description": "The Alberta Moose Association offers this scholarship to recognize youth who participate in their KidsTalks awareness program. Grade 9 to 12 students who complete at least three presentations at an Association Student Congress are eligible to win $1,000 to $12,000, with top presenters at the International Student Congress earning up to $12,000.",
     "eligibility": {
       "grades": [
         "10",
@@ -4653,7 +4616,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Treat as unconfirmed; contact the association."
+    "metaDetail": "Unconfirmed; contact the association."
   },
   {
     "id": 158,
@@ -37870,7 +37833,7 @@
     "category": "STEM",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "A September deadline is unusual and it works in a graduate’s favour: you apply after you have your acceptance, with a confirmation of enrolment letter attached. Open to First Nations status and non-status, Métis and Inuit applicants alike. The society posts only the previous cycle’s form, so email ccspe.scholarship@calgary.ca to confirm this year’s date.",
+    "notes": "A September deadline is unusual and it works in a graduate's favour: you apply after you have your acceptance, with a confirmation of enrolment letter attached. Open to First Nations status and non-status, Métis and Inuit applicants alike. The society posts only the previous cycle's form, so email ccspe.scholarship@calgary.ca to confirm this year's date.",
     "description": "One award from the City of Calgary Society of Professional Engineers, decided on a 500-word essay about why STEM interests you and how your actions have affected your community.",
     "metaDetail": "Decided on a 500-word essay.",
     "eligibility": {
@@ -38103,8 +38066,8 @@
     "category": "General",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "A hundred and fifty of these exist and there is no year-of-study bar, so a first-year student qualifies. The province does not run the intake; Mount Royal’s awards office does, and it sets the deadline. Full-time here means at least 60% of a course load in both fall and winter, or 40% for a student with a disability. Lifetime maximum of two.",
-    "description": "The province pays $10,000 to students entering aviation and pilot training at Mount Royal, an unusually large bursary aimed at Alberta’s pilot shortage.",
+    "notes": "A hundred and fifty of these exist and there is no year-of-study bar, so a first-year student qualifies. The province does not run the intake; Mount Royal's awards office does, and it sets the deadline. Full-time here means at least 60% of a course load in both fall and winter, or 40% for a student with a disability. Lifetime maximum of two.",
+    "description": "The province pays $10,000 to students entering aviation and pilot training at Mount Royal, an unusually large bursary aimed at Alberta's pilot shortage.",
     "eligibility": {
       "grades": [
         "12"
@@ -38139,13 +38102,13 @@
     "amount": "$2,000",
     "deadline": null,
     "openDate": null,
-    "audience": "Alberta post-secondary students who lead in improving other people’s lives",
+    "audience": "Alberta post-secondary students who lead in improving other people's lives",
     "url": "https://studentaid.alberta.ca/scholarships/dr-gary-mcpherson-leadership-scholarship/",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Alberta",
     "applyViaGuidance": true,
-    "notes": "A hundred awards a year and no year-of-study restriction, which makes it one of the better odds on the provincial list for a first-year student. Leadership in the area of disability is named first in the criteria. You apply to your own institution’s student awards office, with a resume and an essay of up to 1,000 words, and each school sets its own date.",
+    "notes": "A hundred awards a year and no year-of-study restriction, which makes it one of the better odds on the provincial list for a first-year student. Leadership in the area of disability is named first in the criteria. You apply to your own institution's student awards office, with a resume and an essay of up to 1,000 words, and each school sets its own date.",
     "description": "Named for the Alberta disability advocate, this provincial scholarship rewards leadership and initiative that improved the lives of other people rather than academic standing.",
     "eligibility": {
       "grades": [
@@ -38183,7 +38146,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "applyViaGuidance": true,
-    "notes": "Your institution nominates you and holds a limited number of these, so the competition is inside your own school rather than the province. The government warns that a student-facing deadline can fall months before the school’s own submission date, which is the trap here: ask in September, not in spring.",
+    "notes": "Your institution nominates you and holds a limited number of these, so the competition is inside your own school rather than the province. The government warns that a student-facing deadline can fall months before the school's own submission date, which is the trap here: ask in September, not in spring.",
     "description": "A provincial leadership award for students involved in student government, campus societies and clubs, or non-profit community organizations.",
     "metaDetail": "Your school nominates, and dates vary.",
     "eligibility": {
@@ -38221,7 +38184,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "Up to two hundred of these are available, which is a large field for a $5,000 award, and there is no year-of-study bar. The service test is specific: the member must have served in a designated military operation, or have been permanently disabled through Armed Forces training. A journeyperson certificate counts as an academic credential here alongside degrees and diplomas. Lifetime maximum of two.",
-    "description": "Named for the Olympic runner who became Canada’s first Indigenous police officer, this award supports returning soldiers and their families through post-secondary study in Alberta.",
+    "description": "Named for the Olympic runner who became Canada's first Indigenous police officer, this award supports returning soldiers and their families through post-secondary study in Alberta.",
     "eligibility": {
       "grades": [
         "12"
@@ -38370,7 +38333,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "Twenty awards, and the target is narrow and worth naming: the technical side of the cultural industries, such as audio production, film production and game design, rather than performance or fine art. The province publishes a list of qualifying programs. Like the other two, it opens in mid-September and excludes anyone still in high school.",
-    "description": "A provincial scholarship for women entering the technical crafts behind Alberta’s film, music and video game industries, where they remain underrepresented.",
+    "description": "A provincial scholarship for women entering the technical crafts behind Alberta's film, music and video game industries, where they remain underrepresented.",
     "eligibility": {
       "grades": [
         "12"
@@ -38443,7 +38406,7 @@
     "category": "Trades",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Apprentices do not apply. The Alberta Board of Skilled Trades picks recipients from classroom instruction marks and whatever criteria each donor set, so the only thing you control is the mark. The board’s own page does not restate the value; the scholarships index does. Cheques are mailed by November 1.",
+    "notes": "Apprentices do not apply. The Alberta Board of Skilled Trades picks recipients from classroom instruction marks and whatever criteria each donor set, so the only thing you control is the mark. The board's own page does not restate the value; the scholarships index does. Cheques are mailed by November 1.",
     "description": "An award the Alberta Board of Skilled Trades hands to apprentices with the strongest classroom results and a strong employer recommendation behind them.",
     "eligibility": {
       "grades": [
@@ -38517,7 +38480,7 @@
     "category": "Sports",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Sixteen awards, roughly one per U18 AAA team, which makes the field your own dressing room rather than the province. You can still apply up to one year after your last registered season. The money never reaches you directly; it is paid to your institution, and you have five years to collect it before it is forfeited. The league page gives only a January opening, so the March date comes from Hockey Alberta’s own announcement.",
+    "notes": "Sixteen awards, roughly one per U18 AAA team, which makes the field your own dressing room rather than the province. You can still apply up to one year after your last registered season. The money never reaches you directly; it is paid to your institution, and you have five years to collect it before it is forfeited. The league page gives only a January opening, so the March date comes from Hockey Alberta's own announcement.",
     "description": "The Alberta Elite Hockey League has paid out more than $500,000 since 2006, weighing character, hockey ability, marks and financial need together.",
     "eligibility": {
       "grades": [
@@ -38673,7 +38636,7 @@
     "category": "Sports",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "The third and least-known of School Sport Alberta’s three scholarships, and the criteria are about character rather than results: putting teammates first, enhancing culture, servant leadership. You need three written answers of up to 500 words each and two references, at least one from a teacher or coach in your sport, and neither may be a family member. You must already hold an acceptance. The value is not published.",
+    "notes": "The third and least-known of School Sport Alberta's three scholarships, and the criteria are about character rather than results: putting teammates first, enhancing culture, servant leadership. You need three written answers of up to 500 words each and two references, at least one from a teacher or coach in your sport, and neither may be a family member. You must already hold an acceptance. The value is not published.",
     "description": "For a grade 12 athlete who plays several sports, one of them a School Sport Alberta sport, and who is held up as a role model by the rest of the school.",
     "metaDetail": "Judged on sportsmanship, not on winning.",
     "eligibility": {
@@ -38713,7 +38676,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "The union created this in 2017 specifically so high school students would stop losing to university students in one shared pool, so the two awards here are the whole field. Your parent needs two consecutive years of AUPE service and you must be under 25. The essay is marked by independent adjudicators and has to be formal: title page, footnotes, citations, bibliography.",
-    "description": "Two awards from the Alberta Union of Provincial Employees, ring-fenced for high school students, funded through the Members’ Education Assistance Fund.",
+    "description": "Two awards from the Alberta Union of Provincial Employees, ring-fenced for high school students, funded through the Members' Education Assistance Fund.",
     "metaDetail": "High school students compete only against each other.",
     "eligibility": {
       "grades": [
@@ -38749,7 +38712,7 @@
     "category": "General",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Set up at the union’s 2004 convention to raise awareness of the privatization of public services, which is the subject the essay circles. It is the post-secondary half of the pair, so a graduate applying in the summer before first year should check with the education sub-committee which stream they fall into. Same July cutoff and the same formal essay rules.",
+    "notes": "Set up at the union's 2004 convention to raise awareness of the privatization of public services, which is the subject the essay circles. It is the post-secondary half of the pair, so a graduate applying in the summer before first year should check with the education sub-committee which stream they fall into. Same July cutoff and the same formal essay rules.",
     "description": "Two AUPE awards for students already in post-secondary study, the twin of the high school scholarship the union runs alongside it.",
     "metaDetail": "The post-secondary half of a matched pair.",
     "eligibility": {
@@ -38777,7 +38740,7 @@
   },
   {
     "id": 1023,
-    "title": "AUPE Members’ Education Assistance Bursary",
+    "title": "AUPE Members' Education Assistance Bursary",
     "amount": "$1,000",
     "deadline": "2027-07-15",
     "openDate": "2027-05-12",
@@ -38788,7 +38751,7 @@
     "region": "Alberta",
     "notes": "Unlike the two scholarships beside it there is no essay, so it is much less work for the same summer deadline. How much is paid out each year depends on the interest the fund earned. First-time applicants may be given preference, and priority goes to students who have not had it before. Dependants of retired and deceased members qualify too.",
     "description": "A need-based bursary from the interest on the Alberta Union of Provincial Employees education fund, open to members and to the family members they support.",
-    "metaDetail": "No essay, unlike the union’s scholarships.",
+    "metaDetail": "No essay, unlike the union's scholarships.",
     "eligibility": {
       "grades": [
         "12"
@@ -38819,11 +38782,11 @@
     "deadline": "2026-10-31",
     "openDate": null,
     "audience": "Livingstone Range School Division graduates and the children of its teachers",
-    "url": "http://www.lrata.com/application.html",
+    "url": "https://lrata.com/scholarship-application/",
     "category": "General",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "Six awards in two streams, and the streams have different gates. Three entrance scholarships go to students whose parent teaches in the division, and those can be used in any faculty anywhere. The other three go to any Livingstone Range graduate enrolled in a Faculty of Education. The entrance stream is first year only, so it is now or never.",
+    "notes": "Six awards in two streams, and the streams have different gates. Three entrance scholarships go to students whose parent teaches in the division, and those can be used in any faculty anywhere. The other three go to any Livingstone Range graduate enrolled in a Faculty of Education. The entrance stream is first year only, so it is now or never. Verified 2026-09-09: the local rebuilt its site and the old application.html now 404s, so this points at the current scholarship page. One useful detail from the criteria, since it saves a calculation: the entrance stream is selected on the highest high school average, computed the same way as the Alexander Rutherford Scholarship. A student may hold only one of the six in a year and cannot win twice. Cheques go out in December once enrolment is verified, and applications go by mail to the Local in Blairmore.",
     "description": "The teachers of the Livingstone Range division, covering Claresholm, Pincher Creek and the Crowsnest Pass, fund six of these a year out of their own local.",
     "metaDetail": "Two streams of awards.",
     "eligibility": {
