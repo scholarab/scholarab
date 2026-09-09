@@ -5,6 +5,7 @@
 import { DEFAULT_SCHOLARSHIP_STATE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipDayChip, scholarshipGroupKey, shortDate } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
+import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../../lib/facets.ts';
 
 interface Props {
@@ -272,7 +273,7 @@ const soonLine = [
           data-deadline={s.deadline ?? undefined}
           data-open-date={s.openDate ?? undefined}
           data-inactive={s.active === false ? '' : undefined}
-          data-search={[s.title, s.audience, s.category].filter(Boolean).join('\n').toLowerCase()}
+          data-search={scholarshipSearchBlob(s)}
         >
           <div class="sabl-card-top">
             <span class="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
@@ -317,7 +318,11 @@ const soonLine = [
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
     <div class="sabl-empty-title">Nothing matches that.</div>
-    <div class="sabl-empty-sub">Try clearing a filter or searching something broader.</div>
+    <div class="sabl-empty-sub" data-dir-empty-sub>Try clearing a filter or searching something broader.</div>
+    {/* Filled in by directory-client when the term exists somewhere else on
+        the site: a facet page holds a slice, so "clear a filter" is the wrong
+        advice for a match sitting on another page. */}
+    <div class="sabl-empty-elsewhere" data-dir-elsewhere hidden></div>
     <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
   </div>
 </div>

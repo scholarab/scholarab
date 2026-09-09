@@ -300,13 +300,30 @@ export default function AnalyticsPanel({ data }: Props) {
     })
   }, [allRows, typeFilter, query, sortKey, sortDesc])
 
+  // Rows arrive as "query | /path" since 2026-09-09. Aggregate on the query,
+  // or the same dead end typed on three pages reads as three smaller ones,
+  // and keep the paths as a second line: where students hunt for a term is
+  // its own signal about which hub is missing a facet.
   const searches = useMemo(() => {
-    const merged = new Map<string, number>()
+    const merged = new Map<string, { n: number; paths: Map<string, number> }>()
     for (const s of data.emptySearches) {
       if (!s.q || (month !== ALL && s.month !== month)) continue
-      merged.set(s.q, (merged.get(s.q) ?? 0) + s.n)
+      const [q, path] = s.q.split(' | ')
+      const key = (q ?? s.q).trim()
+      if (!key) continue
+      const row = merged.get(key) ?? { n: 0, paths: new Map<string, number>() }
+      row.n += s.n
+      if (path) row.paths.set(path, (row.paths.get(path) ?? 0) + s.n)
+      merged.set(key, row)
     }
-    return [...merged.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20)
+    return [...merged.entries()]
+      .sort((a, b) => b[1].n - a[1].n)
+      .slice(0, 20)
+      .map(([q, row]) => ({
+        q,
+        n: row.n,
+        paths: [...row.paths.entries()].sort((a, b) => b[1] - a[1]).map(([p]) => p),
+      }))
   }, [data.emptySearches, month])
 
   const dailyRows = useMemo(() => {
@@ -617,10 +634,15 @@ export default function AnalyticsPanel({ data }: Props) {
                 {searches.length === 0 && (
                   <tr><td className="px-4 py-6 text-white/30 text-center">Nothing yet. These are scholarships students looked for and didn&apos;t find.</td></tr>
                 )}
-                {searches.map(([q, n]) => (
+                {searches.map(({ q, n, paths }) => (
                   <tr key={q} className="border-b border-white/4">
-                    <td className="px-4 py-2.5">{q}</td>
-                    <td className="px-4 py-2.5 text-right text-white/40">{n}×</td>
+                    <td className="px-4 py-2.5">
+                      {q}
+                      {paths.length > 0 && (
+                        <div className="text-xs text-white/30 mt-0.5">{paths.slice(0, 3).join('  ')}</div>
+                      )}
+                    </td>
+                    <td className="px-4 py-2.5 text-right text-white/40 align-top">{n}×</td>
                   </tr>
                 ))}
               </tbody>

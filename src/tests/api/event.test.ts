@@ -248,6 +248,29 @@ describe('POST /api/event', () => {
     expect(inserted.meta).toBe('rotary club grant')
   })
 
+  it('keeps the page path a search_empty was typed on', async () => {
+    // "query | /path": the path separates a term the site does not carry from
+    // one the facet hub in front of the student does not.
+    await call({ event: 'search_empty', meta: 'Nursing | /scholarships/calgary/' })
+    const inserted = mockValues.mock.calls[0]![0] as { meta: string | null }
+    expect(inserted.meta).toBe('nursing | /scholarships/calgary/')
+  })
+
+  it('drops a path that is not a plain site-relative path', async () => {
+    for (const bad of ['https://evil.test/x', '/x?token=abc', '/x#a b', 'scholarships']) {
+      mockValues.mockClear()
+      await call({ event: 'search_empty', meta: `nursing | ${bad}` })
+      const inserted = mockValues.mock.calls[0]![0] as { meta: string | null }
+      expect(inserted.meta).toBe('nursing')
+    }
+  })
+
+  it('judges length on the query alone, not the path', async () => {
+    const res = await call({ event: 'search_empty', meta: 'ab | /scholarships/' })
+    expect(res.status).toBe(204)
+    expect(mockValues).not.toHaveBeenCalled()
+  })
+
   it('silently drops search_empty meta that is too short to mean anything', async () => {
     const res = await call({ event: 'search_empty', meta: 'ab' })
     expect(res.status).toBe(204)

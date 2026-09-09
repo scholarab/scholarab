@@ -4,6 +4,7 @@ import { getToday } from './utils.ts';
 import { scholarshipStatusOf } from './status.ts';
 import type { ScholarshipStatus } from './status.ts';
 import type { Scholarship, Program } from './data-loader.ts';
+import { normalizeSearchQuery, programSearchBlob, scholarshipSearchBlob } from './search-text.ts';
 
 // ── Scholarships ──────────────────────────────────────────────────────────────
 
@@ -103,14 +104,10 @@ export function selectScholarships(
   const afterRegion = selectedRegion === null
     ? afterCategory
     : afterCategory.filter(s => regionMatches(selectedRegion, s));
-  const q = searchQuery.trim().toLowerCase();
+  const q = normalizeSearchQuery(searchQuery);
   const afterSearch = q === ''
     ? afterRegion
-    : afterRegion.filter(s =>
-        (s.title?.toLowerCase().includes(q)) ||
-        (s.audience?.toLowerCase().includes(q)) ||
-        (s.category?.toLowerCase().includes(q))
-      );
+    : afterRegion.filter(s => scholarshipSearchBlob(s).includes(q));
 
   return afterSearch;
 }
@@ -344,15 +341,11 @@ export function selectPrograms(
   const afterGrade = gradeFilter === null
     ? afterCategory
     : afterCategory.filter(p => programMatchesGrade(p.grades, gradeFilter));
-  const q = searchQuery.trim().toLowerCase();
+  const q = normalizeSearchQuery(searchQuery);
   const afterSearch = q === ''
     ? afterGrade
     : afterGrade.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        (p.provider?.toLowerCase().includes(q)) ||
-        (p.description?.toLowerCase().includes(q)) ||
-        (p.category?.toLowerCase().includes(q))
-      );
+        programSearchBlob(p).includes(q));
 
   return afterSearch;
 }

@@ -3,6 +3,7 @@
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
 import { DEFAULT_PROGRAM_STATE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programDayChip, programGroupKey, shortDate } from '../../lib/list-core.ts';
+import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { emailOff } from '../../lib/email-off';
@@ -195,7 +196,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
           data-grades={p.grades ?? undefined}
           data-paid={p.paid ? '1' : undefined}
           data-deadline={p.deadline ?? undefined}
-          data-search={[p.name, p.provider, p.description, p.category].filter(Boolean).join('\n').toLowerCase()}
+          data-search={programSearchBlob(p)}
         >
           <div class="sabl-card-top">
             <span class="sabl-card-top-left">
@@ -239,7 +240,11 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
     <div class="sabl-empty-title">Nothing matches that.</div>
-    <div class="sabl-empty-sub">Try clearing a filter or searching something broader.</div>
+    <div class="sabl-empty-sub" data-dir-empty-sub>Try clearing a filter or searching something broader.</div>
+    {/* Filled in by directory-client when the term exists somewhere else on
+        the site: a facet page holds a slice, so "clear a filter" is the wrong
+        advice for a match sitting on another page. */}
+    <div class="sabl-empty-elsewhere" data-dir-elsewhere hidden></div>
     <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
   </div>
 </div>

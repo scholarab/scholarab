@@ -94,9 +94,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
     // Empty-search queries that can't name a content gap aren't worth a row:
     // too short to mean anything, no letters, or something email-shaped (PII).
     // lowercased so "Rotary" and "rotary" aggregate as one search gap.
-    cleanMeta = meta.trim().toLowerCase().replace(/\s+/g, ' ').slice(0, META_MAX)
-    if (cleanMeta.length < 3 || !/\p{L}/u.test(cleanMeta) || EMAIL_LIKE.test(cleanMeta))
+    // `search_empty` sends "query | /path". The path says which page the
+    // student was standing on, which is the difference between a term the
+    // site does not carry and a term the facet hub in front of them does not.
+    // Split, clean each half, and rejoin, so a stray pipe in the query text
+    // cannot forge a path.
+    const [rawQuery, ...rest] = meta.split('|')
+    const query = (rawQuery ?? '').trim().toLowerCase().replace(/\s+/g, ' ')
+    if (query.length < 3 || !/\p{L}/u.test(query) || EMAIL_LIKE.test(query))
       return accepted()
+    const path = (rest[0] ?? '').trim().toLowerCase()
+    // Site-relative paths only, and nothing that could carry an identifier.
+    const cleanPath = /^\/[a-z0-9/-]{0,60}$/.test(path) ? path : ''
+    cleanMeta = (cleanPath ? `${query} | ${cleanPath}` : query).slice(0, META_MAX)
   }
 
   try {

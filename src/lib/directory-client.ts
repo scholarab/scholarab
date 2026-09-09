@@ -2,6 +2,7 @@
 // The page ships fully server-rendered cards; this module only shows/hides and
 // reorders existing DOM nodes, replicating what the old React islands did.
 import { sendEvent } from './events.ts';
+import { normalizeSearchQuery, tokenIndexMayMatch } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
 import { showConfetti } from './utils.ts';
 
@@ -80,6 +81,33 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
   initialState?(state: S): S;
 }
 
+interface SearchIndex { s: string[]; p: string[] }
+
+/**
+ * Every word in either directory, fetched once per page and only after a
+ * search has already come up empty.
+ *
+ * A directory page holds a slice of the corpus (see the facet hubs), so
+ * "nothing matches" on the page in front of you says nothing about the site.
+ * Until this existed the empty state offered "try clearing a filter" for a
+ * term whose sixteen matches were on another page, and logged the term as a
+ * content gap on the way past.
+ */
+let indexPromise: Promise<SearchIndex | null> | null = null;
+
+function loadSearchIndex(): Promise<SearchIndex | null> {
+  indexPromise ??= fetch('/search-index.json')
+    .then(r => (r.ok ? r.json() : null))
+    .then((j: unknown) => {
+      const i = j as SearchIndex | null;
+      return i && Array.isArray(i.s) && Array.isArray(i.p) ? i : null;
+    })
+    // An unreachable index must not turn into a broken empty state; the
+    // caller falls back to the generic copy and logs nothing.
+    .catch(() => null);
+  return indexPromise;
+}
+
 export function initDirectory<T extends DirectoryItem, S extends Record<string, string>, C = unknown>(
   rootSelector: string,
   config: DirectoryConfig<T, S, C>,
@@ -156,7 +184,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (emptyTimer) { clearTimeout(emptyTimer); emptyTimer = undefined; }
 
     const q = query.trim();
-    const ql = q.toLowerCase();
+    // Normalized the same way the cards' blobs were, so punctuation a student
+    // omits (or adds) does not decide whether they find anything.
+    const ql = normalizeSearchQuery(q);
     const ctx = config.renderContext?.(items) as C;
     const visible = config.select(items, state, ql, ctx);
     const grid = root.querySelector<HTMLElement>('[data-dir-grid]');
@@ -235,12 +265,66 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     const empty = root.querySelector<HTMLElement>('[data-dir-empty]');
     if (empty) empty.hidden = visible.length > 0;
+    if (visible.length > 0 || q.length < 3) resetFallback();
+    else resolveEmptySearch(q, ql, items.some(it => it.search.includes(ql)));
+  }
 
-    // Content-gap signal: only report a query that matches nothing in the FULL
-    // directory, not one starved by an active category/grade filter.
-    if (q.length >= 3 && visible.length === 0 && !items.some(it => it.search.includes(ql))) {
-      emptyTimer = setTimeout(() => sendEvent('search_empty', undefined, undefined, q), 1000);
-    }
+  /** Put the empty state back to its generic copy. */
+  function resetFallback() {
+    const slot = root?.querySelector<HTMLElement>('[data-dir-elsewhere]');
+    if (slot) { slot.hidden = true; slot.textContent = ''; }
+    const sub = root?.querySelector<HTMLElement>('[data-dir-empty-sub]');
+    if (sub) sub.hidden = false;
+  }
+
+  /**
+   * Decide what "nothing matches" actually means, then say so.
+   *
+   * Three different situations used to share one message and one event:
+   * the term exists on another page of this same directory (a facet slice),
+   * it exists in the other directory, or the site really does not have it.
+   * Only the third is a content gap, and only the third gets logged.
+   */
+  function resolveEmptySearch(q: string, ql: string, onThisPage: boolean) {
+    const kind = config.itemType;
+    void loadSearchIndex().then(index => {
+      // Still the same query? A slow index must not overwrite a later render.
+      if (!root || normalizeSearchQuery(query) !== ql) return;
+
+      const here = index ? tokenIndexMayMatch(kind === 'scholarship' ? index.s : index.p, ql) : onThisPage;
+      const there = index ? tokenIndexMayMatch(kind === 'scholarship' ? index.p : index.s, ql) : false;
+
+      const slot = root.querySelector<HTMLElement>('[data-dir-elsewhere]');
+      const sub = root.querySelector<HTMLElement>('[data-dir-empty-sub]');
+      if (slot) {
+        // Own directory first: same page, same filters, just a wider slice.
+        const target = here
+          ? { href: kind === 'scholarship' ? '/scholarships/' : '/programs/', label: kind === 'scholarship' ? 'all scholarships' : 'all research programs' }
+          : there
+            ? { href: kind === 'scholarship' ? '/programs/' : '/scholarships/', label: kind === 'scholarship' ? 'research programs' : 'scholarships' }
+            : null;
+        slot.textContent = '';
+        slot.hidden = target === null;
+        if (target) {
+          const a = document.createElement('a');
+          a.className = 'sabl-empty-link';
+          a.href = `${target.href}?q=${encodeURIComponent(q)}`;
+          a.textContent = `Search ${target.label} for "${q}"`;
+          slot.append(a);
+        }
+        // The generic "clear a filter" line is wrong whenever the match is on
+        // another page: no filter on this one is hiding it.
+        if (sub) sub.hidden = target !== null;
+      }
+
+      // A real gap: nowhere on the site, in either directory.
+      if (!here && !there) {
+        emptyTimer = setTimeout(
+          () => sendEvent('search_empty', undefined, undefined, `${q} | ${location.pathname}`),
+          1000,
+        );
+      }
+    });
   }
 
   document.addEventListener('click', e => {
@@ -294,9 +378,14 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     items = [...root.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);
     state = { ...config.defaultState };
     if (config.initialState) state = config.initialState(state);
-    query = '';
+    // ?q= arrives from the other directory's empty state, which offers this
+    // page as the wider search. Landing here with an empty box would drop the
+    // query the student already typed.
+    let initialQuery = '';
+    try { initialQuery = new URLSearchParams(location.search).get('q') ?? ''; } catch { /* no URL */ }
+    query = initialQuery;
     const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
-    if (input) input.value = '';
+    if (input) input.value = initialQuery;
     config.onCardsParsed?.(items);
     paintSaved();
     render();

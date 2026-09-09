@@ -45,6 +45,8 @@ function mountFixture() {
         ${card(3, 'Gamma Research', 'Science', false, 3)}
       </div>
       <div class="sabl-empty" data-dir-empty hidden>
+        <div data-dir-empty-sub>Try clearing a filter.</div>
+        <div data-dir-elsewhere hidden></div>
         <button type="button" data-dir-clear>Clear all filters</button>
       </div>
     </div>`
@@ -110,9 +112,20 @@ const visibleCardNames = () =>
 const gridOrderNames = () => $$('[data-dir-grid] [data-dir-card]').map(el => el.dataset.name)
 const click = (el: Element) => el.dispatchEvent(new Event('click', { bubbles: true }))
 
+/**
+ * The corpus-wide token index the client fetches when a search comes up
+ * empty. "nursing" stands for a term on another page of this same directory,
+ * "telescope" for one that only exists in the other directory.
+ */
+const INDEX = { s: ['alpha', 'camp', 'beta', 'lab', 'gamma', 'research', 'nursing'], p: ['telescope', 'observatory'] }
+
+/** Let the index fetch and its .then chain settle before asserting. */
+const flushIndex = async () => { for (let i = 0; i < 4; i++) await Promise.resolve() }
+
 beforeEach(() => {
   savedIds = []
   vi.clearAllMocks()
+  vi.stubGlobal('fetch', vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve(INDEX) })))
 })
 
 afterEach(() => {
@@ -242,35 +255,86 @@ describe('initDirectory', () => {
     expect(btn.textContent).toBe('★')
   })
 
-  it('fires search_empty after 1s only when the query misses the whole directory', () => {
-    vi.useFakeTimers()
+  it('fires search_empty after 1s only when the query misses the whole site', async () => {
+    history.replaceState(null, '', '/scholarships/calgary/')
     setup()
     const input = $('[data-dir-search]') as HTMLInputElement
+    const type = async (v: string) => {
+      input.value = v
+      input.dispatchEvent(new Event('input', { bubbles: true }))
+      await flushIndex()
+    }
 
-    // Misses everything → debounced event with the trimmed query
-    input.value = '  quantum  '
-    input.dispatchEvent(new Event('input', { bubbles: true }))
+    // Misses both directories → debounced event carrying query and page
+    vi.useFakeTimers()
+    await type('  quantum  ')
     vi.advanceTimersByTime(1000)
-    expect(sendEvent).toHaveBeenCalledWith('search_empty', undefined, undefined, 'quantum')
+    expect(sendEvent).toHaveBeenCalledWith('search_empty', undefined, undefined, 'quantum | /scholarships/calgary/')
+    vi.useRealTimers()
 
     // Query that matches a card but is starved by a filter → no event
     vi.mocked(sendEvent).mockClear()
     click($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Arts')!)
-    input.value = 'gamma'
-    input.dispatchEvent(new Event('input', { bubbles: true }))
+    vi.useFakeTimers()
+    await type('gamma')
     vi.advanceTimersByTime(1500)
     expect(sendEvent).not.toHaveBeenCalled()
+    vi.useRealTimers()
 
     // Typing again before the debounce fires cancels the pending event
-    input.value = 'zzzz'
-    input.dispatchEvent(new Event('input', { bubbles: true }))
+    vi.useFakeTimers()
+    await type('zzzz')
     vi.advanceTimersByTime(500)
-    input.value = ''
-    input.dispatchEvent(new Event('input', { bubbles: true }))
+    await type('')
     vi.advanceTimersByTime(2000)
     expect(sendEvent).not.toHaveBeenCalled()
     vi.useRealTimers()
+    history.replaceState(null, '', '/')
   })
+
+  it('offers the wider directory instead of logging a gap that is not one', async () => {
+    setup()
+    const input = $('[data-dir-search]') as HTMLInputElement
+    const elsewhere = $('[data-dir-elsewhere]') as HTMLElement
+    const sub = $('[data-dir-empty-sub]') as HTMLElement
+
+    // On the page but hidden by a filter: no fallback, no event.
+    click($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Arts')!)
+
+    // "nursing" is absent from this page's cards but present in the index's
+    // scholarship tokens, which is the facet-slice case.
+    input.value = 'nursing'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    await flushIndex()
+    expect(elsewhere.hidden).toBe(false)
+    const link = elsewhere.querySelector('a')!
+    expect(link.getAttribute('href')).toBe('/scholarships/?q=nursing')
+    expect(link.textContent).toContain('all scholarships')
+    // The generic advice is wrong here: no filter on this page is hiding it.
+    expect(sub.hidden).toBe(true)
+
+    // Present only in the other directory → link across.
+    input.value = 'telescope'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    await flushIndex()
+    expect(elsewhere.querySelector('a')!.getAttribute('href')).toBe('/programs/?q=telescope')
+
+    // A true miss restores the generic copy and hides the link.
+    input.value = 'quantum'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    await flushIndex()
+    expect(elsewhere.hidden).toBe(true)
+    expect(sub.hidden).toBe(false)
+  })
+
+  it('picks up ?q= so a handoff from the other directory keeps the query', async () => {
+    history.replaceState(null, '', '/scholarships/?q=alpha')
+    setup()
+    expect(($('[data-dir-search]') as HTMLInputElement).value).toBe('alpha')
+    expect(visibleCardNames()).toEqual(['Alpha Camp'])
+    history.replaceState(null, '', '/scholarships/')
+  })
+
 
   it('re-parses cards and resets filters on subsequent astro:page-load', () => {
     setup()

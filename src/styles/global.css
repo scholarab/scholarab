@@ -708,6 +708,14 @@ body.quiz-results #match-divider {
 .sabl-empty { text-align: center; padding: 80px 0; border: 2px dashed rgba(20,25,21,0.2); border-radius: 20px; margin-top: 16px; }
 .sabl-empty-title { font-family: 'Instrument Serif', serif; font-size: 34px; margin-bottom: 10px; }
 .sabl-empty-sub { font-size: 15px; color: rgba(20,25,21,0.55); margin-bottom: 24px; }
+.sabl-empty-elsewhere { font-size: 15px; margin-bottom: 24px; }
+.sabl-empty-link {
+  font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 15px;
+  color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+.sabl-empty-link:hover, .sabl-empty-link:focus-visible { color: #08573E; }
+
 .sabl-empty-btn {
   font-family: 'Archivo', sans-serif; background: #0A6B4D; color: #F5FBF8;
   font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 100px; border: none; cursor: pointer;
