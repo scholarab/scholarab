@@ -266,7 +266,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "You must already be a Servus member in good standing."
   },
   {
     "id": 19,
@@ -305,7 +306,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "One Indspire form covers every award."
   },
   {
     "id": 20,
@@ -381,7 +383,8 @@
         "science_fair"
       ]
     },
-    "notes": "Praxis has confirmed the 2027 Southeastern Alberta Regional Science Fair for March 20, 2027 at Medicine Hat College. The date here is the fair itself; registration closes earlier, so watch the Praxis page. Prizes range from certificates to national level awards and university scholarships, which is why no single amount is listed."
+    "notes": "Praxis has confirmed the 2027 Southeastern Alberta Regional Science Fair for March 20, 2027 at Medicine Hat College. The date here is the fair itself; registration closes earlier, so watch the Praxis page. Prizes range from certificates to national level awards and university scholarships, which is why no single amount is listed.",
+    "metaDetail": "Top seniors advance to the Canada-Wide fair."
   },
   {
     "id": 35,
@@ -419,7 +422,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs Metis citizenship or proof your application is in progress."
   },
   {
     "id": 36,
@@ -502,21 +506,22 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Confirm the date before you plan on it."
   },
   {
     "id": 38,
     "title": "Bill Gibson Bursary",
     "amount": "$7,500",
     "deadline": "2027-05-15",
-    "audience": "Graduating Calgary-area high school student entering post-secondary",
+    "audience": "Calgary public and Catholic grads entering first year in the city",
     "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
     "category": "Community",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "Calgary",
-    "notes": "The provider had not posted a date for the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward. Confirm before you plan around it.",
+    "notes": "Established by the Stampede City Progress Club for Bill Gibson, its longest serving member. You must go straight from Grade 12 into first year: a gap year disqualifies you, and the program has to be a full-time undergraduate degree at a Calgary institution. Selection weighs leadership in Calgary communities alongside financial need. The value has moved between cycles, listed at $10,000 in an earlier year and at $7,500 renewable for three years on the most recent Calgary Board of Education listing, so confirm the figure with the Calgary Foundation. The provider had not posted a date for the new cycle when this was checked, so this is last cycle's deadline rolled forward.",
     "active": false,
-    "description": "A $10,000 bursary for graduating Calgary-area students entering post-secondary studies.",
+    "description": "$7,500 for a Grade 12 student graduating from a Calgary public or Catholic school and entering first year of a full-time undergraduate degree at a Calgary post-secondary institution, renewable for up to three years.",
     "eligibility": {
       "grades": [
         "12"
@@ -542,7 +547,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Renewable three years; no gap year allowed."
   },
   {
     "id": 39,
@@ -582,7 +588,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "Not an entrance award."
   },
   {
     "id": 40,
@@ -781,7 +788,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Two awards; video can replace the letter."
   },
   {
     "id": 47,
@@ -816,7 +824,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "A video can replace it."
   },
   {
     "id": 48,
@@ -930,7 +939,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "A video may replace the letter."
   },
   {
     "id": 51,
@@ -969,7 +979,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "No immediate family CPA."
   },
   {
     "id": 53,
@@ -1044,7 +1055,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "You qualify by placing at the provincials."
   },
   {
     "id": 55,
@@ -1119,7 +1131,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "No separate application form."
   },
   {
     "id": 57,
@@ -1196,7 +1209,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "100 awards a year."
   },
   {
     "id": 59,
@@ -1233,7 +1247,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "Community work outweighs marks here."
   },
   {
     "id": 60,
@@ -1272,7 +1287,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "The committee looks for years of service, not one project."
   },
   {
     "id": 62,
@@ -1421,7 +1437,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "You commit to a year of work up north."
   },
   {
     "id": 67,
@@ -1498,7 +1515,8 @@
       "extracurriculars": [
         "arts"
       ]
-    }
+    },
+    "metaDetail": "Six awards: three in Calgary, three elsewhere in southern Alberta."
   },
   {
     "id": 70,
@@ -1612,7 +1630,8 @@
     },
     "alsoOpenTo": [
       "Lloydminster"
-    ]
+    ],
+    "metaDetail": "IODE lists the value inconsistently."
   },
   {
     "id": 74,
@@ -1688,7 +1707,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Check it is still running before applying."
   },
   {
     "id": 76,
@@ -1722,7 +1742,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Tied to your Rutherford form."
   },
   {
     "id": 77,
@@ -1762,7 +1783,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs honours standing and a U of A offer."
   },
   {
     "id": 78,
@@ -1800,7 +1822,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs a conditional offer already in hand."
   },
   {
     "id": 79,
@@ -1838,7 +1861,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs conditional acceptance at U of A, NAIT or MacEwan."
   },
   {
     "id": 80,
@@ -1876,7 +1900,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "You must have attended Garneau School for two years."
   },
   {
     "id": 81,
@@ -1953,7 +1978,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Opens February 2027; recipients are contacted in June."
   },
   {
     "id": 83,
@@ -1991,7 +2017,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Covers tuition and fees, paid to the institution."
   },
   {
     "id": 84,
@@ -2031,7 +2058,8 @@
       "extracurriculars": [
         "music"
       ]
-    }
+    },
+    "metaDetail": "Needs a reference from your current major teacher."
   },
   {
     "id": 85,
@@ -2073,7 +2101,8 @@
       "extracurriculars": [
         "music"
       ]
-    }
+    },
+    "metaDetail": "Opens January 15 and closes at 4:30 p.m."
   },
   {
     "id": 86,
@@ -2110,7 +2139,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "No minimum average, and no other condition."
   },
   {
     "id": 87,
@@ -2149,7 +2179,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": "2027-03-31"
+    "openDate": "2027-03-31",
+    "metaDetail": "The value is not published."
   },
   {
     "id": 88,
@@ -2189,7 +2220,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "The window runs January to late April."
   },
   {
     "id": 89,
@@ -2226,7 +2258,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Also listed as the Stirling Wind Project award; do not apply twice."
   },
   {
     "id": 91,
@@ -2300,7 +2333,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Grade 12s want the Board of Governors award."
   },
   {
     "id": 93,
@@ -2336,7 +2370,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Opens in late January; check the site then."
   },
   {
     "id": 94,
@@ -2415,7 +2450,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "metaDetail": "Curling Alberta's page is down; contact them first."
   },
   {
     "id": 97,
@@ -2450,7 +2486,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "May be the same award as the Community Benefit Scholarship."
   },
   {
     "id": 98,
@@ -2564,7 +2601,8 @@
       "extracurriculars": [
         "RAP"
       ]
-    }
+    },
+    "metaDetail": "No application: consent in MyTradesecrets."
   },
   {
     "id": 101,
@@ -2645,7 +2683,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "One award a year, for Alberta writers 25 and under."
   },
   {
     "id": 103,
@@ -2684,7 +2723,8 @@
       "extracurriculars": [
         "arts"
       ]
-    }
+    },
+    "metaDetail": "One award a year, for Albertans 25 and under."
   },
   {
     "id": 104,
@@ -2721,7 +2761,8 @@
       "extracurriculars": [
         "arts"
       ]
-    }
+    },
+    "metaDetail": "Covers dance, theatre and music, for ages 25 and under."
   },
   {
     "id": 105,
@@ -2758,7 +2799,8 @@
       "extracurriculars": [
         "arts"
       ]
-    }
+    },
+    "metaDetail": "One award a year, for Albertans aged 25 or under."
   },
   {
     "id": 106,
@@ -2984,7 +3026,8 @@
       "extracurriculars": []
     },
     "applyViaGuidance": true,
-    "notes": "There is no province-wide deadline. Each post-secondary institution sets its own date and gets a limited number of awards, so ask your school's Student Awards Office as soon as you register. Selection is on academic standing."
+    "notes": "There is no province-wide deadline. Each post-secondary institution sets its own date and gets a limited number of awards, so ask your school's Student Awards Office as soon as you register. Selection is on academic standing.",
+    "metaDetail": "Each institution sets its own date."
   },
   {
     "id": 113,
@@ -3095,7 +3138,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Automatic on admission with a 95 per cent average."
   },
   {
     "id": 117,
@@ -3171,7 +3215,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs 80 per cent; any MRU program."
   },
   {
     "id": 119,
@@ -3249,7 +3294,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Over 800 awards; no employee children."
   },
   {
     "id": 121,
@@ -3289,7 +3335,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": "2026-06-23"
+    "openDate": "2026-06-23",
+    "metaDetail": "500 awards, then it shuts."
   },
   {
     "id": 122,
@@ -3324,7 +3371,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Also gives $5,000 bursaries."
   },
   {
     "id": 123,
@@ -3406,7 +3454,8 @@
     "alsoOpenTo": [
       "Airdrie",
       "Chestermere"
-    ]
+    ],
+    "metaDetail": "Two awards; nine-town catchment."
   },
   {
     "id": 125,
@@ -3590,7 +3639,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Thirty bursaries a year; closes at noon."
   },
   {
     "id": 130,
@@ -3715,7 +3765,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "metaDetail": "Eight a year; junior rosters count."
   },
   {
     "id": 133,
@@ -3798,7 +3849,8 @@
         "arts"
       ]
     },
-    "deadline": "2027-03-01"
+    "deadline": "2027-03-01",
+    "metaDetail": "The 2027 round is the music year of three."
   },
   {
     "id": 135,
@@ -3837,7 +3889,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2027-06-01"
+    "deadline": "2027-06-01",
+    "metaDetail": "The odd sum marks 2005."
   },
   {
     "id": 136,
@@ -3880,7 +3933,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Renewable up to three years at a 2.0 GPA."
   },
   {
     "id": 137,
@@ -3921,7 +3975,8 @@
         "agriculture"
       ]
     },
-    "openDate": "2027-05-01"
+    "openDate": "2027-05-01",
+    "metaDetail": "Ten awards, one at $20,000."
   },
   {
     "id": 138,
@@ -4039,7 +4094,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Administered by Bow Valley High School; ask them."
   },
   {
     "id": 142,
@@ -4075,7 +4131,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "metaDetail": "One application per calendar year."
   },
   {
     "id": 143,
@@ -4510,7 +4567,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs two signed references; funds go straight to your school."
   },
   {
     "id": 156,
@@ -4548,7 +4606,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "For Central Albertans entering any healthcare training."
   },
   {
     "id": 157,
@@ -4588,7 +4647,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Treat as unconfirmed; contact the association."
   },
   {
     "id": 158,
@@ -4666,7 +4726,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "A 250-word essay decides it; no GPA requirement."
   },
   {
     "id": 160,
@@ -4747,7 +4808,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "metaDetail": "Two awards; typed applications only."
   },
   {
     "id": 163,
@@ -4827,7 +4889,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Renewable for up to four years; ask your counsellor for the date."
   },
   {
     "id": 165,
@@ -4872,7 +4935,8 @@
     },
     "alsoOpenTo": [
       "Lacombe"
-    ]
+    ],
+    "metaDetail": "Needs an arts portfolio, and covers Ponoka to Olds."
   },
   {
     "id": 166,
@@ -4916,7 +4980,8 @@
     },
     "alsoOpenTo": [
       "Lacombe"
-    ]
+    ],
+    "metaDetail": "Confirm the date with the Arts Council."
   },
   {
     "id": 167,
@@ -5031,7 +5096,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "A pool of named awards; you apply through the Bridge portal."
   },
   {
     "id": 170,
@@ -5148,7 +5214,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Two age brackets, 14-15 and 16-18, judged separately."
   },
   {
     "id": 173,
@@ -5185,7 +5252,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs 80 per cent and a physical sciences acceptance."
   },
   {
     "id": 174,
@@ -5225,7 +5293,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "You build prom attire out of duct tape and submit photos."
   },
   {
     "id": 175,
@@ -5263,7 +5332,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "A 1,000 to 1,500 word essay on the Essential Scholars."
   },
   {
     "id": 176,
@@ -5301,7 +5371,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "You submit a 4 to 6 minute video at a local war memorial."
   },
   {
     "id": 177,
@@ -5340,7 +5411,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs an audiogram showing 40dB loss within 24 months."
   },
   {
     "id": 179,
@@ -5377,7 +5449,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs 90 per cent in Chinese 10 and 20, and 80 overall."
   },
   {
     "id": 180,
@@ -7627,7 +7700,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": null
+    "metaDetail": "Judged on athletics and fine arts together."
   },
   {
     "id": 235,
@@ -8942,7 +9015,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": null
+    "metaDetail": "Goes to the top average with volunteering."
   },
   {
     "id": 268,
@@ -9164,7 +9237,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": null
+    "metaDetail": "Four named NE Calgary schools."
   },
   {
     "id": 273,
@@ -9334,7 +9407,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": null
+    "metaDetail": "Needs apprenticeship or work experience credit."
   },
   {
     "id": 277,
@@ -10104,7 +10177,8 @@
       "extracurriculars": [
         "arts"
       ]
-    }
+    },
+    "metaDetail": "Pays tuition for Theatre Alberta's Artstrek summer school."
   },
   {
     "id": 296,
@@ -10231,7 +10305,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Three references, and video is encouraged."
   },
   {
     "id": 299,
@@ -10273,7 +10348,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "A three-minute video counts instead of the essay."
   },
   {
     "id": 300,
@@ -10311,7 +10387,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "About 150 students receive one each year."
   },
   {
     "id": 301,
@@ -10350,7 +10427,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Your IB English 30 teacher has to nominate you."
   },
   {
     "id": 302,
@@ -10388,7 +10466,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "About 40 awards a year against roughly 64 applicants."
   },
   {
     "id": 303,
@@ -10509,7 +10588,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs a letter of interest and two references."
   },
   {
     "id": 306,
@@ -10549,7 +10629,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "For former ESL students with landed immigrant status."
   },
   {
     "id": 307,
@@ -10589,7 +10670,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Send proof of registration and a teacher reference."
   },
   {
     "id": 308,
@@ -10629,7 +10711,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Needs three Grade 12 CTS business or information processing courses."
   },
   {
     "id": 309,
@@ -10704,7 +10787,8 @@
         "sports",
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "Renewable to four years; two given."
   },
   {
     "id": 311,
@@ -11221,7 +11305,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "One award at every city high school."
   },
   {
     "id": 326,
@@ -11420,7 +11505,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "For H.J. Cody graduates; applications close at 4:30pm."
   },
   {
     "id": 331,
@@ -11458,7 +11544,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "metaDetail": "Needs two golf club member references."
   },
   {
     "id": 332,
@@ -11499,7 +11586,8 @@
     },
     "alsoOpenTo": [
       "Lacombe"
-    ]
+    ],
+    "metaDetail": "Paid to your institution as a tuition credit."
   },
   {
     "id": 333,
@@ -11539,7 +11627,8 @@
       "extracurriculars": [
         "music"
       ]
-    }
+    },
+    "metaDetail": "Needs two references and a portal account."
   },
   {
     "id": 334,
@@ -11577,7 +11666,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Trades and workplace certification count, not only degrees."
   },
   {
     "id": 335,
@@ -11619,7 +11709,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "Amount and date were still unannounced."
   },
   {
     "id": 336,
@@ -11657,7 +11748,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Three awards at Penhold Crossing; apply through the school."
   },
   {
     "id": 337,
@@ -11819,7 +11911,8 @@
       "extracurriculars": [
         "arts"
       ]
-    }
+    },
+    "metaDetail": "Runs on nomination, and opens from Grade 9."
   },
   {
     "id": 341,
@@ -11893,7 +11986,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "Recognises service, with nothing to write."
   },
   {
     "id": 343,
@@ -11929,7 +12023,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Its two pages disagree on this."
   },
   {
     "id": 344,
@@ -12006,7 +12101,8 @@
         "volunteer"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Asks for long-term volunteering and a part-time job."
   },
   {
     "id": 346,
@@ -12047,7 +12143,8 @@
         "volunteer"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Renewable for three years."
   },
   {
     "id": 347,
@@ -12089,7 +12186,8 @@
         "leadership"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Prefers student council, debate or Model UN."
   },
   {
     "id": 348,
@@ -12127,7 +12225,8 @@
         "sports"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Needs an 85 per cent average and a coach's nomination."
   },
   {
     "id": 349,
@@ -12170,7 +12269,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Two per school, and part-time workers are preferred."
   },
   {
     "id": 350,
@@ -12209,7 +12309,8 @@
         "volunteer"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Sailing experience is preferred, not required."
   },
   {
     "id": 351,
@@ -12246,7 +12347,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Entering first year straight from Grade 12 counts."
   },
   {
     "id": 352,
@@ -12284,7 +12386,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "The only CEEA award open from Grade 12."
   },
   {
     "id": 353,
@@ -12337,7 +12440,8 @@
     "openDate": null,
     "alsoOpenTo": [
       "Cochrane"
-    ]
+    ],
+    "metaDetail": "For students working toward lifeguard papers."
   },
   {
     "id": 354,
@@ -12381,7 +12485,8 @@
         "volunteer"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Five Wheatland County schools qualify, any field of study."
   },
   {
     "id": 355,
@@ -12466,7 +12571,8 @@
         "arts"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "The application is a three-minute video, not an essay."
   },
   {
     "id": 357,
@@ -12503,7 +12609,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Southern Alberta means Red Deer and south."
   },
   {
     "id": 358,
@@ -12546,7 +12653,8 @@
         "leadership"
       ]
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "Rural residency is the real filter, not province."
   },
   {
     "id": 359,
@@ -12583,7 +12691,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "openDate": null
+    "openDate": null,
+    "metaDetail": "A library technician diploma out of Grade 12 qualifies."
   },
   {
     "id": 360,
@@ -13730,7 +13839,8 @@
       "extracurriculars": []
     },
     "openDate": "2027-03-01",
-    "deadline": "2027-06-01"
+    "deadline": "2027-06-01",
+    "metaDetail": "Eight a year, with a medallion."
   },
   {
     "id": 389,
@@ -13769,7 +13879,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Your club's own cutoff is in February, months before this date."
   },
   {
     "id": 390,
@@ -13807,7 +13918,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Judged live, and your local club sets the real date."
   },
   {
     "id": 391,
@@ -14029,7 +14141,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "No application; decided on your blended marks."
   },
   {
     "id": 397,
@@ -14773,7 +14886,8 @@
       "citizenship": "any",
       "apprenticeship": true,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "The school sets the date, not the sponsor."
   },
   {
     "id": 417,
@@ -37462,7 +37576,8 @@
         "STEM"
       ]
     },
-    "active": true
+    "active": true,
+    "metaDetail": "Needs a teacher nomination too."
   },
   {
     "id": 992,
@@ -37500,7 +37615,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "metaDetail": "Two streams: an 80 per cent merit route and a vocational route."
   },
   {
     "id": 993,
@@ -37577,7 +37693,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "metaDetail": "One award across the whole public board."
   },
   {
     "id": 995,
@@ -37694,7 +37811,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "metaDetail": "The essay is the whole application."
   },
   {
     "id": 998,
@@ -37817,7 +37935,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "metaDetail": "Diploma stream takes year one."
   },
   {
     "id": 1001,
@@ -38012,7 +38131,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "metaDetail": "150 available; Mount Royal sets the date."
   },
   {
     "id": 1006,
@@ -38160,7 +38280,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "metaDetail": "Harvard may add $5,000 more."
   },
   {
     "id": 1010,
@@ -38198,7 +38319,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "metaDetail": "You apply the September after Grade 12."
   },
   {
     "id": 1011,
@@ -38271,7 +38393,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "metaDetail": "Twenty awards; not open in Grade 12."
   },
   {
     "id": 1013,
@@ -38420,7 +38543,8 @@
         "sports"
       ]
     },
-    "active": true
+    "active": true,
+    "metaDetail": "Sixteen awards, roughly one per U18 AAA team."
   },
   {
     "id": 1017,
