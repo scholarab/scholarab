@@ -196,7 +196,7 @@
     "title": "Cypress County Agricultural Service Board Bursary",
     "amount": "$1,000",
     "deadline": "2026-09-30",
-    "audience": "Cypress County and Medicine Hat students entering agriculture, agri-tech or environmental studies",
+    "audience": "Cypress County and Medicine Hat students in agriculture, agri-tech or environment",
     "url": "https://www.cypress.ab.ca/p/agricultural",
     "category": "Trades",
     "lastVerified": "2026-09",
@@ -228,7 +228,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Two are awarded each calendar year."
+    "metaDetail": "Two each calendar year."
   },
   {
     "id": 18,
@@ -1170,8 +1170,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "notes": "You apply directly at apply.loranscholar.ca; the 88% is calculated from Grade 10, 11 and 12 courses only. Applicants must be born between January 1, 2005 and September 1, 2011. Even if you do not make the final class, up to 54 finalists receive $6,000 and up to 70 provincial and territorial recipients receive $3,000.",
-    "metaDetail": "Applications close at noon ET."
+    "notes": "You apply directly at apply.loranscholar.ca; the 88% is calculated from Grade 10, 11 and 12 courses only. Applicants must be born between January 1, 2005 and September 1, 2011. Even if you do not make the final class, up to 54 finalists receive $6,000 and up to 70 provincial and territorial recipients receive $3,000. Applications close at noon ET on the deadline day, not at midnight."
   },
   {
     "id": 58,
@@ -1369,7 +1368,7 @@
     "amount": "$3,000",
     "deadline": "2026-10-31",
     "openDate": "2026-08-01",
-    "audience": "Alberta residents entering first year of an oil & gas related degree or diploma at an AB institution",
+    "audience": "Alberta residents entering first year of an oil and gas degree or diploma in AB",
     "url": "https://studentaid.alberta.ca/scholarships/keyera-energy-peter-j-renton-memorial-scholarship/",
     "category": "STEM",
     "lastVerified": "2026-08",
@@ -1399,7 +1398,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Two awards a year."
   },
   {
     "id": 65,
@@ -1638,7 +1638,7 @@
     "title": "Canadian Natural Resources Scholarship",
     "amount": "Varies",
     "deadline": "2026-12-15",
-    "audience": "Dependents of Canadian Natural employees, or Indigenous students from communities near its operations, already enrolled in post-secondary or trade school",
+    "audience": "Dependents of Canadian Natural employees, or Indigenous students near its operations, already enrolled",
     "url": "https://www.cnrl.com/careers/student-opportunities/scholarships/",
     "category": "Trades",
     "lastVerified": "2026-08",
@@ -2266,7 +2266,7 @@
     "title": "University of Lethbridge Board of Governors Award",
     "amount": "$1,000",
     "deadline": "2026-12-15",
-    "audience": "Grade 12 students applying to University of Lethbridge; automatic consideration with admission application",
+    "audience": "Grade 12 students applying to University of Lethbridge; automatic with admission",
     "url": "https://www.ulethbridge.ca/future-student/high-school-student-awards",
     "category": "Academic",
     "region": "Lethbridge",
@@ -2533,7 +2533,7 @@
     "id": 99,
     "title": "High School Apprenticeship Scholarship",
     "amount": "$1,000",
-    "audience": "Alberta high school students registered in the Registered Apprenticeship Program (RAP) or Career and Technology Studies (CTS) apprenticeship pathway",
+    "audience": "Alberta students registered in the Registered Apprenticeship Program or a CTS apprenticeship pathway",
     "url": "https://tradesecrets.alberta.ca/apprentice-services/get-financial-support/scholarships/high-school-apprenticeship-scholarships/",
     "category": "Trades",
     "lastVerified": "2026-08",
@@ -2563,7 +2563,8 @@
       "citizenship": "canadian",
       "apprenticeship": true,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Notified by November 1."
   },
   {
     "id": 100,
@@ -2848,7 +2849,7 @@
     "title": "Alberta Blue Cross Indigenous Scholarship",
     "amount": "$1,500",
     "deadline": "2027-01-31",
-    "audience": "Indigenous (First Nations, Métis, or Inuit) Alberta residents enrolled full-time in a post-secondary program of at least 2 years",
+    "audience": "First Nations, Métis or Inuit Albertans in a full-time program of at least two years",
     "url": "https://www.community.ab.bluecross.ca/programs/indigenous-scholarships.php",
     "category": "Indigenous",
     "lastVerified": "2026-08",
@@ -2877,7 +2878,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Nine awards, and no repeat winners."
   },
   {
     "id": 108,
@@ -2924,7 +2926,7 @@
     "amount": "Varies",
     "deadline": "2026-11-01",
     "openDate": "2026-09-01",
-    "audience": "High school students from across Alberta demonstrating exceptional potential in intellectual curiosity, leadership, and resilience",
+    "audience": "Alberta high school students showing intellectual curiosity, leadership and resilience",
     "url": "https://studentaid.alberta.ca/scholarships/grant-macewan-united-world-college-scholarships/",
     "category": "Academic",
     "lastVerified": "2026-08",
@@ -2960,7 +2962,7 @@
     "title": "Lois Hole Humanities and Social Sciences Scholarship",
     "amount": "$5,000",
     "deadline": null,
-    "audience": "Alberta students enrolled full-time in the Faculty of Humanities, Social Sciences, or Arts at an Alberta post-secondary institution",
+    "audience": "Alberta students in full-time Humanities, Social Sciences or Arts at an Alberta institution",
     "url": "https://studentaid.alberta.ca/scholarships/lois-hole-humanities-and-social-sciences-scholarship/",
     "category": "Arts",
     "lastVerified": "2026-08",
@@ -2991,7 +2993,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "notes": "No public application deadline. Recipients are selected by the Student Awards Office at participating Alberta institutions. Contact yours to be considered."
+    "notes": "No public application deadline. Recipients are selected by the Student Awards Office at participating Alberta institutions. Contact yours to be considered.",
+    "metaDetail": "No public deadline; your school selects."
   },
   {
     "id": 112,
@@ -3034,7 +3037,7 @@
     "title": "Mildred Rowe Weston Memorial Scholarship",
     "amount": "$1,000",
     "deadline": null,
-    "audience": "Alberta students who completed at least three courses through ADLC as shown on Alberta Transcript of High School Achievement",
+    "audience": "Alberta students who completed at least three ADLC courses on their high school transcript",
     "url": "https://studentaid.alberta.ca/scholarships/mildred-rowe-weston-memorial-scholarship/",
     "category": "Academic",
     "lastVerified": "2026-08",
@@ -3063,7 +3066,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "notes": "No separate application. Students are automatically considered when they apply for the Alexander Rutherford Scholarship; recipients are chosen on Grade 12 averages."
+    "notes": "No separate application. Students are automatically considered when they apply for the Alexander Rutherford Scholarship; recipients are chosen on Grade 12 averages.",
+    "metaDetail": "No application; comes with the Rutherford."
   },
   {
     "id": 114,
@@ -3147,7 +3151,7 @@
     "amount": "$14,000",
     "deadline": "2027-03-01",
     "openDate": "2026-11-01",
-    "audience": "Canadian citizens or permanent residents entering a MacEwan degree program from high school with an 80%+ average",
+    "audience": "Canadian citizens or permanent residents entering a MacEwan degree from high school with 80%+",
     "url": "https://www.macewan.ca/apply-enrol/fees-finances/scholarships-awards-bursaries/entrance-scholarships/",
     "category": "Academic",
     "lastVerified": "2026-08",
@@ -3536,7 +3540,7 @@
     "title": "Wolf Scholars Program",
     "amount": "$80,000",
     "deadline": "2026-11-02",
-    "audience": "Canadian citizens or permanent residents entering U of T Faculty of Arts & Science (St. George) with 90–100% average",
+    "audience": "Canadians entering the U of T Faculty of Arts and Science, St. George, with 90 to 100%",
     "url": "https://www.wolfscholars.com/apply",
     "category": "Academic",
     "lastVerified": "2026-08",
@@ -3648,7 +3652,7 @@
     "amount": "$1,000 to $2,000",
     "deadline": "2027-01-15",
     "openDate": "2026-08-01",
-    "audience": "Alberta residents competing on a designated provincial junior sport team and entering post-secondary",
+    "audience": "Alberta residents on a designated provincial junior sport team, entering post-secondary",
     "url": "https://studentaid.alberta.ca/scholarships/alberta-junior-athletic-award/",
     "category": "Sports",
     "lastVerified": "2026-08",
@@ -3681,8 +3685,7 @@
       "extracurriculars": [
         "sports"
       ]
-    },
-    "metaDetail": "Seventy awards a year across football, baseball and hockey."
+    }
   },
   {
     "id": 131,
@@ -4176,7 +4179,7 @@
     "amount": "up to $8,000",
     "deadline": "2027-02-15",
     "openDate": "2026-10-01",
-    "audience": "Domestic students applying to a UAlberta direct-entry undergraduate program with no prior post-secondary and demonstrated financial barriers",
+    "audience": "Domestic students entering UAlberta direct-entry with no prior post-secondary and financial need",
     "category": "Academic",
     "region": "Alberta",
     "active": false,
@@ -4207,7 +4210,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Closes Feb 15."
   },
   {
     "id": 146,
@@ -4252,7 +4256,7 @@
     "title": "Charmaine Letourneau Scholarship",
     "amount": "$2,000–$7,000",
     "deadline": "2026-09-30",
-    "audience": "Alberta residents who are deaf or hard of hearing entering a post-secondary or vocational program",
+    "audience": "Deaf or hard of hearing Albertans entering post-secondary or vocational study",
     "category": "Community",
     "region": "Alberta",
     "active": true,
@@ -4290,7 +4294,7 @@
     "id": 149,
     "title": "Royal Canadian Legion Ladies Auxiliary AB-NWT Bursary",
     "amount": "$500",
-    "audience": "Alberta and NWT students entering first-term post-secondary with a family connection to veterans, RCMP, firefighters, or Legion members",
+    "audience": "Alberta and NWT students entering first term with family ties to veterans, RCMP, firefighters or Legion members",
     "category": "Community",
     "region": "Alberta",
     "active": true,
@@ -4324,7 +4328,8 @@
     },
     "alsoOpenTo": [
       "Wetaskiwin"
-    ]
+    ],
+    "metaDetail": "Branches set dates."
   },
   {
     "id": 150,
@@ -4735,7 +4740,7 @@
     "amount": "$8,500 to $10,000",
     "deadline": "2027-06-30",
     "openDate": "2027-02-01",
-    "audience": "Graduating Grade 12 students entering first-year post-secondary with involvement in a Rogers Birdies for Kids presented by AltaLink participating charity",
+    "audience": "Grade 12 students entering first year with involvement in a Birdies for Kids charity",
     "url": "https://calgaryfoundation.org/awards/scholarships-awards-bursaries/",
     "category": "Community",
     "lastVerified": "2026-08",
@@ -4768,7 +4773,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "One award, despite two sponsor names."
   },
   {
     "id": 162,
@@ -4816,7 +4822,7 @@
     "title": "Rotary Career Opportunity Award",
     "amount": "$3,000",
     "deadline": "2027-05-05",
-    "audience": "Graduating students from Red Deer Public or Catholic school divisions with financial need, planning to attend an Alberta post-secondary institution",
+    "audience": "Red Deer Public or Catholic graduates with financial need, entering Alberta post-secondary",
     "url": "https://cfcab.ca/rotary-career-opportunity-awards/",
     "category": "Community",
     "lastVerified": "2026-08",
@@ -4850,7 +4856,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Ask your counsellor; it closes early."
   },
   {
     "id": 164,
@@ -4988,7 +4995,7 @@
     "title": "Trey Purdie Memorial Scholarship",
     "amount": "$2,500",
     "deadline": "2027-05-31",
-    "audience": "Graduating students from Red Deer County or Chinook's Edge School Division living on a working farm or ranch, or Alberta High School Rodeo Association members",
+    "audience": "Red Deer County or Chinook's Edge students on a working farm or ranch, or in high school rodeo",
     "url": "https://cfcab.ca/trey-purdie-memorial-scholarship-2/",
     "category": "Community",
     "lastVerified": "2026-08",
@@ -5022,7 +5029,8 @@
       "extracurriculars": [
         "sports"
       ]
-    }
+    },
+    "metaDetail": "Active involvement in agriculture."
   },
   {
     "id": 168,
@@ -8762,7 +8770,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Open to students at Western Canada High School graduating Grade."
+    "metaDetail": "You pick one of three areas to apply in."
   },
   {
     "id": 262,
@@ -9059,7 +9067,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Open to students at Robert Thirsk High School registered in Grade."
+    "metaDetail": "For students who identify as female."
   },
   {
     "id": 269,
@@ -9067,7 +9075,7 @@
     "amount": "$1,000",
     "deadline": "2027-05-30",
     "openDate": "2027-03-01",
-    "audience": "Grade 12 students at James Fowler High School, Nelson Mandela High School, Lester B. Pearson High School, Jack James High School, Forest Lawn High School",
+    "audience": "Grade 12 students at James Fowler, Nelson Mandela, Lester B. Pearson, Jack James or Forest Lawn",
     "url": "https://www.educationmatters.ca/awards/nav-ghali-memorial-scholarship",
     "category": "Community",
     "lastVerified": "2026-08",
@@ -9105,7 +9113,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Open to students registered in grade."
+    "metaDetail": "Applications open March 1."
   },
   {
     "id": 270,
@@ -11314,7 +11322,7 @@
     "amount": "$500",
     "deadline": "2026-09-15",
     "openDate": null,
-    "audience": "Graduating students at five named Edmonton high schools with community service and post-secondary acceptance",
+    "audience": "Graduating students at five named Edmonton high schools with community service and an offer",
     "url": "https://www.edmontonhostlions.com/scholarships",
     "category": "Community",
     "lastVerified": "2026-08",
@@ -11350,7 +11358,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "metaDetail": "Two awards only."
   },
   {
     "id": 327,
@@ -11436,7 +11445,7 @@
     "amount": "$10,000",
     "deadline": "2027-05-30",
     "openDate": null,
-    "audience": "Central Alberta students aged 25 or under who have received services from the Sheldon Kennedy Centre of Excellence or the Central Alberta Child Advocacy Centre",
+    "audience": "Central Albertans 25 or under served by the Sheldon Kennedy or Child Advocacy Centre",
     "url": "https://cfcab.ca/rising-futures-scholarship/",
     "category": "Community",
     "region": "Red Deer",
@@ -11467,7 +11476,8 @@
     },
     "alsoOpenTo": [
       "Lacombe"
-    ]
+    ],
+    "metaDetail": "Planning to enrol counts, not just enrolled."
   },
   {
     "id": 330,
@@ -11838,7 +11848,7 @@
     "amount": "$3,000",
     "deadline": "2027-03-31",
     "openDate": null,
-    "audience": "Canadian students entering theatre production design and management or media production and design",
+    "audience": "Canadian students entering theatre or media production design and management",
     "url": "https://artslethbridge.org/awards-and-scholarships/",
     "category": "Arts",
     "region": "Lethbridge",
@@ -12738,7 +12748,7 @@
     "title": "Airdrie and District Agricultural Society Scholarship",
     "amount": "Varies",
     "deadline": "2026-09-15",
-    "audience": "Airdrie area students heading to post-secondary, one award for agricultural studies and one for anything else",
+    "audience": "Airdrie area students, one award for agricultural studies and one for any field",
     "category": "Community",
     "region": "Airdrie",
     "active": true,
@@ -12746,7 +12756,7 @@
     "url": "https://www.airdrieagsociety.com/ag-scholarship",
     "notes": "The society does not publish the award value. Applications go by email to airdrieagsocietysocial@gmail.com, and the essay topic has been the same one for years, so it can be drafted well before September. The non-agricultural award is the one students skip, which is exactly why it is worth an evening.",
     "description": "Two scholarships a year from the Airdrie and District Agricultural Society, one for a student entering agricultural studies and one for a student entering anything else. It asks for a 250 to 300 word essay on the value of volunteerism, three years of extracurricular and leadership activity, and a transcript that includes Grade 12 marks.",
-    "metaDetail": "Two local awards, one of them open to any field.",
+    "metaDetail": "A 250 to 300 word essay.",
     "eligibility": {
       "grades": [
         "12"
@@ -12778,7 +12788,7 @@
     "title": "Rocky View Teachers' Scholarship",
     "amount": "Varies",
     "deadline": "2026-09-30",
-    "audience": "Rocky View Schools graduates, and children of ATA Local 35 members graduating anywhere in Alberta",
+    "audience": "Rocky View graduates, and children of ATA Local 35 members graduating in Alberta",
     "category": "Academic",
     "region": "Airdrie",
     "active": true,
@@ -12786,7 +12796,6 @@
     "url": "https://sites.google.com/rvata35.ca/rvata35/scholarships/for-students",
     "notes": "The teachers fund this themselves out of ATA Local 35, and in 2022-23 the pool was about $90,000. Proof of enrolment is the catch: a letter of acceptance does not count, so you apply after you have registered, not when you get in. The forms are Cognito forms and do not work properly on a phone.",
     "description": "Rocky View teachers fund a set of scholarships each year for students graduating from a Rocky View high school, which covers the Airdrie public schools, and for children of ATA Local 35 members graduating from any Alberta high school. A Certificate of Achievement qualifies as well as a diploma. Applications opened May 1 and close September 30, the fall after you graduate.",
-    "metaDetail": "Applied the fall after you graduate, with proof of enrolment.",
     "eligibility": {
       "grades": [
         "12",
@@ -12873,7 +12882,6 @@
     "url": "https://www.rockyview.ca/services/agriculture-and-environment/awards-and-scholarships",
     "notes": "Two intakes rather than one: October 15 for the fall term and December 31 for winter. Residency is in the county itself, so a student inside Airdrie's city limits does not qualify for this one even though the rest of the page applies to them. The application is Olds College's own awards portal.",
     "description": "A $500 award for a Rocky View County resident in the first or second year of the Agricultural Production or the Land and Water Resources program at Olds College, with a GPA of at least 3.00. The county funds it and Olds College administers it through its awards portal.",
-    "metaDetail": "County residents only, with a fall and a winter intake.",
     "eligibility": {
       "grades": [
         "12",
@@ -13043,7 +13051,6 @@
     "url": "https://www.bowvalleycu.com/en/bvcu/our-communities/scholarships",
     "notes": "The volunteering has to be in one of the credit union's own communities: Acheson, Airdrie, Banff, Calgary, Canmore or Cochrane, and within the last two years. You do not have to bank there. Applications run June 17 to August 31, results by September 16 and money by September 30, which makes this one of the few awards that pays in time for the fall term.",
     "description": "A single $4,000 award from Bow Valley Credit Union for an Alberta student between 17 and 25 who is enrolled or accepted full time at a Canadian post-secondary institution and has volunteered in the credit union's service area in the past two years. You submit proof of enrolment, proof of Alberta residency, a resume, and a statement or video about your goals.",
-    "metaDetail": "Volunteering in the credit union's own towns is the filter.",
     "eligibility": {
       "grades": [
         "12",
@@ -13083,7 +13090,6 @@
     "url": "https://www.bowvalleycu.com/en/bvcu/our-communities/scholarships",
     "notes": "Two awards, and no membership requirement: the credit union asks for Alberta residency, not an account. The same June 17 to August 31 window as the Jack Paterson award, and one application covers what you qualify for. Trades and technical programs count.",
     "description": "Two $2,000 scholarships from Bow Valley Credit Union for Alberta residents between 17 and 25 who are enrolled or accepted at an accredited Canadian post-secondary institution in a full-time undergraduate or technical program. The application asks for proof of enrolment, proof of Alberta residency, a resume, and a short statement or video about your educational goals.",
-    "metaDetail": "No membership needed, and trades programs count.",
     "eligibility": {
       "grades": [
         "12",
@@ -13287,7 +13293,7 @@
     "title": "Ron Pfau Memorial Scholarship",
     "amount": "$1,000",
     "deadline": "2027-08-09",
-    "audience": "County of Grande Prairie residents studying business, commerce or public office administration",
+    "audience": "County of Grande Prairie residents studying business, commerce or office administration",
     "category": "Academic",
     "region": "Grande Prairie",
     "active": true,
@@ -13295,7 +13301,7 @@
     "url": "https://www.countygp.ab.ca/council-administration/grants-and-scholarships/ron-pfau-memorial-scholarship/",
     "notes": "Named for a longtime County administrator, and the residency test is the County of Grande Prairie rather than the City, so a student inside city limits does not qualify on their own address. Your parents' County residence counts if you have moved away for school. County council handed administration to the Northwestern Alberta Foundation in 2024, so it now runs on the foundation's universal application and its August deadline, shown here rolled forward.",
     "description": "A $1,000 scholarship for current or former residents of the County of Grande Prairie who are Canadian citizens or landed immigrants and are entering or enrolled at an Alberta post-secondary institution in business, commerce or public office administration. Applications go through the Northwestern Alberta Foundation portal.",
-    "metaDetail": "County address required, not a city one.",
+    "metaDetail": "County address only.",
     "eligibility": {
       "grades": [
         "12",
@@ -20295,7 +20301,7 @@
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://sites.google.com/lpsd.ca/baronsbeyond/home/scholarships",
-    "notes": "One form covers every LPSD award. You complete the General LPSD Scholarship Application in the Google Classroom, code an2eroz, by May 1, and tick this award on the LCHS organizer sheet rather than applying to the sponsor.",
+    "notes": "One form covers every LPSD award. You complete the General LPSD Scholarship Application in the Google Classroom, code an2eroz, by May 1, and tick this award on the LCHS organizer sheet rather than applying to the sponsor. It is not restricted to teaching: any English-centred program counts.",
     "applyViaGuidance": true,
     "deadline": "2027-05-01",
     "title": "J.G. Willard Scholarship",
@@ -20303,7 +20309,6 @@
     "category": "Academic",
     "audience": "LCHS graduates entering education with an English major or an English-centred career",
     "description": "One $2,000 award, tied for the largest single payment on the LPSD list, established by John Kemp in honour of J. G. Willard, the pioneer editor of the Lloydminster Times, and his concern for the correct use of English. It is for a graduate entering a teacher education program with an English major, or another program in which English is a major component, which is wider than it first reads.",
-    "metaDetail": "Not only teaching: any English-centred program counts.",
     "eligibility": {
       "grades": [
         "12"
@@ -20447,7 +20452,7 @@
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://sites.google.com/lpsd.ca/baronsbeyond/home/scholarships",
-    "notes": "One form covers every LPSD award. You complete the General LPSD Scholarship Application in the Google Classroom, code an2eroz, by May 1, and tick this award on the LCHS organizer sheet rather than applying to the sponsor.",
+    "notes": "One form covers every LPSD award. You complete the General LPSD Scholarship Application in the Google Classroom, code an2eroz, by May 1, and tick this award on the LCHS organizer sheet rather than applying to the sponsor. Four awards of $1,000, plus $500 each to carry on into a second year.",
     "applyViaGuidance": true,
     "deadline": "2027-05-01",
     "title": "Lloydminster Employers Trades Scholarship",
@@ -20455,7 +20460,6 @@
     "category": "Trades",
     "audience": "LCHS graduates becoming apprentices in any indentured trade in Alberta or Saskatchewan",
     "description": "Four entrance awards of $1,000, each with a $500 continuing award behind it, for graduates planning to apprentice in any indentured trade in either province. Having attended LCHS within the last two years is enough, so a graduate who spent a year working before starting an apprenticeship has not missed it.",
-    "metaDetail": "Four at $1,000, plus $500 each to continue.",
     "eligibility": {
       "grades": [
         "12"
@@ -20826,7 +20830,7 @@
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://sites.google.com/lpsd.ca/baronsbeyond/home/scholarships",
-    "notes": "One form covers every LPSD award. You complete the General LPSD Scholarship Application in the Google Classroom, code an2eroz, by May 1, and tick this award on the LCHS organizer sheet rather than applying to the sponsor.",
+    "notes": "One form covers every LPSD award. You complete the General LPSD Scholarship Application in the Google Classroom, code an2eroz, by May 1, and tick this award on the LCHS organizer sheet rather than applying to the sponsor. You need eight credits of full-time attendance at LCHS to qualify.",
     "applyViaGuidance": true,
     "deadline": "2027-05-01",
     "title": "Synergy Credit Union Office Technology Scholarship",
@@ -20834,7 +20838,6 @@
     "category": "Academic",
     "audience": "LCHS graduates entering office administration, business, computer science, accounting or marketing",
     "description": "One or two awards of $1,000 for graduates who carried a full course load of at least eight credits at LCHS and are entering office administration, business, computer science, accounting or marketing. Judged on academic achievement, school and community involvement, leadership and citizenship, with the money going to whoever has won least if two candidates are equal.",
-    "metaDetail": "Needs eight credits of full-time attendance at LCHS.",
     "eligibility": {
       "grades": [
         "12"
@@ -20906,7 +20909,7 @@
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://sites.google.com/lpsd.ca/baronsbeyond/home/scholarships",
-    "notes": "One form covers every LPSD award. You complete the General LPSD Scholarship Application in the Google Classroom, code an2eroz, by May 1, and tick this award on the LCHS organizer sheet rather than applying to the sponsor.",
+    "notes": "One form covers every LPSD award. You complete the General LPSD Scholarship Application in the Google Classroom, code an2eroz, by May 1, and tick this award on the LCHS organizer sheet rather than applying to the sponsor. Overcoming adversity is a stated requirement here, not a tiebreaker.",
     "applyViaGuidance": true,
     "deadline": "2027-05-01",
     "title": "Verna Jean (Maisie) Hawkins Scholarship",
@@ -20914,7 +20917,6 @@
     "category": "Trades",
     "audience": "LCHS graduates entering a trade, technology or business field who have overcome adversity",
     "description": "Four awards of $750, two for trades and two for technology or business, from a bequest by Verna Jean Hawkins to the school division. Two of the three criteria are unusual: applicants should not already be receiving significant scholarship money, and students must have overcome adversity to succeed at school. Marks are not mentioned at all.",
-    "metaDetail": "Overcoming adversity is a stated requirement.",
     "eligibility": {
       "grades": [
         "12"
@@ -21245,11 +21247,11 @@
     "amount": "$1,000",
     "deadline": "2026-09-20",
     "category": "STEM",
-    "audience": "Students from Lloydminster and district entering conservation, wildlife or renewable resources",
+    "audience": "Lloydminster-area students entering conservation, wildlife or renewable resources",
     "url": "https://lloydfishandgame.org/scholarships/",
     "notes": "The eligible school list reaches well onto the Alberta side, naming Marwayne, Kitscoty and Paradise Valley alongside the two Lloydminster high schools and the Saskatchewan villages.",
     "description": "Two awards of $1,000 for students entering conservation, wildlife and fisheries, biology or renewable resource technology. Eligibility runs across the border by name: Lloydminster Comprehensive and Holy Rosary plus Lashburn, Hillmond, Maidstone, Neilburg, Marwayne, Kitscoty and Paradise Valley. The package is the form, marks, a letter of acceptance, two references, a resume and a covering letter. It may go unawarded in a year with no suitable applicants.",
-    "metaDetail": "Names Alberta villages as well as Saskatchewan ones.",
+    "metaDetail": "Reaches into Sask.",
     "eligibility": {
       "grades": [
         "12"
@@ -35351,7 +35353,6 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "Foothills County's Agricultural Service Board funds two scholarships of $2,500 for county residents enrolled in the second, third or fourth year of a post-secondary programme in agronomy, animal science, agricultural business, production or mechanics, or another field advancing agriculture.",
-    "metaDetail": "Not a grade 12 award: second year study and up.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -37250,7 +37251,6 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "An award from the Murray family for Central Alberta students enrolling at a post-secondary institution or technical institute in a diploma or degree programme, open across fields with a stated preference for athletics or mechanics.",
-    "metaDetail": "Preference for athletics or mechanics, not a rule.",
     "eligibility": {
       "grades": [
         "12",
@@ -37980,7 +37980,7 @@
     "amount": "$1,000",
     "deadline": "2026-10-31",
     "openDate": "2026-08-01",
-    "audience": "Alberta students who graduated this year and are entering agriculture, engineering, fine arts, health or the trades",
+    "audience": "Alberta students who graduated this year entering agriculture, engineering, arts, health or trades",
     "url": "https://studentaid.alberta.ca/scholarships/dr-robert-and-anna-shaw-scholarship/",
     "category": "General",
     "lastVerified": "2026-09",
@@ -40254,8 +40254,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "notes": "Do not look for a Rogers application form, because there isn't one. The six partner universities are UBC, the University of Calgary, Waterloo, Toronto Metropolitan, Polytechnique Montreal and UNB, and each handles its own nomination and selection. For an Alberta student the practical route is the University of Calgary's own awards process, so ask their admissions office how the Ted Rogers award is assessed there.",
-    "metaDetail": "Applied for through the partner university, not through Rogers."
+    "notes": "Do not look for a Rogers application form, because there isn't one. The six partner universities are UBC, the University of Calgary, Waterloo, Toronto Metropolitan, Polytechnique Montreal and UNB, and each handles its own nomination and selection. For an Alberta student the practical route is the University of Calgary's own awards process, so ask their admissions office how the Ted Rogers award is assessed there."
   },
   {
     "id": 1061,
@@ -40483,7 +40482,6 @@
     "region": "National",
     "description": "A $1,000 tuition award for a graduating Canadian high school student with a documented disability heading into health care, criminal justice, or community and social services at an accredited post-secondary institution.",
     "notes": "Unusually for a disability award, this one is aimed at high school graduates rather than students already enrolled. You submit an essay plus proof of graduation and proof of acceptance. The 2026 round closed July 31; the 2027 date had not been posted when this was checked.",
-    "metaDetail": "Aimed at graduating students, not those already enrolled.",
     "eligibility": {
       "grades": [
         "12"
@@ -40729,14 +40727,14 @@
     "id": 1074,
     "title": "Double A Solutions Blitz Scholarship",
     "amount": "$1,000",
-    "audience": "Students in their final year of high school, transitioning to post-secondary, or already enrolled in Canada or the US",
+    "audience": "Students in their final year of high school, transitioning, or enrolled in Canada or the US",
     "deadline": "2027-04-01",
     "url": "https://www.nowblitz.com/blitz-scholarship/",
     "category": "General",
     "region": "National",
     "description": "A $1,000 award on a workplace-themed essay question. The scholarship opens January 1 and closes April 1, and is paid by cheque made out jointly to the winner and the institution they attend.",
     "notes": "The eligibility is unusually wide: final-year high school, transitioning, or already enrolled at any level in Canada or the United States. The 2026 round has closed and the page takes email reminders for 2027.",
-    "metaDetail": "Paid directly to your school, not to you.",
+    "metaDetail": "Paid to the school.",
     "eligibility": {
       "grades": [
         "12"
@@ -40765,14 +40763,14 @@
     "id": 1075,
     "title": "Pretty Lightroom Presets Scholarship",
     "amount": "$500",
-    "audience": "Students in their final year of high school, transitioning to post-secondary, or already enrolled in Canada or the US",
+    "audience": "Students in their final year of high school, transitioning, or enrolled in Canada or the US",
     "deadline": "2027-04-15",
     "url": "https://www.lightroompresets.com/pages/pretty-lightroom-presets-scholarship-program",
     "category": "Arts",
     "region": "National",
     "description": "A $500 writing award run annually on April 15 by a photography presets company. The winning entry is published on the company's blog and the winner is notified about three weeks after the deadline.",
     "notes": "Grammar and punctuation are named in the entry requirements, which tells you what the judging actually rewards. Open to Canadian students alongside American ones.",
-    "metaDetail": "A fixed annual date: April 15, every year.",
+    "metaDetail": "Grammar is judged.",
     "eligibility": {
       "grades": [
         "12"
@@ -40801,14 +40799,14 @@
     "id": 1076,
     "title": "Pretty Photoshop Actions Scholarship",
     "amount": "$500",
-    "audience": "Students in their final year of high school, transitioning to post-secondary, or already enrolled in Canada or the US",
+    "audience": "Students in their final year of high school, transitioning, or enrolled in Canada or the US",
     "deadline": "2026-10-15",
     "url": "https://www.photoshopactions.com/pages/pretty-photoshop-actions-scholarship-program",
     "category": "Arts",
     "region": "National",
     "description": "A $500 writing award from the same company as the Pretty Lightroom Presets scholarship but on a different annual date, October 15, so a student can enter both in the same school year.",
     "notes": "The winner is notified about four weeks after the deadline and the entry is published on the company blog. Same eligibility as its April sibling: final-year high school, transitioning, or enrolled, in Canada or the United States.",
-    "metaDetail": "October 15 every year, so it pairs with the April one.",
+    "metaDetail": "Winner published.",
     "eligibility": {
       "grades": [
         "12"
@@ -40837,14 +40835,14 @@
     "id": 1077,
     "title": "North American Van Lines Logistics Scholarship",
     "amount": "$1,000",
-    "audience": "Canadian citizens and permanent residents enrolled or enrolling full-time at an accredited Canadian university",
+    "audience": "Canadian citizens and permanent residents enrolling full-time at an accredited university",
     "deadline": "2026-12-15",
     "url": "https://www.northamericanvanlines.ca/scholarship",
     "category": "General",
     "region": "National",
     "description": "Four awards of $1,000 each, open across fields of study rather than restricted to logistics despite the name. Applicants must be Canadian citizens or permanent residents attending an accredited Canadian institution.",
     "notes": "The application form specifies an accredited four-year degree institution, so a two-year diploma or a trades program may not qualify; confirm with the company before spending time on it if that is your path.",
-    "metaDetail": "Four awards, and open across fields despite the name.",
+    "metaDetail": "Any field counts.",
     "eligibility": {
       "grades": [
         "12"
@@ -40908,14 +40906,13 @@
     "id": 1079,
     "title": "editing.services Scholarship",
     "amount": "$1,000 USD",
-    "audience": "Students aged 18 or older attending or about to attend an accredited college, university or trade school",
+    "audience": "Students 18 or older attending or entering an accredited college, university or trade school",
     "deadline": "2026-11-29",
     "url": "https://www.servicescape.com/scholarship",
     "category": "General",
     "region": "National",
     "description": "A $1,000 USD award on a 300 word essay answering how writing impacts today's world. The contest runs a full year, from November 30 to November 29, and past winners are published.",
     "notes": "Two things to check before you spend time on it. You must be at least 18 on entry, which rules out a good share of Grade 12 students, and the award is in US dollars. This was listed on Alberta counsellor sheets as the ServiceScape scholarship; the company has since rebranded to editing.services and the old name still points at the right page.",
-    "metaDetail": "You must be 18 to enter, which excludes many Grade 12 students.",
     "eligibility": {
       "grades": [
         "12"
