@@ -42403,5 +42403,44 @@
     },
     "lastVerified": "2026-09",
     "active": true
+  },
+  {
+    "id": 1120,
+    "title": "Future Masterfeeder Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-30",
+    "openDate": null,
+    "audience": "Canadian students aged 17 to 19 entering agriculture studies",
+    "url": "https://masterfeeds.com/future-ag-master-program",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Verified on 2026-09-08 against the Masterfeeds application PDF (FAM_MstrFeederScholarshipApp.pdf) linked from the Future AgMaster Program page. One $1,000 award a year, and the application must be received by April 30. Reachable by a Grade 12 student despite the post-secondary wording: the form asks for the name of the post-secondary school APPLIED TO, and proof of full-time enrolment is required of the recipient rather than the applicant. The age window is the real gate at 17 to 19, and it is narrow enough to check first. Preference goes to students majoring in animal science or biology, though any agriculture program may apply. Requires a 500 to 700 word essay on what you hope to achieve for the future of food production, a current resume with references, and evidence of integrity, volunteerism and leadership. Applicants under 18 need a parent or guardian signature. Entries go through the online form, by mail, or to futureAg@masterfeeds.com. The winner is notified by August 1 and announced by September 1. Note that Masterfeeds runs a separate all-ages colouring contest called Masterpieces on the same page, which is not this award.",
+    "active": true,
+    "description": "Masterfeeds awards one $1,000 scholarship a year to a Canadian student aged 17 to 19 heading into post-secondary agriculture studies, judged on a 500 to 700 word essay about the future of food production. Applications are read anonymously.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": 19,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "metaDetail": "One award a year; animal science preferred."
   }
 ]
