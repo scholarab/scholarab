@@ -1450,7 +1450,7 @@
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Alberta",
-    "notes": "No money is attached. The province runs three Alberta Citizenship Awards from one nomination process, and this is the one that pays nothing: the Alberta Centennial Award carries $2,005 and the Queen Elizabeth II Platinum Jubilee Citizenship Medallion carries $7,000. Each high school may put forward one student, so the first competition is inside your own school. Academic achievement is explicitly not a criterion.",
+    "notes": "No money is attached. The province runs three Alberta Citizenship Awards from one nomination process, and this is the one that pays nothing: the Alberta Centennial Award carries $2,005 and the Queen's Platinum Jubilee Citizenship Award carries $7,000, eight a year against 25 Centennial awards. Each high school may put forward one student, so the first competition is inside your own school. Academic achievement is explicitly not a criterion.",
     "applyViaGuidance": true,
     "active": false,
     "description": "The Premier writes to one graduating student per Alberta high school in recognition of citizenship, leadership and community service, and winning it makes you eligible for the two cash awards beside it.",
@@ -4590,17 +4590,16 @@
   {
     "id": 151,
     "title": "UFCW Local 401 Scholarships",
-    "amount": "up to $2,500",
-    "deadline": "2026-09-30",
+    "amount": "$500 to $2,000",
     "audience": "UFCW Local 401 (Alberta) members or their dependents entering post-secondary",
     "category": "Community",
     "region": "Alberta",
     "active": true,
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "applyViaGuidance": false,
-    "notes": "The Robert McWilliams Memorial Scholarship pays $2,500 to each of two recipients and closes September 30; the Grant Notley Memorial Scholarship pays $500 to $2,000 and closes December 31.",
+    "notes": "The two funds are sized differently, so the McWilliams pool is the larger of the pair: $30,000 a year against $25,000. Six months of seniority is required as of the closing date. The union says only that there is a yearly deadline and does not publish the date, so watch the page rather than a calendar. Separately, UFCW Canada runs the national Beggs-Dowling-Mathieu award, eighteen at $1,000, which Local 401 members can also enter. Corrected against gounion.ca on 2026-09-09: this listing had said $2,500 to each of two recipients and a September 30 close, and the union's page supports neither.",
     "url": "https://gounion.ca/edu/scholarships/",
-    "description": "UFCW Local 401 offers two separate scholarships, the Robert McWilliams Memorial Scholarship and the Grant Notley Memorial Scholarship, worth up to $2,500 to support members' dependents as they enter post-secondary education. To be eligible, your parent or guardian must be a UFCW Local 401 member in Alberta. Applications are submitted through gounion.ca.",
+    "description": "UFCW Local 401 runs two scholarships for members and their immediate families, the Robert McWilliams Memorial Scholarship and the Grant Notley Memorial Scholarship. Both pay $500 to $2,000 and both are applied for through gounion.ca. Your parent, guardian or spouse must be a Local 401 member in Alberta.",
     "eligibility": {
       "grades": [
         "12"
@@ -4623,7 +4622,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "metaDetail": "Two union awards, one application page."
   },
   {
     "id": 152,
