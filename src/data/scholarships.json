@@ -2614,9 +2614,9 @@
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "National",
-    "notes": "Six streams, each with its own form at apply.4-h-canada.ca and its own field of study. McDonald's Canada Future of Agriculture, 15 awards of $3,000, for agriculture, food security or food-system programs. John Deere Canada, 15 awards of $1,000, any degree, certificate or trade program, with three of the fifteen allocated to Alberta. TD 4-H Agriculture, 12 awards of $3,000, for agriculture, ag-science or agri-business. Maizex, 5 awards of $4,000, for field crop production or crop science. MNP, 5 awards of $2,000, for business, commerce, accounting, finance, data analytics or public administration. Campbellbrook Fund Trade, 5 awards of $2,000, for a trade or apprenticeship leading to a career supporting agriculture. You must be a current 4-H member in good standing and at least 16 by January 1 of the application year. The 2026 cycle ran April 1 to June 1 and has closed; 4-H Canada has not yet posted 2027 dates, so treat April as the month to check rather than a promise. Verified against the 4-H Canada scholarships page and the MNP, John Deere and Campbellbrook application guidelines on 2026-09-08.",
+    "notes": "The six streams are listed separately here, because each has its own sponsor, cheque size and field of study: McDonald's Canada, John Deere Canada, TD, Maizex, MNP and the Campbellbrook Fund. Detailed criteria live in each stream's own application guidelines at apply.4-h-canada.ca. The 2026 cycle ran in the spring and has closed; no 2027 dates are posted yet, so check in April rather than treating April as a promise. Verified against the 4-H Canada scholarships page on 2026-09-09.",
     "active": true,
-    "description": "4-H Canada runs six sponsored scholarship streams for senior 4-H members across Canada, worth $1,000 to $4,000 depending on the stream and the field you are heading into. All six are applied for through the same portal.",
+    "description": "4-H Canada runs six sponsored scholarship streams for senior 4-H members across Canada, worth $1,000 to $4,000 depending on the sponsor and the field you are heading into. One portal covers all six, and you can apply to more than one.",
     "eligibility": {
       "grades": [
         "12"
@@ -2648,6 +2648,260 @@
       ]
     },
     "metaDetail": "One portal covers all six sponsored streams."
+  },
+  {
+    "id": 1122,
+    "title": "McDonald's Canada Future of Agriculture 4-H Scholarship",
+    "amount": "$3,000",
+    "audience": "Senior 4-H members entering agriculture, food security or food-system studies",
+    "url": "https://4-h-canada.ca/scholarships-awards/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The largest of the six sponsored streams by number of awards, tied with John Deere at 15. You must be a senior 4-H member to apply, and every stream is applied for through the same 4-H Canada portal. The 2026 cycle has closed and 4-H Canada has not posted 2027 dates yet.",
+    "active": true,
+    "description": "McDonald's Canada funds 15 awards of $3,000 a year through 4-H Canada, for senior members heading into an agricultural program or one that supports food security, the food system or the value chain.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "agriculture",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    },
+    "metaDetail": "Fifteen awards a year, the most of the six."
+  },
+  {
+    "id": 1123,
+    "title": "John Deere Canada 4-H Scholarship",
+    "amount": "$1,000",
+    "audience": "Senior 4-H members entering any degree, certificate or trade program",
+    "url": "https://4-h-canada.ca/scholarships-awards/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Worth the least per award, but open to the widest range of programs, so it is the stream to try if no other 4-H field requirement fits. You must be a senior 4-H member to apply, and every stream is applied for through the same 4-H Canada portal. The 2026 cycle has closed and 4-H Canada has not posted 2027 dates yet.",
+    "active": true,
+    "description": "John Deere Canada funds 15 awards of $1,000 a year through 4-H Canada. It is the least restrictive of the six streams on field of study: any degree, certificate or trade-based program at a Canadian college or university qualifies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "agriculture",
+        "business",
+        "trades",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    },
+    "metaDetail": "No field-of-study requirement, unlike the other five streams."
+  },
+  {
+    "id": 1124,
+    "title": "TD 4-H Agriculture Scholarship",
+    "amount": "$3,000",
+    "audience": "Senior 4-H members entering agriculture, ag-science or agri-business",
+    "url": "https://4-h-canada.ca/scholarships-awards/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Narrower than the McDonald's stream, which also counts food-system and food-security programs. You must be a senior 4-H member to apply, and every stream is applied for through the same 4-H Canada portal. The 2026 cycle has closed and 4-H Canada has not posted 2027 dates yet.",
+    "active": true,
+    "description": "TD funds 12 awards of $3,000 a year through 4-H Canada, for senior members entering agriculture, ag-science or agri-business at a Canadian college or university.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "agriculture",
+        "business",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    },
+    "metaDetail": "Twelve awards a year for ag, ag-science or agri-business."
+  },
+  {
+    "id": 1125,
+    "title": "Maizex 4-H Canada Scholarship",
+    "amount": "$4,000",
+    "audience": "Senior 4-H members entering field crop production or crop science",
+    "url": "https://4-h-canada.ca/scholarships-awards/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The biggest cheque of the six streams and the narrowest field requirement, so the applicant pool is the smallest. You must be a senior 4-H member to apply, and every stream is applied for through the same 4-H Canada portal. The 2026 cycle has closed and 4-H Canada has not posted 2027 dates yet.",
+    "active": true,
+    "description": "Maizex Seeds funds 5 awards of $4,000 a year through 4-H Canada, for senior members taking an agriculture diploma or degree in field crop production or crop science.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "agriculture",
+        "Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    },
+    "metaDetail": "The largest single award of the six 4-H streams."
+  },
+  {
+    "id": 1126,
+    "title": "MNP 4-H Canada Scholarship",
+    "amount": "$2,000",
+    "audience": "Senior 4-H members entering a business-related program",
+    "url": "https://4-h-canada.ca/scholarships-awards/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The only 4-H stream aimed at business students rather than agriculture or trades. You must be a senior 4-H member to apply, and every stream is applied for through the same 4-H Canada portal. The 2026 cycle has closed and 4-H Canada has not posted 2027 dates yet.",
+    "active": true,
+    "description": "MNP funds 5 awards of $2,000 a year through 4-H Canada, for senior members entering a business-related program: commerce, accounting, finance, data analytics or public administration.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    },
+    "metaDetail": "The one 4-H stream for business students."
+  },
+  {
+    "id": 1127,
+    "title": "Campbellbrook Fund 4-H Canada Trade Scholarship",
+    "amount": "$2,000",
+    "audience": "Senior 4-H members entering a trade or apprenticeship supporting agriculture",
+    "url": "https://4-h-canada.ca/scholarships-awards/scholarships/",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The trade stream, open coast to coast. A welding or heavy-equipment ticket aimed at farm work counts; a trade with no agricultural tie does not. You must be a senior 4-H member to apply, and every stream is applied for through the same 4-H Canada portal. The 2026 cycle has closed and 4-H Canada has not posted 2027 dates yet.",
+    "active": true,
+    "description": "The Campbellbrook Fund pays 5 awards of $2,000 a year through 4-H Canada, for senior members entering a trade-based program or apprenticeship leading to a career that supports the agriculture sector.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "any"
+      ],
+      "fields": [
+        "trades",
+        "agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": [
+        "4-H"
+      ]
+    },
+    "metaDetail": "The 4-H stream for apprenticeships and trade tickets."
   },
   {
     "id": 102,
