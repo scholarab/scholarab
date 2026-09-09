@@ -1,0 +1,166 @@
+---
+import SabGuide from '../../components/sab/SabGuide.astro';
+import { getGuide } from '../../lib/guides';
+
+const guide = getGuide('dead-scholarships-alberta-counsellor-lists');
+
+const faqJson = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'How many scholarships on Alberta counsellor lists are dead?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'On the national-awards list we checked in September 2026, nine of the thirty-one names were dead: the program had closed, the organisation had folded, or the page had been gone long enough that no student could apply. That is roughly one name in three.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Why do closed scholarships stay on school lists for years?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Nobody owns the deletion. Lists are copied from school to school and forwarded each September, and a closed award almost never announces itself. Most of the dead ones leave the page up with an old deadline, so a list maintainer glancing at the link sees a working page and keeps the entry.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'How can I tell if a scholarship is still running?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Open the awarding body\'s own page, not a scholarship directory, and look for a year. Check the stated deadline, the most recent winner named, and whether the application form itself opens. If the newest date on the page is more than about eighteen months old, treat it as closed until something proves otherwise.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Is a 403 error the same as a dead scholarship?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'No, and this is the mistake that makes automated link checking unreliable. Several sites block automated requests while working perfectly in a browser. Of the pages that refused our first automated check, some were live awards and some were genuinely gone, and only opening each one in a real browser told them apart.',
+      },
+    },
+    {
+      '@type': 'Question',
+      'name': 'Which dead scholarship matters most?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'The Jeremy Dias Scholarship. The Canadian Centre for Gender and Sexual Diversity went bankrupt in October 2024 and its website no longer resolves, so a 2SLGBTQIA+ student following the list is being sent to a charity that no longer exists.',
+      },
+    },
+  ],
+};
+---
+
+<SabGuide guide={guide}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJson)} slot="ld" />
+
+  <p>
+    Most Alberta high schools hand out a list of national scholarships in September. The lists get copied from school to school and forwarded year after year, and nobody is responsible for taking anything off them. We checked one of these lists against every awarding body's own website in September 2026. Nine of the names on it are dead.
+  </p>
+  <p>
+    Not "hard to find" or "changed their web address". Dead: the program has closed, the organisation has folded, or the page has been gone long enough that no student could apply if they tried.
+  </p>
+
+  <h2>What we checked</h2>
+  <p>
+    The list is a national-awards sheet compiled by Wolf Creek Public Schools and redistributed by an Edmonton public high school. It carries thirty-one names we did not already have in our directory. We opened every one at the awarding body's own site, not at a scholarship aggregator, and read the page rather than the link status.
+  </p>
+  <p>
+    That distinction turned out to matter more than anything else in this exercise, and we come back to it below.
+  </p>
+
+  <h2>The nine that are gone</h2>
+
+  <h3>1. The Jeremy Dias Scholarship</h3>
+  <p>
+    This is the one that matters. The Canadian Centre for Gender and Sexual Diversity ran it, and the CCGSD declared bankruptcy and shut down abruptly in October 2024, laying off staff with hours of notice. Both spellings of its domain now fail to resolve at all. A 2SLGBTQIA+ student following this list is being pointed at a charity that has not existed for nearly two years.
+  </p>
+
+  <h3>2. STEAM Horizon Awards</h3>
+  <p>
+    The site is still up and looks perfectly normal. Its own page says the program "is no longer accepting award applications." The most recent winners it names are from 2022.
+  </p>
+
+  <h3>3. Toyota Earth Day Scholarship</h3>
+  <p>
+    Twenty awards of $5,000 a year, run with Earth Day Canada from 2003. Earth Day Canada's current site lists a dozen programs and no scholarship among them. There is nothing to apply to.
+  </p>
+
+  <h3>4. Azazie Scholarship</h3>
+  <p>
+    A live, polished page on a working retail site. The deadline printed on it is May 31, 2021, and the award date is June 30, 2021. It has sat there unchanged for five years. Worth noting because the page gives every impression of being current until you read the dates.
+  </p>
+
+  <h3>5. Novus Biologicals Scholarship</h3>
+  <p>
+    Novus was absorbed into Bio-Techne and its site now redirects to R&amp;D Systems. The scholarship page survives the move and says the program "is currently under construction" and invites you to "check back for updates fall semester 2024". The most recent recipient it names is from spring 2023.
+  </p>
+  <p>
+    This one had a second problem that no list should have missed: even when it was running, it was open only to "all levels of education above high school". It could never have been won by the Grade 12 students being handed the list.
+  </p>
+
+  <h3>6. The Cover Guy Scholarship</h3>
+  <p>
+    The company still trades. The scholarship page returns a 404, and there is no link to a scholarship anywhere on the site.
+  </p>
+
+  <h3>7. Lineups.com Scholarship</h3>
+  <p>
+    The scholarship URL returns a 404 and the homepage no longer links to it. Lineups is a sports betting site, which is its own reason to question how the name reached a list for minors.
+  </p>
+
+  <h3>8. Zoeken Scholarship</h3>
+  <p>
+    The domain no longer belongs to a company. It now redirects to a marketplace listing where the name itself is for sale.
+  </p>
+
+  <h3>9. Canadian Cowboys Association Scholarship</h3>
+  <p>
+    Every scholarship path on the site returns a 404. What the association does run is a monthly "Youth of Rodeo" recognition, and the entire benefit is a free junior membership. There is no money and there never was a scholarship at this address.
+  </p>
+
+  <h2>Three we expected to be dead and were not</h2>
+  <p>
+    We are publishing these because they say something about how the checking has to be done. Our own first pass, done with automated requests, had all three of these filed as gone. Opening them properly proved otherwise.
+  </p>
+  <ul>
+    <li><strong>The Arthur Paulin Automotive Aftermarket Scholarship</strong> is alive. Our earlier note recorded a 404, but that was a stale web address, not a dead award. AIA Canada still lists it at $700, alongside two other awards on the same page.</li>
+    <li><strong>The Future Masterfeeder Scholarship</strong> is alive: $1,000 for a Canadian student aged 17 to 19 entering agriculture, renewing annually with an April 30 deadline. We had it filed as a children's colouring contest, because Masterfeeds runs both on the same page and we had read the wrong one.</li>
+    <li><strong>The Melissa Weekes Business &amp; Marketing Excellence Scholarship</strong> is genuinely unclear rather than dead. Its page says the program runs every year, but the last deadline printed on it is September 1, 2022, and no winner has been named since. We have not listed it, and we would not tell a student to spend an evening on it without an email to the company first.</li>
+  </ul>
+
+  <h2>Why dead awards survive on these lists</h2>
+  <p>
+    Nobody owns the deletion. A counsellor inherits the list, adds a name or two, and passes it on. Removing an entry requires somebody to prove a negative, and nothing in the school year makes that anyone's job.
+  </p>
+  <p>
+    Closed scholarships also almost never announce themselves. Only one of our nine says plainly on its own page that it has stopped. The rest fail quietly, in four distinct ways:
+  </p>
+  <ul>
+    <li><strong>The page freezes.</strong> Azazie and Novus both left a complete, professional-looking page up with an expired date on it. This is the most dangerous kind, because a list maintainer clicking the link sees a page that loads and moves on.</li>
+    <li><strong>The organisation folds.</strong> CCGSD. The award vanishes with the charity, and the only trace is a news story you would have to already know to look for.</li>
+    <li><strong>The company reorganises.</strong> Novus into Bio-Techne. The award is collateral damage in a website migration nobody outside the company noticed.</li>
+    <li><strong>The page just goes.</strong> Cover Guy, Lineups, Canadian Cowboys. A 404 and no explanation.</li>
+  </ul>
+
+  <h2>How to check an award yourself</h2>
+  <p>
+    This takes about a minute per scholarship and it is the single most useful habit for anyone working from an inherited list.
+  </p>
+  <ul>
+    <li><strong>Go to the awarding body's own site.</strong> Not a scholarship directory. Directories copy each other, and they are where dead awards go to live forever.</li>
+    <li><strong>Look for a year, not a link.</strong> The question is never whether the page loads. It is what the newest date on the page is. A stated deadline, a named recent winner, an application window. If the newest date is more than about eighteen months old, treat the award as closed until something proves otherwise.</li>
+    <li><strong>Open the application form.</strong> A live award has a form you can actually reach. A frozen one usually has a link to a form that is closed, or no form at all.</li>
+    <li><strong>Do not trust an error as proof of death.</strong> Plenty of working sites block automated tools while behaving perfectly in a browser. Several of the pages that refused our first check were live awards. If a checker tells you a scholarship is broken, open it yourself before believing it.</li>
+    <li><strong>Check that it includes you.</strong> Novus excluded high school students in its own eligibility text while sitting on a list for Grade 12s. "Still running" and "open to you" are separate questions and both need answering.</li>
+  </ul>
+
+  <h2>What we did with this</h2>
+  <p>
+    None of the nine are in our directory, and each one is recorded as rejected with the reason, so they cannot be quietly re-added later by someone working from the same list. The Arthur Paulin and Masterfeeds awards are being verified for inclusion.
+  </p>
+  <p>
+    This is the argument for a directory that is checked rather than compiled. Every listing here is written from the provider's own page, and a listing that stops being true is meant to be removed rather than left to sit. If you maintain a scholarship list for an Alberta school and want the results of this check for your own copy, we are happy to send them over.
+  </p>
+</SabGuide>

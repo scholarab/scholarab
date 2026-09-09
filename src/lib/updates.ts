@@ -581,6 +581,10 @@ export const months: UpdateMonth[] = [
     summary: 'Seventeen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie, Sherwood Park, Okotoks and Cochrane, a much deeper Edmonton page, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
       {
+        kind: 'new',
+        text: 'A new guide names nine scholarships that are still on Alberta counsellor lists and no longer exist. One is the Jeremy Dias Scholarship, whose charity went bankrupt in October 2024. Only one of the nine admits on its own page that it has closed, so a link that loads proves nothing.',
+      },
+      {
         kind: 'listings',
         text: 'Cochrane has a page, with the Rotary U-START bursary at $5,000 as the largest award in the town. Thirteen of its listings run through one printed application package at Cochrane High, and six existing Rocky View and Bow Valley awards now say they are open to Cochrane students too.',
       },

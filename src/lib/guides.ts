@@ -357,6 +357,26 @@ export const guides: GuideMeta[] = [
     ],
   },
   {
+    slug: 'dead-scholarships-alberta-counsellor-lists',
+    // Original research rather than an explainer, which is deliberate: the
+    // backlink problem needs a page worth citing, and every other guide here
+    // restates advice a counsellor could give. This one contains a finding
+    // nobody else has published, and the method section is what makes it
+    // quotable by list maintainers rather than only by students.
+    title: 'Nine dead scholarships still on Alberta counsellor lists',
+    description:
+      'We checked a national-awards list used by Alberta schools against each provider\'s own site. Nine awards no longer exist, and one charity folded in 2024.',
+    kicker: 'ORIGINAL RESEARCH',
+    minutes: 7,
+    datePublished: '2026-09-08',
+    dateModified: '2026-09-08',
+    takeaways: [
+      'Nine awards on one circulating Alberta list are dead, including the Jeremy Dias Scholarship, whose charity went bankrupt in October 2024.',
+      'Only one of the nine says so on its own page. The rest freeze with an old deadline, so a working link proves nothing.',
+      'Check the newest date on the provider\'s own page, not whether the link loads, and never trust an automated error as proof of death.',
+    ],
+  },
+  {
     slug: 'local-scholarships-better-odds',
     title: 'Local scholarships: smaller awards, much better odds',
     description:
