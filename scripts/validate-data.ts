@@ -498,6 +498,43 @@ if (shortMetas.length) {
   );
 }
 
+// -- metaDetail values that never reach a snippet -----------------------------
+//
+// withTrail appends a metaDetail only if body + 1 + clause fits META_MAX. It
+// DROPS the clause otherwise; it does not truncate. So an authored clause that
+// is a few characters too long is not shortened, it is silently discarded, and
+// nothing downstream complains. 304 of 1024 clauses had accumulated in that
+// state before this check existed, written by people who reasonably assumed
+// they were adding snippet text. Two other ways to lose one, both worth
+// knowing because neither is a length problem: a clamped audience clause
+// suppresses both tails outright, and two listings given the SAME clause can
+// collide into the title-prefixed form of the snippet, which then has no room
+// for either. That is how the two Rocky Mountain House twins lost theirs.
+//
+// A dropped clause is dead data, not a fault, so this warns. The remainder are
+// listings where the audience already spends the budget; the number is what to
+// watch.
+const renderedMetas = scholarshipMetas(
+  scholarships as Parameters<typeof scholarshipMetas>[0],
+  (s) => scholarshipStatusOf(s, today),
+  formatListingDate,
+  todayIso,
+);
+const deadDetails = scholarships
+  .map((s, i) => ({
+    title: String(s.title),
+    clause: String(s.metaDetail ?? '').trim(),
+    rendered: renderedMetas[i]!,
+  }))
+  .filter((x) => x.clause && !x.rendered.includes(x.clause));
+if (deadDetails.length) {
+  console.warn(
+    `validate-data: ${deadDetails.length} metaDetail clause(s) never reach the rendered snippet and are dead data:\n  ${deadDetails
+      .map((x) => `${x.title} (snippet ${x.rendered.length}, clause ${x.clause.length})`)
+      .join('\n  ')}`,
+  );
+}
+
 // -- No em dashes, anywhere in src, scripts or workflows --------------------
 //
 // Standing rule: the em dash never appears in ScholarAB copy, data or code.

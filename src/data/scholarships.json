@@ -75,7 +75,7 @@
         "volunteer"
       ]
     },
-    "metaDetail": "Your family needs a Co-op membership in good standing."
+    "metaDetail": "Needs a family Co-op membership."
   },
   {
     "id": 7,
@@ -684,7 +684,7 @@
     "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1; most close May 30, a few May 1. Confirm this award's own deadline in the portal before you rely on the date here.",
     "active": false,
     "description": "For a student with past or present involvement in Big Brothers Big Sisters of Calgary and Area.",
-    "metaDetail": "Community involvement counts, and so does mentorship experience.",
+    "metaDetail": "Community involvement and mentorship both count.",
     "eligibility": {
       "grades": [
         "12"
@@ -2916,7 +2916,7 @@
       "apprenticeship": true,
       "extracurriculars": []
     },
-    "metaDetail": "One application covers every named corporate fund."
+    "metaDetail": "One form, every fund."
   },
   {
     "id": 110,
@@ -4690,7 +4690,7 @@
         "volunteer"
       ]
     },
-    "metaDetail": "Endorsed by your nearest Kin club, judged nationally."
+    "metaDetail": "Kin club endorsed, nationally judged."
   },
   {
     "id": 159,
@@ -5176,7 +5176,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "For students accepted into a fire service program."
+    "metaDetail": "For students accepted into a fire program."
   },
   {
     "id": 172,
@@ -10843,7 +10843,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Named for Chuck Love, who was vice principal of St. Mary's and of McCoy and later principal of McCoy, Mother Teresa and St. Francis Xavier. It goes to a Grade 12 student at Monsignor McCoy High School who is active in student council and in at least one other school activity, shows strong character and academic perseverance, and leads by doing for others. The Foundation caps the total paid out at $500 in any one year.",
-    "metaDetail": "Student council plus one more activity is the bar.",
+    "metaDetail": "Student council plus one more activity.",
     "eligibility": {
       "grades": [
         "12"
@@ -11162,7 +11162,7 @@
     "applyViaGuidance": true,
     "active": false,
     "description": "The original Redcliff award, endowed at a 2002 reunion of the town's 1944 Grade One class and funded since by Redcliff residents and organizations. Worth up to $6,000, paid straight to your post-secondary institution in two $3,000 instalments in mid-August and mid-December. Selection weighs financial need, leadership and citizenship, and academic merit, with preference to first year students who lived in Redcliff for most of their school years.",
-    "metaDetail": "Paid in two instalments, mid-August and mid-December.",
+    "metaDetail": "Paid in instalments, August and December.",
     "eligibility": {
       "grades": [
         "12"
@@ -12040,7 +12040,7 @@
     "url": "https://www.cypress.ab.ca/p/online-registrations",
     "notes": "This is the County Council award, which is separate from the Agricultural Service Board bursary that closes on the same date. You can be a candidate for both. What decides it is residency, not which school you attend: the terms of reference say applicants living in the County but attending high school in Medicine Hat, Brooks, Foremost or Bow Island are eligible, and so are students in the Crown Village of Ralston and the Townsite of Elkwater. You can only win it once. The application form is on the County's online registrations page, under Scholarship Application.",
     "description": "Cypress County Council awards two $1,000 scholarships a year to high school students from the County who are heading to post-secondary, with preference given to those entering a technical program. You need to be registered to start your first year, and the application wants a letter setting out your goals, your transcripts, and your letter of acceptance. A council committee picks the winners on citizenship and community involvement as well as marks.",
-    "metaDetail": "Two are awarded a year; residency in the County is what counts.",
+    "metaDetail": "Two a year.",
     "eligibility": {
       "grades": [
         "12"
@@ -12707,7 +12707,7 @@
     "url": "https://www.ucalgary.ca/registrar/awards/royal-canadian-legion-branch-288-scholarship",
     "notes": "There is no separate form. You are considered through the High School Awards section of the My UCalgary portal once you have applied for admission, so the work is finishing that section rather than writing anything new. The award page publishes no closing date, which means the admission timeline is the one that matters.",
     "description": "Three awards of up to $1,300 each, funded by Airdrie's Royal Canadian Legion branch, for graduates of any Airdrie high school entering their first year at the University of Calgary in any faculty. Selection is on academic merit, and the award carries no citizenship or residency requirement beyond the Airdrie school.",
-    "metaDetail": "Three awards for Airdrie graduates heading to UCalgary.",
+    "metaDetail": "Three awards, Airdrie grads to UCalgary.",
     "eligibility": {
       "grades": [
         "12"
@@ -12955,7 +12955,7 @@
     "url": "https://airdriebasketball.ca/airdrieminorbasketballassociation/",
     "notes": "Read this one twice: it is not for players. If you have refereed a season of mini ball or helped run a tournament, you are the intended applicant, and almost nobody applies. AMBA's site moved to TeamLinkt and took the scholarships page with it, so the old link 404s and no criteria are published anywhere as of September 2026. The last advertised window was January 8 to February 26. Contact the association to confirm it is still offered.",
     "description": "One $500 award from Airdrie Minor Basketball for someone who gave time to the association off the court, as a coach, referee, volunteer or board member, and is now enrolled full time in post-secondary study. It honours Colin McKenna's work building basketball in Airdrie. The application is a short essay judged blind.",
-    "metaDetail": "For the volunteers and referees, not the players.",
+    "metaDetail": "For the volunteers, not the players.",
     "eligibility": {
       "grades": [
         "12",
@@ -13172,7 +13172,7 @@
     "url": "https://calgaryfoundation.org/student-awards/high-school-students/",
     "notes": "One application is considered for all four awards, so there is nothing to gain from picking one. The geography is wider than the name suggests: a graduate of an Airdrie, Chestermere, Cochrane, Diamond Valley, High River, Okotoks, Springbank or Strathmore high school qualifies at any Canadian institution, and everyone else has to be at a Calgary one. The provider had not posted the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward.",
     "description": "Four awards for Black Canadian citizens or permanent residents in a full-time Commerce or Business Administration degree or diploma, entering second year or beyond: the ATB Community Leadership Scholarship and the KPMG Academic Excellence Scholarship at $5,000, and the Academic Excellence at MRU and TD Business Leadership scholarships at $7,000. It needs a GPA of at least 2.7 or 70 per cent and one reference letter from a business or community leader.",
-    "metaDetail": "One application, four awards, second year and beyond.",
+    "metaDetail": "Second year and beyond.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -13217,7 +13217,7 @@
     "url": "https://calgaryfoundation.org/student-awards/high-school-students/",
     "notes": "Eight awards makes this one of the better odds in the Calgary Foundation's list, and it is the continuing-student twin of the Legacy Entrance Scholarship rather than a competitor to it. Graduates of an Airdrie, Chestermere, Cochrane, Diamond Valley, High River, Okotoks, Springbank or Strathmore high school qualify wherever in Canada they are studying. The provider had not posted the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward.",
     "description": "Eight awards of $2,500 each for Black Canadian citizens or permanent residents entering second year or beyond of a first undergraduate degree or diploma in full-time study. It asks for a GPA of at least 2.7 or 70 per cent, demonstrated financial need, school or community involvement, and one reference letter.",
-    "metaDetail": "Eight awards, for students already at post-secondary.",
+    "metaDetail": "Eight awards, for post-secondary students.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -13335,7 +13335,7 @@
     "url": "https://nafgives.com/grande-prairie-auto-group/",
     "notes": "A single award, but the eligible pool is tiny: you have to live in the City or County of Grande Prairie and be registered specifically as an automotive service technician. If that is you, this is close to the best odds on the site. Five dealership general managers put it together in 2022. It is paid through the Northwestern Alberta Foundation universal application, so the deadline shown is the foundation's, rolled forward a year.",
     "description": "One award of $1,500 for a resident of the City of Grande Prairie or the County of Grande Prairie who is registered in an Automotive Service Technician program. Applications are made through the Northwestern Alberta Foundation.",
-    "metaDetail": "One award, and a very small eligible pool.",
+    "metaDetail": "A small eligible pool.",
     "eligibility": {
       "grades": [
         "12",
@@ -13690,7 +13690,7 @@
     "url": "https://gphospitalfoundation.ca/bursaries-and-scholarships/",
     "notes": "The range is wide because the committee sizes the award to the applicant, so a strong file is worth applying with even if you only need part of it. Every nursing credential is eligible, from licensed practical nursing through to a doctorate, which makes this unusually open compared to most nursing awards. Applications go by email to the hospital foundation. This is last cycle's May deadline rolled forward a year.",
     "description": "A bursary of between $500 and $5,000 from the Grande Prairie Regional Hospital Foundation for students in licensed practical nursing, nursing, psychiatric nursing, nurse practitioner, master of nursing or nursing doctorate programs. The committee looks for commitment, dedication and growth potential. The application asks for a cover letter, resume, two letters of reference, a course outline and transcripts.",
-    "metaDetail": "Every nursing credential qualifies, LPN through doctorate.",
+    "metaDetail": "Every nursing credential qualifies.",
     "eligibility": {
       "grades": [
         "12",
@@ -13775,7 +13775,7 @@
     "url": "https://gphospitalfoundation.ca/bursaries-and-scholarships/",
     "notes": "The eligibility line is drawn on a map: you had to attend high school in an Alberta community at or north of the 54th parallel, which takes in Grande Prairie, Peace River, High Level, Fort McMurray and Grande Cache. Worth flagging in Grade 12 even though you cannot apply yet, because it is a reason to keep your northern high school records handy years later.",
     "description": "One or more awards totalling up to $10,000 a year from the Grande Prairie Regional Hospital Foundation for medical students accepted at or enrolled in a Canadian medical school who intend to practise in rural northern Alberta at or north of the 54th parallel. Applicants must have attended high school in an Alberta community at or north of that line, and sign a return of service agreement on completion.",
-    "metaDetail": "Drawn on a map: high school north of the 54th.",
+    "metaDetail": "Drawn on a map: schools north of the 54th.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -14105,7 +14105,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Three reference letters and a transcript are required.",
+    "metaDetail": "Three references and a transcript.",
     "deadline": "2027-05-15"
   },
   {
@@ -14902,7 +14902,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Named for the RCMP constable killed in St. Albert in 2015, and written around what he believed: that every young person deserves a leg up and deserves recognition for service. It asks for a 65% average, a record of volunteer or leadership service in school, community or international programs, and two letters of reference to back that record up. The fields named are police work, EMT, paramedic, law, military, forensic science and medicine, including nursing, pharmacy and lab tech, though the wording is deliberately not limited to them. Consideration is given to students from financially challenged families. It is offered at Bellerose, Paul Kane, St. Albert Catholic, Outreach and St. Gabriel, which is the widest reach of any award on this list.",
-    "metaDetail": "Reachable from five St. Albert schools.",
+    "metaDetail": "Five St. Albert schools qualify.",
     "eligibility": {
       "grades": [
         "12"
@@ -14941,7 +14941,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "One of four awards the families created after the 2018 Humboldt Broncos bus crash, which killed four young men from St. Albert. This one is for players who love the game itself rather than players at the top of the scoring sheet: Jaxon Joseph did not always make the top AAA team and kept pushing anyway, and the award is written around that. You need a 70% average through high school, a commitment to community through service or volunteering, and participation in hockey inside or outside school. The application is a short essay or a video of up to five minutes, a coach's reference, a transcript, and proof of post-secondary acceptance.",
-    "metaDetail": "Needs a 70% average and a coach's reference.",
+    "metaDetail": "Needs 70% and a coach's reference.",
     "eligibility": {
       "grades": [
         "12"
@@ -14981,7 +14981,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "A second of the four Humboldt memorial awards, this one tied to a field of study. It goes to a student heading for athletic therapy, physiotherapy, or another career that helps heal the human body, which is a much narrower gate than the hockey requirement beside it. You need a 70% average, service or volunteer involvement, demonstrated leadership, and participation in hockey. Conner Lukan spent his summers training on a dirt road by the lake at Slave Lake, and the award is built around that kind of dedication rather than around results.",
-    "metaDetail": "Field of study is the narrow part, not the sport.",
+    "metaDetail": "The field of study narrows it.",
     "eligibility": {
       "grades": [
         "12"
@@ -15022,7 +15022,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The third Humboldt memorial award, and the one that asks for what you have done for younger players. Logan Hunter wanted to be a teacher and spent his time helping young people as a volunteer and a coach, so the criteria ask for excellence in hockey over more than two years, character and respect for coaches, and support and involvement of youth through volunteering or teaching. A 70% average is required, along with a commitment to training or personal fitness. The submission is an essay or a video of up to five minutes, a coach's reference, and a transcript.",
-    "metaDetail": "Wants two or more years of hockey and youth work.",
+    "metaDetail": "Wants hockey plus youth work.",
     "eligibility": {
       "grades": [
         "12"
@@ -15063,7 +15063,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The last of the four Humboldt awards and the one built differently from the others. It is open from grade 10, it asks for an 80% average rather than 70%, and it is meant to fund personal growth in any area the recipient chooses: higher education, sport, hobbies, training, classes, or equipment. Stephen Wack was an honours student and a self-taught videographer as well as a defenceman, and priority goes to students who play defence. The criteria ask for extraordinary commitment to personal growth and an exemplary work ethic on and off the ice, not for a points total.",
-    "metaDetail": "Open from grade 10, and the money need not go to tuition.",
+    "metaDetail": "Open from Grade 10; not tied to tuition.",
     "eligibility": {
       "grades": [
         "10",
@@ -15104,7 +15104,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a student-athlete in their graduation year who plays high school or club volleyball and carries a never give up attitude onto the court. The award says plainly that the recipient may not be the most skilled player on the team, and asks instead for strength of character, persistence against challenges, dedication to the team, and encouragement of teammates. Applicants can put themselves forward or be nominated by someone else. The money has to be used toward post-secondary tuition or associated costs within two years of graduating, which is an unusually long window.",
-    "metaDetail": "You can be nominated rather than apply yourself.",
+    "metaDetail": "You can be nominated instead.",
     "eligibility": {
       "grades": [
         "12"
@@ -15143,7 +15143,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "One fund, but the criteria are written separately for each school that offers it. At Bellerose it goes to a student entering fine arts, musical theatre or design studies who has completed a 30 level course in arts, communications or musical theatre. At Paul Kane it splits into two Art and Design awards for graduating students with demonstrated financial need who finished Art 30, Art 31, Design Studies 30 or Communication Technology 30. At St. Albert Catholic it covers art, drama, musical theatre and music, and also asks for commitment to the arts outside school hours. Outreach and St. Gabriel run their own versions through administration.",
-    "metaDetail": "Criteria differ by school; Paul Kane's version weighs financial need.",
+    "metaDetail": "Paul Kane's version weighs financial need.",
     "eligibility": {
       "grades": [
         "12"
@@ -15218,7 +15218,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Erin James graduated from the Bellerose International Baccalaureate programme in 2000 and went on to a Bachelor of Arts and a public relations diploma. The scholarship in her name is presented annually to a grade 12 Bellerose student, and says outright that the recipient is not required to have the highest academic average. What it asks for instead is commitment to your academics, a contribution to the Bellerose community, and compassion, kindness and generosity toward others.",
-    "metaDetail": "States outright that the top average is not the point.",
+    "metaDetail": "It says outright the top average is not it.",
     "eligibility": {
       "grades": [
         "12"
@@ -15254,7 +15254,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Stanley Dennis struggled in school and had great potential, and this award exists to tell a student in the same position that somebody believes in them. It is for a Paul Kane student who is working hard to get ahead, and it is open from grade 10 rather than only at graduation. It is one of three awards the Stanley Dennis Memorial Fund pays for at Paul Kane, and the only one of the three with no field of study attached to it.",
-    "metaDetail": "Written for the student who struggles and keeps going.",
+    "metaDetail": "For those who keep going.",
     "eligibility": {
       "grades": [
         "10",
@@ -15293,7 +15293,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The second of the three awards the Stanley Dennis Memorial Fund pays for at Paul Kane. It goes to a grade 12 student heading into media and visual arts or performing arts, and the recipient has to provide proof of enrolment in a fine arts or similar degree program at a recognised post-secondary institution. The proof requirement means this is settled after you have an acceptance in hand, not before.",
-    "metaDetail": "Needs proof of enrolment in a fine arts program.",
+    "metaDetail": "Needs proof of fine arts enrolment.",
     "eligibility": {
       "grades": [
         "12"
@@ -15332,7 +15332,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The third award from the Stanley Dennis Memorial Fund at Paul Kane, this one for a grade 12 student pursuing business or technologies. Paul Kane's own handout reads the technologies half broadly: computer science, engineering, environmental technologies, biotechnology and manufacturing technologies all count. The recipient has to show proof of enrolment in a Bachelor of Commerce or a technologies degree program at a recognised institution.",
-    "metaDetail": "Covers engineering and biotech, not just commerce.",
+    "metaDetail": "Covers engineering and biotech too.",
     "eligibility": {
       "grades": [
         "12"
@@ -15535,7 +15535,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Named to honour Adam Stychin, who intended to follow his love of woodworking into a career as an architect and to build a bee farm. It goes to two students who completed Construction and Fabrication 30, showed exceptional kindness and a willingness to help others, and took part in school events. The course requirement is the hard gate; the rest is character, which makes it a genuine shot for a shop student whose transcript is unremarkable.",
-    "metaDetail": "Two awards, and kindness is an explicit criterion.",
+    "metaDetail": "Kindness is a stated criterion.",
     "eligibility": {
       "grades": [
         "12"
@@ -15572,7 +15572,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "In memory of Yvonne Brostrom and Andrew Maltby, two Paul Kane students from the class of 1975. It goes to two graduating students who are involved in school activities and shine with school spirit, and the founders ask specifically for students who show a positive attitude toward friends, teachers and parents. There is no marks requirement and no field of study, which is rare among the graduating awards at this school.",
-    "metaDetail": "Two awards, judged on attitude rather than marks.",
+    "metaDetail": "Two awards, on attitude not marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -15609,7 +15609,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Two $1,000 scholarships from CUPE Local 1099, open to any student graduating from a St. Albert public high school. The application is proof of enrolment in any post-secondary program plus an original essay of at least 750 words answering one question: how has the history of unionized workers helped shape Canada. There is no average requirement and no field restriction, so the essay is the whole competition.",
-    "metaDetail": "Two awards of $1,000, decided on one essay.",
+    "metaDetail": "Two awards of $1,000, on one essay.",
     "eligibility": {
       "grades": [
         "12"
@@ -15646,7 +15646,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a grade 12 student who has made a significant contribution to the theatre arts program at Paul Kane. It is judged on what you put into the program rather than on marks or on a plan to study theatre after graduation, so backstage and production work counts as much as performing does.",
-    "metaDetail": "Judged on what you gave the theatre program.",
+    "metaDetail": "Judged on what you gave the program.",
     "eligibility": {
       "grades": [
         "12"
@@ -15765,7 +15765,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a student who has shown exceptional commitment to two or more languages other than English at the 30 level, and who demonstrates leadership in using those languages outside the classroom. The out of class requirement is what separates this from the school's Japanese 30, Spanish 30 and French 30 prizes, which are decided on marks alone and need no application.",
-    "metaDetail": "Wants languages used outside the classroom too.",
+    "metaDetail": "Languages used outside class too.",
     "eligibility": {
       "grades": [
         "12"
@@ -15802,7 +15802,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Presented to the grade 12 student who best exemplifies the school's own acronym: perseverance, knowledge, honour and service. The criteria ask for significant contributions to Paul Kane activities and events across all three years, so this is not something a strong final year can win on its own.",
-    "metaDetail": "Wants three years of involvement, not one.",
+    "metaDetail": "Wants three years of involvement.",
     "eligibility": {
       "grades": [
         "12"
@@ -15839,7 +15839,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a graduating student who has given outstanding extracurricular service to the school and the community, honouring the legacy of Mr. Dale Smith's leadership at Paul Kane. What makes it unusual is the selection: a student vote decides the winner, not a committee, which means it rewards the kind of contribution your classmates actually noticed.",
-    "metaDetail": "The winner is decided by a vote of the students.",
+    "metaDetail": "The winner is decided by a student vote.",
     "eligibility": {
       "grades": [
         "12"
@@ -15918,7 +15918,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Formerly the Roy Swanson Memorial, this is a $1,000 scholarship for a grade 12 student going on to post-secondary study in fine arts, trades, technology, business, or study in French. Bellerose's version of the criteria sets a minimum 65% overall average and asks for above-average community service in the school or the community. The five eligible fields are unusually wide for a service club award, and trades sit in the list on equal footing with business.",
-    "metaDetail": "A 65% floor and five eligible fields.",
+    "metaDetail": "A 65% floor.",
     "eligibility": {
       "grades": [
         "12"
@@ -16042,7 +16042,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a graduating male student on one of Paul Kane's senior athletic teams who has improved his academic standing while at the school and is going on to post-secondary, preferably in business. Improvement rather than a high average is what is being measured, which makes this reachable for an athlete whose grade 10 year was weak.",
-    "metaDetail": "Rewards an improved transcript, not a high one.",
+    "metaDetail": "Rewards an improved transcript.",
     "eligibility": {
       "grades": [
         "12"
@@ -16083,7 +16083,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "One of the narrowest awards in St. Albert. The recipient has to be a Paul Kane grade 12 graduate who attended Lorne Akins Junior High School for three years and Paul Kane for three years, and who is registered full time at a post-secondary institution inside Alberta. Two school histories and a province, all three of which have to line up, so the pool in a given year is small.",
-    "metaDetail": "Needs three years at Lorne Akins and three at PK.",
+    "metaDetail": "Three years at each school.",
     "eligibility": {
       "grades": [
         "12"
@@ -16120,7 +16120,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a graduating female student who has shown courage, ingenuity, determination, compassion and the synthesis of ideas in her scientific studies. The criteria are written about how you think rather than what you scored, which is deliberate: the award is about the qualities that make a scientist rather than the ones that make a high transcript.",
-    "metaDetail": "Judged on scientific thinking, not on marks.",
+    "metaDetail": "Judged on scientific thinking, not marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -16159,7 +16159,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Breakfast Lions give this to the student who most embodies the club motto, We Serve, and who is caring and helpful in both the school and the community. Paul Kane lists it as the Lion Gerry Gorgichuk Memorial Bursary; Bellerose lists it under the motto. Academic performance is considered but the club says plainly that volunteerism, character and service are the important parts.",
-    "metaDetail": "Also called the Lion Gerry Gorgichuk Memorial Bursary.",
+    "metaDetail": "Also the Lion Gerry Gorgichuk Memorial Bursary.",
     "eligibility": {
       "grades": [
         "12"
@@ -16198,7 +16198,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a grade 10 student who has shown proficiency and skill in construction and fabrication courses. A trades award aimed at grade 10 is unusual anywhere in Alberta, and it is worth knowing about in grade 9: this is money available two years before the graduating awards open, to a student who has barely started the pathway.",
-    "metaDetail": "A grade 10 award, which is rare in the trades.",
+    "metaDetail": "A Grade 10 award, rare in the trades.",
     "eligibility": {
       "grades": [
         "10"
@@ -16276,7 +16276,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a graduating student who shows leadership, is recognised as honest and full of integrity, and has committed to their community through service work for youth groups, senior citizens or non-profit organisations. The three named beneficiary groups are the useful detail: general volunteering is weaker here than sustained work with one of them.",
-    "metaDetail": "A September date makes it live after graduation.",
+    "metaDetail": "September, after graduation.",
     "eligibility": {
       "grades": [
         "12"
@@ -16316,7 +16316,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "A bursary in memory of Cpl. Jordan Anderson for a graduating Bellerose student who is enrolled in a post-secondary program and has demonstrated excellence in scholastic effort. Effort is the word the criteria use rather than achievement, which leaves room for a student whose work rate is well ahead of their transcript.",
-    "metaDetail": "Measured on effort rather than on final marks.",
+    "metaDetail": "Measured on effort, not final marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -16429,7 +16429,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For an Alberta resident who played U15AAA, formerly Bantam AAA, hockey in St. Albert for at least three years and is going on to post-secondary education. The criteria ask for leadership, community involvement and a passion for the game to match John Reid's. The three-year residency inside one club is the real gate, and it is decided long before you apply.",
-    "metaDetail": "Needs three years of U15AAA hockey in St. Albert.",
+    "metaDetail": "Three years of St. Albert U15AAA.",
     "eligibility": {
       "grades": [
         "12"
@@ -16468,7 +16468,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a student respected by peers and staff alike who has improved their academic standing over three years at Bellerose and is going on to post-secondary, preferably in psychiatry, psychiatric nursing, social work or chartered psychology. Improvement across three years is the measure, so a weak start is not disqualifying here and may be the point.",
-    "metaDetail": "Rewards three years of improvement at Bellerose.",
+    "metaDetail": "Rewards improvement.",
     "eligibility": {
       "grades": [
         "12"
@@ -16507,7 +16507,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Presented to a grade 12 Bellerose student who has helped create a positive spirit and environment at the school through dedication and leadership across a variety of school activities. The word variety is doing work in the criteria: this rewards a student involved across several parts of school life rather than deeply in one.",
-    "metaDetail": "Wants breadth of involvement across school life.",
+    "metaDetail": "Wants breadth of involvement in school life.",
     "eligibility": {
       "grades": [
         "12"
@@ -17530,7 +17530,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Rotary Club of Parkland After Dark award this to a student entering their first year of post-secondary education, and they say explicitly that registered apprenticeship programs count. Preference goes to students demonstrating financial need or a strong commitment to good citizenship and volunteerism, which is an either-or rather than a both, so a student with one of the two should still apply.",
-    "metaDetail": "Registered apprenticeships count as post-secondary here.",
+    "metaDetail": "Registered apprenticeships count here.",
     "eligibility": {
       "grades": [
         "12"
@@ -17758,7 +17758,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Memorial Composite fund two of these at $1,000 each for athletes who are well rounded and community minded, with a positive attitude, unselfishness, responsibility, coachability, leadership and goal setting. The hard requirements are an overall average of at least 70% in grade 12, involvement on at least one school athletic team in two high school years with one of them being grade 12, and involvement in Green and Gold fundraising while at the school. That last one is easy to miss and cannot be fixed late.",
-    "metaDetail": "Two awards, and fundraising involvement is required.",
+    "metaDetail": "Two awards, and fundraising is required.",
     "eligibility": {
       "grades": [
         "12"
@@ -17796,7 +17796,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Two scholarships of $1,000 each from the Spruce Grove and District Agricultural Society, for students enrolled in an agriculture-related field of study at an accredited college, university or trade school. Two things make this wider than a typical graduation award: any year of study qualifies, not just first year, and past applicants and recipients are allowed to apply again. You have to be a resident of the Tri-Region, meaning Parkland County, Spruce Grove or Stony Plain.",
-    "metaDetail": "Open to any year of study, and past recipients may reapply.",
+    "metaDetail": "Past recipients may reapply.",
     "eligibility": {
       "grades": [
         "10",
@@ -17878,7 +17878,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Bert Rimer gave Leduc County $50,000 in memory of his parents to fund this for Warburg High School graduates. The amount varies year to year but will be at least $1,000. The primary target is a post-secondary major in agriculture or agricultural food, with secondary consideration for applicants in health sciences and medicine, and you cannot have received it before. Warburg is a village of a few hundred people, so the field this competes against is very small.",
-    "metaDetail": "One school, and previous recipients cannot reapply.",
+    "metaDetail": "No repeat recipients.",
     "eligibility": {
       "grades": [
         "12"
@@ -17918,7 +17918,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Katie Dringenberg left Leduc County $20,000 to start this fund, asking that it go to a graduate of Calmar High School, Thorsby High School or Warburg High School. It is awarded annually to a post-secondary student with a declared major in a medical field, and the county names nursing, dentistry, pharmacy and veterinary medicine as examples rather than limits. Previous recipients are not eligible again.",
-    "metaDetail": "Nursing, dentistry, pharmacy and veterinary all count.",
+    "metaDetail": "Nursing, dentistry, pharmacy count.",
     "eligibility": {
       "grades": [
         "12"
@@ -17957,7 +17957,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Funded by Cory Bablitz, a Calmar Secondary graduate, for a Black Gold graduate continuing to post-secondary. You must have been enrolled at a Black Gold school for your grade twelve year and completed high school in three years, be accepted into a post-secondary program, and show genuine commitment across academics, sports in school or the community, and citizenship or volunteering. The application is a covering letter, a summary of all three areas, and three letters of reference, one for each.",
-    "metaDetail": "Needs three reference letters, one for each criterion.",
+    "metaDetail": "Three references, one per criterion.",
     "eligibility": {
       "grades": [
         "12"
@@ -18000,7 +18000,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Funded by the estate of Gregory Garth Sylvester and paid in two halves, $500 in September and $500 in February on continued registration. The requirement is unusually specific: acceptance into Bishop's or Queen's University with history as a major area of study, plus a year at a Black Gold high school including grade twelve. The application is a letter of recommendation from a teacher or principal and a short account of why you are pursuing history. The deadline is July 15 of any year after you finish grade 12, so a student who switches into history later can still apply.",
-    "metaDetail": "You can apply in any year after grade 12, not just the first.",
+    "metaDetail": "Any year after Grade 12 qualifies.",
     "eligibility": {
       "grades": [
         "12"
@@ -18042,7 +18042,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "A music scholarship paid $500 in October and $500 in February on continued registration. You have to be accepted into a post-secondary program in Alberta with music as a major area of study, and to have spent at least a year at a Black Gold high school including grade twelve. The application is a letter of recommendation from a music teacher or principal plus a short account of your musical background and why you are continuing in music.",
-    "metaDetail": "Paid in two halves on continued registration.",
+    "metaDetail": "Paid in halves on registration.",
     "eligibility": {
       "grades": [
         "12"
@@ -18084,7 +18084,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Three recipients a year at $6,000 each, held in perpetuity through the Edmonton Community Foundation and paid in two halves: $3,000 when granted and $3,000 on confirmation of a completed first semester and continued enrolment. The qualifying condition is financial need that would restrict your ability to pursue post-secondary education at all. The application is a form, a letter of introduction addressing the criteria, a reference letter from an authority figure outside your immediate family, a current transcript, and a preliminary acceptance letter. At $6,000 this is the largest locally funded award in the Leduc area by a wide margin.",
-    "metaDetail": "Three awards a year, the largest local award in Leduc.",
+    "metaDetail": "Leduc's largest local award.",
     "eligibility": {
       "grades": [
         "12"
@@ -18124,7 +18124,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Two awards of $2,500 each at John Maland High School in Devon, established in 2024. You need a GPA of 70%, you must meet the entrance requirements for post-secondary study, and you must have financial need that would restrict your ability to go. The application is a form, a letter of introduction, a reference letter from an authority figure outside your immediate family, a transcript, and a preliminary acceptance letter. The selection committee is made up of staff from the school itself.",
-    "metaDetail": "Two awards, decided by the school's own staff.",
+    "metaDetail": "Two awards, decided by school staff.",
     "eligibility": {
       "grades": [
         "12"
@@ -18161,7 +18161,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Mary Marsh established this in Leduc for a graduate of Leduc Composite High School who has reached the second year of a Bachelor of Education program at an Alberta university, preferably with a major in music. It pays $1,200 to a student in an elementary program with musical training and interest, or $1,000 for any other major within a BEd. The application is a personal letter, your grade 12 transcript, and the university transcript for the first year you have just finished.",
-    "metaDetail": "Pays $1,200 for elementary with music, $1,000 otherwise.",
+    "metaDetail": "$1,200 with elementary music, $1,000 without.",
     "eligibility": {
       "grades": [
         "12"
@@ -18597,7 +18597,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Open to a Fort High student from any grade level, which makes it one of the few awards here a grade 10 can win. It is judged on active involvement in leadership activity at the school, community volunteering and service, and acting as an ambassador for both the school and the City of Fort Saskatchewan. Academic standing has to be satisfactory but is not otherwise scored.",
-    "metaDetail": "Open from any grade, not just grade 12.",
+    "metaDetail": "Open from any grade, not just 12.",
     "eligibility": {
       "grades": [
         "10",
@@ -18678,7 +18678,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a Fort High student in financial need who also has strong academic performance and will be attending a post-secondary institution. It sits between the school's two need-based awards and its academic ones by asking for both at once, so a strong transcript is not on its own enough and neither is need.",
-    "metaDetail": "Weighs need and academic performance together.",
+    "metaDetail": "Weighs need and performance.",
     "eligibility": {
       "grades": [
         "12"
@@ -18715,7 +18715,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a strong academic Fort High student registered in a health sciences faculty at a post-secondary institution, with medicine, dentistry and X-ray technician given as examples of what counts. It overlaps with the hospital auxiliary bursary beside it, and since the school's application is a single checklist you tick both rather than choosing between them.",
-    "metaDetail": "Wants a faculty placement, not just an interest.",
+    "metaDetail": "Wants a placement, not just interest.",
     "eligibility": {
       "grades": [
         "12"
@@ -18754,7 +18754,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Funded by the alumni of the old red brick Fort High and written for a student registered at a post-secondary institution who exemplified hard work without necessarily having top marks, has overcome some adversity, and is in financial need. All three parts of that are unusual to see stated so plainly, and together they describe a student most award criteria quietly exclude.",
-    "metaDetail": "Says outright that top marks are not the point.",
+    "metaDetail": "Top marks are explicitly not the point.",
     "eligibility": {
       "grades": [
         "12"
@@ -18791,7 +18791,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The criteria here go further than any other award on this list: the student must have a passing grade without regard for percentages, and limited income. Above all the award asks for dedication to studies and to the school. If your marks have kept you out of every other application, this is the one written with you in mind.",
-    "metaDetail": "A passing grade is enough; percentages are ignored.",
+    "metaDetail": "A pass is enough.",
     "eligibility": {
       "grades": [
         "12"
@@ -18828,7 +18828,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Royal Canadian Legion Ladies Auxiliary in Fort Saskatchewan fund this for a grade 12 student who shows leadership and participation in school activities. Worth noting against Legion bursaries elsewhere in Alberta, which usually require descent from a veteran: this one asks only for the leadership and the participation.",
-    "metaDetail": "No veteran descent required, unlike most Legion money.",
+    "metaDetail": "No veteran descent required, unlike most.",
     "eligibility": {
       "grades": [
         "12"
@@ -18867,7 +18867,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For a graduating Fort High student continuing to post-secondary who either comes from a rural farming family or has a passion for music. The two routes are unrelated and it is an either-or, not a both, which doubles the number of students who can genuinely apply. The award also asks that you exemplify the qualities Fort High knew Serge for, described on the form as Sting Style.",
-    "metaDetail": "Two unrelated routes in, and either one qualifies.",
+    "metaDetail": "Either route works.",
     "eligibility": {
       "grades": [
         "12"
@@ -18904,7 +18904,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Victoria Lodge Number 13 fund this for a grade 12 student who shows good school spirit, benevolence and concern for fellow peers, and active participation in school and community affairs. The middle criterion is the distinctive one: this is decided partly on how you treat the people around you, which is not something a transcript records.",
-    "metaDetail": "Judged on how you treat other students.",
+    "metaDetail": "On how you treat peers.",
     "eligibility": {
       "grades": [
         "12"
@@ -19142,7 +19142,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "A thrift store funds the two largest awards in Fort Saskatchewan: $5,000 each, with the Anne Springman Scholarship for a student going to college or university and the Lesley Macmillan Scholarship for one going to a technical institute, trade school or apprenticeship. If nobody applies on one side they may award both on the other. Financial need carries 30 of the 100 selection points, work experience 20, personal challenges 15, and marks only 10, and the criteria say plainly that grades matter only insofar as they got you accepted. Eligibility reaches homeschooled students, Fort Saskatchewan Outreach, Strathcona Christian Academy and students in designated programmes outside the city, and you may apply in your graduating year or within one year of it.",
-    "metaDetail": "Two awards of $5,000, one reserved for trades.",
+    "metaDetail": "Two at $5,000, one reserved for trades.",
     "eligibility": {
       "grades": [
         "12"
@@ -19181,7 +19181,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Fort Saskatchewan Lions Club run this in memory of Lion Don Westman, and their published recipient lists show it going to students from Fort Saskatchewan High School and St. André Bessette Catholic High School in alternating pairs each year. The application is a downloadable form sent to the club, not something the school collects, so it is easy to miss entirely if you are relying on the school awards package.",
-    "metaDetail": "Closes after graduation, in mid September.",
+    "metaDetail": "Closes after graduation, mid September.",
     "eligibility": {
       "grades": [
         "12"
@@ -19218,7 +19218,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Northeast Capital Industrial Association is the industry body for Alberta's Industrial Heartland, headquartered in Fort Saskatchewan, and it awarded $2,000 to each of four students in its most recent round. Its recipients have been heading into electrical engineering, engineering at the University of Alberta, instrumentation engineering technology at NAIT and power engineering at NAIT, which tells you more about what wins it than any published rubric would: a concrete plan tied to industry in the region, in a degree or a diploma equally.",
-    "metaDetail": "Four awards went out in the most recent round.",
+    "metaDetail": "Four awards in the most recent round.",
     "eligibility": {
       "grades": [
         "12"
@@ -19411,7 +19411,7 @@
     "active": true,
     "deadline": "2027-09-01",
     "description": "Started in 1978 by a Chestermere student, Carolyn Tester, who noticed there was nothing for students who were capable of further study and willing to do it but did not have the marks to win the awards that existed. The fund was built by donation to a principal now sitting at $15,000, and the award is paid from the interest, so a committee of five community members and a school representative decides each year both who wins and how much they get. Selection weighs academic proficiency, extracurricular involvement, citizenship, leadership and financial need together.",
-    "metaDetail": "Built for capable students without top marks.",
+    "metaDetail": "For capable students without top marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -19602,7 +19602,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "An annual scholarship run by the Beaumont Chamber of Commerce in partnership with the RCMP for one grade 12 student heading to post-secondary. The Chamber describes the winner as a young person recognised for demonstrating the core values of the RCMP, which are honesty, integrity, professionalism, compassion, respect and accountability, so this is a character award rather than a marks award. It is the only scholarship any Beaumont organisation outside the school publishes.",
-    "metaDetail": "Character rather than marks, judged on RCMP core values.",
+    "metaDetail": "Character over marks, on RCMP core values.",
     "eligibility": {
       "grades": [
         "12"
@@ -19647,7 +19647,7 @@
     "notes": "The deadline is set relative to your own ceremony rather than to a calendar date, at three weeks before graduation, so the school office is the only place that can tell you the real day. In Beaumont the school is Ecole Quatre-Saisons.",
     "applyViaGuidance": true,
     "description": "The francophone division gives this to its graduating ambassadors: $500 at a school with one to nineteen graduates, and two awards of $500 where twenty or more graduate. The application is a letter to the principal describing yourself and what you intend to study or do, and candidates who make the shortlist are interviewed by a selection committee at the school. Because it is awarded per school rather than per division, a small francophone school is a much better place to win it from than a large one.",
-    "metaDetail": "Awarded per school, so a small graduating class helps.",
+    "metaDetail": "Per school, so a small class helps.",
     "eligibility": {
       "grades": [
         "12"
@@ -19727,7 +19727,7 @@
     "category": "General",
     "audience": "LCHS graduates entering university, college or technical school",
     "description": "Four awards of $500 with no field of study attached, judged on personal initiative and on attributes like tolerance and compassion rather than on marks. Two things make it unusually reachable: preference goes to graduates who have won fewer local scholarships, and a classmate or teacher can nominate you by letter even if you do not apply yourself. A student who delayed post-secondary by a year after graduating is also eligible.",
-    "metaDetail": "Four at $500, and classmates can nominate you.",
+    "metaDetail": "Four at $500, nominated by peers.",
     "eligibility": {
       "grades": [
         "12"
@@ -19764,7 +19764,7 @@
     "category": "Academic",
     "audience": "LCHS students taking History 20 or 30, Native Studies 20 or 30, or Law 30",
     "description": "Four prizes of $500 for essays written as part of your course work in History 20 or 30, Native Studies 20 or 30, or Law 30, judged anonymously by an outside adjudicator. Because the essay is submitted for course credit anyway, this is one of the few awards in the corpus where the work is already required of you. One essay per student per year, and last year's first-place winner cannot enter again.",
-    "metaDetail": "The essay doubles as course work you already owe.",
+    "metaDetail": "Doubles as course work.",
     "eligibility": {
       "grades": [
         "11",
@@ -19802,7 +19802,7 @@
     "category": "General",
     "audience": "LCHS graduates entering agriculture or a directly related field",
     "description": "One $1,000 award left in the will of Arthur Tildesley, a Lone Rock farmer, for a graduate heading into agriculture, agri-business, veterinary medicine, agricultural mechanics, animal husbandry or agricultural technology. The unusually generous part is the timing: there is no limit on how many years you may apply, you need not have attended LCHS in the preceding year, and a general arts and science student who plans to transfer into an agriculture program later still qualifies.",
-    "metaDetail": "No limit on how many years you can apply.",
+    "metaDetail": "No limit on years you may apply.",
     "eligibility": {
       "grades": [
         "12"
@@ -19839,7 +19839,7 @@
     "category": "STEM",
     "audience": "LCHS graduates entering engineering or engineering technology",
     "description": "One $1,000 award from BAR Engineering, a Lloydminster heavy oil and municipal engineering firm of about 90 people, for a current-year LCHS graduate enrolled in an engineering or engineering technology program. Technology programs count equally with degrees here, which is not true of every engineering award.",
-    "metaDetail": "Engineering technology counts equally with a degree.",
+    "metaDetail": "Technology counts equally.",
     "eligibility": {
       "grades": [
         "12"
@@ -19878,7 +19878,7 @@
     "category": "Community",
     "audience": "LCHS graduates entering careers working with people with disabilities",
     "description": "Two awards of $1,000 from the Lloydminster Parkland Residence Society for students heading into teaching, physiotherapy, occupational therapy, speech-language pathology or rehabilitation assistant programs. Selection leans on demonstrated interest through volunteering or part-time work with people with disabilities rather than on marks, and preference goes to applicants who have won less scholarship money elsewhere. Education students must have taken at least one course in exceptionality or special education.",
-    "metaDetail": "Volunteering with people with disabilities is the main test.",
+    "metaDetail": "Disability volunteering.",
     "eligibility": {
       "grades": [
         "12"
@@ -19917,7 +19917,7 @@
     "category": "Community",
     "audience": "LCHS graduates entering any college, university or training program",
     "description": "One $750 award for a current-year LCHS graduate, and the criteria say outright that academic standing is secondary. What counts is demonstrating family, community, citizenship and respect in your own life, or leadership and involvement in school or community activities. Any post-secondary or training program qualifies.",
-    "metaDetail": "The criteria say academic standing is secondary.",
+    "metaDetail": "Academic standing is secondary.",
     "eligibility": {
       "grades": [
         "12"
@@ -19957,7 +19957,7 @@
     "category": "Academic",
     "audience": "LCHS graduates entering a university program immediately after high school",
     "description": "One $300 award for a deserving graduate entering a recognised university program straight out of high school. The criteria are a single sentence, which makes this one of the shortest applications on the LPSD form: if you are going to university in September, you qualify.",
-    "metaDetail": "The shortest set of criteria on the LPSD list.",
+    "metaDetail": "Very short criteria list.",
     "eligibility": {
       "grades": [
         "12"
@@ -19994,7 +19994,7 @@
     "category": "Trades",
     "audience": "LCHS graduates entering trades, oil and gas or power engineering",
     "description": "Two awards worth $1,000 each, paid as safety training rather than as money. CANSAFE covers the tickets you need to work, such as First Aid, WHMIS and H2S Alive, and the funds are never deposited to you. Confirmation of post-secondary, an apprenticeship or an oil and gas job is asked for, but if you cannot confirm yet a one-paragraph statement of your career goals and the tickets you will need is accepted instead.",
-    "metaDetail": "Paid as safety tickets, never as cash.",
+    "metaDetail": "Paid as safety tickets, not cash.",
     "eligibility": {
       "grades": [
         "12"
@@ -20031,7 +20031,7 @@
     "category": "Academic",
     "audience": "LCHS graduates entering the business program at Lakeland College",
     "description": "One $750 award from the Lloydminster Chamber of Commerce, and it is tied to a single program at a single institution: the business program at Lakeland College. That is the narrowest eligibility on the LPSD list, which is the reason to look at it if Lakeland is already your plan.",
-    "metaDetail": "One program at one college, so the field is tiny.",
+    "metaDetail": "One program at one college.",
     "eligibility": {
       "grades": [
         "12"
@@ -20070,7 +20070,7 @@
     "category": "STEM",
     "audience": "Female LCHS graduates entering an accredited engineering degree",
     "description": "One $1,000 award established by Karla Collinge Ingoldsby, an LCHS graduate of 1998 who went on to mechanical engineering at the University of Alberta, and her husband Charles. It is for a female student entering first year of an accredited Canadian engineering program with an average of at least 80% across seven grade 12 courses. Preference goes to applicants who play sports and who have done robotics, STEM clubs or engineering outreach.",
-    "metaDetail": "80% across seven grade 12 courses, and athletics helps.",
+    "metaDetail": "80% over seven Grade 12 courses.",
     "eligibility": {
       "grades": [
         "12"
@@ -20112,7 +20112,7 @@
     "category": "General",
     "audience": "LCHS graduates in any program, apprentices included",
     "description": "Two awards of $750 from Dave Jones, a long-time Lloydminster resident whose own schooling was cut short by the Depression and the war. Selection weighs effort, diligence and personal sacrifice in finishing grade 12 alongside marks, and financial need here is measured specifically by how much other local scholarship money you have already been given. Apprentices registered and working full time in a designated trade are eligible on the same footing.",
-    "metaDetail": "Need is measured by other local awards you have won.",
+    "metaDetail": "Need is measured by other awards you won.",
     "eligibility": {
       "grades": [
         "12"
@@ -20151,7 +20151,7 @@
     "category": "Community",
     "audience": "LCHS graduates entering nursing or another medical field",
     "description": "One $750 award for a graduate entering nursing or a medically oriented career, which may be split between two equally strong candidates. A second $750 follows if you finish first year and go on to second, so the award is worth $1,500 across two years to a student who continues.",
-    "metaDetail": "A second $750 follows if you reach year two.",
+    "metaDetail": "A second $750 follows in year two.",
     "eligibility": {
       "grades": [
         "12"
@@ -20190,7 +20190,7 @@
     "category": "Sports",
     "audience": "LCHS graduates joining a college or university sports team",
     "description": "The largest award on the LPSD list: $2,000 in first year, funded by the Hartnell/MacArthur Golf Charity Classic, with a separate $1,000 continuing award in year two. You must be full time and actually playing on a college or university team, and the application letter has to describe both the program and your involvement with the team. It asks for a commitment to elite sport rather than to participation.",
-    "metaDetail": "$2,000 then $1,000, for students on a varsity team.",
+    "metaDetail": "$2,000 then $1,000 for varsity players.",
     "eligibility": {
       "grades": [
         "12"
@@ -20266,7 +20266,7 @@
     "category": "Community",
     "audience": "LCHS graduates who attended Jack Kemp Community School for at least a year",
     "description": "At least one $500 award, more if the Jack Kemp School Community Council has the funds, for a graduate who spent at least one full year at Jack Kemp Community School and finished grade 12 with a 70% average on the April report card. It rewards respect for property and for people, work ethic, willingness to try new things and helping others. A separate Jack Kemp form goes in alongside the general application.",
-    "metaDetail": "Your elementary school decides whether you can apply.",
+    "metaDetail": "Your elementary decides.",
     "eligibility": {
       "grades": [
         "12"
@@ -20379,7 +20379,7 @@
     "category": "Community",
     "audience": "LCHS graduates entering any recognised post-secondary program",
     "description": "One $750 award chosen by a committee of LCHS staff and a Lions Club member, weighing financial need, academic proficiency and community involvement. The criteria specify community activity outside of school, so school clubs alone will not carry this one. A separate Lions Club form is submitted in the Google Classroom on top of the general application.",
-    "metaDetail": "Community involvement must be outside school.",
+    "metaDetail": "Community work must be outside school.",
     "eligibility": {
       "grades": [
         "12"
@@ -20418,7 +20418,7 @@
     "category": "Trades",
     "audience": "LCHS students heading for an apprenticeship or a journeyman certificate",
     "description": "One $500 award for a student continuing into an apprenticeship or a post-secondary program leading to a journeyman certificate. Students who attended LCHS in the previous school year are eligible as well as current graduates, and you may apply before your apprenticeship is confirmed as long as you can prove it before the money is paid.",
-    "metaDetail": "You can apply before the apprenticeship is confirmed.",
+    "metaDetail": "Apply before confirmation.",
     "eligibility": {
       "grades": [
         "12"
@@ -20492,7 +20492,7 @@
     "category": "Community",
     "audience": "LCHS graduates entering university, college or an apprenticeship",
     "description": "One $500 award from the Lloydminster Kinette Club, decided on a 500-word essay about succeeding in school and community despite adversity you have faced, alongside a record of community or school involvement. The winning essay is forwarded to the Kinette Club, which is worth knowing before you decide how much to write about.",
-    "metaDetail": "The winning essay goes to the club itself.",
+    "metaDetail": "The winning essay goes to the club.",
     "eligibility": {
       "grades": [
         "12"
@@ -20531,7 +20531,7 @@
     "category": "Community",
     "audience": "LCHS graduates entering a program of two years or longer",
     "description": "One $500 award for a graduate entering a program of at least two years, judged on community involvement and academic proficiency. The essay question is fixed and specific: the Kinsmen motto is serving the community's greatest need, so you are asked what you think this community's greatest need is and how you would address it, in 500 words, with a resume alongside.",
-    "metaDetail": "A fixed essay question about Lloydminster itself.",
+    "metaDetail": "A fixed essay question about Lloydminster.",
     "eligibility": {
       "grades": [
         "12"
@@ -20607,7 +20607,7 @@
     "category": "Community",
     "audience": "LCHS graduates with school or community leadership, veterans' children preferred",
     "description": "One $500 award from Royal Canadian Legion Branch #39. Preference goes to the child of a Canadian veteran, and applicants in that position attach a short letter naming the veteran and their relationship, but the criteria state in capitals that it is open to any student who has shown leadership in school or community activities. Students who assume a Legion award is closed to them are the ones this wording is aimed at.",
-    "metaDetail": "Open to any student, not only veterans' children.",
+    "metaDetail": "Any student.",
     "eligibility": {
       "grades": [
         "12"
@@ -20647,7 +20647,7 @@
     "category": "General",
     "audience": "LCHS graduates entering a college or university in Alberta or Saskatchewan",
     "description": "Two awards of $1,000, one to a male and one to a female graduate, left by Marjorie Ranger of the Marshall Rebekah Lodge, who was a teacher herself. The program must be in Alberta or Saskatchewan. Qualifying factors are financial need, reasonable grades, community involvement and a good chance of finishing, and it asks for two letters of recommendation, one from school staff and one from the community, plus a 500-word essay.",
-    "metaDetail": "One award to a male and one to a female graduate.",
+    "metaDetail": "One male, one female.",
     "eligibility": {
       "grades": [
         "12"
@@ -20686,7 +20686,7 @@
     "category": "Academic",
     "audience": "LCHS graduates entering a business program who completed Accounting 30",
     "description": "One $500 award from MNP for a graduate entering a post-secondary business program who has successfully completed Accounting 30 at LCHS. The accounting teacher is consulted during selection and MNP reviews the successful application before the award is made, so this is decided by people who will read your transcript closely.",
-    "metaDetail": "Accounting 30 at LCHS is a hard requirement.",
+    "metaDetail": "Needs Accounting 30 at LCHS.",
     "eligibility": {
       "grades": [
         "12"
@@ -20723,7 +20723,7 @@
     "category": "Trades",
     "audience": "LCHS students entering an apprenticeship or post-secondary program in welding",
     "description": "One $1,000 award for a student continuing into welding, either through an apprenticeship or a post-secondary program. Current graduates and students who attended in the previous school year both qualify, and citizenship and character are weighed alongside academic standing. You may apply before enrolment is confirmed.",
-    "metaDetail": "Welding specifically, not trades generally.",
+    "metaDetail": "Welding, not trades.",
     "eligibility": {
       "grades": [
         "12"
@@ -20760,7 +20760,7 @@
     "category": "General",
     "audience": "LCHS graduates entering any recognised program immediately after high school",
     "description": "Two awards of $500 judged on personal character, work habits, suitability for the program you have chosen, need, and what the criteria call an innovative approach to career preparation. The application is a letter containing an autobiography, a summary of your school program and your career plans, plus a resume.",
-    "metaDetail": "Rewards an unconventional route into a career.",
+    "metaDetail": "Rewards an odd route.",
     "eligibility": {
       "grades": [
         "12"
@@ -20797,7 +20797,7 @@
     "category": "Arts",
     "audience": "LCHS graduates, with preference for those continuing in the arts",
     "description": "A $250 award in honour of Duff Stewart, funded by the LCHS magazine campaign, for a graduate with a strong desire to pursue a career in the arts and a strong work ethic. You submit up to 200 words on how making art has affected your life plus two photographs of your own work with a short description of each, which makes it the only LPSD award decided on a portfolio.",
-    "metaDetail": "The only LPSD award judged on a portfolio.",
+    "metaDetail": "The only LPSD award on a portfolio.",
     "eligibility": {
       "grades": [
         "12"
@@ -20874,7 +20874,7 @@
     "category": "Trades",
     "audience": "LCHS graduates entering an apprenticeship or technology program",
     "description": "One or two awards of $1,000, the trades counterpart to Synergy's office technology award, for graduates who carried at least eight credits at LCHS and are enrolled full time in an apprenticeship or technology program. Same tie-breaker: if two applicants are equally deserving the one who has received less scholarship money wins.",
-    "metaDetail": "The trades half of the Synergy pair.",
+    "metaDetail": "The trades half of a Synergy pair.",
     "eligibility": {
       "grades": [
         "12"
@@ -20951,7 +20951,7 @@
     "applyViaGuidance": true,
     "notes": "This one does not go through the LPSD form. LCHS student services holds the application, and the deadline is two weeks after the LPSD cutoff, so it is easy to file it and forget it.",
     "description": "One $1,000 award for a graduating Lloydminster Public School Division student entering a recognised post-secondary program, decided on financial need. It is a local company award rather than a division one, so it is applied for separately from the May 1 bundle.",
-    "metaDetail": "Financial need, applied for outside the May 1 bundle.",
+    "metaDetail": "Financial need, outside the May 1 bundle.",
     "eligibility": {
       "grades": [
         "12"
@@ -20988,7 +20988,7 @@
     "applyViaGuidance": true,
     "notes": "The qualifying condition is retrospective and cannot be fixed late: you need two consecutive years of Lloydminster and District Music Festival participation, with at least two classes in each of those years, already behind you.",
     "description": "One $500 award for a full-time post-secondary student majoring in music or music education who took part in the Lloydminster and District Music Festival for two consecutive years, entering at least two classes each year. It rewards a record built over years of festivals rather than anything you can assemble in grade 12.",
-    "metaDetail": "Two consecutive years of the music festival, minimum.",
+    "metaDetail": "Two consecutive festival years.",
     "eligibility": {
       "grades": [
         "12"
@@ -21027,7 +21027,7 @@
     "applyViaGuidance": true,
     "notes": "Applications go to the Lloydminster Animal Hospital rather than to a school or a foundation, and the August 31 date sits well after graduation.",
     "description": "One $1,000 award for a student in a field related to veterinary medicine, with priority given to pre-vet and animal health technology. The package is a scholarship resume, a letter of intent and grade 12 marks, submitted directly to the Lloydminster Animal Hospital.",
-    "metaDetail": "Priority to pre-vet and animal health technology.",
+    "metaDetail": "Priority to pre-vet students.",
     "eligibility": {
       "grades": [
         "12"
@@ -21066,7 +21066,7 @@
     "applyViaGuidance": true,
     "notes": "The three-month minimum program length is the loosest in the Lloydminster set, so a short certificate qualifies where most agriculture awards demand a diploma or degree.",
     "description": "Three awards of $600 for education in agriculture or agriculture-related business, where the program need only run three months or longer. That short minimum is the point: it reaches students taking a certificate or a single season of training rather than a multi-year program.",
-    "metaDetail": "A three-month program is long enough to qualify.",
+    "metaDetail": "A three-month program is long enough.",
     "eligibility": {
       "grades": [
         "12"
@@ -21103,7 +21103,7 @@
     "applyViaGuidance": true,
     "notes": "FOPA publishes no application page of its own, so LCHS student services holds the contact information and the form.",
     "description": "One award of up to $1,500 from Friends of the Performing Arts for a grade 12 student or recent graduate from the Lloydminster area entering post-secondary study in drama, dance, music or another performing art. It is the largest arts award in the Lloydminster set by some distance.",
-    "metaDetail": "The largest performing arts award in the city.",
+    "metaDetail": "The largest arts award.",
     "eligibility": {
       "grades": [
         "12"
@@ -21178,7 +21178,7 @@
     "applyViaGuidance": true,
     "notes": "Held by LCHS student services rather than published by the sponsor, so the form comes from the school.",
     "description": "One $500 award for a student enrolled in a diploma or degree program in agriculture, veterinary medicine or a related agricultural field. It shares a May 31 deadline with the Dunstan award and covers much the same ground, so most applicants for one should file for both.",
-    "metaDetail": "Pairs with the Dunstan award on the same deadline.",
+    "metaDetail": "Pairs with the Dunstan award on one deadline.",
     "eligibility": {
       "grades": [
         "12"
@@ -21214,7 +21214,7 @@
     "url": "https://www.lloydminsterco-op.crs/sites/lloydminster/local/detail/scholarship-program-",
     "notes": "The qualifying condition belongs to your parent rather than to you: the Co-op membership must have been held for at least three years, so this is worth checking at home early rather than in May.",
     "description": "Four awards of $1,000 for students going to post-secondary full time in the fall whose parent or legal guardian has held a Lloydminster and District Co-op membership for at least three years. Four awards at $1,000 makes it one of the larger pools in the city, and the membership condition removes most of the competition rather than adding to it.",
-    "metaDetail": "Four at $1,000, gated on a family Co-op membership.",
+    "metaDetail": "Co-op members only.",
     "eligibility": {
       "grades": [
         "12"
@@ -21286,7 +21286,7 @@
     "url": "https://cloud.rampinteractive.com/lloydminsterminorball/files/LMBA%20Scholarship%20Application.pdf",
     "notes": "Umpires and coaches count as active members alongside players, which widens this further than the name suggests.",
     "description": "Two awards of $500 for graduates entering full-time post-secondary who were active members of the Lloydminster Minor Ball Association. Being a player is one of three routes in, since umpiring and coaching qualify on the same terms, and the August deadline means it stays open long after the school awards have closed.",
-    "metaDetail": "Umpiring or coaching qualifies, not only playing.",
+    "metaDetail": "Umpiring or coaching qualifies.",
     "eligibility": {
       "grades": [
         "12"
@@ -21363,7 +21363,7 @@
     "applyViaGuidance": true,
     "notes": "The foundation names seven awards but publishes no amount and no deadline for any of them, so the foundation itself is the only source for both. Deadlines are described only as varying.",
     "description": "A group of seven named awards from the Lloydminster Region Health Foundation, split between general health and nursing. The general ones are the Sunrise Scholarship for mental health programs and the Dustin Cody McConnell Memorial. The nursing ones are the Pat Redden Memorial, the Goodfellow, the Jane Ruptash for students who have finished second year of an RN program, the Crude Master Cutter Rally For Cancer, and the Arnold Family Scholarship.",
-    "metaDetail": "Seven named awards, none with a published amount.",
+    "metaDetail": "Seven named awards, no published amount.",
     "eligibility": {
       "grades": [
         "12"
@@ -22069,7 +22069,7 @@
     "category": "Community",
     "audience": "Camrose Composite graduates with average marks entering education or children's services",
     "description": "One to three awards of $900 for a student of average academic standing who has shown service and leadership and is going into education or children's services. Average standing is written into the criteria rather than implied, so a middling transcript is the intended profile, not a handicap.",
-    "metaDetail": "Average academic standing is the stated target.",
+    "metaDetail": "Average academic standing is the target.",
     "eligibility": {
       "grades": [
         "12"
@@ -22520,7 +22520,7 @@
     "url": "https://cchs.brsd.ab.ca/students/student-services/awards",
     "notes": "Run by the Rotary Club of Camrose Daybreak, and it closes on the first Friday in April, months before the school awards close. A transcript and a reference letter go in with the form.",
     "description": "One $1,000 award from the Rotary Club of Camrose Daybreak, open to new and continuing post-secondary students who attended at least one year of high school at a Camrose city or county school. It asks for leadership qualities in line with the beliefs of Rotary International, a 75% minimum or 2.7 GPA, a transcript and a reference letter. The renewability is the unusual part: you may win it again in each of four years of study, so it is worth up to $4,000 to someone who keeps applying.",
-    "metaDetail": "Renewable for up to four years, so worth up to $4,000.",
+    "metaDetail": "Renewable four years, so worth $4,000.",
     "eligibility": {
       "grades": [
         "12"
@@ -22702,7 +22702,7 @@
     "applyViaGuidance": true,
     "notes": "Administered at the division level rather than by any one school, and the value is set each year by the Battle River Community Foundation from the return on the fund, so no fixed amount is published.",
     "description": "For a Battle River School Division graduate entering full-time study at an institution in Alberta, British Columbia, Manitoba or Saskatchewan in an agricultural program, or in a program which supports agriculture. The criteria say that second phrase is meant to be read broadly and name veterinary medicine, research, climate, commerce and economics as examples, inviting applicants to present their case. BRACE and the division home school count as division schools.",
-    "metaDetail": "\"Supports agriculture\" is deliberately broad here.",
+    "metaDetail": "Supports agriculture is read broadly.",
     "eligibility": {
       "grades": [
         "12"
@@ -23287,7 +23287,7 @@
     "url": "https://www.fedgas.com/community-programs?mid=947",
     "notes": "The date is not a submission deadline in the usual sense: the form has to be signed by your local gas co-op, band, town, village or county office no later than October 1 following graduation, so the office you need is a third party with its own hours.",
     "description": "Four awards of $1,000 handed out at the FedGas annual general meeting to children of co-operative members of gas utilities in the federation, and to children of landowners serviced by member towns, villages, counties or First Nations. The membership must have been in place a full year, and at least 75% in core subjects is required rather than preferred. Preference goes to fields that apply to the natural gas industry, such as gas utility operator, gasfitter, pipefitter, power engineering and heavy equipment technician, or to rural-based programs.",
-    "metaDetail": "75% in core subjects is a hard floor, not a preference.",
+    "metaDetail": "75 per cent in core subjects is a floor.",
     "eligibility": {
       "grades": [
         "12"
@@ -23324,7 +23324,7 @@
     "applyViaGuidance": true,
     "notes": "There is nothing to apply for. A committee of Cold Lake High staff picks two students from the graduating class and tells them at the awards ceremony. The value moves with the money the school's ATM raises, and was two awards of $450 in 2021.",
     "description": "Two awards drawn from the funds the school's Rapid Cash ATM raises over the year, given to graduates who have shown the qualities of being a Royal: integrity, pride and commitment. It is the only award in the corpus paid for by a cash machine, and because staff choose the winners there is no form, no essay and no deadline you can miss.",
-    "metaDetail": "Funded by the school's own ATM, chosen by staff.",
+    "metaDetail": "Funded by the school's ATM, chosen by staff.",
     "eligibility": {
       "grades": [
         "12"
@@ -23398,7 +23398,7 @@
     "applyViaGuidance": true,
     "notes": "Chosen by a committee of Cold Lake High staff with no application, though you must be accepted to a post-secondary institution before the money is released.",
     "description": "A $500 award for a graduate who has demonstrated exceptional leadership in the school and the local community. Selection is by staff committee rather than by application, so the record you build over three years is the whole submission.",
-    "metaDetail": "No form. Your three-year record is the application.",
+    "metaDetail": "No form; your three-year record decides.",
     "eligibility": {
       "grades": [
         "12"
@@ -23476,7 +23476,7 @@
     "url": "https://www.nlpsab.ca/students/scholarships/bonnyville-cold-lake-area-awards",
     "notes": "Application forms come from Mrs. Jennifer Johnson at Cold Lake High. Your high school must be in the City of Cold Lake, Town of Bonnyville, MD of Bonnyville or RM of Beaver River.",
     "description": "Three awards of $2,500 from The Medley CFB Society for graduating students who are dependents of personnel currently serving at 4 Wing Cold Lake in the Canadian Armed Forces, regular or reserve, or working there as DND or NPF employees. Created in 2005 at $1,000 and since raised. The criteria go out of their way to say that consistent academic standing does not mean the honour roll: Peter Stauffer never insisted that people be the best, only that they do their best. You submit a 500-word essay on quality of life, leadership or community spirit, two references from outside your family, proof of acceptance and your grade 12 marks.",
-    "metaDetail": "Three at $2,500, and the honour roll is explicitly not required.",
+    "metaDetail": "Three at $2,500; honour roll not required.",
     "eligibility": {
       "grades": [
         "12"
@@ -23552,7 +23552,7 @@
     "url": "https://www.lakelandcreditunion.com/scholarship",
     "notes": "Two published dates disagree, May 2 on the school list and May 4 on the division list, so the earlier one is used here. Membership is the real gate: half a year in good standing for you, or a full year for a parent.",
     "description": "$2,500 for university or college and $1,500 for a trade or technical institute, judged on leadership, community volunteering, school involvement, educational goals, academic achievement, an essay and letters of recommendation. The trades stream at $1,500 is separately funded, so a student heading to an apprenticeship is not competing against university applicants.",
-    "metaDetail": "Separate streams at $2,500 and $1,500 for trades.",
+    "metaDetail": "Has a trades stream.",
     "eligibility": {
       "grades": [
         "12"
@@ -23591,7 +23591,7 @@
     "url": "https://www.lakelandco-op.crs/sites/lakeland/local/detail/scholarship-program",
     "notes": "Applications open January 25, nearly four months before they close, and the membership must have been held for at least a year before you apply, so this is one to check at home early.",
     "description": "Three awards of $1,000: two for students entering an accredited post-secondary institution and one reserved for a student entering a trades program. Your parent or guardian must be a current Lakeland Co-op member of at least a year, and you must hold a valid diploma from a school in the Co-op trading area. The package is a personal essay, a resume and two letters of recommendation.",
-    "metaDetail": "One of the three is reserved for a trades student.",
+    "metaDetail": "One of three is for trades.",
     "eligibility": {
       "grades": [
         "12"
@@ -23631,7 +23631,7 @@
     "applyViaGuidance": true,
     "notes": "The school lists the amount as $2,000 while the description alongside it says $1,000, so confirm the figure with Mrs. Jennifer Johnson when you request the form.",
     "description": "An award from the Grand Centre Lions Club for a young person committed to humanitarian causes who shows the Lions philosophy of active volunteer service in their own community. You submit a transcript, proof of acceptance, up to four reference letters and a one-page essay on why you deserve it. Four reference letters is the most any Cold Lake award asks for, so line them up early.",
-    "metaDetail": "Accepts up to four reference letters, more than any other here.",
+    "metaDetail": "Accepts up to four reference letters.",
     "eligibility": {
       "grades": [
         "12"
@@ -23707,7 +23707,7 @@
     "applyViaGuidance": true,
     "notes": "Applications go by email to Bob Mattice and Audrey McFarlane rather than through the school, and no value is published.",
     "description": "Named for Lynn McFarlane, born in Cold Lake in 1966 and diagnosed with Down syndrome at birth, who was one of the first students with a developmental disability to graduate from Cold Lake High School and who then worked at the same Cold Lake pharmacy for thirty years. The scholarship began when she retired in 2018. Two separate routes qualify: being accepted into a disability studies program, or being a student with a disability accepted into any post-secondary program. The application is a single 500 to 1,000 word response covering who you are, what you want to study and why.",
-    "metaDetail": "Two routes in: studying disability, or having one.",
+    "metaDetail": "Two routes: studying it, or having one.",
     "eligibility": {
       "grades": [
         "12"
@@ -23744,7 +23744,7 @@
     "applyViaGuidance": true,
     "notes": "Contact Shawn Metchewais for the form. The bar is deliberately reachable rather than competitive, so read the four conditions as a checklist.",
     "description": "A $1,000 award with four plain conditions: full-time enrolment, a 60% class average, 80% attendance, and twenty hours of sports involvement through school or organized sport. The twenty hours do not require you to play. Timekeeping, scorekeeping, officiating or general help at any sporting event all count, which makes this one of the few athletic awards a non-athlete can win.",
-    "metaDetail": "Scorekeeping counts toward the twenty sport hours.",
+    "metaDetail": "Scorekeeping counts toward the hours.",
     "eligibility": {
       "grades": [
         "12"
@@ -23783,7 +23783,7 @@
     "applyViaGuidance": true,
     "notes": "Membership in the Beaver River Fish and Game Association is required, and the award goes only to students continuing directly after their graduation year.",
     "description": "A $1,000 bursary for a member of the Beaver River Fish and Game Association. The substance of the application is an essay of 500 to 1,000 words on a current issue facing Alberta or Canadian wildlife or the environment, which has to offer solutions rather than only describe the problem, plus a list of community involvement and extracurricular activities.",
-    "metaDetail": "The essay must propose solutions, not just describe.",
+    "metaDetail": "Propose solutions.",
     "eligibility": {
       "grades": [
         "12"
@@ -23820,7 +23820,7 @@
     "applyViaGuidance": true,
     "notes": "You cannot enter this one yourself: applicants must be nominated by their high school, so the conversation to have is with Mrs. Johnson rather than with Inter Pipeline.",
     "description": "A $2,000 bursary for a grade 12 Cold Lake High student with financial need who is entering one of the industry-related programs Inter Pipeline names. The nomination requirement is the thing to know early, since a student who waits for an application window will find there is not one.",
-    "metaDetail": "Nominated by the school, so you cannot apply yourself.",
+    "metaDetail": "Nominated by the school.",
     "eligibility": {
       "grades": [
         "12"
@@ -23861,7 +23861,7 @@
     "applyViaGuidance": true,
     "notes": "A Northern Lights Public Schools award, so every high school in the division competes for it, Cold Lake High included. The division publishes no value for it.",
     "description": "Created by the Board of Trustees to recognise students who have shown exceptional leadership. It asks for a high degree of empathy for others and a leadership role within your school held for at least two years, which rules out anyone who started in grade 12. Apprenticeships count as post-secondary here, alongside universities, colleges and trade schools.",
-    "metaDetail": "Two years in a leadership role, so start early.",
+    "metaDetail": "Two years of leadership.",
     "eligibility": {
       "grades": [
         "12"
@@ -23900,7 +23900,7 @@
     "applyViaGuidance": true,
     "notes": "A Northern Lights Public Schools award, so every high school in the division competes for it, Cold Lake High included. Two published figures disagree, three awards of $1,500 on the division site and $1,000 on the school site, and the division also notes each school may grant one of its own students $120. Applications go to president@atalocal15.com.",
     "description": "Three awards from the teachers' local for graduating Northern Lights students, decided on an essay of no more than 500 words about a Northern Lights teacher who had a positive impact on your life. That is the whole submission besides the form and a letter of acceptance, and it is a topic no other award in the corpus asks for.",
-    "metaDetail": "Write about a teacher who changed something for you.",
+    "metaDetail": "Write about a teacher who mattered.",
     "eligibility": {
       "grades": [
         "12"
@@ -23936,7 +23936,7 @@
     "url": "https://www.nlpsab.ca/students/scholarships/walter-hayduk-memorial-scholarship",
     "notes": "A Northern Lights Public Schools award, so every high school in the division competes for it, Cold Lake High included. You may apply only in your graduating year.",
     "description": "A $100 award in memory of Walter Hayduk, a teacher, superintendent, trustee and friend of education, for a Northern Lights graduate entering the Faculty of Education at the University of Alberta with a grade 12 average of 80% or better. The money is small and the conditions are narrow, but the field is correspondingly tiny: it wants one specific faculty at one specific university.",
-    "metaDetail": "One faculty at one university, and 80%.",
+    "metaDetail": "One faculty at one university, 80%.",
     "eligibility": {
       "grades": [
         "12"
@@ -23976,7 +23976,7 @@
     "url": "https://www.nlpsab.ca/students/scholarships/xerox-scholarship-award-business-and-entrepreneurship",
     "notes": "A Northern Lights Public Schools award, so every high school in the division competes for it, Cold Lake High included. Two recommendation letters are required, one from your principal and one from a teacher, so ask both well before mid-June.",
     "description": "A $1,000 award from Xerox Canada for a Northern Lights graduate entering a recognised business or entrepreneurship program, needing an overall grade 12 average of 65% or better. Priority goes to applicants who intend to return to their home community to start a local business, which is the rare case of an award that rewards planning to come back to a small town rather than leave it.",
-    "metaDetail": "Priority for students planning to come back home.",
+    "metaDetail": "Prefers locals.",
     "eligibility": {
       "grades": [
         "12"
@@ -24012,7 +24012,7 @@
     "url": "https://www.nlpsab.ca/students/scholarships/indigenous-student-scholarships-and-awards",
     "notes": "A Northern Lights Public Schools award, so every high school in the division competes for it, Cold Lake High included.",
     "description": "A $1,500 award to help Indigenous youth reach a university degree, a college diploma or a technical certificate. The resume it asks for covers grades 10 to 12 and counts four kinds of involvement equally: student government, sports, Indigenous cultural or recreational activity such as Métis dancing, Pow-Wow dancing, drumming, fiddling or Native art, and Indigenous community activity such as youth councils or the Native Friendship Centre. A one-page statement of career goals and at least one recommendation letter go with it.",
-    "metaDetail": "Cultural activity counts as much as student government.",
+    "metaDetail": "Cultural activity counts as much as council.",
     "eligibility": {
       "grades": [
         "12"
@@ -24052,7 +24052,7 @@
     "url": "https://www.nlpsab.ca/students/scholarships/regional-scholarships-and-awards",
     "notes": "You must be living in the Lakeland Centre for FASD service area at the time you graduate and be in grade 12 at a high school in that area, so both conditions are geographic as well as diagnostic.",
     "description": "A $500 award for a grade 12 student diagnosed with Fetal Alcohol Spectrum Disorder who lives in the Lakeland Centre for FASD service area and is planning to attend a post-secondary program. It is the only award in the corpus that names FASD, and the eligible group is small enough that anyone who qualifies should apply.",
-    "metaDetail": "The only FASD-specific award in the directory.",
+    "metaDetail": "The only FASD award here.",
     "eligibility": {
       "grades": [
         "12"
@@ -24088,7 +24088,7 @@
     "url": "https://www.nlpsab.ca/students/scholarships/regional-scholarships-and-awards",
     "notes": "Eligibility follows the rural internet provider's coverage map rather than any municipal boundary, so check the service area before assuming Cold Lake addresses qualify.",
     "description": "Four awards of $1,000 from MCSNet, the rural Alberta internet provider, for graduating students in its service area who are pursuing computer science or STEM-related studies. An August 31 close makes it one of the last deadlines of the year, which suits a student who decided on a STEM program late.",
-    "metaDetail": "Four at $1,000, and it closes at the end of August.",
+    "metaDetail": "Four awards.",
     "eligibility": {
       "grades": [
         "12"
@@ -24129,7 +24129,7 @@
     "url": "https://rmalberta.com/about/rma-scholarship-program/",
     "notes": "Your municipality has to be a member in good standing of the RMA, which covers municipal districts, counties, specialized municipalities and the Special Areas, so a town or city address does not qualify even when a member county surrounds it. Preference goes to applicants studying in Alberta unless the programme is not offered here. The cutoff is the same late-August date each year and the one shown is next year's.",
     "description": "Six scholarships of $1,500 a year from the Rural Municipalities of Alberta, running since 1995, for a resident of an RMA member municipality in the first four years of study with no previous degree or diploma, taking a programme relevant to local government or rural communities.",
-    "metaDetail": "Six awards, and rural residency is the real gate.",
+    "metaDetail": "Rural residency is the gate.",
     "eligibility": {
       "grades": [
         "12"
@@ -24237,7 +24237,7 @@
     "category": "Community",
     "audience": "Wolf Creek graduates entering a two-year or longer program",
     "description": "The Wolf Creek Local of the Alberta Teachers' Association gives one award of $400 to a student going on to a diploma or degree of two years or more at a recognised institution. Preference goes to someone entering a faculty of education, but the award is not restricted to future teachers.",
-    "metaDetail": "Preference for education, but open to any program.",
+    "metaDetail": "Prefers education, but any program works.",
     "eligibility": {
       "grades": [
         "12"
@@ -24274,7 +24274,7 @@
     "category": "STEM",
     "audience": "Grade 12 students at Lacombe Composite headed for healthcare",
     "description": "A $500 award from a Blackfalds dental practice for a Lacombe Composite grade 12 student aiming at a career in healthcare. The sponsor picks on marks and community volunteering together, and says plainly that the point is the rising cost of training as a healthcare professional.",
-    "metaDetail": "A small business paying down the cost of healthcare training.",
+    "metaDetail": "A small business paying for healthcare training.",
     "eligibility": {
       "grades": [
         "12"
@@ -24391,7 +24391,7 @@
     "category": "Community",
     "audience": "Lacombe Composite grade 12 students starting post-secondary in the fall",
     "description": "A $1,000 award from Cando for a grade 12 student heading to post-secondary in the fall, chosen for leadership, determination and work ethic, an optimistic attitude, a taste for challenge and innovation, and ownership of their own work. Proof of enrolment is required before the cheque is written.",
-    "metaDetail": "Chosen on attitude and work ethic, not marks.",
+    "metaDetail": "Chosen on attitude and work ethic.",
     "eligibility": {
       "grades": [
         "12"
@@ -24615,7 +24615,7 @@
     "category": "Community",
     "audience": "Former Blackfalds School students entering a faculty of education",
     "description": "Given in memory of a former principal of Blackfalds School, this award is for a student who attended Blackfalds School and is enrolling in a faculty of education. Preference goes to applicants majoring in social studies, language arts or elementary education. The amount is not published.",
-    "metaDetail": "The one award that turns on which elementary school you attended.",
+    "metaDetail": "Your elementary school decides it.",
     "eligibility": {
       "grades": [
         "12"
@@ -24727,7 +24727,7 @@
     "category": "Academic",
     "audience": "Lacombe Composite students entering the University of Alberta",
     "description": "A $1,500 award for a Lacombe Composite student attending the University of Alberta or equivalent, with high academic standing across grades 10, 11 and 12 and extracurricular involvement at the school. It exists to reward the pursuit of knowledge as a lifelong goal.",
-    "metaDetail": "Three years of standing, not just the grade 12 year.",
+    "metaDetail": "Three years of standing, not just Grade 12.",
     "eligibility": {
       "grades": [
         "12"
@@ -24766,7 +24766,7 @@
     "category": "STEM",
     "audience": "Lacombe Composite graduates entering STEM at the U of A or U of C",
     "description": "Either one award of $10,000 or two of $5,000, and by a wide margin the largest award a Lacombe Composite graduate can win. It is funded by two alumni in honour of Henri Forgues, principal of Lacombe High School from 1954 to 1974. Recipients must be entering science, technology, engineering or mathematics at the University of Alberta or the University of Calgary, and engineering is preferred.",
-    "metaDetail": "The biggest award here, and medicine is ruled out.",
+    "metaDetail": "The biggest award here; medicine ruled out.",
     "eligibility": {
       "grades": [
         "12"
@@ -24919,7 +24919,7 @@
     "category": "Community",
     "audience": "Lacombe Composite graduates writing on emergency preparedness",
     "description": "One $1,000 award a year to a Lacombe Composite graduate, decided by a committee of the Lacombe County Mutual Aid Organization. Applicants write an essay of 800 to 1,000 words on emergency preparedness and must be registered at a recognised Alberta institution in a program of at least one year. Preference goes to students studying something related to emergency services, or connected to a member of Lacombe County Emergency Services.",
-    "metaDetail": "The essay is the application, and it is 800 words.",
+    "metaDetail": "The essay is the application: 800 words.",
     "eligibility": {
       "grades": [
         "12"
@@ -24956,7 +24956,7 @@
     "category": "Community",
     "audience": "Lacombe and Lacombe County students tied to a Chamber member",
     "description": "Two awards of $1,250 for grade 12 students at a school in the City of Lacombe or Lacombe County who live in Lacombe or the county. The condition most students miss is employment: you must be employed by, or the child of an employee of, a Chamber member in good standing. The Chamber also says it would like recipients to come back and serve the community afterwards.",
-    "metaDetail": "The employment link is what disqualifies most applicants.",
+    "metaDetail": "The employment link disqualifies most people.",
     "eligibility": {
       "grades": [
         "12"
@@ -24993,7 +24993,7 @@
     "category": "Community",
     "audience": "Lacombe students entering full-time post-secondary training",
     "description": "The Lacombe Kinsmen sponsor entries to the Kin Canada bursary, worth $500 locally and $1,000 nationally. Applicants are judged on school and community involvement, knowledge of Kin Canada and financial need, and must be registering full time in university, college, trade school or a technical institute.",
-    "metaDetail": "One form, judged locally first and then nationally.",
+    "metaDetail": "One form, judged locally then nationally.",
     "eligibility": {
       "grades": [
         "12"
@@ -25369,7 +25369,7 @@
     "category": "Community",
     "audience": "Lacombe Composite students descended from service personnel, with financial need",
     "description": "Two bursaries of $2,500, the largest community awards on the Lacombe Composite list. They are for graduates who are the child, grandchild or great-grandchild of Canadian ex-service personnel, of Merchant Navy personnel awarded campaign stars or decorations, of the RCMP, or of ex-service personnel of Commonwealth or Allied countries. Unlike the Legion's other award, this one is decided on financial need.",
-    "metaDetail": "The largest community award here, and need-based.",
+    "metaDetail": "The largest here, need-based.",
     "eligibility": {
       "grades": [
         "12"
@@ -25406,7 +25406,7 @@
     "category": "Community",
     "audience": "Lacombe Composite students from Alix, Clive, Haynes, Mirror or Tees",
     "description": "Two awards of $1,000, one for a student going into the trades and one for a student going into an agriculture-related program. Recipients must be Lacombe Composite graduates with a mailing address in Alix, Clive, Haynes, Mirror or Tees, so this one is for the hamlets around Lacombe rather than the city.",
-    "metaDetail": "For the hamlets around Lacombe, not the city itself.",
+    "metaDetail": "The hamlets around Lacombe, not the city.",
     "eligibility": {
       "grades": [
         "12"
@@ -25484,7 +25484,7 @@
     "category": "Community",
     "audience": "Lacombe Composite students who succeeded despite adversity",
     "description": "Achievement Against Adversity: $1,500 from the Lacombe branch of the Knights of Columbus for a student who did well in school while facing something hard. The adversity is defined broadly, covering illness or injury, learning disabilities, family challenges, economic hardship and personal problems. Apprenticeship or any other learning counts, not only college and university.",
-    "metaDetail": "Apprenticeship counts, and adversity is defined broadly.",
+    "metaDetail": "Apprenticeship counts, and adversity is broad.",
     "eligibility": {
       "grades": [
         "12"
@@ -25597,7 +25597,7 @@
     "category": "Community",
     "audience": "Wolf Creek students not eligible for the Rutherford",
     "description": "Six of these $300 awards are set aside for Lacombe alone, out of twenty across the division, given for contribution to school affairs, personal attributes and community involvement. The eligibility is unusual and worth reading: students who qualify for the Rutherford Scholarship in grade 12 cannot apply, which makes this one deliberately aimed at students whose marks fall below the Rutherford line.",
-    "metaDetail": "Rutherford-eligible students are barred from this one.",
+    "metaDetail": "Rutherford-eligible students are barred.",
     "eligibility": {
       "grades": [
         "12"
@@ -25636,7 +25636,7 @@
     "category": "Trades",
     "audience": "Wolf Creek students with a heavy CTS, RAP or Green Certificate load",
     "description": "One $300 award at Lacombe for a student taking a significant part of their program in Career and Technology Studies, the Registered Apprenticeship Program or the Green Certificate, who is going on to a related program. Apprenticeship counts as post-secondary here.",
-    "metaDetail": "Apprenticeship counts as post-secondary for this one.",
+    "metaDetail": "Apprenticeship counts here.",
     "eligibility": {
       "grades": [
         "12"
@@ -25673,7 +25673,7 @@
     "category": "STEM",
     "audience": "Wolf Creek students going on in conservation or natural history",
     "description": "A $1,000 award to encourage further study in conservation, the environment and natural history. The recipient must start post-secondary in the fall of the year they apply, so it cannot be deferred.",
-    "metaDetail": "No deferral: you start in the fall or you lose it.",
+    "metaDetail": "No deferral; start in the fall.",
     "eligibility": {
       "grades": [
         "12"
@@ -25793,7 +25793,7 @@
     "category": "Arts",
     "audience": "Wolf Creek students entering music, broadcasting or journalism",
     "description": "Up to $2,000 from the local radio station, for a student enrolling within twelve months in an accredited music, broadcasting or journalism program. It is one of the few awards in central Alberta that treats broadcasting and journalism as fundable fields in their own right.",
-    "metaDetail": "Broadcasting and journalism count, not just music.",
+    "metaDetail": "Broadcasting and journalism count.",
     "eligibility": {
       "grades": [
         "12"
@@ -25833,7 +25833,7 @@
     "category": "Community",
     "audience": "Graduates of Lacombe, Rimbey, Alix, Bentley, Eckville and CACHS",
     "description": "A $1,000 award for graduating students of Lacombe, Rimbey, Alix-MAC, Bentley, Eckville and CACHS. Applicants need a graduating average of at least 70 per cent, must be registered in a post-secondary program, and must have lived in the area for the past three years. Preference goes to agriculture-related study.",
-    "metaDetail": "Three years of local residence, and a 70 per cent floor.",
+    "metaDetail": "Three years local, and a 70 per cent floor.",
     "eligibility": {
       "grades": [
         "12"
@@ -25948,7 +25948,7 @@
     "category": "Academic",
     "audience": "Students who complete a Burman application by February 1",
     "description": "One thousand dollars for applicants who complete their Burman application, including every supporting document, by February 1 for the following September. It is the cheapest thousand dollars on this page: the only thing being rewarded is doing the paperwork early.",
-    "metaDetail": "Paid for finishing the application early, nothing else.",
+    "metaDetail": "Paid for applying early, nothing else.",
     "eligibility": {
       "grades": [
         "12"
@@ -26063,7 +26063,7 @@
     "category": "Academic",
     "audience": "Burman entrants with a 95 per cent admission average",
     "description": "A full tuition scholarship, the largest award tied to Lacombe. It goes to first-year students with a Burman admission average of 95 per cent over at least five qualifying academic courses, and covers a minimum of fifteen Burman credits per term. It can be renewed for a further three years on a full course load and a 3.9 GPA each year.",
-    "metaDetail": "Full tuition, but the renewal bar is a 3.9 GPA.",
+    "metaDetail": "Full tuition, but renewal needs a 3.9 GPA.",
     "eligibility": {
       "grades": [
         "12"
@@ -26182,7 +26182,7 @@
     "category": "Arts",
     "audience": "Orchestral instrumentalists entering Burman University",
     "description": "Up to two awards of $8,000, the largest arts award anywhere in the Lacombe set. You submit a video of yourself playing an approved piece on an orchestral instrument and the Burman music faculty adjudicates. Strings, woodwinds, brass, percussion and keyboard all qualify, and other instruments may be considered case by case. Preference goes to a student entering a music program, but any student who meets the criteria is eligible.",
-    "metaDetail": "You do not need to be a music major to win $8,000.",
+    "metaDetail": "You need not be a music major to win $8,000.",
     "eligibility": {
       "grades": [
         "12"
@@ -26305,7 +26305,7 @@
     "category": "STEM",
     "audience": "Burman health sciences students continuing into nursing",
     "description": "Three awards of $8,000 for students admitted to Burman's Certificate in Health Sciences who plan to continue into a nursing degree. It is a need-tested award in practice: you must apply for and receive a Canadian government student loan of at least $8,500 to be eligible at all.",
-    "metaDetail": "You must actually receive an $8,500 student loan.",
+    "metaDetail": "You must actually receive an $8,500 loan.",
     "eligibility": {
       "grades": [
         "12"
@@ -26347,7 +26347,7 @@
     "category": "Community",
     "audience": "Burman entrants receiving a government student loan",
     "description": "Four bursaries: three one-time awards of $6,000 and one renewable award worth $2,000 a year, which can reach $8,000 over a four-year degree. You must apply for and receive a Canadian government student loan of at least $8,500, or the American equivalent, and hand the notice of assessment to student financial services. The donors choose the recipients anonymously, on the strength of a short written response and nothing else.",
-    "metaDetail": "The donors pick anonymously, on a short written answer.",
+    "metaDetail": "Donors pick anonymously on a written answer.",
     "eligibility": {
       "grades": [
         "12"
@@ -27699,7 +27699,7 @@
     "category": "Academic",
     "audience": "Wood Buffalo high school graduates with an 80 per cent average",
     "description": "Free first-year tuition at Keyano College for a student entering from a secondary school inside the Regional Municipality of Wood Buffalo with an average of 80 per cent or better. It is the largest single thing a Fort McMurray graduate can win and it is not a competition against the whole province, only against the region.",
-    "metaDetail": "Free first-year tuition for local grads at 80 per cent.",
+    "metaDetail": "Free first-year tuition at 80 per cent.",
     "eligibility": {
       "grades": [
         "12"
@@ -27737,7 +27737,7 @@
     "category": "Community",
     "audience": "Wood Buffalo students entering Keyano who are active in the community",
     "description": "Sixty awards of $1,000, issued as a voucher against tuition or eligible costs such as books, for students who represent the Wood Buffalo region through extracurricular activity, volunteer work, military service or community initiatives. Sixty recipients makes it the widest award anywhere in this directory.",
-    "metaDetail": "Sixty $1,000 vouchers for local community builders.",
+    "metaDetail": "Sixty $1,000 vouchers for community builders.",
     "eligibility": {
       "grades": [
         "12"
@@ -27939,7 +27939,7 @@
     "category": "General",
     "audience": "Students entering the first year of a Keyano diploma",
     "description": "One award of $1,000 for a student in the first year of any diploma programme at Keyano. It is one of the few awards in the book restricted to first-year students, which removes the continuing students you would otherwise be competing against.",
-    "metaDetail": "First-year diploma students only, which thins the field.",
+    "metaDetail": "First-year diploma students only.",
     "eligibility": {
       "grades": [
         "12"
@@ -27978,7 +27978,7 @@
     "category": "General",
     "audience": "Students starting a new programme at Keyano",
     "description": "One award of $1,200 from ATCO for a student in a new post-secondary programme in the current academic year, judged on academic achievement and financial need, with preference given to a student of Indigenous ancestry.",
-    "metaDetail": "For students in their first year of a new programme.",
+    "metaDetail": "For first-year students in a new programme.",
     "eligibility": {
       "grades": [
         "12"
@@ -28095,7 +28095,7 @@
     "category": "General",
     "audience": "Keyano students, with preference to female and Indigenous applicants",
     "description": "Three awards of $2,000 from an endowment funded by the Canadian Association of Petroleum Producers, open to any Keyano student and judged on academic achievement and financial need, with preference given to female and Indigenous students.",
-    "metaDetail": "Three $2,000 awards with no programme restriction.",
+    "metaDetail": "No programme limit.",
     "eligibility": {
       "grades": [
         "12"
@@ -28134,7 +28134,7 @@
     "category": "General",
     "audience": "Keyano students, with preference to CEDA employees and their children",
     "description": "Two awards of $1,350 for Keyano students in any programme and any year who show financial need and effort in their studies. Preference goes to employees of CEDA and to the children of employees, evidenced by a letter on company letterhead.",
-    "metaDetail": "Preference for CEDA employees and their children.",
+    "metaDetail": "CEDA families first.",
     "eligibility": {
       "grades": [
         "12"
@@ -28173,7 +28173,7 @@
     "category": "Community",
     "audience": "Female Keyano students with three years in Wood Buffalo",
     "description": "One award of $650 from the Famous 5 Foundation for a female student with strong academic standing, demonstrated leadership through community service and financial need, who has lived in the Regional Municipality of Wood Buffalo for at least three years.",
-    "metaDetail": "Three years of Wood Buffalo residency required.",
+    "metaDetail": "Three years in Wood Buffalo.",
     "eligibility": {
       "grades": [
         "12"
@@ -28255,7 +28255,7 @@
     "category": "General",
     "audience": "First-year Keyano students in a new programme",
     "description": "One award of $1,700 from GKO Design Consultants for a student entering the first year of a new post-secondary programme, judged entirely on academic performance together with self-motivated and enthusiastic participation in class and student activities.",
-    "metaDetail": "Judged on marks alone, with no financial component.",
+    "metaDetail": "Judged on marks alone, no need component.",
     "eligibility": {
       "grades": [
         "12"
@@ -28294,7 +28294,7 @@
     "category": "Community",
     "audience": "Students entering first-year full-time study at Keyano",
     "description": "Two awards of $1,100 for students entering their first year of full-time study, judged on academic merit through high school together with contributions to school and community life showing leadership and interpersonal skills.",
-    "metaDetail": "Explicitly judged on your high school record.",
+    "metaDetail": "Judged on your high school record.",
     "eligibility": {
       "grades": [
         "12"
@@ -28336,7 +28336,7 @@
     "category": "Community",
     "audience": "Keyano students with documented volunteer involvement",
     "description": "One award of $600 for a student in any programme who shows financial need and community involvement, and who is enrolled in the programme immediately following the award. A letter of reference on organisation or company letterhead confirming the amount of volunteer work is required.",
-    "metaDetail": "A letterhead reference for your volunteering is required.",
+    "metaDetail": "A letterhead volunteering reference.",
     "eligibility": {
       "grades": [
         "12"
@@ -28416,7 +28416,7 @@
     "category": "Community",
     "audience": "Single parents in a Keyano certificate or diploma",
     "description": "One award of $1,300 for a full-time student who is a single parent, enrolled in any certificate or diploma programme at Keyano, judged on financial need and academic achievement.",
-    "metaDetail": "Reserved for full-time students who are single parents.",
+    "metaDetail": "Reserved for full-time single parents.",
     "eligibility": {
       "grades": [
         "12"
@@ -28455,7 +28455,7 @@
     "category": "General",
     "audience": "Keyano College Preparation graduates moving into a credential",
     "description": "One award of $1,300 for a student who completed the College Preparation programme at Keyano and then enrolled in a certificate, diploma or degree there, judged on academic achievement and financial need.",
-    "metaDetail": "For students who upgraded first, then carried on.",
+    "metaDetail": "For those who upgraded first.",
     "eligibility": {
       "grades": [
         "12"
@@ -28494,7 +28494,7 @@
     "category": "Community",
     "audience": "Keyano students with ten years in Wood Buffalo",
     "description": "One award of $1,300 for a student in any programme with proof of at least ten years of residency in the Wood Buffalo region, judged on community involvement and academic success. A letter of reference on letterhead confirming volunteer hours is required.",
-    "metaDetail": "Ten years of Wood Buffalo residency is the gate.",
+    "metaDetail": "Ten years of Wood Buffalo residency.",
     "eligibility": {
       "grades": [
         "12"
@@ -28535,7 +28535,7 @@
     "category": "Community",
     "audience": "Keyano students with five years in Wood Buffalo",
     "description": "One award of $1,300 for a student in any programme with proof of at least five years of residency in Wood Buffalo, judged on community involvement and academic success, with a letterhead reference confirming volunteer hours.",
-    "metaDetail": "Five years of residency and marks are what count here.",
+    "metaDetail": "Five years of residency, plus marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -28576,7 +28576,7 @@
     "category": "Community",
     "audience": "Keyano students with five years in Wood Buffalo and financial need",
     "description": "One award of $1,300 for a student in any programme with at least five years of Wood Buffalo residency, judged on community involvement and financial need rather than on marks, with a letterhead volunteer reference required.",
-    "metaDetail": "The version of this award that ignores your marks.",
+    "metaDetail": "This one ignores marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -28617,7 +28617,7 @@
     "category": "Community",
     "audience": "Wood Buffalo residents with a Suncor family connection",
     "description": "One award of $1,000 from the Suncor Energy Foundation for a Wood Buffalo resident in any Keyano programme who is part of the Suncor family, meaning you, a spouse, a parent or a grandparent is employed by Suncor. Proof of residency and of the employment connection are both required.",
-    "metaDetail": "You, a parent or a grandparent must work at Suncor.",
+    "metaDetail": "You or a parent must work at Suncor.",
     "eligibility": {
       "grades": [
         "12"
@@ -28659,7 +28659,7 @@
     "category": "Trades",
     "audience": "Keyano students in business, environmental or power engineering programmes",
     "description": "Two awards of $2,500 from Wolf NGL for students in the Business Administration certificate or diploma, Human Resources Management certificate, Environmental Technology diploma or third and fourth class Power Engineering certificate. Selection is on leadership and mentorship in the classroom as judged by the instructors.",
-    "metaDetail": "Your instructors decide this one, not a committee.",
+    "metaDetail": "Staff decide it.",
     "eligibility": {
       "grades": [
         "12"
@@ -28780,7 +28780,7 @@
     "category": "Indigenous",
     "audience": "Indigenous students at Keyano College",
     "description": "One award of $1,000 from the Keyano Board of Governors and Friends of Keyano College for a full-time Indigenous student, based on academic excellence and financial need. Proof of Indigenous ancestry is required.",
-    "metaDetail": "The Indigenous counterpart to the Board of Governors award.",
+    "metaDetail": "The Indigenous counterpart to the Governors award.",
     "eligibility": {
       "grades": [
         "12"
@@ -28819,7 +28819,7 @@
     "category": "Indigenous",
     "audience": "Indigenous women from the Wood Buffalo communities",
     "description": "One award of $1,000 for an Indigenous female student in any Keyano programme who shows strong community leadership and academic excellence. Preference goes to students living in, or living immediately before college in, Fort Chipewyan, Conklin, Janvier, Anzac, Gregoire Lake, Fort McKay or Fort McMurray.",
-    "metaDetail": "Named preference for seven Wood Buffalo communities.",
+    "metaDetail": "Prefers seven named communities.",
     "eligibility": {
       "grades": [
         "12"
@@ -28861,7 +28861,7 @@
     "category": "Indigenous",
     "audience": "Indigenous students at Keyano who are active in the community",
     "description": "One award of $2,500 for an Indigenous student at Keyano, scored entirely on community involvement.",
-    "metaDetail": "Community involvement is one hundred per cent of the score.",
+    "metaDetail": "Community work is all of it.",
     "eligibility": {
       "grades": [
         "12"
@@ -28902,7 +28902,7 @@
     "category": "Indigenous",
     "audience": "Indigenous nursing and paramedicine students at Keyano",
     "description": "One award of $1,000 for an Indigenous student enrolled in the Bachelor of Science in Nursing or in the advanced care or primary care paramedic programmes at Keyano, selected on academic success alone.",
-    "metaDetail": "Nursing and both paramedic streams are eligible.",
+    "metaDetail": "Nursing and both paramedic streams.",
     "eligibility": {
       "grades": [
         "12"
@@ -28944,7 +28944,7 @@
     "category": "Indigenous",
     "audience": "Indigenous students in business or environmental technology at Keyano",
     "description": "One award of $1,500 for an Indigenous student in Business Administration or Environmental Technology, judged on financial need and academic excellence. Recipients may also be considered for a paid summer position at Rally Engineering and for career mentorship.",
-    "metaDetail": "It can come with a paid summer job attached.",
+    "metaDetail": "May add a summer job.",
     "eligibility": {
       "grades": [
         "12"
@@ -28986,7 +28986,7 @@
     "category": "Indigenous",
     "audience": "Indigenous students from the rural Wood Buffalo communities",
     "description": "Three awards of $1,600 for Indigenous students in any Keyano programme, with preference to those living in the Indigenous and rural communities of Wood Buffalo now or immediately before starting college. Where more students qualify than there are awards, recipients are chosen at random.",
-    "metaDetail": "Ties are broken by random draw, not by ranking.",
+    "metaDetail": "Ties broken by random draw.",
     "eligibility": {
       "grades": [
         "12"
@@ -29025,7 +29025,7 @@
     "category": "Indigenous",
     "audience": "Indigenous Alberta residents at Keyano",
     "description": "One award of $1,500 for a student of Indigenous ancestry who has lived in Alberta for at least three years immediately before applying, with strong academic qualifications and demonstrated financial need. Proof of ancestry and of residency are both required.",
-    "metaDetail": "Three years of Alberta residency, not just Wood Buffalo.",
+    "metaDetail": "Three years in Alberta, not just Wood Buffalo.",
     "eligibility": {
       "grades": [
         "12"
@@ -29064,7 +29064,7 @@
     "category": "Indigenous",
     "audience": "Indigenous students from the Wood Buffalo communities",
     "description": "Two awards of $1,650 from an anonymous donor for Indigenous students in their first or second year at Keyano, with preference to students from Fort Chipewyan, Janvier, Conklin, Anzac, Gregoire Lake, Fort McKay or Fort McMurray. Selection is on financial need and academic achievement.",
-    "metaDetail": "First and second year students from the region.",
+    "metaDetail": "First and second year students.",
     "eligibility": {
       "grades": [
         "12"
@@ -29144,7 +29144,7 @@
     "category": "STEM",
     "audience": "Keyano nursing students active in the community",
     "description": "One award of $1,500 for a Bachelor of Science in Nursing student with outstanding community involvement, scored entirely on that involvement. You need satisfactory academic standing, defined as a 2.0 GPA or 65 per cent, and demonstrated financial need.",
-    "metaDetail": "A 65 per cent floor, then community work decides it.",
+    "metaDetail": "A 65 per cent floor, then community work.",
     "eligibility": {
       "grades": [
         "12"
@@ -29228,7 +29228,7 @@
     "category": "STEM",
     "audience": "Practical nursing students at Keyano who have overcome barriers",
     "description": "One award of $1,000 in memory of a Fort McMurray emergency room nurse, for a practical nursing student who has overcome barriers on the way to becoming a student. It is the only award in the book that treats adversity itself as the qualification.",
-    "metaDetail": "Adversity is the criterion, not a tiebreaker.",
+    "metaDetail": "Adversity is the criterion.",
     "eligibility": {
       "grades": [
         "12"
@@ -29313,7 +29313,7 @@
     "category": "Academic",
     "audience": "First-year business administration students at Keyano",
     "description": "One award of $1,350 for a student in year one of the Business Administration programme at Keyano, judged equally on academic achievement and financial need.",
-    "metaDetail": "First-year business students, no other conditions.",
+    "metaDetail": "First-year business students only.",
     "eligibility": {
       "grades": [
         "12"
@@ -29395,7 +29395,7 @@
     "category": "Indigenous",
     "audience": "Indigenous office administration students at Keyano",
     "description": "One award of $1,000 for an Indigenous student in the Office Administration certificate programme, judged on financial need and community involvement. Proof of Indigenous ancestry and a letterhead volunteer reference are required.",
-    "metaDetail": "Certificate students, judged on need and volunteering.",
+    "metaDetail": "Certificate students; need and service.",
     "eligibility": {
       "grades": [
         "12"
@@ -29481,7 +29481,7 @@
     "category": "Academic",
     "audience": "University Studies students at Keyano born outside Canada",
     "description": "Three awards of $1,600 for students born outside Canada who are enrolled in a University Studies programme at Keyano, judged on academic achievement and financial need.",
-    "metaDetail": "For students born abroad, whatever their status now.",
+    "metaDetail": "For students born abroad.",
     "eligibility": {
       "grades": [
         "12"
@@ -29522,7 +29522,7 @@
     "category": "Academic",
     "audience": "First-year University Studies students at Keyano",
     "description": "One award of $500 for any first-year student enrolled in University Studies at Keyano, selected on academic success and financial need.",
-    "metaDetail": "No condition beyond being in first-year University Studies.",
+    "metaDetail": "First-year University Studies, no other bar.",
     "eligibility": {
       "grades": [
         "12"
@@ -29603,7 +29603,7 @@
     "category": "Indigenous",
     "audience": "Indigenous women in academic upgrading at Keyano",
     "description": "One award of $1,600 for a female Indigenous student enrolled full time and in good standing in the Academic Upgrading programme at Keyano, scored on academic achievement, with preference to students demonstrating financial need.",
-    "metaDetail": "Upgrading rather than a credential programme.",
+    "metaDetail": "Upgrading rather than a credential.",
     "eligibility": {
       "grades": [
         "12"
@@ -29644,7 +29644,7 @@
     "category": "STEM",
     "audience": "Students entering environmental technology at Keyano",
     "description": "One award of $1,200 from ATCO for a student entering the Environmental Technology programme, judged on academic achievement and financial need, with preference to a student of Indigenous ancestry although all students are encouraged to apply.",
-    "metaDetail": "For students entering the programme, not continuing.",
+    "metaDetail": "For students entering, not continuing.",
     "eligibility": {
       "grades": [
         "12"
@@ -29728,7 +29728,7 @@
     "category": "STEM",
     "audience": "Environmental technology students with volunteer experience",
     "description": "One award of $1,000 for a full-time Environmental Technology student with demonstrated community involvement, with priority given to involvement in the environmental sector specifically. A letterhead volunteer reference is required.",
-    "metaDetail": "Environmental volunteering counts double here.",
+    "metaDetail": "Volunteering counts double.",
     "eligibility": {
       "grades": [
         "12"
@@ -29771,7 +29771,7 @@
     "category": "STEM",
     "audience": "First-year environmental studies students at Keyano",
     "description": "One award of $1,250 from Finning for a student enrolled in an environmental studies programme at Keyano. The booklet lists no academic or financial condition beyond enrolment.",
-    "metaDetail": "Enrolment appears to be the only stated condition.",
+    "metaDetail": "Enrolment seems the only condition.",
     "eligibility": {
       "grades": [
         "12"
@@ -29812,7 +29812,7 @@
     "category": "STEM",
     "audience": "Wood Buffalo residents in environmental technology at Keyano",
     "description": "Five awards of $1,000 from Imperial for students in year one or two of Environmental Technology who live in the Regional Municipality of Wood Buffalo or the surrounding Indigenous communities, including Clearwater River Reserve and La Loche. Preference goes to local Indigenous applicants, then to local non-Indigenous applicants.",
-    "metaDetail": "Five awards, and the catchment crosses into Saskatchewan.",
+    "metaDetail": "Catchment crosses into Sask.",
     "eligibility": {
       "grades": [
         "12"
@@ -29896,7 +29896,7 @@
     "category": "Trades",
     "audience": "Power engineering students at Keyano with financial need",
     "description": "An award from the Wood Buffalo Community Foundation for a student in any year of Power Engineering at Keyano, selected on financial need alone. You need to maintain satisfactory standing, defined as a 1.70 GPA.",
-    "metaDetail": "Decided purely on need, above a 1.70 GPA floor.",
+    "metaDetail": "Purely on need, above a 1.70 GPA.",
     "eligibility": {
       "grades": [
         "12"
@@ -29937,7 +29937,7 @@
     "category": "Indigenous",
     "audience": "Indigenous power engineering students at Keyano",
     "description": "One award of $1,000 funded by Syncrude for an Indigenous student in the Power Engineering or Process Operations programme, judged on community involvement and academic success.",
-    "metaDetail": "Process Operations counts as well as Power Engineering.",
+    "metaDetail": "Process Operations counts too.",
     "eligibility": {
       "grades": [
         "12"
@@ -30023,7 +30023,7 @@
     "category": "Indigenous",
     "audience": "Indigenous power engineering students at Keyano",
     "description": "One award of $1,000 for an Indigenous student in any year of Power Engineering, judged on community involvement and academic success, with preference to those living and working in the Wood Buffalo region. A letterhead volunteer reference is required.",
-    "metaDetail": "The Indigenous half of a paired Spartan award.",
+    "metaDetail": "The Indigenous half of a paired award.",
     "eligibility": {
       "grades": [
         "12"
@@ -30109,7 +30109,7 @@
     "category": "Trades",
     "audience": "Power engineering and process operator students at Keyano",
     "description": "Five awards of $1,100 funded by Syncrude for students in Power Engineering or Process Operations, based on academic achievement and financial need. Five recipients makes it the deepest pool of money attached to the trades at Keyano.",
-    "metaDetail": "Five awards, the deepest trades pool at Keyano.",
+    "metaDetail": "Keyano's deepest trades pool.",
     "eligibility": {
       "grades": [
         "12"
@@ -30398,7 +30398,7 @@
     "category": "STEM",
     "audience": "Permanent Fort McMurray residents entering engineering at Keyano",
     "description": "One award of $1,000 from the Oil Sands Branch of the Canadian Institute of Mining and Metallurgy for a first-year Bachelor of Science in Engineering student who is a permanent resident of Fort McMurray. Proof of residency and a letterhead volunteer reference are both required.",
-    "metaDetail": "Permanent Fort McMurray residency must be proven.",
+    "metaDetail": "Permanent Fort McMurray residency proven.",
     "eligibility": {
       "grades": [
         "12"
@@ -30441,7 +30441,7 @@
     "category": "STEM",
     "audience": "Recent local graduates entering engineering at Keyano",
     "description": "One award of $1,300 for a recent local high school graduate in the first year of the Bachelor of Science in Engineering programme, based on financial need and academic achievement.",
-    "metaDetail": "Written for a recent local high school graduate.",
+    "metaDetail": "Written for a recent local graduate.",
     "eligibility": {
       "grades": [
         "12"
@@ -30523,7 +30523,7 @@
     "category": "STEM",
     "audience": "First-year engineering students at Keyano",
     "description": "One award of $1,400 from WorleyCord for a first-year Bachelor of Science in Engineering student, selected on academic standing and financial need.",
-    "metaDetail": "The largest of Keyano's first-year engineering awards.",
+    "metaDetail": "Keyano's largest first-year engineering award.",
     "eligibility": {
       "grades": [
         "12"
@@ -30687,7 +30687,7 @@
     "category": "Community",
     "audience": "Fort McMurray graduates entering equine and animal science fields",
     "description": "One award of $500 from the Clearwater Horse Club for a grade 12 student eligible for a high school diploma. Equine studies come first, then animal science, veterinary and agriculture, and finally any Alberta post-secondary programme at all. Recipients are scored on a four point scale and ties are settled by drawing names.",
-    "metaDetail": "A four-point score, with ties broken by a name draw.",
+    "metaDetail": "A four-point score, ties broken by draw.",
     "eligibility": {
       "grades": [
         "12"
@@ -30802,7 +30802,7 @@
     "category": "Academic",
     "audience": "Alberta students entering Northwestern Polytechnic with an 80 per cent average",
     "description": "One award of $1,000 for an Alberta resident entering post-secondary study immediately after high school with an 80 per cent average in grade 12, carrying a full course load and holding satisfactory standing through the fall semester.",
-    "metaDetail": "An 80 per cent average and a full course load.",
+    "metaDetail": "80 per cent and a full course load.",
     "eligibility": {
       "grades": [
         "12"
@@ -31072,7 +31072,7 @@
     "category": "General",
     "audience": "Northwestern Polytechnic students with demonstrated financial need",
     "description": "One bursary of $300 for a student with demonstrated need, entering or in any later year of study. Academic upgrading and foundational learning students are named as students who should also be considered.",
-    "metaDetail": "Upgrading and foundational learners are named in it.",
+    "metaDetail": "Upgrading and foundational learners qualify.",
     "eligibility": {
       "grades": [
         "12"
@@ -31110,7 +31110,7 @@
     "category": "Academic",
     "audience": "Students entering business at Northwestern Polytechnic with the top high school average",
     "description": "Two entrance awards of $1,000 for students admitted to the Business Administration programme with the highest high school averages. Where possible, one of the two goes to an Indigenous student.",
-    "metaDetail": "Decided on your high school average alone.",
+    "metaDetail": "High school average alone.",
     "eligibility": {
       "grades": [
         "12"
@@ -31150,7 +31150,7 @@
     "category": "STEM",
     "audience": "Students entering veterinary technology at Northwestern Polytechnic",
     "description": "Two entrance scholarships of $500 for students entering the Veterinary Technology programme, awarded on academic achievement.",
-    "metaDetail": "Two awards for entering veterinary technology students.",
+    "metaDetail": "Two awards for veterinary technology entrants.",
     "eligibility": {
       "grades": [
         "12"
@@ -31190,7 +31190,7 @@
     "category": "Arts",
     "audience": "Students entering visual arts or fine arts at Northwestern Polytechnic",
     "description": "Two scholarships of $1,500 from Pattison Media for students entering Visual Arts, or Fine Arts with a visual art focus. At $1,500 apiece these are the largest entrance awards in the arts at the polytechnic.",
-    "metaDetail": "The largest entrance award in the arts at NWP.",
+    "metaDetail": "The largest arts entrance award at NWP.",
     "eligibility": {
       "grades": [
         "12"
@@ -31231,7 +31231,7 @@
     "category": "Arts",
     "audience": "First-year visual and fine arts students at Northwestern Polytechnic",
     "description": "One award of $275 from the Art Gallery of Grande Prairie for a first-year Visual Arts or Fine Arts student who is continuing full time the following year. Selection weighs academics, portfolio, relevant experience, education and career goals together.",
-    "metaDetail": "Portfolio counts alongside marks and career goals.",
+    "metaDetail": "Portfolio counts alongside marks and goals.",
     "eligibility": {
       "grades": [
         "12"
@@ -31312,7 +31312,7 @@
     "category": "Sports",
     "audience": "First-year kinesiology and recreation students at Northwestern Polytechnic",
     "description": "One bursary of $300 for a first-year student in kinesiology, personal training, recreation, sport and tourism or a related programme. Consideration goes to service to fellow students in athletics and recreation alongside a commitment to studies.",
-    "metaDetail": "Service to other students is what it rewards.",
+    "metaDetail": "Service to other students is rewarded.",
     "eligibility": {
       "grades": [
         "12"
@@ -31548,7 +31548,7 @@
     "category": "STEM",
     "audience": "Nurses entering orthopedic nursing in northwestern Alberta",
     "description": "A bursary from the Grande Prairie Regional Hospital Foundation for nurses working in, or wanting to move into, orthopedic nursing that benefits the Grande Prairie Regional Hospital and other health care providers in northwestern Alberta. The board decides how many to award each year.",
-    "metaDetail": "Orthopedic nursing specifically, not nursing generally.",
+    "metaDetail": "Orthopedic nursing specifically.",
     "eligibility": {
       "grades": [
         "12"
@@ -32067,7 +32067,7 @@
     "category": "Academic",
     "audience": "Children of Elk Island teachers entering education",
     "description": "Two annual scholarships from the Elk Island local of the Alberta Teachers' Association for a child of an Elk Island teacher accepted into a Faculty of Education, with a high level of achievement. If nobody qualifies it opens to the child of any teacher, and then to any grade 12 student accepted into education.",
-    "metaDetail": "A three-tier cascade starting with teachers' children.",
+    "metaDetail": "Starts with teachers' children.",
     "eligibility": {
       "grades": [
         "12"
@@ -32228,7 +32228,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Strathcona's largest school award goes to a student who has done well in athletics and the visual arts at the same time, while keeping up their academic work. Leadership, sportsmanship and character all count, and the school gives particular attention to a candidate who has overcome adversity or risen to a challenge.",
-    "metaDetail": "The rare award that wants an athlete and an artist.",
+    "metaDetail": "Wants an athlete and an artist at once.",
     "eligibility": {
       "grades": [
         "10",
@@ -32315,7 +32315,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Presented since 1949 for outstanding service and leadership to Strathcona through extracurricular activities. The candidate must be in grade 12 and have contributed for at least two years, with her contributions judged on organization, delegation and what she actually built for the school community.",
-    "metaDetail": "Two years of service, judged on what you built.",
+    "metaDetail": "Two years of service is the bar.",
     "eligibility": {
       "grades": [
         "12"
@@ -32357,7 +32357,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Established in 1952 in honour of Charlie Scarborough, who left Strathcona to enlist in 1914 and returned to teach mathematics there. It recognizes outstanding service and leadership through extracurricular activities across at least two years of high school.",
-    "metaDetail": "The male twin of the Griesdorf Trophy, same terms.",
+    "metaDetail": "The male twin of the Griesdorf Trophy.",
     "eligibility": {
       "grades": [
         "12"
@@ -32399,7 +32399,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The largest school award in Edmonton, funded by an alumnus in honour of Elwyn Probert, a mathematics teacher who went on to become principal at Eastglen. It goes to the top mathematics student, judged on first-attempt marks in Math 30-1 and Math 31, who enrols in mathematics, engineering or science with a mathematics major.",
-    "metaDetail": "First-attempt marks only, and a math major required.",
+    "metaDetail": "First-attempt marks only.",
     "eligibility": {
       "grades": [
         "12"
@@ -32653,7 +32653,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Four awards of $500 for Jasper Place students enrolled in the school's Off-Campus Career Development program, either through Work Experience or the Registered Apprenticeship Program, who are going on to post-secondary study.",
-    "metaDetail": "Four awards, and only RAP or Work Experience count.",
+    "metaDetail": "Only RAP or Work Experience.",
     "eligibility": {
       "grades": [
         "12"
@@ -33023,7 +33023,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "An annual award for a student finishing high school with excellent academic standing who has also proven to be a leader in at least two other fields of endeavour.",
-    "metaDetail": "Strong marks plus leadership in two other areas.",
+    "metaDetail": "Marks plus leadership.",
     "eligibility": {
       "grades": [
         "12"
@@ -33065,7 +33065,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Austin O'Brien's legacy award for a student who has completed three years of music at a high level of performance and has actively supported the various parts of the music and performing arts program.",
-    "metaDetail": "Three full years in the program is the gate.",
+    "metaDetail": "Three full years in the program.",
     "eligibility": {
       "grades": [
         "12"
@@ -33276,7 +33276,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Paid from the interest on an in-trust fund, this goes to a student taking grade 12 subjects for the first time with at least 28 credits. English 30-1 plus the four highest of Physics 30, Chemistry 30, Biology 30, Science 30, Social Studies 30-1, Math 30-1, Math 31 or a grade 12 language are what get counted.",
-    "metaDetail": "Your best four sciences and maths, plus English 30-1.",
+    "metaDetail": "Your best four sciences and maths, plus English.",
     "eligibility": {
       "grades": [
         "12"
@@ -33477,7 +33477,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Okotoks Eyecare pays $750 to the student with the highest overall average across Biology 30, Chemistry 30 and Physics 30, on proof of acceptance into a post-secondary program.",
-    "metaDetail": "All three sciences, and Math 30-1 breaks a tie.",
+    "metaDetail": "Math 30-1 breaks a tie.",
     "eligibility": {
       "grades": [
         "12"
@@ -33557,7 +33557,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Okotoks and District Senior Club pays $500 to the student holding the third highest average across English 30, Social Studies 30, a 30 level mathematics and a 30 level science, who is attending post-secondary that same year.",
-    "metaDetail": "Third place is the target, and the money cannot wait.",
+    "metaDetail": "Third place is the target, and it pays fast.",
     "eligibility": {
       "grades": [
         "12"
@@ -33597,7 +33597,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "For the graduate with the highest average across English 30-1, one of Social Studies 30-1, Social Studies 30-2 or French 30, and one of Biology 30, Chemistry 30, Physics 30 or Science 30, with an average above 80 per cent and at least 28 credits in the graduating year.",
-    "metaDetail": "A three-subject average, with choices inside two of them.",
+    "metaDetail": "A three-subject average, with some choice.",
     "eligibility": {
       "grades": [
         "12"
@@ -33637,7 +33637,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Western Wheel, Okotoks' local paper, pays $250 to a grade 12 student in English 30-1 or 30-2 who is interested in journalism, has shown growth and initiative in it, and has contributed to the school newspaper or newsletter.",
-    "metaDetail": "Contributing to the school paper is the qualification.",
+    "metaDetail": "Contributing to the school paper qualifies you.",
     "eligibility": {
       "grades": [
         "12"
@@ -33679,7 +33679,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Windmill Theatre Players give $300 to the graduating student who has made the greatest contribution to the development of the drama program and has been involved in staging a drama production.",
-    "metaDetail": "Building the program counts, not just performing in it.",
+    "metaDetail": "Building the program counts, not just acting.",
     "eligibility": {
       "grades": [
         "12"
@@ -34053,7 +34053,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Okotoks Legion offers two scholarships to graduating students from either Foothills Composite or Holy Trinity Academy who have been accepted into a recognised professional, technological, trade or other approved programme starting within a year of graduation.",
-    "metaDetail": "Open to both Okotoks high schools, not just one.",
+    "metaDetail": "Open to both Okotoks high schools.",
     "eligibility": {
       "grades": [
         "12"
@@ -34179,7 +34179,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Offered with Sheep River Agencies, this $500 award recognises a student seeking further education who has overcome adversity, financial hardship or family difficulty, or has shown outstanding school and community spirit, or has demonstrated inspirational conduct such as an act of heroism or leadership in a crisis.",
-    "metaDetail": "Any one of its three routes qualifies you.",
+    "metaDetail": "Any one of three routes qualifies.",
     "eligibility": {
       "grades": [
         "12"
@@ -34261,7 +34261,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Funded by the Sheep River Health Trust, this $500 bursary needs an average of 85 per cent or better in two of Biology 30, Chemistry 30 and Physics 30, enrolment in a post-secondary science programme, and a plan to enter a professional science career.",
-    "metaDetail": "Two sciences at 85, plus a healthy lifestyle clause.",
+    "metaDetail": "Two sciences at 85, plus a lifestyle clause.",
     "eligibility": {
       "grades": [
         "12"
@@ -34383,7 +34383,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "English Elm and Gord's Running Store award gift cards of $200, $100, $50 and $50 to the highest placed male and female finishers who represented Foothills Composite at the Provincial Cross-Country Championships.",
-    "metaDetail": "Paid in gift cards, and both genders get four each.",
+    "metaDetail": "Paid in gift cards.",
     "eligibility": {
       "grades": [
         "10",
@@ -34511,7 +34511,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "NAPA gives a toolbox to a graduating student of the Automotives Intermediate and Advanced program who has an excellent attendance and punctuality record, is dependable, shows initiative in shop work and has a positive attitude to the industry.",
-    "metaDetail": "Attendance and punctuality are named criteria.",
+    "metaDetail": "Attendance and punctuality are criteria.",
     "eligibility": {
       "grades": [
         "12"
@@ -34595,7 +34595,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The local Chevrolet dealership pays $300 to a graduating student with 25 credits in the automotive area and a final Advanced Automotives Theory mark of 80 per cent or better, who shows leadership, deals well with the public and has an excellent attendance record.",
-    "metaDetail": "Needs 25 automotive credits and an 80 in theory.",
+    "metaDetail": "Needs 25 automotive credits and 80 in theory.",
     "eligibility": {
       "grades": [
         "12"
@@ -34721,7 +34721,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "LeDuc Developments pays $500 to a student with 100 high school credits who is entering an apprenticeship or a related institutional programme such as Welding Technology at SAIT, and who shows good attendance, cooperation, diligence and the ability to work alone and with others.",
-    "metaDetail": "Requires 100 credits and a place in the trade.",
+    "metaDetail": "Requires 100 credits and a trade place.",
     "eligibility": {
       "grades": [
         "12"
@@ -34763,7 +34763,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The High River Rotary Club pays $500 to a graduating student with first class standing in Fabrication Studies who is heading into the mechanical trades and has shown involvement in shop based community projects and in the community itself, in the Rotary spirit of service above self.",
-    "metaDetail": "Community projects out of the shop are the differentiator.",
+    "metaDetail": "Community projects out of the shop decide it.",
     "eligibility": {
       "grades": [
         "12"
@@ -34893,7 +34893,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "A $1,000 credit against tuition at the Academy of Learning in High River for a graduating student with ability in secretarial arts or accounting courses, success in Information Processing, Financial Management or Computer Processing, good academic standing, financial need and extracurricular involvement.",
-    "metaDetail": "Paid as tuition at one named college, not as cash.",
+    "metaDetail": "Paid as tuition at one named college.",
     "eligibility": {
       "grades": [
         "12"
@@ -34935,7 +34935,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Sobeys pays $500 to a student in the Business Education Program with average standing in Information Processing or Computer Programming, work experience in a commercial enterprise while attending school, regular attendance, good work habits and a grade 12 average of at least 60 per cent.",
-    "metaDetail": "A 60 per cent average and a part time job qualify you.",
+    "metaDetail": "A 60 per cent average and a part-time job.",
     "eligibility": {
       "grades": [
         "12"
@@ -35142,7 +35142,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "Friesens fund a $1,500 scholarship for a member of the yearbook committee. It may be given at any grade level, and may be split between more than one applicant.",
-    "metaDetail": "Any grade can win it, and joining the committee is the gate.",
+    "metaDetail": "Any grade can win; joining the committee is the gate.",
     "eligibility": {
       "grades": [
         "10",
@@ -35392,7 +35392,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Rotary Club of Cochrane funds one $5,000 bursary at each of the three Cochrane high schools every year. It is a grant based on clearly demonstrated financial need and satisfactory academic achievement rather than on academic excellence alone.",
-    "metaDetail": "The largest single award in Cochrane, and need-based.",
+    "metaDetail": "Cochrane's largest award, and need-based.",
     "eligibility": {
       "grades": [
         "12"
@@ -35434,7 +35434,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Kiwanis Club of Cochrane, with Bow Valley Credit Union, funds six $1,000 scholarships a year, two at each of Cochrane High, Bow Valley High and St. Timothy. They recognise outstanding leadership and a strong commitment to volunteering in the Cochrane community.",
-    "metaDetail": "Six awards, split two to each Cochrane high school.",
+    "metaDetail": "Six awards, two at each Cochrane school.",
     "eligibility": {
       "grades": [
         "12"
@@ -35840,7 +35840,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "West Fraser, the forestry company with a Cochrane operation, funds a career development scholarship awarded through the Cochrane High School application package.",
-    "metaDetail": "One of two West Fraser awards, so tick both boxes.",
+    "metaDetail": "One of two West Fraser awards; tick both.",
     "eligibility": {
       "grades": [
         "12"
@@ -35882,7 +35882,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The forestry-specific half of West Fraser's support at Cochrane High School, awarded through the same application package and aimed at students entering forestry or a related programme.",
-    "metaDetail": "The narrower West Fraser award, and less contested.",
+    "metaDetail": "The narrower West Fraser award.",
     "eligibility": {
       "grades": [
         "12"
@@ -36093,7 +36093,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "At least three scholarships of $10,000 each from the Rotary Club of Lethbridge East and Exhibition Park, for undergraduate or graduate students in agriculture or a related field who have already completed the equivalent of two full years, or 60 credit hours, of post-secondary study.",
-    "metaDetail": "The largest award in southern Alberta, and rarely contested.",
+    "metaDetail": "Large and rarely contested.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -36137,7 +36137,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "The YMCA of Lethbridge pays the full cost of the lifeguarding ladder for two applicants each year: Bronze Medallion, Bronze Cross, National Lifeguard, Pool and Waterpark certification, and Standard First Aid with CPR C. The package runs to roughly $1,800 a person.",
-    "metaDetail": "Pays for a qualification, and it leads to a job.",
+    "metaDetail": "Pays for a hiring qualification.",
     "eligibility": {
       "grades": [
         "10",
@@ -36219,7 +36219,7 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "The Catholic Women's League at St. Basil's parish gives $500 to a graduating Catholic Central High School student who has been actively involved in their faith community and has applied to a post-secondary institution.",
-    "metaDetail": "Parish involvement counts, not just school marks.",
+    "metaDetail": "Parish involvement counts.",
     "eligibility": {
       "grades": [
         "12"
@@ -36261,7 +36261,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "Each department in the Faculty of Fine Arts at the University of Lethbridge, meaning Art, Drama, Music and New Media, offers entrance scholarships worth at least $500. They are awarded on a portfolio and personal statement or on an audition, and are conditional on acceptance into the faculty.",
-    "metaDetail": "Four departments, each with its own award.",
+    "metaDetail": "Four departments, one award each.",
     "eligibility": {
       "grades": [
         "12"
@@ -36429,7 +36429,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $1,500 award for a recent high school graduate who had to move at least 100 kilometres from their hometown to attend Red Deer Polytechnic full time, in an undergraduate programme of at least two years.",
-    "metaDetail": "Distance from home is the qualifying condition.",
+    "metaDetail": "Distance from home is the condition.",
     "eligibility": {
       "grades": [
         "12"
@@ -36469,7 +36469,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $1,500 entrance scholarship for a recent high school graduate who is an Alberta resident, registered full time in an undergraduate programme of at least two years at Red Deer Polytechnic.",
-    "metaDetail": "Alberta Blue Cross funds one of these at each college.",
+    "metaDetail": "Alberta Blue Cross funds one at each college.",
     "eligibility": {
       "grades": [
         "12"
@@ -36509,7 +36509,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $1,500 bursary for a recent high school graduate entering Red Deer Polytechnic full time who, because of special needs, has to carry extra expenses to attend.",
-    "metaDetail": "For the costs disability adds, not for tuition alone.",
+    "metaDetail": "For costs disability adds, not tuition.",
     "eligibility": {
       "grades": [
         "12"
@@ -36549,7 +36549,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "EQUS funds a $750 award for a recent high school graduate entering the first year of the Bachelor of Business Administration, the Business Diploma or the Business Certificate at Red Deer Polytechnic.",
-    "metaDetail": "All three business credentials qualify, not just the degree.",
+    "metaDetail": "All three business credentials qualify.",
     "eligibility": {
       "grades": [
         "12"
@@ -36676,7 +36676,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $3,000 entrance award for a recent high school graduate starting full-time studies in the Bachelor of Science in Engineering at Red Deer Polytechnic, judged on academic achievement alone.",
-    "metaDetail": "Marks alone decide it, with no essay or reference.",
+    "metaDetail": "Marks alone; no essay or reference.",
     "eligibility": {
       "grades": [
         "12"
@@ -36760,7 +36760,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "Two awards of $1,000 for students entering their first year of full-time study at Red Deer Polytechnic, on academic achievement and demonstrated leadership through extracurricular activities and community participation.",
-    "metaDetail": "Extracurricular record carries as much as marks.",
+    "metaDetail": "Extracurriculars carry as much as marks.",
     "eligibility": {
       "grades": [
         "12"
@@ -36802,7 +36802,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $1,500 bursary for a recent high school graduate entering the first year of the Practical Nurse programme at Red Deer Polytechnic full time, awarded on financial need.",
-    "metaDetail": "Financial need is the only stated criterion.",
+    "metaDetail": "Financial need is the only criterion.",
     "eligibility": {
       "grades": [
         "12"
@@ -36884,7 +36884,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $1,000 entrance award for a student starting the Early Learning and Childcare Certificate programme at Red Deer Polytechnic, on academic achievement and financial need.",
-    "metaDetail": "A certificate programme with its own entrance award.",
+    "metaDetail": "A certificate with its own award.",
     "eligibility": {
       "grades": [
         "12"
@@ -36924,7 +36924,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $1,000 entrance award for a student starting the Educational Assistant programme at Red Deer Polytechnic, on academic achievement and financial need.",
-    "metaDetail": "The twin of the early learning entrance award.",
+    "metaDetail": "Twin of the early learning award.",
     "eligibility": {
       "grades": [
         "12"
@@ -36964,7 +36964,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $450 award for a student entering the first year of the Red Deer Polytechnic Academic Upgrading programme full time who can show clearly defined career goals, awarded on financial need.",
-    "metaDetail": "For upgrading students, who rarely get their own award.",
+    "metaDetail": "For upgrading students, who rarely get one.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -37004,7 +37004,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "Two bursaries of $1,000 for students entering the first year of Academic Upgrading at Red Deer Polytechnic full time, with preference for those serving or honourably discharged from the Canadian Forces, or single parents.",
-    "metaDetail": "Preference for Forces members and single parents.",
+    "metaDetail": "Forces preferred.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -37044,7 +37044,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "Three bursaries of $1,600 from the Red Deer Advocate for students entering Academic Upgrading or Open Studies at Red Deer Polytechnic, who can show evidence of career planning and goal setting, awarded on financial need.",
-    "metaDetail": "Three awards, aimed at people coming back to school.",
+    "metaDetail": "Aimed at people returning.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -37084,7 +37084,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "Two awards of $3,000 for students entering full-time studies at Red Deer Polytechnic who graduated from Confluence Campus in Rocky Mountain House, meaning West Central High School or St. Dominic High School, with preference for mature students.",
-    "metaDetail": "Restricted to two Rocky Mountain House schools.",
+    "metaDetail": "Mature students 22 and up get preference.",
     "eligibility": {
       "grades": [
         "12"
@@ -37127,7 +37127,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "Two awards of $3,000 for students entering full-time studies at Red Deer Polytechnic who graduated from Confluence Campus in Rocky Mountain House, meaning West Central High School or St. Dominic High School, with preference for mature students.",
-    "metaDetail": "Restricted to two Rocky Mountain House schools.",
+    "metaDetail": "One General Application covers it.",
     "eligibility": {
       "grades": [
         "12"
@@ -37170,7 +37170,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "The Community Foundation of Central Alberta funds this in memory of Rex Turple, who played for the Red Deer Rustlers and coached in Scotland, England and Austria. It goes to post-secondary students who are part of a team in Alberta's Heritage Junior Hockey League.",
-    "metaDetail": "Playing junior hockey is the qualification.",
+    "metaDetail": "Junior hockey qualifies.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -37210,7 +37210,7 @@
     "applyViaGuidance": false,
     "active": true,
     "description": "A $1,000 award, given annually to a Central Alberta resident enrolled in or planning to enrol in a post-secondary programme focused on human resources management.",
-    "metaDetail": "A named field almost nothing else funds.",
+    "metaDetail": "A field almost nothing else funds.",
     "eligibility": {
       "grades": [
         "12",
@@ -37749,7 +37749,7 @@
     "applyViaGuidance": true,
     "notes": "Volunteering outside the school is what the committee weighs most heavily, alongside marks, financial need and extra-curricular involvement. Forms come from the Success Centre and go by email to the club secretary, and you have to show proof of registration before the money is released.",
     "description": "Two bursaries the Chinook Kiwanis give each year to Robert Thirsk graduates who have served their wider community, not only their school.",
-    "metaDetail": "Robert Thirsk students only, two awards.",
+    "metaDetail": "Robert Thirsk students only.",
     "eligibility": {
       "grades": [
         "12"
@@ -37832,7 +37832,7 @@
     ],
     "notes": "The geography is set by where your parent lives, not your school: anywhere south of and including Airdrie qualifies, which the foundation spells out as reaching Lethbridge and Medicine Hat, while families north of Airdrie are refused. Children of work permit holders may apply. The application instructions on the same page still carry dates from an older cycle, so confirm the July close by email before relying on it.",
     "description": "The Calgary Korean Scholarship Foundation reserves this one for high school students, judged on talent in music, art or sport rather than on marks.",
-    "metaDetail": "The only CKSF award open before university.",
+    "metaDetail": "CKSF's only pre-university award.",
     "eligibility": {
       "grades": [
         "11",
@@ -37873,7 +37873,7 @@
     "region": "Alberta",
     "notes": "A September deadline is unusual and it works in a graduate’s favour: you apply after you have your acceptance, with a confirmation of enrolment letter attached. Open to First Nations status and non-status, Métis and Inuit applicants alike. The society posts only the previous cycle’s form, so email ccspe.scholarship@calgary.ca to confirm this year’s date.",
     "description": "One award from the City of Calgary Society of Professional Engineers, decided on a 500-word essay about why STEM interests you and how your actions have affected your community.",
-    "metaDetail": "Closes in September, after acceptances land.",
+    "metaDetail": "Closes in September.",
     "eligibility": {
       "grades": [
         "12"
@@ -38067,7 +38067,7 @@
     "applyViaGuidance": true,
     "notes": "You must have completed every high school grade at École Olds, not merely graduated from it, which rules out a transfer in grade 12. The form goes to the school office rather than to the province, and the school then has until September 30 to nominate, so ask the office for its own earlier cutoff.",
     "description": "Two provincial awards reserved for graduates of one school in Olds, decided on extra-curricular involvement and achievement in mathematics and science.",
-    "metaDetail": "All four years at the school, not just grade 12.",
+    "metaDetail": "All four years at the school.",
     "eligibility": {
       "grades": [
         "12"
@@ -38335,7 +38335,7 @@
     "region": "Alberta",
     "notes": "Forty awards, and unlike its two sister scholarships this one is not restricted to women: it is open to any student whose gender is underrepresented or disadvantaged in their field, which is how men in nursing-adjacent and care fields have qualified. Graduate students may study outside Alberta; undergraduates must be at an Alberta institution.",
     "description": "Named for the 1929 ruling that made women legally persons in Canada, this $2,500 award goes to students working to advance gender equality in the arts, humanities and social sciences.",
-    "metaDetail": "Not restricted to women, unlike its siblings.",
+    "metaDetail": "Not restricted to women.",
     "eligibility": {
       "grades": [
         "12"
@@ -38598,7 +38598,7 @@
     "region": "National",
     "notes": "Two awards a year, and the first-time condition means this one is aimed squarely at graduating students rather than at players already partway through a degree. Elite here means AA, or the highest level offered where you live, so a small community is not penalised for having no AA team. Applications go to the Ringette Canada office.",
     "description": "Funded by a former World Ringette Championship captain, this award pairs academic excellence with play at the top level your community offers.",
-    "metaDetail": "Only for a first year at university.",
+    "metaDetail": "First university year only.",
     "eligibility": {
       "grades": [
         "12"
@@ -38637,7 +38637,7 @@
     "region": "National",
     "notes": "Coaches and officials qualify alongside players, which is unusual and useful: refereeing or coaching a younger division counts as commitment to the sport here. Ringette Canada’s board decides how many are given in a year, so the number is not fixed. Named for the widow of the sport’s founder, who spent decades promoting it.",
     "description": "Ringette Canada gives a variable number of $1,000 awards to people who have shown a strong commitment to the sport, whichever side of the boards they are on.",
-    "metaDetail": "Coaches and referees count, not only players.",
+    "metaDetail": "Coaches and referees count too.",
     "eligibility": {
       "grades": [
         "12"
@@ -38826,7 +38826,7 @@
     "region": "Alberta",
     "notes": "Six awards in two streams, and the streams have different gates. Three entrance scholarships go to students whose parent teaches in the division, and those can be used in any faculty anywhere. The other three go to any Livingstone Range graduate enrolled in a Faculty of Education. The entrance stream is first year only, so it is now or never.",
     "description": "The teachers of the Livingstone Range division, covering Claresholm, Pincher Creek and the Crowsnest Pass, fund six of these a year out of their own local.",
-    "metaDetail": "Two streams, six awards, one autumn deadline.",
+    "metaDetail": "Two streams of awards.",
     "eligibility": {
       "grades": [
         "12"
@@ -39748,7 +39748,7 @@
     "region": "Alberta",
     "notes": "You do not apply for this one, someone nominates you, and the nomination form takes about twenty minutes. That is worth knowing early because it means telling an instructor or a supervisor at the arena or pool you work at that the award exists. Any year of study counts, including your first, and you do not need to be an AARFP member. Note that several aggregator sites still list this at $750, which is the old value. The association's own awards page says $1,500, and the same page carries the February 15 nomination deadline that applies to every award they hand out.",
     "description": "A $1,500 nominated award from the Alberta Association of Recreation Facility Personnel for students in recognized recreation services operation programs.",
-    "metaDetail": "Nomination-based, and membership is not required.",
+    "metaDetail": "Nomination-based; membership not required.",
     "eligibility": {
       "grades": [
         "12"
@@ -39829,7 +39829,7 @@
     "region": "National",
     "notes": "This is the highest ratio of money to effort in the corpus: 750 words in French, and 100 scholarships are handed out from a pool of $388,000. Two categories keep the field fair, so immersion and Core French students compete as French Second Language and are not measured against students who speak French at home. You can enter in grade 10, 11 or 12, which means a grade 10 student can enter three times. The scholarship is tied to studying wholly or partly in French at one of 15 partner institutions, so check that list before you write. Registration runs October 14 to December 18 and the theme changes every year.",
     "description": "A 750-word essay in French for grade 10 to 12 students, with 100 scholarships worth $1,000 to $28,000 shared out of a $388,000 pool at 15 partner universities and colleges.",
-    "metaDetail": "Immersion students compete in their own category.",
+    "metaDetail": "Immersion students have own category.",
     "eligibility": {
       "grades": [
         "10",
@@ -39872,7 +39872,7 @@
     "region": "National",
     "notes": "Worth checking whether a parent or grandparent is in AUPE, because AUPE is a NUPGE component and that makes you eligible for a national award almost nobody in Alberta applies for. Foster children of members count too, which is unusual and worth knowing. It is decided on a 750 to 1,000 word essay about how Tommy Douglas made Canada a more just and equitable society, so it rewards writing rather than marks. You have to be entering the first year of a Canadian public post-secondary institution full time.",
     "description": "One of about five $1,500 scholarships the National Union of Public and General Employees awards each year to the children, grandchildren and foster children of its members, decided by essay.",
-    "metaDetail": "AUPE membership in the family makes you eligible.",
+    "metaDetail": "AUPE family qualifies.",
     "eligibility": {
       "grades": [
         "12"
@@ -39911,7 +39911,7 @@
     "region": "National",
     "notes": "Two filters have to line up, and when they do the field is very small: you have a disability, and a parent, grandparent or foster parent belongs to a NUPGE component union, which in Alberta usually means AUPE. The essay is 750 to 1,000 words on why quality public services matter to the quality of life of people with disabilities, so lived experience is the point rather than a disadvantage. Not to be confused with the Terry Fox Humanitarian Award, which is a separate and much larger national program with no union requirement.",
     "description": "A $1,500 award for students with disabilities entering first year whose parent, grandparent or foster parent belongs to a NUPGE member union, decided on an essay about public services.",
-    "metaDetail": "A disability award with a union-family requirement.",
+    "metaDetail": "A disability award, union family only.",
     "eligibility": {
       "grades": [
         "12"
@@ -39989,7 +39989,7 @@
     "region": "Alberta",
     "notes": "This is an endowment program, not a single scholarship. The Métis Education Foundation and Rupertsland Institute have negotiated endowments at 22 Alberta institutions including the University of Alberta, University of Calgary, University of Lethbridge, NAIT, SAIT, MacEwan, Mount Royal, Athabasca, Bow Valley, Concordia, Keyano, King's, Lakeland, Lethbridge College, Medicine Hat College, NorQuest, Northern Lakes, Northwestern Polytechnic, Olds, Portage and Red Deer Polytechnic. Each institution administers its own award, sets its own criteria and its own deadline, so apply directly to the school you are attending and ask their awards office. The University of Calgary runs a separate entrance stream, which is the one to look at if you are coming straight out of grade 12. The October 15 deadline here is for the two awards the Foundation holds itself, which are open to Métis citizens at institutions where no endowment exists. You must be a citizen of the Otipemisiwak Métis Government, a registered member of the Otipemisiwak Métis Student Association, enrolled full time and an Alberta resident, and you cannot be receiving other Rupertsland funding.",
     "description": "Métis Education Foundation endowments at 22 Alberta post-secondary institutions, each administered by the school, plus two awards the Foundation holds for students elsewhere.",
-    "metaDetail": "The University of Calgary runs an entrance stream.",
+    "metaDetail": "Calgary runs an entrance stream.",
     "eligibility": {
       "grades": [
         "12"
@@ -40028,7 +40028,7 @@
     "region": "National",
     "notes": "A small charity award decided on a single essay of 1,000 to 1,500 words, on your definition of the Modern Métis Woman, how your Métis heritage has affected you personally, or any topic you choose that relates to Métis women. Only one award is given each year, so the field is small but so is the prize pool, and the amount is not published. You are eligible if you will be attending university, not only if you already are, so a grade 12 student heading to first year can apply. You must be a Canadian citizen, enrolled full time at a minimum of three courses a semester, and identify as both a woman and Métis. Essays are checked for plagiarism. Submissions go by email.",
     "description": "A yearly essay award for self-identified Métis women heading to or already at a Canadian or US university, decided on a 1,000 to 1,500 word essay.",
-    "metaDetail": "Open to students who will be attending, not only those enrolled.",
+    "metaDetail": "Not only current students.",
     "eligibility": {
       "grades": [
         "12"
@@ -40067,7 +40067,7 @@
     "region": "National",
     "notes": "One award a year, administered by the Arctic Institute of North America at the University of Calgary but open to Indigenous students across Canada. It honours James W. Bourque, who was Cree and Métis, born at Wandering River in Alberta, and who founded the Fur Institute of Canada and was sworn into the Privy Council in 1992. Grade 12 students can apply: the application asks for your most recent transcript from college, university or high school, and accepts proof of application to a post-secondary institution rather than proof of enrolment. You need a cover letter, a 500-word description of your intended program, a recommendation from a community leader such as a band or town council, chamber of commerce or Métis local, a statement of financial need, and proof of Indigenous descent. Applications went in by July 8 in the 2026 cycle. The committee weighs financial need heavily.",
     "description": "A $1,000 award for Indigenous students across Canada entering education, environmental studies, Indigenous knowledge or telecommunications, accepting high school transcripts.",
-    "metaDetail": "Proof of application counts, not just enrolment.",
+    "metaDetail": "Proof of application is enough.",
     "eligibility": {
       "grades": [
         "12"
@@ -40111,7 +40111,7 @@
     "region": "National",
     "notes": "Three awards of $10,000, one for each of the three groups: Indigenous students, students with a disability, and newcomers who have been in Canada less than five years. CEGEP students receive $5,000. This is strictly an entrance award and BioTalent says so plainly: students beyond first year or in non-biosciences programs are screened out. Eligible programs are broad and include biotechnology, biochemistry, health sciences, environmental biology and biomedical programs, so anything that leads into the bioeconomy is worth checking. Because it splits three ways by category rather than pooling everyone, the odds are much better than a general national scholarship. You need your acceptance letter. Canadian citizens, permanent residents and newcomers already in Canada qualify, but international students on a visa do not. Applications in the 2026 cycle closed June 8.",
     "description": "Three $10,000 awards, one each for Indigenous students, students with a disability and newcomers, for students entering first year of a biosciences program.",
-    "metaDetail": "First year only, and one award per category.",
+    "metaDetail": "First year, one per category.",
     "eligibility": {
       "grades": [
         "12"
@@ -40191,7 +40191,7 @@
     "region": "National",
     "notes": "Run by the Indigenous Pharmacy Professionals of Canada with the Canadian Pharmacists Association. The route worth knowing about from grade 12 is the pharmacy technician stream, funded by the Sobeys National Pharmacy Group at $10,000, because a pharmacy technician diploma is a college program you can enter straight out of high school. The two PharmD scholarships are worth $20,000 a year and matter later, since PharmD programs in Canada generally want undergraduate study first. Being accepted counts, not just being enrolled, so you can apply on an acceptance letter. You must provide verification of ancestry such as a status card, a parent's status card with proof of relationship, or a Métis citizenship card, and you must be a member of IPPC. The application needs a letter of intent of up to 500 words or a three-minute video, plus a reference letter from someone outside your household. Recipients meet annually with IPPC and the sponsor. The 2026 to 2027 cycle has closed.",
     "description": "Pharmacy awards for First Nations, Métis and Inuit students worth $10,000 for pharmacy technician studies and $20,000 a year for PharmD, open on acceptance.",
-    "metaDetail": "The technician stream is reachable from grade 12.",
+    "metaDetail": "The technician stream is open from Grade 12.",
     "eligibility": {
       "grades": [
         "12"
@@ -40291,7 +40291,7 @@
       "extracurriculars": []
     },
     "notes": "The medical bar is specific: a documented hearing loss of 50dB or greater in each ear, not just one. Like the Rutherford, this is applied for once you are enrolled rather than while you are still in Grade 12, so a graduating student applies in the year they start post-secondary. It is not a token programme: Canadian Hearing Services awarded 29 scholarships for the 2025-26 year, to both first-time and returning students, and the money can go to tuition, residence or accessibility services rather than tuition alone. The 2026 round closed April 24 and notified winners in July; the 2027 dates were not posted when this was checked, so expect a late-April deadline and confirm. Applicants must be 17 or older. Re-verified against chs.ca on 2026-09-08.",
-    "metaDetail": "Renewable at the same level for up to four years."
+    "metaDetail": "Renewable."
   },
   {
     "id": 1062,
@@ -40326,7 +40326,7 @@
       "extracurriculars": []
     },
     "notes": "Employment at a Burger King restaurant is not required for the general track. The 2025 cycle ran October 15 to December 15 and the program describes its 2026 details as tentative, so treat the autumn window as the shape to watch rather than a confirmed date. Awards can be used at an accredited college, university or vocational school in Canada or the United States.",
-    "metaDetail": "A 2.0 average clears the academic bar, which is unusually low."
+    "metaDetail": "A 2.0 average is enough."
   },
   {
     "id": 1063,
@@ -40365,7 +40365,7 @@
       "extracurriculars": []
     },
     "notes": "There are two deadlines, and missing the first ends it: a pre-application closes March 15 and is not accessible after that date, and only applicants judged eligible are invited to the full application by April 15. Both close at 5 PM Mountain Time, which is Alberta time for once. The project must be one you initiated, not a school assignment.",
-    "metaDetail": "A pre-application closes March 15, a month before the deadline."
+    "metaDetail": "Pre-application closes March 15."
   },
   {
     "id": 1064,
@@ -40377,7 +40377,7 @@
     "region": "National",
     "description": "A $5,000 entrance award from the Canadian Engineering Memorial Foundation for a young woman entering an accredited Canadian engineering program from high school. It also carries a potential paid summer engineering work placement with Fortis at one of their Canadian utilities after second or third year.",
     "notes": "The foundation states plainly that this award is not based on academic achievement, which makes it unusual among engineering entrance awards and worth applying for on a mid-range average. You must self-identify as a woman and hold Canadian citizenship or permanent residency.",
-    "metaDetail": "Explicitly not judged on marks, and carries a paid Fortis placement.",
+    "metaDetail": "Not judged on marks, and carries a paid Fortis placement.",
     "eligibility": {
       "grades": [
         "12"
@@ -40449,7 +40449,7 @@
     "region": "National",
     "description": "Two bursaries of $1,000, awarded through two intakes a year rather than one. Open to Canadian citizens and permanent residents who have spina bifida or hydrocephalus and hold a current SBHAC membership.",
     "notes": "There are two application windows a calendar year, closing at noon on the third Wednesday in July and the third Wednesday in November, but you can only receive one award per year. Membership must be in good standing before you apply, so join first rather than at the deadline.",
-    "metaDetail": "Two intakes a year: the third Wednesday of July and of November.",
+    "metaDetail": "Two intakes: the third Wednesday of July and November.",
     "eligibility": {
       "grades": [
         "12"
@@ -40591,7 +40591,7 @@
     "region": "National",
     "description": "Two $3,000 awards a year from the Canadian Centre for Occupational Health and Safety, for students in any occupational health and safety course or program leading to a certificate, diploma or degree. Full-time and part-time students are both eligible.",
     "notes": "You apply once you are enrolled rather than in Grade 12, so this is one to note now and act on in your first term. It takes a 1,000 to 1,200 word essay and a cover letter. CCOHS runs a second award on the same page, the Chad Bradley Scholarship, open to women in the same field.",
-    "metaDetail": "Applied for once enrolled, not from Grade 12.",
+    "metaDetail": "Applied for once enrolled, not in Grade 12.",
     "eligibility": {
       "grades": [
         "12"
@@ -40629,7 +40629,7 @@
     "region": "National",
     "description": "A $750 award decided on a written personal story rather than marks. Applications open January 1 and close July 31, with the winner announced August 31. Past recipients are named publicly, which is a reasonable sign the money is actually paid.",
     "notes": "A summer deadline is rare and useful: this stays open through the months when almost every other award has closed. The application is a form plus your story, so it is one of the cheapest applications on the site in time.",
-    "metaDetail": "Still open through July, when most awards have closed.",
+    "metaDetail": "Still open through July, when most have closed.",
     "eligibility": {
       "grades": [
         "12"
@@ -40665,7 +40665,7 @@
     "region": "National",
     "description": "A $500 essay award run by an Alberta energy comparison site, with winners named publicly every year since 2022. Essays are submitted as Word, RTF or PDF documents.",
     "notes": "The cutoff is 11:59 PM MST, which is Alberta time, so unlike most national awards there is no timezone arithmetic to get wrong.",
-    "metaDetail": "Closes 11:59 PM Mountain, which is Alberta time.",
+    "metaDetail": "Closes 11:59 Mountain.",
     "eligibility": {
       "grades": [
         "12"
@@ -40701,7 +40701,7 @@
     "region": "National",
     "description": "A $500 award open to student athletes regardless of sport or the capacity in which they take part, so coaches, officials and team managers are not excluded. The application is an essay about how your participation has shaped you.",
     "notes": "The organisation states that AI-generated essays will not be accepted. Recipients are named each year. A June deadline puts it after most of the spring rush.",
-    "metaDetail": "Any sport, any role, and a June deadline.",
+    "metaDetail": "Any sport or role.",
     "eligibility": {
       "grades": [
         "12"
@@ -40987,7 +40987,7 @@
     "region": "National",
     "description": "The United Steelworkers awards 22 scholarships of $1,500 each year to members and children of members who are heading into post-secondary education.",
     "notes": "Open to a USW member or the child of a member in good standing who is 25 or younger. The application is a form plus either a three-minute video or a 250-word written statement, in English or French, on one of four set topics. The 22 awards are split across USW Districts 3, 5 and 6 and the national locals; District 3 covers Western Canada including Alberta. You cannot win more than twice. The 2026 cycle closed June 30, 2026 and the date has held to June 30 in recent years, but confirm on the USW page before relying on it. Verified against usw.ca on 2026-09-08.",
-    "metaDetail": "22 awards of $1,500 for USW members and their children.",
+    "metaDetail": "22 awards for USW members and their children.",
     "eligibility": {
       "grades": [
         "12"
@@ -41824,7 +41824,7 @@
     "region": "National",
     "description": "Up to $5,000 a year toward post-secondary education for children of Canadian Forces members who died while serving on an active mission since January 2002.",
     "notes": "Narrow by design and worth knowing exists. Eligibility covers children of Regular Force or Reserve Force members who died on duty in an active role on a Canadian Forces mission since January 2002. There is no annual deadline; applications are accepted on a rolling basis, and a program representative contacts every applicant to discuss next steps rather than simply screening them out. Read the Terms of Reference before applying, and expect to authorize the Canadian Armed Forces to confirm eligibility. Funding covers post-secondary and post-graduate study. The eligibility hotline is 1-800-883-6094. A separate charity, the Canadian Hero Fund, covers similar ground for children and spouses and is listed here too, so check both. Verified against canadacompany.ca on 2026-09-08.",
-    "metaDetail": "No deadline; applications are accepted on a rolling basis.",
+    "metaDetail": "No deadline; applications are rolling.",
     "eligibility": {
       "grades": [
         "12"
@@ -41930,7 +41930,7 @@
     "region": "National",
     "description": "Seven grants of $5,000 from the CIM Foundation for First Nations, Inuit and Métis students pursuing a career in mining, and one of the few national awards that takes high school applicants outright.",
     "notes": "Formally the Brian and Harold Keevil Endowment Taking Flight Grants. Seven grants of $5,000 a year, open to Indigenous students in high school as well as post-secondary, from across Canada, studying at a Canadian school toward a career in mineral extraction or processing. Recipients are judged on community involvement and demonstrated commitment to the mining industry. The CIM Foundation's wider scholarship list is otherwise almost entirely undergraduate and graduate, so this grant is the door in for a Grade 12 student. The deadline is October 30 and a 2026 submission form is posted, so this one is live and close: confirm with the CIM Foundation before counting on the date. Recipients are announced by December 31. Verified against cim.org and cimfoundation.ca on 2026-09-08.",
-    "metaDetail": "One of few national awards open to high school applicants.",
+    "metaDetail": "One of few national awards open in Grade 12.",
     "eligibility": {
       "grades": [
         "10",
@@ -42238,7 +42238,7 @@
     "region": "National",
     "description": "Pays up to 80 per cent of tuition and books for up to four years, to a total of $50,000, for the children of Canadian police and peace officers slain in the line of duty.",
     "notes": "By total value this is the largest award listed on this site. It covers up to but no more than 80 per cent of tuition and books per year, for no more than four years, capped at $50,000 overall, and it pays for tuition and textbooks only, toward an undergraduate degree or diploma at an approved Canadian post-secondary institution. Any child of a Canadian police or peace officer slain in the line of duty may apply, including a child born outside marriage and an adopted child. Applicants must be between 18 and 26 at the time of applying, though the Society will consider a first-time applicant over 27 case by case, and it also considers support for elementary, middle and high school costs on the same basis. You need evidence of the parent's line-of-duty death; the governing definition sits in the Society's by-laws. Run by the Police and Peace Officers' Memorial Ribbon Society. No deadline is published, so contact the Scholarship Advisory Council rather than waiting for a date to appear. Verified against memorialribbon.org on 2026-09-08.",
-    "metaDetail": "Covers 80 per cent of tuition and books for four years.",
+    "metaDetail": "Covers 80 per cent of tuition for four years.",
     "eligibility": {
       "grades": [
         "12"
@@ -42310,7 +42310,7 @@
     "region": "National",
     "description": "An award from the Pipe Line Contractors Association of Canada for the sons, daughters and wards of people whose principal income comes from the pipeline construction industry.",
     "notes": "Directly relevant in Alberta, where pipeline construction employs a lot of parents, and it has helped more than 400 students since 1974. Two conditions do the work: your parent or guardian must draw their principal income from the pipeline construction industry, AND that parent must be employed by, or have a history of employment with, a company that is a member of the PLCAC, so check the association's membership directory before you spend time on the form. Your own program can lead to a diploma or degree in ANY field at a recognized Canadian college or university, and post-graduate students are considered too. The PLCAC does not publish the award value, so none is claimed here. The 2026 window runs September 17 to October 19, 2026. Contact plcac@pipeline.ca or 905-847-9383. Verified against pipeline.ca on 2026-09-08.",
-    "metaDetail": "Check the PLCAC member directory before you apply.",
+    "metaDetail": "Check the PLCAC member directory first.",
     "eligibility": {
       "grades": [
         "12"
