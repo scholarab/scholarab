@@ -1,3 +1,4 @@
+import MatchingReview from './MatchingReview';
 import { useState, useEffect, type ComponentProps } from 'react';
 import { Toaster, toast } from 'sonner';
 import ScholarshipManager from './ScholarshipManager';
@@ -13,7 +14,7 @@ interface User {
 
 interface Props {
   user: User;
-  page: 'scholarships' | 'programs' | 'analytics';
+  page: 'scholarships' | 'programs' | 'analytics' | 'matching';
   data: string;
 }
 
@@ -88,7 +89,10 @@ export default function AdminShell({ user, page, data }: Props) {
   try {
     parsedData = JSON.parse(data);
   } catch {
-    parsedData = page === 'analytics' ? { error: true } : {items:[],total:0,counts:{},page:0,pageSize:25};
+    parsedData =
+      page === 'analytics'
+        ? { error: true }
+        : { items: [], total: 0, counts: {}, page: 0, pageSize: 25 };
   }
 
   return (
@@ -110,6 +114,9 @@ export default function AdminShell({ user, page, data }: Props) {
         </div>
 
         <nav className="flex flex-col gap-1 flex-1">
+          <a href="/admin/matching" className="px-3 py-2 text-sm">
+            Matching coverage
+          </a>
           <a
             href="/admin/scholarships"
             className={`px-3 py-2 rounded-lg text-sm transition ${page === 'scholarships' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white hover:bg-white/5'}`}
@@ -198,7 +205,9 @@ export default function AdminShell({ user, page, data }: Props) {
       )}
       {/* Main content */}
       <main className="ml-56 flex-1 p-8">
-        {page === 'scholarships' ? (
+        {page === 'matching' ? (
+          <MatchingReview />
+        ) : page === 'scholarships' ? (
           <ScholarshipManager
             initialData={parsedData as ComponentProps<typeof ScholarshipManager>['initialData']}
           />

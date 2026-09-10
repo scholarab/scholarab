@@ -1,11 +1,13 @@
 // Zod schemas for the admin CRUD routes. Create and Update share the same
 // field definitions; Update loosens the required fields and drops defaults
 // (an omitted boolean on PUT must not overwrite the stored value).
-import { z } from 'zod'
-import { strictEligibilitySchema as eligibilitySchema } from './eligibility-types'
-import { httpsUrl } from './validators'
+import { z } from 'zod';
+import { strictEligibilitySchema as eligibilitySchema } from './eligibility-types';
+import { matchingSchema } from './matching/schema';
+import { httpsUrl } from './validators';
 
 const scholarshipOptionalFields = {
+  matching: matchingSchema.optional().nullable(),
   deadline: z.string().max(50).optional().nullable(),
   openDate: z.string().max(50).optional().nullable(),
   audience: z.string().max(5000).optional().nullable(),
@@ -14,7 +16,7 @@ const scholarshipOptionalFields = {
   region: z.string().max(100).optional().nullable(),
   notes: z.string().max(5000).optional().nullable(),
   eligibility: eligibilitySchema.optional().nullable(),
-}
+};
 
 export const scholarshipCreateSchema = z.object({
   title: z.string().min(1).max(500),
@@ -23,7 +25,7 @@ export const scholarshipCreateSchema = z.object({
   applyViaGuidance: z.boolean().default(false),
   active: z.boolean().default(true),
   ...scholarshipOptionalFields,
-})
+});
 
 export const scholarshipUpdateSchema = z.object({
   title: z.string().min(1).max(500).optional(),
@@ -32,9 +34,10 @@ export const scholarshipUpdateSchema = z.object({
   applyViaGuidance: z.boolean().optional(),
   active: z.boolean().optional(),
   ...scholarshipOptionalFields,
-})
+});
 
 const programOptionalFields = {
+  matching: matchingSchema.optional().nullable(),
   emoji: z.string().max(10).optional().nullable(),
   category: z.string().max(100).optional().nullable(),
   provider: z.string().max(200).optional().nullable(),
@@ -46,7 +49,7 @@ const programOptionalFields = {
   deadline: z.string().max(50).optional().nullable(),
   description: z.string().max(5000).optional().nullable(),
   lastVerified: z.string().max(50).optional().nullable(),
-}
+};
 
 export const programCreateSchema = z.object({
   name: z.string().min(1).max(500),
@@ -54,7 +57,7 @@ export const programCreateSchema = z.object({
   paid: z.boolean().default(false),
   active: z.boolean().default(true),
   ...programOptionalFields,
-})
+});
 
 export const programUpdateSchema = z.object({
   name: z.string().min(1).max(500).optional(),
@@ -62,4 +65,4 @@ export const programUpdateSchema = z.object({
   paid: z.boolean().optional(),
   active: z.boolean().optional(),
   ...programOptionalFields,
-})
+});

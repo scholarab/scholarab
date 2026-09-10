@@ -1,3 +1,4 @@
+import { assertIdentitySets } from '../src/lib/matching/catalogue.ts';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { quizPayload } from '../src/lib/quiz-payload.ts';
 import { eligibilitySchema } from '../src/lib/eligibility-types.ts';
@@ -11,4 +12,6 @@ const scholarships = JSON.parse(readFileSync('src/data/scholarships.json', 'utf8
 const programs = JSON.parse(readFileSync('src/data/research-programs.json', 'utf8')).map(
   (p: Program) => ({ ...p, active: p.active !== false })
 ) as Program[];
-writeFileSync('src/data/quiz-payload.json', JSON.stringify(quizPayload(scholarships, programs)));
+const payload=quizPayload(scholarships,programs);
+assertIdentitySets([...scholarships.map(s=>'scholarship:'+s.id),...programs.map(p=>'program:'+p.id)],[...payload.scholarships.map(s=>'scholarship:'+s.id),...payload.programs.map(p=>'program:'+p.id)],'Current quiz payload');
+writeFileSync('src/data/quiz-payload.json', JSON.stringify(payload));

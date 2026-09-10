@@ -72,6 +72,11 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx tsx scripts/sync-db.ts
 
+      - name: Reconcile complete matching catalogue
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm run matching:audit-db
+
       # These five steps are `npm run ci` unrolled, so each gets its own line in
       # the GitHub UI. Keep the two in sync: the script exists so a local run
       # can be the same gate as this job, and the scripts typecheck below is

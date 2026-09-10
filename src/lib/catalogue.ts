@@ -1,3 +1,4 @@
+import { matchingSchema } from './matching/schema';
 /** Shared, environment-independent publication model. IDs are public JSON IDs. */
 export type CatalogueKind = 'scholarship' | 'program';
 export type Document = Record<string, unknown> & { id: number };
@@ -59,6 +60,7 @@ export function validateCatalogue(raw: unknown, kind: CatalogueKind): Document[]
     } catch {
       throw new Error(`${kind} ${row.id}: invalid provider URL`);
     }
+    if (row.matching != null) matchingSchema.parse(row.matching);
     if ('open_date' in row) throw new Error(`${kind} ${row.id}: use openDate`);
     ids.add(row.id);
     return row as Document;

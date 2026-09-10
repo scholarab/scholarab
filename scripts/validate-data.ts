@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { matchingSchema } from '../src/lib/matching/schema.ts';
 import { readFileSync, readdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -648,4 +649,9 @@ if (dupTitles.length) {
 }
 
 if (failed) process.exit(1);
+
+
+// New matching contracts must be validated before sync or publication.
+for (const row of [...scholarships, ...programs]) if (row.matching != null) matchingSchema.parse(row.matching);
+
 console.log(`validate-data: OK (${scholarships.length} scholarships, ${programs.length} programs, ${rules.length} redirects)`);
