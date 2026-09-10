@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-const legacy = process.env.MATCHING_QUIZ_VARIANT === 'legacy';
+// Mirrors src/pages/match.astro: the beta is opt-in, so anything that is not
+// an explicit adaptive build serves the established quiz.
+const legacy = process.env.MATCHING_QUIZ_VARIANT !== 'adaptive';
 
 // Run against each corresponding build. This checks the entire handoff,
 // including the destination's interpretation of the stored answer values.

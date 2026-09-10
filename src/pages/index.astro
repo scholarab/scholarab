@@ -9,7 +9,7 @@ import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 import { programIsListed } from '../lib/status';
 import { SCHOLARSHIP_FACETS, facetForCategory } from '../lib/facets';
-import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
+import { TEASER_KEYS, teaserOptions, ADAPTIVE_QUIZ } from '../lib/quiz';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -97,7 +97,7 @@ const cityFacets = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region').map(f => 
 
 // Follow the same build variant as /match so a rollback cannot leave the
 // homepage seeding answers the destination does not understand.
-const adaptive = import.meta.env.MATCHING_QUIZ_VARIANT !== 'legacy';
+const adaptive = ADAPTIVE_QUIZ;
 const legacyLabels: Record<string, string> = {
   grade: 'YOUR GRADE', city: 'YOUR REGION', field: "YOU'RE INTO",
 };

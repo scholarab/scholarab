@@ -316,3 +316,15 @@ export const QUIZ_DURATION = '30 seconds';
 
 /** One sentence, for anywhere that needs the whole claim at once. */
 export const QUIZ_PROMISE = `${QUIZ_QUESTION_WORD} questions, ${QUIZ_DURATION}. No account, no email.`;
+
+/**
+ * Which quiz a build serves. The redesigned experience is opt-in: only an
+ * explicit MATCHING_QUIZ_VARIANT=adaptive build ships it, so a plain build
+ * and any other value serve the established quiz.
+ *
+ * It lives here because /match/ and the homepage teaser both need it and both
+ * used to spell the check out themselves. They drifted the moment the default
+ * changed: the teaser kept handing adaptive-shaped answers to a legacy quiz.
+ * One export, imported twice, cannot disagree with itself.
+ */
+export const ADAPTIVE_QUIZ = import.meta.env.MATCHING_QUIZ_VARIANT === 'adaptive';
