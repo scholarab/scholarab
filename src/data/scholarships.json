@@ -189,7 +189,104 @@
     "alsoOpenTo": [
       "Lloydminster"
     ],
-    "notes": "Alberta Student Aid names Lloydminster as a border community: all students living there are eligible, whether the Alberta side or the Saskatchewan side, provided they attend Holy Rosary High School or Lloydminster Comprehensive High School. Your courses still have to line up with the Alberta curriculum, so ask about your transcript early."
+    "notes": "Alberta Student Aid names Lloydminster as a border community: all students living there are eligible, whether the Alberta side or the Saskatchewan side, provided they attend Holy Rosary High School or Lloydminster Comprehensive High School. Your courses still have to line up with the Alberta curriculum, so ask about your transcript early.",
+    "matching": {
+      "root": "requirements",
+      "groups": [
+        {
+          "id": "requirements",
+          "children": [
+            "rutherford-legal-status",
+            "rutherford-residence",
+            "rutherford-study-and-transcript"
+          ],
+          "operator": "all"
+        }
+      ],
+      "version": 1,
+      "coverage": "partial",
+      "availability": {
+        "cycle": null,
+        "method": "application",
+        "timing": "unpublished",
+        "opensOn": null,
+        "closesOn": null,
+        "evidence": {
+          "status": "reviewed",
+          "excerpt": "Apply when official high-school marks are available and full-time post-secondary enrollment has begun.",
+          "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+          "verifiedAt": "2026-09-09"
+        },
+        "timezone": "America/Edmonton"
+      },
+      "requirements": [
+        {
+          "id": "rutherford-legal-status",
+          "basis": "legal-status",
+          "field": "citizenship",
+          "evidence": {
+            "status": "reviewed",
+            "excerpt": "Canadian citizens, permanent residents and protected persons may qualify; visa students do not.",
+            "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+            "verifiedAt": "2026-09-09"
+          },
+          "answerKey": "rutherford-legal-status",
+          "condition": {
+            "values": [
+              "Canadian citizen",
+              "Permanent resident",
+              "Protected person"
+            ],
+            "operator": "oneOf"
+          },
+          "importance": "mandatory",
+          "explanation": "Canadian citizens, permanent residents and protected persons may qualify; visa students do not.",
+          "referenceDate": null
+        },
+        {
+          "id": "rutherford-residence",
+          "field": "manual",
+          "evidence": {
+            "status": "reviewed",
+            "excerpt": "Residence duration and family alternatives need provider verification.",
+            "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+            "verifiedAt": "2026-09-09"
+          },
+          "answerKey": "rutherford-residence",
+          "condition": {
+            "text": "Check the applicant or parent/guardian residence alternatives and residence during each claimed high-school grade.",
+            "operator": "manual"
+          },
+          "importance": "mandatory",
+          "explanation": "Residence duration and family alternatives need provider verification.",
+          "referenceDate": null
+        },
+        {
+          "id": "rutherford-study-and-transcript",
+          "field": "manual",
+          "evidence": {
+            "status": "reviewed",
+            "excerpt": "The provider must assess the transcript, study program and remaining application conditions.",
+            "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+            "verifiedAt": "2026-09-09"
+          },
+          "answerKey": "rutherford-study-and-transcript",
+          "condition": {
+            "text": "Check designated course averages, transcript and graduation timing, eligible full-time undergraduate or apprenticeship enrollment, valid SIN, and the once-only award restriction. Graduate and specified professional programs are excluded.",
+            "operator": "manual"
+          },
+          "importance": "mandatory",
+          "explanation": "The provider must assess the transcript, study program and remaining application conditions.",
+          "referenceDate": null
+        }
+      ],
+      "coverageEvidence": {
+        "status": "reviewed",
+        "excerpt": "Supported criteria checked; remaining provider conditions require manual verification.",
+        "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+        "verifiedAt": "2026-09-09"
+      }
+    }
   },
   {
     "id": 16,

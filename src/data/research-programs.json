@@ -610,9 +610,103 @@
     "eligibility": "Students aged 13–18 worldwide",
     "deadline": "2026-09-15",
     "url": "https://breakthroughjuniorchallenge.org/enter",
-    "description": "Global science and math research competition. Students research a complex concept in life sciences, physics, or mathematics and translate that research into an engaging explanatory video (max 3 min). Grand prize includes a $250,000 scholarship.",
+    "description": "Global science and math research competition. Students research a complex concept in life sciences, physics, or mathematics and translate that research into an engaging explanatory video (max 2 min for the 2026 competition). Grand prize includes a $250,000 scholarship.",
     "metaDescription": "Explain a hard science or maths concept in a video under 3 minutes. The grand prize includes a $250,000 scholarship.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "matching": {
+      "root": "requirements",
+      "groups": [
+        {
+          "id": "requirements",
+          "children": [
+            "breakthrough-2026-min-age",
+            "breakthrough-2026-max-age",
+            "breakthrough-entry-checks"
+          ],
+          "operator": "all"
+        }
+      ],
+      "version": 1,
+      "coverage": "partial",
+      "availability": {
+        "cycle": "2026",
+        "method": "application",
+        "timing": "dated",
+        "opensOn": "2026-05-11",
+        "closesOn": "2026-09-15",
+        "evidence": {
+          "status": "reviewed",
+          "excerpt": "2026 entries run May 11 through September 15; the provider specifies Pacific closing times.",
+          "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+          "verifiedAt": "2026-09-09"
+        },
+        "timezone": "America/Los_Angeles"
+      },
+      "requirements": [
+        {
+          "id": "breakthrough-2026-min-age",
+          "basis": "age-at-provider-reference",
+          "field": "age",
+          "evidence": {
+            "status": "reviewed",
+            "excerpt": "You must be at least 13 on May 11, 2026 (Pacific time).",
+            "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+            "verifiedAt": "2026-09-09"
+          },
+          "answerKey": "breakthrough-2026-min-age",
+          "condition": {
+            "value": 13,
+            "operator": "minimum"
+          },
+          "importance": "mandatory",
+          "explanation": "You must be at least 13 on May 11, 2026 (Pacific time).",
+          "referenceDate": "2026-05-11"
+        },
+        {
+          "id": "breakthrough-2026-max-age",
+          "basis": "age-at-provider-reference",
+          "field": "age",
+          "evidence": {
+            "status": "reviewed",
+            "excerpt": "You must still be 18 or younger on October 1, 2026 (Pacific time).",
+            "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+            "verifiedAt": "2026-09-09"
+          },
+          "answerKey": "breakthrough-2026-max-age",
+          "condition": {
+            "value": 18,
+            "operator": "maximum"
+          },
+          "importance": "mandatory",
+          "explanation": "You must still be 18 or younger on October 1, 2026 (Pacific time).",
+          "referenceDate": "2026-10-01"
+        },
+        {
+          "id": "breakthrough-entry-checks",
+          "field": "manual",
+          "evidence": {
+            "status": "reviewed",
+            "excerpt": "Other entry conditions need a manual check against the complete official rules.",
+            "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+            "verifiedAt": "2026-09-09"
+          },
+          "answerKey": "breakthrough-entry-checks",
+          "condition": {
+            "text": "Check guardian consent, entrant and conflict restrictions, lawful participation, original English video content, permissions, two-minute maximum, individual entry, and the required peer reviews. Provider terms and judging decisions also apply.",
+            "operator": "manual"
+          },
+          "importance": "mandatory",
+          "explanation": "Other entry conditions need a manual check against the complete official rules.",
+          "referenceDate": null
+        }
+      ],
+      "coverageEvidence": {
+        "status": "reviewed",
+        "excerpt": "Supported criteria checked; remaining provider conditions require manual verification.",
+        "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+        "verifiedAt": "2026-09-09"
+      }
+    }
   },
   {
     "id": 45,
