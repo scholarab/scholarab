@@ -157,16 +157,26 @@ test('expiry clears answers; students can explicitly extend before expiration', 
     'Expiry Test'
   );
 });
-test('a verified fixture supports refinement, explicit opt-in and declining without a loop', async ({
-  page,
-}) => {
-  // Local network fixture only: complete real catalogue, one synthetic rule.
+async function installRefinementFixture(page: Page, withSchoolQuestion = false) {
+  await page.clock.install({ time: new Date('2026-09-10T12:00:00Z') });
+  // Local network fixture only: complete identity set, controlled policy rules.
+  // Published Breakthrough age rules are legitimate nonpersonal questions.
+  // They must not silently change this test of a single personal opt-in rule.
   // Pin its hash in the test HTML so the real integrity boundary still runs.
   const core = parseClientCatalogue(
     JSON.parse(readFileSync(`public/matching/core.${meta.coreHash}.json`, 'utf8')),
     meta.catalogueHash
   );
+  for (const item of core.opportunities) {
+    item.matching.coverage = 'partial';
+    for (const requirement of item.matching.requirements)
+      requirement.evidence.status = 'legacy-unreviewed';
+  }
   const o = core.opportunities.find((o) => o.key === 'scholarship:14')!;
+  o.applyViaGuidance = false;
+  o.active = true;
+  o.legacyDeadline = null;
+  o.legacyOpenDate = null;
   const rule = {
     id: 'test-identity',
     field: 'identity' as const,
@@ -182,8 +192,19 @@ test('a verified fixture supports refinement, explicit opt-in and declining with
       verifiedAt: '2026-01-01',
     },
   };
-  o.matching.requirements = [rule];
-  o.matching.groups = [{ id: 'test-root', operator: 'all', children: [rule.id] }];
+  const schoolRule = {
+    ...rule,
+    id: 'test-school',
+    field: 'school' as const,
+    answerKey: 'test.school',
+    basis: 'current-school',
+    condition: { operator: 'oneOf' as const, values: ['Synthetic school'] },
+    explanation: 'Synthetic school criterion for automated testing only.',
+  };
+  o.matching.requirements = withSchoolQuestion ? [rule, schoolRule] : [rule];
+  o.matching.groups = [{
+    id: 'test-root', operator: 'all', children: o.matching.requirements.map((r) => r.id),
+  }];
   o.matching.root = 'test-root';
   const body = JSON.stringify(encodeClientCatalogue(core)),
     hash = createHash('sha256').update(body).digest('hex');
@@ -197,6 +218,13 @@ test('a verified fixture supports refinement, explicit opt-in and declining with
   await page.route('**/matching/core.*.json', (route) =>
     route.fulfill({ status: 200, contentType: 'application/json', body })
   );
+  return { rule, schoolRule };
+}
+
+test('a verified fixture supports refinement, explicit opt-in and declining without a loop', async ({
+  page,
+}) => {
+  const { rule } = await installRefinementFixture(page);
   await essentials(page);
   await expect(page.getByRole('button', { name: 'Check one more requirement' })).toBeDisabled();
   await page.getByLabel('Offer optional questions about personal eligibility topics').check();
@@ -204,6 +232,26 @@ test('a verified fixture supports refinement, explicit opt-in and declining with
   await expect(page.getByText(rule.explanation, { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Prefer not to answer' }).click();
   await expect(page.getByRole('button', { name: 'Check one more requirement' })).toBeDisabled();
+});
+
+test('declining a personal question preserves an unrelated question without repeating the declined one', async ({ page }) => {
+  const { rule, schoolRule } = await installRefinementFixture(page, true);
+  await essentials(page);
+  const next = page.getByRole('button', { name: 'Check one more requirement' });
+  // A nonpersonal question can be offered before personal opt-in.
+  await expect(next).toBeEnabled();
+  await page.getByLabel('Offer optional questions about personal eligibility topics').check();
+  await next.click();
+  await expect(page.getByText(rule.explanation, { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Prefer not to answer' }).click();
+  await expect(next).toBeEnabled();
+  await next.click();
+  await expect(page.getByText(schoolRule.explanation, { exact: true })).toBeVisible();
+  await expect(page.getByText(rule.explanation, { exact: true })).not.toBeVisible();
+  await page.getByRole('button', { name: 'Prefer not to answer' }).click();
+  await expect(next).toBeDisabled();
+  await page.reload();
+  await expect(next).toBeDisabled();
 });
 
 test('homepage essentials replace an earlier session and reach the new quiz', async ({ page }) => {
