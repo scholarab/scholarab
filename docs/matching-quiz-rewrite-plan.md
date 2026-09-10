@@ -146,6 +146,48 @@ Use the existing canonical catalogue and draft publication flow for new fields. 
 
 Create a repeatable coverage report and editor queue for unsupported rules, contradictions, missing reference dates, stale evidence, and uncertain availability. Prioritize frequently viewed/saved opportunities and near-term deadlines, then cover the remaining catalogue. Every record must either have supported reviewed requirements or an explicit visible unresolved state; full manual re-verification is not a prerequisite for representing the catalogue safely.
 
+### Mandatory connection to the complete database catalogue
+
+**Every scholarship and every program must have an explicit, traceable catalogue identity and matching disposition.** The quiz must not use a manually selected subset, a separate hand-maintained list, the first page of the admin API, or a fixed maximum number of records.
+
+The connection uses the existing canonical `(kind, public_id)` key. For example, `scholarship:20` and `program:20` are different opportunities. Titles, array positions, and legacy database primary keys are not matching identities. The same key connects requirements, source evidence, result cards, detail-page links, saves, application progress, reminders, and analytics.
+
+```mermaid
+flowchart TD
+    A[Canonical database catalogue: scholarships and programs] --> B[Reviewed draft publication]
+    B --> C[Versioned committed catalogue snapshot]
+    C --> D[Complete matching manifest and generated assets]
+    D --> E[Browser evaluates every published opportunity]
+    E --> F[Explained results and availability groups]
+    F --> G[Detail pages, saves, application steps and reminders]
+```
+
+The diagram describes the admin publication path. Reviewed repository edits can also update the committed catalogue; existing sync mirrors those published records into the canonical database. Both paths must converge on the same public IDs and published content. Database drafts remain separate until publication succeeds.
+
+#### Coverage rules
+
+1. Every canonical database record is accounted for as published, draft-only, or archived/tombstoned. Every legacy scholarship/program row must map to a canonical public identity or appear in an explicit reconciliation report. The eight previously identified unmatched legacy scholarships must be reviewed and either restored with valid public identities or explicitly retained as archived historical records; do not silently discard them or expose them merely to inflate coverage.
+2. Every published scholarship and program appears exactly once in the generated matching manifest and core evaluation input. This includes closed, future, rolling, undated, and incomplete-criteria opportunities. Publication status controls whether content is public; application availability controls its display group, not whether it is connected.
+3. Draft-only/new records appear in an authenticated admin matching preview so editors can test their rules before publication. Public clients receive published content only. Archived/deleted records remain traceable through identity/tombstone handling and have no active recommendation; an existing saved reference gets an explicit unavailable state or approved redirect.
+4. Every rule on every record is either supported and evaluated or explicitly unresolved with a manual-check explanation. Programs use the same requirement engine as scholarships, with program-specific fields where necessary; they cannot fall back to a grade/keyword-only shortcut.
+5. Every published opportunity receives an eligibility result and availability state for every student profile, including a reason when it is not recommended. Selecting “scholarships” or “programs,” sorting, and paging only affect presentation. The initial five cards never restrict evaluation coverage. All non-excluded results remain reachable; known-ineligible items have an inspectable explanation.
+6. New listings, edits, renames, and approved removals propagate automatically through publication, snapshot generation, deployment, and manifest verification. Adding a listing does not require editing the quiz code. A genuinely new rule type enters the review queue and stays visibly unresolved until supported.
+7. Public assets contain only allowlisted listing/rule/evidence fields. They never contain credentials, draft material, subscriber information, internal editorial notes, or student answers. Browser code does not connect directly to Neon or use database credentials.
+
+#### Manifest, reconciliation, and release gates
+
+Generate a manifest with schema version, catalogue content hash/publication identifier, counts by kind, and a unique entry for each `(kind, public_id)` with record hash and availability. Rules and display/evidence assets must agree with that manifest version.
+
+Compare **exact ID sets and per-record hashes**, not just counts: a missing record and a duplicate must not cancel each other out. Required equalities are published snapshot IDs = matching manifest IDs = normalized engine-input IDs, separately for scholarships and programs. Detail routes and saved/reminder lookups must resolve those same IDs; differing app behavior by availability must be intentional and tested.
+
+Reconcile the canonical database's published snapshot against the corresponding committed/deployed version. During an in-flight publication, report queued/committed/live versions separately instead of comparing different versions as if they were one or claiming an unfinished deployment is current. Genuine unexplained drift blocks publication completion and enters the editor/operations report.
+
+Current baseline: 1,078 published scholarships plus 129 published programs, or 1,207 matching identities. These counts are assertions for the inspected snapshot only; derive expected IDs from the full catalogue on every build so future additions are included automatically.
+
+Fail generation/build for missing IDs, duplicates, invalid identities, missing required core assets, or unreported normalization failures. Incomplete eligibility does not remove a record: emit an unresolved assessment and coverage warning. Add integration cases for create, edit, rename, delete/archive, restoration, more than 1,000 records, identical numeric IDs across kinds, unknown rules, and stale asset versions.
+
+The admin coverage view must show published/connected counts for both kinds, draft-preview coverage, explicit archived records, missing mappings, and unresolved-rule counts. **100% connection is a release gate; 100% verified eligibility is a separate editorial metric and must never be implied by connectivity.**
+
 ## 6. Eligibility engine
 
 Build pure, deterministic modules separate from React:
@@ -222,7 +264,7 @@ Required checks:
 - Rule-level tests for interval boundaries, ALL/ANY logic, missing/declined answers, unsupported fields, stale sources, identity semantics, aliases, and Alberta/provider date boundaries.
 - Invariants: unknown never equals satisfied; adding a verified failed mandatory condition excludes the item; unrelated preferences cannot change eligibility; deterministic ordering; all non-excluded candidates remain discoverable.
 - Explicit regressions for the 167 age-restricted records, mark-band approximation, “another school,” mandatory institution requirements, secondary eligible cities, and active/openDate propagation.
-- Catalogue integration tests: every record normalizes or produces a reported unresolved condition; public IDs remain stable; new fields survive draft/edit/publish/sync and payload generation.
+- Catalogue integration tests: exact ID sets and record hashes reconcile across the published catalogue, manifest, and engine inputs for both kinds; every record normalizes or produces a reported unresolved condition; public IDs remain stable; new fields survive draft/edit/publish/sync and payload generation.
 - Component/browser tests: full initial journey, refine/back/edit, compare/save/remind handoff, homepage teaser, keyboard navigation, narrow screens, loading errors, session expiry, storage failure, and catalogue-version mismatch.
 - Privacy checks intercept requests and storage to confirm answer isolation and clearing semantics.
 - Performance checks include page, data, JavaScript, parsing, evaluation, and rendering. Record benchmark device/throttle/cache conditions; local timings are not field interaction metrics.
@@ -230,21 +272,23 @@ Required checks:
 
 Run two usability rounds with 5–8 participants each, representing different education stages and including uncertain plans. Use synthetic profiles where discussing real personal circumstances is unnecessary. Recruitment/contact requires separately authorized coordination. Automated checks and internal walkthroughs can proceed independently; if participant testing is unavailable, label the release a beta and leave human validation explicitly incomplete rather than declaring it passed.
 
-## 11. Delivery sequence
+## 11. Five implementation phases
 
-| Package | Work and deliverable | Dependencies | Completion gate | Planning effort |
-|---|---|---|---|---|
-| 1. Baseline and evaluation | Regenerate coverage, capture payload/JS timings, define profiles and initial reviewed judgments, inventory all teaser/storage consumers | None | Reproducible baseline and traceable failure cases | 2–3 focused days |
-| 2. Data semantics and editorial support | Versioned requirement/availability schema, aliases, legacy adapter, coverage report, source review controls in existing admin | 1 | All catalogue rows represented without silently inventing certainty; draft round-trip tests pass | 4–6 days |
-| 3. Engine and ordering | Pure evaluation, grouped rules, numeric intervals, availability, explanations, ranking | 2 plus initial judgments | Rule tests and reviewed cases pass; old/new differences classified | 4–6 days |
-| 4. Adaptive question/session model | Three essentials, optional selection, personal-topic opt-in, answer dependencies, session/teaser migration | 3 | No loops, invalid inherited answers, or personal-data network leakage | 2–4 days |
-| 5. Design and complete journey | Responsive essentials/results/refinement, cards, compare, evidence, all error/empty states, saved-workspace handoffs | Prototype can begin after 1; implementation depends on 3–4 | Complete desktop/mobile journey and accessibility walkthrough | 5–7 days |
-| 6. Validation and revision | Held-out evaluation, representative source review, usability rounds, performance tuning, copy/privacy/analytics review | 2–5 | Measurable release gates pass; human-testing status stated | 3–5 days plus recruitment |
-| 7. Rollout and cleanup | Preview, controlled beta, production switch, monitoring, rollback exercise, old-code removal after stability | 6 | Production smoke checks pass and no unresolved release blockers | 1–2 days plus observation |
+These five phases replace the previous seven work packages without dropping their scope. Each phase produces a reviewable deliverable and has an explicit exit gate.
 
-Approximate engineering effort: 21–33 focused days. Editorial source verification, independent review, and participant availability add calendar uncertainty; this is not a promise of a specific elapsed delivery date. Re-estimate after packages 1–2 using actual source ambiguity and coverage. Design prototyping and editorial review can overlap engine work; implementation dependencies remain explicit.
+| Phase | Scope and deliverables | Exit gate | Planning effort |
+|---|---|---|---|
+| **1. Complete catalogue connection and data foundation** | Inventory both database kinds and legacy mappings; establish the full-ID manifest/reconciliation checks; capture performance baseline; define evaluation profiles; introduce requirement/availability schema, aliases, legacy adapters, source evidence and admin review/preview tools | Every database row has an explicit disposition; every published record is connected exactly once; both kinds retain all required fields through draft → publish → matching generation; incomplete rules remain visible | 6–9 focused days |
+| **2. Trustworthy eligibility and recommendation engine** | Shared scholarship/program evaluator; mandatory/preference and ALL/ANY rules; age/date and mark-interval handling; normalized geography/school/institution checks; availability; explanations; deterministic ordering | Every published record is evaluated; no silent unsupported rules; reviewed rule cases pass; known contradictions cannot enter default recommendations; all plausible results remain discoverable | 4–6 days |
+| **3. Adaptive quiz, visual design and application journey** | Three essentials; useful optional follow-ups; personal-topic opt-in; session/teaser migration; responsive results and editable answers; evidence panels; comparison; existing save/application/calendar/reminder connections; all loading/error/empty states | Complete desktop/mobile journey works with the full catalogue; no question loops or personal-answer leakage; old saves remain valid; every result has an explanation and appropriate next action | 7–11 days |
+| **4. Full-catalogue verification and student testing** | Exact-ID/hash audits; held-out profile judgments; source review; lifecycle and browser tests; accessibility/privacy review; two usability rounds; performance tuning; refinement of confusing copy or ranking | 100% catalogue connectivity; zero known hard-rule violations or missing eligible cases in the curated release set; performance and interaction gates pass; human testing status explicitly recorded | 3–5 days plus recruitment/editorial coordination |
+| **5. Controlled launch, monitoring and handover** | Preview/beta; publication round-trip; authorized designated-recipient reminder test; production switch; live manifest verification; aggregate monitoring; rollback exercise; documentation and legacy-code removal after stability | Production connections and student actions verified; rollback ready; no unresolved release blockers; observation window completed before old engine removal | 1–2 days plus observation |
 
-Do not cut correctness, privacy, or source uncertainty handling to meet a date. If time becomes constrained, simplify comparison styling or defer optional polish while retaining the complete core journey and clearly reporting changed scope.
+Approximate engineering effort: **21–33 focused days**. Editorial source verification, independent review, and participant availability add calendar uncertainty. Re-estimate after phase 1 using actual source ambiguity and coverage. Design prototypes and editorial review can begin during phase 1; production UI integration depends on phase 2's stable contract, and launch depends on phase 4's gates.
+
+All five phases are required for completion. A phase is not complete merely because its screens or modules exist: its exit gate must pass. If participant testing cannot be arranged, use the explicitly labeled beta path described in section 10 and retain the outstanding human-validation work.
+
+Do not cut correctness, full-catalogue connection, privacy, or source uncertainty handling to meet a date. If time becomes constrained, simplify optional visual polish while retaining the complete core journey and clearly reporting changed scope.
 
 ## 12. Rollout and recovery
 
@@ -260,6 +304,6 @@ Do not cut correctness, privacy, or source uncertainty handling to meet a date. 
 
 Defaults chosen: preserve `/match/`; retain ScholarAB branding; three essentials before results; deterministic local matching; no account requirement; session-scoped personal answers; five initial recommendations plus all results; optional personal refinement; source-backed requirements; additive migration; existing publication and application tools.
 
-Engineering must settle the exact payload split and JavaScript budget from measured package-1 results. Editorial review must settle ambiguous provider requirements from sources, never from a guessed conversion. Design/usability review must validate whether result grouping and language are understood. User coordination is needed only for participant recruitment, external contact, and a designated live-email test; these dependencies do not block implementation or synthetic evaluation.
+Engineering must settle the exact payload split and JavaScript budget from measured phase-1 results. Editorial review must settle ambiguous provider requirements from sources, never from a guessed conversion. Design/usability review must validate whether result grouping and language are understood. User coordination is needed only for participant recruitment, external contact, and a designated live-email test; these dependencies do not block implementation or synthetic evaluation.
 
 The rewrite is complete when the source/data model, engine, adaptive flow, full results/action experience, privacy controls, operational handoffs, documented evaluation, and production rollout all meet their gates. A beautiful screen with the old scoring logic underneath is not completion.
