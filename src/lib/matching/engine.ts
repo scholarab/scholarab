@@ -33,6 +33,9 @@ export function createMatchingEngine(input: Opportunity[]) {
       const results: Assessment[] = opportunities.map((o) => {
         const eligibility = evaluateEligibility(o.matching, profile, context);
         const availability = evaluateAvailability(o, options.now);
+        if (o.applyViaGuidance) {
+          availability.nextAction = 'Your school decides this one. Ask your counsellor, and bring this page';
+        }
         const exact = (key: string, values: string[]) => {
           const answer = profile.answers[key];
           return (
@@ -52,6 +55,7 @@ export function createMatchingEngine(input: Opportunity[]) {
         const communityListed = exact('residence', o.discovery?.communities ?? []);
         return {
           ...eligibility,
+          eligibility: o.applyViaGuidance ? 'school_decides' : eligibility.eligibility,
           discoveryMatches: Number(stageListed) + Number(communityListed),
           communityListed,
           key: o.key,

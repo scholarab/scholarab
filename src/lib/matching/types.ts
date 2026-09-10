@@ -62,4 +62,8 @@ export interface GroupResult {
   children: string[];
   ignoredPreferences: string[];
 }
-export type Eligibility = 'meets_checked_requirements' | 'worth_checking' | 'known_ineligible';
+export type Eligibility =
+  | 'meets_checked_requirements'
+  | 'worth_checking'
+  | 'known_ineligible'
+  | 'school_decides';

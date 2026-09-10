@@ -32,3 +32,7 @@ The commit did not change hero content, listing counts, SEO metadata, closing-so
 ## Deferred human validation
 
 The user has kept human testing pending. Two real Grade 12 students should complete the quiz while observed, including explaining what uncertainty means to them and locating the next action for a school-managed award. No invitation or email to students or counsellors is authorized by this brief.
+
+## School-managed outcome
+
+All 542 `applyViaGuidance` scholarships receive `school_decides` rather than a student eligibility verdict. They remain connected to their detail pages, evidence and saved list. The card directs the student to their counsellor without presenting ranking confidence, and these records do not generate follow-up questions. Source-rule tests still test each individual condition, while whole-record judgments respect the school's decision process.

@@ -1,7 +1,9 @@
 import type { Opportunity } from './normalize';
 import type { evaluateEligibility } from './evaluate';
 import type { Availability } from './availability';
-export interface Assessment extends ReturnType<typeof evaluateEligibility> {
+import type { Eligibility } from './types';
+export interface Assessment extends Omit<ReturnType<typeof evaluateEligibility>, 'eligibility'> {
+  eligibility: Eligibility;
   key: string;
   kind: Opportunity['kind'];
   publicId: number;

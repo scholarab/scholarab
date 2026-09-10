@@ -28,7 +28,11 @@ export function nextQuestions(
   const byKey = new Map(opportunities.map((o) => [o.key, o]));
   const candidates = new Map<string, FollowUp>();
   for (const a of assessments) {
-    if (a.eligibility === 'known_ineligible' || a.availability.status === 'closed') continue;
+    if (
+      a.eligibility === 'known_ineligible' ||
+      a.eligibility === 'school_decides' ||
+      a.availability.status === 'closed'
+    ) continue;
     const opportunity = byKey.get(a.key)!;
     for (const result of a.rules) {
       const key = result.questionKey;

@@ -55,7 +55,9 @@ for (const split of ['development', 'held-out'])
           now: new Date('2026-09-10T12:00:00Z'),
         });
         expect(full.all[0]!.eligibility).toBe(
-          judgment.expected === 'not_satisfied' ? 'known_ineligible' : 'worth_checking'
+          original.applyViaGuidance
+            ? 'school_decides'
+            : judgment.expected === 'not_satisfied' ? 'known_ineligible' : 'worth_checking'
         );
         expect(
           createMatchingEngine([evaluationProjection(opportunity)]).assess(profile, {

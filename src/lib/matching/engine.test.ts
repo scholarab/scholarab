@@ -428,7 +428,7 @@ it('accounts for the entire corpus for every synthetic profile, without upgradin
     );
     expect(result.all.length).toBe(bundle.opportunities.length);
     expect(new Set(result.all.map((r) => r.key)).size).toBe(engine.size);
-    expect(result.all.every((r) => r.eligibility === 'worth_checking')).toBe(true);
+    expect(result.all.every((r) => ['worth_checking', 'school_decides'].includes(r.eligibility))).toBe(true);
   }
 });
 it('keeps known-ineligible items out of every recommendation sort, and retains all other results', () => {

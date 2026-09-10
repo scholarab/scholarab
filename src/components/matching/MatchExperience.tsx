@@ -35,6 +35,7 @@ const labels = {
   meets_checked_requirements: 'Meets requirements we checked',
   worth_checking: 'Worth checking',
   known_ineligible: 'Doesn’t meet a known requirement',
+  school_decides: 'Your school decides',
 };
 const availabilityLabels = {
   open: 'Open',
@@ -777,7 +778,9 @@ function OpportunityCard({
       <p>
         {a.availability.nextAction}. {a.availability.note}
       </p>
-      <p className="match-reasons">Order: {a.rankingReasons.slice(0, 2).join(' · ')}.</p>
+      {a.eligibility !== 'school_decides' && (
+        <p className="match-reasons">Order: {a.rankingReasons.slice(0, 2).join(' · ')}.</p>
+      )}
       <div className="match-actions">
         <a
           className="match-primary"

@@ -155,6 +155,7 @@ export function normalizeOpportunity(row: Document, kind: CatalogueKind) {
     stipend: text(row.stipend),
     paid: row.paid === true,
     active: row.active !== false,
+    applyViaGuidance: kind === 'scholarship' && row.applyViaGuidance === true,
     legacyDeadline: text(row.deadline),
     legacyOpenDate: text(row.openDate),
     // Discovery metadata influences ordering only, never eligibility. Preserve
