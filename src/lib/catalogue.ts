@@ -1,4 +1,5 @@
 import { matchingSchema } from './matching/schema';
+import { eligibilityEvidenceSchema } from './matching/field-evidence';
 /** Shared, environment-independent publication model. IDs are public JSON IDs. */
 export type CatalogueKind = 'scholarship' | 'program';
 export type Document = Record<string, unknown> & { id: number };
@@ -61,6 +62,7 @@ export function validateCatalogue(raw: unknown, kind: CatalogueKind): Document[]
       throw new Error(`${kind} ${row.id}: invalid provider URL`);
     }
     if (row.matching != null) matchingSchema.parse(row.matching);
+    if (row.eligibilityEvidence != null) eligibilityEvidenceSchema.parse(row.eligibilityEvidence);
     if ('open_date' in row) throw new Error(`${kind} ${row.id}: use openDate`);
     ids.add(row.id);
     return row as Document;

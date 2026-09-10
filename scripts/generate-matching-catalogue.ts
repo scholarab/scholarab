@@ -1,5 +1,6 @@
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync, statSync } from 'node:fs';
 import { buildMatchingCatalogue, verifyMatchingCatalogue } from '../src/lib/matching/catalogue.ts';
+import { assertMatchingAssetBudget } from '../src/lib/matching/asset-budget.ts';
 const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 const snapshot = {
   scholarship: read('src/data/scholarships.json'),
@@ -86,3 +87,16 @@ writeFileSync(
 console.log(
   `Matching core: ${core.length} bytes; evidence connected through ${new Set(Object.values(evidence)).size} versioned packs.`
 );
+const assetBudget = assertMatchingAssetBudget(
+  readdirSync(dir, { recursive: true, encoding: 'utf8' })
+    .filter((path) => statSync(`${dir}/${path}`).isFile())
+    .map((path) => ({ path: path.replaceAll('\\', '/'), bytes: statSync(`${dir}/${path}`).size })),
+  [
+    'manifest.json',
+    `opportunities.${manifest.assetHash}.json`,
+    `core.${coreHash}.json`,
+    ...new Set(Object.values(evidence).map((hash) => `evidence/${hash}.json`)),
+  ]
+);
+writeFileSync('.cache/matching-asset-budget.json', JSON.stringify(assetBudget, null, 2));
+console.log(`Matching output budget: ${assetBudget.fileCount}/${assetBudget.budget.maxFiles} files; ${assetBudget.totalBytes}/${assetBudget.budget.maxTotalBytes} bytes; largest evidence pack ${assetBudget.largestEvidencePack?.bytes ?? 0}/${assetBudget.budget.maxEvidencePackBytes} bytes.`);

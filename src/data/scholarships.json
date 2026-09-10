@@ -212,10 +212,11 @@
         "opensOn": null,
         "closesOn": null,
         "evidence": {
-          "status": "reviewed",
-          "excerpt": "Apply when official high-school marks are available and full-time post-secondary enrollment has begun.",
+          "status": "partial",
           "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
-          "verifiedAt": "2026-09-09"
+          "verifiedAt": "2026-09-09",
+          "summary": "Apply when official high-school marks are available and full-time post-secondary enrollment has begun.",
+          "quote": ""
         },
         "timezone": "America/Edmonton"
       },
@@ -225,10 +226,11 @@
           "basis": "legal-status",
           "field": "citizenship",
           "evidence": {
-            "status": "reviewed",
-            "excerpt": "Canadian citizens, permanent residents and protected persons may qualify; visa students do not.",
+            "status": "partial",
             "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
-            "verifiedAt": "2026-09-09"
+            "verifiedAt": "2026-09-09",
+            "summary": "Canadian citizens, permanent residents and protected persons may qualify; visa students do not.",
+            "quote": ""
           },
           "answerKey": "rutherford-legal-status",
           "condition": {
@@ -247,10 +249,11 @@
           "id": "rutherford-residence",
           "field": "manual",
           "evidence": {
-            "status": "reviewed",
-            "excerpt": "Residence duration and family alternatives need provider verification.",
+            "status": "partial",
             "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
-            "verifiedAt": "2026-09-09"
+            "verifiedAt": "2026-09-09",
+            "summary": "Residence duration and family alternatives need provider verification.",
+            "quote": ""
           },
           "answerKey": "rutherford-residence",
           "condition": {
@@ -265,10 +268,11 @@
           "id": "rutherford-study-and-transcript",
           "field": "manual",
           "evidence": {
-            "status": "reviewed",
-            "excerpt": "The provider must assess the transcript, study program and remaining application conditions.",
+            "status": "partial",
             "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
-            "verifiedAt": "2026-09-09"
+            "verifiedAt": "2026-09-09",
+            "summary": "The provider must assess the transcript, study program and remaining application conditions.",
+            "quote": ""
           },
           "answerKey": "rutherford-study-and-transcript",
           "condition": {
@@ -281,10 +285,11 @@
         }
       ],
       "coverageEvidence": {
-        "status": "reviewed",
-        "excerpt": "Supported criteria checked; remaining provider conditions require manual verification.",
+        "status": "partial",
         "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
-        "verifiedAt": "2026-09-09"
+        "verifiedAt": "2026-09-09",
+        "summary": "Supported criteria checked; remaining provider conditions require manual verification.",
+        "quote": ""
       }
     }
   },
@@ -16375,7 +16380,7 @@
       "minAverage": null,
       "minAge": null,
       "maxAge": null,
-      "genderRequired": "male",
+      "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
       "financialNeed": false,
@@ -32685,7 +32690,7 @@
       "minAverage": null,
       "minAge": null,
       "maxAge": null,
-      "genderRequired": "male",
+      "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
       "financialNeed": false,
@@ -33561,7 +33566,7 @@
       "minAverage": null,
       "minAge": null,
       "maxAge": null,
-      "genderRequired": "male",
+      "genderRequired": null,
       "indigenousRequired": false,
       "bipocRequired": false,
       "financialNeed": false,

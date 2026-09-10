@@ -778,6 +778,14 @@ function OpportunityCard({
       <p>
         {a.availability.nextAction}. {a.availability.note}
       </p>
+      {a.eligibility === 'known_ineligible' && a.rules
+        .filter((r) => r.state === 'not_satisfied' && r.importance === 'mandatory' && r.quote)
+        .map((r) => (
+          <div key={r.id}>
+            <blockquote>{r.quote}</blockquote>
+            <a href={r.sourceUrl ?? undefined} target="_blank" rel="noreferrer">Provider requirement</a>
+          </div>
+        ))}
       {a.eligibility !== 'school_decides' && (
         <p className="match-reasons">Order: {a.rankingReasons.slice(0, 2).join(' · ')}.</p>
       )}
@@ -846,11 +854,8 @@ function OpportunityCard({
                     {source.evidence.verifiedAt ?? 'No verification date'}
                   </p>
                   {source.condition.operator === 'manual' && <p>{source.condition.text}</p>}
-                  {source.evidence.excerpt && source.evidence.status === 'reviewed' ? (
-                    <blockquote>{source.evidence.excerpt}</blockquote>
-                  ) : source.condition.operator !== 'manual' && source.evidence.excerpt ? (
-                    <p>Existing listing note: {source.evidence.excerpt}</p>
-                  ) : null}
+                  {source.evidence.quote && <blockquote>{source.evidence.quote}</blockquote>}
+                  {source.evidence.summary && <p>Summary: {source.evidence.summary}</p>}
                 </>
               )}
               {r.sourceUrl && (

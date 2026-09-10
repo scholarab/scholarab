@@ -17,7 +17,7 @@ it('keeps synthetic profile edits local and shows legacy uncertainty', () => {
       )}
     />
   );
-  fireEvent.click(screen.getByText('Test Phase 2 eligibility engine'));
+  fireEvent.click(screen.getByText('Test matching eligibility engine'));
   fireEvent.click(screen.getByRole('button', { name: 'Load example: 80–89 admission average' }));
   expect(screen.getByRole('status').textContent).toContain('worth checking');
   expect(screen.getByRole('status').textContent).toContain('source verification');

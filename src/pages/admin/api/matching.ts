@@ -3,7 +3,7 @@ import { isAdminRequest } from '../../../lib/adminAuth';
 import { jsonOk, jsonError } from '../../../lib/api-response';
 import { matchingCoverage } from '../../../lib/matching/store';
 import { getCatalogueEntry } from '../../../lib/catalogue-store';
-import { normalizeOpportunity } from '../../../lib/matching/normalize';
+import { legacyMatching, normalizeOpportunity } from '../../../lib/matching/normalize';
 import { parseId } from '../../../lib/admin-crud';
 export const prerender = false;
 export const GET: APIRoute = async ({ request }) => {
@@ -19,13 +19,18 @@ export const GET: APIRoute = async ({ request }) => {
       const row = await getCatalogueEntry(kind, id);
       if (!row || (!row.draft && !row.published)) return jsonError('Not found', 404);
       const document = row.draft ?? row.published!;
+      const preview = normalizeOpportunity(document, kind);
       response = jsonOk({
         kind,
         id,
         revision: row.revision,
         deleted: row.deleted,
         hasDraft: !!row.draft,
-        preview: normalizeOpportunity(document, kind),
+        // The generated field gate wrapper belongs only in the preview. Saving
+        // it as the base would duplicate gates on every subsequent edit.
+        editableMatching: document.matching ?? legacyMatching(document, kind),
+        eligibilityEvidence: preview.eligibilityEvidence,
+        preview,
       });
     } else response = jsonOk(await matchingCoverage());
     response.headers.set('Cache-Control', 'private, no-store');

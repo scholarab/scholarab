@@ -1,0 +1,213 @@
+[
+  {
+    "key": "program:44",
+    "source": "https://breakthroughjuniorchallenge.org/rules",
+    "reviewedOn": "2026-09-09",
+    "matching": {
+      "version": 1,
+      "coverage": "partial",
+      "coverageEvidence": {
+        "status": "partial",
+        "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+        "verifiedAt": "2026-09-09",
+        "summary": "Supported criteria checked; remaining provider conditions require manual verification.",
+        "quote": ""
+      },
+      "requirements": [
+        {
+          "id": "breakthrough-2026-min-age",
+          "field": "age",
+          "importance": "mandatory",
+          "condition": {
+            "operator": "minimum",
+            "value": 13
+          },
+          "answerKey": "breakthrough-2026-min-age",
+          "explanation": "You must be at least 13 on May 11, 2026 (Pacific time).",
+          "referenceDate": "2026-05-11",
+          "evidence": {
+            "status": "partial",
+            "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+            "verifiedAt": "2026-09-09",
+            "summary": "You must be at least 13 on May 11, 2026 (Pacific time).",
+            "quote": ""
+          },
+          "basis": "age-at-provider-reference"
+        },
+        {
+          "id": "breakthrough-2026-max-age",
+          "field": "age",
+          "importance": "mandatory",
+          "condition": {
+            "operator": "maximum",
+            "value": 18
+          },
+          "answerKey": "breakthrough-2026-max-age",
+          "explanation": "You must still be 18 or younger on October 1, 2026 (Pacific time).",
+          "referenceDate": "2026-10-01",
+          "evidence": {
+            "status": "partial",
+            "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+            "verifiedAt": "2026-09-09",
+            "summary": "You must still be 18 or younger on October 1, 2026 (Pacific time).",
+            "quote": ""
+          },
+          "basis": "age-at-provider-reference"
+        },
+        {
+          "id": "breakthrough-entry-checks",
+          "field": "manual",
+          "importance": "mandatory",
+          "condition": {
+            "operator": "manual",
+            "text": "Check guardian consent, entrant and conflict restrictions, lawful participation, original English video content, permissions, two-minute maximum, individual entry, and the required peer reviews. Provider terms and judging decisions also apply."
+          },
+          "answerKey": "breakthrough-entry-checks",
+          "explanation": "Other entry conditions need a manual check against the complete official rules.",
+          "referenceDate": null,
+          "evidence": {
+            "status": "partial",
+            "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+            "verifiedAt": "2026-09-09",
+            "summary": "Other entry conditions need a manual check against the complete official rules.",
+            "quote": ""
+          }
+        }
+      ],
+      "groups": [
+        {
+          "id": "requirements",
+          "operator": "all",
+          "children": [
+            "breakthrough-2026-min-age",
+            "breakthrough-2026-max-age",
+            "breakthrough-entry-checks"
+          ]
+        }
+      ],
+      "root": "requirements",
+      "availability": {
+        "method": "application",
+        "timing": "dated",
+        "opensOn": "2026-05-11",
+        "closesOn": "2026-09-15",
+        "cycle": "2026",
+        "timezone": "America/Los_Angeles",
+        "evidence": {
+          "status": "partial",
+          "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
+          "verifiedAt": "2026-09-09",
+          "summary": "2026 entries run May 11 through September 15; the provider specifies Pacific closing times.",
+          "quote": ""
+        }
+      }
+    }
+  },
+  {
+    "key": "scholarship:14",
+    "source": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+    "reviewedOn": "2026-09-09",
+    "matching": {
+      "version": 1,
+      "coverage": "partial",
+      "coverageEvidence": {
+        "status": "partial",
+        "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+        "verifiedAt": "2026-09-09",
+        "summary": "Supported criteria checked; remaining provider conditions require manual verification.",
+        "quote": ""
+      },
+      "requirements": [
+        {
+          "id": "rutherford-legal-status",
+          "field": "citizenship",
+          "importance": "mandatory",
+          "condition": {
+            "operator": "oneOf",
+            "values": [
+              "Canadian citizen",
+              "Permanent resident",
+              "Protected person"
+            ]
+          },
+          "answerKey": "rutherford-legal-status",
+          "explanation": "Canadian citizens, permanent residents and protected persons may qualify; visa students do not.",
+          "referenceDate": null,
+          "evidence": {
+            "status": "partial",
+            "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+            "verifiedAt": "2026-09-09",
+            "summary": "Canadian citizens, permanent residents and protected persons may qualify; visa students do not.",
+            "quote": ""
+          },
+          "basis": "legal-status"
+        },
+        {
+          "id": "rutherford-residence",
+          "field": "manual",
+          "importance": "mandatory",
+          "condition": {
+            "operator": "manual",
+            "text": "Check the applicant or parent/guardian residence alternatives and residence during each claimed high-school grade."
+          },
+          "answerKey": "rutherford-residence",
+          "explanation": "Residence duration and family alternatives need provider verification.",
+          "referenceDate": null,
+          "evidence": {
+            "status": "partial",
+            "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+            "verifiedAt": "2026-09-09",
+            "summary": "Residence duration and family alternatives need provider verification.",
+            "quote": ""
+          }
+        },
+        {
+          "id": "rutherford-study-and-transcript",
+          "field": "manual",
+          "importance": "mandatory",
+          "condition": {
+            "operator": "manual",
+            "text": "Check designated course averages, transcript and graduation timing, eligible full-time undergraduate or apprenticeship enrollment, valid SIN, and the once-only award restriction. Graduate and specified professional programs are excluded."
+          },
+          "answerKey": "rutherford-study-and-transcript",
+          "explanation": "The provider must assess the transcript, study program and remaining application conditions.",
+          "referenceDate": null,
+          "evidence": {
+            "status": "partial",
+            "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+            "verifiedAt": "2026-09-09",
+            "summary": "The provider must assess the transcript, study program and remaining application conditions.",
+            "quote": ""
+          }
+        }
+      ],
+      "groups": [
+        {
+          "id": "requirements",
+          "operator": "all",
+          "children": [
+            "rutherford-legal-status",
+            "rutherford-residence",
+            "rutherford-study-and-transcript"
+          ]
+        }
+      ],
+      "root": "requirements",
+      "availability": {
+        "method": "application",
+        "timing": "unpublished",
+        "opensOn": null,
+        "closesOn": null,
+        "cycle": null,
+        "timezone": "America/Edmonton",
+        "evidence": {
+          "status": "partial",
+          "sourceUrl": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+          "verifiedAt": "2026-09-09",
+          "summary": "Apply when official high-school marks are available and full-time post-secondary enrollment has begun.",
+          "quote": ""
+        }
+      }
+    }
+  }
+]

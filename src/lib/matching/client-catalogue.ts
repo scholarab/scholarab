@@ -1,13 +1,16 @@
 import type { Opportunity } from './normalize';
-import { matchingSchema } from './schema';
+import { runtimeMatchingSchema } from './schema';
 
 /** Unreviewed evidence cannot affect eligibility, regardless of its prose or
  * condition. Preserve every rule and its uncertainty; load original conditions
  * and evidence for display on demand. Reviewed rules retain their full content. */
 export function evaluationProjection(opportunity: Opportunity): Opportunity {
   const result = structuredClone(opportunity);
-  const omitUnreviewedBody = (e: { status: string; excerpt: string }) => {
-    if (e.status !== 'reviewed') e.excerpt = '';
+  const omitUnreviewedBody = (e: { status: string; summary: string; quote: string }) => {
+    if (e.status !== 'reviewed') {
+      e.summary = '';
+      e.quote = '';
+    }
   };
   omitUnreviewedBody(result.matching.coverageEvidence);
   omitUnreviewedBody(result.matching.availability.evidence);
@@ -50,7 +53,7 @@ export function parseClientCatalogue(raw: unknown, expected: string): ClientCata
     )
       throw new Error('Incomplete matching catalogue. Reload this page.');
     keys.add(o.key);
-    matchingSchema.parse(o.matching);
+    o.matching = runtimeMatchingSchema.parse(o.matching);
   }
   if (keys.size !== Object.keys(data.evidence).length)
     throw new Error('Evidence connection mismatch');
@@ -86,7 +89,10 @@ export function encodeClientCatalogue(data: ClientCatalogue) {
       indices.set(signature, index);
       templates.push(template);
     }
-    return { ...o, matching: index, availability };
+    // The public identity is losslessly derived from kind + publicId. Avoid
+    // repeating it on the wire; evidence remains indexed by the full identity.
+    const { key: _key, ...fields } = o;
+    return { ...fields, matching: index, availability };
   });
   return { ...data, version: 2, opportunities, templates };
 }
@@ -118,7 +124,13 @@ function decodeClientCatalogue(raw: unknown): unknown {
         ...matching.requirements.map((r) => r.evidence),
       ])
         if (e.sourceUrl === '@opportunity') e.sourceUrl = fields.url;
-      return { ...fields, matching };
+      return {
+        ...fields,
+        // Old version-2 assets carried the key explicitly. Preserve it when
+        // supplied so identity validation still rejects a conflicting key.
+        key: (fields as { key?: string }).key ?? `${fields.kind}:${fields.publicId}`,
+        matching,
+      };
     }),
   };
 }

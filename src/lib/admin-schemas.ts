@@ -4,10 +4,12 @@
 import { z } from 'zod';
 import { strictEligibilitySchema as eligibilitySchema } from './eligibility-types';
 import { matchingSchema } from './matching/schema';
+import { eligibilityEvidenceSchema } from './matching/field-evidence';
 import { httpsUrl } from './validators';
 
 const scholarshipOptionalFields = {
   matching: matchingSchema.optional().nullable(),
+  eligibilityEvidence: eligibilityEvidenceSchema.optional().nullable(),
   deadline: z.string().max(50).optional().nullable(),
   openDate: z.string().max(50).optional().nullable(),
   audience: z.string().max(5000).optional().nullable(),
@@ -38,6 +40,7 @@ export const scholarshipUpdateSchema = z.object({
 
 const programOptionalFields = {
   matching: matchingSchema.optional().nullable(),
+  eligibilityEvidence: eligibilityEvidenceSchema.optional().nullable(),
   emoji: z.string().max(10).optional().nullable(),
   category: z.string().max(100).optional().nullable(),
   provider: z.string().max(200).optional().nullable(),

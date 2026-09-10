@@ -188,7 +188,8 @@ async function installRefinementFixture(page: Page, withSchoolQuestion = false) 
     evidence: {
       status: 'reviewed' as const,
       sourceUrl: 'https://example.org',
-      excerpt: 'Synthetic test fixture, not a real provider criterion.',
+      summary: '',
+    quote: 'Synthetic test fixture, not a real provider criterion.',
       verifiedAt: '2026-01-01',
     },
   };

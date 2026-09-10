@@ -9,6 +9,7 @@ vi.mock('../../lib/catalogue-store', () => ({
   getCatalogueEntry: vi.fn(async () => state.record),
 }));
 import { GET } from '../../pages/admin/api/matching';
+import { legacyMatching } from '../../lib/matching/normalize';
 const call = (query = '') =>
   GET({ request: new Request('https://scholarab.ca/admin/api/matching' + query) } as any);
 beforeEach(() => {
@@ -52,4 +53,25 @@ it('previews the draft with its revision while preserving the public record', as
   });
   expect(JSON.stringify(d)).not.toContain('secret');
   expect(state.record.published.name).toBe('Old');
+});
+
+it.each(['scholarship', 'program'] as const)('returns an uncompiled editable base for %s field evidence', async (kind) => {
+  const record = { id: 1, title: 'Award', name: 'Program', url: 'https://example.com' };
+  const matching = legacyMatching(record, kind);
+  const eligibilityEvidence = {
+    minAge: {
+      value: 13, tier: 'gate', status: 'partial', sourceUrl: 'https://example.com/rules',
+      quote: 'Synthetic age criterion for this API fixture.', summary: 'Fixture only.',
+      verifiedAt: '2026-09-10', referenceDate: '2026-10-01',
+    },
+  };
+  state.record = { revision: 2, deleted: false, published: null, draft: { ...record, matching, eligibilityEvidence } };
+  const response = await call(`?kind=${kind}&id=1`);
+  expect(response.status).toBe(200);
+  const data = await response.json();
+  expect(data.editableMatching).toEqual(matching);
+  expect(data.eligibilityEvidence).toEqual(eligibilityEvidence);
+  expect(data.preview.matching.requirements).toHaveLength(matching.requirements.length + 1);
+  expect(data.preview.matching.root).toBe('eligibility-evidence-root');
+  expect(state.record.draft.matching).toEqual(matching);
 });

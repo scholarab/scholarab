@@ -2,6 +2,7 @@ import { it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import MatchingReview from '../components/admin/MatchingReview';
 import { normalizeOpportunity } from '../lib/matching/normalize';
+import type { EligibilityEvidence } from '../lib/matching/field-evidence';
 const preview = normalizeOpportunity(
   { id: 1, title: 'Test award', url: 'https://example.com' },
   'scholarship'
@@ -38,7 +39,7 @@ it('keeps unsaved review fields and revision on conflict', async () => {
     return new Response(
       JSON.stringify(
         url.includes('?')
-          ? { kind: 'scholarship', id: 1, revision: 7, deleted: false, hasDraft: false, preview }
+          ? { kind: 'scholarship', id: 1, revision: 7, deleted: false, hasDraft: false, preview, editableMatching: preview.matching, eligibilityEvidence: {} }
           : coverage
       )
     );
@@ -72,6 +73,8 @@ it('does not mark evidence reviewed merely by opening the editor', async () => {
                   deleted: false,
                   hasDraft: false,
                   preview,
+                  editableMatching: preview.matching,
+                  eligibilityEvidence: {},
                 }
               : coverage
           )
@@ -90,4 +93,51 @@ it('does not mark evidence reviewed merely by opening the editor', async () => {
       .getAllByLabelText('Review status')
       .every((el) => (el as HTMLSelectElement).value === 'legacy-unreviewed')
   ).toBe(true);
+});
+
+it('saves the editable base separately from field gates across a save and reload', async () => {
+  const base = structuredClone(preview.matching);
+  let record = {
+    id: 1, title: 'Test award', url: 'https://example.com', matching: base,
+    eligibilityEvidence: {
+      minAge: {
+        value: 13, tier: 'gate', status: 'partial', sourceUrl: 'https://example.com/rules',
+        quote: 'Synthetic test source: minimum age is thirteen.', summary: 'Fixture only.',
+        verifiedAt: '2026-09-10', referenceDate: '2026-10-01',
+      },
+    } as EligibilityEvidence,
+  };
+  let revision = 7;
+  const writes: Array<Record<string, unknown>> = [];
+  vi.stubGlobal('fetch', vi.fn(async (url: string, init?: RequestInit) => {
+    if (init?.method === 'PUT') {
+      const body = JSON.parse(String(init.body));
+      writes.push(body);
+      record = { ...record, matching: body.matching, eligibilityEvidence: body.eligibilityEvidence };
+      return new Response(JSON.stringify({ revision: ++revision }));
+    }
+    return new Response(JSON.stringify(url.includes('?') ? {
+      kind: 'scholarship', id: 1, revision, deleted: false, hasDraft: revision > 7,
+      preview: normalizeOpportunity(record, 'scholarship'), editableMatching: record.matching,
+      eligibilityEvidence: record.eligibilityEvidence,
+    } : coverage));
+  }));
+  render(<MatchingReview />);
+  fireEvent.click(await screen.findByRole('button', { name: /Test award/ }));
+  fireEvent.change(await screen.findByLabelText('Minimum age: value JSON'), { target: { value: '14' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Save reviewed fields as draft' }));
+  await screen.findByText('Saved as a draft. Review and publish when ready.');
+  expect(writes[0]).toMatchObject({ revision: 7, matching: base, eligibilityEvidence: { minAge: { value: 14, status: 'partial' } } });
+  expect(writes[0]?.matching).toEqual(base);
+
+  fireEvent.click(screen.getByRole('button', { name: 'Back to coverage (discard unsaved changes)' }));
+  fireEvent.click(await screen.findByRole('button', { name: /Test award/ }));
+  await screen.findByLabelText('Minimum age: value JSON');
+  fireEvent.click(screen.getByRole('button', { name: 'Save reviewed fields as draft' }));
+  await waitFor(() => expect(writes).toHaveLength(2));
+  expect(writes[1]?.revision).toBe(8);
+  expect(writes[1]?.matching).toEqual(base);
+  const generated = normalizeOpportunity(record, 'scholarship').matching;
+  expect(generated.requirements.filter((r) => r.id === 'eligibility-evidence-minAge')).toHaveLength(1);
+  expect(generated.groups.filter((g) => g.id === 'eligibility-evidence-root')).toHaveLength(1);
 });

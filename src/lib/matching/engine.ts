@@ -1,4 +1,4 @@
-import { matchingSchema } from './schema';
+import { runtimeMatchingSchema } from './schema';
 import type { Opportunity } from './normalize';
 import { profileSchema, type Profile } from './types';
 import { evaluateEligibility, type EvaluationContext } from './evaluate';
@@ -18,7 +18,7 @@ export function createMatchingEngine(input: Opportunity[]) {
     )
       throw new Error('Invalid or duplicate matching identity');
     seen.add(o.key);
-    return { ...o, matching: matchingSchema.parse(o.matching) };
+    return { ...o, matching: runtimeMatchingSchema.parse(o.matching) };
   });
   return {
     size: opportunities.length,

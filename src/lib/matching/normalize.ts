@@ -1,6 +1,7 @@
 import { type CatalogueKind, type Document, validateCatalogue } from '../catalogue';
 import { generateSlug } from '../utils';
 import { matchingSchema, type MatchingDocument, type Requirement } from './schema';
+import { eligibilityEvidenceSchema, applyFieldEvidence } from './field-evidence';
 export const identity = (kind: CatalogueKind, id: number) => `${kind}:${id}`;
 const text = (v: unknown) => (typeof v === 'string' ? v : null);
 const date = (v: unknown) =>
@@ -11,7 +12,8 @@ export function legacyMatching(row: Document, kind: CatalogueKind): MatchingDocu
   const evidence = {
     status: 'legacy-unreviewed' as const,
     sourceUrl: text(row.url),
-    excerpt: '',
+    summary: '',
+    quote: '',
     verifiedAt: null,
   };
   const requirements: Requirement[] = [];
@@ -37,7 +39,7 @@ export function legacyMatching(row: Document, kind: CatalogueKind): MatchingDocu
       condition,
       explanation: `Verify the provider's ${field} requirement.`,
       referenceDate: null,
-      evidence: { ...evidence, excerpt: JSON.stringify(value).slice(0, 4000) },
+      evidence: { ...evidence, summary: JSON.stringify(value).slice(0, 4000) },
     });
   };
   if (kind === 'scholarship') {
@@ -125,7 +127,7 @@ export function legacyMatching(row: Document, kind: CatalogueKind): MatchingDocu
       timezone: null,
       evidence: {
         ...evidence,
-        excerpt: `Legacy deadline: ${String(row.deadline ?? 'unpublished')}; opening: ${String(row.openDate ?? 'unknown')}`,
+        summary: `Legacy deadline: ${String(row.deadline ?? 'unpublished')}; opening: ${String(row.openDate ?? 'unknown')}`,
       },
     },
   });
@@ -140,8 +142,11 @@ function programStages(label: string | null): string[] {
 }
 export function normalizeOpportunity(row: Document, kind: CatalogueKind) {
   validateCatalogue([row], kind);
-  const matching =
-    row.matching == null ? legacyMatching(row, kind) : matchingSchema.parse(row.matching);
+  const eligibilityEvidence = eligibilityEvidenceSchema.parse(row.eligibilityEvidence ?? {});
+  const matching = applyFieldEvidence(
+    row.matching == null ? legacyMatching(row, kind) : matchingSchema.parse(row.matching),
+    eligibilityEvidence
+  );
   const title = String(kind === 'scholarship' ? row.title : row.name);
   return {
     key: identity(kind, row.id),
@@ -173,6 +178,7 @@ export function normalizeOpportunity(row: Document, kind: CatalogueKind) {
           : [],
     },
     matching,
+    eligibilityEvidence,
     issues: [
       ...(matching.coverage !== 'reviewed' ? ['coverage-unreviewed'] : []),
       ...(matching.availability.evidence.status !== 'reviewed' ? ['availability-unreviewed'] : []),

@@ -1,6 +1,7 @@
 import { stableJson } from '../src/lib/catalogue.ts';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { verifyMatchingCatalogue, assertIdentitySets } from '../src/lib/matching/catalogue.ts';
+import { assertMatchingAssetBudget } from '../src/lib/matching/asset-budget.ts';
 const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 const snapshot = {
   scholarship: read('src/data/scholarships.json'),
@@ -38,6 +39,18 @@ const coreBytes = readFileSync(`dist/matching/core.${client.coreHash}.json`);
 if (createHash('sha256').update(coreBytes).digest('hex') !== client.coreHash)
   throw new Error('Core asset hash mismatch');
 const core = parseClientCatalogue(JSON.parse(coreBytes.toString()), manifest.catalogueHash);
+const assetBudget = assertMatchingAssetBudget(
+  readdirSync('dist/matching', { recursive: true, encoding: 'utf8' })
+    .filter((path) => statSync(`dist/matching/${path}`).isFile())
+    .map((path) => ({ path: path.replaceAll('\\', '/'), bytes: statSync(`dist/matching/${path}`).size })),
+  [
+    'manifest.json',
+    `opportunities.${manifest.assetHash}.json`,
+    `core.${client.coreHash}.json`,
+    ...new Set(Object.values(core.evidence).map((hash) => `evidence/${hash}.json`)),
+  ]
+);
+console.log(`Verified matching output budget: ${assetBudget.fileCount} files, ${assetBudget.totalBytes} bytes, largest evidence pack ${assetBudget.largestEvidencePack?.bytes ?? 0} bytes.`);
 assertIdentitySets(
   manifest.entries.map((e: { key: string }) => e.key),
   core.opportunities.map((o) => o.key),

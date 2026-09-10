@@ -36,3 +36,25 @@ The user has kept human testing pending. Two real Grade 12 students should compl
 ## School-managed outcome
 
 All 542 `applyViaGuidance` scholarships receive `school_decides` rather than a student eligibility verdict. They remain connected to their detail pages, evidence and saved list. The card directs the student to their counsellor without presenting ranking confidence, and these records do not generate follow-up questions. Source-rule tests still test each individual condition, while whole-record judgments respect the school's decision process.
+
+## Evidence boundary
+
+Each of the 17 structured eligibility fields can now carry its own value, gate/signal tier, quotation, summary, source URL, verification date, and review status. Provider-specific question keys, qualification bases and age reference dates are explicit. A proposed gate can stay partial while a human reviews it. A reviewed individual field can establish a failed requirement even when the rest of the record remains partial; reviewing one field does not certify the entire listing.
+
+`validate-data` rejects declared field gates without a quotation, source URL or verification date. It also rejects reviewed automatic mandatory matching rules without those items. Runtime parsing accepts older structurally valid assets but treats missing quotes as unreviewed; an old `excerpt` is converted only to `summary`. Result cards show the provider quotation for verified exclusions. Optional questions cannot be activated by a paraphrase.
+
+Evidence becomes unusable after an explicit `expiresOn`, or after the 365-day review cap, whichever comes first. The cap is a maximum review interval, not an assertion that every provider has an annual cycle. Authors must enter an earlier expiration for a shorter known cycle. Future verification dates are unusable. Stale field values remain available as discovery signals when the two-tier ranking is connected in step 5.
+
+The two previously published matching documents were automatically authored from paraphrases. Their prose is now explicitly a summary, their evidence is partial, and their quotes are empty. This removes automatic eligibility/window claims until a human approves exact provider evidence. It preserves both records, their individual conditions and manual checks. The separate reference tests simulate approval only within tests; they do not certify production records.
+
+Three unsupported `genderRequired: "male"` values were cleared to null: Ryan Burak Memorial Award (446), Scarborough Trophy (864), and Johnathan Doody Memorial Scholarship (885). Their other criteria and narrative text are retained. The schema now accepts only `female` or null, as required; null does not prove an absence of provider restrictions.
+
+## CI repair before step 3
+
+Both 610f897 and d62871e failed the first opt-in fixture assertion, before any decline. The fixture mixed its single synthetic personal rule with two newly published, nonpersonal Breakthrough age rules. The old availability function and the corrected shared-status function produced the same two candidates. The isolation assumption was wrong; declining did not cause a loop.
+
+ffa6b08 preserves both original disabled assertions, controls the fixture's policy rules, and adds a mixed-question regression. That regression proves a declined personal question does not repeat while an unrelated school question remains available, then verifies no questions remain after both are declined and the page reloads. All 20 matching browser tests, public browser tests, validation and Cloudflare passed before step 3 resumed.
+
+## Generated evidence budget
+
+The measured baseline is 79 generated files and 16,861,527 bytes, including 76 evidence packs. The largest pack is 131,100 bytes. Build limits are 128 files, 24 MiB total generated matching output, and 256 KiB per evidence pack. Both generation and deployed-output verification check the exact expected file inventory, including stale files. Exceeding a limit fails the build; no record or evidence is truncated to fit. Initial transfer budgets remain separate and unchanged.

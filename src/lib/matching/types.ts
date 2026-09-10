@@ -53,6 +53,7 @@ export interface RuleResult {
   code: string;
   explanation: string;
   sourceUrl: string | null;
+  quote?: string | null;
   questionKey: string | null;
   local: boolean;
 }

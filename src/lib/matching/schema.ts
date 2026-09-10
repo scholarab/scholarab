@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { canonicalEvidence, hasQuotedEvidence } from './evidence';
 
 const date = z.iso.date();
 const validTimezones = new Set<string>();
@@ -8,24 +9,19 @@ const url = z
     (value) => ['http:', 'https:'].includes(new URL(value).protocol),
     'Use an HTTP(S) source'
   );
-export const evidenceSchema = z
+export const evidenceInputSchema = z
   .object({
-    status: z.enum(['legacy-unreviewed', 'reviewed', 'ambiguous', 'stale']),
+    status: z.enum(['legacy-unreviewed', 'partial', 'reviewed', 'ambiguous', 'stale']),
     sourceUrl: url.nullable(),
-    excerpt: z.string().max(4000),
+    summary: z.string().max(4000).optional(),
+    quote: z.string().max(4000).optional(),
+    // Compatibility input only: a historic excerpt may be an AI paraphrase.
+    excerpt: z.string().max(4000).optional(),
     verifiedAt: date.nullable(),
+    expiresOn: date.nullable().optional(),
   })
-  .strict()
-  .superRefine((value, ctx) => {
-    if (
-      value.status === 'reviewed' &&
-      (!value.sourceUrl || !value.excerpt.trim() || !value.verifiedAt)
-    )
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Reviewed evidence requires a source, excerpt, and exact verification date',
-      });
-  });
+  .strict();
+export const evidenceSchema = evidenceInputSchema.transform(canonicalEvidence);
 export const ruleFields = [
   'educationStage',
   'residence',
@@ -45,7 +41,7 @@ export const ruleFields = [
   'familyIncome',
   'manual',
 ] as const;
-export const requirementSchema = z
+const runtimeRequirementSchema = z
   .object({
     id: z.string().regex(/^[a-zA-Z0-9_-]{1,100}$/),
     field: z.enum(ruleFields),
@@ -73,11 +69,6 @@ export const requirementSchema = z
   .strict()
   .superRefine((r, ctx) => {
     const op = r.condition.operator;
-    if (r.field === 'age' && r.evidence.status === 'reviewed' && !r.referenceDate)
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Reviewed age requirements need the provider reference date',
-      });
     if (
       ['average', 'age', 'familyIncome'].includes(r.field) &&
       !['minimum', 'maximum', 'manual'].includes(op)
@@ -120,14 +111,26 @@ export const requirementSchema = z
     if (r.field === 'manual' && op !== 'manual')
       ctx.addIssue({ code: 'custom', message: 'Manual requirements need source text' });
   });
+export const requirementSchema = runtimeRequirementSchema.superRefine((r, ctx) => {
+  if (
+    r.importance === 'mandatory' && r.condition.operator !== 'manual' &&
+    r.evidence.status === 'reviewed' && !hasQuotedEvidence(r.evidence)
+  )
+    ctx.addIssue({
+      code: 'custom',
+      message: 'No quote, no gate: reviewed mandatory rules need a verbatim quote, source URL, and verification date',
+    });
+  if (r.field === 'age' && r.evidence.status === 'reviewed' && !r.referenceDate)
+    ctx.addIssue({ code: 'custom', message: 'Reviewed age requirements need the provider reference date' });
+});
 // A flat group graph avoids recursive payloads. IDs refer to rules or groups;
 // validation requires one parent, full coverage, and an acyclic root.
-export const matchingSchema = z
+const matchingDocumentSchema = (ruleSchema: typeof runtimeRequirementSchema) => z
   .object({
     version: z.literal(1),
     coverage: z.enum(['partial', 'reviewed']),
     coverageEvidence: evidenceSchema,
-    requirements: z.array(requirementSchema).max(200),
+    requirements: z.array(ruleSchema).max(200),
     groups: z
       .array(
         z
@@ -201,5 +204,9 @@ export const matchingSchema = z
       }
     }
   });
+export const matchingSchema = matchingDocumentSchema(requirementSchema);
+// Historic assets can contain prose under excerpt with no provider quote. They
+// must load as uncertain, not acquire permission to gate or break the whole quiz.
+export const runtimeMatchingSchema = matchingDocumentSchema(runtimeRequirementSchema);
 export type MatchingDocument = z.infer<typeof matchingSchema>;
 export type Requirement = z.infer<typeof requirementSchema>;

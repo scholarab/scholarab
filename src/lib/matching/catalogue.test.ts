@@ -100,7 +100,8 @@ it('requires evidence and date for reviewed age rules and complete group referen
   age.evidence = {
     status: 'reviewed',
     sourceUrl: 'https://example.com',
-    excerpt: 'Age 18 on Jan 1',
+    summary: '',
+    quote: 'Age 18 on Jan 1',
     verifiedAt: '2026-09-09',
   };
   expect(matchingSchema.safeParse({ ...m, coverage: 'partial' }).success).toBe(false);

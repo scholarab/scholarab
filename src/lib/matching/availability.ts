@@ -1,5 +1,6 @@
 import type { Opportunity } from './normalize';
 import { scholarshipStatusOf, programStatusOf } from '../status';
+import { evidenceIsUsable } from './evidence';
 const clocks = new Map<string, Intl.DateTimeFormat>();
 export function dateInZone(now: Date, zone = 'America/Edmonton') {
   let formatter = clocks.get(zone);
@@ -17,8 +18,7 @@ export function dateInZone(now: Date, zone = 'America/Edmonton') {
 export function evaluateAvailability(opportunity: Opportunity, now: Date) {
   const a = opportunity.matching.availability;
   const today = dateInZone(now, a.timezone ?? 'America/Edmonton');
-  const verified =
-    a.evidence.status === 'reviewed' && !!a.evidence.verifiedAt && a.evidence.verifiedAt <= today;
+  const verified = evidenceIsUsable(a.evidence, today);
   // Status functions compare calendar dates at midnight. Use the provider's
   // calendar day so a deadline remains current through that entire day.
   const calendarDay = new Date(`${today}T00:00:00`);

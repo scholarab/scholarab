@@ -20,7 +20,8 @@ function reviewed() {
   r.evidence = {
     status: 'reviewed',
     sourceUrl: o.url,
-    excerpt: 'Synthetic requirement, not a provider claim.',
+    summary: '',
+    quote: 'Synthetic requirement, not a provider claim.',
     verifiedAt: '2026-01-01',
   };
   return o;
@@ -211,6 +212,11 @@ it('round-trips shared templates without merging identities or mutable rules', a
   const wire = encodeClientCatalogue(data);
   const decoded = parseClientCatalogue(wire, 'same');
   expect(decoded).toEqual(data);
+  const previousWire = structuredClone(wire);
+  previousWire.opportunities.forEach((o, i) => Object.assign(o, { key: data.opportunities[i]!.key }));
+  expect(parseClientCatalogue(previousWire, 'same')).toEqual(data);
+  Object.assign(previousWire.opportunities[0]!, { key: 'program:9999' });
+  expect(() => parseClientCatalogue(previousWire, 'same')).toThrow('Incomplete matching catalogue');
   decoded.opportunities[0]!.matching.requirements[0]!.explanation = 'edited';
   expect(decoded.opportunities[1]!.matching.requirements[0]!.explanation).not.toBe('edited');
   wire.opportunities[0]!.matching = 999999;

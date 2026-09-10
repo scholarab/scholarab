@@ -1,4 +1,6 @@
 import MatchingEnginePreview from './MatchingEnginePreview';
+import FieldEvidenceEditor from './FieldEvidenceEditor';
+import { applyFieldEvidence, eligibilityEvidenceSchema, type EligibilityEvidence } from '../../lib/matching/field-evidence';
 import { useEffect, useState } from 'react';
 import type { Coverage } from '../../lib/matching/store';
 import type { MatchingDocument } from '../../lib/matching/schema';
@@ -11,6 +13,8 @@ type Selection = {
   hasDraft: boolean;
   deleted: boolean;
   preview: Opportunity;
+  editableMatching: MatchingDocument;
+  eligibilityEvidence: EligibilityEvidence;
 };
 const input = 'block w-full rounded border border-white/20 bg-[#15151c] p-2 text-white';
 export default function MatchingReview() {
@@ -19,9 +23,11 @@ export default function MatchingReview() {
     [query, setQuery] = useState(''),
     [page, setPage] = useState(0);
   const [selection, setSelection] = useState<Selection | null>(null),
-    [document, setDocument] = useState<MatchingDocument | null>(null),
+    [editableBaseMatching, setEditableBaseMatching] = useState<MatchingDocument | null>(null),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState('');
+  const [fieldEvidence, setFieldEvidence] = useState<EligibilityEvidence>({});
+  const [fieldJsonValid, setFieldJsonValid] = useState(true);
   async function refresh() {
     const r = await fetch('/admin/api/matching');
     const data = await r.json();
@@ -51,8 +57,12 @@ export default function MatchingReview() {
       const r = await fetch(`/admin/api/matching?kind=${kind}&id=${id}`);
       const data = await r.json();
       if (!r.ok) throw new Error(data.error);
+      const base = matchingSchema.parse(data.editableMatching);
+      const fields = eligibilityEvidenceSchema.parse(data.eligibilityEvidence ?? {});
       setSelection(data);
-      setDocument(data.preview.matching);
+      setEditableBaseMatching(base);
+      setFieldEvidence(fields);
+      setFieldJsonValid(true);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Unable to load');
     } finally {
@@ -60,18 +70,20 @@ export default function MatchingReview() {
     }
   }
   async function save() {
-    if (!selection || !document) return;
+    if (!selection || !editableBaseMatching || !fieldJsonValid) return;
     setBusy(true);
     setError('');
     setMessage('');
     try {
-      const validated = matchingSchema.parse(document);
+      const validated = matchingSchema.parse(editableBaseMatching);
+      const validatedFields = eligibilityEvidenceSchema.parse(fieldEvidence);
+      applyFieldEvidence(validated, validatedFields);
       const r = await fetch(
         `/admin/api/${selection.kind === 'scholarship' ? 'scholarships' : 'programs'}/${selection.id}`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ revision: selection.revision, matching: validated }),
+          body: JSON.stringify({ revision: selection.revision, matching: validated, eligibilityEvidence: validatedFields }),
         }
       );
       const result = await r.json();
@@ -102,7 +114,7 @@ export default function MatchingReview() {
               change({ ...evidence, status: e.target.value as typeof evidence.status })
             }
           >
-            {['legacy-unreviewed', 'reviewed', 'ambiguous', 'stale'].map((s) => (
+            {['legacy-unreviewed', 'partial', 'reviewed', 'ambiguous', 'stale'].map((s) => (
               <option key={s}>{s}</option>
             ))}
           </select>
@@ -116,13 +128,22 @@ export default function MatchingReview() {
           />
         </label>
         <label className="block">
-          Supporting excerpt
+          Provider quotation (verbatim)
           <textarea
             className={input}
-            value={evidence.excerpt}
-            onChange={(e) => change({ ...evidence, excerpt: e.target.value })}
+            value={evidence.quote}
+            onChange={(e) => change({ ...evidence, quote: e.target.value })}
           />
         </label>
+        <label className="block">
+          Summary (your own words)
+          <textarea
+            className={input}
+            value={evidence.summary}
+            onChange={(e) => change({ ...evidence, summary: e.target.value })}
+          />
+        </label>
+        <p>Keep proposed evidence partial. Only select reviewed after a human checks the quotation, source and verification date.</p>
         <label className="block">
           Verified on
           <input
@@ -139,13 +160,20 @@ export default function MatchingReview() {
     coverage?.queue.filter((r) =>
       `${r.key} ${r.title}`.toLowerCase().includes(query.toLowerCase())
     ) ?? [];
-  const parsed = document ? matchingSchema.safeParse(document) : null;
+  const parsed = editableBaseMatching ? matchingSchema.safeParse(editableBaseMatching) : null;
+  const parsedFields = eligibilityEvidenceSchema.safeParse(fieldEvidence);
+  let compiled: MatchingDocument | null = null;
+  let compilationError = '';
+  if (parsed?.success && parsedFields.success && fieldJsonValid) {
+    try { compiled = applyFieldEvidence(parsed.data, parsedFields.data); }
+    catch (e) { compilationError = e instanceof Error ? e.message : 'Unable to compile preview'; }
+  }
   return (
     <section className="space-y-5 max-w-5xl">
       <h1 className="text-2xl font-bold">Matching catalogue review</h1>
       <p>
-        Source review and Phase 2 engine preview. The public quiz still uses its existing engine
-        until the redesigned experience is ready.
+        Review source evidence and test the matching engine used by the public beta. Draft changes
+        affect public results only after publication.
       </p>
       {error && (
         <p role="alert" className="text-red-300 whitespace-pre-wrap">
@@ -238,14 +266,16 @@ export default function MatchingReview() {
           )}
         </>
       )}
-      {selection && document && (
+      {selection && editableBaseMatching && (
         <div className="space-y-4">
           <button
             disabled={busy}
             className="underline"
             onClick={() => {
               setSelection(null);
-              setDocument(null);
+              setEditableBaseMatching(null);
+              setFieldEvidence({});
+              setFieldJsonValid(true);
               setError('');
             }}
           >
@@ -264,16 +294,22 @@ export default function MatchingReview() {
           </a>
           <p>
             Nothing is marked reviewed automatically. Confirm the provider's complete criteria
-            before declaring reviewed coverage. Evidence excerpts entered here become public when
+            before declaring reviewed coverage. Quotations and summaries entered here become public when
             published.
           </p>
+          <FieldEvidenceEditor
+            key={selection.preview.key}
+            value={fieldEvidence}
+            onChange={setFieldEvidence}
+            onValidityChange={setFieldJsonValid}
+          />
           <label className="block">
             Requirement coverage
             <select
               className={input}
-              value={document.coverage}
+              value={editableBaseMatching.coverage}
               onChange={(e) =>
-                setDocument({ ...document, coverage: e.target.value as 'partial' | 'reviewed' })
+                setEditableBaseMatching({ ...editableBaseMatching, coverage: e.target.value as 'partial' | 'reviewed' })
               }
             >
               <option value="partial">Partial / needs review</option>
@@ -282,10 +318,10 @@ export default function MatchingReview() {
           </label>
           {evidenceEditor(
             'Evidence for completeness of requirements',
-            document.coverageEvidence,
-            (evidence) => setDocument({ ...document, coverageEvidence: evidence })
+            editableBaseMatching.coverageEvidence,
+            (evidence) => setEditableBaseMatching({ ...editableBaseMatching, coverageEvidence: evidence })
           )}
-          {document.requirements.map((r, i) => (
+          {editableBaseMatching.requirements.map((r, i) => (
             <details key={r.id} className="border border-white/15 p-3">
               <summary>
                 {r.field}: {r.explanation} ({r.evidence.status})
@@ -297,9 +333,9 @@ export default function MatchingReview() {
                     className={input}
                     value={r.importance}
                     onChange={(e) =>
-                      setDocument({
-                        ...document,
-                        requirements: document.requirements.map((v, j) =>
+                      setEditableBaseMatching({
+                        ...editableBaseMatching,
+                        requirements: editableBaseMatching.requirements.map((v, j) =>
                           j === i ? { ...v, importance: e.target.value as typeof r.importance } : v
                         ),
                       })
@@ -316,9 +352,9 @@ export default function MatchingReview() {
                     className={input}
                     value={r.explanation}
                     onChange={(e) =>
-                      setDocument({
-                        ...document,
-                        requirements: document.requirements.map((v, j) =>
+                      setEditableBaseMatching({
+                        ...editableBaseMatching,
+                        requirements: editableBaseMatching.requirements.map((v, j) =>
                           j === i ? { ...v, explanation: e.target.value } : v
                         ),
                       })
@@ -332,9 +368,9 @@ export default function MatchingReview() {
                     className={input}
                     value={r.referenceDate ?? ''}
                     onChange={(e) =>
-                      setDocument({
-                        ...document,
-                        requirements: document.requirements.map((v, j) =>
+                      setEditableBaseMatching({
+                        ...editableBaseMatching,
+                        requirements: editableBaseMatching.requirements.map((v, j) =>
                           j === i ? { ...v, referenceDate: e.target.value || null } : v
                         ),
                       })
@@ -343,9 +379,9 @@ export default function MatchingReview() {
                 </label>
                 <pre className="whitespace-pre-wrap">{JSON.stringify(r.condition, null, 2)}</pre>
                 {evidenceEditor('Requirement evidence', r.evidence, (evidence) =>
-                  setDocument({
-                    ...document,
-                    requirements: document.requirements.map((v, j) =>
+                  setEditableBaseMatching({
+                    ...editableBaseMatching,
+                    requirements: editableBaseMatching.requirements.map((v, j) =>
                       j === i ? { ...v, evidence } : v
                     ),
                   })
@@ -355,9 +391,9 @@ export default function MatchingReview() {
           ))}
           {evidenceEditor(
             'Application-window evidence',
-            document.availability.evidence,
+            editableBaseMatching.availability.evidence,
             (evidence) =>
-              setDocument({ ...document, availability: { ...document.availability, evidence } })
+              setEditableBaseMatching({ ...editableBaseMatching, availability: { ...editableBaseMatching.availability, evidence } })
           )}
           <details>
             <summary>Advanced: edit conditions, groups, and application dates</summary>
@@ -365,13 +401,15 @@ export default function MatchingReview() {
               Use the version 1 JSON contract. The preview validates all references and evidence
               before saving.
             </p>
-            <JsonEditor value={document} onApply={setDocument} />
+            <JsonEditor value={editableBaseMatching} onApply={setEditableBaseMatching} />
           </details>
-          <MatchingEnginePreview opportunity={{ ...selection.preview, matching: document }} />
+          {compiled && parsedFields.success ? (
+            <MatchingEnginePreview opportunity={{ ...selection.preview, matching: compiled, eligibilityEvidence: parsedFields.data }} />
+          ) : <p role="status">Fix the validation errors to preview these changes.</p>}
           <details>
             <summary>Normalized draft preview</summary>
             <pre className="overflow-auto whitespace-pre-wrap">
-              {JSON.stringify(document, null, 2)}
+              {JSON.stringify(compiled, null, 2)}
             </pre>
           </details>
           {parsed && !parsed.success && (
@@ -379,9 +417,15 @@ export default function MatchingReview() {
               {parsed.error.issues.map((i) => i.message).join('; ')}
             </p>
           )}
+          {!parsedFields.success && (
+            <p role="status" className="text-amber-300">
+              {parsedFields.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')}
+            </p>
+          )}
+          {compilationError && <p role="status" className="text-amber-300">{compilationError}</p>}
           <button
             className="rounded bg-emerald-400 px-4 py-2 text-black disabled:opacity-40"
-            disabled={busy || selection.deleted || !parsed?.success}
+            disabled={busy || selection.deleted || !compiled || !fieldJsonValid}
             onClick={() => void save()}
           >
             {busy ? 'Saving…' : 'Save reviewed fields as draft'}

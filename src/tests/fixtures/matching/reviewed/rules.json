@@ -11,7 +11,8 @@
     "importance": "mandatory",
     "explanation": "Highest eligible five-course average across Grades 10 to 12 for the post-April-2008 chart.",
     "referenceDate": null,
-    "basis": "rutherford-highest-eligible-grade-average-after-2008"
+    "basis": "rutherford-highest-eligible-grade-average-after-2008",
+    "quote": "Average of 75.0% to 79.9% in five courses"
   },
   {
     "id": "breakthrough-min-age",
@@ -25,7 +26,8 @@
     "importance": "mandatory",
     "explanation": "breakthrough min age",
     "referenceDate": "2026-05-11",
-    "basis": "age-at-provider-reference"
+    "basis": "age-at-provider-reference",
+    "quote": "13 years of age by May 11, 2026"
   },
   {
     "id": "breakthrough-max-age",
@@ -39,7 +41,8 @@
     "importance": "mandatory",
     "explanation": "breakthrough max age",
     "referenceDate": "2026-10-01",
-    "basis": "age-at-provider-reference"
+    "basis": "age-at-provider-reference",
+    "quote": "cannot be older than 18 years of age (not yet 19) on October 1, 2026"
   },
   {
     "id": "rutherford-citizenship",
@@ -57,7 +60,8 @@
     "importance": "mandatory",
     "explanation": "rutherford citizenship",
     "referenceDate": null,
-    "basis": "legal-status"
+    "basis": "legal-status",
+    "quote": "be a Canadian Citizen, a Permanent Resident of Canada or Protected Person"
   },
   {
     "id": "shad-stage",
@@ -74,7 +78,8 @@
     "importance": "mandatory",
     "explanation": "shad stage",
     "referenceDate": null,
-    "basis": "application-school-year"
+    "basis": "application-school-year",
+    "quote": "High school students currently completing Grade 10 and 11 (Secondaire IV and V in Quebec)."
   },
   {
     "id": "schulich-citizenship",
@@ -90,7 +95,8 @@
     "importance": "mandatory",
     "explanation": "schulich citizenship",
     "referenceDate": null,
-    "basis": "legal-status"
+    "basis": "legal-status",
+    "quote": "Canadian citizen"
   },
   {
     "id": "schulich-graduation",
@@ -107,7 +113,8 @@
     "importance": "mandatory",
     "explanation": "schulich graduation",
     "referenceDate": null,
-    "basis": "canadian-graduation-2026-2027"
+    "basis": "canadian-graduation-2026-2027",
+    "quote": "Graduate high school or cégep in Canada in the 2026/2027 academic year"
   },
   {
     "id": "schulich-nomination",
@@ -121,7 +128,8 @@
     "importance": "mandatory",
     "explanation": "schulich nomination",
     "referenceDate": null,
-    "basis": "official-school-nomination"
+    "basis": "official-school-nomination",
+    "quote": "All nominations are verified by the Schulich Leader Scholarships office."
   },
   {
     "id": "rutherford-residence",
@@ -134,7 +142,8 @@
     "answerKey": "rutherford-residence",
     "importance": "mandatory",
     "explanation": "rutherford residence",
-    "referenceDate": null
+    "referenceDate": null,
+    "quote": ""
   },
   {
     "id": "aaron-school",
@@ -150,7 +159,8 @@
     "importance": "mandatory",
     "explanation": "aaron school",
     "referenceDate": null,
-    "basis": "current-school"
+    "basis": "current-school",
+    "quote": "Western Canada High School"
   },
   {
     "id": "aaron-field",
@@ -167,7 +177,8 @@
     "importance": "mandatory",
     "explanation": "aaron field",
     "referenceDate": null,
-    "basis": "intended-postsecondary-field"
+    "basis": "intended-postsecondary-field",
+    "quote": "Theatre or Technical Theatre"
   },
   {
     "id": "aaron-production",
@@ -181,7 +192,8 @@
     "importance": "mandatory",
     "explanation": "aaron production",
     "referenceDate": null,
-    "basis": "participated-in-at-least-one-wchs-drama-production"
+    "basis": "participated-in-at-least-one-wchs-drama-production",
+    "quote": "participated in at least one WCHS drama production"
   },
   {
     "id": "archibald-board",
@@ -198,7 +210,8 @@
     "importance": "mandatory",
     "explanation": "archibald board",
     "referenceDate": null,
-    "basis": "current-school-board"
+    "basis": "current-school-board",
+    "quote": "Calgary Board of Education and Calgary Catholic School District (City of Calgary schools only)"
   },
   {
     "id": "archibald-need",
@@ -212,7 +225,8 @@
     "importance": "mandatory",
     "explanation": "archibald need",
     "referenceDate": null,
-    "basis": "meets-provider-financial-need-with-proof"
+    "basis": "meets-provider-financial-need-with-proof",
+    "quote": "Applicants are required to submit proof of financial need."
   },
   {
     "id": "indigenous-careers-ancestry",
@@ -226,7 +240,8 @@
     "importance": "mandatory",
     "explanation": "indigenous careers ancestry",
     "referenceDate": null,
-    "basis": "meets-listed-ancestry-and-proof-criterion"
+    "basis": "meets-listed-ancestry-and-proof-criterion",
+    "quote": "be Status Indian/First Nations, Non-Status Indian/First Nations, Métis or Inuit and be able to provide a copy of proof of Indigenous ancestry;"
   },
   {
     "id": "registered-apprentice",
@@ -240,7 +255,8 @@
     "importance": "mandatory",
     "explanation": "registered apprentice",
     "referenceDate": null,
-    "basis": "registered-as-apprentice"
+    "basis": "registered-as-apprentice",
+    "quote": "be registered as an apprentice"
   },
   {
     "id": "john-deere-membership",
@@ -254,7 +270,8 @@
     "importance": "mandatory",
     "explanation": "john deere membership",
     "referenceDate": null,
-    "basis": "current-4h-member-in-good-standing"
+    "basis": "current-4h-member-in-good-standing",
+    "quote": "a current 4-H member in good standing."
   },
   {
     "id": "horatio-income",
@@ -268,7 +285,8 @@
     "importance": "mandatory",
     "explanation": "horatio income",
     "referenceDate": null,
-    "basis": "annual-net-household-income"
+    "basis": "annual-net-household-income",
+    "quote": "Demonstrate financial need ($80,000 or less annual net income per household is required)"
   },
   {
     "id": "mhc-institution-scope",
@@ -281,7 +299,8 @@
     "answerKey": "mhc-institution-scope",
     "importance": "mandatory",
     "explanation": "mhc institution scope",
-    "referenceDate": null
+    "referenceDate": null,
+    "quote": ""
   },
   {
     "id": "aaron-essay",
@@ -294,6 +313,7 @@
     "answerKey": "aaron-essay",
     "importance": "mandatory",
     "explanation": "aaron essay",
-    "referenceDate": null
+    "referenceDate": null,
+    "quote": ""
   }
 ]

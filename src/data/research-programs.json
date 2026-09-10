@@ -635,10 +635,11 @@
         "opensOn": "2026-05-11",
         "closesOn": "2026-09-15",
         "evidence": {
-          "status": "reviewed",
-          "excerpt": "2026 entries run May 11 through September 15; the provider specifies Pacific closing times.",
+          "status": "partial",
           "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
-          "verifiedAt": "2026-09-09"
+          "verifiedAt": "2026-09-09",
+          "summary": "2026 entries run May 11 through September 15; the provider specifies Pacific closing times.",
+          "quote": ""
         },
         "timezone": "America/Los_Angeles"
       },
@@ -648,10 +649,11 @@
           "basis": "age-at-provider-reference",
           "field": "age",
           "evidence": {
-            "status": "reviewed",
-            "excerpt": "You must be at least 13 on May 11, 2026 (Pacific time).",
+            "status": "partial",
             "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
-            "verifiedAt": "2026-09-09"
+            "verifiedAt": "2026-09-09",
+            "summary": "You must be at least 13 on May 11, 2026 (Pacific time).",
+            "quote": ""
           },
           "answerKey": "breakthrough-2026-min-age",
           "condition": {
@@ -667,10 +669,11 @@
           "basis": "age-at-provider-reference",
           "field": "age",
           "evidence": {
-            "status": "reviewed",
-            "excerpt": "You must still be 18 or younger on October 1, 2026 (Pacific time).",
+            "status": "partial",
             "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
-            "verifiedAt": "2026-09-09"
+            "verifiedAt": "2026-09-09",
+            "summary": "You must still be 18 or younger on October 1, 2026 (Pacific time).",
+            "quote": ""
           },
           "answerKey": "breakthrough-2026-max-age",
           "condition": {
@@ -685,10 +688,11 @@
           "id": "breakthrough-entry-checks",
           "field": "manual",
           "evidence": {
-            "status": "reviewed",
-            "excerpt": "Other entry conditions need a manual check against the complete official rules.",
+            "status": "partial",
             "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
-            "verifiedAt": "2026-09-09"
+            "verifiedAt": "2026-09-09",
+            "summary": "Other entry conditions need a manual check against the complete official rules.",
+            "quote": ""
           },
           "answerKey": "breakthrough-entry-checks",
           "condition": {
@@ -701,10 +705,11 @@
         }
       ],
       "coverageEvidence": {
-        "status": "reviewed",
-        "excerpt": "Supported criteria checked; remaining provider conditions require manual verification.",
+        "status": "partial",
         "sourceUrl": "https://breakthroughjuniorchallenge.org/rules",
-        "verifiedAt": "2026-09-09"
+        "verifiedAt": "2026-09-09",
+        "summary": "Supported criteria checked; remaining provider conditions require manual verification.",
+        "quote": ""
       }
     }
   },

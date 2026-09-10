@@ -15,7 +15,8 @@ const now = new Date('2026-09-10T01:00:00Z'),
 const evidence = {
   status: 'reviewed' as const,
   sourceUrl: 'https://example.com/fixture',
-  excerpt: 'Synthetic test policy',
+  summary: '',
+    quote: 'Synthetic test policy',
   verifiedAt: '2026-09-01',
 };
 const rule = (changes: Partial<Requirement> = {}): Requirement => ({

@@ -39,7 +39,7 @@ export default function MatchingEnginePreview({ opportunity }: { opportunity: Op
   }, [opportunity, raw, clock]);
   return (
     <details className="border border-white/15 p-3">
-      <summary>Test Phase 2 eligibility engine</summary>
+      <summary>Test matching eligibility engine</summary>
       <p className="my-3">
         Use synthetic answers to check the draft rules. Preview answers stay in this page’s memory
         and are not sent to the server. This does not change any listing or the public quiz.

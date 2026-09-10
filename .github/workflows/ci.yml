@@ -52,30 +52,14 @@ jobs:
           restore-keys: og-${{ runner.os }}-
       - run: npm ci
 
-      # DATABASE_URL is scoped to this step only; the build below must never see it.
+      # Expiration edits only the JSON working copy. It has no database access;
+      # nothing is mirrored until the resulting snapshot passes every check and
+      # any changed data is successfully pushed to main.
       - name: Sync scholarship active flags
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx tsx scripts/auto-expire.ts
 
-      - name: Validate catalogue before database sync
+      - name: Validate catalogue
         run: npm run validate-data
-
-      # Push the JSON files into the admin panel's database. auto-expire above
-      # only flips `active` on rows that already exist, so without this a new
-      # listing never reaches the admin: by 2026-09-03 the panel showed 155
-      # scholarships against 345 in JSON. Runs after auto-expire so it carries
-      # that step's freshly written flags. Scoped to this step for the same
-      # reason as above, and a no-op when nothing has drifted.
-      - name: Sync JSON into the admin database
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx tsx scripts/sync-db.ts
-
-      - name: Reconcile complete matching catalogue
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npm run matching:audit-db
 
       # These five steps are `npm run ci` unrolled, so each gets its own line in
       # the GitHub UI. Keep the two in sync: the script exists so a local run
@@ -87,9 +71,9 @@ jobs:
       - name: Test
         run: npm run test -- --run
 
-      # No DATABASE_URL here on purpose: builds must use the committed JSON.
-      # The DB path only returns active rows (~28) and has null eligibility,
-      # which shrinks the site and breaks quiz matching.
+      # No DATABASE_URL here: the JSON snapshot is authoritative for both the
+      # public pages and every generated matching asset. Admin drafts are not
+      # published merely because a build or database sync runs.
       - name: Build
         run: npm run build
 
@@ -102,7 +86,8 @@ jobs:
       - name: Typecheck scripts
         run: npm run type-check:scripts
 
-      # Last so a rejected push can't hide validation results. The commit tag
+      # After validation so a rejected push cannot hide its results. A failed
+      # build or push stops the job before it can mirror uncommitted data. The tag
       # skips GitHub Actions only; Cloudflare Pages still sees the push and
       # deploys the fresh data. Do NOT tag it to skip "ci": Cloudflare honors
       # that form too and the deploy would be silently skipped.
@@ -114,6 +99,25 @@ jobs:
           # sitemap would re-announce every synced listing on the next deploy.
           git add src/data/scholarships.json src/data/research-programs.json src/data/lastmod.json
           git diff --staged --quiet || { git commit -m "auto-sync scholarships [skip actions]" && git push; }
+
+      # Git is the published-data authority; the database mirrors its validated
+      # snapshot and preserves drafts. Recheck main immediately before writing:
+      # another publisher or CI trigger can advance it while this run validates.
+      # Do not mirror that older checkout over a newer published revision.
+      # Cloudflare deploys separately: until deployment succeeds, the public site
+      # can still serve the previous snapshot. A DB sync is not proof of a live
+      # deploy, and publisher acknowledgment checks the public manifest itself.
+      - name: Mirror latest validated JSON and reconcile matching
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            echo "::notice::Skipping database sync: main advanced beyond this validated checkout."
+            exit 0
+          fi
+          npx tsx scripts/sync-db.ts
+          npm run matching:audit-db
 
       # IndexNow announces the pages that changed today to Bing/Copilot/Yandex.
       # Google ignores the protocol entirely, so this is not the fix for the

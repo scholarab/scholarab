@@ -30,13 +30,16 @@ for (const split of ['development', 'held-out'])
           );
           return;
         }
-        const { source: _source, ...definition } = authored!;
+        const { source: _source, quote, ...definition } = authored!;
         const rule = requirementSchema.parse({
           ...definition,
           evidence: {
-            status: 'reviewed',
+            // Approval is simulated only inside this policy-reference test.
+            // These fixtures never promote production evidence to reviewed.
+            status: quote ? 'reviewed' : 'partial',
             sourceUrl: source.url,
-            excerpt: source.summary,
+            summary: source.summary,
+            quote,
             verifiedAt: source.reviewedOn,
           },
         });
@@ -44,12 +47,17 @@ for (const split of ['development', 'held-out'])
         expect(evaluateRequirement(rule, profile, { today: '2026-09-10' }).state).toBe(
           judgment.expected
         );
-        // Test the rule inside the real identity, retaining partial scope. These
-        // cases do NOT certify the rest of the provider's eligibility conditions.
+        // Evaluate the entire real record with its other checks retained. A
+        // source-bounded answer never certifies the remaining unknown scope.
         const opportunity = structuredClone(original);
-        opportunity.matching.requirements = [rule];
-        opportunity.matching.groups = [{ id: 'scope', operator: 'all', children: [rule.id] }];
-        opportunity.matching.root = 'scope';
+        const referenceRule = { ...rule, id: `reference-${rule.id}` };
+        opportunity.matching.requirements.push(referenceRule);
+        opportunity.matching.groups.push({
+          id: 'reference-envelope',
+          operator: 'all',
+          children: [...(opportunity.matching.root ? [opportunity.matching.root] : []), referenceRule.id],
+        });
+        opportunity.matching.root = 'reference-envelope';
         opportunity.matching.coverage = 'partial';
         const full = createMatchingEngine([opportunity]).assess(profile, {
           now: new Date('2026-09-10T12:00:00Z'),

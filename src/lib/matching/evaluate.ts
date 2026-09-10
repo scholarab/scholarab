@@ -1,6 +1,7 @@
 import type { MatchingDocument, Requirement } from './schema';
 import type { Profile, RuleResult, RuleState, GroupResult, Eligibility } from './types';
 import { schoolBoardEntities, resolveEntity, type Entity } from './aliases';
+import { evidenceIsUsable } from './evidence';
 export interface EvaluationContext {
   today: string;
   entities?: Partial<Record<Requirement['field'], Entity[]>>;
@@ -29,6 +30,7 @@ export function evaluateRequirement(
   context: EvaluationContext
 ): RuleResult {
   const key = rule.answerKey ?? rule.field;
+  const evidenceUsable = evidenceIsUsable(rule.evidence, context.today);
   const result = (
     state: RuleState,
     code: string,
@@ -41,16 +43,11 @@ export function evaluateRequirement(
     code,
     explanation: `${rule.explanation} ${messages[code] ?? code}`,
     sourceUrl: rule.evidence.sourceUrl,
+    quote: evidenceUsable ? rule.evidence.quote.trim() : null,
     questionKey,
     local: rule.field === 'residence' && rule.basis === 'community' && state === 'satisfied',
   });
-  if (
-    rule.evidence.status !== 'reviewed' ||
-    !rule.evidence.verifiedAt ||
-    rule.evidence.verifiedAt > context.today ||
-    !rule.evidence.sourceUrl ||
-    !rule.evidence.excerpt.trim()
-  )
+  if (!evidenceUsable)
     return result('unresolved', 'evidence-unreviewed');
   if (rule.condition.operator === 'manual' || rule.field === 'manual')
     return result('unresolved', 'manual-check');
@@ -190,10 +187,7 @@ export function evaluateEligibility(
   };
   const aggregate = document.root ? visit(document.root, new Set()) : 'satisfied';
   const scopeReviewed =
-    document.coverage === 'reviewed' &&
-    document.coverageEvidence.status === 'reviewed' &&
-    !!document.coverageEvidence.verifiedAt &&
-    document.coverageEvidence.verifiedAt <= context.today;
+    document.coverage === 'reviewed' && evidenceIsUsable(document.coverageEvidence, context.today);
   const eligibility: Eligibility =
     aggregate === 'not_satisfied'
       ? 'known_ineligible'
