@@ -88,12 +88,17 @@ describe('getToday', () => {
     expect(d.getMilliseconds()).toBe(0)
   })
 
-  it('matches today\'s calendar date', () => {
-    const d = getToday()
-    const now = new Date()
-    expect(d.getFullYear()).toBe(now.getFullYear())
-    expect(d.getMonth()).toBe(now.getMonth())
-    expect(d.getDate()).toBe(now.getDate())
+  it('uses Alberta calendar dates even after UTC midnight', () => {
+    vi.useFakeTimers()
+    try {
+      vi.setSystemTime(new Date('2026-09-10T03:00:00Z'))
+      const d = getToday()
+      expect(d.getFullYear()).toBe(2026)
+      expect(d.getMonth()).toBe(8)
+      expect(d.getDate()).toBe(9)
+    } finally {
+      vi.useRealTimers()
+    }
   })
 
   it('returns a new Date object each call', () => {
