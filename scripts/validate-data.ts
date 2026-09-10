@@ -653,9 +653,18 @@ if (failed) process.exit(1);
 
 
 // New matching contracts must be validated before sync or publication.
-for (const row of [...scholarships, ...programs]) {
-  if (row.matching != null) matchingSchema.parse(row.matching);
-  if (row.eligibilityEvidence != null) eligibilityEvidenceSchema.parse(row.eligibilityEvidence);
+for (const [kind, rows] of [['scholarship', scholarships], ['program', programs]] as const) {
+  for (const row of rows) {
+    for (const [field, schema] of [['matching', matchingSchema], ['eligibilityEvidence', eligibilityEvidenceSchema]] as const) {
+      if (row[field] == null) continue;
+      const result = schema.safeParse(row[field]);
+      if (result.success) continue;
+      failed = true;
+      for (const issue of result.error.issues)
+        console.error(`validate-data: ${kind}:${row.id} ${'title' in row ? row.title : row.name} ${[field, ...issue.path].join('.')}: ${issue.message}`);
+    }
+  }
 }
+if (failed) process.exit(1);
 
 console.log(`validate-data: OK (${scholarships.length} scholarships, ${programs.length} programs, ${rules.length} redirects)`);

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { albertaDate } from '../calendar';
 import { canonicalEvidence, hasQuotedEvidence } from './evidence';
 
 const date = z.iso.date();
@@ -6,10 +7,17 @@ const validTimezones = new Set<string>();
 const url = z
   .url()
   .refine(
-    (value) => ['http:', 'https:'].includes(new URL(value).protocol),
+    (value) => {
+      // Zod can run refinements even when the preceding URL check failed.
+      try {
+        return ['http:', 'https:'].includes(new URL(value).protocol);
+      } catch {
+        return false;
+      }
+    },
     'Use an HTTP(S) source'
   );
-export const evidenceInputSchema = z
+const runtimeEvidenceInputSchema = z
   .object({
     status: z.enum(['legacy-unreviewed', 'partial', 'reviewed', 'ambiguous', 'stale']),
     sourceUrl: url.nullable(),
@@ -21,7 +29,14 @@ export const evidenceInputSchema = z
     expiresOn: date.nullable().optional(),
   })
   .strict();
+const verificationDate = date.refine(
+  (value) => value <= albertaDate(),
+  'Verification date cannot be in the future (America/Edmonton)'
+).nullable();
+// Authoring/build validation is stricter than loading historic public assets.
+export const evidenceInputSchema = runtimeEvidenceInputSchema.extend({ verifiedAt: verificationDate });
 export const evidenceSchema = evidenceInputSchema.transform(canonicalEvidence);
+const runtimeEvidenceSchema = runtimeEvidenceInputSchema.transform(canonicalEvidence);
 export const ruleFields = [
   'educationStage',
   'residence',
@@ -64,7 +79,7 @@ const runtimeRequirementSchema = z
     basis: z.string().min(1).max(200).optional(),
     explanation: z.string().min(1).max(4000),
     referenceDate: date.nullable(),
-    evidence: evidenceSchema,
+    evidence: runtimeEvidenceSchema,
   })
   .strict()
   .superRefine((r, ctx) => {
@@ -112,6 +127,10 @@ const runtimeRequirementSchema = z
       ctx.addIssue({ code: 'custom', message: 'Manual requirements need source text' });
   });
 export const requirementSchema = runtimeRequirementSchema.superRefine((r, ctx) => {
+  const verified = verificationDate.safeParse(r.evidence.verifiedAt);
+  if (!verified.success)
+    for (const issue of verified.error.issues)
+      ctx.addIssue({ ...issue, path: ['evidence', 'verifiedAt', ...issue.path] });
   if (
     r.importance === 'mandatory' && r.condition.operator !== 'manual' &&
     r.evidence.status === 'reviewed' && !hasQuotedEvidence(r.evidence)
@@ -125,11 +144,14 @@ export const requirementSchema = runtimeRequirementSchema.superRefine((r, ctx) =
 });
 // A flat group graph avoids recursive payloads. IDs refer to rules or groups;
 // validation requires one parent, full coverage, and an acyclic root.
-const matchingDocumentSchema = (ruleSchema: typeof runtimeRequirementSchema) => z
+const matchingDocumentSchema = (
+  ruleSchema: typeof runtimeRequirementSchema,
+  sourceSchema = evidenceSchema
+) => z
   .object({
     version: z.literal(1),
     coverage: z.enum(['partial', 'reviewed']),
-    coverageEvidence: evidenceSchema,
+    coverageEvidence: sourceSchema,
     requirements: z.array(ruleSchema).max(200),
     groups: z
       .array(
@@ -151,7 +173,7 @@ const matchingDocumentSchema = (ruleSchema: typeof runtimeRequirementSchema) => 
         closesOn: date.nullable(),
         cycle: z.string().max(100).nullable(),
         timezone: z.string().max(100).nullable(),
-        evidence: evidenceSchema,
+        evidence: sourceSchema,
       })
       .strict(),
   })
@@ -207,6 +229,6 @@ const matchingDocumentSchema = (ruleSchema: typeof runtimeRequirementSchema) => 
 export const matchingSchema = matchingDocumentSchema(requirementSchema);
 // Historic assets can contain prose under excerpt with no provider quote. They
 // must load as uncertain, not acquire permission to gate or break the whole quiz.
-export const runtimeMatchingSchema = matchingDocumentSchema(runtimeRequirementSchema);
+export const runtimeMatchingSchema = matchingDocumentSchema(runtimeRequirementSchema, runtimeEvidenceSchema);
 export type MatchingDocument = z.infer<typeof matchingSchema>;
 export type Requirement = z.infer<typeof requirementSchema>;
