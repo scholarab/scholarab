@@ -205,7 +205,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Build isolated adaptive matching variant
+      - name: Build public matching experience
         env:
           MATCHING_QUIZ_VARIANT: adaptive
         run: npm run build

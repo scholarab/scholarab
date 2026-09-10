@@ -9,6 +9,8 @@ export interface Assessment extends ReturnType<typeof evaluateEligibility> {
   detailPath: string;
   availability: Availability;
   rankingReasons: string[];
+  discoveryMatches?: number;
+  communityListed?: boolean;
 }
 export type SortMode = 'best_fit' | 'closing_soon' | 'local';
 const availabilityOrder = {
@@ -19,9 +21,11 @@ const availabilityOrder = {
   unknown: 4,
   closed: 5,
 };
-const localHit = (r: Assessment) => r.rules.some((rule) => rule.local);
+const localHit = (r: Assessment) => r.communityListed || r.rules.some((rule) => rule.local);
 const date = (r: Assessment) =>
-  r.availability.verified && r.availability.status !== 'closed'
+  r.availability.status !== 'closed' &&
+  !!r.availability.closesOn &&
+  r.availability.closesOn >= r.availability.today
     ? (r.availability.closesOn ?? '9999-99-99')
     : '9999-99-99';
 export function rankAssessments(results: Assessment[], mode: SortMode = 'best_fit'): Assessment[] {
@@ -52,6 +56,7 @@ export function rankAssessments(results: Assessment[], mode: SortMode = 'best_fi
         ? a.unresolvedRequirements.length - b.unresolvedRequirements.length
         : 0) ||
       b.preferenceMatches.length - a.preferenceMatches.length ||
+      (b.discoveryMatches ?? 0) - (a.discoveryMatches ?? 0) ||
       date(a).localeCompare(date(b)) ||
       a.publicId - b.publicId ||
       a.key.localeCompare(b.key)

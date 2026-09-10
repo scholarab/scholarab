@@ -8,6 +8,7 @@ export type AppEvent =
   /** Landed from an off-site campaign link carrying `?s=`. Meta is the source
    *  code, never free text; see SOURCES. */
   | 'source_visit'
+  | 'match_v1_start' | 'match_v1_results' | 'match_v1_refine' | 'match_v1_compare' | 'match_v1_action'
 
 const OPT_OUT_KEY = 'sa_no_track'
 /** `?nt=1` opts this browser out, `?nt=0` opts back in. */

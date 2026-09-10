@@ -33,8 +33,27 @@ export function createMatchingEngine(input: Opportunity[]) {
       const results: Assessment[] = opportunities.map((o) => {
         const eligibility = evaluateEligibility(o.matching, profile, context);
         const availability = evaluateAvailability(o, options.now);
+        const exact = (key: string, values: string[]) => {
+          const answer = profile.answers[key];
+          return (
+            answer?.state === 'answered' &&
+            answer.fact.kind === 'choices' &&
+            answer.fact.mode === 'actual' &&
+            answer.fact.values.some((value) =>
+              values.some(
+                (listed) =>
+                  listed.trim().toLocaleLowerCase('en-CA') ===
+                  value.trim().toLocaleLowerCase('en-CA')
+              )
+            )
+          );
+        };
+        const stageListed = exact('educationStage', o.discovery?.stages ?? []);
+        const communityListed = exact('residence', o.discovery?.communities ?? []);
         return {
           ...eligibility,
+          discoveryMatches: Number(stageListed) + Number(communityListed),
+          communityListed,
           key: o.key,
           kind: o.kind,
           publicId: o.publicId,
@@ -42,7 +61,15 @@ export function createMatchingEngine(input: Opportunity[]) {
           detailPath: o.detailPath,
           availability,
           rankingReasons: [
-            availability.status.replaceAll('_', ' '),
+            ...(stageListed
+              ? ['Your education stage appears in the listing (eligibility unverified)']
+              : []),
+            ...(communityListed
+              ? ['Your community appears in the listing (residence requirements unverified)']
+              : []),
+            availability.status === 'unknown'
+              ? 'Application dates need checking'
+              : availability.status.replaceAll('_', ' '),
             eligibility.scopeReviewed
               ? 'Requirement scope reviewed'
               : 'Requirement scope needs review',

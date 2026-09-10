@@ -21,40 +21,17 @@ test('programs page - list hydrates and shows count', async ({ page }) => {
   await expect(page.locator('text=/\\d+ OF \\d+ PROGRAMS/i').first()).toBeVisible({ timeout: 10_000 });
 });
 
-test('match quiz - answers every question it is asked and reaches results', async ({ page }) => {
+test('match quiz reaches full-catalogue results', async ({ page }) => {
   await page.goto('/match/');
-  // Wait for React client:load hydration
-  await expect(page.locator('text=Question 1 of 6')).toBeVisible({ timeout: 15_000 });
-
-  // The length is not fixed. Answering the city appends a board question, and
-  // a school question on top of that where the city has awards tied to named
-  // schools, so the counter reads "of 6" until the city is chosen and "of 7"
-  // or "of 8" after it. This used to hard-code six and broke at question 4,
-  // one step past the city. Read the counter instead of assuming it.
-  const counter = page.locator('text=/Question \\d+ of \\d+/');
-  for (let guard = 0; guard < 12; guard++) {
-    const label = await counter.first().textContent();
-    const [, step, total] = /Question (\d+) of (\d+)/.exec(label ?? '') ?? [];
-    expect(step, 'the quiz should show a question counter').toBeDefined();
-
-    // Target the answer tiles by their own class. Scoping to '#main-content
-    // button' used to pick the mobile menu burger; it is the first button in
-    // main, and its label is whitespace, so the Previous filter kept it. On
-    // mobile that opened the nav sheet instead of answering; the quiz never
-    // advanced and this test failed on every run.
-    const tiles = page.locator('.sabm-opt');
-    await expect(tiles.first()).toBeVisible({ timeout: 10_000 });
-    await tiles.first().click();
-
-    if (step === total) break;
-    // Deterministic step advance; no fixed sleep racing the transition window.
-    // Matched on the step alone: answering the city grows the total in the
-    // same tick that advances the step.
-    await expect(page.locator(`text=/Question ${Number(step) + 1} of \\d+/`))
-      .toBeVisible({ timeout: 10_000 });
-  }
-
-  await expect(page.locator('text=/We found/')).toBeVisible({ timeout: 10_000 });
+  await expect(page.getByRole('heading', { name: 'Three things to get started.' })).toBeVisible();
+  await expect(page.getByLabel('1. What are you looking for?')).toBeEnabled();
+  await page.getByLabel('1. What are you looking for?').selectOption('both');
+  await page.getByLabel('2. What is your current education stage?').selectOption('12');
+  await page.getByLabel('3. Which community do you currently live in?').fill('Calgary');
+  await page.getByRole('button', { name: 'Show opportunities →' }).click();
+  await expect(page.locator('.match-card').first()).toBeVisible();
+  await expect(page.locator('[data-catalogue-ready="true"]')).toBeVisible();
+  await expect(page.getByText('NEW MATCHING · BETA', { exact: true })).toBeVisible();
 });
 
 test('saved page - hydrates and shows item count', async ({ page }) => {

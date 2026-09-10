@@ -1,6 +1,6 @@
 # Phase 4: evaluation, accessibility and performance
 
-Technical work implemented September 10, 2026. Phase 4 remains open; the adaptive quiz is still an isolated preview. The user explicitly deferred human testing. The production build continues to select the established quiz.
+Technical work implemented September 10, 2026. This report records the pre-launch Phase 4 snapshot. The subsequent [beta rollout](matching-launch.md) makes the new quiz the default and documents the remaining gates and explicit budget adjustments. Human testing remains deferred by the user.
 
 ## Catalogue connection and source evaluation
 

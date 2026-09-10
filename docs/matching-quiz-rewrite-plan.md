@@ -1,6 +1,6 @@
 # ScholarAB Match: rewrite specification and implementation plan
 
-Status: Phases 1–2 implemented; see [Phase 1 delivery](matching-phase-1.md) and [Phase 2 delivery](matching-phase-2.md). Phases 3–5 remain planned. The existing public quiz engine is unchanged.
+Status: Phases 1–3 implemented; Phase 4 technical validation delivered with human/source-review work still pending. The user requested full implementation; the new quiz is the default public beta. See [rollout and explicit beta adjustments](matching-launch.md). Phase 5 observation and legacy retirement remain open.
 
 Prepared from the current repository on 2026-09-09, following the catalogue and reliability improvements. Estimates below are planning ranges, not delivery promises. The intended release includes the entire core journey, not merely a redesigned questionnaire.
 

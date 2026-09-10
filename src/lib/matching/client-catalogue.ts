@@ -122,3 +122,25 @@ function decodeClientCatalogue(raw: unknown): unknown {
     }),
   };
 }
+
+/** Accept old individual assets during rollback as well as bounded evidence
+ * packs. Digest verification happens before this version/identity boundary. */
+export function evidenceOpportunity(raw: unknown, catalogueHash: string, key: string): Opportunity {
+  const data = raw as {
+    version?: number;
+    catalogueHash?: string;
+    opportunity?: Opportunity;
+    opportunities?: Opportunity[];
+  } | null;
+  if (!data || data.catalogueHash !== catalogueHash)
+    throw new Error('Evidence version changed. Reload the page.');
+  const candidates =
+    data.version === 1
+      ? [data.opportunity]
+      : data.version === 2 && Array.isArray(data.opportunities) && data.opportunities.length <= 16
+        ? data.opportunities
+        : [];
+  const matches = candidates.filter((o) => o?.key === key);
+  if (matches.length !== 1) throw new Error('Evidence identity mismatch. Reload the page.');
+  return matches[0]!;
+}

@@ -147,10 +147,9 @@ test('expiry clears answers; students can explicitly extend before expiration', 
   await page.goto('/match/');
   await expect(page.getByRole('button', { name: 'Keep answers for another hour' })).toBeVisible();
   await page.getByRole('button', { name: 'Keep answers for another hour' }).click();
-  const extended = await page.evaluate(
+  await expect.poll(() => page.evaluate(
     () => JSON.parse(sessionStorage.getItem('scholarab_matching_v1')!).expiresAt
-  );
-  expect(extended).toBeGreaterThan(session.expiresAt + 3500000);
+  )).toBeGreaterThan(session.expiresAt + 3500000);
   await page.clock.install();
   await page.clock.fastForward(3600001);
   await expect(page.getByRole('heading', { name: 'Three things to get started.' })).toBeVisible();
@@ -205,4 +204,36 @@ test('a verified fixture supports refinement, explicit opt-in and declining with
   await expect(page.getByText(rule.explanation, { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Prefer not to answer' }).click();
   await expect(page.getByRole('button', { name: 'Check one more requirement' })).toBeDisabled();
+});
+
+test('homepage essentials replace an earlier session and reach the new quiz', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(({ hash }) => {
+    sessionStorage.setItem('scholarab_matching_v1', JSON.stringify({ version: 1, catalogueHash: hash, expiresAt: Date.now() + 300000, intent: 'scholarships', stage: '10', community: 'Old community', profile: { answers: {} }, personal: false, attempted: [], ready: true }));
+  }, { hash: meta.catalogueHash });
+  await page.locator('[data-match-group="searchType"] [data-value="programs"]').click();
+  await page.locator('[data-match-group="grade"] [data-value="12"]').click();
+  await page.locator('[data-match-group="city"] [data-value="Calgary"]').click();
+  await page.locator('#match-teaser-cta').click();
+  await expect(page.getByLabel('1. What are you looking for?')).toHaveValue('programs');
+  await expect(page.getByLabel('2. What is your current education stage?')).toHaveValue('12');
+  await expect(page.getByLabel('3. Which community do you currently live in?')).toHaveValue('Calgary');
+  await page.getByRole('button', { name: 'Show opportunities →' }).click();
+  await expect(page.locator('.match-card')).toHaveCount(5);
+});
+
+test('initial transfer stays within beta budgets with the complete catalogue', async ({ page }) => {
+  const { gzipSync } = await import('node:zlib');
+  const resources: Promise<{ type: string; bytes: number }>[] = [];
+  page.on('response', response => {
+    const type = response.request().resourceType();
+    if (new URL(response.url()).origin === 'http://127.0.0.1:4325' && ['document', 'script', 'fetch'].includes(type))
+      resources.push(response.body().then(body => ({ type, bytes: gzipSync(body).length })));
+  });
+  await essentials(page);
+  await page.waitForLoadState('networkidle');
+  const sizes = await Promise.all(resources);
+  expect(sizes.filter(r => r.type !== 'script').reduce((sum, r) => sum + r.bytes, 0)).toBeLessThanOrEqual(101000);
+  expect(sizes.filter(r => r.type === 'script').reduce((sum, r) => sum + r.bytes, 0)).toBeLessThanOrEqual(110000);
+  await expect(page.locator('[data-catalogue-count]')).toHaveAttribute('data-catalogue-count', String(meta.count));
 });

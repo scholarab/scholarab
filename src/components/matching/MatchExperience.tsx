@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { createMatchingEngine } from '../../lib/matching/engine';
 import {
   parseClientCatalogue,
+  evidenceOpportunity,
   verifiedJSON,
   type ClientCatalogue,
 } from '../../lib/matching/client-catalogue';
@@ -20,6 +21,7 @@ import type { Opportunity } from '../../lib/matching/normalize';
 import { getSaved, getSavedPrograms, toggleSaved, toggleSavedProgram } from '../../lib/tracker';
 import { QUIZ_STORAGE_KEY } from '../../lib/quiz';
 import './matching.css';
+import { sendEvent } from '../../lib/events';
 
 const fieldLabel = (field: string) =>
   ({
@@ -33,6 +35,14 @@ const labels = {
   meets_checked_requirements: 'Meets requirements we checked',
   worth_checking: 'Worth checking',
   known_ineligible: 'Doesn’t meet a known requirement',
+};
+const availabilityLabels = {
+  open: 'Open',
+  rolling: 'Rolling applications',
+  opens_later: 'Opens later',
+  deadline_unpublished: 'Deadline not published',
+  unknown: 'Dates need checking',
+  closed: 'Closed',
 };
 export default function MatchExperience({
   catalogueHash,
@@ -133,7 +143,23 @@ export default function MatchExperience({
     if (session.ready) heading.current?.focus();
   }, [session.ready]);
   const engine = useMemo(() => (data ? createMatchingEngine(data.opportunities) : null), [data]);
-  const profile = useMemo(() => essentialProfile(session), [session]);
+  const opportunitiesByKey = useMemo(
+    () => new Map(data?.opportunities.map((o) => [o.key, o])),
+    [data]
+  );
+  const communities = useMemo(
+    () =>
+      [...new Set(data?.opportunities.flatMap((o) => o.discovery?.communities ?? []) ?? [])]
+        .filter((value) => !['Alberta', 'National', 'Canada', 'International'].includes(value))
+        .sort(),
+    [data]
+  );
+  const profile = useMemo(
+    () => essentialProfile(session),
+    // Session expiry/intent changes do not change eligibility answers.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [session.stage, session.community, session.profile]
+  );
   // Calendar-day updates need assessment; a ticking timer must not reevaluate
   // thousands of rules every second.
   const minute = clock.toISOString().slice(0, 16);
@@ -154,16 +180,29 @@ export default function MatchExperience({
             ? a.eligibility === 'known_ineligible'
             : a.eligibility !== 'known_ineligible'))
     ) ?? [];
-  const candidates =
-    data && evaluated
-      ? nextQuestions(
-          data.opportunities,
-          evaluated.all.filter(visibleKind),
-          profile,
-          session.attempted,
-          session.personal
-        )
-      : [];
+  const candidates = useMemo(
+    () =>
+      data && evaluated
+        ? nextQuestions(
+            data.opportunities,
+            evaluated.all.filter(
+              (a) =>
+                session.intent === 'both' ||
+                a.kind === (session.intent === 'programs' ? 'program' : 'scholarship')
+            ),
+            profile,
+            session.attempted,
+            session.personal
+          )
+        : [],
+    [data, evaluated, profile, session.intent, session.attempted, session.personal]
+  );
+  useEffect(() => {
+    if (session.ready && evaluated) sendEvent('match_v1_results');
+  }, [session.ready, evaluated]);
+  useEffect(() => {
+    if (compare.length) sendEvent('match_v1_compare');
+  }, [compare.length]);
   const update = (change: Partial<MatchSession>) => {
     if (session.expiresAt <= Date.now()) {
       setSession(freshSession(catalogueHash));
@@ -193,6 +232,7 @@ export default function MatchExperience({
   };
   const answer = (value: Profile['answers'][string]) => {
     if (!question) return;
+    sendEvent('match_v1_refine');
     update({
       profile: { answers: { ...session.profile.answers, [question.key]: value } },
       attempted: [...session.attempted, question.key],
@@ -207,13 +247,16 @@ export default function MatchExperience({
       data-catalogue-count={data?.opportunities.length}
     >
       <div className="match-topline">
-        <span>NEW MATCHING · PREVIEW</span>
+        <span>NEW MATCHING · BETA</span>
         <a href="/saved/">Your saved applications →</a>
       </div>
       <p className="match-privacy">
         Answers stay in this tab for one hour unless you extend the session. No account required.{' '}
-        <button onClick={end}>End answer session</button>
+        <button disabled={!hydrated} onClick={end}>
+          End answer session
+        </button>
         <button
+          disabled={!hydrated}
           onClick={() => {
             if (session.expiresAt <= Date.now()) {
               end();
@@ -238,6 +281,7 @@ export default function MatchExperience({
           className="match-panel"
           onSubmit={(e) => {
             e.preventDefault();
+            sendEvent('match_v1_start');
             update({ ready: true });
           }}
         >
@@ -294,10 +338,17 @@ export default function MatchExperience({
               maxLength={300}
               disabled={!hydrated}
               value={session.community}
+              list="matching-communities"
               placeholder="For example, Medicine Hat"
               onChange={(e) => essentials({ community: e.target.value })}
             />
           </label>
+          <datalist id="matching-communities">
+            {communities.map((value) => (
+              <option key={value} value={value} />
+            ))}
+          </datalist>
+          <p>You can type any community, even if it is not listed, or skip this question.</p>
           <button type="button" onClick={() => essentials({ community: 'not-sure' })}>
             Skip community
           </button>
@@ -431,7 +482,7 @@ export default function MatchExperience({
                   Order
                   <select value={sort} onChange={(e) => setSort(e.target.value as SortMode)}>
                     <option value="best_fit">Best fit</option>
-                    <option value="closing_soon">Closing soon</option>
+                    <option value="closing_soon">Listed closing date</option>
                     <option value="local">Local opportunities</option>
                   </select>
                 </label>
@@ -459,18 +510,20 @@ export default function MatchExperience({
                   <div className="match-compare">
                     {compare.map((key) => {
                       const a = evaluated!.all.find((a) => a.key === key)!;
-                      const o = data.opportunities.find((o) => o.key === key)!;
+                      const o = opportunitiesByKey.get(key)!;
                       return (
                         <article key={key}>
                           <h4>{a.title}</h4>
                           <p>{o.amount || o.stipend || 'Amount not listed'}</p>
                           <p>{labels[a.eligibility]}</p>
                           <p>
-                            {a.availability.status.replaceAll('_', ' ')} ·{' '}
+                            {availabilityLabels[a.availability.status]} ·{' '}
                             {a.unresolvedRequirements.length} unresolved checks
                           </p>
                           <p>{a.availability.nextAction}</p>
-                          <a href={a.detailPath}>Full listing and application steps</a>
+                          <a href={a.detailPath} onClick={() => sendEvent('match_v1_action')}>
+                            Full listing and application steps
+                          </a>
                           <button onClick={() => setCompare((c) => c.filter((k) => k !== key))}>
                             Remove {a.title}
                           </button>
@@ -491,7 +544,7 @@ export default function MatchExperience({
                   <OpportunityCard
                     key={a.key}
                     assessment={a}
-                    opportunity={data.opportunities.find((o) => o.key === a.key)!}
+                    opportunity={opportunitiesByKey.get(a.key)!}
                     catalogueHash={catalogueHash}
                     evidenceHash={data.evidence[a.key]!}
                     compared={compare.includes(a.key)}
@@ -689,13 +742,11 @@ function OpportunityCard({
     setLoading(true);
     setFailure('');
     try {
-      const raw = (await verifiedJSON(
+      const raw = await verifiedJSON(
         await fetch(`/matching/evidence/${evidenceHash}.json`),
         evidenceHash
-      )) as { version: number; catalogueHash: string; opportunity: Opportunity };
-      if (raw.version !== 1 || raw.catalogueHash !== catalogueHash || raw.opportunity.key !== o.key)
-        throw new Error('Evidence version changed. Reload the page.');
-      setDetails(raw.opportunity);
+      );
+      setDetails(evidenceOpportunity(raw, catalogueHash, o.key));
     } catch {
       setFailure('Evidence could not be loaded or its version changed. Retry or reload this page.');
     } finally {
@@ -710,23 +761,29 @@ function OpportunityCard({
         <span>{labels[a.eligibility]}</span>
       </div>
       <h3>
-        <a href={a.detailPath}>{a.title}</a>
+        <a href={a.detailPath} onClick={() => sendEvent('match_v1_action')}>
+          {a.title}
+        </a>
       </h3>
       <p>
         {o.amount || o.stipend || 'Amount not listed'}
         {o.provider && ` · ${o.provider}`}
       </p>
       <p>
-        <strong>{a.availability.status.replaceAll('_', ' ')}</strong>
+        <strong>{availabilityLabels[a.availability.status]}</strong>
         {a.availability.closesOn &&
           ` · Listed closing date: ${a.availability.closesOn}${!a.availability.verified ? ' (unverified)' : ''}`}
       </p>
       <p>
         {a.availability.nextAction}. {a.availability.note}
       </p>
-      <p className="match-reasons">Order: {a.rankingReasons.join(' · ')}.</p>
+      <p className="match-reasons">Order: {a.rankingReasons.slice(0, 2).join(' · ')}.</p>
       <div className="match-actions">
-        <a className="match-primary" href={a.detailPath}>
+        <a
+          className="match-primary"
+          href={a.detailPath}
+          onClick={() => sendEvent('match_v1_action')}
+        >
           Review listing & next steps →
         </a>
         <button
@@ -736,6 +793,7 @@ function OpportunityCard({
               const result =
                 o.kind === 'scholarship' ? toggleSaved(o.publicId) : toggleSavedProgram(o.publicId);
               setSaved(result.includes(o.publicId));
+              if (result.includes(o.publicId)) sendEvent('match_v1_action');
               setMessage('Saved list updated. Application steps and calendar export are in Saved.');
             } catch {
               setMessage('This browser could not persist your saved list.');

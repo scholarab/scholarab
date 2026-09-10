@@ -15,7 +15,7 @@ import {
   QUIZ_MAX_QUESTION_WORD,
 } from '../lib/quiz';
 
-const adaptive = import.meta.env.MATCHING_QUIZ_VARIANT === 'adaptive';
+const adaptive = import.meta.env.MATCHING_QUIZ_VARIANT !== 'legacy';
 const description = adaptive
   ? 'Explore scholarships and programs with explained requirements, optional follow-ups and private answers.'
   : `${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`;
@@ -70,7 +70,7 @@ const breadcrumbJson = {
         </div>
       </div>
 
-      <!-- Build-time rollback: production stays on the established experience until Phase 4/5 gates. -->
+      <!-- Explicit legacy build remains available for rollback during beta observation. -->
       {
         adaptive ? (
           <MatchExperience {...matchingClient} client:load />
@@ -97,7 +97,8 @@ const breadcrumbJson = {
               <h2>How matching works</h2>
               <p>
                 Start with your search intent, current education stage and community. Every
-                published scholarship and program is assessed locally in your browser. Optional
+                published scholarship and program is assessed locally in your browser. Existing
+                listing details help order results but do not establish eligibility. Optional
                 questions appear only when they can clarify supported requirements. Personal topics
                 require your opt-in.
               </p>
@@ -107,10 +108,11 @@ const breadcrumbJson = {
                 result to see every requirement, its evidence and the appropriate next step.
               </p>
               <p>
-                Answers expire after one hour, including while this page is open, unless you explicitly extend the session. End your session
-                to clear them sooner. They never enter URLs or analytics. Saved listing IDs are kept
-                separately on your device. Use Saved for application steps and calendar export, and
-                each listing for its available reminder options.
+                Answers expire after one hour, including while this page is open, unless you
+                explicitly extend the session. End your session to clear them sooner. They never
+                enter URLs or analytics. Saved listing IDs are kept separately on your device. Use
+                Saved for application steps and calendar export, and each listing for its available
+                reminder options.
               </p>
               <p>
                 You can always browse the <a href="/scholarships/">scholarship directory</a>,{' '}
@@ -171,7 +173,9 @@ const breadcrumbJson = {
 
 <style is:global>
   /* The match design is fixed light regardless of site theme */
-  #sab-match .sabm-trust { color: #526252; }
+  #sab-match .sabm-trust {
+    color: #526252;
+  }
   body:has(#sab-match) {
     background: #fbf8f2;
   }

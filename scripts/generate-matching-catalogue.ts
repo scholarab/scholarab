@@ -52,10 +52,18 @@ mkdirSync(`${dir}/evidence`, { recursive: true });
 for (const name of readdirSync(`${dir}/evidence`)) {
   if (/^[a-f0-9]{64}\.json$/.test(name)) unlinkSync(`${dir}/evidence/${name}`);
 }
-for (const opportunity of opportunities) {
-  const body = JSON.stringify({ version: 1, catalogueHash: manifest.catalogueHash, opportunity });
+// Small evidence packs share one content digest across 16 identities. This
+// avoids shipping 1,207 unrelated hashes before a student opens any evidence.
+// Every record still has a verified mapping and complete original evidence.
+for (let offset = 0; offset < opportunities.length; offset += 16) {
+  const pack = opportunities.slice(offset, offset + 16);
+  const body = JSON.stringify({
+    version: 2,
+    catalogueHash: manifest.catalogueHash,
+    opportunities: pack,
+  });
   const hash = createHash('sha256').update(body).digest('hex');
-  evidence[opportunity.key] = hash;
+  for (const opportunity of pack) evidence[opportunity.key] = hash;
   writeFileSync(`${dir}/evidence/${hash}.json`, body);
 }
 for (const name of readdirSync(dir)) {
@@ -76,5 +84,5 @@ writeFileSync(
   JSON.stringify({ catalogueHash: manifest.catalogueHash, coreHash, count: opportunities.length })
 );
 console.log(
-  `Matching core: ${core.length} bytes; evidence split into ${opportunities.length} versioned assets.`
+  `Matching core: ${core.length} bytes; evidence connected through ${new Set(Object.values(evidence)).size} versioned packs.`
 );

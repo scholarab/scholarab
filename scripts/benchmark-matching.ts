@@ -6,11 +6,19 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 const base = new URL(process.argv[2] ?? 'http://127.0.0.1:4322');
 if (!['localhost', '127.0.0.1'].includes(base.hostname))
   throw new Error('Benchmark must use a local build');
+const slowNetwork = process.argv.includes('--slow-network');
 const browser = await chromium.launch();
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const cdp = await page.context().newCDPSession(page);
   await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+  if (slowNetwork)
+    await cdp.send('Network.emulateNetworkConditions', {
+      offline: false,
+      latency: 150,
+      downloadThroughput: 200000,
+      uploadThroughput: 93750,
+    });
   const resources: Promise<{ path: string; raw: number; gzip: number; type: string }>[] = [];
   page.on('response', (response) => {
     if (new URL(response.url()).origin !== base.origin) return;
@@ -52,7 +60,10 @@ try {
   const report = {
     measuredAt: new Date().toISOString(),
     conditions:
-      'Local static build, cold browser context, Chromium, 390x844, 4x CPU; gzip is Node gzip; no network throttling',
+      'Local static build, cold browser context, Chromium, 390x844, 4x CPU; gzip is Node gzip; ' +
+      (slowNetwork
+        ? '150ms latency, 1.6Mbps download, 750kbps upload (static server sends uncompressed bodies)'
+        : 'no network throttling'),
     variant: adaptive ? 'adaptive' : 'legacy',
     readyMs: Math.round(readyMs),
     catalogueReadyMs,

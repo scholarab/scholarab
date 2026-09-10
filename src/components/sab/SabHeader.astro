@@ -11,7 +11,6 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 
 import SabLogoMark from './SabLogoMark.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
-import { QUIZ_DURATION } from '../../lib/quiz';
 import { programIsListed } from '../../lib/status';
 
 interface Props {
@@ -62,7 +61,7 @@ const isActive = (href: string) =>
 // Scrolling announcement band (fishback2026.com-style): a short pair of
 // linked CTAs repeated to fill the loop.
 const tickerPair = [
-  { label: 'Find your match', rest: `in ${QUIZ_DURATION}`, href: '/match/' },
+  { label: 'Find your match', rest: 'with three essentials', href: '/match/' },
   { label: 'Browse scholarships', rest: 'open right now', href: '/scholarships/' },
 ];
 const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();

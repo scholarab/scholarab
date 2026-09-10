@@ -7,7 +7,7 @@ import { jsonError } from '../../lib/api-response'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'app_step', 'source_visit'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'app_step', 'source_visit', 'match_v1_start', 'match_v1_results', 'match_v1_refine', 'match_v1_compare', 'match_v1_action'])
 // Campaign sources, mirroring SOURCES in src/lib/events.ts. Anyone can type
 // `?s=` into the address bar, so the server keeps its own copy of the list
 // rather than trusting whatever the client sends.
@@ -70,6 +70,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   if (typeof event !== 'string' || !ALLOWED_EVENTS.has(event))
     return jsonError('Unknown event', 400)
+  if (event.startsWith('match_v1_') && Object.keys(body).some(key => key !== 'event'))
+    return jsonError('Matching milestones accept only an event name', 400)
   if (itemType !== undefined && itemType !== 'scholarship' && itemType !== 'program')
     return jsonError('itemType must be scholarship or program', 400)
   if (itemId !== undefined && (typeof itemId !== 'number' || !Number.isInteger(itemId) || itemId < 1 || itemId > 1_000_000))

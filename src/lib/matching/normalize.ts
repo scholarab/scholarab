@@ -130,6 +130,14 @@ export function legacyMatching(row: Document, kind: CatalogueKind): MatchingDocu
     },
   });
 }
+function programStages(label: string | null): string[] {
+  if (!label) return [];
+  if (/^high school$/i.test(label)) return ['10', '11', '12'];
+  const range = /^Grades? (10|11|12)[–-](10|11|12)$/i.exec(label);
+  if (range) return ['10', '11', '12'].filter((v) => +v >= +range[1]! && +v <= +range[2]!);
+  const single = /^Grade (10|11|12)$/i.exec(label);
+  return single ? [single[1]!] : [];
+}
 export function normalizeOpportunity(row: Document, kind: CatalogueKind) {
   validateCatalogue([row], kind);
   const matching =
@@ -149,6 +157,20 @@ export function normalizeOpportunity(row: Document, kind: CatalogueKind) {
     active: row.active !== false,
     legacyDeadline: text(row.deadline),
     legacyOpenDate: text(row.openDate),
+    // Discovery metadata influences ordering only, never eligibility. Preserve
+    // explicit listing values without guessing residence from a program venue.
+    discovery: {
+      stages:
+        kind === 'scholarship'
+          ? (((row.eligibility as Record<string, unknown> | undefined)?.grades ?? []) as string[])
+          : programStages(text(row.grades)),
+      communities:
+        kind === 'scholarship'
+          ? [text(row.region), ...(Array.isArray(row.alsoOpenTo) ? row.alsoOpenTo : [])].filter(
+              (v): v is string => typeof v === 'string'
+            )
+          : [],
+    },
     matching,
     issues: [
       ...(matching.coverage !== 'reviewed' ? ['coverage-unreviewed'] : []),

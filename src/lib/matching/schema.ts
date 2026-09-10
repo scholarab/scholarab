@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 const date = z.iso.date();
+const validTimezones = new Set<string>();
 const url = z
   .url()
   .refine(
@@ -191,7 +192,10 @@ export const matchingSchema = z
       errors('Opening date must precede closing date');
     if (a.timezone) {
       try {
-        new Intl.DateTimeFormat('en', { timeZone: a.timezone });
+        if (!validTimezones.has(a.timezone)) {
+          new Intl.DateTimeFormat('en', { timeZone: a.timezone });
+          validTimezones.add(a.timezone);
+        }
       } catch {
         errors('Invalid availability timezone');
       }

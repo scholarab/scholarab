@@ -31,7 +31,7 @@ console.log(
   `Verified ${manifest.entries.length} matching identities, content hashes, quiz connections, and detail pages.`
 );
 const { createHash } = await import('node:crypto');
-const { parseClientCatalogue, evaluationProjection } =
+const { parseClientCatalogue, evaluationProjection, evidenceOpportunity } =
   await import('../src/lib/matching/client-catalogue.ts');
 const client = read('src/data/matching-client.json');
 const coreBytes = readFileSync(`dist/matching/core.${client.coreHash}.json`);
@@ -54,8 +54,9 @@ for (const opportunity of asset.opportunities) {
   const detail = JSON.parse(bytes.toString());
   if (
     detail.catalogueHash !== manifest.catalogueHash ||
-    JSON.stringify(detail.opportunity) !== JSON.stringify(opportunity)
+    JSON.stringify(evidenceOpportunity(detail, manifest.catalogueHash, opportunity.key)) !==
+      JSON.stringify(opportunity)
   )
     throw new Error('Evidence content mismatch');
 }
-console.log(`Verified adaptive core and all ${core.opportunities.length} evidence assets.`);
+console.log(`Verified adaptive core and all ${core.opportunities.length} evidence connections.`);

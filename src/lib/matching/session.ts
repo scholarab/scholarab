@@ -63,7 +63,7 @@ export function readSession(storage: Storage, hash: string, now = Date.now()): M
       fresh.intent = ['both', 'scholarships', 'programs'].includes(old.answers?.searchType)
         ? old.answers.searchType
         : '';
-      fresh.stage = ['10', '11', '12', 'post-secondary'].includes(old.answers?.grade)
+      fresh.stage = ['10', '11', '12', 'post-secondary', 'not-sure'].includes(old.answers?.grade)
         ? old.answers.grade
         : '';
       fresh.community =
