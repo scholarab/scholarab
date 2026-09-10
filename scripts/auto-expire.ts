@@ -42,7 +42,13 @@ for (const s of scholarships) {
       console.log(`Expired: [${s.id}] ${s.title} (deadline: ${s.deadline})`);
     }
   } else if (s.active === false && s.openDate) {
-    if (s.openDate <= today && !isPast(s.deadline)) {
+    // A dated, still-future deadline is required, not merely "not past":
+    // isPast(undefined) is false, so a listing with NO deadline used to
+    // satisfy this and get reopened by a stale openDate, with nothing left
+    // that could ever expire it again. That is how the discontinued TD
+    // community leadership award came back as open the night after it was
+    // retired, carrying an openDate from its last real cycle.
+    if (s.openDate <= today && isDated(s.deadline) && !isPast(s.deadline)) {
       s.active = true;
       changed++;
       console.log(`Opened: [${s.id}] ${s.title} (openDate: ${s.openDate})`);
