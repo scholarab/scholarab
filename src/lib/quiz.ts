@@ -327,4 +327,13 @@ export const QUIZ_PROMISE = `${QUIZ_QUESTION_WORD} questions, ${QUIZ_DURATION}. 
  * changed: the teaser kept handing adaptive-shaped answers to a legacy quiz.
  * One export, imported twice, cannot disagree with itself.
  */
-export const ADAPTIVE_QUIZ = import.meta.env.MATCHING_QUIZ_VARIANT === 'adaptive';
+/* This module is also imported from plain Node: session.ts pulls the storage
+ * key, and the matching E2E specs pull session.ts. `import.meta.env` is a Vite
+ * construct and is undefined there, so read it defensively and fall back to
+ * process.env rather than throwing at import time. */
+const quizVariant =
+  (import.meta as unknown as { env?: Record<string, string | undefined> }).env
+    ?.MATCHING_QUIZ_VARIANT ??
+  (typeof process === 'undefined' ? undefined : process.env.MATCHING_QUIZ_VARIANT);
+
+export const ADAPTIVE_QUIZ = quizVariant === 'adaptive';
