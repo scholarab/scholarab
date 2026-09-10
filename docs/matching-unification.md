@@ -21,13 +21,13 @@ The 10 TD availability fixtures now expect the shared future state, rather than 
 
 The expiration job runs at 00:00 UTC in `.github/workflows/ci.yml`, as well as on pushes. `auto-expire.ts` edits JSON; CI validates, mirrors JSON to the admin DB, builds matching assets and pushes data changes. Cloudflare rebuilds the catalogue on that data commit. The public build reads repository JSON, never DB drafts. There is no separate DB-only expiration path. The job already requires a valid current/future deadline before reopening an inactive scholarship, so a stale opening date cannot revive TD or other inactive undated records.
 
-A remaining publication risk is the DB sync occurring before tests, build and push. If a later step fails, the admin mirror may temporarily run ahead of Git. Move the mirror after a validated successful data push and check repository freshness. This is separate from the immediate status fix.
+The audit found DB sync occurring before tests, build and push. Step 3 moved it after all validation and a successful data push, with a fresh main-revision check before writing. If main advanced, the older run skips the mirror. This narrows the race but is not an atomic lock across Git and the database; a completed mirror still does not prove Cloudflare deployed successfully.
 
 ## Homepage audit of 19260ec
 
 The 59 changed diff lines were 28 additions and 31 deletions in the quiz teaser and its handoff. The change replaced grade/region/interests with intent/stage/community, added postsecondary and uncertain options, cleared an old adaptive session after explicit teaser submission, stored the three essentials, and navigated to `/match/`. The adaptive quiz became responsible for its versioned start event. These changes let the homepage populate the new quiz's actual essentials.
 
-The commit did not change hero content, listing counts, SEO metadata, closing-soon logic, layout or CSS. Existing smoke tests cover homepage content, and adaptive journey tests cover the teaser handoff. The unconditional handoff needs a legacy-variant regression: legacy does not offer the uncertain values and can miss its start event when entering at step 3. Keep any fix limited to the teaser, with the production variant unchanged.
+The commit did not change hero content, listing counts, SEO metadata, closing-soon logic, layout or CSS. Existing smoke tests cover homepage content, and adaptive journey tests cover the teaser handoff. The handoff now follows the destination's existing build variant. Adaptive keeps intent/stage/community; legacy receives grade/community/field, searches both opportunity types and resumes at average. Its start event is retained. Desktop and mobile handoff tests passed against both local variants, and the default adaptive build was restored. The production variant is unchanged.
 
 ## Deferred human validation
 

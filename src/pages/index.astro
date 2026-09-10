@@ -9,7 +9,7 @@ import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 import { programIsListed } from '../lib/status';
 import { SCHOLARSHIP_FACETS, facetForCategory } from '../lib/facets';
-import { teaserOptions } from '../lib/quiz';
+import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -95,10 +95,13 @@ const cityFacets = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region').map(f => 
   count: scholarships.filter(s => s.region === f.value).length,
 }));
 
-// The teaser is the first three questions of the real quiz, not a lookalike:
-// every chip carries the value the matcher expects, so picking here writes a
-// exact essentials that the matching session adapter can read.
-const matchGroups = [
+// Follow the same build variant as /match so a rollback cannot leave the
+// homepage seeding answers the destination does not understand.
+const adaptive = import.meta.env.MATCHING_QUIZ_VARIANT !== 'legacy';
+const legacyLabels: Record<string, string> = {
+  grade: 'YOUR GRADE', city: 'YOUR REGION', field: "YOU'RE INTO",
+};
+const matchGroups = adaptive ? [
   { key: 'searchType', label: 'YOU WANT TO FIND', opts: [
     { label: 'Scholarships', value: 'scholarships' },
     { label: 'Programs', value: 'programs' },
@@ -111,7 +114,7 @@ const matchGroups = [
   { key: 'city', label: 'YOUR COMMUNITY', opts: [
     ...teaserOptions('city'), { label: 'Somewhere else', value: 'not-sure' },
   ] },
-];
+] : TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, opts: teaserOptions(key) }));
 ---
 
 <Layout
@@ -278,13 +281,15 @@ const matchGroups = [
     <div class="sab-container sab-match">
       <div class="sab-match-grid">
         <div>
-          <div class="sab-mono sab-match-eyebrow">MATCH · THREE ESSENTIALS</div>
+          <div class="sab-mono sab-match-eyebrow">{adaptive ? 'MATCH · THREE ESSENTIALS' : 'MATCH · START WITH THREE'}</div>
           <h2 class="sab-h2 sab-match-h2">Tell us three things. We'll shortlist for you.</h2>
           <p class="sab-match-copy">
-            Pick what you want to find, your education stage, and community. Explore listings with clear requirements and next steps. Everything stays in your browser, with no account or email needed.
+            {adaptive
+              ? 'Pick what you want to find, your education stage, and community. Explore listings with clear requirements and next steps. Everything stays in your browser, with no account or email needed.'
+              : 'Pick your grade, region, and academic focus. Continue the quiz to explore scholarships and programs. Everything stays in your browser, with no account or email needed.'}
           </p>
         </div>
-        <div class="sab-match-card" id="match-teaser">
+        <div class="sab-match-card" id="match-teaser" data-quiz-variant={adaptive ? 'adaptive' : 'legacy'}>
           {matchGroups.map(g => (
             <div class="sab-match-group" data-match-group={g.key}>
               <div class="sab-mono sab-match-label">{g.label}</div>
@@ -309,9 +314,7 @@ const matchGroups = [
 <script>
   import { todayDate as albertaToday } from '../lib/calendar';
   import { QUIZ_STORAGE_KEY } from '../lib/quiz';
-
-  // The new flow receives intent, education stage, and community.
-  const TEASER_STEP = 3; // Legacy rollback resumes at the first unanswered field.
+  import { sendEvent } from '../lib/events';
 
   // ── Closing-this-week day chips (client-side so a stale static build never lies) ──
   function updateClosingSoon() {
@@ -391,6 +394,7 @@ const matchGroups = [
     const cta = document.getElementById('match-teaser-cta');
     if (!card || !cta || card.dataset.init) return;
     card.dataset.init = 'true';
+    const adaptive = card.dataset.quizVariant === 'adaptive';
 
     const groups = Array.from(card.querySelectorAll<HTMLElement>('[data-match-group]'));
     const picked = () => {
@@ -423,14 +427,17 @@ const matchGroups = [
     });
     cta.addEventListener('click', () => {
       if ((cta as HTMLButtonElement).disabled) return;
-      // The new quiz migrates exact grade/community picks into its essentials.
-      // Old field preferences are not treated as verified eligibility facts.
-      const answers = picked();
+      // Adaptive matching migrates the three essentials. Legacy matching
+      // receives its original grade/city/field picks and defaults to both
+      // opportunity types, resuming at the first unanswered question.
+      const answers = adaptive ? picked() : { searchType: 'both', ...picked() };
       try {
         sessionStorage.removeItem('scholarab_matching_v1'); // Explicit new teaser picks replace a prior quiz session.
-        sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step: TEASER_STEP, answers, savedAt: Date.now() }));
+        sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step: adaptive ? 3 : 4, answers, savedAt: Date.now() }));
       } catch { /* private mode: the quiz just starts from question 1 */ }
-      // The destination records its own versioned milestones on submission.
+      // Legacy resumes after question 1, where it would otherwise count a
+      // start. The adaptive destination records its own versioned milestone.
+      if (!adaptive) sendEvent('quiz_start');
       window.location.assign('/match/');
     });
     update();
