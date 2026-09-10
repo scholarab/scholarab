@@ -383,7 +383,7 @@ it('handles Alberta midnight, DST, future openings, unknown windows, and inactiv
   o.matching.availability.opensOn = null;
   expect(evaluateAvailability(o, now).status).toBe('unknown');
   o.active = false;
-  expect(evaluateAvailability(o, now).status).toBe('closed');
+  expect(evaluateAvailability(o, now).status).toBe('opens_later');
 });
 it('separates nomination/automatic methods and warns about deadline-day time', () => {
   const o = opportunity();

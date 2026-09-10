@@ -103,5 +103,5 @@ it('orders by upcoming listed dates without claiming unverified applications are
     { now, sort: 'closing_soon' }
   );
   expect(result.all.map((a) => a.publicId)).toEqual([2, 1, 3]);
-  expect(result.all.every((a) => a.availability.status === 'unknown')).toBe(true);
+  expect(result.all.map((a) => a.availability.status)).toEqual(['unknown', 'unknown', 'closed']);
 });

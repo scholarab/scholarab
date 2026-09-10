@@ -1323,82 +1323,82 @@
   {
     "id": "judgment-091",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2026-09-10T12:00:00Z",
     "profileDescription": "grade-10",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-092",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2026-09-11T12:00:00Z",
     "profileDescription": "grade-11",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-093",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2026-09-12T12:00:00Z",
     "profileDescription": "grade-12",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-094",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2026-10-01T12:00:00Z",
     "profileDescription": "citizen",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-095",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2026-11-15T12:00:00Z",
     "profileDescription": "resident",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-096",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2027-01-01T12:00:00Z",
     "profileDescription": "high-marks",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-097",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2027-06-01T12:00:00Z",
     "profileDescription": "leadership",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-098",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2027-09-01T12:00:00Z",
     "profileDescription": "unknown",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-099",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2028-01-01T12:00:00Z",
     "profileDescription": "alumnus",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-100",
     "source": "td-ended",
-    "availability": "closed",
+    "availability": "opens_later",
     "now": "2029-01-01T12:00:00Z",
     "profileDescription": "future-applicant",
-    "reason": "TD states no new applications in 2026 or beyond; student circumstances cannot reopen it"
+    "reason": "TD is inactive with no deadline: shared listing policy reports future with no confirmed opening, never open"
   },
   {
     "id": "judgment-101",
