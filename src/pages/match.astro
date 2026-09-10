@@ -107,7 +107,7 @@ const breadcrumbJson = {
                 result to see every requirement, its evidence and the appropriate next step.
               </p>
               <p>
-                Answers expire after one hour, including while this page is open. End your session
+                Answers expire after one hour, including while this page is open, unless you explicitly extend the session. End your session
                 to clear them sooner. They never enter URLs or analytics. Saved listing IDs are kept
                 separately on your device. Use Saved for application steps and calendar export, and
                 each listing for its available reminder options.
@@ -171,6 +171,7 @@ const breadcrumbJson = {
 
 <style is:global>
   /* The match design is fixed light regardless of site theme */
+  #sab-match .sabm-trust { color: #526252; }
   body:has(#sab-match) {
     background: #fbf8f2;
   }

@@ -4,12 +4,16 @@ export const factSchema = z.discriminatedUnion('kind', [
   z
     .object({
       kind: z.literal('choices'),
-      values: z.array(z.string().min(1).max(300)).min(1).max(200),
+      values: z.array(z.string().min(1).max(300)).max(200),
       mode: z.enum(['actual', 'possible']),
       complete: z.boolean(),
       ...qualifier,
     })
-    .strict(),
+    .strict()
+    .refine(
+      (v) => v.values.length > 0 || (v.mode === 'actual' && v.complete),
+      'Only an explicit complete actual set may be empty'
+    ),
   z
     .object({
       kind: z.literal('number'),

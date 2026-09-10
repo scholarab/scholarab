@@ -1,3 +1,4 @@
+import { stableJson } from '../src/lib/catalogue.ts';
 import { readFileSync, existsSync } from 'node:fs';
 import { verifyMatchingCatalogue, assertIdentitySets } from '../src/lib/matching/catalogue.ts';
 const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
@@ -44,7 +45,7 @@ assertIdentitySets(
 );
 for (const opportunity of asset.opportunities) {
   const projected = core.opportunities.find((o) => o.key === opportunity.key);
-  if (JSON.stringify(projected) !== JSON.stringify(evaluationProjection(opportunity)))
+  if (stableJson(projected) !== stableJson(evaluationProjection(opportunity)))
     throw new Error(`Evaluation projection drift: ${opportunity.key}`);
   const hash = core.evidence[opportunity.key];
   const bytes = readFileSync(`dist/matching/evidence/${hash}.json`);

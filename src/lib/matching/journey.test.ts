@@ -194,3 +194,73 @@ it('does not reward an unreviewed listing for having fewer recorded rules', () =
       .all.map((a) => a.publicId)
   ).toEqual([1, 2]);
 });
+it('round-trips shared templates without merging identities or mutable rules', async () => {
+  const { encodeClientCatalogue } = await import('./client-catalogue');
+  const a = evaluationProjection(reviewed()),
+    b = structuredClone(a);
+  b.key = 'scholarship:2';
+  b.publicId = 2;
+  b.url = 'https://second.example.org';
+  b.matching.requirements[0]!.evidence.sourceUrl = b.url;
+  const data = {
+    version: 1 as const,
+    catalogueHash: 'same',
+    opportunities: [a, b],
+    evidence: { [a.key]: 'a'.repeat(64), [b.key]: 'b'.repeat(64) },
+  };
+  const wire = encodeClientCatalogue(data);
+  const decoded = parseClientCatalogue(wire, 'same');
+  expect(decoded).toEqual(data);
+  decoded.opportunities[0]!.matching.requirements[0]!.explanation = 'edited';
+  expect(decoded.opportunities[1]!.matching.requirements[0]!.explanation).not.toBe('edited');
+  wire.opportunities[0]!.matching = 999999;
+  expect(() => parseClientCatalogue(wire, 'same')).toThrow('Missing matching template');
+});
+it('distinguishes an explicit none-of-these answer from unknown or misspelled community text', () => {
+  const o = reviewed(),
+    r = o.matching.requirements[0]!;
+  r.field = 'residence';
+  r.basis = 'community';
+  r.condition = { operator: 'oneOf', values: ['Calgary'] };
+  const s = freshSession('a');
+  s.community = 'Unlisted / unsure';
+  expect(createMatchingEngine([o]).assess(essentialProfile(s), { now }).all[0]!.eligibility).toBe(
+    'worth_checking'
+  );
+  const profile = {
+    answers: {
+      residence: {
+        state: 'answered' as const,
+        fact: {
+          kind: 'choices' as const,
+          values: [],
+          mode: 'actual' as const,
+          complete: true,
+          basis: 'community',
+        },
+      },
+    },
+  };
+  expect(createMatchingEngine([o]).assess(profile, { now }).all[0]!.eligibility).toBe(
+    'known_ineligible'
+  );
+  expect(() =>
+    createMatchingEngine([o]).assess(
+      {
+        answers: {
+          residence: {
+            state: 'answered',
+            fact: {
+              kind: 'choices',
+              values: [],
+              mode: 'possible',
+              complete: true,
+              basis: 'community',
+            },
+          },
+        },
+      },
+      { now }
+    )
+  ).toThrow();
+});

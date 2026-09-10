@@ -10,6 +10,7 @@ import {
   freshSession,
   readSession,
   SESSION_KEY,
+  TTL,
   type MatchSession,
 } from '../../lib/matching/session';
 import { nextQuestions, type FollowUp } from '../../lib/matching/questions';
@@ -200,15 +201,37 @@ export default function MatchExperience({
     heading.current?.focus();
   };
   return (
-    <div className="match-experience">
+    <div
+      className="match-experience"
+      data-catalogue-ready={data ? 'true' : 'false'}
+      data-catalogue-count={data?.opportunities.length}
+    >
       <div className="match-topline">
         <span>NEW MATCHING · PREVIEW</span>
         <a href="/saved/">Your saved applications →</a>
       </div>
       <p className="match-privacy">
-        Answers stay in this tab for up to one hour. No account required.{' '}
+        Answers stay in this tab for one hour unless you extend the session. No account required.{' '}
         <button onClick={end}>End answer session</button>
+        <button
+          onClick={() => {
+            if (session.expiresAt <= Date.now()) {
+              end();
+              return;
+            }
+            update({ expiresAt: Date.now() + TTL });
+            setNotice('Answer session extended for one hour. You can clear it at any time.');
+          }}
+        >
+          Keep answers for another hour
+        </button>
       </p>
+      {hydrated && session.expiresAt - clock.getTime() < 120000 && (
+        <p role="alert">
+          Your answers will expire shortly. Choose “Keep answers for another hour” to continue, or
+          let this session clear automatically.
+        </p>
+      )}
       {notice && <p role="status">{notice}</p>}
       {!session.ready ? (
         <form
@@ -226,6 +249,7 @@ export default function MatchExperience({
             1. What are you looking for?
             <select
               required
+              disabled={!hydrated}
               value={session.intent}
               onChange={(e) => essentials({ intent: e.target.value })}
             >
@@ -241,6 +265,7 @@ export default function MatchExperience({
             2. What is your current education stage?
             <select
               required
+              disabled={!hydrated}
               value={session.stage}
               onChange={(e) => essentials({ stage: e.target.value })}
             >
@@ -267,6 +292,7 @@ export default function MatchExperience({
             <input
               required
               maxLength={300}
+              disabled={!hydrated}
               value={session.community}
               placeholder="For example, Medicine Hat"
               onChange={(e) => essentials({ community: e.target.value })}
@@ -564,7 +590,7 @@ function Refinement({
         {condition.operator === 'equals'
           ? 'Does this criterion describe you?'
           : condition.operator === 'oneOf'
-            ? `Your ${q.rule.field} (${condition.values.join(', ')} are listed by this provider; enter your actual answer)`
+            ? `Which listed ${fieldLabel(q.rule.field).toLowerCase()} applies to you?`
             : `Your exact ${q.rule.field}${q.rule.referenceDate ? ` on ${q.rule.referenceDate}` : ''}`}
         {condition.operator === 'equals' ? (
           <select required value={value} onChange={(e) => setValue(e.target.value)}>
@@ -572,11 +598,20 @@ function Refinement({
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
+        ) : condition.operator === 'oneOf' ? (
+          <select required value={value} onChange={(e) => setValue(e.target.value)}>
+            <option value="">Choose a listed option</option>
+            {condition.values.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         ) : (
           <input
             required
             maxLength={300}
-            type={condition.operator === 'oneOf' ? 'text' : 'number'}
+            type="number"
             min={0}
             max={q.rule.field === 'average' ? 100 : undefined}
             step="any"
@@ -586,6 +621,26 @@ function Refinement({
         )}
       </label>
       <button disabled={!value.trim()}>Update results</button>
+      {condition.operator === 'oneOf' && (
+        <button
+          type="button"
+          onClick={() =>
+            onAnswer({
+              state: 'answered',
+              fact: {
+                kind: 'choices',
+                values: [],
+                mode: 'actual',
+                complete: true,
+                ...(q.rule.basis ? { basis: q.rule.basis } : {}),
+                ...(q.rule.referenceDate ? { asOf: q.rule.referenceDate } : {}),
+              },
+            })
+          }
+        >
+          None of these applies to me
+        </button>
+      )}
       <button type="button" onClick={() => onAnswer({ state: 'not-sure' })}>
         Not sure
       </button>

@@ -102,7 +102,7 @@ export function essentialProfile(s: MatchSession): Profile {
                 kind: 'choices' as const,
                 values: [s.community],
                 mode: 'actual' as const,
-                complete: true,
+                complete: false,
                 basis: 'community',
               },
             },

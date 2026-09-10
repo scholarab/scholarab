@@ -1,0 +1,110 @@
+[
+  {
+    "id": "rutherford",
+    "key": "scholarship:14",
+    "url": "https://studentaid.alberta.ca/scholarships-and-awards/alexander-rutherford-scholarship/",
+    "reviewedOn": "2026-09-10",
+    "section": "Eligibility; Course requirements, graduated after April 1, 2008",
+    "summary": "Canadian citizens, permanent residents and protected persons qualify for the citizenship criterion. Designated five-course averages begin at 75%; averages are not rounded. Alberta residence has duration and family alternatives; community alone cannot establish it.",
+    "split": "development"
+  },
+  {
+    "id": "breakthrough",
+    "key": "program:44",
+    "url": "https://breakthroughjuniorchallenge.org/rules",
+    "reviewedOn": "2026-09-10",
+    "section": "Overview and Eligibility, 2026 competition",
+    "summary": "Minimum age 13 on May 11, 2026; maximum age 18 on October 1, 2026, using the provider\u2019s Pacific reference times. Prior winners cannot participate. Other legal, parental-permission, video and submission conditions remain manual checks.",
+    "split": "development"
+  },
+  {
+    "id": "shad",
+    "key": "program:10",
+    "url": "https://www.shad.ca/participate/",
+    "reviewedOn": "2026-09-10",
+    "section": "Who can apply?",
+    "summary": "The page welcomes Grades 10 and 11. Its broader selection assessment is not an automatic eligibility guarantee. The page does not establish a universal numeric admission cutoff.",
+    "split": "held-out"
+  },
+  {
+    "id": "schulich",
+    "key": "scholarship:58",
+    "url": "https://schulichleaders.com/high-school-nomination-process/",
+    "reviewedOn": "2026-09-10",
+    "section": "Submit your nominee, 2026/2027 academic year",
+    "summary": "The current cycle requires Canadian citizenship and high-school or c\u00e9gep graduation in Canada in 2026/2027. Students must plan an eligible STEM program at a partner university and receive a school nomination. Intending to attend an arbitrary university is insufficient.",
+    "split": "held-out"
+  },
+  {
+    "id": "td-ended",
+    "key": "scholarship:59",
+    "url": "https://www.td.com/ca/en/about-td/ready-commitment/community-leadership-scholarship-for-canadians",
+    "reviewedOn": "2026-09-10",
+    "section": "What should families or students do if they were planning to apply?",
+    "summary": "The program has concluded and accepts no new applications in 2026 or later. Existing recipients retain their commitments. Historical marks or leadership criteria cannot reopen the program.",
+    "split": "held-out"
+  },
+  {
+    "id": "aaron",
+    "key": "scholarship:213",
+    "url": "https://www.educationmatters.ca/awards/aaron-family-scholarship",
+    "section": "Eligibility; schools",
+    "summary": "Western Canada High School applicants must continue into theatre or technical theatre. Participation in at least one WCHS drama production is required, along with Drama 30 and other academic, leadership and essay conditions.",
+    "reviewedOn": "2026-09-10",
+    "split": "held-out"
+  },
+  {
+    "id": "archibald",
+    "key": "scholarship:36",
+    "url": "https://www.educationmatters.ca/awards/kermet-archibald-jacoba-van-den-brink-entrance-bursary",
+    "section": "Where Tenable; Eligibility",
+    "summary": "The award is for Calgary-city schools within CBE or CCSD, with financial need and proof required. Board membership alone does not prove school location. Listed fields, graduation, essay, award-conflict and international-fee restrictions also apply.",
+    "reviewedOn": "2026-09-10",
+    "split": "held-out"
+  },
+  {
+    "id": "indigenous-careers",
+    "key": "scholarship:7",
+    "url": "https://studentaid.alberta.ca/scholarships/indigenous-careers-award/",
+    "section": "Eligibility",
+    "summary": "The award requires the listed Indigenous ancestry categories with proof. Full-time eligible programs, residency and legal status apply; documented disability changes the course-load threshold. School-specific additional conditions remain unresolved.",
+    "reviewedOn": "2026-09-10",
+    "split": "held-out"
+  },
+  {
+    "id": "apprenticeship",
+    "key": "scholarship:99",
+    "url": "https://tradesecrets.alberta.ca/apprentice-services/get-financial-support/scholarships/high-school-apprenticeship-scholarships/",
+    "section": "Eligibility; How to apply",
+    "summary": "Both RAP and CTS alternatives require apprentice registration. Other citizenship, residence, graduation and prior-recipient conditions also apply. Consideration requires consent rather than a separate application.",
+    "reviewedOn": "2026-09-10",
+    "split": "held-out"
+  },
+  {
+    "id": "horatio",
+    "key": "scholarship:53",
+    "url": "https://horatioalger.ca/scholarships-and-services/undergraduate-scholarships/",
+    "section": "Canadian Scholarships",
+    "summary": "The Canadian Scholarships section requires annual net household income of $80,000 or less. Grade 11, a 70% minimum, service, adversity and Canadian citizenship or permanent residency in Canada also apply. Gross income is not interchangeable with net income.",
+    "reviewedOn": "2026-09-10",
+    "split": "held-out"
+  },
+  {
+    "id": "john-deere",
+    "key": "scholarship:1123",
+    "url": "https://4-h-canada.ca/wp-content/uploads/2026/03/John-Deere-Canada-4-H-Scholarship-Application-Guidelines-2026-Final.pdf",
+    "section": "2026 Application Guidelines, page 1, Eligibility",
+    "summary": "Current 4-H membership in good standing is required. Minimum age is 16 on January 1, 2026. Canadian residence, study plans, acceptance and application documents are separate conditions. The published 2026 deadline is June 1.",
+    "reviewedOn": "2026-09-10",
+    "split": "held-out"
+  },
+  {
+    "id": "mhc",
+    "key": "scholarship:2",
+    "url": "https://www.mhc.ab.ca/-/media/mhc/documents/about-mhc/admin-governance/policies-procedures/sd---student-services/2025/sd-31-student-awards-procedure.pdf",
+    "section": "SD 3.1, sections 3.3 and 5.1\u20135.2, approved April 8, 2026",
+    "summary": "Enrolment or recent completion can be at MHC or a partner program. Individual award agreements add eligibility rules. Without the partner-program and award-specific details, a different institution cannot automatically establish ineligibility.",
+    "reviewedOn": "2026-09-10",
+    "split": "held-out"
+  }
+]

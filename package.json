@@ -32,7 +32,8 @@
     "matching:generate": "tsx scripts/generate-matching-catalogue.ts",
     "matching:audit-db": "tsx scripts/audit-matching-db.ts",
     "matching:benchmark": "tsx scripts/benchmark-matching.ts",
-    "matching:evaluate": "tsx scripts/evaluate-matching.ts"
+    "matching:evaluate": "tsx scripts/evaluate-matching.ts",
+    "test:matching:e2e": "playwright test --config=playwright.matching.config.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",
@@ -56,6 +57,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@axe-core/playwright": "^4.13.0",
     "@electric-sql/pglite": "^0.5.8",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",

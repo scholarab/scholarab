@@ -40,3 +40,4 @@ public/matching/
 src/data/matching-manifest.json
 
 src/data/matching-client.json
+playwright-report/

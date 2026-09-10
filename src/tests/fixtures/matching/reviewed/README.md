@@ -1,0 +1,13 @@
+# Source-bounded evaluation set: September 10, 2026
+
+155 authored criterion/availability judgments connect to 12 real catalogue identities. The rules and expected outcomes were authored from linked primary sources before running the evaluator. `sources.json` records sections, dates and paraphrased findings; `rules.json` contains the scoped interpretations; `judgments.json` contains reference outcomes.
+
+Development sources: Rutherford and Breakthrough. The other ten sources are held out by provider. The same agent authored and tested these cases; no independent human review is claimed. Scope is deliberately partial. A satisfied criterion does not establish full scholarship/program eligibility. These fixture matching documents are **not published** to the live catalogue.
+
+The 155 cases comprise 145 criterion checks and 10 closed-program checks, spanning all 17 rule fields. Several exercise the same requirement across boundaries or unknown answer states. This is **not 155 independently reviewed awards, nor the complete Phase 4 release set**. Full-opportunity judgments, independent review of ambiguous interpretations, and participant sessions remain pending. Manual rules exercise safe uncertainty, not verified exclusion.
+
+Rutherford averages use the highest eligible five-course average across Grades 10 to 12 under the post-April-2008 chart. Failing one grade cannot exclude a student who qualifies through another. Residency duration and family alternatives remain manual. SHAD stage refers to the school year of application. Schulich uses the current 2026/2027 nomination page; older permanent-resident wording must not carry into this cycle. Breakthrough has two reference dates, so current age alone is insufficient. Horatio Alger uses annual net household income, not gross income. MHC institution eligibility stays manual because partner programs and individual award agreements can change the answer. Source summaries are paraphrases, not quotations.
+
+During the first held-out run, the board exclusion case used the unknown abbreviation EPSB. The evaluator correctly left it unresolved. Cases 117 and 118 now use the catalogue's canonical EPS identifier for Edmonton Public Schools; expected outcomes are unchanged. Unknown aliases must never become exclusions.
+
+The UAlberta HYRS primary page returned 403 during review. An older search-indexed preview was not accepted as current verification. No published source statuses were upgraded based on these fixtures. TD was already marked inactive in the catalogue; these cases prevent a regression rather than claim a newly discovered closure.

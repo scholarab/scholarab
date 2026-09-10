@@ -13,6 +13,7 @@
   font-size: clamp(25px, 4vw, 38px);
   line-height: 1.2;
   letter-spacing: -0.03em;
+  margin: 24px 0 16px;
 }
 .match-experience h3 {
   font-size: 23px;
@@ -168,4 +169,8 @@
     animation: none !important;
     transition: none !important;
   }
+}
+
+.match-experience .match-inline {
+  min-height: 44px;
 }

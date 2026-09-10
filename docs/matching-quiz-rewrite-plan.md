@@ -307,3 +307,7 @@ Defaults chosen: preserve `/match/`; retain ScholarAB branding; three essentials
 Engineering must settle the exact payload split and JavaScript budget from measured phase-1 results. Editorial review must settle ambiguous provider requirements from sources, never from a guessed conversion. Design/usability review must validate whether result grouping and language are understood. User coordination is needed only for participant recruitment, external contact, and a designated live-email test; these dependencies do not block implementation or synthetic evaluation.
 
 The rewrite is complete when the source/data model, engine, adaptive flow, full results/action experience, privacy controls, operational handoffs, documented evaluation, and production rollout all meet their gates. A beautiful screen with the old scoring logic underneath is not completion.
+
+## Phase 4 accessibility adjustment (September 10, 2026)
+
+The one-hour expiry remains the default and ordinary activity never extends it. An expiry warning and explicit “Keep answers for another hour” control let students who need more time extend their session. This replaces the earlier unconditional fixed-expiry wording to address timed-interaction accessibility. Ending the session, closing the tab, or letting the new expiry pass still clears answers; saved listing IDs remain separate. Participant testing is pending at the user's request. No recruitment or external contact is authorized by this adjustment.

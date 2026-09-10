@@ -33,13 +33,30 @@ try {
     .first()
     .waitFor();
   const readyMs = performance.now() - start;
+  const adaptive = (await page.locator('.match-experience').count()) > 0;
+  let catalogueReadyMs: number | null = null;
+  let resultsMs: number | null = null;
+  if (adaptive) {
+    await page.locator('[data-catalogue-ready="true"]').waitFor();
+    catalogueReadyMs = Math.round(performance.now() - start);
+    await page.getByLabel('1. What are you looking for?').selectOption('both');
+    await page.getByLabel('2. What is your current education stage?').selectOption('12');
+    await page.getByLabel('3. Which community do you currently live in?').fill('Calgary');
+    const submit = performance.now();
+    await page.getByRole('button', { name: 'Show opportunities →' }).click();
+    await page.locator('.match-card').first().waitFor();
+    resultsMs = Math.round(performance.now() - submit);
+  }
   await page.waitForLoadState('networkidle');
   const loaded = await Promise.all(resources);
   const report = {
     measuredAt: new Date().toISOString(),
     conditions:
       'Local static build, cold browser context, Chromium, 390x844, 4x CPU; gzip is Node gzip; no network throttling',
+    variant: adaptive ? 'adaptive' : 'legacy',
     readyMs: Math.round(readyMs),
+    catalogueReadyMs,
+    resultsMs,
     resources: loaded,
     totals: loaded.reduce((a, r) => ({ raw: a.raw + r.raw, gzip: a.gzip + r.gzip }), {
       raw: 0,

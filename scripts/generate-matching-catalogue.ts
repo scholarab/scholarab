@@ -44,7 +44,8 @@ console.log(
 );
 
 // Public quiz: evaluation fields up front, complete evidence only on request.
-const { evaluationProjection } = await import('../src/lib/matching/client-catalogue.ts');
+const { evaluationProjection, encodeClientCatalogue } =
+  await import('../src/lib/matching/client-catalogue.ts');
 const { createHash } = await import('node:crypto');
 const evidence: Record<string, string> = {};
 mkdirSync(`${dir}/evidence`, { recursive: true });
@@ -60,12 +61,14 @@ for (const opportunity of opportunities) {
 for (const name of readdirSync(dir)) {
   if (/^core\.[a-f0-9]{64}\.json$/.test(name)) unlinkSync(`${dir}/${name}`);
 }
-const core = JSON.stringify({
-  version: 1,
-  catalogueHash: manifest.catalogueHash,
-  opportunities: opportunities.map(evaluationProjection),
-  evidence,
-});
+const core = JSON.stringify(
+  encodeClientCatalogue({
+    version: 1,
+    catalogueHash: manifest.catalogueHash,
+    opportunities: opportunities.map(evaluationProjection),
+    evidence,
+  })
+);
 const coreHash = createHash('sha256').update(core).digest('hex');
 writeFileSync(`${dir}/core.${coreHash}.json`, core);
 writeFileSync(

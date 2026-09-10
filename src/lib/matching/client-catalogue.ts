@@ -1,20 +1,20 @@
 import type { Opportunity } from './normalize';
 import { matchingSchema } from './schema';
 
-/** Evaluation projection only. Full quotations and manual prose live in the
- * content-addressed evidence asset. Keep a real non-whitespace character to
- * preserve the evaluator's evidence-presence check, never display it as a quote.
- * No condition, rule identity, evidence status, date or source is upgraded. */
+/** Unreviewed evidence cannot affect eligibility, regardless of its prose or
+ * condition. Preserve every rule and its uncertainty; load original conditions
+ * and evidence for display on demand. Reviewed rules retain their full content. */
 export function evaluationProjection(opportunity: Opportunity): Opportunity {
   const result = structuredClone(opportunity);
-  const trimEvidence = (e: { excerpt: string }) => {
-    e.excerpt = e.excerpt.trim().slice(0, 1);
+  const omitUnreviewedBody = (e: { status: string; excerpt: string }) => {
+    if (e.status !== 'reviewed') e.excerpt = '';
   };
-  trimEvidence(result.matching.coverageEvidence);
-  trimEvidence(result.matching.availability.evidence);
+  omitUnreviewedBody(result.matching.coverageEvidence);
+  omitUnreviewedBody(result.matching.availability.evidence);
   for (const rule of result.matching.requirements) {
-    trimEvidence(rule.evidence);
-    if (rule.condition.operator === 'manual') rule.condition.text = rule.condition.text.slice(0, 1);
+    omitUnreviewedBody(rule.evidence);
+    if (rule.evidence.status !== 'reviewed')
+      rule.condition = { operator: 'manual', text: 'Source review required' };
   }
   result.issues = [];
   return result;
@@ -26,7 +26,7 @@ export interface ClientCatalogue {
   evidence: Record<string, string>;
 }
 export function parseClientCatalogue(raw: unknown, expected: string): ClientCatalogue {
-  const data = raw as ClientCatalogue;
+  const data = decodeClientCatalogue(raw) as ClientCatalogue;
   if (
     !data ||
     data.version !== 1 ||
@@ -63,4 +63,62 @@ export async function verifiedJSON(response: Response, expectedHash: string): Pr
   const hash = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
   if (hash !== expectedHash) throw new Error('Catalogue version changed. Reload this page.');
   return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+/** Wire-only template sharing. A template is cloned before expanding provider
+ * references, so no record can mutate another record's requirements. */
+export function encodeClientCatalogue(data: ClientCatalogue) {
+  const templates: unknown[] = [];
+  const indices = new Map<string, number>();
+  const opportunities = data.opportunities.map((original) => {
+    const o = structuredClone(original);
+    for (const e of [
+      o.matching.coverageEvidence,
+      o.matching.availability.evidence,
+      ...o.matching.requirements.map((r) => r.evidence),
+    ])
+      if (e.sourceUrl === o.url) e.sourceUrl = '@opportunity';
+    const { availability, ...template } = o.matching;
+    const signature = JSON.stringify(template);
+    let index = indices.get(signature);
+    if (index === undefined) {
+      index = templates.length;
+      indices.set(signature, index);
+      templates.push(template);
+    }
+    return { ...o, matching: index, availability };
+  });
+  return { ...data, version: 2, opportunities, templates };
+}
+function decodeClientCatalogue(raw: unknown): unknown {
+  if (!raw || typeof raw !== 'object' || !('version' in raw) || raw.version !== 2) return raw;
+  const wire = raw as ReturnType<typeof encodeClientCatalogue>;
+  if (!Array.isArray(wire.templates) || !Array.isArray(wire.opportunities))
+    throw new Error('Invalid matching templates');
+  return {
+    version: 1,
+    catalogueHash: wire.catalogueHash,
+    evidence: wire.evidence,
+    opportunities: wire.opportunities.map(({ availability, matching: index, ...fields }) => {
+      if (!Number.isSafeInteger(index) || index < 0 || index >= wire.templates.length)
+        throw new Error('Missing matching template');
+      const matching = {
+        ...structuredClone(wire.templates[index] as Omit<Opportunity['matching'], 'availability'>),
+        availability: structuredClone(availability),
+      };
+      if (
+        !matching.coverageEvidence ||
+        !matching.availability?.evidence ||
+        !Array.isArray(matching.requirements)
+      )
+        throw new Error('Invalid matching template');
+      for (const e of [
+        matching.coverageEvidence,
+        matching.availability.evidence,
+        ...matching.requirements.map((r) => r.evidence),
+      ])
+        if (e.sourceUrl === '@opportunity') e.sourceUrl = fields.url;
+      return { ...fields, matching };
+    }),
+  };
 }
