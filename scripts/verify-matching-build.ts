@@ -29,3 +29,32 @@ assertIdentitySets(
 console.log(
   `Verified ${manifest.entries.length} matching identities, content hashes, quiz connections, and detail pages.`
 );
+const { createHash } = await import('node:crypto');
+const { parseClientCatalogue, evaluationProjection } =
+  await import('../src/lib/matching/client-catalogue.ts');
+const client = read('src/data/matching-client.json');
+const coreBytes = readFileSync(`dist/matching/core.${client.coreHash}.json`);
+if (createHash('sha256').update(coreBytes).digest('hex') !== client.coreHash)
+  throw new Error('Core asset hash mismatch');
+const core = parseClientCatalogue(JSON.parse(coreBytes.toString()), manifest.catalogueHash);
+assertIdentitySets(
+  manifest.entries.map((e: { key: string }) => e.key),
+  core.opportunities.map((o) => o.key),
+  'Adaptive quiz connection'
+);
+for (const opportunity of asset.opportunities) {
+  const projected = core.opportunities.find((o) => o.key === opportunity.key);
+  if (JSON.stringify(projected) !== JSON.stringify(evaluationProjection(opportunity)))
+    throw new Error(`Evaluation projection drift: ${opportunity.key}`);
+  const hash = core.evidence[opportunity.key];
+  const bytes = readFileSync(`dist/matching/evidence/${hash}.json`);
+  if (createHash('sha256').update(bytes).digest('hex') !== hash)
+    throw new Error('Evidence digest mismatch');
+  const detail = JSON.parse(bytes.toString());
+  if (
+    detail.catalogueHash !== manifest.catalogueHash ||
+    JSON.stringify(detail.opportunity) !== JSON.stringify(opportunity)
+  )
+    throw new Error('Evidence content mismatch');
+}
+console.log(`Verified adaptive core and all ${core.opportunities.length} evidence assets.`);

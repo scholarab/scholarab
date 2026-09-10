@@ -17,19 +17,21 @@ try {
     const type = response.request().resourceType();
     if (['document', 'script', 'fetch'].includes(type))
       resources.push(
-        response
-          .body()
-          .then((body) => ({
-            path: new URL(response.url()).pathname,
-            raw: body.length,
-            gzip: gzipSync(body).length,
-            type,
-          }))
+        response.body().then((body) => ({
+          path: new URL(response.url()).pathname,
+          raw: body.length,
+          gzip: gzipSync(body).length,
+          type,
+        }))
       );
   });
   const start = performance.now();
   await page.goto(new URL('/match/', base).href);
-  await page.getByText('What are you looking for?', { exact: true }).waitFor();
+  await page
+    .getByText('What are you looking for?', { exact: true })
+    .or(page.getByRole('heading', { name: 'Three things to get started.' }))
+    .first()
+    .waitFor();
   const readyMs = performance.now() - start;
   await page.waitForLoadState('networkidle');
   const loaded = await Promise.all(resources);

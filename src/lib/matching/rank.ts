@@ -48,9 +48,12 @@ export function rankAssessments(results: Assessment[], mode: SortMode = 'best_fi
       Number(b.scopeReviewed) - Number(a.scopeReviewed) ||
       Number(b.eligibility === 'meets_checked_requirements') -
         Number(a.eligibility === 'meets_checked_requirements') ||
-      a.unresolvedRequirements.length - b.unresolvedRequirements.length ||
+      (a.scopeReviewed && b.scopeReviewed
+        ? a.unresolvedRequirements.length - b.unresolvedRequirements.length
+        : 0) ||
       b.preferenceMatches.length - a.preferenceMatches.length ||
       date(a).localeCompare(date(b)) ||
+      a.publicId - b.publicId ||
       a.key.localeCompare(b.key)
     );
   });

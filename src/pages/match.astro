@@ -1,33 +1,52 @@
 ---
 import SabFooter from '../components/sab/SabFooter.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
-import Layout from '../layouts/Layout.astro'
-import SabHeader from '../components/sab/SabHeader.astro'
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
 
-import QuizLoader from '../components/QuizLoader'
-import quizDataUrl from '../data/quiz-payload.json?url'
-import { QUIZ_DURATION, QUIZ_PROMISE, QUIZ_QUESTION_WORD, QUIZ_MAX_QUESTION_WORD } from '../lib/quiz'
+import QuizLoader from '../components/QuizLoader';
+import MatchExperience from '../components/matching/MatchExperience';
+import matchingClient from '../data/matching-client.json';
+import quizDataUrl from '../data/quiz-payload.json?url';
+import {
+  QUIZ_DURATION,
+  QUIZ_PROMISE,
+  QUIZ_QUESTION_WORD,
+  QUIZ_MAX_QUESTION_WORD,
+} from '../lib/quiz';
 
-
-
+const adaptive = import.meta.env.MATCHING_QUIZ_VARIANT === 'adaptive';
+const description = adaptive
+  ? 'Explore scholarships and programs with explained requirements, optional follow-ups and private answers.'
+  : `${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`;
 const breadcrumbJson = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
-  'itemListElement': [
-    { '@type': 'ListItem', 'position': 1, 'name': 'ScholarAB', 'item': 'https://www.scholarab.ca' },
-    { '@type': 'ListItem', 'position': 2, 'name': 'Find Your Scholarships', 'item': 'https://www.scholarab.ca/match/' },
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ScholarAB', item: 'https://www.scholarab.ca' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Find Your Scholarships',
+      item: 'https://www.scholarab.ca/match/',
+    },
   ],
 };
 ---
 
 <Layout
   title="Find Your Scholarships | ScholarAB"
-  description={`${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`}
+  description={description}
   ogTitle="Find Your Scholarships | ScholarAB"
-  ogDescription={`${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`}
+  ogDescription={description}
   ogUrl="https://www.scholarab.ca/match/"
 >
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbJson)}
+    slot="head"
+  />
   <SabFonts italic slot="head" />
 
   <div class="sabp-header" slot="header">
@@ -39,17 +58,29 @@ const breadcrumbJson = {
       <div id="match-intro">
         <h1 class="sabm-h1">Find your <em>match.</em></h1>
         <p class="sabm-sub">
-          {QUIZ_QUESTION_WORD} questions. Instant results. Every Alberta opportunity available to you.
+          {
+            adaptive
+              ? 'Start with three essentials. Explore every scholarship and program.'
+              : `${QUIZ_QUESTION_WORD} questions. Instant results. Every Alberta opportunity available to you.`
+          }
         </p>
         <div class="sabm-trust sabl-mono">
           <span>◦ Completely anonymous</span>
-          <span>◦ Under {QUIZ_DURATION}</span>
+          <span>{adaptive ? '◦ Optional follow-ups' : `◦ Under ${QUIZ_DURATION}`}</span>
         </div>
       </div>
 
-      <QuizLoader url={quizDataUrl} client:load />
+      <!-- Build-time rollback: production stays on the established experience until Phase 4/5 gates. -->
+      {
+        adaptive ? (
+          <MatchExperience {...matchingClient} client:load />
+        ) : (
+          <QuizLoader url={quizDataUrl} client:load />
+        )
+      }
 
-      {/* The quiz is a React island, so until it hydrates this page has about
+      {
+        /* The quiz is a React island, so until it hydrates this page has about
           twenty words on it -- a heading, a subhead, and two trust chips. That
           is not enough for anything to read, index or rank, and it is not
           enough for a reader who lands here and wants to know what the tool
@@ -57,24 +88,82 @@ const breadcrumbJson = {
           page's actual prose. It sits below the quiz because the quiz is what
           the reader came for; it does not get hidden once the quiz starts,
           because a description of how matching works is most useful next to
-          the results it produced. */}
-      <section class="sabm-about">
-        <h2>How the match works</h2>
-        <p>
-          The quiz asks {QUIZ_QUESTION_WORD.toLowerCase()} things: whether you want scholarships, research programs or both; your grade; your city; the field you are headed into; your average; and where you plan to study. If your city has awards tied to a school board or to particular schools, it asks which board you are with and which school you go to as well, which makes it {QUIZ_MAX_QUESTION_WORD} at most. Nothing else. There is no name field, no email field and no account, and your answers never leave your browser. They are held on your own device for the tab you are in, so the quiz remembers where you were if you reload, and they are gone once you close the tab or leave it sitting for an hour. You can also clear them at any time by starting over.
-        </p>
-        <p>
-          What comes back is the same corpus you can browse on <a href="/scholarships/">the scholarship directory</a> and <a href="/programs/">the research programs list</a>, narrowed to what your answers actually clear. The matching is deliberately cautious in one direction: a question you skip is treated as unknown rather than as a &ldquo;no&rdquo;, so an award restricted to a group you did not tell us about still appears rather than being silently dropped. That is the right way round to be wrong. It does mean the list you get is the set worth checking, not a set you are guaranteed to be eligible for.
-        </p>
-        <p>
-          Each result carries a <strong>strong</strong>, <strong>good</strong> or <strong>possible</strong> badge. Those tiers are about how much of your profile the award's criteria actually spoke to, not about your odds of winning. A local award that names your city and your grade earns a strong badge because it matched on specific things; a province-wide award open to everyone in Alberta is a possible match for the same reason it is open to you: it barely asked. Read them as &ldquo;how well this fits what you told us&rdquo;.
-        </p>
-        <p>
-          Every result links to its full listing, and the criteria on that page come from the provider's own site. Check them there before you apply: rules change mid-cycle, and this quiz is a way to shorten the list, not a ruling on eligibility. If you would rather read than answer, the <a href="/deadlines/">deadline calendar</a> shows the same awards by month and the <a href="/guides/">guides</a> explain the year they sit in.
-        </p>
-      </section>
+          the results it produced. */
+      }
+      {
+        adaptive ? (
+          <section class="sabm-about">
+            <>
+              <h2>How matching works</h2>
+              <p>
+                Start with your search intent, current education stage and community. Every
+                published scholarship and program is assessed locally in your browser. Optional
+                questions appear only when they can clarify supported requirements. Personal topics
+                require your opt-in.
+              </p>
+              <p>
+                Eligibility and application availability are separate. A satisfied check is not a
+                guarantee of admission or funding. Unverified sources remain unresolved; open a
+                result to see every requirement, its evidence and the appropriate next step.
+              </p>
+              <p>
+                Answers expire after one hour, including while this page is open. End your session
+                to clear them sooner. They never enter URLs or analytics. Saved listing IDs are kept
+                separately on your device. Use Saved for application steps and calendar export, and
+                each listing for its available reminder options.
+              </p>
+              <p>
+                You can always browse the <a href="/scholarships/">scholarship directory</a>,{' '}
+                <a href="/programs/">program directory</a> or{' '}
+                <a href="/deadlines/">deadline calendar</a>, including without JavaScript.
+              </p>
+            </>
+          </section>
+        ) : (
+          <section class="sabm-about">
+            <h2>How the match works</h2>
+            <p>
+              The quiz asks {QUIZ_QUESTION_WORD.toLowerCase()} things: whether you want
+              scholarships, research programs or both; your grade; your city; the field you are
+              headed into; your average; and where you plan to study. If your city has awards tied
+              to a school board or to particular schools, it asks which board you are with and which
+              school you go to as well, which makes it {QUIZ_MAX_QUESTION_WORD} at most. Nothing
+              else. There is no name field, no email field and no account, and your answers never
+              leave your browser. They are held on your own device for the tab you are in, so the
+              quiz remembers where you were if you reload, and they are gone once you close the tab
+              or leave it sitting for an hour. You can also clear them at any time by starting over.
+            </p>
+            <p>
+              What comes back is the same corpus you can browse on{' '}
+              <a href="/scholarships/">the scholarship directory</a> and{' '}
+              <a href="/programs/">the research programs list</a>, narrowed to what your answers
+              actually clear. The matching is deliberately cautious in one direction: a question you
+              skip is treated as unknown rather than as a &ldquo;no&rdquo;, so an award restricted
+              to a group you did not tell us about still appears rather than being silently dropped.
+              That is the right way round to be wrong. It does mean the list you get is the set
+              worth checking, not a set you are guaranteed to be eligible for.
+            </p>
+            <p>
+              Each result carries a <strong>strong</strong>, <strong>good</strong> or{' '}
+              <strong>possible</strong> badge. Those tiers are about how much of your profile the
+              award's criteria actually spoke to, not about your odds of winning. A local award that
+              names your city and your grade earns a strong badge because it matched on specific
+              things; a province-wide award open to everyone in Alberta is a possible match for the
+              same reason it is open to you: it barely asked. Read them as &ldquo;how well this fits
+              what you told us&rdquo;.
+            </p>
+            <p>
+              Every result links to its full listing, and the criteria on that page come from the
+              provider's own site. Check them there before you apply: rules change mid-cycle, and
+              this quiz is a way to shorten the list, not a ruling on eligibility. If you would
+              rather read than answer, the <a href="/deadlines/">deadline calendar</a> shows the
+              same awards by month and the <a href="/guides/">guides</a> explain the year they sit
+              in.
+            </p>
+          </section>
+        )
+      }
     </div>
-
   </div>
 
   <SabFooter slot="footer" />
@@ -82,7 +171,9 @@ const breadcrumbJson = {
 
 <style is:global>
   /* The match design is fixed light regardless of site theme */
-  body:has(#sab-match) { background: #FBF8F2; }
+  body:has(#sab-match) {
+    background: #fbf8f2;
+  }
 </style>
 
 <style>
@@ -92,21 +183,38 @@ const breadcrumbJson = {
     max-width: 62ch;
     margin: 72px auto 8px;
     padding-top: 32px;
-    border-top: 1px solid rgba(20,25,21,0.12);
+    border-top: 1px solid rgba(20, 25, 21, 0.12);
     font-family: 'Archivo', sans-serif;
   }
   .sabm-about h2 {
-    font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
-    color: #141915; margin: 0 0 14px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #141915;
+    margin: 0 0 14px;
   }
   .sabm-about p {
-    font-size: 16px; line-height: 1.65;
-    color: rgba(20,25,21,0.74); margin: 0 0 16px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(20, 25, 21, 0.74);
+    margin: 0 0 16px;
   }
-  .sabm-about p:last-child { margin-bottom: 0; }
-  .sabm-about a { color: #141915; text-decoration: underline; text-underline-offset: 2px; }
-  .sabm-about strong { color: #141915; font-weight: 600; }
+  .sabm-about p:last-child {
+    margin-bottom: 0;
+  }
+  .sabm-about a {
+    color: #141915;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .sabm-about strong {
+    color: #141915;
+    font-weight: 600;
+  }
   @media (max-width: 720px) {
-    .sabm-about { margin-top: 48px; padding-top: 24px; }
+    .sabm-about {
+      margin-top: 48px;
+      padding-top: 24px;
+    }
   }
 </style>

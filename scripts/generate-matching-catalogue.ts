@@ -42,3 +42,36 @@ writeFileSync('.cache/matching-coverage.json', JSON.stringify(report, null, 2));
 console.log(
   `Matching coverage: ${opportunities.length}/${opportunities.length}; scholarships ${manifest.counts.scholarship}, programs ${manifest.counts.program}; reviewed ${report.reviewed}; unresolved ${report.unresolved}`
 );
+
+// Public quiz: evaluation fields up front, complete evidence only on request.
+const { evaluationProjection } = await import('../src/lib/matching/client-catalogue.ts');
+const { createHash } = await import('node:crypto');
+const evidence: Record<string, string> = {};
+mkdirSync(`${dir}/evidence`, { recursive: true });
+for (const name of readdirSync(`${dir}/evidence`)) {
+  if (/^[a-f0-9]{64}\.json$/.test(name)) unlinkSync(`${dir}/evidence/${name}`);
+}
+for (const opportunity of opportunities) {
+  const body = JSON.stringify({ version: 1, catalogueHash: manifest.catalogueHash, opportunity });
+  const hash = createHash('sha256').update(body).digest('hex');
+  evidence[opportunity.key] = hash;
+  writeFileSync(`${dir}/evidence/${hash}.json`, body);
+}
+for (const name of readdirSync(dir)) {
+  if (/^core\.[a-f0-9]{64}\.json$/.test(name)) unlinkSync(`${dir}/${name}`);
+}
+const core = JSON.stringify({
+  version: 1,
+  catalogueHash: manifest.catalogueHash,
+  opportunities: opportunities.map(evaluationProjection),
+  evidence,
+});
+const coreHash = createHash('sha256').update(core).digest('hex');
+writeFileSync(`${dir}/core.${coreHash}.json`, core);
+writeFileSync(
+  'src/data/matching-client.json',
+  JSON.stringify({ catalogueHash: manifest.catalogueHash, coreHash, count: opportunities.length })
+);
+console.log(
+  `Matching core: ${core.length} bytes; evidence split into ${opportunities.length} versioned assets.`
+);
