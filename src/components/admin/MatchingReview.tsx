@@ -1,3 +1,4 @@
+import MatchingEnginePreview from './MatchingEnginePreview';
 import { useEffect, useState } from 'react';
 import type { Coverage } from '../../lib/matching/store';
 import type { MatchingDocument } from '../../lib/matching/schema';
@@ -143,8 +144,8 @@ export default function MatchingReview() {
     <section className="space-y-5 max-w-5xl">
       <h1 className="text-2xl font-bold">Matching catalogue review</h1>
       <p>
-        Phase 1 foundation. This preview shows source requirements and coverage; eligibility
-        recommendations will be implemented in Phase 2.
+        Source review and Phase 2 engine preview. The public quiz still uses its existing engine
+        until the redesigned experience is ready.
       </p>
       {error && (
         <p role="alert" className="text-red-300 whitespace-pre-wrap">
@@ -366,6 +367,7 @@ export default function MatchingReview() {
             </p>
             <JsonEditor value={document} onApply={setDocument} />
           </details>
+          <MatchingEnginePreview opportunity={{ ...selection.preview, matching: document }} />
           <details>
             <summary>Normalized draft preview</summary>
             <pre className="overflow-auto whitespace-pre-wrap">

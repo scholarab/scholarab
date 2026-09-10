@@ -60,6 +60,11 @@ export const requirementSchema = z
       z.object({ operator: z.literal('equals'), value: z.boolean() }).strict(),
       z.object({ operator: z.literal('manual'), text: z.string().min(1).max(10000) }).strict(),
     ]),
+    answerKey: z
+      .string()
+      .regex(/^[a-zA-Z0-9_.:-]{1,150}$/)
+      .optional(),
+    basis: z.string().min(1).max(200).optional(),
     explanation: z.string().min(1).max(4000),
     referenceDate: date.nullable(),
     evidence: evidenceSchema,
@@ -80,6 +85,37 @@ export const requirementSchema = z
         code: 'custom',
         message: 'Numeric requirements need a threshold or manual check',
       });
+    if (
+      [
+        'educationStage',
+        'residence',
+        'school',
+        'schoolBoard',
+        'institution',
+        'field',
+        'citizenship',
+      ].includes(r.field) &&
+      !['oneOf', 'manual'].includes(op)
+    )
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Categorical requirements need explicit accepted values or a manual check',
+      });
+    if (
+      ['apprenticeship', 'financialNeed', 'nomination'].includes(r.field) &&
+      !['equals', 'manual'].includes(op)
+    )
+      ctx.addIssue({
+        code: 'custom',
+        message: 'This requirement needs a boolean or manual condition',
+      });
+    if (r.condition.operator === 'minimum' || r.condition.operator === 'maximum') {
+      const value = r.condition.value;
+      if (['average', 'age', 'familyIncome'].includes(r.field) && value < 0)
+        ctx.addIssue({ code: 'custom', message: 'Thresholds cannot be negative' });
+      if (r.field === 'average' && value > 100)
+        ctx.addIssue({ code: 'custom', message: 'Percentage thresholds cannot exceed 100' });
+    }
     if (r.field === 'manual' && op !== 'manual')
       ctx.addIssue({ code: 'custom', message: 'Manual requirements need source text' });
   });

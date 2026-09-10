@@ -31,7 +31,8 @@
     "publish-drafts": "tsx scripts/publish-drafts.ts",
     "matching:generate": "tsx scripts/generate-matching-catalogue.ts",
     "matching:audit-db": "tsx scripts/audit-matching-db.ts",
-    "matching:benchmark": "tsx scripts/benchmark-matching.ts"
+    "matching:benchmark": "tsx scripts/benchmark-matching.ts",
+    "matching:evaluate": "tsx scripts/evaluate-matching.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",
