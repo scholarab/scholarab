@@ -64,7 +64,7 @@ export const GET: APIRoute = async ({ request }) => {
   return page(
     'Confirm reminder',
     `<h1>Confirm your reminder</h1>
-     <p>We'll email you 30, 14 and 3 days before this deadline.</p>
+     <p>We'll use the reminder schedule shown in your confirmation email.</p>
      <form method="post">
        <input type="hidden" name="token" value="${escapeAttr(token)}">
        <button type="submit">Yes, remind me</button>
@@ -76,7 +76,8 @@ export const GET: APIRoute = async ({ request }) => {
 export const POST: APIRoute = async ({ request }) => {
   if (await limited(request)) return new Response('Too many requests; try again later', { status: 429 })
 
-  const form = await request.formData()
+  let form: FormData
+  try { form = await request.formData() } catch { return new Response('Invalid form', {status:400}) }
   const token = form.get('token')
   if (typeof token !== 'string' || !token) return new Response('Missing token', { status: 400 })
 
@@ -91,8 +92,7 @@ export const POST: APIRoute = async ({ request }) => {
   return page(
     'Confirmed',
     `<h1>You're all set</h1>
-     <p>We'll send your first reminder 30 days before the deadline, or sooner if
-     it's closer than that already.</p>
+     <p>Your selected reminders are now enabled. We'll email you at the upcoming milestones you chose.</p>
      ${backLink}`
   )
 }

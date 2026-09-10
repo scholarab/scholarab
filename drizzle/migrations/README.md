@@ -1,5 +1,8 @@
 # Database migrations
 
+For the maintained 0013+ chain, use `npm run migrate-db` / `npm run migrate-db -- --check`. See [the operational guide](../../docs/publication-and-operations.md). The manual instructions below describe the historical 0000–0012 chain. Do not replay that incomplete chain to bootstrap a new database.
+
+
 Postgres (Neon). `drizzle.config.ts` points `out` here.
 
 ## How these are applied

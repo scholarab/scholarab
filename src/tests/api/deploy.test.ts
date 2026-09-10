@@ -1,61 +1,65 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { POST } from '../../pages/admin/api/deploy'
+// @vitest-environment node
+import { beforeAll, beforeEach, afterAll, it, expect, vi } from 'vitest';
+import { PGlite } from '@electric-sql/pglite';
+import { drizzle } from 'drizzle-orm/pglite';
+import { readFileSync } from 'node:fs';
+import { GET, POST } from '../../pages/admin/api/deploy';
+const state = vi.hoisted(() => ({ db: null as any, admin: true }));
+vi.mock('../../lib/db/client', () => ({ db: new Proxy({}, { get: (_, key) => state.db[key] }) }));
+vi.mock('../../lib/adminAuth', () => ({ isAdminRequest: async () => state.admin }));
+let pg: PGlite;
+beforeAll(async () => {
+  pg = new PGlite();
+  await pg.exec(readFileSync('drizzle/bootstrap.sql', 'utf8'));
+  await pg.exec(readFileSync('drizzle/migrations/0013_catalogue_and_delivery.sql', 'utf8'));
+  state.db = drizzle(pg);
+}, 30000);
+beforeEach(async () => {
+  state.admin = true;
+  await pg.exec('TRUNCATE catalogue_entries,publication_requests');
+});
+afterAll(async () => pg.close());
+const call = async (route: any, method = 'POST', hash?: string) => {
+  let previewHash = hash;
+  if (method === 'POST' && previewHash === undefined) {
+    const state = await GET({ request: new Request('http://localhost/admin/api/deploy') } as any);
+    previewHash = (await state.json()).previewHash;
+  }
+  return route({
+    request: new Request('http://localhost/admin/api/deploy', {
+      method,
+      body: method === 'POST' ? JSON.stringify({ previewHash }) : undefined,
+    }),
+  }) as Promise<Response>;
+};
+it('requires admin access', async () => {
+  state.admin = false;
+  expect((await call(POST)).status).toBe(401);
+  expect((await call(GET, 'GET')).status).toBe(401);
+});
+it('does not report success with nothing to publish', async () => {
+  expect((await call(POST)).status).toBe(409);
+});
+it('freezes exact requested draft revisions and queues only once', async () => {
+  await pg.exec(
+    `INSERT INTO catalogue_entries(kind,public_id,draft,revision) VALUES ('program',20,'{"id":20,"name":"Draft"}',3)`
+  );
+  expect((await call(POST)).status).toBe(202);
+  await pg.exec(`UPDATE catalogue_entries SET draft='{"id":20,"name":"Later"}',revision=4`);
+  const r = await pg.query('SELECT changes FROM publication_requests');
+  expect(r.rows[0]).toMatchObject({
+    changes: [{ publicId: 20, revision: 3, value: { name: 'Draft' } }],
+  });
+  expect((await call(POST)).status).toBe(409);
+  expect(await (await call(GET, 'GET')).json()).toMatchObject({ status: 'queued' });
+});
 
-const { mockIsAdmin } = vi.hoisted(() => ({
-  mockIsAdmin: vi.fn(),
-}))
-
-vi.mock('../../lib/adminAuth', () => ({
-  isAdminRequest: mockIsAdmin,
-}))
-
-function req() {
-  return new Request('http://localhost/admin/api/deploy', { method: 'POST' })
-}
-
-beforeEach(() => {
-  vi.clearAllMocks()
-  vi.unstubAllEnvs()
-})
-
-describe('POST /admin/api/deploy', () => {
-  it('returns 401 when unauthenticated', async () => {
-    mockIsAdmin.mockResolvedValue(false)
-    const res = await POST({ request: req() } as any)
-    expect(res.status).toBe(401)
-    expect(await res.json()).toMatchObject({ error: 'Unauthorized' })
-  })
-
-  it('returns 500 when DEPLOY_HOOK_URL is not configured', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    delete process.env.DEPLOY_HOOK_URL
-    const res = await POST({ request: req() } as any)
-    expect(res.status).toBe(500)
-    expect(await res.json()).toMatchObject({ error: 'Deploy hook not configured' })
-  })
-
-  it('returns 200 and logs deployment when deploy hook succeeds', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    process.env.DEPLOY_HOOK_URL = 'https://api.cloudflare.com/deploy/hook'
-    const mockFetch = vi.fn().mockResolvedValue(
-      new Response(JSON.stringify({ job: { id: 'abc123' } }), { status: 200 })
-    )
-    vi.stubGlobal('fetch', mockFetch)
-
-    const res = await POST({ request: req() } as any)
-    expect(res.status).toBe(200)
-    const body = await res.json()
-    expect(body.success).toBe(true)
-    expect(mockFetch).toHaveBeenCalledWith('https://api.cloudflare.com/deploy/hook', { method: 'POST' })
-  })
-
-  it('returns 500 when fetch throws', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    process.env.DEPLOY_HOOK_URL = 'https://api.cloudflare.com/deploy/hook'
-    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('network error')))
-
-    const res = await POST({ request: req() } as any)
-    expect(res.status).toBe(500)
-    expect(await res.json()).toMatchObject({ error: 'Failed to trigger deployment' })
-  })
-})
+it('rejects a stale review snapshot', async () => {
+  await pg.exec(
+    `INSERT INTO catalogue_entries(kind,public_id,draft) VALUES ('program',1,'{"id":1,"name":"First"}')`
+  );
+  const response = await call(GET, 'GET');
+  const { previewHash } = await response.json();
+  await pg.exec(`UPDATE catalogue_entries SET draft='{"id":1,"name":"Later"}',revision=2`);
+  expect((await call(POST, 'POST', previewHash)).status).toBe(409);
+});

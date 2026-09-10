@@ -1,18 +1,12 @@
 ---
 export const prerender = false
-import { db } from '../../lib/db/client'
-import { researchPrograms } from '../../lib/db/schema'
-import { desc } from 'drizzle-orm'
+import { listCatalogue } from '../../lib/catalogue-store'
 import AdminShell from '../../components/admin/AdminShell'
 import '../../styles/global.css'
 
 const user = Astro.locals.user!
-let data: typeof researchPrograms.$inferSelect[] = []
-try {
-  data = await db.select().from(researchPrograms).orderBy(desc(researchPrograms.updatedAt))
-} catch (e) {
-  console.error('DB error:', e)
-}
+const data = await listCatalogue('program')
+
 ---
 <!DOCTYPE html>
 <html lang="en">

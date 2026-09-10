@@ -1,4 +1,5 @@
 ---
+import { todayDate as albertaToday } from '../../lib/calendar';
 import SabFooter from '../../components/sab/SabFooter.astro';
 import SabFonts from '../../components/sab/SabFonts.astro';
 // One route for both detail-page types: /scholarships/<slug> and
@@ -41,8 +42,7 @@ export async function getStaticPaths() {
   // Meta descriptions need the whole corpus, not one listing: two awards that
   // differ only by name generate the same description, and only a pass over
   // the full list can see that. Same reason "more like this" is computed here.
-  const metaToday = new Date();
-  metaToday.setHours(0, 0, 0, 0);
+  const metaToday = albertaToday();
   // The ISO form as well as the Date: scholarshipMetas needs it to decide which
   // open dates are near enough to lead the snippet with. toLocaleDateString
   // en-CA is the calendar date in the pinned TZ, which is the comparison the
@@ -150,8 +150,7 @@ export async function getStaticPaths() {
 
 const { kind, scholarship, program, related, crossRelated, metaDescription } = Astro.props;
 
-const todayDate = new Date();
-todayDate.setHours(0, 0, 0, 0);
+const todayDate = albertaToday();
 // round, not ceil: the diff is midnight-to-midnight so it's a whole number of
 // days except across a DST change, where ceil would overcount by one.
 const daysUntil = (d: Date) => Math.max(0, Math.round((d.getTime() - todayDate.getTime()) / 86400000));

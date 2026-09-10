@@ -11,7 +11,9 @@ National scholarship databases are overwhelming and heavily gated. ScholarAB is 
 ## 🛠️ Tech Stack
 - **Framework:** [Astro](https://astro.build)
 - **UI:** React & Tailwind CSS
-- **Data:** Flat JSON structure
+- **Published data:** Versioned JSON; Neon Postgres stores admin drafts, reminders, and anonymous counters.
+
+Admin publication, migrations, and recovery: [operational guide](docs/publication-and-operations.md).
 
 ## 🤝 How to Contribute (Add a Scholarship)
 This project is open source! If you know of a local scholarship that isn't on the list, you can add it easily:
@@ -25,7 +27,7 @@ This project is open source! If you know of a local scholarship that isn't on th
      "title": "Name of Scholarship",
      "amount": "$1,000",
      "deadline": "YYYY-MM-DD",
-     "open_date": "YYYY-MM-DD",
+     "openDate": "YYYY-MM-DD",
      "audience": "Who qualifies for this?",
      "url": "https://link-to-application.com",
      "category": "Community",
@@ -40,7 +42,7 @@ This project is open source! If you know of a local scholarship that isn't on th
    - `region`: `Medicine Hat` | `Alberta` | `Alberta-wide` | `National` | `Lethbridge` | `Calgary` | `Edmonton`
    - `active`: set to `true`; set to `false` once the scholarship is permanently discontinued
    - `lastVerified`: month you confirmed the listing is still active (e.g. `"2026-03"`)
-   - `open_date`: omit if unknown; only set when applications open on a future date
+   - `openDate`: omit if unknown; only set when applications open on a future date
 4. Submit a pull request with the scholarship name in the title.
 
 Contributions to the data are accepted under CC BY-SA 4.0; contributions to the code under AGPL-3.0.

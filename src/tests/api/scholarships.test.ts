@@ -1,352 +1,181 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { GET, POST } from '../../pages/admin/api/scholarships/index'
-import { GET as getById, PUT, DELETE } from '../../pages/admin/api/scholarships/[id]'
-
-// ── Mocks ─────────────────────────────────────────────────────────────────────
-
-const { mockIsAdmin, mockSelect, mockInsert, mockUpdate, mockDelete } = vi.hoisted(() => ({
-  mockIsAdmin:  vi.fn(),
-  mockSelect:   vi.fn(),
-  mockInsert:   vi.fn(),
-  mockUpdate:   vi.fn(),
-  mockDelete:   vi.fn(),
-}))
-
-vi.mock('../../lib/adminAuth', () => ({
-  isAdminRequest: mockIsAdmin,
-}))
-
-vi.mock('../../lib/db/client', () => ({
-  db: {
-    select: (...a: any[]) => mockSelect(...a),
-    insert: (...a: any[]) => mockInsert(...a),
-    update: (...a: any[]) => mockUpdate(...a),
-    delete: (...a: any[]) => mockDelete(...a),
-  },
-}))
-
-vi.mock('../../lib/db/schema', () => ({
-  scholarships: { id: 'id', title: 'title', updatedAt: 'updatedAt' },
-}))
-
-vi.mock('drizzle-orm', () => ({
-  ilike: vi.fn(() => 'ilike'),
-  eq:    vi.fn(() => 'eq'),
-  desc:  vi.fn(() => 'desc'),
-}))
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-function chain(value: unknown) {
-  const resolve = () => Promise.resolve(value)
-  const c: Record<string, any> = {
-    from:      () => c,
-    where:     () => c,
-    orderBy:   () => c,
-    limit:     () => c,
-    set:       () => c,
-    values:    () => c,
-    returning: resolve,
-    then:      (ok: any, fail: any) => resolve().then(ok, fail),
-    catch:     (fail: any) => resolve().catch(fail),
-  }
-  return c
+// @vitest-environment node
+import { beforeAll, beforeEach, afterAll, describe, it, expect, vi } from 'vitest';
+import { PGlite } from '@electric-sql/pglite';
+import { drizzle } from 'drizzle-orm/pglite';
+import { readFileSync } from 'node:fs';
+import * as schema from '../../lib/db/schema';
+import { makeAdminCollectionRoutes, makeAdminItemRoutes } from '../../lib/admin-crud';
+import {
+  scholarshipCreateSchema,
+  scholarshipUpdateSchema,
+  programCreateSchema,
+  programUpdateSchema,
+} from '../../lib/admin-schemas';
+const state = vi.hoisted(() => ({ db: null as any, admin: true }));
+vi.mock('../../lib/db/client', () => ({ db: new Proxy({}, { get: (_, key) => state.db[key] }) }));
+vi.mock('../../lib/adminAuth', () => ({ isAdminRequest: async () => state.admin }));
+let pg: PGlite;
+beforeAll(async () => {
+  pg = new PGlite();
+  await pg.exec(readFileSync('drizzle/bootstrap.sql', 'utf8'));
+  await pg.exec(readFileSync('drizzle/migrations/0013_catalogue_and_delivery.sql', 'utf8'));
+  state.db = drizzle(pg, { schema });
+}, 30000);
+beforeEach(async () => {
+  state.admin = true;
+  await pg.exec('TRUNCATE catalogue_entries,publication_requests');
+});
+afterAll(async () => {
+  await pg.close();
+});
+function call(route: any, method: string, body?: unknown, id = '1', query = '') {
+  return route({
+    request: new Request('http://localhost/admin/api/catalogue' + query, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    }),
+    params: { id },
+  }) as Promise<Response>;
 }
-
-function req(method: string, body?: object) {
-  return new Request(`http://localhost/admin/api/scholarships`, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    body: body ? JSON.stringify(body) : undefined,
-  })
-}
-
-function reqWithId(method: string, id: string, body?: object) {
-  return new Request(`http://localhost/admin/api/scholarships/${id}`, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    body: body ? JSON.stringify(body) : undefined,
-  })
-}
-
-const VALID_BODY = { title: 'Test Scholarship', amount: '$1,000', url: 'https://example.com' }
-
-const STORED_ROW = {
-  id: 1, title: 'Test Scholarship', amount: '$1,000', url: 'https://example.com',
-  deadline: null, openDate: null, audience: null, category: null,
-  lastVerified: null, region: null, notes: null,
-  applyViaGuidance: false, active: true, eligibility: null,
-  updatedAt: new Date('2026-04-05T10:00:00Z'),
-}
-
-beforeEach(() => {
-  vi.clearAllMocks()
-})
-
-// ── GET /admin/api/scholarships ───────────────────────────────────────────────
-
-describe('GET /admin/api/scholarships', () => {
-  it('returns 401 when unauthenticated', async () => {
-    mockIsAdmin.mockResolvedValue(false)
-    const res = await GET({ request: req('GET') } as any)
-    expect(res.status).toBe(401)
-    expect(await res.json()).toMatchObject({ error: 'Unauthorized' })
-  })
-
-  it('returns 200 with array of scholarships', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValue(chain([STORED_ROW]))
-    const res = await GET({ request: req('GET') } as any)
-    expect(res.status).toBe(200)
-    const body = await res.json()
-    expect(body).toHaveLength(1)
-    expect(body[0].title).toBe('Test Scholarship')
-  })
-
-  it('returns 200 with empty array when no scholarships', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValue(chain([]))
-    const res = await GET({ request: req('GET') } as any)
-    expect(res.status).toBe(200)
-    expect(await res.json()).toEqual([])
-  })
-
-  it('applies limit to the query (safety cap)', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const rows = Array.from({ length: 5 }, (_, i) => ({ ...STORED_ROW, id: i + 1 }))
-    mockSelect.mockReturnValue(chain(rows))
-    const res = await GET({ request: req('GET') } as any)
-    expect(res.status).toBe(200)
-    expect(await res.json()).toHaveLength(5)
-  })
-})
-
-// ── POST /admin/api/scholarships ──────────────────────────────────────────────
-
-describe('POST /admin/api/scholarships', () => {
-  it('returns 401 when unauthenticated', async () => {
-    mockIsAdmin.mockResolvedValue(false)
-    const res = await POST({ request: req('POST', VALID_BODY) } as any)
-    expect(res.status).toBe(401)
-  })
-
-  it('returns 400 when title is missing', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await POST({ request: req('POST', { amount: '$1,000', url: 'https://example.com' }) } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 400 when amount is missing', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await POST({ request: req('POST', { title: 'Test', url: 'https://example.com' }) } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 400 when URL is invalid', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await POST({ request: req('POST', { title: 'Test', amount: '$1,000', url: 'not-a-url' }) } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 400 when URL uses HTTP instead of HTTPS', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await POST({ request: req('POST', { title: 'Test', amount: '$1,000', url: 'http://example.com' }) } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 400 when title exceeds max length', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await POST({ request: req('POST', { title: 'x'.repeat(501), amount: '$1,000', url: 'https://example.com' }) } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 400 when title is empty string', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await POST({ request: req('POST', { title: '', amount: '$1,000', url: 'https://example.com' }) } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 409 with duplicate error when title already exists', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValue(chain([{ id: 1, title: 'Test Scholarship' }]))
-    const res = await POST({ request: req('POST', VALID_BODY) } as any)
-    expect(res.status).toBe(409)
-    const body = await res.json()
-    expect(body.error).toBe('duplicate')
-    expect(body.existing).toBe('Test Scholarship')
-  })
-
-  it('returns 201 with created scholarship when no duplicate', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValueOnce(chain([]))
-    mockInsert.mockReturnValue(chain([STORED_ROW]))
-    const res = await POST({ request: req('POST', VALID_BODY) } as any)
-    expect(res.status).toBe(201)
-    const body = await res.json()
-    expect(body.title).toBe('Test Scholarship')
-    expect(body.id).toBe(1)
-  })
-
-  it('returns 400 when eligibility has wrong shape', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await POST({ request: req('POST', { ...VALID_BODY, eligibility: { grades: 'not-an-array' } }) } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('accepts valid eligibility object', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValueOnce(chain([]))
-    mockInsert.mockReturnValue(chain([STORED_ROW]))
-    const validEligibility = { grades: ['11', '12'], financialNeed: true }
-    const res = await POST({ request: req('POST', { ...VALID_BODY, eligibility: validEligibility }) } as any)
-    expect(res.status).toBe(201)
-  })
-
-  it('applies default applyViaGuidance=false when omitted', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValueOnce(chain([]))
-    mockInsert.mockReturnValue(chain([STORED_ROW]))
-    const res = await POST({ request: req('POST', VALID_BODY) } as any)
-    expect(res.status).toBe(201)
-  })
-})
-
-// ── GET /admin/api/scholarships/[id] ─────────────────────────────────────────
-
-describe('GET /admin/api/scholarships/[id]', () => {
-  it('returns 401 when unauthenticated', async () => {
-    mockIsAdmin.mockResolvedValue(false)
-    const res = await getById({ request: reqWithId('GET', '1'), params: { id: '1' } } as any)
-    expect(res.status).toBe(401)
-  })
-
-  it('returns 400 for non-numeric id', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await getById({ request: reqWithId('GET', 'abc'), params: { id: 'abc' } } as any)
-    expect(res.status).toBe(400)
-    expect(await res.json()).toMatchObject({ error: 'Invalid ID' })
-  })
-
-  it('returns 404 when scholarship not found', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValue(chain([]))
-    const res = await getById({ request: reqWithId('GET', '999'), params: { id: '999' } } as any)
-    expect(res.status).toBe(404)
-  })
-
-  it('returns 200 with scholarship when found', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValue(chain([STORED_ROW]))
-    const res = await getById({ request: reqWithId('GET', '1'), params: { id: '1' } } as any)
-    expect(res.status).toBe(200)
-    const body = await res.json()
-    expect(body.id).toBe(1)
-  })
-})
-
-// ── PUT /admin/api/scholarships/[id] ─────────────────────────────────────────
-
-describe('PUT /admin/api/scholarships/[id]', () => {
-  const UPDATE_BODY = { title: 'Updated Title', amount: '$2,000', url: 'https://example.com' }
-
-  it('returns 401 when unauthenticated', async () => {
-    mockIsAdmin.mockResolvedValue(false)
-    const res = await PUT({ request: reqWithId('PUT', '1', UPDATE_BODY), params: { id: '1' } } as any)
-    expect(res.status).toBe(401)
-  })
-
-  it('returns 400 for non-numeric id', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await PUT({ request: reqWithId('PUT', 'abc', UPDATE_BODY), params: { id: 'abc' } } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 400 when URL is invalid', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await PUT({ request: reqWithId('PUT', '1', { url: 'not-a-url' }), params: { id: '1' } } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 400 when URL uses HTTP instead of HTTPS', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await PUT({ request: reqWithId('PUT', '1', { url: 'http://example.com' }), params: { id: '1' } } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 409 conflict when optimistic lock timestamp differs', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValue(chain([{ updatedAt: new Date('2026-04-05T11:00:00Z') }]))
-    const bodyWithStaleTimestamp = { ...UPDATE_BODY, updatedAt: '2026-04-05T10:00:00Z' }
-    const res = await PUT({ request: reqWithId('PUT', '1', bodyWithStaleTimestamp), params: { id: '1' } } as any)
-    expect(res.status).toBe(409)
-    const body = await res.json()
-    expect(body.error).toBe('conflict')
-  })
-
-  it('returns 404 when record not found during optimistic lock check', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockSelect.mockReturnValue(chain([]))
-    const bodyWithTimestamp = { ...UPDATE_BODY, updatedAt: '2026-04-05T10:00:00Z' }
-    const res = await PUT({ request: reqWithId('PUT', '1', bodyWithTimestamp), params: { id: '1' } } as any)
-    expect(res.status).toBe(404)
-  })
-
-  it('returns 200 with updated scholarship when timestamps match', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const ts = '2026-04-05T10:00:00Z'
-    mockSelect.mockReturnValue(chain([{ updatedAt: new Date(ts) }]))
-    mockUpdate.mockReturnValue(chain([{ ...STORED_ROW, title: 'Updated Title' }]))
-    const bodyWithTimestamp = { ...UPDATE_BODY, updatedAt: ts }
-    const res = await PUT({ request: reqWithId('PUT', '1', bodyWithTimestamp), params: { id: '1' } } as any)
-    expect(res.status).toBe(200)
-    const body = await res.json()
-    expect(body.title).toBe('Updated Title')
-  })
-
-  it('returns 200 without optimistic lock check when no updatedAt provided', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockUpdate.mockReturnValue(chain([{ ...STORED_ROW, title: 'Updated Title' }]))
-    const res = await PUT({ request: reqWithId('PUT', '1', UPDATE_BODY), params: { id: '1' } } as any)
-    expect(res.status).toBe(200)
-  })
-
-  it('returns 404 when update finds no record', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockUpdate.mockReturnValue(chain([]))
-    const res = await PUT({ request: reqWithId('PUT', '1', UPDATE_BODY), params: { id: '1' } } as any)
-    expect(res.status).toBe(404)
-  })
-})
-
-// ── DELETE /admin/api/scholarships/[id] ──────────────────────────────────────
-
-describe('DELETE /admin/api/scholarships/[id]', () => {
-  it('returns 401 when unauthenticated', async () => {
-    mockIsAdmin.mockResolvedValue(false)
-    const res = await DELETE({ request: reqWithId('DELETE', '1'), params: { id: '1' } } as any)
-    expect(res.status).toBe(401)
-  })
-
-  it('returns 400 for non-numeric id', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    const res = await DELETE({ request: reqWithId('DELETE', 'abc'), params: { id: 'abc' } } as any)
-    expect(res.status).toBe(400)
-  })
-
-  it('returns 204 on successful deletion', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockDelete.mockReturnValue(chain(undefined))
-    const res = await DELETE({ request: reqWithId('DELETE', '1'), params: { id: '1' } } as any)
-    expect(res.status).toBe(204)
-  })
-
-  it('returns 500 when DB throws during deletion', async () => {
-    mockIsAdmin.mockResolvedValue(true)
-    mockDelete.mockReturnValue({
-      where: () => Promise.reject(new Error('DB error')),
-    })
-    const res = await DELETE({ request: reqWithId('DELETE', '1'), params: { id: '1' } } as any)
-    expect(res.status).toBe(500)
-    expect(await res.json()).toMatchObject({ error: 'Internal server error' })
-  })
-})
+for (const kind of ['scholarship', 'program'] as const)
+  describe(`${kind} draft CRUD on PostgreSQL`, () => {
+    const cfg = {
+      kind,
+      createSchema: kind === 'scholarship' ? scholarshipCreateSchema : programCreateSchema,
+      updateSchema: kind === 'scholarship' ? scholarshipUpdateSchema : programUpdateSchema,
+    };
+    const collection = makeAdminCollectionRoutes(cfg),
+      item = makeAdminItemRoutes(cfg);
+    const title = kind === 'scholarship' ? 'title' : 'name';
+    const valid = { [title]: 'Test award', amount: '$1,000', url: 'https://example.com' };
+    async function seed() {
+      await pg.query('INSERT INTO catalogue_entries(kind,public_id,published) VALUES ($1,1,$2)', [
+        kind,
+        JSON.stringify({ ...valid, id: 1, alsoOpenTo: ['Beaumont'], metaDetail: 'Preserve this' }),
+      ]);
+    }
+    it('rejects every unauthorized operation', async () => {
+      state.admin = false;
+      for (const [route, method] of [
+        [collection.GET, 'GET'],
+        [collection.POST, 'POST'],
+        [item.GET, 'GET'],
+        [item.PUT, 'PUT'],
+        [item.DELETE, 'DELETE'],
+      ] as const)
+        expect((await call(route, method, method === 'GET' ? undefined : valid)).status).toBe(401);
+    });
+    it('creates an unpublished record with a public ID and revision', async () => {
+      const res = await call(collection.POST, 'POST', valid);
+      expect(res.status).toBe(201);
+      expect(await res.json()).toMatchObject({ id: 1, revision: 1, unpublished: true });
+      const rows = await pg.query('SELECT published,draft FROM catalogue_entries');
+      expect(rows.rows[0]).toMatchObject({ published: null, draft: { id: 1 } });
+    });
+    it.each([
+      null,
+      [],
+      false,
+      {},
+      { url: 'http://example.com' },
+      { [title]: '', url: 'https://example.com' },
+    ])('rejects invalid create data %j', async (data) => {
+      expect((await call(collection.POST, 'POST', data)).status).toBe(400);
+    });
+    it('enforces duplicate names at the database boundary', async () => {
+      expect((await call(collection.POST, 'POST', valid)).status).toBe(201);
+      expect(
+        (await call(collection.POST, 'POST', { ...valid, [title]: ' test AWARD ' })).status
+      ).toBe(409);
+    });
+    it('reads public IDs and preserves JSON-only fields on edit', async () => {
+      await seed();
+      const res = await call(item.PUT, 'PUT', { revision: 1, [title]: 'Renamed' });
+      expect(res.status).toBe(200);
+      expect(await res.json()).toMatchObject({
+        id: 1,
+        revision: 2,
+        alsoOpenTo: ['Beaumont'],
+        metaDetail: 'Preserve this',
+      });
+      const rows = await pg.query('SELECT published,draft_base FROM catalogue_entries');
+      expect(rows.rows[0]).toMatchObject({
+        published: { [title]: 'Test award' },
+        draft_base: { [title]: 'Test award' },
+      });
+    });
+    it('one of two simultaneous saves wins', async () => {
+      await seed();
+      const results = await Promise.all([
+        call(item.PUT, 'PUT', { revision: 1, [title]: 'A' }),
+        call(item.PUT, 'PUT', { revision: 1, [title]: 'B' }),
+      ]);
+      expect(results.map((r) => r.status).sort()).toEqual([200, 409]);
+    });
+    it('preserves an unchanged vetted HTTP URL but rejects a new HTTP URL', async () => {
+      await seed();
+      await pg.query(
+        `UPDATE catalogue_entries SET published=jsonb_set(published,'{url}','"http://legacy.example.org"')`
+      );
+      expect(
+        (
+          await call(item.PUT, 'PUT', {
+            revision: 1,
+            [title]: 'Edited',
+            url: 'http://legacy.example.org',
+          })
+        ).status
+      ).toBe(200);
+      expect(
+        (await call(item.PUT, 'PUT', { revision: 2, url: 'http://different.example.org' })).status
+      ).toBe(400);
+    });
+    it('requires revisions for update and delete', async () => {
+      await seed();
+      expect((await call(item.PUT, 'PUT', { [title]: 'A' })).status).toBe(400);
+      expect((await call(item.DELETE, 'DELETE', {})).status).toBe(400);
+    });
+    it('deletion is a reversible unpublished tombstone', async () => {
+      await seed();
+      expect((await call(item.DELETE, 'DELETE', { revision: 1 })).status).toBe(204);
+      expect((await call(item.GET, 'GET')).status).toBe(404);
+      const result = await pg.query('SELECT published,deleted FROM catalogue_entries');
+      expect(result.rows[0]).toMatchObject({ published: { id: 1 }, deleted: true });
+    });
+    it.each(['1x', '0', '-1', '1.1', '2147483648', 'NaN'])(
+      'rejects ambiguous path ID %s',
+      async (id) => {
+        expect((await call(item.GET, 'GET', undefined, id)).status).toBe(400);
+      }
+    );
+    it('returns 404 for absent rows', async () => {
+      expect((await call(item.GET, 'GET')).status).toBe(404);
+      expect((await call(item.PUT, 'PUT', { revision: 1 })).status).toBe(404);
+    });
+    it('paginates every row beyond 1000 with stable order and complete search', async () => {
+      await pg.query(
+        `INSERT INTO catalogue_entries(kind,public_id,published) SELECT $1,n,jsonb_build_object('id',n,$2::text,'Award '||n,'url','https://example.com') FROM generate_series(1,1086) n`,
+        [kind, title]
+      );
+      const seen: number[] = [];
+      for (let page = 0; page < 44; page++) {
+        const res = await call(collection.GET, 'GET', undefined, '1', `?page=${page}`);
+        expect(res.status).toBe(200);
+        const data = await res.json();
+        expect(data.total).toBe(1086);
+        seen.push(...data.items.map((x: { id: number }) => x.id));
+      }
+      expect(new Set(seen).size).toBe(1086);
+      expect(seen[0]).toBe(1086);
+      expect(seen.at(-1)).toBe(1);
+      const filtered = await (
+        await call(collection.GET, 'GET', undefined, '1', '?q=Award%201086')
+      ).json();
+      expect(filtered.items).toHaveLength(1);
+      expect(filtered.items[0].id).toBe(1086);
+    });
+    it('validates pagination parameters', async () => {
+      expect((await call(collection.GET, 'GET', undefined, '1', '?page=-1')).status).toBe(400);
+    });
+  });

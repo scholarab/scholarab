@@ -3,11 +3,12 @@ import SabFooter from '../components/sab/SabFooter.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro'
 import SabHeader from '../components/sab/SabHeader.astro'
-import { loadScholarships, loadPrograms } from '../lib/data-loader'
-import EligibilityQuiz from '../components/EligibilityQuiz'
+
+import QuizLoader from '../components/QuizLoader'
+import quizDataUrl from '../data/quiz-payload.json?url'
 import { QUIZ_DURATION, QUIZ_PROMISE, QUIZ_QUESTION_WORD, QUIZ_MAX_QUESTION_WORD } from '../lib/quiz'
 
-const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()])
+
 
 const breadcrumbJson = {
   '@context': 'https://schema.org',
@@ -46,7 +47,7 @@ const breadcrumbJson = {
         </div>
       </div>
 
-      <EligibilityQuiz scholarships={scholarships} programs={programs} client:load />
+      <QuizLoader url={quizDataUrl} client:load />
 
       {/* The quiz is a React island, so until it hydrates this page has about
           twenty words on it -- a heading, a subhead, and two trust chips. That

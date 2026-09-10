@@ -4,6 +4,8 @@
  * row the Worker could not mail (no RESEND_API_KEY bound, Resend down) so a
  * sign-up is never silently stranded unconfirmed.
  */
+import { parseCadence } from './alerts'
+import { claimRecipient, deliverMail, mailKey } from './mail-delivery'
 import { listUnsubscribeHeaders, senderIdentityHtml } from './email-identity'
 
 export const CONFIRM_SUBJECT = 'Confirm your ScholarAB deadline reminder'
@@ -50,13 +52,13 @@ function unsubscribeUrlFor(confirmUrl: string): string | undefined {
   }
 }
 
-export function confirmEmailHtml(itemLabel: string, confirmUrl: string, mailingAddress?: string): string {
+export function confirmEmailHtml(itemLabel: string, confirmUrl: string, mailingAddress?: string, cadence = '30,14,3'): string {
   const origin = (() => {
     try { return new URL(confirmUrl).origin } catch { return 'https://www.scholarab.ca' }
   })()
   return `<!doctype html><html><body style="font-family:system-ui,-apple-system,sans-serif;color:#141915;line-height:1.55">
   <p>Someone (hopefully you) asked ScholarAB to send deadline reminders for <strong>${escapeHtml(itemLabel)}</strong>.</p>
-  <p>Confirm and we'll email you 30, 14 and 3 days before it closes.</p>
+  <p>Confirm and we'll email you ${parseCadence(cadence).join(', ')} days before it closes.</p>
   <p><a href="${escapeHtml(confirmUrl)}"
         style="display:inline-block;background:#2FD3A0;color:#08120E;font-weight:600;
                text-decoration:none;padding:12px 28px;border-radius:100px">Confirm my reminder</a></p>
@@ -81,32 +83,21 @@ export function escapeHtml(s: string): string {
  * missing key must not turn a sign-up into a 500. The caller records whether
  * the mail went out so the daily sweep can try again.
  */
-export async function sendConfirmEmail(to: string, itemLabel: string, confirmUrl: string): Promise<boolean> {
+export async function sendConfirmEmail(to: string, itemLabel: string, confirmUrl: string, cadence: string, subscriptionId: number): Promise<boolean> {
   const key = await env('RESEND_API_KEY')
   if (!key) return false
-  const from = (await env('ALERT_FROM_EMAIL')) || 'ScholarAB <alerts@scholarab.ca>'
-  const replyTo = (await env('ALERT_REPLY_TO')) || 'contact.scholarab@gmail.com'
-  const mailingAddress = await env('ALERT_MAILING_ADDRESS')
-  // Same token, same URL the footer link uses; see unsubscribeUrlFor.
-  const unsubscribeUrl = unsubscribeUrlFor(confirmUrl)
+  const { getSql } = await import('./db/client')
+  const sql = getSql()
+  const query = (text:string, params?:unknown[]) => sql.query(text,params)
   try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from, to: [to], reply_to: replyTo,
-        subject: CONFIRM_SUBJECT,
-        html: confirmEmailHtml(itemLabel, confirmUrl, mailingAddress),
-        headers: listUnsubscribeHeaders(unsubscribeUrl),
-      }),
-    })
-    if (!res.ok) {
-      console.error('[confirm] Resend', res.status, await res.text())
-      return false
-    }
-    return true
-  } catch (e) {
-    console.error('[confirm] send failed:', e)
-    return false
-  }
+    if (!(await claimRecipient(query,to))) return false
+    const result = await deliverMail(query, await mailKey(`confirm/${confirmUrl}`), subscriptionId, 'confirm', {
+      from:(await env('ALERT_FROM_EMAIL')) || 'ScholarAB <alerts@scholarab.ca>',
+      to:[to],reply_to:(await env('ALERT_REPLY_TO')) || 'contact.scholarab@gmail.com',
+      subject:CONFIRM_SUBJECT,
+      html:confirmEmailHtml(itemLabel,confirmUrl,await env('ALERT_MAILING_ADDRESS'),cadence),
+      headers:listUnsubscribeHeaders(unsubscribeUrlFor(confirmUrl)),
+    },key)
+    return result === 'sent'
+  } catch(e) { console.error('[confirm] delivery deferred:', e instanceof Error ? e.message : 'unavailable'); return false }
 }

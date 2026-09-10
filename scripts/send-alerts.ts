@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Sends deadline reminder emails via Resend.
 // Run daily via GitHub Actions. Requires DATABASE_URL and RESEND_API_KEY.
+import { claimRecipient, deliverMail, mailKey, type MailPayload } from '../src/lib/mail-delivery.ts'
+import { calendarDaysUntil } from '../src/lib/calendar.ts'
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
@@ -30,8 +32,6 @@ const scholarships: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/dat
 const programs: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8'))
 
 const sql = neon(DATABASE_URL)
-const today = new Date()
-today.setHours(0, 0, 0, 0)
 const MILESTONES = process.env.TEST_DAYS ? [parseInt(process.env.TEST_DAYS)] : [30, 14, 3]
 // CATCH_UP=1: one-off mode; remind every subscriber whose item still has a
 // future deadline, using the real days-left count instead of milestone days.
@@ -43,44 +43,9 @@ const DRY_RUN = process.env.DRY_RUN === '1'
 // subscriber's chosen milestones would make them send nothing at all.
 const IGNORE_CADENCE = CATCH_UP || !!process.env.TEST_DAYS
 
-interface SubscriberRow { email: string; token: string; cadence: string }
-
-// Double opt-in (migration 0010). /api/alert is a public JSON endpoint, so a
-// row existing is not evidence that the person behind the address asked for
-// anything; only confirmed_at is. Both queries below filter on it inline:
-// neon's tagged template parameterises every ${}, so this cannot be hoisted
-// into a shared fragment without it arriving as a bound value.
-
-/**
- * Subscribers for one item, with their cadence. Falls back to a query without
- * the column so a run that beats 0009_subscriber_cadence.sql still mails on
- * every milestone rather than failing the whole job.
- */
-let cadenceColumnMissing = false
-async function subscribersFor(itemType: string, itemId: number): Promise<SubscriberRow[]> {
-  if (!cadenceColumnMissing) {
-    try {
-      return await sql`
-        SELECT email, token, cadence FROM subscribers
-        WHERE item_type = ${itemType} AND item_id = ${itemId}
-          AND confirmed_at IS NOT NULL
-      ` as SubscriberRow[]
-    } catch (e) {
-      cadenceColumnMissing = true
-      console.error('[alerts] no cadence column, mailing every milestone. Apply drizzle/migrations/0009_subscriber_cadence.sql:', e)
-    }
-  }
-  const rows = await sql`
-    SELECT email, token FROM subscribers
-    WHERE item_type = ${itemType} AND item_id = ${itemId}
-      AND confirmed_at IS NOT NULL
-  ` as { email: string; token: string }[]
-  return rows.map(r => ({ ...r, cadence: '' }))
-}
-
-function daysUntil(deadline: string): number {
-  return Math.round((new Date(deadline + 'T00:00:00').getTime() - today.getTime()) / 86_400_000)
-}
+interface SubscriberRow { id:number; email:string; token:string; cadence:string; item_type:string; item_id:number }
+const query = (text:string,params?:unknown[]) => sql.query(text,params)
+function daysUntil(deadline:string):number { return calendarDaysUntil(deadline) }
 
 function formatDate(str: string): string {
   return new Date(str + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
@@ -129,16 +94,9 @@ function emailHtml(rawLabel: string, rawAmount: string | undefined, deadline: st
  * sends has a subscription behind it, and a missing one would silently drop
  * the one-click headers rather than fail loudly. See listUnsubscribeHeaders.
  */
-async function sendEmail(to: string, subject: string, html: string, unsubscribeUrl: string): Promise<void> {
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: FROM, to: [to], reply_to: REPLY_TO, subject, html,
-      headers: listUnsubscribeHeaders(unsubscribeUrl),
-    }),
-  })
-  if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`)
+async function sendEmail(row: {id:number; email:string; token:string}, kind:'confirm'|'reminder', identity:string, subject:string, html:string, unsubscribeUrl:string): Promise<boolean> {
+  const payload:MailPayload = {from:FROM,to:[row.email],reply_to:REPLY_TO,subject,html,headers:listUnsubscribeHeaders(unsubscribeUrl)}
+  return await deliverMail(query,await mailKey(identity),row.id,kind,payload,RESEND_API_KEY!) === 'sent'
 }
 
 let sent = 0
@@ -180,10 +138,10 @@ const CONFIRM_SWEEP_COOLDOWN = '24 hours'
 const CONFIRM_SWEEP_MAX_AGE = '7 days'
 
 async function sendPendingConfirmations(): Promise<void> {
-  let pending: { id: number; email: string; token: string; item_type: string; item_id: number }[]
+  let pending: { id: number; email: string; token: string; item_type: string; item_id: number; cadence:string }[]
   try {
     pending = await sql`
-      SELECT DISTINCT ON (s.email) s.id, s.email, s.token, s.item_type, s.item_id
+      SELECT DISTINCT ON (s.email) s.id, s.email, s.token, s.item_type, s.item_id, s.cadence
       FROM subscribers s
       WHERE s.confirmed_at IS NULL
         AND s.confirm_sent_at IS NULL
@@ -211,18 +169,20 @@ async function sendPendingConfirmations(): Promise<void> {
     const label = item.title ?? item.name ?? 'your saved listing'
     if (/@example\.(com|org|net)$/i.test(row.email)) continue
     if (DRY_RUN) {
-      console.log(`  would ask ${row.email} to confirm (${row.item_type} ${row.item_id})`)
+      console.log(`  would ask ${row.id} to confirm (${row.item_type} ${row.item_id})`)
       continue
     }
     try {
-      await sendEmail(row.email, CONFIRM_SUBJECT,
-        confirmEmailHtml(label, `${BASE_URL}/api/confirm?token=${row.token}`, MAILING_ADDRESS),
-        `${BASE_URL}/api/unsubscribe?token=${row.token}`)
+      if (!(await claimRecipient(query,row.email))) continue
+      const confirmUrl = `${BASE_URL}/api/confirm?token=${row.token}`
+      if (!(await sendEmail(row,'confirm',`confirm/${confirmUrl}`,CONFIRM_SUBJECT,
+        confirmEmailHtml(label,confirmUrl,MAILING_ADDRESS,row.cadence),
+        `${BASE_URL}/api/unsubscribe?token=${row.token}`))) continue
       await sql`UPDATE subscribers SET confirm_sent_at = now() WHERE id = ${row.id}`
-      console.log(`  asked ${row.email} to confirm (${row.item_type} ${row.item_id})`)
+      console.log(`  asked ${row.id} to confirm (${row.item_type} ${row.item_id})`)
     } catch (e) {
       errors++
-      console.error(`  confirm failed ${row.email}:`, e)
+      console.error(`  confirm failed ${row.id}:`, e)
     }
   }
 }
@@ -240,38 +200,50 @@ const targets = CATCH_UP
   ? allItems.map(item => ({ item, days: daysUntil(item.deadline!) })).filter(t => t.days > 0)
   : MILESTONES.flatMap(m => allItems.filter(item => daysUntil(item.deadline!) === m).map(item => ({ item, days: m })))
 
-for (const { item, days } of targets) {
-  const rows = await subscribersFor(item.itemType, item.id)
-
-  for (const { email, token, cadence } of rows) {
-    // Skip anyone who did not pick this milestone. CATCH_UP is a deliberate
-    // one-off sweep after an outage and TEST_DAYS is a manual probe, so both
-    // ignore the cadence; the point there is that everyone hears once.
-    if (!IGNORE_CADENCE && !(parseCadence(cadence) as number[]).includes(days)) continue
-    // Resend rejects reserved test domains with a 422, which would fail the
-    // whole run; skip them rather than count them as errors.
-    if (/@example\.(com|org|net)$/i.test(email)) {
-      console.log(`  skipped test address ${email} (${item.itemType} ${item.id})`)
-      continue
-    }
+// One recipient read for all target items, not one HTTP round trip per listing.
+const targetKeys = targets.map(({item})=>`${item.itemType}:${item.id}`)
+const recipients = targetKeys.length ? await sql`
+  SELECT id,email,token,cadence,item_type,item_id FROM subscribers
+  WHERE confirmed_at IS NOT NULL AND (item_type || ':' || item_id::text) = ANY(${targetKeys}::text[])` as SubscriberRow[] : []
+const byItem = new Map<string,SubscriberRow[]>()
+for (const row of recipients) {
+  const key=`${row.item_type}:${row.item_id}`
+  const bucket=byItem.get(key) ?? [];bucket.push(row);byItem.set(key,bucket)
+}
+for (const {item,days} of targets) {
+  for (const row of byItem.get(`${item.itemType}:${item.id}`) ?? []) {
+    if (!IGNORE_CADENCE && !(parseCadence(row.cadence) as number[]).includes(days)) continue
+    if (/@example\.(com|org|net)$/i.test(row.email)) continue
     const subject = `${days} day${days === 1 ? '' : 's'} left: ${item.label} closes ${formatDate(item.deadline!)}`
-    const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${token}`
-    const html = emailHtml(item.label, item.amount, item.deadline!, item.detailUrl, unsubscribeUrl, days)
-    if (DRY_RUN) {
-      sent++
-      console.log(`  would send ${days}d → ${email} (${item.itemType} ${item.id}: ${item.label})`)
-      continue
-    }
+    const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${row.token}`
+    const html = emailHtml(item.label,item.amount,item.deadline!,item.detailUrl,unsubscribeUrl,days)
+    if (DRY_RUN) {sent++;console.log(`would send ${days}d to subscription ${row.id}`);continue}
     try {
-      await sendEmail(email, subject, html, unsubscribeUrl)
-      sent++
-      console.log(`  sent ${days}d → ${email} (${item.itemType} ${item.id})`)
-    } catch (e) {
-      errors++
-      console.error(`  failed ${email} (${item.itemType} ${item.id}):`, e)
-    }
+      // Catch-up is one logical send per subscription/deadline, even on rerun.
+      const milestone=CATCH_UP?'catch-up':String(days)
+      if(await sendEmail(row,'reminder',`reminder/${row.token}/${item.deadline}/${milestone}`,subject,html,unsubscribeUrl)) sent++
+    } catch(e) {errors++;console.error(`delivery failed for subscription ${row.id}`,e instanceof Error?e.message:'unknown')}
   }
 }
-
+// Retry unsettled payloads within the provider's deduplication window, even if
+// the calendar milestone has passed. Unsubscribe cascades delete the payload.
+if(!DRY_RUN) {
+  const retries=await sql`SELECT d.key,d.subscription_id,d.kind,d.payload,s.email
+    FROM mail_deliveries d JOIN subscribers s ON s.id=d.subscription_id
+    WHERE d.state <> 'sent' AND d.created_at > now()-interval '23 hours'
+      AND d.updated_at < now()-interval '2 minutes'
+      AND ((d.kind='reminder' AND s.confirmed_at IS NOT NULL) OR (d.kind='confirm' AND s.confirmed_at IS NULL))`
+  for(const row of retries) {
+    try {
+      if(row.kind==='confirm' && !(await claimRecipient(query,row.email))) continue
+      if(await deliverMail(query,row.key,row.subscription_id,row.kind,row.payload,RESEND_API_KEY!)==='sent') {
+        sent++
+        if(row.kind==='confirm') await sql`UPDATE subscribers SET confirm_sent_at=now() WHERE id=${row.subscription_id}`
+      }
+    } catch {errors++}
+  }
+  const [blocked]=await sql`SELECT count(*)::int AS n FROM mail_deliveries WHERE state <> 'sent' AND created_at <= now()-interval '23 hours'`
+  if(blocked!.n) {errors++;console.error(`${blocked!.n} ambiguous deliveries need provider reconciliation; automatic resend withheld`)}
+}
 console.log(`Done. Sent: ${sent}, Errors: ${errors}`)
-if (errors > 0) process.exit(1)
+if(errors>0) process.exit(1)

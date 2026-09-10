@@ -1,4 +1,5 @@
 ---
+import { todayDate as albertaToday } from '../lib/calendar';
 import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
@@ -13,8 +14,7 @@ import { TEASER_KEYS, teaserOptions, QUIZ_DURATION } from '../lib/quiz';
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+const today = albertaToday();
 
 const activeScholarships = scholarships.filter(s => {
   if (!s.active) return false;
@@ -304,6 +304,7 @@ const matchGroups = TEASER_KEYS.map(key => ({
 </Layout>
 
 <script>
+  import { todayDate as albertaToday } from '../lib/calendar';
   import { QUIZ_STORAGE_KEY, TEASER_KEYS } from '../lib/quiz';
   import { sendEvent } from '../lib/events';
 
@@ -315,8 +316,7 @@ const matchGroups = TEASER_KEYS.map(key => ({
   function updateClosingSoon() {
     const list = document.getElementById('closing-soon-list');
     if (!list) return;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = albertaToday();
     const todayMs = today.getTime();
     const rows = list.querySelectorAll<HTMLElement>('a[data-deadline]');
     let visible = 0;

@@ -2,7 +2,7 @@
 // field definitions; Update loosens the required fields and drops defaults
 // (an omitted boolean on PUT must not overwrite the stored value).
 import { z } from 'zod'
-import { eligibilitySchema } from './data-loader'
+import { strictEligibilitySchema as eligibilitySchema } from './eligibility-types'
 import { httpsUrl } from './validators'
 
 const scholarshipOptionalFields = {

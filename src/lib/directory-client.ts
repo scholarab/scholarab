@@ -201,8 +201,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       // them before this runs. Re-appending all 280 there is what made a
       // navigation flash. Cheap identity check, and every real filter change
       // fails it on the first index.
-      const inOrder = want.length === grid.children.length
-        && want.every((node, i) => grid.children[i] === node);
+      const currentVisible = [...grid.children].filter(node => !(node as HTMLElement).hidden);
+      const inOrder = want.length === currentVisible.length
+        && want.every((node, i) => currentVisible[i] === node);
       if (!inOrder) {
         // Headers are pulled out first: append() only moves the nodes it is
         // given, so any header left in place would strand itself above the

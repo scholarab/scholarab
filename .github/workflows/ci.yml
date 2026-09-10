@@ -43,6 +43,13 @@ jobs:
           node-version: 22
           cache: npm
 
+      - uses: actions/cache@v4
+        with:
+          path: |
+            public/og/scholarships
+            .cache/og-images.json
+          key: og-${{ runner.os }}-${{ hashFiles('scripts/generate-og-images.ts', 'scripts/og-fonts/*', 'package-lock.json', 'src/data/scholarships.json') }}
+          restore-keys: og-${{ runner.os }}-
       - run: npm ci
 
       # DATABASE_URL is scoped to this step only; the build below must never see it.
@@ -50,6 +57,9 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx tsx scripts/auto-expire.ts
+
+      - name: Validate catalogue before database sync
+        run: npm run validate-data
 
       # Push the JSON files into the admin panel's database. auto-expire above
       # only flips `active` on rows that already exist, so without this a new

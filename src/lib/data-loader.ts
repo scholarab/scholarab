@@ -1,7 +1,5 @@
 import type { EligibilityCriteria } from './eligibility-types'
 import { eligibilitySchema } from './eligibility-types'
-import { getEnv } from 'astro/env/runtime'
-import { CACHE_TTL_MS } from './constants'
 
 export { eligibilitySchema } from './eligibility-types'
 
@@ -74,148 +72,27 @@ export type Program = {
   active: boolean
 }
 
-let scholarshipCache: { data: Scholarship[]; exp: number } | null = null
-let programCache:     { data: Program[];     exp: number } | null = null
+export function loadScholarships(): Promise<Scholarship[]> { return loadScholarshipsFromJson() }
 
-const hasDbUrl = () =>
-  getEnv('DATABASE_URL') ?? import.meta.env.DATABASE_URL ?? process.env.DATABASE_URL
-
-// Shared cache + DB-with-JSON-fallback skeleton for both loaders.
-async function loadItems<T>(
-  cache: { data: T[]; exp: number } | null,
-  setCache: (c: { data: T[]; exp: number }) => void,
-  fromDb: () => Promise<T[]>,
-  fromJson: () => Promise<T[]>,
-): Promise<T[]> {
-  if (cache && Date.now() < cache.exp) return cache.data
-  if (hasDbUrl()) {
-    try {
-      const result = await fromDb()
-      setCache({ data: result, exp: Date.now() + CACHE_TTL_MS })
-      return result
-    } catch (e) {
-      console.error('DB load failed, falling back to JSON:', e)
-    }
-  }
-  return fromJson()
-}
-
-export function loadScholarships(): Promise<Scholarship[]> {
-  return loadItems(
-    scholarshipCache,
-    c => { scholarshipCache = c },
-    async () => {
-      const { db } = await import('./db/client')
-      const { scholarships } = await import('./db/schema')
-      const { eq } = await import('drizzle-orm')
-      const rows = await db.select({
-        id: scholarships.id,
-        title: scholarships.title,
-        amount: scholarships.amount,
-        deadline: scholarships.deadline,
-        openDate: scholarships.openDate,
-        audience: scholarships.audience,
-        url: scholarships.url,
-        category: scholarships.category,
-        lastVerified: scholarships.lastVerified,
-        region: scholarships.region,
-        applyViaGuidance: scholarships.applyViaGuidance,
-        active: scholarships.active,
-        eligibility: scholarships.eligibility,
-      }).from(scholarships).where(eq(scholarships.active, true))
-      return rows.map(r => ({
-        id: r.id,
-        title: r.title,
-        amount: r.amount,
-        deadline: r.deadline ?? null,
-        openDate: r.openDate ?? null,
-        audience: r.audience ?? null,
-        url: r.url,
-        category: r.category ?? null,
-        lastVerified: r.lastVerified ?? null,
-        region: r.region ?? null,
-        notes: null, // admin-only field, not fetched on public path
-        applyViaGuidance: r.applyViaGuidance ?? false,
-        active: r.active ?? true,
-        eligibility: parseEligibility(r.eligibility),
-        metaDetail: null,
-      }))
-    },
-    loadScholarshipsFromJson,
-  )
-}
-
-/**
- * The committed JSON, never the database.
- *
- * `loadScholarships` prefers Postgres whenever DATABASE_URL is bound, which is
- * always true inside the Worker. That is fine for anything that only needs the
- * currently-active set, but it is wrong for resolving an id that came from a
- * page: pages are prerendered from this JSON with DATABASE_URL blanked (see
- * the build script), and the two stores have diverged badly. Callers that must
- * agree with what the site actually rendered use this instead.
- */
+/** Public data is the deployed JSON snapshot. Admin drafts are isolated in
+ * catalogue_entries and never affect the public site before publication. */
+let scholarshipJson: Scholarship[] | undefined
 export async function loadScholarshipsFromJson(): Promise<Scholarship[]> {
+  if (scholarshipJson) return scholarshipJson
   const data = await import('../data/scholarships.json')
-  return (data.default as Array<Record<string, unknown>>).map(s => ({ ...(s as Omit<Scholarship, 'eligibility'>), openDate: (s.openDate as string | null) ?? null, eligibility: parseEligibility(s.eligibility) }))
+  return scholarshipJson = (data.default as Array<Record<string, unknown>>).map(s => ({ ...(s as Omit<Scholarship, 'eligibility'>), openDate: (s.openDate as string | null) ?? null, eligibility: parseEligibility(s.eligibility) }))
 }
 
-export function loadPrograms(): Promise<Program[]> {
-  return loadItems(
-    programCache,
-    c => { programCache = c },
-    async () => {
-      const { db } = await import('./db/client')
-      const { researchPrograms } = await import('./db/schema')
-      const { eq } = await import('drizzle-orm')
-      const rows = await db.select({
-        id: researchPrograms.id,
-        name: researchPrograms.name,
-        emoji: researchPrograms.emoji,
-        category: researchPrograms.category,
-        provider: researchPrograms.provider,
-        grades: researchPrograms.grades,
-        duration: researchPrograms.duration,
-        paid: researchPrograms.paid,
-        stipend: researchPrograms.stipend,
-        location: researchPrograms.location,
-        eligibility: researchPrograms.eligibility,
-        deadline: researchPrograms.deadline,
-        url: researchPrograms.url,
-        description: researchPrograms.description,
-        lastVerified: researchPrograms.lastVerified,
-        active: researchPrograms.active,
-      }).from(researchPrograms).where(eq(researchPrograms.active, true))
-      return rows.map(r => ({
-        id: r.id,
-        name: r.name,
-        emoji: r.emoji ?? null,
-        category: r.category ?? null,
-        provider: r.provider ?? null,
-        grades: r.grades ?? null,
-        duration: r.duration ?? null,
-        paid: r.paid ?? false,
-        stipend: r.stipend ?? null,
-        location: r.location ?? null,
-        eligibility: r.eligibility ?? null,
-        deadline: r.deadline ?? null,
-        url: r.url,
-        description: r.description ?? null,
-        metaDescription: null,
-        lastVerified: r.lastVerified ?? null,
-        active: r.active ?? true,
-      }))
-    },
-    loadProgramsFromJson,
-  )
-}
+export function loadPrograms(): Promise<Program[]> { return loadProgramsFromJson() }
 
 /** The committed JSON, never the database. See loadScholarshipsFromJson. */
+let programJson: Program[] | undefined
 export async function loadProgramsFromJson(): Promise<Program[]> {
+  if (programJson) return programJson
   const data = await import('../data/research-programs.json')
   // Most JSON entries omit `active` entirely (only retired programs carry
   // active: false); default it to true so `p.active` checks don't drop them.
-  return (data.default as Array<Record<string, unknown>>).map(p => ({
+  return programJson = (data.default as Array<Record<string, unknown>>).map(p => ({
     ...(p as unknown as Program),
     metaDescription: (p.metaDescription as string | undefined) ?? null,
     active: (p.active as boolean | undefined) ?? true,

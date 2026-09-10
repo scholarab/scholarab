@@ -2,13 +2,17 @@ name: Email Deadline Alerts
 
 on:
   schedule:
-    - cron: '0 14 * * *'   # Daily at 2pm UTC (8am MT)
+    - cron: '0 */6 * * *'   # Same milestone is deduplicated; retry failures within 24h
   workflow_dispatch:
     inputs:
       catch_up:
         description: 'Catch-up send: remind every subscriber with a future deadline now (ignores 30/14/3 milestones)'
         type: boolean
         default: false
+
+concurrency:
+  group: deadline-alert-delivery
+  cancel-in-progress: false
 
 jobs:
   send:
@@ -27,6 +31,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          TZ: America/Edmonton
           SITE_URL: https://www.scholarab.ca
           CATCH_UP: ${{ inputs.catch_up == true && '1' || '' }}
         run: npx tsx scripts/send-alerts.ts

@@ -1,144 +1,152 @@
-// Factory for the admin CRUD API routes; scholarships and programs share
-// identical GET/POST/PUT/DELETE logic and differ only in table, schemas,
-// and which column is checked for duplicates.
-import type { APIRoute } from 'astro'
-import { eq, ilike, desc } from 'drizzle-orm'
-import type { AnyPgColumn } from 'drizzle-orm/pg-core'
-import { z } from 'zod'
-import { isAdminRequest } from './adminAuth'
-import { db } from './db/client'
-import { jsonOk, jsonError } from './api-response'
+import type { APIRoute } from 'astro';
+import { and, eq, sql } from 'drizzle-orm';
+import { z } from 'zod';
+import { isAdminRequest } from './adminAuth';
+import { db } from './db/client';
+import { catalogueEntries as entries } from './db/schema';
+import { jsonOk, jsonError } from './api-response';
+import { entryView, type CatalogueKind, type Document } from './catalogue';
+import { getCatalogueEntry, listCatalogue } from './catalogue-store';
 
-export interface AdminCrudConfig {
-  // Drizzle's table generics don't survive a generic factory; the routes only
-  // use the columns passed explicitly below, so the table itself stays loose.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  table: any
-  idColumn: AnyPgColumn
-  updatedAtColumn: AnyPgColumn
-  dupColumn: AnyPgColumn
-  /** Field name checked for duplicates on create ('title' / 'name'). */
-  dupField: string
-  createSchema: z.ZodType<Record<string, unknown>>
-  updateSchema: z.ZodType<Record<string, unknown>>
-  /** URL segment for log lines, e.g. 'scholarships'. */
-  logTag: string
+interface AdminCrudConfig {
+  kind: CatalogueKind;
+  createSchema: z.ZodType<Record<string, unknown>>;
+  updateSchema: z.ZodType<Record<string, unknown>>;
 }
-
-function zodDetail(e: z.ZodError): string {
-  return e.issues.map(i => `${i.path.join('.') || 'root'}: ${i.message}`).join('; ')
+export const parseId = (raw: string | undefined): number | null =>
+  raw && /^[1-9]\d*$/.test(raw) && Number.isSafeInteger(Number(raw)) && Number(raw) <= 2147483647
+    ? Number(raw)
+    : null;
+const conflict = () => jsonError('This record changed. Refresh and try again.', 409);
+function failure(e: unknown) {
+  if (e instanceof SyntaxError) return jsonError('Invalid JSON', 400);
+  if (e instanceof z.ZodError)
+    return jsonError(
+      `Invalid request data: ${e.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')}`,
+      400
+    );
+  const code =
+    (e as { code?: string; cause?: { code?: string } })?.code ??
+    (e as { cause?: { code?: string } })?.cause?.code;
+  if (code === '23505') return jsonError('A listing with that name already exists', 409);
+  console.error('[admin catalogue]', e);
+  return jsonError('Unable to save. Please try again.', 500);
 }
-
 export function makeAdminCollectionRoutes(cfg: AdminCrudConfig): { GET: APIRoute; POST: APIRoute } {
-  const GET: APIRoute = async ({ request }) => {
-    if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
-    const all = await db.select().from(cfg.table).orderBy(desc(cfg.updatedAtColumn)).limit(1000)
-    return jsonOk(all)
-  }
-
-  const POST: APIRoute = async ({ request }) => {
-    if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
-
-    try {
-      const body = await request.json()
-      const data = cfg.createSchema.parse(body)
-
-      const dupValue = String(data[cfg.dupField] ?? '').trim()
-      // Escape LIKE wildcards; a literal % or _ in a title would otherwise
-      // pattern-match unrelated rows and report a false duplicate.
-      const dupPattern = dupValue.replace(/([\\%_])/g, '\\$1')
-      const existing = await db
-        .select({ id: cfg.idColumn, [cfg.dupField]: cfg.dupColumn })
-        .from(cfg.table)
-        .where(ilike(cfg.dupColumn, dupPattern))
-        .limit(1)
-      if (existing.length > 0) {
-        return jsonOk({ error: 'duplicate', existing: existing[0]![cfg.dupField] }, 409)
+  return {
+    GET: async ({ request }) => {
+      if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401);
+      const params = new URL(request.url).searchParams;
+      const page = Number(params.get('page') ?? 0);
+      if (!Number.isSafeInteger(page) || page < 0 || page > 100000)
+        return jsonError('Invalid page', 400);
+      try {
+        return jsonOk(
+          await listCatalogue(
+            cfg.kind,
+            page,
+            (params.get('q') ?? '').slice(0, 500),
+            (params.get('facet') ?? 'All').slice(0, 100)
+          )
+        );
+      } catch (e) {
+        return failure(e);
       }
-
-      const [created] = (await db.insert(cfg.table).values(data).returning()) as Record<string, unknown>[]
-      return jsonOk(created, 201)
-    } catch (e) {
-      if (e instanceof z.ZodError) {
-        const detail = zodDetail(e)
-        console.error(`[POST /admin/api/${cfg.logTag}] ZodError:`, detail)
-        return jsonError(`Invalid request data: ${detail}`, 400)
-      }
-      console.error(`[POST /admin/api/${cfg.logTag}]`, e)
-      return jsonError('Internal server error', 500)
-    }
-  }
-
-  return { GET, POST }
-}
-
-export function makeAdminItemRoutes(cfg: AdminCrudConfig): { GET: APIRoute; PUT: APIRoute; DELETE: APIRoute } {
-  const GET: APIRoute = async ({ request, params }) => {
-    if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
-    const id = parseInt(params.id!, 10)
-    if (isNaN(id)) return jsonError('Invalid ID', 400)
-    const [item] = await db.select().from(cfg.table).where(eq(cfg.idColumn, id))
-    if (!item) return jsonError('Not found', 404)
-    return jsonOk(item)
-  }
-
-  const PUT: APIRoute = async ({ request, params }) => {
-    if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
-    const id = parseInt(params.id!, 10)
-    if (isNaN(id)) return jsonError('Invalid ID', 400)
-
-    try {
-      const body = await request.json()
-      // Destructuring a null or scalar body throws a TypeError, which the
-      // catch below turns into a 500. A malformed body is a 400.
-      if (body === null || typeof body !== 'object' || Array.isArray(body))
-        return jsonError('Invalid request data: body must be an object', 400)
-      const { updatedAt: clientUpdatedAt, ...rest } = body as Record<string, unknown>
-      const data = cfg.updateSchema.parse(rest)
-
-      if (clientUpdatedAt) {
-        const [current] = await db
-          .select({ updatedAt: cfg.updatedAtColumn })
-          .from(cfg.table)
-          .where(eq(cfg.idColumn, id))
-        if (!current) return jsonError('Not found', 404)
-        const dbTs = (current.updatedAt as Date | null)?.getTime() ?? 0
-        const clientTs = new Date(clientUpdatedAt as string | number | Date).getTime()
-        if (dbTs !== clientTs) {
-          return jsonOk({ error: 'conflict', message: 'This record was modified by someone else. Please refresh and try again.' }, 409)
+    },
+    POST: async ({ request }) => {
+      if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401);
+      try {
+        const data = cfg.createSchema.parse(await request.json());
+        // The unique PK arbitrates concurrent allocation; each retry uses a
+        // fresh statement snapshot. Never recycle IDs of retained tombstones.
+        for (let attempt = 0; attempt < 5; attempt++) {
+          const [next] = await db
+            .select({ id: sql<number>`coalesce(max(${entries.publicId}),0)+1` })
+            .from(entries)
+            .where(eq(entries.kind, cfg.kind));
+          const id = next!.id;
+          const [created] = await db
+            .insert(entries)
+            .values({ kind: cfg.kind, publicId: id, draft: { ...data, id } as Document })
+            .onConflictDoNothing({ target: [entries.kind, entries.publicId] })
+            .returning();
+          if (created) return jsonOk(entryView(created), 201);
         }
+        return conflict();
+      } catch (e) {
+        return failure(e);
       }
-
-      const [updated] = await db
-        .update(cfg.table)
-        .set({ ...data, updatedAt: new Date() })
-        .where(eq(cfg.idColumn, id))
-        .returning()
-      if (!updated) return jsonError('Not found', 404)
-      return jsonOk(updated)
-    } catch (e) {
-      if (e instanceof z.ZodError) {
-        const detail = zodDetail(e)
-        console.error(`[PUT /admin/api/${cfg.logTag}/:id] ZodError:`, detail)
-        return jsonError(`Invalid request data: ${detail}`, 400)
+    },
+  };
+}
+export function makeAdminItemRoutes(cfg: AdminCrudConfig): {
+  GET: APIRoute;
+  PUT: APIRoute;
+  DELETE: APIRoute;
+} {
+  const write =
+    (deleting: boolean): APIRoute =>
+    async ({ request, params }) => {
+      if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401);
+      const id = parseId(params.id);
+      if (!id) return jsonError('Invalid ID', 400);
+      try {
+        const body = z
+          .looseObject({ revision: z.number().int().positive() })
+          .parse(await request.json());
+        const current = await getCatalogueEntry(cfg.kind, id);
+        if (!current || current.deleted || (!current.published && !current.draft))
+          return jsonError('Not found', 404);
+        const fields = { ...body };
+        const existingUrl = (current.draft ?? current.published)?.url;
+        // Four vetted legacy providers still use HTTP. Preserve their unchanged
+        // URLs when editing another field; new or changed links require HTTPS.
+        if (
+          fields.url === existingUrl &&
+          typeof existingUrl === 'string' &&
+          existingUrl.startsWith('http://')
+        )
+          delete fields.url;
+        const data = deleting ? {} : cfg.updateSchema.parse(fields);
+        const document = { ...(current.draft ?? current.published), ...data, id } as Document;
+        const [saved] = await db
+          .update(entries)
+          .set({
+            draft: document,
+            draftBase: current.draft ? current.draftBase : current.published,
+            deleted: deleting,
+            revision: sql`${entries.revision}+1`,
+            updatedAt: new Date(),
+          })
+          .where(
+            and(
+              eq(entries.kind, cfg.kind),
+              eq(entries.publicId, id),
+              eq(entries.revision, body.revision)
+            )
+          )
+          .returning();
+        if (!saved) return conflict();
+        return deleting ? new Response(null, { status: 204 }) : jsonOk(entryView(saved));
+      } catch (e) {
+        return failure(e);
       }
-      console.error(`[PUT /admin/api/${cfg.logTag}/:id]`, e)
-      return jsonError('Internal server error', 500)
-    }
-  }
-
-  const DELETE: APIRoute = async ({ request, params }) => {
-    if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401)
-    const id = parseInt(params.id!, 10)
-    if (isNaN(id)) return jsonError('Invalid ID', 400)
-    try {
-      await db.delete(cfg.table).where(eq(cfg.idColumn, id))
-      return new Response(null, { status: 204 })
-    } catch (e) {
-      console.error(`[DELETE /admin/api/${cfg.logTag}/:id]`, e)
-      return jsonError('Internal server error', 500)
-    }
-  }
-
-  return { GET, PUT, DELETE }
+    };
+  return {
+    GET: async ({ request, params }) => {
+      if (!(await isAdminRequest(request))) return jsonError('Unauthorized', 401);
+      const id = parseId(params.id);
+      if (!id) return jsonError('Invalid ID', 400);
+      try {
+        const row = await getCatalogueEntry(cfg.kind, id);
+        return row && !row.deleted && (row.draft || row.published)
+          ? jsonOk(entryView(row))
+          : jsonError('Not found', 404);
+      } catch (e) {
+        return failure(e);
+      }
+    },
+    PUT: write(false),
+    DELETE: write(true),
+  };
 }

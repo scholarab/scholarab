@@ -41,6 +41,13 @@ export const eligibilitySchema = z.object({
   extracurriculars: z.array(z.string()).default([]),
 })
 
+// Untrusted AI/admin writes must not turn the string "false" into true.
+export const strictEligibilitySchema = eligibilitySchema.extend({
+  indigenousRequired:z.boolean().default(false), bipocRequired:z.boolean().default(false),
+  financialNeed:z.boolean().default(false), fosterCare:z.boolean().default(false),
+  apprenticeship:z.boolean().default(false),
+})
+
 export const EMPTY_ELIGIBILITY: EligibilityCriteria = {
   grades: [],
   schoolBoards: [],

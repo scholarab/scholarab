@@ -929,3 +929,9 @@ describe('the tie-break', () => {
     expect(reversed).toEqual(forward)
   })
 })
+
+describe('additional eligible cities',()=>{
+  it('matches Beaumont for the real Ambassador Scholarship',()=>{const row=scholarshipsJson.find(s=>s.id===496)!;expect(matchScholarship({...baseProfile,city:'Beaumont'},row as any).match).toBe(true)})
+  it('does not erase known geography when criteria are missing',()=>{expect(matchScholarship({...baseProfile,city:'Beaumont'},{region:'Leduc',eligibility:null}).match).toBe(false)})
+  it('rejects unrelated cities even with secondary cities',()=>{expect(matchScholarship(baseProfile,{...sch({},'Leduc'),alsoOpenTo:['Beaumont']}).match).toBe(false)})
+})

@@ -1,5 +1,6 @@
+import { todayDate } from '../lib/calendar'
 import { useState, useMemo, useCallback, useEffect, useRef, type ReactNode } from 'react'
-import type { Scholarship, Program } from '../lib/data-loader'
+import type { QuizScholarship as Scholarship, QuizProgram as Program } from '../lib/quiz-payload'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
@@ -182,7 +183,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     if (step < QUESTIONS.length) {
       questionHeadingRef.current?.focus({ preventScroll: true })
     }
-  }, [animKey, step])
+  }, [animKey, step, QUESTIONS.length])
 
   // Persist, including the completed state, so results survive a reload
   useEffect(() => {
@@ -271,8 +272,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // clock, not the build's). Not-yet-open listings stay: their dated deadline
   // is honest and they're worth preparing for.
   const openScholarships = useMemo(() => {
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
+    const today = todayDate()
     return scholarships.filter(s => !s.deadline || new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime())
   }, [scholarships])
   const scholarshipInputs = useMemo(
@@ -280,7 +280,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     // not for matching: confidence takes few enough distinct values that most
     // of the shown results are drawn from one tied block.
     () => openScholarships.map(s => ({
-      id: s.id, region: s.region, eligibility: s.eligibility,
+      id: s.id, region: s.region, alsoOpenTo: s.alsoOpenTo, eligibility: s.eligibility,
       deadline: s.deadline, amount: s.amount,
     })),
     [openScholarships]
@@ -303,12 +303,12 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const quality  = all.filter(r => r.tier !== 'possible')
     const possible = all.filter(r => r.tier === 'possible')
     return quality.length >= 5 ? quality.slice(0, RESULT_LIMIT) : [...quality, ...possible].slice(0, RESULT_LIMIT)
-  }, [profile, step, scholarshipInputs, scholarshipMap, showScholarships])
+  }, [profile, step, scholarshipInputs, scholarshipMap, showScholarships, QUESTIONS.length])
 
   const programResults = useMemo(() => {
     if (step < QUESTIONS.length || !showPrograms) return null
     return matchPrograms(programs, answers)
-  }, [programs, answers, step, showPrograms])
+  }, [programs, answers, step, showPrograms, QUESTIONS.length])
 
   // What one of these is worth, not what all of them add up to. The card used
   // to show a sum; "COMBINED AWARD VALUE $27,500", which is a number nobody
@@ -348,7 +348,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   useEffect(() => {
     document.body.classList.toggle('quiz-results', step >= QUESTIONS.length)
     return () => document.body.classList.remove('quiz-results')
-  }, [step])
+  }, [step, QUESTIONS.length])
 
   // ── Results ────────────────────────────────────────────────────────────────
 

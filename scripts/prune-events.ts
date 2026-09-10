@@ -13,6 +13,7 @@
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
+import { validateCatalogue } from '../src/lib/catalogue.ts'
 import { neon } from '@neondatabase/serverless'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -24,16 +25,27 @@ const sql = neon(url)
 type Listing = { id: number; deadline?: string | null }
 const scholarships = JSON.parse(readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8')) as Listing[]
 const programs = JSON.parse(readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8')) as Listing[]
+validateCatalogue(scholarships,'scholarship')
+validateCatalogue(programs,'program')
+// Dry-run wraps every deletion in EXPLAIN: PostgreSQL plans but never executes
+// it (no ANALYZE). Inputs are validated before even the first retention query.
+const dry=process.argv.includes('--dry-run')
+const execute=async (query: string, params: unknown[]) => {
+  if(dry) {await sql.query('EXPLAIN '+query,params);return [{n:0}]}
+  return sql.query(query,params)
+}
+const pruneSql=(parts:TemplateStringsArray,...values:unknown[])=>execute(parts.reduce((s,p,i)=>s+(i?'$'+i:'')+p,''),values)
+
 const scholarshipIds = scholarships.map(s => s.id)
 const programIds = programs.map(p => p.id)
 
-const [retention] = await sql`
+const [retention] = await pruneSql`
   with del as (delete from events where ts < now() - interval '180 days' returning 1)
   select count(*)::int as n from del
 `
 console.log(`retention (>180d): ${retention!.n} events deleted`)
 
-const [junk] = await sql`
+const [junk] = await pruneSql`
   with del as (
     delete from events
     where event = 'search_empty'
@@ -47,7 +59,7 @@ const [junk] = await sql`
 `
 console.log(`junk search_empty: ${junk!.n} deleted`)
 
-const [orphans] = await sql`
+const [orphans] = await pruneSql`
   with del as (
     delete from events
     where item_id is not null
@@ -64,7 +76,7 @@ console.log(`orphaned item ids: ${orphans!.n} deleted`)
 // rate_limit was dropped in 0012 along with the better-auth leftovers;
 // rate_limit_counter replaced it in 0011. hitRateLimit sweeps this on a 5%
 // sample of calls, so this is a backstop for a quiet month, not the mechanism.
-const [stale] = await sql`
+const [stale] = await pruneSql`
   with del as (delete from rate_limit_counter where window_start < now() - interval '2 days' returning 1)
   select count(*)::int as n from del
 `
@@ -97,7 +109,7 @@ if (scholarshipIds.length === 0 || programIds.length === 0) {
   process.exit(1)
 }
 for (const type of ['scholarship', 'program'] as const) {
-  const [gone] = await sql`
+  const [gone] = await pruneSql`
     with del as (
       delete from subscribers
       where item_type = ${type}
@@ -115,7 +127,7 @@ for (const type of ['scholarship', 'program'] as const) {
 // longer is retention without a purpose, which is the thing PIPEDA's limiting
 // principle is about. The window is generous: a student who signs up in June
 // and clears their inbox in July still lands inside it.
-const [unconfirmed] = await sql`
+const [unconfirmed] = await pruneSql`
   with del as (
     delete from subscribers
     where confirmed_at is null
@@ -125,6 +137,12 @@ const [unconfirmed] = await sql`
   select count(*)::int as n from del
 `
 console.log(`unconfirmed sign-ups (>30d): ${unconfirmed!.n} deleted`)
+
+await pruneSql`WITH del AS (DELETE FROM confirmation_recipients WHERE claimed_at < now()-interval '30 days' RETURNING 1) SELECT count(*)::int AS n FROM del`
+// Unsettled payloads contain addresses and tokens; retain at most 30 days for
+// reconciliation, then retain only their deduplication tombstones.
+if(!dry) await sql`UPDATE mail_deliveries SET payload=NULL WHERE payload IS NOT NULL AND created_at < now()-interval '30 days'`
+console.log(dry?'Dry-run completed: no rows changed':'Pruning completed')
 
 const [subs] = await sql`select count(*)::int as n from subscribers`
 console.log(`subscribers table now holds ${subs!.n} rows`)

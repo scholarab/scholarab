@@ -417,6 +417,7 @@ const chip =
 </style>
 
 <script>
+  import { todayDate } from '../../lib/calendar';
   import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
   import { showToast, showConfetti } from '../../lib/utils';
@@ -521,9 +522,7 @@ const chip =
         // arrives. `confirmed` is true only when this address was already on
         // file for this listing; a returning student changing their mind.
         if (msg) {
-          msg.textContent = data.confirmed
-            ? "✓ Set. We'll nudge you before the deadline."
-            : '✓ Check your email, then confirm the link and you\'re on the list.';
+          msg.textContent = 'Request received. If confirmation is needed, check your inbox. Existing reminders stay unchanged.' ;
           msg.style.display = 'block';
         }
       } else {
@@ -548,8 +547,7 @@ const chip =
     const inactive = el.dataset.inactive !== undefined;
     if (!deadline && !openDate && !inactive) return; // tba/ongoing: not clock-driven
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = todayDate();
     const todayMs = today.getTime();
     const paint = (text: string, bg: string, fg: string) => {
       el.textContent = text;

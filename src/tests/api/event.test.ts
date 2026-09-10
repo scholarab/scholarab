@@ -314,3 +314,5 @@ describe('POST /api/event', () => {
     expect(res.status).toBe(204)
   })
 })
+
+it.each([null,[],false,123,'"text"'])('returns 400 for a non-object body %j',async body=>{expect((await call(body)).status).toBe(400)})

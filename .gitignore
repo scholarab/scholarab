@@ -29,3 +29,8 @@ outreach/
 private/
 # ready-to-post social assets (scripts/generate-social.ts)
 social-out/
+
+# Derived, fingerprinted quiz data; generated before build/dev/type-check.
+src/data/quiz-payload.json
+
+.cache/

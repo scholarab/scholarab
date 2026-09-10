@@ -1,3 +1,4 @@
+import { todayDate } from './calendar'
 // Accents are folded to their base letter, not dropped. Without the NFD pass
 // the character class below deletes them outright, which is how the Belcourt
 // listing shipped at /scholarships/belcourt-brosseau-mtis-awards/ and why the
@@ -13,11 +14,7 @@ export function generateSlug(title: string): string {
     .replace(/\s+/g, '-');
 }
 
-export function getToday(): Date {
-  const d = new Date();
-  d.setHours(0, 0, 0, 0);
-  return d;
-}
+export function getToday(): Date { return todayDate() }
 
 export function formatDeadline(str: string | null | undefined): string | null | undefined {
   if (!str || str === 'TBA' || str === 'Ongoing') return str;

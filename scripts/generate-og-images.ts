@@ -6,9 +6,10 @@
  * the site-wide og-image.png, mirroring the sitemap's rule; [slug].astro
  * applies the same condition when choosing the og:image URL.
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { createHash } from 'node:crypto';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { generateSlug, getToday } from '../src/lib/utils.ts';
@@ -83,9 +84,21 @@ mkdirSync(outDir, { recursive: true });
 const open = scholarships.filter(
   s => scholarshipStatusOf(s, getToday()) !== 'closed'
 );
+const cacheDir=join(__dirname,'../.cache');mkdirSync(cacheDir,{recursive:true});
+const cachePath=join(cacheDir,'og-images.json');
+let previous:Record<string,string>={};
+try {previous=JSON.parse(readFileSync(cachePath,'utf8'));} catch { /* cold build */ }
+const hash=(input:string|Buffer)=>createHash('sha256').update(input).digest('hex');
+const renderer=hash(readFileSync(join(__dirname,'../package-lock.json')))+fonts.map(f=>hash(f.data)).join('');
+const next:Record<string,string>={};let written=0;
 for (const s of open) {
-  const svg = await satori(card(s) as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts });
+  const tree=card(s);
+  const file=`${generateSlug(s.title)}.png`;
+  const digest=hash(renderer+JSON.stringify(tree));next[file]=digest;
+  if(previous[file]===digest && existsSync(join(outDir,file))) continue;
+  const svg = await satori(tree as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts });
   const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
-  writeFileSync(join(outDir, `${generateSlug(s.title)}.png`), png);
+  writeFileSync(join(outDir,file),png);written++;
 }
-console.log(`Wrote ${open.length} OG images to ${outDir}`);
+writeFileSync(cachePath,JSON.stringify(next));
+console.log(`Wrote ${written} OG images; reused ${open.length-written} unchanged images`);

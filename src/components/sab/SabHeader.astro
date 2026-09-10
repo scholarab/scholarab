@@ -1,4 +1,5 @@
 ---
+import { todayDate as albertaToday } from '../../lib/calendar';
 // Dark header band from the claude.ai/design "ScholarAB" pages:
 // nav with accent underline on the active link.
 // (The mono annotation bar and the home-page Home-item omission from the
@@ -34,8 +35,7 @@ let scholarshipCount: number | null = null;
 let programCount: number | null = null;
 try {
   const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = albertaToday();
   scholarshipCount = scholarships.length;
   programCount = programs.filter(p => programIsListed(p, today)).length;
 } catch {

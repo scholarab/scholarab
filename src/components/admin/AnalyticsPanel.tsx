@@ -7,7 +7,7 @@ export interface AnalyticsData {
   daily: { day: string; n: number }[]
   emptySearches: { month: string; q: string | null; n: number }[]
   /** Live email list: people = distinct addresses, reminders = rows. */
-  subscribers: { people: number; reminders: number }
+  subscribers: { people: number; reminders: number; pending?: number }
   monthlySubs: { month: string; people: number; reminders: number }[]
   perItemSubs: { month: string; itemType: string; itemId: number; n: number }[]
   /** Google Search Console totals per month, from the committed snapshot.
@@ -429,10 +429,11 @@ export default function AnalyticsPanel({ data }: Props) {
             {subs.people.toLocaleString()}
           </p>
           <p className="text-xs text-white/40 mt-1">
-            {month === ALL ? 'People on email' : 'People who joined'}
+            {month === ALL ? 'Confirmed people on email' : 'Confirmed people who joined'}
           </p>
           <p className="text-xs text-white/25 mt-0.5">
-            {subs.reminders.toLocaleString()} reminder{subs.reminders === 1 ? '' : 's'} set
+            {subs.reminders.toLocaleString()} confirmed reminder{subs.reminders === 1 ? '' : 's'} set
+            {month === ALL && (data.subscribers.pending ?? 0) > 0 && <span> · {data.subscribers.pending} awaiting confirmation</span>}
           </p>
         </div>
       </div>

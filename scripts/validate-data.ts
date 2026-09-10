@@ -208,6 +208,10 @@ for (const s of scholarships) {
     failed = true;
   }
 
+  if ('open_date' in s) {
+    console.error(`${tag}: use openDate, not open_date`);
+    failed = true;
+  }
   if (s.openDate && !isValidDate(s.openDate)) {
     console.error(`${tag}: openDate must be YYYY-MM-DD, got: ${s.openDate}`);
     failed = true;

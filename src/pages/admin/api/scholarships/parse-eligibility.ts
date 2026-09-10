@@ -3,11 +3,13 @@ import Anthropic from '@anthropic-ai/sdk'
 import { getEnv } from 'astro/env/runtime'
 import { isAdminRequest } from '../../../../lib/adminAuth'
 import { db } from '../../../../lib/db/client'
-import { scholarships, parseLog } from '../../../../lib/db/schema'
+import { parseLog } from '../../../../lib/db/schema'
 import { eq, gte, and, sql } from 'drizzle-orm'
 import type { EligibilityCriteria } from '../../../../lib/eligibility-types'
-import { EMPTY_ELIGIBILITY } from '../../../../lib/eligibility-types'
+import { strictEligibilitySchema } from '../../../../lib/eligibility-types'
 import { jsonError } from '../../../../lib/api-response'
+import { getCatalogueEntry } from '../../../../lib/catalogue-store'
+import { entryView } from '../../../../lib/catalogue'
 import { AI_PARSE_LIMIT, AI_PARSE_WINDOW_MS } from '../../../../lib/constants'
 
 export const prerender = false
@@ -95,19 +97,17 @@ export const POST: APIRoute = async ({ request }) => {
     const { id } = await request.json()
     if (typeof id !== 'number') return jsonError('id must be a number', 400)
 
-    const [scholarship] = await db
-      .select({ id: scholarships.id, title: scholarships.title, audience: scholarships.audience, category: scholarships.category, region: scholarships.region })
-      .from(scholarships)
-      .where(eq(scholarships.id, id))
-    if (!scholarship) return jsonError('Not found', 404)
-
-    if (!scholarship.audience?.trim()) return jsonError('No audience text to parse', 400)
+    if (!Number.isSafeInteger(id) || id < 1) return jsonError('Invalid ID', 400)
+    const entry = await getCatalogueEntry('scholarship', id)
+    if (!entry || entry.deleted) return jsonError('Not found', 404)
+    const scholarship = entryView(entry)
+    if (typeof scholarship.audience !== 'string' || !scholarship.audience.trim()) return jsonError('No audience text to parse', 400)
 
     const client = new Anthropic({ apiKey })
     const message = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 1024,
-      messages: [{ role: 'user', content: buildPrompt(scholarship.title, scholarship.audience, scholarship.category, scholarship.region) }],
+      messages: [{ role: 'user', content: buildPrompt(String(scholarship.title), scholarship.audience, typeof scholarship.category === 'string' ? scholarship.category : null, typeof scholarship.region === 'string' ? scholarship.region : null) }],
     })
 
     const first = message.content[0]
@@ -121,7 +121,9 @@ export const POST: APIRoute = async ({ request }) => {
       return jsonError('AI returned invalid JSON', 502)
     }
 
-    const eligibility: EligibilityCriteria = { ...EMPTY_ELIGIBILITY, ...parsed }
+    const checked = strictEligibilitySchema.safeParse(parsed)
+    if (!checked.success) return jsonError('AI returned invalid eligibility fields', 502)
+    const eligibility = checked.data
     return new Response(JSON.stringify({ eligibility }), { status: 200 })
   } catch (e) {
     console.error('[POST /admin/api/scholarships/parse-eligibility]', e)

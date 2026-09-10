@@ -1,4 +1,5 @@
 ---
+import { todayDate as albertaToday } from '../../lib/calendar';
 // The program facet hubs: /programs/research/, /programs/computing/.
 // The scholarship twin, and the same route-precedence hazard applies; see the
 // header comment in src/pages/scholarships/[facet].astro.
@@ -16,8 +17,7 @@ import { programStatusOf, programIsListed } from '../../lib/status';
 import { getGuide } from '../../lib/guides';
 
 export async function getStaticPaths() {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = albertaToday();
   // Retired programs keep their detail pages for old links but stay out of the
   // directory, so they must stay out of the hubs too; same rule as
   // /programs, and the sitemap agrees with both.
@@ -30,8 +30,7 @@ export async function getStaticPaths() {
 
 const { facet, items, allItems } = Astro.props;
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+const today = albertaToday();
 
 const ordered = filterSortPrograms(items, DEFAULT_PROGRAM_STATE);
 const canonical = `https://www.scholarab.ca/programs/${facet.slug}/`;

@@ -1,21 +1,21 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { useAdminList, type AdminPage, type AdminRecord } from '../../lib/use-admin-list'
+import { useState, useMemo, useEffect } from 'react'
 import { toast } from 'sonner'
 import { EMPTY_ELIGIBILITY } from '../../lib/eligibility-types'
 import { EligibilityEditor } from './EligibilityEditor'
 import { AdminTabBar, AdminPagination, AdminDeleteModal } from './primitives'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
-const REFRESH_INTERVAL = 60_000 // 60 seconds
 
 import type { Scholarship as BaseScholarship } from '../../lib/data-loader'
 
 // Admin rows carry updatedAt for optimistic locking; the public type doesn't.
-type Scholarship = BaseScholarship & { updatedAt: string }
+type Scholarship = AdminRecord<BaseScholarship>
 
 const CATEGORIES = ['Academic', 'Arts', 'Community', 'Environmental', 'General', 'Indigenous', 'STEM', 'Sports', 'Trades']
-const REGIONS = ['National', 'Alberta', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']
+const KNOWN_REGIONS = ['National', 'Alberta', 'Calgary', 'Edmonton', 'Lethbridge', 'Medicine Hat', 'Red Deer']
 
 interface Props {
-  initialData: Scholarship[]
+  initialData: AdminPage<Scholarship>
 }
 
 const emptyForm = (): Partial<Scholarship> => ({
@@ -25,7 +25,6 @@ const emptyForm = (): Partial<Scholarship> => ({
 })
 
 export default function ScholarshipManager({ initialData }: Props) {
-  const [items, setItems] = useState<Scholarship[]>(initialData)
   const [search, setSearch] = useState('')
   const [regionTab, setRegionTab] = useState<string>('All')
   const [page, setPage] = useState(0)
@@ -37,30 +36,8 @@ export default function ScholarshipManager({ initialData }: Props) {
   const [showEligibility, setShowEligibility] = useState(false)
   const [parsing, setParsing] = useState(false)
   const [bulkProgress, setBulkProgress] = useState<{ done: number; total: number } | null>(null)
-  const modalOpenRef = useRef(false)
 
-  // Auto-refresh every 60s; skip if a modal is open to avoid disrupting edits
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      if (modalOpenRef.current) return
-      try {
-        const res = await fetch('/admin/api/scholarships')
-        if (!res.ok) return
-        const fresh: Scholarship[] = await res.json()
-        setItems(prev => {
-          if (prev.length === fresh.length && prev[0]?.updatedAt === fresh[0]?.updatedAt) return prev
-          return fresh
-        })
-      } catch {
-        // silent; don't bother user if refresh fails
-      }
-    }, REFRESH_INTERVAL)
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    modalOpenRef.current = modal !== null
-  }, [modal])
+  const { items, setItems, total, counts: regionCounts, refresh, error } = useAdminList(initialData, '/admin/api/scholarships', page, search, regionTab, modal !== null, setPage)
 
   useEffect(() => {
     if (!modal) return
@@ -78,28 +55,9 @@ export default function ScholarshipManager({ initialData }: Props) {
     return items.find(s => s.title.trim().toLowerCase() === needle) ?? null
   }, [form.title, items, modal?.type])
 
-  const filtered = useMemo(() => {
-    let list = items.filter(s => s.title.toLowerCase().includes(search.toLowerCase()))
-    if (regionTab !== 'All') {
-      list = regionTab === 'No region'
-        ? list.filter(s => !s.region)
-        : list.filter(s => s.region === regionTab)
-    }
-    return list
-  }, [items, search, regionTab])
-
-  const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
-  const paginated = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
-
-  const regionCounts = useMemo(() => {
-    const counts: Record<string, number> = { All: items.length, 'No region': 0 }
-    for (const r of REGIONS) counts[r] = 0
-    for (const s of items) {
-      if (s.region && counts[s.region] !== undefined) counts[s.region] = (counts[s.region] ?? 0) + 1
-      else if (!s.region) counts['No region'] = (counts['No region'] ?? 0) + 1
-    }
-    return counts
-  }, [items])
+  const REGIONS = [...new Set([...KNOWN_REGIONS, ...Object.keys(regionCounts).filter(k => k !== 'All' && k !== 'No region')])]
+  const totalPages = Math.ceil(total / PAGE_SIZE)
+  const paginated = items
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value)
@@ -169,7 +127,7 @@ export default function ScholarshipManager({ initialData }: Props) {
       const url = isEdit ? `/admin/api/scholarships/${modal.item!.id}` : '/admin/api/scholarships'
       const method = isEdit ? 'PUT' : 'POST'
       // Include updatedAt for optimistic locking on edits
-      const body = isEdit ? { ...form, updatedAt: modal.item!.updatedAt } : form
+      const body = isEdit ? { ...form, revision: modal.item!.revision } : form
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
@@ -183,16 +141,9 @@ export default function ScholarshipManager({ initialData }: Props) {
 
       if (res.status === 409) {
         const err = await res.json()
-        if (err.error === 'duplicate') {
-          toast.error(`Already exists: "${err.existing}"`)
-        } else if (err.error === 'conflict') {
-          toast.error(err.message)
-          // Refresh list so they see the latest state
-          const fresh = await fetch('/admin/api/scholarships')
-          if (fresh.ok) setItems(await fresh.json())
-          closeModal()
-        }
-        return
+        toast.error(err.message ?? err.error ?? 'This record changed. Refresh and try again.')
+        refresh()
+        return // Keep the unsaved form visible so the editor can recover it.
       }
 
       if (!res.ok) throw new Error(await res.text())
@@ -202,6 +153,7 @@ export default function ScholarshipManager({ initialData }: Props) {
         : [saved, ...prev]
       )
       toast.success(isEdit ? 'Scholarship updated' : 'Scholarship added')
+      refresh()
       closeModal()
     } catch (e) {
       toast.error('Failed to save: ' + String(e))
@@ -214,11 +166,12 @@ export default function ScholarshipManager({ initialData }: Props) {
     if (!modal?.item) return
     setSaving(true)
     try {
-      const res = await fetch(`/admin/api/scholarships/${modal.item.id}`, { method: 'DELETE' })
+      const res = await fetch(`/admin/api/scholarships/${modal.item.id}`, { method: 'DELETE', headers: {'Content-Type':'application/json'}, body: JSON.stringify({revision: modal.item.revision}) })
       if (res.status === 429) { toast.error('Too many requests. Wait a moment and try again.'); return }
       if (!res.ok) throw new Error()
       setItems(prev => prev.filter(s => s.id !== modal.item!.id))
       toast.success('Scholarship deleted')
+      refresh()
       closeModal()
     } catch {
       toast.error('Failed to delete')
@@ -243,19 +196,21 @@ export default function ScholarshipManager({ initialData }: Props) {
           body: JSON.stringify({ id: s.id }),
         })
         if (res.status === 429) {
-          toast.error('Rate limit hit. Bulk parse stopped. Try again in an hour.')
+          toast.error('Rate limit hit. Parse this page stopped. Try again in an hour.')
           setBulkProgress(null)
           return
         }
         if (res.ok) {
           const { eligibility } = await res.json()
           // Save immediately
-          await fetch(`/admin/api/scholarships/${s.id}`, {
+          const savedResponse = await fetch(`/admin/api/scholarships/${s.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ eligibility }),
+            body: JSON.stringify({ eligibility, revision: s.revision }),
           })
-          setItems(prev => prev.map(x => x.id === s.id ? { ...x, eligibility } : x))
+          if (!savedResponse.ok) throw new Error(`Save failed (${savedResponse.status})`)
+          const saved = await savedResponse.json() as Scholarship
+          setItems(prev => prev.map(x => x.id === s.id ? saved : x))
         } else {
           failed++
         }
@@ -267,7 +222,7 @@ export default function ScholarshipManager({ initialData }: Props) {
     }
     setBulkProgress(null)
     if (failed === 0) toast.success(`Tagged ${done} scholarship${done !== 1 ? 's' : ''}`)
-    else toast.success(`Tagged ${done - failed}/${done}, ${failed} failed`)
+    else toast.error(`Tagged ${done - failed}/${done}, ${failed} failed`)
   }
 
   const ALL_TABS = ['All', ...REGIONS, 'No region']
@@ -278,7 +233,7 @@ export default function ScholarshipManager({ initialData }: Props) {
         <div>
           <h1 className="text-xl font-semibold">Scholarships</h1>
           <p className="text-sm text-white/40">
-            {items.length} total · {items.filter(s => s.eligibility).length} tagged
+            {regionCounts.All ?? total} total · {items.filter(s => s.eligibility).length} tagged on this page
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -291,7 +246,7 @@ export default function ScholarshipManager({ initialData }: Props) {
               onClick={handleBulkParse}
               className="px-3 py-2 rounded-lg text-xs font-medium border border-white/10 text-white/50 hover:text-white hover:border-white/20 transition"
             >
-              ✦ Parse all untagged
+              ✦ Parse untagged on this page
             </button>
           )}
           <button onClick={openAdd} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f]" style={{background:'#22d3a5'}}>
@@ -357,7 +312,8 @@ export default function ScholarshipManager({ initialData }: Props) {
         </table>
       </div>
 
-      <AdminPagination page={page} totalPages={totalPages} total={filtered.length} totalWord="results" onPage={setPage} />
+      {error && <p role="alert" className="text-red-400">{error}</p>}
+      <AdminPagination page={page} totalPages={totalPages} total={total} totalWord="results" onPage={setPage} />
 
       {/* Edit/Add Modal */}
       {(modal?.type === 'edit' || modal?.type === 'add') && (

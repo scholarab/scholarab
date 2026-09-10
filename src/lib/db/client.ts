@@ -5,6 +5,12 @@ import * as schema from './schema'
 
 let _db: ReturnType<typeof drizzle<typeof schema>> | null = null
 
+export function getSql() {
+  const url = getEnv('DATABASE_URL') ?? import.meta.env.DATABASE_URL ?? process.env.DATABASE_URL
+  if (!url) throw new Error('DATABASE_URL is not set')
+  return neon(url)
+}
+
 export function getDb() {
   if (_db) return _db
   // getEnv is wired to CF Pages runtime env by @astrojs/cloudflare adapter (via setGetEnv).

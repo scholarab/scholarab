@@ -1,14 +1,17 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useAdminList, type AdminPage, type AdminRecord } from '../../lib/use-admin-list'
+import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
 import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 import { AdminTabBar, AdminPagination, AdminDeleteModal } from './primitives'
 
-import type { Program } from '../../lib/data-loader'
+import type { Program as BaseProgram } from '../../lib/data-loader'
+
+type Program = AdminRecord<BaseProgram>
 
 const CATEGORIES = ['Biology', 'Chemistry', 'Computer Science', 'Engineering', 'Environmental', 'Math', 'Medicine', 'Physics', 'Social Science', 'Multidisciplinary', 'Other']
 
 interface Props {
-  initialData: Program[]
+  initialData: AdminPage<Program>
 }
 
 const emptyForm = (): Partial<Program> => ({
@@ -18,7 +21,6 @@ const emptyForm = (): Partial<Program> => ({
 })
 
 export default function ProgramManager({ initialData }: Props) {
-  const [items, setItems] = useState<Program[]>(initialData)
   const [search, setSearch] = useState('')
   const [categoryTab, setCategoryTab] = useState<string>('All')
   const [page, setPage] = useState(0)
@@ -27,28 +29,9 @@ export default function ProgramManager({ initialData }: Props) {
   const [saving, setSaving] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
 
-  const filtered = useMemo(() => {
-    let list = items.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
-    if (categoryTab !== 'All') {
-      list = categoryTab === 'No category'
-        ? list.filter(p => !p.category)
-        : list.filter(p => p.category === categoryTab)
-    }
-    return list
-  }, [items, search, categoryTab])
-
-  const totalPages = Math.ceil(filtered.length / PAGE_SIZE)
-  const paginated = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
-
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { All: items.length, 'No category': 0 }
-    for (const c of CATEGORIES) counts[c] = 0
-    for (const p of items) {
-      if (p.category && counts[p.category] !== undefined) counts[p.category] = (counts[p.category] ?? 0) + 1
-      else if (!p.category) counts['No category'] = (counts['No category'] ?? 0) + 1
-    }
-    return counts
-  }, [items])
+  const {items,setItems,total,counts:categoryCounts,refresh,error} = useAdminList(initialData, '/admin/api/programs', page, search, categoryTab, modal !== null, setPage)
+  const totalPages = Math.ceil(total / PAGE_SIZE)
+  const paginated = items
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value)
@@ -81,7 +64,7 @@ export default function ProgramManager({ initialData }: Props) {
       const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(isEdit ? {...form, revision:modal.item!.revision} : form),
       })
       if (res.status === 429) { toast.error('Too many requests. Wait a moment and try again.'); return }
       if (!res.ok) throw new Error(await res.text())
@@ -91,6 +74,7 @@ export default function ProgramManager({ initialData }: Props) {
         : [saved, ...prev]
       )
       toast.success(isEdit ? 'Program updated' : 'Program added')
+      refresh()
       closeModal()
     } catch (e) {
       toast.error('Failed to save: ' + String(e))
@@ -103,11 +87,12 @@ export default function ProgramManager({ initialData }: Props) {
     if (!modal?.item) return
     setSaving(true)
     try {
-      const res = await fetch(`/admin/api/programs/${modal.item.id}`, { method: 'DELETE' })
+      const res = await fetch(`/admin/api/programs/${modal.item.id}`, { method: 'DELETE', headers:{'Content-Type':'application/json'}, body:JSON.stringify({revision:modal.item.revision}) })
       if (res.status === 429) { toast.error('Too many requests. Wait a moment and try again.'); return }
       if (!res.ok) throw new Error()
       setItems(prev => prev.filter(p => p.id !== modal.item!.id))
       toast.success('Program deleted')
+      refresh()
       closeModal()
     } catch {
       toast.error('Failed to delete')
@@ -133,7 +118,7 @@ export default function ProgramManager({ initialData }: Props) {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-xl font-semibold">Research Programs</h1>
-          <p className="text-sm text-white/40">{items.length} total</p>
+          <p className="text-sm text-white/40">{categoryCounts.All ?? total} total</p>
         </div>
         <button onClick={openAdd} className="px-4 py-2 rounded-lg text-sm font-medium text-[#0a0a0f]" style={{background:'#22d3a5'}}>
           + Add program
@@ -200,7 +185,8 @@ export default function ProgramManager({ initialData }: Props) {
         </table>
       </div>
 
-      <AdminPagination page={page} totalPages={totalPages} total={filtered.length} totalWord="total" onPage={setPage} />
+      {error && <p role="alert" className="text-red-400">{error}</p>}
+      <AdminPagination page={page} totalPages={totalPages} total={total} totalWord="total" onPage={setPage} />
 
       {/* Edit/Add Modal */}
       {(modal?.type === 'edit' || modal?.type === 'add') && (

@@ -21,6 +21,12 @@ vi.mock('../../lib/db/client', () => ({
   },
 }))
 
+vi.mock('../../lib/catalogue-store', () => ({getCatalogueEntry: async () => {
+  const rows = await mockSelect().from().where()
+  const row = rows[0]
+  return row ? {publicId:row.id,published:row,draft:null,revision:1,deleted:false,updatedAt:new Date()} : undefined
+}}))
+
 vi.mock('../../lib/db/schema', () => ({
   scholarships: { id: 'id', title: 'title', audience: 'audience', category: 'category', region: 'region' },
   parseLog: { userId: 'userId', createdAt: 'createdAt' },

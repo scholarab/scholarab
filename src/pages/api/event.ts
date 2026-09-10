@@ -64,6 +64,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
   let body: unknown
   try { body = await request.json() } catch { return jsonError('Invalid JSON', 400) }
 
+  if (!body || typeof body !== 'object' || Array.isArray(body)) return jsonError('Body must be an object', 400)
+
   const { event, itemType, itemId, meta } = body as Record<string, unknown>
 
   if (typeof event !== 'string' || !ALLOWED_EVENTS.has(event))

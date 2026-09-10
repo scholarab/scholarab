@@ -4,7 +4,7 @@ import type {
   MatchResult,
   ConfidenceTier,
 } from './eligibility-types'
-import type { Program } from './data-loader'
+import type { QuizProgram as Program } from './quiz-payload'
 import { programMatchesGrade } from './list-core'
 import { parseAmount } from './utils'
 import { RESULT_LIMIT } from './quiz'
@@ -20,9 +20,10 @@ const ALBERTA_CITIES = new Set([
   'Other Alberta',
 ])
 
-function regionMatches(city: string, scholarshipRegion: string | null): boolean {
-  if (!scholarshipRegion || scholarshipRegion === 'National') return true
-  if (scholarshipRegion === 'Alberta') return ALBERTA_CITIES.has(city)
+export function regionMatches(city: string, scholarshipRegion: string | null, alsoOpenTo?: string[] | null): boolean {
+  if (alsoOpenTo?.includes(city)) return true
+  if (!scholarshipRegion || scholarshipRegion === 'National' || scholarshipRegion === 'International') return true
+  if (scholarshipRegion === 'Alberta' || scholarshipRegion === 'Alberta-wide') return ALBERTA_CITIES.has(city)
   return scholarshipRegion === city
 }
 
@@ -69,22 +70,17 @@ const FINANCIAL_NEED_BOOST         = 0.10
  */
 export function matchScholarship(
   profile: StudentProfile,
-  scholarship: { region: string | null; eligibility: EligibilityCriteria | null },
+  scholarship: { region: string | null; alsoOpenTo?: string[] | null; eligibility: EligibilityCriteria | null },
 ): MatchResult {
   const { eligibility, region } = scholarship
 
-  // No eligibility data yet → show as possible match, but with low confidence
-  if (!eligibility) {
-    return { match: true, confidence: 0.20, reasons: [], signals: [] }
-  }
-
   const reasons: string[] = []
-
-  // ── Region ────────────────────────────────────────────────────────────────
-  if (!regionMatches(profile.city, region)) {
+  if (!regionMatches(profile.city, region, scholarship.alsoOpenTo)) {
     reasons.push(`Only for students in ${region}`)
     return { match: false, confidence: 0, reasons, signals: [] }
   }
+  // Missing criteria do not erase the geography that we do know.
+  if (!eligibility) return { match: true, confidence: 0.20, reasons: [], signals: [] }
 
   // ── Grade ─────────────────────────────────────────────────────────────────
   if (eligibility.grades.length > 0 && !eligibility.grades.includes(profile.grade)) {

@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "TZ=America/Edmonton tsx scripts/validate-data.ts && TZ=America/Edmonton tsx scripts/generate-sitemap.ts && TZ=America/Edmonton tsx scripts/generate-og-images.ts && DATABASE_URL= TZ=America/Edmonton astro build",
+    "build": "TZ=America/Edmonton tsx scripts/validate-data.ts && TZ=America/Edmonton tsx scripts/generate-sitemap.ts && TZ=America/Edmonton tsx scripts/generate-og-images.ts && tsx scripts/generate-quiz-payload.ts && DATABASE_URL= TZ=America/Edmonton astro build",
     "preview": "astro preview",
     "auto-expire": "tsx scripts/auto-expire.ts",
     "sitemap": "TZ=America/Edmonton tsx scripts/generate-sitemap.ts",
@@ -24,7 +24,11 @@
     "social": "TZ=America/Edmonton tsx scripts/generate-social.ts",
     "indexnow": "TZ=America/Edmonton tsx scripts/submit-indexnow.ts",
     "index-status": "TZ=America/Edmonton tsx scripts/index-status.ts",
-    "gsc-months": "TZ=America/Edmonton tsx scripts/gsc-months.ts"
+    "gsc-months": "TZ=America/Edmonton tsx scripts/gsc-months.ts",
+    "predev": "tsx scripts/generate-quiz-payload.ts",
+    "pretype-check": "tsx scripts/generate-quiz-payload.ts",
+    "migrate-db": "tsx scripts/migrate-db.ts",
+    "publish-drafts": "tsx scripts/publish-drafts.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.1",
@@ -48,6 +52,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@electric-sql/pglite": "^0.5.8",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
     "@resvg/resvg-js": "^2.6.2",
