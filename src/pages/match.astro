@@ -15,7 +15,12 @@ import {
   QUIZ_MAX_QUESTION_WORD,
 } from '../lib/quiz';
 
-const adaptive = import.meta.env.MATCHING_QUIZ_VARIANT !== 'legacy';
+// Opt-in until the beta has verified evidence behind it: only an explicit
+// MATCHING_QUIZ_VARIANT=adaptive build serves the new experience. Two of 1,207
+// listings carry matching documents and both are partial, so the redesign
+// promises explained requirements it cannot yet show. Nothing is deleted; the
+// adaptive path stays built and is still exercised by the matching-e2e job.
+const adaptive = import.meta.env.MATCHING_QUIZ_VARIANT === 'adaptive';
 const description = adaptive
   ? 'Explore scholarships and programs with explained requirements, optional follow-ups and private answers.'
   : `${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`;
