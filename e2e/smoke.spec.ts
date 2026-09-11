@@ -21,27 +21,8 @@ test('programs page - list hydrates and shows count', async ({ page }) => {
   await expect(page.locator('text=/\\d+ OF \\d+ PROGRAMS/i').first()).toBeVisible({ timeout: 10_000 });
 });
 
-// Mirrors src/pages/match.astro: only an explicit adaptive build serves the
-// beta, so the public smoke test walks whichever quiz production actually
-// ships. The matching-e2e job sets the variable and covers the beta in depth.
-const adaptive = process.env.MATCHING_QUIZ_VARIANT === 'adaptive';
-
 test('match quiz reaches results', async ({ page }) => {
-  if (adaptive) {
-    await page.goto('/match/');
-    await expect(page.getByRole('heading', { name: 'Three things to get started.' })).toBeVisible();
-    await expect(page.getByLabel('1. What are you looking for?')).toBeEnabled();
-    await page.getByLabel('1. What are you looking for?').selectOption('both');
-    await page.getByLabel('2. What is your current education stage?').selectOption('12');
-    await page.getByLabel('3. Which community do you currently live in?').fill('Calgary');
-    await page.getByRole('button', { name: 'Show opportunities →' }).click();
-    await expect(page.locator('.match-card').first()).toBeVisible();
-    await expect(page.locator('[data-catalogue-ready="true"]')).toBeVisible();
-    await expect(page.getByText('NEW MATCHING · BETA', { exact: true })).toBeVisible();
-    return;
-  }
-
-    await page.goto('/match/');
+  await page.goto('/match/');
     // Wait for React client:load hydration
     await expect(page.locator('text=Question 1 of 6')).toBeVisible({ timeout: 15_000 });
 

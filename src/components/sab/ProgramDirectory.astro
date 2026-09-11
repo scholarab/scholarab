@@ -291,6 +291,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
           : undefined,
         emoji: null, provider: null, duration: null, stipend: null, location: null,
         eligibility: null, url: '', description: null, lastVerified: null, active: true,
+        cost: 'unconfirmed', costNote: null,
       };
     },
     // One pass over the corpus per render, shared by the visible list and all

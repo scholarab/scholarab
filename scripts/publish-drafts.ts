@@ -5,8 +5,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { neon } from '@neondatabase/serverless';
 import { applyPublication, type PublicationChange, type Document } from '../src/lib/catalogue.ts';
-import { buildMatchingCatalogue } from '../src/lib/matching/catalogue.ts';
-import { stableJson } from '../src/lib/catalogue.ts';
+import { catalogueHash } from '../src/lib/catalogue.ts';
 import { generateSlug } from '../src/lib/utils.ts';
 const sql = neon(process.env.DATABASE_URL!);
 const git = (...args: string[]) => execFileSync('git', args, { encoding: 'utf8' }).trim();
@@ -116,21 +115,12 @@ try {
     signal: AbortSignal.timeout(15000),
     headers: { 'User-Agent': 'Mozilla/5.0 ScholarAB publication verification' },
   });
-  const expectedMatching = await buildMatchingCatalogue({
+  const expectedHash = await catalogueHash({
     scholarship: read(paths.scholarship),
     program: read(paths.program),
   });
-  const matchingResponse = await fetch(
-    `https://www.scholarab.ca/matching/manifest.json?request=${id}`,
-    {
-      signal: AbortSignal.timeout(15000),
-      headers: { 'User-Agent': 'Mozilla/5.0 ScholarAB publication verification' },
-    }
-  );
-  const matchingLive =
-    matchingResponse.ok &&
-    stableJson(await matchingResponse.json()) === stableJson(expectedMatching.manifest);
-  if (response.ok && ((await response.json()) as { id?: string }).id === id && matchingLive) {
+  const deployed = response.ok ? await response.json() as { id?: string; catalogueHash?: string } : null;
+  if (deployed?.id === id && deployed.catalogueHash === expectedHash) {
     await sql`UPDATE publication_requests SET status='published',message='Publication is live.',updated_at=now() WHERE id=${id}`;
     console.log('Publication verified live');
   } else console.log('Committed; deployment not visible yet. Next run will verify.');

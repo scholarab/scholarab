@@ -47,8 +47,6 @@ OG rendering caches a hash of the render tree, font bytes and dependency lockfil
 
 Analytics aggregates are sent in one database batch instead of nine sequential requests; obsolete internal-ID title lookups are removed. Counts distinguish confirmed subscriptions from those awaiting confirmation. At the current table size, full retained-history aggregates are inexpensive. Month-only APIs and new indexes were deferred until a query plan demonstrates a need.
 
-## Matching catalogue foundation
+## Build verification
 
-Phase 1 adds `/admin/matching` for source review and draft previews. Matching fields are validated and saved through the same revisioned catalogue APIs. Every build creates `/matching/manifest.json` plus its content-addressed opportunity asset and verifies exact IDs, hashes, current quiz connections, and detail-page existence. The current public quiz does not load the new foundation asset yet. See [Phase 1 delivery](matching-phase-1.md) for commands, baseline, coverage, and evidence limitations.
-
-CI also runs `npm run matching:audit-db` after sync. It performs read-only reconciliation of canonical published records, drafts/archives, and explicit historical mappings. Structural failures remain failures even during publication; expected version differences are labeled in-flight. The publisher verifies the live matching manifest as well as `/publication.json` before declaring completion.
+The legacy quiz is the only quiz. Its payload generator verifies every source identity and stamps the complete JSON catalogue hash into `public/publication.json`. The publisher requires both its request ID and that hash to match the live deployment before acknowledging publication. Browser tests reuse the validated build in CI.

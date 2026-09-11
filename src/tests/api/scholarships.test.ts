@@ -4,8 +4,6 @@ import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import { readFileSync } from 'node:fs';
 import * as schema from '../../lib/db/schema';
-import { legacyMatching } from '../../lib/matching/normalize';
-import { applyPublication } from '../../lib/catalogue';
 import { makeAdminCollectionRoutes, makeAdminItemRoutes } from '../../lib/admin-crud';
 import {
   scholarshipCreateSchema,
@@ -57,34 +55,6 @@ for (const kind of ['scholarship', 'program'] as const)
         JSON.stringify({ ...valid, id: 1, alsoOpenTo: ['Beaumont'], metaDetail: 'Preserve this' }),
       ]);
     }
-    it('round trips matching evidence through draft save, read, and publication without touching the published baseline', async () => {
-      await seed();
-      const original = { ...valid, id: 1, alsoOpenTo: ['Beaumont'], metaDetail: 'Preserve this' };
-      const matching = legacyMatching(original, kind);
-      const saved = await call(item.PUT, 'PUT', { revision: 1, matching });
-      expect(saved.status).toBe(200);
-      const document = await saved.json();
-      expect(document.matching).toEqual(matching);
-      expect((await (await call(item.GET, 'GET')).json()).matching).toEqual(matching);
-      const result = await pg.query(
-        'SELECT published,draft,draft_base,revision FROM catalogue_entries WHERE kind=$1',
-        [kind]
-      );
-      const row = result.rows[0] as any;
-      expect(row.published).toEqual(original);
-      const merged = applyPublication(
-        [original],
-        [{ kind, publicId: 1, base: row.draft_base, value: row.draft, revision: row.revision }],
-        kind
-      );
-      expect(merged[0]?.matching).toEqual(matching);
-      expect(merged[0]?.metaDetail).toBe('Preserve this');
-      expect(
-        (await call(item.PUT, 'PUT', { revision: document.revision, matching: { version: 99 } }))
-          .status
-      ).toBe(400);
-      expect((await call(item.PUT, 'PUT', { revision: 1, matching })).status).toBe(409);
-    });
     it('rejects every unauthorized operation', async () => {
       state.admin = false;
       for (const [route, method] of [

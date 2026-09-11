@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { matchingSchema } from '../src/lib/matching/schema.ts';
-import { eligibilityEvidenceSchema } from '../src/lib/matching/field-evidence.ts';
 import { readFileSync, readdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -682,20 +680,5 @@ if (dupTitles.length) {
 
 if (failed) process.exit(1);
 
-
-// New matching contracts must be validated before sync or publication.
-for (const [kind, rows] of [['scholarship', scholarships], ['program', programs]] as const) {
-  for (const row of rows) {
-    for (const [field, schema] of [['matching', matchingSchema], ['eligibilityEvidence', eligibilityEvidenceSchema]] as const) {
-      if (row[field] == null) continue;
-      const result = schema.safeParse(row[field]);
-      if (result.success) continue;
-      failed = true;
-      for (const issue of result.error.issues)
-        console.error(`validate-data: ${kind}:${row.id} ${'title' in row ? row.title : row.name} ${[field, ...issue.path].join('.')}: ${issue.message}`);
-    }
-  }
-}
-if (failed) process.exit(1);
 
 console.log(`validate-data: OK (${scholarships.length} scholarships, ${programs.length} programs, ${rules.length} redirects)`);

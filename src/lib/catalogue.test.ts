@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   applyPublication,
   validateCatalogue,
+  catalogueHash,
   type Document,
   type PublicationChange,
 } from './catalogue';
@@ -19,6 +20,19 @@ const change = (value: Document | null): PublicationChange => ({
   base,
   value,
   revision: 1,
+});
+describe('deployed catalogue fingerprint', () => {
+  it('ignores object key order but detects content, identity, and catalogue changes', async () => {
+    const snapshot = { scholarship: [base], program: [] };
+    const expected = await catalogueHash(snapshot);
+    expect(expected).toMatch(/^[a-f0-9]{64}$/);
+    expect(await catalogueHash({ program: [], scholarship: [{ ...base }] })).toBe(expected);
+    for (const changed of [
+      { scholarship: [{ ...base, notes: 'changed' }], program: [] },
+      { scholarship: [{ ...base, id: 2 }], program: [] },
+      { scholarship: [], program: [base] },
+    ]) expect(await catalogueHash(changed)).not.toBe(expected);
+  });
 });
 describe('publication three-way merge', () => {
   it('preserves JSON-only fields and independent newer changes', () => {
