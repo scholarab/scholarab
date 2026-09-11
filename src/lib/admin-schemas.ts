@@ -47,6 +47,10 @@ const programOptionalFields = {
   grades: z.string().max(200).optional().nullable(),
   duration: z.string().max(200).optional().nullable(),
   stipend: z.string().max(200).optional().nullable(),
+  // What the student pays, independent of whether they get paid. Defaulted at
+  // the loader, not here, so an admin draft that omits it is still explicit.
+  cost: z.enum(['free', 'fee', 'varies', 'unconfirmed']).optional().nullable(),
+  costNote: z.string().max(300).optional().nullable(),
   location: z.string().max(500).optional().nullable(),
   eligibility: z.string().max(10000).optional().nullable(),
   deadline: z.string().max(50).optional().nullable(),

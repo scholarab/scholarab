@@ -39,6 +39,10 @@ export const researchPrograms = pgTable('research_programs', {
   duration: text('duration'),
   paid: boolean('paid').default(false),
   stipend: text('stipend'),
+  // free | fee | varies | unconfirmed. Defaults to unconfirmed so a row nobody
+  // has checked cannot present itself as free; see Program.cost in data-loader.
+  cost: text('cost').default('unconfirmed'),
+  costNote: text('cost_note'),
   location: text('location'),
   eligibility: text('eligibility'),
   deadline: text('deadline'),

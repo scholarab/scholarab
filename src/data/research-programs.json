@@ -128,7 +128,9 @@
     "url": "https://www.shad.ca/apply/",
     "description": "Applications for SHAD 2027 open in mid-September and close in early January. Month-long STEAM program on a Canadian university campus: solve real-world problems in teams, live in residence, and build a cross-country network.",
     "metaDescription": "A month-long STEAM program on a Canadian university campus: solve real-world problems in teams, live in residence, and build a cross-country network.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "varies",
+    "costNote": "SHAD publishes 2026 fees of $7,495 live-in and $3,955 virtual; financial assistance available. 2027 fees not yet confirmed."
   },
   {
     "id": 11,
@@ -464,7 +466,9 @@
     "url": "https://ysp.utoronto.ca/medysp/",
     "description": "Postponed: U of T states Med YSP is pushed to Summer 2027. The program runs hands-on medical modules (human physiology, microbiology) with labs, lectures and discussions for high school students, open to Canadian and international applicants.",
     "metaDescription": "Postponed to Summer 2027. Hands-on medical modules in human physiology and microbiology, with labs, lectures and discussions for high school students.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "~$1,700 per module"
   },
   {
     "id": 35,
@@ -497,7 +501,9 @@
     "deadline": "TBA",
     "url": "https://www.immerse.education/pathways/online",
     "description": "Online academic program where students work directly with university tutors to research and draft a university-level paper. Research tracks available in medicine, computer science, engineering, and more. Builds academic writing and independent research skills.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Tuition fee applies"
   },
   {
     "id": 37,
@@ -874,7 +880,9 @@
     "url": "https://pioneeracademics.com/pioneer-research-institute/admission/",
     "description": "Rigorous virtual research institute for high school students. Accepted students work one-on-one with university professors across disciplines, from neuroscience to computer science, to produce a peer-reviewed research paper over 8 weeks.",
     "metaDescription": "Accepted students work one-on-one with a university professor over eight weeks to produce a peer-reviewed research paper.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Tuition applies; need-based aid available"
   },
   {
     "id": 58,
@@ -924,7 +932,9 @@
     "url": "https://4hab.com/member-programs/",
     "description": "4-H Alberta's Senior division runs from age 15 to 20. Members carry a project through the October-to-September club year and present it to judges. The project list reaches well past agriculture (Veterinary Sciences, Engineering, Welding, Entomology, Photography and Written Communications are all on it), grouped under four pillars including Science & Technology. Senior members can also compete at the spring Senior Symposium at Olds College for national and international travel selection; it charges a registration fee, and its dates are announced each year.",
     "metaDescription": "Ages 15 to 20. Members carry a project through the club year and present it to judges; the project list reaches well past agriculture.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Registration fee applies"
   },
   {
     "id": 61,
@@ -992,7 +1002,9 @@
     "deadline": "Ongoing",
     "url": "https://www.polygence.org/core-program",
     "description": "Ten weeks of one-to-one research with a PhD mentor, ending in a paper, podcast or prototype. Tuition-based, with need-based financial aid.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Tuition-based; need-based financial aid available"
   },
   {
     "id": 68,
@@ -1025,7 +1037,9 @@
     "deadline": "TBA",
     "url": "https://www.qubitbyqubit.org/programs",
     "description": "Summer research applications are open now, and the signature Introduction to Quantum Computing course runs from October. Qubit by Qubit teaches quantum computing to high school students, taught by PhD researchers with Google Quantum AI.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Tuition applies; need-based aid available"
   },
   {
     "id": 70,
@@ -1225,7 +1239,9 @@
     "deadline": "TBA",
     "url": "https://outreach.engineering.utoronto.ca/pre-university-programs/high-school-program/deep/",
     "description": "Two weeks of university engineering at U of T's St. George campus for Grades 10-12. A paid academy; applications open early March, early-bird round first.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Tuition fee applies"
   },
   {
     "id": 84,
@@ -1242,7 +1258,9 @@
     "url": "https://www.launchx.com/programs",
     "description": "Rigorous global entrepreneurship program where high schoolers form teams to conduct deep market research, prototype a digital or physical tech product, and pitch a fully functioning startup to a panel of investors. MIT-affiliated curriculum.",
     "metaDescription": "High schoolers form teams to do market research, prototype a tech product and pitch a functioning startup to investors, on MIT-affiliated curriculum.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Tuition fee applies; need-based aid available"
   },
   {
     "id": 87,
@@ -1424,7 +1442,9 @@
     "deadline": "TBA",
     "url": "https://active-living.ucalgary.ca/programs/camps",
     "description": "Registration is closed. UCalgary states the camp form \"is no longer available\" while the service is being updated. Active Living runs multi-sport and recreation summer camps on campus; sign up for their notification list for the next intake.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Registration fee applies"
   },
   {
     "id": 101,
@@ -1558,7 +1578,9 @@
     "url": "https://www.macewan.ca/campus-life/opportunities/design-summer-camp/",
     "description": "The camp runs the last week of July, with registration closing in mid-July. A five-day MacEwan design camp covering graphic design, app design, illustration, photography and videography.",
     "metaDescription": "A five-day MacEwan design camp covering graphic design, app design, illustration, photography and videography, running the last week of July.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Registration fee applies"
   },
   {
     "id": 112,
@@ -1575,7 +1597,9 @@
     "url": "https://www.auarts.ca/program-areas/university-prep-programs",
     "description": "For students aged 16+: Pre-College is a four-week summer immersive covering both Fine Art and Design at university level, and Arts-Bridge is a shorter two-week introduction for students who cannot commit to the full month.",
     "metaDescription": "For students 16 and up: a four-week summer immersive in Fine Art and Design, or Arts-Bridge, a two-week introduction for a shorter commitment.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Tuition applies"
   },
   {
     "id": 114,
@@ -1607,7 +1631,9 @@
     "deadline": "TBA",
     "url": "https://www.forum.ca/",
     "description": "Applications for Forum 2027 open soon, for sessions running February 7-12, February 28 - March 5, and April 18-23, 2027. Three hundred students aged 15-18 spend a week in Ottawa meeting MPs and Senators; travel, meals and accommodation are covered, with bursaries against the $995 fee.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "$995; bursaries available"
   },
   {
     "id": 116,
@@ -1691,7 +1717,9 @@
     "url": "https://www.sait.ca/youth-programs/dual-credit-programs",
     "description": "Earn high school credits and a post-secondary credential or workplace certification at the same time, across more than 20 options: skilled trades (welding, carpentry, pipe trades, automotive, heavy equipment), software and web development, IT, health care, aviation, business, culinary and construction. Offered at no direct tuition cost. Students enrol through their high school.",
     "metaDescription": "Earn high school credits and a credential at once, across 20-plus options from welding to software. Enrol through your high school.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "free",
+    "costNote": "Offered at no direct tuition cost; enrol through your high school"
   },
   {
     "id": 121,
@@ -1758,7 +1786,9 @@
     "deadline": "2027-03-11",
     "url": "https://cemc.uwaterloo.ca/contests/euclid",
     "description": "Canada's best-known senior high school mathematics contest, written each year by more than 25,000 students worldwide. Ten questions in 2.5 hours, mixing final-answer and full-solution problems. Results carry real weight in University of Waterloo admissions and scholarship decisions. Ask a math teacher to register the school. The ordering deadline is March 11, 2027 for the April 6, 2027 contest.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "$18 per participant plus school order fees"
   },
   {
     "id": 125,
@@ -1775,7 +1805,9 @@
     "url": "https://cemc.uwaterloo.ca/contests/pcf",
     "description": "The CEMC entry point to competitive mathematics before Euclid, with a separate contest for each of grades 9, 10 and 11. Twenty-five multiple-choice questions in 60 minutes, graded in three parts of increasing difficulty. A good first contest and the standard way Alberta students build toward Euclid and the Canadian Open Mathematics Challenge. Canadian schools order by February 9, 2027 for the February 23–24, 2027 contests.",
     "metaDescription": "The CEMC entry point before Euclid: 25 questions in 60 minutes, one contest each for grades 9, 10 and 11.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "$6 per participant plus school order fees"
   },
   {
     "id": 126,
@@ -1808,7 +1840,9 @@
     "deadline": "TBA",
     "url": "https://challenge.canadiangeographic.ca/about-the-challenge/",
     "description": "National geography competition and Canada's route to the International Geography Olympiad. Levels 1 and 2 run through classroom and school rounds. Level 3 is the senior stream: a multimedia test open to everyone who signs up, narrowing to the top 20 for a written test, the top 10 for a fieldwork test, then six interviews and four Team Canada spots. Free to join, and a guardian can supervise if your school does not take part.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "free",
+    "costNote": "No cost to join"
   },
   {
     "id": 128,
@@ -1825,7 +1859,9 @@
     "url": "https://schulich.ucalgary.ca/future-students/undergraduate/admissions/bioengineering-summer-institute",
     "description": "Runs as a full-time summer course from late July to late August. The UCalgary Bioengineering Summer Institute gives high school students lab exposure to biomedical engineering ahead of a Schulich application.",
     "metaDescription": "A full-time summer course from late July to late August, giving lab exposure to biomedical engineering ahead of a Schulich application.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "$50 student fee; UCalgary covers the remaining ~$950"
   },
   {
     "id": 129,
@@ -1875,7 +1911,9 @@
     "url": "https://www.ualberta.ca/en/mathematical-and-statistical-sciences/outreach/alberta-high-school-math-competition/index.html",
     "description": "Part I is written in November and Part II in early February; your school registers you. The Alberta High School Mathematics Competition is the province's longest-running math contest, run by the U of A.",
     "metaDescription": "The province's longest-running math contest, run by the U of A. Part I is written in November and Part II in early February.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "$5 per extra Second Round nomination"
   },
   {
     "id": 132,
@@ -1891,7 +1929,9 @@
     "deadline": "2026-11-14",
     "url": "https://www.spaceappschallenge.org/",
     "description": "The largest hackathon in the world, built entirely on open NASA and partner space agency data. Teams spend a weekend on a real challenge written by NASA experts, spanning software, data science, hardware, design and science storytelling. Alberta hubs ran in both Calgary and Edmonton in 2025. The 2026 edition runs November 14 to 15 with registration opening August 26, 2026, so check the site for the confirmed Alberta locations.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "free",
+    "costNote": "No cost to compete"
   },
   {
     "id": 133,
@@ -1940,7 +1980,9 @@
     "deadline": "TBA",
     "url": "https://www.aapt.org/Programs/PhysicsBowl/index.cfm",
     "description": "Your teacher registers the school by late February; the exam is written between mid-March and early April. A 40-question multiple-choice physics contest run by the American Association of Physics Teachers, open to schools worldwide.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "$10 per student"
   },
   {
     "id": 136,
@@ -1957,7 +1999,9 @@
     "url": "https://maa.org/amcreg/",
     "description": "The standard way to show quantitative rigour on an application to an American university, and the qualifying route to the AIME and the olympiad path beyond it. Twenty-five questions in 75 minutes on advanced algebra, geometry, number theory and combinatorics. For 2026/27 the A versions run November 5, 2026 and the B versions November 13, 2026. October 15, 2026 is the final registration deadline for a school that has never hosted before, so if no school near you offers it, ask a math teacher to sign up as a competition manager well ahead of that.",
     "metaDescription": "25 questions in 75 minutes on algebra, geometry, number theory and combinatorics; the qualifying route to the AIME.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "$55 early bird or $75 regular site fee, plus $30 per bundle"
   },
   {
     "id": 137,
@@ -2005,7 +2049,9 @@
     "deadline": "Ongoing",
     "url": "https://www.loi.ac/find-your-program",
     "description": "The largest youth startup accelerator in Canada, a national charity founded by Hootsuite founder Ryan Holmes. Launch It is a free self-paced course for getting an idea off the ground. Labs is the flagship 12-week virtual accelerator, with workshops, mentors, AMA sessions and a cohort of other young founders. Boost is a 12-month program for founders further along. All three are free and take no equity, and the deposits are returned on completion. Applications for the fall 2026 Labs cohort opened in July 2026.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "fee",
+    "costNote": "Free to join; refundable deposit of $120 (Labs) or $250 (Boost)"
   },
   {
     "id": 140,
@@ -2140,7 +2186,9 @@
     "url": "https://vimyfoundation.ca/programs/vimy-pilgrimage-award/",
     "description": "A fully funded week in Belgium and France studying Canada's role in the First World War on the ground, visiting battlefields, cemeteries and museums with a national cohort of students. It rewards community service and historical interest rather than marks, and it carries real weight on a scholarship application later. The 2026 journey ran April 3 to 11 and its application window was October 21 to November 25, 2025. The next cycle had not been posted as of August 2026, so watch the page from mid-October.",
     "metaDescription": "A fully funded week in Belgium and France studying Canada's role in the First World War, visiting battlefields, cemeteries and museums.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-08",
+    "cost": "free",
+    "costNote": "No cost to recipients"
   },
   {
     "id": 148,
@@ -2191,7 +2239,9 @@
     "url": "https://www.centralalbertasciencefair.com/",
     "description": "One fair day at Red Deer Polytechnic on March 20, 2027, with setup the evening before. A $10 entry fee applies per project, payable on or after the fair, and up to six of the top senior projects advance to the Canada-Wide Science Fair. Registration had not reopened when this was checked.",
     "metaDescription": "One day at Red Deer Polytechnic on March 20, 2027. A $10 entry fee applies, and up to six senior projects advance to the Canada-Wide Science Fair.",
-    "lastVerified": "2026-09"
+    "lastVerified": "2026-09",
+    "cost": "fee",
+    "costNote": "$10 entry fee per project"
   },
   {
     "id": 151,
@@ -2225,7 +2275,9 @@
     "url": "https://wbrsf.ca/",
     "description": "Fort McMurray's qualifying fair, judged on a Friday with public viewing and awards the Saturday after. Sponsors cover the cost so entry is free to students, and finalists from the junior, intermediate and senior pools advance to the Canada-Wide Science Fair. The 2026 judging ran March 27.",
     "metaDescription": "Fort McMurray's route to the Canada-Wide Science Fair, open to grades 4-12 across the Regional Municipality of Wood Buffalo. Sponsors keep entry free.",
-    "lastVerified": "2026-09"
+    "lastVerified": "2026-09",
+    "cost": "free",
+    "costNote": "Sponsors cover the cost; entry is free to students"
   },
   {
     "id": 153,

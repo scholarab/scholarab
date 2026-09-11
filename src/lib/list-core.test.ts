@@ -57,6 +57,8 @@ function makeProgram(
     duration: null,
     paid: false,
     stipend: null,
+    cost: 'unconfirmed',
+    costNote: null,
     location: null,
     eligibility: null,
     deadline: null,

@@ -16,7 +16,7 @@ interface Props {
 
 const emptyForm = (): Partial<Program> => ({
   name: '', emoji: '', category: '', provider: '', grades: '', duration: '',
-  paid: false, stipend: '', location: '', eligibility: '', deadline: '',
+  paid: false, stipend: '', cost: 'unconfirmed' as const, costNote: '', location: '', eligibility: '', deadline: '',
   url: '', description: '', lastVerified: '', active: true
 })
 
@@ -168,8 +168,8 @@ export default function ProgramManager({ initialData }: Props) {
                   )}
                 </td>
                 <td className="px-4 py-3">
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${p.active ? 'bg-[#22d3a5]/15 text-[#22d3a5]' : 'bg-white/10 text-white/40'}`}>
-                    {p.active ? 'Active' : 'Inactive'}
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${p.active !== false ? 'bg-[#22d3a5]/15 text-[#22d3a5]' : 'bg-white/10 text-white/40'}`}>
+                    {p.active !== false ? 'Active' : 'Inactive'}
                   </span>
                 </td>
                 <td className="px-4 py-3 text-right">
@@ -254,6 +254,24 @@ export default function ProgramManager({ initialData }: Props) {
                   placeholder="Stipend amount (e.g. $5,000)"
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               )}
+
+              {/* Separate from the stipend checkbox on purpose: not paying the
+                  student says nothing about whether the student pays. */}
+              <div className="space-y-2">
+                <span className="text-sm text-white/70">What the student pays</span>
+                <select value={form.cost ?? 'unconfirmed'} onChange={e => setForm(f => ({ ...f, cost: e.target.value as typeof f.cost }))}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition">
+                  <option value="unconfirmed">Not checked yet</option>
+                  <option value="free">Nothing, the program is free</option>
+                  <option value="fee">A fee</option>
+                  <option value="varies">Varies</option>
+                </select>
+                {(form.cost === 'fee' || form.cost === 'varies') && (
+                  <input type="text" value={form.costNote ?? ''} onChange={e => setForm(f => ({ ...f, costNote: e.target.value }))}
+                    placeholder="The fee in the provider's words (e.g. ~$1,700 per module)"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
+                )}
+              </div>
 
               <label className="flex items-center gap-3 cursor-pointer">
                 <input type="checkbox" checked={form.active ?? true} onChange={e => setForm(f => ({ ...f, active: e.target.checked }))} className="accent-[#22d3a5] w-4 h-4" />

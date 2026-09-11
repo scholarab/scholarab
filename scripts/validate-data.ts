@@ -116,6 +116,37 @@ for (const [id, names] of progIds) {
   }
 }
 
+// ── A program that charges cannot be silent about it ────────────────────────
+// The detail page renders cost from these two fields. A fee with no note shows
+// a bare "Fee", which is barely better than the "Free" this replaced, and a
+// note claiming a dollar amount under cost:'free' is a contradiction on the
+// page. Unconfirmed is always allowed: not knowing is a real state.
+const COST_VALUES = new Set(['free', 'fee', 'varies', 'unconfirmed']);
+for (const p of programs) {
+  const cost = (p as { cost?: string }).cost ?? 'unconfirmed';
+  const note = (p as { costNote?: string | null }).costNote ?? null;
+  if (!COST_VALUES.has(cost)) {
+    console.error(
+      `Program [${p.id}] "${p.name}": cost "${cost}" is not one of ${[...COST_VALUES].join(', ')}.`
+    );
+    failed = true;
+  }
+  if ((cost === 'fee' || cost === 'varies') && !note) {
+    console.error(
+      `Program [${p.id}] "${p.name}": cost is "${cost}" but costNote is empty. ` +
+      `Say what the fee is, in the provider's own words.`
+    );
+    failed = true;
+  }
+  if (cost === 'free' && note && /\$\s?\d/.test(note)) {
+    console.error(
+      `Program [${p.id}] "${p.name}": cost is "free" but costNote names a dollar amount ` +
+      `("${note}"). Use "fee" or "varies" instead.`
+    );
+    failed = true;
+  }
+}
+
 // ── Scholarship slugs must be unique ────────────────────────────────────────
 const schSlugs = new Map<string, Array<number | string>>();
 for (const s of scholarships) {

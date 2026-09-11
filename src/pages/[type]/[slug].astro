@@ -334,16 +334,39 @@ if (kind === 'scholarship') {
         ? 'Apply or sign up on the official site. You can join anytime.'
         : `Apply on the official site${deadlineClause}.`,
     ],
-    valueLabel: 'THIS PROGRAM IS',
-    valueBig: p.paid ? 'Paid' : 'Free',
-    // The stipend, or nothing. This used to fall back to duration · grades,
-    // which are two of the three facts listed directly to its left; "Free"
-    // needs no footnote, and the footnote it had was a copy.
-    valueNote: p.paid ? p.stipend : null,
+    // Two independent questions, and they used to be one. `paid` is whether
+    // the student receives money; `cost` is whether they pay any. Rendering
+    // `paid ? 'Paid' : 'Free'` told 115 of 129 programs they were free,
+    // including ones charging $1,700. A stipend is the headline when there is
+    // one, because it is the rarer fact; otherwise the cost is.
+    ...programValue(p),
     ctaLabel: 'Learn more',
     url: p.url,
     canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
   };
+}
+
+/**
+ * The value block for a program: what it pays, or what it costs.
+ *
+ * `unconfirmed` deliberately says so rather than guessing. Silence about a fee
+ * is not evidence there isn't one, and the old code's guess was always "Free".
+ */
+function programValue(p: Program) {
+  if (p.paid) {
+    return { valueLabel: 'THIS PROGRAM IS', valueBig: 'Paid', valueNote: p.stipend };
+  }
+  if (p.cost === 'free') {
+    return { valueLabel: 'THIS PROGRAM IS', valueBig: 'Free', valueNote: p.costNote };
+  }
+  if (p.cost === 'fee' || p.cost === 'varies') {
+    return {
+      valueLabel: 'PROGRAM COST',
+      valueBig: p.cost === 'fee' ? 'Fee' : 'Varies',
+      valueNote: p.costNote,
+    };
+  }
+  return { valueLabel: 'PROGRAM COST', valueBig: 'See provider', valueNote: null };
 }
 
 // The explainer for this listing, when one exists. The link is reciprocal on

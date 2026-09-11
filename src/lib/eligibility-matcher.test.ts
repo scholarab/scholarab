@@ -622,7 +622,7 @@ describe('matchPrograms', () => {
   function prog(overrides: Record<string, unknown> = {}) {
     return {
       id: 1, name: 'Test Program', emoji: null, category: null, provider: null,
-      grades: null, duration: null, paid: false, stipend: null, location: null,
+      grades: null, duration: null, paid: false, stipend: null, cost: 'unconfirmed', costNote: null, location: null,
       eligibility: null, deadline: null, url: 'https://x.example',
       description: null, lastVerified: null, active: true,
       ...overrides,
@@ -839,7 +839,7 @@ describe('the results cap', () => {
   it('returns at most RESULT_LIMIT programs, and honours a raise', () => {
     const many = Array.from({ length: RESULT_LIMIT + 15 }, (_, i) => ({
       id: i, name: 'P' + i, emoji: null, category: null, provider: null,
-      grades: null, duration: null, paid: false, stipend: null, location: null,
+      grades: null, duration: null, paid: false, stipend: null, cost: 'unconfirmed', costNote: null, location: null,
       eligibility: null, deadline: null, url: 'https://x.example',
       description: null, lastVerified: null, active: true,
     }))
