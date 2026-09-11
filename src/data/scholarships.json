@@ -18279,7 +18279,7 @@
     "region": "Leduc",
     "notes": "This one closes on September 10 following graduation, which is after most students have already started post-secondary, so it is easy to forget about. Applications go to your principal, who submits the school's candidate to the superintendent by September 15.",
     "applyViaGuidance": true,
-    "active": true,
+    "active": false,
     "description": "Funded by Cory Bablitz, a Calmar Secondary graduate, for a Black Gold graduate continuing to post-secondary. You must have been enrolled at a Black Gold school for your grade twelve year and completed high school in three years, be accepted into a post-secondary program, and show genuine commitment across academics, sports in school or the community, and citizenship or volunteering. The application is a covering letter, a summary of all three areas, and three letters of reference, one for each.",
     "metaDetail": "Three references, one per criterion.",
     "eligibility": {
@@ -32377,7 +32377,7 @@
     "id": 857,
     "region": "Sherwood Park",
     "lastVerified": "2026-09",
-    "active": true,
+    "active": false,
     "url": "https://www.ardrossan.ca/student-services/scholarships/in-house-awards",
     "notes": "The third tier is the one to notice: if no teacher's child applies, any grade 12 student accepted into a Faculty of Education is eligible. A separate application is required and the deadline falls in September, after you have graduated.",
     "applyViaGuidance": false,
