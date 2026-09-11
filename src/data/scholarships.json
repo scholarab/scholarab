@@ -44281,5 +44281,165 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1225,
+    "title": "Youth Climate Action Bursary",
+    "amount": "$500 to $1,000",
+    "deadline": "2026-09-15",
+    "openDate": null,
+    "audience": "Calgary high school graduates and Calgary post-secondary students active in the youth climate movement",
+    "url": "https://www.calgaryclimatehub.ca/youth_climate_bursary",
+    "category": "Community",
+    "region": "Calgary",
+    "active": true,
+    "description": "The Calgary Climate Hub gives four to eight bursaries of $500 to $1,000 a year to young people involved in climate action, such as climate strikes, school eco-clubs or community climate projects.",
+    "notes": "This round is for the 2026/27 school year: you qualify if you will study at a Calgary post-secondary school, or if you graduated from a Calgary high school and are studying elsewhere. That means current Grade 12 students apply in next year's round, the September after graduating. Email a 200 to 500-word description of your climate involvement, your school and program, and links to any related projects, using the address on the Climate Hub page.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 1226,
+    "title": "Brandon Langhjelm Memorial Essay Contest",
+    "amount": "$3,000",
+    "deadline": "2026-09-27",
+    "openDate": null,
+    "audience": "Canadian residents aged 15 to 25",
+    "url": "https://www.jccf.ca/essay-contest/",
+    "category": "Academic",
+    "region": "National",
+    "active": true,
+    "description": "The Justice Centre for Constitutional Freedoms runs a yearly essay contest in memory of lawyer Brandon Langhjelm, with prizes of $3,000, $2,000 and $1,000 for essays on Canadian freedom issues.",
+    "notes": "The 2026 topics are social media restrictions for youth, or safety and privacy in AI chatbots. Essays run 1,200 to 1,500 words and are uploaded through the online form by 11:59 p.m. on September 27, 2026. Strong entries engage with thinkers and theories and end with practical policy proposals. You must be 15 to 25 on the deadline.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 15,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "writing"
+      ]
+    }
+  },
+  {
+    "id": 1227,
+    "title": "Headway's Book Lovers Scholarship",
+    "amount": "$1,500",
+    "deadline": "2026-09-15",
+    "openDate": null,
+    "audience": "Students 16 and older in their final year of high school or in post-secondary, in Canada, the US, the UK or Australia",
+    "url": "https://makeheadway.com/scholarship/",
+    "category": "General",
+    "region": "National",
+    "active": true,
+    "description": "Book-summary app Headway gives one $1,500 scholarship a year for the best vision of a non-fiction book that could become a timeless handbook for humanity.",
+    "notes": "Write up to 500 words or record a two-minute video, and add short paragraphs on your leadership and goals, a transcript showing at least a 3.0 GPA, and a recommendation letter from a teacher or community supervisor. It closes at 3 p.m. Central on September 15, 2026, and only one student wins worldwide, so treat it as a long shot.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 16,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 1228,
+    "title": "Chick-fil-A Community Scholars",
+    "amount": "$25,000",
+    "deadline": "2026-11-03",
+    "openDate": "2026-08-21",
+    "audience": "High school seniors and college students living in Canada or the US with community service or leadership",
+    "url": "https://scholarshipamerica.org/scholarship/cfacommunityscholars/",
+    "category": "Community",
+    "region": "National",
+    "active": true,
+    "description": "Chick-fil-A gives up to 13 scholarships of up to $25,000 to students who lead in their communities, with a year-long leadership development program for the $25,000 winners. Canadian residents can apply.",
+    "notes": "Apply on the Scholarship America portal by 3 p.m. Central on November 3, 2026, for study starting in 2027-28. You need at least a 3.0 GPA, community service, extracurriculars or leadership in the last 12 months, your transcript, and the first two pages of your parents’ T-1 tax return. At least one online recommendation must arrive within three business days of the deadline.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering",
+        "Leadership"
+      ]
+    }
   }
 ]
