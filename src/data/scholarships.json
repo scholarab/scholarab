@@ -24404,8 +24404,8 @@
     "deadline": "2027-08-31",
     "category": "STEM",
     "audience": "Graduating students in the MCSNet service area entering computer science or STEM",
-    "url": "https://www.nlpsab.ca/students/scholarships/regional-scholarships-and-awards",
-    "notes": "Eligibility follows the rural internet provider's coverage map rather than any municipal boundary, so check the service area before assuming Cold Lake addresses qualify.",
+    "url": "https://mcsnet.ca/mcsnet-scholarship/",
+    "notes": "Eligibility follows the rural internet provider's coverage map rather than any municipal boundary, so check the service area before assuming Cold Lake addresses qualify. Up to four awards go to graduating Grade 12 students going into computer science or another STEM field; marks count for 60% and community involvement for 40%. Send a transcript, a principal or counsellor reference, your acceptance letter and an 800 to 1,000-word essay to marketing@mcsnet.ca between April 1 and August 31.",
     "description": "Four awards of $1,000 from MCSNet, the rural Alberta internet provider, for graduating students in its service area who are pursuing computer science or STEM-related studies. An August 31 close makes it one of the last deadlines of the year, which suits a student who decided on a STEM program late.",
     "metaDetail": "Four awards.",
     "eligibility": {
@@ -24415,7 +24415,9 @@
       "schoolBoards": [],
       "specificSchools": [],
       "targetInstitutions": [],
-      "fields": [],
+      "fields": [
+        "STEM"
+      ],
       "minAverage": null,
       "minAge": null,
       "maxAge": null,
@@ -24428,7 +24430,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2027-04-01"
   },
   {
     "id": 657,
@@ -43881,6 +43884,397 @@
       "indigenousRequired": false,
       "bipocRequired": false,
       "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1167,
+    "title": "Ponoka Ag Society Scholarship",
+    "amount": "$750",
+    "deadline": "2027-09-01",
+    "openDate": null,
+    "audience": "Ponoka-area students aged 17 to 21 heading into agriculture-related studies",
+    "url": "https://www.ponokaagsociety.ca/scholarship/",
+    "category": "General",
+    "region": "Alberta",
+    "active": false,
+    "description": "The Ponoka Agricultural Society gives up to four $750 scholarships a year to young people from the Town or County of Ponoka whose trade, certificate, diploma or degree program relates to agriculture or benefits rural farming communities.",
+    "notes": "You must be 17 to 21 as of December 1 and live east of the Crestomere School west boundary. Send the form with an essay on how your training will help rural Alberta, plus your current marks, by mail or email. The money is released once you show proof you have paid for your program. The society lists September 1 as its yearly deadline.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": 21,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering",
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 1168,
+    "title": "Parkland County Agricultural Bursary",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Parkland County residents enrolled in an agriculture-based post-secondary program",
+    "url": "https://www.parklandcounty.com/county-government/awards-grants-funding-and-non-profit/scholarships/",
+    "category": "General",
+    "region": "Alberta",
+    "active": false,
+    "description": "Parkland County gives five $500 bursaries a year to residents enrolled in an agriculture-based program at a university, college or other recognized post-secondary school.",
+    "notes": "Send the form with an essay about your rural background, community and volunteer involvement and your goals, plus proof of enrolment, to Agricultural Services or agriculture@parklandcounty.com. The 2026 window ran July 1 to September 4 and has closed; expect a similar summer window in 2027, the summer after Grade 12.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1169,
+    "title": "Lacombe County Leadership Scholarship",
+    "amount": "$1,850",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Lacombe County high school graduates starting full-time at Red Deer Polytechnic",
+    "url": "https://www.lacombecounty.com/our-government/budget-and-finance/grants-and-funding/",
+    "category": "Community",
+    "region": "Lacombe",
+    "active": true,
+    "description": "Lacombe County funds a $1,850 scholarship at Red Deer Polytechnic for a student entering the first year of any full-time program there.",
+    "notes": "You must be a current or former Lacombe County resident who finished at a Lacombe County high school within the last three years. You apply through Red Deer Polytechnic's own awards system, not the county, so watch RDP's scholarship dates once you have been admitted. A separate $1,850 version exists for first-year RDP apprentices.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership"
+      ]
+    }
+  },
+  {
+    "id": 1170,
+    "title": "Alix Legion Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Graduating students at Alix-MAC School",
+    "url": "https://www.lacombecounty.com/our-government/budget-and-finance/grants-and-funding/",
+    "category": "Community",
+    "region": "Lacombe",
+    "active": true,
+    "description": "A $1,000 award for a graduating student from Alix-MAC School who is going on to a post-secondary program lasting at least one year.",
+    "notes": "Lacombe County lists this award but does not post a deadline or form, so ask the Alix-MAC counsellor or call the county at 403-782-6601 in the spring of Grade 12.",
+    "applyViaGuidance": true,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Alix-MAC School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "metaDetail": "Ask the Alix-MAC counsellor in the spring."
+  },
+  {
+    "id": 1171,
+    "title": "Cornerstone Co-op Spirit of Youth Scholarships",
+    "amount": "$1,000",
+    "deadline": "2026-09-30",
+    "openDate": null,
+    "audience": "High school students living in Cornerstone Co-op's trading area around Vermilion",
+    "url": "https://www.cornerstoneco-op.crs/sites/cornerstone/local/detail/spirit-of-youth-scholarships",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Cornerstone Co-op gives five $1,000 scholarships: two for Buffalo Trail Public Schools students, one for East Central Alberta Catholic Schools and two in memory of Liane Plante for St. Paul Education students. Home-educated students apply in the Buffalo Trail stream.",
+    "notes": "Marks count for 40% and community involvement for 60%. Apply online through the form for your school division or mail a paper form to the Vermilion office, with an official transcript. Ties go to students who support the co-op or have worked there. Questions go to marketing@cornerstone.crs.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 1173,
+    "title": "Robert E. Walter Memorial Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-03-31",
+    "openDate": null,
+    "audience": "Residents of Mackenzie Municipal Services Agency member municipalities planning a local government career",
+    "url": "https://mmsa.ca/scholarship/",
+    "category": "Community",
+    "region": "Alberta",
+    "active": false,
+    "description": "The Mackenzie Municipal Services Agency gives one $2,000 scholarship a year to a student from its member municipalities in the Peace region who is studying toward a job in local government.",
+    "notes": "Members include Berwyn, Falher, Grimshaw, High Prairie, Manning, Nampa, Rainbow Lake, the Town of Spirit River, Clear Hills County, Northern Sunrise County and the MDs of Fairview, Peace and Spirit River. You must agree to work in the North Peace or Mackenzie region for at least a year after graduating. Email the form to info@mmsa.ca by March 31.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1174,
+    "title": "Big Lakes County Return of Service Bursary",
+    "amount": "$3,500",
+    "deadline": "2027-04-30",
+    "openDate": "2027-01-02",
+    "audience": "Big Lakes County residents 18 or older who will work in the county or northern Alberta after graduating",
+    "url": "https://biglakescounty.ca/return-of-service-bursary",
+    "category": "General",
+    "region": "Alberta",
+    "active": true,
+    "description": "Big Lakes County pays $3,500 a year, matched by another $3,500 from the provincial Northern Alberta Development Bursary, for up to two years to two students entering a one- or two-year program or the last two years of a degree. Larger streams exist for medicine, dentistry, nurse practitioner, pharmacy and large-animal vet students.",
+    "notes": "In return you must work full-time in your field in Big Lakes County or northern Alberta for one year per year of funding. You must be 18 or older, live in the county (towns included), have lived in Alberta for 12 months and have applied to a provincially funded program. Apply January 2 to April 30 and reapply each year. A $750 trades stream has no matching money.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 18,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1175,
+    "title": "MD of Wainwright Education Bursary",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "MD of Wainwright residents accepted to any accredited post-secondary program",
+    "url": "https://www.mdwainwright.ca/?p=5773",
+    "category": "General",
+    "region": "Alberta",
+    "active": true,
+    "description": "The Municipal District of Wainwright gives $1,000 education bursaries to residents accepted to or attending any program at an accredited college, university or trade school.",
+    "notes": "Residents of the MD and the villages of Irma, Edgerton and Chauvin can apply; Town of Wainwright residents cannot. Students in agriculture or environmental programs should apply for the MD's separate ASB bursary instead. The fillable form is on the MD page and no deadline is posted, so email asbprograms@mdwainwright.ca or call 780-842-4454 to confirm the date.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1176,
+    "title": "MD of Wainwright Agricultural Service Board Bursary",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "MD of Wainwright residents going into agriculture or environmental programs",
+    "url": "https://www.mdwainwright.ca/?p=5773",
+    "category": "General",
+    "region": "Alberta",
+    "active": true,
+    "description": "The Municipal District of Wainwright's Agricultural Service Board gives $1,000 bursaries to residents accepted to or attending an agricultural or environmental program at an accredited post-secondary school.",
+    "notes": "The same residency rule as the education bursary applies: the MD plus Irma, Edgerton and Chauvin, but not the Town of Wainwright. The board picks winners through an anonymous review. The fillable form is on the MD page and no deadline is posted, so confirm it with asbprograms@mdwainwright.ca.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture",
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1177,
+    "title": "County of Northern Lights Student Bursary",
+    "amount": "$2,500",
+    "deadline": "2027-07-15",
+    "openDate": null,
+    "audience": "County of Northern Lights residents going into post-secondary, technical or apprenticeship training",
+    "url": "https://www.countyofnorthernlights.com/bursary",
+    "category": "General",
+    "region": "Alberta",
+    "active": false,
+    "description": "The County of Northern Lights, around Manning, gives two $2,500 bursaries a year to residents of any age heading into post-secondary studies or technical or apprenticeship training. Winners are chosen on financial need and references.",
+    "notes": "Recipients can get up to $2,500 more through the provincial Northern Alberta Development partnership if they sign the return-of-service agreement on page 5 of the form, which means living and working in the northern program area for at least ten months after graduating. That matching money needs you to be 18 or older and not in an apprenticeship. The form is due July 15 each year.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
       "maxFamilyIncome": null,
       "fosterCare": false,
       "citizenship": "any",
