@@ -3,6 +3,7 @@ import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { Agent } from 'undici'
+import { groupLinkTargets } from './link-targets.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -102,7 +103,7 @@ async function checkUrl(url: string): Promise<Verdict> {
     result = await fetchStatus(url)
   }
   if (result.error) {
-    const dnsFailure = /ENOTFOUND|EAI_AGAIN/i.test(result.error)
+    const dnsFailure = /ENOTFOUND/i.test(result.error)
     return { kind: dnsFailure ? 'broken' : 'suspect', error: result.error }
   }
   const status = result.status!
@@ -111,7 +112,7 @@ async function checkUrl(url: string): Promise<Verdict> {
   return { kind: 'suspect', error: `HTTP ${status}` }
 }
 
-console.log(`Checking ${items.length} URLs...`)
+console.log(`Checking ${groupLinkTargets(items).size} unique URLs for ${items.length} listings...`)
 
 // Group by host and walk each host's URLs one at a time. The old flat batch of
 // 10 opened up to 10 sockets against a single host; studentaid.alberta.ca
@@ -142,12 +143,14 @@ async function checkHost(host: string, hostItems: typeof items): Promise<void> {
     for (const item of hostItems) console.log(`  [${item.id}] ${item.label}: skipped (known bot-blocking host)`)
     return
   }
-  for (const [i, item] of hostItems.entries()) {
+  for (const [i, [url, listings]] of [...groupLinkTargets(hostItems)].entries()) {
     if (i > 0) await sleep(PER_HOST_DELAY_MS)
-    const verdict = await checkUrl(item.url!)
+    const verdict = await checkUrl(url)
     if (verdict.kind === 'ok') continue
-    const entry = { id: item.id, name: item.label, url: item.url ?? '', error: verdict.error }
-    ;(verdict.kind === 'broken' ? broken : suspect).push(entry)
+    for (const item of listings) {
+      const entry = { id: item.id, name: item.label, url, error: verdict.error }
+      ;(verdict.kind === 'broken' ? broken : suspect).push(entry)
+    }
   }
 }
 

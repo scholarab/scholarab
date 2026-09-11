@@ -6,7 +6,6 @@ interface ImportMetaEnv {
   readonly SESSION_SECRET: string
   readonly ADMIN_PASSWORD: string
   readonly ANTHROPIC_API_KEY: string
-  readonly DEPLOY_HOOK_URL: string
   readonly RESEND_API_KEY: string
 }
 

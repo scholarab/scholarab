@@ -39,10 +39,11 @@ vi.mock('drizzle-orm', () => ({
   sql: vi.fn(() => 'count_sql'),
 }))
 
-vi.mock('@anthropic-ai/sdk', () => ({
-  default: vi.fn(function (this: any) {
-    this.messages = { create: mockCreate }
-  }),
+vi.mock('../../lib/parse-message', () => ({
+  parseMessage: async () => {
+    const message = await mockCreate()
+    return message.content[0]?.text.trim() ?? ''
+  },
 }))
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

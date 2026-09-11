@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro'
-import Anthropic from '@anthropic-ai/sdk'
+import { parseMessage } from '../../../../lib/parse-message'
 import { getEnv } from 'astro/env/runtime'
 import { isAdminRequest } from '../../../../lib/adminAuth'
 import { db } from '../../../../lib/db/client'
@@ -103,15 +103,7 @@ export const POST: APIRoute = async ({ request }) => {
     const scholarship = entryView(entry)
     if (typeof scholarship.audience !== 'string' || !scholarship.audience.trim()) return jsonError('No audience text to parse', 400)
 
-    const client = new Anthropic({ apiKey })
-    const message = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 1024,
-      messages: [{ role: 'user', content: buildPrompt(String(scholarship.title), scholarship.audience, typeof scholarship.category === 'string' ? scholarship.category : null, typeof scholarship.region === 'string' ? scholarship.region : null) }],
-    })
-
-    const first = message.content[0]
-    const text = first?.type === 'text' ? first.text.trim() : ''
+    const text = await parseMessage(apiKey, buildPrompt(String(scholarship.title), scholarship.audience, typeof scholarship.category === 'string' ? scholarship.category : null, typeof scholarship.region === 'string' ? scholarship.region : null))
     const cleaned = text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim()
 
     let parsed: EligibilityCriteria
