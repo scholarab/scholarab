@@ -110,8 +110,13 @@ if (pending.status !== 'committed') {
 }
 // Completion is tied to the public artifact ID, not a deploy-hook response or
 // a sitemap date that an unrelated deployment may also carry.
+//
+// Read it from the Pages production alias, not www: the zone firewall answers
+// GitHub Actions runners with 403, so from CI the www check could never pass
+// and request 4fab8530 sat at 'committed' for a day, blocking every publication
+// queued behind it. pages.dev serves the same production deployment.
 try {
-  const response = await fetch(`https://www.scholarab.ca/publication.json?request=${id}`, {
+  const response = await fetch(`https://scholarab.pages.dev/publication.json?request=${id}`, {
     signal: AbortSignal.timeout(15000),
     headers: { 'User-Agent': 'Mozilla/5.0 ScholarAB publication verification' },
   });

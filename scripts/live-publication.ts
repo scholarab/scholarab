@@ -1,4 +1,7 @@
-const BASE = 'https://www.scholarab.ca';
+// The Pages production alias serves the same deployment as www, but sits outside
+// the zone firewall that answers GitHub Actions runners with 403. Checking www
+// from CI failed every run, so IndexNow never announced anything from CI.
+const BASE = 'https://scholarab.pages.dev';
 const headers = { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' };
 
 /** A same-day sitemap alone cannot distinguish two different deployments. */
