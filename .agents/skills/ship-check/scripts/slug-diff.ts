@@ -31,7 +31,7 @@ let churn = 0;
 for (const { file, key, type } of sources) {
   let before: Set<string>;
   try {
-    before = slugs(execFileSync('git', ['show', `${baseRef}:${file}`], { encoding: 'utf8' }), key);
+    before = slugs(execFileSync('git', ['show', `${baseRef}:${file}`], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 }), key);
   } catch {
     console.error(`FAIL cannot read ${file} at the comparison revision`);
     process.exit(1);
