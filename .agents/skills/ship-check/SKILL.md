@@ -6,12 +6,15 @@ description: Decide what verification a ScholarAB change needs before committing
 Run from anywhere in the repo:
 
 ```
-.Codex/skills/ship-check/scripts/ship-check.sh
+npm run ship-check -- <base-ref>
 ```
 
 Report its CHANGED / PASS / FAIL / RUN lines without re-deriving the checklist.
 Then run exactly the commands it printed under RUN, nothing more, and fix any FAIL.
 
 Notes:
-- `npm run build` pins `DATABASE_URL=`; the dev server reads the DB and will disagree with the build. Trust the build.
+- Omit `<base-ref>` for uncommitted changes; use `origin/main` to include branch commits.
+- Public pages and the legacy quiz use the JSON snapshot. Verify the built site; admin drafts are separate.
+- `npm run ci` is shared with GitHub Actions; do not maintain a second list of its checks.
+- Before shipping a reduction, record removal candidates, restored requirements, repair attempts, and before/after evidence in `docs/simplification.md`.
 - Finish by committing and pushing.

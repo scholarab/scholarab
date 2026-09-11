@@ -13,19 +13,29 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v7
+      # The runner's Node can perform this dependency-free, read-only check.
+      - name: Check publication queue
+        id: queue
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: node scripts/publication-pending.mjs
       - uses: actions/setup-node@v7
+        if: steps.queue.outputs.pending == 'true'
         with:
           node-version: 22
           cache: npm
       - uses: actions/cache@v4
+        if: steps.queue.outputs.pending == 'true'
         with:
           path: |
             public/og/scholarships
             .cache/og-images.json
-          key: og-${{ runner.os }}-${{ hashFiles('scripts/generate-og-images.ts', 'scripts/og-fonts/*', 'package-lock.json', 'src/data/scholarships.json') }}
+          key: og-${{ runner.os }}-${{ hashFiles('scripts/generate-og-images.ts', 'scripts/opaque-png.ts', 'scripts/og-fonts/*', 'package-lock.json', 'src/data/scholarships.json') }}
           restore-keys: og-${{ runner.os }}-
       - run: npm ci
+        if: steps.queue.outputs.pending == 'true'
       - name: Validate and publish queued changes
+        if: steps.queue.outputs.pending == 'true'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           TZ: America/Edmonton

@@ -1,14 +1,14 @@
 #!/bin/sh
 # Decide which verification steps a ScholarAB change actually needs.
 # Prints PASS / FAIL / RUN lines. Exit 1 if any FAIL.
-set -u
+set -eu
 cd "$(git rev-parse --show-toplevel)" || exit 2
 
 BASE_REF=${1:-HEAD}
+git rev-parse --verify "$BASE_REF^{commit}" >/dev/null || exit 2
 CHANGED=$(
   {
     git diff --name-only "$BASE_REF" --
-    git diff --name-only --cached "$BASE_REF" --
     git ls-files --others --exclude-standard
   } | sort -u
 )
@@ -26,21 +26,17 @@ printf 'CHANGED %s file(s)\n' "$(printf '%s\n' "$CHANGED" | wc -l | tr -d ' ')"
 
 # ── data ─────────────────────────────────────────────────────────────────────
 if has '^src/data/.*\.json$'; then
-  printf 'RUN npm run validate-data   (data JSON changed; also checks _redirects)\n'
-  if ! npx --no-install tsx .claude/skills/ship-check/scripts/slug-diff.ts "$BASE_REF"; then
+  if ! npx --no-install tsx .agents/skills/ship-check/scripts/slug-diff.ts "$BASE_REF"; then
     FAILED=1
   fi
 fi
 
 # ── code ─────────────────────────────────────────────────────────────────────
-has '^src/.*\.(ts|tsx|astro)$' && printf 'RUN npm run lint && npm run type-check\n'
-has '^scripts/.*\.ts$'         && printf 'RUN npm run type-check:scripts\n'
-has '^(src|scripts)/'          && printf 'RUN npm test\n'
-has '^src/pages/'              && printf 'RUN npm run build   (route added/changed; regenerates sitemap + OG)\n'
-has '^public/_redirects$' && ! has '^src/data/.*\.json$' && printf 'RUN npm run validate-data   (_redirects changed)\n'
+has '^(src/|scripts/|public/|e2e/|\.github/workflows/|package(-lock)?\.json$|.*config\.[^/]+$|wrangler\.toml$)' && printf 'RUN npm run ci\n'
+has '^(src/(pages|components|layouts|styles|lib)/|src/data/|public/|e2e/|package(-lock)?\.json$|astro\.config\.|playwright\.config\.|wrangler\.toml$)' && printf 'RUN npm run test:e2e\n'
 
 # ── things easy to forget ────────────────────────────────────────────────────
-has '^drizzle/' && printf 'RUN apply the migration via the Neon driver (no psql on this machine)\n'
+has '^drizzle/.*\.sql$' && printf 'MANUAL review migration scope and rollback before any live database change\n'
 has '^outreach/.*\.csv$' && fail 'outreach contact CSV is staged, never commit it'
 
 printf 'MANUAL commit and push when green (repo rule: never leave work uncommitted)\n'

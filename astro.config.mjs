@@ -17,7 +17,6 @@ export default defineConfig({
     schema: {
       SESSION_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
       DATABASE_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
-      DEPLOY_HOOK_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       ANTHROPIC_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
       // Confirmation emails for double opt-in (/api/alert). Optional: without
       // it the Worker cannot mail the confirm link and the daily job sweeps

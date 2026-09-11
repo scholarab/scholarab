@@ -20,7 +20,7 @@
     "format:check": "prettier --check src",
     "type-check": "astro check",
     "type-check:scripts": "tsc -p tsconfig.scripts.json",
-    "ci": "npm run lint && npm run test -- --run && npm run build && tsc --noEmit && npm run type-check:scripts",
+    "ci": "npm run lint && npm test && npm run build && npm run type-check && npm run type-check:scripts",
     "social": "TZ=America/Edmonton tsx scripts/generate-social.ts",
     "indexnow": "TZ=America/Edmonton tsx scripts/submit-indexnow.ts",
     "index-status": "TZ=America/Edmonton tsx scripts/index-status.ts",
@@ -28,10 +28,10 @@
     "predev": "tsx scripts/generate-quiz-payload.ts",
     "pretype-check": "tsx scripts/generate-quiz-payload.ts",
     "migrate-db": "tsx scripts/migrate-db.ts",
-    "publish-drafts": "tsx scripts/publish-drafts.ts"
+    "publish-drafts": "tsx scripts/publish-drafts.ts",
+    "ship-check": "sh .agents/skills/ship-check/scripts/ship-check.sh"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.100.1",
     "@astrojs/cloudflare": "^12.6.13",
     "@astrojs/react": "^5.0.1",
     "@neondatabase/serverless": "^1.0.2",

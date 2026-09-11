@@ -10,8 +10,6 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlink
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { createHash } from 'node:crypto';
-import satori from 'satori';
-import { Resvg } from '@resvg/resvg-js';
 import { encodeCardPng } from './opaque-png';
 import { generateSlug, getToday } from '../src/lib/utils.ts';
 import { scholarshipStatusOf } from '../src/lib/status.ts';
@@ -97,6 +95,7 @@ for (const s of open) {
   const file=`${generateSlug(s.title)}.png`;
   const digest=hash(renderer+JSON.stringify(tree));next[file]=digest;
   if(previous[file]===digest && existsSync(join(outDir,file))) continue;
+  const [{ default: satori }, { Resvg }] = await Promise.all([import('satori'), import('@resvg/resvg-js')]);
   const svg = await satori(tree as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts });
   const png = encodeCardPng(new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render());
   writeFileSync(join(outDir,file),png);written++;

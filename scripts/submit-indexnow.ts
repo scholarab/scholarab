@@ -27,6 +27,7 @@ import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { getToday } from '../src/lib/utils.ts';
+import { livePublicationMatches } from './live-publication.ts';
 import type { LastmodManifest } from '../src/lib/lastmod.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -38,7 +39,7 @@ const BASE = `https://${HOST}`;
 const KEY = 'd8074d8f2e20640078dee36d99caef2b';
 const KEY_LOCATION = `${BASE}/${KEY}.txt`;
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
-// The protocol's cap is 10,000 per request; the whole site is ~312 URLs, so a
+// The protocol's cap is 10,000 per request; the site fits in one request, so a
 // batch split would be dead code. Guard instead of silently truncating.
 const MAX_URLS = 10_000;
 
@@ -75,18 +76,30 @@ if (dryRun) {
   process.exit(0);
 }
 
+const { catalogueHash } = JSON.parse(readFileSync(join(__dirname, '../public/publication.json'), 'utf8'));
+if (typeof catalogueHash !== 'string' || !/^[a-f0-9]{64}$/.test(catalogueHash)) {
+  throw new Error('Build a valid publication marker before announcing URLs.');
+}
+const sitemap = readFileSync(join(__dirname, '../public/sitemap.xml'), 'utf8');
+let live = false;
+for (let attempt = 1; attempt <= 3; attempt++) {
+  if (await livePublicationMatches(catalogueHash, sitemap)) { live = true; break; }
+  if (attempt < 3) await new Promise(resolve => setTimeout(resolve, 30_000 * attempt));
+}
+if (!live) {
+  console.error('IndexNow: this snapshot is not confirmed live after three attempts. Rerun after deployment.');
+  process.exit(1);
+}
+
 const res = await fetch(ENDPOINT, {
   method: 'POST',
+  signal: AbortSignal.timeout(15_000),
   headers: { 'Content-Type': 'application/json; charset=utf-8' },
   body: JSON.stringify({ host: HOST, key: KEY, keyLocation: KEY_LOCATION, urlList: urls }),
 });
-
-// 200 and 202 are both success (202 = accepted, key validation pending).
 if (res.ok) {
   console.log(`IndexNow: submitted (HTTP ${res.status}).`);
-  process.exit(0);
+} else {
+  console.error(`IndexNow: submission rejected (HTTP ${res.status}).`);
+  process.exitCode = 1;
 }
-
-// A failure here must not fail the workflow: the deploy already shipped, and
-// a rejected announcement costs us nothing but a slower Bing crawl.
-console.error(`IndexNow: submission rejected (HTTP ${res.status}) ${await res.text()}`);
