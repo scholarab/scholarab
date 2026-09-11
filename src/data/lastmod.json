@@ -671,6 +671,14 @@
     "hash": "79324e7555c45c9c",
     "date": "2026-09-08"
   },
+  "/scholarships/alberta-electrical-alliance-scholarships/": {
+    "hash": "8e3b9aad16d50728",
+    "date": "2026-09-11"
+  },
+  "/scholarships/alberta-female-hockey-league-scholarship/": {
+    "hash": "b28c6bc2b2f623fd",
+    "date": "2026-09-11"
+  },
   "/scholarships/alberta-foundation-for-the-arts-film-and-video-arts-scholarship/": {
     "hash": "cc5f38819ade157e",
     "date": "2026-09-08"
@@ -737,10 +745,6 @@
   },
   "/scholarships/allan-craig-scholarship/": {
     "hash": "366eade73e8b1e4c",
-    "date": "2026-09-08"
-  },
-  "/scholarships/ambassador-scholarship/": {
-    "hash": "56cacc317dbdaee2",
     "date": "2026-09-08"
   },
   "/scholarships/amy-sands-memorial-scholarship/": {
@@ -1283,6 +1287,10 @@
     "hash": "dd227394a6e0e157",
     "date": "2026-08-25"
   },
+  "/scholarships/canadian-angus-foundation-legacy-scholarship/": {
+    "hash": "33619e8d86376d4a",
+    "date": "2026-09-11"
+  },
   "/scholarships/canadian-association-of-petroleum-producers-endowed-award/": {
     "hash": "d5051cef0be4bb2c",
     "date": "2026-09-08"
@@ -1302,6 +1310,10 @@
   "/scholarships/canadian-hero-fund-scholarships/": {
     "hash": "fb22c179624c400e",
     "date": "2026-09-08"
+  },
+  "/scholarships/canadian-junior-angus-scholarships/": {
+    "hash": "5809183515f3f520",
+    "date": "2026-09-11"
   },
   "/scholarships/canadian-natural-environmental-technology-award/": {
     "hash": "ed58d81cc03976d5",
@@ -1370,6 +1382,10 @@
   "/scholarships/cbe-staff-association-scholarship-award/": {
     "hash": "6250dc7816f3e911",
     "date": "2026-09-08"
+  },
+  "/scholarships/cbfy-youth-achievement-award-scholarship/": {
+    "hash": "a2177973d9ea2c50",
+    "date": "2026-09-11"
   },
   "/scholarships/ccspe-indigenous-stem-scholarship/": {
     "hash": "213a268638ed972f",
@@ -1511,6 +1527,10 @@
     "hash": "c4da352ef879fc25",
     "date": "2026-09-08"
   },
+  "/scholarships/clac-scholarship/": {
+    "hash": "e03e44acd7149631",
+    "date": "2026-09-11"
+  },
   "/scholarships/claire-mccormick-poppitt-award/": {
     "hash": "2f2d346155b2d74a",
     "date": "2026-09-08"
@@ -1647,6 +1667,10 @@
     "hash": "4c947c385c1bec11",
     "date": "2026-09-08"
   },
+  "/scholarships/cupe-local-709-post-secondary-scholarship/": {
+    "hash": "1402ff1212614dd9",
+    "date": "2026-09-11"
+  },
   "/scholarships/curling-canada-youth-scholarships/": {
     "hash": "38e688d79ffc4a54",
     "date": "2026-09-08"
@@ -1711,6 +1735,10 @@
     "hash": "c7eb6563fac9e514",
     "date": "2026-09-08"
   },
+  "/scholarships/david-ellis-scholarship/": {
+    "hash": "caf632ad76bfa71c",
+    "date": "2026-09-11"
+  },
   "/scholarships/david-james-anderson-memorial-award/": {
     "hash": "ede1c60824daa431",
     "date": "2026-09-08"
@@ -1750,6 +1778,10 @@
   "/scholarships/dick-martin-scholarship-award/": {
     "hash": "a1265ebf9d0542c6",
     "date": "2026-09-08"
+  },
+  "/scholarships/dick-turner-memorial-award/": {
+    "hash": "143ac9ffbc4d2be4",
+    "date": "2026-09-11"
   },
   "/scholarships/don-and-norine-lowry-awards-for-women-of-excellence/": {
     "hash": "f8548003ef8f0de8",
@@ -1911,10 +1943,6 @@
     "hash": "c3db6e44fea8716f",
     "date": "2026-09-03"
   },
-  "/scholarships/elk-island-ata-local-28-award/": {
-    "hash": "5e5262ec0306e68f",
-    "date": "2026-09-08"
-  },
   "/scholarships/ellis-nature-centre-environment-scholarship/": {
     "hash": "d6e140f71e213722",
     "date": "2026-09-08"
@@ -2074,6 +2102,10 @@
   "/scholarships/ford-family-scholarship/": {
     "hash": "de213338adda10cd",
     "date": "2026-09-08"
+  },
+  "/scholarships/fordthearts-youth-scholarship/": {
+    "hash": "4baedaf6fb892eb9",
+    "date": "2026-09-11"
   },
   "/scholarships/fore-the-ladies-classic-female-empowerment-award/": {
     "hash": "192ed6e304f28f88",
@@ -2515,6 +2547,10 @@
     "hash": "ffc5fa411c914890",
     "date": "2026-09-08"
   },
+  "/scholarships/iuoe-canadian-conference-bursary/": {
+    "hash": "82f54da576c0a63a",
+    "date": "2026-09-11"
+  },
   "/scholarships/ivy-len-freeston-award/": {
     "hash": "722ed50a22fbb0ed",
     "date": "2026-09-08"
@@ -2818,6 +2854,10 @@
   "/scholarships/kirk-and-angelle-mcdougall-award/": {
     "hash": "66f94a601a9cb247",
     "date": "2026-09-08"
+  },
+  "/scholarships/kiwanis-calgary-chinook-and-kiwanis-foundation-of-canada-matching-bursary/": {
+    "hash": "0901abf82cfbcbb5",
+    "date": "2026-09-11"
   },
   "/scholarships/kiwanis-club-of-calgary-chinook-bursary/": {
     "hash": "0458fdc7da46b920",
@@ -3142,6 +3182,10 @@
   "/scholarships/luke-santi-memorial-award/": {
     "hash": "27a96025a5fa26b2",
     "date": "2026-09-08"
+  },
+  "/scholarships/lyle-bradley-memorial-citizenship-scholarship/": {
+    "hash": "9ec5ea30448e7629",
+    "date": "2026-09-11"
   },
   "/scholarships/lynda-costello-award/": {
     "hash": "effe0c9575119824",
@@ -3771,6 +3815,10 @@
     "hash": "33e3b517dc034bf2",
     "date": "2026-09-08"
   },
+  "/scholarships/rank-itca-college-scholarship/": {
+    "hash": "cf8aea339fe6598a",
+    "date": "2026-09-11"
+  },
   "/scholarships/rapid-cash-being-royal-award/": {
     "hash": "abf52da2b844a5f7",
     "date": "2026-09-08"
@@ -4010,6 +4058,10 @@
   "/scholarships/rotary-club-of-stony-plain-volunteer-award/": {
     "hash": "4e81bf0d04c1cd5c",
     "date": "2026-09-03"
+  },
+  "/scholarships/rotary-club-of-sylvan-lake-scholarship/": {
+    "hash": "50d76cc7c552ac52",
+    "date": "2026-09-11"
   },
   "/scholarships/rouse-family-relentless-award/": {
     "hash": "bf761da9bb0e44be",
@@ -4391,6 +4443,14 @@
     "hash": "a366430d65bdab42",
     "date": "2026-09-08"
   },
+  "/scholarships/supply-build-canada-member-education-awards/": {
+    "hash": "edde9518de620a2b",
+    "date": "2026-09-11"
+  },
+  "/scholarships/supply-build-canada-rising-star-awards/": {
+    "hash": "f3e1d356841f9693",
+    "date": "2026-09-11"
+  },
   "/scholarships/support-our-troops-national-scholarship-program/": {
     "hash": "f0d46146ccdd1495",
     "date": "2026-09-08"
@@ -4630,6 +4690,10 @@
   "/scholarships/volleyball-alberta-hugh-hoyles-scholarship-fund/": {
     "hash": "54577ea746e433a0",
     "date": "2026-09-09"
+  },
+  "/scholarships/vulcan-county-agricultural-services-bursary/": {
+    "hash": "45d5ef1864757ed5",
+    "date": "2026-09-11"
   },
   "/scholarships/w-f-macdonald-scholarship/": {
     "hash": "6c025f5882297283",
