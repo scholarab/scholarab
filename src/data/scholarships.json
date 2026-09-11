@@ -43489,5 +43489,403 @@
       "extracurriculars": []
     },
     "applyViaGuidance": false
+  },
+  {
+    "id": 1153,
+    "title": "Kalix Langenau Memorial Scholarship",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 athletes at W.H. Croxford, George McDougall and Bert Church high schools in Airdrie",
+    "url": "https://kalixlegacyfoundation.com/kalix-langenau-memorial-scholarship",
+    "category": "Sports",
+    "region": "Airdrie",
+    "active": false,
+    "description": "The Kalix Legacy Foundation gives one $500 scholarship to a Grade 12 athlete at each of Airdrie's three public high schools, in memory of Kalix Langenau. It looks for sportsmanship, teamwork and strong character.",
+    "notes": "This works by nomination: a classmate, teacher, coach or staff member emails the foundation along with a reference letter from a coach or school staff member. You need an acceptance to a post-secondary program. The 2026 round closed May 16, 2026 and no 2027 date is posted yet, so ask your coach about it in the spring.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "W.H. Croxford High School",
+        "George McDougall High School",
+        "Bert Church High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Sports"
+      ]
+    }
+  },
+  {
+    "id": 1154,
+    "title": "MD of Taber Annual Bursary",
+    "amount": "$500",
+    "deadline": "2027-08-31",
+    "openDate": "2027-08-01",
+    "audience": "Residents of the Municipal District of Taber enrolled full-time in post-secondary",
+    "url": "https://www.mdtaber.ab.ca/p/bursaries",
+    "category": "General",
+    "region": "Alberta",
+    "active": true,
+    "description": "The Municipal District of Taber gives up to four one-time $500 bursaries each year to residents studying full-time at a college, university or recognized post-secondary program. Programs that can lead to work in agriculture get preference.",
+    "notes": "Applications are only accepted from August 1 to 31, through the online form on the MD page, and you must upload proof of enrolment as a PDF. That means you apply the summer after Grade 12, once you are registered for fall. You must have lived in the MD before enrolling; Taber town residents do not qualify.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1155,
+    "title": "Mountain View County Citizenship Awards",
+    "amount": "$1,250",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 students who live in rural Mountain View County",
+    "url": "https://www.mountainviewcounty.com/p/scholarships",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Mountain View County gives a $1,250 citizenship award to one Grade 12 student at each of the six high schools that serve the county. It recognizes students who contribute to their community.",
+    "notes": "The awards run through the high schools, so ask your counsellor rather than the county. Judges look at extracurriculars, initiative, attitude toward school and community, leadership, volunteer work and good marks. You must be a rural resident of the county, not a town resident. The county contact is its Community Outreach Coordinator at 403-335-3311 ext 125.",
+    "applyViaGuidance": true,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering",
+        "Leadership"
+      ]
+    },
+    "metaDetail": "Apply through your high school counsellor."
+  },
+  {
+    "id": 1156,
+    "title": "Clearwater County Post-Secondary Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Grade 12 graduates who live in Clearwater County (outside its towns and villages)",
+    "url": "https://www.clearwatercounty.ca/p/scholarships",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Clearwater County gives a $1,000 scholarship to one graduating student at each of West Central, St. Dominic, David Thompson and Caroline high schools. Recipients must be county residents who show citizenship through school and community volunteering.",
+    "notes": "Every graduating county student is told about it and applies through their high school with a written application and reference letters. Town and village residents do not qualify. The money is paid once you are attending full-time. Home-schooled graduates have a separate $1,000 award, applied for through the county's forms page by August 31.",
+    "applyViaGuidance": true,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "West Central High School",
+        "St. Dominic High School",
+        "David Thompson High School",
+        "Caroline High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 1157,
+    "title": "Kneehill County Scholarship Program",
+    "amount": "$2,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Rural Kneehill County residents starting their first year of post-secondary",
+    "url": "https://www.kneehillcounty.com/2245/Scholarship-Program",
+    "category": "Community",
+    "region": "Alberta",
+    "active": false,
+    "description": "Kneehill County Council gives two $2,000 scholarships each year to rural residents entering their first full-time year at a university, college or trade school.",
+    "notes": "Councillors choose the winners: the essay counts for half the mark, reference letters for a quarter, and school or community contributions for the last quarter. The 2026 applications are closed and the county has not posted the next date. Past rounds closed around the end of August, so check the page in early summer after Grade 12.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 1158,
+    "title": "Wheatland County Community Benefit Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-07-31",
+    "openDate": null,
+    "audience": "High-achieving Wheatland County students going into STEM",
+    "url": "https://wheatlandcounty.ca/community-benefit-scholarship/",
+    "category": "STEM",
+    "region": "Alberta",
+    "active": false,
+    "description": "Wheatland County and the Wheatland Wind Project fund at least one scholarship of up to $2,000 a year for strong students in Wheatland County schools who plan to study science, technology, engineering or math.",
+    "notes": "Email the application form to parks@wheatlandcounty.ca, mail it, or drop it off at the county office. The county lists July 31 as the deadline each year; the 2027 form has not been posted yet, so confirm the date before you rely on it.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1159,
+    "title": "Yellowhead County Agricultural Service Board Bursary",
+    "amount": "$500",
+    "deadline": "2027-08-31",
+    "openDate": null,
+    "audience": "Yellowhead County residents enrolled in post-secondary",
+    "url": "https://www.yhcounty.ca/county-office/grants",
+    "category": "General",
+    "region": "Alberta",
+    "active": false,
+    "description": "Yellowhead County's Agricultural Service Board gives two $500 bursaries each year to county residents enrolled at a post-secondary institution.",
+    "notes": "Download the guidelines and application from the county grants page and save the file before filling it in; the county warns that forms completed in the browser can lose your answers. Mail it to Agricultural Services in Edson. The deadline is August 31 every year, so you apply the summer after Grade 12 once you are enrolled.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1160,
+    "title": "Dale MacMillan Memorial Scholarship for Community Leadership",
+    "amount": "$2,000",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Sturgeon County residents enrolled in post-secondary who lead in their community",
+    "url": "https://www.sturgeoncounty.ca/community-safety/scholarships/",
+    "category": "Community",
+    "region": "Alberta",
+    "active": false,
+    "description": "Sturgeon County gives two $2,000 awards a year, in memory of community leader Dale MacMillan, to residents enrolled at a recognized post-secondary institution who have shown leadership in the county.",
+    "notes": "You need a current Sturgeon County address, proof of enrolment, an essay of up to 300 words on your contributions and plans, and up to two reference letters. The Calahoo-Villeneuve Sand and Gravel Advisory Committee picks the winners and may give no award if no application fits. The 2026 round is closed and the next date isn't posted yet.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Leadership",
+        "Volunteering"
+      ]
+    }
+  },
+  {
+    "id": 1161,
+    "title": "County of Stettler Agricultural Service Board Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-04-15",
+    "openDate": null,
+    "audience": "High school graduates from the County of Stettler enrolled in post-secondary",
+    "url": "https://www.stettlercounty.ca/DocumentCenter/View/1311/ASB-Bursary-Form",
+    "category": "General",
+    "region": "Alberta",
+    "active": false,
+    "description": "The County of Stettler's Agricultural Service Board gives one $1,000 bursary a year to a county resident with a high school diploma who has contributed to their community and understands why agriculture matters to rural life.",
+    "notes": "Send the county proof that you are enrolled in college or university (any year counts), proof of your diploma or eligibility for it, and two references from people who are not related to you. Applications must reach the county office by April 15, and you can only win it once. The April 15 date is from the current form; check that it has not changed before applying.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1162,
+    "title": "Wheatland County Agricultural Service Board Scholarship",
+    "amount": "$500 to $2,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Wheatland County residents studying agriculture or environmental science",
+    "url": "https://wheatlandcounty.ca/documents/asb-bursary/",
+    "category": "General",
+    "region": "Alberta",
+    "active": false,
+    "description": "Wheatland County's Agricultural Service Board gives up to $10,000 a year in scholarships of $500 to $2,500 to county residents in agriculture or environment-related programs.",
+    "notes": "Email the form to agandenv@wheatlandcounty.ca. Current students and graduates up to three years out can apply, but past winners and people in job-training grant programs cannot. The county has not posted a deadline for the new round; the last one it published was September 15, 2024, so ask the county (403-361-2000) in the summer.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture",
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
