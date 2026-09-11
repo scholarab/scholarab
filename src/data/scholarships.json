@@ -1348,7 +1348,7 @@
       ]
     },
     "metaDetail": "Ended by TD. Nothing to apply for.",
-    "notes": "TD now points students at the TD Scholarship for Indigenous Peoples instead, run with AFOA Canada: 25 awards a year worth up to $60,000 over four years. That one is not listed here yet and has not been checked, so go to td.com rather than treating this line as verified. Confirmed concluded against td.com on 2026-09-09; this listing had been carrying a November 15, 2026 deadline and was sitting in the open set."
+    "notes": "TD now points students at the TD Scholarship for Indigenous Peoples instead, run with AFOA Canada: 25 awards a year worth up to $60,000 over four years. That one now has its own listing here, checked on 2026-09-11. Confirmed concluded against td.com on 2026-09-09; this listing had been carrying a November 15, 2026 deadline and was sitting in the open set."
   },
   {
     "id": 60,
@@ -44441,5 +44441,42 @@
         "Leadership"
       ]
     }
+  },
+  {
+    "id": 1229,
+    "title": "TD Scholarship for Indigenous Peoples",
+    "amount": "$60,000 over 4 years",
+    "deadline": null,
+    "openDate": null,
+    "audience": "First Nations, Métis and Inuit students applying to a full-time post-secondary program of two years or more",
+    "url": "https://www.td.com/ca/en/personal-banking/solutions/student-advice/indigenous-student-scholarships-grants-and-bursaries",
+    "category": "Indigenous",
+    "region": "National",
+    "active": false,
+    "description": "TD and AFOA Canada give 25 Indigenous students a year up to $60,000 over four years: up to $10,000 a year toward tuition plus $5,000 a year for living costs.",
+    "notes": "Applications open in fall 2026 through AFOA Canada, for funding that starts in September 2027, so this round is the one for current Grade 12 students. You must be a member or citizen of a First Nation, Métis or Inuit community, a citizen or permanent resident, and have applied to a full-time program of at least two years. Winners must complete a paid four-month term at TD each year. The 2025 round ran October 1 to November 5 and no 2026 dates are posted yet; AFOA answers questions at td-scholarships@afoa.ca.",
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "applyViaGuidance": false
   }
 ]
