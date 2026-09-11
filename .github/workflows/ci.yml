@@ -58,9 +58,6 @@ jobs:
       - name: Sync scholarship active flags
         run: npx tsx scripts/auto-expire.ts
 
-      - name: Validate catalogue
-        run: npm run validate-data
-
       # These five steps are `npm run ci` unrolled, so each gets its own line in
       # the GitHub UI. Keep the two in sync: the script exists so a local run
       # can be the same gate as this job, and the scripts typecheck below is
@@ -72,7 +69,7 @@ jobs:
         run: npm run test -- --run
 
       # No DATABASE_URL here: the JSON snapshot is authoritative for both the
-      # public pages and every generated matching asset. Admin drafts are not
+      # public pages and the quiz payload. Admin drafts are not
       # published merely because a build or database sync runs.
       - name: Build
         run: npm run build
@@ -85,6 +82,15 @@ jobs:
       # and prune tables. tsconfig.scripts.json picks them up.
       - name: Typecheck scripts
         run: npm run type-check:scripts
+
+      - name: Install Playwright Chromium
+        if: github.event_name != 'schedule'
+        run: npx playwright install --with-deps chromium
+
+      # Exercise the exact build validated above; no second install or rebuild.
+      - name: Browser tests
+        if: github.event_name != 'schedule'
+        run: npm run test:e2e
 
       # After validation so a rejected push cannot hide its results. A failed
       # build or push stops the job before it can mirror uncommitted data. The tag
@@ -107,7 +113,7 @@ jobs:
       # Cloudflare deploys separately: until deployment succeeds, the public site
       # can still serve the previous snapshot. A DB sync is not proof of a live
       # deploy, and publisher acknowledgment checks the public manifest itself.
-      - name: Mirror latest validated JSON and reconcile matching
+      - name: Mirror latest validated JSON
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
@@ -117,7 +123,6 @@ jobs:
             exit 0
           fi
           npx tsx scripts/sync-db.ts
-          npm run matching:audit-db
 
       # IndexNow announces the pages that changed today to Bing/Copilot/Yandex.
       # Google ignores the protocol entirely, so this is not the fix for the
@@ -159,59 +164,3 @@ jobs:
             sleep 15
           done
           echo "Deploy did not go live within 10 minutes; skipping IndexNow."
-
-  # Playwright smoke tests against the built dist/, served the same way local
-  # runs serve it (wrangler pages dev). This is a post-push signal, not a deploy
-  # gate (Cloudflare Pages deploys in parallel and cannot wait on it), so a red
-  # run here means "prod just shipped something the smoke tests don't like, go
-  # look", not "the deploy was blocked". Skipped on the cron data-sync run,
-  # where there's no code change to exercise.
-  e2e:
-    if: github.event_name != 'schedule'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 22
-          cache: npm
-
-      - run: npm ci
-
-      # Both Playwright projects (Desktop Chrome + Pixel 7) run on the Chromium
-      # engine, so only that browser is needed.
-      - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
-
-      # No DATABASE_URL, same as the validate build. The E2E specs assert on the
-      # committed-JSON site (listing counts, quiz flow), which the DB path breaks.
-      - name: Build
-        run: npm run build
-
-      # playwright.config.ts starts `wrangler pages dev dist` itself and waits on
-      # it; CI-mode retries/workers/forbidOnly are already gated on $CI there.
-      - name: E2E
-        run: npm run test:e2e
-
-  matching-e2e:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - name: Build public matching experience
-        env:
-          MATCHING_QUIZ_VARIANT: adaptive
-        run: npm run build
-      - name: Matching accessibility, privacy and journey tests
-        run: npm run test:matching:e2e

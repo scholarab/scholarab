@@ -1,5 +1,3 @@
-import { matchingSchema } from './matching/schema';
-import { eligibilityEvidenceSchema } from './matching/field-evidence';
 /** Shared, environment-independent publication model. IDs are public JSON IDs. */
 export type CatalogueKind = 'scholarship' | 'program';
 export type Document = Record<string, unknown> & { id: number };
@@ -61,8 +59,6 @@ export function validateCatalogue(raw: unknown, kind: CatalogueKind): Document[]
     } catch {
       throw new Error(`${kind} ${row.id}: invalid provider URL`);
     }
-    if (row.matching != null) matchingSchema.parse(row.matching);
-    if (row.eligibilityEvidence != null) eligibilityEvidenceSchema.parse(row.eligibilityEvidence);
     if ('open_date' in row) throw new Error(`${kind} ${row.id}: use openDate`);
     ids.add(row.id);
     return row as Document;
@@ -116,4 +112,11 @@ export function applyPublication(
     rows.set(c.publicId, merged);
   }
   return validateCatalogue([...rows.values()], kind);
+}
+
+/** Fingerprint the complete published JSON without building a second quiz catalogue. */
+export async function catalogueHash(snapshot: { scholarship: unknown[]; program: unknown[] }): Promise<string> {
+  const bytes = new TextEncoder().encode(stableJson(snapshot));
+  const hash = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(hash), b => b.toString(16).padStart(2, '0')).join('');
 }

@@ -316,24 +316,3 @@ export const QUIZ_DURATION = '30 seconds';
 
 /** One sentence, for anywhere that needs the whole claim at once. */
 export const QUIZ_PROMISE = `${QUIZ_QUESTION_WORD} questions, ${QUIZ_DURATION}. No account, no email.`;
-
-/**
- * Which quiz a build serves. The redesigned experience is opt-in: only an
- * explicit MATCHING_QUIZ_VARIANT=adaptive build ships it, so a plain build
- * and any other value serve the established quiz.
- *
- * It lives here because /match/ and the homepage teaser both need it and both
- * used to spell the check out themselves. They drifted the moment the default
- * changed: the teaser kept handing adaptive-shaped answers to a legacy quiz.
- * One export, imported twice, cannot disagree with itself.
- */
-/* This module is also imported from plain Node: session.ts pulls the storage
- * key, and the matching E2E specs pull session.ts. `import.meta.env` is a Vite
- * construct and is undefined there, so read it defensively and fall back to
- * process.env rather than throwing at import time. */
-const quizVariant =
-  (import.meta as unknown as { env?: Record<string, string | undefined> }).env
-    ?.MATCHING_QUIZ_VARIANT ??
-  (typeof process === 'undefined' ? undefined : process.env.MATCHING_QUIZ_VARIANT);
-
-export const ADAPTIVE_QUIZ = quizVariant === 'adaptive';

@@ -33,12 +33,7 @@ const EVENT_LABELS: Record<string, string> = {
   save: 'Saves',
   app_step: 'Applications started',
   quiz_start: 'Quiz starts',
-  quiz_complete: 'Legacy quiz completions',
-  match_v1_start: 'New match: essentials submitted',
-  match_v1_results: 'New match: results shown',
-  match_v1_refine: 'New match: refinement used',
-  match_v1_compare: 'New match: comparison used',
-  match_v1_action: 'New match: saved or listing opened',
+  quiz_complete: 'Quiz completions',
   search_empty: 'Empty searches',
   alert_subscribe: 'Alert signups',
 }

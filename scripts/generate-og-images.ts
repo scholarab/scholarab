@@ -6,12 +6,13 @@
  * the site-wide og-image.png, mirroring the sitemap's rule; [slug].astro
  * applies the same condition when choosing the og:image URL.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { createHash } from 'node:crypto';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
+import { encodeCardPng } from './opaque-png';
 import { generateSlug, getToday } from '../src/lib/utils.ts';
 import { scholarshipStatusOf } from '../src/lib/status.ts';
 
@@ -89,7 +90,7 @@ const cachePath=join(cacheDir,'og-images.json');
 let previous:Record<string,string>={};
 try {previous=JSON.parse(readFileSync(cachePath,'utf8'));} catch { /* cold build */ }
 const hash=(input:string|Buffer)=>createHash('sha256').update(input).digest('hex');
-const renderer=hash(readFileSync(join(__dirname,'../package-lock.json')))+fonts.map(f=>hash(f.data)).join('');
+const renderer=hash(readFileSync(join(__dirname,'../package-lock.json')))+hash(readFileSync(join(__dirname,'opaque-png.ts')))+fonts.map(f=>hash(f.data)).join('');
 const next:Record<string,string>={};let written=0;
 for (const s of open) {
   const tree=card(s);
@@ -97,8 +98,11 @@ for (const s of open) {
   const digest=hash(renderer+JSON.stringify(tree));next[file]=digest;
   if(previous[file]===digest && existsSync(join(outDir,file))) continue;
   const svg = await satori(tree as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts });
-  const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
+  const png = encodeCardPng(new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render());
   writeFileSync(join(outDir,file),png);written++;
+}
+for (const file of readdirSync(outDir)) {
+  if (file.endsWith('.png') && !(file in next)) unlinkSync(join(outDir, file));
 }
 writeFileSync(cachePath,JSON.stringify(next));
 console.log(`Wrote ${written} OG images; reused ${open.length-written} unchanged images`);

@@ -317,17 +317,7 @@ describe('POST /api/event', () => {
 
 it.each([null,[],false,123,'"text"'])('returns 400 for a non-object body %j',async body=>{expect((await call(body)).status).toBe(400)})
 
-describe('matching milestone privacy', () => {
-  for (const event of ['match_v1_start', 'match_v1_results', 'match_v1_refine', 'match_v1_compare', 'match_v1_action']) {
-    it(`accepts ${event} without identifiers`, async () => {
-      expect((await call({ event })).status).toBe(204)
-      expect(mockValues).toHaveBeenCalledWith({ event, itemType: null, itemId: null, meta: null })
-    })
-    for (const extra of [{ itemType: 'scholarship', itemId: 1 }, { meta: 'identity' }, { answers: { city: 'Calgary' } }]) {
-      it(`rejects extra fields on ${event}: ${Object.keys(extra).join(',')}`, async () => {
-        expect((await call({ event, ...extra })).status).toBe(400)
-        expect(mockValues).not.toHaveBeenCalled()
-      })
-    }
-  }
+it('rejects retired adaptive quiz events', async () => {
+  expect((await call({ event: 'match_v1_start' })).status).toBe(400)
+  expect(mockInsert).not.toHaveBeenCalled()
 })

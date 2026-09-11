@@ -35,9 +35,4 @@ src/data/quiz-payload.json
 
 .cache/
 
-# Generated full-catalogue matching foundation
-public/matching/
-src/data/matching-manifest.json
-
-src/data/matching-client.json
 playwright-report/

@@ -5,25 +5,15 @@ import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 
 import QuizLoader from '../components/QuizLoader';
-import MatchExperience from '../components/matching/MatchExperience';
-import matchingClient from '../data/matching-client.json';
 import quizDataUrl from '../data/quiz-payload.json?url';
 import {
   QUIZ_DURATION,
   QUIZ_PROMISE,
   QUIZ_QUESTION_WORD,
   QUIZ_MAX_QUESTION_WORD,
-  ADAPTIVE_QUIZ,
 } from '../lib/quiz';
 
-// Opt-in until the beta has verified evidence behind it. Two of 1,207 listings
-// carry matching documents and both are partial, so the redesign promises
-// explained requirements it cannot yet show. Nothing is deleted; the adaptive
-// path stays built and the matching-e2e job still covers it in depth.
-const adaptive = ADAPTIVE_QUIZ;
-const description = adaptive
-  ? 'Explore scholarships and programs with explained requirements, optional follow-ups and private answers.'
-  : `${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`;
+const description = `${QUIZ_PROMISE} See every Alberta scholarship you qualify for, instantly and anonymously.`;
 const breadcrumbJson = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -64,25 +54,16 @@ const breadcrumbJson = {
         <h1 class="sabm-h1">Find your <em>match.</em></h1>
         <p class="sabm-sub">
           {
-            adaptive
-              ? 'Start with three essentials. Explore every scholarship and program.'
-              : `${QUIZ_QUESTION_WORD} questions. Instant results. Every Alberta opportunity available to you.`
+            `${QUIZ_QUESTION_WORD} questions. Instant results. Every Alberta opportunity available to you.`
           }
         </p>
         <div class="sabm-trust sabl-mono">
           <span>◦ Completely anonymous</span>
-          <span>{adaptive ? '◦ Optional follow-ups' : `◦ Under ${QUIZ_DURATION}`}</span>
+          <span>{`◦ Under ${QUIZ_DURATION}`}</span>
         </div>
       </div>
 
-      <!-- Explicit legacy build remains available for rollback during beta observation. -->
-      {
-        adaptive ? (
-          <MatchExperience {...matchingClient} client:load />
-        ) : (
-          <QuizLoader url={quizDataUrl} client:load />
-        )
-      }
+      <QuizLoader url={quizDataUrl} client:load />
 
       {
         /* The quiz is a React island, so until it hydrates this page has about
@@ -95,38 +76,6 @@ const breadcrumbJson = {
           because a description of how matching works is most useful next to
           the results it produced. */
       }
-      {
-        adaptive ? (
-          <section class="sabm-about">
-            <>
-              <h2>How matching works</h2>
-              <p>
-                Start with your search intent, current education stage and community. Every
-                published scholarship and program is assessed locally in your browser. Existing
-                listing details help order results but do not establish eligibility. Optional
-                questions appear only when they can clarify supported requirements. Personal topics
-                require your opt-in.
-              </p>
-              <p>
-                Eligibility and application availability are separate. A satisfied check is not a
-                guarantee of admission or funding. Unverified sources remain unresolved; open a
-                result to see every requirement, its evidence and the appropriate next step.
-              </p>
-              <p>
-                Answers expire after one hour, including while this page is open, unless you
-                explicitly extend the session. End your session to clear them sooner. They never
-                enter URLs or analytics. Saved listing IDs are kept separately on your device. Use
-                Saved for application steps and calendar export, and each listing for its available
-                reminder options.
-              </p>
-              <p>
-                You can always browse the <a href="/scholarships/">scholarship directory</a>,{' '}
-                <a href="/programs/">program directory</a> or{' '}
-                <a href="/deadlines/">deadline calendar</a>, including without JavaScript.
-              </p>
-            </>
-          </section>
-        ) : (
           <section class="sabm-about">
             <h2>How the match works</h2>
             <p>
@@ -168,8 +117,6 @@ const breadcrumbJson = {
               in.
             </p>
           </section>
-        )
-      }
     </div>
   </div>
 

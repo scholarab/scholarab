@@ -36,6 +36,8 @@ export default defineConfig({
     },
   },
   vite: {
+    // Shared scripts/styles should be cached once, not copied into 1,279 pages.
+    build: { assetsInlineLimit: 0 },
     plugins: [
       {
         // sharp is only needed during prerender (build-time image optimization).
