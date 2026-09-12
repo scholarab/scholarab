@@ -5,8 +5,7 @@ import { events, subscribers } from '../../lib/db/schema'
 import { sql, and, eq, desc, count, isNotNull } from 'drizzle-orm'
 import AdminShell from '../../components/admin/AdminShell'
 import type { AnalyticsData } from '../../components/admin/AnalyticsPanel'
-import scholarshipsJson from '../../data/scholarships.json'
-import programsJson from '../../data/research-programs.json'
+import catalogue from '../../data/runtime-catalogue.json'
 import searchMonths from '../../data/search-months.json'
 import '../../styles/global.css'
 
@@ -115,8 +114,8 @@ try {
   ])
   const subTotals = totals[0]
   // Event IDs name published JSON; internal historical IDs are never joined.
-  const sJson = scholarshipsJson as unknown as { id: number; title: string }[]
-  const pJson = (programsJson as unknown as { id: number; name: string }[])
+  const sJson = catalogue.scholarships
+  const pJson = catalogue.programs
     .map(p => ({ id: p.id, title: p.name }))
 
   data = {

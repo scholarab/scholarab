@@ -41,11 +41,15 @@ An unresolved delivery older than 23 hours deliberately fails the sender job wit
 
 ## Build and performance
 
-Quiz data is generated before build/dev/type-check and emitted as a fingerprinted asset. It contains only matching/result fields; answers remain entirely in the browser. The page retries loading on failure. The generated source JSON is ignored by git.
+`scripts/generate-catalogue-payloads.ts` validates the committed JSON and generates two transport shapes before build/dev/type-check/tests. The legacy quiz payload contains only matching/result fields and is emitted as a fingerprinted asset; answers remain entirely in the browser and the page retries loading on failure. The runtime catalogue contains only public IDs, labels, availability and deadlines for reminders and admin analytics. Both generated source files are ignored by git; neither is an independently edited catalogue or a source of admin drafts.
 
 OG rendering caches a hash of the render tree, font bytes and dependency lockfile. Only changed/missing images render; the CI/publisher workflows restore the previous image cache. The full catalogue validation and sitemap generation still run every build. Directory filtering compares visible DOM order before moving cards, and the shared Alberta calendar clock caches its expensive timezone calculation without carrying yesterday across midnight.
 
 Analytics aggregates are sent in one database batch instead of nine sequential requests; obsolete internal-ID title lookups are removed. Counts distinguish confirmed subscriptions from those awaiting confirmation. At the current table size, full retained-history aggregates are inexpensive. Month-only APIs and new indexes were deferred until a query plan demonstrates a need.
+
+Google Analytics has one consent/page-view path, initialized by `astro:page-load` on both first load and navigation. Granting consent loads the tag once; declining or resetting a previous grant disables that loaded tag and updates consent to denied. Local browser checks intercept the tag and serve local assets under the allowed origin, without contacting production analytics or APIs.
+
+Link checking retains eight concurrent hosts and serial requests with a 400 ms gap within each host. A free host slot now starts the next host immediately, without waiting for the slowest host in a fixed batch. URL deduplication, three network attempts, host exclusions and reports remain unchanged.
 
 ## Build verification
 

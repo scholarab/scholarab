@@ -36,3 +36,6 @@ src/data/quiz-payload.json
 .cache/
 
 playwright-report/
+
+# Derived minimal reminder/title fields from the same published snapshot.
+src/data/runtime-catalogue.json

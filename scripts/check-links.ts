@@ -3,7 +3,7 @@ import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { Agent } from 'undici'
-import { groupLinkTargets } from './link-targets.ts'
+import { groupLinkTargets, forEachHost } from './link-targets.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -154,10 +154,7 @@ async function checkHost(host: string, hostItems: typeof items): Promise<void> {
   }
 }
 
-const hosts = [...byHost.entries()]
-for (let i = 0; i < hosts.length; i += HOST_CONCURRENCY) {
-  await Promise.all(hosts.slice(i, i + HOST_CONCURRENCY).map(([h, list]) => checkHost(h, list)))
-}
+await forEachHost([...byHost.entries()], HOST_CONCURRENCY, ([host, list]) => checkHost(host, list))
 
 // Bare-origin URLs: a 200 proves the host is alive, never that it still
 // describes the award. Alberta Computers for Schools pointed at acfs.org; a

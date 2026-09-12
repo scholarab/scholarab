@@ -63,71 +63,59 @@ const gaId = import.meta.env.PUBLIC_GA_ID ?? GA_MEASUREMENT_ID;
     <script>
       import { readConsent, setConsent, analyticsAllowedHere, syncConsentReset } from '../../lib/consent.ts';
 
+      const gaWindow = window as unknown as {
+        __sabGaId?: string;
+        gtag?: (...args: unknown[]) => void;
+        [key: string]: unknown;
+      };
       let loaded = false;
 
-      /** Inject gtag.js. Idempotent: ClientRouter fires page-load per navigation. */
-      function loadGa() {
-        const id = (window as unknown as { __sabGaId?: string }).__sabGaId;
-        if (loaded || !id) return;
-        // The environment guard lives here rather than only in apply(), so it
-        // covers the grant path too. Both callers are meant to be gated, and a
-        // choke point that cannot be walked around beats two that agree today.
-        if (!analyticsAllowedHere(location.hostname, navigator.webdriver, import.meta.env.MODE)) return;
-        loaded = true;
-        const gtag = (window as unknown as { gtag: (...a: unknown[]) => void }).gtag;
-        gtag('consent', 'update', { analytics_storage: 'granted' });
-        const s = document.createElement('script');
-        s.async = true;
-        s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
-        document.head.appendChild(s);
-        gtag('js', new Date());
-        // Views are sent by hand below. With ClientRouter the document never
-        // reloads, so the automatic first-load page_view would be the only one
-        // GA ever saw and every route after it would go unrecorded.
-        gtag('config', id, { send_page_view: false, anonymize_ip: true });
-        sendPageView();
-      }
-
-      function sendPageView() {
-        const w = window as unknown as { gtag?: (...a: unknown[]) => void };
-        if (!loaded || !w.gtag) return;
-        w.gtag('event', 'page_view', {
+      // One consent transition and one page-view path for both the banner and
+      // ClientRouter. Denial also disables a tag loaded on an earlier page.
+      function applyChoice(choice: 'granted' | 'denied' | null) {
+        if (!analyticsAllowedHere(location.hostname, navigator.webdriver, import.meta.env.MODE))
+          choice = 'denied';
+        const banner = document.getElementById('sab-consent');
+        if (banner) banner.hidden = choice !== null;
+        const id = gaWindow.__sabGaId;
+        if (!id || !gaWindow.gtag) return;
+        gaWindow[`ga-disable-${id}`] = choice !== 'granted';
+        if (choice !== 'granted') {
+          if (loaded) gaWindow.gtag('consent', 'update', { analytics_storage: 'denied' });
+          return;
+        }
+        gaWindow.gtag('consent', 'update', { analytics_storage: 'granted' });
+        if (!loaded) {
+          loaded = true;
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+          document.head.appendChild(script);
+          gaWindow.gtag('js', new Date());
+          gaWindow.gtag('config', id, { send_page_view: false, anonymize_ip: true });
+        }
+        gaWindow.gtag('event', 'page_view', {
           page_location: location.href,
           page_path: location.pathname + location.search,
           page_title: document.title,
         });
       }
 
-      function banner(): HTMLElement | null {
-        return document.getElementById('sab-consent');
-      }
-
-      function decide(value: 'granted' | 'denied') {
-        setConsent(value);
-        const el = banner();
-        if (el) el.hidden = true;
-        if (value === 'granted') loadGa();
-      }
-
-      function apply() {
-        if (!analyticsAllowedHere(location.hostname, navigator.webdriver, import.meta.env.MODE)) return;
-        syncConsentReset(location.search);
-        const choice = readConsent();
-        if (choice === 'granted') { loadGa(); sendPageView(); return; }
-        const el = banner();
-        if (!el) return;
-        // Only ask when there is no answer on file. A decline is an answer.
-        el.hidden = choice !== null;
-      }
-
-      // Delegated, so it survives ClientRouter swapping the banner's DOM.
       document.addEventListener('click', e => {
         const btn = (e.target as HTMLElement | null)?.closest?.('[data-consent]');
-        if (btn) decide(btn.getAttribute('data-consent') === 'granted' ? 'granted' : 'denied');
+        if (!btn) return;
+        const choice = setConsent(btn.getAttribute('data-consent') === 'granted' ? 'granted' : 'denied');
+        // The browser-wide opt-out outranks even a new grant. A grant with
+        // blocked storage still applies to this page, as it did previously.
+        applyChoice(readConsent() === 'denied' ? 'denied' : choice);
       });
 
-      document.addEventListener('astro:page-load', apply);
-      apply();
+      // Astro emits this on first load as well as navigation; calling it here
+      // too used to count a returning visitor's first page three times.
+      document.addEventListener('astro:page-load', () => {
+        syncConsentReset(location.search);
+        applyChoice(readConsent());
+      });
     </script>
   </>
 )}
