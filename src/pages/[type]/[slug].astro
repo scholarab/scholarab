@@ -160,16 +160,16 @@ let d;
 if (kind === 'scholarship') {
   const s = scholarship!;
   const slug = generateSlug(s.title);
-  const openDate     = new Date((s.openDate || '1970-01-01') + 'T00:00:00');
   const deadlineDate = s.deadline ? new Date(s.deadline + 'T00:00:00') : null;
-  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = todayDate < openDate
-    ? 'future'
-    : (deadlineDate && todayDate > deadlineDate)
-      ? 'closed'
-      // Curator-closed with a future deadline = next cycle, open date unknown
-      // yet; show as upcoming, not accepting (mirrors getScholarshipStatus).
-      : s.active === false ? 'future'
-      : deadlineDate ? 'active' : 'tba';
+  // Read the ladder from status.ts rather than restating it here. This page
+  // kept its own copy, so a listing could be non-indexable by status.ts and
+  // still paint "OPENING SOON"; the ended TD award did exactly that, because
+  // only `noindex` below consulted the shared function. The one distinction the
+  // shared function does not draw is 'tba': with no deadline it reports
+  // 'active', and this page separates "open" from "no date announced yet".
+  const base = scholarshipStatusOf(s, todayDate);
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' =
+    base === 'active' && !deadlineDate ? 'tba' : base;
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
 
   // Status-aware and capped at Google's ~155-character cut. The old template
@@ -232,9 +232,13 @@ if (kind === 'scholarship') {
     daysLeft,
     // ISO dates for the client-side chip recompute (SabDetail): the page is
     // prerendered, so days-left/closed state must be re-derived on load.
-    deadlineIso: s.deadline,
-    openDateIso: s.active === false && !s.openDate ? null : s.openDate,
-    inactive: s.active === false,
+    // A concluded award is not clock-driven, so it passes none of these on.
+    // refreshStatusChip returns early without them, leaving the server's CLOSED
+    // chip alone; otherwise its `inactive` branch repaints "OPENING SOON" on
+    // every load, and a stale future deadline would paint a days-left count.
+    deadlineIso: s.concluded ? null : s.deadline,
+    openDateIso: s.concluded || (s.active === false && !s.openDate) ? null : s.openDate,
+    inactive: s.active === false && !s.concluded,
     dueLong: formatDate(s.deadline),
     opensLabel: s.openDate ? formatDate(s.openDate) : null,
     // Empty on purpose. Every one of the five facts this used to list was

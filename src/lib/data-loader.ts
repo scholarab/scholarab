@@ -27,6 +27,13 @@ export type Scholarship = {
   notes: string | null
   applyViaGuidance: boolean
   active: boolean
+  /**
+   * The provider has ended the award outright, so there is no next cycle.
+   * Distinct from `active: false`, which means "between cycles": without this,
+   * an ended award carrying no deadline reads as OPENING SOON and its value
+   * counts toward upcoming money. JSON-only, like metaDetail. See status.ts.
+   */
+  concluded?: boolean
   eligibility: EligibilityCriteria | null
   /**
    * An authored clause appended to the derived SERP snippet. JSON-only, like
