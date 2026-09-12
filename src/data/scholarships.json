@@ -44528,5 +44528,476 @@
         "writing"
       ]
     }
+  },
+  {
+    "id": 1291,
+    "title": "VAPPA Student Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-05-15",
+    "openDate": null,
+    "audience": "Vulcan County and Town of Vulcan graduates entering agriculture, energy, medical or emergency services",
+    "url": "https://vappa.ca/",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "The Vulcan Area Petroleum and Agriculture Partnership Association, made up of landowners, government and energy companies with holdings around Vulcan, pays $1,000 bursaries to local graduates heading into agriculture, oil and gas, medical or emergency services careers.",
+    "notes": "You must have earned your high school diploma while living in the Town of Vulcan or Vulcan County, and be registered at a post-secondary institution. Send the application with your final Grade 12 transcript, proof of acceptance or enrolment, and an essay of at least 1,000 words on the career you are chasing and why you deserve the award, by May 15. Missing documents can follow later, but the money is not released until after classes start and you have shown proof of enrolment. You may reapply in later years of study, though first-time applicants are considered first.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture",
+        "Health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1292,
+    "title": "Brazeau County Agricultural Service Board Bursary",
+    "amount": "$500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Brazeau County residents in a post-secondary agriculture or environment program",
+    "url": "https://www.brazeau.ab.ca/live-and-play/education",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Brazeau County’s Agricultural Service Board gives up to two $500 bursaries a year to county residents studying agriculture or the environment.",
+    "notes": "Open to students living in Brazeau County who are enrolled in a BSc in Agriculture or Environment, a college diploma in either, or another degree or diploma directly tied to agriculture. Enrolment comes first, so a Grade 12 applies for the year they are starting. The county does not publish a closing date on its education page, so phone the county office before you plan around a date. Brazeau County also jointly funds the Tuition Assistance Bursary with the Town of Drayton Valley, which is a separate program.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture",
+        "Environment"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1293,
+    "title": "Woodlands County Agriculture Bursary",
+    "amount": "$500",
+    "deadline": "2026-10-15",
+    "openDate": null,
+    "audience": "Woodlands County students in a full time Alberta agriculture or environmental science program",
+    "url": "https://woodlands.ab.ca/p/ag-bursary",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "One $500 bursary a year from Woodlands County for a local student taking agriculture or environmental science at an Alberta post-secondary institution.",
+    "notes": "You, or your parents, must live in Woodlands County or own property there. You need to be enrolled full time in an agriculture or environmental science program at an Alberta post-secondary institution, so a Grade 12 applies for the fall they are starting. Send the form with your high school transcript, proof of post-secondary enrolment and a cover letter making your case, to the county office in Fort Assiniboine by October 15.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture",
+        "Environmental Science"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1294,
+    "title": "Woodlands County Post-Secondary Bursary",
+    "amount": "$2,000",
+    "deadline": "2026-10-15",
+    "openDate": null,
+    "audience": "Woodlands County students entering full time post-secondary study",
+    "url": "https://woodlands.ab.ca/p/bursaries",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Woodlands County pays $2,000 for a first year of post-secondary study and $1,000 for a second, $3,000 in total, to students from the county.",
+    "notes": "You qualify as a resident, or if your parents own property in the county and you lived there within the past five years. You must be full time at a recognised accredited institution and pass at least three courses a semester to collect that portion. The useful part for a graduating student: the county policy says that taking up to three school years off before starting post-secondary does not cost you the bursary. Applications close October 15.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1295,
+    "title": "Woodlands County Apprenticeship Bursary",
+    "amount": "$1,500",
+    "deadline": null,
+    "openDate": null,
+    "audience": "Woodlands County apprentices in a provincially recognised trade program",
+    "url": "https://woodlands.ab.ca/p/bursaries",
+    "category": "Trades",
+    "region": "Alberta",
+    "active": true,
+    "description": "Up to $1,500 for a first year of apprenticeship training and $1,500 for a second, $3,000 in total, for apprentices from Woodlands County.",
+    "notes": "Applications are taken all year rather than on one closing date. You need proof of enrolment in a provincially recognised apprenticeship program and two reference letters, and you must pass the classroom portion before the money is released against an official transcript. There is no age limit, you can only receive it once, and you have to declare that you are not drawing wages or a subsidy from an employer while you are at school. Residency works the same as the county post-secondary bursary.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1296,
+    "title": "Saddle Hills County Student Bursary",
+    "amount": "Varies",
+    "deadline": "2027-06-01",
+    "openDate": null,
+    "audience": "Saddle Hills County residents entering post-secondary, trades or Class 1 driver training",
+    "url": "https://www.saddlehills.ab.ca/living-in-our-community/community-support-programs/grants-and-bursaries/",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Saddle Hills County helps local students moving into post-secondary study, the trades, or commercial Class 1 driver training.",
+    "notes": "You must have lived in Saddle Hills County for at least a year, with a year in Alberta immediately before that, and be enrolled in a recognised program. The county also asks that you intend to live and work in northern Alberta after you finish and have reasonable job prospects there, so say so plainly in your essay. Send an essay of at least 200 words on your field of study and two reference letters with the online form by June 1. The county does not publish the award value, so ask before you count on a figure.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1297,
+    "title": "Saddle Hills County Veterinary Education Bursary",
+    "amount": "Varies",
+    "deadline": "2027-07-15",
+    "openDate": null,
+    "audience": "Students in a Doctor of Veterinary Medicine or veterinary technologist program",
+    "url": "https://www.saddlehills.ab.ca/living-in-our-community/community-support-programs/grants-and-bursaries/",
+    "category": "STEM",
+    "region": "Alberta",
+    "active": true,
+    "description": "The Saddle Hills County Agricultural Service Board supports students training as veterinarians or veterinary technologists, with priority to the Central Peace region.",
+    "notes": "Of the two routes this covers, the veterinary technologist diploma is the one you can enter straight from Grade 12; the Doctor of Veterinary Medicine needs university first, so it is a later step rather than a first-year option. Applications go in through the county website by July 15, and the county does not publish the value.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Veterinary Medicine",
+        "Veterinary Technology"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1298,
+    "title": "Lamont County Centennial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "openDate": null,
+    "audience": "Lamont County rural residents graduating this year or within the last two years",
+    "url": "https://www.lamontcounty.ca/residents/scholarships",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Lamont County awards two $1,000 scholarships a year to students from the rural county who are heading to post-secondary study.",
+    "notes": "You must live in the county itself rather than in one of its towns or villages, and either be on track to graduate or have graduated within the last two years, with an application already in to a post-secondary institution. The county says marks are not the main test: it is looking for a demonstrated commitment to the community. Applications close June 30. Lamont County also keeps a useful page of outside awards open to its students.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1299,
+    "title": "Peace River Agricultural Society Bursary",
+    "amount": "$500",
+    "deadline": "2026-11-30",
+    "openDate": null,
+    "audience": "Peace Country residents aged 25 and under, with agriculture courses preferred",
+    "url": "https://www.peaceriveragsociety.com/bursarys",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Three $500 bursaries a year from the Peace River Agricultural Society for young people in the Peace Country taking an educational course or pursuing sport, with agriculture given priority.",
+    "notes": "Three intake dates each year: March 30, July 31 and November 30. You must be 25 or younger on the date you apply and live in the Peace Country, which the society defines as Grande Prairie, the County of Grande Prairie No. 1, Peace River, the MD of Peace, the MD of Greenview, the MD of Northern Lights, Clear Hills County, Saddle Hills County, Grimshaw or the MD of Smoky River. Agriculture-focused courses get priority. Winners complete at least 50 volunteer hours with an approved agricultural non-profit before the money is paid out. Send a one page letter with proof of registration and your costs.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "agriculture"
+      ]
+    }
+  },
+  {
+    "id": 1300,
+    "title": "Beaver County Agricultural Service Board Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-09-01",
+    "openDate": null,
+    "audience": "Beaver County residents in a post-secondary agriculture program of two years or more",
+    "url": "https://www.beaver.ab.ca/residents/scholarships-awards",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "Beaver County’s Agricultural Service Board sponsors a yearly scholarship for county students studying something tied to the agriculture industry.",
+    "notes": "You must be a current resident of Beaver County and enrolled in a post-secondary agriculture-related program that runs two years or longer, so a Grade 12 applies for the program they are starting. The value moves: council sets a pot each year and splits it equally between eligible applicants, which means a single eligible applicant can receive the whole budget. You can only win it once for the same program. Applications go to the county’s agricultural fieldman by September 1.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1301,
+    "title": "Ed Stelmach Community Foundation Scholarship",
+    "amount": "$2,750",
+    "deadline": "2027-05-01",
+    "openDate": null,
+    "audience": "Grade 12 students in Lamont, Two Hills, Fort Saskatchewan, Tofield, Viking, Vegreville and New Myrnam",
+    "url": "https://edstelmachfoundation.com/scholarships/",
+    "category": "Academic",
+    "region": "Alberta",
+    "active": true,
+    "description": "The foundation started by former premier Ed Stelmach awards three $2,750 scholarships a year to Grade 12 students from a set list of communities northeast of Edmonton.",
+    "notes": "Open to students finishing Grade 12 at a public or Catholic high school in Lamont, Two Hills, Fort Saskatchewan, New Myrnam, Tofield, Viking or Vegreville. You need at least 80 percent in Social Studies, acceptance at a post-secondary institution, a 500 word essay covering your goals, your community involvement, hardship you have come through and your financial need, and a reference letter from someone in your community. Applications are mailed and have to arrive by May 1.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1321,
+    "title": "Greenview Post-Secondary Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-06-30",
+    "openDate": null,
+    "audience": "MD of Greenview residents, or students whose parents live there, entering post-secondary study",
+    "url": "https://mdgreenview.ab.ca/postsecondary-scholarships/",
+    "category": "Community",
+    "region": "Alberta",
+    "active": true,
+    "description": "The Municipal District of Greenview budgets money every year to help local students with post-secondary costs, including a $2,500 scholarship for students in a degree program.",
+    "notes": "Policy 8008 counts you as a resident if you live in Greenview, normally live there, or your parents live there, so a student who moves away to study still qualifies. Applications close June 30 each year, and you can apply again every year you stay enrolled. Council sets aside $25,000 a year for the degree stream. The policy runs a second stream for trade, diploma, certificate and apprenticeship programs, but the value of that one is not stated in the policy document, so confirm the figure with Greenview rather than planning around a number. If you accept the scholarship and then do not attend, the money goes back to the municipality.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
