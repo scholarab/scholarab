@@ -17,17 +17,17 @@ vi.mock('../../lib/rate-limit', () => ({
 vi.mock('../../lib/confirm-email', () => ({
   sendConfirmEmail: (...args: unknown[]) => state.send(...args),
 }));
-vi.mock('../../lib/data-loader', () => ({
-  loadScholarshipsFromJson: async () => [
+vi.mock('../../data/runtime-catalogue.json', () => ({ default: {
+  scholarships: [
     { id: 1, title: 'Example award', active: true, deadline: '2099-10-01' },
     { id: 3, title: 'Retired', active: false, deadline: '2099-10-01' },
     { id: 4, title: 'Expired', active: true, deadline: '2000-01-01' },
   ],
-  loadProgramsFromJson: async () => [
+  programs: [
     { id: 2, name: 'Example research', deadline: '2099-10-01' },
     { id: 5, name: 'TBA research', deadline: 'TBA' },
   ],
-}));
+} }));
 let pg: PGlite;
 beforeAll(async () => {
   pg = new PGlite();

@@ -1,0 +1,1357 @@
+{
+  "baselineCommit": "c2d93add997933b467e4c6105a5f5363e6eff9e3",
+  "auditDateUTC": "2026-09-12",
+  "scope": "Isolated committed baseline; production unchanged. Browser responses are decoded bytes; compression figures are local.",
+  "runtime": {
+    "node": "24.14.0",
+    "npm": "11.9.0",
+    "hostedNode": "22"
+  },
+  "verification": {
+    "unitTests": 915,
+    "unitFiles": 46,
+    "astroFiles": 181,
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "browserPassed": 34,
+    "browserSkipped": 2,
+    "runtimeAlertTests": 26
+  },
+  "timingSeconds": {
+    "cleanInstall": 16.78,
+    "coldCi": 206.94,
+    "warmCi": 38.92,
+    "browserSuite": 20.31
+  },
+  "advisories": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 2,
+      "high": 4,
+      "critical": 1,
+      "total": 7
+    },
+    "dependencies": {
+      "prod": 341,
+      "dev": 321,
+      "optional": 127,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 770
+    }
+  },
+  "artifacts": {
+    "pages": {
+      "index.html": {
+        "raw": 36864,
+        "gzip": 7118,
+        "brotli": 5730,
+        "elements": 425,
+        "savedCards": 0,
+        "savedCardBytes": 0,
+        "scripts": [
+          "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "https://static.cloudflareinsights.com/beacon.min.js",
+          "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js",
+          "/_astro/index.astro_astro_type_script_index_0_lang.DojiuQoh.js"
+        ]
+      },
+      "scholarships/index.html": {
+        "raw": 1994064,
+        "gzip": 248829,
+        "brotli": 182486,
+        "elements": 16077,
+        "savedCards": 0,
+        "savedCardBytes": 0,
+        "scripts": [
+          "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "https://static.cloudflareinsights.com/beacon.min.js",
+          "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "/_astro/ScholarshipDirectory.astro_astro_type_script_index_0_lang.DLZj_tM_.js",
+          "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js"
+        ]
+      },
+      "programs/index.html": {
+        "raw": 279714,
+        "gzip": 46113,
+        "brotli": 35412,
+        "elements": 2413,
+        "savedCards": 0,
+        "savedCardBytes": 0,
+        "scripts": [
+          "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "https://static.cloudflareinsights.com/beacon.min.js",
+          "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "/_astro/ProgramDirectory.astro_astro_type_script_index_0_lang.D9jUSPuI.js",
+          "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js"
+        ]
+      },
+      "saved/index.html": {
+        "raw": 1666434,
+        "gzip": 140926,
+        "brotli": 104138,
+        "elements": 18755,
+        "savedCards": 1251,
+        "savedCardBytes": 1668746,
+        "scripts": [
+          "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "https://static.cloudflareinsights.com/beacon.min.js",
+          "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "/_astro/SavedDirectory.astro_astro_type_script_index_0_lang.Cg8Qo9Cf.js",
+          "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js"
+        ],
+        "savedFragmentPrototype": {
+          "shellRaw": 20216,
+          "shellGzip": 4787,
+          "fourCardsRaw": 5432,
+          "fourCardsGzip": 2477,
+          "emptyElements": 248,
+          "reinsertedExactly": true
+        }
+      },
+      "match/index.html": {
+        "raw": 26104,
+        "gzip": 7549,
+        "brotli": 6151,
+        "elements": 237,
+        "savedCards": 0,
+        "savedCardBytes": 0,
+        "scripts": [
+          "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "https://static.cloudflareinsights.com/beacon.min.js",
+          "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js"
+        ]
+      },
+      "scholarships/aaaf-memorial-bursary/index.html": {
+        "raw": 26069,
+        "gzip": 5916,
+        "brotli": 4685,
+        "elements": 298,
+        "savedCards": 0,
+        "savedCardBytes": 0,
+        "scripts": [
+          "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "https://static.cloudflareinsights.com/beacon.min.js",
+          "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "/_astro/SabDetail.astro_astro_type_script_index_0_lang.DvyN5viU.js",
+          "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js"
+        ]
+      }
+    },
+    "bucket": {
+      ".txt": {
+        "files": 5,
+        "bytes": 12969
+      },
+      ".html": {
+        "files": 1323,
+        "bytes": 44241766
+      },
+      ".css": {
+        "files": 21,
+        "bytes": 180462
+      },
+      ".js": {
+        "files": 25,
+        "bytes": 445444
+      },
+      ".json": {
+        "files": 5,
+        "bytes": 891148
+      },
+      "other": {
+        "files": 2,
+        "bytes": 20399
+      },
+      "worker": {
+        "files": 1,
+        "bytes": 3808965
+      },
+      ".png": {
+        "files": 1122,
+        "bytes": 27202277
+      },
+      ".svg": {
+        "files": 2,
+        "bytes": 1903
+      },
+      ".ico": {
+        "files": 1,
+        "bytes": 4174
+      },
+      ".woff2": {
+        "files": 15,
+        "bytes": 258124
+      },
+      ".webp": {
+        "files": 3,
+        "bytes": 60568
+      },
+      ".xml": {
+        "files": 1,
+        "bytes": 201496
+      }
+    },
+    "totalFiles": 2526,
+    "totalBytes": 77329695,
+    "largest": [
+      {
+        "path": "dist/_worker.js/index.js",
+        "bytes": 3808965
+      },
+      {
+        "path": "dist/scholarships/index.html",
+        "bytes": 1994064
+      },
+      {
+        "path": "dist/saved/index.html",
+        "bytes": 1666434
+      },
+      {
+        "path": "dist/_astro/quiz-payload.CUXFy7s0.json",
+        "bytes": 824510
+      },
+      {
+        "path": "dist/scholarships/community/index.html",
+        "bytes": 568856
+      },
+      {
+        "path": "dist/deadlines/index.html",
+        "bytes": 326738
+      },
+      {
+        "path": "dist/scholarships/calgary/index.html",
+        "bytes": 295194
+      },
+      {
+        "path": "dist/scholarships/alberta/index.html",
+        "bytes": 289657
+      },
+      {
+        "path": "dist/programs/index.html",
+        "bytes": 279714
+      },
+      {
+        "path": "dist/scholarships/national/index.html",
+        "bytes": 250090
+      },
+      {
+        "path": "dist/scholarships/arts/index.html",
+        "bytes": 220032
+      },
+      {
+        "path": "dist/scholarships/stem/index.html",
+        "bytes": 212202
+      },
+      {
+        "path": "dist/sitemap.xml",
+        "bytes": 201496
+      },
+      {
+        "path": "dist/_astro/client.H9qOWt3O.js",
+        "bytes": 182480
+      }
+    ]
+  },
+  "browser": {
+    "/scholarships/": {
+      "elements": 16077,
+      "htmlBytes": 1994064,
+      "resourceCount": 24,
+      "local": [
+        {
+          "path": "/scholarships/",
+          "bytes": 1994064,
+          "type": "document"
+        },
+        {
+          "path": "/_astro/SabGuideRail.DfiFocfO.css",
+          "bytes": 1917,
+          "type": "stylesheet"
+        },
+        {
+          "path": "/_astro/SabHeader.2IGPOCJo.css",
+          "bytes": 62366,
+          "type": "stylesheet"
+        },
+        {
+          "path": "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "bytes": 15948,
+          "type": "script"
+        },
+        {
+          "path": "/fonts/instrument-serif-400.woff2",
+          "bytes": 15040,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-400.woff2",
+          "bytes": 14612,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-700.woff2",
+          "bytes": 14488,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/plex-mono-400.woff2",
+          "bytes": 10052,
+          "type": "font"
+        },
+        {
+          "path": "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "bytes": 1825,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/ScholarshipDirectory.astro_astro_type_script_index_0_lang.DLZj_tM_.js",
+          "bytes": 2703,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "bytes": 1692,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/scholarships.BmmGGiII.css",
+          "bytes": 48,
+          "type": "stylesheet"
+        },
+        {
+          "path": "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js",
+          "bytes": 1002,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/list-core.DTr5Bq-M.js",
+          "bytes": 5568,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/directory-client.CkaxTjBZ.js",
+          "bytes": 5255,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/events.Bj9iYXNt.js",
+          "bytes": 1690,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/tracker.Bc4I5Dt7.js",
+          "bytes": 3513,
+          "type": "script"
+        },
+        {
+          "path": "/fonts/archivo-800.woff2",
+          "bytes": 14436,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-500.woff2",
+          "bytes": 14668,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-600.woff2",
+          "bytes": 13820,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/manrope-600.woff2",
+          "bytes": 14148,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/plex-mono-500.woff2",
+          "bytes": 10060,
+          "type": "font"
+        },
+        {
+          "path": "/_astro/list-context.FVLB0ruV.js",
+          "bytes": 608,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/calendar.CtbyG5xT.js",
+          "bytes": 372,
+          "type": "script"
+        }
+      ],
+      "concludedCard": "  COMMUNITY OPENING SOON  TD Scholarships for Community Leadership Was $70,000 No longer accepting applications   NO FIXED DEADLINE   \u2606 Visit\u2197   ",
+      "filterHandlerMs": [
+        {
+          "q": "nursing",
+          "ms": 34.20000000298023
+        },
+        {
+          "q": "calgary",
+          "ms": 38.600000001490116
+        },
+        {
+          "q": "rotary",
+          "ms": 27.399999998509884
+        },
+        {
+          "q": "",
+          "ms": 353.3999999985099
+        },
+        {
+          "q": "medicine hat",
+          "ms": 16.69999999552965
+        },
+        {
+          "q": "arts",
+          "ms": 50.899999998509884
+        },
+        {
+          "q": "",
+          "ms": 325.8999999985099
+        }
+      ]
+    },
+    "/saved/": {
+      "elements": 18755,
+      "htmlBytes": 1666434,
+      "resourceCount": 20,
+      "local": [
+        {
+          "path": "/saved/",
+          "bytes": 1666434,
+          "type": "document"
+        },
+        {
+          "path": "/_astro/SabHeader.2IGPOCJo.css",
+          "bytes": 62366,
+          "type": "stylesheet"
+        },
+        {
+          "path": "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "bytes": 15948,
+          "type": "script"
+        },
+        {
+          "path": "/fonts/instrument-serif-400.woff2",
+          "bytes": 15040,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-400.woff2",
+          "bytes": 14612,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/plex-mono-400.woff2",
+          "bytes": 10052,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-700.woff2",
+          "bytes": 14488,
+          "type": "font"
+        },
+        {
+          "path": "/_astro/saved.Bnef3xeA.css",
+          "bytes": 41,
+          "type": "stylesheet"
+        },
+        {
+          "path": "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "bytes": 1825,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/SavedDirectory.astro_astro_type_script_index_0_lang.Cg8Qo9Cf.js",
+          "bytes": 11087,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "bytes": 1692,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js",
+          "bytes": 1002,
+          "type": "script"
+        },
+        {
+          "path": "/fonts/archivo-800.woff2",
+          "bytes": 14436,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-500.woff2",
+          "bytes": 14668,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-600.woff2",
+          "bytes": 13820,
+          "type": "font"
+        },
+        {
+          "path": "/_astro/tracker.Bc4I5Dt7.js",
+          "bytes": 3513,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/list-core.DTr5Bq-M.js",
+          "bytes": 5568,
+          "type": "script"
+        },
+        {
+          "path": "/fonts/manrope-600.woff2",
+          "bytes": 14148,
+          "type": "font"
+        },
+        {
+          "path": "/_astro/events.Bj9iYXNt.js",
+          "bytes": 1690,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/calendar.CtbyG5xT.js",
+          "bytes": 372,
+          "type": "script"
+        }
+      ]
+    },
+    "/match/": {
+      "elements": 267,
+      "htmlBytes": 26104,
+      "resourceCount": 27,
+      "local": [
+        {
+          "path": "/match/",
+          "bytes": 26104,
+          "type": "document"
+        },
+        {
+          "path": "/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js",
+          "bytes": 15948,
+          "type": "script"
+        },
+        {
+          "path": "/fonts/instrument-serif-400.woff2",
+          "bytes": 15040,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/instrument-serif-400i.woff2",
+          "bytes": 15684,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-400.woff2",
+          "bytes": 14612,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/plex-mono-400.woff2",
+          "bytes": 10052,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-700.woff2",
+          "bytes": 14488,
+          "type": "font"
+        },
+        {
+          "path": "/_astro/SabHeader.2IGPOCJo.css",
+          "bytes": 62366,
+          "type": "stylesheet"
+        },
+        {
+          "path": "/_astro/match.Os2T-tz-.css",
+          "bytes": 930,
+          "type": "stylesheet"
+        },
+        {
+          "path": "/_astro/SabHeader.astro_astro_type_script_index_0_lang.jMvIMIDh.js",
+          "bytes": 1825,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js",
+          "bytes": 1692,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/Layout.astro_astro_type_script_index_0_lang.DgqeZ1Um.js",
+          "bytes": 1002,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/QuizLoader.BRexj3Do.js",
+          "bytes": 18873,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/client.H9qOWt3O.js",
+          "bytes": 182480,
+          "type": "script"
+        },
+        {
+          "path": "/fonts/archivo-800.woff2",
+          "bytes": 14436,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-500.woff2",
+          "bytes": 14668,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/archivo-600.woff2",
+          "bytes": 13820,
+          "type": "font"
+        },
+        {
+          "path": "/fonts/manrope-600.woff2",
+          "bytes": 14148,
+          "type": "font"
+        },
+        {
+          "path": "/_astro/jsx-runtime.DXco-PnT.js",
+          "bytes": 531,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/events.Bj9iYXNt.js",
+          "bytes": 1690,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/index.tKE6ZPn1.js",
+          "bytes": 7798,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/quiz.CpfQb-bz.js",
+          "bytes": 5062,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/calendar.CtbyG5xT.js",
+          "bytes": 372,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/list-core.DTr5Bq-M.js",
+          "bytes": 5568,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/tracker.Bc4I5Dt7.js",
+          "bytes": 3513,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/index.DJhp4BMD.js",
+          "bytes": 3706,
+          "type": "script"
+        },
+        {
+          "path": "/_astro/quiz-payload.CUXFy7s0.json",
+          "bytes": 824510,
+          "type": "fetch"
+        }
+      ]
+    }
+  },
+  "removals": {
+    "ga": {
+      "baseline": {
+        "initial": 3,
+        "afterNavigation": 4,
+        "denialUpdates": 0
+      },
+      "deletedDuplicateCalls": {
+        "initial": 1,
+        "afterNavigation": 2,
+        "denialUpdates": 0
+      }
+    },
+    "sw": {
+      "baseline": {
+        "installRequests": [
+          "/",
+          "/scholarships/",
+          "/programs/",
+          "/saved/",
+          "/about/",
+          "/offline"
+        ],
+        "offlineScholarships": "/scholarships/"
+      },
+      "deletedPageSeeds": {
+        "installRequests": [
+          "/offline"
+        ],
+        "offlineScholarships": "/offline"
+      }
+    }
+  },
+  "encoderSamples": [
+    {
+      "file": "1989-alberta-summer-games-athletics-scholarship.png",
+      "variants": {
+        "1": {
+          "ms": 15.271832999999958,
+          "bytes": 42013
+        },
+        "3": {
+          "ms": 14.652415999999903,
+          "bytes": 37718
+        },
+        "6": {
+          "ms": 16.03591700000004,
+          "bytes": 26104
+        },
+        "9": {
+          "ms": 27.75145800000007,
+          "bytes": 24321
+        },
+        "native": {
+          "ms": 13.829208999999992,
+          "bytes": 40187
+        }
+      }
+    },
+    {
+      "file": "bchs-construction-scholarship.png",
+      "variants": {
+        "1": {
+          "ms": 5.699292000000014,
+          "bytes": 38640
+        },
+        "3": {
+          "ms": 6.884082999999919,
+          "bytes": 34694
+        },
+        "6": {
+          "ms": 11.379165999999941,
+          "bytes": 23500
+        },
+        "9": {
+          "ms": 22.91854199999989,
+          "bytes": 21726
+        },
+        "native": {
+          "ms": 8.598500000000058,
+          "bytes": 35830
+        }
+      }
+    },
+    {
+      "file": "canadian-association-of-petroleum-producers-endowed-award.png",
+      "variants": {
+        "1": {
+          "ms": 8.286415999999917,
+          "bytes": 48403
+        },
+        "3": {
+          "ms": 10.697583000000122,
+          "bytes": 43335
+        },
+        "6": {
+          "ms": 11.731125000000247,
+          "bytes": 31331
+        },
+        "9": {
+          "ms": 30.668958000000202,
+          "bytes": 29680
+        },
+        "native": {
+          "ms": 8.727916000000278,
+          "bytes": 48071
+        }
+      }
+    },
+    {
+      "file": "daughters-of-wisdom-social-justice-award.png",
+      "variants": {
+        "1": {
+          "ms": 7.873541999999816,
+          "bytes": 43228
+        },
+        "3": {
+          "ms": 87.021209,
+          "bytes": 38618
+        },
+        "6": {
+          "ms": 12.833000000000084,
+          "bytes": 27132
+        },
+        "9": {
+          "ms": 24.40195900000026,
+          "bytes": 25243
+        },
+        "native": {
+          "ms": 8.622957999999926,
+          "bytes": 41214
+        }
+      }
+    },
+    {
+      "file": "fort-high-perseverance-and-dedication-award.png",
+      "variants": {
+        "1": {
+          "ms": 6.479415999999674,
+          "bytes": 42173
+        },
+        "3": {
+          "ms": 5.758166999999958,
+          "bytes": 37424
+        },
+        "6": {
+          "ms": 10.829208000000108,
+          "bytes": 26399
+        },
+        "9": {
+          "ms": 23.414332999999715,
+          "bytes": 24720
+        },
+        "native": {
+          "ms": 8.537624999999935,
+          "bytes": 40487
+        }
+      }
+    },
+    {
+      "file": "inspiring-immigrant-award.png",
+      "variants": {
+        "1": {
+          "ms": 5.5015829999993,
+          "bytes": 38448
+        },
+        "3": {
+          "ms": 5.835959000000003,
+          "bytes": 34160
+        },
+        "6": {
+          "ms": 9.7984579999993,
+          "bytes": 23179
+        },
+        "9": {
+          "ms": 101.29725000000053,
+          "bytes": 21503
+        },
+        "native": {
+          "ms": 8.383249999999862,
+          "bytes": 35996
+        }
+      }
+    },
+    {
+      "file": "lacombe-district-chamber-of-commerce-annual-scholarship.png",
+      "variants": {
+        "1": {
+          "ms": 7.173749999999927,
+          "bytes": 46250
+        },
+        "3": {
+          "ms": 4.9849169999997684,
+          "bytes": 41008
+        },
+        "6": {
+          "ms": 9.644416999999521,
+          "bytes": 29223
+        },
+        "9": {
+          "ms": 24.197957999999744,
+          "bytes": 27273
+        },
+        "native": {
+          "ms": 9.090500000000247,
+          "bytes": 45629
+        }
+      }
+    },
+    {
+      "file": "marguerite-patricia-p-bannister-memorial-degree-awards-at-calgary-foundation.png",
+      "variants": {
+        "1": {
+          "ms": 74.91529199999968,
+          "bytes": 47794
+        },
+        "3": {
+          "ms": 5.109625000000051,
+          "bytes": 42416
+        },
+        "6": {
+          "ms": 10.178499999999985,
+          "bytes": 30922
+        },
+        "9": {
+          "ms": 25.836874999999964,
+          "bytes": 29409
+        },
+        "native": {
+          "ms": 8.453042000000096,
+          "bytes": 47720
+        }
+      }
+    },
+    {
+      "file": "pamela-jane-hardy-memorial-award.png",
+      "variants": {
+        "1": {
+          "ms": 5.546166999999514,
+          "bytes": 42292
+        },
+        "3": {
+          "ms": 6.561041999999361,
+          "bytes": 37815
+        },
+        "6": {
+          "ms": 9.509415999999874,
+          "bytes": 26470
+        },
+        "9": {
+          "ms": 23.324375000000146,
+          "bytes": 24705
+        },
+        "native": {
+          "ms": 9.321083999999246,
+          "bytes": 40558
+        }
+      }
+    },
+    {
+      "file": "royal-canadian-legion-branch-54-bursary.png",
+      "variants": {
+        "1": {
+          "ms": 9.784707999999227,
+          "bytes": 44000
+        },
+        "3": {
+          "ms": 5.265208000000712,
+          "bytes": 39234
+        },
+        "6": {
+          "ms": 9.308333000000857,
+          "bytes": 27723
+        },
+        "9": {
+          "ms": 26.023208000000523,
+          "bytes": 25782
+        },
+        "native": {
+          "ms": 8.713416999999026,
+          "bytes": 42490
+        }
+      }
+    },
+    {
+      "file": "suncor-energy-rick-george-leadership-award.png",
+      "variants": {
+        "1": {
+          "ms": 5.194041999999172,
+          "bytes": 44021
+        },
+        "3": {
+          "ms": 5.193042000000787,
+          "bytes": 39317
+        },
+        "6": {
+          "ms": 8.876792000000933,
+          "bytes": 27676
+        },
+        "9": {
+          "ms": 23.289709000000585,
+          "bytes": 25898
+        },
+        "native": {
+          "ms": 8.3577920000007,
+          "bytes": 42489
+        }
+      }
+    },
+    {
+      "file": "zutz-family-scholarship.png",
+      "variants": {
+        "1": {
+          "ms": 9.259416000000783,
+          "bytes": 35900
+        },
+        "3": {
+          "ms": 5.006708999999319,
+          "bytes": 32363
+        },
+        "6": {
+          "ms": 8.510583000001134,
+          "bytes": 21336
+        },
+        "9": {
+          "ms": 18.702500000001237,
+          "bytes": 19929
+        },
+        "native": {
+          "ms": 8.294583000000785,
+          "bytes": 32595
+        }
+      }
+    }
+  ],
+  "maintenanceBundles": [
+    {
+      "job": "prune-events",
+      "bytes": 202504,
+      "gzipBytes": 54968,
+      "packages": [
+        "node_modules/@neondatabase/serverless"
+      ]
+    },
+    {
+      "job": "send-alerts",
+      "bytes": 233148,
+      "gzipBytes": 60069,
+      "packages": [
+        "node_modules/@neondatabase/serverless",
+        "node_modules/astro",
+        "node_modules/drizzle-orm"
+      ]
+    },
+    {
+      "job": "check-links",
+      "bytes": 1019686,
+      "gzipBytes": 209480,
+      "packages": [
+        "node_modules/undici"
+      ]
+    }
+  ],
+  "retentionDryRun": {
+    "queryCount": 10,
+    "onlyExplainAndCounts": true,
+    "withoutNodeModules": true,
+    "exitCode": 0
+  },
+  "runtimeProjection": {
+    "workerBefore": 3808965,
+    "workerAfter": 2090593,
+    "publicFilesCompared": 2525,
+    "publicDifferences": []
+  },
+  "runtimeParity": {
+    "scholarships": 1122,
+    "programs": 129,
+    "fields": [
+      "id",
+      "deadline",
+      "active",
+      "title/name"
+    ],
+    "equal": true
+  },
+  "linkSchedulingModel": {
+    "listings": 1251,
+    "eligibleListings": 1232,
+    "uniqueUrls": 683,
+    "hosts": 382,
+    "largest": [
+      {
+        "host": "educationmatters.ca",
+        "urls": 116
+      },
+      {
+        "host": "studentaid.alberta.ca",
+        "urls": 23
+      },
+      {
+        "host": "rdpolytech.academicworks.ca",
+        "urls": 22
+      },
+      {
+        "host": "sascf.ca",
+        "urls": 16
+      },
+      {
+        "host": "burmanu.ca",
+        "urls": 14
+      },
+      {
+        "host": "epsb.ca",
+        "urls": 13
+      },
+      {
+        "host": "cfcab.ca",
+        "urls": 13
+      },
+      {
+        "host": "alberta.ca",
+        "urls": 10
+      }
+    ],
+    "projections": [
+      {
+        "assumedRequestMs": 200,
+        "batchBarrierMs": 157200,
+        "workQueueMs": 69400,
+        "longestFirstQueueMs": 69200
+      },
+      {
+        "assumedRequestMs": 1000,
+        "batchBarrierMs": 392400,
+        "workQueueMs": 163000,
+        "longestFirstQueueMs": 162000
+      },
+      {
+        "assumedRequestMs": 5000,
+        "batchBarrierMs": 1568400,
+        "workQueueMs": 631000,
+        "longestFirstQueueMs": 626000
+      }
+    ]
+  },
+  "publisherRuns": [
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-12T00:33:07Z",
+      "databaseId": 34662013038,
+      "updatedAt": "2026-09-12T00:33:15Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T22:27:44Z",
+      "databaseId": 34654102790,
+      "updatedAt": "2026-09-11T22:27:54Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T19:57:29Z",
+      "databaseId": 34641611629,
+      "updatedAt": "2026-09-11T19:57:39Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T17:16:59Z",
+      "databaseId": 34626800894,
+      "updatedAt": "2026-09-11T17:17:09Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T13:36:27Z",
+      "databaseId": 34605272916,
+      "updatedAt": "2026-09-11T13:36:38Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T09:02:42Z",
+      "databaseId": 34582182860,
+      "updatedAt": "2026-09-11T09:02:50Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T04:19:44Z",
+      "databaseId": 34561789759,
+      "updatedAt": "2026-09-11T04:20:13Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T23:56:00Z",
+      "databaseId": 34544302839,
+      "updatedAt": "2026-09-10T23:56:37Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T21:55:44Z",
+      "databaseId": 34534795134,
+      "updatedAt": "2026-09-10T21:56:20Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T19:32:17Z",
+      "databaseId": 34520985431,
+      "updatedAt": "2026-09-10T19:32:53Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T16:57:40Z",
+      "databaseId": 34505269285,
+      "updatedAt": "2026-09-10T16:58:13Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T12:56:22Z",
+      "databaseId": 34479588187,
+      "updatedAt": "2026-09-10T12:56:55Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T08:10:33Z",
+      "databaseId": 34453751421,
+      "updatedAt": "2026-09-10T08:11:01Z"
+    }
+  ],
+  "ciRuns": [
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-12T04:33:15Z",
+      "databaseId": 34673307694,
+      "event": "push",
+      "updatedAt": "2026-09-12T04:36:00Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-12T04:27:45Z",
+      "databaseId": 34673059129,
+      "event": "push",
+      "updatedAt": "2026-09-12T04:30:40Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-12T04:09:18Z",
+      "databaseId": 34672255131,
+      "event": "push",
+      "updatedAt": "2026-09-12T04:12:30Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-12T04:08:17Z",
+      "databaseId": 34672210974,
+      "event": "schedule",
+      "updatedAt": "2026-09-12T04:09:37Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-12T03:54:38Z",
+      "databaseId": 34671617996,
+      "event": "push",
+      "updatedAt": "2026-09-12T03:57:56Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T21:19:19Z",
+      "databaseId": 34648785804,
+      "event": "push",
+      "updatedAt": "2026-09-11T21:22:34Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T17:38:18Z",
+      "databaseId": 34628810770,
+      "event": "push",
+      "updatedAt": "2026-09-11T17:41:39Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T17:23:43Z",
+      "databaseId": 34627428335,
+      "event": "push",
+      "updatedAt": "2026-09-11T17:27:45Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T07:56:37Z",
+      "databaseId": 34576757374,
+      "event": "push",
+      "updatedAt": "2026-09-11T07:59:37Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T07:33:33Z",
+      "databaseId": 34574943544,
+      "event": "push",
+      "updatedAt": "2026-09-11T07:36:13Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T07:12:52Z",
+      "databaseId": 34573336249,
+      "event": "push",
+      "updatedAt": "2026-09-11T07:17:16Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T05:27:18Z",
+      "databaseId": 34566020917,
+      "event": "push",
+      "updatedAt": "2026-09-11T05:32:23Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T04:53:54Z",
+      "databaseId": 34563913446,
+      "event": "push",
+      "updatedAt": "2026-09-11T04:57:42Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T04:08:57Z",
+      "databaseId": 34561094998,
+      "event": "schedule",
+      "updatedAt": "2026-09-11T04:11:22Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-11T00:22:42Z",
+      "databaseId": 34546233399,
+      "event": "push",
+      "updatedAt": "2026-09-11T00:25:09Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T07:21:51Z",
+      "databaseId": 34449577320,
+      "event": "push",
+      "updatedAt": "2026-09-10T07:24:11Z"
+    },
+    {
+      "conclusion": "failure",
+      "createdAt": "2026-09-10T07:17:13Z",
+      "databaseId": 34449202117,
+      "event": "push",
+      "updatedAt": "2026-09-10T07:19:41Z"
+    },
+    {
+      "conclusion": "failure",
+      "createdAt": "2026-09-10T07:10:20Z",
+      "databaseId": 34448639769,
+      "event": "push",
+      "updatedAt": "2026-09-10T07:12:43Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T07:03:51Z",
+      "databaseId": 34448106202,
+      "event": "push",
+      "updatedAt": "2026-09-10T07:06:21Z"
+    },
+    {
+      "conclusion": "success",
+      "createdAt": "2026-09-10T06:54:08Z",
+      "databaseId": 34447329621,
+      "event": "push",
+      "updatedAt": "2026-09-10T06:56:33Z"
+    }
+  ],
+  "quizPooling": {
+    "original": {
+      "raw": 824510,
+      "gzip": 95228,
+      "brotli": 73821
+    },
+    "pooled": {
+      "raw": 648140,
+      "gzip": 91813,
+      "brotli": 72204
+    },
+    "criteriaCount": 609,
+    "scholarships": 1122,
+    "roundTripEqual": true
+  }
+}

@@ -11,3 +11,15 @@ export function groupLinkTargets(items: LinkItem[]): Map<string, LinkItem[]> {
   }
   return targets;
 }
+
+/** Refill a free host slot immediately; one slow host must not hold a batch. */
+export async function forEachHost<T>(
+  hosts: readonly T[], concurrency: number, check: (host: T) => Promise<void>,
+): Promise<void> {
+  if (!Number.isSafeInteger(concurrency) || concurrency < 1)
+    throw new Error('Host concurrency must be a positive integer');
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(concurrency, hosts.length) }, async () => {
+    while (next < hosts.length) await check(hosts[next++]!);
+  }));
+}

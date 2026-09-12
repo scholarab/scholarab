@@ -2,7 +2,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { publicationPending } from '../../scripts/publication-pending.mjs';
 import { livePublicationMatches } from '../../scripts/live-publication';
-import { groupLinkTargets } from '../../scripts/link-targets';
+import { groupLinkTargets, forEachHost } from '../../scripts/link-targets';
 import { parseMessage } from '../lib/parse-message';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
@@ -83,6 +83,35 @@ describe('deployment readiness', () => {
 });
 
 describe('deduplicated link checks', () => {
+  it('starts the next host as soon as a slot is free, checks all hosts once and stays bounded', async () => {
+    vi.useFakeTimers();
+    const started: number[] = [];
+    const completed: number[] = [];
+    let active = 0, peak = 0;
+    const run = forEachHost(Array.from({ length: 19 }, (_, i) => i), 8, async host => {
+      started.push(host);
+      peak = Math.max(peak, ++active);
+      await new Promise(resolve => setTimeout(resolve, host === 0 ? 1000 : 10));
+      --active;
+      completed.push(host);
+    });
+    expect(started).toHaveLength(8);
+    await vi.advanceTimersByTimeAsync(10);
+    expect(started).toContain(8);
+    expect(completed).not.toContain(0);
+    await vi.runAllTimersAsync();
+    await run;
+    expect(peak).toBe(8);
+    expect(started).toEqual(Array.from({ length: 19 }, (_, i) => i));
+    expect(completed.sort((a, b) => a - b)).toEqual(started);
+  });
+  it('does not turn a failed host operation or invalid concurrency into a successful empty report', async () => {
+    await expect(forEachHost(['host'], 1, async () => { throw new Error('checker failed'); })).rejects.toThrow('checker failed');
+    const check = vi.fn();
+    await expect(forEachHost(['host'], 0, check)).rejects.toThrow('positive integer');
+    await forEachHost([], 8, check);
+    expect(check).not.toHaveBeenCalled();
+  });
   it('retains every listing while keeping different paths and queries separate', () => {
     const items = [
       { id: 1, label: 'A', url: 'https://example.com/award' },

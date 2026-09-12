@@ -1,5 +1,76 @@
 # ScholarAB simplification record
 
+## First implemented cuts — September 12, 2026 UTC
+
+This implementation follows the deep audit below, on an isolated branch from `41abc6a`. The shared checkout's reminder changes and desktop audit were left untouched. [Measured build evidence](audit-evidence/first-cuts-2026-09-12.json) records the baseline revision and the exact comparison scope.
+
+### 1. Requirements and student outcomes
+
+| Requirement challenged | Retained outcome | Unnecessary work removed |
+| --- | --- | --- |
+| Full editorial records in runtime reminder and analytics lookups | Reminders resolve every published ID with its exact label, availability and deadline; analytics names the same records. Drafts stay separate. | Runtime imports of the complete catalogue and its loader. |
+| Several analytics initialization functions | Count each consenting visitor's page once and honor a later denial. | Duplicate initial calls and overlapping consent/event paths. |
+| Wait for every host in an eight-host batch | Check every distinct URL without concurrent requests to one provider. | The global batch barrier; free slots start the next host immediately. |
+
+### 2. Remove first and record add-backs
+
+The compact catalogue prototype and analytics deletion probe survived the deep audit's retained-behavior checks; this pass integrates them into the real build lifecycle and browser behavior. The host queue removes a scheduling dependency while retaining the same URLs, exclusions, request spacing, retry limit and reports. No public listing, copy, layout, font, saved ID, quiz field, retention operation or publication reconciliation was removed.
+
+The audit experiment pool remains **3 required restorations / 8 attempted removals = 37.5% add-back**. These three implementation cuts needed **0 additional restorations / 3 cuts**; that separate ratio is 0%, not a new claim of meeting the target. Do not invent regressions or count added tests as restored parts. The already demonstrated offline-directory, dependency-compatibility and image-size regressions justify the audit's retained components.
+
+### 3. Repair attempts and final failure behavior
+
+No product repair failed three times in this pass. The first public-output comparison rejected `_routes.json`; inspection proved that only the order of its 38 exclusion entries changed. The revised comparison requires the entire parsed object to match after sorting that one list. It still requires exact HTML bytes after normalizing only the intended analytics asset filename. This is a corrected measurement assumption, not a restored product requirement.
+
+Catalogue generation rejects invalid/truncated inputs before writing generated payloads. Existing publication request identity and the full-catalogue hash remain intact. Link requests retain the existing maximum of three attempts, timeouts and visible final verdicts. Optional-service failure never removes student content.
+
+### 4. Simplify surviving implementations
+
+One generator reads and validates the JSON authority, writes the unchanged legacy quiz shape plus the four-field runtime projection, and stamps the existing publication marker. Build/dev/type-check/test entry points generate these ignored files, including in a clean checkout. One host-worker loop replaces fixed batches. One analytics consent transition handles both navigation and the banner; a previous grant can be disabled without a reload.
+
+### 5. Measure the reduction
+
+| Metric | Before | After | Evidence and limits |
+| --- | --- | --- | --- |
+| Local Worker output, raw file bytes | 3,827,517 | 2,093,888 | **45.29% smaller**, measured from two production builds on the same revision. Not a request-latency or hosting-cost claim. |
+| Initial page-view commands for returning consent | 3 | 1 | **66.67% fewer**. Baseline component model; replacement verified against the built site on desktop and mobile with Google requests intercepted. |
+| Link-check completion model, 1 s per request | 398.2 s | 163.0 s | **59.07% shorter projected cycle**, with all 693 eligible unique URLs retained. At 0.25 s and 5 s assumptions, reductions are 56.74% and 60.42%. Real network and hosted timing remain unmeasured. |
+| Public output files | 2,549 | 2,549 | 1,213 byte-identical files; 1,334 HTML files differ only in the analytics script fingerprint; one script replaced; routing exclusions identical except ordering. Quiz assets, content, styles, fonts and images remain identical. |
+| Published identities | 1,134 scholarships + 129 programs | Same | Projection equality checked for every record. No data deletion. |
+
+The baseline warm local build took 11.48 s; the changed build passed, but no controlled whole-build speedup is claimed. Source/test/documentation lines grow in this pass. A 50% reduction in every metric has not been achieved.
+
+### 6. Automate only what survived
+
+Existing `npm run ci` and browser checks remain the release gates. Added checks cover generated catalogue equality and rejection of truncated input, host concurrency/refill/final failure, and real compiled consent/navigation behavior. No new scheduled job, connector or service was added. Google documents the [tag disable flag](https://developers.google.com/tag-platform/security/guides/privacy) and [consent updates](https://developers.google.com/tag-platform/security/guides/consent); local checks verify the commands and disable state, not Google's internal delivery.
+
+Focused verification passes: 44 unit tests in three files and four desktop/mobile analytics checks. `npm run ship-check -- origin/main` reported `CHANGED 19 file(s)`, `RUN npm run ci` and `RUN npm run test:e2e`, with no FAIL lines. Both required commands pass: lint, **919 unit tests in 47 files**, full catalogue validation/build, Astro checks (184 files, zero errors/warnings; three hints in the historical probe script), scripts type checks, and **38 browser tests with two existing mobile skips**. Browser tests used an isolated local server (`CI=1`); no production API or GA collection traffic was sent by the new tests. Existing adapter deprecation/build warnings remain documented audit findings. This evidence validates the branch locally; it does not claim a main-branch merge or a production deployment.
+
+## Deep reduction audit — September 12, 2026 UTC (isolated prototypes)
+
+The [deep audit](deep-reduction-audit-2026-09-12.md) examines commit `c2d93ad`, with [durable measurements](audit-evidence/reduction-2026-09-12.json). The shared repository advanced during inspection; implementation must be verified against its eventual release revision. This pass adds audit evidence only. It does not alter deployed code, public content/design/fonts, the legacy quiz, live records, or scheduled processes. Existing local reminder edits and prior audit notes remain intact.
+
+**Retained outcomes:** students keep all opportunities and saved identities, exact public presentation, offline directory behavior, private quiz answers, correct availability, consent/unsubscribe, retention promises, and publication reconciliation. Smaller representations and fewer setup/duplicate operations serve those outcomes; a universal percentage is not permission to weaken them.
+
+Eight deletion experiments were attempted on the isolated baseline. **Three required restoration: 3/8 = 37.5% add-back within these experiments.** This is not a count of deployed deletions. Quiz pooling was also deferred for poor compressed savings, but is not counted as a failed-behavior restoration. The link scheduling model is a projection and is not included in this experiment denominator.
+
+| Removal candidate | Experiment result / decision |
+| --- | --- |
+| All unselected Saved-page cards | Shell plus four unchanged fragments: 140,926 → 7,264 gzip bytes (94.8% less); empty DOM 18,755 → 248 elements. Retain as a candidate; offline/error/interaction parity still required. |
+| Full catalogue records in runtime-only consumers | Worker 3,808,965 → 2,090,593 bytes (45.1% less); all 2,525 public output files identical, all 1,251 projected lookup records equal, 26 alert tests pass. Build lifecycle integration remains. |
+| Full application installation for retention | 202,504-byte bundled script executes its mocked dry-run without node_modules; only EXPLAIN and count queries. Hosted artifact retrieval and operation timing unmeasured. |
+| Duplicate initial GA page-view calls | Component model: three → one initial view; one view per subsequent navigation retained. Existing denial-update defect remains a separate fix. |
+| Service-worker page seeds | **Restore:** six → one install requests loses offline scholarship-directory content, returning only the generic fallback. |
+| Peer-dependency suppression | **Restore pending compatible upgrade:** strict resolution rejects Astro 6.4.8 with the adapter's declared Astro 5 peer requirement. |
+| Custom RGB PNG encoding | **Restore:** native encoding preserves pixels but increases sampled bytes 64.3%. After restoration, level-6 encoding cuts sampled encoding time 65.4% with 6.9% larger images; not a whole-build claim. |
+| Repeated quiz eligibility objects | Lossless pooling passes equality, but only 3.6% gzip savings. Defer added format/decoder work; no functional failure counted. |
+
+**Cycle-time evidence:** baseline clean install 16.78 s; cold CI 206.94 s; warm CI 38.92 s; browser suite 20.31 s. These are local samples (Node 24; hosted workflows use Node 22), and cache savings already existed. A sampled hosted email job used 15 of 23 seconds installing dependencies; removal's hosted savings remain a projection after artifact retrieval costs. Replacing the link checker's eight-host batch barrier with a work queue projects 55.9–59.8% less wall time under three uniform-latency assumptions, preserving the same 683 URLs and per-host limits. No live link timing or cost reduction is claimed.
+
+**Repair attempts:** each adverse deletion probe was stopped and its retained implementation restored. Setup failures (local tar API, module resolution, repository selection, preview lifecycle) each received a different one-step correction; no product repair approach failed three times. Existing five-attempt loops and missing transport deadlines are documented for bounded replacements. Failed optional services must preserve content and unresolved publication/delivery state while exposing a final actionable failure.
+
+**Validation:** isolated baseline lint, 915 tests in 46 files, data validation, production build, Astro checks (181 files, zero errors/warnings/hints), and scripts type checks pass; browser suite has 34 passes and two existing mobile skips. Prototypes have only the additional checks explicitly described above. This is an audit, not a ship-ready implementation. Automate surviving replacements only after their behavior/output checks and measurements; reuse `npm run ci` and the release ship-check for any implementation. No new recurring automation was added.
+
 This pass follows the removal of the adaptive quiz in PR #23. The public catalogue, copy, design, layouts, fonts, and legacy quiz remain requirements. The goal is less machinery and work, not a smaller catalogue or fewer tests for retained behavior. A 50% cut in every individual metric is not established by this pass.
 
 ## 1. Requirements challenged

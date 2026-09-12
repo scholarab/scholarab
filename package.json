@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "TZ=America/Edmonton tsx scripts/validate-data.ts && TZ=America/Edmonton tsx scripts/generate-sitemap.ts && TZ=America/Edmonton tsx scripts/generate-og-images.ts && tsx scripts/generate-quiz-payload.ts && DATABASE_URL= TZ=America/Edmonton astro build",
+    "build": "TZ=America/Edmonton tsx scripts/validate-data.ts && TZ=America/Edmonton tsx scripts/generate-sitemap.ts && TZ=America/Edmonton tsx scripts/generate-og-images.ts && tsx scripts/generate-catalogue-payloads.ts && DATABASE_URL= TZ=America/Edmonton astro build",
     "preview": "astro preview",
     "auto-expire": "tsx scripts/auto-expire.ts",
     "sitemap": "TZ=America/Edmonton tsx scripts/generate-sitemap.ts",
@@ -12,6 +12,7 @@
     "check-copies": "tsx scripts/check-copies.ts",
     "sync-db": "tsx scripts/sync-db.ts",
     "check-outreach": "TZ=America/Edmonton tsx scripts/check-outreach.ts",
+    "pretest": "tsx scripts/generate-catalogue-payloads.ts",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "lint": "eslint src",
@@ -25,8 +26,8 @@
     "indexnow": "TZ=America/Edmonton tsx scripts/submit-indexnow.ts",
     "index-status": "TZ=America/Edmonton tsx scripts/index-status.ts",
     "gsc-months": "TZ=America/Edmonton tsx scripts/gsc-months.ts",
-    "predev": "tsx scripts/generate-quiz-payload.ts",
-    "pretype-check": "tsx scripts/generate-quiz-payload.ts",
+    "predev": "tsx scripts/generate-catalogue-payloads.ts",
+    "pretype-check": "tsx scripts/generate-catalogue-payloads.ts",
     "migrate-db": "tsx scripts/migrate-db.ts",
     "publish-drafts": "tsx scripts/publish-drafts.ts",
     "ship-check": "sh .agents/skills/ship-check/scripts/ship-check.sh"

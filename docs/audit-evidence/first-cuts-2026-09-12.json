@@ -1,0 +1,79 @@
+{
+  "baseline_revision": "41abc6a8abb303c712910600f762f8093885794e",
+  "scope": "local builds, no hosted timing or real GA/link requests",
+  "worker_raw_bytes": {
+    "before": 3827517,
+    "after": 2093888,
+    "reduction_percent": 45.29
+  },
+  "public_files": {
+    "before": 2549,
+    "after": 2549,
+    "identical": 1213,
+    "html_differing_only_in_analytics_asset_reference": 1334,
+    "routing_exclusions_reordered_only": [
+      "_routes.json"
+    ],
+    "replaced_assets": {
+      "before": [
+        "_astro/Analytics.astro_astro_type_script_index_0_lang.DaJ5cNIc.js"
+      ],
+      "after": [
+        "_astro/Analytics.astro_astro_type_script_index_0_lang.CKomB8lP.js"
+      ]
+    },
+    "all_other_public_bytes_equal": true
+  },
+  "catalogue_records": {
+    "scholarships": 1134,
+    "programs": 129
+  },
+  "runtime_projection_bytes": 115493,
+  "link_scheduling_model": {
+    "unique_urls_checked": 693,
+    "host_groups_including_skipped": 406,
+    "host_concurrency": 8,
+    "per_host_delay_seconds": 0.4,
+    "scenarios": [
+      {
+        "assumed_request_seconds": 0.25,
+        "batch_seconds": 173.95,
+        "queue_seconds": 75.25,
+        "reduction_percent": 56.74
+      },
+      {
+        "assumed_request_seconds": 1,
+        "batch_seconds": 398.2,
+        "queue_seconds": 163.0,
+        "reduction_percent": 59.07
+      },
+      {
+        "assumed_request_seconds": 5,
+        "batch_seconds": 1594.2,
+        "queue_seconds": 631.0,
+        "reduction_percent": 60.42
+      }
+    ]
+  },
+  "browser_analytics": {
+    "first_page_views_before": 3,
+    "first_page_views_after": 1,
+    "reduction_percent": 66.67,
+    "new_desktop_mobile_tests_passed": 4,
+    "scope": "component baseline model and intercepted local browser; no Google collection requests"
+  },
+  "release_verification": {
+    "ship_check_base": "origin/main",
+    "ci": "passed",
+    "unit_tests": 919,
+    "unit_test_files": 47,
+    "astro_files": 184,
+    "astro_errors": 0,
+    "astro_warnings": 0,
+    "astro_hints": 3,
+    "browser_passed": 38,
+    "browser_existing_skips": 2,
+    "browser_elapsed_seconds": 24.0,
+    "production_deployed": false
+  }
+}
