@@ -186,11 +186,27 @@ describe('initSaved', () => {
 
     click($('[data-cal-add]'))
     expect(downloadICS).toHaveBeenCalledTimes(1)
-    expect($('[data-cal-add]').textContent).toBe('✓ Added to calendar')
+    // A download is all this does; the import happens in the student's calendar.
+    expect($('[data-cal-add]').textContent).toBe('✓ Calendar file downloaded')
 
     // Back to list view
     click($('[data-sv-view="list"]'))
     expect($('[data-sv-cal]').hidden).toBe(true)
     expect($('[data-sv-list]').hidden).toBe(false)
+  })
+
+  it('offers no calendar export when nothing saved carries a date', () => {
+    // An undated bookmark produces zero VEVENTs, so the export used to hand the
+    // student an empty 118-byte file and report "Added to calendar".
+    savedSch = [3]
+    mount()
+    // Added here rather than to the shared fixture, so the other tests keep
+    // counting exactly the cards they were written against.
+    $('[data-sv-sh-section] .sabl-grid').insertAdjacentHTML('beforeend', schWrap(3, 'Undated Award', null))
+    document.dispatchEvent(new Event('astro:page-load'))
+    click($('[data-sv-view="calendar"]'))
+    expect($('[data-sv-cal]').hidden).toBe(false)
+    expect(document.querySelector('[data-cal-add]')).toBeNull()
+    expect(downloadICS).not.toHaveBeenCalled()
   })
 })

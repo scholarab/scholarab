@@ -150,6 +150,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const transitionTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
   const mountedOnce = useRef(false)
   const questionHeadingRef = useRef<HTMLHeadingElement>(null)
+  const resultsHeadingRef = useRef<HTMLHeadingElement>(null)
 
   // The question list is not fixed: the board and school questions are
   // appended only once a city is chosen, and only when that city has awards
@@ -182,7 +183,15 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     }
     if (step < QUESTIONS.length) {
       questionHeadingRef.current?.focus({ preventScroll: true })
+      return
     }
+    // Completing the quiz kept the scroll position from the last question, so
+    // answering at the bottom of a long school list landed the student partway
+    // down the results with the headline and highest-ranked matches above the
+    // viewport. Scroll first, then focus without scrolling again, so the sticky
+    // header cannot end up covering the heading focus would have scrolled to.
+    window.scrollTo({ top: 0, behavior: 'auto' })
+    resultsHeadingRef.current?.focus({ preventScroll: true })
   }, [animKey, step, QUESTIONS.length])
 
   // Persist, including the completed state, so results survive a reload
@@ -381,7 +390,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <span>YOUR MATCHES</span>
         </div>
 
-        <h2 className="sabm-results-h1">
+        <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1">
           {headline}
         </h2>
 

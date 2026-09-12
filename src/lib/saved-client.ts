@@ -262,7 +262,13 @@ export function initSaved() {
       + '<span class="sabs-dot" style="background:#2FD3A0" aria-hidden="true"></span>'
       + '<span>DEADLINE CALENDAR</span>'
       + '</div>'
-      + `<button type="button" class="sabs-cal-add" data-cal-add>${calAdded ? '✓ Added to calendar' : 'Add to calendar'}</button>`
+      // No dated item means buildICS emits zero VEVENTs, so the export offered
+      // a 118-byte empty calendar and still reported success. Nothing to
+      // export, no button. "Downloaded" rather than "Added" because a download
+      // is all this does; the import happens in the student's own calendar.
+      + (byDate.size > 0
+        ? `<button type="button" class="sabs-cal-add" data-cal-add>${calAdded ? '✓ Calendar file downloaded' : 'Add to calendar'}</button>`
+        : '')
       + '</div>'
       + '<div class="sabs-cal-card">'
       + '<div class="sabs-cal-head">'
@@ -354,11 +360,16 @@ export function initSaved() {
     }
 
     if (t.closest('[data-cal-add]')) {
-      const { sch, prg } = calItems();
+      const { sch, prg, byDate } = calItems();
+      // byDate applies the same skip rules buildICS does, so an empty map means
+      // the file would carry zero VEVENTs. The button is not rendered in that
+      // case; this guards the stale-click path so success is never reported for
+      // an empty export.
+      if (byDate.size === 0) return;
       downloadICS(sch, prg);
       calAdded = true;
       const btn = root.querySelector('[data-cal-add]');
-      if (btn) btn.textContent = '✓ Added to calendar';
+      if (btn) btn.textContent = '✓ Calendar file downloaded';
       return;
     }
 

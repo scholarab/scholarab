@@ -16,6 +16,11 @@ export interface StatusInput {
   openDate?: string | null;
   deadline?: string | null;
   active?: boolean;
+  /**
+   * The provider has ended the program outright, so there is no next cycle to
+   * wait for. Distinct from `active: false`, which means "between cycles".
+   */
+  concluded?: boolean;
 }
 
 /** Precomputed ms fields from the directory payload, when the caller has them. */
@@ -29,6 +34,10 @@ export function scholarshipStatusOf(
   today: Date,
   { openMs, deadlineMs }: StatusHints = {},
 ): ScholarshipStatus {
+  // Ended for good, so no date can make it open again. Without this an ended
+  // award with no deadline falls through to the `active: false` branch below
+  // and renders "OPENING SOON", promising a cycle that will never come.
+  if (s.concluded === true) return 'closed';
   const todayMs = today.getTime();
   const open = openMs ?? new Date((s.openDate || '1970-01-01') + 'T00:00:00').getTime();
   if (todayMs < open) return 'future';

@@ -32,6 +32,19 @@ describe('scholarshipStatusOf', () => {
     const past = new Date('2026-01-01T00:00:00').getTime()
     expect(scholarshipStatusOf({ deadline: '2027-01-01' }, TODAY, { deadlineMs: past })).toBe('closed')
   })
+
+  it('is closed once the provider has ended the program, whatever the dates say', () => {
+    // The case that made TD's ended award read "OPENING SOON": no deadline, so
+    // the `active: false` branch classed it as a next-cycle listing, and its
+    // value summed into the directory's "opening in a later cycle" total.
+    expect(scholarshipStatusOf({ concluded: true }, TODAY)).toBe('closed')
+    expect(scholarshipStatusOf({ concluded: true, active: false }, TODAY)).toBe('closed')
+    expect(scholarshipStatusOf({ concluded: true, deadline: '2027-05-15' }, TODAY)).toBe('closed')
+  })
+
+  it('leaves an ordinary between-cycles listing alone', () => {
+    expect(scholarshipStatusOf({ deadline: '2027-05-15', active: false, concluded: false }, TODAY)).toBe('future')
+  })
 })
 
 describe('programStatusOf', () => {
@@ -58,6 +71,10 @@ describe('the sitemap/noindex contract', () => {
 
   it('drops a scholarship whose deadline passed with no next open date', () => {
     expect(scholarshipIsIndexable({ deadline: '2026-04-04' }, TODAY)).toBe(false)
+  })
+
+  it('drops a concluded scholarship, which has no next cycle to wait for', () => {
+    expect(scholarshipIsIndexable({ concluded: true }, TODAY)).toBe(false)
   })
 
   it('drops a program whose deadline passed before auto-expire reset it to TBA', () => {
