@@ -44363,5 +44363,169 @@
       "extracurriculars": []
     },
     "applyViaGuidance": false
+  },
+  {
+    "id": 1249,
+    "title": "Jake Weitz Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-03-01",
+    "openDate": null,
+    "audience": "Canadian students starting a mechanics program at a Canadian college or university",
+    "url": "https://www.jakeweitz.ca/how-to-apply",
+    "category": "Trades",
+    "region": "National",
+    "active": false,
+    "description": "A registered Canadian charity based in Didsbury, Alberta that pays $1,000 to students entering the mechanical trades. It awarded 13 scholarships in 2026 and 10 in 2025.",
+    "notes": "You apply for the program you are starting, not the one you are in: the form asks for proof of acceptance or enrolment in an accredited Canadian college or university mechanics program, so a Grade 12 applies in the winter before starting. Eligible paths include automotive service, heavy duty equipment, agricultural equipment and aviation maintenance technician. You need high school English, math, physics or science plus any related CTS courses. A 30 second to one minute video explaining your interest in mechanics is strongly recommended. Applications go through a Google form or a PDF emailed to the foundation by March 1, with winners notified by April 15. You can only receive this award once in your lifetime.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Trades",
+        "Automotive",
+        "Aviation"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1250,
+    "title": "Rick Blight Leadership in Action Scholarship for Athletes",
+    "amount": "$2,000",
+    "deadline": "2026-09-15",
+    "openDate": null,
+    "audience": "Canadian student athletes aged 16 to 21",
+    "url": "https://menshealthfoundation.ca/rick-blight-leadership/",
+    "category": "Sports",
+    "region": "National",
+    "active": true,
+    "description": "Three scholarships from Men's Health Foundation in memory of Rick Blight, for Canadian student athletes who show leadership in their sport and look after their own mental wellbeing or their team's. Two awards of $2,000 and one of $1,000.",
+    "notes": "Closes at 11:59 p.m. on September 15, 2026. You send in the questionnaire from the downloadable PDF, a high school or college transcript, a signed reference letter from a teacher or community leader, and a three to five minute video or audio recording about your involvement in sport and your volunteering. Everything goes to the foundation by email. The award has given out more than $55,000 since 2012, and current high school students qualify.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 16,
+      "maxAge": 21,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "Athletics"
+      ]
+    },
+    "metaDetail": "Two awards of $2,000 and one of $1,000."
+  },
+  {
+    "id": 1251,
+    "title": "James Lee Foundation Scholarship",
+    "amount": "$5,000",
+    "deadline": "2026-09-15",
+    "openDate": null,
+    "audience": "Canadian residents over 16 with a creative portfolio aimed at advertising",
+    "url": "https://jamesleefoundation.com/scholarship/",
+    "category": "Arts",
+    "region": "National",
+    "active": true,
+    "description": "The James Lee Foundation awards a minimum of $5,000 to emerging creative talent across Canada who want to work in advertising. Writers, art directors, film makers, recording artists, illustrators and digital artists all qualify.",
+    "notes": "Submissions run August 1 to September 15, 2026, and judging is finished by October 15. You upload a link to a portfolio of up to 10 pieces plus a statement of at most 1,000 characters on how the money would help your creative path. You must be a Canadian resident over 16 and not already working professionally in the field, so a Grade 12 student building a portfolio is exactly who this is for.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Arts",
+        "Communications"
+      ],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "arts"
+      ]
+    }
+  },
+  {
+    "id": 1271,
+    "title": "Niagara Region Right to Life Scholarship",
+    "amount": "$2,000",
+    "deadline": "2026-10-16",
+    "openDate": null,
+    "audience": "Grade 11 and 12 students attending a Canadian high school",
+    "url": "https://niagararegionrighttolife.ca/scholarship-program/",
+    "category": "Academic",
+    "region": "National",
+    "active": true,
+    "description": "An essay contest run by Niagara Region Right to Life, open to grade 11 and 12 students across Canada. Three prizes are awarded each year: $2,000, $1,500 and $1,000.",
+    "notes": "You submit a personal profile, a letter of recommendation and a 1,500 word essay by email, using the address printed on the official poster and brochure, by Friday October 16, 2026. Winners are announced by December 18, 2026. The 2026/2027 topic asks whether artificial intelligence is a force for good or a technology that undermines human dignity, and whether it changes how human beings are defined, reproduced and die, naming IVF, surrogacy, gene editing and embryo screening. The sponsor is an advocacy organisation and the essay is judged on how well you engage its questions, so read the brochure topic in full before you start. Students educated in Canada outside a high school may also enter.",
+    "applyViaGuidance": false,
+    "lastVerified": "2026-09",
+    "eligibility": {
+      "grades": [
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "writing"
+      ]
+    }
   }
 ]
