@@ -9864,47 +9864,6 @@
     "metaDetail": "Open to students registered in Grade 12 in the current."
   },
   {
-    "id": 281,
-    "title": "Skipping Stone Foundation Trans Community Award",
-    "amount": "$5,000",
-    "deadline": "2027-05-30",
-    "openDate": "2027-03-01",
-    "audience": "Grade 12 students at CBE and Calgary Catholic schools in Calgary",
-    "url": "https://www.educationmatters.ca/awards/skipping-stone-foundation-trans-community-award",
-    "category": "Community",
-    "lastVerified": "2026-09",
-    "region": "Calgary",
-    "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1. Confirm the date on the award page before you rely on it. Three rules apply to every EducationMatters award and are easy to miss: you must be 20 or younger as of September 1, you must not already be attending a post-secondary institution, and you must apply in your Grade 12 year. Once you leave high school you can no longer apply, so a gap year is fine only if you applied before you graduated.",
-    "applyViaGuidance": false,
-    "active": true,
-    "description": "Open to Grade 12 students who are completing the requirements of a high school diploma. Applicants must identify as a member of the transgender and gender diverse communities. Successful applicants are individuals who have made a meaningful contribution to individuals within the transgender and gender diverse communities.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [
-        "CBE",
-        "CCSD"
-      ],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": 20,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": []
-    },
-    "metaDetail": "Open to Grade 12 students who are completing."
-  },
-  {
     "id": 282,
     "title": "Steven Irving Memorial Music Scholarship",
     "amount": "$750",
@@ -19684,42 +19643,6 @@
       "Fort Saskatchewan",
       "Sherwood Park"
     ]
-  },
-  {
-    "id": 532,
-    "title": "John M. Kerr Memorial Bursary",
-    "amount": "$500 to $750",
-    "audience": "2SLGBTQIA+ students in any accredited Alberta post-secondary program",
-    "url": "https://iscwr.ca/bursary/",
-    "category": "General",
-    "lastVerified": "2026-09",
-    "region": "Alberta",
-    "notes": "The 2026 round is closed and recipients were announced at the court's coronation weekend in August, so the next intake opens in the new year. This is not a Fort Saskatchewan award, though Elk Island and Fort High both carry it on their lists; it is open across Alberta.",
-    "applyViaGuidance": true,
-    "active": true,
-    "description": "The Imperial Sovereign Court of the Wild Rose, an Edmonton charitable society that has been fundraising since 1976, grants these each year to students of the 2SLGBTQIA+ community entering any accredited post-secondary programme in Alberta. Bursaries are usually between $500 and $750, but the number and the amount both move with how much the court raises in a given year. The fund is managed by the court's own board of directors.",
-    "metaDetail": "Amounts vary with what the court raises each year.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "any",
-      "apprenticeship": false,
-      "extracurriculars": []
-    }
   },
   {
     "id": 533,
@@ -37939,45 +37862,6 @@
     "metaDetail": "Two streams: 80 per cent merit, or vocational."
   },
   {
-    "id": 993,
-    "title": "Local 38 2SLGBTQQIA+ Scholarship",
-    "amount": "Varies",
-    "deadline": "2027-05-31",
-    "openDate": null,
-    "audience": "2SLGBTQQIA+ students and allies at Calgary Board of Education schools",
-    "url": "https://ata38.smapply.ca/",
-    "category": "General",
-    "lastVerified": "2026-09",
-    "region": "Calgary",
-    "notes": "Allies are named in the criteria alongside students who identify as 2SLGBTQQIA+, which is rarer than it sounds and worth reading twice before you rule yourself out. Local 38 only lists its awards in the portal while they are open, so the value is not posted out of season; ask your scholarship coordinator. Local 38 runs its awards through a members-only portal, so the opening date is not published anywhere public; all four of its awards share the end-of-May closing date and one application site.",
-    "description": "One of four scholarships funded by Calgary Public Teachers, ATA Local 38, recognising outstanding merit in a 2SLGBTQQIA+ student or ally within the public board.",
-    "metaDetail": "Allies are eligible, not just members.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [
-        "CBE"
-      ],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": null,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "any",
-      "apprenticeship": false,
-      "extracurriculars": []
-    },
-    "active": true
-  },
-  {
     "id": 994,
     "title": "John Laurie Scholarship",
     "amount": "Varies",
@@ -41671,7 +41555,7 @@
     "category": "General",
     "region": "National",
     "description": "Twenty-four scholarships from the Public Service Alliance of Canada, fourteen of them reserved for dependent children of members, awarded on a written or creative submission rather than on grades.",
-    "notes": "Twenty-four awards in four buckets: 14 for dependent children of members heading to full-time study, 3 for members in full-time study, 2 for members part-time, and 5 for members or dependents who self-identify as a woman, Indigenous, a person with a disability, racialized or 2SLGBTQIA+. You must be a member, or the dependent child under 26 of a member, in good standing as of March 31 of the application year. Judged on the merit of a 750 to 850 word essay OR a creative submission: a video, infographic or song, up to five minutes, answering that year's set question. Not limited to first-year students, and past winners cannot win twice. PSAC does not publish the award value in its guidelines, so no figure is claimed here. The 2026 round closed June 22, 2026 and PSAC says the 2027 program opens in April. Verified against psacunion.ca and the PSAC scholarship guidelines on 2026-09-08.",
+    "notes": "Twenty-four awards in four buckets: 14 for dependent children of members heading to full-time study, 3 for members in full-time study, 2 for members part-time, and 5 for members or dependents who self-identify as a woman, Indigenous, a person with a disability or racialized. You must be a member, or the dependent child under 26 of a member, in good standing as of March 31 of the application year. Judged on the merit of a 750 to 850 word essay OR a creative submission: a video, infographic or song, up to five minutes, answering that year's set question. Not limited to first-year students, and past winners cannot win twice. PSAC does not publish the award value in its guidelines, so no figure is claimed here. The 2026 round closed June 22, 2026 and PSAC says the 2027 program opens in April. Verified against psacunion.ca and the PSAC scholarship guidelines on 2026-09-08.",
     "metaDetail": "A song or video counts as a submission, not just an essay.",
     "eligibility": {
       "grades": [
@@ -44361,7 +44245,8 @@
       "extracurriculars": [
         "writing"
       ]
-    }
+    },
+    "metaDetail": "Topics are youth social media limits or AI chatbot privacy."
   },
   {
     "id": 1227,
