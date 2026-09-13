@@ -1,5 +1,7 @@
+/** @jsxImportSource preact */
 import { todayDate } from '../lib/calendar'
-import { useState, useMemo, useCallback, useEffect, useRef, type ReactNode } from 'react'
+import { useState, useMemo, useCallback, useLayoutEffect, useRef } from 'preact/hooks'
+import type { ComponentChildren } from 'preact'
 import type { QuizScholarship as Scholarship, QuizProgram as Program } from '../lib/quiz-payload'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
@@ -111,11 +113,11 @@ function ResultRow({
   title: string
   titleHref: string
   subtitle?: string | null
-  tags: ReactNode
+  tags: ComponentChildren
   /** Why this one ranked here, in the student's own answers. */
   why?: string[]
-  amount: ReactNode
-  actions: ReactNode
+  amount: ComponentChildren
+  actions: ComponentChildren
   delay: number
 }) {
   return (
@@ -147,8 +149,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // Index of the tile just clicked; non-null while the step is animating out
   const [pendingTile, setPendingTile] = useState<number | null>(null)
   const [enterDir, setEnterDir] = useState<'fwd' | 'back'>('fwd')
-  const transitionTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const mountedOnce = useRef(false)
+  const transitionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const mountedOnceRef = useRef(false)
   const questionHeadingRef = useRef<HTMLHeadingElement>(null)
   const resultsHeadingRef = useRef<HTMLHeadingElement>(null)
 
@@ -170,15 +172,15 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     ]
   }, [answers.city, scholarships])
 
-  useEffect(() => () => {
-    if (transitionTimeout.current) clearTimeout(transitionTimeout.current)
+  useLayoutEffect(() => () => {
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
   }, [])
 
   // Focus question heading on step change for screen reader navigation.
-  // Skipped on first render so hydration doesn't steal focus from the page.
-  useEffect(() => {
-    if (!mountedOnce.current) {
-      mountedOnce.current = true
+  // Skipped on first render so mounting doesn't steal focus from the page.
+  useLayoutEffect(() => {
+    if (!mountedOnceRef.current) {
+      mountedOnceRef.current = true
       return
     }
     if (step < QUESTIONS.length) {
@@ -195,14 +197,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   }, [animKey, step, QUESTIONS.length])
 
   // Persist, including the completed state, so results survive a reload
-  useEffect(() => {
+  useLayoutEffect(() => {
     try { sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step, answers, savedAt: Date.now() })) } catch { /* ignore */ }
   }, [step, answers])
 
   function answer(key: string, value: string, index: number) {
     if (pendingTile !== null) return
     setPendingTile(index)
-    transitionTimeout.current = setTimeout(() => {
+    transitionTimeoutRef.current = setTimeout(() => {
       setPendingTile(null)
       setAnswers(a => {
         const next = { ...a, [key]: value }
@@ -230,7 +232,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
   function reset() {
     try { sessionStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
-    if (transitionTimeout.current) clearTimeout(transitionTimeout.current)
+    if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
     setPendingTile(null)
     setAnswers({})
     setEnterDir('fwd')
@@ -285,16 +287,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const today = todayDate()
     return scholarships.filter(s => !s.concluded && (!s.deadline || new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime()))
   }, [scholarships])
-  const scholarshipInputs = useMemo(
-    // deadline and amount are carried through for the tie-break in matchAll,
-    // not for matching: confidence takes few enough distinct values that most
-    // of the shown results are drawn from one tied block.
-    () => openScholarships.map(s => ({
-      id: s.id, region: s.region, alsoOpenTo: s.alsoOpenTo, eligibility: s.eligibility,
-      deadline: s.deadline, amount: s.amount,
-    })),
-    [openScholarships]
-  )
+  // deadline and amount are carried through for the tie-break in matchAll,
+  // not for matching: confidence takes few enough distinct values that most
+  // of the shown results are drawn from one tied block.
   const scholarshipMap = useMemo(
     () => new Map(openScholarships.map(s => [s.id, s])),
     [openScholarships]
@@ -306,14 +301,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
   const scholarshipResults = useMemo(() => {
     if (!profile || step < QUESTIONS.length || !showScholarships) return null
-    const all = matchAll(profile, scholarshipInputs).map(m => ({
+    const all = matchAll(profile, openScholarships).map(m => ({
       ...m,
       scholarship: scholarshipMap.get(m.id)!,
     })).filter(m => m.scholarship)
     const quality  = all.filter(r => r.tier !== 'possible')
     const possible = all.filter(r => r.tier === 'possible')
     return quality.length >= 5 ? quality.slice(0, RESULT_LIMIT) : [...quality, ...possible].slice(0, RESULT_LIMIT)
-  }, [profile, step, scholarshipInputs, scholarshipMap, showScholarships, QUESTIONS.length])
+  }, [profile, step, openScholarships, scholarshipMap, showScholarships, QUESTIONS.length])
 
   const programResults = useMemo(() => {
     if (step < QUESTIONS.length || !showPrograms) return null
@@ -355,7 +350,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   }, [])
 
   // Hide the static match-page intro when results are shown
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.body.classList.toggle('quiz-results', step >= QUESTIONS.length)
     return () => document.body.classList.remove('quiz-results')
   }, [step, QUESTIONS.length])

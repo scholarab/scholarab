@@ -1,0 +1,36 @@
+---
+interface Props { url: string }
+---
+<div data-quiz-url={Astro.props.url}><div role="status">Loading the scholarship quiz…</div></div>
+<script>
+  import { h, render } from 'preact';
+  import EligibilityQuiz from './EligibilityQuiz';
+  import type { quizPayload } from '../lib/quiz-payload';
+
+  document.addEventListener('astro:page-load', () => {
+    const host = document.querySelector<HTMLElement>('[data-quiz-url]');
+    if (!host) return;
+    let alive = true, pending = false;
+    async function load() {
+      if (pending) return;
+      pending = true;
+      try {
+        const res = await fetch(host!.dataset.quizUrl!);
+        if (!res.ok) throw new Error('Unable to load the matching data');
+        const data = await res.json() as ReturnType<typeof quizPayload>;
+        if (data.version !== 1 || !Array.isArray(data.scholarships) || !Array.isArray(data.programs))
+          throw new Error('Please reload to get the latest quiz');
+        if (alive) render(h(EligibilityQuiz, data), host!);
+      } catch (error) {
+        if (alive) render(h('div', { role: 'status' },
+          h('p', null, (error as Error).message),
+          h('button', { onClick: load }, 'Try again')), host!);
+      } finally { pending = false; }
+    }
+    void load();
+    document.addEventListener('astro:before-swap', () => {
+      alive = false;
+      render(null, host);
+    }, { once: true });
+  });
+</script>

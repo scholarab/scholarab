@@ -30,7 +30,8 @@
     "pretype-check": "tsx scripts/generate-catalogue-payloads.ts",
     "migrate-db": "tsx scripts/migrate-db.ts",
     "publish-drafts": "tsx scripts/publish-drafts.ts",
-    "ship-check": "sh .agents/skills/ship-check/scripts/ship-check.sh"
+    "ship-check": "sh .agents/skills/ship-check/scripts/ship-check.sh",
+    "measure:match": "MATCH_MEASURE=1 playwright test e2e/match-performance.spec.ts --project chromium --workers 1"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.13",
@@ -39,6 +40,7 @@
     "@tailwindcss/postcss": "^4.3.0",
     "astro": "^6.0.8",
     "drizzle-orm": "^0.45.2",
+    "preact": "^10.29.8",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sonner": "^2.0.7",

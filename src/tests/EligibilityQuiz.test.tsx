@@ -1,5 +1,14 @@
+/** @jsxImportSource preact */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, fireEvent, act, cleanup } from '@testing-library/react'
+import { screen, fireEvent as dispatch } from '@testing-library/dom'
+import { render as mount, type VNode } from 'preact'
+import { act } from 'preact/test-utils'
+
+const host = document.createElement('div')
+document.body.append(host)
+function render(node: VNode) { act(() => mount(node, host)) }
+function cleanup() { act(() => mount(null, host)) }
+const fireEvent = { click: (element: Element) => act(() => { dispatch.click(element) }) }
 import EligibilityQuiz from '../components/EligibilityQuiz'
 import type { ConfidenceTier } from '../lib/eligibility-types'
 // Type-only: erased at runtime, so it does not fight the vi.mock below. The
@@ -12,8 +21,9 @@ import { QUIZ_STORAGE_KEY, QUIZ_TTL_MS } from '../lib/quiz'
 
 const {
   mockMatchAll, mockGetSaved, mockToggleSaved, mockShowConfetti,
-  mockGetSavedPrograms, mockToggleSavedProgram, mockMatchPrograms,
+  mockGetSavedPrograms, mockToggleSavedProgram, mockMatchPrograms, mockSendEvent,
 } = vi.hoisted(() => ({
+  mockSendEvent: vi.fn(),
   mockMatchAll:     vi.fn(() => [] as ReturnType<typeof matchAll>),
   mockGetSaved:     vi.fn(() => [] as number[]),
   mockToggleSaved:  vi.fn(),
@@ -22,6 +32,8 @@ const {
   mockToggleSavedProgram: vi.fn(),
   mockMatchPrograms:      vi.fn(() => [] as Array<Record<string, unknown>>),
 }))
+
+vi.mock('../lib/events.ts', () => ({ sendEvent: mockSendEvent }))
 
 // matchPrograms (plural) is what the component actually imports; a mock named
 // matchProgram would leave it undefined and crash any program-results path.
@@ -568,5 +580,36 @@ describe('School question', () => {
     clickTile('Another school')
     const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]
     expect(profile.specificSchool).toBeNull()
+  })
+})
+
+
+describe('Operator completion events', () => {
+  it('counts the first and last committed answers at their original transition points', () => {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    expect(mockSendEvent).not.toHaveBeenCalled()
+    fireEvent.click(screen.getByText('Both'))
+    act(() => { vi.advanceTimersByTime(259) })
+    expect(mockSendEvent).not.toHaveBeenCalled()
+    act(() => { vi.advanceTimersByTime(1) })
+    expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
+    for (const text of ['Grade 12', 'Medicine Hat', 'Still figuring it out', "I'd rather not say"]) clickTile(text)
+    expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
+    fireEvent.click(screen.getByText('Not sure yet'))
+    act(() => { vi.advanceTimersByTime(259) })
+    expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
+    act(() => { vi.advanceTimersByTime(1) })
+    expect(mockSendEvent.mock.calls).toEqual([['quiz_start'], ['quiz_complete']])
+  })
+
+  it('does not count restored results or an answer cancelled by navigation', () => {
+    sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step: 6, answers: { city: 'Medicine Hat' }, savedAt: Date.now() }))
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    expect(mockSendEvent).not.toHaveBeenCalled()
+    fireEvent.click(screen.getByText('Retake quiz'))
+    fireEvent.click(screen.getByText('Both'))
+    cleanup()
+    act(() => { vi.runAllTimers() })
+    expect(mockSendEvent).not.toHaveBeenCalled()
   })
 })
