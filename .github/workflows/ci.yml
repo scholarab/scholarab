@@ -15,6 +15,10 @@ name: CI
 on:
   push:
     branches: [main]
+  # The same checks before merge, so a PR is validated before Cloudflare deploys
+  # it. The steps that write (data commit, DB mirror, IndexNow) skip PRs.
+  pull_request:
+    branches: [main]
   schedule:
     - cron: '0 0 * * *'   # Daily: sync scholarship active flags; a data commit triggers the CF Pages deploy
   workflow_dispatch:
@@ -26,8 +30,8 @@ on:
 # other; scheduled and manual runs never cancel, since they can be part way
 # through committing a data sync.
 concurrency:
-  group: ci-${{ github.event_name }}
-  cancel-in-progress: ${{ github.event_name == 'push' }}
+  group: ci-${{ github.event_name }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
 
 jobs:
   validate:
@@ -77,6 +81,7 @@ jobs:
       # deploys the fresh data. Do NOT tag it to skip "ci": Cloudflare honors
       # that form too and the deploy would be silently skipped.
       - name: Commit synced data
+        if: github.event_name != 'pull_request'
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
@@ -93,6 +98,7 @@ jobs:
       # can still serve the previous snapshot. A DB sync is not proof of a live
       # deploy, and publisher acknowledgment checks the public manifest itself.
       - name: Mirror latest validated JSON
+        if: github.event_name != 'pull_request'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
@@ -106,5 +112,6 @@ jobs:
       # The script verifies this exact publication and sitemap, with at most
       # three readiness checks. Failed announcements remain optional and visible.
       - name: Announce changed URLs (IndexNow)
+        if: github.event_name != 'pull_request'
         continue-on-error: true
         run: npm run indexnow

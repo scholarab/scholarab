@@ -1,6 +1,6 @@
 # ScholarAB simplification record
 
-## First implemented cuts — September 12, 2026 UTC
+## First implemented cuts: September 12, 2026 UTC
 
 This implementation follows the deep audit below, on an isolated branch from `41abc6a`. The shared checkout's reminder changes and desktop audit were left untouched. [Measured build evidence](audit-evidence/first-cuts-2026-09-12.json) records the baseline revision and the exact comparison scope.
 
@@ -46,7 +46,7 @@ Existing `npm run ci` and browser checks remain the release gates. Added checks 
 
 Focused verification passes: 44 unit tests in three files and four desktop/mobile analytics checks. `npm run ship-check -- origin/main` reported `CHANGED 19 file(s)`, `RUN npm run ci` and `RUN npm run test:e2e`, with no FAIL lines. Both required commands pass: lint, **919 unit tests in 47 files**, full catalogue validation/build, Astro checks (184 files, zero errors/warnings; three hints in the historical probe script), scripts type checks, and **38 browser tests with two existing mobile skips**. Browser tests used an isolated local server (`CI=1`); no production API or GA collection traffic was sent by the new tests. Existing adapter deprecation/build warnings remain documented audit findings. This evidence validates the branch locally; it does not claim a main-branch merge or a production deployment.
 
-## Deep reduction audit — September 12, 2026 UTC (isolated prototypes)
+## Deep reduction audit: September 12, 2026 UTC (isolated prototypes)
 
 The [deep audit](deep-reduction-audit-2026-09-12.md) examines commit `c2d93ad`, with [durable measurements](audit-evidence/reduction-2026-09-12.json). The shared repository advanced during inspection; implementation must be verified against its eventual release revision. This pass adds audit evidence only. It does not alter deployed code, public content/design/fonts, the legacy quiz, live records, or scheduled processes. Existing local reminder edits and prior audit notes remain intact.
 
@@ -70,6 +70,10 @@ Eight deletion experiments were attempted on the isolated baseline. **Three requ
 **Repair attempts:** each adverse deletion probe was stopped and its retained implementation restored. Setup failures (local tar API, module resolution, repository selection, preview lifecycle) each received a different one-step correction; no product repair approach failed three times. Existing five-attempt loops and missing transport deadlines are documented for bounded replacements. Failed optional services must preserve content and unresolved publication/delivery state while exposing a final actionable failure.
 
 **Validation:** isolated baseline lint, 915 tests in 46 files, data validation, production build, Astro checks (181 files, zero errors/warnings/hints), and scripts type checks pass; browser suite has 34 passes and two existing mobile skips. Prototypes have only the additional checks explicitly described above. This is an audit, not a ship-ready implementation. Automate surviving replacements only after their behavior/output checks and measurements; reuse `npm run ci` and the release ship-check for any implementation. No new recurring automation was added.
+
+## Desktop UX audit: September 11, 2026 (no implementation changes)
+
+The [desktop audit](desktop-ux-audit-2026-09-11.md) records live Mac/Firefox reproductions and student outcomes. Removal candidates for a repair pass are the calendar export action when it has no dated events, self-linking previous/next arrows for one-result lists, and duplicate availability interpretations across directory/detail/match surfaces. These are proposals, not completed removals. Public content and the legacy quiz were retained; no repair attempts or removal experiments were performed. Add-back fraction is not applicable (zero attempted removals), and no cycle-time or hosted performance improvement is claimed. Measured audit evidence includes a 118-byte calendar export containing zero events and return navigation expanding a one-result search back to 1118 listings. No new automation was added.
 
 This pass follows the removal of the adaptive quiz in PR #23. The public catalogue, copy, design, layouts, fonts, and legacy quiz remain requirements. The goal is less machinery and work, not a smaller catalogue or fewer tests for retained behavior. A 50% cut in every individual metric is not established by this pass.
 

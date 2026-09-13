@@ -4,7 +4,7 @@ Public pages, saved IDs, quiz matching and reminders use the committed JSON cata
 
 ## Editing and publishing
 
-Admin search and pagination operate on the entire catalogue. Every update/delete requires the row revision. A conflict keeps the unsaved form visible. Edits—including deletions—remain drafts until **Review and publish**, followed by **Publish these changes**, queues their exact revisions. Later edits are not included in that request.
+Admin search and pagination operate on the entire catalogue. Every update/delete requires the row revision. A conflict keeps the unsaved form visible. Edits (including deletions) remain drafts until **Review and publish**, followed by **Publish these changes**, queues their exact revisions. Later edits are not included in that request.
 
 The **Publish admin drafts** workflow checks the queue every 15 minutes (GitHub schedules may run late), or can be started through GitHub's workflow-dispatch UI. It merges independent JSON changes, rejects conflicting field edits, generates rename/deletion redirects, validates and builds, commits, and pushes without force. It then verifies the request ID in the live `/publication.json` artifact. A commit or accepted deploy hook alone is never shown as “published.” Failed requests retain their drafts; correct the reported problem and queue again.
 

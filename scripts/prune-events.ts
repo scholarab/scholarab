@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Housekeeping for the first-party analytics tables. Safe to re-run; runs
-// monthly via .github/workflows/prune-events.yml and by hand when needed.
+// daily via .github/workflows/prune-events.yml and by hand when needed.
 //
 //   1. Retention: events older than 180 days (dashboard reads 30)
 //   2. Junk search_empty rows that predate the server-side hygiene rules
@@ -34,16 +34,20 @@ const execute=async (query: string, params: unknown[]) => {
   if(dry) {await sql.query('EXPLAIN '+query,params);return [{n:0}]}
   return sql.query(query,params)
 }
+// Every window below is one day shorter than the promise on /privacy. The sweep
+// runs daily, so a row can wait up to a day past its cutoff; cutting a day early
+// keeps the published limit a ceiling. The monthly schedule this replaced let
+// rows outlive the promise by almost a month.
 const pruneSql=(parts:TemplateStringsArray,...values:unknown[])=>execute(parts.reduce((s,p,i)=>s+(i?'$'+i:'')+p,''),values)
 
 const scholarshipIds = scholarships.map(s => s.id)
 const programIds = programs.map(p => p.id)
 
 const [retention] = await pruneSql`
-  with del as (delete from events where ts < now() - interval '180 days' returning 1)
+  with del as (delete from events where ts < now() - interval '179 days' returning 1)
   select count(*)::int as n from del
 `
-console.log(`retention (>180d): ${retention!.n} events deleted`)
+console.log(`retention (>179d): ${retention!.n} events deleted`)
 
 const [junk] = await pruneSql`
   with del as (
@@ -88,7 +92,7 @@ console.log(`stale rate_limit_counter windows: ${stale!.n} deleted`)
 // corrected, and a listing whose date moves forward should still have its
 // subscribers. Anything older than that is gone from the data files too.
 const deadItemIds = { scholarship: new Set<number>(), program: new Set<number>() }
-const CUTOFF_DAYS = 60
+const CUTOFF_DAYS = 59
 const cutoff = new Date(Date.now() - CUTOFF_DAYS * 24 * 60 * 60 * 1000)
 for (const [type, list] of [['scholarship', scholarships], ['program', programs]] as const) {
   for (const item of list) {
@@ -131,17 +135,17 @@ const [unconfirmed] = await pruneSql`
   with del as (
     delete from subscribers
     where confirmed_at is null
-      and created_at < now() - interval '30 days'
+      and created_at < now() - interval '29 days'
     returning 1
   )
   select count(*)::int as n from del
 `
-console.log(`unconfirmed sign-ups (>30d): ${unconfirmed!.n} deleted`)
+console.log(`unconfirmed sign-ups (>29d): ${unconfirmed!.n} deleted`)
 
-await pruneSql`WITH del AS (DELETE FROM confirmation_recipients WHERE claimed_at < now()-interval '30 days' RETURNING 1) SELECT count(*)::int AS n FROM del`
+await pruneSql`WITH del AS (DELETE FROM confirmation_recipients WHERE claimed_at < now()-interval '29 days' RETURNING 1) SELECT count(*)::int AS n FROM del`
 // Unsettled payloads contain addresses and tokens; retain at most 30 days for
 // reconciliation, then retain only their deduplication tombstones.
-if(!dry) await sql`UPDATE mail_deliveries SET payload=NULL WHERE payload IS NOT NULL AND created_at < now()-interval '30 days'`
+if(!dry) await sql`UPDATE mail_deliveries SET payload=NULL WHERE payload IS NOT NULL AND created_at < now()-interval '29 days'`
 console.log(dry?'Dry-run completed: no rows changed':'Pruning completed')
 
 const [subs] = await sql`select count(*)::int as n from subscribers`

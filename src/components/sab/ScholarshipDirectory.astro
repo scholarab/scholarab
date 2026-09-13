@@ -273,6 +273,7 @@ const soonLine = [
           data-deadline={s.deadline ?? undefined}
           data-open-date={s.openDate ?? undefined}
           data-inactive={s.active === false ? '' : undefined}
+          data-concluded={s.concluded ? '' : undefined}
           data-search={scholarshipSearchBlob(s)}
         >
           <div class="sabl-card-top">
@@ -391,6 +392,9 @@ const soonLine = [
         _open_ms: d.openDate ? new Date(d.openDate + 'T00:00:00').getTime() : 0,
         amount: '', audience: null, url: '', lastVerified: null, notes: null,
         applyViaGuidance: false, active: d.inactive === undefined, eligibility: null,
+        // Without this an ended award with no deadline reparses as "between
+        // cycles" and the client repaints the server's CLOSED chip as OPENING SOON.
+        concluded: d.concluded !== undefined,
       };
     },
     // One pass over the corpus per render, shared by the visible list and all

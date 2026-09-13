@@ -2,7 +2,7 @@ name: Prune analytics tables
 
 on:
   schedule:
-    - cron: '0 8 1 * *'   # 1st of every month, 8am UTC
+    - cron: '0 8 * * *'   # Daily, 8am UTC. /privacy promises limits in days, which a monthly sweep broke
   workflow_dispatch:
 
 jobs:

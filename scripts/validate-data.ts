@@ -570,7 +570,7 @@ if (deadDetails.length) {
   );
 }
 
-// -- No em dashes, anywhere in src, scripts or workflows --------------------
+// -- No em dashes, anywhere in src, scripts, workflows or docs-------------------
 //
 // Standing rule: the em dash never appears in ScholarAB copy, data or code.
 // It has been swept out of the repo twice; both times it came back through new
@@ -590,7 +590,8 @@ const EM_DASH_ALLOWED = new Set([
 const EM_DASH_PATTERN = /\u2014|&mdash;|&#(?:8212|x2014);/i;
 // Workflow comments and script output are read by people too, and the same
 // rule was quietly broken in both while only src/ was being checked.
-const EM_DASH_ROOTS = ['src', 'scripts', '.github'];
+// docs joined 2026-09-12 after an audit landed eight of them there.
+const EM_DASH_ROOTS = ['src', 'scripts', '.github', 'docs'];
 function walk(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
     const full = join(dir, e.name);

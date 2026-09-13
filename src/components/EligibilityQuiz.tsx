@@ -279,10 +279,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // Expired listings never belong in results (the data ships every listing,
   // open or closed, and the page is prerendered, so filter by the visitor's
   // clock, not the build's). Not-yet-open listings stay: their dated deadline
-  // is honest and they're worth preparing for.
+  // is honest and they're worth preparing for. An award its provider has ended
+  // is dropped too: it carries no deadline, so the date check alone kept it.
   const openScholarships = useMemo(() => {
     const today = todayDate()
-    return scholarships.filter(s => !s.deadline || new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime())
+    return scholarships.filter(s => !s.concluded && (!s.deadline || new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime()))
   }, [scholarships])
   const scholarshipInputs = useMemo(
     // deadline and amount are carried through for the tie-break in matchAll,

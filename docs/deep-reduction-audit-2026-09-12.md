@@ -1,4 +1,4 @@
-# ScholarAB deep reduction audit — September 12, 2026 UTC
+# ScholarAB deep reduction audit: September 12, 2026 UTC
 
 **There are credible reductions above 50% in several expensive operations. There is no evidence that every aspect of ScholarAB can safely be halved.** The highest-value targets are hidden Saved-page cards, installing the whole application for maintenance, link-checker scheduling, duplicate analytics calls, and unnecessarily broad runtime data imports. Cutting listings, protections, or test coverage to reach a percentage would defeat the student outcome.
 
@@ -104,21 +104,21 @@ With existing granted consent, the component model records **three initial `page
 
 This is a local model of the component, not a measurement of GA's ingested or deduplicated reports. Retain explicit grant handling and test first visit, returning consent, navigation, denial, and consent reset. The model also exposes a separate denial defect described below; the duplicate-call patch does not fix it.
 
-### E. Remove proactive service-worker page downloads — restore
+### E. Remove proactive service-worker page downloads: restore
 
 Changing six install downloads to `/offline` alone cuts request count 83.3%. But a fresh installed worker that previously served `/scholarships/` offline now returns only the generic fallback. That fails existing behavior, so restore the seeds for now. Reduce the representations/download duplication first; do not call removal of offline directories a transparent optimization.
 
-### F. Remove `legacy-peer-deps` — restore pending compatible versions
+### F. Remove `legacy-peer-deps`: restore pending compatible versions
 
 An isolated install dry-run without the override fails with `ERESOLVE`: installed `@astrojs/cloudflare@12.6.13` declares `astro@^5.7.0`, while the lockfile contains Astro 6.4.8. Restore the override until the framework/adapter/tooling versions are upgraded together and verified. Do not repeatedly force installation and count that as a repair.
 
-### G. Remove the custom PNG encoder — restore, then benchmark
+### G. Remove the custom PNG encoder: restore, then benchmark
 
 On 12 distributed card samples, the native renderer encoder preserved pixels but increased total bytes from **300,189 to 493,266, up 64.3%**. Restore the custom RGB encoding because removal worsens the asset-size target.
 
 Only after that deletion failed the size goal, compare compression settings. Level 6 preserved every decoded pixel and reduced measured encode time from **371.8 to 128.6 ms, down 65.4%**, while increasing these image bytes 6.9%. This is a sample of encoding time, not a 65% build-time saving. It is an explicit speed/size tradeoff requiring a larger controlled sample before adoption. Levels 1/3 were also measured and produced substantially larger files.
 
-### H. Remove duplicate quiz eligibility objects — small compressed gain
+### H. Remove duplicate quiz eligibility objects: small compressed gain
 
 Pooling 1,122 scholarship eligibility objects into 609 distinct values round-tripped to exactly the original payload. Raw JSON fell from 824,510 to 648,140 bytes, but gzip fell only from **95,228 to 91,813 bytes: 3.6%**, and Brotli from 73,821 to 72,204. Compression already removes most of this repetition. Defer the extra transport/decoder contract at this benefit level; do not describe the 21.4% raw reduction as an equivalent download improvement. No legacy quiz behavior was changed.
 
