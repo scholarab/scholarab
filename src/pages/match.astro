@@ -4,7 +4,7 @@ import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 
-import QuizLoader from '../components/QuizLoader';
+import QuizLoader from '../components/QuizLoader.astro';
 import quizDataUrl from '../data/quiz-payload.json?url';
 import {
   QUIZ_DURATION,
@@ -63,10 +63,10 @@ const breadcrumbJson = {
         </div>
       </div>
 
-      <QuizLoader url={quizDataUrl} client:load />
+      <QuizLoader url={quizDataUrl} />
 
       {
-        /* The quiz is a React island, so until it hydrates this page has about
+        /* The quiz renders in the browser, so until it loads this page has about
           twenty words on it -- a heading, a subhead, and two trust chips. That
           is not enough for anything to read, index or rank, and it is not
           enough for a reader who lands here and wants to know what the tool
