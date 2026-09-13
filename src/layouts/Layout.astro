@@ -79,12 +79,12 @@ const {
          untracked (?nt=1) devices counted as students. -->
     <script is:inline>
       (function () {
-        var q = new URLSearchParams(location.search).get('nt');
-        var optedOut = q === '1';
-        try { optedOut = optedOut || (q !== '0' && !!localStorage.getItem('sa_no_track')); } catch (e) {}
+        const q = new URLSearchParams(location.search).get('nt');
+        let optedOut = q === '1';
+        try { optedOut = optedOut || (q !== '0' && !!localStorage.getItem('sa_no_track')); } catch { /* no storage: count it */ }
         if (optedOut || navigator.webdriver) return;
         if (location.hostname !== 'www.scholarab.ca' && location.hostname !== 'scholarab.ca') return;
-        var s = document.createElement('script');
+        const s = document.createElement('script');
         s.defer = true;
         s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
         s.setAttribute('data-cf-beacon', '{"token": "908fe9e663974dcf903e6a4d862d7bdf"}');
