@@ -350,9 +350,26 @@ const rules = readFileSync(redirectsPath, 'utf8')
     return { ...r, from: from ?? '', to: to ?? '', code: code ?? '' };
   });
 
+// A removed page can keep answering 200 from a Cloudflare layer no purge clears
+// (for up to 7 days), and only a _redirects rule masks it. When the page breaks
+// a legal rule that wait is too long, so it gets a temporary 302 to its index.
+// These rules skip the rename checks below; past `until` the build warns so the
+// rule gets deleted once the stale copy has expired.
+const TEMPORARY_TAKEDOWNS = [
+  // Removed 2026-09-11 for the gender rule; still served stale on 2026-09-13.
+  { from: '/scholarships/local-38-2*', until: '2026-09-19' },
+];
 const sources = new Set(rules.map((r) => r.from));
 for (const r of rules) {
   const tag = `_redirects:${r.n}`;
+
+  const takedown = TEMPORARY_TAKEDOWNS.find((t) => t.from === r.from);
+  if (takedown) {
+    if (new Date().toISOString().slice(0, 10) > takedown.until) {
+      console.warn(`${tag}: temporary takedown for ${r.from} ended ${takedown.until}; delete the rule and its TEMPORARY_TAKEDOWNS entry`);
+    }
+    continue;
+  }
 
   if (r.to.startsWith('/') && !r.to.startsWith('/guides/')) {
     if (STATIC_ROUTES.has(r.to) && (r.to === '/scholarships/' || r.to === '/programs/')) {

@@ -220,3 +220,10 @@
 /scholarships/alberta-foundation-for-the-arts-performing-arts-scholarship/ /scholarships/queens-platinum-jubilee-scholarship-for-performing-arts/ 301
 /scholarships/alberta-foundation-for-the-arts-visual-arts-scholarship  /scholarships/queens-platinum-jubilee-scholarship-for-visual-arts/ 301
 /scholarships/alberta-foundation-for-the-arts-visual-arts-scholarship/ /scholarships/queens-platinum-jubilee-scholarship-for-visual-arts/ 301
+
+# TEMPORARY, delete after 2026-09-18 with its TEMPORARY_TAKEDOWNS entry in
+# scripts/validate-data.ts. A listing removed 2026-09-11 for the gender rule is
+# still served from Cloudflare's stale layer, which purges do not clear; only a
+# redirect masks it. The wildcard matches both slash forms and keeps the removed
+# slug's wording out of this file.
+/scholarships/local-38-2*  /scholarships/ 302
