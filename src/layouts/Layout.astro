@@ -72,8 +72,25 @@ const {
     <!-- The token is the one in Web Analytics > Manage site > Install JS Snippet.
          bda47a... in the dashboard URL is the site tag, not the token: this beacon
          carried the tag until 2026-09-13 and every report got a 404, so Cloudflare
-         recorded zero visits from launch to that date. -->
-    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "908fe9e663974dcf903e6a4d862d7bdf"}'></script>
+         recorded zero visits from launch to that date.
+         Injected rather than a plain tag so it gets the same guards as GA and the
+         events table (analyticsAllowedHere in consent.ts): its first 15 hours of
+         data had 46 of 238 visits on localhost, from Playwright runs, plus
+         untracked (?nt=1) devices counted as students. -->
+    <script is:inline>
+      (function () {
+        var q = new URLSearchParams(location.search).get('nt');
+        var optedOut = q === '1';
+        try { optedOut = optedOut || (q !== '0' && !!localStorage.getItem('sa_no_track')); } catch (e) {}
+        if (optedOut || navigator.webdriver) return;
+        if (location.hostname !== 'www.scholarab.ca' && location.hostname !== 'scholarab.ca') return;
+        var s = document.createElement('script');
+        s.defer = true;
+        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        s.setAttribute('data-cf-beacon', '{"token": "908fe9e663974dcf903e6a4d862d7bdf"}');
+        document.head.appendChild(s);
+      })();
+    </script>
   </head>
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
 
