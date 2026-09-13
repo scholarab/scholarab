@@ -70,5 +70,73 @@
   {
     "host": "4hab.com",
     "reason": "Stalls automated requests from GitHub Actions IPs until the 20s timeout rather than refusing them; two 4-H Alberta URLs timed out in the same run while the host answers in under a second off-runner and loads fine in browser, verified 2026-09-08. Listed on one run's evidence: if 4hab.com starts passing in CI, drop this entry rather than leaving two listings unchecked."
+  },
+  {
+    "host": "about.rogers.com",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (Ted Rogers Legacy Scholarship page). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "barronprize.org",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (Gloria Barron Prize apply page). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "firstroboticscanada.org",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (five FIRST Robotics Canada scholarship listings share two pages). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "psacunion.ca",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (PSAC scholarship program page). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "beaver.ab.ca",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (Beaver County scholarships page). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "calgaryclimatehub.ca",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (Youth Climate Action Bursary page). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "canadacompany.ca",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (Children of the Fallen scholarship page). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "hemophilia.ca",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (James Kreppner scholarship page). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "pharmacists.ca",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (IPPC Indigenous Pharmacy Scholarship page). If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "girlguides.ca",
+    "reason": "TLS chain incomplete for Node clients (unable to verify the first certificate); the scholarships page returns 200 off-runner and loads in browser, verified 2026-09-12."
+  },
+  {
+    "host": "k03735.site.kiwanis.org",
+    "reason": "WAF returns 403 to automated requests from every network tried; the Calgary Chinook scholarships page was verified live in browser 2026-09-12. Scoped to this club subdomain, not all of site.kiwanis.org."
+  },
+  {
+    "host": "clac.ca",
+    "reason": "WAF returns 403 to automated requests from every network tried; the CLAC scholarships page was verified live in browser 2026-09-12."
+  },
+  {
+    "host": "vertexfoundation.org",
+    "reason": "WAF returns 403 to automated requests from every network tried; the Healthy Families page was verified live in browser 2026-09-12."
+  },
+  {
+    "host": "editing.services",
+    "reason": "WAF returns 403 to automated requests from every network tried; servicescape.com/scholarship redirects here and the scholarship page was verified live in browser 2026-09-12."
+  },
+  {
+    "host": "facebook.com",
+    "reason": "Returns 400 to a browser user agent and 200 to a plain one, and a 200 from Facebook does not prove a page still exists, so no automated result here means anything. Facebook-hosted listings need a manual look."
+  },
+  {
+    "host": "scouts.ca",
+    "reason": "Cloudflare challenge page; it never resolves for a plain fetch or a headless browser. Not verifiable automatically: the scholarship page was last verified by hand when the listing was added on 2026-09-08, and it is a review-and-relaunch notice, so recheck it by hand each cycle."
+  },
+  {
+    "host": "aupe.org",
+    "reason": "Queue-it waiting room redirects every automated request in a loop (redirect count exceeded), so the checker can never reach the page. The site also returned a Cloudflare 502 in browser on 2026-09-12; the page was verified when the three AUPE listings were added on 2026-09-07. Recheck it by hand."
   }
 ]

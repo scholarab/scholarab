@@ -616,6 +616,31 @@ if (emDashHits.length) {
   failed = true;
 }
 
+// Legal rule: gender eligibility is 'female' or nothing, and no gender-identity
+// or sexual-orientation wording may appear in site copy or data. Nothing checked
+// the text until 2026-09-13, when a crawler report surfaced five live mentions in
+// program data and three guides. Only src and public are scanned, because this
+// file has to spell the terms out.
+const RULE1_PATTERN = /non-?binary|transgender|gender[- ]diverse|gender diversity|sexual diversity|lgbt|queer|two-spirit/i;
+const RULE1_EXT = /\.(json|astro|ts|tsx|md|xml|txt|html)$|\/_redirects$|\/_headers$/;
+const rule1Hits = ['src', 'public'].flatMap((r) => walk(join(__dirname, '..', r)))
+  .map((f) => ({ rel: f.slice(join(__dirname, '..').length + 1).split('\\').join('/'), full: f }))
+  .filter((f) => RULE1_EXT.test('/' + f.rel))
+  .flatMap(({ rel, full }) =>
+    readFileSync(full, 'utf-8')
+      .split('\n')
+      .map((line, i) => ({ rel, line: i + 1, text: line }))
+      .filter((x) => RULE1_PATTERN.test(x.text)),
+  );
+if (rule1Hits.length) {
+  console.error(
+    `validate-data: ${rule1Hits.length} line(s) with gender-identity or orientation wording; gender eligibility may only read as female:\n  ${rule1Hits
+      .map((h) => `${h.rel}:${h.line}`)
+      .join('\n  ')}`,
+  );
+  failed = true;
+}
+
 // -- Eligibility objects the runtime schema would reject ----------------------
 //
 // data-loader's parseEligibility calls safeParse and returns null on failure,

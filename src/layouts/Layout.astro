@@ -69,7 +69,11 @@ const {
          render. Public pages preload their real faces via SabFonts. -->
     <ClientRouter />
     <slot name="head" />
-    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "bda47a2a06b543d7be56420c5efb42ff"}'></script>
+    <!-- The token is the one in Web Analytics > Manage site > Install JS Snippet.
+         bda47a... in the dashboard URL is the site tag, not the token: this beacon
+         carried the tag until 2026-09-13 and every report got a 404, so Cloudflare
+         recorded zero visits from launch to that date. -->
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "908fe9e663974dcf903e6a4d862d7bdf"}'></script>
   </head>
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
 
