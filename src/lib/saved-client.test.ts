@@ -31,32 +31,14 @@ vi.mock('./ics.ts', () => ({ buildICS: vi.fn(() => ''), downloadICS: vi.fn() }))
 import { showToast } from './utils.ts'
 import { downloadICS } from './ics.ts'
 
-function schWrap(id: number, title: string, deadline: string | null) {
-  return `
-    <div class="h-full" data-sv-wrap data-type="scholarship" data-id="${id}" hidden>
-      <div class="sabl-card h-full" data-id="${id}" data-name="${title}"
-           ${deadline ? `data-deadline="${deadline}"` : ''} data-amount="$1,000" data-url="https://x.example">
-        <span class="sabl-days" data-sv-chip></span>
-        <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
-        <a href="https://x.example" class="sabl-apply" data-sv-apply><span data-apply-label>Apply</span><span class="sabl-ext" aria-hidden="true">↗</span></a>
-      </div>
-    </div>`
-}
-
-function prgWrap(id: number, name: string, deadline: string | null) {
-  return `
-    <div class="h-full" data-sv-wrap data-type="program" data-id="${id}" hidden>
-      <div class="sabl-card h-full" data-id="${id}" data-name="${name}"
-           ${deadline ? `data-deadline="${deadline}"` : ''} data-url="https://y.example">
-        <span class="sabl-days" data-sv-chip></span>
-        <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
-      </div>
-    </div>`
-}
-
 function mount() {
   document.body.innerHTML = `
     <div id="sab-saved">
+      <script type="application/json" data-sv-items>${JSON.stringify([
+        { type: 'scholarship', id: 1, name: 'Big Award', deadline: '2026-05-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/big-award/' },
+        { type: 'scholarship', id: 2, name: 'Closed Award', deadline: '2026-01-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/closed-award/' },
+        { type: 'program', id: 7, name: 'Summer Lab', deadline: '2026-06-15', url: 'https://y.example', href: '/programs/summer-lab/' },
+      ])}</script>
       <div class="sabl-page" data-sv-skeleton>skeleton</div>
       <div class="sabl-page" data-sv-content hidden>
         <p data-sv-count></p>
@@ -66,11 +48,11 @@ function mount() {
         <div data-sv-list hidden>
           <div data-sv-sh-section hidden>
             <span data-sv-sh-label></span>
-            <div class="sabl-grid">${schWrap(1, 'Big Award', '2026-05-01')}${schWrap(2, 'Closed Award', '2026-01-01')}</div>
+            <div class="sabl-grid"></div>
           </div>
           <div data-sv-pr-section hidden>
             <span data-sv-pr-label></span>
-            <div class="sabl-grid">${prgWrap(7, 'Summer Lab', '2026-06-15')}</div>
+            <div class="sabl-grid"></div>
           </div>
         </div>
         <div data-sv-cal hidden></div>
@@ -100,6 +82,7 @@ afterEach(() => { document.body.innerHTML = '' })
 describe('initSaved', () => {
   it('swaps the skeleton for content and shows the empty state with nothing saved', () => {
     setup()
+    expect($$('[data-sv-wrap]')).toHaveLength(0)
     expect($('[data-sv-skeleton]').hidden).toBe(true)
     expect($('[data-sv-content]').hidden).toBe(false)
     expect($('[data-sv-empty]').hidden).toBe(false)
@@ -107,7 +90,7 @@ describe('initSaved', () => {
     expect($('[data-sv-count]').textContent).toBe('0 items bookmarked. Your shortlist lives here.')
   })
 
-  it('unhides only the saved cards and writes counts and section labels', () => {
+  it('renders only the saved cards and writes counts and section labels', () => {
     savedSch = [1]
     savedPrg = [7]
     setup()
@@ -135,6 +118,9 @@ describe('initSaved', () => {
     // leaves the site is markup and must survive that rewrite.
     const applyTexts = $$('[data-sv-apply]').map(a => a.textContent)
     expect(applyTexts).toEqual(['Apply↗', 'Visit↗'])
+    expect($$('[data-sv-apply]')[1]!.getAttribute('aria-label')).toBe(
+      "Visit Closed Award on the sponsor's site (opens in a new tab)",
+    )
   })
 
   it('remove button unsaves the item, hides its card, and updates counts', () => {
@@ -195,6 +181,15 @@ describe('initSaved', () => {
     expect($('[data-sv-list]').hidden).toBe(false)
   })
 
+  it('restores cards saved in another tab without changing catalogue order', () => {
+    savedSch = [2]
+    setup()
+    savedSch = [2, 1, 99999]
+    window.dispatchEvent(new StorageEvent('storage', { key: 'scholarab_saved' }))
+    expect($$('[data-sv-wrap]').map(w => w.dataset.id)).toEqual(['1', '2'])
+    expect($('[data-sv-count]').textContent).toContain('2 items')
+  })
+
   it('offers no calendar export when nothing saved carries a date', () => {
     // An undated bookmark produces zero VEVENTs, so the export used to hand the
     // student an empty 118-byte file and report "Added to calendar".
@@ -202,7 +197,9 @@ describe('initSaved', () => {
     mount()
     // Added here rather than to the shared fixture, so the other tests keep
     // counting exactly the cards they were written against.
-    $('[data-sv-sh-section] .sabl-grid').insertAdjacentHTML('beforeend', schWrap(3, 'Undated Award', null))
+    $('[data-sv-items]').textContent = JSON.stringify([
+      { type: 'scholarship', id: 3, name: 'Undated Award', deadline: null, url: 'https://x.example', href: '/scholarships/undated-award/' },
+    ])
     document.dispatchEvent(new Event('astro:page-load'))
     click($('[data-sv-view="calendar"]'))
     expect($('[data-sv-cal]').hidden).toBe(false)
