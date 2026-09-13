@@ -272,7 +272,6 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     itemType: 'program',
     defaultState: { sort: 'closest_due', category: 'all', grade: '', status: 'all' },
     toggleKeys: ['category', 'grade'],
-    countKeys: ['category', 'grade', 'status'],
     parseCard(el) {
       const d = el.dataset;
       return {
@@ -297,21 +296,16 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     // One pass over the corpus per render, shared by the visible list and all
     // eighteen chip counts. See the scholarship twin.
     renderContext: items => buildProgramStatusCache(items),
-    select(items, state, q, cache) {
-      const sorted = filterSortPrograms(items, asFilterState(state), cache) as Item[];
-      return q ? sorted.filter(it => it.search.includes(q)) : sorted;
-    },
-    countFor(items, state, q, cache) {
-      const pool = selectPrograms(items, asFilterState(state), cache) as Item[];
-      return q ? pool.filter(it => it.search.includes(q)).length : pool.length;
-    },
-    countLine: (shown, total, visible) =>
-      directoryCountLine(shown, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) !== 'closed').length),
+    select: (items, state, cache) => filterSortPrograms(items, asFilterState(state), cache) as Item[],
+    countFor: (items, state, cache) => selectPrograms(items, asFilterState(state), cache).length,
     groups: { key: programGroupKey, label: key => PROGRAM_GROUP_LABELS[key] ?? key },
-    // The sibling page puts a dollar figure in this exact slot, so a bare
-    // numeral in 44px serif reads as money. The denominator makes it a
-    // proportion, which is what it always was.
-    stat: visible => `${visible.filter(p => p.paid).length} / ${visible.length}`,
+    summary: (visible, total) => ({
+      count: directoryCountLine(visible.length, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) !== 'closed').length),
+      // The sibling page puts a dollar figure in this exact slot, so a bare
+      // numeral in 44px serif reads as money. The denominator makes it a
+      // proportion, which is what it always was.
+      stat: `${visible.filter(p => p.paid).length} / ${visible.length}`,
+    }),
     getSavedIds: () => [...getSavedPrograms()],
     toggleSave: id => [...toggleSavedProgram(id)],
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),

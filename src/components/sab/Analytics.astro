@@ -85,6 +85,12 @@ const gaId = import.meta.env.PUBLIC_GA_ID ?? GA_MEASUREMENT_ID;
           return;
         }
         gaWindow.gtag('consent', 'update', { analytics_storage: 'granted' });
+        const referrer = document.referrer ? new URL(document.referrer) : null;
+        const page = {
+          page_location: location.origin + location.pathname, page_path: location.pathname,
+          page_referrer: referrer ? referrer.origin + referrer.pathname : '',
+        };
+        gaWindow.gtag('set', page);
         if (!loaded) {
           loaded = true;
           const script = document.createElement('script');
@@ -95,8 +101,7 @@ const gaId = import.meta.env.PUBLIC_GA_ID ?? GA_MEASUREMENT_ID;
           gaWindow.gtag('config', id, { send_page_view: false, anonymize_ip: true });
         }
         gaWindow.gtag('event', 'page_view', {
-          page_location: location.href,
-          page_path: location.pathname + location.search,
+          ...page,
           page_title: document.title,
         });
       }

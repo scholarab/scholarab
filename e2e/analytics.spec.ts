@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 // Serve the checked local build under its allowed origin. Every request is
 // intercepted: no real analytics or production API receives test traffic.
 test.use({ serviceWorkers: 'block' });
+test.afterEach(async ({ page }) => page.unrouteAll({ behavior: 'wait' }));
 test.beforeEach(async ({ page, baseURL }) => {
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'webdriver', { get: () => false });
@@ -69,4 +70,21 @@ test('a fresh visitor loads no tag until granting, and an opt-out still outranks
     const w = window as unknown as { __sabGaId: string; [key: string]: unknown };
     return w[`ga-disable-${w.__sabGaId}`];
   })).toBe(true);
+});
+
+test('search text stays out of analytics page fields on load and Back', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('sa_consent', 'granted'));
+  await page.goto('https://www.scholarab.ca/scholarships/?q=private-student-search');
+  await page.locator('footer a[href="/about/"]').first().click();
+  await expect(page).toHaveURL('https://www.scholarab.ca/about/');
+  await page.goBack();
+  await expect(page.locator('[data-dir-search]')).toHaveValue('private-student-search');
+  const fields = await page.evaluate(() => (window as unknown as { dataLayer: IArguments[] }).dataLayer
+    .flatMap(args => Array.from(args).filter(v => v && typeof v === 'object' && 'page_location' in v)));
+  expect(fields.length).toBeGreaterThanOrEqual(4);
+  for (const field of fields) {
+    expect(field.page_location).not.toMatch(/[?#]/);
+    expect(field.page_path).not.toMatch(/[?#]/);
+    expect(JSON.stringify(field)).not.toContain('private-student-search');
+  }
 });
