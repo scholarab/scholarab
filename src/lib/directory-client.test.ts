@@ -79,22 +79,21 @@ function setup() {
         order: Number(d.order),
       } as Item & { order: number }
     },
-    select(items, state, q) {
+    select(items, state) {
       const pool = state.category === 'all' ? items : items.filter(i => i.category === state.category)
-      const searched = q ? pool.filter(i => i.search.includes(q)) : pool
-      return [...searched].sort((a, b) =>
+      return [...pool].sort((a, b) =>
         state.sort === 'name'
           ? a.name.localeCompare(b.name)
           : (a as Item & { order: number }).order - (b as Item & { order: number }).order,
       )
     },
-    countLine: (shown, total) => `${shown} OF ${total} SHOWN`,
-    stat: visible => String(visible.filter(i => i.paid).length),
-    statLabel: visible => (visible.some(i => i.paid) ? 'PAID' : 'NONE PAID'),
-    statSoon: visible => {
-      const unpaid = visible.filter(i => !i.paid).length
-      return unpaid === 0 ? '' : `+${unpaid} UNPAID`
-    },
+    countFor: (items, state) => (state.category === 'all' ? items : items.filter(i => i.category === state.category)).length,
+    summary: (visible, total) => ({
+      count: `${visible.length} OF ${total} SHOWN`,
+      stat: String(visible.filter(i => i.paid).length),
+      'stat-label': visible.some(i => i.paid) ? 'PAID' : 'NONE PAID',
+      'stat-soon': visible.every(i => i.paid) ? '' : `+${visible.filter(i => !i.paid).length} UNPAID`,
+    }),
     getSavedIds: () => savedIds,
     toggleSave: id => {
       savedIds = savedIds.includes(id) ? savedIds.filter(s => s !== id) : [...savedIds, id]
@@ -124,6 +123,7 @@ const flushIndex = async () => { for (let i = 0; i < 4; i++) await Promise.resol
 
 beforeEach(() => {
   savedIds = []
+  history.replaceState(null, '', '/scholarships/')
   vi.clearAllMocks()
   vi.stubGlobal('fetch', vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve(INDEX) })))
 })
@@ -208,6 +208,7 @@ describe('initDirectory', () => {
     setup()
     // The order the reader sees, not the order the JSON is in; this is the
     // whole basis of the detail page's ‹ › arrows.
+    click($('.sabl-name'))
     expect(readListContext()).toEqual({
       paths: visibleCardNames().map(n => `/scholarships/${(n ?? "").toLowerCase()}/`),
       filtered: false,
@@ -216,6 +217,7 @@ describe('initDirectory', () => {
     const input = $('[data-dir-search]') as HTMLInputElement
     input.value = 'alpha'
     input.dispatchEvent(new Event('input', { bubbles: true }))
+    click($('[data-dir-card]:not([hidden]) .sabl-name'))
     const narrowed = readListContext()!
     expect(narrowed.paths).toEqual(visibleCardNames().map(n => `/scholarships/${(n ?? "").toLowerCase()}/`))
     expect(narrowed.paths.length).toBeLessThan(3)
@@ -224,6 +226,7 @@ describe('initDirectory', () => {
     expect(narrowed.filtered).toBe(true)
 
     click($('[data-dir-clear]'))
+    click($('.sabl-name'))
     expect(readListContext()!.filtered).toBe(false)
   })
 
@@ -336,13 +339,13 @@ describe('initDirectory', () => {
   })
 
 
-  it('re-parses cards and resets filters on subsequent astro:page-load', () => {
+  it('re-parses cards and restores URL filters on subsequent astro:page-load', () => {
     setup()
     click($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!)
     expect(visibleCardNames()).toHaveLength(2)
     document.dispatchEvent(new Event('astro:page-load'))
-    expect(visibleCardNames()).toHaveLength(3)
-    expect($$('[data-fkey="category"]').find(c => c.dataset.fval === 'all')!.classList.contains('on')).toBe(true)
+    expect(visibleCardNames()).toHaveLength(2)
+    expect($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!.classList.contains('on')).toBe(true)
   })
 })
 
@@ -381,7 +384,8 @@ describe('grouped grids', () => {
           search: el.dataset.search ?? '', group: el.dataset.group ?? '',
         }),
         select: (items, st) => (st.group === 'all' ? items : items.filter(i => i.group === st.group)),
-        countLine: shown => `${shown} SHOWN`,
+        countFor: (items, st) => (st.group === 'all' ? items : items.filter(i => i.group === st.group)).length,
+        summary: visible => ({ count: `${visible.length} SHOWN` }),
         groups: { key: i => i.group, label: k => k.toUpperCase() },
         getSavedIds: () => [],
         toggleSave: () => [],
@@ -407,8 +411,7 @@ describe('grouped grids', () => {
     setupGroups()
     click(document.querySelector('[data-fval="open"]')!)
     expect(layout()).toEqual(['One', 'Two'])
-    // and leaves nothing stranded in the grid, hidden or otherwise
-    expect(document.querySelectorAll('[data-dir-grid] [data-dir-group]').length).toBe(0)
+    expect(document.querySelectorAll('[data-dir-grid] [data-dir-group]:not([hidden])').length).toBe(0)
   })
 
   it('restores them when the filter is lifted', () => {

@@ -339,23 +339,6 @@ const soonLine = [
   type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string };
   type State = { sort: string; category: string; region: string; status: string };
 
-  /**
-   * Open money, not-yet-open money, and the rows that publish no amount at
-   * all. The third one matters: an unpriced listing adds $0 to both totals,
-   * so without saying how many there are the header reads as a stalled page
-   * every time a batch of school awards lands without dollar figures.
-   */
-  function statMoney(visible: Item[]) {
-    let open = 0, soon = 0, unpriced = 0;
-    for (const s of visible) {
-      const status = getScholarshipStatus(s);
-      if (status === 'active') open += s._amount ?? 0;
-      else if (status === 'future') soon += s._amount ?? 0;
-      if (status !== 'closed' && !(s._amount ?? 0)) unpriced++;
-    }
-    return { open, soon, unpriced };
-  }
-
   type Cache = Map<number, ScholarshipStatus>;
 
   /** The filter state a chip row's key/value pair stands for. */
@@ -371,7 +354,6 @@ const soonLine = [
     itemType: 'scholarship',
     defaultState: { sort: 'closest_due', category: 'all', region: '', status: 'all' },
     toggleKeys: ['category', 'region'],
-    countKeys: ['category', 'region', 'status'],
     parseCard(el) {
       const d = el.dataset;
       return {
@@ -400,31 +382,27 @@ const soonLine = [
     // One pass over the corpus per render, shared by the visible list and all
     // seventeen chip counts.
     renderContext: items => buildScholarshipStatusCache(items),
-    select(items, state, q, cache) {
-      const sorted = filterSortScholarships(items, asFilterState(state), cache) as Item[];
-      return q ? sorted.filter(it => it.search.includes(q)) : sorted;
-    },
-    countFor(items, state, q, cache) {
-      const pool = selectScholarships(items, asFilterState(state), cache) as Item[];
-      return q ? pool.filter(it => it.search.includes(q)).length : pool.length;
-    },
-    countLine: (shown, total, visible) =>
-      directoryCountLine(shown, total, 'LISTINGS', visible.filter(s => getScholarshipStatus(s) === 'active').length),
+    select: (items, state, cache) => filterSortScholarships(items, asFilterState(state), cache) as Item[],
+    countFor: (items, state, cache) => selectScholarships(items, asFilterState(state), cache).length,
     groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key },
-    stat: visible => {
-      const { open, soon } = statMoney(visible);
-      return '$' + (open > 0 || soon === 0 ? open : soon).toLocaleString('en-CA');
-    },
-    statLabel: visible => {
-      const { open, soon } = statMoney(visible);
-      return open > 0 || soon === 0 ? 'OPEN ACROSS THESE LISTINGS' : 'OPENING IN A LATER CYCLE';
-    },
-    statSoon: visible => {
-      const { open, soon, unpriced } = statMoney(visible);
-      return [
-        open > 0 && soon > 0 ? `+$${soon.toLocaleString('en-CA')} OPENING LATER` : '',
-        unpriced > 0 ? `${unpriced} AMOUNT${unpriced === 1 ? '' : 'S'} NOT PUBLISHED` : '',
-      ].filter(Boolean).join('\n');
+    summary(visible, total) {
+      let open = 0, soon = 0, unpriced = 0, openNow = 0;
+      for (const s of visible) {
+        const status = getScholarshipStatus(s);
+        if (status === 'active') { open += s._amount ?? 0; openNow++; }
+        else if (status === 'future') soon += s._amount ?? 0;
+        if (status !== 'closed' && !(s._amount ?? 0)) unpriced++;
+      }
+      const headlineOpen = open > 0 || soon === 0;
+      return {
+        count: directoryCountLine(visible.length, total, 'LISTINGS', openNow),
+        stat: '$' + (headlineOpen ? open : soon).toLocaleString('en-CA'),
+        'stat-label': headlineOpen ? 'OPEN ACROSS THESE LISTINGS' : 'OPENING IN A LATER CYCLE',
+        'stat-soon': [
+          open > 0 && soon > 0 ? `+$${soon.toLocaleString('en-CA')} OPENING LATER` : '',
+          unpriced > 0 ? `${unpriced} AMOUNT${unpriced === 1 ? '' : 'S'} NOT PUBLISHED` : '',
+        ].filter(Boolean).join('\n'),
+      };
     },
     getSavedIds: () => [...getSaved()],
     toggleSave: id => [...toggleSaved(id)],
@@ -447,11 +425,7 @@ const soonLine = [
         if (applyLabel) applyLabel.textContent = status === 'active' ? 'Apply' : 'Visit';
       }
     },
-    // Deep links like /scholarships?category=STEM pre-select that track chip
-    initialState(state) {
-      const cat = new URLSearchParams(window.location.search).get('category');
-      return cat ? { ...state, category: cat } : state;
-    },
+
   });
 
   // Outbound apply clicks are an analytics event (same as the old React list)

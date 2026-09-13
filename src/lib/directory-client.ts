@@ -1,6 +1,4 @@
-// Vanilla controller for the public directory pages (/scholarships, /programs).
-// The page ships fully server-rendered cards; this module only shows/hides and
-// reorders existing DOM nodes, replicating what the old React islands did.
+// Enhance complete server-rendered directories without replacing their cards.
 import { sendEvent } from './events.ts';
 import { normalizeSearchQuery, tokenIndexMayMatch } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
@@ -10,89 +8,31 @@ export interface DirectoryItem {
   el: HTMLElement;
   id: number;
   name: string;
-  /** Lowercased searchable fields joined with \n (queries can't contain \n). */
   search: string;
 }
 
+// Selection receives the search-matched pool; counts need membership, not order.
 export interface DirectoryConfig<T extends DirectoryItem, S extends Record<string, string>, C = unknown> {
-  /** What these cards are; the `save` event needs it to name the item. */
   itemType: 'scholarship' | 'program';
   defaultState: S;
-  /** Chip keys where re-clicking the active (non-default) value toggles it back off. */
   toggleKeys: string[];
-  /**
-   * Chip keys whose counts are live.
-   *
-   * A chip's number answers "how many would I be left with if I pressed this",
-   * so it is computed against the rest of the current state rather than the
-   * whole corpus: with STATUS=Open showing, Arts reads the arts awards that are
-   * open, not every arts award on file. A static number would contradict the
-   * result line the moment a second filter went on.
-   *
-   * SORT is deliberately absent. Reordering changes nothing about how many
-   * cards are on screen, so a count there would be the same figure three times.
-   */
-  countKeys?: string[];
-  /**
-   * Derived once per render and handed to every select()/countFor() call in it.
-   *
-   * The scholarship list returns a status-per-id map: classifying a row costs
-   * two date comparisons, and a counted row asks for the whole corpus once per
-   * chip. Without this, one keystroke rebuilt that map eighteen times.
-   */
   renderContext?(items: T[]): C;
   parseCard(el: HTMLElement): T;
-  /** Visible items in display order for the given state + lowercased trimmed query. */
-  select(items: T[], state: S, query: string, ctx: C): T[];
-  /**
-   * How many items a state would leave visible, when that can be answered more
-   * cheaply than by building the list. Chip counts use it; they need the size
-   * of the set and never its order, so sorting for them is work thrown away.
-   * Falls back to select().length.
-   */
-  countFor?(items: T[], state: S, query: string, ctx: C): number;
-  countLine(shown: number, total: number, visible: T[]): string;
-  /** Labelled seams between runs in the grid. `key` must be the sort's primary
-   *  key, or one group would be split across two headers. */
+  select(items: T[], state: S, ctx: C): T[];
+  countFor(items: T[], state: S, ctx: C): number;
+  summary(visible: T[], total: number): Record<string, string>;
   groups?: {
     key(item: T): string;
     label(key: string): string;
   };
-  stat?(visible: T[], all: T[]): string;
-
-  /** The label under `stat`, when it depends on the figures themselves. */
-  statLabel?(visible: T[], all: T[]): string;
-
-  /**
-   * A second, quieter figure beside `stat`. Returns '' to hide the line.
-   *
-   * The scholarship stat counts only money open today, so a cycle that has not
-   * opened yet contributes nothing: 33 Calgary awards landed in August 2026 and
-   * the header did not move, because they open in March 2027. This says what is
-   * waiting rather than letting the page look flat.
-   */
-  statSoon?(visible: T[], all: T[]): string;
   getSavedIds(): number[];
   toggleSave(id: number): number[];
   saveLabel(name: string, saved: boolean): string;
-  /** Runs after cards are (re)parsed on every astro:page-load; e.g. recompute day chips. */
   onCardsParsed?(items: T[]): void;
-  /** Adjust the fresh default state on load; e.g. apply ?category= from the URL. */
-  initialState?(state: S): S;
 }
 
 interface SearchIndex { s: string[]; p: string[] }
 
-/**
- * Every word in either directory, fetched once per page and only after a
- * search has already come up empty.
- *
- * A directory page holds a slice of the corpus (see the facet hubs), so
- * "nothing matches" on the page in front of you says nothing about the site.
- * Until this existed the empty state offered "try clearing a filter" for a
- * term whose sixteen matches were on another page, and logged the term as a
- * content gap on the way past.
- */
 let indexPromise: Promise<SearchIndex | null> | null = null;
 
 function loadSearchIndex(): Promise<SearchIndex | null> {
@@ -102,8 +42,6 @@ function loadSearchIndex(): Promise<SearchIndex | null> {
       const i = j as SearchIndex | null;
       return i && Array.isArray(i.s) && Array.isArray(i.p) ? i : null;
     })
-    // An unreachable index must not turn into a broken empty state; the
-    // caller falls back to the generic copy and logs nothing.
     .catch(() => null);
   return indexPromise;
 }
@@ -116,6 +54,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   let items: T[] = [];
   let state: S = { ...config.defaultState };
   let query = '';
+  let visible: T[] = [];
   let emptyTimer: ReturnType<typeof setTimeout> | undefined;
 
   function setSaveState(btn: HTMLElement, saved: boolean) {
@@ -132,10 +71,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       setSaveState(btn, saved.has(Number(btn.dataset.id)));
     });
   }
-
-  // Cached so the same header node is reused across renders instead of being
-  // rebuilt; the server already shipped one per group, and reusing it keeps
-  // the no-JS render and the hydrated render byte-identical.
   const headers = new Map<string, HTMLElement>();
 
   function headerFor(key: string, count: number): HTMLElement {
@@ -150,18 +85,16 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       }
       headers.set(key, el);
     }
+    el.hidden = false;
     el.querySelector('.sabl-group-label')!.textContent = config.groups!.label(key);
     el.querySelector('.sabl-group-count')!.textContent = String(count);
     return el;
   }
 
-  /** visible cards with a header node spliced in ahead of each run. */
   function withGroupHeaders(visible: T[]): HTMLElement[] {
     const g = config.groups;
     if (!g) return visible.map(v => v.el);
     const keys = visible.map(v => g.key(v));
-    // One group is no grouping: a lone "OPEN NOW" bar over the whole grid is
-    // a label with nothing to distinguish it from.
     if (new Set(keys).size < 2) return visible.map(v => v.el);
 
     const counts = new Map<string, number>();
@@ -183,57 +116,43 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (!root) return;
     if (emptyTimer) { clearTimeout(emptyTimer); emptyTimer = undefined; }
 
+    const url = new URL(location.href);
+    for (const [key, value] of Object.entries({ ...state, q: query })) {
+      if (value && value !== config.defaultState[key]) url.searchParams.set(key, value);
+      else url.searchParams.delete(key);
+    }
+    if (url.href !== location.href) history.replaceState(history.state, '', url);
+
     const q = query.trim();
-    // Normalized the same way the cards' blobs were, so punctuation a student
-    // omits (or adds) does not decide whether they find anything.
     const ql = normalizeSearchQuery(q);
     const ctx = config.renderContext?.(items) as C;
-    const visible = config.select(items, state, ql, ctx);
+    const searched = ql ? items.filter(it => it.search.includes(ql)) : items;
+    visible = config.select(searched, state, ctx);
     const grid = root.querySelector<HTMLElement>('[data-dir-grid]');
     if (grid) {
       const shown = new Set(visible.map(v => v.el));
-      for (const it of items) it.el.hidden = !shown.has(it.el);
+      for (const it of items) {
+        const hidden = !shown.has(it.el);
+        if (it.el.hidden !== hidden) it.el.hidden = hidden;
+      }
+      // Keep hidden cards in the document; move only misplaced visible nodes.
+      for (const header of headers.values()) header.hidden = true;
       const want = withGroupHeaders(visible);
-      // Moving nodes that are already in this order costs a full relayout of
-      // the grid for no visual change, and the one render that is always
-      // guaranteed to be in order is the first after a page swap: the server
-      // shipped the cards in the default state's order, and the swap paints
-      // them before this runs. Re-appending all 280 there is what made a
-      // navigation flash. Cheap identity check, and every real filter change
-      // fails it on the first index.
-      const currentVisible = [...grid.children].filter(node => !(node as HTMLElement).hidden);
-      const inOrder = want.length === currentVisible.length
-        && want.every((node, i) => currentVisible[i] === node);
-      if (!inOrder) {
-        // Headers are pulled out first: append() only moves the nodes it is
-        // given, so any header left in place would strand itself above the
-        // cards it no longer heads.
-        grid.querySelectorAll('[data-dir-group]').forEach(h => h.remove());
-        grid.append(...want);
+      let cursor = grid.firstElementChild;
+      for (const node of want) {
+        while (cursor && (cursor as HTMLElement).hidden) cursor = cursor.nextElementSibling;
+        if (node !== cursor) grid.insertBefore(node, cursor);
+        else cursor = cursor.nextElementSibling;
       }
       grid.hidden = visible.length === 0;
     }
 
-    // Hand the detail pages the order the reader is actually looking at, so
-    // their ‹ › arrows walk this list instead of the JSON's build order.
-    writeListContext({
-      paths: visible
-        .map(v => v.el.querySelector<HTMLAnchorElement>('.sabl-name')?.getAttribute('href') ?? '')
-        .filter(Boolean),
-      filtered: q !== '' || Object.keys(state).some(k => state[k] !== config.defaultState[k]),
-    });
-
-    const count = root.querySelector('[data-dir-count]');
-    if (count) count.textContent = config.countLine(visible.length, items.length, visible);
-    const stat = root.querySelector('[data-dir-stat]');
-    if (stat && config.stat) stat.textContent = config.stat(visible, items);
-    const statLabel = root.querySelector('[data-dir-stat-label]');
-    if (statLabel && config.statLabel) statLabel.textContent = config.statLabel(visible, items);
-    const soon = root.querySelector<HTMLElement>('[data-dir-stat-soon]');
-    if (soon && config.statSoon) {
-      const text = config.statSoon(visible, items);
-      soon.textContent = text;
-      soon.hidden = text === '';
+    for (const [key, text] of Object.entries(config.summary(visible, items.length))) {
+      const slot = root.querySelector<HTMLElement>(`[data-dir-${key}]`);
+      if (slot) {
+        slot.textContent = text;
+        if (key === 'stat-soon') slot.hidden = text === '';
+      }
     }
 
     root.querySelectorAll<HTMLElement>('[data-fkey]').forEach(chip => {
@@ -241,28 +160,13 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       chip.classList.toggle('on', on);
       chip.setAttribute('aria-pressed', String(on));
     });
-
-    // Counts are recomputed rather than cached because every one of them
-    // depends on every other filter; there is no subset that survives a click
-    // elsewhere in the block. Each is a filter pass over a few hundred
-    // already-parsed rows, sharing this render's status cache and skipping the
-    // sort, since a count needs the size of the set and not its order.
-    const countKeys = config.countKeys;
-    if (countKeys?.length) {
-      root.querySelectorAll<HTMLElement>('[data-chip-count]').forEach(slot => {
-        const chip = slot.closest<HTMLElement>('[data-fkey]');
-        const k = chip?.dataset.fkey;
-        if (!chip || !k || !countKeys.includes(k)) return;
-        const next = { ...state, [k]: chip.dataset.fval ?? '' };
-        const n = config.countFor
-          ? config.countFor(items, next, ql, ctx)
-          : config.select(items, next, ql, ctx).length;
-        slot.textContent = String(n);
-        // A chip that would empty the page still works, but it should not look
-        // like an equal offer beside one holding forty listings.
-        chip.classList.toggle('is-empty', n === 0 && !chip.classList.contains('on'));
-      });
-    }
+    root.querySelectorAll<HTMLElement>('[data-fkey] [data-chip-count]').forEach(slot => {
+      const chip = slot.closest<HTMLElement>('[data-fkey]')!;
+      const next = { ...state, [chip.dataset.fkey!]: chip.dataset.fval ?? '' };
+      const n = config.countFor(searched, next, ctx);
+      slot.textContent = String(n);
+      chip.classList.toggle('is-empty', n === 0 && !chip.classList.contains('on'));
+    });
 
     const empty = root.querySelector<HTMLElement>('[data-dir-empty]');
     if (empty) empty.hidden = visible.length > 0;
@@ -270,7 +174,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     else resolveEmptySearch(q, ql, items.some(it => it.search.includes(ql)));
   }
 
-  /** Put the empty state back to its generic copy. */
   function resetFallback() {
     const slot = root?.querySelector<HTMLElement>('[data-dir-elsewhere]');
     if (slot) { slot.hidden = true; slot.textContent = ''; }
@@ -278,18 +181,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (sub) sub.hidden = false;
   }
 
-  /**
-   * Decide what "nothing matches" actually means, then say so.
-   *
-   * Three different situations used to share one message and one event:
-   * the term exists on another page of this same directory (a facet slice),
-   * it exists in the other directory, or the site really does not have it.
-   * Only the third is a content gap, and only the third gets logged.
-   */
   function resolveEmptySearch(q: string, ql: string, onThisPage: boolean) {
     const kind = config.itemType;
     void loadSearchIndex().then(index => {
-      // Still the same query? A slow index must not overwrite a later render.
       if (!root || normalizeSearchQuery(query) !== ql) return;
 
       const here = index ? tokenIndexMayMatch(kind === 'scholarship' ? index.s : index.p, ql) : onThisPage;
@@ -298,7 +192,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const slot = root.querySelector<HTMLElement>('[data-dir-elsewhere]');
       const sub = root.querySelector<HTMLElement>('[data-dir-empty-sub]');
       if (slot) {
-        // Own directory first: same page, same filters, just a wider slice.
         const target = here
           ? { href: kind === 'scholarship' ? '/scholarships/' : '/programs/', label: kind === 'scholarship' ? 'all scholarships' : 'all research programs' }
           : there
@@ -313,12 +206,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
           a.textContent = `Search ${target.label} for "${q}"`;
           slot.append(a);
         }
-        // The generic "clear a filter" line is wrong whenever the match is on
-        // another page: no filter on this one is hiding it.
         if (sub) sub.hidden = target !== null;
       }
-
-      // A real gap: nowhere on the site, in either directory.
       if (!here && !there) {
         emptyTimer = setTimeout(
           () => sendEvent('search_empty', undefined, undefined, `${q} | ${location.pathname}`),
@@ -327,6 +216,14 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       }
     });
   }
+
+  // Pointer/context-menu activation must store context before a new tab copies it.
+  for (const event of ['pointerdown', 'contextmenu', 'click']) document.addEventListener(event, e => {
+    const link = (e.target as Element | null)?.closest?.('.sabl-name');
+    if (link && root?.contains(link)) {
+      writeListContext({ paths: visible.map(v => v.el.querySelector<HTMLAnchorElement>('.sabl-name')!.getAttribute('href')!), filtered: query.trim() !== '' || Object.keys(state).some(k => state[k] !== config.defaultState[k]) });
+    }
+  });
 
   document.addEventListener('click', e => {
     const t = e.target as Element | null;
@@ -338,8 +235,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const next = config.toggleSave(id);
       const nowSaved = next.includes(id);
       setSaveState(save, nowSaved);
-      // Only the save counts, not the un-save: the metric is "people who
-      // shortlisted this", and sendEvent dedupes it per item per tab session.
       if (nowSaved) { showConfetti(save); sendEvent('save', config.itemType, id); }
       return;
     }
@@ -369,24 +264,21 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     query = input.value;
     render();
   });
-
-  // Fires on first load and after every view-transition swap: re-grab nodes,
-  // reset filter state, and re-derive anything clock- or storage-dependent.
   document.addEventListener('astro:page-load', () => {
     root = document.querySelector<HTMLElement>(rootSelector);
     if (!root) return;
     headers.clear();
+    root.querySelectorAll<HTMLElement>('[data-dir-group]').forEach(h => headers.set(h.dataset.dirGroup!, h));
     items = [...root.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);
+    const params = new URLSearchParams(location.search);
     state = { ...config.defaultState };
-    if (config.initialState) state = config.initialState(state);
-    // ?q= arrives from the other directory's empty state, which offers this
-    // page as the wider search. Landing here with an empty box would drop the
-    // query the student already typed.
-    let initialQuery = '';
-    try { initialQuery = new URLSearchParams(location.search).get('q') ?? ''; } catch { /* no URL */ }
-    query = initialQuery;
+    for (const key of Object.keys(state)) {
+      const value = params.get(key);
+      if (value !== null) state = { ...state, [key]: value };
+    }
+    query = params.get('q') ?? '';
     const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
-    if (input) input.value = initialQuery;
+    if (input) input.value = query;
     config.onCardsParsed?.(items);
     paintSaved();
     render();

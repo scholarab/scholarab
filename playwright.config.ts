@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const port = process.env.PLAYWRIGHT_PORT ?? '4321';
+
 export default defineConfig({
   testDir: './e2e',
   timeout: 30_000,
@@ -9,7 +11,7 @@ export default defineConfig({
   workers: process.env.CI ? 2 : undefined,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:4321',
+    baseURL: `http://localhost:${port}`,
     trace: 'on-first-retry',
   },
   projects: [
@@ -18,8 +20,8 @@ export default defineConfig({
   ],
   webServer: {
     // Requires dist/ to be built first: npm run build
-    command: 'npx wrangler pages dev dist --port 4321',
-    url: 'http://localhost:4321',
+    command: `npx wrangler pages dev dist --port ${port}`,
+    url: `http://localhost:${port}`,
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },
