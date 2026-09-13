@@ -5,6 +5,10 @@ on:
     - cron: '0 */6 * * *'   # Same milestone is deduplicated; retry failures within 24h
   workflow_dispatch:
     inputs:
+      test_subscription_id:
+        description: 'Send one test reminder only to this confirmed subscription ID; leave blank for normal delivery'
+        type: string
+        required: false
       catch_up:
         description: 'Catch-up send: remind every subscriber with a future deadline now (ignores 30/14/3 milestones)'
         type: boolean
@@ -29,9 +33,12 @@ jobs:
 
       - name: Send deadline reminders
         env:
+          TEST_SUBSCRIPTION_INPUT: ${{ inputs.test_subscription_id }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           TZ: America/Edmonton
           SITE_URL: https://www.scholarab.ca
           CATCH_UP: ${{ inputs.catch_up == true && '1' || '' }}
-        run: npx tsx scripts/send-alerts.ts
+        run: |
+          if [ -n "$TEST_SUBSCRIPTION_INPUT" ]; then export TEST_SUBSCRIPTION_ID="$TEST_SUBSCRIPTION_INPUT"; fi
+          npx tsx scripts/send-alerts.ts

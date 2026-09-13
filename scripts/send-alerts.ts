@@ -39,9 +39,13 @@ const MILESTONES = process.env.TEST_DAYS ? [parseInt(process.env.TEST_DAYS)] : [
 // prints the plan without sending.
 const CATCH_UP = process.env.CATCH_UP === '1'
 const DRY_RUN = process.env.DRY_RUN === '1'
+const testId = process.env.TEST_SUBSCRIPTION_ID
+if (testId !== undefined && !/^[1-9]\d*$/.test(testId)) throw new Error('TEST_SUBSCRIPTION_ID must be a positive integer')
+const TEST_SUBSCRIPTION_ID = testId === undefined ? null : Number(testId)
+if (TEST_SUBSCRIPTION_ID !== null && !Number.isSafeInteger(TEST_SUBSCRIPTION_ID)) throw new Error('Invalid test subscription ID')
 // Both of these are manual overrides aimed at a specific day, so honouring a
 // subscriber's chosen milestones would make them send nothing at all.
-const IGNORE_CADENCE = CATCH_UP || !!process.env.TEST_DAYS
+const IGNORE_CADENCE = CATCH_UP || !!process.env.TEST_DAYS || TEST_SUBSCRIPTION_ID !== null
 
 interface SubscriberRow { id:number; email:string; token:string; cadence:string; item_type:string; item_id:number }
 const query = (text:string,params?:unknown[]) => sql.query(text,params)
@@ -187,7 +191,7 @@ async function sendPendingConfirmations(): Promise<void> {
   }
 }
 
-await sendPendingConfirmations()
+if (TEST_SUBSCRIPTION_ID === null) await sendPendingConfirmations()
 
 const allItems = [
   // `active !== false`: most program entries don't carry the field at all;
@@ -196,7 +200,7 @@ const allItems = [
   ...programs.filter(p => p.active !== false && p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing').map(p => ({ ...p, itemType: 'program', label: p.name!, detailUrl: `${BASE_URL}/programs/${generateSlug(p.name!)}` })),
 ]
 
-const targets = CATCH_UP
+const targets = (CATCH_UP || TEST_SUBSCRIPTION_ID !== null)
   ? allItems.map(item => ({ item, days: daysUntil(item.deadline!) })).filter(t => t.days > 0)
   : MILESTONES.flatMap(m => allItems.filter(item => daysUntil(item.deadline!) === m).map(item => ({ item, days: m })))
 
@@ -204,9 +208,10 @@ const targets = CATCH_UP
 const targetKeys = targets.map(({item})=>`${item.itemType}:${item.id}`)
 const recipients = targetKeys.length ? await sql`
   SELECT id,email,token,cadence,item_type,item_id FROM subscribers
-  WHERE confirmed_at IS NOT NULL AND (item_type || ':' || item_id::text) = ANY(${targetKeys}::text[])` as SubscriberRow[] : []
+  WHERE confirmed_at IS NOT NULL AND (${TEST_SUBSCRIPTION_ID}::int IS NULL OR id = ${TEST_SUBSCRIPTION_ID}) AND (item_type || ':' || item_id::text) = ANY(${targetKeys}::text[])` as SubscriberRow[] : []
 const byItem = new Map<string,SubscriberRow[]>()
 for (const row of recipients) {
+  if (TEST_SUBSCRIPTION_ID !== null && row.id !== TEST_SUBSCRIPTION_ID) continue
   const key=`${row.item_type}:${row.item_id}`
   const bucket=byItem.get(key) ?? [];bucket.push(row);byItem.set(key,bucket)
 }
@@ -214,20 +219,22 @@ for (const {item,days} of targets) {
   for (const row of byItem.get(`${item.itemType}:${item.id}`) ?? []) {
     if (!IGNORE_CADENCE && !(parseCadence(row.cadence) as number[]).includes(days)) continue
     if (/@example\.(com|org|net)$/i.test(row.email)) continue
-    const subject = `${days} day${days === 1 ? '' : 's'} left: ${item.label} closes ${formatDate(item.deadline!)}`
+    const subject = `${TEST_SUBSCRIPTION_ID !== null ? '[TEST] ' : ''}${days} day${days === 1 ? '' : 's'} left: ${item.label} closes ${formatDate(item.deadline!)}`
     const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${row.token}`
     const html = emailHtml(item.label,item.amount,item.deadline!,item.detailUrl,unsubscribeUrl,days)
     if (DRY_RUN) {sent++;console.log(`would send ${days}d to subscription ${row.id}`);continue}
     try {
       // Catch-up is one logical send per subscription/deadline, even on rerun.
-      const milestone=CATCH_UP?'catch-up':String(days)
+      const milestone=TEST_SUBSCRIPTION_ID !== null ? 'designated-test' : CATCH_UP?'catch-up':String(days)
       if(await sendEmail(row,'reminder',`reminder/${row.token}/${item.deadline}/${milestone}`,subject,html,unsubscribeUrl)) sent++
     } catch(e) {errors++;console.error(`delivery failed for subscription ${row.id}`,e instanceof Error?e.message:'unknown')}
   }
 }
 // Retry unsettled payloads within the provider's deduplication window, even if
 // the calendar milestone has passed. Unsubscribe cascades delete the payload.
-if(!DRY_RUN) {
+// The designated test uses exactly its own idempotent send above. A retry sweep
+// could also deliver an unrelated older milestone for the same subscriber.
+if(!DRY_RUN && TEST_SUBSCRIPTION_ID === null) {
   const retries=await sql`SELECT d.key,d.subscription_id,d.kind,d.payload,s.email
     FROM mail_deliveries d JOIN subscribers s ON s.id=d.subscription_id
     WHERE d.state <> 'sent' AND d.created_at > now()-interval '23 hours'
