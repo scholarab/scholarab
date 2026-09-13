@@ -1,15 +1,13 @@
-// Vanilla controller for /saved: all cards are server-rendered hidden, and
-// this module unhides the bookmarked ones from localStorage, handles the
-// remove animation flow, and renders the deadline calendar on demand;
-// replicating the old SavedList/DeadlineCalendar React islands exactly.
+// Render only bookmarked cards from the published page snapshot.
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts';
 import { showToast, getToday, prefersReducedMotion } from './utils.ts';
 import { getScholarshipStatus } from './list-core.ts';
 import { sendEvent } from './events.ts';
 import { downloadICS } from './ics.ts';
 import type { ICSScholarship, ICSProgram } from './ics.ts';
+import { emailOff } from './email-off';
 
-// ── Chip/label helpers (shared with the SavedDirectory frontmatter) ───────────
+// ── Chip/label helpers ───────────────────────────────────────────────────────
 
 export function savedShortDate(iso: string): string {
   return new Date(iso + 'T00:00:00')
@@ -52,6 +50,41 @@ function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+export type SavedItem = {
+  type: 'scholarship' | 'program'; id: number; name: string; href: string;
+  category: string | null; deadline: string | null; url: string;
+  amount?: string; audience?: string | null; provider?: string | null;
+  description?: string | null; openDate?: string | null; active?: boolean; concluded?: boolean;
+};
+
+function savedCard(s: SavedItem): string {
+  const sh = s.type === 'scholarship';
+  const attr = (key: string, value: string | undefined | null) => value == null ? '' : ` data-${key}="${esc(value)}"`;
+  const due = sh
+    ? (s.deadline ? `DUE ${savedShortDate(s.deadline).toUpperCase()}` : 'NO FIXED DEADLINE')
+    : (s.deadline && s.deadline !== 'TBA' && s.deadline !== 'Ongoing'
+      ? `DUE ${savedShortDate(s.deadline).toUpperCase()}` : s.deadline === 'Ongoing' ? 'ROLLING INTAKE' : 'DEADLINE TBA');
+  return `<div class="h-full" data-sv-wrap data-type="${s.type}" data-id="${s.id}">
+    <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${sh ? attr('open-date', s.openDate) + attr('inactive', s.active === false ? '' : undefined) + attr('concluded', s.concluded ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
+      <div class="sabl-card-top">
+        <span class="sabl-mono sabl-tag">${esc((s.category ?? (sh ? 'GENERAL' : 'PROGRAM')).toUpperCase())}</span>
+        <span data-sv-chip></span>
+      </div>
+      <a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a>
+      ${sh ? `<div class="sabl-amount">${esc(s.amount ?? '')}</div>${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}`
+        : `${s.provider ? `<div class="sabl-org" style="margin:10px 0 0">${esc(s.provider.toUpperCase())}</div>` : ''}${s.description ? `<div class="sabl-blurb" style="margin-top:14px">${emailOff(s.description)}</div>` : ''}`}
+      <div class="sabl-card-foot">
+        <span class="sabl-due">${due}</span>
+        <div class="sabl-card-actions">
+          <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
+          ${sh ? (s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-sv-apply><span data-apply-label></span><span class="sabl-ext" aria-hidden="true">↗</span></a>` : '')
+            : `<a href="${esc(s.href)}" class="sabl-apply">Details →</a>`}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
 type CalItem = { title: string; url: string; amount?: string; type: 'scholarship' | 'program' };
 
 export function initSaved() {
@@ -59,6 +92,7 @@ export function initSaved() {
   let view: 'list' | 'calendar' = 'list';
   let calMonth = new Date();
   let calAdded = false;
+  let items: SavedItem[] = [];
 
   const wraps = () => root ? [...root.querySelectorAll<HTMLElement>('[data-sv-wrap]')] : [];
 
@@ -86,6 +120,7 @@ export function initSaved() {
         const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined } as Parameters<typeof getScholarshipStatus>[0]);
         const applyLabel = apply.querySelector('[data-apply-label]');
         if (applyLabel) applyLabel.textContent = status === 'active' ? 'Apply' : 'Visit';
+        apply.setAttribute('aria-label', `${status === 'active' ? 'Apply for' : 'Visit'} ${d.name} on the sponsor's site (opens in a new tab)`);
       }
     }
   }
@@ -139,21 +174,12 @@ export function initSaved() {
     if (prLabel) prLabel.textContent = `RESEARCH PROGRAMS · ${pr.length}`;
   }
 
-  // Full repaint from localStorage: restores cards hidden by a remove
-  // animation if they were re-saved elsewhere (storage event, page swap).
   function repaint() {
     if (!root) return;
-    const shIds = new Set(getSaved());
-    const prIds = new Set(getSavedPrograms());
-    for (const w of wraps()) {
-      const on = (w.dataset.type === 'scholarship' ? shIds : prIds).has(Number(w.dataset.id));
-      w.hidden = !on;
-      w.removeAttribute('style');
-      const card = w.querySelector<HTMLElement>('.sabl-card');
-      if (card) {
-        delete card.dataset.removing;
-        card.getAnimations?.().forEach(a => a.cancel());
-      }
+    for (const type of ['scholarship', 'program'] as const) {
+      const ids = new Set(type === 'scholarship' ? getSaved() : getSavedPrograms());
+      const grid = root.querySelector(`[data-sv-${type === 'scholarship' ? 'sh' : 'pr'}-section] .sabl-grid`);
+      if (grid) grid.innerHTML = items.filter(s => s.type === type && ids.has(s.id)).map(savedCard).join('');
     }
     repaintChips();
     updateVisibility();
@@ -391,6 +417,7 @@ export function initSaved() {
   document.addEventListener('astro:page-load', () => {
     root = document.querySelector<HTMLElement>('#sab-saved');
     if (!root) return;
+    items = JSON.parse(root.querySelector('[data-sv-items]')?.textContent ?? '[]');
     view = 'list';
     calAdded = false;
     repaint();
