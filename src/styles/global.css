@@ -277,6 +277,15 @@ body {
   box-shadow: 0 0 0 rgba(0,0,0,0);
   border-bottom: 1px solid rgba(92,227,187,0);
 }
+/* Title bands inside <main> reuse .sabp-header for its dark surface and mint
+   accents, and the rule above made them stick too: on every guide the 560px
+   title pinned itself over the article. Only the banner above <main> sticks.
+   The id outranks the [data-sab-stuck] shadow rule below as well. */
+#main-content .sabp-header {
+  position: static;
+  box-shadow: none;
+  border-bottom: 0;
+}
 
 /* The condensing half needs a header wide enough to condense: at 900px and
    below the ticker is already hidden and the nav row is already the tight 12px
