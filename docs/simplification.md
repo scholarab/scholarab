@@ -1,33 +1,5 @@
 # ScholarAB simplification record
 
-## Directory search: September 13, 2026
-
-Worktree branched from latest `origin/main` (`415cbff`); the shared checkout's edits remain untouched. JSON remains the publication authority. The Back defect was reproduced first (1 result became 1,134) and repaired first by reading all filters from the URL and preserving Astro's history state with `replaceState`.
-
-| Work on each keystroke | Student outcome and decision |
-| --- | --- |
-| Cancel stale empty-search timer; normalize query | Accurate gap reporting and punctuation-insensitive matches; retain. |
-| Classify status; select and sort | Correct results and order, including concluded=CLOSED; retain authoritative rules and date refresh. |
-| Set card visibility; move grid children | Exact results, grouping and keyboard order; remove unchanged writes and wholesale moves. All cards stay in HTML and DOM for no-JS access, browser find and SEO. |
-| Write every detail URL to storage | Arrows follow the filtered order; remove from typing and restore when opening a listing. |
-| Count results; scan money three times | Honest live counts, open/upcoming money and unpriced totals; replace repeated money scans with one summary. |
-| Re-search every hypothetical chip filter | Accurate chip counts; search once, then share the matching pool. |
-| Maintain a separate count-key registry | No separate outcome; derive counted controls from their existing markup. |
-| Use a category-only initialization callback | Shareable filters and working Back; replace with one URL-state implementation. |
-| Paint chip pressed states; resolve empty-state guidance | Keyboard/screen-reader state and useful recovery; retain both. |
-
-Deletion experiment: removing reordering and context writes broke 18/23 reference states and erased detail context. The other five cuts (unchanged visibility writes, repeated search, repeated money scans, count-key registry, special initialization callback) survived. **2/7 operations restored = 28.6% add-back**, measured by operations, not padded source lines.
-- Added back targeted node insertion and reusable group headers because sorts and group boundaries broke.
-- Added back context persistence on listing activation because previous/next arrows lost the filtered sequence.
-
-Simplification preceded speed work: one search pool, one money summary and one URL-state path. CSS containment and a flex-layout probe measured 410.7 ms and 392.2 ms to paint, respectively; neither justified changing the retained layout. Both probes were discarded. No public copy, styling, fonts, listing, retention or consent requirement was cut.
-
-[Local evidence](audit-evidence/directory-search-2026-09-13.json): production builds, Chromium 149.0.7827.55, 1440x900, Alberta timezone, 4x CPU, 20 alternating narrow/clear pairs (20 measured clears, no discarded samples). Instrumented document input-handler boundaries and Chromium's first subsequent Paint include rendering cost without substituting a timer. Median handler **362.642 to 12.759 ms (96.5% lower)**; median next paint **751.988 to 402.804 ms (46.4% lower)**. The handler target passes; paint remains above 150 ms. No hosted or deployment result is claimed. Reproduce with `npm run build`, serve that worktree's `dist`, then `node scripts/measure-directory.mjs http://localhost:PORT` with no concurrent workload.
-
-Automation came last: data-derived browser checks cover HTML completeness, exact order/counts/groups/chips/money, ended awards, empty recovery, keyboard navigation, history length, one-result Back and multi-result detail arrows. Existing unit checks now exercise activation-time context and URL restoration. Setup corrections: drain intercepted routes before browser teardown; match the validated JSON fixture to the loader type; add Node's JSON import attribute; use the original SSR order as the stable-sort tie oracle; await completed Astro navigation before invoking Back. These are test harness corrections, not product regressions or extra add-backs; no repair approach was repeated three times.
-
-Search text is removed from analytics page location/path and referrer, including config defaults, before tag initialization and page views. Consent remains intact. Intercepted current-tag requests contained sanitized URLs and no test search text; no test collection reached Google. Google documents [page field overrides](https://developers.google.com/analytics/devguides/collection/ga4/reference/config) and [property-controlled automatic search collection](https://support.google.com/analytics/answer/9216061?hl=en); the retrieved current tag had no site-search collector. This is local verification of the current configuration, not a promise about future GA settings. Final `npm run ci` passes (928 tests in 48 files, production build, lint and both type checks); `PLAYWRIGHT_PORT=4332 npm run test:e2e` passes (48 tests, two existing mobile skips). The alternate port isolates this worktree from the existing preview. After three unsuccessful optional new-tab probes (native middle-click timeout, then two null-context results), testing switched to a baseline comparison: explicit target-blank links have no opener and no inherited context in both builds. This pre-existing browser limitation is not an add-back failure; normal filtered detail arrows pass. A baseline/final geometry probe matches exactly. Existing build deprecation warnings and three historical-script hints remain. The production source files lose more lines than they add; restored-behavior tests, privacy checks, benchmark and evidence account for the PR's net line growth.
-
 ## First implemented cuts: September 12, 2026 UTC
 
 This implementation follows the deep audit below, on an isolated branch from `41abc6a`. The shared checkout's reminder changes and desktop audit were left untouched. [Measured build evidence](audit-evidence/first-cuts-2026-09-12.json) records the baseline revision and the exact comparison scope.

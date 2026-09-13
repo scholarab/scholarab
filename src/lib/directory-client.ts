@@ -1,4 +1,6 @@
-// Enhance complete server-rendered directories without replacing their cards.
+// Vanilla controller for the public directory pages (/scholarships, /programs).
+// The page ships fully server-rendered cards; this module only shows/hides and
+// reorders existing DOM nodes, replicating what the old React islands did.
 import { sendEvent } from './events.ts';
 import { normalizeSearchQuery, tokenIndexMayMatch } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
@@ -8,19 +10,46 @@ export interface DirectoryItem {
   el: HTMLElement;
   id: number;
   name: string;
+  /** Lowercased searchable fields joined with \n (queries can't contain \n). */
   search: string;
 }
 
 // Selection receives the search-matched pool; counts need membership, not order.
 export interface DirectoryConfig<T extends DirectoryItem, S extends Record<string, string>, C = unknown> {
+  /** What these cards are; the `save` event needs it to name the item. */
   itemType: 'scholarship' | 'program';
   defaultState: S;
+  /** Chip keys where re-clicking the active (non-default) value toggles it back off. */
   toggleKeys: string[];
+  /**
+   * Derived once per render and handed to every select()/countFor() call in it.
+   *
+   * The scholarship list returns a status-per-id map: classifying a row costs
+   * two date comparisons, and a counted row asks for the whole corpus once per
+   * chip. Without this, one keystroke rebuilt that map eighteen times.
+   */
   renderContext?(items: T[]): C;
   parseCard(el: HTMLElement): T;
+  /** Visible items in display order; items already match the normalized query. */
   select(items: T[], state: S, ctx: C): T[];
+  /**
+   * How many items a state would leave visible, when that can be answered more
+   * cheaply than by building the list. Chip counts use it; they need the size
+   * of the set and never its order, so sorting for them is work thrown away.
+   */
   countFor(items: T[], state: S, ctx: C): number;
+  /**
+   * Count, headline, its label, and a second, quieter figure beside it.
+   * An empty secondary figure hides the line.
+   *
+   * The scholarship stat counts only money open today, so a cycle that has not
+   * opened yet contributes nothing: 33 Calgary awards landed in August 2026 and
+   * the header did not move, because they open in March 2027. This says what is
+   * waiting rather than letting the page look flat.
+   */
   summary(visible: T[], total: number): Record<string, string>;
+  /** Labelled seams between runs in the grid. `key` must be the sort's primary
+   *  key, or one group would be split across two headers. */
   groups?: {
     key(item: T): string;
     label(key: string): string;
@@ -28,11 +57,22 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
   getSavedIds(): number[];
   toggleSave(id: number): number[];
   saveLabel(name: string, saved: boolean): string;
+  /** Runs after cards are (re)parsed on every astro:page-load; e.g. recompute day chips. */
   onCardsParsed?(items: T[]): void;
 }
 
 interface SearchIndex { s: string[]; p: string[] }
 
+/**
+ * Every word in either directory, fetched once per page and only after a
+ * search has already come up empty.
+ *
+ * A directory page holds a slice of the corpus (see the facet hubs), so
+ * "nothing matches" on the page in front of you says nothing about the site.
+ * Until this existed the empty state offered "try clearing a filter" for a
+ * term whose sixteen matches were on another page, and logged the term as a
+ * content gap on the way past.
+ */
 let indexPromise: Promise<SearchIndex | null> | null = null;
 
 function loadSearchIndex(): Promise<SearchIndex | null> {
@@ -42,6 +82,8 @@ function loadSearchIndex(): Promise<SearchIndex | null> {
       const i = j as SearchIndex | null;
       return i && Array.isArray(i.s) && Array.isArray(i.p) ? i : null;
     })
+    // An unreachable index must not turn into a broken empty state; the
+    // caller falls back to the generic copy.
     .catch(() => null);
   return indexPromise;
 }
@@ -71,6 +113,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       setSaveState(btn, saved.has(Number(btn.dataset.id)));
     });
   }
+
+  // Cached so the same header node is reused across renders instead of being
+  // rebuilt; the server already shipped one per group, and reusing it keeps
+  // the no-JS render and the hydrated render byte-identical.
   const headers = new Map<string, HTMLElement>();
 
   function headerFor(key: string, count: number): HTMLElement {
@@ -91,10 +137,13 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     return el;
   }
 
+  /** visible cards with a header node spliced in ahead of each run. */
   function withGroupHeaders(visible: T[]): HTMLElement[] {
     const g = config.groups;
     if (!g) return visible.map(v => v.el);
     const keys = visible.map(v => g.key(v));
+    // One group is no grouping: a lone "OPEN NOW" bar over the whole grid is
+    // a label with nothing to distinguish it from.
     if (new Set(keys).size < 2) return visible.map(v => v.el);
 
     const counts = new Map<string, number>();
@@ -124,6 +173,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (url.href !== location.href) history.replaceState(history.state, '', url);
 
     const q = query.trim();
+    // Normalized the same way the cards' blobs were, so punctuation a student
+    // omits (or adds) does not decide whether they find anything.
     const ql = normalizeSearchQuery(q);
     const ctx = config.renderContext?.(items) as C;
     const searched = ql ? items.filter(it => it.search.includes(ql)) : items;
@@ -135,6 +186,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
         const hidden = !shown.has(it.el);
         if (it.el.hidden !== hidden) it.el.hidden = hidden;
       }
+      // Moving nodes already in order causes relayout without a visual change.
+      // The server supplies the default order, and query-only filtering preserves
+      // it, so compare node identities and move only the misplaced survivors.
       // Keep hidden cards in the document; move only misplaced visible nodes.
       for (const header of headers.values()) header.hidden = true;
       const want = withGroupHeaders(visible);
@@ -160,11 +214,27 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       chip.classList.toggle('on', on);
       chip.setAttribute('aria-pressed', String(on));
     });
+    // A chip's number answers "how many would I be left with if I pressed this",
+    // so it is computed against the rest of the current state rather than the
+    // whole corpus: with STATUS=Open showing, Arts reads the arts awards that are
+    // open, not every arts award on file. A static number would contradict the
+    // result line the moment a second filter went on.
+    //
+    // SORT is deliberately absent. Reordering changes nothing about how many
+    // cards are on screen, so a count there would be the same figure three times.
+    //
+    // Counts are recomputed rather than cached because every one of them
+    // depends on every other filter; there is no subset that survives a click
+    // elsewhere in the block. Each is a filter pass over the shared search pool,
+    // sharing this render's status cache and skipping the sort, since a count
+    // needs the size of the set and not its order.
     root.querySelectorAll<HTMLElement>('[data-fkey] [data-chip-count]').forEach(slot => {
       const chip = slot.closest<HTMLElement>('[data-fkey]')!;
       const next = { ...state, [chip.dataset.fkey!]: chip.dataset.fval ?? '' };
       const n = config.countFor(searched, next, ctx);
       slot.textContent = String(n);
+      // A chip that would empty the page still works, but it should not look
+      // like an equal offer beside one holding forty listings.
       chip.classList.toggle('is-empty', n === 0 && !chip.classList.contains('on'));
     });
 
@@ -174,6 +244,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     else resolveEmptySearch(q, ql, items.some(it => it.search.includes(ql)));
   }
 
+  /** Put the empty state back to its generic copy. */
   function resetFallback() {
     const slot = root?.querySelector<HTMLElement>('[data-dir-elsewhere]');
     if (slot) { slot.hidden = true; slot.textContent = ''; }
@@ -181,9 +252,18 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (sub) sub.hidden = false;
   }
 
+  /**
+   * Decide what "nothing matches" actually means, then say so.
+   *
+   * Three different situations used to share one message and one event:
+   * the term exists on another page of this same directory (a facet slice),
+   * it exists in the other directory, or the site really does not have it.
+   * Only the third is a content gap, and only the third gets logged.
+   */
   function resolveEmptySearch(q: string, ql: string, onThisPage: boolean) {
     const kind = config.itemType;
     void loadSearchIndex().then(index => {
+      // Still the same query? A slow index must not overwrite a later render.
       if (!root || normalizeSearchQuery(query) !== ql) return;
 
       const here = index ? tokenIndexMayMatch(kind === 'scholarship' ? index.s : index.p, ql) : onThisPage;
@@ -192,6 +272,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const slot = root.querySelector<HTMLElement>('[data-dir-elsewhere]');
       const sub = root.querySelector<HTMLElement>('[data-dir-empty-sub]');
       if (slot) {
+        // Own directory first: same page, same filters, just a wider slice.
         const target = here
           ? { href: kind === 'scholarship' ? '/scholarships/' : '/programs/', label: kind === 'scholarship' ? 'all scholarships' : 'all research programs' }
           : there
@@ -206,8 +287,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
           a.textContent = `Search ${target.label} for "${q}"`;
           slot.append(a);
         }
+        // The generic "clear a filter" line is wrong whenever the match is on
+        // another page: no filter on this one is hiding it.
         if (sub) sub.hidden = target !== null;
       }
+      // A real gap: nowhere on the site, in either directory.
       if (!here && !there) {
         emptyTimer = setTimeout(
           () => sendEvent('search_empty', undefined, undefined, `${q} | ${location.pathname}`),
@@ -217,10 +301,17 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     });
   }
 
+  // Hand the detail pages the order the reader is actually looking at, so
+  // their ‹ › arrows walk this list instead of the JSON's build order.
+  // Both a card title and its Details button can open that same listing;
+  // sponsor links must not be mistaken for detail navigation.
   // Pointer/context-menu activation must store context before a new tab copies it.
   for (const event of ['pointerdown', 'contextmenu', 'click']) document.addEventListener(event, e => {
-    const link = (e.target as Element | null)?.closest?.('.sabl-name');
-    if (link && root?.contains(link)) {
+    const link = (e.target as Element | null)?.closest?.<HTMLAnchorElement>('a[href]');
+    const card = link?.closest<HTMLElement>('[data-dir-card]');
+    const detail = card?.querySelector<HTMLAnchorElement>('.sabl-name');
+    if (link && card && detail && root?.contains(card)
+      && link.origin === detail.origin && link.pathname === detail.pathname) {
       writeListContext({ paths: visible.map(v => v.el.querySelector<HTMLAnchorElement>('.sabl-name')!.getAttribute('href')!), filtered: query.trim() !== '' || Object.keys(state).some(k => state[k] !== config.defaultState[k]) });
     }
   });
@@ -235,6 +326,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const next = config.toggleSave(id);
       const nowSaved = next.includes(id);
       setSaveState(save, nowSaved);
+      // Only the save counts, not the un-save: the metric is "people who
+      // shortlisted this", and sendEvent dedupes it per item per tab session.
       if (nowSaved) { showConfetti(save); sendEvent('save', config.itemType, id); }
       return;
     }
@@ -264,6 +357,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     query = input.value;
     render();
   });
+
+  // Fires on first load and after every view-transition swap: re-grab nodes,
+  // restore URL filter state, and re-derive anything clock- or storage-dependent.
   document.addEventListener('astro:page-load', () => {
     root = document.querySelector<HTMLElement>(rootSelector);
     if (!root) return;
@@ -272,10 +368,14 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     items = [...root.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);
     const params = new URLSearchParams(location.search);
     state = { ...config.defaultState };
+    // Deep links like /scholarships?category=STEM pre-select that track chip.
     for (const key of Object.keys(state)) {
       const value = params.get(key);
       if (value !== null) state = { ...state, [key]: value };
     }
+    // ?q= arrives from the other directory's empty state, which offers this
+    // page as the wider search. Landing here with an empty box would drop the
+    // query the student already typed.
     query = params.get('q') ?? '';
     const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
     if (input) input.value = query;

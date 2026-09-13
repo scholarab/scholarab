@@ -72,3 +72,25 @@ test('detail arrows walk the filtered search in both directions', async ({ page 
   await page.locator('[data-sabd-prev]').press('Enter');
   await expect(page).toHaveURL(new RegExp(`${paths[1]}$`));
 });
+
+test('program Details links preserve filtered previous and next arrows', async ({ page }) => {
+  await page.goto('/programs/');
+  const total = await page.locator('[data-dir-card]').count();
+  const grade = await page.locator('[data-fkey="grade"] [data-chip-count]').evaluateAll((slots, total) => {
+    const slot = slots.find(slot => Number(slot.textContent) >= 3 && Number(slot.textContent) < total);
+    return slot?.closest<HTMLElement>('[data-fkey]')?.dataset.fval;
+  }, total);
+  expect(grade, 'choose a grade with multiple results from the rendered data').toBeTruthy();
+  await page.locator(`[data-fkey="grade"][data-fval="${grade}"]`).click();
+  const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(links => links.map(link => link.getAttribute('href')!));
+  await page.locator('[data-dir-card]:visible .sabl-apply').first().click();
+  await expect(page.locator('[data-sabd-position]')).toHaveText(`FILTERED · 1 OF ${paths.length}`);
+  await expect(page.locator('[data-sabd-prev]')).toHaveAttribute('href', paths.at(-1)!);
+  await expect(page.locator('[data-sabd-next]')).toHaveAttribute('href', paths[1]!);
+  await page.locator('[data-sabd-next]').click();
+  await expect(page.locator('[data-sabd-position]')).toHaveText(`FILTERED · 2 OF ${paths.length}`);
+  await expect(page.locator('[data-sabd-prev]')).toHaveAttribute('href', paths[0]!);
+  await expect(page.locator('[data-sabd-next]')).toHaveAttribute('href', paths[2]!);
+  await page.locator('[data-sabd-prev]').click();
+  await expect(page.locator('[data-sabd-position]')).toHaveText(`FILTERED · 1 OF ${paths.length}`);
+});

@@ -385,6 +385,12 @@ const soonLine = [
     select: (items, state, cache) => filterSortScholarships(items, asFilterState(state), cache) as Item[],
     countFor: (items, state, cache) => selectScholarships(items, asFilterState(state), cache).length,
     groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key },
+    /**
+     * Open money, not-yet-open money, and the rows that publish no amount at
+     * all. The third one matters: an unpriced listing adds $0 to both totals,
+     * so without saying how many there are the header reads as a stalled page
+     * every time a batch of school awards lands without dollar figures.
+     */
     summary(visible, total) {
       let open = 0, soon = 0, unpriced = 0, openNow = 0;
       for (const s of visible) {

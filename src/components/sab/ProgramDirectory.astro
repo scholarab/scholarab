@@ -301,6 +301,9 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     groups: { key: programGroupKey, label: key => PROGRAM_GROUP_LABELS[key] ?? key },
     summary: (visible, total) => ({
       count: directoryCountLine(visible.length, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) !== 'closed').length),
+      // The sibling page puts a dollar figure in this exact slot, so a bare
+      // numeral in 44px serif reads as money. The denominator makes it a
+      // proportion, which is what it always was.
       stat: `${visible.filter(p => p.paid).length} / ${visible.length}`,
     }),
     getSavedIds: () => [...getSavedPrograms()],
