@@ -59,7 +59,9 @@ try {
   scopeTiles = MENU_SCOPES
     .map(slug => facetBySlug.get(slug))
     .filter(f => f !== undefined)
-    .map(f => ({ label: f.label, href: `/scholarships/${f.slug}/`, count: facetItems(f, scholarships).length }));
+    .map(f => ({ label: f.label, href: `/scholarships/${f.slug}/`, count: facetItems(f, scholarships).length }))
+    // Biggest scope first. Array sort is stable, so a tie keeps MENU_SCOPES order.
+    .sort((a, b) => b.count - a.count);
 } catch {
   /* counts are decoration; the nav works without them */
 }
