@@ -13,6 +13,7 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 import SabLogoMark from './SabLogoMark.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { programIsListed } from '../../lib/status';
+import { SCHOLARSHIP_FACETS, facetItems } from '../../lib/facets';
 
 interface Props {
   currentPath: string;
@@ -33,14 +34,46 @@ const { currentPath, ticker } = Astro.props;
 // do not render.
 let scholarshipCount: number | null = null;
 let programCount: number | null = null;
+
+// The Scholarships dropdown (Tesla-style, Ilia 2026-09-13): the two broad
+// scopes, then eight cities chosen for population and reach, not listing count
+// (Lacombe and Okotoks out-list Lethbridge, but far fewer students live there).
+// Slugs must exist in SCHOLARSHIP_FACETS; a missing one is dropped, not faked.
+const MENU_SCOPES = [
+  'alberta', 'national',
+  'calgary', 'edmonton', 'red-deer', 'lethbridge',
+  'medicine-hat', 'grande-prairie', 'fort-mcmurray', 'st-albert',
+];
+const MENU_TOPICS = ['stem', 'arts', 'trades', 'community', 'sports', 'indigenous'];
+const facetBySlug = new Map(SCHOLARSHIP_FACETS.map(f => [f.slug, f]));
+let scopeTiles: { label: string; href: string; count: number | null }[] = MENU_SCOPES
+  .map(slug => facetBySlug.get(slug))
+  .filter(f => f !== undefined)
+  .map(f => ({ label: f.label, href: `/scholarships/${f.slug}/`, count: null }));
+
 try {
   const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
   const today = albertaToday();
   scholarshipCount = scholarships.length;
   programCount = programs.filter(p => programIsListed(p, today)).length;
+  scopeTiles = MENU_SCOPES
+    .map(slug => facetBySlug.get(slug))
+    .filter(f => f !== undefined)
+    .map(f => ({ label: f.label, href: `/scholarships/${f.slug}/`, count: facetItems(f, scholarships).length }));
 } catch {
   /* counts are decoration; the nav works without them */
 }
+
+const topicLinks = [
+  { label: 'All scholarships', href: '/scholarships/' },
+  { label: 'Closing soon', href: '/#closing' },
+  { label: 'Deadline calendar', href: '/deadlines/' },
+  ...MENU_TOPICS
+    .map(slug => facetBySlug.get(slug))
+    .filter(f => f !== undefined)
+    .map(f => ({ label: f.label, href: `/scholarships/${f.slug}/` })),
+  { label: 'Guides', href: '/guides/' },
+];
 
 const navItems = [
   { label: 'Home', href: '/', count: null as number | null },
@@ -84,14 +117,43 @@ const showTicker = ticker ?? true;
       <nav class="sabh-links" id="sabh-links" aria-label="Main">
         <div class="sabh-sheet-label" aria-hidden="true">GO TO</div>
         {navItems.map(n => (
-          <a
-            href={n.href}
-            class={`sabh-link${isActive(n.href) ? ' sabh-link-active' : ''}`}
-            aria-current={isActive(n.href) ? 'page' : undefined}
-          >
-            <span class="sabh-link-label">{n.label}</span>
-            {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count}</span>}
-          </a>
+          <div class={`sabh-item${n.href === '/scholarships/' ? ' sabh-has-menu' : ''}`}>
+            <a
+              href={n.href}
+              class={`sabh-link${isActive(n.href) ? ' sabh-link-active' : ''}`}
+              aria-current={isActive(n.href) ? 'page' : undefined}
+            >
+              <span class="sabh-link-label">{n.label}</span>
+              {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count}</span>}
+            </a>
+            {n.href === '/scholarships/' && (
+              /* Desktop only. Opens on hover (pointer devices) or when focus
+                 enters the item, so a keyboard user tabs from Scholarships
+                 straight into it. The Scholarships link itself still
+                 navigates. */
+              <div class="sabh-menu" role="group" aria-label="Scholarships by location and topic">
+                <div class="sabh-menu-inner">
+                  <ul class="sabh-menu-tiles">
+                    {scopeTiles.map(t => (
+                      <li>
+                        <a href={t.href} class="sabh-tile">
+                          <span class="sabh-tile-name">{t.label}</span>
+                          {t.count !== null && (
+                            <span class="sabh-tile-count">{t.count} {t.count === 1 ? 'scholarship' : 'scholarships'}</span>
+                          )}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <ul class="sabh-menu-list">
+                    {topicLinks.map(l => (
+                      <li><a href={l.href}>{l.label}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
         ))}
         <div class="sabh-sheet-foot" aria-hidden="true">FREE · NO ACCOUNT<br />MADE IN MEDICINE HAT</div>
       </nav>
@@ -165,7 +227,62 @@ const showTicker = ticker ?? true;
      markup; on desktop the links take the middle column and the burger the
      last, as if the wrapper were not there. */
   .sabh-actions { display: contents; }
-  .sabh-links { display: flex; align-items: center; gap: 4px; }
+  /* The nav row is the positioning context for the dropdown, so the panel
+     spans the whole window rather than the width of the link it hangs from. */
+  .sabh-nav { position: relative; }
+  /* Items fill the bar's full height, so the pointer can travel from a link
+     down into the panel without crossing a gap that would close it. */
+  .sabh-links { display: flex; align-items: stretch; gap: 4px; align-self: stretch; }
+  .sabh-item { display: flex; align-items: center; }
+
+  /* ── Scholarships dropdown ── */
+  .sabh-menu {
+    position: absolute; left: 0; right: 0; top: 100%; z-index: 5;
+    background: #0A1310; border-top: 1px solid rgba(242,240,233,0.08);
+    box-shadow: 0 24px 40px -20px rgba(0,0,0,0.6);
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
+  }
+  .sabh-has-menu:focus-within .sabh-menu { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  /* Hover opens only where hover is real. On a touch screen wider than 900px
+     a first tap would otherwise open the panel instead of following the link. */
+  @media (hover: hover) {
+    .sabh-has-menu:hover .sabh-menu { opacity: 1; visibility: visible; transform: none; transition: opacity 0.16s ease 0.06s, transform 0.16s ease 0.06s, visibility 0s linear 0.06s; }
+    .sabh-has-menu:hover .sabh-link { color: #F2F0E9; background: rgba(242,240,233,0.08); }
+  }
+  .sabh-menu-inner {
+    max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
+    padding: 32px 48px 40px;
+    display: grid; grid-template-columns: 1fr auto; gap: 48px;
+  }
+  .sabh-menu ul { list-style: none; margin: 0; padding: 0; }
+  /* align-content: start, or the two tile rows stretch to the height of the
+     topic list beside them and turn into tall empty boxes. */
+  .sabh-menu-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-content: start; }
+  .sabh-tile {
+    display: flex; flex-direction: column; gap: 4px; height: 100%; box-sizing: border-box;
+    padding: 18px 16px; border-radius: 10px; text-decoration: none;
+    border: 1px solid rgba(242,240,233,0.1);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+  .sabh-tile:hover { background: rgba(242,240,233,0.06); border-color: rgba(242,240,233,0.22); }
+  .sabh-tile-name { font-size: 16px; font-weight: 600; color: #F2F0E9; letter-spacing: -0.005em; }
+  .sabh-tile-count { font-size: 13px; color: rgba(242,240,233,0.55); }
+  .sabh-menu-list {
+    border-left: 1px solid rgba(242,240,233,0.12); padding-left: 40px;
+    display: flex; flex-direction: column; gap: 2px; min-width: 190px;
+  }
+  .sabh-menu-list a {
+    display: block; padding: 6px 0; font-size: 14px; font-weight: 500;
+    color: rgba(242,240,233,0.78); text-decoration: none;
+  }
+  .sabh-menu-list a:hover { color: #F2F0E9; }
+  @media (max-width: 1100px) {
+    .sabh-menu-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sabh-menu { transform: none; transition: none; }
+  }
   .sabh-link {
     font-size: 13.5px; font-weight: 500; letter-spacing: 0.005em; color: rgba(242,240,233,0.7);
     text-decoration: none; padding: 7px 13px; border-radius: 6px;
@@ -266,6 +383,10 @@ const showTicker = ticker ?? true;
     /* No room beside the logo and the menu button; the footer still carries
        all three on a phone. */
     .sabh-social { display: none; }
+    /* The dropdown is a desktop affordance; the sheet lists Scholarships as
+       one row, and the hubs are one tap further in. */
+    .sabh-menu { display: none; }
+    .sabh-item { display: block; }
 
     /* Same six anchors, same order, same active class; just a column that
        owns the screen. Nothing to keep in sync with the desktop row. */
@@ -372,6 +493,13 @@ const showTicker = ticker ?? true;
   }
 
   document.addEventListener('keydown', e => {
+    // Escape inside the Scholarships dropdown closes it: the panel is held
+    // open by focus, so dropping focus is what closes it. Focus goes back to
+    // the Scholarships link's item, blurred, so the next Tab resumes there.
+    if (e.key === 'Escape') {
+      const active = document.activeElement as HTMLElement | null;
+      if (active?.closest('.sabh-has-menu')) active.blur();
+    }
     if (!isOpen() || !sheet || !burger) return;
     if (e.key === 'Escape') {
       closeMenu({ restoreFocus: true });
@@ -380,7 +508,9 @@ const showTicker = ticker ?? true;
     if (e.key !== 'Tab') return;
     // Keep Tab inside the sheet and its button while the sheet covers
     // everything else on screen.
-    const stops = [...sheet.querySelectorAll<HTMLElement>('a[href]'), burger];
+    // .sabh-link only: the dropdown's links live inside the sheet's markup but
+    // are display:none on a phone, and focus() on those silently does nothing.
+    const stops = [...sheet.querySelectorAll<HTMLElement>('a.sabh-link[href]'), burger];
     const first = stops[0];
     const last = stops[stops.length - 1];
     if (!first || !last) return;
