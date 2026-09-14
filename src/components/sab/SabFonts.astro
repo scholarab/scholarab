@@ -1,13 +1,22 @@
 ---
 // Font preloads shared by every sab-design page; `italic` adds the serif
 // italic used by the about/match hero copy.
+//
+// `chips` adds Archivo 600, the filter chips' weight, for the directory pages.
+// Without it that face was only discovered from the CSS and landed after first
+// paint, and the wrapping chip rows re-wrapped when it swapped in: a layout
+// shift of 0.12 to 0.14 on the desktop hubs (0.09 to 0.12 on a 4G profile),
+// 0.0007 with the preload. Directories only, because they show chips at every
+// width; elsewhere a phone may never render 600 and the preload would be waste.
 interface Props {
   italic?: boolean;
+  chips?: boolean;
 }
-const { italic = false } = Astro.props;
+const { italic = false, chips = false } = Astro.props;
 ---
 <link rel="preload" href="/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin />
 {italic && <link rel="preload" href="/fonts/instrument-serif-400i.woff2" as="font" type="font/woff2" crossorigin />}
 <link rel="preload" href="/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin />
+{chips && <link rel="preload" href="/fonts/archivo-600.woff2" as="font" type="font/woff2" crossorigin />}
 <link rel="preload" href="/fonts/archivo-700.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin />
