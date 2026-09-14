@@ -268,7 +268,9 @@ const showTicker = ticker ?? true;
   .sabh-tile:hover { background: rgba(242,240,233,0.06); border-color: rgba(242,240,233,0.22); }
   .sabh-tile-name { font-size: 16px; font-weight: 600; color: #F2F0E9; letter-spacing: -0.005em; }
   .sabh-tile-count { font-size: 13px; color: rgba(242,240,233,0.55); }
-  .sabh-menu-list {
+  /* Two classes, not one: `.sabh-menu ul` above resets padding and outranks a
+     bare `.sabh-menu-list`, which left the divider touching the text. */
+  .sabh-menu .sabh-menu-list {
     border-left: 1px solid rgba(242,240,233,0.12); padding-left: 40px;
     display: flex; flex-direction: column; gap: 2px; min-width: 190px;
   }
