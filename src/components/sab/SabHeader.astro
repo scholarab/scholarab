@@ -95,6 +95,18 @@ const showTicker = ticker ?? true;
         ))}
         <div class="sabh-sheet-foot" aria-hidden="true">FREE · NO ACCOUNT<br />MADE IN MEDICINE HAT</div>
       </nav>
+      {/* Same destinations and link treatment as the footer's CONTACT column:
+          outside links open a new tab, and the mailto sits inside email_off so
+          Cloudflare's email obfuscation does not rewrite the anchor. */}
+      <div class="sabh-social">
+        <a href="https://www.instagram.com/scholarab.ca" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" /></svg>
+        </a>
+        <a href="https://www.tiktok.com/@scholarab" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.11V9.77a5.7 5.7 0 0 0-.77-.05 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.24-1.48z" /></svg>
+        </a>
+        <Fragment set:html={`<!--email_off--><a href="mailto:contact.scholarab@gmail.com" aria-label="Email ScholarAB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a><!--/email_off-->`} />
+      </div>
       <button
         type="button"
         class="sabh-burger"
@@ -166,6 +178,19 @@ const showTicker = ticker ?? true;
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
   .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count { display: none; }
+  /* The right-hand column, balancing the logo: the same three destinations
+     the footer carries, as quiet glyphs in the links' colour. */
+  /* :global on the children: the email link is injected with set:html (for
+     the email_off comments), so it never receives this component's scope
+     attribute and a scoped `a` selector would miss it. */
+  .sabh-social { justify-self: end; display: flex; align-items: center; gap: 2px; }
+  .sabh-social :global(a) {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 6px; color: rgba(242,240,233,0.7);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .sabh-social :global(a:hover) { color: #F2F0E9; background: rgba(242,240,233,0.08); }
+  .sabh-social :global(svg) { width: 18px; height: 18px; display: block; }
 
   /* ── Menu button: three bars that fold into an ✕ while the sheet is open ── */
   .sabh-burger {
@@ -238,6 +263,9 @@ const showTicker = ticker ?? true;
        no longer claims the fold, so nothing is subtracting this. */
     .sabh-nav { grid-template-columns: 1fr auto; padding: 0 8px 0 20px; }
     .sabh-burger { display: flex; }
+    /* No room beside the logo and the menu button; the footer still carries
+       all three on a phone. */
+    .sabh-social { display: none; }
 
     /* Same six anchors, same order, same active class; just a column that
        owns the screen. Nothing to keep in sync with the desktop row. */
