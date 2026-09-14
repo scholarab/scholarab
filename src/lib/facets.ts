@@ -66,10 +66,11 @@ export interface Facet {
   /** Guide slug that explains this facet, cross-linked both ways. */
   guide?: string;
   /**
-   * A full-page background for the hub, fixed behind everything while the page
-   * scrolls, instead of a photo band. File at public/photos/backdrops/<name>.webp;
-   * portrait works, since it is cropped to cover and anchored to the bottom.
-   * Placement is in the hub page's CSS.
+   * A full-page photo background for the hub, fixed behind everything while
+   * the page scrolls. Needs five files in public/photos/backdrops/:
+   * <name>-wide-{1672,3344}.webp, <name>-tall-{1000,2000}.webp and
+   * <name>-tile.webp (the header menu tile). Placement is in the hub page's CSS;
+   * credits in public/photos/CREDITS.md.
    */
   backdrop?: string;
 }
@@ -94,6 +95,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Edmonton',
     label: 'Edmonton',
     h1: 'Edmonton scholarships',
+    backdrop: 'edmonton',
     title: 'Edmonton High School Scholarships',
     description:
       'Scholarships for Edmonton high school students: the public and Catholic division awards, the Edmonton Community Foundation funds, and school award lists.',
@@ -360,6 +362,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     label: 'Province-wide',
     broad: true,
     h1: 'Province-wide scholarships',
+    backdrop: 'alberta',
     title: 'Province-Wide Scholarships in Alberta',
     description:
       'Alberta scholarships with no city requirement: the Rutherford, provincial arts and trades awards, credit union and energy money, open anywhere in the province.',
