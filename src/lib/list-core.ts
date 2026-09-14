@@ -203,6 +203,14 @@ export function groupRuns<T>(items: T[], keyOf: (item: T) => string, labels: Rec
  * it counted a wall of cards without saying how much of it a student could act
  * on today, which on this directory is about a quarter.
  */
+/**
+ * How many cards a directory shows before its "Show more" button. 24 divides
+ * by one, two and three, so the phone, tablet and desktop grids all end on a
+ * full row. The server renders every card (search engines and no-JS readers
+ * get the whole list) and hides the ones past this.
+ */
+export const DIRECTORY_PAGE_SIZE = 24;
+
 export function directoryCountLine(shown: number, total: number, noun: string, openNow: number): string {
   // Suppressed when everything shown is already open; "117 OF 117 PROGRAMS ·
   // 117 OPEN NOW" is the same number three times. The clause earns its place

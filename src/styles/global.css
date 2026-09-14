@@ -712,6 +712,40 @@ body.quiz-results #match-divider {
 }
 .sabl-apply:hover { color: #0A6B4D; }
 
+/* "Show more" under a directory grid. The count line says what is left, the
+   filled button takes the next step, the underlined link takes all of it. */
+.sabl-more {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  margin-top: 36px; padding: 26px 20px; text-align: center;
+}
+.sabl-more[hidden], .sabl-more-all[hidden] { display: none; }
+/* The first-step cut, before directory-client has run. html.js is set by an
+   inline script in the layout's head, so without JavaScript nothing is cut
+   and no button that cannot work is offered. The client clears
+   data-dir-later on its first render and uses `hidden` from then on. */
+html.js .sabl-grid [data-dir-later] { display: none; }
+html:not(.js) .sabl-more { display: none; }
+.sabl-more-line { font-size: 12px; letter-spacing: 0.06em; color: rgba(20,25,21,0.6); margin: 0; }
+.sabl-more-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 22px; }
+.sabl-more-btn {
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 15px;
+  min-height: 48px; padding: 0 30px; border-radius: 100px; cursor: pointer;
+  background: #141915; color: #F2F0E9; border: 1.5px solid #141915;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.sabl-more-btn:hover { background: #0A6B4D; border-color: #0A6B4D; }
+.sabl-more-all {
+  font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 15px;
+  min-height: 44px; padding: 0 6px; background: none; border: none; cursor: pointer;
+  color: #141915; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px;
+}
+.sabl-more-all:hover { color: #0A6B4D; }
+@media (prefers-reduced-motion: reduce) { .sabl-more-btn { transition: none; } }
+@media (max-width: 640px) {
+  .sabl-more { margin-top: 24px; }
+  .sabl-more-btn { width: 100%; }
+}
+
 .sabl-empty { text-align: center; padding: 80px 0; border: 2px dashed rgba(20,25,21,0.2); border-radius: 20px; margin-top: 16px; }
 .sabl-empty-title { font-family: 'Instrument Serif', serif; font-size: 34px; margin-bottom: 10px; }
 .sabl-empty-sub { font-size: 15px; color: rgba(20,25,21,0.55); margin-bottom: 24px; }

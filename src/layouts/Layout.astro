@@ -91,6 +91,15 @@ const {
         document.head.appendChild(s);
       })();
     </script>
+    <!-- html.js: this page can run scripts. CSS keys things off it that only
+         make sense with JavaScript, such as the directories' "Show more" cut
+         (global.css), so a reader or crawler without it gets the full list.
+         Re-added after every ClientRouter swap, which resets <html>'s
+         attributes to the incoming page's. -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      document.addEventListener('astro:after-swap', function () { document.documentElement.classList.add('js'); });
+    </script>
   </head>
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
 

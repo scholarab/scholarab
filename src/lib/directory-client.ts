@@ -5,6 +5,7 @@ import { sendEvent } from './events.ts';
 import { normalizeSearchQuery, tokenIndexMayMatch } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
 import { showConfetti } from './utils.ts';
+import { DIRECTORY_PAGE_SIZE } from './list-core.ts';
 
 export interface DirectoryItem {
   el: HTMLElement;
@@ -59,7 +60,12 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
   saveLabel(name: string, saved: boolean): string;
   /** Runs after cards are (re)parsed on every astro:page-load; e.g. recompute day chips. */
   onCardsParsed?(items: T[]): void;
+  /** Cards shown before "Show more"; DIRECTORY_PAGE_SIZE unless a test says otherwise. */
+  pageSize?: number;
 }
+
+/** Where a reader was when they left the list for a listing, so Back lands there. */
+const SCROLL_KEY = 'sab:dir-scroll';
 
 interface SearchIndex { s: string[]; p: string[] }
 
@@ -98,6 +104,12 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   let query = '';
   let visible: T[] = [];
   let emptyTimer: ReturnType<typeof setTimeout> | undefined;
+  // The list reveals in steps rather than all at once: every match is still
+  // counted, searched, summed and handed to the detail arrows (`visible`), but
+  // only the first `shown` are on screen. Any change to what matches starts the
+  // count over; only the buttons raise it.
+  const pageSize = config.pageSize ?? DIRECTORY_PAGE_SIZE;
+  let shown = pageSize;
 
   function setSaveState(btn: HTMLElement, saved: boolean) {
     btn.classList.toggle('on', saved);
@@ -137,21 +149,26 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     return el;
   }
 
-  /** visible cards with a header node spliced in ahead of each run. */
-  function withGroupHeaders(visible: T[]): HTMLElement[] {
+  /**
+   * The on-screen cards with a header node spliced in ahead of each run.
+   * Grouping and the header counts come from every match, not just the cards
+   * revealed so far: "CLOSING LATER 90" stays 90 while only six are showing.
+   */
+  function withGroupHeaders(page: T[], all: T[]): HTMLElement[] {
     const g = config.groups;
-    if (!g) return visible.map(v => v.el);
-    const keys = visible.map(v => g.key(v));
+    if (!g) return page.map(v => v.el);
+    const allKeys = all.map(v => g.key(v));
     // One group is no grouping: a lone "OPEN NOW" bar over the whole grid is
     // a label with nothing to distinguish it from.
-    if (new Set(keys).size < 2) return visible.map(v => v.el);
+    if (new Set(allKeys).size < 2) return page.map(v => v.el);
 
     const counts = new Map<string, number>();
-    for (const k of keys) counts.set(k, (counts.get(k) ?? 0) + 1);
+    for (const k of allKeys) counts.set(k, (counts.get(k) ?? 0) + 1);
 
+    const keys = allKeys.slice(0, page.length);
     const out: HTMLElement[] = [];
     let current: string | null = null;
-    visible.forEach((v, i) => {
+    page.forEach((v, i) => {
       if (keys[i] !== current) {
         current = keys[i]!;
         out.push(headerFor(current, counts.get(current) ?? 0));
@@ -170,6 +187,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       if (value && value !== config.defaultState[key]) url.searchParams.set(key, value);
       else url.searchParams.delete(key);
     }
+    // In the URL, so Back from a listing and a reload both come back to the
+    // same number of cards instead of collapsing to the first 24.
+    if (shown > pageSize) url.searchParams.set('show', String(shown));
+    else url.searchParams.delete('show');
     if (url.href !== location.href) history.replaceState(history.state, '', url);
 
     const q = query.trim();
@@ -179,19 +200,23 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const ctx = config.renderContext?.(items) as C;
     const searched = ql ? items.filter(it => it.search.includes(ql)) : items;
     visible = config.select(searched, state, ctx);
+    const page = visible.slice(0, shown);
     const grid = root.querySelector<HTMLElement>('[data-dir-grid]');
     if (grid) {
-      const shown = new Set(visible.map(v => v.el));
+      const onScreen = new Set(page.map(v => v.el));
       for (const it of items) {
-        const hidden = !shown.has(it.el);
+        const hidden = !onScreen.has(it.el);
         if (it.el.hidden !== hidden) it.el.hidden = hidden;
+        // The server's pre-JS cut (see global.css); `hidden` owns it now.
+        if (it.el.hasAttribute('data-dir-later')) it.el.removeAttribute('data-dir-later');
       }
+      for (const header of headers.values()) header.removeAttribute('data-dir-later');
       // Moving nodes already in order causes relayout without a visual change.
       // The server supplies the default order, and query-only filtering preserves
       // it, so compare node identities and move only the misplaced survivors.
       // Keep hidden cards in the document; move only misplaced visible nodes.
       for (const header of headers.values()) header.hidden = true;
-      const want = withGroupHeaders(visible);
+      const want = withGroupHeaders(page, visible);
       let cursor = grid.firstElementChild;
       for (const node of want) {
         while (cursor && (cursor as HTMLElement).hidden) cursor = cursor.nextElementSibling;
@@ -199,6 +224,23 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
         else cursor = cursor.nextElementSibling;
       }
       grid.hidden = visible.length === 0;
+    }
+
+    const more = root.querySelector<HTMLElement>('[data-dir-more]');
+    if (more) {
+      const remaining = visible.length - page.length;
+      more.hidden = remaining <= 0;
+      const line = more.querySelector<HTMLElement>('[data-dir-more-line]');
+      if (line) line.textContent = `SHOWING ${page.length} OF ${visible.length}`;
+      const btn = more.querySelector<HTMLElement>('[data-dir-more-btn]');
+      if (btn) btn.textContent = `Show ${Math.min(pageSize, remaining)} more`;
+      // "Show all" only earns its place when it does something the other
+      // button would not do in one press.
+      const all = more.querySelector<HTMLElement>('[data-dir-all]');
+      if (all) {
+        all.hidden = remaining <= pageSize;
+        all.textContent = `Show all ${visible.length}`;
+      }
     }
 
     for (const [key, text] of Object.entries(config.summary(visible, items.length))) {
@@ -312,6 +354,12 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const detail = card?.querySelector<HTMLAnchorElement>('.sabl-name');
     if (link && card && detail && root?.contains(card)
       && link.origin === detail.origin && link.pathname === detail.pathname) {
+      // The router restores scroll before this page's cards are revealed, so a
+      // position deep in a long list gets clamped to the first 24. Kept here
+      // and re-applied once the list is back at full length.
+      try {
+        sessionStorage.setItem(SCROLL_KEY, JSON.stringify({ url: location.pathname + location.search, y: scrollY }));
+      } catch { /* storage blocked: Back lands a little higher, nothing breaks */ }
       writeListContext({ paths: visible.map(v => v.el.querySelector<HTMLAnchorElement>('.sabl-name')!.getAttribute('href')!), filtered: query.trim() !== '' || Object.keys(state).some(k => state[k] !== config.defaultState[k]) });
     }
   });
@@ -332,12 +380,27 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
+    const step = t.closest<HTMLElement>('[data-dir-more-btn], [data-dir-all]');
+    if (step) {
+      const before = Math.min(shown, visible.length);
+      shown = step.matches('[data-dir-all]') ? Math.max(pageSize, visible.length) : shown + pageSize;
+      render();
+      // Once everything is out the block hides, taking the pressed button with
+      // it. Focus goes to the first card that press revealed rather than
+      // dropping to <body>, which would send a keyboard user back to the top.
+      if (step.closest<HTMLElement>('[data-dir-more]')?.hidden || step.hidden) {
+        visible[before]?.el.querySelector<HTMLElement>('.sabl-name')?.focus({ preventScroll: true });
+      }
+      return;
+    }
+
     const chip = t.closest<HTMLElement>('[data-fkey]');
     if (chip) {
       const k = chip.dataset.fkey as keyof S & string;
       const v = chip.dataset.fval ?? '';
       const toggleOff = config.toggleKeys.includes(k) && state[k] === v && v !== config.defaultState[k];
       state = { ...state, [k]: toggleOff ? config.defaultState[k] : v };
+      shown = pageSize;
       render();
       return;
     }
@@ -345,6 +408,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (t.closest('[data-dir-clear]')) {
       state = { ...config.defaultState };
       query = '';
+      shown = pageSize;
       const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
       if (input) input.value = '';
       render();
@@ -355,6 +419,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const input = e.target as HTMLInputElement | null;
     if (!root || !input?.matches?.('[data-dir-search]') || !root.contains(input)) return;
     query = input.value;
+    shown = pageSize;
     render();
   });
 
@@ -363,6 +428,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   document.addEventListener('astro:page-load', () => {
     root = document.querySelector<HTMLElement>(rootSelector);
     if (!root) return;
+    // The layout sets this in <head>; repeated here so a page built on another
+    // layout still gets its "Show more" block (global.css hides it without).
+    document.documentElement.classList.add('js');
     headers.clear();
     root.querySelectorAll<HTMLElement>('[data-dir-group]').forEach(h => headers.set(h.dataset.dirGroup!, h));
     items = [...root.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);
@@ -377,10 +445,38 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // page as the wider search. Landing here with an empty box would drop the
     // query the student already typed.
     query = params.get('q') ?? '';
+    // A hand-edited ?show=abc or ?show=3 falls back to the first step.
+    const showParam = Number(params.get('show'));
+    shown = Number.isFinite(showParam) && showParam > pageSize ? Math.floor(showParam) : pageSize;
     const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
     if (input) input.value = query;
     config.onCardsParsed?.(items);
     paintSaved();
     render();
+    restoreScroll();
   });
+
+  /** One-shot: put a reader back where they left this exact list. */
+  function restoreScroll() {
+    let saved: { url?: string; y?: number } | null;
+    try {
+      saved = JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? 'null');
+      sessionStorage.removeItem(SCROLL_KEY);
+    } catch { return; }
+    if (!saved || saved.url !== location.pathname + location.search || typeof saved.y !== 'number') return;
+    const y = saved.y;
+    // Only when the page is back at a length the router could not have
+    // restored into on its own; a first-24 list needs no help.
+    if (shown <= pageSize) return;
+    scrollTo(0, y);
+    // The router's own restore can land after this handler, clamped to the
+    // short page it measured. That only ever leaves the page too high, so for
+    // a quarter of a second, pull it back down if it is above the spot.
+    let checks = 0;
+    const recheck = () => {
+      if (scrollY < y - 2) scrollTo(0, y);
+      if (++checks < 5) setTimeout(recheck, 50);
+    };
+    requestAnimationFrame(recheck);
+  }
 }

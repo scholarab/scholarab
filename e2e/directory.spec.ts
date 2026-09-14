@@ -2,10 +2,26 @@ import { test, expect } from '@playwright/test';
 import raw from '../src/data/scholarships.json' with { type: 'json' };
 import type { Scholarship } from '../src/lib/data-loader';
 import { enrichScholarships } from '../src/lib/enrich';
-import { DEFAULT_SCHOLARSHIP_STATE, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, directoryCountLine } from '../src/lib/list-core';
+import type { Page } from '@playwright/test';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, directoryCountLine } from '../src/lib/list-core';
 import { normalizeSearchQuery, scholarshipSearchBlob } from '../src/lib/search-text';
 
 const items = filterSortScholarships(enrichScholarships(raw as unknown as Scholarship[]), DEFAULT_SCHOLARSHIP_STATE);
+const PAGE = DIRECTORY_PAGE_SIZE;
+
+/** Press "Show more" until the whole filtered list is on screen. */
+async function showEverything(page: Page) {
+  const btn = page.locator('[data-dir-more-btn]');
+  while (await btn.isVisible()) await btn.click();
+}
+
+/** The group headers a reader sees: runs that start inside the revealed cards. */
+function shownRuns(visible: typeof items, shown: number) {
+  const runs = groupRuns(visible, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS);
+  if (runs.length < 2) return [];
+  let at = 0;
+  return runs.filter(r => { const start = at; at += r.count; return start < shown; }).map(r => `${r.label} ${r.count}`);
+}
 const unique = items.find(s => items.filter(x => scholarshipSearchBlob(x).includes(normalizeSearchQuery(s.title))).length === 1)!;
 const query = unique.title;
 test('all listings remain accessible without JavaScript', async ({ browser, baseURL }) => {
@@ -24,10 +40,11 @@ test('search preserves results, groups, chips, money, closed awards and history'
       await page.locator('[data-dir-search]').fill(searchQuery);
       const state = { ...DEFAULT_SCHOLARSHIP_STATE, sortBy, searchQuery };
       const visible = filterSortScholarships(items, state);
-      expect(await page.locator('[data-dir-card]:not([hidden])').evaluateAll(els => els.map(e => Number(e.getAttribute('data-id'))))).toEqual(visible.map(s => s.id));
+      expect(await page.locator('[data-dir-card]:not([hidden])').evaluateAll(els => els.map(e => Number(e.getAttribute('data-id'))))).toEqual(visible.slice(0, PAGE).map(s => s.id));
+      // The count line and the stat still describe every match, not just the
+      // cards revealed so far.
       await expect(page.locator('[data-dir-count]')).toHaveText(directoryCountLine(visible.length, items.length, 'LISTINGS', visible.filter(s => getScholarshipStatus(s) === 'active').length));
-      const runs = groupRuns(visible, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS);
-      expect(await page.locator('[data-dir-group]:not([hidden])').evaluateAll(els => els.map(e => e.textContent!.replace(/\s+/g, ' ').trim()))).toEqual(runs.length > 1 ? runs.map(r => `${r.label} ${r.count}`) : []);
+      expect(await page.locator('[data-dir-group]:not([hidden])').evaluateAll(els => els.map(e => e.textContent!.replace(/\s+/g, ' ').trim()))).toEqual(shownRuns(visible, PAGE));
       const chips = await page.locator('[data-fkey]:has([data-chip-count])').evaluateAll(els => els.map(e => ({ key: e.getAttribute('data-fkey')!, value: e.getAttribute('data-fval')!, count: Number(e.querySelector('[data-chip-count]')!.textContent) })));
       const keys = { category: 'selectedCategory', status: 'statusFilter', region: 'selectedRegion' };
       for (const chip of chips) expect(chip.count).toBe(filterSortScholarships(items, { ...state, [keys[chip.key as keyof typeof keys]]: chip.value || null }).length);
@@ -39,7 +56,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
   for (const s of items.filter(s => s.concluded)) await expect(page.locator(`[data-dir-card][data-id="${s.id}"] [data-days-chip]`)).toHaveText('CLOSED');
   await expect(page.locator('[data-dir-empty]')).toBeVisible();
   await page.locator('[data-dir-clear]').press('Enter');
-  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(items.length);
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(Math.min(PAGE, items.length));
   expect(await page.evaluate(() => history.length)).toBe(historyLength);
   await page.locator(`[data-fkey="category"][data-fval="${unique.category}"]`).press('Enter');
   await page.locator('[data-dir-search]').fill(query);
@@ -54,6 +71,41 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(1);
 });
 
+test('the list reveals 24 at a time and Back returns to the same card', async ({ page }) => {
+  await page.goto('/scholarships/');
+  const cards = page.locator('[data-dir-card]:visible');
+  await expect(cards).toHaveCount(PAGE);
+  await expect(page.locator('[data-dir-more-line]')).toHaveText(`SHOWING ${PAGE} OF ${items.length}`);
+  await expect(page.locator('[data-dir-more-btn]')).toHaveText(`Show ${PAGE} more`);
+  await expect(page.locator('[data-dir-all]')).toHaveText(`Show all ${items.length}`);
+
+  await page.locator('[data-dir-more-btn]').click();
+  await page.locator('[data-dir-more-btn]').click();
+  await expect(cards).toHaveCount(PAGE * 3);
+  await expect(page).toHaveURL(new RegExp(`show=${PAGE * 3}`));
+
+  // Leave from deep in the list, come back, land on the same card.
+  const target = items[PAGE * 2 + 5]!;
+  const link = page.locator(`[data-dir-card][data-id="${target.id}"] .sabl-name`);
+  await link.scrollIntoViewIfNeeded();
+  await link.click();
+  await expect(page).toHaveURL(new RegExp(`/scholarships/${target._slug}/`));
+  await page.goBack();
+  await expect(cards).toHaveCount(PAGE * 3);
+  await expect(page.locator(`[data-dir-card][data-id="${target.id}"]`)).toBeInViewport();
+
+  // A new filter starts the count over and drops ?show.
+  await page.locator('[data-fkey="status"][data-fval="active"]').click();
+  expect(await cards.count()).toBeLessThanOrEqual(PAGE);
+  await expect(page).not.toHaveURL(/show=/);
+
+  // "Show all" puts the whole filtered list out and hides the block.
+  await page.goto('/scholarships/');
+  await page.locator('[data-dir-all]').click();
+  await expect(cards).toHaveCount(items.length);
+  await expect(page.locator('[data-dir-more]')).toBeHidden();
+});
+
 test('detail arrows walk the filtered search in both directions', async ({ page }) => {
   const term = unique.title.split(' ').find(word => {
     const n = items.filter(s => scholarshipSearchBlob(s).includes(normalizeSearchQuery(word))).length;
@@ -61,6 +113,7 @@ test('detail arrows walk the filtered search in both directions', async ({ page 
   })!;
   await page.goto(`/scholarships/?sort=highest_pay&q=${encodeURIComponent(term)}`);
   await expect(page.locator('[data-dir-search]')).toHaveValue(term);
+  await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(els => els.map(e => e.getAttribute('href')));
   await page.locator('[data-dir-card]:visible .sabl-name').first().press('Enter');
   for (const index of [0, 1, 2]) {
@@ -82,6 +135,7 @@ test('program Details links preserve filtered previous and next arrows', async (
   }, total);
   expect(grade, 'choose a grade with multiple results from the rendered data').toBeTruthy();
   await page.locator(`[data-fkey="grade"][data-fval="${grade}"]`).click();
+  await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(links => links.map(link => link.getAttribute('href')!));
   await page.locator('[data-dir-card]:visible .sabl-apply').first().click();
   await expect(page.locator('[data-sabd-position]')).toHaveText(`FILTERED · 1 OF ${paths.length}`);

@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
-import { DEFAULT_SCHOLARSHIP_STATE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipDayChip, scholarshipGroupKey, shortDate } from '../../lib/list-core.ts';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipDayChip, scholarshipGroupKey, shortDate } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
@@ -261,7 +261,7 @@ const soonLine = [
       return (
         <>
         {head && (
-          <div class="sabl-group" data-dir-group={head.key}>
+          <div class="sabl-group" data-dir-group={head.key} data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}>
             <span class="sabl-group-label">{head.label}</span>
             <span class="sabl-group-count">{head.count}</span>
           </div>
@@ -269,6 +269,7 @@ const soonLine = [
         <div
           class="sabl-card"
           data-dir-card
+          data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
           data-id={s.id}
           data-name={s.title}
           data-category={s.category ?? undefined}
@@ -319,6 +320,17 @@ const soonLine = [
         </>
       );
     })}
+  </div>
+
+  {/* Every card is in the HTML. Past the first step they carry data-dir-later,
+      which global.css hides only under html.js, so a reader or crawler without
+      JavaScript still gets the whole list. directory-client drives the rest. */}
+  <div class="sabl-more" data-dir-more hidden={initial.length <= DIRECTORY_PAGE_SIZE}>
+    <p class="sabl-mono sabl-more-line" data-dir-more-line>SHOWING {Math.min(DIRECTORY_PAGE_SIZE, initial.length)} OF {initial.length}</p>
+    <div class="sabl-more-actions">
+      <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
+      <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length}</button>
+    </div>
   </div>
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
