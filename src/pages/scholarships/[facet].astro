@@ -257,13 +257,20 @@ const breadcrumbJson = {
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .sabl-has-backdrop { --sabl-glass: rgba(251,248,242,0.96); }
   }
+  /* These three sizes are fixed on purpose, and they add up to the plain
+     hubs' offset: e2e/smoke.spec.ts checks that every hub puts its toolbar at
+     the same height, so hopping from Calgary to Edmonton does not move the
+     chips under the cursor. Plain hub: 72px body padding + a 42px crumb row
+     = 114px to the top of the title. Here: 32 padding + 34 pill + 11 gap +
+     1 border + 36 panel padding = 114. Change one, change another. */
   .sabl-has-backdrop .sabp-body { padding-top: 32px; }
   .sabl-has-backdrop .sabl-crumbs {
-    display: inline-flex; padding: 8px 14px; border-radius: 100px; color: #4B5563;
+    display: inline-flex; align-items: center; box-sizing: border-box;
+    height: 34px; padding: 0 14px; border-radius: 100px; color: #4B5563;
   }
   .sabl-has-backdrop .sabl-crumbs a { color: #4B5563; }
   .sabl-has-backdrop .sabl-head {
-    margin-top: 12px; padding: 36px 40px 6px; border-radius: 22px;
+    margin-top: 11px; padding: 36px 40px 6px; border-radius: 22px;
   }
   .sabl-has-backdrop .sabl-group {
     padding: 10px 16px; border-radius: 12px; margin-top: 10px;
