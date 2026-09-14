@@ -214,12 +214,9 @@ describe('POST /api/event', () => {
     expect(mockInsert).not.toHaveBeenCalled()
   })
 
-  it('accepts app_step with item fields', async () => {
-    const res = await call({ event: 'app_step', itemType: 'scholarship', itemId: 12 })
-    expect(res.status).toBe(204)
-    expect(mockValues).toHaveBeenCalledWith({
-      event: 'app_step', itemType: 'scholarship', itemId: 12, meta: null,
-    })
+  it('no longer records app_step, whose ticker was deleted', async () => {
+    await call({ event: 'app_step', itemType: 'scholarship', itemId: 12 })
+    expect(mockInsert).not.toHaveBeenCalled()
   })
 
   it('accepts detail_view with item fields', async () => {

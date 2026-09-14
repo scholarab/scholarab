@@ -143,7 +143,10 @@ export default function AdminShell({ user, page, data }: Props) {
             {deploying ? 'Queuing…' : 'Review and publish'}
           </button>
           <p role="status" className="text-xs text-white/50">
-            {publication.status === 'idle'
+            {/* A finished publication has nothing left to report, and its stored
+                message can be a stale manual note; only in-flight or failed
+                runs show their message. */}
+            {publication.status === 'idle' || publication.status === 'published'
               ? 'Edits are saved as drafts until published.'
               : (publication.message ?? publication.status)}
           </p>

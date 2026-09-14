@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-04",
+  "generated": "2026-09-13",
   "months": [
     {
       "month": "2026-03",
@@ -45,10 +45,10 @@
     },
     {
       "month": "2026-09",
-      "clicks": 31,
-      "impressions": 1914,
+      "clicks": 251,
+      "impressions": 14448,
       "position": 7.7,
-      "days": 2
+      "days": 11
     }
   ]
 }

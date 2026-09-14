@@ -5,10 +5,15 @@ import { ADMIN_PAGE_SIZE as PAGE_SIZE } from '../../lib/constants'
 import { AdminTabBar, AdminPagination, AdminDeleteModal } from './primitives'
 
 import type { Program as BaseProgram } from '../../lib/data-loader'
+import { PROGRAM_CATEGORIES } from '../../lib/facets'
 
 type Program = AdminRecord<BaseProgram>
 
-const CATEGORIES = ['Biology', 'Chemistry', 'Computer Science', 'Engineering', 'Environmental', 'Math', 'Medicine', 'Physics', 'Social Science', 'Multidisciplinary', 'Other']
+// The tabs and the dropdown read the one declared vocabulary. This list used to
+// be written out here (Biology, Chemistry, Medicine...), none of which the data
+// uses, so every tab but Engineering read 0 and the form offered categories
+// validate-data would reject.
+const CATEGORIES: readonly string[] = PROGRAM_CATEGORIES
 
 interface Props {
   initialData: AdminPage<Program>

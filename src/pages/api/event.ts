@@ -7,7 +7,8 @@ import { jsonError } from '../../lib/api-response'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'app_step', 'source_visit'])
+// app_step left with the application-step ticker (deleted with /app, Aug 2026).
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit'])
 // Campaign sources, mirroring SOURCES in src/lib/events.ts. Anyone can type
 // `?s=` into the address bar, so the server keeps its own copy of the list
 // rather than trusting whatever the client sends.

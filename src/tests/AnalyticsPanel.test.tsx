@@ -15,14 +15,12 @@ const data: AnalyticsData = {
     { month: '2026-07', event: 'quiz_complete', n: 3 },
     { month: '2026-09', event: 'detail_view', n: 25 },
     { month: '2026-09', event: 'apply_click', n: 10 },
-    { month: '2026-09', event: 'app_step', n: 6 },
   ],
   perItem: [
     { month: '2026-07', event: 'detail_view', itemType: 'scholarship', itemId: 1, n: 60 },
     { month: '2026-07', event: 'apply_click', itemType: 'scholarship', itemId: 1, n: 30 },
     { month: '2026-09', event: 'detail_view', itemType: 'scholarship', itemId: 1, n: 20 },
     { month: '2026-09', event: 'apply_click', itemType: 'scholarship', itemId: 1, n: 10 },
-    { month: '2026-09', event: 'app_step', itemType: 'scholarship', itemId: 1, n: 6 },
     { month: '2026-07', event: 'detail_view', itemType: 'program', itemId: 7, n: 40 },
   ],
   daily: [
@@ -114,8 +112,7 @@ describe('AnalyticsPanel', () => {
     expect(cells[2]).toBe('80')   // 60 + 20 views
     expect(cells[3]).toBe('40')   // 30 + 10 applies
     expect(cells[4]).toBe('50%')
-    expect(cells[6]).toBe('6')    // students who ticked an application step
-    expect(cells[8]).toBe('8')    // its own July signups; item 99 holds the other 4
+    expect(cells[7]).toBe('8')    // its own July signups; item 99 holds the other 4
   })
 
   it('narrows every section to the selected month', () => {
@@ -140,15 +137,14 @@ describe('AnalyticsPanel', () => {
     const cells = [...row.querySelectorAll('td')].map(c => c.textContent)
     expect(cells[2]).toBe('0')   // no views
     expect(cells[4]).toBe('·')   // no rate to show
-    expect(cells[8]).toBe('4')   // but four people are waiting on it
+    expect(cells[7]).toBe('4')   // but four people are waiting on it
   })
 
-  // app_step landed in the DB and the daily chart but had no tile, no column
-  // and no per-item cell, so the columns could never sum to the daily total.
-  it('surfaces application steps in both the month table and the tiles', () => {
+  // The application-step ticker was deleted with /app; its tile could only
+  // ever show one historical row, so it is gone rather than left reading 1.
+  it('no longer shows the dead Applications started metric', () => {
     render(<AnalyticsPanel data={data} />)
-    expect(monthRow('Sep 2026')[4]).toBe('6')
-    expect(screen.getByText('Applications started')).toBeTruthy()
+    expect(screen.queryByText('Applications started')).toBeNull()
   })
 
   it('renders an empty month without crashing', () => {

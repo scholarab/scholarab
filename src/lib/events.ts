@@ -2,9 +2,6 @@
 // beyond the event name and which item it concerns. Must never break the page.
 export type AppEvent =
   | 'detail_view' | 'apply_click' | 'save' | 'quiz_start' | 'quiz_complete' | 'search_empty'
-  /** First application step ticked on an award. Deduped per item per session,
-   *  so it counts students who started something, not ticks. */
-  | 'app_step'
   /** Landed from an off-site campaign link carrying `?s=`. Meta is the source
    *  code, never free text; see SOURCES. */
   | 'source_visit'
