@@ -67,6 +67,8 @@ The ScholarAB name and logo are not covered by either license. A public fork has
 
 The web fonts in `public/fonts/` (Archivo, Inter, Instrument Serif, Manrope, IBM Plex Mono) are the work of their respective authors under the SIL Open Font License 1.1, and are covered by neither license above. Notices and full license text: [`public/fonts/OFL.txt`](./public/fonts/OFL.txt).
 
+The photos in `public/photos/` are also covered by neither license. Each keeps its own license (Pexels, for the current set); sources and terms are in [`public/photos/CREDITS.md`](./public/photos/CREDITS.md).
+
 If you want to do something these terms don't cover, just ask: contact.scholarab@gmail.com. Permission is usually easy to get.
 
 ## 🔐 Security

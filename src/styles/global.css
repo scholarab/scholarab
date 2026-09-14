@@ -209,8 +209,9 @@ body {
      thing that needs to: it fills the fold, and the header is no longer inside
      it to take up part of that itself. Both apply above 900px only; below it
      the ticker is hidden, the nav is padding-sized, and the hero stops
-     claiming the fold. */
-  --sab-nav-h: 89px;
+     claiming the fold. The nav row is one height at every width now (the thin
+     bar, 2026-09-13), so the mobile sheet reads it too. */
+  --sab-nav-h: 52px;
   --sab-ticker-h: 45px;
   /* The hard shadow a control lifts onto. Mint on cream is 1.8:1, so the lift
      read as a smudge rather than as a second edge; deep green is the default
@@ -229,7 +230,6 @@ body {
 /* Accent-filled controls are themselves #2FD3A0, so they must opt back out of
    whatever surface they sit on; a mint ring on a mint pill is 1:1, and a mint
    shadow under a mint button is the same problem one property along. */
-.sabh-cta,
 .sab-btn-accent,
 .sabm-btn-accent,
 .sab404-btn-accent,
@@ -309,16 +309,14 @@ body {
     box-shadow: 0 10px 30px -12px rgba(0,0,0,0.75);
     border-bottom-color: rgba(92,227,187,0.18);
   }
-  html[data-sab-stuck] .sabh-nav { min-height: 64px; padding-top: 12px; padding-bottom: 12px; }
   html[data-sab-stuck] .sabh-ticker-band { height: 0; opacity: 0; }
   html[data-sab-stuck] .sabh-ticker { top: -10px; }
-  /* 24px off the nav row's padding, and the ticker's own 45px. The nav row is
-     91px tall rather than its 89px minimum (the CTA pill plus 24px of
-     padding), so what moves is the padding, not the two min-heights. */
-  html[data-sab-stuck] #main-content { margin-top: 69px; }
+  /* The thin nav row (2026-09-13) is already the collapsed size, so only the
+     ticker's own 45px folds away and only that is paid back. */
+  html[data-sab-stuck] #main-content { margin-top: var(--sab-ticker-h); }
   /* The detail-page rail is the one other sticky thing on the site; without
      this it parks under the collapsed bar instead of below it. */
-  html[data-sab-stuck] .sabd-rail { top: calc(67px + 24px); }
+  html[data-sab-stuck] .sabd-rail { top: calc(var(--sab-nav-h) + 1px + 24px); }
 }
 
 /* ── Button press language ─────────────────────────────────── */

@@ -1,7 +1,8 @@
 ---
 import { todayDate as albertaToday } from '../../lib/calendar';
-// Dark header band from the claude.ai/design "ScholarAB" pages:
-// nav with accent underline on the active link.
+// Dark header band. Thin, full-width bar in the Apple/Tesla manner (Ilia,
+// 2026-09-13): logo at the window's left edge, links centred, no CTA pill.
+// The current page is marked by brighter text, not an accent underline.
 // (The mono annotation bar and the home-page Home-item omission from the
 // design were both removed at Ilia's request, 2026-07-11.)
 //
@@ -74,7 +75,7 @@ const showTicker = ticker ?? true;
 <header class="sabh" data-sab-header>
   <div class="sabh-nav">
     <a href="/" class="sabh-logo" aria-label="ScholarAB home">
-      <SabLogoMark size={32} id="header" />
+      <SabLogoMark size={24} id="header" />
       <span class="sabh-logo-word">Scholar<span style="color:#2FD3A0;">AB</span></span>
     </a>
     <div class="sabh-actions">
@@ -94,12 +95,6 @@ const showTicker = ticker ?? true;
         ))}
         <div class="sabh-sheet-foot" aria-hidden="true">FREE · NO ACCOUNT<br />MADE IN MEDICINE HAT</div>
       </nav>
-      {/* The one nav item worth permanent rent: the CTA stays in the bar at
-          every width and every menu state, so it is never a tap away. */}
-      <a href="/match/" class="sabh-cta">
-        <span class="sabh-cta-long">Find my match</span>
-        <span class="sabh-cta-short" aria-hidden="true">Match</span>
-      </a>
       <button
         type="button"
         class="sabh-burger"
@@ -141,63 +136,41 @@ const showTicker = ticker ?? true;
 </header>
 
 <style>
-  /* Same measure as the page body, so the logo shares the content's left edge
-     instead of hugging the window on a wide monitor. The dark band itself
-     stays full width. */
+  /* Full window width, not the content measure: the logo sits at the window's
+     left edge and the links are centred on the window, the way Apple and
+     Tesla lay out their bars. Three columns, the outer two equal, so the
+     links stay truly centred whatever the logo's width. */
   .sabh-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 24px 48px; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 0 clamp(20px, 4vw, 56px); box-sizing: border-box;
     /* Declared, not content-derived: the home hero subtracts this to fill the
-       fold, and a height that moves with a font metric would move the fold.
-       min-, not a fixed height: if this row ever needs more room it should
-       take it and leave the fold slightly off, rather than clip the nav. */
-    min-height: var(--sab-nav-h);
+       fold, and a height that moves with a font metric would move the fold. */
+    height: var(--sab-nav-h);
   }
-  .sabh-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; color: #F2F0E9; }
-  /* The CTA used to live inside .sabh-links. It sits beside it now so the
-     link list alone can become the mobile sheet; the desktop row is the
-     same 34px rhythm it always was. */
-  .sabh-actions { display: flex; align-items: center; gap: 34px; }
-  .sabh-links { display: flex; align-items: center; gap: 34px; }
+  .sabh-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; justify-self: start; }
+  .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.015em; color: #F2F0E9; }
+  /* The wrapper only exists so the burger can sit beside the links in the
+     markup; on desktop the links take the middle column and the burger the
+     last, as if the wrapper were not there. */
+  .sabh-actions { display: contents; }
+  .sabh-links { display: flex; align-items: center; gap: 4px; }
   .sabh-link {
-    font-size: 14.5px; font-weight: 500; color: rgba(242,240,233,0.82);
-    text-decoration: none; border-bottom: 2px solid transparent; padding-bottom: 4px;
-    transition: color 0.18s ease, border-bottom-color 0.18s ease;
+    font-size: 13.5px; font-weight: 500; letter-spacing: 0.005em; color: rgba(242,240,233,0.7);
+    text-decoration: none; padding: 7px 13px; border-radius: 6px;
+    transition: color 0.15s ease, background-color 0.15s ease;
   }
-  /* Hover previews the active underline at 45% rather than only lifting the
-     text colour, so the target of the click is visible before the click. */
-  .sabh-link:hover { color: #F2F0E9; border-bottom-color: rgba(47,211,160,0.45); }
-  /* The current page is the one link carrying weight, which is what tells it
-     apart from the four that only differ by opacity. */
-  .sabh-link-active { color: #F2F0E9; font-weight: 600; border-bottom-color: #2FD3A0; }
+  /* A soft pill on hover, as on tesla.com: the target is visible before the
+     click without an underline or a colour accent. */
+  .sabh-link:hover { color: #F2F0E9; background: rgba(242,240,233,0.08); }
+  .sabh-link-active { color: #F2F0E9; }
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
   .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count { display: none; }
-  .sabh-cta {
-    font-size: 14px; font-weight: 700; background: #2FD3A0; color: #08120E;
-    padding: 11px 22px; border-radius: 100px; text-decoration: none;
-    /* 36px on a phone, where it is the only always-visible action. */
-    display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box;
-    transition: background 0.18s ease, color 0.18s ease,
-                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
-  }
-  .sabh-cta:hover, .sabh-cta:focus-visible {
-    background: #4FE0B4; color: #08120E;
-    transform: translate(-2px, -2px); box-shadow: 4px 4px 0 #0E8C64;
-  }
-  .sabh-cta:active {
-    transform: translate(1px, 1px); box-shadow: 0 0 0 #0E8C64; transition-duration: 0.07s;
-  }
-  .sabh-cta-short { display: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .sabh-cta, .sabh-cta:hover, .sabh-cta:focus-visible, .sabh-cta:active { transform: none; transition: none; }
-  }
 
   /* ── Menu button: three bars that fold into an ✕ while the sheet is open ── */
   .sabh-burger {
-    display: none; width: 44px; height: 44px; flex: none; padding: 0;
-    border: 1px solid rgba(242,240,233,0.28); border-radius: 100px; background: transparent;
+    display: none; width: 44px; height: 44px; flex: none; padding: 0; justify-self: end;
+    border: 0; border-radius: 8px; background: transparent;
     flex-direction: column; align-items: center; justify-content: center; gap: 4px;
     cursor: pointer; transition: background 0.18s ease;
   }
@@ -263,10 +236,7 @@ const showTicker = ticker ?? true;
   @media (max-width: 900px) {
     /* Padding-sized again below 900: the ticker is hidden here and the hero
        no longer claims the fold, so nothing is subtracting this. */
-    .sabh-nav { padding: 12px 16px 12px 20px; gap: 10px; min-height: 0; }
-    .sabh-logo-word { font-size: 19px; }
-    .sabh-actions { gap: 8px; }
-    .sabh-cta { font-size: 13px; font-weight: 600; padding: 0 16px; height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
+    .sabh-nav { grid-template-columns: 1fr auto; padding: 0 8px 0 20px; }
     .sabh-burger { display: flex; }
 
     /* Same six anchors, same order, same active class; just a column that
@@ -279,12 +249,12 @@ const showTicker = ticker ?? true;
       position: fixed; inset: 0; z-index: 1;
       background: #0A1310;
       flex-direction: column; align-items: stretch; gap: 0;
-      padding: 68px 20px 24px; box-sizing: border-box;
+      padding: calc(var(--sab-nav-h) + 12px) 20px 24px; box-sizing: border-box;
       overflow-y: auto; overscroll-behavior: contain;
     }
     .sabh[data-open] .sabh-links { display: flex; }
-    /* The bar rides above the sheet so the logo and the CTA stay reachable
-       and the button that opened the menu is the button that closes it. */
+    /* The bar rides above the sheet so the logo stays reachable and the
+       button that opened the menu is the button that closes it. */
     .sabh[data-open] .sabh-nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: #0A1310;
     }
@@ -292,7 +262,6 @@ const showTicker = ticker ?? true;
       content: ''; position: absolute; inset: 0; background: #0A1310; z-index: 2;
     }
     .sabh[data-open] .sabh-logo,
-    .sabh[data-open] .sabh-cta,
     .sabh[data-open] .sabh-burger { position: relative; z-index: 3; }
 
     .sabh-sheet-label {
@@ -305,8 +274,10 @@ const showTicker = ticker ?? true;
       min-height: 56px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
       padding-bottom: 0; border-bottom: 1px solid rgba(242,240,233,0.12);
     }
-    /* The accent underline becomes the accent dot; restyled, not remarked. */
-    .sabh-link-active { border-bottom-color: rgba(242,240,233,0.12); }
+    /* The sheet keeps an accent dot on the current page: at 22px in a list,
+       brighter text alone does not tell the rows apart. */
+    .sabh-link { padding: 0; border-radius: 0; }
+    .sabh-link:hover { background: transparent; }
     .sabh-link-active .sabh-link-label::after {
       content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
       background: #2FD3A0; margin-left: 10px; vertical-align: middle;
@@ -326,11 +297,6 @@ const showTicker = ticker ?? true;
        read without fighting the motion. Decorative and out of the tab
        order, so hiding it; Home included; loses nothing. */
     .sabh-ticker-band { display: none; }
-  }
-  @media (max-width: 374px) {
-    /* Logo + pill + 44px button do not fit at 360 with the full label. */
-    .sabh-cta-long { display: none; }
-    .sabh-cta-short { display: inline; }
   }
 </style>
 

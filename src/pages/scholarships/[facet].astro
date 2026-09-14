@@ -115,7 +115,29 @@ const breadcrumbJson = {
     <SabHeader currentPath="/scholarships" />
   </div>
 
-  <div id="sab-scholarships" class="sabp">
+  {facet.photo && (
+    <figure class="sabl-scope-photo">
+      <img
+        src={`/photos/scopes/${facet.slug}-1600.webp`}
+        srcset={`/photos/scopes/${facet.slug}-800.webp 800w, /photos/scopes/${facet.slug}-1600.webp 1600w, /photos/scopes/${facet.slug}-2400.webp 2400w`}
+        sizes="100vw"
+        width="2400"
+        height="1200"
+        alt={facet.photo.alt}
+        fetchpriority="high"
+        decoding="async"
+        style={`object-position: ${facet.photo.position ?? '50% 50%'}`}
+      />
+    </figure>
+  )}
+
+  <div
+    id="sab-scholarships"
+    class:list={['sabp', { 'sabl-has-backdrop': facet.backdrop }]}
+    style={facet.backdrop
+      ? `--sabl-backdrop: url(/photos/backdrops/${facet.backdrop}-1672.webp); --sabl-backdrop-2x: url(/photos/backdrops/${facet.backdrop}-3344.webp)`
+      : undefined}
+  >
     <div class="sabp-body">
       <nav class="sabl-crumbs sabl-mono" aria-label="Breadcrumb">
         <a href="/scholarships/">All scholarships</a>
@@ -156,6 +178,66 @@ const breadcrumbJson = {
 <style is:global>
   /* The directory design is fixed light regardless of site theme */
   body:has(#sab-scholarships) { background: #FBF8F2; }
+
+  /* A scope's photo opens the page as a continuation of the dark header: the
+     top fades out of the header colour so the band reads as one piece, and the
+     cream page starts under it unchanged. Outside .sabp-body, so the toolbar
+     offset every hub shares (e2e/smoke.spec.ts) is untouched. */
+  .sabl-scope-photo {
+    position: relative; margin: 0; overflow: hidden;
+    height: clamp(200px, 28vw, 400px); background: #0A1310;
+  }
+  .sabl-scope-photo img {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.9);
+  }
+  .sabl-scope-photo::before {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(#0A1310 0%, rgba(10,19,16,0.4) 28%, rgba(10,19,16,0) 55%);
+  }
+  @media (max-width: 900px) {
+    .sabl-scope-photo { height: 170px; }
+  }
+
+  /* A scope's full-page backdrop. A fixed pseudo-element rather than
+     background-attachment: fixed, which iOS Safari ignores (it scrolls the
+     image with the page and blows it up to the page's full 18,000px height).
+     Anchored to the bottom, where the scene is; the top of the image is
+     empty sky. The cream veil keeps
+     listing text readable where it scrolls across the skyline. */
+  /* .sabp paints solid cream (global.css), which would cover the layer. */
+  #sab-scholarships.sabl-has-backdrop { background: transparent; }
+  .sabl-has-backdrop::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-position: 0 0, center bottom;
+    background-size: auto, cover;
+    background-repeat: no-repeat;
+  }
+  /* Browsers without image-set get the 1672 file. Kept out of the cascade
+     everywhere else, or a 2x screen downloads both files. */
+  @supports not (background-image: image-set(url("a.webp") 1x)) {
+    .sabl-has-backdrop::before {
+      background-image:
+        linear-gradient(rgba(251,248,242,0.2), rgba(251,248,242,0.2)),
+        var(--sabl-backdrop);
+    }
+  }
+  /* A portrait screen crops the landscape image to a narrow slice, and the
+     centre slice is the bridge and river. 88% keeps the Calgary Tower and the
+     towers, the part that says Calgary, in the frame. */
+  @media (max-width: 900px) {
+    .sabl-has-backdrop::before { background-position: 0 0, 88% bottom; }
+  }
+  /* Sharp screens get the double-size file. Behind @supports, not as a
+     second declaration: a var() inside an image-set the browser cannot parse
+     would not fall back to the url above, it would blank the background. */
+  @supports (background-image: image-set(url("a.webp") 1x)) {
+    .sabl-has-backdrop::before {
+      background-image:
+        linear-gradient(rgba(251,248,242,0.2), rgba(251,248,242,0.2)),
+        image-set(var(--sabl-backdrop) 1x, var(--sabl-backdrop-2x) 2x);
+    }
+  }
 
   .sabl-crumbs {
     display: flex; gap: 8px; align-items: center;

@@ -65,6 +65,25 @@ export interface Facet {
   intro: string;
   /** Guide slug that explains this facet, cross-linked both ways. */
   guide?: string;
+  /**
+   * A banner photo for the hub. Files live at public/photos/scopes/<slug>-{800,1600,2400}.webp,
+   * cropped to 2:1. Pexels photos stay under the Pexels license, not the repo's
+   * (see public/photos/CREDITS.md, the record of source, photographer and
+   * download date; Pexels requires no on-page credit), and must never show a
+   * logo or a face that could read as an endorsement.
+   */
+  photo?: {
+    alt: string;
+    /** CSS object-position for the band crop. */
+    position?: string;
+  };
+  /**
+   * A full-page background for the hub, fixed behind everything while the page
+   * scrolls, instead of a photo band. File at public/photos/backdrops/<name>.webp;
+   * portrait works, since it is cropped to cover and anchored to the bottom.
+   * Placement is in the hub page's CSS.
+   */
+  backdrop?: string;
 }
 
 export const SCHOLARSHIP_FACETS: Facet[] = [
@@ -99,6 +118,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Calgary',
     label: 'Calgary',
     h1: 'Calgary scholarships',
+    backdrop: 'calgary',
     title: 'Calgary High School Scholarships',
     description:
       "Scholarships for Calgary high school students: EducationMatters and Calgary Foundation awards, teachers' union scholarships and the Burns Memorial Fund.",
@@ -352,6 +372,10 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     label: 'Province-wide',
     broad: true,
     h1: 'Province-wide scholarships',
+    photo: {
+      alt: 'Rocky Mountain peaks above a forested valley, framed by spruce trees',
+      position: '50% 40%',
+    },
     title: 'Province-Wide Scholarships in Alberta',
     description:
       'Alberta scholarships with no city requirement: the Rutherford, provincial arts and trades awards, credit union and energy money, open anywhere in the province.',
@@ -366,6 +390,10 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     label: 'National',
     broad: true,
     h1: 'National scholarships',
+    photo: {
+      alt: 'A Canadian flag flying against a pale winter sky',
+      position: '50% 15%',
+    },
     title: 'National Scholarships for Canadian Students',
     description:
       'The Canada-wide scholarships an Alberta student can enter, from the $100,000 Loran and Schulich awards down to essay contests that take an evening.',
