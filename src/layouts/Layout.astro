@@ -84,6 +84,21 @@ const {
         try { optedOut = optedOut || (q !== '0' && !!localStorage.getItem('sa_no_track')); } catch { /* no storage: count it */ }
         if (optedOut || navigator.webdriver) return;
         if (location.hostname !== 'www.scholarab.ca' && location.hostname !== 'scholarab.ca') return;
+        // Only a new path is a page view. The beacon counts every same-document
+        // navigation, and where the Navigation API exists that includes each
+        // history.replaceState, even one that keeps the URL: Astro's router
+        // calls it whenever scrolling stops (to remember the position), and the
+        // directories call it for ?show and their filters. Measured on the live
+        // site 2026-09-14: four scroll stops on /about/ logged four extra page
+        // views. Registered before the beacon loads, this listener stops those
+        // from reaching it; the navigation itself goes ahead untouched.
+        if (window.navigation) {
+          window.navigation.addEventListener('navigate', function (e) {
+            if (e.destination && e.destination.sameDocument && new URL(e.destination.url).pathname === location.pathname) {
+              e.stopImmediatePropagation();
+            }
+          });
+        }
         const s = document.createElement('script');
         s.defer = true;
         s.src = 'https://static.cloudflareinsights.com/beacon.min.js';

@@ -240,14 +240,17 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
   </div>
 
   {/* Every card is in the HTML; past the first step they carry data-dir-later,
-      hidden only under html.js. Same as the scholarship list. */}
-  <div class="sabl-more" data-dir-more hidden={initial.length <= DIRECTORY_PAGE_SIZE}>
-    <p class="sabl-mono sabl-more-line" data-dir-more-line>SHOWING {Math.min(DIRECTORY_PAGE_SIZE, initial.length)} OF {initial.length}</p>
-    <div class="sabl-more-actions">
-      <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
-      <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length}</button>
+      hidden only under html.js. Same as the scholarship list, including leaving
+      the block out of a list that fits in one step. */}
+  {initial.length > DIRECTORY_PAGE_SIZE && (
+    <div class="sabl-more" data-dir-more>
+      <p class="sabl-mono sabl-more-line" data-dir-more-line>SHOWING {DIRECTORY_PAGE_SIZE} OF {initial.length}</p>
+      <div class="sabl-more-actions">
+        <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
+        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length}</button>
+      </div>
     </div>
-  </div>
+  )}
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
     <div class="sabl-empty-title">Nothing matches that.</div>

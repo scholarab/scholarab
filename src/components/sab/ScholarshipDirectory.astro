@@ -324,14 +324,19 @@ const soonLine = [
 
   {/* Every card is in the HTML. Past the first step they carry data-dir-later,
       which global.css hides only under html.js, so a reader or crawler without
-      JavaScript still gets the whole list. directory-client drives the rest. */}
-  <div class="sabl-more" data-dir-more hidden={initial.length <= DIRECTORY_PAGE_SIZE}>
-    <p class="sabl-mono sabl-more-line" data-dir-more-line>SHOWING {Math.min(DIRECTORY_PAGE_SIZE, initial.length)} OF {initial.length}</p>
-    <div class="sabl-more-actions">
-      <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
-      <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length}</button>
+      JavaScript still gets the whole list. directory-client drives the rest.
+      A list that fits in one step can never need the block (the cards on the
+      page are the most any filter can show), so it is left out rather than
+      shipped hidden with "Show -3 more" in the markup. */}
+  {initial.length > DIRECTORY_PAGE_SIZE && (
+    <div class="sabl-more" data-dir-more>
+      <p class="sabl-mono sabl-more-line" data-dir-more-line>SHOWING {DIRECTORY_PAGE_SIZE} OF {initial.length}</p>
+      <div class="sabl-more-actions">
+        <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
+        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length}</button>
+      </div>
     </div>
-  </div>
+  )}
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
     <div class="sabl-empty-title">Nothing matches that.</div>
