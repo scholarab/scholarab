@@ -229,8 +229,10 @@ const breadcrumbJson = {
                       <a href={r.href}>{r.name}</a>
                       {r.kind === 'program' && <span class="sabl-mono sabcal-tag">PROGRAM</span>}
                     </span>
-                    <span class="sabcal-meta">{r.meta}</span>
-                    <span class:list={['sabl-mono', 'sabcal-state', r.open && 'is-open']}>{r.state}</span>
+                    <span class="sabcal-sub">
+                      <span class="sabcal-meta">{r.meta}</span>
+                      <span class:list={['sabl-mono', 'sabcal-state', r.open && 'is-open']}>{r.state}</span>
+                    </span>
                   </li>
                 ))}
               </ol>
@@ -318,6 +320,9 @@ const breadcrumbJson = {
     gap: 8px 18px; align-items: baseline;
     padding: 13px 0; border-bottom: 1px solid #E5E0D5;
   }
+  /* A layout-free wrapper above 720px (meta and status stay grid columns);
+     phones turn it into one wrapping line. */
+  .sabcal-sub { display: contents; }
   .sabcal-day { font-size: 15px; color: #6B7280; text-align: right; }
   .sabcal-name a { color: #141915; text-decoration: none; font-size: 16px; line-height: 1.4; }
   .sabcal-name a:hover { text-decoration: underline; }
@@ -350,10 +355,18 @@ const breadcrumbJson = {
     /* Two columns, and the amount and status share the second row rather than
        taking one line each: four stacked lines per award made a month of
        twenty-two deadlines a very long scroll for very little information. */
-    .sabcal-row { grid-template-columns: 30px 1fr; gap: 4px 12px; padding: 11px 0; }
-    .sabcal-meta, .sabcal-state { grid-column: 2; grid-row: 2; }
-    .sabcal-meta { justify-self: start; }
-    .sabcal-state { justify-self: end; }
+    /* Meta and status share one wrapping line: side by side when they fit,
+       the status dropping below when they do not. A plain 1fr column never
+       shrinks below its content, and a program's unwrapped eligibility line
+       ("Grades 9 to 12 (AMC 10 for ...") pushed the whole page 224px past a
+       320px screen. */
+    .sabcal-row { grid-template-columns: 30px minmax(0, 1fr); gap: 4px 12px; padding: 11px 0; }
+    .sabcal-sub {
+      grid-column: 2; display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: baseline; gap: 2px 12px;
+    }
+    .sabcal-meta { white-space: normal; min-width: 0; }
+    .sabcal-state { margin-left: auto; }
     .sabcal-undated li { flex-direction: column; gap: 4px; }
   }
 </style>
