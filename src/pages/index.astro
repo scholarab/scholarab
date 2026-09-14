@@ -52,7 +52,7 @@ const anyClosingThisWeek = closingSoon.some(
   s => new Date(s.deadline! + 'T00:00:00').getTime() <= today.getTime() + CLOSING_SOON_MS,
 );
 const closingHeading = anyClosingThisWeek ? 'Closing this week' : 'Next deadlines';
-const closingEyebrow = anyClosingThisWeek ? '⏳ TIME-SENSITIVE' : '⏳ UPCOMING';
+const closingEyebrow = anyClosingThisWeek ? 'TIME-SENSITIVE' : 'UPCOMING';
 
 // Categories: real counts from the data, top 8 tracks
 const categoryCounts = new Map<string, number>();
@@ -175,7 +175,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
             </p>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
-                Browse {scholarshipCount} scholarships <span class="sab-btn-arrow">→</span>
+                Browse {scholarshipCount} scholarships
               </a>
               <a href="/programs/" class="sab-btn-outline">
                 Explore programs
@@ -496,51 +496,25 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-hero-copy { max-width: 460px; }
   .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.8); margin: 0 0 30px; }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  /* Buttons lift onto a hard accent shadow on hover/keyboard focus, then snap
-     flush into it while held; same press language as the category cards. */
+  /* One pair, one size, one motion: hover only changes colour. The lift onto a
+     hard shadow and the press snap were three effects on two buttons, and the
+     outline button's thick tinted border made it look like a second, heavier
+     pill rather than the quieter choice. */
+  .sab-btn-accent, .sab-btn-outline {
+    display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
+    height: 52px; padding: 0 28px; border-radius: 100px;
+    font-size: 16px; text-decoration: none; white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
   .sab-btn-accent {
-    display: inline-flex; align-items: center; gap: 10px;
-    justify-content: center; box-sizing: border-box;
-    background: #2FD3A0; color: #08120E; font-weight: 700; font-size: 16px;
-    height: 56px; padding: 0 30px; border-radius: 100px; text-decoration: none; white-space: nowrap;
-    transition: background 0.18s ease, color 0.18s ease,
-                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+    background: #2FD3A0; color: #08120E; font-weight: 700;
   }
-  .sab-btn-accent:hover, .sab-btn-accent:focus-visible {
-    background: #4FE0B4; color: #08120E;
-    transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #0E8C64;
-  }
-  .sab-btn-accent:active {
-    transform: translate(1px, 1px); box-shadow: 0 0 0 #0E8C64;
-    transition-duration: 0.07s;
-  }
-  /* The arrow used to slide 4px right on hover. The button already lifts onto
-     its shadow, which is this site's own press language; the slide was a
-     second borrowed one stacked on top of it. Static now, and sized in CSS
-     rather than by an inline style. */
-  .sab-btn-arrow { font-size: 18px; line-height: 1; }
-
+  .sab-btn-accent:hover { background: #5CE3BB; }
   .sab-btn-outline {
-    display: inline-flex; align-items: center; gap: 10px;
-    justify-content: center; box-sizing: border-box;
-    color: #F2F0E9; font-weight: 600; font-size: 16px;
-    height: 56px; padding: 0 28px; border-radius: 100px;
-    /* Tinted rather than a bare cream hairline: the outline button had no
-       relationship to the accent beside it, so the pair read as one button
-       and one link. */
-    border: 1.5px solid rgba(92,227,187,0.45); background: rgba(47,211,160,0.07);
-    text-decoration: none; white-space: nowrap;
-    transition: border-color 0.18s ease, background 0.18s ease,
-                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+    color: #F2F0E9; font-weight: 600;
+    border: 1px solid rgba(242,240,233,0.3); background: transparent;
   }
-  .sab-btn-outline:hover, .sab-btn-outline:focus-visible {
-    border-color: #2FD3A0; color: #F2F0E9; background: rgba(47,211,160,0.14);
-    transform: translate(-3px, -3px); box-shadow: 5px 5px 0 rgba(47,211,160,0.35);
-  }
-  .sab-btn-outline:active {
-    transform: translate(1px, 1px); box-shadow: 0 0 0 rgba(47,211,160,0.35);
-    transition-duration: 0.07s;
-  }
+  .sab-btn-outline:hover { border-color: rgba(242,240,233,0.7); background: rgba(242,240,233,0.06); }
 
   .sab-stats { display: flex; border-left: 1px solid rgba(92,227,187,0.28); }
   .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(92,227,187,0.28); }
@@ -678,11 +652,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-h1 { animation: none; }
     .sab-cat-card, .sab-cat-card:hover { transform: none; transition: none; }
     /* keep the colour/shadow feedback, drop the movement */
-    .sab-btn-accent, .sab-btn-outline, .sab-match-cta, .sab-match-opt,
-    .sab-btn-accent:hover, .sab-btn-outline:hover, .sab-match-cta:hover, .sab-match-opt:hover,
-    .sab-btn-accent:focus-visible, .sab-btn-outline:focus-visible,
+    .sab-match-cta, .sab-match-opt,
+    .sab-match-cta:hover, .sab-match-opt:hover,
     .sab-match-cta:focus-visible, .sab-match-opt:focus-visible,
-    .sab-btn-accent:active, .sab-btn-outline:active, .sab-match-cta:active, .sab-match-opt:active {
+    .sab-match-cta:active, .sab-match-opt:active {
       transform: none; transition: none;
     }
     .sab-match-opt.on { animation: none; }
@@ -721,10 +694,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-view-all { display: inline-flex; align-items: center; min-height: 44px; }
     .sab-kicker { display: none; }
     .sab-hero-p-tail { display: none; }
-    .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 9px; }
-    .sab-btn-accent, .sab-btn-outline { justify-content: center; padding: 0 20px; }
-    .sab-btn-accent { height: 52px; font-size: 16px; }
-    .sab-btn-outline { height: 46px; font-size: 15px; }
+    .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
+    .sab-btn-accent, .sab-btn-outline { height: 50px; padding: 0 20px; }
     /* Ledger row: three columns under one hairline, sized so the dollar
        figure keeps its line and nothing shrinks below 9.5px. */
     .sab-stats {
