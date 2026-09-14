@@ -1,7 +1,45 @@
 ---
+import { QUIZ_QUESTIONS } from '../lib/quiz';
+
 interface Props { url: string }
+const first = QUIZ_QUESTIONS[0]!;
 ---
-<div data-quiz-url={Astro.props.url}><div role="status">Loading the scholarship quiz…</div></div>
+{/* The quiz renders only once its data arrives, and it used to arrive into a
+    one-line status: the section below jumped down about 500px after load
+    (CLS 0.35 on phones). The placeholder is question one drawn with the same
+    rules, invisible and inert, sharing a grid cell with the host so the slot
+    starts at the quiz's own height at every width. The loader removes it in
+    the same task that renders the quiz. Its classes are sabm-ph-* so nothing
+    that looks for a live tile, heading or step label can find it. */}
+<div class="sabm-slot">
+  <div class="sabm-ph" data-quiz-placeholder aria-hidden="true" inert>
+    <div style="display:flex;flex-direction:column">
+      <div class="sabm-progress-wrap">
+        <div class="sabm-progress">
+          {QUIZ_QUESTIONS.map((_, i) => <div class:list={['sabm-seg', i === 0 && 'current']} />)}
+        </div>
+        <div class="sabl-mono sabm-ph-step-label">Question 1 of {QUIZ_QUESTIONS.length}</div>
+      </div>
+      <div>
+        <div class="sabm-ph-question">{first.q}</div>
+        <div class="sabm-opts">
+          {first.opts.map((opt, i) => (
+            <div style={first.opts.length % 2 !== 0 && i === first.opts.length - 1 ? 'grid-column:1 / -1;height:100%' : 'height:100%'}>
+              <button type="button" tabindex="-1" class="sabm-ph-opt" style="height:100%">
+                <span class="sabm-opt-text">
+                  <span class="sabm-ph-opt-label">{opt.label}</span>
+                  {opt.hint && <span class="sabm-ph-opt-hint sabl-mono">{opt.hint}</span>}
+                </span>
+                <span class="sabm-opt-arrow">→</span>
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-quiz-url={Astro.props.url}><div role="status">Loading the scholarship quiz…</div></div>
+</div>
 <script>
   import { h, render } from 'preact';
   import EligibilityQuiz from './EligibilityQuiz';
@@ -25,7 +63,11 @@ interface Props { url: string }
         if (alive) render(h('div', { role: 'status' },
           h('p', null, (error as Error).message),
           h('button', { onClick: load }, 'Try again')), host!);
-      } finally { pending = false; }
+      } finally {
+        pending = false;
+        // Same task as the render above, so no frame ever shows both or neither.
+        document.querySelector('[data-quiz-placeholder]')?.remove();
+      }
     }
     void load();
     document.addEventListener('astro:before-swap', () => {
