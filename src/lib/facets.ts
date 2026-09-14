@@ -383,7 +383,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'The Canada-wide scholarships an Alberta student can enter, from the $100,000 Loran and Schulich awards down to essay contests that take an evening.',
     intro:
-      'This is the smallest list on the site and the most valuable, because the six-figure money is here and the deadlines land first: Loran closes October 15, months before any local award opens.',
+      'The largest awards in Canada are here, and the first close this fall: Loran, worth about $150,000, closes October 15, and Schulich Leader and Ted Rogers each pay $100,000 or more.',
   },
   {
     slug: 'indigenous',
