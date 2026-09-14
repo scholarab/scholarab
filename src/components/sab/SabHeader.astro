@@ -137,10 +137,15 @@ const showTicker = ticker ?? true;
                     {scopeTiles.map(t => (
                       <li>
                         <a href={t.href} class="sabh-tile">
-                          <span class="sabh-tile-name">{t.label}</span>
                           {t.count !== null && (
-                            <span class="sabh-tile-count">{t.count} {t.count === 1 ? 'scholarship' : 'scholarships'}</span>
+                            <span class="sabh-tile-num">{t.count}</span>
                           )}
+                          <span class="sabh-tile-text">
+                            <span class="sabh-tile-name">{t.label}</span>
+                            {t.count !== null && (
+                              <span class="sabh-tile-count">{t.count === 1 ? 'scholarship' : 'scholarships'}</span>
+                            )}
+                          </span>
                         </a>
                       </li>
                     ))}
@@ -256,16 +261,22 @@ const showTicker = ticker ?? true;
     display: grid; grid-template-columns: 1fr auto; gap: 48px;
   }
   .sabh-menu ul { list-style: none; margin: 0; padding: 0; }
-  /* align-content: start, or the two tile rows stretch to the height of the
-     topic list beside them and turn into tall empty boxes. */
-  .sabh-menu-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; align-content: start; }
+  /* The tile rows stretch to the full height of the topic list beside them, as
+     Tesla's panel does, so nothing sits empty under the grid. The big count up
+     top and the name at the bottom give the tall tile something to hold. */
+  .sabh-menu-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 8px; }
   .sabh-tile {
-    display: flex; flex-direction: column; gap: 4px; height: 100%; box-sizing: border-box;
-    padding: 18px 16px; border-radius: 10px; text-decoration: none;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 16px; height: 100%; box-sizing: border-box;
+    padding: 20px 18px; border-radius: 10px; text-decoration: none;
     border: 1px solid rgba(242,240,233,0.1);
     transition: background-color 0.15s ease, border-color 0.15s ease;
   }
   .sabh-tile:hover { background: rgba(242,240,233,0.06); border-color: rgba(242,240,233,0.22); }
+  .sabh-tile-num {
+    font-family: 'Instrument Serif', Georgia, serif; font-size: 44px; line-height: 1;
+    color: rgba(242,240,233,0.9); letter-spacing: -0.01em; font-variant-numeric: lining-nums;
+  }
+  .sabh-tile-text { display: flex; flex-direction: column; gap: 2px; margin-top: auto; }
   .sabh-tile-name { font-size: 16px; font-weight: 600; color: #F2F0E9; letter-spacing: -0.005em; }
   .sabh-tile-count { font-size: 13px; color: rgba(242,240,233,0.55); }
   /* Two classes, not one: `.sabh-menu ul` above resets padding and outranks a
