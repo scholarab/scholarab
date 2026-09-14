@@ -8,6 +8,7 @@ The images in this folder are **not** covered by the repository's licenses (AGPL
 | --- | --- | --- | --- | --- | --- |
 | `backdrops/calgary-*.webp` | /scholarships/calgary/ (full-page background) and its header menu tile | Igor Kyryliuk and Tetiana Kravchenko | Unsplash, photo `n4mvQ1YWk1U` (https://unsplash.com/photos/n4mvQ1YWk1U) | Unsplash License | 2026-09-13 |
 | `backdrops/edmonton-*.webp` | /scholarships/edmonton/ (full-page background) and its header menu tile | Alex Pugliese | Unsplash, photo `u2tSj5H3rXQ` (https://unsplash.com/photos/u2tSj5H3rXQ) | Unsplash License | 2026-09-13 |
+| `backdrops/national-*.webp` | /scholarships/national/ (full-page background) and its header menu tile | Caio Silva | Unsplash, photo `l3mNDwVVT10` (https://unsplash.com/photos/l3mNDwVVT10) | Unsplash License | 2026-09-13 |
 | `backdrops/alberta-*.webp` | /scholarships/alberta/ (full-page background) and its header menu tile | Nataliia Kvitovska | Unsplash, photo `tTsdpwnLZ_s` (https://unsplash.com/photos/tTsdpwnLZ_s) | Unsplash License | 2026-09-13 |
 
 Unsplash License: free commercial use, no attribution required; a photo may not be sold unaltered or used to build a competing image service.

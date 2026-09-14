@@ -377,6 +377,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     label: 'National',
     broad: true,
     h1: 'National scholarships',
+    backdrop: 'national',
     title: 'National Scholarships for Canadian Students',
     description:
       'The Canada-wide scholarships an Alberta student can enter, from the $100,000 Loran and Schulich awards down to essay contests that take an evening.',
