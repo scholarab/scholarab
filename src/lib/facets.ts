@@ -301,6 +301,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Fort McMurray',
     label: 'Fort McMurray',
     h1: 'Fort McMurray scholarships',
+    backdrop: 'fort-mcmurray',
     title: 'Fort McMurray Scholarships',
     description:
       'Scholarships for Fort McMurray and Wood Buffalo students: the Keyano College award book, the public district awards and the industry money behind them.',
