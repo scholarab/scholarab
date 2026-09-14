@@ -163,6 +163,9 @@ const soonLine = [
 ---
 
 <div class="sabl-page">
+  {/* Everything above the cards. Unstyled by default; a hub with a photo
+      backdrop turns it into one frosted panel so no text sits on the photo. */}
+  <div class="sabl-head">
   <div class="sabl-title-row">
     <div>
       <h1 class="sabl-h1">{h1}</h1>
@@ -247,6 +250,7 @@ const soonLine = [
       wholesale on every keystroke, not appended to. */}
   <div class="sabl-mono sabl-result-line" data-dir-count role="status">
     {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
+  </div>
   </div>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>

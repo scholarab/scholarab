@@ -119,7 +119,7 @@ const breadcrumbJson = {
     id="sab-scholarships"
     class:list={['sabp', { 'sabl-has-backdrop': facet.backdrop }]}
     style={facet.backdrop
-      ? `--sabl-backdrop: url(/photos/backdrops/${facet.backdrop}-1672.webp); --sabl-backdrop-2x: url(/photos/backdrops/${facet.backdrop}-3344.webp)`
+      ? `--sabl-wide: url(/photos/backdrops/${facet.backdrop}-wide-1672.webp); --sabl-wide-2x: url(/photos/backdrops/${facet.backdrop}-wide-3344.webp); --sabl-tall: url(/photos/backdrops/${facet.backdrop}-tall-1000.webp); --sabl-tall-2x: url(/photos/backdrops/${facet.backdrop}-tall-2000.webp)`
       : undefined}
   >
     <div class="sabp-body">
@@ -163,44 +163,101 @@ const breadcrumbJson = {
   /* The directory design is fixed light regardless of site theme */
   body:has(#sab-scholarships) { background: #FBF8F2; }
 
-  /* A scope's full-page backdrop. A fixed pseudo-element rather than
+  /* A scope's full-page photo backdrop. A fixed pseudo-element rather than
      background-attachment: fixed, which iOS Safari ignores (it scrolls the
      image with the page and blows it up to the page's full 18,000px height).
-     Anchored to the bottom, where the scene is; the top of the image is
-     empty sky. The cream veil keeps
-     listing text readable where it scrolls across the skyline. */
+     The photo stays at full strength; readability comes from the frosted
+     panels below, never from fading the photo. Anchored to the bottom, so the
+     calm sky sits behind the top of the screen, where the text is, and the
+     skyline along the bottom edge. */
   /* .sabp paints solid cream (global.css), which would cover the layer. */
   #sab-scholarships.sabl-has-backdrop { background: transparent; }
   .sabl-has-backdrop::before {
     content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background-position: 0 0, center bottom;
-    background-size: auto, cover;
+    background-color: #D9CFC2;
+    background-position: center bottom;
+    background-size: cover;
     background-repeat: no-repeat;
   }
-  /* Browsers without image-set get the 1672 file. Kept out of the cascade
-     everywhere else, or a 2x screen downloads both files. */
+  /* Portrait screens (phones, an upright iPad) get a tall crop of the same
+     photo instead of a thin slice of the wide one. The towers sit right of
+     centre, so the crop leans right to keep them in frame. */
+  @media (orientation: portrait) {
+    .sabl-has-backdrop::before { background-position: 62% bottom; }
+  }
+  /* Browsers without image-set get the 1x files. Kept out of the cascade
+     everywhere else, or a 2x screen downloads both sizes. */
   @supports not (background-image: image-set(url("a.webp") 1x)) {
-    .sabl-has-backdrop::before {
-      background-image:
-        linear-gradient(rgba(251,248,242,0.2), rgba(251,248,242,0.2)),
-        var(--sabl-backdrop);
+    .sabl-has-backdrop::before { background-image: var(--sabl-wide); }
+    @media (orientation: portrait) {
+      .sabl-has-backdrop::before { background-image: var(--sabl-tall); }
     }
   }
-  /* A portrait screen crops the landscape image to a narrow slice, and the
-     centre slice is the bridge and river. 88% keeps the Calgary Tower and the
-     towers, the part that says Calgary, in the frame. */
-  @media (max-width: 900px) {
-    .sabl-has-backdrop::before { background-position: 0 0, 88% bottom; }
-  }
-  /* Sharp screens get the double-size file. Behind @supports, not as a
-     second declaration: a var() inside an image-set the browser cannot parse
-     would not fall back to the url above, it would blank the background. */
+  /* Behind @supports, not as a second declaration: a var() inside an
+     image-set the browser cannot parse would not fall back to the url above,
+     it would blank the background. Each orientation names only its own pair,
+     so a screen fetches one file. */
   @supports (background-image: image-set(url("a.webp") 1x)) {
-    .sabl-has-backdrop::before {
-      background-image:
-        linear-gradient(rgba(251,248,242,0.2), rgba(251,248,242,0.2)),
-        image-set(var(--sabl-backdrop) 1x, var(--sabl-backdrop-2x) 2x);
+    .sabl-has-backdrop::before { background-image: image-set(var(--sabl-wide) 1x, var(--sabl-wide-2x) 2x); }
+    @media (orientation: portrait) {
+      .sabl-has-backdrop::before { background-image: image-set(var(--sabl-tall) 1x, var(--sabl-tall-2x) 2x); }
     }
+  }
+
+  /* ── Frosted panels ──
+     Every piece of text sits on cream glass, and the photo shows in the
+     margins and the gaps between cards. The cards are already solid white. */
+  .sabl-has-backdrop {
+    --sabl-glass: rgba(251,248,242,0.84);
+    --sabl-glass-edge: rgba(255,255,255,0.55);
+  }
+  .sabl-has-backdrop .sabl-head,
+  .sabl-has-backdrop .sabl-hubfoot,
+  .sabl-has-backdrop .sabl-crumbs,
+  .sabl-has-backdrop .sabl-group,
+  .sabl-has-backdrop .sabl-empty {
+    background: var(--sabl-glass);
+    border: 1px solid var(--sabl-glass-edge);
+    -webkit-backdrop-filter: blur(20px) saturate(1.15);
+    backdrop-filter: blur(20px) saturate(1.15);
+    box-shadow: 0 10px 30px -18px rgba(20,25,21,0.45);
+  }
+  /* No blur support: the glass goes nearly opaque instead, so the text over
+     it keeps its contrast. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .sabl-has-backdrop { --sabl-glass: rgba(251,248,242,0.96); }
+  }
+  .sabl-has-backdrop .sabp-body { padding-top: 32px; }
+  .sabl-has-backdrop .sabl-crumbs {
+    display: inline-flex; padding: 8px 14px; border-radius: 100px; color: #4B5563;
+  }
+  .sabl-has-backdrop .sabl-crumbs a { color: #4B5563; }
+  .sabl-has-backdrop .sabl-head {
+    margin-top: 12px; padding: 36px 40px 6px; border-radius: 22px;
+  }
+  .sabl-has-backdrop .sabl-group {
+    padding: 10px 16px; border-radius: 12px; margin-top: 10px;
+  }
+  .sabl-has-backdrop .sabl-group:first-child { padding-top: 10px; margin-top: 0; }
+  .sabl-has-backdrop .sabl-hubfoot {
+    padding: 28px 32px; border-radius: 22px; margin-bottom: 8px;
+  }
+  .sabl-has-backdrop .sabl-empty { border-style: solid; }
+  @media (max-width: 900px) {
+    .sabl-has-backdrop .sabp-body { padding-top: 20px; }
+    /* Nearly edge to edge on a phone: 8px of photo each side is enough to
+       read as a panel without costing the chips their width. */
+    .sabl-has-backdrop .sabl-head {
+      margin-left: -12px; margin-right: -12px; padding: 24px 16px 4px; border-radius: 18px;
+      overflow: clip;
+    }
+    /* The chip rows bleed to the edge they scroll under, which is now the
+       panel's edge rather than the screen's. */
+    .sabl-has-backdrop .sabl-head .sabl-chips,
+    .sabl-has-backdrop .sabl-head .sabl-sort-chips {
+      margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px;
+    }
+    .sabl-has-backdrop .sabl-hubfoot { margin-left: -12px; margin-right: -12px; padding: 22px 16px; }
   }
 
   .sabl-crumbs {
