@@ -133,7 +133,12 @@ const showTicker = ticker ?? true;
                  enters the item, so a keyboard user tabs from Scholarships
                  straight into it. The Scholarships link itself still
                  navigates. */
-              <div class="sabh-menu" role="group" aria-label="Scholarships by location and topic">
+              <div class="sabh-menu" id="sabh-menu" role="group" aria-label="Scholarships by location and topic">
+                {/* Phone only: the sheet shows this panel in place of the link
+                    list when Scholarships is tapped, and this returns to it. */}
+                <button type="button" class="sabh-sub-back" data-sabh-back>
+                  <span aria-hidden="true">←</span> Back
+                </button>
                 <div class="sabh-menu-inner">
                   <ul class="sabh-menu-tiles">
                     {scopeTiles.map(t => (
@@ -341,7 +346,7 @@ const showTicker = ticker ?? true;
   .sabh-link-active { color: #F2F0E9; }
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
-  .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count { display: none; }
+  .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count, .sabh-sub-back { display: none; }
   /* The right-hand column, balancing the logo: the same three destinations
      the footer carries, as quiet glyphs in the links' colour. */
   /* :global on the children: the email link is injected with set:html (for
@@ -430,10 +435,38 @@ const showTicker = ticker ?? true;
     /* No room beside the logo and the menu button; the footer still carries
        all three on a phone. */
     .sabh-social { display: none; }
-    /* The dropdown is a desktop affordance; the sheet lists Scholarships as
-       one row, and the hubs are one tap further in. */
+    /* Tapping Scholarships in the sheet swaps the link list for the same
+       panel the desktop dropdown shows (Ilia, 2026-09-15): photo tiles two
+       across, the topic list under them, and a Back button above. */
     .sabh-menu { display: none; }
     .sabh-item { display: block; }
+    .sabh[data-sub] .sabh-item:not(.sabh-has-menu),
+    .sabh[data-sub] .sabh-has-menu > .sabh-link,
+    .sabh[data-sub] .sabh-sheet-label,
+    .sabh[data-sub] .sabh-sheet-foot { display: none; }
+    .sabh[data-sub] .sabh-menu {
+      display: block; position: static; opacity: 1; visibility: visible; transform: none;
+      transition: none; background: transparent; border-top: 0; box-shadow: none;
+    }
+    .sabh-sub-back {
+      display: flex; align-items: center; gap: 8px; min-height: 44px; width: 100%;
+      padding: 0; margin: 0 0 12px; border: 0; border-bottom: 1px solid rgba(242,240,233,0.18);
+      background: transparent; color: rgba(242,240,233,0.7); cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .sabh-menu-inner { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 0 0 24px; }
+    .sabh-menu-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
+    .sabh-tile { aspect-ratio: 1; padding: 14px 14px 12px; gap: 8px; }
+    .sabh-tile-num { font-size: 38px; }
+    .sabh-tile-name { font-size: 15px; }
+    .sabh[data-sub] .sabh-tile-photo::after {
+      background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
+    }
+    .sabh-menu .sabh-menu-list {
+      border-left: 0; padding-left: 0; min-width: 0;
+      border-top: 1px solid rgba(242,240,233,0.12); padding-top: 12px;
+    }
+    .sabh-menu-list a { padding: 12px 0; font-size: 16px; }
 
     /* Same six anchors, same order, same active class; just a column that
        owns the screen. Nothing to keep in sync with the desktop row. */
@@ -515,7 +548,24 @@ const showTicker = ticker ?? true;
     sheet.querySelector<HTMLElement>('a')?.focus();
   }
 
+  const isSub = () => !!header?.hasAttribute('data-sub');
+  const phone = window.matchMedia('(max-width: 900px)');
+
+  // The Scholarships panel inside the sheet (phones only).
+  function openSub() {
+    if (!header || !sheet) return;
+    header.setAttribute('data-sub', '');
+    sheet.scrollTop = 0;
+    sheet.querySelector<HTMLElement>('[data-sabh-back]')?.focus();
+  }
+
+  function closeSub() {
+    header?.removeAttribute('data-sub');
+    sheet?.querySelector<HTMLElement>('.sabh-has-menu > .sabh-link')?.focus();
+  }
+
   function closeMenu({ restoreFocus = false } = {}) {
+    header?.removeAttribute('data-sub');
     header?.removeAttribute('data-open');
     burger?.setAttribute('aria-expanded', 'false');
     burger?.setAttribute('aria-label', 'Open menu');
@@ -535,11 +585,29 @@ const showTicker = ticker ?? true;
     // Tapping a destination closes the sheet. The ClientRouter swaps the page
     // without a reload, so nothing else would.
     sheet.addEventListener('click', e => {
-      if ((e.target as HTMLElement).closest('a')) closeMenu();
+      const target = e.target as HTMLElement;
+      if (target.closest('[data-sabh-back]')) {
+        closeSub();
+        return;
+      }
+      // In the sheet, Scholarships opens its panel instead of navigating; the
+      // panel's own "All scholarships" link goes to the directory. The
+      // ClientRouter skips clicks that are already default-prevented.
+      if (isOpen() && phone.matches && target.closest('.sabh-has-menu > .sabh-link')) {
+        e.preventDefault();
+        openSub();
+        return;
+      }
+      if (target.closest('a')) closeMenu();
     });
   }
 
   document.addEventListener('keydown', e => {
+    // In the sheet, Escape backs out of the Scholarships panel first.
+    if (e.key === 'Escape' && isOpen() && isSub()) {
+      closeSub();
+      return;
+    }
     // Escape inside the Scholarships dropdown closes it: the panel is held
     // open by focus, so dropping focus is what closes it. Focus goes back to
     // the Scholarships link's item, blurred, so the next Tab resumes there.
@@ -557,7 +625,10 @@ const showTicker = ticker ?? true;
     // everything else on screen.
     // .sabh-link only: the dropdown's links live inside the sheet's markup but
     // are display:none on a phone, and focus() on those silently does nothing.
-    const stops = [...sheet.querySelectorAll<HTMLElement>('a.sabh-link[href]'), burger];
+    // In the Scholarships panel the stops are its Back button and links instead.
+    const stops = isSub()
+      ? [...sheet.querySelectorAll<HTMLElement>('#sabh-menu button, #sabh-menu a[href]'), burger]
+      : [...sheet.querySelectorAll<HTMLElement>('a.sabh-link[href]'), burger];
     const first = stops[0];
     const last = stops[stops.length - 1];
     if (!first || !last) return;
@@ -572,7 +643,7 @@ const showTicker = ticker ?? true;
 
   // A sheet left open across a rotation to landscape would be a fixed panel
   // with no visible way out; the button it belongs to is hidden above 900px.
-  window.matchMedia('(max-width: 900px)').addEventListener('change', ev => {
+  phone.addEventListener('change', ev => {
     if (!ev.matches && isOpen()) closeMenu();
   });
 
