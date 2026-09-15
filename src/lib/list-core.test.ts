@@ -385,7 +385,7 @@ describe('filterSortPrograms', () => {
   const PAST_MS    = new Date('2026-01-01T00:00:00').getTime()
 
   const state = (over: Partial<ProgramFilterState> = {}): ProgramFilterState => ({
-    selectedCategory: 'all', gradeFilter: null, searchQuery: '', sortBy: 'closest_due', ...over,
+    selectedCategory: 'all', searchQuery: '', sortBy: 'closest_due', ...over,
   })
   const ids = (r: ProgramWithMeta[]) => r.map(p => p.id)
 
@@ -445,14 +445,16 @@ describe('filterSortPrograms', () => {
     expect(ids(filterSortPrograms(items, state({ sortBy: 'name' })))).toEqual([2, 1])
   })
 
-  it('category and grade filters combine; search matches name/provider/description/category', () => {
+  // The GRADE filter was deleted on 2026-09-15; category and search are what
+  // the directory still narrows by.
+  it('category filters; search matches name/provider/description/category', () => {
     const items = [
       makeProgram({ id: 1, category: 'Science', grades: 'Grades 9–10' }),
       makeProgram({ id: 2, category: 'Science', grades: 'Grades 11–12' }),
       makeProgram({ id: 3, category: 'Arts', grades: null }),
       makeProgram({ id: 4, category: 'Arts', provider: 'Quantum University' }),
     ]
-    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Science', gradeFilter: 12 })))).toEqual([2])
+    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Science' })))).toEqual([1, 2])
     expect(ids(filterSortPrograms(items, state({ searchQuery: 'quantum' })))).toEqual([4])
   })
 })
@@ -544,7 +546,7 @@ describe('the directory group keys match the sort order', () => {
     ]
     for (const sortBy of ['closest_due', 'paid_first', 'name'] as const) {
       const sorted = filterSortPrograms(items, {
-        selectedCategory: 'all', gradeFilter: null, searchQuery: '', sortBy, statusFilter: 'all',
+        selectedCategory: 'all', searchQuery: '', sortBy, statusFilter: 'all',
       })
       const runs = groupRuns(sorted, programGroupKey, PROGRAM_GROUP_LABELS)
       expect(new Set(runs.map(r => r.key)).size, `"${sortBy}" split a group`).toBe(runs.length)

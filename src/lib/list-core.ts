@@ -310,7 +310,6 @@ export type ProgramStatusFilter = 'all' | 'open' | 'active' | 'tba' | 'closed';
 
 export interface ProgramFilterState {
   selectedCategory: string;
-  gradeFilter: number | null;
   searchQuery: string;
   sortBy: ProgramSort;
   statusFilter?: ProgramStatusFilter;
@@ -325,7 +324,6 @@ export function buildProgramStatusCache(items: ProgramWithMeta[]): Map<number, P
 /** The program twin of DEFAULT_SCHOLARSHIP_STATE; see that comment. */
 export const DEFAULT_PROGRAM_STATE: ProgramFilterState = {
   selectedCategory: 'all',
-  gradeFilter: null,
   searchQuery: '',
   sortBy: 'closest_due',
   statusFilter: 'all',
@@ -334,7 +332,7 @@ export const DEFAULT_PROGRAM_STATE: ProgramFilterState = {
 /** The program twin of selectScholarships; see that comment. */
 export function selectPrograms(
   initialPrograms: ProgramWithMeta[],
-  { selectedCategory, gradeFilter, searchQuery, statusFilter = 'open' }: ProgramFilterState,
+  { selectedCategory, searchQuery, statusFilter = 'open' }: ProgramFilterState,
   statusCache: Map<number, ProgramStatus> = buildProgramStatusCache(initialPrograms),
 ): ProgramWithMeta[] {
   const afterStatus = statusFilter === 'all'
@@ -346,13 +344,15 @@ export function selectPrograms(
   const afterCategory = selectedCategory === 'all'
     ? afterStatus
     : afterStatus.filter(p => p.category === selectedCategory);
-  const afterGrade = gradeFilter === null
-    ? afterCategory
-    : afterCategory.filter(p => programMatchesGrade(p.grades, gradeFilter));
+  // The GRADE row was deleted on 2026-09-15 (Ilia): of 123 programs it held
+  // back 10 at Grade 10 and 4 at Grade 12, because most say "High school" or
+  // give an age range, and programMatchesGrade counts those as inclusive.
+  // A filter that removes almost nothing costs a row and teaches nothing.
+  // programMatchesGrade itself stays; the quiz matcher is its real caller.
   const q = normalizeSearchQuery(searchQuery);
   const afterSearch = q === ''
-    ? afterGrade
-    : afterGrade.filter(p =>
+    ? afterCategory
+    : afterCategory.filter(p =>
         programSearchBlob(p).includes(q));
 
   return afterSearch;

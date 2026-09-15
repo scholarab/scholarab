@@ -129,12 +129,14 @@ test('detail arrows walk the filtered search in both directions', async ({ page 
 test('program Details links preserve filtered previous and next arrows', async ({ page }) => {
   await page.goto('/programs/');
   const total = await page.locator('[data-dir-card]').count();
-  const grade = await page.locator('[data-fkey="grade"] [data-chip-count]').evaluateAll((slots, total) => {
+  // Any filter that leaves several programs will do; GRADE used to be the one
+  // driven here and was deleted on 2026-09-15, so this walks STATUS instead.
+  const status = await page.locator('[data-fkey="status"] [data-chip-count]').evaluateAll((slots, total) => {
     const slot = slots.find(slot => Number(slot.textContent) >= 3 && Number(slot.textContent) < total);
     return slot?.closest<HTMLElement>('[data-fkey]')?.dataset.fval;
   }, total);
-  expect(grade, 'choose a grade with multiple results from the rendered data').toBeTruthy();
-  await page.locator(`[data-fkey="grade"][data-fval="${grade}"]`).click();
+  expect(status, 'choose a status with multiple results from the rendered data').toBeTruthy();
+  await page.locator(`[data-fkey="status"][data-fval="${status}"]`).click();
   await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(links => links.map(link => link.getAttribute('href')!));
   await page.locator('[data-dir-card]:visible .sabl-apply').first().click();

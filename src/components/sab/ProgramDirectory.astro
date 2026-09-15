@@ -37,7 +37,6 @@ const SORT_CHIPS = [
   { value: 'paid_first',  label: 'Paid first' },
   { value: 'name',        label: 'A–Z' },
 ] as const;
-const GRADE_CHIPS = [10, 11, 12];
 
 // Mirrors the scholarship STATUS row: 'tba' covers Ongoing and undated intakes.
 const STATUS_CHIPS = [
@@ -68,9 +67,7 @@ const fieldChips = PROGRAM_FACETS
   .filter(c => c.count >= MIN_FACET_ITEMS)
   .sort((a, b) => b.count - a.count);
 
-// The scholarship twin of this; see the note on chipCount there. Same rule
-// applies to the GRADE row, where the numbers do real work: a Grade 10 reader
-// can see at a glance which fields are open to them at all.
+// The scholarship twin of this; see the note on chipCount there.
 // FORMAT is the second navigation row, added 2026-09-15 (Ilia): FIELD says what
 // a program is about and FORMAT says what shape it is, and a reader looking for
 // "an olympiad" or "something over the summer" was choosing on the axis the
@@ -176,15 +173,6 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
             : <a href={`/programs/${c.slug}/`} class="sabl-chip sabl-chip-link">
                 {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
               </a>
-        ))}
-      </div>
-    </div>
-    <div class="sabl-filter-row">
-      <span class="sabl-mono sabl-row-label">GRADE</span>
-      <div class="sabl-chips">
-        <button type="button" class="sabl-chip on" data-fkey="grade" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
-        {GRADE_CHIPS.map(g => (
-          <button type="button" class="sabl-chip" data-fkey="grade" data-fval={String(g)} aria-pressed="false">{`Gr ${g}`}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ gradeFilter: g })}</span></button>
         ))}
       </div>
     </div>
@@ -304,13 +292,12 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
   import { getSavedPrograms, toggleSavedProgram } from '../../lib/tracker.ts';
 
   type Item = ProgramWithMeta & { el: HTMLElement; search: string };
-  type State = { sort: string; category: string; grade: string; status: string };
+  type State = { sort: string; category: string; status: string };
 
   type Cache = Map<number, ProgramStatus>;
 
   const asFilterState = (state: State) => ({
     selectedCategory: state.category,
-    gradeFilter: state.grade ? Number(state.grade) : null,
     searchQuery: '',
     sortBy: state.sort as ProgramSort,
     statusFilter: state.status as ProgramStatusFilter,
@@ -318,8 +305,8 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 
   initDirectory<Item, State, Cache>('#sab-programs', {
     itemType: 'program',
-    defaultState: { sort: 'closest_due', category: 'all', grade: '', status: 'all' },
-    toggleKeys: ['category', 'grade'],
+    defaultState: { sort: 'closest_due', category: 'all', status: 'all' },
+    toggleKeys: ['category'],
     parseCard(el) {
       const d = el.dataset;
       return {
