@@ -7,7 +7,7 @@ import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { emailOff } from '../../lib/email-off';
-import { PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets.ts';
+import { PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets.ts';
 
 interface Props {
   items: ProgramWithMeta[];
@@ -17,6 +17,8 @@ interface Props {
   /** Set on a field hub: the FIELD row turns into navigation rather than a
       filter, since filtering a hub by any other field can only empty it. */
   currentField?: string | null;
+  /** The same, on the FORMAT axis. Exactly one of the two is ever set. */
+  currentFormat?: string | null;
   /** A hub is handed only its own field's programs, and the FIELD row is a map
       of the whole directory wherever it appears, so it counts against this. */
   allItems?: ProgramWithMeta[];
@@ -26,6 +28,7 @@ const {
   h1 = 'Research programs',
   intro = 'Labs, competitions, apprenticeships, and summer placements open to Alberta high school students. Some even pay you.',
   currentField = null,
+  currentFormat = null,
   allItems = items,
 } = Astro.props;
 
@@ -68,6 +71,20 @@ const fieldChips = PROGRAM_FACETS
 // The scholarship twin of this; see the note on chipCount there. Same rule
 // applies to the GRADE row, where the numbers do real work: a Grade 10 reader
 // can see at a glance which fields are open to them at all.
+// FORMAT is the second navigation row, added 2026-09-15 (Ilia): FIELD says what
+// a program is about and FORMAT says what shape it is, and a reader looking for
+// "an olympiad" or "something over the summer" was choosing on the axis the
+// page did not have. Same rules as FIELD above: whole-corpus counts, and a
+// format that drops under the floor loses its chip along with its page.
+const formatChips = PROGRAM_FORMATS
+  .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, allItems).length }))
+  .filter(c => c.count >= MIN_FACET_ITEMS)
+  .sort((a, b) => b.count - a.count);
+
+// "All" is the current page only when neither axis is narrowed; on a format hub
+// the FIELD row is showing a slice of the directory even though no field is set.
+const onAll = !currentField && !currentFormat;
+
 const chipCount = (o: Partial<ProgramFilterState>) =>
   filterSortPrograms(items, { ...DEFAULT_PROGRAM_STATE, ...o }).length;
 
@@ -129,11 +146,28 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       controls. */}
   <div class="sabl-filters sabl-filters-dense">
     <div class="sabl-filter-row">
+      <span class="sabl-mono sabl-row-label">FORMAT</span>
+      <div class="sabl-chips">
+        {onAll
+          ? <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></span>
+          : <a href="/programs/" class="sabl-chip sabl-chip-link">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></a>}
+        {formatChips.map(c => (
+          c.slug === currentFormat
+            ? <span class="sabl-chip on" aria-current="page">
+                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+              </span>
+            : <a href={`/programs/${c.slug}/`} class="sabl-chip sabl-chip-link">
+                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+              </a>
+        ))}
+      </div>
+    </div>
+    <div class="sabl-filter-row">
       <span class="sabl-mono sabl-row-label">FIELD</span>
       <div class="sabl-chips">
-        {currentField
-          ? <a href="/programs/" class="sabl-chip sabl-chip-link">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></a>
-          : <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></span>}
+        {onAll
+          ? <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></span>
+          : <a href="/programs/" class="sabl-chip sabl-chip-link">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></a>}
         {fieldChips.map(c => (
           c.slug === currentField
             ? <span class="sabl-chip on" aria-current="page">

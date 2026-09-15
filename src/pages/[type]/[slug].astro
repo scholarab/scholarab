@@ -16,7 +16,7 @@ import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount } from '../../lib/utils.ts';
 import { programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
-import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, facetForListing } from '../../lib/facets.ts';
+import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
 type RelatedItem = { href: string; title: string; value: string; tag: string };
@@ -320,9 +320,15 @@ if (kind === 'scholarship') {
     inactive: false,
     dueLong,
     opensLabel: undefined,
-    // Programs keep the three facts that appear nowhere else on the page.
-    // DEADLINE left with them; the rail already carries it.
+    // Programs keep the facts that appear nowhere else on the page. DEADLINE
+    // left with them; the rail already carries it. FORMAT says what shape the
+    // thing is (2026-09-15): the tag above reads HEALTH for both a one-day
+    // Brain Bee and a six-week paid placement, and the reader cannot tell them
+    // apart until they read the duration and guess.
     facts: [
+      ...(PROGRAM_FORMATS.find(f => f.value === p.format)
+        ? [{ label: 'FORMAT', value: PROGRAM_FORMATS.find(f => f.value === p.format)!.h1 }]
+        : []),
       { label: 'DURATION', value: p.duration || 'Varies' },
       { label: 'GRADES', value: p.grades || 'High school' },
       { label: 'LOCATION', value: p.location || 'Alberta' },

@@ -29,8 +29,17 @@ export const MIN_FACET_ITEMS = 5;
 
 export interface Facet {
   slug: string;
-  /** Which data field the `value` is matched against. */
-  kind: 'region' | 'category';
+  /**
+   * Which data field the `value` is matched against: `region` and `category`
+   * live on the listing's own fields of those names, `format` on `format`.
+   *
+   * Programs carry two axes since 2026-09-15 (Ilia): the FIELD is the subject
+   * (Research, Computing), the FORMAT is the shape (a two-week summer camp, a
+   * 75-minute contest, a four-year apprenticeship). Filing everything from
+   * the Euclid contest to RAP under "Research" is what made /programs read as
+   * a dump, and neither axis alone separates them.
+   */
+  kind: 'region' | 'category' | 'format';
   /** Matched against the listing field exactly, so it must track the data. */
   value: string;
   /**
@@ -567,6 +576,126 @@ export const PROGRAM_FACETS: Facet[] = [
   },
 ];
 
+/**
+ * The program FORMAT hubs: /programs/summer-programs/, /programs/olympiads/.
+ *
+ * The second axis, added 2026-09-15. Every live program carries exactly one
+ * `format`, so these eight counts sum to the directory and a program appears
+ * on exactly one of them. The vocabulary is the shape of the commitment, which
+ * is the thing a reader is actually choosing between: a student who wants a
+ * contest to write in an afternoon and a student who wants six weeks in a lab
+ * are not served by the same page, and before this they had the same page.
+ *
+ * `value` is the slug itself rather than a prose label: unlike category, the
+ * format vocabulary exists nowhere but here, so there is no display string in
+ * the data for it to track.
+ */
+export const PROGRAM_FORMATS: Facet[] = [
+  {
+    slug: 'summer-programs',
+    kind: 'format',
+    value: 'summer',
+    label: 'Summer',
+    h1: 'Summer programs',
+    title: 'Summer Programs for Alberta Students',
+    description:
+      'Summer camps, institutes and paid research placements open to Alberta high school students, from one-week campus camps to six-week labs.',
+    intro:
+      'These run in July and August but close in February and March, so the summer you are planning for is the one you apply for in the winter before it.',
+  },
+  {
+    slug: 'competitions',
+    kind: 'format',
+    value: 'competitions',
+    label: 'Competitions',
+    h1: 'Competitions and challenges',
+    title: 'Competitions for Alberta High School Students',
+    description:
+      'Team competitions for Alberta high school students: robotics, hackathons, cyber defence, innovation challenges and the Skills Canada trades events.',
+    intro:
+      'These are built over a season rather than written in an afternoon, and most are entered as a school team that a teacher registers months before the event.',
+  },
+  {
+    slug: 'olympiads',
+    kind: 'format',
+    value: 'olympiads',
+    label: 'Olympiads',
+    h1: 'Olympiads and contests',
+    title: 'Olympiads and Contests for Alberta Students',
+    description:
+      'Written contests and olympiad qualifiers Alberta students sit at their own school: Euclid, the CAP physics exam, and the biology and chemistry olympiads.',
+    intro:
+      'Almost every one of these is written at your own school on a fixed date, which makes your teacher\'s registration the real deadline rather than the exam.',
+  },
+  {
+    slug: 'science-fairs',
+    kind: 'format',
+    value: 'science-fairs',
+    label: 'Science fairs',
+    h1: 'Science fairs',
+    title: 'Science Fairs in Alberta',
+    description:
+      'Every regional science fair in Alberta and what lies past them: winning your own region is the only route to the Canada-Wide Science Fair.',
+    intro:
+      'The regional fairs run February to April on a project you start in the fall, and each one is the only door to the national fair for the students in its area.',
+  },
+  {
+    slug: 'research-placements',
+    kind: 'format',
+    value: 'research',
+    label: 'Research',
+    h1: 'Research and mentorship',
+    title: 'Research Programs for Alberta Students',
+    description:
+      'Year-round research and mentorship programs for Alberta high school students: one-to-one mentors, virtual cohorts and university placements.',
+    intro:
+      'These run alongside school rather than instead of it, and what you finish with is a piece of work carrying your name rather than a certificate of attendance.',
+  },
+  {
+    slug: 'dual-credit',
+    kind: 'format',
+    value: 'dual-credit',
+    label: 'Dual credit',
+    h1: 'Dual credit and work experience',
+    title: 'Dual Credit and RAP in Alberta',
+    description:
+      'Dual credit courses, apprenticeships and paid internships for Alberta students: RAP, SAIT and Olds College credentials, and CAREERS placements.',
+    intro:
+      'These pay you, credit you, or both, and nearly all of them are arranged through your own school rather than by applying to the provider directly.',
+  },
+  {
+    slug: 'clubs',
+    kind: 'format',
+    value: 'clubs',
+    label: 'Clubs',
+    h1: 'Clubs and year-round programs',
+    title: 'Year-Round Programs for Alberta Students',
+    description:
+      'Clubs, councils, volunteering and self-paced programs Alberta students can join at any point in the year, from 4-H to youth councils and hospital shifts.',
+    intro:
+      'Nothing here turns on a single application date, which makes these the easiest programs to start this week and the easiest to put off for a year.',
+  },
+  {
+    slug: 'conferences',
+    kind: 'format',
+    value: 'conferences',
+    label: 'Conferences',
+    h1: 'Conferences and workshops',
+    title: 'Conferences and Workshops for Students',
+    description:
+      'Short conferences, campus days and workshops for Alberta high school students: Forum for Young Canadians, Discovery Days and the regional summits.',
+    intro:
+      'A few days each, several of them funded down to the flight, and the cheapest way to find out whether a field is worth four years before you commit them.',
+  },
+];
+
+/**
+ * Both program axes, in the order the routes build them. The hub route, the
+ * sitemap and the reserved-slug check all read this, so a format hub can never
+ * exist in one of the three and not the others.
+ */
+export const ALL_PROGRAM_FACETS: Facet[] = [...PROGRAM_FACETS, ...PROGRAM_FORMATS];
+
 /** Facet lookups, by slug, for the two routes. */
 /**
  * The complete category vocabulary of each dataset, and the only place it is
@@ -605,12 +734,14 @@ export const PROGRAM_FACET_BY_SLUG = new Map(PROGRAM_FACETS.map(f => [f.slug, f]
  * against and cannot drift from what the routes actually build.
  */
 export const RESERVED_SCHOLARSHIP_SLUGS = new Set(SCHOLARSHIP_FACETS.map(f => f.slug));
-export const RESERVED_PROGRAM_SLUGS = new Set(PROGRAM_FACETS.map(f => f.slug));
+export const RESERVED_PROGRAM_SLUGS = new Set(ALL_PROGRAM_FACETS.map(f => f.slug));
 
 /** What a facet is matched against. `alsoOpenTo` is scholarships-only and optional. */
 export interface FacetTarget {
   region?: string | null;
   category?: string | null;
+  /** Programs only: the slug of the format facet this program belongs to. */
+  format?: string | null;
   alsoOpenTo?: string[] | null;
 }
 
@@ -631,6 +762,7 @@ export function facetMatches(
   item: FacetTarget,
   { primaryOnly = false }: { primaryOnly?: boolean } = {},
 ): boolean {
+  if (facet.kind === 'format') return item.format === facet.value;
   if (facet.kind !== 'region') return item.category === facet.value;
   if (item.region === facet.value) return true;
   if (facet.extraValues?.includes(item.region ?? '')) return true;

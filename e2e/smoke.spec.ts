@@ -109,7 +109,15 @@ const HUBS = [
   '/programs/', '/programs/research/', '/programs/computing/',
   '/programs/math-physics/', '/programs/social-sciences/', '/programs/health/',
   '/programs/engineering/', '/programs/enrichment/', '/programs/trades/',
+  // The FORMAT axis (2026-09-15): the same hub template on the other axis.
+  '/programs/summer-programs/', '/programs/competitions/', '/programs/olympiads/',
+  '/programs/science-fairs/', '/programs/research-placements/', '/programs/dual-credit/',
+  '/programs/clubs/', '/programs/conferences/',
 ];
+
+/** The row whose label is `name`; FORMAT and FIELD are both navigation rows. */
+const filterRow = (page: import('@playwright/test').Page, name: string) =>
+  page.locator('.sabl-filter-row').filter({ has: page.locator('.sabl-row-label', { hasText: new RegExp(`^${name}$`) }) });
 
 test('every hub puts its filter chips at the same height', async ({ page }, testInfo) => {
   // Mobile stacks the header and wraps the chips on its own terms; the row a
@@ -138,17 +146,43 @@ test('every hub puts its filter chips at the same height', async ({ page }, test
 // The field hubs carry the FIELD row as navigation, the way the scholarship
 // hubs carry SCOPE: every sibling reachable in one click from any of them,
 // with the page's own field marked rather than linked to itself.
+test('every format hub links to every other format', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'desktop layout');
+  await page.setViewportSize({ width: 1440, height: 900 });
+
+  const formats = [
+    '/programs/summer-programs/', '/programs/competitions/', '/programs/olympiads/',
+    '/programs/science-fairs/', '/programs/research-placements/', '/programs/dual-credit/',
+    '/programs/clubs/', '/programs/conferences/',
+  ];
+  for (const path of ['/programs/', ...formats]) {
+    await page.goto(path);
+    const row = filterRow(page, 'FORMAT');
+    const links = await row.locator('a.sabl-chip-link').evaluateAll(
+      els => els.map(e => (e as HTMLAnchorElement).getAttribute('href')!),
+    );
+    expect(links, `${path} links every sibling`).toEqual(
+      expect.arrayContaining(formats.filter(f => f !== path)),
+    );
+    expect(links, `${path} does not link to itself`).not.toContain(path);
+    await expect(row.locator('button')).toHaveCount(0);
+  }
+});
+
 test('every field hub links to every other field', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.setViewportSize({ width: 1440, height: 900 });
 
-  const fields = HUBS.filter(p => p.startsWith('/programs/') && p !== '/programs/');
+  const fields = [
+    '/programs/research/', '/programs/computing/', '/programs/math-physics/',
+    '/programs/social-sciences/', '/programs/health/', '/programs/engineering/',
+    '/programs/enrichment/', '/programs/trades/',
+  ];
   // /programs itself is in the walk: its FIELD row navigates too, so a reader
   // on the directory opens a field's page rather than filtering in place.
   for (const path of ['/programs/', ...fields]) {
     await page.goto(path);
-    const row = page.locator('.sabl-filter-row').first();
-    await expect(row.locator('.sabl-row-label')).toHaveText('FIELD');
+    const row = filterRow(page, 'FIELD');
     const links = await row.locator('a.sabl-chip-link').evaluateAll(
       els => els.map(e => (e as HTMLAnchorElement).getAttribute('href')!),
     );

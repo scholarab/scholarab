@@ -1,6 +1,8 @@
 ---
 import { todayDate as albertaToday } from '../../lib/calendar';
-// The program facet hubs: /programs/research/, /programs/computing/.
+// The program facet hubs, on both axes: the FIELD hubs (/programs/research/,
+// /programs/computing/) and since 2026-09-15 the FORMAT hubs
+// (/programs/summer-programs/, /programs/olympiads/).
 // The scholarship twin, and the same route-precedence hazard applies; see the
 // header comment in src/pages/scholarships/[facet].astro.
 import SabFooter from '../../components/sab/SabFooter.astro';
@@ -10,7 +12,7 @@ import SabHeader from '../../components/sab/SabHeader.astro';
 import ProgramDirectory from '../../components/sab/ProgramDirectory.astro';
 import { loadPrograms } from '../../lib/data-loader';
 import { enrichPrograms } from '../../lib/enrich';
-import { PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
+import { ALL_PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
 import { DEFAULT_PROGRAM_STATE, filterSortPrograms } from '../../lib/list-core';
 import { itemListJson } from '../../lib/ld';
 import { programStatusOf, programIsListed } from '../../lib/status';
@@ -22,7 +24,7 @@ export async function getStaticPaths() {
   // directory, so they must stay out of the hubs too; same rule as
   // /programs, and the sitemap agrees with both.
   const all = enrichPrograms((await loadPrograms()).filter(p => programIsListed(p, today)));
-  return PROGRAM_FACETS
+  return ALL_PROGRAM_FACETS
     .map(facet => ({ facet, items: facetItems(facet, all) }))
     .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
     .map(({ facet, items }) => ({ params: { facet: facet.slug }, props: { facet, items, allItems: all } }));
@@ -55,7 +57,9 @@ const countLine = [
   paid > 0 ? `${paid} paid` : null,
 ].filter(Boolean).join(' · ');
 
-const siblings = PROGRAM_FACETS.filter(f => f.slug !== facet.slug);
+// Siblings on this hub's own axis: a format hub offers the other formats, not
+// the fields, which the FORMAT and FIELD rows above already both carry.
+const siblings = ALL_PROGRAM_FACETS.filter(f => f.kind === facet.kind && f.slug !== facet.slug);
 
 const listJson = itemListJson(
   ordered.map(p => ({ name: p.name, url: `https://www.scholarab.ca/programs/${p._slug}/` })),
@@ -103,7 +107,8 @@ const breadcrumbJson = {
         h1={facet.h1}
         intro={facet.intro}
         allItems={allItems}
-        currentField={facet.slug}
+        currentField={facet.kind === 'category' ? facet.slug : null}
+        currentFormat={facet.kind === 'format' ? facet.slug : null}
       />
 
       <div class="sabl-hubfoot">

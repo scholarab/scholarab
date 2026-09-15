@@ -15,7 +15,7 @@ import { dirname, join } from 'path';
 import { generateSlug, getToday } from '../src/lib/utils.ts';
 import { scholarshipIsIndexable, programIsIndexable, scholarshipStatusOf } from '../src/lib/status.ts';
 import { guides } from '../src/lib/guides.ts';
-import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../src/lib/facets.ts';
+import { SCHOLARSHIP_FACETS, ALL_PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../src/lib/facets.ts';
 import { fingerprint, stampAll, newest, type LastmodManifest } from '../src/lib/lastmod.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -165,7 +165,7 @@ const lines: string[] = [
     .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
     .map(({ f, items }) =>
       urlEntry(`${BASE}/scholarships/${f.slug}/`, '0.8', newest(items.map((s) => modOf(scholarshipPath(s)))))),
-  ...PROGRAM_FACETS
+  ...ALL_PROGRAM_FACETS
     .map((f) => ({ f, items: facetItems(f, indexablePrograms) }))
     .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
     .map(({ f, items }) =>

@@ -58,6 +58,14 @@ export type Program = {
   name: string
   emoji: string | null
   category: string | null
+  /**
+   * The FORMAT hub this program sits on: 'summer', 'olympiads', 'dual-credit'
+   * and five more (see PROGRAM_FORMATS). The second axis beside `category`,
+   * added 2026-09-15: the category says what the program is about, this says
+   * what shape it is. JSON-only, like metaDescription; every live program
+   * carries exactly one, which validate-data enforces.
+   */
+  format: string | null
   provider: string | null
   grades: string | null
   duration: string | null

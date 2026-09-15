@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest';
 import {
   SCHOLARSHIP_FACETS,
   PROGRAM_FACETS,
+  PROGRAM_FORMATS,
+  ALL_PROGRAM_FACETS,
   RESERVED_SCHOLARSHIP_SLUGS,
   RESERVED_PROGRAM_SLUGS,
   facetItems,
@@ -15,7 +17,7 @@ import { generateSlug } from './utils.ts';
 import scholarships from '../data/scholarships.json';
 import programs from '../data/research-programs.json';
 
-type Listing = { title?: string; name?: string; region?: string | null; category?: string | null; alsoOpenTo?: string[]; active?: boolean };
+type Listing = { title?: string; name?: string; region?: string | null; category?: string | null; format?: string | null; alsoOpenTo?: string[]; active?: boolean };
 
 const allScholarships = scholarships as Listing[];
 const listedPrograms = (programs as Listing[]).filter(p => p.active !== false);
@@ -23,7 +25,7 @@ const listedPrograms = (programs as Listing[]).filter(p => p.active !== false);
 describe('facet registry', () => {
   it('has unique slugs within each type', () => {
     expect(RESERVED_SCHOLARSHIP_SLUGS.size).toBe(SCHOLARSHIP_FACETS.length);
-    expect(RESERVED_PROGRAM_SLUGS.size).toBe(PROGRAM_FACETS.length);
+    expect(RESERVED_PROGRAM_SLUGS.size).toBe(ALL_PROGRAM_FACETS.length);
   });
 
   it('matches a value that actually exists in the data', () => {
@@ -39,13 +41,17 @@ describe('facet registry', () => {
     for (const f of PROGRAM_FACETS) {
       expect(pCategories, `program facet "${f.slug}" matches value "${f.value}"`).toContain(f.value);
     }
+    const pFormats = new Set(listedPrograms.map(p => p.format));
+    for (const f of PROGRAM_FORMATS) {
+      expect(pFormats, `program format "${f.slug}" matches value "${f.value}"`).toContain(f.value);
+    }
   });
 
   it('every facet clears the doorway-page floor', () => {
     for (const f of SCHOLARSHIP_FACETS) {
       expect(facetItems(f, allScholarships).length, f.slug).toBeGreaterThanOrEqual(MIN_FACET_ITEMS);
     }
-    for (const f of PROGRAM_FACETS) {
+    for (const f of ALL_PROGRAM_FACETS) {
       expect(facetItems(f, listedPrograms).length, f.slug).toBeGreaterThanOrEqual(MIN_FACET_ITEMS);
     }
   });
@@ -150,20 +156,20 @@ describe('reserved slugs', () => {
 describe('facet copy', () => {
   it('keeps titles short enough to survive the brand suffix', () => {
     // Google truncates around 60; the page appends " | ScholarAB" (12 chars).
-    for (const f of [...SCHOLARSHIP_FACETS, ...PROGRAM_FACETS]) {
+    for (const f of [...SCHOLARSHIP_FACETS, ...ALL_PROGRAM_FACETS]) {
       expect(f.title.length + ' | ScholarAB'.length, f.slug).toBeLessThanOrEqual(60);
     }
   });
 
   it('keeps descriptions inside the house range', () => {
-    for (const f of [...SCHOLARSHIP_FACETS, ...PROGRAM_FACETS]) {
+    for (const f of [...SCHOLARSHIP_FACETS, ...ALL_PROGRAM_FACETS]) {
       expect(f.description.length, `${f.slug} description`).toBeGreaterThanOrEqual(120);
       expect(f.description.length, `${f.slug} description`).toBeLessThanOrEqual(160);
     }
   });
 
   it('gives every facet real intro prose rather than a templated label', () => {
-    for (const f of [...SCHOLARSHIP_FACETS, ...PROGRAM_FACETS]) {
+    for (const f of [...SCHOLARSHIP_FACETS, ...ALL_PROGRAM_FACETS]) {
       expect(f.intro.length, `${f.slug} intro`).toBeGreaterThan(120);
       // And the ceiling, which is a layout rule rather than a taste one:
       // .sabl-desc reserves three lines so the chip rows land at the same
@@ -187,7 +193,7 @@ describe('facet copy', () => {
     // like different layouts, and prose grows back one sentence at a time
     // unless something says no. A sentence break is a period followed by a
     // space; the amounts in these lines use commas, so nothing false-positives.
-    for (const f of [...SCHOLARSHIP_FACETS, ...PROGRAM_FACETS]) {
+    for (const f of [...SCHOLARSHIP_FACETS, ...ALL_PROGRAM_FACETS]) {
       expect(f.intro, `${f.slug} intro`).not.toMatch(/\.\s/);
       expect(f.intro.endsWith('.'), `${f.slug} intro ends in a period`).toBe(true);
     }
@@ -196,7 +202,7 @@ describe('facet copy', () => {
   it('only points at guides that exist', async () => {
     const { guides } = await import('./guides.ts');
     const known = new Set(guides.map(g => g.slug));
-    for (const f of [...SCHOLARSHIP_FACETS, ...PROGRAM_FACETS]) {
+    for (const f of [...SCHOLARSHIP_FACETS, ...ALL_PROGRAM_FACETS]) {
       if (f.guide) expect(known, `${f.slug} guide`).toContain(f.guide);
     }
   });
@@ -219,5 +225,18 @@ describe('category vocabulary', () => {
     for (const f of PROGRAM_FACETS) {
       expect(PROGRAM_CATEGORIES, f.slug).toContain(f.value);
     }
+  });
+
+  // The FORMAT axis is only useful if it is total and exclusive: every live
+  // program carries exactly one declared format, so the eight hub counts add
+  // up to the directory and no program is invisible on the axis.
+  it('gives every live program exactly one declared format', () => {
+    const declared = new Set(PROGRAM_FORMATS.map(f => f.value));
+    for (const p of listedPrograms) {
+      expect(declared, `${p.name} format ${JSON.stringify(p.format)}`).toContain(p.format);
+    }
+    const covered = PROGRAM_FORMATS
+      .reduce((sum, f) => sum + facetItems(f, listedPrograms).length, 0);
+    expect(covered).toBe(listedPrograms.length);
   });
 });

@@ -13,7 +13,7 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 import SabLogoMark from './SabLogoMark.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { programIsListed } from '../../lib/status';
-import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
+import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
 
 interface Props {
   currentPath: string;
@@ -40,7 +40,8 @@ let programCount: number | null = null;
 // The Scholarships tiles are the two broad scopes and eight cities chosen for
 // population and reach, not listing count (Lacombe and Okotoks out-list
 // Lethbridge, but far fewer students live there). The Programs tiles are the
-// field hubs, which is the only split the data actually supports today.
+// format hubs (what shape the thing is), because that is what a reader is
+// choosing between; the subject hubs sit in the list beside them.
 // Slugs must exist in the facet lists; a missing one is dropped, not faked.
 const MENU_SCOPES = [
   'alberta', 'national',
@@ -58,8 +59,9 @@ const tileOf = (f: { slug: string; label: string; backdrop?: string }, base: str
   ({ label: f.label, href: `${base}${f.slug}/`, count, backdrop: f.backdrop });
 
 let scopeTiles: Tile[] = scopeFacets.map(f => tileOf(f, '/scholarships/', null));
-// A field hub below the floor has no page, so it gets no tile either.
-let fieldTiles: Tile[] = [];
+// A hub below the floor has no page, so it gets no tile and no link either.
+let formatTiles: Tile[] = [];
+let fieldLinks: { label: string; href: string }[] = [];
 
 try {
   const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
@@ -71,11 +73,16 @@ try {
   scopeTiles = scopeFacets
     .map(f => tileOf(f, '/scholarships/', facetItems(f, scholarships).length))
     .sort((a, b) => b.count! - a.count!);
-  fieldTiles = PROGRAM_FACETS
-    .map(f => ({ facet: f, items: facetItems(f, listedPrograms).length }))
+  const liveHub = (f: { slug: string }) =>
+    facetItems(f as Parameters<typeof facetItems>[0], listedPrograms).length;
+  formatTiles = PROGRAM_FORMATS
+    .map(f => ({ facet: f, items: liveHub(f) }))
     .filter(({ items }) => items >= MIN_FACET_ITEMS)
     .map(({ facet, items }) => tileOf(facet, '/programs/', items))
     .sort((a, b) => b.count! - a.count!);
+  fieldLinks = PROGRAM_FACETS
+    .filter(f => liveHub(f) >= MIN_FACET_ITEMS)
+    .map(f => ({ label: f.label, href: `/programs/${f.slug}/` }));
 } catch {
   /* counts are decoration; the nav works without them */
 }
@@ -91,22 +98,19 @@ const topicLinks = [
   { label: 'Guides', href: '/guides/' },
 ];
 
-// The programs side has no second facet kind to list, so the column carries the
-// guides written about these programs instead of a second set of hubs.
+// Tiles are formats, so the column beside them is the other axis: the subject
+// hubs, then the guides. Both are one click from the panel rather than one
+// click plus a chip row.
 const programLinks = [
   { label: 'All programs', href: '/programs/' },
-  { label: 'Research programs', href: '/guides/high-school-research-programs-alberta/' },
-  { label: 'Medical experience', href: '/guides/medical-experience-high-school-alberta/' },
-  { label: 'Computing contests', href: '/guides/high-school-computing-programs-alberta/' },
-  { label: 'Chemistry competitions', href: '/guides/chemistry-competitions-canada/' },
-  { label: 'Volunteering', href: '/guides/volunteering-alberta-high-school/' },
+  ...fieldLinks,
   { label: 'Guides', href: '/guides/' },
 ];
 
 // Which nav rows carry a panel, and what goes in it.
 const MENUS: Record<string, { label: string; tiles: Tile[]; links: { label: string; href: string }[] }> = {
   '/scholarships/': { label: 'Scholarships by location and topic', tiles: scopeTiles, links: topicLinks },
-  '/programs/': { label: 'Programs by field', tiles: fieldTiles, links: programLinks },
+  '/programs/': { label: 'Programs by format and field', tiles: formatTiles, links: programLinks },
 };
 
 const navItems = [

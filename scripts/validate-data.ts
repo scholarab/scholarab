@@ -13,6 +13,8 @@ import {
   PROGRAM_CATEGORIES,
   SCHOLARSHIP_FACETS,
   PROGRAM_FACETS,
+  PROGRAM_FORMATS,
+  ALL_PROGRAM_FACETS,
   facetItems,
   MIN_FACET_ITEMS,
 } from '../src/lib/facets.ts';
@@ -49,6 +51,8 @@ interface Program {
   metaDescription?: string;
   region?: string | null;
   category?: string | null;
+  format?: string | null;
+  active?: boolean;
   [key: string]: unknown;
 }
 
@@ -307,6 +311,22 @@ for (const p of programs) {
   }
 }
 
+// ── Every program declares a format ─────────────────────────────────────────
+// The FORMAT axis only works if it is total: a program with no format sits on
+// no format hub, and the eight hub counts stop adding up to the directory. A
+// value outside the vocabulary is worse, since it reaches no hub at all and
+// nothing else would say so.
+const progFormats = new Set<string>(PROGRAM_FORMATS.map((f) => String(f.value)));
+for (const p of programs) {
+  if (!p.format || !progFormats.has(String(p.format))) {
+    console.error(
+      `Program [${p.id}] "${p.name}": format ${JSON.stringify(p.format)} is not one of ` +
+        `${[...progFormats].join(', ')}`,
+    );
+    failed = true;
+  }
+}
+
 // ── public/_redirects ────────────────────────────────────────────────────────
 // Renames are the only reason a detail URL ever moves, so this file is the
 // site's whole memory of its own history. Four ways it silently rots, each of
@@ -335,7 +355,7 @@ const livePaths = new Set([
   ...SCHOLARSHIP_FACETS
     .filter((f) => facetItems(f, scholarships).length >= MIN_FACET_ITEMS)
     .map((f) => `/scholarships/${f.slug}/`),
-  ...PROGRAM_FACETS
+  ...ALL_PROGRAM_FACETS
     .filter((f) => facetItems(f, programs).length >= MIN_FACET_ITEMS)
     .map((f) => `/programs/${f.slug}/`),
 ]);
