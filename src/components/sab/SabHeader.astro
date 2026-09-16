@@ -3,10 +3,13 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 // Dark header band. Thin, full-width bar in the Apple/Tesla manner (Ilia,
 // 2026-09-13): logo at the window's left edge, links centred, no CTA pill.
 // The current page is marked by brighter text, not an accent underline.
-// (The mono annotation bar and the home-page Home-item omission from the
-// design were both removed at Ilia's request, 2026-07-11.)
+// (The mono annotation bar was removed at Ilia's request, 2026-07-11.)
 //
-// Below 900px the same six anchors become a full-screen sheet behind a
+// There is no Home link: the logo is an anchor to '/' on every page and in
+// the open phone sheet, so a Home row was a second control for a destination
+// the wordmark already owns (Ilia, 2026-09-15).
+//
+// Below 900px the same five anchors become a full-screen sheet behind a
 // 44×44 button ("ScholarAB Mobile Home.dc.html", state B); one nav, two
 // layouts, so there is no second link list to keep in sync.
 
@@ -114,7 +117,6 @@ const MENUS: Record<string, { label: string; tiles: Tile[]; links: { label: stri
 };
 
 const navItems = [
-  { label: 'Home', href: '/', count: null as number | null },
   { label: 'Scholarships', href: '/scholarships/', count: scholarshipCount },
   { label: 'Programs', href: '/programs/', count: programCount },
   { label: 'Match', href: '/match/', count: null as number | null },
