@@ -636,10 +636,19 @@ body.quiz-results #match-divider {
    listings rather than on four rows of the filters they just used. */
 .sabl-split { display: contents; }
 @media (min-width: 1100px) {
-  .sabl-railed .sabl-split {
+  /* The whole hub is the two columns, title included (Ilia, 2026-09-15): the
+     filters sit at the window's left edge and everything a reader came for,
+     heading down to the last card, fills the rest. .sabl-split dissolves so
+     its two children become items of this grid rather than a grid of their
+     own, which is what lets the head share the right column with them. */
+  .sabl-railed {
     display: grid; grid-template-columns: 228px minmax(0, 1fr);
-    gap: 32px; align-items: start; padding-top: 20px;
+    gap: 0 36px; align-items: start;
   }
+  .sabl-railed .sabl-head { grid-column: 2; grid-row: 1; }
+  .sabl-railed .sabl-split { display: contents; }
+  .sabl-railed .sabl-rail { grid-column: 1; grid-row: 1 / span 2; }
+  .sabl-railed .sabl-col { grid-column: 2; grid-row: 2; }
   /* Its own scroller, so a 30-city SCOPE row cannot make the rail taller than
      the window and strand the last chips where sticky will not reach them. */
   .sabl-railed .sabl-rail {
@@ -658,6 +667,10 @@ body.quiz-results #match-divider {
     flex-wrap: wrap; overflow-x: visible; gap: 6px;
   }
   .sabl-railed .sabl-col .sabl-result-line { padding-top: 0; }
+  /* As many cards as the window holds, not three. On the wide body a 1440
+     window fits four and a 2560 one seven, and the card keeps a floor of 300px
+     so it never gets too narrow to read. */
+  .sabl-railed .sabl-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 }
 
 .sabl-result-line { font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); padding: 22px 0 6px; }
@@ -912,6 +925,11 @@ html:not(.js) .sabl-more { display: none; }
 .sabp { background: #FBF8F2; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
 .sabp-header { background: #0A1310; color: #F2F0E9; font-family: 'Archivo', sans-serif; }
 .sabp-body { width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; padding: 72px 48px 96px; }
+/* Hubs only, and no maximum. The measure is a rule about line length, and the
+   only long line here is the standfirst, which is capped at 560px by
+   .sabl-desc; the cards and the filter rail were paying for it in empty margin
+   on both sides. A wider window now buys cards rather than gutters. */
+.sabp-wide .sabp-body { max-width: none; padding-left: clamp(20px, 2.2vw, 40px); padding-right: clamp(20px, 2.2vw, 40px); }
 @media (max-width: 900px) {
   .sabp-body { padding: 28px 20px 64px; }
 }

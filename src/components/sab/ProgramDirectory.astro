@@ -108,6 +108,10 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 ---
 
 <div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
+  {/* The scholarship twin's wrapper, and load-bearing on a railed hub: it is
+      what puts the heading and the toolbar in the right-hand column beside the
+      filter rail. Without it both would auto-place into the rail's column. */}
+  <div class="sabl-head">
   <div class="sabl-title-row">
     <div>
       <h1 class="sabl-h1">{h1}</h1>
@@ -137,6 +141,8 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       ))}
       </div>
     </div>
+  </div>
+
   </div>
 
   {/* Rail or rows, one DOM; see the twin in ScholarshipDirectory. */}
