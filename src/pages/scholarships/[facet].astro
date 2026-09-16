@@ -36,6 +36,14 @@ export async function getStaticPaths() {
 
 const { facet, items, allItems } = Astro.props;
 
+// Full-page photo backdrops are OFF (Ilia, 2026-09-15: "looks broke ... maybe
+// we will put them back eventually"). Flip this to false and the hubs render
+// their photo again; the images, the facets' `backdrop` values and the
+// `.sabl-has-backdrop` CSS below all stay in place for that. The header's
+// square photo tiles are a separate surface and are unaffected.
+const BACKDROPS_OFF = true;
+const backdrop = BACKDROPS_OFF ? null : facet.backdrop;
+
 const today = albertaToday();
 
 const ordered = filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
@@ -117,9 +125,9 @@ const breadcrumbJson = {
 
   <div
     id="sab-scholarships"
-    class:list={['sabp', 'sabp-wide', { 'sabl-has-backdrop': facet.backdrop }]}
-    style={facet.backdrop
-      ? `--sabl-wide: url(/photos/backdrops/${facet.backdrop}-wide-1672.webp); --sabl-wide-2x: url(/photos/backdrops/${facet.backdrop}-wide-3344.webp); --sabl-tall: url(/photos/backdrops/${facet.backdrop}-tall-1000.webp); --sabl-tall-2x: url(/photos/backdrops/${facet.backdrop}-tall-2000.webp)`
+    class:list={['sabp', 'sabp-wide', { 'sabl-has-backdrop': backdrop }]}
+    style={backdrop
+      ? `--sabl-wide: url(/photos/backdrops/${backdrop}-wide-1672.webp); --sabl-wide-2x: url(/photos/backdrops/${backdrop}-wide-3344.webp); --sabl-tall: url(/photos/backdrops/${backdrop}-tall-1000.webp); --sabl-tall-2x: url(/photos/backdrops/${backdrop}-tall-2000.webp)`
       : undefined}
   >
     <div class="sabp-body">
