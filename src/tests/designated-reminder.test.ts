@@ -15,6 +15,24 @@ vi.mock('@neondatabase/serverless', () => ({ neon: () => Object.assign(async (st
 }, { query: vi.fn(async () => []) }) }));
 vi.mock('../lib/mail-delivery', () => ({ claimRecipient: vi.fn(), mailKey: async (key: string) => key, deliverMail: (...args: unknown[]) => state.send(...args as []) }));
 vi.mock('../lib/calendar', () => ({ calendarDaysUntil: () => 6 }));
+// The script's own fixture, not the live catalogue. This test used to lean on
+// real program 44 (Breakthrough Junior Challenge) having a dated deadline, and
+// CI runs auto-expire before the tests: the day after that deadline, 44 read
+// "TBA", the script rightly skipped it, and the test failed on a push that
+// touched nothing but CSS (2026-09-16). Every listing's deadline passes
+// eventually, so no real id is safe to pin here.
+vi.mock('fs', async importOriginal => {
+  const fs = await importOriginal<typeof import('fs')>();
+  const fixtures: Record<string, unknown[]> = {
+    'scholarships.json': [],
+    'research-programs.json': [{ id: 44, name: 'Fixture Program', deadline: '2099-01-01', url: 'https://example.test/program' }],
+  };
+  const readFileSync = ((path: unknown, ...rest: unknown[]) => {
+    const name = Object.keys(fixtures).find(f => String(path).endsWith(f));
+    return name ? JSON.stringify(fixtures[name]) : (fs.readFileSync as (...a: unknown[]) => unknown)(path, ...rest);
+  }) as typeof fs.readFileSync;
+  return { ...fs, default: { ...fs, readFileSync }, readFileSync };
+});
 beforeEach(() => {
   vi.resetModules(); state.send.mockClear(); state.queries.length = 0;
   vi.stubEnv('DATABASE_URL', 'test-only'); vi.stubEnv('RESEND_API_KEY', 'test-only');
