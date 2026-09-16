@@ -341,6 +341,10 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
         _deadline_ms: d.deadline && d.deadline !== 'TBA' && d.deadline !== 'Ongoing'
           ? new Date(d.deadline + 'T00:00:00').getTime()
           : undefined,
+        // FORMAT is a hub axis, not a client filter: the chips above the grid
+        // are links to /programs/<format>/, so no card carries a data-format
+        // and nothing in list-core reads this at runtime.
+        format: null,
         emoji: null, provider: null, duration: null, stipend: null, location: null,
         eligibility: null, url: '', description: null, lastVerified: null, active: true,
         cost: 'unconfirmed', costNote: null,

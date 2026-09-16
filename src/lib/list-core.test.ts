@@ -52,6 +52,7 @@ function makeProgram(
     name: `Program ${overrides.id}`,
     emoji: null,
     category: 'Science',
+    format: null,
     provider: null,
     grades: null,
     duration: null,
