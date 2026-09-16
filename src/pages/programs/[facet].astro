@@ -15,7 +15,7 @@ import { enrichPrograms } from '../../lib/enrich';
 import { ALL_PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
 import { DEFAULT_PROGRAM_STATE, filterSortPrograms } from '../../lib/list-core';
 import { itemListJson } from '../../lib/ld';
-import { programStatusOf, programIsListed } from '../../lib/status';
+import { programIsListed } from '../../lib/status';
 import { getGuide } from '../../lib/guides';
 
 export async function getStaticPaths() {
@@ -32,30 +32,17 @@ export async function getStaticPaths() {
 
 const { facet, items, allItems } = Astro.props;
 
-const today = albertaToday();
-
 const ordered = filterSortPrograms(items, DEFAULT_PROGRAM_STATE);
 const canonical = `https://www.scholarab.ca/programs/${facet.slug}/`;
-
-// Programs have no 'future': auto-expire rewrites a passed deadline to 'TBA',
-// so between cycles a program reads as undated rather than closed. The count
-// line says "open" and "rolling" rather than borrowing the scholarship wording.
-const statuses = items.map(p => programStatusOf(p, today));
-const openNow = statuses.filter(x => x === 'active').length;
-const rolling = statuses.filter(x => x === 'tba' || x === 'ongoing').length;
-const paid = items.filter(p => p.paid).length;
 
 // The hub half of the guide pairing. Only the scholarship facet page read
 // facet.guide, so a programs hub could declare an explainer and never link to
 // it; the same one-sided wiring that kept guides out of /programs/ entirely.
 const guide = facet.guide ? getGuide(facet.guide) : null;
 
-const countLine = [
-  `${items.length} ${items.length === 1 ? 'program' : 'programs'}`,
-  openNow > 0 ? `${openNow} with an open deadline` : null,
-  rolling > 0 ? `${rolling} rolling or undated` : null,
-  paid > 0 ? `${paid} paid` : null,
-].filter(Boolean).join(' · ');
+// The footer's count line went with the scholarship hubs' on 2026-09-15
+// (Ilia): the status sections in the list say how many are open and how many
+// are not, next to the cards rather than at the bottom of the page.
 
 // Siblings on this hub's own axis: a format hub offers the other formats, not
 // the fields, which the FORMAT and FIELD rows above already both carry.
@@ -112,7 +99,6 @@ const breadcrumbJson = {
       />
 
       <div class="sabl-hubfoot">
-        <p class="sabl-mono sabl-hubcount">{countLine.toUpperCase()}</p>
         {guide && (
           <p>
             Reading first? <a href={`/guides/${guide.slug}/`}>{guide.title}</a> walks through how to
@@ -142,7 +128,6 @@ const breadcrumbJson = {
     display: flex; flex-direction: column; gap: 12px;
     font-size: 15px; color: #4B5563;
   }
-  .sabl-hubcount { font-size: 12px; letter-spacing: 0.08em; color: #6B7280; margin: 0; }
   .sabl-hubfoot p { margin: 0; }
   .sabl-hublinks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
   .sabl-hublinks a { color: #141915; }

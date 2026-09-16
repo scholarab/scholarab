@@ -237,8 +237,14 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
             aria-expanded="true"
             data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
           >
-            <span class="sabl-group-label">{head.label}</span>
-            <span class="sabl-group-count">{head.count}</span>
+            {/* The rule belongs to the words, not to the row: it stops
+                after the count rather than running on to the toggle (Ilia,
+                2026-09-15: "only for text and number of scholarships in that
+                filter, stop there"). */}
+            <span class="sabl-group-name">
+              <span class="sabl-group-label">{head.label}</span>
+              <span class="sabl-group-count">{head.count}</span>
+            </span>
             {/* aria-hidden so the button's name stays "OPEN NOW 15"; the state
                 itself is carried by aria-expanded, which is what a screen
                 reader announces and what the word duplicates for everyone

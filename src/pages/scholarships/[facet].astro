@@ -19,9 +19,8 @@ import { enrichScholarships } from '../../lib/enrich';
 import { SCHOLARSHIP_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
 import { DEFAULT_SCHOLARSHIP_STATE, filterSortScholarships } from '../../lib/list-core';
 import { itemListJson } from '../../lib/ld';
-import { scholarshipStatusOf, scholarshipIsIndexable } from '../../lib/status';
+import { scholarshipIsIndexable } from '../../lib/status';
 import { getGuide } from '../../lib/guides';
-import { formatListingDate } from '../../lib/meta';
 
 export async function getStaticPaths() {
   const all = enrichScholarships(await loadScholarships());
@@ -57,25 +56,10 @@ const canonical = `https://www.scholarab.ca/scholarships/${facet.slug}/`;
 // "OPENS <date>", so the counts here have to say the same thing. A hub that
 // reported "0 scholarships" in the month counsellors start looking would be
 // worse than no hub at all, which is why nothing on this page filters to open.
-const statuses = items.map(s => scholarshipStatusOf(s, today));
-const openNow = statuses.filter(x => x === 'active').length;
-const reopening = statuses.filter(x => x === 'future').length;
-
-// The soonest date any not-yet-open listing opens, so the standfirst can say
-// when rather than just "later". Only listings with a real openDate qualify;
-// the rest are genuinely unknown and must not be given an invented month.
-const nextOpen = items
-  .filter((s, i) => statuses[i] === 'future' && s.openDate)
-  .map(s => s.openDate!)
-  .sort()[0];
-
-const countLine = [
-  `${items.length} ${items.length === 1 ? 'award' : 'awards'}`,
-  openNow > 0 ? `${openNow} open now` : null,
-  reopening > 0
-    ? `${reopening} not open yet${nextOpen ? `, the first on ${formatListingDate(nextOpen)}` : ''}`
-    : null,
-].filter(Boolean).join(' · ');
+// The footer's count line ("153 AWARDS · 15 OPEN NOW · 138 NOT OPEN YET, THE
+// FIRST ON JANUARY 19, 2027") was deleted 2026-09-15 at Ilia's request. The
+// status sections in the list carry all three figures now, each beside the
+// listings it describes, and the footer's job is the sibling hubs.
 
 // A hub whose every listing is genuinely closed has nothing to offer and should
 // not be in the index. In practice this never fires today, because `active:
@@ -152,7 +136,6 @@ const breadcrumbJson = {
       />
 
       <div class="sabl-hubfoot">
-        <p class="sabl-mono sabl-hubcount">{countLine.toUpperCase()}</p>
         {guide && (
           <p>
             Reading first? <a href={`/guides/${guide.slug}/`}>{guide.title}</a> walks through how to
@@ -328,7 +311,6 @@ const breadcrumbJson = {
     display: flex; flex-direction: column; gap: 12px;
     font-size: 15px; color: #4B5563;
   }
-  .sabl-hubcount { font-size: 12px; letter-spacing: 0.08em; color: #6B7280; margin: 0; }
   .sabl-hubfoot p { margin: 0; }
   .sabl-hublinks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
   .sabl-hublinks a { color: #141915; }

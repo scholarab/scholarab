@@ -178,7 +178,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
         el.setAttribute('type', 'button');
         el.className = 'sabl-group';
         el.dataset.dirGroup = key;
-        el.innerHTML = '<span class="sabl-group-label"></span><span class="sabl-group-count"></span>'
+        el.innerHTML = '<span class="sabl-group-name"><span class="sabl-group-label"></span><span class="sabl-group-count"></span></span>'
           + `<span class="sabl-group-toggle" aria-hidden="true"><span data-dir-group-word></span>${CARET}</span>`;
       }
       headers.set(key, el);
