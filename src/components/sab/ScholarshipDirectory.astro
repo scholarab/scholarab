@@ -206,10 +206,10 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       ))}
       </div>
     </div>
-    {/* Everything on the page that is not the list can be put away from here:
-        the filter rail and the standfirst go together, and on a hub the cards
-        take the rail's column with them (Ilia, 2026-09-15). The button itself
-        never hides, and neither does anything else in this row. */}
+    {/* TRACK and STATUS put away from here, and on a hub the cards take the
+        rail's column with them (Ilia, 2026-09-15). Only the filters: the
+        heading, the standfirst, the money, the search box and these chips all
+        stay whichever way it is set. */}
     <button type="button" class="sabl-lean" data-dir-lean aria-pressed="false">
       <span data-dir-lean-word>Hide filters</span>
       <svg class="sabl-lean-caret" viewBox="0 0 12 8" width="12" height="8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>

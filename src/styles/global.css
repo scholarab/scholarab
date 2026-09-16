@@ -719,16 +719,15 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 }
 
 /* ── Lean mode ──
-   Everything on a directory page that is scenery rather than the list can be
-   put away (Ilia, 2026-09-15): the TRACK/STATUS rail and the standfirst
-   paragraph go, and on a hub the grid takes the rail's column with them. What
-   is left is the heading, the money, the search box and the sort chips, which
-   is the set Ilia named as the part that cannot be hidden.
+   The filter rail goes away and, on a hub, the grid takes its column (Ilia,
+   2026-09-15). The standfirst went with it for an hour and was put back the
+   same evening ("lets not hide the text. just the filters"): it is the one
+   sentence that says what the page is, it costs three lines, and the button
+   says filters. So the only thing this hides is TRACK and STATUS.
    The switch lives on <html>, set from localStorage by the inline script in
    Layout.astro before the first paint, so a reader who chose the wide layout
    does not watch the rail appear and then vanish on every page. */
-html[data-lean] .sabl-rail,
-html[data-lean] .sabl-desc { display: none; }
+html[data-lean] .sabl-rail { display: none; }
 @media (min-width: 1180px) {
   /* Two columns collapse to one flow. The head, the split and the column are
      all plain blocks again, and .sabl-railed .sabl-grid keeps its auto-fill

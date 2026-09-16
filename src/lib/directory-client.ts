@@ -68,7 +68,7 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
 const SCROLL_KEY = 'sab:dir-scroll';
 
 /**
- * The wide layout: filters and standfirst put away, cards across the whole
+ * The wide layout: TRACK and STATUS put away, cards across the whole
  * page (Ilia, 2026-09-15). Kept on <html> rather than in this module, because
  * the inline script in Layout.astro reads the same key before the first paint
  * so the page never renders one layout and then the other. Unlike a shut

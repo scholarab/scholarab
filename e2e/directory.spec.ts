@@ -85,8 +85,8 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
 
   await page.locator('[data-dir-lean]').click();
   await expect(rail).toBeHidden();
-  await expect(desc).toBeHidden();
-  // The four things Ilia named as unhideable stay put.
+  // Filters only: everything else on the head stays, the standfirst included.
+  await expect(desc).toBeVisible();
   await expect(page.locator('.sabl-h1')).toBeVisible();
   await expect(page.locator('[data-dir-stat]')).toBeVisible();
   await expect(page.locator('[data-dir-search]')).toBeVisible();
@@ -101,7 +101,6 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
 
   await page.locator('[data-dir-lean]').click();
   await expect(rail).toBeVisible();
-  await expect(desc).toBeVisible();
   expect((await grid.boundingBox())!.width).toBe(narrow);
 });
 
