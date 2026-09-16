@@ -638,13 +638,13 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 }
 
 /* ── Filter rail (hubs) ──
-   One DOM, two layouts. Off a hub, and in any window under 1100px, .sabl-split
+   One DOM, two layouts. Off a hub, and in any window under 1180px, .sabl-split
    is display:contents and the chip rows sit above the grid exactly as they
    always have. On a railed hub wide enough for it, the rows become a sticky
    left column: a reader who has already picked Calgary opens the page on the
    listings rather than on four rows of the filters they just used. */
 .sabl-split { display: contents; }
-@media (min-width: 1100px) {
+@media (min-width: 1180px) {
   /* The whole hub is the two columns, title included (Ilia, 2026-09-15): the
      filters sit at the window's left edge and everything a reader came for,
      heading down to the last card, fills the rest. .sabl-split dissolves so
@@ -694,7 +694,23 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   /* As many cards as the window holds, not three. On the wide body a 1440
      window fits four and a 2560 one seven, and the card keeps a floor of 300px
      so it never gets too narrow to read. */
-  .sabl-railed .sabl-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  /* Three is the floor, more only when the window can hold them at full size
+     (Ilia, 2026-09-15: "keep three cards as long as possible on every device").
+     The track's minimum is 300px until three of those no longer fit, and from
+     there it is exactly a third of the row, so a 1180px window still lays out
+     three rather than dropping to two.
+     The rail itself waits until 1180px for the same reason: it costs 220px,
+     and below that the three cards beside it come out narrower than the ones a
+     window 100px smaller shows with the filters stacked above them. */
+  .sabl-railed .sabl-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, (100% - 36px) / 3), 1fr));
+  }
+  /* A 228px rail plus its 36px gutter is a fifth of a 1280px window, and the
+     three cards beside it pay for all of it. Under 1280 the rail gives some
+     back: the chips still fit a 196px column, and the cards gain 24px each. */
+  @media (max-width: 1279px) {
+    .sabl-railed { grid-template-columns: 196px minmax(0, 1fr); gap: 0 24px; }
+  }
 }
 
 .sabl-result-line { font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); padding: 22px 0 6px; }
@@ -857,7 +873,13 @@ html:not(.js) .sabl-more { display: none; }
     transform: none; transition: none;
   }
 }
-@media (max-width: 1024px) {
+/* Three across is the target everywhere a window can hold it (Ilia,
+   2026-09-15). This used to break to two at 1024px, which gave a half-screen
+   laptop window or an iPad in landscape two 480px cards while a 1920 window
+   was showing five 301px ones. Three fit at 900px (272px each, wider than the
+   railed hubs give at 1180), so the break waits until 899px, and two hold
+   until the single column takes over at 640px. */
+@media (max-width: 899px) {
   .sabl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 900px) {
