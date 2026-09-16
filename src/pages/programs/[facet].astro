@@ -96,12 +96,11 @@ const breadcrumbJson = {
 
   <div id="sab-programs" class="sabp sabp-wide">
     <div class="sabp-body">
-      <nav class="sabl-crumbs sabl-mono" aria-label="Breadcrumb">
-        <a href="/programs/">All programs</a>
-        <span aria-hidden="true">/</span>
-        <span>{facet.label}</span>
-      </nav>
-
+      {/* No visible breadcrumb (Ilia, 2026-09-15). The header names the
+          section, the h1 names the facet, and the hub footer links back to the
+          directory, so the row was a third copy of the same two facts at the
+          top of the reader's screen. The BreadcrumbList JSON-LD stays: the
+          trail it describes is still true of the URL. */}
       <ProgramDirectory
         items={items}
         h1={facet.h1}
@@ -136,13 +135,6 @@ const breadcrumbJson = {
 <style is:global>
   body:has(#sab-programs) { background: #FBF8F2; }
 
-  .sabl-crumbs {
-    display: flex; gap: 8px; align-items: center;
-    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
-    padding-top: 24px; color: #6B7280;
-  }
-  .sabl-crumbs a { color: #6B7280; text-decoration: none; }
-  .sabl-crumbs a:hover { color: #141915; text-decoration: underline; }
 
   .sabl-hubfoot {
     border-top: 1px solid #E5E0D5;

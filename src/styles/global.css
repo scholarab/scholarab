@@ -473,11 +473,6 @@ body.quiz-results #match-divider {
   margin: 20px 0 0; max-width: 560px; min-height: calc(1.55em * 3);
 }
 
-/* The other half of that: a hub carries a breadcrumb and /scholarships does
-   not, which put its h1 42px higher than every scope it links to. The root
-   pages reserve the row instead of closing it up. 42px is the 24px padding-top
-   in .sabl-crumbs plus its 18px line. */
-.sabl-crumb-gap { height: 42px; }
 .sabl-stat { text-align: right; flex: none; padding-top: 10px; }
 .sabl-stat-value { font-family: 'Instrument Serif', serif; font-size: clamp(32px, 4vw, 44px); line-height: 1; }
 .sabl-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.5); margin-top: 6px; }
@@ -863,12 +858,6 @@ html:not(.js) .sabl-more { display: none; }
      link, which is text with an underline and was 25px tall. */
   .sabl-save { width: 44px; height: 44px; }
   .sabl-apply { display: inline-flex; align-items: center; min-height: 44px; }
-  /* The reserved breadcrumb row keeps a root page's h1 level with a hub's when
-     a reader hops between them. On a phone that hop costs a full page load and
-     nothing is level with anything, so the row is 42px of empty screen above
-     the only heading. */
-  .sabl-crumb-gap { display: none; }
-
   /* SORT was the one control row that still wrapped, so three chips took two
      lines and sat at a different rhythm from the three scrolling rows directly
      beneath it. Given the same shape, the four rows read as one block. */
