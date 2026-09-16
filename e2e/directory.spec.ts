@@ -44,7 +44,9 @@ test('search preserves results, groups, chips, money, closed awards and history'
       // The count line and the stat still describe every match, not just the
       // cards revealed so far.
       await expect(page.locator('[data-dir-count]')).toHaveText(directoryCountLine(visible.length, items.length, 'LISTINGS', visible.filter(s => getScholarshipStatus(s) === 'active').length));
-      expect(await page.locator('[data-dir-group]:not([hidden])').evaluateAll(els => els.map(e => e.textContent!.replace(/\s+/g, ' ').trim()))).toEqual(shownRuns(visible, PAGE));
+      // Label and count only: the bar also carries a Hide/Show word, which is
+      // state and not part of what the run is called.
+      expect(await page.locator('[data-dir-group]:not([hidden])').evaluateAll(els => els.map(e => `${e.querySelector('.sabl-group-label')!.textContent} ${e.querySelector('.sabl-group-count')!.textContent}`))).toEqual(shownRuns(visible, PAGE));
       const chips = await page.locator('[data-fkey]:has([data-chip-count])').evaluateAll(els => els.map(e => ({ key: e.getAttribute('data-fkey')!, value: e.getAttribute('data-fval')!, count: Number(e.querySelector('[data-chip-count]')!.textContent) })));
       const keys = { category: 'selectedCategory', status: 'statusFilter', region: 'selectedRegion' };
       for (const chip of chips) expect(chip.count).toBe(filterSortScholarships(items, { ...state, [keys[chip.key as keyof typeof keys]]: chip.value || null }).length);

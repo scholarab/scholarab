@@ -125,12 +125,28 @@ describe('directory "Show more"', () => {
 
   it('heads only the runs that have started, counting every match rather than the revealed cards', () => {
     setup()
-    const headers = () => [...document.querySelectorAll<HTMLElement>('[data-dir-group]')].filter(h => !h.hidden).map(h => h.textContent)
+    // Label and count, not the whole bar: it also carries a Hide/Show word.
+    const headers = () => [...document.querySelectorAll<HTMLElement>('[data-dir-group]')].filter(h => !h.hidden)
+      .map(h => h.querySelector('.sabl-group-label')!.textContent! + h.querySelector('.sabl-group-count')!.textContent)
     // Cards 1 and 2 are out: only the Arts run has started, so only its header
     // shows. Science's appears once one of its cards is revealed, already
     // carrying all three.
     expect(headers()).toEqual(['ARTS2'])
     click($('[data-dir-more-btn]'))
     expect(headers()).toEqual(['ARTS2', 'SCIENCE3'])
+  })
+
+  it('shutting a run gives its place in the step to the runs still open', () => {
+    setup()
+    expect(shownIds()).toEqual([1, 2])
+    // Arts shut: its two cards leave the page, and the step spends itself on
+    // the first two Science cards instead of showing nothing in their place.
+    click($('[data-dir-group="Arts"]'))
+    expect(shownIds()).toEqual([3, 4])
+    expect($('[data-dir-more-line]').textContent).toBe('SHOWING 2 OF 3')
+    // The count line still describes every match; shutting a run is not a filter.
+    expect($('[data-dir-count]').textContent).toBe('5 OF 5')
+    click($('[data-dir-group="Arts"]'))
+    expect(shownIds()).toEqual([1, 2])
   })
 })

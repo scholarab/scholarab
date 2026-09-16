@@ -690,7 +690,6 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   .sabl-railed .sabl-rail .sabl-chips {
     flex-wrap: wrap; overflow-x: visible; gap: 6px;
   }
-  .sabl-railed .sabl-col .sabl-result-line { padding-top: 0; }
   /* As many cards as the window holds, not three. On the wide body a 1440
      window fits four and a 2560 one seven, and the card keeps a floor of 300px
      so it never gets too narrow to read. */
@@ -713,7 +712,12 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   }
 }
 
-.sabl-result-line { font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); padding: 22px 0 6px; }
+/* The visible count line ("153 OF 153 LISTINGS · 15 OPEN NOW") was deleted
+   2026-09-15 at Ilia's request: the status sections below now say the same
+   thing in the place the reader is actually looking, and each says it about
+   its own run. The node itself survives as a screen-reader live region (class
+   `sr-only` in both directories), because typing in the search box changes
+   nothing else that a screen reader would announce. */
 
 /* Card metrics went up about 10% on 2026-09-15 (Ilia: "make them bigger"):
    30/28/26 padding, 20px name, 40px amount, 15px blurb, 12px chips. The hub
@@ -730,21 +734,47 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    next column's cards off the right edge of the viewport, cutting off their
    Details buttons. Zero floor lets the chips ellipsize as they were told to. */
 .sabl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 16px; }
-/* Full-width seam between runs of cards. It is a grid item, not a wrapper, so
-   the cards either side stay in one grid and keep their column rhythm. */
+/* Status sections. Full-width grid items, not wrappers, so the cards either
+   side stay in one grid and keep their column rhythm.
+   Until 2026-09-15 these were 12px mono seams between runs, sitting under a
+   count line that carried the same information in weaker form. The count line
+   is gone and the seam is now the page's structure (Ilia: "make open now,
+   opening later and closed way bigger and more visible"): each is a heading
+   with its listings attached under it, and a show/hide control on the right
+   that shuts the whole run. The control needs JavaScript to do anything, so
+   without it the bar is an inert heading and every card stays on the page. */
 .sabl-group {
-  grid-column: 1 / -1; display: flex; align-items: center; gap: 12px;
-  padding: 20px 0 2px;
+  grid-column: 1 / -1; width: 100%;
+  display: flex; align-items: center; gap: 14px;
+  margin: 36px 0 4px; padding: 0 0 12px;
+  background: none; border: 0; border-bottom: 2px solid #141915;
+  font: inherit; color: inherit; text-align: left;
 }
-.sabl-group:first-child { padding-top: 4px; }
+html.js .sabl-group { cursor: pointer; }
+.sabl-group:first-child { margin-top: 8px; }
 .sabl-group-label {
-  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
-  letter-spacing: 0.08em; color: #141915;
+  font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 600;
+  letter-spacing: 0.02em; line-height: 1.1; color: #141915;
 }
+/* A filled pill rather than grey type beside the heading: at this size the
+   count is the second thing read, and it is the number the reader came for. */
 .sabl-group-count {
-  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
-  color: rgba(20,25,21,0.5);
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.04em; padding: 5px 11px; border-radius: 100px;
+  background: rgba(20,25,21,0.07); color: rgba(20,25,21,0.7);
 }
+.sabl-group-toggle {
+  display: none; margin-left: auto; align-items: center; gap: 8px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; color: rgba(20,25,21,0.55);
+}
+html.js .sabl-group-toggle { display: inline-flex; }
+.sabl-group:hover .sabl-group-toggle { color: #141915; }
+/* Points down while the run is open, right while it is shut, which is the
+   only cue a reader gets once the cards under it are gone. */
+.sabl-group-caret { transition: transform 0.18s ease; }
+.sabl-group[aria-expanded='false'] .sabl-group-caret { transform: rotate(-90deg); }
+@media (prefers-reduced-motion: reduce) { .sabl-group-caret { transition: none; } }
 .sabl-card {
   display: flex; flex-direction: column; background: #FFFFFF;
   border: 1.5px solid rgba(20,25,21,0.85); border-radius: 18px; padding: 30px 28px 26px;
@@ -902,7 +932,8 @@ html:not(.js) .sabl-more { display: none; }
      the row becomes a column, and the chips keep their own line underneath. */
   .sabl-filter-row { flex-direction: column; align-items: stretch; gap: 6px; }
   .sabl-filters { gap: 10px; padding-top: 14px; }
-  .sabl-result-line { padding: 14px 0 6px; }
+  .sabl-group { margin-top: 26px; padding-bottom: 10px; }
+  .sabl-group-label { font-size: 21px; }
   /* Touch targets. The chips came out at 39px and the search field at 23,
      both under the 44px minimum, and the search box is the primary control on
      the page. Height only: the padding stays, so the rows keep their metrics. */

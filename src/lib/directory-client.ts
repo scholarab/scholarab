@@ -131,50 +131,80 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // the no-JS render and the hydrated render byte-identical.
   const headers = new Map<string, HTMLElement>();
 
+  /**
+   * Group keys the reader has shut (Ilia, 2026-09-15: "so you can close them
+   * like columns"). A shut run keeps its heading and its count -- the count is
+   * of every match, not of what is on screen -- and drops its cards.
+   *
+   * Deliberately not persisted. It resets on every load, so a reader who shuts
+   * CLOSED and comes back a week later does not find a page that is quietly
+   * hiding a third of itself with no memory of having been told to.
+   */
+  const collapsed = new Set<string>();
+
+  const CARET = '<svg class="sabl-group-caret" viewBox="0 0 12 8" width="12" height="8" fill="none"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
   function headerFor(key: string, count: number): HTMLElement {
     let el = headers.get(key);
     if (!el) {
       el = root?.querySelector<HTMLElement>(`[data-dir-group="${key}"]`) ?? undefined;
       if (!el) {
-        el = document.createElement('div');
+        el = document.createElement('button');
+        el.setAttribute('type', 'button');
         el.className = 'sabl-group';
         el.dataset.dirGroup = key;
-        el.innerHTML = '<span class="sabl-group-label"></span><span class="sabl-group-count"></span>';
+        el.innerHTML = '<span class="sabl-group-label"></span><span class="sabl-group-count"></span>'
+          + `<span class="sabl-group-toggle" aria-hidden="true"><span data-dir-group-word></span>${CARET}</span>`;
       }
       headers.set(key, el);
     }
     el.hidden = false;
+    const open = !collapsed.has(key);
+    el.setAttribute('aria-expanded', String(open));
+    const word = el.querySelector('[data-dir-group-word]');
+    if (word) word.textContent = open ? 'Hide' : 'Show';
     el.querySelector('.sabl-group-label')!.textContent = config.groups!.label(key);
     el.querySelector('.sabl-group-count')!.textContent = String(count);
     return el;
+  }
+
+  /** Is this list split into headed sections at all? One group is no grouping:
+   *  a lone "OPEN NOW" bar over the whole grid is a label with nothing to
+   *  distinguish it from, and there would be nothing to fold it away from. */
+  function isGrouped(all: T[]): boolean {
+    const g = config.groups;
+    return !!g && new Set(all.map(v => g.key(v))).size >= 2;
   }
 
   /**
    * The on-screen cards with a header node spliced in ahead of each run.
    * Grouping and the header counts come from every match, not just the cards
    * revealed so far: "CLOSING LATER 90" stays 90 while only six are showing.
+   *
+   * A run gets a heading once one of its cards is on screen, or once it is
+   * shut: a shut run has no cards left to announce it, and without its heading
+   * there would be no way to open it again. A run the reader has not paged
+   * down to yet still gets nothing.
    */
   function withGroupHeaders(page: T[], all: T[]): HTMLElement[] {
     const g = config.groups;
-    if (!g) return page.map(v => v.el);
-    const allKeys = all.map(v => g.key(v));
-    // One group is no grouping: a lone "OPEN NOW" bar over the whole grid is
-    // a label with nothing to distinguish it from.
-    if (new Set(allKeys).size < 2) return page.map(v => v.el);
+    if (!g || !isGrouped(all)) return page.map(v => v.el);
 
     const counts = new Map<string, number>();
-    for (const k of allKeys) counts.set(k, (counts.get(k) ?? 0) + 1);
+    const order: string[] = [];
+    for (const v of all) {
+      const k = g.key(v);
+      if (!counts.has(k)) order.push(k);
+      counts.set(k, (counts.get(k) ?? 0) + 1);
+    }
 
-    const keys = allKeys.slice(0, page.length);
     const out: HTMLElement[] = [];
-    let current: string | null = null;
-    page.forEach((v, i) => {
-      if (keys[i] !== current) {
-        current = keys[i]!;
-        out.push(headerFor(current, counts.get(current) ?? 0));
-      }
-      out.push(v.el);
-    });
+    for (const key of order) {
+      const cards = page.filter(v => g.key(v) === key);
+      if (!cards.length && !collapsed.has(key)) continue;
+      out.push(headerFor(key, counts.get(key) ?? 0));
+      for (const v of cards) out.push(v.el);
+    }
     return out;
   }
 
@@ -200,7 +230,14 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const ctx = config.renderContext?.(items) as C;
     const searched = ql ? items.filter(it => it.search.includes(ql)) : items;
     visible = config.select(searched, state, ctx);
-    const page = visible.slice(0, shown);
+    // A shut section's cards come off the page entirely, so they do not eat
+    // the "Show more" budget either: shutting CLOSED on a 24-card step buys
+    // twenty-four open ones rather than twenty-four fewer cards.
+    const g = config.groups;
+    const pool = g && collapsed.size && isGrouped(visible)
+      ? visible.filter(v => !collapsed.has(g.key(v)))
+      : visible;
+    const page = pool.slice(0, shown);
     const grid = root.querySelector<HTMLElement>('[data-dir-grid]');
     if (grid) {
       const onScreen = new Set(page.map(v => v.el));
@@ -228,10 +265,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     const more = root.querySelector<HTMLElement>('[data-dir-more]');
     if (more) {
-      const remaining = visible.length - page.length;
+      const remaining = pool.length - page.length;
       more.hidden = remaining <= 0;
       const line = more.querySelector<HTMLElement>('[data-dir-more-line]');
-      if (line) line.textContent = `SHOWING ${page.length} OF ${visible.length}`;
+      if (line) line.textContent = `SHOWING ${page.length} OF ${pool.length}`;
       const btn = more.querySelector<HTMLElement>('[data-dir-more-btn]');
       if (btn) btn.textContent = `Show ${Math.min(pageSize, remaining)} more`;
       // "Show all" only earns its place when it does something the other
@@ -239,7 +276,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const all = more.querySelector<HTMLElement>('[data-dir-all]');
       if (all) {
         all.hidden = remaining <= pageSize;
-        all.textContent = `Show all ${visible.length}`;
+        all.textContent = `Show all ${pool.length}`;
       }
     }
 
@@ -380,6 +417,16 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
+    // A section heading is its own show/hide control: the whole bar toggles,
+    // not just the word on the right of it.
+    const group = t.closest<HTMLElement>('[data-dir-group]');
+    if (group) {
+      const key = group.dataset.dirGroup!;
+      if (!collapsed.delete(key)) collapsed.add(key);
+      render();
+      return;
+    }
+
     const step = t.closest<HTMLElement>('[data-dir-more-btn], [data-dir-all]');
     if (step) {
       const before = Math.min(shown, visible.length);
@@ -432,6 +479,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // layout still gets its "Show more" block (global.css hides it without).
     document.documentElement.classList.add('js');
     headers.clear();
+    collapsed.clear();
     root.querySelectorAll<HTMLElement>('[data-dir-group]').forEach(h => headers.set(h.dataset.dirGroup!, h));
     items = [...root.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);
     const params = new URLSearchParams(location.search);

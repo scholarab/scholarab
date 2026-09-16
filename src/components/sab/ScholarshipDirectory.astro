@@ -254,15 +254,17 @@ const soonLine = totalOpen > 0 && totalSoon > 0
     </div>
   </div>
 
-  {/* Typing in the search box rewrites this line and nothing else visible
-      changes above the fold, so without a live region a screen-reader user
-      gets no signal that 278 listings just became 4. role="status" is
-      implicitly polite and atomic, which is right: the line is replaced
+  {/* Deleted from the page 2026-09-15 (Ilia), kept for screen readers. The
+      status headings below now carry the counts a sighted reader needs, and
+      each one is about its own run rather than the whole page. But typing in
+      the search box changes nothing else a screen reader would announce -- the
+      cards simply stop existing -- so the line stays as a polite live region.
+      role="status" is implicitly atomic, which is right: it is replaced
       wholesale on every keystroke, not appended to. */}
   </aside>
 
   <div class="sabl-col">
-  <div class="sabl-mono sabl-result-line" data-dir-count role="status">
+  <div class="sr-only" data-dir-count role="status">
     {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
   </div>
 
@@ -274,10 +276,24 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       return (
         <>
         {head && (
-          <div class="sabl-group" data-dir-group={head.key} data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}>
+          <button
+            type="button"
+            class="sabl-group"
+            data-dir-group={head.key}
+            aria-expanded="true"
+            data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
+          >
             <span class="sabl-group-label">{head.label}</span>
             <span class="sabl-group-count">{head.count}</span>
-          </div>
+            {/* aria-hidden so the button's name stays "OPEN NOW 15"; the state
+                itself is carried by aria-expanded, which is what a screen
+                reader announces and what the word duplicates for everyone
+                else. */}
+            <span class="sabl-group-toggle" aria-hidden="true">
+              <span data-dir-group-word>Hide</span>
+              <svg class="sabl-group-caret" viewBox="0 0 12 8" width="12" height="8" fill="none"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
         )}
         <div
           class="sabl-card"

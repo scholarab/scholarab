@@ -421,4 +421,27 @@ describe('grouped grids', () => {
     expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1', 'Three'])
     expect(document.querySelectorAll('[data-dir-group="open"]').length).toBe(1)
   })
+
+  it('shuts a run when its heading is clicked and keeps the count', () => {
+    setupGroups()
+    const open = document.querySelector<HTMLElement>('[data-dir-group="open"]')!
+    click(open)
+    // The heading stays, still counting all two: shut is not empty, and it is
+    // the only thing left that can open the run again.
+    expect(layout()).toEqual(['H:open:2', 'H:closed:1', 'Three'])
+    expect(open.getAttribute('aria-expanded')).toBe('false')
+    expect(open.querySelector('[data-dir-group-word]')!.textContent).toBe('Show')
+    click(open)
+    expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1', 'Three'])
+    expect(open.getAttribute('aria-expanded')).toBe('true')
+    expect(open.querySelector('[data-dir-group-word]')!.textContent).toBe('Hide')
+  })
+
+  it('forgets what was shut on the next page load', () => {
+    setupGroups()
+    click(document.querySelector<HTMLElement>('[data-dir-group="closed"]')!)
+    expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1'])
+    setupGroups()
+    expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1', 'Three'])
+  })
 })
