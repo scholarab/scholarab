@@ -658,15 +658,21 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   .sabl-railed .sabl-split { display: contents; }
   .sabl-railed .sabl-rail { grid-column: 1; grid-row: 1 / span 2; }
   .sabl-railed .sabl-col { grid-column: 2; grid-row: 2; }
-  /* A window-tall sticky column with the chips centred inside it (Ilia,
-     2026-09-15: "a little bit lower, maybe in the center of the page ... once
-     you go down it would stay in the center"). The box is what sticks; the
-     filters float in the middle of it, so they hold the vertical centre of the
-     window the whole way down the list instead of sitting up by the heading.
-     It is also its own scroller, so a taller set of rows than the window holds
-     cannot strand its last chips where sticky will not reach them. */
+  /* The chips hold the vertical centre of the window, from the moment the page
+     paints to the end of the list (Ilia, 2026-09-15). top: 50% is what puts
+     them there on load as well as on scroll: a sticky element whose static
+     position is above its offset is pushed down to it immediately, so there is
+     no jump from "beside the heading" to "centred" on the reader's first
+     scroll. The transform takes back half its own height, since 50% aligns the
+     box's top edge, not its middle.
+     A window-tall box centred with auto margins was the other way to do this,
+     and it detaches at exactly the right moment, but it cannot be centred on
+     load without hard-coding the header and ticker heights.
+     max-height plus its own scroller so a taller set of rows than the window
+     holds cannot strand its last chips where sticky will not reach them. */
   .sabl-railed .sabl-rail {
-    position: sticky; top: 0; height: 100vh; height: 100svh;
+    position: sticky; top: 50%; transform: translateY(-50%);
+    max-height: 100vh; max-height: 100svh;
     display: flex; flex-direction: column;
     overflow-y: auto; overscroll-behavior: contain;
     scrollbar-width: thin;
