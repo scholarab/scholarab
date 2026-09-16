@@ -114,6 +114,15 @@ const {
     <script is:inline>
       document.documentElement.classList.add('js');
       document.addEventListener('astro:after-swap', function () { document.documentElement.classList.add('js'); });
+      // html[data-pointer]: the last input was a mouse or a touch, so focus
+      // rings meant for keyboard users stay hidden. A text input matches
+      // :focus-visible however it was focused, which is why CSS alone cannot
+      // tell a click into the search box from a Tab into it.
+      const root = document.documentElement;
+      document.addEventListener('pointerdown', function () { root.setAttribute('data-pointer', ''); }, true);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Tab' || e.key.slice(0, 5) === 'Arrow') root.removeAttribute('data-pointer');
+      }, true);
     </script>
   </head>
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">

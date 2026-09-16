@@ -479,10 +479,15 @@ body.quiz-results #match-divider {
 .sabl-stat-soon { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.38); margin-top: 3px; white-space: pre-line; }
 .sabl-stat-soon[hidden] { display: none; }
 
+/* One rule, not three. The toolbar used to close with a hairline of its own
+   and the first group seam drew another a few pixels below it, so the band
+   between the standfirst and the first card was three horizontal lines in
+   40px of cream (Ilia, 2026-09-15: "too many lines here"). The 2px rule above
+   the search field is the one that does the work. */
 .sabl-toolbar {
   display: flex; justify-content: space-between; align-items: center; gap: 20px;
   margin-top: 44px; padding: 14px 0;
-  border-top: 2px solid #141915; border-bottom: 1px solid rgba(20,25,21,0.14);
+  border-top: 2px solid #141915;
 }
 /* No box, no fill, no hover state: an icon and a caret on the page's own
    background, which is the whole design. The padding is only there to hold the
@@ -507,11 +512,14 @@ body.quiz-results #match-divider {
    borders, so the field takes a ring around the whole search group instead of
    the bare input. */
 .sabl-search input:focus { outline: none; }
-/* Clicking into the field shows nothing but the caret, which is the point. A
-   keyboard user gets no caret to follow, though, and an input with no visible
-   indicator at all fails 2.4.7 outright, so :focus-visible draws a rule under
-   the field: a line, not a box, and it never appears for a mouse. */
-.sabl-search:has(input:focus-visible) {
+/* Clicking into the field shows nothing but the caret, which is the point.
+   :focus-visible alone does not deliver that: browsers match it on every
+   focused text input whatever the modality, so clicking into the box drew a
+   rule under it (Ilia, 2026-09-15: "delete the line when you are clicked
+   typing"). html[data-pointer] says the focus came from a pointer, set by the
+   inline script in Layout.astro, so the rule is left to keyboard focus, where
+   an input with no visible indicator fails 2.4.7 outright. */
+html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   box-shadow: inset 0 -2px 0 rgba(20,25,21,0.75);
 }
 /* The field carries no visible label, so the placeholder is the only thing
@@ -680,7 +688,7 @@ body.quiz-results #match-divider {
    the cards either side stay in one grid and keep their column rhythm. */
 .sabl-group {
   grid-column: 1 / -1; display: flex; align-items: center; gap: 12px;
-  padding: 20px 0 2px; border-bottom: 1px solid rgba(20,25,21,0.12);
+  padding: 20px 0 2px;
 }
 .sabl-group:first-child { padding-top: 4px; }
 .sabl-group-label {
