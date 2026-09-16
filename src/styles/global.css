@@ -699,6 +699,15 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 
 .sabl-result-line { font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); padding: 22px 0 6px; }
 
+/* Card metrics went up about 10% on 2026-09-15 (Ilia: "make them bigger"):
+   30/28/26 padding, 20px name, 40px amount, 15px blurb, 12px chips. The hub
+   30/28/26 padding, 20px name, 40px amount, 15px blurb, 12px chips, so a card
+   at 1440 went 329px tall to 354px in the same 359px column.
+   The hub grid's 300px floor stayed: raising it to 340px to buy wider cards on
+   a 1920 window also dropped a 1280 one from three cards to two of 471px, and
+   306px, the value that threads both, leaves a 9px margin at 1280 that a
+   visible scrollbar would eat. Column counts are unchanged: 3 at 1280 and
+   1440, 5 at 1920, 7 at 2560. */
 /* minmax(0,...), not 1fr: a plain 1fr floors at the track's min-content, and a
    card holds nowrap chips like "School-based across Alberta (national
    competition)". One long chip widened its column past the page and pushed the
@@ -722,7 +731,7 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 }
 .sabl-card {
   display: flex; flex-direction: column; background: #FFFFFF;
-  border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px; padding: 26px 24px 22px;
+  border: 1.5px solid rgba(20,25,21,0.85); border-radius: 18px; padding: 30px 28px 26px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .sabl-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #0E8C64; }
@@ -730,19 +739,19 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    railed hubs put three cards in 916px) a long tag like MATH & PHYSICS used to
    run straight under the day chip. `margin-left: auto` keeps the day chip on
    the right whether the row holds one line or two. */
-.sabl-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 8px; flex-wrap: wrap; }
+.sabl-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; gap: 8px; flex-wrap: wrap; }
 .sabl-card-top > .sabl-days { margin-left: auto; }
 /* Programs carry a $ PAID badge beside the tag; the right slot stays reserved
    for the day chip so program and scholarship cards line up. */
 .sabl-card-top-left { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
 .sabl-tag {
-  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.05em;
-  padding: 5px 11px; border-radius: 100px; border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6);
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.05em;
+  padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6);
   white-space: nowrap;
 }
 .sabl-days {
-  font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; font-weight: 500;
-  padding: 5px 11px; border-radius: 100px; white-space: nowrap;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+  padding: 6px 12px; border-radius: 100px; white-space: nowrap;
   /* Three tiers, not two. Every countdown used to wear the same orange, so a
      grid where most deadlines are months away was uniformly loud and the one
      closing this week did not stand out. Past six weeks the chip is quiet ink;
@@ -753,24 +762,24 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 .sabl-days.soon { background: rgba(160,73,26,0.12); color: #A0491A; }
 .sabl-days.urgent { background: #A0491A; color: #FBF8F2; }
 .sabl-days.neutral { background: transparent; border: 1px solid rgba(20,25,21,0.25); color: rgba(20,25,21,0.6); }
-.sabl-name { font-weight: 700; font-size: 18.5px; letter-spacing: -0.01em; line-height: 1.25; color: #141915; text-decoration: none; display: block; }
+.sabl-name { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; line-height: 1.25; color: #141915; text-decoration: none; display: block; }
 .sabl-name:hover { color: #0A6B4D; }
-.sabl-amount { font-family: 'Instrument Serif', serif; font-size: 36px; line-height: 1.1; margin: 12px 0 14px; color: #0A6B4D; }
+.sabl-amount { font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1.1; margin: 14px 0 16px; color: #0A6B4D; }
 /* Clamped at three lines. Program descriptions are free text and run from one
    line to eight, and because the cards share a grid row, the longest one in a
    row set the height for all three; a single verbose listing opened a band of
    dead space across the page. The full text is one click away on the detail
    page, which is where it belongs. */
 .sabl-blurb {
-  font-size: 14px; line-height: 1.55; color: rgba(20,25,21,0.6); flex: 1;
+  font-size: 15px; line-height: 1.55; color: rgba(20,25,21,0.6); flex: 1;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3;
   overflow: hidden;
 }
 .sabl-card-foot {
   display: flex; justify-content: space-between; align-items: center;
-  margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(20,25,21,0.12); gap: 10px;
+  margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(20,25,21,0.12); gap: 10px;
 }
-.sabl-due { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: rgba(20,25,21,0.5); }
+.sabl-due { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: rgba(20,25,21,0.5); }
 .sabl-card-actions { display: flex; align-items: center; gap: 14px; }
 .sabl-save {
   font-family: 'Archivo', sans-serif; font-size: 15px; background: none;
