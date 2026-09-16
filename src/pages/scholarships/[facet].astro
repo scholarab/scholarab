@@ -136,6 +136,7 @@ const breadcrumbJson = {
         allItems={allItems}
         currentRegion={facet.kind === 'region' ? facet.slug : null}
         hideCategories={facet.kind === 'category'}
+        railFilters
       />
 
       <div class="sabl-hubfoot">
@@ -242,6 +243,8 @@ const breadcrumbJson = {
     --sabl-glass-edge: rgba(255,255,255,0.55);
   }
   .sabl-has-backdrop .sabl-head,
+  .sabl-has-backdrop .sabl-rail,
+  .sabl-has-backdrop .sabl-result-line,
   .sabl-has-backdrop .sabl-hubfoot,
   .sabl-has-backdrop .sabl-crumbs,
   .sabl-has-backdrop .sabl-group,
@@ -276,6 +279,19 @@ const breadcrumbJson = {
   .sabl-has-backdrop .sabl-group {
     padding: 10px 16px; border-radius: 12px; margin-top: 10px;
   }
+  /* The rail and the count line left .sabl-head when the filters moved into a
+     column (2026-09-15), so each needs its own glass: chips and mono type
+     straight on a photographed lake are unreadable. The count line is a pill
+     that ends where its text does, like the breadcrumb above it. */
+  .sabl-has-backdrop .sabl-result-line {
+    display: inline-block; padding: 8px 14px; border-radius: 100px;
+    margin-bottom: 10px; color: #4B5563;
+  }
+  @media (min-width: 1100px) {
+    .sabl-has-backdrop .sabl-railed .sabl-rail {
+      padding: 18px 16px; border-radius: 18px;
+    }
+  }
   .sabl-has-backdrop .sabl-group:first-child { padding-top: 10px; margin-top: 0; }
   .sabl-has-backdrop .sabl-hubfoot {
     padding: 28px 32px; border-radius: 22px; margin-bottom: 8px;
@@ -290,10 +306,15 @@ const breadcrumbJson = {
       margin-left: -12px; margin-right: -12px; padding: 24px 16px 4px; border-radius: 18px;
       overflow: clip;
     }
+    /* Under 1100px the rail is not a column; it is the chip rows again, in
+       their own panel under the title one. */
+    .sabl-has-backdrop .sabl-rail {
+      margin: 10px -12px 0; padding: 4px 16px 16px; border-radius: 18px; overflow: clip;
+    }
     /* The chip rows bleed to the edge they scroll under, which is now the
        panel's edge rather than the screen's. */
-    .sabl-has-backdrop .sabl-head .sabl-chips,
-    .sabl-has-backdrop .sabl-head .sabl-sort-chips {
+    .sabl-has-backdrop .sabl-head .sabl-sort-chips,
+    .sabl-has-backdrop .sabl-rail .sabl-chips {
       margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px;
     }
     .sabl-has-backdrop .sabl-hubfoot { margin-left: -12px; margin-right: -12px; padding: 22px 16px; }

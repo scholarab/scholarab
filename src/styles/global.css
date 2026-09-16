@@ -628,6 +628,38 @@ body.quiz-results #match-divider {
   .sabl-filters-dense .sabl-row-label { width: 56px; }
 }
 
+/* ── Filter rail (hubs) ──
+   One DOM, two layouts. Off a hub, and in any window under 1100px, .sabl-split
+   is display:contents and the chip rows sit above the grid exactly as they
+   always have. On a railed hub wide enough for it, the rows become a sticky
+   left column: a reader who has already picked Calgary opens the page on the
+   listings rather than on four rows of the filters they just used. */
+.sabl-split { display: contents; }
+@media (min-width: 1100px) {
+  .sabl-railed .sabl-split {
+    display: grid; grid-template-columns: 228px minmax(0, 1fr);
+    gap: 32px; align-items: start; padding-top: 20px;
+  }
+  /* Its own scroller, so a 30-city SCOPE row cannot make the rail taller than
+     the window and strand the last chips where sticky will not reach them. */
+  .sabl-railed .sabl-rail {
+    position: sticky; top: 16px; max-height: calc(100vh - 32px);
+    overflow-y: auto; overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  .sabl-railed .sabl-rail .sabl-filters { padding-top: 0; gap: 18px; }
+  /* Stacked, not a row: the label sits over its chips and the chips wrap down
+     the column rather than scrolling sideways out of a 228px box. */
+  .sabl-railed .sabl-rail .sabl-filter-row {
+    flex-direction: column; align-items: stretch; gap: 8px;
+  }
+  .sabl-railed .sabl-rail .sabl-row-label { width: auto; padding-top: 0; }
+  .sabl-railed .sabl-rail .sabl-chips {
+    flex-wrap: wrap; overflow-x: visible; gap: 6px;
+  }
+  .sabl-railed .sabl-col .sabl-result-line { padding-top: 0; }
+}
+
 .sabl-result-line { font-size: 12.5px; letter-spacing: 0.04em; color: rgba(20,25,21,0.5); padding: 22px 0 6px; }
 
 /* minmax(0,...), not 1fr: a plain 1fr floors at the track's min-content, and a
@@ -657,7 +689,12 @@ body.quiz-results #match-divider {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .sabl-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #0E8C64; }
-.sabl-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 8px; }
+/* Wraps rather than collides: both chips are nowrap, so in a narrow card (the
+   railed hubs put three cards in 916px) a long tag like MATH & PHYSICS used to
+   run straight under the day chip. `margin-left: auto` keeps the day chip on
+   the right whether the row holds one line or two. */
+.sabl-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 8px; flex-wrap: wrap; }
+.sabl-card-top > .sabl-days { margin-left: auto; }
 /* Programs carry a $ PAID badge beside the tag; the right slot stays reserved
    for the day chip so program and scholarship cards line up. */
 .sabl-card-top-left { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }

@@ -25,6 +25,15 @@ interface Props {
   /** A category hub has already applied a track, so TRACK would only offer the
       reader ways to empty their own page. */
   hideCategories?: boolean;
+  /**
+   * Hubs only (Ilia, 2026-09-15). A reader who has already chosen Calgary is
+   * past the chips, and on a hub they were four stacked rows of them between
+   * the title and the first card: on a laptop the page opened on filters the
+   * reader had just used. Railed, the rows move into a sticky left column and
+   * the cards start under the toolbar. Below 1100px there is no room for a
+   * column, so the rail unwraps back into the rows above the grid.
+   */
+  railFilters?: boolean;
 }
 const {
   items,
@@ -33,6 +42,7 @@ const {
   currentRegion = null,
   allItems = items,
   hideCategories = false,
+  railFilters = false,
 } = Astro.props;
 
 // SCOPE, not REGION: these are how far an award reaches, not where the student
@@ -162,7 +172,7 @@ const soonLine = [
 ].filter(Boolean).join('\n');
 ---
 
-<div class="sabl-page">
+<div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
   {/* Everything above the cards. Unstyled by default; a hub with a photo
       backdrop turns it into one frosted panel so no text sits on the photo. */}
   <div class="sabl-head">
@@ -200,10 +210,17 @@ const soonLine = [
     </div>
   </div>
 
+  </div>
+
+  {/* Rail or rows, one DOM: .sabl-split is display:contents unless the page is
+      railed and wide, so the filters sit exactly where they always did on
+      /scholarships and on any narrow window. */}
+  <div class="sabl-split">
   {/* -dense: ten TRACK chips now that each carries a count, which is 90px more
       than the measure holds at the default metrics. The rows scroll rather than
       wrap, so this is not load-bearing; it just buys back enough width that
       nobody has to scroll the row on a desktop. See the modifier in global.css. */}
+  <aside class="sabl-rail" aria-label="Filters">
   <div class="sabl-filters sabl-filters-dense">
     {!hideCategories && (
       <div class="sabl-filter-row">
@@ -248,9 +265,11 @@ const soonLine = [
       gets no signal that 278 listings just became 4. role="status" is
       implicitly polite and atomic, which is right: the line is replaced
       wholesale on every keystroke, not appended to. */}
+  </aside>
+
+  <div class="sabl-col">
   <div class="sabl-mono sabl-result-line" data-dir-count role="status">
     {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
-  </div>
   </div>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
@@ -346,6 +365,8 @@ const soonLine = [
         advice for a match sitting on another page. */}
     <div class="sabl-empty-elsewhere" data-dir-elsewhere hidden></div>
     <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
+  </div>
+  </div>
   </div>
 </div>
 

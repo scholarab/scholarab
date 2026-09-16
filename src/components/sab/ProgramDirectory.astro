@@ -22,6 +22,9 @@ interface Props {
   /** A hub is handed only its own field's programs, and the FIELD row is a map
       of the whole directory wherever it appears, so it counts against this. */
   allItems?: ProgramWithMeta[];
+  /** Hubs only: the chip rows move into a sticky left column so the cards start
+      at the top of the page. The scholarship twin; see the note there. */
+  railFilters?: boolean;
 }
 const {
   items,
@@ -30,6 +33,7 @@ const {
   currentField = null,
   currentFormat = null,
   allItems = items,
+  railFilters = false,
 } = Astro.props;
 
 const SORT_CHIPS = [
@@ -103,7 +107,7 @@ if (showGroups) {
 const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 ---
 
-<div class="sabl-page">
+<div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
   <div class="sabl-title-row">
     <div>
       <h1 class="sabl-h1">{h1}</h1>
@@ -135,6 +139,9 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     </div>
   </div>
 
+  {/* Rail or rows, one DOM; see the twin in ScholarshipDirectory. */}
+  <div class="sabl-split">
+  <aside class="sabl-rail" aria-label="Filters">
   {/* -dense: FIELD is nine chips wide and only holds one line on the tighter
       metrics: 995px of the 1020 the measure gives it, where the default chip
       padding would put it well over. The row was ten and scrolling before
@@ -186,6 +193,9 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     </div>
   </div>
 
+  </aside>
+
+  <div class="sabl-col">
   {/* Typing in the search box rewrites this line and nothing else visible
       changes above the fold, so without a live region a screen-reader user
       gets no signal that 278 listings just became 4. role="status" is
@@ -282,6 +292,8 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
         advice for a match sitting on another page. */}
     <div class="sabl-empty-elsewhere" data-dir-elsewhere hidden></div>
     <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
+  </div>
+  </div>
   </div>
 </div>
 
