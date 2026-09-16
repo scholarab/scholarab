@@ -658,14 +658,23 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   .sabl-railed .sabl-split { display: contents; }
   .sabl-railed .sabl-rail { grid-column: 1; grid-row: 1 / span 2; }
   .sabl-railed .sabl-col { grid-column: 2; grid-row: 2; }
-  /* Its own scroller, so a 30-city SCOPE row cannot make the rail taller than
-     the window and strand the last chips where sticky will not reach them. */
+  /* A window-tall sticky column with the chips centred inside it (Ilia,
+     2026-09-15: "a little bit lower, maybe in the center of the page ... once
+     you go down it would stay in the center"). The box is what sticks; the
+     filters float in the middle of it, so they hold the vertical centre of the
+     window the whole way down the list instead of sitting up by the heading.
+     It is also its own scroller, so a taller set of rows than the window holds
+     cannot strand its last chips where sticky will not reach them. */
   .sabl-railed .sabl-rail {
-    position: sticky; top: 16px; max-height: calc(100vh - 32px);
+    position: sticky; top: 0; height: 100vh; height: 100svh;
+    display: flex; flex-direction: column;
     overflow-y: auto; overscroll-behavior: contain;
     scrollbar-width: thin;
   }
-  .sabl-railed .sabl-rail .sabl-filters { padding-top: 0; gap: 18px; }
+  /* auto margins rather than justify-content: centre, which in every engine
+     makes the overflow unreachable above the fold once the rows outgrow the
+     window. */
+  .sabl-railed .sabl-rail .sabl-filters { padding-top: 0; gap: 18px; margin-block: auto; }
   /* Stacked, not a row: the label sits over its chips and the chips wrap down
      the column rather than scrolling sideways out of a 228px box. */
   .sabl-railed .sabl-rail .sabl-filter-row {
