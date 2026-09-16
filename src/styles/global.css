@@ -775,6 +775,13 @@ html:not(.js) .sabl-lean { display: none; }
 .sabl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 16px; }
 /* Status sections. Full-width grid items, not wrappers, so the cards either
    side stay in one grid and keep their column rhythm.
+   No rule under the heading. It had one for an afternoon, and with three
+   sections shut the page was a ladder: the toolbar's rule and two identical
+   full-width 2px lines in one screen, none of them saying anything the one
+   above the search box had not already said (Ilia, 2026-09-15: "again looks
+   like too many lines"). The size and the count pill are what make it a
+   heading; the cards under it are the boundary. The page is back to one rule,
+   which is where it was left on the same day ("we need just one line").
    Until 2026-09-15 these were 12px mono seams between runs, sitting under a
    count line that carried the same information in weaker form. The count line
    is gone and the seam is now the page's structure (Ilia: "make open now,
@@ -785,8 +792,8 @@ html:not(.js) .sabl-lean { display: none; }
 .sabl-group {
   grid-column: 1 / -1; width: 100%;
   display: flex; align-items: center; gap: 14px;
-  margin: 36px 0 4px; padding: 0 0 12px;
-  background: none; border: 0; border-bottom: 2px solid #141915;
+  margin: 38px 0 14px; padding: 0;
+  background: none; border: 0;
   font: inherit; color: inherit; text-align: left;
 }
 html.js .sabl-group { cursor: pointer; }
@@ -975,7 +982,7 @@ html:not(.js) .sabl-more { display: none; }
      the row becomes a column, and the chips keep their own line underneath. */
   .sabl-filter-row { flex-direction: column; align-items: stretch; gap: 6px; }
   .sabl-filters { gap: 10px; padding-top: 14px; }
-  .sabl-group { margin-top: 26px; padding-bottom: 10px; }
+  .sabl-group { margin: 28px 0 12px; }
   .sabl-group-label { font-size: 21px; }
   /* Touch targets. The chips came out at 39px and the search field at 23,
      both under the 44px minimum, and the search box is the primary control on
