@@ -485,10 +485,14 @@ body.quiz-results #match-divider {
    40px of cream (Ilia, 2026-09-15: "too many lines here"). The 2px rule above
    the search field is the one that does the work. */
 .sabl-toolbar {
-  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  display: flex; align-items: center; gap: 20px;
   margin-top: 44px; padding: 14px 0;
   border-top: 2px solid #141915;
 }
+/* The search box is capped at 420px, so `space-between` used to hold SORT out
+   at the right edge on its own. With a third control in the row the sort chips
+   and the toggle travel together as one right-hand block instead. */
+.sabl-sort { margin-left: auto; }
 /* No box, no fill, no hover state: an icon and a caret on the page's own
    background, which is the whole design. The padding is only there to hold the
    keyboard underline off the text, and the negative margin cancels it so the
@@ -658,29 +662,26 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   .sabl-railed .sabl-split { display: contents; }
   .sabl-railed .sabl-rail { grid-column: 1; grid-row: 1 / span 2; }
   .sabl-railed .sabl-col { grid-column: 2; grid-row: 2; }
-  /* The chips hold the vertical centre of the window, from the moment the page
-     paints to the end of the list (Ilia, 2026-09-15). top: 50% is what puts
-     them there on load as well as on scroll: a sticky element whose static
-     position is above its offset is pushed down to it immediately, so there is
-     no jump from "beside the heading" to "centred" on the reader's first
-     scroll. The transform takes back half its own height, since 50% aligns the
-     box's top edge, not its middle.
-     A window-tall box centred with auto margins was the other way to do this,
-     and it detaches at exactly the right moment, but it cannot be centred on
-     load without hard-coding the header and ticker heights.
+  /* The chips ride at the top of the window rather than its middle (Ilia,
+     2026-09-15: "move the track status on the left even higher"). They were
+     centred for a day, which read well on a long page and left the first
+     screen looking bottom-heavy: the filters sat level with the second row of
+     cards while the heading had nothing beside it.
+     52px of nav plus 24px of air, so the rail clears the collapsed header when
+     it sticks. It does not stick until the reader scrolls past its static
+     position, which is well below the full-height header, so one offset covers
+     both states and no [data-sab-stuck] override is needed.
      max-height plus its own scroller so a taller set of rows than the window
      holds cannot strand its last chips where sticky will not reach them. */
   .sabl-railed .sabl-rail {
-    position: sticky; top: 50%; transform: translateY(-50%);
-    max-height: 100vh; max-height: 100svh;
+    position: sticky; top: calc(var(--sab-nav-h) + 24px);
+    max-height: calc(100vh - var(--sab-nav-h) - 48px);
+    max-height: calc(100svh - var(--sab-nav-h) - 48px);
     display: flex; flex-direction: column;
     overflow-y: auto; overscroll-behavior: contain;
     scrollbar-width: thin;
   }
-  /* auto margins rather than justify-content: centre, which in every engine
-     makes the overflow unreachable above the fold once the rows outgrow the
-     window. */
-  .sabl-railed .sabl-rail .sabl-filters { padding-top: 0; gap: 18px; margin-block: auto; }
+  .sabl-railed .sabl-rail .sabl-filters { padding-top: 0; gap: 18px; }
   /* Stacked, not a row: the label sits over its chips and the chips wrap down
      the column rather than scrolling sideways out of a 228px box. */
   .sabl-railed .sabl-rail .sabl-filter-row {
@@ -695,14 +696,19 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
      so it never gets too narrow to read. */
   /* Three is the floor, more only when the window can hold them at full size
      (Ilia, 2026-09-15: "keep three cards as long as possible on every device").
-     The track's minimum is 300px until three of those no longer fit, and from
+     The track's minimum is 340px until three of those no longer fit, and from
      there it is exactly a third of the row, so a 1180px window still lays out
      three rather than dropping to two.
+     The floor went 300 -> 340 when the filters became hideable: a hidden rail
+     hands the grid 264px back, and at 300 the grid spent it on a fourth column
+     and came out with SMALLER cards than it had with the rail in place, which
+     is the opposite of what widening it is for (Ilia: "use all the space,
+     making the cards overall bigger"). At 340 a fourth column has to be earned.
      The rail itself waits until 1180px for the same reason: it costs 220px,
      and below that the three cards beside it come out narrower than the ones a
      window 100px smaller shows with the filters stacked above them. */
   .sabl-railed .sabl-grid {
-    grid-template-columns: repeat(auto-fill, minmax(min(300px, (100% - 36px) / 3), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, (100% - 36px) / 3), 1fr));
   }
   /* A 228px rail plus its 36px gutter is a fifth of a 1280px window, and the
      three cards beside it pay for all of it. Under 1280 the rail gives some
@@ -711,6 +717,39 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
     .sabl-railed { grid-template-columns: 196px minmax(0, 1fr); gap: 0 24px; }
   }
 }
+
+/* ── Lean mode ──
+   Everything on a directory page that is scenery rather than the list can be
+   put away (Ilia, 2026-09-15): the TRACK/STATUS rail and the standfirst
+   paragraph go, and on a hub the grid takes the rail's column with them. What
+   is left is the heading, the money, the search box and the sort chips, which
+   is the set Ilia named as the part that cannot be hidden.
+   The switch lives on <html>, set from localStorage by the inline script in
+   Layout.astro before the first paint, so a reader who chose the wide layout
+   does not watch the rail appear and then vanish on every page. */
+html[data-lean] .sabl-rail,
+html[data-lean] .sabl-desc { display: none; }
+@media (min-width: 1180px) {
+  /* Two columns collapse to one flow. The head, the split and the column are
+     all plain blocks again, and .sabl-railed .sabl-grid keeps its auto-fill
+     track list, so the cards simply have more room to spend. */
+  html[data-lean] .sabl-railed { display: block; }
+}
+.sabl-lean {
+  display: inline-flex; align-items: center; gap: 8px; flex: none;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; color: rgba(20,25,21,0.55);
+}
+.sabl-lean:hover { color: #141915; }
+/* Points at the rail it tucks away, and back out at the space it would come
+   from. The glyph is the same caret the status sections use. */
+.sabl-lean-caret { transition: transform 0.18s ease; transform: rotate(90deg); }
+.sabl-lean[aria-pressed='true'] .sabl-lean-caret { transform: rotate(-90deg); }
+@media (prefers-reduced-motion: reduce) { .sabl-lean-caret { transition: none; } }
+/* No JavaScript, no toggle: the attribute it sets would never be read back,
+   and a control that does nothing is worse than no control. */
+html:not(.js) .sabl-lean { display: none; }
 
 /* The visible count line ("153 OF 153 LISTINGS · 15 OPEN NOW") was deleted
    2026-09-15 at Ilia's request: the status sections below now say the same
@@ -927,6 +966,10 @@ html:not(.js) .sabl-more { display: none; }
      regardless. */
   .sabl-desc { min-height: 0; margin-top: 14px; font-size: 16px; }
   .sabl-toolbar { flex-direction: column; align-items: stretch; margin-top: 22px; padding: 12px 0; gap: 14px; }
+  /* The row is a column here, so the chips and the toggle are stacked and
+     neither needs pushing to an edge. */
+  .sabl-sort { margin-left: 0; }
+  .sabl-lean { align-self: flex-start; min-height: 44px; }
   .sabl-row-label { width: 100%; }
   /* The label takes the full width here, which a nowrap row cannot give it:
      the row becomes a column, and the chips keep their own line underneath. */
@@ -1005,6 +1048,12 @@ html:not(.js) .sabl-more { display: none; }
 .sabp { background: #FBF8F2; color: #141915; font-family: 'Archivo', sans-serif; -webkit-font-smoothing: antialiased; }
 .sabp-header { background: #0A1310; color: #F2F0E9; font-family: 'Archivo', sans-serif; }
 .sabp-body { width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; padding: 72px 48px 96px; }
+/* The directories open on their heading rather than on 72px of cream (Ilia,
+   2026-09-15: "move the overall page over higher"). An article wants the air;
+   a list of 154 cards wants the fold. :has rather than a class because the
+   four pages that render a directory are built from three different page
+   files and all of them hold one .sabl-page. */
+.sabp-body:has(.sabl-page) { padding-top: 32px; }
 /* Hubs only, and no maximum. The measure is a rule about line length, and the
    only long line here is the standfirst, which is capped at 560px by
    .sabl-desc; the cards and the filter rail were paying for it in empty margin

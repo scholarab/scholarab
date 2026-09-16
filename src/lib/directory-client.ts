@@ -67,6 +67,31 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
 /** Where a reader was when they left the list for a listing, so Back lands there. */
 const SCROLL_KEY = 'sab:dir-scroll';
 
+/**
+ * The wide layout: filters and standfirst put away, cards across the whole
+ * page (Ilia, 2026-09-15). Kept on <html> rather than in this module, because
+ * the inline script in Layout.astro reads the same key before the first paint
+ * so the page never renders one layout and then the other. Unlike a shut
+ * status section this IS persisted: it is a standing preference about how much
+ * of the page a reader wants, not a thing they did to one list.
+ */
+const LEAN_KEY = 'sa_lean';
+
+function setLean(on: boolean) {
+  const root = document.documentElement;
+  if (on) root.setAttribute('data-lean', '');
+  else root.removeAttribute('data-lean');
+  try {
+    if (on) localStorage.setItem(LEAN_KEY, '1');
+    else localStorage.removeItem(LEAN_KEY);
+  } catch { /* storage blocked: the choice holds for this page only */ }
+  for (const btn of document.querySelectorAll<HTMLElement>('[data-dir-lean]')) {
+    btn.setAttribute('aria-pressed', String(on));
+    const word = btn.querySelector('[data-dir-lean-word]');
+    if (word) word.textContent = on ? 'Show filters' : 'Hide filters';
+  }
+}
+
 interface SearchIndex { s: string[]; p: string[] }
 
 /**
@@ -417,6 +442,12 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
+    const lean = t.closest<HTMLElement>('[data-dir-lean]');
+    if (lean) {
+      setLean(!document.documentElement.hasAttribute('data-lean'));
+      return;
+    }
+
     // A section heading is its own show/hide control: the whole bar toggles,
     // not just the word on the right of it.
     const group = t.closest<HTMLElement>('[data-dir-group]');
@@ -498,6 +529,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     shown = Number.isFinite(showParam) && showParam > pageSize ? Math.floor(showParam) : pageSize;
     const input = root.querySelector<HTMLInputElement>('[data-dir-search]');
     if (input) input.value = query;
+    // The attribute is already right (Layout.astro set it in <head>); this is
+    // the button catching up with it after a swap brought a fresh one in.
+    setLean(document.documentElement.hasAttribute('data-lean'));
     config.onCardsParsed?.(items);
     paintSaved();
     render();

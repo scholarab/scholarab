@@ -73,6 +73,38 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(1);
 });
 
+test('hiding the filters widens the grid and survives a reload', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'the rail is a desktop column');
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/scholarships/alberta/');
+  const rail = page.locator('.sabl-rail');
+  const desc = page.locator('.sabl-desc');
+  const grid = page.locator('.sabl-grid');
+  await expect(rail).toBeVisible();
+  const narrow = (await grid.boundingBox())!.width;
+
+  await page.locator('[data-dir-lean]').click();
+  await expect(rail).toBeHidden();
+  await expect(desc).toBeHidden();
+  // The four things Ilia named as unhideable stay put.
+  await expect(page.locator('.sabl-h1')).toBeVisible();
+  await expect(page.locator('[data-dir-stat]')).toBeVisible();
+  await expect(page.locator('[data-dir-search]')).toBeVisible();
+  await expect(page.locator('[data-fkey="sort"]').first()).toBeVisible();
+  expect((await grid.boundingBox())!.width).toBeGreaterThan(narrow);
+
+  // Set in <head> from localStorage, so the wide layout is in the first paint.
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-lean', '');
+  await expect(rail).toBeHidden();
+  await expect(page.locator('[data-dir-lean]')).toHaveAttribute('aria-pressed', 'true');
+
+  await page.locator('[data-dir-lean]').click();
+  await expect(rail).toBeVisible();
+  await expect(desc).toBeVisible();
+  expect((await grid.boundingBox())!.width).toBe(narrow);
+});
+
 test('the list reveals 24 at a time and Back returns to the same card', async ({ page }) => {
   await page.goto('/scholarships/');
   const cards = page.locator('[data-dir-card]:visible');
