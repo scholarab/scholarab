@@ -85,8 +85,13 @@ const indexable = items.some(s => scholarshipIsIndexable(s, today));
 
 const guide = facet.guide ? getGuide(facet.guide) : null;
 
+// The hub footer is now the only cross-hub path on the page (SCOPE left the
+// filter rail on 2026-09-15), so it also has to respect the MIN_FACET_ITEMS
+// floor that getStaticPaths applies: a facet too thin for a page of its own
+// would otherwise be linked here and 404.
 const siblings = SCHOLARSHIP_FACETS.filter(
-  f => f.slug !== facet.slug && f.kind === facet.kind,
+  f => f.slug !== facet.slug && f.kind === facet.kind
+    && facetItems(f, allItems).length >= MIN_FACET_ITEMS,
 );
 
 const listJson = itemListJson(
@@ -142,8 +147,8 @@ const breadcrumbJson = {
         h1={facet.h1}
         intro={facet.intro}
         allItems={allItems}
-        currentRegion={facet.kind === 'region' ? facet.slug : null}
         hideCategories={facet.kind === 'category'}
+        hideScopes
         railFilters
       />
 

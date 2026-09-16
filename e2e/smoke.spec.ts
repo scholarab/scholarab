@@ -143,6 +143,37 @@ test('every hub puts its filter chips at the same height', async ({ page }, test
   );
 });
 
+// The SCOPE row left the scholarship hubs on 2026-09-15 (a reader who picked
+// Calgary in the header menu does not need eighteen chips offering to take them
+// somewhere else), which makes the hub footer the only path from one hub to the
+// next, for a reader and for a crawler. So the property that used to be true of
+// the row has to be true of the footer instead.
+test('every scholarship hub links to every other hub of its kind', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'desktop layout');
+  const kinds = [
+    ['/scholarships/medicine-hat/', '/scholarships/edmonton/', '/scholarships/calgary/',
+     '/scholarships/red-deer/', '/scholarships/lethbridge/', '/scholarships/airdrie/',
+     '/scholarships/alberta/', '/scholarships/national/'],
+    ['/scholarships/indigenous/', '/scholarships/trades/', '/scholarships/arts/',
+     '/scholarships/stem/', '/scholarships/community/', '/scholarships/sports/'],
+  ];
+  for (const kind of kinds) {
+    for (const path of kind) {
+      await page.goto(path);
+      const links = await page.locator('.sabl-hublinks a').evaluateAll(
+        els => els.map(e => (e as HTMLAnchorElement).getAttribute('href')!),
+      );
+      expect(links, `${path} links every sibling`).toEqual(
+        expect.arrayContaining(kind.filter(f => f !== path)),
+      );
+      expect(links, `${path} does not link to itself`).not.toContain(path);
+      expect(links, `${path} links back to the directory`).toContain('/scholarships/');
+      // SCOPE is gone from the rail; TRACK and STATUS are what is left.
+      await expect(page.locator('.sabl-row-label', { hasText: /^SCOPE$/ })).toHaveCount(0);
+    }
+  }
+});
+
 // The field hubs carry the FIELD row as navigation, the way the scholarship
 // hubs carry SCOPE: every sibling reachable in one click from any of them,
 // with the page's own field marked rather than linked to itself.

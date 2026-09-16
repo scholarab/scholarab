@@ -13,12 +13,16 @@ interface Props {
   /** Facet hubs supply their own heading and standfirst; /scholarships keeps these defaults. */
   h1?: string;
   intro?: string;
-  /** Slug of the region hub this is rendering, or null on /scholarships and the
-      category hubs. A region hub used to hide the SCOPE row entirely, because a
-      chip that filtered could only empty a page already narrowed to one city.
-      Now that a city chip navigates, the row is the way across to another city,
-      and hiding it left the reader with the breadcrumb and two clicks. */
-  currentRegion?: string | null;
+  /**
+   * Hubs only (Ilia, 2026-09-15). SCOPE on a hub was eighteen chips of
+   * navigation dressed as a filter: the reader had already chosen Calgary in
+   * the header menu, and every chip in the row took them off the page they
+   * asked for. Two other places carry the same links, both better placed: the
+   * header's Scholarships panel above, and the hub footer's sibling list
+   * below, which is also what keeps hub-to-hub crawling intact. The row still
+   * belongs on /scholarships, where no scope has been chosen yet.
+   */
+  hideScopes?: boolean;
   /** The whole corpus, for counting the city chips. A region hub is handed only
       its own city in `items`, so it must pass this too. */
   allItems?: ScholarshipWithMeta[];
@@ -39,9 +43,9 @@ const {
   items,
   h1 = 'Scholarships',
   intro = "All available scholarships for Alberta high school students. Every listing is written from the provider's own page and links straight back to it.",
-  currentRegion = null,
   allItems = items,
   hideCategories = false,
+  hideScopes = false,
   railFilters = false,
 } = Astro.props;
 
@@ -71,10 +75,10 @@ const regionChips = SCHOLARSHIP_FACETS
   .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, chipSource).length }))
   .sort((a, b) => b.count - a.count);
 
-// A scope chip navigates to that scope's hub rather than filtering in place.
-// The hub is the better page for the same intent: it carries a written intro, a
-// guide link, its own TRACK and STATUS rows, and a URL the reader can send to
-// someone. Filtering produced the same list at a URL that forgot it by the next
+// The row appears on /scholarships only; see `hideScopes`. There, a scope chip
+// navigates to that scope's hub rather than filtering in place. The hub is the
+// better page for the same intent: it carries a written intro, a guide link,
+// its own TRACK and STATUS rows, and a URL the reader can send to someone. Filtering produced the same list at a URL that forgot it by the next
 // visit, and the homepage already sent this click to the hub, so the two rows
 // disagreed about what picking a scope means.
 //
@@ -233,23 +237,19 @@ const soonLine = [
         </div>
       </div>
     )}
-    <div class="sabl-filter-row sabl-filter-row-wrap">
-      <span class="sabl-mono sabl-row-label">SCOPE</span>
-      <div class="sabl-chips sabl-chips-wrap">
-        {currentRegion
-          ? <a href="/scholarships/" class="sabl-chip sabl-chip-link">All</a>
-          : <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>}
-        {regionChips.map(c => (
-          c.slug === currentRegion
-            ? <span class="sabl-chip on" aria-current="page">
-                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
-              </span>
-            : <a href={`/scholarships/${c.slug}/`} class="sabl-chip sabl-chip-link">
-                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
-              </a>
-        ))}
+    {!hideScopes && (
+      <div class="sabl-filter-row sabl-filter-row-wrap">
+        <span class="sabl-mono sabl-row-label">SCOPE</span>
+        <div class="sabl-chips sabl-chips-wrap">
+          <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
+          {regionChips.map(c => (
+            <a href={`/scholarships/${c.slug}/`} class="sabl-chip sabl-chip-link">
+              {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+    )}
     <div class="sabl-filter-row">
       <span class="sabl-mono sabl-row-label">STATUS</span>
       <div class="sabl-chips">
