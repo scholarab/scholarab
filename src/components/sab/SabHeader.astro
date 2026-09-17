@@ -20,15 +20,8 @@ import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FA
 
 interface Props {
   currentPath: string;
-  /**
-   * Scrolling announcement band. Every page on desktop (Ilia, 2026-08-26);
-   * it was home-only from 2026-08-19 until then. Desktop is enforced in CSS,
-   * not here: the band is display:none below 900px, so a page that opts in
-   * still shows nothing on a phone.
-   */
-  ticker?: boolean;
 }
-const { currentPath, ticker } = Astro.props;
+const { currentPath } = Astro.props;
 
 // Counts shown beside two links in the mobile sheet. Same definitions the
 // home hero uses: every scholarship in the directory, and the programs
@@ -131,18 +124,6 @@ const navItems = [
 const withSlash = (p: string) => (p.endsWith('/') ? p : p + '/');
 const isActive = (href: string) =>
   href === '/' ? currentPath === '/' : withSlash(currentPath).startsWith(withSlash(href));
-
-// Scrolling announcement band (fishback2026.com-style): a short pair of
-// linked CTAs repeated to fill the loop.
-const tickerPair = [
-  { label: 'Find your match', rest: 'with three essentials', href: '/match/' },
-  { label: 'Browse scholarships', rest: 'open right now', href: '/scholarships/' },
-];
-const tickerItems = Array.from({ length: 4 }, () => tickerPair).flat();
-// Default on. The two destinations it points at, /match and /scholarships,
-// are the two things a reader on any page is most likely to want next, and
-// the band was already doing that work on exactly one page.
-const showTicker = ticker ?? true;
 ---
 
 <header class="sabh" data-sab-header>
@@ -239,30 +220,6 @@ const showTicker = ticker ?? true;
       </button>
     </div>
   </div>
-  {showTicker && (
-    <>
-      {/*
-        The band is decorative: both destinations are already in navItems above, so
-        hiding it costs assistive tech nothing. It is aria-hidden AND its links are
-        tabindex="-1"; aria-hidden alone leaves elements in the tab order, which
-        would strand a keyboard user on a link screen readers report as absent
-        (WCAG 4.1.2). Without both, each half put 8 duplicate stops on the page.
-      */}
-      <div class="sabh-ticker-band" aria-hidden="true">
-        <div class="sabh-ticker">
-          {[false, true].map(dup => (
-            <span class="sabh-ticker-half" data-dup={dup || undefined}>
-              {tickerItems.map(t => (
-                <span class="sabh-ticker-item">
-                  <a href={t.href} draggable="false" tabindex="-1">{t.label}</a>{' '}<span>{t.rest}</span>
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
-      </div>
-    </>
-  )}
 </header>
 
 <style>
@@ -420,56 +377,10 @@ const showTicker = ticker ?? true;
     .sabh-burger span { transition: none; }
   }
 
-  /* fishback2026.com campaign-ticker parity: Manrope 600 14px, solid band,
-     45px tall, 60px between items, 30s linear loop, 1px underline offset 3px */
-  .sabh-ticker-band {
-    background: #0F231C;
-    /* A definite height, not one derived from the row inside it: the collapse
-       animation in global.css runs it to 0, and height cannot interpolate
-       from `auto`. The home hero also subtracts this token to size its fold. */
-    height: var(--sab-ticker-h);
-    overflow: hidden;
-  }
-  .sabh-ticker {
-    display: flex; white-space: nowrap; align-items: center; height: 100%;
-    font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600;
-    color: rgba(242,240,233,0.9);
-    animation: sabh-tick 30s linear infinite; will-change: transform;
-  }
-  .sabh-ticker-half { display: inline-flex; }
-  /* Plain inline text (not flex children) so a drag or triple-click selects
-     the whole message, link included, and copies with real spaces. */
-  .sabh-ticker-item { display: inline-block; padding-right: 60px; }
-  .sabh-ticker-item a {
-    color: #5CE3BB; text-decoration: underline;
-    text-decoration-thickness: 1px; text-underline-offset: 3px;
-  }
-  .sabh-ticker-item a:hover { color: #F2F0E9; }
-  /* Pause while hovered, touched, or keyboard-focused so the text can be
-     read, selected, and copied; same behaviour as the fishback2026.com
-     ticker. :active covers touch devices, where hover doesn't exist and a
-     long-press would otherwise fight a moving target. */
-  .sabh-ticker-band:hover .sabh-ticker,
-  .sabh-ticker-band:active .sabh-ticker,
-  .sabh-ticker-band:focus-within .sabh-ticker {
-    animation-play-state: paused;
-  }
-  /* The duplicate half exists only to make the loop seamless; keep it out
-     of selections so a long drag or select-all can't copy messages twice.
-     Keyed off data-dup rather than aria-hidden: that attribute now sits on
-     the whole band, so it no longer distinguishes the two halves. */
-  .sabh-ticker-half[data-dup] { user-select: none; }
-  @keyframes sabh-tick {
-    to { transform: translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .sabh-ticker { animation: none; }
-  }
-
   /* ══ Phone: bar + sheet ══ */
   @media (max-width: 900px) {
-    /* Padding-sized again below 900: the ticker is hidden here and the hero
-       no longer claims the fold, so nothing is subtracting this. */
+    /* Padding-sized again below 900: the hero no longer claims the fold,
+       so nothing is subtracting this. */
     .sabh-nav { grid-template-columns: 1fr auto; padding: 0 8px 0 20px; }
     .sabh-burger { display: flex; }
     /* No room beside the logo and the menu button; the footer still carries
@@ -560,12 +471,6 @@ const showTicker = ticker ?? true;
       font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em;
       color: rgba(242,240,233,0.4); line-height: 1.6;
     }
-
-    /* The scrolling band is a desktop-only flourish. On a phone it eats 5%
-       of the viewport, drags the eye away from the content, and can't be
-       read without fighting the motion. Decorative and out of the tab
-       order, so hiding it; Home included; loses nothing. */
-    .sabh-ticker-band { display: none; }
   }
 </style>
 

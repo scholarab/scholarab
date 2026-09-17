@@ -469,14 +469,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
                                       rgba(47,211,160,0.10), rgba(47,211,160,0) 68%);
     display: flex; flex-direction: column;
     /* The header used to be inside this box and counted toward the fold. Now
-       it sits above, so its two bands come off the target instead. */
-    min-height: calc(100vh - var(--sab-nav-h) - var(--sab-ticker-h));
-    min-height: calc(100svh - var(--sab-nav-h) - var(--sab-ticker-h));
+       it sits above, so its height comes off the target instead. */
+    min-height: calc(100vh - var(--sab-nav-h));
+    min-height: calc(100svh - var(--sab-nav-h));
   }
 
   .sab-hero-body {
     padding-top: 76px; position: relative;
-    /* Center the copy in the space left under the header/ticker */
+    /* Center the copy in the space left under the header */
     flex: 1; display: flex; flex-direction: column; justify-content: center;
     width: 100%; box-sizing: border-box;
   }

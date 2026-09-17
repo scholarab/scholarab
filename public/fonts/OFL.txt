@@ -17,10 +17,6 @@ Copyright notices, as embedded in the font files themselves:
                   https://github.com/Instrument/instrument-serif
                   instrument-serif-400.woff2, instrument-serif-400i.woff2
 
-  Manrope         Copyright 2019 The Manrope Project Authors
-                  https://github.com/sharanda/manrope
-                  manrope-600.woff2
-
   IBM Plex Mono   Copyright 2017 IBM Corp. All rights reserved.
                   https://github.com/IBM/plex
                   plex-mono-400.woff2, plex-mono-500.woff2

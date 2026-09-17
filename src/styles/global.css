@@ -113,13 +113,6 @@
     src: url('/fonts/archivo-800.woff2') format('woff2');
   }
   @font-face {
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url('/fonts/manrope-600.woff2') format('woff2');
-  }
-  @font-face {
     font-family: 'IBM Plex Mono';
     font-style: normal;
     font-weight: 400;
@@ -204,15 +197,12 @@ body {
      wide it is between one nav click and the next. Full-bleed backgrounds are
      unaffected: the cap goes on the inner wrapper, never the band. */
   --sab-measure: 1180px;
-  /* The header's two bands, declared rather than left to content so that
-     something outside the header can subtract them. The home hero is the only
-     thing that needs to: it fills the fold, and the header is no longer inside
-     it to take up part of that itself. Both apply above 900px only; below it
-     the ticker is hidden, the nav is padding-sized, and the hero stops
-     claiming the fold. The nav row is one height at every width now (the thin
-     bar, 2026-09-13), so the mobile sheet reads it too. */
+  /* The header's height, declared rather than left to content so that
+     something outside the header can subtract it. The home hero fills the
+     fold with it; the sticky rails park under it. The nav row is one height
+     at every width (the thin bar, 2026-09-13), so the mobile sheet reads it
+     too. */
   --sab-nav-h: 52px;
-  --sab-ticker-h: 45px;
   /* The hard shadow a control lifts onto. Mint on cream is 1.8:1, so the lift
      read as a smudge rather than as a second edge; deep green is the default
      and the ink surfaces below hand the token back to mint, which is the
@@ -244,14 +234,11 @@ body {
 }
 
 /* ── Sticky header collapse ────────────────────────────────── */
-/* The header follows you down the page and condenses as it goes: the ticker
-   band folds its own 45px away while the marquee slides 10px up behind it, the
-   nav row tightens from 91px to 67px, and a shadow plus a mint hairline fade in
-   underneath so the bar reads as floating over the page rather than as part of
-   it. Scrolling back up plays the whole thing backwards.
+/* The header follows you down the page, and a shadow plus a mint hairline
+   fade in underneath once you scroll so the bar reads as floating over the
+   page rather than as part of it. Scrolling back up fades them out.
 
-   One threshold on one 0.3s curve, so everything moves as a single condensing
-   motion rather than as four events. The threshold has hysteresis (down at
+   One threshold on one 0.3s curve. The threshold has hysteresis (down at
    116px, back up at 36px) so a scroll that hovers on the line cannot flap.
 
    This was first written as a scroll-driven animation, which is the prettier
@@ -260,13 +247,6 @@ body {
    because that turned out to do nothing in real browsers that report
    supporting it, and a header that condenses on every browser beats one that
    scrubs on some and sits there on the rest.
-
-   The one subtlety is that a shrinking header hands 69px back to the flow,
-   which would drag the page up under it and read as a jump rather than as a
-   collapse. #main-content pays exactly that 69px back as a top margin on the
-   same curve, so nothing below the header moves in the document at all. That
-   margin is only ever exposed above the viewport, behind the bar itself, so it
-   is never visible.
 
    Sticking is not the animated part and is not conditional on anything: every
    browser has had position:sticky for a decade, it is not a motion effect, and
@@ -287,33 +267,18 @@ body {
   border-bottom: 0;
 }
 
-/* The condensing half needs a header wide enough to condense: at 900px and
-   below the ticker is already hidden and the nav row is already the tight 12px
-   version, so there is nothing left to take away. 901px, because the header's
-   own mobile query is an inclusive max-width: 900px. */
+/* The shadow is desktop only. 901px, because the header's own mobile query
+   is an inclusive max-width: 900px. */
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
-  .sabp-header, .sab-hero-band, .sabh-nav, .sabh-ticker-band, #main-content {
-    transition: min-height 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
-                padding 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
-                height 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
-                margin-top 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
-                top 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
-                opacity 0.3s ease, box-shadow 0.3s ease, border-bottom-color 0.3s ease;
+  .sabp-header, .sab-hero-band {
+    transition: box-shadow 0.3s ease, border-bottom-color 0.3s ease;
   }
-  /* `top`, not `transform`: the marquee is already using transform for its own
-     30s loop, and a transition cannot share that property with an animation. */
-  .sabh-ticker { position: relative; top: 0; transition: top 0.3s cubic-bezier(0.2, 0.8, 0.3, 1); }
 
   html[data-sab-stuck] .sabp-header,
   html[data-sab-stuck] .sab-hero-band {
     box-shadow: 0 10px 30px -12px rgba(0,0,0,0.75);
     border-bottom-color: rgba(92,227,187,0.18);
   }
-  html[data-sab-stuck] .sabh-ticker-band { height: 0; opacity: 0; }
-  html[data-sab-stuck] .sabh-ticker { top: -10px; }
-  /* The thin nav row (2026-09-13) is already the collapsed size, so only the
-     ticker's own 45px folds away and only that is paid back. */
-  html[data-sab-stuck] #main-content { margin-top: var(--sab-ticker-h); }
   /* The detail-page rail is the one other sticky thing on the site; without
      this it parks under the collapsed bar instead of below it. */
   html[data-sab-stuck] .sabd-rail { top: calc(var(--sab-nav-h) + 1px + 24px); }
