@@ -494,7 +494,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     gap: 40px; margin-top: 52px; padding-bottom: 64px;
   }
   .sab-hero-copy { max-width: 460px; }
-  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242,240,233,0.8); margin: 0 0 30px; }
+  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242, 240, 233, 0.8); margin: 0 0 30px; }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   /* One pair, one size, one motion: hover only changes colour. The lift onto a
      hard shadow and the press snap were three effects on two buttons, and the
@@ -514,12 +514,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     color: #F2F0E9; font-weight: 600;
     border: 1px solid rgba(242,240,233,0.3); background: transparent;
   }
-  .sab-btn-outline:hover { border-color: rgba(242,240,233,0.7); background: rgba(242,240,233,0.06); }
+  .sab-btn-outline:hover { border-color: rgba(242, 240, 233, 0.7); background: rgba(242,240,233,0.06); }
 
   .sab-stats { display: flex; border-left: 1px solid rgba(92,227,187,0.28); }
   .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(92,227,187,0.28); }
   .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; font-variant-numeric: tabular-nums; }
-  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242,240,233,0.62); margin-top: 6px; white-space: nowrap; }
+  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242, 240, 233, 0.62); margin-top: 6px; white-space: nowrap; }
 
   /* ── Closing this week ── */
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
@@ -542,10 +542,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     cursor: pointer; color: inherit; text-decoration: none;
   }
   .sab-closing-row:hover { background: rgba(47,211,160,0.07); color: inherit; }
-  .sab-row-num { font-size: 14px; color: rgba(20,25,21,0.4); }
+  .sab-row-num { font-size: 14px; color: rgba(20, 25, 21, 0.68); }
   .sab-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
   .sab-row-blurb {
-    font-size: 14.5px; color: rgba(20,25,21,0.55); margin-top: 5px;
+    font-size: 14.5px; color: rgba(20, 25, 21, 0.68); margin-top: 5px;
     display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
   }
   .sab-row-amount { font-family: 'Instrument Serif', serif; font-size: 28px; text-align: right; }
@@ -559,7 +559,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-cat-band { background: #F1EDE3; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
   .sab-cats { padding-top: 88px; padding-bottom: 88px; }
   .sab-cats .sab-section-head { margin-bottom: 44px; }
-  .sab-cats-meta { font-size: 13px; color: rgba(20,25,21,0.55); white-space: nowrap; }
+  .sab-cats-meta { font-size: 13px; color: rgba(20, 25, 21, 0.68); white-space: nowrap; }
   .sab-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .sab-cat-card {
     display: block; background: #FBF8F2; border: 1.5px solid rgba(20,25,21,0.85);
@@ -572,8 +572,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   }
   .sab-cat-top { display: flex; justify-content: space-between; align-items: baseline; }
   .sab-cat-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
-  .sab-cat-count { font-size: 12px; color: rgba(20,25,21,0.5); }
-  .sab-cat-desc { font-size: 13.5px; color: rgba(20,25,21,0.6); margin-top: 8px; line-height: 1.45; }
+  .sab-cat-count { font-size: 12px; color: rgba(20, 25, 21, 0.68); }
+  .sab-cat-desc { font-size: 13.5px; color: rgba(20, 25, 21, 0.65); margin-top: 8px; line-height: 1.45; }
 
   /* City row: a quieter chip than the category cards on purpose. Cities are a
      second axis through the same listings, not eight more tracks.
@@ -588,7 +588,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
      on a line of its own; on a desktop it stays one row, so this box has to
      carry the wrapping and the gap the row used to. */
   .sab-city-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1; min-width: 0; }
-  .sab-city-label { font-size: 11px; letter-spacing: 0.12em; color: rgba(20,25,21,0.5); margin-right: 4px; }
+  .sab-city-label { font-size: 11px; letter-spacing: 0.12em; color: rgba(20, 25, 21, 0.68); margin-right: 4px; }
   .sab-city-chip {
     display: inline-flex; align-items: baseline; gap: 8px;
     border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
@@ -597,20 +597,20 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
   .sab-city-chip:hover { border-color: #0A6B4D; box-shadow: 2px 2px 0 #0E8C64; color: #141915; }
-  .sab-city-count { font-size: 11px; color: rgba(20,25,21,0.5); }
+  .sab-city-count { font-size: 11px; color: rgba(20, 25, 21, 0.68); }
 
   /* ── Match teaser ── */
   .sab-match { padding-top: 96px; padding-bottom: 96px; }
   .sab-match-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: center; }
   .sab-match-eyebrow { font-size: 13px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 16px; }
   .sab-match-h2 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.05; margin-bottom: 20px; }
-  .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20,25,21,0.68); margin: 0; }
+  .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.68); margin: 0; }
   .sab-match-card {
     background: #FBF8F2; border: 2px solid #141915; border-radius: 20px; padding: 36px;
     box-shadow: 8px 8px 0 rgba(14,140,100,0.35);
   }
   .sab-match-group { margin-bottom: 22px; }
-  .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20,25,21,0.55); margin-bottom: 10px; }
+  .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); margin-bottom: 10px; }
   .sab-match-opts { display: flex; flex-wrap: wrap; gap: 8px; }
   .sab-match-opt {
     font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 600;
@@ -642,7 +642,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   /* Inert until all three are picked: the label is an instruction at that
      point, so the control must not look like it can be obeyed. */
   .sab-match-cta:disabled {
-    background: transparent; color: rgba(20,25,21,0.45);
+    background: transparent; color: rgba(20, 25, 21, 0.68);
     border: 1.5px dashed rgba(20,25,21,0.25); cursor: default;
   }
   .sab-match-cta:disabled:hover { background: transparent; transform: none; box-shadow: none; }

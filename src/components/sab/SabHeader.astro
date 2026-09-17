@@ -279,7 +279,7 @@ const isActive = (href: string) =>
     border: 1px solid rgba(242,240,233,0.1);
     transition: background-color 0.15s ease, border-color 0.15s ease;
   }
-  .sabh-tile:hover { background: rgba(242,240,233,0.06); border-color: rgba(242,240,233,0.22); }
+  .sabh-tile:hover { background: rgba(242,240,233,0.06); border-color: rgba(242, 240, 233, 0.22); }
   /* A scope with a hub photo shows it in its tile. The image is only named
      while the menu is open, so the header, which is on every page, costs no
      image bytes until someone actually opens the menu. The gradient keeps the
@@ -304,17 +304,17 @@ const isActive = (href: string) =>
   }
   /* The photo tile's hover is a slow zoom rather than the grey wash, which
      would muddy the image. */
-  .sabh-tile-photo:hover { background-color: #16211C; border-color: rgba(242,240,233,0.35); }
+  .sabh-tile-photo:hover { background-color: #16211C; border-color: rgba(242, 240, 233, 0.35); }
   .sabh-tile-photo:hover::after { transform: scale(1.05); }
   .sabh-tile-photo .sabh-tile-num { color: #F2F0E9; text-shadow: 0 1px 12px rgba(0,0,0,0.35); }
-  .sabh-tile-photo .sabh-tile-count { color: rgba(242,240,233,0.8); }
+  .sabh-tile-photo .sabh-tile-count { color: rgba(242, 240, 233, 0.8); }
   .sabh-tile-num {
     font-family: 'Instrument Serif', Georgia, serif; font-size: 44px; line-height: 1;
-    color: rgba(242,240,233,0.9); letter-spacing: -0.01em; font-variant-numeric: lining-nums;
+    color: rgba(242, 240, 233, 0.9); letter-spacing: -0.01em; font-variant-numeric: lining-nums;
   }
   .sabh-tile-text { display: flex; flex-direction: column; gap: 2px; margin-top: auto; }
   .sabh-tile-name { font-size: 16px; font-weight: 600; color: #F2F0E9; letter-spacing: -0.005em; }
-  .sabh-tile-count { font-size: 13px; color: rgba(242,240,233,0.55); }
+  .sabh-tile-count { font-size: 13px; color: rgba(242, 240, 233, 0.55); }
   /* Two classes, not one: `.sabh-menu ul` above resets padding and outranks a
      bare `.sabh-menu-list`, which left the divider touching the text. */
   .sabh-menu .sabh-menu-list {
@@ -323,7 +323,7 @@ const isActive = (href: string) =>
   }
   .sabh-menu-list a {
     display: block; padding: 6px 0; font-size: 14px; font-weight: 500;
-    color: rgba(242,240,233,0.78); text-decoration: none;
+    color: rgba(242, 240, 233, 0.78); text-decoration: none;
   }
   .sabh-menu-list a:hover { color: #F2F0E9; }
   @media (max-width: 1100px) {
@@ -333,7 +333,7 @@ const isActive = (href: string) =>
     .sabh-menu { transform: none; transition: none; }
   }
   .sabh-link {
-    font-size: 13.5px; font-weight: 500; letter-spacing: 0.005em; color: rgba(242,240,233,0.7);
+    font-size: 13.5px; font-weight: 500; letter-spacing: 0.005em; color: rgba(242, 240, 233, 0.7);
     text-decoration: none; padding: 7px 13px; border-radius: 6px;
     transition: color 0.15s ease, background-color 0.15s ease;
   }
@@ -352,7 +352,7 @@ const isActive = (href: string) =>
   .sabh-social { justify-self: end; display: flex; align-items: center; gap: 2px; }
   .sabh-social :global(a) {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: 6px; color: rgba(242,240,233,0.7);
+    width: 36px; height: 36px; border-radius: 6px; color: rgba(242, 240, 233, 0.7);
     transition: color 0.15s ease, background-color 0.15s ease;
   }
   .sabh-social :global(a:hover) { color: #F2F0E9; background: rgba(242,240,233,0.08); }
@@ -402,7 +402,7 @@ const isActive = (href: string) =>
     .sabh-sub-back {
       display: flex; align-items: center; gap: 8px; min-height: 44px; width: 100%;
       padding: 0; margin: 0 0 12px; border: 0; border-bottom: 1px solid rgba(242,240,233,0.18);
-      background: transparent; color: rgba(242,240,233,0.7); cursor: pointer;
+      background: transparent; color: rgba(242, 240, 233, 0.7); cursor: pointer;
       font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
     }
     .sabh-menu-inner { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 0 0 24px; }
@@ -446,7 +446,7 @@ const isActive = (href: string) =>
 
     .sabh-sheet-label {
       display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
-      letter-spacing: 0.06em; color: rgba(242,240,233,0.45);
+      letter-spacing: 0.06em; color: rgba(242, 240, 233, 0.62);
       padding: 14px 0 6px; border-top: 1px solid rgba(242,240,233,0.18);
     }
     .sabh-link {
@@ -464,12 +464,12 @@ const isActive = (href: string) =>
     }
     .sabh-link-count {
       display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-      color: rgba(242,240,233,0.4);
+      color: rgba(242, 240, 233, 0.62);
     }
     .sabh-sheet-foot {
       display: block; margin-top: 26px;
       font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em;
-      color: rgba(242,240,233,0.4); line-height: 1.6;
+      color: rgba(242, 240, 233, 0.62); line-height: 1.6;
     }
   }
 </style>
