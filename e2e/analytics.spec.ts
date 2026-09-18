@@ -3,7 +3,10 @@ import { test, expect } from '@playwright/test';
 // Serve the checked local build under its allowed origin. Every request is
 // intercepted: no real analytics or production API receives test traffic.
 test.use({ serviceWorkers: 'block' });
-test.afterEach(async ({ page }) => page.unrouteAll({ behavior: 'wait' }));
+// 'ignoreErrors', not 'wait': a test can end while the page it navigated to is
+// still fetching (the /about/ paper and handwriting face), and closing the page
+// aborts those routes mid-fulfil. The assertions have already run by then.
+test.afterEach(async ({ page }) => page.unrouteAll({ behavior: 'ignoreErrors' }));
 test.beforeEach(async ({ page, baseURL }) => {
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'webdriver', { get: () => false });
