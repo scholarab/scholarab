@@ -444,7 +444,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   delay={Math.min(index * 40, 320)}
                   title={s.title}
                   titleHref={`/scholarships/${generateSlug(s.title)}/`}
-                  subtitle={s.audience}
                   tags={<>
                     <span className={style.badge}>{style.label}</span>
                     {s.deadline && <span className="sabm-tier sabm-due">Due {formatDue(s.deadline)}</span>}

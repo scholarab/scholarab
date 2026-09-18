@@ -45,7 +45,7 @@ const first = QUIZ_QUESTIONS[0]!;
 <script>
   import { h, render } from 'preact';
   import EligibilityQuiz from './EligibilityQuiz';
-  import type { quizPayload } from '../lib/quiz-payload';
+  import { readQuizPayload } from '../lib/quiz-payload';
 
   (() => {
     const host = document.querySelector<HTMLElement>('[data-quiz-url]');
@@ -58,10 +58,8 @@ const first = QUIZ_QUESTIONS[0]!;
       try {
         const res = await fetch(host!.dataset.quizUrl!);
         if (!res.ok) throw new Error('Unable to load the matching data');
-        const data = await res.json() as ReturnType<typeof quizPayload>;
+        const data = readQuizPayload(await res.json());
         if (!alive) return;
-        if (data.version !== 1 || !Array.isArray(data.scholarships) || !Array.isArray(data.programs))
-          throw new Error('Please reload to get the latest quiz');
         render(h(EligibilityQuiz, data), host!);
       } catch (error) {
         if (!alive) return;
