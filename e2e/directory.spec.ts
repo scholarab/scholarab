@@ -40,7 +40,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
       await page.locator('[data-dir-search]').fill(searchQuery);
       const state = { ...DEFAULT_SCHOLARSHIP_STATE, sortBy, searchQuery };
       const visible = filterSortScholarships(items, state);
-      expect(await page.locator('[data-dir-card]:not([hidden])').evaluateAll(els => els.map(e => Number(e.getAttribute('data-id'))))).toEqual(visible.slice(0, PAGE).map(s => s.id));
+      await expect.poll(() => page.locator('[data-dir-card]:not([hidden])').evaluateAll(els => els.map(e => Number(e.getAttribute('data-id'))))).toEqual(visible.slice(0, PAGE).map(s => s.id));
       // The count line and the stat still describe every match, not just the
       // cards revealed so far.
       await expect(page.locator('[data-dir-count]')).toHaveText(directoryCountLine(visible.length, items.length, 'LISTINGS', visible.filter(s => getScholarshipStatus(s) === 'active').length));
@@ -182,4 +182,28 @@ test('program Details links preserve filtered previous and next arrows', async (
   await expect(page.locator('[data-sabd-next]')).toHaveAttribute('href', paths[2]!);
   await page.locator('[data-sabd-prev]').click();
   await expect(page.locator('[data-sabd-position]')).toHaveText(`FILTERED · 1 OF ${paths.length}`);
+});
+
+test('exact search text loads only on demand and covers the whole scholarship catalogue', async ({ page }) => {
+  const requests: string[] = [];
+  page.on('request', request => { if (request.url().endsWith('/search-index.json')) requests.push(request.url()); });
+  await page.goto('/scholarships/');
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(PAGE);
+  expect(requests).toHaveLength(0);
+  const response = page.waitForResponse('**/search-index.json');
+  await page.locator('[data-dir-search]').fill(query);
+  const index = await (await response).json();
+  expect(index.scholarship).toEqual(Object.fromEntries(items.map(s => [s.id, scholarshipSearchBlob(s)])));
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(1);
+});
+
+test('failed search preserves listings and working filters', async ({ page }) => {
+  await page.route('**/search-index.json', route => route.abort());
+  await page.goto('/scholarships/');
+  await page.locator('[data-dir-search]').fill('unavailable');
+  await expect(page.locator('[data-dir-search-error]')).toBeVisible();
+  await expect(page.locator('[data-dir-card]')).toHaveCount(items.length);
+  await page.locator('[data-fkey="status"][data-fval="closed"]').click();
+  const closed = items.filter(s => getScholarshipStatus(s) === 'closed');
+  await expect(page.locator('[data-dir-count]')).toHaveText(directoryCountLine(closed.length, items.length, 'LISTINGS', 0));
 });

@@ -1,5 +1,9 @@
 # ScholarAB simplification record
 
+| Target | Student outcome and challenged parts | Local before / after | Restored / removed units | Repairs and limitations |
+| --- | --- | --- | --- | --- |
+| A1 | Every listing and exact search result with less initial HTML; remove duplicated search/name/ID/label attributes and card wrappers. | 2,039,118 to 1,016,723 bytes (-50.14%); gzip 252,704 to 97,068; no hosted timing claim. | 1/16 (6.25%): restore inactive status after its contract test failed. | Two cut rounds; async assertions now wait for lazy search; index failure preserves cards and filters. 943 unit tests, 75 E2E passes (7 existing skips); ship-check RUN commands pass. |
+
 ## First implemented cuts: September 12, 2026 UTC
 
 This implementation follows the deep audit below, on an isolated branch from `41abc6a`. The shared checkout's reminder changes and desktop audit were left untouched. [Measured build evidence](audit-evidence/first-cuts-2026-09-12.json) records the baseline revision and the exact comparison scope.

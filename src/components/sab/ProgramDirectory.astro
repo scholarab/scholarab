@@ -3,7 +3,6 @@
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
 import { DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programDayChip, programGroupKey, shortDate } from '../../lib/list-core.ts';
-import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { emailOff } from '../../lib/email-off';
@@ -123,6 +122,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     </div>
   </div>
 
+  <p data-dir-search-error role="status" hidden>Search unavailable. Reload to retry. Filters still work.</p>
   <div class="sabl-toolbar">
     <div class="sabl-search">
       <span class="sabl-search-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
@@ -256,20 +256,16 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
           </button>
         )}
         <div
-          class="sabl-card"
           data-dir-card
           data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
           data-id={p.id}
-          data-name={p.name}
           data-category={p.category ?? undefined}
-          data-grades={p.grades ?? undefined}
           data-paid={p.paid ? '1' : undefined}
           data-deadline={p.deadline ?? undefined}
-          data-search={programSearchBlob(p)}
         >
           <div class="sabl-card-top">
             <span class="sabl-card-top-left">
-              <span class="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
+              <span class="sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
               {p.paid && <span class="sabl-mono sabl-paid">$ PAID</span>}
             </span>
             <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
@@ -288,18 +284,13 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
                 ? `DUE ${shortDate(p.deadline)}`
                 : 'NO FIXED DEADLINE'}
             </span>
-            <div class="sabl-card-actions">
               <button
-                type="button"
                 class="sabl-save"
                 data-dir-save
-                data-id={p.id}
-                data-name={p.name}
-                aria-label={`Save ${p.name}`}
+                aria-label="Save"
                 aria-pressed="false"
               >☆</button>
               <a href={`/programs/${slug}/`} class="sabl-apply">Details →</a>
-            </div>
           </div>
         </div>
         </>
@@ -359,11 +350,11 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       const d = el.dataset;
       return {
         el,
-        search: d.search ?? '',
+        search: '',
         id: Number(d.id),
-        name: d.name ?? '',
+        name: el.querySelector('.sabl-name')!.textContent!,
         category: d.category ?? null,
-        grades: d.grades ?? null,
+        grades: null,
         paid: d.paid === '1',
         deadline: d.deadline ?? null,
         // Visitor-timezone ms from the ISO string; a serialized build-time

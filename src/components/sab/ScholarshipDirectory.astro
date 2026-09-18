@@ -1,11 +1,7 @@
 ---
-// Server-rendered replacement for the old ScholarshipList React island.
-// Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
-// them and recomputes the clock-dependent bits on load, so no React ships.
 import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipDayChip, scholarshipGroupKey, shortDate } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
-import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../../lib/facets.ts';
 
 interface Props {
@@ -188,6 +184,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
     </div>
   </div>
 
+  <p data-dir-search-error role="status" hidden>Search unavailable. Reload to retry. Filters still work.</p>
   <div class="sabl-toolbar">
     <div class="sabl-search">
       <span class="sabl-search-icon" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
@@ -310,11 +307,9 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           </button>
         )}
         <div
-          class="sabl-card"
           data-dir-card
           data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
           data-id={s.id}
-          data-name={s.title}
           data-category={s.category ?? undefined}
           data-region={s.region ?? undefined}
           data-amount={String(s._amount ?? 0)}
@@ -322,10 +317,9 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           data-open-date={s.openDate ?? undefined}
           data-inactive={s.active === false ? '' : undefined}
           data-concluded={s.concluded ? '' : undefined}
-          data-search={scholarshipSearchBlob(s)}
         >
           <div class="sabl-card-top">
-            <span class="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
+            <span class="sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
             <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
           </div>
           <a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a>
@@ -335,29 +329,20 @@ const soonLine = totalOpen > 0 && totalSoon > 0
             <span class="sabl-due">
               {s.deadline ? `DUE ${shortDate(s.deadline)}` : 'NO FIXED DEADLINE'}
             </span>
-            <div class="sabl-card-actions">
               <button
-                type="button"
                 class="sabl-save"
                 data-dir-save
-                data-id={s.id}
-                data-name={s.title}
-                aria-label={`Save ${s.title}`}
+                aria-label="Save"
                 aria-pressed="false"
               >☆</button>
               {s.url && (
                 <a
                   href={s.url}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  referrerpolicy="no-referrer"
+                  rel="noreferrer"
                   class="sabl-apply"
-                  data-track="apply"
-                  data-item-id={s.id}
-                  aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
-                ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span><span class="sabl-ext" aria-hidden="true">↗</span></a>
+                >{status === 'active' ? 'Apply' : 'Visit'}</a>
               )}
-            </div>
           </div>
         </div>
         </>
@@ -424,10 +409,10 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       const d = el.dataset;
       return {
         el,
-        search: d.search ?? '',
+        search: '',
         id: Number(d.id),
-        name: d.name ?? '',
-        title: d.name ?? '',
+        name: el.querySelector('.sabl-name')!.textContent!,
+        title: el.querySelector('.sabl-name')!.textContent!,
         category: d.category ?? null,
         region: d.region ?? null,
         deadline: d.deadline ?? null,
@@ -485,11 +470,8 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           chipEl.hidden = !chip;
           if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
         }
-        const apply = s.el.querySelector<HTMLElement>('[data-track="apply"]');
-        // Only the word: the ↗ beside it is a sibling span, and overwriting
-        // the anchor's textContent would take the arrow with it.
-        const applyLabel = apply?.querySelector('[data-apply-label]');
-        if (applyLabel) applyLabel.textContent = status === 'active' ? 'Apply' : 'Visit';
+        const apply = s.el.querySelector<HTMLElement>('.sabl-apply');
+        if (apply) apply.textContent = status === 'active' ? 'Apply' : 'Visit';
       }
     },
 
@@ -497,9 +479,9 @@ const soonLine = totalOpen > 0 && totalSoon > 0
 
   // Outbound apply clicks are an analytics event (same as the old React list)
   document.addEventListener('click', e => {
-    const link = (e.target as Element | null)?.closest?.('[data-track="apply"]');
+    const link = (e.target as Element | null)?.closest?.('.sabl-apply');
     if (link && link.closest('#sab-scholarships')) {
-      sendEvent('apply_click', 'scholarship', Number((link as HTMLElement).dataset.itemId));
+      sendEvent('apply_click', 'scholarship', Number(link.closest<HTMLElement>('[data-dir-card]')?.dataset.id));
     }
   });
 </script>
