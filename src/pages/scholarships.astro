@@ -9,6 +9,7 @@ import SabGuideRail from '../components/sab/SabGuideRail.astro';
 import { enrichScholarships } from '../lib/enrich';
 import { DEFAULT_SCHOLARSHIP_STATE, filterSortScholarships } from '../lib/list-core';
 import { itemListJson } from '../lib/ld';
+import { SCHOLARSHIP_FACETS, facetItems, MIN_FACET_ITEMS } from '../lib/facets';
 let raw: Awaited<ReturnType<typeof loadScholarships>> = [];
 let loadError = false;
 try {
@@ -67,6 +68,11 @@ const listJson = itemListJson(
       ) : (
         <ScholarshipDirectory items={scholarships} />
       )}
+      <nav aria-label="Scholarships by topic" style="display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:32px;">
+        {SCHOLARSHIP_FACETS.filter(f => f.kind === 'category' && facetItems(f, scholarships).length >= MIN_FACET_ITEMS).map(f => (
+          <a href={`/scholarships/${f.slug}/`}>{f.label}</a>
+        ))}
+      </nav>
     </div>
 
     {/* The two directories are the highest-authority pages on the site and
