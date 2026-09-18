@@ -162,7 +162,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     <div class="sab-hero">
       <!-- hero body -->
       <div class="sab-container sab-hero-body">
-        <div class="sab-kicker">BUILT BY A STUDENT, FOR STUDENTS</div>
+        <div class="sab-kicker">BUILT BY A HIGH SCHOOL STUDENT FROM MEDICINE HAT<span class="sab-kicker-sep" aria-hidden="true">·</span><a href="/about/" class="sab-kicker-link">READ THE STORY</a></div>
 
         <h1 class="sab-h1"><span class="sab-h1-l sab-h1-l1">Making scholarships and programs</span> <span class="sab-h1-l sab-h1-l2">easier to find for Alberta students.</span></h1>
 
@@ -475,6 +475,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     min-height: calc(100svh - var(--sab-nav-h));
   }
 
+  /* The kicker names who built the site and hands off to /about for the rest. */
+  .sab-hero .sab-kicker { font-size: 16px; flex-wrap: wrap; row-gap: 4px; }
+  .sab-kicker-sep { opacity: 0.45; }
+  .sab-kicker-link { color: #EEF1EC; text-decoration: none; border-bottom: 1px solid rgba(238, 241, 236, 0.35); }
+  .sab-kicker-link:hover { border-bottom-color: #2FD3A0; color: #2FD3A0; }
   .sab-hero-body {
     padding-top: 76px; position: relative;
     /* Center the copy in the space left under the header */
@@ -713,7 +718,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
        the underlined "View all" link at 28. */
     .sab-city-chip { min-height: 44px; align-items: center; }
     .sab-view-all { display: inline-flex; align-items: center; min-height: 44px; }
-    .sab-kicker { display: none; }
+    /* Shown on phones since 2026-09-18: the line now says who built the
+       site and links to the story, which a phone visitor should see too. */
+    .sab-hero .sab-kicker { font-size: 12px; margin-bottom: 12px; }
+    .sab-kicker-sep { display: none; }
     .sab-hero-p-tail { display: none; }
     .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
     .sab-btn-accent, .sab-btn-outline { height: 50px; padding: 0 20px; }
