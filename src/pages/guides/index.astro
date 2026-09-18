@@ -49,7 +49,7 @@ const collectionJson = {
         <div class="sab-kicker">GUIDES</div>
         <h1 class="sabgi-h1">How to actually <em>win</em> a scholarship.</h1>
         <p class="sabgi-lede">
-          Deadlines, applications and next steps for Alberta students.
+          Short, practical guides written for Alberta high school students. No filler, no recycled advice from American sites that doesn't apply here.
         </p>
       </div>
     </div>
@@ -63,6 +63,7 @@ const collectionJson = {
               <span class="sabgi-mono sabgi-card-tag">{g.kicker}</span>
             </div>
             <div class="sabgi-card-title">{g.title}</div>
+            <div class="sabgi-card-desc">{g.description}</div>
             <div class="sabgi-mono sabgi-card-meta">{g.minutes} MIN READ</div>
           </a>
         ))}
@@ -106,6 +107,7 @@ const collectionJson = {
   }
   .sabgi-card-tag { font-size: 11px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); }
   .sabgi-card-title { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 10px; }
+  .sabgi-card-desc { font-size: 15px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); flex: 1; }
   .sabgi-card-meta { font-size: 11px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); margin-top: 18px; }
 
   @media (max-width: 900px) {

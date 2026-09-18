@@ -14,6 +14,14 @@
 // sentence per line, and only the changes a reader would care about. A month
 // that did ten forgettable things gets three lines, not ten.
 
+/** Category chip shown beside each line. */
+export type UpdateKind = 'new' | 'better' | 'fixed' | 'listings' | 'under-hood'
+
+export type UpdateItem = {
+  kind: UpdateKind
+  text: string
+}
+
 /**
  * A screenshot of the site as it looked at a point in time.
  *
@@ -51,7 +59,33 @@ export type UpdateMonth = {
    * surviving screenshots, and a month with none simply shows no strip.
    */
   shots?: UpdateShot[]
-  items: string[]
+  items: UpdateItem[]
+}
+
+export const KIND_LABELS: Record<UpdateKind, string> = {
+  'new': 'NEW',
+  'better': 'IMPROVED',
+  'fixed': 'FIXED',
+  'listings': 'LISTINGS',
+  'under-hood': 'UNDER THE HOOD',
+}
+
+/**
+ * Five categories need five distinguishable marks, so these are the one place
+ * the palette carries hues of its own. All five are measured against the WHITE
+ * month card these sit on, not the cream page, which is the more forgiving
+ * background and the reason the misses went unnoticed. At the badge's 11px:
+ * #B8541F was 4.13:1 (the same orange already retired from the day chips and
+ * /404), the 0.45 grey was 2.9:1, and #0E8C64; the site's link green, which
+ * does clear AA on cream; is only 4.24:1 here. Their replacements measure
+ * 6.06, 5.08 and 6.52; the blue and purple always cleared it at 5.22 and 5.77.
+ */
+export const KIND_COLORS: Record<UpdateKind, string> = {
+  'new': '#0A6B4D',
+  'better': '#1F6FB8',
+  'fixed': '#A0491A',
+  'listings': '#7A4FB8',
+  'under-hood': 'rgba(20,25,21,0.62)',
 }
 
 /** Date the project folder was created on disk. Work began here. */
@@ -77,24 +111,78 @@ export const months: UpdateMonth[] = [
       },
     ],
     items: [
-      "Planned a Medicine Hat directory using a spreadsheet.",
-      "Started building on March 2 after two failed prototypes.",
-      "Chose no accounts, scannable cards, visible amounts and deadline sorting.",
-      "Dropped ScholarHat because another company already used the name.",
-      "Renamed the site ScholarAB on March 14.",
-      "Gave every page a shared layout.",
-      "Rebuilt scholarship cards to fit phones.",
-      "Added a filter for the university students plan to attend.",
-      "Added the logo and region icons.",
-      "Added saved listings after a teacher suggested them.",
-      "Built automatic expiry and link checks.",
-      "Simplified the typeface and homepage before launch.",
-      "Launched scholarab.ca with shared-link previews.",
-      "Opened March 23 with 115 scholarships and 17 programs.",
-      "Kept saved listings on the student's device.",
-      "Added bottom navigation on phones.",
-      "Published the first Alberta scholarship application guide.",
-      "Started daily expiry and broken-link checks.",
+      {
+        kind: 'under-hood',
+        text: 'The first plan, from late February, covered Medicine Hat only and ran off a spreadsheet.',
+      },
+      {
+        kind: 'new',
+        text: 'Work starts March 2. A tool that builds a site from a description failed twice, so it was written by hand instead.',
+      },
+      {
+        kind: 'new',
+        text: 'March 6: the four biggest Canadian scholarship sites were taken apart to see what to do differently. Five rules came out of it and all five are still here: no account, cards you can skim, the dollar total up front, and closing soonest first.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'The name changes that day: "ScholarHat" was already taken by a big training company. The next one used the 403 area code.',
+      },
+      {
+        kind: 'new',
+        text: 'ScholarAB on March 14. The 403 idea was dropped because 403 means nothing to a student in Edmonton.',
+      },
+      {
+        kind: 'better',
+        text: 'One shared layout, so every page looks the same instead of being built separately.',
+      },
+      {
+        kind: 'fixed',
+        text: 'Scholarship cards would not line up on phones. The card had to be rebuilt from scratch.',
+      },
+      {
+        kind: 'new',
+        text: 'A filter on March 16: pick the university you are heading to, and the list narrows to what fits.',
+      },
+      {
+        kind: 'new',
+        text: 'The logo arrives March 17, with an icon for each region.',
+      },
+      {
+        kind: 'new',
+        text: 'A teacher pointed out that students lose everything they find by the next day. Saving listings came out of that.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'The robots get written: retiring closed scholarships, and checking every link.',
+      },
+      {
+        kind: 'better',
+        text: 'March 22, the night before launch: one plain typeface everywhere, and a home page that points you somewhere instead of dumping the whole list on you.',
+      },
+      {
+        kind: 'new',
+        text: 'scholarab.ca goes live that evening, with a preview picture for shared links.',
+      },
+      {
+        kind: 'new',
+        text: 'March 23: ScholarAB opens to the public with 115 scholarships and 17 research programs. Browse everything, save what you like. No account, no login.',
+      },
+      {
+        kind: 'new',
+        text: 'Saved listings stay on your own device. Nothing about you leaves it.',
+      },
+      {
+        kind: 'new',
+        text: 'A bar along the bottom on phones, for jumping between sections.',
+      },
+      {
+        kind: 'new',
+        text: 'The first guide: how to apply for scholarships in Alberta.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'Two robots start on launch day: one retires closed scholarships, one hunts for dead links.',
+      },
     ],
   },
 
@@ -126,17 +214,50 @@ export const months: UpdateMonth[] = [
       },
     ],
     items: [
-      "Launched the scholarship match quiz.",
-      "Added pagination for long lists.",
-      "Added a private admin screen for editing listings.",
-      "Expanded research programs from 17 to 97.",
-      "Expanded scholarships from 113 to 148, removing duplicates.",
-      "Made scholarship and program filters, sorting and saving consistent.",
-      "Added optional deadline reminder emails.",
-      "Added a page for teachers and counsellors.",
-      "Added About and the site's privacy commitments.",
-      "Moved hosting to Cloudflare.",
-      "Added automated link and browser checks.",
+      {
+        kind: 'new',
+        text: 'The match quiz. Answer a few questions and get back only the scholarships you qualify for.',
+      },
+      {
+        kind: 'new',
+        text: 'Page numbers on long lists, so the page stops loading a hundred cards at once.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'Listings moved into a database with a private admin screen. Before this, fixing a deadline meant editing the site\'s code.',
+      },
+      {
+        kind: 'listings',
+        text: 'Research programs went from 17 to 97: summer labs and student placements.',
+      },
+      {
+        kind: 'listings',
+        text: 'Scholarships grew from 113 to 148, adding awards for Red Deer and Lethbridge, with duplicates weeded out.',
+      },
+      {
+        kind: 'better',
+        text: 'Scholarships and programs ran on two sets of code that had drifted apart. Merged, so filtering, sorting and saving now behave the same on both.',
+      },
+      {
+        kind: 'new',
+        text: 'Deadline alerts. Give an email address, get a reminder before a saved scholarship closes. Nothing else is ever sent.',
+      },
+      {
+        kind: 'new',
+        text: 'A page for teachers and counsellors.',
+      },
+      {
+        kind: 'new',
+        text: 'An About page, and the rules: no ads, no sponsored listings, no personal data.',
+      },
+      {
+        kind: 'better',
+        text: 'The site moved to Cloudflare, so pages come from somewhere near you.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'Link checks and browser tests now run on every change.',
+      },
     ],
   },
 
@@ -146,17 +267,50 @@ export const months: UpdateMonth[] = [
     start: '2026-05-01',
     summary: 'A quieter month on accuracy: dead links, wrong counts, a broken scholarships page.',
     items: [
-      "Clarified Cypress agricultural bursary eligibility for Medicine Hat and Redcliff.",
-      "Added 24 Red Deer awards, mostly Polytechnic entrance scholarships.",
-      "Added Lethbridge school, Rotary and lifeguard awards.",
-      "Repaired 38 links and retired five discontinued programs.",
-      "Excluded closed awards from the homepage dollar total.",
-      "Fixed the scholarship directory's broken route.",
-      "Fixed matching for newer listings.",
-      "Added seven scholarships, bringing the total to 155.",
-      "Explained the match quiz before students start.",
-      "Arranged longer answer lists in two columns.",
-      "Fixed the homepage count's stale data.",
+      {
+        kind: 'fixed',
+        text: 'The Cypress County agricultural bursary said nothing about who may apply. Its form counts urban areas inside the county boundary and names the City of Medicine Hat and Redcliff outright, so city students qualify after all. Its sibling scholarship, closing the same day, does not work that way.',
+      },
+      {
+        kind: 'listings',
+        text: 'Red Deer gained 24 awards, most of them Red Deer Polytechnic entrance scholarships that one May application covers. Its award portal lists 520 opportunities and 519 of them are closed cycles for students already enrolled, so only the entrance awards are here.',
+      },
+      {
+        kind: 'listings',
+        text: 'Lethbridge gained the awards its schools list but nobody else does, including a $10,000 Rotary agricultural scholarship and a YMCA scholarship that pays for a full lifeguard certification rather than tuition.',
+      },
+      {
+        kind: 'fixed',
+        text: '38 broken links repaired. 5 programs had shut down for good and were retired.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The dollar total on the home page was counting closed scholarships. It now counts only money you can still apply for.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The scholarships page had started showing "page not found" after a hosting change.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The match quiz was ignoring the rules on newer listings, so some never matched.',
+      },
+      {
+        kind: 'listings',
+        text: 'Seven scholarships added, including the Medicine Hat Firefighters Charitable Foundation Scholarship, bringing the site to 155.',
+      },
+      {
+        kind: 'better',
+        text: 'The match page now explains what the quiz does before you start.',
+      },
+      {
+        kind: 'better',
+        text: 'Questions with four or more answers now sit in two columns.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The home page count was frozen at whatever it was when the site was last built. It now counts live.',
+      },
     ],
   },
 
@@ -166,16 +320,46 @@ export const months: UpdateMonth[] = [
     start: '2026-06-01',
     summary: 'A design pass across the whole site, then a rebuild of the match quiz.',
     items: [
-      "Kept closed awards visible with a CLOSED label.",
-      "Sorted listings by open, opening later, then closed.",
-      "Refreshed cards, amount labels and quiz progress dots.",
-      "Added a message when filters return nothing.",
-      "Kept the Previous button in place between questions.",
-      "Made answer tiles respond on hover.",
-      "Added transitions between pages.",
-      "Added the $250,000 Breakthrough Junior Challenge.",
-      "Fixed Clear filters.",
-      "Restarted the overnight listing refresh.",
+      {
+        kind: 'better',
+        text: 'Closed scholarships now carry a red CLOSED chip and stay in the All tab, so you can plan for next year.',
+      },
+      {
+        kind: 'better',
+        text: 'Listings sort in a sensible order: open now, opening later, then closed.',
+      },
+      {
+        kind: 'better',
+        text: 'A visual refresh: cards glow on hover, amounts sit in their own pill, the quiz shows progress dots.',
+      },
+      {
+        kind: 'better',
+        text: 'A filter that finds nothing now says so instead of going blank.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The Previous button used to slide down the screen on longer questions, so you would reach for it and miss. It stays put now.',
+      },
+      {
+        kind: 'better',
+        text: 'Answer tiles lift when you hover them, so it is clear what you are picking.',
+      },
+      {
+        kind: 'better',
+        text: 'Moving between pages crossfades, and swiping left or right on a phone slides.',
+      },
+      {
+        kind: 'listings',
+        text: 'Added the Breakthrough Junior Challenge, worth $250,000.',
+      },
+      {
+        kind: 'fixed',
+        text: 'Clear filters did not always clear everything.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The overnight listing refresh had stopped running. Restarted.',
+      },
     ],
   },
 
@@ -185,26 +369,86 @@ export const months: UpdateMonth[] = [
     start: '2026-07-01',
     summary: 'The biggest month since launch: a full redesign, the guides, a new logo, faster pages.',
     items: [
-      "Fixed a build that showed only 28 scholarships.",
-      "Added scholarship search and program sorting.",
-      "Added a proper page-not-found screen.",
-      "Unified the main pages' design.",
-      "Added anonymous counts of listing views.",
-      "Published eight scholarship guides.",
-      "Added related listings below each award.",
-      "Updated the logo, browser icon and link previews.",
-      "Added share pictures for open scholarships.",
-      "Rewrote 80 listing descriptions.",
-      "Repaired 18 dead links.",
-      "Fixed awards closing early because of timezones.",
-      "Reduced browser code for older phones.",
-      "Fixed missing program matches and five quiz bugs.",
-      "Enabled saving programs from match results.",
-      "Confirmed successful reminder unsubscribes.",
-      "Removed an unofficial Rutherford deadline from its guide.",
-      "Corrected Mehl and Wolf deadlines from official sources.",
-      "Added an app-style phone layout with saved listings.",
-      "Added a choice of reminder timing.",
+      {
+        kind: 'fixed',
+        text: 'The live site was building with 28 scholarships instead of the full set.',
+      },
+      {
+        kind: 'new',
+        text: 'Search on the scholarships page, and sorting on the programs page.',
+      },
+      {
+        kind: 'new',
+        text: 'A real 404 page. A mistyped address used to quietly serve the home page instead.',
+      },
+      {
+        kind: 'better',
+        text: 'Every main page was redesigned around a single look.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'Anonymous counting of which listings get opened. No names, emails, cookies or IP addresses.',
+      },
+      {
+        kind: 'new',
+        text: 'The Guides section: eight write-ups on Rutherford, essays, reference letters, Grade 11 and 12 timelines, local awards and trades funding.',
+      },
+      {
+        kind: 'new',
+        text: 'A "More like this" block at the bottom of every listing, so you do not have to go back to the list.',
+      },
+      {
+        kind: 'new',
+        text: 'A new logo across the site, the browser tab, and shared links.',
+      },
+      {
+        kind: 'new',
+        text: 'Every open scholarship gets its own share picture, so a link shows the actual award.',
+      },
+      {
+        kind: 'better',
+        text: '80 listing descriptions rewritten by hand.',
+      },
+      {
+        kind: 'fixed',
+        text: '18 dead links repaired.',
+      },
+      {
+        kind: 'fixed',
+        text: 'A timezone bug could show a scholarship as closed on its own deadline day.',
+      },
+      {
+        kind: 'better',
+        text: 'Pages send far less code to your browser, so they load faster on older phones.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The match quiz was returning scholarships only, never research programs. Fixed, with five smaller bugs.',
+      },
+      {
+        kind: 'new',
+        text: 'Research programs can now be saved straight from the match results.',
+      },
+      {
+        kind: 'better',
+        text: 'Unsubscribing from deadline alerts now confirms it worked.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The Rutherford guide listed a deadline that does not officially exist. It was removed, and the guide now says when applications open instead.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The Mehl and Wolf deadlines were corrected against their official pages.',
+      },
+      {
+        kind: 'new',
+        text: 'An app-style layout for phones, with your saved listings carried over.',
+      },
+      {
+        kind: 'better',
+        text: 'You now choose when alert reminders arrive.',
+      },
     ],
   },
 
@@ -215,34 +459,118 @@ export const months: UpdateMonth[] = [
     summary:
       'The 2026-27 refresh, 37 new research programs, a rebuilt phone home page, a privacy and safety pass over the whole site, and a listing count that more than doubled in the last week.',
     items: [
-      "Merged duplicate RMA awards and corrected amount and deadline.",
-      "Updated provincial, national and city awards for the next cycle.",
-      "Added 37 research and enrichment programs.",
-      "Reviewed 86 program pages and rechecked 45 verification dates.",
-      "Added opening dates and corrected 154 misleading open statuses.",
-      "Repaired the remaining two broken links.",
-      "Added four application steps to each award.",
-      "Published research, medical-experience and computing guides.",
-      "Fixed incomplete descriptions on 25 program search results.",
-      "Gave search engines each page's actual update date.",
-      "Replaced the app-style phone layout with a mobile homepage.",
-      "Carried homepage answers into the quiz and explained match rankings.",
-      "Added filter counts, deadline colours and consistent page widths.",
-      "Fixed keyboard navigation, focus outlines and page landmarks.",
-      "Required email confirmation and added one-click reminder unsubscribe.",
-      "Restored 112 pages to search indexing and corrected the sitemap.",
-      "Rewrote titles and descriptions for clearer search results.",
-      "Licensed the code and data for reuse.",
-      "Stopped storing IP addresses and removed educator email contacts.",
-      "Published terms, accuracy notices and a data-incident policy.",
-      "Fixed admin login limits, session expiry and rate limits.",
-      "Expanded scholarships from 153 to 345 through verified city awards.",
-      "Added Airdrie, Grande Prairie, provincial and national hub navigation.",
-      "Added filter counts and direct city links.",
-      "Added school questions and cleared quiz answers when tabs close.",
-      "Made 73 search snippets lead with award amounts.",
-      "Shortened hub introductions and stopped filter rows jumping.",
-      "Added search-engine notifications and weekly indexing checks.",
+      {
+        kind: 'fixed',
+        text: 'The Rural Municipalities of Alberta scholarship had two entries, one of them added days earlier during the Cochrane pass with the wrong amount and the wrong cutoff. RMA gives six awards of $1,500 closing at the end of August, and the surviving record says so.',
+      },
+      {
+        kind: 'listings',
+        text: 'Provincial, national and city awards were all rolled forward to the 2026-27 cycle. As of August 2, nothing on the site reads closed.',
+      },
+      {
+        kind: 'listings',
+        text: '37 research and enrichment programs were added: trades and apprenticeship, math and physics contests, Model UN and youth parliament, Space Apps, Rise, Explore and the House of Commons Page Program.',
+      },
+      {
+        kind: 'listings',
+        text: 'All 86 program pages were read end to end. Programs that pointed at a provider home page now point at the page that actually describes them, and the verified stamp on 45 of them was re-checked by hand.',
+      },
+      {
+        kind: 'listings',
+        text: 'Listings now say when applications open rather than only "DATE TBA", and 154 awards that were being called open are no longer.',
+      },
+      {
+        kind: 'fixed',
+        text: 'The last two dead addresses were repaired. All 251 links now work.',
+      },
+      {
+        kind: 'new',
+        text: 'Every award page lists the four real steps of applying, so you can tick them off.',
+      },
+      {
+        kind: 'new',
+        text: 'Three guides now cover the programs side: research placements that pay, how to get medical experience in high school, and which computing contests are free.',
+      },
+      {
+        kind: 'better',
+        text: 'Search results were showing half a description on 25 program pages. They now use the whole line Google gives them.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'Each page now tells search engines the day its own content changed, rather than 308 pages sharing one date.',
+      },
+      {
+        kind: 'new',
+        text: 'A home page built for phones, after the old app-style mobile layout was taken back out.',
+      },
+      {
+        kind: 'better',
+        text: 'The match quiz carries your answers over from the home page teaser, and each result now says why it ranked where it did.',
+      },
+      {
+        kind: 'better',
+        text: 'Filters say how many listings are left, deadlines are shaded by how close they are, and every page shares one width.',
+      },
+      {
+        kind: 'better',
+        text: 'The skip link, the focus outlines and the site banner work properly for anyone using a keyboard or a screen reader.',
+      },
+      {
+        kind: 'better',
+        text: 'Deadline reminders now ask you to confirm your email before anything is sent, and every reminder carries a one-click unsubscribe.',
+      },
+      {
+        kind: 'better',
+        text: '112 scholarship pages had been quietly hidden from Google. They are indexable again, and the sitemap no longer lists pages it tells Google to skip.',
+      },
+      {
+        kind: 'better',
+        text: 'Page titles and descriptions were rewritten to answer the question in the search result itself, instead of five awards sharing one line.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'The project was licensed: the code is open source, and the listing data can be reused with credit.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'A privacy pass: IP addresses are no longer stored, search text that is kept is now disclosed, and 695 educator email addresses were taken out of the public data.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'Terms of use were published, every page says plainly that a listing can be wrong or out of date, and the security page now explains what happens if data ever leaks.',
+      },
+      {
+        kind: 'fixed',
+        text: 'Admin logins are capped across all addresses, admin sessions expire, and the rate limits count properly instead of losing writes.',
+      },
+      {
+        kind: 'listings',
+        text: 'The last week of the month more than doubled the site: 153 scholarships became 345. Almost all of the new ones are city awards, read one at a time against the organisation that funds them, across Calgary, Edmonton, Lethbridge, Red Deer, Medicine Hat, Grande Prairie and Airdrie.',
+      },
+      {
+        kind: 'new',
+        text: 'Airdrie and Grande Prairie got pages of their own, and province-wide and national awards now have the same kind of page the cities have.',
+      },
+      {
+        kind: 'better',
+        text: 'Every filter says how many listings are behind it before you click, and a city chip now takes you to that city instead of filtering where you stand.',
+      },
+      {
+        kind: 'better',
+        text: 'The quiz asks which school you go to, where the city has awards tied to one, and it forgets your answers when you close the tab.',
+      },
+      {
+        kind: 'better',
+        text: 'Search results lead with what an award is worth. 73 of them used to open on "Not open yet", which told you nothing.',
+      },
+      {
+        kind: 'better',
+        text: 'The emoji came off the category and program pages, the hub intros were cut to one sentence, and the chip rows stopped jumping between pages.',
+      },
+      {
+        kind: 'under-hood',
+        text: 'Changed pages are announced to search engines within minutes of a deploy, and a weekly check now reports which pages are actually indexed rather than assuming.',
+      },
     ],
   },
 
@@ -252,33 +580,114 @@ export const months: UpdateMonth[] = [
     start: '2026-09-01',
     summary: 'Seventeen new city pages, for St. Albert, Brooks, Spruce Grove, Leduc, Fort Saskatchewan, Chestermere, Beaumont, Lloydminster, Camrose, Cold Lake, Lacombe, Wetaskiwin, Fort McMurray, Grande Prairie, Sherwood Park, Okotoks and Cochrane, a much deeper Edmonton page, three more guides, the Trades and Tech hub back where it belongs, and a match quiz that asks more and returns more.',
     items: [
-      "Published a guide to nine discontinued awards on counsellor lists.",
-      "Added Cochrane awards, including the $5,000 Rotary U-START bursary.",
-      "Added Okotoks and 52 awards from its school handbooks.",
-      "Added 25 Edmonton school awards, including Eastglen's mathematics scholarship.",
-      "Fixed eligibility parsing that discarded grade and subject rules.",
-      "Added Sherwood Park and Strathcona County school awards.",
-      "Corrected Grande Prairie's hub and added Polytechnic entrance awards.",
-      "Added Fort McMurray, Wood Buffalo and 76 awards.",
-      "Added Wetaskiwin school, county and service-club awards.",
-      "Added Lacombe and 60 school, division and university awards.",
-      "Added Cold Lake, the Lakeland and 22 awards.",
-      "Added Camrose and 53 school, service-club and entrance awards.",
-      "Added 46 Lloydminster awards, including 32 sharing one application.",
-      "Added Chestermere school and Calgary-region awards.",
-      "Added Fort Saskatchewan and 21 Elk Island awards.",
-      "Added 16 awards for Leduc, Leduc County and Devon.",
-      "Separated Beaumont's nine awards from Leduc County's.",
-      "Added 30 Spruce Grove, Stony Plain and Parkland awards.",
-      "Added 46 St. Albert and Sturgeon County awards.",
-      "Added 26 Brooks and County of Newell awards.",
-      "Published Loran, chemistry-competition and volunteering guides.",
-      "Restored the Trades and Tech field hub.",
-      "Added two quiz questions and expanded results to 20.",
-      "Ranked matches by eligibility fit rather than listing detail.",
-      "Linked program field chips and fixed homepage city wrapping.",
-      "Corrected 149 search snippets and three outdated page titles.",
-      "Merged a duplicate award and blocked invalid categories.",
+      {
+        kind: 'new',
+        text: 'A new guide names nine scholarships that are still on Alberta counsellor lists and no longer exist. One is the Jeremy Dias Scholarship, whose charity went bankrupt in October 2024. Only one of the nine admits on its own page that it has closed, so a link that loads proves nothing.',
+      },
+      {
+        kind: 'listings',
+        text: 'Cochrane has a page, with the Rotary U-START bursary at $5,000 as the largest award in the town. Thirteen of its listings run through one printed application package at Cochrane High, and six existing Rocky View and Bow Valley awards now say they are open to Cochrane students too.',
+      },
+      {
+        kind: 'listings',
+        text: 'Okotoks has a page, and it arrives with 52 awards. Foothills Composite publishes a handbook naming every award it hands out, from a $100 diploma bonus to a $1,500 yearbook scholarship, which is a level of disclosure almost no other Alberta school matches.',
+      },
+      {
+        kind: 'listings',
+        text: 'Edmonton gained 25 school awards, the first the city page has carried from individual high schools rather than the two divisions. They include a $16,000 mathematics scholarship at Eastglen, seven awards at Jasper Place, and grade 10 and 11 awards at St. Oscar Romero, which almost nothing else in the directory is open to.',
+      },
+      {
+        kind: 'fixed',
+        text: 'A male-only award was matching every student in the quiz. The eligibility schema only accepted female, so the whole criteria object was thrown away on the one listing that did not fit, taking its grade and subject filters with it.',
+      },
+      {
+        kind: 'listings',
+        text: 'Sherwood Park and Strathcona County now have a page, built out of the two award lists their high schools publish in full. The five Elk Island division awards that were filed under Fort Saskatchewan are open to Sherwood Park students too, and now say so.',
+      },
+      {
+        kind: 'listings',
+        text: 'Grande Prairie finally has the page this changelog claimed it had back in April. Its 33 awards were sitting under the province-wide list, and the entrance awards at Northwestern Polytechnic have been added beside them.',
+      },
+      {
+        kind: 'listings',
+        text: 'Fort McMurray and Wood Buffalo now have 76 awards and a page of their own, most of them out of the Keyano College award book, alongside the Fort McMurray Public School District awards and the municipal youth citizenship award.',
+      },
+      {
+        kind: 'listings',
+        text: 'Wetaskiwin and Wetaskiwin County now have a page of their own, built out of the one application form that Wetaskiwin Composite High School uses for every award it hands out, plus the county bursaries and the service club money beside it.',
+      },
+      {
+        kind: 'listings',
+        text: 'Lacombe and Lacombe County now have 60 awards and a page of their own, out of the Lacombe Composite awards list, the Wolf Creek division awards and the entrance awards at Burman University.',
+      },
+      {
+        kind: 'listings',
+        text: 'Cold Lake and the Lakeland now have 22 awards and a page of their own, including three military scholarships for the families serving at 4 Wing.',
+      },
+      {
+        kind: 'listings',
+        text: 'Camrose and Camrose County now have 53 awards and a page of their own, out of the Camrose Composite handbook, the service clubs and the Augustana entrance awards.',
+      },
+      {
+        kind: 'listings',
+        text: 'Lloydminster on the Alberta side now has 46 awards and a page of their own, 32 of which share a single application and a single May 1 deadline.',
+      },
+      {
+        kind: 'listings',
+        text: 'Chestermere now has a page of its own, built on the three awards Chestermere High collects and the Calgary-region money that names the city.',
+      },
+      {
+        kind: 'listings',
+        text: 'Fort Saskatchewan and the Elk Island schools now have 21 awards and a page of their own, including two worth $5,000 that a thrift store pays for.',
+      },
+      {
+        kind: 'listings',
+        text: 'Leduc, Leduc County and Devon now have 16 awards and a page of their own, five of which close between now and the end of October.',
+      },
+      {
+        kind: 'listings',
+        text: 'Beaumont has been split out of the Leduc page into nine awards of its own, since Beaumont is a city rather than part of Leduc County and the county bursaries never applied to it.',
+      },
+      {
+        kind: 'listings',
+        text: 'Spruce Grove, Stony Plain and Parkland County now have 30 awards and a page of their own, out of the two Parkland high schools and the ag society.',
+      },
+      {
+        kind: 'listings',
+        text: 'St. Albert and Sturgeon County now have 46 awards and a page of their own, including the four scholarships the Humboldt Broncos families endowed.',
+      },
+      {
+        kind: 'listings',
+        text: 'Brooks and the County of Newell now have 26 awards and a page of their own, read one at a time out of the Brooks Composite scholarship handbook.',
+      },
+      {
+        kind: 'new',
+        text: 'Three new guides: the Loran Award, chemistry competitions across Canada, and how volunteering hours actually work in Alberta high schools.',
+      },
+      {
+        kind: 'new',
+        text: 'Trades and Tech is a field again, with a page of its own rather than a filter buried in a list.',
+      },
+      {
+        kind: 'better',
+        text: 'The match quiz asks two more questions it already knew how to use, and shows up to 20 matches instead of stopping at ten.',
+      },
+      {
+        kind: 'better',
+        text: 'Matches are ranked on what actually separates one award from another, not on how much detail a listing happens to carry.',
+      },
+      {
+        kind: 'better',
+        text: 'The field chips open the field from the programs side too, and the home page city row fits on one line again.',
+      },
+      {
+        kind: 'fixed',
+        text: '149 pages were opening their search result on a date nobody can act on, and three page titles were still promising 2026 when most deadlines are 2027.',
+      },
+      {
+        kind: 'fixed',
+        text: 'A listing that existed twice was merged, and the build now refuses to ship a category that does not exist.',
+      },
     ],
   },
 ]

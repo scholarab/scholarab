@@ -2,7 +2,7 @@
 export const prerender = false
 import { listCatalogue } from '../../lib/catalogue-store'
 import AdminShell from '../../components/admin/AdminShell'
-import '../../styles/admin.css'
+import '../../styles/global.css'
 
 const user = Astro.locals.user!
 const data = await listCatalogue('program')

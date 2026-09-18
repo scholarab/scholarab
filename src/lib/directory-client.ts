@@ -1,4 +1,3 @@
-import { onPageLoad } from './page-load';
 // Vanilla controller for the public directory pages (/scholarships, /programs).
 // The page ships fully server-rendered cards; this module only shows/hides and
 // reorders existing DOM nodes, replicating what the old React islands did.
@@ -59,7 +58,7 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
   getSavedIds(): number[];
   toggleSave(id: number): number[];
   saveLabel(name: string, saved: boolean): string;
-  /** Runs after cards are parsed on load or a cached Back visit; e.g. recompute day chips. */
+  /** Runs after cards are (re)parsed on every astro:page-load; e.g. recompute day chips. */
   onCardsParsed?(items: T[]): void;
   /** Cards shown before "Show more"; DIRECTORY_PAGE_SIZE unless a test says otherwise. */
   pageSize?: number;
@@ -93,19 +92,29 @@ function setLean(on: boolean) {
   }
 }
 
-interface SearchIndex { s: string[]; p: string[]; scholarship?: Record<string, string>; program?: Record<string, string> }
+interface SearchIndex { s: string[]; p: string[] }
 
-// Shared by exact card search and cross-directory suggestions.
+/**
+ * Every word in either directory, fetched once per page and only after a
+ * search has already come up empty.
+ *
+ * A directory page holds a slice of the corpus (see the facet hubs), so
+ * "nothing matches" on the page in front of you says nothing about the site.
+ * Until this existed the empty state offered "try clearing a filter" for a
+ * term whose sixteen matches were on another page, and logged the term as a
+ * content gap on the way past.
+ */
 let indexPromise: Promise<SearchIndex | null> | null = null;
 
 function loadSearchIndex(): Promise<SearchIndex | null> {
-  indexPromise ??= fetch('/search-index.json', { signal: AbortSignal.timeout(10000) })
+  indexPromise ??= fetch('/search-index.json')
     .then(r => (r.ok ? r.json() : null))
     .then((j: unknown) => {
       const i = j as SearchIndex | null;
       return i && Array.isArray(i.s) && Array.isArray(i.p) ? i : null;
     })
-    // The caller exposes failure without hiding listings.
+    // An unreachable index must not turn into a broken empty state; the
+    // caller falls back to the generic copy.
     .catch(() => null);
   return indexPromise;
 }
@@ -118,7 +127,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   let items: T[] = [];
   let state: S = { ...config.defaultState };
   let query = '';
-  let searchUnavailable = false;
   let visible: T[] = [];
   let emptyTimer: ReturnType<typeof setTimeout> | undefined;
   // The list reveals in steps rather than all at once: every match is still
@@ -132,14 +140,14 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     btn.classList.toggle('on', saved);
     btn.textContent = saved ? '★' : '☆';
     btn.setAttribute('aria-pressed', String(saved));
-    btn.setAttribute('aria-label', config.saveLabel(btn.closest('[data-dir-card]')?.querySelector('.sabl-name')?.textContent ?? '', saved));
+    btn.setAttribute('aria-label', config.saveLabel(btn.dataset.name ?? '', saved));
   }
 
   function paintSaved() {
     if (!root) return;
     const saved = new Set(config.getSavedIds());
     root.querySelectorAll<HTMLElement>('[data-dir-save]').forEach(btn => {
-      setSaveState(btn, saved.has(Number(btn.closest<HTMLElement>('[data-dir-card]')?.dataset.id)));
+      setSaveState(btn, saved.has(Number(btn.dataset.id)));
     });
   }
 
@@ -244,28 +252,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // Normalized the same way the cards' blobs were, so punctuation a student
     // omits (or adds) does not decide whether they find anything.
     const ql = normalizeSearchQuery(q);
-    const error = root.querySelector<HTMLElement>('[data-dir-search-error]');
-    if (error) error.hidden = !ql || !searchUnavailable;
-    if (ql && !searchUnavailable && items.some(it => !it.search)) {
-      const currentRoot = root;
-      root.setAttribute('aria-busy', 'true');
-      void loadSearchIndex().then(index => {
-        if (root !== currentRoot) return;
-        root.removeAttribute('aria-busy');
-        const rows = index?.[config.itemType];
-        if (!rows || items.some(it => !rows[it.id])) {
-          searchUnavailable = true;
-          render();
-          return;
-        }
-        for (const it of items) it.search = rows[it.id]!;
-        render();
-        restoreScroll();
-      });
-      return;
-    }
     const ctx = config.renderContext?.(items) as C;
-    const searched = ql && !searchUnavailable ? items.filter(it => it.search.includes(ql)) : items;
+    const searched = ql ? items.filter(it => it.search.includes(ql)) : items;
     visible = config.select(searched, state, ctx);
     // A shut section's cards come off the page entirely, so they do not eat
     // the "Show more" budget either: shutting CLOSED on a 24-card step buys
@@ -356,7 +344,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     const empty = root.querySelector<HTMLElement>('[data-dir-empty]');
     if (empty) empty.hidden = visible.length > 0;
-    if (searchUnavailable || visible.length > 0 || q.length < 3) resetFallback();
+    if (visible.length > 0 || q.length < 3) resetFallback();
     else resolveEmptySearch(q, ql, items.some(it => it.search.includes(ql)));
   }
 
@@ -444,7 +432,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     const save = t.closest<HTMLElement>('[data-dir-save]');
     if (save) {
-      const id = Number(save.closest<HTMLElement>('[data-dir-card]')?.dataset.id);
+      const id = Number(save.dataset.id);
       const next = config.toggleSave(id);
       const nowSaved = next.includes(id);
       setSaveState(save, nowSaved);
@@ -515,7 +503,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
   // Fires on first load and after every view-transition swap: re-grab nodes,
   // restore URL filter state, and re-derive anything clock- or storage-dependent.
-  onPageLoad(() => {
+  document.addEventListener('astro:page-load', () => {
     root = document.querySelector<HTMLElement>(rootSelector);
     if (!root) return;
     // The layout sets this in <head>; repeated here so a page built on another
@@ -536,7 +524,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // page as the wider search. Landing here with an empty box would drop the
     // query the student already typed.
     query = params.get('q') ?? '';
-    searchUnavailable = false;
     // A hand-edited ?show=abc or ?show=3 falls back to the first step.
     const showParam = Number(params.get('show'));
     shown = Number.isFinite(showParam) && showParam > pageSize ? Math.floor(showParam) : pageSize;
@@ -548,7 +535,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     config.onCardsParsed?.(items);
     paintSaved();
     render();
-    if (!query || items.every(it => it.search)) restoreScroll();
+    restoreScroll();
   });
 
   /** One-shot: put a reader back where they left this exact list. */

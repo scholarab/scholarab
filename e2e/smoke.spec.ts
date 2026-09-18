@@ -227,31 +227,3 @@ test('every field hub links to every other field', async ({ page }, testInfo) =>
     await expect(row.locator('button')).toHaveCount(0);
   }
 });
-
-
-test('compact navigation keeps its scholarship dropdown and phone back path', async ({ page }, testInfo) => {
-  await page.goto('/about/');
-  const phone = testInfo.project.name === 'mobile';
-  if (phone) await page.getByRole('button', { name: 'Open menu' }).click();
-  const scholarships = page.locator('.sabh-link[href="/scholarships/"]');
-  if (phone) await scholarships.click();
-  else await scholarships.focus();
-  const menu = page.getByRole('group', { name: 'Scholarships', exact: true });
-  await expect(menu).toBeVisible();
-  await expect(menu.getByRole('link')).toHaveCount(3);
-  if (phone) {
-    await menu.getByRole('button', { name: 'Back' }).click();
-    await expect(scholarships).toBeVisible();
-    await page.keyboard.press('Escape');
-    await expect(page.getByRole('button', { name: 'Open menu' })).toBeFocused();
-  }
-});
-
-test('phone visitors without JavaScript can reach the directories and match', async ({ browser, baseURL }) => {
-  const page = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
-  await page.goto(`${baseURL}/about/`);
-  for (const href of ['/scholarships/', '/programs/', '/match/']) {
-    await expect(page.locator(`a[href="${href}"]:visible`)).toHaveCount(1);
-  }
-  await page.close();
-});

@@ -46,10 +46,11 @@ const gaId = import.meta.env.PUBLIC_GA_ID ?? GA_MEASUREMENT_ID;
     >
       <div class="sab-consent-inner">
         <div class="sab-consent-copy">
-          <p id="sab-consent-title" class="sab-consent-title">Allow Google Analytics cookies?</p>
+          <p id="sab-consent-title" class="sab-consent-title">Can we count this visit with Google Analytics?</p>
           <p class="sab-consent-body">
-            Counts visits with a browser ID.
-            <a href="/privacy/">Privacy</a>
+            It sets a cookie and gives your browser an ID, which is how we tell a returning
+            visitor from a new one. Saying no changes nothing about the site.
+            <a href="/privacy/">What we collect</a>
           </p>
         </div>
         <div class="sab-consent-actions">
@@ -60,7 +61,6 @@ const gaId = import.meta.env.PUBLIC_GA_ID ?? GA_MEASUREMENT_ID;
     </div>
 
     <script>
-      import { onPageLoad } from '../../lib/page-load';
       import { readConsent, setConsent, analyticsAllowedHere, syncConsentReset } from '../../lib/consent.ts';
 
       const gaWindow = window as unknown as {
@@ -70,7 +70,8 @@ const gaId = import.meta.env.PUBLIC_GA_ID ?? GA_MEASUREMENT_ID;
       };
       let loaded = false;
 
-      // One consent transition and page-view path, including cached Back visits.
+      // One consent transition and one page-view path for both the banner and
+      // ClientRouter. Denial also disables a tag loaded on an earlier page.
       function applyChoice(choice: 'granted' | 'denied' | null) {
         if (!analyticsAllowedHere(location.hostname, navigator.webdriver, import.meta.env.MODE))
           choice = 'denied';
@@ -114,8 +115,9 @@ const gaId = import.meta.env.PUBLIC_GA_ID ?? GA_MEASUREMENT_ID;
         applyChoice(readConsent() === 'denied' ? 'denied' : choice);
       });
 
-      // Count once per document or restored Back visit.
-      onPageLoad(() => {
+      // Astro emits this on first load as well as navigation; calling it here
+      // too used to count a returning visitor's first page three times.
+      document.addEventListener('astro:page-load', () => {
         syncConsentReset(location.search);
         applyChoice(readConsent());
       });

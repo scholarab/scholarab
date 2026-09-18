@@ -37,7 +37,7 @@ it('generates both payloads together, preserves publication identity, and reject
     const runtime = read('src/data/runtime-catalogue.json');
     expect(runtime).toEqual({ scholarships: [{ id: 17, title: 'Award', active: false }],
       programs: [{ id: 29, name: 'Program', active: true, deadline: 'TBA' }] });
-    expect(read('src/data/quiz-payload.json').scholarships[0]).toMatchObject({ id: 17, title: 'Award' });
+    expect(read('src/data/quiz-payload.json').scholarships[0]).toMatchObject({ id: 17, audience: 'An audience' });
     const marker = read('public/publication.json');
     expect(marker.id).toBe('reviewed-request');
     expect(marker.catalogueHash).toMatch(/^[a-f0-9]{64}$/);

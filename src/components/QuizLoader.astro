@@ -1,6 +1,4 @@
 ---
-import '../styles/quiz.css';
-import '../styles/directory.css';
 import { QUIZ_QUESTIONS } from '../lib/quiz';
 
 interface Props { url: string }
@@ -45,25 +43,24 @@ const first = QUIZ_QUESTIONS[0]!;
 <script>
   import { h, render } from 'preact';
   import EligibilityQuiz from './EligibilityQuiz';
-  import { readQuizPayload } from '../lib/quiz-payload';
+  import type { quizPayload } from '../lib/quiz-payload';
 
-  (() => {
+  document.addEventListener('astro:page-load', () => {
     const host = document.querySelector<HTMLElement>('[data-quiz-url]');
     if (!host) return;
-    let pending = false;
-    let alive = true;
+    let alive = true, pending = false;
     async function load() {
       if (pending) return;
       pending = true;
       try {
         const res = await fetch(host!.dataset.quizUrl!);
         if (!res.ok) throw new Error('Unable to load the matching data');
-        const data = readQuizPayload(await res.json());
-        if (!alive) return;
-        render(h(EligibilityQuiz, data), host!);
+        const data = await res.json() as ReturnType<typeof quizPayload>;
+        if (data.version !== 1 || !Array.isArray(data.scholarships) || !Array.isArray(data.programs))
+          throw new Error('Please reload to get the latest quiz');
+        if (alive) render(h(EligibilityQuiz, data), host!);
       } catch (error) {
-        if (!alive) return;
-        render(h('div', { role: 'status' },
+        if (alive) render(h('div', { role: 'status' },
           h('p', null, (error as Error).message),
           h('button', { onClick: load }, 'Try again')), host!);
       } finally {
@@ -72,8 +69,10 @@ const first = QUIZ_QUESTIONS[0]!;
         document.querySelector('[data-quiz-placeholder]')?.remove();
       }
     }
-    window.addEventListener('pagehide', () => { alive = false; render(null, host!); });
-    window.addEventListener('pageshow', e => { if (e.persisted) { alive = true; void load(); } });
     void load();
-  })();
+    document.addEventListener('astro:before-swap', () => {
+      alive = false;
+      render(null, host);
+    }, { once: true });
+  });
 </script>

@@ -1,9 +1,6 @@
 import { test, expect } from '@playwright/test';
-import transport from '../src/data/quiz-payload.json' with { type: 'json' };
+import payload from '../src/data/quiz-payload.json' with { type: 'json' };
 import { QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, boardsForCity, schoolsForCity, boardQuestion, schoolQuestion } from '../src/lib/quiz';
-
-import { readQuizPayload } from '../src/lib/quiz-payload';
-const payload = readQuizPayload(transport);
 
 // Payload fault injection must reach Playwright rather than the service worker.
 test.use({ serviceWorkers: 'block' });
@@ -62,7 +59,7 @@ for (const failure of ['network', 'version', 'shape'] as const) {
       requests++;
       if (requests > 1) return route.continue();
       if (failure === 'network') return route.fulfill({ status: 503, body: 'Unavailable' });
-      return route.fulfill({ json: failure === 'version' ? { ...transport, version: 3 } : { version: 2 } });
+      return route.fulfill({ json: failure === 'version' ? { ...payload, version: 2 } : { version: 1 } });
     });
     await page.goto('/match/');
     await expect(page.getByRole('status')).toContainText(failure === 'network' ? 'Unable to load the matching data' : 'Please reload to get the latest quiz');
@@ -73,13 +70,13 @@ for (const failure of ['network', 'version', 'shape'] as const) {
   });
 }
 
-test('leaving cancels a pending answer and Back remounts the quiz', async ({ page }) => {
+test('client navigation cancels a pending answer and remounts the quiz', async ({ page }) => {
   await page.goto('/match/');
   await page.locator('.sabm-opt').first().waitFor();
   await page.evaluate(() => {
     (document.querySelector('.sabm-opt') as HTMLButtonElement).click();
-    // A cached document must not finish a pending transition while away.
-    window.dispatchEvent(new Event('pagehide'));
+    // The router announces departure before the fetch/swap; cleanup must happen here.
+    document.dispatchEvent(new Event('astro:before-swap'));
   });
   await page.waitForTimeout(400);
   const stored = await page.evaluate(key => JSON.parse(sessionStorage.getItem(key)!), QUIZ_STORAGE_KEY);
@@ -112,7 +109,7 @@ test('a concluded catalogue award is excluded even when its profile would otherw
   const grade = QUIZ_QUESTIONS.find(q => q.key === 'grade')!.opts.find(o => ended.eligibility?.grades.some(grade => String(grade) === o.value))!.value;
   const profile = { ...answers, grade, city: 'Other Alberta', average: '93', field: '', institution: '', board: '', school: '' };
   let concluded = false;
-  await page.route('**/quiz-payload*.json', route => route.fulfill({ json: { version: 2, scholarships: [{ ...ended, concluded }], programs: [] } }));
+  await page.route('**/quiz-payload*.json', route => route.fulfill({ json: { version: 1, scholarships: [{ ...ended, concluded }], programs: [] } }));
   await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ step: 8, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
   await page.goto('/match/');
   await expect(page.locator('.sabm-row-name')).toHaveText(ended.title);

@@ -23,10 +23,18 @@ const stats = [
 ];
 
 const features = [
-  { num: '01', tag: QUIZ_DURATION.toUpperCase(), title: 'Find matches', body: `Answer ${QUIZ_QUESTION_COUNT} questions. Check each provider's rules before applying.` },
-  { num: '02', tag: 'BY REGION', title: 'Browse local awards', body: 'Compare amounts, deadlines and who can apply.' },
-  { num: '03', tag: 'REMINDERS', title: 'Save deadlines', body: 'Bookmarks stay on the device. Email reminders are optional.' },
-  { num: '04', tag: 'PROGRAMS', title: 'Try something new', body: 'Find labs, contests and trades placements.' },
+  { num: '01', tag: QUIZ_DURATION.toUpperCase(), title: `Take the ${QUIZ_QUESTION_COUNT}-question match quiz`, body: 'Students answer questions about their grade, region, interests, and background. ScholarAB shows the scholarships they’re most likely to qualify for. No account required.' },
+  { num: '02', tag: 'REGION-AWARE', title: 'Browse by region and category', body: 'Scholarships are tagged by region (Medicine Hat, Calgary, Edmonton, Lethbridge, Red Deer, and Alberta-wide) so students only see what’s relevant to them.' },
+  { num: '03', tag: 'DEADLINE ALERTS', title: 'Save scholarships and get reminders', body: 'Students can bookmark scholarships and sign up for email reminders 30, 14, and 3 days before the deadline. No account required, just an email address.' },
+  { num: '04', tag: 'BEYOND AWARDS', title: 'Explore research programs', body: 'Beyond scholarships, ScholarAB lists paid and unpaid research placements, competitions, and trades apprenticeships for high school students across Canada.' },
+];
+
+// Zero-padded like every other ordinal on the site (the feature cards above,
+// /about's principles, the match result rows). Bare "1." was the odd one out.
+const steps = [
+  { num: '01', body: 'Post scholarab.ca on your classroom board or guidance office bulletin.' },
+  { num: '02', body: `Tell Grade 11 and 12 students to take the Match quiz; it takes ${QUIZ_DURATION} and finds scholarships they qualify for.` },
+  { num: '03', body: 'Remind students to sign up for deadline reminders so they don’t miss applications they’ve saved.' },
 ];
 
 const pageTitle = 'For Alberta Educators & Counsellors | ScholarAB';
@@ -68,10 +76,10 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
     <div class="sabp-header">
       <div class="sabe-hero">
         <div class="sab-kicker">FOR EDUCATORS</div>
-        <h1 class="sabe-h1">Help students find <em>scholarships.</em></h1>
+        <h1 class="sabe-h1">Help your students find scholarships they <em>actually</em> qualify for.</h1>
         <div class="sabe-hero-bottom">
           <p class="sabe-lede">
-            Free Alberta scholarships and programs for your students.
+            ScholarAB is a free, ad-free directory of Alberta scholarships and research programs built specifically for high school students. Share it with your class, post it in your guidance office, or send it directly to Grade 11 and 12 students.
           </p>
           <div class="sabe-stats">
             {stats.map(s => (
@@ -89,6 +97,7 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
     <div class="sabe-section">
       <div class="sabe-section-head">
         <h2 class="sabe-h2">What students can do</h2>
+        <span class="sabe-mono sabe-head-note">No accounts · no ads · nothing to install</span>
       </div>
       <div class="sabe-feature-grid">
         {features.map(f => (
@@ -104,6 +113,25 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
       </div>
     </div>
 
+    <!-- ============ HOW TO SHARE IT ============ -->
+    <div class="sabe-section">
+      <div class="sabe-share-grid">
+        <div>
+          <div class="sabe-mono sabe-share-kicker">THREE MINUTES, TOPS</div>
+          <h2 class="sabe-h2 sabe-share-h2">How to share it</h2>
+          <p class="sabe-share-lede">No sign-up forms, no school licences, no IT tickets. It's a public website; sharing the link is the whole job.</p>
+        </div>
+        <div class="sabe-steps">
+          {steps.map(st => (
+            <div class="sabe-step">
+              <div class="sabe-step-num">{st.num}</div>
+              <p class="sabe-step-body">{st.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
     <!-- ============ SHARE CTA ============ -->
     <div class="sabe-section sabe-cta-section" style="flex:1;">
       <div class="sabe-cta">
@@ -113,7 +141,7 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
           <a href="/scholarships/" class="sab-btn sabe-btn sabe-btn-solid">Browse scholarships <span class="sabe-btn-arrow">→</span></a>
           <a href="/match/" class="sab-btn sabe-btn sabe-btn-outline">Try the quiz</a>
         </div>
-        <p class="sabe-cta-contact">Share this link with your class. Questions? <!--email_off--><a href="mailto:contact.scholarab@gmail.com" class="sabe-cta-email">contact.scholarab@gmail.com</a><!--/email_off--></p>
+        <p class="sabe-cta-contact">Built by a high school student in Alberta. Questions or feedback? <!--email_off--><a href="mailto:contact.scholarab@gmail.com" class="sabe-cta-email">contact.scholarab@gmail.com</a><!--/email_off--></p>
       </div>
     </div>
 
@@ -154,6 +182,7 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
   .sabe-section { max-width: var(--sab-measure); margin: 0 auto; padding: 88px 48px 0; width: 100%; box-sizing: border-box; }
   .sabe-h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(38px, 4.5vw, 58px); letter-spacing: -0.01em; margin: 0; }
   .sabe-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; gap: 20px; }
+  .sabe-head-note { font-size: 13px; color: rgba(20, 25, 21, 0.68); }
 
   /* ── Feature cards ── */
   .sabe-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -173,6 +202,17 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
   .sabe-card-body { font-size: 15px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); }
 
   /* ── How to share ── */
+  .sabe-share-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: start; }
+  .sabe-share-kicker { font-size: 13px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 16px; }
+  .sabe-share-h2 { font-size: clamp(38px, 4.4vw, 56px); line-height: 1.05; }
+  .sabe-share-lede { font-size: 16px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); margin: 20px 0 0; }
+  .sabe-steps { border-top: 2px solid #141915; }
+  .sabe-step {
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 24px 0;
+    border-bottom: 1px solid rgba(20,25,21,0.14); align-items: start;
+  }
+  .sabe-step-num { font-family: 'Instrument Serif', serif; font-size: 28px; color: #0A6B4D; line-height: 1.1; }
+  .sabe-step-body { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.75); margin: 0; }
 
   /* ── Share CTA ── */
   .sabe-cta-section { padding-bottom: 110px; }
@@ -209,6 +249,7 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
     .sabe-section { padding: 56px 20px 0; }
     .sabe-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
     .sabe-feature-grid { grid-template-columns: 1fr; }
+    .sabe-share-grid { grid-template-columns: 1fr; gap: 36px; }
     .sabe-cta-section { padding-bottom: 90px; }
     .sabe-cta { padding: 48px 24px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
   }

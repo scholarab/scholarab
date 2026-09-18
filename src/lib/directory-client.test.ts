@@ -59,7 +59,7 @@ let initialized = false
 function setup() {
   mountFixture()
   if (initialized) {
-    window.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
+    document.dispatchEvent(new Event('astro:page-load'))
     return
   }
   initialized = true
@@ -101,7 +101,7 @@ function setup() {
     },
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),
   })
-  window.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
+  document.dispatchEvent(new Event('astro:page-load'))
 }
 
 const $ = (sel: string) => document.querySelector(sel) as HTMLElement
@@ -339,11 +339,11 @@ describe('initDirectory', () => {
   })
 
 
-  it('re-parses cards and restores URL filters on a return from browser cache', () => {
+  it('re-parses cards and restores URL filters on subsequent astro:page-load', () => {
     setup()
     click($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!)
     expect(visibleCardNames()).toHaveLength(2)
-    window.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
+    document.dispatchEvent(new Event('astro:page-load'))
     expect(visibleCardNames()).toHaveLength(2)
     expect($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!.classList.contains('on')).toBe(true)
   })
@@ -392,7 +392,7 @@ describe('grouped grids', () => {
         saveLabel: n => n,
       })
     }
-    window.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
+    document.dispatchEvent(new Event('astro:page-load'))
   }
 
   const layout = () =>

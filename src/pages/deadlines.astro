@@ -121,7 +121,10 @@ const months = [...byMonth.entries()]
 
 // The two tails. Both are real answers to "why isn't X on this page", so they
 // are on the page rather than left to be discovered as an absence.
-const undated = scholarships.filter(s => !s.deadline).length;
+const undated = scholarships
+  .filter(s => !s.deadline)
+  .map(s => ({ name: s.title, href: `/scholarships/${generateSlug(s.title)}/`, meta: s.amount || 'Varies' }))
+  .sort((a, b) => a.name.localeCompare(b.name));
 
 const rollingPrograms = programs.filter(
   p => programIsListed(p, today) && (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing'),
@@ -220,11 +223,16 @@ const breadcrumbJson = {
               </div>
               <ol class="sabcal-rows">
                 {m.items.map(r => (
-                  <li>
-                    <span>{dayOf(r.deadline)}</span>
-                    <a href={r.href}>{r.name}{r.kind === 'program' && <i>PROGRAM</i>}</a>
-                    <span>{r.meta}</span>
-                    <small data-open={r.open ? '' : undefined}>{r.state}</small>
+                  <li class="sabcal-row">
+                    <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
+                    <span class="sabcal-name">
+                      <a href={r.href}>{r.name}</a>
+                      {r.kind === 'program' && <span class="sabl-mono sabcal-tag">PROGRAM</span>}
+                    </span>
+                    <span class="sabcal-sub">
+                      <span class="sabcal-meta">{r.meta}</span>
+                      <span class:list={['sabl-mono', 'sabcal-state', r.open && 'is-open']}>{r.state}</span>
+                    </span>
                   </li>
                 ))}
               </ol>
@@ -232,10 +240,21 @@ const breadcrumbJson = {
           ))}
 
           <section class="sabcal-tail">
-            <h2 class="sabcal-h2">No date listed</h2>
+            <h2 class="sabcal-h2">Awards with no fixed deadline</h2>
             <p>
-              Dates are not listed for {undated} awards and {rollingPrograms} programs.
-              Find them in <a href="/scholarships/">scholarships</a> and <a href="/programs/">programs</a>.
+              {undated.length} listings have no date to file under a month; they run until the money
+              is gone, or the provider has never published one. They are worth a look early rather
+              than late.
+            </p>
+            <ul class="sabcal-undated">
+              {undated.map(u => (
+                <li><a href={u.href}>{u.name}</a> <span class="sabcal-meta">{u.meta}</span></li>
+              ))}
+            </ul>
+            <p>
+              A further {rollingPrograms} research programs are rolling or have not announced next
+              year's date yet. Those live on <a href="/programs/">the programs directory</a>, which
+              shows each one's status as it changes.
             </p>
           </section>
         </>
@@ -296,32 +315,33 @@ const breadcrumbJson = {
   .sabcal-month-count { font-size: 12px; letter-spacing: 0.08em; color: #6B7280; }
 
   .sabcal-rows { list-style: none; margin: 0; padding: 0; }
-  .sabcal-rows > li {
-    display: grid; grid-template-columns: 40px minmax(0, 1fr) auto auto;
+  .sabcal-row {
+    display: grid; grid-template-columns: 40px 1fr auto auto;
     gap: 8px 18px; align-items: baseline;
     padding: 13px 0; border-bottom: 1px solid #E5E0D5;
   }
-  .sabcal-rows > li > :first-child {
-    font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #6B7280; text-align: right;
-  }
-  .sabcal-rows a { color: #141915; text-decoration: none; font-size: 16px; line-height: 1.4; }
-  .sabcal-rows a:hover { text-decoration: underline; }
-  .sabcal-rows i {
-    font-family: 'IBM Plex Mono', monospace; font-style: normal;
+  /* A layout-free wrapper above 720px (meta and status stay grid columns);
+     phones turn it into one wrapping line. */
+  .sabcal-sub { display: contents; }
+  .sabcal-day { font-size: 15px; color: #6B7280; text-align: right; }
+  .sabcal-name a { color: #141915; text-decoration: none; font-size: 16px; line-height: 1.4; }
+  .sabcal-name a:hover { text-decoration: underline; }
+  .sabcal-tag {
     font-size: 10px; letter-spacing: 0.1em; color: #6B7280;
     border: 1px solid #E5E0D5; border-radius: 3px; padding: 1px 5px; margin-left: 8px;
     white-space: nowrap;
   }
-  .sabcal-rows > li > :nth-child(3) { font-size: 14px; color: #6B7280; white-space: nowrap; }
-  .sabcal-rows small {
-    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.07em;
-    color: #6B7280; text-transform: uppercase; white-space: nowrap;
-  }
-  .sabcal-rows [data-open] { color: #0B7A5A; }
+  .sabcal-meta { font-size: 14px; color: #6B7280; white-space: nowrap; }
+  .sabcal-state { font-size: 11px; letter-spacing: 0.07em; color: #6B7280; text-transform: uppercase; white-space: nowrap; }
+  .sabcal-state.is-open { color: #0B7A5A; }
 
   .sabcal-tail { padding-top: 56px; font-size: 16px; line-height: 1.65; color: #4B5563; }
   .sabcal-tail p { max-width: 62ch; }
   .sabcal-tail .sabcal-h2 { border-bottom: 2px solid #141915; padding-bottom: 8px; margin-bottom: 16px; }
+  .sabcal-undated { list-style: none; margin: 20px 0; padding: 0; }
+  .sabcal-undated li { padding: 9px 0; border-bottom: 1px solid #E5E0D5; display: flex; justify-content: space-between; gap: 18px; }
+  .sabcal-undated a { color: #141915; }
+
   .sabcal-empty { padding: 64px 0; color: #4B5563; }
 
   @media (max-width: 720px) {
@@ -332,10 +352,21 @@ const breadcrumbJson = {
     .sabcal-jump::-webkit-scrollbar { display: none; }
     .sabcal-chip { flex: 0 0 auto; min-height: 44px; align-items: center; }
 
-    .sabcal-rows > li { grid-template-columns: 30px minmax(0, 1fr) auto; gap: 4px 12px; padding: 11px 0; }
-    .sabcal-rows a { grid-column: 2 / 4; }
-    .sabcal-rows > li > :nth-child(3) { grid-column: 2; white-space: normal; min-width: 0; }
-    .sabcal-rows small { max-width: 130px; white-space: normal; text-align: right; }
-
+    /* Two columns, and the amount and status share the second row rather than
+       taking one line each: four stacked lines per award made a month of
+       twenty-two deadlines a very long scroll for very little information. */
+    /* Meta and status share one wrapping line: side by side when they fit,
+       the status dropping below when they do not. A plain 1fr column never
+       shrinks below its content, and a program's unwrapped eligibility line
+       ("Grades 9 to 12 (AMC 10 for ...") pushed the whole page 224px past a
+       320px screen. */
+    .sabcal-row { grid-template-columns: 30px minmax(0, 1fr); gap: 4px 12px; padding: 11px 0; }
+    .sabcal-sub {
+      grid-column: 2; display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: baseline; gap: 2px 12px;
+    }
+    .sabcal-meta { white-space: normal; min-width: 0; }
+    .sabcal-state { margin-left: auto; }
+    .sabcal-undated li { flex-direction: column; gap: 4px; }
   }
 </style>

@@ -1,4 +1,4 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 // Serve the checked local build under its allowed origin. Every request is
 // intercepted: no real analytics or production API receives test traffic.
@@ -21,34 +21,22 @@ test.beforeEach(async ({ page, baseURL }) => {
   });
 });
 
-async function recordCommands(page: Page) {
-  const commands: unknown[][] = [];
-  await page.exposeFunction('recordGaCommand', (args: unknown[]) => commands.push(args));
-  await page.addInitScript(() => {
-    const w = window as unknown as { dataLayer: unknown[][]; recordGaCommand: (args: unknown[]) => void };
-    w.dataLayer = [];
-    w.dataLayer.push = function (...items) {
-      items.forEach(args => w.recordGaCommand(Array.from(args)));
-      return Array.prototype.push.apply(this, items);
-    };
-  });
-  return commands;
-}
-
-test('returning consent sends one view per navigation and can be revoked', async ({ page }) => {
-  const commands = await recordCommands(page);
+test('returning consent sends one view per navigation and can be revoked without reloading', async ({ page }) => {
   let tagLoads = 0;
   page.on('request', request => { if (request.url().includes('googletagmanager.com/gtag/js')) tagLoads++; });
-  await page.addInitScript(() => { if (!localStorage.getItem('sa_consent')) localStorage.setItem('sa_consent', 'granted'); });
+  await page.addInitScript(() => localStorage.setItem('sa_consent', 'granted'));
   await page.goto('https://www.scholarab.ca/');
-  const views = () => commands.filter(args => args[0] === 'event' && args[1] === 'page_view').length;
+  const views = () => page.evaluate(() => {
+    const layer = (window as unknown as { dataLayer: IArguments[] }).dataLayer;
+    return layer.filter(args => args[0] === 'event' && args[1] === 'page_view').length;
+  });
   await expect.poll(views).toBe(1);
   await page.locator('footer a[href="/about/"]').first().click();
   await expect(page).toHaveURL('https://www.scholarab.ca/about/');
   await expect.poll(views).toBe(2);
-  expect(tagLoads).toBe(2);
+  expect(tagLoads).toBe(1);
 
-  // A fresh document drops the old tag before showing the reset choices.
+  // Request the documented reset through ClientRouter, preserving the loaded tag.
   await page.locator('footer a[href="/privacy/"]').first().evaluate(el => el.setAttribute('href', '/privacy/?ga=ask'));
   await page.locator('footer a[href="/privacy/?ga=ask"]').first().click();
   await expect(page.locator('#sab-consent')).toBeVisible();
@@ -58,15 +46,13 @@ test('returning consent sends one view per navigation and can be revoked', async
     const w = window as unknown as { __sabGaId: string; dataLayer: IArguments[]; [key: string]: unknown };
     return {
       disabled: w[`ga-disable-${w.__sabGaId}`],
-      denial: w.dataLayer.some(args => args[0] === 'consent' && args[1] === 'default'
+      denial: w.dataLayer.some(args => args[0] === 'consent' && args[1] === 'update'
         && (args[2] as { analytics_storage: string }).analytics_storage === 'denied'),
     };
   })).toEqual({ disabled: true, denial: true });
   await page.locator('footer a[href="/about/"]').first().click();
   await expect(page).toHaveURL('https://www.scholarab.ca/about/');
-  await page.waitForLoadState('load');
-  expect(views()).toBe(2);
-  expect(tagLoads).toBe(2);
+  expect(await views()).toBe(2);
 });
 
 test('a fresh visitor loads no tag until granting, and an opt-out still outranks a grant', async ({ page }) => {
@@ -80,23 +66,23 @@ test('a fresh visitor loads no tag until granting, and an opt-out still outranks
   await page.evaluate(() => localStorage.setItem('sa_no_track', '1'));
   await page.locator('footer a[href="/about/"]').first().click();
   await expect(page).toHaveURL('https://www.scholarab.ca/about/');
-  await expect.poll(() => page.evaluate(() => {
+  expect(await page.evaluate(() => {
     const w = window as unknown as { __sabGaId: string; [key: string]: unknown };
     return w[`ga-disable-${w.__sabGaId}`];
   })).toBe(true);
 });
 
 test('search text stays out of analytics page fields on load and Back', async ({ page }) => {
-  const commands = await recordCommands(page);
-  await page.addInitScript(() => { if (!localStorage.getItem('sa_consent')) localStorage.setItem('sa_consent', 'granted'); });
+  await page.addInitScript(() => localStorage.setItem('sa_consent', 'granted'));
   await page.goto('https://www.scholarab.ca/scholarships/?q=private-student-search');
   await page.locator('footer a[href="/about/"]').first().click();
   await expect(page).toHaveURL('https://www.scholarab.ca/about/');
   await page.goBack();
   await expect(page.locator('[data-dir-search]')).toHaveValue('private-student-search');
-  const fields = () => commands.flatMap(args => args.filter(v => v && typeof v === 'object' && 'page_location' in v)) as { page_location: string; page_path: string }[];
-  await expect.poll(() => fields().length).toBeGreaterThanOrEqual(4);
-  for (const field of fields()) {
+  const fields = await page.evaluate(() => (window as unknown as { dataLayer: IArguments[] }).dataLayer
+    .flatMap(args => Array.from(args).filter(v => v && typeof v === 'object' && 'page_location' in v)));
+  expect(fields.length).toBeGreaterThanOrEqual(4);
+  for (const field of fields) {
     expect(field.page_location).not.toMatch(/[?#]/);
     expect(field.page_path).not.toMatch(/[?#]/);
     expect(JSON.stringify(field)).not.toContain('private-student-search');

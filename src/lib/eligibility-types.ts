@@ -48,7 +48,25 @@ export const strictEligibilitySchema = eligibilitySchema.extend({
   apprenticeship:z.boolean().default(false),
 })
 
-export { EMPTY_ELIGIBILITY } from './eligibility-defaults';
+export const EMPTY_ELIGIBILITY: EligibilityCriteria = {
+  grades: [],
+  schoolBoards: [],
+  specificSchools: [],
+  targetInstitutions: [],
+  fields: [],
+  minAverage: null,
+  minAge: null,
+  maxAge: null,
+  genderRequired: null,
+  indigenousRequired: false,
+  bipocRequired: false,
+  financialNeed: false,
+  maxFamilyIncome: null,
+  fosterCare: false,
+  citizenship: 'any',
+  apprenticeship: false,
+  extracurriculars: [],
+}
 
 // Student's self-reported profile; never leaves the browser
 export type StudentProfile = {

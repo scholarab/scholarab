@@ -15,18 +15,26 @@ const principles: Principle[] = [
   {
     num: '01',
     title: 'No ads.',
-    body: 'Listings follow deadlines, not payments.',
+    body: 'Nothing on the site advertises to you. Listings are sorted by deadline.',
   },
   {
     num: '02',
+    // "No personal data" flat contradicts /privacy, which discloses an email,
+    // a salted IP hash and the text of dead-end searches. "Required" is the
+    // word that makes it true: none of it is asked for, the email is offered.
     title: 'No personal data required.',
-    body: 'No email needed to browse. Reminders need one. We never sell data. Bookmarks and quiz answers stay on your device. Google Analytics needs your consent.',
-    more: { href: '/privacy/', label: 'Privacy details.' },
+    // Kept deliberately in step with /privacy's table. That page discloses five
+    // things: the email, what the reminder is for, a salted hash of the IP for
+    // rate limiting, the text of searches that find nothing, and anonymous
+    // counts. "The only thing we ever store is an email address" contradicted
+    // three of those, so this summary now names them and links to the full list.
+    body: 'No name, school, or grades, ever. The only personal information we hold is an email address, and only if you ask for a deadline reminder; delete it any time, in one click. Bookmarks and quiz answers stay on your device and never leave it. Beyond that we keep anonymous counts of what gets used, and the text of searches that find nothing, so we know what to add next. No advertising, no data brokers, and nothing stored that points back to a person. The one thing that would set a cookie is Google Analytics, and it only runs if you press Allow on the banner asking; say no, or ignore it, and it never loads.',
+    more: { href: '/privacy/', label: 'The full list is on the privacy page.' },
   },
   {
     num: '03',
     title: 'No account required.',
-    body: 'Browse free on any device.',
+    body: 'Everything is public and works on any device, instantly.',
   },
 ];
 const title = 'About ScholarAB | Free Alberta Scholarship Directory';
@@ -64,6 +72,7 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
     <div class="saba-body" style="flex:1;">
       <!-- Title -->
       <h1 class="saba-h1">Built by a student,<br /><span class="saba-h1-accent">for students.</span></h1>
+      <p class="saba-lede">There was a problem. Now it's fixed.</p>
 
       <!-- Problem / fix -->
       <div class="saba-cols">
@@ -73,7 +82,9 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
             <span>THE PROBLEM</span>
           </div>
           <p class="saba-col-body">
-            Alberta scholarships were scattered across school boards and websites, with no clear way to compare deadlines.
+            Scholarship information in Alberta was scattered across dozens of websites and school bulletin
+            boards. There was no single place to find what was open, what was closing, or what you actually
+            qualified for.
           </p>
         </div>
         <div class="saba-col">
@@ -82,7 +93,9 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
             <span>THE FIX</span>
           </div>
           <p class="saba-col-body">
-            ScholarAB brings them together. Each listing is written from the provider's page and links back to it.
+            ScholarAB is a free scholarship directory for Alberta high school students. Every listing is
+            written from the provider's own page and links back to it. Nothing is scraped or
+            auto-generated.
           </p>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 import { programIsListed } from '../lib/status';
+import { SCHOLARSHIP_FACETS, facetForCategory } from '../lib/facets';
 import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
 
 const scholarships = await loadScholarships();
@@ -52,6 +53,47 @@ const anyClosingThisWeek = closingSoon.some(
 );
 const closingHeading = anyClosingThisWeek ? 'Closing this week' : 'Next deadlines';
 const closingEyebrow = anyClosingThisWeek ? 'TIME-SENSITIVE' : 'UPCOMING';
+
+// Categories: real counts from the data, top 8 tracks
+const categoryCounts = new Map<string, number>();
+for (const s of scholarships) {
+  if (s.category) categoryCounts.set(s.category, (categoryCounts.get(s.category) ?? 0) + 1);
+}
+const CATEGORY_DESCS: Record<string, string> = {
+  'Academic':   'Merit, entrance, and general academic awards.',
+  'Community':  'Volunteering hours that actually pay off.',
+  'Arts':       'Portfolios, performances, film, and writing.',
+  'STEM':       'Science fairs, labs, and research awards.',
+  'Trades':     'Apprenticeships, RAP, and skilled-trade awards.',
+  'Indigenous': 'Awards for First Nations, Métis, and Inuit students.',
+  'Sports':     'For athletes at every level, not just varsity.',
+  'General':    'Open eligibility, no niche required.',
+};
+// Each card points at its hub where one exists. Academic (56 listings) and
+// General deliberately have none -- a hub that big would compete with
+// /scholarships for the same queries -- so those keep the query-string filter,
+// which is still a working page, just not a landing one.
+const categories = [...categoryCounts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 8)
+  .map(([name, count]) => {
+    const facet = facetForCategory(name, SCHOLARSHIP_FACETS);
+    return {
+      name,
+      count,
+      desc: CATEGORY_DESCS[name] ?? 'Awards for Alberta high school students.',
+      href: facet ? `/scholarships/${facet.slug}/` : `/scholarships/?category=${encodeURIComponent(name)}`,
+    };
+  });
+
+// The homepage has never linked into geo content, which is the half of the
+// directory the city queries are looking for. Counts come from the data so a
+// card can't advertise a number the hub doesn't show.
+const cityFacets = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region').map(f => ({
+  slug: f.slug,
+  label: f.label,
+  count: scholarships.filter(s => s.region === f.value).length,
+}));
 
 // Seed the same grade/city/field answers consumed by the legacy quiz.
 const legacyLabels: Record<string, string> = {
@@ -120,15 +162,16 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     <div class="sab-hero">
       <!-- hero body -->
       <div class="sab-container sab-hero-body">
+        <div class="sab-kicker">BUILT BY A STUDENT, FOR STUDENTS</div>
 
         <h1 class="sab-h1">
-          Alberta student <em>opportunities.</em>
+          Alberta's student opportunities, in <em>one</em> directory.
         </h1>
 
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
             <p>
-              Scholarships and programs, sorted by deadline.
+              ScholarAB tracks scholarships and research programs for Alberta high school students.<span class="sab-hero-p-tail"> Finally one place with all the information.</span>
             </p>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
@@ -187,14 +230,46 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       </div>
     )}
 
+    <!-- ============ BROWSE BY CATEGORY ============ -->
+    <div class="sab-cat-band">
+      <div class="sab-container sab-cats">
+        <div class="sab-section-head">
+          <h2 class="sab-h2">Start where you are</h2>
+          <span class="sab-mono sab-cats-meta">{scholarshipCount} scholarships · {categories.length} tracks</span>
+        </div>
+        <div class="sab-cat-grid">
+          {categories.map(c => (
+            <a href={c.href} class="sab-cat-card">
+              <div class="sab-cat-top">
+                <span class="sab-cat-name">{c.name}</span>
+                <span class="sab-cat-count sab-mono">{c.count}</span>
+              </div>
+              <div class="sab-cat-desc">{c.desc}</div>
+            </a>
+          ))}
+        </div>
+
+        <div class="sab-city-row">
+          <span class="sab-mono sab-city-label">OR BY CITY</span>
+          <div class="sab-city-chips">
+            {cityFacets.map(c => (
+              <a href={`/scholarships/${c.slug}/`} class="sab-city-chip">
+                {c.label}<span class="sab-mono sab-city-count">{c.count}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ============ MATCH TEASER ============ -->
     <div class="sab-container sab-match">
       <div class="sab-match-grid">
         <div>
-
-          <h2 class="sab-h2 sab-match-h2">Find your match.</h2>
+          <div class="sab-mono sab-match-eyebrow">MATCH · START WITH THREE</div>
+          <h2 class="sab-h2 sab-match-h2">Tell us three things. We'll shortlist for you.</h2>
           <p class="sab-match-copy">
-            Pick three answers to start. They stay on your device.
+            Pick your grade, region, and academic focus. Continue the quiz to explore scholarships and programs. Everything stays in your browser, with no account or email needed.
           </p>
         </div>
         <div class="sab-match-card" id="match-teaser" data-quiz-variant="legacy">
@@ -220,7 +295,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 </Layout>
 
 <script>
-  import { onPageLoad } from '../lib/page-load';
   import { todayDate as albertaToday } from '../lib/calendar';
   import { QUIZ_STORAGE_KEY } from '../lib/quiz';
   import { sendEvent } from '../lib/events';
@@ -262,7 +336,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     }
   }
 
-  onPageLoad(updateClosingSoon);
+  updateClosingSoon();
+  document.addEventListener('astro:page-load', updateClosingSoon);
 
   // ── Hero amount count-up (kept from previous hero; final value is server-rendered) ──
   function animateHeroAmount() {
@@ -293,7 +368,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     requestAnimationFrame(tick);
   }
 
-  onPageLoad(animateHeroAmount);
+  animateHeroAmount();
+  document.addEventListener('astro:page-load', animateHeroAmount);
 
   // ── Match teaser: local chip picks, CTA goes to the real quiz ──
   function initMatchTeaser() {
@@ -346,7 +422,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     update();
   }
 
-  onPageLoad(initMatchTeaser);
+  initMatchTeaser();
+  document.addEventListener('astro:page-load', initMatchTeaser);
 </script>
 
 <style is:global>
@@ -479,6 +556,24 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #FBF8F2; }
 
   /* ── Categories ── */
+  .sab-cat-band { background: #F1EDE3; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
+  .sab-cats { padding-top: 88px; padding-bottom: 88px; }
+  .sab-cats .sab-section-head { margin-bottom: 44px; }
+  .sab-cats-meta { font-size: 13px; color: rgba(20, 25, 21, 0.68); white-space: nowrap; }
+  .sab-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sab-cat-card {
+    display: block; background: #FBF8F2; border: 1.5px solid rgba(20,25,21,0.85);
+    border-radius: 14px; padding: 24px 22px; color: #141915; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .sab-cat-card:hover {
+    transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #0E8C64;
+    border-color: #0A6B4D; color: #141915;
+  }
+  .sab-cat-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .sab-cat-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .sab-cat-count { font-size: 12px; color: rgba(20, 25, 21, 0.68); }
+  .sab-cat-desc { font-size: 13.5px; color: rgba(20, 25, 21, 0.65); margin-top: 8px; line-height: 1.45; }
 
   /* City row: a quieter chip than the category cards on purpose. Cities are a
      second axis through the same listings, not eight more tracks.
@@ -488,9 +583,21 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
      row, which reads as a mistake rather than as a wrap. 12 and 8 bring it to
      1053 with 31px spare. It still wraps, and has to below about 1100px; a
      ninth scope would need re-measuring rather than eyeballing. */
+  .sab-city-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
   /* The chips moved into their own box so the phone layout can put the label
      on a line of its own; on a desktop it stays one row, so this box has to
      carry the wrapping and the gap the row used to. */
+  .sab-city-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+  .sab-city-label { font-size: 11px; letter-spacing: 0.12em; color: rgba(20, 25, 21, 0.68); margin-right: 4px; }
+  .sab-city-chip {
+    display: inline-flex; align-items: baseline; gap: 8px;
+    border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+    padding: 7px 12px; font-size: 14px; font-weight: 600;
+    color: #141915; text-decoration: none; background: #FBF8F2;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sab-city-chip:hover { border-color: #0A6B4D; box-shadow: 2px 2px 0 #0E8C64; color: #141915; }
+  .sab-city-count { font-size: 11px; color: rgba(20, 25, 21, 0.68); }
 
   /* ── Match teaser ── */
   .sab-match { padding-top: 96px; padding-bottom: 96px; }
@@ -543,6 +650,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   /* ── Motion safety ── */
   @media (prefers-reduced-motion: reduce) {
     .sab-h1 { animation: none; }
+    .sab-cat-card, .sab-cat-card:hover { transform: none; transition: none; }
     /* keep the colour/shadow feedback, drop the movement */
     .sab-match-cta, .sab-match-opt,
     .sab-match-cta:hover, .sab-match-opt:hover,
@@ -577,8 +685,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
        started 145px in while every other chip began at the margin: the row
        read as a mistake rather than as a list. Given its own line, the way
        the directory's chip rows label themselves. */
+    .sab-city-row { display: block; }
+    .sab-city-label { display: block; margin: 0 0 8px; }
+    .sab-city-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     /* Both came out under the 44px touch minimum: the city chips at 38 and
        the underlined "View all" link at 28. */
+    .sab-city-chip { min-height: 44px; align-items: center; }
     .sab-view-all { display: inline-flex; align-items: center; min-height: 44px; }
     .sab-kicker { display: none; }
     .sab-hero-p-tail { display: none; }
@@ -618,6 +730,15 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; white-space: nowrap; }
     .sab-row-chip { grid-column: 1 / -1; justify-self: start; margin-top: 4px; font-size: 11px; padding: 6px 12px; }
 
+    .sab-cats { padding-top: 32px; padding-bottom: 32px; }
+    .sab-cats .sab-section-head { margin-bottom: 22px; }
+    .sab-cats-meta { font-size: 11.5px; }
+    .sab-cat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .sab-cat-card { padding: 16px 14px; min-height: 44px; }
+    .sab-cat-name { font-size: 15px; }
+    .sab-cat-desc { font-size: 12.5px; margin-top: 6px; }
+    .sab-cat-top { gap: 6px; }
+    .sab-cat-count { font-size: 11.5px; }
 
     .sab-match { padding-top: 34px; padding-bottom: 40px; }
     .sab-match-grid { grid-template-columns: 1fr; gap: 22px; }
@@ -634,5 +755,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   /* Two-up survives 390 and 360; the two-word track names still fit. Below
      that they don't. */
   @media (max-width: 359px) {
+    .sab-cat-grid { grid-template-columns: 1fr; }
   }
 </style>

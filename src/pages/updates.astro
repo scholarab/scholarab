@@ -5,6 +5,8 @@ import SabFooter from '../components/sab/SabFooter.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
 import {
   months,
+  KIND_LABELS,
+  KIND_COLORS,
   PROJECT_START,
 } from '../lib/updates';
 import { webPageJson } from '../lib/ld';
@@ -54,9 +56,10 @@ const startLabel = longDate(PROJECT_START);
     <div class="sabp-header">
       <div class="sabu-hero">
         <div class="sab-kicker">UPDATE LOG</div>
-        <h1 class="sabu-h1">What <em>changed.</em></h1>
+        <h1 class="sabu-h1">Everything that has <em>changed</em>.</h1>
         <p class="sabu-lede">
-          Updates since {startLabel}.
+          ScholarAB is built in the open. This is what has changed since {startLabel}, month by
+          month, in plain English.
         </p>
         <div class="sabu-stats">
           <div class="sabu-stat">
@@ -111,7 +114,13 @@ const startLabel = longDate(PROJECT_START);
             <ul class="sabu-list">
               {month.items.map(item => (
                 <li class="sabu-item">
-                  <span class="sabu-item-text">{item}</span>
+                  <span
+                    class="sabu-mono sabu-tag"
+                    style={`color:${KIND_COLORS[item.kind]};border-color:${KIND_COLORS[item.kind]};`}
+                  >
+                    {KIND_LABELS[item.kind]}
+                  </span>
+                  <span class="sabu-item-text">{item.text}</span>
                 </li>
               ))}
             </ul>
@@ -207,7 +216,15 @@ const startLabel = longDate(PROJECT_START);
   }
 
   .sabu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
-  .sabu-item { display: block; }
+  /* Fixed-width tag column so every line of text starts on the same edge; the
+     pill itself hugs its label rather than stretching to fill the column. */
+  .sabu-item { display: grid; grid-template-columns: 118px 1fr; gap: 16px; align-items: start; }
+  .sabu-tag {
+    justify-self: start;
+    font-size: 11px; letter-spacing: 0.07em; line-height: 1;
+    border: 1.5px solid; border-radius: 100px; padding: 5px 9px;
+    white-space: nowrap; margin-top: 3px;
+  }
   .sabu-item-text { font-size: 15px; line-height: 1.62; color: rgba(20, 25, 21, 0.72); }
 
   @media (max-width: 900px) {
@@ -222,5 +239,7 @@ const startLabel = longDate(PROJECT_START);
     /* Two across on a phone, whatever the shape, so the strip stays one row. */
     .sabu-shot-wide, .sabu-shot-tall { flex: 1 1 calc(50% - 8px); max-width: calc(50% - 8px); }
     .sabu-month-card { padding: 24px 22px; }
+    .sabu-item { grid-template-columns: 1fr; gap: 7px; }
+    .sabu-tag { justify-self: start; text-align: left; }
   }
 </style>

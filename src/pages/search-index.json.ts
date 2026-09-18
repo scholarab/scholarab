@@ -7,7 +7,19 @@ import {
   searchTokens,
 } from '../lib/search-text';
 
-// Exact card search and cross-directory suggestions, requested on first search.
+/**
+ * Every word either directory can be searched by, as two sorted token lists.
+ *
+ * This exists so a search that comes up empty can tell the difference between
+ * "we do not have this" and "we have it, just not on the page you are
+ * standing on". A facet page holds a slice of the corpus, so /scholarships/
+ * calgary searching "nursing" saw nothing and reported a content gap while
+ * sixteen nursing awards sat one page away.
+ *
+ * Tokens rather than the text they came from: the blobs run to 126KB gzipped
+ * and dedupe down to 20KB, and a token list answers the only question asked
+ * of it. Fetched lazily, once, and only after a search has already failed.
+ */
 export const GET: APIRoute = async () => {
   const [scholarships, programs] = await Promise.all([
     loadScholarships().then(enrichScholarships),
@@ -23,15 +35,13 @@ export const GET: APIRoute = async () => {
   const body = JSON.stringify({
     s: collect(scholarships.map(scholarshipSearchBlob)),
     p: collect(programs.map(programSearchBlob)),
-    scholarship: Object.fromEntries(scholarships.map(s => [s.id, scholarshipSearchBlob(s)])),
-    program: Object.fromEntries(programs.map(p => [p.id, programSearchBlob(p)])),
   });
 
   return new Response(body, {
     headers: {
       'content-type': 'application/json; charset=utf-8',
-      // Card IDs and their search text must belong to the current catalogue.
-      'cache-control': 'public, max-age=0, must-revalidate',
+      // Rebuilt on every deploy, and a stale token list only softens a nudge.
+      'cache-control': 'public, max-age=3600',
     },
   });
 };
