@@ -1,3 +1,6 @@
+@import './quiz-buttons.css';
+
+[data-sv-wrap], [data-sv-wrap] .sabl-card { height: 100%; }
 
 .sabs-toggle {
   display: flex; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 100px;
