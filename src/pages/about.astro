@@ -76,11 +76,13 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
       <!-- The story, in Ilia's words (2026-09-18) -->
       <div class="saba-paper-wrap">
       <section class="saba-story saba-paper" id="story">
+        <p class="saba-paper-right"><time datetime="2026-09-18">September 18, 2026</time></p>
         <p>During my first week of Grade 10, I was signing up for dual credit courses when the coordinator mentioned that they could strengthen my résumé and help with scholarship applications. He told me about a friend’s son who had covered his university tuition through scholarships that hardly anyone applied for.</p>
         <p>I remembered that conversation because I wanted to go to university too, and I knew I’d need scholarships myself.</p>
         <p>At the start of Grade 11, I began searching for scholarships myself. The information was scattered across different websites, and a lot of them wanted me to create an account and fill out registration forms. That got tiring. I just wanted to see which scholarships I could apply for without signing up for so many sites.</p>
         <p>In March 2026, I started working on the first version of ScholarAB. I made it free, with no ads and no account required, because those were the things I wanted when I first started searching.</p>
         <p>I’m a high school student from Medicine Hat, and this project grew out of my own experience trying to find scholarships. I figured other students were running into the same problems, and I wanted to make that search easier.</p>
+        <p class="saba-paper-right saba-paper-sign">I.I.</p>
       </section>
       </div>
 
@@ -175,6 +177,10 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   }
   .saba-paper p { margin: 0 0 1lh; }
   .saba-paper p:last-child { margin-bottom: 0; }
+  /* The date on the first rule and the initials under the last paragraph,
+     right-aligned like a signed letter; each keeps the one-rule gap. */
+  .saba-paper-right { text-align: right; }
+  .saba-paper-sign { font-size: 1.15em; }
   .saba-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
 
   .saba-card {
