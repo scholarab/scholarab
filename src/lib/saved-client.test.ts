@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { initSaved } from './saved-client'
+import { savedPayload } from './saved-payload'
 
 let savedSch: number[] = []
 let savedPrg: number[] = []
@@ -16,7 +17,8 @@ vi.mock('./tracker.ts', () => ({
     return savedPrg
   }),
 }))
-vi.mock('./utils.ts', () => ({
+vi.mock('./utils.ts', async importOriginal => ({
+  ...await importOriginal<typeof import('./utils.ts')>(),
   showToast: vi.fn(),
   prefersReducedMotion: () => true, // makes the remove flow synchronous
   getToday: () => {
@@ -34,11 +36,11 @@ import { downloadICS } from './ics.ts'
 function mount() {
   document.body.innerHTML = `
     <div id="sab-saved">
-      <script type="application/json" data-sv-items>${JSON.stringify([
-        { type: 'scholarship', id: 1, name: 'Big Award', deadline: '2026-05-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/big-award/' },
-        { type: 'scholarship', id: 2, name: 'Closed Award', deadline: '2026-01-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/closed-award/' },
-        { type: 'program', id: 7, name: 'Summer Lab', deadline: '2026-06-15', url: 'https://y.example', href: '/programs/summer-lab/' },
-      ])}</script>
+      <script type="application/json" data-sv-items>${JSON.stringify(savedPayload([
+        { type: 'scholarship', id: 1, name: 'Big Award', deadline: '2026-05-01', amount: '$1,000', url: 'https://x.example' },
+        { type: 'scholarship', id: 2, name: 'Closed Award', deadline: '2026-01-01', amount: '$1,000', url: 'https://x.example' },
+        { type: 'program', id: 7, name: 'Summer Lab', deadline: '2026-06-15', url: 'https://y.example' },
+      ]))}</script>
       <div class="sabl-page" data-sv-skeleton>skeleton</div>
       <div class="sabl-page" data-sv-content hidden>
         <p data-sv-count></p>
@@ -197,9 +199,9 @@ describe('initSaved', () => {
     mount()
     // Added here rather than to the shared fixture, so the other tests keep
     // counting exactly the cards they were written against.
-    $('[data-sv-items]').textContent = JSON.stringify([
-      { type: 'scholarship', id: 3, name: 'Undated Award', deadline: null, url: 'https://x.example', href: '/scholarships/undated-award/' },
-    ])
+    $('[data-sv-items]').textContent = JSON.stringify(savedPayload([
+      { type: 'scholarship', id: 3, name: 'Undated Award', deadline: null, url: 'https://x.example' },
+    ]))
     window.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
     click($('[data-sv-view="calendar"]'))
     expect($('[data-sv-cal]').hidden).toBe(false)
