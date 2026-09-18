@@ -164,9 +164,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       <div class="sab-container sab-hero-body">
         <div class="sab-kicker">BUILT BY A STUDENT, FOR STUDENTS</div>
 
-        <h1 class="sab-h1">
-          Making scholarships and programs easier to find for Alberta students.
-        </h1>
+        <h1 class="sab-h1"><span class="sab-h1-l sab-h1-l1">Making scholarships and programs</span> <span class="sab-h1-l sab-h1-l2">easier to find for Alberta students.</span></h1>
 
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
@@ -484,21 +482,29 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     width: 100%; box-sizing: border-box;
   }
 
+  /* Two fixed lines on desktop (2026-09-18). With three, the gap at the left
+     edge changed from line to line with whichever words opened it: "p" hung
+     over "f" while "M" sat well clear of "p", so identical leading read as
+     sloppy. Two lines have one gap. Both lines are nearly the same length
+     (12.96em and 12.68em of Big Shoulders), so the size is the width of
+     the hero divided by the first line: the block fills the row at any
+     desktop window instead of wrapping at some widths and not others.
+     Line height 1.1 leaves 0.08em between descenders and the ascenders
+     below. Tracking 0 is the face's designed spacing, the word space trims
+     0.03em because a condensed face's default space reads as a gap, and each
+     line is pulled left by its first letter's side-bearing (M 0.043em, e
+     0.0355em) so both stems sit exactly on the kicker's and paragraph's
+     edge. */
+  .sab-hero-body { container-type: inline-size; }
   .sab-h1 {
     font-family: var(--font-display); font-weight: 400;
-    /* Spacing from the font's own metrics (2026-09-18): caps and ascenders
-       reach 0.80em, g/p/y descend 0.21em, so 1.1 leaves a clear 0.08em
-       between one line's descenders and the next line's ascenders (1.06 left
-       0.04 and they nearly touched). Tracking 0 is the face's designed
-       spacing; negative tracking crowded the heavy weight's small counters.
-       The word space trims 0.03em because a condensed face's default space
-       reads as a gap. The -0.035em margin hangs M's side-bearing so the
-       stems line up with the kicker and the paragraph below. 7.2vw keeps
-       two lines at 1920. */
-    font-size: clamp(42px, 7.2vw, 168px); line-height: 1.1; letter-spacing: 0; word-spacing: -0.03em;
-    margin: 0 0 0 -0.035em; text-wrap: balance;
+    font-size: min(168px, calc(100cqi / 13)); line-height: 1.1; letter-spacing: 0; word-spacing: -0.03em;
+    margin: 0;
     animation: sab-rise 0.7s ease both;
   }
+  .sab-h1-l { display: block; white-space: nowrap; }
+  .sab-h1-l1 { margin-left: -0.043em; }
+  .sab-h1-l2 { margin-left: -0.0355em; }
 
   .sab-hero-bottom {
     display: flex; align-items: flex-end; justify-content: space-between;
@@ -685,7 +691,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-hero-body { padding-top: 22px; }
     /* 44px at 390, 41 at 360, 48 at a Pro Max; where the closing list
        clears one more row above the fold. */
-    .sab-h1 { font-size: clamp(38px, 11.5vw, 48px); }
+    /* Phones wrap naturally; the lines go back inline and only the first
+       letter's side-bearing is hung. */
+    .sab-h1 { font-size: clamp(38px, 11.5vw, 48px); margin-left: -0.043em; text-wrap: balance; }
+    .sab-h1-l { display: inline; white-space: normal; }
+    .sab-h1-l1, .sab-h1-l2 { margin-left: 0; }
     .sab-hero-bottom { flex-direction: column; align-items: stretch; gap: 0; margin-top: 16px; padding-bottom: 20px; }
     .sab-hero-copy { max-width: none; }
     .sab-hero-copy p { font-size: 14.5px; line-height: 1.5; margin: 0 0 16px; }
