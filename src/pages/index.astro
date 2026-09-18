@@ -451,7 +451,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   }
   #sab-home ::selection { background: #2FD3A0; color: #08120E; }
   .sab-mono { font-family: var(--font-label); }
-  .sab-container { max-width: var(--sab-measure); margin: 0 auto; width: 100%; box-sizing: border-box; padding-left: 48px; padding-right: 48px; }
+  /* Full window width with the header's own gutter, so every section lines
+     up with the logo and nothing sits in a centred column with bare margins
+     either side (Ilia, 2026-09-18). */
+  .sab-container { width: 100%; box-sizing: border-box; padding-left: clamp(20px, 4vw, 56px); padding-right: clamp(20px, 4vw, 56px); }
 
   @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes sab-pop { 0% { transform: scale(0.94); } 60% { transform: scale(1.05); } 100% { transform: scale(1); } }
@@ -483,8 +486,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
   .sab-h1 {
     font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(42px, 8.2vw, 96px); line-height: 0.98; letter-spacing: -0.015em;
-    margin: 0; max-width: 1050px; text-wrap: balance;
+    font-size: clamp(42px, 7.4vw, 168px); line-height: 1.06; letter-spacing: -0.015em;
+    margin: 0; text-wrap: balance;
     animation: sab-rise 0.7s ease both;
   }
 
