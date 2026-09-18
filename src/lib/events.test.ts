@@ -122,7 +122,7 @@ describe('sendEventAfterDwell', () => {
   it('does not send if the user navigates away first (view transition)', () => {
     sendEventAfterDwell('detail_view', 'scholarship', 42, 2500)
     vi.advanceTimersByTime(1000)
-    document.dispatchEvent(new Event('astro:before-preparation'))
+    window.dispatchEvent(new Event('pagehide'))
     vi.advanceTimersByTime(5000)
     expect(beaconCalls).toHaveLength(0)
   })

@@ -70,13 +70,13 @@ for (const failure of ['network', 'version', 'shape'] as const) {
   });
 }
 
-test('client navigation cancels a pending answer and remounts the quiz', async ({ page }) => {
+test('leaving cancels a pending answer and Back remounts the quiz', async ({ page }) => {
   await page.goto('/match/');
   await page.locator('.sabm-opt').first().waitFor();
   await page.evaluate(() => {
     (document.querySelector('.sabm-opt') as HTMLButtonElement).click();
-    // The router announces departure before the fetch/swap; cleanup must happen here.
-    document.dispatchEvent(new Event('astro:before-swap'));
+    // A cached document must not finish a pending transition while away.
+    window.dispatchEvent(new Event('pagehide'));
   });
   await page.waitForTimeout(400);
   const stored = await page.evaluate(key => JSON.parse(sessionStorage.getItem(key)!), QUIZ_STORAGE_KEY);

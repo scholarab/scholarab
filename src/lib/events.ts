@@ -146,12 +146,10 @@ export function sendEventAfterDwell(
   let timer: ReturnType<typeof setTimeout> | null = null
   const cancel = () => {
     if (timer !== null) { clearTimeout(timer); timer = null }
-    document.removeEventListener('astro:before-preparation', cancel)
     window.removeEventListener('pagehide', cancel)
   }
   try {
     timer = setTimeout(() => { cancel(); sendEvent(event, itemType, itemId) }, dwellMs)
-    document.addEventListener('astro:before-preparation', cancel)
     window.addEventListener('pagehide', cancel)
   } catch { /* never break the page for analytics */ }
   return cancel

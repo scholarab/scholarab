@@ -42,7 +42,7 @@ const isActive = (href: string) => `${currentPath.replace(/\/$/, '')}/`.startsWi
     </button>
   </div>
 </header>
-<style>
+<style is:global>
   .sabh-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 clamp(20px, 4vw, 56px); box-sizing: border-box; height: var(--sab-nav-h); position: relative; }
   .sabh-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; justify-self: start; }
   .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.015em; color: #F2F0E9; }
@@ -82,9 +82,8 @@ const isActive = (href: string) => `${currentPath.replace(/\/$/, '')}/`.startsWi
 </style>
 
 <script>
-  // The ClientRouter swaps in fresh header markup on every navigation, so the
-  // element handles are re-resolved per page while the document-level
-  // listeners below are bound exactly once.
+  import { onPageLoad } from '../../lib/page-load';
+  // Bind each document once; cached Back visits keep their listeners.
   let header: HTMLElement | null = null;
   let burger: HTMLElement | null = null;
   let sheet: HTMLElement | null = null;
@@ -141,8 +140,7 @@ const isActive = (href: string) => `${currentPath.replace(/\/$/, '')}/`.startsWi
 
     burger.addEventListener('click', () => (isOpen() ? closeMenu({ restoreFocus: true }) : openMenu()));
 
-    // Tapping a destination closes the sheet. The ClientRouter swaps the page
-    // without a reload, so nothing else would.
+    // Close before leaving so a cached Back visit returns to the page.
     sheet.addEventListener('click', e => {
       const target = e.target as HTMLElement;
       if (target.closest('[data-sabh-back]')) {
@@ -151,7 +149,7 @@ const isActive = (href: string) => `${currentPath.replace(/\/$/, '')}/`.startsWi
       }
       // In the sheet, a row with a panel opens it instead of navigating; the
       // panel's own "All scholarships" or "All programs" link goes to the
-      // directory. The ClientRouter skips clicks already default-prevented.
+      // directory.
       const item = target.closest<HTMLElement>('.sabh-has-menu');
       if (isOpen() && phone.matches && item && target.closest('.sabh-link')) {
         e.preventDefault();
@@ -207,11 +205,6 @@ const isActive = (href: string) => `${currentPath.replace(/\/$/, '')}/`.startsWi
     if (!ev.matches && isOpen()) closeMenu();
   });
 
-  // Never leave the scroll lock behind on a client-side navigation.
-  document.addEventListener('astro:before-swap', () => {
-    document.documentElement.style.overflow = '';
-  });
-
   // ── Sticky header collapse ───────────────────────────────────────────────
   // Flips one attribute on <html>; every property that moves is a transition
   // in global.css. Hysteresis, so a scroll that hovers on the line cannot make
@@ -237,9 +230,5 @@ const isActive = (href: string) => `${currentPath.replace(/\/$/, '')}/`.startsWi
   window.addEventListener('scroll', onStickScroll, { passive: true });
   // A client-side navigation can land part-way down a page, and a reload
   // restores the old offset before any scroll event fires.
-  document.addEventListener('astro:page-load', readStuck);
-  readStuck();
-
-  initSabHeader();
-  document.addEventListener('astro:page-load', initSabHeader);
+  onPageLoad(() => { readStuck(); initSabHeader(); });
 </script>

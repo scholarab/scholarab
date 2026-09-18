@@ -220,6 +220,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 </Layout>
 
 <script>
+  import { onPageLoad } from '../lib/page-load';
   import { todayDate as albertaToday } from '../lib/calendar';
   import { QUIZ_STORAGE_KEY } from '../lib/quiz';
   import { sendEvent } from '../lib/events';
@@ -261,8 +262,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     }
   }
 
-  updateClosingSoon();
-  document.addEventListener('astro:page-load', updateClosingSoon);
+  onPageLoad(updateClosingSoon);
 
   // ── Hero amount count-up (kept from previous hero; final value is server-rendered) ──
   function animateHeroAmount() {
@@ -293,8 +293,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     requestAnimationFrame(tick);
   }
 
-  animateHeroAmount();
-  document.addEventListener('astro:page-load', animateHeroAmount);
+  onPageLoad(animateHeroAmount);
 
   // ── Match teaser: local chip picks, CTA goes to the real quiz ──
   function initMatchTeaser() {
@@ -347,8 +346,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     update();
   }
 
-  initMatchTeaser();
-  document.addEventListener('astro:page-load', initMatchTeaser);
+  onPageLoad(initMatchTeaser);
 </script>
 
 <style is:global>

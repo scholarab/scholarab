@@ -64,7 +64,7 @@ let initialized = false
 function setup() {
   mount()
   if (!initialized) { initSaved(); initialized = true }
-  document.dispatchEvent(new Event('astro:page-load'))
+  window.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
 }
 
 const $ = (sel: string) => document.querySelector(sel) as HTMLElement
@@ -200,7 +200,7 @@ describe('initSaved', () => {
     $('[data-sv-items]').textContent = JSON.stringify([
       { type: 'scholarship', id: 3, name: 'Undated Award', deadline: null, url: 'https://x.example', href: '/scholarships/undated-award/' },
     ])
-    document.dispatchEvent(new Event('astro:page-load'))
+    window.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
     click($('[data-sv-view="calendar"]'))
     expect($('[data-sv-cal]').hidden).toBe(false)
     expect(document.querySelector('[data-cal-add]')).toBeNull()
