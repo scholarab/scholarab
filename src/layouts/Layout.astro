@@ -65,7 +65,7 @@ const {
          pages build their own <head> rather than using this layout, so these
          preloaded four unused weights on every public page (500/600/700/800
          report `unloaded` in document.fonts) and spent a fetchpriority="high"
-         slot racing the Instrument Serif and Archivo faces that actually
+         slot racing the Big Shoulders and Public Sans faces that actually
          render. Public pages preload their real faces via SabFonts. -->
     <ClientRouter />
     <slot name="head" />
@@ -137,7 +137,7 @@ const {
   </head>
   <body class="min-h-screen min-h-svh flex flex-col overflow-x-clip md:overscroll-none">
 
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-9999 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#141915;color:#FBF8F2;">Skip to content</a>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-9999 focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold" style="background:#141915;color:#F4F5F1;">Skip to content</a>
     {/*
       The site header renders here, OUTSIDE <main>. It used to render inside
       it, which meant the page had no banner landmark to offer; a <header>
@@ -227,7 +227,7 @@ const {
          `body:has(#sab-*)`; `html` is what shows through on overscroll.
          global.css keeps its token rule for /admin, which does not use this
          layout. */
-      html { background-color: #FBF8F2; }
+      html { background-color: #F4F5F1; }
     </style>
   </body>
 </html>

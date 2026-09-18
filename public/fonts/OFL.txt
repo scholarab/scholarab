@@ -5,21 +5,17 @@ license (CC BY-SA 4.0).
 
 Copyright notices, as embedded in the font files themselves:
 
-  Archivo         Copyright 2020 The Archivo Project Authors
-                  https://github.com/Omnibus-Type/Archivo
-                  archivo-400/500/600/700/800.woff2
+  Big Shoulders   Copyright 2019 The Big Shoulders Project Authors
+                  https://github.com/xotypeco/big_shoulders
+                  big-shoulders-700/800.woff2
+
+  Public Sans     Copyright 2015 The Public Sans Project Authors
+                  https://github.com/uswds/public-sans
+                  public-sans-400/500/600/700/800.woff2
 
   Inter           Copyright 2016 The Inter Project Authors
                   https://github.com/rsms/inter
                   inter-400/500/600/700/800.woff2
-
-  Instrument Serif  Copyright 2022 The Instrument Serif Project Authors
-                  https://github.com/Instrument/instrument-serif
-                  instrument-serif-400.woff2, instrument-serif-400i.woff2
-
-  IBM Plex Mono   Copyright 2017 IBM Corp. All rights reserved.
-                  https://github.com/IBM/plex
-                  plex-mono-400.woff2, plex-mono-500.woff2
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

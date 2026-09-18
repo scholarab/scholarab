@@ -22,7 +22,7 @@ const page = (title: string, body: string) =>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
       body{font-family:system-ui,-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;
-        min-height:100vh;margin:0;background:#FBF8F2;color:#141915}
+        min-height:100vh;margin:0;background:#F4F5F1;color:#141915}
       .card{text-align:center;padding:2rem;max-width:420px}
       h1{font-size:1.5rem;margin:0 0 .5rem}
       p{color:#5A605B;font-size:.95rem;line-height:1.5}
@@ -32,7 +32,7 @@ const page = (title: string, body: string) =>
       button:hover{background:#28BC8E}
       button.secondary{background:transparent;color:#5A605B;border:1px solid #d8d4c8;font-weight:500;
         padding:10px 22px;margin-top:.75rem}
-      button.secondary:hover{background:#F2EFE6;color:#141915}
+      button.secondary:hover{background:#EBEEE8;color:#141915}
       .fine{font-size:.8rem;color:#8A8F8B;margin-top:1rem}
       .fine a{color:#8A8F8B}
       .back{display:inline-block;margin-top:1.5rem;font-size:.9rem}

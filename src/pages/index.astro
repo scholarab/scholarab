@@ -428,12 +428,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
 <style is:global>
   /* The home design is fixed light regardless of site theme */
-  body:has(#sab-home) { background: #FBF8F2; }
+  body:has(#sab-home) { background: #F4F5F1; }
 </style>
 
 <style>
   /* ════ ScholarAB Home · claude.ai/design "ScholarAB Home.dc.html" ════
-     Palette: canvas #FBF8F2 · alt band #F1EDE3 · ink #141915 · hero/footer #08120E
+     Palette: canvas #F4F5F1 · alt band #E9ECE6 · ink #141915 · hero/footer #08120E
      accent #2FD3A0 · accent hover #4FE0B4 · accent-on-dark text #5CE3BB
      green #0A6B4D (pressed #08573E) · hard shadows on cream #0E8C64
      ink-on-accent #08120E · urgency #B8541F
@@ -441,16 +441,16 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
      drop shadow on cream, where 1.8:1 against the card made the lift read as
      a smudge. Deep green carries the shadows and the primary action on light
      surfaces; mint keeps the dark ones.
-     Type: Instrument Serif (display) · Archivo (UI/body) · IBM Plex Mono (labels) */
+     Type: see --font-display / --font-body / --font-label in global.css */
 
   #sab-home {
-    background: #FBF8F2;
+    background: #F4F5F1;
     color: #141915;
-    font-family: 'Archivo', sans-serif;
+    font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
   }
   #sab-home ::selection { background: #2FD3A0; color: #08120E; }
-  .sab-mono { font-family: 'IBM Plex Mono', monospace; }
+  .sab-mono { font-family: var(--font-label); }
   .sab-container { max-width: var(--sab-measure); margin: 0 auto; width: 100%; box-sizing: border-box; padding-left: 48px; padding-right: 48px; }
 
   @keyframes sab-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
@@ -459,9 +459,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   /* ── Dark hero ── */
   /* Fills the first viewport so no canvas sliver peeks below the fold on
      tall/fullscreen windows; on short viewports it grows past 100svh. */
-  .sab-hero-band { background: #0A1310; color: #F2F0E9; }
+  .sab-hero-band { background: #0A1310; color: #EEF1EC; }
   .sab-hero {
-    background: #0A1310; color: #F2F0E9; position: relative; overflow: hidden;
+    background: #0A1310; color: #EEF1EC; position: relative; overflow: hidden;
     /* One low-alpha mint wash off the top right corner. The hero was a flat
        slab of near-black behind 96px type; this gives the accent somewhere to
        come from without putting a second colour on the surface. */
@@ -482,7 +482,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   }
 
   .sab-h1 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(42px, 8.2vw, 96px); line-height: 0.98; letter-spacing: -0.015em;
     margin: 0; max-width: 1050px; text-wrap: balance;
     animation: sab-rise 0.7s ease both;
@@ -494,7 +494,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     gap: 40px; margin-top: 52px; padding-bottom: 64px;
   }
   .sab-hero-copy { max-width: 460px; }
-  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(242, 240, 233, 0.8); margin: 0 0 30px; }
+  .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.8); margin: 0 0 30px; }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   /* One pair, one size, one motion: hover only changes colour. The lift onto a
      hard shadow and the press snap were three effects on two buttons, and the
@@ -511,22 +511,22 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   }
   .sab-btn-accent:hover { background: #5CE3BB; }
   .sab-btn-outline {
-    color: #F2F0E9; font-weight: 600;
-    border: 1px solid rgba(242,240,233,0.3); background: transparent;
+    color: #EEF1EC; font-weight: 600;
+    border: 1px solid rgba(238, 241, 236,0.3); background: transparent;
   }
-  .sab-btn-outline:hover { border-color: rgba(242, 240, 233, 0.7); background: rgba(242,240,233,0.06); }
+  .sab-btn-outline:hover { border-color: rgba(238, 241, 236, 0.7); background: rgba(238, 241, 236,0.06); }
 
   .sab-stats { display: flex; border-left: 1px solid rgba(92,227,187,0.28); }
   .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(92,227,187,0.28); }
-  .sab-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; font-variant-numeric: tabular-nums; }
-  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242, 240, 233, 0.62); margin-top: 6px; white-space: nowrap; }
+  .sab-stat-value { font-family: var(--font-display); font-size: 44px; line-height: 1.05; color: #EEF1EC; font-variant-numeric: tabular-nums; }
+  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(238, 241, 236, 0.62); margin-top: 6px; white-space: nowrap; }
 
   /* ── Closing this week ── */
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
   .sab-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px; gap: 20px; }
   .sab-eyebrow-urgent { font-size: 13px; letter-spacing: 0.06em; color: #B8541F; margin-bottom: 14px; }
   .sab-h2 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.01em; margin: 0;
   }
   .sab-view-all {
@@ -548,21 +548,21 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     font-size: 14.5px; color: rgba(20, 25, 21, 0.68); margin-top: 5px;
     display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
   }
-  .sab-row-amount { font-family: 'Instrument Serif', serif; font-size: 28px; text-align: right; }
+  .sab-row-amount { font-family: var(--font-display); font-size: 28px; text-align: right; }
   .sab-row-chip {
     font-size: 12.5px; font-weight: 500; padding: 7px 14px; border-radius: 100px;
     background: rgba(184,84,31,0.12); color: #B8541F; white-space: nowrap;
   }
-  .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #FBF8F2; }
+  .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #F4F5F1; }
 
   /* ── Categories ── */
-  .sab-cat-band { background: #F1EDE3; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
+  .sab-cat-band { background: #E9ECE6; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
   .sab-cats { padding-top: 88px; padding-bottom: 88px; }
   .sab-cats .sab-section-head { margin-bottom: 44px; }
   .sab-cats-meta { font-size: 13px; color: rgba(20, 25, 21, 0.68); white-space: nowrap; }
   .sab-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .sab-cat-card {
-    display: block; background: #FBF8F2; border: 1.5px solid rgba(20,25,21,0.85);
+    display: block; background: #F4F5F1; border: 1.5px solid rgba(20,25,21,0.85);
     border-radius: 14px; padding: 24px 22px; color: #141915; text-decoration: none;
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
@@ -593,7 +593,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     display: inline-flex; align-items: baseline; gap: 8px;
     border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
     padding: 7px 12px; font-size: 14px; font-weight: 600;
-    color: #141915; text-decoration: none; background: #FBF8F2;
+    color: #141915; text-decoration: none; background: #F4F5F1;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
   .sab-city-chip:hover { border-color: #0A6B4D; box-shadow: 2px 2px 0 #0E8C64; color: #141915; }
@@ -606,14 +606,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-match-h2 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.05; margin-bottom: 20px; }
   .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.68); margin: 0; }
   .sab-match-card {
-    background: #FBF8F2; border: 2px solid #141915; border-radius: 20px; padding: 36px;
+    background: #F4F5F1; border: 2px solid #141915; border-radius: 20px; padding: 36px;
     box-shadow: 8px 8px 0 rgba(14,140,100,0.35);
   }
   .sab-match-group { margin-bottom: 22px; }
   .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); margin-bottom: 10px; }
   .sab-match-opts { display: flex; flex-wrap: wrap; gap: 8px; }
   .sab-match-opt {
-    font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 600;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
     padding: 9px 16px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.32);
     background: transparent; color: #141915; cursor: pointer;
     transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease,
@@ -625,11 +625,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-match-opt:active { transform: translate(0, 0); box-shadow: 0 0 0 #0E8C64; transition-duration: 0.07s; }
   /* a small pop the moment a chip turns on */
   .sab-match-opt.on {
-    background: #141915; color: #F2F0E9; border-color: #141915;
+    background: #141915; color: #EEF1EC; border-color: #141915;
     animation: sab-pop 0.24s cubic-bezier(0.2, 0.8, 0.3, 1);
   }
   .sab-match-cta {
-    width: 100%; margin-top: 6px; font-family: 'Archivo', sans-serif;
+    width: 100%; margin-top: 6px; font-family: var(--font-body);
     background: #0A6B4D; color: #F5FBF8; font-weight: 700; font-size: 16px;
     height: 56px; padding: 0 16px; border-radius: 100px; border: none; cursor: pointer;
     transition: background 0.18s ease,
@@ -700,10 +700,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
        figure keeps its line and nothing shrinks below 9.5px. */
     .sab-stats {
       border-left: none; width: 100%;
-      margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(242,240,233,0.18);
+      margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(238, 241, 236,0.18);
     }
     .sab-stat { flex: 1; min-width: 0; padding: 0 12px 0 0; border-right: none; }
-    .sab-stat + .sab-stat { padding-left: 14px; border-left: 1px solid rgba(242,240,233,0.18); }
+    .sab-stat + .sab-stat { padding-left: 14px; border-left: 1px solid rgba(238, 241, 236,0.18); }
     .sab-stat:first-child { flex: 1.3; }
     .sab-stat:nth-child(2) { flex: 0.85; }
     .sab-stat-value { font-size: 27px; }

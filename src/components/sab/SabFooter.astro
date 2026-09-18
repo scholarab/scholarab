@@ -68,32 +68,32 @@ const footerCols = [
 </footer>
 
 <style>
-  .sabf-footer { background: #0A1310; color: rgba(242, 240, 233, 0.65); font-family: 'Archivo', sans-serif; }
+  .sabf-footer { background: #0A1310; color: rgba(238, 241, 236, 0.65); font-family: var(--font-body); }
   /* Capped to the same measure as the page above it: the band stays full
      bleed, its contents line up with the content. */
   .sabf-inner { padding: 64px 48px 40px; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
-  .sabf-mono { font-family: 'IBM Plex Mono', monospace; }
+  .sabf-mono { font-family: var(--font-label); }
   .sabf-accent { color: #2FD3A0; }
   .sabf-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
   .sabf-logo { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
   .sabf-lockup { display: flex; flex-direction: column; gap: 6px; }
-  .sabf-word { font-weight: 800; letter-spacing: -0.02em; color: #F2F0E9; font-size: clamp(36px, 5vw, 52px); line-height: 1; }
-  .sabf-tagline { font-size: 12px; letter-spacing: 0.24em; color: rgba(242, 240, 233, 0.6); }
+  .sabf-word { font-weight: 800; letter-spacing: -0.02em; color: #EEF1EC; font-size: clamp(36px, 5vw, 52px); line-height: 1; }
+  .sabf-tagline { font-size: 12px; letter-spacing: 0.24em; color: rgba(238, 241, 236, 0.6); }
   .sabf-blurb { font-size: 14px; line-height: 1.6; max-width: 340px; margin: 0; }
   /* The accuracy disclaimer. Deliberately in the footer rather than only in
      the terms: a student about to miss a deadline is not reading /terms. */
-  .sabf-disclaimer { margin-top: 14px; font-size: 13px; color: rgba(242, 240, 233, 0.62); }
-  .sabf-disclaimer a { color: rgba(242, 240, 233, 0.7); text-decoration: underline; text-underline-offset: 2px; }
-  .sabf-disclaimer a:hover { color: #F2F0E9; }
+  .sabf-disclaimer { margin-top: 14px; font-size: 13px; color: rgba(238, 241, 236, 0.62); }
+  .sabf-disclaimer a { color: rgba(238, 241, 236, 0.7); text-decoration: underline; text-underline-offset: 2px; }
+  .sabf-disclaimer a:hover { color: #EEF1EC; }
   .sabf-cols { display: flex; gap: 64px; flex-wrap: wrap; }
-  .sabf-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(242, 240, 233, 0.62); margin-bottom: 14px; }
+  .sabf-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(238, 241, 236, 0.62); margin-bottom: 14px; }
   .sabf-links { display: flex; flex-direction: column; gap: 10px; }
-  .sabf-links a { font-size: 14px; color: rgba(242, 240, 233, 0.7); text-decoration: none; }
-  .sabf-links a:hover { color: #F2F0E9; }
+  .sabf-links a { font-size: 14px; color: rgba(238, 241, 236, 0.7); text-decoration: none; }
+  .sabf-links a:hover { color: #EEF1EC; }
   .sabf-bottom {
     display: flex; justify-content: space-between; margin-top: 56px; padding-top: 24px;
-    border-top: 1px solid rgba(242,240,233,0.12);
-    font-size: 12px; color: rgba(242, 240, 233, 0.62); gap: 12px; flex-wrap: wrap;
+    border-top: 1px solid rgba(238, 241, 236,0.12);
+    font-size: 12px; color: rgba(238, 241, 236, 0.62); gap: 12px; flex-wrap: wrap;
   }
   @media (max-width: 900px) {
     .sabf-top { flex-direction: column; }

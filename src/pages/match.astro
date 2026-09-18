@@ -42,7 +42,7 @@ const breadcrumbJson = {
     set:html={JSON.stringify(breadcrumbJson)}
     slot="head"
   />
-  <SabFonts italic slot="head" />
+  <SabFonts slot="head" />
 
   <div class="sabp-header" slot="header">
     <SabHeader currentPath="/match" />
@@ -129,7 +129,7 @@ const breadcrumbJson = {
     color: #526252;
   }
   body:has(#sab-match) {
-    background: #fbf8f2;
+    background: #F4F5F1;
   }
 </style>
 
@@ -141,7 +141,7 @@ const breadcrumbJson = {
     margin: 72px auto 8px;
     padding-top: 32px;
     border-top: 1px solid rgba(20, 25, 21, 0.12);
-    font-family: 'Archivo', sans-serif;
+    font-family: var(--font-body);
   }
   .sabm-about h2 {
     font-size: 22px;

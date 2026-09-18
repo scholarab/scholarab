@@ -125,7 +125,7 @@ I really appreciate you taking the time.
   ogUrl={canonical}
   canonical={canonical}
 >
-  <SabFonts italic slot="head" />
+  <SabFonts slot="head" />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
 
   <div class="sabp-header" slot="header">
@@ -209,23 +209,23 @@ I really appreciate you taking the time.
 </script>
 
 <style is:global>
-  body:has(#sab-tpl) { background: #FBF8F2; }
+  body:has(#sab-tpl) { background: #F4F5F1; }
 </style>
 
 <style>
-  .sabt-mono { font-family: 'IBM Plex Mono', monospace; }
+  .sabt-mono { font-family: var(--font-label); }
 
   .sabt-hero { max-width: var(--sab-read); margin: 0 auto; padding: 64px 24px 72px; width: 100%; box-sizing: border-box; }
   .sabt-kicker { margin-bottom: 24px; }
-  .sabt-kicker-link { color: rgba(242, 240, 233, 0.55); text-decoration: none; }
-  .sabt-kicker-link:hover { color: #F2F0E9; }
-  .sabt-kicker-sep { color: rgba(242, 240, 233, 0.3); }
+  .sabt-kicker-link { color: rgba(238, 241, 236, 0.55); text-decoration: none; }
+  .sabt-kicker-link:hover { color: #EEF1EC; }
+  .sabt-kicker-sep { color: rgba(238, 241, 236, 0.3); }
   .sabt-h1 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(38px, 5.5vw, 62px); line-height: 1.05; letter-spacing: -0.015em;
     margin: 0; text-wrap: balance;
   }
-  .sabt-lede { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(242, 240, 233, 0.7); max-width: 52ch; }
+  .sabt-lede { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(238, 241, 236, 0.7); max-width: 52ch; }
 
   .sabt-body { max-width: var(--sab-read); margin: 0 auto; padding: 56px 24px 96px; width: 100%; box-sizing: border-box; }
   .sabt-intro, .sabt-outro { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); margin: 0 0 8px; }
@@ -237,7 +237,7 @@ I really appreciate you taking the time.
   .sabt-block-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .sabt-step { font-size: 12px; letter-spacing: 0.09em; color: rgba(20, 25, 21, 0.68); }
   .sabt-h2 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(26px, 3.2vw, 34px); line-height: 1.15; letter-spacing: -0.01em;
     margin: 0; color: #141915;
   }
@@ -255,7 +255,7 @@ I really appreciate you taking the time.
     padding: 22px 22px 20px;
   }
   .sabt-pre {
-    margin: 0; font-family: 'IBM Plex Mono', monospace;
+    margin: 0; font-family: var(--font-label);
     font-size: 13.5px; line-height: 1.75; color: #141915;
     white-space: pre-wrap; overflow-wrap: anywhere;
   }
@@ -263,7 +263,7 @@ I really appreciate you taking the time.
     position: absolute; top: 12px; right: 12px;
     font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
     padding: 7px 13px; border-radius: 999px; cursor: pointer;
-    background: #141915; color: #F2F0E9; border: none;
+    background: #141915; color: #EEF1EC; border: none;
     min-width: 84px;
   }
   .sabt-copy:hover { background: #0A6B4D; }

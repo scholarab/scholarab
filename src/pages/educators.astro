@@ -62,7 +62,7 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
   canonical={canonical}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
-  <SabFonts italic slot="head" />
+  <SabFonts slot="head" />
 
   {/* The header band and the hero band are separate elements now; the header
       is the page's banner and cannot sit inside <main>. Same background, no
@@ -152,16 +152,16 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
 
 <style is:global>
   /* The educators design is fixed light regardless of site theme */
-  body:has(#sab-educators) { background: #FBF8F2; }
+  body:has(#sab-educators) { background: #F4F5F1; }
 </style>
 
 <style>
-  .sabe-mono { font-family: 'IBM Plex Mono', monospace; }
+  .sabe-mono { font-family: var(--font-label); }
 
   /* ── Dark hero ── */
   .sabe-hero { max-width: var(--sab-measure); margin: 0 auto; padding: 72px 48px 0; width: 100%; box-sizing: border-box; }
   .sabe-h1 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;
     margin: 0; max-width: 900px; text-wrap: balance;
     animation: sabe-rise 0.7s ease both;
@@ -172,15 +172,15 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
     display: flex; align-items: flex-end; justify-content: space-between;
     gap: 40px; margin-top: 44px; padding-bottom: 64px;
   }
-  .sabe-lede { font-size: 18px; line-height: 1.55; color: rgba(242, 240, 233, 0.72); margin: 0; max-width: 520px; }
-  .sabe-stats { display: flex; border-left: 1px solid rgba(242,240,233,0.18); }
-  .sabe-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(242,240,233,0.18); }
-  .sabe-stat-value { font-family: 'Instrument Serif', serif; font-size: 44px; line-height: 1.05; color: #F2F0E9; }
-  .sabe-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(242, 240, 233, 0.55); margin-top: 6px; }
+  .sabe-lede { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.72); margin: 0; max-width: 520px; }
+  .sabe-stats { display: flex; border-left: 1px solid rgba(238, 241, 236,0.18); }
+  .sabe-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(238, 241, 236,0.18); }
+  .sabe-stat-value { font-family: var(--font-display); font-size: 44px; line-height: 1.05; color: #EEF1EC; }
+  .sabe-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(238, 241, 236, 0.55); margin-top: 6px; }
 
   /* ── Shared section shell ── */
   .sabe-section { max-width: var(--sab-measure); margin: 0 auto; padding: 88px 48px 0; width: 100%; box-sizing: border-box; }
-  .sabe-h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(38px, 4.5vw, 58px); letter-spacing: -0.01em; margin: 0; }
+  .sabe-h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(38px, 4.5vw, 58px); letter-spacing: -0.01em; margin: 0; }
   .sabe-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; gap: 20px; }
   .sabe-head-note { font-size: 13px; color: rgba(20, 25, 21, 0.68); }
 
@@ -195,7 +195,7 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
   .sabe-card-num {
     width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid rgba(20,25,21,0.25);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Instrument Serif', serif; font-size: 20px; color: #0A6B4D;
+    font-family: var(--font-display); font-size: 20px; color: #0A6B4D;
   }
   .sabe-card-tag { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); }
   .sabe-card-title { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; margin-bottom: 8px; }
@@ -211,17 +211,17 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
     display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 24px 0;
     border-bottom: 1px solid rgba(20,25,21,0.14); align-items: start;
   }
-  .sabe-step-num { font-family: 'Instrument Serif', serif; font-size: 28px; color: #0A6B4D; line-height: 1.1; }
+  .sabe-step-num { font-family: var(--font-display); font-size: 28px; color: #0A6B4D; line-height: 1.1; }
   .sabe-step-body { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.75); margin: 0; }
 
   /* ── Share CTA ── */
   .sabe-cta-section { padding-bottom: 110px; }
   .sabe-cta {
-    background: #0A1310; color: #F2F0E9; border-radius: 20px; padding: 64px 48px;
+    background: #0A1310; color: #EEF1EC; border-radius: 20px; padding: 64px 48px;
     text-align: center; box-shadow: 8px 8px 0 rgba(47,211,160,0.4);
   }
   .sabe-cta-kicker { font-size: 13px; letter-spacing: 0.06em; color: #2FD3A0; margin-bottom: 18px; }
-  .sabe-cta-domain { font-family: 'Instrument Serif', serif; font-size: clamp(44px, 6vw, 72px); line-height: 1; letter-spacing: -0.01em; color: #F2F0E9; }
+  .sabe-cta-domain { font-family: var(--font-display); font-size: clamp(44px, 6vw, 72px); line-height: 1; letter-spacing: -0.01em; color: #EEF1EC; }
   .sabe-cta-tld { color: #2FD3A0; }
   .sabe-cta-actions { display: flex; justify-content: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
   .sabe-btn {
@@ -231,11 +231,11 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
   .sabe-btn-solid { background: #2FD3A0; color: #08120E; font-weight: 700; padding: 15px 28px; }
   .sabe-btn-solid:hover { background: #4FE0B4; color: #08120E; }
   .sabe-btn-arrow { font-size: 18px; }
-  .sabe-btn-outline { color: #F2F0E9; font-weight: 600; padding: 15px 26px; border: 1px solid rgba(242,240,233,0.3); }
-  .sabe-btn-outline:hover { border-color: #F2F0E9; color: #F2F0E9; }
-  .sabe-cta-contact { font-size: 14.5px; line-height: 1.6; color: rgba(242, 240, 233, 0.55); margin: 32px auto 0; max-width: 440px; }
+  .sabe-btn-outline { color: #EEF1EC; font-weight: 600; padding: 15px 26px; border: 1px solid rgba(238, 241, 236,0.3); }
+  .sabe-btn-outline:hover { border-color: #EEF1EC; color: #EEF1EC; }
+  .sabe-cta-contact { font-size: 14.5px; line-height: 1.6; color: rgba(238, 241, 236, 0.55); margin: 32px auto 0; max-width: 440px; }
   .sabe-cta-email { color: #2FD3A0; text-decoration: none; }
-  .sabe-cta-email:hover { color: #F2F0E9; }
+  .sabe-cta-email:hover { color: #EEF1EC; }
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
@@ -243,7 +243,7 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
     .sabe-hero-bottom { flex-direction: column; align-items: flex-start; margin-top: 36px; padding-bottom: 44px; }
     .sabe-stats { border-left: none; width: 100%; }
     .sabe-stat { padding: 6px 24px 6px 0; border-right: none; }
-    .sabe-stat + .sabe-stat { padding-left: 24px; border-left: 1px solid rgba(242,240,233,0.18); }
+    .sabe-stat + .sabe-stat { padding-left: 24px; border-left: 1px solid rgba(238, 241, 236,0.18); }
     .sabe-stat-value { font-size: 32px; }
     .sabe-stat-label { font-size: 10.5px; }
     .sabe-section { padding: 56px 20px 0; }

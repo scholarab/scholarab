@@ -24,7 +24,7 @@ const page = (title: string, body: string) =>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
       body{font-family:system-ui,-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;
-        min-height:100vh;margin:0;background:#FBF8F2;color:#141915}
+        min-height:100vh;margin:0;background:#F4F5F1;color:#141915}
       .card{text-align:center;padding:2rem;max-width:420px}
       h1{font-size:1.5rem;margin:0 0 .5rem}
       p{color:#5A605B;font-size:.95rem;line-height:1.5}

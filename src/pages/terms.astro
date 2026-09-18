@@ -22,7 +22,7 @@ const ldJson = webPageJson({ name: 'Terms of Use', description, path: '/terms/' 
   ogUrl="https://www.scholarab.ca/terms/"
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
-  <SabFonts italic slot="head" />
+  <SabFonts slot="head" />
 
   <div class="sabp-header" slot="header">
     <SabHeader currentPath="/terms" />
@@ -163,7 +163,7 @@ const ldJson = webPageJson({ name: 'Terms of Use', description, path: '/terms/' 
   .sabtm-body { padding: 72px 48px 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
 
   .sabtm-h1 {
-    font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(40px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.02em;
     color: #141915; margin: 12px 0 24px;
   }
@@ -171,12 +171,12 @@ const ldJson = webPageJson({ name: 'Terms of Use', description, path: '/terms/' 
 
   .sabtm-lede { font-size: 19px; line-height: 1.65; color: #3A403B; max-width: 62ch; margin: 0 0 12px; }
   .sabtm-updated {
-    font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.06em;
+    font-family: var(--font-label); font-size: 12px; letter-spacing: 0.06em;
     text-transform: uppercase; color: #8A8F8B; margin: 0 0 56px;
   }
 
   .sabtm-h2 {
-    font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(26px, 3vw, 34px); letter-spacing: -0.01em; color: #141915;
     margin: 56px 0 20px; padding-top: 24px; border-top: 1px solid #E4E0D5;
   }

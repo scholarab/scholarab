@@ -76,9 +76,9 @@ const chip =
   : status === 'future' ? { text: opensLabel ? `OPENS ${opensLabel.toUpperCase()}` : 'OPENING SOON', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'ongoing' ? { text: 'ONGOING · JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
-  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#B8541F', fg: '#FBF8F2' }
+  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#B8541F', fg: '#F4F5F1' }
   : typeof daysLeft === 'number'
-    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#B8541F' : 'rgba(184,84,31,0.12)', fg: urgent ? '#FBF8F2' : '#B8541F' }
+    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#B8541F' : 'rgba(184,84,31,0.12)', fg: urgent ? '#F4F5F1' : '#B8541F' }
     : { text: 'OPEN', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' };
 ---
 
@@ -227,12 +227,12 @@ const chip =
 </div>
 
 <style>
-  .sabd-mono { font-family: 'IBM Plex Mono', monospace; }
+  .sabd-mono { font-family: var(--font-label); }
 
   .sabd-guide {
     display: block; margin-top: 16px; padding: 18px 20px;
     border: 1px solid rgba(20,25,21,0.14); border-radius: 4px;
-    background: #FBF8F2; text-decoration: none; box-sizing: border-box;
+    background: #F4F5F1; text-decoration: none; box-sizing: border-box;
   }
   .sabd-guide:hover { border-color: #0E8C64; }
 
@@ -246,7 +246,7 @@ const chip =
     color: rgba(20, 25, 21, 0.68);
   }
   .sabd-guide-title {
-    display: block; margin-top: 8px; font-family: 'Instrument Serif', Georgia, serif;
+    display: block; margin-top: 8px; font-family: var(--font-display);
     font-size: 19px; line-height: 1.25; color: #141915;
   }
   .sabd-guide-go {
@@ -275,10 +275,10 @@ const chip =
   .sabd-title-block { padding: 36px 48px 0; box-sizing: border-box; }
   .sabd-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .sabd-chip { font-size: 11.5px; letter-spacing: 0.05em; padding: 6px 12px; border-radius: 100px; }
-  .sabd-chip-type { background: #141915; color: #F2F0E9; }
+  .sabd-chip-type { background: #141915; color: #EEF1EC; }
   .sabd-chip-tag { border: 1px solid rgba(20,25,21,0.25); color: rgba(20, 25, 21, 0.65); }
   .sabd-h1 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.015em;
     margin: 22px 0 0; max-width: 820px;
   }
@@ -311,7 +311,7 @@ const chip =
 
   .sabd-steps { display: flex; flex-direction: column; border-top: 1px solid rgba(20,25,21,0.14); max-width: 640px; }
   .sabd-step { display: flex; gap: 18px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(20,25,21,0.14); }
-  .sabd-step-n { font-family: 'Instrument Serif', serif; font-size: 24px; color: #0A6B4D; flex: none; width: 28px; }
+  .sabd-step-n { font-family: var(--font-display); font-size: 24px; color: #0A6B4D; flex: none; width: 28px; }
   .sabd-step-text { font-size: 15.5px; line-height: 1.55; color: rgba(20, 25, 21, 0.8); }
 
   .sabd-rail { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
@@ -319,7 +319,7 @@ const chip =
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
     padding: 28px 26px; box-shadow: 6px 6px 0 #0E8C64;
   }
-  .sabd-value { font-family: 'Instrument Serif', serif; font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
+  .sabd-value { font-family: var(--font-display); font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
   .sabd-value-note { font-size: 14px; color: rgba(20, 25, 21, 0.65); }
   /* space-between with no gap only looked safe because the rail was 360px
      wide. In the phone's single column the label and the date met in the
@@ -339,7 +339,7 @@ const chip =
   .sabd-cta-disabled { background: rgba(20,25,21,0.08); color: rgba(20, 25, 21, 0.68); cursor: not-allowed; }
   .sabd-cta-disabled:hover { background: rgba(20,25,21,0.08); color: rgba(20, 25, 21, 0.68); }
   .sabd-save {
-    font-family: 'Archivo', sans-serif; font-size: 17px; border: 1.5px solid rgba(20,25,21,0.3);
+    font-family: var(--font-body); font-size: 17px; border: 1.5px solid rgba(20,25,21,0.3);
     border-radius: 100px; width: 50px; height: 50px; cursor: pointer;
     color: rgba(20, 25, 21, 0.68); background: transparent; flex: none;
   }
@@ -361,14 +361,14 @@ const chip =
   }
   .sabd-copy:hover { border-color: #141915; color: #141915; }
 
-  .sabd-remind { background: #141915; border-radius: 16px; padding: 24px 26px; color: #F2F0E9; }
+  .sabd-remind { background: #141915; border-radius: 16px; padding: 24px 26px; color: #EEF1EC; }
   .sabd-remind-label { font-size: 11.5px; letter-spacing: 0.06em; color: #2FD3A0; margin-bottom: 8px; }
-  .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: rgba(242, 240, 233, 0.65); margin-bottom: 16px; }
+  .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: rgba(238, 241, 236, 0.65); margin-bottom: 16px; }
   .sabd-remind-form { display: flex; gap: 8px; }
   .sabd-remind-input {
-    font-family: 'Archivo', sans-serif; font-size: 14px; flex: 1; min-width: 0;
-    background: rgba(242,240,233,0.08); border: 1px solid rgba(242,240,233,0.2);
-    border-radius: 100px; padding: 11px 16px; color: #F2F0E9;
+    font-family: var(--font-body); font-size: 14px; flex: 1; min-width: 0;
+    background: rgba(238, 241, 236,0.08); border: 1px solid rgba(238, 241, 236,0.2);
+    border-radius: 100px; padding: 11px 16px; color: #EEF1EC;
   }
   /* Bare `outline: none` here outranked the global :focus-visible rule, so the
      reminder field had no focus indicator on any of the detail pages. Keeping
@@ -379,9 +379,9 @@ const chip =
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
-  .sabd-remind-input::placeholder { color: rgba(242, 240, 233, 0.62); }
+  .sabd-remind-input::placeholder { color: rgba(238, 241, 236, 0.62); }
   .sabd-remind-btn {
-    font-family: 'Archivo', sans-serif; font-size: 13.5px; font-weight: 700;
+    font-family: var(--font-body); font-size: 13.5px; font-weight: 700;
     background: #2FD3A0; color: #08120E; border: none; border-radius: 100px;
     padding: 11px 18px; cursor: pointer; flex: none;
   }
@@ -527,12 +527,12 @@ const chip =
       } else {
         btn.disabled = false;
         btn.textContent = 'Remind me';
-        if (msg) { msg.textContent = data.error || 'Something went wrong.'; msg.style.color = 'rgba(242,240,233,0.65)'; msg.style.display = 'block'; }
+        if (msg) { msg.textContent = data.error || 'Something went wrong.'; msg.style.color = 'rgba(238, 241, 236,0.65)'; msg.style.display = 'block'; }
       }
     } catch {
       btn.disabled = false;
       btn.textContent = 'Remind me';
-      if (msg) { msg.textContent = 'Something went wrong. Try again.'; msg.style.color = 'rgba(242,240,233,0.65)'; msg.style.display = 'block'; }
+      if (msg) { msg.textContent = 'Something went wrong. Try again.'; msg.style.color = 'rgba(238, 241, 236,0.65)'; msg.style.display = 'block'; }
     }
   }, true);
 
@@ -568,8 +568,8 @@ const chip =
       // round, not ceil: midnight-to-midnight is whole days except across a
       // DST change, where ceil overcounts by one (and disagrees with the list chips)
       const days = Math.max(0, Math.round((new Date(deadline + 'T00:00:00').getTime() - todayMs) / 86400000));
-      if (days === 0) paint('DUE TODAY', '#B8541F', '#FBF8F2');
-      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#B8541F', '#FBF8F2');
+      if (days === 0) paint('DUE TODAY', '#B8541F', '#F4F5F1');
+      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#B8541F', '#F4F5F1');
       else paint(`${days} DAYS LEFT`, 'rgba(184,84,31,0.12)', '#B8541F');
     }
   }

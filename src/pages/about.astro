@@ -62,7 +62,7 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   ogUrl="https://www.scholarab.ca/about/"
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
-  <SabFonts italic slot="head" />
+  <SabFonts slot="head" />
 
   <div class="sabp-header" slot="header">
     <SabHeader currentPath="/about" />
@@ -145,14 +145,14 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
 
 <style is:global>
   /* The about design is fixed light regardless of site theme */
-  body:has(#sab-about) { background: #FBF8F2; }
+  body:has(#sab-about) { background: #F4F5F1; }
 </style>
 
 <style>
   .saba-body { padding: 72px 48px 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
 
   .saba-h1 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-family: var(--font-display); font-weight: 400;
     font-size: clamp(44px, 7vw, 76px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
   .saba-h1-accent { color: #0A6B4D; font-style: italic; }
@@ -162,7 +162,7 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   .saba-col { border-top: 2px solid #141915; padding-top: 20px; }
   .saba-col-label {
     display: flex; align-items: center; gap: 10px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-label);
     font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65); margin-bottom: 16px;
   }
   .saba-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
@@ -173,7 +173,7 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
     padding: 36px 40px 20px; margin-top: 64px;
   }
   .saba-card-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-label);
     font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65); margin-bottom: 8px;
   }
   .saba-principle {
@@ -183,7 +183,7 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   .saba-principle-num {
     width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid rgba(20,25,21,0.25);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Instrument Serif', serif; font-size: 20px; color: #0A6B4D;
+    font-family: var(--font-display); font-size: 20px; color: #0A6B4D;
   }
   .saba-principle-title { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; margin-bottom: 6px; }
   .saba-principle-body { font-size: 15px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); max-width: 720px; }
@@ -192,7 +192,7 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   .saba-os-label {
     display: flex; align-items: center; gap: 10px; padding: 14px 0;
     border-top: 2px solid #141915; margin-top: 64px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-label);
     font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65);
   }
   .saba-actions { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
