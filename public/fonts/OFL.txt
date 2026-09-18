@@ -10,6 +10,10 @@ Copyright notices, as embedded in the font files themselves:
                   big-shoulders-700/800.woff2
                   (and scripts/og-fonts/big-shoulders-700/800.ttf)
 
+  Patrick Hand    Copyright (c) 2012 Patrick Wagesreiter
+                  https://github.com/google/fonts/tree/main/ofl/patrickhand
+                  hw-patrick-hand.woff2
+
   Public Sans     Copyright 2015 The Public Sans Project Authors
                   https://github.com/uswds/public-sans
                   public-sans-400/500/600/700/800.woff2

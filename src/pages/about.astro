@@ -71,33 +71,17 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   <div id="sab-about" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="saba-body" style="flex:1;">
       <!-- Title -->
-      <h1 class="saba-h1">Built by a student,<br /><span class="saba-h1-accent">for students.</span></h1>
-      <p class="saba-lede">There was a problem. Now it's fixed.</p>
+      <h1 class="saba-h1">The story behind ScholarAB.</h1>
 
-      <!-- Problem / fix -->
-      <div class="saba-cols">
-        <div class="saba-col">
-          <div class="saba-col-label">
-            <span class="saba-dot" style="background:#B8541F;"></span>
-            <span>THE PROBLEM</span>
-          </div>
-          <p class="saba-col-body">
-            Scholarship information in Alberta was scattered across dozens of websites and school bulletin
-            boards. There was no single place to find what was open, what was closing, or what you actually
-            qualified for.
-          </p>
-        </div>
-        <div class="saba-col">
-          <div class="saba-col-label">
-            <span class="saba-dot" style="background:#2FD3A0;"></span>
-            <span>THE FIX</span>
-          </div>
-          <p class="saba-col-body">
-            ScholarAB is a free scholarship directory for Alberta high school students. Every listing is
-            written from the provider's own page and links back to it. Nothing is scraped or
-            auto-generated.
-          </p>
-        </div>
+      <!-- The story, in Ilia's words (2026-09-18) -->
+      <div class="saba-paper-wrap">
+      <section class="saba-story saba-paper" id="story">
+        <p>During my first week of Grade 10, I was signing up for dual credit courses when the coordinator mentioned that they could strengthen my résumé and help with scholarship applications. He told me about a friend’s son who had covered his university tuition through scholarships that hardly anyone applied for.</p>
+        <p>I remembered that conversation because I wanted to go to university too, and I knew I’d need scholarships myself.</p>
+        <p>At the start of Grade 11, I began searching for scholarships myself. The information was scattered across different websites, and a lot of them wanted me to create an account and fill out registration forms. That got tiring. I just wanted to see which scholarships I could apply for without signing up for so many sites.</p>
+        <p>In March 2026, I started working on the first version of ScholarAB. I made it free, with no ads and no account required, because those were the things I wanted when I first started searching.</p>
+        <p>I’m a high school student from Medicine Hat, and this project grew out of my own experience trying to find scholarships. I figured other students were running into the same problems, and I wanted to make that search easier.</p>
+      </section>
       </div>
 
       <!-- How this works -->
@@ -148,6 +132,10 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   body:has(#sab-about) { background: #F4F5F1; }
 </style>
 
+<style is:global>
+  @font-face { font-family: 'Patrick Hand'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/hw-patrick-hand.woff2') format('woff2'); }
+</style>
+
 <style>
   .saba-body { padding: 72px var(--sab-gutter) 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
 
@@ -155,18 +143,39 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(44px, 7vw, 76px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
-  .saba-h1-accent { color: #0A6B4D; font-style: italic; }
-  .saba-lede { font-size: 18px; line-height: 1.55; color: rgba(20, 25, 21, 0.65); margin: 24px 0 0; max-width: 560px; }
 
-  .saba-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 64px; }
-  .saba-col { border-top: 2px solid #141915; padding-top: 20px; }
-  .saba-col-label {
-    display: flex; align-items: center; gap: 10px;
-    font-family: var(--font-label);
-    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65); margin-bottom: 16px;
+  /* The story is written on a sheet of ruled paper (Ilia, 2026-09-18).
+     The scan's blue rules are 54.594px apart at its native 1326px width,
+     first rule at y=227, red margin at x=46, faint right margin near 1090.
+     --u is one scan pixel at the rendered size, so every measurement below is
+     in scan pixels and the text lands on the rules at any width. The sheet
+     never renders narrower than 700px (a phone shows its left part), because
+     narrower rules would force the writing below a readable size.
+     The scan is cut in two: the top 1073 rows, then an 11-rule band that
+     repeats for as long as the story runs. Line height is one rule;
+     paragraphs are one blank rule apart (1lh). The first baseline sits
+     0.08 of a rule above rule one: padding = 227 minus the half line box
+     minus the face's ascent-over-descent share, all in rule units. */
+  .saba-paper-wrap { container-type: inline-size; max-width: 880px; margin-top: 40px; }
+  /* Patrick Hand: printed handwriting, chosen over Kalam and Caveat as the
+     least template-looking of the three that still reads easily. */
+  .saba-paper {
+    --pw: max(100cqi, 700px); --u: calc(var(--pw) / 1326); --rule: calc(var(--u) * 54.594);
+    --hw-r: 0.707; --hw-ad: 0.730;
+    background:
+      url('/photos/paper/lined-top.webp') 0 0 / var(--pw) auto no-repeat,
+      url('/photos/paper/lined-band.webp') 0 calc(var(--u) * 1073) / var(--pw) auto repeat-y;
+    background-color: #F7F9FA;
+    box-shadow: 0 1px 2px rgba(20,25,21,0.08), 0 10px 30px rgba(20,25,21,0.10);
+    font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+    font-size: calc(var(--rule) * var(--hw-r)); line-height: var(--rule);
+    color: #1F2A44;
+    padding: calc(var(--u) * (199.703 - 54.594 * (var(--hw-r) * var(--hw-ad) / 2 + 0.08))) calc(var(--u) * 250) calc(var(--rule) * 2) calc(var(--u) * 80);
+    box-sizing: border-box;
   }
+  .saba-paper p { margin: 0 0 1lh; }
+  .saba-paper p:last-child { margin-bottom: 0; }
   .saba-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
-  .saba-col-body { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.75); margin: 0; }
 
   .saba-card {
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 20px;
@@ -225,7 +234,7 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   /* The design specifies >=1080px only; below is our adaptation. */
   @media (max-width: 900px) {
     .saba-body { padding: 40px 20px 72px; }
-    .saba-cols { grid-template-columns: 1fr; gap: 32px; margin-top: 48px; }
+    .saba-paper { padding-right: calc(var(--u) * 60); }
     .saba-card { padding: 24px 20px 12px; margin-top: 48px; }
     .saba-principle { grid-template-columns: 44px 1fr; gap: 14px; }
     .saba-os-label { margin-top: 48px; }
