@@ -1,12 +1,12 @@
 import { onPageLoad } from './page-load';
 // Render only bookmarked cards from the published page snapshot.
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts';
-import { showToast, getToday, prefersReducedMotion } from './utils.ts';
+import { showToast, getToday, prefersReducedMotion, generateSlug } from './utils.ts';
 import { getScholarshipStatus } from './list-core.ts';
 import { sendEvent } from './events.ts';
 import { downloadICS } from './ics.ts';
 import type { ICSScholarship, ICSProgram } from './ics.ts';
-import { emailOff } from './email-off';
+import { readSavedPayload, type SavedItem } from './saved-payload';
 
 // ── Chip/label helpers ───────────────────────────────────────────────────────
 
@@ -51,15 +51,9 @@ function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-export type SavedItem = {
-  type: 'scholarship' | 'program'; id: number; name: string; href: string;
-  category: string | null; deadline: string | null; url: string;
-  amount?: string; audience?: string | null; provider?: string | null;
-  description?: string | null; openDate?: string | null; active?: boolean; concluded?: boolean;
-};
-
 function savedCard(s: SavedItem): string {
   const sh = s.type === 'scholarship';
+  const href = `/${sh ? 'scholarships' : 'programs'}/${generateSlug(s.name)}/`;
   const attr = (key: string, value: string | undefined | null) => value == null ? '' : ` data-${key}="${esc(value)}"`;
   const due = sh
     ? (s.deadline ? `DUE ${savedShortDate(s.deadline).toUpperCase()}` : 'NO FIXED DEADLINE')
@@ -71,15 +65,15 @@ function savedCard(s: SavedItem): string {
         <span class="sabl-mono sabl-tag">${esc((s.category ?? (sh ? 'GENERAL' : 'PROGRAM')).toUpperCase())}</span>
         <span data-sv-chip></span>
       </div>
-      <a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a>
-      ${sh ? `<div class="sabl-amount">${esc(s.amount ?? '')}</div>${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}`
-        : `${s.provider ? `<div class="sabl-org" style="margin:10px 0 0">${esc(s.provider.toUpperCase())}</div>` : ''}${s.description ? `<div class="sabl-blurb" style="margin-top:14px">${emailOff(s.description)}</div>` : ''}`}
+      <a href="${esc(href)}" class="sabl-name">${esc(s.name)}</a>
+      ${sh ? `<div class="sabl-amount">${esc(s.amount ?? '')}</div>`
+        : s.provider ? `<div class="sabl-org" style="margin:10px 0 0">${esc(s.provider.toUpperCase())}</div>` : ''}
       <div class="sabl-card-foot">
         <span class="sabl-due">${due}</span>
         <div class="sabl-card-actions">
           <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
           ${sh ? (s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-sv-apply><span data-apply-label></span><span class="sabl-ext" aria-hidden="true">↗</span></a>` : '')
-            : `<a href="${esc(s.href)}" class="sabl-apply">Details →</a>`}
+            : `<a href="${esc(href)}" class="sabl-apply">Details →</a>`}
         </div>
       </div>
     </div>
@@ -418,7 +412,7 @@ export function initSaved() {
   onPageLoad(() => {
     root = document.querySelector<HTMLElement>('#sab-saved');
     if (!root) return;
-    items = JSON.parse(root.querySelector('[data-sv-items]')?.textContent ?? '[]');
+    items = readSavedPayload(JSON.parse(root.querySelector('[data-sv-items]')?.textContent ?? '[]'));
     view = 'list';
     calAdded = false;
     repaint();

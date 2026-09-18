@@ -1,8 +1,7 @@
 ---
 import '../../styles/saved.css';
 import '../../styles/directory.css';
-import type { SavedItem } from '../../lib/saved-client.ts';
-import { generateSlug } from '../../lib/utils.ts';
+import { savedPayload, type SavedItem } from '../../lib/saved-payload';
 import type { Scholarship, Program } from '../../lib/data-loader.ts';
 
 interface Props {
@@ -12,10 +11,10 @@ interface Props {
 const { initialScholarships, initialPrograms } = Astro.props;
 // Keep the card fields inline so every bookmark works with the cached page.
 const items: SavedItem[] = [
-  ...initialScholarships.map(({ id, title: name, amount, audience, category, deadline, openDate, active, concluded, url }) =>
-    ({ type: 'scholarship' as const, id, name, amount, audience, category, deadline, openDate, active, concluded, url, href: `/scholarships/${generateSlug(name)}/` })),
-  ...initialPrograms.map(({ id, name, category, provider, description, deadline, url }) =>
-    ({ type: 'program' as const, id, name, category, provider, description, deadline, url, href: `/programs/${generateSlug(name)}/` })),
+  ...initialScholarships.map(({ id, title: name, amount, category, deadline, openDate, active, concluded, url }) =>
+    ({ type: 'scholarship' as const, id, name, amount, category, deadline, openDate, active, concluded, url })),
+  ...initialPrograms.map(({ id, name, category, provider, deadline, url }) =>
+    ({ type: 'program' as const, id, name, category, provider, deadline, url })),
 ];
 ---
 
@@ -78,7 +77,7 @@ const items: SavedItem[] = [
   <div data-sv-cal hidden></div>
 </div>
 
-<script is:inline type="application/json" data-sv-items set:html={JSON.stringify(items).replace(/</g, '\\u003c')} />
+<script is:inline type="application/json" data-sv-items set:html={JSON.stringify(savedPayload(items)).replace(/</g, '\\u003c')} />
 
 <script>
   import { initSaved } from '../../lib/saved-client.ts';

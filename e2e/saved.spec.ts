@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 test('Saved stays small while retaining bookmarks, cross-tab updates and calendar export', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   const response = await page.goto('/saved/');
-  expect(Buffer.byteLength(await response!.text())).toBeLessThan(800_000);
+  expect(Buffer.byteLength(await response!.text())).toBeLessThan(271_208);
   await expect(page.locator('[data-sv-content]')).toBeVisible();
   await expect(page.locator('[data-sv-wrap]')).toHaveCount(0);
   for (const link of await page.locator('[data-sv-empty] a').all()) {
@@ -35,4 +35,32 @@ test('Saved stays small while retaining bookmarks, cross-tab updates and calenda
   });
   await expect(page.locator('[data-sv-count]')).toContainText('4 items');
   expect(await page.locator('[data-sv-wrap][data-type="scholarship"]').evaluateAll(els => els.map(e => e.getAttribute('data-id')))).toEqual(['4', '59']);
+});
+
+
+test('bookmarks and calendar export survive an offline reload', async ({ page, context }) => {
+  await page.goto('/saved/');
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  await page.reload();
+  await expect(page.locator('[data-sv-content]')).toBeVisible();
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    localStorage.setItem('scholarab_saved', '[4,59,999999]');
+    localStorage.setItem('scholarab_saved_programs', '[1,2]');
+  });
+  // Wait for the worker's asynchronous cache writes, including module imports.
+  await expect.poll(() => page.evaluate(async () => {
+    const urls = performance.getEntriesByType('resource').map(e => e.name)
+      .filter(url => url.includes('/_astro/') || url.includes('/fonts/'));
+    return (await Promise.all([...urls, location.href].map(url => caches.match(url)))).every(Boolean);
+  })).toBe(true);
+  await context.setOffline(true);
+  await page.reload();
+  await expect(page.locator('[data-sv-wrap]')).toHaveCount(4);
+  await expect(page.locator('[data-type="scholarship"][data-id="59"] [data-sv-chip]')).toHaveText('CLOSED');
+  await page.locator('[data-sv-view="calendar"]').click();
+  const download = page.waitForEvent('download');
+  await page.locator('[data-cal-add]').click();
+  const calendar = await readFile((await (await download).path())!, 'utf8');
+  expect(calendar).toContain('SUMMARY:Deadline: South Country Co-op Scholarship');
 });
