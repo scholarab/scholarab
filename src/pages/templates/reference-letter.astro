@@ -215,7 +215,7 @@ I really appreciate you taking the time.
 <style>
   .sabt-mono { font-family: var(--font-label); }
 
-  .sabt-hero { max-width: var(--sab-read); margin: 0 auto; padding: 64px 24px 72px; width: 100%; box-sizing: border-box; }
+  .sabt-hero { padding: 64px var(--sab-gutter) 72px; width: 100%; box-sizing: border-box; }
   .sabt-kicker { margin-bottom: 24px; }
   .sabt-kicker-link { color: rgba(238, 241, 236, 0.55); text-decoration: none; }
   .sabt-kicker-link:hover { color: #EEF1EC; }
@@ -227,7 +227,7 @@ I really appreciate you taking the time.
   }
   .sabt-lede { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(238, 241, 236, 0.7); max-width: 52ch; }
 
-  .sabt-body { max-width: var(--sab-read); margin: 0 auto; padding: 56px 24px 96px; width: 100%; box-sizing: border-box; }
+  .sabt-body { max-width: calc(var(--sab-read) + 2 * var(--sab-gutter)); padding: 56px var(--sab-gutter) 96px; width: 100%; box-sizing: border-box; }
   .sabt-intro, .sabt-outro { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); margin: 0 0 8px; }
   .sabt-outro { margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(20,25,21,0.14); }
   .sabt-intro a, .sabt-outro a, .sabt-list a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }

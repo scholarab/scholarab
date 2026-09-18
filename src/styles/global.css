@@ -169,13 +169,12 @@ body {
      is for grids and dashboards. 17px over ~610px of text is about 78
      characters a line; the guides were running past 95. */
   --sab-read: 660px;
-  /* One content measure for every sab page. /educators and /updates already
-     capped at 1180px; the home page, both directories, the detail pages, the
-     quiz and /about were fluid, so on a wide monitor they ran edge to edge
-     while those two stayed put; the same site changing its mind about how
-     wide it is between one nav click and the next. Full-bleed backgrounds are
-     unaffected: the cap goes on the inner wrapper, never the band. */
-  --sab-measure: 1180px;
+  /* One content measure for every sab page, and since 2026-09-18 it is the
+     window: every page runs to the header's gutter (Ilia asked for no empty
+     sides). Only long-form prose keeps --sab-read. Full-bleed backgrounds
+     are unaffected either way. */
+  --sab-measure: none;
+  --sab-gutter: clamp(20px, 4vw, 56px);
   /* The header's height, declared rather than left to content so that
      something outside the header can subtract it. The home hero fills the
      fold with it; the sticky rails park under it. The nav row is one height
@@ -714,8 +713,11 @@ html:not(.js) .sabl-lean { display: none; }
    card holds nowrap chips like "School-based across Alberta (national
    competition)". One long chip widened its column past the page and pushed the
    next column's cards off the right edge of the viewport, cutting off their
-   Details buttons. Zero floor lets the chips ellipsize as they were told to. */
-.sabl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-top: 16px; }
+   Details buttons. Zero floor lets the chips ellipsize as they were told to.
+   The column count grows with the window now that pages are full width: 3 at
+   1440, 4 at 1920, 6 at 2560. A 380px floor keeps those counts dividing the
+   24-card first page evenly. min() keeps the zero floor below 3 columns. */
+.sabl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(380px, (100% - 36px) / 3), 1fr)); gap: 18px; padding-top: 16px; }
 /* Status sections. Full-width grid items, not wrappers, so the cards either
    side stay in one grid and keep their column rhythm.
    The rule under the heading belongs to .sabl-group-name, so it is as long as
@@ -1003,7 +1005,7 @@ html:not(.js) .sabl-more { display: none; }
 /* Directory-page shell (scholarships + programs design pages) */
 .sabp { background: #F4F5F1; color: #141915; font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
 .sabp-header { background: #0A1310; color: #EEF1EC; font-family: var(--font-body); }
-.sabp-body { width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; padding: 72px 48px 96px; }
+.sabp-body { width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; padding: 72px var(--sab-gutter) 96px; }
 /* The directories open on their heading rather than on 72px of cream (Ilia,
    2026-09-15: "move the overall page over higher"). An article wants the air;
    a list of 154 cards wants the fold. :has rather than a class because the
@@ -1020,7 +1022,7 @@ html:not(.js) .sabl-more { display: none; }
 }
 
 /* ══ "ScholarAB Match" design (claude.ai/design); quiz island ══ */
-.sabm-body { padding: 36px 48px 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
+.sabm-body { padding: 36px var(--sab-gutter) 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
 .sabm-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 13px; color: #0A6B4D; letter-spacing: 0.06em; }
 .sabm-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
 .sabm-h1 {

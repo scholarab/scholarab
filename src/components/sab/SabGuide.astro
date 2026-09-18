@@ -147,7 +147,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-mono { font-family: var(--font-label); }
 
   /* ── Dark hero ── */
-  .sabg-hero { max-width: var(--sab-read); margin: 0 auto; padding: 64px 24px 72px; width: 100%; box-sizing: border-box; }
+  .sabg-hero { padding: 64px var(--sab-gutter) 72px; width: 100%; box-sizing: border-box; }
   /* The shared .sab-kicker plus the one thing this one adds: it is a
      breadcrumb, so the first segment is a link back to the index. */
   .sabg-kicker { margin-bottom: 24px; }
@@ -163,8 +163,9 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-meta-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(238, 241, 236,0.35); }
 
   /* ── Prose body ── */
-  .sabg-body { max-width: var(--sab-read); margin: 0 auto; padding: 56px 24px 96px; width: 100%; box-sizing: border-box; }
-  .sabg-prose { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); }
+  .sabg-body { padding: 56px var(--sab-gutter) 96px; width: 100%; box-sizing: border-box; }
+  /* The page runs full width; the prose alone keeps a readable line. */
+  .sabg-prose { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); max-width: var(--sab-read); }
   .sabg-prose h2 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(28px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.01em;
