@@ -7,6 +7,9 @@ test('Saved stays small while retaining bookmarks, cross-tab updates and calenda
   expect(Buffer.byteLength(await response!.text())).toBeLessThan(800_000);
   await expect(page.locator('[data-sv-content]')).toBeVisible();
   await expect(page.locator('[data-sv-wrap]')).toHaveCount(0);
+  for (const link of await page.locator('[data-sv-empty] a').all()) {
+    expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  }
   await page.evaluate(() => {
     localStorage.setItem('scholarab_saved', '[4,"59",999999]');
     localStorage.setItem('scholarab_saved_programs', '["1",2]');

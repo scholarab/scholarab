@@ -7,7 +7,7 @@ const read = (p: string) => readFileSync(join(root, p), 'utf8')
 /** Comments here explain what was removed, so they name the very selectors
  *  these tests forbid. Strip them before matching. */
 const stripComments = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, '')
-const globalCss = stripComments(read('src/styles/global.css'))
+const globalCss = ['global', 'directory', 'quiz', 'saved'].map(name => stripComments(read(`src/styles/${name}.css`))).join('\n')
 
 /**
  * These guard the two defects the 2026-08-20 design-system audit found, both
@@ -54,7 +54,7 @@ describe('theme tokens', () => {
 
 describe('green text colour', () => {
   const files = [
-    'src/styles/global.css',
+    ...['global', 'directory', 'quiz', 'saved'].map(name => `src/styles/${name}.css`),
     'src/components/sab/SabDetail.astro',
     'src/components/sab/SabGuide.astro',
     'src/pages/index.astro',

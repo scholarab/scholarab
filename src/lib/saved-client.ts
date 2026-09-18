@@ -1,3 +1,4 @@
+import { onPageLoad } from './page-load';
 // Render only bookmarked cards from the published page snapshot.
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts';
 import { showToast, getToday, prefersReducedMotion } from './utils.ts';
@@ -414,7 +415,7 @@ export function initSaved() {
     if (e.key === 'scholarab_saved' || e.key === 'scholarab_saved_programs') repaint();
   });
 
-  document.addEventListener('astro:page-load', () => {
+  onPageLoad(() => {
     root = document.querySelector<HTMLElement>('#sab-saved');
     if (!root) return;
     items = JSON.parse(root.querySelector('[data-sv-items]')?.textContent ?? '[]');

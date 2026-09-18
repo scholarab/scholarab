@@ -146,6 +146,7 @@ test('detail arrows walk the filtered search in both directions', async ({ page 
   })!;
   await page.goto(`/scholarships/?sort=highest_pay&q=${encodeURIComponent(term)}`);
   await expect(page.locator('[data-dir-search]')).toHaveValue(term);
+  await expect(page.locator('#sab-scholarships')).not.toHaveAttribute('aria-busy', 'true');
   await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(els => els.map(e => e.getAttribute('href')));
   await page.locator('[data-dir-card]:visible .sabl-name').first().press('Enter');

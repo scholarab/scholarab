@@ -17,10 +17,10 @@ const links = [
     <p>© 2026 ScholarAB · Medicine Hat, Alberta</p>
   </div>
 </footer>
-<style>
+<style is:global>
   .sabf-footer { background: #0A1310; color: #C6CEC9; font-family: 'Archivo', sans-serif; font-size: 14px; }
   .sabf-inner { padding: 32px 48px; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
-  nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
-  nav :global(a) { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-underline-offset: 3px; }
+  .sabf-footer nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .sabf-footer nav a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-underline-offset: 3px; }
   @media (max-width: 900px) { .sabf-inner { padding: 24px 20px; } }
 </style>

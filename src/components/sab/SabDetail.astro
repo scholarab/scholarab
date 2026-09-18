@@ -226,7 +226,7 @@ const chip =
 
 </div>
 
-<style>
+<style is:global>
   .sabd-mono { font-family: 'IBM Plex Mono', monospace; }
 
   .sabd-guide {
@@ -416,6 +416,7 @@ const chip =
 </style>
 
 <script>
+  import { onPageLoad } from '../../lib/page-load';
   import { todayDate } from '../../lib/calendar';
   import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
@@ -494,13 +495,11 @@ const chip =
     }
   });
 
-  // Capture phase + stopPropagation so Astro's ClientRouter (which also
-  // listens for submit and would swap the page) never handles this form.
+  // Submit this opt-in form without leaving the listing.
   document.addEventListener('submit', async (e) => {
     const form = (e.target as Element).closest?.('[data-sabd-alert-form]') as HTMLFormElement | null;
     if (!form) return;
     e.preventDefault();
-    e.stopPropagation();
     const [itemType, itemId] = itemAttrs(form);
     const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value.trim();
     const btn = form.querySelector('button') as HTMLButtonElement;
@@ -575,8 +574,8 @@ const chip =
   }
 
   // Per-item views + initial save-state paint.
-  // astro:page-load fires on first load and after every view-transition swap.
-  document.addEventListener('astro:page-load', () => {
+  // Refresh changing dates and saved state after a cached Back visit.
+  onPageLoad(() => {
     refreshStatusChip();
     restoreSwitcher();
     const view = document.querySelector('[data-detail-view]');

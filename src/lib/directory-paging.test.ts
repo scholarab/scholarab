@@ -55,7 +55,7 @@ function setup(url = '/scholarships/') {
       saveLabel: n => n,
     })
   }
-  document.dispatchEvent(new Event('astro:page-load'))
+  window.dispatchEvent(Object.assign(new Event('pageshow'), { persisted: true }))
 }
 
 const $ = (sel: string) => document.querySelector(sel) as HTMLElement

@@ -1,3 +1,4 @@
+import { onPageLoad } from './page-load';
 // Vanilla controller for the public directory pages (/scholarships, /programs).
 // The page ships fully server-rendered cards; this module only shows/hides and
 // reorders existing DOM nodes, replicating what the old React islands did.
@@ -58,7 +59,7 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
   getSavedIds(): number[];
   toggleSave(id: number): number[];
   saveLabel(name: string, saved: boolean): string;
-  /** Runs after cards are (re)parsed on every astro:page-load; e.g. recompute day chips. */
+  /** Runs after cards are parsed on load or a cached Back visit; e.g. recompute day chips. */
   onCardsParsed?(items: T[]): void;
   /** Cards shown before "Show more"; DIRECTORY_PAGE_SIZE unless a test says otherwise. */
   pageSize?: number;
@@ -514,7 +515,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
   // Fires on first load and after every view-transition swap: re-grab nodes,
   // restore URL filter state, and re-derive anything clock- or storage-dependent.
-  document.addEventListener('astro:page-load', () => {
+  onPageLoad(() => {
     root = document.querySelector<HTMLElement>(rootSelector);
     if (!root) return;
     // The layout sets this in <head>; repeated here so a page built on another
