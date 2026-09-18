@@ -486,8 +486,17 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
   .sab-h1 {
     font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(42px, 7.4vw, 168px); line-height: 1.06; letter-spacing: -0.015em;
-    margin: 0; text-wrap: balance;
+    /* Spacing from the font's own metrics (2026-09-18): caps and ascenders
+       reach 0.80em, g/p/y descend 0.21em, so 1.1 leaves a clear 0.08em
+       between one line's descenders and the next line's ascenders (1.06 left
+       0.04 and they nearly touched). Tracking 0 is the face's designed
+       spacing; negative tracking crowded the heavy weight's small counters.
+       The word space trims 0.03em because a condensed face's default space
+       reads as a gap. The -0.035em margin hangs M's side-bearing so the
+       stems line up with the kicker and the paragraph below. 7.2vw keeps
+       two lines at 1920. */
+    font-size: clamp(42px, 7.2vw, 168px); line-height: 1.1; letter-spacing: 0; word-spacing: -0.03em;
+    margin: 0 0 0 -0.035em; text-wrap: balance;
     animation: sab-rise 0.7s ease both;
   }
 
