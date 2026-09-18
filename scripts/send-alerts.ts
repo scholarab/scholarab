@@ -69,7 +69,7 @@ function emailHtml(rawLabel: string, rawAmount: string | undefined, deadline: st
   const applyUrl = escapeHtml(rawApplyUrl)
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f4f4f5;font-family:Inter,system-ui,sans-serif">
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:system-ui,-apple-system,sans-serif">
 <div style="max-width:560px;margin:32px auto;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
   <div style="background:#0a0a0f;padding:24px 32px">
     <span style="font-size:20px;font-weight:700;color:#fff">Scholar<span style="color:#22d3a5">AB</span></span>

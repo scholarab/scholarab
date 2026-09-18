@@ -31,9 +31,9 @@ const scholarships: Scholarship[] = JSON.parse(
 
 const font = (name: string) => readFileSync(join(__dirname, 'og-fonts', name));
 const fonts = [
-  { name: 'Instrument Serif', data: font('instrument-serif-400.ttf'), weight: 400 as const, style: 'normal' as const },
-  { name: 'Archivo', data: font('archivo-700.ttf'), weight: 700 as const, style: 'normal' as const },
-  { name: 'IBM Plex Mono', data: font('plex-mono-500.ttf'), weight: 500 as const, style: 'normal' as const },
+  { name: 'Big Shoulders', data: font('big-shoulders-800.ttf'), weight: 800 as const, style: 'normal' as const },
+  { name: 'Big Shoulders Label', data: font('big-shoulders-700.ttf'), weight: 700 as const, style: 'normal' as const },
+  { name: 'Public Sans', data: font('public-sans-700.ttf'), weight: 700 as const, style: 'normal' as const },
 ];
 
 function fmtDeadline(d: string | null | undefined): string {
@@ -50,29 +50,29 @@ const el = (type: string, style: Record<string, unknown>, children?: unknown) =>
   ({ type, props: { style, children } });
 
 function card(s: Scholarship) {
-  const titleSize = s.title.length > 60 ? 54 : s.title.length > 40 ? 64 : 76;
+  const titleSize = s.title.length > 60 ? 62 : s.title.length > 40 ? 74 : 88;
   return el('div', {
     width: '100%', height: '100%', display: 'flex', flexDirection: 'column',
     justifyContent: 'space-between', backgroundColor: '#0B1512',
-    padding: '64px 72px', color: '#F2F0E9',
+    padding: '64px 72px', color: '#EEF1EC',
   }, [
-    el('div', { display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'IBM Plex Mono', fontSize: 22, letterSpacing: 2, color: '#2FD3A0' }, [
+    el('div', { display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 22, letterSpacing: 2, color: '#2FD3A0' }, [
       el('div', { width: 14, height: 14, borderRadius: 999, backgroundColor: '#2FD3A0' }),
       el('div', {}, `SCHOLARSHIP · ${(s.region || 'ALBERTA').toUpperCase()}`),
     ]),
     el('div', { display: 'flex', flexDirection: 'column', gap: 28 }, [
-      el('div', { fontFamily: 'Instrument Serif', fontSize: titleSize, lineHeight: 1.05, letterSpacing: -1 }, s.title),
+      el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: titleSize, lineHeight: 1.05, letterSpacing: -1 }, s.title),
       el('div', { display: 'flex', alignItems: 'baseline', gap: 24 }, [
-        el('div', { fontFamily: 'Instrument Serif', fontSize: 58, color: '#2FD3A0' }, s.amount),
-        el('div', { fontFamily: 'IBM Plex Mono', fontSize: 22, letterSpacing: 1.5, color: 'rgba(242,240,233,0.6)' }, fmtDeadline(s.deadline)),
+        el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: 68, color: '#2FD3A0' }, s.amount),
+        el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 22, letterSpacing: 1.5, color: 'rgba(238,241,236,0.6)' }, fmtDeadline(s.deadline)),
       ]),
     ]),
-    el('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(242,240,233,0.2)', paddingTop: 28 }, [
-      el('div', { display: 'flex', fontFamily: 'Archivo', fontSize: 30, fontWeight: 700 }, [
+    el('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(238,241,236,0.2)', paddingTop: 28 }, [
+      el('div', { display: 'flex', fontFamily: 'Public Sans', fontSize: 30, fontWeight: 700 }, [
         el('span', {}, 'Scholar'),
         el('span', { color: '#2FD3A0' }, 'AB'),
       ]),
-      el('div', { fontFamily: 'IBM Plex Mono', fontSize: 20, letterSpacing: 1.5, color: 'rgba(242,240,233,0.6)' }, 'FIND YOUR SCHOLARSHIP · SCHOLARAB.CA'),
+      el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 20, letterSpacing: 1.5, color: 'rgba(238,241,236,0.6)' }, 'FIND YOUR SCHOLARSHIP · SCHOLARAB.CA'),
     ]),
   ]);
 }

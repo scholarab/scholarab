@@ -97,7 +97,7 @@ export default function AdminShell({ user, page, data }: Props) {
   return (
     <div
       className="min-h-screen bg-[#0a0a0f] text-white flex"
-      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+      style={{ fontFamily: 'var(--font-body)' }}
     >
       <Toaster richColors position="top-right" />
 

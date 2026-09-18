@@ -61,12 +61,8 @@ const {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#2FD3A0" />
-    <!-- No Inter preloads here. Inter is the admin panel's font, and the admin
-         pages build their own <head> rather than using this layout, so these
-         preloaded four unused weights on every public page (500/600/700/800
-         report `unloaded` in document.fonts) and spent a fetchpriority="high"
-         slot racing the Big Shoulders and Public Sans faces that actually
-         render. Public pages preload their real faces via SabFonts. -->
+    <!-- No font preloads here. Public pages preload the faces they render
+         via SabFonts; the admin pages build their own <head>. -->
     <ClientRouter />
     <slot name="head" />
     <!-- The token is the one in Web Analytics > Manage site > Install JS Snippet.

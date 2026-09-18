@@ -12,7 +12,7 @@
     <polygon points="6,92 28,60 41,72 37,92" fill="#0E8C64"/>
     <polygon points="53,92 68,58 96,92" fill="#0E8C64"/>
     <polygon points="14,92 46,37 78,92" fill="#2FD3A0"/>
-    <polygon points="30,44 46,34 62,44 46,54" fill="#141915" stroke="#F2F0E9" stroke-width="2.3" stroke-linejoin="round"/>
+    <polygon points="30,44 46,34 62,44 46,54" fill="#141915" stroke="#EEF1EC" stroke-width="2.3" stroke-linejoin="round"/>
     <path d="M 62 44 Q 66 50 64.8 58" fill="none" stroke="#FFC94A" stroke-width="2.1" stroke-linecap="round"/>
     <circle cx="64.6" cy="61" r="2.9" fill="#FFC94A"/>
   </g>

@@ -1,10 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Public Sans, not Inter. Inter is the admin panel's face and it declares it
-     itself; naming it here made the AI-default sans look like ScholarAB's
-     own. Nothing consumes the token today, so this is about what the next
-     page to reach for `font-sans` inherits. */
+  /* Public Sans, the one sans on every page, admin included (Inter, the
+     AI-default sans, was deleted 2026-09-18). */
   --font-sans: 'Public Sans', system-ui, -apple-system, sans-serif;
 }
 
@@ -27,41 +25,6 @@
 }
 
 @layer base {
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/inter-400.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url('/fonts/inter-500.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url('/fonts/inter-600.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url('/fonts/inter-700.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 800;
-    font-display: swap;
-    src: url('/fonts/inter-800.woff2') format('woff2');
-  }
   /* ── Public faces (2026-09-17). Big Shoulders replaced Instrument Serif and
      IBM Plex Mono, Public Sans replaced Archivo: the serif-with-an-italic-word
      and mono-label pairing read as AI-generated. Two family names over the

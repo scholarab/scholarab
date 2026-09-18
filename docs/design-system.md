@@ -27,7 +27,7 @@ under any selector.
 | `--brand` | `#2FD3A0` | `showToast()` in `src/lib/utils.ts`: its only consumer |
 | `--brand-rgb` | `47, 211, 160` | the toast's shadow |
 | `--text-on-brand` | `#0B1512` | the toast's label |
-| `--bg-page` | `#FAF7F0` | `html`/`body`; the canvas behind everything |
+| `--bg-page` | `#F4F5F1` | `html`/`body`; the canvas behind everything |
 | `--text-primary` | `#141915` | `body` colour |
 | `--focus-ring` | `#0A6B4D` | every focus indicator; rebound per surface |
 | `--sab-measure` | `1180px` | grid/dashboard content width |
@@ -36,6 +36,9 @@ under any selector.
 | `--sab-ticker-h` | `45px` | same; both apply above 900px only |
 | `--kicker` | per surface | `.sab-kicker` colour, mint on ink bands |
 | `--sab-btn-shadow` | `#2FD3A0` | the button press shadow |
+| `--font-display` | Big Shoulders (Display 800) | headings, big numbers |
+| `--font-body` | Public Sans 400 to 800 | body, buttons, the wordmark (700) |
+| `--font-label` | Big Shoulders Label (Display 700) | uppercase kickers, dates, small labels |
 
 Everything else is a literal. That is deliberate, see section 6.
 
@@ -43,11 +46,11 @@ Everything else is a literal. That is deliberate, see section 6.
 
 | Role | Value | Notes |
 |---|---|---|
-| Canvas | `#FAF7F0` | cream |
-| Alt band | `#F2EEE4` | |
+| Canvas | `#F4F5F1` | the "cream": a cool off-white since 2026-09-17 |
+| Alt band | `#E9ECE6` | |
 | Ink | `#141915` | body text |
 | Ink band | `#0B1512` | hero, footer, header, dark panels |
-| On-ink | `#F2F0E9` | text on the ink band |
+| On-ink | `#EEF1EC` | text on the ink band |
 | Accent | `#2FD3A0` | mint: **fills only**, 1.8:1 on cream |
 | Green, text | `#0A6B4D` | 6.09:1 on cream, 6.72:1 on white |
 | Green, fill | `#0E8C64` | 3.96:1 on cream: **never as text** |
@@ -138,13 +141,13 @@ duration once drove the height of every card beside it.
 
 `.sabl-chip`, `.sabl-meta`, `.sabl-tag`, `.sabm-count-chip`, `.sabm-paid-chip`,
 and the `/updates` kind labels coloured from `KIND_COLORS` in
-`src/lib/updates.ts`. Pill radius, mono or 600-weight label. **Contrast is measured
+`src/lib/updates.ts`. Pill radius, label-font or 600-weight label. **Contrast is measured
 against the white card, not the cream page**: that distinction is what made
 three `/updates` badges fail AA while looking fine.
 
 ### Kicker (`.sab-kicker`)
 
-The dot-and-mono label above every `h1`. One rule, replacing seven
+The dot-and-label above every `h1`. One rule, replacing seven
 implementations. Colour comes from `--kicker`: green on cream, mint on an ink
 band. Never hard-code its colour at the call site.
 

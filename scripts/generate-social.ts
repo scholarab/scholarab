@@ -171,12 +171,12 @@ function caption(p: Post, index: number): string {
 
 const font = (name: string) => readFileSync(join(__dirname, 'og-fonts', name));
 const fonts = [
-  { name: 'Instrument Serif', data: font('instrument-serif-400.ttf'), weight: 400 as const, style: 'normal' as const },
-  { name: 'Archivo', data: font('archivo-700.ttf'), weight: 700 as const, style: 'normal' as const },
-  { name: 'IBM Plex Mono', data: font('plex-mono-500.ttf'), weight: 500 as const, style: 'normal' as const },
+  { name: 'Big Shoulders', data: font('big-shoulders-800.ttf'), weight: 800 as const, style: 'normal' as const },
+  { name: 'Big Shoulders Label', data: font('big-shoulders-700.ttf'), weight: 700 as const, style: 'normal' as const },
+  { name: 'Public Sans', data: font('public-sans-700.ttf'), weight: 700 as const, style: 'normal' as const },
 ];
 
-const INK = '#F2F0E9';
+const INK = '#EEF1EC';
 const GREEN = '#2FD3A0';
 const BG = '#0B1512';
 
@@ -199,27 +199,27 @@ function card(p: Post, height: number) {
     padding: tall ? '220px 80px' : '90px 80px', color: INK,
   }, [
     el('div', { display: 'flex', flexDirection: 'column', gap: 20 }, [
-      el('div', { display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'IBM Plex Mono', fontSize: 28, letterSpacing: 2, color: GREEN }, [
+      el('div', { display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 28, letterSpacing: 2, color: GREEN }, [
         el('div', { width: 16, height: 16, borderRadius: 999, backgroundColor: GREEN }),
         el('div', {}, `${p.days} DAYS LEFT`),
       ]),
-      el('div', { fontFamily: 'IBM Plex Mono', fontSize: 24, letterSpacing: 2, color: 'rgba(242,240,233,0.55)' },
+      el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 24, letterSpacing: 2, color: 'rgba(238,241,236,0.55)' },
         (p.s.region || 'ALBERTA').toUpperCase()),
     ]),
     el('div', { display: 'flex', flexDirection: 'column', gap: 72 }, [
-      el('div', { fontFamily: 'Instrument Serif', fontSize: titleSize, lineHeight: 1.03, letterSpacing: -2 }, t),
+      el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: titleSize, lineHeight: 1.03, letterSpacing: -1 }, t),
       el('div', { display: 'flex', flexDirection: 'column', gap: 12 }, [
-        el('div', { fontFamily: 'Instrument Serif', fontSize: amountSize, lineHeight: 1, color: GREEN }, p.s.amount),
-        el('div', { fontFamily: 'IBM Plex Mono', fontSize: 30, letterSpacing: 2, color: 'rgba(242,240,233,0.6)' },
+        el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: amountSize, lineHeight: 1, color: GREEN }, p.s.amount),
+        el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 30, letterSpacing: 2, color: 'rgba(238,241,236,0.6)' },
           `CLOSES ${fmtDate(p.s.deadline as string).toUpperCase()}`),
       ]),
     ]),
-    el('div', { display: 'flex', flexDirection: 'column', gap: 22, borderTop: '1px solid rgba(242,240,233,0.2)', paddingTop: 34 }, [
-      el('div', { display: 'flex', fontFamily: 'Archivo', fontSize: 46, fontWeight: 700 }, [
+    el('div', { display: 'flex', flexDirection: 'column', gap: 22, borderTop: '1px solid rgba(238,241,236,0.2)', paddingTop: 34 }, [
+      el('div', { display: 'flex', fontFamily: 'Public Sans', fontSize: 46, fontWeight: 700 }, [
         el('span', {}, 'Scholar'),
         el('span', { color: GREEN }, 'AB'),
       ]),
-      el('div', { fontFamily: 'IBM Plex Mono', fontSize: 26, letterSpacing: 2, color: 'rgba(242,240,233,0.6)' },
+      el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 26, letterSpacing: 2, color: 'rgba(238,241,236,0.6)' },
         'LINK IN BIO · SCHOLARAB.CA'),
     ]),
   ]);
