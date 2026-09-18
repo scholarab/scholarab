@@ -2,6 +2,7 @@
 
 | Target | Student outcome and challenged parts | Local before / after | Restored / removed units | Repairs and limitations |
 | --- | --- | --- | --- | --- |
+| A2 | Students keep navigation and crawlable hubs with less repeated HTML; remove long menu groups, counts, social icons, and footer duplication. | Chrome 27,760 to 13,170 bytes (-52.56%); local production build. | 1/12 (8.33%): restore three primary footer links after a no-JS phone had no route to directories or match. | One cutting round; 1,343 titles/descriptions and guide article mains unchanged; 943 unit tests, 79 E2E passes (7 existing skips); ship-check RUN commands pass. |
 | A1 | Every listing and exact search result with less initial HTML; remove duplicated search/name/ID/label attributes and card wrappers. | 2,039,118 to 1,016,723 bytes (-50.14%); gzip 252,704 to 97,068; no hosted timing claim. | 1/16 (6.25%): restore inactive status after its contract test failed. | Two cut rounds; async assertions now wait for lazy search; index failure preserves cards and filters. 943 unit tests, 75 E2E passes (7 existing skips); ship-check RUN commands pass. |
 
 ## First implemented cuts: September 12, 2026 UTC

@@ -1,476 +1,83 @@
 ---
-import { todayDate as albertaToday } from '../../lib/calendar';
-// Dark header band. Thin, full-width bar in the Apple/Tesla manner (Ilia,
-// 2026-09-13): logo at the window's left edge, links centred, no CTA pill.
-// The current page is marked by brighter text, not an accent underline.
-// (The mono annotation bar was removed at Ilia's request, 2026-07-11.)
-//
-// There is no Home link: the logo is an anchor to '/' on every page and in
-// the open phone sheet, so a Home row was a second control for a destination
-// the wordmark already owns (Ilia, 2026-09-15).
-//
-// Below 900px the same five anchors become a full-screen sheet behind a
-// 44×44 button ("ScholarAB Mobile Home.dc.html", state B); one nav, two
-// layouts, so there is no second link list to keep in sync.
-
 import SabLogoMark from './SabLogoMark.astro';
-import { loadScholarships, loadPrograms } from '../../lib/data-loader';
-import { programIsListed } from '../../lib/status';
-import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
-
-interface Props {
-  currentPath: string;
-}
+interface Props { currentPath: string }
 const { currentPath } = Astro.props;
-
-// Counts shown beside two links in the mobile sheet. Same definitions the
-// home hero uses: every scholarship in the directory, and the programs
-// /programs actually lists. Both loaders are cached, so this is free after
-// the first page of a build, if the data is unreachable the counts simply
-// do not render.
-let scholarshipCount: number | null = null;
-let programCount: number | null = null;
-
-// The Scholarships and Programs dropdowns (Tesla-style, Ilia 2026-09-13,
-// Programs added 2026-09-15): tiles for the hubs, a text list beside them.
-// The Scholarships tiles are the two broad scopes and eight cities chosen for
-// population and reach, not listing count (Lacombe and Okotoks out-list
-// Lethbridge, but far fewer students live there). The Programs tiles are the
-// format hubs (what shape the thing is), because that is what a reader is
-// choosing between; the subject hubs sit in the list beside them.
-// Slugs must exist in the facet lists; a missing one is dropped, not faked.
-const MENU_SCOPES = [
-  'alberta', 'national',
-  'calgary', 'edmonton', 'red-deer', 'lethbridge',
-  'medicine-hat', 'grande-prairie', 'fort-mcmurray', 'st-albert',
-];
-const MENU_TOPICS = ['stem', 'arts', 'trades', 'community', 'sports', 'indigenous'];
-const scholarshipFacetBySlug = new Map(SCHOLARSHIP_FACETS.map(f => [f.slug, f]));
-
-interface Tile { label: string; href: string; count: number | null; backdrop?: string }
-const scopeFacets = MENU_SCOPES
-  .map(slug => scholarshipFacetBySlug.get(slug))
-  .filter(f => f !== undefined);
-const tileOf = (f: { slug: string; label: string; backdrop?: string }, base: string, count: number | null): Tile =>
-  ({ label: f.label, href: `${base}${f.slug}/`, count, backdrop: f.backdrop });
-
-let scopeTiles: Tile[] = scopeFacets.map(f => tileOf(f, '/scholarships/', null));
-// A hub below the floor has no page, so it gets no tile and no link either.
-let formatTiles: Tile[] = [];
-let fieldLinks: { label: string; href: string }[] = [];
-
-try {
-  const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
-  const today = albertaToday();
-  const listedPrograms = programs.filter(p => programIsListed(p, today));
-  scholarshipCount = scholarships.length;
-  programCount = listedPrograms.length;
-  // Biggest scope first. Array sort is stable, so a tie keeps the source order.
-  scopeTiles = scopeFacets
-    .map(f => tileOf(f, '/scholarships/', facetItems(f, scholarships).length))
-    .sort((a, b) => b.count! - a.count!);
-  const liveHub = (f: { slug: string }) =>
-    facetItems(f as Parameters<typeof facetItems>[0], listedPrograms).length;
-  formatTiles = PROGRAM_FORMATS
-    .map(f => ({ facet: f, items: liveHub(f) }))
-    .filter(({ items }) => items >= MIN_FACET_ITEMS)
-    .map(({ facet, items }) => tileOf(facet, '/programs/', items))
-    .sort((a, b) => b.count! - a.count!);
-  fieldLinks = PROGRAM_FACETS
-    .filter(f => liveHub(f) >= MIN_FACET_ITEMS)
-    .map(f => ({ label: f.label, href: `/programs/${f.slug}/` }));
-} catch {
-  /* counts are decoration; the nav works without them */
-}
-
-const topicLinks = [
-  { label: 'All scholarships', href: '/scholarships/' },
-  { label: 'Closing soon', href: '/#closing' },
-  { label: 'Deadline calendar', href: '/deadlines/' },
-  ...MENU_TOPICS
-    .map(slug => scholarshipFacetBySlug.get(slug))
-    .filter(f => f !== undefined)
-    .map(f => ({ label: f.label, href: `/scholarships/${f.slug}/` })),
-  { label: 'Guides', href: '/guides/' },
-];
-
-// Tiles are formats, so the column beside them is the other axis: the subject
-// hubs, then the guides. Both are one click from the panel rather than one
-// click plus a chip row.
-const programLinks = [
-  { label: 'All programs', href: '/programs/' },
-  ...fieldLinks,
-  { label: 'Guides', href: '/guides/' },
-];
-
-// Which nav rows carry a panel, and what goes in it.
-const MENUS: Record<string, { label: string; tiles: Tile[]; links: { label: string; href: string }[] }> = {
-  '/scholarships/': { label: 'Scholarships by location and topic', tiles: scopeTiles, links: topicLinks },
-  '/programs/': { label: 'Programs by format and field', tiles: formatTiles, links: programLinks },
-};
-
 const navItems = [
-  { label: 'Scholarships', href: '/scholarships/', count: scholarshipCount },
-  { label: 'Programs', href: '/programs/', count: programCount },
-  { label: 'Match', href: '/match/', count: null as number | null },
-  { label: 'Saved', href: '/saved/', count: null as number | null },
-  { label: 'About', href: '/about/', count: null as number | null },
+  { label: 'Scholarships', href: '/scholarships/' },
+  { label: 'Programs', href: '/programs/' },
+  { label: 'Match', href: '/match/' },
+  { label: 'Saved', href: '/saved/' },
+  { label: 'About', href: '/about/' },
 ];
-
-// Compare with a normalized trailing slash on both sides. The nav hrefs carry
-// one (bare paths 308-redirect in production, so linking to them split every
-// page across two indexed URLs), but callers pass currentPath either way;
-// a bare '/scholarships' must still light up the '/scholarships/' tab.
-const withSlash = (p: string) => (p.endsWith('/') ? p : p + '/');
-const isActive = (href: string) =>
-  href === '/' ? currentPath === '/' : withSlash(currentPath).startsWith(withSlash(href));
+const scholarshipLinks = [
+  { label: 'All scholarships', href: '/scholarships/' },
+  { label: 'Deadline calendar', href: '/deadlines/' },
+  { label: 'Guides', href: '/guides/' },
+];
+const isActive = (href: string) => `${currentPath.replace(/\/$/, '')}/`.startsWith(href);
 ---
-
 <header class="sabh" data-sab-header>
   <div class="sabh-nav">
     <a href="/" class="sabh-logo" aria-label="ScholarAB home">
       <SabLogoMark size={24} id="header" />
-      <span class="sabh-logo-word">Scholar<span style="color:#2FD3A0;">AB</span></span>
+      <span class="sabh-logo-word">Scholar<span style="color:#2FD3A0">AB</span></span>
     </a>
-    <div class="sabh-actions">
-      <!-- The site nav is a real landmark: it is the only way to jump past
-           these links, or straight to them, without walking the whole page. -->
-      <nav class="sabh-links" id="sabh-links" aria-label="Main">
-        <div class="sabh-sheet-label" aria-hidden="true">GO TO</div>
-        {navItems.map(n => (
-          <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
-            <a
-              href={n.href}
-              class={`sabh-link${isActive(n.href) ? ' sabh-link-active' : ''}`}
-              aria-current={isActive(n.href) ? 'page' : undefined}
-            >
-              <span class="sabh-link-label">{n.label}</span>
-              {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count}</span>}
-            </a>
-            {MENUS[n.href] && (
-              /* Desktop: opens on hover (pointer devices) or when focus enters
-                 the item, so a keyboard user tabs from the link straight into
-                 it, and the link itself still navigates. Phones: the sheet
-                 swaps the link list for this panel instead of navigating. */
-              <div class="sabh-menu" role="group" aria-label={MENUS[n.href]!.label}>
-                <button type="button" class="sabh-sub-back" data-sabh-back>
-                  <span aria-hidden="true">←</span> Back
-                </button>
-                <div class="sabh-menu-inner">
-                  <ul class="sabh-menu-tiles">
-                    {MENUS[n.href]!.tiles.map(t => (
-                      <li>
-                        <a
-                          href={t.href}
-                          class:list={['sabh-tile', { 'sabh-tile-photo': t.backdrop }]}
-                          style={t.backdrop ? `--sabh-tile-img: url(/photos/backdrops/${t.backdrop}-tile.webp)` : undefined}
-                        >
-                          {t.count !== null && (
-                            <span class="sabh-tile-num">{t.count}</span>
-                          )}
-                          <span class="sabh-tile-text">
-                            <span class="sabh-tile-name">{t.label}</span>
-                            {t.count !== null && (
-                              <span class="sabh-tile-count">
-                                {n.href === '/programs/'
-                                  ? (t.count === 1 ? 'program' : 'programs')
-                                  : (t.count === 1 ? 'scholarship' : 'scholarships')}
-                              </span>
-                            )}
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                  <ul class="sabh-menu-list">
-                    {MENUS[n.href]!.links.map(l => (
-                      <li><a href={l.href}>{l.label}</a></li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-        <div class="sabh-sheet-foot" aria-hidden="true">FREE · NO ACCOUNT<br />MADE IN MEDICINE HAT</div>
-      </nav>
-      {/* Same destinations and link treatment as the footer's CONTACT column:
-          outside links open a new tab, and the mailto sits inside email_off so
-          Cloudflare's email obfuscation does not rewrite the anchor. */}
-      <div class="sabh-social">
-        <a href="https://www.instagram.com/scholarab.ca" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" /></svg>
-        </a>
-        <a href="https://www.tiktok.com/@scholarab" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on TikTok">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.11V9.77a5.7 5.7 0 0 0-.77-.05 5.68 5.68 0 1 0 5.68 5.68V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.24-1.48z" /></svg>
-        </a>
-        <Fragment set:html={`<!--email_off--><a href="mailto:contact.scholarab@gmail.com" aria-label="Email ScholarAB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a><!--/email_off-->`} />
-      </div>
-      <button
-        type="button"
-        class="sabh-burger"
-        id="sabh-burger"
-        aria-controls="sabh-links"
-        aria-expanded="false"
-        aria-label="Open menu"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </button>
-    </div>
+    <nav class="sabh-links" id="sabh-links" aria-label="Main">
+      {navItems.map(n => (
+        <div class:list={['sabh-item', { 'sabh-has-menu': n.href === '/scholarships/' }]}>
+          <a href={n.href} class:list={['sabh-link', { 'sabh-link-active': isActive(n.href) }]} aria-current={isActive(n.href) ? 'page' : undefined}>
+            <span class="sabh-link-label">{n.label}</span>
+          </a>
+          {n.href === '/scholarships/' && (
+            <div class="sabh-menu" role="group" aria-label="Scholarships">
+              <button type="button" class="sabh-sub-back" data-sabh-back>← Back</button>
+              <ul>{scholarshipLinks.map(l => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+            </div>
+          )}
+        </div>
+      ))}
+    </nav>
+    <button type="button" class="sabh-burger" id="sabh-burger" aria-controls="sabh-links" aria-expanded="false" aria-label="Open menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
   </div>
 </header>
-
 <style>
-  /* Full window width, not the content measure: the logo sits at the window's
-     left edge and the links are centred on the window, the way Apple and
-     Tesla lay out their bars. Three columns, the outer two equal, so the
-     links stay truly centred whatever the logo's width. */
-  .sabh-nav {
-    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-    padding: 0 clamp(20px, 4vw, 56px); box-sizing: border-box;
-    /* Declared, not content-derived: the home hero subtracts this to fill the
-       fold, and a height that moves with a font metric would move the fold. */
-    height: var(--sab-nav-h);
-  }
+  .sabh-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 clamp(20px, 4vw, 56px); box-sizing: border-box; height: var(--sab-nav-h); position: relative; }
   .sabh-logo { display: flex; align-items: center; gap: 9px; text-decoration: none; justify-self: start; }
   .sabh-logo-word { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.015em; color: #F2F0E9; }
-  /* The wrapper only exists so the burger can sit beside the links in the
-     markup; on desktop the links take the middle column and the burger the
-     last, as if the wrapper were not there. */
-  .sabh-actions { display: contents; }
-  /* The nav row is the positioning context for the dropdown, so the panel
-     spans the whole window rather than the width of the link it hangs from. */
-  .sabh-nav { position: relative; }
-  /* Items fill the bar's full height, so the pointer can travel from a link
-     down into the panel without crossing a gap that would close it. */
   .sabh-links { display: flex; align-items: stretch; gap: 4px; align-self: stretch; }
-  .sabh-item { display: flex; align-items: center; }
-
-  /* ── Scholarships dropdown ── */
-  .sabh-menu {
-    position: absolute; left: 0; right: 0; top: 100%; z-index: 5;
-    background: #0A1310; border-top: 1px solid rgba(242,240,233,0.08);
-    box-shadow: 0 24px 40px -20px rgba(0,0,0,0.6);
-    opacity: 0; visibility: hidden; transform: translateY(-6px);
-    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
-  }
-  .sabh-has-menu:focus-within .sabh-menu { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
-  /* Hover opens only where hover is real. On a touch screen wider than 900px
-     a first tap would otherwise open the panel instead of following the link. */
-  @media (hover: hover) {
-    .sabh-has-menu:hover .sabh-menu { opacity: 1; visibility: visible; transform: none; transition: opacity 0.16s ease 0.06s, transform 0.16s ease 0.06s, visibility 0s linear 0.06s; }
-    .sabh-has-menu:hover .sabh-link { color: #F2F0E9; background: rgba(242,240,233,0.08); }
-  }
-  .sabh-menu-inner {
-    max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
-    padding: 32px 48px 40px;
-    display: grid; grid-template-columns: 1fr auto; gap: 48px;
-  }
+  .sabh-item { display: flex; align-items: center; position: relative; }
+  .sabh-link { font-size: 13.5px; font-weight: 500; letter-spacing: 0.005em; color: #C6CEC9; text-decoration: none; padding: 7px 13px; border-radius: 6px; }
+  .sabh-link:hover, .sabh-link-active { color: #F2F0E9; }
+  .sabh-link:hover { background: rgba(242,240,233,0.08); }
+  .sabh-menu { position: absolute; left: 0; top: 100%; z-index: 5; min-width: 220px; padding: 16px; background: #0A1310; border: 1px solid rgba(242,240,233,0.18); border-radius: 0 0 10px 10px; visibility: hidden; }
   .sabh-menu ul { list-style: none; margin: 0; padding: 0; }
-  /* The tile rows stretch to the full height of the topic list beside them, as
-     Tesla's panel does, so nothing sits empty under the grid. The big count up
-     top and the name at the bottom give the tall tile something to hold. */
-  .sabh-menu-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 8px; }
-  .sabh-tile {
-    display: flex; flex-direction: column; justify-content: space-between; gap: 16px; height: 100%; box-sizing: border-box;
-    padding: 20px 18px; border-radius: 10px; text-decoration: none;
-    border: 1px solid rgba(242,240,233,0.1);
-    transition: background-color 0.15s ease, border-color 0.15s ease;
-  }
-  .sabh-tile:hover { background: rgba(242,240,233,0.06); border-color: rgba(242, 240, 233, 0.22); }
-  /* A scope with a hub photo shows it in its tile. The image is only named
-     while the menu is open, so the header, which is on every page, costs no
-     image bytes until someone actually opens the menu. The gradient keeps the
-     number and name readable over a bright sky or a lit skyline. */
-  /* The photo lives on ::after, never on the tile itself: .sabh-tile:hover
-     sets the `background` shorthand, which would wipe an image on the tile. */
-  .sabh-tile-photo {
-    position: relative; overflow: hidden; isolation: isolate; background-color: #16211C;
-  }
-  .sabh-tile-photo::after {
-    content: ''; position: absolute; inset: 0; z-index: -1;
-    background-size: cover; background-position: center;
-    transition: transform 0.4s ease;
-  }
-  .sabh-has-menu:focus-within .sabh-tile-photo::after {
-    background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
-  }
-  @media (hover: hover) {
-    .sabh-has-menu:hover .sabh-tile-photo::after {
-      background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
-    }
-  }
-  /* The photo tile's hover is a slow zoom rather than the grey wash, which
-     would muddy the image. */
-  .sabh-tile-photo:hover { background-color: #16211C; border-color: rgba(242, 240, 233, 0.35); }
-  .sabh-tile-photo:hover::after { transform: scale(1.05); }
-  .sabh-tile-photo .sabh-tile-num { color: #F2F0E9; text-shadow: 0 1px 12px rgba(0,0,0,0.35); }
-  .sabh-tile-photo .sabh-tile-count { color: rgba(242, 240, 233, 0.8); }
-  .sabh-tile-num {
-    font-family: 'Instrument Serif', Georgia, serif; font-size: 44px; line-height: 1;
-    color: rgba(242, 240, 233, 0.9); letter-spacing: -0.01em; font-variant-numeric: lining-nums;
-  }
-  .sabh-tile-text { display: flex; flex-direction: column; gap: 2px; margin-top: auto; }
-  .sabh-tile-name { font-size: 16px; font-weight: 600; color: #F2F0E9; letter-spacing: -0.005em; }
-  .sabh-tile-count { font-size: 13px; color: rgba(242, 240, 233, 0.55); }
-  /* Two classes, not one: `.sabh-menu ul` above resets padding and outranks a
-     bare `.sabh-menu-list`, which left the divider touching the text. */
-  .sabh-menu .sabh-menu-list {
-    border-left: 1px solid rgba(242,240,233,0.12); padding-left: 40px;
-    display: flex; flex-direction: column; gap: 2px; min-width: 190px;
-  }
-  .sabh-menu-list a {
-    display: block; padding: 6px 0; font-size: 14px; font-weight: 500;
-    color: rgba(242, 240, 233, 0.78); text-decoration: none;
-  }
-  .sabh-menu-list a:hover { color: #F2F0E9; }
-  @media (max-width: 1100px) {
-    .sabh-menu-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .sabh-menu { transform: none; transition: none; }
-  }
-  .sabh-link {
-    font-size: 13.5px; font-weight: 500; letter-spacing: 0.005em; color: rgba(242, 240, 233, 0.7);
-    text-decoration: none; padding: 7px 13px; border-radius: 6px;
-    transition: color 0.15s ease, background-color 0.15s ease;
-  }
-  /* A soft pill on hover, as on tesla.com: the target is visible before the
-     click without an underline or a colour accent. */
-  .sabh-link:hover { color: #F2F0E9; background: rgba(242,240,233,0.08); }
-  .sabh-link-active { color: #F2F0E9; }
-  /* Sheet-only furniture: the section label, the per-link counts and the
-     footnote are all invisible on desktop. */
-  .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count, .sabh-sub-back { display: none; }
-  /* The right-hand column, balancing the logo: the same three destinations
-     the footer carries, as quiet glyphs in the links' colour. */
-  /* :global on the children: the email link is injected with set:html (for
-     the email_off comments), so it never receives this component's scope
-     attribute and a scoped `a` selector would miss it. */
-  .sabh-social { justify-self: end; display: flex; align-items: center; gap: 2px; }
-  .sabh-social :global(a) {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px; border-radius: 6px; color: rgba(242, 240, 233, 0.7);
-    transition: color 0.15s ease, background-color 0.15s ease;
-  }
-  .sabh-social :global(a:hover) { color: #F2F0E9; background: rgba(242,240,233,0.08); }
-  .sabh-social :global(svg) { width: 18px; height: 18px; display: block; }
-
-  /* ── Menu button: three bars that fold into an ✕ while the sheet is open ── */
-  .sabh-burger {
-    display: none; width: 44px; height: 44px; flex: none; padding: 0; justify-self: end;
-    border: 0; border-radius: 8px; background: transparent;
-    flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-    cursor: pointer; transition: background 0.18s ease;
-  }
-  .sabh-burger span {
-    display: block; width: 16px; height: 1.5px; background: #F2F0E9;
-    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 0.12s linear;
-  }
-  .sabh-burger[aria-expanded='true'] { background: rgba(242,240,233,0.08); }
+  .sabh-menu a { display: block; padding: 12px 4px; color: #C6CEC9; text-decoration: none; }
+  .sabh-menu a:hover { color: #F2F0E9; text-decoration: underline; }
+  .sabh-has-menu:focus-within .sabh-menu { visibility: visible; }
+  @media (hover: hover) { .sabh-has-menu:hover .sabh-menu { visibility: visible; } }
+  .sabh-sub-back { display: none; }
+  .sabh-burger { display: none; width: 44px; height: 44px; padding: 0; justify-self: end; border: 0; border-radius: 8px; background: transparent; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
+  .sabh-burger span { display: block; width: 16px; height: 1.5px; background: #F2F0E9; }
   .sabh-burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
   .sabh-burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
   .sabh-burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
-  @media (prefers-reduced-motion: reduce) {
-    .sabh-burger span { transition: none; }
-  }
-
-  /* ══ Phone: bar + sheet ══ */
   @media (max-width: 900px) {
-    /* Padding-sized again below 900: the hero no longer claims the fold,
-       so nothing is subtracting this. */
     .sabh-nav { grid-template-columns: 1fr auto; padding: 0 8px 0 20px; }
     .sabh-burger { display: flex; }
-    /* No room beside the logo and the menu button; the footer still carries
-       all three on a phone. */
-    .sabh-social { display: none; }
-    /* Tapping Scholarships in the sheet swaps the link list for the same
-       panel the desktop dropdown shows (Ilia, 2026-09-15): photo tiles two
-       across, the topic list under them, and a Back button above. */
-    .sabh-menu { display: none; }
-    .sabh-item { display: block; }
-    .sabh[data-sub] .sabh-item:not([data-sub-open]),
-    .sabh[data-sub] [data-sub-open] > .sabh-link,
-    .sabh[data-sub] .sabh-sheet-label,
-    .sabh[data-sub] .sabh-sheet-foot { display: none; }
-    .sabh[data-sub] [data-sub-open] .sabh-menu {
-      display: block; position: static; opacity: 1; visibility: visible; transform: none;
-      transition: none; background: transparent; border-top: 0; box-shadow: none;
-    }
-    .sabh-sub-back {
-      display: flex; align-items: center; gap: 8px; min-height: 44px; width: 100%;
-      padding: 0; margin: 0 0 12px; border: 0; border-bottom: 1px solid rgba(242,240,233,0.18);
-      background: transparent; color: rgba(242, 240, 233, 0.7); cursor: pointer;
-      font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
-    }
-    .sabh-menu-inner { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 0 0 24px; }
-    .sabh-menu-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
-    .sabh-tile { aspect-ratio: 1; padding: 14px 14px 12px; gap: 8px; }
-    .sabh-tile-num { font-size: 38px; }
-    .sabh-tile-name { font-size: 15px; }
-    .sabh[data-sub] [data-sub-open] .sabh-tile-photo::after {
-      background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
-    }
-    .sabh-menu .sabh-menu-list {
-      border-left: 0; padding-left: 0; min-width: 0;
-      border-top: 1px solid rgba(242,240,233,0.12); padding-top: 12px;
-    }
-    .sabh-menu-list a { padding: 12px 0; font-size: 16px; }
-
-    /* Same six anchors, same order, same active class; just a column that
-       owns the screen. Nothing to keep in sync with the desktop row. */
-    .sabh-links {
-      display: none;
-      /* The sheet is a descendant of the bar, so the two are ordered inside
-         the bar's own stacking context: sheet 1, bar backdrop 2, bar
-         contents 3. */
-      position: fixed; inset: 0; z-index: 1;
-      background: #0A1310;
-      flex-direction: column; align-items: stretch; gap: 0;
-      padding: calc(var(--sab-nav-h) + 12px) 20px 24px; box-sizing: border-box;
-      overflow-y: auto; overscroll-behavior: contain;
-    }
+    .sabh-links { display: none; position: fixed; inset: 0; z-index: 1; background: #0A1310; flex-direction: column; align-items: stretch; gap: 0; padding: calc(var(--sab-nav-h) + 12px) 20px 24px; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; }
     .sabh[data-open] .sabh-links { display: flex; }
-    /* The bar rides above the sheet so the logo stays reachable and the
-       button that opened the menu is the button that closes it. */
-    .sabh[data-open] .sabh-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: #0A1310;
-    }
-    .sabh[data-open] .sabh-nav::before {
-      content: ''; position: absolute; inset: 0; background: #0A1310; z-index: 2;
-    }
-    .sabh[data-open] .sabh-logo,
-    .sabh[data-open] .sabh-burger { position: relative; z-index: 3; }
-
-    .sabh-sheet-label {
-      display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px;
-      letter-spacing: 0.06em; color: rgba(242, 240, 233, 0.62);
-      padding: 14px 0 6px; border-top: 1px solid rgba(242,240,233,0.18);
-    }
-    .sabh-link {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      min-height: 56px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
-      padding-bottom: 0; border-bottom: 1px solid rgba(242,240,233,0.12);
-    }
-    /* The sheet keeps an accent dot on the current page: at 22px in a list,
-       brighter text alone does not tell the rows apart. */
-    .sabh-link { padding: 0; border-radius: 0; }
-    .sabh-link:hover { background: transparent; }
-    .sabh-link-active .sabh-link-label::after {
-      content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-      background: #2FD3A0; margin-left: 10px; vertical-align: middle;
-    }
-    .sabh-link-count {
-      display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-      color: rgba(242, 240, 233, 0.62);
-    }
-    .sabh-sheet-foot {
-      display: block; margin-top: 26px;
-      font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em;
-      color: rgba(242, 240, 233, 0.62); line-height: 1.6;
-    }
+    .sabh[data-open] .sabh-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: #0A1310; }
+    .sabh[data-open] .sabh-nav::before { content: ''; position: absolute; inset: 0; background: #0A1310; z-index: 2; }
+    .sabh[data-open] .sabh-logo, .sabh[data-open] .sabh-burger { position: relative; z-index: 3; }
+    .sabh-item { display: block; }
+    .sabh-link { display: flex; align-items: center; min-height: 56px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; padding: 0; border-radius: 0; border-bottom: 1px solid rgba(242,240,233,0.12); }
+    .sabh-link-active .sabh-link-label::after { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; margin-left: 10px; vertical-align: middle; }
+    .sabh-menu { display: none; }
+    .sabh[data-sub] .sabh-item:not([data-sub-open]), .sabh[data-sub] [data-sub-open] > .sabh-link { display: none; }
+    .sabh[data-sub] [data-sub-open] .sabh-menu { display: block; position: static; visibility: visible; border: 0; padding: 0; }
+    .sabh-sub-back { display: block; min-height: 44px; border: 0; border-bottom: 1px solid rgba(242,240,233,0.18); background: transparent; color: #C6CEC9; font-size: 16px; cursor: pointer; }
   }
 </style>
 
