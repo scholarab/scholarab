@@ -1,10 +1,4 @@
-// One normalizer for every search surface.
-//
-// Three of them have to agree or the directory lies to its own analytics: the
-// `data-search` blob each card carries, the full-corpus token index at
-// /search-index.json, and the query a student types. They did not agree
-// before. `mcdonalds` could never match the stored `McDonald's`, and every
-// such miss was written to the events table as a content gap.
+// One normalizer for directory search text, suggestions, and student queries.
 
 /**
  * Field separator inside a search blob.

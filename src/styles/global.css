@@ -789,12 +789,12 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-group-caret { transition: transform 0.18s ease; }
 .sabl-group[aria-expanded='false'] .sabl-group-caret { transform: rotate(-90deg); }
 @media (prefers-reduced-motion: reduce) { .sabl-group-caret { transition: none; } }
-.sabl-card {
+:is(.sabl-card, [data-dir-card]) {
   display: flex; flex-direction: column; background: #FFFFFF;
   border: 1.5px solid rgba(20,25,21,0.85); border-radius: 18px; padding: 30px 28px 26px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.sabl-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #0E8C64; }
+:is(.sabl-card, [data-dir-card]):hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #0E8C64; }
 /* Wraps rather than collides: both chips are nowrap, so in a narrow card (the
    railed hubs put three cards in 916px) a long tag like MATH & PHYSICS used to
    run straight under the day chip. `margin-left: auto` keeps the day chip on
@@ -840,6 +840,8 @@ html.js .sabl-group-toggle { display: inline-flex; }
   margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(20,25,21,0.12); gap: 10px;
 }
 .sabl-due { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: rgba(20, 25, 21, 0.85); }
+[data-dir-card] .sabl-due { margin-right: auto; }
+#sab-scholarships .sabl-apply::after { content: "↗"; margin-left: 0.4em; }
 .sabl-card-actions { display: flex; align-items: center; gap: 14px; }
 .sabl-save {
   font-family: 'Archivo', sans-serif; font-size: 15px; background: none;
@@ -912,7 +914,7 @@ html:not(.js) .sabl-more { display: none; }
 .sabl-empty-btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .sabl-card, .sabl-card:hover { transform: none; transition: none; }
+  :is(.sabl-card, [data-dir-card]), :is(.sabl-card, [data-dir-card]):hover { transform: none; transition: none; }
   .sabl-empty-btn, .sabl-empty-btn:hover, .sabl-empty-btn:focus-visible, .sabl-empty-btn:active {
     transform: none; transition: none;
   }
