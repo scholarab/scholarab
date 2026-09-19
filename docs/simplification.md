@@ -1,5 +1,17 @@
 # ScholarAB simplification record
 
+## Hero film re-encode: September 19, 2026
+
+Re-encoded from the H.264 masters (the higher-bitrate copies) at 1080p: H.265 CRF 28 and H.264 CRF 27, CRF 30/29 for the three high-detail takes (08, 10, 18), audio and timecode tracks dropped, faststart kept. SSIM against the masters is at or above what the old H.265 files scored (clip 01: 0.982 vs 0.987; clip 08: 0.958 vs 0.953).
+
+| Metric | Before | After |
+| --- | --- | --- |
+| H.265 set (what Chrome and Safari fetch) | 63.7 MB | 29.3 MB (54% smaller) |
+| H.264 fallback set | 80.2 MB | 34.6 MB (57% smaller) |
+| First clip on a desktop first visit, measured in Chrome | 6.56 MB (plus a second clip, 13.2 MB total, before the prefetch change) | 2.71 MB |
+
+Local measurements. Playback, the 6 s prefetch and the crossfade were verified in Chrome; the H.264 files were checked by a full decode, not in a browser that needs them.
+
 ## P2/P3 pass: September 19, 2026
 
 | Candidate | Outcome |
