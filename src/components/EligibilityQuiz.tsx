@@ -12,6 +12,7 @@ import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
   SCHOOL_QUESTION_KEY, schoolQuestion, schoolsForCity,
   BOARD_QUESTION_KEY, boardQuestion, boardsForCity, RESULT_LIMIT,
+  quizQuestionCeiling, quizTotalLabel,
 } from '../lib/quiz.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -171,6 +172,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       ...(schools.length > 0 ? [schoolQuestion(schools)] : []),
     ]
   }, [answers.city, scholarships])
+
+  // Until the city is answered the board and school questions are unknown, so
+  // "of 6" would jump to "of 8" mid-quiz. Say the most it can be for any city
+  // instead; landing on fewer is good news, growing is not.
+  // QuizLoader's placeholder prints the same label from the same helpers.
+  const ceiling = useMemo(() => quizQuestionCeiling(scholarships), [scholarships])
+  const totalLabel = quizTotalLabel(ceiling, QUESTIONS.length, !!answers.city)
 
   useLayoutEffect(() => () => {
     if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
@@ -366,11 +374,20 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const programCount = programResults?.length ?? 0
     const hasAnyResults = scholarshipCount > 0 || programCount > 0
 
+    // "Worth a look", never "you qualify for": the quiz asks six things and
+    // most awards gate on more than six, so it can rule awards out but it
+    // cannot rule them in. The rows say what is left to check.
     const headline = showScholarships && showPrograms
-      ? `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} and ${programCount} program${programCount !== 1 ? 's' : ''} for you.`
+      ? `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} and ${programCount} program${programCount !== 1 ? 's' : ''} worth a look.`
       : showPrograms
-        ? `We found ${programCount} program${programCount !== 1 ? 's' : ''} matching your profile.`
-        : `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} you qualify for.`
+        ? `We found ${programCount} program${programCount !== 1 ? 's' : ''} for your grade and field.`
+        : `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} worth a look.`
+
+    // A tier only means something next to a different tier. When every row
+    // carries the same one (20 of 20 "Strong match" was the common case), the
+    // label reads as a promise about each award rather than a ranking.
+    const tierCount = [strong, good, possible].filter(t => t.length > 0).length
+    const showTiers = tierCount > 1
 
     return (
       <div className="quiz-results-in">
@@ -381,12 +398,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           ))}
         </div>
 
-        <div className="sabm-kicker sabl-mono" style={{ marginTop: 24 }}>
-          <span className="sabm-kicker-dot" aria-hidden="true"></span>
-          <span>YOUR MATCHES</span>
-        </div>
-
-        <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1">
+        <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1" style={{ marginTop: 24 }}>
           {headline}
         </h2>
 
@@ -409,7 +421,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         )}
 
         <div className="sabm-results-bar">
-          {showScholarships && (strong.length > 0 || good.length > 0 || possible.length > 0) ? (
+          {showScholarships && showTiers ? (
             <div className="sabm-count-chips">
               {strong.length > 0 && <span className="sabl-mono sabm-count-chip solid">{strong.length} strong match{strong.length !== 1 ? 'es' : ''}</span>}
               {good.length > 0 && <span className="sabl-mono sabm-count-chip">{good.length} good match{good.length !== 1 ? 'es' : ''}</span>}
@@ -435,7 +447,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             <p className="sabl-mono sabm-table-label">
               {showPrograms ? 'SCHOLARSHIPS · RANKED BY FIT' : 'RANKED BY FIT'}
             </p>
-            {scholarshipResults.map(({ scholarship: s, tier, signals }, index) => {
+            {scholarshipResults.map(({ scholarship: s, tier, signals, checks }, index) => {
               const style = TIER_STYLES[tier]
               return (
                 <ResultRow
@@ -446,7 +458,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   titleHref={`/scholarships/${generateSlug(s.title)}/`}
                   subtitle={s.audience}
                   tags={<>
-                    <span className={style.badge}>{style.label}</span>
+                    {checks.length > 0
+                      ? checks.map(c => <span key={c} className="sabm-tier sabm-check">Check: {c}</span>)
+                      : showTiers && <span className={style.badge}>{style.label}</span>}
                     {s.deadline && <span className="sabm-tier sabm-due">Due {formatDue(s.deadline)}</span>}
                   </>}
                   // Two at most. The point is to justify the rank at a glance,
@@ -568,7 +582,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           ))}
         </div>
         <div className="sabl-mono sabm-step-label">
-          Question {step + 1} of {QUESTIONS.length}
+          Question {step + 1} of {totalLabel}
         </div>
       </div>
 

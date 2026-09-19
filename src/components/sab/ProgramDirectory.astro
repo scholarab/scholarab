@@ -133,7 +133,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
         aria-label="Search programs by name, university, or field"
       />
     </div>
-    <div class="sabl-sort">
+    <div class="sabl-sort" id="dir-sort">
       <span class="sabl-mono sabl-row-label">SORT</span>
       <div class="sabl-sort-chips">
       {SORT_CHIPS.map(s => (
@@ -145,6 +145,11 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
         rail's column with them (Ilia, 2026-09-15). Only the filters: the
         heading, the standfirst, the money, the search box and these chips all
         stay whichever way it is set. */}
+    {/* Phones only: sort and every chip row fold behind this, so the first
+        card is on the first screen. Desktop keeps the lean toggle below. */}
+    <button type="button" class="sabl-filters-btn" data-dir-filters aria-expanded="false" aria-controls="dir-sort dir-filters">
+      Filters<span class="sabl-mono sabl-filters-n" data-dir-filter-n hidden></span>
+    </button>
     <button type="button" class="sabl-lean" data-dir-lean aria-pressed="false">
       <span data-dir-lean-word>Hide filters</span>
       <svg class="sabl-lean-caret" viewBox="0 0 12 8" width="12" height="8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -155,7 +160,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 
   {/* Rail or rows, one DOM; see the twin in ScholarshipDirectory. */}
   <div class="sabl-split">
-  <aside class="sabl-rail" aria-label="Filters">
+  <aside class="sabl-rail" id="dir-filters" aria-label="Filters">
   {/* -dense: FIELD is nine chips wide and only holds one line on the tighter
       metrics: 995px of the 1020 the measure gives it, where the default chip
       padding would put it well over. The row was ten and scrolling before

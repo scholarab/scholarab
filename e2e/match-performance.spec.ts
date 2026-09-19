@@ -56,7 +56,7 @@ test('production match startup budget and ten-run median at 4x CPU', async ({ br
           observer.observe(document, { childList: true, subtree: true });
         });
         const response = await page.goto(url, { waitUntil: 'domcontentloaded' });
-        await expect(page.locator('.sabm-step-label')).toHaveText('Question 2 of 6');
+        await expect(page.locator('.sabm-step-label')).toHaveText(/^Question 2 of (up to )?\d+$/);
         const observed = await page.evaluate(() => {
           const readyMs = Number(Reflect.get(window, 'matchProbe'));
           const loaded = (performance.getEntriesByType('resource') as PerformanceResourceTiming[]).filter(r => r.responseEnd <= readyMs).map(r => r.name);

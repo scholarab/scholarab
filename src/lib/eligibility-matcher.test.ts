@@ -40,7 +40,25 @@ describe('matchScholarship', () => {
   describe('null eligibility', () => {
     it('returns match:true, confidence:0.20, and nothing to say either way', () => {
       expect(matchScholarship(baseProfile, { region: null, eligibility: null }))
-        .toEqual({ match: true, confidence: 0.20, reasons: [], signals: [] })
+        .toEqual({ match: true, confidence: 0.20, reasons: [], signals: [], checks: [] })
+    })
+  })
+
+  // ── Unasked requirements ──────────────────────────────────────────────────
+  describe('checks', () => {
+    it('lists restrictions the quiz never asked about, and still matches', () => {
+      const r = matchScholarship(baseProfile, sch({ indigenousRequired: true, financialNeed: true }))
+      expect(r.match).toBe(true)
+      expect(r.checks).toEqual(['Indigenous students only', 'Based on financial need'])
+    })
+
+    it('drops a check once the student has answered it', () => {
+      const r = matchScholarship({ ...baseProfile, identifiesAsFemale: true }, sch({ genderRequired: 'female' }))
+      expect(r.checks).toEqual([])
+    })
+
+    it('does not flag citizenship', () => {
+      expect(matchScholarship(baseProfile, sch({ citizenship: 'canadian' })).checks).toEqual([])
     })
   })
 

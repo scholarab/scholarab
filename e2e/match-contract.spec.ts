@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import payload from '../src/data/quiz-payload.json' with { type: 'json' };
-import { QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, boardsForCity, schoolsForCity, boardQuestion, schoolQuestion } from '../src/lib/quiz';
+import { QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, boardsForCity, schoolsForCity, boardQuestion, schoolQuestion, quizQuestionCeiling } from '../src/lib/quiz';
 
 // Payload fault injection must reach Playwright rather than the service worker.
 test.use({ serviceWorkers: 'block' });
@@ -48,7 +48,7 @@ test('catalogue questions keep their order, keyboard navigation, private resume 
   await page.getByRole('button', { name: 'Retake quiz' }).click();
   await expect(page.locator('.sabm-question')).toHaveText(QUIZ_QUESTIONS[0]!.q);
   await page.reload();
-  await expect(page.locator('.sabm-step-label')).toHaveText('Question 1 of 6');
+  await expect(page.locator('.sabm-step-label')).toHaveText(`Question 1 of up to ${quizQuestionCeiling(payload.scholarships)}`);
 });
 
 for (const failure of ['network', 'version', 'shape'] as const) {

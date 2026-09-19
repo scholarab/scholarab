@@ -24,17 +24,17 @@ test('programs page - list hydrates and shows count', async ({ page }) => {
 test('match quiz reaches results', async ({ page }) => {
   await page.goto('/match/');
     // Wait for React client:load hydration
-    await expect(page.locator('text=Question 1 of 6')).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('text=/Question 1 of up to \\d+/')).toBeVisible({ timeout: 15_000 });
 
     // The length is not fixed. Answering the city appends a board question, and
     // a school question on top of that where the city has awards tied to named
-    // schools, so the counter reads "of 6" until the city is chosen and "of 7"
-    // or "of 8" after it. This used to hard-code six and broke at question 4,
+    // schools, so the counter reads "of up to 8" until the city is chosen and
+    // the real total after it. This used to hard-code six and broke at question 4,
     // one step past the city. Read the counter instead of assuming it.
-    const counter = page.locator('text=/Question \\d+ of \\d+/');
+    const counter = page.locator('text=/Question \\d+ of (up to )?\\d+/');
     for (let guard = 0; guard < 12; guard++) {
       const label = await counter.first().textContent();
-      const [, step, total] = /Question (\d+) of (\d+)/.exec(label ?? '') ?? [];
+      const [, step, total] = /Question (\d+) of (?:up to )?(\d+)/.exec(label ?? '') ?? [];
       expect(step, 'the quiz should show a question counter').toBeDefined();
 
       // Target the answer tiles by their own class. Scoping to '#main-content
@@ -50,7 +50,7 @@ test('match quiz reaches results', async ({ page }) => {
       // Deterministic step advance; no fixed sleep racing the transition window.
       // Matched on the step alone: answering the city grows the total in the
       // same tick that advances the step.
-      await expect(page.locator(`text=/Question ${Number(step) + 1} of \\d+/`))
+      await expect(page.locator(`text=/Question ${Number(step) + 1} of (up to )?\\d+/`))
         .toBeVisible({ timeout: 10_000 });
     }
 

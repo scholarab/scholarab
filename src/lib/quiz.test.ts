@@ -250,3 +250,21 @@ describe('school board question', () => {
     for (const code of Object.keys(SCHOOL_BOARD_NAMES)) expect(used.has(code), code).toBe(true);
   });
 })
+
+describe('quiz step label', () => {
+  it('says "up to" the ceiling until the city is answered', async () => {
+    const { quizTotalLabel } = await import('./quiz');
+    expect(quizTotalLabel(8, 6, false)).toBe('up to 8');
+    expect(quizTotalLabel(8, 6, true)).toBe('6');
+    expect(quizTotalLabel(6, 6, false)).toBe('6');
+  });
+
+  it('never states a ceiling below the base question count', async () => {
+    const { quizQuestionCeiling, QUIZ_QUESTION_COUNT, QUIZ_MAX_QUESTION_COUNT } = await import('./quiz');
+    expect(quizQuestionCeiling([])).toBe(QUIZ_QUESTION_COUNT);
+    const payload = (await import('../data/quiz-payload.json')).default as { scholarships: Parameters<typeof quizQuestionCeiling>[0] };
+    const ceiling = quizQuestionCeiling(payload.scholarships);
+    expect(ceiling).toBeGreaterThanOrEqual(QUIZ_QUESTION_COUNT);
+    expect(ceiling).toBeLessThanOrEqual(QUIZ_MAX_QUESTION_COUNT);
+  });
+});

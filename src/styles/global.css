@@ -670,7 +670,12 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    The switch lives on <html>, set from localStorage by the inline script in
    Layout.astro before the first paint, so a reader who chose the wide layout
    does not watch the rail appear and then vanish on every page. */
-html[data-lean] .sabl-rail { display: none; }
+/* Desktop only: on a phone the rail is folded by the Filters button instead,
+   and a lean preference set on a laptop must not leave that button opening
+   an empty fold. */
+@media (min-width: 901px) {
+  html[data-lean] .sabl-rail { display: none; }
+}
 @media (min-width: 1180px) {
   /* Two columns collapse to one flow. The head, the split and the column are
      all plain blocks again, and .sabl-railed .sabl-grid keeps its auto-fill
@@ -692,6 +697,35 @@ html[data-lean] .sabl-rail { display: none; }
 /* No JavaScript, no toggle: the attribute it sets would never be read back,
    and a control that does nothing is worse than no control. */
 html:not(.js) .sabl-lean { display: none; }
+
+/* ── Phone filters ──
+   On a phone, sort and the chip rows sat between the search box and the
+   first card: 38 chips on /scholarships, and no listing on the first screen
+   of any directory. They fold behind one button beside the search box. The
+   number is how many filters are on, so a deep link like ?category=Arts
+   still says it is filtered while folded. Without JS the fold never closes. */
+.sabl-filters-btn { display: none; }
+@media (max-width: 900px) {
+  html.js .sabl-lean { display: none; }
+  html.js .sabl-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 10px; }
+  html.js .sabl-toolbar .sabl-search { grid-column: 1; max-width: none; }
+  html.js .sabl-toolbar .sabl-sort { grid-column: 1 / -1; }
+  html.js .sabl-filters-btn {
+    display: inline-flex; align-items: center; gap: 8px; grid-column: 2; grid-row: 1;
+    min-height: 44px; padding: 0 16px; border-radius: 100px;
+    border: 1.5px solid rgba(20,25,21,0.3); background: transparent; color: #141915;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  html.js .sabl-filters-btn[aria-expanded='true'] { background: #141915; color: #EEF1EC; border-color: #141915; }
+  .sabl-filters-n {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 20px; height: 20px; padding: 0 6px; box-sizing: border-box; border-radius: 100px;
+    background: #0A6B4D; color: #F4F5F1; font-size: 11.5px;
+  }
+  .sabl-filters-n[hidden] { display: none; }
+  html.js:not([data-filters]) .sabl-toolbar .sabl-sort,
+  html.js:not([data-filters]) .sabl-rail { display: none; }
+}
 
 /* The visible count line ("153 OF 153 LISTINGS · 15 OPEN NOW") was deleted
    2026-09-15 at Ilia's request: the status sections below now say the same
@@ -1023,8 +1057,6 @@ html:not(.js) .sabl-more { display: none; }
 
 /* ══ "ScholarAB Match" design (claude.ai/design); quiz island ══ */
 .sabm-body { padding: 36px var(--sab-gutter) 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
-.sabm-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 13px; color: #0A6B4D; letter-spacing: 0.06em; }
-.sabm-kicker-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2FD3A0; }
 .sabm-h1 {
   font-family: var(--font-display); font-weight: 400;
   font-size: clamp(44px, 7vw, 72px); line-height: 1; letter-spacing: -0.015em; margin: 0; color: #141915;
@@ -1170,6 +1202,9 @@ html:not(.js) .sabm-ph { display: none; }
 }
 .sabm-tier-strong { background: rgba(47,211,160,0.18); color: #0A6B4D; }
 .sabm-tier-good { background: rgba(20,25,21,0.07); color: rgba(20, 25, 21, 0.7); }
+/* An eligibility rule the quiz never asked about. Rust, like every other
+   "act on this" mark, at #9C4518 so it clears AA on cream (5.85:1). */
+.sabm-check { border: 1px solid rgba(156,69,24,0.45); color: #9C4518; white-space: normal; }
 .sabm-tier-possible, .sabm-due { border: 1px solid rgba(20,25,21,0.2); color: rgba(20, 25, 21, 0.68); }
 .sabm-row-amount { font-family: var(--font-display); font-size: 28px; line-height: 1.15; text-align: right; color: #0A6B4D; }
 .sabm-amount-muted { font-family: var(--font-body); font-size: 13px; color: rgba(20, 25, 21, 0.68); }

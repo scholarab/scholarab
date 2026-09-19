@@ -1,8 +1,14 @@
 ---
-import { QUIZ_QUESTIONS } from '../lib/quiz';
+import { QUIZ_QUESTIONS, quizQuestionCeiling, quizTotalLabel } from '../lib/quiz';
+import payload from '../data/quiz-payload.json';
 
 interface Props { url: string }
 const first = QUIZ_QUESTIONS[0]!;
+// Build time only: the payload is imported here for its board and school
+// lists, the same ones the live quiz reads, so the two labels agree.
+const totalLabel = quizTotalLabel(
+  quizQuestionCeiling((payload as { scholarships: Parameters<typeof quizQuestionCeiling>[0] }).scholarships),
+  QUIZ_QUESTIONS.length, false);
 ---
 {/* The quiz renders only once its data arrives, and it used to arrive into a
     one-line status: the section below jumped down about 500px after load
@@ -18,7 +24,7 @@ const first = QUIZ_QUESTIONS[0]!;
         <div class="sabm-progress">
           {QUIZ_QUESTIONS.map((_, i) => <div class:list={['sabm-seg', i === 0 && 'current']} />)}
         </div>
-        <div class="sabl-mono sabm-ph-step-label">Question 1 of {QUIZ_QUESTIONS.length}</div>
+        <div class="sabl-mono sabm-ph-step-label">Question 1 of {totalLabel}</div>
       </div>
       <div>
         <div class="sabm-ph-question">{first.q}</div>

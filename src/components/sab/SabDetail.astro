@@ -137,24 +137,35 @@ const chip =
 
     {eligibility && (
       <div class="sabd-elig">
-        <div class="sabd-mono sabd-elig-label">WHO CAN APPLY</div>
+        <h2 class="sabd-h2 sabd-h2-elig">Who can apply</h2>
         <div class="sabd-elig-text" set:html={emailOff(eligibility)} />
       </div>
     )}
 
     {about && (
       <div>
-        <div class="sabd-mono sabd-section-label">ABOUT THIS {typeLabel}</div>
+        <h2 class="sabd-h2">About this {typeLabel.toLowerCase()}</h2>
         <div class="sabd-about">
           <p set:html={aboutHtml} />
-          {notes && <p set:html={notesHtml} />}
         </div>
+      </div>
+    )}
+
+    {/* The notes are the part no other list has: the catch, the trick, the
+        thing the sponsor's page buries. They get the ruled paper and the
+        handwriting from the founder's letter on /about, so the one voice that
+        is ours reads as ours wherever it appears. No signature: a note is
+        the site's, not a personal promise from one person. */}
+    {notes && (
+      <div class="sabd-note">
+        <h2 class="sabd-h2">Worth knowing</h2>
+        <div class="sabd-paper"><p set:html={notesHtml} /></div>
       </div>
     )}
 
     {steps.length > 0 && (
       <div>
-        <div class="sabd-mono sabd-section-label">HOW TO APPLY</div>
+        <h2 class="sabd-h2">How to apply</h2>
         <div class="sabd-steps">
           {steps.map((text, i) => (
             <div class="sabd-step">
@@ -191,7 +202,10 @@ const chip =
         <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
           class="sabd-save" title="Save" aria-label="Save">☆</button>
       </div>
-      {status !== 'active' && url && (
+      {/* Only when the button above is a dead label. For TBA and ongoing
+          listings the button already goes to this same URL, and a second
+          link to it under a different name read as a second destination. */}
+      {(status === 'closed' || status === 'future') && url && (
         <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
           data-track="apply" data-item-type={itemType} data-item-id={itemId}
           class="sabd-mono sabd-visit">VISIT OFFICIAL SITE<span class="sabl-ext" aria-hidden="true">↗</span></a>
@@ -301,10 +315,43 @@ const chip =
   .sabd-fact-value { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
 
   .sabd-elig { background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px; padding: 28px 30px; }
-  .sabd-elig-label { font-size: 12px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 14px; }
+  /* Section heads in the directory's own group-heading voice (OPEN NOW,
+     CLOSING SOON): real h2s, so a screen reader can walk the page by
+     section, where these used to be 12px grey mono labels in divs. */
+  .sabd-h2 {
+    font-family: var(--font-label); font-size: 24px; font-weight: 600;
+    letter-spacing: 0.02em; line-height: 1.1; text-transform: uppercase;
+    color: #141915; margin: 0 0 14px;
+  }
+  .sabd-h2-elig { color: #0A6B4D; }
   .sabd-elig-text { font-size: 16.5px; line-height: 1.6; }
 
-  .sabd-section-label { font-size: 12px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.68); margin-bottom: 14px; }
+  @font-face { font-family: 'Patrick Hand'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/hw-patrick-hand.woff2') format('woff2'); }
+  /* Ruled paper drawn in CSS rather than the /about scan, which is sized for
+     an 880px sheet: blue rules one line apart, the red margin, and text set
+     on the rules. Line height IS the rule pitch, and the top padding is one
+     pitch, so every line box ends on a rule at any width. */
+  .sabd-paper {
+    --pitch: 32px;
+    max-width: 640px; box-sizing: border-box;
+    padding: var(--pitch) 24px var(--pitch) 56px;
+    background:
+      linear-gradient(to right, transparent 40px, rgba(206,72,72,0.5) 40px, rgba(206,72,72,0.5) 41.5px, transparent 41.5px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--pitch) - 1px), rgba(64,120,196,0.3) calc(var(--pitch) - 1px), rgba(64,120,196,0.3) var(--pitch));
+    background-color: #F7F9FA;
+    box-shadow: 0 1px 2px rgba(20,25,21,0.08), 0 10px 30px rgba(20,25,21,0.10);
+    font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+    font-size: 22px; line-height: var(--pitch); color: #1F2A44;
+  }
+  .sabd-paper p { margin: 0; }
+  .sabd-paper a { color: inherit; text-decoration-color: rgba(31,42,68,0.45); text-underline-offset: 3px; }
+  @media (max-width: 640px) {
+    .sabd-paper { --pitch: 30px; font-size: 20px; padding-left: 46px; padding-right: 16px; }
+    .sabd-paper { background:
+      linear-gradient(to right, transparent 32px, rgba(206,72,72,0.5) 32px, rgba(206,72,72,0.5) 33.5px, transparent 33.5px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--pitch) - 1px), rgba(64,120,196,0.3) calc(var(--pitch) - 1px), rgba(64,120,196,0.3) var(--pitch));
+      background-color: #F7F9FA; }
+  }
   .sabd-about { font-size: 16.5px; line-height: 1.65; color: rgba(20, 25, 21, 0.78); max-width: 640px; }
   .sabd-about p { margin: 0; }
   .sabd-about p + p { margin-top: 12px; }

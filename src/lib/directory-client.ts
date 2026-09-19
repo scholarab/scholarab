@@ -92,6 +92,21 @@ function setLean(on: boolean) {
   }
 }
 
+/**
+ * The phone layout: filters and sort fold behind one "Filters" button, so the
+ * first card is on the first screen instead of under 38 chips. Not persisted
+ * and separate from lean mode, which is a desktop preference about a column;
+ * this is a disclosure a reader opens, uses and forgets.
+ */
+function setFiltersOpen(open: boolean) {
+  const root = document.documentElement;
+  if (open) root.setAttribute('data-filters', '');
+  else root.removeAttribute('data-filters');
+  for (const btn of document.querySelectorAll<HTMLElement>('[data-dir-filters]')) {
+    btn.setAttribute('aria-expanded', String(open));
+  }
+}
+
 interface SearchIndex { s: string[]; p: string[] }
 
 /**
@@ -247,6 +262,14 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (shown > pageSize) url.searchParams.set('show', String(shown));
     else url.searchParams.delete('show');
     if (url.href !== location.href) history.replaceState(history.state, '', url);
+
+    // How many filters are on, for the folded phone button. Sort is an order,
+    // not a filter, and it sits inside the same fold, so it does not count.
+    const active = Object.keys(state).filter(k => k !== 'sort' && state[k] !== config.defaultState[k]).length;
+    root.querySelectorAll<HTMLElement>('[data-dir-filter-n]').forEach(n => {
+      n.textContent = String(active);
+      n.hidden = active === 0;
+    });
 
     const q = query.trim();
     // Normalized the same way the cards' blobs were, so punctuation a student
@@ -442,6 +465,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
+    if (t.closest('[data-dir-filters]')) {
+      setFiltersOpen(!document.documentElement.hasAttribute('data-filters'));
+      return;
+    }
+
     const lean = t.closest<HTMLElement>('[data-dir-lean]');
     if (lean) {
       setLean(!document.documentElement.hasAttribute('data-lean'));
@@ -532,6 +560,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // The attribute is already right (Layout.astro set it in <head>); this is
     // the button catching up with it after a swap brought a fresh one in.
     setLean(document.documentElement.hasAttribute('data-lean'));
+    setFiltersOpen(false);
     config.onCardsParsed?.(items);
     paintSaved();
     render();

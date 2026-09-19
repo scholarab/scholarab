@@ -15,6 +15,12 @@ async function showEverything(page: Page) {
   while (await btn.isVisible()) await btn.click();
 }
 
+/** On a phone the chips fold behind the Filters button; open it if it is there. */
+async function openFilters(page: Page) {
+  const btn = page.locator('[data-dir-filters]');
+  if (await btn.isVisible() && (await btn.getAttribute('aria-expanded')) !== 'true') await btn.click();
+}
+
 /** The group headers a reader sees: runs that start inside the revealed cards. */
 function shownRuns(visible: typeof items, shown: number) {
   const runs = groupRuns(visible, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS);
@@ -33,6 +39,7 @@ test('all listings remain accessible without JavaScript', async ({ browser, base
 
 test('search preserves results, groups, chips, money, closed awards and history', async ({ page }) => {
   await page.goto('/scholarships/');
+  await openFilters(page);
   const historyLength = await page.evaluate(() => history.length);
   for (const sortBy of ['highest_pay', 'lowest_pay', 'closest_due'] as const) {
     await page.locator(`[data-fkey="sort"][data-fval="${sortBy}"]`).press('Enter');
@@ -104,6 +111,21 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
   expect((await grid.boundingBox())!.width).toBe(narrow);
 });
 
+test('on a phone, filters fold behind one button that counts them', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'the fold is phone-only');
+  await page.goto('/scholarships/calgary/?category=Arts');
+  const btn = page.locator('[data-dir-filters]');
+  await expect(page.locator('.sabl-rail')).toBeHidden();
+  await expect(page.locator('[data-fkey="sort"]').first()).toBeHidden();
+  await expect(page.locator('[data-dir-filter-n]')).toHaveText('1');
+  // The first card is on the first screen.
+  await expect(page.locator('[data-dir-card]:visible').first()).toBeInViewport();
+  await btn.click();
+  await expect(btn).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('.sabl-rail')).toBeVisible();
+  await expect(page.locator('[data-fkey="sort"]').first()).toBeVisible();
+});
+
 test('the list reveals 24 at a time and Back returns to the same card', async ({ page }) => {
   await page.goto('/scholarships/');
   const cards = page.locator('[data-dir-card]:visible');
@@ -128,6 +150,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   await expect(page.locator(`[data-dir-card][data-id="${target.id}"]`)).toBeInViewport();
 
   // A new filter starts the count over and drops ?show.
+  await openFilters(page);
   await page.locator('[data-fkey="status"][data-fval="active"]').click();
   expect(await cards.count()).toBeLessThanOrEqual(PAGE);
   await expect(page).not.toHaveURL(/show=/);
@@ -169,6 +192,7 @@ test('program Details links preserve filtered previous and next arrows', async (
     return slot?.closest<HTMLElement>('[data-fkey]')?.dataset.fval;
   }, total);
   expect(status, 'choose a status with multiple results from the rendered data').toBeTruthy();
+  await openFilters(page);
   await page.locator(`[data-fkey="status"][data-fval="${status}"]`).click();
   await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(links => links.map(link => link.getAttribute('href')!));

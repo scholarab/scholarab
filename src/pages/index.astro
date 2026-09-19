@@ -271,10 +271,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     <div class="sab-container sab-match">
       <div class="sab-match-grid">
         <div>
-          <div class="sab-mono sab-match-eyebrow">MATCH · START WITH THREE</div>
           <h2 class="sab-h2 sab-match-h2">Tell us three things. We'll shortlist for you.</h2>
           <p class="sab-match-copy">
-            Pick your grade, region, and academic focus. Continue the quiz to explore scholarships and programs. Everything stays in your browser, with no account or email needed.
+            Pick your grade, region and focus. A few more questions on the next page, then your shortlist. No account, no email.
           </p>
         </div>
         <div class="sab-match-card" id="match-teaser" data-quiz-variant="legacy">
@@ -396,7 +395,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     const update = () => {
       const chosen = Object.keys(picked()).length;
       const ready = chosen === groups.length;
-      cta.textContent = ready ? 'Show my matches →' : `Pick ${groups.length - chosen} more to see matches`;
+      cta.textContent = ready ? 'Keep going →' : `Pick ${groups.length - chosen} more to see matches`;
       // The button navigates, until all three are picked there is nothing to
       // navigate *with*, so it stays genuinely inert rather than just labelled
       // as if it were.
@@ -709,7 +708,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   /* ── Match teaser ── */
   .sab-match { padding-top: 96px; padding-bottom: 96px; }
   .sab-match-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: center; }
-  .sab-match-eyebrow { font-size: 13px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 16px; }
   .sab-match-h2 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.05; margin-bottom: 20px; }
   .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.68); margin: 0; }
   .sab-match-card {
@@ -856,7 +854,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
     .sab-match { padding-top: 34px; padding-bottom: 40px; }
     .sab-match-grid { grid-template-columns: 1fr; gap: 22px; }
-    .sab-match-eyebrow { font-size: 11.5px; margin-bottom: 12px; }
     .sab-match-h2 { font-size: 32px; margin-bottom: 12px; }
     .sab-match-copy { font-size: 15px; }
     .sab-match-card { padding: 22px 18px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }

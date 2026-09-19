@@ -13,7 +13,7 @@ test('homepage teaser hands its selections to the legacy quiz', async ({ page })
   for (const [key, value] of Object.entries(selections)) {
     await teaser.locator(`[data-match-group="${key}"] [data-value="${value}"]`).click();
   }
-  await teaser.getByRole('button', { name: 'Show my matches →' }).click();
+  await teaser.getByRole('button', { name: 'Keep going →' }).click();
   await expect(page).toHaveURL(/\/match\//);
 
     await expect(page.getByRole('heading', { name: "What's your academic average?" })).toBeVisible();

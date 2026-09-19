@@ -100,6 +100,11 @@ export type MatchResult = {
    *  Empty on a rejection, and empty on a match that cleared every filter
    *  without any specificity signal firing. */
   signals: string[]
+  /** Requirements the quiz never asks about (identity, need, care,
+   *  apprenticeship), in the student's words. The quiz leaves these unknown
+   *  so it cannot say the student meets them; the results show them as
+   *  "check first" instead of a match label. Empty on a rejection. */
+  checks: string[]
 }
 
 export type ConfidenceTier = 'strong' | 'good' | 'possible'

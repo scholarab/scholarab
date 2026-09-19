@@ -289,6 +289,25 @@ export function schoolsForCity(
 
 export const QUIZ_QUESTION_COUNT = QUIZ_QUESTIONS.length;
 
+/**
+ * The most questions any city can get, for the step label before the city is
+ * answered. "of 6" that turns into "of 8" at question four reads as the quiz
+ * growing; "of up to 8" that lands on 6 is good news.
+ */
+export function quizQuestionCeiling(
+  listings: Array<{ region?: string | null; eligibility?: { schoolBoards?: string[]; specificSchools?: string[] } | null }>,
+): number {
+  const cities = QUIZ_QUESTIONS.find(q => q.key === 'city')?.opts ?? [];
+  return QUIZ_QUESTION_COUNT + Math.max(0, ...cities.map(o =>
+    (boardsForCity(listings, o.value).length > 0 ? 1 : 0) +
+    (schoolsForCity(listings, o.value).length > 0 ? 1 : 0)));
+}
+
+/** The step label's denominator: "6", or "up to 8" while the city is open. */
+export function quizTotalLabel(ceiling: number, current: number, cityAnswered: boolean): string {
+  return !cityAnswered && ceiling > current ? `up to ${ceiling}` : String(current);
+}
+
 /** Spelled form for prose. Pinned to QUIZ_QUESTION_COUNT by a test. */
 export const QUIZ_QUESTION_WORD = 'Six';
 
@@ -315,4 +334,4 @@ export const RESULT_LIMIT = 20;
 export const QUIZ_DURATION = '30 seconds';
 
 /** One sentence, for anywhere that needs the whole claim at once. */
-export const QUIZ_PROMISE = `${QUIZ_QUESTION_WORD} questions, ${QUIZ_DURATION}. No account, no email.`;
+export const QUIZ_PROMISE = `${QUIZ_QUESTION_WORD} to ${QUIZ_MAX_QUESTION_WORD} questions, ${QUIZ_DURATION}. No account, no email.`;

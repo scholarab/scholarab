@@ -198,7 +198,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
         aria-label="Search scholarships by name or keyword"
       />
     </div>
-    <div class="sabl-sort">
+    <div class="sabl-sort" id="dir-sort">
       <span class="sabl-mono sabl-row-label">SORT</span>
       <div class="sabl-sort-chips">
       {SORT_CHIPS.map(s => (
@@ -210,6 +210,11 @@ const soonLine = totalOpen > 0 && totalSoon > 0
         rail's column with them (Ilia, 2026-09-15). Only the filters: the
         heading, the standfirst, the money, the search box and these chips all
         stay whichever way it is set. */}
+    {/* Phones only: sort and every chip row fold behind this, so the first
+        card is on the first screen. Desktop keeps the lean toggle below. */}
+    <button type="button" class="sabl-filters-btn" data-dir-filters aria-expanded="false" aria-controls="dir-sort dir-filters">
+      Filters<span class="sabl-mono sabl-filters-n" data-dir-filter-n hidden></span>
+    </button>
     <button type="button" class="sabl-lean" data-dir-lean aria-pressed="false">
       <span data-dir-lean-word>Hide filters</span>
       <svg class="sabl-lean-caret" viewBox="0 0 12 8" width="12" height="8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -226,7 +231,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       than the measure holds at the default metrics. The rows scroll rather than
       wrap, so this is not load-bearing; it just buys back enough width that
       nobody has to scroll the row on a desktop. See the modifier in global.css. */}
-  <aside class="sabl-rail" aria-label="Filters">
+  <aside class="sabl-rail" id="dir-filters" aria-label="Filters">
   <div class="sabl-filters sabl-filters-dense">
     {!hideCategories && (
       <div class="sabl-filter-row">

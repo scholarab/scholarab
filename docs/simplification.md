@@ -1,5 +1,21 @@
 # ScholarAB simplification record
 
+## Trust and phone-layout pass: September 19, 2026
+
+From the 2026-09-19 Impeccable critique (P0 and P1 only). Local build measurements, not hosted results.
+
+| Candidate | Outcome |
+| --- | --- |
+| Tier label on every quiz result ("Strong match" on 20 of 20 for a Calgary grade 12 STEM profile) | Removed when every row shares a tier. Rows gated on something the quiz never asks (gender, Indigenous or BIPOC identity, care, RAP/CTS, financial need) show "Check: ..." instead. "You qualify for" is gone from the quiz, `/match`, the guide CTA and two guides. |
+| Generic three-step "How to apply" on every detail page | Removed. Restored in part (2 true steps, no invented submit step) for school-run awards that do take an application. Detail pages with the section: 517 of 1,310, down from all of them. |
+| "Apply now" on awards whose own notes say there is no application | Replaced by "How it is awarded" on 41 pages (`src/lib/apply-method.ts`, strict phrases, tested against false positives). |
+| Second link to the same URL ("Visit official site") on TBA and ongoing listings | Removed; kept only where the main button is a dead Closed/Opens label (377 pages). |
+| Sort and chip rows above the first card on phones | Folded behind one Filters button with an active-filter count. First card on the first 375x812 screen of `/scholarships/` and `/scholarships/calgary/`, previously below it. |
+| Eyebrow labels on the homepage quiz teaser and the quiz results | Removed. |
+
+Add-back fraction: 1 of 6 candidates partly restored (17%). Nothing public was deleted to reach it; the listing notes moved into their own ruled-paper block instead of being cut.
+
+
 ## First implemented cuts: September 12, 2026 UTC
 
 This implementation follows the deep audit below, on an isolated branch from `41abc6a`. The shared checkout's reminder changes and desktop audit were left untouched. [Measured build evidence](audit-evidence/first-cuts-2026-09-12.json) records the baseline revision and the exact comparison scope.

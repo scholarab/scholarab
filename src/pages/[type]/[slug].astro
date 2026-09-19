@@ -16,6 +16,7 @@ import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount } from '../../lib/utils.ts';
 import { programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
+import { saysNoApplication } from '../../lib/apply-method.ts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
@@ -179,7 +180,10 @@ if (kind === 'scholarship') {
   const description  = metaDescription!;
   const canonical    = `https://www.scholarab.ca/scholarships/${slug}/`;
   const parsedAmount = parseAmount(s.amount) || null;
-  const deadlineClause = s.deadline ? ` before ${formatDate(s.deadline)}` : '';
+  // Nominated, school-selected, or bundled with another application: the
+  // listing's own notes say so, and the page must not answer them with
+  // "Apply now" and a generic three-step form-filling guide.
+  const noApplication = saysNoApplication(s.notes, s.metaDetail, (s as { description?: string }).description);
 
   d = {
     currentPath: '/scholarships/',
@@ -253,22 +257,21 @@ if (kind === 'scholarship') {
     about: (s as { description?: string }).description
       ?? `${s.title} is an Alberta award for high school students.`,
     notes: s.notes,
-    // The data has no per-listing application steps; these stay generic and true.
-    steps: s.applyViaGuidance
+    // The data has no per-listing application steps. The generic three
+    // ("read the requirements", "prepare your documents", "submit") said
+    // nothing the button did not, and were false for every award with no
+    // form. Only the school-run case has advice worth a section: the school's
+    // own cut-off, which the listing cannot show.
+    steps: s.applyViaGuidance && !noApplication
       ? [
-          'Talk to your school guidance counsellor about this award.',
-          'Ask about internal school deadlines, which can be earlier than the listed one.',
-          `Submit your application through your school${deadlineClause}.`,
+          'Ask your guidance counsellor how your school handles this award.',
+          'Ask for the school deadline too. It is often earlier than the one listed here.',
         ]
-      : [
-          'Read the full requirements on the official website.',
-          'Prepare your documents and any references it asks for.',
-          `Submit through the official website${deadlineClause}.`,
-        ],
+      : [],
     valueLabel: 'AWARD VALUE',
     valueBig: s.amount,
-    valueNote: s.applyViaGuidance ? 'Applications go through your school.' : null,
-    ctaLabel: s.applyViaGuidance ? 'Learn more' : 'Apply now',
+    valueNote: s.applyViaGuidance && !noApplication ? 'Applications go through your school.' : null,
+    ctaLabel: noApplication ? 'How it is awarded' : s.applyViaGuidance ? 'Learn more' : 'Apply now',
     url: s.url,
     canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
   };
@@ -285,7 +288,6 @@ if (kind === 'scholarship') {
   const programDescription = programMeta(p, status, formatDate);
   const canonical = `https://www.scholarab.ca/programs/${slug}/`;
   const dueLong = status === 'ongoing' ? 'Ongoing, join anytime' : formatDate(p.deadline);
-  const deadlineClause = hasDate ? ` before ${formatDate(p.deadline)}` : '';
 
   d = {
     currentPath: '/programs/',
@@ -336,14 +338,9 @@ if (kind === 'scholarship') {
     eligibility: p.eligibility,
     about: p.description,
     notes: undefined,
-    // The data has no per-listing application steps; these stay generic and true.
-    steps: [
-      'Review the details and eligibility on the official program site.',
-      'Prepare the application materials it asks for.',
-      status === 'ongoing'
-        ? 'Apply or sign up on the official site. You can join anytime.'
-        : `Apply on the official site${deadlineClause}.`,
-    ],
+    // No generic steps: the data has none per program, and "review the
+    // details, prepare materials, apply" restated the button.
+    steps: [],
     // Two independent questions, and they used to be one. `paid` is whether
     // the student receives money; `cost` is whether they pay any. Rendering
     // `paid ? 'Paid' : 'Free'` told 115 of 129 programs they were free,
