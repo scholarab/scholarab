@@ -460,7 +460,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   /* ── Dark hero ── */
   /* Fills the first viewport so no canvas sliver peeks below the fold on
      tall/fullscreen windows; on short viewports it grows past 100svh. */
-  .sab-hero-band { background: #0A1310; color: #EEF1EC; }
+  /* The header strip carries the same mint wash, shifted up by its own
+     height, so the glow runs through the bar instead of starting under it
+     and the top of the page reads as one surface. */
+  .sab-hero-band {
+    background: #0A1310; color: #EEF1EC;
+    background-image: radial-gradient(ellipse 760px 620px at calc(100% + 120px) calc(var(--sab-nav-h) - 160px),
+                                      rgba(47,211,160,0.10), rgba(47,211,160,0) 68%);
+  }
   .sab-hero {
     background: #0A1310; color: #EEF1EC; position: relative; overflow: hidden;
     /* One low-alpha mint wash off the top right corner. The hero was a flat
