@@ -209,7 +209,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
             <div class="sab-mono sab-eyebrow-urgent">{closingEyebrow}</div>
             <h2 class="sab-h2">{closingHeading}</h2>
           </div>
-          <a href="/deadlines/" class="sab-view-all">View all deadlines →</a>
+          <a href="/deadlines/" class="sab-view-all">View all deadlines</a>
         </div>
 
         <div class="sab-closing-table" id="closing-soon-list">
@@ -477,6 +477,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
   /* The kicker names who built the site and hands off to /about for the rest. */
   .sab-hero .sab-kicker { font-size: 16px; flex-wrap: wrap; row-gap: 4px; }
+  .sab-hero .sab-kicker::before { content: none; }
   .sab-kicker-sep { opacity: 0.45; }
   .sab-kicker-link { color: #EEF1EC; text-decoration: none; border-bottom: 1px solid rgba(238, 241, 236, 0.35); }
   .sab-kicker-link:hover { border-bottom-color: #2FD3A0; color: #2FD3A0; }
