@@ -50,7 +50,7 @@ The homepage hero plays these clips in a crossfading loop from `public/video/her
 | `video/hero/25.mp4` | Tall grass under a blue sky | AP Vibes | Pexels, video `35551383` (https://www.pexels.com/video/35551383/) | Pexels License | 2026-09-18 |
 | `video/hero/26.mp4` | Wild grass in the breeze | Christopher More | Pexels, video `39017939` (https://www.pexels.com/video/39017939/) | Pexels License | 2026-09-18 |
 
-Pexels License: free commercial use, no attribution required; a clip may not be sold unaltered or used to imply endorsement by the people or brands shown. Each file is cut from Pexels' 1920x1080 download: 6 seconds starting 1.5 seconds in (the whole clip when shorter), scaled to 1280x720 at 24 fps, H.264 with no audio. Clips 22 and 26 are denoised to keep them under 2.6 MB.
+Pexels License: free commercial use, no attribution required; a clip may not be sold unaltered or used to imply endorsement by the people or brands shown. Each file is cut from Pexels' 1920x1080 download: 6 seconds starting 1.5 seconds in (the whole clip when shorter), kept at 1920x1080 and at the source frame rate (24, 25 or 30 fps; 60 fps sources are halved to an exact 30, since dropping frames unevenly makes camera moves stutter), H.264 at CRF 24 capped at 3 Mbps, no audio. The grainiest clips (08, 10, 18, 22, 26) are lightly denoised to stay under the cap.
 
 ## Removed
 

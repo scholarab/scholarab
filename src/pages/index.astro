@@ -451,7 +451,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     const src = (n: number) => `/video/hero/${HERO_CLIPS[n % HERO_CLIPS.length]}.mp4`;
     const load = (v: HTMLVideoElement, n: number) => { v.preload = 'auto'; v.src = src(n); v.load(); };
     const start = (v: HTMLVideoElement) => {
-      v.currentTime = 0;
+      if (v.currentTime) v.currentTime = 0;
       v.play().then(() => v.classList.add('is-on')).catch(() => {});
     };
     vids.forEach(v => v.addEventListener('timeupdate', () => {
