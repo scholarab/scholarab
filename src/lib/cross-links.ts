@@ -75,5 +75,10 @@ export function scoreScholarshipForProgram(
   const wanted = SCHOLARSHIPS_FOR_PROGRAM[program.category ?? ''] ?? [];
   const topical = scholarship.category && wanted.includes(scholarship.category) ? 2 : 0;
   const local = locationMatchesRegion(program.location, scholarship.region) ? 1 : 0;
-  return topical + local;
+  // A city-only award beside a program run somewhere else is only open to a
+  // fraction of that page's readers: a national physics contest was showing
+  // three Calgary awards. It stays eligible as filler, ranked below awards
+  // anyone in the province can apply for.
+  const cityOnly = !!scholarship.region && scholarship.region !== 'Alberta' && scholarship.region !== 'National';
+  return Math.max(0, topical + local - (cityOnly && !local ? 1 : 0));
 }

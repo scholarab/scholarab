@@ -279,11 +279,11 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
             </span>
             <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
           </div>
-          <a href={`/programs/${slug}/`} class="sabl-name">{p.name}</a>
+          <h2 class="sabl-name-h"><a href={`/programs/${slug}/`} class="sabl-name">{p.name}</a></h2>
           {p.provider && <div class="sabl-org">{p.provider}</div>}
           {meta.length > 0 && (
             <div class="sabl-meta-row">
-              {meta.map(m => <span class="sabl-meta">{m}</span>)}
+              {meta.map(m => <span class="sabl-meta" title={m}>{m}</span>)}
             </div>
           )}
           {p.description && <div class="sabl-blurb" set:html={emailOff(p.description)} />}
@@ -327,12 +327,12 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
     <div class="sabl-empty-title">Nothing matches that.</div>
-    <div class="sabl-empty-sub" data-dir-empty-sub>Try clearing a filter or searching something broader.</div>
+    <div class="sabl-empty-sub" data-dir-empty-sub>Try a shorter word, or clear a filter.</div>
     {/* Filled in by directory-client when the term exists somewhere else on
         the site: a facet page holds a slice, so "clear a filter" is the wrong
         advice for a match sitting on another page. */}
     <div class="sabl-empty-elsewhere" data-dir-elsewhere hidden></div>
-    <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
+    <button type="button" class="sabl-empty-btn" data-dir-clear>Clear search</button>
   </div>
   </div>
   </div>

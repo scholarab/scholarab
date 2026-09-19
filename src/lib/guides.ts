@@ -1,6 +1,13 @@
 // Metadata for the /guides section. Each guide page imports its own entry;
 // the index page, footer, sitemap generator, and "keep reading" blocks all
 // read from this list so a new guide only needs a page file + one entry here.
+import { deadlineStats } from './deadline-stats'
+import scholarshipsJson from '../data/scholarships.json'
+
+// The deadlines guide quotes counts from the catalogue; computed, not typed.
+// Build-time only: this module is read by .astro pages and scripts.
+const DL = deadlineStats(scholarshipsJson as Array<{ deadline?: string | null; url?: string | null }>)
+
 export type GuideMeta = {
   slug: string
   title: string
@@ -402,15 +409,15 @@ export const guides: GuideMeta[] = [
     // /deadlines/ from a page that is all content.
     title: 'Alberta scholarship deadlines, month by month',
     description:
-      'When Alberta scholarships actually close: 644 dated deadlines by month, why May carries 259 of them, and the single dates that hide dozens of awards.',
+      `When Alberta scholarships actually close: ${DL.total} dated deadlines by month, why May carries ${DL.byMonth[4]} of them, and the single dates that hide dozens of awards.`,
     kicker: 'THE CALENDAR',
     minutes: 7,
     datePublished: '2026-09-07',
-    dateModified: '2026-09-07',
+    dateModified: '2026-09-19',
     takeaways: [
-      'May carries 259 of the 644 dated deadlines, more than three times any other month, and it is the month students stop looking.',
-      'The spikes are administrators, not coincidence: 66 awards share December 18 because one college books them all on one date.',
-      'The money and the odds run in opposite directions. October and November hold the six-figure awards and 31 deadlines between them.',
+      `May carries ${DL.byMonth[4]} of the ${DL.total} dated deadlines, far more than any other month, and it is the month students stop looking.`,
+      `The spikes are administrators, not coincidence: ${DL.onDayFrom('12-18', 'keyano.ca')} awards share December 18 because one college books them all on one date.`,
+      `The money and the odds run in opposite directions. October and November hold the six-figure awards and ${DL.sum(10, 11)} deadlines between them.`,
     ],
   },
 ]

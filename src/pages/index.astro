@@ -430,13 +430,16 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   document.addEventListener('astro:page-load', initMatchTeaser);
 
   // ── Hero film: two <video> elements take turns so the next clip is already
-  // buffered when the current one starts fading out. Only the playing clip and
-  // the next one are ever fetched.
+  // buffered when the current one starts fading out. The next clip is fetched
+  // PREFETCH_S before the handoff, not at page load: loading both up front
+  // pulled 13.2 MB on a desktop first visit (two 6-7 MB takes) for a film most
+  // visitors scroll past before the first cut.
   // Twelve 12-second takes, no timelapses (they step, and read as stutter).
   // Each clip ships as H.265 (what SpaceX serves: about half the bits of
   // H.264 for the same picture) and as H.264 for browsers without H.265.
   const HERO_CLIPS = ['01','18','12','04','17','16','20','08','13','06','10','07'];
   const FADE_S = 1.5;
+  const PREFETCH_S = 6;
   function initHeroFilm() {
     const media = document.querySelector<HTMLElement>('.sab-hero-media');
     if (!media || media.dataset.init) return;
@@ -464,8 +467,13 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       v.load();
       if (v === vids[cur]) start(v);
     }));
+    let queued = 0; // index of the furthest clip already requested
     vids.forEach(v => v.addEventListener('timeupdate', () => {
       if (v !== vids[cur] || !v.duration || v.dataset.handed) return;
+      if (queued === i && v.currentTime >= v.duration - FADE_S - PREFETCH_S) {
+        queued = i + 1;
+        load(vids[1 - cur]!, i + 1);
+      }
       if (v.currentTime < v.duration - FADE_S) return;
       v.dataset.handed = '1';
       const next = vids[1 - cur]!;
@@ -473,10 +481,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       v.classList.remove('is-on');
       cur = 1 - cur;
       i++;
-      setTimeout(() => { v.pause(); delete v.dataset.handed; load(v, i + 1); }, FADE_S * 1000);
+      setTimeout(() => { v.pause(); delete v.dataset.handed; }, FADE_S * 1000);
     }));
     load(a, 0);
-    load(b, 1);
     start(a);
   }
   initHeroFilm();
@@ -493,7 +500,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
      Palette: canvas #F4F5F1 · alt band #E9ECE6 · ink #141915 · hero/footer #08120E
      accent #2FD3A0 · accent hover #4FE0B4 · accent-on-dark text #5CE3BB
      green #0A6B4D (pressed #08573E) · hard shadows on cream #0E8C64
-     ink-on-accent #08120E · urgency #B8541F
+     ink-on-accent #08120E · urgency #A0491A
      Tuned 2026-09-02: mint stays the accent, but it no longer doubles as the
      drop shadow on cream, where 1.8:1 against the card made the lift read as
      a smudge. Deep green carries the shadows and the primary action on light
@@ -562,7 +569,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-hero .sab-kicker { font-size: 16px; flex-wrap: wrap; row-gap: 4px; }
   .sab-hero .sab-kicker::before { content: none; }
   .sab-kicker-sep { opacity: 0.45; }
-  .sab-kicker-link { color: #EEF1EC; text-decoration: none; border-bottom: 1px solid rgba(238, 241, 236, 0.35); }
+  .sab-kicker-link { color: #EEF1EC; text-decoration: none; border-bottom: 1px solid rgba(238, 241, 236, 0.35); padding-top: 12px; margin-top: -12px; display: inline-block; }
   .sab-kicker-link:hover { border-bottom-color: #2FD3A0; color: #2FD3A0; }
   .sab-hero-body {
     padding-top: 76px; position: relative;
@@ -630,7 +637,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   /* ── Closing this week ── */
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
   .sab-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px; gap: 20px; }
-  .sab-eyebrow-urgent { font-size: 13px; letter-spacing: 0.06em; color: #B8541F; margin-bottom: 14px; }
+  .sab-eyebrow-urgent { font-size: 13px; letter-spacing: 0.06em; color: #A0491A; margin-bottom: 14px; }
   .sab-h2 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.01em; margin: 0;
@@ -657,9 +664,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-row-amount { font-family: var(--font-display); font-size: 28px; text-align: right; }
   .sab-row-chip {
     font-size: 12.5px; font-weight: 500; padding: 7px 14px; border-radius: 100px;
-    background: rgba(184,84,31,0.12); color: #B8541F; white-space: nowrap;
+    background: rgba(160,73,26,0.12); color: #A0491A; white-space: nowrap;
   }
-  .sab-row-chip.sab-chip-urgent { background: #B8541F; color: #F4F5F1; }
+  .sab-row-chip.sab-chip-urgent { background: #A0491A; color: #F4F5F1; }
 
   /* ── Categories ── */
   .sab-cat-band { background: #E9ECE6; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
@@ -809,7 +816,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
     .sab-btn-accent, .sab-btn-outline { height: 50px; padding: 0 20px; }
     /* Ledger row: three columns under one hairline, sized so the dollar
-       figure keeps its line and nothing shrinks below 9.5px. */
+       figure keeps its line and nothing shrinks below 11px. */
     .sab-stats {
       border-left: none; width: 100%;
       margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(238, 241, 236,0.18);
@@ -820,7 +827,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-stat:nth-child(2) { flex: 0.85; }
     .sab-stat-value { font-size: 27px; }
     /* "RESEARCH PROGRAMS" wraps at 360; two lines beats a smaller label. */
-    .sab-stat-label { font-size: 9.5px; margin-top: 5px; white-space: normal; }
+    .sab-stat-label { font-size: 11px; margin-top: 5px; white-space: normal; line-height: 1.2; }
 
     .sab-closing { padding-top: 22px; padding-bottom: 8px; }
     .sab-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }

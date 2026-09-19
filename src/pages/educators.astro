@@ -23,17 +23,17 @@ const stats = [
 ];
 
 const features = [
-  { num: '01', tag: QUIZ_DURATION.toUpperCase(), title: `Take the ${QUIZ_QUESTION_COUNT}-question match quiz`, body: 'Students answer questions about their grade, region, interests, and background. ScholarAB shows the scholarships they’re most likely to qualify for. No account required.' },
-  { num: '02', tag: 'REGION-AWARE', title: 'Browse by region and category', body: 'Scholarships are tagged by region (Medicine Hat, Calgary, Edmonton, Lethbridge, Red Deer, and Alberta-wide) so students only see what’s relevant to them.' },
-  { num: '03', tag: 'DEADLINE ALERTS', title: 'Save scholarships and get reminders', body: 'Students can bookmark scholarships and sign up for email reminders 30, 14, and 3 days before the deadline. No account required, just an email address.' },
-  { num: '04', tag: 'BEYOND AWARDS', title: 'Explore research programs', body: 'Beyond scholarships, ScholarAB lists paid and unpaid research placements, competitions, and trades apprenticeships for high school students across Canada.' },
+  { tag: QUIZ_DURATION.toUpperCase(), title: `Take the ${QUIZ_QUESTION_COUNT}-question match quiz`, body: 'Students answer a few questions about their grade, region and interests, and get a shortlist worth checking. No account required.' },
+  { tag: 'REGION-AWARE', title: 'Browse by region and category', body: 'Scholarships are tagged by region (Medicine Hat, Calgary, Edmonton, Lethbridge, Red Deer, and Alberta-wide) so students only see what’s relevant to them.' },
+  { tag: 'DEADLINE ALERTS', title: 'Save scholarships and get reminders', body: 'Students can bookmark scholarships and sign up for email reminders 30, 14, and 3 days before the deadline. No account required, just an email address.' },
+  { tag: 'BEYOND AWARDS', title: 'Explore research programs', body: 'Beyond scholarships, ScholarAB lists paid and unpaid research placements, competitions, and trades apprenticeships for Alberta high school students.' },
 ];
 
-// Zero-padded like every other ordinal on the site (the feature cards above,
-// /about's principles, the match result rows). Bare "1." was the odd one out.
+// Zero-padded like the match result rows. These are the one numbered list on
+// the page that is a real sequence, so they keep their numbers.
 const steps = [
   { num: '01', body: 'Post scholarab.ca on your classroom board or guidance office bulletin.' },
-  { num: '02', body: `Tell Grade 11 and 12 students to take the Match quiz; it takes ${QUIZ_DURATION} and finds scholarships they qualify for.` },
+  { num: '02', body: `Tell Grade 11 and 12 students to take the Match quiz; it takes ${QUIZ_DURATION} and gives them a shortlist worth checking.` },
   { num: '03', body: 'Remind students to sign up for deadline reminders so they don’t miss applications they’ve saved.' },
 ];
 
@@ -103,7 +103,6 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
         {features.map(f => (
           <div class="sabe-card">
             <div class="sabe-card-top">
-              <div class="sabe-card-num">{f.num}</div>
               <span class="sabe-mono sabe-card-tag">{f.tag}</span>
             </div>
             <div class="sabe-card-title">{f.title}</div>
@@ -192,11 +191,6 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
   }
   .sabe-card:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #0E8C64; }
   .sabe-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-  .sabe-card-num {
-    width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid rgba(20,25,21,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display); font-size: 20px; color: #0A6B4D;
-  }
   .sabe-card-tag { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); }
   .sabe-card-title { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; margin-bottom: 8px; }
   .sabe-card-body { font-size: 15px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); }
@@ -245,7 +239,7 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
     .sabe-stat { padding: 6px 24px 6px 0; border-right: none; }
     .sabe-stat + .sabe-stat { padding-left: 24px; border-left: 1px solid rgba(238, 241, 236,0.18); }
     .sabe-stat-value { font-size: 32px; }
-    .sabe-stat-label { font-size: 10.5px; }
+    .sabe-stat-label { font-size: 11.5px; }
     .sabe-section { padding: 56px 20px 0; }
     .sabe-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
     .sabe-feature-grid { grid-template-columns: 1fr; }

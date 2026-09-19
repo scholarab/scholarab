@@ -70,7 +70,7 @@ function savedCard(s: SavedItem): string {
         <span class="sabl-mono sabl-tag">${esc((s.category ?? (sh ? 'GENERAL' : 'PROGRAM')).toUpperCase())}</span>
         <span data-sv-chip></span>
       </div>
-      <a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a>
+      <h2 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h2>
       ${sh ? `<div class="sabl-amount">${esc(s.amount ?? '')}</div>${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}`
         : `${s.provider ? `<div class="sabl-org" style="margin:10px 0 0">${esc(s.provider.toUpperCase())}</div>` : ''}${s.description ? `<div class="sabl-blurb" style="margin-top:14px">${emailOff(s.description)}</div>` : ''}`}
       <div class="sabl-card-foot">

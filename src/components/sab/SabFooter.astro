@@ -87,8 +87,12 @@ const footerCols = [
   .sabf-disclaimer a:hover { color: #EEF1EC; }
   .sabf-cols { display: flex; gap: 64px; flex-wrap: wrap; }
   .sabf-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(238, 241, 236, 0.62); margin-bottom: 14px; }
-  .sabf-links { display: flex; flex-direction: column; gap: 10px; }
-  .sabf-links a { font-size: 14px; color: rgba(238, 241, 236, 0.7); text-decoration: none; }
+  /* The links were 21px tall with a 10px gap between them: under the 24px
+     WCAG 2.2 minimum. The gap now lives inside each link, so the rhythm is
+     the same 31-32px and the whole row takes the tap; 44px on touch. */
+  .sabf-links { display: flex; flex-direction: column; gap: 0; align-items: flex-start; }
+  .sabf-links a { font-size: 14px; color: rgba(238, 241, 236, 0.7); text-decoration: none; display: inline-flex; align-items: center; min-height: 32px; }
+  @media (pointer: coarse) { .sabf-links a { min-height: 44px; } }
   .sabf-links a:hover { color: #EEF1EC; }
   .sabf-bottom {
     display: flex; justify-content: space-between; margin-top: 56px; padding-top: 24px;

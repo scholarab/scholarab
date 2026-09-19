@@ -72,13 +72,13 @@ const aboutHtml = about ? emailOff(about) : '';
 const notesHtml = notes ? emailOff(notes) : '';
 
 const chip =
-  status === 'closed' ? { text: 'CLOSED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
+  status === 'closed' ? { text: 'CLOSED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : status === 'future' ? { text: opensLabel ? `OPENS ${opensLabel.toUpperCase()}` : 'OPENING SOON', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'ongoing' ? { text: 'ONGOING · JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
-  : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.55)' }
-  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#B8541F', fg: '#F4F5F1' }
+  : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
+  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#A0491A', fg: '#F4F5F1' }
   : typeof daysLeft === 'number'
-    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#B8541F' : 'rgba(184,84,31,0.12)', fg: urgent ? '#F4F5F1' : '#B8541F' }
+    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#A0491A' : 'rgba(160,73,26,0.12)', fg: urgent ? '#F4F5F1' : '#A0491A' }
     : { text: 'OPEN', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' };
 ---
 
@@ -183,7 +183,8 @@ const chip =
   <div class="sabd-rail">
     <div class="sabd-card">
       <div class="sabd-mono sabd-fact-label">{valueLabel}</div>
-      <div class="sabd-value">{valueBig}</div>
+      {/* Green is money you receive. A cost in the same green read as a prize. */}
+      <div class:list={['sabd-value', { 'is-cost': valueLabel === 'PROGRAM COST' }]}>{valueBig}</div>
       {valueNote && <div class="sabd-value-note">{valueNote}</div>}
       <div class="sabd-deadline-row">
         <span class="sabd-mono sabd-deadline-label">DEADLINE</span>
@@ -226,7 +227,8 @@ const chip =
         <div class="sabd-mono sabd-remind-label">GET A DEADLINE REMINDER</div>
         <div class="sabd-remind-sub">We email you a link to confirm, then nudge you before it closes.</div>
         <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form">
-          <input type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" />
+          <label for={`sabd-remind-${itemType}-${itemId}`} class="sr-only">Your email for a deadline reminder</label>
+          <input id={`sabd-remind-${itemType}-${itemId}`} type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" />
           <button type="submit" class="sab-btn sabd-remind-btn">Remind me</button>
         </form>
         <div data-sabd-alert-msg class="sabd-remind-msg" style="display:none;"></div>
@@ -272,7 +274,9 @@ const chip =
     padding: 40px var(--sab-gutter) 0;
     display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;
   }
-  .sabd-back { font-size: 13px; letter-spacing: 0.04em; color: rgba(20, 25, 21, 0.65); text-decoration: none; }
+  /* 12px of padding cancelled by margin: the text sits where it did, the tap
+     target grows from 20px to 44px. */
+  .sabd-back { font-size: 13px; letter-spacing: 0.04em; color: rgba(20, 25, 21, 0.65); text-decoration: none; display: inline-block; padding: 12px 0; margin: -12px 0; }
   .sabd-back:hover { color: #0A6B4D; }
   /* The facet crumb sits beside the back link with a separator drawn in CSS, so
      the two read as one trail rather than two competing back-buttons. */
@@ -367,6 +371,7 @@ const chip =
     padding: 28px 26px; box-shadow: 6px 6px 0 #0E8C64;
   }
   .sabd-value { font-family: var(--font-display); font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
+  .sabd-value.is-cost { color: #141915; }
   .sabd-value-note { font-size: 14px; color: rgba(20, 25, 21, 0.65); }
   /* space-between with no gap only looked safe because the rail was 360px
      wide. In the phone's single column the label and the date met in the
@@ -608,16 +613,16 @@ const chip =
     if (openDate && todayMs < new Date(openDate + 'T00:00:00').getTime()) {
       paint(`OPENS ${fmtLong(openDate)}`, 'rgba(14,140,100,0.12)', '#0A6B4D');
     } else if (deadline && todayMs > new Date(deadline + 'T00:00:00').getTime()) {
-      paint('CLOSED', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.55)');
+      paint('CLOSED', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
     } else if (inactive) {
       paint('OPENING SOON', 'rgba(14,140,100,0.12)', '#0A6B4D');
     } else if (deadline) {
       // round, not ceil: midnight-to-midnight is whole days except across a
       // DST change, where ceil overcounts by one (and disagrees with the list chips)
       const days = Math.max(0, Math.round((new Date(deadline + 'T00:00:00').getTime() - todayMs) / 86400000));
-      if (days === 0) paint('DUE TODAY', '#B8541F', '#F4F5F1');
-      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#B8541F', '#F4F5F1');
-      else paint(`${days} DAYS LEFT`, 'rgba(184,84,31,0.12)', '#B8541F');
+      if (days === 0) paint('DUE TODAY', '#A0491A', '#F4F5F1');
+      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#A0491A', '#F4F5F1');
+      else paint(`${days} DAYS LEFT`, 'rgba(160,73,26,0.12)', '#A0491A');
     }
   }
 

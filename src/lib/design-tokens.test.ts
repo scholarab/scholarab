@@ -182,6 +182,6 @@ describe('quiz option states', () => {
   it('does not draw selected exactly like hover', () => {
     // One shared rule meant an option you were pointing at looked identical to
     // one you had chosen.
-    expect(globalCss).toMatch(/\.sabm-opt-selected \{ border-color: #0A6B4D; \}/)
+    expect(globalCss).toMatch(/\.sabm-opt-selected \{ border-color: var\(--green\); \}/)
   })
 })

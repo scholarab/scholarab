@@ -5,7 +5,6 @@ import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { webPageJson } from '../lib/ld';
 interface Principle {
-  num: string;
   title: string;
   body: string;
   /** Optional trailing link, rendered after the body. */
@@ -13,12 +12,10 @@ interface Principle {
 }
 const principles: Principle[] = [
   {
-    num: '01',
     title: 'No ads.',
     body: 'Nothing on the site advertises to you. Listings are sorted by deadline.',
   },
   {
-    num: '02',
     // "No personal data" flat contradicts /privacy, which discloses an email,
     // a salted IP hash and the text of dead-end searches. "Required" is the
     // word that makes it true: none of it is asked for, the email is offered.
@@ -32,7 +29,6 @@ const principles: Principle[] = [
     more: { href: '/privacy/', label: 'The full list is on the privacy page.' },
   },
   {
-    num: '03',
     title: 'No account required.',
     body: 'Everything is public and works on any device, instantly.',
   },
@@ -90,7 +86,6 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
         <div class="saba-card-label">HOW THIS WORKS</div>
         {principles.map((p, i) => (
           <div class="saba-principle" style={i === 0 ? 'border-top-color:transparent;' : undefined}>
-            <div class="saba-principle-num">{p.num}</div>
             <div>
               <div class="saba-principle-title">{p.title}</div>
               <div class="saba-principle-body">
@@ -190,14 +185,10 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
     font-family: var(--font-label);
     font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65); margin-bottom: 8px;
   }
+  /* No 01/02/03 badge: three promises, not three steps. */
   .saba-principle {
-    display: grid; grid-template-columns: 48px 1fr; gap: 20px;
+    display: grid; grid-template-columns: 1fr; gap: 20px;
     padding: 22px 0; border-top: 1px solid rgba(20,25,21,0.12); align-items: start;
-  }
-  .saba-principle-num {
-    width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid rgba(20,25,21,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display); font-size: 20px; color: #0A6B4D;
   }
   .saba-principle-title { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; margin-bottom: 6px; }
   .saba-principle-body { font-size: 15px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); max-width: 720px; }

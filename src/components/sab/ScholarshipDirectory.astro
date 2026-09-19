@@ -333,7 +333,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
             <span class="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
             <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
           </div>
-          <a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a>
+          <h2 class="sabl-name-h"><a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a></h2>
           <div class="sabl-amount">{s.amount}</div>
           {s.audience && <div class="sabl-blurb">{s.audience}</div>}
           <div class="sabl-card-foot">
@@ -388,12 +388,13 @@ const soonLine = totalOpen > 0 && totalSoon > 0
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
     <div class="sabl-empty-title">Nothing matches that.</div>
-    <div class="sabl-empty-sub" data-dir-empty-sub>Try clearing a filter or searching something broader.</div>
+    <div class="sabl-empty-sub" data-dir-empty-sub>Try a shorter word, or clear a filter.</div>
     {/* Filled in by directory-client when the term exists somewhere else on
         the site: a facet page holds a slice, so "clear a filter" is the wrong
         advice for a match sitting on another page. */}
     <div class="sabl-empty-elsewhere" data-dir-elsewhere hidden></div>
-    <button type="button" class="sabl-empty-btn" data-dir-clear>Clear all filters</button>
+    <button type="button" class="sabl-empty-btn" data-dir-clear>Clear search</button>
+    <p class="sabl-empty-sub sabl-empty-quiz">Not sure what to search for? <a href="/match/">Answer a few questions</a> and get a shortlist.</p>
   </div>
   </div>
   </div>

@@ -1,5 +1,18 @@
 # ScholarAB simplification record
 
+## P2/P3 pass: September 19, 2026
+
+| Candidate | Outcome |
+| --- | --- |
+| Three rusts (#B8541F, #9C4518, #A0491A) | One: #A0491A, 5.54:1 on cream. Closed/TBA chips moved from 55% to 68% ink (3.68 to 5.44:1). |
+| Hand-typed counts in the deadlines-by-month guide (644, 259, 417 and 20 more) | Removed; computed from the catalogue at build (`src/lib/deadline-stats.ts`). They had drifted to 703 and 265, and "April, the next busiest month" was wrong (June is). |
+| Second hero clip downloaded at page load | Deferred until 6 s before its handoff: first-visit video drops from two clips (13.2 MB measured) to one. Local projection, not a hosted measurement. |
+| 01 to 18 badges on /guides, 01 to 03 on /about principles, 01 to 04 on /educators features | Removed; not sequences. /educators steps keep theirs, which are. |
+| Hex literals in global.css | 129 to 21 (the rest are token definitions and one-offs). Components untouched. |
+| Gray #6B7280 on /deadlines (4.41:1) | Replaced with brand ink at 68% (5.91:1). |
+
+Add-back fraction: 0 of 6.
+
 ## Trust and phone-layout pass: September 19, 2026
 
 From the 2026-09-19 Impeccable critique (P0 and P1 only). Local build measurements, not hosted results.

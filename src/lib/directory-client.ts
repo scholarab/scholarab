@@ -367,6 +367,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     const empty = root.querySelector<HTMLElement>('[data-dir-empty]');
     if (empty) empty.hidden = visible.length > 0;
+    // Name what the button undoes. "Clear all filters" with no filter on,
+    // after a search that found nothing, pointed at the wrong culprit.
+    const clear = root.querySelector<HTMLElement>('[data-dir-clear]');
+    if (clear) clear.textContent = active > 0 && q ? 'Clear search and filters' : active > 0 ? 'Clear filters' : 'Clear search';
     if (visible.length > 0 || q.length < 3) resetFallback();
     else resolveEmptySearch(q, ql, items.some(it => it.search.includes(ql)));
   }
