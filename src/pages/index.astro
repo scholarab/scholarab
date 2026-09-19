@@ -160,10 +160,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
     <!-- ============ DARK HERO ============ -->
     <div class="sab-hero">
-      {/* Background film: 26 short Pexels clips crossfading in a loop. The
-          layer reaches up behind the header band so bar and hero are one
-          surface. The still is the first clip's first frame and is all that
-          shows on phones, with reduced motion, or with Save-Data on. */}
+      {/* Background film: twelve Pexels clips crossfading in a loop, under
+          the solid header. The still is the first clip's first frame and is
+          all that shows on phones, with reduced motion, or with Save-Data on. */}
       <div class="sab-hero-media" aria-hidden="true">
         <video class="sab-hero-vid" muted playsinline preload="none"></video>
         <video class="sab-hero-vid" muted playsinline preload="none"></video>
@@ -521,13 +520,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   /* ── Dark hero ── */
   /* Fills the first viewport so no canvas sliver peeks below the fold on
      tall/fullscreen windows; on short viewports it grows past 100svh. */
-  /* Transparent, and above the hero: the hero's film layer reaches up behind
-     it, so the bar sits on the same picture as the headline. */
-  .sab-hero-band { position: relative; z-index: 2; color: #EEF1EC; }
+  /* Solid, the same #0A1310 as the Scholarships and Programs dropdowns, so
+     an open menu sits on one continuous black panel instead of on the film. */
+  .sab-hero-band { position: relative; z-index: 2; background: #0A1310; color: #EEF1EC; }
   .sab-hero {
     background: #0A1310; color: #EEF1EC; position: relative; isolation: isolate;
-    /* Clip sideways only: the film layer overflows upward behind the header. */
-    overflow-x: clip;
+    overflow: hidden;
     display: flex; flex-direction: column;
     /* The header used to be inside this box and counted toward the fold. Now
        it sits above, so its height comes off the target instead. */
@@ -536,8 +534,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   }
 
   .sab-hero-media {
-    position: absolute; z-index: -1; left: 0; right: 0; bottom: 0;
-    top: calc(-1 * var(--sab-nav-h));
+    position: absolute; z-index: -1; inset: 0;
     background: #0A1310 url('/video/hero/poster.webp') center / cover no-repeat;
   }
   .sab-hero-vid {
@@ -557,7 +554,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-hero-media::after {
     content: ''; position: absolute; inset: 0;
     background:
-      linear-gradient(180deg, rgba(10,19,16,0.55) 0, rgba(10,19,16,0) 150px),
+      linear-gradient(180deg, rgba(10,19,16,0.35) 0, rgba(10,19,16,0) 120px),
       linear-gradient(180deg, rgba(10,19,16,0) 45%, rgba(10,19,16,0.55) 75%, rgba(10,19,16,0.9) 100%),
       rgba(10,19,16,0.28);
   }
