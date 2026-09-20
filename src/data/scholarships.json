@@ -48055,5 +48055,1379 @@
         "RAP"
       ]
     }
+  },
+  {
+    "id": 1399,
+    "title": "Coronation and Consort Victim Services Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-30",
+    "audience": "Consort area students continuing to post-secondary",
+    "url": "https://careerpathways.plrd.ab.ca/scholarships/school-specific-scholarships/consort-school-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The school's list gives the April 30 date but no amount. The older application form asked for an essay or video about your volunteer service plus two references, so expect something similar.",
+    "active": true,
+    "description": "Victim Services in Coronation and Consort offers a scholarship to a local student going on to post-secondary, listed among the awards Consort School students can apply for.",
+    "metaDetail": "The amount is not published.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1400,
+    "title": "Veteran and District Lions Club Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "Consort School grads who finished Grade 9 in Veteran",
+    "url": "https://careerpathways.plrd.ab.ca/scholarships/school-specific-scholarships/consort-school-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Marks, community involvement and financial need are all weighed, and the school provides a reference. You have to be registered for post-secondary in the year you apply.",
+    "active": true,
+    "description": "Two $500 scholarships a year for Consort School graduates who completed Grade 9 at Veteran School and still live in the Veteran area, bounded by the County of Paintearth, Special Area 2 and the Loyalist road.",
+    "metaDetail": "Two awards, tied to Veteran School.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Consort School",
+        "Veteran School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1401,
+    "title": "Gaye Ross Memorial Nursing Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-09-01",
+    "audience": "Drumheller area students in RN or RPN programs",
+    "url": "https://careerpathways.plrd.ab.ca/scholarships/school-specific-scholarships/delia-school-awards",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Students already in an RN or RPN program can apply, not just those entering, and the September deadline suits both.",
+    "active": true,
+    "description": "A $1,500 scholarship for someone living in Drumheller or the surrounding area who has been accepted into a registered nursing or registered psychiatric nursing program.",
+    "metaDetail": "Open to students already in the program.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1402,
+    "title": "Hanna Masonic Lodge Student Bursary",
+    "amount": "$500",
+    "deadline": "2027-06-30",
+    "audience": "Grade 12 students in Hanna, Youngstown, Cessford or Delia",
+    "url": "https://careerpathways.plrd.ab.ca/scholarships/school-specific-scholarships/delia-school-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You do not need any Masonic connection. Extracurriculars, character and financial need are what the Lodge weighs.",
+    "active": true,
+    "description": "The Hanna Masonic Lodge gives $500 to a Grade 12 student from J.C. Charyk Hanna, Youngstown, Cessford or Delia who has been accepted into post-secondary.",
+    "metaDetail": "No Masonic connection needed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "J.C. Charyk Hanna School",
+        "Youngstown School",
+        "Cessford School",
+        "Delia School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1403,
+    "title": "Garry Hannigan Memorial Scholarship Fund",
+    "amount": "$500",
+    "deadline": "2027-03-31",
+    "audience": "Albertans up to age 18 living with epilepsy",
+    "url": "https://edmontonepilepsy.org/scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "This one pays for activities rather than tuition, so a season of hockey, a music program or a camp fee all fit. Applications are accepted from January 1 to March 31 each year.",
+    "active": true,
+    "description": "The Edmonton Epilepsy Association gives up to $500 to help youth up to age 18 take part in sports or recreation that will help them develop as individuals.",
+    "metaDetail": "It pays for activities, not tuition.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 18,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1404,
+    "title": "Edmonton Epilepsy Continuing Education Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-03-31",
+    "audience": "Alberta post-secondary students living with epilepsy",
+    "url": "https://edmontonepilepsy.org/scholarships/",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "The 2026 round is closed. The next one opens January 5, 2027 and closes March 31. The Association does not publish the amount or the detailed criteria, so ask before the window opens.",
+    "active": true,
+    "description": "The Edmonton Epilepsy Association manages this scholarship for students with epilepsy who are continuing their education.",
+    "metaDetail": "The next window opens January 5, 2027.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1405,
+    "title": "Sam Bull Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-02-15",
+    "audience": "Alberta First Nation students in law or politics",
+    "url": "https://aiicbusiness.org/scholarships/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You send a copy of your status card, a certified transcript and a statement of 100 to 200 words on your objectives. Proof of acceptance is needed before the money is released.",
+    "active": true,
+    "description": "The Alberta Indian Investment Corporation gives $1,000 to a status First Nation student from Alberta studying law or political science, weighing marks, career plans and what the studies will bring back to First Nation community development.",
+    "metaDetail": "Needs a status card and a certified transcript.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1406,
+    "title": "Senator James Gladstone Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-02-15",
+    "audience": "Alberta status First Nation students in business or economics",
+    "url": "https://aiicbusiness.org/scholarships/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Selection weighs your marks, your career plans and what your studies will contribute to First Nation business and economic development. Same paperwork and date as the Corporation's law award.",
+    "active": true,
+    "description": "Named for Canada's first Indigenous senator, this award goes to a status First Nation student from Alberta in business, finance or economics. University students receive $1,000 and college or technical students $750.",
+    "metaDetail": "College students receive $750.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1407,
+    "title": "Christie Foreman and Christopher Wong Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-28",
+    "audience": "Banff National Park residents aged 21 to 35",
+    "url": "https://banffcanmorefoundation.org/wp-content/uploads/BCF-Scholarship-Programs-2025.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Priority goes to non-traditional students, including people returning to school or changing careers. You submit a budget, a cover letter, references and proof of acceptance or a pending decision. The 2025 guide does not state the amount.",
+    "active": true,
+    "description": "The Banff Canmore Community Foundation backs students aged 21 to 35 with a real connection to the communities inside Banff National Park who are pursuing practical education and plan to give back locally.",
+    "metaDetail": "Built for career changers and returning students.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 21,
+      "maxAge": 35,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1408,
+    "title": "David M. Bayne Legacy Bursary",
+    "amount": "$5,000",
+    "deadline": "2027-04-28",
+    "audience": "Hospitality students tied to Banff or Lake Louise",
+    "url": "https://banffcanmorefoundation.org/wp-content/uploads/BCF-Scholarship-Programs-2025.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "New Canadians, Albertans and local youth get special consideration. You need a budget, references, a transcript and evidence of acceptance, plus banking details and a photo if you win.",
+    "active": true,
+    "description": "Four $5,000 bursaries for post-secondary students in tourism, hospitality or culinary programs who face barriers to advancing their careers and have a personal or professional tie to Banff or Lake Louise.",
+    "metaDetail": "Four bursaries, and new Canadians are prioritized.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1409,
+    "title": "SPECEF General Scholarship",
+    "amount": "$2,500",
+    "deadline": "2026-11-08",
+    "audience": "Canadian students heading into the energy industry",
+    "url": "https://www.specef.org/general-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "You need an SPE student membership, satisfactory grades and volunteer involvement. Diploma, degree, graduate and non-engineering students all qualify, but students in their final undergraduate year do not.",
+    "active": true,
+    "description": "The Society of Petroleum Engineers Canadian Educational Foundation funds multiple scholarships for full-time students at any Canadian institution who intend to enter the energy industry after graduating.",
+    "metaDetail": "Final-year undergraduates are excluded.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1410,
+    "title": "B. Hanson Leadership Award",
+    "amount": "$3,000",
+    "deadline": "2026-11-08",
+    "audience": "Engineering students at Canadian universities",
+    "url": "https://www.specef.org/general-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "There is no separate form. The general scholarship application is what puts you in the running for this one.",
+    "active": true,
+    "description": "A $3,000 award from the same Foundation for an engineering student who has shown exceptional leadership at school or in the community.",
+    "metaDetail": "No separate application needed.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1411,
+    "title": "Ben Sandison Writer's Craft and English Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "audience": "Students accepted into writing or English programs",
+    "url": "https://bensandisonmemorialscholarship.ca/writers-craft",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "You submit a 500 word essay and a recommendation from a writing or English teacher. The fund states no geographic restriction, and Alberta schools link to it.",
+    "active": true,
+    "description": "One of three memorial scholarships in Ben Sandison's name, $1,000 for a student accepted into a Writer's Craft, English or related post-secondary program.",
+    "metaDetail": "A 500 word essay and a teacher reference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1412,
+    "title": "Ben Sandison Hockey and Fitness Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "audience": "Students accepted into hockey or fitness programs",
+    "url": "https://bensandisonmemorialscholarship.ca/hockey-and-fitness",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "You list your athletic accomplishments and include a recommendation from a coach or gym teacher.",
+    "active": true,
+    "description": "A $1,000 scholarship for a student accepted into a hockey, fitness or related program at a post-secondary institution.",
+    "metaDetail": "Needs a coach's recommendation.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1413,
+    "title": "Ben Sandison Drumming and Music Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "audience": "Students accepted into drumming or music programs",
+    "url": "https://bensandisonmemorialscholarship.ca/music",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Along with your music experience you send an audition video of up to three minutes and a recommendation from a music instructor.",
+    "active": true,
+    "description": "A $1,000 scholarship for a student accepted into a drum, music or related post-secondary program.",
+    "metaDetail": "Needs a three minute audition video.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 1414,
+    "title": "Michael R. Allers Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-01",
+    "audience": "Drayton Valley area students entering education studies",
+    "url": "https://dvcf.org/scholarships-bursaries/",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "It sits in the Foundation's youth group of scholarships, all of which close June 1 and apply through the same site.",
+    "active": true,
+    "description": "The Drayton Valley Community Foundation gives $1,000 to a student from its area who is studying to become a teacher.",
+    "metaDetail": "One of the Foundation's June 1 awards.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1415,
+    "title": "Bredal Energy Fund Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-06-01",
+    "audience": "Drayton Valley area students entering oil and gas careers",
+    "url": "https://dvcf.org/bredal-energy-fund-scholarship-application/",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Priority goes to students and families living in Drayton Valley and Brazeau County. You can apply in your graduating year or one year after it.",
+    "active": true,
+    "description": "Two $1,500 scholarships a year for students from the Drayton Valley Community Foundation area who want a career supporting the oil and gas industry, at a university, college or trade school.",
+    "metaDetail": "You can apply a year after graduating.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1416,
+    "title": "Community Foundation Emergency Services Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "Drayton Valley and Brazeau County emergency services students",
+    "url": "https://dvcf.org/fire-service-emergency-services-scholarship-fund-application/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "There is no age restriction, so this is open to people coming back to school later. You need to be in good standing with your school and community and include a letter of support.",
+    "active": true,
+    "description": "A $500 scholarship for a Drayton Valley or Brazeau County resident enrolled in an accredited emergency services program, covering firefighting and fire sciences, emergency medical services, emergency management and law enforcement.",
+    "metaDetail": "No age limit on this one.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1417,
+    "title": "Pembina Education Society Adult Continuing Education Bursary",
+    "amount": "Up to $5,000 a year",
+    "deadline": "2027-07-31",
+    "audience": "Adults 20 and over near Drayton Valley",
+    "url": "https://dvcf.org/pembina-education-society-adult-continuing-education-bursary/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You apply once a calendar year and the application is re-evaluated for three terms: 40 percent in the fall, 40 percent in winter and 20 percent in spring. The money goes to the school, not to you, and the lifetime cap is $20,000.",
+    "active": true,
+    "description": "A bursary of up to $5,000 a year for adults who are at least 20 by September 1, live between Alder Flats and Entwistle, and are studying or upgrading in Canada. What you get depends on the applicant pool, available funds and your tuition.",
+    "metaDetail": "Paid to your school, with a $20,000 lifetime cap.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 20,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1418,
+    "title": "Jane Ripkens Scholarship Fund for Music and the Arts",
+    "amount": "$500",
+    "deadline": "2027-06-15",
+    "audience": "Bonnyville Centralized grads entering music or the arts",
+    "url": "https://www.nlpsab.ca/students/scholarships/jane-ripkens-scholarship-fund-for-music-and-the-arts",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need a Grade 12 average of at least 65 percent and proof of acceptance. Priority goes to students who intend to teach in a public school, then to financial need.",
+    "active": true,
+    "description": "Jane Ripkens, who taught English and was principal at Bonnyville Centralized High School, funds $500 and a certificate for a graduate entering a recognized music or arts program.",
+    "metaDetail": "Future teachers get priority.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bonnyville Centralized High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "arts"
+      ],
+      "minAverage": 65,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 1419,
+    "title": "Alberta Beach and District Agricultural Society Scholarship Fund",
+    "amount": "$2,000",
+    "deadline": "2027-05-15",
+    "audience": "Alberta Beach area students in two-year programs or longer",
+    "url": "https://www.abagsociety.com/_files/ugd/90ff0e_cbed322181ce44cdb5f29f4f9f532ffb.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "It is paid in two pieces, $1,250 in first year and $750 in second, each released after your enrolment is verified.",
+    "active": true,
+    "description": "One $2,000 scholarship a year for a student enrolled in a program of at least two years at a recognized institution. Marks, citizenship, volunteering and leadership are all weighed, and you write an essay.",
+    "metaDetail": "Paid across two years of study.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1420,
+    "title": "Crown Mentorship Foundation Alliance Program Bursary",
+    "amount": "$2,000",
+    "deadline": "2026-09-30",
+    "audience": "Black post-secondary students in Calgary and Edmonton",
+    "url": "https://crownmentorship.com/alliance-program-2026/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The money follows the Deloitte Mentorship Shadow Day, so the bursary comes with the program rather than instead of it. International students can apply.",
+    "active": true,
+    "description": "The Crown Mentorship Foundation gives a $2,000 bursary to Black students living and studying in Calgary, Edmonton or the surrounding areas, alongside mentorship and professional development.",
+    "metaDetail": "Comes with a mentorship day.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1421,
+    "title": "Dr. Josephine M. Brown Memorial Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-05-01",
+    "audience": "Edwin Parr Composite students entering medicine or dentistry",
+    "url": "https://athabasca.ca/Home/DownloadDocument?docId=ef3f4001-95e3-4025-a4aa-ff29967f9d9f",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Grade 12 applicants need an 85 percent Grade 11 average and at least 75 percent in Grade 12. Students already in medicine or dentistry need a 3.3 GPA, 75 percent or B plus across three terms. You send an essay and three references.",
+    "active": true,
+    "description": "Dr. Josephine Brown served Athabasca as a physician and a town councillor. Her $2,000 scholarship goes to an Edwin Parr Composite student or alumnus heading into medical or dental studies.",
+    "metaDetail": "One award each calendar year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Edwin Parr Composite School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1422,
+    "title": "Future in Agriculture Bursary",
+    "amount": "$1,500",
+    "deadline": "2027-09-15",
+    "audience": "Athabasca County students in agriculture programs",
+    "url": "https://athabascacounty.com/wp-content/uploads/2025/08/3855-Future-in-Agriculture-Bursary.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You, a parent or a guardian has to live in or own property in the county. First-year students get priority, and mature students are welcome. The county hopes you bring the knowledge back.",
+    "active": true,
+    "description": "Athabasca County's Agricultural Service Board funds one $1,500 bursary a year for a student in full-time agriculture or related studies at an Alberta university, college or trade school.",
+    "metaDetail": "Mature students qualify too.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1423,
+    "title": "Kinette Club of Vulcan Bursary",
+    "amount": "Varies",
+    "deadline": "2027-04-15",
+    "audience": "Vulcan area students starting full-time post-secondary",
+    "url": "https://www.countycentral.ca/download/384499",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You must be a Canadian citizen or landed immigrant, registered full time for September, and a first-time recipient. The form the school hosts does not state the amount or the year of the April 15 date.",
+    "active": true,
+    "description": "The Kinette Club of Vulcan helps local students heading to a recognized university, college or technical institution, judging applicants on the qualities of good citizenship.",
+    "metaDetail": "The amount is not published.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1424,
+    "title": "Rosalind Agricultural Society Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-01",
+    "audience": "Bawlf area graduates and children of Society members",
+    "url": "https://bawlf.brsd.ab.ca/download/508861",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "The courses have to be full term and not subsidized. You send transcripts and references, and there may be an interview.",
+    "active": true,
+    "description": "A $1,000 scholarship for a Bawlf School graduate, a graduate from its attendance area, or the child of a current Rosalind Agricultural Society member, entering first or second year of college or university.",
+    "metaDetail": "Second-year students qualify too.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bawlf School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1425,
+    "title": "Bawlf and District Lions Club Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-30",
+    "audience": "Bawlf School graduates with a strong work ethic",
+    "url": "https://bawlf.brsd.ab.ca/download/560405",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "You need three years at Bawlf School, which do not have to be consecutive, and you have one year after graduating to register somewhere in Canada. Two references are required.",
+    "active": true,
+    "description": "The Bawlf and District Lions give $500 a year to a graduate who has shown a strong work ethic in their studies and in the community.",
+    "metaDetail": "Three years at Bawlf, consecutive or not.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bawlf School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1426,
+    "title": "Grimshaw Regional Healthcare Attraction and Retention Scholarship",
+    "amount": "$3,000",
+    "deadline": "2026-12-31",
+    "audience": "Grimshaw area students in health care programs",
+    "url": "https://grimshaw.ca/index.asp?SEC=5B389DE2-C047-4754-940F-46D353E8FCF2",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You show proof of residency, send a professional reference and write an essay about your commitment to rural northern health care. Your family living there counts if you have moved away to study.",
+    "active": true,
+    "description": "Four $3,000 scholarships a year for students from Grimshaw, Berwyn, the M.D. of Peace No. 135 or the County of Northern Lights who are accepted into a health care or medical program, at any level including prerequisite courses.",
+    "metaDetail": "Prerequisite courses count as eligible study.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1427,
+    "title": "Bonnyville Oilmen's Registered Apprenticeship Program Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "audience": "Bonnyville area grads in a Red Seal apprenticeship",
+    "url": "https://bonnyvilleoilmens.net/wp-content/uploads/2026/04/RAP-Program-rev4.pdf",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You have to be graduating from Off Campus, Notre Dame High, Bonnyville Centralized or Ecole des Beaux-Lacs inside the society's boundaries. The application needs an employer evaluation, references and an essay.",
+    "active": true,
+    "description": "The Bonnyville Oilmen's Society gives one $1,000 scholarship a year to a graduating student enrolled in one of Alberta's Red Seal interprovincial apprenticeship programs.",
+    "metaDetail": "Needs an employer evaluation.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bonnyville Centralized High School",
+        "Ecole Notre Dame High School",
+        "Ecole des Beaux Lacs"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": [
+        "RAP"
+      ]
+    }
+  },
+  {
+    "id": 1428,
+    "title": "Bonnyville Oilmen's Post-secondary Scholarship",
+    "amount": "$1,000 a year for up to two years",
+    "deadline": "2027-06-30",
+    "audience": "Bonnyville area graduates",
+    "url": "https://bonnyvilleoilmens.net/wp-content/uploads/2026/04/Post-secondary-Scholarship-rev4.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The essay covers your career plans, your activities and your volunteering, and the instructions tell you to leave academic achievements out of it. You need to be graduating from one of the four local schools.",
+    "active": true,
+    "description": "The Society picks two students a year for $1,000, and pays a second $1,000 the following year if they send proof that they are continuing.",
+    "metaDetail": "The essay must leave out your marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bonnyville Centralized High School",
+        "Ecole Notre Dame High School",
+        "Ecole des Beaux Lacs"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1429,
+    "title": "Clayton Bellamy Scholarship Fund for Music and the Arts",
+    "amount": "$2,500",
+    "deadline": "2027-06-15",
+    "audience": "Graduating students entering fine arts programs",
+    "url": "https://www.claytonbellamyfoundation.org/scholarship",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need at least 65 percent, admission and registration in fine arts, performance experience and references from your principal and a teacher. Students who plan to teach get preference, and financial need breaks any remaining tie.",
+    "active": true,
+    "description": "The Clayton Bellamy Foundation for the Arts gives $2,500 and a certificate to a graduating student with academic results, artistic talent and a habit of sharing that talent with the community.",
+    "metaDetail": "Performance experience is required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "arts"
+      ],
+      "minAverage": 65,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1430,
+    "title": "Friends of Canadian Simmental Foundation Advancing Education Bursary",
+    "amount": "Up to $1,000",
+    "deadline": "2027-03-01",
+    "audience": "Simmental association members 25 and under",
+    "url": "https://www.simmentalfoundation.com/bursary.html",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "It funds learning that is not a degree, which makes it unusual. The board reviews applications twice a year, in spring and fall, and caps the total at $5,000 a year. You have a year to spend it and must send receipts and a report.",
+    "active": true,
+    "description": "This bursary pays up to $1,000 toward agricultural training, conferences and educational events for Canadian Simmental Association or Young Canadian Simmental Association members aged 25 or younger.",
+    "metaDetail": "It funds courses and conferences, not tuition.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 1431,
+    "title": "SPECEF Corporate Partnered Scholarships",
+    "amount": "$5,000",
+    "deadline": "2026-11-08",
+    "audience": "Second and third year students heading into energy",
+    "url": "https://www.specef.org/corporate-partnered-scholarships",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The interview is guaranteed, the job is not. You need to be eligible to work in Canada and able to live where the internship is, and some partners require a co-op program.",
+    "active": true,
+    "description": "Energy companies partner with the Society of Petroleum Engineers Canadian Educational Foundation on $5,000 scholarships. Winners also get a guaranteed interview for an internship with that company.",
+    "metaDetail": "Winners get a guaranteed internship interview.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1432,
+    "title": "Lyle Duncan and Ian Appleyard Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2026-09-30",
+    "audience": "Carbon School graduates entering post-secondary",
+    "url": "https://carbon.ghsd75.ca/download/467303",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need a 65 percent Grade 12 average, references, a personal letter and a resume built around service. The package goes to any Carbon Lions member or to the club's box number.",
+    "active": true,
+    "description": "The Carbon Lions Club gives $1,000 to a graduating student who spent at least three years at Carbon School and has been accepted into a program of a year or more.",
+    "metaDetail": "Hand it to a Lions member or mail it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Carbon School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 65,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1433,
+    "title": "Carbon and District Agricultural Society Ag Scholarship",
+    "amount": "$500",
+    "deadline": "2026-10-31",
+    "audience": "Carbon School graduates with a farming background",
+    "url": "https://carbon.ghsd75.ca/parents/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Marks, agricultural involvement and the essay carry equal weight. You need at least one year at Carbon School and a full-time program lasting a year or more. Past recipients cannot apply again.",
+    "active": true,
+    "description": "The Carbon and District Agricultural Society and Curling Club give $500 to a graduate who either grew up around farming or is entering agricultural studies with the intention of working in the industry.",
+    "metaDetail": "A farm background counts as much as the program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Carbon School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
   }
 ]
