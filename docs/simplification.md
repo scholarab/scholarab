@@ -189,3 +189,23 @@ Do not treat fewer dependency files, cache cleanup, reduced request counts, sour
 Validation of the isolated committed code passed: lint, all 911 unit tests in 46 files, data validation, production build, Astro checks (zero errors/warnings/hints), and script type checks. The new maintenance regression file passes all 14 tests. Browser checks passed 34 tests with two existing mobile skips. All 1,279 HTML pages remain. All 72 protected authored-data, public-template/component/style and font files match their pre-change SHA-256 fingerprints; unrelated reminder edits also match their saved originals. Workflow YAML parses successfully. No database mutation, paid AI request, IndexNow submission or production deployment is needed to validate this pass. The only live database probe is the read-only queue existence check.
 
 Protocol references: [Claude API overview](https://platform.claude.com/docs/en/api/overview) and the installed `@neondatabase/serverless` 1.0.2 HTTP implementation. The precheck uses the same Neon endpoint, headers and boolean representation, and has been exercised with the existing connection without exposing credentials.
+
+## Astra hunt ingest, 2026-09-19
+
+Astra collected 1,417 candidate awards into a gitignored JSONL file. Triage dropped 100
+(87 URLs that pointed at a portal search page rather than an award, 12 deadlines whose
+stated year had passed, 1 duplicate) and rewrote 138 em dash titles. Of the 571 broad
+listings that survived, 332 carried a deadline string, 283 parsed to an ISO date and 173
+of those fall in the future.
+
+Verification before any of it shipped: every one of the 95 source URLs was fetched, one
+host at a time (93 returned 200, one 403 on a vendor page that was dropped, one page had
+gone). Each award's source quote was checked against the fetched page text; 160 of 173
+matched, and the 13 that did not were held back rather than guessed at.
+
+142 listings were written from the fetched page text and added. 4 ATA awards were dropped
+as being for certified teachers rather than students, 4 Indspire sub-funds were dropped
+because they share one application, and 2 were held for lack of a confirmable page.
+
+Removal candidates and outcomes: the portal-search URLs, the stale years and the vendor
+SEO page were removed outright and none were added back, an add-back fraction of 0.
