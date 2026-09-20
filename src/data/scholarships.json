@@ -46443,5 +46443,1617 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1358,
+    "title": "Alix Agricultural Society Scholarship",
+    "amount": "Up to $1,200",
+    "deadline": "2027-05-15",
+    "audience": "Alix and Mirror students entering post-secondary",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/alix-mac-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "The whole application is a letter of 500 words or less about yourself, your program and what you plan to do with it. A conditional acceptance counts. Send it by mail or email to the Society.",
+    "active": true,
+    "description": "The Alix Agricultural Society puts up to $1,200 behind students from the Alix and Mirror area going on to trade school, college or university. How much you get depends on how many suitable applications arrive.",
+    "metaDetail": "A conditional acceptance qualifies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Alix MAC School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1359,
+    "title": "Alix Lions Club Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-09-01",
+    "audience": "Alix MAC School graduates with a leadership record",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/alix-mac-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "The cheque is made out to your institution, not to you. The September 1 date is months later than most local awards, so it is still open after everything else has closed.",
+    "active": true,
+    "description": "The Alix Lions Club funds two $1,000 scholarships for Alix MAC School graduates who meet post-secondary entrance requirements and are known for leadership, honesty and integrity.",
+    "metaDetail": "The cheque goes to your school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Alix MAC School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1360,
+    "title": "Alix and Clive Agencies Exceptional Achievement Citation and Bursary",
+    "amount": "$500",
+    "deadline": "2027-05-15",
+    "audience": "Alix MAC students who overcame adversity or lifted the school",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/alix-mac-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "A school committee nominates, so there is no form to fill in. Being known by staff for the right reasons is the whole application.",
+    "active": true,
+    "description": "Alix and Clive Agencies, with the Western Communities Foundation, give $500 to a student seeking further training who has overcome adversity, shown outstanding school or community spirit, or conducted themselves in a way that inspired others.",
+    "metaDetail": "The school nominates you.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Alix MAC School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1361,
+    "title": "Dane Nelson Memorial Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-15",
+    "audience": "Alix MAC students entering a trade or apprenticeship",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/alix-mac-scholarships",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "The committee looks for someone well rounded across academics, sports, leadership and community, which is how Dane is remembered.",
+    "active": true,
+    "description": "Dane Nelson was an Alix MAC student who went on to the electrician apprenticeship at Red Deer College until his health stopped him. This $1,500 scholarship continues that, for a student accepted to a trade school or registered in an apprenticeship.",
+    "metaDetail": "The largest of the Alix MAC awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Alix MAC School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1362,
+    "title": "Rahr Malting Canada Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-15",
+    "audience": "Alix MAC students entering agriculture-related studies",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/alix-mac-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "Indirectly related counts, so a program that serves farming without being an agriculture degree is still worth applying with. The school committee nominates.",
+    "active": true,
+    "description": "Rahr Malting Canada gives $500 to a student attending a post-secondary program related directly or indirectly to agriculture, who has performed well in academics, community, citizenship or sportsmanship.",
+    "metaDetail": "Indirect agriculture programs count.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Alix MAC School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1363,
+    "title": "Royal Canadian Legion Mirror Poppy Sales Bursary",
+    "amount": "$500",
+    "deadline": "2027-06-15",
+    "audience": "Children of Armed Forces members and grandchildren of veterans",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/alix-mac-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "A letter is required and the form comes from the school career centre.",
+    "active": true,
+    "description": "Poppy sales in Mirror pay for a $500 bursary for a graduating Grade 12 student who is the child of a Canadian Armed Forces member or the grandchild of a veteran, and who is going on to post-secondary.",
+    "metaDetail": "Open to grandchildren of veterans.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1364,
+    "title": "Florence A. Wilford Scholarship",
+    "amount": "$1,000",
+    "deadline": "2026-10-31",
+    "audience": "Stavely School alumni already in post-secondary",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need at least one finished semester of post-secondary before you qualify, so this is one to apply for after you leave, not in Grade 12. The amount can move year to year.",
+    "active": true,
+    "description": "An annual award for a well rounded student who spent at least six years at Stavely School and is now at a university, college, technical school or in an apprenticeship. Leadership, community service and marks at both levels are weighed.",
+    "metaDetail": "Apply after your first term, not in Grade 12.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Stavely School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1365,
+    "title": "Stavely Education Foundation Scholarships",
+    "amount": "$2,000",
+    "deadline": "2026-10-31",
+    "audience": "Stavely School alumni entering post-secondary",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Your confirmation of enrolment has to be dated September 30 or later, which is why the deadline falls in the fall. First-time applicants get preference.",
+    "active": true,
+    "description": "The Stavely Education Foundation gives up to $2,000 to students who attended Stavely School for at least four years. Part of the application is a paragraph about a favourite memory of the school.",
+    "metaDetail": "Enrolment proof must be dated after September 30.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Stavely School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1366,
+    "title": "Claresholm Lions Club Trades, Polytechnic and College Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-30",
+    "audience": "Willow Creek Composite students entering trades or technology",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The school's list flags that the application link was waiting to be updated as of May 2026, so ask the office for the current form.",
+    "active": true,
+    "description": "The Claresholm Lions give $1,500 to a Willow Creek Composite High School student entering a trades or technology program at a college or polytechnic, with a history of school or community service.",
+    "metaDetail": "Ask the office for the current form.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Willow Creek Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1367,
+    "title": "Claresholm Lions Club Service and Leadership Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-05-30",
+    "audience": "Willow Creek Composite students entering a four-year degree",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The field of study does not matter, which is rarer than it sounds among awards this size. The application link was pending an update as of May 2026.",
+    "active": true,
+    "description": "The larger of the two Claresholm Lions awards, $2,500 for a Willow Creek Composite student entering a four-year bachelor's degree in any field, with a record of service or leadership and documented academic success.",
+    "metaDetail": "Any field of study qualifies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Willow Creek Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1368,
+    "title": "Lucy Clifton Bedinfield-Wehrfritz Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-05-15",
+    "audience": "Claresholm and Fort Macleod students in arts or trades",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need at least 90 percent attendance in your final year, and a willingness to work to the best of your ability counts more than a top average. The family has committed to ten years of funding.",
+    "active": true,
+    "description": "Lucy Bedinfield-Wehrfritz supported her local schools for decades and died in 2022 at 94. Her family funds up to six $2,000 awards a year, three at Willow Creek Composite and three at F.P. Walshe, for students entering artistic or trades careers.",
+    "metaDetail": "Needs 90 percent attendance in Grade 12.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Willow Creek Composite High School",
+        "F.P. Walshe School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "arts",
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1369,
+    "title": "Cairo Lodge #32 Bursary Fund",
+    "amount": "$500",
+    "deadline": "2027-05-31",
+    "audience": "Willow Creek Composite students with community involvement",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Canadian colleges and universities are preferred, though the wording does not rule out a school elsewhere.",
+    "active": true,
+    "description": "Cairo Lodge, the Claresholm chapter of the Masons since 1908, gives $500 to a Willow Creek Composite student who shows community involvement and school spirit and has been accepted into post-secondary.",
+    "metaDetail": "Canadian institutions are preferred.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Willow Creek Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1370,
+    "title": "Neal Knoot Memorial Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "Students entering forestry or natural resources",
+    "url": "https://lsfes.org/scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You can apply to have it matched by the Northern Alberta Development Council, but that money comes with a return-service obligation of one month working in the north per $500, or you pay it back.",
+    "active": true,
+    "description": "The Lesser Slave Forest Education Society funds two $500 scholarships for students heading into forestry, forest products manufacturing, natural resources or environmental science, or any health and safety program.",
+    "metaDetail": "Matching funds carry a northern work obligation.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1371,
+    "title": "MJ Munn-Kristoff Forest Resources Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "Students entering forestry or environmental science",
+    "url": "https://lsfes.org/scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "It shares an application and a deadline with the Society's Neal Knoot award, so one form puts you in for both.",
+    "active": true,
+    "description": "A $500 award from the Lesser Slave Forest Education Society for a high school graduate studying forestry, forest products manufacturing, natural resources or environmental science.",
+    "metaDetail": "One form covers both Society awards.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1372,
+    "title": "BPO Elks Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-07-01",
+    "audience": "High Prairie area students entering post-secondary",
+    "url": "https://gpv.hpsd.ca/scholarships-1717187816760",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You send a transcript and an essay, and there is an interview. The Elks page the school links to returns a 404, so ask the school or the lodge for the current form.",
+    "active": true,
+    "description": "The High Prairie Elks give $1,000 to a local student entering post-secondary who combines academic results with volunteering and citizenship.",
+    "metaDetail": "There is an interview stage.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1373,
+    "title": "Elliott and Rosche Memorial Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-06-01",
+    "audience": "Big Lakes County students in biology, earth or water sciences",
+    "url": "https://www.lswc.ca/memorial_bursary",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The county boundary is the only geographic test, so students from Kinuso, Faust, Joussard and High Prairie all qualify.",
+    "active": true,
+    "description": "The Lesser Slave Watershed Council gives $1,000 to a Big Lakes County student studying biology, earth sciences or anything water focused.",
+    "metaDetail": "Open across Big Lakes County.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1374,
+    "title": "Ruth Pratt Memorial Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-06-01",
+    "audience": "Students entering agriculture programs",
+    "url": "https://gpv.hpsd.ca/scholarships-1717187816760",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The Society's own bursary page returns a 404, so ask the Society or your school office for the form rather than relying on the link.",
+    "active": true,
+    "description": "The High Prairie Agricultural Society gives $1,000 to a student pursuing post-secondary studies in agriculture. The application is a single form.",
+    "metaDetail": "The Society's own link is dead.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1375,
+    "title": "Tolko High Prairie Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "High Prairie area graduates entering post-secondary",
+    "url": "https://gpv.hpsd.ca/scholarships-1717187816760",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Children of Tolko employees and students entering forestry or related studies get preference. The application is posted in Google Classroom rather than on a public page.",
+    "active": true,
+    "description": "Tolko funds two $1,000 scholarships for High Prairie area graduates going on to post-secondary. Any program qualifies, and you send proof of enrolment with the form.",
+    "metaDetail": "The form lives in Google Classroom.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1376,
+    "title": "Mullets Barber Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "Iron Ridge Secondary Campus graduates",
+    "url": "https://irsc.wolfcreek.ab.ca/students/scholarship-info",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "Selection weighs academic responsibility, citizenship, community contribution and a balanced life, so it rewards the steady student rather than the top average.",
+    "active": true,
+    "description": "A $1,000 award for an Iron Ridge Secondary Campus graduate who kept up consistent effort in every subject, took part across several areas of school life and contributed to the school community.",
+    "metaDetail": "Rewards steadiness, not the top average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Iron Ridge Secondary Campus"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1377,
+    "title": "Blackfalds Veterinary Hospital Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "Iron Ridge Secondary Campus graduates",
+    "url": "https://irsc.wolfcreek.ab.ca/students/scholarship-info",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "The school's list gives the sponsor, the amount and the May 1 date but no criteria. Ask the career counsellor what this one is judged on before you write anything.",
+    "active": true,
+    "description": "Blackfalds Veterinary Hospital sponsors a $500 scholarship for an Iron Ridge Secondary Campus graduate, awarded through the school's own scholarship package.",
+    "metaDetail": "The school lists no published criteria.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Iron Ridge Secondary Campus"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1378,
+    "title": "Ken and Doris Hubbard Serenity Developments Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "Iron Ridge Secondary Campus graduates",
+    "url": "https://irsc.wolfcreek.ab.ca/students/scholarship-info",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "As with the other locally sponsored awards on this list, the criteria live in the school's scholarship package rather than on the web page.",
+    "active": true,
+    "description": "Serenity Developments funds a $500 scholarship in the name of Ken and Doris Hubbard for an Iron Ridge Secondary Campus graduate.",
+    "metaDetail": "Criteria are in the school package.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Iron Ridge Secondary Campus"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1379,
+    "title": "Rellis Path Forward Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "Iron Ridge graduates who came through a hard stretch",
+    "url": "https://irsc.wolfcreek.ab.ca/students/scholarship-info",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "You are explicitly not required to disclose personal or family circumstances. You can speak as broadly as you want about your experiences, and a small committee keeps what you write confidential.",
+    "active": true,
+    "description": "Louise Rellis funds $1,000 a year for a graduating student who has shown resilience and character through a path that was not easy, and who is taking a real next step into trades, college or university.",
+    "metaDetail": "You need not disclose private circumstances.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Iron Ridge Secondary Campus"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1380,
+    "title": "Lacombe Legion Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-05-01",
+    "audience": "Descendants of long-serving Lacombe Legion members",
+    "url": "https://irsc.wolfcreek.ab.ca/students/scholarship-info",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "The service requirement is the whole test, so check the family record before writing this off. The application comes from the Legion office rather than the school.",
+    "active": true,
+    "description": "The Lacombe Legion gives $2,000 to a child, grandchild or great-grandchild of a past or current branch member who has at least ten years of continuous service with the Royal Canadian Legion.",
+    "metaDetail": "Ten years of Legion service in the family.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1381,
+    "title": "BIKK Cookbook Scholarship",
+    "amount": "$150",
+    "deadline": "2027-05-01",
+    "audience": "Beiseker Community School grads in culinary programs",
+    "url": "https://beiseker.rockyview.ab.ca/learning/student-supports/graduation",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "There are two intakes: May 1 if you start in September, December 1 if you start in January. Applications must be postmarked, and averages are not rounded up.",
+    "active": true,
+    "description": "The Beiseker Irricana Kathyrn Keoma cookbook committee gives $150 and a cookbook to a Beiseker Community School graduate registered in a culinary or food related program, or holding at least five Foods credits at the 30 level.",
+    "metaDetail": "Two intakes a year, and it must be mailed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Beiseker Community School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1382,
+    "title": "Irricana and District Agricultural Society Scholarship",
+    "amount": "$250",
+    "deadline": "2027-06-30",
+    "audience": "Beiseker Community School grads entering any program",
+    "url": "https://beiseker.rockyview.ab.ca/learning/student-supports/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "All your Grade 12 courses are considered, along with extracurriculars and an essay on how agriculture has shaped you.",
+    "active": true,
+    "description": "Two $250 awards for Beiseker Community School graduates registered at a university, college or technical school. One goes to a student in agriculture and the other to any field, trades included.",
+    "metaDetail": "One award is open to any field.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Beiseker Community School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1383,
+    "title": "Beiseker and District Chamber of Commerce Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-30",
+    "audience": "Beiseker grads entering business or self-employment programs",
+    "url": "https://beiseker.rockyview.ab.ca/learning/student-supports/graduation",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need at least 25 Grade 12 credits and no more than ten days missed, so attendance matters as much as marks here. An essay and two references are required.",
+    "active": true,
+    "description": "The Beiseker and District Chamber of Commerce gives $500 to a graduate starting business administration or any program that leads to working for yourself. Academics, service and leadership are all weighed.",
+    "metaDetail": "No more than ten missed school days.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Beiseker Community School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1384,
+    "title": "M.D. of Bonnyville Municipal Scholarship for Nursing",
+    "amount": "$7,000",
+    "deadline": "2027-06-30",
+    "audience": "M.D. of Bonnyville residents in nursing programs",
+    "url": "https://md.bonnyville.ab.ca/DocumentCenter/View/7591",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Every funded year costs you a year of full-time work afterwards in the M.D., Cold Lake, Bonnyville or Glendon. You write a 300 to 500 word essay on practising in rural Alberta and send a reference and proof of enrolment. Late applications are not accepted.",
+    "active": true,
+    "description": "The Municipal District of Bonnyville pays $7,000 a year to one resident enrolled full time as a registered nurse or nurse practitioner student. It is a return-of-service award aimed at keeping health workers in the area.",
+    "metaDetail": "One year of local work per funded year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1385,
+    "title": "M.D. of Bonnyville Municipal Scholarship for Veterinary Medicine",
+    "amount": "$10,500",
+    "deadline": "2027-06-30",
+    "audience": "M.D. of Bonnyville residents in veterinary medicine",
+    "url": "https://md.bonnyville.ab.ca/DocumentCenter/View/7591",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Each funded year commits you to a year working in the M.D., Cold Lake, Bonnyville or Glendon. First-time recipients are preferred over repeat applicants.",
+    "active": true,
+    "description": "One resident enrolled full time in a Doctor of Veterinary Medicine program gets $10,500 a year from the M.D. of Bonnyville, on the same return-of-service terms as its nursing and medical awards.",
+    "metaDetail": "Return of service is required.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1386,
+    "title": "M.D. of Bonnyville Municipal Scholarship for Medicine",
+    "amount": "$14,000",
+    "deadline": "2027-06-30",
+    "audience": "M.D. of Bonnyville residents in medical school",
+    "url": "https://md.bonnyville.ab.ca/DocumentCenter/View/7591",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The essay asks about your interest in rural medicine and what you have contributed to the community, from volunteering to farming. Each funded year is repaid with a year of local practice.",
+    "active": true,
+    "description": "The largest of the M.D. of Bonnyville's three municipal scholarships, $14,000 a year for one resident enrolled full time in a Medical Doctor program.",
+    "metaDetail": "The essay asks about rural practice.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1387,
+    "title": "Maegan Janz Ladies Basketball Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-30",
+    "audience": "Female Glendon School grads playing post-secondary basketball",
+    "url": "https://www.nlpsab.ca/students/scholarships/nlpsawards",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "A second $500 arrives once you finish that first year, so it is worth $1,000 if you stay with the team.",
+    "active": true,
+    "description": "A $500 scholarship for a female Glendon School graduate in her first year of post-secondary who is on her institution's basketball team.",
+    "metaDetail": "A second $500 follows first year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Glendon School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1388,
+    "title": "Plamondon Russian Language and Culture Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-31",
+    "audience": "Ecole Plamondon grads fluent in Russian",
+    "url": "https://www.nlpsab.ca/students/scholarships/nlpsawards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Plamondon was settled by Russian speaking families, which is why an award like this exists in a village this size.",
+    "active": true,
+    "description": "Fred and Kathy Frolov fund $500 for an Ecole Plamondon graduate with a Grade 12 average of at least 75 percent who is recognized for fluency in Russian and for taking part in the White Russian community.",
+    "metaDetail": "Needs Russian fluency and a 75 average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Ecole Plamondon School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1389,
+    "title": "Richard Creelman ACCESS Pipeline Scholarship Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "Ecole Plamondon grads entering a trade or vocation",
+    "url": "https://www.nlpsab.ca/students/scholarships/nlpsawards",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The trade is yours to pick, so it is not tied to pipeline work.",
+    "active": true,
+    "description": "ACCESS Pipeline funds one $1,000 scholarship for an Ecole Plamondon graduate continuing into the trade or vocation of their choice.",
+    "metaDetail": "Any trade or vocation qualifies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Ecole Plamondon School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1390,
+    "title": "Bow Island and District Health Foundation Scholarship",
+    "amount": "$500",
+    "deadline": "2027-07-15",
+    "audience": "Bow Island area students entering health care",
+    "url": "https://www.bidfoundation.ca/education/scholarship-program",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Medicine Hat",
+    "notes": "Nursing, pharmacy, pre-med and kinesiology are all named as examples. You are notified at the start of your program but paid after you show evidence that you finished the course or year.",
+    "active": true,
+    "description": "The Bow Island and District Health Foundation funds $500 scholarships in three categories: a high school student entering health care, a student from the service area in second year or later of a health program, and an Alberta Health Services employee upgrading.",
+    "metaDetail": "Paid after you finish the year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1391,
+    "title": "Friends of Canadian Simmental Foundation Scholarships",
+    "amount": "$3,000",
+    "deadline": "2026-09-30",
+    "audience": "Students involved in beef cattle, in any program",
+    "url": "https://www.simmentalfoundation.com/pdf/2026%20Scholarship%20Application.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The set is four general $3,000 scholarships plus the $3,000 First Year Scholarship and the $3,000 Trevor Vance Memorial, both for first-year students only. You can win each named award once, and no more than two Foundation awards in your life.",
+    "active": true,
+    "description": "The Foundation hands out $18,000 a year to students involved in beef cattle who are working toward any degree, diploma or certificate. One application form covers all six awards, including two reserved for first-year students.",
+    "metaDetail": "One form enters you for six awards.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 1392,
+    "title": "G.L.D.C. Gas Co-op Post-Secondary Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "audience": "G.L.D.C. Gas Co-op members and their children",
+    "url": "https://www.gldcgas.com/gas-co-op-post-secondary-scholarship-application/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "Community involvement and fit with co-op values carry the decision. You can only receive it once, and winners are asked to allow their name and photo on the co-op's website and Facebook page.",
+    "active": true,
+    "description": "The co-op awards two $1,000 scholarships a year to members in good standing, or their children, who are entering first year at a recognized university, college or trade school. One of the two is named the Jack Siebenga Memorial Scholarship.",
+    "metaDetail": "Winners are asked to be named publicly.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1393,
+    "title": "CCWA Helen Dueck Memorial Nursing Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-30",
+    "audience": "Coaldale area graduates entering nursing or health care",
+    "url": "https://drive.google.com/uc?export=download&id=1VgszbzaM1hlhMLIHiG7pCMbMZTq5z0jG",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "You need English 30-1, Biology 30, Chemistry 30 or Science 30, and Math 30-1 or Math 31. Send a cover letter, a resume and either proof of acceptance or the date you expect to hear.",
+    "active": true,
+    "description": "Helen Dueck nursed in Coaldale and volunteered as a health care practitioner in several countries after she retired. The Coaldale Community Wellness Association gives $1,000 in her name to a graduate entering health care, with nursing preferred.",
+    "metaDetail": "Specific Grade 12 courses are required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1394,
+    "title": "CCWA Jake Janzen Memorial Community Service Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-30",
+    "audience": "Coaldale area graduates with a volunteer record",
+    "url": "https://drive.google.com/uc?export=download&id=1VgszbzaM1hlhMLIHiG7pCMbMZTq5z0jG",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "How the application is put together is part of the judging, so the cover letter and resume are worth the time.",
+    "active": true,
+    "description": "The Coaldale Community Wellness Association gives $1,000 to a graduate with substantial volunteering behind them who plans to keep serving the community. Any post-secondary program qualifies.",
+    "metaDetail": "Any program qualifies.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1395,
+    "title": "CCWA George Wall Memorial Agricultural Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-04-30",
+    "audience": "Coaldale area graduates entering agriculture",
+    "url": "https://drive.google.com/uc?export=download&id=1VgszbzaM1hlhMLIHiG7pCMbMZTq5z0jG",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "Your cover letter has to set out your extracurricular experience in agriculture, so 4-H, rodeo or farm work all belong in it.",
+    "active": true,
+    "description": "George Wall farmed irrigated and dry land near Coaldale and Readymade and sat on the Coaldale Hospital Association board. This $1,000 award goes to a graduate entering agricultural studies.",
+    "metaDetail": "Farm and 4-H experience belongs in the letter.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1396,
+    "title": "St. Paul Legion Scholarship",
+    "amount": "$500",
+    "deadline": "2026-10-30",
+    "audience": "Children of active Legion members in the St. Paul area",
+    "url": "https://drive.google.com/uc?export=download&id=1SzQ27abuZ3cwDNXipjrQXmC87D-w80r9",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You confirm the family connection and send proof of enrolment. The October deadline means you apply after you have started, not before.",
+    "active": true,
+    "description": "The St. Paul Legion gives $500 to a graduating child of an active member from the St. Paul, Myrnam, Elk Point or Heinsburg area who is entering post-secondary.",
+    "metaDetail": "The deadline falls after you start.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1397,
+    "title": "St. Paul Poppy Area Scholarship",
+    "amount": "$500",
+    "deadline": "2026-10-30",
+    "audience": "Grandchildren of veterans in the St. Paul poppy area",
+    "url": "https://drive.google.com/uc?export=download&id=1SzQ27abuZ3cwDNXipjrQXmC87D-w80r9",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The winner is drawn from the eligible submissions rather than judged, so a complete application is the whole job.",
+    "active": true,
+    "description": "Funded by poppy campaign money, this $500 award goes to a graduating grandchild of a veteran from the St. Paul, Myrnam, Elk Point or Heinsburg poppy area who is entering post-secondary.",
+    "metaDetail": "The winner is drawn, not judged.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1398,
+    "title": "St. Paul Dodge Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "St. Paul Regional High School students entering auto service",
+    "url": "https://drive.google.com/uc?export=download&id=1SzQ27abuZ3cwDNXipjrQXmC87D-w80r9",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The essay covers your plans, what you have achieved, your work ethic and your financial need. It is part of the division's internal set, all due June 1 through one online form.",
+    "active": true,
+    "description": "St. Paul Dodge gives $500 to a St. Paul Regional High School student working toward Automotive Service Technician. High school mechanics courses and time in the Registered Apprenticeship Program are preferred.",
+    "metaDetail": "Part of the division's June 1 online form.",
+    "eligibility": {
+      "grades": [
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "St. Paul Regional High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": [
+        "RAP"
+      ]
+    }
   }
 ]
