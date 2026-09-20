@@ -44999,5 +44999,1449 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1322,
+    "title": "Andrew Haworth Scholarship Trust Fund",
+    "amount": "About $400",
+    "deadline": "2027-05-01",
+    "audience": "Carmangay district graduates with the top average",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The payout is whatever the invested fund earns that year, so the figure moves. Apply in writing to the principal of County Central High School by May 1. If nobody wins it, the money goes back into the fund.",
+    "active": true,
+    "description": "A trust fund pays out its yearly interest to one graduate from the Carmangay district, the part of Vulcan County south of the Little Bow River. You need a high school diploma, the highest average among the applicants, and plans for academic or vocational training.",
+    "metaDetail": "Highest average in the Carmangay district wins.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1323,
+    "title": "Arrowwood Lions Award",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "County Central grads who attended Arrowwood School",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "There is no application. The selection committee at County Central High School picks the eligible Grade 12 student with the highest academic average.",
+    "active": true,
+    "description": "The Arrowwood Lions give $500 to the County Central High School graduate with the highest core subject marks who spent at least two years at Arrowwood School. You need at least a 70 percent average and post-secondary plans.",
+    "metaDetail": "No application; the school picks the winner.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School",
+        "Arrowwood School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1324,
+    "title": "Dr. W. A. Proudfoot Memorial Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "County Central High School grads accepted into a health program",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You have to write an essay of at least 1,000 words on health care as a career. Apply in writing to the principal by May 1 with proof of acceptance and your Grade 12 marks.",
+    "active": true,
+    "description": "The Vulcan Health Care Auxiliary gives $500 to a County Central High School graduate accepted into a health-related post-secondary program. Judges weigh your school and community involvement alongside the application.",
+    "metaDetail": "Needs a 1,000 word essay on health care.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1325,
+    "title": "Dr. M. E. Koziol Memorial Fund",
+    "amount": "About $450",
+    "deadline": "2027-05-01",
+    "audience": "Vulcan County grads entering medicine or nursing",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "If no medical student applies it drops to a third-year nursing student, then to first-year pre-med or nursing, then to other health sciences. Every tier needs written confirmation of enrolment.",
+    "active": true,
+    "description": "Set up in 2002 after Dr. Koziol died, this fund backs a Vulcan County graduate going into medicine, nursing or health sciences. It goes first to anyone accepted into a Canadian faculty of medicine.",
+    "metaDetail": "Medicine first, then nursing.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1326,
+    "title": "Kinsmen Club of Vulcan Scholarships",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "County Central High School graduates",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Your GPA is not one of the criteria, so a middling transcript does not rule you out. You need proof of acceptance or enrolment and a record of community involvement.",
+    "active": true,
+    "description": "The Kinsmen Club of Vulcan funds up to three $500 scholarships a year for County Central High School graduates continuing their education through any stream, whether college, a technical institution, a registered apprenticeship or university.",
+    "metaDetail": "Grades are not part of the decision.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1327,
+    "title": "Milo Lions Legacy Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "County Central High School grads who went to school in Milo",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The application wants a transcript, letters of reference, a letter you write yourself and the specific program you are entering. Send it to the awards committee at the school by May 1.",
+    "active": true,
+    "description": "The Milo Lions give $500 to a County Central High School graduate who spent most of Grades 1 to 9 in Milo and has been accepted into a post-secondary program.",
+    "metaDetail": "For students who grew up in Milo schools.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1328,
+    "title": "Palliser ATA Scholarship: CTS Award",
+    "amount": "$100",
+    "deadline": "2027-05-01",
+    "audience": "Grade 10 to 12 students with the top average across three CTS strands",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Grade 10, 11 and 12 students all compete for the same two awards. Apply to the principal by May 1.",
+    "active": true,
+    "description": "The Palliser local of the Alberta Teachers' Association gives two $100 awards to the students with the highest average across three Career and Technology Studies strands, worth at least nine credits earned in the year you apply.",
+    "metaDetail": "Needs nine CTS credits in one year.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1329,
+    "title": "Palliser ATA Scholarship: General Diploma Award",
+    "amount": "$200",
+    "deadline": "2027-05-01",
+    "audience": "Grads with the best marks in two of English, Social or Math 30-2",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "It is aimed at the dash-two stream, so the 30-1 courses do not count toward the average.",
+    "active": true,
+    "description": "This $200 award goes to the student with the highest average across any two of Social Studies 30-2, English 30-2 and Mathematics 30-2. You need an Alberta High School Diploma and enrolment at a recognized post-secondary institution.",
+    "metaDetail": "Built for the 30-2 course stream.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1330,
+    "title": "Paul Liska Agricultural Scholarship",
+    "amount": "About $150",
+    "deadline": "2027-05-01",
+    "audience": "Vulcan area grads entering university sciences",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The amount is the fund's annual income, so it moves year to year and is small next to the work of applying.",
+    "active": true,
+    "description": "A trust fund pays its yearly interest to a graduate entering university to pursue a career in the sciences. Your marks have to be good enough for university entrance, and a counsellor or administrator confirms your financial need.",
+    "metaDetail": "Science plans plus confirmed financial need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1331,
+    "title": "Vulcan County Cruisers Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-01",
+    "audience": "County Central grads in an automotive program",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Your GPA is not used in the decision. You need proof of acceptance or enrolment in an automotive-related program and a written application to the principal by May 1.",
+    "active": true,
+    "description": "The Vulcan County Cruisers car club puts $1,500 behind one graduate a year who is entering an automotive program or apprenticeship, at a college, technical institution or university.",
+    "metaDetail": "Grades do not count here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1332,
+    "title": "Wayne Ericksen Lions Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "County Central Grade 12 students",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Effort, volunteering and community spirit carry the decision rather than marks alone.",
+    "active": true,
+    "description": "The Lions Club of Vulcan farms 160 acres donated by Wayne Ericksen's family and puts the profit into this $1,000 scholarship for one County Central High School student a year who is continuing on to further education or training.",
+    "metaDetail": "Funded by a memorial field farmed each year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1333,
+    "title": "Chapman Business or Finance Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "Bassano graduates entering business or finance",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "The handbook says first-year students are preferred, and that you can take one gap year before starting the program.",
+    "active": true,
+    "description": "A $1,000 award for a Bassano School graduate entering a business or finance program, in Alberta or out of province. The committee wants strong marks plus a record of school, community or volunteer work.",
+    "metaDetail": "One gap year is allowed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bassano School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1334,
+    "title": "Emma Armstrong Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-15",
+    "audience": "Grade 12 students in Strathmore, Drumheller or Bassano",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Community participation, leadership, character, teamwork and athletics all count. You need a letter and two references. The handbook warns the amount may change in later years.",
+    "active": true,
+    "description": "Two $1,000 awards remember Emma Armstrong of Hussar, who played everything from curling to water skiing and usually ended up leading. They go to Grade 12 students at Strathmore, Drumheller, Bassano or Wheatland Crossing who start post-secondary within three years.",
+    "metaDetail": "Two awards, and you have three years to start.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bassano School",
+        "Strathmore High School",
+        "Drumheller Valley Secondary School",
+        "Wheatland Crossing School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1335,
+    "title": "Mary Keohane #96 Order of the Eastern Star Scholarship",
+    "amount": "At least $500",
+    "deadline": "2027-05-01",
+    "audience": "Bassano High School graduates with a volunteer record",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "The money is paid once you show proof of registration at a Canadian institution, and you have until September 30 of the year after you graduate. Miss that and it passes to the next student who qualifies.",
+    "active": true,
+    "description": "One award a year, never less than $500, for a Bassano High School student. The Order of the Eastern Star says participation in student activities and community volunteering is essential, and that you need good average marks rather than the highest ones.",
+    "metaDetail": "You have until September 30 to enrol.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bassano School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1336,
+    "title": "Pioneer Gas Co-op Achievement Award",
+    "amount": "$500",
+    "deadline": "2026-10-01",
+    "audience": "Children of Pioneer Gas Co-op members starting post-secondary",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "The membership has to be a year old, so check with whoever holds it before you count on this one. The deadline falls the October after you graduate, not in the spring.",
+    "active": true,
+    "description": "Pioneer Gas Co-op gives $500 to the child of a member in good standing who is starting a degree, diploma or apprenticeship. You need at least 75 percent in your core subjects.",
+    "metaDetail": "Needs a parent's Co-op membership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1337,
+    "title": "Edward A. Ted Schaffer Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "Bassano grads in trades, technical or university science",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "You need 75 percent or better in the subjects that relate to your program, plus school and community involvement.",
+    "active": true,
+    "description": "Gentherm Global Power Technology funds $1,000 for a student enrolled in a trade or technical program at a technical college, or a science program at university. Financial need is part of the decision.",
+    "metaDetail": "Covers both trades and university science.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bassano School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades",
+        "STEM"
+      ],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1338,
+    "title": "Dr. Walter Shydlowski Health Care Scholarship",
+    "amount": "$300",
+    "deadline": "2027-05-01",
+    "audience": "Bassano hospital district residents entering health care",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "Eligibility runs on the old hospital district boundary rather than the town limits, so ask the school office whether your address counts.",
+    "active": true,
+    "description": "A $300 award for a student who lives in the Bassano General and Auxiliary Hospital and Nursing Home district and is continuing into any health care field. Marks, community service and financial need are all weighed.",
+    "metaDetail": "Runs on the hospital district boundary.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1339,
+    "title": "Brooks and District Chamber of Commerce Business Scholarship",
+    "amount": "$500",
+    "deadline": "2027-07-01",
+    "audience": "County of Newell graduates entering business",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "Open to grads of Bassano, Brooks Composite, Duchess, Ecole Rousseau, Rosemary and St. Joseph's Collegiate. The July deadline is later than most, so it is worth a second pass after graduation.",
+    "active": true,
+    "description": "The Brooks and District Chamber of Commerce gives three $500 awards to County of Newell graduates registered in a business diploma, applied degree or bachelor's degree. You need a 75 percent average.",
+    "metaDetail": "Three awards, and the deadline is in July.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bassano School",
+        "Brooks Composite High School",
+        "Duchess School",
+        "Ecole Rousseau",
+        "Rosemary School",
+        "St. Joseph's Collegiate"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1340,
+    "title": "Brooks Kiwanis Club Armstrong Trust Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-06-01",
+    "audience": "County of Newell grads with financial need",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "You have to apply for a student loan as part of it, and finalists may be interviewed.",
+    "active": true,
+    "description": "The Brooks and District Kiwanis Club awards this one mainly on financial need, with academics and school and community contributions also weighed. The amount varies with what the trust can pay and what you need.",
+    "metaDetail": "A student loan application is part of it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1341,
+    "title": "Brooks and District Kiwanis Club Vocational Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "County of Newell grads entering technical training",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "The application asks for Grade 12 math and English plus whatever else your program needs for entry, and a description of your school and community activities.",
+    "active": true,
+    "description": "One $500 award a year for a public high school graduate in the County of Newell heading to technical training at NAIT, SAIT, a vocational training centre or the equivalent.",
+    "metaDetail": "Grade 12 math and English are required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1342,
+    "title": "Al-Pac Environmental Sciences Education Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "Boyle School grads entering environmental science",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Boyle School staff form the selection committee and weigh academics, community involvement and leadership.",
+    "active": true,
+    "description": "Alberta-Pacific Forest Industries gives one Boyle School graduate $1,000 for a first year of environmental science. Qualifying programs run from forest and plant sciences to renewable resources, environmental biology and natural resources technology.",
+    "metaDetail": "Forestry and natural resources programs count.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1343,
+    "title": "Al-Pac Trades Education Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "Boyle School grads entering a pulp industry trade",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Same committee and the same May 1 date as the environmental sciences award, so you can prepare both together.",
+    "active": true,
+    "description": "The companion to Al-Pac's science award, this one puts $1,000 behind a Boyle School graduate training for a trade used in the pulp industry.",
+    "metaDetail": "Pairs with the environmental sciences award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1344,
+    "title": "Boyle Healthcare Centre Auxiliary Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "Boyle School grads starting health studies",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You send a transcript and two references, and the money arrives after you finish the course or year, not up front.",
+    "active": true,
+    "description": "The Boyle Healthcare Centre Auxiliary funds two $1,000 bursaries for Boyle School graduates who start health studies within a year of finishing high school.",
+    "metaDetail": "Paid after you finish the year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1345,
+    "title": "Boyle Lions Club Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-20",
+    "audience": "Boyle School grads with a community service record",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The booklet's index says May 31 but the application form itself says May 20. Work to the earlier date until the school confirms which is right.",
+    "active": true,
+    "description": "The Boyle Lions Club gives $1,000 to a graduate heading into further study who has served the community and shown up for school, with attendance and effort counted alongside the essay and references.",
+    "metaDetail": "The booklet and the form give different dates.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1346,
+    "title": "Catholic Women's League Student Citizen's Award",
+    "amount": "$500",
+    "deadline": "2027-05-15",
+    "audience": "Boyle and Grassland graduates known for service",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You have 16 months after graduating to take up further study, and you need references.",
+    "active": true,
+    "description": "The Catholic Women's League gives $500 to a Boyle School graduate from Boyle or Grassland whose conduct toward others stands out. You write a statement on how you live out the League's values.",
+    "metaDetail": "Sixteen months to start your program.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1347,
+    "title": "Greater Athabasca Community Foundation Scholarship",
+    "amount": "$250",
+    "deadline": "2027-04-30",
+    "audience": "Athabasca area graduates, including homeschool grads",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need an essay, two references and Canadian citizenship or permanent residency. The money comes after you send your first semester transcript.",
+    "active": true,
+    "description": "The Greater Athabasca Community Foundation gives $250 to a graduate of Edwin Parr Composite or Boyle School, or a homeschooled graduate living in the area, who has led something in the community.",
+    "metaDetail": "Homeschool graduates qualify too.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School",
+        "Edwin Parr Composite School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1348,
+    "title": "Green Leaf Fuel Excellence in Community Service Scholarship",
+    "amount": "$500",
+    "deadline": "2027-04-01",
+    "audience": "Boyle and Edwin Parr grads with a service record",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "A teacher or principal has to endorse the application, and April 1 makes it one of the earliest local deadlines.",
+    "active": true,
+    "description": "Green Leaf Fuel gives $500 to an Edwin Parr Composite or Boyle School graduate who documents what they have contributed to the community and what they plan to study next.",
+    "metaDetail": "Needs a teacher or principal endorsement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School",
+        "Edwin Parr Composite School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1349,
+    "title": "North Corridor Co-operative Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-31",
+    "audience": "Grade 12 students whose family holds a Co-op membership",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The application asks for an essay and your marks, and payment follows the end of your first year.",
+    "active": true,
+    "description": "North Corridor Co-operative funds four $500 scholarships for Grade 12 students whose parent or guardian is a member. You have a year after graduating to begin further study in Canada.",
+    "metaDetail": "Four awards, one family membership needed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1350,
+    "title": "Royal Canadian Legion Branch #169 Boyle Bursary",
+    "amount": "$500",
+    "deadline": "2027-04-30",
+    "audience": "Boyle School grads entering study or an apprenticeship",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Descendants of military or RCMP members get preference, but the bursary is not limited to them.",
+    "active": true,
+    "description": "Legion Branch #169 in Boyle gives $500 to a graduate moving into further study or an apprenticeship, judged on marks and an essay on a Legion theme.",
+    "metaDetail": "Military and RCMP families get preference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1351,
+    "title": "Duclos Hospital Society Scholarship",
+    "amount": "$1,500 a year for four years",
+    "deadline": "2027-05-15",
+    "audience": "Bonnyville Centralized grads in health programs",
+    "url": "https://sites.google.com/nlsd.ab.ca/bchs-scholarship-website/local-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "It renews for four years, which makes it worth far more than the one-time awards around it. Past BCHS graduates can apply, not just this year's class. The written application goes to the Society in Bonnyville.",
+    "active": true,
+    "description": "The Duclos Hospital Society backs a Bonnyville Centralized High School graduate through a health program at any Canadian institution, naming medicine, pharmacy, dentistry, chiropractic, optometry and lab and x-ray technology as examples.",
+    "metaDetail": "Renews for four years of study.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bonnyville Centralized High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1352,
+    "title": "Century 21 Mary Poirier Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "Bonnyville area grads who led something in the community",
+    "url": "https://sites.google.com/nlsd.ab.ca/bchs-scholarship-website/local-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You submit a one minute video about your goals plus a reference from outside your family. The page heading says May 28 while the deadline line says June 1, so treat May 28 as the safe date.",
+    "active": true,
+    "description": "A $500 award for a student from Bonnyville Centralized High School, Ecole Notre Dame High School or Ecole des Beaux Lacs who has shown community leadership.",
+    "metaDetail": "Needs a one minute video.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bonnyville Centralized High School",
+        "Ecole Notre Dame High School",
+        "Ecole des Beaux Lacs"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1353,
+    "title": "Bonnyville Lions Club Bursary",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "Grade 12 students at Bonnyville Centralized High School",
+    "url": "https://sites.google.com/nlsd.ab.ca/bchs-scholarship-website/local-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Most improved counts here, so a rough start to high school is not a reason to skip it. You need an essay, two reference letters and an official transcript.",
+    "active": true,
+    "description": "The Bonnyville Lions weigh community involvement, leadership, marks and how much you improved over your high school years, along with what the school recommends.",
+    "metaDetail": "Improvement counts as much as marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bonnyville Centralized High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1354,
+    "title": "Lookmanjee Sportsman Mobile Park Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-06-15",
+    "audience": "Graduates living at Sportsman Mobile Home Park",
+    "url": "https://sites.google.com/nlsd.ab.ca/bchs-scholarship-website/local-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The eligible group is tiny, which makes the odds better than the amount suggests. You need a reference letter, a letter from your principal and a transcript.",
+    "active": true,
+    "description": "A $2,000 award for a student who is a tenant at Sportsman Mobile Home Park in their graduating year. The essay covers your goals and your financial situation.",
+    "metaDetail": "Only park tenants can apply.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1355,
+    "title": "Jen Col Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-15",
+    "audience": "BCHS grads entering construction programs",
+    "url": "https://sites.google.com/nlsd.ab.ca/bchs-scholarship-website/local-scholarships",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "A committee at the school picks the winner. You send the form, your detailed academic report and your acceptance letter.",
+    "active": true,
+    "description": "Jen Col Construction gives $500 to a Bonnyville Centralized High School graduate entering a post-secondary program related to construction.",
+    "metaDetail": "The school committee decides.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bonnyville Centralized High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1356,
+    "title": "Bonnyville Agriculture Society Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "audience": "Students registered in an agriculture business program",
+    "url": "https://sites.google.com/nlsd.ab.ca/bchs-scholarship-website/local-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Two reference letters and the full application form are required. The June 30 date lands well after graduation, so it is easy to forget.",
+    "active": true,
+    "description": "The Bonnyville Agriculture Society gives $1,000 to a student registered in an agriculture business program, weighing marks, 4-H or Society involvement and community work.",
+    "metaDetail": "4-H involvement helps here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H",
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1357,
+    "title": "Ramzi Halabi Memorial Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "Graduating students heading into business or planning one",
+    "url": "https://sites.google.com/nlsd.ab.ca/bchs-scholarship-website/local-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The whole application is a 500 word essay about yourself, your career goals and why business interests you.",
+    "active": true,
+    "description": "Nick's Lounge funds this $500 award for a graduating student going into business or entrepreneurship. Students taking something else who hope to start their own business are told to apply anyway.",
+    "metaDetail": "A 500 word essay is the application.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
