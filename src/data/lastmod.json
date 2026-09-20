@@ -527,6 +527,10 @@
     "hash": "c4a61338b933acf3",
     "date": "2026-09-08"
   },
+  "/scholarships/aaron-family-award-for-students-with-disabilities/": {
+    "hash": "3d46d7a278159037",
+    "date": "2026-09-19"
+  },
   "/scholarships/aaron-family-scholarship/": {
     "hash": "be887b0a320ff82d",
     "date": "2026-09-08"
@@ -561,6 +565,10 @@
   },
   "/scholarships/acfn-post-secondary-completion-incentive/": {
     "hash": "1f7e83d27d7ab377",
+    "date": "2026-09-19"
+  },
+  "/scholarships/adam-richard-leinweber-entrance-scholarship/": {
+    "hash": "e1ceb32177693b58",
     "date": "2026-09-19"
   },
   "/scholarships/adam-stychin-be-positive-award/": {
@@ -2031,6 +2039,10 @@
     "hash": "3f9ac0178ed1808a",
     "date": "2026-09-05"
   },
+  "/scholarships/cochrane-and-area-humane-society-scholarship/": {
+    "hash": "bf35b5fc811e0211",
+    "date": "2026-09-19"
+  },
   "/scholarships/cochrane-high-school-class-act-award/": {
     "hash": "c5db94c8412b934b",
     "date": "2026-09-05"
@@ -2085,6 +2097,10 @@
   },
   "/scholarships/consort-and-district-chamber-of-commerce-scholarship/": {
     "hash": "d1f65eb9689737c6",
+    "date": "2026-09-19"
+  },
+  "/scholarships/consort-lions-club-scholarship/": {
+    "hash": "4d9ecfdf4539e57c",
     "date": "2026-09-19"
   },
   "/scholarships/constable-david-wynn-memorial-award/": {
@@ -2383,6 +2399,10 @@
     "hash": "d3e1e1216a28ffe2",
     "date": "2026-09-08"
   },
+  "/scholarships/dr-martha-kostuch-scholarship/": {
+    "hash": "d768d6ab2983f782",
+    "date": "2026-09-19"
+  },
   "/scholarships/dr-phil-and-vi-sunohara-nursing-bursary/": {
     "hash": "b9f9b6b50579c53e",
     "date": "2026-09-08"
@@ -2579,6 +2599,10 @@
     "hash": "13a8dfa5508ab936",
     "date": "2026-09-08"
   },
+  "/scholarships/entwistle-scholarship-at-guelph/": {
+    "hash": "78bb82833d39a008",
+    "date": "2026-09-19"
+  },
   "/scholarships/equs-business-rural-community-scholarship/": {
     "hash": "0c94dfa6ca1af263",
     "date": "2026-09-08"
@@ -2623,6 +2647,10 @@
     "hash": "13eb718fcd913cba",
     "date": "2026-09-08"
   },
+  "/scholarships/fairview-health-complex-foundation-scholarship/": {
+    "hash": "8f16f2181e045b71",
+    "date": "2026-09-19"
+  },
   "/scholarships/fairview-health-professional-enhancement-committee-scholarship/": {
     "hash": "3a02025c6f552149",
     "date": "2026-09-19"
@@ -2634,6 +2662,10 @@
   "/scholarships/federation-of-alberta-gas-co-ops-achievement-award/": {
     "hash": "db71ba15c7120a94",
     "date": "2026-09-08"
+  },
+  "/scholarships/fessenden-trott-scholarship/": {
+    "hash": "896315c54e8e5c96",
+    "date": "2026-09-19"
   },
   "/scholarships/feth-family-award/": {
     "hash": "a9ad5acfebde1474",
@@ -2786,6 +2818,10 @@
   "/scholarships/fraser-w-lockwood-memorial-scholarship/": {
     "hash": "fc4012be52f0dc2d",
     "date": "2026-09-08"
+  },
+  "/scholarships/fred-and-muriel-lebold-scholarship/": {
+    "hash": "f7054d5361e9deea",
+    "date": "2026-09-19"
   },
   "/scholarships/fred-arbter-memorial-award/": {
     "hash": "634e3dc746588c4c",
@@ -3006,6 +3042,10 @@
   "/scholarships/grant-macewan-united-world-college-scholarship/": {
     "hash": "e1e8c7f63dafc2e5",
     "date": "2026-09-08"
+  },
+  "/scholarships/grant-notley-memorial-scholarship/": {
+    "hash": "1d08f6d2a8684a7b",
+    "date": "2026-09-19"
   },
   "/scholarships/grasslands-ata-scholarship/": {
     "hash": "868d9b4c2465b207",
@@ -3471,6 +3511,22 @@
     "hash": "52cc3be1c03f5910",
     "date": "2026-09-08"
   },
+  "/scholarships/kcsfe-academic-excellence-scholarship/": {
+    "hash": "be6641e94c73832e",
+    "date": "2026-09-19"
+  },
+  "/scholarships/kcsfe-bursary/": {
+    "hash": "16615d29c3f396aa",
+    "date": "2026-09-19"
+  },
+  "/scholarships/kcsfe-graduate-scholarship/": {
+    "hash": "aef1773dd3bad5f2",
+    "date": "2026-09-19"
+  },
+  "/scholarships/kcsfe-volunteerism-and-community-leadership-scholarship/": {
+    "hash": "f22ca4b93177e342",
+    "date": "2026-09-19"
+  },
   "/scholarships/kdm-helping-hands-community-spirit-award/": {
     "hash": "10153e9951c3a620",
     "date": "2026-09-03"
@@ -3498,6 +3554,10 @@
   "/scholarships/ken-cowan-bursary/": {
     "hash": "4aafaf79c5cd4990",
     "date": "2026-09-08"
+  },
+  "/scholarships/ken-foster-memorial-scholarship/": {
+    "hash": "f98a9b847cd61f41",
+    "date": "2026-09-19"
   },
   "/scholarships/ken-litke-and-family-memorial-award/": {
     "hash": "d2d8aac9a354981e",
@@ -3634,6 +3694,10 @@
   "/scholarships/knights-of-columbus-triple-a-scholarship/": {
     "hash": "12c4d523b4f80b4c",
     "date": "2026-09-08"
+  },
+  "/scholarships/knowlton-family-rural-alberta-hba-award/": {
+    "hash": "0c41fc6a8e2bd51f",
+    "date": "2026-09-19"
   },
   "/scholarships/konica-minolta-award/": {
     "hash": "f4447ccceb6ad8f9",
@@ -3834,6 +3898,10 @@
   "/scholarships/lion-bjarne-tangen-memorial-bursary/": {
     "hash": "a83f748d6cbeae24",
     "date": "2026-09-04"
+  },
+  "/scholarships/lions-audiology-scholarship/": {
+    "hash": "252e8a9cde8d68af",
+    "date": "2026-09-19"
   },
   "/scholarships/lions-club-of-camrose-len-palmer-memorial-award/": {
     "hash": "cea9921de93ea1be",
@@ -4419,6 +4487,10 @@
     "hash": "8e792c3da8bd22c4",
     "date": "2026-09-07"
   },
+  "/scholarships/north-peace-winter-games-legacy-scholarship/": {
+    "hash": "e94e421690628091",
+    "date": "2026-09-19"
+  },
   "/scholarships/northeastern-alberta-aboriginal-business-association-office-administration-award/": {
     "hash": "cc12634f3eb25794",
     "date": "2026-09-08"
@@ -4426,6 +4498,10 @@
   "/scholarships/northern-alberta-rural-physicians-fund/": {
     "hash": "7da60cc3afc956de",
     "date": "2026-09-08"
+  },
+  "/scholarships/northern-lakes-college-dual-credit-bursary/": {
+    "hash": "7364a397c32c3136",
+    "date": "2026-09-19"
   },
   "/scholarships/northern-lights-aboriginal-achievement-scholarship/": {
     "hash": "eba914fe87a59833",
@@ -4697,6 +4773,10 @@
   },
   "/scholarships/pioneer-gas-co-op-achievement-award/": {
     "hash": "f203e78859607f87",
+    "date": "2026-09-19"
+  },
+  "/scholarships/pioneer-homestead-bursary/": {
+    "hash": "aa8f7ad6e2ade209",
     "date": "2026-09-19"
   },
   "/scholarships/pirates-minor-fastball-student-award-fund/": {
@@ -5706,6 +5786,10 @@
   "/scholarships/university-of-alberta-turtle-spirit-pathway-award/": {
     "hash": "36c2294087349e93",
     "date": "2026-09-08"
+  },
+  "/scholarships/university-of-calgary-undergraduate-awards/": {
+    "hash": "8659f845eb374338",
+    "date": "2026-09-19"
   },
   "/scholarships/university-of-lethbridge-board-of-governors-award/": {
     "hash": "977d501a5deaffb7",

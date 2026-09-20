@@ -55160,5 +55160,806 @@
       "apprenticeship": true,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1585,
+    "title": "Cochrane and Area Humane Society Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Cochrane and Stoney Nakoda students in animal or human care",
+    "url": "https://www.cochranehumane.ca/programs-services/youth-engagement",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Volunteering at the shelter is the qualifying work, so start well before your application year. Human care programs count too, not only veterinary ones.",
+    "active": true,
+    "description": "A $1,000 scholarship for a Stoney Nakoda or Cochrane area high school student accepted into post-secondary human or animal care, health, medicine or education, requiring meaningful volunteer service with the society.",
+    "metaDetail": "Shelter volunteering is the qualifying work.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1586,
+    "title": "Consort Lions Club Scholarship",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Consort and Altario students entering trades or short programs",
+    "url": "https://drive.google.com/uc?export=download&id=1lyb5rvAm1sEuj4ZRLnVXhuLYxAHodWJy",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need at least two high school years at Altario or Consort. Degree students are not the target here: shorter credentials and the trades are, which is the opposite of most academic awards.",
+    "active": true,
+    "description": "A Lions Club award of $500 for a student entering a one-year certificate, two-year diploma or apprenticeship in Canada, with preference for technical and apprenticeship study.",
+    "metaDetail": "Built for short programs, not degrees.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1587,
+    "title": "Pioneer Homestead Bursary",
+    "amount": "$1,005",
+    "deadline": null,
+    "audience": "Prairie Land graduates from Special Areas 2, 3 and 4",
+    "url": "https://drive.google.com/uc?export=download&id=1EVfV-rKxiMULsKCfxhgMh-WSdKTstG-2",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Residence in one of the three Special Areas is a hard requirement and rules out most of the province. Financial need is weighed alongside the 70 percent average.",
+    "active": true,
+    "description": "A bursary of $1,005 from the estate of Ruth Rushfeldt Curry for a Prairie Land graduate living in Special Areas 2, 3 or 4 who is entering first-year post-secondary with at least a 70 percent average in the named senior subjects.",
+    "metaDetail": "Only the three Special Areas qualify.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1588,
+    "title": "KCSFE Academic Excellence Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Red Deer and northern Alberta students with strong grades",
+    "url": "https://www.kcsfe.ca/academic-excellence.html",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "International students qualify, which is rare. Applications run through a Google Form and the closing date is published in the separate annual guidelines document rather than on the award page, so open that first.",
+    "active": true,
+    "description": "A scholarship paying $1,000 to high school students and $2,000 to college and university students who live, or whose parents live, in Red Deer or farther north in Alberta.",
+    "metaDetail": "International students qualify here.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1589,
+    "title": "KCSFE Volunteerism and Community Leadership Scholarship",
+    "amount": "$750",
+    "deadline": null,
+    "audience": "Red Deer and northern Alberta students who volunteer",
+    "url": "https://www.kcsfe.ca/volunteerismcommunity-leadership.html",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Grade 10 and 11 students can apply, so you do not have to wait for your graduating year. The closing date is in the annual guidelines document, not on the award page.",
+    "active": true,
+    "description": "A scholarship paying $750 to high school students and $1,500 to college and university students in Red Deer and northern Alberta, awarded for volunteering and community leadership.",
+    "metaDetail": "Open from Grade 10, not just Grade 12.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1590,
+    "title": "KCSFE Bursary",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Red Deer and northern Alberta students with financial need",
+    "url": "https://www.kcsfe.ca/bursary.html",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "The three tiers mean this one award follows you from high school through a master's degree. International students qualify. The closing date is in the annual guidelines document.",
+    "active": true,
+    "description": "A bursary paying $1,000 to high school students, $2,000 to undergraduates and $2,500 to graduate students who live, or whose parents live, in Red Deer or farther north in Alberta.",
+    "metaDetail": "Three tiers, from high school to graduate study.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1591,
+    "title": "KCSFE Graduate Scholarship",
+    "amount": "$2,500",
+    "deadline": null,
+    "audience": "Northern Alberta master's and doctoral students",
+    "url": "https://www.kcsfe.ca/graduate.html",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Graduate awards tied to a home region are uncommon, and this one accepts international students. The closing date appears in the annual guidelines document rather than on the page.",
+    "active": true,
+    "description": "A $2,500 scholarship for a full-time master's or doctoral student who lives, or whose parents live, in Red Deer or farther north in Alberta.",
+    "metaDetail": "A rare graduate award tied to where you are from.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1592,
+    "title": "Fred and Muriel Lebold Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-04-20",
+    "audience": "IBEW Local 92 members and their families",
+    "url": "https://www.local92.com/_service/downloadFile.ashx?fileid=dddea236-bc61-40c6-974f-7584e8ffa986",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Any field of study qualifies and three awards are given, so a union family with more than one student can do well here. You need to be in good standing or enrolled for the coming semester.",
+    "active": true,
+    "description": "Three awards of $3,000 for Local 92 members and their immediate family who are in their final year of high school or enrolled in post-secondary study, in any field.",
+    "metaDetail": "Any field, three awards, union families only.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1593,
+    "title": "Ken Foster Memorial Scholarship",
+    "amount": "$8,000",
+    "deadline": null,
+    "audience": "Transit union members, their children and grandchildren",
+    "url": "https://atu569.ca/wp-content/uploads/2025/11/2026-ATU-Memorial-Scholarship-Announcement.pdf",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Eight thousand dollars is among the largest amounts on this site. Grandchildren of members qualify, which widens the family net considerably, but anyone who has already attended college is excluded. The 2026 round closed March 31.",
+    "active": true,
+    "description": "Five scholarships of $8,000 and a sixth of $2,000 from the Amalgamated Transit Union for members, their children, stepchildren and grandchildren entering an accredited college or a technical or vocational school for the first time.",
+    "metaDetail": "Grandchildren of members qualify too.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1594,
+    "title": "Fairview Health Complex Foundation Scholarship",
+    "amount": "$1,000",
+    "deadline": "2026-11-15",
+    "audience": "Fairview and Hines Creek graduates in health care",
+    "url": "https://www.fairviewhealthcomplexfoundation.ca/fhcfscholarship",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Any health care field counts, from nursing to lab technology. The application is short: a form plus a personal note of about a page. The November deadline is unusually late, so it catches students already in first term.",
+    "active": true,
+    "description": "A $1,000 scholarship for a graduate of Fairview High School, St Thomas More or Hines Creek High School entering first-year study in any health care field.",
+    "metaDetail": "A form and a one page note, nothing more.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1595,
+    "title": "North Peace Winter Games Legacy Scholarship",
+    "amount": "$500",
+    "deadline": "2027-06-30",
+    "audience": "North Peace graduates in arts, culture or sport programs",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/north_peace_winter_games_legacy_scholarship_application.3083fb3402.pdf",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The five year window means earlier graduates can still apply. Your program should point toward northern employment, which the application asks you to explain.",
+    "active": true,
+    "description": "Awards of $500 for Alberta residents in North Peace communities who graduated locally within the past five years and are entering full-time study related to arts, culture or sport.",
+    "metaDetail": "Graduates from the last five years qualify.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1596,
+    "title": "Grant Notley Memorial Scholarship",
+    "amount": "$500",
+    "deadline": "2027-04-20",
+    "audience": "Students from Grant Notley's former constituency",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/grant_notley_memorial_scholarship_application.bbfeee3413.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The essay topic is fixed: how you hope to contribute to improving the quality of life in Alberta, in 500 to 1,000 words. Students whose parents live in the old constituency qualify even if they attend school elsewhere.",
+    "active": true,
+    "description": "One $500 scholarship a year for a student at a high school in the Spirit River and Fairview constituency Grant Notley represented, or one of the named Berwyn, Grimshaw and Bonanza routes, decided on an essay and on Social Studies and English marks.",
+    "metaDetail": "One fixed essay topic decides it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1597,
+    "title": "Knowlton Family Rural Alberta HBA Award",
+    "amount": "$30,000",
+    "deadline": "2026-09-30",
+    "audience": "Rural Alberta students entering Western University",
+    "url": "https://registrar.uwo.ca/student_finances/scholarships_awards/pdfs/Knowlton%20Family%20Rural%20Alberta%20HBA%20Award%20%202023-2024.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "This is the largest award on this site for a rural Alberta student. You need to enrol in Business 1220E, show interest in Ivey, and have competitive extracurricular experience. Renewal in second year needs a 70 percent average.",
+    "active": true,
+    "description": "An award worth up to $30,000 over four years for a first-year Western University student from Alberta outside Calgary and Edmonton, paying $5,000 in each of years one and two and $10,000 in years three and four if the student continues into the Ivey Business School HBA program.",
+    "metaDetail": "Up to $30,000 across four years.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1598,
+    "title": "Northern Lakes College Dual Credit Bursary",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Students who took a Northern Lakes College dual credit course",
+    "url": "https://www.northernlakescollege.ca/future-students/dual-credit/financial-information",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Taking one dual credit course in high school is the whole qualification, which makes this close to automatic money for students who already did it. You have to continue at Northern Lakes to collect.",
+    "active": true,
+    "description": "A $500 bursary for a student who completed a Northern Lakes College dual credit course in the previous academic year and then enrols in post-secondary studies at the college.",
+    "metaDetail": "One dual credit course qualifies you.",
+    "eligibility": {
+      "grades": [
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Lakes College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1599,
+    "title": "Dr. Martha Kostuch Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Olds College students entering second year",
+    "url": "https://pamz.org/martha-kostuch-scholarship/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "This used to be a high school award and has moved to Olds College, so older listings elsewhere may send you to the wrong place. Environmental stewardship is the theme rather than a specific program.",
+    "active": true,
+    "description": "A $1,500 scholarship recognising service, leadership and potential in environmental stewardship for a student entering their second year at Olds College.",
+    "metaDetail": "It moved from high schools to Olds College.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Olds College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1600,
+    "title": "Lions Audiology Scholarship",
+    "amount": "$1,100",
+    "deadline": null,
+    "audience": "University of Alberta audiology students",
+    "url": "https://www.edmontonhostlions.com/scholarships",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "There is no application: the department puts your name forward based on your audiology marks. That makes it one of the few awards you cannot miss by forgetting a deadline.",
+    "active": true,
+    "description": "An $1,100 scholarship for a graduating University of Alberta student with superior grades in audiology courses, awarded automatically through the Communication Sciences and Disorders department.",
+    "metaDetail": "No application; the department nominates you.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Alberta"
+      ],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1601,
+    "title": "Entwistle Scholarship at Guelph",
+    "amount": "$1,000",
+    "deadline": "2027-04-15",
+    "audience": "Black students and students of colour entering Guelph",
+    "url": "https://www.uoguelph.ca/regweb/studentfinance/apps/awards?id=E1483",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "You have to be heading to Guelph, so this only helps an Alberta student moving to Ontario. Canadian citizens, permanent residents and protected persons all qualify.",
+    "active": true,
+    "description": "A $1,000 scholarship for a Black student or student of colour entering undergraduate studies in the University of Guelph College of Social and Applied Human Sciences, with preference for International Development Studies.",
+    "metaDetail": "Only for students heading to Guelph.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Guelph"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1602,
+    "title": "Fessenden-Trott Scholarship",
+    "amount": "$9,000",
+    "deadline": null,
+    "audience": "Students entering second year of a first degree",
+    "url": "https://ucalgary.ca/registrar/awards/2026-fessenden-trott-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Second-year entry is the unusual part: you apply after a year of university rather than out of high school. You need Canadian citizenship or permanent residency by the stated cutoff. The 2026 round closed in May.",
+    "active": true,
+    "description": "A $9,000 scholarship for a student entering the second year of a first bachelor's degree in a program lasting at least three years, decided on strong academic results.",
+    "metaDetail": "You apply after first year, not out of Grade 12.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1603,
+    "title": "Adam Richard Leinweber Entrance Scholarship",
+    "amount": "$10,000",
+    "deadline": null,
+    "audience": "Students entering physics at the University of Calgary",
+    "url": "https://ucalgary.ca/registrar/awards/adam-richard-leinweber-entrance-scholarship",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Ten thousand dollars for one entering physics major is among the largest entrance awards at the university. Declaring Physics rather than general Science is what puts you in the running.",
+    "active": true,
+    "description": "A $10,000 entrance scholarship for a first-year University of Calgary Science student majoring in Physics, awarded on academic achievement.",
+    "metaDetail": "Declaring physics is what qualifies you.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1604,
+    "title": "Aaron Family Award for Students with Disabilities",
+    "amount": "$3,500",
+    "deadline": null,
+    "audience": "University of Calgary students with a permanent disability",
+    "url": "https://ucalgary.ca/registrar/awards/aaron-family-award-students-disabilities",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Registering with Student Accessibility Services is the qualifying step, and it is worth doing anyway for accommodations. Any faculty qualifies and selection is on academic achievement.",
+    "active": true,
+    "description": "An award of up to $3,500 for a continuing University of Calgary undergraduate in any faculty who is registered with the university accessibility service for a documented permanent disability.",
+    "metaDetail": "Registering with accessibility services qualifies you.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1605,
+    "title": "University of Calgary Undergraduate Awards",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "University of Calgary undergraduates in any faculty",
+    "url": "https://ucalgary.ca/registrar/awards",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Many are handed out on nomination with no application at all, so talking to your department adviser matters more than watching deadlines. Others need the university's own award application. Search the registrar's list by your faculty and year rather than reading it end to end.",
+    "active": true,
+    "description": "The University of Calgary funds hundreds of continuing awards for students already enrolled, ranging from a few hundred dollars to several thousand, most of them tied to a faculty, a major or a specific course and awarded for academic achievement, financial need or both.",
+    "metaDetail": "Many are awarded by nomination, with no application.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
