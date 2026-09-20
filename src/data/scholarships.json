@@ -50811,5 +50811,833 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1470,
+    "title": "NAIT Student Awards",
+    "amount": "Varies",
+    "deadline": "2026-10-15",
+    "audience": "NAIT students in any program",
+    "url": "https://nait.academicworks.ca/",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Most of them close October 15 and most are judged on financial need plus satisfactory grades. Many are tied to a specific program and year, so the list you see depends on what you are enrolled in. A few are reserved for Indigenous students, student athletes or students with disabilities.",
+    "active": true,
+    "description": "NAIT runs hundreds of bursaries and awards through one portal, from trades and heavy equipment to culinary arts, paramedicine and business. One general application enters you for every award you qualify for.",
+    "metaDetail": "One form covers every award you qualify for.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1471,
+    "title": "Daniel Jantzie Scholarship Award",
+    "amount": "About $100",
+    "deadline": "2027-05-01",
+    "audience": "County Central students in the Advanced Diploma program",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You apply in writing to the principal with proof of attendance and your Grade 12 marks. The amount is small, but the application is short.",
+    "active": true,
+    "description": "This award goes to the County Central High School student with the highest standing across five Grade 12 subjects in the Advanced Diploma program, who is continuing to post-secondary.",
+    "metaDetail": "For the Advanced Diploma stream.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1472,
+    "title": "Wendell Wolfe Memorial Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-05-01",
+    "audience": "County Central students with top science marks",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "There is no application. The school's awards selection committee decides, so your marks do the work.",
+    "active": true,
+    "description": "A $2,000 scholarship for the County Central High School student with the top two Science 30 level marks plus Mathematics 30-1, who is continuing to post-secondary.",
+    "metaDetail": "No application, and the school decides.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1473,
+    "title": "Alex Schaap Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-01",
+    "audience": "Palliser School Division grads entering technology training",
+    "url": "https://www.countycentral.ca/download/408155",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The application is deliberately open-ended: you are asked to be creative and resourceful in showing why you qualify. Two references are required, and you need to be a Canadian citizen or permanent resident living in Alberta.",
+    "active": true,
+    "description": "A $1,000 scholarship each year for a Palliser School Division graduate entering full-time first-year technology training at an accredited institution.",
+    "metaDetail": "A creative application is invited.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1474,
+    "title": "Marit McKenzie Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-01",
+    "audience": "Palliser Regional grads entering fine arts",
+    "url": "https://www.countycentral.ca/download/408154",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You can answer with a short essay, a story, a video or a photography submission rather than a standard form.",
+    "active": true,
+    "description": "A $1,000 scholarship for a Palliser Regional Schools graduate entering a full-time first-year fine arts degree or diploma at an accredited Alberta institution.",
+    "metaDetail": "You can apply with a video or photos.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1475,
+    "title": "Tom Baldwin Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-30",
+    "audience": "Peace River constituency graduates",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/tom_baldwin_scholarship.14ef9e17f81.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The five year window means graduates who took time off still qualify. Applications go back through the school division with supporting documents.",
+    "active": true,
+    "description": "A $1,000 scholarship for an Alberta resident in the Peace River constituency who graduated within the past five years from the Peace River, Holy Family, Northwest Francophone, Fort Vermilion or Northland school divisions, and is in full-time study.",
+    "metaDetail": "Open five years after you graduate.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1476,
+    "title": "Early Childhood Scholarship",
+    "amount": "$100",
+    "deadline": "2027-06-30",
+    "audience": "Fairview area grads entering early childhood programs",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/early-childhood-scholarship.14ef9e17f81.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Experience working with young children counts alongside your marks and effort. The amount is small, so treat it as a top-up rather than a plan.",
+    "active": true,
+    "description": "A $100 scholarship for a graduate of Fairview High, Hines Creek Composite, Worsley Central or St. Thomas More accepted into an accredited early childhood education degree or diploma.",
+    "metaDetail": "Experience with children counts.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Fairview High School",
+        "Hines Creek Composite School",
+        "Worsley Central School",
+        "St. Thomas More School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1477,
+    "title": "Tom and Alice Walker Memorial Bursary",
+    "amount": "Varies",
+    "deadline": "2027-06-30",
+    "audience": "Fairview and Hines Creek area graduates with financial need",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/tom-and-alice-walker-memorial-bursary.14ef9e17f81.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The amount is not published and depends on what the fund earns. Applications go through the school division.",
+    "active": true,
+    "description": "A bursary for a graduate of Worsley Central, Hines Creek Composite, Fairview High or St. Thomas More who has financial need, studies diligently and shows good citizenship, and is enrolled at an accredited Canadian institution.",
+    "metaDetail": "The amount depends on the fund.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Fairview High School",
+        "Hines Creek Composite School",
+        "Worsley Central School",
+        "St. Thomas More School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1478,
+    "title": "Whitelaw History Book Scholarship",
+    "amount": "Up to $500 a year",
+    "deadline": "2026-09-20",
+    "audience": "Fairview area grads from the Whitelaw districts",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/whitelaw-history-book-scholarship.14ef9e17f81.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "It goes to the highest combined average across five subjects, and the school submits the candidate's name and marks to the division rather than you applying directly.",
+    "active": true,
+    "description": "Proceeds from a local history book fund up to $500 a year for a graduate of Fairview High, St. Thomas More or Hines Creek Composite who lives in one of the rural districts the book covers and is continuing post-secondary.",
+    "metaDetail": "Awarded on your five subject average.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Fairview High School",
+        "Hines Creek Composite School",
+        "St. Thomas More School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1479,
+    "title": "West Meadowlark Memorial Scholarship",
+    "amount": "$500",
+    "deadline": "2027-08-31",
+    "audience": "West Meadowlark community league members in Edmonton",
+    "url": "https://www.wmcl.org/about/scholarship",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "You or your immediate family need to be league members and West Meadowlark residents for two consecutive years, and the league asks for five volunteer hours.",
+    "active": true,
+    "description": "The West Meadowlark Community League funds two $500 scholarships for Grade 12 graduates who move straight into a post-secondary program lasting at least a year.",
+    "metaDetail": "Two awards, tied to league membership.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1480,
+    "title": "TECK Courageous Leadership Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-01",
+    "audience": "Crowsnest Consolidated graduates entering the trades",
+    "url": "https://www.crowsnesthighschool.ca/students/awards-and-scholarships",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The essay is reviewed outside the school, so it carries more weight than a staff nomination would. You need proof of post-secondary registration.",
+    "active": true,
+    "description": "Teck funds $1,000 for a Crowsnest Consolidated High School graduate entering a trades program, with mechanics, welding and the electrical trades named as examples.",
+    "metaDetail": "The essay is judged externally.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Crowsnest Consolidated High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1481,
+    "title": "Livingstone MacLeod Association Bursary Fund",
+    "amount": "$2,000",
+    "deadline": "2027-05-01",
+    "audience": "Livingstone Range graduates in trades or agriculture",
+    "url": "https://www.crowsnesthighschool.ca/students/awards-and-scholarships",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You write an essay and supply two references. The award moves around the division, so it is not tied to one school.",
+    "active": true,
+    "description": "One $2,000 bursary a year within the Livingstone Range School Division for a graduate who needs support to take up eligible trades or agriculture studies.",
+    "metaDetail": "Open across the whole division.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1482,
+    "title": "James Miller Bursary",
+    "amount": "$500",
+    "deadline": "2027-06-15",
+    "audience": "Northern Lights grads entering a welding apprenticeship",
+    "url": "https://www.nlpsab.ca/students/scholarships/nlpsawards",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Welding is the whole criterion, which makes the field narrow and the odds correspondingly better if it is your trade.",
+    "active": true,
+    "description": "A $500 bursary for a Northern Lights Public Schools student in their graduating year who is entering a welding apprenticeship at a post-secondary institution.",
+    "metaDetail": "Welding apprentices only.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1483,
+    "title": "Matthewson and Co Bursary Program",
+    "amount": "$500",
+    "deadline": "2027-05-29",
+    "audience": "Students from prairie communities under 5,000 people",
+    "url": "https://sites.google.com/wrsd.ca/scholarshipwebsite/community-based/breton-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "There is no age limit, so this is open to adults returning to school. The application runs through the 4-H Alberta website.",
+    "active": true,
+    "description": "Two $500 bursaries for people from an Alberta, Saskatchewan or Manitoba community of fewer than 5,000 residents who have finished high school and are entering Canadian post-secondary or apprenticeship training.",
+    "metaDetail": "Applications go through 4-H Alberta.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 1484,
+    "title": "Bott Sisters Memorial Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-06-01",
+    "audience": "Caroline area farm students entering post-secondary",
+    "url": "https://sites.google.com/wrsd.ca/scholarshipwebsite/school-specific/caroline",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Agriculture, culinary and fine arts studies are preferred, an unusual combination that widens who can realistically apply. Graduates from the previous year can still apply.",
+    "active": true,
+    "description": "A $2,500 scholarship for a graduate of David Thompson, West Central, Caroline or Visions West Outreach who is active on a family farm, volunteers in the community and is enrolled for the coming year.",
+    "metaDetail": "Farm work plus volunteering.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "David Thompson High School",
+        "West Central High School",
+        "Caroline School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer",
+        "4-H"
+      ]
+    }
+  },
+  {
+    "id": 1485,
+    "title": "Next Step Legacy RAP Scholarship",
+    "amount": "$1,000 to $2,000",
+    "deadline": "2027-04-29",
+    "audience": "Grade 12 athletes entering a trade through RAP",
+    "url": "https://careerpathways.plrd.ab.ca/scholarships",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "There are eight awards, one per zone, and the final value depends on the funds and who applies. Needing both RAP and school sports narrows the field considerably.",
+    "active": true,
+    "description": "Awards of $1,000 to $2,000 for Grade 12 students heading into a trade who took part in the Registered Apprenticeship Program at some point in high school and played school sports.",
+    "metaDetail": "Needs both RAP and school sports.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "trades"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": true,
+      "extracurriculars": [
+        "RAP",
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1486,
+    "title": "Allan Quick Memorial Scholarship",
+    "amount": "$1,500 to $2,000 a year",
+    "deadline": "2026-10-01",
+    "audience": "Lakeland College students from Dewberry area schools",
+    "url": "https://dewberry.btps.ca/download/360290",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You apply after finishing a year of a two to four year Lakeland program. A farming background near Landonville is preferred, and you need an academic and community record plus a reference.",
+    "active": true,
+    "description": "For students at Lakeland College who graduated from Dewberry, J.R. Robson, Marwayne, Kitscoty or E.H. Walter and can explain how their program connects to a career in agriculture.",
+    "metaDetail": "Apply after your first year at Lakeland.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Lakeland College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1487,
+    "title": "Burnt Lee Recreation Area Scholarship",
+    "amount": "$400",
+    "deadline": "2027-06-30",
+    "audience": "Students from the Burnt Lee area near Peace River",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/burnt-lee-recreation-area-scholarship.5f38833411.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The area is defined by township and range, the north half of Township 82 Range 1 W6 and all of Township 83 Ranges 1 and 2 W6, so check a county map if you are unsure. Effort and citizenship come first and financial need second.",
+    "active": true,
+    "description": "A $400 scholarship for a first or second year post-secondary student who graduated from the Peace River, Holy Family Catholic or Grande Prairie Catholic divisions and has lived three years in the Burnt Lee area.",
+    "metaDetail": "Second-year students qualify too.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1488,
+    "title": "Canadian Forest Products Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-06-30",
+    "audience": "Fairview area Grade 12 students continuing their education",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/canfor-scholarship-application.6701663410.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The essay is capped at 200 words, and you need two references, one from the school and one on your personal character, plus certified grades. Your principal submits it.",
+    "active": true,
+    "description": "Canfor funds a scholarship for Grade 12 students at Fairview High, Worsley Central, Hines Creek Composite or St. Thomas More, judged on school and community involvement and what you plan to study.",
+    "metaDetail": "The essay is capped at 200 words.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Fairview High School",
+        "Hines Creek Composite School",
+        "Worsley Central School",
+        "St. Thomas More School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1489,
+    "title": "Mary and Tony Gom Memorial Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-06-30",
+    "audience": "Hines Creek graduates entering Alberta post-secondary",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/mary-tony-gom-memorial-scholarship-application.00ab893406.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The amount moves with what the endowment earns each year. You send an explanation of your plans, a teacher reference and a transcript.",
+    "active": true,
+    "description": "For a Hines Creek Composite School graduate accepted at an Alberta institution, weighing marks, community interest and exceptional diligence and effort.",
+    "metaDetail": "Effort counts as much as marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Hines Creek Composite School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1490,
+    "title": "Peggy Campbell Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-03-01",
+    "audience": "Peace River High School students with financial need",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/peggy_campbell_scholarship.c28e7c3412.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Academic, trade and specialty training all qualify. You need Grades 10 to 12 in the Peace River School Division and a June graduation. The March deadline is earlier than most local awards.",
+    "active": true,
+    "description": "A scholarship for a Peace River High School graduate where financial need carries the most weight, followed by attitude, effort, class participation and school and community activity.",
+    "metaDetail": "Need counts more than marks here.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Peace River High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
