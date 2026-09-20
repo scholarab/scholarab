@@ -50658,5 +50658,158 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1466,
+    "title": "ManCap Foundation Education Grants",
+    "amount": "$5,000",
+    "deadline": "2027-07-31",
+    "audience": "Alberta grads entering post-secondary with a business in mind",
+    "url": "https://www.mancapfoundation.com/apply",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The Foundation states plainly that academic excellence is not a prerequisite and financial need is a criterion. You need an acceptance letter, two letters of recommendation and answers to their questions. Recipients are announced September 30.",
+    "active": true,
+    "description": "The ManCap Foundation gives $5,000 grants, named for Alberta entrepreneurs, to Alberta high school graduates entering first year at a designated Alberta institution in preparation for starting a business.",
+    "metaDetail": "Marks are explicitly not a requirement.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1467,
+    "title": "Boyle and District Agricultural Society Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-08",
+    "audience": "Boyle School graduates who volunteer locally",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Further study is optional, which is unusual, and a reference is required. It is the earliest of the Boyle local deadlines at May 8.",
+    "active": true,
+    "description": "The Boyle and District Agricultural Society gives $500 to a Boyle School graduate with a record of volunteering in the community.",
+    "metaDetail": "Further study is not required.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1468,
+    "title": "Robert Allan Memorial Scholarship",
+    "amount": "Up to $5,000 a year",
+    "deadline": "2027-06-30",
+    "audience": "Students in naval architecture or marine engineering",
+    "url": "https://ral.ca/scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The application wants your date of birth and Social Insurance Number along with transcripts, two references and a full list of your other funding, so it asks for more personal information than most.",
+    "active": true,
+    "description": "Robert Allan Ltd. funds up to $5,000 a year toward tuition for a Canadian student in naval architecture or marine engineering. Winners are announced in August and the money goes to tuition only.",
+    "metaDetail": "The award pays tuition only.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": 18,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "permanent_resident",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1469,
+    "title": "Evelyn Henry Reconciliation Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-04-01",
+    "audience": "Women in Alberta or Saskatchewan studying reconciliation",
+    "url": "https://www.peoab-sk.ca/evelyn-henry-reconciliation-scholarship-fund/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Start a month or two before the April 1 date, because your recommendation has to clear a chapter first. You need two years of Alberta or Saskatchewan residency, a reference letter and an official transcript. The number and size of awards changes each year.",
+    "active": true,
+    "description": "P.E.O. Alberta-Saskatchewan set up this fund in 2017 for a female student taking courses in Indigenous studies who plans to use that education to further reconciliation between Indigenous and non-Indigenous peoples in Canada.",
+    "metaDetail": "A local chapter must recommend you.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
