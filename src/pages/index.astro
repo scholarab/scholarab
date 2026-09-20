@@ -437,6 +437,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   // Twelve 12-second takes, no timelapses (they step, and read as stutter).
   // Each clip ships as H.265 (what SpaceX serves: about half the bits of
   // H.264 for the same picture) and as H.264 for browsers without H.265.
+  // Phones get a `.m` cut: the hero box is portrait there (375x563 on a 390pt
+  // phone), so object-fit already threw away most of a 1920-wide frame's
+  // width. The mobile file is that same centre crop encoded at 720x1080,
+  // which is about a quarter of the bytes for the picture a phone shows.
+  // The film was off on phones entirely until 2026-09-19; it looked stopped.
   const HERO_CLIPS = ['01','18','12','04','17','16','20','08','13','06','10','07'];
   const FADE_S = 1.5;
   const PREFETCH_S = 6;
@@ -445,18 +450,33 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     if (!media || media.dataset.init) return;
     media.dataset.init = '1';
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    if (matchMedia('(prefers-reduced-motion: reduce), (max-width: 900px)').matches || conn?.saveData) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || conn?.saveData) return;
     const [a, b] = media.querySelectorAll<HTMLVideoElement>('video');
     if (!a || !b) return;
     const vids = [a, b];
     let i = 0;
     let cur = 0;
+    const cut = matchMedia('(max-width: 900px)').matches ? '.m' : '';
     let ext = a.canPlayType('video/mp4; codecs="hvc1.1.6.L120.90"') ? '.hevc.mp4' : '.mp4';
-    const src = (n: number) => `/video/hero/${HERO_CLIPS[n % HERO_CLIPS.length]}${ext}`;
+    const src = (n: number) => `/video/hero/${HERO_CLIPS[n % HERO_CLIPS.length]}${cut}${ext}`;
     const load = (v: HTMLVideoElement, n: number) => { v.preload = 'auto'; v.src = src(n); v.load(); };
+    // A rejected play() leaves the poster up and the film reads as stopped
+    // rather than absent, so a refusal is retried once the clip is decodable
+    // and again on the visitor's first touch. iOS refuses the first call while
+    // the clip is still arriving, and refuses every call in Low Power Mode,
+    // where the poster is the honest end state.
     const start = (v: HTMLVideoElement) => {
       if (v.currentTime) v.currentTime = 0;
-      v.play().then(() => v.classList.add('is-on')).catch(() => {});
+      v.play().then(() => v.classList.add('is-on')).catch(() => {
+        if (v !== vids[cur]) return;
+        const again = () => {
+          if (v !== vids[cur] || !v.paused) return;
+          v.play().then(() => v.classList.add('is-on')).catch(() => {});
+        };
+        v.addEventListener('canplay', again, { once: true });
+        addEventListener('touchstart', again, { once: true, passive: true });
+        addEventListener('pointerdown', again, { once: true });
+      });
     };
     // A browser can claim H.265 and still fail to decode it (no hardware
     // decoder). Fall back to H.264 for the rest of the visit.
@@ -483,6 +503,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       i++;
       setTimeout(() => { v.pause(); delete v.dataset.handed; }, FADE_S * 1000);
     }));
+    // Backgrounding the tab pauses the clip, and nothing resumes it on the way
+    // back: the film sits on a still frame and reads as broken. Phones hit this
+    // constantly, since every app switch hides the page.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) return;
+      const v = vids[cur]!;
+      if (v.paused && v.src) v.play().then(() => v.classList.add('is-on')).catch(() => {});
+    });
     load(a, 0);
     start(a);
   }
