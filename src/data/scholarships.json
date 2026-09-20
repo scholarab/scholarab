@@ -6434,7 +6434,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "For refugees and immigrants who arrived within the last five years."
+    "metaDetail": "Arrived within the last five years."
   },
   {
     "id": 196,
@@ -8922,7 +8922,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "65% GPA needed."
+    "metaDetail": "One school, one subject, 65% needed."
   },
   {
     "id": 258,
@@ -39870,7 +39870,7 @@
     "region": "Alberta",
     "notes": "Read the academic bar carefully, because it is written twice: entering students need an 80 percent average, while students already in a program need a 3.0 GPA. That first line is the one that matters to you, and it is the reason this award is worth filing in grade 12 rather than waiting. Utility Safety Partners is the organization formerly called Alberta One-Call, the people behind Click Before You Dig, and they want a letter of recommendation plus evidence you care about safety through work, coursework or volunteering. Only two are given each year and the applications run through the ScholarTree platform rather than their own site.",
     "description": "A $2,500 award from the organization behind Click Before You Dig, for Alberta students entering skilled trades, power lineperson, health and safety or civil engineering programs.",
-    "metaDetail": "Two awards a year, and entering students qualify at 80 percent.",
+    "metaDetail": "Two a year; entering students qualify.",
     "eligibility": {
       "grades": [
         "12"
@@ -42506,13 +42506,13 @@
     "amount": "Varies",
     "deadline": "2026-10-19",
     "openDate": "2026-09-17",
-    "audience": "Children of people whose main income comes from pipeline construction",
+    "audience": "Children of pipeline construction workers",
     "url": "https://pipeline.ca/member-services/awards/plcac-student-award-program/",
     "category": "General",
     "region": "National",
     "description": "An award from the Pipe Line Contractors Association of Canada for the sons, daughters and wards of people whose principal income comes from the pipeline construction industry.",
     "notes": "Directly relevant in Alberta, where pipeline construction employs a lot of parents, and it has helped more than 400 students since 1974. Two conditions do the work: your parent or guardian must draw their principal income from the pipeline construction industry, AND that parent must be employed by, or have a history of employment with, a company that is a member of the PLCAC, so check the association's membership directory before you spend time on the form. Your own program can lead to a diploma or degree in ANY field at a recognized Canadian college or university, and post-graduate students are considered too. The PLCAC does not publish the award value, so none is claimed here. The 2026 window runs September 17 to October 19, 2026. Contact plcac@pipeline.ca or 905-847-9383. Verified against pipeline.ca on 2026-09-08.",
-    "metaDetail": "Check the PLCAC member directory first.",
+    "metaDetail": "Check the member directory first.",
     "eligibility": {
       "grades": [
         "12"
@@ -44527,7 +44527,8 @@
       "extracurriculars": [
         "writing"
       ]
-    }
+    },
+    "metaDetail": "Open to Grade 11 as well as Grade 12."
   },
   {
     "id": 1291,
@@ -51445,7 +51446,7 @@
     "title": "Allan Quick Memorial Scholarship",
     "amount": "$1,500 to $2,000 a year",
     "deadline": "2026-10-01",
-    "audience": "Lakeland College students from Dewberry area schools",
+    "audience": "Lakeland College students from Dewberry",
     "url": "https://dewberry.btps.ca/download/360290",
     "category": "Community",
     "lastVerified": "2026-09",
@@ -51453,7 +51454,7 @@
     "notes": "You apply after finishing a year of a two to four year Lakeland program. A farming background near Landonville is preferred, and you need an academic and community record plus a reference.",
     "active": true,
     "description": "For students at Lakeland College who graduated from Dewberry, J.R. Robson, Marwayne, Kitscoty or E.H. Walter and can explain how their program connects to a career in agriculture.",
-    "metaDetail": "Apply after your first year at Lakeland.",
+    "metaDetail": "Apply after your first year.",
     "eligibility": {
       "grades": [
         "post-secondary"
@@ -51637,6 +51638,3526 @@
       "fosterCare": false,
       "citizenship": "canadian",
       "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1491,
+    "title": "G3 Grow Beyond Scholarship",
+    "amount": "$5,000",
+    "deadline": null,
+    "audience": "Canadian high school graduates outside Quebec",
+    "url": "https://g3growbeyond.org/contest-rules/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Four of the awards go to western Canadian students, which is unusually good odds for Alberta. The 2026 round closed in April, so watch for the next one to open in winter. You must be at your province's age of majority.",
+    "active": true,
+    "description": "A grain company award for a graduating student entering a first-year Canadian degree or diploma, decided on a video about agricultural innovation and on community involvement.",
+    "metaDetail": "Four of the awards are reserved for western Canada.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1493,
+    "title": "Glendon Agricultural Society Student Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-08-30",
+    "audience": "Glendon School students entering post-secondary or trades",
+    "url": "https://www.nlpsab.ca/students/scholarships/bonnyville-cold-lake-area-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cold Lake",
+    "notes": "Society membership is a requirement, not a preference, so join before you apply. Applicants aged 25 or younger are preferred. The late August deadline makes this one of the last awards you can still catch after graduation.",
+    "active": true,
+    "description": "An agricultural society award for a current member involved with Glendon School and community activities who is entering post-secondary study or an apprenticeship.",
+    "metaDetail": "You must already be a society member.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Glendon School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1494,
+    "title": "Petro Canada Fund Scholarship",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Drayton Valley and Brazeau County students in energy programs",
+    "url": "https://dvcf.org/petro-canada-scholarship-fund-application/",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Applications are due June 1 each year. You have to be enrolled before the money is released. Because priority rather than residency is the rule, students from outside the county can still apply.",
+    "active": true,
+    "description": "A community foundation award for a student entering studies that support an oil and gas career, with priority for Drayton Valley and Brazeau County families and for financial disadvantage.",
+    "metaDetail": "Priority, not a hard rule, for local families.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1495,
+    "title": "Community Scholarship Trust Society Scholarship",
+    "amount": "$1,200",
+    "deadline": null,
+    "audience": "Drayton Valley area graduates within two years of high school",
+    "url": "https://dvcf.org/community-scholarship-trust-society/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You can apply up to two years after graduation, which covers a gap year. An Alberta high school diploma and proof of enrolment are both required. Outreach and home-schooled students are named explicitly.",
+    "active": true,
+    "description": "An award for a former Frank Maddock, Breton, Holy Trinity, Drayton Valley Outreach or Home School Association student who is enrolled full-time in post-secondary study.",
+    "metaDetail": "A gap year does not disqualify you.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1496,
+    "title": "Calgary Italian Sportswomen's Dinner Association Scholarship",
+    "amount": "$5,000",
+    "deadline": "2027-05-20",
+    "audience": "Female Grade 12 students of Italian descent in Calgary",
+    "url": "https://img1.wsimg.com/blobby/go/cf2649e5-560d-4ca1-8c40-69b8a4cca5a8/downloads/416281ef-9af1-4073-8ee6-6c31724213eb/2026-Calgary%20Italian%20Sportswomen_s%20Dinner%20Asso.pdf?ver=1784570009929",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "Five thousand dollars is large for a city award with this narrow a field. You must be registered for post-secondary in September. Sport achievement is weighed with the rest, not on its own.",
+    "active": true,
+    "description": "A $5,000 award for a Calgary Grade 12 student of Italian descent with at least a 75 percent average and achievement in sport alongside academics, leadership and community activity.",
+    "metaDetail": "Unusually large for an award this specific.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1497,
+    "title": "Calgary Italian Cultural Centre Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Calgary area Grade 12 graduates of Italian descent",
+    "url": "https://www.calgaryitalianculturalcentre.com/it/scholarship-program",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "The county catchment means rural students around Calgary qualify too. Applications are due at the end of September. The centre publishes the program in Italian and English, so read whichever version you find first carefully.",
+    "active": true,
+    "description": "A cultural centre award for a graduate of Italian descent from Calgary, Foothills, Mountain View County or Rocky View County who is entering post-secondary within a year of graduating.",
+    "metaDetail": "The catchment reaches well past the city limits.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1498,
+    "title": "Queen Elizabeth II Silver Jubilee Endowment Fund Award",
+    "amount": "$10,000",
+    "deadline": null,
+    "audience": "Canadian undergraduates studying in their second official language",
+    "url": "https://ucalgary.ca/registrar/awards/2026-queen-elizabeth-ii-silver-jubilee-endowment-fund-study-second-official-language-award-program",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "French immersion graduates are the natural fit here and the amount is far above a typical language award. Applications close in early June for the following fall. Quebec students may apply a year earlier.",
+    "active": true,
+    "description": "A $10,000 federal endowment award for a Canadian undergraduate entering the third or fourth year of a first bachelor's degree who is going on an approved full-time exchange in their second official language.",
+    "metaDetail": "French immersion graduates are the natural fit.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1499,
+    "title": "ATA Battle River Local 32 Scholarship",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Children of Battle River teachers entering post-secondary",
+    "url": "https://www.atabattleriverlocal32.com/_files/ugd/7d3948_8dbf03b251e147f3a5fdef90eddbbebd.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Part-time teaching parents count, and so do retired ones and those on leave who keep paying the ATA leave fee. You have 18 months after Grade 12 to use it, and you apply before your program starts.",
+    "active": true,
+    "description": "A teachers' local award for the child of a current, retired or on-leave Battle River teacher who is starting post-secondary study.",
+    "metaDetail": "Retired and part-time teaching parents both count.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1500,
+    "title": "Carstairs Elks Tiny Lafleur Science Bursary",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Hugh Sutherland School graduates entering university science",
+    "url": "https://carstairselks.ca/wp-content/uploads/2026/03/Lafleur-Science-Award-2026.pdf",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Applications close May 15 and the Elks run it every year. You must use the money by October, and the lodge releases it only against a tuition receipt. Your science grades need a teacher's signature.",
+    "active": true,
+    "description": "An Elks bursary for a Hugh Sutherland School Grade 12 student registering in a university science program who has taken two of Biology 30, Chemistry 30 and Physics 30.",
+    "metaDetail": "Paid against a tuition receipt, not in advance.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Hugh Sutherland School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1501,
+    "title": "Carstairs Elks Health Services Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Hugh Sutherland School graduates entering health programs",
+    "url": "https://carstairselks.ca/wp-content/uploads/2026/03/Health-Services-Award-2026.pdf",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Applications close May 15 each year and the lodge pays out against a tuition receipt. The Elks run five separate awards for this one school, so read each set of criteria rather than sending one application.",
+    "active": true,
+    "description": "An Elks scholarship for a Hugh Sutherland School graduate entering a health services program at an accredited Alberta institution.",
+    "metaDetail": "One of five separate Elks awards at this school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Hugh Sutherland School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1502,
+    "title": "Carstairs Elks Creative Arts Scholarship",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Hugh Sutherland School graduates entering the arts",
+    "url": "https://carstairselks.ca/wp-content/uploads/2026/03/Creative-Arts-Award-2026.pdf",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Applications close May 15 each year. The lodge asks for your most recent grades with a teacher's signature and releases the money against a tuition receipt. Arts applicants compete only against each other, not the science and trades applicants.",
+    "active": true,
+    "description": "An Elks scholarship for a Hugh Sutherland School graduate continuing into a creative arts program after Grade 12.",
+    "metaDetail": "Arts applicants compete only against each other.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Hugh Sutherland School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1503,
+    "title": "Carstairs Elks Business and Entrepreneurship Scholarship",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Hugh Sutherland School graduates entering business",
+    "url": "https://carstairselks.ca/wp-content/uploads/2026/03/Business-Entrepreneurship-Award-2026.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Applications close May 15 each year and the money is released against a tuition receipt. A teacher's endorsement may be included and helps, since the committee is made up of lodge members rather than educators.",
+    "active": true,
+    "description": "An Elks scholarship for a Hugh Sutherland School graduate entering a business or entrepreneurship program.",
+    "metaDetail": "Lodge members, not teachers, pick the winner.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Hugh Sutherland School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1504,
+    "title": "Carstairs Elks Trades Bursaries",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Hugh Sutherland School graduates entering the trades",
+    "url": "https://carstairselks.ca/wp-content/uploads/2026/03/Trades-Award-2026.pdf",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Every trade is eligible, and financial need is one of the things the lodge weighs. Applications close May 15 each year. Two awards from one small school makes this among the better odds on the list.",
+    "active": true,
+    "description": "Two bursaries of $1,000 each for graduating Hugh Sutherland School students accepted into a trades program at SAIT, NAIT, Red Deer, Lethbridge, Olds College or another accredited Alberta institution.",
+    "metaDetail": "Two awards, one school, every trade eligible.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Hugh Sutherland School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1505,
+    "title": "Opa Kers Legacy Fund Unsung Hero Award",
+    "amount": "$1,000",
+    "deadline": "2027-04-15",
+    "audience": "Willow Creek Composite High School graduates",
+    "url": "https://img1.wsimg.com/blobby/go/0a1a0c84-331d-4ca7-b5b0-af3c435cda1e/Unsung%20Hero%20Award-b65ae75.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You cannot apply for this one yourself. A staff member has to nominate you, so the useful move is being known by the adults in the building. First presented in 2026 and intended to run annually.",
+    "active": true,
+    "description": "An award for a Willow Creek Composite High School graduate nominated by a teacher or support staff member for sustained quiet compassion and service, who is entering post-secondary in the fall.",
+    "metaDetail": "Staff nominate you; there is no application.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Willow Creek Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1506,
+    "title": "Claresholm Rural Nursing Cohort Bursary",
+    "amount": "$1,250",
+    "deadline": null,
+    "audience": "Students in the Claresholm rural nursing cohort",
+    "url": "https://www.vchwfoundation.com/collaborating-for-rural-healthcare-university-of-calgary-2026-claresholm-rural-nursing-cohort-bursary-announcement/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Because each foundation backs a student from its own area, your home town decides which one you approach: Claresholm, Vulcan, High River, Nanton, Diamond Valley, Okotoks or the rural areas around them. It renews for four years.",
+    "active": true,
+    "description": "An annual $1,250 bursary for a student in the University of Calgary Claresholm rural nursing cohort, funded by four foundations that each support one student from their own area for the cohort's four-year term.",
+    "metaDetail": "Your home town decides which foundation funds you.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1507,
+    "title": "Clearwater Endowment Fund and SLS Recreation Park Society Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-05-29",
+    "audience": "Cochrane and Springbank area graduates",
+    "url": "https://www.slscentre.com/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "The scoring is published as a 100-point rubric, so you can see where the marks come from before you write anything. Two awards at this size in one small catchment are good odds.",
+    "active": true,
+    "description": "Two awards of $2,500 for graduating Cochrane area or Springbank students entering their first year of full-time post-secondary study, selected on a 100-point assessment.",
+    "metaDetail": "The scoring rubric is published up front.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1508,
+    "title": "Foothills Natural Gas Co-op Achievement Award",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Foothills area students entering post-secondary",
+    "url": "https://www.foothillsgas.ca/grants/foothills-natural-gas-co-op-ltd.--achievement-award",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Okotoks",
+    "notes": "The co-op posts the award but the linked application form did not load when we checked, so phone or email the office for a current copy rather than assuming the award has ended.",
+    "active": true,
+    "description": "A co-op award of $500 for a student showing a clear commitment to entering post-secondary education, selected once a year.",
+    "metaDetail": "Call the office; the online form did not load.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1509,
+    "title": "Pete Ketcham Memorial Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-06-30",
+    "audience": "Students from West Fraser operating communities",
+    "url": "https://www.westfraser.com/careers/training-scholarships/scholarships/pete-ketcham-memorial-scholarship",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The company hands out several each year across Canada, the United States, the United Kingdom and Europe, so the field is wide but so is the number of awards. Living in a mill town is the qualifying fact.",
+    "active": true,
+    "description": "Several annual $1,500 awards for post-secondary students from areas where West Fraser operates, including its Alberta mill communities.",
+    "metaDetail": "Several awarded a year, not just one.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1510,
+    "title": "Obsidian Energy Energy Excellence Scholarship",
+    "amount": "$3,000",
+    "deadline": null,
+    "audience": "Grade 12 students in Obsidian Energy operating areas",
+    "url": "https://drive.google.com/uc?export=download&id=13rAvHLoLXc2Gz0XK-7IScSASnC9xAsTw",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "There is an interview, which is unusual at this level and worth preparing for. Your school division has to be one that serves an operating area, so ask your counsellor whether yours is on the list before you apply.",
+    "active": true,
+    "description": "Three awards of $3,000 for Grade 12 students in school divisions serving Obsidian Energy operating areas who have at least an 80 percent average and acceptance into oil and gas related study.",
+    "metaDetail": "An interview is part of the selection.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1511,
+    "title": "Bancroft Student Bursary",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Drumheller area students entering post-secondary",
+    "url": "https://drumhellerrotary.ca/index.php/bursaries-and-scholarships/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The club's page states no residency restriction even though the bursary is administered in Drumheller, so students from nearby towns should ask rather than assume they are out. Character weighs as heavily as marks.",
+    "active": true,
+    "description": "A Rotary bursary of $1,000 for a student who meets post-secondary entrance requirements and shows strong leadership, honesty and integrity.",
+    "metaDetail": "Character weighs as heavily as marks here.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1512,
+    "title": "Edmonton Gymkhana Association Scholarship",
+    "amount": "$1,200",
+    "deadline": "2027-09-18",
+    "audience": "Students in horse sport entering post-secondary",
+    "url": "https://edmontongymkhana.com/EGA%202026%20Scholarship%20Application%20Form.pdf",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Five places means most serious applicants place somewhere. You need a tuition receipt for current studies, two dated references and an essay of at least 300 words. The September deadline suits students already enrolled.",
+    "active": true,
+    "description": "Five ranked awards from $1,200 down to $400 for students accepted at an accredited post-secondary institution, decided on an essay covering goals and horse-related experience plus two references.",
+    "metaDetail": "Five ranked places, from $1,200 down to $400.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1513,
+    "title": "Lance Yearley Scholarship",
+    "amount": "$2,500",
+    "deadline": "2027-07-10",
+    "audience": "Children of Quality Control Council members",
+    "url": "https://local488.ca/applications-open-for-the-2026-lance-yearley-scholarship-qcc-members-only/",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Union membership in your family is the gate here, so check your parent's local before anything else. Academics, extracurriculars and the written submission are all assessed. The July deadline is later than most graduation awards.",
+    "active": true,
+    "description": "An award of up to $2,500 for the dependent child of a Quality Control Council member in good standing who is entering an accredited first-year diploma or degree program.",
+    "metaDetail": "A parent's union membership is the gate.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1514,
+    "title": "Peace Collaborative Services Specialist Bursary",
+    "amount": "$3,000",
+    "deadline": null,
+    "audience": "Master’s students in rehabilitation specialties",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/peace-collaborative-services-specialist-bursary-program.5c5bb13404.pdf",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "This is a graduate-level award, which is rare on this list, and it targets the exact specialists northern Alberta schools struggle to hire. It renews annually while you stay in the qualifying program.",
+    "active": true,
+    "description": "A bursary of up to $3,000 a year for a full-time master's student in physical, occupational or speech-language therapy, psychology, or education for students who are deaf, hard of hearing, blind or visually impaired.",
+    "metaDetail": "A graduate award aimed at hard to fill specialties.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1515,
+    "title": "Ashcor Technologies Forestburg School Scholarship",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students",
+    "url": "https://forestburg.brsd.ab.ca/download/517343",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Applications are due by 3:30 pm on the last instructional day of classes, which is earlier in June than most awards. Local work and volunteering count in the decision.",
+    "active": true,
+    "description": "An award for a graduating Forestburg School student continuing their education, with preference for trades, science, engineering, technology or mining.",
+    "metaDetail": "Due by 3:30 pm on the last day of classes.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1516,
+    "title": "Alaire Oberg Award of Music",
+    "amount": "$200",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students in music",
+    "url": "https://forestburg.brsd.ab.ca/download/267095",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Conditional post-secondary acceptance is enough, so you do not need a final offer in hand. Applications close at 3:30 pm on the last instructional day.",
+    "active": true,
+    "description": "An award for a Forestburg School graduate who has contributed to the band program, intends to continue with music and plans to give back to the community.",
+    "metaDetail": "Conditional acceptance is enough to apply.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 1517,
+    "title": "Everett Oberg Masonic Memorial Award",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students",
+    "url": "https://forestburg.brsd.ab.ca/download/267122",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "The Masons make the selection rather than the school, and an essay is required. Applications close at 3:30 pm on the last instructional day of classes.",
+    "active": true,
+    "description": "A Masonic memorial award for a Forestburg School graduate with conditional post-secondary acceptance, selected on academics together with school and community service.",
+    "metaDetail": "The Masons, not the school, choose the winner.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1518,
+    "title": "Forestburg and Galahad Community Service Award",
+    "amount": "$300",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students who volunteer",
+    "url": "https://forestburg.brsd.ab.ca/download/267101",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "An essay is required and volunteering carries real weight next to marks. Applications close at 3:30 pm on the last instructional day of classes.",
+    "active": true,
+    "description": "An award for a Forestburg School graduate with strong academics and a record of community volunteer service, holding conditional post-secondary acceptance.",
+    "metaDetail": "Volunteering is weighed alongside marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1519,
+    "title": "Gary Fink Memorial Award",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students from farm families",
+    "url": "https://forestburg.brsd.ab.ca/download/267104",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "The family's income source is the qualifying fact, not your intended program, so any field of study is open. An essay is required and applications close at 3:30 pm on the last instructional day.",
+    "active": true,
+    "description": "A memorial award for a Forestburg School graduate whose family earns its livelihood primarily from farming or ranching, with conditional post-secondary acceptance.",
+    "metaDetail": "Your family farms; your program can be anything.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1520,
+    "title": "Ken Litke and Family Memorial Award",
+    "amount": "$200",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students entering apprenticeships",
+    "url": "https://forestburg.brsd.ab.ca/download/267116",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Conditional acceptance is enough. Applications close at 3:30 pm on the last instructional day of classes, so sort your apprenticeship paperwork before the final week of school.",
+    "active": true,
+    "description": "A memorial award for a Forestburg School graduate entering an apprenticeship at NAIT, SAIT or another technical institution on a path to journeyman status.",
+    "metaDetail": "Aimed squarely at the journeyman path.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1521,
+    "title": "Sean Bevington Memorial Award",
+    "amount": "$250",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students in sports",
+    "url": "https://forestburg.brsd.ab.ca/download/267125",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Average grades are explicitly enough here, which makes it one of the few awards where being a good teammate outweighs the transcript. An essay is required and applications close at 3:30 pm on the last instructional day.",
+    "active": true,
+    "description": "A memorial award for a Forestburg School graduate who loves sport, earns average or better grades and improves student life at the school.",
+    "metaDetail": "Average grades are explicitly enough.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1522,
+    "title": "Westmoreland Coal Company Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students in engineering or mining",
+    "url": "https://forestburg.brsd.ab.ca/download/267119",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "This is the largest of the Forestburg awards. You need a school reference and an essay, and applications close at 3:30 pm on the last instructional day of classes.",
+    "active": true,
+    "description": "An award for a Forestburg School graduate with strong academics entering university, college or vocational study in engineering relevant to mining.",
+    "metaDetail": "The largest of the Forestburg school awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1523,
+    "title": "Forestburg Fire Department Memorial Award",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students with emergency services ties",
+    "url": "https://forestburg.brsd.ab.ca/download/561754",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Priority rather than a hard requirement, so a graduate with no fire hall connection can still apply. Applications close at 3:30 pm on the last scheduled day of classes.",
+    "active": true,
+    "description": "A memorial award for a Forestburg School graduate, with priority for active local firefighters, children of emergency services members and students entering emergency services study.",
+    "metaDetail": "Priority, not a requirement, for fire hall families.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1524,
+    "title": "Rugged and Real Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-06-26",
+    "audience": "Lesser Slave River area students",
+    "url": "https://mdlsr.ca/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Mature learners qualify alongside recent graduates, so there is no age cutoff to worry about. Three awards in a municipal district this small are good odds.",
+    "active": true,
+    "description": "Up to three awards of $1,000 for students living within the Municipal District of Lesser Slave River who will attend post-secondary in the coming year.",
+    "metaDetail": "Mature learners qualify alongside new graduates.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1525,
+    "title": "Jack and Lily Kirschman Bursary",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Forestburg School graduates entering post-secondary",
+    "url": "https://www.forestburg.ca/public/download/files/226833",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "A student who attended Forestburg School their whole life can reach $12,000, which is among the largest single-school awards in the province. You have to graduate from Forestburg to collect, and the money goes to the institution rather than to you.",
+    "active": true,
+    "description": "A bursary that accrues $1,000 for every year a student attends Forestburg School from Grade 1 through Grade 12, to a maximum of $12,000, paid out to an Alberta designated post-secondary institution.",
+    "metaDetail": "It accrues from Grade 1 and can reach $12,000.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1526,
+    "title": "ACFN High School Graduation Incentive",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Athabasca Chipewyan First Nation members completing high school",
+    "url": "https://acfn.com/wp-content/uploads/2023/08/Highschool-Graduation-Incentive-Guidelines-May-19-2022.pdf",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Fort McMurray",
+    "notes": "Where you live does not matter, only membership, so members outside the community qualify. There is no competition and no deadline: you apply after you graduate and send the diploma.",
+    "active": true,
+    "description": "A one-time $1,000 incentive for a recognized Athabasca Chipewyan First Nation member who completes an Alberta high school diploma, paid on proof of the diploma.",
+    "metaDetail": "Not a contest; graduate and claim it.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1527,
+    "title": "ACFN Post-Secondary Completion Incentive",
+    "amount": "$750",
+    "deadline": null,
+    "audience": "Athabasca Chipewyan First Nation members finishing post-secondary",
+    "url": "https://acfn.com/wp-content/uploads/2025/04/Post-Secondary-Completion-Incentive-Guidelines-Final-SIGNED-May-19-2022.pdf",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Fort McMurray",
+    "notes": "You claim this after you finish rather than before you start, so treat it as a reward you bank on graduation day. Membership qualifies you regardless of where you live.",
+    "active": true,
+    "description": "A one-time completion incentive for a recognized Athabasca Chipewyan First Nation member, paying $750 for a certificate, $1,000 for a diploma, $1,500 for a bachelor's degree, $2,000 for a master's and $3,000 for a doctorate.",
+    "metaDetail": "Claimed after you finish, not before you start.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1528,
+    "title": "Fort McKay Alcor Aboriginal Trades Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Graduating Indigenous students entering the trades",
+    "url": "https://fortmckayalcor.ca/community/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Fort McMurray",
+    "notes": "The five named trades are the whole field, so check that your program is one of them. Two awards a year in the Wood Buffalo region makes the odds reasonable for students who qualify.",
+    "active": true,
+    "description": "Two annual awards of $1,000 for graduating Indigenous students accepted into an accredited trade school for plumbing, refrigeration, electrical, millwright or carpentry.",
+    "metaDetail": "Five named trades, two awards a year.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1529,
+    "title": "Fort McKay First Nation Graduation Incentive",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Sponsored Fort McKay First Nation post-secondary students",
+    "url": "https://www.fortmckayeducation.ca/download/536054",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Fort McMurray",
+    "notes": "You submit your credential and an official transcript to the Nation's post-secondary department after you finish. It runs every year and is separate from the sponsorship funding itself.",
+    "active": true,
+    "description": "An incentive paying $1,000 for a completed degree at any level and $500 for a diploma or certificate, for Fort McKay First Nation students the Nation sponsors.",
+    "metaDetail": "Separate from your sponsorship funding.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1530,
+    "title": "Sunshine Coast Health Centre Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-08-01",
+    "audience": "Students in counselling, psychology, medicine or nursing",
+    "url": "https://www.sunshinecoasthealthcentre.ca/scholarships/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "The essay runs 800 to 1,000 words in APA format, so it is closer to a course assignment than a personal statement. The August deadline means you can apply after your enrolment is confirmed.",
+    "active": true,
+    "description": "A $1,000 award for a student enrolled at an accredited Canadian university or college in counselling, psychology, medicine, nursing or a related program, decided on an essay about meaning therapy in addiction and mental health.",
+    "metaDetail": "An APA essay, not a personal statement.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1531,
+    "title": "Helen Bassett Commemorative Student Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Indigenous women in post-secondary study under 31",
+    "url": "https://nwac.ca/wg2stgd/direct-support-programs/grants-scholarships/helen-bassett-commemorative-student-award/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Law and related studies are preferred but not required. The awards are regional, so you compete against students in your part of the country rather than the whole national field. The association lists further eligible applicants on its own page.",
+    "active": true,
+    "description": "Four regional awards of $1,000 from the Native Women’s Association of Canada for Indigenous women in post-secondary study who are under 31, show financial need and are committed to improving Indigenous women’s and youths’ circumstances.",
+    "metaDetail": "Regional awards, so a smaller field each.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 30,
+      "genderRequired": "female",
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1532,
+    "title": "Nellie Makokis Carlson Commemorative Student Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Indigenous single mothers in post-secondary study",
+    "url": "https://nwac.ca/wg2stgd/direct-support-programs/grants-scholarships/nellie-makokis-carlson-commemorative-student-award/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Being a mother or primary caregiver is the qualifying fact and there is no age limit, which makes this one of the few awards built for students returning to school with children. Check the page for the current intake, since it closes between rounds.",
+    "active": true,
+    "description": "Three awards of $1,000 for Indigenous women who are single parents in post-secondary study, open to all ages and all fields and decided on financial need.",
+    "metaDetail": "Built for students returning to school with kids.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1533,
+    "title": "Michael Melancon-Koffend Student Award",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Indigenous women in post-secondary study",
+    "url": "https://nwac.ca/wg2stgd/direct-support-programs/grants-scholarships/michael-melancon-koffend-student-awards/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "No age limit and no field restriction, so this is worth a look even if other awards have ruled you out on those grounds. The association runs several similar awards and one application does not cover them all.",
+    "active": true,
+    "description": "A $1,000 award for Indigenous women in post-secondary study of any age in any field, decided on financial need with priority for those working to improve Indigenous women’s circumstances.",
+    "metaDetail": "No age limit and no field restriction.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1534,
+    "title": "Future Generations Foundation Individual Funding",
+    "amount": "$20,000",
+    "deadline": null,
+    "audience": "First Nations post-secondary, trades and cultural learners",
+    "url": "https://fgfoundation.ca/programs/individual-funding/",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "Twenty thousand a year puts this among the largest awards a First Nations student in Alberta can apply for, and cultural learning counts as a stream alongside academic study. You must turn 18 during the calendar year. The 2026 round closed in June.",
+    "active": true,
+    "description": "Funding of up to $20,000 a year for First Nations students in college or university, training and trades, or cultural learning, requiring First Nation membership or status and a valid social insurance number.",
+    "metaDetail": "Cultural learning is a funded stream, not a footnote.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 18,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1535,
+    "title": "ONECA Post-Secondary Student Award",
+    "amount": "$1,000",
+    "deadline": "2027-07-31",
+    "audience": "Indigenous students at Ontario post-secondary institutions",
+    "url": "https://oneca.com/wp-content/uploads/2026/04/2026_APPLICATION-FORM-ONECA-Post-Secondary-Student-Award.pdf",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "National",
+    "notes": "You have to be studying in Ontario, so this only helps an Alberta student who has moved east for school. Community involvement and extracurriculars are part of the assessment.",
+    "active": true,
+    "description": "A $1,000 award for an Indigenous student who has completed the first year of a full-time program with a counselling component and is entering second year or beyond with a 75 percent average.",
+    "metaDetail": "Only for Albertans who moved east to study.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 75,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1536,
+    "title": "Dr. B. Bose Nursing Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-07-15",
+    "audience": "Barrhead area nursing students",
+    "url": "https://barrheadauxiliary.com/dr-b-bose-nursing-scholarship-application-form-2026/",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You need a Barrhead town or county address or a Barrhead Composite High School diploma, plus one completed year of your program and enrolment for September. The nurse practitioner stream at $5,000 is the largest.",
+    "active": true,
+    "description": "A hospital auxiliary scholarship paying $2,000 to licensed practical nursing students, $3,000 to registered nursing students and $5,000 to nurse practitioner students with Barrhead ties.",
+    "metaDetail": "Three streams, from $2,000 up to $5,000.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1537,
+    "title": "Peace River School Division Student Teacher Bursary",
+    "amount": "$3,000",
+    "deadline": null,
+    "audience": "Peace River division graduates studying education",
+    "url": "https://media.prsd.ab.ca/media/Default/medialib/prsd-student-teacher-bursary-information.cc65803405.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "You apply partway through your degree rather than at the start, so keep it on file for later. The division is recruiting teachers back to the region, which means your connection to it is the point.",
+    "active": true,
+    "description": "A $3,000 bursary for a Peace River School Division high school graduate in full-time third or fourth year studies toward a Bachelor of Education.",
+    "metaDetail": "Apply in third year, not in Grade 12.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1538,
+    "title": "Small Town, Big Dreams Scholarship",
+    "amount": "$1,500",
+    "deadline": null,
+    "audience": "Young women from Drayton Valley and Brazeau County",
+    "url": "https://dvcf.org/small-town-big-dreams-scholarship/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Grades are explicitly not the deciding factor, which is unusual. Applications are due June 1. Studying away from home is a requirement, so a student staying local does not qualify.",
+    "active": true,
+    "description": "A $1,500 award for a female graduate aged 17 to 20 from Drayton Valley or Brazeau County who is studying away from home, weighing financial circumstances rather than grades.",
+    "metaDetail": "Grades are explicitly not the deciding factor.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": 17,
+      "maxAge": 20,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1540,
+    "title": "Alan Norris Distinguished Business Leader Scholarship",
+    "amount": "$2,000",
+    "deadline": null,
+    "audience": "Haskayne business undergraduates at the University of Calgary",
+    "url": "https://ucalgary.ca/registrar/awards/alan-norris-distinguished-business-leader-scholarship",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Calgary",
+    "notes": "A full course load is not required, which opens it to students carrying a lighter term. The REAL 317 requirement means you cannot apply before you have taken that course.",
+    "active": true,
+    "description": "An award of up to $2,000 for a full-time Haskayne School of Business student entering second, third or fourth year who has completed REAL 317 successfully and has strong academics.",
+    "metaDetail": "REAL 317 has to be behind you already.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "University of Calgary"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1541,
+    "title": "Clearview School Division Return to Service Bursary",
+    "amount": "$10,000",
+    "deadline": "2027-03-30",
+    "audience": "Clearview area students in a final year",
+    "url": "https://www.clearview.ab.ca/download/558280",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Ten thousand dollars is exceptional for a rural division, and it comes with a return to service expectation, so read what you are agreeing to work. You apply in your last year, not your first.",
+    "active": true,
+    "description": "A $10,000 bursary for a post-secondary student entering their final year or final semester who graduated from a Clearview high school or lived in the division's service area for three consecutive years.",
+    "metaDetail": "Exceptional money, with a service commitment attached.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1542,
+    "title": "Oliver Collumbell Kelly Memorial Scholarship",
+    "amount": "$4,000",
+    "deadline": null,
+    "audience": "Willow Creek Composite High School graduates entering Lethbridge",
+    "url": "https://uleth.academicworks.ca/opportunities/13404",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Four thousand dollars as a minimum, from one high school to one university, is about as narrow and as generous as these get. Selection is academic. The 2026 round closed in March.",
+    "active": true,
+    "description": "A memorial scholarship of at least $4,000 for a Claresholm town or district resident graduating from Willow Creek Composite High School who enrols full-time at the University of Lethbridge.",
+    "metaDetail": "One high school, one university, $4,000 minimum.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Willow Creek Composite High School"
+      ],
+      "targetInstitutions": [
+        "University of Lethbridge"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1543,
+    "title": "Jeremy Dickout Memorial Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-31",
+    "audience": "Coaldale Prairie Winds School graduating students",
+    "url": "https://docs.google.com/document/d/16LZW8VAxXnDIqizuV2pKE46h6zEwkZJIvMPRJ6zTSDY/export?format=txt",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "Any field of study qualifies and the average is judged by your teachers rather than a fixed cutoff, so this rewards how you carry yourself at school as much as your marks.",
+    "active": true,
+    "description": "A memorial award for a Coaldale Prairie Winds School Grade 12 graduate with post-secondary plans in any field, a respectable teacher-assigned average, and a record of respect for others and volunteering.",
+    "metaDetail": "Teachers judge the average; there is no cutoff.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1544,
+    "title": "Alberta Teachers' Association Gold Medal in Education",
+    "amount": "$2,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP Bachelor of Education students finishing the program",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12679",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "There is one of these a year and it recognises the whole degree rather than a single year, so it rewards consistency across your practicum placements as much as your grades.",
+    "active": true,
+    "description": "A medal and $2,000 for the Red Deer Polytechnic Bachelor of Education student finishing the program with the strongest overall coursework and field performance.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "education"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1545,
+    "title": "Alberta Union of Provincial Employees Bursary",
+    "amount": "$300",
+    "deadline": "2027-05-31",
+    "audience": "RDP students in AUPE member families with financial need",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12249",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Membership normally has to span one continuous year and dependents must be under 25, with exceptions written in for retired and deceased members and for job elimination. Check your parent's membership date before applying.",
+    "active": true,
+    "description": "Two bursaries of $300 for returning full-time Red Deer Polytechnic students with financial need and academic merit who hold qualifying AUPE membership or are the spouse or dependent of a member.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": 25,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1546,
+    "title": "Allan Ferchuk Athletic Award",
+    "amount": "$750",
+    "deadline": "2027-05-31",
+    "audience": "RDP varsity athletes nominated by their coach",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12143",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Your coach nominates you, so there is nothing to fill in yourself beyond staying eligible under conference rules. Contribution to the team is the whole criterion.",
+    "active": true,
+    "description": "Two awards of $750 for Red Deer Polytechnic varsity athletes who meet ACAC and CCAA rules, nominated by their coach for contribution to the team.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    },
+    "metaDetail": "Two awards, coach nominated."
+  },
+  {
+    "id": 1547,
+    "title": "Allan Ferchuk Athletic Leadership Award",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "audience": "RDP varsity athletes with a 3.0 GPA and leadership",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11682",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "This is the largest of the Ferchuk athletic awards and the only one that sets a GPA floor. Leadership off the field counts as much as on it.",
+    "active": true,
+    "description": "An award of $1,500 for a Red Deer Polytechnic varsity athlete with a 3.0 GPA, nominated by a coach for leadership in sport, campus life or the community.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    },
+    "metaDetail": "Leadership off the field counts."
+  },
+  {
+    "id": 1548,
+    "title": "Allan Ferchuk Kings Hockey Leadership Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP Kings hockey players nominated by their coach",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11948",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "One of several Ferchuk hockey awards, so read each one: they split by team and by whether leadership or all-round performance is being recognised.",
+    "active": true,
+    "description": "An award of $1,000 for a Red Deer Polytechnic Kings hockey player who meets ACAC and CCAA requirements, nominated by a coach for team contribution.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    },
+    "metaDetail": "One of several Ferchuk hockey awards."
+  },
+  {
+    "id": 1549,
+    "title": "Allan Ferchuk Kings Hockey Student-Athlete Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP Kings hockey players with strong grades",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11661",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "The GPA preference of 3.4 is high for an athletic award, which makes this the academic counterpart to the leadership version of the same scholarship.",
+    "active": true,
+    "description": "An award of $1,000 for a Red Deer Polytechnic Kings hockey player selected as a well-rounded athlete and student, with preference for a GPA of 3.4 or above.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    },
+    "metaDetail": "A 3.4 GPA is preferred."
+  },
+  {
+    "id": 1550,
+    "title": "Allan Ferchuk Queens Hockey Leadership Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP Queens hockey players nominated by their coach",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11713",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "The Queens equivalent of the Kings leadership award, so women's hockey players are not competing against the men's roster for it.",
+    "active": true,
+    "description": "An award of $1,000 for a Red Deer Polytechnic Queens hockey player who meets ACAC and CCAA requirements, nominated by a coach for team contribution.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    },
+    "metaDetail": "Womens hockey has its own award."
+  },
+  {
+    "id": 1551,
+    "title": "AltaLink Centennial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP University Transfer students from rural Alberta towns",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12368",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "The population cap is the key detail: a student from a town of 20,000 or more does not qualify no matter how rural it feels. Grades, need and community leadership are all weighed.",
+    "active": true,
+    "description": "Two awards of $1,000 for returning full-time Red Deer Polytechnic University Transfer students with a permanent rural Alberta address in a community under 20,000 people.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1552,
+    "title": "Applied Arts Award",
+    "amount": "$400",
+    "deadline": "2027-05-31",
+    "audience": "RDP Animation and Visual Effects students returning full-time",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12019",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Small but uncontested: the field is one program at one school, and grades alone decide it.",
+    "active": true,
+    "description": "An award of $400 for a returning full-time Red Deer Polytechnic Animation and Visual Effects student, selected on grades.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1553,
+    "title": "Arun Mishra Engineering Academic Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP engineering students transferring to the University of Alberta",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12533",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "This one follows you out the door: it is for students leaving RDP for the University of Alberta, so apply in the year you transfer.",
+    "active": true,
+    "description": "An award of $1,000 for a Red Deer Polytechnic engineering science student transferring into their next full-time year at the University of Alberta, selected on grades.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1554,
+    "title": "Asset Builders Building Your Future Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP carpentry, plumbing and electrical apprentices with financial need",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11645",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Need is the only criterion, so marks will not rule you out. You have to be coming back for the next training period rather than finishing.",
+    "active": true,
+    "description": "Two bursaries of $1,000 for first-year Red Deer Polytechnic carpentry, plumbing or electrical apprentices returning for their next training year, selected on financial need.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1555,
+    "title": "ATB BIPOC Business Administration Entrance Scholarship",
+    "amount": "$1,250",
+    "deadline": "2027-05-31",
+    "audience": "Incoming RDP Business Administration students who are Black, Indigenous or people of colour",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12499",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "An entrance award, so you apply as you start rather than partway through. ATB funds a parallel award reserved for Indigenous students, and it is worth checking which fits you better.",
+    "active": true,
+    "description": "A scholarship of $1,250 for an incoming full-time Red Deer Polytechnic Business Administration student who is Black, Indigenous or a person of colour, considering grades and financial need.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": true,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1556,
+    "title": "ATB Indigenous Business Administration Entrance Scholarship",
+    "amount": "$1,250",
+    "deadline": "2027-05-31",
+    "audience": "Incoming Indigenous RDP Business Administration students",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12529",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Reserved for Indigenous students entering the program, which makes the field much smaller than the general entrance scholarships. Apply in your first term.",
+    "active": true,
+    "description": "A scholarship of $1,250 for an incoming full-time Indigenous Red Deer Polytechnic Business Administration student, considering grades and financial need.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1557,
+    "title": "ATB Financial Continuing Scholarship in Business Administration",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP Business Administration students entering second year",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11739",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Four things are weighed here rather than just marks, so a middling transcript with real community involvement is still competitive.",
+    "active": true,
+    "description": "A scholarship of $1,000 for a Red Deer Polytechnic Business Administration diploma student moving from first to second year, considering need, community participation, leadership and grades.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1558,
+    "title": "ATB Financial Entrance Scholarship in Business Administration",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "Incoming first-year RDP Business Administration students",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12245",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "For students just starting the diploma. ATB runs a separate continuing scholarship for the jump into second year, so you can be considered twice over two years.",
+    "active": true,
+    "description": "A scholarship of $1,000 for an incoming full-time first-year Red Deer Polytechnic Business Administration student, considering financial circumstances, grades and community service.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1559,
+    "title": "ATB Financial Bachelor of Business Administration Academic Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP diploma students moving into the Business Administration degree",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12519",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "This one marks the step from the diploma into the degree, and grades alone decide it.",
+    "active": true,
+    "description": "Two awards of $1,000 for full-time second-year Red Deer Polytechnic Business Administration students progressing into the Bachelor of Business Administration, selected on grades.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1560,
+    "title": "ATB Financial Entrepreneur Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP students who completed Entrepreneurship 2251",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12079",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "One course decides this, which is unusually specific. If you did well in Entrepreneurship 2251, you are already most of the way to qualifying.",
+    "active": true,
+    "description": "An award of $1,000 for a Red Deer Polytechnic student who completed Entrepreneurship 2251 in the most recent academic year, selected on achievement in that course.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    },
+    "metaDetail": "One course decides it."
+  },
+  {
+    "id": 1561,
+    "title": "Atoskewan Indigenous Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "Returning Indigenous RDP students, with preference for non-status and Metis applicants",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11671",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "The preference for non-status and Metis students is unusual, since most Indigenous awards ask for status. Three awards makes the odds reasonable.",
+    "active": true,
+    "description": "Three awards of $1,000 for returning full-time Red Deer Polytechnic students, considering grades and need, with preference for non-status and Metis applicants and a GPA of 2.7 or above.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1562,
+    "title": "Automotive Department Second-Year Apprenticeship Award",
+    "amount": "$300",
+    "deadline": "2027-05-31",
+    "audience": "RDP second-year automotive service technician apprentices",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11977",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Small, but the field is one trade in one year at one school, so a strong second-year apprentice has a real chance.",
+    "active": true,
+    "description": "An award of $300 for a second-year Red Deer Polytechnic automotive service technician apprentice returning for the next training year, selected on grades.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1563,
+    "title": "Avalon Central Alberta Carpentry Scholarship",
+    "amount": "$1,250",
+    "deadline": "2027-05-31",
+    "audience": "RDP second-year carpentry apprentices in residential or environmental construction",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12411",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "You have to say where you are heading: residential building or environmental construction. Grades decide it among the apprentices who do.",
+    "active": true,
+    "description": "Two scholarships of $1,250 for second-year Red Deer Polytechnic carpentry apprentices returning for the next year who state career plans in residential construction or an interest in environmental construction.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1564,
+    "title": "B.A. Bruce Snider Scholarship for Indigenous Students",
+    "amount": "$2,500",
+    "deadline": "2027-05-31",
+    "audience": "Incoming first-year Indigenous RDP students with financial need",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12254",
+    "category": "Indigenous",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Six awards at $2,500 makes this the most generous entrance award for Indigenous students at the school. Cultural leadership is weighed alongside need.",
+    "active": true,
+    "description": "Six scholarships of $2,500 for incoming full-time first-year Indigenous Red Deer Polytechnic students, considering financial circumstances and leadership supporting Indigenous culture.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": true,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1565,
+    "title": "Bailey Flick Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP Practical Nurse students who support their classmates",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12542",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Nothing here is about marks. It goes to the student their classmates could count on, which means your reputation in the cohort is the application.",
+    "active": true,
+    "description": "A scholarship of $1,000 for a Red Deer Polytechnic student who attended the second year of Practical Nurse studies in the preceding year, selected for helping and supporting classmates.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1566,
+    "title": "BDO Red Deer Accounting Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "audience": "RDP accounting students entering the Business Administration degree",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12427",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Five awards in one narrow stream is among the best odds at the school for accounting students making the jump to the degree.",
+    "active": true,
+    "description": "Five scholarships of $1,500 for returning full-time second-year Red Deer Polytechnic accounting students progressing to the Bachelor of Business Administration, considering grades and financial circumstances.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1567,
+    "title": "Beedle Family Apprenticeship Award",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP instrumentation technician apprentices in years one to three",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11609",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "You need to be continuing your training unless you have already finished the program, and the selection is made on grades alone. Instrumentation is a small trade, so the applicant pool is narrow.",
+    "active": true,
+    "description": "Five awards of $1,000 for Red Deer Polytechnic instrumentation technician apprentices in years one, two or three, selected on grades.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1568,
+    "title": "Betty Bancroft Memorial Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP Fine Arts and Visual Arts students with a 3.0 drawing and painting GPA",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12132",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "The GPA requirement applies to your drawing and painting courses specifically, not your whole transcript. Need is weighed alongside grades.",
+    "active": true,
+    "description": "A scholarship of $1,000 for a first-year Red Deer Polytechnic Fine Arts or Visual Arts diploma student returning full-time, requiring a 3.0 GPA in drawing and painting.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "arts"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1569,
+    "title": "Black Knight Inn University Transfer Scholarship",
+    "amount": "$750",
+    "deadline": "2027-05-31",
+    "audience": "Incoming RDP Commerce, Education, Science and Nursing students",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11989",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Four program streams share two awards, so check that yours is one of the named ones before applying.",
+    "active": true,
+    "description": "Two scholarships of $750 for incoming full-time first-year Red Deer Polytechnic students in Commerce, Education, Science or Nursing, considering grades and financial circumstances.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1570,
+    "title": "Blackfalds Bulldogs Athletic Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "audience": "Returning RDP varsity athletes with a 3.0 GPA",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12674",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Your coach nominates you and the 3.0 GPA is a hard floor. At $1,500 it is one of the larger athletic awards at the school.",
+    "active": true,
+    "description": "A scholarship of $1,500 for a returning Red Deer Polytechnic varsity athlete with a 3.0 GPA and sport leadership, nominated by a coach for team contribution.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    },
+    "metaDetail": "Your coach nominates you."
+  },
+  {
+    "id": 1571,
+    "title": "Blackfalds Bulldogs Kings Hockey Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "audience": "RDP Kings players who formerly played for the Blackfalds Bulldogs",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12676",
+    "category": "Sports",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Having played for the Bulldogs is the qualifying fact, so this is effectively reserved for one pipeline of players. If that is you, the field is tiny.",
+    "active": true,
+    "description": "A scholarship of $1,500 for a Red Deer Polytechnic Kings hockey player who formerly played for the Blackfalds Bulldogs, nominated by a coach for team contribution.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "sports"
+      ]
+    }
+  },
+  {
+    "id": 1572,
+    "title": "Booth Family MusiCamp Scholarship",
+    "amount": "$437",
+    "deadline": "2027-05-31",
+    "audience": "MusiCamp Alberta registrants who need help attending",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12357",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "This covers camp attendance rather than tuition, and the application is a straight case for why the money matters to you, your family and your musical development.",
+    "active": true,
+    "description": "A scholarship of roughly $437 for a MusiCamp Alberta registrant at Red Deer Polytechnic, awarded on an explanation of how the funding would make attendance possible.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    },
+    "metaDetail": "It pays for camp, not tuition."
+  },
+  {
+    "id": 1573,
+    "title": "Border Paving Engineering Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-05-31",
+    "audience": "First-year RDP engineering science students continuing next year",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11617",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Border Paving funds three separate awards at the school, one for engineering, one for business and one open to any program. Read all three before you apply.",
+    "active": true,
+    "description": "A scholarship of $2,000 for a full-time first-year Red Deer Polytechnic engineering science student continuing into the following year, considering financial circumstances and grades.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1574,
+    "title": "Border Paving Entrance Bursary",
+    "amount": "$2,000",
+    "deadline": "2027-05-31",
+    "audience": "Incoming RDP students in any credit program with financial need",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12498",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Need is the only criterion and every credit program qualifies, which makes this the most broadly open of the $2,000 entrance awards at the school.",
+    "active": true,
+    "description": "A bursary of $2,000 for an incoming full-time first-year student in any Red Deer Polytechnic credit program, selected on financial circumstances alone.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1575,
+    "title": "Border Paving Scholarship for Business",
+    "amount": "$2,000",
+    "deadline": "2027-05-31",
+    "audience": "Incoming RDP Bachelor of Business Administration students",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11615",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Two awards at $2,000 for students entering the business degree, judged on need as well as marks.",
+    "active": true,
+    "description": "Two scholarships of $2,000 for incoming full-time first-year Red Deer Polytechnic Bachelor of Business Administration students, considering financial circumstances and grades.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1576,
+    "title": "Bryan James Wright Memorial Bursary",
+    "amount": "$500",
+    "deadline": "2027-05-31",
+    "audience": "RDP students who completed Music 1233 or 1303",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12331",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Completing one of two named music courses is the whole eligibility test, and need decides it from there. You do not need to be a music major.",
+    "active": true,
+    "description": "A bursary of $500 for a full-time Red Deer Polytechnic student from the preceding year who completed Music 1233 or 1303, selected on financial circumstances.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    },
+    "metaDetail": "No music major required."
+  },
+  {
+    "id": 1577,
+    "title": "BScN Faculty Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "Returning RDP nursing students with a 3.3 GPA who volunteer",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11913",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "The 3.3 GPA is a hard floor and volunteering is weighed on top of it. The nursing faculty funds a second, similar award, so check both.",
+    "active": true,
+    "description": "A scholarship of $1,000 for a returning full-time Red Deer Polytechnic nursing student after second or third year with a 3.3 GPA, considering grades and volunteering.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1578,
+    "title": "BScN Faculty Summit Scholarship",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "Third-year RDP nursing students who completed NURS 3360 and 3364",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12784",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Selection looks at compassionate patient care and peer support alongside community work, so clinical instructors' impressions of you matter here.",
+    "active": true,
+    "description": "A scholarship of $1,000 for a third-year Red Deer Polytechnic nursing student continuing full-time after completing NURS 3360 and 3364, requiring a 3.3 GPA.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [
+        "health"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1579,
+    "title": "Buchwald Family Scholarship",
+    "amount": "$1,200",
+    "deadline": "2027-05-31",
+    "audience": "Returning RDP students in agriculture, environmental and biological sciences",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11603",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Preference goes to Agriculture, Environmental and Conservation Science, Environmental Management and Biological Sciences students, but the award is not closed to others.",
+    "active": true,
+    "description": "Two scholarships of $1,200 for returning full-time Red Deer Polytechnic students after first year who are Canadian citizens or landed immigrants, considering grades, community participation and need.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1580,
+    "title": "Calgary Flames Harley Hotchkiss Leadership Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-05-31",
+    "audience": "Returning RDP students with a 2.7 GPA and community leadership",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12693",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Five awards, a modest GPA floor and three eligible year levels make this one of the widest open awards at the school despite the hockey name.",
+    "active": true,
+    "description": "Five scholarships of $1,500 for returning full-time Red Deer Polytechnic students after first, second or third year with a 2.7 GPA, considering grades, community participation and leadership.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1581,
+    "title": "Cam Clark Ford Sales Award",
+    "amount": "$350",
+    "deadline": "2027-05-31",
+    "audience": "RDP third-year automotive service technician apprentices",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11994",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Small and specific: one trade, one year level, decided on marks.",
+    "active": true,
+    "description": "An award of $350 for a third-year Red Deer Polytechnic automotive service technician apprentice progressing to the next training year, selected on grades.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1582,
+    "title": "Campus Management Apprenticeship Bursary",
+    "amount": "$1,000",
+    "deadline": "2027-05-31",
+    "audience": "RDP apprentices involved in occupational safety",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12230",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Safety committee work or similar involvement is the tiebreaker, which is an easy edge to build if you are already on a crew.",
+    "active": true,
+    "description": "Three bursaries of $1,000 for Red Deer Polytechnic apprentices continuing their training, selected on need with preference for involvement in occupational safety at the school or in the community.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
+      "extracurriculars": []
+    },
+    "metaDetail": "Safety work is the tiebreaker."
+  },
+  {
+    "id": 1583,
+    "title": "Campus Management Green Bursary",
+    "amount": "$1,300",
+    "deadline": "2027-05-31",
+    "audience": "RDP students involved in environmental initiatives",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/12540",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Environmental volunteering is the tiebreaker rather than your program, so any student with a green record can compete.",
+    "active": true,
+    "description": "Three bursaries of $1,300 for Red Deer Polytechnic students from the preceding year, selected on need with preference for involvement in environmental initiatives at the school or in the community.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    },
+    "metaDetail": "Any program qualifies."
+  },
+  {
+    "id": 1584,
+    "title": "Canada West Homes Apprenticeship Bursary",
+    "amount": "$750",
+    "deadline": "2027-05-31",
+    "audience": "RDP carpentry, electrical and plumbing apprentices with financial need",
+    "url": "https://rdpolytech.academicworks.ca/opportunities/11768",
+    "category": "Trades",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "Need alone decides it across three trades and three year levels, so marks are not a barrier.",
+    "active": true,
+    "description": "A bursary of $750 for a Red Deer Polytechnic apprentice in years one to three of carpentry, electrical or plumbing who is continuing into the next training year, selected on financial circumstances.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Red Deer Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": true,
       "extracurriculars": []
     }
   }
