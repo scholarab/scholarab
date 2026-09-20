@@ -209,3 +209,26 @@ because they share one application, and 2 were held for lack of a confirmable pa
 
 Removal candidates and outcomes: the portal-search URLs, the stale years and the vendor
 SEO page were removed outright and none were added back, an add-back fraction of 0.
+
+## Astra hunt, amount-verified ingest, 2026-09-19
+
+The 844 hunt rows carrying a dollar figure were re-fetched (286 URLs, 110 new
+fetches, 4 dead) and checked against the live page: the award title had to
+appear, and its amount had to appear inside the award's own section rather than
+anywhere on the page. 522 passed, 196 failed on a missing title, 122 on an
+unconfirmed amount, 4 on an unreadable page.
+
+Removal before improvement: of the 508 fresh passes, 328 came from 36
+multi-award handbooks and portals where a nearby amount is not evidence, so they
+were held back rather than shipped. The 41 Red Deer Polytechnic portal awards
+were listed individually because 22 of them were already listed that way; the 32
+University of Calgary continuing awards were collapsed into one listing because
+the hunt had only crawled titles starting with "A" and shipping them would have
+published an alphabetical fragment as if it were coverage. The 26 NAIT rows were
+dropped as already covered by the NAIT aggregate.
+
+Add-back fraction: 0. Two authored listings were withdrawn before shipping, one
+as a duplicate of an existing entry and one because it could not be described
+without wording the gender rule forbids.
+
+Catalogue 1,303 to 1,416.
