@@ -11,6 +11,7 @@
 // - Closed and opening-soon states added (the design only shows open listings).
 
 import { emailOff } from '../../lib/email-off';
+import { BOOKMARK } from '../../lib/icons';
 
 interface Fact {
   label: string;
@@ -201,7 +202,7 @@ const chip =
             class="sab-btn sabd-cta">{ctaLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
         )}
         <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
-          class="sabd-save" title="Save" aria-label="Save">☆</button>
+          class="sabd-save" title="Save" aria-label="Save" aria-pressed="false"><Fragment set:html={BOOKMARK} /></button>
       </div>
       {/* Only when the button above is a dead label. For TBA and ongoing
           listings the button already goes to this same URL, and a second
@@ -285,7 +286,9 @@ const chip =
   /* The facet crumb sits beside the back link with a separator drawn in CSS, so
      the two read as one trail rather than two competing back-buttons. */
   .sabd-facet::before { content: '/'; margin-right: 8px; opacity: 0.45; }
-  .sabd-facet { margin-left: 8px; }
+  /* The auto margin keeps the crumb beside the back link. Without it
+     space-between threw it to the far edge, a stray "/ Calgary" on its own. */
+  .sabd-facet { margin-left: 8px; margin-right: auto; }
   .sabd-switcher { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); }
   .sabd-arrow {
     font-size: 13px; border: 1.5px solid rgba(20,25,21,0.3); color: #141915;
@@ -395,12 +398,16 @@ const chip =
   .sabd-cta-disabled { background: rgba(20,25,21,0.08); color: rgba(20, 25, 21, 0.68); cursor: not-allowed; }
   .sabd-cta-disabled:hover { background: rgba(20,25,21,0.08); color: rgba(20, 25, 21, 0.68); }
   .sabd-save {
+    display: inline-flex; align-items: center; justify-content: center;
     font-family: var(--font-body); font-size: 17px; border: 1.5px solid rgba(20,25,21,0.3);
     border-radius: 100px; width: 50px; height: 50px; cursor: pointer;
     color: rgba(20, 25, 21, 0.68); background: transparent; flex: none;
   }
   .sabd-save:hover { border-color: #141915; }
   .sabd-save[data-saved] { color: #0A6B4D; background: rgba(47,211,160,0.15); }
+  /* :global because the icon arrives through set:html and carries no scope id. */
+  .sabd-save :global(svg) { width: 16px; height: 18px; fill: none; }
+  .sabd-save[data-saved] :global(svg) { fill: currentColor; }
   /* Official-site link shown when the CTA pill is Closed/Opens-soon, so the
      source page stays reachable for every listing. */
   .sabd-visit {
@@ -505,10 +512,11 @@ const chip =
   }
 
   function applySaveState(btn: HTMLElement, saved: boolean) {
-    btn.textContent = saved ? '★' : '☆';
+    // The drawn bookmark from the directories; [data-saved] fills it.
     if (saved) btn.setAttribute('data-saved', '');
     else btn.removeAttribute('data-saved');
     btn.setAttribute('aria-label', saved ? 'Remove from saved' : 'Save');
+    btn.setAttribute('aria-pressed', String(saved));
   }
 
   // Delegated so everything survives view-transition swaps between detail pages

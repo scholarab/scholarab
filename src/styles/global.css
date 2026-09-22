@@ -196,6 +196,8 @@ body {
 }
 
 .sabp-header,
+.sabh,
+.sabg-cta,
 .sab-hero,
 .sabf-footer,
 .sabd-remind,
@@ -519,7 +521,10 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 /* A filter that would leave nothing behind. Still clickable (the empty state
    explains itself and offers a way out), just not presented as an equal
    offer beside a chip holding forty listings. */
-.sabl-chip.is-empty { opacity: 0.45; }
+/* Muted by ink, not opacity: at 0.45 opacity the label measured 2.87:1 on
+   the cream and failed AA. 0.62 ink is about 5:1. */
+.sabl-chip.is-empty { color: rgba(20, 25, 21, 0.62); border-color: rgba(20, 25, 21, 0.14); }
+.sabl-chip.is-empty .sabl-chip-count { color: rgba(20, 25, 21, 0.62); }
 /* The current city's chip is filled dark, so its count needs the light ink or
    it renders dark on dark and disappears. */
 .sabl-chip.on .sabl-chip-count { color: rgba(238, 241, 236, 0.6); }

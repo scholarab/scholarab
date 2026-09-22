@@ -180,7 +180,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
             </p>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
-                Browse {scholarshipCount} scholarships
+                Browse {scholarshipCount.toLocaleString('en-CA')} scholarships
               </a>
               <a href="/programs/" class="sab-btn-outline">
                 Explore programs
@@ -195,7 +195,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
               <div class="sab-stat-label sab-mono">OPEN RIGHT NOW</div>
             </div>
             <div class="sab-stat">
-              <div class="sab-stat-value tnum">{scholarshipCount}</div>
+              <div class="sab-stat-value tnum">{scholarshipCount.toLocaleString('en-CA')}</div>
               <div class="sab-stat-label sab-mono">SCHOLARSHIPS</div>
             </div>
             <div class="sab-stat">
