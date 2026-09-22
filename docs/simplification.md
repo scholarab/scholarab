@@ -1,5 +1,57 @@
 # ScholarAB simplification record
 
+## Contrast, tap targets and quiz start: September 21, 2026
+
+Third pass over the 2026-09-19 critique, after the P0/P1 and P2/P3 passes on
+the 19th. Every remaining item was re-measured against the build before it was
+touched, and four of them turned out to be already closed. Local measurements
+on a throttled emulated phone, not hosted results.
+
+| Candidate | Outcome |
+| --- | --- |
+| `#8A8F8B` fine print on /privacy, /terms and the unsubscribe page (3.00:1) | Replaced with the muted ink the rest of the site already uses, `#5C5F5B` (5.91:1 on cream). Site-wide contrast failures across 18 sampled pages at two widths: 6 to 0. |
+| Breadcrumb "/" on guides at 2.49:1 | It is a divider, not a step: `aria-hidden`, and raised off 0.3 so it is not also faint. |
+| "HOW THIS WORKS", the three principle titles and "OPEN SOURCE UNDER AGPL-3.0" as divs on /about | Promoted to h2/h3. /about and /saved were the only two pages on the site with no h2 at all. Weight and margins are pinned, so the computed type is byte-identical to what the divs rendered. |
+| /saved section heads and the empty state as divs | Promoted to h2, cards under them to h3. |
+| 152 award links on /deadlines at 17px tall (mobile) | Padded to a 24px target with a matching negative margin. Single-line rows keep their exact pitch; two-line rows tighten 4px. Undersized targets on /deadlines: 152 to 2 on mobile, 322 to 2 on desktop. |
+| 22 city links per hub page and 8 category links on /programs facets at 23px | Row gap moved onto the links themselves; 22 to 0 and 8 to 0. |
+| Desktop search field (23px) and "Hide filters" (18px) | `min-height: 24px`. The phone block already took both to 44px. |
+| Reminder-block fine print at `#6B716C` on `#141915` (3.56:1) | Paper at 0.55 (5.48:1). Found only after the detail-page sample was widened: the first two listings sampled were closed and render no reminder form. |
+| The privacy link inside that fine print | It was the same colour as the sentence around it with no underline, so the one route from the reminder form to the privacy page was invisible. Now paper and underlined. Not a contrast finding; found while fixing one. |
+| Quiz payload fetched only after its own module loaded | Preloaded with the document. |
+| Stripping default values out of the quiz payload | Rejected, not shipped. See below. |
+
+The one deliberate non-removal: every scholarship ships all 17 eligibility keys
+even when null, false or empty, which is 37.5% of the payload's raw bytes.
+Stripping them and rehydrating on the client measured 6.0% off the wire
+(114,427 to 107,578 bytes gzipped) and 1.7 ms off the parse (1.89 ms to
+1.44 ms, median of 40 runs). That does not pay for a rehydration layer between
+the catalogue and the matcher, so the payload was left alone. Raw bytes are not
+wire bytes and neither is a measured improvement here.
+
+| Metric | Before | After |
+| --- | --- | --- |
+| Contrast failures, 26 pages x 2 widths | 8 | 0 |
+| Undersized tap targets, same sample | 477 | 45 |
+| Remaining 45 | | All inline links inside a sentence, plus one single-link breadcrumb: WCAG 2.2 2.5.8's inline and spacing exceptions. |
+| /match first question tappable, Slow 4G + 4x CPU | 2,546 ms | 2,040 ms (20% less) |
+| /match first question tappable, Fast 4G + 4x CPU | 1,460 ms | 1,092 ms (25% less) |
+| Quiz payload request start, Slow 4G | 1,365 ms | 194 ms |
+| Quiz payload network requests | 1 | 1 (the preload is reused, not doubled) |
+
+Add-back fraction: 0 of 11 candidates restored. One was rejected on its own
+measurement before shipping rather than added back after.
+
+Verification: `npm run ci` green (52 files, 968 unit tests), Playwright 72
+passed with the 8 existing skips, Impeccable's mechanical detector clean on all
+ten changed files. One E2E locator was made stricter, not weaker: /saved now
+has a second heading whose text contains "saved", so the assertion on the page
+title was pinned to an exact match.
+
+Not addressed, and not a defect this pass can fix: the 2026-09-19 P1 that the
+interface reads as category-standard. That is a visual-identity question, and
+polishing the current look is the one thing that cannot answer it.
+
 ## Hero film re-encode: September 19, 2026
 
 Re-encoded from the H.264 masters (the higher-bitrate copies) at 1080p: H.265 CRF 28 and H.264 CRF 27, CRF 30/29 for the three high-detail takes (08, 10, 18), audio and timecode tracks dropped, faststart kept. SSIM against the masters is at or above what the old H.265 files scored (clip 01: 0.982 vs 0.987; clip 08: 0.958 vs 0.953).

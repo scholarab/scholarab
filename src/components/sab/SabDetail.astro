@@ -255,8 +255,12 @@ const chip =
   /* Collection notice, sits under the sign-up form. Deliberately quiet but
      always present: the address is the only personal data the site takes, and
      the moment to say what happens to it is the moment it is asked for. */
-  .sabd-remind-fine { margin-top: 10px; font-size: 12px; line-height: 1.55; color: #6B716C; }
-  .sabd-remind-fine a { color: #6B716C; }
+  /* On the #141915 block, #6B716C measured 3.56:1. Paper at 0.55 is 5.48:1
+     and still sits below the sub above it, which is paper at 0.65. */
+  .sabd-remind-fine { margin-top: 10px; font-size: 12px; line-height: 1.55; color: rgba(238, 241, 236, 0.55); }
+  /* This was the same colour as the sentence around it with no underline, so
+     the one route from the reminder form to the privacy page was invisible. */
+  .sabd-remind-fine a { color: #EEF1EC; text-decoration: underline; text-underline-offset: 2px; }
   .sabd-guide-label {
     display: block; font-size: 11px; letter-spacing: 0.08em;
     color: rgba(20, 25, 21, 0.68);

@@ -43,6 +43,14 @@ const breadcrumbJson = {
     slot="head"
   />
   <SabFonts slot="head" />
+  {/* The quiz cannot render until the catalogue lands, and the fetch used to
+      wait on its own module: on a throttled Slow 4G phone the payload did not
+      start until 1,365 ms and question one stayed inert for 2.5 s. Preloading
+      it here starts the download with the document instead of after the
+      bundle. `crossorigin` matches fetch()'s default CORS mode, so the
+      preloaded response is the one the loader reuses rather than a second
+      request. */}
+  <link rel="preload" as="fetch" href={quizDataUrl} crossorigin slot="head" />
 
   <div class="sabp-header" slot="header">
     <SabHeader currentPath="/match" />

@@ -1,11 +1,11 @@
 {
   "/about/": {
-    "hash": "3a1f6c1db8ee60a6",
-    "date": "2026-09-19"
+    "hash": "80d27e42c27e04d3",
+    "date": "2026-09-21"
   },
   "/privacy/": {
-    "hash": "b650d2d139a4234a",
-    "date": "2026-09-18"
+    "hash": "0f4deea3f30e3a64",
+    "date": "2026-09-21"
   },
   "/programs/4-h-alberta-senior-program/": {
     "hash": "c2b4cae0d14974cf",
@@ -3923,10 +3923,6 @@
     "hash": "13862ea0ddb03bf7",
     "date": "2026-09-08"
   },
-  "/scholarships/lloydminster-and-district-fish-and-game-scholarship/": {
-    "hash": "9d7406cc6446de4b",
-    "date": "2026-09-08"
-  },
   "/scholarships/lloydminster-construction-association-scholarship/": {
     "hash": "54a3bb3272dadec3",
     "date": "2026-09-08"
@@ -5987,10 +5983,6 @@
     "hash": "5a490590855eed0d",
     "date": "2026-09-11"
   },
-  "/scholarships/whitelaw-history-book-scholarship/": {
-    "hash": "69e09b6a9519ca5b",
-    "date": "2026-09-19"
-  },
   "/scholarships/william-aberhart-alumni-scholarship/": {
     "hash": "7e3867c7bf4bf3ca",
     "date": "2026-09-08"
@@ -6100,7 +6092,7 @@
     "date": "2026-09-18"
   },
   "/terms/": {
-    "hash": "eda78446805112b7",
-    "date": "2026-09-18"
+    "hash": "3a0b6fe7931e6eb2",
+    "date": "2026-09-21"
   }
 }

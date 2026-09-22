@@ -70,7 +70,7 @@ function savedCard(s: SavedItem): string {
         <span class="sabl-mono sabl-tag">${esc((s.category ?? (sh ? 'GENERAL' : 'PROGRAM')).toUpperCase())}</span>
         <span data-sv-chip></span>
       </div>
-      <h2 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h2>
+      <h3 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
       ${sh ? `<div class="sabl-amount">${esc(s.amount ?? '')}</div>${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}`
         : `${s.provider ? `<div class="sabl-org" style="margin:10px 0 0">${esc(s.provider.toUpperCase())}</div>` : ''}${s.description ? `<div class="sabl-blurb" style="margin-top:14px">${emailOff(s.description)}</div>` : ''}`}
       <div class="sabl-card-foot">
@@ -286,10 +286,10 @@ export function initSaved() {
     calEl.innerHTML =
       '<div style="margin-top:48px">'
       + '<div class="sabs-cal-toolbar">'
-      + '<div class="sabs-section-head sabl-mono" style="border-top:none;padding:0">'
+      + '<h2 class="sabs-section-head sabl-mono" style="border-top:none;padding:0">'
       + '<span class="sabs-dot" style="background:#2FD3A0" aria-hidden="true"></span>'
       + '<span>DEADLINE CALENDAR</span>'
-      + '</div>'
+      + '</h2>'
       // No dated item means buildICS emits zero VEVENTs, so the export offered
       // a 118-byte empty calendar and still reported success. Nothing to
       // export, no button. "Downloaded" rather than "Added" because a download

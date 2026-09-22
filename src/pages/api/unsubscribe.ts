@@ -33,8 +33,8 @@ const page = (title: string, body: string) =>
       button.secondary{background:transparent;color:#5A605B;border:1px solid #d8d4c8;font-weight:500;
         padding:10px 22px;margin-top:.75rem}
       button.secondary:hover{background:#EBEEE8;color:#141915}
-      .fine{font-size:.8rem;color:#8A8F8B;margin-top:1rem}
-      .fine a{color:#8A8F8B}
+      .fine{font-size:.8rem;color:#5C5F5B;margin-top:1rem}
+      .fine a{color:#5C5F5B}
       .back{display:inline-block;margin-top:1.5rem;font-size:.9rem}
     </style></head>
     <body><div class="card">${body}</div></body></html>`,

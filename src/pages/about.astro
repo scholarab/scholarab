@@ -83,11 +83,11 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
 
       <!-- How this works -->
       <div class="saba-card">
-        <div class="saba-card-label">HOW THIS WORKS</div>
+        <h2 class="saba-card-label">HOW THIS WORKS</h2>
         {principles.map((p, i) => (
           <div class="saba-principle" style={i === 0 ? 'border-top-color:transparent;' : undefined}>
             <div>
-              <div class="saba-principle-title">{p.title}</div>
+              <h3 class="saba-principle-title">{p.title}</h3>
               <div class="saba-principle-body">
                 {p.body}
                 {p.more && <> <a href={p.more.href}>{p.more.label}</a></>}
@@ -98,10 +98,10 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
       </div>
 
       <!-- Open source + creator -->
-      <div class="saba-os-label">
-        <span class="saba-dot" style="background:#2FD3A0;"></span>
+      <h2 class="saba-os-label">
+        <span class="saba-dot" style="background:#2FD3A0;" aria-hidden="true"></span>
         <span>OPEN SOURCE UNDER AGPL-3.0</span>
-      </div>
+      </h2>
       <div class="saba-actions">
         <a
           href="https://github.com/scholarab/scholarab"
@@ -182,22 +182,22 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
     padding: 36px 40px 20px; margin-top: 64px;
   }
   .saba-card-label {
-    font-family: var(--font-label);
-    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65); margin-bottom: 8px;
+    font-family: var(--font-label); font-weight: 400;
+    font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65); margin: 0 0 8px;
   }
   /* No 01/02/03 badge: three promises, not three steps. */
   .saba-principle {
     display: grid; grid-template-columns: 1fr; gap: 20px;
     padding: 22px 0; border-top: 1px solid rgba(20,25,21,0.12); align-items: start;
   }
-  .saba-principle-title { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .saba-principle-title { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; margin: 0 0 6px; }
   .saba-principle-body { font-size: 15px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); max-width: 720px; }
   .saba-principle-body a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px; }
 
   .saba-os-label {
     display: flex; align-items: center; gap: 10px; padding: 14px 0;
-    border-top: 2px solid #141915; margin-top: 64px;
-    font-family: var(--font-label);
+    border-top: 2px solid #141915; margin: 64px 0 0;
+    font-family: var(--font-label); font-weight: 400;
     font-size: 12.5px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65);
   }
   .saba-actions { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; }

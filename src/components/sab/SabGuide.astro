@@ -96,7 +96,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
       <div class="sabg-hero">
         <div class="sab-kicker sabg-kicker">
           <a href="/guides/" class="sabg-kicker-link">GUIDES</a>
-          <span class="sabg-kicker-sep">/</span>
+          <span class="sabg-kicker-sep" aria-hidden="true">/</span>
           <span>{guide.kicker}</span>
         </div>
         <h1 class="sabg-h1">{guide.title}</h1>
@@ -153,7 +153,9 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-kicker { margin-bottom: 24px; }
   .sabg-kicker-link { color: rgba(238, 241, 236, 0.55); text-decoration: none; }
   .sabg-kicker-link:hover { color: #EEF1EC; }
-  .sabg-kicker-sep { color: rgba(238, 241, 236, 0.3); }
+  /* Decorative divider, not a breadcrumb step: hidden from assistive tech
+     rather than read out as "slash". Raised off 0.3, which measured 2.49:1. */
+  .sabg-kicker-sep { color: rgba(238, 241, 236, 0.5); }
   .sabg-h1 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(38px, 5.5vw, 62px); line-height: 1.05; letter-spacing: -0.015em;
