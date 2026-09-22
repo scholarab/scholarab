@@ -148,11 +148,22 @@ const isActive = (href: string) =>
               {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count}</span>}
             </a>
             {MENUS[n.href] && (
-              /* Desktop: opens on hover (pointer devices) or when focus enters
-                 the item, so a keyboard user tabs from the link straight into
-                 it, and the link itself still navigates. Phones: the sheet
-                 swaps the link list for this panel instead of navigating. */
-              <div class="sabh-menu" role="group" aria-label={MENUS[n.href]!.label}>
+              /* Desktop keyboard: one stop, not twenty. The panel's links are
+                 out of the tab order until this button opens it, so Tab walks
+                 Scholarships, this toggle, Programs. Invisible until focused,
+                 so the pointer look is unchanged. Hidden in the phone sheet,
+                 where tapping the row opens the panel instead. */
+              <button type="button" class="sabh-menu-toggle" data-sabh-toggle
+                aria-expanded="false" aria-controls={`sabh-menu-${n.label.toLowerCase()}`}
+                aria-label={`Show ${n.label} menu`}>
+                <svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            )}
+            {MENUS[n.href] && (
+              /* Desktop: opens on hover (pointer devices) or from the toggle
+                 above (keyboard). Phones: the sheet swaps the link list for
+                 this panel instead of navigating. */
+              <div class="sabh-menu" id={`sabh-menu-${n.label.toLowerCase()}`} role="group" aria-label={MENUS[n.href]!.label}>
                 <button type="button" class="sabh-sub-back" data-sabh-back>
                   <span aria-hidden="true">←</span> Back
                 </button>
@@ -256,7 +267,7 @@ const isActive = (href: string) =>
     opacity: 0; visibility: hidden; transform: translateY(-6px);
     transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
   }
-  .sabh-has-menu:focus-within .sabh-menu { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .sabh-has-menu[data-menu-open] .sabh-menu { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
   /* Hover opens only where hover is real. On a touch screen wider than 900px
      a first tap would otherwise open the panel instead of following the link. */
   @media (hover: hover) {
@@ -294,7 +305,7 @@ const isActive = (href: string) =>
     background-size: cover; background-position: center;
     transition: transform 0.4s ease;
   }
-  .sabh-has-menu:focus-within .sabh-tile-photo::after {
+  .sabh-has-menu[data-menu-open] .sabh-tile-photo::after {
     background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
   }
   @media (hover: hover) {
@@ -344,6 +355,17 @@ const isActive = (href: string) =>
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
   .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count, .sabh-sub-back { display: none; }
+  /* Clipped to nothing until it has keyboard focus, then a small chevron
+     beside its link. Never shown to the pointer, which has hover. */
+  .sabh-menu-toggle {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%);
+    padding: 0; border: 0; background: transparent; color: rgba(238, 241, 236, 0.78); cursor: pointer;
+  }
+  .sabh-menu-toggle:focus-visible, .sabh-has-menu[data-menu-open] .sabh-menu-toggle:focus {
+    position: static; width: 24px; height: 24px; overflow: visible; clip-path: none;
+    display: inline-flex; align-items: center; justify-content: center; border-radius: 6px;
+  }
+  .sabh-has-menu[data-menu-open] .sabh-menu-toggle svg { transform: rotate(180deg); }
   /* The right-hand column, balancing the logo: the same three destinations
      the footer carries, as quiet glyphs in the links' colour. */
   /* :global on the children: the email link is injected with set:html (for
@@ -390,6 +412,7 @@ const isActive = (href: string) =>
        panel the desktop dropdown shows (Ilia, 2026-09-15): photo tiles two
        across, the topic list under them, and a Back button above. */
     .sabh-menu { display: none; }
+    .sabh-menu-toggle, .sabh-menu-toggle:focus-visible { display: none; }
     .sabh-item { display: block; }
     .sabh[data-sub] .sabh-item:not([data-sub-open]),
     .sabh[data-sub] [data-sub-open] > .sabh-link,
@@ -525,6 +548,14 @@ const isActive = (href: string) =>
     if (restoreFocus) burger?.focus();
   }
 
+  function setDropdown(item: HTMLElement, open: boolean) {
+    item.toggleAttribute('data-menu-open', open);
+    const toggle = item.querySelector<HTMLElement>('[data-sabh-toggle]');
+    toggle?.setAttribute('aria-expanded', String(open));
+    const label = item.querySelector('.sabh-link-label')?.textContent ?? '';
+    toggle?.setAttribute('aria-label', `${open ? 'Hide' : 'Show'} ${label} menu`);
+  }
+
   function initSabHeader() {
     header = document.querySelector<HTMLElement>('[data-sab-header]');
     burger = document.getElementById('sabh-burger');
@@ -533,6 +564,17 @@ const isActive = (href: string) =>
     header.dataset.init = 'true';
 
     burger.addEventListener('click', () => (isOpen() ? closeMenu({ restoreFocus: true }) : openMenu()));
+
+    // Desktop dropdown toggles. Focus leaving the item closes its panel, so a
+    // Tab past the last link, or a click elsewhere, never leaves it hanging.
+    header.querySelectorAll<HTMLElement>('.sabh-has-menu').forEach(item => {
+      item.querySelector('[data-sabh-toggle]')?.addEventListener('click', () => {
+        setDropdown(item, !item.hasAttribute('data-menu-open'));
+      });
+      item.addEventListener('focusout', e => {
+        if (!item.contains(e.relatedTarget as Node | null)) setDropdown(item, false);
+      });
+    });
 
     // Tapping a destination closes the sheet. The ClientRouter swaps the page
     // without a reload, so nothing else would.
@@ -561,12 +603,14 @@ const isActive = (href: string) =>
       closeSub();
       return;
     }
-    // Escape inside the Scholarships dropdown closes it: the panel is held
-    // open by focus, so dropping focus is what closes it. Focus goes back to
-    // the Scholarships link's item, blurred, so the next Tab resumes there.
+    // Escape inside a desktop dropdown closes it and hands focus back to
+    // the toggle that opened it, so the next Tab resumes from there.
     if (e.key === 'Escape') {
-      const active = document.activeElement as HTMLElement | null;
-      if (active?.closest('.sabh-has-menu')) active.blur();
+      const item = (document.activeElement as HTMLElement | null)?.closest<HTMLElement>('.sabh-has-menu[data-menu-open]');
+      if (item) {
+        setDropdown(item, false);
+        item.querySelector<HTMLElement>('[data-sabh-toggle]')?.focus();
+      }
     }
     if (!isOpen() || !sheet || !burger) return;
     if (e.key === 'Escape') {

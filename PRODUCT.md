@@ -27,7 +27,8 @@ high school students, so a student can find what they qualify for and apply
 before the deadline. Success is a student applying to an award they would not
 otherwise have found.
 
-Currently 1,134 scholarships and 129 research programs.
+As of 2026-09-22 the site lists 1,416 scholarships and 123 research programs
+(123 of the 129 program records are listed).
 
 ## Positioning
 
@@ -54,8 +55,9 @@ No ads, no account, no paywall, no email required to browse.
 ## Capabilities and Constraints
 
 - Directories for scholarships and research programs, with facet hubs by city,
-  scope, topic, field and format; detail pages per listing; a three-question
-  match quiz at /match; saved listings; deadline reminders by email; guides;
+  scope, topic, field and format; detail pages per listing; a match quiz at
+  /match (six to eight questions, depending on the answers); saved listings;
+  deadline reminders by email; guides;
   an admin area.
 - Status vocabulary is product truth: a listing is open now, opening later (with
   a real open date, never invented), or closed. `active: false` does not mean

@@ -1334,7 +1334,6 @@ html:not(.js) .sabm-ph { display: none; }
 .sabs-toggle-btn:hover { opacity: 0.85; }
 .sabs-toggle-btn.on { background: var(--text-primary); color: var(--paper); }
 
-.sabs-empty-count { font-size: 13px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.68); margin-bottom: 18px; }
 
 .sabs-section-head {
   display: flex; align-items: center; gap: 10px; padding: 14px 0;
