@@ -127,24 +127,43 @@ body:has(.sg) {
 
 .sg .sabl-railed { position: relative; }
 
+/* The spine. Above 1180px it is the seam between the legend and the field, a
+   real structural line rather than a decoration over the content. Below that
+   there is no legend column to seam, so it becomes the sheet's bound edge,
+   which is where a survey sheet carries its heavy rule anyway. Either way the
+   sheet has a spine at every width, including the phone this world was
+   decided for. */
+.sg .sabl-railed::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -10px;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    var(--sg-line) calc(var(--sg-unit) * 2),
+    var(--sg-line) calc(100% - var(--sg-unit) * 4),
+    transparent 100%
+  );
+  opacity: 0.45;
+  pointer-events: none;
+}
+
 @media (min-width: 1180px) {
-  .sg .sabl-railed::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: calc(var(--sg-rail-w, 228px) + (var(--sg-gap, 36px) / 2));
-    width: 2px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0,
-      var(--sg-line) calc(var(--sg-unit) * 2),
-      var(--sg-line) calc(100% - var(--sg-unit) * 4),
-      transparent 100%
-    );
-    opacity: 0.45;
-    pointer-events: none;
-  }
+  .sg .sabl-railed::before { left: calc(var(--sg-rail-w, 228px) + (var(--sg-gap, 36px) / 2)); }
+}
+
+/* Raise 2, authored rather than inherited: hiding the legend is one control
+   that restructures the whole field. The spine leaves the seam it registered
+   to and returns to the sheet's edge, and the field spends the reclaimed
+   column on the two things the reader kept: the description and the rail they
+   read the deadline against. */
+@media (min-width: 1180px) {
+  html[data-lean] .sg .sabl-railed::before { left: -10px; }
+  html[data-lean] .sg .sabl-card { grid-template-columns: minmax(0, 1fr) 150px 300px 112px; }
+  html[data-lean] .sg .sabl-blurb { max-width: 84ch; }
 }
 
 /* ── The legend block ──────────────────────────────────────────────────────
@@ -265,14 +284,32 @@ html.js .sg .sabl-filters-btn[aria-expanded='true'] {
 }
 .sg .sabl-group-toggle { color: var(--sg-dim); font-family: 'B612 Mono', monospace; font-size: 10px; letter-spacing: 0.12em; }
 
+/* One stroke across the whole icon set. The carets predate this world and were
+   44% heavier than the marks drawn for it. */
+.sg .sabl-group-caret path,
+.sg .sabl-lean-caret path { stroke-width: 1.5; }
+
 /* ── Entries ───────────────────────────────────────────────────────────────
    No cards. Each award is a parcel on the sheet: ruled top and bottom, its
    figures in a fixed column, its deadline measured against the graticule that
    every other entry is measured against. */
 
+/* In the margins the sheet is ruled both ways. In the field it is not, and
+   that is the survey's own structure rather than a concession: a township plat
+   keeps regular range verticals and lets parcels take whatever depth the land
+   gives them. The horizontal rule of this grid IS the parcel boundary, drawn
+   by each entry's own border, so there is no horizontal line left for a row to
+   miss. Entry depth follows the title, which wraps to one line or two.
+   The field takes the sheet colour so the margin's horizontal rules, which run
+   on a different origin, do not show through behind the parcels. */
 .sg .sabl-grid {
   display: block;
   padding-top: 0;
+  background-color: var(--sg-field);
+  background-image:
+    repeating-linear-gradient(to right, var(--sg-rule-6) 0 1px, transparent 1px calc(var(--sg-unit) * 6)),
+    repeating-linear-gradient(to right, var(--sg-rule) 0 1px, transparent 1px var(--sg-unit));
+  background-position: 0 0;
 }
 
 /* One measured row, four columns, the same four on every entry: what it is,
@@ -290,10 +327,24 @@ html.js .sg .sabl-filters-btn[aria-expanded='true'] {
   border-top: 1px solid var(--sg-hair);
   border-radius: 0;
   box-shadow: none;
-  padding: 14px 0 12px;
+  /* Three modules exactly. The rule under each entry is the grid's own line. */
+  min-height: calc(var(--sg-unit) * 3);
+  padding: 13px 0 12px;
+  position: relative;
   transition: background-color 0.12s ease;
 }
-.sg .sabl-card:hover { background: var(--sg-plate); }
+.sg .sabl-card:hover { background-color: var(--sg-plate); }
+/* FIRST VIEWPORT says the whole entry is the target, and the hover fill was
+   offering a click the row would not take. The title's own anchor is stretched
+   over the parcel, so the target is the row without a second link or any
+   script; the controls sit above it and keep their own hit areas. */
+.sg .sabl-name::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.sg .sabl-card-actions { position: relative; z-index: 1; }
 .sg .sabl-card:last-of-type { border-bottom: 1px solid var(--sg-hair); }
 
 /* .sabl-card-top and .sabl-card-foot are wrappers the incumbent world needs
@@ -396,13 +447,14 @@ html.js .sg .sabl-filters-btn[aria-expanded='true'] {
   height: 14px;
   margin-top: 5px;
   align-self: center;
-}
-.sg .sg-scale::before {
-  content: '';
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 1px;
-  background: var(--sg-hair);
+  /* The rail itself: a baseline and a post at each end, drawn as the box's own
+     borders rather than a stacked pseudo-element. Without the posts the rail
+     had no visible extent, so a tick's position said nothing about what it was
+     measured against. */
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--sg-hair);
+  border-left: 1px solid var(--sg-hair);
+  border-right: 1px solid var(--sg-hair);
 }
 .sg .sg-scale::after {
   content: '';
@@ -425,10 +477,23 @@ html.js .sg .sabl-filters-btn[aria-expanded='true'] {
 /* The survey's three states, drawn as the survey draws them. */
 .sg .sabl-card[data-sg-mark='pending'] .sg-tick { background: var(--sg-dim); height: 7px; }
 .sg .sabl-card[data-sg-mark='undated'] .sg-tick { display: none; }
-.sg .sabl-card[data-sg-mark='cancelled'] { opacity: 0.55; }
-.sg .sabl-card[data-sg-mark='cancelled'] .sabl-amount { color: var(--sg-dim); }
+/* A cancelled parcel is struck on the sheet, not faded out. `opacity: 0.55`
+   over the whole entry composited its description to 3.29:1 and its date to
+   2.50:1, under the AA bar PRODUCT.md sets, and a wash is the generic web way
+   to say "less important" rather than anything a survey does. The parcel is
+   cross-ruled and its text steps down to the annotation ink, which still
+   measures 5.37:1. */
+.sg .sabl-card[data-sg-mark='cancelled'] {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--sg-hair) 0 1px,
+    transparent 1px 11px
+  );
+}
+.sg .sabl-card[data-sg-mark='cancelled'] .sabl-name,
+.sg .sabl-card[data-sg-mark='cancelled'] .sabl-amount,
+.sg .sabl-card[data-sg-mark='cancelled'] .sabl-blurb { color: var(--sg-dim); }
 .sg .sabl-card[data-sg-mark='cancelled'] .sg-tick { display: none; }
-.sg .sabl-card[data-sg-mark='cancelled'] .sg-scale::after { opacity: 0.35; }
 /* A cancelled parcel keeps its lines on the sheet: the name is struck, not
    removed, so the page shows its own upkeep instead of silently shrinking. */
 .sg .sabl-card[data-sg-mark='cancelled'] .sabl-name {

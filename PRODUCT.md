@@ -66,7 +66,10 @@ No ads, no account, no paywall, no email required to browse.
 - React runs only on /match and /admin. Everything else is server-rendered HTML
   with small vanilla controllers; new work extends those rather than adding
   islands.
-- One fixed light palette. There is no theme system and must not be one.
+- One fixed palette per surface, chosen from that surface's use scene and never
+  from a toggle. Light everywhere except the scholarship hubs, which are the
+  survey sheet and are dark because they are read on a phone in the evening.
+  There is no theme system and must not be one.
 - Analytics are consent-gated Google Analytics plus Cloudflare Web Analytics and
   first-party events, all zero-PII. The consent banner is required and stays.
 - Dual licensed: code AGPL-3.0, data CC BY-SA 4.0, name reserved.
