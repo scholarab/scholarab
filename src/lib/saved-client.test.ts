@@ -114,10 +114,13 @@ describe('initSaved', () => {
     expect(chips['1']).toBe('26 DAYS LEFT')
     expect(chips['2']).toBe('CLOSED')
     expect(chips['7']).toBe('71 DAYS LEFT')
-    // The word is recomputed from the clock; the ↗ marking it as a link that
-    // leaves the site is markup and must survive that rewrite.
-    const applyTexts = $$('[data-sv-apply]').map(a => a.textContent)
-    expect(applyTexts).toEqual(['Apply↗', 'Visit↗'])
+    // The word is recomputed from the clock; the mark saying the link leaves
+    // the site is markup and must survive that rewrite. It is a drawn SVG
+    // rather than a ↗ character now, so this asserts the element survives,
+    // not just that a glyph is still in the text.
+    const applyLinks = $$('[data-sv-apply]')
+    expect(applyLinks.map(a => a.textContent!.trim())).toEqual(['Apply', 'Visit'])
+    expect(applyLinks.map(a => !!a.querySelector('svg'))).toEqual([true, true])
     expect($$('[data-sv-apply]')[1]!.getAttribute('aria-label')).toBe(
       "Visit Closed Award on the sponsor's site (opens in a new tab)",
     )

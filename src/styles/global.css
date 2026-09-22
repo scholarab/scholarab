@@ -768,7 +768,15 @@ html:not(.js) .sabl-lean { display: none; }
    The column count grows with the window now that pages are full width: 3 at
    1440, 4 at 1920, 6 at 2560. A 380px floor keeps those counts dividing the
    24-card first page evenly. min() keeps the zero floor below 3 columns. */
-.sabl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(380px, (100% - 36px) / 3), 1fr)); gap: 18px; padding-top: 16px; }
+/* Rows, not a card grid (2026-09-21). The card model spent a whole screen on
+   three listings: a reader comparing a shortlist had to scroll past 20 of them
+   to see 20, and the amount and the deadline sat in a different place on each
+   one. As rows they sit in fixed columns that can be read straight down
+   without reading a single title, and the Calgary hub went from 6,136px to
+   3,570px. The trade, stated because it reverses a call from 2026-09-15: no
+   three-card floor, no card width to tune, and no hard offset shadow on hover,
+   because a row is not a card. */
+.sabl-grid { display: block; padding-top: 10px; }
 /* Status sections. Full-width grid items, not wrappers, so the cards either
    side stay in one grid and keep their column rhythm.
    The rule under the heading belongs to .sabl-group-name, so it is as long as
@@ -822,28 +830,49 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-group[aria-expanded='false'] .sabl-group-caret { transform: rotate(-90deg); }
 @media (prefers-reduced-motion: reduce) { .sabl-group-caret { transition: none; } }
 .sabl-card {
-  display: flex; flex-direction: column; background: #FFFFFF;
-  border: 1.5px solid rgba(20,25,21,0.85); border-radius: 18px; padding: 30px 28px 26px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 152px 148px 116px;
+  column-gap: 24px;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(20,25,21,0.14);
+  border-radius: 0;
+  padding: 16px 12px 15px;
+  transition: background-color 0.14s ease;
 }
-.sabl-card:hover { transform: translate(-3px, -3px); box-shadow: 5px 5px 0 var(--green-shadow); }
+.sabl-card:hover { background-color: rgba(20,25,21,0.04); }
+.sabl-card:last-of-type { border-bottom: 1px solid rgba(20,25,21,0.14); }
+
+/* Four cells, each with its own stack. The deadline's two lines used to be
+   separate grid items, which forced a matching empty row into the title column
+   and opened a gap between a listing's name and its description. */
+.sabl-row-main { grid-column: 1; min-width: 0; }
+.sabl-amount { grid-column: 2; align-self: center; justify-self: end; text-align: right; }
+.sabl-card-top-left { grid-column: 2; align-self: center; justify-self: end; }
+.sabl-row-when {
+  grid-column: 3; align-self: center; justify-self: end;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+}
+.sabl-card-actions { grid-column: 4; align-self: center; justify-self: end; }
 /* Wraps rather than collides: both chips are nowrap, so in a narrow card (the
    railed hubs put three cards in 916px) a long tag like MATH & PHYSICS used to
    run straight under the day chip. `margin-left: auto` keeps the day chip on
    the right whether the row holds one line or two. */
-.sabl-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; gap: 8px; flex-wrap: wrap; }
-.sabl-card-top > .sabl-days { margin-left: auto; }
+.sabl-card-top > .sabl-days { margin-left: 0; }
 /* Programs carry a $ PAID badge beside the tag; the right slot stays reserved
    for the day chip so program and scholarship cards line up. */
 .sabl-card-top-left { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
+/* Above is the programs' PAID badge; the category label that used to sit
+   beside it was an eyebrow over the listing's own heading and is gone. */
 .sabl-tag {
   font-family: var(--font-label); font-size: 12px; letter-spacing: 0.05em;
   padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(20,25,21,0.25); color: rgba(20, 25, 21, 0.65);
   white-space: nowrap;
 }
 .sabl-days {
-  font-family: var(--font-label); font-size: 12px; font-weight: 500;
-  padding: 6px 12px; border-radius: 100px; white-space: nowrap;
+  font-family: var(--font-label); font-size: 11.5px; font-weight: 500;
+  padding: 4px 10px; border-radius: 100px; white-space: nowrap;
   /* Three tiers, not two. Every countdown used to wear the same orange, so a
      grid where most deadlines are months away was uniformly loud and the one
      closing this week did not stand out. Past six weeks the chip is quiet ink;
@@ -854,40 +883,44 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-days.soon { background: rgba(160,73,26,0.12); color: var(--rust); }
 .sabl-days.urgent { background: var(--rust); color: var(--bg-page); }
 .sabl-days.neutral { background: transparent; border: 1px solid rgba(20,25,21,0.25); color: rgba(20, 25, 21, 0.65); }
-.sabl-name { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; line-height: 1.3; color: var(--text-primary); text-decoration: none; display: block; }
+.sabl-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; line-height: 1.3; color: var(--text-primary); text-decoration: none; display: block; }
 .sabl-name:hover { color: var(--green); }
 /* Card titles are headings so a screen reader can walk a directory card by
    card; the heading itself adds nothing visual. Tight leading 1.25 became
    1.3: two-line award names were touching descender to ascender. */
 .sabl-name-h { margin: 0; font: inherit; }
-.sabl-amount { font-family: var(--font-display); font-size: 40px; line-height: 1.1; margin: 14px 0 16px; color: var(--green); }
+/* A row's figure column, not a card's headline: it sits beside the title at
+   the same place on every row so the column reads down. */
+.sabl-amount { font-family: var(--font-display); font-size: 26px; line-height: 1.15; margin: 0; color: var(--green); }
 /* Clamped at three lines. Program descriptions are free text and run from one
    line to eight, and because the cards share a grid row, the longest one in a
    row set the height for all three; a single verbose listing opened a band of
    dead space across the page. The full text is one click away on the detail
    page, which is where it belongs. */
 .sabl-blurb {
-  font-size: 15px; line-height: 1.55; color: rgba(20, 25, 21, 0.65); flex: 1;
-  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3;
+  font-size: 13.5px; line-height: 1.5; color: rgba(20, 25, 21, 0.68); margin-top: 3px;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2;
   overflow: hidden;
 }
-.sabl-card-foot {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(20,25,21,0.12); gap: 10px;
-}
-.sabl-due { font-family: var(--font-label); font-size: 12.5px; color: rgba(20, 25, 21, 0.85); }
-.sabl-card-actions { display: flex; align-items: center; gap: 14px; }
+.sabl-due { font-family: var(--font-label); font-size: 12px; color: rgba(20, 25, 21, 0.68); margin-top: 4px; }
+.sabl-card-actions { display: flex; align-items: center; gap: 12px; }
 .sabl-save {
   font-family: var(--font-body); font-size: 15px; background: none;
   border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
-  width: 34px; height: 34px; cursor: pointer; color: rgba(20, 25, 21, 0.68);
+  width: 30px; height: 30px; cursor: pointer; color: rgba(20, 25, 21, 0.68);
+  display: inline-grid; place-items: center;
   display: inline-flex; align-items: center; justify-content: center;
 }
 .sabl-save:hover { border-color: var(--text-primary); }
 .sabl-save.on { color: var(--green); background: rgba(47,211,160,0.15); }
+/* The bookmark is drawn, not a ☆ character standing in for an icon set. Saved
+   fills it; unsaved leaves it open. */
+.sabl-save svg { fill: none; }
+.sabl-save.on svg { fill: currentColor; }
 .sabl-apply {
   font-size: 14px; font-weight: 700; color: var(--text-primary); text-decoration: none;
   border-bottom: 2px solid var(--brand); padding-bottom: 2px; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 5px;
 }
 .sabl-apply:hover { color: var(--green); }
 
@@ -961,6 +994,31 @@ html:not(.js) .sabl-more { display: none; }
    was showing five 301px ones. Three fit at 900px (272px each, wider than the
    railed hubs give at 1180), so the break waits until 899px, and two hold
    until the single column takes over at 640px. */
+/* The row folds rather than shrinking. Below 900px the four columns cannot
+   hold their content, so the figure and the deadline come out from beside the
+   title and sit under it, where they are still the same two things in the same
+   two places on every row. */
+@media (max-width: 899px) {
+  .sabl-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 14px;
+    align-items: center;
+    padding: 14px 0 13px;
+  }
+  .sabl-row-main { grid-column: 1 / -1; grid-row: 1; }
+  .sabl-amount,
+  .sabl-card-top-left {
+    grid-column: 1; grid-row: 2;
+    justify-self: start; text-align: left; margin-top: 8px;
+  }
+  .sabl-card-actions { grid-column: 2; grid-row: 2; margin-top: 8px; }
+  .sabl-row-when {
+    grid-column: 1 / -1; grid-row: 3;
+    flex-direction: row; align-items: center; gap: 10px;
+    justify-self: start; margin-top: 8px;
+  }
+}
+
 @media (max-width: 899px) {
   .sabl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

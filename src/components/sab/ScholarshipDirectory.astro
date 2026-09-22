@@ -7,6 +7,7 @@ import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list
 import { generateSlug } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../../lib/facets.ts';
+import { BOOKMARK, EXT } from '../../lib/icons.ts';
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -329,18 +330,22 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           data-concluded={s.concluded ? '' : undefined}
           data-search={scholarshipSearchBlob(s)}
         >
-          <div class="sabl-card-top">
-            <span class="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
-            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
+          {/* Four cells, in the order the row reads: what it is, what it pays,
+              when it closes, what you can do. No category label above the
+              heading; it was an eyebrow over a title that already says what
+              the award is, and TRACK filters the same field with a count. */}
+          <div class="sabl-row-main">
+            <h2 class="sabl-name-h"><a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a></h2>
+            {s.audience && <div class="sabl-blurb">{s.audience}</div>}
           </div>
-          <h2 class="sabl-name-h"><a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a></h2>
           <div class="sabl-amount">{s.amount}</div>
-          {s.audience && <div class="sabl-blurb">{s.audience}</div>}
-          <div class="sabl-card-foot">
+          <div class="sabl-row-when">
+            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
             <span class="sabl-due">
               {s.deadline ? `DUE ${shortDate(s.deadline)}` : 'NO FIXED DEADLINE'}
             </span>
-            <div class="sabl-card-actions">
+          </div>
+          <div class="sabl-card-actions">
               <button
                 type="button"
                 class="sabl-save"
@@ -349,7 +354,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
                 data-name={s.title}
                 aria-label={`Save ${s.title}`}
                 aria-pressed="false"
-              >☆</button>
+              ><Fragment set:html={BOOKMARK} /></button>
               {s.url && (
                 <a
                   href={s.url}
@@ -360,9 +365,8 @@ const soonLine = totalOpen > 0 && totalSoon > 0
                   data-track="apply"
                   data-item-id={s.id}
                   aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
-                ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span><span class="sabl-ext" aria-hidden="true">↗</span></a>
-              )}
-            </div>
+                ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span><Fragment set:html={EXT} /></a>
+            )}
           </div>
         </div>
         </>

@@ -152,8 +152,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   let shown = pageSize;
 
   function setSaveState(btn: HTMLElement, saved: boolean) {
+    // The drawn bookmark carries the state through `.on` (CSS fills it), so
+    // there is no glyph to swap. A button that has no icon still gets the two
+    // characters, which is what the admin list and any future caller use.
     btn.classList.toggle('on', saved);
-    btn.textContent = saved ? '★' : '☆';
+    if (!btn.querySelector('svg')) btn.textContent = saved ? '★' : '☆';
     btn.setAttribute('aria-pressed', String(saved));
     btn.setAttribute('aria-label', config.saveLabel(btn.dataset.name ?? '', saved));
   }

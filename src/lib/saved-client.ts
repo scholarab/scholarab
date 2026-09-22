@@ -4,6 +4,7 @@ import { showToast, getToday, prefersReducedMotion } from './utils.ts';
 import { getScholarshipStatus } from './list-core.ts';
 import { sendEvent } from './events.ts';
 import { downloadICS } from './ics.ts';
+import { BOOKMARK, ARROW, EXT } from './icons.ts';
 import type { ICSScholarship, ICSProgram } from './ics.ts';
 import { emailOff } from './email-off';
 
@@ -66,20 +67,21 @@ function savedCard(s: SavedItem): string {
       ? `DUE ${savedShortDate(s.deadline).toUpperCase()}` : s.deadline === 'Ongoing' ? 'ROLLING INTAKE' : 'DEADLINE TBA');
   return `<div class="h-full" data-sv-wrap data-type="${s.type}" data-id="${s.id}">
     <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${sh ? attr('open-date', s.openDate) + attr('inactive', s.active === false ? '' : undefined) + attr('concluded', s.concluded ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
-      <div class="sabl-card-top">
-        <span class="sabl-mono sabl-tag">${esc((s.category ?? (sh ? 'GENERAL' : 'PROGRAM')).toUpperCase())}</span>
-        <span data-sv-chip></span>
+      <div class="sabl-row-main">
+        <h3 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
+        ${sh
+          ? (s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : '')
+          : `${s.provider ? `<div class="sabl-org">${esc(s.provider.toUpperCase())}</div>` : ''}${s.description ? `<div class="sabl-blurb">${emailOff(s.description)}</div>` : ''}`}
       </div>
-      <h3 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
-      ${sh ? `<div class="sabl-amount">${esc(s.amount ?? '')}</div>${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}`
-        : `${s.provider ? `<div class="sabl-org" style="margin:10px 0 0">${esc(s.provider.toUpperCase())}</div>` : ''}${s.description ? `<div class="sabl-blurb" style="margin-top:14px">${emailOff(s.description)}</div>` : ''}`}
-      <div class="sabl-card-foot">
+      ${sh ? `<div class="sabl-amount">${esc(s.amount ?? '')}</div>` : '<span class="sabl-card-top-left"></span>'}
+      <div class="sabl-row-when">
+        <span data-sv-chip></span>
         <span class="sabl-due">${due}</span>
-        <div class="sabl-card-actions">
-          <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">★</button>
-          ${sh ? (s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-sv-apply><span data-apply-label></span><span class="sabl-ext" aria-hidden="true">↗</span></a>` : '')
-            : `<a href="${esc(s.href)}" class="sabl-apply">Details →</a>`}
-        </div>
+      </div>
+      <div class="sabl-card-actions">
+        <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">${BOOKMARK}</button>
+        ${sh ? (s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-sv-apply><span data-apply-label></span>${EXT}</a>` : '')
+          : `<a href="${esc(s.href)}" class="sabl-apply">Details${ARROW}</a>`}
       </div>
     </div>
   </div>`;
@@ -278,7 +280,7 @@ export function initSaved() {
           + `<div class="sabs-cal-name">${esc(item.title)}</div>`
           + `<div class="sabl-mono sabs-cal-kind">${item.type === 'scholarship' ? `SCHOLARSHIP${item.amount ? ' · ' + esc(item.amount.toUpperCase()) : ''}` : 'RESEARCH PROGRAM'}</div>`
           + '</div>'
-          + `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" style="font-size:13.5px">Apply<span class="sabl-ext" aria-hidden="true">↗</span></a>`
+          + `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" style="font-size:13.5px">Apply${EXT}</a>`
           + '</div>').join('')
         + '</div>'
       : '<div class="sabl-mono sabs-cal-none">No deadlines this month.</div>';

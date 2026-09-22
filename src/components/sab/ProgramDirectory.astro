@@ -8,6 +8,7 @@ import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts
 import { generateSlug } from '../../lib/utils.ts';
 import { emailOff } from '../../lib/email-off';
 import { PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets.ts';
+import { BOOKMARK, ARROW } from '../../lib/icons.ts';
 
 interface Props {
   items: ProgramWithMeta[];
@@ -272,28 +273,31 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
           data-deadline={p.deadline ?? undefined}
           data-search={programSearchBlob(p)}
         >
-          <div class="sabl-card-top">
-            <span class="sabl-card-top-left">
-              <span class="sabl-mono sabl-tag">{(p.category ?? 'PROGRAM').toUpperCase()}</span>
-              {p.paid && <span class="sabl-mono sabl-paid">$ PAID</span>}
-            </span>
-            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
+          {/* Same four cells as a scholarship row. The category label above the
+              heading is gone; the PAID badge stays, because nothing else on
+              the row says it. */}
+          <div class="sabl-row-main">
+            <h2 class="sabl-name-h"><a href={`/programs/${slug}/`} class="sabl-name">{p.name}</a></h2>
+            {p.provider && <div class="sabl-org">{p.provider}</div>}
+            {meta.length > 0 && (
+              <div class="sabl-meta-row">
+                {meta.map(m => <span class="sabl-meta" title={m}>{m}</span>)}
+              </div>
+            )}
+            {p.description && <div class="sabl-blurb" set:html={emailOff(p.description)} />}
           </div>
-          <h2 class="sabl-name-h"><a href={`/programs/${slug}/`} class="sabl-name">{p.name}</a></h2>
-          {p.provider && <div class="sabl-org">{p.provider}</div>}
-          {meta.length > 0 && (
-            <div class="sabl-meta-row">
-              {meta.map(m => <span class="sabl-meta" title={m}>{m}</span>)}
-            </div>
-          )}
-          {p.description && <div class="sabl-blurb" set:html={emailOff(p.description)} />}
-          <div class="sabl-card-foot">
+          <span class="sabl-card-top-left">
+            {p.paid && <span class="sabl-mono sabl-paid">$ PAID</span>}
+          </span>
+          <div class="sabl-row-when">
+            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
             <span class="sabl-due">
               {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
                 ? `DUE ${shortDate(p.deadline)}`
                 : 'NO FIXED DEADLINE'}
             </span>
-            <div class="sabl-card-actions">
+          </div>
+          <div class="sabl-card-actions">
               <button
                 type="button"
                 class="sabl-save"
@@ -302,9 +306,8 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
                 data-name={p.name}
                 aria-label={`Save ${p.name}`}
                 aria-pressed="false"
-              >☆</button>
-              <a href={`/programs/${slug}/`} class="sabl-apply">Details →</a>
-            </div>
+              ><Fragment set:html={BOOKMARK} /></button>
+              <a href={`/programs/${slug}/`} class="sabl-apply">Details<Fragment set:html={ARROW} /></a>
           </div>
         </div>
         </>
