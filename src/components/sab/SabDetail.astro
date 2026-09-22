@@ -482,7 +482,7 @@ const chip =
   import { todayDate } from '../../lib/calendar';
   import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
-  import { showToast, showConfetti } from '../../lib/utils';
+  import { showToast, showConfetti, prefersReducedMotion } from '../../lib/utils';
   import { placeInList, readListContext } from '../../lib/list-context.ts';
 
   /** Point the ‹ › arrows at the list the reader came from, or leave them off. */
@@ -537,7 +537,7 @@ const chip =
     if (save) {
       const id = parseInt(save.dataset.bookmarkId!);
       const type = save.dataset.bookmarkType as 'scholarship' | 'program';
-      save.animate(
+      if (!prefersReducedMotion()) save.animate(
         [{ transform: 'scale(1)' }, { transform: 'scale(1.4)' }, { transform: 'scale(0.9)' }, { transform: 'scale(1.05)' }, { transform: 'scale(1)' }],
         { duration: 380, easing: 'ease-out' }
       );

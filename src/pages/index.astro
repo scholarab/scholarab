@@ -581,6 +581,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
      bright frames (snow, sky) and is invisible over dark ones. */
   .sab-hero .sab-h1 { text-shadow: 0 2px 30px rgba(5,10,8,0.45), 0 1px 3px rgba(5,10,8,0.3); }
   .sab-hero .sab-kicker, .sab-hero-copy p, .sab-stats { text-shadow: 0 1px 14px rgba(5,10,8,0.75), 0 1px 2px rgba(5,10,8,0.6); }
+  /* The kicker is mint, nearly as light as the sky it crosses on a phone, so
+     it gets a tight halo as well: the wide one alone measured 3.2:1 at its
+     worst glyph pixels over the bright poster frame. */
+  .sab-hero .sab-kicker { text-shadow: 0 0 6px rgba(5,10,8,0.85), 0 1px 14px rgba(5,10,8,0.75), 0 1px 2px rgba(5,10,8,0.6); }
   /* SpaceX-style scrim: the picture stays close to full strength and only
      the places text sits are darkened. A light veil over everything, a band
      under the nav, and a fall-off to near black behind the copy, buttons and

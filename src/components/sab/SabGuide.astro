@@ -184,6 +184,12 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-prose th { font-family: var(--font-label); font-weight: 500; font-size: 12px; letter-spacing: 0.05em; text-align: left; color: rgba(20, 25, 21, 0.68); padding: 10px 14px; border-bottom: 2px solid #141915; }
   .sabg-prose td { padding: 12px 14px; border-bottom: 1px solid rgba(20,25,21,0.14); }
   .sabg-prose td:last-child, .sabg-prose th:last-child { text-align: right; }
+  /* At 320px the three columns with 14px sides ran 8px past the screen. */
+  @media (max-width: 420px) {
+    .sabg-prose th, .sabg-prose td { padding-left: 6px; padding-right: 6px; }
+    .sabg-prose th:first-child, .sabg-prose td:first-child { padding-left: 0; }
+    .sabg-prose th:last-child, .sabg-prose td:last-child { padding-right: 0; }
+  }
   .sabg-note {
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 14px;
     padding: 18px 22px; margin: 0 0 18px; font-size: 15.5px;

@@ -163,7 +163,9 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;
     margin: 0; max-width: 900px; text-wrap: balance;
-    animation: sabe-rise 0.7s ease both;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .sabe-h1 { animation: sabe-rise 0.7s ease both; }
   }
   .sabe-h1 em { font-style: italic; color: #2FD3A0; }
   @keyframes sabe-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
