@@ -14,6 +14,7 @@
 
 import { emailOff } from '../../lib/email-off';
 import { BOOKMARK } from '../../lib/icons';
+import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
 
 interface Fact {
   label: string;
@@ -70,7 +71,10 @@ const {
   ctaLabel, url, canRemind, canonical, guideHref, guideTitle,
 } = Astro.props;
 
-const urgent = status === 'active' && typeof daysLeft === 'number' && daysLeft <= 7;
+// The directory's three tiers (list-core), so a listing is the same colour on
+// its own page as in the row that linked to it. This page used to go solid at 7.
+const urgent = status === 'active' && typeof daysLeft === 'number' && daysLeft <= URGENT_DAYS;
+const far = status === 'active' && typeof daysLeft === 'number' && daysLeft > SOON_DAYS;
 
 // Listing prose can carry a provider's own address ("apply to x@y.ca"), so it
 // is bracketed for Cloudflare's obfuscator. See src/lib/email-off.ts.
@@ -85,7 +89,7 @@ const chip =
   : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#A0491A', fg: '#F4F5F1' }
   : typeof daysLeft === 'number'
-    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#A0491A' : 'rgba(160,73,26,0.12)', fg: urgent ? '#F4F5F1' : '#A0491A' }
+    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#A0491A' : far ? 'rgba(20,25,21,0.05)' : 'rgba(160,73,26,0.12)', fg: urgent ? '#F4F5F1' : far ? 'rgba(20,25,21,0.65)' : '#A0491A' }
     : { text: 'OPEN', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' };
 ---
 
@@ -498,6 +502,7 @@ const chip =
   import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
   import { showToast, showConfetti, prefersReducedMotion } from '../../lib/utils';
+  import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
   import { placeInList, readListContext } from '../../lib/list-context.ts';
 
   /** Point the ‹ › arrows at the list the reader came from, or leave them off. */
@@ -652,8 +657,9 @@ const chip =
       // DST change, where ceil overcounts by one (and disagrees with the list chips)
       const days = Math.max(0, Math.round((new Date(deadline + 'T00:00:00').getTime() - todayMs) / 86400000));
       if (days === 0) paint('DUE TODAY', '#A0491A', '#F4F5F1');
-      else if (days <= 7) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#A0491A', '#F4F5F1');
-      else paint(`${days} DAYS LEFT`, 'rgba(160,73,26,0.12)', '#A0491A');
+      else if (days <= URGENT_DAYS) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#A0491A', '#F4F5F1');
+      else if (days <= SOON_DAYS) paint(`${days} DAYS LEFT`, 'rgba(160,73,26,0.12)', '#A0491A');
+      else paint(`${days} DAYS LEFT`, 'rgba(20,25,21,0.05)', 'rgba(20,25,21,0.65)');
     }
   }
 

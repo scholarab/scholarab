@@ -8,7 +8,7 @@ import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 import { programIsListed, scholarshipStatusOf } from '../lib/status';
-import { SCHOLARSHIP_FACETS, facetForCategory } from '../lib/facets';
+import { SCHOLARSHIP_FACETS, facetForCategory, facetItems } from '../lib/facets';
 import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
 
 const scholarships = await loadScholarships();
@@ -88,7 +88,10 @@ const categories = [...categoryCounts.entries()]
 const cityFacets = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region').map(f => ({
   slug: f.slug,
   label: f.label,
-  count: scholarships.filter(s => s.region === f.value).length,
+  // facetItems, not `region ===`: the hub, the header tile and the directory
+  // chip all count awards open to several towns (alsoOpenTo), so this row said
+  // Medicine Hat 20 beside a header tile saying 22 on the same page.
+  count: facetItems(f, scholarships).length,
 }));
 
 // Seed the same grade/city/field answers consumed by the legacy quiz.
@@ -295,6 +298,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 </Layout>
 
 <script>
+  import { URGENT_DAYS, SOON_DAYS } from '../lib/list-core';
   import { todayDate as albertaToday } from '../lib/calendar';
   import { QUIZ_STORAGE_KEY } from '../lib/quiz';
   import { sendEvent } from '../lib/events';
@@ -320,7 +324,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       const chip = row.querySelector('.closing-soon-badge');
       if (chip) {
         chip.textContent = daysLeft === 0 ? 'DUE TODAY' : `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`;
-        chip.classList.toggle('sab-chip-urgent', daysLeft <= 4);
+        // The directory's scale (list-core), so a row is the same colour here
+        // as on the listing it links to. This page used to go solid at 4 days.
+        chip.classList.toggle('sab-chip-urgent', daysLeft <= URGENT_DAYS);
+        chip.classList.toggle('sab-chip-far', daysLeft > SOON_DAYS);
       }
     });
     // Renumber the visible rows so hidden expired entries don't leave gaps
@@ -695,6 +702,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     background: rgba(160,73,26,0.12); color: #A0491A; white-space: nowrap;
   }
   .sab-row-chip.sab-chip-urgent { background: #A0491A; color: #F4F5F1; }
+  .sab-row-chip.sab-chip-far { background: rgba(20,25,21,0.05); color: rgba(20, 25, 21, 0.65); }
 
   /* ── Categories ── */
   .sab-cat-band { background: #E9ECE6; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }

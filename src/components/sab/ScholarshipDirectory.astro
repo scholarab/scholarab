@@ -6,7 +6,7 @@ import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABEL
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
-import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../../lib/facets.ts';
+import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { BOOKMARK, EXT } from '../../lib/icons.ts';
 
@@ -72,10 +72,16 @@ const chipSource = allItems;
 // sat fourth behind three scopes a tenth its size. Counted against the whole
 // corpus rather than the page, so the order is the same on every hub and a
 // reader crossing the row twice finds the chip where they left it.
-const regionChips = SCHOLARSHIP_FACETS
-  .filter(f => f.kind === 'region' && facetItems(f, chipSource).length >= MIN_FACET_ITEMS)
+const regionFacets = SCHOLARSHIP_FACETS
+  .filter(f => f.kind === 'region' && facetItems(f, chipSource).length >= MIN_FACET_ITEMS);
+const regionChips = regionFacets
   .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, chipSource).length }))
   .sort((a, b) => b.count - a.count);
+// Which hubs a row belongs to, by the hubs' own test (facetMatches counts
+// alsoOpenTo, which the client's regionMatches does not), so the client can
+// recount the SCOPE row under the live filters with the hub's own arithmetic.
+const scopesOf = (s: ScholarshipWithMeta) =>
+  hideScopes ? undefined : regionFacets.filter(f => facetMatches(f, s)).map(f => f.slug).join(' ') || undefined;
 
 // The row appears on /scholarships only; see `hideScopes`. There, a scope chip
 // navigates to that scope's hub rather than filtering in place. The hub is the
@@ -253,7 +259,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
         <div class="sabl-chips sabl-chips-wrap">
           <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
           {regionChips.map(c => (
-            <a href={`/scholarships/${c.slug}/`} class="sabl-chip sabl-chip-link">
+            <a href={`/scholarships/${c.slug}/`} class="sabl-chip sabl-chip-link" data-scope={c.slug}>
               {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
             </a>
           ))}
@@ -336,6 +342,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           data-concluded={s.concluded ? '' : undefined}
           data-estimated={s.deadlineEstimated ? '' : undefined}
           data-no-apply={noApply ? '' : undefined}
+          data-scopes={scopesOf(s)}
           data-search={scholarshipSearchBlob(s)}
         >
           {/* Four cells, in the order the row reads: what it is, what it pays,
@@ -420,7 +427,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
   import { sendEvent } from '../../lib/events.ts';
 
   // `name` mirrors the card title for the DirectoryItem contract (save labels)
-  type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string };
+  type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string; scopes: string[] };
   type State = { sort: string; category: string; region: string; status: string };
 
   type Cache = Map<number, ScholarshipStatus>;
@@ -462,6 +469,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
         // cycles" and the client repaints the server's CLOSED chip as OPENING SOON.
         concluded: d.concluded !== undefined,
         deadlineEstimated: d.estimated !== undefined,
+        scopes: d.scopes ? d.scopes.split(' ') : [],
       };
     },
     // One pass over the corpus per render, shared by the visible list and all
@@ -469,6 +477,28 @@ const soonLine = totalOpen > 0 && totalSoon > 0
     renderContext: items => buildScholarshipStatusCache(items),
     select: (items, state, cache) => filterSortScholarships(items, asFilterState(state), cache) as Item[],
     countFor: (items, state, cache) => selectScholarships(items, asFilterState(state), cache).length,
+    // SCOPE links go to hubs, so they are recounted here rather than by the
+    // chip loop: under the live TRACK, STATUS and search, and each link carries
+    // those filters so the hub opens on the same number the chip showed.
+    afterCounts(root, searched, state, query, cache) {
+      const links = root.querySelectorAll<HTMLAnchorElement>('a[data-scope]');
+      if (!links.length) return;
+      const pool = selectScholarships(searched, asFilterState({ ...state, region: '' }), cache) as Item[];
+      const counts = new Map<string, number>();
+      for (const s of pool) for (const slug of s.scopes) counts.set(slug, (counts.get(slug) ?? 0) + 1);
+      const qs = new URLSearchParams();
+      if (state.category !== 'all') qs.set('category', state.category);
+      if (state.status !== 'all') qs.set('status', state.status);
+      if (query) qs.set('q', query);
+      const tail = qs.toString() ? `?${qs}` : '';
+      links.forEach(a => {
+        const n = counts.get(a.dataset.scope!) ?? 0;
+        const slot = a.querySelector('.sabl-chip-count');
+        if (slot) slot.textContent = String(n);
+        a.href = `/scholarships/${a.dataset.scope}/${tail}`;
+        a.classList.toggle('is-empty', n === 0);
+      });
+    },
     groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key },
     /**
      * Open money, and the money on listings whose cycle has not opened yet:

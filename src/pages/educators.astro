@@ -4,7 +4,8 @@ import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
-import { QUIZ_DURATION, QUIZ_QUESTION_COUNT } from '../lib/quiz';
+import { QUIZ_DURATION, QUIZ_QUESTION_COUNT, QUIZ_MAX_QUESTION_COUNT } from '../lib/quiz';
+import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../lib/facets';
 import { programIsListed } from '../lib/status';
 import { getToday } from '../lib/utils';
 import { webPageJson } from '../lib/ld';
@@ -22,9 +23,14 @@ const stats = [
   { value: '$0', label: 'NO ADS, NO ACCOUNTS' },
 ];
 
+// Counted from the hubs that exist, not typed in: this line listed five cities
+// long after the site had grown to over twenty.
+const cityHubCount = SCHOLARSHIP_FACETS
+  .filter(f => f.kind === 'region' && !f.broad && facetItems(f, scholarships).length >= MIN_FACET_ITEMS).length;
+
 const features = [
-  { tag: QUIZ_DURATION.toUpperCase(), title: `Take the ${QUIZ_QUESTION_COUNT}-question match quiz`, body: 'Students answer a few questions about their grade, region and interests, and get a shortlist worth checking. No account required.' },
-  { tag: 'REGION-AWARE', title: 'Browse by region and category', body: 'Scholarships are tagged by region (Medicine Hat, Calgary, Edmonton, Lethbridge, Red Deer, and Alberta-wide) so students only see what’s relevant to them.' },
+  { tag: QUIZ_DURATION.toUpperCase(), title: `Take the ${QUIZ_QUESTION_COUNT} to ${QUIZ_MAX_QUESTION_COUNT} question match quiz`, body: 'Students answer a few questions about their grade, region and interests, and get a shortlist worth checking. No account required.' },
+  { tag: 'REGION-AWARE', title: 'Browse by region and category', body: `Scholarships are tagged by region, with ${cityHubCount} city and town pages plus province-wide and national lists, so students only see what’s relevant to them.` },
   { tag: 'DEADLINE ALERTS', title: 'Save scholarships and get reminders', body: 'Students can bookmark scholarships and sign up for email reminders 30, 14, and 3 days before the deadline. No account required, just an email address.' },
   { tag: 'BEYOND AWARDS', title: 'Explore research programs', body: 'Beyond scholarships, ScholarAB lists paid and unpaid research placements, competitions, and trades apprenticeships for Alberta high school students.' },
 ];

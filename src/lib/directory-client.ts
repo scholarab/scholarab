@@ -58,6 +58,12 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
   getSavedIds(): number[];
   toggleSave(id: number): number[];
   saveLabel(name: string, saved: boolean): string;
+  /**
+   * Counts that are not filter chips, recomputed with them on every render.
+   * The scholarship SCOPE row is links to hubs, not buttons, so the chip loop
+   * never reached it and it kept the whole-corpus figure under every filter.
+   */
+  afterCounts?(root: HTMLElement, searched: T[], state: S, query: string, ctx: C): void;
   /** Runs after cards are (re)parsed on every astro:page-load; e.g. recompute day chips. */
   onCardsParsed?(items: T[]): void;
   /** Cards shown before "Show more"; DIRECTORY_PAGE_SIZE unless a test says otherwise. */
@@ -367,6 +373,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       // like an equal offer beside one holding forty listings.
       chip.classList.toggle('is-empty', n === 0 && !chip.classList.contains('on'));
     });
+    config.afterCounts?.(root, searched, state, q, ctx);
 
     const empty = root.querySelector<HTMLElement>('[data-dir-empty]');
     if (empty) empty.hidden = visible.length > 0;

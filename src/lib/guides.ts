@@ -409,7 +409,7 @@ export const guides: GuideMeta[] = [
     // /deadlines/ from a page that is all content.
     title: 'Alberta scholarship deadlines, month by month',
     description:
-      `When Alberta scholarships actually close: ${DL.total} dated deadlines by month, why May carries ${DL.byMonth[4]} of them, and the single dates that hide dozens of awards.`,
+      `When Alberta scholarships close: a year of ${DL.total} dated deadlines by month, why May carries ${DL.byMonth[4]} of them, and the single dates that hide dozens of awards.`,
     kicker: 'THE CALENDAR',
     minutes: 7,
     datePublished: '2026-09-07',
