@@ -67,9 +67,13 @@ const scholarshipRows: Row[] = scholarships
       // `active: false` is "next cycle, open date not known yet", not closed;
       // so the row says when it opens if the data knows, and says only that it
       // isn't open yet if it doesn't. Never a guessed month.
+      // A rolled-forward date is filed under last cycle's month, so the row
+      // says so rather than letting the calendar vouch for it.
       state: status === 'active'
         ? 'Open now'
-        : s.openDate
+        : status === 'unconfirmed'
+          ? 'Date not confirmed'
+          : s.openDate
           ? `Opens ${formatListingDate(s.openDate)}`
           : 'Not open yet',
       open: status === 'active',

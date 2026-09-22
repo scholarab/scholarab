@@ -337,6 +337,11 @@ describe('scholarshipDayChip', () => {
     expect(scholarshipDayChip(s)).toEqual({ label: 'OPENS SEP 1', cls: 'sabl-days neutral' })
   })
 
+  it('never counts down to an estimated deadline', () => {
+    const s = makeScholarship({ id: 1, deadline: '2026-04-20', deadlineEstimated: true, _deadline_ms: new Date('2026-04-20T00:00:00').getTime() })
+    expect(scholarshipDayChip(s)).toEqual({ label: 'DATE NOT CONFIRMED', cls: 'sabl-days neutral' })
+  })
+
   it('returns days-left with urgent class inside two weeks', () => {
     // getToday mock = 2026-04-05; deadline 2026-04-08 → 3 days
     const s = makeScholarship({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })

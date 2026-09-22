@@ -23,6 +23,7 @@ interface Scholarship {
   openDate?: string | null;
   region?: string | null;
   active?: boolean;
+  deadlineEstimated?: boolean;
 }
 
 const scholarships: Scholarship[] = JSON.parse(
@@ -36,8 +37,10 @@ const fonts = [
   { name: 'Public Sans', data: font('public-sans-700.ttf'), weight: 700 as const, style: 'normal' as const },
 ];
 
-function fmtDeadline(d: string | null | undefined): string {
+function fmtDeadline(d: string | null | undefined, estimated = false): string {
   if (!d || d === 'TBA') return 'DEADLINE TBA';
+  // A share card outlives the page it points at; never print a guessed date on it.
+  if (estimated) return 'DATE NOT CONFIRMED';
   if (d === 'Ongoing') return 'ONGOING';
   const date = new Date(d + 'T00:00:00');
   return 'DEADLINE ' + date
@@ -64,7 +67,7 @@ function card(s: Scholarship) {
       el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: titleSize, lineHeight: 1.05, letterSpacing: -1 }, s.title),
       el('div', { display: 'flex', alignItems: 'baseline', gap: 24 }, [
         el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: 68, color: '#2FD3A0' }, s.amount),
-        el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 22, letterSpacing: 1.5, color: 'rgba(238,241,236,0.6)' }, fmtDeadline(s.deadline)),
+        el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 22, letterSpacing: 1.5, color: 'rgba(238,241,236,0.6)' }, fmtDeadline(s.deadline, s.deadlineEstimated)),
       ]),
     ]),
     el('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(238,241,236,0.2)', paddingTop: 28 }, [

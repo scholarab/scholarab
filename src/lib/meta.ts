@@ -260,7 +260,7 @@ export interface ScholarshipMetaInput {
   metaDetail?: string | null;
 }
 
-export type ScholarshipMetaStatus = 'active' | 'future' | 'closed';
+export type ScholarshipMetaStatus = 'active' | 'future' | 'unconfirmed' | 'closed';
 
 /**
  * How far ahead an open date may sit and still be worth the opening clause.
@@ -331,6 +331,8 @@ function whenClause(
   // An undated future cycle has no lead worth spending the opening on, and
   // neither does one dated past HORIZON_DAYS; see UNDATED_TRAIL, distantTrail
   // and scholarshipMeta, which move both to the end instead.
+  // A rolled-forward date is a guess, so it never leads; see ESTIMATED_TRAIL.
+  if (status === 'unconfirmed') return '';
   if (status === 'future') {
     if (!s.openDate) return '';
     return distant(s.openDate, today) ? '' : `Opens ${fmt(s.openDate)}.`;
@@ -387,7 +389,9 @@ export function scholarshipMeta(
   // genuinely unknown, and one whose date is known but too far out to lead on.
   // They are different claims, so they get different tails.
   const trail =
-    when || status !== 'future'
+    status === 'unconfirmed'
+      ? ESTIMATED_TRAIL
+      : when || status !== 'future'
       ? ''
       : s.openDate && distant(s.openDate, today)
         ? `Next cycle opens ${monthYear(s.openDate)}.`
@@ -425,6 +429,8 @@ export function scholarshipMeta(
 
 /** What an undated next cycle says, once it is out of the opening position. */
 const UNDATED_TRAIL = 'Next cycle dates are not announced yet.';
+/** The tail for a deadline rolled forward from last cycle. */
+const ESTIMATED_TRAIL = "This year's deadline is not posted yet.";
 
 /** Append `trail` when it fits whole; a half-printed tail is worse than none. */
 function withTrail(body: string, trail: string): string {

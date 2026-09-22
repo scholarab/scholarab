@@ -42,6 +42,20 @@ describe('scholarshipStatusOf', () => {
     expect(scholarshipStatusOf({ concluded: true, deadline: '2027-05-15' }, TODAY)).toBe('closed')
   })
 
+  it('is unconfirmed, not open, when the deadline is last cycle rolled forward', () => {
+    // A guessed date read as OPEN NOW with a day count, and its money joined
+    // "open right now", on 80 listings.
+    expect(scholarshipStatusOf({ deadline: '2027-05-15', deadlineEstimated: true }, TODAY)).toBe('unconfirmed')
+    expect(scholarshipStatusOf({ deadline: '2027-05-15', active: false, deadlineEstimated: true }, TODAY)).toBe('unconfirmed')
+    // A rolled-forward open date is a guess too, so it does not make it 'future'.
+    expect(scholarshipStatusOf({ openDate: '2027-03-01', deadline: '2027-06-01', deadlineEstimated: true }, TODAY)).toBe('unconfirmed')
+  })
+
+  it('still closes an estimated listing once even the guessed date has passed', () => {
+    expect(scholarshipStatusOf({ deadline: '2026-04-04', deadlineEstimated: true }, TODAY)).toBe('closed')
+    expect(scholarshipIsIndexable({ deadline: '2027-05-15', deadlineEstimated: true }, TODAY)).toBe(true)
+  })
+
   it('leaves an ordinary between-cycles listing alone', () => {
     expect(scholarshipStatusOf({ deadline: '2027-05-15', active: false, concluded: false }, TODAY)).toBe('future')
   })

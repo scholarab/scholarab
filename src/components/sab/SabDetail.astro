@@ -6,7 +6,9 @@
 //   annotation bar stays removed per Ilia (2026-07-11).
 // - The canvas "PREVIEWING X OF N" switcher is implemented as real prev/next
 //   links between listings ("LISTING X OF N").
-// - No "Hand-checked / Last verified" line (removed site-wide 2026-07-12).
+// - A "Checked against the provider's page in <month>" line under the CTA
+//   (removed site-wide 2026-07-12, back 2026-09-22 after the design critique:
+//   trust is the product, and the month is per listing, not a promised cycle).
 // - Reminder copy reflects the real send schedule (30/14/3 days out).
 // - Closed and opening-soon states added (the design only shows open listings).
 
@@ -25,13 +27,14 @@ interface Props {
   tag: string | null; // category, uppercased
   name: string;
   subline: string;
-  status: 'active' | 'closed' | 'future' | 'ongoing' | 'tba';
+  status: 'active' | 'closed' | 'future' | 'unconfirmed' | 'ongoing' | 'tba';
   daysLeft: number | null;
   // ISO dates for the client-side chip recompute: the page is prerendered, so
   // the SSR chip is only as fresh as the last build. null = not clock-driven.
   deadlineIso?: string | null;
   openDateIso?: string | null;
   inactive?: boolean; // curator-closed next-cycle listing (open date unknown)
+  estimated?: boolean; // the deadline is last cycle's, rolled forward
   dueLong: string; // 'July 15, 2026' / 'Ongoing' / 'TBA'
   opensLabel?: string | null; // formatted open date, for status 'future'
   backHref: string;
@@ -47,6 +50,8 @@ interface Props {
   valueLabel: string;
   valueBig: string;
   valueNote?: string | null;
+  /** 'Sep 2026' from lastVerified; null hides the line. */
+  checkedLabel?: string | null;
   ctaLabel: string;
   url: string;
   canRemind: boolean;
@@ -58,10 +63,10 @@ interface Props {
 
 const {
   itemType, itemId, typeLabel, tag, name, subline,
-  status, daysLeft, deadlineIso, openDateIso, inactive, dueLong, opensLabel,
+  status, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, dueLong, opensLabel,
   backHref, backLabel, facetHref = null, facetLabel = null,
   facts, eligibility, about, notes, steps,
-  valueLabel, valueBig, valueNote,
+  valueLabel, valueBig, valueNote, checkedLabel = null,
   ctaLabel, url, canRemind, canonical, guideHref, guideTitle,
 } = Astro.props;
 
@@ -75,6 +80,7 @@ const notesHtml = notes ? emailOff(notes) : '';
 const chip =
   status === 'closed' ? { text: 'CLOSED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : status === 'future' ? { text: opensLabel ? `OPENS ${opensLabel.toUpperCase()}` : 'OPENING SOON', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
+  : status === 'unconfirmed' ? { text: 'DATE NOT CONFIRMED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : status === 'ongoing' ? { text: 'ONGOING · JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#A0491A', fg: '#F4F5F1' }
@@ -112,6 +118,7 @@ const chip =
       data-deadline={deadlineIso ?? undefined}
       data-open-date={openDateIso ?? undefined}
       data-inactive={inactive ? '' : undefined}
+      data-estimated={estimated ? '' : undefined}
     >{chip.text}</span>
   </div>
   <h1 class="sabd-h1">
@@ -189,8 +196,11 @@ const chip =
       {valueNote && <div class="sabd-value-note">{valueNote}</div>}
       <div class="sabd-deadline-row">
         <span class="sabd-mono sabd-deadline-label">DEADLINE</span>
-        <span class="sabd-deadline-value">{dueLong}</span>
+        <span class="sabd-deadline-value">{estimated ? `Around ${dueLong}` : dueLong}</span>
       </div>
+      {estimated && (
+        <p class="sabd-estimate-note">Last year's date. The provider hasn't posted this year's yet, so check their page before you plan around it.</p>
+      )}
       <div class="sabd-cta-row">
         {status === 'closed' ? (
           <span class="sab-btn sabd-cta sabd-cta-disabled">Closed</span>
@@ -199,7 +209,7 @@ const chip =
         ) : (
           <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
             data-track="apply" data-item-type={itemType} data-item-id={itemId}
-            class="sab-btn sabd-cta">{ctaLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
+            class="sab-btn sabd-cta">{status === 'unconfirmed' ? 'Check the provider' : ctaLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
         )}
         <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
           class="sabd-save" title="Save" aria-label="Save" aria-pressed="false"><Fragment set:html={BOOKMARK} /></button>
@@ -213,6 +223,9 @@ const chip =
           class="sabd-mono sabd-visit">VISIT OFFICIAL SITE<span class="sabl-ext" aria-hidden="true">↗</span></a>
       )}
       <button data-sabd-copy data-copy-url={canonical} class="sabd-mono sabd-copy">COPY LINK</button>
+      {checkedLabel && (
+        <p class="sabd-checked">Checked against the provider's page in {checkedLabel}.</p>
+      )}
     </div>
 
     {guideHref && guideTitle && (
@@ -389,6 +402,8 @@ const chip =
   }
   .sabd-deadline-label { font-size: 12px; color: rgba(20, 25, 21, 0.68); }
   .sabd-deadline-value { font-size: 15px; font-weight: 700; }
+  .sabd-checked { margin: 14px 0 0; font-size: 12.5px; line-height: 1.4; color: rgba(20, 25, 21, 0.7); text-align: center; }
+  .sabd-estimate-note { margin: 10px 0 0; font-size: 13.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.72); }
   .sabd-cta-row { display: flex; gap: 10px; margin-top: 22px; }
   .sabd-cta {
     flex: 1; text-align: center; font-size: 15.5px; font-weight: 700;
@@ -622,7 +637,11 @@ const chip =
         .toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
         .toUpperCase();
 
-    if (openDate && todayMs < new Date(openDate + 'T00:00:00').getTime()) {
+    const pastDeadline = !!deadline && todayMs > new Date(deadline + 'T00:00:00').getTime();
+    // Same ladder as status.ts: an estimate outranks a (rolled-forward) open date.
+    if (el.dataset.estimated !== undefined && !pastDeadline) {
+      paint('DATE NOT CONFIRMED', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
+    } else if (openDate && todayMs < new Date(openDate + 'T00:00:00').getTime()) {
       paint(`OPENS ${fmtLong(openDate)}`, 'rgba(14,140,100,0.12)', '#0A6B4D');
     } else if (deadline && todayMs > new Date(deadline + 'T00:00:00').getTime()) {
       paint('CLOSED', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');

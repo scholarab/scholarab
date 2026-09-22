@@ -34,6 +34,13 @@ export type Scholarship = {
    * counts toward upcoming money. JSON-only, like metaDetail. See status.ts.
    */
   concluded?: boolean
+  /**
+   * The deadline is last cycle's date rolled forward, because the provider had
+   * not posted this cycle's when the listing was checked. The notes say so in
+   * prose; this is the same fact in a form the status, the chips and the money
+   * totals can act on. JSON-only, like concluded. See status.ts.
+   */
+  deadlineEstimated?: boolean
   eligibility: EligibilityCriteria | null
   /**
    * An authored clause appended to the derived SERP snippet. JSON-only, like

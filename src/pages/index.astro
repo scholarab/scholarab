@@ -7,7 +7,7 @@ import SabFooter from '../components/sab/SabFooter.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
-import { programIsListed } from '../lib/status';
+import { programIsListed, scholarshipStatusOf } from '../lib/status';
 import { SCHOLARSHIP_FACETS, facetForCategory } from '../lib/facets';
 import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
 
@@ -16,14 +16,10 @@ const programs = await loadPrograms();
 
 const today = albertaToday();
 
-const activeScholarships = scholarships.filter(s => {
-  if (!s.active) return false;
-  // Not open yet ≠ open right now (Loran/TD/Wolf open in September; the
-  // directory shows them as OPENS SEP; the hero total must agree).
-  if (s.openDate && new Date(s.openDate + 'T00:00:00').getTime() > today.getTime()) return false;
-  if (!s.deadline) return true;
-  return new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime();
-});
+// The directory's own definition of open, not a copy of it: this page kept
+// its own ladder, so a concluded award or a rolled-forward date could count
+// here as "open right now" while the directory said otherwise.
+const activeScholarships = scholarships.filter(s => scholarshipStatusOf(s, today) === 'active');
 const activeTotal = activeScholarships.reduce((sum, s) => sum + parseAmount(s.amount), 0);
 // Retired programs (active: false) are out of the directory, so they must be
 // out of this total too; otherwise the hero promises more than /programs shows.
@@ -41,8 +37,8 @@ const scholarshipCount = scholarships.length;
 // CLOSING_SOON_MS still decides the urgency badge on each row, which is where
 // "this week" actually belongs; it just no longer decides whether the section
 // exists.
-const closingSoon = scholarships
-  .filter(s => s.active && s.deadline && new Date(s.deadline + 'T00:00:00').getTime() >= today.getTime())
+const closingSoon = activeScholarships
+  .filter(s => s.deadline)
   .sort((a, b) => new Date(a.deadline! + 'T00:00:00').getTime() - new Date(b.deadline! + 'T00:00:00').getTime())
   .slice(0, 5);
 

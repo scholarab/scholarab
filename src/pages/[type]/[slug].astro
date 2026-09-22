@@ -152,6 +152,13 @@ export async function getStaticPaths() {
 const { kind, scholarship, program, related, crossRelated, metaDescription } = Astro.props;
 
 const todayDate = albertaToday();
+
+// 'Sep 2026' from a lastVerified of '2026-09'; anything else hides the line
+// rather than printing a date the data does not actually hold.
+const checkedMonth = (v: string | null | undefined): string | null => {
+  const m = /^(\d{4})-(\d{2})/.exec(v ?? '');
+  return m ? new Date(+m[1]!, +m[2]! - 1, 1).toLocaleDateString('en-CA', { month: 'short', year: 'numeric' }).replace('.', '') : null;
+};
 // round, not ceil: the diff is midnight-to-midnight so it's a whole number of
 // days except across a DST change, where ceil would overcount by one.
 const daysUntil = (d: Date) => Math.max(0, Math.round((d.getTime() - todayDate.getTime()) / 86400000));
@@ -169,7 +176,7 @@ if (kind === 'scholarship') {
   // shared function does not draw is 'tba': with no deadline it reports
   // 'active', and this page separates "open" from "no date announced yet".
   const base = scholarshipStatusOf(s, todayDate);
-  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' =
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'unconfirmed' | 'ongoing' =
     base === 'active' && !deadlineDate ? 'tba' : base;
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
 
@@ -226,8 +233,6 @@ if (kind === 'scholarship') {
     itemType: 'scholarship' as const,
     typeLabel: 'SCHOLARSHIP',
     tag: s.category ? s.category.toUpperCase() : null,
-    // No verified stamp: a month printed beside a listing reads as a promise
-    // that someone re-reads all of them on a cycle, and nobody does.
     subline: (s.region || 'Alberta').toUpperCase(),
     status,
     // Not `status === 'closed'` spelled out again: the sitemap has to list the
@@ -243,6 +248,7 @@ if (kind === 'scholarship') {
     deadlineIso: s.concluded ? null : s.deadline,
     openDateIso: s.concluded || (s.active === false && !s.openDate) ? null : s.openDate,
     inactive: s.active === false && !s.concluded,
+    estimated: s.deadlineEstimated === true,
     dueLong: formatDate(s.deadline),
     opensLabel: s.openDate ? formatDate(s.openDate) : null,
     // Empty on purpose. Every one of the five facts this used to list was
@@ -270,7 +276,10 @@ if (kind === 'scholarship') {
       : [],
     valueLabel: 'AWARD VALUE',
     valueBig: s.amount,
-    valueNote: s.applyViaGuidance && !noApplication ? 'Applications go through your school.' : null,
+    valueNote: noApplication
+      ? "You don't file an application for this one. The notes say how it is awarded."
+      : s.applyViaGuidance ? 'Applications go through your school.' : null,
+    checkedLabel: checkedMonth(s.lastVerified),
     ctaLabel: noApplication ? 'How it is awarded' : s.applyViaGuidance ? 'Learn more' : 'Apply now',
     url: s.url,
     canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
@@ -280,7 +289,7 @@ if (kind === 'scholarship') {
   const slug = generateSlug(p.name);
   const hasDate = !!p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing';
   const deadlineDate = hasDate ? new Date(p.deadline + 'T00:00:00') : null;
-  const status: 'active' | 'tba' | 'closed' | 'future' | 'ongoing' = programStatusOf(p, todayDate);
+  const status: 'active' | 'tba' | 'closed' | 'future' | 'unconfirmed' | 'ongoing' = programStatusOf(p, todayDate);
   const daysLeft = status === 'active' && deadlineDate ? daysUntil(deadlineDate) : null;
 
   // Word-boundary clamp, not `slice(0, 157) + '...'`: that cut 123 of the 125
@@ -349,6 +358,7 @@ if (kind === 'scholarship') {
     ...programValue(p),
     ctaLabel: 'Learn more',
     url: p.url,
+    checkedLabel: checkedMonth(p.lastVerified),
     canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
   };
 }
@@ -447,6 +457,7 @@ const breadcrumbJson = {
       deadlineIso={d.deadlineIso}
       openDateIso={d.openDateIso}
       inactive={d.inactive}
+      estimated={"estimated" in d ? d.estimated : false}
       dueLong={d.dueLong}
       opensLabel={d.opensLabel}
       facetHref={facetHref}
@@ -461,6 +472,7 @@ const breadcrumbJson = {
       valueLabel={d.valueLabel}
       valueBig={d.valueBig}
       valueNote={d.valueNote}
+      checkedLabel={"checkedLabel" in d ? d.checkedLabel : null}
       ctaLabel={d.ctaLabel}
       url={d.url}
       canRemind={d.canRemind}

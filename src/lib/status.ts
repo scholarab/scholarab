@@ -10,7 +10,7 @@
 // `today` is passed in rather than read from the clock so callers keep control
 // of it; list-core hands it its own mockable getToday().
 
-export type ScholarshipStatus = 'active' | 'future' | 'closed';
+export type ScholarshipStatus = 'active' | 'future' | 'unconfirmed' | 'closed';
 
 export interface StatusInput {
   openDate?: string | null;
@@ -21,6 +21,11 @@ export interface StatusInput {
    * wait for. Distinct from `active: false`, which means "between cycles".
    */
   concluded?: boolean;
+  /**
+   * The deadline shown is last cycle's, rolled forward because the provider
+   * has not posted this cycle's date. See Scholarship.deadlineEstimated.
+   */
+  deadlineEstimated?: boolean;
 }
 
 /** Precomputed ms fields from the directory payload, when the caller has them. */
@@ -39,10 +44,16 @@ export function scholarshipStatusOf(
   // and renders "OPENING SOON", promising a cycle that will never come.
   if (s.concluded === true) return 'closed';
   const todayMs = today.getTime();
-  const open = openMs ?? new Date((s.openDate || '1970-01-01') + 'T00:00:00').getTime();
-  if (todayMs < open) return 'future';
   // `||` on purpose: a deadlineMs of 0 means "no deadline" → Infinity, never a 1970 cutoff
   const dead = deadlineMs || (s.deadline ? new Date(s.deadline + 'T00:00:00').getTime() : Infinity);
+  // A guessed date is not an open window. Before this state a rolled-forward
+  // deadline read as OPEN NOW with a day count and its money joined "open
+  // right now", which is the site asserting a date the provider never gave.
+  // Checked ahead of the open date, because a rolled-forward openDate is a
+  // guess too; once even the guessed deadline has passed, it is closed.
+  if (s.deadlineEstimated === true) return todayMs > dead ? 'closed' : 'unconfirmed';
+  const open = openMs ?? new Date((s.openDate || '1970-01-01') + 'T00:00:00').getTime();
+  if (todayMs < open) return 'future';
   if (todayMs > dead) return 'closed';
   // Curator-closed (active: false) with a future deadline is a next-cycle
   // listing whose open date isn't known yet, not accepting applications now.

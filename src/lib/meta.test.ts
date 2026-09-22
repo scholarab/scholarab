@@ -66,6 +66,13 @@ describe('clampMeta', () => {
 describe('scholarshipMeta', () => {
   const base = { title: 'Test Award', amount: '$2,500', audience: 'Alberta high school students', region: 'Alberta' }
 
+  it('never leads with a rolled-forward deadline, and says it is not posted', () => {
+    const meta = scholarshipMeta({ ...base, deadline: '2027-05-14' }, 'unconfirmed', fmt)
+    expect(meta).not.toMatch(/May 14/)
+    expect(meta).toMatch(/^\$2,500 for /)
+    expect(meta).toMatch(/This year's deadline is not posted yet\.$/)
+  })
+
   it('leads with the open date for a listing whose cycle has not started', () => {
     expect(scholarshipMeta({ ...base, openDate: '2026-08-01' }, 'future', fmt))
       .toMatch(/^Opens August 1, 2026\. \$2,500 for /)

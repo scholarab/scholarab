@@ -17,7 +17,7 @@ export interface ScholarshipWithMeta extends Scholarship {
 }
 
 export type { ScholarshipStatus };
-export type StatusFilter = 'all' | 'active' | 'opening' | 'closed';
+export type StatusFilter = 'all' | 'active' | 'opening' | 'unconfirmed' | 'closed';
 
 export function getScholarshipStatus(s: ScholarshipWithMeta): ScholarshipStatus {
   return scholarshipStatusOf(s, getToday(), { openMs: s._open_ms, deadlineMs: s._deadline_ms });
@@ -96,7 +96,9 @@ export function selectScholarships(
       ? initialScholarships.filter(s => statusCache.get(s.id) === 'future')
       : statusFilter === 'active'
         ? initialScholarships.filter(s => statusCache.get(s.id) === 'active')
-        : initialScholarships;
+        : statusFilter === 'unconfirmed'
+          ? initialScholarships.filter(s => statusCache.get(s.id) === 'unconfirmed')
+          : initialScholarships;
 
   const afterCategory = selectedCategory === 'all'
     ? pool
@@ -119,7 +121,7 @@ export function filterSortScholarships(
 ): ScholarshipWithMeta[] {
   const afterSearch = selectScholarships(initialScholarships, state, statusCache);
   const { sortBy } = state;
-  const rank = { active: 0, future: 1, closed: 2 } as Record<string, number>;
+  const rank = { active: 0, future: 1, unconfirmed: 2, closed: 3 } as Record<string, number>;
   return [...afterSearch].sort((a, b) => {
     const aStatus = statusCache.get(a.id) ?? 'active';
     const bStatus = statusCache.get(b.id) ?? 'active';
@@ -169,6 +171,7 @@ export function daysLeftClass(days: number): string {
 export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
   active: 'OPEN NOW',
   future: 'OPENING LATER',
+  unconfirmed: 'DATE NOT CONFIRMED',
   closed: 'CLOSED',
 };
 
@@ -234,6 +237,8 @@ export function scholarshipDayChip(s: ScholarshipWithMeta): { label: string; cls
   if (status === 'future') {
     return { label: s.openDate ? `OPENS ${shortDate(s.openDate)}` : 'OPENING SOON', cls: 'sabl-days neutral' };
   }
+  // No day count: counting down to a guessed date is the claim this state exists to stop.
+  if (status === 'unconfirmed') return { label: 'DATE NOT CONFIRMED', cls: 'sabl-days neutral' };
   if (!s.deadline) return null;
   const days = Math.max(0, Math.round((new Date(s.deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
   const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;

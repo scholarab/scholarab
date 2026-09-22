@@ -7,6 +7,8 @@ export interface ICSScholarship {
   amount?: string | null;
   url: string;
   deadline: string | null;
+  /** Last cycle's date rolled forward; the event says so in its title. */
+  estimated?: boolean;
 }
 
 export interface ICSProgram {
@@ -88,8 +90,8 @@ export function buildICS(scholarships: ICSScholarship[], programs: ICSProgram[])
       `DTSTAMP:${now}`,
       `DTSTART;VALUE=DATE:${dateStr}`,
       `DTEND;VALUE=DATE:${endStr}`,
-      `SUMMARY:Deadline: ${escapeICSText(s.title)}`,
-      `DESCRIPTION:${escapeICSText(s.title)}${amountPart}\\nApply at: ${s.url}`,
+      `SUMMARY:${s.estimated ? 'Deadline (estimated)' : 'Deadline'}: ${escapeICSText(s.title)}`,
+      `DESCRIPTION:${escapeICSText(s.title)}${amountPart}${s.estimated ? "\\nLast year's date. Check the provider's page for this year's." : ''}\\nApply at: ${s.url}`,
       `URL:${s.url}`,
       'END:VEVENT',
     );

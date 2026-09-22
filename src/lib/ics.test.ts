@@ -27,6 +27,13 @@ describe('buildICS', () => {
     expect(ics).not.toContain('TBA Program')
   })
 
+  it('titles an estimated deadline as one and says why', () => {
+    const ics = buildICS([{ id: 3, title: 'Guess Award', url: 'https://g.example', deadline: '2027-05-14', estimated: true }], [])
+    expect(ics).toContain('SUMMARY:Deadline (estimated): Guess Award')
+    // Unfolded: RFC 5545 wraps long lines at 75 octets.
+    expect(ics.replace(/\r\n /g, '')).toContain("Last year's date. Check the provider's page for this year's.")
+  })
+
   it('escapes commas and semicolons in text fields per RFC 5545', () => {
     const ics = buildICS(
       [{ id: 3, title: 'Math, Science; Award', amount: null, url: 'https://f.example', deadline: '2026-04-01' }],

@@ -7,6 +7,7 @@ import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list
 import { generateSlug } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../../lib/facets.ts';
+import { saysNoApplication } from '../../lib/apply-method.ts';
 import { BOOKMARK, EXT } from '../../lib/icons.ts';
 
 interface Props {
@@ -104,6 +105,7 @@ const STATUS_CHIPS = [
   { value: 'all',     label: 'All' },
   { value: 'active',  label: 'Open' },
   { value: 'opening', label: 'Opening soon' },
+  { value: 'unconfirmed', label: 'Date not confirmed' },
   { value: 'closed',  label: 'Closed' },
 ] as const;
 
@@ -287,6 +289,10 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       const status = getScholarshipStatus(s);
       const chip = scholarshipDayChip(s);
       const head = headerAt.get(i);
+      // Nominated, school-selected or automatic: "Apply" would send a student
+      // to a form that does not exist. Same test as the detail page's button.
+      const noApply = saysNoApplication(s.notes, s.metaDetail, (s as { description?: string }).description);
+      const canApply = status === 'active' && !noApply;
       return (
         <>
         {head && (
@@ -328,6 +334,8 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           data-open-date={s.openDate ?? undefined}
           data-inactive={s.active === false ? '' : undefined}
           data-concluded={s.concluded ? '' : undefined}
+          data-estimated={s.deadlineEstimated ? '' : undefined}
+          data-no-apply={noApply ? '' : undefined}
           data-search={scholarshipSearchBlob(s)}
         >
           {/* Four cells, in the order the row reads: what it is, what it pays,
@@ -342,7 +350,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           <div class="sabl-row-when">
             <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
             <span class="sabl-due">
-              {s.deadline ? `DUE ${shortDate(s.deadline)}` : 'NO FIXED DEADLINE'}
+              {s.deadline ? `${s.deadlineEstimated ? 'AROUND' : 'DUE'} ${shortDate(s.deadline)}` : 'NO FIXED DEADLINE'}
             </span>
           </div>
           <div class="sabl-card-actions">
@@ -364,8 +372,8 @@ const soonLine = totalOpen > 0 && totalSoon > 0
                   class="sabl-apply"
                   data-track="apply"
                   data-item-id={s.id}
-                  aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
-                ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span><Fragment set:html={EXT} /></a>
+                  aria-label={`${canApply ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
+                ><span data-apply-label>{canApply ? 'Apply' : 'Visit'}</span><Fragment set:html={EXT} /></a>
             )}
           </div>
         </div>
@@ -453,6 +461,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
         // Without this an ended award with no deadline reparses as "between
         // cycles" and the client repaints the server's CLOSED chip as OPENING SOON.
         concluded: d.concluded !== undefined,
+        deadlineEstimated: d.estimated !== undefined,
       };
     },
     // One pass over the corpus per render, shared by the visible list and all
@@ -499,7 +508,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
         // Only the word: the ↗ beside it is a sibling span, and overwriting
         // the anchor's textContent would take the arrow with it.
         const applyLabel = apply?.querySelector('[data-apply-label]');
-        if (applyLabel) applyLabel.textContent = status === 'active' ? 'Apply' : 'Visit';
+        if (applyLabel) applyLabel.textContent = status === 'active' && s.el.dataset.noApply === undefined ? 'Apply' : 'Visit';
       }
     },
 

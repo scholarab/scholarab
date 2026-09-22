@@ -10,8 +10,8 @@ interface Props {
 const { initialScholarships, initialPrograms } = Astro.props;
 // Keep the card fields inline so every bookmark works with the cached page.
 const items: SavedItem[] = [
-  ...initialScholarships.map(({ id, title: name, amount, audience, category, deadline, openDate, active, concluded, url }) =>
-    ({ type: 'scholarship' as const, id, name, amount, audience, category, deadline, openDate, active, concluded, url, href: `/scholarships/${generateSlug(name)}/` })),
+  ...initialScholarships.map(({ id, title: name, amount, audience, category, deadline, openDate, active, concluded, deadlineEstimated, url }) =>
+    ({ type: 'scholarship' as const, id, name, amount, audience, category, deadline, openDate, active, concluded, deadlineEstimated, url, href: `/scholarships/${generateSlug(name)}/` })),
   ...initialPrograms.map(({ id, name, category, provider, description, deadline, url }) =>
     ({ type: 'program' as const, id, name, category, provider, description, deadline, url, href: `/programs/${generateSlug(name)}/` })),
 ];
