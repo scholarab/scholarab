@@ -7,6 +7,8 @@ import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list
 import { generateSlug } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../../lib/facets.ts';
+import { surveyReach, daysUntil, surveyMark } from '../../lib/survey.ts';
+import { todayDate as albertaToday } from '../../lib/calendar.ts';
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -38,6 +40,15 @@ interface Props {
    * column, so the rail unwraps back into the rows above the grid.
    */
   railFilters?: boolean;
+  /**
+   * The Survey Grid world (facet hubs only, seed 75c83193). It changes what is
+   * drawn, not what is in the DOM: every data-dir-* hook the directory client
+   * reads is identical either way. What it does change is the three things the
+   * incumbent markup cannot carry, a category label sitting above the entry's
+   * heading, two glyphs standing in for an icon set, and the absence of any
+   * shared scale to measure a deadline against.
+   */
+  survey?: boolean;
 }
 const {
   items,
@@ -47,6 +58,7 @@ const {
   hideCategories = false,
   hideScopes = false,
   railFilters = false,
+  survey = false,
 } = Astro.props;
 
 // SCOPE, not REGION: these are how far an award reaches, not where the student
@@ -165,12 +177,18 @@ const statLabel = totalOpen > 0 || totalSoon === 0
 // ("11 AMOUNTS NOT PUBLISHED"). It was a footnote about our own data in the
 // one place on the page that is supposed to answer "how much money is here",
 // and it was deleted 2026-09-15 at Ilia's request.
+// The graticule's origin. Rendered here so the ticks are in the HTML, then
+// recomputed in onCardsParsed on every load, because CDN-cached HTML outlives
+// the day it was built. Never serialised as milliseconds; the card carries the
+// ISO string and the browser measures from that in the reader's own timezone.
+const sgToday = albertaToday();
+
 const soonLine = totalOpen > 0 && totalSoon > 0
   ? `+$${totalSoon.toLocaleString('en-CA')} OPENING LATER`
   : '';
 ---
 
-<div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
+<div class:list={['sabl-page', { 'sabl-railed': railFilters, 'sg': survey }]}>
   {/* Everything above the cards. Unstyled by default; a hub with a photo
       backdrop turns it into one frosted panel so no text sits on the photo. */}
   <div class="sabl-head">
@@ -328,9 +346,16 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           data-inactive={s.active === false ? '' : undefined}
           data-concluded={s.concluded ? '' : undefined}
           data-search={scholarshipSearchBlob(s)}
+          data-sg-mark={survey ? surveyMark(status, s.deadline) : undefined}
+          style={survey
+            ? `--sg-i:${i};--sg-reach:${s.deadline && status === 'active' ? surveyReach(daysUntil(s.deadline, sgToday)) : 0}`
+            : undefined}
         >
           <div class="sabl-card-top">
-            <span class="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>
+            {/* No category label above the entry's own heading on the survey
+                sheet: a word set above a title is a label the title already
+                carries, and TRACK in the legend filters by the same field. */}
+            {!survey && <span class="sabl-mono sabl-tag">{(s.category ?? 'GENERAL').toUpperCase()}</span>}
             <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
           </div>
           <h2 class="sabl-name-h"><a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a></h2>
@@ -349,7 +374,9 @@ const soonLine = totalOpen > 0 && totalSoon > 0
                 data-name={s.title}
                 aria-label={`Save ${s.title}`}
                 aria-pressed="false"
-              >☆</button>
+              >{survey
+                ? <svg class="sg-ico" viewBox="0 0 14 16" width="13" height="15" aria-hidden="true"><path d="M2.5 1.5h9v13l-4.5-3.6-4.5 3.6z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                : '☆'}</button>
               {s.url && (
                 <a
                   href={s.url}
@@ -360,10 +387,15 @@ const soonLine = totalOpen > 0 && totalSoon > 0
                   data-track="apply"
                   data-item-id={s.id}
                   aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
-                ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span><span class="sabl-ext" aria-hidden="true">↗</span></a>
+                ><span data-apply-label>{status === 'active' ? 'Apply' : 'Visit'}</span>{survey
+                  ? <svg class="sg-ico" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M4 1.2h6.8V8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.4 1.6 1.4 10.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  : <span class="sabl-ext" aria-hidden="true">↗</span>}</a>
               )}
             </div>
           </div>
+          {survey && (
+            <div class="sg-scale" aria-hidden="true"><span class="sg-tick"></span></div>
+          )}
         </div>
         </>
       );
@@ -406,6 +438,8 @@ const soonLine = totalOpen > 0 && totalSoon > 0
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
   import { sendEvent } from '../../lib/events.ts';
+  import { surveyReach, daysUntil, surveyMark } from '../../lib/survey.ts';
+  import { getToday } from '../../lib/utils.ts';
 
   // `name` mirrors the card title for the DirectoryItem contract (save labels)
   type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string };
@@ -490,6 +524,18 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           const chip = scholarshipDayChip(s);
           chipEl.hidden = !chip;
           if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
+        }
+        // The graticule is a measurement, so it is recomputed from the ISO
+        // string here rather than trusted from the build. Same helper the
+        // server used, so the tick and the words beside it cannot disagree.
+        if (s.el.classList.contains('sabl-card') && s.el.querySelector('.sg-tick')) {
+          const iso = s.el.dataset.deadline;
+          const mark = surveyMark(status, iso ?? null);
+          s.el.dataset.sgMark = mark;
+          s.el.style.setProperty(
+            '--sg-reach',
+            String(iso && status === 'active' ? surveyReach(daysUntil(iso, getToday())) : 0),
+          );
         }
         const apply = s.el.querySelector<HTMLElement>('[data-track="apply"]');
         // Only the word: the ↗ beside it is a sibling span, and overwriting

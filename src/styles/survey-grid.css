@@ -1,0 +1,580 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   The Survey Grid: the scholarship hubs drawn as a Dominion Land Survey sheet.
+   Seed 75c83193, re-roll 1. Contract in
+   .impeccable/surfaces/src-pages-scholarships-facet-astro.md.
+
+   Scoped entirely under `.sg`, which only the facet hubs carry. /scholarships,
+   /programs and every other page keep the incumbent world untouched, so this
+   can be looked at and reverted as one class.
+
+   The grid is not wallpaper. `--sg-unit` is the module every element registers
+   to, the rules are drawn at that pitch, and every sixth one is heavier because
+   a township is six sections across. If an element does not land on the grid,
+   the grid is lying.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.sg {
+  --sg-field: #0E1411;
+  --sg-plate: #121A15;
+  --sg-line: #2FD3A0;
+  --sg-ink: #E6E9E2;
+  --sg-annot: #8FB3A4;
+  --sg-dim: #6E9184;
+
+  --sg-unit: 24px;
+  --sg-rule: rgba(47, 211, 160, 0.07);
+  --sg-rule-6: rgba(47, 211, 160, 0.14);
+  --sg-hair: rgba(47, 211, 160, 0.22);
+
+  background-color: var(--sg-field);
+  color: var(--sg-ink);
+  font-family: 'B612', ui-sans-serif, system-ui, sans-serif;
+
+  background-image:
+    repeating-linear-gradient(to right, var(--sg-rule-6) 0 1px, transparent 1px calc(var(--sg-unit) * 6)),
+    repeating-linear-gradient(to bottom, var(--sg-rule-6) 0 1px, transparent 1px calc(var(--sg-unit) * 6)),
+    repeating-linear-gradient(to right, var(--sg-rule) 0 1px, transparent 1px var(--sg-unit)),
+    repeating-linear-gradient(to bottom, var(--sg-rule) 0 1px, transparent 1px var(--sg-unit));
+}
+
+/* Layout.astro pins `html` to the cream page colour, which then showed through
+   the overscroll gutter and behind the sheet. The hub is the one route that is
+   not a light page, so it reclaims the root here rather than adding a theme. */
+html:has(.sg),
+body:has(.sg) {
+  background: #0E1411;
+  color-scheme: dark;
+}
+
+/* The browser surfaces that ship with no design system. */
+.sg ::selection { background: var(--sg-line); color: var(--sg-field); }
+.sg { caret-color: var(--sg-line); scrollbar-color: var(--sg-dim) var(--sg-field); }
+.sg :focus-visible { outline: 2px solid var(--sg-line); outline-offset: 2px; }
+.sg .tnum, .sg [class*='sg-fig'] { font-variant-numeric: tabular-nums; }
+
+.sg .sabl-mono,
+.sg .sg-annot {
+  font-family: 'B612 Mono', ui-monospace, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── The margin block ──────────────────────────────────────────────────────
+   Replaces the title row. The money and the counts were a hero-metric block:
+   big number, small label, supporting stat. Here they are what they actually
+   are, marginal annotation on a sheet, set at annotation size in the margin. */
+
+.sg .sabl-head { position: relative; padding-top: calc(var(--sg-unit) * 1.5); }
+
+.sg .sabl-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--sg-unit);
+  border-bottom: 1px solid var(--sg-hair);
+  padding-bottom: 15px;
+  /* Registered to the grid rather than left to the copy. A standfirst that
+     wraps to three lines on one hub and three slightly different lines on the
+     next moved the toolbar 2px between hubs, and the filter row is the one
+     thing a reader keeps clicking as they move across hubs. Seven and a half
+     modules puts the toolbar on a module line on every hub, which is what the
+     sheet claims about itself anyway. */
+  min-height: calc(var(--sg-unit) * 7.5);
+}
+
+.sg .sabl-h1 {
+  font-family: 'B612', sans-serif;
+  font-weight: 700;
+  font-size: clamp(34px, 4.4vw, 58px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--sg-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.sg .sabl-desc {
+  color: var(--sg-annot);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 62ch;
+  margin: calc(var(--sg-unit) / 2) 0 0;
+}
+
+/* The stat column: annotation, not a headline. */
+.sg .sabl-stat { text-align: right; align-self: end; }
+.sg .sabl-stat-value {
+  font-family: 'B612 Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--sg-line);
+  line-height: 1.2;
+}
+.sg .sabl-stat-label,
+.sg .sabl-stat-soon {
+  font-size: 10.5px;
+  color: var(--sg-dim);
+  margin-top: 2px;
+  letter-spacing: 0.08em;
+}
+
+/* ── The meridian ──────────────────────────────────────────────────────────
+   One heavy off-centre vertical the whole sheet registers to. It is drawn on
+   the railed grid's own column seam, so it is a real structural line rather
+   than a decoration floating over the content. */
+
+.sg .sabl-railed { position: relative; }
+
+@media (min-width: 1180px) {
+  .sg .sabl-railed::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--sg-rail-w, 228px) + (var(--sg-gap, 36px) / 2));
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent 0,
+      var(--sg-line) calc(var(--sg-unit) * 2),
+      var(--sg-line) calc(100% - var(--sg-unit) * 4),
+      transparent 100%
+    );
+    opacity: 0.45;
+    pointer-events: none;
+  }
+}
+
+/* ── The legend block ──────────────────────────────────────────────────────
+   The filter rail is the sheet's legend: a ruled box that says what the marks
+   on the field mean. Chips are survey ticks, square and flush, never pills. */
+
+.sg .sabl-rail {
+  border: 1px solid var(--sg-hair);
+  background: var(--sg-plate);
+  padding: calc(var(--sg-unit) / 1.5);
+}
+
+.sg .sabl-rail::before {
+  content: 'LEGEND';
+  display: block;
+  font-family: 'B612 Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--sg-dim);
+  border-bottom: 1px solid var(--sg-hair);
+  padding-bottom: 6px;
+  margin-bottom: calc(var(--sg-unit) / 1.5);
+}
+
+.sg .sabl-row-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--sg-dim);
+}
+
+.sg .sabl-chip {
+  font-family: 'B612 Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 0;
+  border: 1px solid var(--sg-hair);
+  background: transparent;
+  color: var(--sg-annot);
+  padding: 5px 9px;
+  box-shadow: none;
+  transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+.sg .sabl-chip:hover { border-color: var(--sg-line); color: var(--sg-ink); }
+.sg .sabl-chip.on,
+.sg .sabl-chip[aria-pressed='true'] {
+  background: var(--sg-line);
+  border-color: var(--sg-line);
+  color: var(--sg-field);
+  font-weight: 700;
+}
+.sg .sabl-chip-count { color: inherit; opacity: 0.7; margin-left: 6px; }
+
+.sg .sabl-search {
+  border: 1px solid var(--sg-hair);
+  background: var(--sg-plate);
+  padding: 8px 12px;
+  margin-bottom: 0;
+}
+.sg .sabl-search input { color: var(--sg-ink); font-family: 'B612', sans-serif; }
+.sg .sabl-search input::placeholder { color: var(--sg-dim); }
+.sg .sabl-search-icon { color: var(--sg-dim); }
+
+.sg .sabl-toolbar { border-top: none; padding-top: 16px; margin-top: 0; }
+
+.sg .sabl-lean,
+.sg .sabl-filters-btn {
+  font-family: 'B612 Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: var(--sg-dim);
+  border-radius: 0;
+}
+.sg .sabl-lean:hover, .sg .sabl-filters-btn:hover { color: var(--sg-line); }
+/* `html.js .sabl-filters-btn` in global.css outranks a plain `.sg` selector,
+   and the colour it sets is the light world's ink, which on this field is
+   invisible. On a phone this button is the only route to the filters, so it
+   matches that selector's weight rather than hoping to win on order. */
+html.js .sg .sabl-filters-btn {
+  border: 1px solid var(--sg-line);
+  background: var(--sg-plate);
+  color: var(--sg-annot);
+  font-weight: 700;
+}
+html.js .sg .sabl-filters-btn[aria-expanded='true'] {
+  background: var(--sg-line);
+  border-color: var(--sg-line);
+  color: var(--sg-field);
+}
+
+/* ── Status runs as masses, not a ladder of identical headings ─────────────── */
+
+.sg .sabl-group {
+  background: transparent;
+  border: 0;
+  padding: calc(var(--sg-unit) * 1.5) 0 calc(var(--sg-unit) / 2);
+}
+.sg .sabl-group-name {
+  border-bottom: 2px solid var(--sg-line);
+  padding-bottom: 5px;
+}
+.sg .sabl-group-label {
+  font-family: 'B612 Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--sg-ink);
+}
+.sg .sabl-group-count {
+  font-family: 'B612 Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  background: var(--sg-line);
+  color: var(--sg-field);
+  border-radius: 0;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+}
+.sg .sabl-group-toggle { color: var(--sg-dim); font-family: 'B612 Mono', monospace; font-size: 10px; letter-spacing: 0.12em; }
+
+/* ── Entries ───────────────────────────────────────────────────────────────
+   No cards. Each award is a parcel on the sheet: ruled top and bottom, its
+   figures in a fixed column, its deadline measured against the graticule that
+   every other entry is measured against. */
+
+.sg .sabl-grid {
+  display: block;
+  padding-top: 0;
+}
+
+/* One measured row, four columns, the same four on every entry: what it is,
+   what it pays, when it closes, what you can do about it. The figure and
+   measurement columns are fixed widths so the page can be read straight down
+   either of them without reading a single title. */
+.sg .sabl-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px 200px 112px;
+  grid-template-rows: auto auto auto;
+  column-gap: var(--sg-unit);
+  align-items: start;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--sg-hair);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 14px 0 12px;
+  transition: background-color 0.12s ease;
+}
+.sg .sabl-card:hover { background: var(--sg-plate); }
+.sg .sabl-card:last-of-type { border-bottom: 1px solid var(--sg-hair); }
+
+/* .sabl-card-top and .sabl-card-foot are wrappers the incumbent world needs
+   and this one does not: dissolving them lets their children take their own
+   cells instead of forcing a second layout inside the row. */
+.sg .sabl-card-top,
+.sg .sabl-card-foot { display: contents; }
+/* Written for the flex row those wrappers used to be. In a grid cell an auto
+   margin outranks justify-self, so the day chip ignored its placement. */
+.sg .sabl-card-top > .sabl-days { margin-left: 0; }
+
+.sg .sabl-name-h { grid-column: 1; grid-row: 1; margin: 0; font: inherit; }
+.sg .sabl-name {
+  font-family: 'B612', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--sg-ink);
+  text-decoration: none;
+}
+.sg .sabl-name:hover { color: var(--sg-line); }
+
+.sg .sabl-blurb {
+  grid-column: 1;
+  grid-row: 2 / span 2;
+  color: var(--sg-annot);
+  font-size: 13px;
+  line-height: 1.45;
+  margin-top: 3px;
+  max-width: 62ch;
+}
+
+.sg .sabl-amount {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  font-family: 'B612 Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--sg-line);
+  text-align: right;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+/* The measurement column. */
+.sg [data-days-chip] {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  font-family: 'B612 Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--sg-annot);
+  white-space: nowrap;
+}
+.sg [data-days-chip].urgent,
+.sg [data-days-chip].soon { color: var(--sg-line); font-weight: 700; }
+.sg [data-days-chip].neutral { color: var(--sg-dim); }
+
+.sg .sabl-due {
+  grid-column: 3;
+  grid-row: 3;
+  justify-self: end;
+  font-family: 'B612 Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  color: var(--sg-dim);
+  white-space: nowrap;
+  margin-top: 3px;
+}
+
+.sg .sabl-card-actions {
+  grid-column: 4;
+  grid-row: 1 / span 3;
+  align-self: center;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── The graticule ─────────────────────────────────────────────────────────
+   One scale, identical on every entry, so deadline proximity reads as a
+   progression straight down the sheet rather than as a chip repeated on each
+   row. The tick's position is real data: see lib/survey.ts. Today is the right
+   edge, a year out is the left, and the quarter marks are what it is read
+   against. */
+
+.sg .sg-scale {
+  grid-column: 3;
+  grid-row: 2;
+  position: relative;
+  height: 14px;
+  margin-top: 5px;
+  align-self: center;
+}
+.sg .sg-scale::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--sg-hair);
+}
+.sg .sg-scale::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 5px;
+  background-image: repeating-linear-gradient(to right, var(--sg-hair) 0 1px, transparent 1px 25%);
+}
+.sg .sg-tick {
+  position: absolute;
+  bottom: 0;
+  left: clamp(0%, calc(var(--sg-reach, 0) * 100%), 100%);
+  width: 3px;
+  height: 14px;
+  background: var(--sg-line);
+  transform: translateX(-1.5px);
+  z-index: 1;
+}
+
+/* The survey's three states, drawn as the survey draws them. */
+.sg .sabl-card[data-sg-mark='pending'] .sg-tick { background: var(--sg-dim); height: 7px; }
+.sg .sabl-card[data-sg-mark='undated'] .sg-tick { display: none; }
+.sg .sabl-card[data-sg-mark='cancelled'] { opacity: 0.55; }
+.sg .sabl-card[data-sg-mark='cancelled'] .sabl-amount { color: var(--sg-dim); }
+.sg .sabl-card[data-sg-mark='cancelled'] .sg-tick { display: none; }
+.sg .sabl-card[data-sg-mark='cancelled'] .sg-scale::after { opacity: 0.35; }
+/* A cancelled parcel keeps its lines on the sheet: the name is struck, not
+   removed, so the page shows its own upkeep instead of silently shrinking. */
+.sg .sabl-card[data-sg-mark='cancelled'] .sabl-name {
+  text-decoration: line-through;
+  text-decoration-color: var(--sg-dim);
+  text-decoration-thickness: 1px;
+}
+
+/* ── Controls ──────────────────────────────────────────────────────────────── */
+
+.sg .sabl-save,
+.sg .sabl-apply {
+  border-radius: 0;
+  box-shadow: none;
+  font-family: 'B612 Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.sg .sabl-save {
+  border: 1px solid var(--sg-hair);
+  background: transparent;
+  color: var(--sg-annot);
+  width: 26px;
+  height: 26px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+}
+.sg .sabl-save:hover { border-color: var(--sg-line); color: var(--sg-line); }
+.sg .sabl-save[aria-pressed='true'] { background: var(--sg-line); border-color: var(--sg-line); color: var(--sg-field); }
+.sg .sabl-apply {
+  border: 1px solid var(--sg-line);
+  background: transparent;
+  color: var(--sg-line);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 6px 10px;
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sg .sabl-apply:hover { background: var(--sg-line); color: var(--sg-field); }
+
+.sg .sabl-more { border-top: 1px solid var(--sg-hair); padding-top: var(--sg-unit); margin-top: var(--sg-unit); }
+.sg .sabl-more-line { color: var(--sg-dim); font-family: 'B612 Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; }
+.sg .sabl-more-btn,
+.sg .sabl-more-all,
+.sg .sabl-empty-btn {
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid var(--sg-line);
+  background: transparent;
+  color: var(--sg-line);
+  font-family: 'B612 Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+}
+.sg .sabl-more-btn:hover,
+.sg .sabl-more-all:hover,
+.sg .sabl-empty-btn:hover { background: var(--sg-line); color: var(--sg-field); }
+
+.sg .sabl-empty {
+  border: 1px dashed var(--sg-hair);
+  border-radius: 0;
+  background: var(--sg-plate);
+}
+.sg .sabl-empty-title { font-family: 'B612', sans-serif; font-weight: 700; font-size: 26px; color: var(--sg-ink); }
+.sg .sabl-empty-sub { color: var(--sg-annot); }
+
+/* ── Hub footer ────────────────────────────────────────────────────────────
+   The sibling hubs are the sheet's adjoining parcels, so they are set as a
+   marginal index rather than a paragraph of links. */
+
+.sg .sabl-hubfoot {
+  border-top: 1px solid var(--sg-hair);
+  background: transparent;
+  margin-top: calc(var(--sg-unit) * 2);
+  padding-top: var(--sg-unit);
+}
+.sg .sabl-hubfoot p { color: var(--sg-annot); font-size: 14px; }
+.sg .sabl-hublinks a {
+  color: var(--sg-annot);
+  font-family: 'B612 Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.sg .sabl-hublinks a:hover { color: var(--sg-line); border-bottom-color: var(--sg-line); }
+
+/* ── Motion ────────────────────────────────────────────────────────────────
+   One authored moment: the ticks land. The sheet is drawn, then every entry's
+   measurement arrives on the graticule together, which is the one thing on the
+   page that is a measurement rather than a fact. Entries are visible from the
+   first frame; only the tick moves. */
+
+@keyframes sg-land {
+  from { transform: translateX(-1px) scaleY(0.2); opacity: 0; }
+  to   { transform: translateX(-1px) scaleY(1); opacity: 1; }
+}
+.sg .sg-tick {
+  transform-origin: bottom;
+  animation: sg-land 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--sg-i, 0) * 28ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sg .sg-tick { animation: none; }
+  .sg * { transition-duration: 0.01ms !important; }
+}
+
+/* ── Narrow ────────────────────────────────────────────────────────────────
+   The figure column folds under the title rather than shrinking: the two
+   numbers that decide whether a student bothers never get smaller. */
+
+@media (max-width: 760px) {
+  .sg { --sg-unit: 20px; }
+  /* The row folds to two columns rather than shrinking: the figures that decide
+     whether a student bothers never get smaller than they are here, and the
+     graticule keeps its full width so the column still reads down the page. */
+  .sg .sabl-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 14px;
+    row-gap: 0;
+    padding: 13px 0 12px;
+  }
+  .sg .sabl-name-h { grid-column: 1 / -1; grid-row: 1; }
+  .sg .sabl-blurb { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+  .sg .sabl-amount {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: center;
+    justify-self: start;
+    text-align: left;
+    font-size: 16px;
+    margin-top: 6px;
+  }
+  .sg .sabl-card-actions { grid-column: 2; grid-row: 3; align-self: center; margin-top: 6px; }
+  .sg .sg-scale { grid-column: 1; grid-row: 4; width: 190px; margin-top: 9px; }
+  .sg [data-days-chip] { grid-column: 2; grid-row: 4; justify-self: end; align-self: end; }
+  .sg .sabl-due { grid-column: 1 / -1; grid-row: 5; justify-self: start; margin-top: 4px; }
+
+  .sg .sabl-title-row { grid-template-columns: minmax(0, 1fr); }
+  .sg .sabl-stat { text-align: left; }
+}

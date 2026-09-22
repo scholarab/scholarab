@@ -21,6 +21,10 @@ import { DEFAULT_SCHOLARSHIP_STATE, filterSortScholarships } from '../../lib/lis
 import { itemListJson } from '../../lib/ld';
 import { scholarshipIsIndexable } from '../../lib/status';
 import { getGuide } from '../../lib/guides';
+// The Survey Grid world (seed 75c83193). Entirely scoped under `.sg`, which
+// only this route sets, so /scholarships, /programs and everything else keep
+// the incumbent design until this one is judged.
+import '../../styles/survey-grid.css';
 
 export async function getStaticPaths() {
   const all = enrichScholarships(await loadScholarships());
@@ -106,7 +110,7 @@ const breadcrumbJson = {
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(listJson)} slot="head" />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
-  <SabFonts slot="head" chips />
+  <SabFonts slot="head" chips survey />
 
   <div class="sabp-header" slot="header">
     <SabHeader currentPath="/scholarships" />
@@ -114,7 +118,7 @@ const breadcrumbJson = {
 
   <div
     id="sab-scholarships"
-    class:list={['sabp', 'sabp-wide', { 'sabl-has-backdrop': backdrop }]}
+    class:list={['sabp', 'sabp-wide', 'sg', { 'sabl-has-backdrop': backdrop }]}
     style={backdrop
       ? `--sabl-wide: url(/photos/backdrops/${backdrop}-wide-1672.webp); --sabl-wide-2x: url(/photos/backdrops/${backdrop}-wide-3344.webp); --sabl-tall: url(/photos/backdrops/${backdrop}-tall-1000.webp); --sabl-tall-2x: url(/photos/backdrops/${backdrop}-tall-2000.webp)`
       : undefined}
@@ -133,6 +137,7 @@ const breadcrumbJson = {
         hideCategories={facet.kind === 'category'}
         hideScopes
         railFilters
+        survey
       />
 
       <div class="sabl-hubfoot">

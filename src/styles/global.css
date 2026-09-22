@@ -59,6 +59,42 @@
     size-adjust: 118%;
     src: url('/fonts/big-shoulders-700.woff2') format('woff2');
   }
+  /* B612 was drawn by Airbus and ENAC for cockpit displays, which is why it is
+     here: the survey hubs need a face that was engineered to be read off an
+     instrument, not a poster face. Scoped to those pages via .sg; nothing else
+     on the site references it. OFL, like the rest of public/fonts. */
+  @font-face {
+    font-family: 'B612';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/b612-400.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'B612';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/b612-700.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'B612 Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/b612-mono-400.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'B612 Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/b612-mono-700.woff2') format('woff2');
+  }
+
   @font-face {
     font-family: 'Public Sans';
     font-style: normal;

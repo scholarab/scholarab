@@ -5,6 +5,10 @@ license (CC BY-SA 4.0).
 
 Copyright notices, as embedded in the font files themselves:
 
+  B612            Copyright 2018 The B612 Project Authors
+                  https://github.com/polarsys/b612
+                  b612-400/700.woff2, b612-mono-400/700.woff2
+
   Big Shoulders   Copyright 2019 The Big Shoulders Project Authors
                   https://github.com/xotypeco/big_shoulders
                   big-shoulders-700/800.woff2

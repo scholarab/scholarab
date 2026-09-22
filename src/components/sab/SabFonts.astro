@@ -8,13 +8,24 @@
 // shift of 0.12 to 0.14 on the desktop hubs (0.09 to 0.12 on a 4G profile),
 // 0.0007 with the preload. Directories only, because they show chips at every
 // width; elsewhere a phone may never render 600 and the preload would be waste.
+// `survey` swaps in the hubs' own faces. B612 and B612 Mono are only ever
+// referenced under `.sg`, so no other page pays for them.
 interface Props {
   chips?: boolean;
+  survey?: boolean;
 }
-const { chips = false } = Astro.props;
+const { chips = false, survey = false } = Astro.props;
 ---
 <link rel="preload" href="/fonts/big-shoulders-800.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/public-sans-400.woff2" as="font" type="font/woff2" crossorigin />
 {chips && <link rel="preload" href="/fonts/public-sans-600.woff2" as="font" type="font/woff2" crossorigin />}
 <link rel="preload" href="/fonts/public-sans-700.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/big-shoulders-700.woff2" as="font" type="font/woff2" crossorigin />
+{survey && (
+  <>
+    <link rel="preload" href="/fonts/b612-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/b612-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/b612-mono-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/b612-mono-700.woff2" as="font" type="font/woff2" crossorigin />
+  </>
+)}

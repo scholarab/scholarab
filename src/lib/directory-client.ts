@@ -153,7 +153,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
   function setSaveState(btn: HTMLElement, saved: boolean) {
     btn.classList.toggle('on', saved);
-    btn.textContent = saved ? '★' : '☆';
+    // A button that ships its own drawn icon keeps it: writing textContent
+    // would delete the SVG and put a glyph in its place. The survey hubs draw
+    // a bookmark and let CSS fill it from aria-pressed; every other directory
+    // still uses the two star characters this line has always written.
+    if (!btn.querySelector('svg')) btn.textContent = saved ? '★' : '☆';
     btn.setAttribute('aria-pressed', String(saved));
     btn.setAttribute('aria-label', config.saveLabel(btn.dataset.name ?? '', saved));
   }
