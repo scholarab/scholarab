@@ -21484,7 +21484,7 @@
     "id": 581,
     "region": "Lloydminster",
     "lastVerified": "2026-09",
-    "active": true,
+    "active": false,
     "title": "Lloydminster and District Fish and Game Scholarship",
     "amount": "$1,000",
     "deadline": "2026-09-20",
@@ -51135,7 +51135,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "It goes to the highest combined average across five subjects, and the school submits the candidate's name and marks to the division rather than you applying directly.",
-    "active": true,
+    "active": false,
     "description": "Proceeds from a local history book fund up to $500 a year for a graduate of Fairview High, St. Thomas More or Hines Creek Composite who lives in one of the rural districts the book covers and is continuing post-secondary.",
     "metaDetail": "Awarded on your five subject average.",
     "eligibility": {
