@@ -226,8 +226,10 @@ if (kind === 'scholarship') {
       // Rutherford variants alone drew 82 impressions last month, and 59
       // listings carry an openDate the markup never mentioned. It is a
       // property of EducationalOccupationalProgram, same as the deadline.
-      ...(s.openDate ? { 'applicationStartDate': s.openDate } : {}),
-      ...(s.deadline ? { 'applicationDeadline': s.deadline } : {}),
+      // Never a rolled-forward guess: markup is a claim to Google, and the page
+      // itself no longer states these dates as fact (deadlineEstimated).
+      ...(s.openDate && !s.deadlineEstimated ? { 'applicationStartDate': s.openDate } : {}),
+      ...(s.deadline && !s.deadlineEstimated ? { 'applicationDeadline': s.deadline } : {}),
       ...(parsedAmount !== null ? { 'offers': { '@type': 'Offer', 'price': parsedAmount, 'priceCurrency': 'CAD' } } : {}),
       // No `provider`: ScholarAB lists these awards, it does not fund or award
       // them, and the data has no provider field to name the real one. Claiming
