@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, scholarshipGroupKey, scholarshipMoneyByMonth, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
@@ -10,6 +10,8 @@ import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '.
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { BOOKMARK, EXT } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
+import { scholarshipFigs } from '../../lib/ledger.ts';
+import SabLedger from './SabLedger.astro';
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -149,38 +151,12 @@ if (showGroups) {
 }
 const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length;
 
-// "$X open across these listings"; active money only, follows the filters
-const totalOpen = initial.reduce(
-  (sum, s) => sum + (getScholarshipStatus(s) === 'active' ? (s._amount ?? 0) : 0), 0,
-);
-
-// The money on listings whose cycle has not opened yet. Without this the header
-// is flat for months at a time: an award added in August that opens in March
-// adds nothing to totalOpen, which is correct and reads as a stalled page.
-const totalSoon = initial.reduce(
-  (sum, s) => sum + (getScholarshipStatus(s) === 'future' ? (s._amount ?? 0) : 0), 0,
-);
-
-// A hub can hold nothing open at all: every Calgary award runs on the one
-// EducationMatters cycle, so between June and February the honest open figure
-// is $0. A $0 hero reads as breakage, so the upcoming money is promoted into
-// the headline and the label says which of the two it is.
-const statValue = totalOpen > 0 || totalSoon === 0 ? totalOpen : totalSoon;
-const statLabel = totalOpen > 0 || totalSoon === 0
-  ? 'Open across these listings'
-  : 'Opening in a later cycle';
-// One short line under the label, never a stack of them: the stat block shares
-// a flex row with the h1 and the standfirst, so a taller stat column pushes the
-// toolbar down. e2e/smoke.spec.ts pins every hub's toolbar to the same height
-// and catches exactly that.
-//
-// A count of listings that publish no dollar figure used to sit here too
-// ("11 AMOUNTS NOT PUBLISHED"). It was a footnote about our own data in the
-// one place on the page that is supposed to answer "how much money is here",
-// and it was deleted 2026-09-15 at Ilia's request.
-const soonLine = totalOpen > 0 && totalSoon > 0
-  ? `+$${totalSoon.toLocaleString('en-CA')} opening later`
-  : '';
+// The four figures and the month chart. The figures replaced a lone headline
+// number (Ilia, 2026-09-22: the big-number-top-right header read as a
+// template). Open money leads; an empty figure is left out rather than
+// printed as $0, so an off-season hub leads with the money opening later.
+const figs = scholarshipFigs(initial);
+const months = scholarshipMoneyByMonth(initial);
 ---
 
 <div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
@@ -192,14 +168,15 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       <h1 class="sabl-h1">{h1}</h1>
       <p class="sabl-desc">{intro}</p>
     </div>
-    <div class="sabl-stat">
-      <div class="sabl-stat-value tnum" data-dir-stat>${statValue.toLocaleString('en-CA')}</div>
-      <div class="sabl-stat-label" data-dir-stat-label>{statLabel}</div>
-      <div class="sabl-stat-soon" data-dir-stat-soon hidden={!soonLine}>
-        {soonLine}
-      </div>
-    </div>
   </div>
+  <SabLedger
+    figs={figs}
+    months={months}
+    format="money"
+    title="When the money closes"
+    note="Dollars due each month, next 12 months"
+    empty="None of these listings has a confirmed deadline in the next 12 months."
+  />
 
   <div class="sabl-toolbar">
     <div class="sabl-search">
@@ -435,7 +412,8 @@ const soonLine = totalOpen > 0 && totalSoon > 0
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
+  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipGroupKey, scholarshipMoneyByMonth, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
+  import { paintLedger, scholarshipFigs } from '../../lib/ledger.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
   import { sendEvent } from '../../lib/events.ts';
@@ -520,26 +498,11 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       });
     },
     groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key },
-    /**
-     * Open money, and the money on listings whose cycle has not opened yet:
-     * without the second figure the header is flat for months at a time. Keep
-     * this in step with the server pass in the frontmatter above.
-     */
     summary(visible, total) {
-      let open = 0, soon = 0, openNow = 0;
-      for (const s of visible) {
-        const status = getScholarshipStatus(s);
-        if (status === 'active') { open += s._amount ?? 0; openNow++; }
-        else if (status === 'future') soon += s._amount ?? 0;
-      }
-      const headlineOpen = open > 0 || soon === 0;
-      return {
-        count: directoryCountLine(visible.length, total, 'LISTINGS', openNow),
-        stat: '$' + (headlineOpen ? open : soon).toLocaleString('en-CA'),
-        'stat-label': headlineOpen ? 'Open across these listings' : 'Opening in a later cycle',
-        'stat-soon': open > 0 && soon > 0 ? `+$${soon.toLocaleString('en-CA')} opening later` : '',
-      };
+      const openNow = visible.filter(s => getScholarshipStatus(s) === 'active').length;
+      return { count: directoryCountLine(visible.length, total, 'LISTINGS', openNow) };
     },
+    paint: (root, visible) => paintLedger(root, scholarshipFigs(visible), scholarshipMoneyByMonth(visible), 'money'),
     getSavedIds: () => [...getSaved()],
     toggleSave: id => [...toggleSaved(id)],
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),

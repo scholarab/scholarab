@@ -137,9 +137,26 @@ is. Chips inside truncate rather than wrap (`.sabl-meta` is
 `white-space: nowrap` + `text-overflow: ellipsis`), because one long free-text
 duration once drove the height of every card beside it.
 
+### Directory filters (`.sabl-chip`)
+
+Words, not pills, since 2026-09-22: ink text with a 2px underline on the
+choice in force, the count beside it. On a railed hub the rail sets them as an
+index, one per line, count flush right, a green mark on the active line.
+
+### Figures and month chart (`SabLedger.astro`)
+
+Between a directory's standfirst and its toolbar: four figures under a black
+rule, then "When the money closes" (scholarships, dollars per month) or "When
+applications close" (programs, programs per month) for the next twelve months.
+Built by `src/lib/ledger.ts` on the server and repainted from the visible list
+on every filter change through the same functions. An empty figure is hidden,
+never printed as $0. The chart keeps its height when empty, so the toolbar
+never moves between hubs. Directory rows are numbered per status run with a CSS
+counter, and amounts are ink, not green.
+
 ### Chip / badge
 
-`.sabl-chip`, `.sabl-meta`, `.sabl-tag`, `.sabm-count-chip`, `.sabm-paid-chip`,
+`.sabl-meta`, `.sabl-tag`, `.sabm-count-chip`, `.sabm-paid-chip`,
 and the `/updates` kind labels coloured from `KIND_COLORS` in
 `src/lib/updates.ts`. Pill radius, label-font or 600-weight label. **Contrast is measured
 against the white card, not the cream page**: that distinction is what made

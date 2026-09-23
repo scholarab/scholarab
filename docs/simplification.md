@@ -284,3 +284,15 @@ as a duplicate of an existing entry and one because it could not be described
 without wording the gender rule forbids.
 
 Catalogue 1,303 to 1,416.
+
+## Directory head, 2026-09-22
+
+The lone headline figure beside the title and its three client-side keys
+(`stat`, `stat-label`, `stat-soon`) were removed in both directories, along with
+their CSS. One module, `src/lib/ledger.ts`, now builds the figures and the month
+chart for both the server pass and the client repaint, where the scholarship
+header used to keep the same arithmetic twice (frontmatter and `summary()`).
+The pill styling on filter and sort chips was removed rather than restyled; the
+buttons, their counts and their behaviour are unchanged.
+
+Add-back fraction: 0. Nothing removed had to be restored.

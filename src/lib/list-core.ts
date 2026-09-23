@@ -248,6 +248,84 @@ export function scholarshipWhen(s: ScholarshipWithMeta): { main: string; sub: st
   return { main: date(s.deadline), sub, cls: `sabl-when${whenTier(days)}` };
 }
 
+/** The four figures across the top of a scholarship directory, from the listings on screen. */
+export interface ScholarshipLedger {
+  open: number;
+  soon: number;
+  openCount: number;
+  /** The soonest open deadline, or failing that the soonest opening date. */
+  next: { iso: string; days: number; kind: 'deadline' | 'opening' } | null;
+}
+
+export function scholarshipLedger(visible: ScholarshipWithMeta[]): ScholarshipLedger {
+  let open = 0, soon = 0, openCount = 0;
+  let deadline: string | null = null, opening: string | null = null;
+  for (const s of visible) {
+    const status = getScholarshipStatus(s);
+    if (status === 'active') {
+      open += s._amount ?? 0;
+      openCount++;
+      if (s.deadline && (!deadline || s.deadline < deadline)) deadline = s.deadline;
+    } else if (status === 'future') {
+      soon += s._amount ?? 0;
+      if (s.openDate && (!opening || s.openDate < opening)) opening = s.openDate;
+    }
+  }
+  const iso = deadline ?? opening;
+  const next = iso
+    ? { iso, kind: deadline ? 'deadline' as const : 'opening' as const,
+        days: Math.max(0, Math.round((new Date(iso + 'T00:00:00').getTime() - getToday().getTime()) / 86400000)) }
+    : null;
+  return { open, soon, openCount, next };
+}
+
+export interface MonthBucket { key: string; label: string; name: string; total: number; count: number }
+
+/**
+ * Totals for each of the next `months` calendar months, this one first. `pick`
+ * returns the date that files an item under a month and what it adds there, or
+ * null to leave it out.
+ */
+export function monthBuckets<T>(items: T[], pick: (item: T) => { iso: string; value: number } | null, months = 12): MonthBucket[] {
+  const today = getToday();
+  const out: MonthBucket[] = [];
+  const at = new Map<string, MonthBucket>();
+  for (let i = 0; i < months; i++) {
+    const d = new Date(today.getFullYear(), today.getMonth() + i, 1);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+    const m = {
+      key,
+      label: d.toLocaleDateString('en-CA', { month: 'short' }),
+      name: d.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' }),
+      total: 0,
+      count: 0,
+    };
+    out.push(m);
+    at.set(key, m);
+  }
+  for (const item of items) {
+    const hit = pick(item);
+    const m = hit && at.get(hit.iso.slice(0, 7));
+    if (!m) continue;
+    m.total += hit.value;
+    m.count++;
+  }
+  return out;
+}
+
+/**
+ * Dollars due each month. Only open and not-yet-open listings with a confirmed
+ * deadline count: a rolled-forward guess is `unconfirmed` and stays out, so
+ * every bar is money a provider has actually dated.
+ */
+export function scholarshipMoneyByMonth(visible: ScholarshipWithMeta[]): MonthBucket[] {
+  return monthBuckets(visible, s => {
+    if (!s.deadline) return null;
+    const status = getScholarshipStatus(s);
+    return status === 'active' || status === 'future' ? { iso: s.deadline, value: s._amount ?? 0 } : null;
+  });
+}
+
 // ── Programs ──────────────────────────────────────────────────────────────────
 
 export interface ProgramWithMeta extends Program {
@@ -293,6 +371,29 @@ export function programWhen(p: ProgramWithMeta): { main: string; sub: string; cl
   const main = new Date(deadMs).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
   const sub = days === 0 ? 'due today' : `${days} ${days === 1 ? 'day' : 'days'} left`;
   return { main, sub, cls: `sabl-when${whenTier(days)}` };
+}
+
+/** The four figures across the top of a program directory. */
+export function programLedger(visible: ProgramWithMeta[]): { openCount: number; paid: number; tba: number; next: { iso: string; days: number } | null } {
+  let openCount = 0, paid = 0, tba = 0;
+  let next: string | null = null;
+  for (const p of visible) {
+    const status = getProgramStatus(p);
+    if (p.paid) paid++;
+    if (status === 'tba') tba++;
+    if (status !== 'active') continue;
+    openCount++;
+    if (!next || p.deadline! < next) next = p.deadline!;
+  }
+  return {
+    openCount, paid, tba,
+    next: next ? { iso: next, days: Math.max(0, Math.round((new Date(next + 'T00:00:00').getTime() - getToday().getTime()) / 86400000)) } : null,
+  };
+}
+
+/** Open programs closing each month, counted rather than summed. */
+export function programDeadlinesByMonth(visible: ProgramWithMeta[]): MonthBucket[] {
+  return monthBuckets(visible, p => (getProgramStatus(p) === 'active' ? { iso: p.deadline!, value: 1 } : null));
 }
 
 export type ProgramSort = 'closest_due' | 'paid_first' | 'name';

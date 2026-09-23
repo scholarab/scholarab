@@ -1,0 +1,50 @@
+---
+// The figures and the twelve-month chart between a directory's standfirst and
+// its toolbar. Server-rendered from the default list; the page script repaints
+// the same nodes through paintLedger() as filters change. The chart keeps its
+// height when every bar is empty, so the toolbar below never moves.
+import { monthBars } from '../../lib/ledger.ts';
+import type { Fig, MonthFormat } from '../../lib/ledger.ts';
+import type { MonthBucket } from '../../lib/list-core.ts';
+
+interface Props {
+  figs: Fig[];
+  months: MonthBucket[];
+  format: MonthFormat;
+  title: string;
+  note: string;
+  empty: string;
+}
+const { figs, months, format, title, note, empty } = Astro.props;
+const bars = monthBars(months, format);
+---
+
+<div class="sabl-ledger">
+  <dl class="sabl-figs">
+    {figs.map(f => (
+      <div class="sabl-fig" data-fig={f.key} hidden={!f.value}>
+        <dt class="sabl-fig-label" data-fig-label>{f.label}</dt>
+        <dd class:list={['sabl-fig-value tnum', { 'is-money': f.money }]} data-fig-value>{f.value}</dd>
+      </div>
+    ))}
+  </dl>
+  <figure class="sabl-months">
+    <figcaption class="sabl-months-h"><strong>{title}</strong><span>{note}</span></figcaption>
+    <ol class="sabl-months-bars">
+      {bars.map(b => (
+        <li class:list={['sabl-month', { 'is-now': b.now, 'is-zero': !b.total }]} style={`--h: ${b.height}%`} data-month>
+          <span class="sr-only" data-month-sr>{b.spoken}</span>
+          <span class="sabl-month-plot" aria-hidden="true">
+            <span class="sabl-month-v tnum" data-month-v>{b.value}</span>
+            <span class="sabl-month-bar"></span>
+          </span>
+          <span class="sabl-month-m" aria-hidden="true" data-month-m>{b.label}</span>
+          {/* Always rendered, empty on the program chart, so both charts are the
+              same height and the toolbar sits at one height on every hub. */}
+          <span class="sabl-month-n" aria-hidden="true" data-month-n>{b.sub}</span>
+        </li>
+      ))}
+    </ol>
+    <p class="sabl-months-empty" data-months-empty hidden={bars.some(b => b.total > 0)}>{empty}</p>
+  </figure>
+</div>

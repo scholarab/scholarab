@@ -425,11 +425,76 @@ body.quiz-results #match-divider {
   margin: 20px 0 0; max-width: 560px; min-height: calc(1.55em * 3);
 }
 
-.sabl-stat { text-align: right; flex: none; padding-top: 10px; }
-.sabl-stat-value { font-family: var(--font-display); font-size: clamp(32px, 4vw, 44px); line-height: 1; }
-.sabl-stat-label { font-size: 13.5px; font-weight: 500; color: rgba(20, 25, 21, 0.68); margin-top: 6px; }
-.sabl-stat-soon { font-size: 13.5px; font-weight: 500; color: rgba(20, 25, 21, 0.68); margin-top: 2px; white-space: pre-line; }
-.sabl-stat-soon[hidden] { display: none; }
+/* ── Figures and month chart (SabLedger) ──
+   Replaced the lone headline number top-right of the title (Ilia, 2026-09-22:
+   "still looks AI generated"). Four figures read as a report rather than a
+   landing page, and the chart is the one thing on the page no other directory
+   can show: when the money actually comes due. A hidden figure takes its
+   divider with it: only a figure after a visible one gets the left rule. */
+.sabl-ledger { margin-top: 28px; }
+.sabl-figs {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
+  margin: 0; border-top: 1px solid var(--text-primary);
+}
+.sabl-fig { display: flex; flex-direction: column; min-width: 0; padding: 16px 20px 2px 0; }
+.sabl-fig[hidden] { display: none; }
+.sabl-fig:not([hidden]) ~ .sabl-fig { padding-left: 20px; border-left: 1px solid rgba(20, 25, 21, 0.14); }
+.sabl-fig-value {
+  order: -1; margin: 0; white-space: nowrap;
+  font: 400 clamp(32px, 3.4vw, 44px)/1 var(--font-display); color: var(--text-primary);
+}
+.sabl-fig-value.is-money { color: var(--green); }
+.sabl-fig-label { margin-top: 8px; font-size: 13.5px; font-weight: 500; color: rgba(20, 25, 21, 0.68); }
+
+.sabl-months { margin: 30px 0 0; position: relative; }
+.sabl-months-h { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 14px; }
+.sabl-months-h strong { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.sabl-months-h span { font-size: 13px; color: rgba(20, 25, 21, 0.68); }
+/* The baseline is one rule under all twelve plots, drawn on the list, so the
+   gaps between bars do not break it. */
+.sabl-months-bars {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px;
+  background: linear-gradient(var(--text-primary), var(--text-primary)) 0 128px / 100% 1px no-repeat;
+}
+.sabl-month { display: flex; flex-direction: column; min-width: 0; }
+.sabl-month-plot { height: 128px; display: flex; flex-direction: column; justify-content: flex-end; }
+.sabl-month-v {
+  margin-bottom: 6px; text-align: center; white-space: nowrap;
+  font: 400 17px/1 var(--font-display); color: var(--text-primary);
+}
+/* 80% of the plot at most, so the tallest bar's figure still fits above it. */
+.sabl-month-bar {
+  display: block; height: calc(var(--h, 0%) * 0.8); min-height: 2px;
+  background: #CFE3D6; border-radius: 3px 3px 0 0;
+}
+.sabl-month.is-now .sabl-month-bar { background: var(--green); }
+.sabl-month.is-zero .sabl-month-v { color: rgba(20, 25, 21, 0.4); }
+.sabl-month-m { margin-top: 8px; text-align: center; font: 600 12px/1.3 var(--font-body); color: rgba(20, 25, 21, 0.68); }
+.sabl-month.is-now .sabl-month-m { color: var(--text-primary); }
+.sabl-month-n { min-height: 1.3em; text-align: center; font-size: 12px; line-height: 1.3; color: rgba(20, 25, 21, 0.62); white-space: nowrap; }
+.sabl-months-empty {
+  position: absolute; left: 0; right: 0; top: 84px; margin: 0;
+  text-align: center; font-size: 13.5px; color: rgba(20, 25, 21, 0.68);
+}
+.sabl-months-empty[hidden] { display: none; }
+@media (max-width: 700px) {
+  .sabl-ledger { margin-top: 22px; }
+  .sabl-figs { grid-auto-flow: row; grid-template-columns: 1fr 1fr; column-gap: 16px; }
+  .sabl-fig, .sabl-fig:not([hidden]) ~ .sabl-fig {
+    padding: 14px 0 12px; border-left: 0; border-bottom: 1px solid rgba(20, 25, 21, 0.14);
+  }
+  .sabl-fig-value { font-size: 32px; }
+  .sabl-fig-label { font-size: 13px; }
+  .sabl-months { margin-top: 24px; }
+  .sabl-months-h { flex-direction: column; gap: 2px; }
+  .sabl-months-bars { gap: 3px; background-position: 0 104px; }
+  .sabl-month-plot { height: 104px; }
+  .sabl-month-v { font-size: 11.5px; margin-bottom: 4px; }
+  .sabl-month-m { font-size: 10.5px; }
+  .sabl-month-n { display: none; }
+  .sabl-months-empty { top: 64px; }
+}
 
 /* One rule, not three. The toolbar used to close with a hairline of its own
    and the first group seam drew another a few pixels below it, so the band
@@ -500,34 +565,36 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    at 13.5px Archivo. Set flush against each other they read as one blob with
    a black lump in it (Ilia, 2026-09-15: "too packed together"). The phone
    block below overrides the gap for the scrolling row. */
-.sabl-sort-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sabl-sort-chips { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
 .sabl-row-label { font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.68); width: 72px; flex: none; }
 .sabl-sort .sabl-row-label { width: auto; margin-right: 0; }
 
+/* Words, not pills (Ilia, 2026-09-22). A row of outlined capsules with one
+   filled black was the most template-looking thing on the page. The choice is
+   now ink and an underline, the way a tab is marked, and the counts sit
+   beside the words. On a railed hub the rail restyles these as an index. */
 .sabl-chip {
   font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
-  padding: 8px 15px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
-  background: transparent; color: var(--text-primary); cursor: pointer;
+  padding: 8px 0; border: 0; border-radius: 0; background: none;
+  color: rgba(20, 25, 21, 0.72); cursor: pointer;
+  box-shadow: inset 0 -2px 0 transparent;
 }
-.sabl-chip:hover { border-color: var(--text-primary); }
-.sabl-chip.on { background: var(--text-primary); color: var(--paper); border-color: var(--text-primary); }
+.sabl-chip:hover { color: var(--text-primary); box-shadow: inset 0 -2px 0 rgba(20, 25, 21, 0.2); }
+.sabl-chip.on { color: var(--text-primary); box-shadow: inset 0 -2px 0 var(--text-primary); }
 
 /* City chips are links to that city's hub, so they need the padding and
    baseline an inline anchor does not get on its own, and no underline. */
 .sabl-chip-link { display: inline-flex; align-items: center; text-decoration: none; }
 /* margin rather than a flex gap, because most chips carrying a count are plain
    buttons and only the city ones are inline-flex links. */
-.sabl-chip-count { font-size: 11.5px; margin-left: 6px; color: rgba(20, 25, 21, 0.68); }
+.sabl-chip-count { font-size: 12px; margin-left: 6px; color: rgba(20, 25, 21, 0.62); }
 /* A filter that would leave nothing behind. Still clickable (the empty state
    explains itself and offers a way out), just not presented as an equal
    offer beside a chip holding forty listings. */
 /* Muted by ink, not opacity: at 0.45 opacity the label measured 2.87:1 on
    the cream and failed AA. 0.62 ink is about 5:1. */
-.sabl-chip.is-empty { color: rgba(20, 25, 21, 0.62); border-color: rgba(20, 25, 21, 0.14); }
+.sabl-chip.is-empty { color: rgba(20, 25, 21, 0.62); font-weight: 500; }
 .sabl-chip.is-empty .sabl-chip-count { color: rgba(20, 25, 21, 0.62); }
-/* The current city's chip is filled dark, so its count needs the light ink or
-   it renders dark on dark and disappears. */
-.sabl-chip.on .sabl-chip-count { color: rgba(238, 241, 236, 0.6); }
 .sabl-chip-link:hover .sabl-chip-count { color: rgba(20, 25, 21, 0.7); }
 
 .sabl-filters { display: flex; flex-direction: column; gap: 12px; padding: 20px 0 0; }
@@ -563,7 +630,7 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
  * The scrollbar is deliberately not hidden. It is the only thing telling a
  * mouse user that there is more row to the right. */
 .sabl-chips {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 4px 20px;
   flex: 1; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain;
   padding-bottom: 2px;
   /* Thin and quiet rather than hidden: on a row that does overflow (FIELD on
@@ -608,8 +675,7 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
    would win inside that media query and put FIELD back beside its chips on a
    375px screen. */
 @media (min-width: 901px) {
-  .sabl-filters-dense .sabl-chips { gap: 5px; }
-  .sabl-filters-dense .sabl-chip { padding: 8px 10px; }
+  .sabl-filters-dense .sabl-chips { gap: 4px 16px; }
   .sabl-filters-dense .sabl-row-label { width: 56px; }
   /* /scholarships has room (its TYPE row ends near 950px), and "Where you
      live" in sentence case broke onto two lines at 56px. */
@@ -663,9 +729,22 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
     flex-direction: column; align-items: stretch; gap: 8px;
   }
   .sabl-railed .sabl-rail .sabl-row-label { width: auto; padding-top: 0; }
+  /* The rail reads as an index: one choice per line, its count flush right,
+     and a green mark beside the one in force. */
   .sabl-railed .sabl-rail .sabl-chips {
-    flex-wrap: wrap; overflow-x: visible; gap: 6px;
+    flex-direction: column; align-items: stretch; flex-wrap: nowrap; overflow-x: visible; gap: 0;
   }
+  .sabl-railed .sabl-rail .sabl-chip {
+    position: relative; display: flex; justify-content: space-between; align-items: baseline;
+    width: 100%; padding: 6px 0 6px 14px; text-align: left; font-weight: 500; box-shadow: none;
+  }
+  .sabl-railed .sabl-rail .sabl-chip:hover { box-shadow: none; }
+  .sabl-railed .sabl-rail .sabl-chip.on { font-weight: 700; }
+  .sabl-railed .sabl-rail .sabl-chip.on::before {
+    content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px;
+    border-radius: 2px; background: var(--green);
+  }
+  .sabl-railed .sabl-rail .sabl-chip-count { font-size: 13px; }
   /* As many cards as the window holds, not three. On the wide body a 1440
      window fits four and a 2560 one seven, and the card keeps a floor of 300px
      so it never gets too narrow to read. */
@@ -871,6 +950,20 @@ html.js .sabl-group-toggle { display: inline-flex; }
   transition: background-color 0.14s ease;
 }
 .sabl-card:hover { background-color: rgba(20,25,21,0.04); }
+/* Numbered within each status run (Ilia, 2026-09-22), so the list reads as a
+   ranked table in whatever order the sort puts it. A CSS counter, not markup:
+   hidden and folded rows do not count, and a group header restarts it. The
+   number is absolutely placed, so it never becomes a fifth grid cell. Directory
+   grids only; /saved shares .sabl-card but is not a ranking. */
+[data-dir-grid] { counter-reset: sabl-rank; }
+[data-dir-grid] .sabl-group { counter-reset: sabl-rank; }
+[data-dir-grid] .sabl-card { counter-increment: sabl-rank; position: relative; padding-left: 64px; }
+[data-dir-grid] .sabl-card::before {
+  content: counter(sabl-rank, decimal-leading-zero);
+  position: absolute; left: 10px; top: 18px;
+  font: 400 22px/1 var(--font-display); color: rgba(20, 25, 21, 0.3);
+  font-variant-numeric: tabular-nums;
+}
 .sabl-card:last-of-type { border-bottom: 1px solid rgba(20,25,21,0.14); }
 
 /* Four cells, each with its own stack. The deadline's two lines used to be
@@ -902,7 +995,10 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-name-h { margin: 0; font: inherit; }
 /* A row's figure column, not a card's headline: it sits beside the title at
    the same place on every row so the column reads down. */
-.sabl-amount { font-family: var(--font-display); font-size: 26px; line-height: 1.15; margin: 0; color: var(--green); }
+/* Ink, not green (2026-09-22): a column of green figures read as decoration;
+   black reads as the number it is. Green is kept for the page's headline
+   money and the chart. */
+.sabl-amount { font-family: var(--font-display); font-size: 26px; line-height: 1.15; margin: 0; color: var(--text-primary); }
 /* Clamped at three lines. Program descriptions are free text and run from one
    line to eight, and because the cards share a grid row, the longest one in a
    row set the height for all three; a single verbose listing opened a band of
@@ -1036,6 +1132,8 @@ html:not(.js) .sabl-more { display: none; }
     padding: 14px 0 13px;
   }
   .sabl-row-main { grid-column: 1 / -1; grid-row: 1; }
+  [data-dir-grid] .sabl-card { padding-left: 40px; }
+  [data-dir-grid] .sabl-card::before { left: 0; top: 16px; font-size: 18px; }
   .sabl-amount,
   .sabl-card-top-left {
     grid-column: 1; grid-row: 2;
@@ -1054,9 +1152,6 @@ html:not(.js) .sabl-more { display: none; }
 }
 @media (max-width: 900px) {
   .sabl-title-row { flex-direction: column; align-items: flex-start; gap: 18px; }
-  /* The column layout already has its own gap; the optical nudge that
-     settles the stat against the h1 side by side is just extra space here. */
-  .sabl-stat { text-align: left; padding-top: 0; }
   /* 48px is the desktop floor of the clamp, which on a phone spent a third of
      the viewport on one word. */
   .sabl-h1 { font-size: 40px; }
@@ -1101,7 +1196,7 @@ html:not(.js) .sabl-more { display: none; }
   .sabl-sort { flex-direction: column; align-items: stretch; gap: 6px; flex-wrap: nowrap; }
   .sabl-sort .sabl-row-label { width: 100%; margin-right: 0; }
   .sabl-sort-chips {
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: center; gap: 22px;
     min-width: 0; overflow-x: auto; overscroll-behavior-x: contain;
   }
   .sabl-sort-chips > * { flex: none; }

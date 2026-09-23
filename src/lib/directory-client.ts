@@ -49,6 +49,9 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
    * waiting rather than letting the page look flat.
    */
   summary(visible: T[], total: number): Record<string, string>;
+  /** Anything above the grid drawn from the visible list as a whole, such as
+   *  the figures and the month chart; runs after `summary` on every render. */
+  paint?(root: HTMLElement, visible: T[]): void;
   /** Labelled seams between runs in the grid. `key` must be the sort's primary
    *  key, or one group would be split across two headers. */
   groups?: {
@@ -344,6 +347,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
         if (key === 'stat-soon') slot.hidden = text === '';
       }
     }
+    config.paint?.(root, visible);
 
     root.querySelectorAll<HTMLElement>('[data-fkey]').forEach(chip => {
       const on = state[chip.dataset.fkey!] === chip.dataset.fval;
