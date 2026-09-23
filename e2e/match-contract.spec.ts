@@ -7,7 +7,10 @@ test.use({ serviceWorkers: 'block' });
 
 const city = QUIZ_QUESTIONS.find(q => q.key === 'city')!.opts.find(o =>
   boardsForCity(payload.scholarships, o.value).length && schoolsForCity(payload.scholarships, o.value).length)!.value;
-const questions = [...QUIZ_QUESTIONS, boardQuestion(boardsForCity(payload.scholarships, city)), schoolQuestion(schoolsForCity(payload.scholarships, city))];
+const board = boardQuestion(boardsForCity(payload.scholarships, city));
+// The test answers the first option everywhere, and the school list is
+// narrowed by the board that was picked, exactly as the quiz narrows it.
+const questions = [...QUIZ_QUESTIONS, board, schoolQuestion(schoolsForCity(payload.scholarships, city, board.opts[0]!.value))];
 const answers = Object.fromEntries(questions.map(q => [q.key,
   q.key === 'city' ? city : q.key === 'searchType' ? 'both' : q.opts[0]!.value]));
 

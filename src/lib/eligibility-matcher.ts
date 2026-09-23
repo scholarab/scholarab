@@ -338,7 +338,7 @@ export function programFields(p: { category?: string | null; description?: strin
  * Filter active programs by the student's grade, narrow by field keywords when
  * that doesn't empty the list, and return the top RESULT_LIMIT.
  */
-export function matchPrograms(programs: Program[], answers: Record<string, string>): Program[] {
+export function matchPrograms(programs: Program[], answers: Record<string, string>, limit = RESULT_LIMIT): Program[] {
   const grade = answers.grade ?? '12'
   let filtered = programs.filter(p => p.active && matchProgram(grade, p))
   const field = answers.field
@@ -346,7 +346,7 @@ export function matchPrograms(programs: Program[], answers: Record<string, strin
     const byField = filtered.filter(p => programFields(p).includes(field))
     if (byField.length > 0) filtered = byField
   }
-  return filtered.slice(0, RESULT_LIMIT)
+  return filtered.slice(0, limit)
 }
 
 /**

@@ -8,6 +8,8 @@ import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti, generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
+import { scholarshipStatusOf } from '../lib/status.ts'
+import { BOOKMARK } from '../lib/icons.ts'
 import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
   SCHOOL_QUESTION_KEY, schoolQuestion, schoolsForCity,
@@ -163,7 +165,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const QUESTIONS = useMemo(() => {
     if (!answers.city) return BASE_QUESTIONS
     const boards = boardsForCity(scholarships, answers.city)
-    const schools = schoolsForCity(scholarships, answers.city)
+    const schools = schoolsForCity(scholarships, answers.city, answers[BOARD_QUESTION_KEY])
     // Board before school: it is the coarser cut, and a student who answers it
     // has already narrowed the school list they are about to be shown.
     return [
@@ -171,7 +173,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       ...(boards.length > 0 ? [boardQuestion(boards)] : []),
       ...(schools.length > 0 ? [schoolQuestion(schools)] : []),
     ]
-  }, [answers.city, scholarships])
+  }, [answers.city, answers[BOARD_QUESTION_KEY], scholarships])
 
   // Until the city is answered the board and school questions are unknown, so
   // "of 6" would jump to "of 8" mid-quiz. Say the most it can be for any city
@@ -224,6 +226,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           delete next[SCHOOL_QUESTION_KEY]
           delete next[BOARD_QUESTION_KEY]
         }
+        // The school list is narrowed by the board, so a new board can take
+        // the kept school off it.
+        if (key === BOARD_QUESTION_KEY && a[BOARD_QUESTION_KEY] !== value) delete next[SCHOOL_QUESTION_KEY]
         return next
       })
       setEnterDir('fwd')
@@ -245,6 +250,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     setAnswers({})
     setEnterDir('fwd')
     setStep(0)
+    setShowAll(false)
     setAnimKey(k => k + 1)
   }
 
@@ -307,7 +313,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const showScholarships = searchType === 'scholarships' || searchType === 'both'
   const showPrograms = searchType === 'programs' || searchType === 'both'
 
-  const scholarshipResults = useMemo(() => {
+  // Every match, uncapped. The screen shows the first RESULT_LIMIT and says how
+  // many there are: "We found 20" was the cap talking, not the count.
+  const allScholarshipResults = useMemo(() => {
     if (!profile || step < QUESTIONS.length || !showScholarships) return null
     const all = matchAll(profile, openScholarships).map(m => ({
       ...m,
@@ -315,13 +323,17 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     })).filter(m => m.scholarship)
     const quality  = all.filter(r => r.tier !== 'possible')
     const possible = all.filter(r => r.tier === 'possible')
-    return quality.length >= 5 ? quality.slice(0, RESULT_LIMIT) : [...quality, ...possible].slice(0, RESULT_LIMIT)
+    return quality.length >= 5 ? quality : [...quality, ...possible]
   }, [profile, step, openScholarships, scholarshipMap, showScholarships, QUESTIONS.length])
 
-  const programResults = useMemo(() => {
+  const allProgramResults = useMemo(() => {
     if (step < QUESTIONS.length || !showPrograms) return null
-    return matchPrograms(programs, answers)
+    return matchPrograms(programs, answers, Infinity)
   }, [programs, answers, step, showPrograms, QUESTIONS.length])
+
+  const [showAll, setShowAll] = useState(false)
+  const scholarshipResults = allScholarshipResults && (showAll ? allScholarshipResults : allScholarshipResults.slice(0, RESULT_LIMIT))
+  const programResults = allProgramResults && (showAll ? allProgramResults : allProgramResults.slice(0, RESULT_LIMIT))
 
   // What one of these is worth, not what all of them add up to. The card used
   // to show a sum; "COMBINED AWARD VALUE $27,500", which is a number nobody
@@ -366,22 +378,30 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // ── Results ────────────────────────────────────────────────────────────────
 
   if (step >= QUESTIONS.length) {
+    const today = todayDate()
     const strong   = scholarshipResults?.filter(r => r.tier === 'strong') ?? []
     const good     = scholarshipResults?.filter(r => r.tier === 'good') ?? []
     const possible = scholarshipResults?.filter(r => r.tier === 'possible') ?? []
 
     const scholarshipCount = scholarshipResults?.length ?? 0
     const programCount = programResults?.length ?? 0
+    const scholarshipTotal = allScholarshipResults?.length ?? 0
+    const programTotal = allProgramResults?.length ?? 0
     const hasAnyResults = scholarshipCount > 0 || programCount > 0
+    const hasMore = scholarshipTotal > scholarshipCount || programTotal > programCount
+    // "Your top 20 of 64" when the list is cut, the plain count when it is not.
+    const counted = (shown: number, total: number, noun: string) =>
+      `${total > shown ? `your top ${shown} of ${total}` : shown} ${noun}${total !== 1 ? 's' : ''}`
 
     // "Worth a look", never "you qualify for": the quiz asks six things and
     // most awards gate on more than six, so it can rule awards out but it
     // cannot rule them in. The rows say what is left to check.
+    const sentence = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
     const headline = showScholarships && showPrograms
-      ? `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} and ${programCount} program${programCount !== 1 ? 's' : ''} worth a look.`
+      ? sentence(`${counted(scholarshipCount, scholarshipTotal, 'scholarship')} and ${counted(programCount, programTotal, 'program')} worth a look.`)
       : showPrograms
-        ? `We found ${programCount} program${programCount !== 1 ? 's' : ''} for your grade and field.`
-        : `We found ${scholarshipCount} scholarship${scholarshipCount !== 1 ? 's' : ''} worth a look.`
+        ? sentence(`${counted(programCount, programTotal, 'program')} for your grade and field.`)
+        : sentence(`${counted(scholarshipCount, scholarshipTotal, 'scholarship')} worth a look.`)
 
     // A tier only means something next to a different tier. When every row
     // carries the same one (20 of 20 "Strong match" was the common case), the
@@ -431,7 +451,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <div className="sabm-results-actions">
             <button onClick={reset} className="sabm-btn-outline">Retake quiz</button>
             {showScholarships && (
-              <a href="/scholarships/" className="sabm-btn-accent">Browse all scholarships →</a>
+              // The student's own hub, not the whole directory: the city is the
+              // one answer every award in it already agrees with.
+              answers.city && answers.city !== 'Other Alberta'
+                ? <a href={`/scholarships/${generateSlug(answers.city)}/`} className="sabm-btn-accent">All {answers.city} scholarships →</a>
+                : <a href="/scholarships/alberta/" className="sabm-btn-accent">All province-wide scholarships →</a>
             )}
             {showPrograms && !showScholarships && (
               <a href="/programs/" className="sabm-btn-accent">Browse all programs →</a>
@@ -449,6 +473,12 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             </p>
             {scholarshipResults.map(({ scholarship: s, tier, signals, checks }, index) => {
               const style = TIER_STYLES[tier]
+              // Same ladder as the directory row this links to, so a match that
+              // is not open today never wears a bare "Apply".
+              const status = scholarshipStatusOf(s, today)
+              const when = status === 'unconfirmed' ? 'Date not confirmed'
+                : status === 'future' ? (s.openDate ? `Opens ${formatDue(s.openDate)}` : 'Opening later')
+                : s.deadline ? `Due ${formatDue(s.deadline)}` : 'No fixed deadline'
               return (
                 <ResultRow
                   key={s.id}
@@ -461,7 +491,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     {checks.length > 0
                       ? checks.map(c => <span key={c} className="sabm-tier sabm-check">Check: {c}</span>)
                       : showTiers && <span className={style.badge}>{style.label}</span>}
-                    {s.deadline && <span className="sabm-tier sabm-due">Due {formatDue(s.deadline)}</span>}
+                    <span className="sabm-tier sabm-due">{when}</span>
                   </>}
                   // Two at most. The point is to justify the rank at a glance,
                   // not to reprint the eligibility criteria.
@@ -474,7 +504,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       aria-pressed={savedIds.has(s.id)}
                       className={`sabl-save${savedIds.has(s.id) ? ' on' : ''}`}
                     >
-                      {savedIds.has(s.id) ? '★' : '☆'}
+                      <span className="sabm-save-ico" dangerouslySetInnerHTML={{ __html: BOOKMARK }} />
                     </button>
                     <a
                       href={s.url}
@@ -483,8 +513,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       referrerPolicy="no-referrer"
                       className="sabl-apply"
                       onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
-                      aria-label={`Apply for ${s.title} on the sponsor's site (opens in a new tab)`}
-                    >Apply<span className="sabl-ext" aria-hidden="true">↗</span></a>
+                      aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
+                    >{status === 'active' ? 'Apply' : 'Visit'}<span className="sabl-ext" aria-hidden="true">↗</span></a>
                   </>}
                 />
               )
@@ -538,7 +568,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     aria-pressed={savedProgramIds.has(p.id)}
                     className={`sabl-save${savedProgramIds.has(p.id) ? ' on' : ''}`}
                   >
-                    {savedProgramIds.has(p.id) ? '★' : '☆'}
+                    <span className="sabm-save-ico" dangerouslySetInnerHTML={{ __html: BOOKMARK }} />
                   </button>
                   <a
                     href={p.url}
@@ -553,6 +583,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
               />
             ))}
           </div>
+        )}
+
+        {hasMore && (
+          <button type="button" className="sabm-btn-outline sabm-show-all" onClick={() => setShowAll(true)}>
+            Show all {showScholarships && showPrograms
+              ? `${scholarshipTotal + programTotal} matches`
+              : showPrograms ? `${programTotal} programs` : `${scholarshipTotal} scholarships`}
+          </button>
         )}
 
         {!hasAnyResults && (
@@ -595,9 +633,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           {current.q}
         </h2>
 
-        <div className="sabm-opts">
+        <div className={`sabm-opts${current.opts.length > 8 ? ' is-many' : ''}`}>
           {current.opts.map((opt, i) => {
-            const spanFull = current.opts.length % 2 !== 0 && i === current.opts.length - 1;
+            // A lone last tile spans the row in the two-column grid only; the
+            // compact grid has three columns on desktop and would stretch it.
+            const spanFull = current.opts.length <= 8 && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
             return (
               <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1', height: '100%' } : { height: '100%' }}>
                 <MatchTile

@@ -54,7 +54,7 @@ test('match quiz reaches results', async ({ page }) => {
         .toBeVisible({ timeout: 10_000 });
     }
 
-    await expect(page.locator('text=/We found/')).toBeVisible({ timeout: 10_000 });
+    await expect(page.locator('text=/worth a look/')).toBeVisible({ timeout: 10_000 });
 });
 
 test('saved page - hydrates and shows item count', async ({ page }) => {

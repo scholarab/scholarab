@@ -277,7 +277,7 @@ describe('Question 6; Institution', () => {
 
   it('clicking an institution advances to results', () => {
     clickTile('Not sure yet')
-    expect(screen.getByText(/we found/i)).toBeTruthy()
+    expect(screen.getByText(/worth a look/i)).toBeTruthy()
   })
 })
 
@@ -287,7 +287,7 @@ describe('Results', () => {
   it('shows "0 scholarships found" when matchAll returns empty', () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/we found 0 scholarships/i)).toBeTruthy()
+    expect(screen.getByText(/^0 scholarships worth a look/i)).toBeTruthy()
   })
 
   it('shows why each row ranked where it did, at most two reasons', () => {
@@ -324,7 +324,7 @@ describe('Results', () => {
     ])
     render(<EligibilityQuiz scholarships={[s1 as any, s2 as any]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/we found 2 scholarships/i)).toBeTruthy()
+    expect(screen.getByText(/^2 scholarships worth a look/i)).toBeTruthy()
   })
 
   it('shows "1 scholarship found" with singular form', () => {
@@ -332,7 +332,19 @@ describe('Results', () => {
     mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] }])
     render(<EligibilityQuiz scholarships={[s1 as any]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/we found 1 scholarship/i)).toBeTruthy()
+    expect(screen.getByText(/^1 scholarship worth a look/i)).toBeTruthy()
+  })
+
+  it('says "your top 20 of N" when the list is cut, and shows the rest on request', () => {
+    // "We found 20" was the cap talking; 25 matched.
+    const many = Array.from({ length: 25 }, (_, i) => makeScholarship({ id: i + 1, title: `Award ${i + 1}` }))
+    mockMatchAll.mockReturnValue(many.map(s => ({ id: s.id, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] })))
+    render(<EligibilityQuiz scholarships={many as any} programs={[]} />)
+    advanceToResults()
+    expect(screen.getByText(/^Your top 20 of 25 scholarships worth a look/)).toBeTruthy()
+    expect(screen.queryByText('Award 25')).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: /show all 25 scholarships/i }))
+    expect(screen.getByText('Award 25')).toBeTruthy()
   })
 
   it('renders scholarship titles in results', () => {
@@ -471,10 +483,11 @@ describe('Results', () => {
     expect(screen.getByText('1 good match')).toBeTruthy()
   })
 
-  it('shows "Browse all scholarships" link in results', () => {
+  it("links the results to the student's own city hub", () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/browse all scholarships/i)).toBeTruthy()
+    const link = screen.getByText(/all medicine hat scholarships/i).closest('a')
+    expect(link?.getAttribute('href')).toBe('/scholarships/medicine-hat/')
   })
 })
 

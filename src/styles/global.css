@@ -1170,6 +1170,12 @@ html:not(.js) .sabl-more { display: none; }
   font-size: clamp(34px, 5vw, 54px); letter-spacing: -0.01em; margin: 18px 0 0;
 }
 .sabm-opts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 36px; }
+/* A long list (city, school) in compact tiles. At full size the 24 cities ran
+   about 2,800px on a phone, with "Other Alberta" last. */
+.sabm-opts.is-many { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.sabm-opts.is-many .sabm-opt { padding: 14px 16px; border-radius: 12px; }
+.sabm-opts.is-many .sabm-opt-label { font-size: 16px; }
+.sabm-opts.is-many .sabm-opt-arrow { display: none; }
 .sabm-opt, .sabm-ph-opt {
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   width: 100%; text-align: left; font-family: var(--font-body);
@@ -1225,6 +1231,7 @@ html:not(.js) .sabm-ph { display: none; }
 }
 .sabm-count-chip.solid { background: var(--text-primary); color: var(--paper); border-color: var(--text-primary); }
 .sabm-results-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.sabm-show-all { display: block; margin: 32px auto 0; }
 .sabm-btn-outline {
   font-family: var(--font-body); font-size: 14.5px; font-weight: 600;
   padding: 12px 22px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
@@ -1312,6 +1319,10 @@ html:not(.js) .sabm-ph { display: none; }
 @media (max-width: 900px) {
   .sabm-body { padding: 24px 20px 64px; }
   .sabm-opts { grid-template-columns: 1fr; }
+  .sabm-opts.is-many { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sabm-opts.is-many .sabm-opt { padding: 12px 12px; }
+  .sabm-opts.is-many .sabm-opt-label { font-size: 15px; }
+  .sabm-opts.is-many .sabm-opt-hint { font-size: 10.5px; }
   .sabm-value-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
   .sabm-value-note { border-left: none; padding-left: 0; border-top: 1px solid rgba(238, 241, 236,0.18); padding-top: 20px; }
   .sabm-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; padding: 20px 4px; }

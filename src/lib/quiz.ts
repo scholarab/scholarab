@@ -265,17 +265,34 @@ export function boardQuestion(boards: string[]): QuizQuestion {
   };
 }
 
-/** Schools with awards restricted to them, for one city, in listing order. */
+/**
+ * Schools with awards restricted to them, for one city, sorted by name.
+ *
+ * With a board chosen, a school the data places in a different board is left
+ * out: a Catholic-board student was offered Medicine Hat High School (MHPSD).
+ * There is no school-to-board table, so the only evidence is an award naming
+ * both; a school with no such award stays in, since hiding a student's own
+ * school is worse than offering one that is not theirs.
+ */
 export function schoolsForCity(
-  listings: Array<{ region?: string | null; eligibility?: { specificSchools?: string[] } | null }>,
+  listings: Array<{ region?: string | null; eligibility?: { specificSchools?: string[]; schoolBoards?: string[] } | null }>,
   city: string,
+  board?: string | null,
 ): string[] {
   const seen = new Set<string>();
+  const boardsOf = new Map<string, Set<string>>();
   for (const l of listings) {
     if (!inCityScope(l.region, city)) continue;
-    for (const s of l.eligibility?.specificSchools ?? []) seen.add(s);
+    for (const s of l.eligibility?.specificSchools ?? []) {
+      seen.add(s);
+      const known = boardsOf.get(s) ?? new Set<string>();
+      for (const b of l.eligibility?.schoolBoards ?? []) known.add(b);
+      boardsOf.set(s, known);
+    }
   }
-  return [...seen].sort((a, b) => a.localeCompare(b));
+  return [...seen]
+    .filter(s => !board || !boardsOf.get(s)?.size || boardsOf.get(s)!.has(board))
+    .sort((a, b) => a.localeCompare(b));
 }
 
 // ── How the quiz describes itself ─────────────────────────────────────────────

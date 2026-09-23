@@ -69,7 +69,12 @@ export async function getStaticPaths() {
   // with no inbound link from any peer while one collected 27. So the picks are
   // made for the whole corpus at once (see lib/related.ts), which is also why
   // the tie-break is no longer corpus order.
+  // A closed listing is noindexed and has nothing to apply to, so a rail
+  // recommending one (Youreka's page offered the closed AAAF bursary) is a
+  // dead end with a friendly face. Its own page still gets neighbours.
+  const notClosed = (s: Scholarship) => scholarshipStatusOf(s, metaToday) !== 'closed';
   const relatedScholarshipsFor = balancedRelated(scholarships, {
+    eligible: notClosed,
     score: (self, s) =>
       (s.category && s.category === self.category ? 2 : 0) +
       (s.region && s.region === self.region ? 1 : 0) +
@@ -102,6 +107,7 @@ export async function getStaticPaths() {
   });
 
   const crossScholarshipsFor = balancedCross(programs, scholarships, {
+    eligible: notClosed,
     score: (self, s) => scoreScholarshipForProgram(self, s),
     qualifies: score => score > 0,
     prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
