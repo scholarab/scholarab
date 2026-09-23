@@ -691,8 +691,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       if (held) return;
       v.play().then(() => v.classList.add('is-on')).catch(() => {
         if (v !== vids[cur]) return;
+        // An open dropdown pausing a play() still in flight rejects it too, so
+        // the retry has to respect the hold or it restarts the film under the blur.
         const again = () => {
-          if (v !== vids[cur] || !v.paused) return;
+          if (held || v !== vids[cur] || !v.paused) return;
           v.play().then(() => v.classList.add('is-on')).catch(() => {});
         };
         v.addEventListener('canplay', again, { once: true });

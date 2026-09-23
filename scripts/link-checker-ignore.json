@@ -108,6 +108,10 @@
     "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (IPPC Indigenous Pharmacy Scholarship page). If it starts passing in CI, drop this entry."
   },
   {
+    "host": "spaceappschallenge.org",
+    "reason": "The certificate chains to Comodo's AAA Certificate Services root, which Node's bundled CA store does not carry, so every Node fetch fails with 'unable to get local issuer certificate' while openssl against the system store verifies and the site loads in browser. First failed in the 2026-09-21 run; verified live 2026-09-23 (Space Apps 2026 registration page, November 14 to 15)."
+  },
+  {
     "host": "girlguides.ca",
     "reason": "TLS chain incomplete for Node clients (unable to verify the first certificate); the scholarships page returns 200 off-runner and loads in browser, verified 2026-09-12."
   },
