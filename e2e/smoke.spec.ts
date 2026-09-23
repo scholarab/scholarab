@@ -276,3 +276,22 @@ test('header dropdown switches without closing', async ({ page }, testInfo) => {
   await expect(drop).not.toHaveAttribute('data-on', '');
   await expect(page.locator('.sabh-scrim')).toBeHidden();
 });
+
+// The scope carousel under the hero: one photo card per scope with a hub
+// photo, each linking to its hub, and arrows that step one card at a time.
+test('home scope carousel links every card to its hub and steps with the arrows', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'arrows are desktop only');
+  await page.goto('/');
+  const cards = page.locator('[data-scope-card]');
+  await expect(cards).toHaveCount(5);
+  for (const href of await cards.locator('.sab-scope-btn-solid').evaluateAll(els => els.map(e => e.getAttribute('href')))) {
+    expect(href).toMatch(/^\/scholarships\/[a-z-]+\/$/);
+  }
+  const track = page.locator('[data-scopes-track]');
+  await expect(page.locator('[data-scopes-prev]')).toBeHidden();
+  await page.locator('[data-scopes-next]').click();
+  await expect(page.locator('.sab-scopes-dot').nth(1)).toHaveAttribute('aria-current', 'true');
+  const step = await cards.nth(1).evaluate(el => (el as HTMLElement).offsetLeft - (el.previousElementSibling as HTMLElement).offsetLeft);
+  await expect.poll(() => track.evaluate(el => Math.round(el.scrollLeft))).toBe(step);
+  await expect(page.locator('[data-scopes-prev]')).toBeVisible();
+});

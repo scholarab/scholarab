@@ -106,6 +106,29 @@ const cityFacets = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region').map(f => 
   count: facetItems(f, scholarships).length,
 }));
 
+// The scope carousel under the hero (Ilia, 2026-09-22, after tesla.com's
+// model cards): one big photo card per scope that has a hub photo, biggest
+// first, so the order follows the data rather than a hand-kept list. Counts
+// are the hub's own (facetItems), the same numbers the header tiles show.
+const SCOPE_KICKERS: Record<string, string> = {
+  alberta: 'Anywhere in Alberta',
+  national: 'Open across Canada',
+};
+const scopeCards = SCHOLARSHIP_FACETS
+  .filter(f => f.kind === 'region' && f.backdrop)
+  .map(f => {
+    const items = facetItems(f, scholarships);
+    return {
+      slug: f.slug,
+      label: f.label,
+      backdrop: f.backdrop!,
+      kicker: SCOPE_KICKERS[f.slug] ?? `${f.label} students`,
+      count: items.length,
+      open: items.filter(s => scholarshipStatusOf(s, today) === 'active').length,
+    };
+  })
+  .sort((a, b) => b.count - a.count);
+
 // Seed the same grade/city/field answers consumed by the legacy quiz.
 const legacyLabels: Record<string, string> = {
   grade: 'YOUR GRADE', city: 'YOUR REGION', field: "YOU'RE INTO",
@@ -223,6 +246,54 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       </div>
 
     </div>
+
+    <!-- ============ SCOPE CAROUSEL ============ -->
+    {scopeCards.length > 0 && (
+      <section class="sab-scopes" aria-labelledby="sab-scopes-h" data-scopes>
+        <h2 id="sab-scopes-h" class="sr-only">Scholarships by where you live</h2>
+        <div class="sab-scopes-track" data-scopes-track tabindex="-1">
+          {scopeCards.map(c => (
+            <article class="sab-scope" aria-label={`${c.label}: ${c.count} scholarships`} data-scope-card>
+              <picture>
+                <source media="(max-width: 700px)" srcset={`/photos/backdrops/${c.backdrop}-tall-1000.webp 1000w, /photos/backdrops/${c.backdrop}-tall-2000.webp 2000w`} sizes="88vw" />
+                <img
+                  class="sab-scope-img"
+                  src={`/photos/backdrops/${c.backdrop}-wide-1672.webp`}
+                  srcset={`/photos/backdrops/${c.backdrop}-wide-1672.webp 1672w, /photos/backdrops/${c.backdrop}-wide-3344.webp 3344w`}
+                  sizes="74vw" alt="" loading="lazy" decoding="async"
+                />
+              </picture>
+              <div class="sab-scope-body">
+                <div class="sab-scope-kicker">{c.kicker}</div>
+                <div class="sab-scope-bottom">
+                  <h3 class="sab-scope-name">{c.label}</h3>
+                  <a href={c.open > 0 ? `/scholarships/${c.slug}/?status=active` : `/scholarships/${c.slug}/`} class="sab-scope-sub">
+                    {c.open > 0 ? `${c.open.toLocaleString('en-CA')} open right now` : 'Opening later this year'}
+                  </a>
+                  <div class="sab-scope-ctas">
+                    <a href={`/scholarships/${c.slug}/`} class="sab-scope-btn sab-scope-btn-solid">
+                      See all {c.count.toLocaleString('en-CA')}
+                    </a>
+                    <a href="/match/" class="sab-scope-btn sab-scope-btn-light">Find my match</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <button type="button" class="sab-scopes-arrow sab-scopes-prev" data-scopes-prev aria-label="Previous" hidden>
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="sab-scopes-arrow sab-scopes-next" data-scopes-next aria-label="Next">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="sab-scopes-dots" data-scopes-dots>
+          {scopeCards.map((c, i) => (
+            <button type="button" class="sab-scopes-dot" aria-label={`Show ${c.label}`} aria-current={i === 0 ? 'true' : undefined}></button>
+          ))}
+        </div>
+      </section>
+    )}
 
     <!-- ============ CLOSING THIS WEEK ============ -->
     {closingSoon.length > 0 && (
@@ -393,6 +464,44 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
   updateClosingSoon();
   document.addEventListener('astro:page-load', updateClosingSoon);
+
+  // ── Scope carousel ──
+  // Native horizontal scroll with snap does the swiping; this only wires the
+  // arrows and dots to it and keeps them in step with wherever it rests.
+  function initScopes() {
+    const root = document.querySelector<HTMLElement>('[data-scopes]');
+    const track = root?.querySelector<HTMLElement>('[data-scopes-track]');
+    if (!root || !track || root.dataset.init) return;
+    root.dataset.init = '';
+    const cards = [...track.querySelectorAll<HTMLElement>('[data-scope-card]')];
+    const dots = [...root.querySelectorAll<HTMLElement>('.sab-scopes-dot')];
+    const prev = root.querySelector<HTMLButtonElement>('[data-scopes-prev]')!;
+    const next = root.querySelector<HTMLButtonElement>('[data-scopes-next]')!;
+    const smooth: ScrollBehavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    const current = () => {
+      const left = track.scrollLeft;
+      let best = 0;
+      cards.forEach((c, i) => { if (Math.abs(c.offsetLeft - track.offsetLeft - left) < Math.abs(cards[best]!.offsetLeft - track.offsetLeft - left)) best = i; });
+      return best;
+    };
+    const go = (i: number) => {
+      const c = cards[Math.max(0, Math.min(cards.length - 1, i))];
+      if (c) track.scrollTo({ left: c.offsetLeft - track.offsetLeft - parseFloat(getComputedStyle(track).scrollPaddingLeft || '0'), behavior: smooth });
+    };
+    const sync = () => {
+      const i = current();
+      dots.forEach((d, j) => (j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+      prev.hidden = track.scrollLeft < 4;
+      next.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    };
+    prev.addEventListener('click', () => go(current() - 1));
+    next.addEventListener('click', () => go(current() + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+    let raf = 0;
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(sync); }, { passive: true });
+    sync();
+  }
+  document.addEventListener('astro:page-load', initScopes);
 
   // ── Hero amount count-up (kept from previous hero; final value is server-rendered) ──
   function animateHeroAmount() {
@@ -729,6 +838,83 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(238, 241, 236, 0.62); margin-top: 6px; white-space: nowrap; }
 
   /* ── Closing this week ── */
+  /* ── Scope carousel (after tesla.com's model cards) ──
+     Cards take most of the width so the next one peeks in at the right edge;
+     the track scrolls natively and snaps each card to the page gutter. */
+  .sab-scopes { position: relative; padding-top: 40px; --scope-gutter: clamp(20px, 4vw, 56px); }
+  .sab-scopes-track {
+    display: flex; gap: 24px; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-left: var(--scope-gutter);
+    padding: 0 var(--scope-gutter); scrollbar-width: none; outline: none;
+  }
+  .sab-scopes-track::-webkit-scrollbar { display: none; }
+  .sab-scope {
+    position: relative; flex: 0 0 min(74vw, 1420px); aspect-ratio: 16 / 9;
+    border-radius: 12px; overflow: hidden; scroll-snap-align: start; background: #16211C;
+  }
+  .sab-scope picture, .sab-scope-img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .sab-scope-img { object-fit: cover; }
+  /* Shade at the top for the kicker and at the bottom for the name and
+     buttons; the photo stays untouched in the middle. */
+  .sab-scope::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(rgba(8,18,14,0.45), rgba(8,18,14,0) 26%, rgba(8,18,14,0) 52%, rgba(8,18,14,0.7));
+  }
+  .sab-scope-body {
+    position: relative; z-index: 1; height: 100%; box-sizing: border-box;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: clamp(24px, 3.4vw, 48px) clamp(24px, 3.4vw, 52px);
+    color: #FFFFFF;
+  }
+  .sab-scope-kicker { font-size: 19px; font-weight: 600; letter-spacing: -0.005em; }
+  .sab-scope-name {
+    margin: 0; font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(48px, 6vw, 84px); line-height: 0.95; letter-spacing: -0.005em;
+  }
+  .sab-scope-sub {
+    display: inline-block; margin-top: 12px; color: #FFFFFF; font-size: 19px;
+    text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px;
+  }
+  .sab-scope-sub:hover { text-decoration-thickness: 2px; }
+  .sab-scope-ctas { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+  .sab-scope-btn {
+    display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
+    min-width: 200px; height: 48px; padding: 0 24px; border-radius: 6px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .sab-scope-btn-solid { background: #2FD3A0; color: #08120E; }
+  .sab-scope-btn-solid:hover { background: #5CE3BB; }
+  .sab-scope-btn-light { background: rgba(255,255,255,0.92); color: #141915; }
+  .sab-scope-btn-light:hover { background: #FFFFFF; }
+  .sab-scopes-arrow {
+    /* Above the cards: each card's text layer is z-index 1, and without this
+       the arrow is drawn but every click on it lands on the card. */
+    position: absolute; z-index: 2; top: calc(40px + min(74vw, 1420px) * 9 / 32); transform: translateY(-50%);
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 56px; border: 0; border-radius: 6px; cursor: pointer;
+    background: rgba(255,255,255,0.85); color: #141915;
+    transition: background-color 0.2s ease;
+  }
+  .sab-scopes-arrow:hover { background: #FFFFFF; }
+  .sab-scopes-arrow[hidden] { display: none; }
+  .sab-scopes-prev { left: calc(var(--scope-gutter) + 16px); }
+  .sab-scopes-next { right: calc(var(--scope-gutter) + 16px); }
+  .sab-scopes-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+  .sab-scopes-dot {
+    width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+    background: rgba(20, 25, 21, 0.2); transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  .sab-scopes-dot[aria-current] { background: #141915; }
+  @media (max-width: 700px) {
+    .sab-scopes-track { gap: 12px; }
+    .sab-scope { flex-basis: 86vw; aspect-ratio: 3 / 4; }
+    .sab-scope-kicker, .sab-scope-sub { font-size: 16px; }
+    .sab-scope-ctas { flex-direction: column; gap: 10px; }
+    .sab-scope-btn { width: 100%; min-width: 0; }
+    .sab-scopes-arrow { display: none; }
+  }
+
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
   .sab-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px; gap: 20px; }
   .sab-eyebrow-urgent { font-size: 13px; letter-spacing: 0.06em; color: #A0491A; margin-bottom: 14px; }
