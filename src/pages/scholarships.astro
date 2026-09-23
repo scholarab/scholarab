@@ -56,7 +56,7 @@ const listJson = itemListJson(
     <SabHeader currentPath="/scholarships" />
   </div>
 
-  <div id="sab-scholarships" class="sabp">
+  <div id="sab-scholarships" class="sabp sabp-wide">
     <div class="sabp-body">
       {loadError ? (
         <div class="sabl-empty" style="margin-top:64px;">
@@ -65,7 +65,7 @@ const listJson = itemListJson(
           <a href="/scholarships/" class="sabl-empty-btn" style="display:inline-block;text-decoration:none;">Try again</a>
         </div>
       ) : (
-        <ScholarshipDirectory items={scholarships} />
+        <ScholarshipDirectory items={scholarships} railFilters />
       )}
     </div>
 

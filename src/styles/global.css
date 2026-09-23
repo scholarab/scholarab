@@ -674,6 +674,8 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
     border-radius: 2px; background: var(--green);
   }
   .sabl-railed .sabl-rail .sabl-chip-count { font-size: 13px; }
+  /* /scholarships' WHERE YOU LIVE picker, fitted to the column. */
+  html.js .sabl-railed .sabl-rail .sabl-scope-select { min-width: 0; width: 100%; }
   /* As many cards as the window holds, not three. On the wide body a 1440
      window fits four and a 2560 one seven, and the card keeps a floor of 300px
      so it never gets too narrow to read. */
