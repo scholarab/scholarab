@@ -108,6 +108,14 @@
     "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs; the same URL returns 200 off-runner, verified 2026-09-12 (IPPC Indigenous Pharmacy Scholarship page). If it starts passing in CI, drop this entry."
   },
   {
+    "host": "g3growbeyond.org",
+    "reason": "WAF returns 403 to requests from GitHub Actions IPs in two consecutive runs (2026-09-21 and a manual run 2026-09-23); the same URL returns 200 off-runner with both Node and curl, and the G3 Grow Beyond contest rules page was verified live 2026-09-23. If it starts passing in CI, drop this entry."
+  },
+  {
+    "host": "ral.ca",
+    "reason": "Drops the TLS handshake from GitHub Actions IPs ('Client network socket disconnected before secure TLS connection was established') in two consecutive runs (2026-09-21 and 2026-09-23); the same URL returns 200 off-runner with Node and curl, and the Robert Allan Memorial Scholarship page was verified live 2026-09-23. If it starts passing in CI, drop this entry."
+  },
+  {
     "host": "spaceappschallenge.org",
     "reason": "The certificate chains to Comodo's AAA Certificate Services root, which Node's bundled CA store does not carry, so every Node fetch fails with 'unable to get local issuer certificate' while openssl against the system store verifies and the site loads in browser. First failed in the 2026-09-21 run; verified live 2026-09-23 (Space Apps 2026 registration page, November 14 to 15)."
   },

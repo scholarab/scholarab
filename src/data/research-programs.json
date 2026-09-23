@@ -1280,17 +1280,18 @@
     "category": "Computing",
     "format": "competitions",
     "provider": "Cyber Security Challenge Canada (CyberSci)",
-    "grades": "High school",
+    "grades": "Post-secondary only",
     "duration": "Several months (regional CTF events + national finals)",
     "paid": false,
     "stipend": null,
     "location": "Virtual (CTF events) + in-person nationals (open to Alberta teams)",
-    "eligibility": "Canadian high school students; teams or individuals",
+    "eligibility": "Full-time students at a Canadian university or college, registered through their school; national finalists must be Canadian citizens. High school students cannot enter.",
     "deadline": "TBA",
-    "url": "https://cybersecuritychallenge.ca/en/",
-    "description": "Ethical hacking competition where teams research network vulnerabilities, cryptography, and server security, then compete in simulated real-time Capture the Flag (CTF) events. Regional and national levels with Alberta participation.",
-    "metaDescription": "Teams research network vulnerabilities, cryptography and server security, then compete in simulated real-time Capture the Flag events.",
-    "lastVerified": "2026-08"
+    "url": "https://cybersci.ca/students/",
+    "description": "Not open to high school students. CyberSci's regional hacking challenges and national finals are for full-time university and college students, who must register through their post-secondary school, so an Alberta student can enter only after starting at a college or university.",
+    "metaDescription": "Not open to high school students: CyberSci's regional challenges and national finals are for full-time university and college students only.",
+    "lastVerified": "2026-09",
+    "active": false
   },
   {
     "id": 83,
@@ -2288,10 +2289,11 @@
     "location": "Edmonton (meetings at City Hall, first Wednesday of the month, 5:30 to 8:30 pm)",
     "eligibility": "Edmonton youth appointed by City Council through an annual recruitment normally held in May. The age range and residency terms are set in each year's posting, so email youthcouncil@edmonton.ca for the current criteria.",
     "deadline": "TBA",
-    "url": "https://www.edmonton.ca/city_government/city_organization/youth-council-city-of-edmonton",
-    "description": "An official civic agency, not a simulation. Members research and write policy proposals that go to City Council, run events on local youth issues and advise on decisions that affect young Edmontonians, which makes it verifiable government experience rather than a mock exercise. Meetings are open to the public if you want to sit in before applying. Other Alberta municipalities run comparable youth councils or advisory committees, so if you are outside Edmonton, check your own city or town's civic agency listings for the local equivalent.",
-    "metaDescription": "An official civic agency, not a simulation. Members write policy proposals that go to City Council and advise on decisions affecting young Edmontonians.",
-    "lastVerified": "2026-08"
+    "url": "https://edmonton.taproot.news/news/2026/04/23/edmonton-city-council-sunsets-seven-advisory-boards",
+    "description": "The City of Edmonton Youth Council ended on August 31, 2026. City Council dissolved it that spring along with six other advisory boards, after nearly three decades of youth members writing policy proposals and advising Council on issues affecting young Edmontonians. Other Alberta municipalities still run youth councils or advisory committees, so check your own city or town's civic agency listings for one that is recruiting.",
+    "metaDescription": "Ended August 31, 2026, when Edmonton City Council dissolved it with six other advisory boards. Look for a youth council in your own town.",
+    "lastVerified": "2026-09",
+    "active": false
   },
   {
     "id": 147,

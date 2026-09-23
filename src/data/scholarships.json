@@ -3143,26 +3143,23 @@
     "amount": "$2,500",
     "deadline": "2027-05-30",
     "audience": "Grade 12 students with a parent or guardian at ENMAX",
-    "url": "https://www.educationmatters.ca/awards/enmax-scholarship",
+    "url": "https://www.enmax.com/about-us/community/scholarships",
     "category": "Academic",
     "lastVerified": "2026-09",
     "region": "Calgary",
-    "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1; most close May 30, a few May 1. Confirm this award's own deadline in the portal before you rely on the date here. Three rules apply to every EducationMatters award and are easy to miss: you must be 20 or younger as of September 1, you must not already be attending a post-secondary institution, and you must apply in your Grade 12 year. Once you leave high school you can no longer apply, so a gap year is fine only if you applied before you graduated.",
+    "notes": "EducationMatters took down its page for this award in September 2026. ENMAX's own scholarships page still lists it and sends students to EducationMatters or their school scholarship coordinator, so ask your coordinator how to apply this cycle. Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1; most close May 30, a few May 1. Confirm this award's own deadline in the portal before you rely on the date here. Three rules apply to every EducationMatters award and are easy to miss: you must be 20 or younger as of September 1, you must not already be attending a post-secondary institution, and you must apply in your Grade 12 year. Once you leave high school you can no longer apply, so a gap year is fine only if you applied before you graduated.",
     "applyViaGuidance": true,
     "active": false,
-    "description": "Two awards for students whose parent or guardian is a permanent ENMAX employee or retiree. Two reference letters required.",
+    "description": "Three $2,500 awards for Grade 12 students whose parent or guardian is a permanent ENMAX employee or retiree, at a CBE, Calgary Catholic or other school district high school. You need at least 70 per cent and two reference letters showing ENMAX's values through activities outside class.",
     "eligibility": {
       "grades": [
         "12"
       ],
-      "schoolBoards": [
-        "CBE",
-        "CCSD"
-      ],
+      "schoolBoards": [],
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [],
-      "minAverage": null,
+      "minAverage": 70,
       "minAge": null,
       "maxAge": 20,
       "genderRequired": null,
