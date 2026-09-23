@@ -740,6 +740,33 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
    and a control that does nothing is worse than no control. */
 html:not(.js) .sabl-lean { display: none; }
 
+/* ── View switcher (SabViewSwitch) ──
+   Finder's four buttons, in Finder's shape: one rounded well, the chosen view
+   filled a shade darker. The fill comes from html[data-view] rather than
+   aria-pressed, so it is right in the first paint. No JS, no switcher. */
+.sabl-views {
+  display: inline-flex; align-items: center; gap: 2px; flex: none;
+  padding: 3px; border: 1px solid rgba(20,25,21,0.16); border-radius: 12px;
+}
+.sabl-view {
+  display: inline-grid; place-items: center; width: 36px; height: 30px;
+  padding: 0; border: 0; border-radius: 9px; background: none; cursor: pointer;
+  color: rgba(20, 25, 21, 0.6);
+}
+.sabl-view:hover { color: var(--text-primary); background: rgba(20,25,21,0.05); }
+html:not([data-view]) .sabl-view[data-dir-view='list'],
+html[data-view='grid'] .sabl-view[data-dir-view='grid'],
+html[data-view='columns'] .sabl-view[data-dir-view='columns'],
+html[data-view='gallery'] .sabl-view[data-dir-view='gallery'] {
+  color: var(--text-primary); background: rgba(20,25,21,0.11);
+}
+html:not(.js) .sabl-views { display: none; }
+@media (max-width: 900px) {
+  /* Two panes do not fit a phone: Columns reads as the list there. */
+  .sabl-view[data-dir-view='columns'] { display: none; }
+  html[data-view='columns'] .sabl-view[data-dir-view='list'] { color: var(--text-primary); background: rgba(20,25,21,0.11); }
+}
+
 /* ── Phone filters ──
    On a phone, sort and the chip rows sat between the search box and the
    first card: 38 chips on /scholarships, and no listing on the first screen
@@ -766,7 +793,10 @@ html:not(.js) .sabl-lean { display: none; }
   }
   .sabl-filters-n[hidden] { display: none; }
   html.js:not([data-filters]) .sabl-toolbar .sabl-sort,
+  html.js:not([data-filters]) .sabl-toolbar .sabl-views,
   html.js:not([data-filters]) .sabl-rail { display: none; }
+  html.js .sabl-toolbar .sabl-views { grid-column: 1 / -1; justify-self: start; margin-top: 6px; }
+  .sabl-view { width: 48px; height: 38px; }
   /* Full width and a 44px target inside the phone panel. */
   html.js .sabl-scope-select { width: 100%; min-height: 44px; font-size: 15px; border-radius: 12px; }
   /* The panel's exit, pinned to the bottom of the screen while it is open. */
@@ -978,6 +1008,163 @@ html.js .sabl-group-toggle { display: inline-flex; }
   display: inline-flex; align-items: center; gap: 5px;
 }
 .sabl-apply:hover { color: var(--green); }
+
+/* ── Views (SabViewSwitch, Ilia 2026-09-23) ──
+   The same rows under four layouts, chosen by html[data-view]; absent is the
+   list above. Directory grids only: /saved shares .sabl-card and stays a list.
+   Grid is Finder's icons: each row becomes a tile whose figures sit on its
+   floor, so a row of tiles reads across at one height. */
+html[data-view='grid'] [data-dir-grid] {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  column-gap: 28px; align-items: stretch;
+}
+html[data-view='grid'] [data-dir-grid] .sabl-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  padding: 18px 14px 20px; border-bottom: 0;
+}
+/* The row's cells centre themselves in their grid cells; in a column that
+   would centre them across the tile. */
+html:is([data-view='grid'], [data-view='gallery']) [data-dir-grid] .sabl-card > * { align-self: flex-start; }
+html[data-view='grid'] [data-dir-grid] .sabl-card::before { position: static; font-size: 26px; }
+html[data-view='grid'] [data-dir-grid] .sabl-row-main { width: 100%; }
+html[data-view='grid'] [data-dir-grid] :is(.sabl-amount, .sabl-card-top-left) { margin-top: auto; padding-top: 6px; text-align: left; }
+html[data-view='grid'] [data-dir-grid] .sabl-row-when { flex-direction: row; align-items: center; }
+html[data-view='grid'] [data-dir-grid] .sabl-card-actions { align-self: stretch; justify-content: space-between; }
+@media (max-width: 899px) {
+  html[data-view='grid'] [data-dir-grid] { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
+  html[data-view='grid'] [data-dir-grid] .sabl-card { padding: 14px 0 16px; gap: 8px; }
+  html[data-view='grid'] [data-dir-grid] .sabl-card::before { font-size: 20px; }
+  html[data-view='grid'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-meta-row) { display: none; }
+  html[data-view='grid'] [data-dir-grid] .sabl-name { font-size: 15px; }
+  html[data-view='grid'] [data-dir-grid] .sabl-amount { font-size: 22px; }
+  html[data-view='grid'] [data-dir-grid] .sabl-amount.is-long { font-size: 16px; white-space: normal; }
+  html[data-view='grid'] [data-dir-grid] .sabl-amount.is-varies { font-size: 13px; }
+  html[data-view='grid'] [data-dir-grid] .sabl-when { white-space: normal; flex-wrap: wrap; font-size: 13px; }
+}
+
+/* Columns is Finder's column view: a narrow list of names on the left, the
+   selected one in full on the right (directory-client builds that pane).
+   The pane sticks while the list scrolls. A phone has no room for two panes,
+   so there the list is simply the list. */
+@media (min-width: 901px) {
+  html[data-view='columns'] .sabl-col {
+    display: grid; grid-template-columns: minmax(300px, 5fr) minmax(0, 7fr);
+    column-gap: 40px; align-items: start;
+  }
+  html[data-view='columns'] .sabl-col > * { grid-column: 1; }
+  html[data-view='columns'] .sabl-col > [data-dir-grid] { grid-row: 1; }
+  html[data-view='columns'] .sabl-col > [data-dir-more] { grid-row: 2; }
+  html[data-view='columns'] .sabl-col > [data-dir-empty] { grid-column: 1 / -1; }
+  html[data-view='columns'] .sabl-col > [data-dir-preview] {
+    grid-column: 2; grid-row: 1 / span 2;
+    position: sticky; top: calc(var(--sab-nav-h) + 24px);
+    max-height: calc(100vh - var(--sab-nav-h) - 48px);
+    max-height: calc(100svh - var(--sab-nav-h) - 48px);
+    overflow-y: auto; overscroll-behavior: contain;
+    margin-top: 18px; padding: 4px 0 24px 36px; border-left: 1px solid rgba(20,25,21,0.14);
+  }
+  html[data-view='columns'] [data-dir-grid] .sabl-card {
+    grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px;
+    padding: 11px 12px 11px 50px; cursor: pointer;
+  }
+  html[data-view='columns'] [data-dir-grid] .sabl-card::before { top: 13px; font-size: 18px; }
+  html[data-view='columns'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-org, .sabl-meta-row, .sabl-amount, .sabl-card-top-left, .sabl-card-actions, .sabl-when-sub) { display: none; }
+  html[data-view='columns'] [data-dir-grid] .sabl-name { font-size: 15px; font-weight: 600; }
+  html[data-view='columns'] [data-dir-grid] .sabl-row-when { grid-column: 2; }
+  html[data-view='columns'] [data-dir-grid] .sabl-when { font-size: 13px; }
+  html[data-view='columns'] [data-dir-grid] .sabl-group { margin-top: 26px; }
+  html[data-view='columns'] [data-dir-grid] :is(.sabl-group-label, .sabl-group-count) { font-size: 20px; }
+  /* The rail's own mark for "this one": a green bar and a green wash. */
+  html[data-view='columns'] [data-dir-grid] .sabl-card.is-selected {
+    background: rgba(47,211,160,0.14); box-shadow: inset 3px 0 0 var(--green);
+  }
+}
+
+/* Gallery is Finder's gallery: the selected listing large on top, every
+   match as a small tile in one strip underneath that scrolls sideways. A
+   status heading is a tile of its own in the strip and still folds its run. */
+html[data-view='gallery'] [data-dir-grid] {
+  display: flex; align-items: stretch; gap: 12px;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity;
+  padding: 16px 2px 14px; scrollbar-width: thin;
+}
+html[data-view='gallery'] [data-dir-grid] .sabl-card {
+  flex: none; width: 196px; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+  padding: 14px 14px 16px; border: 1px solid rgba(20,25,21,0.14); border-radius: 12px;
+  scroll-snap-align: start; cursor: pointer;
+}
+html[data-view='gallery'] [data-dir-grid] .sabl-card::before { position: static; font-size: 18px; }
+html[data-view='gallery'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-org, .sabl-meta-row, .sabl-card-actions, .sabl-when-sub) { display: none; }
+html[data-view='gallery'] [data-dir-grid] .sabl-name {
+  font-size: 14.5px; display: -webkit-box; -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
+}
+html[data-view='gallery'] [data-dir-grid] :is(.sabl-amount, .sabl-card-top-left) { margin-top: auto; text-align: left; }
+html[data-view='gallery'] [data-dir-grid] .sabl-amount { font-size: 20px; }
+html[data-view='gallery'] [data-dir-grid] .sabl-amount.is-long { font-size: 16px; white-space: normal; }
+html[data-view='gallery'] [data-dir-grid] .sabl-amount.is-varies { font-size: 12.5px; }
+html[data-view='gallery'] [data-dir-grid] .sabl-row-when { flex-direction: row; }
+html[data-view='gallery'] [data-dir-grid] .sabl-when { font-size: 12.5px; }
+html[data-view='gallery'] [data-dir-grid] .sabl-card.is-selected {
+  border-color: var(--text-primary); box-shadow: inset 0 0 0 1px var(--text-primary);
+  background: rgba(47,211,160,0.1);
+}
+html[data-view='gallery'] [data-dir-grid] .sabl-group {
+  flex: none; width: auto; margin: 0; padding: 14px 4px 16px 0;
+  flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 10px;
+}
+html[data-view='gallery'] [data-dir-grid] .sabl-group-name { flex-direction: column; align-items: flex-start; gap: 2px; padding-bottom: 8px; }
+html[data-view='gallery'] [data-dir-grid] :is(.sabl-group-label, .sabl-group-count) { font-size: 20px; }
+html[data-view='gallery'] [data-dir-grid] .sabl-group-toggle { margin-left: 0; padding-bottom: 0; }
+/* Held at one height so the strip under it does not jump as the reader
+   steps through listings of different lengths. */
+html[data-view='gallery'] .sabl-pv { min-height: 340px; padding-top: 18px; }
+@media (max-width: 899px) {
+  html[data-view='gallery'] .sabl-pv { min-height: 0; padding-top: 10px; }
+  /* Four lines, so the strip is still on the first screen; Details has the rest. */
+  html[data-view='gallery'] .sabl-pv-body .sabl-blurb { display: -webkit-box; -webkit-line-clamp: 4; line-clamp: 4; }
+  html[data-view='gallery'] [data-dir-grid] .sabl-card { width: 164px; }
+}
+
+/* The preview pane, shared by Columns and Gallery. Its cells are clones of
+   the row's, so the row's own classes style them and this only resizes. */
+.sabl-pv { display: flex; flex-direction: column; gap: 14px; }
+.sabl-pv[hidden] { display: none; }
+.sabl-pv-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.sabl-pv-kicker {
+  margin: 0; font-family: var(--font-label); font-size: 14px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: rgba(20, 25, 21, 0.6);
+}
+.sabl-pv-nav { display: inline-flex; gap: 6px; }
+.sabl-pv-step {
+  display: inline-grid; place-items: center; width: 36px; height: 36px; padding: 0;
+  border: 1px solid rgba(20,25,21,0.2); border-radius: 50%; background: none;
+  color: var(--text-primary); cursor: pointer;
+}
+.sabl-pv-step:hover:not(:disabled) { background: rgba(20,25,21,0.06); }
+.sabl-pv-step:disabled { opacity: 0.35; cursor: default; }
+.sabl-pv-name { margin: 0; }
+.sabl-pv-name .sabl-name {
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 3.2vw, 48px);
+  line-height: 1.02; letter-spacing: -0.01em;
+}
+.sabl-pv-body { max-width: 720px; }
+.sabl-pv-body .sabl-blurb { display: block; -webkit-line-clamp: unset; line-clamp: none; font-size: 16px; margin-top: 0; }
+.sabl-pv-body .sabl-org { font-size: 15px; }
+.sabl-pv-body .sabl-facts { margin-top: 10px; }
+.sabl-pv-body .sabl-facts li { font-size: 14px; }
+.sabl-pv-figures {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; margin-top: auto;
+  padding: 14px 0; border-top: 1px solid rgba(20,25,21,0.14); border-bottom: 1px solid rgba(20,25,21,0.14);
+}
+.sabl-pv-figures .sabl-amount { font-size: 44px; }
+.sabl-pv-figures .sabl-amount.is-long { font-size: 30px; white-space: normal; }
+.sabl-pv-figures .sabl-amount.is-varies { font-size: 15px; }
+.sabl-pv-figures .sabl-row-when { flex-direction: row; align-items: center; }
+.sabl-pv-figures .sabl-when { font-size: 16px; }
+.sabl-pv .sabl-card-actions { align-self: flex-start; gap: 24px; }
+.sabl-pv .sabl-apply { font-size: 15.5px; }
 
 /* "Show more" under a directory grid. The count line says what is left, the
    filled button takes the next step, the underlined link takes all of it. */

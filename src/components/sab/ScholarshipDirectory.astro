@@ -10,6 +10,7 @@ import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '.
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { BOOKMARK, EXT } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
+import SabViewSwitch from './SabViewSwitch.astro';
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -188,6 +189,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
     <button type="button" class="sabl-filters-btn" data-dir-filters aria-expanded="false" aria-controls="dir-sort dir-filters">
       Filters<span class="sabl-mono sabl-filters-n" data-dir-filter-n hidden></span>
     </button>
+    <SabViewSwitch />
     <button type="button" class="sabl-lean" data-dir-lean aria-pressed="false">
       <span data-dir-lean-word>Hide filters</span>
       <svg class="sabl-lean-caret" viewBox="0 0 12 8" width="12" height="8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>

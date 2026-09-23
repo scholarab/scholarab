@@ -108,6 +108,52 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
   expect((await grid.boundingBox())!.width).toBe(narrow);
 });
 
+test('the view buttons lay the list out as a grid, columns or gallery, and remember it', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'Columns is a desktop view');
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('/scholarships/calgary/');
+  const cards = page.locator('[data-dir-card]:visible');
+  const pv = page.locator('[data-dir-preview]');
+  const title = async (i: number) => (await cards.nth(i).locator('.sabl-name').textContent())!.trim();
+  const sideBySide = async () => {
+    const a = (await cards.nth(0).boundingBox())!;
+    const b = (await cards.nth(1).boundingBox())!;
+    return Math.abs(a.y - b.y) < 2 && b.x > a.x;
+  };
+  await expect(page.locator('[data-dir-view="list"]')).toHaveAttribute('aria-pressed', 'true');
+  expect(await sideBySide()).toBe(false);
+
+  await page.locator('[data-dir-view="grid"]').click();
+  expect(await sideBySide()).toBe(true);
+  // Set in <head> from localStorage, so the chosen view is in the first paint.
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-view', 'grid');
+  await expect(page.locator('[data-dir-view="grid"]')).toHaveAttribute('aria-pressed', 'true');
+
+  // Columns: a click puts the listing in the preview rather than leaving.
+  await page.locator('[data-dir-view="columns"]').click();
+  await expect(pv).toBeVisible();
+  await expect(pv.locator('.sabl-pv-name')).toHaveText(await title(0));
+  await cards.nth(1).locator('.sabl-name').click();
+  await expect(page).toHaveURL(/\/scholarships\/calgary\/(\?.*)?$/);
+  await expect(pv.locator('.sabl-pv-name')).toHaveText(await title(1));
+  await page.keyboard.press('ArrowDown');
+  await expect(pv.locator('.sabl-pv-name')).toHaveText(await title(2));
+  await pv.locator('[data-dir-step="-1"]').click();
+  await expect(pv.locator('.sabl-pv-name')).toHaveText(await title(1));
+
+  // Gallery: the preview on top, every match in one strip under it.
+  await page.locator('[data-dir-view="gallery"]').click();
+  await expect(pv).toBeVisible();
+  expect(await sideBySide()).toBe(true);
+  expect((await pv.boundingBox())!.y).toBeLessThan((await cards.nth(0).boundingBox())!.y);
+
+  await page.locator('[data-dir-view="list"]').click();
+  await expect(pv).toBeHidden();
+  await expect(page.locator('html')).not.toHaveAttribute('data-view');
+  expect(await sideBySide()).toBe(false);
+});
+
 test('on a phone, filters fold behind one button that counts them', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile', 'the fold is phone-only');
   await page.goto('/scholarships/calgary/?category=Arts');

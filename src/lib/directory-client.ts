@@ -99,6 +99,53 @@ function setLean(on: boolean) {
 }
 
 /**
+ * Finder's four views (Ilia, 2026-09-23), persisted like lean mode and for the
+ * same reason: it is a standing preference about how a reader likes to read a
+ * list. Kept on <html> and re-applied by Layout.astro before the first paint.
+ * `list` is the default and is stored as no attribute at all.
+ */
+const VIEWS = ['grid', 'list', 'columns', 'gallery'] as const;
+type View = (typeof VIEWS)[number];
+const VIEW_KEY = 'sa_view';
+/** Columns is two panes side by side; below this a phone reads it as a list. */
+const WIDE = '(min-width: 901px)';
+
+function storedView(): View {
+  const v = document.documentElement.getAttribute('data-view');
+  return (VIEWS as readonly string[]).includes(v ?? '') ? (v as View) : 'list';
+}
+
+/** The view actually on screen: a phone keeps a stored Columns as a list. */
+function effectiveView(): View {
+  const v = storedView();
+  return v === 'columns' && !matchMedia(WIDE).matches ? 'list' : v;
+}
+
+function setView(v: View) {
+  const root = document.documentElement;
+  if (v === 'list') root.removeAttribute('data-view');
+  else root.setAttribute('data-view', v);
+  try {
+    if (v === 'list') localStorage.removeItem(VIEW_KEY);
+    else localStorage.setItem(VIEW_KEY, v);
+  } catch { /* storage blocked: the choice holds for this page only */ }
+  paintViewButtons();
+}
+
+function paintViewButtons() {
+  const on = effectiveView();
+  for (const btn of document.querySelectorAll<HTMLElement>('[data-dir-view]')) {
+    btn.setAttribute('aria-pressed', String(btn.dataset.dirView === on));
+  }
+}
+
+/** Columns and Gallery show one listing large beside or above the rest. */
+const previewing = () => {
+  const v = effectiveView();
+  return v === 'columns' || v === 'gallery';
+};
+
+/**
  * The phone layout: filters and sort fold behind one "Filters" button, so the
  * first card is on the first screen instead of under 38 chips. Not persisted
  * and separate from lean mode, which is a desktop preference about a column;
@@ -156,6 +203,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // count over; only the buttons raise it.
   const pageSize = config.pageSize ?? DIRECTORY_PAGE_SIZE;
   let shown = pageSize;
+  // Columns and Gallery: the listing in the preview pane, and the matches it
+  // can step through (the unfolded ones, of which `page` is on screen).
+  let selected: T | null = null;
+  let pool: T[] = [];
+  let page: T[] = [];
 
   function setSaveState(btn: HTMLElement, saved: boolean) {
     // The drawn bookmark carries the state through `.on` (CSS fills it), so
@@ -257,6 +309,111 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     return out;
   }
 
+  /**
+   * The preview pane of Columns and Gallery: the selected row, large. Built
+   * from clones of the row's own cells, so it says exactly what the row says
+   * (today's countdown, the Apply/Visit word, the saved state) with no second
+   * copy of the listing in the HTML. The pane lives before the grid, so
+   * Gallery needs no reordering to put it on top.
+   */
+  function paintPreview() {
+    if (!root) return;
+    const grid = root.querySelector<HTMLElement>('[data-dir-grid]');
+    if (!grid) return;
+    let pane = root.querySelector<HTMLElement>('[data-dir-preview]');
+    root.querySelectorAll('.sabl-card.is-selected').forEach(el => {
+      el.classList.remove('is-selected');
+      el.querySelector('.sabl-name')?.removeAttribute('aria-current');
+    });
+    if (!previewing() || !page.length) {
+      if (pane) { pane.hidden = true; pane.replaceChildren(); }
+      return;
+    }
+    if (!pane) {
+      pane = document.createElement('section');
+      pane.className = 'sabl-pv';
+      pane.dataset.dirPreview = '';
+      pane.setAttribute('aria-label', 'Selected listing');
+      grid.before(pane);
+    }
+    const sel: T = selected && page.includes(selected) ? selected : page[0]!;
+    selected = sel;
+    const card = sel.el;
+    card.classList.add('is-selected');
+    const link = card.querySelector<HTMLAnchorElement>('.sabl-name');
+    link?.setAttribute('aria-current', 'true');
+
+    const at = pool.indexOf(sel);
+    const top = document.createElement('div');
+    top.className = 'sabl-pv-top';
+    const kicker = document.createElement('p');
+    kicker.className = 'sabl-pv-kicker';
+    const group = config.groups && isGrouped(visible) ? `${config.groups.label(config.groups.key(sel))} · ` : '';
+    kicker.textContent = `${group}${at + 1} of ${pool.length}`;
+    const nav = document.createElement('div');
+    nav.className = 'sabl-pv-nav';
+    for (const [step, label, glyph] of [[-1, 'Previous listing', 'M7.5 1.5 3 6l4.5 4.5'], [1, 'Next listing', 'M4.5 1.5 9 6l-4.5 4.5']] as const) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sabl-pv-step';
+      b.dataset.dirStep = String(step);
+      b.setAttribute('aria-label', label);
+      b.disabled = step < 0 ? at <= 0 : at >= pool.length - 1;
+      b.innerHTML = `<svg viewBox="0 0 12 12" width="14" height="14" fill="none" aria-hidden="true"><path d="${glyph}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      nav.append(b);
+    }
+    top.append(kicker, nav);
+
+    const name = document.createElement('h2');
+    name.className = 'sabl-pv-name';
+    if (link) {
+      const a = document.createElement('a');
+      a.className = 'sabl-name';
+      a.href = link.getAttribute('href')!;
+      a.textContent = link.textContent;
+      name.append(a);
+    }
+
+    const body = card.querySelector('.sabl-row-main')?.cloneNode(true) as HTMLElement | undefined;
+    body?.querySelector('.sabl-name-h')?.remove();
+    body?.classList.replace('sabl-row-main', 'sabl-pv-body');
+
+    const figures = document.createElement('div');
+    figures.className = 'sabl-pv-figures';
+    for (const cell of card.querySelectorAll('.sabl-amount, .sabl-card-top-left, .sabl-row-when')) {
+      // A program that is not paid has an empty badge slot; a gap for it
+      // would push the date off the pane's edge.
+      if (cell.textContent?.trim()) figures.append(cell.cloneNode(true));
+    }
+
+    const actions = card.querySelector('.sabl-card-actions')?.cloneNode(true) as HTMLElement | undefined;
+    // Programs already end on a Details link; a scholarship's only link out
+    // is the sponsor's, so the pane adds the way to the full listing.
+    if (actions && link && ![...actions.querySelectorAll('a')].some(a => a.getAttribute('href') === link.getAttribute('href'))) {
+      const more = document.createElement('a');
+      more.className = 'sabl-apply sabl-pv-more';
+      more.href = link.getAttribute('href')!;
+      more.textContent = 'Full details';
+      actions.append(more);
+    }
+
+    pane.replaceChildren(...[top, name, body, figures, actions].filter((n): n is HTMLElement => !!n));
+    pane.hidden = false;
+  }
+
+  /** Step the preview through the list; past the last card on screen it
+      reveals the next step of the list, as "Show more" would. */
+  function stepSelection(by: number, focusRow: boolean) {
+    if (!selected) return;
+    const next = pool[pool.indexOf(selected) + by];
+    if (!next) return;
+    if (!page.includes(next)) shown += pageSize;
+    selected = next;
+    render();
+    if (focusRow) next.el.querySelector<HTMLElement>('.sabl-name')?.focus({ preventScroll: true });
+    next.el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+
   function render() {
     if (!root) return;
     if (emptyTimer) { clearTimeout(emptyTimer); emptyTimer = undefined; }
@@ -291,10 +448,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // the "Show more" budget either: shutting CLOSED on a 24-card step buys
     // twenty-four open ones rather than twenty-four fewer cards.
     const g = config.groups;
-    const pool = g && collapsed.size && isGrouped(visible)
+    pool = g && collapsed.size && isGrouped(visible)
       ? visible.filter(v => !collapsed.has(g.key(v)))
       : visible;
-    const page = pool.slice(0, shown);
+    page = pool.slice(0, shown);
     const grid = root.querySelector<HTMLElement>('[data-dir-grid]');
     if (grid) {
       const onScreen = new Set(page.map(v => v.el));
@@ -319,6 +476,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       }
       grid.hidden = visible.length === 0;
     }
+    paintPreview();
 
     const more = root.querySelector<HTMLElement>('[data-dir-more]');
     if (more) {
@@ -453,7 +611,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // Pointer/context-menu activation must store context before a new tab copies it.
   for (const event of ['pointerdown', 'contextmenu', 'click']) document.addEventListener(event, e => {
     const link = (e.target as Element | null)?.closest?.<HTMLAnchorElement>('a[href]');
-    const card = link?.closest<HTMLElement>('[data-dir-card]');
+    // The preview pane's title and Full details go to the same listing.
+    const card = link?.closest<HTMLElement>('[data-dir-card], [data-dir-preview]');
     const detail = card?.querySelector<HTMLAnchorElement>('.sabl-name');
     if (link && card && detail && root?.contains(card)
       && link.origin === detail.origin && link.pathname === detail.pathname) {
@@ -476,7 +635,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const id = Number(save.dataset.id);
       const next = config.toggleSave(id);
       const nowSaved = next.includes(id);
-      setSaveState(save, nowSaved);
+      // The row and its copy in the preview pane are two buttons for one save.
+      root.querySelectorAll<HTMLElement>(`[data-dir-save][data-id="${id}"]`).forEach(b => setSaveState(b, nowSaved));
       // Only the save counts, not the un-save: the metric is "people who
       // shortlisted this", and sendEvent dedupes it per item per tab session.
       if (nowSaved) { showConfetti(save); sendEvent('save', config.itemType, id); }
@@ -494,6 +654,19 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       setFiltersOpen(false);
       root.querySelector<HTMLElement>('[data-dir-grid], [data-dir-empty]:not([hidden])')
         ?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      return;
+    }
+
+    const view = t.closest<HTMLElement>('[data-dir-view]');
+    if (view) {
+      setView(view.dataset.dirView as View);
+      render();
+      return;
+    }
+
+    const stepBtn = t.closest<HTMLElement>('[data-dir-step]');
+    if (stepBtn) {
+      stepSelection(Number(stepBtn.dataset.dirStep), false);
       return;
     }
 
@@ -548,6 +721,54 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     }
   });
 
+  // Columns and Gallery, as in Finder: a click selects a listing into the
+  // preview, a double click opens it. Capture phase, so the router never
+  // starts a navigation for the title link a single click lands on. The row's
+  // own Save and Apply keep working, and a modified click still opens a tab.
+  let opening = false;
+  document.addEventListener('click', e => {
+    const t = e.target as Element | null;
+    if (opening || !root || !previewing() || !t?.closest) return;
+    const card = t.closest<HTMLElement>('[data-dir-card]');
+    if (!card || !root.contains(card) || t.closest('.sabl-card-actions')) return;
+    const a = t.closest('a');
+    if (a && !a.classList.contains('sabl-name')) return;
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    const item = items.find(it => it.el === card);
+    if (!item || item === selected) return;
+    selected = item;
+    paintPreview();
+    // On a phone the pane sits above the strip; bring it back into view.
+    root.querySelector<HTMLElement>('[data-dir-preview]')?.scrollIntoView({ block: 'nearest' });
+  }, true);
+
+  document.addEventListener('dblclick', e => {
+    const card = (e.target as Element | null)?.closest?.<HTMLElement>('[data-dir-card]');
+    if (!root || !previewing() || !card || !root.contains(card) || (e.target as Element).closest('.sabl-card-actions')) return;
+    opening = true;
+    card.querySelector<HTMLAnchorElement>('.sabl-name')?.click();
+    opening = false;
+  });
+
+  // Arrow keys walk the selection while focus is in the list or the pane.
+  document.addEventListener('keydown', e => {
+    const t = e.target as Element | null;
+    if (!root || !previewing() || !t?.closest || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!t.closest('[data-dir-grid], [data-dir-preview]') || t.matches('input, select, textarea')) return;
+    const by = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+    if (!by) return;
+    e.preventDefault();
+    stepSelection(by, !!t.closest('[data-dir-grid]'));
+  });
+
+  // Crossing the phone breakpoint turns Columns into the list and back.
+  matchMedia(WIDE).addEventListener('change', () => {
+    if (!root?.isConnected) return;
+    paintViewButtons();
+    render();
+  });
+
   document.addEventListener('input', e => {
     const input = e.target as HTMLInputElement | null;
     if (!root || !input?.matches?.('[data-dir-search]') || !root.contains(input)) return;
@@ -588,6 +809,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // the button catching up with it after a swap brought a fresh one in.
     setLean(document.documentElement.hasAttribute('data-lean'));
     setFiltersOpen(false);
+    paintViewButtons();
+    selected = null;
     config.onCardsParsed?.(items);
     paintSaved();
     render();
