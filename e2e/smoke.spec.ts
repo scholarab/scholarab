@@ -282,24 +282,44 @@ test('header dropdown switches without closing', async ({ page }, testInfo) => {
 test('home scope carousel links every card to its hub and steps with the arrows', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'arrows are desktop only');
   await page.goto('/');
-  const cards = page.locator('[data-scope-card]');
+  const root = page.locator('[data-scopes="scholarships"]');
+  const cards = root.locator('[data-scope-card]');
   // One card per header-menu scope (MENU_SCOPES), not one per photo.
   await expect(cards).toHaveCount(10);
   // CC BY and CC BY-SA photos carry their credit, linked to the source page.
-  for (const href of await page.locator('.sab-scope-credit').evaluateAll(els => els.map(e => e.getAttribute('href')))) {
+  for (const href of await root.locator('.sab-scope-credit').evaluateAll(els => els.map(e => e.getAttribute('href')))) {
     expect(href).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
   }
-  await expect(page.locator('.sab-scope-credit')).not.toHaveCount(0);
+  await expect(root.locator('.sab-scope-credit')).not.toHaveCount(0);
   for (const href of await cards.locator('.sab-scope-btn-solid').evaluateAll(els => els.map(e => e.getAttribute('href')))) {
     expect(href).toMatch(/^\/scholarships\/[a-z-]+\/$/);
   }
-  const track = page.locator('[data-scopes-track]');
-  await expect(page.locator('[data-scopes-prev]')).toBeHidden();
-  await page.locator('[data-scopes-next]').click();
-  await expect(page.locator('.sab-scopes-dot').nth(1)).toHaveAttribute('aria-current', 'true');
+  const track = root.locator('[data-scopes-track]');
+  await expect(root.locator('[data-scopes-prev]')).toBeHidden();
+  await root.locator('[data-scopes-next]').click();
+  await expect(root.locator('.sab-scopes-dot').nth(1)).toHaveAttribute('aria-current', 'true');
   const step = await cards.nth(1).evaluate(el => (el as HTMLElement).offsetLeft - (el.previousElementSibling as HTMLElement).offsetLeft);
   await expect.poll(() => track.evaluate(el => Math.round(el.scrollLeft))).toBe(step);
-  await expect(page.locator('[data-scopes-prev]')).toBeVisible();
+  await expect(root.locator('[data-scopes-prev]')).toBeVisible();
+});
+
+// The program carousel below it: one card per format hub, and its arrows move
+// its own track, not the scholarship one above.
+test('home program carousel links every card to its format hub', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'arrows are desktop only');
+  await page.goto('/');
+  const root = page.locator('[data-scopes="programs"]');
+  const cards = root.locator('[data-scope-card]');
+  await expect(cards).toHaveCount(8);
+  for (const href of await cards.locator('.sab-scope-btn-solid').evaluateAll(els => els.map(e => e.getAttribute('href')))) {
+    expect(href).toMatch(/^\/programs\/[a-z-]+\/$/);
+  }
+  const other = page.locator('[data-scopes="scholarships"] [data-scopes-track]');
+  await root.scrollIntoViewIfNeeded();
+  await root.locator('[data-scopes-next]').click();
+  await expect(root.locator('.sab-scopes-dot').nth(1)).toHaveAttribute('aria-current', 'true');
+  await expect.poll(() => root.locator('[data-scopes-track]').evaluate(el => el.scrollLeft)).toBeGreaterThan(0);
+  expect(await other.evaluate(el => el.scrollLeft)).toBe(0);
 });
 
 // The blur under an open dropdown is recomputed for every frame of whatever

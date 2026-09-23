@@ -7,8 +7,8 @@ import SabFooter from '../components/sab/SabFooter.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
-import { programIsListed, scholarshipStatusOf } from '../lib/status';
-import { SCHOLARSHIP_FACETS, MENU_SCOPES, facetForCategory, facetItems } from '../lib/facets';
+import { programIsListed, programStatusOf, scholarshipStatusOf } from '../lib/status';
+import { SCHOLARSHIP_FACETS, PROGRAM_FORMATS, MENU_SCOPES, MIN_FACET_ITEMS, facetForCategory, facetItems } from '../lib/facets';
 import { PHOTO_CREDITS, needsCredit } from '../lib/photo-credits';
 import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
 
@@ -117,21 +117,67 @@ const SCOPE_KICKERS: Record<string, string> = {
   alberta: 'Anywhere in Alberta',
   national: 'Open across Canada',
 };
-const scopeCards = SCHOLARSHIP_FACETS
+interface PhotoCard {
+  label: string; kicker: string; backdrop: string; href: string; count: number;
+  /** The open count, and where it links; null href when the hub has no open filter. */
+  open: number; openHref: string | null;
+  credit: (typeof PHOTO_CREDITS)[string] | undefined;
+}
+const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
   .filter(f => MENU_SCOPES.includes(f.slug) && f.backdrop)
   .map(f => {
     const items = facetItems(f, scholarships);
+    const href = `/scholarships/${f.slug}/`;
     return {
-      slug: f.slug,
       label: f.label,
       backdrop: f.backdrop!,
       kicker: SCOPE_KICKERS[f.slug] ?? `${f.label} students`,
+      href,
       count: items.length,
       open: items.filter(s => scholarshipStatusOf(s, today) === 'active').length,
+      openHref: `${href}?status=active`,
       credit: PHOTO_CREDITS[f.backdrop!],
     };
   })
   .sort((a, b) => b.count - a.count);
+
+// The program twin (Ilia, 2026-09-23): one card per format hub, the same eight
+// the header's Programs tiles show, biggest first. The kickers are each hub's
+// own intro cut to a line. "Open" counts dated deadlines still ahead plus
+// rolling ones; the program directory has no status filter, so it is not a link.
+const FORMAT_KICKERS: Record<string, string> = {
+  'summer-programs': 'Camps, institutes and labs',
+  competitions: 'Built over a season, entered as a team',
+  olympiads: 'Written at your own school',
+  'science-fairs': 'The only door to Canada-Wide',
+  'research-placements': 'A piece of work with your name on it',
+  'dual-credit': 'Paid, credited, or both',
+  clubs: 'Start any week of the year',
+  conferences: 'A few days, some funded down to the flight',
+};
+const listedPrograms = programs.filter(p => programIsListed(p, today));
+const formatCards: PhotoCard[] = PROGRAM_FORMATS
+  .filter(f => f.backdrop)
+  .map(f => ({ f, items: facetItems(f, listedPrograms) }))
+  .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
+  .map(({ f, items }) => ({
+    label: f.label === 'Summer' ? 'Summer programs' : f.label,
+    backdrop: f.backdrop!,
+    kicker: FORMAT_KICKERS[f.slug] ?? f.h1,
+    href: `/programs/${f.slug}/`,
+    count: items.length,
+    open: items.filter(p => ['active', 'ongoing'].includes(programStatusOf(p, today))).length,
+    openHref: null,
+    credit: PHOTO_CREDITS[f.backdrop!],
+  }))
+  .sort((a, b) => b.count - a.count);
+
+const carousels = [
+  { key: 'scholarships', title: 'Scholarships by where you live', noun: 'scholarships', none: 'Opening later this year', cards: scopeCards },
+  // A program with nothing open is waiting on next cycle's dates (summer
+  // programs close in February), which "later this year" would misstate.
+  { key: 'programs', title: 'Programs by format', noun: 'programs', none: 'Next dates not posted yet', cards: formatCards },
+].filter(c => c.cards.length > 0);
 
 // Seed the same grade/city/field answers consumed by the legacy quiz.
 const legacyLabels: Record<string, string> = {
@@ -251,13 +297,13 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
     </div>
 
-    <!-- ============ SCOPE CAROUSEL ============ -->
-    {scopeCards.length > 0 && (
-      <section class="sab-scopes" aria-labelledby="sab-scopes-h" data-scopes>
-        <h2 id="sab-scopes-h" class="sr-only">Scholarships by where you live</h2>
+    <!-- ============ PHOTO CAROUSELS (scholarship scopes, then program formats) ============ -->
+    {carousels.map(k => (
+      <section class="sab-scopes" aria-labelledby={`sab-scopes-h-${k.key}`} data-scopes={k.key}>
+        <h2 id={`sab-scopes-h-${k.key}`} class="sr-only">{k.title}</h2>
         <div class="sab-scopes-track" data-scopes-track tabindex="-1">
-          {scopeCards.map(c => (
-            <article class="sab-scope" aria-label={`${c.label}: ${c.count} scholarships`} data-scope-card>
+          {k.cards.map(c => (
+            <article class="sab-scope" aria-label={`${c.label}: ${c.count} ${k.noun}`} data-scope-card>
               <picture>
                 <source media="(max-width: 700px)" srcset={`/photos/backdrops/${c.backdrop}-tall-1000.webp 1000w, /photos/backdrops/${c.backdrop}-tall-2000.webp 2000w`} sizes="88vw" />
                 <img
@@ -271,11 +317,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
                 <div class="sab-scope-kicker">{c.kicker}</div>
                 <div class="sab-scope-bottom">
                   <h3 class="sab-scope-name">{c.label}</h3>
-                  <a href={c.open > 0 ? `/scholarships/${c.slug}/?status=active` : `/scholarships/${c.slug}/`} class="sab-scope-sub">
-                    {c.open > 0 ? `${c.open.toLocaleString('en-CA')} open right now` : 'Opening later this year'}
-                  </a>
+                  {c.open > 0 && c.openHref
+                    ? <a href={c.openHref} class="sab-scope-sub">{c.open.toLocaleString('en-CA')} open right now</a>
+                    : <span class="sab-scope-sub sab-scope-sub-plain">{c.open > 0 ? `${c.open.toLocaleString('en-CA')} open right now` : k.none}</span>}
                   <div class="sab-scope-ctas">
-                    <a href={`/scholarships/${c.slug}/`} class="sab-scope-btn sab-scope-btn-solid">
+                    <a href={c.href} class="sab-scope-btn sab-scope-btn-solid">
                       See all {c.count.toLocaleString('en-CA')}
                     </a>
                     <a href="/match/" class="sab-scope-btn sab-scope-btn-light">Find my match</a>
@@ -297,12 +343,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="sab-scopes-dots" data-scopes-dots>
-          {scopeCards.map((c, i) => (
+          {k.cards.map((c, i) => (
             <button type="button" class="sab-scopes-dot" aria-label={`Show ${c.label}`} aria-current={i === 0 ? 'true' : undefined}></button>
           ))}
         </div>
       </section>
-    )}
+    ))}
 
     <!-- ============ CLOSING THIS WEEK ============ -->
     {closingSoon.length > 0 && (
@@ -478,9 +524,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   // Native horizontal scroll with snap does the swiping; this only wires the
   // arrows and dots to it and keeps them in step with wherever it rests.
   function initScopes() {
-    const root = document.querySelector<HTMLElement>('[data-scopes]');
-    const track = root?.querySelector<HTMLElement>('[data-scopes-track]');
-    if (!root || !track || root.dataset.init) return;
+    document.querySelectorAll<HTMLElement>('[data-scopes]').forEach(initCarousel);
+  }
+  function initCarousel(root: HTMLElement) {
+    const track = root.querySelector<HTMLElement>('[data-scopes-track]');
+    if (!track || root.dataset.init) return;
     root.dataset.init = '';
     const cards = [...track.querySelectorAll<HTMLElement>('[data-scope-card]')];
     const dots = [...root.querySelectorAll<HTMLElement>('.sab-scopes-dot')];
@@ -897,6 +945,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px;
   }
   .sab-scope-sub:hover { text-decoration-thickness: 2px; }
+  .sab-scope-sub-plain, .sab-scope-sub-plain:hover { text-decoration: none; }
   .sab-scope-ctas { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
   .sab-scope-btn {
     display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;

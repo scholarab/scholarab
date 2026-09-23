@@ -81,8 +81,8 @@ export interface Facet {
    * <name>-tile.webp (the header menu tile). Placement is in the hub page's CSS;
    * credits in public/photos/CREDITS.md and src/lib/photo-credits.ts.
    *
-   * A program FORMAT hub ships the tile alone: its photo appears only in the
-   * header's Programs menu (Ilia, 2026-09-23), and a hub page has no backdrop.
+   * A program FORMAT hub's photo shows in the header's Programs menu and the
+   * home page's program carousel (Ilia, 2026-09-23); its hub page has none.
    */
   backdrop?: string;
 }
