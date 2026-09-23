@@ -265,7 +265,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
             <p>
-              ScholarAB tracks scholarships and research programs for Alberta high school students.<span class="sab-hero-p-tail"> Finally one place with all the information.</span>
+              <span class="sab-hero-p-l1">ScholarAB tracks scholarships and research programs for Alberta high school students</span><span class="sab-hero-p-tail"> Finally one place with all the information</span>
             </p>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
@@ -880,7 +880,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     display: flex; align-items: flex-end; justify-content: space-between;
     gap: 40px; margin-top: 52px; padding-bottom: 64px;
   }
-  .sab-hero-copy { max-width: 460px; }
+  /* Two lines, one sentence each (Ilia, 2026-09-23): the first holds its
+     line, the second starts under it. The stats wrap under the copy on a
+     window too narrow to hold both side by side. */
+  .sab-hero-bottom { flex-wrap: wrap; }
+  .sab-hero-p-l1, .sab-hero-p-tail { display: block; }
+  .sab-hero-p-l1 { white-space: nowrap; }
   .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.8); margin: 0 0 30px; }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   /* One pair, one size, one motion: hover only changes colour. The lift onto a
@@ -1158,6 +1163,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-h1-l1, .sab-h1-l2 { margin-left: 0; }
     .sab-hero-bottom { flex-direction: column; align-items: stretch; gap: 0; margin-top: 16px; padding-bottom: 20px; }
     .sab-hero-copy { max-width: none; }
+    .sab-hero-p-l1 { display: inline; white-space: normal; }
     .sab-hero-copy p { font-size: 14.5px; line-height: 1.5; margin: 0 0 16px; }
     /* Three separate blocks all said "free, student-built, no account" before
        the fold. On a phone that reads as a wall, so the two decorative ones
