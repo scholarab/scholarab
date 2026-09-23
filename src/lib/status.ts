@@ -112,3 +112,45 @@ export function programIsIndexable(p: ProgramStatusInput, today: Date): boolean 
   if (p.active === false) return false;
   return programStatusOf(p, today) !== 'closed';
 }
+
+// ── The one set of words for a listing that is not open today ──────────────
+//
+// The quiz said "Opening later", the detail page "Opening soon", /saved
+// "Around Jun 15 / not confirmed" and programs "Ongoing" for what was often
+// the same award (critique 2026-09-23). Every surface now takes its wording
+// from here. `fmt` formats an ISO date the way the caller already prints them,
+// which keeps this module free of imports.
+
+export const STATUS_WORDS = {
+  future: 'Not open yet',
+  unconfirmed: 'Date not confirmed',
+  none: 'No fixed deadline',
+  closed: 'Closed',
+} as const;
+
+/**
+ * `main` is the state or its date, `sub` the qualifier a one-line cell prints
+ * beside it. Null for an open award: each surface prints its own due date.
+ */
+export function waitingLabel(
+  status: ScholarshipStatus,
+  s: { openDate?: string | null; deadline?: string | null },
+  fmt: (iso: string) => string,
+): { main: string; sub: string } | null {
+  if (status === 'closed') return { main: STATUS_WORDS.closed, sub: '' };
+  if (status === 'future') {
+    if (s.openDate) return { main: `Opens ${fmt(s.openDate)}`, sub: '' };
+    // Between cycles with this cycle's deadline known: say both halves.
+    return { main: STATUS_WORDS.future, sub: s.deadline ? `due ${fmt(s.deadline)}` : '' };
+  }
+  // No countdown: counting down to a guessed date is what this state stops.
+  if (status === 'unconfirmed') {
+    return s.deadline ? { main: `Around ${fmt(s.deadline)}`, sub: 'not confirmed' } : { main: STATUS_WORDS.unconfirmed, sub: '' };
+  }
+  return null;
+}
+
+/** Programs speak the same words: TBA is an unconfirmed date, Ongoing has no deadline. */
+export function programUndatedLabel(deadline: string | null | undefined): string {
+  return deadline === 'Ongoing' ? STATUS_WORDS.none : STATUS_WORDS.unconfirmed;
+}

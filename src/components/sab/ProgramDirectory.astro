@@ -2,13 +2,14 @@
 // Server-rendered replacement for the old ProgramList React island.
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
+import SabStatusHelp from './SabStatusHelp.astro';
 import { DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programGroupKey, programWhen } from '../../lib/list-core.ts';
 import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
 import { emailOff } from '../../lib/email-off';
 import { PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets.ts';
-import { BOOKMARK, ARROW } from '../../lib/icons.ts';
+import { ARROW_REF, BOOKMARK_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import SabViewSwitch from './SabViewSwitch.astro';
 
 interface Props {
@@ -49,7 +50,7 @@ const SORT_CHIPS = [
 const STATUS_CHIPS = [
   { value: 'all',    label: 'All' },
   { value: 'active', label: 'Open' },
-  { value: 'tba',    label: 'Ongoing' },
+  { value: 'tba',    label: 'No set date' },
   { value: 'closed', label: 'Closed' },
 ] as const;
 
@@ -109,6 +110,7 @@ if (showGroups) {
 const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 ---
 
+<Fragment set:html={ICON_SPRITE} />
 <div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
   {/* The scholarship twin's wrapper, and load-bearing on a railed hub: it is
       what puts the heading and the toolbar in the right-hand column beside the
@@ -118,6 +120,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     <div>
       <h1 class="sabl-h1">{h1}</h1>
       <p class="sabl-desc">{intro}</p>
+      <p class="sabl-quiz-line">Not sure where to start? <a href="/match/">Answer a few questions</a> for a shortlist.</p>
     </div>
   </div>
 
@@ -204,11 +207,12 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     <div class="sabl-filter-row">
       <span class="sabl-row-label">Status</span>
       <div class="sabl-chips">
-        {STATUS_CHIPS.map(s => (
+        {STATUS_CHIPS.filter(s => s.value !== 'closed' || chipCount({ statusFilter: s.value }) > 0).map(s => (
           <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value })}</span></button>
         ))}
       </div>
     </div>
+    <SabStatusHelp kind="program" />
   </div>
 
   <button type="button" class="sabl-filters-done" data-dir-filters-done>Show results</button>
@@ -301,8 +305,8 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
                 data-name={p.name}
                 aria-label={`Save ${p.name}`}
                 aria-pressed="false"
-              ><Fragment set:html={BOOKMARK} /></button>
-              <a href={`/programs/${slug}/`} class="sabl-apply">Details<Fragment set:html={ARROW} /></a>
+              ><Fragment set:html={BOOKMARK_REF} /></button>
+              <a href={`/programs/${slug}/`} class="sabl-apply">Details<Fragment set:html={ARROW_REF} /></a>
           </div>
         </div>
         </>

@@ -1,7 +1,7 @@
 // Framework-free filtering/sorting/status logic for the public directories.
 // Shared by the directory page scripts and the eligibility quiz.
 import { getToday } from './utils.ts';
-import { scholarshipStatusOf } from './status.ts';
+import { STATUS_WORDS, programUndatedLabel, scholarshipStatusOf, waitingLabel } from './status.ts';
 import type { ScholarshipStatus } from './status.ts';
 import type { Scholarship, Program } from './data-loader.ts';
 import { normalizeSearchQuery, programSearchBlob, scholarshipSearchBlob } from './search-text.ts';
@@ -170,8 +170,8 @@ export function whenTier(days: number): '' | ' is-soon' | ' is-urgent' {
 
 export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
   active: 'OPEN NOW',
-  future: 'OPENING LATER',
-  unconfirmed: 'DATE NOT CONFIRMED',
+  future: STATUS_WORDS.future.toUpperCase(),
+  unconfirmed: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
 };
 
@@ -238,11 +238,9 @@ export function amountCell(amount: string | null | undefined): { text: string; c
 export function scholarshipWhen(s: ScholarshipWithMeta): { main: string; sub: string; cls: string } {
   const date = (iso: string) => new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
   const status = getScholarshipStatus(s);
-  if (status === 'closed') return { main: 'Closed', sub: '', cls: 'sabl-when is-quiet' };
-  if (status === 'future') return { main: s.openDate ? `Opens ${date(s.openDate)}` : 'Opening later', sub: '', cls: 'sabl-when is-quiet' };
-  // No countdown: counting down to a guessed date is what this state stops.
-  if (status === 'unconfirmed') return { main: s.deadline ? `Around ${date(s.deadline)}` : 'Date not confirmed', sub: 'not confirmed', cls: 'sabl-when is-quiet' };
-  if (!s.deadline) return { main: 'No fixed deadline', sub: '', cls: 'sabl-when is-quiet' };
+  const waiting = waitingLabel(status, s, date);
+  if (waiting) return { ...waiting, cls: 'sabl-when is-quiet' };
+  if (!s.deadline) return { main: STATUS_WORDS.none, sub: '', cls: 'sabl-when is-quiet' };
   const days = Math.max(0, Math.round((new Date(s.deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
   const sub = days === 0 ? 'due today' : `${days} ${days === 1 ? 'day' : 'days'} left`;
   return { main: date(s.deadline), sub, cls: `sabl-when${whenTier(days)}` };
@@ -286,8 +284,8 @@ export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
 // The program row's deadline cell, in the same one-line form as scholarshipWhen.
 export function programWhen(p: ProgramWithMeta): { main: string; sub: string; cls: string } {
   const status = getProgramStatus(p);
-  if (status === 'closed') return { main: 'Closed', sub: '', cls: 'sabl-when is-quiet' };
-  if (status === 'tba') return { main: p.deadline === 'Ongoing' ? 'Ongoing' : 'Deadline TBA', sub: '', cls: 'sabl-when is-quiet' };
+  if (status === 'closed') return { main: STATUS_WORDS.closed, sub: '', cls: 'sabl-when is-quiet' };
+  if (status === 'tba') return { main: programUndatedLabel(p.deadline), sub: '', cls: 'sabl-when is-quiet' };
   const deadMs = p._deadline_ms ?? new Date(p.deadline! + 'T00:00:00').getTime();
   const days = Math.max(0, Math.round((deadMs - getToday().getTime()) / 86400000));
   const main = new Date(deadMs).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });

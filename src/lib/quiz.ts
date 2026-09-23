@@ -145,11 +145,10 @@ export function schoolQuestion(schools: string[]): QuizQuestion {
     key: SCHOOL_QUESTION_KEY,
     q: 'Which school do you go to?',
     opts: [
-      ...schools.map(name => ({
-        label: name,
-        value: name,
-        hint: 'Has school-only awards',
-      })),
+      // No hint on these: the same "Has school-only awards" under each of up
+      // to 67 tiles said nothing that told one from another (critique
+      // 2026-09-23). Being on this list is what it meant.
+      ...schools.map(name => ({ label: name, value: name })),
       // Always last, and always present: a student at a school with no awards
       // of its own must be able to pass without claiming one that isn't theirs.
       { label: 'Another school', value: '', hint: 'Skip this filter' },

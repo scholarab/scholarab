@@ -327,8 +327,8 @@ describe('programWhen', () => {
     // getToday mock = 2026-04-05
     expect(programWhen(makeProgram({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })))
       .toEqual({ main: 'Apr 8', sub: '3 days left', cls: 'sabl-when is-urgent' })
-    expect(programWhen(makeProgram({ id: 2, deadline: 'Ongoing' })).main).toBe('Ongoing')
-    expect(programWhen(makeProgram({ id: 3, deadline: 'TBA' })).main).toBe('Deadline TBA')
+    expect(programWhen(makeProgram({ id: 2, deadline: 'Ongoing' })).main).toBe('No fixed deadline')
+    expect(programWhen(makeProgram({ id: 3, deadline: 'TBA' })).main).toBe('Date not confirmed')
     expect(programWhen(makeProgram({ id: 4, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime() })).main).toBe('Closed')
   })
 })

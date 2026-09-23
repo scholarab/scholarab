@@ -15,6 +15,7 @@
 import { emailOff } from '../../lib/email-off';
 import { BOOKMARK } from '../../lib/icons';
 import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
+import { STATUS_WORDS } from '../../lib/status';
 
 interface Fact {
   label: string;
@@ -35,7 +36,7 @@ interface Props {
   openDateIso?: string | null;
   inactive?: boolean; // curator-closed next-cycle listing (open date unknown)
   estimated?: boolean; // the deadline is last cycle's, rolled forward
-  dueLong: string; // 'July 15, 2026' / 'Ongoing' / 'TBA'
+  dueLong: string; // 'July 15, 2026' / 'No fixed deadline, join any time' / 'TBA'
   opensLabel?: string | null; // formatted open date, for status 'future'
   backHref: string;
   backLabel: string;
@@ -83,11 +84,11 @@ const aboutHtml = about ? emailOff(about) : '';
 const notesHtml = notes ? emailOff(notes) : '';
 
 const chip =
-  status === 'closed' ? { text: 'Closed', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
-  : status === 'future' ? { text: opensLabel ? `Opens ${opensLabel}` : 'Opening soon', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
-  : status === 'unconfirmed' ? { text: 'Date not confirmed', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
-  : status === 'ongoing' ? { text: 'Ongoing, join any time', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
-  : status === 'tba' ? { text: 'Deadline not posted', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
+  status === 'closed' ? { text: STATUS_WORDS.closed, bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
+  : status === 'future' ? { text: opensLabel ? `Opens ${opensLabel}` : STATUS_WORDS.future, bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
+  : status === 'unconfirmed' ? { text: STATUS_WORDS.unconfirmed, bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
+  : status === 'ongoing' ? { text: `${STATUS_WORDS.none}, join any time`, bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
+  : status === 'tba' ? { text: STATUS_WORDS.unconfirmed, bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : daysLeft === 0 ? { text: 'Due today', bg: '#A0491A', fg: '#FFFFFF' }
   : typeof daysLeft === 'number'
     ? { text: `${daysLeft} ${daysLeft === 1 ? 'day' : 'days'} left`, bg: urgent ? '#A0491A' : far ? 'rgba(20,25,21,0.05)' : 'rgba(160,73,26,0.12)', fg: urgent ? '#FFFFFF' : far ? 'rgba(20,25,21,0.65)' : '#A0491A' }
@@ -134,6 +135,56 @@ const chip =
 
 <div class="sabd-grid">
 
+  {/* First in the source, as it is first on a phone screen: the page used
+      CSS order to lift it, so a screen reader and the Tab key reached the
+      amount, deadline and Apply after all the prose (critique 2026-09-23). */}
+  <section class="sabd-card" aria-labelledby="sabd-card-h">
+    <h2 id="sabd-card-h" class="sr-only">Amount and deadline</h2>
+    <div class="sabd-mono sabd-fact-label">{valueLabel}</div>
+    {/* Green is money you receive. A cost in the same green read as a prize. */}
+    <div class:list={['sabd-value', { 'is-cost': valueLabel === 'PROGRAM COST', 'is-quiet': valueQuiet }]}>{valueBig}</div>
+    {valueNote && <div class="sabd-value-note">{valueNote}</div>}
+    <div class="sabd-deadline-row">
+      <span class="sabd-mono sabd-deadline-label">DEADLINE</span>
+      <span class="sabd-deadline-value">{estimated ? `Around ${dueLong}` : dueLong}</span>
+    </div>
+    {/* Beside the deadline, at reading size: the check is what the site is
+        for, and at the foot of the card in 12.5px grey nobody saw it. */}
+    {checkedLabel && (
+      <p class="sabd-checked">Checked against the provider's page in {checkedLabel}.</p>
+    )}
+    {status === 'closed' && (
+      <p class="sabd-estimate-note">{opensLabel
+        ? `This cycle is over. The next one opens ${opensLabel}.`
+        : "This cycle is over and the provider hasn't posted the next one. Save it to find it again."}</p>
+    )}
+    {estimated && (
+      <p class="sabd-estimate-note">Last year's date. The provider hasn't posted this year's yet, so check their page before you plan around it.</p>
+    )}
+    <div class="sabd-cta-row">
+      {status === 'closed' ? (
+        <span class="sab-btn sabd-cta sabd-cta-disabled">Closed</span>
+      ) : status === 'future' ? (
+        <span class="sab-btn sabd-cta sabd-cta-disabled">{opensLabel ? `Opens ${opensLabel}` : STATUS_WORDS.future}</span>
+      ) : (
+        <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+          data-track="apply" data-item-type={itemType} data-item-id={itemId}
+          class="sab-btn sabd-cta">{status === 'unconfirmed' ? 'Check the provider' : ctaLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
+      )}
+      <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
+        class="sabd-save" title="Save" aria-label={`Save: ${name}`} data-save-name={name} aria-pressed="false"><Fragment set:html={BOOKMARK} /></button>
+    </div>
+    {/* Only when the button above is a dead label. For TBA and ongoing
+        listings the button already goes to this same URL, and a second
+        link to it under a different name read as a second destination. */}
+    {(status === 'closed' || status === 'future') && url && (
+      <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+        data-track="apply" data-item-type={itemType} data-item-id={itemId}
+        class="sabd-visit">Visit the official site<span class="sabl-ext" aria-hidden="true">↗</span></a>
+    )}
+    <button data-sabd-copy data-copy-url={canonical} class="sabd-copy">Copy link</button>
+  </section>
+
   <!-- left column -->
   <div class="sabd-left">
 
@@ -165,9 +216,10 @@ const chip =
     )}
 
     {/* The notes are the part no other list has: the catch, the trick, the
-        thing the sponsor's page buries. They get the ruled paper and the
-        handwriting from the founder's letter on /about, so the one voice that
-        is ours reads as ours wherever it appears. No signature: a note is
+        thing the sponsor's page buries. They get the ruled paper from the
+        founder's letter on /about, so the one voice that is ours reads as
+        ours wherever it appears; the words are in the body face so the
+        condition that decides eligibility is easy to read. No signature: a note is
         the site's, not a personal promise from one person. */}
     {notes && (
       <div class="sabd-note">
@@ -194,52 +246,6 @@ const chip =
 
   <!-- right rail -->
   <div class="sabd-rail">
-    <div class="sabd-card">
-      <div class="sabd-mono sabd-fact-label">{valueLabel}</div>
-      {/* Green is money you receive. A cost in the same green read as a prize. */}
-      <div class:list={['sabd-value', { 'is-cost': valueLabel === 'PROGRAM COST', 'is-quiet': valueQuiet }]}>{valueBig}</div>
-      {valueNote && <div class="sabd-value-note">{valueNote}</div>}
-      <div class="sabd-deadline-row">
-        <span class="sabd-mono sabd-deadline-label">DEADLINE</span>
-        <span class="sabd-deadline-value">{estimated ? `Around ${dueLong}` : dueLong}</span>
-      </div>
-      {/* Beside the deadline, at reading size: the check is what the site is
-          for, and at the foot of the card in 12.5px grey nobody saw it. */}
-      {checkedLabel && (
-        <p class="sabd-checked">Checked against the provider's page in {checkedLabel}.</p>
-      )}
-      {status === 'closed' && (
-        <p class="sabd-estimate-note">{opensLabel
-          ? `This cycle is over. The next one opens ${opensLabel}.`
-          : "This cycle is over and the provider hasn't posted the next one. Save it to find it again."}</p>
-      )}
-      {estimated && (
-        <p class="sabd-estimate-note">Last year's date. The provider hasn't posted this year's yet, so check their page before you plan around it.</p>
-      )}
-      <div class="sabd-cta-row">
-        {status === 'closed' ? (
-          <span class="sab-btn sabd-cta sabd-cta-disabled">Closed</span>
-        ) : status === 'future' ? (
-          <span class="sab-btn sabd-cta sabd-cta-disabled">{opensLabel ? `Opens ${opensLabel}` : 'Opening soon'}</span>
-        ) : (
-          <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
-            data-track="apply" data-item-type={itemType} data-item-id={itemId}
-            class="sab-btn sabd-cta">{status === 'unconfirmed' ? 'Check the provider' : ctaLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
-        )}
-        <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
-          class="sabd-save" title="Save" aria-label="Save" aria-pressed="false"><Fragment set:html={BOOKMARK} /></button>
-      </div>
-      {/* Only when the button above is a dead label. For TBA and ongoing
-          listings the button already goes to this same URL, and a second
-          link to it under a different name read as a second destination. */}
-      {(status === 'closed' || status === 'future') && url && (
-        <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
-          data-track="apply" data-item-type={itemType} data-item-id={itemId}
-          class="sabd-visit">Visit the official site<span class="sabl-ext" aria-hidden="true">↗</span></a>
-      )}
-      <button data-sabd-copy data-copy-url={canonical} class="sabd-copy">Copy link</button>
-    </div>
-
     {guideHref && guideTitle && (
       <a href={guideHref} class="sabd-guide">
         <span class="sabd-guide-label">Read the guide</span>
@@ -326,8 +332,12 @@ const chip =
 
   .sabd-grid {
     padding: 44px var(--sab-gutter) 96px; box-sizing: border-box;
-    display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start;
+    display: grid; grid-template-columns: 1fr 360px; grid-template-rows: auto 1fr; gap: 16px 40px; align-items: start;
   }
+  /* Source order is card, prose, rail; the desktop puts the card and rail in
+     the right column and lets the prose span both rows. */
+  .sabd-card { grid-column: 2; grid-row: 1; }
+  .sabd-left { grid-column: 1; grid-row: 1 / span 2; }
   .sabd-left { display: flex; flex-direction: column; gap: 36px; min-width: 0; }
 
   /* auto-fit rather than a hard 2 columns: with three facts, repeat(2, 1fr)
@@ -354,27 +364,32 @@ const chip =
   .sabd-h2-elig { color: #0A6B4D; }
   .sabd-elig-text { font-size: 16.5px; line-height: 1.6; }
 
-  @font-face { font-family: 'Patrick Hand'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/hw-patrick-hand.woff2') format('woff2'); }
   /* Ruled paper drawn in CSS rather than the /about scan, which is sized for
      an 880px sheet: blue rules one line apart, the red margin, and text set
      on the rules. Line height IS the rule pitch, and the top padding is one
-     pitch, so every line box ends on a rule at any width. */
+     pitch, so every line box ends on a rule at any width.
+     The words are in the body face, not the handwriting: these notes carry
+     the condition that decides eligibility (residency, nomination, must be
+     enrolled), and the least legible face on the page was holding the most
+     important sentence (critique 2026-09-23). The paper stays; it is what
+     marks the note as ours. The 6px shift sets each baseline just above its
+     rule rather than floating mid-line. */
   .sabd-paper {
     --pitch: 32px;
     max-width: 640px; box-sizing: border-box;
-    padding: var(--pitch) 24px var(--pitch) 56px;
+    padding: calc(var(--pitch) + 6px) 24px calc(var(--pitch) - 6px) 56px;
     background:
       linear-gradient(to right, transparent 40px, rgba(206,72,72,0.5) 40px, rgba(206,72,72,0.5) 41.5px, transparent 41.5px),
       repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--pitch) - 1px), rgba(64,120,196,0.3) calc(var(--pitch) - 1px), rgba(64,120,196,0.3) var(--pitch));
     background-color: #F7F9FA;
     box-shadow: 0 1px 2px rgba(20,25,21,0.08), 0 10px 30px rgba(20,25,21,0.10);
-    font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
-    font-size: 22px; line-height: var(--pitch); color: #1F2A44;
+    font-family: var(--font-body);
+    font-size: 17px; line-height: var(--pitch); color: #1F2A44;
   }
   .sabd-paper p { margin: 0; }
   .sabd-paper a { color: inherit; text-decoration-color: rgba(31,42,68,0.45); text-underline-offset: 3px; }
   @media (max-width: 640px) {
-    .sabd-paper { --pitch: 30px; font-size: 20px; padding-left: 46px; padding-right: 16px; }
+    .sabd-paper { --pitch: 30px; font-size: 16px; padding-left: 46px; padding-right: 16px; }
     .sabd-paper { background:
       linear-gradient(to right, transparent 32px, rgba(206,72,72,0.5) 32px, rgba(206,72,72,0.5) 33.5px, transparent 33.5px),
       repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--pitch) - 1px), rgba(64,120,196,0.3) calc(var(--pitch) - 1px), rgba(64,120,196,0.3) var(--pitch));
@@ -389,7 +404,7 @@ const chip =
   .sabd-step-n { font-family: var(--font-display); font-size: 24px; color: #0A6B4D; flex: none; width: 28px; }
   .sabd-step-text { font-size: 15.5px; line-height: 1.55; color: rgba(20, 25, 21, 0.8); }
 
-  .sabd-rail { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
+  .sabd-rail { grid-column: 2; grid-row: 2; display: flex; flex-direction: column; gap: 16px; }
   .sabd-card {
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
     padding: 28px 26px;
@@ -483,19 +498,16 @@ const chip =
        box, the description and all three how-to-apply steps to find out what
        the award is worth, when it closes, or where to apply.
 
-       display:contents dissolves the rail so its children can be ordered
-       against the prose column individually. Only the card moves; the guide
-       link and the reminder form still read better after the description. */
+       The card is first in the source now, so the stack is just source
+       order: card, prose, then the guide link and reminder form, which read
+       better after the description. display:contents lets the rail's two
+       blocks take the column's gap. */
     /* align-items:start is inherited from the desktop grid, where it stops the
        rail stretching to the tallest row. On a flex column that is the cross
        axis, so it sized every block to its own content and left the card at
        257px in a 335px measure. */
     .sabd-grid { display: flex; flex-direction: column; align-items: stretch; gap: 32px; padding: 32px 20px 72px; }
-    .sabd-rail { position: static; display: contents; }
-    .sabd-card { order: -1; }
-    .sabd-left { order: 0; }
-    .sabd-guide { order: 1; }
-    .sabd-remind { order: 2; }
+    .sabd-rail { display: contents; }
     .sabd-facts { grid-template-columns: 1fr; }
   }
 </style>
@@ -506,6 +518,7 @@ const chip =
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
   import { showToast, showConfetti, prefersReducedMotion } from '../../lib/utils';
   import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
+  import { STATUS_WORDS } from '../../lib/status';
   import { placeInList, readListContext } from '../../lib/list-context.ts';
 
   /** Point the ‹ › arrows at the list the reader came from, or leave them off. */
@@ -538,7 +551,7 @@ const chip =
     // The drawn bookmark from the directories; [data-saved] fills it.
     if (saved) btn.setAttribute('data-saved', '');
     else btn.removeAttribute('data-saved');
-    btn.setAttribute('aria-label', saved ? 'Remove from saved' : 'Save');
+    btn.setAttribute('aria-label', `${saved ? 'Remove from saved' : 'Save'}: ${btn.dataset.saveName ?? ''}`);
     btn.setAttribute('aria-pressed', String(saved));
   }
 
@@ -658,13 +671,13 @@ const chip =
     const pastDeadline = !!deadline && todayMs > new Date(deadline + 'T00:00:00').getTime();
     // Same ladder as status.ts: an estimate outranks a (rolled-forward) open date.
     if (el.dataset.estimated !== undefined && !pastDeadline) {
-      paint('Date not confirmed', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
+      paint(STATUS_WORDS.unconfirmed, 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
     } else if (openDate && todayMs < new Date(openDate + 'T00:00:00').getTime()) {
       paint(`Opens ${fmtLong(openDate)}`, 'rgba(14,140,100,0.12)', '#0A6B4D');
     } else if (deadline && todayMs > new Date(deadline + 'T00:00:00').getTime()) {
-      paint('Closed', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
+      paint(STATUS_WORDS.closed, 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
     } else if (inactive) {
-      paint('Opening soon', 'rgba(14,140,100,0.12)', '#0A6B4D');
+      paint(STATUS_WORDS.future, 'rgba(14,140,100,0.12)', '#0A6B4D');
     } else if (deadline) {
       // round, not ceil: midnight-to-midnight is whole days except across a
       // DST change, where ceil overcounts by one (and disagrees with the list chips)

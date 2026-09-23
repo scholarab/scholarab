@@ -62,8 +62,8 @@ test('saved page - hydrates and shows item count', async ({ page }) => {
   // Exact: the empty state's own heading ("Nothing saved yet") also contains
   // "saved", and this line is asserting the page title.
   await expect(page.getByRole('heading', { name: 'Saved', exact: true })).toBeVisible({ timeout: 10_000 });
-  // Skeleton clears and count line is shown (0 items if nothing saved)
-  await expect(page.locator('text=/\\d+ item(s)? bookmarked/').first()).toBeVisible({ timeout: 10_000 });
+  // Skeleton clears and the count line is shown (only the device note at zero)
+  await expect(page.locator('text=/saved on this device/').first()).toBeVisible({ timeout: 10_000 });
 });
 
 // The site header rendered inside <main> on every page for months, which meant

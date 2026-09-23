@@ -330,11 +330,24 @@ describe('Results', () => {
     mockToggleSaved.mockImplementation((id: number) => { if (saved.has(id)) saved.delete(id); else saved.add(id); return [...saved] })
     render(<EligibilityQuiz scholarships={[s1, s2, s3] as any} programs={[]} />)
     advanceToResults()
-    fireEvent.click(screen.getByText('Save these 2'))
+    fireEvent.click(screen.getByText('Save the 2 strong matches'))
     expect([...saved].sort()).toEqual([1, 2])
     expect(screen.getByText('Saved to your list')).toBeTruthy()
     mockGetSaved.mockImplementation(() => [])
     mockToggleSaved.mockImplementation(() => undefined as unknown as number[])
+  })
+
+  it('puts an open, dated award ahead of an undated one in the same tier', () => {
+    const undated = makeScholarship({ id: 1, title: 'Undated Strong' })
+    const dated = makeScholarship({ id: 2, title: 'Dated Strong', deadline: '2099-06-01' })
+    mockMatchAll.mockReturnValue([
+      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.95, signals: [], checks: [] },
+      { id: 2, tier: 'strong' as ConfidenceTier, confidence: 0.8, signals: [], checks: [] },
+    ])
+    render(<EligibilityQuiz scholarships={[undated, dated] as any} programs={[]} />)
+    advanceToResults()
+    const titles = screen.getAllByText(/Strong$/).map(el => el.textContent)
+    expect(titles).toEqual(['Dated Strong', 'Undated Strong'])
   })
 
   it('shows scholarship count from matchAll results', () => {
@@ -455,7 +468,7 @@ describe('Results', () => {
     mockGetSaved.mockReturnValueOnce([]).mockReturnValue([1])
     render(<EligibilityQuiz scholarships={[s1 as any]} programs={[]} />)
     advanceToResults()
-    fireEvent.click(screen.getByRole('button', { name: /save scholarship/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^save: save test scholarship$/i }))
     expect(mockToggleSaved).toHaveBeenCalledWith(1)
   })
 
@@ -466,7 +479,7 @@ describe('Results', () => {
     }])
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     advanceToResults('Research programs')
-    fireEvent.click(screen.getByRole('button', { name: /save program/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^save: save test program$/i }))
     expect(mockToggleSavedProgram).toHaveBeenCalledWith(42)
     expect(mockToggleSaved).not.toHaveBeenCalled()
   })
@@ -488,7 +501,7 @@ describe('Results', () => {
     mockGetSaved.mockReturnValueOnce([]).mockReturnValue([1])
     render(<EligibilityQuiz scholarships={[s1 as any]} programs={[]} />)
     advanceToResults()
-    fireEvent.click(screen.getByRole('button', { name: /save scholarship/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^save: scholarship 1$/i }))
     expect(mockShowConfetti).toHaveBeenCalledTimes(1)
   })
 

@@ -1,0 +1,46 @@
+---
+// What the status words mean, under the Status filter. The words themselves
+// come from STATUS_WORDS in lib/status.ts, so this note and every row that
+// prints them cannot disagree. First-time applicants met "Date not confirmed"
+// and "Ongoing" with nothing explaining either (critique 2026-09-23).
+import { STATUS_WORDS } from '../../lib/status';
+
+interface Props { kind: 'scholarship' | 'program' }
+const { kind } = Astro.props;
+
+const terms = kind === 'scholarship'
+  ? [
+      ['Open', 'Taking applications now. The date is the deadline.'],
+      [STATUS_WORDS.future, 'This year’s application has not opened. Save it, or set a reminder on its page.'],
+      [STATUS_WORDS.unconfirmed, 'The sponsor has not posted this year’s date. “Around” means last year’s date, so check before you plan on it.'],
+      [STATUS_WORDS.none, 'Applications are taken any time.'],
+      [STATUS_WORDS.closed, 'This year’s deadline has passed.'],
+    ]
+  : [
+      ['Open', 'Taking applications now. The date is the deadline.'],
+      ['No set date', `No deadline to count down to. The row says “${STATUS_WORDS.unconfirmed}” when the provider has not posted this year’s date, and “${STATUS_WORDS.none}” when you can join any time.`],
+    ];
+---
+<details class="sabl-status-help">
+  <summary>What these mean</summary>
+  <dl>
+    {terms.map(([t, d]) => (<div><dt>{t}</dt><dd>{d}</dd></div>))}
+  </dl>
+</details>
+
+<style>
+  .sabl-status-help { margin: 4px 0 0; font-size: 13.5px; color: rgba(20, 25, 21, 0.72); width: 100%; flex: 1 1 100%; }
+  .sabl-status-help summary {
+    display: inline-flex; align-items: center; min-height: 32px; cursor: pointer;
+    font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+    text-decoration-color: rgba(20, 25, 21, 0.3);
+  }
+  .sabl-status-help summary:hover { color: #141915; text-decoration-color: currentColor; }
+  .sabl-status-help dl { margin: 6px 0 4px; display: grid; gap: 6px; max-width: 640px; }
+  .sabl-status-help dl > div { display: grid; grid-template-columns: 11em 1fr; gap: 12px; }
+  .sabl-status-help dt { font-weight: 600; color: #141915; }
+  .sabl-status-help dd { margin: 0; line-height: 1.45; }
+  @media (max-width: 600px) {
+    .sabl-status-help dl > div { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

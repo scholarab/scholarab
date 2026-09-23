@@ -14,7 +14,7 @@ import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline } from '../../lib/utils.ts';
-import { programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
+import { STATUS_WORDS, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
@@ -121,7 +121,7 @@ export async function getStaticPaths() {
       title: s.title,
       value: s.amount,
       tag: s.region || 'Alberta',
-      when: !s.deadline ? 'No fixed deadline'
+      when: !s.deadline ? STATUS_WORDS.none
         : `${s.deadlineEstimated ? 'Around ' : 'Due '}${formatDeadline(s.deadline)}`,
       money: true,
     }));
@@ -132,8 +132,7 @@ export async function getStaticPaths() {
       title: p.name,
       value: p.duration || 'Varies',
       tag: p.category || 'Program',
-      when: p.deadline === 'Ongoing' ? 'Ongoing'
-        : !p.deadline || p.deadline === 'TBA' ? 'Deadline not posted'
+      when: !p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing' ? programUndatedLabel(p.deadline)
         : `Due ${formatDeadline(p.deadline)}`,
     }));
 
@@ -305,7 +304,7 @@ if (kind === 'scholarship') {
   // program descriptions mid-word. Dated cycles lead with the closing date.
   const programDescription = programMeta(p, status, formatDate);
   const canonical = `https://www.scholarab.ca/programs/${slug}/`;
-  const dueLong = status === 'ongoing' ? 'Ongoing, join anytime' : formatDate(p.deadline);
+  const dueLong = status === 'ongoing' ? `${STATUS_WORDS.none}, join any time` : formatDate(p.deadline);
 
   d = {
     currentPath: '/programs/',

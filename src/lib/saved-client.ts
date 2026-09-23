@@ -149,8 +149,11 @@ export function initSaved() {
       // Just the total. The per-type split used to be spelled out here and
       // then again 100px below in the two section heads; the same numbers
       // twice, which is where a mismatch would eventually come from.
-      countEl.textContent =
-        `${total} ${total === 1 ? 'item' : 'items'} bookmarked. Your shortlist is saved on this device.`;
+      // At zero the count would repeat the empty state's "Nothing saved yet"
+      // right under it (critique 2026-09-23), so it keeps only the device note.
+      countEl.textContent = empty
+        ? 'Your shortlist is saved on this device.'
+        : `${total} ${total === 1 ? 'item' : 'items'} bookmarked. Your shortlist is saved on this device.`;
     }
 
     const emptyEl = root.querySelector<HTMLElement>('[data-sv-empty]');

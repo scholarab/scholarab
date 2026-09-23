@@ -255,9 +255,6 @@ body {
     box-shadow: 0 10px 30px -12px rgba(0,0,0,0.75);
     border-bottom-color: rgba(92,227,187,0.18);
   }
-  /* The detail-page rail is the one other sticky thing on the site; without
-     this it parks under the collapsed bar instead of below it. */
-  html[data-sab-stuck] .sabd-rail { top: calc(var(--sab-nav-h) + 1px + 24px); }
 }
 
 /* ── Button press language ─────────────────────────────────── */
@@ -398,6 +395,13 @@ body.quiz-results #match-divider {
   font-size: 17px; line-height: 1.55; color: rgba(20, 25, 21, 0.65);
   margin: 20px 0 0; max-width: 560px; min-height: calc(1.55em * 3);
 }
+.sabl-quiz-line { font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.72); margin: 10px 0 0; max-width: 560px; }
+.sabl-quiz-line a {
+  color: var(--text-primary); font-weight: 600; text-decoration: underline;
+  text-underline-offset: 3px; text-decoration-color: var(--green);
+  display: inline-block; padding-block: 10px; margin-block: -10px;
+}
+.sabl-quiz-line a:hover { color: var(--green); }
 
 /* One rule, not three. The toolbar used to close with a hairline of its own
    and the first group seam drew another a few pixels below it, so the band
@@ -925,6 +929,9 @@ html.js .sabl-group-toggle { display: inline-flex; }
   white-space: nowrap;
 }
 .sabl-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; line-height: 1.3; color: var(--text-primary); text-decoration: none; display: block; }
+/* A one-line title was a 22px-tall target; 4px each way that the negative
+   margin gives back, so the row does not move (critique 2026-09-23). */
+.sabl-name { padding-block: 4px; margin-block: -4px; }
 .sabl-name:hover { color: var(--green); }
 /* Card titles are headings so a screen reader can walk a directory card by
    card; the heading itself adds nothing visual. Tight leading 1.25 became
@@ -1395,6 +1402,8 @@ html:not(.js) .sabl-more { display: none; }
 .sabm-seg { flex: 1; height: 5px; border-radius: 100px; background: rgba(20,25,21,0.12); }
 .sabm-seg.done { background: var(--green-shadow); }
 .sabm-seg.current { background: var(--brand); }
+/* A question only some cities get: outlined until the city answer decides. */
+.sabm-seg.maybe { background: transparent; box-shadow: inset 0 0 0 1px rgba(20,25,21,0.22); }
 .sabm-step-label, .sabm-ph-step-label { font-family: var(--font-body); font-size: 14px; color: rgba(20, 25, 21, 0.72); margin-top: 14px; }
 
 .sabm-question {
@@ -1480,6 +1489,15 @@ html:not(.js) .sabm-ph { display: none; }
   background: #4FE0B4; color: var(--text-on-brand);
 }
 .sabm-btn-accent:active { transform: translateY(1px); transition-duration: 0.07s; }
+/* The save-all action is a <button>, the rest of the accents are links. */
+button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: pointer; }
+/* Leaving the results is the quiet choice (critique 2026-09-23). */
+.sabm-text-link {
+  align-self: center; font-size: 14.5px; font-weight: 600; color: var(--text-primary);
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(20, 25, 21, 0.35);
+  padding: 12px 4px;
+}
+.sabm-text-link:hover, .sabm-text-link:focus-visible { text-decoration-color: currentColor; }
 
 @media (prefers-reduced-motion: reduce) {
   .sabm-btn-outline, .sabm-btn-outline:hover, .sabm-btn-outline:focus-visible, .sabm-btn-outline:active,

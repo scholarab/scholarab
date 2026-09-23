@@ -8,7 +8,7 @@ import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti, generateSlug } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { scholarshipStatusOf } from '../lib/status.ts'
+import { STATUS_WORDS, programUndatedLabel, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
@@ -321,6 +321,15 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       ...m,
       scholarship: scholarshipMap.get(m.id)!,
     })).filter(m => m.scholarship)
+    // Within a fit tier, an award a student can apply to today, with a real
+    // date, goes ahead of one that is not open or has no confirmed date. By
+    // confidence alone the first "Strong match" was often undated or not open
+    // yet, so the results led with the one row nobody could act on (critique
+    // 2026-09-23). The sort is stable, so confidence order holds inside each.
+    const today = todayDate()
+    const TIER_RANK: Record<string, number> = { strong: 0, good: 1, possible: 2 }
+    const actionable = (s: Scholarship) => scholarshipStatusOf(s, today) === 'active' && !!s.deadline ? 0 : 1
+    all.sort((a, b) => TIER_RANK[a.tier]! - TIER_RANK[b.tier]! || actionable(a.scholarship) - actionable(b.scholarship))
     const quality  = all.filter(r => r.tier !== 'possible')
     const possible = all.filter(r => r.tier === 'possible')
     return quality.length >= 5 ? quality : [...quality, ...possible]
@@ -438,21 +447,26 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             {showScholarships && saveable.length > 0 && (
               saveable.every(r => savedIds.has(r.scholarship.id))
                 ? <span className="sabm-saved-all" role="status">Saved to your list</span>
+                // The loudest thing on the page keeps the shortlist; it used to
+                // be a link away from it (critique 2026-09-23). The label names
+                // which rows it saves, since 20 are showing and it saves fewer.
                 : <button
                     onClick={e => handleSaveAll(saveable.map(r => r.scholarship.id), e.currentTarget)}
-                    className="sabm-btn-outline"
-                  >Save {saveable.length === 1 ? 'this one' : `these ${saveable.length}`}</button>
+                    className="sabm-btn-accent"
+                  >{saveable.length === 1
+                    ? `Save the ${strong.length > 0 ? 'strong' : 'good'} match`
+                    : `Save the ${saveable.length} ${strong.length > 0 ? 'strong' : 'good'} matches`}</button>
             )}
             <button onClick={reset} className="sabm-btn-outline">Retake quiz</button>
             {showScholarships && (
               // The student's own hub, not the whole directory: the city is the
               // one answer every award in it already agrees with.
               answers.city && answers.city !== 'Other Alberta'
-                ? <a href={`/scholarships/${generateSlug(answers.city)}/`} className="sabm-btn-accent">All {answers.city} scholarships →</a>
-                : <a href="/scholarships/alberta/" className="sabm-btn-accent">All province-wide scholarships →</a>
+                ? <a href={`/scholarships/${generateSlug(answers.city)}/`} className="sabm-text-link">All {answers.city} scholarships</a>
+                : <a href="/scholarships/alberta/" className="sabm-text-link">All province-wide scholarships</a>
             )}
             {showPrograms && !showScholarships && (
-              <a href="/programs/" className="sabm-btn-accent">Browse all programs →</a>
+              <a href="/programs/" className="sabm-text-link">Browse all programs</a>
             )}
           </div>
         </div>
@@ -470,9 +484,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
               // Same ladder as the directory row this links to, so a match that
               // is not open today never wears a bare "Apply".
               const status = scholarshipStatusOf(s, today)
-              const when = status === 'unconfirmed' ? 'Date not confirmed'
-                : status === 'future' ? (s.openDate ? `Opens ${formatDue(s.openDate)}` : 'Opening later')
-                : s.deadline ? `Due ${formatDue(s.deadline)}` : 'No fixed deadline'
+              // The directory's words (lib/status.ts), so a result and the row
+              // it links to never describe one award two ways.
+              const waiting = waitingLabel(status, s, formatDue)
+              const when = waiting ? [waiting.main, waiting.sub].filter(Boolean).join(', ')
+                : s.deadline ? `Due ${formatDue(s.deadline)}` : STATUS_WORDS.none
               return (
                 <ResultRow
                   key={s.id}
@@ -494,7 +510,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   actions={<>
                     <button
                       onClick={(e) => handleToggleSave(s.id, e.currentTarget)}
-                      aria-label={savedIds.has(s.id) ? 'Remove from saved' : 'Save scholarship'}
+                      aria-label={`${savedIds.has(s.id) ? 'Remove from saved' : 'Save'}: ${s.title}`}
                       aria-pressed={savedIds.has(s.id)}
                       className={`sabl-save${savedIds.has(s.id) ? ' on' : ''}`}
                     >
@@ -540,7 +556,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 subtitle={p.provider}
                 tags={<>
                   {p.category && <span className="sabm-tier sabm-due">{p.category}</span>}
-                  {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' && <span className="sabm-tier sabm-due">Due {formatDue(p.deadline)}</span>}
+                  <span className="sabm-tier sabm-due">{p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' ? `Due ${formatDue(p.deadline)}` : programUndatedLabel(p.deadline)}</span>
                 </>}
                 amount={
                   // Stipends are free text ("Paid internship", "$3,000 stipend"),
@@ -558,7 +574,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 actions={<>
                   <button
                     onClick={(e) => handleToggleSaveProgram(p.id, e.currentTarget)}
-                    aria-label={savedProgramIds.has(p.id) ? 'Remove from saved' : 'Save program'}
+                    aria-label={`${savedProgramIds.has(p.id) ? 'Remove from saved' : 'Save'}: ${p.name}`}
                     aria-pressed={savedProgramIds.has(p.id)}
                     className={`sabl-save${savedProgramIds.has(p.id) ? ' on' : ''}`}
                   >
@@ -608,12 +624,23 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Segmented progress */}
       <div className="sabm-progress-wrap">
-        <div className="sabm-progress">
-          {QUESTIONS.map((_, i) => (
-            <div key={i} className={`sabm-seg${i < step ? ' done' : i === step ? ' current' : ''}`} />
+        {/* One segment per question the label counts: while the city is
+            open the label says "up to 8", so the bar draws 8, the ones that
+            may not be asked in outline (it drew 6 under "of up to 8"). */}
+        <div
+          className="sabm-progress"
+          role="progressbar"
+          aria-label="Quiz progress"
+          aria-valuemin={1}
+          aria-valuemax={QUESTIONS.length}
+          aria-valuenow={step + 1}
+          aria-valuetext={`Question ${step + 1} of ${totalLabel}`}
+        >
+          {Array.from({ length: Math.max(QUESTIONS.length, answers.city ? 0 : ceiling) }, (_, i) => (
+            <div key={i} className={`sabm-seg${i >= QUESTIONS.length ? ' maybe' : i < step ? ' done' : i === step ? ' current' : ''}`} />
           ))}
         </div>
-        <div className="sabl-mono sabm-step-label">
+        <div className="sabl-mono sabm-step-label" aria-hidden="true">
           Question {step + 1} of {totalLabel}
         </div>
       </div>

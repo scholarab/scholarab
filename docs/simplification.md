@@ -1,5 +1,42 @@
 # ScholarAB simplification record
 
+## Critique third pass: September 23, 2026
+
+From the re-run critique (27/40, `.impeccable/critique/2026-09-23T23-26-22Z__src-pages.md`):
+the quiz had lost its only home-page link, four surfaces named the same status
+four ways, and the detail card was first on screen but last in the source.
+Local measurements against `dist/`, not hosted.
+
+| Candidate | Outcome |
+| --- | --- |
+| Four status vocabularies (quiz "Opening later", detail "Opening soon", programs "Ongoing" / "Deadline TBA" / "Deadline not posted") | One set in `STATUS_WORDS` + `waitingLabel` in `lib/status.ts`; list-core, the quiz, the detail page (server and client repaint) and related rows all read it. A "What these mean" note under each Status filter. |
+| Programs "Closed 0" chip | Hidden while its count is 0 (programs are only listed while open), shown if a stale cycle ever puts one there. |
+| "Has school-only awards" under each of up to 67 school tiles | Removed; being on the list is what it meant. |
+| /saved empty: "0 items bookmarked" over "Nothing saved yet"; programs button | Count line keeps only the device note at zero; buttons are the quiz and scholarships. |
+| Quiz reachable only from a zero-results state | Nav "Find my scholarships", one line under the hero buttons, one line under each directory standfirst, the /saved empty state. A row inside the grid (as the critique proposed) was not built: paging and the view switcher own that grid. |
+| Quiz results: undated #1, exit link as the loudest button, "Save these 4" | Open, dated awards first within each tier (stable sort, test added); save is the accent button and names the tier; hub link is text. Save buttons carry the award name. |
+| Progress bar drew 6 segments under "of up to 8" | Draws the ceiling, the conditional two outlined; `role=progressbar` with the same text. Placeholder copy changed with it. |
+| Detail card lifted by CSS `order` | First in the source with a hidden heading; grid areas on desktop. The rail is no longer sticky (card and rail are separate grid rows now), and its sticky offset rule in global.css is deleted. |
+| Handwriting face on "Worth knowing" | Body face on the ruled paper; Patrick Hand no longer loads on detail pages (still on /about). |
+| 3,084 inline SVG icon copies on /scholarships | One `<symbol>` sprite, `<use>` per row (both directories). /saved and the quiz keep the inline strings. |
+| `data-search` blobs (599 KB) | Kept: rebuilding them client-side would split the one normalizer the index and analytics depend on. |
+| Shipping 24 rows and fetching the rest | Not done: rows are the client's data source and the no-JS/crawler contract. Needs its own decision. |
+| Home 8px carousel dots, 14px credits, 23px "Next deadlines", 22px row titles | 24px hit areas, drawn size unchanged; row titles 30px with negative margin. Left-side scrim for the hero byline. |
+
+Repair attempts: the directory quiz line wrapped on /programs and moved every
+program hub's toolbar (e2e hub-height test); fixed on the first retry by one
+shorter sentence for both directories.
+
+Add-back fraction: 0 of 13. Nothing removed had to be restored.
+
+| Metric | Before | After |
+| --- | --- | --- |
+| /scholarships HTML, raw | 3,670,566 B | 3,219,289 B (-12.3%) |
+| /scholarships HTML, gzip -6 | 365,929 B | 360,387 B (-1.5%) |
+| /scholarships DOM elements | 32,786 | 31,274 (-4.6%) |
+| Unit tests | 974 | 975 (1 ranking test added) |
+| E2E | | 76 passed |
+
 ## AI-look audit, second pass: September 23, 2026
 
 From the re-run critique (28/40, `.impeccable/critique/2026-09-23T21-27-54Z__src-pages.md`),

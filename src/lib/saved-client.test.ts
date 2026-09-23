@@ -87,7 +87,7 @@ describe('initSaved', () => {
     expect($('[data-sv-content]').hidden).toBe(false)
     expect($('[data-sv-empty]').hidden).toBe(false)
     expect($('[data-sv-list]').hidden).toBe(true)
-    expect($('[data-sv-count]').textContent).toBe('0 items bookmarked. Your shortlist is saved on this device.')
+    expect($('[data-sv-count]').textContent).toBe('Your shortlist is saved on this device.')
   })
 
   it('renders only the saved cards and writes counts and section labels', () => {
