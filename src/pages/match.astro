@@ -59,16 +59,13 @@ const breadcrumbJson = {
   <div id="sab-match" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabm-body" style="flex:1;">
       <div id="match-intro">
-        <h1 class="sabm-h1">Find your <em>match</em></h1>
+        <h1 class="sabm-h1">Find your match</h1>
         <p class="sabm-sub">
           {
             `${QUIZ_QUESTION_WORD} to ${QUIZ_MAX_QUESTION_WORD} questions. A shortlist worth checking, not a promise you qualify.`
           }
         </p>
-        <div class="sabm-trust sabl-mono">
-          <span>◦ Completely anonymous</span>
-          <span>{`◦ Under ${QUIZ_DURATION}`}</span>
-        </div>
+        <p class="sabm-trust">{`No name or email needed, and it takes under ${QUIZ_DURATION}.`}</p>
       </div>
 
       <QuizLoader url={quizDataUrl} />

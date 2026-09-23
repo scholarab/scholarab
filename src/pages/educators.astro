@@ -6,8 +6,8 @@ import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { QUIZ_DURATION, QUIZ_QUESTION_COUNT, QUIZ_MAX_QUESTION_COUNT } from '../lib/quiz';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../lib/facets';
-import { programIsListed } from '../lib/status';
-import { getToday } from '../lib/utils';
+import { programIsListed, scholarshipStatusOf } from '../lib/status';
+import { getToday, formatDeadline, generateSlug } from '../lib/utils';
 import { webPageJson } from '../lib/ld';
 
 const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
@@ -17,31 +17,31 @@ const today = getToday();
 // programs.length counts retired programs, which /programs does not list, so
 // this page was quoting counsellors a number eight higher than the directory
 // they were about to open. Same helper the home hero and the nav count use.
-const stats = [
-  { value: `${scholarships.length}`, label: 'SCHOLARSHIPS' },
-  { value: `${programs.filter(p => programIsListed(p, today)).length}`, label: 'RESEARCH PROGRAMS' },
-  { value: '$0', label: 'NO ADS, NO ACCOUNTS' },
-];
+const scholarshipCount = scholarships.length.toLocaleString('en-CA');
+const programCount = programs.filter(p => programIsListed(p, today)).length.toLocaleString('en-CA');
 
 // Counted from the hubs that exist, not typed in: this line listed five cities
 // long after the site had grown to over twenty.
 const cityHubCount = SCHOLARSHIP_FACETS
   .filter(f => f.kind === 'region' && !f.broad && facetItems(f, scholarships).length >= MIN_FACET_ITEMS).length;
 
-const features = [
-  { tag: QUIZ_DURATION.toUpperCase(), title: `Take the ${QUIZ_QUESTION_COUNT} to ${QUIZ_MAX_QUESTION_COUNT} question match quiz`, body: 'Students answer a few questions about their grade, region and interests, and get a shortlist worth checking. No account required.' },
-  { tag: 'REGION-AWARE', title: 'Browse by region and category', body: `Scholarships are tagged by region, with ${cityHubCount} city and town pages plus province-wide and national lists, so students only see what’s relevant to them.` },
-  { tag: 'DEADLINE ALERTS', title: 'Save scholarships and get reminders', body: 'Students can bookmark scholarships and sign up for email reminders 30, 14, and 3 days before the deadline. No account required, just an email address.' },
-  { tag: 'BEYOND AWARDS', title: 'Explore research programs', body: 'Beyond scholarships, ScholarAB lists paid and unpaid research placements, competitions, and trades apprenticeships for Alberta high school students.' },
+// The page is a handout (critique 2026-09-23: the stats row, tag cards,
+// 01/02/03 steps and dark CTA block were a landing-page kit, on the page for
+// the site's distribution channel). Plain lines a counsellor can print.
+const canDo = [
+  `Take the ${QUIZ_QUESTION_COUNT} to ${QUIZ_MAX_QUESTION_COUNT} question match quiz (${QUIZ_DURATION}) and get a shortlist worth checking.`,
+  `Browse by where they live: ${cityHubCount} city and town pages, plus province-wide and national lists.`,
+  'Save scholarships and get email reminders 30, 14 and 3 days before the deadline.',
+  'Find paid and unpaid research placements, competitions and trades apprenticeships.',
 ];
 
-// Zero-padded like the match result rows. These are the one numbered list on
-// the page that is a real sequence, so they keep their numbers.
-const steps = [
-  { num: '01', body: 'Post scholarab.ca on your classroom board or guidance office bulletin.' },
-  { num: '02', body: `Tell Grade 11 and 12 students to take the Match quiz; it takes ${QUIZ_DURATION} and gives them a shortlist worth checking.` },
-  { num: '03', body: 'Remind students to sign up for deadline reminders so they don’t miss applications they’ve saved.' },
-];
+// The directory's own definition of open and the home page's "next five", so
+// the printed sheet lists exactly what a student will find on the site.
+const nextDeadlines = scholarships
+  .filter(s => s.deadline && scholarshipStatusOf(s, today) === 'active')
+  .sort((a, b) => a.deadline!.localeCompare(b.deadline!))
+  .slice(0, 5);
+const asOf = today.toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' });
 
 const pageTitle = 'For Alberta Educators & Counsellors | ScholarAB';
 // Ranked position 1.5 on 24 impressions and took zero clicks, so the ranking
@@ -51,10 +51,10 @@ const pageTitle = 'For Alberta Educators & Counsellors | ScholarAB';
 // read on five other sites. The counts are the one thing here that no
 // competitor snippet can claim, so they lead.
 //
-// Interpolated rather than typed out: the stats block above computes these
+// Interpolated rather than typed out: the counts above come
 // from the live data, and a hardcoded number in the description would drift
 // away from the number rendered on the page the first time a listing lands.
-const description = `${stats[0]!.value} Alberta scholarships and ${stats[1]!.value} research programs, sorted by deadline and free for your students. No accounts, no ads, nothing to sign up for.`;
+const description = `${scholarshipCount} Alberta scholarships and ${programCount} research programs, sorted by deadline and free for your students. No accounts, no ads, nothing to sign up for.`;
 const canonical = 'https://www.scholarab.ca/educators/';
 const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', description, path: '/educators/' });
 ---
@@ -70,189 +70,120 @@ const ldJson = webPageJson({ name: 'For Alberta Educators & Counsellors', descri
   <script is:inline type="application/ld+json" set:html={JSON.stringify(ldJson)} slot="head" />
   <SabFonts slot="head" />
 
-  {/* The header band and the hero band are separate elements now; the header
-      is the page's banner and cannot sit inside <main>. Same background, no
-      margins, so the two read as the single dark band they always were. */}
   <div class="sabp-header" slot="header">
     <SabHeader currentPath="/educators" />
   </div>
 
   <div id="sab-educators" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
-    <!-- ============ DARK HERO ============ -->
-    <div class="sabp-header">
-      <div class="sabe-hero">
-        <div class="sab-kicker">FOR EDUCATORS</div>
-        <h1 class="sabe-h1">Help your students find scholarships they <em>actually</em> qualify for</h1>
-        <div class="sabe-hero-bottom">
-          <p class="sabe-lede">
-            ScholarAB is a free, ad-free directory of Alberta scholarships and research programs built specifically for high school students. Share it with your class, post it in your guidance office, or send it directly to Grade 11 and 12 students.
-          </p>
-          <div class="sabe-stats">
-            {stats.map(s => (
-              <div class="sabe-stat">
-                <div class="sabe-stat-value">{s.value}</div>
-                <div class="sabe-stat-label sabe-mono">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+    <div class="sabe-body" style="flex:1;">
+      <h1 class="sabe-h1">For counsellors and teachers</h1>
+      <p class="sabe-lede">
+        ScholarAB is a free list of {scholarshipCount} Alberta scholarships and {programCount} research programs for high school students, each with its deadline and amount. Students don't need an account. Post the link in your guidance office or send it to Grade 11 and 12 students; this page prints as a one-page handout.
+      </p>
+      <div class="sabe-actions">
+        <button type="button" class="sab-btn sabe-btn sabe-btn-solid" data-sabe-print>Print the handout</button>
+        <a href="/scholarships/" class="sab-btn sabe-btn sabe-btn-outline">Browse scholarships</a>
       </div>
-    </div>
 
-    <!-- ============ WHAT STUDENTS CAN DO ============ -->
-    <div class="sabe-section">
-      <div class="sabe-section-head">
-        <h2 class="sabe-h2">What students can do</h2>
-        <span class="sabe-mono sabe-head-note">No accounts · no ads · nothing to install</span>
-      </div>
-      <div class="sabe-feature-grid">
-        {features.map(f => (
-          <div class="sabe-card">
-            <div class="sabe-card-top">
-              <span class="sabe-mono sabe-card-tag">{f.tag}</span>
-            </div>
-            <div class="sabe-card-title">{f.title}</div>
-            <div class="sabe-card-body">{f.body}</div>
-          </div>
-        ))}
-      </div>
-    </div>
+      <section class="sabe-sheet" aria-labelledby="sabe-sheet-h">
+        <h2 id="sabe-sheet-h" class="sabe-domain">scholarab<span class="sabe-tld">.ca</span></h2>
+        <p class="sabe-sheet-sub">Scholarships and research programs for Alberta high school students. Free, no account.</p>
 
-    <!-- ============ HOW TO SHARE IT ============ -->
-    <div class="sabe-section">
-      <div class="sabe-share-grid">
-        <div>
-          <div class="sabe-mono sabe-share-kicker">THREE MINUTES, TOPS</div>
-          <h2 class="sabe-h2 sabe-share-h2">How to share it</h2>
-          <p class="sabe-share-lede">No sign-up forms, no school licences, no IT tickets. It's a public website; sharing the link is the whole job.</p>
-        </div>
-        <div class="sabe-steps">
-          {steps.map(st => (
-            <div class="sabe-step">
-              <div class="sabe-step-num">{st.num}</div>
-              <p class="sabe-step-body">{st.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+        <h3 class="sabe-h3">What you can do there</h3>
+        <ul class="sabe-list">
+          {canDo.map(line => <li>{line}</li>)}
+        </ul>
 
-    <!-- ============ SHARE CTA ============ -->
-    <div class="sabe-section sabe-cta-section" style="flex:1;">
-      <div class="sabe-cta">
-        <div class="sabe-mono sabe-cta-kicker">SHARE WITH YOUR STUDENTS</div>
-        <div class="sabe-cta-domain">scholarab<span class="sabe-cta-tld">.ca</span></div>
-        <div class="sabe-cta-actions">
-          <a href="/scholarships/" class="sab-btn sabe-btn sabe-btn-solid">Browse scholarships <span class="sabe-btn-arrow">→</span></a>
-          <a href="/match/" class="sab-btn sabe-btn sabe-btn-outline">Try the quiz</a>
-        </div>
-        <p class="sabe-cta-contact">Built by a high school student in Alberta. Questions or feedback? <!--email_off--><a href="mailto:contact.scholarab@gmail.com" class="sabe-cta-email">contact.scholarab@gmail.com</a><!--/email_off--></p>
-      </div>
-    </div>
+        {nextDeadlines.length > 0 && (
+          <>
+            <h3 class="sabe-h3">Next deadlines, as of {asOf}</h3>
+            <ul class="sabe-deadlines">
+              {nextDeadlines.map(s => (
+                <li>
+                  <a href={`/scholarships/${generateSlug(s.title)}/`}>{s.title}</a>
+                  <span class="sabe-dl-amount tnum">{s.amount}</span>
+                  <span class="sabe-dl-date tnum">{formatDeadline(s.deadline)}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </section>
 
+      <p class="sabe-contact">Built by a high school student in Medicine Hat. Questions, or an award your students should see? <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off--></p>
+    </div>
   </div>
 
   <SabFooter slot="footer" />
 </Layout>
 
+<script is:inline>
+  document.querySelector('[data-sabe-print]')?.addEventListener('click', () => window.print());
+</script>
+
 <style is:global>
   /* The educators design is fixed light regardless of site theme */
   body:has(#sab-educators) { background: var(--bg-page); }
+
+  /* The handout prints alone: no header, footer, consent banner or buttons. */
+  @media print {
+    body:has(#sab-educators) .sabp-header,
+    body:has(#sab-educators) .sabf-footer,
+    body:has(#sab-educators) .sabe-actions,
+    body:has(#sab-educators) .sabe-lede,
+    body:has(#sab-educators) .sabe-h1,
+    body:has(#sab-educators) #sab-consent { display: none !important; }
+    body:has(#sab-educators) .sabe-body { padding: 0; }
+    body:has(#sab-educators) .sabe-sheet { border: 0; padding: 0; margin: 0; }
+  }
 </style>
 
 <style>
-  .sabe-mono { font-family: var(--font-label); }
-
-  /* ── Dark hero ── */
-  .sabe-hero { max-width: var(--sab-measure); margin: 0 auto; padding: 72px var(--sab-gutter) 0; width: 100%; box-sizing: border-box; }
+  .sabe-body { padding: 72px var(--sab-gutter) 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
   .sabe-h1 {
     font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(44px, 6.5vw, 78px); line-height: 1.02; letter-spacing: -0.015em;
-    margin: 0; max-width: 900px; text-wrap: balance;
+    font-size: clamp(44px, 7vw, 76px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
-  @media (prefers-reduced-motion: no-preference) {
-    .sabe-h1 { animation: sabe-rise 0.7s ease both; }
-  }
-  .sabe-h1 em { font-style: italic; color: #2FD3A0; }
-  @keyframes sabe-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-  .sabe-hero-bottom {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 40px; margin-top: 44px; padding-bottom: 64px;
-  }
-  .sabe-lede { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.72); margin: 0; max-width: 520px; }
-  .sabe-stats { display: flex; border-left: 1px solid rgba(238, 241, 236,0.18); }
-  .sabe-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(238, 241, 236,0.18); }
-  .sabe-stat-value { font-family: var(--font-display); font-size: 44px; line-height: 1.05; color: #EEF1EC; }
-  .sabe-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(238, 241, 236, 0.55); margin-top: 6px; }
+  .sabe-lede { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.78); margin: 20px 0 0; max-width: 62ch; }
 
-  /* ── Shared section shell ── */
-  .sabe-section { max-width: var(--sab-measure); margin: 0 auto; padding: 88px var(--sab-gutter) 0; width: 100%; box-sizing: border-box; }
-  .sabe-h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(38px, 4.5vw, 58px); letter-spacing: -0.01em; margin: 0; }
-  .sabe-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; gap: 20px; }
-  .sabe-head-note { font-size: 13px; color: rgba(20, 25, 21, 0.68); }
-
-  /* ── Feature cards ── */
-  .sabe-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .sabe-card {
-    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
-    padding: 30px 30px 32px; transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .sabe-card:hover { transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #0E8C64; }
-  .sabe-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-  .sabe-card-tag { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); }
-  .sabe-card-title { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; margin-bottom: 8px; }
-  .sabe-card-body { font-size: 15px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); }
-
-  /* ── How to share ── */
-  .sabe-share-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: start; }
-  .sabe-share-kicker { font-size: 13px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 16px; }
-  .sabe-share-h2 { font-size: clamp(38px, 4.4vw, 56px); line-height: 1.05; }
-  .sabe-share-lede { font-size: 16px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); margin: 20px 0 0; }
-  .sabe-steps { border-top: 2px solid #141915; }
-  .sabe-step {
-    display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 24px 0;
-    border-bottom: 1px solid rgba(20,25,21,0.14); align-items: start;
-  }
-  .sabe-step-num { font-family: var(--font-display); font-size: 28px; color: #0A6B4D; line-height: 1.1; }
-  .sabe-step-body { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.75); margin: 0; }
-
-  /* ── Share CTA ── */
-  .sabe-cta-section { padding-bottom: 110px; }
-  .sabe-cta {
-    background: #0A1310; color: #EEF1EC; border-radius: 20px; padding: 64px 48px;
-    text-align: center; box-shadow: 8px 8px 0 rgba(47,211,160,0.4);
-  }
-  .sabe-cta-kicker { font-size: 13px; letter-spacing: 0.06em; color: #2FD3A0; margin-bottom: 18px; }
-  .sabe-cta-domain { font-family: var(--font-display); font-size: clamp(44px, 6vw, 72px); line-height: 1; letter-spacing: -0.01em; color: #EEF1EC; }
-  .sabe-cta-tld { color: #2FD3A0; }
-  .sabe-cta-actions { display: flex; justify-content: center; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .sabe-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
   .sabe-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 16px; border-radius: 100px; text-decoration: none;
+    display: inline-flex; align-items: center; font-family: var(--font-body);
+    font-size: 15.5px; border-radius: 100px; text-decoration: none; cursor: pointer;
   }
-  .sabe-btn-solid { background: #2FD3A0; color: #08120E; font-weight: 700; padding: 15px 28px; }
-  .sabe-btn-solid:hover { background: #4FE0B4; color: #08120E; }
-  .sabe-btn-arrow { font-size: 18px; }
-  .sabe-btn-outline { color: #EEF1EC; font-weight: 600; padding: 15px 26px; border: 1px solid rgba(238, 241, 236,0.3); }
-  .sabe-btn-outline:hover { border-color: #EEF1EC; color: #EEF1EC; }
-  .sabe-cta-contact { font-size: 14.5px; line-height: 1.6; color: rgba(238, 241, 236, 0.55); margin: 32px auto 0; max-width: 440px; }
-  .sabe-cta-email { color: #2FD3A0; text-decoration: underline; text-underline-offset: 3px; }
-  .sabe-cta-email:hover { color: #EEF1EC; }
+  .sabe-btn-solid { background: var(--green); color: #F5FBF8; font-weight: 700; padding: 13px 24px; border: 0; }
+  .sabe-btn-solid:hover { background: #08573E; }
+  .sabe-btn-outline { color: var(--text-primary); font-weight: 600; padding: 12px 22px; border: 1.5px solid rgba(20,25,21,0.3); }
+  .sabe-btn-outline:hover { border-color: var(--green); color: var(--text-primary); }
 
-  /* ── Responsive ── */
+  /* The sheet is the handout: one bordered page, read top to bottom. */
+  .sabe-sheet {
+    margin-top: 56px; max-width: 760px; border: 1.5px solid rgba(20,25,21,0.85);
+    border-radius: 14px; padding: 40px 44px 36px; background: #FFFFFF;
+  }
+  .sabe-domain { font-family: var(--font-display); font-weight: 400; font-size: clamp(48px, 8vw, 84px); line-height: 1; letter-spacing: -0.01em; margin: 0; }
+  .sabe-tld { color: #0A6B4D; }
+  .sabe-sheet-sub { font-size: 17px; line-height: 1.5; color: rgba(20, 25, 21, 0.78); margin: 12px 0 0; }
+  .sabe-h3 { font-size: 17px; font-weight: 700; margin: 34px 0 10px; }
+  .sabe-list { margin: 0; padding-left: 1.2em; font-size: 16px; line-height: 1.6; color: rgba(20, 25, 21, 0.85); }
+  .sabe-list li + li { margin-top: 6px; }
+  .sabe-deadlines { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(20,25,21,0.14); }
+  .sabe-deadlines li {
+    display: grid; grid-template-columns: 1fr auto 110px; gap: 16px; align-items: baseline;
+    padding: 10px 0; border-bottom: 1px solid rgba(20,25,21,0.14); font-size: 15.5px;
+  }
+  .sabe-deadlines a { color: var(--text-primary); text-decoration: none; font-weight: 600; }
+  .sabe-deadlines a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .sabe-dl-amount { color: #0A6B4D; font-weight: 700; }
+  .sabe-dl-date { color: rgba(20, 25, 21, 0.78); text-align: right; }
+
+  .sabe-contact { font-size: 15px; line-height: 1.6; color: rgba(20, 25, 21, 0.78); margin: 32px 0 0; max-width: 62ch; }
+  .sabe-contact a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
+
   @media (max-width: 900px) {
-    .sabe-hero { padding: 44px 20px 0; }
-    .sabe-hero-bottom { flex-direction: column; align-items: flex-start; margin-top: 36px; padding-bottom: 44px; }
-    .sabe-stats { border-left: none; width: 100%; }
-    .sabe-stat { padding: 6px 24px 6px 0; border-right: none; }
-    .sabe-stat + .sabe-stat { padding-left: 24px; border-left: 1px solid rgba(238, 241, 236,0.18); }
-    .sabe-stat-value { font-size: 32px; }
-    .sabe-stat-label { font-size: 11.5px; }
-    .sabe-section { padding: 56px 20px 0; }
-    .sabe-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
-    .sabe-feature-grid { grid-template-columns: 1fr; }
-    .sabe-share-grid { grid-template-columns: 1fr; gap: 36px; }
-    .sabe-cta-section { padding-bottom: 90px; }
-    .sabe-cta { padding: 48px 24px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
+    .sabe-body { padding: 44px 20px 90px; }
+    .sabe-sheet { padding: 28px 20px 24px; margin-top: 40px; }
+    .sabe-deadlines li { grid-template-columns: 1fr auto; gap: 4px 12px; }
+    .sabe-dl-date { grid-column: 1 / -1; text-align: left; font-size: 14px; }
   }
 </style>

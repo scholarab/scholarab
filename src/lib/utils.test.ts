@@ -290,15 +290,15 @@ describe('parseAmount', () => {
 
 describe('formatVerifiedMonth', () => {
   it('renders the stamp /terms promises is printed on every listing', () => {
-    expect(formatVerifiedMonth('2026-08')).toBe('AUG 2026');
-    expect(formatVerifiedMonth('2026-01')).toBe('JAN 2026');
-    expect(formatVerifiedMonth('2026-12')).toBe('DEC 2026');
+    expect(formatVerifiedMonth('2026-08')).toBe('Aug 2026');
+    expect(formatVerifiedMonth('2026-01')).toBe('Jan 2026');
+    expect(formatVerifiedMonth('2026-12')).toBe('Dec 2026');
   });
 
   it('does not slip a month backwards in a negative-offset zone', () => {
     // new Date('2026-08') is midnight UTC, which is July 31 in Edmonton. The
     // string is parsed by hand precisely so the stamp cannot be off by one.
-    expect(formatVerifiedMonth('2026-08-01')).toBe('AUG 2026');
+    expect(formatVerifiedMonth('2026-08-01')).toBe('Aug 2026');
   });
 
   it('returns null rather than inventing a month it was not given', () => {

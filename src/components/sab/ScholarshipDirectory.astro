@@ -4,7 +4,7 @@
 // them and recomputes the clock-dependent bits on load, so no React ships.
 import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
-import { generateSlug } from '../../lib/utils.ts';
+import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
@@ -337,6 +337,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
           <div class={amount.cls}>{amount.text}</div>
           <div class="sabl-row-when">
             <span class={when.cls} data-when><span data-when-main>{when.main}</span><span class="sabl-when-sub" data-when-sub hidden={!when.sub}>{when.sub}</span></span>
+            {formatVerifiedMonth(s.lastVerified) && <span class="sabl-checked">Checked {formatVerifiedMonth(s.lastVerified)}</span>}
           </div>
           <div class="sabl-card-actions">
               <button

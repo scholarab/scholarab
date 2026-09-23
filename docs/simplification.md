@@ -1,5 +1,41 @@
 # ScholarAB simplification record
 
+## AI-look audit fixes: September 23, 2026
+
+From the 2026-09-23 critique (`.impeccable/critique/2026-09-23T20-54-02Z__src-pages.md`),
+which named the site-wide lift-and-offset-shadow hover and the landing-page kit
+on the home hero, /educators and /updates as what reads as "Claude default".
+Everything is local, measured against `dist/`, not hosted.
+
+| Candidate | Outcome |
+| --- | --- |
+| Hover lift (`translate(-3px,-3px)`) plus zero-blur offset shadow on buttons, quiz options, cards, chips, CTAs, and static hard shadows on the match card, price card, guide CTA and educators CTA | Removed everywhere. Hover now changes colour or tint only; a press sinks 1px. The `--sab-btn-shadow` token is gone. A test now fails on any new offset shadow or lift. |
+| /educators stats row (with a filler "$0" stat), 2x2 tag cards, 01/02/03 steps, dark CTA block | Replaced by a printable one-page handout: the address, four plain lines, and the next five real deadlines. Counts are comma-formatted from the same helpers. |
+| /updates dark hero, stats row, pill jump links, pill kind tags, "N CHANGES" eyebrow | White page with h1 and lede (the entry count moved into the sentence), plain month links, the kind as a coloured word. |
+| Home hero count-up, "$ open right now" ledger, glow text-shadows, "Finally one place..." tail | The ledger became the next three deadlines (same list as #closing, pruned client-side once past). Glow halos became one 1px shadow over a slightly stronger scrim. The video stays (Ilia's call). |
+| "Checked" date at 12.5px grey at the foot of the detail card | Moved under the deadline at 14.5px; added to every scholarship and program row. One month formatter (`formatVerifiedMonth`) now serves both, replacing a second copy in `[slug].astro`. |
+| Eyebrows restating the h1 (ERROR 404, TERMS, PRIVACY, CREDITS, GUIDES), home TIME-SENSITIVE / HIGHEST VALUE, guide rail kickers, accent-word headlines, 01/02 numbers on the two home lists | Removed. The directory row counter stays (Ilia, 2026-09-22). |
+| Dark CTA band at the end of every guide | Folded into the existing note card as one line in the guide's voice. |
+| /about "HOW THIS WORKS" card, No-X/No-Y/No-Z titles, status dot | Plain section, statement titles, no dot. Body text raised from 0.65 to 0.8 ink. |
+| /match trust chips ("◦ Completely anonymous ◦ Under 30 seconds") | One sentence. |
+| Footer mailto links unstyled (set:html misses scoped CSS) | `:global` selector; all 18 footer links now compute the same 14px and colour. |
+
+Add-back fraction: 0 of 10 candidates restored. Nothing was removed that a
+retained behaviour needed; the educators and updates facts all survived in
+plainer form.
+
+| Metric | Before | After |
+| --- | --- | --- |
+| Hard offset shadow / lift declarations in `src` (excluding admin) | 23 | 0 |
+| Detector `kicker-above-heading`, 12 built pages | 2 | 0 |
+| Detector `tiny-text`, same pages | 1 | 0 |
+| Detector findings total, same pages (rest are house style or false positives) | 116 | 109 |
+| Lines changed | | +360 / -571 across 25 files |
+| /educators.astro, /updates.astro lines | 258, 245 | 189, 201 |
+
+Not measured: whether readers stop calling the site "Claude default". That is
+the outcome this serves and only a re-run of outside feedback can show it.
+
 ## Contrast, tap targets and quiz start: September 21, 2026
 
 Third pass over the 2026-09-19 critique, after the P0/P1 and P2/P3 passes on

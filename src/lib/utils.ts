@@ -23,17 +23,13 @@ export function formatDeadline(str: string | null | undefined): string | null | 
 }
 
 /**
- * "2026-08" → "AUG 2026".
- *
- * Nothing renders this since the verified stamp came off the detail pages: no
- * page claims a review month any more, because no such review happens on a
- * cycle. Kept because `last_verified` is still a column and still worth
- * formatting the day something admin-side wants to show it. Parsed by hand
- * rather than through Date: a bare "YYYY-MM" is a UTC instant, and in a
- * negative-offset zone new Date("2026-08") lands in July.
+ * "2026-08" → "Aug 2026", the month a listing was last checked against its
+ * provider's page. One helper for the detail card and every directory row.
+ * Parsed by hand rather than through Date: a bare "YYYY-MM" is a UTC instant,
+ * and in a negative-offset zone new Date("2026-08") lands in July.
  */
-const VERIFIED_MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
-                         'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+const VERIFIED_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export function formatVerifiedMonth(str: string | null | undefined): string | null {
   const m = /^(\d{4})-(\d{2})/.exec(str ?? '');

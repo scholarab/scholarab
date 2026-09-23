@@ -92,9 +92,11 @@ const footerCols = [
      WCAG 2.2 minimum. The gap now lives inside each link, so the rhythm is
      the same 31-32px and the whole row takes the tap; 44px on touch. */
   .sabf-links { display: flex; flex-direction: column; gap: 0; align-items: flex-start; }
-  .sabf-links a { font-size: 14px; color: rgba(238, 241, 236, 0.7); text-decoration: none; display: inline-flex; align-items: center; min-height: 32px; }
-  @media (pointer: coarse) { .sabf-links a { min-height: 44px; } }
-  .sabf-links a:hover { color: #EEF1EC; }
+  /* :global because the mailto links arrive through set:html (email_off) and
+     carry no scope attribute; scoped, they rendered in the browser default. */
+  .sabf-links :global(a) { font-size: 14px; color: rgba(238, 241, 236, 0.7); text-decoration: none; display: inline-flex; align-items: center; min-height: 32px; }
+  @media (pointer: coarse) { .sabf-links :global(a) { min-height: 44px; } }
+  .sabf-links :global(a:hover) { color: #EEF1EC; }
   .sabf-bottom {
     display: flex; justify-content: space-between; margin-top: 56px; padding-top: 24px;
     border-top: 1px solid rgba(238, 241, 236,0.12);

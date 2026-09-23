@@ -5,7 +5,7 @@
 import { DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programGroupKey, programWhen } from '../../lib/list-core.ts';
 import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
-import { generateSlug } from '../../lib/utils.ts';
+import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
 import { emailOff } from '../../lib/email-off';
 import { PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets.ts';
 import { BOOKMARK, ARROW } from '../../lib/icons.ts';
@@ -290,6 +290,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
           </span>
           <div class="sabl-row-when">
             <span class={when.cls} data-when><span data-when-main>{when.main}</span><span class="sabl-when-sub" data-when-sub hidden={!when.sub}>{when.sub}</span></span>
+            {formatVerifiedMonth(p.lastVerified) && <span class="sabl-checked">Checked {formatVerifiedMonth(p.lastVerified)}</span>}
           </div>
           <div class="sabl-card-actions">
               <button

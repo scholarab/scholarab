@@ -144,11 +144,28 @@ describe('focus indicators', () => {
 })
 
 describe('button press language', () => {
-  it('defines hover, active, disabled and reduced-motion on one base class', () => {
-    expect(globalCss).toMatch(/\.sab-btn:hover, \.sab-btn:focus-visible \{[\s\S]{0,140}transform: translate\(-3px, -3px\)/)
-    expect(globalCss).toMatch(/\.sab-btn:active \{[\s\S]{0,140}transform: translate\(1px, 1px\)/)
+  it('defines active, disabled and reduced-motion on one base class', () => {
+    expect(globalCss).toMatch(/\.sab-btn:active \{ transform: translateY\(1px\); \}/)
     expect(globalCss).toMatch(/\.sab-btn:disabled[\s\S]{0,160}transform: none/)
-    expect(globalCss).toMatch(/prefers-reduced-motion[\s\S]{0,200}\.sab-btn:active \{\s*transform: none/)
+    expect(globalCss).toMatch(/prefers-reduced-motion[\s\S]{0,200}\.sab-btn:active \{ transform: none/)
+  })
+
+  it('never lifts a control onto a hard offset shadow', () => {
+    // The translate(-3px,-3px) + zero-blur offset shadow hover was the
+    // loudest template tell on the site (critique 2026-09-23).
+    const surfaces = [
+      'src/styles/global.css', 'src/components/sab/SabDetail.astro', 'src/components/sab/SabGuide.astro',
+      'src/pages/index.astro', 'src/pages/about.astro', 'src/pages/educators.astro',
+      'src/pages/guides/index.astro', 'src/pages/[type]/[slug].astro',
+    ]
+    const offenders: string[] = []
+    for (const f of surfaces) {
+      stripComments(read(f)).split('\n').forEach((line, i) => {
+        if (/box-shadow:\s*\d+px \d+px 0[\s;]/.test(line) || /translate\(-\d+px, -\d+px\)/.test(line))
+          offenders.push(`${f}:${i + 1}`)
+      })
+    }
+    expect(offenders).toEqual([])
   })
 
   it('is worn by the buttons that had no transition at all', () => {
@@ -182,6 +199,7 @@ describe('quiz option states', () => {
   it('does not draw selected exactly like hover', () => {
     // One shared rule meant an option you were pointing at looked identical to
     // one you had chosen.
-    expect(globalCss).toMatch(/\.sabm-opt-selected \{ border-color: var\(--green\); \}/)
+    expect(globalCss).toMatch(/\.sabm-opt:hover \{ background: #F5F6F4; \}/)
+    expect(globalCss).toMatch(/\.sabm-opt-selected \{ border-color: var\(--green\);/)
   })
 })

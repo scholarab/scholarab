@@ -63,11 +63,11 @@ export type UpdateMonth = {
 }
 
 export const KIND_LABELS: Record<UpdateKind, string> = {
-  'new': 'NEW',
-  'better': 'IMPROVED',
-  'fixed': 'FIXED',
-  'listings': 'LISTINGS',
-  'under-hood': 'UNDER THE HOOD',
+  'new': 'New',
+  'better': 'Improved',
+  'fixed': 'Fixed',
+  'listings': 'Listings',
+  'under-hood': 'Under the hood',
 }
 
 /**

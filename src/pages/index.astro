@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import SabFooter from '../components/sab/SabFooter.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
-import { generateSlug, parseAmount } from '../lib/utils';
+import { generateSlug, parseAmount, formatDeadline } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 import { programIsListed, programStatusOf, scholarshipStatusOf } from '../lib/status';
 import { SCHOLARSHIP_FACETS, PROGRAM_FORMATS, MENU_SCOPES, MIN_FACET_ITEMS, facetForCategory, facetItems } from '../lib/facets';
@@ -21,10 +21,6 @@ const today = albertaToday();
 // its own ladder, so a concluded award or a rolled-forward date could count
 // here as "open right now" while the directory said otherwise.
 const activeScholarships = scholarships.filter(s => scholarshipStatusOf(s, today) === 'active');
-const activeTotal = activeScholarships.reduce((sum, s) => sum + parseAmount(s.amount), 0);
-// Retired programs (active: false) are out of the directory, so they must be
-// out of this total too; otherwise the hero promises more than /programs shows.
-const researchCount = programs.filter(p => programIsListed(p, today)).length;
 
 const scholarshipCount = scholarships.length;
 
@@ -61,7 +57,6 @@ const biggestOpen = activeScholarships
     parseAmount(b.amount) - parseAmount(a.amount) ||
     (a.deadline ?? '9999').localeCompare(b.deadline ?? '9999'))
   .slice(0, 5);
-const closingEyebrow = anyClosingThisWeek ? 'TIME-SENSITIVE' : 'UPCOMING';
 
 // Categories: real counts from the data, top 8 types
 const categoryCounts = new Map<string, number>();
@@ -258,14 +253,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       </div>
       <!-- hero body -->
       <div class="sab-container sab-hero-body">
-        <div class="sab-kicker">BUILT BY A HIGH SCHOOL STUDENT FROM MEDICINE HAT<span class="sab-kicker-sep" aria-hidden="true">·</span><a href="/about/" class="sab-kicker-link">READ THE STORY</a></div>
+        <p class="sab-byline">Built by a high school student from Medicine Hat<span class="sab-kicker-sep" aria-hidden="true">·</span><a href="/about/" class="sab-kicker-link">Read the story</a></p>
 
         <h1 class="sab-h1"><span class="sab-h1-l sab-h1-l1">Making scholarships and programs</span> <span class="sab-h1-l sab-h1-l2">easier to find for Alberta students</span></h1>
 
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
             <p>
-              <span class="sab-hero-p-l1">ScholarAB tracks scholarships and research programs for Alberta high school students</span><span class="sab-hero-p-tail"> Finally one place with all the information</span>
+              <span class="sab-hero-p-l1">ScholarAB tracks scholarships and research programs for Alberta high school students.</span>
             </p>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
@@ -277,21 +272,25 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
             </div>
           </div>
 
-          <!-- stat block, ledger style -->
-          <div class="sab-stats">
-            <div class="sab-stat">
-              <div class="sab-stat-value tnum"><span id="hero-amount-count" data-total={activeTotal}>${activeTotal.toLocaleString('en-CA')}</span></div>
-              <div class="sab-stat-label sab-mono">OPEN RIGHT NOW</div>
+          {/* The next three real deadlines, where a province-wide dollar total
+              and two counts used to sit (critique 2026-09-23: the hero-metric
+              ledger and its count-up were the startup-hero template). Same
+              list as #closing below, so the hero never disagrees with it. */}
+          {closingSoon.length > 0 && (
+            <div class="sab-next">
+              <a href="#closing" class="sab-next-h">Next deadlines <span aria-hidden="true">↓</span></a>
+              <ol class="sab-next-list">
+                {closingSoon.slice(0, 3).map(s => (
+                  <li>
+                    <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-next-row" data-deadline={s.deadline}>
+                      <span class="sab-next-name">{s.title}</span>
+                      <span class="sab-next-meta tnum"><span class="sab-next-amt">{s.amount}</span> due {formatDeadline(s.deadline)}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
             </div>
-            <div class="sab-stat">
-              <div class="sab-stat-value tnum">{scholarshipCount.toLocaleString('en-CA')}</div>
-              <div class="sab-stat-label sab-mono">SCHOLARSHIPS</div>
-            </div>
-            <div class="sab-stat">
-              <div class="sab-stat-value tnum">{researchCount}</div>
-              <div class="sab-stat-label sab-mono">RESEARCH PROGRAMS</div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 
@@ -355,16 +354,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       <div class="sab-container sab-closing" id="closing" data-closing-section>
         <div class="sab-section-head">
           <div>
-            <div class="sab-mono sab-eyebrow-urgent">{closingEyebrow}</div>
             <h2 class="sab-h2">{closingHeading}</h2>
           </div>
           <a href="/deadlines/" class="sab-view-all">View all deadlines</a>
         </div>
 
         <div class="sab-closing-table" id="closing-soon-list" data-deadline-list>
-          {closingSoon.map((s, i) => (
+          {closingSoon.map(s => (
             <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-closing-row" data-deadline={s.deadline}>
-              <div class="sab-row-num sab-mono">{String(i + 1).padStart(2, '0')}</div>
               <div class="sab-row-main">
                 <div class="sab-row-name">{s.title}</div>
                 {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
@@ -382,16 +379,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       <div class="sab-container sab-closing sab-biggest" data-closing-section>
         <div class="sab-section-head">
           <div>
-            <div class="sab-mono sab-eyebrow-money">HIGHEST VALUE</div>
             <h2 class="sab-h2">Biggest awards open now</h2>
           </div>
           <a href="/scholarships/?sort=highest_pay" class="sab-view-all">All by amount</a>
         </div>
 
         <div class="sab-closing-table" data-deadline-list>
-          {biggestOpen.map((s, i) => (
+          {biggestOpen.map(s => (
             <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-closing-row" data-deadline={s.deadline}>
-              <div class="sab-row-num sab-mono">{String(i + 1).padStart(2, '0')}</div>
               <div class="sab-row-main">
                 <div class="sab-row-name">{s.title}</div>
                 {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
@@ -504,13 +499,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
         sub.hidden = !when.sub;
       }
     });
-    // Renumber the visible rows so hidden expired entries don't leave gaps
-    let n = 0;
-    rows.forEach(row => {
-      if (row.style.display === 'none') return;
-      const num = row.querySelector('.sab-row-num');
-      if (num) num.textContent = String(++n).padStart(2, '0');
-    });
     if (visible === 0) {
       const section = list.closest('[data-closing-section]') as HTMLElement | null;
       if (section) section.style.display = 'none';
@@ -519,6 +507,17 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
   updateClosingSoon();
   document.addEventListener('astro:page-load', updateClosingSoon);
+
+  // The hero's three deadlines come from the same build-time list; a page
+  // served a day after its build must not lead with an award that has closed.
+  function pruneHeroDeadlines() {
+    const todayMs = albertaToday().getTime();
+    document.querySelectorAll<HTMLElement>('.sab-next-row[data-deadline]').forEach(a => {
+      if (new Date(a.dataset.deadline + 'T00:00:00').getTime() < todayMs) a.closest('li')!.hidden = true;
+    });
+  }
+  pruneHeroDeadlines();
+  document.addEventListener('astro:page-load', pruneHeroDeadlines);
 
   // ── Scope carousel ──
   // Native horizontal scroll with snap does the swiping; this only wires the
@@ -559,38 +558,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     sync();
   }
   document.addEventListener('astro:page-load', initScopes);
-
-  // ── Hero amount count-up (kept from previous hero; final value is server-rendered) ──
-  function animateHeroAmount() {
-    const el = document.getElementById('hero-amount-count');
-    if (!el || el.dataset.counted) return;
-    el.dataset.counted = 'true';
-    try {
-      if (sessionStorage.getItem('sab_hero_counted')) return;
-      sessionStorage.setItem('sab_hero_counted', '1');
-    } catch { /* storage unavailable; animate anyway */ }
-    const total = parseInt(el.dataset.total || '', 10);
-    if (!Number.isFinite(total) || total <= 0) return;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const sameDigitFloor = Math.pow(10, String(total).length - 1);
-    const start = Math.max(sameDigitFloor, Math.round(total * 0.35));
-    const DURATION = 1100;
-    let t0: number | null = null;
-    let lastText = '';
-    function tick(now: number) {
-      if (t0 === null) t0 = now;
-      const p = Math.min((now - t0) / DURATION, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const text = '$' + Math.round(start + (total - start) * eased).toLocaleString('en-CA');
-      if (text !== lastText) { el!.textContent = text; lastText = text; }
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  animateHeroAmount();
-  document.addEventListener('astro:page-load', animateHeroAmount);
 
   // ── Match teaser: local chip picks, CTA goes to the real quiz ──
   function initMatchTeaser() {
@@ -818,15 +785,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     opacity: 0; transition: opacity 1.2s ease;
   }
   .sab-hero-vid.is-on { opacity: 1; }
-  /* The film runs near full strength, so the words carry their own soft
-     shadow instead of the whole picture being dimmed: it only matters over
-     bright frames (snow, sky) and is invisible over dark ones. */
-  .sab-hero .sab-h1 { text-shadow: 0 2px 30px rgba(5,10,8,0.45), 0 1px 3px rgba(5,10,8,0.3); }
-  .sab-hero .sab-kicker, .sab-hero-copy p, .sab-stats { text-shadow: 0 1px 14px rgba(5,10,8,0.75), 0 1px 2px rgba(5,10,8,0.6); }
-  /* The kicker is mint, nearly as light as the sky it crosses on a phone, so
-     it gets a tight halo as well: the wide one alone measured 3.2:1 at its
-     worst glyph pixels over the bright poster frame. */
-  .sab-hero .sab-kicker { text-shadow: 0 0 6px rgba(5,10,8,0.85), 0 1px 14px rgba(5,10,8,0.75), 0 1px 2px rgba(5,10,8,0.6); }
+  /* The words sit on the scrim below, not on a glow: the wide soft halos
+     that used to carry them read as a template effect (critique 2026-09-23).
+     One tight 1px shadow keeps glyph edges clean over bright frames. */
+  .sab-hero .sab-h1, .sab-byline, .sab-hero-copy p, .sab-next { text-shadow: 0 1px 2px rgba(5,10,8,0.55); }
   /* SpaceX-style scrim: the picture stays close to full strength and only
      the places text sits are darkened. A light veil over everything, a band
      under the nav, and a fall-off to near black behind the copy, buttons and
@@ -834,16 +796,19 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-hero-media::after {
     content: ''; position: absolute; inset: 0;
     background:
-      linear-gradient(180deg, rgba(10,19,16,0.35) 0, rgba(10,19,16,0) 120px),
-      linear-gradient(180deg, rgba(10,19,16,0) 45%, rgba(10,19,16,0.55) 75%, rgba(10,19,16,0.9) 100%),
-      rgba(10,19,16,0.28);
+      linear-gradient(180deg, rgba(10,19,16,0.45) 0, rgba(10,19,16,0) 160px),
+      linear-gradient(180deg, rgba(10,19,16,0) 40%, rgba(10,19,16,0.6) 72%, rgba(10,19,16,0.92) 100%),
+      rgba(10,19,16,0.38);
   }
 
-  /* The kicker names who built the site and hands off to /about for the rest. */
-  .sab-hero .sab-kicker { font-size: 16px; flex-wrap: wrap; row-gap: 4px; }
-  .sab-hero .sab-kicker::before { content: none; }
+  /* The byline names who built the site and hands off to /about for the rest.
+     A sentence in the body face, not a mono eyebrow. */
+  .sab-byline {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
+    font-size: 17px; font-weight: 600; color: #EEF1EC; margin: 0 0 26px;
+  }
   .sab-kicker-sep { opacity: 0.45; }
-  .sab-kicker-link { color: #EEF1EC; text-decoration: none; border-bottom: 1px solid rgba(238, 241, 236, 0.35); padding-top: 12px; margin-top: -12px; display: inline-block; }
+  .sab-kicker-link { color: #EEF1EC; font-weight: 400; text-decoration: none; border-bottom: 1px solid rgba(92,227,187,0.6); padding-top: 12px; margin-top: -12px; display: inline-block; }
   .sab-kicker-link:hover { border-bottom-color: #2FD3A0; color: #2FD3A0; }
   .sab-hero-body {
     padding-top: 76px; position: relative;
@@ -884,7 +849,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
      line, the second starts under it. The stats wrap under the copy on a
      window too narrow to hold both side by side. */
   .sab-hero-bottom { flex-wrap: wrap; }
-  .sab-hero-p-l1, .sab-hero-p-tail { display: block; }
+  .sab-hero-p-l1 { display: block; }
   .sab-hero-p-l1 { white-space: nowrap; }
   .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.8); margin: 0 0 30px; }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
@@ -908,10 +873,21 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   }
   .sab-btn-outline:hover { border-color: rgba(238, 241, 236, 0.7); background: rgba(238, 241, 236,0.06); }
 
-  .sab-stats { display: flex; border-left: 1px solid rgba(92,227,187,0.28); }
-  .sab-stat { padding: 6px 36px 6px 28px; border-right: 1px solid rgba(92,227,187,0.28); }
-  .sab-stat-value { font-family: var(--font-display); font-size: 44px; line-height: 1.05; color: #EEF1EC; font-variant-numeric: tabular-nums; }
-  .sab-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(238, 241, 236, 0.62); margin-top: 6px; white-space: nowrap; }
+  .sab-next { width: min(420px, 100%); }
+  .sab-next-h {
+    display: inline-block; font-size: 15px; font-weight: 700; color: #EEF1EC; text-decoration: none;
+    margin-bottom: 8px;
+  }
+  .sab-next-h:hover { color: #2FD3A0; }
+  .sab-next-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(238, 241, 236, 0.22); }
+  .sab-next-row {
+    display: flex; flex-direction: column; gap: 2px; padding: 10px 0;
+    border-bottom: 1px solid rgba(238, 241, 236, 0.22); color: #EEF1EC; text-decoration: none;
+  }
+  .sab-next-name { font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sab-next-row:hover .sab-next-name { text-decoration: underline; text-underline-offset: 3px; }
+  .sab-next-meta { font-size: 14px; color: rgba(238, 241, 236, 0.86); }
+  .sab-next-amt { color: #2FD3A0; font-weight: 700; }
 
   /* ── Closing this week ── */
   /* ── Scope carousel (after tesla.com's model cards) ──
@@ -1004,11 +980,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
   .sab-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px; gap: 20px; }
-  .sab-eyebrow-urgent { font-size: 13px; letter-spacing: 0.06em; color: #A0491A; margin-bottom: 14px; }
-  /* Biggest open awards: the same table, money-green eyebrow, and a shorter
-     gap since it follows another table rather than the hero. */
+  /* Biggest open awards: the same table, and a shorter gap since it follows
+     another table rather than the hero. No eyebrows over either heading, no
+     01/02 row numbers (critique 2026-09-23): the headings say it. */
   .sab-biggest { padding-top: 56px; }
-  .sab-eyebrow-money { font-size: 13px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 14px; }
   .sab-h2 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.01em; margin: 0;
@@ -1021,12 +996,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
   .sab-closing-table { border-top: 2px solid #141915; }
   .sab-closing-row {
-    display: grid; grid-template-columns: 64px 1fr auto auto; gap: 28px; align-items: center;
+    display: grid; grid-template-columns: 1fr auto auto; gap: 28px; align-items: center;
     padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
     cursor: pointer; color: inherit; text-decoration: none;
   }
   .sab-closing-row:hover { background: rgba(47,211,160,0.07); color: inherit; }
-  .sab-row-num { font-size: 14px; color: rgba(20, 25, 21, 0.68); }
   .sab-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
   .sab-row-blurb {
     font-size: 14.5px; color: rgba(20, 25, 21, 0.68); margin-top: 5px;
@@ -1046,11 +1020,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-cat-card {
     display: block; background: var(--bg-page); border: 1.5px solid rgba(20,25,21,0.85);
     border-radius: 14px; padding: 24px 22px; color: #141915; text-decoration: none;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
   .sab-cat-card:hover {
-    transform: translate(-3px, -3px); box-shadow: 4px 4px 0 #0E8C64;
-    border-color: #0A6B4D; color: #141915;
+    border-color: #0A6B4D; background: #F5F6F4; color: #141915;
   }
   .sab-cat-top { display: flex; justify-content: space-between; align-items: baseline; }
   .sab-cat-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
@@ -1076,9 +1049,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
     padding: 7px 12px; font-size: 14px; font-weight: 600;
     color: #141915; text-decoration: none; background: var(--bg-page);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: border-color 0.15s ease;
   }
-  .sab-city-chip:hover { border-color: #0A6B4D; box-shadow: 2px 2px 0 #0E8C64; color: #141915; }
+  .sab-city-chip:hover { border-color: #0A6B4D; color: #141915; }
   .sab-city-count { font-size: 11px; color: rgba(20, 25, 21, 0.68); }
 
   /* ── Match teaser ── */
@@ -1088,7 +1061,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.68); margin: 0; }
   .sab-match-card {
     background: var(--bg-page); border: 2px solid #141915; border-radius: 20px; padding: 36px;
-    box-shadow: 8px 8px 0 rgba(14,140,100,0.35);
   }
   .sab-match-group { margin-bottom: 22px; }
   .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); margin-bottom: 10px; }
@@ -1097,13 +1069,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     font-family: var(--font-body); font-size: 14px; font-weight: 600;
     padding: 9px 16px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.32);
     background: transparent; color: #141915; cursor: pointer;
-    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease,
-                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.07s ease;
   }
   .sab-match-opt:hover, .sab-match-opt:focus-visible {
-    border-color: #0A6B4D; transform: translate(-2px, -2px); box-shadow: 3px 3px 0 #0E8C64;
+    border-color: #0A6B4D;
   }
-  .sab-match-opt:active { transform: translate(0, 0); box-shadow: 0 0 0 #0E8C64; transition-duration: 0.07s; }
+  .sab-match-opt:active { transform: translate(0, 0); transition-duration: 0.07s; }
   /* a small pop the moment a chip turns on */
   .sab-match-opt.on {
     background: #141915; color: #EEF1EC; border-color: #141915;
@@ -1113,13 +1084,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     width: 100%; margin-top: 6px; font-family: var(--font-body);
     background: #0A6B4D; color: #F5FBF8; font-weight: 700; font-size: 16px;
     height: 56px; padding: 0 16px; border-radius: 100px; border: none; cursor: pointer;
-    transition: background 0.18s ease,
-                transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.3, 1);
+    transition: background 0.18s ease, transform 0.07s ease;
   }
   .sab-match-cta:hover, .sab-match-cta:focus-visible {
-    background: #08573E; transform: translate(-3px, -3px); box-shadow: 5px 5px 0 #2FD3A0;
+    background: #08573E;
   }
-  .sab-match-cta:active { transform: translate(1px, 1px); box-shadow: 0 0 0 #2FD3A0; transition-duration: 0.07s; }
+  .sab-match-cta:active { transform: translateY(1px); transition-duration: 0.07s; }
   /* Inert until all three are picked: the label is an instruction at that
      point, so the control must not look like it can be obeyed. */
   .sab-match-cta:disabled {
@@ -1181,24 +1151,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-view-all { display: inline-flex; align-items: center; min-height: 44px; }
     /* Shown on phones since 2026-09-18: the line now says who built the
        site and links to the story, which a phone visitor should see too. */
-    .sab-hero .sab-kicker { font-size: 12px; margin-bottom: 12px; }
+    .sab-byline { font-size: 14px; margin-bottom: 12px; }
     .sab-kicker-sep { display: none; }
-    .sab-hero-p-tail { display: none; }
     .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
     .sab-btn-accent, .sab-btn-outline { height: 50px; padding: 0 20px; }
-    /* Ledger row: three columns under one hairline, sized so the dollar
-       figure keeps its line and nothing shrinks below 11px. */
-    .sab-stats {
-      border-left: none; width: 100%;
-      margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(238, 241, 236,0.18);
-    }
-    .sab-stat { flex: 1; min-width: 0; padding: 0 12px 0 0; border-right: none; }
-    .sab-stat + .sab-stat { padding-left: 14px; border-left: 1px solid rgba(238, 241, 236,0.18); }
-    .sab-stat:first-child { flex: 1.3; }
-    .sab-stat:nth-child(2) { flex: 0.85; }
-    .sab-stat-value { font-size: 27px; }
-    /* "RESEARCH PROGRAMS" wraps at 360; two lines beats a smaller label. */
-    .sab-stat-label { font-size: 11px; margin-top: 5px; white-space: normal; line-height: 1.2; }
+    .sab-next { width: 100%; margin-top: 20px; }
+    .sab-next-row { padding: 9px 0; }
+    .sab-next-name { font-size: 15px; }
+    .sab-next-meta { font-size: 13.5px; }
 
     .sab-closing { padding-top: 22px; padding-bottom: 8px; }
     .sab-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
@@ -1209,12 +1169,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-closing { display: flex; flex-direction: column; }
     .sab-closing .sab-section-head { display: contents; }
     .sab-closing .sab-section-head > div { order: 1; }
-    .sab-closing .sab-eyebrow-urgent, .sab-closing .sab-eyebrow-money { font-size: 11.5px; margin-bottom: 8px; }
     .sab-biggest { padding-top: 40px; }
     .sab-closing-table { order: 2; margin-top: 12px; }
     .sab-closing .sab-view-all { order: 3; align-self: flex-start; margin-top: 20px; }
     .sab-closing-row { grid-template-columns: 1fr auto; gap: 4px 14px; padding: 16px 2px; min-height: 44px; }
-    .sab-row-num { display: none; }
     .sab-row-main { grid-column: 1; min-width: 0; }
     .sab-row-name { font-size: 16px; line-height: 1.3; }
     .sab-row-blurb { font-size: 13px; margin-top: 4px; }
@@ -1236,7 +1194,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-match-grid { grid-template-columns: 1fr; gap: 22px; }
     .sab-match-h2 { font-size: 32px; margin-bottom: 12px; }
     .sab-match-copy { font-size: 15px; }
-    .sab-match-card { padding: 22px 18px; box-shadow: 6px 6px 0 rgba(47,211,160,0.4); }
+    .sab-match-card { padding: 22px 18px; }
     .sab-match-group { margin-bottom: 18px; }
     .sab-match-label { font-size: 11px; }
     /* Same chips, taller: 34px was under the tap target minimum. */

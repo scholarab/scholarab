@@ -204,6 +204,11 @@ const chip =
         <span class="sabd-mono sabd-deadline-label">DEADLINE</span>
         <span class="sabd-deadline-value">{estimated ? `Around ${dueLong}` : dueLong}</span>
       </div>
+      {/* Beside the deadline, at reading size: the check is what the site is
+          for, and at the foot of the card in 12.5px grey nobody saw it. */}
+      {checkedLabel && (
+        <p class="sabd-checked">Checked against the provider's page in {checkedLabel}.</p>
+      )}
       {status === 'closed' && (
         <p class="sabd-estimate-note">{opensLabel
           ? `This cycle is over. The next one opens ${opensLabel}.`
@@ -234,9 +239,6 @@ const chip =
           class="sabd-mono sabd-visit">VISIT OFFICIAL SITE<span class="sabl-ext" aria-hidden="true">↗</span></a>
       )}
       <button data-sabd-copy data-copy-url={canonical} class="sabd-mono sabd-copy">COPY LINK</button>
-      {checkedLabel && (
-        <p class="sabd-checked">Checked against the provider's page in {checkedLabel}.</p>
-      )}
     </div>
 
     {guideHref && guideTitle && (
@@ -399,7 +401,7 @@ const chip =
   .sabd-rail { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
   .sabd-card {
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 16px;
-    padding: 28px 26px; box-shadow: 6px 6px 0 #0E8C64;
+    padding: 28px 26px;
   }
   .sabd-value { font-family: var(--font-display); font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
   .sabd-value.is-cost { color: #141915; }
@@ -414,7 +416,7 @@ const chip =
   }
   .sabd-deadline-label { font-size: 12px; color: rgba(20, 25, 21, 0.68); }
   .sabd-deadline-value { font-size: 15px; font-weight: 700; }
-  .sabd-checked { margin: 14px 0 0; font-size: 12.5px; line-height: 1.4; color: rgba(20, 25, 21, 0.7); text-align: center; }
+  .sabd-checked { margin: 10px 0 0; font-size: 14.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.8); }
   .sabd-estimate-note { margin: 10px 0 0; font-size: 13.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.72); }
   .sabd-cta-row { display: flex; gap: 10px; margin-top: 22px; }
   .sabd-cta {

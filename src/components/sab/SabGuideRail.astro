@@ -17,23 +17,18 @@ import { getGuide } from '../../lib/guides';
 interface Props {
   /** Guide slugs to show, in the order they should appear. */
   slugs: string[];
-  /** Mono kicker above the heading. */
-  kicker: string;
   /** The heading itself. */
   heading: string;
 }
 
-const { slugs, kicker, heading } = Astro.props;
+const { slugs, heading } = Astro.props;
 const items = slugs.map(getGuide);
 ---
 
 <section class="sabgr" aria-labelledby="sabgr-heading">
   <div class="sabgr-inner">
     <div class="sabgr-top">
-      <div>
-        <div class="sabgr-mono sabgr-kicker">{kicker}</div>
-        <h2 class="sabgr-heading" id="sabgr-heading">{heading}</h2>
-      </div>
+      <h2 class="sabgr-heading" id="sabgr-heading">{heading}</h2>
       <a class="sabgr-mono sabgr-all" href="/guides/">ALL GUIDES &rarr;</a>
     </div>
 
@@ -63,7 +58,6 @@ const items = slugs.map(getGuide);
     display: flex; align-items: flex-end; justify-content: space-between;
     gap: 24px; margin-bottom: 28px;
   }
-  .sabgr-kicker { font-size: 11px; letter-spacing: 0.08em; color: rgba(20, 25, 21, 0.68); }
   .sabgr-heading {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(26px, 3.4vw, 34px); line-height: 1.15; letter-spacing: -0.01em;
