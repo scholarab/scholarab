@@ -260,6 +260,8 @@ test('header dropdown switches without closing', async ({ page }, testInfo) => {
   await page.locator('.sabh-has-menu .sabh-link').first().hover();
   await expect(drop).toHaveAttribute('data-on', '');
   await expect(page.locator('#sabh-menu-scholarships')).toBeVisible();
+  // The page under the panel is blurred while it is open.
+  await expect(page.locator('.sabh-scrim')).toBeVisible();
   // Record every time the background turns off during the move.
   await drop.evaluate(el => {
     (window as unknown as { dropOff: number }).dropOff = 0;
@@ -272,4 +274,5 @@ test('header dropdown switches without closing', async ({ page }, testInfo) => {
   expect(await page.evaluate(() => (window as unknown as { dropOff: number }).dropOff)).toBe(0);
   await page.mouse.move(5, 600);
   await expect(drop).not.toHaveAttribute('data-on', '');
+  await expect(page.locator('.sabh-scrim')).toBeHidden();
 });
