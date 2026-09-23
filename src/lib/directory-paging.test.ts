@@ -73,7 +73,7 @@ describe('directory "Show more"', () => {
     setup()
     expect(shownIds()).toEqual([1, 2])
     expect($('[data-dir-count]').textContent).toBe('5 OF 5')
-    expect($('[data-dir-more-line]').textContent).toBe('SHOWING 2 OF 5')
+    expect($('[data-dir-more-line]').textContent).toBe('Showing 2 of 5')
     expect($('[data-dir-more-btn]').textContent).toBe('Show 2 more')
     expect($('[data-dir-all]').hidden).toBe(false)
     expect($('[data-dir-all]').textContent).toBe('Show all 5')
@@ -143,7 +143,7 @@ describe('directory "Show more"', () => {
     // the first two Science cards instead of showing nothing in their place.
     click($('[data-dir-group="Arts"]'))
     expect(shownIds()).toEqual([3, 4])
-    expect($('[data-dir-more-line]').textContent).toBe('SHOWING 2 OF 3')
+    expect($('[data-dir-more-line]').textContent).toBe('Showing 2 of 3')
     // The count line still describes every match; shutting a run is not a filter.
     expect($('[data-dir-count]').textContent).toBe('5 OF 5')
     click($('[data-dir-group="Arts"]'))

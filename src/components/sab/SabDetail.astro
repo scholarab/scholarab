@@ -25,7 +25,6 @@ interface Props {
   itemType: 'scholarship' | 'program';
   itemId: number;
   typeLabel: string; // 'SCHOLARSHIP' | 'PROGRAM'
-  tag: string | null; // category, uppercased
   name: string;
   subline: string;
   status: 'active' | 'closed' | 'future' | 'unconfirmed' | 'ongoing' | 'tba';
@@ -65,7 +64,7 @@ interface Props {
 }
 
 const {
-  itemType, itemId, typeLabel, tag, name, subline,
+  itemType, itemId, typeLabel, name, subline,
   status, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, dueLong, opensLabel,
   backHref, backLabel, facetHref = null, facetLabel = null,
   facts, eligibility, about, notes, steps,
@@ -84,15 +83,15 @@ const aboutHtml = about ? emailOff(about) : '';
 const notesHtml = notes ? emailOff(notes) : '';
 
 const chip =
-  status === 'closed' ? { text: 'CLOSED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
-  : status === 'future' ? { text: opensLabel ? `OPENS ${opensLabel.toUpperCase()}` : 'OPENING SOON', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
-  : status === 'unconfirmed' ? { text: 'DATE NOT CONFIRMED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
-  : status === 'ongoing' ? { text: 'ONGOING · JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
-  : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
-  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#A0491A', fg: '#FFFFFF' }
+  status === 'closed' ? { text: 'Closed', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
+  : status === 'future' ? { text: opensLabel ? `Opens ${opensLabel}` : 'Opening soon', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
+  : status === 'unconfirmed' ? { text: 'Date not confirmed', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
+  : status === 'ongoing' ? { text: 'Ongoing, join any time', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
+  : status === 'tba' ? { text: 'Deadline not posted', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
+  : daysLeft === 0 ? { text: 'Due today', bg: '#A0491A', fg: '#FFFFFF' }
   : typeof daysLeft === 'number'
-    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#A0491A' : far ? 'rgba(20,25,21,0.05)' : 'rgba(160,73,26,0.12)', fg: urgent ? '#FFFFFF' : far ? 'rgba(20,25,21,0.65)' : '#A0491A' }
-    : { text: 'OPEN', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' };
+    ? { text: `${daysLeft} ${daysLeft === 1 ? 'day' : 'days'} left`, bg: urgent ? '#A0491A' : far ? 'rgba(20,25,21,0.05)' : 'rgba(160,73,26,0.12)', fg: urgent ? '#FFFFFF' : far ? 'rgba(20,25,21,0.65)' : '#A0491A' }
+    : { text: 'Open', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' };
 ---
 
 <div class="sabd-crumb-row">
@@ -115,8 +114,8 @@ const chip =
 
 <div class="sabd-title-block" data-detail-view data-item-type={itemType} data-item-id={itemId}>
   <div class="sabd-chips">
-    <span class="sabd-mono sabd-chip sabd-chip-type">{typeLabel}</span>
-    {tag && <span class="sabd-mono sabd-chip sabd-chip-tag">{tag}</span>}
+    {/* Status only. The type and topic pills restated the breadcrumb and
+        read as template tags over the title (critique 2026-09-23). */}
     <span
       class="sabd-mono sabd-chip"
       style={`background:${chip.bg};color:${chip.fg};`}
@@ -130,7 +129,7 @@ const chip =
   <h1 class="sabd-h1">
     {name}
   </h1>
-  <div class="sabd-mono sabd-subline">{subline}</div>
+  <div class="sabd-subline">{subline}</div>
 </div>
 
 <div class="sabd-grid">
@@ -236,23 +235,22 @@ const chip =
       {(status === 'closed' || status === 'future') && url && (
         <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
           data-track="apply" data-item-type={itemType} data-item-id={itemId}
-          class="sabd-mono sabd-visit">VISIT OFFICIAL SITE<span class="sabl-ext" aria-hidden="true">↗</span></a>
+          class="sabd-visit">Visit the official site<span class="sabl-ext" aria-hidden="true">↗</span></a>
       )}
-      <button data-sabd-copy data-copy-url={canonical} class="sabd-mono sabd-copy">COPY LINK</button>
+      <button data-sabd-copy data-copy-url={canonical} class="sabd-copy">Copy link</button>
     </div>
 
     {guideHref && guideTitle && (
       <a href={guideHref} class="sabd-guide">
-        <span class="sabd-mono sabd-guide-label">READ THE GUIDE</span>
-        <span class="sabd-guide-title">{guideTitle}</span>
-        <span class="sabd-mono sabd-guide-go">OPEN →</span>
+        <span class="sabd-guide-label">Read the guide</span>
+        <span class="sabd-guide-title">{guideTitle} →</span>
       </a>
     )}
 
     {canRemind && (
       <div class="sabd-remind">
-        <div class="sabd-mono sabd-remind-label">GET A DEADLINE REMINDER</div>
-        <div class="sabd-remind-sub">We email you a link to confirm, then remind you 30, 14 and 3 days before it closes.</div>
+        <h2 class="sabd-remind-label">Email me before it closes</h2>
+        <div class="sabd-remind-sub">We send one link to confirm, then a reminder 30, 14 and 3 days before the deadline.</div>
         <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form" novalidate>
           <label for={`sabd-remind-${itemType}-${itemId}`} class="sr-only">Your email for a deadline reminder</label>
           <input id={`sabd-remind-${itemType}-${itemId}`} type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" />
@@ -284,21 +282,14 @@ const chip =
      the moment to say what happens to it is the moment it is asked for. */
   /* On the #141915 block, #6B716C measured 3.56:1. Paper at 0.55 is 5.48:1
      and still sits below the sub above it, which is paper at 0.65. */
-  .sabd-remind-fine { margin-top: 10px; font-size: 12px; line-height: 1.55; color: rgba(238, 241, 236, 0.55); }
+  .sabd-remind-fine { margin-top: 10px; font-size: 12.5px; line-height: 1.55; color: rgba(20, 25, 21, 0.72); }
   /* This was the same colour as the sentence around it with no underline, so
      the one route from the reminder form to the privacy page was invisible. */
-  .sabd-remind-fine a { color: #EEF1EC; text-decoration: underline; text-underline-offset: 2px; }
-  .sabd-guide-label {
-    display: block; font-size: 11px; letter-spacing: 0.08em;
-    color: rgba(20, 25, 21, 0.68);
-  }
+  .sabd-remind-fine a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px; }
+  .sabd-guide-label { display: block; font-size: 13.5px; font-weight: 600; color: rgba(20, 25, 21, 0.72); }
   .sabd-guide-title {
-    display: block; margin-top: 8px; font-family: var(--font-display);
+    display: block; margin-top: 6px; font-family: var(--font-display);
     font-size: 19px; line-height: 1.25; color: #141915;
-  }
-  .sabd-guide-go {
-    display: block; margin-top: 10px; font-size: 11px;
-    letter-spacing: 0.08em; color: #0A6B4D;
   }
 
   .sabd-crumb-row {
@@ -325,15 +316,13 @@ const chip =
 
   .sabd-title-block { padding: 36px var(--sab-gutter) 0; box-sizing: border-box; }
   .sabd-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .sabd-chip { font-size: 11.5px; letter-spacing: 0.05em; padding: 6px 12px; border-radius: 100px; }
-  .sabd-chip-type { background: #141915; color: #EEF1EC; }
-  .sabd-chip-tag { border: 1px solid rgba(20,25,21,0.25); color: rgba(20, 25, 21, 0.65); }
+  .sabd-chip { font-family: var(--font-body); font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 100px; }
   .sabd-h1 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.015em;
     margin: 22px 0 0; max-width: 820px;
   }
-  .sabd-subline { font-size: 13px; letter-spacing: 0.04em; color: rgba(20, 25, 21, 0.68); margin-top: 14px; }
+  .sabd-subline { font-size: 15px; color: rgba(20, 25, 21, 0.75); margin-top: 12px; }
 
   .sabd-grid {
     padding: 44px var(--sab-gutter) 96px; box-sizing: border-box;
@@ -355,9 +344,11 @@ const chip =
   /* Section heads in the directory's own group-heading voice (OPEN NOW,
      CLOSING SOON): real h2s, so a screen reader can walk the page by
      section, where these used to be 12px grey mono labels in divs. */
+  /* Sentence-case display headings, not an uppercase label voice
+     (critique 2026-09-23: the overline habit was the loudest tell left). */
   .sabd-h2 {
-    font-family: var(--font-label); font-size: 24px; font-weight: 600;
-    letter-spacing: 0.02em; line-height: 1.1; text-transform: uppercase;
+    font-family: var(--font-display); font-size: 30px; font-weight: 400;
+    letter-spacing: -0.01em; line-height: 1.1;
     color: #141915; margin: 0 0 14px;
   }
   .sabd-h2-elig { color: #0A6B4D; }
@@ -441,26 +432,28 @@ const chip =
      source page stays reachable for every listing. */
   .sabd-visit {
     display: block; text-align: center; text-decoration: none;
-    font-size: 12.5px; letter-spacing: 0.03em; width: 100%; margin-top: 12px;
+    font-size: 14px; font-weight: 600; width: 100%; margin-top: 12px;
     border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
-    padding: 11px 0; color: rgba(20, 25, 21, 0.7);
+    padding: 11px 0; color: rgba(20, 25, 21, 0.78);
   }
   .sabd-visit:hover { border-color: #0E8C64; color: #0A6B4D; }
   .sabd-copy {
-    font-size: 12.5px; letter-spacing: 0.03em; width: 100%; margin-top: 12px;
+    font-family: var(--font-body); font-size: 14px; font-weight: 600; width: 100%; margin-top: 12px;
     background: transparent; border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
-    padding: 11px 0; cursor: pointer; color: rgba(20, 25, 21, 0.7);
+    padding: 11px 0; cursor: pointer; color: rgba(20, 25, 21, 0.78);
   }
   .sabd-copy:hover { border-color: #141915; color: #141915; }
 
-  .sabd-remind { background: #141915; border-radius: 16px; padding: 24px 26px; color: #EEF1EC; }
-  .sabd-remind-label { font-size: 11.5px; letter-spacing: 0.06em; color: #2FD3A0; margin-bottom: 8px; }
-  .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: rgba(238, 241, 236, 0.65); margin-bottom: 16px; }
+  /* A light inline form under the card, not a dark newsletter box
+     (critique 2026-09-23). */
+  .sabd-remind { border-top: 1px solid rgba(20,25,21,0.14); padding: 18px 2px 0; color: var(--text-primary); }
+  .sabd-remind-label { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin: 0 0 4px; }
+  .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: rgba(20, 25, 21, 0.75); margin-bottom: 12px; }
   .sabd-remind-form { display: flex; gap: 8px; }
   .sabd-remind-input {
     font-family: var(--font-body); font-size: 14px; flex: 1; min-width: 0;
-    background: rgba(238, 241, 236,0.08); border: 1px solid rgba(238, 241, 236,0.2);
-    border-radius: 100px; padding: 11px 16px; color: #EEF1EC;
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3);
+    border-radius: 100px; padding: 11px 16px; color: var(--text-primary);
   }
   /* Bare `outline: none` here outranked the global :focus-visible rule, so the
      reminder field had no focus indicator on any of the detail pages. Keeping
@@ -471,15 +464,15 @@ const chip =
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
-  .sabd-remind-input::placeholder { color: rgba(238, 241, 236, 0.62); }
+  .sabd-remind-input::placeholder { color: rgba(20, 25, 21, 0.55); }
   .sabd-remind-btn {
     font-family: var(--font-body); font-size: 13.5px; font-weight: 700;
-    background: #2FD3A0; color: #08120E; border: none; border-radius: 100px;
+    background: #0A6B4D; color: #F5FBF8; border: none; border-radius: 100px;
     padding: 11px 18px; cursor: pointer; flex: none;
   }
-  .sabd-remind-btn:hover { background: #4FE0B4; }
+  .sabd-remind-btn:hover { background: #08573E; }
   .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
-  .sabd-remind-msg { font-size: 14.5px; font-weight: 600; color: #2FD3A0; }
+  .sabd-remind-msg { font-size: 14.5px; font-weight: 600; color: #0A6B4D; }
 
   @media (max-width: 900px) {
     .sabd-crumb-row { padding: 28px 20px 0; }
@@ -582,8 +575,8 @@ const chip =
     const copy = target.closest?.('[data-sabd-copy]') as HTMLElement | null;
     if (copy) {
       navigator.clipboard.writeText(copy.dataset.copyUrl || window.location.href).then(() => {
-        copy.textContent = '✓ LINK COPIED';
-        setTimeout(() => { copy.textContent = 'COPY LINK'; }, 2000);
+        copy.textContent = 'Link copied';
+        setTimeout(() => { copy.textContent = 'Copy link'; }, 2000);
       });
     }
   });
@@ -660,27 +653,26 @@ const chip =
     };
     const fmtLong = (iso: string) =>
       new Date(iso + 'T00:00:00')
-        .toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
-        .toUpperCase();
+        .toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
 
     const pastDeadline = !!deadline && todayMs > new Date(deadline + 'T00:00:00').getTime();
     // Same ladder as status.ts: an estimate outranks a (rolled-forward) open date.
     if (el.dataset.estimated !== undefined && !pastDeadline) {
-      paint('DATE NOT CONFIRMED', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
+      paint('Date not confirmed', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
     } else if (openDate && todayMs < new Date(openDate + 'T00:00:00').getTime()) {
-      paint(`OPENS ${fmtLong(openDate)}`, 'rgba(14,140,100,0.12)', '#0A6B4D');
+      paint(`Opens ${fmtLong(openDate)}`, 'rgba(14,140,100,0.12)', '#0A6B4D');
     } else if (deadline && todayMs > new Date(deadline + 'T00:00:00').getTime()) {
-      paint('CLOSED', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
+      paint('Closed', 'rgba(20,25,21,0.08)', 'rgba(20,25,21,0.68)');
     } else if (inactive) {
-      paint('OPENING SOON', 'rgba(14,140,100,0.12)', '#0A6B4D');
+      paint('Opening soon', 'rgba(14,140,100,0.12)', '#0A6B4D');
     } else if (deadline) {
       // round, not ceil: midnight-to-midnight is whole days except across a
       // DST change, where ceil overcounts by one (and disagrees with the list chips)
       const days = Math.max(0, Math.round((new Date(deadline + 'T00:00:00').getTime() - todayMs) / 86400000));
-      if (days === 0) paint('DUE TODAY', '#A0491A', '#FFFFFF');
-      else if (days <= URGENT_DAYS) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#A0491A', '#FFFFFF');
-      else if (days <= SOON_DAYS) paint(`${days} DAYS LEFT`, 'rgba(160,73,26,0.12)', '#A0491A');
-      else paint(`${days} DAYS LEFT`, 'rgba(20,25,21,0.05)', 'rgba(20,25,21,0.65)');
+      if (days === 0) paint('Due today', '#A0491A', '#FFFFFF');
+      else if (days <= URGENT_DAYS) paint(`${days} ${days === 1 ? 'day' : 'days'} left`, '#A0491A', '#FFFFFF');
+      else if (days <= SOON_DAYS) paint(`${days} days left`, 'rgba(160,73,26,0.12)', '#A0491A');
+      else paint(`${days} days left`, 'rgba(20,25,21,0.05)', 'rgba(20,25,21,0.65)');
     }
   }
 

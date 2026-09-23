@@ -173,7 +173,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   await page.goto('/scholarships/');
   const cards = page.locator('[data-dir-card]:visible');
   await expect(cards).toHaveCount(PAGE);
-  await expect(page.locator('[data-dir-more-line]')).toHaveText(`SHOWING ${PAGE} OF ${items.length}`);
+  await expect(page.locator('[data-dir-more-line]')).toHaveText(`Showing ${PAGE} of ${items.length.toLocaleString('en-CA')}`);
   await expect(page.locator('[data-dir-more-btn]')).toHaveText(`Show ${PAGE} more`);
   await expect(page.locator('[data-dir-all]')).toHaveText(`Show all ${items.length}`);
 

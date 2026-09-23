@@ -348,8 +348,13 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     top.className = 'sabl-pv-top';
     const kicker = document.createElement('p');
     kicker.className = 'sabl-pv-kicker';
-    const group = config.groups && isGrouped(visible) ? `${config.groups.label(config.groups.key(sel))} · ` : '';
-    kicker.textContent = `${group}${at + 1} of ${pool.length}`;
+    // Inside a group the position counts that group, not the whole pool:
+    // "Open now · 1 of 1542" under a heading saying 1083 open was two numbers
+    // for one list (critique 2026-09-23).
+    const grouped = config.groups && isGrouped(visible) ? config.groups : null;
+    const siblings = grouped ? pool.filter(x => grouped.key(x) === grouped.key(sel)) : pool;
+    const group = grouped ? `${grouped.label(grouped.key(sel))} · ` : '';
+    kicker.textContent = `${group}${siblings.indexOf(sel) + 1} of ${siblings.length}`;
     const nav = document.createElement('div');
     nav.className = 'sabl-pv-nav';
     for (const [step, label, glyph] of [[-1, 'Previous listing', 'M7.5 1.5 3 6l4.5 4.5'], [1, 'Next listing', 'M4.5 1.5 9 6l-4.5 4.5']] as const) {
@@ -483,7 +488,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const remaining = pool.length - page.length;
       more.hidden = remaining <= 0;
       const line = more.querySelector<HTMLElement>('[data-dir-more-line]');
-      if (line) line.textContent = `SHOWING ${page.length} OF ${pool.length}`;
+      if (line) line.textContent = `Showing ${page.length} of ${pool.length.toLocaleString('en-CA')}`;
       const btn = more.querySelector<HTMLElement>('[data-dir-more-btn]');
       if (btn) btn.textContent = `Show ${Math.min(pageSize, remaining)} more`;
       // "Show all" only earns its place when it does something the other

@@ -10,7 +10,6 @@ import { CLOSING_SOON_MS } from '../lib/constants';
 import { programIsListed, programStatusOf, scholarshipStatusOf } from '../lib/status';
 import { SCHOLARSHIP_FACETS, PROGRAM_FORMATS, MENU_SCOPES, MIN_FACET_ITEMS, facetForCategory, facetItems } from '../lib/facets';
 import { PHOTO_CREDITS, needsCredit } from '../lib/photo-credits';
-import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -63,16 +62,6 @@ const categoryCounts = new Map<string, number>();
 for (const s of scholarships) {
   if (s.category) categoryCounts.set(s.category, (categoryCounts.get(s.category) ?? 0) + 1);
 }
-const CATEGORY_DESCS: Record<string, string> = {
-  'Academic':   'Merit, entrance, and general academic awards.',
-  'Community':  'Volunteering hours that actually pay off.',
-  'Arts':       'Portfolios, performances, film, and writing.',
-  'STEM':       'Science fairs, labs, and research awards.',
-  'Trades':     'Apprenticeships, RAP, and skilled-trade awards.',
-  'Indigenous': 'Awards for First Nations, Métis, and Inuit students.',
-  'Sports':     'For athletes at every level, not just varsity.',
-  'General':    'Open eligibility, no niche required.',
-};
 // Each card points at its hub where one exists. Academic (56 listings) and
 // General deliberately have none -- a hub that big would compete with
 // /scholarships for the same queries -- so those keep the query-string filter,
@@ -82,25 +71,19 @@ const categories = [...categoryCounts.entries()]
   .slice(0, 8)
   .map(([name, count]) => {
     const facet = facetForCategory(name, SCHOLARSHIP_FACETS);
+    // Data where slogans used to be ("Volunteering hours that actually pay
+    // off."): how many are open today and when the next one closes.
+    const inCat = activeScholarships.filter(s => s.category === name);
+    const next = inCat.filter(s => s.deadline).map(s => s.deadline!).sort()[0] ?? null;
     return {
       name,
       count,
-      desc: CATEGORY_DESCS[name] ?? 'Awards for Alberta high school students.',
+      open: inCat.length,
+      next,
       href: facet ? `/scholarships/${facet.slug}/` : `/scholarships/?category=${encodeURIComponent(name)}`,
     };
   });
 
-// The homepage has never linked into geo content, which is the half of the
-// directory the city queries are looking for. Counts come from the data so a
-// card can't advertise a number the hub doesn't show.
-const cityFacets = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region').map(f => ({
-  slug: f.slug,
-  label: f.label,
-  // facetItems, not `region ===`: the hub, the header tile and the directory
-  // chip all count awards open to several towns (alsoOpenTo), so this row said
-  // Medicine Hat 20 beside a header tile saying 22 on the same page.
-  count: facetItems(f, scholarships).length,
-}));
 
 // The scope carousel under the hero (Ilia, 2026-09-22, after tesla.com's
 // model cards): one big photo card per header-menu scope (MENU_SCOPES), biggest
@@ -174,11 +157,6 @@ const carousels = [
   { key: 'programs', title: 'Programs by format', noun: 'programs', none: 'Next dates not posted yet', cards: formatCards },
 ].filter(c => c.cards.length > 0);
 
-// Seed the same grade/city/field answers consumed by the legacy quiz.
-const legacyLabels: Record<string, string> = {
-  grade: 'YOUR GRADE', city: 'YOUR REGION', field: "YOU'RE INTO",
-};
-const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, opts: teaserOptions(key) }));
 ---
 
 <Layout
@@ -323,7 +301,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
                     <a href={c.href} class="sab-scope-btn sab-scope-btn-solid">
                       See all {c.count.toLocaleString('en-CA')}
                     </a>
-                    <a href="/match/" class="sab-scope-btn sab-scope-btn-light">Find my match</a>
                   </div>
                 </div>
               </div>
@@ -399,60 +376,24 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       </div>
     )}
 
-    <!-- ============ BROWSE BY CATEGORY ============ -->
-    <div class="sab-cat-band">
-      <div class="sab-container sab-cats">
-        <div class="sab-section-head">
-          <h2 class="sab-h2">Start where you are</h2>
-          <span class="sab-mono sab-cats-meta">{scholarshipCount.toLocaleString('en-CA')} scholarships · {categories.length} types</span>
-        </div>
-        <div class="sab-cat-grid">
-          {categories.map(c => (
-            <a href={c.href} class="sab-cat-card">
-              <div class="sab-cat-top">
-                <span class="sab-cat-name">{c.name}</span>
-                <span class="sab-cat-count sab-mono">{c.count}</span>
-              </div>
-              <div class="sab-cat-desc">{c.desc}</div>
-            </a>
-          ))}
-        </div>
-
-        <div class="sab-city-row">
-          <span class="sab-mono sab-city-label">OR BY CITY</span>
-          <div class="sab-city-chips">
-            {cityFacets.map(c => (
-              <a href={`/scholarships/${c.slug}/`} class="sab-city-chip">
-                {c.label}<span class="sab-mono sab-city-count">{c.count}</span>
-              </a>
-            ))}
-          </div>
-        </div>
+    <!-- ============ BY TYPE ============ -->
+    {/* Rows in the directory's grammar, not a card grid with slogans; the
+        city chip cloud and the home mini-quiz that followed are gone
+        (critique 2026-09-23): the header dropdown carries every city, and
+        /match is the one quiz. */}
+    <div class="sab-container sab-closing sab-types">
+      <div class="sab-section-head">
+        <h2 class="sab-h2">By type</h2>
+        <a href="/scholarships/" class="sab-view-all">All {scholarshipCount.toLocaleString('en-CA')} scholarships</a>
       </div>
-    </div>
-
-    <!-- ============ MATCH TEASER ============ -->
-    <div class="sab-container sab-match">
-      <div class="sab-match-grid">
-        <div>
-          <h2 class="sab-h2 sab-match-h2">Tell us three things and we'll shortlist for you</h2>
-          <p class="sab-match-copy">
-            Three picks here, a few more on the next page. No account, no email.
-          </p>
-        </div>
-        <div class="sab-match-card" id="match-teaser" data-quiz-variant="legacy">
-          {matchGroups.map(g => (
-            <div class="sab-match-group" data-match-group={g.key}>
-              <div class="sab-mono sab-match-label">{g.label}</div>
-              <div class="sab-match-opts">
-                {g.opts.map(o => (
-                  <button type="button" class="sab-match-opt" data-value={o.value}>{o.label}</button>
-                ))}
-              </div>
-            </div>
-          ))}
-          <button type="button" class="sab-match-cta" id="match-teaser-cta" disabled>Pick 3 more to see matches</button>
-        </div>
+      <div class="sab-closing-table">
+        {categories.map(c => (
+          <a href={c.href} class="sab-type-row">
+            <span class="sab-row-name">{c.name}</span>
+            <span class="sab-type-open tnum">{c.open} open now <span class="sab-type-total">of {c.count}</span></span>
+            <span class="sab-type-next tnum">{c.next ? `Next due ${formatDeadline(c.next)}` : 'Nothing due soon'}</span>
+          </a>
+        ))}
       </div>
     </div>
 
@@ -466,8 +407,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   import { scholarshipWhen } from '../lib/list-core';
   import type { ScholarshipWithMeta } from '../lib/list-core';
   import { todayDate as albertaToday } from '../lib/calendar';
-  import { QUIZ_STORAGE_KEY } from '../lib/quiz';
-  import { sendEvent } from '../lib/events';
 
   // ── Deadline lines on the homepage rows (client-side so a stale static build never lies) ──
   // Both row lists (closing soon, biggest open) share the chips and the rule
@@ -559,59 +498,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   }
   document.addEventListener('astro:page-load', initScopes);
 
-  // ── Match teaser: local chip picks, CTA goes to the real quiz ──
-  function initMatchTeaser() {
-    const card = document.getElementById('match-teaser');
-    const cta = document.getElementById('match-teaser-cta');
-    if (!card || !cta || card.dataset.init) return;
-    card.dataset.init = 'true';
-
-    const groups = Array.from(card.querySelectorAll<HTMLElement>('[data-match-group]'));
-    const picked = () => {
-      const answers: Record<string, string> = {};
-      for (const g of groups) {
-        const on = g.querySelector<HTMLElement>('.sab-match-opt.on');
-        const key = g.dataset.matchGroup;
-        if (on && key) answers[key] = on.dataset.value ?? '';
-      }
-      return answers;
-    };
-    const update = () => {
-      const chosen = Object.keys(picked()).length;
-      const ready = chosen === groups.length;
-      cta.textContent = ready ? 'Keep going →' : `Pick ${groups.length - chosen} more to see matches`;
-      // The button navigates, until all three are picked there is nothing to
-      // navigate *with*, so it stays genuinely inert rather than just labelled
-      // as if it were.
-      (cta as HTMLButtonElement).disabled = !ready;
-    };
-    groups.forEach(g => {
-      g.querySelectorAll<HTMLElement>('.sab-match-opt').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const wasOn = btn.classList.contains('on');
-          g.querySelectorAll('.sab-match-opt').forEach(b => b.classList.remove('on'));
-          if (!wasOn) btn.classList.add('on');
-          update();
-        });
-      });
-    });
-    cta.addEventListener('click', () => {
-      if ((cta as HTMLButtonElement).disabled) return;
-      // Resume the quiz with the grade/city/field picks and both opportunity types.
-      const answers = { searchType: 'both', ...picked() };
-      try {
-        sessionStorage.removeItem('scholarab_matching_v1'); // Explicit new teaser picks replace a prior quiz session.
-        sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step: 4, answers, savedAt: Date.now() }));
-      } catch { /* private mode: the quiz just starts from question 1 */ }
-      // The teaser skips question 1, where the quiz normally counts its start.
-      sendEvent('quiz_start');
-      window.location.assign('/match/');
-    });
-    update();
-  }
-
-  initMatchTeaser();
-  document.addEventListener('astro:page-load', initMatchTeaser);
 
   // ── Hero film: two <video> elements take turns so the next clip is already
   // buffered when the current one starts fading out. The next clip is fetched
@@ -932,14 +818,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-scope-ctas { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
   .sab-scope-btn {
     display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;
-    min-width: 200px; height: 48px; padding: 0 24px; border-radius: 6px;
+    min-width: 200px; height: 48px; padding: 0 24px; border-radius: 100px;
     font-size: 15px; font-weight: 600; text-decoration: none;
     transition: background-color 0.2s ease;
   }
   .sab-scope-btn-solid { background: #2FD3A0; color: #08120E; }
   .sab-scope-btn-solid:hover { background: #5CE3BB; }
-  .sab-scope-btn-light { background: rgba(255,255,255,0.92); color: #141915; }
-  .sab-scope-btn-light:hover { background: #FFFFFF; }
   /* The license credit a CC BY or CC BY-SA photo requires, kept small in the
      card's bottom-right corner, over the photo's own bottom shade. */
   .sab-scope-credit {
@@ -1012,104 +896,21 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-row-when .sabl-when { font-size: 15px; }
 
   /* ── Categories ── */
-  .sab-cat-band { background: #F2F3F5; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
-  .sab-cats { padding-top: 88px; padding-bottom: 88px; }
-  .sab-cats .sab-section-head { margin-bottom: 44px; }
-  .sab-cats-meta { font-size: 13px; color: rgba(20, 25, 21, 0.68); white-space: nowrap; }
-  .sab-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .sab-cat-card {
-    display: block; background: var(--bg-page); border: 1.5px solid rgba(20,25,21,0.85);
-    border-radius: 14px; padding: 24px 22px; color: #141915; text-decoration: none;
-    transition: border-color 0.15s ease, background 0.15s ease;
+  .sab-types { padding-top: 56px; padding-bottom: 96px; }
+  .sab-type-row {
+    display: grid; grid-template-columns: 1fr 200px 200px; gap: 28px; align-items: baseline;
+    padding: 20px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
+    color: inherit; text-decoration: none;
   }
-  .sab-cat-card:hover {
-    border-color: #0A6B4D; background: #F5F6F4; color: #141915;
-  }
-  .sab-cat-top { display: flex; justify-content: space-between; align-items: baseline; }
-  .sab-cat-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
-  .sab-cat-count { font-size: 12px; color: rgba(20, 25, 21, 0.68); }
-  .sab-cat-desc { font-size: 13.5px; color: rgba(20, 25, 21, 0.65); margin-top: 8px; line-height: 1.45; }
-
-  /* City row: a quieter chip than the category cards on purpose. Cities are a
-     second axis through the same listings, not eight more tracks.
-     Metrics are tighter than they look like they should be because eight
-     scopes at padding 15 and gap 10 came to 1117px in a 1084px measure, and
-     National dropped onto a line of its own -- one orphan chip under a full
-     row, which reads as a mistake rather than as a wrap. 12 and 8 bring it to
-     1053 with 31px spare. It still wraps, and has to below about 1100px; a
-     ninth scope would need re-measuring rather than eyeballing. */
-  .sab-city-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 22px; }
-  /* The chips moved into their own box so the phone layout can put the label
-     on a line of its own; on a desktop it stays one row, so this box has to
-     carry the wrapping and the gap the row used to. */
-  .sab-city-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1; min-width: 0; }
-  .sab-city-label { font-size: 11px; letter-spacing: 0.12em; color: rgba(20, 25, 21, 0.68); margin-right: 4px; }
-  .sab-city-chip {
-    display: inline-flex; align-items: baseline; gap: 8px;
-    border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
-    padding: 7px 12px; font-size: 14px; font-weight: 600;
-    color: #141915; text-decoration: none; background: var(--bg-page);
-    transition: border-color 0.15s ease;
-  }
-  .sab-city-chip:hover { border-color: #0A6B4D; color: #141915; }
-  .sab-city-count { font-size: 11px; color: rgba(20, 25, 21, 0.68); }
-
-  /* ── Match teaser ── */
-  .sab-match { padding-top: 96px; padding-bottom: 96px; }
-  .sab-match-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: center; }
-  .sab-match-h2 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.05; margin-bottom: 20px; }
-  .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.68); margin: 0; }
-  .sab-match-card {
-    background: var(--bg-page); border: 2px solid #141915; border-radius: 20px; padding: 36px;
-  }
-  .sab-match-group { margin-bottom: 22px; }
-  .sab-match-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); margin-bottom: 10px; }
-  .sab-match-opts { display: flex; flex-wrap: wrap; gap: 8px; }
-  .sab-match-opt {
-    font-family: var(--font-body); font-size: 14px; font-weight: 600;
-    padding: 9px 16px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.32);
-    background: transparent; color: #141915; cursor: pointer;
-    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.07s ease;
-  }
-  .sab-match-opt:hover, .sab-match-opt:focus-visible {
-    border-color: #0A6B4D;
-  }
-  .sab-match-opt:active { transform: translate(0, 0); transition-duration: 0.07s; }
-  /* a small pop the moment a chip turns on */
-  .sab-match-opt.on {
-    background: #141915; color: #EEF1EC; border-color: #141915;
-    animation: sab-pop 0.24s cubic-bezier(0.2, 0.8, 0.3, 1);
-  }
-  .sab-match-cta {
-    width: 100%; margin-top: 6px; font-family: var(--font-body);
-    background: #0A6B4D; color: #F5FBF8; font-weight: 700; font-size: 16px;
-    height: 56px; padding: 0 16px; border-radius: 100px; border: none; cursor: pointer;
-    transition: background 0.18s ease, transform 0.07s ease;
-  }
-  .sab-match-cta:hover, .sab-match-cta:focus-visible {
-    background: #08573E;
-  }
-  .sab-match-cta:active { transform: translateY(1px); transition-duration: 0.07s; }
-  /* Inert until all three are picked: the label is an instruction at that
-     point, so the control must not look like it can be obeyed. */
-  .sab-match-cta:disabled {
-    background: transparent; color: rgba(20, 25, 21, 0.68);
-    border: 1.5px dashed rgba(20,25,21,0.25); cursor: default;
-  }
-  .sab-match-cta:disabled:hover { background: transparent; transform: none; box-shadow: none; }
+  .sab-type-row:hover { background: rgba(47,211,160,0.07); }
+  .sab-type-row:hover .sab-row-name { color: var(--green); }
+  .sab-type-open { font-size: 15px; font-weight: 700; text-align: right; }
+  .sab-type-total { font-weight: 500; color: rgba(20, 25, 21, 0.72); }
+  .sab-type-next { font-size: 15px; color: rgba(20, 25, 21, 0.78); text-align: right; }
 
   /* ── Motion safety ── */
   @media (prefers-reduced-motion: reduce) {
     .sab-h1 { animation: none; }
-    .sab-cat-card, .sab-cat-card:hover { transform: none; transition: none; }
-    /* keep the colour/shadow feedback, drop the movement */
-    .sab-match-cta, .sab-match-opt,
-    .sab-match-cta:hover, .sab-match-opt:hover,
-    .sab-match-cta:focus-visible, .sab-match-opt:focus-visible,
-    .sab-match-cta:active, .sab-match-opt:active {
-      transform: none; transition: none;
-    }
-    .sab-match-opt.on { animation: none; }
   }
 
   /* ── Responsive (the design specifies ≥1080px; below is adapted) ── */
@@ -1138,16 +939,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     /* Three separate blocks all said "free, student-built, no account" before
        the fold. On a phone that reads as a wall, so the two decorative ones
        go and the sentence keeps the claim. */
-    /* The label shared the first wrapped line with a chip, so "Medicine Hat"
-       started 145px in while every other chip began at the margin: the row
-       read as a mistake rather than as a list. Given its own line, the way
-       the directory's chip rows label themselves. */
-    .sab-city-row { display: block; }
-    .sab-city-label { display: block; margin: 0 0 8px; }
-    .sab-city-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    /* Both came out under the 44px touch minimum: the city chips at 38 and
-       the underlined "View all" link at 28. */
-    .sab-city-chip { min-height: 44px; align-items: center; }
+    /* The underlined "View all" link came out at 28px, under the 44px touch minimum. */
     .sab-view-all { display: inline-flex; align-items: center; min-height: 44px; }
     /* Shown on phones since 2026-09-18: the line now says who built the
        site and links to the story, which a phone visitor should see too. */
@@ -1173,6 +965,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-closing-table { order: 2; margin-top: 12px; }
     .sab-closing .sab-view-all { order: 3; align-self: flex-start; margin-top: 20px; }
     .sab-closing-row { grid-template-columns: 1fr auto; gap: 4px 14px; padding: 16px 2px; min-height: 44px; }
+    .sab-types { padding-top: 32px; padding-bottom: 48px; }
+    .sab-type-row { grid-template-columns: 1fr auto; gap: 2px 14px; padding: 14px 2px; }
+    .sab-type-next { grid-column: 1 / -1; text-align: left; font-size: 14px; }
     .sab-row-main { grid-column: 1; min-width: 0; }
     .sab-row-name { font-size: 16px; line-height: 1.3; }
     .sab-row-blurb { font-size: 13px; margin-top: 4px; }
@@ -1180,30 +975,5 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-row-when { grid-column: 1 / -1; justify-self: start; margin-top: 2px; }
     .sab-row-when .sabl-when { font-size: 14px; }
 
-    .sab-cats { padding-top: 32px; padding-bottom: 32px; }
-    .sab-cats .sab-section-head { margin-bottom: 22px; }
-    .sab-cats-meta { font-size: 11.5px; }
-    .sab-cat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .sab-cat-card { padding: 16px 14px; min-height: 44px; }
-    .sab-cat-name { font-size: 15px; }
-    .sab-cat-desc { font-size: 12.5px; margin-top: 6px; }
-    .sab-cat-top { gap: 6px; }
-    .sab-cat-count { font-size: 11.5px; }
-
-    .sab-match { padding-top: 34px; padding-bottom: 40px; }
-    .sab-match-grid { grid-template-columns: 1fr; gap: 22px; }
-    .sab-match-h2 { font-size: 32px; margin-bottom: 12px; }
-    .sab-match-copy { font-size: 15px; }
-    .sab-match-card { padding: 22px 18px; }
-    .sab-match-group { margin-bottom: 18px; }
-    .sab-match-label { font-size: 11px; }
-    /* Same chips, taller: 34px was under the tap target minimum. */
-    .sab-match-opt { min-height: 44px; padding: 0 16px; }
-    .sab-match-cta { height: 52px; padding: 0 16px; }
-  }
-  /* Two-up survives 390 and 360; the two-word track names still fit. Below
-     that they don't. */
-  @media (max-width: 359px) {
-    .sab-cat-grid { grid-template-columns: 1fr; }
   }
 </style>

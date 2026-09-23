@@ -3,7 +3,7 @@ import SabLogoMark from './SabLogoMark.astro';
 
 // Full dark footer shared by every sab-design page (same design as the home page).
 const footerCols = [
-  { title: 'EXPLORE', links: [
+  { title: 'Explore', links: [
     { label: 'All scholarships', href: '/scholarships/' },
     { label: 'Research programs', href: '/programs/' },
     { label: 'Closing soon', href: '/#closing' },
@@ -12,17 +12,16 @@ const footerCols = [
     { label: 'Guides', href: '/guides/' },
     { label: 'Reference letter template', href: '/templates/reference-letter/' },
   ]},
-  { title: 'ABOUT', links: [
+  { title: 'About', links: [
     { label: 'The story', href: '/about/' },
     { label: 'For educators', href: '/educators/' },
-    { label: 'Where listings come from', href: '/about/' },
     { label: 'What changed', href: '/updates/' },
     { label: 'Privacy', href: '/privacy/' },
     { label: 'Terms of use', href: '/terms/' },
     { label: 'Photo credits', href: '/credits/' },
     { label: 'Suggest a scholarship', href: 'mailto:contact.scholarab@gmail.com' },
   ]},
-  { title: 'CONTACT', links: [
+  { title: 'Contact', links: [
     { label: 'Email', href: 'mailto:contact.scholarab@gmail.com' },
     { label: 'Instagram', href: 'https://www.instagram.com/scholarab.ca' },
     { label: 'TikTok', href: 'https://www.tiktok.com/@scholarab' },
@@ -34,11 +33,8 @@ const footerCols = [
     <div class="sabf-top">
       <div>
         <div class="sabf-logo">
-          <SabLogoMark size={56} id="footer" />
-          <div class="sabf-lockup">
-            <span class="sabf-word">Scholar<span class="sabf-accent">AB</span></span>
-            <span class="sabf-mono sabf-tagline">FIND YOUR SCHOLARSHIP</span>
-          </div>
+          <SabLogoMark size={32} id="footer" />
+          <span class="sabf-word">Scholar<span class="sabf-accent">AB</span></span>
         </div>
         <p class="sabf-blurb">ScholarAB is a free directory of scholarships and research programs for Alberta high school students, with deadlines tracked. No account needed.</p>
         <p class="sabf-blurb sabf-disclaimer">Listings are written and reviewed by a person, but this site can still contain errors and out-of-date information. Deadlines move and rules change. Always confirm the details on the provider's own page before you apply. <a href="/terms/">More in the terms of use</a>.</p>
@@ -46,7 +42,7 @@ const footerCols = [
       <div class="sabf-cols">
         {footerCols.map(col => (
           <div>
-            <div class="sabf-mono sabf-col-title">{col.title}</div>
+            <div class="sabf-col-title">{col.title}</div>
             <div class="sabf-links">
               {col.links.map(l => (
                 l.href.startsWith('mailto:')
@@ -77,9 +73,7 @@ const footerCols = [
   .sabf-accent { color: #2FD3A0; }
   .sabf-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
   .sabf-logo { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-  .sabf-lockup { display: flex; flex-direction: column; gap: 6px; }
-  .sabf-word { font-weight: 800; letter-spacing: -0.02em; color: #EEF1EC; font-size: clamp(36px, 5vw, 52px); line-height: 1; }
-  .sabf-tagline { font-size: 12px; letter-spacing: 0.24em; color: rgba(238, 241, 236, 0.6); }
+  .sabf-word { font-weight: 800; letter-spacing: -0.02em; color: #EEF1EC; font-size: 28px; line-height: 1; }
   .sabf-blurb { font-size: 14px; line-height: 1.6; max-width: 340px; margin: 0; }
   /* The accuracy disclaimer. Deliberately in the footer rather than only in
      the terms: a student about to miss a deadline is not reading /terms. */
@@ -87,7 +81,7 @@ const footerCols = [
   .sabf-disclaimer a { color: rgba(238, 241, 236, 0.7); text-decoration: underline; text-underline-offset: 2px; }
   .sabf-disclaimer a:hover { color: #EEF1EC; }
   .sabf-cols { display: flex; gap: 64px; flex-wrap: wrap; }
-  .sabf-col-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(238, 241, 236, 0.62); margin-bottom: 14px; }
+  .sabf-col-title { font-size: 14px; font-weight: 700; color: #EEF1EC; margin-bottom: 8px; }
   /* The links were 21px tall with a 10px gap between them: under the 24px
      WCAG 2.2 minimum. The gap now lives inside each link, so the rhythm is
      the same 31-32px and the whole row takes the tap; 44px on touch. */

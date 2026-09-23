@@ -2,6 +2,16 @@
 import SabFooter from '../components/sab/SabFooter.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
+import { loadScholarships } from '../lib/data-loader';
+import { SCHOLARSHIP_FACETS, facetItems } from '../lib/facets';
+
+// A search box and the biggest hubs, so a dead link still lands somewhere
+// useful (critique 2026-09-23: two buttons and a slogan were a dead end).
+const scholarships = await loadScholarships();
+const hubs = SCHOLARSHIP_FACETS
+  .map(f => ({ label: f.label, href: `/scholarships/${f.slug}/`, count: facetItems(f, scholarships).length }))
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 6);
 ---
 
 <Layout
@@ -19,11 +29,15 @@ import SabHeader from '../components/sab/SabHeader.astro';
   <div id="sab-404" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabp-body" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
       <h1 class="sab404-h1">This page doesn't exist.</h1>
-      <p class="sab404-copy">The link may be old, or the address was mistyped. Everything real lives one click away.</p>
-      <div class="sab404-actions">
-        <a href="/" class="sab-btn sab404-btn-accent">Back home</a>
-        <a href="/scholarships/" class="sab-btn sab404-btn-outline">Browse scholarships</a>
-      </div>
+      <p class="sab404-copy">The link may be old, or the address was mistyped. Search the directory, or start from one of the biggest lists.</p>
+      <form action="/scholarships/" method="get" class="sab404-search" role="search">
+        <label for="sab404-q" class="sr-only">Search scholarships</label>
+        <input id="sab404-q" name="q" type="search" placeholder="Search scholarships, e.g. nursing or Red Deer" class="sab404-input" />
+        <button type="submit" class="sab-btn sab404-btn-accent">Search</button>
+      </form>
+      <ul class="sab404-hubs">
+        {hubs.map(h => <li><a href={h.href}>{h.label}</a> <span class="tnum">{h.count.toLocaleString('en-CA')}</span></li>)}
+      </ul>
     </div>
 
   </div>
@@ -40,17 +54,21 @@ import SabHeader from '../components/sab/SabHeader.astro';
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(44px, 6vw, 68px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
-  .sab404-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); margin: 20px 0 0; max-width: 480px; }
-  .sab404-actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+  .sab404-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.78); margin: 20px 0 0; max-width: 520px; }
+  .sab404-search { display: flex; gap: 10px; margin-top: 28px; max-width: 560px; }
+  .sab404-input {
+    flex: 1; min-width: 0; font: 16px var(--font-body); color: var(--text-primary);
+    border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px; padding: 12px 18px; background: #FFFFFF;
+  }
+  .sab404-input:focus { outline: none; border-color: var(--green); }
+  .sab404-input:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .sab404-hubs { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15.5px; }
+  .sab404-hubs a { color: #0A6B4D; font-weight: 600; text-underline-offset: 3px; }
+  .sab404-hubs span { color: rgba(20, 25, 21, 0.72); }
   .sab404-btn-accent {
     display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;
     background: #2FD3A0; color: #08120E; padding: 13px 24px; border-radius: 100px; text-decoration: none;
+    border: 0; cursor: pointer; font-family: var(--font-body);
   }
   .sab404-btn-accent:hover { background: #4FE0B4; color: #08120E; }
-  .sab404-btn-outline {
-    display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;
-    color: #141915; padding: 13px 24px; border-radius: 100px;
-    border: 1.5px solid rgba(20,25,21,0.3); text-decoration: none;
-  }
-  .sab404-btn-outline:hover { border-color: #141915; color: #141915; }
 </style>

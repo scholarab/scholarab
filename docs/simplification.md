@@ -1,5 +1,47 @@
 # ScholarAB simplification record
 
+## AI-look audit, second pass: September 23, 2026
+
+From the re-run critique (28/40, `.impeccable/critique/2026-09-23T21-27-54Z__src-pages.md`),
+which found no hover lifts left and named the remaining tell as density:
+uppercase label-face overlines, card grids, pill clouds, dark stat and capture
+cards. Local measurements against `dist/`, not hosted.
+
+| Candidate | Outcome |
+| --- | --- |
+| Detail page type and topic pills, uppercase subline, uppercase section heads, COPY LINK / VISIT OFFICIAL SITE / READ THE GUIDE, uppercase status pill | Type and topic pills removed (the breadcrumb already says both); headings in sentence-case display type; buttons and the status pill in sentence case, server and client copies both. Rail data labels (value, deadline) keep the label face. |
+| Dark "GET A DEADLINE REMINDER" box | Light inline form under the card, same fields, same privacy line. |
+| "More like this" and cross-dataset card grids with an identical CALGARY tag and no deadline | Rows: name, where/what, amount, deadline. |
+| Home "Start where you are" card grid with slogan copy | "By type" rows: open now, total, next deadline. |
+| Home "OR BY CITY" 25-chip cloud | Removed; the header dropdown lists every city on every page. |
+| Home mini-quiz (a second quiz UI that seeded /match) | Removed with its script, `TEASER_KEYS`/`teaserOptions`, the `short` labels, 5 unit tests and its E2E spec. /match is the one quiz. |
+| Quiz reassurance hints (PRIME PREP TIME, TOTALLY FINE, GRADES AREN'T EVERYTHING...) | Removed; informative hints kept in sentence case in the body face. Hints are now optional. |
+| Results "$250 – $30,000" dark stat card | Replaced by the sentence it carried; "Save these N" saves the strong matches in one tap (new test). Count and tier pills are plain text. |
+| "Under 30 seconds" for up to eight questions | "About a minute", from the one constant. |
+| Guides index blog-card grid with kickers and read times | A list of titles and descriptions. |
+| Guide dark band, GUIDES / kicker, N MIN READ, KEEP READING cards | White title with a back link; the hub's open listings in the empty right column (up to 8, soonest first); keep-reading as three plain links (same rotation). |
+| Footer tagline, uppercase column titles, 56px logo, duplicate "Where listings come from" link | Removed or sentence case; 32px logo. |
+| Mobile sheet "GO TO" eyebrow and tagline; no Deadlines or Guides | Eyebrow and tagline gone; Deadlines and Guides rows added (phone only). |
+| Carousel "Find my match" button on all 18 cards, square buttons | One action per card, pill shape like every other button. |
+| CTA labels "Apply now" / "Learn more" | "Apply", "How to apply" (applications through school), "Visit the program site". Status-dependent labels (Visit, Check the provider) kept: they say something true about the listing. |
+| Columns/Gallery "1 of 1542" under a 1,083 group | Counts the group. |
+| Group count 2.92:1; row counter read aloud | 0.62 ink; counter has empty alt text. |
+| 404 with two pills | Search box and the six biggest hubs. |
+| /deadlines at 78,000px with uppercase stats and pill jump chips | Next three months open, the rest folded under their headings (jump links open them); plain sticky month index under the header; sentence-case counts. |
+| Frosted-glass hub CSS behind `BACKDROPS_OFF` | Kept: parked by the owner, not dead. |
+
+Add-back fraction: 1 of 19 candidates (the status-dependent CTA labels) kept
+rather than collapsed, because "Apply" on a closed or unconfirmed listing would
+be false.
+
+| Metric | Before | After |
+| --- | --- | --- |
+| Label-face class uses in public markup | 79 | 38 |
+| Detector `wide-tracking`, 12 built pages | 42 | 1 |
+| Detector findings total, same pages | 109 | 68 |
+| Lines changed | | +555 / -771 across 23 files |
+| Unit tests | 978 | 974 (5 teaser tests deleted with the teaser, 1 save-all test added) |
+
 ## AI-look audit fixes: September 23, 2026
 
 From the 2026-09-23 critique (`.impeccable/critique/2026-09-23T20-54-02Z__src-pages.md`),

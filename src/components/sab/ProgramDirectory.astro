@@ -315,7 +315,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       the block out of a list that fits in one step. */}
   {initial.length > DIRECTORY_PAGE_SIZE && (
     <div class="sabl-more" data-dir-more>
-      <p class="sabl-mono sabl-more-line" data-dir-more-line>SHOWING {DIRECTORY_PAGE_SIZE} OF {initial.length}</p>
+      <p class="sabl-more-line" data-dir-more-line>Showing {DIRECTORY_PAGE_SIZE} of {initial.length.toLocaleString('en-CA')}</p>
       <div class="sabl-more-actions">
         <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
         <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length}</button>

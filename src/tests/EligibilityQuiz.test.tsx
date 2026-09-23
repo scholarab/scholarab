@@ -89,7 +89,7 @@ function schoolRestricted(id: number, school: string) {
 }
 
 /** Go through all 6 questions and reach the results screen. */
-function advanceToResults(searchType: 'Scholarships' | 'Research Programs' | 'Both' = 'Scholarships') {
+function advanceToResults(searchType: 'Scholarships' | 'Research programs' | 'Both' = 'Scholarships') {
   clickTile(searchType)                // Q1 searchType
   clickTile('Grade 12')                // Q2 grade
   clickTile('Medicine Hat')            // Q3 city
@@ -127,7 +127,7 @@ describe('Question 1; Search type', () => {
   it('renders search type options', () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     expect(screen.getByText('Scholarships')).toBeTruthy()
-    expect(screen.getByText('Research Programs')).toBeTruthy()
+    expect(screen.getByText('Research programs')).toBeTruthy()
     expect(screen.getByText('Both')).toBeTruthy()
   })
 
@@ -312,7 +312,29 @@ describe('Results', () => {
     ])
     render(<EligibilityQuiz scholarships={[s1 as any]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/RANKED BY FIT/)).toBeTruthy()
+    expect(screen.getByText(/Best fit first/)).toBeTruthy()
+  })
+
+  it('saves every strong match in one tap', () => {
+    const s1 = makeScholarship({ id: 1, title: 'Strong One' })
+    const s2 = makeScholarship({ id: 2, title: 'Strong Two' })
+    const s3 = makeScholarship({ id: 3, title: 'Good Three' })
+    mockMatchAll.mockReturnValue([
+      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] },
+      { id: 2, tier: 'strong' as ConfidenceTier, confidence: 0.8, signals: [], checks: [] },
+      { id: 3, tier: 'good' as ConfidenceTier, confidence: 0.6, signals: [], checks: [] },
+    ])
+    // A stateful stand-in for the tracker, so the button can see its own saves.
+    const saved = new Set<number>()
+    mockGetSaved.mockImplementation(() => [...saved])
+    mockToggleSaved.mockImplementation((id: number) => { if (saved.has(id)) saved.delete(id); else saved.add(id); return [...saved] })
+    render(<EligibilityQuiz scholarships={[s1, s2, s3] as any} programs={[]} />)
+    advanceToResults()
+    fireEvent.click(screen.getByText('Save these 2'))
+    expect([...saved].sort()).toEqual([1, 2])
+    expect(screen.getByText('Saved to your list')).toBeTruthy()
+    mockGetSaved.mockImplementation(() => [])
+    mockToggleSaved.mockImplementation(() => undefined as unknown as number[])
   })
 
   it('shows scholarship count from matchAll results', () => {
@@ -443,7 +465,7 @@ describe('Results', () => {
       paid: true, stipend: '$3,000 stipend', category: 'STEM research', deadline: null,
     }])
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
-    advanceToResults('Research Programs')
+    advanceToResults('Research programs')
     fireEvent.click(screen.getByRole('button', { name: /save program/i }))
     expect(mockToggleSavedProgram).toHaveBeenCalledWith(42)
     expect(mockToggleSaved).not.toHaveBeenCalled()
@@ -455,8 +477,8 @@ describe('Results', () => {
       paid: true, stipend: '$3,000 stipend', category: null, deadline: null,
     }])
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
-    advanceToResults('Research Programs')
-    expect(screen.getByText('$ PAID')).toBeTruthy()
+    advanceToResults('Research programs')
+    expect(screen.getByText('Paid')).toBeTruthy()
     expect(screen.getByText('$3,000 stipend')).toBeTruthy()
   })
 

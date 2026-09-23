@@ -173,7 +173,7 @@ describe('button press language', () => {
     // base existed; no lift, no press. .sabd-cta is the Apply button on all
     // 278 listing pages, so its hover was an instant colour flip.
     const wearers: [string, string[]][] = [
-      ['src/pages/404.astro', ['sab404-btn-accent', 'sab404-btn-outline']],
+      ['src/pages/404.astro', ['sab404-btn-accent']],
       ['src/pages/educators.astro', ['sabe-btn-solid', 'sabe-btn-outline']],
       ['src/components/sab/SabDetail.astro', ['sabd-cta', 'sabd-remind-btn']],
     ]

@@ -200,45 +200,47 @@ const breadcrumbJson = {
               Every dated scholarship and program deadline, soonest first. {span ? `${span}.` : ''}
               Dates can move, so check the provider's page before you plan around one.
             </p>
-            <p class="sabl-mono sabcal-stats">
-              {`${rows.length} DATED DEADLINES · ${openNow} OPEN TO APPLY TODAY · ${months.length} MONTHS`}
+            <p class="sabcal-stats">
+              {`${rows.length.toLocaleString('en-CA')} dated deadlines across ${months.length} months, ${openNow.toLocaleString('en-CA')} of them open to apply today.`}
             </p>
           </header>
 
           <nav class="sabcal-jump" aria-label="Jump to a month">
             {months.map(m => (
               <a href={`#${m.key}`} class="sabcal-chip">
-                <span class="sabl-mono sabcal-chip-m">{m.short}</span>
+                <span class="sabcal-chip-m">{m.short}</span>
                 <span class="sabcal-chip-n tnum">{m.items.length}</span>
               </a>
             ))}
           </nav>
 
-          {months.map(m => (
-            <section class="sabcal-month" id={m.key}>
-              <div class="sabcal-month-head">
+          {/* The next three months open; the rest fold into their headings, so
+              the page is a calendar to scan rather than a 78,000px scroll
+              (critique 2026-09-23). The jump links open a folded month. */}
+          {months.map((m, i) => (
+            <details class="sabcal-month" id={m.key} open={i < 3}>
+              <summary class="sabcal-month-head">
                 <h2 class="sabcal-h2">{m.name}</h2>
-                <span class="sabl-mono sabcal-month-count">
-                  {`${m.items.length} ${m.items.length === 1 ? 'DEADLINE' : 'DEADLINES'}`}
-                  {m.openCount > 0 ? ` · ${m.openCount} OPEN NOW` : ''}
+                <span class="sabcal-month-count">
+                  {`${m.items.length} ${m.items.length === 1 ? 'deadline' : 'deadlines'}${m.openCount > 0 ? `, ${m.openCount} open now` : ''}`}
                 </span>
-              </div>
+              </summary>
               <ol class="sabcal-rows">
                 {m.items.map(r => (
                   <li class="sabcal-row">
                     <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>
-                      {r.kind === 'program' && <span class="sabl-mono sabcal-tag">PROGRAM</span>}
+                      {r.kind === 'program' && <span class="sabcal-tag">Program</span>}
                     </span>
                     <span class="sabcal-sub">
                       <span class="sabcal-meta">{r.meta}</span>
-                      <span class:list={['sabl-mono', 'sabcal-state', r.open && 'is-open']}>{r.state}</span>
+                      <span class:list={['sabcal-state', r.open && 'is-open']}>{r.state}</span>
                     </span>
                   </li>
                 ))}
               </ol>
-            </section>
+            </details>
           ))}
 
           <section class="sabcal-tail">
@@ -267,6 +269,22 @@ const breadcrumbJson = {
   <SabFooter slot="footer" />
 </Layout>
 
+<script>
+  // A jump link to a folded month opens it before the browser scrolls there.
+  function openFromHash() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const el = id ? document.getElementById(id) : null;
+    if (el instanceof HTMLDetailsElement && !el.open) { el.open = true; el.scrollIntoView(); }
+  }
+  document.addEventListener('click', e => {
+    const a = (e.target as Element).closest?.('.sabcal-jump a') as HTMLAnchorElement | null;
+    const el = a ? document.getElementById(a.hash.slice(1)) : null;
+    if (el instanceof HTMLDetailsElement) el.open = true;
+  });
+  window.addEventListener('hashchange', openFromHash);
+  document.addEventListener('astro:page-load', openFromHash);
+</script>
+
 <style is:global>
   body:has(#sab-deadlines) { background: var(--bg-page); }
 
@@ -285,38 +303,45 @@ const breadcrumbJson = {
        one page whose H1 read as a different site. */
     font-family: var(--font-display); font-weight: 400; letter-spacing: -0.015em;
     font-size: clamp(40px, 6vw, 68px); line-height: 1.02; color: #141915;
-    margin: 0 0 16px; text-wrap: balance; max-width: 18ch;
+    margin: 0 0 16px; text-wrap: balance; max-width: 24ch;
   }
   .sabcal-intro { font-size: 17px; line-height: 1.65; color: #454945; max-width: 62ch; margin: 0; }
-  .sabcal-stats { font-size: 12px; letter-spacing: 0.08em; color: #5C5F5B; margin: 18px 0 0; }
+  .sabcal-stats { font-size: 15px; color: #5C5F5B; margin: 14px 0 0; }
 
   /* The jump nav is the page's table of contents and its main internal link
      block; it sticks because the months below it are long. */
   .sabcal-jump {
-    position: sticky; top: 0; z-index: 2;
+    position: sticky; top: var(--sab-nav-h); z-index: 2;
     display: flex; flex-wrap: wrap; gap: 8px;
     margin: 28px 0 8px; padding: 12px 0;
     background: var(--bg-page); border-bottom: 1px solid rgba(20,25,21,0.12);
   }
   .sabcal-chip {
     display: inline-flex; align-items: baseline; gap: 6px;
-    padding: 6px 11px; border: 1px solid #E5E0D5; border-radius: 999px;
-    background: #FBFCFA; text-decoration: none; color: #141915;
+    padding: 6px 4px; text-decoration: none; color: #141915;
   }
-  .sabcal-chip:hover { border-color: #141915; }
-  .sabcal-chip-m { font-size: 12px; letter-spacing: 0.08em; }
-  .sabcal-chip-n { font-size: 12px; color: #5C5F5B; }
+  .sabcal-chip:hover .sabcal-chip-m { text-decoration: underline; text-underline-offset: 3px; }
+  .sabcal-chip-m { font-size: 15px; font-weight: 700; }
+  .sabcal-chip-n { font-size: 13.5px; color: #5C5F5B; }
 
   .sabcal-month { padding-top: 40px; scroll-margin-top: 72px; }
   .sabcal-month-head {
     display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
     flex-wrap: wrap; border-bottom: 2px solid #141915; padding-bottom: 8px;
+    cursor: pointer; list-style: none;
   }
+  .sabcal-month-head::-webkit-details-marker { display: none; }
+  .sabcal-month-head .sabcal-h2::after {
+    content: ''; display: inline-block; width: 8px; height: 8px; margin-left: 12px;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: translateY(-4px) rotate(45deg); transition: transform 0.15s ease;
+  }
+  .sabcal-month:not([open]) .sabcal-h2::after { transform: translateY(-1px) rotate(-45deg); }
   .sabcal-h2 {
     font-family: var(--font-body); font-weight: 700; letter-spacing: -0.01em;
     font-size: 24px; color: #141915; margin: 0;
   }
-  .sabcal-month-count { font-size: 12px; letter-spacing: 0.08em; color: #5C5F5B; }
+  .sabcal-month-count { font-size: 14px; color: #5C5F5B; }
 
   .sabcal-rows { list-style: none; margin: 0; padding: 0; }
   .sabcal-row {
@@ -338,12 +363,11 @@ const breadcrumbJson = {
   }
   .sabcal-name a:hover { text-decoration: underline; }
   .sabcal-tag {
-    font-size: 11px; letter-spacing: 0.1em; color: #5C5F5B;
-    border: 1px solid #E5E0D5; border-radius: 3px; padding: 1px 5px; margin-left: 8px;
+    font-size: 13px; font-weight: 600; color: #5C5F5B; margin-left: 8px;
     white-space: nowrap;
   }
   .sabcal-meta { font-size: 14px; color: #5C5F5B; white-space: nowrap; }
-  .sabcal-state { font-size: 11px; letter-spacing: 0.07em; color: #5C5F5B; text-transform: uppercase; white-space: nowrap; }
+  .sabcal-state { font-size: 13.5px; font-weight: 600; color: #5C5F5B; white-space: nowrap; }
   .sabcal-state.is-open { color: #0B7A5A; }
 
   .sabcal-tail { padding-top: 56px; font-size: 16px; line-height: 1.65; color: #454945; }

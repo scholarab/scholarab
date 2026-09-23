@@ -22,7 +22,8 @@ test('catalogue questions keep their order, keyboard navigation, private resume 
     const q = questions[i]!;
     await expect(page.locator('.sabm-question')).toHaveText(q.q);
     await expect(page.locator('.sabm-opt-label')).toHaveText(q.opts.map(o => o.label));
-    await expect(page.locator('.sabm-opt-hint')).toHaveText(q.opts.map(o => o.hint));
+    // Only options with a hint render one; the rest show the label alone.
+    await expect(page.locator('.sabm-opt-hint')).toHaveText(q.opts.flatMap(o => (o.hint ? [o.hint] : [])));
     const tile = page.locator('.sabm-opt').nth(q.opts.findIndex(o => o.value === answers[q.key]));
     await tile.focus();
     if (i === questions.length - 1) await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));

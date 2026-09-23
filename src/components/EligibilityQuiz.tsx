@@ -6,7 +6,7 @@ import type { QuizScholarship as Scholarship, QuizProgram as Program } from '../
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
-import { showConfetti, generateSlug, parseAmount } from '../lib/utils.ts'
+import { showConfetti, generateSlug } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
 import { scholarshipStatusOf } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
@@ -100,7 +100,7 @@ function MatchTile({
     >
       <span className="sabm-opt-text">
         <span className="sabm-opt-label">{label}</span>
-        {hint && <span className="sabm-opt-hint sabl-mono">{hint}</span>}
+        {hint && <span className="sabm-opt-hint">{hint}</span>}
       </span>
       <span className="sabm-opt-arrow" aria-hidden="true">→</span>
     </button>
@@ -335,21 +335,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const scholarshipResults = allScholarshipResults && (showAll ? allScholarshipResults : allScholarshipResults.slice(0, RESULT_LIMIT))
   const programResults = allProgramResults && (showAll ? allProgramResults : allProgramResults.slice(0, RESULT_LIMIT))
 
-  // What one of these is worth, not what all of them add up to. The card used
-  // to show a sum; "COMBINED AWARD VALUE $27,500", which is a number nobody
-  // can win: these are independent competitive awards, most students take home
-  // one or none, and the total moved with an arbitrary result cap. The
-  // range answers the question the student actually has at this point, which
-  // is whether any of this is worth an evening of applications.
-  const awardRange = useMemo(() => {
-    if (!scholarshipResults) return null
-    const amounts = scholarshipResults
-      .filter(r => r.tier !== 'possible')
-      .map(r => parseAmount(r.scholarship.amount))
-      .filter(a => a > 0)
-    if (amounts.length === 0) return null
-    return { low: Math.min(...amounts), high: Math.max(...amounts) }
-  }, [scholarshipResults])
 
   const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
   const handleToggleSave = useCallback((id: number, el?: Element | null) => {
@@ -358,6 +343,16 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     // Saves count, un-saves don't; the metric is "people who shortlisted it"
     if (next.has(id)) { showConfetti(el); sendEvent('save', 'scholarship', id) }
     setSavedIds(next)
+  }, [])
+
+  // One tap to keep the whole shortlist: the results were the best moment in
+  // the quiz and ended on "Retake" with nothing kept (critique 2026-09-23).
+  const handleSaveAll = useCallback((ids: number[], el?: Element | null) => {
+    const have = new Set(getSaved())
+    const fresh = ids.filter(id => !have.has(id))
+    for (const id of fresh) { toggleSaved(id); sendEvent('save', 'scholarship', id) }
+    if (fresh.length > 0) showConfetti(el)
+    setSavedIds(new Set(getSaved()))
   }, [])
 
   // Programs have their own shortlist key, read by the /saved page
@@ -382,6 +377,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const strong   = scholarshipResults?.filter(r => r.tier === 'strong') ?? []
     const good     = scholarshipResults?.filter(r => r.tier === 'good') ?? []
     const possible = scholarshipResults?.filter(r => r.tier === 'possible') ?? []
+    // Strong matches when there are any, otherwise good ones: the set a
+    // student would save first.
+    const saveable = strong.length > 0 ? strong : good
 
     const scholarshipCount = scholarshipResults?.length ?? 0
     const programCount = programResults?.length ?? 0
@@ -422,33 +420,29 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           {headline}
         </h2>
 
-        {showScholarships && awardRange && (
-          <div className="sabm-value-card">
-            <div style={{ flex: 'none' }}>
-              <div className="sabm-value-label sabl-mono">
-                {awardRange.low === awardRange.high ? 'EACH ONE IS WORTH' : 'THESE AWARDS RANGE FROM'}
-              </div>
-              <div className="sabm-value-amount tnum">
-                {awardRange.low === awardRange.high
-                  ? `$${awardRange.high.toLocaleString('en-CA')}`
-                  : `$${awardRange.low.toLocaleString('en-CA')} – $${awardRange.high.toLocaleString('en-CA')}`}
-              </div>
-            </div>
-            <div className="sabm-value-note">
-              Each is a separate application, judged on its own. Always verify eligibility on the official site before applying.
-            </div>
-          </div>
+        {showScholarships && (
+          <p className="sabm-results-note">
+            Each is a separate application, judged on its own. Check eligibility on the official site before you apply.
+          </p>
         )}
 
         <div className="sabm-results-bar">
           {showScholarships && showTiers ? (
             <div className="sabm-count-chips">
-              {strong.length > 0 && <span className="sabl-mono sabm-count-chip solid">{strong.length} strong match{strong.length !== 1 ? 'es' : ''}</span>}
-              {good.length > 0 && <span className="sabl-mono sabm-count-chip">{good.length} good match{good.length !== 1 ? 'es' : ''}</span>}
-              {possible.length > 0 && <span className="sabl-mono sabm-count-chip">{possible.length} possible</span>}
+              {strong.length > 0 && <span className="sabm-count-chip solid">{strong.length} strong match{strong.length !== 1 ? 'es' : ''}</span>}
+              {good.length > 0 && <span className="sabm-count-chip">{good.length} good match{good.length !== 1 ? 'es' : ''}</span>}
+              {possible.length > 0 && <span className="sabm-count-chip">{possible.length} possible</span>}
             </div>
           ) : <div />}
           <div className="sabm-results-actions">
+            {showScholarships && saveable.length > 0 && (
+              saveable.every(r => savedIds.has(r.scholarship.id))
+                ? <span className="sabm-saved-all" role="status">Saved to your list</span>
+                : <button
+                    onClick={e => handleSaveAll(saveable.map(r => r.scholarship.id), e.currentTarget)}
+                    className="sabm-btn-outline"
+                  >Save {saveable.length === 1 ? 'this one' : `these ${saveable.length}`}</button>
+            )}
             <button onClick={reset} className="sabm-btn-outline">Retake quiz</button>
             {showScholarships && (
               // The student's own hub, not the whole directory: the city is the
@@ -468,8 +462,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <div className="sabm-table">
             {/* The rows are numbered 01..10 and were never told what the
                 number meant. It is confidence order, so say so. */}
-            <p className="sabl-mono sabm-table-label">
-              {showPrograms ? 'SCHOLARSHIPS · RANKED BY FIT' : 'RANKED BY FIT'}
+            <p className="sabm-table-label">
+              {showPrograms ? 'Scholarships, best fit first' : 'Best fit first'}
             </p>
             {scholarshipResults.map(({ scholarship: s, tier, signals, checks }, index) => {
               const style = TIER_STYLES[tier]
@@ -533,8 +527,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             {/* Deliberately not "ranked by fit": matchPrograms filters by
                 grade and field and keeps the data's own order; it does not
                 score. The label says what the list actually is. */}
-            <p className="sabl-mono sabm-table-label">
-              {showScholarships ? 'RESEARCH PROGRAMS · YOUR GRADE AND FIELD' : 'MATCHED TO YOUR GRADE AND FIELD'}
+            <p className="sabm-table-label">
+              {showScholarships ? 'Research programs for your grade and field' : 'Matched to your grade and field'}
             </p>
             {programResults.map((p, index) => (
               <ResultRow
@@ -555,7 +549,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   <div className="sabm-amount-cell">
                     {p.paid
                       ? <>
-                          <span className="sabl-mono sabm-paid-chip">$ PAID</span>
+                          <span className="sabm-paid-chip">Paid</span>
                           {p.stipend && <span className="sabm-paid-note" title={p.stipend}>{p.stipend}</span>}
                         </>
                       : <span className="sabm-amount-muted">Unpaid</span>}

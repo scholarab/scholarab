@@ -13,14 +13,16 @@ import { scoreProgramForScholarship, scoreScholarshipForProgram } from '../../li
 import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
-import { generateSlug, parseAmount, formatVerifiedMonth } from '../../lib/utils.ts';
+import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline } from '../../lib/utils.ts';
 import { programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
-type RelatedItem = { href: string; title: string; value: string; tag: string; money?: boolean };
+// A related listing as a row: name, where/what, amount, deadline. The cards
+// these replaced left out the deadline, the one thing a student compares on.
+type RelatedItem = { href: string; title: string; value: string; tag: string; when: string; money?: boolean };
 
 export async function getStaticPaths() {
   // Neighbor order matches each directory's default sort: earliest deadline
@@ -119,6 +121,8 @@ export async function getStaticPaths() {
       title: s.title,
       value: s.amount,
       tag: s.region || 'Alberta',
+      when: !s.deadline ? 'No fixed deadline'
+        : `${s.deadlineEstimated ? 'Around ' : 'Due '}${formatDeadline(s.deadline)}`,
       money: true,
     }));
 
@@ -128,6 +132,9 @@ export async function getStaticPaths() {
       title: p.name,
       value: p.duration || 'Varies',
       tag: p.category || 'Program',
+      when: p.deadline === 'Ongoing' ? 'Ongoing'
+        : !p.deadline || p.deadline === 'TBA' ? 'Deadline not posted'
+        : `Due ${formatDeadline(p.deadline)}`,
     }));
 
   return [
@@ -195,7 +202,7 @@ if (kind === 'scholarship') {
 
   d = {
     currentPath: '/scholarships/',
-    crossLabel: 'RESEARCH PROGRAMS TO MATCH',
+    crossLabel: 'Research programs to go with it',
     crossPath: '/programs/',
     // Award names run long (the median is 41 characters, the longest 76), and
     // Google truncates titles around 60. A second boilerplate phrase after the
@@ -235,8 +242,7 @@ if (kind === 'scholarship') {
     itemId: s.id,
     itemType: 'scholarship' as const,
     typeLabel: 'SCHOLARSHIP',
-    tag: s.category ? s.category.toUpperCase() : null,
-    subline: (s.region || 'Alberta').toUpperCase(),
+    subline: s.region || 'Alberta',
     status,
     // Not `status === 'closed'` spelled out again: the sitemap has to list the
     // exact complement of this, so both sides read it from status.ts.
@@ -283,7 +289,7 @@ if (kind === 'scholarship') {
       ? "You don't file an application for this one. The notes say how it is awarded."
       : s.applyViaGuidance ? 'Applications go through your school.' : null,
     checkedLabel: formatVerifiedMonth(s.lastVerified),
-    ctaLabel: noApplication ? 'How it is awarded' : s.applyViaGuidance ? 'Learn more' : 'Apply now',
+    ctaLabel: noApplication ? 'How it is awarded' : s.applyViaGuidance ? 'How to apply' : 'Apply',
     url: s.url,
     canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
   };
@@ -303,7 +309,7 @@ if (kind === 'scholarship') {
 
   d = {
     currentPath: '/programs/',
-    crossLabel: 'SCHOLARSHIPS TO MATCH',
+    crossLabel: 'Scholarships to go with it',
     crossPath: '/scholarships/',
     pageTitle: brandedTitle(p.name),
     description: programDescription,
@@ -322,8 +328,7 @@ if (kind === 'scholarship') {
     itemId: p.id,
     itemType: 'program' as const,
     typeLabel: 'PROGRAM',
-    tag: p.category ? p.category.toUpperCase() : null,
-    subline: p.provider ? `RUN BY ${p.provider.toUpperCase()}` : 'ALBERTA',
+    subline: p.provider ? `Run by ${p.provider}` : 'Alberta',
     status,
     // Retired programs read as TBA/Ongoing on the page; the copy is honest,
     // the page just isn't a search result: nothing links to it any more.
@@ -359,7 +364,7 @@ if (kind === 'scholarship') {
     // including ones charging $1,700. A stipend is the headline when there is
     // one, because it is the rarer fact; otherwise the cost is.
     ...programValue(p),
-    ctaLabel: 'Learn more',
+    ctaLabel: 'Visit the program site',
     url: p.url,
     checkedLabel: formatVerifiedMonth(p.lastVerified),
     canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
@@ -454,7 +459,6 @@ const breadcrumbJson = {
       itemType={d.itemType}
       itemId={d.itemId}
       typeLabel={d.typeLabel}
-      tag={d.tag}
       name={d.itemName}
       subline={d.subline}
       status={d.status}
@@ -490,15 +494,18 @@ const breadcrumbJson = {
     {related.length > 0 && (
       <div class:list={['sabd-related', crossRelated.length > 0 && 'sabd-related-paired']}>
         <div class="sabd-related-head">
-          <span class="sabdr-mono sabd-related-title">MORE LIKE THIS</span>
-          <a href={d.currentPath} class="sabdr-mono sabd-related-all">VIEW ALL →</a>
+          <h2 class="sabd-related-title">More like this</h2>
+          <a href={d.currentPath} class="sabd-related-all">See all →</a>
         </div>
         <div class="sabd-related-grid">
           {related.map(r => (
-            <a href={r.href} class="sabd-related-card">
-              <span class="sabdr-mono sabd-related-tag">{r.tag.toUpperCase()}</span>
-              <span class="sabd-related-name">{r.title}</span>
-              <span class:list={['sabd-related-value', { 'is-plain': !r.money }]}>{r.value}</span>
+            <a href={r.href} class="sabd-related-row">
+              <span class="sabd-related-main">
+                <span class="sabd-related-name">{r.title}</span>
+                <span class="sabd-related-tag">{r.tag}</span>
+              </span>
+              <span class:list={['sabd-related-value tnum', { 'is-plain': !r.money }]}>{r.value}</span>
+              <span class="sabd-related-when tnum">{r.when}</span>
             </a>
           ))}
         </div>
@@ -512,15 +519,18 @@ const breadcrumbJson = {
     {crossRelated.length > 0 && (
       <div class="sabd-related sabd-cross">
         <div class="sabd-related-head">
-          <span class="sabdr-mono sabd-related-title">{d.crossLabel}</span>
-          <a href={d.crossPath} class="sabdr-mono sabd-related-all">VIEW ALL →</a>
+          <h2 class="sabd-related-title">{d.crossLabel}</h2>
+          <a href={d.crossPath} class="sabd-related-all">See all →</a>
         </div>
-        <div class="sabd-related-grid sabd-cross-grid">
+        <div class="sabd-related-grid">
           {crossRelated.map(r => (
-            <a href={r.href} class="sabd-related-card">
-              <span class="sabdr-mono sabd-related-tag">{r.tag.toUpperCase()}</span>
-              <span class="sabd-related-name">{r.title}</span>
-              <span class:list={['sabd-related-value', { 'is-plain': !r.money }]}>{r.value}</span>
+            <a href={r.href} class="sabd-related-row">
+              <span class="sabd-related-main">
+                <span class="sabd-related-name">{r.title}</span>
+                <span class="sabd-related-tag">{r.tag}</span>
+              </span>
+              <span class:list={['sabd-related-value tnum', { 'is-plain': !r.money }]}>{r.value}</span>
+              <span class="sabd-related-when tnum">{r.when}</span>
             </a>
           ))}
         </div>
@@ -538,36 +548,42 @@ const breadcrumbJson = {
 </style>
 
 <style>
-  .sabdr-mono { font-family: var(--font-label); }
-
   .sabd-related { padding: 0 48px 96px; box-sizing: border-box; }
   .sabd-related-head {
-    display: flex; justify-content: space-between; align-items: center;
-    border-top: 2px solid #141915; padding-top: 20px; margin-bottom: 18px;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+    padding-top: 20px; margin-bottom: 10px;
   }
-  .sabd-related-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.68); }
-  .sabd-related-all { font-size: 12px; letter-spacing: 0.05em; color: #0A6B4D; text-decoration: none; display: inline-block; padding: 12px 0; margin: -12px 0; }
+  .sabd-related-title { font-family: var(--font-display); font-weight: 400; font-size: 30px; letter-spacing: -0.01em; line-height: 1.1; margin: 0; }
+  .sabd-related-all { font-size: 15px; font-weight: 600; color: #0A6B4D; text-decoration: none; display: inline-block; padding: 12px 0; margin: -12px 0; white-space: nowrap; }
   .sabd-related-all:hover { color: #141915; }
-  .sabd-related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  /* Rows in the directory's own grammar: name and where on the left, then the
+     figure and the deadline in fixed columns so both read down the list. */
+  .sabd-related-grid { border-top: 2px solid #141915; }
   /* The two related blocks are one pair, so the full 96px section rhythm
      between them would read as two unrelated sections. Applied from the first
      block only when a second actually follows it. */
   .sabd-related-paired { padding-bottom: 40px; }
-  .sabd-cross-grid { grid-template-columns: repeat(3, 1fr); }
-  .sabd-related-card {
-    display: flex; flex-direction: column; gap: 10px; background: #FFFFFF;
-    border: 1.5px solid rgba(20,25,21,0.85); border-radius: 14px; padding: 20px;
-    text-decoration: none; color: #141915; transition: border-color 0.15s ease, background 0.15s ease;
+  .sabd-related-row {
+    display: grid; grid-template-columns: 1fr 180px 170px; gap: 24px; align-items: center;
+    padding: 16px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
+    text-decoration: none; color: #141915; transition: background 0.15s ease;
   }
-  .sabd-related-card:hover { border-color: #0A6B4D; background: #F5F6F4; }
-  .sabd-related-tag { font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); }
-  .sabd-related-name { font-weight: 700; font-size: 15px; line-height: 1.35; letter-spacing: -0.01em; flex: 1; }
-  .sabd-related-value { font-family: var(--font-display); font-size: 20px; color: #0A6B4D; }
-  /* A duration is not prize money; green display type made "1 day" read as one. */
-  .sabd-related-value.is-plain { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.72); }
+  .sabd-related-row:hover { background: rgba(20,25,21,0.04); }
+  .sabd-related-row:hover .sabd-related-name { color: var(--green); }
+  .sabd-related-main { min-width: 0; }
+  .sabd-related-name { display: block; font-weight: 700; font-size: 16px; line-height: 1.35; letter-spacing: -0.01em; }
+  .sabd-related-tag { display: block; font-size: 13.5px; color: rgba(20, 25, 21, 0.72); margin-top: 2px; }
+  .sabd-related-value { font-family: var(--font-display); font-size: 22px; color: var(--text-primary); text-align: right; }
+  /* A duration is not prize money; display type made "1 day" read as one. */
+  .sabd-related-value.is-plain { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.75); }
+  .sabd-related-when { font-size: 14px; font-weight: 700; text-align: right; }
 
   @media (max-width: 900px) {
     .sabd-related { padding: 0 20px 72px; }
-    .sabd-related-grid { grid-template-columns: 1fr 1fr; }
+    .sabd-related-title { font-size: 26px; }
+    .sabd-related-row { grid-template-columns: 1fr auto; gap: 4px 14px; padding: 14px 2px; }
+    .sabd-related-main { grid-column: 1 / -1; }
+    .sabd-related-value { text-align: left; font-size: 20px; }
+    .sabd-related-value.is-plain { font-size: 14px; }
   }
 </style>

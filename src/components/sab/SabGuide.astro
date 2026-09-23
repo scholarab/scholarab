@@ -1,6 +1,6 @@
 ---
-// Shared shell for /guides pages: dark hero, light prose body, keep-reading
-// links, CTA, JSON-LD. Guide pages put their prose in the default slot and
+// Shared shell for /guides pages: title, prose, the hub's open listings,
+// keep-reading links, JSON-LD. Guide pages put their prose in the default slot and
 // optional extra JSON-LD (e.g. FAQPage) in the "ld" slot.
 import Layout from '../../layouts/Layout.astro';
 import SabHeader from './SabHeader.astro';
@@ -12,7 +12,11 @@ import { guides, type GuideMeta } from '../../lib/guides';
 // quoting the rejected one. Read it from the constant like everywhere else.
 import { QUIZ_DURATION } from '../../lib/quiz';
 import { brandedTitle } from '../../lib/meta';
-import { SCHOLARSHIP_FACETS, PROGRAM_FACETS } from '../../lib/facets';
+import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, facetItems } from '../../lib/facets';
+import { loadScholarships, loadPrograms } from '../../lib/data-loader';
+import { scholarshipStatusOf, programStatusOf } from '../../lib/status';
+import { generateSlug, formatDeadline } from '../../lib/utils';
+import { todayDate } from '../../lib/calendar';
 
 interface Props {
   guide: GuideMeta;
@@ -32,6 +36,33 @@ const hubFacet =
 const hubHref = hubFacet
   ? `/${SCHOLARSHIP_FACETS.includes(hubFacet) ? 'scholarships' : 'programs'}/${hubFacet.slug}/`
   : null;
+// The hub's open listings beside the prose, soonest first (critique
+// 2026-09-23: a city guide cited 19 listings and showed none of them as data,
+// with half the desktop page empty). Same status ladder as the directory.
+const today = todayDate();
+type LocalRow = { href: string; name: string; amount: string; due: string };
+let localRows: LocalRow[] = [];
+let localTotal = 0;
+if (hubFacet && SCHOLARSHIP_FACETS.includes(hubFacet)) {
+  const open = facetItems(hubFacet, await loadScholarships())
+    .filter(x => x.deadline && scholarshipStatusOf(x, today) === 'active')
+    .sort((a, b) => a.deadline!.localeCompare(b.deadline!));
+  localTotal = open.length;
+  localRows = open.slice(0, 8).map(x => ({
+    href: `/scholarships/${generateSlug(x.title)}/`, name: x.title, amount: x.amount,
+    due: formatDeadline(x.deadline) ?? '',
+  }));
+} else if (hubFacet) {
+  const open = facetItems(hubFacet, await loadPrograms())
+    .filter(x => programStatusOf(x, today) === 'active')
+    .sort((a, b) => (a.deadline ?? '').localeCompare(b.deadline ?? ''));
+  localTotal = open.length;
+  localRows = open.slice(0, 8).map(x => ({
+    href: `/programs/${generateSlug(x.name)}/`, name: x.name, amount: x.duration || '',
+    due: formatDeadline(x.deadline) ?? '',
+  }));
+}
+
 // Same rule as the listing pages: the brand goes on only when it does not
 // push the guide's own title out of what Google renders.
 const pageTitle = brandedTitle(guide.title);
@@ -84,32 +115,37 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
   <slot name="ld" slot="head" />
 
-  {/* The header band and the hero band are separate elements now; the header
-      is the page's banner and cannot sit inside <main>. Same background, no
-      margins, so the two read as the single dark band they always were. */}
   <div class="sabp-header" slot="header">
     <SabHeader currentPath="/guides" />
   </div>
 
   <div class="sabp" id="sab-guide" style="display:flex;flex-direction:column;min-height:100%;">
-    <div class="sabp-header">
-      <div class="sabg-hero">
-        <div class="sab-kicker sabg-kicker">
-          <a href="/guides/" class="sabg-kicker-link">GUIDES</a>
-          <span class="sabg-kicker-sep" aria-hidden="true">/</span>
-          <span>{guide.kicker}</span>
-        </div>
-        <h1 class="sabg-h1">{guide.title}</h1>
-        <div class="sabg-meta sabg-mono">
-          <span>{guide.minutes} MIN READ</span>
-        </div>
-      </div>
+    <div class="sabg-hero">
+      <a href="/guides/" class="sabg-crumb">← All guides</a>
+      <h1 class="sabg-h1">{guide.title}</h1>
     </div>
 
-    <div class="sabg-body" style="flex:1;">
+    <div class:list={['sabg-body', { 'has-aside': localRows.length > 0 }]} style="flex:1;">
       <article class="sabg-prose">
         <slot />
       </article>
+
+      {localRows.length > 0 && hubFacet && hubHref && (
+        <aside class="sabg-local" aria-labelledby="sabg-local-h">
+          <h2 id="sabg-local-h" class="sabg-local-h">Open now: {hubFacet.label}</h2>
+          <ul class="sabg-local-list">
+            {localRows.map(r => (
+              <li>
+                <a href={r.href} class="sabg-local-row">
+                  <span class="sabg-local-name">{r.name}</span>
+                  <span class="sabg-local-meta tnum">{r.amount && <span class="sabg-local-amt">{r.amount}</span>}{r.due && <span>due {r.due}</span>}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a href={hubHref} class="sabg-local-all">{localTotal > localRows.length ? `See all ${localTotal} open →` : 'See the full list →'}</a>
+        </aside>
+      )}
 
       {/* The guide ends in its own voice, not on a dark CTA band (critique
           2026-09-23): where to look next, as plain lines on the note card. */}
@@ -120,17 +156,14 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
         <p>Not sure which ones fit you? <a href="/match/">Take the match quiz</a> ({QUIZ_DURATION}, no account) and get a shortlist worth checking.</p>
       </div>
 
-      <div class="sabg-more">
-        <div class="sabg-mono sabg-more-title">KEEP READING</div>
-        <div class="sabg-more-grid">
+      <nav class="sabg-more" aria-labelledby="sabg-more-h">
+        <h2 id="sabg-more-h" class="sabg-more-title">Keep reading</h2>
+        <ul class="sabg-more-list">
           {keepReading.map(g => (
-            <a href={`/guides/${g.slug}/`} class="sabg-more-card">
-              <span class="sabg-mono sabg-more-tag">{g.kicker}</span>
-              <span class="sabg-more-name">{g.title}</span>
-            </a>
+            <li><a href={`/guides/${g.slug}/`}>{g.title}</a></li>
           ))}
-        </div>
-      </div>
+        </ul>
+      </nav>
     </div>
 
   </div>
@@ -141,28 +174,41 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
 <style is:global>
   body:has(#sab-guide) { background: var(--bg-page); }
 
-  .sabg-mono { font-family: var(--font-label); }
-
-  /* ── Dark hero ── */
-  .sabg-hero { padding: 64px var(--sab-gutter) 72px; width: 100%; box-sizing: border-box; }
-  /* The shared .sab-kicker plus the one thing this one adds: it is a
-     breadcrumb, so the first segment is a link back to the index. */
-  .sabg-kicker { margin-bottom: 24px; }
-  .sabg-kicker-link { color: rgba(238, 241, 236, 0.55); text-decoration: none; }
-  .sabg-kicker-link:hover { color: #EEF1EC; }
-  /* Decorative divider, not a breadcrumb step: hidden from assistive tech
-     rather than read out as "slash". Raised off 0.3, which measured 2.49:1. */
-  .sabg-kicker-sep { color: rgba(238, 241, 236, 0.5); }
+  /* White title area like every other page, not a dark band with a kicker
+     and a read time (critique 2026-09-23). */
+  .sabg-hero { padding: 64px var(--sab-gutter) 0; width: 100%; box-sizing: border-box; }
+  .sabg-crumb { display: inline-block; font-size: 15px; font-weight: 600; color: #0A6B4D; text-decoration: none; margin-bottom: 18px; }
+  .sabg-crumb:hover { color: #141915; }
   .sabg-h1 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(38px, 5.5vw, 62px); line-height: 1.05; letter-spacing: -0.015em;
-    margin: 0; text-wrap: balance;
+    margin: 0; text-wrap: balance; max-width: 22ch;
   }
-  .sabg-meta { display: flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 12px; letter-spacing: 0.05em; color: rgba(238, 241, 236, 0.55); }
-  .sabg-meta-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(238, 241, 236,0.35); }
 
   /* ── Prose body ── */
-  .sabg-body { padding: 56px var(--sab-gutter) 96px; width: 100%; box-sizing: border-box; }
+  .sabg-body { padding: 40px var(--sab-gutter) 96px; width: 100%; box-sizing: border-box; }
+  /* Prose on the left, the hub's open listings in the column the prose's
+     measure leaves empty. Everything after the prose stays in column one. */
+  @media (min-width: 1100px) {
+    .sabg-body.has-aside {
+      display: grid; grid-template-columns: minmax(0, var(--sab-read)) minmax(300px, 420px);
+      column-gap: clamp(40px, 6vw, 96px); align-items: start;
+    }
+    .sabg-body.has-aside > :not(.sabg-local) { grid-column: 1; }
+    .sabg-local { grid-column: 2; grid-row: 1 / span 3; position: sticky; top: calc(var(--sab-nav-h) + 24px); }
+  }
+  .sabg-local { margin-top: 32px; }
+  @media (min-width: 1100px) { .sabg-local { margin-top: 0; } }
+  .sabg-local-h { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.15; margin: 0 0 10px; }
+  .sabg-local-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid #141915; }
+  .sabg-local-row { display: flex; flex-direction: column; gap: 2px; padding: 11px 4px; border-bottom: 1px solid rgba(20,25,21,0.14); text-decoration: none; color: #141915; }
+  .sabg-local-row:hover { background: rgba(20,25,21,0.04); }
+  .sabg-local-row:hover .sabg-local-name { color: var(--green); }
+  .sabg-local-name { font-weight: 700; font-size: 15px; line-height: 1.35; }
+  .sabg-local-meta { display: flex; gap: 10px; font-size: 13.5px; color: rgba(20, 25, 21, 0.75); }
+  .sabg-local-amt { color: #0A6B4D; font-weight: 700; }
+  .sabg-local-all { display: inline-block; margin-top: 12px; font-size: 15px; font-weight: 600; color: #0A6B4D; text-decoration: none; }
+  .sabg-local-all:hover { color: #141915; }
   /* The page runs full width; the prose alone keeps a readable line. */
   .sabg-prose { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); max-width: var(--sab-read); }
   .sabg-prose h2 {
@@ -216,21 +262,15 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-hublink a { color: #0A6B4D; font-weight: 600; }
 
   /* ── Keep reading ── */
-  .sabg-more { margin-top: 56px; }
-  .sabg-more-title { font-size: 12px; letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.68); margin-bottom: 16px; }
-  .sabg-more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .sabg-more-card {
-    display: flex; flex-direction: column; gap: 10px; background: #FFFFFF;
-    border: 1.5px solid rgba(20,25,21,0.85); border-radius: 14px; padding: 20px;
-    text-decoration: none; color: #141915; transition: border-color 0.15s ease, background 0.15s ease;
-  }
-  .sabg-more-card:hover { border-color: #0A6B4D; background: #F5F6F4; }
-  .sabg-more-tag { font-size: 11px; letter-spacing: 0.05em; color: #0A6B4D; }
-  .sabg-more-name { font-weight: 700; font-size: 15px; line-height: 1.35; letter-spacing: -0.01em; }
+  .sabg-more { margin-top: 48px; max-width: var(--sab-read); }
+  .sabg-more-title { font-size: 17px; font-weight: 700; margin: 0 0 8px; }
+  .sabg-more-list { margin: 0; padding-left: 1.2em; font-size: 16px; line-height: 1.6; }
+  .sabg-more-list li + li { margin-top: 6px; }
+  .sabg-more-list a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(10,107,77,0.35); }
+  .sabg-more-list a:hover { text-decoration-color: currentColor; }
 
   @media (max-width: 900px) {
-    .sabg-hero { padding: 40px 20px 48px; }
-    .sabg-body { padding: 40px 20px 72px; }
-    .sabg-more-grid { grid-template-columns: 1fr; }
+    .sabg-hero { padding: 36px 20px 0; }
+    .sabg-body { padding: 28px 20px 72px; }
   }
 </style>

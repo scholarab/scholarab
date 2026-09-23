@@ -108,6 +108,10 @@ const navItems = [
   { label: 'Match', href: '/match/', count: null as number | null },
   { label: 'Saved', href: '/saved/', count: null as number | null },
   { label: 'About', href: '/about/', count: null as number | null },
+  // Phone sheet only: the desktop bar reaches these through the dropdowns,
+  // the phone sheet had no route to them at all (critique 2026-09-23).
+  { label: 'Deadlines', href: '/deadlines/', count: null as number | null, mobileOnly: true },
+  { label: 'Guides', href: '/guides/', count: null as number | null, mobileOnly: true },
 ];
 
 // Compare with a normalized trailing slash on both sides. The nav hrefs carry
@@ -129,7 +133,7 @@ const isActive = (href: string) =>
       <!-- The site nav is a real landmark: it is the only way to jump past
            these links, or straight to them, without walking the whole page. -->
       <nav class="sabh-links" id="sabh-links" aria-label="Main">
-        <div class="sabh-sheet-label" aria-hidden="true">GO TO</div>
+        <div class="sabh-sheet-label" aria-hidden="true"></div>
         {/* One highlight that glides between links, as on tesla.com, instead
             of a pill per link that blinks out and back in as the pointer
             crosses from one to the next. The script sizes and moves it. */}
@@ -144,7 +148,7 @@ const isActive = (href: string) =>
             page must still read as leaving the menu. */}
         <span class="sabh-scrim" aria-hidden="true"></span>
         {navItems.map(n => (
-          <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
+          <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}${'mobileOnly' in n ? ' sabh-item-mobile' : ''}`}>
             <a
               href={n.href}
               class={`sabh-link${isActive(n.href) ? ' sabh-link-active' : ''}`}
@@ -209,7 +213,6 @@ const isActive = (href: string) =>
             )}
           </div>
         ))}
-        <div class="sabh-sheet-foot" aria-hidden="true">FREE · NO ACCOUNT<br />MADE IN MEDICINE HAT</div>
       </nav>
       {/* Same destinations and link treatment as the footer's CONTACT column:
           outside links open a new tab, and the mailto sits inside email_off so
@@ -418,7 +421,7 @@ const isActive = (href: string) =>
   }
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
-  .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count, .sabh-sub-back { display: none; }
+  .sabh-sheet-label, .sabh-link-count, .sabh-sub-back, .sabh-item-mobile { display: none; }
   /* Clipped to nothing until it has keyboard focus, then a small chevron
      beside its link. Never shown to the pointer, which has hover. */
   .sabh-menu-toggle {
@@ -480,8 +483,7 @@ const isActive = (href: string) =>
     .sabh-item { display: block; }
     .sabh[data-sub] .sabh-item:not([data-sub-open]),
     .sabh[data-sub] [data-sub-open] > .sabh-link,
-    .sabh[data-sub] .sabh-sheet-label,
-    .sabh[data-sub] .sabh-sheet-foot { display: none; }
+    .sabh[data-sub] .sabh-sheet-label { display: none; }
     .sabh[data-sub] [data-sub-open] .sabh-menu {
       display: block; position: static; opacity: 1; visibility: visible; transform: none;
       transition: none; background: transparent; border-top: 0; box-shadow: none;
@@ -531,11 +533,9 @@ const isActive = (href: string) =>
     .sabh[data-open] .sabh-logo,
     .sabh[data-open] .sabh-burger { position: relative; z-index: 3; }
 
-    .sabh-sheet-label {
-      display: block; font-family: var(--font-label); font-size: 12px;
-      letter-spacing: 0.06em; color: rgba(238, 241, 236, 0.62);
-      padding: 14px 0 6px; border-top: 1px solid rgba(238, 241, 236,0.18);
-    }
+    /* A rule under the bar, no "GO TO" eyebrow (critique 2026-09-23). */
+    .sabh-sheet-label { display: block; padding-top: 6px; border-top: 1px solid rgba(238, 241, 236,0.18); }
+    .sabh-item-mobile { display: block; }
     .sabh-link {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       min-height: 56px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
@@ -553,11 +553,6 @@ const isActive = (href: string) =>
     .sabh-link-count {
       display: inline-block; font-family: var(--font-label); font-size: 11px;
       color: rgba(238, 241, 236, 0.62);
-    }
-    .sabh-sheet-foot {
-      display: block; margin-top: 26px;
-      font-family: var(--font-label); font-size: 12px; letter-spacing: 0.06em;
-      color: rgba(238, 241, 236, 0.62); line-height: 1.6;
     }
   }
 </style>
