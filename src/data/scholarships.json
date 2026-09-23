@@ -58775,5 +58775,1576 @@
         "volunteer"
       ]
     }
+  },
+  {
+    "id": 1676,
+    "title": "Chestermere High School Awards",
+    "amount": "$50 to $300",
+    "deadline": null,
+    "audience": "Chestermere High School students in Grades 10 to 12",
+    "url": "https://chestermere.rockyview.ab.ca/download/465741",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Chestermere",
+    "notes": "There is nothing to apply for: teachers nominate students and the awards are handed out at the school's year-end ceremony. Academic awards need at least a 75% average, a student can win only one major award, and special projects, work experience and course challenges do not count.",
+    "active": true,
+    "description": "Chestermere High School's awards program recognizes students in every grade. The cash awards include the Highest Academic Achievement awards by grade ($300 in Grade 12, $200 in Grade 11), the Principal's Scholarship ($300), the Extra Mile award for a Grade 12 student ($250), the Debbie Berdusco Memorial Most Improved Student award ($200) and Outstanding Citizenship ($50). Most of the other forty or so awards, such as honour roll, subject, athletics, fine arts, music and culinary awards, are recognition rather than money.",
+    "metaDetail": "Teacher-nominated; no application.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [
+        "RVS"
+      ],
+      "specificSchools": [
+        "Chestermere High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1677,
+    "title": "Canmore Collegiate High School Scholarships and Awards",
+    "amount": "$50 to $2,500",
+    "deadline": null,
+    "audience": "Canmore Collegiate High School students, most of them graduating",
+    "url": "https://cchs.crps.ca/student-life/scholarships-and-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The school says the list is subject to change and asks students to go through its academic advisor for details and help with applications. Deadlines differ award by award.",
+    "active": true,
+    "description": "Canmore Collegiate lists about thirty-five local awards, most from Bow Valley businesses, clubs and families. The largest are the Town of Canmore Law Enforcement Bursary ($2,500) and $1,000 awards including the Peter and Catharine Whyte Fine Art Scholarship, the 3 Ski Areas Alpine Scholarship, the Bertram Dyck Leadership Bursary, the Mount Temple IODE Award and the Canmore Jam Music Scholarship. Others include the Collins Barrow Bow Valley scholarship ($750), Rotary scholarships for engineering, technical and nursing students ($500 each), the Soroptimist Leadership Award, the CUPE Local 4306 and Boilermakers bursaries, and Canmore Lions awards for Grades 9 to 11.",
+    "metaDetail": "About thirty-five awards, up to $2,500.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Canmore Collegiate High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1678,
+    "title": "Banff Community High School Graduation Awards",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Banff Community High School graduating students",
+    "url": "https://bchs.crps.ca/download/343934",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Most of these are chosen by the school and donors rather than applied for, and awards based only on final marks are given in mid-July, once blended Grade 12 marks are out. Several, including the IODE awards, are paid on proof of post-secondary registration.",
+    "active": true,
+    "description": "Banff Community High School presents about twenty donor awards to its graduates, including the Town of Banff Award for citizenship, the IODE's Tillie Knight Scholarship and Shirley Peatfield Bursary for students heading into family studies, social work or education, the Banff Legion scholarships for the top marks in English 30 and Social Studies 30, the Soroptimist and SI Banff awards for students who have overcome adversity, the Rotary Club of Banff Bursary, the Mineral Springs Hospital Medical Staff Award, and the PAUW! Caribou Awards at $1,000 each.",
+    "metaDetail": "About twenty awards for Banff graduates.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Banff Community High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1679,
+    "title": "F.P. Walshe High School Scholarships and Awards",
+    "amount": "$50 to $2,000",
+    "deadline": null,
+    "audience": "F.P. Walshe High School students and graduates in Fort Macleod",
+    "url": "https://www.fpwalsheschool.ca/download/332340",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "The school's scholarship guide was last updated in January 2021 and says funders can change criteria, amounts and dates at any time, so confirm each award with the school before you rely on it.",
+    "active": true,
+    "description": "F.P. Walshe's guide lists about thirty local awards for Fort Macleod students, from $50 to $2,000: the Alberta Lodge No. 3 Masons Higher Education Bursary ($2,000), the Fort Macleod Ladies Hospital Auxiliary Scholarship and Fort Macleod Junior Chambers Award ($1,000 each), the Livingstone Range award, the Gordon Elgin Scholarship ($750), the Town of Fort Macleod Leadership, Fish & Game, CUPE Local 2133 and valedictorian awards ($500), and awards for Kainai, Piikani and Blood Tribe students, including the Blood Tribe Chief & Council achievement award and the Trent Yellow Wings Scholarship.",
+    "metaDetail": "The guide dates from January 2021.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "F.P. Walshe High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1680,
+    "title": "R.F. Staples School Scholarships and Bursaries",
+    "amount": "$500 to $2,000",
+    "deadline": "2027-05-01",
+    "deadlineEstimated": true,
+    "audience": "R.F. Staples School students in Westlock heading to post-secondary",
+    "url": "https://www.rfstaples.ca/wp-content/uploads/sites/15/2026/02/Scholarships-2026.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The 2026 deadline to apply for all of these was May 1, 2026; the 2027 date here is rolled forward. The school weighs academics, school activities, community involvement, financial need and post-secondary plans in different combinations for each award.",
+    "active": true,
+    "description": "R.F. Staples lists over twenty local awards from $500 to $2,000, including eight $2,000 agricultural scholarships from Mile 14 Holdings, Titan Livestock and Schmidt Livestock, the Albert & Florence Miller Agricultural Scholarship, two ATA scholarships of $1,000 for future teachers, the Jim Shaffer Memorial Scholarship ($1,250), Westlock Rotary, Fire and Rescue and Healthcare Auxiliary scholarships, the United Nurses of Alberta Local 73 Scholarship and the Boston Pizza Entrepreneurial Spirit Award.",
+    "metaDetail": "Eight agricultural awards at $2,000.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "R.F. Staples School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1681,
+    "title": "John Maland High School and Devon Community Scholarships",
+    "amount": "Up to $1,000",
+    "deadline": "2027-06-19",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students at John Maland High School in Devon",
+    "url": "https://docs.google.com/document/d/1m3K3QJypvYpDP740yYD8LMug-RD7LkwfwkCRt6P-9oY/edit?usp=sharing",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Leduc",
+    "notes": "Print each application and hand in a hard copy at the school office. The 2026 deadline for all of them was Friday, June 19, 2026, except the Leduc County Bursary, which you apply for directly; the 2027 date here is rolled forward. Incomplete applications are not considered, and awards are handed out at the school's awards night in early October of the next school year.",
+    "active": true,
+    "description": "The Leduc County, Devon and John Maland scholarships that take an application, each chosen by its own committee: the Devon Lions Legacy Scholarship, the Devon Lions Community Service Awards and the Devon Royal Canadian Legion Bursaries ($1,000 each), the Neighbourhood Dental Scholarship ($1,000), the Linda Finlay Scholarship and the Devon History Book Scholarship. The school also gives honours, subject, service, fine arts, CTS and athletic awards at the same ceremony.",
+    "metaDetail": "Hard-copy applications at the school office.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "John Maland High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1682,
+    "title": "St. Paul Education Local Scholarships",
+    "amount": "$200 to $1,500",
+    "deadline": "2027-06-01",
+    "deadlineEstimated": true,
+    "audience": "Students of St. Paul Education schools, including St. Paul, Elk Point, Two Hills, Ashmont and Mallaig",
+    "url": "https://drive.google.com/uc?export=download&id=1SzQ27abuZ3cwDNXipjrQXmC87D-w80r9",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The division's 2026 booklet sorts every award by deadline: a few close in March to May, most in June 2026, and a few have none. The date here stands in for the June group and is not confirmed for 2027. Several awards are for one school only, marked in the booklet (FGM, SPRHS, EPOS, THS, Ashmont or Mallaig). Questions go to the scholarship coordinator at scholarships@sperd.ca.",
+    "active": true,
+    "description": "St. Paul Education's own booklet of about fifty local awards, from $200 to $1,500. It includes four County of St. Paul scholarships of $1,000 each for academic, agriculture, health care and trades students, the Sobeys and Empire and Maria Samoil-Marchak scholarships ($1,500), Tim Hortons, Lakeland Family Eyecare, Saik Insurance, St. Paul Fish & Game, Lions Club, Greg Flondra, Ruth Bateyko, E.H. Bjornstad and Steve Kuziw awards ($1,000), the JMD Accounting Scholarship for future CPAs, and local sports awards from minor hockey, karate and football.",
+    "metaDetail": null,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1683,
+    "title": "Crowsnest Consolidated High School Scholarships and Bursaries",
+    "amount": "$100 to $2,000",
+    "deadline": null,
+    "audience": "Crowsnest Consolidated High School students and graduates in Crowsnest Pass",
+    "url": "https://www.crowsnesthighschool.ca/students/awards-and-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Deadlines differ by award; several close May 1 or May 30, and some need proof of post-secondary registration before they are paid. The school's page gives each award's criteria and date.",
+    "active": true,
+    "description": "Crowsnest Consolidated lists about forty local awards, including the Shirley (Montalbetti) Wolfe Memorial Scholarship ($2,000), the Canadian Institute of Mining and Metallurgy Crowsnest Branch scholarships ($1,000 in first year and more in later years, plus a trades award), Dr. Kay Kerr, Joanne & Ed Drain, Eugene Fabro, Audrey Bonne, Dan Marcial and Eric & Wilma Prentice scholarships ($1,000), the Jerome Rejman leadership and Bruce Kutcher academic scholarships ($1,000), West Fraser forestry and general studies awards, Lions and CUPE awards, and subject bursaries from $100.",
+    "metaDetail": null,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Crowsnest Consolidated High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1684,
+    "title": "Daysland School Awards and Scholarships",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Daysland School high school students",
+    "url": "https://daysland.brsd.ab.ca/download/171555",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "The awards list comes from the school's 2018-2019 program guide, the latest the school has posted, so ask the school which are still given. Most are chosen by the school at spring exercises. For the Bill Campbell award, send a letter, proof of acceptance into education and financial need information to the principal or awards committee before September 10 of the year after you graduate.",
+    "active": true,
+    "description": "Daysland School awards Grade 12 subject scholarships in English, Math, Biology, Chemistry, Physics, Social Studies and French, the Top Grade 12 Academic Scholarship and the Robert Zwack Memorial Grade 12 Scholarship, the Lloyd Sather art and physical education scholarships, leadership, CTS, Green Certificate and athletics awards, and honours in every grade. Separately, the $500 W.E. Bill Campbell Scholarship goes to a Daysland graduate with financial need entering education at any University of Alberta campus.",
+    "metaDetail": "The school's list dates from 2018.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Daysland School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1685,
+    "title": "Cardston High School Scholarships and Awards",
+    "amount": "$100 to $5,000",
+    "deadline": null,
+    "audience": "Cardston High School students and graduates",
+    "url": "https://www.academicadvising.westwind.ab.ca/scholarships/local-scholarships/cardston-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Several are chosen by staff with no application (the ATA Valedictorian Award, Student of the Year, Atmosphere and M. Shaun Marshall awards); the E.J. Wood and others need one. Some forms on Westwind's page are still labelled 2023, so check the current version with academic advising.",
+    "active": true,
+    "description": "Cardston High School's local awards include the E.J. Wood Memorial Scholarships, up to $5,000 shared by two or more students for academic excellence, character and involvement; the Willard Brooks Family Memorial Scholarship ($1,000 each) for academics, athletics and need; the ATA Valedictorian Award ($500); Student of the Year ($400); the Teresa Bowers English and Social Studies awards; the Simpson Markinch Ranches, Shirley Gibb, Maggie Kronen citizenship, Chief Mountain Masonic Lodge and Legion Branch 170 scholarships; and the Blue & White Club's $500 citizenship and athlete scholarships.",
+    "metaDetail": "The E.J. Wood awards reach $5,000.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Cardston High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1686,
+    "title": "Consort School Awards and Scholarships",
+    "amount": "$50 to $500",
+    "deadline": null,
+    "audience": "Consort School students in Grades 10 to 12",
+    "url": "https://careerpathways.plrd.ab.ca/scholarships/school-specific-scholarships/consort-school-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Most school awards are chosen by staff. The community awards on the same page have their own dates, such as April 30 for the Coronation/Consort Victim Services Scholarship and June 1 for the Consort Agro Services Green Certificate awards and Inter Pipeline's Discovery Awards.",
+    "active": true,
+    "description": "Prairie Land's career site lists Consort School's awards: the Grade 12 Achievement Award, Legion Citizenship Award and Neutral Hills Academic Achievement Award ($500 each), the Energy and Academic/Citizenship scholarships ($300 and $250), Student of the Year ($250), the Patricia Bye Award of Excellence and Grade 11 Award of Excellence ($200), a senior leadership award, merit and achievement awards for every grade, and two $500 Consort Lions Club awards for students entering a certificate, diploma or apprenticeship, with preference to technical and trades training.",
+    "metaDetail": "School and community awards together.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Consort School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1687,
+    "title": "Delia School Awards and Scholarships",
+    "amount": "$200 to $1,000",
+    "deadline": "2027-06-15",
+    "deadlineEstimated": true,
+    "audience": "Delia School students and graduates",
+    "url": "https://careerpathways.plrd.ab.ca/scholarships/school-specific-scholarships/delia-school-awards",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Dates differ: the BluEarth Renewables Hand Hills Wind Scholarship is due June 15 to the Delia School career rep, the Delia & District Ag Society scholarships July 15 (one generic form, one scholarship per applicant), and the Charlie Fielding Memorial Bursary July 31. The date here is the earliest of those and is an estimate for 2027.",
+    "active": true,
+    "description": "Delia School students can apply for the Delia & District Ag Society scholarships (four at $500 plus the $500 Art Hoover Memorial Scholarship for agriculture studies, open to Delia graduates in full-time post-secondary), two Delia Elks scholarships of up to $1,000, and the BluEarth Renewables Hand Hills Wind Scholarship for students heading into renewable energy or sustainability. The school also gives the Dr. E.F. Todd matriculation and science awards, chosen by the Delia and Morrin principals, the Ed Remfert Motivational Achievement Award, valedictorian awards and the $200 Penny Deugo Memorial Scholarship.",
+    "metaDetail": "Ag Society, Elks and wind-farm awards.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Delia School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1688,
+    "title": "Beiseker Community School Scholarships and Awards",
+    "amount": "$150 to $500",
+    "deadline": null,
+    "audience": "Beiseker Community School students in Grades 11 and 12",
+    "url": "https://beiseker.rockyview.ab.ca/learning/student-supports/graduation",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Most of these are chosen by the school and its scholarship committee rather than applied for; the J.H. Schmaltz Memorial Leadership Award is the one that needs an application, due by June 30 of your Grade 12 year. The page gives no year for its dates, so ask the office which awards are still offered.",
+    "active": true,
+    "description": "Beiseker Community School gives a set of local awards at graduation: the J.H. Schmaltz Memorial Leadership Award ($500), the Kathyrn Beiseker Scholarship Committee Grade 12 Award ($500, best four Grade 12 marks with English 30-1 at 65% or more), the J.G. Schissel Memorial Scholarship ($500, for a graduate with a 70% average and formal music training), the Geysler Memorial ($500, which can recognize a RAP fabrication student), the Beiseker Lions Scholarship ($500, for a Grade 11 student), two Beiseker & District Agricultural Society scholarships ($250 each, for agriculture programs), and the staff Grade 11 and Grade 12 scholarships and outstanding athlete awards ($150 each).",
+    "metaDetail": "Seven local awards, most chosen by the school.",
+    "eligibility": {
+      "grades": [
+        "11",
+        "12"
+      ],
+      "schoolBoards": [
+        "RVS"
+      ],
+      "specificSchools": [
+        "Beiseker Community School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1689,
+    "title": "Bow Valley High School Committee Scholarships",
+    "amount": "$250 to $2,500",
+    "deadline": "2027-04-01",
+    "deadlineEstimated": true,
+    "audience": "Grade 12 students at Bow Valley High School in Cochrane",
+    "url": "https://bowvalley.rockyview.ab.ca/download/540287",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "One application, posted on the Grad Google Classroom in February, puts you forward for the committee's awards; in 2026 it was due April 1. The 2027 date here is rolled forward and not confirmed. The Mike Bigland scholarship is applied for through Cochrane Minor Hockey, not the school.",
+    "active": true,
+    "description": "Bow Valley High School's scholarship committee picks or nominates Grade 12 students for local awards, including Bobcat Brilliance ($500, for responsibility, respect and resilience rather than marks), Bow Valley Class Act ($500, for a well-rounded ambassador), the Lindsay Leigh Kimmett Valedictorian Award ($1,000), the Canadian Association of Principals Student Leadership Award ($250) and nominations to the Kirpal Kaur Dhindsa Memorial Scholarship ($1,000, need due to financial, emotional, physical or educational hardship). The directory also lists the Mike Bigland Memorial Scholarship ($2,500) for Cochrane Minor Hockey players and officials.",
+    "metaDetail": "One committee application covers several awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "RVS"
+      ],
+      "specificSchools": [
+        "Bow Valley High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1690,
+    "title": "Aspen View Public Schools Grade 12 Academic Award",
+    "amount": "$300 to $500",
+    "deadline": null,
+    "audience": "Grade 12 graduates of Aspen View Public Schools",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "No application: the school sends the list of qualifying students to the division, and the cheque comes with a letter from your trustee at the school's awards ceremony. The rules come from the division's June 2021 procedure, reprinted in Boyle School's current awards package.",
+    "active": true,
+    "description": "Every Aspen View Public Schools Grade 12 student with an average of 80% or more gets $300, and 90% or more gets $500. The average uses your best Grade 12 marks across at least 25 credits, including five in English, taken at a division school; Special Projects and Work Experience do not count, and you must finish your diploma by June.",
+    "metaDetail": "Automatic at 80% or 90%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1691,
+    "title": "Boyle School Parents Advisory Award",
+    "amount": "$500",
+    "deadline": "2027-04-30",
+    "audience": "Graduating students at Boyle School",
+    "url": "https://boyle.aspenview.org/download/552962",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Due April 30 each year by email, by mail to the Parents Advisory in Boyle, or at the school's front office. You do not need to be enrolled in post-secondary to receive it.",
+    "active": true,
+    "description": "A $500 award from the Boyle School Parents Advisory for one graduate in good standing who has been a positive member of the school, for example by volunteering at school events, helping teachers or classmates, or being a good role model. You write up to 500 words about how you have contributed and include two reference letters, which can come from staff, classmates or someone in the community.",
+    "metaDetail": "No post-secondary enrolment needed.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Boyle School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1692,
+    "title": "Eckville Junior/Senior High School Awards and Scholarships",
+    "amount": "$100 to $1,855",
+    "deadline": null,
+    "audience": "Eckville Junior/Senior High School students and graduates",
+    "url": "https://ehs.wolfcreek.ab.ca/students/grad",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Most school awards are chosen by staff; the Kayden Waisanen scholarship needs a letter of intent and proof of enrolment, and the family set it up in 2022 as a five-year award, so check that it is still running. Some dates on the page are from earlier years.",
+    "active": true,
+    "description": "Eckville's grad page lists the school's own awards: $100 Top Academic ACES Awards in each grade, the $100 Principal's List for averages over 90%, pay for diploma exam marks of 80% or more, the $500 Co-op Scholarship for business or agriculture, the Aces Canteen Scholarship for volunteering in the school, the valedictorian award, the Eckford Trophy from the Town of Eckville, and the $1,855 Kayden Waisanen Memorial Scholarship for a graduate going into an agriculture or animal-based program.",
+    "metaDetail": "Diploma exam marks of 80% or more pay cash.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Eckville Junior/Senior High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1693,
+    "title": "Twice Nice Student Award",
+    "amount": "$2,000",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students with financial need",
+    "url": "https://forestburg.brsd.ab.ca/download/560780",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Applications go to the Forestburg School office by 3:30 pm on the last instructional day of high school classes. You then have 12 months from the awards ceremony to show an acceptance letter and claim the money from Twice Nice in Killam.",
+    "active": true,
+    "description": "A $2,000 award from Twice Nice in Killam for a Forestburg School graduate going on to post-secondary, including a trade ticket, diploma or degree, who shows consistent effort and good character and has the greatest financial need. You write a typed essay of one to one and a half pages that speaks to your maturity and financial need.",
+    "metaDetail": "Essay should speak to maturity and need.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1694,
+    "title": "David C. Jahns Memorial Award",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students heading to post-secondary",
+    "url": "https://forestburg.brsd.ab.ca/download/267092",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Applications go to the Forestburg School office by 3:30 pm on the last instructional day of high school classes, with a typed essay of one to one and a half pages.",
+    "active": true,
+    "description": "A $500 award from the Forestburg Community Enhancement Fund for a Forestburg School graduate who has applied to or been accepted at a post-secondary school. Preference runs in order: biomedical engineering technology, electronics engineering technology, diagnostic imaging, a career in medicine or medical research such as nursing or physiotherapy, a Bachelor of Science, and then any deserving student.",
+    "metaDetail": "Biomedical technology students come first.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "health",
+        "STEM"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1695,
+    "title": "Cody Neufeld Memorial Legacy Award",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Graduating Forestburg School students",
+    "url": "https://forestburg.brsd.ab.ca/download/517381",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Essays are due before the last day of school in June, and the award is paid within a year once you enrol. Marks are not the deciding factor.",
+    "active": true,
+    "description": "A $500 award from J&L Hays Welding in memory of Cody Neufeld, for Forestburg School graduates going into any post-secondary program; more than one may be given each year. You write an essay on your impact on your community and school, and preference goes to members of the volunteer Forestburg Fire Department.",
+    "metaDetail": "Fire department volunteers get preference.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1696,
+    "title": "Forestburg School Community Awards",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Forestburg School students and graduates",
+    "url": "https://forestburg.brsd.ab.ca/download/267089",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Each award has its own form on the school's site, due at the office by 3:30 pm on the last instructional day of high school classes, usually with a typed essay and proof of conditional acceptance. The link here is the Curtain Call form; the others are on the same school awards page.",
+    "active": true,
+    "description": "Forestburg School's smaller community awards, with values that change each year: the Curtain Call Community Theatre Award for fine arts, the Donna Bish Oberg Award for education students, the Galahad Lions and Galahad Agricultural Society Award for agriculture programs, the Hastings Coulee 4H Beef Club Award for 4-H members, the Jim Lorrain Memorial Award for one student in each of Grades 10 to 12 with a 70% average, sports and volunteering, and the staff's Falcon Excellence Award.",
+    "metaDetail": "Theatre, teaching, farming and 4-H awards.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Forestburg School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1697,
+    "title": "Margarethe Banack Memorial Award for Volunteerism",
+    "amount": "$500",
+    "deadline": "2027-07-31",
+    "audience": "Bawlf School students in Grades 10 to 12",
+    "url": "https://bawlf.brsd.ab.ca/download/170631",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Camrose",
+    "notes": "Postmarked by July 31 each year, mailed to the family contact in Bawlf named on the form. You can apply in each of your three high school years.",
+    "active": true,
+    "description": "A $500 award given each year for volunteering, open to any Bawlf School student in Grades 10, 11 or 12. You write 500 to 750 words on what volunteering means to you, how it helps the people you serve and what you have done, with two references, at least one of whom can confirm your volunteer work.",
+    "metaDetail": "Grade 10 and 11 students can apply too.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bawlf School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1698,
+    "title": "Pembina Hills Grade 12 Citizenship Award",
+    "amount": "$500",
+    "deadline": null,
+    "audience": "Grade 12 students at Pembina Hills high schools",
+    "url": "https://www.pembinahills.ca/schools-programs/student-citizenship-awards/",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Apply online or on paper; the division says to check your school handbook or ask your principal for the deadline. Each school's selection committee picks its winners, and a trustee presents the award at the school's ceremony.",
+    "active": true,
+    "description": "Pembina Hills School Division gives nine $500 citizenship awards to Grade 12 students each year: two at Barrhead Composite, two at R.F. Staples, two for Vista Virtual School primary students, and one each at Barrhead Outreach, Swan Hills School and Westlock Outreach. Your application shows how you meet at least three criteria such as responsibility, helping others, honesty, kindness and dependability.",
+    "metaDetail": "Nine awards across six schools.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Barrhead Composite High School",
+        "R.F. Staples Secondary School",
+        "Swan Hills School",
+        "Vista Virtual School",
+        "Barrhead Outreach School",
+        "Westlock Outreach School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1699,
+    "title": "Didsbury High School Scholarship Fund Society Scholarships",
+    "amount": "Varies",
+    "deadline": "2027-04-27",
+    "deadlineEstimated": true,
+    "audience": "Graduating students at Didsbury High School",
+    "url": "https://www.didsburyhigh.ca/download/549396",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The 2026 form was due Monday, April 27 at 3:30 pm at the school office, with no late applications; the 2027 date is an estimate. Letters from relatives, school staff or classmates are not accepted, and you have two years to show enrolment and claim the money.",
+    "active": true,
+    "description": "One Didsbury High School application puts you in front of a selection committee for the school's scholarship funds. You need a 65% average on the listed Grade 11 and 12 courses, a personal letter of up to two pages on financial need, school and community involvement, marks and citizenship, two sealed letters of recommendation and the division's direct deposit form.",
+    "metaDetail": "Needs a 65% average and two sealed letters.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "CESD"
+      ],
+      "specificSchools": [
+        "Didsbury High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": 65,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1700,
+    "title": "Bassano Agricultural Society Scholarship",
+    "amount": "$1,500",
+    "deadline": "2027-04-30",
+    "audience": "Bassano School graduates entering agriculture programs",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "Due April 30 each year. The cheque goes to your school once you tell the society where you have enrolled full time.",
+    "active": true,
+    "description": "One $1,500 scholarship each year from the Bassano Agricultural Society for a Bassano School graduate entering a full-time agriculture program at an accredited post-secondary school. You need passing marks and should show involvement in your school, your community and agricultural activities.",
+    "metaDetail": null,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bassano School"
+      ],
+      "targetInstitutions": [],
+      "fields": [
+        "agriculture"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1701,
+    "title": "Ellen E. Thompson Scholarship",
+    "amount": "$3,000",
+    "deadline": "2027-06-01",
+    "audience": "Grasslands Public Schools graduates with financial need",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "Applications go to the Grasslands central office by June 1, and winners hear by June 30. The form is in the Bassano School scholarship handbook; other Grasslands high schools can tell you where to get it.",
+    "active": true,
+    "description": "Two $3,000 scholarships each year for Grasslands Public Schools graduates going to a recognized post-secondary school. Financial need is the main test, judged the way Alberta student aid does it: your family's last two tax returns, the number of dependent children and how many are already in post-secondary.",
+    "metaDetail": null,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1702,
+    "title": "John Wass Smidstrup Scholarship",
+    "amount": "$1,000",
+    "deadline": null,
+    "audience": "Grade 12 graduates of County of Newell high schools",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "No application: the award goes on marks and is given in the fall after graduation.",
+    "active": true,
+    "description": "Two $1,000 scholarships each year, one to a male and one to a female graduate of a County of Newell high school, for the highest average (blended marks for diploma courses) across five subjects from the award's list. Both winners must be going on to a recognized post-secondary school.",
+    "metaDetail": "Awarded on your best five subjects.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1703,
+    "title": "James Nesbitt Sr. Memorial Scholarship for Journalism",
+    "amount": "$500",
+    "deadline": "2027-06-01",
+    "audience": "Grasslands Public Schools graduates studying journalism, communications or English",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "Due June 1. The Bassano School handbook lists it with the Grasslands division awards.",
+    "active": true,
+    "description": "One $500 scholarship each year for a Grasslands Public Schools graduate going into journalism, communications or English, with at least a 70% average in Grade 12 courses.",
+    "metaDetail": null,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [
+        "Journalism",
+        "Communications"
+      ],
+      "minAverage": 70,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1704,
+    "title": "Bassano School SRC and Pursuit of the Trades Awards",
+    "amount": "$200",
+    "deadline": "2027-05-01",
+    "audience": "Bassano School graduates",
+    "url": "https://files-backend.assets.thrillshare.ca/documents/asset/uploaded_file/1000013/Bassano/6431bdbe-1978-4814-a8bd-f2e24fe5fd66/Bassano_Scholarship_Handbook_2025-2026.pdf?disposition=inline",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Brooks",
+    "notes": "Both are due May 1 with a letter of application, mailed or delivered to Bassano School. The handbook also lists the $200 Creative Screen Arts trades award on the same terms.",
+    "active": true,
+    "description": "Two $200 awards for Bassano School graduates. The Students' Representative Council award goes to a graduate who led student activities and is registered in post-secondary. The Pursuit of the Trades Scholarship goes to a graduate entering a trades program of two years or less or any apprenticeship, judged on overall performance rather than marks alone.",
+    "metaDetail": "Apprentices qualify for the trades award.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bassano School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1705,
+    "title": "Glen Keeley Memorial Scholarship",
+    "amount": "$2,000",
+    "deadline": "2027-07-15",
+    "deadlineEstimated": true,
+    "audience": "Students who attended school in Claresholm, Stavely or Nanton",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The school lists the deadline only as mid to end of July, so the date here is an estimate; confirm it with Willow Creek Composite High School.",
+    "active": true,
+    "description": "Four $2,000 scholarships for Canadian citizens living in Alberta who attended school in Claresholm, Stavely or Nanton for at least a year and are registered at any post-secondary school, including technical and trade schools. You need good standing in Grade 12 or your last post-secondary year, plus leadership, community spirit and extracurricular involvement.",
+    "metaDetail": "Four awards; one year in Claresholm, Stavely or Nanton.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "canadian",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1706,
+    "title": "Carmangay Lions Club Legacy Scholarship",
+    "amount": "$500",
+    "deadline": "2027-09-15",
+    "audience": "Graduates living in the Carmangay area",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Due September 15, after graduation. Willow Creek Composite High School lists it with its fall scholarships.",
+    "active": true,
+    "description": "A $500 scholarship for a student who lives in the Carmangay area when they finish high school and is registered at a post-secondary school. You describe your community service, volunteering and leadership.",
+    "metaDetail": "Applied for in the fall after graduation.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1707,
+    "title": "Willow Creek Composite High School Staff-Selected Awards",
+    "amount": "$100 to $1,000",
+    "deadline": null,
+    "audience": "Graduating students at Willow Creek Composite High School in Claresholm",
+    "url": "https://www.willowcreekhighschool.ca/download/556820",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "No application: school staff choose the recipients.",
+    "active": true,
+    "description": "Willow Creek Composite's staff pick the winners of its own awards: the Jim and Mertie Chilton Science Award (about $1,000, highest average across the sciences from Grade 10 to 12), two Amy Berg Jennings Awards ($500, for balancing marks, school involvement and community service), the Grad Imagine Award ($500, graduation committee), six Kinsmen and Kinette Humanities Awards ($150 to $300, top English and social studies averages), the Independent Order of Odd Fellows Stavely award ($400) and the Graham Boyle Award ($100, Biology 30 and Physical Education 30).",
+    "metaDetail": "Chosen by staff; no forms.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Willow Creek Composite High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1708,
+    "title": "Sebastian M. Aninger Scholarship",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "Grade 12 graduates of County Central High School in Vulcan",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Apply in writing to the principal of County Central High School by May 1, naming the scholarship, with your Grade 12 marks and proof of post-secondary attendance when you have it. The value is approximate and comes from a fund.",
+    "active": true,
+    "description": "About $500 for the best all-around student in County Central High School's graduating class: above average in every Grade 12 course and active in two of sports, drama, yearbook, the students' union or community groups such as Scouts or 4-H. Students continuing their education get extra consideration.",
+    "metaDetail": null,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1709,
+    "title": "Mr. and Mrs. E.R. Finckh Scholarship Fund",
+    "amount": "$500",
+    "deadline": "2027-05-01",
+    "audience": "County Central High School graduates going to university",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Apply in writing to the principal of County Central High School by May 1, with your Grade 12 marks and proof of registration. The value is approximate.",
+    "active": true,
+    "description": "About $500 for a County Central High School graduate registered at a university. Among students judged eligible on need, it goes to the highest diploma exam average, and you should show good character, sportsmanship, citizenship and contributions to school and community life.",
+    "metaDetail": null,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1710,
+    "title": "Ware & Lewis Memorial Scholarship",
+    "amount": "$150",
+    "deadline": "2027-05-01",
+    "audience": "County Central High School graduates heading into the humanities",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Apply in writing to the principal of County Central High School by May 1, with your marks, proof of acceptance and the essay. The value is approximate.",
+    "active": true,
+    "description": "About $150 for a County Central High School graduate who attended the school for the past two years and is pursuing a career in the humanities. You write an essay of at least 1,000 words on a significant event or development in the history of southern Alberta.",
+    "metaDetail": null,
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "writing"
+      ]
+    }
+  },
+  {
+    "id": 1711,
+    "title": "Herbert H. Mumby Memorial Scholarship",
+    "amount": "$35",
+    "deadline": "2027-05-01",
+    "audience": "Top Grade 12 students at County Central High School",
+    "url": "https://www.countycentral.ca/download/447122",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "Apply in writing to the principal of County Central High School by May 1. The scholarship is currently worth about $35.",
+    "active": true,
+    "description": "Two small scholarships, one to a female and one to a male student, for the highest average in six five-credit Grade 12 subjects taken at County Central High School in one year. Recipients must be continuing their education.",
+    "metaDetail": "Best six Grade 12 subjects in one year.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "County Central High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1712,
+    "title": "Bentley School Awards and Scholarships",
+    "amount": "$100 to $500",
+    "deadline": null,
+    "audience": "Bentley School high school students",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/bentley-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "Most are chosen by the school. Wolf Creek's division scholarships and the Sylvan Lake Rotary Club Scholarship listed on the same page have their own listings.",
+    "active": true,
+    "description": "Bentley School's own awards include the Bentley Ag Society Scholarship ($500, for a student in post-secondary agriculture), two Joslyn Snow scholarships ($500 each, for students who live out the school's motto), outstanding athlete and leadership awards ($200 each) and $100 subject awards for the top marks in English, social studies, math, biology, chemistry, physics and science at the 30 level.",
+    "metaDetail": "Ag, leadership, athlete and subject awards.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Bentley School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1713,
+    "title": "Alix-MAC School Scholarship",
+    "amount": "Varies",
+    "deadline": "2027-05-15",
+    "audience": "Alix-MAC School students",
+    "url": "https://www.wolfcreek.ab.ca/students-families/scholarships/alix-mac-scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lacombe",
+    "notes": "Apply by May 15. The Alix Agricultural Society, Alix Lions and Alix Legion scholarships on the same page have their own listings.",
+    "active": true,
+    "description": "Alix-MAC School's own scholarship for students who have volunteered beyond what was asked of them, taking on extra duties to help others and make the school better for everyone.",
+    "metaDetail": "For volunteering inside the school.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Alix-MAC School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1714,
+    "title": "Delburne Centralized School Awards",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Delburne Centralized School high school students",
+    "url": "https://www.delburneschool.ca/download/531650",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Red Deer",
+    "notes": "The handbook names the awards but not their values. Awards night is held each September for the previous year, and Grade 12 awards are also presented at commencement.",
+    "active": true,
+    "description": "Delburne Centralized School presents the Delburne Elks Trade/Agriculture Award, the Delburne Ardley Branch #142 Remembrance Scholarship and the Maxson Scholarship, along with dedication awards, top student awards, Grade 12 subject awards, the highest matriculation award, athlete of the year awards and the best all-around student award.",
+    "metaDetail": "Elks, Legion and Maxson awards.",
+    "eligibility": {
+      "grades": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [
+        "CESD"
+      ],
+      "specificSchools": [
+        "Delburne Centralized School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1715,
+    "title": "Cremona School Local Scholarships",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Cremona School graduates",
+    "url": "https://www.cremonaschool.ca/programs/graduation/scholarships",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The school's page names the awards but gives no values or dates, so ask the office for the current forms.",
+    "active": true,
+    "description": "Cremona School's local awards include the Cremona Legion Branch scholarship, the Modern Woodmen award for the highest Math 30-1 mark, Lions volunteerism and top English 30-2 and Social 30-2 awards, the Cremona Library Sandra Herbert Scholarship, Small Town Big Dreams (top marks in three of chemistry, biology, physics and social studies), the Sundre Hospital Auxiliary Society Award for health care programs and the Trey Purdie Memorial Scholarship.",
+    "metaDetail": "Legion, Lions, library and hospital auxiliary awards; ask the office for forms.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [
+        "CESD"
+      ],
+      "specificSchools": [
+        "Cremona School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
