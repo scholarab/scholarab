@@ -531,6 +531,8 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 .sabl-chip-link:hover .sabl-chip-count { color: rgba(20, 25, 21, 0.7); }
 
 .sabl-filters { display: flex; flex-direction: column; gap: 12px; padding: 20px 0 0; }
+/* Phone-only controls; the media block below turns them on. */
+.sabl-scope-select, .sabl-filters-done { display: none; }
 .sabl-filter-row { display: flex; align-items: center; gap: 8px; }
 
 /* One row per filter, always.
@@ -743,6 +745,21 @@ html:not(.js) .sabl-lean { display: none; }
   .sabl-filters-n[hidden] { display: none; }
   html.js:not([data-filters]) .sabl-toolbar .sabl-sort,
   html.js:not([data-filters]) .sabl-rail { display: none; }
+  /* WHERE YOU LIVE is a picker here, not 27 chips. The picker navigates by
+     script, so without it the chips stay. */
+  html.js .sabl-scope-chips { display: none; }
+  html.js .sabl-scope-select {
+    display: block; width: 100%; min-height: 44px; padding: 0 14px;
+    font: 600 15px var(--font-body); color: var(--text-primary);
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 12px;
+  }
+  /* The panel's exit, pinned to the bottom of the screen while it is open. */
+  html.js[data-filters] .sabl-filters-done {
+    display: block; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 3;
+    width: 100%; min-height: 50px; margin: 18px 0 8px; border: 0; border-radius: 100px;
+    background: var(--text-primary); color: var(--paper); font: 700 15.5px var(--font-body); cursor: pointer;
+    box-shadow: 0 8px 20px -8px rgba(20,25,21,0.45);
+  }
   /* Inside the fold the rows wrap instead of scrolling sideways: a clipped
      row gave no sign there were more chips past the edge, and the fold has
      the height to spare. */

@@ -74,9 +74,12 @@ const chipSource = allItems;
 // reader crossing the row twice finds the chip where they left it.
 const regionFacets = SCHOLARSHIP_FACETS
   .filter(f => f.kind === 'region' && facetItems(f, chipSource).length >= MIN_FACET_ITEMS);
+// The two broad scopes first, then the towns A to Z. Biggest-first put Brooks
+// somewhere in the middle of 27 chips, and a student looks for their town by
+// name, not by how many awards it has.
 const regionChips = regionFacets
-  .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, chipSource).length }))
-  .sort((a, b) => b.count - a.count);
+  .map(f => ({ slug: f.slug, label: f.label, count: facetItems(f, chipSource).length, broad: !!f.broad }))
+  .sort((a, b) => Number(b.broad) - Number(a.broad) || (a.broad ? b.count - a.count : a.label.localeCompare(b.label)));
 // Which hubs a row belongs to, by the hubs' own test (facetMatches counts
 // alsoOpenTo, which the client's regionMatches does not), so the client can
 // recount the SCOPE row under the live filters with the hub's own arithmetic.
@@ -244,7 +247,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
   <div class="sabl-filters sabl-filters-dense">
     {!hideCategories && (
       <div class="sabl-filter-row">
-        <span class="sabl-mono sabl-row-label">TRACK</span>
+        <span class="sabl-mono sabl-row-label">TYPE</span>
         <div class="sabl-chips">
             <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
             {categories.map(c => (
@@ -255,8 +258,14 @@ const soonLine = totalOpen > 0 && totalSoon > 0
     )}
     {!hideScopes && (
       <div class="sabl-filter-row sabl-filter-row-wrap">
-        <span class="sabl-mono sabl-row-label">SCOPE</span>
-        <div class="sabl-chips sabl-chips-wrap">
+        <span class="sabl-mono sabl-row-label">WHERE YOU LIVE</span>
+        {/* Phones: one native picker instead of 27 chips. Each option goes
+            to the same hub its chip does, filters included (afterCounts). */}
+        <select class="sabl-scope-select" data-scope-select aria-label="Where you live">
+          <option value="">Anywhere ({items.length})</option>
+          {regionChips.map(c => <option value={c.slug}>{c.label} ({c.count})</option>)}
+        </select>
+        <div class="sabl-chips sabl-chips-wrap sabl-scope-chips">
           <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
           {regionChips.map(c => (
             <a href={`/scholarships/${c.slug}/`} class="sabl-chip sabl-chip-link" data-scope={c.slug}>
@@ -283,6 +292,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       cards simply stop existing -- so the line stays as a polite live region.
       role="status" is implicitly atomic, which is right: it is replaced
       wholesale on every keystroke, not appended to. */}
+  <button type="button" class="sabl-filters-done" data-dir-filters-done>Show results</button>
   </aside>
 
   <div class="sabl-col">
@@ -491,6 +501,12 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       if (state.status !== 'all') qs.set('status', state.status);
       if (query) qs.set('q', query);
       const tail = qs.toString() ? `?${qs}` : '';
+      const select = root.querySelector<HTMLSelectElement>('[data-scope-select]');
+      select?.querySelectorAll('option').forEach(o => {
+        if (!o.value) return;
+        const label = o.textContent!.replace(/ \(\d+\)$/, '');
+        o.textContent = `${label} (${counts.get(o.value) ?? 0})`;
+      });
       links.forEach(a => {
         const n = counts.get(a.dataset.scope!) ?? 0;
         const slot = a.querySelector('.sabl-chip-count');
@@ -542,6 +558,15 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       }
     },
 
+  });
+
+  // The phone picker goes where the matching chip goes; afterCounts keeps that
+  // href carrying the live filters, so the hub opens on the number shown.
+  document.addEventListener('change', e => {
+    const select = (e.target as Element | null)?.closest?.<HTMLSelectElement>('[data-scope-select]');
+    if (!select?.value) return;
+    const link = document.querySelector<HTMLAnchorElement>(`#sab-scholarships a[data-scope="${select.value}"]`);
+    if (link) location.assign(link.href);
   });
 
   // Outbound apply clicks are an analytics event (same as the old React list)

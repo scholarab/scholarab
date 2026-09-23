@@ -374,6 +374,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       chip.classList.toggle('is-empty', n === 0 && !chip.classList.contains('on'));
     });
     config.afterCounts?.(root, searched, state, q, ctx);
+    root.querySelectorAll<HTMLElement>('[data-dir-filters-done]').forEach(b => {
+      b.textContent = visible.length === 0 ? 'No results. Change a filter'
+        : `Show ${visible.length} result${visible.length === 1 ? '' : 's'}`;
+    });
 
     const empty = root.querySelector<HTMLElement>('[data-dir-empty]');
     if (empty) empty.hidden = visible.length > 0;
@@ -481,6 +485,15 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     if (t.closest('[data-dir-filters]')) {
       setFiltersOpen(!document.documentElement.hasAttribute('data-filters'));
+      return;
+    }
+
+    // The phone panel's way out: fold it and land on the list it just shaped.
+    // Inline, the results changed about 1,000px below the chip being tapped.
+    if (t.closest('[data-dir-filters-done]')) {
+      setFiltersOpen(false);
+      root.querySelector<HTMLElement>('[data-dir-grid], [data-dir-empty]:not([hidden])')
+        ?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       return;
     }
 

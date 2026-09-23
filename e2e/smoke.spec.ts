@@ -170,8 +170,8 @@ test('every scholarship hub links to every other hub of its kind', async ({ page
       );
       expect(links, `${path} does not link to itself`).not.toContain(path);
       expect(links, `${path} links back to the directory`).toContain('/scholarships/');
-      // SCOPE is gone from the rail; TRACK and STATUS are what is left.
-      await expect(page.locator('.sabl-row-label', { hasText: /^SCOPE$/ })).toHaveCount(0);
+      // WHERE YOU LIVE (was SCOPE) is gone from the rail; TYPE and STATUS are what is left.
+      await expect(page.locator('.sabl-row-label', { hasText: /^WHERE YOU LIVE$/ })).toHaveCount(0);
     }
   }
 });
