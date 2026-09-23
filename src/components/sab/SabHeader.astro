@@ -631,6 +631,15 @@ const isActive = (href: string) =>
     syncDrop();
   }
 
+  // Tells the page a dropdown opened or closed. The blur under an open panel
+  // is recomputed for every frame of whatever moves beneath it, and the home
+  // film is 30 frames a second of exactly that: measured in Chrome, 8 to 10
+  // times the GPU work of the closed menu, against none at all over a still
+  // page. The film listens and holds while a panel covers it.
+  function announceMenu(open: boolean) {
+    document.dispatchEvent(new CustomEvent('sab:menu', { detail: { open } }));
+  }
+
   // Sizes the shared background to whichever panel is open. Opening from
   // closed takes the height at once and fades in; a switch between panels
   // animates the height, so the background itself never closes.
@@ -639,10 +648,12 @@ const isActive = (href: string) =>
     if (!drop) return;
     const panel = header!.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open] .sabh-menu');
     if (!panel) {
+      if (drop.hasAttribute('data-on')) announceMenu(false);
       drop.removeAttribute('data-on');
       return;
     }
     const first = !drop.hasAttribute('data-on');
+    if (first) announceMenu(true);
     const scrim = header!.querySelector<HTMLElement>('.sabh-scrim');
     if (scrim && first) scrim.style.top = `${header!.querySelector('.sabh-nav')!.getBoundingClientRect().bottom}px`;
     drop.toggleAttribute('data-snap', first);

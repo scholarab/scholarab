@@ -295,3 +295,22 @@ test('home scope carousel links every card to its hub and steps with the arrows'
   await expect.poll(() => track.evaluate(el => Math.round(el.scrollLeft))).toBe(step);
   await expect(page.locator('[data-scopes-prev]')).toBeVisible();
 });
+
+// The blur under an open dropdown is recomputed for every frame of whatever
+// moves beneath it, so the home film holds while a panel is open (measured:
+// 8 to 10 times the GPU work of the closed menu with the film running, none
+// with it held) and resumes when the panel closes.
+test('home film holds while a header dropdown is open', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'the film is behind the desktop dropdown');
+  await page.goto('/');
+  const playing = () => page.evaluate(() => [...document.querySelectorAll('video')].filter(v => !v.paused).length);
+  await expect.poll(playing, { timeout: 15000 }).toBeGreaterThan(0);
+  await page.locator('.sabh-has-menu .sabh-link').first().hover();
+  await expect(page.locator('.sabh-drop')).toHaveAttribute('data-on', '');
+  await expect.poll(playing).toBe(0);
+  await page.locator('.sabh-has-menu .sabh-link').nth(1).hover();
+  await expect.poll(playing).toBe(0);
+  await page.mouse.move(700, 850);
+  await expect(page.locator('.sabh-drop')).not.toHaveAttribute('data-on', '');
+  await expect.poll(playing).toBe(1);
+});

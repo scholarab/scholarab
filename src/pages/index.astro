@@ -621,6 +621,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     let ext = a.canPlayType('video/mp4; codecs="hvc1.1.6.L120.90"') ? '.hevc.mp4' : '.mp4';
     const src = (n: number) => `/video/hero/${HERO_CLIPS[n % HERO_CLIPS.length]}${cut}${ext}`;
     const load = (v: HTMLVideoElement, n: number) => { v.preload = 'auto'; v.src = src(n); v.load(); };
+    // Held while a header dropdown is open: the blur over the page would
+    // otherwise be recomputed for every frame of the film (see SabHeader).
+    let held = false;
     // A rejected play() leaves the poster up and the film reads as stopped
     // rather than absent, so a refusal is retried once the clip is decodable
     // and again on the visitor's first touch. iOS refuses the first call while
@@ -628,6 +631,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     // where the poster is the honest end state.
     const start = (v: HTMLVideoElement) => {
       if (v.currentTime) v.currentTime = 0;
+      if (held) return;
       v.play().then(() => v.classList.add('is-on')).catch(() => {
         if (v !== vids[cur]) return;
         const again = () => {
@@ -667,8 +671,16 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     // Backgrounding the tab pauses the clip, and nothing resumes it on the way
     // back: the film sits on a still frame and reads as broken. Phones hit this
     // constantly, since every app switch hides the page.
+    // Both listeners live on the document, which outlasts this page under the
+    // ClientRouter; once the film is swapped out they must not touch it.
+    document.addEventListener('sab:menu', e => {
+      if (!media.isConnected) return;
+      held = (e as CustomEvent<{ open: boolean }>).detail.open;
+      if (held) vids.forEach(v => v.pause());
+      else if (vids[cur]!.src) vids[cur]!.play().then(() => vids[cur]!.classList.add('is-on')).catch(() => {});
+    });
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) return;
+      if (document.hidden || held || !media.isConnected) return;
       const v = vids[cur]!;
       if (v.paused && v.src) v.play().then(() => v.classList.add('is-on')).catch(() => {});
     });
