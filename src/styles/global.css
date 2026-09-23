@@ -1194,6 +1194,25 @@ html:not(.js) .sabl-more { display: none; }
 @media (max-width: 900px) {
   .sabp-body { padding: 28px 20px 64px; }
 }
+/* The hub pages end on their sibling links, which sit on a rule with 28px
+   above and below and then meet the site footer. The body's 96px bottom
+   padding stacked on the old 64px here left 160px of blank page under the
+   links whenever the lists were collapsed (Ilia, 2026-09-23). */
+.sabp-body:has(.sabl-hubfoot) { padding-bottom: 0; }
+.sabl-hubfoot {
+  border-top: 1px solid #E5E0D5;
+  margin-top: 48px; padding: 28px 0;
+  display: flex; flex-direction: column; gap: 12px;
+  font-size: 15px; color: #4B5563;
+}
+.sabl-hubfoot p { margin: 0; }
+/* Row gap carries most of the vertical rhythm so each link can pad itself
+   out to a 24px tap target (WCAG 2.2 2.5.8); these are a nav cluster, not
+   links inside a sentence, so the inline exception does not apply. */
+.sabl-hublinks { display: flex; flex-wrap: wrap; gap: 2px 18px; }
+.sabl-hublinks a {
+  color: #141915; display: inline-flex; align-items: center; min-height: 24px;
+}
 
 /* ══ "ScholarAB Match" design (claude.ai/design); quiz island ══ */
 .sabm-body { padding: 36px var(--sab-gutter) 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
