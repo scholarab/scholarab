@@ -3,21 +3,23 @@ import SabFooter from '../components/sab/SabFooter.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
-import { SCHOLARSHIP_FACETS } from '../lib/facets';
+import { PROGRAM_FORMATS, SCHOLARSHIP_FACETS } from '../lib/facets';
 import { PHOTO_CREDITS } from '../lib/photo-credits';
 
-// The attribution page for the scope photos (header menu tiles and the home
-// carousel). CC BY and CC BY-SA photos need their author, license and source
+// The attribution page for the scope and program-format photos (header menu
+// tiles and the home carousel). CC BY and CC BY-SA photos need their author, license and source
 // credited; the carousel carries a short credit on each card and this page
 // carries the full one for every photo, including the tiles, which have no
 // room for text. Noindex: it has no search value, and the sitemap lists only
 // the pages Google may index. Rows come from photo-credits.ts, in facet order.
 const title = 'Photo Credits | ScholarAB';
-const description = 'Who took the photos of Alberta cities and towns used on ScholarAB, and the license each one is used under.';
-const rows = SCHOLARSHIP_FACETS
+const description = 'Who took the photos used in the ScholarAB menus and on the home page, and the license each one is used under.';
+const rowsOf = (facets: typeof SCHOLARSHIP_FACETS, name: (f: (typeof facets)[number]) => string) => facets
   .filter(f => f.backdrop && PHOTO_CREDITS[f.backdrop])
-  .map(f => ({ scope: f.label, ...PHOTO_CREDITS[f.backdrop!]! }))
+  .map(f => ({ scope: name(f), ...PHOTO_CREDITS[f.backdrop!]! }))
   .sort((a, b) => a.scope.localeCompare(b.scope, 'en-CA'));
+// Places first, then the program formats under their hub names.
+const rows = [...rowsOf(SCHOLARSHIP_FACETS, f => f.label), ...rowsOf(PROGRAM_FORMATS, f => f.h1)];
 ---
 
 <Layout
@@ -39,14 +41,15 @@ const rows = SCHOLARSHIP_FACETS
       <div class="sab-kicker">CREDITS</div>
       <h1 class="sabcr-h1">Photo credits</h1>
       <p class="sabcr-lede">
-        The city and town photos in the Scholarships menu and on the home page were taken by the
-        people below. Each is used under the license shown and was cropped and lightly colour graded
-        for this site. Photos under CC BY-SA remain under CC BY-SA in their edited form.
+        The photos in the Scholarships and Programs menus and on the home page were taken by the
+        people below. Each is used under the license shown and was cropped for this site, and the
+        city and town photos were also lightly colour graded. Photos under CC BY-SA remain under
+        CC BY-SA in their edited form.
       </p>
       <div class="sabcr-table-wrap">
         <table class="sabcr-table">
           <thead>
-            <tr><th scope="col">Place</th><th scope="col">Photo</th><th scope="col">By</th><th scope="col">License</th></tr>
+            <tr><th scope="col">Used for</th><th scope="col">Photo</th><th scope="col">By</th><th scope="col">License</th></tr>
           </thead>
           <tbody>
             {rows.map(r => (

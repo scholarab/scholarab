@@ -79,7 +79,10 @@ export interface Facet {
    * the page scrolls. Needs five files in public/photos/backdrops/:
    * <name>-wide-{1672,3344}.webp, <name>-tall-{1000,2000}.webp and
    * <name>-tile.webp (the header menu tile). Placement is in the hub page's CSS;
-   * credits in public/photos/CREDITS.md.
+   * credits in public/photos/CREDITS.md and src/lib/photo-credits.ts.
+   *
+   * A program FORMAT hub ships the tile alone: its photo appears only in the
+   * header's Programs menu (Ilia, 2026-09-23), and a hub page has no backdrop.
    */
   backdrop?: string;
 }
@@ -627,6 +630,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   {
     slug: 'summer-programs',
     kind: 'format',
+    backdrop: 'summer-programs',
     value: 'summer',
     label: 'Summer',
     h1: 'Summer programs',
@@ -639,6 +643,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   {
     slug: 'competitions',
     kind: 'format',
+    backdrop: 'competitions',
     value: 'competitions',
     label: 'Competitions',
     h1: 'Competitions and challenges',
@@ -651,6 +656,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   {
     slug: 'olympiads',
     kind: 'format',
+    backdrop: 'olympiads',
     value: 'olympiads',
     label: 'Olympiads',
     h1: 'Olympiads and contests',
@@ -663,6 +669,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   {
     slug: 'science-fairs',
     kind: 'format',
+    backdrop: 'science-fairs',
     value: 'science-fairs',
     label: 'Science fairs',
     h1: 'Science fairs',
@@ -675,6 +682,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   {
     slug: 'research-placements',
     kind: 'format',
+    backdrop: 'research-placements',
     value: 'research',
     label: 'Research',
     h1: 'Research and mentorship',
@@ -687,6 +695,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   {
     slug: 'dual-credit',
     kind: 'format',
+    backdrop: 'dual-credit',
     value: 'dual-credit',
     label: 'Dual credit',
     h1: 'Dual credit and work experience',
@@ -699,6 +708,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   {
     slug: 'clubs',
     kind: 'format',
+    backdrop: 'clubs',
     value: 'clubs',
     label: 'Clubs',
     h1: 'Clubs and year-round programs',
@@ -711,6 +721,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   {
     slug: 'conferences',
     kind: 'format',
+    backdrop: 'conferences',
     value: 'conferences',
     label: 'Conferences',
     h1: 'Conferences and workshops',
