@@ -137,6 +137,10 @@ const isActive = (href: string) =>
            these links, or straight to them, without walking the whole page. -->
       <nav class="sabh-links" id="sabh-links" aria-label="Main">
         <div class="sabh-sheet-label" aria-hidden="true">GO TO</div>
+        {/* One highlight that glides between links, as on tesla.com, instead
+            of a pill per link that blinks out and back in as the pointer
+            crosses from one to the next. The script sizes and moves it. */}
+        <span class="sabh-glide" aria-hidden="true"></span>
         {navItems.map(n => (
           <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
             <a
@@ -256,7 +260,7 @@ const isActive = (href: string) =>
   .sabh-nav { position: relative; }
   /* Items fill the bar's full height, so the pointer can travel from a link
      down into the panel without crossing a gap that would close it. */
-  .sabh-links { display: flex; align-items: stretch; gap: 4px; align-self: stretch; }
+  .sabh-links { position: relative; display: flex; align-items: stretch; gap: 0; align-self: stretch; }
   .sabh-item { display: flex; align-items: center; }
 
   /* ── Scholarships dropdown ── */
@@ -345,13 +349,30 @@ const isActive = (href: string) =>
   }
   .sabh-link {
     font-size: 13.5px; font-weight: 500; letter-spacing: 0.005em; color: rgba(238, 241, 236, 0.7);
-    text-decoration: none; padding: 7px 13px; border-radius: 6px;
+    text-decoration: none; padding: 8px 15px; border-radius: 6px;
     transition: color 0.15s ease, background-color 0.15s ease;
   }
   /* A soft pill on hover, as on tesla.com: the target is visible before the
      click without an underline or a colour accent. */
   .sabh-link:hover { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
   .sabh-link-active { color: #EEF1EC; }
+  /* The link's own pill is the no-JS fallback; with the glide running, the
+     glide is the only highlight. It sits under the links (z-index), fades in
+     where the pointer enters, then slides and resizes between links. */
+  .sabh-glide {
+    position: absolute; top: 0; left: 0; width: 0; height: 0; z-index: 0;
+    border-radius: 6px; background: rgba(238, 241, 236, 0.08);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .sabh-glide[data-snap] { transition: opacity 0.2s ease; }
+  .sabh-glide[data-on] { opacity: 1; }
+  .sabh-link { position: relative; z-index: 1; }
+  .sabh-links[data-glide] .sabh-link:hover,
+  .sabh-links[data-glide] .sabh-has-menu:hover .sabh-link { background: transparent; }
+  @media (prefers-reduced-motion: reduce) {
+    .sabh-glide { transition: opacity 0.2s ease; }
+  }
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
   .sabh-sheet-label, .sabh-sheet-foot, .sabh-link-count, .sabh-sub-back { display: none; }
@@ -480,6 +501,7 @@ const isActive = (href: string) =>
     /* The sheet keeps an accent dot on the current page: at 22px in a list,
        brighter text alone does not tell the rows apart. */
     .sabh-link { padding: 0; border-radius: 0; }
+    .sabh-glide { display: none; }
     .sabh-link:hover { background: transparent; }
     .sabh-link-active .sabh-link-label::after {
       content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
@@ -556,6 +578,32 @@ const isActive = (href: string) =>
     toggle?.setAttribute('aria-label', `${open ? 'Hide' : 'Show'} ${label} menu`);
   }
 
+  // Moves the one highlight to whichever link the pointer is over. Inside an
+  // open Scholarships panel the pointer is still within that item, so the
+  // highlight stays on Scholarships, as the per-link pill used to.
+  function initGlide(nav: HTMLElement) {
+    const glide = nav.querySelector<HTMLElement>('.sabh-glide');
+    if (!glide || !matchMedia('(hover: hover)').matches) return;
+    nav.dataset.glide = '';
+    nav.addEventListener('pointerover', e => {
+      if (matchMedia('(max-width: 900px)').matches) return;
+      const link = (e.target as HTMLElement).closest('.sabh-item')?.querySelector<HTMLElement>('.sabh-link');
+      if (!link) return;
+      const box = nav.getBoundingClientRect();
+      const r = link.getBoundingClientRect();
+      const first = !glide.hasAttribute('data-on');
+      // Entering from outside: appear in place, then only later moves slide.
+      glide.toggleAttribute('data-snap', first);
+      glide.style.width = `${r.width}px`;
+      glide.style.height = `${r.height}px`;
+      glide.style.transform = `translate(${r.left - box.left}px, ${r.top - box.top}px)`;
+      if (first) void glide.offsetWidth;
+      glide.removeAttribute('data-snap');
+      glide.setAttribute('data-on', '');
+    });
+    nav.addEventListener('pointerleave', () => glide.removeAttribute('data-on'));
+  }
+
   function initSabHeader() {
     header = document.querySelector<HTMLElement>('[data-sab-header]');
     burger = document.getElementById('sabh-burger');
@@ -564,6 +612,8 @@ const isActive = (href: string) =>
     header.dataset.init = 'true';
 
     burger.addEventListener('click', () => (isOpen() ? closeMenu({ restoreFocus: true }) : openMenu()));
+
+    initGlide(sheet);
 
     // Desktop dropdown toggles. Focus leaving the item closes its panel, so a
     // Tab past the last link, or a click elsewhere, never leaves it hanging.
