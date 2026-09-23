@@ -229,3 +229,24 @@ test('every field hub links to every other field', async ({ page }, testInfo) =>
     await expect(row.locator('button')).toHaveCount(0);
   }
 });
+
+// The header dropdowns hang from the whole bar. When the link row became their
+// containing block (for the hover glide), each panel shrank to the row's width
+// and its photo tiles piled on top of one another.
+test('header dropdowns span the bar and keep their tiles apart', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'desktop layout');
+  await page.goto('/');
+  const width = page.viewportSize()!.width;
+  for (const label of ['Scholarships', 'Programs']) {
+    // By what it controls: its accessible name flips to "Hide" once open.
+    const toggle = page.locator(`[aria-controls="sabh-menu-${label.toLowerCase()}"]`);
+    await toggle.focus();
+    await toggle.press('Enter');
+    const menu = page.locator(`#sabh-menu-${label.toLowerCase()}`);
+    await expect(menu).toBeVisible();
+    expect((await menu.boundingBox())!.width).toBeGreaterThan(width * 0.9);
+    const lefts = await menu.locator('.sabh-tile').evaluateAll(els => els.slice(0, 5).map(e => Math.round(e.getBoundingClientRect().left)));
+    lefts.slice(1).forEach((left, i) => expect(left - lefts[i]!).toBeGreaterThan(100));
+    await toggle.press('Enter');
+  }
+});

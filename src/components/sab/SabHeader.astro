@@ -260,7 +260,7 @@ const isActive = (href: string) =>
   .sabh-nav { position: relative; }
   /* Items fill the bar's full height, so the pointer can travel from a link
      down into the panel without crossing a gap that would close it. */
-  .sabh-links { position: relative; display: flex; align-items: stretch; gap: 0; align-self: stretch; }
+  .sabh-links { display: flex; align-items: stretch; gap: 0; align-self: stretch; }
   .sabh-item { display: flex; align-items: center; }
 
   /* ── Scholarships dropdown ── */
@@ -356,7 +356,9 @@ const isActive = (href: string) =>
      click without an underline or a colour accent. */
   .sabh-link:hover { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
   .sabh-link-active { color: #EEF1EC; }
-  /* The link's own pill is the no-JS fallback; with the glide running, the
+  /* Positioned against .sabh-nav like the dropdowns, never against
+     .sabh-links: making the link row a containing block shrinks every panel
+     to the row's width. The link's own pill is the no-JS fallback; with the glide running, the
      glide is the only highlight. It sits under the links (z-index), fades in
      where the pointer enters, then slides and resizes between links. */
   .sabh-glide {
@@ -589,7 +591,8 @@ const isActive = (href: string) =>
       if (matchMedia('(max-width: 900px)').matches) return;
       const link = (e.target as HTMLElement).closest('.sabh-item')?.querySelector<HTMLElement>('.sabh-link');
       if (!link) return;
-      const box = nav.getBoundingClientRect();
+      // Measured from the glide's containing block (.sabh-nav), not the link row.
+      const box = (glide.offsetParent ?? nav).getBoundingClientRect();
       const r = link.getBoundingClientRect();
       const first = !glide.hasAttribute('data-on');
       // Entering from outside: appear in place, then only later moves slide.
