@@ -232,7 +232,9 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
     .saba-body { padding: 40px 20px 72px; }
     .saba-paper { padding-right: calc(var(--u) * 60); }
     .saba-card { padding: 24px 20px 12px; margin-top: 48px; }
-    .saba-principle { grid-template-columns: 44px 1fr; gap: 14px; }
+    /* The 44px column held the 01/02/03 badge; with the badge gone it took the
+       card's only child and set every title one word per line. */
+    .saba-principle { gap: 14px; }
     .saba-os-label { margin-top: 48px; }
     .saba-actions .saba-btn { font-size: 14px; padding: 12px 20px; }
   }

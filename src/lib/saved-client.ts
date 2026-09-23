@@ -91,6 +91,24 @@ function savedCard(s: SavedItem): string {
   </div>`;
 }
 
+/**
+ * Soonest deadline first, then undated, then passed: the order the directory
+ * reads in. The list came out in catalogue order, which put an award due in
+ * eight days above one due in four.
+ */
+export function savedOrder(list: SavedItem[]): SavedItem[] {
+  const todayMs = getToday().getTime();
+  const key = (s: SavedItem): [number, number] => {
+    const ms = s.deadline && /^\d{4}-\d{2}-\d{2}$/.test(s.deadline) ? new Date(s.deadline + 'T00:00:00').getTime() : null;
+    if (ms === null) return [1, 0];
+    return ms < todayMs ? [2, -ms] : [0, ms];
+  };
+  return [...list].sort((a, b) => {
+    const [ga, va] = key(a); const [gb, vb] = key(b);
+    return ga - gb || va - vb;
+  });
+}
+
 type CalItem = { title: string; url: string; amount?: string; type: 'scholarship' | 'program' };
 
 export function initSaved() {
@@ -155,7 +173,7 @@ export function initSaved() {
       // then again 100px below in the two section heads; the same numbers
       // twice, which is where a mismatch would eventually come from.
       countEl.textContent =
-        `${total} ${total === 1 ? 'item' : 'items'} bookmarked. Your shortlist lives here.`;
+        `${total} ${total === 1 ? 'item' : 'items'} bookmarked. Your shortlist is saved on this device.`;
     }
 
     const emptyEl = root.querySelector<HTMLElement>('[data-sv-empty]');
@@ -185,7 +203,7 @@ export function initSaved() {
     for (const type of ['scholarship', 'program'] as const) {
       const ids = new Set(type === 'scholarship' ? getSaved() : getSavedPrograms());
       const grid = root.querySelector(`[data-sv-${type === 'scholarship' ? 'sh' : 'pr'}-section] .sabl-grid`);
-      if (grid) grid.innerHTML = items.filter(s => s.type === type && ids.has(s.id)).map(savedCard).join('');
+      if (grid) grid.innerHTML = savedOrder(items.filter(s => s.type === type && ids.has(s.id))).map(savedCard).join('');
     }
     repaintChips();
     updateVisibility();

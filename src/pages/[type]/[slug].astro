@@ -20,7 +20,7 @@ import { saysNoApplication } from '../../lib/apply-method.ts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
-type RelatedItem = { href: string; title: string; value: string; tag: string };
+type RelatedItem = { href: string; title: string; value: string; tag: string; money?: boolean };
 
 export async function getStaticPaths() {
   // Neighbor order matches each directory's default sort: earliest deadline
@@ -119,6 +119,7 @@ export async function getStaticPaths() {
       title: s.title,
       value: s.amount,
       tag: s.region || 'Alberta',
+      money: true,
     }));
 
   const asProgramCards = (list: Program[]): RelatedItem[] =>
@@ -389,7 +390,9 @@ function programValue(p: Program) {
       valueNote: p.costNote,
     };
   }
-  return { valueLabel: 'PROGRAM COST', valueBig: 'See provider', valueNote: null };
+  // Not a figure, so not set as one: "See provider" in the 52px money type was
+  // the largest text on the page and answered nothing.
+  return { valueLabel: 'PROGRAM COST', valueBig: 'Not listed', valueNote: "Check the provider's page for any fee.", valueQuiet: true };
 }
 
 // The explainer for this listing, when one exists. The link is reciprocal on
@@ -479,6 +482,7 @@ const breadcrumbJson = {
       valueBig={d.valueBig}
       valueNote={d.valueNote}
       checkedLabel={"checkedLabel" in d ? d.checkedLabel : null}
+      valueQuiet={"valueQuiet" in d ? d.valueQuiet : false}
       ctaLabel={d.ctaLabel}
       url={d.url}
       canRemind={d.canRemind}
@@ -498,7 +502,7 @@ const breadcrumbJson = {
             <a href={r.href} class="sabd-related-card">
               <span class="sabdr-mono sabd-related-tag">{r.tag.toUpperCase()}</span>
               <span class="sabd-related-name">{r.title}</span>
-              <span class="sabd-related-value">{r.value}</span>
+              <span class:list={['sabd-related-value', { 'is-plain': !r.money }]}>{r.value}</span>
             </a>
           ))}
         </div>
@@ -520,7 +524,7 @@ const breadcrumbJson = {
             <a href={r.href} class="sabd-related-card">
               <span class="sabdr-mono sabd-related-tag">{r.tag.toUpperCase()}</span>
               <span class="sabd-related-name">{r.title}</span>
-              <span class="sabd-related-value">{r.value}</span>
+              <span class:list={['sabd-related-value', { 'is-plain': !r.money }]}>{r.value}</span>
             </a>
           ))}
         </div>
@@ -563,6 +567,8 @@ const breadcrumbJson = {
   .sabd-related-tag { font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); }
   .sabd-related-name { font-weight: 700; font-size: 15px; line-height: 1.35; letter-spacing: -0.01em; flex: 1; }
   .sabd-related-value { font-family: var(--font-display); font-size: 20px; color: #0A6B4D; }
+  /* A duration is not prize money; green display type made "1 day" read as one. */
+  .sabd-related-value.is-plain { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.72); }
 
   @media (max-width: 900px) {
     .sabd-related { padding: 0 20px 72px; }

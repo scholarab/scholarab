@@ -51,6 +51,8 @@ interface Props {
   valueLabel: string;
   valueBig: string;
   valueNote?: string | null;
+  /** The value is a word, not a figure: set small rather than in money type. */
+  valueQuiet?: boolean;
   /** 'Sep 2026' from lastVerified; null hides the line. */
   checkedLabel?: string | null;
   ctaLabel: string;
@@ -67,7 +69,7 @@ const {
   status, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, dueLong, opensLabel,
   backHref, backLabel, facetHref = null, facetLabel = null,
   facts, eligibility, about, notes, steps,
-  valueLabel, valueBig, valueNote, checkedLabel = null,
+  valueLabel, valueBig, valueNote, checkedLabel = null, valueQuiet = false,
   ctaLabel, url, canRemind, canonical, guideHref, guideTitle,
 } = Astro.props;
 
@@ -196,12 +198,17 @@ const chip =
     <div class="sabd-card">
       <div class="sabd-mono sabd-fact-label">{valueLabel}</div>
       {/* Green is money you receive. A cost in the same green read as a prize. */}
-      <div class:list={['sabd-value', { 'is-cost': valueLabel === 'PROGRAM COST' }]}>{valueBig}</div>
+      <div class:list={['sabd-value', { 'is-cost': valueLabel === 'PROGRAM COST', 'is-quiet': valueQuiet }]}>{valueBig}</div>
       {valueNote && <div class="sabd-value-note">{valueNote}</div>}
       <div class="sabd-deadline-row">
         <span class="sabd-mono sabd-deadline-label">DEADLINE</span>
         <span class="sabd-deadline-value">{estimated ? `Around ${dueLong}` : dueLong}</span>
       </div>
+      {status === 'closed' && (
+        <p class="sabd-estimate-note">{opensLabel
+          ? `This cycle is over. The next one opens ${opensLabel}.`
+          : "This cycle is over and the provider hasn't posted the next one. Save it to find it again."}</p>
+      )}
       {estimated && (
         <p class="sabd-estimate-note">Last year's date. The provider hasn't posted this year's yet, so check their page before you plan around it.</p>
       )}
@@ -243,13 +250,13 @@ const chip =
     {canRemind && (
       <div class="sabd-remind">
         <div class="sabd-mono sabd-remind-label">GET A DEADLINE REMINDER</div>
-        <div class="sabd-remind-sub">We email you a link to confirm, then nudge you before it closes.</div>
-        <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form">
+        <div class="sabd-remind-sub">We email you a link to confirm, then remind you 30, 14 and 3 days before it closes.</div>
+        <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form" novalidate>
           <label for={`sabd-remind-${itemType}-${itemId}`} class="sr-only">Your email for a deadline reminder</label>
           <input id={`sabd-remind-${itemType}-${itemId}`} type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" />
           <button type="submit" class="sab-btn sabd-remind-btn">Remind me</button>
         </form>
-        <div data-sabd-alert-msg class="sabd-remind-msg" style="display:none;"></div>
+        <div data-sabd-alert-msg class="sabd-remind-msg" role="status" aria-live="polite" style="display:none;"></div>
         <div class="sabd-remind-fine">
           We store your address only to send these reminders, and delete it the
           moment you unsubscribe. <a href="/privacy/">How this works</a>.
@@ -396,6 +403,7 @@ const chip =
   }
   .sabd-value { font-family: var(--font-display); font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
   .sabd-value.is-cost { color: #141915; }
+  .sabd-value.is-quiet { font-family: var(--font-body); font-size: 20px; font-weight: 700; line-height: 1.3; margin: 6px 0 2px; }
   .sabd-value-note { font-size: 14px; color: rgba(20, 25, 21, 0.65); }
   /* space-between with no gap only looked safe because the rail was 360px
      wide. In the phone's single column the label and the date met in the
@@ -589,6 +597,17 @@ const chip =
     const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value.trim();
     const btn = form.querySelector('button') as HTMLButtonElement;
     const msg = form.parentElement?.querySelector('[data-sabd-alert-msg]') as HTMLElement | null;
+    // One voice for every bad address. `novalidate` turns off the browser's
+    // bubbles, which used to appear on top of this message for some inputs and
+    // instead of it for others. Same test as /api/alert.
+    const problem = !email ? 'Type your email address first.'
+      : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "That address is missing something. It should look like name@gmail.com."
+      : null;
+    if (problem) {
+      if (msg) { msg.textContent = problem; msg.style.color = 'rgba(238, 241, 236,0.65)'; msg.style.display = 'block'; }
+      (form.querySelector('input[name="email"]') as HTMLInputElement).focus();
+      return;
+    }
     btn.disabled = true;
     btn.textContent = 'Saving…';
     try {

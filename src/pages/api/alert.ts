@@ -43,7 +43,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // is a trap for anything that isn't one of those forms.
   const email = typeof rawEmail === 'string' ? rawEmail.trim() : ''
   if (!email || email.length > 254 || !EMAIL_RE.test(email))
-    return jsonError('Valid email required', 400)
+    return jsonError('That address is missing something. It should look like name@gmail.com.', 400)
   if (itemType !== 'scholarship' && itemType !== 'program')
     return jsonError('itemType must be scholarship or program', 400)
   if (!itemId || typeof itemId !== 'number' || !Number.isInteger(itemId))

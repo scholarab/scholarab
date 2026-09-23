@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { initSaved } from './saved-client'
+import { initSaved, savedOrder } from './saved-client'
 
 let savedSch: number[] = []
 let savedPrg: number[] = []
@@ -87,7 +87,7 @@ describe('initSaved', () => {
     expect($('[data-sv-content]').hidden).toBe(false)
     expect($('[data-sv-empty]').hidden).toBe(false)
     expect($('[data-sv-list]').hidden).toBe(true)
-    expect($('[data-sv-count]').textContent).toBe('0 items bookmarked. Your shortlist lives here.')
+    expect($('[data-sv-count]').textContent).toBe('0 items bookmarked. Your shortlist is saved on this device.')
   })
 
   it('renders only the saved cards and writes counts and section labels', () => {
@@ -98,7 +98,7 @@ describe('initSaved', () => {
     expect($('[data-sv-list]').hidden).toBe(false)
     expect($$('[data-sv-wrap]').filter(w => !w.hidden).map(w => w.dataset.id)).toEqual(['1', '7'])
     // The per-type split belongs to the section heads, not to this line too.
-    expect($('[data-sv-count]').textContent).toBe('2 items bookmarked. Your shortlist lives here.')
+    expect($('[data-sv-count]').textContent).toBe('2 items bookmarked. Your shortlist is saved on this device.')
     expect($('[data-sv-sh-label]').textContent).toBe('SCHOLARSHIPS · 1')
     expect($('[data-sv-pr-label]').textContent).toBe('RESEARCH PROGRAMS · 1')
   })
@@ -134,7 +134,7 @@ describe('initSaved', () => {
     expect(savedSch).toEqual([2])
     expect(wrap.hidden).toBe(true)
     expect(showToast).toHaveBeenCalledWith('Removed from saved')
-    expect($('[data-sv-count]').textContent).toBe('1 item bookmarked. Your shortlist lives here.')
+    expect($('[data-sv-count]').textContent).toBe('1 item bookmarked. Your shortlist is saved on this device.')
   })
 
   it('removing the last item shows the empty state', () => {
@@ -208,5 +208,14 @@ describe('initSaved', () => {
     expect($('[data-sv-cal]').hidden).toBe(false)
     expect(document.querySelector('[data-cal-add]')).toBeNull()
     expect(downloadICS).not.toHaveBeenCalled()
+  })
+})
+
+describe('savedOrder', () => {
+  const item = (id: number, deadline: string | null) =>
+    ({ type: 'scholarship' as const, id, name: `S${id}`, href: '', category: null, deadline, url: '' })
+  it('puts the soonest deadline first, undated next, passed last', () => {
+    const order = savedOrder([item(1, null), item(2, '2000-01-01'), item(3, '2099-06-01'), item(4, '2099-01-01')])
+    expect(order.map(s => s.id)).toEqual([4, 3, 1, 2])
   })
 })
