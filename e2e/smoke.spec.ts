@@ -250,3 +250,26 @@ test('header dropdowns span the bar and keep their tiles apart', async ({ page }
     await toggle.press('Enter');
   }
 });
+
+// Moving from Scholarships to Programs switches the panel in place: the shared
+// background stays open and only the contents change, as on tesla.com.
+test('header dropdown switches without closing', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'mobile', 'desktop layout');
+  await page.goto('/');
+  const drop = page.locator('.sabh-drop');
+  await page.locator('.sabh-has-menu .sabh-link').first().hover();
+  await expect(drop).toHaveAttribute('data-on', '');
+  await expect(page.locator('#sabh-menu-scholarships')).toBeVisible();
+  // Record every time the background turns off during the move.
+  await drop.evaluate(el => {
+    (window as unknown as { dropOff: number }).dropOff = 0;
+    new MutationObserver(() => { if (!el.hasAttribute('data-on')) (window as unknown as { dropOff: number }).dropOff++; })
+      .observe(el, { attributes: true, attributeFilter: ['data-on'] });
+  });
+  await page.locator('.sabh-has-menu .sabh-link').nth(1).hover();
+  await expect(page.locator('#sabh-menu-programs')).toBeVisible();
+  await expect(page.locator('#sabh-menu-scholarships')).toBeHidden();
+  expect(await page.evaluate(() => (window as unknown as { dropOff: number }).dropOff)).toBe(0);
+  await page.mouse.move(5, 600);
+  await expect(drop).not.toHaveAttribute('data-on', '');
+});

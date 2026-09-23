@@ -141,6 +141,11 @@ const isActive = (href: string) =>
             of a pill per link that blinks out and back in as the pointer
             crosses from one to the next. The script sizes and moves it. */}
         <span class="sabh-glide" aria-hidden="true"></span>
+        {/* The dropdown's background, shared by both panels (desktop). It
+            stays open from Scholarships to Programs and only the contents
+            crossfade, as on tesla.com, instead of one panel closing and the
+            other reopening. The script sets its height. */}
+        <span class="sabh-drop" aria-hidden="true"></span>
         {navItems.map(n => (
           <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
             <a
@@ -275,8 +280,36 @@ const isActive = (href: string) =>
   /* Hover opens only where hover is real. On a touch screen wider than 900px
      a first tap would otherwise open the panel instead of following the link. */
   @media (hover: hover) {
-    .sabh-has-menu:hover .sabh-menu { opacity: 1; visibility: visible; transform: none; transition: opacity 0.16s ease 0.06s, transform 0.16s ease 0.06s, visibility 0s linear 0.06s; }
+    .sabh:not([data-drop]) .sabh-has-menu:hover .sabh-menu { opacity: 1; visibility: visible; transform: none; transition: opacity 0.16s ease 0.06s, transform 0.16s ease 0.06s, visibility 0s linear 0.06s; }
     .sabh-has-menu:hover .sabh-link { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
+  }
+  /* With the script running (data-drop), the panels lose their own
+     background and slide, and sit on one shared .sabh-drop instead, so moving
+     between Scholarships and Programs is a crossfade on a panel that never
+     closes. The old panel fades out quickly; the new one fades in just behind
+     it. Without the script, each panel keeps its own look above. */
+  .sabh-drop { display: none; }
+  @media (min-width: 901px) {
+    .sabh-drop {
+      display: block; position: absolute; left: 0; right: 0; top: 100%; z-index: 4;
+      height: 0; pointer-events: none;
+      background: #0A1310; border-top: 1px solid rgba(238, 241, 236,0.08);
+      box-shadow: 0 24px 40px -20px rgba(0,0,0,0.6);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.22s ease, height 0.32s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.22s;
+    }
+    .sabh-drop[data-on] { opacity: 1; visibility: visible; transition-delay: 0s; }
+    .sabh-drop[data-snap] { transition: opacity 0.22s ease, visibility 0s; }
+    .sabh[data-drop] .sabh-menu {
+      background: transparent; border-top-color: transparent; box-shadow: none; transform: none;
+      transition: opacity 0.14s ease, visibility 0s linear 0.14s;
+    }
+    .sabh[data-drop] .sabh-has-menu[data-menu-open] .sabh-menu {
+      transition: opacity 0.24s ease 0.06s, visibility 0s linear 0s;
+    }
+  }
+  @media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+    .sabh-drop { transition: opacity 0.12s ease, visibility 0s linear 0.12s; }
   }
   .sabh-menu-inner {
     max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box;
@@ -313,7 +346,7 @@ const isActive = (href: string) =>
     background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
   }
   @media (hover: hover) {
-    .sabh-has-menu:hover .sabh-tile-photo::after {
+    .sabh:not([data-drop]) .sabh-has-menu:hover .sabh-tile-photo::after {
       background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
     }
   }
@@ -573,11 +606,63 @@ const isActive = (href: string) =>
   }
 
   function setDropdown(item: HTMLElement, open: boolean) {
+    // One panel at a time: opening Programs is a switch, not a second panel.
+    if (open) header?.querySelectorAll<HTMLElement>('.sabh-has-menu[data-menu-open]').forEach(o => { if (o !== item) setDropdown(o, false); });
     item.toggleAttribute('data-menu-open', open);
     const toggle = item.querySelector<HTMLElement>('[data-sabh-toggle]');
     toggle?.setAttribute('aria-expanded', String(open));
     const label = item.querySelector('.sabh-link-label')?.textContent ?? '';
     toggle?.setAttribute('aria-label', `${open ? 'Hide' : 'Show'} ${label} menu`);
+    syncDrop();
+  }
+
+  // Sizes the shared background to whichever panel is open. Opening from
+  // closed takes the height at once and fades in; a switch between panels
+  // animates the height, so the background itself never closes.
+  function syncDrop() {
+    const drop = header?.querySelector<HTMLElement>('.sabh-drop');
+    if (!drop) return;
+    const panel = header!.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open] .sabh-menu');
+    if (!panel) {
+      drop.removeAttribute('data-on');
+      return;
+    }
+    const first = !drop.hasAttribute('data-on');
+    drop.toggleAttribute('data-snap', first);
+    drop.style.height = `${panel.offsetHeight}px`;
+    if (first) void drop.offsetHeight;
+    drop.removeAttribute('data-snap');
+    drop.setAttribute('data-on', '');
+  }
+
+  // Desktop hover drives the same open state the keyboard toggle does. A
+  // short intent delay before the first open, so a pointer crossing the bar
+  // does not flash a panel; none on a switch, since the panel is already
+  // there; and a short grace on the way out.
+  function initHoverMenus(nav: HTMLElement) {
+    if (!header || !matchMedia('(hover: hover)').matches) return;
+    header.dataset.drop = '';
+    let timer = 0;
+    const openItemNow = () => header!.querySelector<HTMLElement>('.sabh-has-menu[data-menu-open]');
+    const closeAll = () => header!.querySelectorAll<HTMLElement>('.sabh-has-menu[data-menu-open]').forEach(o => setDropdown(o, false));
+    nav.addEventListener('pointerover', e => {
+      if (phone.matches) return;
+      const item = (e.target as HTMLElement).closest<HTMLElement>('.sabh-item');
+      if (!item) return;
+      clearTimeout(timer);
+      const current = openItemNow();
+      if (item === current) return;
+      if (!item.classList.contains('sabh-has-menu')) {
+        if (current) timer = window.setTimeout(closeAll, 90);
+        return;
+      }
+      if (current) setDropdown(item, true);
+      else timer = window.setTimeout(() => setDropdown(item, true), 70);
+    });
+    nav.addEventListener('pointerleave', () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(closeAll, 140);
+    });
   }
 
   // Moves the one highlight to whichever link the pointer is over. Inside an
@@ -617,6 +702,7 @@ const isActive = (href: string) =>
     burger.addEventListener('click', () => (isOpen() ? closeMenu({ restoreFocus: true }) : openMenu()));
 
     initGlide(sheet);
+    initHoverMenus(sheet);
 
     // Desktop dropdown toggles. Focus leaving the item closes its panel, so a
     // Tab past the last link, or a click elsewhere, never leaves it hanging.
