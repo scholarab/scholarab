@@ -59,7 +59,7 @@ test('match quiz reaches results', async ({ page }) => {
 
 test('saved page - hydrates and shows item count', async ({ page }) => {
   await page.goto('/saved');
-  // Exact: the empty state's own heading ("Nothing saved yet.") also contains
+  // Exact: the empty state's own heading ("Nothing saved yet") also contains
   // "saved", and this line is asserting the page title.
   await expect(page.getByRole('heading', { name: 'Saved', exact: true })).toBeVisible({ timeout: 10_000 });
   // Skeleton clears and count line is shown (0 items if nothing saved)

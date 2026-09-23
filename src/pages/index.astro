@@ -48,9 +48,21 @@ const anyClosingThisWeek = closingSoon.some(
   s => new Date(s.deadline! + 'T00:00:00').getTime() <= today.getTime() + CLOSING_SOON_MS,
 );
 const closingHeading = anyClosingThisWeek ? 'Closing this week' : 'Next deadlines';
+
+// The biggest awards a student can apply for today, in the directory's own
+// "Highest $" order (first dollar figure, so "$2,000 to $7,000" ranks at
+// $2,000). A Reddit reviewer's note: the top of the catalogue was behind a
+// click and a sort, and the homepage led only with whatever closed next.
+// "Varies" has no number to rank, so it stays out rather than sorting last.
+const biggestOpen = activeScholarships
+  .filter(s => parseAmount(s.amount) > 0)
+  .sort((a, b) =>
+    parseAmount(b.amount) - parseAmount(a.amount) ||
+    (a.deadline ?? '9999').localeCompare(b.deadline ?? '9999'))
+  .slice(0, 5);
 const closingEyebrow = anyClosingThisWeek ? 'TIME-SENSITIVE' : 'UPCOMING';
 
-// Categories: real counts from the data, top 8 tracks
+// Categories: real counts from the data, top 8 types
 const categoryCounts = new Map<string, number>();
 for (const s of scholarships) {
   if (s.category) categoryCounts.set(s.category, (categoryCounts.get(s.category) ?? 0) + 1);
@@ -146,6 +158,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     ],
   })} slot="head" />
   <SabFonts slot="head" />
+  {/* The poster is the phone LCP and a CSS background, so the browser only
+      found it after the stylesheet: 2.5 s on a throttled 4G run. Phones get
+      the same 720x1080 centre crop as the `.m` clips, at under half the bytes. */}
+  <link rel="preload" as="image" href="/video/hero/poster.webp" media="(min-width: 901px)" fetchpriority="high" slot="head" />
+  <link rel="preload" as="image" href="/video/hero/poster.m.webp" media="(max-width: 900px)" fetchpriority="high" slot="head" />
 
   {/* The header is the page's banner and cannot sit inside <main>; it used to
       be the hero's first flex child. Same dark background either side, so the
@@ -170,12 +187,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       <div class="sab-container sab-hero-body">
         <div class="sab-kicker">BUILT BY A HIGH SCHOOL STUDENT FROM MEDICINE HAT<span class="sab-kicker-sep" aria-hidden="true">·</span><a href="/about/" class="sab-kicker-link">READ THE STORY</a></div>
 
-        <h1 class="sab-h1"><span class="sab-h1-l sab-h1-l1">Making scholarships and programs</span> <span class="sab-h1-l sab-h1-l2">easier to find for Alberta students.</span></h1>
+        <h1 class="sab-h1"><span class="sab-h1-l sab-h1-l1">Making scholarships and programs</span> <span class="sab-h1-l sab-h1-l2">easier to find for Alberta students</span></h1>
 
         <div class="sab-hero-bottom">
           <div class="sab-hero-copy">
             <p>
-              ScholarAB tracks scholarships and research programs for Alberta high school students.<span class="sab-hero-p-tail"> Finally one place with all the information.</span>
+              Amounts, deadlines and who can apply, each linked to the provider's own page.<span class="sab-hero-p-tail"> Free, no account.</span>
             </p>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
@@ -218,8 +235,35 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
           <a href="/deadlines/" class="sab-view-all">View all deadlines</a>
         </div>
 
-        <div class="sab-closing-table" id="closing-soon-list">
+        <div class="sab-closing-table" id="closing-soon-list" data-deadline-list>
           {closingSoon.map((s, i) => (
+            <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-closing-row" data-deadline={s.deadline}>
+              <div class="sab-row-num sab-mono">{String(i + 1).padStart(2, '0')}</div>
+              <div class="sab-row-main">
+                <div class="sab-row-name">{s.title}</div>
+                {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
+              </div>
+              <div class="sab-row-amount tnum">{s.amount}</div>
+              <div class="sab-row-chip sab-mono closing-soon-badge">&hellip;</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- ============ BIGGEST OPEN AWARDS ============ -->
+    {biggestOpen.length > 0 && (
+      <div class="sab-container sab-closing sab-biggest" data-closing-section>
+        <div class="sab-section-head">
+          <div>
+            <div class="sab-mono sab-eyebrow-money">HIGHEST VALUE</div>
+            <h2 class="sab-h2">Biggest awards open now</h2>
+          </div>
+          <a href="/scholarships/?sort=highest_pay" class="sab-view-all">All by amount</a>
+        </div>
+
+        <div class="sab-closing-table" data-deadline-list>
+          {biggestOpen.map((s, i) => (
             <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-closing-row" data-deadline={s.deadline}>
               <div class="sab-row-num sab-mono">{String(i + 1).padStart(2, '0')}</div>
               <div class="sab-row-main">
@@ -239,7 +283,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       <div class="sab-container sab-cats">
         <div class="sab-section-head">
           <h2 class="sab-h2">Start where you are</h2>
-          <span class="sab-mono sab-cats-meta">{scholarshipCount} scholarships · {categories.length} tracks</span>
+          <span class="sab-mono sab-cats-meta">{scholarshipCount.toLocaleString('en-CA')} scholarships · {categories.length} types</span>
         </div>
         <div class="sab-cat-grid">
           {categories.map(c => (
@@ -270,9 +314,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     <div class="sab-container sab-match">
       <div class="sab-match-grid">
         <div>
-          <h2 class="sab-h2 sab-match-h2">Tell us three things. We'll shortlist for you.</h2>
+          <h2 class="sab-h2 sab-match-h2">Tell us three things and we'll shortlist for you</h2>
           <p class="sab-match-copy">
-            Pick your grade, region and focus. A few more questions on the next page, then your shortlist. No account, no email.
+            Three picks here, a few more on the next page. No account, no email.
           </p>
         </div>
         <div class="sab-match-card" id="match-teaser" data-quiz-variant="legacy">
@@ -304,16 +348,25 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   import { sendEvent } from '../lib/events';
 
   // ── Closing-this-week day chips (client-side so a stale static build never lies) ──
+  // Both row lists (closing soon, biggest open) share the chips and the rule
+  // that a row whose deadline has passed since the build drops out.
   function updateClosingSoon() {
-    const list = document.getElementById('closing-soon-list');
-    if (!list) return;
+    document.querySelectorAll<HTMLElement>('[data-deadline-list]').forEach(updateDeadlineList);
+  }
+  function updateDeadlineList(list: HTMLElement) {
     const today = albertaToday();
     const todayMs = today.getTime();
-    const rows = list.querySelectorAll<HTMLElement>('a[data-deadline]');
+    const rows = list.querySelectorAll<HTMLElement>('.sab-closing-row');
     let visible = 0;
     rows.forEach(row => {
       const deadline = row.dataset.deadline;
-      if (!deadline) return;
+      const chip = row.querySelector('.closing-soon-badge');
+      // Only the biggest-awards list can hold an open award with no date.
+      if (!deadline) {
+        visible++;
+        if (chip) { chip.textContent = 'NO FIXED DEADLINE'; chip.classList.add('sab-chip-far'); }
+        return;
+      }
       const deadlineMs = new Date(deadline + 'T00:00:00').getTime();
       if (deadlineMs < todayMs) {
         row.style.display = 'none';
@@ -321,7 +374,6 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
       }
       visible++;
       const daysLeft = Math.round((deadlineMs - todayMs) / 86400000);
-      const chip = row.querySelector('.closing-soon-badge');
       if (chip) {
         chip.textContent = daysLeft === 0 ? 'DUE TODAY' : `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`;
         // The directory's scale (list-core), so a row is the same colour here
@@ -452,8 +504,9 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     const media = document.querySelector<HTMLElement>('.sab-hero-media');
     if (!media || media.dataset.init) return;
     media.dataset.init = '1';
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches || conn?.saveData) return;
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    // A 2G connection would spend the visit downloading a background.
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || conn?.saveData || /2g/.test(conn?.effectiveType ?? '')) return;
     const [a, b] = media.querySelectorAll<HTMLVideoElement>('video');
     if (!a || !b) return;
     const vids = [a, b];
@@ -517,8 +570,18 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     load(a, 0);
     start(a);
   }
-  initHeroFilm();
-  document.addEventListener('astro:page-load', initHeroFilm);
+  // After the page has loaded and gone idle, so the first clip (2.7 to 3.2 MB
+  // on a desktop) never competes with the poster, fonts or first paint. The
+  // poster is the same frame, so the late start is invisible.
+  function startHeroFilmLater() {
+    const go = () => ('requestIdleCallback' in window
+      ? requestIdleCallback(initHeroFilm, { timeout: 2000 })
+      : setTimeout(initHeroFilm, 200));
+    if (document.readyState === 'complete') go();
+    else addEventListener('load', go, { once: true });
+  }
+  startHeroFilmLater();
+  document.addEventListener('astro:page-load', startHeroFilmLater);
 </script>
 
 <style is:global>
@@ -673,6 +736,10 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-closing { padding-top: 96px; padding-bottom: 40px; }
   .sab-section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px; gap: 20px; }
   .sab-eyebrow-urgent { font-size: 13px; letter-spacing: 0.06em; color: #A0491A; margin-bottom: 14px; }
+  /* Biggest open awards: the same table, money-green eyebrow, and a shorter
+     gap since it follows another table rather than the hero. */
+  .sab-biggest { padding-top: 56px; }
+  .sab-eyebrow-money { font-size: 13px; letter-spacing: 0.06em; color: #0A6B4D; margin-bottom: 14px; }
   .sab-h2 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.01em; margin: 0;
@@ -815,6 +882,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
      lands on the promise, the money, the counts *and* the name of one
      closing scholarship without scrolling. */
   @media (max-width: 900px) {
+    .sab-hero-media { background-image: url('/video/hero/poster.m.webp'); }
     .sab-container { padding-left: 20px; padding-right: 20px; }
     /* The rule that ate the phone viewport. Nothing else in the hero
        changes shape; it simply stops padding itself out to 100svh. */
@@ -874,7 +942,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-closing { display: flex; flex-direction: column; }
     .sab-closing .sab-section-head { display: contents; }
     .sab-closing .sab-section-head > div { order: 1; }
-    .sab-closing .sab-eyebrow-urgent { font-size: 11.5px; margin-bottom: 8px; }
+    .sab-closing .sab-eyebrow-urgent, .sab-closing .sab-eyebrow-money { font-size: 11.5px; margin-bottom: 8px; }
+    .sab-biggest { padding-top: 40px; }
     .sab-closing-table { order: 2; margin-top: 12px; }
     .sab-closing .sab-view-all { order: 3; align-self: flex-start; margin-top: 20px; }
     .sab-closing-row { grid-template-columns: 1fr auto; gap: 4px 14px; padding: 16px 2px; min-height: 44px; }

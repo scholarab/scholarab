@@ -531,8 +531,19 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 .sabl-chip-link:hover .sabl-chip-count { color: rgba(20, 25, 21, 0.7); }
 
 .sabl-filters { display: flex; flex-direction: column; gap: 12px; padding: 20px 0 0; }
-/* Phone-only controls; the media block below turns them on. */
-.sabl-scope-select, .sabl-filters-done { display: none; }
+/* Phone-only control; the media block below turns it on. */
+.sabl-filters-done { display: none; }
+/* WHERE YOU LIVE is one picker at every width, not 27 chips: on a desktop the
+   chips alone took four rows above the first listing. The picker navigates by
+   script, so without it the chips stay. */
+.sabl-scope-select { display: none; }
+html.js .sabl-scope-chips { display: none; }
+html.js .sabl-scope-select {
+  display: block; width: auto; min-width: 260px; max-width: 100%; min-height: 40px; padding: 0 14px;
+  font: 600 14px var(--font-body); color: var(--text-primary); cursor: pointer;
+  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+}
+html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
 .sabl-filter-row { display: flex; align-items: center; gap: 8px; }
 
 /* One row per filter, always.
@@ -745,14 +756,8 @@ html:not(.js) .sabl-lean { display: none; }
   .sabl-filters-n[hidden] { display: none; }
   html.js:not([data-filters]) .sabl-toolbar .sabl-sort,
   html.js:not([data-filters]) .sabl-rail { display: none; }
-  /* WHERE YOU LIVE is a picker here, not 27 chips. The picker navigates by
-     script, so without it the chips stay. */
-  html.js .sabl-scope-chips { display: none; }
-  html.js .sabl-scope-select {
-    display: block; width: 100%; min-height: 44px; padding: 0 14px;
-    font: 600 15px var(--font-body); color: var(--text-primary);
-    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 12px;
-  }
+  /* Full width and a 44px target inside the phone panel. */
+  html.js .sabl-scope-select { width: 100%; min-height: 44px; font-size: 15px; border-radius: 12px; }
   /* The panel's exit, pinned to the bottom of the screen while it is open. */
   html.js[data-filters] .sabl-filters-done {
     display: block; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 3;

@@ -259,8 +259,9 @@ const soonLine = totalOpen > 0 && totalSoon > 0
     {!hideScopes && (
       <div class="sabl-filter-row sabl-filter-row-wrap">
         <span class="sabl-mono sabl-row-label">WHERE YOU LIVE</span>
-        {/* Phones: one native picker instead of 27 chips. Each option goes
-            to the same hub its chip does, filters included (afterCounts). */}
+        {/* One native picker instead of 27 chips (the chips stay for no-JS).
+            Each option goes to the same hub its chip does, filters included
+            (afterCounts). */}
         <select class="sabl-scope-select" data-scope-select aria-label="Where you live">
           <option value="">Anywhere ({items.length})</option>
           {regionChips.map(c => <option value={c.slug}>{c.label} ({c.count})</option>)}
@@ -560,7 +561,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
 
   });
 
-  // The phone picker goes where the matching chip goes; afterCounts keeps that
+  // The picker goes where the matching chip goes; afterCounts keeps that
   // href carrying the live filters, so the hub opens on the number shown.
   document.addEventListener('change', e => {
     const select = (e.target as Element | null)?.closest?.<HTMLSelectElement>('[data-scope-select]');

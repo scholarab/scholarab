@@ -145,7 +145,7 @@ const isActive = (href: string) =>
               aria-current={isActive(n.href) ? 'page' : undefined}
             >
               <span class="sabh-link-label">{n.label}</span>
-              {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count}</span>}
+              {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count.toLocaleString('en-CA')}</span>}
             </a>
             {MENUS[n.href] && (
               /* Desktop keyboard: one stop, not twenty. The panel's links are
