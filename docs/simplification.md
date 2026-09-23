@@ -296,3 +296,32 @@ The pill styling on filter and sort chips was removed rather than restyled; the
 buttons, their counts and their behaviour are unchanged.
 
 Add-back fraction: 0. Nothing removed had to be restored.
+
+## Astra hunt leftovers, 2026-09-22
+
+The 1,027 hunt rows still unlisted after the two September 19 passes were worked
+source by source rather than row by row, on the rule that a school handbook or
+college booklet gets one listing and an award only gets its own listing when it
+has its own application and a stated amount. 126 listings were added (catalogue
+1,416 to 1,542), each written from the fetched page, PDF, OCR text or rendered
+page, never from the hunt's summary.
+
+Outcome per row: 598 are on a page that now has a listing or are named in one,
+358 are covered by an aggregate (the King's University, Keyano, NWP and CBT
+groupings written in this pass, or the existing NAIT, University of Calgary,
+Northwestern Alberta Foundation, 4-H and Indspire listings), 32 were dropped as
+recognition only (trophies, honour roll, MVP awards with no money), and 39 were
+held with a written reason: teacher-only or graduate-only awards, a male-only
+award the gender rule cannot express, a 2019-20 handbook, club newsletters from
+2016 to 2023, a password-protected page, and two Drumheller forms that now 404
+while the school's current list is a private document. The Skipping Stone Trans
+Community Award was listed as the single named exception to the gender rule,
+and `validate-data` carries that one phrase as an exception.
+
+Removal before improvement: about 330 per-award rows from handbooks and portals
+became 30 school and institution listings instead of 330 thin pages; one listing
+with gender-identity eligibility inside an aggregate was left out of its text.
+A school board code the quiz does not know (CSCN) was removed from one listing
+instead of adding a new board to the quiz.
+
+Add-back fraction: 0. Nothing collapsed or dropped had to be restored.

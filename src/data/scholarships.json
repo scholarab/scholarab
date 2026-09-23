@@ -60346,5 +60346,647 @@
       "apprenticeship": false,
       "extracurriculars": []
     }
+  },
+  {
+    "id": 1716,
+    "title": "Coalhurst High School Memorial Scholarships",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Coalhurst High School students",
+    "url": "https://www.coalhursthighschool.ca/download/420128",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "The school's memorial scholarship sheet gives the criteria but not the values, and the school chooses the winners; ask the office how to be considered.",
+    "active": true,
+    "description": "Coalhurst High School's memorial scholarships, funded by local families and groups, include the Robert Longmire Scholarship from Coalhurst Legion #273 for a graduate who volunteers in the school or community, the Roger Vander Linden Memorial Scholarship for a graduate heading to post-secondary with interests in business and social studies, leadership and volunteering, the Jeff McLaren Memorial Scholarship for respect and all-round effort, and the Frank Fuller Scholarship for a Grade 10 or 11 student active in student council or yearbook.",
+    "metaDetail": "Legion, business and student council awards.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Coalhurst High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1717,
+    "title": "Coaldale Christian School Graduation Scholarships",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Graduating students at Coaldale Christian School",
+    "url": "https://www.coaldalecs.com/editoruploads/files/Publications/Policies/CCS%20Handbook%202025.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Lethbridge",
+    "notes": "The handbook names the awards but not their values or criteria; the guidance counsellor has the details and forms.",
+    "active": true,
+    "description": "Coaldale Christian School's graduates can receive the Christian Credit Union Scholarship, the Adora Kitchens Scholarship, the Meliefste Family Scholarship, the Bethel Windows & Doors Award, the Intercontinental Truck Body Award and a Teacher Education Scholarship for students going into teaching.",
+    "metaDetail": "Six local awards, one for future teachers.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Coaldale Christian School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1718,
+    "title": "Frank Maddock High School Awards",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Frank Maddock High School students in Drayton Valley",
+    "url": "https://fmhigh.wrsd.ca/download/433369",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Alberta",
+    "notes": "The student handbook says the full list of awards and scholarship information is available from the school office.",
+    "active": true,
+    "description": "Frank Maddock High School presents over 250 awards at its yearly ceremony, including the Rotary Service Above Self and Rotary Merit scholarships, the latter recommended by the construction teacher, and an ATA award chosen by teachers, alongside honours, top course marks, academic medals and the FMHS Trophy.",
+    "metaDetail": "Rotary scholarships and an ATA award.",
+    "eligibility": {
+      "grades": [
+        "10",
+        "11",
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [
+        "Frank Maddock High School"
+      ],
+      "targetInstitutions": [],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1719,
+    "title": "The King's University Admission Scholarships",
+    "amount": "$2,000 to $3,000",
+    "deadline": null,
+    "audience": "High school graduates admitted to The King's University in Edmonton",
+    "url": "https://www.kingsu.ca/services/financial-aid/scholarships/admission-scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "No separate application: you are considered when you apply for admission on high school marks. The money is paid half in the fall and half in the winter, applied to tuition, and you need at least 12 credits a term.",
+    "active": true,
+    "description": "Every new student admitted to The King's University on high school marks is considered automatically: a final Grade 12 average of 80% to 89% earns the $2,000 Honours Scholarship and 90% or more earns the $3,000 Academic Distinction Scholarship. The Leder School of Business adds $3,000 and $2,000 to the two incoming business students with the highest entrance marks.",
+    "metaDetail": "Automatic at 80%; $3,000 at 90%.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "The King's University"
+      ],
+      "fields": [],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1720,
+    "title": "The King's University Competitive Awards for Incoming Students",
+    "amount": "$500 to $4,000",
+    "deadline": "2027-03-26",
+    "openDate": "2027-02-01",
+    "audience": "Grade 12 students starting at The King's University",
+    "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Applications for King's competitive awards open February 1, 2027 and close March 26, 2027; music awards that need a performance video are due before March 31. The awards page filters by program and year of study and gives each award's criteria.",
+    "active": true,
+    "description": "About forty King's awards take applications from incoming high school students, usually needing an 80% entrance average for scholarships or financial need for bursaries. They include the Boessenkool Scholarship (twelve at $2,000 for commerce), the Cook/Mahaffy Bursary ($4,000), Computronix computing science awards ($1,000 to $3,000), environmental studies awards from $500 to $2,000, the King's Awareness Scholarship ($2,000, renewable, for students from a Canadian high school that has not sent anyone to King's in two years), music scholarships that ask for a video, and several awards that ask for a statement of Christian commitment.",
+    "metaDetail": "One window: February 1 to March 26.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "The King's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1721,
+    "title": "The King's University Returning Student Awards",
+    "amount": "Varies",
+    "deadline": "2027-03-26",
+    "openDate": "2027-02-01",
+    "audience": "Students already enrolled at The King's University",
+    "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Returning scholarships based on GPA are automatic; the competitive ones open February 1, 2027 and close March 26, 2027. Check the awards page for each award's year of study.",
+    "active": true,
+    "description": "Once you are at King's, about ninety more awards open up for returning students: automatic Returning Student Scholarships on GPA, program awards in education, business, the sciences, English, history, music and political science, bursaries for financial need and Christian service, Eagles athletics awards, pre-seminary and pre-medical scholarships, and Foundation bursaries.",
+    "metaDetail": "About ninety awards after first year.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "The King's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1722,
+    "title": "GLC Solutions Women in Business Scholarship",
+    "amount": "$4,000",
+    "deadline": "2027-03-26",
+    "openDate": "2027-02-01",
+    "audience": "Women entering or in the Bachelor of Commerce at The King's University",
+    "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Apply in King's competitive awards window, February 1 to March 26, 2027.",
+    "active": true,
+    "description": "One $4,000 scholarship each year from GLC Solutions for a full-time female student, incoming or returning, in the four-year Bachelor of Commerce at The King's University. You need an 80% high school entrance average or a 3.30 GPA, and a written statement of Christian commitment, career intent and volunteer experience; marks and the statement are weighed together.",
+    "metaDetail": "Needs an 80% entrance average.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "The King's University"
+      ],
+      "fields": [
+        "business"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1723,
+    "title": "GLC Solutions Women in Technology Scholarship",
+    "amount": "$4,000",
+    "deadline": "2027-03-26",
+    "openDate": "2027-02-01",
+    "audience": "Women entering or in Computing Science at The King's University",
+    "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
+    "category": "STEM",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Apply in King's competitive awards window, February 1 to March 26, 2027.",
+    "active": true,
+    "description": "One $4,000 scholarship each year from GLC Solutions for a full-time female student, incoming or returning, in the four-year Bachelor of Science with a major in Computing Science at The King's University. You need an 80% high school entrance average or a 3.30 GPA, and a written statement of Christian commitment, career intent and volunteer experience.",
+    "metaDetail": "Needs an 80% entrance average.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "The King's University"
+      ],
+      "fields": [
+        "STEM"
+      ],
+      "minAverage": 80,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": "female",
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1724,
+    "title": "Gerry Segger Music Scholarship in Performance Excellence",
+    "amount": "$6,000",
+    "deadline": "2027-03-31",
+    "openDate": "2027-02-01",
+    "audience": "Music performance students at The King's University",
+    "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
+    "category": "Arts",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Apply before March 31 with a 3 to 5 minute performance video. You can hold this award only once.",
+    "active": true,
+    "description": "A $6,000 scholarship each year for a full-time student, incoming or returning, in the Bachelor of Music (performance) or Performance Diploma at The King's University; if no one qualifies, a Bachelor of Arts in Music performance major can be considered. Selection is mainly on performance ability, shown in a short video.",
+    "metaDetail": "Chosen on a 3 to 5 minute video.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "The King's University"
+      ],
+      "fields": [
+        "Music"
+      ],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "music"
+      ]
+    }
+  },
+  {
+    "id": 1725,
+    "title": "Hollaar Family Bursary",
+    "amount": "$4,000",
+    "deadline": "2027-03-26",
+    "openDate": "2027-02-01",
+    "audience": "International students from Africa at The King's University",
+    "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Edmonton",
+    "notes": "Apply in King's competitive awards window, February 1 to March 26, 2027, and show financial need.",
+    "active": true,
+    "description": "One $4,000 bursary each year for a full-time international student from Africa, incoming or returning, at The King's University, with preference for students of African ancestry. You must apply and show financial need.",
+    "metaDetail": "For international students from Africa.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "The King's University"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1726,
+    "title": "Keyano College Fall Financial Need Bursaries",
+    "amount": "$660 to $1,550",
+    "deadline": "2027-07-31",
+    "openDate": "2027-05-01",
+    "audience": "Keyano College students with financial need",
+    "url": "https://media-002-ca.cdn.govstack.com/keyano-015-ca/media/qaenhvzf/26-27-booklet-august-26-2026.pdf",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Fort McMurray",
+    "notes": "Keyano's fall financial need application opens May 1 and closes July 31; one Awards Application with proof of income and expenses covers these bursaries. Other Keyano awards have their own listings.",
+    "active": true,
+    "description": "Keyano's 2026-27 award booklet lists bursaries for students with financial need, including the Alberta Opportunities Bursary ($850), CUPE Local 2157 ($1,300), Knights of Columbus ($1,300), Investment in the Future ($1,000) and SAKC ($1,000) bursaries, the Business and Professional Women's Club bursary ($750) for mature women returning to school, program bursaries for nursing, practical nursing, business administration, environmental technology, power engineering, early learning and college preparation, and Indigenous bursaries from Bert Lang and Enbridge.",
+    "metaDetail": "One application covers about twenty bursaries.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": true,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1727,
+    "title": "Keyano College Program Entrance Scholarships",
+    "amount": "$500 to $1,750",
+    "deadline": null,
+    "audience": "Students entering first year full time at Keyano College",
+    "url": "https://media-002-ca.cdn.govstack.com/keyano-015-ca/media/qaenhvzf/26-27-booklet-august-26-2026.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Fort McMurray",
+    "notes": "No application: the Office of the Registrar picks recipients from entering students' marks, and entrance scholarships are paid half in the fall and half in the winter.",
+    "active": true,
+    "description": "Keyano's Registrar awards entrance scholarships on marks to new full-time students: Keyano College Entrance Scholarships ($1,200), four Syncrude Canada scholarships ($1,750 each) for the top entrants to the Bachelor of Education, Bachelor of Science, Business Administration and Bachelor of Science in Nursing, and three $500 Lamb family scholarships for entrants to nursing, the Bachelor of Commerce and Business Administration.",
+    "metaDetail": "Chosen by the Registrar on your marks.",
+    "eligibility": {
+      "grades": [
+        "12"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1728,
+    "title": "Keyano College Program Achievement Awards",
+    "amount": "$300 to $1,800",
+    "deadline": "2026-12-18",
+    "audience": "Continuing Keyano College students",
+    "url": "https://media-002-ca.cdn.govstack.com/keyano-015-ca/media/qaenhvzf/26-27-booklet-august-26-2026.pdf",
+    "category": "Academic",
+    "lastVerified": "2026-09",
+    "region": "Fort McMurray",
+    "notes": "Keyano's winter student award application runs September 15 to December 18, 2026. Several of these are picked by the Registrar with no application.",
+    "active": true,
+    "description": "Awards for students already in a Keyano program, including the Keyano College Alumni Scholarship ($1,800) for graduates who come back after a year, the Gibson Energy Diversity Scholarship ($1,700) for women in third- or fourth-class power engineering, the CPA Education Foundation Scholarship ($1,300), Business Administration Academic Achievement Scholarships ($1,450), the Diane C. Wilson Bursary ($750) for single parents in University Studies, and awards for top science, early learning and college preparation students.",
+    "metaDetail": "For students already in a Keyano program.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1729,
+    "title": "Students' Association of Keyano College Awards",
+    "amount": "$500 to $1,000",
+    "deadline": null,
+    "audience": "Student members of the Students' Association of Keyano College",
+    "url": "https://media-002-ca.cdn.govstack.com/keyano-015-ca/media/1hselkua/sakc-awards.pdf",
+    "category": "Community",
+    "lastVerified": "2026-09",
+    "region": "Fort McMurray",
+    "notes": "Given at the Students' Association awards ceremony and funded by the association's operations and casino money. Members of the Executive Council are not eligible, and most awards prefer students who volunteered with the association or the college.",
+    "active": true,
+    "description": "The Students' Association of Keyano College gives the President's Award ($1,000, two awards, for leadership with a 3.0 GPA), First Year Achievement Awards ($500, four), Outstanding Volunteerism Awards ($500), the Vision Award for graduating students, awards from each vice-president for academics, math-related courses and student life, the Joel Cris Caminos Memorial International Student Award ($1,000), and $500 Huskies athletics awards in volleyball, basketball, soccer and esports.",
+    "metaDetail": "Volunteering with the association helps.",
+    "eligibility": {
+      "grades": [
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Keyano College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": [
+        "volunteer"
+      ]
+    }
+  },
+  {
+    "id": 1730,
+    "title": "Canadian Baptist Theological Seminary and College Scholarships",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Students admitted to CBT's college or seminary programs in Cochrane",
+    "url": "https://cbtsc.ca/scholarships/",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Cochrane",
+    "notes": "Apply once a year through the Populi student system before the school year starts, or before the Winter semester if you start in January. Most awards need admission to a program and at least two courses that semester, and returning students need a 2.3 GPA.",
+    "active": true,
+    "description": "Canadian Baptist Theological Seminary & College funds more than twenty scholarships through one yearly application, most paid per credit hour: from $50 a credit for named scholarships up to $250 a credit for the Barnabas Scholarship (new students nominated by a CNBC or SBC church) and for ministry leaders on staff at a CNBC church. Others cover dependents of CNBC, CBT and IMB staff, spouses of CBT students, former missionary volunteers, and students planning missions, pastoral, children's or religious education ministry.",
+    "metaDetail": "Most students get at least one; one yearly form.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Canadian Baptist Theological Seminary and College"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
+  },
+  {
+    "id": 1731,
+    "title": "Northwestern Polytechnic Awards",
+    "amount": "Varies",
+    "deadline": null,
+    "audience": "Students entering or attending Northwestern Polytechnic in Grande Prairie",
+    "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
+    "category": "General",
+    "lastVerified": "2026-09",
+    "region": "Grande Prairie",
+    "notes": "The awards listing filters by type (bursaries, entrance, Indigenous, leadership, fine arts, year-end) and by program, and each award says whether you apply or are selected. Several NWP awards also have their own listings here.",
+    "active": true,
+    "description": "Northwestern Polytechnic's awards listing holds about 350 awards, with more than $350,000 a year in scholarships and bursaries: entrance awards such as the Alberta Blue Cross awards for students with 80% in English 30 and four other 30-level courses, bursaries for financial need, and program awards for power engineering, automotive, millwright, animal health technology, education and athletics, from a few hundred dollars to $2,000.",
+    "metaDetail": "About 350 awards in one searchable list.",
+    "eligibility": {
+      "grades": [
+        "12",
+        "post-secondary"
+      ],
+      "schoolBoards": [],
+      "specificSchools": [],
+      "targetInstitutions": [
+        "Northwestern Polytechnic"
+      ],
+      "fields": [],
+      "minAverage": null,
+      "minAge": null,
+      "maxAge": null,
+      "genderRequired": null,
+      "indigenousRequired": false,
+      "bipocRequired": false,
+      "financialNeed": false,
+      "maxFamilyIncome": null,
+      "fosterCare": false,
+      "citizenship": "any",
+      "apprenticeship": false,
+      "extracurriculars": []
+    }
   }
 ]
