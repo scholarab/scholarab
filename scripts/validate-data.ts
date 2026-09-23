@@ -659,6 +659,11 @@ if (emDashHits.length) {
 // program data and three guides. Only src and public are scanned, because this
 // file has to spell the terms out.
 const RULE1_PATTERN = /non-?binary|transgender|gender[- ]diverse|gender diversity|sexual diversity|lgbt|queer|two-spirit/i;
+// The one exception, taken by Ilia on 2026-09-22: the Skipping Stone Foundation
+// Trans Community Award is listed in its provider's own words. The phrase is
+// removed from a line before the test, so any other wording on the same line,
+// or anywhere else, still fails.
+const RULE1_EXCEPTIONS = ['transgender and gender diverse communities'];
 const RULE1_EXT = /\.(json|astro|ts|tsx|md|xml|txt|html)$|\/_redirects$|\/_headers$/;
 const rule1Hits = ['src', 'public'].flatMap((r) => walk(join(__dirname, '..', r)))
   .map((f) => ({ rel: f.slice(join(__dirname, '..').length + 1).split('\\').join('/'), full: f }))
@@ -667,7 +672,7 @@ const rule1Hits = ['src', 'public'].flatMap((r) => walk(join(__dirname, '..', r)
     readFileSync(full, 'utf-8')
       .split('\n')
       .map((line, i) => ({ rel, line: i + 1, text: line }))
-      .filter((x) => RULE1_PATTERN.test(x.text)),
+      .filter((x) => RULE1_PATTERN.test(RULE1_EXCEPTIONS.reduce((t, p) => t.split(p).join(''), x.text))),
   );
 if (rule1Hits.length) {
   console.error(
