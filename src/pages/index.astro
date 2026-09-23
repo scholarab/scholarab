@@ -8,7 +8,8 @@ import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 import { programIsListed, scholarshipStatusOf } from '../lib/status';
-import { SCHOLARSHIP_FACETS, facetForCategory, facetItems } from '../lib/facets';
+import { SCHOLARSHIP_FACETS, MENU_SCOPES, facetForCategory, facetItems } from '../lib/facets';
+import { PHOTO_CREDITS, needsCredit } from '../lib/photo-credits';
 import { TEASER_KEYS, teaserOptions } from '../lib/quiz';
 
 const scholarships = await loadScholarships();
@@ -107,15 +108,17 @@ const cityFacets = SCHOLARSHIP_FACETS.filter(f => f.kind === 'region').map(f => 
 }));
 
 // The scope carousel under the hero (Ilia, 2026-09-22, after tesla.com's
-// model cards): one big photo card per scope that has a hub photo, biggest
-// first, so the order follows the data rather than a hand-kept list. Counts
-// are the hub's own (facetItems), the same numbers the header tiles show.
+// model cards): one big photo card per header-menu scope (MENU_SCOPES), biggest
+// first. Every scope has a photo since 2026-09-23, so the menu list is what
+// keeps this at ten cards rather than twenty-five. Counts are the hub's own
+// (facetItems), the same numbers the header tiles show. A CC BY or CC BY-SA
+// photo carries its credit on the card (photo-credits.ts).
 const SCOPE_KICKERS: Record<string, string> = {
   alberta: 'Anywhere in Alberta',
   national: 'Open across Canada',
 };
 const scopeCards = SCHOLARSHIP_FACETS
-  .filter(f => f.kind === 'region' && f.backdrop)
+  .filter(f => MENU_SCOPES.includes(f.slug) && f.backdrop)
   .map(f => {
     const items = facetItems(f, scholarships);
     return {
@@ -125,6 +128,7 @@ const scopeCards = SCHOLARSHIP_FACETS
       kicker: SCOPE_KICKERS[f.slug] ?? `${f.label} students`,
       count: items.length,
       open: items.filter(s => scholarshipStatusOf(s, today) === 'active').length,
+      credit: PHOTO_CREDITS[f.backdrop!],
     };
   })
   .sort((a, b) => b.count - a.count);
@@ -278,6 +282,11 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
                   </div>
                 </div>
               </div>
+              {c.credit && needsCredit(c.credit) && (
+                <a class="sab-scope-credit" href={c.credit.sourceUrl} target="_blank" rel="noopener noreferrer">
+                  Photo: {c.credit.author}, {c.credit.license}
+                </a>
+              )}
             </article>
           ))}
         </div>
@@ -899,6 +908,14 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-scope-btn-solid:hover { background: #5CE3BB; }
   .sab-scope-btn-light { background: rgba(255,255,255,0.92); color: #141915; }
   .sab-scope-btn-light:hover { background: #FFFFFF; }
+  /* The license credit a CC BY or CC BY-SA photo requires, kept small in the
+     card's bottom-right corner, over the photo's own bottom shade. */
+  .sab-scope-credit {
+    position: absolute; right: 14px; bottom: 10px; z-index: 1;
+    font-size: 11px; line-height: 1.3; color: rgba(255,255,255,0.72); text-decoration: none;
+    max-width: 60%; text-align: right; text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .sab-scope-credit:hover { color: #FFFFFF; text-decoration: underline; }
   .sab-scopes-arrow {
     /* Above the cards: each card's text layer is z-index 1, and without this
        the arrow is drawn but every click on it lands on the card. */
@@ -921,6 +938,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   @media (max-width: 700px) {
     .sab-scopes-track { gap: 12px; }
     .sab-scope { flex-basis: 86vw; aspect-ratio: 3 / 4; }
+    /* Room under the stacked buttons for the photo credit line. */
+    .sab-scope-body { padding-bottom: 38px; }
     .sab-scope-kicker, .sab-scope-sub { font-size: 16px; }
     .sab-scope-ctas { flex-direction: column; gap: 10px; }
     .sab-scope-btn { width: 100%; min-width: 0; }

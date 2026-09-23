@@ -16,7 +16,7 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 import SabLogoMark from './SabLogoMark.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { programIsListed } from '../../lib/status';
-import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
+import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, MENU_SCOPES, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
 
 interface Props {
   currentPath: string;
@@ -33,17 +33,10 @@ let programCount: number | null = null;
 
 // The Scholarships and Programs dropdowns (Tesla-style, Ilia 2026-09-13,
 // Programs added 2026-09-15): tiles for the hubs, a text list beside them.
-// The Scholarships tiles are the two broad scopes and eight cities chosen for
-// population and reach, not listing count (Lacombe and Okotoks out-list
-// Lethbridge, but far fewer students live there). The Programs tiles are the
-// format hubs (what shape the thing is), because that is what a reader is
-// choosing between; the subject hubs sit in the list beside them.
-// Slugs must exist in the facet lists; a missing one is dropped, not faked.
-const MENU_SCOPES = [
-  'alberta', 'national',
-  'calgary', 'edmonton', 'red-deer', 'lethbridge',
-  'medicine-hat', 'grande-prairie', 'fort-mcmurray', 'st-albert',
-];
+// The Scholarships tiles are MENU_SCOPES (facets.ts), shared with the home
+// carousel. The Programs tiles are the format hubs (what shape the thing is),
+// because that is what a reader is choosing between; the subject hubs sit in
+// the list beside them.
 const MENU_TOPICS = ['stem', 'arts', 'trades', 'community', 'sports', 'indigenous'];
 const scholarshipFacetBySlug = new Map(SCHOLARSHIP_FACETS.map(f => [f.slug, f]));
 

@@ -84,6 +84,19 @@ export interface Facet {
   backdrop?: string;
 }
 
+/**
+ * The scopes the header's Scholarships menu shows as photo tiles, and the home
+ * page's scope carousel shows as cards: the two broad scopes and eight cities
+ * chosen for population and reach, not listing count (Lacombe and Okotoks
+ * out-list Lethbridge, but far fewer students live there). Both surfaces sort
+ * these by count. A slug missing from SCHOLARSHIP_FACETS is dropped, not faked.
+ */
+export const MENU_SCOPES = [
+  'alberta', 'national',
+  'calgary', 'edmonton', 'red-deer', 'lethbridge',
+  'medicine-hat', 'grande-prairie', 'fort-mcmurray', 'st-albert',
+];
+
 export const SCHOLARSHIP_FACETS: Facet[] = [
   {
     slug: 'medicine-hat',
@@ -91,6 +104,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Medicine Hat',
     label: 'Medicine Hat',
     h1: 'Medicine Hat scholarships',
+    backdrop: 'medicine-hat',
     title: 'Medicine Hat High School Scholarships',
     description:
       'Every scholarship a Medicine Hat high school student can apply for: Catholic board awards, county bursaries, the college, service clubs and local employers.',
@@ -130,6 +144,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Red Deer',
     label: 'Red Deer',
     h1: 'Red Deer scholarships',
+    backdrop: 'red-deer',
     title: 'Red Deer Scholarships for High School Students',
     description:
       'Scholarships for Red Deer and central Alberta high school students: polytechnic entrance awards, memorial funds, and community scholarships.',
@@ -142,6 +157,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Lethbridge',
     label: 'Lethbridge',
     h1: 'Lethbridge scholarships',
+    backdrop: 'lethbridge',
     title: 'Lethbridge High School Scholarships',
     description:
       'Scholarships for Lethbridge and southern Alberta students: school division awards, county scholarships, and university entrance bursaries.',
@@ -154,6 +170,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Airdrie',
     label: 'Airdrie',
     h1: 'Airdrie scholarships',
+    backdrop: 'airdrie',
     title: 'Airdrie High School Scholarships',
     description:
       'Scholarships for Airdrie and Rocky View students: the Legion branch award, ag society and minor sport scholarships, and Rocky View teacher money.',
@@ -166,6 +183,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Brooks',
     label: 'Brooks',
     h1: 'Brooks scholarships',
+    backdrop: 'brooks',
     title: 'Brooks High School Scholarships',
     description:
       'Scholarships for Brooks and County of Newell students: the Brooks Composite handbook awards, service club money, trades scholarships and health bursaries.',
@@ -178,6 +196,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'St. Albert',
     label: 'St. Albert',
     h1: 'St. Albert scholarships',
+    backdrop: 'st-albert',
     title: 'St. Albert High School Scholarships',
     description:
       'Scholarships for St. Albert and Sturgeon County students: community foundation awards, the Humboldt memorial funds, service club money and school bursaries.',
@@ -190,6 +209,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Spruce Grove',
     label: 'Spruce Grove',
     h1: 'Spruce Grove scholarships',
+    backdrop: 'spruce-grove',
     title: 'Spruce Grove High School Scholarships',
     description:
       'Scholarships for Spruce Grove, Stony Plain and Parkland County students: division citizenship awards, service club money, trades bursaries and employer funds.',
@@ -202,6 +222,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Leduc',
     label: 'Leduc',
     h1: 'Leduc scholarships',
+    backdrop: 'leduc',
     title: 'Leduc High School Scholarships',
     description:
       'Scholarships for Leduc, Leduc County and Devon students: county bursaries, Black Gold division awards, arts foundation and hospital money.',
@@ -214,6 +235,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Fort Saskatchewan',
     label: 'Fort Saskatchewan',
     h1: 'Fort Saskatchewan scholarships',
+    backdrop: 'fort-saskatchewan',
     title: 'Fort Saskatchewan Scholarships',
     description:
       'Scholarships for Fort Saskatchewan and Elk Island students: Fort High internal awards, division scholarships, industry money and service club bursaries.',
@@ -226,6 +248,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Beaumont',
     label: 'Beaumont',
     h1: 'Beaumont scholarships',
+    backdrop: 'beaumont',
     title: 'Beaumont Scholarships',
     description:
       'Scholarships for Beaumont students: two Beaumont Composite awards, the Chamber and RCMP scholarship, Black Gold division money and francophone bourses.',
@@ -238,6 +261,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Lloydminster',
     label: 'Lloydminster',
     h1: 'Lloydminster scholarships',
+    backdrop: 'lloydminster',
     title: 'Lloydminster Scholarships',
     description:
       'Scholarships for Lloydminster students on the Alberta side: Comprehensive High awards, service club money, trades and engineering awards, and the Rutherford.',
@@ -250,6 +274,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Lacombe',
     label: 'Lacombe',
     h1: 'Lacombe scholarships',
+    backdrop: 'lacombe',
     title: 'Lacombe Scholarships',
     description:
       'Scholarships for Lacombe and Lacombe County students: the Lacombe Composite awards list, service club money and the entrance awards at Burman.',
@@ -262,6 +287,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Cochrane',
     label: 'Cochrane',
     h1: 'Cochrane scholarships',
+    backdrop: 'cochrane',
     title: 'Cochrane Scholarships',
     description:
       "Scholarships for Cochrane students: the Cochrane High award package, the town's Rotary, Kiwanis and Lions awards, and the Rocky View County scholarships.",
@@ -274,6 +300,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Okotoks',
     label: 'Okotoks',
     h1: 'Okotoks scholarships',
+    backdrop: 'okotoks',
     title: 'Okotoks Scholarships',
     description:
       "Scholarships for Okotoks students: the Foothills Composite awards handbook, the town's service clubs, and the Holy Trinity Academy and Foothills County awards.",
@@ -286,6 +313,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Sherwood Park',
     label: 'Sherwood Park',
     h1: 'Sherwood Park scholarships',
+    backdrop: 'sherwood-park',
     title: 'Sherwood Park Scholarships',
     description:
       'Scholarships for Sherwood Park and Strathcona County: the Bev Facey and Ardrossan award lists, the Elk Island division awards and the local service clubs.',
@@ -298,6 +326,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Grande Prairie',
     label: 'Grande Prairie',
     h1: 'Grande Prairie scholarships',
+    backdrop: 'grande-prairie',
     title: 'Grande Prairie Scholarships',
     description:
       'Scholarships for Grande Prairie and the Peace Region: Northwestern Polytechnic entrance awards, community foundation funds and the city and county money.',
@@ -323,6 +352,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Wetaskiwin',
     label: 'Wetaskiwin',
     h1: 'Wetaskiwin scholarships',
+    backdrop: 'wetaskiwin',
     title: 'Wetaskiwin Scholarships',
     description:
       'Scholarships for Wetaskiwin and Wetaskiwin County students: the Composite High School award list, service club money and the county agricultural bursaries.',
@@ -335,6 +365,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Camrose',
     label: 'Camrose',
     h1: 'Camrose scholarships',
+    backdrop: 'camrose',
     title: 'Camrose Scholarships',
     description:
       'Scholarships for Camrose and Camrose County students: the Camrose Composite handbook, service club money and the entrance awards at Augustana.',
@@ -347,6 +378,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Cold Lake',
     label: 'Cold Lake',
     h1: 'Cold Lake scholarships',
+    backdrop: 'cold-lake',
     title: 'Cold Lake Scholarships',
     description:
       'Scholarships for Cold Lake and Lakeland students: Cold Lake High awards, the 4 Wing military scholarships, co-op and credit union money, and division awards.',
@@ -359,6 +391,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     value: 'Chestermere',
     label: 'Chestermere',
     h1: 'Chestermere scholarships',
+    backdrop: 'chestermere',
     title: 'Chestermere Scholarships',
     description:
       'Scholarships for Chestermere students: the three Chestermere High awards, the Rocky View teachers\' scholarship and the Calgary-region awards that name the city.',

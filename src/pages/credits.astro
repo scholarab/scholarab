@@ -1,0 +1,90 @@
+---
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import Layout from '../layouts/Layout.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import { SCHOLARSHIP_FACETS } from '../lib/facets';
+import { PHOTO_CREDITS } from '../lib/photo-credits';
+
+// The attribution page for the scope photos (header menu tiles and the home
+// carousel). CC BY and CC BY-SA photos need their author, license and source
+// credited; the carousel carries a short credit on each card and this page
+// carries the full one for every photo, including the tiles, which have no
+// room for text. Noindex: it has no search value, and the sitemap lists only
+// the pages Google may index. Rows come from photo-credits.ts, in facet order.
+const title = 'Photo Credits | ScholarAB';
+const description = 'Who took the photos of Alberta cities and towns used on ScholarAB, and the license each one is used under.';
+const rows = SCHOLARSHIP_FACETS
+  .filter(f => f.backdrop && PHOTO_CREDITS[f.backdrop])
+  .map(f => ({ scope: f.label, ...PHOTO_CREDITS[f.backdrop!]! }))
+  .sort((a, b) => a.scope.localeCompare(b.scope, 'en-CA'));
+---
+
+<Layout
+  title={title}
+  description={description}
+  ogTitle={title}
+  ogDescription={description}
+  ogUrl="https://www.scholarab.ca/credits/"
+  robots="noindex, follow"
+>
+  <SabFonts slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/credits" />
+  </div>
+
+  <div id="sab-credits" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
+    <div class="sabcr-body" style="flex:1;">
+      <div class="sab-kicker">CREDITS</div>
+      <h1 class="sabcr-h1">Photo credits</h1>
+      <p class="sabcr-lede">
+        The city and town photos in the Scholarships menu and on the home page were taken by the
+        people below. Each is used under the license shown and was cropped and lightly colour graded
+        for this site. Photos under CC BY-SA remain under CC BY-SA in their edited form.
+      </p>
+      <div class="sabcr-table-wrap">
+        <table class="sabcr-table">
+          <thead>
+            <tr><th scope="col">Place</th><th scope="col">Photo</th><th scope="col">By</th><th scope="col">License</th></tr>
+          </thead>
+          <tbody>
+            {rows.map(r => (
+              <tr>
+                <th scope="row">{r.scope}</th>
+                <td><a href={r.sourceUrl} target="_blank" rel="noopener noreferrer">{r.shows}</a><span class="sabcr-src"> ({r.source})</span></td>
+                <td>{r.author}</td>
+                <td>{r.licenseUrl ? <a href={r.licenseUrl} target="_blank" rel="noopener noreferrer">{r.license}</a> : r.license}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <SabFooter />
+  </div>
+</Layout>
+
+<style>
+  .sabcr-body { padding: 72px var(--sab-gutter) 110px; width: 100%; max-width: var(--sab-measure); margin: 0 auto; box-sizing: border-box; }
+  .sabcr-h1 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(40px, 6vw, 76px); line-height: 1.02; letter-spacing: -0.02em;
+    color: #141915; margin: 12px 0 24px;
+  }
+  .sabcr-lede { font-size: 17px; line-height: 1.65; color: #3A403B; max-width: 68ch; margin: 0 0 40px; }
+  .sabcr-table-wrap { overflow-x: auto; }
+  .sabcr-table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; color: #3A403B; }
+  .sabcr-table th, .sabcr-table td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-bottom: 1px solid #E4E0D5; }
+  .sabcr-table thead th {
+    font-family: var(--font-label); font-weight: 500; font-size: 12px; letter-spacing: 0.05em;
+    text-transform: uppercase; color: #5C5F5B; border-bottom: 2px solid #141915;
+  }
+  .sabcr-table tbody th { font-weight: 600; color: #141915; white-space: nowrap; }
+  .sabcr-table a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
+  .sabcr-src { color: #5C5F5B; }
+  @media (max-width: 760px) {
+    .sabcr-body { padding: 48px 20px 80px; }
+    .sabcr-table { font-size: 14px; }
+  }
+</style>

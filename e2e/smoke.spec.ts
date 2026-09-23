@@ -283,7 +283,13 @@ test('home scope carousel links every card to its hub and steps with the arrows'
   test.skip(testInfo.project.name === 'mobile', 'arrows are desktop only');
   await page.goto('/');
   const cards = page.locator('[data-scope-card]');
-  await expect(cards).toHaveCount(5);
+  // One card per header-menu scope (MENU_SCOPES), not one per photo.
+  await expect(cards).toHaveCount(10);
+  // CC BY and CC BY-SA photos carry their credit, linked to the source page.
+  for (const href of await page.locator('.sab-scope-credit').evaluateAll(els => els.map(e => e.getAttribute('href')))) {
+    expect(href).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+  }
+  await expect(page.locator('.sab-scope-credit')).not.toHaveCount(0);
   for (const href of await cards.locator('.sab-scope-btn-solid').evaluateAll(els => els.map(e => e.getAttribute('href')))) {
     expect(href).toMatch(/^\/scholarships\/[a-z-]+\/$/);
   }
