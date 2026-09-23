@@ -109,11 +109,12 @@ describe('initSaved', () => {
     setup()
     // getToday mock = 2026-04-05
     const chips = Object.fromEntries($$('[data-sv-wrap]').map(w => [
-      w.dataset.id, w.querySelector('[data-sv-chip]')!.textContent,
+      // textContent joins the date and the countdown; the dot between them is CSS.
+      w.dataset.id, w.querySelector('[data-when]')!.textContent,
     ]))
-    expect(chips['1']).toBe('26 DAYS LEFT')
-    expect(chips['2']).toBe('CLOSED')
-    expect(chips['7']).toBe('71 DAYS LEFT')
+    expect(chips['1']).toBe('May 126 days left')
+    expect(chips['2']).toBe('Closed')
+    expect(chips['7']).toBe('Jun 1571 days left')
     // The word is recomputed from the clock; the mark saying the link leaves
     // the site is markup and must survive that rewrite. It is a drawn SVG
     // rather than a ↗ character now, so this asserts the element survives,

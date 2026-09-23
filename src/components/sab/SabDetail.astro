@@ -89,9 +89,9 @@ const chip =
   : status === 'unconfirmed' ? { text: 'DATE NOT CONFIRMED', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : status === 'ongoing' ? { text: 'ONGOING · JOIN ANYTIME', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'tba' ? { text: 'DEADLINE TBA', bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
-  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#A0491A', fg: '#F4F5F1' }
+  : daysLeft === 0 ? { text: 'DUE TODAY', bg: '#A0491A', fg: '#FFFFFF' }
   : typeof daysLeft === 'number'
-    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#A0491A' : far ? 'rgba(20,25,21,0.05)' : 'rgba(160,73,26,0.12)', fg: urgent ? '#F4F5F1' : far ? 'rgba(20,25,21,0.65)' : '#A0491A' }
+    ? { text: `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`, bg: urgent ? '#A0491A' : far ? 'rgba(20,25,21,0.05)' : 'rgba(160,73,26,0.12)', fg: urgent ? '#FFFFFF' : far ? 'rgba(20,25,21,0.65)' : '#A0491A' }
     : { text: 'OPEN', bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' };
 ---
 
@@ -273,7 +273,7 @@ const chip =
   .sabd-guide {
     display: block; margin-top: 16px; padding: 18px 20px;
     border: 1px solid rgba(20,25,21,0.14); border-radius: 4px;
-    background: #F4F5F1; text-decoration: none; box-sizing: border-box;
+    background: var(--bg-page); text-decoration: none; box-sizing: border-box;
   }
   .sabd-guide:hover { border-color: #0E8C64; }
 
@@ -675,8 +675,8 @@ const chip =
       // round, not ceil: midnight-to-midnight is whole days except across a
       // DST change, where ceil overcounts by one (and disagrees with the list chips)
       const days = Math.max(0, Math.round((new Date(deadline + 'T00:00:00').getTime() - todayMs) / 86400000));
-      if (days === 0) paint('DUE TODAY', '#A0491A', '#F4F5F1');
-      else if (days <= URGENT_DAYS) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#A0491A', '#F4F5F1');
+      if (days === 0) paint('DUE TODAY', '#A0491A', '#FFFFFF');
+      else if (days <= URGENT_DAYS) paint(`${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`, '#A0491A', '#FFFFFF');
       else if (days <= SOON_DAYS) paint(`${days} DAYS LEFT`, 'rgba(160,73,26,0.12)', '#A0491A');
       else paint(`${days} DAYS LEFT`, 'rgba(20,25,21,0.05)', 'rgba(20,25,21,0.65)');
     }

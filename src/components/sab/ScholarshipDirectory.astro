@@ -2,13 +2,14 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipDayChip, scholarshipGroupKey, shortDate } from '../../lib/list-core.ts';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { BOOKMARK, EXT } from '../../lib/icons.ts';
+import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -166,8 +167,8 @@ const totalSoon = initial.reduce(
 // the headline and the label says which of the two it is.
 const statValue = totalOpen > 0 || totalSoon === 0 ? totalOpen : totalSoon;
 const statLabel = totalOpen > 0 || totalSoon === 0
-  ? 'OPEN ACROSS THESE LISTINGS'
-  : 'OPENING IN A LATER CYCLE';
+  ? 'Open across these listings'
+  : 'Opening in a later cycle';
 // One short line under the label, never a stack of them: the stat block shares
 // a flex row with the h1 and the standfirst, so a taller stat column pushes the
 // toolbar down. e2e/smoke.spec.ts pins every hub's toolbar to the same height
@@ -178,7 +179,7 @@ const statLabel = totalOpen > 0 || totalSoon === 0
 // one place on the page that is supposed to answer "how much money is here",
 // and it was deleted 2026-09-15 at Ilia's request.
 const soonLine = totalOpen > 0 && totalSoon > 0
-  ? `+$${totalSoon.toLocaleString('en-CA')} OPENING LATER`
+  ? `+$${totalSoon.toLocaleString('en-CA')} opening later`
   : '';
 ---
 
@@ -193,8 +194,8 @@ const soonLine = totalOpen > 0 && totalSoon > 0
     </div>
     <div class="sabl-stat">
       <div class="sabl-stat-value tnum" data-dir-stat>${statValue.toLocaleString('en-CA')}</div>
-      <div class="sabl-mono sabl-stat-label" data-dir-stat-label>{statLabel}</div>
-      <div class="sabl-mono sabl-stat-soon" data-dir-stat-soon hidden={!soonLine}>
+      <div class="sabl-stat-label" data-dir-stat-label>{statLabel}</div>
+      <div class="sabl-stat-soon" data-dir-stat-soon hidden={!soonLine}>
         {soonLine}
       </div>
     </div>
@@ -211,7 +212,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       />
     </div>
     <div class="sabl-sort" id="dir-sort">
-      <span class="sabl-mono sabl-row-label">SORT</span>
+      <span class="sabl-row-label">Sort</span>
       <div class="sabl-sort-chips">
       {SORT_CHIPS.map(s => (
         <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
@@ -247,7 +248,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
   <div class="sabl-filters sabl-filters-dense">
     {!hideCategories && (
       <div class="sabl-filter-row">
-        <span class="sabl-mono sabl-row-label">TYPE</span>
+        <span class="sabl-row-label">Type</span>
         <div class="sabl-chips">
             <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
             {categories.map(c => (
@@ -258,7 +259,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
     )}
     {!hideScopes && (
       <div class="sabl-filter-row sabl-filter-row-wrap">
-        <span class="sabl-mono sabl-row-label">WHERE YOU LIVE</span>
+        <span class="sabl-row-label">Where you live</span>
         {/* One native picker instead of 27 chips (the chips stay for no-JS).
             Each option goes to the same hub its chip does, filters included
             (afterCounts). */}
@@ -277,7 +278,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       </div>
     )}
     <div class="sabl-filter-row">
-      <span class="sabl-mono sabl-row-label">STATUS</span>
+      <span class="sabl-row-label">Status</span>
       <div class="sabl-chips">
         {STATUS_CHIPS.map(s => (
           <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value })}</span></button>
@@ -304,7 +305,9 @@ const soonLine = totalOpen > 0 && totalSoon > 0
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
     {initial.map((s, i) => {
       const status = getScholarshipStatus(s);
-      const chip = scholarshipDayChip(s);
+      const when = scholarshipWhen(s);
+      const facts = eligibilityFacts(s.eligibility);
+      const amount = amountCell(s.amount);
       const head = headerAt.get(i);
       // Nominated, school-selected or automatic: "Apply" would send a student
       // to a form that does not exist. Same test as the detail page's button.
@@ -363,13 +366,13 @@ const soonLine = totalOpen > 0 && totalSoon > 0
           <div class="sabl-row-main">
             <h2 class="sabl-name-h"><a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a></h2>
             {s.audience && <div class="sabl-blurb">{s.audience}</div>}
+            {facts.length > 0 && (
+              <ul class="sabl-facts" aria-label="Requirements">{facts.map(f => <li>{f}</li>)}</ul>
+            )}
           </div>
-          <div class="sabl-amount">{s.amount}</div>
+          <div class={amount.cls}>{amount.text}</div>
           <div class="sabl-row-when">
-            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
-            <span class="sabl-due">
-              {s.deadline ? `${s.deadlineEstimated ? 'AROUND' : 'DUE'} ${shortDate(s.deadline)}` : 'NO FIXED DEADLINE'}
-            </span>
+            <span class={when.cls} data-when><span data-when-main>{when.main}</span><span class="sabl-when-sub" data-when-sub hidden={!when.sub}>{when.sub}</span></span>
           </div>
           <div class="sabl-card-actions">
               <button
@@ -432,7 +435,7 @@ const soonLine = totalOpen > 0 && totalSoon > 0
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipDayChip, scholarshipGroupKey, selectScholarships } from '../../lib/list-core.ts';
+  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
   import { sendEvent } from '../../lib/events.ts';
@@ -533,8 +536,8 @@ const soonLine = totalOpen > 0 && totalSoon > 0
       return {
         count: directoryCountLine(visible.length, total, 'LISTINGS', openNow),
         stat: '$' + (headlineOpen ? open : soon).toLocaleString('en-CA'),
-        'stat-label': headlineOpen ? 'OPEN ACROSS THESE LISTINGS' : 'OPENING IN A LATER CYCLE',
-        'stat-soon': open > 0 && soon > 0 ? `+$${soon.toLocaleString('en-CA')} OPENING LATER` : '',
+        'stat-label': headlineOpen ? 'Open across these listings' : 'Opening in a later cycle',
+        'stat-soon': open > 0 && soon > 0 ? `+$${soon.toLocaleString('en-CA')} opening later` : '',
       };
     },
     getSavedIds: () => [...getSaved()],
@@ -545,11 +548,14 @@ const soonLine = totalOpen > 0 && totalSoon > 0
     onCardsParsed(items) {
       for (const s of items) {
         const status = getScholarshipStatus(s);
-        const chipEl = s.el.querySelector<HTMLElement>('[data-days-chip]');
-        if (chipEl) {
-          const chip = scholarshipDayChip(s);
-          chipEl.hidden = !chip;
-          if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
+        const whenEl = s.el.querySelector<HTMLElement>('[data-when]');
+        if (whenEl) {
+          const when = scholarshipWhen(s);
+          whenEl.className = when.cls;
+          whenEl.querySelector('[data-when-main]')!.textContent = when.main;
+          const sub = whenEl.querySelector<HTMLElement>('[data-when-sub]')!;
+          sub.textContent = when.sub;
+          sub.hidden = !when.sub;
         }
         const apply = s.el.querySelector<HTMLElement>('[data-track="apply"]');
         // Only the word: the ↗ beside it is a sibling span, and overwriting

@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ProgramList React island.
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
-import { DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programDayChip, programGroupKey, shortDate } from '../../lib/list-core.ts';
+import { DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programGroupKey, programWhen } from '../../lib/list-core.ts';
 import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
@@ -120,7 +120,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     </div>
     <div class="sabl-stat">
       <div class="sabl-stat-value tnum" data-dir-stat>{paidCount} / {initial.length}</div>
-      <div class="sabl-mono sabl-stat-label">PAID ACROSS THESE LISTINGS</div>
+      <div class="sabl-stat-label">Paid across these listings</div>
     </div>
   </div>
 
@@ -135,7 +135,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       />
     </div>
     <div class="sabl-sort" id="dir-sort">
-      <span class="sabl-mono sabl-row-label">SORT</span>
+      <span class="sabl-row-label">Sort</span>
       <div class="sabl-sort-chips">
       {SORT_CHIPS.map(s => (
         <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
@@ -170,7 +170,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       controls. */}
   <div class="sabl-filters sabl-filters-dense">
     <div class="sabl-filter-row">
-      <span class="sabl-mono sabl-row-label">FORMAT</span>
+      <span class="sabl-row-label">Format</span>
       <div class="sabl-chips">
         {onAll
           ? <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></span>
@@ -187,7 +187,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       </div>
     </div>
     <div class="sabl-filter-row">
-      <span class="sabl-mono sabl-row-label">FIELD</span>
+      <span class="sabl-row-label">Field</span>
       <div class="sabl-chips">
         {onAll
           ? <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></span>
@@ -204,7 +204,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       </div>
     </div>
     <div class="sabl-filter-row">
-      <span class="sabl-mono sabl-row-label">STATUS</span>
+      <span class="sabl-row-label">Status</span>
       <div class="sabl-chips">
         {STATUS_CHIPS.map(s => (
           <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value })}</span></button>
@@ -232,7 +232,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     {initial.map((p, i) => {
       const slug = p._slug ?? generateSlug(p.name);
       const meta = [p.duration, p.grades, p.location].filter(Boolean) as string[];
-      const chip = programDayChip(p);
+      const when = programWhen(p);
       const head = headerAt.get(i);
       return (
         <>
@@ -281,22 +281,17 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
             <h2 class="sabl-name-h"><a href={`/programs/${slug}/`} class="sabl-name">{p.name}</a></h2>
             {p.provider && <div class="sabl-org">{p.provider}</div>}
             {meta.length > 0 && (
-              <div class="sabl-meta-row">
-                {meta.map(m => <span class="sabl-meta" title={m}>{m}</span>)}
-              </div>
+              <ul class="sabl-meta-row">
+                {meta.map(m => <li class="sabl-meta" title={m}>{m}</li>)}
+              </ul>
             )}
             {p.description && <div class="sabl-blurb" set:html={emailOff(p.description)} />}
           </div>
           <span class="sabl-card-top-left">
-            {p.paid && <span class="sabl-mono sabl-paid">$ PAID</span>}
+            {p.paid && <span class="sabl-paid">Paid</span>}
           </span>
           <div class="sabl-row-when">
-            <span class={chip ? chip.cls : 'sabl-days'} data-days-chip hidden={!chip}>{chip?.label}</span>
-            <span class="sabl-due">
-              {p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
-                ? `DUE ${shortDate(p.deadline)}`
-                : 'NO FIXED DEADLINE'}
-            </span>
+            <span class={when.cls} data-when><span data-when-main>{when.main}</span><span class="sabl-when-sub" data-when-sub hidden={!when.sub}>{when.sub}</span></span>
           </div>
           <div class="sabl-card-actions">
               <button
@@ -344,7 +339,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { PROGRAM_GROUP_LABELS, buildProgramStatusCache, directoryCountLine, filterSortPrograms, getProgramStatus, programDayChip, programGroupKey, selectPrograms } from '../../lib/list-core.ts';
+  import { PROGRAM_GROUP_LABELS, buildProgramStatusCache, directoryCountLine, filterSortPrograms, getProgramStatus, programGroupKey, programWhen, selectPrograms } from '../../lib/list-core.ts';
   import type { ProgramWithMeta, ProgramSort, ProgramStatus, ProgramStatusFilter } from '../../lib/list-core.ts';
   import { getSavedPrograms, toggleSavedProgram } from '../../lib/tracker.ts';
 
@@ -409,11 +404,14 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     // load so CDN-cached HTML never shows a stale countdown.
     onCardsParsed(items) {
       for (const p of items) {
-        const chipEl = p.el.querySelector<HTMLElement>('[data-days-chip]');
-        if (!chipEl) continue;
-        const chip = programDayChip(p);
-        chipEl.hidden = !chip;
-        if (chip) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
+        const whenEl = p.el.querySelector<HTMLElement>('[data-when]');
+        if (!whenEl) continue;
+        const when = programWhen(p);
+        whenEl.className = when.cls;
+        whenEl.querySelector('[data-when-main]')!.textContent = when.main;
+        const sub = whenEl.querySelector<HTMLElement>('[data-when-sub]')!;
+        sub.textContent = when.sub;
+        sub.hidden = !when.sub;
       }
     },
   });

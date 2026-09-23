@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { savedScholarshipChip } from '../lib/saved-client'
-import { scholarshipDayChip } from '../lib/list-core'
+import { savedWhen } from '../lib/saved-client'
+import { scholarshipWhen } from '../lib/list-core'
 import { quizPayload } from '../lib/quiz-payload'
 import type { Scholarship } from '../lib/data-loader'
 import scholarships from '../data/scholarships.json'
@@ -16,12 +16,12 @@ import generated from '../data/quiz-payload.json'
 const ended = { deadline: null, openDate: null, active: false, concluded: true }
 
 describe('a concluded award is closed on every client surface', () => {
-  it('Saved chips it CLOSED', () => {
-    expect(savedScholarshipChip(ended)).toEqual({ label: 'CLOSED', cls: 'sabl-days neutral' })
+  it('Saved marks it Closed', () => {
+    expect(savedWhen('scholarship', ended).main).toBe('Closed')
   })
 
-  it('the directory chips it CLOSED', () => {
-    expect(scholarshipDayChip({ id: 1, title: 'x', ...ended } as never)).toEqual({ label: 'CLOSED', cls: 'sabl-days neutral' })
+  it('the directory marks it Closed', () => {
+    expect(scholarshipWhen({ id: 1, title: 'x', ...ended } as never).main).toBe('Closed')
   })
 
   it('the quiz payload keeps the flag, and only where it is true', () => {

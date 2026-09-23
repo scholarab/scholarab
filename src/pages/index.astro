@@ -244,7 +244,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
                 {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
               </div>
               <div class="sab-row-amount tnum">{s.amount}</div>
-              <div class="sab-row-chip sab-mono closing-soon-badge">&hellip;</div>
+              <div class="sab-row-when"><span class="sabl-when" data-when><span data-when-main>&hellip;</span><span class="sabl-when-sub" data-when-sub hidden></span></span></div>
             </a>
           ))}
         </div>
@@ -271,7 +271,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
                 {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
               </div>
               <div class="sab-row-amount tnum">{s.amount}</div>
-              <div class="sab-row-chip sab-mono closing-soon-badge">&hellip;</div>
+              <div class="sab-row-when"><span class="sabl-when" data-when><span data-when-main>&hellip;</span><span class="sabl-when-sub" data-when-sub hidden></span></span></div>
             </a>
           ))}
         </div>
@@ -342,12 +342,13 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 </Layout>
 
 <script>
-  import { URGENT_DAYS, SOON_DAYS } from '../lib/list-core';
+  import { scholarshipWhen } from '../lib/list-core';
+  import type { ScholarshipWithMeta } from '../lib/list-core';
   import { todayDate as albertaToday } from '../lib/calendar';
   import { QUIZ_STORAGE_KEY } from '../lib/quiz';
   import { sendEvent } from '../lib/events';
 
-  // ── Closing-this-week day chips (client-side so a stale static build never lies) ──
+  // ── Deadline lines on the homepage rows (client-side so a stale static build never lies) ──
   // Both row lists (closing soon, biggest open) share the chips and the rule
   // that a row whose deadline has passed since the build drops out.
   function updateClosingSoon() {
@@ -359,27 +360,22 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     const rows = list.querySelectorAll<HTMLElement>('.sab-closing-row');
     let visible = 0;
     rows.forEach(row => {
-      const deadline = row.dataset.deadline;
-      const chip = row.querySelector('.closing-soon-badge');
-      // Only the biggest-awards list can hold an open award with no date.
-      if (!deadline) {
-        visible++;
-        if (chip) { chip.textContent = 'NO FIXED DEADLINE'; chip.classList.add('sab-chip-far'); }
-        return;
-      }
-      const deadlineMs = new Date(deadline + 'T00:00:00').getTime();
-      if (deadlineMs < todayMs) {
+      const deadline = row.dataset.deadline ?? null;
+      if (deadline && new Date(deadline + 'T00:00:00').getTime() < todayMs) {
         row.style.display = 'none';
         return;
       }
       visible++;
-      const daysLeft = Math.round((deadlineMs - todayMs) / 86400000);
-      if (chip) {
-        chip.textContent = daysLeft === 0 ? 'DUE TODAY' : `${daysLeft} ${daysLeft === 1 ? 'DAY' : 'DAYS'} LEFT`;
-        // The directory's scale (list-core), so a row is the same colour here
-        // as on the listing it links to. This page used to go solid at 4 days.
-        chip.classList.toggle('sab-chip-urgent', daysLeft <= URGENT_DAYS);
-        chip.classList.toggle('sab-chip-far', daysLeft > SOON_DAYS);
+      // The directory's own deadline line (list-core), so a row reads the
+      // same here as on the listing it links to. Every row here is open.
+      const when = scholarshipWhen({ id: 0, deadline, openDate: null, active: true } as unknown as ScholarshipWithMeta);
+      const el = row.querySelector<HTMLElement>('[data-when]');
+      if (el) {
+        el.className = when.cls;
+        el.querySelector('[data-when-main]')!.textContent = when.main;
+        const sub = el.querySelector<HTMLElement>('[data-when-sub]')!;
+        sub.textContent = when.sub;
+        sub.hidden = !when.sub;
       }
     });
     // Renumber the visible rows so hidden expired entries don't leave gaps
@@ -586,12 +582,12 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
 
 <style is:global>
   /* The home design is fixed light regardless of site theme */
-  body:has(#sab-home) { background: #F4F5F1; }
+  body:has(#sab-home) { background: var(--bg-page); }
 </style>
 
 <style>
   /* ════ ScholarAB Home · claude.ai/design "ScholarAB Home.dc.html" ════
-     Palette: canvas #F4F5F1 · alt band #E9ECE6 · ink #141915 · hero/footer #08120E
+     Palette: canvas var(--bg-page) (white since 2026-09-22) · alt band #F2F3F5 · ink #141915 · hero/footer #08120E
      accent #2FD3A0 · accent hover #4FE0B4 · accent-on-dark text #5CE3BB
      green #0A6B4D (pressed #08573E) · hard shadows on cream #0E8C64
      ink-on-accent #08120E · urgency #A0491A
@@ -602,7 +598,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
      Type: see --font-display / --font-body / --font-label in global.css */
 
   #sab-home {
-    background: #F4F5F1;
+    background: var(--bg-page);
     color: #141915;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
@@ -764,21 +760,18 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
   }
   .sab-row-amount { font-family: var(--font-display); font-size: 28px; text-align: right; }
-  .sab-row-chip {
-    font-size: 12.5px; font-weight: 500; padding: 7px 14px; border-radius: 100px;
-    background: rgba(160,73,26,0.12); color: #A0491A; white-space: nowrap;
-  }
-  .sab-row-chip.sab-chip-urgent { background: #A0491A; color: #F4F5F1; }
-  .sab-row-chip.sab-chip-far { background: rgba(20,25,21,0.05); color: rgba(20, 25, 21, 0.65); }
+  /* The directory's deadline line (.sabl-when in global.css), a size up. */
+  .sab-row-when { justify-self: end; }
+  .sab-row-when .sabl-when { font-size: 15px; }
 
   /* ── Categories ── */
-  .sab-cat-band { background: #E9ECE6; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
+  .sab-cat-band { background: #F2F3F5; border-top: 2px solid #141915; border-bottom: 2px solid #141915; }
   .sab-cats { padding-top: 88px; padding-bottom: 88px; }
   .sab-cats .sab-section-head { margin-bottom: 44px; }
   .sab-cats-meta { font-size: 13px; color: rgba(20, 25, 21, 0.68); white-space: nowrap; }
   .sab-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .sab-cat-card {
-    display: block; background: #F4F5F1; border: 1.5px solid rgba(20,25,21,0.85);
+    display: block; background: var(--bg-page); border: 1.5px solid rgba(20,25,21,0.85);
     border-radius: 14px; padding: 24px 22px; color: #141915; text-decoration: none;
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
@@ -809,7 +802,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     display: inline-flex; align-items: baseline; gap: 8px;
     border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
     padding: 7px 12px; font-size: 14px; font-weight: 600;
-    color: #141915; text-decoration: none; background: #F4F5F1;
+    color: #141915; text-decoration: none; background: var(--bg-page);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
   .sab-city-chip:hover { border-color: #0A6B4D; box-shadow: 2px 2px 0 #0E8C64; color: #141915; }
@@ -821,7 +814,7 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
   .sab-match-h2 { font-size: clamp(36px, 4.6vw, 56px); line-height: 1.05; margin-bottom: 20px; }
   .sab-match-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.68); margin: 0; }
   .sab-match-card {
-    background: #F4F5F1; border: 2px solid #141915; border-radius: 20px; padding: 36px;
+    background: var(--bg-page); border: 2px solid #141915; border-radius: 20px; padding: 36px;
     box-shadow: 8px 8px 0 rgba(14,140,100,0.35);
   }
   .sab-match-group { margin-bottom: 22px; }
@@ -952,7 +945,8 @@ const matchGroups = TEASER_KEYS.map(key => ({ key, label: legacyLabels[key]!, op
     .sab-row-name { font-size: 16px; line-height: 1.3; }
     .sab-row-blurb { font-size: 13px; margin-top: 4px; }
     .sab-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; white-space: nowrap; }
-    .sab-row-chip { grid-column: 1 / -1; justify-self: start; margin-top: 4px; font-size: 11px; padding: 6px 12px; }
+    .sab-row-when { grid-column: 1 / -1; justify-self: start; margin-top: 2px; }
+    .sab-row-when .sabl-when { font-size: 14px; }
 
     .sab-cats { padding-top: 32px; padding-bottom: 32px; }
     .sab-cats .sab-section-head { margin-bottom: 22px; }

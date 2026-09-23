@@ -1,7 +1,8 @@
 // Render only bookmarked cards from the published page snapshot.
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts';
 import { showToast, getToday, prefersReducedMotion } from './utils.ts';
-import { getScholarshipStatus, daysLeftClass } from './list-core.ts';
+import { amountCell, getScholarshipStatus, scholarshipWhen, programWhen } from './list-core.ts';
+import type { ScholarshipWithMeta, ProgramWithMeta } from './list-core.ts';
 import { sendEvent } from './events.ts';
 import { downloadICS } from './ics.ts';
 import { BOOKMARK, ARROW, EXT } from './icons.ts';
@@ -10,37 +11,14 @@ import { emailOff } from './email-off';
 
 // ── Chip/label helpers ───────────────────────────────────────────────────────
 
-export function savedShortDate(iso: string): string {
-  return new Date(iso + 'T00:00:00')
-    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-function daysChip(deadline: string): { label: string; cls: string } {
-  const days = Math.max(0, Math.round((new Date(deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
-  const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
-  // The directories' scale, not a second one: this list said 7 days where the
-  // directory said 14, so the same award changed colour between pages.
-  return { label, cls: daysLeftClass(days) };
-}
-
-export function savedScholarshipChip(s: { deadline: string | null; openDate: string | null; active?: boolean; concluded?: boolean; deadlineEstimated?: boolean }): { label: string; cls: string } {
+// The same one-line deadline cell the directories use ("Apr 30 · 26 days left"),
+// from the fields a saved card carries.
+export function savedWhen(type: 'scholarship' | 'program', f: { deadline: string | null; openDate?: string | null; active?: boolean; concluded?: boolean; deadlineEstimated?: boolean }): { main: string; sub: string; cls: string } {
   // `concluded` must travel with the dates: an ended award carries no deadline,
-  // so without it the helper reads "between cycles" and chips OPENING SOON.
-  const status = getScholarshipStatus({ id: 0, deadline: s.deadline, openDate: s.openDate, active: s.active ?? true, concluded: s.concluded, deadlineEstimated: s.deadlineEstimated } as Parameters<typeof getScholarshipStatus>[0]);
-  if (status === 'closed') return { label: 'CLOSED', cls: 'sabl-days neutral' };
-  if (status === 'unconfirmed') return { label: 'DATE NOT CONFIRMED', cls: 'sabl-days neutral' };
-  if (status === 'future') {
-    return { label: s.openDate ? `OPENS ${savedShortDate(s.openDate).toUpperCase()}` : 'OPENING SOON', cls: 'sabl-days neutral' };
-  }
-  if (!s.deadline) return { label: 'ROLLING', cls: 'sabl-days neutral' };
-  return daysChip(s.deadline);
-}
-
-export function savedProgramChip(p: { deadline: string | null }): { label: string; cls: string } {
-  if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') {
-    return { label: 'ROLLING', cls: 'sabl-days neutral' };
-  }
-  return daysChip(p.deadline);
+  // so without it the helper reads "between cycles" and says Opening later.
+  return type === 'scholarship'
+    ? scholarshipWhen({ id: 0, deadline: f.deadline, openDate: f.openDate ?? null, active: f.active ?? true, concluded: f.concluded, deadlineEstimated: f.deadlineEstimated } as unknown as ScholarshipWithMeta)
+    : programWhen({ id: 0, deadline: f.deadline } as unknown as ProgramWithMeta);
 }
 
 // ── Controller ────────────────────────────────────────────────────────────────
@@ -65,22 +43,17 @@ export type SavedItem = {
 function savedCard(s: SavedItem): string {
   const sh = s.type === 'scholarship';
   const attr = (key: string, value: string | undefined | null) => value == null ? '' : ` data-${key}="${esc(value)}"`;
-  const due = sh
-    ? (s.deadline ? `${s.deadlineEstimated ? 'AROUND' : 'DUE'} ${savedShortDate(s.deadline).toUpperCase()}` : 'NO FIXED DEADLINE')
-    : (s.deadline && s.deadline !== 'TBA' && s.deadline !== 'Ongoing'
-      ? `DUE ${savedShortDate(s.deadline).toUpperCase()}` : s.deadline === 'Ongoing' ? 'ROLLING INTAKE' : 'DEADLINE TBA');
   return `<div class="h-full" data-sv-wrap data-type="${s.type}" data-id="${s.id}">
     <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${sh ? attr('open-date', s.openDate) + attr('inactive', s.active === false ? '' : undefined) + attr('concluded', s.concluded ? '' : undefined) + attr('estimated', s.deadlineEstimated ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
       <div class="sabl-row-main">
         <h3 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
         ${sh
           ? (s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : '')
-          : `${s.provider ? `<div class="sabl-org">${esc(s.provider.toUpperCase())}</div>` : ''}${s.description ? `<div class="sabl-blurb">${emailOff(s.description)}</div>` : ''}`}
+          : `${s.provider ? `<div class="sabl-org">${esc(s.provider)}</div>` : ''}${s.description ? `<div class="sabl-blurb">${emailOff(s.description)}</div>` : ''}`}
       </div>
-      ${sh ? `<div class="sabl-amount">${esc(s.amount ?? '')}</div>` : '<span class="sabl-card-top-left"></span>'}
+      ${sh ? (() => { const a = amountCell(s.amount); return `<div class="${a.cls}">${esc(a.text)}</div>`; })() : '<span class="sabl-card-top-left"></span>'}
       <div class="sabl-row-when">
-        <span data-sv-chip></span>
-        <span class="sabl-due">${due}</span>
+        <span class="sabl-when" data-when><span data-when-main></span><span class="sabl-when-sub" data-when-sub hidden></span></span>
       </div>
       <div class="sabl-card-actions">
         <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">${BOOKMARK}</button>
@@ -134,11 +107,15 @@ export function initSaved() {
     for (const w of wraps()) {
       const card = w.querySelector<HTMLElement>('.sabl-card')!;
       const d = card.dataset;
-      const chipEl = card.querySelector<HTMLElement>('[data-sv-chip]');
-      const chip = w.dataset.type === 'scholarship'
-        ? savedScholarshipChip({ deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined })
-        : savedProgramChip({ deadline: d.deadline ?? null });
-      if (chipEl) { chipEl.className = chip.cls; chipEl.textContent = chip.label; }
+      const whenEl = card.querySelector<HTMLElement>('[data-when]');
+      const when = savedWhen(w.dataset.type === 'scholarship' ? 'scholarship' : 'program', { deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined });
+      if (whenEl) {
+        whenEl.className = when.cls;
+        whenEl.querySelector('[data-when-main]')!.textContent = when.main;
+        const sub = whenEl.querySelector<HTMLElement>('[data-when-sub]')!;
+        sub.textContent = when.sub;
+        sub.hidden = !when.sub;
+      }
       const apply = card.querySelector<HTMLElement>('[data-sv-apply]');
       if (apply) {
         const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined } as Parameters<typeof getScholarshipStatus>[0]);

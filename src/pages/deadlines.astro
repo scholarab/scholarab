@@ -268,7 +268,7 @@ const breadcrumbJson = {
 </Layout>
 
 <style is:global>
-  body:has(#sab-deadlines) { background: #F4F5F1; }
+  body:has(#sab-deadlines) { background: var(--bg-page); }
 
   .sabl-crumbs {
     display: flex; gap: 8px; align-items: center;
@@ -296,7 +296,7 @@ const breadcrumbJson = {
     position: sticky; top: 0; z-index: 2;
     display: flex; flex-wrap: wrap; gap: 8px;
     margin: 28px 0 8px; padding: 12px 0;
-    background: #F4F5F1; border-bottom: 1px solid #E5E0D5;
+    background: var(--bg-page); border-bottom: 1px solid rgba(20,25,21,0.12);
   }
   .sabcal-chip {
     display: inline-flex; align-items: baseline; gap: 6px;
@@ -322,7 +322,7 @@ const breadcrumbJson = {
   .sabcal-row {
     display: grid; grid-template-columns: 40px 1fr auto auto;
     gap: 8px 18px; align-items: baseline;
-    padding: 13px 0; border-bottom: 1px solid #E5E0D5;
+    padding: 13px 0; border-bottom: 1px solid rgba(20,25,21,0.12);
   }
   /* A layout-free wrapper above 720px (meta and status stay grid columns);
      phones turn it into one wrapping line. */
@@ -350,7 +350,7 @@ const breadcrumbJson = {
   .sabcal-tail p { max-width: 62ch; }
   .sabcal-tail .sabcal-h2 { border-bottom: 2px solid #141915; padding-bottom: 8px; margin-bottom: 16px; }
   .sabcal-undated { list-style: none; margin: 20px 0; padding: 0; }
-  .sabcal-undated li { padding: 9px 0; border-bottom: 1px solid #E5E0D5; display: flex; justify-content: space-between; gap: 18px; }
+  .sabcal-undated li { padding: 9px 0; border-bottom: 1px solid rgba(20,25,21,0.12); display: flex; justify-content: space-between; gap: 18px; }
   .sabcal-undated a {
     color: #141915; display: inline-block; padding-block: 3px; margin-block: -3px;
   }

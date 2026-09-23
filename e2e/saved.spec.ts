@@ -14,7 +14,7 @@ test('Saved stays small while retaining bookmarks, cross-tab updates and calenda
   await page.reload();
   await expect(page.locator('[data-sv-count]')).toContainText('4 items');
   await expect(page.locator('[data-sv-wrap]')).toHaveCount(4);
-  await expect(page.locator('[data-type="scholarship"][data-id="59"] [data-sv-chip]')).toHaveText('CLOSED');
+  await expect(page.locator('[data-type="scholarship"][data-id="59"] [data-when-main]')).toHaveText('Closed');
   const dated = await page.locator('[data-sv-wrap] .sabl-card[data-deadline]').evaluateAll(cards => cards.filter(c => !['', 'TBA', 'Ongoing'].includes(c.getAttribute('data-deadline') ?? '')).length);
   await page.locator('[data-sv-view="calendar"]').click();
   const download = page.waitForEvent('download');

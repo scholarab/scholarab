@@ -129,7 +129,7 @@
   /* The canvas behind everything. Layout.astro pins `html` to the same value
      for pages it owns; this is what /admin and any future page outside that
      layout fall back to. */
-  --bg-page:      #F4F5F1;
+  --bg-page:      #FFFFFF;
   --text-primary: #141915;
 
   /* The rest of the palette global.css repeats. Components still carry their
@@ -427,8 +427,8 @@ body.quiz-results #match-divider {
 
 .sabl-stat { text-align: right; flex: none; padding-top: 10px; }
 .sabl-stat-value { font-family: var(--font-display); font-size: clamp(32px, 4vw, 44px); line-height: 1; }
-.sabl-stat-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); margin-top: 6px; }
-.sabl-stat-soon { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); margin-top: 3px; white-space: pre-line; }
+.sabl-stat-label { font-size: 13.5px; font-weight: 500; color: rgba(20, 25, 21, 0.68); margin-top: 6px; }
+.sabl-stat-soon { font-size: 13.5px; font-weight: 500; color: rgba(20, 25, 21, 0.68); margin-top: 2px; white-space: pre-line; }
 .sabl-stat-soon[hidden] { display: none; }
 
 /* One rule, not three. The toolbar used to close with a hairline of its own
@@ -501,7 +501,7 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    a black lump in it (Ilia, 2026-09-15: "too packed together"). The phone
    block below overrides the gap for the scrolling row. */
 .sabl-sort-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.sabl-row-label { font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); width: 72px; flex: none; }
+.sabl-row-label { font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.68); width: 72px; flex: none; }
 .sabl-sort .sabl-row-label { width: auto; margin-right: 0; }
 
 .sabl-chip {
@@ -611,6 +611,9 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
   .sabl-filters-dense .sabl-chips { gap: 5px; }
   .sabl-filters-dense .sabl-chip { padding: 8px 10px; }
   .sabl-filters-dense .sabl-row-label { width: 56px; }
+  /* /scholarships has room (its TYPE row ends near 950px), and "Where you
+     live" in sentence case broke onto two lines at 56px. */
+  .sabl-filters-dense:has(.sabl-scope-select) .sabl-row-label { width: 108px; }
 }
 
 /* ── Filter rail (hubs) ──
@@ -716,8 +719,8 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
      block below takes it to 44px. */
   display: inline-flex; align-items: center; gap: 8px; flex: none; min-height: 24px;
   background: none; border: 0; padding: 0; cursor: pointer;
-  font-family: var(--font-label); font-size: 12px; font-weight: 500;
-  letter-spacing: 0.08em; color: rgba(20, 25, 21, 0.68);
+  font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
+  color: rgba(20, 25, 21, 0.68);
 }
 .sabl-lean:hover { color: var(--text-primary); }
 /* Points at the rail it tucks away, and back out at the space it would come
@@ -835,19 +838,18 @@ html.js .sabl-group { cursor: pointer; }
   font-family: var(--font-label); font-size: 26px; font-weight: 600;
   letter-spacing: 0.02em; line-height: 1.1; color: var(--text-primary);
 }
-/* A filled pill rather than grey type beside the heading: at this size the
-   count is the second thing read, and it is the number the reader came for. */
+/* The count in the heading's own face, a step lighter. It was a grey pill
+   until 2026-09-22; pills on every count were part of the templated look. */
 .sabl-group-count {
-  font-family: var(--font-label); font-size: 13px; font-weight: 500;
-  letter-spacing: 0.04em; padding: 5px 11px; border-radius: 100px;
-  background: rgba(20,25,21,0.07); color: rgba(20, 25, 21, 0.7);
+  font-family: var(--font-label); font-size: 26px; font-weight: 500;
+  line-height: 1.1; color: rgba(20, 25, 21, 0.45);
 }
 /* padding, not align-items: centre, so the word sits on the same line as the
    rule beside it rather than in the middle of the taller heading box. */
 .sabl-group-toggle {
   display: none; margin-left: auto; align-items: center; gap: 8px; padding-bottom: 12px;
-  font-family: var(--font-label); font-size: 12px; font-weight: 500;
-  letter-spacing: 0.08em; color: rgba(20, 25, 21, 0.68);
+  font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
+  color: rgba(20, 25, 21, 0.68);
 }
 html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-group:hover .sabl-group-toggle { color: var(--text-primary); }
@@ -858,7 +860,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
 @media (prefers-reduced-motion: reduce) { .sabl-group-caret { transition: none; } }
 .sabl-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 152px 148px 116px;
+  grid-template-columns: minmax(0, 1fr) 140px 200px 104px;
   column-gap: 24px;
   align-items: center;
   background: transparent;
@@ -882,13 +884,8 @@ html.js .sabl-group-toggle { display: inline-flex; }
   display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
 }
 .sabl-card-actions { grid-column: 4; align-self: center; justify-self: end; }
-/* Wraps rather than collides: both chips are nowrap, so in a narrow card (the
-   railed hubs put three cards in 916px) a long tag like MATH & PHYSICS used to
-   run straight under the day chip. `margin-left: auto` keeps the day chip on
-   the right whether the row holds one line or two. */
-.sabl-card-top > .sabl-days { margin-left: 0; }
-/* Programs carry a $ PAID badge beside the tag; the right slot stays reserved
-   for the day chip so program and scholarship cards line up. */
+/* Programs carry the Paid mark in the amount column, so program and
+   scholarship rows line up. */
 .sabl-card-top-left { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
 /* Above is the programs' PAID badge; the category label that used to sit
    beside it was an eyebrow over the listing's own heading and is gone. */
@@ -897,19 +894,6 @@ html.js .sabl-group-toggle { display: inline-flex; }
   padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(20,25,21,0.25); color: rgba(20, 25, 21, 0.65);
   white-space: nowrap;
 }
-.sabl-days {
-  font-family: var(--font-label); font-size: 11.5px; font-weight: 500;
-  padding: 4px 10px; border-radius: 100px; white-space: nowrap;
-  /* Three tiers, not two. Every countdown used to wear the same orange, so a
-     grid where most deadlines are months away was uniformly loud and the one
-     closing this week did not stand out. Past six weeks the chip is quiet ink;
-     inside six weeks it warms up; inside two it fills. #A0491A replaces
-     #A0491A, which was 4.13:1 on the card and missed AA. */
-  background: rgba(20,25,21,0.05); color: rgba(20, 25, 21, 0.65);
-}
-.sabl-days.soon { background: rgba(160,73,26,0.12); color: var(--rust); }
-.sabl-days.urgent { background: var(--rust); color: var(--bg-page); }
-.sabl-days.neutral { background: transparent; border: 1px solid rgba(20,25,21,0.25); color: rgba(20, 25, 21, 0.65); }
 .sabl-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; line-height: 1.3; color: var(--text-primary); text-decoration: none; display: block; }
 .sabl-name:hover { color: var(--green); }
 /* Card titles are headings so a screen reader can walk a directory card by
@@ -929,16 +913,35 @@ html.js .sabl-group-toggle { display: inline-flex; }
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2;
   overflow: hidden;
 }
-.sabl-due { font-family: var(--font-label); font-size: 12px; color: rgba(20, 25, 21, 0.68); margin-top: 4px; }
+/* "Amount varies" is the absence of a figure, so it is set as a note, not in
+   the display face the real amounts use. */
+.sabl-amount.is-varies { font: 500 13.5px/1.3 var(--font-body); color: rgba(20, 25, 21, 0.6); }
+.sabl-amount.is-long { font-size: 20px; white-space: nowrap; }
+/* The requirements the audience line leaves out ("80% average", "Financial
+   need"), each after a small green mark. */
+.sabl-facts { display: flex; flex-wrap: wrap; gap: 4px 16px; list-style: none; margin: 7px 0 0; padding: 0; }
+.sabl-facts li { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82); }
+.sabl-facts li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex: none; }
+/* The deadline cell: the date, then the countdown in a lighter weight. The
+   tier colours the text; only the last two weeks get the dot. */
+.sabl-when { font-size: 14px; font-weight: 700; color: var(--text-primary); white-space: nowrap; display: inline-flex; align-items: center; }
+.sabl-when-sub { font-weight: 500; color: rgba(20, 25, 21, 0.62); }
+.sabl-when-sub::before { content: '·'; margin: 0 6px; }
+.sabl-when-sub[hidden] { display: none; }
+.sabl-when.is-soon .sabl-when-sub { color: var(--rust); }
+.sabl-when.is-urgent, .sabl-when.is-urgent .sabl-when-sub { color: var(--rust); }
+.sabl-when.is-urgent::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--rust); margin-right: 7px; }
+.sabl-when.is-quiet { font-weight: 600; color: rgba(20, 25, 21, 0.62); }
+.sabl-when.is-quiet .sabl-when-sub { font-weight: 500; }
 .sabl-card-actions { display: flex; align-items: center; gap: 12px; }
 .sabl-save {
   font-family: var(--font-body); font-size: 15px; background: none;
-  border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
-  width: 30px; height: 30px; cursor: pointer; color: rgba(20, 25, 21, 0.68);
+  border: 0; border-radius: 8px;
+  width: 34px; height: 34px; cursor: pointer; color: rgba(20, 25, 21, 0.68);
   display: inline-grid; place-items: center;
   display: inline-flex; align-items: center; justify-content: center;
 }
-.sabl-save:hover { border-color: var(--text-primary); }
+.sabl-save:hover { background: rgba(20,25,21,0.06); color: var(--text-primary); }
 .sabl-save.on { color: var(--green); background: rgba(47,211,160,0.15); }
 /* The bookmark is drawn, not a ☆ character standing in for an icon set. Saved
    fills it; unsaved leaves it open. */
@@ -1120,8 +1123,9 @@ html:not(.js) .sabl-more { display: none; }
 }
 
 /* Program-card extras for the "ScholarAB Programs" design */
-.sabl-org { font-family: var(--font-label); font-size: 12px; color: rgba(20, 25, 21, 0.68); margin-top: 6px; }
-.sabl-meta-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.sabl-org { font-size: 13.5px; font-weight: 600; color: rgba(20, 25, 21, 0.72); margin-top: 3px; }
+/* Plain facts separated by dots. They were grey boxes until 2026-09-22. */
+.sabl-meta-row { display: flex; flex-wrap: wrap; gap: 3px 16px; margin: 8px 0 6px; padding: 0; list-style: none; }
 /* One line each. duration/grades/location are free text, and a listing whose
    duration reads "45-minute exam, written on one day inside a two-week window
    in late March" turned a row of chips into a 155px paragraph wearing chip
@@ -1129,10 +1133,13 @@ html:not(.js) .sabl-more { display: none; }
    fit its text is a chip that should be truncated; the detail page has the
    sentence. */
 .sabl-meta {
-  font-size: 12.5px; font-weight: 600; padding: 5px 10px; border-radius: 6px;
-  background: #E9ECE6; color: rgba(20, 25, 21, 0.7);
+  position: relative; padding-left: 12px; box-sizing: border-box;
+  font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82);
   max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+/* A dot per item rather than a separator between them, so an item that wraps
+   onto its own line does not start with a stray "·". */
+.sabl-meta::before { content: ''; position: absolute; left: 0; top: calc(50% - 2.5px); width: 5px; height: 5px; border-radius: 50%; background: rgba(20, 25, 21, 0.35); }
 /* Arrow convention: → stays on ScholarAB, ↗ leaves for the sponsor's site.
    Two cards that look alike had buttons that did categorically different
    things; "Details →" opened our page, "Apply →" left the site, with
@@ -1140,9 +1147,10 @@ html:not(.js) .sabl-more { display: none; }
 .sabl-ext { margin-left: 0.4em; }
 
 .sabl-paid {
-  font-size: 11.5px; font-weight: 500; padding: 5px 11px; border-radius: 100px;
-  background: rgba(14,140,100,0.12); color: var(--green); white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 14px; font-weight: 700; color: var(--green); white-space: nowrap;
 }
+.sabl-paid::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
 
 /* Directory-page shell (scholarships + programs design pages) */
 .sabp { background: var(--bg-page); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
@@ -1446,7 +1454,7 @@ html:not(.js) .sabm-ph { display: none; }
 .sab-consent {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 9998;
   background: var(--text-primary); color: var(--bg-page);
-  border-top: 1.5px solid rgba(244, 245, 241,0.14);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.14);
   /* Mint on near-black is the readable pairing; the ink surfaces hand the
      focus ring back to mint for exactly this reason. */
   --focus-ring: #2FD3A0;
@@ -1458,7 +1466,7 @@ html:not(.js) .sabm-ph { display: none; }
 }
 .sab-consent-copy { min-width: 0; }
 .sab-consent-title { font-weight: 700; font-size: 15px; margin: 0; }
-.sab-consent-body { font-size: 13.5px; line-height: 1.5; margin: 4px 0 0; color: rgba(244, 245, 241,0.72); }
+.sab-consent-body { font-size: 13.5px; line-height: 1.5; margin: 4px 0 0; color: rgba(255, 255, 255, 0.72); }
 .sab-consent-body a { color: var(--brand); text-underline-offset: 3px; }
 .sab-consent-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .sab-consent-btn {
@@ -1467,7 +1475,7 @@ html:not(.js) .sabm-ph { display: none; }
   /* 44px minimum target: the banner's most likely reader is on a phone. */
   min-height: 44px;
 }
-.sab-consent-no { background: transparent; color: var(--bg-page); border: 1.5px solid rgba(244, 245, 241,0.32); }
+.sab-consent-no { background: transparent; color: var(--bg-page); border: 1.5px solid rgba(255, 255, 255, 0.32); }
 .sab-consent-yes { background: var(--brand); color: var(--text-on-brand); border: 1.5px solid var(--brand); }
 
 @media (max-width: 700px) {

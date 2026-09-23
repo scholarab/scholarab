@@ -119,7 +119,7 @@ const HUBS = [
 
 /** The row whose label is `name`; FORMAT and FIELD are both navigation rows. */
 const filterRow = (page: import('@playwright/test').Page, name: string) =>
-  page.locator('.sabl-filter-row').filter({ has: page.locator('.sabl-row-label', { hasText: new RegExp(`^${name}$`) }) });
+  page.locator('.sabl-filter-row').filter({ has: page.locator('.sabl-row-label', { hasText: new RegExp(`^${name}$`, 'i') }) });
 
 test('every hub puts its filter chips at the same height', async ({ page }, testInfo) => {
   // Mobile stacks the header and wraps the chips on its own terms; the row a
@@ -171,7 +171,7 @@ test('every scholarship hub links to every other hub of its kind', async ({ page
       expect(links, `${path} does not link to itself`).not.toContain(path);
       expect(links, `${path} links back to the directory`).toContain('/scholarships/');
       // WHERE YOU LIVE (was SCOPE) is gone from the rail; TYPE and STATUS are what is left.
-      await expect(page.locator('.sabl-row-label', { hasText: /^WHERE YOU LIVE$/ })).toHaveCount(0);
+      await expect(page.locator('.sabl-row-label', { hasText: /^where you live$/i })).toHaveCount(0);
     }
   }
 });

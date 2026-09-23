@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest'
 import {
   getScholarshipStatus, getProgramStatus, programMatchesGrade,
-  filterSortScholarships, filterSortPrograms, scholarshipDayChip, programDayChip,
-  daysLeftClass, URGENT_DAYS, SOON_DAYS, groupRuns, directoryCountLine,
+  filterSortScholarships, filterSortPrograms, scholarshipWhen, programWhen,
+  whenTier, URGENT_DAYS, SOON_DAYS, groupRuns, directoryCountLine,
   scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS,
 } from './list-core'
 import type { ScholarshipWithMeta, ProgramWithMeta, ScholarshipFilterState, ProgramFilterState } from './list-core'
@@ -320,66 +320,40 @@ describe('filterSortScholarships', () => {
   })
 })
 
-// ── scholarshipDayChip ────────────────────────────────────────────────────────
+// ── programWhen ───────────────────────────────────────────────────────────────
 
-describe('scholarshipDayChip', () => {
-  it('returns CLOSED for expired listings', () => {
-    const s = makeScholarship({ id: 1, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime() })
-    expect(scholarshipDayChip(s)).toEqual({ label: 'CLOSED', cls: 'sabl-days neutral' })
-  })
-
-  it('returns OPENS date for future listings', () => {
-    const s = makeScholarship({
-      id: 1, openDate: '2026-09-01', deadline: '2026-12-01',
-      _open_ms: new Date('2026-09-01T00:00:00').getTime(),
-      _deadline_ms: new Date('2026-12-01T00:00:00').getTime(),
-    })
-    expect(scholarshipDayChip(s)).toEqual({ label: 'OPENS SEP 1', cls: 'sabl-days neutral' })
-  })
-
-  it('never counts down to an estimated deadline', () => {
-    const s = makeScholarship({ id: 1, deadline: '2026-04-20', deadlineEstimated: true, _deadline_ms: new Date('2026-04-20T00:00:00').getTime() })
-    expect(scholarshipDayChip(s)).toEqual({ label: 'DATE NOT CONFIRMED', cls: 'sabl-days neutral' })
-  })
-
-  it('returns days-left with urgent class inside two weeks', () => {
-    // getToday mock = 2026-04-05; deadline 2026-04-08 → 3 days
-    const s = makeScholarship({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })
-    expect(scholarshipDayChip(s)).toEqual({ label: '3 DAYS LEFT', cls: 'sabl-days urgent' })
-  })
-
-  it('returns DUE TODAY on the deadline day and null with no deadline', () => {
-    const today = makeScholarship({ id: 1, deadline: '2026-04-05', _deadline_ms: new Date('2026-04-05T00:00:00').getTime() })
-    expect(scholarshipDayChip(today)).toEqual({ label: 'DUE TODAY', cls: 'sabl-days urgent' })
-    expect(scholarshipDayChip(makeScholarship({ id: 2, deadline: null, _deadline_ms: 0 }))).toBeNull()
+describe('programWhen', () => {
+  it('uses the scholarship row format and names undated intakes', () => {
+    // getToday mock = 2026-04-05
+    expect(programWhen(makeProgram({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })))
+      .toEqual({ main: 'Apr 8', sub: '3 days left', cls: 'sabl-when is-urgent' })
+    expect(programWhen(makeProgram({ id: 2, deadline: 'Ongoing' })).main).toBe('Ongoing')
+    expect(programWhen(makeProgram({ id: 3, deadline: 'TBA' })).main).toBe('Deadline TBA')
+    expect(programWhen(makeProgram({ id: 4, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime() })).main).toBe('Closed')
   })
 })
 
-// ── programDayChip ────────────────────────────────────────────────────────────
+// ── scholarshipWhen ───────────────────────────────────────────────────────────
 
-describe('programDayChip', () => {
-  it('returns CLOSED for expired programs', () => {
-    const p = makeProgram({ id: 1, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime() })
-    expect(programDayChip(p)).toEqual({ label: 'CLOSED', cls: 'sabl-days neutral' })
-  })
-
-  it('distinguishes Ongoing from an undated intake', () => {
-    expect(programDayChip(makeProgram({ id: 1, deadline: 'Ongoing' })))
-      .toEqual({ label: 'ONGOING', cls: 'sabl-days neutral' })
-    expect(programDayChip(makeProgram({ id: 2, deadline: 'TBA' })))
-      .toEqual({ label: 'DEADLINE TBA', cls: 'sabl-days neutral' })
-    expect(programDayChip(makeProgram({ id: 3, deadline: null })))
-      .toEqual({ label: 'DEADLINE TBA', cls: 'sabl-days neutral' })
-  })
-
-  it('counts days down and marks the closest deadlines urgent', () => {
+describe('scholarshipWhen', () => {
+  const at = (iso: string) => new Date(iso + 'T00:00:00').getTime()
+  it('puts the date and the countdown on one line, tiered by urgency', () => {
     // getToday mock = 2026-04-05
-    const soon = makeProgram({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })
-    expect(programDayChip(soon)).toEqual({ label: '3 DAYS LEFT', cls: 'sabl-days urgent' })
-    const later = makeProgram({ id: 2, deadline: '2026-06-01', _deadline_ms: new Date('2026-06-01T00:00:00').getTime() })
-    expect(programDayChip(later)).toEqual({ label: '57 DAYS LEFT', cls: 'sabl-days' })
-    const today = makeProgram({ id: 3, deadline: '2026-04-05', _deadline_ms: new Date('2026-04-05T00:00:00').getTime() })
-    expect(programDayChip(today)).toEqual({ label: 'DUE TODAY', cls: 'sabl-days urgent' })
+    expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-04-08', _deadline_ms: at('2026-04-08') })))
+      .toEqual({ main: 'Apr 8', sub: '3 days left', cls: 'sabl-when is-urgent' })
+    expect(scholarshipWhen(makeScholarship({ id: 2, deadline: '2026-05-01', _deadline_ms: at('2026-05-01') })))
+      .toEqual({ main: 'May 1', sub: '26 days left', cls: 'sabl-when is-soon' })
+    expect(scholarshipWhen(makeScholarship({ id: 3, deadline: '2026-12-01', _deadline_ms: at('2026-12-01') })).cls).toBe('sabl-when')
+    expect(scholarshipWhen(makeScholarship({ id: 4, deadline: '2026-04-05', _deadline_ms: at('2026-04-05') })).sub).toBe('due today')
+  })
+  it('never counts down to a guessed date', () => {
+    expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-04-20', deadlineEstimated: true, _deadline_ms: at('2026-04-20') })))
+      .toEqual({ main: 'Around Apr 20', sub: 'not confirmed', cls: 'sabl-when is-quiet' })
+  })
+  it('names the other states plainly', () => {
+    expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-01-01', _deadline_ms: at('2026-01-01') })).main).toBe('Closed')
+    expect(scholarshipWhen(makeScholarship({ id: 2, openDate: '2026-09-01', deadline: '2026-12-01', _open_ms: at('2026-09-01'), _deadline_ms: at('2026-12-01') })).main).toBe('Opens Sep 1')
+    expect(scholarshipWhen(makeScholarship({ id: 3, deadline: null, _deadline_ms: 0 })).main).toBe('No fixed deadline')
   })
 })
 
@@ -467,32 +441,32 @@ describe('filterSortPrograms', () => {
 
 // ── deadline tiers ────────────────────────────────────────────────────────────
 
-describe('daysLeftClass', () => {
+describe('whenTier', () => {
   // The tier boundaries are the whole point of having three tiers: an off-by-one
-  // here silently makes a chip a week louder or quieter than it should be.
-  it('fills the chip up to and including the urgent boundary', () => {
-    expect(daysLeftClass(0)).toBe('sabl-days urgent')
-    expect(daysLeftClass(URGENT_DAYS)).toBe('sabl-days urgent')
+  // here silently makes a deadline a week louder or quieter than it should be.
+  it('marks urgent up to and including the urgent boundary', () => {
+    expect(whenTier(0)).toBe(' is-urgent')
+    expect(whenTier(URGENT_DAYS)).toBe(' is-urgent')
   })
 
-  it('warms the chip between the two boundaries', () => {
-    expect(daysLeftClass(URGENT_DAYS + 1)).toBe('sabl-days soon')
-    expect(daysLeftClass(SOON_DAYS)).toBe('sabl-days soon')
+  it('warms between the two boundaries', () => {
+    expect(whenTier(URGENT_DAYS + 1)).toBe(' is-soon')
+    expect(whenTier(SOON_DAYS)).toBe(' is-soon')
   })
 
   it('leaves far-off deadlines quiet', () => {
-    expect(daysLeftClass(SOON_DAYS + 1)).toBe('sabl-days')
-    expect(daysLeftClass(300)).toBe('sabl-days')
+    expect(whenTier(SOON_DAYS + 1)).toBe('')
+    expect(whenTier(300)).toBe('')
   })
 
-  it('drives the real chips at each boundary', () => {
+  it('drives the real rows at each boundary', () => {
     // getToday mock = 2026-04-05
     const at = (iso: string) =>
-      scholarshipDayChip(makeScholarship({ id: 1, deadline: iso, _deadline_ms: new Date(iso + 'T00:00:00').getTime() }))!.cls
-    expect(at('2026-04-19')).toBe('sabl-days urgent') // +14
-    expect(at('2026-04-20')).toBe('sabl-days soon')   // +15
-    expect(at('2026-05-20')).toBe('sabl-days soon')   // +45
-    expect(at('2026-05-21')).toBe('sabl-days')        // +46
+      scholarshipWhen(makeScholarship({ id: 1, deadline: iso, _deadline_ms: new Date(iso + 'T00:00:00').getTime() })).cls
+    expect(at('2026-04-19')).toBe('sabl-when is-urgent') // +14
+    expect(at('2026-04-20')).toBe('sabl-when is-soon')   // +15
+    expect(at('2026-05-20')).toBe('sabl-when is-soon')   // +45
+    expect(at('2026-05-21')).toBe('sabl-when')           // +46
   })
 })
 

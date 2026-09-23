@@ -62,7 +62,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
       await expect(page.locator('[data-dir-card]')).toHaveCount(items.length);
     }
   }
-  for (const s of items.filter(s => s.concluded)) await expect(page.locator(`[data-dir-card][data-id="${s.id}"] [data-days-chip]`)).toHaveText('CLOSED');
+  for (const s of items.filter(s => s.concluded)) await expect(page.locator(`[data-dir-card][data-id="${s.id}"] [data-when-main]`)).toHaveText('Closed');
   await expect(page.locator('[data-dir-empty]')).toBeVisible();
   await page.locator('[data-dir-clear]').press('Enter');
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(Math.min(PAGE, items.length));

@@ -27,7 +27,7 @@ under any selector.
 | `--brand` | `#2FD3A0` | `showToast()` in `src/lib/utils.ts`: its only consumer |
 | `--brand-rgb` | `47, 211, 160` | the toast's shadow |
 | `--text-on-brand` | `#0B1512` | the toast's label |
-| `--bg-page` | `#F4F5F1` | `html`/`body`; the canvas behind everything |
+| `--bg-page` | `#FFFFFF` | `html`/`body`; the canvas behind everything. Every page reads this token; none hard-codes the colour |
 | `--text-primary` | `#141915` | `body` colour |
 | `--focus-ring` | `#0A6B4D` | every focus indicator; rebound per surface |
 | `--sab-measure` | `1180px` | grid/dashboard content width |
@@ -46,7 +46,7 @@ Everything else is a literal. That is deliberate, see section 6.
 
 | Role | Value | Notes |
 |---|---|---|
-| Canvas | `#F4F5F1` | the "cream": a cool off-white since 2026-09-17 |
+| Canvas | `#FFFFFF` | white since 2026-09-22 (the cream `#F4F5F1` read as a generated default); alt band `#F2F3F5` |
 | Alt band | `#E9ECE6` | |
 | Ink | `#141915` | body text |
 | Ink band | `#0B1512` | hero, footer, header, dark panels |

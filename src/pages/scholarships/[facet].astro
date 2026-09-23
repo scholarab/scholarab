@@ -178,7 +178,7 @@ const breadcrumbJson = {
 
 <style is:global>
   /* The directory design is fixed light regardless of site theme */
-  body:has(#sab-scholarships) { background: #F4F5F1; }
+  body:has(#sab-scholarships) { background: var(--bg-page); }
 
   /* A scope's full-page photo backdrop. A fixed pseudo-element rather than
      background-attachment: fixed, which iOS Safari ignores (it scrolls the
@@ -191,7 +191,7 @@ const breadcrumbJson = {
   #sab-scholarships.sabl-has-backdrop { background: transparent; }
   .sabl-has-backdrop::before {
     content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background-color: #D9CFC2;
+    background-color: #E6E8EB;
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
@@ -227,14 +227,14 @@ const breadcrumbJson = {
      (the script below sets --sabl-fade from 0 to 1). */
   .sabl-has-backdrop::after {
     content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background: #F4F5F1; opacity: calc(var(--sabl-fade, 0) * 0.6);
+    background: var(--bg-page); opacity: calc(var(--sabl-fade, 0) * 0.6);
   }
 
   /* ── Frosted panels ──
      Every piece of text sits on cream glass, and the photo shows in the
      margins and the gaps between cards. The cards are already solid white. */
   .sabl-has-backdrop {
-    --sabl-glass: rgba(244, 245, 241,0.84);
+    --sabl-glass: rgba(255, 255, 255, 0.84);
     --sabl-glass-edge: rgba(255,255,255,0.55);
   }
   .sabl-has-backdrop .sabl-head,
@@ -252,7 +252,7 @@ const breadcrumbJson = {
   /* No blur support: the glass goes nearly opaque instead, so the text over
      it keeps its contrast. */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .sabl-has-backdrop { --sabl-glass: rgba(244, 245, 241,0.96); }
+    .sabl-has-backdrop { --sabl-glass: rgba(255, 255, 255, 0.96); }
   }
   /* e2e/smoke.spec.ts checks that every hub puts its toolbar at the same
      height, so hopping from Calgary to Edmonton does not move the chips under

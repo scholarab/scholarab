@@ -145,17 +145,17 @@ export function filterSortScholarships(
   });
 }
 
-// How loud a "N DAYS LEFT" chip gets. One week was the only tier, which made a
+// How loud a row's deadline line gets. One week was the only tier, which made a
 // 9-day deadline and a 300-day one look identical; on a grid where most
 // listings are months out, everything shouted and nothing did. Two weeks is
 // "start now", six weeks is "on your radar", past that is just information.
 export const URGENT_DAYS = 14;
 export const SOON_DAYS = 45;
 
-export function daysLeftClass(days: number): string {
-  if (days <= URGENT_DAYS) return 'sabl-days urgent';
-  if (days <= SOON_DAYS) return 'sabl-days soon';
-  return 'sabl-days';
+export function whenTier(days: number): '' | ' is-soon' | ' is-urgent' {
+  if (days <= URGENT_DAYS) return ' is-urgent';
+  if (days <= SOON_DAYS) return ' is-soon';
+  return '';
 }
 
 // ── Grid grouping ─────────────────────────────────────────────────────────────
@@ -222,27 +222,30 @@ export function directoryCountLine(shown: number, total: number, noun: string, o
   return openNow === shown ? line : `${line} · ${openNow} OPEN NOW`;
 }
 
-export function shortDate(iso: string): string {
-  return new Date(iso + 'T00:00:00')
-    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })
-    .toUpperCase();
+// A row's amount cell. "Varies" is a missing number, not a figure: set in the
+// big green display face it was the loudest thing on a third of the rows. A
+// range ("$2,000 to $7,000") steps down a size so it holds one line.
+export function amountCell(amount: string | null | undefined): { text: string; cls: string } {
+  const a = (amount ?? '').trim();
+  if (!/\$\s?\d/.test(a)) return { text: 'Amount varies', cls: 'sabl-amount is-varies' };
+  return { text: a, cls: a.length > 10 ? 'sabl-amount is-long' : 'sabl-amount' };
 }
 
-// The corner chip on a scholarship card ("14 DAYS LEFT" / "OPENS SEP 1" /
-// "CLOSED"); null means no chip (open listing with no fixed deadline).
-// Clock-dependent, so the client recomputes it on every page load.
-export function scholarshipDayChip(s: ScholarshipWithMeta): { label: string; cls: string } | null {
+// A directory row's deadline cell: one line, in sentence case. The row used to
+// carry a day chip ("220 DAYS LEFT") and a "DUE APR 30" line under it, the same
+// fact twice in two capitalised styles. `main` is the date or the state, `sub`
+// the countdown; the tier class colours the line instead of a filled pill.
+export function scholarshipWhen(s: ScholarshipWithMeta): { main: string; sub: string; cls: string } {
+  const date = (iso: string) => new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
   const status = getScholarshipStatus(s);
-  if (status === 'closed') return { label: 'CLOSED', cls: 'sabl-days neutral' };
-  if (status === 'future') {
-    return { label: s.openDate ? `OPENS ${shortDate(s.openDate)}` : 'OPENING SOON', cls: 'sabl-days neutral' };
-  }
-  // No day count: counting down to a guessed date is the claim this state exists to stop.
-  if (status === 'unconfirmed') return { label: 'DATE NOT CONFIRMED', cls: 'sabl-days neutral' };
-  if (!s.deadline) return null;
+  if (status === 'closed') return { main: 'Closed', sub: '', cls: 'sabl-when is-quiet' };
+  if (status === 'future') return { main: s.openDate ? `Opens ${date(s.openDate)}` : 'Opening later', sub: '', cls: 'sabl-when is-quiet' };
+  // No countdown: counting down to a guessed date is what this state stops.
+  if (status === 'unconfirmed') return { main: s.deadline ? `Around ${date(s.deadline)}` : 'Date not confirmed', sub: 'not confirmed', cls: 'sabl-when is-quiet' };
+  if (!s.deadline) return { main: 'No fixed deadline', sub: '', cls: 'sabl-when is-quiet' };
   const days = Math.max(0, Math.round((new Date(s.deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
-  const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
-  return { label, cls: daysLeftClass(days) };
+  const sub = days === 0 ? 'due today' : `${days} ${days === 1 ? 'day' : 'days'} left`;
+  return { main: date(s.deadline), sub, cls: `sabl-when${whenTier(days)}` };
 }
 
 // ── Programs ──────────────────────────────────────────────────────────────────
@@ -280,21 +283,16 @@ export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
   return 'active';
 }
 
-// The corner chip on a program card; the scholarship chip's twin, so both
-// directories read the same. Clock-dependent, so the client recomputes it on
-// every page load rather than trusting CDN-cached HTML.
-export function programDayChip(p: ProgramWithMeta): { label: string; cls: string } | null {
+// The program row's deadline cell, in the same one-line form as scholarshipWhen.
+export function programWhen(p: ProgramWithMeta): { main: string; sub: string; cls: string } {
   const status = getProgramStatus(p);
-  if (status === 'closed') return { label: 'CLOSED', cls: 'sabl-days neutral' };
-  if (status === 'tba') {
-    return p.deadline === 'Ongoing'
-      ? { label: 'ONGOING', cls: 'sabl-days neutral' }
-      : { label: 'DEADLINE TBA', cls: 'sabl-days neutral' };
-  }
+  if (status === 'closed') return { main: 'Closed', sub: '', cls: 'sabl-when is-quiet' };
+  if (status === 'tba') return { main: p.deadline === 'Ongoing' ? 'Ongoing' : 'Deadline TBA', sub: '', cls: 'sabl-when is-quiet' };
   const deadMs = p._deadline_ms ?? new Date(p.deadline! + 'T00:00:00').getTime();
   const days = Math.max(0, Math.round((deadMs - getToday().getTime()) / 86400000));
-  const label = days === 0 ? 'DUE TODAY' : `${days} ${days === 1 ? 'DAY' : 'DAYS'} LEFT`;
-  return { label, cls: daysLeftClass(days) };
+  const main = new Date(deadMs).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+  const sub = days === 0 ? 'due today' : `${days} ${days === 1 ? 'day' : 'days'} left`;
+  return { main, sub, cls: `sabl-when${whenTier(days)}` };
 }
 
 export type ProgramSort = 'closest_due' | 'paid_first' | 'name';
