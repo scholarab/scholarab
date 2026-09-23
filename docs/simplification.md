@@ -325,3 +325,14 @@ A school board code the quiz does not know (CSCN) was removed from one listing
 instead of adding a new board to the quiz.
 
 Add-back fraction: 0. Nothing collapsed or dropped had to be restored.
+
+## Directory figures and month chart, 2026-09-22
+
+Removed on request from both directories and every hub that shares them: the
+four figures and the twelve-month chart between the standfirst and the toolbar
+(`SabLedger.astro`, `src/lib/ledger.ts` and its test, the month and figure
+helpers in `list-core.ts`, the directory client's `paint` hook, their CSS, the
+e2e assertions and the design-system entry). The lone headline figure they
+replaced was not brought back. 464 lines deleted, 6 added.
+
+Add-back fraction: 0. Nothing removed had to be restored.

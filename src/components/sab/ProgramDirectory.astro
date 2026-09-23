@@ -2,9 +2,7 @@
 // Server-rendered replacement for the old ProgramList React island.
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
-import { DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programDeadlinesByMonth, programGroupKey, programWhen } from '../../lib/list-core.ts';
-import { programFigs } from '../../lib/ledger.ts';
-import SabLedger from './SabLedger.astro';
+import { DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programGroupKey, programWhen } from '../../lib/list-core.ts';
 import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
@@ -95,9 +93,6 @@ const chipCount = (o: Partial<ProgramFilterState>) =>
 // Initial view = the default STATUS filter ('all'), matching /scholarships:
 // closed programs stay in the list wearing a CLOSED chip instead of vanishing.
 const initial = filterSortPrograms(items, DEFAULT_PROGRAM_STATE);
-// The figures and the month chart, shared with the scholarship directory.
-const figs = programFigs(initial);
-const months = programDeadlinesByMonth(initial);
 
 // Only open-vs-closed: unlike scholarships, the program sorts do not keep
 // dated and undated deadlines apart, so a finer split would put the same
@@ -123,14 +118,6 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
       <p class="sabl-desc">{intro}</p>
     </div>
   </div>
-  <SabLedger
-    figs={figs}
-    months={months}
-    format="count"
-    title="When applications close"
-    note="Programs closing each month, next 12 months"
-    empty="None of these programs has a dated deadline in the next 12 months."
-  />
 
   <div class="sabl-toolbar">
     <div class="sabl-search">
@@ -347,8 +334,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { PROGRAM_GROUP_LABELS, buildProgramStatusCache, directoryCountLine, filterSortPrograms, getProgramStatus, programDeadlinesByMonth, programGroupKey, programWhen, selectPrograms } from '../../lib/list-core.ts';
-  import { paintLedger, programFigs } from '../../lib/ledger.ts';
+  import { PROGRAM_GROUP_LABELS, buildProgramStatusCache, directoryCountLine, filterSortPrograms, getProgramStatus, programGroupKey, programWhen, selectPrograms } from '../../lib/list-core.ts';
   import type { ProgramWithMeta, ProgramSort, ProgramStatus, ProgramStatusFilter } from '../../lib/list-core.ts';
   import { getSavedPrograms, toggleSavedProgram } from '../../lib/tracker.ts';
 
@@ -402,7 +388,6 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     summary: (visible, total) => ({
       count: directoryCountLine(visible.length, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) !== 'closed').length),
     }),
-    paint: (root, visible) => paintLedger(root, programFigs(visible), programDeadlinesByMonth(visible), 'count'),
     getSavedIds: () => [...getSavedPrograms()],
     toggleSave: id => [...toggleSavedProgram(id)],
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),

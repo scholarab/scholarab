@@ -3,9 +3,8 @@ import raw from '../src/data/scholarships.json' with { type: 'json' };
 import type { Scholarship } from '../src/lib/data-loader';
 import { enrichScholarships } from '../src/lib/enrich';
 import type { Page } from '@playwright/test';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipGroupKey, scholarshipMoneyByMonth, SCHOLARSHIP_GROUP_LABELS, directoryCountLine } from '../src/lib/list-core';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, directoryCountLine } from '../src/lib/list-core';
 import { normalizeSearchQuery, scholarshipSearchBlob } from '../src/lib/search-text';
-import { monthBars, scholarshipFigs } from '../src/lib/ledger';
 
 const items = filterSortScholarships(enrichScholarships(raw as unknown as Scholarship[]), DEFAULT_SCHOLARSHIP_STATE);
 const PAGE = DIRECTORY_PAGE_SIZE;
@@ -49,7 +48,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
       const state = { ...DEFAULT_SCHOLARSHIP_STATE, sortBy, searchQuery };
       const visible = filterSortScholarships(items, state);
       expect(await page.locator('[data-dir-card]:not([hidden])').evaluateAll(els => els.map(e => Number(e.getAttribute('data-id'))))).toEqual(visible.slice(0, PAGE).map(s => s.id));
-      // The count line and the figures still describe every match, not just the
+      // The count line still describes every match, not just the
       // cards revealed so far.
       await expect(page.locator('[data-dir-count]')).toHaveText(directoryCountLine(visible.length, items.length, 'LISTINGS', visible.filter(s => getScholarshipStatus(s) === 'active').length));
       // Label and count only: the bar also carries a Hide/Show word, which is
@@ -58,10 +57,6 @@ test('search preserves results, groups, chips, money, closed awards and history'
       const chips = await page.locator('[data-fkey]:has([data-chip-count])').evaluateAll(els => els.map(e => ({ key: e.getAttribute('data-fkey')!, value: e.getAttribute('data-fval')!, count: Number(e.querySelector('[data-chip-count]')!.textContent) })));
       const keys = { category: 'selectedCategory', status: 'statusFilter', region: 'selectedRegion' };
       for (const chip of chips) expect(chip.count).toBe(filterSortScholarships(items, { ...state, [keys[chip.key as keyof typeof keys]]: chip.value || null }).length);
-      // The figures and the month chart follow the whole filtered list too.
-      const figs = scholarshipFigs(visible);
-      expect(await page.locator('[data-fig]').evaluateAll(els => els.map(e => ((e as HTMLElement).hidden ? '' : e.querySelector('[data-fig-value]')!.textContent)))).toEqual(figs.map(f => f.value));
-      expect(await page.locator('[data-month-v]').allTextContents()).toEqual(monthBars(scholarshipMoneyByMonth(visible), 'money').map(b => b.value));
       await expect(page.locator('[data-dir-card]')).toHaveCount(items.length);
     }
   }
@@ -98,7 +93,6 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
   // Filters only: everything else on the head stays, the standfirst included.
   await expect(desc).toBeVisible();
   await expect(page.locator('.sabl-h1')).toBeVisible();
-  await expect(page.locator('[data-fig="count"]')).toBeVisible();
   await expect(page.locator('[data-dir-search]')).toBeVisible();
   await expect(page.locator('[data-fkey="sort"]').first()).toBeVisible();
   expect((await grid.boundingBox())!.width).toBeGreaterThan(narrow);

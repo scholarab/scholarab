@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, scholarshipGroupKey, scholarshipMoneyByMonth, scholarshipWhen } from '../../lib/list-core.ts';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
@@ -10,8 +10,6 @@ import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '.
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { BOOKMARK, EXT } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
-import { scholarshipFigs } from '../../lib/ledger.ts';
-import SabLedger from './SabLedger.astro';
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -150,13 +148,6 @@ if (showGroups) {
   for (const r of runs) { headerAt.set(at, r); at += r.count; }
 }
 const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length;
-
-// The four figures and the month chart. The figures replaced a lone headline
-// number (Ilia, 2026-09-22: the big-number-top-right header read as a
-// template). Open money leads; an empty figure is left out rather than
-// printed as $0, so an off-season hub leads with the money opening later.
-const figs = scholarshipFigs(initial);
-const months = scholarshipMoneyByMonth(initial);
 ---
 
 <div class:list={['sabl-page', { 'sabl-railed': railFilters }]}>
@@ -169,14 +160,6 @@ const months = scholarshipMoneyByMonth(initial);
       <p class="sabl-desc">{intro}</p>
     </div>
   </div>
-  <SabLedger
-    figs={figs}
-    months={months}
-    format="money"
-    title="When the money closes"
-    note="Dollars due each month, next 12 months"
-    empty="None of these listings has a confirmed deadline in the next 12 months."
-  />
 
   <div class="sabl-toolbar">
     <div class="sabl-search">
@@ -412,8 +395,7 @@ const months = scholarshipMoneyByMonth(initial);
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipGroupKey, scholarshipMoneyByMonth, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
-  import { paintLedger, scholarshipFigs } from '../../lib/ledger.ts';
+  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
   import { sendEvent } from '../../lib/events.ts';
@@ -502,7 +484,6 @@ const months = scholarshipMoneyByMonth(initial);
       const openNow = visible.filter(s => getScholarshipStatus(s) === 'active').length;
       return { count: directoryCountLine(visible.length, total, 'LISTINGS', openNow) };
     },
-    paint: (root, visible) => paintLedger(root, scholarshipFigs(visible), scholarshipMoneyByMonth(visible), 'money'),
     getSavedIds: () => [...getSaved()],
     toggleSave: id => [...toggleSaved(id)],
     saveLabel: (name, saved) => (saved ? `Remove ${name} from saved` : `Save ${name}`),
