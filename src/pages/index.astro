@@ -7,7 +7,7 @@ import SabFooter from '../components/sab/SabFooter.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount, formatDeadline } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
-import { canApplyNow, programIsListed, programStatusOf, scholarshipStatusOf } from '../lib/status';
+import { STATUS_WORDS, canApplyNow, programIsListed, programStatusOf, scholarshipStatusOf } from '../lib/status';
 import { openCounts } from '../lib/counts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FORMATS, MENU_SCOPES, MIN_FACET_ITEMS, facetForCategory, facetItems } from '../lib/facets';
 import { PHOTO_CREDITS, needsCredit } from '../lib/photo-credits';
@@ -155,10 +155,12 @@ const formatCards: PhotoCard[] = PROGRAM_FORMATS
   .sort((a, b) => b.count - a.count);
 
 const carousels = [
-  { key: 'scholarships', title: 'Scholarships by where you live', noun: 'scholarships', none: 'Opening later this year', cards: scopeCards },
+  // `none` is the line under a hub with nothing open, in the directory's own
+  // status words (lib/status.ts) so the slide and the hub describe it alike.
+  { key: 'scholarships', title: 'Scholarships by where you live', noun: 'scholarships', none: STATUS_WORDS.future, cards: scopeCards },
   // A program with nothing open is waiting on next cycle's dates (summer
-  // programs close in February), which "later this year" would misstate.
-  { key: 'programs', title: 'Programs by format', noun: 'programs', none: 'Next dates not posted yet', cards: formatCards },
+  // programs close in February), which "not open yet" would understate.
+  { key: 'programs', title: 'Programs by format', noun: 'programs', none: STATUS_WORDS.unconfirmed, cards: formatCards },
 ].filter(c => c.cards.length > 0);
 
 ---
@@ -257,34 +259,43 @@ const carousels = [
             <p class="sab-hero-quiz">Not sure where to start? <a href="/match/">Answer a few questions</a> and get a shortlist. No email needed.</p>
           </div>
 
-          {/* The next three real deadlines, where a province-wide dollar total
-              and two counts used to sit (critique 2026-09-23: the hero-metric
-              ledger and its count-up were the startup-hero template). Same
-              list as #closing below, so the hero never disagrees with it. */}
-          {closingSoon.length > 0 && (
-            <div class="sab-next">
-              <a href="#closing" class="sab-next-h">Next deadlines <span aria-hidden="true">↓</span></a>
-              <ol class="sab-next-list">
-                {closingSoon.slice(0, 3).map(s => (
-                  <li>
-                    <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-next-row" data-deadline={s.deadline}>
-                      <span class="sab-next-name">{s.title}</span>
-                      <span class="sab-next-meta tnum"><span class="sab-next-amt">{s.amount}</span> due {formatDeadline(s.deadline)}</span>
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )}
         </div>
       </div>
 
     </div>
 
+    <!-- ============ CLOSING THIS WEEK ============ -->
+    {closingSoon.length > 0 && (
+      <div class="sab-container sab-closing" id="closing" data-closing-section>
+        <div class="sab-section-head">
+          <div>
+            <h2 class="sab-h2">{closingHeading}</h2>
+          </div>
+          <a href="/deadlines/" class="sab-view-all">View all deadlines</a>
+        </div>
+
+        <div class="sab-closing-table" id="closing-soon-list" data-deadline-list>
+          {closingSoon.map(s => (
+            <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-closing-row" data-deadline={s.deadline}>
+              <div class="sab-row-main">
+                <div class="sab-row-name">{s.title}</div>
+                {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
+              </div>
+              <div class="sab-row-amount tnum">{s.amount}</div>
+              <div class="sab-row-when"><span class="sabl-when" data-when><span data-when-main>&hellip;</span><span class="sabl-when-sub" data-when-sub hidden></span></span></div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
     <!-- ============ PHOTO CAROUSELS (scholarship scopes, then program formats) ============ -->
     {carousels.map(k => (
       <section class="sab-scopes" aria-labelledby={`sab-scopes-h-${k.key}`} data-scopes={k.key}>
-        <h2 id={`sab-scopes-h-${k.key}`} class="sr-only">{k.title}</h2>
+        {/* Visible since 2026-09-23 (critique): sr-only, the two carousels never
+            said what they sorted by. It sits in the solid ink at the top of the
+            slides, where the fade makes it legible over any photo. */}
+        <h2 id={`sab-scopes-h-${k.key}`} class="sab-scopes-h">{k.title}</h2>
         <div class="sab-scopes-track" data-scopes-track tabindex="-1">
           {k.cards.map(c => (
             <article class="sab-scope" aria-label={`${c.label}: ${c.count} ${k.noun}`} data-scope-card>
@@ -337,31 +348,6 @@ const carousels = [
         </div>
       </section>
     ))}
-
-    <!-- ============ CLOSING THIS WEEK ============ -->
-    {closingSoon.length > 0 && (
-      <div class="sab-container sab-closing" id="closing" data-closing-section>
-        <div class="sab-section-head">
-          <div>
-            <h2 class="sab-h2">{closingHeading}</h2>
-          </div>
-          <a href="/deadlines/" class="sab-view-all">View all deadlines</a>
-        </div>
-
-        <div class="sab-closing-table" id="closing-soon-list" data-deadline-list>
-          {closingSoon.map(s => (
-            <a href={`/scholarships/${generateSlug(s.title)}/`} class="sab-closing-row" data-deadline={s.deadline}>
-              <div class="sab-row-main">
-                <div class="sab-row-name">{s.title}</div>
-                {s.audience && <div class="sab-row-blurb">{s.audience}</div>}
-              </div>
-              <div class="sab-row-amount tnum">{s.amount}</div>
-              <div class="sab-row-when"><span class="sabl-when" data-when><span data-when-main>&hellip;</span><span class="sabl-when-sub" data-when-sub hidden></span></span></div>
-            </a>
-          ))}
-        </div>
-      </div>
-    )}
 
     <!-- ============ BIGGEST OPEN AWARDS ============ -->
     {biggestOpen.length > 0 && (
@@ -458,17 +444,6 @@ const carousels = [
 
   updateClosingSoon();
   document.addEventListener('astro:page-load', updateClosingSoon);
-
-  // The hero's three deadlines come from the same build-time list; a page
-  // served a day after its build must not lead with an award that has closed.
-  function pruneHeroDeadlines() {
-    const todayMs = albertaToday().getTime();
-    document.querySelectorAll<HTMLElement>('.sab-next-row[data-deadline]').forEach(a => {
-      if (new Date(a.dataset.deadline + 'T00:00:00').getTime() < todayMs) a.closest('li')!.hidden = true;
-    });
-  }
-  pruneHeroDeadlines();
-  document.addEventListener('astro:page-load', pruneHeroDeadlines);
 
   // ── Scope carousel ──
   // Native horizontal scroll with snap does the swiping; this only wires the
@@ -686,7 +661,11 @@ const carousels = [
   /* The words sit on the scrim below, not on a glow: the wide soft halos
      that used to carry them read as a template effect (critique 2026-09-23).
      One tight 1px shadow keeps glyph edges clean over bright frames. */
-  .sab-hero .sab-h1, .sab-byline, .sab-hero-copy p, .sab-next { text-shadow: 0 1px 2px rgba(5,10,8,0.55); }
+  .sab-hero .sab-h1, .sab-byline, .sab-hero-copy p { text-shadow: 0 1px 2px rgba(5,10,8,0.55); }
+  /* The byline measured 3.8:1 median, 2.2 worst, over bright frames of the
+     film (critique 2026-09-23); a soft dark shadow under the small type holds
+     it above 4.5 without darkening the whole film. */
+  .sab-hero .sab-byline { text-shadow: 0 1px 2px rgba(5,10,8,0.7), 0 0 14px rgba(5,10,8,0.6); }
   /* SpaceX-style scrim: the picture stays close to full strength and only
      the places text sits are darkened. A light veil over everything, a band
      under the nav, and a fall-off to near black behind the copy, buttons and
@@ -780,21 +759,6 @@ const carousels = [
   }
   .sab-btn-outline:hover { border-color: rgba(238, 241, 236, 0.7); background: rgba(238, 241, 236,0.06); }
 
-  .sab-next { width: min(420px, 100%); }
-  .sab-next-h {
-    display: inline-block; font-size: 15px; font-weight: 700; color: #EEF1EC; text-decoration: none;
-    padding-block: 10px; margin: -10px 0 -2px;
-  }
-  .sab-next-h:hover { color: #2FD3A0; }
-  .sab-next-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(238, 241, 236, 0.22); }
-  .sab-next-row {
-    display: flex; flex-direction: column; gap: 2px; padding: 10px 0;
-    border-bottom: 1px solid rgba(238, 241, 236, 0.22); color: #EEF1EC; text-decoration: none;
-  }
-  .sab-next-name { font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sab-next-row:hover .sab-next-name { text-decoration: underline; text-underline-offset: 3px; }
-  .sab-next-meta { font-size: 14px; color: rgba(238, 241, 236, 0.86); }
-  .sab-next-amt { color: #2FD3A0; font-weight: 700; }
 
   /* ── Closing this week ── */
   /* ── Scope carousel (after tesla.com's model cards) ──
@@ -821,7 +785,7 @@ const carousels = [
      the bottom; the photo stays untouched in the middle. */
   .sab-scope::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(#0A1310, rgba(10,19,16,0.55) 9%, rgba(10,19,16,0) 30%, rgba(10,19,16,0) 48%, rgba(10,19,16,0.7) 80%, #0A1310);
+    background: linear-gradient(#0A1310, rgba(10,19,16,0.8) 12%, rgba(10,19,16,0) 32%, rgba(10,19,16,0) 48%, rgba(10,19,16,0.7) 80%, #0A1310);
   }
   .sab-scope-body {
     position: relative; z-index: 1; height: 100%; box-sizing: border-box;
@@ -829,7 +793,14 @@ const carousels = [
     padding: clamp(80px, 9vh, 112px) clamp(24px, 5vw, 80px) clamp(64px, 9vh, 96px);
     color: #FFFFFF;
   }
-  .sab-scope-kicker { font-size: 19px; font-weight: 600; letter-spacing: -0.005em; }
+  /* The kicker measured 3.3 to 4.5 over the brighter skies (critique
+     2026-09-23) on a 55% fade; the fade is 80% there now, plus a shadow. */
+  .sab-scope-kicker { font-size: 19px; font-weight: 600; letter-spacing: -0.005em; text-shadow: 0 1px 2px rgba(5,10,8,0.6), 0 0 12px rgba(5,10,8,0.5); }
+  .sab-scopes-h {
+    position: absolute; z-index: 2; top: clamp(22px, 3.6vh, 36px); left: clamp(24px, 5vw, 80px); right: 120px;
+    margin: 0; pointer-events: none; color: #FFFFFF;
+    font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 2.4vw, 34px); line-height: 1;
+  }
   .sab-scope-name {
     margin: 0; font-family: var(--font-display); font-weight: 400;
     font-size: clamp(48px, 6vw, 84px); line-height: 0.95; letter-spacing: -0.005em;
@@ -892,6 +863,7 @@ const carousels = [
   @media (max-width: 700px) {
     /* Room under the stacked buttons for the dots and the photo credit line. */
     .sab-scope-body { padding: 72px 20px 76px; }
+    .sab-scopes-h { left: 20px; right: 20px; top: 20px; font-size: 24px; }
     .sab-scopes-dots { bottom: 30px; }
     .sab-scope-kicker, .sab-scope-sub { font-size: 16px; }
     .sab-scope-ctas { flex-direction: column; gap: 10px; }
@@ -984,10 +956,6 @@ const carousels = [
     .sab-kicker-sep { display: none; }
     .sab-hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
     .sab-btn-accent, .sab-btn-outline { height: 50px; padding: 0 20px; }
-    .sab-next { width: 100%; margin-top: 20px; }
-    .sab-next-row { padding: 9px 0; }
-    .sab-next-name { font-size: 15px; }
-    .sab-next-meta { font-size: 13.5px; }
 
     .sab-closing { padding-top: 22px; padding-bottom: 8px; }
     .sab-section-head { flex-direction: column; align-items: flex-start; gap: 14px; }

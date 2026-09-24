@@ -4,13 +4,13 @@
 // them and recomputes the clock-dependent bits on load, so no React ships.
 import { STATUS_WORDS, canApplyNow } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
-import { BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
+import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
 import SabViewSwitch from './SabViewSwitch.astro';
 
@@ -183,11 +183,11 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
     </div>
     <div class="sabl-sort" id="dir-sort">
       <span class="sabl-row-label">Sort</span>
-      <div class="sabl-sort-chips">
-      {SORT_CHIPS.map(s => (
-        <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
-      ))}
-      </div>
+      {/* One picker, not three chips (critique 2026-09-23: the toolbar held
+          nine controls). directory-client reads [data-fselect] on change. */}
+      <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">
+        {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
+      </select>
     </div>
     {/* TRACK and STATUS put away from here, and on a hub the cards take the
         rail's column with them (Ilia, 2026-09-15). Only the filters: the
@@ -357,18 +357,12 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
                 aria-label={`Save ${s.title}`}
                 aria-pressed="false"
               ><Fragment set:html={BOOKMARK_REF} /></button>
-              {s.url && (
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  referrerpolicy="no-referrer"
-                  class="sabl-apply"
-                  data-track="apply"
-                  data-item-id={s.id}
-                  aria-label={`${canApply ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
-                ><span data-apply-label>{canApply ? 'Apply' : 'Visit'}</span><Fragment set:html={EXT_REF} /></a>
-            )}
+              {(() => {
+                const act = rowAction(canApply, s.url, `/scholarships/${s._slug ?? generateSlug(s.title)}/`, s.title);
+                return act.external
+                  ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-track="apply" data-row-action data-item-id={s.id} data-url={s.url} data-detail={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={EXT_REF} /></span></a>
+                  : <a href={act.href} class="sabl-apply" data-row-action data-item-id={s.id} data-url={s.url ?? undefined} data-detail={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={ARROW_REF} /></span></a>;
+              })()}
           </div>
         </div>
         </>
@@ -409,7 +403,8 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
 <script>
   import { canApplyNow } from '../../lib/status.ts';
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
+  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
+  import { ARROW_REF, EXT_REF } from '../../lib/icons.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
   import { sendEvent } from '../../lib/events.ts';
@@ -515,11 +510,8 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
           sub.textContent = when.sub;
           sub.hidden = !when.sub;
         }
-        const apply = s.el.querySelector<HTMLElement>('[data-track="apply"]');
-        // Only the word: the ↗ beside it is a sibling span, and overwriting
-        // the anchor's textContent would take the arrow with it.
-        const applyLabel = apply?.querySelector('[data-apply-label]');
-        if (applyLabel) applyLabel.textContent = canApplyNow(status) && s.el.dataset.noApply === undefined ? 'Apply' : 'Visit';
+        const a = s.el.querySelector<HTMLAnchorElement>('[data-row-action]');
+        if (a) paintRowAction(a, rowAction(canApplyNow(status) && s.el.dataset.noApply === undefined, a.dataset.url, a.dataset.detail!, s.title), { ext: EXT_REF, arrow: ARROW_REF });
       }
     },
 

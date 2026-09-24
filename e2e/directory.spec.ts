@@ -42,7 +42,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await openFilters(page);
   const historyLength = await page.evaluate(() => history.length);
   for (const sortBy of ['highest_pay', 'lowest_pay', 'closest_due'] as const) {
-    await page.locator(`[data-fkey="sort"][data-fval="${sortBy}"]`).press('Enter');
+    await page.locator('[data-fselect="sort"]').selectOption(sortBy);
     for (const searchQuery of [query, '', 'zz-no-matching-student-award']) {
       await page.locator('[data-dir-search]').fill(searchQuery);
       const state = { ...DEFAULT_SCHOLARSHIP_STATE, sortBy, searchQuery };
@@ -94,7 +94,7 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
   await expect(desc).toBeVisible();
   await expect(page.locator('.sabl-h1')).toBeVisible();
   await expect(page.locator('[data-dir-search]')).toBeVisible();
-  await expect(page.locator('[data-fkey="sort"]').first()).toBeVisible();
+  await expect(page.locator('[data-fselect="sort"]').first()).toBeVisible();
   expect((await grid.boundingBox())!.width).toBeGreaterThan(narrow);
 
   // Set in <head> from localStorage, so the wide layout is in the first paint.
@@ -159,14 +159,14 @@ test('on a phone, filters fold behind one button that counts them', async ({ pag
   await page.goto('/scholarships/calgary/?category=Arts');
   const btn = page.locator('[data-dir-filters]');
   await expect(page.locator('.sabl-rail')).toBeHidden();
-  await expect(page.locator('[data-fkey="sort"]').first()).toBeHidden();
+  await expect(page.locator('[data-fselect="sort"]').first()).toBeHidden();
   await expect(page.locator('[data-dir-filter-n]')).toHaveText('1');
   // The first card is on the first screen.
   await expect(page.locator('[data-dir-card]:visible').first()).toBeInViewport();
   await btn.click();
   await expect(btn).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator('.sabl-rail')).toBeVisible();
-  await expect(page.locator('[data-fkey="sort"]').first()).toBeVisible();
+  await expect(page.locator('[data-fselect="sort"]').first()).toBeVisible();
 });
 
 test('the list reveals 24 at a time and Back returns to the same card', async ({ page }) => {

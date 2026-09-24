@@ -398,3 +398,34 @@ export function filterSortPrograms(
     return programDeadlineOrder(a) - programDeadlineOrder(b);
   });
 }
+
+// ── A row's one action ────────────────────────────────────────────────────────
+// Rows said Apply, Visit or Details depending on the page and the clock, three
+// verbs for one button (critique 2026-09-23). Now there are two, and they mean
+// one thing each: Apply goes to the provider when a student can apply today;
+// Details goes to our listing page, which says when it opens and why not now.
+
+export { rowAction } from './status.ts';
+export type { RowAction } from './status.ts';
+import type { RowAction } from './status.ts';
+
+/** Repaints a server-rendered action link when the clock has moved its status. */
+export function paintRowAction(a: HTMLAnchorElement, act: RowAction, icon: { ext: string; arrow: string }): void {
+  a.href = act.href;
+  a.setAttribute('aria-label', act.aria);
+  if (act.external) {
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.setAttribute('referrerpolicy', 'no-referrer');
+    a.dataset.track = 'apply';
+  } else {
+    a.removeAttribute('target');
+    a.removeAttribute('rel');
+    a.removeAttribute('referrerpolicy');
+    delete a.dataset.track;
+  }
+  const label = a.querySelector('[data-apply-label]');
+  if (label) label.textContent = act.label;
+  const ic = a.querySelector('[data-apply-icon]');
+  if (ic) ic.innerHTML = act.external ? icon.ext : icon.arrow;
+}

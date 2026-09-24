@@ -8,7 +8,7 @@ import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti, generateSlug } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { STATUS_WORDS, canApplyNow, programUndatedLabel, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
+import { STATUS_WORDS, canApplyNow, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
@@ -516,15 +516,16 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     >
                       <span className="sabm-save-ico" dangerouslySetInnerHTML={{ __html: BOOKMARK }} />
                     </button>
-                    <a
-                      href={s.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      referrerPolicy="no-referrer"
-                      className="sabl-apply"
-                      onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
-                      aria-label={`${canApplyNow(status) ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
-                    >{canApplyNow(status) ? 'Apply' : 'Visit'}<span className="sabl-ext" aria-hidden="true">↗</span></a>
+                    {(() => {
+                      // The directory row's rule (list-core rowAction): Apply to
+                      // the provider when open today, otherwise Details here.
+                      const act = rowAction(canApplyNow(status), s.url, `/scholarships/${generateSlug(s.title)}/`, s.title)
+                      return act.external
+                        ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="sabl-apply"
+                            onClick={() => sendEvent('apply_click', 'scholarship', s.id)} aria-label={act.aria}
+                          >{act.label}<span className="sabl-ext" aria-hidden="true">↗</span></a>
+                        : <a href={act.href} className="sabl-apply" aria-label={act.aria}>{act.label}<span className="sabl-ext" aria-hidden="true">→</span></a>
+                    })()}
                   </>}
                 />
               )

@@ -508,6 +508,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       }
     }
 
+    root.querySelectorAll<HTMLSelectElement>('select[data-fselect]').forEach(sel => {
+      sel.value = String(state[sel.dataset.fselect!] ?? '');
+    });
     root.querySelectorAll<HTMLElement>('[data-fkey]').forEach(chip => {
       const on = state[chip.dataset.fkey!] === chip.dataset.fval;
       chip.classList.toggle('on', on);
@@ -724,6 +727,15 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       if (input) input.value = '';
       render();
     }
+  });
+
+  // A picker in place of a chip row (sort): same state key, set on change.
+  document.addEventListener('change', e => {
+    const sel = (e.target as HTMLElement).closest?.<HTMLSelectElement>('select[data-fselect]');
+    if (!root || !sel || !root.contains(sel)) return;
+    state = { ...state, [sel.dataset.fselect as keyof S & string]: sel.value };
+    shown = pageSize;
+    render();
   });
 
   // Columns and Gallery, as in Finder: a click selects a listing into the

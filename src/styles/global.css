@@ -201,6 +201,7 @@ body {
 .sab-btn-accent,
 .sabm-btn-accent,
 .sab404-btn-accent,
+.sabd-cta,
 .sabe-btn-solid { --focus-ring: var(--text-on-brand); }
 
 :focus-visible {
@@ -518,6 +519,13 @@ html.js .sabl-scope-select {
   background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
 }
 html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
+/* Sort: the scope picker's shape, sized to its longest option. */
+.sabl-sort-select {
+  min-height: 40px; padding: 0 14px; cursor: pointer;
+  font: 600 14px var(--font-body); color: var(--text-primary);
+  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+}
+.sabl-sort-select:hover { border-color: var(--text-primary); }
 .sabl-filter-row { display: flex; align-items: center; gap: 8px; }
 
 /* One row per filter, always.

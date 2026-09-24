@@ -119,12 +119,13 @@ describe('initSaved', () => {
     // the site is markup and must survive that rewrite. It is a drawn SVG
     // rather than a ↗ character now, so this asserts the element survives,
     // not just that a glyph is still in the text.
-    const applyLinks = $$('[data-sv-apply]')
-    expect(applyLinks.map(a => a.textContent!.trim())).toEqual(['Apply', 'Visit'])
+    // Since 2026-09-23 a closed award says Details and stays on the site
+    // (list-core rowAction); only Apply leaves for the provider.
+    const applyLinks = $$('[data-sv-apply]') as HTMLAnchorElement[]
+    expect(applyLinks.map(a => a.textContent!.trim())).toEqual(['Apply', 'Details'])
     expect(applyLinks.map(a => !!a.querySelector('svg'))).toEqual([true, true])
-    expect($$('[data-sv-apply]')[1]!.getAttribute('aria-label')).toBe(
-      "Visit Closed Award on the sponsor's site (opens in a new tab)",
-    )
+    expect(applyLinks.map(a => a.target)).toEqual(['_blank', ''])
+    expect(applyLinks[1]!.getAttribute('aria-label')).toBe('Details for Closed Award')
   })
 
   it('remove button unsaves the item, hides its card, and updates counts', () => {

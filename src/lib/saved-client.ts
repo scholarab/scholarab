@@ -1,7 +1,7 @@
 // Render only bookmarked cards from the published page snapshot.
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts';
 import { showToast, getToday, prefersReducedMotion } from './utils.ts';
-import { amountCell, getScholarshipStatus, scholarshipWhen, programWhen } from './list-core.ts';
+import { amountCell, getScholarshipStatus, paintRowAction, rowAction, scholarshipWhen, programWhen } from './list-core.ts';
 import { canApplyNow } from './status.ts';
 import type { ScholarshipWithMeta, ProgramWithMeta } from './list-core.ts';
 import { sendEvent } from './events.ts';
@@ -58,7 +58,7 @@ function savedCard(s: SavedItem): string {
       </div>
       <div class="sabl-card-actions">
         <button type="button" class="sabl-save on" data-sv-remove aria-label="Remove bookmark">${BOOKMARK}</button>
-        ${sh ? (s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-sv-apply><span data-apply-label></span>${EXT}</a>` : '')
+        ${sh ? `<a href="${esc(s.href)}" class="sabl-apply" data-sv-apply data-detail="${esc(s.href)}"><span data-apply-label>Details</span><span data-apply-icon>${ARROW}</span></a>`
           : `<a href="${esc(s.href)}" class="sabl-apply">Details${ARROW}</a>`}
       </div>
     </div>
@@ -117,12 +117,10 @@ export function initSaved() {
         sub.textContent = when.sub;
         sub.hidden = !when.sub;
       }
-      const apply = card.querySelector<HTMLElement>('[data-sv-apply]');
+      const apply = card.querySelector<HTMLAnchorElement>('[data-sv-apply]');
       if (apply) {
         const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined } as Parameters<typeof getScholarshipStatus>[0]);
-        const applyLabel = apply.querySelector('[data-apply-label]');
-        if (applyLabel) applyLabel.textContent = canApplyNow(status) ? 'Apply' : 'Visit';
-        apply.setAttribute('aria-label', `${canApplyNow(status) ? 'Apply for' : 'Visit'} ${d.name} on the sponsor's site (opens in a new tab)`);
+        paintRowAction(apply, rowAction(canApplyNow(status), d.url, apply.dataset.detail!, d.name ?? ''), { ext: EXT, arrow: ARROW });
       }
     }
   }
@@ -388,7 +386,7 @@ export function initSaved() {
     const apply = t.closest<HTMLElement>('[data-sv-apply]');
     if (apply) {
       const wrap = apply.closest<HTMLElement>('[data-sv-wrap]');
-      if (wrap?.dataset.type === 'scholarship') sendEvent('apply_click', 'scholarship', Number(wrap.dataset.id));
+      if (wrap?.dataset.type === 'scholarship' && apply.dataset.track === 'apply') sendEvent('apply_click', 'scholarship', Number(wrap.dataset.id));
       return;
     }
 

@@ -69,6 +69,20 @@ The biggest lever. It is also the product's promise: freshness is the moat.
 
 ## Phase 2: one system, fewer things on screen (H4, H6, H8; about +3)
 
+**Status 2026-09-23:**
+- Done:
+  - Step 1 (status words): the home fallbacks now use `STATUS_WORDS`; "Around {date}, not confirmed" stays as the dated form of Date not confirmed.
+  - Step 2 (CTA): `rowAction` in `status.ts`; rows say Apply or Details, Visit is gone; the detail Apply is mint.
+  - Step 3 (home order): the hero list is deleted, Closing this week sits above the carousels, and the carousel headings are visible.
+  - Step 4 (contrast): guarded by `e2e/media-contrast.spec.ts`, lowest line 7.9:1.
+  - Step 5 (sort): sort is one picker.
+  - Step 7 (/deadlines): two months open, "Due this week" on top.
+- Held for Ilia:
+  - Step 5: cutting the Columns/Gallery views (his own feature).
+  - Step 6: the 01/02 row numbers (his request of 2026-09-22).
+- Dropped:
+  - Step 8: the notebook already sits on its rules; the misalignment report came from a stale build. There is no time field for "noon ET".
+
 1. **One status component.**
    - The label set: Open now, Opens {date}, Date not confirmed, Year-round, Closed.
    - Use it on rows, detail, quiz results, /saved and /deadlines. Delete the other vocabularies ("Opening later", "Around Jun 15 / not confirmed", "Ongoing").

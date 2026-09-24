@@ -135,6 +135,10 @@ const rollingPrograms = programs.filter(
 ).length;
 
 const openNow = rows.filter(r => r.open).length;
+// The seven days a student with a deadline close is actually asking about,
+// above the months (critique 2026-09-23: the page opened on all of September).
+const WEEK_MS = 7 * 86400000;
+const thisWeek = rows.filter(r => dayMs(r.deadline) - todayMs <= WEEK_MS);
 const first = months[0];
 const last = months.at(-1);
 const span = first && last && first.key !== last.key
@@ -206,6 +210,12 @@ const breadcrumbJson = {
           </header>
 
           <nav class="sabcal-jump" aria-label="Jump to a month">
+            {thisWeek.length > 0 && (
+              <a href="#this-week" class="sabcal-chip sabcal-chip-week">
+                <span class="sabcal-chip-m">This week</span>
+                <span class="sabcal-chip-n tnum">{thisWeek.length}</span>
+              </a>
+            )}
             {months.map(m => (
               <a href={`#${m.key}`} class="sabcal-chip">
                 <span class="sabcal-chip-m">{m.short}</span>
@@ -214,11 +224,35 @@ const breadcrumbJson = {
             ))}
           </nav>
 
-          {/* The next three months open; the rest fold into their headings, so
+          {thisWeek.length > 0 && (
+            <section class="sabcal-month sabcal-week" id="this-week" aria-labelledby="this-week-h">
+              <div class="sabcal-month-head">
+                <h2 class="sabcal-h2" id="this-week-h">Due this week</h2>
+                <span class="sabcal-month-count">{`${thisWeek.length} ${thisWeek.length === 1 ? 'deadline' : 'deadlines'}`}</span>
+              </div>
+              <ol class="sabcal-rows">
+                {thisWeek.map(r => (
+                  <li class="sabcal-row" data-deadline={r.deadline}>
+                    <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
+                    <span class="sabcal-name">
+                      <a href={r.href}>{r.name}</a>
+                      {r.kind === 'program' && <span class="sabcal-tag">Program</span>}
+                    </span>
+                    <span class="sabcal-sub">
+                      <span class="sabcal-meta">{r.meta}</span>
+                      <span class:list={['sabcal-state', r.open && 'is-open']}>{r.state}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+
+          {/* This month and next open; the rest fold into their headings, so
               the page is a calendar to scan rather than a 78,000px scroll
               (critique 2026-09-23). The jump links open a folded month. */}
           {months.map((m, i) => (
-            <details class="sabcal-month" id={m.key} open={i < 3}>
+            <details class="sabcal-month" id={m.key} open={i < 2}>
               <summary class="sabcal-month-head">
                 <h2 class="sabcal-h2">{m.name}</h2>
                 <span class="sabcal-month-count">
@@ -282,6 +316,14 @@ const breadcrumbJson = {
     if (el instanceof HTMLDetailsElement) el.open = true;
   });
   window.addEventListener('hashchange', openFromHash);
+  // The week list is built daily; a row whose date has passed since then goes.
+  function pruneWeek() {
+    const t = new Date(); t.setHours(0, 0, 0, 0);
+    document.querySelectorAll<HTMLElement>('.sabcal-week [data-deadline]').forEach(li => {
+      if (new Date(li.dataset.deadline + 'T00:00:00').getTime() < t.getTime()) li.hidden = true;
+    });
+  }
+  document.addEventListener('astro:page-load', pruneWeek);
   document.addEventListener('astro:page-load', openFromHash);
 </script>
 
@@ -336,7 +378,9 @@ const breadcrumbJson = {
     border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
     transform: translateY(-4px) rotate(45deg); transition: transform 0.15s ease;
   }
-  .sabcal-month:not([open]) .sabcal-h2::after { transform: translateY(-1px) rotate(-45deg); }
+  details.sabcal-month:not([open]) .sabcal-h2::after { transform: translateY(-1px) rotate(-45deg); }
+  /* The week list is a plain section that never folds, so no chevron. */
+  .sabcal-week .sabcal-h2::after { content: none; }
   .sabcal-h2 {
     font-family: var(--font-body); font-weight: 700; letter-spacing: -0.01em;
     font-size: 24px; color: #141915; margin: 0;

@@ -73,6 +73,20 @@ export function canApplyNow(status: ScholarshipStatus): boolean {
   return status === 'active' || status === 'ongoing';
 }
 
+// A row's one action (see list-core's paintRowAction for the repaint).
+export interface RowAction {
+  href: string;
+  label: 'Apply' | 'Details';
+  external: boolean;
+  aria: string;
+}
+
+export function rowAction(canApply: boolean, url: string | null | undefined, detailHref: string, name: string): RowAction {
+  return canApply && url
+    ? { href: url, label: 'Apply', external: true, aria: `Apply for ${name} on the provider's site (opens in a new tab)` }
+    : { href: detailHref, label: 'Details', external: false, aria: `Details for ${name}` };
+}
+
 export type ProgramStatus = 'active' | 'tba' | 'ongoing' | 'closed';
 
 export interface ProgramStatusInput {

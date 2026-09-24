@@ -468,3 +468,17 @@ numbers off the built pages. The planned service-worker change was dropped:
 came from a stopped preview server.
 
 Add-back fraction: 0. Nothing removed had to be restored.
+
+## Phase 2 of the 35 plan, 2026-09-23
+
+Removed:
+- the hero's "Next deadlines" list, a duplicate of Closing this week, along with its prune script and CSS;
+- the third row verb, "Visit";
+- three sort chips per directory, now one picker;
+- two home fallback phrases, replaced by the shared status words.
+
+Kept after checking:
+- the notebook block, already aligned;
+- the view switcher and the row numbers, both Ilia's requests and left for him to decide.
+
+Add-back fraction: 0. Nothing removed had to be restored.

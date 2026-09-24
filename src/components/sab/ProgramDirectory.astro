@@ -139,11 +139,11 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
     </div>
     <div class="sabl-sort" id="dir-sort">
       <span class="sabl-row-label">Sort</span>
-      <div class="sabl-sort-chips">
-      {SORT_CHIPS.map(s => (
-        <button type="button" class={`sabl-chip${s.value === 'closest_due' ? ' on' : ''}`} data-fkey="sort" data-fval={s.value} aria-pressed={s.value === 'closest_due' ? 'true' : 'false'}>{s.label}</button>
-      ))}
-      </div>
+      {/* One picker, not three chips (critique 2026-09-23: the toolbar held
+          nine controls). directory-client reads [data-fselect] on change. */}
+      <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">
+        {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
+      </select>
     </div>
     {/* TRACK and STATUS put away from here, and on a hub the cards take the
         rail's column with them (Ilia, 2026-09-15). Only the filters: the
