@@ -285,12 +285,12 @@ const carousels = [
           {k.cards.map(c => (
             <article class="sab-scope" aria-label={`${c.label}: ${c.count} ${k.noun}`} data-scope-card>
               <picture>
-                <source media="(max-width: 700px)" srcset={`/photos/backdrops/${c.backdrop}-tall-1000.webp 1000w, /photos/backdrops/${c.backdrop}-tall-2000.webp 2000w`} sizes="88vw" />
+                <source media="(max-width: 700px)" srcset={`/photos/backdrops/${c.backdrop}-tall-1000.webp 1000w, /photos/backdrops/${c.backdrop}-tall-2000.webp 2000w`} sizes="100vw" />
                 <img
                   class="sab-scope-img"
                   src={`/photos/backdrops/${c.backdrop}-wide-1672.webp`}
                   srcset={`/photos/backdrops/${c.backdrop}-wide-1672.webp 1672w, /photos/backdrops/${c.backdrop}-wide-3344.webp 3344w`}
-                  sizes="74vw" alt="" loading="lazy" decoding="async"
+                  sizes="100vw" alt="" loading="lazy" decoding="async"
                 />
               </picture>
               <div class="sab-scope-body">
@@ -484,7 +484,7 @@ const carousels = [
     };
     const go = (i: number) => {
       const c = cards[Math.max(0, Math.min(cards.length - 1, i))];
-      if (c) track.scrollTo({ left: c.offsetLeft - track.offsetLeft - parseFloat(getComputedStyle(track).scrollPaddingLeft || '0'), behavior: smooth });
+      if (c) track.scrollTo({ left: c.offsetLeft - track.offsetLeft, behavior: smooth });
     };
     const sync = () => {
       const i = current();
@@ -789,18 +789,18 @@ const carousels = [
 
   /* ── Closing this week ── */
   /* ── Scope carousel (after tesla.com's model cards) ──
-     Cards take most of the width so the next one peeks in at the right edge;
-     the track scrolls natively and snaps each card to the page gutter. */
-  .sab-scopes { position: relative; padding-top: 40px; --scope-gutter: clamp(20px, 4vw, 56px); }
+     Full screen since 2026-09-23 (Ilia): each slide is the whole viewport,
+     edge to edge with no page showing around it, and swiping sideways brings
+     in the next one. The track scrolls natively and snaps a slide at a time. */
+  .sab-scopes { position: relative; }
   .sab-scopes-track {
-    display: flex; gap: 24px; overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scroll-padding-left: var(--scope-gutter);
-    padding: 0 var(--scope-gutter); scrollbar-width: none; outline: none;
+    display: flex; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scrollbar-width: none; outline: none;
   }
   .sab-scopes-track::-webkit-scrollbar { display: none; }
   .sab-scope {
-    position: relative; flex: 0 0 min(74vw, 1420px); aspect-ratio: 16 / 9;
-    border-radius: 12px; overflow: hidden; scroll-snap-align: start; background: #16211C;
+    position: relative; flex: 0 0 100%; height: 100svh; min-height: 520px;
+    overflow: hidden; scroll-snap-align: start; scroll-snap-stop: always; background: #16211C;
   }
   .sab-scope picture, .sab-scope-img { position: absolute; inset: 0; width: 100%; height: 100%; }
   .sab-scope-img { object-fit: cover; }
@@ -813,7 +813,7 @@ const carousels = [
   .sab-scope-body {
     position: relative; z-index: 1; height: 100%; box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: space-between;
-    padding: clamp(24px, 3.4vw, 48px) clamp(24px, 3.4vw, 52px);
+    padding: clamp(80px, 9vh, 112px) clamp(24px, 5vw, 80px) clamp(64px, 9vh, 96px);
     color: #FFFFFF;
   }
   .sab-scope-kicker { font-size: 19px; font-weight: 600; letter-spacing: -0.005em; }
@@ -847,7 +847,7 @@ const carousels = [
   .sab-scopes-arrow {
     /* Above the cards: each card's text layer is z-index 1, and without this
        the arrow is drawn but every click on it lands on the card. */
-    position: absolute; z-index: 2; top: calc(40px + min(74vw, 1420px) * 9 / 32); transform: translateY(-50%);
+    position: absolute; z-index: 2; top: 50%; transform: translateY(-50%);
     display: flex; align-items: center; justify-content: center;
     width: 44px; height: 56px; border: 0; border-radius: 6px; cursor: pointer;
     background: rgba(255,255,255,0.85); color: #141915;
@@ -855,25 +855,28 @@ const carousels = [
   }
   .sab-scopes-arrow:hover { background: #FFFFFF; }
   .sab-scopes-arrow[hidden] { display: none; }
-  .sab-scopes-prev { left: calc(var(--scope-gutter) + 16px); }
-  .sab-scopes-next { right: calc(var(--scope-gutter) + 16px); }
+  .sab-scopes-prev { left: 16px; }
+  .sab-scopes-next { right: 16px; }
   /* Each dot is drawn 8px but taps as 24px: the bare 8px buttons 10px apart
-     missed the 24px target floor (critique 2026-09-23). Same 18px pitch. */
-  .sab-scopes-dots { display: flex; justify-content: center; gap: 0; margin-top: 12px; }
+     missed the 24px target floor (critique 2026-09-23). Same 18px pitch.
+     They sit on the photo now, over its bottom shade, so they are white. */
+  .sab-scopes-dots {
+    position: absolute; z-index: 2; left: 50%; bottom: 20px; transform: translateX(-50%);
+    display: flex; justify-content: center; gap: 0;
+  }
   .sab-scopes-dot {
     display: grid; place-items: center; width: 24px; height: 24px; margin: 0 -3px;
     padding: 0; border: 0; background: none; cursor: pointer;
   }
   .sab-scopes-dot::before {
     content: ''; width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(20, 25, 21, 0.2); transition: background-color 0.2s ease;
+    background: rgba(255, 255, 255, 0.4); transition: background-color 0.2s ease;
   }
-  .sab-scopes-dot[aria-current]::before { background: #141915; }
+  .sab-scopes-dot[aria-current]::before { background: #FFFFFF; }
   @media (max-width: 700px) {
-    .sab-scopes-track { gap: 12px; }
-    .sab-scope { flex-basis: 86vw; aspect-ratio: 3 / 4; }
-    /* Room under the stacked buttons for the photo credit line. */
-    .sab-scope-body { padding-bottom: 38px; }
+    /* Room under the stacked buttons for the dots and the photo credit line. */
+    .sab-scope-body { padding: 72px 20px 76px; }
+    .sab-scopes-dots { bottom: 30px; }
     .sab-scope-kicker, .sab-scope-sub { font-size: 16px; }
     .sab-scope-ctas { flex-direction: column; gap: 10px; }
     .sab-scope-btn { width: 100%; min-width: 0; }
