@@ -35,4 +35,8 @@ const programs = await loadPrograms();
 <style is:global>
   /* The saved design is fixed light regardless of site theme */
   body:has(#sab-saved) { background: var(--bg-page); }
+  /* The list swaps in for the skeleton after load and is usually shorter than
+     it, which pulled the footer up (CLS 0.1 with one saved award). A screen of
+     reserved height keeps the footer below the fold before and after. */
+  #sab-saved .sabp-body { min-height: 100svh; }
 </style>

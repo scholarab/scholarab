@@ -493,3 +493,18 @@ Considered and not done:
 - a hard exclude on youth-in-care awards when the quiz never asked. It would break the /match promise that an unanswered question counts as unknown, so those awards rank lower instead.
 
 Add-back fraction: 0.
+
+## Phase 4 of the 35 plan, 2026-09-23
+
+Removed:
+- the second email regex in `/api/alert`; the form and the API now share `EMAIL_RE` and `emailProblem` in `lib/utils.ts`;
+- the hand-written "Date not confirmed" sentence in the status note, now read from `lib/glossary.ts`;
+- the height and width transitions on the header dropdown and its hover glide, now transform only.
+
+Considered and not done:
+- a glossary entry for "rolling". No surface prints it as a label; it appears only inside listing prose, so a definition would be noise.
+- the definition line under the hub standfirst. It moved every chip row on two hubs 57px lower than on the rest, which `smoke.spec.ts` rejects, so it sits over the results instead.
+
+Measured on `dist/`: /saved layout shift with one saved award went from 0.0995 to 0.0002 (footer, 1280px and 375px), after reserving one screen of height.
+
+Add-back fraction: 0 (one placement moved, nothing restored).

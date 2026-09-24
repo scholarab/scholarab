@@ -292,11 +292,14 @@ const isActive = (href: string) =>
   @media (min-width: 901px) {
     .sabh-drop {
       display: block; position: absolute; left: 0; right: 0; top: 100%; z-index: 4;
-      height: 0; pointer-events: none;
+      /* Sized by transform, not height (compositor only). The base height sits
+         inside the panels' range, so the scale stays near 1 and the 1px rule
+         and the shadow never visibly stretch. */
+      height: 400px; transform-origin: top; transform: scaleY(0); pointer-events: none;
       background: #0A1310; border-top: 1px solid rgba(238, 241, 236,0.08);
       box-shadow: 0 24px 40px -20px rgba(0,0,0,0.6);
       opacity: 0; visibility: hidden;
-      transition: opacity 0.22s ease, height 0.32s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.22s;
+      transition: opacity 0.22s ease, transform 0.32s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.22s;
     }
     .sabh-drop[data-on] { opacity: 1; visibility: visible; transition-delay: 0s; }
     /* Fixed to the viewport, from the bottom of the bar (set by the script)
@@ -406,10 +409,11 @@ const isActive = (href: string) =>
      glide is the only highlight. It sits under the links (z-index), fades in
      where the pointer enters, then slides and resizes between links. */
   .sabh-glide {
-    position: absolute; top: 0; left: 0; width: 0; height: 0; z-index: 0;
+    /* Width rides on scaleX from a 100px base, so the slide is transform only. */
+    position: absolute; top: 0; left: 0; width: 100px; height: 0; z-index: 0;
     border-radius: 6px; background: rgba(238, 241, 236, 0.08);
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0; pointer-events: none; transform-origin: left top;
+    transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .sabh-glide[data-snap] { transition: opacity 0.2s ease; }
   .sabh-glide[data-on] { opacity: 1; }
@@ -631,6 +635,7 @@ const isActive = (href: string) =>
   // Sizes the shared background to whichever panel is open. Opening from
   // closed takes the height at once and fades in; a switch between panels
   // animates the height, so the background itself never closes.
+  const DROP_BASE = 400; // .sabh-drop's CSS height
   function syncDrop() {
     const drop = header?.querySelector<HTMLElement>('.sabh-drop');
     if (!drop) return;
@@ -645,7 +650,7 @@ const isActive = (href: string) =>
     const scrim = header!.querySelector<HTMLElement>('.sabh-scrim');
     if (scrim && first) scrim.style.top = `${header!.querySelector('.sabh-nav')!.getBoundingClientRect().bottom}px`;
     drop.toggleAttribute('data-snap', first);
-    drop.style.height = `${panel.offsetHeight}px`;
+    drop.style.transform = `scaleY(${panel.offsetHeight / DROP_BASE})`;
     if (first) void drop.offsetHeight;
     drop.removeAttribute('data-snap');
     drop.setAttribute('data-on', '');
@@ -698,9 +703,8 @@ const isActive = (href: string) =>
       const first = !glide.hasAttribute('data-on');
       // Entering from outside: appear in place, then only later moves slide.
       glide.toggleAttribute('data-snap', first);
-      glide.style.width = `${r.width}px`;
       glide.style.height = `${r.height}px`;
-      glide.style.transform = `translate(${r.left - box.left}px, ${r.top - box.top}px)`;
+      glide.style.transform = `translate(${r.left - box.left}px, ${r.top - box.top}px) scaleX(${r.width / 100})`;
       if (first) void glide.offsetWidth;
       glide.removeAttribute('data-snap');
       glide.setAttribute('data-on', '');

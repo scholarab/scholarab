@@ -12,8 +12,8 @@ import { defer } from '../../lib/defer'
 import { ALERT_MILESTONES, cadenceFromInput, formatCadence } from '../../lib/alerts'
 import { sendConfirmEmail } from '../../lib/confirm-email'
 import { canonicalUrl } from '../../lib/site-origin'
+import { EMAIL_RE } from '../../lib/utils'
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export const POST: APIRoute = async ({ request, locals }) => {
   const ip = getClientIp(request)

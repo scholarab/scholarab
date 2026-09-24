@@ -8,13 +8,13 @@ import SabFonts from '../../components/sab/SabFonts.astro';
 // verified byte-identical against the previous per-type pages' built HTML.
 import Layout from '../../layouts/Layout.astro';
 import { scholarshipMetas, programMeta, brandedTitle, listingTitle, formatListingDate as formatDate } from '../../lib/meta';
-import { balancedRelated, balancedCross } from '../../lib/related';
+import { balancedRelated, balancedCross, openAlternatives } from '../../lib/related';
 import { scoreProgramForScholarship, scoreScholarshipForProgram } from '../../lib/cross-links';
 import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline } from '../../lib/utils.ts';
-import { STATUS_WORDS, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
+import { STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
@@ -136,6 +136,29 @@ export async function getStaticPaths() {
         : `Due ${formatDeadline(p.deadline)}`,
     }));
 
+  // A closed page leads with three open listings from its own hub, so a
+  // student who lands on last year's award has somewhere to go next
+  // (critique 2026-09-23). Only closed pages get them.
+  const sameFacet = <T extends Scholarship | Program>(facets: typeof SCHOLARSHIP_FACETS, a: T, b: T) => {
+    const f = facetForListing(a, facets);
+    return f && f === facetForListing(b, facets) ? 4 : 0;
+  };
+  const alternativesForScholarship = (s: Scholarship): RelatedItem[] =>
+    scholarshipStatusOf(s, metaToday) !== 'closed' ? [] : asScholarshipCards(openAlternatives(s, scholarships, {
+      isOpen: o => canApplyNow(scholarshipStatusOf(o, metaToday)),
+      score: (self, o) => sameFacet(SCHOLARSHIP_FACETS, self, o)
+        + (o.category && o.category === self.category ? 2 : 0)
+        + (o.region && o.region === self.region ? 1 : 0),
+      prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
+    }));
+  const alternativesForProgram = (p: Program): RelatedItem[] =>
+    programStatusOf(p, metaToday) !== 'closed' ? [] : asProgramCards(openAlternatives(p, programs, {
+      isOpen: o => programIsListed(o, metaToday) && canApplyNow(programStatusOf(o, metaToday)),
+      score: (self, o) => (o.format && o.format === self.format ? 3 : 0)
+        + sameFacet(PROGRAM_FACETS, self, o) / 2,
+      prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
+    }));
+
   return [
     ...scholarships.map((s, i) => ({
       params: { type: 'scholarships', slug: generateSlug(s.title) },
@@ -145,6 +168,7 @@ export async function getStaticPaths() {
         program: undefined as Program | undefined,
         related: asScholarshipCards(relatedScholarshipsFor[i]!),
         crossRelated: asProgramCards(crossProgramsFor[i]!),
+        alternatives: alternativesForScholarship(s),
         metaDescription: descriptions[i]!,
       },
     })),
@@ -156,13 +180,14 @@ export async function getStaticPaths() {
         program: p,
         related: asProgramCards(relatedProgramsFor[i]!),
         crossRelated: asScholarshipCards(crossScholarshipsFor[i]!),
+        alternatives: alternativesForProgram(p),
         metaDescription: undefined as string | undefined,
       },
     })),
   ];
 }
 
-const { kind, scholarship, program, related, crossRelated, metaDescription } = Astro.props;
+const { kind, scholarship, program, related, crossRelated, alternatives, metaDescription } = Astro.props;
 
 const todayDate = albertaToday();
 
@@ -488,6 +513,8 @@ const breadcrumbJson = {
       canonical={d.canonical}
       guideHref={guideSlug ? `/guides/${guideSlug.slug}/` : undefined}
       guideTitle={guideSlug?.title}
+      alternatives={alternatives}
+      alternativesHref={facetHref ?? d.currentPath}
     />
 
     {related.length > 0 && (

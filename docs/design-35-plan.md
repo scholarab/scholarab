@@ -134,6 +134,14 @@ The biggest lever. It is also the product's promise: freshness is the moat.
 
 ## Phase 4: help and recovery at the moment it is needed (H2, H9, H10; about +2)
 
+**Status 2026-09-23:** done.
+- Step 1: `src/lib/glossary.ts` defines bursary, designated trade, Date not confirmed, olympiad and dual credit. The olympiad and dual-credit hubs define their word over the results, the home slides use the short forms, and both directories' "What these mean" note lists them. "Rolling" was dropped: nothing prints it as a label.
+- Step 2: all 19 closed detail pages list three open listings from the same hub inside the deadline card, on the first screen at 375px.
+- Step 3: the reminder form names the part to fix, next to the field, in red. It used to print near-white text on the white card.
+- Step 4: the guides index is titled "Guides for Alberta students". Red Deer, Lethbridge and Olympiads now link their guide.
+- Step 5: the breadcrumb Home link is 24px tall, /saved CLS dropped from 0.0995 to 0.0002, and the header dropdown animates transform.
+- Guards: `e2e/help-recovery.spec.ts`, `src/lib/glossary.test.ts`, and new cases in `related.test.ts` and `utils.test.ts`.
+
 1. **Inline definitions.**
    - One `glossary.ts`: bursary, rolling, Date not confirmed, dual credit, olympiad, designated.
    - Shown as a one-line explainer under the program slides and hub headings, and as the existing "What these mean" pattern on every directory.

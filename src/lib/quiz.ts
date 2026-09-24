@@ -42,7 +42,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     key: 'searchType',
     q: 'What are you looking for?',
     opts: [
-      { label: 'Scholarships', value: 'scholarships', hint: 'Awards and bursaries' },
+      { label: 'Scholarships', value: 'scholarships', hint: 'Awards, and bursaries given on financial need' },
       { label: 'Research programs', value: 'programs', hint: 'Summer, trades, contests' },
       { label: 'Both', value: 'both', hint: 'Scholarships and programs' },
     ],

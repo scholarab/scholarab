@@ -11,6 +11,7 @@ import { STATUS_WORDS, canApplyNow, programIsListed, programStatusOf, scholarshi
 import { openCounts } from '../lib/counts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FORMATS, MENU_SCOPES, MIN_FACET_ITEMS, facetForCategory, facetItems } from '../lib/facets';
 import { PHOTO_CREDITS, needsCredit } from '../lib/photo-credits';
+import { GLOSSARY } from '../lib/glossary';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -125,15 +126,16 @@ const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
 
 // The program twin (Ilia, 2026-09-23): one card per format hub, the same eight
 // the header's Programs tiles show, biggest first. The kickers are each hub's
-// own intro cut to a line. "Open" counts dated deadlines still ahead, the same
+// own intro cut to a line; the two named by a jargon word define it instead
+// (lib/glossary.ts). "Open" counts dated deadlines still ahead, the same
 // rule as the hub's Open chip (lib/counts.ts); year-round ones are counted apart.
 const FORMAT_KICKERS: Record<string, string> = {
   'summer-programs': 'Camps, institutes and labs',
   competitions: 'Built over a season, entered as a team',
-  olympiads: 'Written at your own school',
+  olympiads: GLOSSARY.olympiad.short,
   'science-fairs': 'The only door to Canada-Wide',
   'research-placements': 'A piece of work with your name on it',
-  'dual-credit': 'Paid, credited, or both',
+  'dual-credit': GLOSSARY.dualCredit.short,
   clubs: 'Start any week of the year',
   conferences: 'A few days, some funded down to the flight',
 };

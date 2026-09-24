@@ -335,7 +335,8 @@ const breadcrumbJson = {
     font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
     padding-top: 24px; color: #5C5F5B;
   }
-  .sabl-crumbs a { color: #5C5F5B; text-decoration: none; }
+  /* 24px tap target at 12px type; the negative margin keeps the line in place. */
+  .sabl-crumbs a { color: #5C5F5B; text-decoration: none; display: inline-flex; align-items: center; min-height: 24px; padding: 0 4px; margin: -6px -4px; }
   .sabl-crumbs a:hover { color: #141915; text-decoration: underline; }
 
   .sabd-cal { padding-bottom: 72px; }

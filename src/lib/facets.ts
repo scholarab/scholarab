@@ -143,6 +143,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
   },
   {
     slug: 'red-deer',
+    guide: 'scholarships-for-red-deer-students',
     kind: 'region',
     value: 'Red Deer',
     label: 'Red Deer',
@@ -156,6 +157,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
   },
   {
     slug: 'lethbridge',
+    guide: 'scholarships-for-lethbridge-students',
     kind: 'region',
     value: 'Lethbridge',
     label: 'Lethbridge',
@@ -655,6 +657,7 @@ export const PROGRAM_FORMATS: Facet[] = [
   },
   {
     slug: 'olympiads',
+    guide: 'chemistry-competitions-canada',
     kind: 'format',
     backdrop: 'olympiads',
     value: 'olympiads',

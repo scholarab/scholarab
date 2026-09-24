@@ -180,3 +180,23 @@ export function inboundCounts<T>(items: T[], picks: T[][]): Map<T, number> {
   for (const row of picks) for (const it of row) counts.set(it, (counts.get(it) ?? 0) + 1);
   return counts;
 }
+
+/**
+ * What a closed listing offers instead: the `n` open listings closest to it,
+ * so a closed page is never a dead end (critique 2026-09-23). Unlike the
+ * "more like this" rail this is not balanced across the corpus; it is only
+ * shown on closed pages, and the best match is what the reader needs there.
+ * Closeness is the caller's score; ties go to `prefer` (soonest deadline).
+ */
+export function openAlternatives<T>(
+  self: T,
+  items: readonly T[],
+  opts: { isOpen: (item: T) => boolean; score: (self: T, other: T) => number; prefer: (a: T, b: T) => number; n?: number },
+): T[] {
+  return items
+    .filter(it => it !== self && opts.isOpen(it))
+    .map(it => ({ it, score: opts.score(self, it) }))
+    .sort((a, b) => b.score - a.score || opts.prefer(a.it, b.it))
+    .slice(0, opts.n ?? 3)
+    .map(({ it }) => it);
+}

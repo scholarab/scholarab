@@ -2,17 +2,19 @@
 // What the status words mean, under the Status filter. The words themselves
 // come from STATUS_WORDS in lib/status.ts, so this note and every row that
 // prints them cannot disagree. First-time applicants met "Date not confirmed"
-// and "Ongoing" with nothing explaining either (critique 2026-09-23).
+// and "Ongoing" with nothing explaining either (critique 2026-09-23). The
+// directory's other jargon (bursary, olympiad) follows from lib/glossary.ts.
 import { STATUS_WORDS } from '../../lib/status';
+import { DIRECTORY_TERMS, GLOSSARY } from '../../lib/glossary';
 
 interface Props { kind: 'scholarship' | 'program' }
 const { kind } = Astro.props;
 
-const terms = kind === 'scholarship'
+const terms: Array<[string, string]> = kind === 'scholarship'
   ? [
       ['Open', 'Taking applications now. The date is the deadline.'],
       [STATUS_WORDS.future, 'This year’s application has not opened. Save it, or set a reminder on its page.'],
-      [STATUS_WORDS.unconfirmed, 'The sponsor has not posted this year’s date. “Around” means last year’s date, so check before you plan on it.'],
+      [GLOSSARY.unconfirmed.term, GLOSSARY.unconfirmed.line],
       [STATUS_WORDS.none, 'Applications are taken any time.'],
       [STATUS_WORDS.closed, 'This year’s deadline has passed.'],
     ]
@@ -20,6 +22,7 @@ const terms = kind === 'scholarship'
       ['Open', 'Taking applications now. The date is the deadline.'],
       ['No set date', `No deadline to count down to. The row says “${STATUS_WORDS.unconfirmed}” when the provider has not posted this year’s date, and “${STATUS_WORDS.none}” when you can join any time.`],
     ];
+for (const k of DIRECTORY_TERMS[kind]) terms.push([GLOSSARY[k].term, GLOSSARY[k].line]);
 ---
 <details class="sabl-status-help">
   <summary>What these mean</summary>

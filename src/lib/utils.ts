@@ -178,3 +178,27 @@ export function showToast(message: string, action?: { label: string; onClick: ()
     setTimeout(() => el.remove(), 300);
   }, action ? 5000 : 2800);
 }
+
+/** The address shape the reminder form and /api/alert both accept. */
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/**
+ * What is wrong with a typed email, in words that say how to fix it, or null
+ * when it passes EMAIL_RE. The form shows this next to the field; a single
+ * "missing something" line left students guessing which part (critique
+ * 2026-09-23).
+ */
+export function emailProblem(raw: string): string | null {
+  const email = raw.trim();
+  if (!email) return 'Type your email address first.';
+  if (/\s/.test(email)) return 'Take out the space in your email.';
+  const at = email.split('@').length - 1;
+  if (at === 0) return 'Add an @ to your email, like name@gmail.com.';
+  if (at > 1) return 'Your email has more than one @. Keep only one.';
+  const [name, domain] = email.split('@') as [string, string];
+  if (!name) return 'Add your name before the @, like name@gmail.com.';
+  if (!domain || domain.startsWith('.')) return 'Add the part after the @, like gmail.com.';
+  if (!/\.[^.]+$/.test(domain)) return `Finish the part after the @, like ${domain.replace(/\.+$/, '')}.com.`;
+  if (email.length > 254) return 'That email is too long.';
+  return EMAIL_RE.test(email) ? null : 'That address is missing something. It should look like name@gmail.com.';
+}

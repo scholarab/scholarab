@@ -62,6 +62,9 @@ interface Props {
   /** Link to the guide that explains this listing, when one covers it. */
   guideHref?: string;
   guideTitle?: string;
+  /** Open listings to offer instead; set only on a closed page. */
+  alternatives?: Array<{ href: string; title: string; value: string; when: string }>;
+  alternativesHref?: string;
 }
 
 const {
@@ -71,6 +74,7 @@ const {
   facts, eligibility, about, notes, steps,
   valueLabel, valueBig, valueNote, checkedLabel = null, valueQuiet = false,
   ctaLabel, url, canRemind, canonical, guideHref, guideTitle,
+  alternatives = [], alternativesHref = backHref,
 } = Astro.props;
 
 // The directory's three tiers (list-core), so a listing is the same colour on
@@ -157,6 +161,22 @@ const chip =
       <p class="sabd-estimate-note">{opensLabel
         ? `This cycle is over. The next one opens ${opensLabel}.`
         : "This cycle is over and the provider hasn't posted the next one. Save it to find it again."}</p>
+    )}
+    {/* A closed page is never a dead end: three open listings from the same
+        hub, inside the card so they are on the first screen. */}
+    {status === 'closed' && alternatives.length > 0 && (
+      <nav class="sabd-alts" aria-labelledby="sabd-alts-h">
+        <h3 id="sabd-alts-h" class="sabd-alts-h">Open now instead</h3>
+        <ul>
+          {alternatives.map(a => (
+            <li><a href={a.href} class="sabd-alt">
+              <span class="sabd-alt-name">{a.title}</span>
+              <span class="sabd-alt-meta tnum">{a.value} · {a.when}</span>
+            </a></li>
+          ))}
+        </ul>
+        <a href={`${alternativesHref}?status=active`} class="sabd-alts-all">See all open</a>
+      </nav>
     )}
     {estimated && (
       <p class="sabd-estimate-note">Last year's date. The provider hasn't posted this year's yet, so check their page before you plan around it.</p>
@@ -259,10 +279,10 @@ const chip =
         <div class="sabd-remind-sub">We send one link to confirm, then a reminder 30, 14 and 3 days before the deadline.</div>
         <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form" novalidate>
           <label for={`sabd-remind-${itemType}-${itemId}`} class="sr-only">Your email for a deadline reminder</label>
-          <input id={`sabd-remind-${itemType}-${itemId}`} type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" />
+          <input id={`sabd-remind-${itemType}-${itemId}`} type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" aria-describedby={`sabd-remind-msg-${itemType}-${itemId}`} />
           <button type="submit" class="sab-btn sabd-remind-btn">Remind me</button>
         </form>
-        <div data-sabd-alert-msg class="sabd-remind-msg" role="status" aria-live="polite" style="display:none;"></div>
+        <div id={`sabd-remind-msg-${itemType}-${itemId}`} data-sabd-alert-msg class="sabd-remind-msg" role="status" aria-live="polite" hidden></div>
         <div class="sabd-remind-fine">
           We store your address only to send these reminders, and delete it the
           moment you unsubscribe. <a href="/privacy/">How this works</a>.
@@ -424,6 +444,19 @@ const chip =
   .sabd-deadline-value { font-size: 15px; font-weight: 700; }
   .sabd-checked { margin: 10px 0 0; font-size: 14.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.8); }
   .sabd-estimate-note { margin: 10px 0 0; font-size: 13.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.72); }
+  .sabd-alts { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid rgba(20,25,21,0.12); }
+  .sabd-alts-h { margin: 0 0 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: rgba(20, 25, 21, 0.68); }
+  .sabd-alts ul { list-style: none; margin: 0; padding: 0; }
+  .sabd-alt { display: block; padding: 9px 0; text-decoration: none; color: #141915; border-bottom: 1px solid rgba(20,25,21,0.08); }
+  .sabd-alt-name { display: block; font-size: 15px; font-weight: 600; line-height: 1.3; }
+  .sabd-alt:hover .sabd-alt-name { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
+  .sabd-alt-meta { display: block; margin-top: 2px; font-size: 13.5px; color: rgba(20, 25, 21, 0.72); }
+  .sabd-alts-all {
+    display: inline-flex; align-items: center; min-height: 32px; margin-top: 4px;
+    font-size: 14px; font-weight: 600; color: #141915;
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #2FD3A0;
+  }
+  .sabd-alts-all:hover { color: #0A6B4D; }
   .sabd-cta-row { display: flex; gap: 10px; margin-top: 22px; }
   .sabd-cta {
     flex: 1; text-align: center; font-size: 15.5px; font-weight: 700;
@@ -490,7 +523,10 @@ const chip =
   }
   .sabd-remind-btn:hover { background: #08573E; }
   .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
-  .sabd-remind-msg { font-size: 14.5px; font-weight: 600; color: #0A6B4D; }
+  .sabd-remind-msg { margin-top: 8px; font-size: 14.5px; font-weight: 600; color: #0A6B4D; }
+  /* It was near-white on the white card, so a bad address showed nothing. */
+  .sabd-remind-msg.is-error { color: #B42318; }
+  .sabd-remind-input[aria-invalid="true"] { border-color: #B42318; }
 
   @media (max-width: 900px) {
     .sabd-crumb-row { padding: 28px 20px 0; }
@@ -519,7 +555,7 @@ const chip =
   import { todayDate } from '../../lib/calendar';
   import { sendEvent, sendEventAfterDwell } from '../../lib/events.ts';
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
-  import { showToast, showConfetti, prefersReducedMotion } from '../../lib/utils';
+  import { showToast, showConfetti, prefersReducedMotion, emailProblem } from '../../lib/utils';
   import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
   import { STATUS_WORDS } from '../../lib/status';
   import { placeInList, readListContext } from '../../lib/list-context.ts';
@@ -605,18 +641,23 @@ const chip =
     e.preventDefault();
     e.stopPropagation();
     const [itemType, itemId] = itemAttrs(form);
-    const email = (form.querySelector('input[name="email"]') as HTMLInputElement).value.trim();
+    const input = form.querySelector('input[name="email"]') as HTMLInputElement;
+    const email = input.value.trim();
     const btn = form.querySelector('button') as HTMLButtonElement;
     const msg = form.parentElement?.querySelector('[data-sabd-alert-msg]') as HTMLElement | null;
-    // One voice for every bad address. `novalidate` turns off the browser's
-    // bubbles, which used to appear on top of this message for some inputs and
-    // instead of it for others. Same test as /api/alert.
-    const problem = !email ? 'Type your email address first.'
-      : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "That address is missing something. It should look like name@gmail.com."
-      : null;
+    // The message sits under the field and names the part to fix. `novalidate`
+    // turns off the browser's bubbles; the check is the one /api/alert runs.
+    const say = (text: string, error: boolean) => {
+      if (!msg) return;
+      msg.textContent = text;
+      msg.classList.toggle('is-error', error);
+      msg.hidden = false;
+      input.setAttribute('aria-invalid', String(error));
+    };
+    const problem = emailProblem(email);
     if (problem) {
-      if (msg) { msg.textContent = problem; msg.style.color = 'rgba(238, 241, 236,0.65)'; msg.style.display = 'block'; }
-      (form.querySelector('input[name="email"]') as HTMLInputElement).focus();
+      say(problem, true);
+      input.focus();
       return;
     }
     btn.disabled = true;
@@ -634,21 +675,29 @@ const chip =
         // link, so saying "we'll nudge you" here would promise mail that never
         // arrives. `confirmed` is true only when this address was already on
         // file for this listing; a returning student changing their mind.
-        if (msg) {
-          msg.textContent = 'Request received. If confirmation is needed, check your inbox. Existing reminders stay unchanged.' ;
-          msg.style.display = 'block';
-        }
+        say('Request received. If confirmation is needed, check your inbox. Existing reminders stay unchanged.', false);
       } else {
         btn.disabled = false;
         btn.textContent = 'Remind me';
-        if (msg) { msg.textContent = data.error || 'Something went wrong.'; msg.style.color = 'rgba(238, 241, 236,0.65)'; msg.style.display = 'block'; }
+        say(data.error || 'Something went wrong. Try again.', true);
       }
     } catch {
       btn.disabled = false;
       btn.textContent = 'Remind me';
-      if (msg) { msg.textContent = 'Something went wrong. Try again.'; msg.style.color = 'rgba(238, 241, 236,0.65)'; msg.style.display = 'block'; }
+      say('Could not reach the server. Check your connection and try again.', true);
     }
   }, true);
+
+  // Once flagged, the field clears its error the moment the address is fixed,
+  // not on the next submit.
+  document.addEventListener('input', (e) => {
+    const input = e.target as HTMLInputElement;
+    if (!input.matches?.('[data-sabd-alert-form] input[name="email"]') || input.getAttribute('aria-invalid') !== 'true') return;
+    const msg = input.form?.parentElement?.querySelector<HTMLElement>('[data-sabd-alert-msg]');
+    const problem = emailProblem(input.value);
+    if (msg) msg.textContent = problem ?? '';
+    if (!problem) { input.removeAttribute('aria-invalid'); if (msg) msg.hidden = true; }
+  });
 
   // The page is prerendered, so the SSR status chip is only as fresh as the
   // last build. Re-derive it from the ISO dates in the visitor's timezone

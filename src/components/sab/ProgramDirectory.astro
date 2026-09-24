@@ -12,6 +12,7 @@ import { emailOff } from '../../lib/email-off';
 import { PROGRAM_FACETS, PROGRAM_FORMATS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets.ts';
 import { ARROW_REF, BOOKMARK_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import SabViewSwitch from './SabViewSwitch.astro';
+import { FORMAT_TERMS, GLOSSARY } from '../../lib/glossary.ts';
 
 interface Props {
   items: ProgramWithMeta[];
@@ -40,6 +41,9 @@ const {
   allItems = items,
   railFilters = false,
 } = Astro.props;
+
+// A hub named by a jargon word says what the word means under its heading.
+const defined = currentFormat && FORMAT_TERMS[currentFormat] ? GLOSSARY[FORMAT_TERMS[currentFormat]!] : null;
 
 const SORT_CHIPS = [
   { value: 'closest_due', label: 'Earliest deadline' },
@@ -233,6 +237,9 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
     {directoryCountLine(initial.length, items.length, 'PROGRAMS', openNow)}
   </div>
 
+  {/* Over the results, not under the standfirst: every hub's toolbar sits at
+      one height (smoke.spec.ts), and the word is read where the rows use it. */}
+  {defined && <p class="sabl-define"><strong>{defined.term}:</strong> {defined.line}</p>}
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
     {initial.map((p, i) => {
       const slug = p._slug ?? generateSlug(p.name);

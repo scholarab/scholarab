@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { formatVerifiedMonth, generateSlug, getToday, formatDeadline, parseAmount, showConfetti, showToast } from './utils'
+import { formatVerifiedMonth, generateSlug, getToday, formatDeadline, parseAmount, showConfetti, showToast, emailProblem, EMAIL_RE } from './utils'
 
 // ── generateSlug ─────────────────────────────────────────────────────────────
 
@@ -310,3 +310,28 @@ describe('formatVerifiedMonth', () => {
     expect(formatVerifiedMonth('2026-00')).toBeNull();
   });
 });
+
+// ── emailProblem ─────────────────────────────────────────────────────────────
+
+describe('emailProblem', () => {
+  it('passes a normal address, trimmed', () => {
+    expect(emailProblem('  student@gmail.com ')).toBeNull()
+  })
+
+  it('names the missing part instead of one generic line', () => {
+    expect(emailProblem('')).toMatch(/Type your email/)
+    expect(emailProblem('studentgmail.com')).toMatch(/Add an @/)
+    expect(emailProblem('@gmail.com')).toMatch(/before the @/)
+    expect(emailProblem('student@')).toMatch(/after the @/)
+    expect(emailProblem('student@.com')).toBe('Add the part after the @, like gmail.com.')
+    expect(emailProblem('student@gmail')).toBe('Finish the part after the @, like gmail.com.')
+    expect(emailProblem('stu dent@gmail.com')).toMatch(/space/)
+    expect(emailProblem('a@b@c.com')).toMatch(/more than one @/)
+  })
+
+  it('agrees with EMAIL_RE on every sample', () => {
+    for (const e of ['a@b.co', 'x@y', 'x@.com', 'a b@c.d', '', 'a@b.c.d', 'a@b.']) {
+      expect(emailProblem(e) === null).toBe(EMAIL_RE.test(e.trim()))
+    }
+  })
+})

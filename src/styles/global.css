@@ -420,6 +420,12 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 18px; }
   font-size: 17px; line-height: 1.55; color: rgba(20, 25, 21, 0.65);
   margin: 20px 0 0; max-width: 560px; min-height: calc(1.55em * 3);
 }
+/* A hub named by a jargon word defines it here (lib/glossary.ts). */
+.sabl-define {
+  font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.72);
+  margin: 0 0 16px; max-width: 640px;
+}
+.sabl-define strong { color: var(--text-primary); font-weight: 600; }
 .sabl-quiz-line { font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.72); margin: 10px 0 0; max-width: 560px; }
 .sabl-quiz-line a {
   color: var(--text-primary); font-weight: 600; text-decoration: underline;

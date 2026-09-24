@@ -69,7 +69,7 @@ export function scholarshipStatusOf(
  * Whether a student can apply today: open with a deadline or open with none.
  * The Apply-or-Visit label reads this; "open now" counts read 'active' alone.
  */
-export function canApplyNow(status: ScholarshipStatus): boolean {
+export function canApplyNow(status: ScholarshipStatus | ProgramStatus): boolean {
   return status === 'active' || status === 'ongoing';
 }
 

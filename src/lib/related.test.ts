@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { balancedRelated, inboundCounts } from './related.ts';
+import { balancedRelated, inboundCounts, openAlternatives } from './related.ts';
 import scholarshipData from '../data/scholarships.json';
 import programData from '../data/research-programs.json';
 
@@ -97,5 +97,27 @@ describe('the real corpus', () => {
     const counts = inboundCounts(programs, picks);
     const starved = programs.filter(p => p.active !== false && counts.get(p)! < 3);
     expect(starved.map(p => p.id)).toEqual([]);
+  });
+});
+
+describe('openAlternatives', () => {
+  const items: Item[] = [
+    { id: 0, category: 'Trades', region: 'Calgary', deadline: '2026-01-01' },
+    { id: 1, category: 'Trades', region: 'Calgary', deadline: '2027-03-01' },
+    { id: 2, category: 'Trades', region: 'Edmonton', deadline: '2027-02-01' },
+    { id: 3, category: 'Arts', region: 'Calgary', deadline: '2027-01-01' },
+    { id: 4, category: 'Trades', region: 'Calgary', deadline: '2025-01-01' },
+    { id: 5, category: 'Arts', region: 'Edmonton', deadline: '2026-12-01' },
+  ];
+  const open = (it: Item) => it.id !== 0 && it.id !== 4;
+  const pick = (n?: number) => openAlternatives(items[0]!, items, { isOpen: open, score: opts.score, prefer: opts.prefer, n }).map(i => i.id);
+
+  it('offers only open listings, never the closed page itself', () => {
+    expect(pick(10)).not.toContain(0);
+    expect(pick(10)).not.toContain(4);
+  });
+
+  it('puts the closest match first and fills to three', () => {
+    expect(pick()).toEqual([1, 2, 3]);
   });
 });
