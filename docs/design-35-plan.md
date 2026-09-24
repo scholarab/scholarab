@@ -77,9 +77,9 @@ The biggest lever. It is also the product's promise: freshness is the moat.
   - Step 4 (contrast): guarded by `e2e/media-contrast.spec.ts`, lowest line 7.9:1.
   - Step 5 (sort): sort is one picker.
   - Step 7 (/deadlines): two months open, "Due this week" on top.
-- Held for Ilia:
-  - Step 5: cutting the Columns/Gallery views (his own feature).
-  - Step 6: the 01/02 row numbers (his request of 2026-09-22).
+- Decided by Ilia:
+  - Step 5: all four views stay.
+  - Step 6: the 01/02 row numbers are removed from the directories; the quiz keeps its rank.
 - Dropped:
   - Step 8: the notebook already sits on its rules; the misalignment report came from a stale build. There is no time field for "noon ET".
 

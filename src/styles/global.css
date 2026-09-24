@@ -897,22 +897,9 @@ html.js .sabl-group-toggle { display: inline-flex; }
   transition: background-color 0.14s ease;
 }
 .sabl-card:hover { background-color: rgba(20,25,21,0.04); }
-/* Numbered within each status run (Ilia, 2026-09-22), so the list reads as a
-   ranked table in whatever order the sort puts it. A CSS counter, not markup:
-   hidden and folded rows do not count, and a group header restarts it. The
-   number is absolutely placed, so it never becomes a fifth grid cell. Directory
-   grids only; /saved shares .sabl-card but is not a ranking. */
-[data-dir-grid] { counter-reset: sabl-rank; }
-[data-dir-grid] .sabl-group { counter-reset: sabl-rank; }
-[data-dir-grid] .sabl-card { counter-increment: sabl-rank; position: relative; padding-left: 64px; }
-[data-dir-grid] .sabl-card::before {
-  /* Empty alt text: the number is a visual counter, not content a screen
-     reader should announce before every award name. */
-  content: counter(sabl-rank, decimal-leading-zero) / '';
-  position: absolute; left: 10px; top: 18px;
-  font: 400 22px/1 var(--font-display); color: rgba(20, 25, 21, 0.45);
-  font-variant-numeric: tabular-nums;
-}
+/* The 01/02 row numbers (2026-09-22) were removed on 2026-09-23 (Ilia, after
+   the critique): section numbers carry no information a sort does not. */
+[data-dir-grid] .sabl-card { position: relative; }
 .sabl-card:last-of-type { border-bottom: 1px solid rgba(20,25,21,0.14); }
 
 /* Four cells, each with its own stack. The deadline's two lines used to be
@@ -1021,7 +1008,6 @@ html[data-view='grid'] [data-dir-grid] .sabl-card {
 /* The row's cells centre themselves in their grid cells; in a column that
    would centre them across the tile. */
 html:is([data-view='grid'], [data-view='gallery']) [data-dir-grid] .sabl-card > * { align-self: flex-start; }
-html[data-view='grid'] [data-dir-grid] .sabl-card::before { position: static; font-size: 26px; }
 html[data-view='grid'] [data-dir-grid] .sabl-row-main { width: 100%; }
 html[data-view='grid'] [data-dir-grid] :is(.sabl-amount, .sabl-card-top-left) { margin-top: auto; padding-top: 6px; text-align: left; }
 html[data-view='grid'] [data-dir-grid] .sabl-row-when { flex-direction: row; align-items: center; }
@@ -1029,7 +1015,6 @@ html[data-view='grid'] [data-dir-grid] .sabl-card-actions { align-self: stretch;
 @media (max-width: 899px) {
   html[data-view='grid'] [data-dir-grid] { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
   html[data-view='grid'] [data-dir-grid] .sabl-card { padding: 14px 0 16px; gap: 8px; }
-  html[data-view='grid'] [data-dir-grid] .sabl-card::before { font-size: 20px; }
   html[data-view='grid'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-meta-row) { display: none; }
   html[data-view='grid'] [data-dir-grid] .sabl-name { font-size: 15px; }
   html[data-view='grid'] [data-dir-grid] .sabl-amount { font-size: 22px; }
@@ -1061,9 +1046,8 @@ html[data-view='grid'] [data-dir-grid] .sabl-card-actions { align-self: stretch;
   }
   html[data-view='columns'] [data-dir-grid] .sabl-card {
     grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px;
-    padding: 11px 12px 11px 50px; cursor: pointer;
+    padding: 11px 12px; cursor: pointer;
   }
-  html[data-view='columns'] [data-dir-grid] .sabl-card::before { top: 13px; font-size: 18px; }
   html[data-view='columns'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-org, .sabl-meta-row, .sabl-amount, .sabl-card-top-left, .sabl-card-actions, .sabl-when-sub, .sabl-checked) { display: none; }
   html[data-view='columns'] [data-dir-grid] .sabl-name { font-size: 15px; font-weight: 600; }
   html[data-view='columns'] [data-dir-grid] .sabl-row-when { grid-column: 2; }
@@ -1090,7 +1074,6 @@ html[data-view='gallery'] [data-dir-grid] .sabl-card {
   padding: 14px 14px 16px; border: 1px solid rgba(20,25,21,0.14); border-radius: 12px;
   scroll-snap-align: start; cursor: pointer;
 }
-html[data-view='gallery'] [data-dir-grid] .sabl-card::before { position: static; font-size: 18px; }
 html[data-view='gallery'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-org, .sabl-meta-row, .sabl-card-actions, .sabl-when-sub) { display: none; }
 html[data-view='gallery'] [data-dir-grid] .sabl-name {
   font-size: 14.5px; display: -webkit-box; -webkit-box-orient: vertical;
@@ -1243,8 +1226,6 @@ html:not(.js) .sabl-more { display: none; }
     padding: 14px 0 13px;
   }
   .sabl-row-main { grid-column: 1 / -1; grid-row: 1; }
-  [data-dir-grid] .sabl-card { padding-left: 40px; }
-  [data-dir-grid] .sabl-card::before { left: 0; top: 16px; font-size: 18px; }
   .sabl-amount,
   .sabl-card-top-left {
     grid-column: 1; grid-row: 2;
