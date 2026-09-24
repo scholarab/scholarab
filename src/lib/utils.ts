@@ -125,7 +125,11 @@ export function showConfetti(originEl?: Element | null): void {
 }
 
 // Intentionally imperative DOM injection; works outside the React tree, zero bundle cost on public pages.
-export function showToast(message: string): void {
+/**
+ * A short confirmation at the top of the page. With `action` it carries one
+ * button (Undo) and stays up longer, long enough to reach it.
+ */
+export function showToast(message: string, action?: { label: string; onClick: () => void }): void {
   const TOAST_ID = 'sa-toast';
   document.getElementById(TOAST_ID)?.remove();
   const el = document.createElement('div');
@@ -148,7 +152,20 @@ export function showToast(message: string): void {
     transition: 'opacity 0.25s ease, transform 0.25s ease',
     boxShadow: '0 4px 20px rgba(var(--brand-rgb), 0.35)',
   });
+  el.setAttribute('role', 'status');
   el.textContent = message;
+  if (action) {
+    el.style.pointerEvents = 'auto';
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = action.label;
+    Object.assign(b.style, {
+      marginLeft: '14px', padding: '6px 4px', background: 'none', border: '0', cursor: 'pointer',
+      font: 'inherit', color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px',
+    });
+    b.addEventListener('click', () => { action.onClick(); el.remove(); });
+    el.appendChild(b);
+  }
   document.body.appendChild(el);
   // Force a style flush so the entrance transition reliably fires
   // (a single rAF can land in the same frame as the append and skip it)
@@ -159,5 +176,5 @@ export function showToast(message: string): void {
     el.style.opacity = '0';
     el.style.transform = 'translateX(-50%) translateY(-8px)';
     setTimeout(() => el.remove(), 300);
-  }, 2800);
+  }, action ? 5000 : 2800);
 }

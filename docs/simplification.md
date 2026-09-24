@@ -482,3 +482,14 @@ Kept after checking:
 - the view switcher and the row numbers, both Ilia's requests and left for him to decide.
 
 Add-back fraction: 0. Nothing removed had to be restored.
+
+## Phase 3 of the 35 plan, 2026-09-23
+
+Removed:
+- the repeated quiz subhead and trust line after question 1;
+- the Retake-only route to change an answer, now one tap per answer.
+
+Considered and not done:
+- a hard exclude on youth-in-care awards when the quiz never asked. It would break the /match promise that an unanswered question counts as unknown, so those awards rank lower instead.
+
+Add-back fraction: 0.

@@ -88,6 +88,17 @@ export function matchScholarship(
     return { match: false, confidence: 0, reasons, signals: [], checks: [] }
   }
 
+  // ── Age, read from the grade ──────────────────────────────────────────────
+  // The quiz never asks an age, but a grade bounds it. Without this a Grade 10
+  // student got the Advancing Futures Bursary (ages 18 to 24) at #2 of "best
+  // fit first" (critique 2026-09-23). The bands are generous on purpose:
+  // excluded only when no student in that grade could be that age.
+  const band = GRADE_AGE_BAND[profile.grade]
+  if (band && ((eligibility.minAge != null && eligibility.minAge > band[1]) || (eligibility.maxAge != null && eligibility.maxAge < band[0]))) {
+    reasons.push(`Ages ${eligibility.minAge ?? ''}${eligibility.maxAge != null ? ` to ${eligibility.maxAge}` : '+'}`)
+    return { match: false, confidence: 0, reasons, signals: [], checks: [] }
+  }
+
   // ── School board (hard filter only if student provided their board) ───────
   if (eligibility.schoolBoards.length > 0 && profile.schoolBoard) {
     if (!eligibility.schoolBoards.includes(profile.schoolBoard)) {
@@ -236,6 +247,23 @@ export function matchScholarship(
 
   confidence = Math.max(0.1, Math.min(1, confidence))
   return { match: true, confidence, reasons, signals, checks: uncheckedRequirements(profile, eligibility) }
+}
+
+/** The youngest and oldest a student in each grade could plausibly be. */
+const GRADE_AGE_BAND: Record<string, [number, number]> = {
+  '10': [14, 17],
+  '11': [15, 18],
+  '12': [16, 19],
+  'post-secondary': [17, 99],
+}
+
+/**
+ * Checks that name a group the award is limited to, as opposed to financial
+ * need, which nearly every student can meet or explain. The results page ranks
+ * awards carrying one below those that do not, inside the same fit tier.
+ */
+export function isRestrictedCheck(check: string): boolean {
+  return check !== 'Based on financial need'
 }
 
 /**

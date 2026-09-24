@@ -109,6 +109,17 @@ The biggest lever. It is also the product's promise: freshness is the moat.
 
 ## Phase 3: the quiz earns a 4 (H3, H5, H6; about +2)
 
+**Status 2026-09-23:**
+- Done:
+  - Step 1: the intro folds to the heading after question 1.
+  - Step 2: the six biggest cities come first, with type-to-filter.
+  - Step 3: an age filter reads the grade. Group limits the quiz never asks about (youth in care) still show with their flag, as /match promises, but rank below unrestricted awards.
+  - Step 4: a "You answered" summary; changing one answer returns straight to the results.
+  - Step 5: Undo on /saved removals.
+- Unchanged:
+  - The save button already named what it saves.
+  - Browse goes to the student's own city hub.
+
 1. **Collapse the intro after question 1.** Keep one line plus the progress bar. More answers fit on a phone.
 2. **City question.** Six biggest pinned first (Calgary, Edmonton, Red Deer, Lethbridge, St. Albert, Medicine Hat), the rest alphabetical, and type-ahead above them.
 3. **Hard eligibility filters.**

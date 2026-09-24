@@ -557,6 +557,32 @@ describe('matchScholarship', () => {
 
 // Both bars sit 0.15 below where they started, the weight of the grade boost
 // that used to be added to 94% of matches.
+// The quiz asks a grade, never an age; the grade bounds the age. The critique
+// case: a Grade 10 student in Medicine Hat got the Advancing Futures Bursary
+// (ages 18 to 24) at #2 (2026-09-23).
+describe('age read from the grade', () => {
+  const adultsOnly = sch({ minAge: 18, maxAge: 24, fosterCare: true, financialNeed: true }, 'Alberta')
+
+  it('excludes an 18+ award for a Grade 10 student', () => {
+    expect(matchScholarship({ ...baseProfile, grade: '10' }, adultsOnly).match).toBe(false)
+  })
+
+  it('keeps it for Grade 12 and post-secondary, where 18 is a real age', () => {
+    expect(matchScholarship({ ...baseProfile, grade: '12' }, adultsOnly).match).toBe(true)
+    expect(matchScholarship({ ...baseProfile, grade: 'post-secondary' }, adultsOnly).match).toBe(true)
+  })
+
+  it('excludes an award for younger students from post-secondary', () => {
+    expect(matchScholarship({ ...baseProfile, grade: 'post-secondary' }, sch({ maxAge: 15 })).match).toBe(false)
+  })
+
+  it('the real Advancing Futures listing is out for Grade 10 in Medicine Hat', () => {
+    const af = (scholarshipsJson as Array<{ id: number; title: string }>).find(s => s.title === 'Advancing Futures Bursary')!
+    const ids = matchAll({ ...baseProfile, grade: '10' }, scholarshipsJson as never).map(m => m.id)
+    expect(ids).not.toContain(af.id)
+  })
+})
+
 describe('getConfidenceTier', () => {
   it('1.0 → strong', () => expect(getConfidenceTier(1.0)).toBe('strong'))
   it('0.80 → strong', () => expect(getConfidenceTier(0.80)).toBe('strong'))

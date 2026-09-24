@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback, useLayoutEffect, useRef } from 'preact/
 import type { ComponentChildren } from 'preact'
 import type { QuizScholarship as Scholarship, QuizProgram as Program } from '../lib/quiz-payload'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
-import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
+import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti, generateSlug } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
@@ -211,6 +211,18 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     try { sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step, answers, savedAt: Date.now() })) } catch { /* ignore */ }
   }, [step, answers])
 
+  // Set when a student jumps back from the results summary to change one
+  // answer: the next answer returns to the results instead of walking every
+  // later question again. City and board change which questions follow, so
+  // those walk on as usual.
+  const editingRef = useRef(false)
+  function editAnswer(i: number) {
+    editingRef.current = true
+    setEnterDir('back')
+    setAnimKey(k => k + 1)
+    setStep(i)
+  }
+
   function answer(key: string, value: string, index: number) {
     if (pendingTile !== null) return
     setPendingTile(index)
@@ -239,7 +251,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       // Answering the final question = one completed run. Counted here, not on
       // the results screen, so restored sessions don't recount.
       if (step === QUESTIONS.length - 1) sendEvent('quiz_complete')
-      setStep(s => Math.min(s + 1, QUESTIONS.length))
+      const jumpToResults = editingRef.current && key !== 'city' && key !== BOARD_QUESTION_KEY
+      editingRef.current = false
+      setStep(s => jumpToResults ? QUESTIONS.length : Math.min(s + 1, QUESTIONS.length))
     }, 260)
   }
 
@@ -329,7 +343,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const today = todayDate()
     const TIER_RANK: Record<string, number> = { strong: 0, good: 1, possible: 2 }
     const actionable = (s: Scholarship) => scholarshipStatusOf(s, today) === 'active' && !!s.deadline ? 0 : 1
-    all.sort((a, b) => TIER_RANK[a.tier]! - TIER_RANK[b.tier]! || actionable(a.scholarship) - actionable(b.scholarship))
+    // An award limited to a group the quiz never asked about (youth in care,
+    // Indigenous, female) still shows with its flag, but after the awards that
+    // are not: a Grade 10 student saw a youth-in-care bursary at #2.
+    const restricted = (checks: string[]) => checks.some(isRestrictedCheck) ? 1 : 0
+    all.sort((a, b) => TIER_RANK[a.tier]! - TIER_RANK[b.tier]!
+      || restricted(a.checks) - restricted(b.checks)
+      || actionable(a.scholarship) - actionable(b.scholarship))
     const quality  = all.filter(r => r.tier !== 'possible')
     const possible = all.filter(r => r.tier === 'possible')
     return quality.length >= 5 ? quality : [...quality, ...possible]
@@ -373,11 +393,19 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     setSavedProgramIds(next)
   }, [])
 
-  // Hide the static match-page intro when results are shown
+  // Hide the static match-page intro when results are shown, and fold it to
+  // the heading after question one (critique 2026-09-23: the subhead and the
+  // trust line repeated above every question, so a phone fit about three
+  // answers on screen).
   useLayoutEffect(() => {
     document.body.classList.toggle('quiz-results', step >= QUESTIONS.length)
-    return () => document.body.classList.remove('quiz-results')
+    document.body.classList.toggle('quiz-past-first', step >= 1 && step < QUESTIONS.length)
+    return () => document.body.classList.remove('quiz-results', 'quiz-past-first')
   }, [step, QUESTIONS.length])
+
+  // Type-to-filter for the city question; cleared whenever the step moves.
+  const [placeFilter, setPlaceFilter] = useState('')
+  useLayoutEffect(() => { setPlaceFilter('') }, [step])
 
   // ── Results ────────────────────────────────────────────────────────────────
 
@@ -428,6 +456,25 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1" style={{ marginTop: 24 }}>
           {headline}
         </h2>
+
+        {/* What the list was built from, beside the list (critique 2026-09-23:
+            the answers were a screen behind the results). Each answer opens its
+            question; the next answer comes straight back here. */}
+        <div className="sabm-answers">
+          <span className="sabm-answers-label">You answered</span>
+          <ul>
+            {QUESTIONS.map((q, i) => {
+              const v = answers[q.key]
+              if (v === undefined) return null
+              const label = q.opts.find(o => o.value === v)?.label ?? v
+              return (
+                <li key={q.key}>
+                  <button type="button" onClick={() => editAnswer(i)} aria-label={`${label}. Change your answer to: ${q.q}`}>{label}</button>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
 
         {showScholarships && (
           <p className="sabm-results-note">
@@ -619,6 +666,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // ── Question step ──────────────────────────────────────────────────────────
 
   const current = QUESTIONS[step]
+  // "Other Alberta" always stays, so a town not on the list still has a tile.
+  const q = placeFilter.trim().toLowerCase()
+  const shownOpts = current && current.key === 'city' && q
+    ? current.opts.filter(o => o.label.toLowerCase().includes(q) || (o.hint ?? '').toLowerCase().includes(q) || o.value === 'Other Alberta')
+    : current?.opts ?? []
   if (!current) return null
 
   return (
@@ -655,11 +707,26 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           {current.q}
         </h2>
 
+        {current.key === 'city' && (
+          <input
+            type="search"
+            className="sabm-find"
+            placeholder="Type your town"
+            aria-label="Filter the list of towns"
+            value={placeFilter}
+            onInput={e => setPlaceFilter((e.currentTarget as HTMLInputElement).value)}
+            onKeyDown={e => {
+              if (e.key !== 'Enter') return
+              const first = shownOpts[0]
+              if (first && placeFilter.trim()) { e.preventDefault(); answer(current.key, first.value, 0) }
+            }}
+          />
+        )}
         <div className={`sabm-opts${current.opts.length > 8 ? ' is-many' : ''}`}>
-          {current.opts.map((opt, i) => {
+          {shownOpts.map((opt, i) => {
             // A lone last tile spans the row in the two-column grid only; the
             // compact grid has three columns on desktop and would stretch it.
-            const spanFull = current.opts.length <= 8 && current.opts.length % 2 !== 0 && i === current.opts.length - 1;
+            const spanFull = shownOpts.length <= 8 && shownOpts.length % 2 !== 0 && i === shownOpts.length - 1;
             return (
               <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1', height: '100%' } : { height: '100%' }}>
                 <MatchTile

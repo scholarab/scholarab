@@ -135,8 +135,20 @@ describe('initSaved', () => {
     click(wrap.querySelector('[data-sv-remove]')!)
     expect(savedSch).toEqual([2])
     expect(wrap.hidden).toBe(true)
-    expect(showToast).toHaveBeenCalledWith('Removed from saved')
+    expect(showToast).toHaveBeenCalledWith('Removed from saved', expect.objectContaining({ label: 'Undo' }))
     expect($('[data-sv-count]').textContent).toBe('1 item bookmarked. Your shortlist is saved on this device.')
+  })
+
+  it('Undo on the toast puts the item back', () => {
+    savedSch = [1, 2]
+    setup()
+    const wrap = $$('[data-sv-wrap]').find(w => w.dataset.id === '1')!
+    click(wrap.querySelector('[data-sv-remove]')!)
+    const { onClick } = vi.mocked(showToast).mock.calls.at(-1)![1]!
+    onClick()
+    expect([...savedSch].sort()).toEqual([1, 2])
+    expect(wrap.hidden).toBe(false)
+    expect($('[data-sv-count]').textContent).toBe('2 items bookmarked. Your shortlist is saved on this device.')
   })
 
   it('removing the last item shows the empty state', () => {

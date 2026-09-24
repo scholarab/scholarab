@@ -37,7 +37,7 @@ vi.mock('../lib/events.ts', () => ({ sendEvent: mockSendEvent }))
 
 // matchPrograms (plural) is what the component actually imports; a mock named
 // matchProgram would leave it undefined and crash any program-results path.
-vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll, matchPrograms: mockMatchPrograms }))
+vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll, matchPrograms: mockMatchPrograms, isRestrictedCheck: (c: string) => c !== 'Based on financial need' }))
 // Programs use the separate saved-programs key; mock both pairs or the
 // component's useState initialiser calls undefined and every render crashes.
 vi.mock('../lib/tracker.ts',          () => ({
@@ -687,5 +687,42 @@ describe('Operator completion events', () => {
     cleanup()
     act(() => { vi.runAllTimers() })
     expect(mockSendEvent).not.toHaveBeenCalled()
+  })
+})
+
+// ── Phase 3 of the 35 plan (critique 2026-09-23) ──────────────────────────────
+
+describe('Answer summary on the results', () => {
+  it('lists the answers, and changing one returns straight to the results', () => {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    advanceToResults()
+    expect(screen.getByText('You answered')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: /^Grade 12\. Change your answer/ }))
+    expect(screen.getByText('What grade are you in?')).toBeTruthy()
+    clickTile('Grade 11')
+    expect(screen.getByText('You answered')).toBeTruthy()
+    expect(screen.getByRole('button', { name: /^Grade 11\. Change your answer/ })).toBeTruthy()
+  })
+})
+
+describe('Town filter on the city question', () => {
+  it('narrows the tiles as you type and always keeps Other Alberta', () => {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    clickTile('Scholarships')
+    clickTile('Grade 12')
+    const input = screen.getByRole('searchbox', { name: /filter the list of towns/i }) as HTMLInputElement
+    act(() => { input.value = 'leth'; dispatch.input(input) })
+    expect(screen.queryByText('Lethbridge')).toBeTruthy()
+    expect(screen.queryByText('Calgary')).toBeNull()
+    expect(screen.queryByText('Other Alberta')).toBeTruthy()
+  })
+
+  it('lists the six biggest cities first', () => {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    clickTile('Scholarships')
+    clickTile('Grade 12')
+    const labels = [...document.querySelectorAll('.sabm-opt-label')].map(e => e.textContent)
+    expect(labels.slice(0, 6)).toEqual(['Calgary', 'Edmonton', 'Red Deer', 'Lethbridge', 'St. Albert', 'Medicine Hat'])
+    expect(labels.at(-1)).toBe('Other Alberta')
   })
 })

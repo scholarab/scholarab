@@ -330,13 +330,30 @@ export function initSaved() {
     if (!prefersReducedMotion()) {
       btn.animate?.(BOUNCE_KEYFRAMES, { duration: 380, easing: 'ease-out' });
     }
-    showToast('Removed from saved');
     card.dataset.removing = 'true';
+    const id = Number(wrap.dataset.id);
+    const toggle = () => (wrap.dataset.type === 'scholarship' ? toggleSaved(id) : toggleSavedProgram(id));
+    let undone = false;
+    let removed = false;
+    // Undo for five seconds (critique 2026-09-23: a mis-tap on the bookmark
+    // lost the award with no way back but finding it again).
+    showToast('Removed from saved', {
+      label: 'Undo',
+      onClick: () => {
+        undone = true;
+        if (removed) toggle();
+        for (const el of [card, wrap]) el.getAnimations?.().forEach(a => a.cancel());
+        wrap.hidden = false;
+        wrap.removeAttribute('style');
+        delete card.dataset.removing;
+        updateVisibility();
+      },
+    });
 
     const unsave = () => {
-      const id = Number(wrap.dataset.id);
-      if (wrap.dataset.type === 'scholarship') toggleSaved(id);
-      else toggleSavedProgram(id);
+      if (undone) return;
+      removed = true;
+      toggle();
       wrap.hidden = true;
       wrap.removeAttribute('style');
       delete card.dataset.removing;
