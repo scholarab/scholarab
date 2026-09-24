@@ -508,3 +508,18 @@ Considered and not done:
 Measured on `dist/`: /saved layout shift with one saved award went from 0.0995 to 0.0002 (footer, 1280px and 375px), after reserving one screen of height.
 
 Add-back fraction: 0 (one placement moved, nothing restored).
+
+## After the Phase 5 critique, 2026-09-24
+
+The critique held at 27; these are its P1 and P2 findings.
+
+Removed:
+- the second home carousel as a separate section; one carousel now holds both sets behind two tabs (Ilia's choice). The phone home page went from 5,536px to 4,847px.
+- ten of the twenty quiz results on first view; "Show all" keeps the rest one tap away.
+- the programs block on detail pages when none of its programs is open.
+
+Changed:
+- the matcher read field tags case-sensitively, so "Business", "Nursing" and "Commerce" never met a quiz answer; tags now map onto the quiz's five fields. A different field, and family, membership, gender or newcomer gates read from the audience line, become Check notes, and a row with one is never "Strong". Local 38 Heritage (children of Calgary public teachers) was #1 Strong for a Calgary Business student; it is out of the Strong set now, guarded by a real-data test.
+- the home page and the 404 page preload Public Sans 600. Mobile home CLS 0.05 to 0, and the 404 page 0.04 to 0 (measured on `dist/`).
+
+Add-back fraction: 0.

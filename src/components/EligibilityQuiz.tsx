@@ -424,7 +424,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const programTotal = allProgramResults?.length ?? 0
     const hasAnyResults = scholarshipCount > 0 || programCount > 0
     const hasMore = scholarshipTotal > scholarshipCount || programTotal > programCount
-    // "Your top 20 of 64" when the list is cut, the plain count when it is not.
+    // "Your top 10 of 64" when the list is cut, the plain count when it is not.
     const counted = (shown: number, total: number, noun: string) =>
       `${total > shown ? `your top ${shown} of ${total}` : shown} ${noun}${total !== 1 ? 's' : ''}`
 
@@ -461,7 +461,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             the answers were a screen behind the results). Each answer opens its
             question; the next answer comes straight back here. */}
         <div className="sabm-answers">
-          <span className="sabm-answers-label">You answered</span>
+          <span className="sabm-answers-label">You answered <span className="sabm-answers-hint">· tap one to change it</span></span>
           <ul>
             {QUESTIONS.map((q, i) => {
               const v = answers[q.key]

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { matchScholarship, getConfidenceTier, matchAll, matchPrograms, programFields } from './eligibility-matcher'
+import { matchScholarship, getConfidenceTier, matchAll, matchPrograms, programFields, quizField, audienceChecks, capTier } from './eligibility-matcher'
 import { RESULT_LIMIT } from './quiz'
 import scholarshipsJson from '../data/scholarships.json'
 import { EMPTY_ELIGIBILITY, eligibilitySchema } from './eligibility-types'
@@ -960,4 +960,50 @@ describe('additional eligible cities',()=>{
   it('matches Beaumont for the real Ambassador Scholarship',()=>{const row=scholarshipsJson.find(s=>s.id===496)!;expect(matchScholarship({...baseProfile,city:'Beaumont'},row as any).match).toBe(true)})
   it('does not erase known geography when criteria are missing',()=>{expect(matchScholarship({...baseProfile,city:'Beaumont'},{region:'Leduc',eligibility:null}).match).toBe(false)})
   it('rejects unrelated cities even with secondary cities',()=>{expect(matchScholarship(baseProfile,{...sch({},'Leduc'),alsoOpenTo:['Beaumont']}).match).toBe(false)})
+})
+
+// ── Gates the quiz never asks (critique 2026-09-24) ──────────────────────────
+// A Business student in Calgary saw "Strong match" #1 for children of ATA
+// Local 38 teachers, then awards for male students and future teachers.
+describe('unasked gates', () => {
+  it('reads field tags in any case or synonym', () => {
+    expect(quizField('Business')).toBe('business')
+    expect(quizField('Nursing')).toBe('health')
+    expect(quizField('Music')).toBe('arts')
+    expect(quizField('Education')).toBeNull()
+  })
+
+  it('names family, membership, gender and newcomer gates from the audience line', () => {
+    expect(audienceChecks('Children of Calgary Public Teachers, ATA Local 38 members')).toEqual(['Needs a family link to a group'])
+    expect(audienceChecks('Servus Credit Union members entering post-secondary')).toEqual(['Needs a membership'])
+    expect(audienceChecks('Grade 12 CBE and Calgary Catholic students who identify as male')).toContain('Male students only')
+    expect(audienceChecks('Grade 12 CBE and Calgary Catholic students new to Canada')).toContain('Newcomers to Canada only')
+  })
+
+  it('does not read residency, member schools or Boys and Girls Clubs as gates', () => {
+    expect(audienceChecks('MD of Greenview residents, or students whose parents live there')).toEqual([])
+    expect(audienceChecks('Grade 12 athletes at School Sport Alberta member schools')).toEqual([])
+    expect(audienceChecks('Boys and Girls Club youth entering post-secondary')).toEqual([])
+  })
+
+  it('never calls a row Strong while it has a group to check', () => {
+    expect(capTier('strong', ['Needs a membership'])).toBe('good')
+    expect(capTier('strong', ['Based on financial need'])).toBe('strong')
+  })
+
+  it('a different field is a Check, not an exclusion', () => {
+    const r = matchScholarship({ ...baseProfile, fields: ['business'] }, { ...sch({ fields: ['Music'] }), audience: null })
+    expect(r.match).toBe(true)
+    expect(r.checks).toContain('For arts students')
+  })
+
+  it('the real Calgary Business profile has no family, membership or other-field award as Strong', () => {
+    const profile: StudentProfile = { ...baseProfile, city: 'Calgary', schoolBoard: 'CBE', fields: ['business'], averagePercent: 85 }
+    const all = scholarshipsJson as Array<{ id: number; title: string }>
+    const strong = matchAll(profile, all as never).filter(m => m.tier === 'strong')
+    expect(strong.length).toBeGreaterThan(5)
+    const local38 = all.find(s => s.title === 'Local 38 Heritage Scholarship Award')!
+    expect(strong.map(m => m.id)).not.toContain(local38.id)
+    for (const m of strong) expect(m.checks.filter(c => c !== 'Based on financial need')).toEqual([])
+  })
 })

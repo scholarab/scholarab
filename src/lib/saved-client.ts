@@ -215,6 +215,16 @@ export function initSaved() {
     return { sch, prg, byDate };
   }
 
+  // The calendar opens on the month of the next saved deadline, not on an
+  // empty current month with the only deadline two arrows away (critique
+  // 2026-09-24). With nothing ahead it opens on this month.
+  function firstDueMonth(): Date {
+    const t = getToday();
+    const todayStr = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+    const next = [...calItems().byDate.keys()].filter(d => d >= todayStr).sort()[0];
+    return next ? new Date(Number(next.slice(0, 4)), Number(next.slice(5, 7)) - 1, 1) : new Date(t.getFullYear(), t.getMonth(), 1);
+  }
+
   function renderCalendar(calEl: HTMLElement) {
     const { byDate } = calItems();
     const today = getToday();
@@ -392,7 +402,7 @@ export function initSaved() {
     const viewBtn = t.closest<HTMLElement>('[data-sv-view]');
     if (viewBtn) {
       const next = viewBtn.dataset.svView as 'list' | 'calendar';
-      if (next === 'calendar' && view !== 'calendar') { calMonth = new Date(getToday().getFullYear(), getToday().getMonth(), 1); calAdded = false; }
+      if (next === 'calendar' && view !== 'calendar') { calMonth = firstDueMonth(); calAdded = false; }
       setView(next);
       return;
     }

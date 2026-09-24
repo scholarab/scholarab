@@ -167,25 +167,21 @@ describe('initSaved', () => {
     const cal = $('[data-sv-cal]')
     expect(cal.hidden).toBe(false)
     expect($('[data-sv-list]').hidden).toBe(true)
-    expect(cal.querySelector('.sabs-cal-month')!.textContent).toBe('April 2026')
-    expect(cal.textContent).toContain('No deadlines this month.')
+    // It opens on the month of the next saved deadline, not on an empty April.
+    expect(cal.querySelector('.sabs-cal-month')!.textContent).toBe('May 2026')
+    expect(cal.textContent).toContain('Big Award')
+    expect(cal.querySelector('.sabs-cal-cell.has-due .sabs-cal-due')!.textContent).toBe('1 DUE')
 
-    // The next-month arrow is badged with the deadline waiting in May, and
-    // says so to a screen reader.
-    const next = cal.querySelector('[data-cal-next]')!
-    expect(next.querySelector('.sabs-cal-nav-count')!.textContent).toBe('1')
-    expect(next.getAttribute('aria-label')).toBe('Next month, May 2026, 1 deadline')
-
-    // Navigate to May 2026 where the scholarship deadline lands
-    click(next)
-    expect($('.sabs-cal-month').textContent).toBe('May 2026')
-    expect($('[data-sv-cal]').textContent).toContain('Big Award')
-    expect($('[data-sv-cal]').querySelector('.sabs-cal-cell.has-due .sabs-cal-due')!.textContent).toBe('1 DUE')
-
-    // The arrow back to April carries no badge; the one to May did, which is
+    // The arrow back to April carries no badge; the one to May does, which is
     // the only reason a student would press it.
     expect($('[data-cal-prev]').querySelector('.sabs-cal-nav-count')).toBeNull()
     expect($('[data-cal-prev]').getAttribute('aria-label')).toContain('no deadlines')
+    click($('[data-cal-prev]'))
+    expect($('.sabs-cal-month').textContent).toBe('April 2026')
+    expect($('[data-sv-cal]').textContent).toContain('No deadlines this month.')
+    const next = $('[data-cal-next]')
+    expect(next.querySelector('.sabs-cal-nav-count')!.textContent).toBe('1')
+    expect(next.getAttribute('aria-label')).toBe('Next month, May 2026, 1 deadline')
 
     click($('[data-cal-add]'))
     expect(downloadICS).toHaveBeenCalledTimes(1)

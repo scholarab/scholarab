@@ -357,6 +357,7 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 18px; }
    question. */
 .sabm-answers { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; margin: 14px 0 0; }
 .sabm-answers-label { font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.72); }
+.sabm-answers-hint { font-weight: 400; }
 .sabm-answers ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .sabm-answers button {
   min-height: 32px; padding: 0 12px; cursor: pointer;
@@ -666,6 +667,12 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
     display: flex; flex-direction: column;
     overflow-y: auto; overscroll-behavior: contain;
     scrollbar-width: thin;
+    /* A shade at the foot while more filters sit below the fold; the cover
+       rides with the content and hides it at the end (critique 2026-09-24:
+       the rail cut "Status" in half with nothing saying it scrolled). */
+    background:
+      linear-gradient(to top, var(--bg-page) 40%, rgba(255,255,255,0)) center bottom / 100% 36px no-repeat local,
+      linear-gradient(to top, rgba(20,25,21,0.12), rgba(20,25,21,0)) center bottom / 100% 18px no-repeat scroll;
   }
   .sabl-railed .sabl-rail .sabl-filters { padding-top: 0; gap: 18px; }
   /* Stacked, not a row: the label sits over its chips and the chips wrap down
@@ -1362,15 +1369,17 @@ html:not(.js) .sabl-more { display: none; }
    in late March" turned a row of chips into a 155px paragraph wearing chip
    styling, which drove the height of every card beside it. A chip that cannot
    fit its text is a chip that should be truncated; the detail page has the
-   sentence. */
+   sentence. Grid view hides them now, so in the list they wrap to two lines
+   instead: an ellipsis mid-word ("in Novem...") with the rest in a hover
+   title was unreadable on a phone (critique 2026-09-24). */
 .sabl-meta {
   position: relative; padding-left: 12px; box-sizing: border-box;
-  font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82);
-  max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82); line-height: 1.4;
+  max-width: 100%; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 /* A dot per item rather than a separator between them, so an item that wraps
    onto its own line does not start with a stray "·". */
-.sabl-meta::before { content: ''; position: absolute; left: 0; top: calc(50% - 2.5px); width: 5px; height: 5px; border-radius: 50%; background: rgba(20, 25, 21, 0.35); }
+.sabl-meta::before { content: ''; position: absolute; left: 0; top: calc(0.7em - 2.5px); width: 5px; height: 5px; border-radius: 50%; background: rgba(20, 25, 21, 0.35); }
 /* Arrow convention: → stays on ScholarAB, ↗ leaves for the sponsor's site.
    Two cards that look alike had buttons that did categorically different
    things; "Details →" opened our page, "Apply →" left the site, with

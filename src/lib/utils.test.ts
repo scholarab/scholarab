@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { formatVerifiedMonth, generateSlug, getToday, formatDeadline, parseAmount, showConfetti, showToast, emailProblem, EMAIL_RE } from './utils'
+import { formatVerifiedMonth, generateSlug, getToday, formatDeadline, parseAmount, showConfetti, showToast, emailProblem, EMAIL_RE, amountSpan } from './utils'
 
 // ── generateSlug ─────────────────────────────────────────────────────────────
 
@@ -333,5 +333,17 @@ describe('emailProblem', () => {
     for (const e of ['a@b.co', 'x@y', 'x@.com', 'a b@c.d', '', 'a@b.c.d', 'a@b.']) {
       expect(emailProblem(e) === null).toBe(EMAIL_RE.test(e.trim()))
     }
+  })
+})
+
+describe('amountSpan', () => {
+  it('reads a multi-year total from the listing text', () => {
+    expect(amountSpan('$30,000', 'An award worth up to $30,000 over four years for a first-year student')).toBe('Up to this, in total, over four years.')
+    expect(amountSpan('$16,000', 'Renewable to $16,000 over 4 years.')).toBe('In total, over four years.')
+  })
+  it('says nothing when the text does not, or the amount already has its period', () => {
+    expect(amountSpan('$1,000', 'A one-time award.')).toBeNull()
+    expect(amountSpan('$4,000 a year', 'over four years')).toBeNull()
+    expect(amountSpan('Varies', 'over three years')).toBeNull()
   })
 })

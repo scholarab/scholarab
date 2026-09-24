@@ -155,6 +155,8 @@ The biggest lever. It is also the product's promise: freshness is the moat.
 
 ## Phase 5: verify, then critique once
 
+**Status 2026-09-24:** the gate passed and the critique held at 27/40 (`.impeccable/critique/2026-09-24T06-03-57Z__src-pages.md`). The reviewer scored new problems: match results (H5), consistency (H4) and home length (H8) at 2. The P1 and P2 fixes are in (see `docs/simplification.md`, "After the Phase 5 critique"); the P3 consistency items (amount colour, one primary button style, the notebook card) are still open.
+
 1. Run `npm run ci`, `npm run test:e2e` and `npm run ship-check -- origin/main`.
 2. Walk the 35 gate below on desktop and 375px.
 3. Run `/impeccable critique` with the fixed page list. If it lands 33 or 34, fix only the named 3s; no new features.

@@ -327,9 +327,11 @@ export const QUIZ_MAX_QUESTION_WORD = 'eight';
  * Both lists cap at the same number, and both used to hard-code 10 in
  * different files. The corpus has more than tripled since that number was
  * chosen, so 10 was cutting real matches off a list the student had already
- * answered eight questions to narrow.
+ * answered eight questions to narrow. It went to 20, and is back at 10 now
+ * that "Show all" sits under the list (critique 2026-09-24: 20 rows read as a
+ * second directory, not a shortlist). Nothing is cut; the rest is one tap.
  */
-export const RESULT_LIMIT = 20;
+export const RESULT_LIMIT = 10;
 
 // "30 seconds" was the claim for six questions; with the two optional ones
 // the quiz runs to eight taps, so the honest figure is about a minute

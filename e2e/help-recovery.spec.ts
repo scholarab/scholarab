@@ -66,3 +66,29 @@ test('/saved does not move the footer when the list replaces the skeleton', asyn
   await page.waitForTimeout(500);
   expect(await page.evaluate(() => (window as unknown as { __cls: number }).__cls)).toBeLessThan(0.01);
 });
+
+test('home and the 404 page hold still while their fonts arrive', async ({ page }) => {
+  await page.addInitScript(() => {
+    (window as unknown as { __cls: number }).__cls = 0;
+    new PerformanceObserver(l => {
+      for (const e of l.getEntries() as Array<PerformanceEntry & { value: number; hadRecentInput: boolean }>)
+        if (!e.hadRecentInput) (window as unknown as { __cls: number }).__cls += e.value;
+    }).observe({ type: 'layout-shift', buffered: true });
+  });
+  for (const path of ['/', '/404.html']) {
+    await page.goto(path);
+    await page.waitForTimeout(1200);
+    // Measured 0.05 (home, phone) and 0.04 (404) before the 600 weight was preloaded.
+    expect.soft(await page.evaluate(() => (window as unknown as { __cls: number }).__cls), path).toBeLessThan(0.01);
+  }
+});
+
+test('the /saved calendar opens on the month of the next saved deadline', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('scholarab_saved', '[4]'));
+  await page.goto('/saved/');
+  const due = await page.locator('[data-sv-wrap] .sabl-card[data-deadline]').first().getAttribute('data-deadline');
+  test.skip(!due || !/^\d{4}-\d\d-\d\d$/.test(due), 'saved award 4 has no date');
+  await page.locator('[data-sv-view="calendar"]').click();
+  const month = new Date(`${due}T12:00:00`).toLocaleString('en-CA', { month: 'long', year: 'numeric' });
+  await expect(page.locator('.sabs-cal-month')).toHaveText(month);
+});

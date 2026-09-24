@@ -7,7 +7,8 @@ import { test, expect } from '@playwright/test';
 // median luminance under each line must give white 4.5:1. Text shadows are
 // ignored, so the check is pessimistic.
 
-const LINES = ['.sab-scopes-h', '.sab-scope-kicker', '.sab-scope-sub'];
+const TAB = '.sab-scopes-tab[aria-selected="true"]';
+const LINES = [TAB, '.sab-scope-kicker', '.sab-scope-sub'];
 
 test('text over every home photo slide holds 4.5:1 against its photo', async ({ page }, testInfo) => {
   test.setTimeout(180_000);
@@ -16,6 +17,8 @@ test('text over every home photo slide holds 4.5:1 against its photo', async ({ 
   const failures: string[] = [];
   for (let s = 0; s < await sections.count(); s++) {
     const section = sections.nth(s);
+    // One carousel, two sets behind tabs: show this set first.
+    await page.locator(`[data-scopes-tab="${await section.getAttribute('data-scopes')}"]`).click();
     const cards = section.locator('[data-scope-card]');
     for (let i = 0; i < await cards.count(); i++) {
       const card = cards.nth(i);
@@ -30,7 +33,7 @@ test('text over every home photo slide holds 4.5:1 against its photo', async ({ 
         const c = el.querySelectorAll<HTMLElement>('[data-scope-card]')[idx as number]!;
         const out: Array<{ sel: string; x: number; y: number; w: number; h: number }> = [];
         for (const sel of sels as string[]) {
-          const nodes = sel === '.sab-scopes-h' ? [el.querySelector<HTMLElement>(sel)!] : [...c.querySelectorAll<HTMLElement>(sel)];
+          const nodes = sel.startsWith('.sab-scopes-tab') ? [document.querySelector<HTMLElement>(sel)!] : [...c.querySelectorAll<HTMLElement>(sel)];
           for (const n of nodes) {
             const r = n.getBoundingClientRect();
             if (r.width && r.height) out.push({ sel, x: r.x, y: r.y, w: r.width, h: r.height });
@@ -60,8 +63,8 @@ test('text over every home photo slide holds 4.5:1 against its photo', async ({ 
         }, `data:image/png;base64,${png.toString('base64')}`);
         if (ratio < 4.5) failures.push(`${name} ${b.sel} ${ratio.toFixed(2)}:1 (${testInfo.project.name})`);
       }
-      await section.evaluate(el => el.querySelectorAll<HTMLElement>('[style]').forEach(n => {
-        if (n.matches('.sab-scopes-h, .sab-scope-kicker, .sab-scope-sub')) n.removeAttribute('style');
+      await section.evaluate(el => [...el.querySelectorAll<HTMLElement>('[style]'), ...document.querySelectorAll<HTMLElement>('.sab-scopes-tab[style]')].forEach(n => {
+        if (n.matches('.sab-scopes-tab, .sab-scope-kicker, .sab-scope-sub')) n.removeAttribute('style');
       }));
     }
   }

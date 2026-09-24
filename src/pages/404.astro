@@ -2,6 +2,7 @@
 import SabFooter from '../components/sab/SabFooter.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
 import { loadScholarships } from '../lib/data-loader';
 import { SCHOLARSHIP_FACETS, facetItems } from '../lib/facets';
 
@@ -22,6 +23,8 @@ const hubs = SCHOLARSHIP_FACETS
   ogUrl="https://www.scholarab.ca/404/"
   robots="noindex, follow"
 >
+  {/* It had no preloads, so the footer re-wrapped when the faces arrived (CLS 0.04). */}
+  <SabFonts chips slot="head" />
   <div class="sabp-header" slot="header">
     <SabHeader currentPath="/404" />
   </div>
@@ -32,7 +35,7 @@ const hubs = SCHOLARSHIP_FACETS
       <p class="sab404-copy">The link may be old, or the address was mistyped. Search the directory, or start from one of the biggest lists.</p>
       <form action="/scholarships/" method="get" class="sab404-search" role="search">
         <label for="sab404-q" class="sr-only">Search scholarships</label>
-        <input id="sab404-q" name="q" type="search" placeholder="Search scholarships, e.g. nursing or Red Deer" class="sab404-input" />
+        <input id="sab404-q" name="q" type="search" placeholder="Search, e.g. nursing or Red Deer" class="sab404-input" />
         <button type="submit" class="sab-btn sab404-btn-accent">Search</button>
       </form>
       <ul class="sab404-hubs">
@@ -62,8 +65,8 @@ const hubs = SCHOLARSHIP_FACETS
   }
   .sab404-input:focus { outline: none; border-color: var(--green); }
   .sab404-input:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
-  .sab404-hubs { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15.5px; }
-  .sab404-hubs a { color: #0A6B4D; font-weight: 600; text-underline-offset: 3px; }
+  .sab404-hubs { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 22px; font-size: 15.5px; }
+  .sab404-hubs a { color: #0A6B4D; font-weight: 600; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 32px; }
   .sab404-hubs span { color: rgba(20, 25, 21, 0.72); }
   .sab404-btn-accent {
     display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;

@@ -315,6 +315,11 @@ test('home program carousel links every card to its format hub', async ({ page }
     expect(href).toMatch(/^\/programs\/[a-z-]+\/$/);
   }
   const other = page.locator('[data-scopes="scholarships"] [data-scopes-track]');
+  // One carousel since 2026-09-24: the programs set sits behind its tab.
+  await expect(root).toBeHidden();
+  await page.locator('[data-scopes-tab="programs"]').click();
+  await expect(root).toBeVisible();
+  await expect(page.locator('[data-scopes="scholarships"]')).toBeHidden();
   await root.scrollIntoViewIfNeeded();
   await root.locator('[data-scopes-next]').click();
   await expect(root.locator('.sab-scopes-dot').nth(1)).toHaveAttribute('aria-current', 'true');

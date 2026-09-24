@@ -370,13 +370,13 @@ describe('Results', () => {
     expect(screen.getByText(/^1 scholarship worth a look/i)).toBeTruthy()
   })
 
-  it('says "your top 20 of N" when the list is cut, and shows the rest on request', () => {
-    // "We found 20" was the cap talking; 25 matched.
+  it('says "your top 10 of N" when the list is cut, and shows the rest on request', () => {
+    // "We found 10" would be the cap talking; 25 matched.
     const many = Array.from({ length: 25 }, (_, i) => makeScholarship({ id: i + 1, title: `Award ${i + 1}` }))
     mockMatchAll.mockReturnValue(many.map(s => ({ id: s.id, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] })))
     render(<EligibilityQuiz scholarships={many as any} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/^Your top 20 of 25 scholarships worth a look/)).toBeTruthy()
+    expect(screen.getByText(/^Your top 10 of 25 scholarships worth a look/)).toBeTruthy()
     expect(screen.queryByText('Award 25')).toBeNull()
     fireEvent.click(screen.getByRole('button', { name: /show all 25 scholarships/i }))
     expect(screen.getByText('Award 25')).toBeTruthy()

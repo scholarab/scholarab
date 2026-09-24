@@ -211,7 +211,7 @@ const carousels = [
       },
     ],
   })} slot="head" />
-  <SabFonts slot="head" />
+  <SabFonts chips slot="head" />
   {/* The poster is the phone LCP and a CSS background, so the browser only
       found it after the stylesheet: 2.5 s on a throttled 4G run. Phones get
       the same 720x1080 centre crop as the `.m` clips, at under half the bytes. */}
@@ -248,6 +248,14 @@ const carousels = [
             <p>
               <span class="sab-hero-p-l1">ScholarAB tracks scholarships and research programs for Alberta high school students.</span>
             </p>
+            {/* The home page had no search (critique 2026-09-24); the directory
+                reads ?q= the same way the 404 page's search uses it. */}
+            <form action="/scholarships/" method="get" class="sab-hero-search" role="search">
+              <label for="sab-hero-q" class="sr-only">Search scholarships</label>
+              <svg class="sab-hero-search-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <input id="sab-hero-q" name="q" type="search" enterkeyhint="search" placeholder="Search, e.g. nursing" class="sab-hero-search-input" />
+              <button type="submit" class="sab-hero-search-btn">Search</button>
+            </form>
             <div class="sab-hero-ctas">
               <a href="/scholarships/" class="sab-btn-accent">
                 Browse {scholarshipCount.toLocaleString('en-CA')} scholarships
@@ -291,13 +299,20 @@ const carousels = [
       </div>
     )}
 
-    <!-- ============ PHOTO CAROUSELS (scholarship scopes, then program formats) ============ -->
-    {carousels.map(k => (
-      <section class="sab-scopes" aria-labelledby={`sab-scopes-h-${k.key}`} data-scopes={k.key}>
-        {/* Visible since 2026-09-23 (critique): sr-only, the two carousels never
-            said what they sorted by. It sits in the solid ink at the top of the
-            slides, where the fade makes it legible over any photo. */}
-        <h2 id={`sab-scopes-h-${k.key}`} class="sab-scopes-h">{k.title}</h2>
+    <!-- ============ PHOTO CAROUSEL (scholarship scopes or program formats) ============ -->
+    {/* One carousel with two sets (Ilia, 2026-09-24): the two stacked ones took
+        1.6 phone screens (critique). The tabs sit in the solid ink at the top of
+        the slides, where the fade makes them legible over any photo, and name
+        what each set sorts by. Without JS both sets show, one above the other. */}
+    <section class="sab-scopes-pair" aria-labelledby="sab-scopes-h" data-scopes-pair>
+      <h2 id="sab-scopes-h" class="sr-only">Browse by where you live or by program format</h2>
+      <div class="sab-scopes-tabs" role="tablist" aria-label="Photo set">
+        {carousels.map((k, i) => (
+          <button type="button" role="tab" class="sab-scopes-tab" id={`sab-scopes-tab-${k.key}`} aria-controls={`sab-scopes-${k.key}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-scopes-tab={k.key}>{k.title}</button>
+        ))}
+      </div>
+    {carousels.map((k, i) => (
+      <div class="sab-scopes" id={`sab-scopes-${k.key}`} role="tabpanel" aria-labelledby={`sab-scopes-tab-${k.key}`} data-scopes={k.key} data-off={i === 0 ? undefined : ''}>
         <div class="sab-scopes-track" data-scopes-track tabindex="-1">
           {k.cards.map(c => (
             <article class="sab-scope" aria-label={`${c.label}: ${c.count} ${k.noun}`} data-scope-card>
@@ -348,8 +363,9 @@ const carousels = [
             <button type="button" class="sab-scopes-dot" aria-label={`Show ${c.label}`} aria-current={i === 0 ? 'true' : undefined}></button>
           ))}
         </div>
-      </section>
+      </div>
     ))}
+    </section>
 
     <!-- ============ BIGGEST OPEN AWARDS ============ -->
     {biggestOpen.length > 0 && (
@@ -486,6 +502,34 @@ const carousels = [
     sync();
   }
   document.addEventListener('astro:page-load', initScopes);
+
+  // The two photo sets share one place on the page; a tab shows one. Arrow
+  // keys move between the tabs (the WAI tabs pattern), and the shown track
+  // re-syncs its arrows, which measured zero width while it was hidden.
+  function initScopeTabs() {
+    const pair = document.querySelector<HTMLElement>('[data-scopes-pair]');
+    if (!pair || pair.dataset.init) return;
+    pair.dataset.init = '';
+    const tabs = [...pair.querySelectorAll<HTMLButtonElement>('[data-scopes-tab]')];
+    const show = (tab: HTMLButtonElement, focus = false) => {
+      tabs.forEach(t => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        pair.querySelector<HTMLElement>(`[data-scopes="${t.dataset.scopesTab}"]`)?.toggleAttribute('data-off', !on);
+      });
+      pair.querySelector(`[data-scopes="${tab.dataset.scopesTab}"] [data-scopes-track]`)?.dispatchEvent(new Event('scroll'));
+      if (focus) tab.focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => show(t));
+      t.addEventListener('keydown', e => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); show(tabs[(i + d + tabs.length) % tabs.length]!, true); }
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', initScopeTabs);
 
 
   // ── Hero film: two <video> elements take turns so the next clip is already
@@ -734,8 +778,25 @@ const carousels = [
   .sab-hero-p-l1 { display: block; }
   .sab-hero-p-l1 { white-space: nowrap; }
   .sab-hero-copy p { font-size: 18px; line-height: 1.55; color: rgba(238, 241, 236, 0.8); margin: 0 0 30px; }
+  .sab-hero-search {
+    position: relative; display: flex; align-items: center; max-width: 480px; margin: 0 0 16px;
+    border: 1px solid rgba(238, 241, 236, 0.32); border-radius: 100px;
+    background: rgba(10, 19, 16, 0.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  }
+  .sab-hero-search:focus-within { border-color: #2FD3A0; }
+  .sab-hero-search-icon { position: absolute; left: 18px; color: rgba(238, 241, 236, 0.7); pointer-events: none; }
+  .sab-hero-search-input {
+    flex: 1; min-width: 0; height: 50px; padding: 0 8px 0 44px; border: 0; background: none;
+    font: 16px var(--font-body); color: #FFFFFF; outline: none;
+  }
+  .sab-hero-search-input::placeholder { color: rgba(238, 241, 236, 0.66); }
+  .sab-hero-search-btn {
+    height: 40px; margin-right: 5px; padding: 0 18px; border: 0; border-radius: 100px; cursor: pointer;
+    font: 600 14.5px var(--font-body); color: #EEF1EC; background: rgba(238, 241, 236, 0.12);
+  }
+  .sab-hero-search-btn:hover { background: rgba(238, 241, 236, 0.22); }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  .sab-hero .sab-hero-quiz { margin: 18px 0 0; font-size: 15.5px; line-height: 1.5; color: rgba(238, 241, 236, 0.88); }
+  .sab-hero .sab-hero-quiz { margin: 18px 0 0; font-size: 15.5px; line-height: 1.5; color: rgba(238, 241, 236, 0.88); max-width: 62ch; }
   .sab-hero-quiz a {
     color: #EEF1EC; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(92,227,187,0.6);
     display: inline-block; padding-top: 10px; margin-top: -10px;
@@ -798,11 +859,23 @@ const carousels = [
   /* The kicker measured 3.3 to 4.5 over the brighter skies (critique
      2026-09-23) on a 55% fade; the fade is 80% there now, plus a shadow. */
   .sab-scope-kicker { font-size: 19px; font-weight: 600; letter-spacing: -0.005em; text-shadow: 0 1px 2px rgba(5,10,8,0.6), 0 0 12px rgba(5,10,8,0.5); }
-  .sab-scopes-h {
-    position: absolute; z-index: 2; top: clamp(22px, 3.6vh, 36px); left: clamp(24px, 5vw, 80px); right: 120px;
-    margin: 0; pointer-events: none; color: #FFFFFF;
-    font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 2.4vw, 34px); line-height: 1;
+  .sab-scopes-pair { position: relative; }
+  html.js .sab-scopes[data-off] { display: none; }
+  html:not(.js) .sab-scopes-tabs { display: none; }
+  .sab-scopes-tabs {
+    position: absolute; z-index: 3; top: clamp(18px, 3.2vh, 32px); left: clamp(24px, 5vw, 80px); right: clamp(24px, 5vw, 80px);
+    display: flex; flex-wrap: wrap; gap: 4px 22px;
   }
+  .sab-scopes-tab {
+    margin: 0; padding: 6px 0; border: 0; background: none; cursor: pointer;
+    font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 2.4vw, 34px); line-height: 1;
+    color: rgba(255,255,255,0.62); border-bottom: 2px solid transparent;
+    text-shadow: 0 1px 2px rgba(5,10,8,0.6);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .sab-scopes-tab:hover { color: #FFFFFF; }
+  .sab-scopes-tab[aria-selected='true'] { color: #FFFFFF; border-bottom-color: #2FD3A0; }
+  .sab-scopes-tab:focus-visible { outline: 2px solid #2FD3A0; outline-offset: 4px; border-radius: 2px; }
   .sab-scope-name {
     margin: 0; font-family: var(--font-display); font-weight: 400;
     font-size: clamp(48px, 6vw, 84px); line-height: 0.95; letter-spacing: -0.005em;
@@ -864,8 +937,10 @@ const carousels = [
   .sab-scopes-dot[aria-current]::before { background: #FFFFFF; }
   @media (max-width: 700px) {
     /* Room under the stacked buttons for the dots and the photo credit line. */
-    .sab-scope-body { padding: 72px 20px 76px; }
-    .sab-scopes-h { left: 20px; right: 20px; top: 20px; font-size: 24px; }
+    /* Top room for the two tabs, which wrap to two lines at this width. */
+    .sab-scope-body { padding: 104px 20px 76px; }
+    .sab-scopes-tabs { left: 20px; right: 20px; top: 16px; gap: 2px 18px; }
+    .sab-scopes-tab { font-size: 22px; padding: 7px 0; }
     .sab-scopes-dots { bottom: 30px; }
     .sab-scope-kicker, .sab-scope-sub { font-size: 16px; }
     .sab-scope-ctas { flex-direction: column; gap: 10px; }
@@ -899,7 +974,9 @@ const carousels = [
   .sab-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
   .sab-row-blurb {
     font-size: 14.5px; color: rgba(20, 25, 21, 0.68); margin-top: 5px;
-    display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    /* Two lines: who can apply decides whether a student opens the row, and
+       one line cut "Indigenous students starting a STEM progra..." on a phone. */
   }
   .sab-row-amount { font-family: var(--font-display); font-size: 28px; text-align: right; }
   /* The directory's deadline line (.sabl-when in global.css), a size up. */

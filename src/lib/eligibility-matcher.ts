@@ -14,6 +14,67 @@ import { RESULT_LIMIT } from './quiz'
  *  in matchScholarship. */
 const QUIZ_FIELDS = new Set(['STEM', 'health', 'business', 'arts', 'trades'])
 
+/**
+ * A listing's field tag, read as one of the quiz's five, or null when it has
+ * no quiz equivalent (education, agriculture). The tags were compared as
+ * written, so "Business", "Nursing" and "Commerce" never met a Business or
+ * Health answer: 26% of tags are capitalised or a synonym.
+ */
+const FIELD_SYNONYMS: Record<string, string> = {
+  stem: 'STEM', science: 'STEM', engineering: 'STEM', mathematics: 'STEM', technology: 'STEM',
+  biosciences: 'STEM', 'environmental science': 'STEM', 'environmental technology': 'STEM',
+  'environmental studies': 'STEM', environment: 'STEM', telecommunications: 'STEM', aviation: 'STEM', forestry: 'STEM',
+  health: 'health', nursing: 'health', 'practical nursing': 'health', medicine: 'health', pharmacy: 'health',
+  paramedicine: 'health', kinesiology: 'health', 'health sciences': 'health', veterinary: 'health',
+  'veterinary medicine': 'health', 'veterinary technology': 'health',
+  business: 'business', commerce: 'business', accounting: 'business', 'office administration': 'business',
+  arts: 'arts', art: 'arts', 'fine arts': 'arts', 'visual arts': 'arts', 'performing arts': 'arts', music: 'arts',
+  journalism: 'arts', communications: 'arts', broadcasting: 'arts', history: 'arts', 'social studies': 'arts',
+  french: 'arts', language: 'arts', law: 'arts', 'social work': 'arts',
+  trades: 'trades', welding: 'trades', automotive: 'trades', culinary: 'trades', 'power engineering': 'trades', 'fire service': 'trades',
+}
+export function quizField(tag: string): string | null {
+  return FIELD_SYNONYMS[tag.trim().toLowerCase()] ?? null
+}
+const FIELD_WORDS: Record<string, string> = { STEM: 'STEM', health: 'health', business: 'business', arts: 'arts', trades: 'trades' }
+
+/**
+ * Gates the quiz never asks about, read from the listing's own "who can apply"
+ * line: a parent or grandparent in a union, co-op or legion, or the student's
+ * own membership in a club or nation. These took "Strong match" #1 for
+ * students who could not apply (critique 2026-09-24: Local 38 Heritage, for
+ * children of Calgary public teachers, topped a Business student's list).
+ */
+const FAMILY_TIE = /\b(child(ren)?|sons?|daughters?|dependants?|dependents?|grand(child(ren)?|sons?|daughters?)|family members?|spouses?|relatives?|descendants?)\s+of\b|\bwhose (parents?|mother|father|guardians?)\b(?! (live|reside))|\bparents?(\/guardians?)? (is|are|who work|employed)/i
+const MEMBERSHIP = /\b(members?|employees?|staff|policy ?holders?|shareholders?) of\b|\bmembers?\b(?! (schools?|municipalit|welcome))/i
+const AUDIENCE_GATES: Array<[RegExp, string]> = [
+  [/\bidentif(y|ies) as (male|a man|men)\b|\bmale students\b|\byoung men\b|\bboys\b(?! (and|&) girls)/i, 'Male students only'],
+  [/\bnew to canada\b|\bnewcomers?\b|\bimmigrants?\b|\brefugees?\b/i, 'Newcomers to Canada only'],
+]
+export function audienceChecks(audience: string | null | undefined): string[] {
+  if (!audience) return []
+  const out: string[] = []
+  if (FAMILY_TIE.test(audience)) out.push('Needs a family link to a group')
+  else if (MEMBERSHIP.test(audience) && !/\bmembers? welcome\b/i.test(audience)) out.push('Needs a membership')
+  for (const [re, label] of AUDIENCE_GATES) if (re.test(audience)) out.push(label)
+  return out
+}
+
+/** The field a listing's audience line names, for listings with no field tag. */
+const AUDIENCE_FIELDS: Array<[RegExp, string]> = [
+  [/\b(teaching|teachers? education|bachelor of education|education degree)\b/i, 'education'],
+  [/\b(nursing|medicine|health care|healthcare|pharmacy|paramedic)\b/i, 'health'],
+  [/\b(engineering|computer science|science|stem)\b/i, 'STEM'],
+  [/\b(business|commerce|accounting|finance)\b/i, 'business'],
+  [/\b(music|fine arts|visual arts|drama|theatre|art|journalism)\b/i, 'arts'],
+  [/\b(trades?|apprentice\w*|welding|carpentry|electrician|automotive)\b/i, 'trades'],
+  [/\b(agricultur\w*|agri-\w+|farming|ranching)\b/i, 'agriculture'],
+]
+export function audienceFields(audience: string | null | undefined): string[] {
+  if (!audience) return []
+  return AUDIENCE_FIELDS.filter(([re]) => re.test(audience)).map(([, f]) => f)
+}
+
 // Alberta cities recognised for region matching
 const ALBERTA_CITIES = new Set([
   'Airdrie', 'Beaumont', 'Brooks', 'Calgary', 'Camrose', 'Chestermere', 'Cochrane', 'Cold Lake', 'Edmonton', 'Fort McMurray', 'Fort Saskatchewan', 'Grande Prairie', 'Lacombe', 'Leduc', 'Lethbridge', 'Lloydminster', 'Medicine Hat', 'Okotoks', 'Red Deer', 'Sherwood Park', 'Spruce Grove', 'St. Albert', 'Wetaskiwin',
@@ -70,9 +131,10 @@ const FINANCIAL_NEED_BOOST         = 0.10
  */
 export function matchScholarship(
   profile: StudentProfile,
-  scholarship: { region: string | null; alsoOpenTo?: string[] | null; eligibility: EligibilityCriteria | null },
+  scholarship: { region: string | null; alsoOpenTo?: string[] | null; eligibility: EligibilityCriteria | null; audience?: string | null },
 ): MatchResult {
   const { eligibility, region } = scholarship
+  const tieChecks = audienceChecks(scholarship.audience)
 
   const reasons: string[] = []
   if (!regionMatches(profile.city, region, scholarship.alsoOpenTo)) {
@@ -80,7 +142,7 @@ export function matchScholarship(
     return { match: false, confidence: 0, reasons, signals: [], checks: [] }
   }
   // Missing criteria do not erase the geography that we do know.
-  if (!eligibility) return { match: true, confidence: 0.20, reasons: [], signals: [], checks: [] }
+  if (!eligibility) return { match: true, confidence: 0.20, reasons: [], signals: [], checks: tieChecks }
 
   // ── Grade ─────────────────────────────────────────────────────────────────
   if (eligibility.grades.length > 0 && !eligibility.grades.includes(profile.grade)) {
@@ -217,10 +279,17 @@ export function matchScholarship(
   // about the student's answer either way, so they are treated like a listing
   // with no field data at all rather than scored as a mismatch, which is what
   // a bare `includes` did to them for every student who answered the question.
-  const comparableFields = eligibility.fields.filter(f => QUIZ_FIELDS.has(f))
+  // A different field is not scored down (see FIELD_MISMATCH_PENALTY above),
+  // but it is said: the row gets a Check and cannot be called Strong.
+  const tagged = eligibility.fields.length > 0 ? eligibility.fields : audienceFields(scholarship.audience)
+  const comparableFields = [...new Set(tagged.map(quizField).filter((f): f is string => f !== null && QUIZ_FIELDS.has(f)))]
+  const fieldChecks: string[] = []
   if (comparableFields.length > 0 && profile.fields.length > 0) {
     const hit = profile.fields.find(f => comparableFields.includes(f))
     if (hit) { confidence += FIELD_MATCH_BOOST; signals.push(`Matches your ${hit} focus`) }
+    else fieldChecks.push(`For ${comparableFields.map(f => FIELD_WORDS[f]).join(' or ')} students`)
+  } else if (tagged.length > 0 && profile.fields.length > 0) {
+    fieldChecks.push(`For ${tagged[0]!.toLowerCase()} students`)
   }
 
   // Target institution
@@ -246,7 +315,7 @@ export function matchScholarship(
   }
 
   confidence = Math.max(0.1, Math.min(1, confidence))
-  return { match: true, confidence, reasons, signals, checks: uncheckedRequirements(profile, eligibility) }
+  return { match: true, confidence, reasons, signals, checks: [...fieldChecks, ...tieChecks, ...uncheckedRequirements(profile, eligibility)] }
 }
 
 /** The youngest and oldest a student in each grade could plausibly be. */
@@ -293,6 +362,10 @@ export function uncheckedRequirements(profile: StudentProfile, e: EligibilityCri
  * keeps every listing that was getting the boost at the tier it already had,
  * and only moves the handful that never earned it.
  */
+export function capTier(tier: ConfidenceTier, checks: string[]): ConfidenceTier {
+  return tier === 'strong' && checks.some(isRestrictedCheck) ? 'good' : tier
+}
+
 export function getConfidenceTier(confidence: number): ConfidenceTier {
   if (confidence >= 0.65) return 'strong'
   if (confidence >= 0.40) return 'good'
@@ -384,6 +457,8 @@ export function matchPrograms(programs: Program[], answers: Record<string, strin
 export type MatchInput = {
   id: number
   region: string | null
+  /** The "who can apply" line, read for gates the quiz never asks. */
+  audience?: string | null
   eligibility: EligibilityCriteria | null
   /** ISO date, for the tie-break. Null means no announced deadline. */
   deadline?: string | null
@@ -428,7 +503,9 @@ export function matchAll(
     .map(s => {
       const result = matchScholarship(profile, s)
       return result.match
-        ? { id: s.id, confidence: result.confidence, tier: getConfidenceTier(result.confidence), signals: result.signals, checks: result.checks }
+        // "Strong" is a promise the student can act on; a row with a group
+        // it may not belong to is at most Good, whatever it scored.
+        ? { id: s.id, confidence: result.confidence, tier: capTier(getConfidenceTier(result.confidence), result.checks), signals: result.signals, checks: result.checks }
         : null
     })
     .filter((r): r is NonNullable<typeof r> => r !== null)

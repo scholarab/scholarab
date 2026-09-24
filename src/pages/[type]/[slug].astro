@@ -10,10 +10,11 @@ import Layout from '../../layouts/Layout.astro';
 import { scholarshipMetas, programMeta, brandedTitle, listingTitle, formatListingDate as formatDate } from '../../lib/meta';
 import { balancedRelated, balancedCross, openAlternatives } from '../../lib/related';
 import { scoreProgramForScholarship, scoreScholarshipForProgram } from '../../lib/cross-links';
+import { audienceFields, quizField } from '../../lib/eligibility-matcher';
 import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
-import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline } from '../../lib/utils.ts';
+import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline, amountSpan } from '../../lib/utils.ts';
 import { STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
@@ -22,7 +23,7 @@ import type { Scholarship, Program } from '../../lib/data-loader';
 
 // A related listing as a row: name, where/what, amount, deadline. The cards
 // these replaced left out the deadline, the one thing a student compares on.
-type RelatedItem = { href: string; title: string; value: string; tag: string; when: string; money?: boolean };
+type RelatedItem = { href: string; title: string; value: string; tag: string; when: string; money?: boolean; open?: boolean };
 
 export async function getStaticPaths() {
   // Neighbor order matches each directory's default sort: earliest deadline
@@ -75,9 +76,20 @@ export async function getStaticPaths() {
   // recommending one (Youreka's page offered the closed AAAF bursary) is a
   // dead end with a friendly face. Its own page still gets neighbours.
   const notClosed = (s: Scholarship) => scholarshipStatusOf(s, metaToday) !== 'closed';
+  // Field of study leads: a Western business award was followed by health-care
+  // bursaries that shared only "Academic" and "Alberta" with it (critique
+  // 2026-09-24). A known clash of fields counts against a neighbour.
+  const fieldsOf = new Map(scholarships.map(s => [s, new Set(
+    [...(s.eligibility?.fields ?? []), ...audienceFields(s.audience)].map(quizField).filter(Boolean) as string[])]));
+  const fieldFit = (a: Scholarship, b: Scholarship) => {
+    const fa = fieldsOf.get(a)!, fb = fieldsOf.get(b)!;
+    if (!fa.size || !fb.size) return 0;
+    return [...fa].some(f => fb.has(f)) ? 3 : -3;
+  };
   const relatedScholarshipsFor = balancedRelated(scholarships, {
     eligible: notClosed,
     score: (self, s) =>
+      fieldFit(self, s) +
       (s.category && s.category === self.category ? 2 : 0) +
       (s.region && s.region === self.region ? 1 : 0) +
       (isOpen(s.deadline) ? 2 : 0),
@@ -134,6 +146,7 @@ export async function getStaticPaths() {
       tag: p.category || 'Program',
       when: !p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing' ? programUndatedLabel(p.deadline)
         : `Due ${formatDeadline(p.deadline)}`,
+      open: canApplyNow(programStatusOf(p, metaToday)),
     }));
 
   // A closed page leads with three open listings from its own hub, so a
@@ -187,7 +200,12 @@ export async function getStaticPaths() {
   ];
 }
 
-const { kind, scholarship, program, related, crossRelated, alternatives, metaDescription } = Astro.props;
+const { kind, scholarship, program, related, alternatives, metaDescription } = Astro.props;
+// A programs block of nothing but "Date not confirmed" rows offers nothing to
+// do (critique 2026-09-24): it shows only when one of them is open, open first.
+const crossRelated = Astro.props.crossRelated.some(r => r.open !== false)
+  ? [...Astro.props.crossRelated].sort((a, b) => Number(b.open !== false) - Number(a.open !== false))
+  : [];
 
 const todayDate = albertaToday();
 
@@ -309,9 +327,14 @@ if (kind === 'scholarship') {
       : [],
     valueLabel: 'AWARD VALUE',
     valueBig: s.amount,
-    valueNote: noApplication
-      ? "You don't file an application for this one. The notes say how it is awarded."
-      : s.applyViaGuidance ? 'Applications go through your school.' : null,
+    // A multi-year total says so beside the figure; Knowlton's "$30,000" is
+    // $5,000 a year at first (critique 2026-09-24).
+    valueNote: [
+      amountSpan(s.amount, [s.metaDetail, (s as { description?: string }).description].filter(Boolean).join(' ')),
+      noApplication
+        ? "You don't file an application for this one. The notes say how it is awarded."
+        : s.applyViaGuidance ? 'Applications go through your school.' : null,
+    ].filter(Boolean).join(' ') || null,
     checkedLabel: formatVerifiedMonth(s.lastVerified),
     ctaLabel: noApplication ? 'How it is awarded' : s.applyViaGuidance ? 'How to apply' : 'Apply',
     url: s.url,

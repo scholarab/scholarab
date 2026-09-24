@@ -202,3 +202,18 @@ export function emailProblem(raw: string): string | null {
   if (email.length > 254) return 'That email is too long.';
   return EMAIL_RE.test(email) ? null : 'That address is missing something. It should look like name@gmail.com.';
 }
+
+/**
+ * How an award's headline figure is paid, when the listing's own text says it
+ * is a multi-year total ("$30,000" that is $5,000 a year, rising to $10,000).
+ * Read from the listing, never guessed; null when the text does not say, or
+ * when the amount already carries its period or is not a figure.
+ */
+export function amountSpan(amount: string | null | undefined, text: string | null | undefined): string | null {
+  if (!amount || !text || !/\d/.test(amount) || /year|renew|\/yr|annual/i.test(amount)) return null;
+  const m = text.match(/\b(?:over|across)\s+(two|three|four|five|2|3|4|5)\s+years\b/i);
+  if (!m) return null;
+  const words: Record<string, string> = { '2': 'two', '3': 'three', '4': 'four', '5': 'five' };
+  const n = words[m[1]!] ?? m[1]!.toLowerCase();
+  return /\bup to\b/i.test(text) && !/^up to/i.test(amount) ? `Up to this, in total, over ${n} years.` : `In total, over ${n} years.`;
+}
