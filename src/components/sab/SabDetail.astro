@@ -87,7 +87,7 @@ const chip =
   status === 'closed' ? { text: STATUS_WORDS.closed, bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : status === 'future' ? { text: opensLabel ? `Opens ${opensLabel}` : STATUS_WORDS.future, bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'unconfirmed' ? { text: STATUS_WORDS.unconfirmed, bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
-  : status === 'ongoing' ? { text: `${STATUS_WORDS.none}, join any time`, bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
+  : status === 'ongoing' ? { text: STATUS_WORDS.none, bg: 'rgba(14,140,100,0.12)', fg: '#0A6B4D' }
   : status === 'tba' ? { text: STATUS_WORDS.unconfirmed, bg: 'rgba(20,25,21,0.08)', fg: 'rgba(20,25,21,0.68)' }
   : daysLeft === 0 ? { text: 'Due today', bg: '#A0491A', fg: '#FFFFFF' }
   : typeof daysLeft === 'number'

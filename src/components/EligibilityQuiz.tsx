@@ -8,7 +8,7 @@ import { matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti, generateSlug } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { STATUS_WORDS, programUndatedLabel, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
+import { STATUS_WORDS, canApplyNow, programUndatedLabel, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
@@ -523,8 +523,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       referrerPolicy="no-referrer"
                       className="sabl-apply"
                       onClick={() => sendEvent('apply_click', 'scholarship', s.id)}
-                      aria-label={`${status === 'active' ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
-                    >{status === 'active' ? 'Apply' : 'Visit'}<span className="sabl-ext" aria-hidden="true">↗</span></a>
+                      aria-label={`${canApplyNow(status) ? 'Apply for' : 'Visit'} ${s.title} on the sponsor's site (opens in a new tab)`}
+                    >{canApplyNow(status) ? 'Apply' : 'Visit'}<span className="sabl-ext" aria-hidden="true">↗</span></a>
                   </>}
                 />
               )

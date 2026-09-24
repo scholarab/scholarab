@@ -7,7 +7,8 @@ import SabFooter from '../components/sab/SabFooter.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, parseAmount, formatDeadline } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
-import { programIsListed, programStatusOf, scholarshipStatusOf } from '../lib/status';
+import { canApplyNow, programIsListed, programStatusOf, scholarshipStatusOf } from '../lib/status';
+import { openCounts } from '../lib/counts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FORMATS, MENU_SCOPES, MIN_FACET_ITEMS, facetForCategory, facetItems } from '../lib/facets';
 import { PHOTO_CREDITS, needsCredit } from '../lib/photo-credits';
 
@@ -20,6 +21,8 @@ const today = albertaToday();
 // its own ladder, so a concluded award or a rolled-forward date could count
 // here as "open right now" while the directory said otherwise.
 const activeScholarships = scholarships.filter(s => scholarshipStatusOf(s, today) === 'active');
+// Open today with or without a deadline: what "can apply for today" means.
+const applyableScholarships = scholarships.filter(s => canApplyNow(scholarshipStatusOf(s, today)));
 
 const scholarshipCount = scholarships.length;
 
@@ -50,7 +53,7 @@ const closingHeading = anyClosingThisWeek ? 'Closing this week' : 'Next deadline
 // $2,000). A Reddit reviewer's note: the top of the catalogue was behind a
 // click and a sort, and the homepage led only with whatever closed next.
 // "Varies" has no number to rank, so it stays out rather than sorting last.
-const biggestOpen = activeScholarships
+const biggestOpen = applyableScholarships
   .filter(s => parseAmount(s.amount) > 0)
   .sort((a, b) =>
     parseAmount(b.amount) - parseAmount(a.amount) ||
@@ -97,8 +100,9 @@ const SCOPE_KICKERS: Record<string, string> = {
 };
 interface PhotoCard {
   label: string; kicker: string; backdrop: string; href: string; count: number;
-  /** The open count, and where it links; null href when the hub has no open filter. */
-  open: number; openHref: string | null;
+  /** The open count (dated, not yet closed), and where it links; null href
+   *  when the hub has no open filter. `ongoing` is open with no deadline. */
+  open: number; ongoing: number; openHref: string | null;
   credit: (typeof PHOTO_CREDITS)[string] | undefined;
 }
 const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
@@ -112,7 +116,7 @@ const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
       kicker: SCOPE_KICKERS[f.slug] ?? `${f.label} students`,
       href,
       count: items.length,
-      open: items.filter(s => scholarshipStatusOf(s, today) === 'active').length,
+      ...openCounts(items, s => scholarshipStatusOf(s, today)),
       openHref: `${href}?status=active`,
       credit: PHOTO_CREDITS[f.backdrop!],
     };
@@ -121,8 +125,8 @@ const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
 
 // The program twin (Ilia, 2026-09-23): one card per format hub, the same eight
 // the header's Programs tiles show, biggest first. The kickers are each hub's
-// own intro cut to a line. "Open" counts dated deadlines still ahead plus
-// rolling ones; the program directory has no status filter, so it is not a link.
+// own intro cut to a line. "Open" counts dated deadlines still ahead, the same
+// rule as the hub's Open chip (lib/counts.ts); year-round ones are counted apart.
 const FORMAT_KICKERS: Record<string, string> = {
   'summer-programs': 'Camps, institutes and labs',
   competitions: 'Built over a season, entered as a team',
@@ -144,7 +148,7 @@ const formatCards: PhotoCard[] = PROGRAM_FORMATS
     kicker: FORMAT_KICKERS[f.slug] ?? f.h1,
     href: `/programs/${f.slug}/`,
     count: items.length,
-    open: items.filter(p => ['active', 'ongoing'].includes(programStatusOf(p, today))).length,
+    ...openCounts(items, p => programStatusOf(p, today)),
     openHref: null,
     credit: PHOTO_CREDITS[f.backdrop!],
   }))
@@ -299,7 +303,12 @@ const carousels = [
                   <h3 class="sab-scope-name">{c.label}</h3>
                   {c.open > 0 && c.openHref
                     ? <a href={c.openHref} class="sab-scope-sub">{c.open.toLocaleString('en-CA')} open right now</a>
-                    : <span class="sab-scope-sub sab-scope-sub-plain">{c.open > 0 ? `${c.open.toLocaleString('en-CA')} open right now` : k.none}</span>}
+                    : c.open > 0 || c.ongoing === 0
+                      ? <span class="sab-scope-sub sab-scope-sub-plain">{c.open > 0 ? `${c.open.toLocaleString('en-CA')} open right now` : k.none}</span>
+                      : null}
+                  {c.ongoing > 0 && (
+                    <span class="sab-scope-sub sab-scope-sub-plain sab-scope-sub-more">{c.ongoing.toLocaleString('en-CA')} with no fixed deadline</span>
+                  )}
                   <div class="sab-scope-ctas">
                     <a href={c.href} class="sab-scope-btn sab-scope-btn-solid">
                       See all {c.count.toLocaleString('en-CA')}
@@ -831,6 +840,9 @@ const carousels = [
   }
   .sab-scope-sub:hover { text-decoration-thickness: 2px; }
   .sab-scope-sub-plain, .sab-scope-sub-plain:hover { text-decoration: none; }
+  /* The no-deadline count, on its own line under the open one: counted apart
+     so "open" here matches the hub's Open chip (lib/counts.ts). */
+  .sab-scope-sub-more { display: block; margin-top: 6px; }
   .sab-scope-ctas { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
   .sab-scope-btn {
     display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;

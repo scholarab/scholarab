@@ -3,13 +3,14 @@ import SabGuide from '../../components/sab/SabGuide.astro';
 import { getGuide } from '../../lib/guides';
 import { QUIZ_DURATION } from '../../lib/quiz';
 import { deadlineStats } from '../../lib/deadline-stats';
+import { getToday } from '../../lib/utils';
 import scholarships from '../../data/scholarships.json';
 
 const guide = getGuide('alberta-scholarship-deadlines-by-month');
 
 // Every count on this page comes from the catalogue; see deadline-stats.ts
 // for why none of them are typed in any more.
-const st = deadlineStats(scholarships as Array<{ deadline?: string | null; url?: string | null }>);
+const st = deadlineStats(scholarships as Array<{ deadline?: string | null; url?: string | null }>, getToday().toLocaleDateString('en-CA'));
 const m = (n: number) => st.byMonth[n - 1]!;
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const runnerUp = st.byMonth.map((n, i) => ({ n, i })).filter(x => x.i !== 4).sort((a, b) => b.n - a.n)[0]!;
@@ -187,6 +188,6 @@ const faqJson = {
     <li><strong>Do the Rutherford regardless.</strong> It has no deadline to miss and no competition to lose.</li>
   </ul>
   <p>
-    Counts on this page are drawn from the {st.total} scholarship listings in the directory that carry a specific calendar date, and they move as listings are added and cycles roll over. Awards with rolling, ongoing or unannounced dates are not counted here and are not therefore unavailable. The <a href="/scholarships/">full directory</a> shows live status for all of them, and the match quiz takes {QUIZ_DURATION} and narrows the calendar to what your grade and region actually qualify you for.
+    Counts on this page are drawn from the {st.total} scholarship listings in the directory with a calendar date still ahead, the same set the <a href="/deadlines/">deadline calendar</a> lists, and they move as listings are added and cycles roll over. Awards with rolling, ongoing or unannounced dates are not counted here and are not therefore unavailable. The <a href="/scholarships/">full directory</a> shows live status for all of them, and the match quiz takes {QUIZ_DURATION} and narrows the calendar to what your grade and region actually qualify you for.
   </p>
 </SabGuide>

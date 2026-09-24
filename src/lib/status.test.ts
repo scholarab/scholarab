@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { programIsListed,
+import { canApplyNow, programIsListed,
   scholarshipStatusOf,
   programStatusOf,
   scholarshipIsIndexable,
@@ -23,9 +23,20 @@ describe('scholarshipStatusOf', () => {
     expect(scholarshipStatusOf({ deadline: '2027-05-15', active: false }, TODAY)).toBe('future')
   })
 
-  it('treats a missing deadline as open, not as a 1970 cutoff', () => {
-    expect(scholarshipStatusOf({ deadline: null }, TODAY)).toBe('active')
-    expect(scholarshipStatusOf({}, TODAY, { deadlineMs: 0 })).toBe('active')
+  it('treats a missing deadline as open with no deadline, not as a 1970 cutoff', () => {
+    expect(scholarshipStatusOf({ deadline: null }, TODAY)).toBe('ongoing')
+    expect(scholarshipStatusOf({}, TODAY, { deadlineMs: 0 })).toBe('ongoing')
+  })
+
+  // "Open now" counts 'active' only (Ilia, 2026-09-23); an undated award is
+  // still one a student can apply to today.
+  it('keeps "open now" for dated listings and lets undated ones apply', () => {
+    expect(scholarshipStatusOf({ deadline: '2027-01-01' }, TODAY)).toBe('active')
+    expect(canApplyNow('active')).toBe(true)
+    expect(canApplyNow('ongoing')).toBe(true)
+    expect(canApplyNow('future')).toBe(false)
+    expect(canApplyNow('unconfirmed')).toBe(false)
+    expect(canApplyNow('closed')).toBe(false)
   })
 
   it('prefers the precomputed ms hints over parsing the ISO strings', () => {

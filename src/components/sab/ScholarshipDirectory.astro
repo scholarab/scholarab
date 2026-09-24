@@ -2,6 +2,7 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
+import { STATUS_WORDS, canApplyNow } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
 import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
@@ -118,6 +119,7 @@ const SORT_CHIPS = [
 const STATUS_CHIPS = [
   { value: 'all',     label: 'All' },
   { value: 'active',  label: 'Open' },
+  { value: 'ongoing', label: STATUS_WORDS.none },
   { value: 'opening', label: 'Not open yet' },
   { value: 'unconfirmed', label: 'Date not confirmed' },
   { value: 'closed',  label: 'Closed' },
@@ -282,7 +284,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
       // Nominated, school-selected or automatic: "Apply" would send a student
       // to a form that does not exist. Same test as the detail page's button.
       const noApply = saysNoApplication(s.notes, s.metaDetail, (s as { description?: string }).description);
-      const canApply = status === 'active' && !noApply;
+      const canApply = canApplyNow(status) && !noApply;
       return (
         <>
         {head && (
@@ -405,6 +407,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
 </div>
 
 <script>
+  import { canApplyNow } from '../../lib/status.ts';
   import { initDirectory } from '../../lib/directory-client.ts';
   import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
@@ -516,7 +519,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
         // Only the word: the ↗ beside it is a sibling span, and overwriting
         // the anchor's textContent would take the arrow with it.
         const applyLabel = apply?.querySelector('[data-apply-label]');
-        if (applyLabel) applyLabel.textContent = status === 'active' && s.el.dataset.noApply === undefined ? 'Apply' : 'Visit';
+        if (applyLabel) applyLabel.textContent = canApplyNow(status) && s.el.dataset.noApply === undefined ? 'Apply' : 'Visit';
       }
     },
 

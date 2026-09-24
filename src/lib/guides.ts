@@ -2,11 +2,12 @@
 // the index page, footer, sitemap generator, and "keep reading" blocks all
 // read from this list so a new guide only needs a page file + one entry here.
 import { deadlineStats } from './deadline-stats'
+import { getToday } from './utils'
 import scholarshipsJson from '../data/scholarships.json'
 
 // The deadlines guide quotes counts from the catalogue; computed, not typed.
 // Build-time only: this module is read by .astro pages and scripts.
-const DL = deadlineStats(scholarshipsJson as Array<{ deadline?: string | null; url?: string | null }>)
+const DL = deadlineStats(scholarshipsJson as Array<{ deadline?: string | null; url?: string | null }>, getToday().toLocaleDateString('en-CA'))
 
 export type GuideMeta = {
   slug: string

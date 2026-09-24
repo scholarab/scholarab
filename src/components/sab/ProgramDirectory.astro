@@ -3,6 +3,7 @@
 // All cards are in the HTML (build-time closed ones hidden); directory-client
 // shows/hides/reorders them, so the page ships no React.
 import SabStatusHelp from './SabStatusHelp.astro';
+import { STATUS_WORDS } from '../../lib/status.ts';
 import { DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programGroupKey, programWhen } from '../../lib/list-core.ts';
 import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
@@ -46,11 +47,13 @@ const SORT_CHIPS = [
   { value: 'name',        label: 'A–Z' },
 ] as const;
 
-// Mirrors the scholarship STATUS row: 'tba' covers Ongoing and undated intakes.
+// Mirrors the scholarship STATUS row, in the same words: 'ongoing' is open
+// with no deadline, 'tba' is a date the provider has not posted yet.
 const STATUS_CHIPS = [
-  { value: 'all',    label: 'All' },
-  { value: 'active', label: 'Open' },
-  { value: 'tba',    label: 'No set date' },
+  { value: 'all',     label: 'All' },
+  { value: 'active',  label: 'Open' },
+  { value: 'ongoing', label: STATUS_WORDS.none },
+  { value: 'tba',     label: STATUS_WORDS.unconfirmed },
   { value: 'closed', label: 'Closed' },
 ] as const;
 
@@ -107,7 +110,7 @@ if (showGroups) {
   let at = 0;
   for (const r of runs) { headerAt.set(at, r); at += r.count; }
 }
-const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
+const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
 ---
 
 <Fragment set:html={ICON_SPRITE} />
@@ -394,7 +397,7 @@ const openNow = initial.filter(p => getProgramStatus(p) !== 'closed').length;
     countFor: (items, state, cache) => selectPrograms(items, asFilterState(state), cache).length,
     groups: { key: programGroupKey, label: key => PROGRAM_GROUP_LABELS[key] ?? key },
     summary: (visible, total) => ({
-      count: directoryCountLine(visible.length, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) !== 'closed').length),
+      count: directoryCountLine(visible.length, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) === 'active').length),
     }),
     getSavedIds: () => [...getSavedPrograms()],
     toggleSave: id => [...toggleSavedProgram(id)],

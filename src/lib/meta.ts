@@ -260,7 +260,7 @@ export interface ScholarshipMetaInput {
   metaDetail?: string | null;
 }
 
-export type ScholarshipMetaStatus = 'active' | 'future' | 'unconfirmed' | 'closed';
+export type ScholarshipMetaStatus = 'active' | 'ongoing' | 'future' | 'unconfirmed' | 'closed';
 
 /**
  * How far ahead an open date may sit and still be worth the opening clause.

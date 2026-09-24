@@ -8,9 +8,10 @@ describe('deadlineStats', () => {
     { deadline: '2027-05-30', url: 'https://calgaryfoundation.org/b' },
     { deadline: '2026-12-18', url: 'https://www.keyano.ca/c' },
     { deadline: null, url: 'https://x.ca' },
-  ])
+    { deadline: '2026-09-01', url: 'https://passed.ca' },
+  ], '2026-09-23')
 
-  it('counts only dated listings, by month and by day', () => {
+  it('counts only dated listings still ahead, by month and by day', () => {
     expect(s.total).toBe(3)
     expect(s.byMonth[4]).toBe(2)
     expect(s.sum(5, 12)).toBe(3)
@@ -23,7 +24,7 @@ describe('deadlineStats', () => {
   })
 
   it('months add up to the total on the real catalogue', () => {
-    const real = deadlineStats(scholarships as Array<{ deadline?: string | null; url?: string | null }>)
+    const real = deadlineStats(scholarships as Array<{ deadline?: string | null; url?: string | null }>, '2026-09-23')
     expect(real.byMonth.reduce((a, b) => a + b, 0)).toBe(real.total)
   })
 })

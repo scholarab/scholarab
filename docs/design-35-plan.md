@@ -47,6 +47,12 @@ Scores so far: 26, 22, 24, 28, 27, 27.
 
 ## Phase 1: numbers that never disagree (H1, H4; about +3)
 
+**Status 2026-09-23:**
+- Done: steps 1 to 3.
+- Step 4 is partial: the directory count line is grouped; there is no lint rule yet.
+- Step 5 was dropped as a false finding (see `docs/simplification.md`).
+- "Open" now counts dated listings only: 623 scholarships. The 460 undated ones are "No fixed deadline".
+
 The biggest lever. It is also the product's promise: freshness is the moat.
 
 1. **One count module.**

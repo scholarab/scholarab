@@ -451,3 +451,20 @@ e2e assertions and the design-system entry). The lone headline figure they
 replaced was not brought back. 464 lines deleted, 6 added.
 
 Add-back fraction: 0. Nothing removed had to be restored.
+
+## One rule for "open", 2026-09-23
+
+Candidates: five separate definitions of "open" (home scholarship slides,
+home program slides, the program directory's count line and OPEN NOW group,
+the guide and educator cards, /deadlines). Removed four; every count now reads
+`status.ts` through `lib/counts.ts`, and "open" means a real deadline not yet
+passed (Ilia's rule). Open with no deadline is its own status, `ongoing`, for
+scholarships as well as programs, with its own chip and group ("No fixed
+deadline"). The program sort's closed-only status rule was replaced by the
+scholarship one (status leads every sort), so one grouping rule serves both.
+Guarded by `src/lib/counts.test.ts` and `e2e/numbers.spec.ts`, which reads the
+numbers off the built pages. The planned service-worker change was dropped:
+`public/sw.js` is already network-first, and the stale page the critique saw
+came from a stopped preview server.
+
+Add-back fraction: 0. Nothing removed had to be restored.

@@ -11,14 +11,14 @@ test('scholarships page - list hydrates and shows count', async ({ page }) => {
   await page.goto('/scholarships');
   await expect(page).toHaveTitle(/Scholarship/i);
   // React list hydrates and shows the result line
-  await expect(page.locator('text=/\\d+ OF \\d+ LISTINGS/i').first()).toBeVisible({ timeout: 10_000 });
+  await expect(page.locator('text=/[\\d,]+ OF [\\d,]+ LISTINGS/i').first()).toBeVisible({ timeout: 10_000 });
 });
 
 test('programs page - list hydrates and shows count', async ({ page }) => {
   await page.goto('/programs');
   await expect(page).toHaveTitle(/Program/i);
   // React list hydrates and shows the result line
-  await expect(page.locator('text=/\\d+ OF \\d+ PROGRAMS/i').first()).toBeVisible({ timeout: 10_000 });
+  await expect(page.locator('text=/[\\d,]+ OF [\\d,]+ PROGRAMS/i').first()).toBeVisible({ timeout: 10_000 });
 });
 
 test('match quiz reaches results', async ({ page }) => {

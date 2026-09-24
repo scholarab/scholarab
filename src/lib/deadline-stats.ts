@@ -5,9 +5,11 @@
  * and 265. A guide that states a number next to a calendar that states a
  * different one reads as a site that is not checking itself.
  *
- * Every dated scholarship counts, whatever its status: the guide describes
- * the shape of a year, not what is open this week. /deadlines is the list of
- * future dates, which is why its total is different and says so.
+ * Deadlines still ahead of `fromIso` (YYYY-MM-DD) count, which is the rule
+ * /deadlines files scholarships by. Until 2026-09-23 every dated scholarship
+ * counted, passed ones too, so the guide said 1008 dated deadlines while the
+ * calendar it links to listed 990 (critique 2026-09-23). Two honest numbers
+ * that disagree read as a site that is not checking itself.
  */
 export interface DeadlineStats {
   total: number;
@@ -20,8 +22,11 @@ export interface DeadlineStats {
   sum(...months: number[]): number;
 }
 
-export function deadlineStats(listings: Array<{ deadline?: string | null; url?: string | null }>): DeadlineStats {
-  const dated = listings.filter((s): s is { deadline: string; url?: string | null } => !!s.deadline);
+export function deadlineStats(
+  listings: Array<{ deadline?: string | null; url?: string | null }>,
+  fromIso: string,
+): DeadlineStats {
+  const dated = listings.filter((s): s is { deadline: string; url?: string | null } => !!s.deadline && s.deadline >= fromIso);
   const byMonth = Array.from({ length: 12 }, (_, m) =>
     dated.filter(s => Number(s.deadline.slice(5, 7)) === m + 1).length);
   const host = (u?: string | null) => { try { return new URL(u ?? '').hostname.replace(/^www\./, ''); } catch { return ''; } };

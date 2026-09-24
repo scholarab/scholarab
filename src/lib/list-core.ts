@@ -17,7 +17,7 @@ export interface ScholarshipWithMeta extends Scholarship {
 }
 
 export type { ScholarshipStatus };
-export type StatusFilter = 'all' | 'active' | 'opening' | 'unconfirmed' | 'closed';
+export type StatusFilter = 'all' | 'active' | 'ongoing' | 'opening' | 'unconfirmed' | 'closed';
 
 export function getScholarshipStatus(s: ScholarshipWithMeta): ScholarshipStatus {
   return scholarshipStatusOf(s, getToday(), { openMs: s._open_ms, deadlineMs: s._deadline_ms });
@@ -94,8 +94,8 @@ export function selectScholarships(
     ? initialScholarships.filter(s => statusCache.get(s.id) === 'closed')
     : statusFilter === 'opening'
       ? initialScholarships.filter(s => statusCache.get(s.id) === 'future')
-      : statusFilter === 'active'
-        ? initialScholarships.filter(s => statusCache.get(s.id) === 'active')
+      : statusFilter === 'active' || statusFilter === 'ongoing'
+        ? initialScholarships.filter(s => statusCache.get(s.id) === statusFilter)
         : statusFilter === 'unconfirmed'
           ? initialScholarships.filter(s => statusCache.get(s.id) === 'unconfirmed')
           : initialScholarships;
@@ -121,11 +121,12 @@ export function filterSortScholarships(
 ): ScholarshipWithMeta[] {
   const afterSearch = selectScholarships(initialScholarships, state, statusCache);
   const { sortBy } = state;
-  const rank = { active: 0, future: 1, unconfirmed: 2, closed: 3 } as Record<string, number>;
+  const rank = { active: 0, ongoing: 1, future: 2, unconfirmed: 3, closed: 4 } as Record<string, number>;
   return [...afterSearch].sort((a, b) => {
     const aStatus = statusCache.get(a.id) ?? 'active';
     const bStatus = statusCache.get(b.id) ?? 'active';
-    // active first → future → closed, for every sort (so expired entries don't bury open ones)
+    // open (dated) first → no fixed deadline → future → closed, for every sort
+    // (so expired entries don't bury open ones)
     const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
     if (statusDiff !== 0) return statusDiff;
 
@@ -166,17 +167,21 @@ export function whenTier(days: number): '' | ' is-soon' | ' is-urgent' {
 //
 // The key MUST be the sort's primary key, or a group would appear twice: every
 // scholarship sort ranks by status first, so status is safe. Programs only
-// guarantee closed-last, so they group open-vs-closed and nothing finer.
+// rank by status first too since 2026-09-23, so they group the same way:
+// open, no fixed deadline, date not confirmed, closed.
 
 export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
   active: 'OPEN NOW',
+  ongoing: STATUS_WORDS.none.toUpperCase(),
   future: STATUS_WORDS.future.toUpperCase(),
   unconfirmed: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
 };
 
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
-  open: 'OPEN NOW',
+  active: 'OPEN NOW',
+  ongoing: STATUS_WORDS.none.toUpperCase(),
+  tba: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
 };
 
@@ -185,7 +190,7 @@ export function scholarshipGroupKey(s: ScholarshipWithMeta): string {
 }
 
 export function programGroupKey(p: ProgramWithMeta): string {
-  return getProgramStatus(p) === 'closed' ? 'closed' : 'open';
+  return getProgramStatus(p);
 }
 
 /** [{key, label, count}] in display order, for a list already in display order. */
@@ -218,8 +223,10 @@ export function directoryCountLine(shown: number, total: number, noun: string, o
   // Suppressed when everything shown is already open; "117 OF 117 PROGRAMS ·
   // 117 OPEN NOW" is the same number three times. The clause earns its place
   // only where it contradicts the first one, which is the whole point of it.
-  const line = `${shown} OF ${total} ${noun}`;
-  return openNow === shown ? line : `${line} · ${openNow} OPEN NOW`;
+  // Grouped digits like every other count on the site ("1,542", not "1542").
+  const n = (x: number) => x.toLocaleString('en-CA');
+  const line = `${n(shown)} OF ${n(total)} ${noun}`;
+  return openNow === shown ? line : `${line} · ${n(openNow)} OPEN NOW`;
 }
 
 // A row's amount cell. "Varies" is a missing number, not a figure: set in the
@@ -272,10 +279,13 @@ export function programMatchesGrade(gradesText: string | null, grade: number): b
   return true;
 }
 
-export type ProgramStatus = 'active' | 'tba' | 'closed';
+// 'ongoing' (open with no deadline) was folded into 'tba' until 2026-09-23,
+// so the directory's OPEN NOW group held programs that had no date at all.
+export type ProgramStatus = 'active' | 'ongoing' | 'tba' | 'closed';
 
 export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
-  if (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing') return 'tba';
+  if (p.deadline === 'Ongoing') return 'ongoing';
+  if (!p.deadline || p.deadline === 'TBA') return 'tba';
   const deadMs = p._deadline_ms ?? new Date(p.deadline + 'T00:00:00').getTime();
   if (getToday().getTime() > deadMs) return 'closed';
   return 'active';
@@ -285,7 +295,7 @@ export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
 export function programWhen(p: ProgramWithMeta): { main: string; sub: string; cls: string } {
   const status = getProgramStatus(p);
   if (status === 'closed') return { main: STATUS_WORDS.closed, sub: '', cls: 'sabl-when is-quiet' };
-  if (status === 'tba') return { main: programUndatedLabel(p.deadline), sub: '', cls: 'sabl-when is-quiet' };
+  if (status === 'tba' || status === 'ongoing') return { main: programUndatedLabel(p.deadline), sub: '', cls: 'sabl-when is-quiet' };
   const deadMs = p._deadline_ms ?? new Date(p.deadline! + 'T00:00:00').getTime();
   const days = Math.max(0, Math.round((deadMs - getToday().getTime()) / 86400000));
   const main = new Date(deadMs).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
@@ -307,7 +317,7 @@ function programDeadlineOrder(p: ProgramWithMeta): number {
 
 // 'open' is the historical behaviour (closed programs never surface); the
 // directory passes an explicit value so its STATUS chips can reach them.
-export type ProgramStatusFilter = 'all' | 'open' | 'active' | 'tba' | 'closed';
+export type ProgramStatusFilter = 'all' | 'open' | 'active' | 'ongoing' | 'tba' | 'closed';
 
 export interface ProgramFilterState {
   selectedCategory: string;
@@ -366,19 +376,18 @@ export function filterSortPrograms(
 ): ProgramWithMeta[] {
   const afterSearch = selectPrograms(initialPrograms, state, statusCache);
   const { sortBy } = state;
-  const rank = { active: 0, tba: 1, closed: 2 } as Record<string, number>;
+  const rank = { active: 0, ongoing: 1, tba: 2, closed: 3 } as Record<string, number>;
   return [...afterSearch].sort((a, b) => {
     const aStatus = statusCache.get(a.id) ?? 'active';
     const bStatus = statusCache.get(b.id) ?? 'active';
-    // Closed programs sink below open ones in every sort; same rule as
-    // scholarships, so a past deadline can never head the list.
-    if (aStatus === 'closed' || bStatus === 'closed') {
-      const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
-      if (statusDiff !== 0) return statusDiff;
-      // within the closed group: most recently expired first
-      if (aStatus === 'closed' && sortBy === 'closest_due') {
-        return programDeadlineOrder(b) - programDeadlineOrder(a);
-      }
+    // Status leads every sort, the scholarship rule: open programs, then no
+    // fixed deadline, then date not confirmed, then closed, so the groups the
+    // directory labels are contiguous and a past deadline never heads the list.
+    const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
+    if (statusDiff !== 0) return statusDiff;
+    // within the closed group: most recently expired first
+    if (aStatus === 'closed' && sortBy === 'closest_due') {
+      return programDeadlineOrder(b) - programDeadlineOrder(a);
     }
 
     if (sortBy === 'name') return a.name.localeCompare(b.name);

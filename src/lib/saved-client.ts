@@ -2,6 +2,7 @@
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from './tracker.ts';
 import { showToast, getToday, prefersReducedMotion } from './utils.ts';
 import { amountCell, getScholarshipStatus, scholarshipWhen, programWhen } from './list-core.ts';
+import { canApplyNow } from './status.ts';
 import type { ScholarshipWithMeta, ProgramWithMeta } from './list-core.ts';
 import { sendEvent } from './events.ts';
 import { downloadICS } from './ics.ts';
@@ -120,8 +121,8 @@ export function initSaved() {
       if (apply) {
         const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined } as Parameters<typeof getScholarshipStatus>[0]);
         const applyLabel = apply.querySelector('[data-apply-label]');
-        if (applyLabel) applyLabel.textContent = status === 'active' ? 'Apply' : 'Visit';
-        apply.setAttribute('aria-label', `${status === 'active' ? 'Apply for' : 'Visit'} ${d.name} on the sponsor's site (opens in a new tab)`);
+        if (applyLabel) applyLabel.textContent = canApplyNow(status) ? 'Apply' : 'Visit';
+        apply.setAttribute('aria-label', `${canApplyNow(status) ? 'Apply for' : 'Visit'} ${d.name} on the sponsor's site (opens in a new tab)`);
       }
     }
   }

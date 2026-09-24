@@ -121,9 +121,9 @@ describe('getScholarshipStatus', () => {
     expect(getScholarshipStatus(s)).toBe('future')
   })
 
-  it('treats _deadline_ms of 0 with no deadline string as "no deadline" (active, not closed)', () => {
+  it('treats _deadline_ms of 0 with no deadline string as "no deadline" (ongoing, not closed)', () => {
     const s = makeScholarship({ id: 1, deadline: null, _deadline_ms: 0 })
-    expect(getScholarshipStatus(s)).toBe('active')
+    expect(getScholarshipStatus(s)).toBe('ongoing')
   })
 
   it('returns future for curator-closed listings with a future deadline (next cycle, open date unknown)', () => {
@@ -151,8 +151,9 @@ describe('getProgramStatus', () => {
     expect(getProgramStatus(makeProgram({ id: 1, deadline: 'TBA' }))).toBe('tba')
   })
 
-  it('returns tba when deadline is "Ongoing"', () => {
-    expect(getProgramStatus(makeProgram({ id: 1, deadline: 'Ongoing' }))).toBe('tba')
+  it('returns ongoing when deadline is "Ongoing", apart from an unposted date', () => {
+    expect(getProgramStatus(makeProgram({ id: 1, deadline: 'Ongoing' }))).toBe('ongoing')
+    expect(getProgramStatus(makeProgram({ id: 2, deadline: 'TBA' }))).toBe('tba')
   })
 
   it('returns active when deadline is in the future', () => {
@@ -392,9 +393,11 @@ describe('filterSortPrograms', () => {
       makeProgram({ id: 1, deadline: '2026-01-01', _deadline_ms: PAST_MS }),
       makeProgram({ id: 2, deadline: '2026-12-01', _deadline_ms: FUTURE_MS }),
       makeProgram({ id: 3, deadline: 'Ongoing' }),
+      makeProgram({ id: 4, deadline: 'TBA' }),
     ]
     expect(ids(filterSortPrograms(items, state({ statusFilter: 'active' })))).toEqual([2])
-    expect(ids(filterSortPrograms(items, state({ statusFilter: 'tba' })))).toEqual([3])
+    expect(ids(filterSortPrograms(items, state({ statusFilter: 'ongoing' })))).toEqual([3])
+    expect(ids(filterSortPrograms(items, state({ statusFilter: 'tba' })))).toEqual([4])
     expect(ids(filterSortPrograms(items, state({ statusFilter: 'closed' })))).toEqual([1])
   })
 
@@ -406,6 +409,17 @@ describe('filterSortPrograms', () => {
       makeProgram({ id: 4, deadline: '2026-06-01', _deadline_ms: FUTURE2_MS }),
     ]
     expect(ids(filterSortPrograms(items, state()))).toEqual([4, 2, 3, 1])
+  })
+
+  // Status leads every program sort since 2026-09-23, so the directory's
+  // OPEN NOW / NO FIXED DEADLINE / DATE NOT CONFIRMED groups stay contiguous.
+  it('paid_first keeps status groups whole', () => {
+    const items = [
+      makeProgram({ id: 1, paid: true, deadline: 'Ongoing' }),
+      makeProgram({ id: 2, deadline: '2026-12-01', _deadline_ms: FUTURE_MS }),
+      makeProgram({ id: 3, paid: true, deadline: 'TBA' }),
+    ]
+    expect(ids(filterSortPrograms(items, state({ sortBy: 'paid_first' })))).toEqual([2, 1, 3])
   })
 
   it('paid_first puts paid programs first, then by deadline', () => {
@@ -542,5 +556,6 @@ describe('directoryCountLine', () => {
   it('drops the clause when it would just repeat the count', () => {
     expect(directoryCountLine(117, 117, 'PROGRAMS', 117)).toBe('117 OF 117 PROGRAMS')
     expect(directoryCountLine(0, 117, 'PROGRAMS', 0)).toBe('0 OF 117 PROGRAMS')
+    expect(directoryCountLine(1542, 1542, 'LISTINGS', 623)).toBe('1,542 OF 1,542 LISTINGS · 623 OPEN NOW')
   })
 })

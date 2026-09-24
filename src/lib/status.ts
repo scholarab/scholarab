@@ -10,7 +10,11 @@
 // `today` is passed in rather than read from the clock so callers keep control
 // of it; list-core hands it its own mockable getToday().
 
-export type ScholarshipStatus = 'active' | 'future' | 'unconfirmed' | 'closed';
+// 'active' is open with a real deadline; 'ongoing' is open with none. They are
+// separate because "open now" only counts the first (Ilia, 2026-09-23): 460
+// undated awards were being counted as open, so the directory said 1,083 open
+// where 623 had a date to apply by. Programs already drew the same line.
+export type ScholarshipStatus = 'active' | 'ongoing' | 'future' | 'unconfirmed' | 'closed';
 
 export interface StatusInput {
   openDate?: string | null;
@@ -58,7 +62,15 @@ export function scholarshipStatusOf(
   // Curator-closed (active: false) with a future deadline is a next-cycle
   // listing whose open date isn't known yet, not accepting applications now.
   if (s.active === false) return 'future';
-  return 'active';
+  return dead === Infinity ? 'ongoing' : 'active';
+}
+
+/**
+ * Whether a student can apply today: open with a deadline or open with none.
+ * The Apply-or-Visit label reads this; "open now" counts read 'active' alone.
+ */
+export function canApplyNow(status: ScholarshipStatus): boolean {
+  return status === 'active' || status === 'ongoing';
 }
 
 export type ProgramStatus = 'active' | 'tba' | 'ongoing' | 'closed';
