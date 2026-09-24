@@ -54,7 +54,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
       // Label and count only: the bar also carries a Hide/Show word, which is
       // state and not part of what the run is called.
       expect(await page.locator('[data-dir-group]:not([hidden])').evaluateAll(els => els.map(e => `${e.querySelector('.sabl-group-label')!.textContent} ${e.querySelector('.sabl-group-count')!.textContent}`))).toEqual(shownRuns(visible, PAGE));
-      const chips = await page.locator('[data-fkey]:has([data-chip-count])').evaluateAll(els => els.map(e => ({ key: e.getAttribute('data-fkey')!, value: e.getAttribute('data-fval')!, count: Number(e.querySelector('[data-chip-count]')!.textContent) })));
+      const chips = await page.locator('[data-fkey]:has([data-chip-count])').evaluateAll(els => els.map(e => ({ key: e.getAttribute('data-fkey')!, value: e.getAttribute('data-fval')!, count: Number(e.querySelector('[data-chip-count]')!.textContent!.replace(/,/g, '')) })));
       const keys = { category: 'selectedCategory', status: 'statusFilter', region: 'selectedRegion' };
       for (const chip of chips) expect(chip.count).toBe(filterSortScholarships(items, { ...state, [keys[chip.key as keyof typeof keys]]: chip.value || null }).length);
       await expect(page.locator('[data-dir-card]')).toHaveCount(items.length);
@@ -175,7 +175,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   await expect(cards).toHaveCount(PAGE);
   await expect(page.locator('[data-dir-more-line]')).toHaveText(`Showing ${PAGE} of ${items.length.toLocaleString('en-CA')}`);
   await expect(page.locator('[data-dir-more-btn]')).toHaveText(`Show ${PAGE} more`);
-  await expect(page.locator('[data-dir-all]')).toHaveText(`Show all ${items.length}`);
+  await expect(page.locator('[data-dir-all]')).toHaveText(`Show all ${items.length.toLocaleString('en-CA')}`);
 
   await page.locator('[data-dir-more-btn]').click();
   await page.locator('[data-dir-more-btn]').click();
@@ -231,7 +231,7 @@ test('program Details links preserve filtered previous and next arrows', async (
   // Any filter that leaves several programs will do; GRADE used to be the one
   // driven here and was deleted on 2026-09-15, so this walks STATUS instead.
   const status = await page.locator('[data-fkey="status"] [data-chip-count]').evaluateAll((slots, total) => {
-    const slot = slots.find(slot => Number(slot.textContent) >= 3 && Number(slot.textContent) < total);
+    const slot = slots.find(slot => Number(slot.textContent!.replace(/,/g, '')) >= 3 && Number(slot.textContent!.replace(/,/g, '')) < total);
     return slot?.closest<HTMLElement>('[data-fkey]')?.dataset.fval;
   }, total);
   expect(status, 'choose a status with multiple results from the rendered data').toBeTruthy();

@@ -778,11 +778,25 @@ html[data-view='columns'] .sabl-view[data-dir-view='columns'],
 html[data-view='gallery'] .sabl-view[data-dir-view='gallery'] {
   color: var(--text-primary); background: rgba(20,25,21,0.11);
 }
+.sabl-view-label { display: none; font-size: 13px; font-weight: 600; line-height: 1; }
+html:not([data-view]) .sabl-view[data-dir-view='list'],
+html[data-view='list'] .sabl-view[data-dir-view='list'],
+html[data-view='grid'] .sabl-view[data-dir-view='grid'],
+html[data-view='columns'] .sabl-view[data-dir-view='columns'],
+html[data-view='gallery'] .sabl-view[data-dir-view='gallery'] {
+  display: inline-flex; gap: 6px; width: auto; padding: 0 11px 0 8px;
+}
+html:not([data-view]) .sabl-view[data-dir-view='list'] .sabl-view-label,
+html[data-view='list'] .sabl-view[data-dir-view='list'] .sabl-view-label,
+html[data-view='grid'] .sabl-view[data-dir-view='grid'] .sabl-view-label,
+html[data-view='columns'] .sabl-view[data-dir-view='columns'] .sabl-view-label,
+html[data-view='gallery'] .sabl-view[data-dir-view='gallery'] .sabl-view-label { display: inline; }
 html:not(.js) .sabl-views { display: none; }
 @media (max-width: 900px) {
   /* Two panes do not fit a phone: Columns reads as the list there. */
   .sabl-view[data-dir-view='columns'] { display: none; }
-  html[data-view='columns'] .sabl-view[data-dir-view='list'] { color: var(--text-primary); background: rgba(20,25,21,0.11); }
+  html[data-view='columns'] .sabl-view[data-dir-view='list'] { color: var(--text-primary); background: rgba(20,25,21,0.11); display: inline-flex; gap: 6px; width: auto; padding: 0 11px 0 8px; }
+  html[data-view='columns'] .sabl-view[data-dir-view='list'] .sabl-view-label { display: inline; }
 }
 
 /* ── Phone filters ──

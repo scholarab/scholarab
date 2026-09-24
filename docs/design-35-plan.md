@@ -161,19 +161,24 @@ The biggest lever. It is also the product's promise: freshness is the moat.
 
 ## The 35 gate (all must pass before a critique run)
 
-- [ ] Every count on home equals its hub, header tile and /deadlines equivalent (parity tests green).
-- [ ] No raw unformatted count in any page.
-- [ ] HTML is never served from cache while online.
-- [ ] Exactly one status vocabulary in `src/`; old strings grep-clean.
-- [ ] One Apply style and at most two row verbs.
-- [ ] Home: no duplicated deadline list; carousel headings visible; Closing this week is on screen 2 on a 375px phone.
-- [ ] Text over every photo and video frame sampled is at least 4.5:1 median.
-- [ ] The directory toolbar has at most 4 controls; the views have text labels.
-- [ ] The quiz intro shows once, cities are ordered, and there are no ineligible awards in the top 10 for the test profiles.
-- [ ] Quiz results show a "You answered" summary; Browse all keeps the answers.
-- [ ] Every jargon word on home, hubs and the quiz has an inline definition.
-- [ ] Closed detail pages show three open alternatives.
-- [ ] No tap target under 24px except the skip link.
+**Walked 2026-09-23 against `dist/`, 1280px and 375px:** all pass.
+- Two fixes came out of the walk: every count is now grouped (the chips, "Show all", the region picker and the header tiles printed 1542), guarded in `e2e/numbers.spec.ts`; and the chosen view shows its name beside its icon.
+- Notes on the tap-target line: the only element under 24px is the header's keyboard-only menu toggle. It is clipped until it has focus, then 24x24, the same case as the skip link.
+- Closing this week starts at 617px on a 375px phone, so it is on screen 1.
+
+- [x] Every count on home equals its hub, header tile and /deadlines equivalent (parity tests green).
+- [x] No raw unformatted count in any page.
+- [x] HTML is never served from cache while online.
+- [x] Exactly one status vocabulary in `src/`; old strings grep-clean.
+- [x] One Apply style and at most two row verbs.
+- [x] Home: no duplicated deadline list; carousel headings visible; Closing this week is on screen 2 on a 375px phone.
+- [x] Text over every photo and video frame sampled is at least 4.5:1 median.
+- [x] The directory toolbar has at most 4 controls; the views have text labels.
+- [x] The quiz intro shows once, cities are ordered, and there are no ineligible awards in the top 10 for the test profiles.
+- [x] Quiz results show a "You answered" summary; Browse all keeps the answers.
+- [x] Every jargon word on home, hubs and the quiz has an inline definition.
+- [x] Closed detail pages show three open alternatives.
+- [x] No tap target under 24px except the skip link.
 
 ## Order and size
 

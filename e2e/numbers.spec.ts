@@ -47,3 +47,12 @@ test('the deadlines guide and the deadline calendar count the same scholarships'
   expect(calendar).toBeGreaterThan(0);
   expect(guide).toBe(calendar);
 });
+
+test('every count on the fixed critique pages is grouped (1,542, never 1542)', async ({ page }) => {
+  for (const path of ['/', '/scholarships/', '/scholarships/calgary/', '/programs/', '/programs/competitions/', '/deadlines/']) {
+    await page.goto(path);
+    const raw = await page.locator('[class*="count"], [class*="-num"], [class*="stat"]').evaluateAll(els =>
+      els.map(e => e.textContent ?? '').filter(t => /(?<![\d,.])\d{4,}(?![\d,])/.test(t.replace(/\b(19|20)\d\d\b/g, ''))));
+    expect.soft(raw, path).toEqual([]);
+  }
+});

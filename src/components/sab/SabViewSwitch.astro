@@ -6,6 +6,8 @@
 // preview, or a preview over a strip. directory-client owns the state and the
 // preview; the Layout's inline script re-applies it before the first paint.
 // Columns needs two panes side by side, so a phone does not get that button.
+// The chosen view shows its name beside the icon (35 gate: views have text
+// labels); the other three keep icon and tooltip so the toolbar stays one row.
 const VIEWS = [
   {
     key: 'grid', label: 'Grid',
@@ -36,6 +38,7 @@ const VIEWS = [
       title={v.label}
     >
       <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={v.icon} />
+      <span class="sabl-view-label">{v.label}</span>
     </button>
   ))}
 </div>

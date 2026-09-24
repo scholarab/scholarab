@@ -187,7 +187,7 @@ const isActive = (href: string) =>
                           style={t.backdrop ? `--sabh-tile-img: url(/photos/backdrops/${t.backdrop}-tile.webp)` : undefined}
                         >
                           {t.count !== null && (
-                            <span class="sabh-tile-num">{t.count}</span>
+                            <span class="sabh-tile-num">{t.count.toLocaleString('en-CA')}</span>
                           )}
                           <span class="sabh-tile-text">
                             <span class="sabh-tile-name">{t.label}</span>

@@ -221,9 +221,9 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
       <div class="sabl-filter-row">
         <span class="sabl-row-label">Type</span>
         <div class="sabl-chips">
-            <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
+            <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{(items.length).toLocaleString('en-CA')}</span></button>
             {categories.map(c => (
-              <button type="button" class="sabl-chip" data-fkey="category" data-fval={c} aria-pressed="false">{c}<span class="sabl-mono sabl-chip-count" data-chip-count>{counts.get(c) ?? 0}</span></button>
+              <button type="button" class="sabl-chip" data-fkey="category" data-fval={c} aria-pressed="false">{c}<span class="sabl-mono sabl-chip-count" data-chip-count>{(counts.get(c) ?? 0).toLocaleString('en-CA')}</span></button>
             ))}
         </div>
       </div>
@@ -235,14 +235,14 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
             Each option goes to the same hub its chip does, filters included
             (afterCounts). */}
         <select class="sabl-scope-select" data-scope-select aria-label="Where you live">
-          <option value="">Anywhere ({items.length})</option>
+          <option value="">Anywhere ({items.length.toLocaleString('en-CA')})</option>
           {regionChips.map(c => <option value={c.slug}>{c.label} ({c.count})</option>)}
         </select>
         <div class="sabl-chips sabl-chips-wrap sabl-scope-chips">
-          <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{items.length}</span></button>
+          <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{(items.length).toLocaleString('en-CA')}</span></button>
           {regionChips.map(c => (
             <a href={`/scholarships/${c.slug}/`} class="sabl-chip sabl-chip-link" data-scope={c.slug}>
-              {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+              {c.label}<span class="sabl-mono sabl-chip-count">{(c.count).toLocaleString('en-CA')}</span>
             </a>
           ))}
         </div>
@@ -252,7 +252,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
       <span class="sabl-row-label">Status</span>
       <div class="sabl-chips">
         {STATUS_CHIPS.map(s => (
-          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value })}</span></button>
+          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value }).toLocaleString('en-CA')}</span></button>
         ))}
       </div>
     </div>
@@ -301,7 +301,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
                 filter, stop there"). */}
             <span class="sabl-group-name">
               <span class="sabl-group-label">{head.label}</span>
-              <span class="sabl-group-count">{head.count}</span>
+              <span class="sabl-group-count">{head.count.toLocaleString('en-CA')}</span>
             </span>
             {/* aria-hidden so the button's name stays "OPEN NOW 15"; the state
                 itself is carried by aria-expanded, which is what a screen
@@ -381,7 +381,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
       <p class="sabl-more-line" data-dir-more-line>Showing {DIRECTORY_PAGE_SIZE} of {initial.length.toLocaleString('en-CA')}</p>
       <div class="sabl-more-actions">
         <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
-        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length}</button>
+        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length.toLocaleString('en-CA')}</button>
       </div>
     </div>
   )}
@@ -477,13 +477,13 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
       const select = root.querySelector<HTMLSelectElement>('[data-scope-select]');
       select?.querySelectorAll('option').forEach(o => {
         if (!o.value) return;
-        const label = o.textContent!.replace(/ \(\d+\)$/, '');
-        o.textContent = `${label} (${counts.get(o.value) ?? 0})`;
+        const label = o.textContent!.replace(/ \([\d,]+\)$/, '');
+        o.textContent = `${label} (${(counts.get(o.value) ?? 0).toLocaleString('en-CA')})`;
       });
       links.forEach(a => {
         const n = counts.get(a.dataset.scope!) ?? 0;
         const slot = a.querySelector('.sabl-chip-count');
-        if (slot) slot.textContent = String(n);
+        if (slot) slot.textContent = n.toLocaleString('en-CA');
         a.href = `/scholarships/${a.dataset.scope}/${tail}`;
         a.classList.toggle('is-empty', n === 0);
       });

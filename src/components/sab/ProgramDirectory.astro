@@ -181,15 +181,15 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
       <span class="sabl-row-label">Format</span>
       <div class="sabl-chips">
         {onAll
-          ? <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></span>
-          : <a href="/programs/" class="sabl-chip sabl-chip-link">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></a>}
+          ? <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{(allItems.length).toLocaleString('en-CA')}</span></span>
+          : <a href="/programs/" class="sabl-chip sabl-chip-link">All<span class="sabl-mono sabl-chip-count">{(allItems.length).toLocaleString('en-CA')}</span></a>}
         {formatChips.map(c => (
           c.slug === currentFormat
             ? <span class="sabl-chip on" aria-current="page">
-                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+                {c.label}<span class="sabl-mono sabl-chip-count">{(c.count).toLocaleString('en-CA')}</span>
               </span>
             : <a href={`/programs/${c.slug}/`} class="sabl-chip sabl-chip-link">
-                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+                {c.label}<span class="sabl-mono sabl-chip-count">{(c.count).toLocaleString('en-CA')}</span>
               </a>
         ))}
       </div>
@@ -198,15 +198,15 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
       <span class="sabl-row-label">Field</span>
       <div class="sabl-chips">
         {onAll
-          ? <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></span>
-          : <a href="/programs/" class="sabl-chip sabl-chip-link">All<span class="sabl-mono sabl-chip-count">{allItems.length}</span></a>}
+          ? <span class="sabl-chip on" aria-current="page">All<span class="sabl-mono sabl-chip-count">{(allItems.length).toLocaleString('en-CA')}</span></span>
+          : <a href="/programs/" class="sabl-chip sabl-chip-link">All<span class="sabl-mono sabl-chip-count">{(allItems.length).toLocaleString('en-CA')}</span></a>}
         {fieldChips.map(c => (
           c.slug === currentField
             ? <span class="sabl-chip on" aria-current="page">
-                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+                {c.label}<span class="sabl-mono sabl-chip-count">{(c.count).toLocaleString('en-CA')}</span>
               </span>
             : <a href={`/programs/${c.slug}/`} class="sabl-chip sabl-chip-link">
-                {c.label}<span class="sabl-mono sabl-chip-count">{c.count}</span>
+                {c.label}<span class="sabl-mono sabl-chip-count">{(c.count).toLocaleString('en-CA')}</span>
               </a>
         ))}
       </div>
@@ -215,7 +215,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
       <span class="sabl-row-label">Status</span>
       <div class="sabl-chips">
         {STATUS_CHIPS.filter(s => s.value !== 'closed' || chipCount({ statusFilter: s.value }) > 0).map(s => (
-          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value })}</span></button>
+          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value }).toLocaleString('en-CA')}</span></button>
         ))}
       </div>
     </div>
@@ -262,7 +262,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
                 filter, stop there"). */}
             <span class="sabl-group-name">
               <span class="sabl-group-label">{head.label}</span>
-              <span class="sabl-group-count">{head.count}</span>
+              <span class="sabl-group-count">{head.count.toLocaleString('en-CA')}</span>
             </span>
             {/* aria-hidden so the button's name stays "OPEN NOW 15"; the state
                 itself is carried by aria-expanded, which is what a screen
@@ -332,7 +332,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
       <p class="sabl-more-line" data-dir-more-line>Showing {DIRECTORY_PAGE_SIZE} of {initial.length.toLocaleString('en-CA')}</p>
       <div class="sabl-more-actions">
         <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
-        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length}</button>
+        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length.toLocaleString('en-CA')}</button>
       </div>
     </div>
   )}

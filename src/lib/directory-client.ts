@@ -265,7 +265,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const word = el.querySelector('[data-dir-group-word]');
     if (word) word.textContent = open ? 'Hide' : 'Show';
     el.querySelector('.sabl-group-label')!.textContent = config.groups!.label(key);
-    el.querySelector('.sabl-group-count')!.textContent = String(count);
+    el.querySelector('.sabl-group-count')!.textContent = count.toLocaleString('en-CA');
     return el;
   }
 
@@ -496,7 +496,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const all = more.querySelector<HTMLElement>('[data-dir-all]');
       if (all) {
         all.hidden = remaining <= pageSize;
-        all.textContent = `Show all ${pool.length}`;
+        all.textContent = `Show all ${pool.length.toLocaleString('en-CA')}`;
       }
     }
 
@@ -534,7 +534,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const chip = slot.closest<HTMLElement>('[data-fkey]')!;
       const next = { ...state, [chip.dataset.fkey!]: chip.dataset.fval ?? '' };
       const n = config.countFor(searched, next, ctx);
-      slot.textContent = String(n);
+      slot.textContent = n.toLocaleString('en-CA');
       // A chip that would empty the page still works, but it should not look
       // like an equal offer beside one holding forty listings.
       chip.classList.toggle('is-empty', n === 0 && !chip.classList.contains('on'));
@@ -542,7 +542,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     config.afterCounts?.(root, searched, state, q, ctx);
     root.querySelectorAll<HTMLElement>('[data-dir-filters-done]').forEach(b => {
       b.textContent = visible.length === 0 ? 'No results. Change a filter'
-        : `Show ${visible.length} result${visible.length === 1 ? '' : 's'}`;
+        : `Show ${visible.length.toLocaleString('en-CA')} result${visible.length === 1 ? '' : 's'}`;
     });
 
     const empty = root.querySelector<HTMLElement>('[data-dir-empty]');
