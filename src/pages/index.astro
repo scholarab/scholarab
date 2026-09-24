@@ -686,7 +686,7 @@ const carousels = [
     content: ''; position: absolute; inset: 0;
     background:
       linear-gradient(180deg, rgba(10,19,16,0.45) 0, rgba(10,19,16,0) 160px),
-      linear-gradient(180deg, rgba(10,19,16,0) 40%, rgba(10,19,16,0.6) 72%, rgba(10,19,16,0.92) 100%),
+      linear-gradient(180deg, rgba(10,19,16,0) 40%, rgba(10,19,16,0.6) 72%, rgba(10,19,16,0.92) 94%, #0A1310 100%),
       /* The byline and headline sit on the left; on a bright frame the byline
          fell to 3.3:1 (critique 2026-09-23). Darken that side only. */
       linear-gradient(90deg, rgba(10,19,16,0.42) 0, rgba(10,19,16,0.2) 45%, rgba(10,19,16,0) 75%),
@@ -800,15 +800,19 @@ const carousels = [
   .sab-scopes-track::-webkit-scrollbar { display: none; }
   .sab-scope {
     position: relative; flex: 0 0 100%; height: 100svh; min-height: 520px;
-    overflow: hidden; scroll-snap-align: start; scroll-snap-stop: always; background: #16211C;
+    overflow: hidden; scroll-snap-align: start; scroll-snap-stop: always; background: #0A1310;
   }
   .sab-scope picture, .sab-scope-img { position: absolute; inset: 0; width: 100%; height: 100%; }
   .sab-scope-img { object-fit: cover; }
-  /* Shade at the top for the kicker and at the bottom for the name and
-     buttons; the photo stays untouched in the middle. */
+  /* Every slide fades to the hero's ink (#0A1310) at its top and bottom
+     edges, after spacex.com (Ilia, 2026-09-23): hero to carousel and carousel
+     to carousel then meet solid ink against solid ink, so the seam between two
+     photos disappears instead of cutting one picture off against the next.
+     The same shade carries the kicker at the top and the name and buttons at
+     the bottom; the photo stays untouched in the middle. */
   .sab-scope::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(rgba(8,18,14,0.45), rgba(8,18,14,0) 26%, rgba(8,18,14,0) 52%, rgba(8,18,14,0.7));
+    background: linear-gradient(#0A1310, rgba(10,19,16,0.55) 9%, rgba(10,19,16,0) 30%, rgba(10,19,16,0) 48%, rgba(10,19,16,0.7) 80%, #0A1310);
   }
   .sab-scope-body {
     position: relative; z-index: 1; height: 100%; box-sizing: border-box;
