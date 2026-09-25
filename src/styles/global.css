@@ -1449,6 +1449,7 @@ html:not(.js) .sabl-more { display: none; }
 .sabm-step-label, .sabm-ph-step-label { font-family: var(--font-body); font-size: 14px; color: rgba(20, 25, 21, 0.72); margin-top: 14px; }
 
 .sabm-question {
+  scroll-margin-top: calc(var(--sab-nav-h) + 16px);
   font-family: var(--font-display); font-weight: 400;
   font-size: clamp(34px, 5vw, 54px); letter-spacing: -0.01em; margin: 18px 0 0;
   color: var(--text-primary); outline: none;
@@ -1550,6 +1551,8 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 
 .sabm-table { border-top: 2px solid var(--text-primary); margin-top: 40px; }
 .sabm-table-label { font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.75); padding: 14px 0 0; margin: 0; }
+/* The second group's label, below the first group's last row */
+.sabm-row + .sabm-table-label { padding-top: 40px; }
 /* Fixed amount + action tracks so every row lines up, including across the
    scholarship and program tables (each row is its own grid) */
 .sabm-row {

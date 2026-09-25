@@ -523,3 +523,25 @@ Changed:
 - the home page and the 404 page preload Public Sans 600. Mobile home CLS 0.05 to 0, and the 404 page 0.04 to 0 (measured on `dist/`).
 
 Add-back fraction: 0.
+
+## After the 26/40 critique, 2026-09-24
+
+The critique's P1 and P2 findings. Measured on `dist/`.
+
+Removed:
+- the repeat of "Due this week" rows inside their month; the month now says how many are listed above.
+- the open list of 460+ undated awards on /deadlines; it is folded behind "Show all". The phone page went from 54,348px to 9,224px.
+- program grade text from the /deadlines amount column; it shows a stipend, "Paid", or nothing.
+
+Changed:
+- quiz results are two groups, each best fit first: "Open now", then "Opens later", with at least half of the first ten from each when both have that many. A Calgary Business student now sees five awards open today; before, all ten were not open yet.
+- "None of these" (board) and "Another school" are answers, not skips: board-only and school-only awards drop out, and the school list no longer offers schools the data ties to a board.
+- two new audience gates: a parent or guardian "at" an employer (ENMAX) and a named sport or athletes. Both become Check notes.
+- Horatio Alger Canadian and National Entrepreneurial: grades 12 to 11, matching their own text.
+- "More like this" scores neighbours due within 45 days of the award.
+- detail pages: "Worth knowing" sits directly under "Who can apply".
+- the quiz scrolls a hidden question heading back into view.
+
+Not done: requirements are not generated from the parsed eligibility fields, because those fields had the Horatio grade wrong. The detail pages still don't say what to submit, because no listing has that data.
+
+Add-back fraction: 0.

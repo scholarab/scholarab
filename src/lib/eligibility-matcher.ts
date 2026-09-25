@@ -45,11 +45,13 @@ const FIELD_WORDS: Record<string, string> = { STEM: 'STEM', health: 'health', bu
  * students who could not apply (critique 2026-09-24: Local 38 Heritage, for
  * children of Calgary public teachers, topped a Business student's list).
  */
-const FAMILY_TIE = /\b(child(ren)?|sons?|daughters?|dependants?|dependents?|grand(child(ren)?|sons?|daughters?)|family members?|spouses?|relatives?|descendants?)\s+of\b|\bwhose (parents?|mother|father|guardians?)\b(?! (live|reside))|\bparents?(\/guardians?)? (is|are|who work|employed)/i
+const FAMILY_TIE = /\b(child(ren)?|sons?|daughters?|dependants?|dependents?|grand(child(ren)?|sons?|daughters?)|family members?|spouses?|relatives?|descendants?)\s+of\b|\bwhose (parents?|mother|father|guardians?)\b(?! (live|reside))|\bparents?(\/guardians?)? (is|are|who work|employed)|\bparents? or (legal )?guardians? (at|with|who)\b/i
 const MEMBERSHIP = /\b(members?|employees?|staff|policy ?holders?|shareholders?) of\b|\bmembers?\b(?! (schools?|municipalit|welcome))/i
 const AUDIENCE_GATES: Array<[RegExp, string]> = [
   [/\bidentif(y|ies) as (male|a man|men)\b|\bmale students\b|\byoung men\b|\bboys\b(?! (and|&) girls)/i, 'Male students only'],
   [/\bnew to canada\b|\bnewcomers?\b|\bimmigrants?\b|\brefugees?\b/i, 'Newcomers to Canada only'],
+  // 56 audiences name a team, league or sport; the quiz never asks about one.
+  [/\b(hockey|soccer|football|basketball|volleyball|baseball|ringette|curling|golf|athletes?)\b/i, 'Athletes only'],
 ]
 export function audienceChecks(audience: string | null | undefined): string[] {
   if (!audience) return []
@@ -161,18 +163,22 @@ export function matchScholarship(
     return { match: false, confidence: 0, reasons, signals: [], checks: [] }
   }
 
-  // ── School board (hard filter only if student provided their board) ───────
-  if (eligibility.schoolBoards.length > 0 && profile.schoolBoard) {
+  // ── School board (hard filter only if student answered the question) ──────
+  // '' is "None of these": the student is at none of the boards the question
+  // offered, so a board-only award is not theirs either (critique 2026-09-24).
+  if (eligibility.schoolBoards.length > 0 && profile.schoolBoard !== null) {
     if (!eligibility.schoolBoards.includes(profile.schoolBoard)) {
       reasons.push(`Requires ${eligibility.schoolBoards.join(' or ')} student`)
       return { match: false, confidence: 0, reasons, signals: [], checks: [] }
     }
   }
 
-  // ── Specific school (hard filter only if student provided their school) ───
-  if (eligibility.specificSchools.length > 0 && profile.specificSchool) {
+  // ── Specific school (hard filter only if student answered the question) ───
+  // '' is "Another school", which rules out every school-only award the same
+  // way; an empty needle would otherwise match every name below.
+  if (eligibility.specificSchools.length > 0 && profile.specificSchool !== null) {
     const needle = profile.specificSchool.toLowerCase()
-    const schoolMatch = eligibility.specificSchools.some(
+    const schoolMatch = needle !== '' && eligibility.specificSchools.some(
       s => s.toLowerCase().includes(needle) || needle.includes(s.toLowerCase()),
     )
     if (!schoolMatch) {

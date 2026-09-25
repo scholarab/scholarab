@@ -274,7 +274,9 @@ export function schoolsForCity(
     }
   }
   return [...seen]
-    .filter(s => !board || !boardsOf.get(s)?.size || boardsOf.get(s)!.has(board))
+    // '' is "None of these": a school the data ties to any offered board is
+    // not the student's (critique 2026-09-24: it still listed CBE schools).
+    .filter(s => board == null || !boardsOf.get(s)?.size || (board !== '' && boardsOf.get(s)!.has(board)))
     .sort((a, b) => a.localeCompare(b));
 }
 

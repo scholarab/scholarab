@@ -86,10 +86,18 @@ export async function getStaticPaths() {
     if (!fa.size || !fb.size) return 0;
     return [...fa].some(f => fb.has(f)) ? 3 : -3;
   };
+  // Same season: an award due in six days was followed by May 2027 awards
+  // (critique 2026-09-24). Neighbours due within about six weeks of it are
+  // the ones a student can work on in the same stretch.
+  const SEASON_MS = 45 * 86400000;
+  const sameSeason = (a: Scholarship, b: Scholarship) => {
+    const da = ms(a.deadline), db = ms(b.deadline);
+    return da !== Infinity && db !== Infinity && Math.abs(da - db) <= SEASON_MS ? 2 : 0;
+  };
   const relatedScholarshipsFor = balancedRelated(scholarships, {
     eligible: notClosed,
     score: (self, s) =>
-      fieldFit(self, s) +
+      fieldFit(self, s) + sameSeason(self, s) +
       (s.category && s.category === self.category ? 2 : 0) +
       (s.region && s.region === self.region ? 1 : 0) +
       (isOpen(s.deadline) ? 2 : 0),

@@ -119,6 +119,16 @@ describe('school question', () => {
     expect(schoolsForCity(listings, 'Medicine Hat')).toEqual(['Medicine Hat High School']);
   });
 
+  it('leaves out every board-tied school after "None of these"', () => {
+    const tied = [
+      { region: 'Calgary', eligibility: { specificSchools: ['Western Canada High School'], schoolBoards: ['CBE'] } },
+      { region: 'Calgary', eligibility: { specificSchools: ['Bowness High School'] } },
+    ];
+    expect(schoolsForCity(tied, 'Calgary', '')).toEqual(['Bowness High School']);
+    expect(schoolsForCity(tied, 'Calgary', 'CBE')).toEqual(['Bowness High School', 'Western Canada High School']);
+    expect(schoolsForCity(tied, 'Calgary')).toEqual(['Bowness High School', 'Western Canada High School']);
+  });
+
   it('tolerates a listing with no eligibility block', () => {
     expect(schoolsForCity([{ region: 'Calgary', eligibility: null }], 'Calgary')).toEqual([]);
   });
@@ -176,6 +186,16 @@ describe('school board question', () => {
   it('carries a province-wide board into Other Alberta, not into every city', () => {
     expect(boardsForCity(listings, 'Other Alberta')).toEqual(['GPPSD']);
     expect(boardsForCity(listings, 'Lethbridge')).toEqual([]);
+  });
+
+  it('leaves out every board-tied school after "None of these"', () => {
+    const tied = [
+      { region: 'Calgary', eligibility: { specificSchools: ['Western Canada High School'], schoolBoards: ['CBE'] } },
+      { region: 'Calgary', eligibility: { specificSchools: ['Bowness High School'] } },
+    ];
+    expect(schoolsForCity(tied, 'Calgary', '')).toEqual(['Bowness High School']);
+    expect(schoolsForCity(tied, 'Calgary', 'CBE')).toEqual(['Bowness High School', 'Western Canada High School']);
+    expect(schoolsForCity(tied, 'Calgary')).toEqual(['Bowness High School', 'Western Canada High School']);
   });
 
   it('tolerates a listing with no eligibility block', () => {

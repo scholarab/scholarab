@@ -52,6 +52,21 @@ describe('matchScholarship', () => {
       expect(r.checks).toEqual(['Indigenous students only', 'Based on financial need'])
     })
 
+    it('flags a parent-at-employer tie and a sport', () => {
+      expect(audienceChecks('Grade 12 students with a parent or guardian at ENMAX')).toEqual(['Needs a family link to a group'])
+      expect(audienceChecks('Graduating Calgary students playing U18 AA or U18 AAA hockey through Hockey Calgary')).toContain('Athletes only')
+      expect(audienceChecks('Grade 12 students in Calgary')).toEqual([])
+    })
+
+    it('reads "None of these" and "Another school" as ruling out board and school awards', () => {
+      const none = { ...baseProfile, schoolBoard: '', specificSchool: '' }
+      expect(matchScholarship(none, sch({ schoolBoards: ['CBE'] })).match).toBe(false)
+      expect(matchScholarship(none, sch({ specificSchools: ['Western Canada High School'] })).match).toBe(false)
+      expect(matchScholarship(none, sch()).match).toBe(true)
+      // unanswered still shows them
+      expect(matchScholarship(baseProfile, sch({ schoolBoards: ['CBE'] })).match).toBe(true)
+    })
+
     it('drops a check once the student has answered it', () => {
       const r = matchScholarship({ ...baseProfile, identifiesAsFemale: true }, sch({ genderRequired: 'female' }))
       expect(r.checks).toEqual([])
@@ -982,7 +997,7 @@ describe('unasked gates', () => {
 
   it('does not read residency, member schools or Boys and Girls Clubs as gates', () => {
     expect(audienceChecks('MD of Greenview residents, or students whose parents live there')).toEqual([])
-    expect(audienceChecks('Grade 12 athletes at School Sport Alberta member schools')).toEqual([])
+    expect(audienceChecks('Grade 12 athletes at School Sport Alberta member schools')).toEqual(['Athletes only'])
     expect(audienceChecks('Boys and Girls Club youth entering post-secondary')).toEqual([])
   })
 

@@ -88,7 +88,10 @@ const programRows: Row[] = programs
     name: p.name,
     href: `/programs/${generateSlug(p.name)}/`,
     deadline: p.deadline!,
-    meta: p.paid ? 'Paid' : (p.grades || 'Program'),
+    // The column is money. A program's grade text sat under the scholarships'
+    // amounts and read as one (critique 2026-09-24); the Program tag already
+    // says what the row is.
+    meta: p.stipend || (p.paid ? 'Paid' : ''),
     state: 'Open now',
     open: true,
   }));
@@ -112,6 +115,9 @@ const monthName = (key: string) =>
 const monthShort = (key: string) =>
   new Date(key + '-01T00:00:00').toLocaleDateString('en-CA', { month: 'short' }).toUpperCase();
 const dayOf = (d: string) => String(new Date(d + 'T00:00:00').getDate());
+// The week list crosses a month boundary and has no month heading above it.
+const monthDayOf = (d: string) =>
+  new Date(d + 'T00:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
 
 const months = [...byMonth.entries()]
   .sort((a, b) => a[0].localeCompare(b[0]))
@@ -139,6 +145,9 @@ const openNow = rows.filter(r => r.open).length;
 // above the months (critique 2026-09-23: the page opened on all of September).
 const WEEK_MS = 7 * 86400000;
 const thisWeek = rows.filter(r => dayMs(r.deadline) - todayMs <= WEEK_MS);
+// Listed once: a row in "Due this week" is left out of its month, which says
+// how many went above instead of printing them twice (critique 2026-09-24).
+const inWeek = new Set(thisWeek);
 const first = months[0];
 const last = months.at(-1);
 const span = first && last && first.key !== last.key
@@ -233,7 +242,7 @@ const breadcrumbJson = {
               <ol class="sabcal-rows">
                 {thisWeek.map(r => (
                   <li class="sabcal-row" data-deadline={r.deadline}>
-                    <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
+                    <span class="sabl-mono sabcal-day sabcal-day-md tnum">{monthDayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>
                       {r.kind === 'program' && <span class="sabcal-tag">Program</span>}
@@ -259,8 +268,13 @@ const breadcrumbJson = {
                   {`${m.items.length} ${m.items.length === 1 ? 'deadline' : 'deadlines'}${m.openCount > 0 ? `, ${m.openCount} open now` : ''}`}
                 </span>
               </summary>
+              {m.items.some(r => inWeek.has(r)) && (
+                <p class="sabcal-above">
+                  {(n => `${n} due this week ${n === 1 ? 'is' : 'are'} listed above.`)(m.items.filter(r => inWeek.has(r)).length)}
+                </p>
+              )}
               <ol class="sabcal-rows">
-                {m.items.map(r => (
+                {m.items.filter(r => !inWeek.has(r)).map(r => (
                   <li class="sabcal-row">
                     <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
                     <span class="sabcal-name">
@@ -280,15 +294,20 @@ const breadcrumbJson = {
           <section class="sabcal-tail">
             <h2 class="sabcal-h2">Awards with no fixed deadline</h2>
             <p>
-              {undated.length} listings have no date to file under a month; they run until the money
+              {undated.length.toLocaleString('en-CA')} listings have no date to file under a month; they run until the money
               is gone, or the provider has never published one. They are worth a look early rather
               than late.
             </p>
-            <ul class="sabcal-undated">
-              {undated.map(u => (
-                <li><a href={u.href}>{u.name}</a> <span class="sabcal-meta">{u.meta}</span></li>
-              ))}
-            </ul>
+            {/* Folded: open, the list was most of a 54,000px phone page
+                (critique 2026-09-24). */}
+            <details class="sabcal-undated-fold">
+              <summary>{`Show all ${undated.length.toLocaleString('en-CA')}`}</summary>
+              <ul class="sabcal-undated">
+                {undated.map(u => (
+                  <li><a href={u.href}>{u.name}</a> <span class="sabcal-meta">{u.meta}</span></li>
+                ))}
+              </ul>
+            </details>
             <p>
               A further {rollingPrograms} research programs are rolling or have not announced next
               year's date yet. Those live on <a href="/programs/">the programs directory</a>, which
@@ -424,6 +443,14 @@ const breadcrumbJson = {
     color: #141915; display: inline-block; padding-block: 3px; margin-block: -3px;
   }
 
+  .sabcal-above { font-size: 14px; color: #5C5F5B; margin: 12px 0 0; }
+  .sabcal-day-md { white-space: nowrap; }
+  .sabcal-week .sabcal-row { grid-template-columns: 56px 1fr auto auto; }
+  .sabcal-undated-fold summary {
+    display: inline-flex; align-items: center; min-height: 44px; cursor: pointer;
+    font-weight: 600; color: #141915; text-decoration: underline; text-underline-offset: 3px;
+  }
+
   .sabcal-empty { padding: 64px 0; color: #454945; }
 
   @media (max-width: 720px) {
@@ -443,6 +470,7 @@ const breadcrumbJson = {
        ("Grades 9 to 12 (AMC 10 for ...") pushed the whole page 224px past a
        320px screen. */
     .sabcal-row { grid-template-columns: 30px minmax(0, 1fr); gap: 4px 12px; padding: 11px 0; }
+    .sabcal-week .sabcal-row { grid-template-columns: 48px minmax(0, 1fr); }
     .sabcal-sub {
       grid-column: 2; display: flex; flex-wrap: wrap;
       justify-content: space-between; align-items: baseline; gap: 2px 12px;

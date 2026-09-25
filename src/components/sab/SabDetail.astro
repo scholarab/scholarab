@@ -226,25 +226,27 @@ const chip =
       </div>
     )}
 
+    {/* The notes are the part no other list has: the catch, the trick, the
+        thing the sponsor's page buries. They get the ruled paper from the
+        founder's letter on /about, so the one voice that is ours reads as
+        ours wherever it appears; the words are in the body face so the
+        condition that decides eligibility is easy to read. No signature: a note is
+        the site's, not a personal promise from one person. Directly under Who
+        can apply, because the note is where the hard conditions usually are
+        (critique 2026-09-24: they read as an aside below the About text). */}
+    {notes && (
+      <div class="sabd-note">
+        <h2 class="sabd-h2">Worth knowing</h2>
+        <div class="sabd-paper"><p set:html={notesHtml} /></div>
+      </div>
+    )}
+
     {about && (
       <div>
         <h2 class="sabd-h2">About this {typeLabel.toLowerCase()}</h2>
         <div class="sabd-about">
           <p set:html={aboutHtml} />
         </div>
-      </div>
-    )}
-
-    {/* The notes are the part no other list has: the catch, the trick, the
-        thing the sponsor's page buries. They get the ruled paper from the
-        founder's letter on /about, so the one voice that is ours reads as
-        ours wherever it appears; the words are in the body face so the
-        condition that decides eligibility is easy to read. No signature: a note is
-        the site's, not a personal promise from one person. */}
-    {notes && (
-      <div class="sabd-note">
-        <h2 class="sabd-h2">Worth knowing</h2>
-        <div class="sabd-paper"><p set:html={notesHtml} /></div>
       </div>
     )}
 

@@ -1,7 +1,7 @@
 /** @jsxImportSource preact */
 import { todayDate } from '../lib/calendar'
 import { useState, useMemo, useCallback, useLayoutEffect, useRef } from 'preact/hooks'
-import type { ComponentChildren } from 'preact'
+import { Fragment, type ComponentChildren } from 'preact'
 import type { QuizScholarship as Scholarship, QuizProgram as Program } from '../lib/quiz-payload'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-matcher'
@@ -194,7 +194,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       return
     }
     if (step < QUESTIONS.length) {
-      questionHeadingRef.current?.focus({ preventScroll: true })
+      // A long option list (schools, towns) leaves the page scrolled down, and
+      // the next question opened with its heading above the viewport on a
+      // phone (critique 2026-09-24). Bring it back only when it is hidden, so
+      // a short question on desktop does not jump.
+      const h = questionHeadingRef.current
+      if (h && h.getBoundingClientRect().top < parseFloat(getComputedStyle(h).scrollMarginTop)) h.scrollIntoView({ block: 'start' })
+      h?.focus({ preventScroll: true })
       return
     }
     // Completing the quiz kept the scroll position from the last question, so
@@ -285,12 +291,10 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     return {
       grade: gradeVal as StudentProfile['grade'],
       city,
-      // '' is the "none of these" escape hatch, which must stay null: the
-      // matcher treats a set board as a hard filter.
-      schoolBoard: answers[BOARD_QUESTION_KEY] || null,
-      // '' is the "another school" escape hatch, which must stay null: the
-      // matcher treats a set school as a hard filter.
-      specificSchool: answers[SCHOOL_QUESTION_KEY] || null,
+      // '' ("None of these", "Another school") is an answer, not a skip: it
+      // rules out the board-only and school-only awards the question listed.
+      schoolBoard: answers[BOARD_QUESTION_KEY] ?? null,
+      specificSchool: answers[SCHOOL_QUESTION_KEY] ?? null,
       targetInstitution: answers.institution && answers.institution !== '' ? answers.institution : null,
       fields: fieldVal ? [fieldVal] : [],
       averagePercent: avgVal ? parseInt(avgVal) : null,
@@ -352,7 +356,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       || actionable(a.scholarship) - actionable(b.scholarship))
     const quality  = all.filter(r => r.tier !== 'possible')
     const possible = all.filter(r => r.tier === 'possible')
-    return quality.length >= 5 ? quality : [...quality, ...possible]
+    const kept = quality.length >= 5 ? quality : [...quality, ...possible]
+    // Two groups, each best fit first: what a student can apply to tonight,
+    // then what opens later. By fit alone a September list was ten "Opens
+    // Mar 1" rows (critique 2026-09-24), since most Grade 12 money opens in
+    // spring and the local, board-specific awards score highest.
+    const tag = (r: typeof kept[number]) => ({ ...r, applyNow: actionable(r.scholarship) === 0 })
+    return [...kept.filter(r => actionable(r.scholarship) === 0).map(tag), ...kept.filter(r => actionable(r.scholarship) !== 0).map(tag)]
   }, [profile, step, openScholarships, scholarshipMap, showScholarships, QUESTIONS.length])
 
   const allProgramResults = useMemo(() => {
@@ -361,7 +371,15 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   }, [programs, answers, step, showPrograms, QUESTIONS.length])
 
   const [showAll, setShowAll] = useState(false)
-  const scholarshipResults = allScholarshipResults && (showAll ? allScholarshipResults : allScholarshipResults.slice(0, RESULT_LIMIT))
+  // The first screen keeps both groups in view: at least half the rows from
+  // each when both have that many, so the best fits that open in spring are
+  // not all pushed behind "Show all" by the ones open tonight.
+  const scholarshipResults = allScholarshipResults && (showAll ? allScholarshipResults : (() => {
+    const now = allScholarshipResults.filter(r => r.applyNow)
+    const later = allScholarshipResults.filter(r => !r.applyNow)
+    const nowShown = now.slice(0, Math.max(RESULT_LIMIT / 2, RESULT_LIMIT - later.length))
+    return [...nowShown, ...later.slice(0, RESULT_LIMIT - nowShown.length)]
+  })())
   const programResults = allProgramResults && (showAll ? allProgramResults : allProgramResults.slice(0, RESULT_LIMIT))
 
 
@@ -523,10 +541,15 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <div className="sabm-table">
             {/* The rows are numbered 01..10 and were never told what the
                 number meant. It is confidence order, so say so. */}
-            <p className="sabm-table-label">
-              {showPrograms ? 'Scholarships, best fit first' : 'Best fit first'}
-            </p>
-            {scholarshipResults.map(({ scholarship: s, tier, signals, checks }, index) => {
+            {scholarshipResults.map(({ scholarship: s, tier, signals, checks, applyNow }, index) => {
+              // A label at the top of each group, only when there are two;
+              // one group keeps the single "best fit first" line.
+              const split = scholarshipResults.some(r => r.applyNow) && scholarshipResults.some(r => !r.applyNow)
+              const label = index === 0 || applyNow !== scholarshipResults[index - 1]!.applyNow
+                ? !split
+                  ? (showPrograms ? 'Scholarships, best fit first' : 'Best fit first')
+                  : applyNow ? 'Open now, best fit first' : 'Opens later, best fit first'
+                : null
               const style = TIER_STYLES[tier]
               // Same ladder as the directory row this links to, so a match that
               // is not open today never wears a bare "Apply".
@@ -537,8 +560,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
               const when = waiting ? [waiting.main, waiting.sub].filter(Boolean).join(', ')
                 : s.deadline ? `Due ${formatDue(s.deadline)}` : STATUS_WORDS.none
               return (
+                <Fragment key={s.id}>
+                {label && <p className="sabm-table-label">{label}</p>}
                 <ResultRow
-                  key={s.id}
                   rank={index + 1}
                   delay={Math.min(index * 40, 320)}
                   title={s.title}
@@ -575,6 +599,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     })()}
                   </>}
                 />
+                </Fragment>
               )
             })}
           </div>

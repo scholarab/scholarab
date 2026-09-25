@@ -315,6 +315,22 @@ describe('Results', () => {
     expect(screen.getByText(/Best fit first/)).toBeTruthy()
   })
 
+  // Critique 2026-09-24: in September every top-fit row opened in March.
+  it('puts what is open tonight above what opens later, in two labelled groups', () => {
+    const later = makeScholarship({ id: 1, title: 'Opens Later Award', deadline: '2099-05-30', openDate: '2099-03-01' })
+    const now = makeScholarship({ id: 2, title: 'Open Now Award', deadline: '2099-05-30' })
+    mockMatchAll.mockReturnValue([
+      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] },
+      { id: 2, tier: 'good' as ConfidenceTier, confidence: 0.5, signals: [], checks: [] },
+    ])
+    render(<EligibilityQuiz scholarships={[later as any, now as any]} programs={[]} />)
+    advanceToResults()
+    const text = document.querySelector('.sabm-table')!.textContent!
+    expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Open Now Award'))
+    expect(text.indexOf('Open Now Award')).toBeLessThan(text.indexOf('Opens later, best fit first'))
+    expect(text.indexOf('Opens later, best fit first')).toBeLessThan(text.indexOf('Opens Later Award'))
+  })
+
   it('saves every strong match in one tap', () => {
     const s1 = makeScholarship({ id: 1, title: 'Strong One' })
     const s2 = makeScholarship({ id: 2, title: 'Strong Two' })
@@ -650,12 +666,14 @@ describe('School question', () => {
     expect(profile.specificSchool).toBeNull()
   })
 
-  it('leaves the school null when the escape hatch is taken', () => {
+  // "Another school" is an answer: the matcher reads '' as "none of the
+  // listed schools" and drops the school-only awards.
+  it('passes the escape hatch as an empty answer, not a skip', () => {
     render(<EligibilityQuiz scholarships={calgarySchools as any} programs={[]} />)
     answerSix('Calgary')
     clickTile('Another school')
     const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]
-    expect(profile.specificSchool).toBeNull()
+    expect(profile.specificSchool).toBe('')
   })
 })
 
