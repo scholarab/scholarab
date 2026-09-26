@@ -123,6 +123,10 @@
     "hash": "b2f3249448f53acd",
     "date": "2026-09-16"
   },
+  "/programs/calgary-collegiate-programming-contest-ccpc/": {
+    "hash": "2eb8d46caaa3b2eb",
+    "date": "2026-09-26"
+  },
   "/programs/calgary-youth-science-fair-cysf/": {
     "hash": "39e14b7cd5314373",
     "date": "2026-09-15"
@@ -321,6 +325,10 @@
   },
   "/programs/girls-who-code-canada-summer-programs/": {
     "hash": "0b1128de0c946b85",
+    "date": "2026-09-26"
+  },
+  "/programs/green-certificate-program/": {
+    "hash": "e3241e55f96df2e0",
     "date": "2026-09-26"
   },
   "/programs/greenlearning-innovation-challenges/": {
@@ -679,6 +687,10 @@
     "hash": "a612d0d9dea45888",
     "date": "2026-09-15"
   },
+  "/programs/university-of-alberta-programming-contest-uapc-high-school-division/": {
+    "hash": "7c1321dc626baf79",
+    "date": "2026-09-26"
+  },
   "/programs/usa-computing-olympiad-usaco/": {
     "hash": "ac1a32c58fb68eec",
     "date": "2026-09-26"
@@ -734,6 +746,10 @@
   "/programs/youreka-canada/": {
     "hash": "56e3ce9774e5198c",
     "date": "2026-09-15"
+  },
+  "/programs/youth-agriculture-speaking-championships-calgary-stampede/": {
+    "hash": "fd97fb0edd75f9e7",
+    "date": "2026-09-26"
   },
   "/programs/youth-parliament-of-canada/": {
     "hash": "cab830de9b8676d5",
