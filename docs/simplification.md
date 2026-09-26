@@ -545,3 +545,21 @@ Changed:
 Not done: requirements are not generated from the parsed eligibility fields, because those fields had the Horatio grade wrong. The detail pages still don't say what to submit, because no listing has that data.
 
 Add-back fraction: 0.
+
+## After the 27/40 critique, 2026-09-25
+
+All five findings. Measured on `dist/`.
+
+Removed:
+- the closed and "Date not confirmed" scholarship cards from the first view. Both sections load shut with their headings and counts showing, and one tap opens them (Ilia's choice). Programs keep theirs open, because 86 of 121 have no confirmed date.
+- the provider line on program rows on phones; the detail page has it. The three facts run as one line capped at two. Rows went from 286px to 230px on average, and /programs from 9,685px to 8,324px at 375.
+
+Changed:
+- data: 4 board gates (2 CCSD, 2 GPPSD) and 6 institution gates filled from their own audience lines. Other audience lines that named a board were left alone: 3 named a county and 1 a teachers' union.
+- matcher: heritage-specific audiences and a chosen school that is not the award's become Check notes. For a CBE, Western Canada and Mount Royal student, Mary Ngo, Knowlton and CKSF are gone from the top ten.
+- search reads 20 common misspellings of the site's own words ("bursery", "schollarship", "calgery") as meant. No fuzzy matching.
+- restored /match results: the placeholder, intro and footer no longer paint before the results. The layout shift went from 0.633 to 0 on desktop and from 0.173 to 0 on mobile; a first visit stays at 0.
+- detail pages: "Worth knowing" sits inside "Who can apply". "More like this" also scores same-size awards, and the link-floor repair takes slots from the most relevant pages first, not the earliest-sorted ones. Knowlton's neighbours went from fish-and-game and band bursaries to Horatio Alger Entrepreneurial and a business leadership award. Build time went from about 12s to 14s.
+- detail-page arrows walk the list as shown, so they skip shut sections.
+
+Add-back fraction: 0.

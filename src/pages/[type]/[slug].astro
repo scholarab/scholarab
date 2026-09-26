@@ -94,10 +94,17 @@ export async function getStaticPaths() {
     const da = ms(a.deadline), db = ms(b.deadline);
     return da !== Infinity && db !== Infinity && Math.abs(da - db) <= SEASON_MS ? 2 : 0;
   };
+  // Same size of award: a $30,000 university award was followed by $500
+  // community bursaries (critique 2026-09-25). Within a factor of four counts.
+  const amountOf = new Map(scholarships.map(s => [s, parseAmount(s.amount)]));
+  const sameSize = (a: Scholarship, b: Scholarship) => {
+    const x = amountOf.get(a)!, y = amountOf.get(b)!;
+    return x > 0 && y > 0 && Math.max(x, y) / Math.min(x, y) <= 4 ? 2 : 0;
+  };
   const relatedScholarshipsFor = balancedRelated(scholarships, {
     eligible: notClosed,
     score: (self, s) =>
-      fieldFit(self, s) + sameSeason(self, s) +
+      fieldFit(self, s) + sameSeason(self, s) + sameSize(self, s) +
       (s.category && s.category === self.category ? 2 : 0) +
       (s.region && s.region === self.region ? 1 : 0) +
       (isOpen(s.deadline) ? 2 : 0),

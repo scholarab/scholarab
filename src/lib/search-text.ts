@@ -35,9 +35,27 @@ export function normalizeSearchText(input: string): string {
     .join(SEARCH_SEP);
 }
 
+/**
+ * Misspellings of the site's own vocabulary, read as the word meant.
+ *
+ * "bursery" returned 0 of 1,542 (critique 2026-09-25). A fixed list, not fuzzy
+ * matching: a first-time applicant misspells the three or four words the
+ * category is named with, and an edit-distance match on award names would
+ * turn "Kiwanis" into things it is not.
+ */
+const SPELLING: Record<string, string> = {
+  bursery: 'bursary', bursury: 'bursary', bursarys: 'bursaries', burseries: 'bursaries', bursuary: 'bursary',
+  scholorship: 'scholarship', schollarship: 'scholarship', scholership: 'scholarship', scolarship: 'scholarship',
+  scholarhip: 'scholarship', scholarshp: 'scholarship', schoolarship: 'scholarship',
+  scholorships: 'scholarships', schollarships: 'scholarships', scholerships: 'scholarships', scolarships: 'scholarships',
+  calgery: 'calgary', edmonten: 'edmonton', edmontn: 'edmonton', lethbrige: 'lethbridge',
+  indiginous: 'indigenous', indigenious: 'indigenous', nurseing: 'nursing', engeneering: 'engineering', enginering: 'engineering',
+}
+
 /** What the search box produces: one line, no separators of its own. */
 export function normalizeSearchQuery(input: string): string {
-  return normalizeSearchText(input).split(SEARCH_SEP).join(' ').replace(/ +/g, ' ').trim();
+  return normalizeSearchText(input).split(SEARCH_SEP).join(' ').replace(/ +/g, ' ').trim()
+    .split(' ').map(w => SPELLING[w] ?? w).join(' ');
 }
 
 /**

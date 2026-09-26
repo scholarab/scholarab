@@ -11,6 +11,9 @@ import {
   QUIZ_PROMISE,
   QUIZ_QUESTION_WORD,
   QUIZ_MAX_QUESTION_WORD,
+  QUIZ_QUESTION_COUNT,
+  QUIZ_STORAGE_KEY,
+  QUIZ_TTL_MS,
 } from '../lib/quiz';
 
 const description = `${QUIZ_PROMISE} Get a shortlist of Alberta scholarships and programs worth checking.`;
@@ -43,6 +46,20 @@ const breadcrumbJson = {
     slot="head"
   />
   <SabFonts slot="head" />
+  {/* A returning visitor with a finished run lands on results, which render
+      after the catalogue loads. Question one's placeholder and the intro stood
+      in until then and were swapped out, a 0.817 layout shift on desktop
+      (critique 2026-09-25). Known before first paint, so they never show.
+      Finished = past the six base questions plus the board and school
+      questions when those were answered, which is how the quiz counts them. */}
+  <script is:inline slot="head" define:vars={{ key: QUIZ_STORAGE_KEY, ttl: QUIZ_TTL_MS, base: QUIZ_QUESTION_COUNT }}>
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(key) || 'null');
+      const a = saved && saved.answers || {};
+      const total = base + ('board' in a ? 1 : 0) + ('school' in a ? 1 : 0);
+      if (saved && Date.now() - saved.savedAt <= ttl && saved.step >= total) document.documentElement.classList.add('quiz-restore');
+    } catch { /* private mode: the normal first paint */ }
+  </script>
   {/* The quiz cannot render until the catalogue lands, and the fetch used to
       wait on its own module: on a throttled Slow 4G phone the payload did not
       start until 1,365 ms and question one stayed inert for 2.5 s. Preloading

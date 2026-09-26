@@ -4,7 +4,7 @@
 // them and recomputes the clock-dependent bits on load, so no React ships.
 import { STATUS_WORDS, canApplyNow } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
@@ -148,6 +148,7 @@ const initial = filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
 // these exact nodes and re-splices them as filters change.
 const runs = groupRuns(initial, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS);
 const showGroups = runs.length > 1;
+const SHUT_GROUPS = new Set(SCHOLARSHIP_SHUT_GROUPS);
 const headerAt = new Map<number, { label: string; count: number; key: string }>();
 if (showGroups) {
   let at = 0;
@@ -292,7 +293,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
             type="button"
             class="sabl-group"
             data-dir-group={head.key}
-            aria-expanded="true"
+            aria-expanded={SHUT_GROUPS.has(head.key) ? 'false' : 'true'}
             data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
           >
             {/* The rule belongs to the words, not to the row: it stops
@@ -308,7 +309,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
                 reader announces and what the word duplicates for everyone
                 else. */}
             <span class="sabl-group-toggle" aria-hidden="true">
-              <span data-dir-group-word>Hide</span>
+              <span data-dir-group-word>{SHUT_GROUPS.has(head.key) ? 'Show' : 'Hide'}</span>
               <svg class="sabl-group-caret" viewBox="0 0 12 8" width="12" height="8" fill="none"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
           </button>
@@ -317,6 +318,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
           class="sabl-card"
           data-dir-card
           data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
+          data-dir-shut={SHUT_GROUPS.has(status) ? '' : undefined}
           data-id={s.id}
           data-name={s.title}
           data-category={s.category ?? undefined}
@@ -403,7 +405,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
 <script>
   import { canApplyNow } from '../../lib/status.ts';
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { SCHOLARSHIP_GROUP_LABELS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
+  import { SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
   import { ARROW_REF, EXT_REF } from '../../lib/icons.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
@@ -488,7 +490,7 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
         a.classList.toggle('is-empty', n === 0);
       });
     },
-    groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key },
+    groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key, shut: SCHOLARSHIP_SHUT_GROUPS },
     summary(visible, total) {
       const openNow = visible.filter(s => getScholarshipStatus(s) === 'active').length;
       return { count: directoryCountLine(visible.length, total, 'LISTINGS', openNow) };

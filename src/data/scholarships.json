@@ -1958,7 +1958,11 @@
         "EPS"
       ],
       "specificSchools": [],
-      "targetInstitutions": [],
+      "targetInstitutions": [
+        "University of Alberta",
+        "Northern Alberta Institute of Technology",
+        "MacEwan University"
+      ],
       "fields": [],
       "minAverage": null,
       "minAge": null,
@@ -17398,7 +17402,9 @@
       ],
       "schoolBoards": [],
       "specificSchools": [],
-      "targetInstitutions": [],
+      "targetInstitutions": [
+        "Northern Alberta Institute of Technology"
+      ],
       "fields": [],
       "minAverage": null,
       "minAge": null,
@@ -24903,7 +24909,9 @@
       ],
       "schoolBoards": [],
       "specificSchools": [],
-      "targetInstitutions": [],
+      "targetInstitutions": [
+        "Delmar College"
+      ],
       "fields": [],
       "minAverage": null,
       "minAge": null,
@@ -25507,7 +25515,9 @@
       ],
       "schoolBoards": [],
       "specificSchools": [],
-      "targetInstitutions": [],
+      "targetInstitutions": [
+        "MC College"
+      ],
       "fields": [],
       "minAverage": null,
       "minAge": null,
@@ -31721,7 +31731,9 @@
       "grades": [
         "12"
       ],
-      "schoolBoards": [],
+      "schoolBoards": [
+        "GPPSD"
+      ],
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [],
@@ -31758,7 +31770,9 @@
       "grades": [
         "12"
       ],
-      "schoolBoards": [],
+      "schoolBoards": [
+        "GPPSD"
+      ],
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [],
@@ -36250,7 +36264,9 @@
       "grades": [
         "12"
       ],
-      "schoolBoards": [],
+      "schoolBoards": [
+        "CCSD"
+      ],
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [
@@ -36294,7 +36310,9 @@
       "grades": [
         "12"
       ],
-      "schoolBoards": [],
+      "schoolBoards": [
+        "CCSD"
+      ],
       "specificSchools": [],
       "targetInstitutions": [],
       "fields": [],
@@ -38547,7 +38565,9 @@
       ],
       "schoolBoards": [],
       "specificSchools": [],
-      "targetInstitutions": [],
+      "targetInstitutions": [
+        "Harvard College"
+      ],
       "fields": [],
       "minAverage": null,
       "minAge": null,
@@ -55713,7 +55733,9 @@
       ],
       "schoolBoards": [],
       "specificSchools": [],
-      "targetInstitutions": [],
+      "targetInstitutions": [
+        "Western University"
+      ],
       "fields": [
         "business"
       ],

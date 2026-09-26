@@ -417,6 +417,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // answers on screen).
   useLayoutEffect(() => {
     document.body.classList.toggle('quiz-results', step >= QUESTIONS.length)
+    // Set before paint by match.astro for a restored run; the body classes
+    // take over from here, so Retake brings the intro back.
+    document.documentElement.classList.remove('quiz-restore')
     document.body.classList.toggle('quiz-past-first', step >= 1 && step < QUESTIONS.length)
     return () => document.body.classList.remove('quiz-results', 'quiz-past-first')
   }, [step, QUESTIONS.length])

@@ -178,6 +178,12 @@ export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
   closed: 'CLOSED',
 };
 
+/** Scholarship status runs shut on every load, heading and count still
+ *  showing: the list leads with what can still be applied to (critique
+ *  2026-09-25). Programs keep theirs open, since 86 of 121 have no confirmed
+ *  date yet. */
+export const SCHOLARSHIP_SHUT_GROUPS = ['unconfirmed', 'closed'];
+
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
   active: 'OPEN NOW',
   ongoing: STATUS_WORDS.none.toUpperCase(),

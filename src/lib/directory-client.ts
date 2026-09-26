@@ -54,6 +54,10 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
   groups?: {
     key(item: T): string;
     label(key: string): string;
+    /** Runs shut on every load, heading and count still showing (critique
+     *  2026-09-25: the scholarship list opened on closed and unconfirmed
+     *  awards). The server marks their cards data-dir-shut to match. */
+    shut?: string[];
   };
   getSavedIds(): number[];
   toggleSave(id: number): number[];
@@ -465,6 +469,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
         if (it.el.hidden !== hidden) it.el.hidden = hidden;
         // The server's pre-JS cut (see global.css); `hidden` owns it now.
         if (it.el.hasAttribute('data-dir-later')) it.el.removeAttribute('data-dir-later');
+        if (it.el.hasAttribute('data-dir-shut')) it.el.removeAttribute('data-dir-shut');
       }
       for (const header of headers.values()) header.removeAttribute('data-dir-later');
       // Moving nodes already in order causes relayout without a visual change.
@@ -630,7 +635,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       try {
         sessionStorage.setItem(SCROLL_KEY, JSON.stringify({ url: location.pathname + location.search, y: scrollY }));
       } catch { /* storage blocked: Back lands a little higher, nothing breaks */ }
-      writeListContext({ paths: visible.map(v => v.el.querySelector<HTMLAnchorElement>('.sabl-name')!.getAttribute('href')!), filtered: query.trim() !== '' || Object.keys(state).some(k => state[k] !== config.defaultState[k]) });
+      writeListContext({ paths: pool.map(v => v.el.querySelector<HTMLAnchorElement>('.sabl-name')!.getAttribute('href')!), filtered: query.trim() !== '' || Object.keys(state).some(k => state[k] !== config.defaultState[k]) });
     }
   });
 
@@ -804,6 +809,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     document.documentElement.classList.add('js');
     headers.clear();
     collapsed.clear();
+    for (const k of config.groups?.shut ?? []) collapsed.add(k);
     root.querySelectorAll<HTMLElement>('[data-dir-group]').forEach(h => headers.set(h.dataset.dirGroup!, h));
     items = [...root.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);
     const params = new URLSearchParams(location.search);

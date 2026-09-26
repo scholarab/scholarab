@@ -219,22 +219,30 @@ const chip =
       </div>
     )}
 
-    {eligibility && (
-      <div class="sabd-elig">
-        <h2 class="sabd-h2 sabd-h2-elig">Who can apply</h2>
-        <div class="sabd-elig-text" set:html={emailOff(eligibility)} />
-      </div>
-    )}
-
     {/* The notes are the part no other list has: the catch, the trick, the
         thing the sponsor's page buries. They get the ruled paper from the
         founder's letter on /about, so the one voice that is ours reads as
         ours wherever it appears; the words are in the body face so the
-        condition that decides eligibility is easy to read. No signature: a note is
-        the site's, not a personal promise from one person. Directly under Who
-        can apply, because the note is where the hard conditions usually are
-        (critique 2026-09-24: they read as an aside below the About text). */}
-    {notes && (
+        condition that decides eligibility is easy to read. No signature: a
+        note is the site's, not a personal promise from one person.
+
+        Inside Who can apply, because the note is where the hard conditions
+        usually are: Knowlton's box said only "Rural Alberta students entering
+        Western University" and its course, activity and renewal conditions
+        sat in a second section (critique 2026-09-25). One heading, one place
+        to read who qualifies. */}
+    {eligibility ? (
+      <div class="sabd-elig">
+        <h2 class="sabd-h2 sabd-h2-elig">Who can apply</h2>
+        <div class="sabd-elig-text" set:html={emailOff(eligibility)} />
+        {notes && (
+          <div class="sabd-note sabd-note-in">
+            <h3 class="sabd-note-h">Worth knowing</h3>
+            <div class="sabd-paper"><p set:html={notesHtml} /></div>
+          </div>
+        )}
+      </div>
+    ) : notes && (
       <div class="sabd-note">
         <h2 class="sabd-h2">Worth knowing</h2>
         <div class="sabd-paper"><p set:html={notesHtml} /></div>
@@ -409,6 +417,8 @@ const chip =
     font-size: 17px; line-height: var(--pitch); color: #1F2A44;
   }
   .sabd-paper p { margin: 0; }
+  .sabd-note-in { margin-top: 20px; }
+  .sabd-note-h { font-size: 14px; font-weight: 700; color: #454945; margin: 0 0 10px; }
   .sabd-paper a { color: inherit; text-decoration-color: rgba(31,42,68,0.45); text-underline-offset: 3px; }
   @media (max-width: 640px) {
     .sabd-paper { --pitch: 30px; font-size: 16px; padding-left: 46px; padding-right: 16px; }

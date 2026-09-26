@@ -335,6 +335,16 @@ h1, h2 {
   .quiz-tile-in, .quiz-results-in, .quiz-card-in { animation: none !important; }
 }
 
+/* A finished run being restored: nothing that the results will replace, and
+   nothing below them, paints before they do (match.astro sets the class). */
+html.quiz-restore #match-intro,
+html.quiz-restore .sabm-ph,
+html.quiz-restore body:not(.quiz-results) .sabm-about { display: none; }
+/* With those gone the footer painted at y=312 and was pushed off by the
+   results (0.633 on desktop), and the scrollbar arrived with them. A screen
+   of reserved height keeps both below the fold until the results land. */
+html.quiz-restore .sabm-slot { min-height: 100vh; }
+
 /* ── Hide match intro when results are visible ───────────────────── */
 body.quiz-results #match-intro,
 body.quiz-results #match-divider {
@@ -1207,7 +1217,8 @@ html[data-view='gallery'] .sabl-pv { min-height: 340px; padding-top: 18px; }
    inline script in the layout's head, so without JavaScript nothing is cut
    and no button that cannot work is offered. The client clears
    data-dir-later on its first render and uses `hidden` from then on. */
-html.js .sabl-grid [data-dir-later] { display: none; }
+html.js .sabl-grid [data-dir-later],
+html.js .sabl-grid [data-dir-shut] { display: none; }
 html:not(.js) .sabl-more { display: none; }
 .sabl-more-line { font-size: 14px; color: rgba(20, 25, 21, 0.72); margin: 0; }
 .sabl-more-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 22px; }
@@ -1380,6 +1391,20 @@ html:not(.js) .sabl-more { display: none; }
 /* A dot per item rather than a separator between them, so an item that wraps
    onto its own line does not start with a stray "·". */
 .sabl-meta::before { content: ''; position: absolute; left: 0; top: calc(0.7em - 2.5px); width: 5px; height: 5px; border-radius: 50%; background: rgba(20, 25, 21, 0.35); }
+/* On a phone the three facts run as one sentence capped at two lines, and the
+   provider line goes (the detail page has it): each fact wrapping on its own
+   made program rows 286px on average against 180px for a scholarship row
+   (critique 2026-09-25). The cut lands at the end of the run, not mid-chip. */
+@media (max-width: 640px) {
+  .sabl-row-main .sabl-org { display: none; }
+  .sabl-meta-row {
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+    font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82); line-height: 1.4;
+  }
+  .sabl-meta { display: inline; padding-left: 0; }
+  .sabl-meta::before { content: none; }
+  .sabl-meta + .sabl-meta::before { content: ' · '; position: static; width: auto; height: auto; background: none; border-radius: 0; }
+}
 /* Arrow convention: → stays on ScholarAB, ↗ leaves for the sponsor's site.
    Two cards that look alike had buttons that did categorically different
    things; "Details →" opened our page, "Apply →" left the site, with

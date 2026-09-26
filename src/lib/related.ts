@@ -97,7 +97,15 @@ function assign<S, T>(
 
     let swapped = false;
     for (const t of starved) {
-      for (let i = 0; i < nS && inbound[t]! < o.floor; i++) {
+      // Most relevant pages first. In array order the donors were whichever
+      // pages sorted earliest (soonest deadline), so an award due this week
+      // gave its slots to fish-and-game and band bursaries (critique
+      // 2026-09-25). The floor holds either way; this only picks who pays.
+      const donors = [...Array(nS).keys()]
+        .map(i => ({ i, sc: o.excludes(i, t) ? -Infinity : o.score(sources[i]!, targets[t]!) }))
+        .sort((a, b) => b.sc - a.sc || a.i - b.i);
+      for (const { i } of donors) {
+        if (inbound[t]! >= o.floor) break;
         if (o.excludes(i, t)) continue;
         const row = picks[i]!;
         if (row.includes(t)) continue;

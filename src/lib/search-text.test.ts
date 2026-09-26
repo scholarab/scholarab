@@ -96,3 +96,11 @@ describe('tokenIndexMayMatch', () => {
     expect(tokenIndexMayMatch(tokens, '   ')).toBe(false)
   })
 })
+
+describe('misspellings', () => {
+  it('reads the common misspellings of the site vocabulary as the word meant', () => {
+    expect(normalizeSearchQuery('Bursery')).toBe('bursary')
+    expect(normalizeSearchQuery('schollarship calgery')).toBe('scholarship calgary')
+    expect(normalizeSearchQuery('Kiwanis')).toBe('kiwanis')
+  })
+})

@@ -50,6 +50,9 @@ const MEMBERSHIP = /\b(members?|employees?|staff|policy ?holders?|shareholders?)
 const AUDIENCE_GATES: Array<[RegExp, string]> = [
   [/\bidentif(y|ies) as (male|a man|men)\b|\bmale students\b|\byoung men\b|\bboys\b(?! (and|&) girls)/i, 'Male students only'],
   [/\bnew to canada\b|\bnewcomers?\b|\bimmigrants?\b|\brefugees?\b/i, 'Newcomers to Canada only'],
+  // Heritage or community the quiz never asks about. "Filipino community
+  // connection preferred" is a preference, not a gate, so it is left alone.
+  [/\b[A-Z][a-z]+-Canadian\b|\b(descent|heritage)\b|\bBlack (students|youth|Albertans)\b|\bFrancophone students\b/, 'Heritage-specific'],
   // 56 audiences name a team, league or sport; the quiz never asks about one.
   [/\b(hockey|soccer|football|basketball|volleyball|baseball|ringette|curling|golf|athletes?)\b/i, 'Athletes only'],
 ]
@@ -304,7 +307,13 @@ export function matchScholarship(
       if (eligibility.targetInstitutions.includes(profile.targetInstitution)) {
         confidence += INSTITUTION_MATCH_BOOST
         signals.push(`Tied to ${profile.targetInstitution}`)
-      } else confidence -= INSTITUTION_MISMATCH_PENALTY
+      } else {
+        // Said, not only scored: Knowlton (Western University only) read as a
+        // "Good match" for a Mount Royal student (critique 2026-09-25).
+        confidence -= INSTITUTION_MISMATCH_PENALTY
+        const named = eligibility.targetInstitutions
+        fieldChecks.push(named.length > 2 ? 'For some schools only' : `For ${named.join(' or ')} students`)
+      }
     }
   }
 

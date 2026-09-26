@@ -58,6 +58,19 @@ describe('matchScholarship', () => {
       expect(audienceChecks('Grade 12 students in Calgary')).toEqual([])
     })
 
+    it('flags heritage-specific awards, but not a stated preference', () => {
+      expect(audienceChecks('Korean-Canadian grade 11 and 12 students with a non-academic talent')).toContain('Heritage-specific')
+      expect(audienceChecks('Calgary area Grade 12 graduates of Italian descent')).toContain('Heritage-specific')
+      expect(audienceChecks('Graduating Calgary CBE or CCSD students entering first year, with a Filipino community connection preferred')).not.toContain('Heritage-specific')
+    })
+
+    it('says when the award is tied to a different school than the one the student chose', () => {
+      const r = matchScholarship({ ...baseProfile, targetInstitution: 'Mount Royal University' }, sch({ targetInstitutions: ['Western University'] }))
+      expect(r.match).toBe(true)
+      expect(r.checks).toContain('For Western University students')
+      expect(matchScholarship({ ...baseProfile, targetInstitution: 'Western University' }, sch({ targetInstitutions: ['Western University'] })).checks).toEqual([])
+    })
+
     it('reads "None of these" and "Another school" as ruling out board and school awards', () => {
       const none = { ...baseProfile, schoolBoard: '', specificSchool: '' }
       expect(matchScholarship(none, sch({ schoolBoards: ['CBE'] })).match).toBe(false)

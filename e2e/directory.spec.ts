@@ -3,11 +3,14 @@ import raw from '../src/data/scholarships.json' with { type: 'json' };
 import type { Scholarship } from '../src/lib/data-loader';
 import { enrichScholarships } from '../src/lib/enrich';
 import type { Page } from '@playwright/test';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, directoryCountLine } from '../src/lib/list-core';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine } from '../src/lib/list-core';
 import { normalizeSearchQuery, scholarshipSearchBlob } from '../src/lib/search-text';
 
 const items = filterSortScholarships(enrichScholarships(raw as unknown as Scholarship[]), DEFAULT_SCHOLARSHIP_STATE);
 const PAGE = DIRECTORY_PAGE_SIZE;
+/** Date not confirmed and Closed load shut: heading and count, no cards. */
+const SHUT = new Set(SCHOLARSHIP_SHUT_GROUPS);
+const open = items.filter(s => !SHUT.has(scholarshipGroupKey(s)));
 
 /** Press "Show more" until the whole filtered list is on screen. */
 async function showEverything(page: Page) {
@@ -21,12 +24,16 @@ async function openFilters(page: Page) {
   if (await btn.isVisible() && (await btn.getAttribute('aria-expanded')) !== 'true') await btn.click();
 }
 
-/** The group headers a reader sees: runs that start inside the revealed cards. */
+/** The group headers a reader sees: runs that start inside the revealed
+ *  cards, plus every shut run, whose heading is the only way to open it. */
 function shownRuns(visible: typeof items, shown: number) {
   const runs = groupRuns(visible, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS);
   if (runs.length < 2) return [];
   let at = 0;
-  return runs.filter(r => { const start = at; at += r.count; return start < shown; }).map(r => `${r.label} ${r.count}`);
+  return runs.filter(r => {
+    if (SHUT.has(r.key)) return true;
+    const start = at; at += r.count; return start < shown;
+  }).map(r => `${r.label} ${r.count}`);
 }
 const unique = items.find(s => items.filter(x => scholarshipSearchBlob(x).includes(normalizeSearchQuery(s.title))).length === 1)!;
 const query = unique.title;
@@ -173,9 +180,9 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   await page.goto('/scholarships/');
   const cards = page.locator('[data-dir-card]:visible');
   await expect(cards).toHaveCount(PAGE);
-  await expect(page.locator('[data-dir-more-line]')).toHaveText(`Showing ${PAGE} of ${items.length.toLocaleString('en-CA')}`);
+  await expect(page.locator('[data-dir-more-line]')).toHaveText(`Showing ${PAGE} of ${open.length.toLocaleString('en-CA')}`);
   await expect(page.locator('[data-dir-more-btn]')).toHaveText(`Show ${PAGE} more`);
-  await expect(page.locator('[data-dir-all]')).toHaveText(`Show all ${items.length.toLocaleString('en-CA')}`);
+  await expect(page.locator('[data-dir-all]')).toHaveText(`Show all ${open.length.toLocaleString('en-CA')}`);
 
   await page.locator('[data-dir-more-btn]').click();
   await page.locator('[data-dir-more-btn]').click();
@@ -183,7 +190,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   await expect(page).toHaveURL(new RegExp(`show=${PAGE * 3}`));
 
   // Leave from deep in the list, come back, land on the same card.
-  const target = items[PAGE * 2 + 5]!;
+  const target = open[PAGE * 2 + 5]!;
   const link = page.locator(`[data-dir-card][data-id="${target.id}"] .sabl-name`);
   await link.scrollIntoViewIfNeeded();
   await link.click();
@@ -201,7 +208,10 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   // "Show all" puts the whole filtered list out and hides the block.
   await page.goto('/scholarships/');
   await page.locator('[data-dir-all]').click();
-  await expect(cards).toHaveCount(items.length);
+  await expect(cards).toHaveCount(open.length);
+  // A shut section opens from its heading.
+  await page.locator('[data-dir-group="closed"]').click();
+  await expect(cards).toHaveCount(open.length + items.filter(s => scholarshipGroupKey(s) === 'closed').length);
   await expect(page.locator('[data-dir-more]')).toBeHidden();
 });
 
