@@ -87,6 +87,10 @@
     "hash": "2ba48d181b67f483",
     "date": "2026-09-15"
   },
+  "/programs/avogadro-chemistry-exam/": {
+    "hash": "f8963bafb29ac742",
+    "date": "2026-09-26"
+  },
   "/programs/beaver-computing-challenge/": {
     "hash": "eb3f85fa354651b5",
     "date": "2026-09-26"
@@ -111,12 +115,20 @@
     "hash": "b1dfcc8a37cbba2f",
     "date": "2026-09-15"
   },
+  "/programs/calgaryhacks/": {
+    "hash": "d1e196cfa8b25bf2",
+    "date": "2026-09-26"
+  },
   "/programs/canada-wide-science-fair-cwsf/": {
     "hash": "ca29e8726ed61347",
     "date": "2026-09-15"
   },
   "/programs/canadausa-mathcamp/": {
     "hash": "5def118a92a710fd",
+    "date": "2026-09-26"
+  },
+  "/programs/canadian-astronomy-and-astrophysics-olympiad-caao/": {
+    "hash": "034225c86d656b59",
     "date": "2026-09-26"
   },
   "/programs/canadian-biology-olympiad-cbo/": {
@@ -131,9 +143,17 @@
     "hash": "3980699f5e2eedb2",
     "date": "2026-09-15"
   },
+  "/programs/canadian-economics-olympiad-ceo/": {
+    "hash": "36c7918b047f20fc",
+    "date": "2026-09-26"
+  },
   "/programs/canadian-geographic-challenge/": {
     "hash": "6b853db11bffe650",
     "date": "2026-09-15"
+  },
+  "/programs/canadian-high-schools-model-united-nations-cahsmun/": {
+    "hash": "0f8b904f17866b3e",
+    "date": "2026-09-26"
   },
   "/programs/canadian-open-mathematics-challenge-comc/": {
     "hash": "3c678801dd0f615c",
@@ -150,6 +170,10 @@
   "/programs/canadian-sport-institute-calgary-youth-seminars/": {
     "hash": "549ef33c3ef1c6ef",
     "date": "2026-09-15"
+  },
+  "/programs/canadian-student-leadership-conference-cslc/": {
+    "hash": "3fcd43dcb86d730d",
+    "date": "2026-09-26"
   },
   "/programs/canadian-team-mathematics-contest/": {
     "hash": "2a928bc611a9f7ef",
@@ -174,6 +198,14 @@
   "/programs/cern-beamline-for-schools-bl4s/": {
     "hash": "9ad42d6210292515",
     "date": "2026-09-15"
+  },
+  "/programs/chem-13-news-chemistry-exam/": {
+    "hash": "3401dbee4d9b79a9",
+    "date": "2026-09-26"
+  },
+  "/programs/child-and-youth-advisory-council-cayac-alberta-childrens-hospital/": {
+    "hash": "259c4aec3ceeb937",
+    "date": "2026-09-26"
   },
   "/programs/cisco-networking-academy-high-school-stream/": {
     "hash": "4c4ae1c74e933b70",
@@ -259,6 +291,10 @@
     "hash": "b473b66bb60d4f34",
     "date": "2026-09-15"
   },
+  "/programs/high-school-model-united-nations-university-of-alberta-hsmun/": {
+    "hash": "39d4831596280bca",
+    "date": "2026-09-26"
+  },
   "/programs/historica-canada-heritage-fairs-young-citizens/": {
     "hash": "cd902a11625a28c8",
     "date": "2026-09-15"
@@ -307,6 +343,10 @@
     "hash": "94214f01c142cdfe",
     "date": "2026-09-15"
   },
+  "/programs/legislative-assembly-of-alberta-page-program/": {
+    "hash": "35b9648600d835eb",
+    "date": "2026-09-26"
+  },
   "/programs/lets-talk-science-tomatosphere/": {
     "hash": "147e2b101bf55f1b",
     "date": "2026-09-15"
@@ -318,6 +358,10 @@
   "/programs/macewan-university-design-summer-camp/": {
     "hash": "cb6fd6778ae99cbe",
     "date": "2026-09-15"
+  },
+  "/programs/mayors-youth-council-calgary/": {
+    "hash": "749d1275e70c150c",
+    "date": "2026-09-26"
   },
   "/programs/medicine-hat-college-summer-stem-tech-camps/": {
     "hash": "7e91c2e66bfd0287",
@@ -379,6 +423,10 @@
     "hash": "73928b27fd2cf0b8",
     "date": "2026-09-15"
   },
+  "/programs/promys-program-in-mathematics-for-young-scientists/": {
+    "hash": "f9462655e2c4e456",
+    "date": "2026-09-26"
+  },
   "/programs/quantum-school-for-young-students-qsys/": {
     "hash": "9acc51acb584c467",
     "date": "2026-09-15"
@@ -394,6 +442,10 @@
   "/programs/rise-for-the-world/": {
     "hash": "3dfc7528e71cfdd3",
     "date": "2026-09-15"
+  },
+  "/programs/ross-mathematics-program/": {
+    "hash": "432f40dbfcc6253a",
+    "date": "2026-09-26"
   },
   "/programs/rotary-adventure-in-citizenship/": {
     "hash": "13d1edf51ca98d16",
@@ -447,6 +499,10 @@
     "hash": "a3c227b9d603ee60",
     "date": "2026-09-15"
   },
+  "/programs/stollery-childrens-hospital-youth-advisory-council/": {
+    "hash": "d8c8f76760bee704",
+    "date": "2026-09-26"
+  },
   "/programs/student-spaceflight-experiments-program-ssep/": {
     "hash": "d8c3ddf768af383c",
     "date": "2026-09-15"
@@ -473,6 +529,10 @@
   },
   "/programs/telus-world-of-science-volunteering-edmonton/": {
     "hash": "6f9ef0431b631112",
+    "date": "2026-09-26"
+  },
+  "/programs/the-aristotle-contest-high-school-philosophy-essay/": {
+    "hash": "d9f6f48889d0cdab",
     "date": "2026-09-26"
   },
   "/programs/the-duke-of-edinburghs-international-award/": {
@@ -519,6 +579,10 @@
     "hash": "8950baa117ba9d3c",
     "date": "2026-09-15"
   },
+  "/programs/willow-river-biology-contest/": {
+    "hash": "f73a2e5297e978b5",
+    "date": "2026-09-26"
+  },
   "/programs/wisest-summer-research-program/": {
     "hash": "1edfaec7f4827cbc",
     "date": "2026-09-15"
@@ -542,6 +606,10 @@
   "/programs/youth-parliament-of-canada/": {
     "hash": "cab830de9b8676d5",
     "date": "2026-09-15"
+  },
+  "/programs/youth-volunteer-corps-calgary/": {
+    "hash": "e758e2343913087f",
+    "date": "2026-09-26"
   },
   "/scholarships/10x-future-founders-scholarship/": {
     "hash": "6c6b0e6d9cfc95b0",
