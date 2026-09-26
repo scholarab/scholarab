@@ -459,6 +459,10 @@
     "hash": "fb75bc64b4bb756b",
     "date": "2026-09-26"
   },
+  "/programs/national-youth-remembrance-contests-royal-canadian-legion/": {
+    "hash": "31aefd6aae5c1e17",
+    "date": "2026-09-26"
+  },
   "/programs/non-trivial-fellowship/": {
     "hash": "a2fe2ce2e0b94dbd",
     "date": "2026-09-15"
@@ -515,6 +519,10 @@
     "hash": "628dd5b2be9b8283",
     "date": "2026-09-15"
   },
+  "/programs/poetry-in-voice-national-recitation-competition/": {
+    "hash": "4a51b0c12027381e",
+    "date": "2026-09-26"
+  },
   "/programs/polygence-research-program/": {
     "hash": "73928b27fd2cf0b8",
     "date": "2026-09-15"
@@ -537,6 +545,10 @@
   },
   "/programs/queens-commonwealth-writing-competition/": {
     "hash": "b2d886ef31af5e42",
+    "date": "2026-09-26"
+  },
+  "/programs/rangers-girl-guides-of-canada/": {
+    "hash": "3766d57ba32e0334",
     "date": "2026-09-26"
   },
   "/programs/red-deer-polytechnic-dual-credit/": {
@@ -693,6 +705,10 @@
   },
   "/programs/usa-computing-olympiad-usaco/": {
     "hash": "ac1a32c58fb68eec",
+    "date": "2026-09-26"
+  },
+  "/programs/venturer-scouts-scouts-canada/": {
+    "hash": "9210a743fc762e90",
     "date": "2026-09-26"
   },
   "/programs/vex-robotics-competition-alberta-leagues/": {
