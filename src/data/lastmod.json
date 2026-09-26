@@ -63,6 +63,10 @@
     "hash": "6ab6d086d0849499",
     "date": "2026-09-15"
   },
+  "/programs/alberta-junior-forest-wardens/": {
+    "hash": "33bf76a3463e2076",
+    "date": "2026-09-26"
+  },
   "/programs/alberta-student-leadership-conference-aslc/": {
     "hash": "e9106e71b4f5cc20",
     "date": "2026-09-15"
@@ -218,6 +222,10 @@
   "/programs/central-alberta-regional-science-fair-carsf/": {
     "hash": "3ffc91457bf5995a",
     "date": "2026-09-15"
+  },
+  "/programs/centre-for-health-informatics-summer-studentship-university-of-calgary/": {
+    "hash": "891c687a3d80c421",
+    "date": "2026-09-26"
   },
   "/programs/cern-beamline-for-schools-bl4s/": {
     "hash": "9ad42d6210292515",
@@ -415,6 +423,10 @@
     "hash": "e6297c35d150ddf2",
     "date": "2026-09-15"
   },
+  "/programs/metis-youth-summer-employment-program/": {
+    "hash": "41f07f7cd8297747",
+    "date": "2026-09-26"
+  },
   "/programs/mindfuel-tech-futures-challenge/": {
     "hash": "42f656a01db63841",
     "date": "2026-09-15"
@@ -458,6 +470,10 @@
   "/programs/olds-college-high-school-ag-tech-programs/": {
     "hash": "60913e711d1d88ee",
     "date": "2026-09-15"
+  },
+  "/programs/parlement-jeunesse-de-lalberta-pja/": {
+    "hash": "b3934b5940139ff6",
+    "date": "2026-09-26"
   },
   "/programs/pascal-cayley-and-fermat-mathematics-contests/": {
     "hash": "3ae681584ee13297",
@@ -657,6 +673,10 @@
   },
   "/programs/willow-river-biology-contest/": {
     "hash": "f73a2e5297e978b5",
+    "date": "2026-09-26"
+  },
+  "/programs/wisest-set-conference-university-of-alberta/": {
+    "hash": "cccde063f3b202d4",
     "date": "2026-09-26"
   },
   "/programs/wisest-summer-research-program/": {
