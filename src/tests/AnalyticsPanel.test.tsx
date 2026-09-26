@@ -191,4 +191,22 @@ describe('AnalyticsPanel', () => {
     render(<AnalyticsPanel data={{ ...data, monthly: [], perItem: [], monthlySubs: [], perItemSubs: [], daily: [], emptySearches: [], search: [] }} />)
     expect(screen.getByText(/No events yet/)).toBeTruthy()
   })
+  it('splits saves by the button used, with the rate per 100 views', () => {
+    const withSaves = { ...data, saveFrom: [
+      { month: '2026-09', from: 'page', n: 3 },
+      { month: '2026-09', from: 'row', n: 1 },
+      { month: '2026-07', from: null, n: 4 },
+    ] }
+    render(<AnalyticsPanel data={withSaves} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Sep 2026' }))
+    const cells = (label: string) =>
+      [...screen.getByText(label).closest('tr')!.querySelectorAll('td')].map(c => c.textContent)
+    expect(cells('Listing page')).toEqual(['Listing page', '3', '75%'])
+    expect(cells('Directory row')).toEqual(['Directory row', '1', '25%'])
+    expect(cells('Quiz results')).toEqual(['Quiz results', '0', '0%'])
+    // July's unplaced saves stay out of September, and so does their row
+    expect(screen.queryByText(/Not recorded/)).toBeNull()
+    // 4 saves over 25 September views
+    expect(screen.getByText(/16\.0 per 100 views/)).toBeTruthy()
+  })
 })

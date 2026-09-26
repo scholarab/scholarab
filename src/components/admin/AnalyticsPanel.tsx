@@ -6,6 +6,8 @@ export interface AnalyticsData {
   perItem: { month: string; event: string; itemType: string | null; itemId: number | null; n: number }[]
   daily: { day: string; n: number }[]
   emptySearches: { month: string; q: string | null; n: number }[]
+  /** Saves by the button used: page, row or quiz. null = before 2026-09-26. */
+  saveFrom?: { month: string; from: string | null; n: number }[]
   /** Live email list: people = distinct addresses, reminders = rows. */
   subscribers: { people: number; reminders: number; pending?: number }
   monthlySubs: { month: string; people: number; reminders: number }[]
@@ -22,6 +24,13 @@ export interface AnalyticsData {
   currentMonth?: string
   error?: boolean
 }
+
+const SAVE_PLACES: [string, string][] = [
+  ['page', 'Listing page'],
+  ['row', 'Directory row'],
+  ['quiz', 'Quiz results'],
+  ['none', 'Not recorded (before Sep 26 2026)'],
+]
 
 interface Props {
   data: AnalyticsData
@@ -324,6 +333,25 @@ export default function AnalyticsPanel({ data }: Props) {
       }))
   }, [data.emptySearches, month])
 
+  const saves = useMemo(() => {
+    const by: Record<string, number> = {}
+    for (const s of data.saveFrom ?? []) {
+      if (month !== ALL && s.month !== month) continue
+      const key = s.from ?? 'none'
+      by[key] = (by[key] ?? 0) + s.n
+    }
+    let views = 0
+    for (const m of data.monthly) {
+      if (m.event === 'detail_view' && (month === ALL || m.month === month)) views += m.n
+    }
+    const total = Object.values(by).reduce((a, b) => a + b, 0)
+    return {
+      total,
+      per100: views > 0 ? (total / views) * 100 : null,
+      rows: SAVE_PLACES.map(([key, label]) => ({ key, label, n: by[key] ?? 0 })).filter(r => r.n > 0 || r.key !== 'none'),
+    }
+  }, [data.saveFrom, data.monthly, month])
+
   const dailyRows = useMemo(() => {
     if (month === ALL) return data.daily.slice(-14)
     return data.daily.filter(d => d.day.startsWith(month))
@@ -619,6 +647,27 @@ export default function AnalyticsPanel({ data }: Props) {
                 <span className="text-xs text-white/60 w-8 text-right">{d.n}</span>
               </div>
             ))}
+          </div>
+
+          {/* Which save button gets used */}
+          <h2 className="text-sm font-semibold mb-2 mt-8 text-white/70">
+            Where saves happen · {periodLabel}
+            {saves.per100 !== null && <span className="font-normal text-white/40"> · {saves.per100.toFixed(1)} per 100 views</span>}
+          </h2>
+          <div className="border border-white/6 rounded-xl overflow-hidden">
+            <table className="w-full text-sm">
+              <tbody>
+                {saves.rows.map(r => (
+                  <tr key={r.key} className="border-b border-white/4">
+                    <td className="px-4 py-2.5">{r.label}</td>
+                    <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{r.n}</td>
+                    <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">
+                      {saves.total > 0 ? `${Math.round((r.n / saves.total) * 100)}%` : ''}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
