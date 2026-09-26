@@ -453,6 +453,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const ctx = config.renderContext?.(items) as C;
     const searched = ql ? items.filter(it => it.search.includes(ql)) : items;
     visible = config.select(searched, state, ctx);
+    // Notes that describe the whole list (the spring note) go once it is not.
+    const whole = !ql && Object.keys(state).every(k => k === 'sort' || state[k] === config.defaultState[k]);
+    root.querySelectorAll<HTMLElement>('[data-dir-default-only]').forEach(n => { n.hidden = !whole; });
     // A shut section's cards come off the page entirely, so they do not eat
     // the "Show more" budget either: shutting CLOSED on a 24-card step buys
     // twenty-four open ones rather than twenty-four fewer cards.

@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
-import { STATUS_WORDS, canApplyNow } from '../../lib/status.ts';
+import { STATUS_WORDS, canApplyNow, openLaterNote } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
 import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
@@ -118,10 +118,10 @@ const SORT_CHIPS = [
 
 const STATUS_CHIPS = [
   { value: 'all',     label: 'All' },
-  { value: 'active',  label: 'Open' },
+  { value: 'active',  label: STATUS_WORDS.open },
   { value: 'ongoing', label: STATUS_WORDS.none },
-  { value: 'opening', label: 'Not open yet' },
-  { value: 'unconfirmed', label: 'Date not confirmed' },
+  { value: 'opening', label: STATUS_WORDS.future },
+  { value: 'unconfirmed', label: STATUS_WORDS.unconfirmed },
   { value: 'closed',  label: 'Closed' },
 ] as const;
 
@@ -155,6 +155,7 @@ if (showGroups) {
   for (const r of runs) { headerAt.set(at, r); at += r.count; }
 }
 const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length;
+const laterNote = openLaterNote(initial.map(s => ({ status: getScholarshipStatus(s), openDate: s.openDate })));
 ---
 
 <Fragment set:html={ICON_SPRITE} />
@@ -274,6 +275,10 @@ const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length
   <div class="sr-only" data-dir-count role="status">
     {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
   </div>
+
+  {/* Above the first row, where the September reader decides the page has
+      nothing for them. Only on the unfiltered list, which it describes. */}
+  {laterNote && <p class="sabl-later-note" data-dir-default-only>{laterNote}</p>}
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
     {initial.map((s, i) => {

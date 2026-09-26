@@ -908,6 +908,12 @@ html:not(.js) .sabl-views { display: none; }
    with its listings attached under it, and a show/hide control on the right
    that shuts the whole run. The control needs JavaScript to do anything, so
    without it the bar is an inert heading and every card stays on the page. */
+/* The spring note (lib/status.ts openLaterNote), over the first row. */
+.sabl-later-note {
+  margin: 4px 0 12px; max-width: 62ch;
+  font-size: 15px; line-height: 1.55; color: #454945;
+}
+.sabl-later-note[hidden] { display: none; }
 .sabl-group {
   grid-column: 1 / -1; width: 100%;
   display: flex; align-items: flex-end; gap: 14px;
@@ -1574,6 +1580,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   }
 }
 
+.sabm-later-note { font-size: 15px; line-height: 1.55; color: #454945; max-width: 62ch; margin: 10px 0 0; }
 .sabm-table { border-top: 2px solid var(--text-primary); margin-top: 40px; }
 .sabm-table-label { font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.75); padding: 14px 0 0; margin: 0; }
 /* The second group's label, below the first group's last row */

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { canApplyNow, programIsListed,
+import { canApplyNow, openLaterNote, programIsListed,
   scholarshipStatusOf,
   programStatusOf,
   scholarshipIsIndexable,
@@ -144,3 +144,18 @@ describe('programIsListed', () => {
     expect(programIsListed({ deadline: '2026-08-21' }, today)).toBe(false);
   });
 });
+
+describe('openLaterNote', () => {
+  const later = (openDate: string | null) => ({ status: 'future' as const, openDate })
+  it('names the month half the dated waiting awards share', () => {
+    expect(openLaterNote([later('2027-03-01'), later('2027-03-15'), later('2027-02-01'), { status: 'active', openDate: null }]))
+      .toMatch(/^Most of these open later, most of them in March\./)
+  })
+  it('leaves the month out when no month has half', () => {
+    expect(openLaterNote([later('2027-01-01'), later('2027-02-01'), later('2027-03-01')])).toMatch(/^Most of these open later\. /)
+  })
+  it('says nothing when most of the list is open', () => {
+    expect(openLaterNote([later('2027-03-01'), { status: 'active' }, { status: 'active' }])).toBeNull()
+    expect(openLaterNote([])).toBeNull()
+  })
+})

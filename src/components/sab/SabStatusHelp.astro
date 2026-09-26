@@ -12,15 +12,16 @@ const { kind } = Astro.props;
 
 const terms: Array<[string, string]> = kind === 'scholarship'
   ? [
-      ['Open', 'Taking applications now. The date is the deadline.'],
+      [STATUS_WORDS.open, 'Taking applications now. The date is the deadline.'],
+      [STATUS_WORDS.none, 'Taking applications, with no deadline to count down to.'],
       [STATUS_WORDS.future, 'This year’s application has not opened. Save it, or set a reminder on its page.'],
       [GLOSSARY.unconfirmed.term, GLOSSARY.unconfirmed.line],
-      [STATUS_WORDS.none, 'Applications are taken any time.'],
       [STATUS_WORDS.closed, 'This year’s deadline has passed.'],
     ]
   : [
-      ['Open', 'Taking applications now. The date is the deadline.'],
-      ['No set date', `No deadline to count down to. The row says “${STATUS_WORDS.unconfirmed}” when the provider has not posted this year’s date, and “${STATUS_WORDS.none}” when you can join any time.`],
+      [STATUS_WORDS.open, 'Taking applications now. The date is the deadline.'],
+      [STATUS_WORDS.none, 'You can join any time; there is no deadline.'],
+      [GLOSSARY.unconfirmed.term, GLOSSARY.unconfirmed.line],
     ];
 for (const k of DIRECTORY_TERMS[kind]) terms.push([GLOSSARY[k].term, GLOSSARY[k].line]);
 ---

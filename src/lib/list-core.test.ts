@@ -328,8 +328,8 @@ describe('programWhen', () => {
     // getToday mock = 2026-04-05
     expect(programWhen(makeProgram({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })))
       .toEqual({ main: 'Apr 8', sub: '3 days left', cls: 'sabl-when is-urgent' })
-    expect(programWhen(makeProgram({ id: 2, deadline: 'Ongoing' })).main).toBe('No fixed deadline')
-    expect(programWhen(makeProgram({ id: 3, deadline: 'TBA' })).main).toBe('Date not confirmed')
+    expect(programWhen(makeProgram({ id: 2, deadline: 'Ongoing' })).main).toBe('Open any time')
+    expect(programWhen(makeProgram({ id: 3, deadline: 'TBA' })).main).toBe('Opens later, date not posted')
     expect(programWhen(makeProgram({ id: 4, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime() })).main).toBe('Closed')
   })
 })
@@ -349,12 +349,12 @@ describe('scholarshipWhen', () => {
   })
   it('never counts down to a guessed date', () => {
     expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-04-20', deadlineEstimated: true, _deadline_ms: at('2026-04-20') })))
-      .toEqual({ main: 'Around Apr 20', sub: 'not confirmed', cls: 'sabl-when is-quiet' })
+      .toEqual({ main: 'Opens later', sub: 'date not posted, around Apr 20', cls: 'sabl-when is-quiet' })
   })
   it('names the other states plainly', () => {
     expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-01-01', _deadline_ms: at('2026-01-01') })).main).toBe('Closed')
     expect(scholarshipWhen(makeScholarship({ id: 2, openDate: '2026-09-01', deadline: '2026-12-01', _open_ms: at('2026-09-01'), _deadline_ms: at('2026-12-01') })).main).toBe('Opens Sep 1')
-    expect(scholarshipWhen(makeScholarship({ id: 3, deadline: null, _deadline_ms: 0 })).main).toBe('No fixed deadline')
+    expect(scholarshipWhen(makeScholarship({ id: 3, deadline: null, _deadline_ms: 0 })).main).toBe('Open any time')
   })
 })
 

@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, getToday } from '../lib/utils';
-import { scholarshipStatusOf, programIsListed } from '../lib/status';
+import { STATUS_WORDS, scholarshipStatusOf, programIsListed } from '../lib/status';
 import { formatListingDate } from '../lib/meta';
 import { itemListJson } from '../lib/ld';
 
@@ -70,12 +70,12 @@ const scholarshipRows: Row[] = scholarships
       // A rolled-forward date is filed under last cycle's month, so the row
       // says so rather than letting the calendar vouch for it.
       state: status === 'active'
-        ? 'Open now'
+        ? STATUS_WORDS.open
         : status === 'unconfirmed'
-          ? 'Date not confirmed'
+          ? STATUS_WORDS.unconfirmed
           : s.openDate
           ? `Opens ${formatListingDate(s.openDate)}`
-          : 'Not open yet',
+          : STATUS_WORDS.future,
       open: status === 'active',
     };
   });
@@ -92,7 +92,7 @@ const programRows: Row[] = programs
     // amounts and read as one (critique 2026-09-24); the Program tag already
     // says what the row is.
     meta: p.stipend || (p.paid ? 'Paid' : ''),
-    state: 'Open now',
+    state: STATUS_WORDS.open,
     open: true,
   }));
 
@@ -292,7 +292,7 @@ const breadcrumbJson = {
           ))}
 
           <section class="sabcal-tail">
-            <h2 class="sabcal-h2">Awards with no fixed deadline</h2>
+            <h2 class="sabcal-h2">Open any time: awards with no deadline</h2>
             <p>
               {undated.length.toLocaleString('en-CA')} listings have no date to file under a month; they run until the money
               is gone, or the provider has never published one. They are worth a look early rather

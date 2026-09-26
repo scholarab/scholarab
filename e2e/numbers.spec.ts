@@ -24,7 +24,7 @@ test('home photo slides state the same counts as the hubs they link to', async (
       href: c.querySelector<HTMLAnchorElement>('.sab-scope-btn-solid')!.getAttribute('href')!,
       total: c.querySelector('.sab-scope-btn-solid')!.textContent ?? '',
       open: subs.find(t => /open right now/.test(t)) ?? '',
-      ongoing: subs.find(t => /no fixed deadline/.test(t)) ?? '',
+      ongoing: subs.find(t => /open any time/.test(t)) ?? '',
     };
   }));
   expect(slides.length).toBeGreaterThanOrEqual(18);

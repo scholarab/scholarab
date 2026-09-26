@@ -147,10 +147,16 @@ export function programIsIndexable(p: ProgramStatusInput, today: Date): boolean 
 // from here. `fmt` formats an ISO date the way the caller already prints them,
 // which keeps this module free of imports.
 
+// Three headwords, the three states PRODUCT.md names: open now, opens later,
+// closed. Anything finer is a qualifier after the headword, never a word of
+// its own: six labels ("Not open yet", "Date not confirmed", "No fixed
+// deadline"...) were more than a first-time applicant could act on (critique
+// 2026-09-26). The counts did not change: "open now" is still dated only.
 export const STATUS_WORDS = {
-  future: 'Not open yet',
-  unconfirmed: 'Date not confirmed',
-  none: 'No fixed deadline',
+  open: 'Open now',
+  future: 'Opens later',
+  unconfirmed: 'Opens later, date not posted',
+  none: 'Open any time',
   closed: 'Closed',
 } as const;
 
@@ -170,8 +176,9 @@ export function waitingLabel(
     return { main: STATUS_WORDS.future, sub: s.deadline ? `due ${fmt(s.deadline)}` : '' };
   }
   // No countdown: counting down to a guessed date is what this state stops.
+  // The headword first, last cycle's date as the qualifier.
   if (status === 'unconfirmed') {
-    return s.deadline ? { main: `Around ${fmt(s.deadline)}`, sub: 'not confirmed' } : { main: STATUS_WORDS.unconfirmed, sub: '' };
+    return { main: STATUS_WORDS.future, sub: s.deadline ? `date not posted, around ${fmt(s.deadline)}` : 'date not posted' };
   }
   return null;
 }
@@ -179,4 +186,34 @@ export function waitingLabel(
 /** Programs speak the same words: TBA is an unconfirmed date, Ongoing has no deadline. */
 export function programUndatedLabel(deadline: string | null | undefined): string {
   return deadline === 'Ongoing' ? STATUS_WORDS.none : STATUS_WORDS.unconfirmed;
+}
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+/**
+ * The spring note: when most of a list opens later, say so and say when.
+ *
+ * In September a Calgary student saw 125 of 162 awards "not open yet" and
+ * read the site as having nothing for them (critique 2026-09-26). That is the
+ * normal cycle, and the list should say it. The month is read from real open
+ * dates only, never guessed: it is named when at least half of the dated
+ * waiting awards share it, and left out otherwise. Null when fewer than half
+ * of the list is waiting, or nothing is.
+ */
+export function openLaterNote(
+  items: Array<{ status: ScholarshipStatus; openDate?: string | null }>,
+): string | null {
+  const waiting = items.filter(i => i.status === 'future' || i.status === 'unconfirmed');
+  if (waiting.length === 0 || waiting.length * 2 < items.length) return null;
+  const byMonth = new Map<number, number>();
+  let dated = 0;
+  for (const w of waiting) {
+    const m = w.openDate ? Number(w.openDate.slice(5, 7)) : NaN;
+    if (!m) continue;
+    dated++;
+    byMonth.set(m, (byMonth.get(m) ?? 0) + 1);
+  }
+  const [month, n] = [...byMonth.entries()].sort((a, b) => b[1] - a[1])[0] ?? [0, 0];
+  const when = month && n * 2 >= dated ? `, most of them in ${MONTHS[month - 1]}` : '';
+  return `Most of these open later${when}. That is the normal cycle. Save the ones you want now, and each award's page can email you before it closes.`;
 }

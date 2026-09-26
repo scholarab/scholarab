@@ -367,7 +367,7 @@ if (kind === 'scholarship') {
   // program descriptions mid-word. Dated cycles lead with the closing date.
   const programDescription = programMeta(p, status, formatDate);
   const canonical = `https://www.scholarab.ca/programs/${slug}/`;
-  const dueLong = status === 'ongoing' ? `${STATUS_WORDS.none}, join any time` : formatDate(p.deadline);
+  const dueLong = status === 'ongoing' ? 'No deadline, join any time' : formatDate(p.deadline);
 
   d = {
     currentPath: '/programs/',

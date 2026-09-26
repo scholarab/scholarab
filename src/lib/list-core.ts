@@ -171,7 +171,7 @@ export function whenTier(days: number): '' | ' is-soon' | ' is-urgent' {
 // open, no fixed deadline, date not confirmed, closed.
 
 export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
-  active: 'OPEN NOW',
+  active: STATUS_WORDS.open.toUpperCase(),
   ongoing: STATUS_WORDS.none.toUpperCase(),
   future: STATUS_WORDS.future.toUpperCase(),
   unconfirmed: STATUS_WORDS.unconfirmed.toUpperCase(),
@@ -185,7 +185,7 @@ export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
 export const SCHOLARSHIP_SHUT_GROUPS = ['unconfirmed', 'closed'];
 
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
-  active: 'OPEN NOW',
+  active: STATUS_WORDS.open.toUpperCase(),
   ongoing: STATUS_WORDS.none.toUpperCase(),
   tba: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',

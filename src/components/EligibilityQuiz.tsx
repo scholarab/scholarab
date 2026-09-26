@@ -8,7 +8,7 @@ import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-m
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { showConfetti, generateSlug } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { STATUS_WORDS, canApplyNow, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
+import { STATUS_WORDS, canApplyNow, openLaterNote, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
@@ -477,6 +477,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1" style={{ marginTop: 24 }}>
           {headline}
         </h2>
+        {/* Every match, not the ten on screen: the ten are split on purpose. */}
+        {showScholarships && (() => {
+          const note = openLaterNote((allScholarshipResults ?? []).map(r => ({ status: scholarshipStatusOf(r.scholarship, today), openDate: r.scholarship.openDate })))
+          return note && <p className="sabm-later-note">{note}</p>
+        })()}
 
         {/* What the list was built from, beside the list (critique 2026-09-23:
             the answers were a screen behind the results). Each answer opens its

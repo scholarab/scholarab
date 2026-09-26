@@ -8,7 +8,7 @@ import { normalizeSearchQuery, scholarshipSearchBlob } from '../src/lib/search-t
 
 const items = filterSortScholarships(enrichScholarships(raw as unknown as Scholarship[]), DEFAULT_SCHOLARSHIP_STATE);
 const PAGE = DIRECTORY_PAGE_SIZE;
-/** Date not confirmed and Closed load shut: heading and count, no cards. */
+/** "Opens later, date not posted" and Closed load shut: heading and count, no cards. */
 const SHUT = new Set(SCHOLARSHIP_SHUT_GROUPS);
 const open = items.filter(s => !SHUT.has(scholarshipGroupKey(s)));
 

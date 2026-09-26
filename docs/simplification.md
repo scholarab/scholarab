@@ -563,3 +563,17 @@ Changed:
 - detail-page arrows walk the list as shown, so they skip shut sections.
 
 Add-back fraction: 0.
+
+## After the 25/40 critique, 2026-09-26
+
+The two findings Ilia picked. This is the last critique run (Ilia, 2026-09-26); from here fixes are checked by measurement.
+
+Removed:
+- three of the six status headwords. Every surface now leads with "Open now", "Opens later" or "Closed". Finer states are a qualifier after the headword: "Open any time" (no deadline), "Opens later, date not posted" (a rolled-forward date), "Opens Mar 1". One set of words in `STATUS_WORDS`; the counts did not change, and "open now" still counts dated awards only.
+
+Changed:
+- a spring note (`openLaterNote` in lib/status.ts) above the first row of a scholarship hub, and under the quiz results headline, when at least half the list opens later. It names the month only when at least half of the dated waiting awards share it, read from real open dates. Calgary: "Most of these open later, most of them in March." The province-wide list does not get it, because most of it is open or undated. The hub note hides while a filter or search is on. Layout shift on the Calgary hub stays 0.
+
+Cost: the quiz note moves the first result from 822px to 887px on a 375px phone.
+
+Add-back fraction: 0.
