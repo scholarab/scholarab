@@ -280,6 +280,8 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
       nothing for them. Only on the unfiltered list, which it describes. */}
   {laterNote && <p class="sabl-later-note" data-dir-default-only>{laterNote}</p>}
 
+  <p class="sabl-corrected" data-dir-corrected hidden></p>
+
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
     {initial.map((s, i) => {
       const status = getScholarshipStatus(s);

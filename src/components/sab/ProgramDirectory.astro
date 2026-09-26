@@ -240,6 +240,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
   {/* Over the results, not under the standfirst: every hub's toolbar sits at
       one height (smoke.spec.ts), and the word is read where the rows use it. */}
   {defined && <p class="sabl-define"><strong>{defined.term}:</strong> {defined.line}</p>}
+  <p class="sabl-corrected" data-dir-corrected hidden></p>
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
     {initial.map((p, i) => {
       const slug = p._slug ?? generateSlug(p.name);

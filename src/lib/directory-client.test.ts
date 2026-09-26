@@ -39,6 +39,7 @@ function mountFixture() {
       <button class="sabl-chip" data-fkey="category" data-fval="Science" aria-pressed="false">Science</button>
       <button class="sabl-chip" data-fkey="category" data-fval="Arts" aria-pressed="false">Arts</button>
       <div class="sabl-result-line" data-dir-count></div>
+      <p data-dir-corrected hidden></p>
       <div class="sabl-grid" data-dir-grid>
         ${card(1, 'Beta Lab', 'Science', true, 2)}
         ${card(2, 'Alpha Camp', 'Arts', false, 1)}
@@ -293,6 +294,27 @@ describe('initDirectory', () => {
     expect(sendEvent).not.toHaveBeenCalled()
     vi.useRealTimers()
     history.replaceState(null, '', '/')
+  })
+
+  it('shows what the student meant when the words as typed find nothing', async () => {
+    setup()
+    const input = $('[data-dir-search]') as HTMLInputElement
+    const note = $('[data-dir-corrected]') as HTMLElement
+    vi.useFakeTimers()
+    input.value = 'gamma reserch'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    await flushIndex()
+    vi.advanceTimersByTime(2000)
+    expect(visibleCardNames()).toEqual(['Gamma Research'])
+    expect(note.hidden).toBe(false)
+    expect(note.textContent).toBe('No listing says "gamma reserch". Showing results for "gamma research".')
+    // A typo that was corrected is not a content gap
+    expect(sendEvent).not.toHaveBeenCalledWith('search_empty', undefined, undefined, expect.anything())
+
+    input.value = 'gamma'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    expect(note.hidden).toBe(true)
+    vi.useRealTimers()
   })
 
   it('offers the wider directory instead of logging a gap that is not one', async () => {

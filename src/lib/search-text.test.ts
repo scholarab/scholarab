@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   buildSearchBlob,
+  correctQuery,
   normalizeSearchQuery,
   normalizeSearchText,
   programSearchBlob,
@@ -102,5 +103,49 @@ describe('misspellings', () => {
     expect(normalizeSearchQuery('Bursery')).toBe('bursary')
     expect(normalizeSearchQuery('schollarship calgery')).toBe('scholarship calgary')
     expect(normalizeSearchQuery('Kiwanis')).toBe('kiwanis')
+  })
+})
+
+describe('correctQuery', () => {
+  const vocab = ['volleyball', 'medicine', 'hockey', 'rocky', 'mountain', 'cameron', 'nursing', 'community', 'involvement', 'kiwanis']
+
+  it('turns a misspelled word into the one the listings use', () => {
+    expect(correctQuery('hocky', vocab)).toBe('hockey')
+    expect(correctQuery('nursng', vocab)).toBe('nursing')
+    expect(correctQuery('vollyballl', vocab)).toBe('volleyball')
+    // An adjacent swap is one slip, not two
+    expect(correctQuery('medicien', vocab)).toBe('medicine')
+  })
+
+  it('keeps the words that already match and fixes only the rest', () => {
+    expect(correctQuery('community involvment', vocab)).toBe('community involvement')
+  })
+
+  it('never changes the first letter, so hocky is not rocky', () => {
+    expect(correctQuery('hocky', ['rocky'])).toBeNull()
+    expect(correctQuery('camera', ['pamela'])).toBeNull()
+  })
+
+  it('allows one slip in a short word and two in a long one', () => {
+    expect(correctQuery('camera', vocab)).toBeNull() // cameron is two away
+    expect(correctQuery('involvmnt', vocab)).toBe('involvement')
+    expect(correctQuery('volybal', vocab)).toBeNull() // three away
+  })
+
+  it('leaves short words, numbers and nonsense alone', () => {
+    expect(correctQuery('rvs', vocab)).toBeNull()
+    expect(correctQuery('chemistry 3p', ['chemistry'])).toBeNull()
+    expect(correctQuery('quantum', vocab)).toBeNull()
+  })
+
+  it('returns null when the query already matches, or cannot all be fixed', () => {
+    expect(correctQuery('kiwanis', vocab)).toBeNull()
+    expect(correctQuery('hocky zzzzzz', vocab)).toBeNull()
+  })
+
+  it('knows the misspellings from the empty-search log', () => {
+    expect(normalizeSearchQuery('voley')).toBe('volleyball')
+    expect(normalizeSearchQuery('Medicne')).toBe('medicine')
+    expect(normalizeSearchQuery('energy reveiled')).toBe('energy revealed')
   })
 })

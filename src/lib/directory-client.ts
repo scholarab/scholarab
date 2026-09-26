@@ -2,7 +2,7 @@
 // The page ships fully server-rendered cards; this module only shows/hides and
 // reorders existing DOM nodes, replicating what the old React islands did.
 import { sendEvent } from './events.ts';
-import { normalizeSearchQuery, tokenIndexMayMatch } from './search-text.ts';
+import { normalizeSearchQuery, tokenIndexMayMatch, correctQuery, searchTokens } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
 import { showConfetti } from './utils.ts';
 import { DIRECTORY_PAGE_SIZE } from './list-core.ts';
@@ -211,6 +211,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // can step through (the unfolded ones, of which `page` is on screen).
   let selected: T | null = null;
   let pool: T[] = [];
+  // Every word on this page's listings, built on the first search that finds
+  // nothing, for correctQuery.
+  let pageVocab: Set<string> | undefined;
   let page: T[] = [];
 
   function setSaveState(btn: HTMLElement, saved: boolean) {
@@ -453,7 +456,22 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // omits (or adds) does not decide whether they find anything.
     const ql = normalizeSearchQuery(q);
     const ctx = config.renderContext?.(items) as C;
-    const searched = ql ? items.filter(it => it.search.includes(ql)) : items;
+    let searched = ql ? items.filter(it => it.search.includes(ql)) : items;
+    // Nothing as typed: try the words the student most likely meant, from
+    // this page's own listings, and say so above the results rather than
+    // quietly swapping the query.
+    let meant: string | null = null;
+    if (ql && searched.length === 0) {
+      pageVocab ??= new Set(items.flatMap(it => searchTokens(it.search)));
+      const c = correctQuery(ql, pageVocab);
+      const found = c ? items.filter(it => it.search.includes(c)) : [];
+      if (found.length > 0) { meant = c; searched = found; }
+    }
+    const note = root.querySelector<HTMLElement>('[data-dir-corrected]');
+    if (note) {
+      note.hidden = meant === null;
+      note.textContent = meant === null ? '' : `No listing says "${q}". Showing results for "${meant}".`;
+    }
     visible = config.select(searched, state, ctx);
     // Notes that describe the whole list (the spring note) go once it is not.
     const whole = !ql && Object.keys(state).every(k => k === 'sort' || state[k] === config.defaultState[k]);
@@ -593,8 +611,19 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       // Still the same query? A slow index must not overwrite a later render.
       if (!root || normalizeSearchQuery(query) !== ql) return;
 
-      const here = index ? tokenIndexMayMatch(kind === 'scholarship' ? index.s : index.p, ql) : onThisPage;
-      const there = index ? tokenIndexMayMatch(kind === 'scholarship' ? index.p : index.s, ql) : false;
+      const own = index ? (kind === 'scholarship' ? index.s : index.p) : null;
+      const other = index ? (kind === 'scholarship' ? index.p : index.s) : null;
+      let here = own ? tokenIndexMayMatch(own, ql) : onThisPage;
+      let there = other ? tokenIndexMayMatch(other, ql) : false;
+      // Misspelled, and the right word is only on another page: offer the
+      // corrected search there, and do not log a typo as a content gap.
+      let term = q;
+      if (!here && !there && own && other) {
+        const mine = correctQuery(ql, own);
+        const theirs = mine ? null : correctQuery(ql, other);
+        if (mine) { here = true; term = mine; }
+        else if (theirs) { there = true; term = theirs; }
+      }
 
       const slot = root.querySelector<HTMLElement>('[data-dir-elsewhere]');
       const sub = root.querySelector<HTMLElement>('[data-dir-empty-sub]');
@@ -610,8 +639,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
         if (target) {
           const a = document.createElement('a');
           a.className = 'sabl-empty-link';
-          a.href = `${target.href}?q=${encodeURIComponent(q)}`;
-          a.textContent = `Search ${target.label} for "${q}"`;
+          a.href = `${target.href}?q=${encodeURIComponent(term)}`;
+          a.textContent = `Search ${target.label} for "${term}"`;
           slot.append(a);
         }
         // The generic "clear a filter" line is wrong whenever the match is on

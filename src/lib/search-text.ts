@@ -50,6 +50,11 @@ const SPELLING: Record<string, string> = {
   scholorships: 'scholarships', schollarships: 'scholarships', scholerships: 'scholarships', scolarships: 'scholarships',
   calgery: 'calgary', edmonten: 'edmonton', edmontn: 'edmonton', lethbrige: 'lethbridge',
   indiginous: 'indigenous', indigenious: 'indigenous', nurseing: 'nursing', engeneering: 'engineering', enginering: 'engineering',
+  // From the search_empty log, Jul to Sep 2026. Most are also caught by
+  // correctQuery below; these stay so the match needs no second pass.
+  voley: 'volleyball', vollybal: 'volleyball', vollyballl: 'volleyball', vollyball: 'volleyball', volleybal: 'volleyball',
+  medicne: 'medicine', medecine: 'medicine', involvment: 'involvement',
+  reveled: 'revealed', reveiled: 'revealed', reviled: 'revealed', revieled: 'revealed',
 }
 
 /** What the search box produces: one line, no separators of its own. */
@@ -112,4 +117,68 @@ export function programSearchBlob(
   p: { name?: string | null; provider?: string | null; description?: string | null; category?: string | null },
 ): string {
   return buildSearchBlob([p.name, p.provider, p.description, p.category]);
+}
+
+/** Edit distance with adjacent swaps (Damerau, optimal string alignment). */
+function editDistance(a: string, b: string, max: number): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev2: number[] = [];
+  let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    let rowMin = i;
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      let v = Math.min(prev[j]! + 1, cur[j - 1]! + 1, prev[j - 1]! + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, prev2[j - 2]! + 1);
+      cur.push(v);
+      if (v < rowMin) rowMin = v;
+    }
+    if (rowMin > max) return max + 1;
+    prev2 = prev;
+    prev = cur;
+  }
+  return prev[b.length]!;
+}
+
+/**
+ * The query a student most likely meant, when what they typed finds nothing.
+ *
+ * Each word that appears nowhere in `vocab` is swapped for the closest word
+ * that does: one edit for words up to six letters, two for longer ones, and
+ * never for words under four letters or with digits, where one edit is a
+ * different word ("rvs", "3p"), and only for a word with the same first
+ * letter. Words that already match are kept. Returns
+ * null unless every word ends up matching, so a half-fixed query never
+ * stands in for the student's. The caller only asks after the search as
+ * typed came back empty, which is what keeps this from turning a real name
+ * the site does not carry into some other listing.
+ */
+export function correctQuery(ql: string, vocab: Iterable<string>): string | null {
+  const words = ql.split(' ').filter(Boolean);
+  if (words.length === 0) return null;
+  const tokens = [...new Set(vocab)];
+  let changed = false;
+  const out: string[] = [];
+  for (const w of words) {
+    if (tokens.some(t => t.includes(w))) { out.push(w); continue; }
+    if (w.length < 4 || /\d/.test(w)) return null;
+    const max = w.length <= 6 ? 1 : 2;
+    let best: string | null = null;
+    let bestD = max + 1;
+    for (const t of tokens) {
+      // Same first letter: a typo almost never starts the word wrong, and
+      // without this "camera" became "pamela" and "hocky" became "rocky".
+      if (t[0] !== w[0] || t.length < 4 || /\d/.test(t)) continue;
+      const d = editDistance(w, t, max);
+      if (d < bestD || (d === bestD && best !== null && Math.abs(t.length - w.length) < Math.abs(best.length - w.length))) {
+        best = t;
+        bestD = d;
+      }
+    }
+    if (best === null) return null;
+    out.push(best);
+    changed = true;
+  }
+  return changed ? out.join(' ') : null;
 }
