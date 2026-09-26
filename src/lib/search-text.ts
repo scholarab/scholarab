@@ -17,7 +17,8 @@
 export const SEARCH_SEP = '\n';
 
 /**
- * Lowercase, drop apostrophes, and reduce every other separator to a space.
+ * Lowercase, drop accents and apostrophes, and reduce every other separator
+ * to a space.
  *
  * Apostrophes close up rather than split (`mcdonald's` to `mcdonalds`) so a
  * student who skips the punctuation still lands on the award. Everything else
@@ -27,6 +28,10 @@ export const SEARCH_SEP = '\n';
 export function normalizeSearchText(input: string): string {
   return input
     .toLowerCase()
+    // Accents fold away, so "metis" finds the Métis awards (4 listings as
+    // typed, 18 with the accent, 2026-09-26) and "ecole" finds "École".
+    .normalize('NFD')
+    .replace(/\p{M}+/gu, '')
     .replace(/['‘’ʼ`]/g, '')
     .replace(/[^\p{L}\p{N}\n]+/gu, ' ')
     .split(SEARCH_SEP)

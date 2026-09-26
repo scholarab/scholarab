@@ -106,6 +106,16 @@ describe('misspellings', () => {
   })
 })
 
+describe('accents', () => {
+  it('matches with or without them, both ways', () => {
+    const blob = scholarshipSearchBlob({ title: 'Métis Scholar Award', audience: 'École secondaire students' })
+    expect(blob.includes(normalizeSearchQuery('metis'))).toBe(true)
+    expect(blob.includes(normalizeSearchQuery('Métis'))).toBe(true)
+    expect(blob.includes(normalizeSearchQuery('ecole'))).toBe(true)
+    expect(normalizeSearchText('Montréal-Nord')).toBe('montreal nord')
+  })
+})
+
 describe('correctQuery', () => {
   const vocab = ['volleyball', 'medicine', 'hockey', 'rocky', 'mountain', 'cameron', 'nursing', 'community', 'involvement', 'kiwanis']
 
