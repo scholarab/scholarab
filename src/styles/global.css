@@ -1042,11 +1042,15 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-save {
   font-family: var(--font-body); font-size: 15px; background: none;
   border: 0; border-radius: 8px;
-  width: 34px; height: 34px; cursor: pointer; color: rgba(20, 25, 21, 0.68);
+  min-width: 34px; height: 34px; padding: 0 8px; gap: 6px; cursor: pointer; color: rgba(20, 25, 21, 0.68);
   display: inline-grid; place-items: center;
   display: inline-flex; align-items: center; justify-content: center;
 }
 .sabl-save:hover { background: rgba(20,25,21,0.06); color: var(--text-primary); }
+/* Worded since 2026-09-26: the bare bookmark read as decoration (about 5
+   saves per 100 views). Same size and weight as the Apply link beside it. */
+.sabl-save-label { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.sabl-save.on .sabl-save-label { color: var(--green); }
 .sabl-save.on { color: var(--green); background: rgba(47,211,160,0.15); }
 /* The bookmark is drawn, not a ☆ character standing in for an icon set. Saved
    fills it; unsaved leaves it open. */
@@ -1353,7 +1357,7 @@ html:not(.js) .sabl-more { display: none; }
   .sabl-search input { min-height: 44px; }
   /* The two controls on every card: the save star at 34px and the Details
      link, which is text with an underline and was 25px tall. */
-  .sabl-save { width: 44px; height: 44px; }
+  .sabl-save { min-width: 44px; height: 44px; }
   .sabl-apply { display: inline-flex; align-items: center; min-height: 44px; }
   /* SORT was the one control row that still wrapped, so three chips took two
      lines and sat at a different rhythm from the three scrolling rows directly

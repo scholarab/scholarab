@@ -315,7 +315,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
                 data-name={p.name}
                 aria-label={`Save ${p.name}`}
                 aria-pressed="false"
-              ><Fragment set:html={BOOKMARK_REF} /></button>
+              ><Fragment set:html={BOOKMARK_REF} /><span class="sabl-save-label" data-save-label>Save</span></button>
               <a href={`/programs/${slug}/`} class="sabl-apply">Details<Fragment set:html={ARROW_REF} /></a>
           </div>
         </div>

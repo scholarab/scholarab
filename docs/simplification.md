@@ -614,3 +614,7 @@ September had about 4.7 saves per 100 listing views once two bulk sessions are s
 ## Admin analytics: where saves happen, 2026-09-26
 
 The save place recorded since 246d46c was only readable by querying the database. The admin page now groups saves by `meta` in one more query in the existing batch and shows Listing page / Directory row / Quiz results with each share and the period's saves per 100 views, under the daily chart and on the same month tabs. Saves from before the field show as "Not recorded" and only when a period has them. No new endpoint or table. Add-back fraction: 0.
+
+## Save button worded on directory rows and quiz results, 2026-09-26
+
+246d46c worded only the listing-page button; every directory row and quiz result still had the bare bookmark (Ilia's screenshot). Rows and quiz results now read "Save" / "Saved" beside the icon, in the Apply link's size and weight, updated by the existing state setter. The button went from a fixed 34px square to a 34px minimum with padding; row heights and the 44px phone tap target are unchanged. Measured on the build: label on one line in Grid, List, Columns and Gallery at 1440px and on phone rows at 375px, no overflow. Add-back fraction: 0.

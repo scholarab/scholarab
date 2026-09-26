@@ -625,6 +625,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                       className={`sabl-save${savedIds.has(s.id) ? ' on' : ''}`}
                     >
                       <span className="sabm-save-ico" dangerouslySetInnerHTML={{ __html: BOOKMARK }} />
+                      <span className="sabl-save-label">{savedIds.has(s.id) ? 'Saved' : 'Save'}</span>
                     </button>
                     {(() => {
                       // The directory row's rule (list-core rowAction): Apply to
@@ -691,6 +692,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     className={`sabl-save${savedProgramIds.has(p.id) ? ' on' : ''}`}
                   >
                     <span className="sabm-save-ico" dangerouslySetInnerHTML={{ __html: BOOKMARK }} />
+                    <span className="sabl-save-label">{savedProgramIds.has(p.id) ? 'Saved' : 'Save'}</span>
                   </button>
                   <a
                     href={p.url}

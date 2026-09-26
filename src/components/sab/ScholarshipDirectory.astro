@@ -364,7 +364,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
                 data-name={s.title}
                 aria-label={`Save ${s.title}`}
                 aria-pressed="false"
-              ><Fragment set:html={BOOKMARK_REF} /></button>
+              ><Fragment set:html={BOOKMARK_REF} /><span class="sabl-save-label" data-save-label>Save</span></button>
               {(() => {
                 const act = rowAction(canApply, s.url, `/scholarships/${s._slug ?? generateSlug(s.title)}/`, s.title);
                 return act.external

@@ -219,6 +219,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // characters, which is what the admin list and any future caller use.
     btn.classList.toggle('on', saved);
     if (!btn.querySelector('svg')) btn.textContent = saved ? '★' : '☆';
+    const label = btn.querySelector('[data-save-label]');
+    if (label) label.textContent = saved ? 'Saved' : 'Save';
     btn.setAttribute('aria-pressed', String(saved));
     btn.setAttribute('aria-label', config.saveLabel(btn.dataset.name ?? '', saved));
   }
