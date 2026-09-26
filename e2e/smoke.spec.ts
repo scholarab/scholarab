@@ -373,3 +373,23 @@ test('How it works walks through five steps and ends on the quiz', async ({ page
   await page.keyboard.press('Escape');
   await expect(dialog).toBeHidden();
 });
+
+test('How it works opens by itself once, on the first visit only', async ({ page }) => {
+  // Real browsers only: automation is excluded, so pose as one here.
+  await page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }))
+  await page.goto('/scholarships/')
+  const dialog = page.locator('dialog[data-tour]')
+  await expect(dialog).toBeVisible({ timeout: 5_000 })
+  await page.keyboard.press('Escape')
+  await expect(dialog).toBeHidden()
+  await page.goto('/programs/')
+  await page.waitForTimeout(2_000)
+  await expect(dialog).toBeHidden()
+});
+
+test('How it works does not interrupt the quiz', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }))
+  await page.goto('/match/')
+  await page.waitForTimeout(2_000)
+  await expect(page.locator('dialog[data-tour]')).toBeHidden()
+});

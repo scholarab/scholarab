@@ -317,6 +317,13 @@ describe('POST /api/event', () => {
     expect(mockValues).toHaveBeenCalledWith({ event: 'tour_finish', itemType: null, itemId: null, meta: null })
   })
 
+  it('records how the walkthrough was opened, from a fixed list', async () => {
+    expect((await call({ event: 'tour_open', meta: 'auto' })).status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_open', itemType: null, itemId: null, meta: 'auto' })
+    expect((await call({ event: 'tour_open', meta: 'hello' })).status).toBe(400)
+    expect((await call({ event: 'tour_finish', meta: 'auto' })).status).toBe(400)
+  })
+
   it('returns 429 when rate limited', async () => {
     mockHitRateLimit.mockResolvedValue(true)
     const res = await call({ event: 'quiz_complete' })

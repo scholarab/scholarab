@@ -16,6 +16,8 @@ const ALLOWED_SOURCES = new Set(['ig', 'tt', 'yt', 'em', 'qr'])
 // Where a save was made: the listing page, a directory row, or quiz results.
 // Added 2026-09-26 to learn which save button students actually use.
 const SAVE_FROM = new Set(['page', 'row', 'quiz'])
+// How the walkthrough was opened: by itself on a first visit, or the button.
+const TOUR_FROM = new Set(['auto', 'button'])
 // Real browser UAs never contain a URL, a script-runtime name, or an HTTP
 // library name; bots and fetch libraries almost always do. JS-executing
 // crawlers (Googlebot, Bytespider) all match one of the generic terms.
@@ -84,8 +86,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
   if ((itemType === undefined) !== (itemId === undefined))
     return jsonError('itemType and itemId must be sent together', 400)
   // meta carries the query text for search_empty, the source code for
-  // source_visit and the place for save; nothing else takes a meta at all
-  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save'])
+  // source_visit, the place for save and how tour_open was opened; nothing
+  // else takes a meta at all
+  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save', 'tour_open'])
   if (meta !== undefined && (!META_EVENTS.has(event) || typeof meta !== 'string'))
     return jsonError('meta not allowed for this event', 400)
 
@@ -96,6 +99,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (typeof meta !== 'string' || !ALLOWED_SOURCES.has(meta))
       return jsonError('unknown source', 400)
     cleanMeta = meta
+  } else if (event === 'tour_open') {
+    if (meta !== undefined) {
+      if (!TOUR_FROM.has(meta as string)) return jsonError('unknown tour opening', 400)
+      cleanMeta = meta as string
+    }
   } else if (event === 'save') {
     // Optional, since pages cached before the field existed send none
     if (meta !== undefined) {

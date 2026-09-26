@@ -1,6 +1,7 @@
 ---
 // "How it works": a five-step walkthrough of what the site does, opened from
-// the header (Ilia, 2026-09-26, after polymarket.com's). First-time visitors
+// the header (Ilia, 2026-09-26, after polymarket.com's), and by itself once
+// on a browser's first visit. First-time visitors
 // saw a directory and did not know it also saves, builds a shortlist, keeps a
 // calendar and emails before deadlines. One native <dialog>, closed until
 // asked for, so it costs no layout and no script until the button is used.
@@ -299,18 +300,44 @@ const STEPS = 5;
 
   const current = (d: HTMLDialogElement) => Number(d.dataset.step || '1');
 
+  // Once per browser, on the first visit (Ilia, 2026-09-26). Opening it by
+  // hand counts too, so nobody is shown it twice.
+  const SEEN = 'sa_tour_seen';
+
+  function open(dialog: HTMLDialogElement, from: 'auto' | 'button') {
+    // The phone menu is a full-screen sheet; close it under the dialog.
+    document.querySelector<HTMLElement>('#sabh-burger[aria-expanded="true"]')?.click();
+    show(dialog, 1);
+    dialog.showModal();
+    dialog.querySelector<HTMLElement>('[data-tour-next]')?.focus();
+    try { localStorage.setItem(SEEN, '1'); } catch { /* shown this once regardless */ }
+    sendEvent('tour_open', undefined, undefined, from);
+  }
+
+  function autoOpen() {
+    // Storage that cannot be read would mean opening on every page, so a
+    // browser we cannot remember is never shown it unasked.
+    try { if (localStorage.getItem(SEEN)) return; } catch { return; }
+    // Automated browsers (tests, crawlers that run scripts), and the quiz,
+    // where a student who came for it is already doing the thing step 2 sells.
+    if (navigator.webdriver || location.pathname.startsWith('/match')) return;
+    const path = location.pathname;
+    // A beat after the page is up, so the student sees where they landed.
+    setTimeout(() => {
+      const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
+      if (!dialog || location.pathname !== path || document.querySelector('dialog[open]')) return;
+      open(dialog, 'auto');
+    }, 1200);
+  }
+  document.addEventListener('astro:page-load', autoOpen);
+
   document.addEventListener('click', e => {
     const t = e.target as Element;
     const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
     if (!dialog) return;
     if (t.closest('[data-tour-open]')) {
       e.preventDefault();
-      // The phone menu is a full-screen sheet; close it under the dialog.
-      document.querySelector<HTMLElement>('#sabh-burger[aria-expanded="true"]')?.click();
-      show(dialog, 1);
-      dialog.showModal();
-      dialog.querySelector<HTMLElement>('[data-tour-next]')?.focus();
-      sendEvent('tour_open');
+      open(dialog, 'button');
       return;
     }
     if (!dialog.open) return;
