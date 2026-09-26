@@ -105,13 +105,13 @@ const MENUS: Record<string, { label: string; tiles: Tile[]; links: { label: stri
 const navItems = [
   { label: 'Scholarships', href: '/scholarships/', count: scholarshipCount },
   { label: 'Programs', href: '/programs/', count: programCount },
+  // In the bar on every width since 2026-09-26: on desktop they were only
+  // inside the dropdowns, so the phone and desktop menus disagreed.
+  { label: 'Deadlines', href: '/deadlines/', count: null as number | null },
   { label: 'Find my scholarships', href: '/match/', count: null as number | null },
   { label: 'Saved', href: '/saved/', count: null as number | null },
+  { label: 'Guides', href: '/guides/', count: null as number | null },
   { label: 'About', href: '/about/', count: null as number | null },
-  // Phone sheet only: the desktop bar reaches these through the dropdowns,
-  // the phone sheet had no route to them at all (critique 2026-09-23).
-  { label: 'Deadlines', href: '/deadlines/', count: null as number | null, mobileOnly: true },
-  { label: 'Guides', href: '/guides/', count: null as number | null, mobileOnly: true },
 ];
 
 // Compare with a normalized trailing slash on both sides. The nav hrefs carry
@@ -148,7 +148,7 @@ const isActive = (href: string) =>
             page must still read as leaving the menu. */}
         <span class="sabh-scrim" aria-hidden="true"></span>
         {navItems.map(n => (
-          <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}${'mobileOnly' in n ? ' sabh-item-mobile' : ''}`}>
+          <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
             <a
               href={n.href}
               class={`sabh-link${isActive(n.href) ? ' sabh-link-active' : ''}`}
@@ -403,6 +403,16 @@ const isActive = (href: string) =>
      click without an underline or a colour accent. */
   .sabh-link:hover { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
   .sabh-link-active { color: #EEF1EC; }
+  /* Seven links since Deadlines and Guides joined the bar (2026-09-26): one
+     line each, and between the phone sheet and 1100px the icons give way;
+     the footer carries the same three. */
+  @media (min-width: 901px) {
+    .sabh-link { white-space: nowrap; }
+  }
+  @media (min-width: 901px) and (max-width: 1100px) {
+    .sabh-link { padding: 8px 11px; }
+    .sabh-social { display: none; }
+  }
   /* Positioned against .sabh-nav like the dropdowns, never against
      .sabh-links: making the link row a containing block shrinks every panel
      to the row's width. The link's own pill is the no-JS fallback; with the glide running, the
@@ -425,7 +435,7 @@ const isActive = (href: string) =>
   }
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
-  .sabh-sheet-label, .sabh-link-count, .sabh-sub-back, .sabh-item-mobile { display: none; }
+  .sabh-sheet-label, .sabh-link-count, .sabh-sub-back { display: none; }
   /* Clipped to nothing until it has keyboard focus, then a small chevron
      beside its link. Never shown to the pointer, which has hover. */
   .sabh-menu-toggle {
@@ -539,7 +549,6 @@ const isActive = (href: string) =>
 
     /* A rule under the bar, no "GO TO" eyebrow (critique 2026-09-23). */
     .sabh-sheet-label { display: block; padding-top: 6px; border-top: 1px solid rgba(238, 241, 236,0.18); }
-    .sabh-item-mobile { display: block; }
     .sabh-link {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       min-height: 56px; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;

@@ -3,7 +3,7 @@ import {
   getScholarshipStatus, getProgramStatus, programMatchesGrade,
   filterSortScholarships, filterSortPrograms, scholarshipWhen, programWhen,
   whenTier, URGENT_DAYS, SOON_DAYS, groupRuns, directoryCountLine,
-  scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS,
+  scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS, isAfterHighSchool,
 } from './list-core'
 import type { ScholarshipWithMeta, ProgramWithMeta, ScholarshipFilterState, ProgramFilterState } from './list-core'
 import { SCHOLARSHIP_FACETS } from './facets'
@@ -522,6 +522,7 @@ describe('the directory group keys match the sort order', () => {
       makeScholarship({ id: 2, deadline: '2026-05-01', _deadline_ms: new Date('2026-05-01T00:00:00').getTime(), _amount: 500 }),
       makeScholarship({ id: 3, openDate: '2026-09-01', deadline: '2026-12-01', _open_ms: new Date('2026-09-01T00:00:00').getTime(), _deadline_ms: new Date('2026-12-01T00:00:00').getTime(), _amount: 20000 }),
       makeScholarship({ id: 4, deadline: null, _deadline_ms: 0, _amount: 0 }),
+      makeScholarship({ id: 5, deadline: '2026-02-01', _deadline_ms: new Date('2026-02-01T00:00:00').getTime(), _amount: 50000, _after: true }),
     ]
     for (const sortBy of ['closest_due', 'highest_pay', 'lowest_pay'] as const) {
       const sorted = filterSortScholarships(items, {
@@ -529,7 +530,14 @@ describe('the directory group keys match the sort order', () => {
       })
       const runs = groupRuns(sorted, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS)
       expect(new Set(runs.map(r => r.key)).size, `"${sortBy}" split a group`).toBe(runs.length)
+      expect(runs.at(-1)!.key, `"${sortBy}" did not put after-high-school last`).toBe('after')
     }
+  })
+
+  it('reads after-high-school from the grades when the flag is absent', () => {
+    expect(isAfterHighSchool(makeScholarship({ id: 1, eligibility: { grades: ['post-secondary'] } as never }))).toBe(true)
+    expect(isAfterHighSchool(makeScholarship({ id: 2, eligibility: { grades: ['12', 'post-secondary'] } as never }))).toBe(false)
+    expect(isAfterHighSchool(makeScholarship({ id: 3, eligibility: { grades: [] } as never }))).toBe(false)
   })
 
   it('keeps closed programs in one run under every sort', () => {

@@ -4,7 +4,7 @@
 // them and recomputes the clock-dependent bits on load, so no React ships.
 import { STATUS_WORDS, canApplyNow, openLaterNote } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
@@ -155,7 +155,7 @@ if (showGroups) {
   for (const r of runs) { headerAt.set(at, r); at += r.count; }
 }
 const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length;
-const laterNote = openLaterNote(initial.map(s => ({ status: getScholarshipStatus(s), openDate: s.openDate })));
+const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s => ({ status: getScholarshipStatus(s), openDate: s.openDate })));
 ---
 
 <Fragment set:html={ICON_SPRITE} />
@@ -323,7 +323,8 @@ const laterNote = openLaterNote(initial.map(s => ({ status: getScholarshipStatus
           class="sabl-card"
           data-dir-card
           data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
-          data-dir-shut={SHUT_GROUPS.has(status) ? '' : undefined}
+          data-dir-shut={SHUT_GROUPS.has(scholarshipGroupKey(s)) ? '' : undefined}
+          data-after={isAfterHighSchool(s) ? '' : undefined}
           data-id={s.id}
           data-name={s.title}
           data-category={s.category ?? undefined}
@@ -459,6 +460,7 @@ const laterNote = openLaterNote(initial.map(s => ({ status: getScholarshipStatus
         // cycles" and the client repaints the server's CLOSED chip as OPENING SOON.
         concluded: d.concluded !== undefined,
         deadlineEstimated: d.estimated !== undefined,
+        _after: d.after !== undefined,
         scopes: d.scopes ? d.scopes.split(' ') : [],
       };
     },

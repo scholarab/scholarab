@@ -44,6 +44,8 @@ interface Props {
   facetHref?: string | null;
   facetLabel?: string | null;
   facts: Fact[];
+  /** Hard requirements ("88% average"), beside the deadline and above Apply. */
+  needs?: string[];
   eligibility: string | null;
   about: string | null;
   notes?: string | null;
@@ -71,7 +73,7 @@ const {
   itemType, itemId, typeLabel, name, subline,
   status, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, dueLong, opensLabel,
   backHref, backLabel, facetHref = null, facetLabel = null,
-  facts, eligibility, about, notes, steps,
+  facts, needs = [], eligibility, about, notes, steps,
   valueLabel, valueBig, valueNote, checkedLabel = null, valueQuiet = false,
   ctaLabel, url, canRemind, canonical, guideHref, guideTitle,
   alternatives = [], alternativesHref = backHref,
@@ -152,6 +154,15 @@ const chip =
       <span class="sabd-mono sabd-deadline-label">DEADLINE</span>
       <span class="sabd-deadline-value">{estimated ? `Around ${dueLong}` : dueLong}</span>
     </div>
+    {/* The bar a student has to clear, above the button: on a phone Apply
+        came before Who can apply, and Loran's 88% sat in the About prose
+        (critique 2026-09-26). */}
+    {needs.length > 0 && (
+      <div class="sabd-deadline-row sabd-needs-row">
+        <span class="sabd-mono sabd-deadline-label">NEEDS</span>
+        <span class="sabd-needs-value">{needs.join(' · ')}</span>
+      </div>
+    )}
     {/* Beside the deadline, at reading size: the check is what the site is
         for, and at the foot of the card in 12.5px grey nobody saw it. */}
     {checkedLabel && (
@@ -454,6 +465,9 @@ const chip =
   }
   .sabd-deadline-label { font-size: 12px; color: rgba(20, 25, 21, 0.68); }
   .sabd-deadline-value { font-size: 15px; font-weight: 700; }
+  /* Same rule as the deadline, tighter to it: one block of facts. */
+  .sabd-needs-row { margin-top: 12px; padding-top: 12px; }
+  .sabd-needs-value { font-size: 15px; font-weight: 700; text-align: right; }
   .sabd-checked { margin: 10px 0 0; font-size: 14.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.8); }
   .sabd-estimate-note { margin: 10px 0 0; font-size: 13.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.72); }
   .sabd-alts { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid rgba(20,25,21,0.12); }

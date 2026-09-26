@@ -37,7 +37,11 @@ vi.mock('../lib/events.ts', () => ({ sendEvent: mockSendEvent }))
 
 // matchPrograms (plural) is what the component actually imports; a mock named
 // matchProgram would leave it undefined and crash any program-results path.
-vi.mock('../lib/eligibility-matcher', () => ({ matchAll: mockMatchAll, matchPrograms: mockMatchPrograms, isRestrictedCheck: (c: string) => c !== 'Based on financial need' }))
+// isRestrictedCheck is the real one, so the test cannot keep an old rule.
+vi.mock('../lib/eligibility-matcher', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../lib/eligibility-matcher')>()),
+  matchAll: mockMatchAll, matchPrograms: mockMatchPrograms,
+}))
 // Programs use the separate saved-programs key; mock both pairs or the
 // component's useState initialiser calls undefined and every render crashes.
 vi.mock('../lib/tracker.ts',          () => ({
@@ -331,6 +335,43 @@ describe('Results', () => {
     expect(text.indexOf('Opens later, best fit first')).toBeLessThan(text.indexOf('Opens Later Award'))
   })
 
+  // Critique 2026-09-26: Loran, due in 19 days, sat below spring awards.
+  it('puts open awards due within 30 days first, whatever their fit', () => {
+    const soonIso = new Date(Date.now() + 10 * 86_400_000).toISOString().slice(0, 10)
+    const far = makeScholarship({ id: 1, title: 'Far Award', deadline: '2099-05-30' })
+    const soon = makeScholarship({ id: 2, title: 'Soon Award', deadline: soonIso })
+    mockMatchAll.mockReturnValue([
+      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] },
+      { id: 2, tier: 'possible' as ConfidenceTier, confidence: 0.2, signals: [], checks: [] },
+    ])
+    render(<EligibilityQuiz scholarships={[far as any, soon as any]} programs={[]} />)
+    advanceToResults()
+    const text = document.querySelector('.sabm-table')!.textContent!
+    expect(text.indexOf('Due in the next 30 days, biggest first')).toBeLessThan(text.indexOf('Soon Award'))
+    expect(text.indexOf('Soon Award')).toBeLessThan(text.indexOf('Open now, best fit first'))
+    expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Far Award'))
+  })
+
+  it('orders the due-soon group biggest first and leaves restricted awards in their fit order', () => {
+    const soonIso = new Date(Date.now() + 10 * 86_400_000).toISOString().slice(0, 10)
+    const small = makeScholarship({ id: 1, title: 'Small Soon', amount: '$500', deadline: soonIso })
+    const big = makeScholarship({ id: 2, title: 'Big Soon', amount: '~$150,000', deadline: soonIso })
+    const gated = makeScholarship({ id: 3, title: 'Gated Soon', amount: '$40,000', deadline: soonIso })
+    const far = makeScholarship({ id: 4, title: 'Far Award', deadline: '2099-05-30' })
+    mockMatchAll.mockReturnValue([
+      { id: 1, tier: 'good' as ConfidenceTier, confidence: 0.5, signals: [], checks: [] },
+      { id: 2, tier: 'good' as ConfidenceTier, confidence: 0.45, signals: [], checks: ['Needs an average of 88%'] },
+      { id: 3, tier: 'good' as ConfidenceTier, confidence: 0.6, signals: [], checks: ['Youth in care only'] },
+      { id: 4, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] },
+    ])
+    render(<EligibilityQuiz scholarships={[small, big, gated, far] as any[]} programs={[]} />)
+    advanceToResults()
+    const text = document.querySelector('.sabm-table')!.textContent!
+    expect(text.indexOf('Big Soon')).toBeLessThan(text.indexOf('Small Soon'))
+    expect(text.indexOf('Small Soon')).toBeLessThan(text.indexOf('Open now, best fit first'))
+    expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Gated Soon'))
+  })
+
   it('saves every strong match in one tap', () => {
     const s1 = makeScholarship({ id: 1, title: 'Strong One' })
     const s2 = makeScholarship({ id: 2, title: 'Strong Two' })
@@ -435,18 +476,23 @@ describe('Results', () => {
     expect(screen.getByText('Possible match')).toBeTruthy()
   })
 
-  it('shows an unasked requirement instead of a match label', () => {
+  // The tier stays beside the check, so "N strong matches" counts rows that
+  // say Strong (critique 2026-09-26). capTier keeps a restricted award below
+  // Strong, so the pair never reads as a promise.
+  it('shows an unasked requirement beside the match label', () => {
     const s1 = makeScholarship({ id: 1 })
     const s2 = makeScholarship({ id: 2 })
     mockMatchAll.mockReturnValue([
-      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: ['Indigenous students only'] },
-      { id: 2, tier: 'good' as ConfidenceTier, confidence: 0.5, signals: [], checks: [] },
+      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: ['Based on financial need'] },
+      { id: 2, tier: 'good' as ConfidenceTier, confidence: 0.5, signals: [], checks: ['Indigenous students only'] },
     ])
     render(<EligibilityQuiz scholarships={[s1 as any, s2 as any]} programs={[]} />)
     advanceToResults()
+    expect(screen.getByText('Check: Based on financial need')).toBeTruthy()
     expect(screen.getByText('Check: Indigenous students only')).toBeTruthy()
-    expect(screen.queryByText('Strong match')).toBeNull()
+    expect(screen.getByText('Strong match')).toBeTruthy()
     expect(screen.getByText('Good match')).toBeTruthy()
+    expect(screen.getByText('1 strong match')).toBeTruthy()
   })
 
   it('never says the student qualifies', () => {

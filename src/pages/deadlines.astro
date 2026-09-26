@@ -21,6 +21,7 @@ import { generateSlug, getToday } from '../lib/utils';
 import { STATUS_WORDS, scholarshipStatusOf, programIsListed } from '../lib/status';
 import { formatListingDate } from '../lib/meta';
 import { itemListJson } from '../lib/ld';
+import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../lib/facets';
 
 const today = getToday();
 const todayMs = today.getTime();
@@ -45,7 +46,23 @@ interface Row {
   state: string;
   /** True for "you can apply to this today", which is the only row a student can act on now. */
   open: boolean;
+  /** The towns a local award is limited to ('-' for a town with no hub);
+   *  absent for province-wide, national and program rows, which every
+   *  reader can apply to. */
+  places?: string;
 }
+
+// ── Where you live ──────────────────────────────────────────────────────────
+// The calendar had no way to drop the awards tied to other towns, so a Calgary
+// student read Red Deer and Lacombe deadlines to find their own (critique
+// 2026-09-26). The towns are the directory's hubs, by the hubs' own test.
+const townFacets = SCHOLARSHIP_FACETS
+  .filter(f => f.kind === 'region' && !f.broad && facetItems(f, scholarships).length >= MIN_FACET_ITEMS)
+  .sort((a, b) => a.label.localeCompare(b.label));
+const broadRegions = new Set(SCHOLARSHIP_FACETS.filter(f => f.broad).flatMap(f => [f.value, ...(f.extraValues ?? [])]));
+const placesOf = (s: (typeof scholarships)[number]) =>
+  !s.region || broadRegions.has(s.region) ? undefined
+    : townFacets.filter(f => facetMatches(f, s)).map(f => f.slug).join(' ') || '-';
 
 // ── What earns a place on the calendar ──────────────────────────────────────
 //
@@ -77,6 +94,7 @@ const scholarshipRows: Row[] = scholarships
           ? `Opens ${formatListingDate(s.openDate)}`
           : STATUS_WORDS.future,
       open: status === 'active',
+      places: placesOf(s),
     };
   });
 
@@ -213,20 +231,29 @@ const breadcrumbJson = {
               Every dated scholarship and program deadline, soonest first. {span ? `${span}.` : ''}
               Dates can move, so check the provider's page before you plan around one.
             </p>
-            <p class="sabcal-stats">
+            <p class="sabcal-stats" data-cal-stats>
               {`${rows.length.toLocaleString('en-CA')} dated deadlines (${scholarshipRows.length.toLocaleString('en-CA')} scholarships, ${programRows.length.toLocaleString('en-CA')} programs) across ${months.length} months, ${openNow.toLocaleString('en-CA')} of them open to apply today.`}
             </p>
+            {/* Only with scripts (html.js is set before first paint, so the
+                page never shifts): without them the picker does nothing. */}
+            <label class="sabcal-where">
+              <span>Where you live</span>
+              <select data-cal-where>
+                <option value="">Anywhere</option>
+                {townFacets.map(f => <option value={f.slug}>{f.label}</option>)}
+              </select>
+            </label>
           </header>
 
           <nav class="sabcal-jump" aria-label="Jump to a month">
             {thisWeek.length > 0 && (
-              <a href="#this-week" class="sabcal-chip sabcal-chip-week">
+              <a href="#this-week" class="sabcal-chip sabcal-chip-week" data-cal-chip="this-week">
                 <span class="sabcal-chip-m">This week</span>
                 <span class="sabcal-chip-n tnum">{thisWeek.length}</span>
               </a>
             )}
             {months.map(m => (
-              <a href={`#${m.key}`} class="sabcal-chip">
+              <a href={`#${m.key}`} class="sabcal-chip" data-cal-chip={m.key}>
                 <span class="sabcal-chip-m">{m.short}</span>
                 <span class="sabcal-chip-n tnum">{m.items.length}</span>
               </a>
@@ -237,11 +264,11 @@ const breadcrumbJson = {
             <section class="sabcal-month sabcal-week" id="this-week" aria-labelledby="this-week-h">
               <div class="sabcal-month-head">
                 <h2 class="sabcal-h2" id="this-week-h">Due this week</h2>
-                <span class="sabcal-month-count">{`${thisWeek.length} ${thisWeek.length === 1 ? 'deadline' : 'deadlines'}`}</span>
+                <span class="sabcal-month-count" data-cal-count>{`${thisWeek.length} ${thisWeek.length === 1 ? 'deadline' : 'deadlines'}`}</span>
               </div>
               <ol class="sabcal-rows">
                 {thisWeek.map(r => (
-                  <li class="sabcal-row" data-deadline={r.deadline}>
+                  <li class="sabcal-row" data-deadline={r.deadline} data-places={r.places} data-open={r.open ? '' : undefined}>
                     <span class="sabl-mono sabcal-day sabcal-day-md tnum">{monthDayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>
@@ -264,18 +291,18 @@ const breadcrumbJson = {
             <details class="sabcal-month" id={m.key} open={i < 2}>
               <summary class="sabcal-month-head">
                 <h2 class="sabcal-h2">{m.name}</h2>
-                <span class="sabcal-month-count">
+                <span class="sabcal-month-count" data-cal-count>
                   {`${m.items.length} ${m.items.length === 1 ? 'deadline' : 'deadlines'}${m.openCount > 0 ? `, ${m.openCount} open now` : ''}`}
                 </span>
               </summary>
               {m.items.some(r => inWeek.has(r)) && (
-                <p class="sabcal-above">
+                <p class="sabcal-above" data-cal-above>
                   {(n => `${n} due this week ${n === 1 ? 'is' : 'are'} listed above.`)(m.items.filter(r => inWeek.has(r)).length)}
                 </p>
               )}
               <ol class="sabcal-rows">
                 {m.items.filter(r => !inWeek.has(r)).map(r => (
-                  <li class="sabcal-row">
+                  <li class="sabcal-row" data-places={r.places} data-open={r.open ? '' : undefined}>
                     <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>
@@ -344,6 +371,68 @@ const breadcrumbJson = {
   }
   document.addEventListener('astro:page-load', pruneWeek);
   document.addEventListener('astro:page-load', openFromHash);
+
+  // Where you live: hide the awards limited to other towns, then recount every
+  // heading and chip from the rows left, so no number on the page counts a
+  // row the reader cannot see. The choice rides in ?where= so a link keeps it.
+  const plural = (n: number) => `${n} ${n === 1 ? 'deadline' : 'deadlines'}`;
+  function applyWhere(where: string) {
+    const root = document.getElementById('sab-deadlines');
+    if (!root) return;
+    root.querySelectorAll<HTMLElement>('li.sabcal-row').forEach(li => {
+      const places = li.dataset.places;
+      const out = !!where && places !== undefined && !places.split(' ').includes(where);
+      li.classList.toggle('is-elsewhere', out);
+    });
+    let total = 0, open = 0;
+    root.querySelectorAll<HTMLElement>('.sabcal-month').forEach(sec => {
+      const shown = [...sec.querySelectorAll<HTMLElement>('li.sabcal-row:not(.is-elsewhere)')];
+      const isWeek = sec.classList.contains('sabcal-week');
+      const key = isWeek ? 'this-week' : sec.id;
+      const weekHere = isWeek ? [] : [...root.querySelectorAll<HTMLElement>('.sabcal-week li.sabcal-row:not(.is-elsewhere)')]
+        .filter(li => li.dataset.deadline?.startsWith(key));
+      const n = shown.length + weekHere.length;
+      const o = [...shown, ...weekHere].filter(li => li.dataset.open !== undefined).length;
+      if (!isWeek) { total += n; open += o; }
+      const count = sec.querySelector('[data-cal-count]');
+      if (count) count.textContent = isWeek ? plural(shown.length) : `${plural(n)}${o > 0 ? `, ${o} open now` : ''}`;
+      const above = sec.querySelector<HTMLElement>('[data-cal-above]');
+      if (above) {
+        above.hidden = weekHere.length === 0;
+        above.textContent = `${weekHere.length} due this week ${weekHere.length === 1 ? 'is' : 'are'} listed above.`;
+      }
+      sec.hidden = n === 0;
+      const chip = root.querySelector<HTMLElement>(`[data-cal-chip="${key}"]`);
+      if (chip) {
+        chip.hidden = n === 0;
+        const num = chip.querySelector('.sabcal-chip-n');
+        if (num) num.textContent = String(n);
+      }
+    });
+    const stats = root.querySelector<HTMLElement>('[data-cal-stats]');
+    if (stats) {
+      stats.dataset.all ??= stats.textContent ?? '';
+      const select = root.querySelector<HTMLSelectElement>('[data-cal-where]');
+      const town = select?.selectedOptions[0]?.textContent ?? '';
+      stats.textContent = where
+        ? `${total.toLocaleString('en-CA')} deadlines for students in ${town}, counting province-wide and national awards and programs, ${open.toLocaleString('en-CA')} of them open to apply today.`
+        : stats.dataset.all;
+    }
+  }
+  function initWhere() {
+    const select = document.querySelector<HTMLSelectElement>('[data-cal-where]');
+    if (!select) return;
+    const fromUrl = new URLSearchParams(location.search).get('where') ?? '';
+    if ([...select.options].some(o => o.value === fromUrl)) select.value = fromUrl;
+    if (select.value) applyWhere(select.value);
+    select.addEventListener('change', () => {
+      const url = new URL(location.href);
+      if (select.value) url.searchParams.set('where', select.value); else url.searchParams.delete('where');
+      history.replaceState(history.state, '', url);
+      applyWhere(select.value);
+    });
+  }
+  document.addEventListener('astro:page-load', initWhere);
 </script>
 
 <style is:global>
@@ -368,7 +457,15 @@ const breadcrumbJson = {
     margin: 0 0 16px; text-wrap: balance; max-width: 24ch;
   }
   .sabcal-intro { font-size: 17px; line-height: 1.65; color: #454945; max-width: 62ch; margin: 0; }
-  .sabcal-stats { font-size: 15px; color: #5C5F5B; margin: 14px 0 0; }
+  .sabcal-stats { font-size: 15px; color: #5C5F5B; margin: 14px 0 0; max-width: 72ch; }
+  .sabcal-where { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font-size: 15px; font-weight: 600; color: #141915; }
+  html:not(.js) .sabcal-where { display: none; }
+  .sabcal-where select {
+    min-height: 44px; padding: 0 36px 0 16px; font: 500 16px var(--font-body); color: #141915;
+    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+  }
+  .sabcal-where select:hover { border-color: #141915; }
+  .sabcal-row.is-elsewhere, .sabcal-month[hidden], .sabcal-chip[hidden], .sabcal-above[hidden] { display: none; }
 
   /* The jump nav is the page's table of contents and its main internal link
      block; it sticks because the months below it are long. */

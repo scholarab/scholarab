@@ -577,3 +577,24 @@ Changed:
 Cost: the quiz note moves the first result from 822px to 887px on a 375px phone.
 
 Add-back fraction: 0.
+
+## After the 27/40 critique, 2026-09-26
+
+Ilia asked for one more full critique (27/40) and then all five findings. Measured on `dist/` at 375 and 1280; layout shift is 0 on every changed page at both widths.
+
+Removed:
+- the phone quiz results' eight wrapped answer chips (181px) as a block. They are one line that scrolls sideways (65px), and every chip still opens its question. The first result moved from 887px to 685px on a 375px phone.
+- the mobile-only header items. Deadlines and Guides are in the desktop bar too (seven links); between 901 and 1100px the three social icons give way, since the footer has them.
+- the mock copy of `isRestrictedCheck` in the quiz test; it now uses the real rule, which is how the old rule survived there.
+
+Changed:
+- matcher: an average band rejects only when its top is below the bar. "80 to 89%" is 85 in `averagePercent` and 89 in `averageTop` (`AVERAGE_BAND_TOP` in lib/quiz.ts), so a minimum of 86 to 89 keeps the award with "Check: Needs an average of 88%" instead of dropping it. Loran was invisible to every student in that band.
+- quiz results: open awards due within 30 days that the student is not excluded from lead the list, biggest first, up to three of the ten. For a Calgary Grade 12 at 80 to 89%, Loran is now row 1; it was absent.
+- quiz rows show the fit tier beside their Check notes, so "3 strong matches" counts three rows that say Strong. Before, a Check replaced the tier, and "5 strong" sat over two Strong rows.
+- 103 listings open only to post-secondary students (every grade `post-secondary`) sit in a shut "For after high school" section at the foot of every scholarship directory. Nothing was removed; Calgary has 6, Red Deer 43.
+- detail card: a NEEDS row (minimum average, grade outside 12, financial need) between the deadline and Apply. Loran's 88% was only in the About prose.
+- phone directory rows: the deadline sits under the amount, beside Save and Apply, instead of below them. Calgary hub 6,948px to 6,662px.
+- /scholarships: "Show more" sits under the last card it extends, above the shut sections, and keeps focus after a press. It was under three collapsed headers.
+- /deadlines: a "Where you live" picker (the directory's town hubs) hides awards tied to other towns and recounts every month, chip and the stats line. Province-wide, national and program rows always stay. Calgary shows 519 of 1,002; the choice is kept in `?where=`. Only shown with scripts, gated on `html.js` so the page never shifts.
+
+Add-back fraction: 0. One attempt was replaced before shipping: letting every due-soon "possible" match in added 21 rows, most of them awards the student could not apply to.

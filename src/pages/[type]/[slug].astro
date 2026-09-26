@@ -18,6 +18,7 @@ import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline, amountS
 import { STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
+import { eligibilityFacts } from '../../lib/eligibility-facts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
 
@@ -323,6 +324,7 @@ if (kind === 'scholarship') {
     // chip and the rail, AMOUNT is the 52px number in the rail. A facts table
     // that repeats the page teaches the reader to skip tables.
     facts: [],
+    needs: eligibilityFacts(s.eligibility),
     eligibility: s.audience,
     // About text mirrors the data description; scholarship.description exists
     // in the JSON but not in the Scholarship type, so read it defensively.
@@ -536,6 +538,7 @@ const breadcrumbJson = {
       backHref={d.currentPath}
       backLabel={`Back to ${d.breadcrumbName === 'Research Programs' ? 'Programs' : 'Scholarships'}`}
       facts={d.facts}
+      needs={"needs" in d ? d.needs : undefined}
       eligibility={d.eligibility}
       about={d.about}
       notes={d.notes}

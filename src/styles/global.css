@@ -1219,6 +1219,8 @@ html[data-view='gallery'] .sabl-pv { min-height: 340px; padding-top: 18px; }
   margin-top: 36px; padding: 26px 20px; text-align: center;
 }
 .sabl-more[hidden], .sabl-more-all[hidden] { display: none; }
+/* Inside the grid once the client places it under the last card shown. */
+[data-dir-grid] > .sabl-more { grid-column: 1 / -1; margin-top: 12px; }
 /* The first-step cut, before directory-client has run. html.js is set by an
    inline script in the layout's head, so without JavaScript nothing is cut
    and no button that cannot work is offered. The client clears
@@ -1299,12 +1301,15 @@ html:not(.js) .sabl-more { display: none; }
     grid-column: 1; grid-row: 2;
     justify-self: start; text-align: left; margin-top: 8px;
   }
-  .sabl-card-actions { grid-column: 2; grid-row: 2; margin-top: 8px; }
+  /* The deadline sits under the amount, beside the buttons: it was the last
+     line of the row, read after Apply (critique 2026-09-26). */
+  .sabl-card-actions { grid-column: 2; grid-row: 2 / span 2; margin-top: 8px; }
   .sabl-row-when {
-    grid-column: 1 / -1; grid-row: 3;
-    flex-direction: row; align-items: center; gap: 10px;
-    justify-self: start; margin-top: 8px;
+    grid-column: 1; grid-row: 3;
+    flex-direction: row; flex-wrap: wrap; align-items: center; gap: 2px 10px;
+    justify-self: start; margin-top: 4px;
   }
+  .sabl-row-when .sabl-when { white-space: normal; flex-wrap: wrap; }
 }
 
 @media (max-width: 899px) {
@@ -1649,6 +1654,24 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   .sabm-row-main { grid-column: 1; }
   .sabm-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; max-width: 140px; }
   .sabm-row-actions { grid-column: 1 / -1; justify-content: flex-start; margin-top: 4px; }
+}
+/* Phones: the first result sat at 887px, under the headline, eight answer
+   chips and the buttons (critique 2026-09-26). The answers become one line
+   that scrolls sideways; every chip still opens its question. */
+@media (max-width: 640px) {
+  .sabm-results-h1 { font-size: 32px; }
+  .sabm-answers { display: block; }
+  .sabm-answers-label { display: block; margin-bottom: 6px; }
+  .sabm-answers ul {
+    flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+    margin: 0 calc(-1 * 20px); padding: 3px 20px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 20px, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(90deg, transparent 0, #000 20px, #000 calc(100% - 28px), transparent);
+  }
+  .sabm-answers ul::-webkit-scrollbar { display: none; }
+  .sabm-answers li { flex: none; }
+  .sabm-results-bar { margin-top: 18px; gap: 12px; }
+  .sabm-table { margin-top: 24px; }
 }
 
 /* ══ "ScholarAB Saved" design (claude.ai/design); shortlist + calendar ══ */

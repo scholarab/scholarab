@@ -243,6 +243,19 @@ describe('matchScholarship', () => {
       const p = { ...baseProfile, averagePercent: 40 }
       expect(matchScholarship(p, sch({ minAverage: null })).match).toBe(true)
     })
+
+    it('a minimum inside the band keeps the award with a check', () => {
+      const p = { ...baseProfile, averagePercent: 85, averageTop: 89 }
+      const result = matchScholarship(p, sch({ minAverage: 88 }))
+      expect(result.match).toBe(true)
+      expect(result.checks).toContain('Needs an average of 88%')
+      expect(result.signals.join(' ')).not.toContain('clears')
+    })
+
+    it('a minimum above the band still rejects', () => {
+      const p = { ...baseProfile, averagePercent: 85, averageTop: 89 }
+      expect(matchScholarship(p, sch({ minAverage: 90 })).match).toBe(false)
+    })
   })
 
   // ── Gender ────────────────────────────────────────────────────────────────

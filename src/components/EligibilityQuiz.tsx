@@ -1,12 +1,12 @@
 /** @jsxImportSource preact */
-import { todayDate } from '../lib/calendar'
+import { calendarDaysUntil, todayDate } from '../lib/calendar'
 import { useState, useMemo, useCallback, useLayoutEffect, useRef } from 'preact/hooks'
 import { Fragment, type ComponentChildren } from 'preact'
 import type { QuizScholarship as Scholarship, QuizProgram as Program } from '../lib/quiz-payload'
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
-import { showConfetti, generateSlug } from '../lib/utils.ts'
+import { showConfetti, generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
 import { STATUS_WORDS, canApplyNow, openLaterNote, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
@@ -14,7 +14,7 @@ import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
   SCHOOL_QUESTION_KEY, schoolQuestion, schoolsForCity,
   BOARD_QUESTION_KEY, boardQuestion, boardsForCity, RESULT_LIMIT,
-  quizQuestionCeiling, quizTotalLabel,
+  quizQuestionCeiling, quizTotalLabel, AVERAGE_BAND_TOP,
 } from '../lib/quiz.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -36,6 +36,16 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
   strong:   { badge: 'sabm-tier sabm-tier-strong', label: 'Strong match' },
   good:     { badge: 'sabm-tier sabm-tier-good', label: 'Good match' },
   possible: { badge: 'sabm-tier sabm-tier-possible', label: 'Possible match' },
+}
+
+// Results come in up to three groups, each best fit first.
+type ResultGroup = 'soon' | 'now' | 'later'
+const SOON_DAYS = 30
+const SOON_SHOWN = 3
+const GROUP_LABELS: Record<ResultGroup, string> = {
+  soon: `Due in the next ${SOON_DAYS} days, biggest first`,
+  now: 'Open now, best fit first',
+  later: 'Opens later, best fit first',
 }
 
 function formatDue(iso: string): string {
@@ -298,6 +308,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       targetInstitution: answers.institution && answers.institution !== '' ? answers.institution : null,
       fields: fieldVal ? [fieldVal] : [],
       averagePercent: avgVal ? parseInt(avgVal) : null,
+      averageTop: avgVal ? AVERAGE_BAND_TOP[avgVal] ?? null : null,
       identifiesAsFemale: null,
       identifiesAsIndigenous: null,
       identifiesAsBIPOC: null,
@@ -356,13 +367,29 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       || actionable(a.scholarship) - actionable(b.scholarship))
     const quality  = all.filter(r => r.tier !== 'possible')
     const possible = all.filter(r => r.tier === 'possible')
-    const kept = quality.length >= 5 ? quality : [...quality, ...possible]
+    // Open, due within the month, and nothing on it the student was never
+    // asked about beyond need or an average inside their band: the awards
+    // worth this week's evenings. A possible match like this still earns its
+    // row, since Loran scores "possible" for everyone (national, no local
+    // tie) and was cut below five better fits that open in spring.
+    const dueSoon = (r: { scholarship: Scholarship; checks: string[] }) =>
+      actionable(r.scholarship) === 0 && calendarDaysUntil(r.scholarship.deadline!) <= SOON_DAYS && !restricted(r.checks)
+    const kept = quality.length >= 5 ? [...quality, ...possible.filter(dueSoon)] : [...quality, ...possible]
     // Two groups, each best fit first: what a student can apply to tonight,
     // then what opens later. By fit alone a September list was ten "Opens
     // Mar 1" rows (critique 2026-09-24), since most Grade 12 money opens in
     // spring and the local, board-specific awards score highest.
-    const tag = (r: typeof kept[number]) => ({ ...r, applyNow: actionable(r.scholarship) === 0 })
-    return [...kept.filter(r => actionable(r.scholarship) === 0).map(tag), ...kept.filter(r => actionable(r.scholarship) !== 0).map(tag)]
+    // Ahead of both, the open ones due within 30 days: best fit first put
+    // every one of them below spring awards, so a late-September list had
+    // nothing urgent in its top ten (critique 2026-09-26).
+    const groupOf = (r: typeof kept[number]): ResultGroup => actionable(r.scholarship) !== 0 ? 'later'
+      : dueSoon(r) ? 'soon' : 'now'
+    const tagged = kept.map(r => ({ ...r, group: groupOf(r) }))
+    // Biggest first: with days left, the money is the tiebreak a student
+    // actually uses, and fit already let every row in.
+    const soon = tagged.filter(r => r.group === 'soon')
+      .sort((a, b) => parseAmount(b.scholarship.amount) - parseAmount(a.scholarship.amount))
+    return [...soon, ...tagged.filter(r => r.group === 'now'), ...tagged.filter(r => r.group === 'later')]
   }, [profile, step, openScholarships, scholarshipMap, showScholarships, QUESTIONS.length])
 
   const allProgramResults = useMemo(() => {
@@ -374,11 +401,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // The first screen keeps both groups in view: at least half the rows from
   // each when both have that many, so the best fits that open in spring are
   // not all pushed behind "Show all" by the ones open tonight.
+  // The due-soon rows come first and take at most three of the ten.
   const scholarshipResults = allScholarshipResults && (showAll ? allScholarshipResults : (() => {
-    const now = allScholarshipResults.filter(r => r.applyNow)
-    const later = allScholarshipResults.filter(r => !r.applyNow)
-    const nowShown = now.slice(0, Math.max(RESULT_LIMIT / 2, RESULT_LIMIT - later.length))
-    return [...nowShown, ...later.slice(0, RESULT_LIMIT - nowShown.length)]
+    const soon = allScholarshipResults.filter(r => r.group === 'soon').slice(0, SOON_SHOWN)
+    const limit = RESULT_LIMIT - soon.length
+    const now = allScholarshipResults.filter(r => r.group === 'now')
+    const later = allScholarshipResults.filter(r => r.group === 'later')
+    const nowShown = now.slice(0, Math.max(Math.ceil(limit / 2), limit - later.length))
+    return [...soon, ...nowShown, ...later.slice(0, limit - nowShown.length)]
   })())
   const programResults = allProgramResults && (showAll ? allProgramResults : allProgramResults.slice(0, RESULT_LIMIT))
 
@@ -549,14 +579,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <div className="sabm-table">
             {/* The rows are numbered 01..10 and were never told what the
                 number meant. It is confidence order, so say so. */}
-            {scholarshipResults.map(({ scholarship: s, tier, signals, checks, applyNow }, index) => {
+            {scholarshipResults.map(({ scholarship: s, tier, signals, checks, group }, index) => {
               // A label at the top of each group, only when there are two;
               // one group keeps the single "best fit first" line.
-              const split = scholarshipResults.some(r => r.applyNow) && scholarshipResults.some(r => !r.applyNow)
-              const label = index === 0 || applyNow !== scholarshipResults[index - 1]!.applyNow
+              const split = new Set(scholarshipResults.map(r => r.group)).size > 1
+              const label = index === 0 || group !== scholarshipResults[index - 1]!.group
                 ? !split
                   ? (showPrograms ? 'Scholarships, best fit first' : 'Best fit first')
-                  : applyNow ? 'Open now, best fit first' : 'Opens later, best fit first'
+                  : GROUP_LABELS[group]
                 : null
               const style = TIER_STYLES[tier]
               // Same ladder as the directory row this links to, so a match that
@@ -577,9 +607,10 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   titleHref={`/scholarships/${generateSlug(s.title)}/`}
                   subtitle={s.audience}
                   tags={<>
-                    {checks.length > 0
-                      ? checks.map(c => <span key={c} className="sabm-tier sabm-check">Check: {c}</span>)
-                      : showTiers && <span className={style.badge}>{style.label}</span>}
+                    {/* The tier stays beside its checks: "5 strong matches"
+                        over two rows labelled Strong read as a miscount. */}
+                    {showTiers && <span className={style.badge}>{style.label}</span>}
+                    {checks.map(c => <span key={c} className="sabm-tier sabm-check">Check: {c}</span>)}
                     <span className="sabm-tier sabm-due">{when}</span>
                   </>}
                   // Two at most. The point is to justify the rank at a glance,

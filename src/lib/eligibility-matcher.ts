@@ -9,6 +9,8 @@ import { programMatchesGrade } from './list-core'
 import { parseAmount } from './utils'
 import { RESULT_LIMIT } from './quiz'
 
+const AVERAGE_CHECK = 'Needs an average of '
+
 /** The five field values the quiz can emit. Anything a listing carries beyond
  *  these cannot be compared against a student's answer; see the field branch
  *  in matchScholarship. */
@@ -191,8 +193,10 @@ export function matchScholarship(
   }
 
   // ── Minimum average (hard filter only if student provided their average) ──
+  // A band answer rejects only when its top is below the bar: 80 to 89% hid
+  // Loran (88%) from every student in that band (critique 2026-09-26).
   if (eligibility.minAverage !== null && profile.averagePercent !== null) {
-    if (profile.averagePercent < eligibility.minAverage) {
+    if ((profile.averageTop ?? profile.averagePercent) < eligibility.minAverage) {
       reasons.push(`Requires ${eligibility.minAverage}%+ average`)
       return { match: false, confidence: 0, reasons, signals: [], checks: [] }
     }
@@ -317,10 +321,15 @@ export function matchScholarship(
     }
   }
 
-  // Average confirmed; student provided their average and it clears the bar
+  // Average confirmed; student provided their average and it clears the bar.
+  // Inside the band it is said, not scored.
   if (eligibility.minAverage !== null && profile.averagePercent !== null) {
-    confidence += AVERAGE_CLEARED_BOOST
-    signals.push(`Your average clears its ${eligibility.minAverage}% minimum`)
+    if (profile.averagePercent >= eligibility.minAverage) {
+      confidence += AVERAGE_CLEARED_BOOST
+      signals.push(`Your average clears its ${eligibility.minAverage}% minimum`)
+    } else {
+      fieldChecks.push(`${AVERAGE_CHECK}${eligibility.minAverage}%`)
+    }
   }
 
   // Financial need confirmed match
@@ -343,11 +352,12 @@ const GRADE_AGE_BAND: Record<string, [number, number]> = {
 
 /**
  * Checks that name a group the award is limited to, as opposed to financial
- * need, which nearly every student can meet or explain. The results page ranks
- * awards carrying one below those that do not, inside the same fit tier.
+ * need, which nearly every student can meet or explain, and an average inside
+ * the band the student picked, which they may well have. The results page
+ * ranks awards carrying one below those that do not, inside the same fit tier.
  */
 export function isRestrictedCheck(check: string): boolean {
-  return check !== 'Based on financial need'
+  return check !== 'Based on financial need' && !check.startsWith(AVERAGE_CHECK)
 }
 
 /**

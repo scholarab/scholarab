@@ -77,6 +77,9 @@ export type StudentProfile = {
   targetInstitution: string | null
   fields: string[]
   averagePercent: number | null
+  /** The top of the band the quiz asked about (80 to 89% is 85 here and 89
+   *  in averageTop). Absent means averagePercent is exact. */
+  averageTop?: number | null
 
   // All identity fields are nullable; null means "student did not answer"
   // Only hard-filters when the student explicitly answered

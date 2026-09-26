@@ -9,6 +9,8 @@ import { normalizeSearchQuery, programSearchBlob, scholarshipSearchBlob } from '
 // ── Scholarships ──────────────────────────────────────────────────────────────
 
 export interface ScholarshipWithMeta extends Scholarship {
+  /** Set by the client from data-after, where eligibility is not shipped. */
+  _after?: boolean;
   _open_ms?: number;
   _deadline_ms?: number;
   _amount?: number;
@@ -18,6 +20,16 @@ export interface ScholarshipWithMeta extends Scholarship {
 
 export type { ScholarshipStatus };
 export type StatusFilter = 'all' | 'active' | 'ongoing' | 'opening' | 'unconfirmed' | 'closed';
+
+/** Only for students already past high school (every listed grade is
+ *  post-secondary). They stay listed, since a Grade 12 student applies to
+ *  some of them in first year, but in their own shut group at the foot of the
+ *  list: 103 of them were mixed in with Grade 12 awards (critique 2026-09-26). */
+export function isAfterHighSchool(s: ScholarshipWithMeta): boolean {
+  if (s._after !== undefined) return s._after;
+  const grades = s.eligibility?.grades ?? [];
+  return grades.length > 0 && grades.every(g => g === 'post-secondary');
+}
 
 export function getScholarshipStatus(s: ScholarshipWithMeta): ScholarshipStatus {
   return scholarshipStatusOf(s, getToday(), { openMs: s._open_ms, deadlineMs: s._deadline_ms });
@@ -123,6 +135,8 @@ export function filterSortScholarships(
   const { sortBy } = state;
   const rank = { active: 0, ongoing: 1, future: 2, unconfirmed: 3, closed: 4 } as Record<string, number>;
   return [...afterSearch].sort((a, b) => {
+    const afterDiff = Number(isAfterHighSchool(a)) - Number(isAfterHighSchool(b));
+    if (afterDiff !== 0) return afterDiff;
     const aStatus = statusCache.get(a.id) ?? 'active';
     const bStatus = statusCache.get(b.id) ?? 'active';
     // open (dated) first → no fixed deadline → future → closed, for every sort
@@ -176,13 +190,14 @@ export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
   future: STATUS_WORDS.future.toUpperCase(),
   unconfirmed: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
+  after: 'FOR AFTER HIGH SCHOOL',
 };
 
 /** Scholarship status runs shut on every load, heading and count still
  *  showing: the list leads with what can still be applied to (critique
  *  2026-09-25). Programs keep theirs open, since 86 of 121 have no confirmed
  *  date yet. */
-export const SCHOLARSHIP_SHUT_GROUPS = ['unconfirmed', 'closed'];
+export const SCHOLARSHIP_SHUT_GROUPS = ['unconfirmed', 'closed', 'after'];
 
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
   active: STATUS_WORDS.open.toUpperCase(),
@@ -192,7 +207,7 @@ export const PROGRAM_GROUP_LABELS: Record<string, string> = {
 };
 
 export function scholarshipGroupKey(s: ScholarshipWithMeta): string {
-  return getScholarshipStatus(s);
+  return isAfterHighSchool(s) ? 'after' : getScholarshipStatus(s);
 }
 
 export function programGroupKey(p: ProgramWithMeta): string {

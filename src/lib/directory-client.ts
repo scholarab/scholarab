@@ -481,12 +481,18 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       // Keep hidden cards in the document; move only misplaced visible nodes.
       for (const header of headers.values()) header.hidden = true;
       const want = withGroupHeaders(page, visible);
+      const moreEl = root.querySelector<HTMLElement>('[data-dir-more]');
       let cursor = grid.firstElementChild;
       for (const node of want) {
-        while (cursor && (cursor as HTMLElement).hidden) cursor = cursor.nextElementSibling;
+        while (cursor && ((cursor as HTMLElement).hidden || cursor === moreEl)) cursor = cursor.nextElementSibling;
         if (node !== cursor) grid.insertBefore(node, cursor);
         else cursor = cursor.nextElementSibling;
       }
+      // "Show more" goes straight under the last card it extends, above the
+      // shut sections after it: below the grid it sat under CLOSED and three
+      // other headers, a screen away from its list (critique 2026-09-26).
+      const lastCard = page.at(-1)?.el;
+      if (moreEl && lastCard && lastCard.nextElementSibling !== moreEl) grid.insertBefore(moreEl, lastCard.nextElementSibling);
       grid.hidden = visible.length === 0;
     }
     paintPreview();
@@ -710,8 +716,12 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       // Once everything is out the block hides, taking the pressed button with
       // it. Focus goes to the first card that press revealed rather than
       // dropping to <body>, which would send a keyboard user back to the top.
+      // While it stays, it has moved under the new cards, and a moved node
+      // drops focus, so the button takes it back.
       if (step.closest<HTMLElement>('[data-dir-more]')?.hidden || step.hidden) {
         visible[before]?.el.querySelector<HTMLElement>('.sabl-name')?.focus({ preventScroll: true });
+      } else if (document.activeElement !== step) {
+        step.focus({ preventScroll: true });
       }
       return;
     }

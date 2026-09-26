@@ -127,6 +127,11 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
 ]
 
 /** The key the school question stores under, and the matcher reads. */
+/** The top of each average band, keyed by the option value (a band's
+ *  middle). An award whose minimum falls inside the band stays in the
+ *  results with a check instead of dropping out. */
+export const AVERAGE_BAND_TOP: Record<string, number> = { '93': 100, '85': 89, '79': 79 };
+
 export const SCHOOL_QUESTION_KEY = 'school';
 
 /**
