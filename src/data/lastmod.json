@@ -31,6 +31,10 @@
     "hash": "e12cd9e3f630e742",
     "date": "2026-09-15"
   },
+  "/programs/alberta-envirothon/": {
+    "hash": "351ec71cf1fde5fd",
+    "date": "2026-09-26"
+  },
   "/programs/alberta-high-school-mathematics-competition-ahsmc/": {
     "hash": "2625772e5e41f081",
     "date": "2026-09-15"
@@ -46,6 +50,10 @@
   "/programs/alberta-innovates-hyrs-university-of-lethbridge/": {
     "hash": "47fd7cd3bfb842c0",
     "date": "2026-09-15"
+  },
+  "/programs/alberta-innovates-summer-research-studentships-university-of-calgary/": {
+    "hash": "9dd3932fdb870640",
+    "date": "2026-09-26"
   },
   "/programs/alberta-junior-forest-rangers-jfr/": {
     "hash": "6ab6d086d0849499",
@@ -79,6 +87,10 @@
     "hash": "2ba48d181b67f483",
     "date": "2026-09-15"
   },
+  "/programs/beaver-computing-challenge/": {
+    "hash": "eb3f85fa354651b5",
+    "date": "2026-09-26"
+  },
   "/programs/bioengineering-summer-institute-university-of-calgary/": {
     "hash": "2b45051c78c28373",
     "date": "2026-09-15"
@@ -102,6 +114,10 @@
   "/programs/canada-wide-science-fair-cwsf/": {
     "hash": "ca29e8726ed61347",
     "date": "2026-09-15"
+  },
+  "/programs/canadausa-mathcamp/": {
+    "hash": "5def118a92a710fd",
+    "date": "2026-09-26"
   },
   "/programs/canadian-biology-olympiad-cbo/": {
     "hash": "d2505b1bfc1f9bda",
@@ -127,9 +143,17 @@
     "hash": "6fb77e37ea8f698c",
     "date": "2026-09-15"
   },
+  "/programs/canadian-senior-and-intermediate-mathematics-contests/": {
+    "hash": "d8601a14b4d37a61",
+    "date": "2026-09-26"
+  },
   "/programs/canadian-sport-institute-calgary-youth-seminars/": {
     "hash": "549ef33c3ef1c6ef",
     "date": "2026-09-15"
+  },
+  "/programs/canadian-team-mathematics-contest/": {
+    "hash": "2a928bc611a9f7ef",
+    "date": "2026-09-26"
   },
   "/programs/cap-high-school-prize-exam/": {
     "hash": "e6892b52953105f7",
@@ -210,6 +234,10 @@
   "/programs/forum-for-young-canadians/": {
     "hash": "b7e4133b2aa3cb76",
     "date": "2026-09-15"
+  },
+  "/programs/fryer-galois-and-hypatia-mathematics-contests/": {
+    "hash": "423b5846354a2081",
+    "date": "2026-09-26"
   },
   "/programs/future-creators-university-of-alberta/": {
     "hash": "9aef15ae7d1cc895",
@@ -307,9 +335,17 @@
     "hash": "46c2636bc880e62c",
     "date": "2026-09-15"
   },
+  "/programs/national-biology-competition-university-of-toronto/": {
+    "hash": "fb75bc64b4bb756b",
+    "date": "2026-09-26"
+  },
   "/programs/non-trivial-fellowship/": {
     "hash": "a2fe2ce2e0b94dbd",
     "date": "2026-09-15"
+  },
+  "/programs/north-american-computational-linguistics-open-naclo/": {
+    "hash": "f55a96be4853789f",
+    "date": "2026-09-26"
   },
   "/programs/oapt-grade-11-physics-contest/": {
     "hash": "9b59960d73876d4c",
@@ -362,6 +398,14 @@
   "/programs/rotary-adventure-in-citizenship/": {
     "hash": "13d1edf51ca98d16",
     "date": "2026-09-15"
+  },
+  "/programs/rotary-youth-leadership-awards-ryla-central-and-southern-alberta/": {
+    "hash": "da8532c65c93c1af",
+    "date": "2026-09-26"
+  },
+  "/programs/rotary-youth-leadership-experience-ryle-northern-alberta/": {
+    "hash": "a82b9082a63c4879",
+    "date": "2026-09-26"
   },
   "/programs/royal-astronomical-society-of-canada-calgary-youth-group/": {
     "hash": "c7215c0bddd40460",
@@ -427,6 +471,10 @@
     "hash": "0897962e1a223d83",
     "date": "2026-09-15"
   },
+  "/programs/telus-world-of-science-volunteering-edmonton/": {
+    "hash": "6f9ef0431b631112",
+    "date": "2026-09-26"
+  },
   "/programs/the-duke-of-edinburghs-international-award/": {
     "hash": "a9a8dca787e234f8",
     "date": "2026-09-15"
@@ -450,6 +498,10 @@
   "/programs/ucalgary-active-living-summer-camps/": {
     "hash": "a612d0d9dea45888",
     "date": "2026-09-15"
+  },
+  "/programs/usa-computing-olympiad-usaco/": {
+    "hash": "ac1a32c58fb68eec",
+    "date": "2026-09-26"
   },
   "/programs/vex-robotics-competition-alberta-leagues/": {
     "hash": "f01adf63f5ada120",
