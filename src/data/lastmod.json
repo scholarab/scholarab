@@ -103,6 +103,10 @@
     "hash": "f7031b5ad70eb02b",
     "date": "2026-09-15"
   },
+  "/programs/bow-valley-college-dual-credit/": {
+    "hash": "e3aa0591d7b9661a",
+    "date": "2026-09-26"
+  },
   "/programs/breakthrough-junior-challenge/": {
     "hash": "b2f3249448f53acd",
     "date": "2026-09-16"
@@ -117,6 +121,10 @@
   },
   "/programs/calgaryhacks/": {
     "hash": "d1e196cfa8b25bf2",
+    "date": "2026-09-26"
+  },
+  "/programs/canada-service-corps/": {
+    "hash": "6a9791a5d712c226",
     "date": "2026-09-26"
   },
   "/programs/canada-wide-science-fair-cwsf/": {
@@ -134,6 +142,10 @@
   "/programs/canadian-biology-olympiad-cbo/": {
     "hash": "d2505b1bfc1f9bda",
     "date": "2026-09-15"
+  },
+  "/programs/canadian-cadet-program-air-army-and-sea-cadets/": {
+    "hash": "6072aea46e23098b",
+    "date": "2026-09-26"
   },
   "/programs/canadian-chemistry-olympiad-cco/": {
     "hash": "beef778f5b4f4300",
@@ -218,6 +230,10 @@
   "/programs/conrad-challenge/": {
     "hash": "acc9af8d42ef29b6",
     "date": "2026-09-15"
+  },
+  "/programs/conservation-champions-club-calgary-zoo/": {
+    "hash": "f92bd62189200f84",
+    "date": "2026-09-26"
   },
   "/programs/cybertitan-national-cybersecurity-competition/": {
     "hash": "025ce138948e4e37",
@@ -335,6 +351,10 @@
     "hash": "5901a28bf367a872",
     "date": "2026-09-15"
   },
+  "/programs/junior-zoo-guides-calgary-zoo/": {
+    "hash": "1d3851ce10dd76e5",
+    "date": "2026-09-26"
+  },
   "/programs/launchx-virtual-summer-program/": {
     "hash": "a23ef48cd29618a7",
     "date": "2026-09-15"
@@ -345,6 +365,10 @@
   },
   "/programs/legislative-assembly-of-alberta-page-program/": {
     "hash": "35b9648600d835eb",
+    "date": "2026-09-26"
+  },
+  "/programs/lethbridge-polytechnic-dual-credit/": {
+    "hash": "fd28f8704c24efb5",
     "date": "2026-09-26"
   },
   "/programs/lets-talk-science-tomatosphere/": {
@@ -391,6 +415,18 @@
     "hash": "f55a96be4853789f",
     "date": "2026-09-26"
   },
+  "/programs/northern-lakes-college-dual-credit/": {
+    "hash": "ac1bb6d4a559b85f",
+    "date": "2026-09-26"
+  },
+  "/programs/northwestern-polytechnic-dual-credit/": {
+    "hash": "eff0822faa83563a",
+    "date": "2026-09-26"
+  },
+  "/programs/nss-gerard-k-oneill-space-settlement-contest/": {
+    "hash": "551f0bc77105b082",
+    "date": "2026-09-26"
+  },
   "/programs/oapt-grade-11-physics-contest/": {
     "hash": "9b59960d73876d4c",
     "date": "2026-09-15"
@@ -435,6 +471,14 @@
     "hash": "37969ec62cd21405",
     "date": "2026-09-15"
   },
+  "/programs/queens-commonwealth-writing-competition/": {
+    "hash": "b2d886ef31af5e42",
+    "date": "2026-09-26"
+  },
+  "/programs/red-deer-polytechnic-dual-credit/": {
+    "hash": "f34e4e340817dab1",
+    "date": "2026-09-26"
+  },
   "/programs/registered-apprenticeship-program-rap/": {
     "hash": "5d1a150a7f8397bf",
     "date": "2026-09-15"
@@ -466,6 +510,10 @@
   "/programs/sait-dual-credit-programs/": {
     "hash": "a5553eac2c195415",
     "date": "2026-09-15"
+  },
+  "/programs/sait-summer-camps-grades-912/": {
+    "hash": "02aff3e7d9fa1cbc",
+    "date": "2026-09-26"
   },
   "/programs/sci-fusion-lethbridge-regional-science-fair-and-science-olympics/": {
     "hash": "7ed3f4675557917a",
@@ -510,6 +558,10 @@
   "/programs/students-on-ice-soi-foundation-expeditions/": {
     "hash": "7967063599f5ee56",
     "date": "2026-09-15"
+  },
+  "/programs/summer-science-program-ssp/": {
+    "hash": "951caacc5f9f513b",
+    "date": "2026-09-26"
   },
   "/programs/team-canada-regeneron-isef/": {
     "hash": "9b47e78d65b7190c",
@@ -590,6 +642,10 @@
   "/programs/wood-buffalo-regional-science-fair-wbrsf/": {
     "hash": "1792d48f92f70164",
     "date": "2026-09-15"
+  },
+  "/programs/yale-young-global-scholars-yygs/": {
+    "hash": "8bd394cb585b072a",
+    "date": "2026-09-26"
   },
   "/programs/yeti-young-entrepreneurs-training-initiative/": {
     "hash": "233d4682d1de95d5",
