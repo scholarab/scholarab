@@ -2,6 +2,8 @@
 // beyond the event name and which item it concerns. Must never break the page.
 export type AppEvent =
   | 'detail_view' | 'apply_click' | 'save' | 'quiz_start' | 'quiz_complete' | 'search_empty'
+  /** The How it works walkthrough: opened, and read to its last step. */
+  | 'tour_open' | 'tour_finish'
   /** Landed from an off-site campaign link carrying `?s=`. Meta is the source
    *  code, never free text; see SOURCES. */
   | 'source_visit'

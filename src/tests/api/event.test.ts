@@ -309,6 +309,14 @@ describe('POST /api/event', () => {
     expect(mockInsert).not.toHaveBeenCalled()
   })
 
+  it('accepts the How it works walkthrough events', async () => {
+    for (const event of ['tour_open', 'tour_finish']) {
+      const res = await call({ event })
+      expect(res.status).toBe(204)
+    }
+    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_finish', itemType: null, itemId: null, meta: null })
+  })
+
   it('returns 429 when rate limited', async () => {
     mockHitRateLimit.mockResolvedValue(true)
     const res = await call({ event: 'quiz_complete' })

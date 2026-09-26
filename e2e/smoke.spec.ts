@@ -345,3 +345,31 @@ test('home film holds while a header dropdown is open', async ({ page }, testInf
   await expect(page.locator('.sabh-drop')).not.toHaveAttribute('data-on', '');
   await expect.poll(playing).toBe(1);
 });
+
+test('How it works walks through five steps and ends on the quiz', async ({ page }) => {
+  await page.goto('/about/');
+  // Desktop has the button in the bar; phones reach it through the menu.
+  const burger = page.locator('#sabh-burger');
+  if (await burger.isVisible()) {
+    await burger.click();
+    await page.locator('.sabh-how-row button').click();
+  } else {
+    await page.locator('.sabh-how').click();
+  }
+  const dialog = page.locator('dialog[data-tour]');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('heading', { name: 'Find scholarships' })).toBeVisible();
+  // Layout height, not the box: the open animation scales the dialog in.
+  const height = await dialog.evaluate(el => (el as HTMLElement).offsetHeight);
+  for (const title of ['Get a shortlist', 'Save the ones you want', 'Never miss a deadline', 'Apply with a plan']) {
+    await dialog.getByRole('button', { name: 'Next' }).click();
+    await expect(dialog.getByRole('heading', { name: title })).toBeVisible();
+    // Next stays put: the dialog is the height of its tallest step
+    expect(await dialog.evaluate(el => (el as HTMLElement).offsetHeight)).toBe(height);
+  }
+  await expect(dialog.getByRole('link', { name: 'Find my scholarships' })).toHaveAttribute('href', '/match/');
+  await dialog.getByRole('button', { name: 'Back' }).click();
+  await expect(dialog.getByRole('heading', { name: 'Never miss a deadline' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+});

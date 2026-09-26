@@ -44,6 +44,8 @@ const EVENT_LABELS: Record<string, string> = {
   quiz_complete: 'Quiz completions',
   search_empty: 'Empty searches',
   alert_subscribe: 'Alert signups',
+  tour_open: 'How it works opened',
+  tour_finish: 'How it works read to the end',
 }
 
 /** Compact column headers for the by-month table; the tile labels are too long. */
@@ -77,6 +79,8 @@ const EVENT_COVERED_FROM: Record<string, string> = {
   search_empty: '2026-07',
   save: '2026-08',
   alert_subscribe: '2026-08',
+  tour_open: '2026-09',
+  tour_finish: '2026-09',
 }
 
 interface SearchTotals {
