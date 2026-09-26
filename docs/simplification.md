@@ -598,3 +598,7 @@ Changed:
 - /deadlines: a "Where you live" picker (the directory's town hubs) hides awards tied to other towns and recounts every month, chip and the stats line. Province-wide, national and program rows always stay. Calgary shows 519 of 1,002; the choice is kept in `?where=`. Only shown with scripts, gated on `html.js` so the page never shifts.
 
 Add-back fraction: 0. One attempt was replaced before shipping: letting every due-soon "possible" match in added 21 rows, most of them awards the student could not apply to.
+
+## Admin analytics: today from midnight, 2026-09-26
+
+The daily chart listed only days with at least one event, so after Alberta midnight it ended on yesterday until the first visit and looked stuck (Ilia, 1:31 AM). The server now appends today at 0, using the same Alberta clock that already supplies the current month. The heading reads "today and the last 13 active days". No query, schedule or job was added. Add-back fraction: 0.

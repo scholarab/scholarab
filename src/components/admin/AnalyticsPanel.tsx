@@ -606,7 +606,7 @@ export default function AnalyticsPanel({ data }: Props) {
         {/* Daily activity */}
         <div>
           <h2 className="text-sm font-semibold mb-2 text-white/70">
-            {month === ALL ? 'Events per day, last 14 active days' : `Events per day, ${periodLabel}`}
+            {month === ALL ? 'Events per day, today and the last 13 active days' : `Events per day, ${periodLabel}`}
           </h2>
           <div className="border border-white/6 rounded-xl p-4">
             {dailyRows.length === 0 && <p className="text-white/30 text-sm">No activity in this period.</p>}

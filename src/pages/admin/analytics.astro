@@ -26,9 +26,10 @@ const SUB_MONTH = sql<string>`to_char(${subscribers.createdAt} AT TIME ZONE 'Ame
 // September the newest tab still said August. This is the clock half of it,
 // taken here rather than in the browser because the server is the same
 // authority the rows came from, and formatted the same way the buckets are.
-const currentMonth = new Intl.DateTimeFormat('en-CA', {
-  timeZone: 'America/Edmonton', year: 'numeric', month: '2-digit',
-}).format(new Date()).slice(0, 7)
+const currentDay = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'America/Edmonton', year: 'numeric', month: '2-digit', day: '2-digit',
+}).format(new Date())
+const currentMonth = currentDay.slice(0, 7)
 
 // Search Console figures are a committed snapshot, not a live query: the
 // service-account key is gitignored and must never reach the Worker, and the
@@ -121,7 +122,10 @@ try {
   data = {
     monthly,
     perItem,
-    daily,
+    // Today gets its row from Alberta midnight, at 0 until the first event:
+    // the chart only had days with events, so at 1:31 AM it still ended on
+    // yesterday and read as stuck (Ilia, 2026-09-26).
+    daily: daily.at(-1)?.day === currentDay ? daily : [...daily, { day: currentDay, n: 0 }],
     emptySearches,
     subscribers: subTotals ?? { people: 0, reminders: 0 },
     monthlySubs,
