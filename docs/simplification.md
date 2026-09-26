@@ -602,3 +602,7 @@ Add-back fraction: 0. One attempt was replaced before shipping: letting every du
 ## Admin analytics: today from midnight, 2026-09-26
 
 The daily chart listed only days with at least one event, so after Alberta midnight it ended on yesterday until the first visit and looked stuck (Ilia, 1:31 AM). The server now appends today at 0, using the same Alberta clock that already supplies the current month. The heading reads "today and the last 13 active days". No query, schedule or job was added. Add-back fraction: 0.
+
+## Home hero: quiz line on one line, 2026-09-26
+
+The line under the hero buttons had a 62ch cap that pushed "needed." onto a second row (Ilia's screenshot). Removed the cap and set it to one line above 900px; phones still wrap. Measured on the build: one line at 901px and 1440px, no horizontal overflow; two lines at 390px. Add-back fraction: 0.
