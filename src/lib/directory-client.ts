@@ -661,7 +661,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       root.querySelectorAll<HTMLElement>(`[data-dir-save][data-id="${id}"]`).forEach(b => setSaveState(b, nowSaved));
       // Only the save counts, not the un-save: the metric is "people who
       // shortlisted this", and sendEvent dedupes it per item per tab session.
-      if (nowSaved) { showConfetti(save); sendEvent('save', config.itemType, id); }
+      if (nowSaved) { showConfetti(save); sendEvent('save', config.itemType, id, 'row'); }
       return;
     }
 

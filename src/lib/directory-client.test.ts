@@ -239,7 +239,7 @@ describe('initDirectory', () => {
     expect(btn.getAttribute('aria-pressed')).toBe('true')
     expect(btn.getAttribute('aria-label')).toBe('Remove Alpha Camp from saved')
     expect(showConfetti).toHaveBeenCalledTimes(1)
-    expect(sendEvent).toHaveBeenCalledWith('save', 'scholarship', 2)
+    expect(sendEvent).toHaveBeenCalledWith('save', 'scholarship', 2, 'row')
 
     click(btn)
     expect(btn.classList.contains('on')).toBe(false)

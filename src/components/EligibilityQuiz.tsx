@@ -418,7 +418,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     toggleSaved(id)
     const next = new Set(getSaved())
     // Saves count, un-saves don't; the metric is "people who shortlisted it"
-    if (next.has(id)) { showConfetti(el); sendEvent('save', 'scholarship', id) }
+    if (next.has(id)) { showConfetti(el); sendEvent('save', 'scholarship', id, 'quiz') }
     setSavedIds(next)
   }, [])
 
@@ -427,7 +427,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const handleSaveAll = useCallback((ids: number[], el?: Element | null) => {
     const have = new Set(getSaved())
     const fresh = ids.filter(id => !have.has(id))
-    for (const id of fresh) { toggleSaved(id); sendEvent('save', 'scholarship', id) }
+    for (const id of fresh) { toggleSaved(id); sendEvent('save', 'scholarship', id, 'quiz') }
     if (fresh.length > 0) showConfetti(el)
     setSavedIds(new Set(getSaved()))
   }, [])
@@ -437,7 +437,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const handleToggleSaveProgram = useCallback((id: number, el?: Element | null) => {
     toggleSavedProgram(id)
     const next = new Set(getSavedPrograms())
-    if (next.has(id)) { showConfetti(el); sendEvent('save', 'program', id) }
+    if (next.has(id)) { showConfetti(el); sendEvent('save', 'program', id, 'quiz') }
     setSavedProgramIds(next)
   }, [])
 

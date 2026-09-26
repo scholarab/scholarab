@@ -606,3 +606,7 @@ The daily chart listed only days with at least one event, so after Alberta midni
 ## Home hero: quiz line on one line, 2026-09-26
 
 The line under the hero buttons had a 62ch cap that pushed "needed." onto a second row (Ilia's screenshot). Removed the cap and set it to one line above 900px; phones still wrap. Measured on the build: one line at 901px and 1440px, no horizontal overflow; two lines at 390px. Add-back fraction: 0.
+
+## Save button: worded, primary before opening, place recorded, 2026-09-26
+
+September had about 4.7 saves per 100 listing views once two bulk sessions are set aside, against about 45 Apply clicks per 100. The listing-page save was a bare bookmark icon beside the Apply pill. It now reads "Save" / "Saved". On the 332 scholarships that have not opened, where the Apply pill is a grey "Opens ..." label, the save button takes the green fill as "Save for later" and the two stack full width (side by side, the date wrapped onto two lines in the card). The save toast carries a "See your list" link to /saved/. Each save now records where it was made (`page`, `row` or `quiz`) in `meta`, from a fixed list the server enforces; saves without it still count, for cached pages. No new component, event or table. Measured on the build: both layouts fit at 375px and 1440px with no horizontal overflow. Effect on the save rate is to be measured after a week or two, by place. Add-back fraction: 0 (one layout, side by side, replaced before shipping).

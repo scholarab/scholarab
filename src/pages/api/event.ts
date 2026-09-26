@@ -13,6 +13,9 @@ const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_star
 // `?s=` into the address bar, so the server keeps its own copy of the list
 // rather than trusting whatever the client sends.
 const ALLOWED_SOURCES = new Set(['ig', 'tt', 'yt', 'em', 'qr'])
+// Where a save was made: the listing page, a directory row, or quiz results.
+// Added 2026-09-26 to learn which save button students actually use.
+const SAVE_FROM = new Set(['page', 'row', 'quiz'])
 // Real browser UAs never contain a URL, a script-runtime name, or an HTTP
 // library name; bots and fetch libraries almost always do. JS-executing
 // crawlers (Googlebot, Bytespider) all match one of the generic terms.
@@ -80,9 +83,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // those two numbers impossible to reconcile.
   if ((itemType === undefined) !== (itemId === undefined))
     return jsonError('itemType and itemId must be sent together', 400)
-  // meta carries the query text for search_empty and the source code for
-  // source_visit; nothing else takes a meta at all
-  const META_EVENTS = new Set(['search_empty', 'source_visit'])
+  // meta carries the query text for search_empty, the source code for
+  // source_visit and the place for save; nothing else takes a meta at all
+  const META_EVENTS = new Set(['search_empty', 'source_visit', 'save'])
   if (meta !== undefined && (!META_EVENTS.has(event) || typeof meta !== 'string'))
     return jsonError('meta not allowed for this event', 400)
 
@@ -93,6 +96,12 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (typeof meta !== 'string' || !ALLOWED_SOURCES.has(meta))
       return jsonError('unknown source', 400)
     cleanMeta = meta
+  } else if (event === 'save') {
+    // Optional, since pages cached before the field existed send none
+    if (meta !== undefined) {
+      if (!SAVE_FROM.has(meta as string)) return jsonError('unknown save place', 400)
+      cleanMeta = meta as string
+    }
   } else if (typeof meta === 'string') {
     // Empty-search queries that can't name a content gap aren't worth a row:
     // too short to mean anything, no letters, or something email-shaped (PII).

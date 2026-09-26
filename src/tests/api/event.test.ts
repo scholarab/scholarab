@@ -291,6 +291,24 @@ describe('POST /api/event', () => {
     expect(res.status).toBe(400)
   })
 
+  it('records where a save was made', async () => {
+    const res = await call({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'row' })
+    expect(res.status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'row' })
+  })
+
+  it('still accepts a save with no place, from pages cached before the field', async () => {
+    const res = await call({ event: 'save', itemType: 'program', itemId: 3 })
+    expect(res.status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'save', itemType: 'program', itemId: 3, meta: null })
+  })
+
+  it('rejects a save place outside the fixed list', async () => {
+    const res = await call({ event: 'save', itemType: 'scholarship', itemId: 5, meta: 'my name is' })
+    expect(res.status).toBe(400)
+    expect(mockInsert).not.toHaveBeenCalled()
+  })
+
   it('returns 429 when rate limited', async () => {
     mockHitRateLimit.mockResolvedValue(true)
     const res = await call({ event: 'quiz_complete' })

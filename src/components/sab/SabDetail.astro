@@ -192,7 +192,7 @@ const chip =
     {estimated && (
       <p class="sabd-estimate-note">Last year's date. The provider hasn't posted this year's yet, so check their page before you plan around it.</p>
     )}
-    <div class="sabd-cta-row">
+    <div class:list={['sabd-cta-row', status === 'future' && 'sabd-cta-row-later']}>
       {status === 'closed' ? (
         <span class="sab-btn sabd-cta sabd-cta-disabled">Closed</span>
       ) : status === 'future' ? (
@@ -202,8 +202,14 @@ const chip =
           data-track="apply" data-item-type={itemType} data-item-id={itemId}
           class="sab-btn sabd-cta">{status === 'unconfirmed' ? 'Check the provider' : ctaLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
       )}
+      {/* Worded, not a bare icon: at 4.7 saves per 100 views (Sep 2026) the
+          icon beside Apply was being read as decoration. When the listing
+          has not opened yet, saving is the one thing a student can do, so
+          it takes the green fill. */}
       <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
-        class="sabd-save" title="Save" aria-label={`Save: ${name}`} data-save-name={name} aria-pressed="false"><Fragment set:html={BOOKMARK} /></button>
+        class:list={['sabd-save', status === 'future' && 'sabd-save-primary']}
+        aria-label={`Save: ${name}`} data-save-name={name} aria-pressed="false"
+        data-save-idle={status === 'future' ? 'Save for later' : 'Save'}><Fragment set:html={BOOKMARK} /><span data-save-label>{status === 'future' ? 'Save for later' : 'Save'}</span></button>
     </div>
     {/* Only when the button above is a dead label. For TBA and ongoing
         listings the button already goes to this same URL, and a second
@@ -496,12 +502,19 @@ const chip =
   .sabd-cta-disabled:hover { background: rgba(20,25,21,0.08); color: rgba(20, 25, 21, 0.68); }
   .sabd-save {
     display: inline-flex; align-items: center; justify-content: center;
-    font-family: var(--font-body); font-size: 17px; border: 1.5px solid rgba(20,25,21,0.3);
-    border-radius: 100px; width: 50px; height: 50px; cursor: pointer;
-    color: rgba(20, 25, 21, 0.68); background: transparent; flex: none;
+    font-family: var(--font-body); border: 1.5px solid rgba(20,25,21,0.3);
+    border-radius: 100px; height: 50px; padding: 0 20px; gap: 8px; cursor: pointer;
+    font-size: 15.5px; font-weight: 700; color: #141915; background: transparent; flex: none;
   }
   .sabd-save:hover { border-color: #141915; }
   .sabd-save[data-saved] { color: #0A6B4D; background: rgba(47,211,160,0.15); }
+  .sabd-save-primary:not([data-saved]) { background: #2FD3A0; border-color: #2FD3A0; color: #08120E; }
+  .sabd-save-primary:not([data-saved]):hover { background: #5CE3BB; border-color: #5CE3BB; }
+  .sabd-save-primary { flex: 1; }
+  /* Two full-width rows when the listing has not opened: side by side, the
+     opening date wrapped onto two lines in the narrow card. */
+  .sabd-cta-row-later { flex-direction: column; }
+  .sabd-cta-row-later .sabd-save-primary { flex: none; }
   /* :global because the icon arrives through set:html and carries no scope id. */
   .sabd-save :global(svg) { width: 16px; height: 18px; fill: none; }
   .sabd-save[data-saved] :global(svg) { fill: currentColor; }
@@ -618,6 +631,8 @@ const chip =
     else btn.removeAttribute('data-saved');
     btn.setAttribute('aria-label', `${saved ? 'Remove from saved' : 'Save'}: ${btn.dataset.saveName ?? ''}`);
     btn.setAttribute('aria-pressed', String(saved));
+    const label = btn.querySelector('[data-save-label]');
+    if (label) label.textContent = saved ? 'Saved' : (btn.dataset.saveIdle ?? 'Save');
   }
 
   // Delegated so everything survives view-transition swaps between detail pages
@@ -646,8 +661,10 @@ const chip =
       const nowSaved = next.includes(id);
       applySaveState(save, nowSaved);
       // Saves count, un-saves don't; the metric is "people who shortlisted it"
-      if (nowSaved) { showConfetti(save); sendEvent('save', type, id); }
-      showToast(nowSaved ? 'Saved ✓' : 'Removed from saved');
+      if (nowSaved) { showConfetti(save); sendEvent('save', type, id, 'page'); }
+      // Say where it went: the Saved page was otherwise only a header link.
+      if (nowSaved) showToast('Saved ✓', { label: 'See your list', onClick: () => location.assign('/saved/') });
+      else showToast('Removed from saved');
     }
 
     const copy = target.closest?.('[data-sabd-copy]') as HTMLElement | null;
