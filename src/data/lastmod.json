@@ -75,6 +75,10 @@
     "hash": "0cb9d8defbf56947",
     "date": "2026-09-15"
   },
+  "/programs/alberta-youth-leaders-for-environmental-education-aylee/": {
+    "hash": "770efac080461c07",
+    "date": "2026-09-26"
+  },
   "/programs/alberta-youth-parliament-tuxis-parliament-of-alberta/": {
     "hash": "a95295518fbf1e66",
     "date": "2026-09-15"
@@ -294,6 +298,10 @@
   "/programs/euclid-mathematics-contest/": {
     "hash": "d87f7dfd0795fd12",
     "date": "2026-09-15"
+  },
+  "/programs/experiences-canada-group-exchanges/": {
+    "hash": "60612ef1be022776",
+    "date": "2026-09-26"
   },
   "/programs/explore-french-immersion-bursary/": {
     "hash": "57953db9daef7ab8",
@@ -767,12 +775,20 @@
     "hash": "fd97fb0edd75f9e7",
     "date": "2026-09-26"
   },
+  "/programs/youth-conservation-collective-cpaws-southern-alberta/": {
+    "hash": "fb0a5629ba850ca0",
+    "date": "2026-09-26"
+  },
   "/programs/youth-parliament-of-canada/": {
     "hash": "cab830de9b8676d5",
     "date": "2026-09-15"
   },
   "/programs/youth-volunteer-corps-calgary/": {
     "hash": "e758e2343913087f",
+    "date": "2026-09-26"
+  },
+  "/programs/ysc-virtual-regional-stem-fair/": {
+    "hash": "1b96875a13bf981f",
     "date": "2026-09-26"
   },
   "/scholarships/10x-future-founders-scholarship/": {
