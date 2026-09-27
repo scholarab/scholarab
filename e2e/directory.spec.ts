@@ -3,7 +3,7 @@ import raw from '../src/data/scholarships.json' with { type: 'json' };
 import type { Scholarship } from '../src/lib/data-loader';
 import { enrichScholarships } from '../src/lib/enrich';
 import type { Page } from '@playwright/test';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, isAfterHighSchool, openNowCount } from '../src/lib/list-core';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, isAfterHighSchool, openNowCount, showingLine } from '../src/lib/list-core';
 import { normalizeSearchQuery, scholarshipSearchBlob } from '../src/lib/search-text';
 
 const items = filterSortScholarships(enrichScholarships(raw as unknown as Scholarship[]), DEFAULT_SCHOLARSHIP_STATE);
@@ -185,7 +185,8 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   await page.goto('/scholarships/');
   const cards = page.locator('[data-dir-card]:visible');
   await expect(cards).toHaveCount(PAGE);
-  await expect(page.locator('[data-dir-more-line]')).toHaveText(`Showing ${PAGE} of ${open.length.toLocaleString('en-CA')}`);
+  // Counted within the section the button sits in (OPEN NOW), not all three
+  await expect(page.locator('[data-dir-more-line]')).toHaveText(showingLine(open.slice(0, PAGE), open, scholarshipGroupKey, k => SCHOLARSHIP_GROUP_LABELS[k]!));
   await expect(page.locator('[data-dir-more-btn]')).toHaveText(`Show ${PAGE} more`);
   await expect(page.locator('[data-dir-all]')).toHaveText(`Show all ${open.length.toLocaleString('en-CA')}`);
 

@@ -2,10 +2,10 @@
 // The page ships fully server-rendered cards; this module only shows/hides and
 // reorders existing DOM nodes, replicating what the old React islands did.
 import { sendEvent } from './events.ts';
-import { normalizeSearchQuery, tokenIndexMayMatch, correctQuery, searchTokens } from './search-text.ts';
+import { normalizeSearchQuery, tokenIndexMayMatch, correctQuery, searchTokens, searchRows } from './search-text.ts';
 import { writeListContext } from './list-context.ts';
 import { showConfetti } from './utils.ts';
-import { DIRECTORY_PAGE_SIZE } from './list-core.ts';
+import { DIRECTORY_PAGE_SIZE, showingLine } from './list-core.ts';
 
 export interface DirectoryItem {
   el: HTMLElement;
@@ -461,7 +461,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // omits (or adds) does not decide whether they find anything.
     const ql = normalizeSearchQuery(q);
     const ctx = config.renderContext?.(items) as C;
-    let searched = ql ? items.filter(it => it.search.includes(ql)) : items;
+    let searched = ql ? searchRows(items, it => it.search, ql) : items;
     // Nothing as typed: try the words the student most likely meant, from
     // this page's own listings, and say so above the results rather than
     // quietly swapping the query.
@@ -469,7 +469,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (ql && searched.length === 0) {
       pageVocab ??= new Set(items.flatMap(it => searchTokens(it.search)));
       const c = correctQuery(ql, pageVocab);
-      const found = c ? items.filter(it => it.search.includes(c)) : [];
+      const found = c ? searchRows(items, it => it.search, c) : [];
       if (found.length > 0) { meant = c; searched = found; }
     }
     const note = root.querySelector<HTMLElement>('[data-dir-corrected]');
@@ -532,7 +532,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const remaining = pool.length - page.length;
       more.hidden = remaining <= 0;
       const line = more.querySelector<HTMLElement>('[data-dir-more-line]');
-      if (line) line.textContent = `Showing ${page.length} of ${pool.length.toLocaleString('en-CA')}`;
+      if (line) line.textContent = showingLine(page, pool, g && (v => g.key(v)), g && (k => g.label(k)));
       const btn = more.querySelector<HTMLElement>('[data-dir-more-btn]');
       if (btn) btn.textContent = `Show ${Math.min(pageSize, remaining)} more`;
       // "Show all" only earns its place when it does something the other
@@ -596,7 +596,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const clear = root.querySelector<HTMLElement>('[data-dir-clear]');
     if (clear) clear.textContent = active > 0 && q ? 'Clear search and filters' : active > 0 ? 'Clear filters' : 'Clear search';
     if (visible.length > 0 || q.length < 3) resetFallback();
-    else resolveEmptySearch(q, ql, items.some(it => it.search.includes(ql)));
+    else resolveEmptySearch(q, ql, searchRows(items, it => it.search, ql).length > 0);
   }
 
   /** Put the empty state back to its generic copy. */

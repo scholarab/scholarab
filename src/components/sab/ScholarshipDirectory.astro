@@ -4,7 +4,7 @@
 // them and recomputes the clock-dependent bits on load, so no React ships.
 import { STATUS_WORDS, canApplyNow, openLaterNote } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
+import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
@@ -393,7 +393,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
       shipped hidden with "Show -3 more" in the markup. */}
   {initial.length > DIRECTORY_PAGE_SIZE && (
     <div class="sabl-more" data-dir-more>
-      <p class="sabl-more-line" data-dir-more-line>Showing {DIRECTORY_PAGE_SIZE} of {initial.length.toLocaleString('en-CA')}</p>
+      <p class="sabl-more-line" data-dir-more-line>{showingLine(initial.slice(0, DIRECTORY_PAGE_SIZE), initial.filter(s => !SHUT_GROUPS.has(scholarshipGroupKey(s))), scholarshipGroupKey, k => SCHOLARSHIP_GROUP_LABELS[k] ?? k.toUpperCase())}</p>
       <div class="sabl-more-actions">
         <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
         <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length.toLocaleString('en-CA')}</button>

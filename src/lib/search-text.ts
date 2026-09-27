@@ -81,6 +81,56 @@ export function buildSearchBlob(fields: (string | null | undefined)[]): string {
   );
 }
 
+/**
+ * A word cut back to the part its other forms share, so "nurse" finds
+ * "nursing" and "nursing" finds "nurse" (11 and 40 scholarships as typed,
+ * critique 2026-09-27). One suffix at most, and never below four letters:
+ * "arts" stays "arts" rather than matching every "art" inside "start".
+ */
+function stemWord(w: string): string {
+  for (const suf of ['ing', 'ed', 's', 'e']) {
+    if (w.endsWith(suf) && w.length - suf.length >= 4) return w.slice(0, -suf.length);
+  }
+  return w;
+}
+
+/** The phrase with its last word stemmed: "nurse" also finds "nursing". */
+function stemPhrase(query: string): string {
+  const words = query.split(' ');
+  words[words.length - 1] = stemWord(words[words.length - 1]!);
+  return words.join(' ');
+}
+
+/** Every word starts a word somewhere in the row. */
+function allWordsMatch(blob: string, words: string[]): boolean {
+  const padded = ' ' + blob.replace(/\n/g, ' ');
+  return words.every(w => padded.includes(' ' + stemWord(w)));
+}
+
+/**
+ * The rows a normalized query finds. The one search every directory and the
+ * match list share, so a query cannot find a row on one surface and not
+ * another.
+ *
+ * The phrase comes first, its last word stemmed. Only when the phrase finds
+ * nothing does each word get matched on its own, in any order and field:
+ * "indigenous engineering" found nothing as one phrase while awards that are
+ * both exist (critique 2026-09-27). Doing that on every query was tried and
+ * dropped the same day: "first nations" then matched every row saying "first
+ * year". Every word must start a word ("hat" is not in "that"), short ones
+ * included: dropping them let "zz no matching student award" find three
+ * awards on "matching", "student" and "award".
+ */
+export function searchRows<T>(rows: readonly T[], blobOf: (row: T) => string, query: string): T[] {
+  if (!query) return [...rows];
+  const phrase = stemPhrase(query);
+  const hits = rows.filter(r => blobOf(r).includes(phrase));
+  if (hits.length > 0) return hits;
+  const words = query.split(' ').filter(Boolean);
+  if (words.length < 2) return hits;
+  return rows.filter(r => allWordsMatch(blobOf(r), words));
+}
+
 /** Unique tokens of a blob, for the cross-directory index. */
 export function searchTokens(blob: string): string[] {
   return blob.split(/[\s\n]+/).filter(Boolean);

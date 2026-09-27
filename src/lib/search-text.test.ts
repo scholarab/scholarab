@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   buildSearchBlob,
   correctQuery,
+  searchRows,
   normalizeSearchQuery,
   normalizeSearchText,
   programSearchBlob,
@@ -157,5 +158,45 @@ describe('correctQuery', () => {
     expect(normalizeSearchQuery('voley')).toBe('volleyball')
     expect(normalizeSearchQuery('Medicne')).toBe('medicine')
     expect(normalizeSearchQuery('energy reveiled')).toBe('energy revealed')
+  })
+})
+
+describe('searchRows', () => {
+  const rows = [
+    'cenovus indigenous scholarship\nindigenous students in power engineering',
+    'nursing bursary\nstudents entering a nursing program',
+    'a nurse practitioner award',
+    'first nation students\nhorse lake',
+    'loran scholarship\nentering university for the first year\nunited nations model',
+    'medicine hat rotary\nstudents in medicine hat',
+    'ask what that costs\nmedicine',
+    '4 h club award',
+  ]
+  const find = (q: string) => searchRows(rows, r => r, normalizeSearchQuery(q))
+
+  it('finds every word in any order when the phrase finds nothing', () => {
+    expect(find('indigenous engineering')).toEqual([rows[0]])
+    expect(find('engineering indigenous')).toEqual([rows[0]])
+  })
+
+  it('stems the last word, so nurse and nursing find each other', () => {
+    expect(find('nurse')).toEqual([rows[1], rows[2]])
+    expect(find('nursing')).toEqual([rows[1], rows[2]])
+    expect(find('first nations')).toEqual([rows[3]])
+  })
+
+  it('keeps the phrase when it finds something, so common words do not flood in', () => {
+    // "first" and "nations" both appear in the Loran row, apart
+    expect(find('first nations')).not.toContain(rows[4])
+  })
+
+  it('matches the start of a word, never the inside', () => {
+    expect(find('medicine hat')).toEqual([rows[5]])
+    expect(find('costs medicine hat')).toEqual([])
+  })
+
+  it('needs every word, short ones too, so a nonsense word finds nothing', () => {
+    expect(find('4-h')).toEqual([rows[7]])
+    expect(find('zz nursing bursary')).toEqual([])
   })
 })

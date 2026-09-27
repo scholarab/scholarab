@@ -3,7 +3,7 @@ import {
   getScholarshipStatus, getProgramStatus, programMatchesGrade,
   filterSortScholarships, filterSortPrograms, scholarshipWhen, programWhen,
   whenTier, URGENT_DAYS, SOON_DAYS, groupRuns, directoryCountLine,
-  scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS, isAfterHighSchool,
+  scholarshipGroupKey, programGroupKey, SCHOLARSHIP_GROUP_LABELS, PROGRAM_GROUP_LABELS, isAfterHighSchool, showingLine,
 } from './list-core'
 import type { ScholarshipWithMeta, ProgramWithMeta, ScholarshipFilterState, ProgramFilterState } from './list-core'
 import { SCHOLARSHIP_FACETS } from './facets'
@@ -567,5 +567,22 @@ describe('directoryCountLine', () => {
     expect(directoryCountLine(117, 117, 'PROGRAMS', 117)).toBe('117 OF 117 PROGRAMS')
     expect(directoryCountLine(0, 117, 'PROGRAMS', 0)).toBe('0 OF 117 PROGRAMS')
     expect(directoryCountLine(1542, 1542, 'LISTINGS', 623)).toBe('1,542 OF 1,542 LISTINGS · 623 OPEN NOW')
+  })
+})
+
+describe('showingLine', () => {
+  const key = (n: number) => (n < 5 ? 'active' : 'future')
+  const label = (k: string) => (k === 'active' ? 'OPEN NOW' : 'OPENS LATER')
+  const pool = [1, 2, 3, 4, 5, 6, 7]
+
+  it('counts within the section the button sits in', () => {
+    expect(showingLine([1, 2], pool, key, label)).toBe('Showing 2 of 4 open now')
+    expect(showingLine([1, 2, 3, 4, 5], pool, key, label)).toBe('Showing 1 of 3 opens later')
+  })
+
+  it('keeps the overall count when the section is shown to its end, or there is one section', () => {
+    expect(showingLine([1, 2, 3, 4], pool, key, label)).toBe('Showing 4 of 7')
+    expect(showingLine([1, 2], [1, 2, 3], key, label)).toBe('Showing 2 of 3')
+    expect(showingLine([1, 2], pool)).toBe('Showing 2 of 7')
   })
 })

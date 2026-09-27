@@ -4,7 +4,7 @@ import { getToday } from './utils.ts';
 import { STATUS_WORDS, programUndatedLabel, scholarshipStatusOf, waitingLabel } from './status.ts';
 import type { ScholarshipStatus } from './status.ts';
 import type { Scholarship, Program } from './data-loader.ts';
-import { normalizeSearchQuery, programSearchBlob, scholarshipSearchBlob } from './search-text.ts';
+import { normalizeSearchQuery, programSearchBlob, scholarshipSearchBlob, searchRows } from './search-text.ts';
 
 // ── Scholarships ──────────────────────────────────────────────────────────────
 
@@ -121,7 +121,7 @@ export function selectScholarships(
   const q = normalizeSearchQuery(searchQuery);
   const afterSearch = q === ''
     ? afterRegion
-    : afterRegion.filter(s => scholarshipSearchBlob(s).includes(q));
+    : searchRows(afterRegion, scholarshipSearchBlob, q);
 
   return afterSearch;
 }
@@ -244,6 +244,26 @@ export const DIRECTORY_PAGE_SIZE = 24;
  *  awards (their own run whatever their status) are not counted twice over. */
 export function openNowCount(items: ScholarshipWithMeta[]): number {
   return items.filter(s => !isAfterHighSchool(s) && getScholarshipStatus(s) === 'active').length;
+}
+
+/**
+ * The line beside "Show more", counted within the section the button sits in.
+ * Under "OPEN NOW 467" it read "Showing 24 of 793", the 793 being three
+ * sections at once, two of them not on screen yet (critique 2026-09-27). The
+ * server and directory-client both print it, so the number never jumps when
+ * the script takes over.
+ */
+export function showingLine<T>(page: T[], pool: T[], keyOf?: (item: T) => string, labelOf?: (key: string) => string): string {
+  const last = page.at(-1);
+  if (keyOf && labelOf && last !== undefined && new Set(pool.map(keyOf)).size >= 2) {
+    const k = keyOf(last);
+    const upTo = page.filter(v => keyOf(v) === k).length;
+    const inGroup = pool.filter(v => keyOf(v) === k).length;
+    // A section shown to its end says nothing about what "Show more" adds,
+    // so that case keeps the overall count.
+    if (upTo < inGroup) return `Showing ${upTo} of ${inGroup.toLocaleString('en-CA')} ${labelOf(k).toLowerCase()}`;
+  }
+  return `Showing ${page.length} of ${pool.length.toLocaleString('en-CA')}`;
 }
 
 export function directoryCountLine(shown: number, total: number, noun: string, openNow: number): string {
@@ -390,8 +410,7 @@ export function selectPrograms(
   const q = normalizeSearchQuery(searchQuery);
   const afterSearch = q === ''
     ? afterCategory
-    : afterCategory.filter(p =>
-        programSearchBlob(p).includes(q));
+    : searchRows(afterCategory, programSearchBlob, q);
 
   return afterSearch;
 }

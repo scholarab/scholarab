@@ -22,6 +22,7 @@ import { STATUS_WORDS, scholarshipStatusOf, programIsListed } from '../lib/statu
 import { formatListingDate } from '../lib/meta';
 import { itemListJson } from '../lib/ld';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../lib/facets';
+import { isAfterHighSchool } from '../lib/list-core';
 
 const today = getToday();
 const todayMs = today.getTime();
@@ -46,6 +47,11 @@ interface Row {
   state: string;
   /** True for "you can apply to this today", which is the only row a student can act on now. */
   open: boolean;
+  /** Applied to once enrolled after high school. Still listed, and still
+   *  marked open, but left out of "open to apply today": the directory keeps
+   *  them out of its OPEN NOW count, and the two pages said 638 and 467 for
+   *  the same day (critique 2026-09-27). */
+  after?: boolean;
   /** The towns a local award is limited to ('-' for a town with no hub);
    *  absent for province-wide, national and program rows, which every
    *  reader can apply to. */
@@ -94,6 +100,7 @@ const scholarshipRows: Row[] = scholarships
           ? `Opens ${formatListingDate(s.openDate)}`
           : STATUS_WORDS.future,
       open: status === 'active',
+      after: isAfterHighSchool(s),
       places: placesOf(s),
     };
   });
@@ -144,7 +151,7 @@ const months = [...byMonth.entries()]
     items,
     name: monthName(key),
     short: monthShort(key),
-    openCount: items.filter(r => r.open).length,
+    openCount: items.filter(r => r.open && !r.after).length,
   }));
 
 // The two tails. Both are real answers to "why isn't X on this page", so they
@@ -158,7 +165,7 @@ const rollingPrograms = programs.filter(
   p => programIsListed(p, today) && (!p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing'),
 ).length;
 
-const openNow = rows.filter(r => r.open).length;
+const openNow = rows.filter(r => r.open && !r.after).length;
 // The seven days a student with a deadline close is actually asking about,
 // above the months (critique 2026-09-23: the page opened on all of September).
 const WEEK_MS = 7 * 86400000;
@@ -268,7 +275,7 @@ const breadcrumbJson = {
               </div>
               <ol class="sabcal-rows">
                 {thisWeek.map(r => (
-                  <li class="sabcal-row" data-deadline={r.deadline} data-places={r.places} data-open={r.open ? '' : undefined}>
+                  <li class="sabcal-row" data-deadline={r.deadline} data-places={r.places} data-open={r.open && !r.after ? '' : undefined}>
                     <span class="sabl-mono sabcal-day sabcal-day-md tnum">{monthDayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>
@@ -302,7 +309,7 @@ const breadcrumbJson = {
               )}
               <ol class="sabcal-rows">
                 {m.items.filter(r => !inWeek.has(r)).map(r => (
-                  <li class="sabcal-row" data-places={r.places} data-open={r.open ? '' : undefined}>
+                  <li class="sabcal-row" data-places={r.places} data-open={r.open && !r.after ? '' : undefined}>
                     <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>

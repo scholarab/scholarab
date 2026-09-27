@@ -347,7 +347,7 @@ describe('Results', () => {
     render(<EligibilityQuiz scholarships={[far as any, soon as any]} programs={[]} />)
     advanceToResults()
     const text = document.querySelector('.sabm-table')!.textContent!
-    expect(text.indexOf('Due in the next 30 days, biggest first')).toBeLessThan(text.indexOf('Soon Award'))
+    expect(text.indexOf('Due in the next 30 days, best fit first')).toBeLessThan(text.indexOf('Soon Award'))
     expect(text.indexOf('Soon Award')).toBeLessThan(text.indexOf('Open now, best fit first'))
     expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Far Award'))
   })
@@ -370,6 +370,25 @@ describe('Results', () => {
     expect(text.indexOf('Big Soon')).toBeLessThan(text.indexOf('Small Soon'))
     expect(text.indexOf('Small Soon')).toBeLessThan(text.indexOf('Open now, best fit first'))
     expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Gated Soon'))
+  })
+
+  it('puts a better fit ahead of a bigger award in the due-soon group, and says due today', () => {
+    const today = new Date()
+    const todayIso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+    const soonIso = new Date(Date.now() + 10 * 86_400_000).toISOString().slice(0, 10)
+    const bigPossible = makeScholarship({ id: 1, title: 'Big Possible', amount: '~$100,000', deadline: todayIso })
+    const smallStrong = makeScholarship({ id: 2, title: 'Small Strong', amount: '$500', deadline: soonIso })
+    const others = [3, 4, 5, 6, 7].map(id => makeScholarship({ id, title: `Good ${id}`, deadline: '2099-05-30' }))
+    mockMatchAll.mockReturnValue([
+      { id: 2, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] },
+      ...[3, 4, 5, 6, 7].map(id => ({ id, tier: 'good' as ConfidenceTier, confidence: 0.5, signals: [], checks: [] })),
+      { id: 1, tier: 'possible' as ConfidenceTier, confidence: 0.2, signals: [], checks: [] },
+    ])
+    render(<EligibilityQuiz scholarships={[bigPossible, smallStrong, ...others] as any[]} programs={[]} />)
+    advanceToResults()
+    const text = document.querySelector('.sabm-table')!.textContent!
+    expect(text.indexOf('Small Strong')).toBeLessThan(text.indexOf('Big Possible'))
+    expect(text).toContain('Due today')
   })
 
   it('saves every strong match in one tap', () => {

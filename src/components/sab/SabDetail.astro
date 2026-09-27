@@ -137,6 +137,12 @@ const chip =
     {name}
   </h1>
   <div class="sabd-subline">{subline}</div>
+  {/* Phones only: the Who can apply box sits under the card there, 890px
+      down on a 375px screen, and eligibility is one of the three things a
+      student decides on (critique 2026-09-27). The desktop has it in view. */}
+  {eligibility && (
+    <p class="sabd-who"><span class="sabd-who-label">Who can apply:</span> <span set:html={emailOff(eligibility)} /></p>
+  )}
 </div>
 
 <div class="sabd-grid">
@@ -376,6 +382,7 @@ const chip =
     margin: 22px 0 0; max-width: 820px;
   }
   .sabd-subline { font-size: 15px; color: rgba(20, 25, 21, 0.75); margin-top: 12px; }
+  .sabd-who { display: none; }
 
   .sabd-grid {
     padding: 44px var(--sab-gutter) 96px; box-sizing: border-box;
@@ -587,6 +594,18 @@ const chip =
     .sabd-grid { display: flex; flex-direction: column; align-items: stretch; gap: 32px; padding: 32px 20px 72px; }
     .sabd-rail { display: contents; }
     .sabd-facts { grid-template-columns: 1fr; }
+    .sabd-who { display: block; font-size: 16px; line-height: 1.5; color: #141915; margin: 14px 0 0; max-width: 640px; }
+    .sabd-who-label { font-weight: 600; color: #0A6B4D; }
+  }
+  /* The note sat inside three paddings (the column, the eligibility box and
+     the paper's margin) and got a 210px measure on a 375px phone, about 25
+     characters a line (critique 2026-09-27). */
+  @media (max-width: 640px) {
+    .sabd-elig { padding: 22px 18px; }
+    .sabd-paper { padding-left: 38px; padding-right: 14px; background:
+      linear-gradient(to right, transparent 26px, rgba(206,72,72,0.5) 26px, rgba(206,72,72,0.5) 27.5px, transparent 27.5px),
+      repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--pitch) - 1px), rgba(64,120,196,0.3) calc(var(--pitch) - 1px), rgba(64,120,196,0.3) var(--pitch));
+      background-color: #F7F9FA; }
   }
 </style>
 

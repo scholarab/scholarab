@@ -43,7 +43,7 @@ type ResultGroup = 'soon' | 'now' | 'later'
 const SOON_DAYS = 30
 const SOON_SHOWN = 3
 const GROUP_LABELS: Record<ResultGroup, string> = {
-  soon: `Due in the next ${SOON_DAYS} days, biggest first`,
+  soon: `Due in the next ${SOON_DAYS} days, best fit first`,
   now: 'Open now, best fit first',
   later: 'Opens later, best fit first',
 }
@@ -385,10 +385,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const groupOf = (r: typeof kept[number]): ResultGroup => actionable(r.scholarship) !== 0 ? 'later'
       : dueSoon(r) ? 'soon' : 'now'
     const tagged = kept.map(r => ({ ...r, group: groupOf(r) }))
-    // Biggest first: with days left, the money is the tiebreak a student
-    // actually uses, and fit already let every row in.
+    // Fit first, then biggest: with days left the money is the tiebreak a
+    // student uses, but by money alone the three shown were all "Possible"
+    // (Loran, an essay contest, a beef-cattle award) above six strong fits
+    // (critique 2026-09-27).
     const soon = tagged.filter(r => r.group === 'soon')
-      .sort((a, b) => parseAmount(b.scholarship.amount) - parseAmount(a.scholarship.amount))
+      .sort((a, b) => TIER_RANK[a.tier]! - TIER_RANK[b.tier]!
+        || parseAmount(b.scholarship.amount) - parseAmount(a.scholarship.amount))
     return [...soon, ...tagged.filter(r => r.group === 'now'), ...tagged.filter(r => r.group === 'later')]
   }, [profile, step, openScholarships, scholarshipMap, showScholarships, QUESTIONS.length])
 
@@ -595,7 +598,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
               // The directory's words (lib/status.ts), so a result and the row
               // it links to never describe one award two ways.
               const waiting = waitingLabel(status, s, formatDue)
+              // Tonight and tomorrow say so: "Due Sep 27, 2026" on the 27th
+              // read like any other date.
+              const left = s.deadline ? calendarDaysUntil(s.deadline) : null
               const when = waiting ? [waiting.main, waiting.sub].filter(Boolean).join(', ')
+                : left === 0 ? 'Due today' : left === 1 ? 'Due tomorrow'
                 : s.deadline ? `Due ${formatDue(s.deadline)}` : STATUS_WORDS.none
               return (
                 <Fragment key={s.id}>
