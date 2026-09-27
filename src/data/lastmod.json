@@ -27,6 +27,10 @@
     "hash": "e1fba7e7e0584848",
     "date": "2026-09-26"
   },
+  "/programs/alberta-ballet-school-summer-intensive/": {
+    "hash": "7a78fe40585b2a21",
+    "date": "2026-09-26"
+  },
   "/programs/alberta-computers-for-schools-cfs-internship/": {
     "hash": "351c34c5048c15b6",
     "date": "2026-09-15"
@@ -37,6 +41,10 @@
   },
   "/programs/alberta-envirothon/": {
     "hash": "351ec71cf1fde5fd",
+    "date": "2026-09-26"
+  },
+  "/programs/alberta-high-school-drama-festival/": {
+    "hash": "9ec7bc360a6ca125",
     "date": "2026-09-26"
   },
   "/programs/alberta-high-school-mathematics-competition-ahsmc/": {
@@ -69,6 +77,10 @@
   },
   "/programs/alberta-junior-forest-wardens/": {
     "hash": "33bf76a3463e2076",
+    "date": "2026-09-26"
+  },
+  "/programs/alberta-provincial-music-festival/": {
+    "hash": "da42a06ddc2922a0",
     "date": "2026-09-26"
   },
   "/programs/alberta-student-leadership-conference-aslc/": {
@@ -123,6 +135,10 @@
     "hash": "2b45051c78c28373",
     "date": "2026-09-15"
   },
+  "/programs/blue-ocean-student-entrepreneur-competition/": {
+    "hash": "dd26fb7db2ad0224",
+    "date": "2026-09-26"
+  },
   "/programs/blue-planet-awareness-contest-bow-seat/": {
     "hash": "75dbff65d11bd44a",
     "date": "2026-09-26"
@@ -157,6 +173,10 @@
   },
   "/programs/calgary-stampede-showband/": {
     "hash": "7a945ba3730ec604",
+    "date": "2026-09-26"
+  },
+  "/programs/calgary-young-peoples-theatre-cypt/": {
+    "hash": "cd7506b22ed38bd7",
     "date": "2026-09-26"
   },
   "/programs/calgary-youth-orchestra/": {
@@ -257,6 +277,10 @@
   },
   "/programs/canadian-team-mathematics-contest/": {
     "hash": "2a928bc611a9f7ef",
+    "date": "2026-09-26"
+  },
+  "/programs/cansat-design-challenge/": {
+    "hash": "ec08a054ae1684e1",
     "date": "2026-09-26"
   },
   "/programs/cap-high-school-prize-exam/": {
@@ -403,6 +427,10 @@
     "hash": "0b1128de0c946b85",
     "date": "2026-09-26"
   },
+  "/programs/grande-prairie-and-district-music-festival/": {
+    "hash": "a082ba5381afee56",
+    "date": "2026-09-26"
+  },
   "/programs/green-certificate-program/": {
     "hash": "e3241e55f96df2e0",
     "date": "2026-09-26"
@@ -425,6 +453,10 @@
   },
   "/programs/harvard-summer-school-secondary-school-program/": {
     "hash": "8045c3170fedee16",
+    "date": "2026-09-26"
+  },
+  "/programs/healthcare-career-exploration-camp-alberta-health-services/": {
+    "hash": "e23efc82d23f7639",
     "date": "2026-09-26"
   },
   "/programs/high-school-model-un-university-of-calgary/": {
@@ -531,6 +563,10 @@
     "hash": "35b9648600d835eb",
     "date": "2026-09-26"
   },
+  "/programs/lethbridge-and-district-music-and-speech-arts-festival/": {
+    "hash": "980a9b51e40deabe",
+    "date": "2026-09-26"
+  },
   "/programs/lethbridge-polytechnic-dual-credit/": {
     "hash": "fd28f8704c24efb5",
     "date": "2026-09-26"
@@ -562,6 +598,10 @@
   "/programs/medicine-hat-college-summer-stem-tech-camps/": {
     "hash": "7e91c2e66bfd0287",
     "date": "2026-09-15"
+  },
+  "/programs/medicine-hat-rotary-music-festival/": {
+    "hash": "d425b6d571f94d48",
+    "date": "2026-09-26"
   },
   "/programs/medicine-youth-summer-program-med-ysp-uoft/": {
     "hash": "e6297c35d150ddf2",
@@ -687,6 +727,14 @@
     "hash": "3766d57ba32e0334",
     "date": "2026-09-26"
   },
+  "/programs/reach-for-the-top/": {
+    "hash": "d23954065d2f1255",
+    "date": "2026-09-26"
+  },
+  "/programs/red-deer-festival-of-the-performing-arts/": {
+    "hash": "0aeba2fee5793ddb",
+    "date": "2026-09-26"
+  },
   "/programs/red-deer-polytechnic-dual-credit/": {
     "hash": "f34e4e340817dab1",
     "date": "2026-09-26"
@@ -721,6 +769,10 @@
   },
   "/programs/rotary-youth-leadership-experience-ryle-northern-alberta/": {
     "hash": "a82b9082a63c4879",
+    "date": "2026-09-26"
+  },
+  "/programs/rotary-youth-program-of-enrichment-rypen/": {
+    "hash": "9c819b9a545b0df3",
     "date": "2026-09-26"
   },
   "/programs/royal-astronomical-society-of-canada-calgary-youth-group/": {
@@ -943,9 +995,17 @@
     "hash": "a68ea004e70cbc19",
     "date": "2026-09-26"
   },
+  "/programs/women-in-engineering-day-university-of-calgary/": {
+    "hash": "38f0b04ad8f1768f",
+    "date": "2026-09-26"
+  },
   "/programs/wood-buffalo-regional-science-fair-wbrsf/": {
     "hash": "1792d48f92f70164",
     "date": "2026-09-15"
+  },
+  "/programs/write-2-film-youthwrite/": {
+    "hash": "7257a6517bd94764",
+    "date": "2026-09-26"
   },
   "/programs/yale-summer-program-in-astrophysics-yspa/": {
     "hash": "8a6b91e1cb3f60ca",
