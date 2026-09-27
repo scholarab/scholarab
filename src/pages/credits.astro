@@ -4,7 +4,7 @@ import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { PROGRAM_FORMATS, SCHOLARSHIP_FACETS } from '../lib/facets';
-import { PHOTO_CREDITS } from '../lib/photo-credits';
+import { EXPLORE_PHOTOS, PHOTO_CREDITS } from '../lib/photo-credits';
 
 // The attribution page for the scope and program-format photos (header menu
 // tiles and the home carousel). CC BY and CC BY-SA photos need their author, license and source
@@ -18,8 +18,12 @@ const rowsOf = (facets: typeof SCHOLARSHIP_FACETS, name: (f: (typeof facets)[num
   .filter(f => f.backdrop && PHOTO_CREDITS[f.backdrop])
   .map(f => ({ scope: name(f), ...PHOTO_CREDITS[f.backdrop!]! }))
   .sort((a, b) => a.scope.localeCompare(b.scope, 'en-CA'));
-// Places first, then the program formats under their hub names.
-const rows = [...rowsOf(SCHOLARSHIP_FACETS, f => f.label), ...rowsOf(PROGRAM_FORMATS, f => f.h1)];
+// Places first, then the program formats under their hub names, then the
+// Explore tiles in menu order.
+const rows = [
+  ...rowsOf(SCHOLARSHIP_FACETS, f => f.label), ...rowsOf(PROGRAM_FORMATS, f => f.h1),
+  ...Object.entries(EXPLORE_PHOTOS).map(([k, scope]) => ({ scope, ...PHOTO_CREDITS[k]! })),
+];
 ---
 
 <Layout
@@ -40,7 +44,7 @@ const rows = [...rowsOf(SCHOLARSHIP_FACETS, f => f.label), ...rowsOf(PROGRAM_FOR
     <div class="sabcr-body" style="flex:1;">
       <h1 class="sabcr-h1">Photo credits</h1>
       <p class="sabcr-lede">
-        The photos in the Scholarships and Programs menus and on the home page were taken by the
+        The photos in the Scholarships, Programs and Explore menus and on the home page were taken by the
         people below. Each is used under the license shown and was cropped for this site, and the
         city and town photos were also lightly colour graded. Photos under CC BY-SA remain under
         CC BY-SA in their edited form.

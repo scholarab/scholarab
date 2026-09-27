@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { PROGRAM_FORMATS, SCHOLARSHIP_FACETS } from './facets';
-import { PHOTO_CREDITS, needsCredit } from './photo-credits';
+import { EXPLORE_PHOTOS, PHOTO_CREDITS, needsCredit } from './photo-credits';
 
 const DIR = join(__dirname, '../../public/photos/backdrops');
 const FILES = ['wide-1672', 'wide-3344', 'tall-1000', 'tall-2000', 'tile'];
@@ -14,10 +14,16 @@ describe('scope photos', () => {
     expect(missing).toEqual([]);
   });
 
+  it('ships the tile for every Explore photo', () => {
+    const missing = Object.keys(EXPLORE_PHOTOS).map(k => `${k}-tile.webp`).filter(f => !existsSync(join(DIR, f)));
+    expect(missing).toEqual([]);
+  });
+
   // A CC BY or CC BY-SA photo used without its credit breaks its license.
   it('credits every backdrop, and only backdrops that exist', () => {
-    expect(backdrops.filter(b => !PHOTO_CREDITS[b])).toEqual([]);
-    expect(Object.keys(PHOTO_CREDITS).filter(k => !backdrops.includes(k))).toEqual([]);
+    const used = [...backdrops, ...Object.keys(EXPLORE_PHOTOS)];
+    expect(used.filter(b => !PHOTO_CREDITS[b])).toEqual([]);
+    expect(Object.keys(PHOTO_CREDITS).filter(k => !used.includes(k))).toEqual([]);
   });
 
   it('links the license of every photo that needs a credit', () => {

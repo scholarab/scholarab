@@ -57,6 +57,34 @@ export const PHOTO_CREDITS: Record<string, PhotoCredit> = {
   'dual-credit': { shows: 'An apprentice practising welding', author: 'Staff Sgt. Ivy Thomas, U.S. Air National Guard', license: 'Public domain', licenseUrl: null, source: 'Wikimedia Commons', sourceUrl: 'https://commons.wikimedia.org/wiki/File:121_ARW_practices_welding_at_Lajes_Field_(9870984).jpg', added: '2026-09-23' },
   'clubs': { shows: 'A youth delegate at the National 4-H Conference', author: 'U.S. Department of Agriculture', license: 'Public domain', licenseUrl: null, source: 'Wikimedia Commons', sourceUrl: 'https://commons.wikimedia.org/wiki/File:2025_National_4-H_Conference_of_over_400_youth_delegates_from_across_the_U.S._and_its_territories_at_U.S._Department_of_Agriculture_in_Washington,_D.C._from_April_11-15,_2025_-_4.jpg', added: '2026-09-23' },
   'conferences': { shows: 'The House of Commons chamber, Ottawa', author: 'Makaristos', license: 'Public domain', licenseUrl: null, source: 'Wikimedia Commons', sourceUrl: 'https://commons.wikimedia.org/wiki/File:Commons-chamber.jpg', added: '2026-09-23' },
+  // The Explore menu tiles (tile crop only). All public domain or CC0.
+  'explore-quiz': { shows: "Students working on laptops", author: "Jim Henderson", license: 'CC0', licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/', source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:L_Nicosia%27s_YAL_laptop_students_jeh.jpg", added: '2026-09-27' },
+  'explore-closing': { shows: "An hourglass on a table", author: "Suohros", license: 'CC0', licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/', source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:Hourglass_1.jpg", added: '2026-09-27' },
+  'explore-deadlines': { shows: "A wooden flip calendar", author: "Amitbalani", license: 'CC0', licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/', source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:Manual_scrollable_wooden_wall_calendar.jpg", added: '2026-09-27' },
+  'explore-guides': { shows: "Textbooks on a library shelf", author: "Drew Rollman, U.S. Fish and Wildlife Service", license: 'Public domain', licenseUrl: null, source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:Wolf_Creek_NFH_library_books.png", added: '2026-09-27' },
+  'explore-reference': { shows: "A pen on a notebook", author: "Thomas Martinsen", license: 'CC0', licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/', source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:Pen_on_a_notebook_(Unsplash).jpg", added: '2026-09-27' },
+  'explore-rutherford': { shows: "The Alberta Legislature Building, Edmonton", author: "D. Benjamin Miller", license: 'CC0', licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/', source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:Alberta_Legislature_Building,_June_7,_2024.jpg", added: '2026-09-27' },
+  'explore-essays': { shows: "Writing in a notebook", author: "Kristin Hardwick", license: 'CC0', licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/', source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:Woman_writing_on_a_notebook_with_a_pen.jpg", added: '2026-09-27' },
+  'explore-grade-11': { shows: "High school students by their lockers, New Ulm, Minnesota", author: "Art Hanson, U.S. National Archives", license: 'Public domain', licenseUrl: null, source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:STUDENTS_RESTING_IN_THE_HALL_AGAINST_THEIR_LOCKERS_WAITING_FOR_CLASS_AT_SENIOR_HIGH_SCHOOL_IN_NEW_ULM,_MINNESOTA._THE..._-_NARA_-_558223.tif", added: '2026-09-27' },
+  'explore-educators': { shows: "A teacher and his class at Cathedral High School, New Ulm, Minnesota", author: "David Stroble, U.S. National Archives", license: 'Public domain', licenseUrl: null, source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:A_TEACHER_TALKS_TO_HIS_STUDENTS_IN_A_CLASSROOM_AT_CATHEDRAL_HIGH_SCHOOL_IN_NEW_ULM,_MINNESOTA._THE_TOWN_IS_A_COUNTY..._-_NARA_-_558210.tif", added: '2026-09-27' },
+  'explore-updates': { shows: "A vintage typewriter", author: "Florian Klauer", license: 'CC0', licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/', source: 'Wikimedia Commons', sourceUrl: "https://commons.wikimedia.org/wiki/File:Vintage_typewriter_(Unsplash).jpg", added: '2026-09-27' },
+};
+
+/**
+ * The Explore menu's photos, by the tile they sit on. They are not facets, so
+ * they ship only the tile crop and name their place here for /credits/.
+ */
+export const EXPLORE_PHOTOS: Record<string, string> = {
+  'explore-quiz': 'Explore: Find my scholarships',
+  'explore-closing': 'Explore: Closing soon',
+  'explore-deadlines': 'Explore: Deadlines',
+  'explore-guides': 'Explore: Guides',
+  'explore-reference': 'Explore: Reference letter',
+  'explore-rutherford': 'Explore: Rutherford guide',
+  'explore-essays': 'Explore: Scholarship essays',
+  'explore-grade-11': 'Explore: Grade 11 timeline',
+  'explore-educators': 'Explore: For educators',
+  'explore-updates': 'Explore: What changed',
 };
 
 /** CC BY and CC BY-SA require the author and license beside the photo. */

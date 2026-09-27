@@ -117,22 +117,24 @@ const programLinks = [
 // Every tile is one line of name over one line of note, the notes about the
 // same length, so the ten read as one grid rather than ten shapes (Ilia,
 // 2026-09-27). The list beside the tiles keeps the full guide titles.
-const EXPLORE_GUIDES: [string, string, string, string][] = [
-  ['alexander-rutherford-scholarship-guide', 'Rutherford guide', 'When and how to apply', 'Rutherford Scholarship guide'],
-  ['how-to-write-a-scholarship-essay', 'Scholarship essays', 'What committees read for', 'Writing a scholarship essay'],
-  ['grade-11-scholarship-timeline', 'Grade 11 timeline', 'Why to start in grade 11', 'Grade 11 timeline'],
+// Each tile has a public domain or CC0 photo (Ilia, 2026-09-27), credited on
+// /credits/ from EXPLORE_PHOTOS in photo-credits.ts.
+const EXPLORE_GUIDES: [string, string, string, string, string][] = [
+  ['alexander-rutherford-scholarship-guide', 'Rutherford guide', 'When and how to apply', 'Rutherford Scholarship guide', 'explore-rutherford'],
+  ['how-to-write-a-scholarship-essay', 'Scholarship essays', 'What committees read for', 'Writing a scholarship essay', 'explore-essays'],
+  ['grade-11-scholarship-timeline', 'Grade 11 timeline', 'Why to start in grade 11', 'Grade 11 timeline', 'explore-grade-11'],
 ];
 const shownGuides = EXPLORE_GUIDES.filter(([slug]) => guides.some(g => g.slug === slug));
-const guideTiles: Tile[] = shownGuides.map(([slug, label, note]) => ({ label, href: `/guides/${slug}/`, count: null, note }));
+const guideTiles: Tile[] = shownGuides.map(([slug, label, note, , backdrop]) => ({ label, href: `/guides/${slug}/`, count: null, note, backdrop }));
 const exploreTiles: Tile[] = [
-  { label: 'Find my scholarships', href: '/match/', count: null, note: 'Answer a few questions' },
-  { label: 'Closing soon', href: '/#closing', count: null, note: 'Soonest deadlines first' },
-  { label: 'Deadlines', href: '/deadlines/', count: null, note: 'Every deadline, by month' },
-  { label: 'Guides', href: '/guides/', count: null, note: 'Written for Albertans' },
-  { label: 'Reference letter', href: '/templates/reference-letter/', count: null, note: 'A template to hand over' },
+  { label: 'Find my scholarships', href: '/match/', count: null, note: 'Answer a few questions', backdrop: 'explore-quiz' },
+  { label: 'Closing soon', href: '/#closing', count: null, note: 'Soonest deadlines first', backdrop: 'explore-closing' },
+  { label: 'Deadlines', href: '/deadlines/', count: null, note: 'Every deadline, by month', backdrop: 'explore-deadlines' },
+  { label: 'Guides', href: '/guides/', count: null, note: 'Written for Albertans', backdrop: 'explore-guides' },
+  { label: 'Reference letter', href: '/templates/reference-letter/', count: null, note: 'A template to hand over', backdrop: 'explore-reference' },
   ...guideTiles,
-  { label: 'For educators', href: '/educators/', count: null, note: 'Counsellors and teachers' },
-  { label: 'What changed', href: '/updates/', count: null, note: 'Every update to the site' },
+  { label: 'For educators', href: '/educators/', count: null, note: 'Counsellors and teachers', backdrop: 'explore-educators' },
+  { label: 'What changed', href: '/updates/', count: null, note: 'Every update to the site', backdrop: 'explore-updates' },
 ];
 const exploreLinks: MenuLink[] = [
   { label: 'How it works', tour: true },
@@ -412,18 +414,23 @@ const isActive = (href: string, also: string[] = []) =>
      sets the `background` shorthand, which would wipe an image on the tile. */
   .sabh-tile-photo {
     position: relative; overflow: hidden; isolation: isolate; background-color: #16211C;
+    --sabh-tile-scrim: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82));
   }
+  /* Explore's text sits higher, above the room kept for a second note line,
+     so its shade starts higher and goes darker: a white photo under white
+     text was unreadable (Ilia, 2026-09-27). */
+  .sabh-tile-photo.sabh-tile-noted { --sabh-tile-scrim: linear-gradient(rgba(10,19,16,0.35), rgba(10,19,16,0.05) 25%, rgba(10,19,16,0.55) 50%, rgba(10,19,16,0.9)); }
   .sabh-tile-photo::after {
     content: ''; position: absolute; inset: 0; z-index: -1;
     background-size: cover; background-position: center;
     transition: transform 0.4s ease;
   }
   .sabh-has-menu[data-menu-open] .sabh-tile-photo::after {
-    background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
+    background-image: var(--sabh-tile-scrim), var(--sabh-tile-img);
   }
   @media (hover: hover) {
     .sabh:not([data-drop]) .sabh-has-menu:hover .sabh-tile-photo::after {
-      background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
+      background-image: var(--sabh-tile-scrim), var(--sabh-tile-img);
     }
   }
   /* The photo tile's hover is a slow zoom rather than the grey wash, which
@@ -618,7 +625,7 @@ const isActive = (href: string, also: string[] = []) =>
     .sabh-tile-num { font-size: 38px; }
     .sabh-tile-name { font-size: 15px; }
     .sabh[data-sub] [data-sub-open] .sabh-tile-photo::after {
-      background-image: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82)), var(--sabh-tile-img);
+      background-image: var(--sabh-tile-scrim), var(--sabh-tile-img);
     }
     .sabh-menu .sabh-menu-list {
       border-left: 0; padding-left: 0; width: auto;
