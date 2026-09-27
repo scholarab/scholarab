@@ -211,6 +211,10 @@
     "hash": "d8601a14b4d37a61",
     "date": "2026-09-26"
   },
+  "/programs/canadian-severe-storms-laboratory-internship-western-university/": {
+    "hash": "bc1de08eeefa0c85",
+    "date": "2026-09-26"
+  },
   "/programs/canadian-sport-institute-calgary-youth-seminars/": {
     "hash": "549ef33c3ef1c6ef",
     "date": "2026-09-15"
@@ -335,6 +339,10 @@
     "hash": "2bdb5a0d10795812",
     "date": "2026-09-15"
   },
+  "/programs/focused-ultrasound-high-school-summer-research-program-sunnybrook/": {
+    "hash": "4697629cc847a067",
+    "date": "2026-09-26"
+  },
   "/programs/forum-for-young-canadians/": {
     "hash": "b7e4133b2aa3cb76",
     "date": "2026-09-15"
@@ -414,6 +422,10 @@
   "/programs/immerse-education-virtual-summer-school-research-track/": {
     "hash": "239e1cb6647e64b9",
     "date": "2026-09-15"
+  },
+  "/programs/indigenous-summer-research-academy-insra-university-of-lethbridge/": {
+    "hash": "a92877d8a7d47bd9",
+    "date": "2026-09-26"
   },
   "/programs/inside-education-youth-summits/": {
     "hash": "d64e5086c5cefd45",
@@ -659,9 +671,17 @@
     "hash": "7ed3f4675557917a",
     "date": "2026-09-15"
   },
+  "/programs/science-mentorship-institute-sci-mi/": {
+    "hash": "41d6cbb70ea7c480",
+    "date": "2026-09-26"
+  },
   "/programs/shad-canada/": {
     "hash": "9189627363a23478",
     "date": "2026-09-15"
+  },
+  "/programs/sickkids-summer-research-program-ssure/": {
+    "hash": "5b2596bb4cc715f6",
+    "date": "2026-09-26"
   },
   "/programs/sir-isaac-newton-sin-physics-exam/": {
     "hash": "3baed52191b6debe",
@@ -683,6 +703,10 @@
     "hash": "2761cb7e8ee3fadb",
     "date": "2026-09-15"
   },
+  "/programs/stem-fellowship-journal/": {
+    "hash": "66b80c3b131224e8",
+    "date": "2026-09-26"
+  },
   "/programs/stem-fellowship-research-exploration-program-edmonton/": {
     "hash": "c41f61e07ea5fd5f",
     "date": "2026-09-15"
@@ -702,6 +726,10 @@
   "/programs/students-on-ice-soi-foundation-expeditions/": {
     "hash": "7967063599f5ee56",
     "date": "2026-09-15"
+  },
+  "/programs/students-on-the-beamlines-canadian-light-source/": {
+    "hash": "ba046ae3a06dcbac",
+    "date": "2026-09-26"
   },
   "/programs/summer-science-program-ssp/": {
     "hash": "951caacc5f9f513b",
@@ -830,6 +858,10 @@
   "/programs/ymca-youth-exchanges-canada/": {
     "hash": "17cf2021b9c84b14",
     "date": "2026-09-15"
+  },
+  "/programs/young-ornithologist-workshop-beaverhill-bird-observatory/": {
+    "hash": "e6b924468b72a8ff",
+    "date": "2026-09-26"
   },
   "/programs/youreka-canada/": {
     "hash": "56e3ce9774e5198c",
