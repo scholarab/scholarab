@@ -307,6 +307,8 @@ const STEPS = 5;
   // Once per browser, on the first visit (Ilia, 2026-09-26). Opening it by
   // hand counts too, so nobody is shown it twice.
   const SEEN = 'sa_tour_seen';
+  /** Set on the first page this tab shows, so only a listing a student landed on holds the tour back. */
+  const LANDED = 'sa_tour_landed';
 
   // Where it was opened: on its own on a first visit, or from the bar's
   // button, the Explore menu or the phone menu (the value of data-tour-open).
@@ -350,13 +352,33 @@ const STEPS = 5;
     // Automated browsers (tests, crawlers that run scripts), and the quiz,
     // where a student who came for it is already doing the thing step 2 sells.
     if (navigator.webdriver || location.pathname.startsWith('/match')) return;
+    // A student who searched their way onto one listing came for that
+    // listing; the tour waits for their next page (critique 2026-09-27).
+    let landing = false;
+    try { landing = !sessionStorage.getItem(LANDED); sessionStorage.setItem(LANDED, '1'); } catch { /* treat as not landing */ }
+    if (landing && document.querySelector('[data-listing-page]')) return;
     const path = location.pathname;
     // A beat after the page is up, so the student sees where they landed.
-    setTimeout(() => {
-      const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
-      if (!dialog || location.pathname !== path || document.querySelector('dialog[open]')) return;
-      open(dialog, 'auto');
-    }, 1200);
+    setTimeout(() => openWhenAsked(path), 1200);
+  }
+  function openWhenAsked(path: string) {
+    if (location.pathname !== path) return;
+    // One question at a time: while the consent band is still asking, the
+    // tour waits for its answer instead of stacking on top of it. Read here,
+    // not at page load, because the band unhides itself in its own handler.
+    const consent = document.getElementById('sab-consent');
+    if (consent && !consent.hidden) {
+      const onChoice = (e: Event) => {
+        if (!(e.target as Element | null)?.closest?.('[data-consent]')) return;
+        document.removeEventListener('click', onChoice);
+        setTimeout(() => openWhenAsked(path), 400);
+      };
+      document.addEventListener('click', onChoice);
+      return;
+    }
+    const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
+    if (!dialog || document.querySelector('dialog[open]')) return;
+    open(dialog, 'auto');
   }
   document.addEventListener('astro:page-load', autoOpen);
 

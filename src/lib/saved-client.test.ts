@@ -98,7 +98,7 @@ describe('initSaved', () => {
     expect($('[data-sv-list]').hidden).toBe(false)
     expect($$('[data-sv-wrap]').filter(w => !w.hidden).map(w => w.dataset.id)).toEqual(['1', '7'])
     // The per-type split belongs to the section heads, not to this line too.
-    expect($('[data-sv-count]').textContent).toBe('2 items bookmarked. Your shortlist is saved on this device.')
+    expect($('[data-sv-count]').textContent).toBe('2 items saved. Your shortlist stays on this device.')
     expect($('[data-sv-sh-label]').textContent).toBe('SCHOLARSHIPS · 1')
     expect($('[data-sv-pr-label]').textContent).toBe('PROGRAMS · 1')
   })
@@ -136,7 +136,7 @@ describe('initSaved', () => {
     expect(savedSch).toEqual([2])
     expect(wrap.hidden).toBe(true)
     expect(showToast).toHaveBeenCalledWith('Removed from saved', expect.objectContaining({ label: 'Undo' }))
-    expect($('[data-sv-count]').textContent).toBe('1 item bookmarked. Your shortlist is saved on this device.')
+    expect($('[data-sv-count]').textContent).toBe('1 item saved. Your shortlist stays on this device.')
   })
 
   it('Undo on the toast puts the item back', () => {
@@ -148,7 +148,7 @@ describe('initSaved', () => {
     onClick()
     expect([...savedSch].sort()).toEqual([1, 2])
     expect(wrap.hidden).toBe(false)
-    expect($('[data-sv-count]').textContent).toBe('2 items bookmarked. Your shortlist is saved on this device.')
+    expect($('[data-sv-count]').textContent).toBe('2 items saved. Your shortlist stays on this device.')
   })
 
   it('removing the last item shows the empty state', () => {

@@ -350,7 +350,7 @@ describe('scholarshipWhen', () => {
   })
   it('never counts down to a guessed date', () => {
     expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-04-20', deadlineEstimated: true, _deadline_ms: at('2026-04-20') })))
-      .toEqual({ main: 'Opens later', sub: 'date not posted, around Apr 20', cls: 'sabl-when is-quiet' })
+      .toEqual({ main: 'Opens later', sub: 'date not posted yet, likely around Apr 20', cls: 'sabl-when is-quiet' })
   })
   it('names the other states plainly', () => {
     expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-01-01', _deadline_ms: at('2026-01-01') })).main).toBe('Closed')

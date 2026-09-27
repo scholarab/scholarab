@@ -96,10 +96,12 @@ const breadcrumbJson = {
           page's actual prose. It sits below the quiz because the quiz is what
           the reader came for; it does not get hidden once the quiz starts,
           because a description of how matching works is most useful next to
-          the results it produced. */
+          the results it produced. Folded since 2026-09-27: 400 words open
+          under the results were the last thing the page said (critique). The
+          text is still in the HTML for anything that reads it. */
       }
-          <section class="sabm-about">
-            <h2>How the match works</h2>
+          <details class="sabm-about">
+            <summary><h2>How the match works</h2></summary>
             <p>
               The quiz asks {QUIZ_QUESTION_WORD.toLowerCase()} things: whether you want
               scholarships, programs or both; your grade; your city; the field you are
@@ -138,7 +140,7 @@ const breadcrumbJson = {
               same awards by month and the <a href="/guides/">guides</a> explain the year they sit
               in.
             </p>
-          </section>
+          </details>
     </div>
   </div>
 
@@ -165,13 +167,26 @@ const breadcrumbJson = {
     border-top: 1px solid rgba(20, 25, 21, 0.12);
     font-family: var(--font-body);
   }
+  .sabm-about summary {
+    display: flex; align-items: center; gap: 10px;
+    list-style: none; cursor: pointer; min-height: 44px;
+  }
+  .sabm-about summary::-webkit-details-marker { display: none; }
+  .sabm-about summary::after {
+    content: ''; width: 8px; height: 8px; flex: none; margin-top: -4px;
+    border-right: 2px solid #141915; border-bottom: 2px solid #141915;
+    transform: rotate(45deg); transition: transform 0.18s ease;
+  }
+  .sabm-about[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
+  @media (prefers-reduced-motion: reduce) { .sabm-about summary::after { transition: none; } }
   .sabm-about h2 {
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.01em;
     color: #141915;
-    margin: 0 0 14px;
+    margin: 0;
   }
+  .sabm-about[open] summary { margin-bottom: 14px; }
   .sabm-about p {
     font-size: 16px;
     line-height: 1.65;

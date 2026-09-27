@@ -691,3 +691,54 @@ On desktop rows "50 days left" ran under the Save button (Ilia, /programs/summer
 ## Critique fixes: search words, quiz order, phone eligibility, section counts, 2026-09-27
 
 From the 2026-09-27 whole-site critique (26/40), the four priorities Ilia kept; the first-visit walkthrough stays as he asked for it. Each measured on the build. (1) Search matched the query as one substring, in two copies (directory-client and list-core). Both now call one `searchRows`: the phrase first, its last word stemmed, and only when the phrase finds nothing, every word matched at the start of a word in any field. Scholarships found: "indigenous engineering" 0 to 8, "nurse" 11 to 44 (= "nursing"), "first nations" 20 to 29 (the extra rows say "First Nation"), "4-h" 17 to 17, "medicine hat" 12 to 12, a nonsense query 0 to 0. Tried and dropped the same day: word matching on every query ("first nations" matched rows saying "first year") and skipping short words in the fallback (a nonsense query found three awards). (2) The quiz's "Due in the next 30 days" group sorted by amount alone, so its three rows were all "Possible" above six strong fits; it now sorts by fit, then amount, and says "Due today" / "Due tomorrow". (3) Listing pages on phones gain a one-line "Who can apply" under the title (the box itself sat under the card): at 375px it moved from y 892 to y 308, and the Worth knowing note's text measure went from 210 to 244px (the eligibility box and paper margin were trimmed below 640px). (4) Counts: /deadlines counted after-high-school awards as "open to apply today" (638) while the directory leaves them out of OPEN NOW (467); it now says 511, which is 467 scholarships plus 44 programs. The "Show more" line counts within its section through one `showingLine` helper shared by the server render, the client and the E2E: "Showing 24 of 467 open now", not "of 793". Not changed: searching "calgary" (98) and the Calgary hub (162) still differ, since the hub counts by region and search by text. Tests: searchRows, showingLine and the quiz order are covered; the directory E2E states the new line. Add-back fraction: 0.
+
+## Critique fixes: local awards, first visit, school list, phone directory, program cost, 2026-09-27
+
+From the second 2026-09-27 critique (27/40). Ilia chose all five priorities plus the minor items, with the walkthrough held back on landings rather than removed. Each change was measured on the build.
+
+(1) **Local awards.** 184 awards tagged `region: "Alberta"` are for one school, town, county or school division ("Boyle School graduates", "Woodlands County residents"). `region` has no value for a place without a hub, so the quiz treated every one of them as province-wide, and a Calgary STEM student's first result was a Woodlands County bursary marked "Good match". A new JSON-only `localArea` field holds that restriction. It was set by hand from each listing's audience and notes, and left off wherever the area includes one of the quiz's named cities (Cochrane, Okotoks, Fort Saskatchewan, Calgary and Edmonton, the Centre-Nord francophone board, Northern Lights). validate-data allows it only on "Alberta" listings. The matcher now:
+- excludes these awards for a student in a named city;
+- keeps them for "Other Alberta" with an "Only for …" check, capped at Possible and ranked after unrestricted fits;
+- drops the check once the student's school confirms it.
+
+Calgary / STEM / 80 to 89% / U of C, before and after:
+- matches: 618 to 443;
+- local awards: 175 to 0, 23 of which had been "Good".
+
+For "Other Alberta", all 175 now sit at Possible, where 23 were Good before. Awards due today or tomorrow now list among "Open now" rather than leading the due-soon group.
+
+(2) **First visit.** The walkthrough no longer opens on a listing a student landed on from search. It waits for their next page, tracked by a per-tab `sa_tour_landed` flag. It also waits for the consent band to be answered instead of opening over it. "No thanks" is now as solid as "Allow". Verified in the browser:
+- no walkthrough on /scholarships/loran-scholarship/ as a first page, then it opened on the next page;
+- with the band showing, no walkthrough, then it opened after "No thanks".
+
+(3) **School question.** "Another school" is now the first option, not the last of up to 64, and the question has the town question's filter box when it has more than 8 schools. Enter picks the first real school, not the escape tile. Other changes:
+- Middle schools are left off, since the quiz starts at Grade 10.
+- Three schools listed under two spellings are merged in the data: Caroline High School, R.F. Staples Secondary School and Alix MAC School. F.P. Walshe and Grant MacEwan were normalised too.
+- Previous is 44px tall.
+- The study question gained the schools the listings actually name: Red Deer Polytechnic (70 awards) and Keyano (74) had been missing while Mount Royal (2) was listed. Also added: U of Lethbridge, MacEwan, NAIT, SAIT and Northwestern Polytechnic.
+
+(4) **Phone directory.**
+- Section labels are now H2 headings wrapping their toggle buttons (`display: contents`, so the layout does not change), and the 1,542 row titles are H3. Screen-reader heading navigation now reaches 6 sections instead of 1,542 rows.
+- At 375px the quiz line runs on from the standfirst as one paragraph, and the gaps and the March note tighten. The first row moved from y 559 to y 475. The ≤400 target was not met without removing the March note, which is content, so it stays.
+
+(5) **Programs and wording.**
+- Program rows say "Free", "Has a fee" or "Pays you". Cross-links show cost and format, so the two chemistry exams read "Olympiads", not "Research". The sort is "Pays you first", and the program page's hidden heading is "Cost and deadline".
+- /deadlines no longer prints "FEM+ … Program Program".
+- Wetaskiwin (an estimated date) reads "Likely date, not posted yet" under Due this week instead of "Opens later".
+- "date not posted, around Jun 1" now reads "date not posted yet, likely around Jun 1".
+- "Save" everywhere, instead of "Bookmark".
+- Smaller copy fixes: the quiz hint's stray comma; /updates' "Five rules" that listed four; /guides/ now leads with the Grade 12 timeline, deadlines, Loran and Rutherford; "How the match works" is folded into a disclosure, with its text still in the HTML.
+- Polish: the hero quiz line carries the byline's heavier shadow over the film, and the row Save and Details controls get a 44px hit area without growing the row.
+
+Not changed:
+- The quiz counter's "of up to 8" before the town is answered, which is deliberate.
+- The Explore menu's tile-and-link pairs, a layout Ilia set on 2026-09-26.
+- The Province-wide hub, which still lists the 184 local awards.
+
+Tests:
+- New matcher tests for the local rule, including a guard that no real Calgary match is a local award.
+- The school-question tests: escape first, middle schools out.
+- The due-today test now checks that it lists after the group.
+- Selectors updated for the heading wrapper and the folded explainer.
+
+Add-back fraction: 0.

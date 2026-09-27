@@ -372,9 +372,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     // worth this week's evenings. A possible match like this still earns its
     // row, since Loran scores "possible" for everyone (national, no local
     // tie) and was cut below five better fits that open in spring.
-    const dueSoon = (r: { scholarship: Scholarship; checks: string[] }) =>
+    const inMonth = (r: { scholarship: Scholarship; checks: string[] }) =>
       actionable(r.scholarship) === 0 && calendarDaysUntil(r.scholarship.deadline!) <= SOON_DAYS && !restricted(r.checks)
-    const kept = quality.length >= 5 ? [...quality, ...possible.filter(dueSoon)] : [...quality, ...possible]
+    // The group at the top starts two days out: an essay contest due tonight
+    // sat at #2 for a first-time applicant (critique 2026-09-27). It still
+    // lists, with "Due today", among the ones open now.
+    const dueSoon = (r: { scholarship: Scholarship; checks: string[] }) =>
+      inMonth(r) && calendarDaysUntil(r.scholarship.deadline!) >= 2
+    const kept = quality.length >= 5 ? [...quality, ...possible.filter(inMonth)] : [...quality, ...possible]
     // Two groups, each best fit first: what a student can apply to tonight,
     // then what opens later. By fit alone a September list was ten "Opens
     // Mar 1" rows (critique 2026-09-24), since most Grade 12 money opens in
@@ -685,7 +690,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   <div className="sabm-amount-cell">
                     {p.paid
                       ? <>
-                          <span className="sabm-paid-chip">Paid</span>
+                          <span className="sabm-paid-chip">Pays you</span>
                           {p.stipend && <span className="sabm-paid-note" title={p.stipend}>{p.stipend}</span>}
                         </>
                       : <span className="sabm-amount-muted">Unpaid</span>}
@@ -739,10 +744,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // ── Question step ──────────────────────────────────────────────────────────
 
   const current = QUESTIONS[step]
-  // "Other Alberta" always stays, so a town not on the list still has a tile.
+  // The town list and a long school list both get the filter. "Other
+  // Alberta" and "Another school" always stay, so a place or school that is
+  // not listed still has a tile.
   const q = placeFilter.trim().toLowerCase()
-  const shownOpts = current && current.key === 'city' && q
-    ? current.opts.filter(o => o.label.toLowerCase().includes(q) || (o.hint ?? '').toLowerCase().includes(q) || o.value === 'Other Alberta')
+  const filterable = !!current && (current.key === 'city' || (current.key === SCHOOL_QUESTION_KEY && current.opts.length > 8))
+  const shownOpts = current && filterable && q
+    ? current.opts.filter(o => o.label.toLowerCase().includes(q) || (o.hint ?? '').toLowerCase().includes(q) || o.value === 'Other Alberta' || (current.key === SCHOOL_QUESTION_KEY && o.value === ''))
     : current?.opts ?? []
   if (!current) return null
 
@@ -780,18 +788,20 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           {current.q}
         </h2>
 
-        {current.key === 'city' && (
+        {filterable && (
           <input
             type="search"
             className="sabm-find"
-            placeholder="Type your town"
-            aria-label="Filter the list of towns"
+            placeholder={current.key === 'city' ? 'Type your town' : 'Type your school'}
+            aria-label={current.key === 'city' ? 'Filter the list of towns' : 'Filter the list of schools'}
             value={placeFilter}
             onInput={e => setPlaceFilter((e.currentTarget as HTMLInputElement).value)}
             onKeyDown={e => {
               if (e.key !== 'Enter') return
-              const first = shownOpts[0]
-              if (first && placeFilter.trim()) { e.preventDefault(); answer(current.key, first.value, 0) }
+              // The first real match, not the "Another school" tile ahead of it.
+              const i = Math.max(0, shownOpts.findIndex(o => o.value !== ''))
+              const first = shownOpts[i]
+              if (first && placeFilter.trim()) { e.preventDefault(); answer(current.key, first.value, i) }
             }}
           />
         )}

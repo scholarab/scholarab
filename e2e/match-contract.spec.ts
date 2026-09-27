@@ -85,6 +85,7 @@ test('client navigation cancels a pending answer and remounts the quiz', async (
   await page.waitForTimeout(400);
   const stored = await page.evaluate(key => JSON.parse(sessionStorage.getItem(key)!), QUIZ_STORAGE_KEY);
   expect(stored.step).toBe(0);
+  await page.locator('.sabm-about summary').click();
   await page.locator('.sabm-about a[href="/scholarships/"]').first().click();
   await expect(page).toHaveURL(/\/scholarships\//);
   await page.goBack();

@@ -99,7 +99,7 @@ function advanceToResults(searchType: 'Scholarships' | 'Programs' | 'Both' = 'Sc
   clickTile('Medicine Hat')            // Q3 city
   clickTile('Still figuring it out')   // Q4 field
   clickTile("I'd rather not say")      // Q5 average
-  clickTile('Not sure yet')            // Q6 institution
+  clickTile('Somewhere else, or not sure')            // Q6 institution
 }
 
 afterEach(() => cleanup())
@@ -272,7 +272,7 @@ describe('Question 6; Institution', () => {
   it('renders institution options', () => {
     expect(screen.getByText('University of Calgary')).toBeTruthy()
     expect(screen.getByText('University of Alberta')).toBeTruthy()
-    expect(screen.getByText('Not sure yet')).toBeTruthy()
+    expect(screen.getByText('Somewhere else, or not sure')).toBeTruthy()
   })
 
   it('shows Question 6 of 6', () => {
@@ -280,7 +280,7 @@ describe('Question 6; Institution', () => {
   })
 
   it('clicking an institution advances to results', () => {
-    clickTile('Not sure yet')
+    clickTile('Somewhere else, or not sure')
     expect(screen.getByText(/worth a look/i)).toBeTruthy()
   })
 })
@@ -389,6 +389,8 @@ describe('Results', () => {
     const text = document.querySelector('.sabm-table')!.textContent!
     expect(text.indexOf('Small Strong')).toBeLessThan(text.indexOf('Big Possible'))
     expect(text).toContain('Due today')
+    // Due today is not "the next 30 days": it lists below that group.
+    expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Big Possible'))
   })
 
   it('saves every strong match in one tap', () => {
@@ -572,7 +574,7 @@ describe('Results', () => {
     }])
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     advanceToResults('Programs')
-    expect(screen.getByText('Paid')).toBeTruthy()
+    expect(screen.getByText('Pays you')).toBeTruthy()
     expect(screen.getByText('$3,000 stipend')).toBeTruthy()
   })
 
@@ -670,7 +672,7 @@ describe('School question', () => {
     clickTile(city)
     clickTile('Still figuring it out')
     clickTile("I'd rather not say")
-    clickTile('Not sure yet')
+    clickTile('Somewhere else, or not sure')
   }
 
   it('asks a seventh question when the city has school-restricted awards', () => {
@@ -725,7 +727,7 @@ describe('School question', () => {
     // has no school-restricted awards, so those three finish the quiz.
     clickTile('Still figuring it out')
     clickTile("I'd rather not say")
-    clickTile('Not sure yet')
+    clickTile('Somewhere else, or not sure')
     const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]
     expect(profile.city).toBe('Edmonton')
     expect(profile.specificSchool).toBeNull()
@@ -754,7 +756,7 @@ describe('Operator completion events', () => {
     expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
     for (const text of ['Grade 12', 'Medicine Hat', 'Still figuring it out', "I'd rather not say"]) clickTile(text)
     expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
-    fireEvent.click(screen.getByText('Not sure yet'))
+    fireEvent.click(screen.getByText('Somewhere else, or not sure'))
     act(() => { vi.advanceTimersByTime(259) })
     expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
     act(() => { vi.advanceTimersByTime(1) })

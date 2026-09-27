@@ -42,7 +42,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     key: 'searchType',
     q: 'What are you looking for?',
     opts: [
-      { label: 'Scholarships', value: 'scholarships', hint: 'Awards, and bursaries given on financial need' },
+      { label: 'Scholarships', value: 'scholarships', hint: 'Awards, including bursaries for financial need' },
       { label: 'Programs', value: 'programs', hint: 'Summer, trades, contests' },
       { label: 'Both', value: 'both', hint: 'Scholarships and programs' },
     ],
@@ -115,13 +115,23 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     key: 'institution',
     q: 'Where are you planning to study?',
+    // Every school here is one the listings name as a requirement, so picking
+    // it changes the results. Red Deer Polytechnic (70 awards) and Keyano
+    // (74) were missing while Mount Royal (2) was on it (critique 2026-09-27).
     opts: [
-      { label: 'University of Calgary', value: 'University of Calgary', hint: 'Calgary' },
       { label: 'University of Alberta', value: 'University of Alberta', hint: 'Edmonton' },
+      { label: 'University of Calgary', value: 'University of Calgary', hint: 'Calgary' },
+      { label: 'University of Lethbridge', value: 'University of Lethbridge', hint: 'Lethbridge' },
+      { label: 'MacEwan University', value: 'MacEwan University', hint: 'Edmonton' },
       { label: 'Mount Royal University', value: 'Mount Royal University', hint: 'Calgary' },
+      { label: 'NAIT', value: 'Northern Alberta Institute of Technology', hint: 'Edmonton' },
+      { label: 'SAIT', value: 'SAIT', hint: 'Calgary' },
+      { label: 'Red Deer Polytechnic', value: 'Red Deer Polytechnic', hint: 'Red Deer' },
+      { label: 'Northwestern Polytechnic', value: 'Northwestern Polytechnic', hint: 'Grande Prairie' },
+      { label: 'Keyano College', value: 'Keyano College', hint: 'Fort McMurray' },
       { label: 'Medicine Hat College', value: 'Medicine Hat College', hint: 'Medicine Hat' },
-      { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', hint: 'SAIT, NAIT and more' },
-      { label: 'Not sure yet', value: '' },
+      { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', hint: 'Any apprenticeship' },
+      { label: 'Somewhere else, or not sure', value: '' },
     ],
   },
 ]
@@ -153,13 +163,14 @@ export function schoolQuestion(schools: string[]): QuizQuestion {
     key: SCHOOL_QUESTION_KEY,
     q: 'Which school do you go to?',
     opts: [
+      // Always present, and first: a student at a school with no awards of its
+      // own must be able to pass without claiming one that isn't theirs, and
+      // at the end of 64 tiles it sat 3,000px down a phone (critique 2026-09-27).
+      { label: 'Another school', value: '', hint: 'Skip this question' },
       // No hint on these: the same "Has school-only awards" under each of up
       // to 67 tiles said nothing that told one from another (critique
       // 2026-09-23). Being on this list is what it meant.
       ...schools.map(name => ({ label: name, value: name })),
-      // Always last, and always present: a student at a school with no awards
-      // of its own must be able to pass without claiming one that isn't theirs.
-      { label: 'Another school', value: '', hint: 'Skip this filter' },
     ],
   };
 }
@@ -279,6 +290,9 @@ export function schoolsForCity(
     }
   }
   return [...seen]
+    // The quiz starts at Grade 10; a middle school on the list is one no
+    // student taking it attends.
+    .filter(s => !/\b(middle|elementary|junior high) school\b/i.test(s))
     // '' is "None of these": a school the data ties to any offered board is
     // not the student's (critique 2026-09-24: it still listed CBE schools).
     .filter(s => board == null || !boardsOf.get(s)?.size || (board !== '' && boardsOf.get(s)!.has(board)))

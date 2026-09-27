@@ -149,12 +149,16 @@ describe('school question', () => {
     expect(schoolsForCity(wide, 'Edmonton')).toEqual([]);
   });
 
-  it('offers an escape hatch last, and it stores an empty value', () => {
+  it('offers an escape hatch first, and it stores an empty value', () => {
     const q = schoolQuestion(['Bowness High School']);
     expect(q.key).toBe(SCHOOL_QUESTION_KEY);
-    const last = q.opts[q.opts.length - 1]!;
-    expect(last.value).toBe('');
+    expect(q.opts[0]!.value).toBe('');
     expect(q.opts).toHaveLength(2);
+  });
+
+  it('leaves middle schools off the school question', () => {
+    const l = [{ region: 'Alberta', eligibility: { specificSchools: ['Innisfail Middle School', 'Innisfail High School'] } }];
+    expect(schoolsForCity(l, 'Other Alberta')).toEqual(['Innisfail High School']);
   });
 
   it('keeps the spelled maximum in step with the count', () => {

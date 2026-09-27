@@ -624,6 +624,38 @@ describe('age read from the grade', () => {
   })
 })
 
+// A province-wide listing limited to one town (critique 2026-09-27: a
+// Woodlands County bursary led a Calgary student's results as "Good match").
+describe('local awards tagged province-wide', () => {
+  const county = { ...sch({ fields: ['STEM'] }, 'Alberta'), localArea: 'Woodlands County residents' }
+  const schoolOnly = { ...sch({ specificSchools: ['Boyle School'] }, 'Alberta'), localArea: 'Boyle School graduates' }
+
+  it('is out for a student in a named city', () => {
+    const r = matchScholarship({ ...baseProfile, city: 'Calgary', fields: ['STEM'] }, county)
+    expect(r.match).toBe(false)
+    expect(r.reasons).toEqual(['Only for Woodlands County residents'])
+  })
+
+  it('stays for Other Alberta with a check, and never above Possible', () => {
+    const [m] = matchAll({ ...baseProfile, city: 'Other Alberta', fields: ['STEM'] }, [{ id: 1, ...county }])
+    expect(m!.checks).toContain('Only for Woodlands County residents')
+    expect(m!.tier).toBe('possible')
+  })
+
+  it('drops the check once the student names the school', () => {
+    const r = matchScholarship({ ...baseProfile, city: 'Other Alberta', specificSchool: 'Boyle School' }, schoolOnly)
+    expect(r.match).toBe(true)
+    expect(r.checks).not.toContain('Only for Boyle School graduates')
+  })
+
+  it('no real Calgary match is a tagged local award', () => {
+    const local = new Set((scholarshipsJson as Array<{ id: number; localArea?: string }>).filter(s => s.localArea).map(s => s.id))
+    expect(local.size).toBeGreaterThan(100)
+    const ids = matchAll({ ...baseProfile, city: 'Calgary' }, scholarshipsJson as never).map(m => m.id)
+    expect(ids.filter(id => local.has(id))).toEqual([])
+  })
+})
+
 describe('getConfidenceTier', () => {
   it('1.0 → strong', () => expect(getConfidenceTier(1.0)).toBe('strong'))
   it('0.80 → strong', () => expect(getConfidenceTier(0.80)).toBe('strong'))

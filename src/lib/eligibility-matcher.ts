@@ -10,6 +10,8 @@ import { parseAmount } from './utils'
 import { RESULT_LIMIT } from './quiz'
 
 const AVERAGE_CHECK = 'Needs an average of '
+/** The check a local award carries until the student's school confirms it. */
+const LOCAL_CHECK = 'Only for '
 
 /** The five field values the quiz can emit. Anything a listing carries beyond
  *  these cannot be compared against a student's answer; see the field branch
@@ -138,9 +140,9 @@ const FINANCIAL_NEED_BOOST         = 0.10
  */
 export function matchScholarship(
   profile: StudentProfile,
-  scholarship: { region: string | null; alsoOpenTo?: string[] | null; eligibility: EligibilityCriteria | null; audience?: string | null },
+  scholarship: { region: string | null; alsoOpenTo?: string[] | null; localArea?: string | null; eligibility: EligibilityCriteria | null; audience?: string | null },
 ): MatchResult {
-  const { eligibility, region } = scholarship
+  const { eligibility, region, localArea } = scholarship
   const tieChecks = audienceChecks(scholarship.audience)
 
   const reasons: string[] = []
@@ -148,8 +150,18 @@ export function matchScholarship(
     reasons.push(`Only for students in ${region}`)
     return { match: false, confidence: 0, reasons, signals: [], checks: [] }
   }
+  // A local award tagged province-wide. None of the 184 is in one of the
+  // quiz's named cities (those have their own region), so a student who
+  // picked one is not in the area; "Other Alberta" might be, and keeps it
+  // with a check unless their school below confirms it.
+  if (localArea && profile.city !== 'Other Alberta' && !scholarship.alsoOpenTo?.includes(profile.city)) {
+    reasons.push(`${LOCAL_CHECK}${localArea}`)
+    return { match: false, confidence: 0, reasons, signals: [], checks: [] }
+  }
+  const localChecks = localArea && !(eligibility?.specificSchools.length && profile.specificSchool)
+    ? [`${LOCAL_CHECK}${localArea}`] : []
   // Missing criteria do not erase the geography that we do know.
-  if (!eligibility) return { match: true, confidence: 0.20, reasons: [], signals: [], checks: tieChecks }
+  if (!eligibility) return { match: true, confidence: 0.20, reasons: [], signals: [], checks: [...localChecks, ...tieChecks] }
 
   // ── Grade ─────────────────────────────────────────────────────────────────
   if (eligibility.grades.length > 0 && !eligibility.grades.includes(profile.grade)) {
@@ -339,7 +351,7 @@ export function matchScholarship(
   }
 
   confidence = Math.max(0.1, Math.min(1, confidence))
-  return { match: true, confidence, reasons, signals, checks: [...fieldChecks, ...tieChecks, ...uncheckedRequirements(profile, eligibility)] }
+  return { match: true, confidence, reasons, signals, checks: [...localChecks, ...fieldChecks, ...tieChecks, ...uncheckedRequirements(profile, eligibility)] }
 }
 
 /** The youngest and oldest a student in each grade could plausibly be. */
@@ -388,6 +400,10 @@ export function uncheckedRequirements(profile: StudentProfile, e: EligibilityCri
  * and only moves the handful that never earned it.
  */
 export function capTier(tier: ConfidenceTier, checks: string[]): ConfidenceTier {
+  // An award for one town the student may not live in is a possibility,
+  // whatever else it matched: a Woodlands County bursary scored "Good" for a
+  // STEM student on its environmental-science tag.
+  if (checks.some(c => c.startsWith(LOCAL_CHECK))) return 'possible'
   return tier === 'strong' && checks.some(isRestrictedCheck) ? 'good' : tier
 }
 
@@ -482,6 +498,8 @@ export function matchPrograms(programs: Program[], answers: Record<string, strin
 export type MatchInput = {
   id: number
   region: string | null
+  alsoOpenTo?: string[] | null
+  localArea?: string | null
   /** The "who can apply" line, read for gates the quiz never asks. */
   audience?: string | null
   eligibility: EligibilityCriteria | null

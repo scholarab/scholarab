@@ -153,7 +153,7 @@ export function initSaved() {
       // right under it (critique 2026-09-23), so it keeps only the device note.
       countEl.textContent = empty
         ? 'Your shortlist is saved on this device.'
-        : `${total} ${total === 1 ? 'item' : 'items'} bookmarked. Your shortlist is saved on this device.`;
+        : `${total} ${total === 1 ? 'item' : 'items'} saved. Your shortlist stays on this device.`;
     }
 
     const emptyEl = root.querySelector<HTMLElement>('[data-sv-empty]');

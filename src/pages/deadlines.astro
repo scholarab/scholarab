@@ -95,7 +95,9 @@ const scholarshipRows: Row[] = scholarships
       state: status === 'active'
         ? STATUS_WORDS.open
         : status === 'unconfirmed'
-          ? STATUS_WORDS.unconfirmed
+          // Not "Opens later": it sits under "Due this week" by this date, and
+          // the date is the thing that is uncertain (critique 2026-09-27).
+          ? 'Likely date, not posted yet'
           : s.openDate
           ? `Opens ${formatListingDate(s.openDate)}`
           : STATUS_WORDS.future,
@@ -116,7 +118,7 @@ const programRows: Row[] = programs
     // The column is money. A program's grade text sat under the scholarships'
     // amounts and read as one (critique 2026-09-24); the Program tag already
     // says what the row is.
-    meta: p.stipend || (p.paid ? 'Paid' : ''),
+    meta: p.stipend || (p.paid ? 'Pays you' : ''),
     state: STATUS_WORDS.open,
     open: true,
   }));
@@ -279,7 +281,7 @@ const breadcrumbJson = {
                     <span class="sabl-mono sabcal-day sabcal-day-md tnum">{monthDayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>
-                      {r.kind === 'program' && <span class="sabcal-tag">Program</span>}
+                      {r.kind === 'program' && !/\bprograms?$/i.test(r.name) && <span class="sabcal-tag">Program</span>}
                     </span>
                     <span class="sabcal-sub">
                       <span class="sabcal-meta">{r.meta}</span>
@@ -313,7 +315,7 @@ const breadcrumbJson = {
                     <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>
-                      {r.kind === 'program' && <span class="sabcal-tag">Program</span>}
+                      {r.kind === 'program' && !/\bprograms?$/i.test(r.name) && <span class="sabcal-tag">Program</span>}
                     </span>
                     <span class="sabcal-sub">
                       <span class="sabcal-meta">{r.meta}</span>

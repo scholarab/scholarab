@@ -60,6 +60,15 @@ export type Scholarship = {
    * them an award they are plainly eligible for. JSON-only, like metaDetail.
    */
   alsoOpenTo?: string[] | null
+  /**
+   * Who a `region: 'Alberta'` award is actually limited to, when that is one
+   * school, town, county or division rather than the province ("Boyle School
+   * graduates", "Woodlands County residents"). `region` has no value for a
+   * place without a hub, so before this field 184 local awards read as open to
+   * every Albertan and a Calgary student's quiz led with a Woodlands County
+   * bursary (critique 2026-09-27). Phrased to follow "Only for". JSON-only.
+   */
+  localArea?: string | null
 }
 
 export type Program = {

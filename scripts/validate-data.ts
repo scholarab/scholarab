@@ -33,6 +33,8 @@ interface Scholarship {
   region?: string | null;
   /** Extra region hubs, beyond `region`. See Scholarship.alsoOpenTo in data-loader.ts. */
   alsoOpenTo?: string[] | null;
+  /** See Scholarship.localArea in data-loader.ts. */
+  localArea?: string | null;
   category?: string | null;
   // region/category are declared even though the index signature would cover
   // them, because it would cover them as `unknown` -- and `unknown` is not
@@ -96,6 +98,17 @@ for (const s of scholarships) {
 for (const [id, titles] of schIds) {
   if (titles.length > 1) {
     console.error(`Duplicate scholarship id ${id}: "${titles.join('", "')}"`);
+    failed = true;
+  }
+}
+
+// ── localArea narrows a province-wide listing, nothing else ─────────────────
+// A city listing already says where it is; a local area on one would be a
+// second, disagreeing answer to the same question.
+for (const s of scholarships) {
+  if (s.localArea == null) continue;
+  if (typeof s.localArea !== 'string' || !s.localArea.trim() || s.region !== 'Alberta') {
+    console.error(`Scholarship ${s.id} "${s.title}": localArea needs a non-empty string on a region "Alberta" listing`);
     failed = true;
   }
 }

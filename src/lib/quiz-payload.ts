@@ -12,6 +12,7 @@ export type QuizScholarship = Pick<
   | 'eligibility'
   | 'alsoOpenTo'
   | 'concluded'
+  | 'localArea'
 > & {
   // Sparse: present only when they change the status (see quizPayload).
   openDate?: string | null;
@@ -39,7 +40,7 @@ export function quizPayload(scholarships: Scholarship[], programs: Program[]) {
   return {
     version: 1 as const,
     scholarships: scholarships.map(
-      ({ id, title, amount, deadline, audience, url, region, eligibility, alsoOpenTo, concluded, openDate, active, deadlineEstimated, rolling }) => ({
+      ({ id, title, amount, deadline, audience, url, region, eligibility, alsoOpenTo, localArea, concluded, openDate, active, deadlineEstimated, rolling }) => ({
         id,
         title,
         amount,
@@ -49,6 +50,7 @@ export function quizPayload(scholarships: Scholarship[], programs: Program[]) {
         region,
         eligibility,
         alsoOpenTo,
+        ...(localArea ? { localArea } : {}),
         // Only when true, so the rest of the catalogue ships no extra bytes.
         ...(concluded ? { concluded: true } : {}),
         // What the results need to say whether a match is open today, in the

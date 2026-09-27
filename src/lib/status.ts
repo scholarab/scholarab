@@ -190,7 +190,9 @@ export function waitingLabel(
   // No countdown: counting down to a guessed date is what this state stops.
   // The headword first, last cycle's date as the qualifier.
   if (status === 'unconfirmed') {
-    return { main: STATUS_WORDS.future, sub: s.deadline ? `date not posted, around ${fmt(s.deadline)}` : 'date not posted' };
+    // "Not posted, around Jun 1" read as a contradiction (critique 2026-09-27):
+    // the date is last cycle's, carried forward, so it is said as a likelihood.
+    return { main: STATUS_WORDS.future, sub: s.deadline ? `date not posted yet, likely around ${fmt(s.deadline)}` : 'date not posted' };
   }
   return null;
 }

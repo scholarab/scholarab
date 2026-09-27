@@ -154,12 +154,19 @@ export async function getStaticPaths() {
       money: true,
     }));
 
+  // Cost where it is known, since a scholarship page recommending a tuition
+  // program without saying so reads as "free" on a free site; and the format
+  // over the category, which filed two chemistry exams under "Research"
+  // (critique 2026-09-27).
+  const formatLabel = new Map(PROGRAM_FORMATS.map(f => [f.value, f.label]));
+  const costCell = (p: Program) => p.paid ? 'Pays you' : p.cost === 'free' ? 'Free' : p.cost === 'fee' ? 'Has a fee' : p.duration || 'Varies';
   const asProgramCards = (list: Program[]): RelatedItem[] =>
     list.map(p => ({
       href: `/programs/${generateSlug(p.name)}/`,
       title: p.name,
-      value: p.duration || 'Varies',
-      tag: p.category || 'Program',
+      value: costCell(p),
+      money: !!p.paid,
+      tag: (p.format && formatLabel.get(p.format)) || p.category || 'Program',
       when: !p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing' ? programUndatedLabel(p.deadline)
         : `Due ${formatDeadline(p.deadline)}`,
       open: canApplyNow(programStatusOf(p, metaToday)),
@@ -443,7 +450,8 @@ if (kind === 'scholarship') {
  */
 function programValue(p: Program) {
   if (p.paid) {
-    return { valueLabel: 'THIS PROGRAM IS', valueBig: 'Paid', valueNote: p.stipend };
+    // "Paid" alone could be either direction on a page about cost.
+    return { valueLabel: 'THIS PROGRAM', valueBig: 'Pays you', valueNote: p.stipend };
   }
   if (p.cost === 'free') {
     return { valueLabel: 'THIS PROGRAM IS', valueBig: 'Free', valueNote: p.costNote };

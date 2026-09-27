@@ -216,7 +216,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   await page.locator('[data-dir-all]').click();
   await expect(cards).toHaveCount(open.length);
   // A shut section opens from its heading.
-  await page.locator('[data-dir-group="closed"]').click();
+  await page.locator('[data-dir-group="closed"] .sabl-group').click();
   await expect(cards).toHaveCount(open.length + items.filter(s => scholarshipGroupKey(s) === 'closed').length);
   await expect(page.locator('[data-dir-more]')).toBeHidden();
 });

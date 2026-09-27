@@ -451,11 +451,11 @@ describe('grouped grids', () => {
     // The heading stays, still counting all two: shut is not empty, and it is
     // the only thing left that can open the run again.
     expect(layout()).toEqual(['H:open:2', 'H:closed:1', 'Three'])
-    expect(open.getAttribute('aria-expanded')).toBe('false')
+    expect(open.querySelector('.sabl-group')!.getAttribute('aria-expanded')).toBe('false')
     expect(open.querySelector('[data-dir-group-word]')!.textContent).toBe('Show')
     click(open)
     expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1', 'Three'])
-    expect(open.getAttribute('aria-expanded')).toBe('true')
+    expect(open.querySelector('.sabl-group')!.getAttribute('aria-expanded')).toBe('true')
     expect(open.querySelector('[data-dir-group-word]')!.textContent).toBe('Hide')
   })
 

@@ -264,18 +264,19 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (!el) {
       el = root?.querySelector<HTMLElement>(`[data-dir-group="${key}"]`) ?? undefined;
       if (!el) {
-        el = document.createElement('button');
-        el.setAttribute('type', 'button');
-        el.className = 'sabl-group';
+        // A heading holding the toggle, so heading navigation lands on the
+        // sections and the 1,500 rows under them are a level down.
+        el = document.createElement('h2');
+        el.className = 'sabl-group-h';
         el.dataset.dirGroup = key;
-        el.innerHTML = '<span class="sabl-group-name"><span class="sabl-group-label"></span><span class="sabl-group-count"></span></span>'
-          + `<span class="sabl-group-toggle" aria-hidden="true"><span data-dir-group-word></span>${CARET}</span>`;
+        el.innerHTML = '<button type="button" class="sabl-group"><span class="sabl-group-name"><span class="sabl-group-label"></span><span class="sabl-group-count"></span></span>'
+          + `<span class="sabl-group-toggle" aria-hidden="true"><span data-dir-group-word></span>${CARET}</span></button>`;
       }
       headers.set(key, el);
     }
     el.hidden = false;
     const open = !collapsed.has(key);
-    el.setAttribute('aria-expanded', String(open));
+    (el.querySelector('.sabl-group') ?? el).setAttribute('aria-expanded', String(open));
     const word = el.querySelector('[data-dir-group-word]');
     if (word) word.textContent = open ? 'Hide' : 'Show';
     el.querySelector('.sabl-group-label')!.textContent = config.groups!.label(key);

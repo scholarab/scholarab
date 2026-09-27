@@ -121,7 +121,7 @@ export const months: UpdateMonth[] = [
       },
       {
         kind: 'new',
-        text: 'March 6: the four biggest Canadian scholarship sites were taken apart to see what to do differently. Five rules came out of it and all five are still here: no account, cards you can skim, the dollar total up front, and closing soonest first.',
+        text: 'March 6: the four biggest Canadian scholarship sites were taken apart to see what to do differently. Four rules came out of it: no account, cards you can skim, the dollar total up front, and closing soonest first. No account and closing soonest first are still here; the cards became rows and the dollar total came off the page in September.',
       },
       {
         kind: 'under-hood',

@@ -300,12 +300,11 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
       return (
         <>
         {head && (
+          <h2 class="sabl-group-h" data-dir-group={head.key} data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}>
           <button
             type="button"
             class="sabl-group"
-            data-dir-group={head.key}
             aria-expanded={SHUT_GROUPS.has(head.key) ? 'false' : 'true'}
-            data-dir-later={i >= DIRECTORY_PAGE_SIZE ? '' : undefined}
           >
             {/* The rule belongs to the words, not to the row: it stops
                 after the count rather than running on to the toggle (Ilia,
@@ -324,6 +323,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
               <svg class="sabl-group-caret" viewBox="0 0 12 8" width="12" height="8" fill="none"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
           </button>
+          </h2>
         )}
         <div
           class="sabl-card"
@@ -351,7 +351,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
               heading; it was an eyebrow over a title that already says what
               the award is, and TRACK filters the same field with a count. */}
           <div class="sabl-row-main">
-            <h2 class="sabl-name-h"><a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a></h2>
+            <h3 class="sabl-name-h"><a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a></h3>
             {s.audience && <div class="sabl-blurb">{s.audience}</div>}
             {facts.length > 0 && (
               <ul class="sabl-facts" aria-label="Requirements">{facts.map(f => <li>{f}</li>)}</ul>

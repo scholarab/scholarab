@@ -5,6 +5,21 @@ import SabFooter from '../../components/sab/SabFooter.astro';
 import SabFonts from '../../components/sab/SabFonts.astro';
 import { guides } from '../../lib/guides';
 
+// The Grade 12 reader first: the list led with research programs, and the
+// Grade 12 timeline sat 8th while Loran, due in weeks, sat 7th (critique
+// 2026-09-27). Everything else keeps the order guides.ts gives it.
+const FIRST = [
+  'scholarships-for-grade-12-students-alberta',
+  'alberta-scholarship-deadlines-by-month',
+  'loran-award-guide',
+  'alexander-rutherford-scholarship-guide',
+  'how-to-write-a-scholarship-essay',
+  'reference-letters-for-scholarships',
+  'local-scholarships-better-odds',
+];
+const rank = (slug: string) => { const i = FIRST.indexOf(slug); return i < 0 ? FIRST.length : i; };
+const ordered = guides.map((g, i) => ({ g, i })).sort((a, b) => rank(a.g.slug) - rank(b.g.slug) || a.i - b.i).map(x => x.g);
+
 const pageTitle = 'Scholarship Guides for Alberta Students | ScholarAB';
 const description =
   'Practical guides for Alberta high school students: the Rutherford scholarship, essays, reference letters, timelines, research programs and contests.';
@@ -17,7 +32,7 @@ const collectionJson = {
   'description': description,
   'url': canonical,
   'provider': { '@type': 'Organization', 'name': 'ScholarAB', 'url': 'https://www.scholarab.ca' },
-  'hasPart': guides.map(g => ({
+  'hasPart': ordered.map(g => ({
     '@type': 'Article',
     'headline': g.title,
     'url': `https://www.scholarab.ca/guides/${g.slug}/`,
@@ -51,7 +66,7 @@ const collectionJson = {
           2026-09-23). No 01 to 18 numbers either: the list has no order a
           reader needs. */}
       <ul class="sabgi-list">
-        {guides.map(g => (
+        {ordered.map(g => (
           <li>
             <a href={`/guides/${g.slug}/`} class="sabgi-row">
               <h2 class="sabgi-row-title">{g.title}</h2>
