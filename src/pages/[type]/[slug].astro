@@ -149,7 +149,7 @@ export async function getStaticPaths() {
       title: s.title,
       value: s.amount,
       tag: s.region || 'Alberta',
-      when: !s.deadline ? STATUS_WORDS.none
+      when: !s.deadline ? (s.rolling ? STATUS_WORDS.none : STATUS_WORDS.unconfirmed)
         : `${s.deadlineEstimated ? 'Around ' : 'Due '}${formatDeadline(s.deadline)}`,
       money: true,
     }));

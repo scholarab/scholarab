@@ -41,6 +41,8 @@ export type Scholarship = {
    * totals can act on. JSON-only, like concluded. See status.ts.
    */
   deadlineEstimated?: boolean
+  /** Applications are taken year-round, so no deadline is correct. JSON-only. See status.ts. */
+  rolling?: boolean
   eligibility: EligibilityCriteria | null
   /**
    * An authored clause appended to the derived SERP snippet. JSON-only, like

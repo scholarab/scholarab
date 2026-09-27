@@ -9,6 +9,7 @@ describe('openCounts', () => {
     const items = [
       { deadline: '2026-12-01' },
       { deadline: '2026-10-01' },
+      { deadline: null, rolling: true },
       { deadline: null },
       { deadline: '2026-01-01' },
       { deadline: '2027-01-01', openDate: '2026-12-01' },

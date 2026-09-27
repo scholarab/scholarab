@@ -17,6 +17,7 @@ export type QuizScholarship = Pick<
   openDate?: string | null;
   active?: boolean;
   deadlineEstimated?: boolean;
+  rolling?: boolean;
 };
 export type QuizProgram = Pick<
   Program,
@@ -38,7 +39,7 @@ export function quizPayload(scholarships: Scholarship[], programs: Program[]) {
   return {
     version: 1 as const,
     scholarships: scholarships.map(
-      ({ id, title, amount, deadline, audience, url, region, eligibility, alsoOpenTo, concluded, openDate, active, deadlineEstimated }) => ({
+      ({ id, title, amount, deadline, audience, url, region, eligibility, alsoOpenTo, concluded, openDate, active, deadlineEstimated, rolling }) => ({
         id,
         title,
         amount,
@@ -55,6 +56,7 @@ export function quizPayload(scholarships: Scholarship[], programs: Program[]) {
         ...(openDate ? { openDate } : {}),
         ...(active === false ? { active: false } : {}),
         ...(deadlineEstimated ? { deadlineEstimated: true } : {}),
+        ...(rolling ? { rolling: true } : {}),
       })
     ),
     programs: programs.map(

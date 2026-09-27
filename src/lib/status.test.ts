@@ -24,8 +24,16 @@ describe('scholarshipStatusOf', () => {
   })
 
   it('treats a missing deadline as open with no deadline, not as a 1970 cutoff', () => {
-    expect(scholarshipStatusOf({ deadline: null }, TODAY)).toBe('ongoing')
-    expect(scholarshipStatusOf({}, TODAY, { deadlineMs: 0 })).toBe('ongoing')
+    expect(scholarshipStatusOf({ deadline: null, rolling: true }, TODAY)).toBe('ongoing')
+    expect(scholarshipStatusOf({ rolling: true }, TODAY, { deadlineMs: 0 })).toBe('ongoing')
+  })
+
+  // An empty deadline is a date nobody posted, not a year-round intake: 460
+  // awards read "Open any time" while their notes said otherwise (2026-09-26).
+  it('reads a missing deadline as not posted unless the award is rolling', () => {
+    expect(scholarshipStatusOf({ deadline: null }, TODAY)).toBe('unconfirmed')
+    expect(scholarshipStatusOf({}, TODAY, { deadlineMs: 0 })).toBe('unconfirmed')
+    expect(scholarshipStatusOf({ deadline: null, openDate: '2099-01-01' }, TODAY)).toBe('future')
   })
 
   // "Open now" counts 'active' only (Ilia, 2026-09-23); an undated award is

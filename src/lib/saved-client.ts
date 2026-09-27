@@ -14,11 +14,11 @@ import { emailOff } from './email-off';
 
 // The same one-line deadline cell the directories use ("Apr 30 · 26 days left"),
 // from the fields a saved card carries.
-export function savedWhen(type: 'scholarship' | 'program', f: { deadline: string | null; openDate?: string | null; active?: boolean; concluded?: boolean; deadlineEstimated?: boolean }): { main: string; sub: string; cls: string } {
+export function savedWhen(type: 'scholarship' | 'program', f: { deadline: string | null; openDate?: string | null; active?: boolean; concluded?: boolean; deadlineEstimated?: boolean; rolling?: boolean }): { main: string; sub: string; cls: string } {
   // `concluded` must travel with the dates: an ended award carries no deadline,
   // so without it the helper reads "between cycles" and says Opening later.
   return type === 'scholarship'
-    ? scholarshipWhen({ id: 0, deadline: f.deadline, openDate: f.openDate ?? null, active: f.active ?? true, concluded: f.concluded, deadlineEstimated: f.deadlineEstimated } as unknown as ScholarshipWithMeta)
+    ? scholarshipWhen({ id: 0, deadline: f.deadline, openDate: f.openDate ?? null, active: f.active ?? true, concluded: f.concluded, deadlineEstimated: f.deadlineEstimated, rolling: f.rolling } as unknown as ScholarshipWithMeta)
     : programWhen({ id: 0, deadline: f.deadline } as unknown as ProgramWithMeta);
 }
 
@@ -39,13 +39,14 @@ export type SavedItem = {
   amount?: string; audience?: string | null; provider?: string | null;
   description?: string | null; openDate?: string | null; active?: boolean; concluded?: boolean;
   deadlineEstimated?: boolean;
+  rolling?: boolean;
 };
 
 function savedCard(s: SavedItem): string {
   const sh = s.type === 'scholarship';
   const attr = (key: string, value: string | undefined | null) => value == null ? '' : ` data-${key}="${esc(value)}"`;
   return `<div class="h-full" data-sv-wrap data-type="${s.type}" data-id="${s.id}">
-    <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${sh ? attr('open-date', s.openDate) + attr('inactive', s.active === false ? '' : undefined) + attr('concluded', s.concluded ? '' : undefined) + attr('estimated', s.deadlineEstimated ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
+    <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${sh ? attr('open-date', s.openDate) + attr('inactive', s.active === false ? '' : undefined) + attr('concluded', s.concluded ? '' : undefined) + attr('estimated', s.deadlineEstimated ? '' : undefined) + attr('rolling', s.rolling ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
       <div class="sabl-row-main">
         <h3 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
         ${sh
@@ -109,7 +110,7 @@ export function initSaved() {
       const card = w.querySelector<HTMLElement>('.sabl-card')!;
       const d = card.dataset;
       const whenEl = card.querySelector<HTMLElement>('[data-when]');
-      const when = savedWhen(w.dataset.type === 'scholarship' ? 'scholarship' : 'program', { deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined });
+      const when = savedWhen(w.dataset.type === 'scholarship' ? 'scholarship' : 'program', { deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined, rolling: d.rolling !== undefined });
       if (whenEl) {
         whenEl.className = when.cls;
         whenEl.querySelector('[data-when-main]')!.textContent = when.main;
@@ -119,7 +120,7 @@ export function initSaved() {
       }
       const apply = card.querySelector<HTMLAnchorElement>('[data-sv-apply]');
       if (apply) {
-        const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined } as Parameters<typeof getScholarshipStatus>[0]);
+        const status = getScholarshipStatus({ id: 0, deadline: d.deadline ?? null, openDate: d.openDate ?? null, active: d.inactive === undefined, concluded: d.concluded !== undefined, deadlineEstimated: d.estimated !== undefined, rolling: d.rolling !== undefined } as Parameters<typeof getScholarshipStatus>[0]);
         paintRowAction(apply, rowAction(canApplyNow(status), d.url, apply.dataset.detail!, d.name ?? ''), { ext: EXT, arrow: ARROW });
       }
     }

@@ -10,7 +10,8 @@
 // `today` is passed in rather than read from the clock so callers keep control
 // of it; list-core hands it its own mockable getToday().
 
-// 'active' is open with a real deadline; 'ongoing' is open with none. They are
+// 'active' is open with a real deadline; 'ongoing' is open with none because
+// the provider takes applications year-round (`rolling`). They are
 // separate because "open now" only counts the first (Ilia, 2026-09-23): 460
 // undated awards were being counted as open, so the directory said 1,083 open
 // where 623 had a date to apply by. Programs already drew the same line.
@@ -30,6 +31,11 @@ export interface StatusInput {
    * has not posted this cycle's date. See Scholarship.deadlineEstimated.
    */
   deadlineEstimated?: boolean;
+  /**
+   * The provider takes applications at any time, so no deadline is the fact
+   * rather than a gap. Without it an undated award reads "date not posted".
+   */
+  rolling?: boolean;
 }
 
 /** Precomputed ms fields from the directory payload, when the caller has them. */
@@ -62,7 +68,13 @@ export function scholarshipStatusOf(
   // Curator-closed (active: false) with a future deadline is a next-cycle
   // listing whose open date isn't known yet, not accepting applications now.
   if (s.active === false) return 'future';
-  return dead === Infinity ? 'ongoing' : 'active';
+  // No deadline is "open any time" only when the provider says applications
+  // are taken year-round. Otherwise it is a date nobody has posted: 460
+  // undated awards said "Open any time" (and "Open now." in their search
+  // snippet) while their own notes said there was no application, the round
+  // had closed or the date was unknown (external review, 2026-09-26).
+  if (dead === Infinity) return s.rolling === true ? 'ongoing' : 'unconfirmed';
+  return 'active';
 }
 
 /**

@@ -122,8 +122,9 @@ describe('getScholarshipStatus', () => {
   })
 
   it('treats _deadline_ms of 0 with no deadline string as "no deadline" (ongoing, not closed)', () => {
-    const s = makeScholarship({ id: 1, deadline: null, _deadline_ms: 0 })
+    const s = makeScholarship({ id: 1, deadline: null, _deadline_ms: 0, rolling: true })
     expect(getScholarshipStatus(s)).toBe('ongoing')
+    expect(getScholarshipStatus(makeScholarship({ id: 2, deadline: null, _deadline_ms: 0 }))).toBe('unconfirmed')
   })
 
   it('returns future for curator-closed listings with a future deadline (next cycle, open date unknown)', () => {
@@ -354,7 +355,8 @@ describe('scholarshipWhen', () => {
   it('names the other states plainly', () => {
     expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-01-01', _deadline_ms: at('2026-01-01') })).main).toBe('Closed')
     expect(scholarshipWhen(makeScholarship({ id: 2, openDate: '2026-09-01', deadline: '2026-12-01', _open_ms: at('2026-09-01'), _deadline_ms: at('2026-12-01') })).main).toBe('Opens Sep 1')
-    expect(scholarshipWhen(makeScholarship({ id: 3, deadline: null, _deadline_ms: 0 })).main).toBe('Open any time')
+    expect(scholarshipWhen(makeScholarship({ id: 3, deadline: null, _deadline_ms: 0, rolling: true })).main).toBe('Open any time')
+    expect(scholarshipWhen(makeScholarship({ id: 4, deadline: null, _deadline_ms: 0 }))).toMatchObject({ main: 'Opens later', sub: 'date not posted' })
   })
 })
 

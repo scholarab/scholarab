@@ -895,7 +895,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "Two awards; video can replace the letter."
+    "metaDetail": "Two awards; video can replace the letter.",
+    "deadlineEstimated": true
   },
   {
     "id": 47,
@@ -931,7 +932,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "A video can replace it."
+    "metaDetail": "A video can replace it.",
+    "deadlineEstimated": true
   },
   {
     "id": 48,
@@ -970,7 +972,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 49,
@@ -1008,7 +1011,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 50,
@@ -1046,7 +1050,8 @@
         "volunteer"
       ]
     },
-    "metaDetail": "A video may replace the letter."
+    "metaDetail": "A video may replace the letter.",
+    "deadlineEstimated": true
   },
   {
     "id": 51,
@@ -1086,7 +1091,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "metaDetail": "No immediate family CPA."
+    "metaDetail": "No immediate family CPA.",
+    "deadlineEstimated": true
   },
   {
     "id": 53,
@@ -18387,7 +18393,8 @@
     "deadline": "2027-07-15",
     "alsoOpenTo": [
       "Beaumont"
-    ]
+    ],
+    "deadlineEstimated": true
   },
   {
     "id": 498,
@@ -18469,7 +18476,8 @@
     "deadline": "2027-06-30",
     "alsoOpenTo": [
       "Beaumont"
-    ]
+    ],
+    "deadlineEstimated": true
   },
   {
     "id": 500,
@@ -18506,7 +18514,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2027-06-30"
+    "deadline": "2027-06-30",
+    "deadlineEstimated": true
   },
   {
     "id": 501,
@@ -19526,7 +19535,8 @@
         "Volunteering"
       ]
     },
-    "deadline": "2027-06-14"
+    "deadline": "2027-06-14",
+    "deadlineEstimated": true
   },
   {
     "id": 527,
@@ -23936,7 +23946,8 @@
         "Leadership",
         "Volunteering"
       ]
-    }
+    },
+    "openDate": "2027-01-25"
   },
   {
     "id": 644,
@@ -28012,7 +28023,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2026-10-01"
+    "deadline": "2026-10-01",
+    "deadlineEstimated": true
   },
   {
     "id": 749,
@@ -28109,7 +28121,7 @@
     "metaDetail": "Oil Barons and local club athletes qualify too.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28150,7 +28162,7 @@
     "metaDetail": "Half the score is financial need, not performance.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28191,7 +28203,7 @@
     "metaDetail": "No application; your coach puts your name forward.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28231,7 +28243,7 @@
     "metaDetail": "Twenty awards of $2,000, the biggest pool at Keyano.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28270,7 +28282,7 @@
     "metaDetail": "Diplomas only, not certificates.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28309,7 +28321,7 @@
     "metaDetail": "Indigenous preference, not a bar.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28348,7 +28360,7 @@
     "metaDetail": "Three awards, open to every programme and year.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28387,7 +28399,7 @@
     "metaDetail": "Open to any programme; domestic students only.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28426,7 +28438,7 @@
     "metaDetail": "No programme limit.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28465,7 +28477,7 @@
     "metaDetail": "CEDA families first.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28504,7 +28516,7 @@
     "metaDetail": "Marks, service and need all weighed.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28545,7 +28557,7 @@
     "metaDetail": "The largest cash awards in Keyano's award book.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28586,7 +28598,7 @@
     "metaDetail": "Judged on marks alone, no need component.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28625,7 +28637,7 @@
     "metaDetail": "Judged on your high school record.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28667,7 +28679,7 @@
     "metaDetail": "A letterhead volunteering reference.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28708,7 +28720,7 @@
     "metaDetail": "A small award with a light application burden.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28747,7 +28759,7 @@
     "metaDetail": "Reserved for full-time single parents.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28786,7 +28798,7 @@
     "metaDetail": "For those who upgraded first.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28825,7 +28837,7 @@
     "metaDetail": "The strictest of three Northstar awards.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28866,7 +28878,7 @@
     "metaDetail": "Five years of residency, plus marks.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28907,7 +28919,7 @@
     "metaDetail": "This one ignores marks.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28948,7 +28960,7 @@
     "metaDetail": "You or a parent must work at Suncor.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -28990,7 +29002,7 @@
     "metaDetail": "Staff decide it.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29033,7 +29045,7 @@
     "metaDetail": "Scored one hundred per cent on academic achievement.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29072,7 +29084,7 @@
     "metaDetail": "No programme or year restriction of any kind.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29111,7 +29123,7 @@
     "metaDetail": "The Indigenous counterpart to the Governors award.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29150,7 +29162,7 @@
     "metaDetail": "Prefers seven named communities.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29192,7 +29204,7 @@
     "metaDetail": "Community work is all of it.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29233,7 +29245,7 @@
     "metaDetail": "Nursing and both paramedic streams.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29275,7 +29287,7 @@
     "metaDetail": "May add a summer job.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29317,7 +29329,7 @@
     "metaDetail": "Ties broken by random draw.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29356,7 +29368,7 @@
     "metaDetail": "Three years in Alberta, not just Wood Buffalo.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29395,7 +29407,7 @@
     "metaDetail": "First and second year students.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29434,7 +29446,7 @@
     "metaDetail": "First and second year nursing students only.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29475,7 +29487,7 @@
     "metaDetail": "A 65 per cent floor, then community work.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29518,7 +29530,7 @@
     "metaDetail": "The academic half of a paired nursing award.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29559,7 +29571,7 @@
     "metaDetail": "Adversity is the criterion.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29600,7 +29612,7 @@
     "metaDetail": "Judged on community involvement alone.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29644,7 +29656,7 @@
     "metaDetail": "Nothing else in the criteria.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29685,7 +29697,7 @@
     "metaDetail": "A five-step cascade starting at one high school.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29726,7 +29738,7 @@
     "metaDetail": "Certificate students; need and service.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29769,7 +29781,7 @@
     "metaDetail": "The department funds this one itself.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29812,7 +29824,7 @@
     "metaDetail": "Place of birth, not status.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29853,7 +29865,7 @@
     "metaDetail": "University Studies is the transfer route.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29894,7 +29906,7 @@
     "metaDetail": "No application; the upgrading faculty simply choose.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29934,7 +29946,7 @@
     "metaDetail": "Upgrading rather than a credential.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -29975,7 +29987,7 @@
     "metaDetail": "ATCO funds it; all may apply.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30016,7 +30028,7 @@
     "metaDetail": "Any year of the programme is eligible.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30059,7 +30071,7 @@
     "metaDetail": "Volunteering counts double.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30102,7 +30114,7 @@
     "metaDetail": "Enrolment seems the only condition.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30143,7 +30155,7 @@
     "metaDetail": "Catchment crosses into Sask.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30184,7 +30196,7 @@
     "metaDetail": "Power engineering plus documented volunteering.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30227,7 +30239,7 @@
     "metaDetail": "Purely on need, above a 1.70 GPA.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30268,7 +30280,7 @@
     "metaDetail": "Process Operations counts too.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30311,7 +30323,7 @@
     "metaDetail": "Third and fourth class tickets only.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30354,7 +30366,7 @@
     "metaDetail": "The Indigenous half of a paired award.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30397,7 +30409,7 @@
     "metaDetail": "Open to any power engineering student, any year.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30440,7 +30452,7 @@
     "metaDetail": "Keyano's deepest trades pool.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30481,7 +30493,7 @@
     "metaDetail": "It opens to University Studies if no one applies.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30522,7 +30534,7 @@
     "metaDetail": "It opens to University Studies if commerce is empty.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30564,7 +30576,7 @@
     "metaDetail": "Written specifically for a recent local graduate.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30605,7 +30617,7 @@
     "metaDetail": "Fort McMurray graduates only, decided on marks.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30646,7 +30658,7 @@
     "metaDetail": "First-year education students, no local requirement.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30687,7 +30699,7 @@
     "metaDetail": "Mature students first, then any science student.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30729,7 +30741,7 @@
     "metaDetail": "Commemorates Ecole Polytechnique, 1989.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30772,7 +30784,7 @@
     "metaDetail": "Written for a recent local graduate.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30813,7 +30825,7 @@
     "metaDetail": "First-year engineering, no residency condition.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -30854,7 +30866,7 @@
     "metaDetail": "Keyano's largest first-year engineering award.",
     "eligibility": {
       "grades": [
-        "12"
+        "post-secondary"
       ],
       "schoolBoards": [],
       "specificSchools": [],
@@ -35748,7 +35760,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 938,
@@ -35792,7 +35805,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 939,
@@ -35832,7 +35846,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 940,
@@ -35874,7 +35889,8 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 941,
@@ -35996,7 +36012,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 944,
@@ -36036,7 +36053,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 945,
@@ -36158,7 +36176,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 948,
@@ -36200,7 +36219,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 949,
@@ -36242,7 +36262,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "deadlineEstimated": true
   },
   {
     "id": 951,
@@ -37802,7 +37823,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": false
   },
   {
     "id": 989,
@@ -38197,7 +38218,8 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "active": true
+    "active": true,
+    "deadlineEstimated": true
   },
   {
     "id": 1000,
@@ -40952,7 +40974,8 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-09",
-    "active": true
+    "active": true,
+    "openDate": "2027-01-01"
   },
   {
     "id": 1072,
@@ -41060,7 +41083,8 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-09",
-    "active": true
+    "active": true,
+    "openDate": "2027-01-01"
   },
   {
     "id": 1075,
@@ -41453,7 +41477,8 @@
       ]
     },
     "lastVerified": "2026-09",
-    "active": true
+    "active": true,
+    "deadlineEstimated": true
   },
   {
     "id": 1086,
@@ -41677,7 +41702,8 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-09",
-    "active": true
+    "active": true,
+    "deadlineEstimated": true
   },
   {
     "id": 1092,
@@ -42146,7 +42172,8 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-09",
-    "active": true
+    "active": true,
+    "rolling": true
   },
   {
     "id": 1105,
@@ -42790,7 +42817,8 @@
       "Chestermere",
       "Cochrane",
       "Okotoks"
-    ]
+    ],
+    "deadlineEstimated": true
   },
   {
     "id": 1128,
@@ -48390,7 +48418,8 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "openDate": "2027-01-05"
   },
   {
     "id": 1405,
@@ -53070,7 +53099,8 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "rolling": true
   },
   {
     "id": 1527,

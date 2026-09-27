@@ -337,6 +337,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
           data-inactive={s.active === false ? '' : undefined}
           data-concluded={s.concluded ? '' : undefined}
           data-estimated={s.deadlineEstimated ? '' : undefined}
+          data-rolling={s.rolling ? '' : undefined}
           data-no-apply={noApply ? '' : undefined}
           data-scopes={scopesOf(s)}
           data-search={scholarshipSearchBlob(s)}
@@ -462,6 +463,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
         // cycles" and the client repaints the server's CLOSED chip as OPENING SOON.
         concluded: d.concluded !== undefined,
         deadlineEstimated: d.estimated !== undefined,
+        rolling: d.rolling !== undefined,
         _after: d.after !== undefined,
         scopes: d.scopes ? d.scopes.split(' ') : [],
       };
