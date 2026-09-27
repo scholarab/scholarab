@@ -1035,6 +1035,15 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-when.is-urgent::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--rust); margin-right: 7px; }
 .sabl-when.is-quiet { font-weight: 600; color: rgba(20, 25, 21, 0.62); }
 .sabl-when.is-quiet .sabl-when-sub { font-weight: 500; }
+/* A waiting state with a qualifier ("Opens later" + "date not posted, around
+   Sep 26") is wider than the 200px deadline column, and nowrap pushed it left
+   over the amount (Ilia, /saved, 2026-09-26). On the desktop row it stacks,
+   right-aligned and wrapping inside the column; dated rows keep one line. */
+@media (min-width: 900px) {
+  .sabl-card .sabl-row-when { max-width: 100%; min-width: 0; }
+  .sabl-card .sabl-when.is-quiet { flex-direction: column; align-items: flex-end; white-space: normal; text-align: right; max-width: 100%; }
+  .sabl-card .sabl-when.is-quiet .sabl-when-sub::before { content: none; }
+}
 /* The month the listing was last checked against its provider, under the
    date on every row: the check is the reason to trust the row. */
 .sabl-checked { font-size: 12.5px; font-weight: 500; color: rgba(20, 25, 21, 0.7); white-space: nowrap; }
