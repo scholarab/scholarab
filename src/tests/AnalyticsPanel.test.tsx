@@ -218,6 +218,31 @@ describe('AnalyticsPanel', () => {
     expect(screen.queryByText(/before Sep 26/)).toBeNull()
   })
 
+  it('keeps opens from before steps were tracked out of the funnel percentages', () => {
+    const withTour = { ...data,
+      monthly: [...data.monthly,
+        { month: '2026-09', event: 'tour_open', n: 60 },
+        { month: '2026-09', event: 'tour_cta', n: 5 }],
+      tourMeta: [
+        { month: '2026-09', event: 'tour_open', meta: 'auto', n: 31, tracked: false },
+        { month: '2026-09', event: 'tour_open', meta: 'auto', n: 28, tracked: true },
+        { month: '2026-09', event: 'tour_open', meta: 'sheet', n: 1, tracked: true },
+        { month: '2026-09', event: 'tour_step', meta: '2', n: 5, tracked: true },
+        { month: '2026-09', event: 'tour_close', meta: '1', n: 5, tracked: true },
+      ] }
+    render(<AnalyticsPanel data={withTour} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Sep 2026' }))
+    const cells = (label: string) =>
+      [...screen.getByText(label).closest('tr')!.querySelectorAll('td')].map(c => c.textContent)
+    // Where it was opened still counts every opening
+    expect(cells('Opened on its own (first visit)')).toEqual(['Opened on its own (first visit)', '59', '98%'])
+    expect(cells('Not tracked (opened before Sep 26 2026, 10 pm)')).toEqual(['Not tracked (opened before Sep 26 2026, 10 pm)', '31', ''])
+    expect(cells('Step 1: Find')).toEqual(['Step 1: Find', '29', '100%'])
+    expect(cells('Step 2: Shortlist')).toEqual(['Step 2: Shortlist', '5', '17%'])
+    expect(cells('Went on to the quiz')).toEqual(['Went on to the quiz', '5', '17%'])
+    expect(cells('Closed on step 1: Find')).toEqual(['Closed on step 1: Find', '5', '17%'])
+  })
+
   it('splits saves by the button used, with the rate per 100 views', () => {
     const withSaves = { ...data, saveFrom: [
       { month: '2026-09', from: 'page', n: 3 },

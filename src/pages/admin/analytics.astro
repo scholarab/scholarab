@@ -91,12 +91,15 @@ try {
 
   // The How it works walkthrough by its detail: where it was opened, each
   // step reached, and the step it was closed on. Only fixed values reach the
-  // table (api/event.ts), so the meta is safe to group on.
+  // table (api/event.ts), so the meta is safe to group on. Steps, closes and
+  // the quiz link were only recorded from about 10 pm on Sep 26 2026 (ts is
+  // UTC), so opens before that are flagged and kept out of the funnel's base.
+  const tourTracked = sql<boolean>`${events.ts} >= '2026-09-27 04:00:00'`
   const tourMetaQuery = db
-    .select({ month: EVENT_MONTH, event: events.event, meta: events.meta, n: count() })
+    .select({ month: EVENT_MONTH, event: events.event, meta: events.meta, n: count(), tracked: tourTracked })
     .from(events)
     .where(sql`${events.event} in ('tour_open', 'tour_step', 'tour_close')`)
-    .groupBy(sql`1`, events.event, events.meta)
+    .groupBy(sql`1`, events.event, events.meta, tourTracked)
 
   // The email list itself, not the signup events: unsubscribing deletes the
   // row, so these are live reminders. One person can track several deadlines,

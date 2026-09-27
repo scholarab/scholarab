@@ -10,7 +10,9 @@ export interface AnalyticsData {
   saveFrom?: { month: string; from: string | null; n: number }[]
   /** How it works by detail: tour_open by where from, tour_step by step
       reached, tour_close by the step it was closed on. From 2026-09-26. */
-  tourMeta?: { month: string; event: string; meta: string | null; n: number }[]
+  /** tracked is false for opens before steps and closes were recorded
+      (Sep 26 2026, about 10 pm); absent means tracked. */
+  tourMeta?: { month: string; event: string; meta: string | null; n: number; tracked?: boolean }[]
   /** Live email list: people = distinct addresses, reminders = rows. */
   subscribers: { people: number; reminders: number; pending?: number }
   monthlySubs: { month: string; people: number; reminders: number }[]
@@ -373,13 +375,17 @@ export default function AnalyticsPanel({ data }: Props) {
 
   // The walkthrough as a funnel: opened (by where), each step reached, how
   // it ended. Every count is people per tab session, as sendEvent dedupes.
+  // Opens from before steps and closes were recorded can never show up past
+  // step 1, so the funnel's percentages are taken over the tracked opens only.
   const tour = useMemo(() => {
     const inScope = (m: string) => month === ALL || m === month
     const from: Record<string, number> = {}
     const step: Record<string, number> = {}
     const closed: Record<string, number> = {}
+    let untracked = 0
     for (const t of data.tourMeta ?? []) {
       if (!inScope(t.month)) continue
+      if (t.event === 'tour_open' && t.tracked === false) untracked += t.n
       const key = t.meta ?? 'none'
       const into = t.event === 'tour_open' ? from : t.event === 'tour_step' ? step : t.event === 'tour_close' ? closed : null
       if (into) into[key] = (into[key] ?? 0) + t.n
@@ -391,18 +397,21 @@ export default function AnalyticsPanel({ data }: Props) {
       else if (m.event === 'tour_cta') cta += m.n
     }
     const pct = (n: number) => (opens > 0 ? `${Math.round((n / opens) * 100)}%` : '')
+    const base = opens - untracked
+    const funnelPct = (n: number) => (base > 0 ? `${Math.round((n / base) * 100)}%` : '')
     return {
       opens,
+      untracked,
       from: TOUR_FROM_LABELS.map(([k, label]) => ({ k, label, n: from[k] ?? 0 }))
         .filter(r => r.n > 0 || ['auto', 'bar', 'menu', 'sheet'].includes(r.k)),
       steps: TOUR_STEP_NAMES.map((name, i) => {
-        const n = i === 0 ? opens : step[String(i + 1)] ?? 0
-        return { label: `Step ${i + 1}: ${name}`, n, pct: pct(n) }
+        const n = i === 0 ? base : step[String(i + 1)] ?? 0
+        return { label: `Step ${i + 1}: ${name}`, n, pct: funnelPct(n) }
       }),
-      cta: { n: cta, pct: pct(cta) },
+      cta: { n: cta, pct: funnelPct(cta) },
       closed: TOUR_STEP_NAMES.map((name, i) => {
         const n = closed[String(i + 1)] ?? 0
-        return { label: `Closed on step ${i + 1}: ${name}`, n, pct: pct(n) }
+        return { label: `Closed on step ${i + 1}: ${name}`, n, pct: funnelPct(n) }
       }),
       pct,
     }
@@ -743,6 +752,13 @@ export default function AnalyticsPanel({ data }: Props) {
                   </tr>
                 ))}
                 <tr><td colSpan={3} className="px-4 pt-3 pb-1 text-xs text-white/40">How far people got</td></tr>
+                {tour.untracked > 0 && (
+                  <tr className="border-b border-white/4">
+                    <td className="px-4 py-2.5 text-white/50">Not tracked (opened before Sep 26 2026, 10 pm)</td>
+                    <td className="px-4 py-2.5 text-right text-white/40 tabular-nums">{tour.untracked}</td>
+                    <td className="px-4 py-2.5 w-16"></td>
+                  </tr>
+                )}
                 {tour.steps.map(r => (
                   <tr key={r.label} className="border-b border-white/4">
                     <td className="px-4 py-2.5">{r.label}</td>
