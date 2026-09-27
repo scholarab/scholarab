@@ -103,6 +103,10 @@
     "hash": "f8963bafb29ac742",
     "date": "2026-09-26"
   },
+  "/programs/awesomemath-summer-program/": {
+    "hash": "88af8dcc60de490b",
+    "date": "2026-09-26"
+  },
   "/programs/beaver-computing-challenge/": {
     "hash": "eb3f85fa354651b5",
     "date": "2026-09-26"
@@ -187,6 +191,10 @@
     "hash": "0f8b904f17866b3e",
     "date": "2026-09-26"
   },
+  "/programs/canadian-improv-games-alberta/": {
+    "hash": "51eab9b06285f30d",
+    "date": "2026-09-26"
+  },
   "/programs/canadian-math-kangaroo-contest/": {
     "hash": "cc991d8db92c3074",
     "date": "2026-09-26"
@@ -267,6 +275,10 @@
     "hash": "f92bd62189200f84",
     "date": "2026-09-26"
   },
+  "/programs/cubes-in-space/": {
+    "hash": "480b030ddbc910a4",
+    "date": "2026-09-26"
+  },
   "/programs/cybertitan-national-cybersecurity-competition/": {
     "hash": "025ce138948e4e37",
     "date": "2026-09-15"
@@ -298,6 +310,10 @@
   "/programs/euclid-mathematics-contest/": {
     "hash": "d87f7dfd0795fd12",
     "date": "2026-09-15"
+  },
+  "/programs/european-astro-pi-challenge-mission-space-lab/": {
+    "hash": "e5668aa3f95e30b6",
+    "date": "2026-09-26"
   },
   "/programs/experiences-canada-group-exchanges/": {
     "hash": "60612ef1be022776",
@@ -331,6 +347,10 @@
     "hash": "9aef15ae7d1cc895",
     "date": "2026-09-15"
   },
+  "/programs/genius-olympiad/": {
+    "hash": "4dd1a190eab90303",
+    "date": "2026-09-26"
+  },
   "/programs/girls-who-code-canada-summer-programs/": {
     "hash": "0b1128de0c946b85",
     "date": "2026-09-26"
@@ -343,6 +363,10 @@
     "hash": "931acf45402c1046",
     "date": "2026-09-15"
   },
+  "/programs/hack-club/": {
+    "hash": "46c1303118ff74f8",
+    "date": "2026-09-26"
+  },
   "/programs/hack-the-north-high-school-track/": {
     "hash": "a61fe0ab4a2e1356",
     "date": "2026-09-15"
@@ -351,12 +375,20 @@
     "hash": "274205e10016eda0",
     "date": "2026-09-15"
   },
+  "/programs/harvard-summer-school-secondary-school-program/": {
+    "hash": "8045c3170fedee16",
+    "date": "2026-09-26"
+  },
   "/programs/high-school-model-un-university-of-calgary/": {
     "hash": "b473b66bb60d4f34",
     "date": "2026-09-15"
   },
   "/programs/high-school-model-united-nations-university-of-alberta-hsmun/": {
     "hash": "39d4831596280bca",
+    "date": "2026-09-26"
+  },
+  "/programs/himcm-high-school-mathematical-contest-in-modeling/": {
+    "hash": "6684697446a273c7",
     "date": "2026-09-26"
   },
   "/programs/historica-canada-heritage-fairs-young-citizens/": {
@@ -387,9 +419,17 @@
     "hash": "d64e5086c5cefd45",
     "date": "2026-09-15"
   },
+  "/programs/interact-clubs-rotary/": {
+    "hash": "54936f7b6fd3a1e2",
+    "date": "2026-09-26"
+  },
   "/programs/international-summer-school-for-young-physicists-issyp/": {
     "hash": "ca0e1d4fe1bd7cd6",
     "date": "2026-09-15"
+  },
+  "/programs/international-youth-math-challenge-iymc/": {
+    "hash": "cbbcac4f2076fa12",
+    "date": "2026-09-26"
   },
   "/programs/ja-northern-alberta-company-program/": {
     "hash": "f2b0abbf14008c44",
@@ -405,6 +445,10 @@
   },
   "/programs/john-locke-institute-global-essay-prize/": {
     "hash": "af498b3df0049564",
+    "date": "2026-09-26"
+  },
+  "/programs/journal-of-emerging-investigators-jei/": {
+    "hash": "6836f39253eb1c79",
     "date": "2026-09-26"
   },
   "/programs/junior-zoo-guides-calgary-zoo/": {
@@ -434,6 +478,10 @@
   "/programs/lets-talk-science-university-chapter-symposia/": {
     "hash": "f967a4088006abc1",
     "date": "2026-09-15"
+  },
+  "/programs/lumiere-research-scholar-program/": {
+    "hash": "74bf396ba3cc7a48",
+    "date": "2026-09-26"
   },
   "/programs/macewan-university-design-summer-camp/": {
     "hash": "cb6fd6778ae99cbe",
@@ -627,6 +675,10 @@
     "hash": "80dc324c70e494bf",
     "date": "2026-09-15"
   },
+  "/programs/stanford-pre-collegiate-summer-institutes/": {
+    "hash": "a3f5fc2b19ff32d2",
+    "date": "2026-09-26"
+  },
   "/programs/stem-fellowship-big-data-ai-challenge/": {
     "hash": "2761cb7e8ee3fadb",
     "date": "2026-09-15"
@@ -679,6 +731,10 @@
     "hash": "d9f6f48889d0cdab",
     "date": "2026-09-26"
   },
+  "/programs/the-concord-review/": {
+    "hash": "00401025077c3df8",
+    "date": "2026-09-26"
+  },
   "/programs/the-duke-of-edinburghs-international-award/": {
     "hash": "a9a8dca787e234f8",
     "date": "2026-09-15"
@@ -702,6 +758,10 @@
   "/programs/ualberta-game-ai-bootcamps/": {
     "hash": "f37a5f02f05d5f8f",
     "date": "2026-09-15"
+  },
+  "/programs/ubc-future-global-leaders/": {
+    "hash": "8f6022ac1a5ad95b",
+    "date": "2026-09-26"
   },
   "/programs/ucalgary-active-living-summer-camps/": {
     "hash": "a612d0d9dea45888",
@@ -750,6 +810,10 @@
   "/programs/wisest-summer-research-program/": {
     "hash": "1edfaec7f4827cbc",
     "date": "2026-09-15"
+  },
+  "/programs/wolfram-high-school-summer-research-program/": {
+    "hash": "a68ea004e70cbc19",
+    "date": "2026-09-26"
   },
   "/programs/wood-buffalo-regional-science-fair-wbrsf/": {
     "hash": "1792d48f92f70164",
