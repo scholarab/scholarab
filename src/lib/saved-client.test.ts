@@ -100,7 +100,7 @@ describe('initSaved', () => {
     // The per-type split belongs to the section heads, not to this line too.
     expect($('[data-sv-count]').textContent).toBe('2 items bookmarked. Your shortlist is saved on this device.')
     expect($('[data-sv-sh-label]').textContent).toBe('SCHOLARSHIPS · 1')
-    expect($('[data-sv-pr-label]').textContent).toBe('RESEARCH PROGRAMS · 1')
+    expect($('[data-sv-pr-label]').textContent).toBe('PROGRAMS · 1')
   })
 
   it('recomputes day chips from the current clock', () => {

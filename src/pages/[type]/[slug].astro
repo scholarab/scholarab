@@ -260,7 +260,7 @@ if (kind === 'scholarship') {
 
   d = {
     currentPath: '/scholarships/',
-    crossLabel: 'Research programs to go with it',
+    crossLabel: 'Programs to go with it',
     crossPath: '/programs/',
     // Award names run long (the median is 41 characters, the longest 76), and
     // Google truncates titles around 60. A second boilerplate phrase after the
@@ -387,7 +387,7 @@ if (kind === 'scholarship') {
       ...(hasDate ? { 'applicationDeadline': p.deadline } : {}),
       'provider': { '@type': 'Organization', 'name': p.provider },
     },
-    breadcrumbName: 'Research Programs',
+    breadcrumbName: 'Programs',
     itemName: p.name,
     itemId: p.id,
     itemType: 'program' as const,
@@ -536,7 +536,7 @@ const breadcrumbJson = {
       facetHref={facetHref}
       facetLabel={facet?.label ?? null}
       backHref={d.currentPath}
-      backLabel={`Back to ${d.breadcrumbName === 'Research Programs' ? 'Programs' : 'Scholarships'}`}
+      backLabel={`Back to ${d.breadcrumbName === 'Programs' ? 'Programs' : 'Scholarships'}`}
       facts={d.facts}
       needs={"needs" in d ? d.needs : undefined}
       eligibility={d.eligibility}

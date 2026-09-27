@@ -175,7 +175,7 @@ export function initSaved() {
     const shLabel = root.querySelector('[data-sv-sh-label]');
     if (shLabel) shLabel.textContent = `SCHOLARSHIPS · ${sh.length}`;
     const prLabel = root.querySelector('[data-sv-pr-label]');
-    if (prLabel) prLabel.textContent = `RESEARCH PROGRAMS · ${pr.length}`;
+    if (prLabel) prLabel.textContent = `PROGRAMS · ${pr.length}`;
   }
 
   function repaint() {
@@ -290,7 +290,7 @@ export function initSaved() {
           + `<div class="sabl-mono sabs-cal-date">${new Date(date + 'T00:00:00').toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric' }).toUpperCase()}</div>`
           + '<div>'
           + `<div class="sabs-cal-name">${esc(item.title)}</div>`
-          + `<div class="sabl-mono sabs-cal-kind">${item.type === 'scholarship' ? `SCHOLARSHIP${item.amount ? ' · ' + esc(item.amount.toUpperCase()) : ''}` : 'RESEARCH PROGRAM'}</div>`
+          + `<div class="sabl-mono sabs-cal-kind">${item.type === 'scholarship' ? `SCHOLARSHIP${item.amount ? ' · ' + esc(item.amount.toUpperCase()) : ''}` : 'PROGRAM'}</div>`
           + '</div>'
           + `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" style="font-size:13.5px">Apply${EXT}</a>`
           + '</div>').join('')

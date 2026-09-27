@@ -25,22 +25,22 @@ const programs = enrichPrograms(raw);
 const ordered = filterSortPrograms(programs, DEFAULT_PROGRAM_STATE);
 const listJson = itemListJson(
   ordered.map(p => ({ name: p.name, url: `https://www.scholarab.ca/programs/${p._slug}/` })),
-  'Alberta Student Research Programs',
+  'Programs for Alberta High School Students',
   'https://www.scholarab.ca/programs/',
 );
 ---
 
 <Layout
-  title="Alberta Student Research Programs | ScholarAB"
+  title="Programs for Alberta High School Students | ScholarAB"
   description="Research programs, competitions, and apprenticeships for Alberta high school students. Science, health, engineering, computing, trades and more."
-  ogTitle="Alberta Student Research Programs | ScholarAB"
+  ogTitle="Programs for Alberta High School Students | ScholarAB"
   ogDescription="Research programs, competitions, and apprenticeships for Alberta high school students. Science, health, engineering, computing, trades and more."
   ogUrl="https://www.scholarab.ca/programs/"
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Alberta Student Research Programs",
+    "name": "Programs for Alberta High School Students",
     "description": "Research programs, competitions, and apprenticeships for Alberta high school students. Science, health, engineering, computing, trades and more.",
     "url": "https://www.scholarab.ca/programs/",
     "provider": { "@type": "Organization", "name": "ScholarAB", "url": "https://www.scholarab.ca" },

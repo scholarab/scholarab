@@ -236,7 +236,7 @@ describe('programMeta', () => {
 
   it('falls back to a generated sentence when the description is empty', () => {
     expect(programMeta({ name: 'X', provider: 'Y', description: '' }, 'tba', fmt))
-      .toContain('X is a research program run by Y')
+      .toContain('X is a program run by Y')
   })
 
   it('never returns more than Google renders', () => {

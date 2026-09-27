@@ -93,7 +93,7 @@ function schoolRestricted(id: number, school: string) {
 }
 
 /** Go through all 6 questions and reach the results screen. */
-function advanceToResults(searchType: 'Scholarships' | 'Research programs' | 'Both' = 'Scholarships') {
+function advanceToResults(searchType: 'Scholarships' | 'Programs' | 'Both' = 'Scholarships') {
   clickTile(searchType)                // Q1 searchType
   clickTile('Grade 12')                // Q2 grade
   clickTile('Medicine Hat')            // Q3 city
@@ -131,7 +131,7 @@ describe('Question 1; Search type', () => {
   it('renders search type options', () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     expect(screen.getByText('Scholarships')).toBeTruthy()
-    expect(screen.getByText('Research programs')).toBeTruthy()
+    expect(screen.getByText('Programs')).toBeTruthy()
     expect(screen.getByText('Both')).toBeTruthy()
   })
 
@@ -540,7 +540,7 @@ describe('Results', () => {
       paid: true, stipend: '$3,000 stipend', category: 'STEM research', deadline: null,
     }])
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
-    advanceToResults('Research programs')
+    advanceToResults('Programs')
     fireEvent.click(screen.getByRole('button', { name: /^save: save test program$/i }))
     expect(mockToggleSavedProgram).toHaveBeenCalledWith(42)
     expect(mockToggleSaved).not.toHaveBeenCalled()
@@ -552,7 +552,7 @@ describe('Results', () => {
       paid: true, stipend: '$3,000 stipend', category: null, deadline: null,
     }])
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
-    advanceToResults('Research programs')
+    advanceToResults('Programs')
     expect(screen.getByText('Paid')).toBeTruthy()
     expect(screen.getByText('$3,000 stipend')).toBeTruthy()
   })

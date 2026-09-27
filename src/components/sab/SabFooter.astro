@@ -5,7 +5,7 @@ import SabLogoMark from './SabLogoMark.astro';
 const footerCols = [
   { title: 'Explore', links: [
     { label: 'All scholarships', href: '/scholarships/' },
-    { label: 'Research programs', href: '/programs/' },
+    { label: 'Programs', href: '/programs/' },
     { label: 'Closing soon', href: '/#closing' },
     { label: 'Deadline calendar', href: '/deadlines/' },
     { label: 'Find my match', href: '/match/' },
@@ -36,8 +36,8 @@ const footerCols = [
           <SabLogoMark size={32} id="footer" />
           <span class="sabf-word">Scholar<span class="sabf-accent">AB</span></span>
         </div>
-        <p class="sabf-blurb">ScholarAB is a free directory of scholarships and research programs for Alberta high school students, with deadlines tracked. No account needed.</p>
-        <p class="sabf-blurb sabf-disclaimer">Listings are written and reviewed by a person, but this site can still contain errors and out-of-date information. Deadlines move and rules change. Always confirm the details on the provider's own page before you apply. <a href="/terms/">More in the terms of use</a>.</p>
+        <p class="sabf-blurb">ScholarAB is a free directory of scholarships and programs for Alberta high school students, with deadlines tracked. No account needed.</p>
+        <p class="sabf-blurb sabf-disclaimer">Listings are researched with AI tools and checked against each provider's own page, but this site can still contain errors and out-of-date information. Deadlines move and rules change. Always confirm the details on the provider's own page before you apply. <a href="/terms/">More in the terms of use</a>.</p>
       </div>
       <div class="sabf-cols">
         {footerCols.map(col => (

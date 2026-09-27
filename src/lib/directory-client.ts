@@ -630,9 +630,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       if (slot) {
         // Own directory first: same page, same filters, just a wider slice.
         const target = here
-          ? { href: kind === 'scholarship' ? '/scholarships/' : '/programs/', label: kind === 'scholarship' ? 'all scholarships' : 'all research programs' }
+          ? { href: kind === 'scholarship' ? '/scholarships/' : '/programs/', label: kind === 'scholarship' ? 'all scholarships' : 'all programs' }
           : there
-            ? { href: kind === 'scholarship' ? '/programs/' : '/scholarships/', label: kind === 'scholarship' ? 'research programs' : 'scholarships' }
+            ? { href: kind === 'scholarship' ? '/programs/' : '/scholarships/', label: kind === 'scholarship' ? 'programs' : 'scholarships' }
             : null;
         slot.textContent = '';
         slot.hidden = target === null;

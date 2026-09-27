@@ -507,7 +507,7 @@ export function programMeta(
 
   const body =
     p.description?.trim() ||
-    `${p.name} is a research program${p.provider ? ` run by ${p.provider}` : ''} for Alberta high school students.`;
+    `${p.name} is a program${p.provider ? ` run by ${p.provider}` : ''} for Alberta high school students.`;
   const whole = wholeSentences(body, META_MAX - lead.length);
   if (whole.length >= SENTENCE_FLOOR) return `${lead}${whole}`;
   return clampMeta(`${lead}${body}`);

@@ -657,7 +657,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 grade and field and keeps the data's own order; it does not
                 score. The label says what the list actually is. */}
             <p className="sabm-table-label">
-              {showScholarships ? 'Research programs for your grade and field' : 'Matched to your grade and field'}
+              {showScholarships ? 'Programs for your grade and field' : 'Matched to your grade and field'}
             </p>
             {programResults.map((p, index) => (
               <ResultRow

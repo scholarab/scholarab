@@ -32,7 +32,7 @@ export interface QuizQuestion { key: string; q: string; opts: QuizOption[] }
  * ("And County of Newell", "Science, tech, math"). The reassurance lines
  * ("Prime prep time", "Totally fine", "Grades aren't everything") were filler
  * and are gone (critique 2026-09-23). No emoji either: 🔬 once carried
- * "Research programs" and "STEM & Engineering" at once.
+ * "Programs" and "STEM & Engineering" at once.
  *
  * Keys, values and labels are the real matching-engine inputs and must not
  * change without updating the matcher.
@@ -43,7 +43,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     q: 'What are you looking for?',
     opts: [
       { label: 'Scholarships', value: 'scholarships', hint: 'Awards, and bursaries given on financial need' },
-      { label: 'Research programs', value: 'programs', hint: 'Summer, trades, contests' },
+      { label: 'Programs', value: 'programs', hint: 'Summer, trades, contests' },
       { label: 'Both', value: 'both', hint: 'Scholarships and programs' },
     ],
   },
