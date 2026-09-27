@@ -23,15 +23,16 @@
     "format": "summer",
     "provider": "Alberta Innovates + University of Calgary",
     "grades": "Grade 11",
-    "duration": "6 weeks (July 2 – Aug 13, 2026)",
+    "duration": "6 weeks, early July to mid-August",
     "paid": true,
     "stipend": "$3,000 stipend",
     "location": "Calgary (in-person)",
     "eligibility": "Grade 11, south of Red Deer to north of Claresholm, 85%+ in Math 20, Bio 20, and one other science",
     "deadline": "TBA",
     "url": "https://research.ucalgary.ca/research-services/alberta-innovates-HYRS",
-    "description": "Paid research in biomedical and health sciences at UCalgary through Alberta Innovates' High School Youth Researcher Summer (HYRS). Closes mid-March.",
-    "lastVerified": "2026-08"
+    "description": "Paid research in biomedical and health sciences at UCalgary through Alberta Innovates' High School Youth Researcher Summer (HYRS), for Grade 11 students at central Alberta high schools. The award is a $3,000 stipend for six weeks from early July to mid-August. Applications for 2027 launch in January to February 2027.",
+    "lastVerified": "2026-09",
+    "metaDescription": "Paid six-week health research at UCalgary for Grade 11 students at central Alberta high schools, with a $3,000 stipend."
   },
   {
     "id": 3,
@@ -40,15 +41,16 @@
     "format": "summer",
     "provider": "Alberta Innovates + University of Lethbridge",
     "grades": "Grade 11",
-    "duration": "6 weeks (July 3 – Aug 14, 2026)",
+    "duration": "6 weeks (July 2 – Aug 13, 2027)",
     "paid": true,
     "stipend": "$3,000 stipend",
     "location": "Lethbridge (in-person)",
     "eligibility": "Grade 11, in or south of Claresholm, 85%+ in Math 20, Bio 20, and one other science",
-    "deadline": "TBA",
+    "deadline": "2027-03-26",
     "url": "https://www.ulethbridge.ca/artsci/hyrs-applications",
-    "description": "Paid six-week health research at ULethbridge through Alberta Innovates' High School Youth Researcher Summer (HYRS). Applications close late March.",
-    "lastVerified": "2026-08"
+    "description": "Paid six-week health research at ULethbridge through Alberta Innovates' High School Youth Researcher Summer (HYRS), for Grade 11 students. The 2027 program runs July 2 to August 13. Applications close March 26, 2027, and your three references (two science or math teachers and one community member) are due March 29. Afterwards you present your research to a Grade 11 science class.",
+    "lastVerified": "2026-09",
+    "metaDescription": "Paid six-week health research at the University of Lethbridge for Grade 11 students, with a $3,000 stipend."
   },
   {
     "id": 4,
@@ -78,13 +80,14 @@
     "duration": "7 months",
     "paid": false,
     "stipend": null,
-    "location": "Edmonton",
-    "eligibility": "Female high school students considering engineering",
-    "deadline": "TBA",
+    "location": "Online across Canada, with some events in person at the University of Alberta",
+    "eligibility": "Female high school students anywhere in Canada; no engineering background needed",
+    "deadline": "2026-09-30",
     "url": "https://www.ualberta.ca/en/engineering/community-giving/discovere-camps/fem-plus-engineering-mentorship-program.html",
-    "description": "A seven-month one-to-one mentorship with a U of A engineering student, for female high school students, with info sessions, faculty events, campus tours and design challenges in the Elko Engineering Garage. Intakes are announced through DiscoverE.",
-    "metaDescription": "A seven-month U of A mentorship for female high school students, with faculty events, campus tours and Elko Garage design challenges.",
-    "lastVerified": "2026-08"
+    "description": "A free seven-month mentorship pairing you one-to-one with a U of A engineering student, who helps with university applications, the move from high school and what engineering is really like. You meet at least monthly however suits you both, and there are group events like class shadowing, design challenges and facility tours. Students from anywhere in Canada can join; travel to in-person events is not covered. Applications for 2026-27 close September 30, 2026.",
+    "metaDescription": "A free seven-month mentorship with a U of A engineering student for female high school students across Canada.",
+    "lastVerified": "2026-09",
+    "cost": "free"
   },
   {
     "id": 7,
@@ -168,13 +171,15 @@
     "duration": "10 weeks",
     "paid": false,
     "stipend": null,
-    "location": "Alberta (virtual with local chapters)",
-    "eligibility": "Alberta high school students grades 9-12 interested in citizen science research",
-    "deadline": "2026-10-01",
+    "location": "Teams run at seven university campuses across Canada; ask Youreka whether one runs near you",
+    "eligibility": "High school students in grades 9 to 12",
+    "deadline": "TBA",
     "url": "https://yourekacanada.org/apply",
-    "description": "A 10-week research and mentorship program where students create and contribute to a citizen science project guided by an undergraduate student mentor. Students develop research skills, collect real data, and present findings.",
+    "description": "A 10-week program where teams of high school students, led by an undergraduate mentor, run their own research project on open-source data in areas like bioinformatics, public health and economics, using the R programming language. Teams present at a regional symposium, the best go on to a national one, and top manuscripts can be published after peer review. Applications for the 2026-27 program open this fall. There is a CA$80 program fee.",
     "metaDescription": "A 10-week citizen science project guided by an undergrad mentor: collect real data and present your findings.",
-    "lastVerified": "2026-08"
+    "lastVerified": "2026-09",
+    "cost": "fee",
+    "costNote": "CA$80 program fee"
   },
   {
     "id": 13,
@@ -304,20 +309,21 @@
   },
   {
     "id": 23,
-    "name": "STEM Fellowship Research Exploration Program – Edmonton",
+    "name": "STEM Fellowship Research Exploration Opportunity (REO) – University of Calgary",
     "category": "Research",
     "format": "research",
     "provider": "STEM Fellowship",
     "grades": "9-12",
-    "duration": "5 days (spring break intensive)",
+    "duration": "A short placement; dates set by each host university",
     "paid": false,
     "stipend": null,
-    "location": "Edmonton (University of Alberta labs)",
-    "eligibility": "High school students grades 9–12",
+    "location": "Calgary (University of Calgary labs); other hosts in BC and Ontario",
+    "eligibility": "High school students; priority to students who are Indigenous, economically disadvantaged, racialized, rural, refugees, newcomers or first-generation university students, but everyone is encouraged to apply",
     "deadline": "TBA",
     "url": "https://www.stemfellowship.org/programs/reo",
-    "description": "Applications are open now across host universities including UCalgary, UBC, Queens, Guelph, York, TMU and U of T Mississauga. REO places high school students on real research, prioritising Indigenous, rural, refugee, newcomer and first-generation students, though everyone is encouraged to apply.",
-    "lastVerified": "2026-08"
+    "description": "A hands-on research placement for high school students in a university lab. You are mentored one-on-one by a graduate student, help with their experiments, shadow the lab team, and attend lab meetings and seminars. In Alberta the host is the University of Calgary; UBC, Queen's, Guelph, York, TMU and two U of T campuses also host. Each university has its own application form on the REO page, and dates are set per host.",
+    "lastVerified": "2026-09",
+    "metaDescription": "Do hands-on research in a University of Calgary lab with a graduate student mentor, through STEM Fellowship's REO program."
   },
   {
     "id": 24,
@@ -4381,7 +4387,7 @@
     "deadline": "2027-03-08",
     "url": "https://www.summer.ucsb.edu/programs/research-mentorship-program/overview",
     "description": "A seven-week summer at UC Santa Barbara where you are paired with a graduate student, postdoc or professor and carry out your own research project, with lectures on research methods along the way. International students are welcome. Applications for 2027 open December 15, 2026 and close March 8, 2027, with decisions on a rolling basis. It is expensive: in 2026, US$5,675 to commute or US$13,274 living on campus.",
-    "metaDescription": "Seven weeks of mentored research at UC Santa Barbara for Grade 10 and 11 students worldwide; apply by March 8, 2027.",
+    "metaDescription": "Seven weeks of mentored research at UC Santa Barbara for Grade 10 and 11 students from anywhere, Canada included.",
     "lastVerified": "2026-09",
     "cost": "fee",
     "costNote": "US$5,675 commuter or US$13,274 residential (2026); limited need-based aid, California residents first"
@@ -4440,7 +4446,7 @@
     "deadline": "2026-12-01",
     "url": "https://www.mathematics.utoronto.ca/outreach/current-programs/grades-1-12-programs/math-mentorship",
     "description": "You are paired with a U of T math graduate student, postdoc or professor and work on a research project in a field of math you choose, from January to May. Meetings can be online, but the January reception and the May showcase happen in person in Toronto, so an Alberta student needs two trips. The top projects are presented at the Canadian Undergraduate Mathematics Conference. Applications open November 3 and close December 1, 2026.",
-    "metaDescription": "Do a math research project with a University of Toronto mentor from January to May; apply by December 1, 2026.",
+    "metaDescription": "Do a math research project with a University of Toronto mentor from January to May, with online meetings allowed.",
     "lastVerified": "2026-09",
     "cost": "fee",
     "costNote": "$367.25 plus a 4.5% service fee"

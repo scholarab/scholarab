@@ -48,12 +48,12 @@
     "date": "2026-09-15"
   },
   "/programs/alberta-innovates-hyrs-university-of-calgary/": {
-    "hash": "3f64ef31abf9ca52",
-    "date": "2026-09-15"
+    "hash": "a1b78513742271d8",
+    "date": "2026-09-26"
   },
   "/programs/alberta-innovates-hyrs-university-of-lethbridge/": {
-    "hash": "47fd7cd3bfb842c0",
-    "date": "2026-09-15"
+    "hash": "c0ea56058f0660b8",
+    "date": "2026-09-26"
   },
   "/programs/alberta-innovates-summer-research-studentships-university-of-calgary/": {
     "hash": "9dd3932fdb870640",
@@ -328,8 +328,8 @@
     "date": "2026-09-15"
   },
   "/programs/fem-engineering-mentorship-program/": {
-    "hash": "d530331fd0e4da30",
-    "date": "2026-09-15"
+    "hash": "bdd2fba258410bdb",
+    "date": "2026-09-26"
   },
   "/programs/first-robotics-competition-frc-canadian-rockies-region/": {
     "hash": "2b6e91a198722b6e",
@@ -500,7 +500,7 @@
     "date": "2026-09-15"
   },
   "/programs/math-mentorship-program-university-of-toronto/": {
-    "hash": "59e347c80250d76b",
+    "hash": "199795252277135c",
     "date": "2026-09-26"
   },
   "/programs/mayors-youth-council-calgary/": {
@@ -632,7 +632,7 @@
     "date": "2026-09-15"
   },
   "/programs/research-mentorship-program-uc-santa-barbara/": {
-    "hash": "a69a71a5e96303b2",
+    "hash": "809955a1f7c14ef8",
     "date": "2026-09-26"
   },
   "/programs/rise-for-the-world/": {
@@ -719,9 +719,9 @@
     "hash": "66b80c3b131224e8",
     "date": "2026-09-26"
   },
-  "/programs/stem-fellowship-research-exploration-program-edmonton/": {
-    "hash": "c41f61e07ea5fd5f",
-    "date": "2026-09-15"
+  "/programs/stem-fellowship-research-exploration-opportunity-reo-university-of-calgary/": {
+    "hash": "147bc2e59526fb96",
+    "date": "2026-09-26"
   },
   "/programs/stem-racing-canada-f1-in-schools/": {
     "hash": "a3c227b9d603ee60",
@@ -888,8 +888,8 @@
     "date": "2026-09-26"
   },
   "/programs/youreka-canada/": {
-    "hash": "56e3ce9774e5198c",
-    "date": "2026-09-15"
+    "hash": "4cbdc3ca15531cdb",
+    "date": "2026-09-26"
   },
   "/programs/youth-agriculture-speaking-championships-calgary-stampede/": {
     "hash": "fd97fb0edd75f9e7",
