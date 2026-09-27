@@ -499,6 +499,10 @@
     "hash": "cb6fd6778ae99cbe",
     "date": "2026-09-15"
   },
+  "/programs/math-mentorship-program-university-of-toronto/": {
+    "hash": "59e347c80250d76b",
+    "date": "2026-09-26"
+  },
   "/programs/mayors-youth-council-calgary/": {
     "hash": "749d1275e70c150c",
     "date": "2026-09-26"
@@ -627,6 +631,10 @@
     "hash": "5d1a150a7f8397bf",
     "date": "2026-09-15"
   },
+  "/programs/research-mentorship-program-uc-santa-barbara/": {
+    "hash": "a69a71a5e96303b2",
+    "date": "2026-09-26"
+  },
   "/programs/rise-for-the-world/": {
     "hash": "3dfc7528e71cfdd3",
     "date": "2026-09-15"
@@ -675,6 +683,10 @@
     "hash": "41d6cbb70ea7c480",
     "date": "2026-09-26"
   },
+  "/programs/scihigh-summer-internship-lunenfeld-tanenbaum-research-institute/": {
+    "hash": "ccfeadab674dafa2",
+    "date": "2026-09-26"
+  },
   "/programs/shad-canada/": {
     "hash": "9189627363a23478",
     "date": "2026-09-15"
@@ -719,6 +731,10 @@
     "hash": "d8c8f76760bee704",
     "date": "2026-09-26"
   },
+  "/programs/student-advancement-research-star-program-sickkids/": {
+    "hash": "3d1e8f10d3e530a1",
+    "date": "2026-09-26"
+  },
   "/programs/student-spaceflight-experiments-program-ssep/": {
     "hash": "d8c3ddf768af383c",
     "date": "2026-09-15"
@@ -729,6 +745,10 @@
   },
   "/programs/students-on-the-beamlines-canadian-light-source/": {
     "hash": "ba046ae3a06dcbac",
+    "date": "2026-09-26"
+  },
+  "/programs/summer-of-science-mcdonald-institute-queens-university/": {
+    "hash": "1dbeb9b950ec6764",
     "date": "2026-09-26"
   },
   "/programs/summer-science-program-ssp/": {
@@ -846,6 +866,10 @@
   "/programs/wood-buffalo-regional-science-fair-wbrsf/": {
     "hash": "1792d48f92f70164",
     "date": "2026-09-15"
+  },
+  "/programs/yale-summer-program-in-astrophysics-yspa/": {
+    "hash": "8a6b91e1cb3f60ca",
+    "date": "2026-09-26"
   },
   "/programs/yale-young-global-scholars-yygs/": {
     "hash": "8bd394cb585b072a",
