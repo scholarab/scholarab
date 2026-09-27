@@ -38,7 +38,7 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
    * cheaply than by building the list. Chip counts use it; they need the size
    * of the set and never its order, so sorting for them is work thrown away.
    */
-  countFor(items: T[], state: S, ctx: C): number;
+  countFor(items: T[], state: S, ctx: C, key?: string): number;
   /**
    * Count, headline, its label, and a second, quieter figure beside it.
    * An empty secondary figure hides the line.
@@ -251,6 +251,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
    * hiding a third of itself with no memory of having been told to.
    */
   const collapsed = new Set<string>();
+  /** Has the reader clicked a heading this load? Until they do, the shut
+   *  runs are the config's default, recomputed for every result: a filter or
+   *  search whose every match sits in a shut run (?status=closed) opens those
+   *  runs, instead of answering with headings over an empty page. */
+  let readerShut = false;
 
   const CARET = '<svg class="sabl-group-caret" viewBox="0 0 12 8" width="12" height="8" fill="none"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -480,6 +485,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // the "Show more" budget either: shutting CLOSED on a 24-card step buys
     // twenty-four open ones rather than twenty-four fewer cards.
     const g = config.groups;
+    if (g && !readerShut) {
+      const shut = g.shut ?? [];
+      collapsed.clear();
+      if (visible.some(v => !shut.includes(g.key(v)))) for (const k of shut) collapsed.add(k);
+    }
     pool = g && collapsed.size && isGrouped(visible)
       ? visible.filter(v => !collapsed.has(g.key(v)))
       : visible;
@@ -567,7 +577,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     root.querySelectorAll<HTMLElement>('[data-fkey] [data-chip-count]').forEach(slot => {
       const chip = slot.closest<HTMLElement>('[data-fkey]')!;
       const next = { ...state, [chip.dataset.fkey!]: chip.dataset.fval ?? '' };
-      const n = config.countFor(searched, next, ctx);
+      const n = config.countFor(searched, next, ctx, chip.dataset.fkey);
       slot.textContent = n.toLocaleString('en-CA');
       // A chip that would empty the page still works, but it should not look
       // like an equal offer beside one holding forty listings.
@@ -735,6 +745,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (group) {
       const key = group.dataset.dirGroup!;
       if (!collapsed.delete(key)) collapsed.add(key);
+      readerShut = true;
       render();
       return;
     }
@@ -853,6 +864,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     document.documentElement.classList.add('js');
     headers.clear();
     collapsed.clear();
+    readerShut = false;
     for (const k of config.groups?.shut ?? []) collapsed.add(k);
     root.querySelectorAll<HTMLElement>('[data-dir-group]').forEach(h => headers.set(h.dataset.dirGroup!, h));
     items = [...root.querySelectorAll<HTMLElement>('[data-dir-card]')].map(config.parseCard);

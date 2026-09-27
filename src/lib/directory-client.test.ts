@@ -466,4 +466,46 @@ describe('grouped grids', () => {
     setupGroups()
     expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1', 'Three'])
   })
+
+  it('opens a default-shut run when a filter leaves nothing else', () => {
+    document.body.innerHTML = `
+      <div id="shut-root">
+        <button class="sabl-chip" data-fkey="group" data-fval="all">All</button>
+        <button class="sabl-chip" data-fkey="group" data-fval="closed">Closed</button>
+        <div data-dir-count></div>
+        <div class="sabl-grid" data-dir-grid>
+          ${gcard(1, 'One', 'open')}${gcard(2, 'Two', 'open')}${gcard(3, 'Three', 'closed')}${gcard(4, 'Four', 'after')}
+        </div>
+        <div data-dir-empty hidden></div>
+      </div>`
+    initDirectory<DirectoryItem & { group: string }, { group: string }>('#shut-root', {
+      itemType: 'scholarship',
+      defaultState: { group: 'all' },
+      toggleKeys: [],
+      parseCard: el => ({
+        el, id: Number(el.dataset.id), name: el.dataset.name ?? '',
+        search: el.dataset.search ?? '', group: el.dataset.group ?? '',
+      }),
+      select: (items, st) => (st.group === 'all' ? items : items.filter(i => i.group === st.group || (st.group === 'closed' && i.group === 'after'))),
+      countFor: (items, st) => (st.group === 'all' ? items : items.filter(i => i.group === st.group)).length,
+      summary: visible => ({ count: `${visible.length} SHOWN` }),
+      groups: { key: i => i.group, label: k => k.toUpperCase(), shut: ['closed', 'after'] },
+      getSavedIds: () => [],
+      toggleSave: () => [],
+      saveLabel: n => n,
+    })
+    document.dispatchEvent(new Event('astro:page-load'))
+    const grid = () => [...document.querySelectorAll<HTMLElement>('#shut-root [data-dir-grid] > *')]
+      .filter(n => !n.hidden)
+      .map(n => n.dataset.dirGroup ? `H:${n.dataset.dirGroup}` : n.dataset.name)
+    // Default: the shut runs keep their headings, their cards stay off.
+    expect(grid()).toEqual(['H:open', 'One', 'Two', 'H:closed', 'H:after'])
+    // Every match of the filter sits in a shut run: open them rather than
+    // answer with two headings over an empty page.
+    click(document.querySelector('#shut-root [data-fval="closed"]')!)
+    expect(grid()).toEqual(['H:closed', 'Three', 'H:after', 'Four'])
+    // Back to everything: the default shut returns.
+    click(document.querySelector('#shut-root [data-fval="all"]')!)
+    expect(grid()).toEqual(['H:open', 'One', 'Two', 'H:closed', 'H:after'])
+  })
 })

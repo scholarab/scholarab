@@ -572,8 +572,10 @@ const isActive = (href: string, also: string[] = []) =>
     .sabh-nav { grid-template-columns: 1fr auto; padding: 0 8px 0 20px; }
     .sabh-burger { display: flex; }
     /* No room beside the logo and the menu button; the footer still carries
-       all three on a phone. */
-    .sabh-social, .sabh-how { display: none; }
+       all three on a phone. The whole column goes, not just its children: an
+       empty flex box still takes the grid's auto column and pushes the
+       burger onto a second row. */
+    .sabh-right { display: none; }
     .sabh-how-row { display: block; }
     /* Tapping Scholarships in the sheet swaps the link list for the same
        panel the desktop dropdown shows (Ilia, 2026-09-15): photo tiles two

@@ -240,6 +240,12 @@ export function groupRuns<T>(items: T[], keyOf: (item: T) => string, labels: Rec
  */
 export const DIRECTORY_PAGE_SIZE = 24;
 
+/** "N OPEN NOW" on a scholarship list: the OPEN NOW run, so after-high-school
+ *  awards (their own run whatever their status) are not counted twice over. */
+export function openNowCount(items: ScholarshipWithMeta[]): number {
+  return items.filter(s => !isAfterHighSchool(s) && getScholarshipStatus(s) === 'active').length;
+}
+
 export function directoryCountLine(shown: number, total: number, noun: string, openNow: number): string {
   // Suppressed when everything shown is already open; "117 OF 117 PROGRAMS ·
   // 117 OPEN NOW" is the same number three times. The clause earns its place

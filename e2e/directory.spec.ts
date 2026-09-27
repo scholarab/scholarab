@@ -3,7 +3,7 @@ import raw from '../src/data/scholarships.json' with { type: 'json' };
 import type { Scholarship } from '../src/lib/data-loader';
 import { enrichScholarships } from '../src/lib/enrich';
 import type { Page } from '@playwright/test';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, getScholarshipStatus, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine } from '../src/lib/list-core';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, filterSortScholarships, groupRuns, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, isAfterHighSchool, openNowCount } from '../src/lib/list-core';
 import { normalizeSearchQuery, scholarshipSearchBlob } from '../src/lib/search-text';
 
 const items = filterSortScholarships(enrichScholarships(raw as unknown as Scholarship[]), DEFAULT_SCHOLARSHIP_STATE);
@@ -57,13 +57,18 @@ test('search preserves results, groups, chips, money, closed awards and history'
       expect(await page.locator('[data-dir-card]:not([hidden])').evaluateAll(els => els.map(e => Number(e.getAttribute('data-id'))))).toEqual(visible.slice(0, PAGE).map(s => s.id));
       // The count line still describes every match, not just the
       // cards revealed so far.
-      await expect(page.locator('[data-dir-count]')).toHaveText(directoryCountLine(visible.length, items.length, 'LISTINGS', visible.filter(s => getScholarshipStatus(s) === 'active').length));
+      await expect(page.locator('[data-dir-count]')).toHaveText(directoryCountLine(visible.length, items.length, 'LISTINGS', openNowCount(visible)));
       // Label and count only: the bar also carries a Hide/Show word, which is
       // state and not part of what the run is called.
       expect(await page.locator('[data-dir-group]:not([hidden])').evaluateAll(els => els.map(e => `${e.querySelector('.sabl-group-label')!.textContent} ${e.querySelector('.sabl-group-count')!.textContent}`))).toEqual(shownRuns(visible, PAGE));
       const chips = await page.locator('[data-fkey]:has([data-chip-count])').evaluateAll(els => els.map(e => ({ key: e.getAttribute('data-fkey')!, value: e.getAttribute('data-fval')!, count: Number(e.querySelector('[data-chip-count]')!.textContent!.replace(/,/g, '')) })));
       const keys = { category: 'selectedCategory', status: 'statusFilter', region: 'selectedRegion' };
-      for (const chip of chips) expect(chip.count).toBe(filterSortScholarships(items, { ...state, [keys[chip.key as keyof typeof keys]]: chip.value || null }).length);
+      // A status chip counts its run, which leaves out the after-high-school
+      // run: "Open now" and the OPEN NOW heading state the same number.
+      for (const chip of chips) {
+        const hit = filterSortScholarships(items, { ...state, [keys[chip.key as keyof typeof keys]]: chip.value || null });
+        expect(chip.count).toBe(chip.key === 'status' && chip.value !== 'all' ? hit.filter(s => !isAfterHighSchool(s)).length : hit.length);
+      }
       await expect(page.locator('[data-dir-card]')).toHaveCount(items.length);
     }
   }

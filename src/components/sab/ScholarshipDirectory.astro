@@ -4,7 +4,7 @@
 // them and recomputes the clock-dependent bits on load, so no React ships.
 import { STATUS_WORDS, canApplyNow, openLaterNote } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
-import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
+import { DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
@@ -138,8 +138,12 @@ const categories = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([name]
 // with JS sees are always the ones that match their own filters. The
 // server-rendered pass is what a reader without JS gets, and what fills the
 // row before hydration so nothing reflows.
-const chipCount = (o: Partial<ScholarshipFilterState>) =>
-  filterSortScholarships(items, { ...DEFAULT_SCHOLARSHIP_STATE, ...o }).length;
+// A status chip counts the run its heading counts. Awards for after high
+// school sit in their own run whatever their status, so "Open now" counting
+// them said 594 over an OPEN NOW heading of 467 (critique 2026-09-26).
+const statusChipCount = (statusFilter: ScholarshipFilterState['statusFilter']) =>
+  filterSortScholarships(items, { ...DEFAULT_SCHOLARSHIP_STATE, statusFilter })
+    .filter(s => statusFilter === 'all' || !isAfterHighSchool(s)).length;
 
 const initial = filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
 
@@ -154,7 +158,7 @@ if (showGroups) {
   let at = 0;
   for (const r of runs) { headerAt.set(at, r); at += r.count; }
 }
-const openNow = initial.filter(s => getScholarshipStatus(s) === 'active').length;
+const openNow = openNowCount(initial);
 const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s => ({ status: getScholarshipStatus(s), openDate: s.openDate })));
 ---
 
@@ -254,7 +258,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
       <span class="sabl-row-label">Status</span>
       <div class="sabl-chips">
         {STATUS_CHIPS.map(s => (
-          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{chipCount({ statusFilter: s.value }).toLocaleString('en-CA')}</span></button>
+          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{statusChipCount(s.value).toLocaleString('en-CA')}</span></button>
         ))}
       </div>
     </div>
@@ -414,7 +418,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
 <script>
   import { canApplyNow } from '../../lib/status.ts';
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, buildScholarshipStatusCache, directoryCountLine, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
+  import { SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, isAfterHighSchool, buildScholarshipStatusCache, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, paintRowAction, rowAction, scholarshipGroupKey, scholarshipWhen, selectScholarships } from '../../lib/list-core.ts';
   import { ARROW_REF, EXT_REF } from '../../lib/icons.ts';
   import type { ScholarshipWithMeta, ScholarshipSort, ScholarshipStatus, StatusFilter, RegionKey } from '../../lib/list-core.ts';
   import { getSaved, toggleSaved } from '../../lib/tracker.ts';
@@ -472,7 +476,10 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
     // seventeen chip counts.
     renderContext: items => buildScholarshipStatusCache(items),
     select: (items, state, cache) => filterSortScholarships(items, asFilterState(state), cache) as Item[],
-    countFor: (items, state, cache) => selectScholarships(items, asFilterState(state), cache).length,
+    countFor: (items, state, cache, key) => {
+      const hit = selectScholarships(items, asFilterState(state), cache);
+      return key === 'status' && state.status !== 'all' ? hit.filter(s => !isAfterHighSchool(s)).length : hit.length;
+    },
     // SCOPE links go to hubs, so they are recounted here rather than by the
     // chip loop: under the live TRACK, STATUS and search, and each link carries
     // those filters so the hub opens on the same number the chip showed.
@@ -503,8 +510,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
     },
     groups: { key: scholarshipGroupKey, label: key => SCHOLARSHIP_GROUP_LABELS[key] ?? key, shut: SCHOLARSHIP_SHUT_GROUPS },
     summary(visible, total) {
-      const openNow = visible.filter(s => getScholarshipStatus(s) === 'active').length;
-      return { count: directoryCountLine(visible.length, total, 'LISTINGS', openNow) };
+      return { count: directoryCountLine(visible.length, total, 'LISTINGS', openNowCount(visible)) };
     },
     getSavedIds: () => [...getSaved()],
     toggleSave: id => [...toggleSaved(id)],

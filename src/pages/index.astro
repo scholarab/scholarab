@@ -9,6 +9,7 @@ import { generateSlug, parseAmount, formatDeadline } from '../lib/utils';
 import { CLOSING_SOON_MS } from '../lib/constants';
 import { STATUS_WORDS, canApplyNow, programIsListed, programStatusOf, scholarshipStatusOf } from '../lib/status';
 import { openCounts } from '../lib/counts';
+import { isAfterHighSchool } from '../lib/list-core';
 import { SCHOLARSHIP_FACETS, PROGRAM_FORMATS, MENU_SCOPES, MIN_FACET_ITEMS, facetForCategory, facetItems } from '../lib/facets';
 import { PHOTO_CREDITS, needsCredit } from '../lib/photo-credits';
 import { GLOSSARY } from '../lib/glossary';
@@ -117,7 +118,9 @@ const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
       kicker: SCOPE_KICKERS[f.slug] ?? `${f.label} students`,
       href,
       count: items.length,
-      ...openCounts(items, s => scholarshipStatusOf(s, today)),
+      // After-high-school awards sit in their own run on the hub, so its OPEN
+      // NOW heading and status chips leave them out; so does this.
+      ...openCounts(items.filter(s => !isAfterHighSchool(s)), s => scholarshipStatusOf(s, today)),
       openHref: `${href}?status=active`,
       credit: PHOTO_CREDITS[f.backdrop!],
     };
