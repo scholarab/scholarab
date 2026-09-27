@@ -114,21 +114,24 @@ const programLinks = [
 // Same shape as the Scholarships panel (Ilia, 2026-09-26): ten tiles in two
 // rows beside ten links. Five tiles in one row stretched to the height of the
 // list, tall and narrow. No counts on these tiles; a note says what each is.
-const EXPLORE_GUIDES: [string, string, string][] = [
-  ['alexander-rutherford-scholarship-guide', 'Rutherford Scholarship guide', 'When it opens and how to apply'],
-  ['how-to-write-a-scholarship-essay', 'Writing a scholarship essay', 'What committees actually read for'],
-  ['grade-11-scholarship-timeline', 'Grade 11 timeline', 'Why grade 11 is the time to start'],
+// Every tile is one line of name over one line of note, the notes about the
+// same length, so the ten read as one grid rather than ten shapes (Ilia,
+// 2026-09-27). The list beside the tiles keeps the full guide titles.
+const EXPLORE_GUIDES: [string, string, string, string][] = [
+  ['alexander-rutherford-scholarship-guide', 'Rutherford guide', 'When and how to apply', 'Rutherford Scholarship guide'],
+  ['how-to-write-a-scholarship-essay', 'Scholarship essays', 'What committees read for', 'Writing a scholarship essay'],
+  ['grade-11-scholarship-timeline', 'Grade 11 timeline', 'Why to start in grade 11', 'Grade 11 timeline'],
 ];
-const guideTiles: Tile[] = EXPLORE_GUIDES.filter(([slug]) => guides.some(g => g.slug === slug))
-  .map(([slug, label, note]) => ({ label, href: `/guides/${slug}/`, count: null, note }));
+const shownGuides = EXPLORE_GUIDES.filter(([slug]) => guides.some(g => g.slug === slug));
+const guideTiles: Tile[] = shownGuides.map(([slug, label, note]) => ({ label, href: `/guides/${slug}/`, count: null, note }));
 const exploreTiles: Tile[] = [
-  { label: 'Find my scholarships', href: '/match/', count: null, note: 'A shortlist from a few questions' },
-  { label: 'Closing soon', href: '/#closing', count: null, note: 'The next deadlines, soonest first' },
-  { label: 'Deadlines', href: '/deadlines/', count: null, note: 'Every deadline ahead, month by month' },
-  { label: 'Guides', href: '/guides/', count: null, note: 'Written for Alberta students' },
-  { label: 'Reference letter template', href: '/templates/reference-letter/', count: null, note: 'Hand it to the person writing yours' },
+  { label: 'Find my scholarships', href: '/match/', count: null, note: 'Answer a few questions' },
+  { label: 'Closing soon', href: '/#closing', count: null, note: 'Soonest deadlines first' },
+  { label: 'Deadlines', href: '/deadlines/', count: null, note: 'Every deadline, by month' },
+  { label: 'Guides', href: '/guides/', count: null, note: 'Written for Albertans' },
+  { label: 'Reference letter', href: '/templates/reference-letter/', count: null, note: 'A template to hand over' },
   ...guideTiles,
-  { label: 'For educators', href: '/educators/', count: null, note: 'For counsellors and teachers' },
+  { label: 'For educators', href: '/educators/', count: null, note: 'Counsellors and teachers' },
   { label: 'What changed', href: '/updates/', count: null, note: 'Every update to the site' },
 ];
 const exploreLinks: MenuLink[] = [
@@ -136,7 +139,7 @@ const exploreLinks: MenuLink[] = [
   { label: 'Find my scholarships', href: '/match/' },
   { label: 'Deadline calendar', href: '/deadlines/' },
   { label: 'All guides', href: '/guides/' },
-  ...guideTiles.map(t => ({ label: t.label, href: t.href })),
+  ...shownGuides.map(([slug, , , full]) => ({ label: full, href: `/guides/${slug}/` })),
   { label: 'Reference letter template', href: '/templates/reference-letter/' },
   { label: 'For educators', href: '/educators/' },
   { label: 'What changed', href: '/updates/' },
@@ -229,7 +232,7 @@ const isActive = (href: string, also: string[] = []) =>
                       <li>
                         <a
                           href={t.href}
-                          class:list={['sabh-tile', { 'sabh-tile-photo': t.backdrop }]}
+                          class:list={['sabh-tile', { 'sabh-tile-photo': t.backdrop, 'sabh-tile-noted': t.note }]}
                           style={t.backdrop ? `--sabh-tile-img: url(/photos/backdrops/${t.backdrop}-tile.webp)` : undefined}
                         >
                           {t.count !== null && (
@@ -436,6 +439,16 @@ const isActive = (href: string, also: string[] = []) =>
   .sabh-tile-text { display: flex; flex-direction: column; gap: 2px; margin-top: auto; }
   .sabh-tile-name { font-size: 16px; font-weight: 600; color: #EEF1EC; letter-spacing: -0.005em; }
   .sabh-tile-count { font-size: 13px; color: rgba(238, 241, 236, 0.55); }
+  /* Explore's tiles have no number above the name, so a name or note that
+     wraps in one tile and not the next moved the text around the grid. Each
+     gets two lines of room whatever it holds: the name sits at the bottom of
+     its room and the note at the top of its, so every tile in the panel puts
+     both in the same place (Ilia, 2026-09-27). */
+  .sabh-tile-noted .sabh-tile-name, .sabh-tile-noted .sabh-tile-count {
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+    line-height: 1.3; height: 2.6em;
+  }
+  .sabh-tile-noted .sabh-tile-name { display: flex; flex-direction: column; justify-content: flex-end; }
   /* Two classes, not one: `.sabh-menu ul` above resets padding and outranks a
      bare `.sabh-menu-list`, which left the divider touching the text. One
      fixed width in every panel, sized to Explore's longest link, so the three
