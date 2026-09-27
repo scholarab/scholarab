@@ -2,8 +2,10 @@
 // beyond the event name and which item it concerns. Must never break the page.
 export type AppEvent =
   | 'detail_view' | 'apply_click' | 'save' | 'quiz_start' | 'quiz_complete' | 'search_empty'
-  /** The How it works walkthrough: opened, and read to its last step. */
-  | 'tour_open' | 'tour_finish'
+  /** The How it works walkthrough: opened (meta: where from), each step
+   *  reached (meta: 2-5), read to its last step, closed (meta: the step it
+   *  was closed on) and its closing "Find my scholarships" clicked. */
+  | 'tour_open' | 'tour_step' | 'tour_finish' | 'tour_close' | 'tour_cta'
   /** Landed from an off-site campaign link carrying `?s=`. Meta is the source
    *  code, never free text; see SOURCES. */
   | 'source_visit'

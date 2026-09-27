@@ -251,7 +251,7 @@ const isActive = (href: string, also: string[] = []) =>
                   <ul class="sabh-menu-list">
                     {MENUS[n.href]!.links.map(l => (
                       <li>{l.tour
-                        ? <button type="button" class="sabh-menu-tour" data-tour-open>{l.label}</button>
+                        ? <button type="button" class="sabh-menu-tour" data-tour-open="menu">{l.label}</button>
                         : <a href={l.href}>{l.label}</a>}</li>
                     ))}
                   </ul>
@@ -261,7 +261,7 @@ const isActive = (href: string, also: string[] = []) =>
           </div>
         ))}
         <div class="sabh-item sabh-how-row">
-          <button type="button" class="sabh-link" data-tour-open><span class="sabh-link-label">How it works</span></button>
+          <button type="button" class="sabh-link" data-tour-open="sheet"><span class="sabh-link-label">How it works</span></button>
         </div>
       </nav>
       {/* Same destinations and link treatment as the footer's CONTACT column:
@@ -270,7 +270,7 @@ const isActive = (href: string, also: string[] = []) =>
       <div class="sabh-right">
       {/* What the site does, in five steps (SabTour). Text from 1101px, where
           the bar has room; the "i" alone from 901 to 1100. */}
-      <button type="button" class="sabh-how" data-tour-open aria-label="How it works">
+      <button type="button" class="sabh-how" data-tour-open="bar" aria-label="How it works">
         <span class="sabh-how-i" aria-hidden="true">i</span><span class="sabh-how-text">How it works</span>
       </button>
       <div class="sabh-social">

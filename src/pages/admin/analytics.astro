@@ -38,7 +38,7 @@ const currentMonth = currentDay.slice(0, 7)
 const search = (searchMonths as { generated: string; months: AnalyticsData['search'] })
 
 let data: AnalyticsData = {
-  monthly: [], perItem: [], daily: [], emptySearches: [], saveFrom: [],
+  monthly: [], perItem: [], daily: [], emptySearches: [], saveFrom: [], tourMeta: [],
   search: search.months, searchGenerated: search.generated,
   subscribers: { people: 0, reminders: 0 },
   monthlySubs: [], perItemSubs: [],
@@ -89,6 +89,15 @@ try {
     .where(eq(events.event, 'save'))
     .groupBy(sql`1`, events.meta)
 
+  // The How it works walkthrough by its detail: where it was opened, each
+  // step reached, and the step it was closed on. Only fixed values reach the
+  // table (api/event.ts), so the meta is safe to group on.
+  const tourMetaQuery = db
+    .select({ month: EVENT_MONTH, event: events.event, meta: events.meta, n: count() })
+    .from(events)
+    .where(sql`${events.event} in ('tour_open', 'tour_step', 'tour_close')`)
+    .groupBy(sql`1`, events.event, events.meta)
+
   // The email list itself, not the signup events: unsubscribing deletes the
   // row, so these are live reminders. One person can track several deadlines,
   // hence people (distinct emails) alongside the row count. Only the counts
@@ -118,8 +127,8 @@ try {
     .where(isNotNull(subscribers.confirmedAt))
     .groupBy(sql`1`, subscribers.itemType, subscribers.itemId)
 
-  const [monthly,perItem,daily,emptySearches,totals,monthlySubs,perItemSubs,saveFrom] = await db.batch([
-    monthlyQuery,perItemQuery,dailyQuery,emptySearchesQuery,subTotalsQuery,monthlySubsQuery,perItemSubsQuery,saveFromQuery,
+  const [monthly,perItem,daily,emptySearches,totals,monthlySubs,perItemSubs,saveFrom,tourMeta] = await db.batch([
+    monthlyQuery,perItemQuery,dailyQuery,emptySearchesQuery,subTotalsQuery,monthlySubsQuery,perItemSubsQuery,saveFromQuery,tourMetaQuery,
   ])
   const subTotals = totals[0]
   // Event IDs name published JSON; internal historical IDs are never joined.
@@ -136,6 +145,7 @@ try {
     daily: daily.at(-1)?.day === currentDay ? daily : [...daily, { day: currentDay, n: 0 }],
     emptySearches,
     saveFrom,
+    tourMeta,
     subscribers: subTotals ?? { people: 0, reminders: 0 },
     monthlySubs,
     perItemSubs,

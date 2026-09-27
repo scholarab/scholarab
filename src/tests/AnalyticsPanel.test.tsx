@@ -191,6 +191,33 @@ describe('AnalyticsPanel', () => {
     render(<AnalyticsPanel data={{ ...data, monthly: [], perItem: [], monthlySubs: [], perItemSubs: [], daily: [], emptySearches: [], search: [] }} />)
     expect(screen.getByText(/No events yet/)).toBeTruthy()
   })
+  it('shows How it works as a funnel: where it opened, how far people got, how it ended', () => {
+    const withTour = { ...data,
+      monthly: [...data.monthly,
+        { month: '2026-09', event: 'tour_open', n: 10 },
+        { month: '2026-09', event: 'tour_cta', n: 3 }],
+      tourMeta: [
+        { month: '2026-09', event: 'tour_open', meta: 'auto', n: 6 },
+        { month: '2026-09', event: 'tour_open', meta: 'bar', n: 4 },
+        { month: '2026-09', event: 'tour_step', meta: '2', n: 8 },
+        { month: '2026-09', event: 'tour_step', meta: '5', n: 4 },
+        { month: '2026-09', event: 'tour_close', meta: '1', n: 2 },
+      ] }
+    render(<AnalyticsPanel data={withTour} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Sep 2026' }))
+    const cells = (label: string) =>
+      [...screen.getByText(label).closest('tr')!.querySelectorAll('td')].map(c => c.textContent)
+    expect(cells('Opened on its own (first visit)')).toEqual(['Opened on its own (first visit)', '6', '60%'])
+    expect(cells('Explore menu')).toEqual(['Explore menu', '0', '0%'])
+    expect(cells('Step 1: Find')).toEqual(['Step 1: Find', '10', '100%'])
+    expect(cells('Step 2: Shortlist')).toEqual(['Step 2: Shortlist', '8', '80%'])
+    expect(cells('Step 5: Guides')).toEqual(['Step 5: Guides', '4', '40%'])
+    expect(cells('Went on to the quiz')).toEqual(['Went on to the quiz', '3', '30%'])
+    expect(cells('Closed on step 1: Find')).toEqual(['Closed on step 1: Find', '2', '20%'])
+    // The pre-split 'button' row only appears when there is something in it
+    expect(screen.queryByText(/before Sep 26/)).toBeNull()
+  })
+
   it('splits saves by the button used, with the rate per 100 views', () => {
     const withSaves = { ...data, saveFrom: [
       { month: '2026-09', from: 'page', n: 3 },

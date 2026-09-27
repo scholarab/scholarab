@@ -295,6 +295,10 @@ const STEPS = 5;
     dialog.querySelector<HTMLElement>('[data-tour-done]')!.hidden = n !== last;
     dialog.setAttribute('aria-labelledby', `sabt-title-${n}`);
     dialog.dataset.step = String(n);
+    // Each step reached counts once per tab session (sendEvent dedupes on the
+    // meta), so the admin panel reads as a funnel: of those who opened it,
+    // how many saw step 2, 3, 4 and 5.
+    if (n > 1) sendEvent('tour_step', undefined, undefined, String(n));
     if (n === last) sendEvent('tour_finish');
   }
 
@@ -304,15 +308,40 @@ const STEPS = 5;
   // hand counts too, so nobody is shown it twice.
   const SEEN = 'sa_tour_seen';
 
-  function open(dialog: HTMLDialogElement, from: 'auto' | 'button') {
+  // Where it was opened: on its own on a first visit, or from the bar's
+  // button, the Explore menu or the phone menu (the value of data-tour-open).
+  type From = 'auto' | 'bar' | 'menu' | 'sheet';
+  // Set when the closing link is followed, so that ending is not also counted
+  // as a close. Reset on every opening, since the link navigates away and the
+  // swapped-out dialog may never fire its close event.
+  let viaCta = false;
+  const FROM = new Set<string>(['bar', 'menu', 'sheet']);
+
+  function open(dialog: HTMLDialogElement, from: From) {
     // The phone menu is a full-screen sheet; close it under the dialog.
     document.querySelector<HTMLElement>('#sabh-burger[aria-expanded="true"]')?.click();
+    viaCta = false;
     show(dialog, 1);
     dialog.showModal();
     dialog.querySelector<HTMLElement>('[data-tour-next]')?.focus();
     try { localStorage.setItem(SEEN, '1'); } catch { /* shown this once regardless */ }
     sendEvent('tour_open', undefined, undefined, from);
   }
+
+  // The step it was left on, however it was closed (the X, the backdrop,
+  // Escape). Following the closing link is a different ending, counted as
+  // tour_cta, so it is kept out of this.
+  function onClose(this: HTMLDialogElement) {
+    if (!viaCta) sendEvent('tour_close', undefined, undefined, String(current(this)));
+    viaCta = false;
+  }
+  document.addEventListener('astro:page-load', () => {
+    const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
+    if (dialog && !dialog.dataset.closeWired) {
+      dialog.dataset.closeWired = '';
+      dialog.addEventListener('close', onClose);
+    }
+  });
 
   function autoOpen() {
     // Storage that cannot be read would mean opening on every page, so a
@@ -335,12 +364,19 @@ const STEPS = 5;
     const t = e.target as Element;
     const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
     if (!dialog) return;
-    if (t.closest('[data-tour-open]')) {
+    const opener = t.closest<HTMLElement>('[data-tour-open]');
+    if (opener) {
       e.preventDefault();
-      open(dialog, 'button');
+      const from = opener.dataset.tourOpen ?? '';
+      open(dialog, (FROM.has(from) ? from : 'bar') as From);
       return;
     }
     if (!dialog.open) return;
+    if (t.closest('[data-tour-done]')) {
+      viaCta = true;
+      sendEvent('tour_cta');
+      return;
+    }
     if (t.closest('[data-tour-next]')) show(dialog, current(dialog) + 1);
     else if (t.closest('[data-tour-back]')) show(dialog, current(dialog) - 1);
     else if (t.closest('[data-tour-close]') || t === dialog) dialog.close();

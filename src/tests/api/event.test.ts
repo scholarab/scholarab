@@ -322,6 +322,21 @@ describe('POST /api/event', () => {
     expect(mockValues).toHaveBeenCalledWith({ event: 'tour_open', itemType: null, itemId: null, meta: 'auto' })
     expect((await call({ event: 'tour_open', meta: 'hello' })).status).toBe(400)
     expect((await call({ event: 'tour_finish', meta: 'auto' })).status).toBe(400)
+    // The three buttons told apart since 2026-09-26; 'button' from older cached pages
+    for (const meta of ['bar', 'menu', 'sheet', 'button']) expect((await call({ event: 'tour_open', meta })).status).toBe(204)
+  })
+
+  it('records the step reached and the step closed on, and nothing else', async () => {
+    expect((await call({ event: 'tour_step', meta: '3' })).status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_step', itemType: null, itemId: null, meta: '3' })
+    expect((await call({ event: 'tour_close', meta: '1' })).status).toBe(204)
+    expect(mockValues).toHaveBeenCalledWith({ event: 'tour_close', itemType: null, itemId: null, meta: '1' })
+    // Step 1 is the opening, not a step reached; no step 6; a step is required
+    expect((await call({ event: 'tour_step', meta: '1' })).status).toBe(400)
+    expect((await call({ event: 'tour_close', meta: '6' })).status).toBe(400)
+    expect((await call({ event: 'tour_step' })).status).toBe(400)
+    expect((await call({ event: 'tour_cta' })).status).toBe(204)
+    expect((await call({ event: 'tour_cta', meta: '5' })).status).toBe(400)
   })
 
   it('returns 429 when rate limited', async () => {

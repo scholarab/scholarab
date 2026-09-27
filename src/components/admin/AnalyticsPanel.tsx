@@ -8,6 +8,9 @@ export interface AnalyticsData {
   emptySearches: { month: string; q: string | null; n: number }[]
   /** Saves by the button used: page, row or quiz. null = before 2026-09-26. */
   saveFrom?: { month: string; from: string | null; n: number }[]
+  /** How it works by detail: tour_open by where from, tour_step by step
+      reached, tour_close by the step it was closed on. From 2026-09-26. */
+  tourMeta?: { month: string; event: string; meta: string | null; n: number }[]
   /** Live email list: people = distinct addresses, reminders = rows. */
   subscribers: { people: number; reminders: number; pending?: number }
   monthlySubs: { month: string; people: number; reminders: number }[]
@@ -32,6 +35,16 @@ const SAVE_PLACES: [string, string][] = [
   ['none', 'Not recorded (before Sep 26 2026)'],
 ]
 
+const TOUR_FROM_LABELS: [string, string][] = [
+  ['auto', 'Opened on its own (first visit)'],
+  ['bar', 'Bar button'],
+  ['menu', 'Explore menu'],
+  ['sheet', 'Phone menu'],
+  ['button', 'A button (before Sep 26 2026)'],
+  ['none', 'Not recorded'],
+]
+const TOUR_STEP_NAMES = ['Find', 'Shortlist', 'Save', 'Deadlines', 'Guides']
+
 interface Props {
   data: AnalyticsData
 }
@@ -46,6 +59,7 @@ const EVENT_LABELS: Record<string, string> = {
   alert_subscribe: 'Alert signups',
   tour_open: 'How it works opened',
   tour_finish: 'How it works read to the end',
+  tour_cta: 'How it works to the quiz',
 }
 
 /** Compact column headers for the by-month table; the tile labels are too long. */
@@ -81,6 +95,7 @@ const EVENT_COVERED_FROM: Record<string, string> = {
   alert_subscribe: '2026-08',
   tour_open: '2026-09',
   tour_finish: '2026-09',
+  tour_cta: '2026-09',
 }
 
 interface SearchTotals {
@@ -355,6 +370,43 @@ export default function AnalyticsPanel({ data }: Props) {
       rows: SAVE_PLACES.map(([key, label]) => ({ key, label, n: by[key] ?? 0 })).filter(r => r.n > 0 || r.key !== 'none'),
     }
   }, [data.saveFrom, data.monthly, month])
+
+  // The walkthrough as a funnel: opened (by where), each step reached, how
+  // it ended. Every count is people per tab session, as sendEvent dedupes.
+  const tour = useMemo(() => {
+    const inScope = (m: string) => month === ALL || m === month
+    const from: Record<string, number> = {}
+    const step: Record<string, number> = {}
+    const closed: Record<string, number> = {}
+    for (const t of data.tourMeta ?? []) {
+      if (!inScope(t.month)) continue
+      const key = t.meta ?? 'none'
+      const into = t.event === 'tour_open' ? from : t.event === 'tour_step' ? step : t.event === 'tour_close' ? closed : null
+      if (into) into[key] = (into[key] ?? 0) + t.n
+    }
+    let opens = 0, cta = 0
+    for (const m of data.monthly) {
+      if (!inScope(m.month)) continue
+      if (m.event === 'tour_open') opens += m.n
+      else if (m.event === 'tour_cta') cta += m.n
+    }
+    const pct = (n: number) => (opens > 0 ? `${Math.round((n / opens) * 100)}%` : '')
+    return {
+      opens,
+      from: TOUR_FROM_LABELS.map(([k, label]) => ({ k, label, n: from[k] ?? 0 }))
+        .filter(r => r.n > 0 || ['auto', 'bar', 'menu', 'sheet'].includes(r.k)),
+      steps: TOUR_STEP_NAMES.map((name, i) => {
+        const n = i === 0 ? opens : step[String(i + 1)] ?? 0
+        return { label: `Step ${i + 1}: ${name}`, n, pct: pct(n) }
+      }),
+      cta: { n: cta, pct: pct(cta) },
+      closed: TOUR_STEP_NAMES.map((name, i) => {
+        const n = closed[String(i + 1)] ?? 0
+        return { label: `Closed on step ${i + 1}: ${name}`, n, pct: pct(n) }
+      }),
+      pct,
+    }
+  }, [data.tourMeta, data.monthly, month])
 
   const dailyRows = useMemo(() => {
     if (month === ALL) return data.daily.slice(-14)
@@ -668,6 +720,47 @@ export default function AnalyticsPanel({ data }: Props) {
                     <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">
                       {saves.total > 0 ? `${Math.round((r.n / saves.total) * 100)}%` : ''}
                     </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* How it works, as a funnel */}
+          <h2 className="text-sm font-semibold mb-2 mt-8 text-white/70">
+            How it works · {periodLabel}
+            <span className="font-normal text-white/40"> · {tour.opens} opened</span>
+          </h2>
+          <div className="border border-white/6 rounded-xl overflow-hidden">
+            <table className="w-full text-sm" data-tour-table>
+              <tbody>
+                <tr><td colSpan={3} className="px-4 pt-3 pb-1 text-xs text-white/40">Where it was opened</td></tr>
+                {tour.from.map(r => (
+                  <tr key={r.k} className="border-b border-white/4">
+                    <td className="px-4 py-2.5">{r.label}</td>
+                    <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{r.n}</td>
+                    <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{tour.pct(r.n)}</td>
+                  </tr>
+                ))}
+                <tr><td colSpan={3} className="px-4 pt-3 pb-1 text-xs text-white/40">How far people got</td></tr>
+                {tour.steps.map(r => (
+                  <tr key={r.label} className="border-b border-white/4">
+                    <td className="px-4 py-2.5">{r.label}</td>
+                    <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{r.n}</td>
+                    <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{r.pct}</td>
+                  </tr>
+                ))}
+                <tr className="border-b border-white/4">
+                  <td className="px-4 py-2.5">Went on to the quiz</td>
+                  <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{tour.cta.n}</td>
+                  <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{tour.cta.pct}</td>
+                </tr>
+                <tr><td colSpan={3} className="px-4 pt-3 pb-1 text-xs text-white/40">Where it was closed</td></tr>
+                {tour.closed.map(r => (
+                  <tr key={r.label} className="border-b border-white/4">
+                    <td className="px-4 py-2.5">{r.label}</td>
+                    <td className="px-4 py-2.5 text-right text-white/60 tabular-nums">{r.n}</td>
+                    <td className="px-4 py-2.5 text-right text-white/30 tabular-nums w-16">{r.pct}</td>
                   </tr>
                 ))}
               </tbody>
