@@ -44,6 +44,8 @@ let tourExample: { title: string; amount: string; deadline: string | null; check
 const MENU_TOPICS = ['stem', 'arts', 'trades', 'community', 'sports', 'indigenous'];
 const scholarshipFacetBySlug = new Map(SCHOLARSHIP_FACETS.map(f => [f.slug, f]));
 
+// A panel link is a page, or (`tour`) the How it works walkthrough, which is a dialog.
+type MenuLink = { label: string; href?: string; tour?: boolean };
 // `unit` names what a count counts; `note` stands in for a count a tile does not have.
 interface Tile { label: string; href: string; count: number | null; backdrop?: string; unit?: string; note?: string }
 const scopeFacets = MENU_SCOPES
@@ -110,23 +112,40 @@ const programLinks = [
 // Explore gathers the three ways into the directory that are not a list of
 // listings: the quiz, the calendar and the guides. Seven links in the bar
 // were more than a first-time visitor could take in (Ilia, 2026-09-26).
+// Everything else a student can use lives here too, so nothing the footer
+// lists is reachable only from the footer (Ilia, 2026-09-26).
 const exploreTiles: Tile[] = [
   { label: 'Find my scholarships', href: '/match/', count: null, note: 'A shortlist from a few questions' },
+  { label: 'Closing soon', href: '/#closing', count: null, note: 'The next deadlines, soonest first' },
   { label: 'Deadlines', href: '/deadlines/', count: deadlineCount, unit: 'ahead, month by month' },
   { label: 'Guides', href: '/guides/', count: guides.length, unit: 'written for Alberta' },
+  { label: 'Reference letter template', href: '/templates/reference-letter/', count: null, note: 'Hand it to the person writing yours' },
 ];
-const exploreLinks = [
+// Short labels: the full guide titles widened the list column enough to
+// squeeze the tiles at laptop widths.
+const EXPLORE_GUIDES: [string, string][] = [
+  ['alexander-rutherford-scholarship-guide', 'Rutherford Scholarship guide'],
+  ['how-to-write-a-scholarship-essay', 'Writing a scholarship essay'],
+  ['grade-11-scholarship-timeline', 'Grade 11 timeline'],
+];
+const exploreLinks: MenuLink[] = [
+  { label: 'How it works', tour: true },
   { label: 'Find my scholarships', href: '/match/' },
+  { label: 'Closing soon', href: '/#closing' },
   { label: 'Deadline calendar', href: '/deadlines/' },
   { label: 'All guides', href: '/guides/' },
-  ...guides.slice(0, 5).map(g => ({ label: g.title, href: `/guides/${g.slug}/` })),
+  ...EXPLORE_GUIDES.filter(([slug]) => guides.some(g => g.slug === slug))
+    .map(([slug, label]) => ({ label, href: `/guides/${slug}/` })),
+  { label: 'Reference letter template', href: '/templates/reference-letter/' },
+  { label: 'For educators', href: '/educators/' },
+  { label: 'What changed', href: '/updates/' },
 ];
 
 // Which nav rows carry a panel, and what goes in it.
-const MENUS: Record<string, { label: string; tiles: Tile[]; links: { label: string; href: string }[] }> = {
+const MENUS: Record<string, { label: string; tiles: Tile[]; links: MenuLink[] }> = {
   '/scholarships/': { label: 'Scholarships by location and topic', tiles: scopeTiles, links: topicLinks },
   '/programs/': { label: 'Programs by format and field', tiles: formatTiles, links: programLinks },
-  '/match/': { label: 'Explore: the quiz, the deadline calendar and the guides', tiles: exploreTiles, links: exploreLinks },
+  '/match/': { label: 'Explore: the quiz, deadlines, guides and more', tiles: exploreTiles, links: exploreLinks },
 };
 
 // Five in the bar. Deadlines, the quiz and the guides live under Explore,
@@ -231,7 +250,9 @@ const isActive = (href: string, also: string[] = []) =>
                   </ul>
                   <ul class="sabh-menu-list">
                     {MENUS[n.href]!.links.map(l => (
-                      <li><a href={l.href}>{l.label}</a></li>
+                      <li>{l.tour
+                        ? <button type="button" class="sabh-menu-tour" data-tour-open>{l.label}</button>
+                        : <a href={l.href}>{l.label}</a>}</li>
                     ))}
                   </ul>
                 </div>
@@ -420,11 +441,12 @@ const isActive = (href: string, also: string[] = []) =>
     border-left: 1px solid rgba(238, 241, 236,0.12); padding-left: 40px;
     display: flex; flex-direction: column; gap: 2px; min-width: 190px;
   }
-  .sabh-menu-list a {
+  .sabh-menu-list a, .sabh-menu-tour {
     display: block; padding: 6px 0; font-size: 14px; font-weight: 500;
     color: rgba(238, 241, 236, 0.78); text-decoration: none;
   }
-  .sabh-menu-list a:hover { color: #EEF1EC; }
+  .sabh-menu-tour { background: none; border: 0; font-family: inherit; text-align: left; cursor: pointer; width: 100%; }
+  .sabh-menu-list a:hover, .sabh-menu-tour:hover { color: #EEF1EC; }
   @media (max-width: 1100px) {
     .sabh-menu-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
@@ -584,7 +606,7 @@ const isActive = (href: string, also: string[] = []) =>
       border-left: 0; padding-left: 0; min-width: 0;
       border-top: 1px solid rgba(238, 241, 236,0.12); padding-top: 12px;
     }
-    .sabh-menu-list a { padding: 12px 0; font-size: 16px; }
+    .sabh-menu-list a, .sabh-menu-tour { padding: 12px 0; font-size: 16px; }
 
     /* Same six anchors, same order, same active class; just a column that
        owns the screen. Nothing to keep in sync with the desktop row. */
