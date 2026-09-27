@@ -43,6 +43,10 @@
     "hash": "2625772e5e41f081",
     "date": "2026-09-15"
   },
+  "/programs/alberta-honour-wind-ensemble/": {
+    "hash": "6bdad282032da0cf",
+    "date": "2026-09-26"
+  },
   "/programs/alberta-innovates-hyrs-university-of-alberta/": {
     "hash": "24473272589daa99",
     "date": "2026-09-15"
@@ -74,6 +78,10 @@
   "/programs/alberta-university-of-the-arts-pre-college-programs/": {
     "hash": "0cb9d8defbf56947",
     "date": "2026-09-15"
+  },
+  "/programs/alberta-youth-choir/": {
+    "hash": "847202700f19b6cd",
+    "date": "2026-09-26"
   },
   "/programs/alberta-youth-leaders-for-environmental-education-aylee/": {
     "hash": "770efac080461c07",
@@ -123,6 +131,10 @@
     "hash": "f7031b5ad70eb02b",
     "date": "2026-09-15"
   },
+  "/programs/bold-eagle-canadian-armed-forces/": {
+    "hash": "47397d38860d1385",
+    "date": "2026-09-26"
+  },
   "/programs/bow-valley-college-dual-credit/": {
     "hash": "e3aa0591d7b9661a",
     "date": "2026-09-26"
@@ -133,6 +145,22 @@
   },
   "/programs/calgary-collegiate-programming-contest-ccpc/": {
     "hash": "2eb8d46caaa3b2eb",
+    "date": "2026-09-26"
+  },
+  "/programs/calgary-performing-arts-festival-cpaf/": {
+    "hash": "89c9facb2933f7dc",
+    "date": "2026-09-26"
+  },
+  "/programs/calgary-police-cadet-corps/": {
+    "hash": "b9359cc18024e596",
+    "date": "2026-09-26"
+  },
+  "/programs/calgary-stampede-showband/": {
+    "hash": "7a945ba3730ec604",
+    "date": "2026-09-26"
+  },
+  "/programs/calgary-youth-orchestra/": {
+    "hash": "52cd06a6f488ef91",
     "date": "2026-09-26"
   },
   "/programs/calgary-youth-science-fair-cysf/": {
@@ -197,6 +225,10 @@
   },
   "/programs/canadian-math-kangaroo-contest/": {
     "hash": "cc991d8db92c3074",
+    "date": "2026-09-26"
+  },
+  "/programs/canadian-music-competition-cmc-calgary-chapter/": {
+    "hash": "d3669df60c6e118d",
     "date": "2026-09-26"
   },
   "/programs/canadian-open-mathematics-challenge-comc/": {
@@ -303,9 +335,17 @@
     "hash": "f3f987b8d8cca16d",
     "date": "2026-09-15"
   },
+  "/programs/edmonton-music-speech-arts-festival-emsaf/": {
+    "hash": "8e925de8e17e4b3f",
+    "date": "2026-09-26"
+  },
   "/programs/edmonton-regional-science-fair-ersf/": {
     "hash": "fdf0ee8706b62644",
     "date": "2026-09-15"
+  },
+  "/programs/edmonton-youth-orchestra/": {
+    "hash": "04ceb71e3dfaada5",
+    "date": "2026-09-26"
   },
   "/programs/elite-program-for-black-youth/": {
     "hash": "03bde08e7875caad",
@@ -431,6 +471,10 @@
     "hash": "d64e5086c5cefd45",
     "date": "2026-09-15"
   },
+  "/programs/inspirit-ai-scholars/": {
+    "hash": "40992eae20f92f23",
+    "date": "2026-09-26"
+  },
   "/programs/interact-clubs-rotary/": {
     "hash": "54936f7b6fd3a1e2",
     "date": "2026-09-26"
@@ -455,6 +499,10 @@
     "hash": "0338399fdd74b274",
     "date": "2026-09-26"
   },
+  "/programs/jamhacks-high-school-hackathon/": {
+    "hash": "7cf416fc77fe0fb3",
+    "date": "2026-09-26"
+  },
   "/programs/john-locke-institute-global-essay-prize/": {
     "hash": "af498b3df0049564",
     "date": "2026-09-26"
@@ -465,6 +513,10 @@
   },
   "/programs/junior-zoo-guides-calgary-zoo/": {
     "hash": "1d3851ce10dd76e5",
+    "date": "2026-09-26"
+  },
+  "/programs/key-club-kiwanis/": {
+    "hash": "54e32ef50bc0ee30",
     "date": "2026-09-26"
   },
   "/programs/launchx-virtual-summer-program/": {
@@ -523,12 +575,20 @@
     "hash": "42f656a01db63841",
     "date": "2026-09-15"
   },
+  "/programs/moon-camp-challenge-european-space-agency/": {
+    "hash": "2e2029e1e3b891d6",
+    "date": "2026-09-26"
+  },
   "/programs/nasa-international-space-apps-challenge/": {
     "hash": "46c2636bc880e62c",
     "date": "2026-09-15"
   },
   "/programs/national-biology-competition-university-of-toronto/": {
     "hash": "fb75bc64b4bb756b",
+    "date": "2026-09-26"
+  },
+  "/programs/national-youth-orchestra-of-canada-nyo-canada/": {
+    "hash": "701a41c5b7478df6",
     "date": "2026-09-26"
   },
   "/programs/national-youth-remembrance-contests-royal-canadian-legion/": {
@@ -566,6 +626,10 @@
   "/programs/olds-college-high-school-ag-tech-programs/": {
     "hash": "60913e711d1d88ee",
     "date": "2026-09-15"
+  },
+  "/programs/online-physics-olympiad-opho/": {
+    "hash": "53f8e3b41065e507",
+    "date": "2026-09-26"
   },
   "/programs/parlement-jeunesse-de-lalberta-pja/": {
     "hash": "b3934b5940139ff6",
@@ -671,6 +735,10 @@
     "hash": "02aff3e7d9fa1cbc",
     "date": "2026-09-26"
   },
+  "/programs/samsung-solve-for-tomorrow-canada/": {
+    "hash": "9379a037751875bc",
+    "date": "2026-09-26"
+  },
   "/programs/scholastic-art-writing-awards/": {
     "hash": "067ffa3540cfcd46",
     "date": "2026-09-26"
@@ -711,6 +779,10 @@
     "hash": "a3f5fc2b19ff32d2",
     "date": "2026-09-26"
   },
+  "/programs/stanford-university-mathematics-camp-sumac/": {
+    "hash": "86fd7e039d478dfc",
+    "date": "2026-09-26"
+  },
   "/programs/stem-fellowship-big-data-ai-challenge/": {
     "hash": "2761cb7e8ee3fadb",
     "date": "2026-09-15"
@@ -733,6 +805,10 @@
   },
   "/programs/student-advancement-research-star-program-sickkids/": {
     "hash": "3d1e8f10d3e530a1",
+    "date": "2026-09-26"
+  },
+  "/programs/student-police-academy-calgary-police-service/": {
+    "hash": "cac44cd1de4924e4",
     "date": "2026-09-26"
   },
   "/programs/student-spaceflight-experiments-program-ssep/": {
@@ -767,6 +843,10 @@
     "hash": "571896f89ee89d17",
     "date": "2026-09-15"
   },
+  "/programs/telluride-association-summer-seminar-tass/": {
+    "hash": "5a2a37991fe278bc",
+    "date": "2026-09-26"
+  },
   "/programs/telus-spark-science-centre-volunteering-calgary/": {
     "hash": "0897962e1a223d83",
     "date": "2026-09-15"
@@ -798,6 +878,10 @@
   "/programs/the-knowledge-society-tks/": {
     "hash": "9c353a1b300f6cf4",
     "date": "2026-09-15"
+  },
+  "/programs/toshibansta-exploravision/": {
+    "hash": "185da06b55dfba90",
+    "date": "2026-09-26"
   },
   "/programs/ualberta-game-ai-bootcamps/": {
     "hash": "f37a5f02f05d5f8f",
@@ -879,6 +963,18 @@
     "hash": "17cf2021b9c84b14",
     "date": "2026-09-15"
   },
+  "/programs/young-canada-works-in-heritage-organizations/": {
+    "hash": "16731f8292a4d943",
+    "date": "2026-09-26"
+  },
+  "/programs/young-canadians-school-of-performing-arts-calgary-stampede/": {
+    "hash": "cfe4e2c427d679e7",
+    "date": "2026-09-26"
+  },
+  "/programs/young-companies-citadel-theatre/": {
+    "hash": "0ba2dfc1cc5d5962",
+    "date": "2026-09-26"
+  },
   "/programs/young-ornithologist-workshop-beaverhill-bird-observatory/": {
     "hash": "e6b924468b72a8ff",
     "date": "2026-09-26"
@@ -898,6 +994,10 @@
   "/programs/youth-parliament-of-canada/": {
     "hash": "cab830de9b8676d5",
     "date": "2026-09-15"
+  },
+  "/programs/youth-recruit-academy-edmonton-police-service/": {
+    "hash": "715cb517c0b07d0e",
+    "date": "2026-09-26"
   },
   "/programs/youth-volunteer-corps-calgary/": {
     "hash": "e758e2343913087f",
