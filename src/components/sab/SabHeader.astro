@@ -1,5 +1,5 @@
 ---
-import { todayDate as albertaToday } from '../../lib/calendar';
+import { albertaDate, todayDate as albertaToday } from '../../lib/calendar';
 // Dark header band. Thin, full-width bar in the Apple/Tesla manner (Ilia,
 // 2026-09-13): logo at the window's left edge, links centred, no CTA pill.
 // The current page is marked by brighter text, not an accent underline.
@@ -17,6 +17,7 @@ import SabLogoMark from './SabLogoMark.astro';
 import SabTour from './SabTour.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { programIsListed } from '../../lib/status';
+import { guides } from '../../lib/guides';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, MENU_SCOPES, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
 
 interface Props {
@@ -43,7 +44,8 @@ let tourExample: { title: string; amount: string; deadline: string | null; check
 const MENU_TOPICS = ['stem', 'arts', 'trades', 'community', 'sports', 'indigenous'];
 const scholarshipFacetBySlug = new Map(SCHOLARSHIP_FACETS.map(f => [f.slug, f]));
 
-interface Tile { label: string; href: string; count: number | null; backdrop?: string }
+// `unit` names what a count counts; `note` stands in for a count a tile does not have.
+interface Tile { label: string; href: string; count: number | null; backdrop?: string; unit?: string; note?: string }
 const scopeFacets = MENU_SCOPES
   .map(slug => scholarshipFacetBySlug.get(slug))
   .filter(f => f !== undefined);
@@ -54,12 +56,16 @@ let scopeTiles: Tile[] = scopeFacets.map(f => tileOf(f, '/scholarships/', null))
 // A hub below the floor has no page, so it gets no tile and no link either.
 let formatTiles: Tile[] = [];
 let fieldLinks: { label: string; href: string }[] = [];
+let deadlineCount: number | null = null;
 
 try {
   const [scholarships, programs] = await Promise.all([loadScholarships(), loadPrograms()]);
   const today = albertaToday();
   const listedPrograms = programs.filter(p => programIsListed(p, today));
   scholarshipCount = scholarships.length;
+  // What /deadlines files under a month: a dated deadline still ahead.
+  const todayIso = albertaDate();
+  deadlineCount = scholarships.filter(s => s.deadline && s.deadline >= todayIso).length;
   const loran = scholarships.find(s => s.title === 'Loran Scholarship');
   if (loran) tourExample = { title: loran.title, amount: loran.amount ?? '', deadline: loran.deadline ?? null, checked: loran.lastVerified ?? null };
   programCount = listedPrograms.length;
@@ -101,22 +107,37 @@ const programLinks = [
   { label: 'Guides', href: '/guides/' },
 ];
 
+// Explore gathers the three ways into the directory that are not a list of
+// listings: the quiz, the calendar and the guides. Seven links in the bar
+// were more than a first-time visitor could take in (Ilia, 2026-09-26).
+const exploreTiles: Tile[] = [
+  { label: 'Find my scholarships', href: '/match/', count: null, note: 'A shortlist from a few questions' },
+  { label: 'Deadlines', href: '/deadlines/', count: deadlineCount, unit: 'ahead, month by month' },
+  { label: 'Guides', href: '/guides/', count: guides.length, unit: 'written for Alberta' },
+];
+const exploreLinks = [
+  { label: 'Find my scholarships', href: '/match/' },
+  { label: 'Deadline calendar', href: '/deadlines/' },
+  { label: 'All guides', href: '/guides/' },
+  ...guides.slice(0, 5).map(g => ({ label: g.title, href: `/guides/${g.slug}/` })),
+];
+
 // Which nav rows carry a panel, and what goes in it.
 const MENUS: Record<string, { label: string; tiles: Tile[]; links: { label: string; href: string }[] }> = {
   '/scholarships/': { label: 'Scholarships by location and topic', tiles: scopeTiles, links: topicLinks },
   '/programs/': { label: 'Programs by format and field', tiles: formatTiles, links: programLinks },
+  '/match/': { label: 'Explore: the quiz, the deadline calendar and the guides', tiles: exploreTiles, links: exploreLinks },
 };
 
-const navItems = [
+// Five in the bar. Deadlines, the quiz and the guides live under Explore,
+// whose own link opens the quiz: the one first step every visitor can take.
+// `also` lights Explore on the pages it holds.
+const navItems: { label: string; href: string; count: number | null; also?: string[] }[] = [
   { label: 'Scholarships', href: '/scholarships/', count: scholarshipCount },
   { label: 'Programs', href: '/programs/', count: programCount },
-  // In the bar on every width since 2026-09-26: on desktop they were only
-  // inside the dropdowns, so the phone and desktop menus disagreed.
-  { label: 'Deadlines', href: '/deadlines/', count: null as number | null },
-  { label: 'Find my scholarships', href: '/match/', count: null as number | null },
-  { label: 'Saved', href: '/saved/', count: null as number | null },
-  { label: 'Guides', href: '/guides/', count: null as number | null },
-  { label: 'About', href: '/about/', count: null as number | null },
+  { label: 'Explore', href: '/match/', count: null, also: ['/deadlines/', '/guides/'] },
+  { label: 'Saved', href: '/saved/', count: null },
+  { label: 'About', href: '/about/', count: null },
 ];
 
 // Compare with a normalized trailing slash on both sides. The nav hrefs carry
@@ -124,8 +145,8 @@ const navItems = [
 // page across two indexed URLs), but callers pass currentPath either way;
 // a bare '/scholarships' must still light up the '/scholarships/' tab.
 const withSlash = (p: string) => (p.endsWith('/') ? p : p + '/');
-const isActive = (href: string) =>
-  href === '/' ? currentPath === '/' : withSlash(currentPath).startsWith(withSlash(href));
+const isActive = (href: string, also: string[] = []) =>
+  href === '/' ? currentPath === '/' : [href, ...also].some(h => withSlash(currentPath).startsWith(withSlash(h)));
 ---
 
 <header class="sabh" data-sab-header>
@@ -156,7 +177,7 @@ const isActive = (href: string) =>
           <div class={`sabh-item${MENUS[n.href] ? ' sabh-has-menu' : ''}`}>
             <a
               href={n.href}
-              class={`sabh-link${isActive(n.href) ? ' sabh-link-active' : ''}`}
+              class={`sabh-link${isActive(n.href, n.also) ? ' sabh-link-active' : ''}`}
               aria-current={isActive(n.href) ? 'page' : undefined}
             >
               <span class="sabh-link-label">{n.label}</span>
@@ -196,13 +217,13 @@ const isActive = (href: string) =>
                           )}
                           <span class="sabh-tile-text">
                             <span class="sabh-tile-name">{t.label}</span>
-                            {t.count !== null && (
+                            {t.count !== null ? (
                               <span class="sabh-tile-count">
-                                {n.href === '/programs/'
+                                {t.unit ?? (n.href === '/programs/'
                                   ? (t.count === 1 ? 'program' : 'programs')
-                                  : (t.count === 1 ? 'scholarship' : 'scholarships')}
+                                  : (t.count === 1 ? 'scholarship' : 'scholarships'))}
                               </span>
-                            )}
+                            ) : t.note && <span class="sabh-tile-count">{t.note}</span>}
                           </span>
                         </a>
                       </li>
