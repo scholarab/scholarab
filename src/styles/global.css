@@ -953,7 +953,10 @@ html.js .sabl-group-toggle { display: inline-flex; }
 @media (prefers-reduced-motion: reduce) { .sabl-group-caret { transition: none; } }
 .sabl-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 140px 200px 104px;
+  /* The last column fits the widest actions cell, "Saved" + "Details" (147px).
+     It was 104px from before the Save button had a label, so the cell spilled
+     left over "50 days left" on every row (Ilia, 2026-09-26). */
+  grid-template-columns: minmax(0, 1fr) 140px 200px 148px;
   column-gap: 24px;
   align-items: center;
   background: transparent;
