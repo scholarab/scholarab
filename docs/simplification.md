@@ -773,3 +773,18 @@ A third critique run, after e963c23, scored 26/40 (last five runs: 27, 28, 26, 2
 Not changed: the Explore menu duplicates (Ilia's layout); no new county hub page, since every hub needs a photo and the province-wide hub already holds the 184 local awards.
 
 Add-back fraction: 0.
+
+## Expired takedown redirect, 2026-09-27
+
+From a full debug pass. `validate-data` had warned on every build since September 19 that the temporary takedown for `/scholarships/local-38-2*` had ended.
+
+| Candidate | Outcome |
+| --- | --- |
+| The `/scholarships/local-38-2*` 302 to the scholarship index (161b0d2, masking a stale Cloudflare copy of a listing removed September 11) | Removed. The stale copy carried `s-maxage=604800` on September 13, so it expired by September 20, and John M. Kerr, removed in the same commit with no redirect, answers 404 on www. The build has no page at that path. |
+| `TEMPORARY_TAKEDOWNS` and its exemption block in `validate-data.ts` | Removed with its only entry, since an empty list is dead code. If a legal takedown is needed again, 161b0d2 has the pattern. |
+
+Also commits the regenerated `public/publication.json`: 279d061 changed scholarship data without it, so every build dirtied the file.
+
+Local measurements on 279d061 plus this change: validate-data went from 119 redirects and one warning to 118 and none; `npm run ci` passed (1,059 tests) and `npm run test:e2e` passed (104). Not yet checked on production: after the deploy the removed listing's path should answer 404, not 200.
+
+Add-back fraction: 0 of 2.
