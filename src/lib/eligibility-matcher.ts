@@ -158,7 +158,7 @@ export function matchScholarship(
     reasons.push(`${LOCAL_CHECK}${localArea}`)
     return { match: false, confidence: 0, reasons, signals: [], checks: [] }
   }
-  const localChecks = localArea && !(eligibility?.specificSchools.length && profile.specificSchool)
+  const localChecks = localArea && !(eligibility?.specificSchools.length && profile.specificSchool) && !namesTown(localArea, profile.town)
     ? [`${LOCAL_CHECK}${localArea}`] : []
   // Missing criteria do not erase the geography that we do know.
   if (!eligibility) return { match: true, confidence: 0.20, reasons: [], signals: [], checks: [...localChecks, ...tieChecks] }
@@ -351,7 +351,35 @@ export function matchScholarship(
   }
 
   confidence = Math.max(0.1, Math.min(1, confidence))
-  return { match: true, confidence, reasons, signals, checks: [...localChecks, ...fieldChecks, ...tieChecks, ...uncheckedRequirements(profile, eligibility)] }
+  // A local check already names the school's area, so it says this better.
+  const schoolChecks = localChecks.length ? [] : unaskedSchoolChecks(profile, eligibility)
+  return { match: true, confidence, reasons, signals, checks: [...localChecks, ...schoolChecks, ...fieldChecks, ...tieChecks, ...uncheckedRequirements(profile, eligibility)] }
+}
+
+/**
+ * A school or board limit the student skipped. The hard filters above keep
+ * these when the answer is null, and without a check a school-only award
+ * rated "Strong" for any Calgary STEM student (Nancy Wang, Robert Thirsk
+ * only; critique 2026-09-27). Worded "... only", never "Only for ...", so
+ * capTier holds it at Good rather than dropping it to a local possibility.
+ */
+/** Whether a local award's area names the town the student typed ("Vulcan"
+ *  in "Vulcan County residents"), as a whole word so "Ray" is not Raymond. */
+export function namesTown(localArea: string, town: string | null | undefined): boolean {
+  const t = town?.trim()
+  if (!t || t.length < 3) return false
+  return new RegExp(`\\b${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(localArea)
+}
+
+export function unaskedSchoolChecks(profile: StudentProfile, e: EligibilityCriteria): string[] {
+  const schools = e.specificSchools
+  if (schools.length > 0 && profile.specificSchool === null) {
+    return [schools.length > 2 ? `Students at ${schools[0]} and ${schools.length - 1} other schools only` : `Students at ${schools.join(' or ')} only`]
+  }
+  if (e.schoolBoards.length > 0 && profile.schoolBoard === null) {
+    return [`${e.schoolBoards.join(' or ')} students only`]
+  }
+  return []
 }
 
 /** The youngest and oldest a student in each grade could plausibly be. */
@@ -386,7 +414,7 @@ export function uncheckedRequirements(profile: StudentProfile, e: EligibilityCri
   if (e.indigenousRequired && profile.identifiesAsIndigenous === null) checks.push('Indigenous students only')
   if (e.bipocRequired && profile.identifiesAsBIPOC === null) checks.push('BIPOC students only')
   if (e.fosterCare && profile.inFosterCare === null) checks.push('Youth in care only')
-  if (e.apprenticeship && profile.inApprenticeship === null) checks.push('Needs RAP or CTS enrollment')
+  if (e.apprenticeship && profile.inApprenticeship === null) checks.push('Needs an apprenticeship (RAP) or CTS courses')
   if (e.financialNeed && profile.hasFinancialNeed === null) checks.push('Based on financial need')
   return checks
 }

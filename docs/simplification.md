@@ -742,3 +742,34 @@ Tests:
 - Selectors updated for the heading wrapper and the folded explainer.
 
 Add-back fraction: 0.
+
+## Critique fixes: quiz tiers, rural towns, first-visit strip, hub counts, 2026-09-27
+
+A third critique run, after e963c23, scored 26/40 (last five runs: 27, 28, 26, 27, 26). Its two P1s were checkable bugs, both confirmed in code before fixing.
+
+(1) **Quiz tiers.**
+- A school-only award now carries "Students at … only" when the school question was skipped, and a board-only award "… students only". Before this, a skipped answer left no check at all, so Nancy Wang (Robert Thirsk High School only) was "Strong" for every Calgary STEM student. The wording avoids "Only for", so capTier holds these at Good instead of the local Possible. A local-area check, when present, stands in for the school check.
+- Four awards whose descriptions say "identify as female" had `genderRequired: null`: ids 251, 268 and 277, plus 1137 (a female hockey league). They now get the "Female students only" check.
+
+(2) **Towns outside the 23 cities.**
+- "Other Alberta" is the first town tile.
+- A town the filter does not list turns that tile's hint into "Includes Vulcan". Picking it keeps the town (`town` on the profile), which lifts the "Only for" check off local awards whose area names it as a whole word. For Vulcan, 7 awards come back Good or Possible without the check. Enter still picks a real city first.
+- The hub footer's province-wide link reads "Province-wide, other towns and counties". /deadlines "Where you live" gained "Another town or county".
+
+(3) **First visit.** The walkthrough no longer opens by itself. A one-line strip at the foot of the screen offers it ("New here? See how it works in 5 steps"), with the same holds as before (after the consent answer, not on a landed listing). It is offered on up to three pages, and dismissing or taking it ends the offers. The dialog's last step fits a 375px phone: the dots take their own line on every step, so the height stays 526px on all five. `tour_open` gains the meta `strip`.
+
+(4) **Hub counts and repeats.**
+- "Show all" drops its number. Beside "Showing 13 of 126" and "Show 24 more", a third count (137) read as a contradiction.
+- The March timing note has "Got it", remembered per browser and applied in the head script, so it does not flash.
+- Status chips with zero listings on a page are left out ("Open any time 0" on Calgary).
+- Hub intros were already one sentence each, so their copy was left alone.
+
+(5) **Targets.** Home carousel dots are 24 by 44, and the scope sub-links get a 44px hit area. The Saved view toggle is 44px tall. Desktop row Save and Apply already reach 44 through `::after`; the detector measured the box without it.
+
+(6) **Words.** "RAP" joins the glossary in "What these mean", the quiz check reads "Needs an apprenticeship (RAP) or CTS courses", and the trades intro says what RAP is. Quiz tiles are named "Calgary, And the foothills" for screen readers. Saved ends with a next step (reminders, the quiz, browse).
+
+(7) **Polish.** Section rules run the full row width. The guide back link matches the listing pages'. The /deadlines month row fades at its right edge on phones. The directory search box already had a keyboard focus rule, so nothing changed there.
+
+Not changed: the Explore menu duplicates (Ilia's layout); no new county hub page, since every hub needs a photo and the province-wide hub already holds the 184 local awards.
+
+Add-back fraction: 0.

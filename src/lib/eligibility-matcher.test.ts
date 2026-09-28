@@ -648,11 +648,40 @@ describe('local awards tagged province-wide', () => {
     expect(r.checks).not.toContain('Only for Boyle School graduates')
   })
 
+  it('lifts the check off the awards of a town the student typed', () => {
+    const vulcan = { ...sch({}, 'Alberta'), localArea: 'Vulcan County residents' }
+    expect(matchScholarship({ ...baseProfile, city: 'Other Alberta', town: 'vulcan' }, vulcan).checks).toEqual([])
+    expect(matchScholarship({ ...baseProfile, city: 'Other Alberta', town: 'Vul' }, vulcan).checks).toContain('Only for Vulcan County residents')
+    expect(matchScholarship({ ...baseProfile, city: 'Other Alberta', town: 'Hanna' }, vulcan).checks).toContain('Only for Vulcan County residents')
+  })
+
   it('no real Calgary match is a tagged local award', () => {
     const local = new Set((scholarshipsJson as Array<{ id: number; localArea?: string }>).filter(s => s.localArea).map(s => s.id))
     expect(local.size).toBeGreaterThan(100)
     const ids = matchAll({ ...baseProfile, city: 'Calgary' }, scholarshipsJson as never).map(m => m.id)
     expect(ids.filter(id => local.has(id))).toEqual([])
+  })
+})
+
+describe('school and board limits the student skipped', () => {
+  const thirsk = sch({ fields: ['STEM'], specificSchools: ['Robert Thirsk High School'] }, 'Calgary')
+
+  it('names the school and holds the award below Strong', () => {
+    const [m] = matchAll({ ...baseProfile, city: 'Calgary', fields: ['STEM'] }, [{ id: 1, ...thirsk }])
+    expect(m!.checks).toContain('Students at Robert Thirsk High School only')
+    expect(m!.tier).not.toBe('strong')
+    expect(m!.tier).not.toBe('possible')
+  })
+
+  it('drops the check once the school is answered', () => {
+    const r = matchScholarship({ ...baseProfile, city: 'Calgary', specificSchool: 'Robert Thirsk High School' }, thirsk)
+    expect(r.checks.some(c => c.startsWith('Students at'))).toBe(false)
+  })
+
+  it('shortens a long school list and falls back to the board', () => {
+    const many = sch({ specificSchools: ['A School', 'B School', 'C School'] }, 'Calgary')
+    expect(matchScholarship({ ...baseProfile, city: 'Calgary' }, many).checks).toContain('Students at A School and 2 other schools only')
+    expect(matchScholarship({ ...baseProfile, city: 'Calgary' }, sch({ schoolBoards: ['CBE'] }, 'Calgary')).checks).toContain('CBE students only')
   })
 })
 

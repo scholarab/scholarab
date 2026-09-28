@@ -802,12 +802,23 @@ describe('Town filter on the city question', () => {
     expect(screen.queryByText('Other Alberta')).toBeTruthy()
   })
 
-  it('lists the six biggest cities first', () => {
+  it('lists Other Alberta, then the six biggest cities', () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     clickTile('Scholarships')
     clickTile('Grade 12')
     const labels = [...document.querySelectorAll('.sabm-opt-label')].map(e => e.textContent)
-    expect(labels.slice(0, 6)).toEqual(['Calgary', 'Edmonton', 'Red Deer', 'Lethbridge', 'St. Albert', 'Medicine Hat'])
-    expect(labels.at(-1)).toBe('Other Alberta')
+    expect(labels.slice(0, 7)).toEqual(['Other Alberta', 'Calgary', 'Edmonton', 'Red Deer', 'Lethbridge', 'St. Albert', 'Medicine Hat'])
+  })
+
+  it('says Other Alberta includes a town it does not list, and Enter still picks a real city', () => {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    clickTile('Scholarships')
+    clickTile('Grade 12')
+    const input = screen.getByRole('searchbox', { name: /filter the list of towns/i }) as HTMLInputElement
+    act(() => { input.value = 'Vulcan'; dispatch.input(input) })
+    expect(screen.queryByText('Includes Vulcan')).toBeTruthy()
+    act(() => { input.value = 'leth'; dispatch.input(input) })
+    expect(screen.queryByText('Includes leth')).toBeNull()
+    expect(screen.queryByText('Any other town or county')).toBeTruthy()
   })
 })

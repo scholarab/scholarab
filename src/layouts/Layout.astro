@@ -128,11 +128,20 @@ const {
           if (localStorage.getItem('sa_lean')) root.setAttribute('data-lean', '');
           const view = localStorage.getItem('sa_view');
           if (view === 'grid' || view === 'columns' || view === 'gallery') root.setAttribute('data-view', view);
+          // html[data-later-ok]: the "most of these open later" note was
+          // read once and put away; it said the same on every directory and
+          // on quiz results (critique 2026-09-27).
+          if (localStorage.getItem('sa_later_ok')) root.setAttribute('data-later-ok', '');
         } catch { /* no storage: default layout */ }
       }
       lean();
       document.addEventListener('astro:after-swap', lean);
       document.addEventListener('pointerdown', function () { root.setAttribute('data-pointer', ''); }, true);
+      document.addEventListener('click', function (e) {
+        if (!(e.target instanceof Element) || !e.target.closest('[data-later-ok]')) return;
+        root.setAttribute('data-later-ok', '');
+        try { localStorage.setItem('sa_later_ok', '1'); } catch { /* hidden for this page regardless */ }
+      });
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Tab' || e.key.slice(0, 5) === 'Arrow') root.removeAttribute('data-pointer');
       }, true);

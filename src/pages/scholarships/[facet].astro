@@ -143,8 +143,11 @@ const breadcrumbJson = {
           </p>
         )}
         <p class="sabl-hublinks">
+          {/* The province-wide hub also holds the 184 awards for one town,
+              county or school outside the named cities, so a rural reader
+              is told where theirs are (critique 2026-09-27). */}
           {siblings.map(f => (
-            <a href={`/scholarships/${f.slug}/`}>{f.label}</a>
+            <a href={`/scholarships/${f.slug}/`}>{f.slug === 'alberta' ? 'Province-wide, other towns and counties' : f.label}</a>
           ))}
           <a href="/scholarships/">All scholarships</a>
         </p>

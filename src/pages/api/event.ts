@@ -16,10 +16,11 @@ const ALLOWED_SOURCES = new Set(['ig', 'tt', 'yt', 'em', 'qr'])
 // Where a save was made: the listing page, a directory row, or quiz results.
 // Added 2026-09-26 to learn which save button students actually use.
 const SAVE_FROM = new Set(['page', 'row', 'quiz'])
-// How the walkthrough was opened: by itself on a first visit, or the button.
+// How the walkthrough was opened: by itself on a first visit ('auto', until
+// 2026-09-27), from the first-visit strip that replaced that, or a button.
 // 'button' is every hand opening before 2026-09-26, when the three buttons
 // were told apart; pages cached from then still send it.
-const TOUR_FROM = new Set(['auto', 'bar', 'menu', 'sheet', 'button'])
+const TOUR_FROM = new Set(['auto', 'strip', 'bar', 'menu', 'sheet', 'button'])
 // tour_step: the step reached (the first is the opening itself).
 // tour_close: the step the dialog was closed on.
 const TOUR_STEPS = new Set(['2', '3', '4', '5'])

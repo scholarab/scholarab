@@ -80,6 +80,9 @@ export type StudentProfile = {
   /** The top of the band the quiz asked about (80 to 89% is 85 here and 89
    *  in averageTop). Absent means averagePercent is exact. */
   averageTop?: number | null
+  /** The town an "Other Alberta" student typed in the town search. It lifts
+   *  the "Only for ..." check off local awards that name it. */
+  town?: string | null
 
   // All identity fields are nullable; null means "student did not answer"
   // Only hard-filters when the student explicitly answered

@@ -250,6 +250,8 @@ const breadcrumbJson = {
               <select data-cal-where>
                 <option value="">Anywhere</option>
                 {townFacets.map(f => <option value={f.slug}>{f.label}</option>)}
+                {/* Keeps province-wide and county awards, drops the 24 towns'. */}
+                <option value="-">Another town or county</option>
               </select>
             </label>
           </header>
@@ -422,7 +424,7 @@ const breadcrumbJson = {
     if (stats) {
       stats.dataset.all ??= stats.textContent ?? '';
       const select = root.querySelector<HTMLSelectElement>('[data-cal-where]');
-      const town = select?.selectedOptions[0]?.textContent ?? '';
+      const town = where === '-' ? 'another town or county' : select?.selectedOptions[0]?.textContent ?? '';
       stats.textContent = where
         ? `${total.toLocaleString('en-CA')} deadlines for students in ${town}, counting province-wide and national awards and programs, ${open.toLocaleString('en-CA')} of them open to apply today.`
         : stats.dataset.all;
@@ -565,6 +567,14 @@ const breadcrumbJson = {
        a swipe and gives the months back the space. */
     .sabcal-jump { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
     .sabcal-jump::-webkit-scrollbar { display: none; }
+    /* With the scrollbar hidden nothing said the row went on past DEC
+       (critique 2026-09-27): a fade pinned to the right edge does. It takes
+       its own 28px at the end, so once scrolled there it covers nothing. */
+    .sabcal-jump::after {
+      content: ''; position: sticky; right: 0; flex: 0 0 28px; align-self: stretch;
+      margin: -12px 0; pointer-events: none;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-page) 85%);
+    }
     .sabcal-chip { flex: 0 0 auto; min-height: 44px; align-items: center; }
 
     /* Two columns, and the amount and status share the second row rather than

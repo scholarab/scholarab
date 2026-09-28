@@ -38,7 +38,8 @@ const SAVE_PLACES: [string, string][] = [
 ]
 
 const TOUR_FROM_LABELS: [string, string][] = [
-  ['auto', 'Opened on its own (first visit)'],
+  ['strip', 'First-visit strip'],
+  ['auto', 'Opened on its own (before Sep 27 2026)'],
   ['bar', 'Bar button'],
   ['menu', 'Explore menu'],
   ['sheet', 'Phone menu'],
@@ -403,7 +404,7 @@ export default function AnalyticsPanel({ data }: Props) {
       opens,
       untracked,
       from: TOUR_FROM_LABELS.map(([k, label]) => ({ k, label, n: from[k] ?? 0 }))
-        .filter(r => r.n > 0 || ['auto', 'bar', 'menu', 'sheet'].includes(r.k)),
+        .filter(r => r.n > 0 || ['strip', 'bar', 'menu', 'sheet'].includes(r.k)),
       steps: TOUR_STEP_NAMES.map((name, i) => {
         const n = i === 0 ? base : step[String(i + 1)] ?? 0
         return { label: `Step ${i + 1}: ${name}`, n, pct: funnelPct(n) }

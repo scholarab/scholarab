@@ -537,12 +537,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       const btn = more.querySelector<HTMLElement>('[data-dir-more-btn]');
       if (btn) btn.textContent = `Show ${Math.min(pageSize, remaining)} more`;
       // "Show all" only earns its place when it does something the other
-      // button would not do in one press.
+      // button would not do in one press. No number: beside "Showing 13 of
+      // 126" and "Show 24 more", a third count (the whole pool, 137) read as
+      // a contradiction (critique 2026-09-27).
       const all = more.querySelector<HTMLElement>('[data-dir-all]');
-      if (all) {
-        all.hidden = remaining <= pageSize;
-        all.textContent = `Show all ${pool.length.toLocaleString('en-CA')}`;
-      }
+      if (all) { all.hidden = remaining <= pageSize; all.textContent = 'Show all'; }
     }
 
     for (const [key, text] of Object.entries(config.summary(visible, items.length))) {

@@ -1,7 +1,8 @@
 ---
 // "How it works": a five-step walkthrough of what the site does, opened from
-// the header (Ilia, 2026-09-26, after polymarket.com's), and by itself once
-// on a browser's first visit. First-time visitors
+// the header (Ilia, 2026-09-26, after polymarket.com's), and from a one-line
+// strip on a browser's first visits; it opened by itself until 2026-09-27,
+// when the critique called the interruption friction. First-time visitors
 // saw a directory and did not know it also saves, builds a shortlist, keeps a
 // calendar and emails before deadlines. One native <dialog>, closed until
 // asked for, so it costs no layout and no script until the button is used.
@@ -143,6 +144,18 @@ const STEPS = 5;
   </div>
 </dialog>
 
+{/* What a first visit gets instead of the dialog opening by itself: one
+    line at the foot of the screen, over nothing the student came for
+    (critique 2026-09-27). Hidden until the script decides to show it. */}
+<div class="sabt-strip" data-tour-strip hidden>
+  <p class="sabt-strip-copy">
+    New here? <button type="button" class="sabt-strip-open" data-tour-open="strip">See how it works in 5 steps</button>
+  </p>
+  <button type="button" class="sabt-strip-x" data-tour-strip-close aria-label="Dismiss">
+    <svg viewBox="0 0 14 14" width="12" height="12" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+  </button>
+</div>
+
 <style>
   .sabt {
     width: min(460px, calc(100vw - 32px)); max-height: calc(100dvh - 32px);
@@ -265,13 +278,46 @@ const STEPS = 5;
   @keyframes sabt-in { from { opacity: 0; transform: translateY(10px) scale(0.98); } }
   @keyframes sabt-card { from { opacity: 0; translate: 0 14px; } }
 
+  .sabt-strip {
+    position: fixed; z-index: 9997; left: 50%; translate: -50% 0;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    width: max-content; max-width: calc(100vw - 32px); box-sizing: border-box;
+    display: flex; align-items: center; gap: 4px; padding: 0 4px 0 18px;
+    background: #141915; color: #fff; border-radius: 100px;
+    box-shadow: 0 6px 24px rgba(8, 18, 14, 0.22);
+    --focus-ring: #2FD3A0;
+  }
+  .sabt-strip[hidden] { display: none; }
+  .sabt-strip-copy { margin: 0; font-size: 14.5px; line-height: 1.3; color: rgba(255, 255, 255, 0.78); }
+  .sabt-strip-open {
+    min-height: 44px; padding: 0 2px; border: 0; background: none; cursor: pointer;
+    font: inherit; font-weight: 700; color: #2FD3A0;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .sabt-strip-open:hover { color: #5CE3BB; }
+  .sabt-strip-x {
+    flex: none; width: 44px; height: 44px; display: grid; place-items: center;
+    border: 0; border-radius: 100px; background: none; color: rgba(255, 255, 255, 0.7); cursor: pointer;
+  }
+  .sabt-strip-x:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+  @media (prefers-reduced-motion: no-preference) {
+    .sabt-strip:not([hidden]) { animation: sabt-strip-in 0.3s cubic-bezier(0.2, 0.8, 0.3, 1); }
+  }
+  @keyframes sabt-strip-in { from { opacity: 0; translate: -50% 12px; } }
+
   @media (max-width: 480px) {
     .sabt-art { height: 210px; }
     .sabt-step[data-tour-step='1'] .sabt-card { margin-top: 64px; }
     .sabt-body { padding: 18px 20px 2px; }
     .sabt-title { font-size: 28px; }
     .sabt-text { font-size: 15px; }
-    .sabt-foot { padding: 16px 20px 20px; }
+    /* Dots, Back and "Find my scholarships" need about 350px in one row and
+       a 375px phone gives the foot 297: the button ran off the dialog's edge
+       (critique 2026-09-27). The dots take their own line on every step, so
+       the dialog keeps one height from step to step. */
+    .sabt-foot { padding: 14px 20px 20px; flex-wrap: wrap; row-gap: 6px; }
+    .sabt-dots { flex: 1 0 100%; }
+    .sabt-btns { margin-left: auto; }
     .sabt-next { padding: 0 20px; }
   }
 </style>
@@ -304,25 +350,28 @@ const STEPS = 5;
 
   const current = (d: HTMLDialogElement) => Number(d.dataset.step || '1');
 
-  // Once per browser, on the first visit (Ilia, 2026-09-26). Opening it by
-  // hand counts too, so nobody is shown it twice.
+  // Set once the strip is dismissed, taken or offered three times, and when
+  // the walkthrough is opened by hand, so nobody is offered it again.
   const SEEN = 'sa_tour_seen';
   /** Set on the first page this tab shows, so only a listing a student landed on holds the tour back. */
   const LANDED = 'sa_tour_landed';
+  /** Pages the first-visit strip has been offered on. */
+  const STRIP_SHOWN = 'sa_tour_strip';
 
   // Where it was opened: on its own on a first visit, or from the bar's
   // button, the Explore menu or the phone menu (the value of data-tour-open).
-  type From = 'auto' | 'bar' | 'menu' | 'sheet';
+  type From = 'strip' | 'bar' | 'menu' | 'sheet';
   // Set when the closing link is followed, so that ending is not also counted
   // as a close. Reset on every opening, since the link navigates away and the
   // swapped-out dialog may never fire its close event.
   let viaCta = false;
-  const FROM = new Set<string>(['bar', 'menu', 'sheet']);
+  const FROM = new Set<string>(['strip', 'bar', 'menu', 'sheet']);
 
   function open(dialog: HTMLDialogElement, from: From) {
     // The phone menu is a full-screen sheet; close it under the dialog.
     document.querySelector<HTMLElement>('#sabh-burger[aria-expanded="true"]')?.click();
     viaCta = false;
+    hideStrip();
     show(dialog, 1);
     dialog.showModal();
     dialog.querySelector<HTMLElement>('[data-tour-next]')?.focus();
@@ -376,14 +425,28 @@ const STEPS = 5;
       document.addEventListener('click', onChoice);
       return;
     }
-    const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
-    if (!dialog || document.querySelector('dialog[open]')) return;
-    open(dialog, 'auto');
+    const strip = document.querySelector<HTMLElement>('[data-tour-strip]');
+    if (!strip || document.querySelector('dialog[open]')) return;
+    // Offered on up to three pages, then left alone: a strip nobody takes
+    // should not follow a student around the site.
+    let shown: number;
+    try { shown = Number(localStorage.getItem(STRIP_SHOWN) || '0') + 1; localStorage.setItem(STRIP_SHOWN, String(shown)); } catch { return; }
+    if (shown >= 3) { try { localStorage.setItem(SEEN, '1'); } catch { /* ignore */ } }
+    strip.hidden = false;
+  }
+  function hideStrip() {
+    const strip = document.querySelector<HTMLElement>('[data-tour-strip]');
+    if (strip) strip.hidden = true;
   }
   document.addEventListener('astro:page-load', autoOpen);
 
   document.addEventListener('click', e => {
     const t = e.target as Element;
+    if (t.closest('[data-tour-strip-close]')) {
+      hideStrip();
+      try { localStorage.setItem(SEEN, '1'); } catch { /* hidden for this page regardless */ }
+      return;
+    }
     const dialog = document.querySelector<HTMLDialogElement>('[data-tour]');
     if (!dialog) return;
     const opener = t.closest<HTMLElement>('[data-tour-open]');

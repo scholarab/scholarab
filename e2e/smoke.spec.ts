@@ -374,17 +374,26 @@ test('How it works walks through five steps and ends on the quiz', async ({ page
   await expect(dialog).toBeHidden();
 });
 
-test('How it works opens by itself once, on the first visit only', async ({ page }) => {
+test('A first visit gets a one-line strip, not the dialog, and dismissing it is remembered', async ({ page }) => {
   // Real browsers only: automation is excluded, so pose as one here.
   await page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }))
   await page.goto('/scholarships/')
-  const dialog = page.locator('dialog[data-tour]')
-  await expect(dialog).toBeVisible({ timeout: 5_000 })
-  await page.keyboard.press('Escape')
-  await expect(dialog).toBeHidden()
+  const strip = page.locator('[data-tour-strip]')
+  await expect(strip).toBeVisible({ timeout: 5_000 })
+  await expect(page.locator('dialog[data-tour]')).toBeHidden()
+  await strip.getByRole('button', { name: 'Dismiss' }).click()
+  await expect(strip).toBeHidden()
   await page.goto('/programs/')
   await page.waitForTimeout(2_000)
-  await expect(dialog).toBeHidden()
+  await expect(strip).toBeHidden()
+});
+
+test('The strip opens the walkthrough', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }))
+  await page.goto('/scholarships/')
+  await page.locator('[data-tour-strip]').getByRole('button', { name: /how it works/i }).click()
+  await expect(page.locator('dialog[data-tour]')).toBeVisible()
+  await expect(page.locator('[data-tour-strip]')).toBeHidden()
 });
 
 test('How it works does not interrupt the quiz', async ({ page }) => {
@@ -392,4 +401,5 @@ test('How it works does not interrupt the quiz', async ({ page }) => {
   await page.goto('/match/')
   await page.waitForTimeout(2_000)
   await expect(page.locator('dialog[data-tour]')).toBeHidden()
+  await expect(page.locator('[data-tour-strip]')).toBeHidden()
 });

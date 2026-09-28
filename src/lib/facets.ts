@@ -454,7 +454,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       'Scholarships for Alberta students heading into the trades: RAP apprenticeship awards, Skills Canada scholarships, and industry-funded money.',
     intro:
-      'Scholarship advice in Alberta is written almost entirely for university-bound students, which is why trades money goes under-applied and why several of these exist for RAP and apprenticeship students.',
+      'Scholarship advice here is written for university-bound students, so trades money goes under-applied, and several of these are for apprentices, including RAP students who start one in high school.',
     guide: 'trades-scholarships-rap-alberta',
   },
   {

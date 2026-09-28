@@ -188,7 +188,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
   // Counted within the section the button sits in (OPEN NOW), not all three
   await expect(page.locator('[data-dir-more-line]')).toHaveText(showingLine(open.slice(0, PAGE), open, scholarshipGroupKey, k => SCHOLARSHIP_GROUP_LABELS[k]!));
   await expect(page.locator('[data-dir-more-btn]')).toHaveText(`Show ${PAGE} more`);
-  await expect(page.locator('[data-dir-all]')).toHaveText(`Show all ${open.length.toLocaleString('en-CA')}`);
+  await expect(page.locator('[data-dir-all]')).toHaveText('Show all');
 
   await page.locator('[data-dir-more-btn]').click();
   await page.locator('[data-dir-more-btn]').click();

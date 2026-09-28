@@ -257,7 +257,10 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
     <div class="sabl-filter-row">
       <span class="sabl-row-label">Status</span>
       <div class="sabl-chips">
-        {STATUS_CHIPS.map(s => (
+        {/* A status this page has none of is left out: "Open any time 0" on
+            Calgary offered a filter that could only empty the list, and no
+            other filter can raise it above the page's own count. */}
+        {STATUS_CHIPS.filter(s => s.value === 'all' || statusChipCount(s.value) > 0).map(s => (
           <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{statusChipCount(s.value).toLocaleString('en-CA')}</span></button>
         ))}
       </div>
@@ -282,7 +285,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
 
   {/* Above the first row, where the September reader decides the page has
       nothing for them. Only on the unfiltered list, which it describes. */}
-  {laterNote && <p class="sabl-later-note" data-dir-default-only>{laterNote}</p>}
+  {laterNote && <p class="sabl-later-note" data-dir-default-only>{laterNote} <button type="button" class="sab-later-ok" data-later-ok>Got it</button></p>}
 
   <p class="sabl-corrected" data-dir-corrected hidden></p>
 
@@ -396,7 +399,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
       <p class="sabl-more-line" data-dir-more-line>{showingLine(initial.slice(0, DIRECTORY_PAGE_SIZE), initial.filter(s => !SHUT_GROUPS.has(scholarshipGroupKey(s))), scholarshipGroupKey, k => SCHOLARSHIP_GROUP_LABELS[k] ?? k.toUpperCase())}</p>
       <div class="sabl-more-actions">
         <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
-        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length.toLocaleString('en-CA')}</button>
+        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all</button>
       </div>
     </div>
   )}

@@ -76,7 +76,7 @@ describe('directory "Show more"', () => {
     expect($('[data-dir-more-line]').textContent).toBe('Showing 2 of 5')
     expect($('[data-dir-more-btn]').textContent).toBe('Show 2 more')
     expect($('[data-dir-all]').hidden).toBe(false)
-    expect($('[data-dir-all]').textContent).toBe('Show all 5')
+    expect($('[data-dir-all]').textContent).toBe('Show all')
   })
 
   it('reveals the next step, shrinks the last one, and records it in the URL', () => {

@@ -323,7 +323,7 @@ describe('POST /api/event', () => {
     expect((await call({ event: 'tour_open', meta: 'hello' })).status).toBe(400)
     expect((await call({ event: 'tour_finish', meta: 'auto' })).status).toBe(400)
     // The three buttons told apart since 2026-09-26; 'button' from older cached pages
-    for (const meta of ['bar', 'menu', 'sheet', 'button']) expect((await call({ event: 'tour_open', meta })).status).toBe(204)
+    for (const meta of ['strip', 'bar', 'menu', 'sheet', 'button']) expect((await call({ event: 'tour_open', meta })).status).toBe(204)
   })
 
   it('records the step reached and the step closed on, and nothing else', async () => {

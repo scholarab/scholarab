@@ -892,6 +892,9 @@ const carousels = [
     text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px;
   }
   .sab-scope-sub:hover { text-decoration-thickness: 2px; }
+  /* A 44px target around a one-line link, without moving the lines. */
+  a.sab-scope-sub { position: relative; }
+  a.sab-scope-sub::after { content: ''; position: absolute; inset: -10px -4px; }
   .sab-scope-sub-plain, .sab-scope-sub-plain:hover { text-decoration: none; }
   /* The no-deadline count, on its own line under the open one: counted apart
      so "open" here matches the hub's Open chip (lib/counts.ts). */
@@ -930,11 +933,13 @@ const carousels = [
      missed the 24px target floor (critique 2026-09-23). Same 18px pitch.
      They sit on the photo now, over its bottom shade, so they are white. */
   .sab-scopes-dots {
-    position: absolute; z-index: 2; left: 50%; bottom: 20px; transform: translateX(-50%);
+    position: absolute; z-index: 2; left: 50%; bottom: 10px; transform: translateX(-50%);
     display: flex; justify-content: center; gap: 0;
   }
   .sab-scopes-dot {
-    display: grid; place-items: center; width: 24px; height: 24px; margin: 0 -3px;
+    /* 44px tall, the 24px pitch kept: ten 44px-wide dots would not fit a
+       phone. The dot itself sits where it did (bottom moved 20px to 10px). */
+    display: grid; place-items: center; width: 24px; height: 44px; margin: 0 -3px;
     padding: 0; border: 0; background: none; cursor: pointer;
   }
   .sab-scopes-dot::before {
@@ -948,7 +953,7 @@ const carousels = [
     .sab-scope-body { padding: 104px 20px 76px; }
     .sab-scopes-tabs { left: 20px; right: 20px; top: 16px; gap: 2px 18px; }
     .sab-scopes-tab { font-size: 22px; padding: 7px 0; }
-    .sab-scopes-dots { bottom: 30px; }
+    .sab-scopes-dots { bottom: 20px; }
     .sab-scope-kicker, .sab-scope-sub { font-size: 16px; }
     .sab-scope-ctas { flex-direction: column; gap: 10px; }
     .sab-scope-btn { width: 100%; min-width: 0; }

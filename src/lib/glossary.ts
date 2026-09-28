@@ -25,6 +25,11 @@ export const GLOSSARY = {
     line: 'A trade Alberta certifies through an apprenticeship, like electrician, welder or carpenter.',
     short: 'A trade learned by apprenticeship',
   },
+  rap: {
+    term: 'RAP',
+    line: 'The Registered Apprenticeship Program: you start a paid trade apprenticeship while still in high school, earning school credits and apprenticeship hours at once.',
+    short: 'A paid apprenticeship started in high school',
+  },
   unconfirmed: {
     term: STATUS_WORDS.unconfirmed,
     line: 'The sponsor has not posted this year’s date. “Around” means last year’s date, so check before you plan on it.',
@@ -52,6 +57,6 @@ export const FORMAT_TERMS: Readonly<Record<string, GlossaryKey>> = {
 
 /** The words each directory prints on its rows, for its "What these mean" note. */
 export const DIRECTORY_TERMS: Readonly<Record<'scholarship' | 'program', readonly GlossaryKey[]>> = {
-  scholarship: ['bursary', 'designated'],
+  scholarship: ['bursary', 'designated', 'rap'],
   program: ['olympiad', 'dualCredit'],
 };

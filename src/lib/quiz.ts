@@ -60,10 +60,12 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     key: 'city',
     q: 'Where are you based?',
-    // The six biggest cities first, then alphabetical, "Other Alberta" last
-    // (critique 2026-09-23: 24 tiles in no order meant reading all of them).
+    // "Other Alberta" first, then the six biggest cities, then alphabetical
+    // (critique 2026-09-23: 24 tiles in no order meant reading all of them;
+    // 2026-09-27: a rural student scrolled past all 24 to reach their tile).
     // The quiz also offers a type-to-filter box above this list.
     opts: [
+      { label: 'Other Alberta', value: 'Other Alberta', hint: 'Any other town or county' },
       { label: 'Calgary', value: 'Calgary', hint: 'And the foothills' },
       { label: 'Edmonton', value: 'Edmonton', hint: 'And the capital region' },
       { label: 'Red Deer', value: 'Red Deer', hint: 'And central Alberta' },
@@ -87,7 +89,6 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: 'Sherwood Park', value: 'Sherwood Park', hint: 'And Strathcona County' },
       { label: 'Spruce Grove', value: 'Spruce Grove', hint: 'And Stony Plain' },
       { label: 'Wetaskiwin', value: 'Wetaskiwin', hint: 'And Wetaskiwin County' },
-      { label: 'Other Alberta', value: 'Other Alberta', hint: 'Any other town' },
     ],
   },
   {

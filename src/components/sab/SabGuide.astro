@@ -177,8 +177,13 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   /* White title area like every other page, not a dark band with a kicker
      and a read time (critique 2026-09-23). */
   .sabg-hero { padding: 64px var(--sab-gutter) 0; width: 100%; box-sizing: border-box; }
-  .sabg-crumb { display: inline-block; font-size: 15px; font-weight: 600; color: #0A6B4D; text-decoration: none; margin-bottom: 18px; }
-  .sabg-crumb:hover { color: #141915; }
+  /* The listing pages' back link (SabDetail .sabd-back), so "back" looks
+     one way across the site. */
+  .sabg-crumb {
+    display: inline-block; font-family: var(--font-label); font-size: 13px; letter-spacing: 0.04em;
+    color: rgba(20, 25, 21, 0.65); text-decoration: none; padding: 12px 0; margin: -12px 0 6px;
+  }
+  .sabg-crumb:hover { color: #0A6B4D; }
   .sabg-h1 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(38px, 5.5vw, 62px); line-height: 1.05; letter-spacing: -0.015em;

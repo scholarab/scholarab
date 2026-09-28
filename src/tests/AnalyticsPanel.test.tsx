@@ -207,7 +207,7 @@ describe('AnalyticsPanel', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Sep 2026' }))
     const cells = (label: string) =>
       [...screen.getByText(label).closest('tr')!.querySelectorAll('td')].map(c => c.textContent)
-    expect(cells('Opened on its own (first visit)')).toEqual(['Opened on its own (first visit)', '6', '60%'])
+    expect(cells('Opened on its own (before Sep 27 2026)')).toEqual(['Opened on its own (before Sep 27 2026)', '6', '60%'])
     expect(cells('Explore menu')).toEqual(['Explore menu', '0', '0%'])
     expect(cells('Step 1: Find')).toEqual(['Step 1: Find', '10', '100%'])
     expect(cells('Step 2: Shortlist')).toEqual(['Step 2: Shortlist', '8', '80%'])
@@ -235,7 +235,7 @@ describe('AnalyticsPanel', () => {
     const cells = (label: string) =>
       [...screen.getByText(label).closest('tr')!.querySelectorAll('td')].map(c => c.textContent)
     // Where it was opened still counts every opening
-    expect(cells('Opened on its own (first visit)')).toEqual(['Opened on its own (first visit)', '59', '98%'])
+    expect(cells('Opened on its own (before Sep 27 2026)')).toEqual(['Opened on its own (before Sep 27 2026)', '59', '98%'])
     expect(cells('Not tracked (opened before Sep 26 2026, 10 pm)')).toEqual(['Not tracked (opened before Sep 26 2026, 10 pm)', '31', ''])
     expect(cells('Step 1: Find')).toEqual(['Step 1: Find', '29', '100%'])
     expect(cells('Step 2: Shortlist')).toEqual(['Step 2: Shortlist', '5', '17%'])

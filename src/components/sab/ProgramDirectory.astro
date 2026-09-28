@@ -335,7 +335,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
       <p class="sabl-more-line" data-dir-more-line>{showingLine(initial.slice(0, DIRECTORY_PAGE_SIZE), initial, programGroupKey, k => PROGRAM_GROUP_LABELS[k] ?? k.toUpperCase())}</p>
       <div class="sabl-more-actions">
         <button type="button" class="sabl-more-btn" data-dir-more-btn>Show {Math.min(DIRECTORY_PAGE_SIZE, initial.length - DIRECTORY_PAGE_SIZE)} more</button>
-        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all {initial.length.toLocaleString('en-CA')}</button>
+        <button type="button" class="sabl-more-all" data-dir-all hidden={initial.length - DIRECTORY_PAGE_SIZE <= DIRECTORY_PAGE_SIZE}>Show all</button>
       </div>
     </div>
   )}

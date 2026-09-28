@@ -105,6 +105,8 @@ function MatchTile({
     <button
       type="button"
       onClick={onClick}
+      // Read as "Calgary, And the foothills", not the two run together.
+      aria-label={hint ? `${label}, ${hint}` : undefined}
       className={`sabm-opt${state === 'selected' ? ' sabm-opt-selected' : ''}${state === 'dim' ? ' sabm-opt-dim' : ''}${state === 'idle' && animateIn ? ' quiz-tile-in' : ''}`}
       style={{ animationDelay: `${delay}ms`, height: '100%' }}
     >
@@ -241,6 +243,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
   function answer(key: string, value: string, index: number) {
     if (pendingTile !== null) return
+    const typedTown = key === 'city' && unlistedTown ? placeFilter.trim() : ''
     setPendingTile(index)
     transitionTimeoutRef.current = setTimeout(() => {
       setPendingTile(null)
@@ -253,6 +256,12 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         if (key === 'city' && a.city !== value) {
           delete next[SCHOOL_QUESTION_KEY]
           delete next[BOARD_QUESTION_KEY]
+        }
+        // A town typed before picking "Other Alberta" is kept: it lifts the
+        // "Only for" check off that town's own local awards.
+        if (key === 'city') {
+          if (value === 'Other Alberta' && typedTown) next.town = typedTown
+          else delete next.town
         }
         // The school list is narrowed by the board, so a new board can take
         // the kept school off it.
@@ -309,6 +318,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       fields: fieldVal ? [fieldVal] : [],
       averagePercent: avgVal ? parseInt(avgVal) : null,
       averageTop: avgVal ? AVERAGE_BAND_TOP[avgVal] ?? null : null,
+      town: city === 'Other Alberta' ? answers.town ?? null : null,
       identifiesAsFemale: null,
       identifiesAsIndigenous: null,
       identifiesAsBIPOC: null,
@@ -518,7 +528,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         {/* Every match, not the ten on screen: the ten are split on purpose. */}
         {showScholarships && (() => {
           const note = openLaterNote((allScholarshipResults ?? []).map(r => ({ status: scholarshipStatusOf(r.scholarship, today), openDate: r.scholarship.openDate })))
-          return note && <p className="sabm-later-note">{note}</p>
+          return note && <p className="sabm-later-note">{note} <button type="button" className="sab-later-ok" data-later-ok>Got it</button></p>
         })()}
 
         {/* What the list was built from, beside the list (critique 2026-09-23:
@@ -530,7 +540,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             {QUESTIONS.map((q, i) => {
               const v = answers[q.key]
               if (v === undefined) return null
-              const label = q.opts.find(o => o.value === v)?.label ?? v
+              const picked = q.opts.find(o => o.value === v)?.label ?? v
+              const label = q.key === 'city' && answers.town ? `${answers.town} (${picked})` : picked
               return (
                 <li key={q.key}>
                   <button type="button" onClick={() => editAnswer(i)} aria-label={`${label}. Change your answer to: ${q.q}`}>{label}</button>
@@ -752,6 +763,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const shownOpts = current && filterable && q
     ? current.opts.filter(o => o.label.toLowerCase().includes(q) || (o.hint ?? '').toLowerCase().includes(q) || o.value === 'Other Alberta' || (current.key === SCHOOL_QUESTION_KEY && o.value === ''))
     : current?.opts ?? []
+  // A typed town that no named city (or its hint) covers: "Other Alberta"
+  // says it includes that town instead of standing alone without a word.
+  const unlistedTown = !!current && current.key === 'city' && q.length >= 3 && !shownOpts.some(o => o.value !== 'Other Alberta')
   if (!current) return null
 
   return (
@@ -798,8 +812,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             onInput={e => setPlaceFilter((e.currentTarget as HTMLInputElement).value)}
             onKeyDown={e => {
               if (e.key !== 'Enter') return
-              // The first real match, not the "Another school" tile ahead of it.
-              const i = Math.max(0, shownOpts.findIndex(o => o.value !== ''))
+              // The first real match, not the "Another school" or "Other
+              // Alberta" tile ahead of it; that one only when nothing matched.
+              const i = Math.max(0, shownOpts.findIndex(o => o.value !== '' && o.value !== 'Other Alberta'))
               const first = shownOpts[i]
               if (first && placeFilter.trim()) { e.preventDefault(); answer(current.key, first.value, i) }
             }}
@@ -814,7 +829,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
               <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1', height: '100%' } : { height: '100%' }}>
                 <MatchTile
                   label={opt.label}
-                  hint={opt.hint}
+                  hint={opt.value === 'Other Alberta' && unlistedTown ? `Includes ${placeFilter.trim()}` : opt.hint}
                   delay={i * 50}
                   state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : 'idle'}
                   animateIn={enterDir === 'fwd'}

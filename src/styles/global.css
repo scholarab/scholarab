@@ -914,16 +914,30 @@ html:not(.js) .sabl-views { display: none; }
   font-size: 15px; line-height: 1.55; color: #454945;
 }
 .sabl-later-note[hidden] { display: none; }
+html[data-later-ok] :is(.sabl-later-note, .sabm-later-note) { display: none; }
+.sab-later-ok {
+  font: inherit; font-weight: 700; color: #0E6B4D; cursor: pointer;
+  padding: 0; border: 0; background: none;
+  text-decoration: underline; text-underline-offset: 3px;
+  /* A 44px target without making the line taller. */
+  position: relative;
+}
+.sab-later-ok::after { content: ''; position: absolute; inset: -12px -8px; }
+.sab-later-ok:hover { color: #141915; }
 .sabl-group {
   grid-column: 1 / -1; width: 100%;
   display: flex; align-items: flex-end; gap: 14px;
   margin: 38px 0 6px; padding: 0;
   background: none; border: 0;
+  /* The rule runs the row's width: under the name alone its length was the
+     word's, so OPEN NOW and FOR AFTER HIGH SCHOOL had different rules
+     (critique 2026-09-27). */
+  border-bottom: 2px solid var(--text-primary);
   font: inherit; color: inherit; text-align: left;
 }
 .sabl-group-name {
   display: inline-flex; align-items: center; gap: 14px;
-  padding-bottom: 12px; border-bottom: 2px solid var(--text-primary);
+  padding-bottom: 12px;
 }
 html.js .sabl-group { cursor: pointer; }
 /* The section heading wraps its toggle but lays out as if it were not there. */
@@ -1709,13 +1723,20 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 
 /* ══ "ScholarAB Saved" design (claude.ai/design); shortlist + calendar ══ */
+.sabs-next {
+  margin: 32px 0 0; padding-top: 20px; max-width: 62ch;
+  border-top: 1px solid rgba(20, 25, 21, 0.12);
+  font-size: 15px; line-height: 1.6; color: #454945;
+}
+.sabs-next strong { color: #141915; }
+.sabs-next a { color: #141915; text-underline-offset: 3px; }
 .sabs-toggle {
   display: flex; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 100px;
   overflow: hidden; flex: none; margin-bottom: 6px;
 }
 .sabs-toggle-btn {
   font-family: var(--font-body); font-size: 14px; font-weight: 700;
-  padding: 11px 24px; border: none; cursor: pointer; background: transparent; color: var(--text-primary);
+  padding: 11px 24px; min-height: 44px; border: none; cursor: pointer; background: transparent; color: var(--text-primary);
 }
 .sabs-toggle-btn + .sabs-toggle-btn { border-left: 1.5px solid rgba(20,25,21,0.85); }
 .sabs-toggle-btn:hover { opacity: 0.85; }
