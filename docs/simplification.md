@@ -788,3 +788,5 @@ Also commits the regenerated `public/publication.json`: 279d061 changed scholars
 Local measurements on 279d061 plus this change: validate-data went from 119 redirects and one warning to 118 and none; `npm run ci` passed (1,059 tests) and `npm run test:e2e` passed (104). Not yet checked on production: after the deploy the removed listing's path should answer 404, not 200.
 
 Add-back fraction: 0 of 2.
+
+Follow-up, same pass: hosted CI failed on 279d061 and c956727 at 01:18 and 01:34 UTC. `EligibilityQuiz.test.tsx` built "today" from the host's date while the quiz counts days in Alberta (`lib/calendar.ts`), so on a UTC runner the test failed from 6 p.m. to midnight Alberta time, which includes the 04:50 UTC scheduled sync run. The test's hand-rolled date formatting is replaced by `albertaDate()`, the helper the component uses. Reproduced with `TZ=UTC` inside that window, then passed under UTC, Edmonton, UTC+14 and UTC-11; `npm run ci` passed under `TZ=UTC`.

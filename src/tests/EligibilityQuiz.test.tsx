@@ -16,6 +16,7 @@ import type { ConfidenceTier } from '../lib/eligibility-types'
 // `signals` was added to matchAll and this stub kept compiling without it.
 import type { matchAll } from '../lib/eligibility-matcher'
 import { QUIZ_STORAGE_KEY, QUIZ_TTL_MS } from '../lib/quiz'
+import { albertaDate } from '../lib/calendar'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
 
@@ -373,8 +374,9 @@ describe('Results', () => {
   })
 
   it('puts a better fit ahead of a bigger award in the due-soon group, and says due today', () => {
-    const today = new Date()
-    const todayIso = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+    // Alberta's date, as the component counts it. The host's own date is a day
+    // ahead from 6 p.m. in Alberta on a UTC runner, which failed CI at 01:18 UTC.
+    const todayIso = albertaDate()
     const soonIso = new Date(Date.now() + 10 * 86_400_000).toISOString().slice(0, 10)
     const bigPossible = makeScholarship({ id: 1, title: 'Big Possible', amount: '~$100,000', deadline: todayIso })
     const smallStrong = makeScholarship({ id: 2, title: 'Small Strong', amount: '$500', deadline: soonIso })
