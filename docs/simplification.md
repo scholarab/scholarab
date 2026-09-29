@@ -932,3 +932,21 @@ Measured locally, in a copy of the tree in the session scratchpad so the shared 
 Repair attempts against this problem: 2 before this change, both regenerating the file by hand (2026-09-28).
 
 Add-back fraction: 1 of 1 (the listing URLs, now read from the data instead of the files).
+
+## Publication marker: commit only the request ID, 2026-09-29
+
+The outcomes: the publisher marks a publication live only when the deployment serves that request's exact catalogue, IndexNow announces only a confirmed deployment, and a build leaves the shared checkout as it found it. `public/publication.json` held the request ID the publisher commits and a catalogue hash that every build rewrites. No reader used the committed hash: the publisher compares the live marker with a hash it computes from the data, its crash recovery reads only the ID, and IndexNow reads the local marker after the build step has rewritten it. So each data commit had to carry the rebuilt marker for nothing, and one that left it out made every later build show a modified tracked file. Since the marker was added on 2026-09-09, 41 of 55 data commits carried it and 14 left it stale: all 6 daily syncs and 8 made by hand.
+
+| Candidate | Outcome |
+| --- | --- |
+| The committed catalogue hash | Removed. The ID moves to `src/data/publication-request.json`, which only the publisher writes. `public/publication.json` becomes a gitignored build output with the same two fields at the same URL, so the live check and IndexNow are unchanged. |
+| Adding the marker to the daily sync's `git add` (the first idea) | Not used. It fixes the sync but keeps the marker in every data commit, and 8 commits made by hand missed it anyway. |
+| Taking the ID from the publisher's commit message instead of a file | Not used. CI checks out a single commit, so the message is usually not there to read. |
+
+Measured locally: `npm run ci` (1,063 tests; the generator test now also checks that a build leaves the committed request file untouched) and `npm run test:e2e` (107 passed, 17 skipped) left `git status` exactly as before they ran. The built marker, `dist/client/publication.json`, carries request 4fab8530 and the same hash the publisher computes from the data.
+
+Not yet checked on the deployment: after the deploy, `/publication.json` on workers.dev should read the same ID and hash.
+
+Repair attempts against this problem: none before this change; the drift was avoided by not staging the file.
+
+Add-back fraction: 0 of 1.

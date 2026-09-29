@@ -39,3 +39,8 @@ playwright-report/
 
 # Derived minimal reminder/title fields from the same published snapshot.
 src/data/runtime-catalogue.json
+
+# The live publication marker, written by the same generator on every build:
+# the request ID committed in src/data/publication-request.json plus the
+# catalogue hash.
+public/publication.json

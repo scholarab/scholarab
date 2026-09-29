@@ -22,7 +22,9 @@ const paths = {
   scholarship: 'src/data/scholarships.json',
   program: 'src/data/research-programs.json',
 };
-const marker = 'public/publication.json';
+// The committed request ID. The build stamps it, with the catalogue hash, into
+// the public/publication.json that the deployment serves and is checked below.
+const marker = 'src/data/publication-request.json';
 const manifest = () => {
   try {
     return JSON.parse(readFileSync(marker, 'utf8')) as { id: string };

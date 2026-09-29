@@ -8,7 +8,7 @@ Admin search and pagination operate on the entire catalogue. Every update/delete
 
 The **Publish admin drafts** workflow checks the queue every 15 minutes (GitHub schedules may run late), or can be started through GitHub's workflow-dispatch UI. It merges independent JSON changes, rejects conflicting field edits, generates rename/deletion redirects, validates and builds, commits, and pushes without force. It then verifies the request ID in the live `/publication.json` artifact. A commit or accepted deploy hook alone is never shown as “published.” Failed requests retain their drafts; correct the reported problem and queue again.
 
-A publisher interrupted after push recovers by recognizing the committed manifest. Newer edits are retained during acknowledgement. The workflow's concurrency group prevents two publishers from running together; a concurrent regular main push rejects the publisher's push rather than being overwritten. The workflow uses the repository's existing `DATABASE_URL` secret and `GITHUB_TOKEN` with `contents: write`; no new provider credential is needed.
+A publisher interrupted after push recovers by recognizing its request ID in the committed `src/data/publication-request.json`. Newer edits are retained during acknowledgement. The workflow's concurrency group prevents two publishers from running together; a concurrent regular main push rejects the publisher's push rather than being overwritten. The workflow uses the repository's existing `DATABASE_URL` secret and `GITHUB_TOKEN` with `contents: write`; no new provider credential is needed.
 
 The previous deployment-hook endpoint has been replaced by this publication queue. `DEPLOY_HOOK_URL` is no longer required for admin publication. Workers Builds (the Worker's git integration) remains responsible for deployments.
 
@@ -53,4 +53,4 @@ Link checking retains eight concurrent hosts and serial requests with a 400 ms g
 
 ## Build verification
 
-The legacy quiz is the only quiz. Its payload generator verifies every source identity and stamps the complete JSON catalogue hash into `public/publication.json`. The publisher requires both its request ID and that hash to match the live deployment before acknowledging publication. Browser tests reuse the validated build in CI.
+The legacy quiz is the only quiz. Its payload generator verifies every source identity and writes `public/publication.json`, a build output that is not committed: the request ID from `src/data/publication-request.json` plus the complete JSON catalogue hash. The publisher requires both its request ID and that hash to match the live deployment before acknowledging publication. Browser tests reuse the validated build in CI.

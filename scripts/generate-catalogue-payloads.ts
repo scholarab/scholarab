@@ -29,7 +29,10 @@ writeFileSync('src/data/runtime-catalogue.json', JSON.stringify({
   scholarships: scholarships.map(({ id, title, active, deadline }) => ({ id, title, active, deadline })),
   programs: programs.map(({ id, name, active, deadline }) => ({ id, name, active, deadline })),
 }));
-// The publisher checks this same small marker after deployment. Preserve its
-// request ID while binding it to all content in the build's JSON snapshot.
-const marker = JSON.parse(readFileSync('public/publication.json', 'utf8'));
-writeFileSync('public/publication.json', JSON.stringify({ ...marker, catalogueHash: await catalogueHash(snapshot) }) + '\n');
+// The publisher checks this same small marker after deployment: the request ID
+// it committed, bound to all content in the build's JSON snapshot. Only the ID
+// is committed. The hash is recomputed here before anything reads it, so a
+// committed copy could only go stale, and did after every data commit that left
+// it out, the daily sync among them.
+const request = JSON.parse(readFileSync('src/data/publication-request.json', 'utf8'));
+writeFileSync('public/publication.json', JSON.stringify({ ...request, catalogueHash: await catalogueHash(snapshot) }) + '\n');

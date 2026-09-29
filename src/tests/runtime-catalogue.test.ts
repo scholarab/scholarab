@@ -32,7 +32,7 @@ it('generates both payloads together, preserves publication identity, and reject
     write('src/data/scholarships.json', [{ id: 17, title: 'Award', url: 'https://example.org/award',
       active: false, eligibility: null, notes: 'Editorial-only notes', audience: 'An audience' }]);
     write('src/data/research-programs.json', [{ id: 29, name: 'Program', url: 'https://example.org/program', deadline: 'TBA' }]);
-    write('public/publication.json', { id: 'reviewed-request' });
+    write('src/data/publication-request.json', { id: 'reviewed-request' });
     execFileSync(runner, [script], { cwd: root });
     const runtime = read('src/data/runtime-catalogue.json');
     expect(runtime).toEqual({ scholarships: [{ id: 17, title: 'Award', active: false }],
@@ -41,6 +41,9 @@ it('generates both payloads together, preserves publication identity, and reject
     const marker = read('public/publication.json');
     expect(marker.id).toBe('reviewed-request');
     expect(marker.catalogueHash).toMatch(/^[a-f0-9]{64}$/);
+    // The committed request file is only read: a build that rewrote it would
+    // leave every checkout with a modified tracked file.
+    expect(read('src/data/publication-request.json')).toEqual({ id: 'reviewed-request' });
     write('src/data/research-programs.json', []);
     expect(spawnSync(runner, [script], { cwd: root }).status).toBe(1);
     expect(read('src/data/runtime-catalogue.json')).toEqual(runtime);
