@@ -56242,48 +56242,6 @@
     }
   },
   {
-    "id": 1606,
-    "title": "Skipping Stone Foundation Trans Community Award",
-    "amount": "$5,000",
-    "deadline": "2027-05-30",
-    "openDate": "2027-03-01",
-    "audience": "Grade 12 CBE and Calgary Catholic students in the transgender and gender diverse communities",
-    "url": "https://www.educationmatters.ca/awards/skipping-stone-foundation-trans-community-award",
-    "category": "Community",
-    "lastVerified": "2026-09",
-    "region": "Calgary",
-    "notes": "Administered by EducationMatters through one application for all CBE and Calgary Catholic awards. Applications open March 1. Confirm the date on the award page before you rely on it. Two letters of recommendation are required, and at least one must come from a school official, an employer or a community organization. Three rules apply to every EducationMatters award and are easy to miss: you must be 20 or younger as of September 1, you must not already be attending a post-secondary institution, and you must apply in your Grade 12 year.",
-    "active": true,
-    "description": "One $5,000 award from the Skipping Stone Foundation for a Grade 12 student at a City of Calgary school in the CBE or Calgary Catholic district who identifies as a member of the transgender and gender diverse communities and has made a meaningful contribution to others in those communities, through volunteering, community service, improving the environment at school, or being a strong and supportive ally. Any field of study.",
-    "metaDetail": "One award; two letters of recommendation.",
-    "eligibility": {
-      "grades": [
-        "12"
-      ],
-      "schoolBoards": [
-        "CBE",
-        "CCSD"
-      ],
-      "specificSchools": [],
-      "targetInstitutions": [],
-      "fields": [],
-      "minAverage": null,
-      "minAge": null,
-      "maxAge": 20,
-      "genderRequired": null,
-      "indigenousRequired": false,
-      "bipocRequired": false,
-      "financialNeed": false,
-      "maxFamilyIncome": null,
-      "fosterCare": false,
-      "citizenship": "canadian",
-      "apprenticeship": false,
-      "extracurriculars": [
-        "volunteer"
-      ]
-    }
-  },
-  {
     "id": 1607,
     "title": "4-H Alberta Provincial Scholarships",
     "amount": "$500 to $2,750",

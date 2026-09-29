@@ -2,8 +2,9 @@ export const prerender = false
 
 import type { APIRoute } from 'astro'
 import { db } from '../../lib/db/client'
-import { subscribers } from '../../lib/db/schema'
+import { confirmationRecipients, subscribers } from '../../lib/db/schema'
 import { eq } from 'drizzle-orm'
+import { recipientKey } from '../../lib/mail-delivery'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 
 // Unsubscribing is a two-step flow on purpose. The link in the email is a GET,
@@ -106,10 +107,15 @@ export const POST: APIRoute = async ({ request }) => {
   // transactions, and a `delete ... where email = (select email where token
   // = ...)` cannot see its own row disappear mid-statement anyway. Worst case
   // between the two is a concurrent second click, which deletes nothing more.
+  // The confirmation throttle's hash of the address goes first: if the second
+  // delete then fails, the token still works and a retry finishes the job.
   if (form.get('scope') === 'all') {
     const [row] = await db.select({ email: subscribers.email })
       .from(subscribers).where(eq(subscribers.token, token)).limit(1)
-    if (row?.email) await db.delete(subscribers).where(eq(subscribers.email, row.email))
+    if (row?.email) {
+      await db.delete(confirmationRecipients).where(eq(confirmationRecipients.key, await recipientKey(row.email)))
+      await db.delete(subscribers).where(eq(subscribers.email, row.email))
+    }
     // Same page whether or not the token matched; see below.
     return page(
       'Deleted',

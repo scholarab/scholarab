@@ -4,8 +4,8 @@
     "date": "2026-09-27"
   },
   "/privacy/": {
-    "hash": "7340038731f4d4dc",
-    "date": "2026-09-27"
+    "hash": "c55671ff0eddb9c6",
+    "date": "2026-09-28"
   },
   "/programs/4-h-alberta-senior-program/": {
     "hash": "c2b4cae0d14974cf",
@@ -827,14 +827,6 @@
     "hash": "80dc324c70e494bf",
     "date": "2026-09-15"
   },
-  "/programs/stanford-pre-collegiate-summer-institutes/": {
-    "hash": "a3f5fc2b19ff32d2",
-    "date": "2026-09-26"
-  },
-  "/programs/stanford-university-mathematics-camp-sumac/": {
-    "hash": "86fd7e039d478dfc",
-    "date": "2026-09-26"
-  },
   "/programs/stem-fellowship-big-data-ai-challenge/": {
     "hash": "2761cb7e8ee3fadb",
     "date": "2026-09-15"
@@ -1005,14 +997,6 @@
   },
   "/programs/write-2-film-youthwrite/": {
     "hash": "7257a6517bd94764",
-    "date": "2026-09-26"
-  },
-  "/programs/yale-summer-program-in-astrophysics-yspa/": {
-    "hash": "8a6b91e1cb3f60ca",
-    "date": "2026-09-26"
-  },
-  "/programs/yale-young-global-scholars-yygs/": {
-    "hash": "8bd394cb585b072a",
     "date": "2026-09-26"
   },
   "/programs/yeti-young-entrepreneurs-training-initiative/": {
@@ -6379,10 +6363,6 @@
     "hash": "d60eeb5d1dcf0bf8",
     "date": "2026-09-07"
   },
-  "/scholarships/skipping-stone-foundation-trans-community-award/": {
-    "hash": "0dcd42b554a24c26",
-    "date": "2026-09-22"
-  },
   "/scholarships/smacna-ab-scholarship-program/": {
     "hash": "3766239a3f92d825",
     "date": "2026-09-22"
@@ -7156,7 +7136,7 @@
     "date": "2026-09-22"
   },
   "/terms/": {
-    "hash": "6965c57dbae5803e",
-    "date": "2026-09-26"
+    "hash": "ff047544f99988b5",
+    "date": "2026-09-28"
   }
 }

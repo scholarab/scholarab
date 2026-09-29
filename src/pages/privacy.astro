@@ -8,7 +8,7 @@ import { webPageJson } from '../lib/ld';
 // Shown in the page and used as the "last updated" line. Bump this whenever
 // what the site actually collects changes; the date is the only thing telling
 // a reader whether this document still describes the code.
-const LAST_UPDATED = 'September 2, 2026';
+const LAST_UPDATED = 'September 28, 2026';
 
 // One row per thing the site stores. Kept as data rather than prose so it is
 // obvious when a new table or endpoint has no row here yet.
@@ -26,10 +26,16 @@ const collected = [
     kept: 'Same as the email address.',
   },
   {
+    what: 'A fingerprint of your email address',
+    when: 'Each time a confirmation email is sent to an address, including when someone else typed it into the sign-up form.',
+    why: 'To cap confirmation emails at five a day per address, at least 15 minutes apart, so the sign-up form cannot be used to flood someone’s inbox. It is a SHA-256 hash of the address rather than the address itself, which is enough to recognise the same address when it comes back.',
+    kept: '30 days after the last confirmation email sent to it. Delete all my data removes it straight away.',
+  },
+  {
     what: 'A scrambled fingerprint of your IP address',
     when: 'On requests to the sign-up, confirm, unsubscribe and counter endpoints.',
     why: 'Rate limiting. It stops someone signing up thousands of addresses or guessing the admin password. The address is put through a salted one-way hash before it is written, so what is stored cannot be turned back into your IP.',
-    kept: 'Swept on a rolling basis, usually within 24 hours, and never past the monthly cleanup.',
+    kept: 'Swept on a rolling basis, usually within 24 hours, and the daily cleanup deletes anything older than two days.',
   },
   {
     what: 'A cookieless page-view count',
@@ -162,8 +168,9 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
       <h2 class="sabpv-h2">Deleting your data</h2>
       <p class="sabpv-p">
         The unsubscribe link at the bottom of any ScholarAB email has a <strong>Delete all my data</strong>
-        button next to it. It removes every reminder set up with your address, and the address itself,
-        immediately. That is the whole of what we hold about you, so there is nothing left over.
+        button next to it. It removes every reminder set up with your address, the address itself, and
+        its fingerprint, immediately. That is the whole of what we hold about you, so there is nothing
+        left over.
       </p>
       <p class="sabpv-p">
         You can also email <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off--> to
@@ -173,8 +180,10 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
 
       <h2 class="sabpv-h2">Where your data goes</h2>
       <p class="sabpv-p">
-        ScholarAB runs on five services. Each one only ever sees what it needs to do its job, and none
-        of them are permitted to use it for anything else. Because they are based in the United States,
+        ScholarAB runs on five services. Each one only ever sees what it needs to do its job. What each
+        may do with it is set by its own terms, not by us; where a service lets us limit that, we have,
+        which is why Google Analytics runs with ad personalisation and Google signals turned off.
+        Because they are based in the United States,
         information stored with them may be subject to US law, including lawful access requests by US
         authorities.
       </p>
@@ -194,7 +203,8 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
       <p class="sabpv-p">
         Most people using ScholarAB are high school students, and that is who it was built for. We ask for
         as little as it is possible to ask for: an email address, for a reminder you requested, deleted the
-        moment you say so. We don't build profiles, don't advertise, and don't share anything with anyone.
+        moment you say so. We don't build profiles, don't advertise, and never sell or trade what we hold;
+        the only outside companies that see any of it are the five services listed above.
         If you're under 13, please ask a parent or guardian before signing up for reminders. And if a
         parent or guardian wants a sign-up removed, email us and it's done, no questions asked.
       </p>

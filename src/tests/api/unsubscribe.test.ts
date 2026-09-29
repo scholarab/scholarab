@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { recipientKey } from '../../lib/mail-delivery'
 
 const { mockDeleteWhere, mockDelete, mockSelectWhere, mockHitRateLimit, selectRows } = vi.hoisted(() => {
   const selectRows: { email: string }[] = []
@@ -21,6 +22,7 @@ vi.mock('../../lib/db/client', () => ({
 }))
 vi.mock('../../lib/db/schema', () => ({
   subscribers: { __table: 'subscribers', token: 'token', email: 'email' },
+  confirmationRecipients: { __table: 'confirmation_recipients', key: 'key' },
 }))
 vi.mock('../../lib/rate-limit', () => ({
   getClientIp: () => '1.2.3.4',
@@ -101,7 +103,17 @@ describe('POST /api/unsubscribe with scope=all', () => {
     expect(await res.text()).toContain('Deleted')
     // Looked the address up by token, then deleted by address.
     expect(JSON.stringify(mockSelectWhere.mock.calls[0]?.[0])).toContain('token')
-    expect(JSON.stringify(mockDeleteWhere.mock.calls[0]?.[0])).toContain('student@example.com')
+    expect(mockDeleteWhere).toHaveBeenCalledWith({ eq: ['email', 'student@example.com'] })
+  })
+
+  it('also erases the hash the confirmation throttle keeps of that address', async () => {
+    // The privacy policy says nothing is left over, and the throttle holds a
+    // hash of every address sent a confirmation email for up to 30 days.
+    selectRows.push({ email: 'Student@Example.com' })
+    await post({ token: 'abc', scope: 'all' })
+    const tables = mockDelete.mock.calls.map((c) => (c[0] as { __table: string }).__table)
+    expect(tables).toEqual(['confirmation_recipients', 'subscribers'])
+    expect(mockDeleteWhere).toHaveBeenCalledWith({ eq: ['key', await recipientKey('student@example.com')] })
   })
 
   it('deletes nothing when the token matches no row', async () => {

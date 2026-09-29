@@ -123,9 +123,10 @@ What that means in practice:
   Residual risk, accepted: on a shared school computer the answers survive in
   that tab until it closes. sessionStorage is per-tab and not readable by us
   or by another site, and the quiz has a visible restart that clears it.
-- **Limiting retention** is enforced by `scripts/prune-events.ts`, monthly:
+- **Limiting retention** is enforced by `scripts/prune-events.ts`, daily:
   events 180 days, subscriptions 60 days past a deadline, unconfirmed sign-ups
-  30 days, rate-limit windows 2 days.
+  30 days, rate-limit windows 2 days, confirmation-throttle hashes and unsent
+  email payloads 30 days.
 - **Access and correction** run through the contact address in the privacy
   policy, answered within days; the statutory maximum is 30.
 - **Erasure** is self-serve: *Delete all my data* on the unsubscribe page wipes

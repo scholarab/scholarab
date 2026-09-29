@@ -61,15 +61,18 @@ welcome and in scope.
 
 ## Data handling
 
-- No visitor accounts, no tracking of individuals, and no third-party ad or
-  analytics scripts beyond Cloudflare Web Analytics.
+- No visitor accounts and no third-party ad scripts. Two analytics scripts can
+  run: Cloudflare Web Analytics, which is cookieless, and Google Analytics 4,
+  which loads only after the visitor presses Allow on the consent banner
+  (`src/components/sab/Analytics.astro`, `src/lib/consent.ts`).
 - Saved and bookmarked listings are stored only in the browser's
   `localStorage` and are never transmitted to any server.
 - Email addresses submitted for deadline alerts are stored solely to send those
   alerts, and every alert includes a one-click unsubscribe.
 - Client IP addresses are salted-hashed before they are written for rate
   limiting; the raw address is never stored. See `src/lib/rate-limit.ts`.
-- Retention is enforced by `scripts/prune-events.ts`, monthly, not by intent.
+- Retention is enforced by `scripts/prune-events.ts`, run daily by
+  `.github/workflows/prune-events.yml`, not by intent.
 - What the privacy and anti-spam position rests on, and the single change that
   would invalidate it, is written down in [docs/compliance.md](./docs/compliance.md).
 
@@ -80,8 +83,13 @@ personal lives in one Postgres database reachable with one credential,
 `DATABASE_URL`. If that credential leaks, or the database is otherwise accessed
 without authorization, assume the following is exposed: **email addresses,
 which listing each one asked to be reminded about, and the timestamps around
-those sign-ups.** Nothing else, no names, no passwords, no student answers, no
-payment data, and no raw IP addresses, because none of those are ever stored.
+those sign-ups.** Also each sign-up's unsubscribe token, the SHA-256 hash of
+any address sent a confirmation email in the last 30 days (unsalted, so it can
+be matched against a list of known addresses), the content of any email still
+waiting to send, and the text of searches that found nothing (email-shaped
+text is dropped before it is stored). No names, no passwords, no student
+answers, no payment data, and no raw IP addresses, because none of those are
+ever stored.
 
 Steps, in order:
 

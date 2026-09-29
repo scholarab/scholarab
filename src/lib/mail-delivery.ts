@@ -13,6 +13,11 @@ export async function mailKey(value: string): Promise<string> {
   const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
   return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, '0')).join('');
 }
+/** The confirmation throttle's key for an address. Unsubscribe's "Delete all
+ * my data" derives the same key to erase the row, so both go through here. */
+export function recipientKey(email: string): Promise<string> {
+  return mailKey(email.trim().toLowerCase());
+}
 export async function claimRecipient(query: MailQuery, email: string): Promise<boolean> {
   const rows = await query(
     `INSERT INTO confirmation_recipients (key,claimed_at,window_start,attempts)
@@ -22,7 +27,7 @@ export async function claimRecipient(query: MailQuery, email: string): Promise<b
     WHERE confirmation_recipients.claimed_at <= now()-interval '15 minutes'
       AND (confirmation_recipients.window_start <= now()-interval '24 hours' OR confirmation_recipients.attempts < 5)
     RETURNING key`,
-    [await mailKey(email.trim().toLowerCase())]
+    [await recipientKey(email)]
   );
   return rows.length === 1;
 }

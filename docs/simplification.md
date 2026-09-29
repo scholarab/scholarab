@@ -429,9 +429,9 @@ recognition only (trophies, honour roll, MVP awards with no money), and 39 were
 held with a written reason: teacher-only or graduate-only awards, a male-only
 award the gender rule cannot express, a 2019-20 handbook, club newsletters from
 2016 to 2023, a password-protected page, and two Drumheller forms that now 404
-while the school's current list is a private document. The Skipping Stone Trans
-Community Award was listed as the single named exception to the gender rule,
-and `validate-data` carries that one phrase as an exception.
+while the school's current list is a private document. One award (#1606) was
+listed as the single named exception to the gender rule, and `validate-data`
+carried that one phrase as an exception; both were withdrawn on 2026-09-28.
 
 Removal before improvement: about 330 per-award rows from handbooks and portals
 became 30 school and institution listings instead of 330 thin pages; one listing
@@ -790,3 +790,21 @@ Local measurements on 279d061 plus this change: validate-data went from 119 redi
 Add-back fraction: 0 of 2.
 
 Follow-up, same pass: hosted CI failed on 279d061 and c956727 at 01:18 and 01:34 UTC. `EligibilityQuiz.test.tsx` built "today" from the host's date while the quiz counts days in Alberta (`lib/calendar.ts`), so on a UTC runner the test failed from 6 p.m. to midnight Alberta time, which includes the 04:50 UTC scheduled sync run. The test's hand-rolled date formatting is replaced by `albertaDate()`, the helper the component uses. Reproduced with `TZ=UTC` inside that window, then passed under UTC, Edmonton, UTC+14 and UTC-11; `npm run ci` passed under `TZ=UTC`.
+
+## Withdrawn listings and privacy accuracy, 2026-09-28
+
+From a compliance review of the whole site.
+
+| Candidate | Outcome |
+| --- | --- |
+| #1606, the single exception to the gender rule allowed on 2026-09-22 | Removed; the exception was withdrawn. `validate-data` loses its exception list, and its pattern gains the terms that would have let the title through on its own (the lookahead keeps #782 passing). |
+| Programs #196, #242, #256 and #265 | Removed at the maintainer's request. |
+| 301s for the five removed pages | Not added, as in eb6a968: none has a successor page, a 301 onto a hub reads as a Soft 404, and one slug would itself fail the gender-rule scan of `_redirects`. The ship-check slug diff reports all five as FAIL for that reason. |
+| Salting the confirmation throttle's hash of each address | Not done. The scheduled sender on GitHub Actions derives the same key and has no secret to salt it with, so salting needs a new secret in two places to protect about 8 rows kept 30 days. Instead the hash is disclosed on /privacy, listed in the SECURITY.md breach inventory, and erased by "Delete all my data"; `recipientKey` gives both paths one derivation. |
+| The Terms section "Changes, and which law applies" | Removed: "Changes to these terms" and "Governing law" already said the same at greater length. |
+
+Also: /privacy says cleanup runs daily and no longer promises what its five processors may do with data, or that nothing is shared with anyone; SECURITY.md names Google Analytics and says daily, as does `docs/compliance.md`. Both policy dates move to September 28, 2026.
+
+Local measurements: `npm run ci` passed (1,060 tests, one new) and `npm run test:e2e` passed (104). validate-data counts 1,541 scholarships and 270 programs, down from 1,542 and 274. The first build failed on the stale `lastmod.json` entry for #1606, because `generate-sitemap.ts` rewrites that file after the validator reads it; regenerating it first fixed that, and the committed file no longer carries the slug. Not yet checked on production: the five paths should answer 404 on www after the deploy.
+
+Add-back fraction: 0 of 5.
