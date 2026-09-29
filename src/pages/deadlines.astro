@@ -471,9 +471,13 @@ const breadcrumbJson = {
   .sabcal-stats { font-size: 15px; color: #5C5F5B; margin: 14px 0 0; max-width: 72ch; }
   .sabcal-where { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font-size: 15px; font-weight: 600; color: #141915; }
   html:not(.js) .sabcal-where { display: none; }
+  /* Draws its own box and arrow like the directory pickers (.sabl-sort-select
+     in global.css): natively, iPhone Safari drew this 44px picker 29px tall. */
   .sabcal-where select {
     min-height: 44px; padding: 0 36px 0 16px; font: 500 16px var(--font-body); color: #141915;
-    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+    background: #FFFFFF var(--select-arrow) right 16px center / 10px 6px no-repeat;
+    border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+    -webkit-appearance: none; appearance: none;
   }
   .sabcal-where select:hover { border-color: #141915; }
   .sabcal-row.is-elsewhere, .sabcal-month[hidden], .sabcal-chip[hidden], .sabcal-above[hidden] { display: none; }
@@ -528,10 +532,14 @@ const breadcrumbJson = {
   /* Each award name is the row's only action and sits in a list, not a
      sentence, so WCAG 2.2 2.5.8's inline exception does not cover it. The
      inline box measured 17px; the padding takes the tap target past 24px and
-     the matching negative margin leaves the row's rhythm where it was. */
+     the matching negative margin leaves the row's rhythm where it was.
+     inline-flex, not inline-block: an inline-block's baseline is its last
+     line, so the row's baseline alignment set the day beside a wrapped
+     name's second line and, in Safari, lifted the first line over the rule
+     above (479 of 1,030 rows on a 375px phone, critique 2026-09-27). */
   .sabcal-name a {
     color: #141915; text-decoration: none; font-size: 16px; line-height: 1.4;
-    display: inline-block; padding-block: 4px; margin-block: -4px;
+    display: inline-flex; padding-block: 4px; margin-block: -4px;
   }
   .sabcal-name a:hover { text-decoration: underline; }
   .sabcal-tag {

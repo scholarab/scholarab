@@ -596,6 +596,9 @@ const chip =
     .sabd-facts { grid-template-columns: 1fr; }
     .sabd-who { display: block; font-size: 16px; line-height: 1.5; color: #141915; margin: 14px 0 0; max-width: 640px; }
     .sabd-who-label { font-weight: 600; color: #0A6B4D; }
+    /* Safari zooms the page into any field under 16px when it takes focus,
+       and leaves it zoomed (critique 2026-09-27). */
+    .sabd-remind-input { font-size: 16px; }
   }
   /* The note sat inside three paddings (the column, the eligibility box and
      the paper's margin) and got a 210px measure on a 375px phone, about 25

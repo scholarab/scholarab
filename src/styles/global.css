@@ -144,6 +144,9 @@
   --font-display: 'Big Shoulders', 'Arial Narrow', Arial, sans-serif;
   --font-body:    'Public Sans', system-ui, -apple-system, sans-serif;
   --font-label:   'Big Shoulders Label', 'Arial Narrow', Arial, sans-serif;
+
+  /* The pickers' arrow: they draw their own (see .sabl-sort-select). */
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23141915' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 /* ── Base ──────────────────────────────────────────────────── */
@@ -555,16 +558,24 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 .sabl-scope-select { display: none; }
 html.js .sabl-scope-chips { display: none; }
 html.js .sabl-scope-select {
-  display: block; width: auto; min-width: 260px; max-width: 100%; min-height: 40px; padding: 0 14px;
+  display: block; width: auto; min-width: 260px; max-width: 100%; min-height: 40px; padding: 0 36px 0 14px;
   font: 600 14px var(--font-body); color: var(--text-primary); cursor: pointer;
-  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+  background: #FFFFFF var(--select-arrow) right 14px center / 10px 6px no-repeat;
+  border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+  -webkit-appearance: none; appearance: none;
 }
 html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
-/* Sort: the scope picker's shape, sized to its longest option. */
+/* Sort: the scope picker's shape, sized to its longest option. Both draw
+   their own box and arrow (appearance: none), because Safari sizes a native
+   <select> itself: these 40 and 44px pickers came out 21 to 23px tall in
+   WebKit, and the 44px one on /deadlines 29px in iPhone Safari (critique
+   2026-09-27). */
 .sabl-sort-select {
-  min-height: 40px; padding: 0 14px; cursor: pointer;
+  min-height: 40px; padding: 0 36px 0 14px; cursor: pointer;
   font: 600 14px var(--font-body); color: var(--text-primary);
-  background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+  background: #FFFFFF var(--select-arrow) right 14px center / 10px 6px no-repeat;
+  border: 1.5px solid rgba(20,25,21,0.3); border-radius: 100px;
+  -webkit-appearance: none; appearance: none;
 }
 .sabl-sort-select:hover { border-color: var(--text-primary); }
 .sabl-filter-row { display: flex; align-items: center; gap: 8px; }
@@ -847,7 +858,10 @@ html:not(.js) .sabl-views { display: none; }
   html.js .sabl-toolbar .sabl-views { grid-column: 1 / -1; justify-self: start; margin-top: 6px; }
   .sabl-view { width: 48px; height: 38px; }
   /* Full width and a 44px target inside the phone panel. */
-  html.js .sabl-scope-select { width: 100%; min-height: 44px; font-size: 15px; border-radius: 12px; }
+  html.js .sabl-scope-select { width: 100%; min-height: 44px; border-radius: 12px; }
+  /* Safari zooms the page into any field under 16px when it takes focus,
+     and leaves it zoomed (critique 2026-09-27). */
+  .sabl-search input, .sabl-sort-select, html.js .sabl-scope-select { font-size: 16px; }
   /* The panel's exit, pinned to the bottom of the screen while it is open. */
   html.js[data-filters] .sabl-filters-done {
     display: block; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 3;

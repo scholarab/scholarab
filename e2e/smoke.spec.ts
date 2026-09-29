@@ -403,3 +403,30 @@ test('How it works does not interrupt the quiz', async ({ page }) => {
   await expect(page.locator('dialog[data-tour]')).toBeHidden()
   await expect(page.locator('[data-tour-strip]')).toBeHidden()
 });
+
+// Safari zooms the page into any field under 16px that takes focus, and sizes
+// a native <select> itself: the 44px picker on /deadlines drew 29px tall on an
+// iPhone. Neither shows in Chromium, so the rule is read off the styles: 16px
+// text, and pickers that draw their own box (critique 2026-09-27).
+test('on a phone, no field makes Safari zoom and every picker draws its own box', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'mobile', 'the 16px rule is phone-only');
+  await page.goto('/deadlines/');
+  // An open award with a date still to come carries the reminder form.
+  const listing = await page.locator('details.sabcal-month .sabcal-row[data-open] .sabcal-name a').first().getAttribute('href');
+  const seen: string[] = [];
+  const problems: string[] = [];
+  for (const path of ['/deadlines/', '/', '/scholarships/', '/programs/', listing!, '/this-page-does-not-exist/']) {
+    if (path !== '/deadlines/') await page.goto(path);
+    const fields = await page.locator('input:not([type=hidden]):not([type=checkbox]):not([type=radio]), select, textarea').evaluateAll(all => all.map(f => {
+      const s = getComputedStyle(f);
+      return { name: f.className || f.tagName.toLowerCase(), size: parseFloat(s.fontSize), select: f.tagName === 'SELECT', appearance: s.appearance };
+    }));
+    for (const f of fields) {
+      seen.push(f.name);
+      if (f.size < 16) problems.push(`${path} ${f.name}: ${f.size}px text`);
+      if (f.select && f.appearance !== 'none') problems.push(`${path} ${f.name}: native ${f.appearance}`);
+    }
+  }
+  expect(seen.join(' ')).toContain('sabd-remind-input');
+  expect(problems).toEqual([]);
+});

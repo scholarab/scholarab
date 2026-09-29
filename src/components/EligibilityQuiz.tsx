@@ -198,6 +198,23 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
   }, [])
 
+  // Hide the static match-page intro when results are shown, and fold it to
+  // the heading after question one (critique 2026-09-23: the subhead and the
+  // trust line repeated above every question, so a phone fit about three
+  // answers on screen). Declared before the scroll effect below, which
+  // measures the page: Preact runs every cleanup before any effect, so
+  // declared after it, the intro was unfolded when the heading was measured
+  // and folded again once it had been scrolled to, leaving the heading 106px
+  // above an iPhone screen (critique 2026-09-27).
+  useLayoutEffect(() => {
+    document.body.classList.toggle('quiz-results', step >= QUESTIONS.length)
+    // Set before paint by match.astro for a restored run; the body classes
+    // take over from here, so Retake brings the intro back.
+    document.documentElement.classList.remove('quiz-restore')
+    document.body.classList.toggle('quiz-past-first', step >= 1 && step < QUESTIONS.length)
+    return () => document.body.classList.remove('quiz-results', 'quiz-past-first')
+  }, [step, QUESTIONS.length])
+
   // Focus question heading on step change for screen reader navigation.
   // Skipped on first render so mounting doesn't steal focus from the page.
   useLayoutEffect(() => {
@@ -209,9 +226,17 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       // A long option list (schools, towns) leaves the page scrolled down, and
       // the next question opened with its heading above the viewport on a
       // phone (critique 2026-09-24). Bring it back only when it is hidden, so
-      // a short question on desktop does not jump.
+      // a short question on desktop does not jump. Measured by offsetTop, which
+      // leaves out the 14px the step is still sliding up from: measured with
+      // that transform, the heading came to rest touching the header instead
+      // of its scroll margin below it (critique 2026-09-27).
       const h = questionHeadingRef.current
-      if (h && h.getBoundingClientRect().top < parseFloat(getComputedStyle(h).scrollMarginTop)) h.scrollIntoView({ block: 'start' })
+      if (h) {
+        let top = -window.scrollY
+        for (let e: HTMLElement | null = h; e; e = e.offsetParent as HTMLElement | null) top += e.offsetTop
+        const margin = parseFloat(getComputedStyle(h).scrollMarginTop)
+        if (top < margin) window.scrollBy(0, top - margin)
+      }
       h?.focus({ preventScroll: true })
       return
     }
@@ -458,19 +483,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     if (next.has(id)) { showConfetti(el); sendEvent('save', 'program', id, 'quiz') }
     setSavedProgramIds(next)
   }, [])
-
-  // Hide the static match-page intro when results are shown, and fold it to
-  // the heading after question one (critique 2026-09-23: the subhead and the
-  // trust line repeated above every question, so a phone fit about three
-  // answers on screen).
-  useLayoutEffect(() => {
-    document.body.classList.toggle('quiz-results', step >= QUESTIONS.length)
-    // Set before paint by match.astro for a restored run; the body classes
-    // take over from here, so Retake brings the intro back.
-    document.documentElement.classList.remove('quiz-restore')
-    document.body.classList.toggle('quiz-past-first', step >= 1 && step < QUESTIONS.length)
-    return () => document.body.classList.remove('quiz-results', 'quiz-past-first')
-  }, [step, QUESTIONS.length])
 
   // Type-to-filter for the city question; cleared whenever the step moves.
   const [placeFilter, setPlaceFilter] = useState('')

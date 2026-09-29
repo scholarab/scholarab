@@ -55,6 +55,28 @@ test('catalogue questions keep their order, keyboard navigation, private resume 
   await expect(page.locator('.sabm-step-label')).toHaveText(`Question 1 of up to ${quizQuestionCeiling(payload.scholarships)}`);
 });
 
+// The last option is the one a student scrolls furthest to reach: the last
+// town, field or kind of school. The next question used to open with its
+// heading above a phone screen, or under the sticky header (critique 2026-09-27).
+// Its scroll margin is the room it keeps below the header.
+test('each question opens below the header after an answer far down the list', async ({ page }) => {
+  await page.goto('/match/');
+  const heading = page.locator('.sabm-question');
+  const results = page.locator('.sabm-results-h1');
+  for (let i = 0; i < 12; i++) {
+    const q = await heading.innerText();
+    await page.locator('.sabm-opt').last().click();
+    await expect(results.or(heading.filter({ hasNotText: q }))).toBeVisible();
+    if (await results.isVisible()) break;
+    const room = await heading.evaluate(async h => {
+      await Promise.all(h.parentElement!.getAnimations().map(a => a.finished));
+      return h.getBoundingClientRect().top - parseFloat(getComputedStyle(h).scrollMarginTop);
+    });
+    expect(room, `heading after answering "${q}"`).toBeGreaterThanOrEqual(-1);
+  }
+  await expect(results).toBeVisible();
+});
+
 for (const failure of ['network', 'version', 'shape'] as const) {
   test(`quiz data ${failure} failure is visible and manual retry preserves progress`, async ({ page }) => {
     let requests = 0;

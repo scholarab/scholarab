@@ -808,3 +808,37 @@ Also: /privacy says cleanup runs daily and no longer promises what its five proc
 Local measurements: `npm run ci` passed (1,060 tests, one new) and `npm run test:e2e` passed (104). validate-data counts 1,541 scholarships and 270 programs, down from 1,542 and 274. The first build failed on the stale `lastmod.json` entry for #1606, because `generate-sitemap.ts` rewrites that file after the validator reads it; regenerating it first fixed that, and the committed file no longer carries the slug. Not yet checked on production: the five paths should answer 404 on www after the deploy.
 
 Add-back fraction: 0 of 5.
+
+## Phone fixes from the mobile critique, 2026-09-28
+
+From the phone-only critique of 2026-09-27, priorities 1 to 3. The outcomes: a student sees each quiz question after answering the one before, a date sits beside the award it belongs to, and on an iPhone a field does not zoom the page and a picker is the size it was drawn. Before is production, after is the local build (`dist/`); none of the code involved changed between the two. Measured in Playwright WebKit at iPhone 13 size (390x664) and Chromium at Pixel 7, and for the pickers in Safari on the iOS 26.5 simulator (iPhone 16e).
+
+| Candidate | Outcome |
+| --- | --- |
+| A new scroll fix for the quiz | Not needed. The 2026-09-24 correction measured at the wrong moment: Preact runs every effect cleanup before any effect, so the cleanup that unfolds the /match intro ran first, and the class that folds it came back only after the heading had been measured and scrolled to. The intro effect moves above the scroll effect; nothing is added. |
+| `scrollIntoView` for the quiz heading | Replaced by an `offsetTop` measure and `scrollBy`. The old measure included the 14px the step is still sliding up from, so the heading came to rest 1px under the header instead of at its 68px scroll margin. |
+| `display: block` on /deadlines award names (the critique's proposal) | Rejected after trying it on the live page: it fixed every row but put the Program tag on its own line under 12 more names at 375px (41 of 41 instead of 29). `inline-flex` fixes the same rows and moves nothing else, because an inline-flex box aligns on its first line and an inline-block on its last. |
+| Native pickers with a larger `min-height` | Not possible: iPhone Safari ignores `min-height` on a native `<select>` (the /deadlines one asks for 44px and drew 29). The three pickers draw their own box and share one arrow (`--select-arrow`). |
+| 16px text in every field at every width | Phones only (900px and under), where Safari zooms; desktop sizes are unchanged. |
+| A WebKit project in Playwright (the critique's suggestion) | Not added. Playwright's WebKit is not iPhone Safari: it drew the pickers 21 to 23px tall with 5px corners where the simulator's Safari drew 29px pills, and CI would run a third WebKit build, on Linux. Both causes show in computed styles, so one mobile-project test reads them in the existing Chromium run: every field at least 16px, every select `appearance: none`. |
+
+Two new tests: each quiz question opens at its scroll margin after the last option of the one before is answered (both projects), and the phone field rule above (mobile project). Both failed against production before the fix: the heading 136px above the header after the first answer, and 10 field problems across /deadlines, /scholarships, /programs and a listing.
+
+Repair attempts: none against these problems. Separately, the first local `npm run ci` failed in validate-data on a stale, gitignored `public/sitemap.xml` still listing the slug removed in 6f05a7c: validate-data reads the file before `generate-sitemap.ts` rewrites it. Regenerating it fixed the local run; hosted CI starts without the file.
+
+Add-back fraction: 0.
+
+| Metric | Before (production) | After (local `dist/`) |
+| --- | --- | --- |
+| Quiz heading after a scrolled answer, WebKit iPhone 13 | 106px above the screen, 6 of 6 | at 68px, 15px under the header, 6 of 6 |
+| Same, Chromium Pixel 7 | 83px above the screen after the town, under the header after the next three | at 68px, 4 of 4; unscrolled questions unmoved |
+| /deadlines names above their own row, WebKit at 320, 375, 390px | 739, 479, 412 of 1,030 | 0, 0, 0 |
+| /deadlines days beside a later line of the name, Chromium Pixel 7 | 315 | 0 |
+| Picker height, WebKit iPhone 13: sort, where you live, /deadlines | 22, 23, 23px | 40, 44, 44px |
+| /deadlines picker, iPhone Safari (simulator) | 29pt | 44pt |
+| Phone field text: search, sort, where you live, reminder email | 15, 14, 15, 14px | 16px |
+| Desktop Chromium picker widths: sort, where you live, /deadlines | 156, 228, 241px | 158, 228, 221px |
+| Unit tests | 1,060 | 1,060 |
+| E2E | 104 passed | 107 passed, 17 skipped, 53.7s; the new tests take 18s of that test time |
+
+Not yet checked on production: after the deploy, the same probes should read the after column on www.
