@@ -4,6 +4,18 @@ name = "scholarab"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
+# The site's hostnames. Routes run before the zone would reach the old Pages
+# origin that the DNS records still name, so removing these hands the site
+# straight back to Pages. The apex is redirected to www by a zone Redirect
+# Rule before a Worker runs; its route only matters if that rule is removed.
+# workers.dev stays on: the publication check and IndexNow read the
+# deployment there, outside the zone firewall.
+workers_dev = true
+routes = [
+  { pattern = "www.scholarab.ca/*", zone_name = "scholarab.ca" },
+  { pattern = "scholarab.ca/*", zone_name = "scholarab.ca" },
+]
+
 [assets]
 # Pages parity: a path with no file gets dist's 404.html with a 404 status,
 # and only the on-demand routes (formerly _routes.json's include list) run the
