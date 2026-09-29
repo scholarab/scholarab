@@ -100,7 +100,10 @@ for (const s of open) {
   if(previous[file]===digest && existsSync(join(outDir,file))) continue;
   const [{ default: satori }, { Resvg }] = await Promise.all([import('satori'), import('@resvg/resvg-js')]);
   const svg = await satori(tree as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts });
-  const png = encodeCardPng(new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render());
+  // satori has already turned every glyph into a path, so resvg needs no fonts.
+  // Its default scans all system fonts for each image: 119 ms of a 148 ms card
+  // here, and slow enough on Workers Builds that a cold build timed out at 30 min.
+  const png = encodeCardPng(new Resvg(svg, { fitTo: { mode: 'width', value: 1200 }, font: { loadSystemFonts: false } }).render());
   writeFileSync(join(outDir,file),png);written++;
 }
 for (const file of readdirSync(outDir)) {
