@@ -353,12 +353,16 @@ body.quiz-results #match-intro,
 body.quiz-results #match-divider {
   display: none !important;
 }
-/* After question one the intro is only the heading, smaller, so the answers
-   start near the top of a phone screen. */
+/* After question one the intro is only the heading, shrunk to a label, so
+   the question is the first thing read on a phone. At 30-40px it still sat
+   above the question and pushed it to y=235 (critique 2026-09-28). */
 body.quiz-past-first #match-intro .sabm-sub,
 body.quiz-past-first #match-intro .sabm-trust { display: none; }
-body.quiz-past-first #match-intro .sabm-h1 { font-size: clamp(30px, 4vw, 40px); }
-body.quiz-past-first .sabm-progress-wrap { margin-top: 18px; }
+body.quiz-past-first #match-intro .sabm-h1 {
+  font-family: var(--font-body); font-size: 14px; font-weight: 600; line-height: 1.4;
+  letter-spacing: 0; color: rgba(20, 25, 21, 0.72);
+}
+body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; }
 /* The city question's type-to-filter box, in the scope picker's shape. */
 .sabm-find {
   display: block; width: 100%; max-width: 420px; box-sizing: border-box; min-height: 44px; margin: 0 0 16px;
@@ -378,6 +382,9 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 18px; }
   background: #FFFFFF; border: 1px solid rgba(20,25,21,0.22); border-radius: 100px;
 }
 .sabm-answers button:hover { border-color: var(--text-primary); }
+/* Thumb-sized on touch: at 32px these were the smallest buttons on the
+   results screen, and changing an answer is the reason they exist. */
+@media (pointer: coarse) { .sabm-answers button { min-height: 44px; padding: 0 14px; } }
 
 /* ── Reduced motion; entrance + looping animations ──────────────── */
 @media (prefers-reduced-motion: reduce) {
@@ -1080,7 +1087,11 @@ html.js .sabl-group-toggle { display: inline-flex; }
 }
 /* The month the listing was last checked against its provider, under the
    date on every row: the check is the reason to trust the row. */
-.sabl-checked { font-size: 12.5px; font-weight: 500; color: rgba(20, 25, 21, 0.7); white-space: nowrap; }
+/* Freshness is the site's case against stale PDFs, and it was the quietest
+   text on the row (critique 2026-09-28): full ink and a green tick, same
+   place, no badge. The tick is decoration; the words carry the meaning. */
+.sabl-checked { font-size: 13px; font-weight: 600; color: #141915; white-space: nowrap; }
+.sabl-checked::before { content: '\2713' / ''; margin-right: 4px; color: var(--green); font-weight: 700; }
 .sabl-card-actions { display: flex; align-items: center; gap: 12px; }
 .sabl-save {
   font-family: var(--font-body); font-size: 15px; background: none;
@@ -1525,6 +1536,10 @@ html:not(.js) .sabl-more { display: none; }
 .sabl-hublinks { display: flex; flex-wrap: wrap; gap: 2px 18px; }
 .sabl-hublinks a {
   color: #141915; display: inline-flex; align-items: center; min-height: 24px;
+}
+@media (pointer: coarse) {
+  .sabl-hublinks { row-gap: 0; }
+  .sabl-hublinks a { min-height: 44px; }
 }
 
 /* ══ "ScholarAB Match" design (claude.ai/design); quiz island ══ */

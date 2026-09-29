@@ -7,6 +7,7 @@ import type {
 import type { QuizProgram as Program } from './quiz-payload'
 import { programMatchesGrade } from './list-core'
 import { parseAmount } from './utils'
+import { programStatusOf } from './status'
 import { RESULT_LIMIT } from './quiz'
 
 const AVERAGE_CHECK = 'Needs an average of '
@@ -504,17 +505,30 @@ export function programFields(p: { category?: string | null; description?: strin
   return [...fields]
 }
 
+// Open with a real date first (soonest first), then no deadline, then an
+// unconfirmed date, then closed. In the data's own order the first rows were
+// "Opens later, date not posted", which a student with days left cannot act
+// on (critique 2026-09-28).
+const PROGRAM_STATUS_RANK = { active: 0, ongoing: 1, tba: 2, closed: 3 } as const
+
 /**
  * Filter active programs by the student's grade, narrow by field keywords when
- * that doesn't empty the list, and return the top RESULT_LIMIT.
+ * that doesn't empty the list, order what can be applied to first, and return
+ * the top RESULT_LIMIT.
  */
-export function matchPrograms(programs: Program[], answers: Record<string, string>, limit = RESULT_LIMIT): Program[] {
+export function matchPrograms(programs: Program[], answers: Record<string, string>, limit = RESULT_LIMIT, today?: Date): Program[] {
   const grade = answers.grade ?? '12'
   let filtered = programs.filter(p => p.active && matchProgram(grade, p))
   const field = answers.field
   if (field && FIELD_KEYWORDS[field]) {
     const byField = filtered.filter(p => programFields(p).includes(field))
     if (byField.length > 0) filtered = byField
+  }
+  if (today) {
+    const rank = (p: Program) => PROGRAM_STATUS_RANK[programStatusOf(p, today)]
+    // Array.prototype.sort is stable, so ties keep the data's order.
+    filtered = [...filtered].sort((a, b) => rank(a) - rank(b)
+      || (rank(a) === 0 ? a.deadline!.localeCompare(b.deadline!) : 0))
   }
   return filtered.slice(0, limit)
 }

@@ -775,6 +775,20 @@ describe('matchPrograms', () => {
     }
   }
 
+  it('puts open, dated programs first when given today', () => {
+    const today = new Date('2026-09-28T12:00:00')
+    const programs = [
+      prog({ id: 1, deadline: 'TBA' }),
+      prog({ id: 2, deadline: '2026-12-01' }),
+      prog({ id: 3, deadline: 'Ongoing' }),
+      prog({ id: 4, deadline: '2026-10-15' }),
+      prog({ id: 5, deadline: '2026-09-01' }),
+    ]
+    expect(matchPrograms(programs, { grade: '12' }, Infinity, today).map(p => p.id)).toEqual([4, 2, 3, 1, 5])
+    // Without today the data's order stands
+    expect(matchPrograms(programs, { grade: '12' }).map(p => p.id)).toEqual([1, 2, 3, 4, 5])
+  })
+
   it('treats age ranges as inclusive, not as grade ranges', () => {
     // "Ages 13–18" once parsed as grades 13–18 and excluded every real student
     const programs = [

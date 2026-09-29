@@ -437,7 +437,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
   const allProgramResults = useMemo(() => {
     if (step < QUESTIONS.length || !showPrograms) return null
-    return matchPrograms(programs, answers, Infinity)
+    return matchPrograms(programs, answers, Infinity, todayDate())
   }, [programs, answers, step, showPrograms, QUESTIONS.length])
 
   const [showAll, setShowAll] = useState(false)
@@ -689,7 +689,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             style={showScholarships && scholarshipResults && scholarshipResults.length > 0 ? { marginTop: 48 } : undefined}
           >
             {/* Deliberately not "ranked by fit": matchPrograms filters by
-                grade and field and keeps the data's own order; it does not
+                grade and field and orders open-and-dated first; it does not
                 score. The label says what the list actually is. */}
             <p className="sabm-table-label">
               {showScholarships ? 'Programs for your grade and field' : 'Matched to your grade and field'}
@@ -842,7 +842,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 <MatchTile
                   label={opt.label}
                   hint={opt.value === 'Other Alberta' && unlistedTown ? `Includes ${placeFilter.trim()}` : opt.hint}
-                  delay={i * 50}
+                  // Capped: 13 study-location tiles at 50ms each were still
+                  // fading in 1.1s after the question (critique 2026-09-28).
+                  delay={Math.min(i * 30, 150)}
                   state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : 'idle'}
                   animateIn={enterDir === 'fwd'}
                   onClick={() => answer(current.key, opt.value, i)}
