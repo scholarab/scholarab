@@ -945,7 +945,7 @@ The outcomes: the publisher marks a publication live only when the deployment se
 
 Measured locally: `npm run ci` (1,063 tests; the generator test now also checks that a build leaves the committed request file untouched) and `npm run test:e2e` (107 passed, 17 skipped) left `git status` exactly as before they ran. The built marker, `dist/client/publication.json`, carries request 4fab8530 and the same hash the publisher computes from the data.
 
-Not yet checked on the deployment: after the deploy, `/publication.json` on workers.dev should read the same ID and hash.
+Hosted: CI and the Workers Builds deploy of 81fc23d passed, so the hosted build writes the marker from the new file, and `/publication.json` on workers.dev reads request 4fab8530 with the hash the publisher computes from the committed data.
 
 Repair attempts against this problem: none before this change; the drift was avoided by not staging the file.
 
