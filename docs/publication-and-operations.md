@@ -10,7 +10,7 @@ The **Publish admin drafts** workflow checks the queue every 15 minutes (GitHub 
 
 A publisher interrupted after push recovers by recognizing the committed manifest. Newer edits are retained during acknowledgement. The workflow's concurrency group prevents two publishers from running together; a concurrent regular main push rejects the publisher's push rather than being overwritten. The workflow uses the repository's existing `DATABASE_URL` secret and `GITHUB_TOKEN` with `contents: write`; no new provider credential is needed.
 
-The previous deployment-hook endpoint has been replaced by this publication queue. `DEPLOY_HOOK_URL` is no longer required for admin publication. The existing Cloudflare Pages git integration remains responsible for deployments.
+The previous deployment-hook endpoint has been replaced by this publication queue. `DEPLOY_HOOK_URL` is no longer required for admin publication. Workers Builds (the Worker's git integration) remains responsible for deployments.
 
 ## Database setup and drift
 

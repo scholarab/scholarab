@@ -2,8 +2,8 @@
 # provider's real award name orphans the old URL. Every rename goes here as a
 # 301 so indexed links and student bookmarks keep working.
 #
-# Every rule needs BOTH the slash and no-slash source. Cloudflare Pages only
-# 308-normalises a bare path when the slashed page exists as a built asset;
+# Every rule needs BOTH the slash and no-slash source. Cloudflare only
+# 307-normalises a bare path when the slashed page exists as a built asset;
 # a renamed slug has no asset, so /old-slug fell through to a hard 404 while
 # /old-slug/ redirected fine. Google had the no-slash form indexed (it was
 # still earning clicks), so half of every rename below was being thrown away.

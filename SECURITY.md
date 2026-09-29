@@ -28,7 +28,7 @@ In scope:
 
 Out of scope:
 
-- Third-party infrastructure (Cloudflare Pages, Cloudflare Web Analytics, Neon)
+- Third-party infrastructure (Cloudflare Workers, Cloudflare Web Analytics, Neon)
 - Scholarship and program links pointing to external institutions. A dead or
   hijacked third-party link is a data issue, not a vulnerability in ScholarAB;
   report those to contact.scholarab@gmail.com as a normal correction.

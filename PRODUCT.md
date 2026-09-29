@@ -62,7 +62,7 @@ No ads, no account, no paywall, no email required to browse.
 - Status vocabulary is product truth: a listing is open now, opening later (with
   a real open date, never invented), or closed. `active: false` does not mean
   closed.
-- Astro, deployed on Cloudflare Pages via git. JSON files in `src/data` are the
+- Astro, deployed as a Cloudflare Worker (Workers Builds, via git). JSON files in `src/data` are the
   build source of truth; the dev server reads a database and will disagree with
   the build.
 - React runs only on /match and /admin. Everything else is server-rendered HTML

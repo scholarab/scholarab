@@ -868,6 +868,14 @@ Local measurements, same machine, same commit (09fb294):
 - Built HTML: all 1,896 pages match after normalizing whitespace, scoped-style ids and asset hashes. 34 screenshots (17 pages at 1280 and 375) are pixel-identical except 20 pixels of logo antialiasing on three.
 - Worker: 470.6 KB to 470.2 KB gzip (wrangler dry run). Per-page JavaScript within 2%.
 
-Differences that remain: a bare path redirects with 307 rather than Pages' 308, and a 404 carries `max-age=0` rather than `no-store`. Hosted behaviour is unmeasured until a Workers deploy exists.
+Differences that remain: a bare path redirects with 307 rather than Pages' 308, and a 404 carries `max-age=0` rather than `no-store`.
+
+Hosted results, 2026-09-28, Worker `scholarab` at scholarab.iliaivan10.workers.dev (no secrets bound yet), compared with www on Pages:
+- `npx playwright test` pointed at the Worker: 104 passed and 16 skipped, the same as local.
+- Every security header from `_headers` (CSP, HSTS, frame, referrer, permissions, COOP, CORP) is byte-identical. `/_astro/*` is immutable and fonts cache for a year, as on Pages.
+- Root files, service-worker seed URLs, sampled `_redirects` rules, `/admin` (302 to login) and 404s answer with the same status. `/api/event` answers 204 same-origin and 403 cross-origin.
+- Workers does not add Pages' `access-control-allow-origin: *` or a charset to `text/html` and `text/plain`. Every HTML page opens with `<meta charset="utf-8">` and the three `.txt` files are ASCII, so neither changes what a visitor sees. The GA ID in the HTML matches production, so `PUBLIC_GA_ID` needs no binding.
+
+The publication check and IndexNow read the deployment from outside the zone firewall; they now read the workers.dev alias, since pages.dev freezes on the last Pages deployment.
 
 Add-back fraction: 1 of 5 (Node prerendering).

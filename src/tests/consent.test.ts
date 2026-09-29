@@ -51,7 +51,7 @@ describe('analyticsAllowedHere', () => {
 
   // The measurement ID is committed, so the host allowlist is the only thing
   // keeping preview deployments and forks out of the property.
-  it.each(['scholarab.pages.dev', 'abc123.scholarab.pages.dev', 'scholarab.ca.evil.com', 'someonesfork.dev'])(
+  it.each(['scholarab.pages.dev', 'abc123.scholarab.pages.dev', 'scholarab.iliaivan10.workers.dev', 'abc123-scholarab.iliaivan10.workers.dev', 'scholarab.ca.evil.com', 'someonesfork.dev'])(
     'blocks %s, which would otherwise report into our property', host => {
       expect(analyticsAllowedHere(host, false, 'production')).toBe(false)
     })
