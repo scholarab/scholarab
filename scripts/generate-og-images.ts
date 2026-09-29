@@ -105,6 +105,8 @@ for (const s of open) {
   // here, and slow enough on Workers Builds that a cold build timed out at 30 min.
   const png = encodeCardPng(new Resvg(svg, { fitTo: { mode: 'width', value: 1200 }, font: { loadSystemFonts: false } }).render());
   writeFileSync(join(outDir,file),png);written++;
+  // A progress line, so a stalled hosted build shows how far it got.
+  if(written%250===0) console.log(`OG images: ${written} rendered`);
 }
 for (const file of readdirSync(outDir)) {
   if (file.endsWith('.png') && !(file in next)) unlinkSync(join(outDir, file));
