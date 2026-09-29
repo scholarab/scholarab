@@ -7,7 +7,7 @@ The images in this folder are **not** covered by the repository's licenses (AGPL
 | File | Page | Photographer | Source | License | Added |
 | --- | --- | --- | --- | --- | --- |
 | `backdrops/calgary-*.webp` | /scholarships/calgary/ (full-page background) and its header menu tile | Igor Kyryliuk and Tetiana Kravchenko | Unsplash, photo `n4mvQ1YWk1U` (https://unsplash.com/photos/n4mvQ1YWk1U) | Unsplash License | 2026-09-13 |
-| `backdrops/edmonton-*.webp` | /scholarships/edmonton/ (full-page background) and its header menu tile | Alex Pugliese | Unsplash, photo `u2tSj5H3rXQ` (https://unsplash.com/photos/u2tSj5H3rXQ) | Unsplash License | 2026-09-13; the wide and tall crops were a cream-toned ChatGPT edit of the same photo from 2026-09-14 (for the full-page hub background) until 2026-09-23, when the original grade came back so the home carousel card matches the menu tile (the cream files are in git at c564476) |
+| `backdrops/edmonton-*.webp` | /scholarships/edmonton/ (full-page background) and its header menu tile | Alex Pugliese | Unsplash, photo `u2tSj5H3rXQ` (https://unsplash.com/photos/u2tSj5H3rXQ) | Unsplash License | 2026-09-13 |
 | `backdrops/national-*.webp` | /scholarships/national/ (full-page background) and its header menu tile | Caio Silva | Unsplash, photo `l3mNDwVVT10` (https://unsplash.com/photos/l3mNDwVVT10) | Unsplash License | 2026-09-13 |
 | `backdrops/fort-mcmurray-*.webp` | /scholarships/fort-mcmurray/ (full-page background) and its header menu tile | Rovi Matilla | Unsplash, photo `T2ItzSPzIxw` (https://unsplash.com/photos/T2ItzSPzIxw) | Unsplash License | 2026-09-13 |
 | `backdrops/alberta-*.webp` | /scholarships/alberta/ (full-page background) and its header menu tile | Nataliia Kvitovska | Unsplash, photo `tTsdpwnLZ_s` (https://unsplash.com/photos/tTsdpwnLZ_s) | Unsplash License | 2026-09-13 |
@@ -82,7 +82,6 @@ Pexels License: free commercial use, no attribution required; a clip may not be 
 
 ## Removed
 
-- A ChatGPT-made Calgary illustration served as this page's background earlier on 2026-09-13 and was replaced by the photo above.
 - Pexels photo banners for /scholarships/calgary/, /scholarships/alberta/ and /scholarships/national/ were added and removed on 2026-09-13.
 
 None of the removed images remain in the repository's current tree.
