@@ -4,7 +4,7 @@
 // alert_subscribe event were silently dropped for weeks (rate_limit sat at 0
 // rows while 430 events were accepted). waitUntil keeps the request alive until
 // the work finishes, without making the visitor wait for it.
-type CtxLocals = { runtime?: { ctx?: { waitUntil?: (p: Promise<unknown>) => void } } }
+type CtxLocals = { cfContext?: { waitUntil?: (p: Promise<unknown>) => void } }
 
 /**
  * Run background work that must complete but must not delay the response.
@@ -13,10 +13,11 @@ type CtxLocals = { runtime?: { ctx?: { waitUntil?: (p: Promise<unknown>) => void
  */
 export function defer(locals: unknown, work: Promise<unknown>): Promise<void> {
   const settled = Promise.resolve(work).then(() => {}, () => {})
-  const waitUntil = (locals as CtxLocals | undefined)?.runtime?.ctx?.waitUntil
+  const ctx = (locals as CtxLocals | undefined)?.cfContext
+  const waitUntil = ctx?.waitUntil
   if (waitUntil) {
     try {
-      waitUntil.call((locals as CtxLocals).runtime!.ctx, settled)
+      waitUntil.call(ctx, settled)
       return Promise.resolve()
     } catch { /* fall through to the inline await below */ }
   }

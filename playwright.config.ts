@@ -19,8 +19,9 @@ export default defineConfig({
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
   webServer: {
-    // Requires dist/ to be built first: npm run build
-    command: `npx wrangler pages dev dist --port ${port}`,
+    // Requires dist/ to be built first: npm run build. Serves the Worker and
+    // its static assets from the config the build wrote.
+    command: `npx wrangler dev --port ${port}`,
     url: `http://localhost:${port}`,
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,

@@ -1,4 +1,6 @@
-@import 'tailwindcss';
+/* The package's index.css by its exported subpath: under Astro 7's Node
+   prerender environment the bare 'tailwindcss' fails to resolve. */
+@import 'tailwindcss/index.css';
 
 @theme {
   /* Public Sans, the one sans on every page, admin included (Inter, the

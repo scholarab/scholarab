@@ -7,7 +7,7 @@ import { isLocalPreview } from './events'
  * which is fine for a redirect and wrong for anything mailed: the confirm link
  * carries the subscriber's opt-in token, and the message ships from the real
  * `alerts@` address with valid SPF/DKIM. A non-canonical hostname that reaches
- * the deployment; the project's own `*.pages.dev` alias does, with no header
+ * the deployment; the project's own `*.workers.dev` alias does, with no header
  * spoofing at all; would produce a genuine, correctly-signed ScholarAB email
  * whose only call-to-action points somewhere else.
  *
@@ -20,7 +20,7 @@ export const CANONICAL_ORIGIN = 'https://www.scholarab.ca'
  * Build an absolute URL for `path` on the canonical origin.
  *
  * `request` is consulted for one reason only: a link mailed from `astro dev`
- * or `wrangler pages dev` has to point back at that local server, or testing
+ * or `wrangler dev` has to point back at that local server, or testing
  * the confirm flow means hand-editing every URL. A local host can only be
  * reached from the machine running it, so it is not a host an attacker can
  * present. Every other host, including any unrecognised one; gets the

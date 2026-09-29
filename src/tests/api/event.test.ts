@@ -145,8 +145,7 @@ describe('POST /api/event', () => {
   it('silently drops requests from datacenter networks', async () => {
     for (const org of ['AMAZON-02', 'GOOGLE-CLOUD-PLATFORM', 'Hetzner Online GmbH', 'DIGITALOCEAN-ASN', 'MICROSOFT-CORP-MSN-AS-BLOCK']) {
       const res = await POST({
-        request: makeRequest({ event: 'quiz_complete' }),
-        locals: { runtime: { cf: { asOrganization: org } } },
+        request: Object.assign(makeRequest({ event: 'quiz_complete' }), { cf: { asOrganization: org } }),
       } as unknown as Parameters<typeof POST>[0])
       expect(res.status).toBe(204)
     }
@@ -155,8 +154,7 @@ describe('POST /api/event', () => {
 
   it('accepts requests from residential networks', async () => {
     const res = await POST({
-      request: makeRequest({ event: 'quiz_complete' }),
-      locals: { runtime: { cf: { asOrganization: 'TELUS Communications Inc.' } } },
+      request: Object.assign(makeRequest({ event: 'quiz_complete' }), { cf: { asOrganization: 'TELUS Communications Inc.' } }),
     } as unknown as Parameters<typeof POST>[0])
     expect(res.status).toBe(204)
     expect(mockInsert).toHaveBeenCalled()

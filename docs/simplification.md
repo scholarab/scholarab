@@ -842,3 +842,32 @@ Add-back fraction: 0.
 | E2E | 104 passed | 107 passed, 17 skipped, 53.7s; the new tests take 18s of that test time |
 
 Not yet checked on production: after the deploy, the same probes should read the after column on www.
+
+## Astro 7 and the Workers adapter, trial, 2026-09-28
+
+Branch `astro7-trial`, not pushed. `npm audit --omit=dev` listed 8 findings (1 critical) whose only fix is astro 7.3.5 and @astrojs/cloudflare 14.3.3, and adapter 13 dropped Cloudflare Pages. So this branch moves the deploy from Pages to Workers with static assets, and it ships only on Ilia's go-ahead.
+
+None of the 8 was reachable in production, checked against the code and the built Worker: nothing uses `astro:assets`, so sharp never runs, even at build time; the Worker's `/_image` never calls an image service; there is no `base`, no `transition:` directive, no HTMLElement component, no Astro action and no session, so the XSS, base-path and devalue advisories have no input; the adapter's SSRF is in an image endpoint 12.6.13 does not have; undici, ws and miniflare are local tooling.
+
+| Candidate | Outcome |
+| --- | --- |
+| `empty-sharp-in-worker` Vite plugin | Removed. Adapter 14 keeps sharp out of the Worker on its own (0 files mention it). |
+| `react-dom/server` to `server.edge` alias | Removed. The Worker build resolves the edge renderer by itself. |
+| `_routes.json` and `pages_build_output_dir` | Gone with Pages. `wrangler.toml` `run_worker_first` lists the same four route patterns, and `not_found_handling = "404-page"` keeps 404s off the Worker. |
+| SESSION KV namespace the adapter provisions | Never created: `session: false`, since nothing reads `Astro.session`. |
+| Prerendering in workerd (the adapter's default) | Restored to Node (`prerenderEnvironment: 'node'`). workerd ignores the build's `TZ=America/Edmonton`, and the deadlines guide printed 1008 dated deadlines instead of 988. |
+
+Added to keep public output the same: `compressHTML: true` (Astro 7 defaults to JSX whitespace), Vite 7's browser target (Vite 8 raised the floor to Safari 16.4 and emitted media range syntax), and `@import 'tailwindcss/index.css'` (the bare name does not resolve under Node prerendering). An npm override pins miniflare's undici to 7.30, because an advisory published the day of the trial covers the 7.29.0 it pins.
+
+Repairs forced by the adapter: `locals.runtime` is gone and its getters throw, so the old `/api/event` answered 500 to every event and `defer()` would have failed every alert sign-up. They now read `request.cf` and `locals.cfContext`.
+
+Local measurements, same machine, same commit (09fb294):
+- `npm audit --omit=dev`: 8 findings to 0.
+- `astro build`, 3 runs each: median 13.84 s to 12.22 s.
+- `npm run ci`: passed, 1,059 tests. `npm run test:e2e`: 104 passed and 16 skipped on both, 57.7 s to 43.1 s (one run each).
+- Built HTML: all 1,896 pages match after normalizing whitespace, scoped-style ids and asset hashes. 34 screenshots (17 pages at 1280 and 375) are pixel-identical except 20 pixels of logo antialiasing on three.
+- Worker: 470.6 KB to 470.2 KB gzip (wrangler dry run). Per-page JavaScript within 2%.
+
+Differences that remain: a bare path redirects with 307 rather than Pages' 308, and a 404 carries `max-age=0` rather than `no-store`. Hosted behaviour is unmeasured until a Workers deploy exists.
+
+Add-back fraction: 1 of 5 (Node prerendering).

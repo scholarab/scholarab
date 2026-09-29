@@ -11,7 +11,19 @@ export default defineConfig({
   // equivalent check lives in src/lib/same-site.ts and leads with
   // Sec-Fetch-Site instead. Do not switch this back on without reading it.
   security: { checkOrigin: false },
-  adapter: cloudflare({ imageService: 'compile' }),
+  // Nothing reads Astro.session; without this the adapter binds a KV namespace
+  // called SESSION that would sit unused.
+  session: false,
+  // Astro 7 defaults to JSX whitespace rules, which drop the space between
+  // inline elements on separate lines. Keep the HTML-aware behaviour.
+  compressHTML: true,
+  adapter: cloudflare({
+    imageService: 'compile',
+    // workerd runs in UTC and ignores the build's TZ=America/Edmonton, so it
+    // prerendered date-dependent counts and statuses a day off in the evening.
+    // Node honours the pinned timezone.
+    prerenderEnvironment: 'node',
+  }),
   integrations: [react()],
   env: {
     schema: {
@@ -36,28 +48,11 @@ export default defineConfig({
   },
   vite: {
     // Shared scripts/styles should be cached once, not copied into 1,279 pages.
-    build: { assetsInlineLimit: 0 },
-    plugins: [
-      {
-        // sharp is only needed during prerender (build-time image optimization).
-        // Replace it with an empty stub in the SSR/Worker bundle so Wrangler
-        // doesn't try to resolve it as a native Node.js addon at runtime.
-        name: 'empty-sharp-in-worker',
-        enforce: 'pre',
-        resolveId(id, _importer, options) {
-          if (id === 'sharp' && options?.ssr) return '\0empty-sharp';
-        },
-        load(id) {
-          if (id === '\0empty-sharp') return 'export default {};';
-        },
-      },
-    ],
-    resolve: {
-      // Only alias in builds: the edge build is CJS and crashes Vite's dev
-      // module runner with "require is not defined".
-      alias: import.meta.env.PROD && {
-        'react-dom/server': 'react-dom/server.edge',
-      },
+    build: {
+      assetsInlineLimit: 0,
+      // Vite 7's browser floor. Vite 8 raised it to Safari 16.4 and started
+      // emitting media range syntax that Safari 16.0 to 16.3 cannot read.
+      target: ['chrome107', 'edge107', 'firefox104', 'safari16'],
     },
   },
 });

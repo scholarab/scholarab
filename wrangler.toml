@@ -1,4 +1,12 @@
+# Cloudflare Workers with static assets. The Astro adapter fills in `main` and
+# the assets directory and binding at build time.
 name = "scholarab"
-pages_build_output_dir = "dist"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
+
+[assets]
+# Pages parity: a path with no file gets dist's 404.html with a 404 status,
+# and only the on-demand routes (formerly _routes.json's include list) run the
+# Worker at all.
+not_found_handling = "404-page"
+run_worker_first = ["/api/*", "/admin", "/admin/*", "/_image"]

@@ -37,7 +37,7 @@ describe('isCrossSiteWrite', () => {
     expect(isCrossSiteWrite(req('POST', { origin: 'https://www.scholarab.ca' }), URL_CONFIRM)).toBe(false)
     expect(isCrossSiteWrite(req('POST', { origin: 'https://evil.example' }), URL_CONFIRM)).toBe(true)
     // The www-less apex is a different origin and is redirected before it ever
-    // reaches a Function, so treating it as cross-site is correct.
+    // reaches the Worker, so treating it as cross-site is correct.
     expect(isCrossSiteWrite(req('POST', { origin: 'https://scholarab.ca' }), URL_CONFIRM)).toBe(true)
   })
 

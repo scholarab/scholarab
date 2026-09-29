@@ -350,7 +350,7 @@ for (const p of programs) {
 //  2. A target that is a bare directory. Google reads a redirect onto a
 //     category page as a Soft 404 and drops it, so it buys nothing a real 404
 //     doesn't. Delete the rule and let 404.astro do its job.
-//  3. Only one of the two slash forms. Cloudflare Pages 308-normalises a bare
+//  3. Only one of the two slash forms. Cloudflare 307-normalises a bare
 //     path only when the slashed page exists as a built asset, and a renamed
 //     slug has no asset, so /old-slug hard-404s while /old-slug/ redirects.
 //  4. A source that is also a live page, which shadows the real listing.

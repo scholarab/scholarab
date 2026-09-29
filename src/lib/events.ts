@@ -58,7 +58,7 @@ const sentInMemory = new Set<string>()
  * Is this a build being served locally rather than the real site?
  *
  * The MODE check below only catches `astro dev`. A production bundle served by
- * `wrangler pages dev dist` reports MODE 'production' and still holds a live
+ * `wrangler dev` reports MODE 'production' and still holds a live
  * DATABASE_URL, so clicking anything while verifying the real build wrote
  * straight into the production events table, which is exactly the sort of
  * self-inflicted row this file exists to keep out.

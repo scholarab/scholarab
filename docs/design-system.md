@@ -266,6 +266,6 @@ passes:
 - selected is not drawn exactly like hover
 
 Contrast is not covered by a unit test. To re-check it, run the site under
-`npx wrangler pages dev dist` and sweep computed colours against computed
+`npx wrangler dev` and sweep computed colours against computed
 backgrounds at 1440×900, measuring against the *rendered* background, since
 chips sit on white cards and text sits on cream.

@@ -34,11 +34,11 @@
     "measure:match": "MATCH_MEASURE=1 playwright test e2e/match-performance.spec.ts --project chromium --workers 1"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.13",
-    "@astrojs/react": "^5.0.1",
+    "@astrojs/cloudflare": "^14.3.3",
+    "@astrojs/react": "^7.0.0",
     "@neondatabase/serverless": "^1.0.2",
     "@tailwindcss/postcss": "^4.3.0",
-    "astro": "^6.0.8",
+    "astro": "^7.3.5",
     "drizzle-orm": "^0.45.2",
     "preact": "^10.29.8",
     "react": "^19.2.4",
@@ -51,6 +51,9 @@
     "esbuild": "^0.25.0",
     "@esbuild-kit/core-utils": {
       "esbuild": "^0.25.0"
+    },
+    "miniflare": {
+      "undici": "^7.30.0"
     }
   },
   "devDependencies": {
@@ -75,8 +78,8 @@
     "satori": "^0.28.0",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1",
-    "undici": "^7.24.8",
+    "undici": "^7.30.0",
     "vitest": "^4.1.2",
-    "wrangler": "4.83.0"
+    "wrangler": "4.143.0"
   }
 }

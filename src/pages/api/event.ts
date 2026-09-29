@@ -37,17 +37,17 @@ const EMAIL_LIKE = /\S+@\S+\.\S+/
 // Catches JS-executing bots with flawless browser UAs. Checked, never stored.
 const DATACENTER_ORG = /amazon|aws|google[- ]cloud|azure|microsoft[- ]corp|hetzner|digital[- ]?ocean|ovh|linode|akamai|vultr|alibaba|tencent|oracle|leaseweb|contabo|m247|datacamp|choopa|fly\.io|huawei[- ]cloud|scaleway/i
 
-type CfLocals = { runtime?: { cf?: { asOrganization?: string } } }
+type CfRequest = { cf?: { asOrganization?: string } }
 
 const accepted = () => new Response(null, { status: 204 })
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   // Drop bots silently; a 204 gives them nothing to retry against
   const ua = request.headers.get('user-agent') ?? ''
   if (!ua || BOT_UA.test(ua)) return accepted()
 
   // Cloudflare tells us which network the request came from
-  const asOrg = (locals as CfLocals | undefined)?.runtime?.cf?.asOrganization
+  const asOrg = (request as CfRequest).cf?.asOrganization
   if (asOrg && DATACENTER_ORG.test(asOrg)) return accepted()
 
   // Only our own pages send events. Browsers set Origin on POST and

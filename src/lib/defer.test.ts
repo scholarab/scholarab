@@ -7,7 +7,7 @@ describe('defer', () => {
     let done = false
     const work = Promise.resolve().then(() => { done = true })
 
-    await defer({ runtime: { ctx: { waitUntil } } }, work)
+    await defer({ cfContext: { waitUntil } }, work)
 
     expect(waitUntil).toHaveBeenCalledTimes(1)
     await waitUntil.mock.calls[0]![0]
@@ -33,14 +33,14 @@ describe('defer', () => {
 
   it('swallows a rejected job handed to waitUntil', async () => {
     const waitUntil = vi.fn()
-    await defer({ runtime: { ctx: { waitUntil } } }, Promise.reject(new Error('db down')))
+    await defer({ cfContext: { waitUntil } }, Promise.reject(new Error('db down')))
     await expect(waitUntil.mock.calls[0]![0]).resolves.toBeUndefined()
   })
 
   it('falls back to an inline await when waitUntil itself throws', async () => {
     let done = false
     const waitUntil = () => { throw new Error('outside request scope') }
-    await defer({ runtime: { ctx: { waitUntil } } }, Promise.resolve().then(() => { done = true }))
+    await defer({ cfContext: { waitUntil } }, Promise.resolve().then(() => { done = true }))
     expect(done).toBe(true)
   })
 })

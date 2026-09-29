@@ -6,9 +6,9 @@ import { isCrossSiteWrite } from './lib/same-site'
  * The security headers public/_headers sets, repeated here for the routes it
  * cannot reach.
  *
- * Cloudflare Pages applies _headers to static asset responses only; a response
- * produced by a Function is never seen by that file. Every SSR route in this
- * project is a Function: /api/confirm and /api/unsubscribe both render real
+ * Cloudflare applies _headers to static asset responses only; a response
+ * produced by the Worker is never seen by that file. Every SSR route in this
+ * project runs in the Worker: /api/confirm and /api/unsubscribe both render real
  * HTML with a submit button in it, and the whole admin panel lives there too.
  * All of it was shipping with no CSP, no framing rule and no HSTS while the
  * static half of the same site had all three.

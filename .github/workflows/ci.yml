@@ -1,7 +1,7 @@
 name: CI
 
-# Deploys are done by Cloudflare Pages' git integration (it builds every push
-# to main; wrangler.toml's pages_build_output_dir is its config). This workflow
+# Deploys are done by Cloudflare Workers Builds (it builds every push to main
+# and runs wrangler deploy; wrangler.toml is its config). This workflow
 # is validation + the daily data sync. The old wrangler-action deploy step was
 # removed 2026-07-17: it had never once succeeded (0 green runs in 884) and CF
 # was the real deploy path all along.
@@ -20,7 +20,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 0 * * *'   # Daily: sync scholarship active flags; a data commit triggers the CF Pages deploy
+    - cron: '0 0 * * *'   # Daily: sync scholarship active flags; a data commit triggers the Cloudflare deploy
   workflow_dispatch:
 
 # One group per trigger, so the daily cron cannot cancel a push run. Until
@@ -77,7 +77,7 @@ jobs:
 
       # After validation so a rejected push cannot hide its results. A failed
       # build or push stops the job before it can mirror uncommitted data. The tag
-      # skips GitHub Actions only; Cloudflare Pages still sees the push and
+      # skips GitHub Actions only; Cloudflare still sees the push and
       # deploys the fresh data. Do NOT tag it to skip "ci": Cloudflare honors
       # that form too and the deploy would be silently skipped.
       - name: Commit synced data
