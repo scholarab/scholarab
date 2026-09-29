@@ -1,5 +1,7 @@
 # ScholarAB Data License
 
+Copyright (c) 2026 Ilia Ivanov. ScholarAB was created by Ilia Ivanov, Medicine Hat, Alberta.
+
 ScholarAB is licensed in two parts. This file covers **the data**. The software is
 covered separately by [LICENSE](./LICENSE) (GNU AGPL-3.0).
 

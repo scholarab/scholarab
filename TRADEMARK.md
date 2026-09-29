@@ -1,5 +1,7 @@
 # ScholarAB Trademark Policy
 
+Copyright (c) 2026 Ilia Ivanov. ScholarAB was created by Ilia Ivanov, Medicine Hat, Alberta.
+
 The ScholarAB source code is open source under [AGPL-3.0](./LICENSE), and the
 data is open under [CC BY-SA 4.0](./DATA-LICENSE.md). **Neither license grants
 any right to use the ScholarAB name or brand.**

@@ -1,5 +1,7 @@
 # 🎓 ScholarAB
 
+Copyright (c) 2026 Ilia Ivanov. ScholarAB was created by Ilia Ivanov, Medicine Hat, Alberta.
+
 **Live site:** [scholarab.ca](https://www.scholarab.ca)
 
 The fastest, easiest way for students in Alberta to find scholarships.
