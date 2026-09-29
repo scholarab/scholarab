@@ -900,3 +900,12 @@ Local measurements, same build:
 Not yet measured: whether Bing's copy of the home page refreshes. Re-run the "best scholarship websites for Alberta high school students" query after the next data change is announced.
 
 Add-back fraction: 0 of 2.
+
+## First Workers Builds deploy: OG image step, 2026-09-29
+
+The first hosted builds on Workers Builds never finished: `generate-og-images.ts` ran silently until the 30 minute limit. GitHub Actions (Linux, Node 22) renders the same 1,520 cards in 75 s.
+
+Repair attempts against the same problem:
+1. resvg scanned every system font for each card, although satori already emits paths. `loadSystemFonts: false` took a card from 148 ms to 31 ms locally with pixel-identical output (40 of 40 compared), and a cold run from 224 s to 44 s. The hosted build still stalled.
+2. Pinned Node 22 (`.node-version`, matching CI) and added progress lines. The hosted build rendered 1,000 cards in 60 s, then froze.
+3. Changed the implementation instead of a fourth tweak. The renderer holds 1 to 2 GB of native memory that forced garbage collection does not return, so cards now render in child processes of 100 whose memory is released on exit (peak 0.89 GB, down from 1.7 GB; cold run 52 s, warm 1 s). Each batch has a 90 s limit and the step stops starting batches after 8 minutes: an OG image is a social preview, so a stalled render skips its cards (retried next build) instead of blocking the deploy. Both paths were exercised locally with forced limits.

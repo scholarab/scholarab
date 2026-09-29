@@ -10,6 +10,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlink
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
 import { encodeCardPng } from './opaque-png';
 import { generateSlug, getToday } from '../src/lib/utils.ts';
 import { scholarshipStatusOf } from '../src/lib/status.ts';
@@ -92,24 +93,56 @@ let previous:Record<string,string>={};
 try {previous=JSON.parse(readFileSync(cachePath,'utf8'));} catch { /* cold build */ }
 const hash=(input:string|Buffer)=>createHash('sha256').update(input).digest('hex');
 const renderer=hash(readFileSync(join(__dirname,'../package-lock.json')))+hash(readFileSync(join(__dirname,'opaque-png.ts')))+fonts.map(f=>hash(f.data)).join('');
-const next:Record<string,string>={};let written=0;
-for (const s of open) {
-  const tree=card(s);
-  const file=`${generateSlug(s.title)}.png`;
-  const digest=hash(renderer+JSON.stringify(tree));next[file]=digest;
-  if(previous[file]===digest && existsSync(join(outDir,file))) continue;
+const cards=open.map(s=>{const tree=card(s);const file=`${generateSlug(s.title)}.png`;return {file,tree,digest:hash(renderer+JSON.stringify(tree))};});
+
+async function render(batch:typeof cards){
   const [{ default: satori }, { Resvg }] = await Promise.all([import('satori'), import('@resvg/resvg-js')]);
-  const svg = await satori(tree as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts });
-  // satori has already turned every glyph into a path, so resvg needs no fonts.
-  // Its default scans all system fonts for each image: 119 ms of a 148 ms card
-  // here, and slow enough on Workers Builds that a cold build timed out at 30 min.
-  const png = encodeCardPng(new Resvg(svg, { fitTo: { mode: 'width', value: 1200 }, font: { loadSystemFonts: false } }).render());
-  writeFileSync(join(outDir,file),png);written++;
-  // A progress line, so a stalled hosted build shows how far it got.
-  if(written%250===0) console.warn(`OG images: ${written} rendered`);
+  for (const {file,tree} of batch) {
+    const svg = await satori(tree as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts });
+    // satori has already turned every glyph into a path, so resvg needs no fonts.
+    // Its default scans all system fonts for each image: 119 ms of a 148 ms card
+    // here, and slow enough on Workers Builds that a cold build timed out at 30 min.
+    const png = encodeCardPng(new Resvg(svg, { fitTo: { mode: 'width', value: 1200 }, font: { loadSystemFonts: false } }).render());
+    writeFileSync(join(outDir,file),png);
+  }
+}
+
+// A batch child renders only the files it was handed, then exits.
+if (process.env.OG_BATCH) {
+  const wanted=new Set(JSON.parse(process.env.OG_BATCH) as string[]);
+  await render(cards.filter(c=>wanted.has(c.file)));
+  process.exit(0);
+}
+
+// The renderer holds 1 to 2 GB of native memory that garbage collection does
+// not return, and on Workers Builds the run froze near the 1,000th card until
+// the 30 minute limit. So cards render in child processes of BATCH cards, whose
+// memory is released when each exits, and each batch gets a time limit: an OG
+// image is a social preview, and a stalled render must not stop the site from
+// deploying. A skipped card keeps no cache entry, so the next build retries it.
+// A batch takes about 6 s on Workers Builds; the step as a whole stops starting
+// batches after 8 minutes, well inside the build's time limit.
+const BATCH=100, BATCH_LIMIT_MS=90_000, DEADLINE=Date.now()+8*60_000;
+const todo=cards.filter(c=>!(previous[c.file]===c.digest && existsSync(join(outDir,c.file))));
+const next:Record<string,string>={};
+for (const c of cards) next[c.file]=c.digest;
+let written=0;
+for (let i=0;i<todo.length;i+=BATCH) {
+  const batch=todo.slice(i,i+BATCH);
+  if (Date.now()>DEADLINE) {
+    console.warn(`OG images: out of time; ${todo.length-i} cards skipped, retried next build`);
+    for (const c of todo.slice(i)) delete next[c.file];
+    break;
+  }
+  const run=spawnSync(process.execPath,[...process.execArgv,fileURLToPath(import.meta.url)],{
+    env:{...process.env,OG_BATCH:JSON.stringify(batch.map(c=>c.file))},stdio:'inherit',timeout:BATCH_LIMIT_MS,
+  });
+  if (run.status===0) { written+=batch.length; console.warn(`OG images: ${written} of ${todo.length} rendered`); continue; }
+  console.warn(`OG images: batch ${i/BATCH+1} failed (${run.error?.message ?? `exit ${run.status ?? run.signal}`}); ${batch.length} cards skipped, retried next build`);
+  for (const c of batch) { delete next[c.file]; if (existsSync(join(outDir,c.file)) && previous[c.file]!==c.digest) unlinkSync(join(outDir,c.file)); }
 }
 for (const file of readdirSync(outDir)) {
   if (file.endsWith('.png') && !(file in next)) unlinkSync(join(outDir, file));
 }
 writeFileSync(cachePath,JSON.stringify(next));
-console.log(`Wrote ${written} OG images; reused ${open.length-written} unchanged images`);
+console.log(`Wrote ${written} OG images; reused ${cards.length-todo.length} unchanged images`);
