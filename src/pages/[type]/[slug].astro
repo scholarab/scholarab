@@ -259,7 +259,6 @@ if (kind === 'scholarship') {
   // asking about; was always past the truncation point. See src/lib/meta.ts.
   const description  = metaDescription!;
   const canonical    = `https://www.scholarab.ca/scholarships/${slug}/`;
-  const parsedAmount = parseAmount(s.amount) || null;
   // Nominated, school-selected, or bundled with another application: the
   // listing's own notes say so, and the page must not answer them with
   // "Apply now" and a generic three-step form-filling guide.
@@ -296,7 +295,10 @@ if (kind === 'scholarship') {
       // itself no longer states these dates as fact (deadlineEstimated).
       ...(s.openDate && !s.deadlineEstimated ? { 'applicationStartDate': s.openDate } : {}),
       ...(s.deadline && !s.deadlineEstimated ? { 'applicationDeadline': s.deadline } : {}),
-      ...(parsedAmount !== null ? { 'offers': { '@type': 'Offer', 'price': parsedAmount, 'priceCurrency': 'CAD' } } : {}),
+      // No `offers`: on this type an Offer's price is what the program costs, so
+      // `price: 1000` told Google and AI readers a $1,000 award was a $1,000
+      // fee, on 1,278 pages. The type has no property for money paid to the
+      // student; the amount stays in the description and on the page.
       // No `provider`: ScholarAB lists these awards, it does not fund or award
       // them, and the data has no provider field to name the real one. Claiming
       // it here was telling Google we run the Rutherford. Programs, which do

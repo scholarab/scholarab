@@ -8,8 +8,13 @@
  * most. It is here because it is free coverage we had none of, and because
  * Copilot/ChatGPT search answers are sourced from the Bing index.
  *
- * What gets submitted: the URLs src/data/lastmod.json stamped with today's
- * date, i.e. exactly the pages whose content actually changed in this build.
+ * What gets submitted: the sitemap URLs whose <lastmod> is today, i.e. exactly
+ * the pages whose content actually changed in this build. It reads the sitemap
+ * rather than src/data/lastmod.json because the manifest only holds listings and
+ * four prose pages: the home page, both directories, /deadlines/, every guide and
+ * every facet hub (73 of 1,858 URLs on 2026-09-29) were never announced, and
+ * AI search answers were still quoting the home page's "1134+" long after it
+ * read 1541. The sitemap already dates those pages by their newest member.
  * That is the whole contract of the protocol -- submitting unchanged URLs is
  * how a host gets its quota throttled, so this must never fall back to "send
  * everything" on a normal run. `--all` exists for the one-time first
@@ -28,7 +33,6 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { getToday } from '../src/lib/utils.ts';
 import { livePublicationMatches } from './live-publication.ts';
-import type { LastmodManifest } from '../src/lib/lastmod.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -46,18 +50,16 @@ const MAX_URLS = 10_000;
 const all = process.argv.includes('--all');
 const dryRun = process.argv.includes('--dry-run');
 
-const manifest: LastmodManifest = JSON.parse(
-  readFileSync(join(__dirname, '../src/data/lastmod.json'), 'utf8'),
-);
+const sitemap = readFileSync(join(__dirname, '../public/sitemap.xml'), 'utf8');
 
 // TZ is pinned by the npm script for the same reason generate-sitemap.ts pins
-// it: the stamps in lastmod.json are Alberta dates, and a UTC runner after 6pm
-// local would ask for tomorrow's and submit nothing.
+// it: the sitemap's lastmod stamps are Alberta dates, and a UTC runner after
+// 6pm local would ask for tomorrow's and submit nothing.
 const todayISO = getToday().toLocaleDateString('en-CA');
 
-const urls = Object.entries(manifest)
-  .filter(([, entry]) => all || entry.date === todayISO)
-  .map(([path]) => `${BASE}${path}`);
+const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>(?:<lastmod>([^<]+)<\/lastmod>)?/g)]
+  .filter(([, , lastmod]) => all || lastmod === todayISO)
+  .map(([, loc]) => loc!);
 
 if (urls.length === 0) {
   console.log(`IndexNow: nothing changed on ${todayISO}, skipping.`);
@@ -80,7 +82,6 @@ const { catalogueHash } = JSON.parse(readFileSync(join(__dirname, '../public/pub
 if (typeof catalogueHash !== 'string' || !/^[a-f0-9]{64}$/.test(catalogueHash)) {
   throw new Error('Build a valid publication marker before announcing URLs.');
 }
-const sitemap = readFileSync(join(__dirname, '../public/sitemap.xml'), 'utf8');
 let live = false;
 for (let attempt = 1; attempt <= 3; attempt++) {
   if (await livePublicationMatches(catalogueHash, sitemap)) { live = true; break; }

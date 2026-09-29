@@ -879,3 +879,24 @@ Hosted results, 2026-09-28, Worker `scholarab` at scholarab.iliaivan10.workers.d
 The publication check and IndexNow read the deployment from outside the zone firewall; they now read the workers.dev alias, since pages.dev freezes on the last Pages deployment.
 
 Add-back fraction: 1 of 5 (Node prerendering).
+
+## AI visibility audit: IndexNow scope and scholarship markup, 2026-09-29
+
+AI search answers (Bing-sourced, like ChatGPT search and Copilot) described ScholarAB as "1134+ scholarships" while the home page read 1541, but quoted /about/ at its current 1,542. /about/ is in `src/data/lastmod.json`; the home page is not. IndexNow read only that manifest, which holds listings and four prose pages, so the home page, both directories, /deadlines/, every guide and every facet hub were never announced.
+
+| Candidate | Outcome |
+| --- | --- |
+| `lastmod.json` as IndexNow's URL source | Removed. The script already read `public/sitemap.xml` for its live-deploy check; it now takes the URLs whose `<lastmod>` is today from the same file, which dates hubs by their newest member and guides by `dateModified`. |
+| `offers` on scholarship detail JSON-LD | Removed. On `EducationalOccupationalProgram` an Offer's price is what the program costs, so a $1,000 award was declared a $1,000 fee. The type has no property for money paid to the student; the amount stays in the description and on the page. |
+
+Added: the GitHub repo in the Organization's `sameAs`, since it is the top search result for the brand name.
+
+Local measurements, same build:
+- Announceable URLs (`--all --dry-run`): 1,785 to 1,858, all of the sitemap. 73 were unreachable before.
+- 2026-09-28 replayed under the new rule: 3 URLs to 13 (adds /, both directories, /deadlines/, /guides/, /educators/, /match/, /updates/ and the two hubs holding the changed program).
+- Scholarship pages declaring a price: 1,278 to 0.
+- `npm run ci`: passed, 1,063 tests. `npm run test:e2e`: 107 passed, 17 skipped.
+
+Not yet measured: whether Bing's copy of the home page refreshes. Re-run the "best scholarship websites for Alberta high school students" query after the next data change is announced.
+
+Add-back fraction: 0 of 2.
