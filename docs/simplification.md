@@ -845,7 +845,7 @@ Not yet checked on production: after the deploy, the same probes should read the
 
 ## Astro 7 and the Workers adapter, trial, 2026-09-28
 
-Branch `astro7-trial`, not pushed. `npm audit --omit=dev` listed 8 findings (1 critical) whose only fix is astro 7.3.5 and @astrojs/cloudflare 14.3.3, and adapter 13 dropped Cloudflare Pages. So this branch moves the deploy from Pages to Workers with static assets, and it ships only on Ilia's go-ahead.
+Branch `astro7-trial`, approved by Ilia and merged 2026-09-29. `npm audit --omit=dev` listed 8 findings (1 critical) whose only fix is astro 7.3.5 and @astrojs/cloudflare 14.3.3, and adapter 13 dropped Cloudflare Pages. So this branch moves the deploy from Pages to Workers with static assets, and the domains move to the Worker after the merge.
 
 None of the 8 was reachable in production, checked against the code and the built Worker: nothing uses `astro:assets`, so sharp never runs, even at build time; the Worker's `/_image` never calls an image service; there is no `base`, no `transition:` directive, no HTMLElement component, no Astro action and no session, so the XSS, base-path and devalue advisories have no input; the adapter's SSRF is in an image endpoint 12.6.13 does not have; undici, ws and miniflare are local tooling.
 
