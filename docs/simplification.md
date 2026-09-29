@@ -841,7 +841,7 @@ Add-back fraction: 0.
 | Unit tests | 1,060 | 1,060 |
 | E2E | 104 passed | 107 passed, 17 skipped, 53.7s; the new tests take 18s of that test time |
 
-Not yet checked on production: after the deploy, the same probes should read the after column on www.
+Checked on www after the deploy (545794a live 2026-09-29 05:39 UTC), with the same probes: quiz headings at 68px in both engines (10 of 10), 0 /deadlines names over the row above at 320, 375 and 390px and 0 days off a name's first line, every phone field at 16px and the pickers at 40, 44 and 44px. That matches the after column.
 
 ## Astro 7 and the Workers adapter, trial, 2026-09-28
 
@@ -911,3 +911,24 @@ Repair attempts against the same problem:
 3. Changed the implementation instead of a fourth tweak. The renderer holds 1 to 2 GB of native memory that forced garbage collection does not return, so cards now render in child processes of 100 whose memory is released on exit (peak 0.89 GB, down from 1.7 GB; cold run 52 s, warm 1 s). Each batch has a 90 s limit and the step stops starting batches after 8 minutes: an OG image is a social preview, so a stalled render skips its cards (retried next build) instead of blocking the deploy. Both paths were exercised locally with forced limits.
 
 Outcome: the first hosted build after attempt 3 rendered all 1,520 cards and deployed. Cutover, 2026-09-29 08:20 UTC: `wrangler.toml` routes `www.scholarab.ca/*` and `scholarab.ca/*` to the Worker. A zone route runs before the request would reach the Pages origin the DNS records still name, so the switch needed no DNS change and removing the routes hands the site back to Pages, which keeps its domains and its last deployment (automatic deployments are off). Hosted checks after the switch: the Playwright suite against the Workers Builds deployment passed (107, 17 skipped); 80 sitemap pages on www match workers.dev exactly; every `_headers` security header is on www and the middleware's on /admin; the admin login answers 401 to a wrong password (database and secrets bound); the apex still 301s to www; a Workers Builds deploy from `main` kept the routes.
+
+## Stale build outputs in validate-data, 2026-09-29
+
+The outcomes: no gender-identity or orientation wording and no em dash reaches the site, and a local build after a listing is removed passes without regenerating files by hand. validate-data runs before the steps that rewrite `public/sitemap.xml`, `public/llms.txt`, `src/data/lastmod.json` and the two catalogue payloads, so its text scans read the copies an earlier build left. On 2026-09-28 that failed two local builds, once on `lastmod.json` and once on `sitemap.xml`, both still carrying the slug of #1606 after the listing was removed; each time the fix was to run `generate-sitemap.ts` by hand.
+
+| Candidate | Outcome |
+| --- | --- |
+| Reading those five build outputs in the wording and em dash scans | Removed. Their text comes from the data and pages the scans already read, except for listing URLs, which are built from titles. |
+| Listing URLs, which only the sitemap and `lastmod.json` spelled out | Added back from the data: the wording scan reads all 1,858 URLs the validator already builds for `_redirects` (1,811 listings, 47 hubs). Before, CI saw them only in the committed `lastmod.json`: 1,781 indexable listings, as of its last commit. |
+| Listing files with `git ls-files`, so gitignored files drop out (the first idea when this was flagged) | Not used. `lastmod.json` is committed, so it would still fail, and a hand-written file in an ignored folder would quietly stop being read. The skip list names exactly the five files the build rewrites. |
+| Running the generators before validate-data | Not used. They would rewrite the committed `lastmod.json` from data not yet validated, and validate-data run on its own would still read stale copies. |
+| Multi-word terms matched with a space only ("gender identity", "sexual orientation" and three more) or a hyphen only ("two-spirit") | Now a space, a hyphen or nothing. A URL always hyphenates, so a URL check with the old terms would miss five of them, and "gender-identity" in prose passed the old pattern too. No current file or URL matches either form. |
+
+Measured locally, in a copy of the tree in the session scratchpad so the shared checkout was not touched:
+- Stale copies of all five outputs carrying a withdrawn listing: 5 failures before (4 wording, 1 em dash), a pass after.
+- Violations planted in sources: a title "Two Spirit Leadership Award", "gender-identity" in `public/_redirects`, "sexual-orientation" in a new uncommitted file, "lgbt" in a hand-written file under the ignored `public/og/`, an em dash in a new doc. Before, 2 of 5 files failed; after, 5 of 5, plus the title's URL.
+- validate-data run time on the real tree: 0.45 to 0.51 s before, 0.44 to 0.47 s after, the same within noise.
+
+Repair attempts against this problem: 2 before this change, both regenerating the file by hand (2026-09-28).
+
+Add-back fraction: 1 of 1 (the listing URLs, now read from the data instead of the files).
