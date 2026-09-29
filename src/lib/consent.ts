@@ -68,7 +68,7 @@ const GA_HOSTS = ['www.scholarab.ca', 'scholarab.ca']
  * Should GA be loaded at all on this page, before consent is even considered?
  *
  * Mirrors the guards in events.ts. Without them the dev server, `wrangler
- * pages dev dist` and every Playwright run would land in the property as real
+ * dev` and every Playwright run would land in the property as real
  * sessions, which is the same contamination the 2026-08-08 audit found in the
  * events table.
  */
