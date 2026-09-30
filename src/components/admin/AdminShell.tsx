@@ -71,7 +71,14 @@ export default function AdminShell({ user, page, data }: Props) {
       if (!res.ok) throw new Error(result.error ?? 'Unable to queue publication');
       setPublication(result);
       setReviewing(false);
-      toast.success('Changes queued. Validation and publication run every 15 minutes.');
+      // The workflow is scheduled every 15 minutes, but GitHub throttles it to
+      // 4 to 7 runs a day (measured 2026-09-29), so promise what happens.
+      toast.success('Changes queued. Publication usually runs within a few hours.', {
+        action: {
+          label: 'Run now',
+          onClick: () => window.open('https://github.com/scholarab/scholarab/actions/workflows/publish-drafts.yml', '_blank', 'noopener'),
+        },
+      });
     } catch (e) {
       toast.error(e instanceof Error ? e.message : 'Unable to queue publication');
     } finally {

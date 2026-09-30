@@ -109,6 +109,15 @@ jobs:
           fi
           npx tsx scripts/sync-db.ts
 
+      # Read-only. 0014 was applied by hand and missing from the ledger for
+      # nineteen days (found 2026-09-29) because nothing ran this. After the
+      # mirror, so a ledger problem cannot hold up published data.
+      - name: Check database schema
+        if: github.event_name != 'pull_request'
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx tsx scripts/migrate-db.ts --check
+
       # The script verifies this exact publication and sitemap, with at most
       # three readiness checks. Failed announcements remain optional and visible.
       - name: Announce changed URLs (IndexNow)
