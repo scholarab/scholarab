@@ -40,13 +40,24 @@ leaks, delete the key in the Cloud console; that revokes it immediately.
 
 ```
 npm run sitemap          # public/sitemap.xml is generated, not committed
-npm run index-status
+npm run index-status                  # up to 1,800 URLs, stalest first
+npm run index-status -- --budget 500  # a smaller pass
 npm run index-status -- --limit 20    # smoke test, spends 20 of the daily 2000
 ```
 
 Quotas are 2,000 inspections per day and 600 per minute per property. The
-sitemap is ~312 URLs, so a full run costs about a sixth of a day's quota and
-takes a couple of minutes at the concurrency the script uses.
+sitemap went from 312 URLs (2026-08-28) to 1,878 (2026-09-30), and a full pass
+of 1,878 took 53 minutes, so a run no longer asks about every URL. It inspects
+up to `--budget` (default 1,800, leaving 200 for smoke tests): URLs no earlier
+snapshot has first, then pages Google is not serving, then the ones asked
+longest ago. Every other URL keeps its last known state, with the day it was
+last asked in `inspectedAt`, so each snapshot still covers the whole sitemap
+and the `RESULT` line says how many rows were carried and how old the oldest
+is. A URL whose inspection fails is carried the same way, so it cannot show
+up as "gone" in the weekly diff.
+
+The access token lasts an hour. `scripts/lib/gsc.ts` renews it five minutes
+before expiry, and a 401 drops it and retries that URL once with a new one.
 
 ## Reading the result
 
@@ -69,7 +80,10 @@ A launchd agent runs it Mondays at 9am and appends to
 ```
 
 launchd runs a missed calendar job when the machine next wakes, so a laptop
-asleep on Monday morning still gets its run. To stop it:
+asleep on Monday morning still gets its run. The run itself is wrapped in
+`caffeinate -i` so the Mac cannot idle-sleep partway: on 2026-09-14 it slept a
+few requests in and woke after the token had expired, and 1,308 of 1,320
+inspections came back 401 (fixed 2026-09-30, see above). To stop it:
 
 ```
 launchctl unload ~/Library/LaunchAgents/ca.scholarab.index-status.plist

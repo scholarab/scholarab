@@ -16,5 +16,9 @@ export PATH="/usr/local/bin:$PATH"
   echo "=============================================================="
   echo "run: $(date '+%Y-%m-%d %H:%M %Z')"
   npm run sitemap
-  npm run index-status
+  # caffeinate -i: no idle sleep until the run ends. On 2026-09-14 the Mac
+  # slept a few requests in, woke after the hour-long token had expired, and
+  # 1,308 of 1,320 inspections came back 401. The script now renews its token
+  # too; this keeps a sleep from stretching a run past the day it started.
+  /usr/bin/caffeinate -i npm run index-status
 } >> private/index-status/weekly.log 2>&1

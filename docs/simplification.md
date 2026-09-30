@@ -1379,3 +1379,18 @@ Outcome: a student whose quiz answers put them in a combo is told so on the resu
 | Grade 10 and 11 awards in a combo's core | Removed, found by the new drift test: the St. Oscar Romero combo's core was a Grade 10, a Grade 11 and a Grade 12 award, so no one student could apply to all three. An award not open to Grade 12 is now a side. Romero and the Alberta High School of Fine Arts fall below the floor; Edmonton Public, Calgary Board and "Going to the University of Lethbridge" each lose one core award to their sides. |
 
 Five candidates, none restored: add-back fraction 0/5. Result: 59 combos (was 61), of which 58 can be named on /match (Redcliff has no quiz answer); before this change 51 were reachable, 7 of them only after the school question learned the audience-line schools. A real-catalogue test now fails if any indexed combo returns fewer than two of its core awards to a Grade 12 student who gives its answer; today every one returns all of them. The phone probe and screenshots were taken on the built site in WebKit at iPhone 13 size and in Chromium at 1280px.
+
+## Weekly index-status run, September 30, 2026
+
+Outcome: the Monday Search Console check finishes and says which sitemap pages Google is not serving, instead of silently producing a 12-row snapshot.
+
+Cause, from `private/index-status/weekly.log`: the 2026-09-14 run inspected 12 URLs, then 1,308 came back HTTP 401 and the snapshot was written 72 minutes after the start. The token lasts an hour and was minted once per run ("every run is minutes"), 401 was not retried, and the run was not kept awake. A full pass had grown to 1,878 URLs and 53 minutes (measured 2026-09-30), so the same failure was one sitemap growth away even on an awake Mac, and a full pass was about to outgrow the 2,000-a-day quota.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| One token per run | Replaced: `accessToken()` in `scripts/lib/gsc.ts` renews five minutes before expiry and shares one in-flight mint among the workers; a 401 drops the token and retries that URL once. Checked by forcing a 401 on the first inspection: 2 of 2 inspected, 1 retry, 2 tokens minted. |
+| Asking about every sitemap URL every week | Replaced by a budget (default 1,800): new URLs, then pages Google is not serving, then the longest since asked. Unasked and failed URLs keep their last known row with `inspectedAt`, so the snapshot stays complete and a failure cannot read as a de-indexing in the diff. Checked with `--budget 20`: 20 inspected, 1,858 carried, 1,878 rows. |
+| A run the Mac can sleep through | Wrapped in `caffeinate -i` in `scripts/index-status-weekly.sh`. |
+| A separate scheduler or a hosted job | Not added: the key stays on this machine and out of CI secrets. |
+
+Four candidates, none restored: add-back fraction 0/4. Measured on 2026-09-30: a full manual run inspected 1,878 of 1,878 with 0 failures and 0 retries in 53 minutes (1,792 indexed, 86 in the request queue). The next Monday run is the first real test of the launchd path; read the `RESULT` line at the bottom of weekly.log.

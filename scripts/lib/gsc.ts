@@ -47,12 +47,36 @@ function credentials(): ServiceAccount {
 const b64url = (input: string | Buffer): string =>
   Buffer.from(input).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
+let cached: { token: string; expires: number } | null = null;
+// Shared by callers that ask at once, so four parallel workers starting a run
+// (or hitting the renewal together) mint one token, not four.
+let minting: Promise<{ token: string; expires: number }> | null = null;
+
+/**
+ * A live access token, minted again once the cached one is within five
+ * minutes of expiring. Call it per request rather than once per run: tokens
+ * last an hour, a full index-status run over 1,878 URLs took 53 minutes on
+ * 2026-09-30, and the launchd run of 2026-09-14 lost 1,308 of 1,320
+ * inspections to 401s after the Mac slept past the hour mid-run.
+ */
+export async function accessToken(): Promise<string> {
+  if (cached && cached.expires - Date.now() > 5 * 60 * 1000) return cached.token;
+  minting ??= mint().finally(() => { minting = null; });
+  cached = await minting;
+  return cached.token;
+}
+
+/** Forget the cached token, after a 401 says Google already has. */
+export function dropToken(): void {
+  cached = null;
+}
+
 /**
  * Signed JWT -> access token, the two-legged OAuth flow for service accounts.
  * Done with node's crypto rather than googleapis because that dependency is
  * ~40MB of client for one POST, and this is the only Google API the repo calls.
  */
-export async function accessToken(): Promise<string> {
+async function mint(): Promise<{ token: string; expires: number }> {
   const sa = credentials();
   const now = Math.floor(Date.now() / 1000);
   const claims = {
@@ -60,8 +84,7 @@ export async function accessToken(): Promise<string> {
     scope: SCOPE,
     aud: TOKEN_URL,
     iat: now,
-    // An hour is the maximum Google accepts, and every run is minutes, so the
-    // token never needs refreshing mid-run.
+    // An hour is the maximum Google accepts; accessToken() renews before it.
     exp: now + 3600,
   };
   const body = `${b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }))}.${b64url(JSON.stringify(claims))}`;
@@ -83,7 +106,8 @@ export async function accessToken(): Promise<string> {
     console.error(`Token exchange failed (HTTP ${res.status}): ${await res.text()}`);
     process.exit(1);
   }
-  return ((await res.json()) as { access_token: string }).access_token;
+  const json = (await res.json()) as { access_token: string; expires_in?: number };
+  return { token: json.access_token, expires: Date.now() + (json.expires_in ?? 3600) * 1000 };
 }
 
 export interface AnalyticsRow {

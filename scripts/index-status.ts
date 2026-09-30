@@ -23,12 +23,13 @@
  * the key grants write access to the property, including Removals.
  *
  * Usage:
- *   npm run index-status              # every sitemap URL
+ *   npm run index-status              # up to BUDGET sitemap URLs, stalest first
  *   npm run index-status -- --limit 20
+ *   npm run index-status -- --budget 500
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { accessToken, root, SITE_URL } from './lib/gsc.ts';
+import { accessToken, dropToken, root, SITE_URL } from './lib/gsc.ts';
 
 const INSPECT_URL = 'https://searchconsole.googleapis.com/v1/urlInspection/index:inspect';
 
@@ -39,6 +40,13 @@ const INSPECT_URL = 'https://searchconsole.googleapis.com/v1/urlInspection/index
 // without ever tripping it.
 const CONCURRENCY = 4;
 const MAX_RETRIES = 4;
+// Inspections per run. The daily quota is 2,000 and the sitemap was 1,878 on
+// 2026-09-30, a month after it was 312, so a full pass will not fit for long.
+// A run inspects this many, new and not-indexed URLs first and then the ones
+// checked longest ago; every other URL keeps its last known state, so each
+// snapshot still covers the whole sitemap. 200 are left for --limit smoke
+// tests and anything else run the same day.
+const DEFAULT_BUDGET = 1800;
 
 interface Status {
   url: string;
@@ -48,6 +56,9 @@ interface Status {
   indexingState: string;
   lastCrawlTime: string | null;
   googleCanonical: string | null;
+  /** The day this row was asked of Google. Snapshots before 2026-09-30 lack
+   *  it; their rows count as inspected on the snapshot's own date. */
+  inspectedAt?: string;
 }
 
 /**
@@ -56,13 +67,14 @@ interface Status {
  */
 let retries = 0;
 
-async function inspect(url: string, token: string): Promise<Status | null> {
+async function inspect(url: string): Promise<Status | null> {
+  let renewed = false;
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     let res: Response;
     try {
       res = await fetch(INSPECT_URL, {
         method: 'POST',
-        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        headers: { Authorization: `Bearer ${await accessToken()}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ inspectionUrl: url, siteUrl: SITE_URL, languageCode: 'en-CA' }),
       });
     } catch {
@@ -88,6 +100,16 @@ async function inspect(url: string, token: string): Promise<Status | null> {
       await new Promise((r) => setTimeout(r, 2000 * 2 ** attempt));
       continue;
     }
+    // An expired token, which accessToken() renews ahead of time unless the
+    // machine slept through the renewal. Once per URL: a second 401 on a new
+    // token is a credential problem, and retrying would only hide it.
+    if (res.status === 401 && !renewed) {
+      renewed = true;
+      retries++;
+      dropToken();
+      attempt--;
+      continue;
+    }
     if (!res.ok) {
       console.error(`  ${url}: HTTP ${res.status} ${(await res.text()).slice(0, 200)}`);
       return null;
@@ -104,6 +126,7 @@ async function inspect(url: string, token: string): Promise<Status | null> {
       indexingState: i.indexingState ?? 'unknown',
       lastCrawlTime: i.lastCrawlTime ?? null,
       googleCanonical: i.googleCanonical ?? null,
+      inspectedAt: today,
     };
   }
   console.error(`  ${url}: gave up after ${MAX_RETRIES} retries`);
@@ -132,12 +155,34 @@ if (limitArg !== -1) {
   }
 }
 
-const urls = sitemapUrls().slice(0, limit);
-const token = await accessToken();
-console.log(`Inspecting ${urls.length} URLs as ${SITE_URL} ...`);
+const budgetArg = process.argv.indexOf('--budget');
+const budget = budgetArg === -1 ? DEFAULT_BUDGET : Number(process.argv[budgetArg + 1]);
+if (!Number.isInteger(budget) || budget < 1) {
+  console.error('--budget needs a positive whole number, e.g. --budget 500');
+  process.exit(1);
+}
 
 const outDir = join(root, 'private/index-status');
 mkdirSync(outDir, { recursive: true });
+
+// Every URL's last known state across the dated snapshots, newest winning, so
+// a partial week (2026-09-14 kept 12 of 1,320) does not reset what is known.
+const snapshots = readdirSync(outDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort();
+const known = new Map<string, Status>();
+for (const f of snapshots) {
+  for (const r of JSON.parse(readFileSync(join(outDir, f), 'utf8')) as Status[]) {
+    known.set(r.url, { ...r, inspectedAt: r.inspectedAt ?? f.slice(0, 10) });
+  }
+}
+
+// Unknown to us first, then pages Google is not serving (the queue this
+// exists to produce), then the longest since last asked.
+const rank = (u: string) => (!known.has(u) ? 0 : known.get(u)!.verdict !== 'PASS' ? 1 : 2);
+const sitemap = sitemapUrls().sort((a, b) =>
+  rank(a) - rank(b) || (known.get(a)?.inspectedAt ?? '').localeCompare(known.get(b)?.inspectedAt ?? '') || a.localeCompare(b));
+const urls = sitemap.slice(0, Math.min(limit, budget));
+console.log(`Inspecting ${urls.length} of ${sitemap.length} sitemap URLs as ${SITE_URL} ...`);
+
 const today = new Date().toLocaleDateString('en-CA');
 
 // A --limit run is a smoke test, and it must not land on the dated snapshot:
@@ -145,8 +190,11 @@ const today = new Date().toLocaleDateString('en-CA');
 // the next weekly diff reads, and the diff then reports 499 URLs "gone", which
 // reads exactly like a mass de-indexing. Suffix it instead.
 const stem = limit === Infinity ? today : `${today}-limit${limit}`;
+// A --limit run is a smoke test and carries nothing forward.
+const carryForward = limit === Infinity;
 
 const results: Status[] = [];
+let inspected = 0;
 
 /**
  * Write what we have. Called from the finally below as well as on the happy
@@ -165,8 +213,11 @@ try {
     Array.from({ length: Math.min(CONCURRENCY, urls.length) }, async () => {
       while (next < urls.length) {
         const url = urls[next++]!;
-        const s = await inspect(url, token);
-        if (s) results.push(s);
+        const s = await inspect(url);
+        if (s) { results.push(s); inspected++; }
+        // A failed URL keeps its last known state rather than vanishing, or
+        // the diff below reports it "gone", which reads like a de-indexing.
+        else if (carryForward && known.has(url)) results.push(known.get(url)!);
         if (++done % 25 === 0) console.log(`  ${done}/${urls.length}`);
       }
     }),
@@ -179,6 +230,10 @@ try {
   console.error(`\nRun aborted after ${results.length}/${urls.length}; partial snapshot written.`);
   throw err;
 }
+
+// Everything past the budget keeps its last known state.
+const skipped = carryForward ? sitemap.slice(urls.length).filter((u) => known.has(u)) : [];
+for (const u of skipped) results.push(known.get(u)!);
 
 persist();
 
@@ -193,10 +248,12 @@ const previous = readdirSync(outDir)
 const byState = new Map<string, Status[]>();
 for (const r of results) byState.set(r.coverageState, [...(byState.get(r.coverageState) ?? []), r]);
 
-const failed = urls.length - results.length;
+const failed = urls.length - inspected;
+const oldest = [...results].map((r) => r.inspectedAt ?? '').sort()[0];
 // One greppable line, because weekly.log is read by scrolling to the bottom and
 // a failed week previously looked like a stack trace rather than a status.
-console.log(`\nRESULT: ${failed === 0 ? 'ok' : 'partial'} ${results.length}/${urls.length} inspected, ${failed} failed, ${retries} retries\n`);
+console.log(`\nRESULT: ${failed === 0 ? 'ok' : 'partial'} ${inspected}/${urls.length} inspected, ${failed} failed, ${retries} retries` +
+  `; ${results.length - inspected} of ${sitemap.length} carried from earlier runs${oldest ? ` (oldest ${oldest})` : ''}\n`);
 console.log('COVERAGE STATE');
 for (const [state, rows] of [...byState].sort((a, b) => b[1].length - a[1].length)) {
   console.log(`  ${String(rows.length).padStart(4)}  ${state}`);
