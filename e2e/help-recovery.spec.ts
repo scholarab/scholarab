@@ -45,6 +45,42 @@ test('hubs named by a jargon word define it above the results', async ({ page })
   await expect(page.locator('.sabl-status-help dt', { hasText: 'Bursary' })).toHaveCount(1);
 });
 
+for (const path of ['/scholarships/', '/programs/']) {
+  test(`${path} status explanations fit the filter panel and remain reachable`, async ({ page, isMobile }) => {
+    for (const width of isMobile ? [320, 412] : [1200, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(path);
+      if (isMobile) await page.getByRole('button', { name: 'Filters', exact: true }).click();
+
+      const help = page.locator('.sabl-status-help');
+      const summary = help.locator('summary');
+      await summary.press('Enter');
+      await expect(help).toHaveAttribute('open', '');
+
+      const geometry = await help.evaluate(el => {
+        const bounds = el.getBoundingClientRect();
+        const rail = el.closest('.sabl-rail')!;
+        return {
+          overflow: rail.scrollWidth - rail.clientWidth,
+          clippedDefinitions: Array.from(el.querySelectorAll('dt, dd')).filter(term => {
+            const rect = term.getBoundingClientRect();
+            return rect.left < bounds.left - 1 || rect.right > bounds.right + 1
+              || term.scrollWidth > term.clientWidth + 1;
+          }).map(term => term.textContent),
+        };
+      });
+      expect(geometry.overflow, `${width}px filter panel`).toBeLessThanOrEqual(1);
+      expect(geometry.clippedDefinitions, `${width}px definitions`).toEqual([]);
+
+      const lastDefinition = help.locator('dd').last();
+      await lastDefinition.scrollIntoViewIfNeeded();
+      await expect(lastDefinition).toBeInViewport();
+      await summary.press('Enter');
+      await expect(help).not.toHaveAttribute('open');
+    }
+  });
+}
+
 test('the /deadlines breadcrumb Home link is at least 24px tall', async ({ page }) => {
   await page.goto('/deadlines/');
   const box = await page.locator('.sabl-crumbs a', { hasText: 'Home' }).boundingBox();

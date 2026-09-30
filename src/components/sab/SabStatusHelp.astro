@@ -40,11 +40,7 @@ for (const k of DIRECTORY_TERMS[kind]) terms.push([GLOSSARY[k].term, GLOSSARY[k]
     text-decoration-color: rgba(20, 25, 21, 0.3);
   }
   .sabl-status-help summary:hover { color: #141915; text-decoration-color: currentColor; }
-  .sabl-status-help dl { margin: 6px 0 4px; display: grid; gap: 6px; max-width: 640px; }
-  .sabl-status-help dl > div { display: grid; grid-template-columns: 11em 1fr; gap: 12px; }
+  .sabl-status-help dl { margin: 6px 0 4px; display: grid; gap: 12px; max-width: 640px; }
   .sabl-status-help dt { font-weight: 600; color: #141915; }
   .sabl-status-help dd { margin: 0; line-height: 1.45; }
-  @media (max-width: 600px) {
-    .sabl-status-help dl > div { grid-template-columns: 1fr; gap: 0; }
-  }
 </style>
