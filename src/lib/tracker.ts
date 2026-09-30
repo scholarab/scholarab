@@ -54,6 +54,8 @@ function makeTracker(key: string) {
     if (idx > -1) saved.splice(idx, 1);
     else saved.push(id);
     localStorage.setItem(key, JSON.stringify(saved));
+    // The header's Saved counter listens; `storage` only fires in other tabs.
+    window.dispatchEvent(new CustomEvent('sab:saved'));
     return [...saved];
   }
 

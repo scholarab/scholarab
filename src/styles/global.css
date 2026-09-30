@@ -1794,7 +1794,41 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   .sabl-toolbar { margin-top: 14px; }
   .sabl-group-count { min-width: 36px; height: 36px; font-size: 18px; }
 }
+/* Menu-board leaders: dots run from a listing's name to its price, the one
+   line every row of a menu has. The price column starts where the dots end,
+   so figures sit left in their column. Desktop only; on a phone the money is
+   on its own line under the title and a leader would point at nothing. */
+@media (min-width: 900px) {
+  .sabl-card .sabl-name-h { display: flex; align-items: flex-end; }
+  .sabl-card .sabl-name-h::after {
+    content: ''; flex: 1 1 24px; min-width: 24px; margin: 0 -14px 6px 12px;
+    border-bottom: 3px dotted rgba(20, 25, 21, 0.28);
+  }
+  .sabl-card > :is(.sabl-amount, .sabl-card-top-left) { justify-self: start; text-align: left; }
+}
+/* The count stickers say what the run is: rust for the ones closing within
+   two weeks (rust is the deadline colour everywhere), mint for open now. */
+[data-dir-group='soon'] .sabl-group-count { background: var(--rust); color: #fff; }
+[data-dir-group='active'] .sabl-group-count { background: var(--brand); color: var(--text-primary); }
+/* A row lights up mint under the pointer instead of going grey. */
+.sabl-card:hover { background-color: rgba(47, 211, 160, 0.14); }
+/* The pickers were 6px boxes with a hairline, the most default-looking thing
+   on the page; they take the sort picker's pill and an ink outline. */
+.sabl-filter-select, html.js .sabl-rail .sabl-scope-select {
+  border: 2px solid var(--text-primary); border-radius: 999px; font-weight: 600; padding-left: 16px;
+}
+.sabl-sort-select, html.js .sabl-scope-select { border: 2px solid var(--text-primary); }
+.sabl-empty-title { font-weight: 800; text-transform: uppercase; }
+/* The tray count on the header's Saved link. */
+.sabh-saved-n {
+  display: inline-grid; place-items: center; box-sizing: border-box;
+  min-width: 20px; height: 20px; padding: 0 6px; margin-left: 6px; border-radius: 999px;
+  background: #FFC700; color: var(--text-primary); font: 800 13px/1 var(--font-display);
+  vertical-align: 1px;
+}
+.sabh-saved-n[hidden] { display: none; }
 @media print {
+  .sabl-card .sabl-name-h::after { content: none; }
   .sabl-title-row { background: none; color: inherit; padding: 0; border-radius: 0; }
   .sabl-title-row .sabl-h1, .sabl-title-row .sabl-desc { color: #141915; }
   .sabl-promo, .sabl-kicker { display: none; }

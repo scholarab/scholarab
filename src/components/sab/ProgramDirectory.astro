@@ -304,7 +304,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
   )}
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
-    <div class="sabl-empty-title">Nothing matches that.</div>
+    <div class="sabl-empty-title">Nothing on the menu for that.</div>
     <div class="sabl-empty-sub" data-dir-empty-sub>Try a shorter word, or clear a filter.</div>
     {/* Filled in by directory-client when the term exists somewhere else on
         the site: a facet page holds a slice, so "clear a filter" is the wrong
