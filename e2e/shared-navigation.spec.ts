@@ -19,7 +19,7 @@ test('Explore keeps every tool reachable by keyboard and phone menu', async ({ p
   const links = menu.getByRole('link');
   const hrefs = await links.evaluateAll(all => all.map(a => a.getAttribute('href')));
   expect(hrefs).toEqual([
-    '/match/', '/#closing', '/deadlines/', '/guides/',
+    '/match/', '/#closing', '/deadlines/', '/scholarships/medicine-hat/combos/', '/guides/',
     '/guides/alexander-rutherford-scholarship-guide/',
     '/guides/how-to-write-a-scholarship-essay/',
     '/guides/grade-11-scholarship-timeline/',

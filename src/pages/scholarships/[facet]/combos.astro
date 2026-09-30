@@ -32,6 +32,14 @@ const { page, combos } = Astro.props;
 const facet = SCHOLARSHIP_FACETS.find(f => f.slug === page.city)!;
 const canonical = `https://www.scholarab.ca/scholarships/${page.city}/combos/`;
 const sorted = (items: ScholarshipWithMeta[]) => filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
+const totalAwards = combos.reduce((n, c) => n + c.core.length + c.addOns.length, 0);
+
+// The price-burst sticker on the menu board: a 16-point star, drawn once here.
+const burstPath = Array.from({ length: 32 }, (_, i) => {
+  const r = i % 2 ? 46 : 60;
+  const a = (Math.PI * i) / 16;
+  return `${i ? 'L' : 'M'}${(60 + r * Math.sin(a)).toFixed(1)} ${(60 - r * Math.cos(a)).toFixed(1)}`;
+}).join(' ') + ' Z';
 
 const breadcrumbJson = {
   '@context': 'https://schema.org',
@@ -60,30 +68,46 @@ const breadcrumbJson = {
     <SabHeader currentPath="/scholarships" />
   </div>
 
+
   <div id="sab-combos" class="sabp sabp-wide">
     <div class="sabp-body">
       <Fragment set:html={ICON_SPRITE} />
-      <div class="sabl-head">
-        <div class="sabl-title-row">
-          <div>
-            <h1 class="sabl-h1">{page.h1}</h1>
-            <p class="sabl-desc">{page.intro}</p>
-          </div>
-        </div>
-      </div>
 
-      {combos.map(({ combo, core, addOns }) => {
+      {/* The menu board. A drive-thru board, not a directory header: the
+          combos are the specials, numbered, and each one is a jump link. */}
+      <header class="sabc-board">
+        <p class="sabc-kicker">Now serving {facet.label}</p>
+        <h1 class="sabc-h1">{page.h1}</h1>
+        <p class="sabc-intro">{page.intro}</p>
+        <ol class="sabc-menu" aria-label="Combos on this page">
+          {combos.map(({ combo, core, addOns }, n) => (
+            <li>
+              <a href={`#${combo.slug}`} class={`sabc-menu-link sabc-tone-${n % 3}`}>
+                <span class="sabc-menu-no" aria-hidden="true">{n + 1}</span>
+                <span class="sabc-menu-name">{combo.name}</span>
+                <span class="sabc-menu-count">{core.length + addOns.length} awards</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+        <div class="sabc-burst" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><path d={burstPath} /></svg>
+          <span>{combos.length} combos<br />{totalAwards} awards</span>
+        </div>
+      </header>
+
+      {combos.map(({ combo, core, addOns }, n) => {
         const viaSchool = core.every(s => s.applyViaGuidance);
-        const all = [...core, ...addOns];
-        const rows = (list: ScholarshipWithMeta[]) => sorted(list).map(s => {
+        const items = (list: ScholarshipWithMeta[]) => sorted(list).map(s => {
           const when = scholarshipWhen(s);
           const facts = eligibilityFacts(s.eligibility);
           const amount = amountCell(s.amount);
+          const varies = amount.cls.includes('is-varies');
           const noApply = saysNoApplication(s.notes, s.metaDetail, (s as { description?: string }).description);
           const act = rowAction(canApplyNow(getScholarshipStatus(s)) && !noApply, s.url, `/scholarships/${s._slug}/`, s.title);
           return (
-            <div
-              class="sabl-card"
+            <li
+              class="sabc-item"
               data-combo-card
               data-id={s.id}
               data-deadline={s.deadline ?? undefined}
@@ -94,47 +118,55 @@ const breadcrumbJson = {
               data-rolling={s.rolling ? '' : undefined}
               data-no-apply={noApply ? '' : undefined}
             >
-              <div class="sabl-row-main">
-                <h3 class="sabl-name-h"><a href={`/scholarships/${s._slug}/`} class="sabl-name">{s.title}</a></h3>
-                {s.audience && <div class="sabl-blurb">{s.audience}</div>}
-                {facts.length > 0 && <ul class="sabl-facts" aria-label="Requirements">{facts.map(f => <li>{f}</li>)}</ul>}
+              {/* Name, leader dots, price: the one menu-board line. */}
+              <div class="sabc-line">
+                <h3 class="sabc-name-h"><a href={`/scholarships/${s._slug}/`} class="sabc-name">{s.title}</a></h3>
+                <span class="sabc-dots" aria-hidden="true"></span>
+                <span class:list={['sabc-price', { 'is-varies': varies }]}>{varies ? 'Amount varies' : amount.text}</span>
               </div>
-              <div class={amount.cls}>{amount.text}</div>
-              <div class="sabl-row-when">
+              {s.audience && <p class="sabc-aud">{s.audience}</p>}
+              {facts.length > 0 && <ul class="sabl-facts" aria-label="Requirements">{facts.map(f => <li>{f}</li>)}</ul>}
+              <div class="sabc-meta">
                 <span class={when.cls} data-when><span data-when-main>{when.main}</span><span class="sabl-when-sub" data-when-sub hidden={!when.sub}>{when.sub}</span></span>
                 {isCheckStale(s.lastVerified) && <span class="sabl-checked">Last checked {formatVerifiedMonth(s.lastVerified)}</span>}
+                <span class="sabc-acts">
+                  <button type="button" class="sabl-save" data-combo-save aria-label={`Save ${s.title}`} aria-pressed="false"><Fragment set:html={BOOKMARK_REF} /><span class="sabl-save-label" data-save-label>Save</span></button>
+                  {act.external
+                    ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-track="apply" data-row-action data-url={s.url} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={EXT_REF} /></span></a>
+                    : <a href={act.href} class="sabl-apply" data-row-action data-url={s.url ?? undefined} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={ARROW_REF} /></span></a>}
+                </span>
               </div>
-              <div class="sabl-card-actions">
-                <button type="button" class="sabl-save" data-combo-save aria-label={`Save ${s.title}`} aria-pressed="false"><Fragment set:html={BOOKMARK_REF} /><span class="sabl-save-label" data-save-label>Save</span></button>
-                {act.external
-                  ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-track="apply" data-row-action data-url={s.url} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={EXT_REF} /></span></a>
-                  : <a href={act.href} class="sabl-apply" data-row-action data-url={s.url ?? undefined} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={ARROW_REF} /></span></a>}
-              </div>
-            </div>
+            </li>
           );
         });
         return (
-          <section class="sabc-combo" id={combo.slug} aria-labelledby={`${combo.slug}-h`}>
-            <h2 class="sabl-group sabc-h" id={`${combo.slug}-h`}>
-              <span class="sabl-group-name">
-                <span class="sabl-group-label">{combo.name}</span>
-                <span class="sabl-group-count">{all.length}</span>
-              </span>
-            </h2>
-            <p class="sabc-who"><strong>For you if</strong> {combo.who}.{viaSchool && ' All of these go through your school, so one visit to the guidance office covers them.'}</p>
-            <div class="sabc-actions">
+          <section class={`sabc-combo sabc-tone-${n % 3}`} id={combo.slug} aria-labelledby={`${combo.slug}-h`}>
+            <div class="sabc-top">
+              <div class="sabc-no" aria-hidden="true"><span>Combo</span>{n + 1}</div>
+              <div class="sabc-title">
+                <h2 class="sabc-h2" id={`${combo.slug}-h`}>{combo.name}</h2>
+                <p class="sabc-who"><strong>For you if</strong> {combo.who}.</p>
+                {viaSchool && <p class="sabc-tip">One trip to the guidance office covers all {core.length}.</p>}
+              </div>
+              <div class="sabc-sticker" aria-hidden="true">
+                <strong>{core.length}</strong>
+                <span>awards</span>
+                {addOns.length > 0 && <em>+{addOns.length} {addOns.length === 1 ? 'side' : 'sides'}</em>}
+              </div>
+            </div>
+            <ul class="sabc-items">{items(core)}</ul>
+            {addOns.length > 0 && (
+              <div class="sabc-sides">
+                <p class="sabc-sides-h"><strong>Add a side</strong> only if the line under it fits you</p>
+                <ul class="sabc-items">{items(addOns)}</ul>
+              </div>
+            )}
+            <div class="sabc-order">
               <button type="button" class="sabc-save-all" data-combo-save-all data-ids={core.map(s => s.id).join(',')}>
                 Save all {core.length}
               </button>
-              <a class="sabc-saved-link" href="/saved/" data-combo-saved-link hidden>Open your saved list</a>
+              <a class="sabc-saved-link" href="/saved/" data-combo-saved-link hidden>See your saved list</a>
             </div>
-            <div class="sabc-list">{rows(core)}</div>
-            {addOns.length > 0 && (
-              <>
-                <h3 class="sabc-sub">Add if it fits you</h3>
-                <div class="sabc-list">{rows(addOns)}</div>
-              </>
-            )}
           </section>
         );
       })}
@@ -162,7 +194,7 @@ const breadcrumbJson = {
   const root = document.getElementById('sab-combos');
   const cards = [...(root?.querySelectorAll<HTMLElement>('[data-combo-card]') ?? [])];
   const idOf = (el: HTMLElement) => Number(el.dataset.id);
-  const nameOf = (el: HTMLElement) => el.querySelector('.sabl-name')?.textContent ?? '';
+  const nameOf = (el: HTMLElement) => el.querySelector('.sabc-name')?.textContent ?? '';
 
   // The page is prerendered, so the countdowns and Apply labels are
   // recomputed from the ISO dates here, as the directories do.
@@ -183,7 +215,7 @@ const breadcrumbJson = {
       sub.hidden = !when.sub;
     }
     const a = el.querySelector<HTMLAnchorElement>('[data-row-action]');
-    if (a) paintRowAction(a, rowAction(canApplyNow(getScholarshipStatus(s)) && d.noApply === undefined, a.dataset.url, el.querySelector('.sabl-name')!.getAttribute('href')!, s.title), { ext: EXT_REF, arrow: ARROW_REF });
+    if (a) paintRowAction(a, rowAction(canApplyNow(getScholarshipStatus(s)) && d.noApply === undefined, a.dataset.url, el.querySelector('.sabc-name')!.getAttribute('href')!, s.title), { ext: EXT_REF, arrow: ARROW_REF });
   }
 
   function paint() {
@@ -237,34 +269,166 @@ const breadcrumbJson = {
 </script>
 
 <style is:global>
+  /* A fast-food promotion inside the site's own type and palette (Ilia,
+     2026-09-30: "like a promotion for fast food chain, more fun"). Ink
+     outlines and flat colour trays, no shadows; the mint, pink and yellow
+     trays tell the combos apart, and mustard is kept for the stickers. */
+  #sab-combos {
+    --sabc-ink: var(--text-primary);
+    --sabc-mustard: #FFC700;
+    --sabc-line: 3px solid var(--sabc-ink);
+  }
   body:has(#sab-combos) { background: var(--bg-page); }
-  #sab-combos .sabl-desc { min-height: 0; }
-  .sabc-combo { margin-top: 40px; scroll-margin-top: 90px; }
-  html.js .sabc-h { cursor: auto; }
-  .sabc-who {
-    font-size: 16px; line-height: 1.5; color: rgba(20, 25, 21, 0.78);
-    margin: 14px 0 0; max-width: 70ch;
+  #sab-combos .sabp-body { max-width: 1080px; margin: 0 auto; }
+  .sabc-tone-0 { --sabc-tray: var(--brand); }
+  .sabc-tone-1 { --sabc-tray: #FFD84D; }
+  .sabc-tone-2 { --sabc-tray: #FDBEBA; }
+
+  /* ── The menu board ── */
+  .sabc-board {
+    position: relative; background: var(--sabc-ink); color: #fff;
+    border-radius: 30px; padding: 44px 48px 40px; overflow: hidden;
   }
-  .sabc-who strong { color: var(--text-primary); font-weight: 700; }
-  .sabc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: 16px 0 12px; }
+  .sabc-kicker {
+    margin: 0; font: 800 15px/1 var(--font-display); letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--sabc-mustard);
+  }
+  .sabc-h1 {
+    margin: 14px 0 0; max-width: 11ch;
+    font: 800 clamp(54px, 8.5vw, 112px)/0.86 var(--font-display);
+    letter-spacing: -0.015em; text-transform: uppercase; text-wrap: balance;
+  }
+  .sabc-intro { margin: 20px 0 0; max-width: 56ch; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,0.8); }
+  .sabc-menu { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .sabc-menu-link {
+    display: inline-flex; align-items: center; gap: 12px; min-height: 48px;
+    padding: 6px 18px 6px 6px; border-radius: 999px;
+    border: 2px solid rgba(255,255,255,0.28); color: #fff; text-decoration: none;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .sabc-menu-link:hover { border-color: var(--sabc-tray); background: rgba(255,255,255,0.06); }
+  .sabc-menu-no {
+    display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+    background: var(--sabc-tray); color: var(--sabc-ink); font: 800 22px/1 var(--font-display);
+  }
+  .sabc-menu-name { font-weight: 700; font-size: 15.5px; }
+  .sabc-menu-count { font-size: 13.5px; color: rgba(255,255,255,0.62); white-space: nowrap; }
+  .sabc-burst {
+    position: absolute; top: 28px; right: 34px; width: 150px; height: 150px;
+    display: grid; place-items: center; transform: rotate(12deg);
+  }
+  .sabc-burst svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: var(--sabc-mustard); }
+  .sabc-burst span {
+    position: relative; text-align: center; color: var(--sabc-ink);
+    font: 800 21px/0.95 var(--font-display); text-transform: uppercase;
+  }
+
+  /* ── A combo: one tray ── */
+  .sabc-combo {
+    margin-top: 44px; border: var(--sabc-line); border-radius: 30px; overflow: hidden;
+    scroll-margin-top: 80px; background: #fff;
+  }
+  .sabc-top {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 28px; align-items: center;
+    background: var(--sabc-tray); padding: 26px 30px; border-bottom: var(--sabc-line);
+  }
+  .sabc-no { font: 800 108px/0.8 var(--font-display); color: var(--sabc-ink); text-align: center; }
+  .sabc-no span { display: block; font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+  .sabc-h2 {
+    margin: 0; font: 800 clamp(32px, 4.2vw, 48px)/0.92 var(--font-display);
+    text-transform: uppercase; letter-spacing: -0.01em; color: var(--sabc-ink); text-wrap: balance;
+  }
+  .sabc-who { margin: 10px 0 0; font-size: 16.5px; line-height: 1.45; color: var(--sabc-ink); max-width: 52ch; }
+  .sabc-who strong { font-weight: 800; }
+  .sabc-tip {
+    display: inline-block; margin: 12px 0 0; padding: 6px 12px; border-radius: 999px;
+    background: var(--sabc-ink); color: #fff; font-size: 13.5px; font-weight: 700;
+  }
+  .sabc-sticker {
+    width: 118px; height: 118px; border-radius: 50%; background: var(--sabc-ink); color: var(--sabc-mustard);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transform: rotate(-10deg); transition: transform 0.25s ease; text-align: center;
+  }
+  .sabc-combo:hover .sabc-sticker { transform: rotate(4deg) scale(1.04); }
+  .sabc-sticker strong { font: 800 50px/0.85 var(--font-display); }
+  .sabc-sticker span { font: 800 14px/1 var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
+  .sabc-sticker em { font: 700 12px/1 var(--font-body); font-style: normal; color: #fff; margin-top: 6px; }
+
+  /* ── The items, as menu lines ── */
+  .sabc-items { list-style: none; margin: 0; padding: 6px 30px; }
+  .sabc-item { padding: 20px 0; }
+  .sabc-item + .sabc-item { border-top: 2px dashed rgba(20, 25, 21, 0.18); }
+  .sabc-line { display: flex; align-items: flex-end; gap: 10px; }
+  .sabc-name-h { margin: 0; font: inherit; flex: 0 1 auto; min-width: 0; }
+  .sabc-name { font-weight: 800; font-size: 19px; line-height: 1.25; color: var(--sabc-ink); text-decoration: none; }
+  .sabc-name:hover { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+  /* The leader dots that run from the name to the price on a menu board. */
+  .sabc-dots {
+    flex: 1 1 24px; min-width: 24px; margin-bottom: 6px;
+    border-bottom: 3px dotted rgba(20, 25, 21, 0.4);
+  }
+  .sabc-price { flex: none; font: 800 32px/0.95 var(--font-display); color: var(--sabc-ink); white-space: nowrap; }
+  .sabc-price.is-varies { font: 600 14px/1.3 var(--font-body); color: rgba(20, 25, 21, 0.62); padding-bottom: 2px; }
+  .sabc-aud { margin: 6px 0 0; font-size: 14.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.7); max-width: 70ch; }
+  .sabc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 12px; }
+  .sabc-acts { display: inline-flex; align-items: center; gap: 14px; margin-left: auto; }
+
+  .sabc-sides { border-top: 3px dashed var(--sabc-ink); background: #FAFBF9; }
+  .sabc-sides-h { margin: 0; padding: 20px 30px 0; font-size: 14.5px; color: rgba(20, 25, 21, 0.72); }
+  .sabc-sides-h strong {
+    display: inline-block; margin-right: 8px; padding: 5px 12px; border-radius: 999px;
+    background: var(--sabc-mustard); color: var(--sabc-ink);
+    font: 800 15px/1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* ── The order button ── */
+  .sabc-order {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
+    padding: 20px 30px; border-top: var(--sabc-line);
+  }
   .sabc-save-all {
-    font: 700 14px/1 var(--font-body); color: #fff; background: var(--text-primary);
-    border: 0; border-radius: 8px; padding: 12px 16px; min-height: 44px; cursor: pointer;
+    min-height: 52px; padding: 0 30px; border: 0; border-radius: 999px; cursor: pointer;
+    background: var(--sabc-ink); color: #fff;
+    font: 800 22px/1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
+    transition: background-color 0.15s ease, color 0.15s ease;
   }
-  .sabc-save-all:hover { background: #2b332d; }
-  .sabc-save-all:disabled { cursor: default; color: var(--green); background: rgba(47, 211, 160, 0.15); }
-  .sabc-saved-link { font-size: 14.5px; font-weight: 600; color: var(--text-primary); }
+  .sabc-save-all:hover { background: var(--brand); color: var(--sabc-ink); }
+  .sabc-save-all:disabled { cursor: default; background: var(--brand); color: var(--sabc-ink); }
+  .sabc-saved-link { font-size: 15px; font-weight: 700; color: var(--sabc-ink); }
   .sabc-saved-link[hidden] { display: none; }
-  .sabc-sub {
-    font: 600 13px/1.2 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase;
-    color: rgba(20, 25, 21, 0.62); margin: 26px 0 8px;
+
+  @media (prefers-reduced-motion: reduce) {
+    .sabc-sticker, .sabc-menu-link, .sabc-save-all { transition: none; }
+    .sabc-combo:hover .sabc-sticker { transform: rotate(-10deg); }
   }
-  /* The directory stripes rows inside [data-dir-grid]; a combo list is its
-     own short run, so it stripes itself the same way. */
-  .sabc-list > .sabl-card { border-top-color: transparent; }
-  .sabc-list > .sabl-card:nth-child(even) { --row-bg: rgba(20, 25, 21, 0.04); }
-  @media (max-width: 640px) {
-    .sabc-combo { margin-top: 28px; }
-    .sabc-who { font-size: 15px; }
+
+  @media (max-width: 760px) {
+    .sabc-board { border-radius: 22px; padding: 30px 20px 26px; }
+    .sabc-burst { top: 14px; right: 10px; width: 96px; height: 96px; }
+    .sabc-burst span { font-size: 14px; }
+    .sabc-h1 { margin-top: 12px; max-width: 8ch; font-size: clamp(46px, 13vw, 64px); }
+    .sabc-intro { font-size: 16px; }
+    .sabc-menu { flex-direction: column; }
+    .sabc-menu-link { width: 100%; box-sizing: border-box; }
+    .sabc-menu-count { margin-left: auto; }
+    .sabc-combo { margin-top: 30px; border-radius: 22px; }
+    .sabc-top { grid-template-columns: auto 1fr; gap: 14px 18px; padding: 20px 18px; }
+    .sabc-no { font-size: 72px; }
+    .sabc-no span { font-size: 12px; }
+    .sabc-title { grid-column: 1 / -1; grid-row: 2; }
+    .sabc-sticker { width: 88px; height: 88px; justify-self: end; }
+    .sabc-sticker strong { font-size: 38px; }
+    .sabc-sticker span { font-size: 12px; }
+    .sabc-items { padding: 2px 18px; }
+    /* The name takes the whole width; the dots and the price run under it,
+       or a long award name was four words to a line beside the figure. */
+    .sabc-line { flex-wrap: wrap; row-gap: 4px; }
+    .sabc-name-h { flex-basis: 100%; }
+    .sabc-name { font-size: 17px; }
+    .sabc-price { font-size: 26px; }
+    .sabc-sides-h { padding: 18px 18px 0; }
+    .sabc-order { padding: 18px; }
+    .sabc-save-all { width: 100%; }
+    .sabc-acts { margin-left: 0; }
   }
 </style>
