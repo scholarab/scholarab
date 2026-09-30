@@ -49,3 +49,14 @@ export const ICON_SPRITE =
 export const BOOKMARK_REF = ref('i-bookmark', BOOKMARK);
 export const ARROW_REF = ref('i-arrow', ARROW);
 export const EXT_REF = ref('i-ext', EXT);
+
+/**
+ * The price-burst sticker: a 16-point star in a 120 box, the fast-food promo
+ * mark on the directory and combo headers. Drawn once, here, so every sticker
+ * is the same star.
+ */
+export const BURST_PATH = Array.from({ length: 32 }, (_, i) => {
+  const r = i % 2 ? 46 : 60;
+  const a = (Math.PI * i) / 16;
+  return `${i ? 'L' : 'M'}${(60 + r * Math.sin(a)).toFixed(1)} ${(60 - r * Math.cos(a)).toFixed(1)}`;
+}).join(' ') + ' Z';

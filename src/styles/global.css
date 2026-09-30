@@ -1730,3 +1730,73 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   }
   body::after { content: attr(data-printed); display: block; margin: 14pt 0 0; font-size: 9pt; color: #444; }
 }
+
+/* ══ The directories' promo trim (2026-09-30) ══
+   Ilia asked for the combo page's fast-food feel on /scholarships and
+   /programs; the hubs share the same header, so they carry it too and every
+   directory still reads the same way. What changes is the frame, not the
+   list: the heading becomes a menu board (ink panel, mustard kicker, a price
+   burst that makes a promise rather than a count), the run headings get their
+   count as a sticker, and the Show more button speaks the display face. Rows,
+   their order, stripes and the Save and Apply cells are untouched.
+   Mustard (#FFC700) is only ever a sticker or the kicker, never text on white. */
+.sabl-title-row {
+  position: relative; overflow: hidden;
+  background: var(--text-primary); color: #fff;
+  border-radius: 30px; padding: 34px 44px 32px;
+}
+.sabl-title-row > div:first-child { padding-right: 150px; }
+.sabl-kicker {
+  margin: 0 0 12px; font: 800 15px/1 var(--font-display);
+  letter-spacing: 0.14em; text-transform: uppercase; color: #FFC700;
+}
+.sabl-title-row .sabl-h1 {
+  color: #fff; font-weight: 800; text-transform: uppercase;
+  font-size: clamp(44px, 4.8vw, 68px); line-height: 0.9;
+}
+/* The board's edge now does the job the toolbar's 2px rule did, and the two
+   stacked read as a double line. */
+.sabl-title-row + .sabl-toolbar { border-top: 0; }
+.sabl-title-row .sabl-desc { color: rgba(255, 255, 255, 0.8); }
+.sabl-promo {
+  position: absolute; top: 22px; right: 30px; width: 124px; height: 124px;
+  display: grid; place-items: center; transform: rotate(12deg);
+}
+.sabl-promo svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #FFC700; }
+.sabl-promo span {
+  position: relative; text-align: center; color: var(--text-primary);
+  font: 800 19px/0.95 var(--font-display); text-transform: uppercase;
+}
+/* The run heading's count, as the sticker the combo trays wear. */
+.sabl-group { border-bottom-width: 3px; }
+.sabl-group-name { align-items: center; }
+.sabl-group-count {
+  display: inline-grid; place-items: center; box-sizing: border-box;
+  min-width: 42px; height: 42px; padding: 0 10px; border-radius: 999px;
+  background: var(--text-primary); color: #FFC700;
+  font: 800 21px/1 var(--font-display); transform: rotate(-6deg);
+}
+.sabl-more-btn {
+  font: 800 21px/1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
+  min-height: 52px; border-width: 0;
+}
+.sabl-more-btn:hover { background: var(--brand); color: var(--text-primary); }
+@media (max-width: 900px) {
+  /* Kept tight: the first listing on a phone was fought up to 330px of 844
+     (critique 2026-09-29), and the board may only cost it a little. */
+  .sabl-title-row { border-radius: 22px; padding: 16px 18px 16px; gap: 0; }
+  /* No room for the burst beside a phone heading: making room for it put
+     "ALL SCHOLARSHIPS" on two lines and the first listing 94px lower. */
+  .sabl-title-row > div:first-child { padding-right: 0; }
+  .sabl-promo { display: none; }
+  .sabl-kicker { font-size: 12px; margin-bottom: 8px; }
+  .sabl-title-row .sabl-h1 { font-size: 36px; }
+  .sabl-toolbar { margin-top: 14px; }
+  .sabl-group-count { min-width: 36px; height: 36px; font-size: 18px; }
+}
+@media print {
+  .sabl-title-row { background: none; color: inherit; padding: 0; border-radius: 0; }
+  .sabl-title-row .sabl-h1, .sabl-title-row .sabl-desc { color: #141915; }
+  .sabl-promo, .sabl-kicker { display: none; }
+  .sabl-group-count { background: none; color: inherit; transform: none; }
+}

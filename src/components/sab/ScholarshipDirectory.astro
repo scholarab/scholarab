@@ -10,7 +10,7 @@ import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
-import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
+import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE, BURST_PATH } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
 
@@ -19,6 +19,8 @@ interface Props {
   /** Facet hubs supply their own heading and standfirst; /scholarships keeps these defaults. */
   h1?: string;
   intro?: string;
+  /** The line over the heading, in the promo header's mustard. */
+  kicker?: string;
   /**
    * Hubs only (Ilia, 2026-09-15). SCOPE on a hub was eighteen chips of
    * navigation dressed as a filter: the reader had already chosen Calgary in
@@ -51,6 +53,7 @@ const {
   items,
   h1 = 'All scholarships',
   intro = 'Scholarships for Alberta students. Check eligibility and deadlines.',
+  kicker = 'Now serving all of Alberta',
   allItems = items,
   hideCategories = false,
   hideScopes = false,
@@ -168,10 +171,18 @@ const openNow = openNowCount(initial);
   <div class="sabl-head">
   <div class="sabl-title-row">
     <div>
+      <p class="sabl-kicker">{kicker}</p>
       <h1 class="sabl-h1">{h1}</h1>
       <p class="sabl-desc">{intro}</p>
       {/* The quiz was reachable only from a zero-results state (critique
           2026-09-23); a first-time applicant facing 1,500 rows is who it is for. */}
+    </div>
+    {/* The promo sticker (Ilia, 2026-09-30: the directories get the combo
+        page's fast-food treatment). A promise, not a figure: the count
+        figures left this header on purpose (36c0f2a). */}
+    <div class="sabl-promo" aria-hidden="true">
+      <svg viewBox="0 0 120 120"><path d={BURST_PATH} /></svg>
+      <span>Free<br />No sign-up</span>
     </div>
   </div>
 

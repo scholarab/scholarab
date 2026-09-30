@@ -1292,3 +1292,20 @@ Five candidates, none restored: add-back fraction 0/5. No speedup is claimed. Wo
 Verification: `npm run ci` passed with 1,143 unit tests, including 11 new combo tests; the browser suite passed 141 with 19 expected skips. On the built site, the page rendered on desktop and at 375px with no horizontal scroll and no console errors, "Save all 5" put all five awards on /saved, and the Medicine Hat hub footer links to the page. The sitemap lists the page. No catalogue data, quiz behaviour, privacy or consent handling changed.
 
 Follow-up, same day: the page was restyled as a fast-food promotion at the user's request ("more fun and playful"), and combos joined the header's Explore menu. Research: Refero styles for Lamanna (primary: condensed display type, numbered specials, pill actions), Yellowbird (3px ink outlines, 30px trays, no shadows) and Gumroad (white canvas, black primary button). Kept the site's fonts, white page, mint brand colour and the directory's Save, Apply and date cells; mustard is limited to stickers. Removed: the directory row grid on this page, replaced by menu lines (name, leader dots, price), so no new component is shared with the directories. The Explore link is generated from `comboCities`, so it cannot point at a page the build skipped. One repair: on a 375px screen the price squeezed long award names to four words a line; the name now takes its own line there. `npm run ci` passed 1,143 tests and the browser suite 141 with 19 expected skips, with the Explore menu assertion updated for the new link.
+
+## Directory promo trim, September 30, 2026
+
+Outcome: /scholarships, /programs and their hubs carry the combo page's fast-food feel, as the user asked ("same what you did with combos, but avoid AI slop"), without changing what a student reads in a row or how the filters work. The hubs share the header markup and the "every directory page reads the same way" rule, so they change with the two indexes.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| Redesigning the rows (menu lines, trays) | Not done. Row order, stripes, Save and Apply are pinned by reader feedback and the browser suite; the trim stays in the frame: header board, sticker counts on run headings, display-face Show more. |
+| A figure in the burst sticker | Not added. The header's count figures were removed on purpose (36c0f2a); the burst carries a promise instead ("Free, no sign-up"). |
+| An ink outline on the filter panel | Tried, then removed: with the board above it, a boxed panel read as one card too many (the anti-slop "cards everywhere" tell). The tinted panel stays. |
+| The toolbar's 2px rule under the new board | Removed; board edge plus rule read as a double line. |
+| The burst on phones | Removed at 900px and below. With room made for it, "ALL SCHOLARSHIPS" wrapped and the first listing sat at 424px. |
+| A second copy of the burst shape | Removed: `BURST_PATH` in `lib/icons.ts` is shared by the combo page and both directories. |
+
+Six candidates, one restored behaviour (the filter panel outline was added and taken back): add-back fraction 1/6.
+
+Measured on the built site at 390x844, first listing top: /scholarships 330px before, 378px after; /programs 330px before, 378px after. That 48px is the board's cost on a phone, reduced from 94px by the phone rules above. Not a speedup; no performance claim. `npm run ci` passed 1,143 tests and the browser suite 141 with 19 expected skips, including the check that every hub puts its toolbar at the same height.

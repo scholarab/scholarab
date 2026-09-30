@@ -9,7 +9,7 @@ import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils.ts';
 import { PROGRAM_FACETS, PROGRAM_FORMATS, type Facet } from '../../lib/facets.ts';
-import { ARROW_REF, BOOKMARK_REF, ICON_SPRITE } from '../../lib/icons.ts';
+import { ARROW_REF, BOOKMARK_REF, ICON_SPRITE, BURST_PATH } from '../../lib/icons.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
 import { FORMAT_TERMS, GLOSSARY } from '../../lib/glossary.ts';
 
@@ -20,6 +20,8 @@ interface Props {
   /** Facet hubs supply their own heading and standfirst; /programs keeps these defaults. */
   h1?: string;
   intro?: string;
+  /** The line over the heading, in the promo header's mustard. */
+  kicker?: string;
   /** Set on a field hub: the FIELD row turns into navigation rather than a
       filter, since filtering a hub by any other field can only empty it. */
   currentField?: string | null;
@@ -35,6 +37,7 @@ const {
   browseFacets,
   h1 = 'All programs',
   intro = 'Programs for Alberta students, from competitions to research placements.',
+  kicker = 'Now serving all of Alberta',
   currentField = null,
   currentFormat = null,
   railFilters = false,
@@ -87,8 +90,16 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
   <div class="sabl-head">
   <div class="sabl-title-row">
     <div>
+      <p class="sabl-kicker">{kicker}</p>
       <h1 class="sabl-h1">{h1}</h1>
       <p class="sabl-desc">{intro}</p>
+    </div>
+    {/* The promo sticker (Ilia, 2026-09-30: the directories get the combo
+        page's fast-food treatment). A promise, not a figure: the count
+        figures left this header on purpose (36c0f2a). */}
+    <div class="sabl-promo" aria-hidden="true">
+      <svg viewBox="0 0 120 120"><path d={BURST_PATH} /></svg>
+      <span>Free<br />No sign-up</span>
     </div>
   </div>
 
