@@ -22,6 +22,9 @@ vi.mock('../../data/runtime-catalogue.json', () => ({ default: {
     { id: 1, title: 'Example award', active: true, deadline: '2099-10-01' },
     { id: 3, title: 'Retired', active: false, deadline: '2099-10-01' },
     { id: 4, title: 'Expired', active: true, deadline: '2000-01-01' },
+    // Relative to the run date; a day either way still lands in the same case.
+    { id: 6, title: 'Closes in two days', active: true, deadline: new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10) },
+    { id: 7, title: 'Closes in ten days', active: true, deadline: new Date(Date.now() + 10 * 86400000).toISOString().slice(0, 10) },
   ],
   programs: [
     { id: 2, name: 'Example research', deadline: '2099-10-01' },
@@ -145,4 +148,17 @@ it('enforces the sender IP limit', async () => {
   state.limited = true;
   expect((await call(valid)).status).toBe(429);
   expect(state.send).not.toHaveBeenCalled();
+});
+it('refuses a sign-up no reminder can reach in time', async () => {
+  const res = await call({ ...valid, itemId: 6, days: undefined });
+  expect(res.status).toBe(400);
+  expect((await res.json()).error).toMatch(/too soon/);
+  expect(state.send).not.toHaveBeenCalled();
+});
+it('stores only the milestones still ahead', async () => {
+  const res = await call({ ...valid, itemId: 7, days: undefined });
+  expect(res.status).toBe(200);
+  const rows = await pg.query<Record<string, unknown>>('SELECT cadence FROM subscribers');
+  expect(rows.rows[0]!.cadence).toBe('3');
+  expect(state.send.mock.calls[0]![3]).toBe('3');
 });

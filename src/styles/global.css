@@ -853,6 +853,8 @@ html:not(.js) .sabl-views { display: none; }
    number is how many filters are on, so a deep link like ?category=Arts
    still says it is filtered while folded. Without JS the fold never closes. */
 .sabl-filters-btn { display: none; }
+.sabl-rail-sort { display: none; }
+@keyframes sabl-sheet-up { from { transform: translateY(24px); opacity: 0.4; } }
 @media (max-width: 900px) {
   html.js .sabl-lean { display: none; }
   html.js .sabl-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 10px; }
@@ -871,10 +873,31 @@ html:not(.js) .sabl-views { display: none; }
     background: var(--green); color: var(--bg-page); font-size: 11.5px;
   }
   .sabl-filters-n[hidden] { display: none; }
-  html.js:not([data-filters]) .sabl-toolbar .sabl-sort,
-  html.js:not([data-filters]) .sabl-toolbar .sabl-views,
+  /* The sort lives in the sheet on a phone, and the view switcher is off:
+     Columns and Gallery are wide-screen views, and Layout.astro keeps a
+     stored Grid to the wide screen too, so a phone reads the one list. */
+  html.js .sabl-toolbar :is(.sabl-sort, .sabl-views) { display: none; }
   html.js:not([data-filters]) .sabl-rail { display: none; }
-  html.js .sabl-toolbar .sabl-views { grid-column: 1 / -1; justify-self: start; margin-top: 6px; }
+  html.js .sabl-rail-sort { display: flex; }
+  /* A sheet over the page, not a block pushing the list 1,000px down. It
+     rolls up from the bottom edge on its own surface, over a scrim, so it
+     reads as the list's controls and not the list (reader feedback and
+     critique, 2026-09-29). Escape, the scrim or "Show N results" closes it. */
+  html.js[data-filters] .sabl-rail {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+    max-height: min(82vh, 680px); max-height: min(82svh, 680px);
+    overflow-y: auto; overscroll-behavior: contain;
+    margin: 0; padding: 22px 20px 0; border-radius: 18px 18px 0 0;
+    background-color: var(--bg-panel);
+    box-shadow: 0 -14px 40px -12px rgba(20,25,21,0.35);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html.js[data-filters] .sabl-rail { animation: sabl-sheet-up 0.26s cubic-bezier(0.16, 1, 0.3, 1); }
+  }
+  html.js[data-filters] .sabl-page::after {
+    content: ''; position: fixed; inset: 0; z-index: 69; background: rgba(20,25,21,0.42);
+  }
+  html.js[data-filters] { overflow: hidden; }
   .sabl-view { width: 48px; height: 38px; }
   /* Full width and a 44px target inside the phone panel. */
   html.js .sabl-scope-select { width: 100%; min-height: 44px; border-radius: 12px; }
@@ -884,7 +907,7 @@ html:not(.js) .sabl-views { display: none; }
   /* The panel's exit, pinned to the bottom of the screen while it is open. */
   html.js[data-filters] .sabl-filters-done {
     display: block; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 3;
-    width: 100%; min-height: 50px; margin: 18px 0 8px; border: 0; border-radius: 100px;
+    width: 100%; min-height: 50px; margin: 18px 0 12px; border: 0; border-radius: 100px;
     background: var(--text-primary); color: var(--paper); font: 700 15.5px var(--font-body); cursor: pointer;
     box-shadow: 0 8px 20px -8px rgba(20,25,21,0.45);
   }
@@ -1111,38 +1134,74 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-when.is-urgent::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--rust); margin-right: 7px; }
 .sabl-when.is-quiet { font-weight: 600; color: rgba(20, 25, 21, 0.62); }
 .sabl-when.is-quiet .sabl-when-sub { font-weight: 500; }
-/* A waiting state with a qualifier ("Opens later" + "date not posted, around
-   Sep 26") is wider than the 200px deadline column, and nowrap pushed it left
-   over the amount (Ilia, /saved, 2026-09-26). On the desktop row it stacks,
-   right-aligned and wrapping inside the column; dated rows keep one line. */
-@media (min-width: 900px) {
-  .sabl-card .sabl-row-when { max-width: 100%; min-width: 0; }
-  .sabl-card .sabl-when.is-quiet { flex-direction: column; align-items: flex-end; white-space: normal; text-align: right; max-width: 100%; }
-  .sabl-card .sabl-when.is-quiet .sabl-when-sub::before { content: none; }
-  /* The date is one of the two things a reader scans a row for, with the
-     money, and it was 14px beside a 26px amount (reader feedback,
-     2026-09-29). On a list row it is a figure in the amount's face now, the
-     countdown on its own line under it. The waiting states above stay a
-     note, the way "Amount varies" does. Rows only: the tile views and the
-     columns list size their own dates. */
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) {
-    flex-direction: column; align-items: flex-end; gap: 3px;
+/* ── The list row (critique 2026-09-29) ──
+   One row everywhere a listing is a row: the directories and their hubs,
+   /saved, and the same grammar on /deadlines and the home closing list. It
+   reads in the order a student decides: can I still make it (the date, a
+   figure down the left edge, like /deadlines), is it worth it (the money, on
+   the title's line), am I allowed (the line under the title). Before, the
+   date sat at the far right on a desktop and shrank to 14px on a phone, where
+   the audience is, so the reader's "due date and money first" held only on
+   the wide screen (reader feedback and critique, 2026-09-29).
+   Rows only: the tile, gallery and columns views keep their own layouts. */
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) {
+  position: relative;
+  grid-template-columns: 88px minmax(0, 1fr) 150px 148px;
+  grid-template-areas: "when main amount actions";
+  align-items: baseline;
+}
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-row-main { grid-area: main; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > :is(.sabl-amount, .sabl-card-top-left) { grid-area: amount; align-self: baseline; justify-self: end; margin: 0; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-row-when {
+  grid-area: when; align-self: baseline; justify-self: start;
+  flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; max-width: 100%;
+}
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-card-actions { grid-area: actions; align-self: baseline; justify-self: end; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when { flex-direction: column; align-items: flex-start; gap: 3px; white-space: normal; max-width: 100%; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when::before, .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when-sub::before { content: none; }
+/* Ink, like the amounts: a column of rust figures read as decoration. The
+   countdown under it carries the urgency, in rust, and the last two weeks
+   keep their dot, beside the words. */
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) [data-when-main] { font: 400 26px/1 var(--font-display); color: var(--text-primary); white-space: nowrap; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) .sabl-when-sub { font-size: 13px; white-space: nowrap; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-urgent .sabl-when-sub::before {
+  content: ''; display: inline-block; width: 7px; height: 7px; margin: 0 5px 1px 0;
+  border-radius: 50%; background: var(--rust);
+}
+/* The waiting states are words, not a date, so they stay a note (as
+   "Amount varies" does) and wrap inside the column. */
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-quiet [data-when-main] { font-size: 13.5px; line-height: 1.3; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-quiet .sabl-when-sub { font-size: 12.5px; line-height: 1.35; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-checked { white-space: normal; }
+/* The whole row opens the listing. The title's link is stretched over it;
+   Save and Apply sit above the stretch and keep their own targets. */
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-name::after { content: ''; position: absolute; inset: 0; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) :is(.sabl-save, .sabl-apply) { z-index: 1; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *):hover .sabl-name { color: var(--green); }
+/* A program's description is its detail page's first paragraph. On the row
+   it was two more lines of grey under two lines of facts, and the reason the
+   page read as busy with nothing leading (reader feedback, 2026-09-29). The
+   provider line takes the facts' style, so the row has one secondary voice. */
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-blurb[data-row-desc] { display: none; }
+.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-org { font-size: 13px; color: rgba(20, 25, 21, 0.76); }
+@media (max-width: 899px) {
+  /* The date keeps its column on a phone, the height it takes comes out of
+     the line it used to have under the amount. Money and the buttons share
+     the second line. */
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) {
+    grid-template-columns: 66px minmax(0, 1fr) auto;
+    grid-template-areas: "when main main" "when amount actions";
+    column-gap: 14px; row-gap: 8px; align-items: start;
   }
-  /* Ink, like the amounts: a column of rust figures read as decoration. The
-     countdown under it carries the urgency, in rust, and the last two weeks
-     keep their dot, moved from beside the date to beside the words. */
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) [data-when-main] {
-    font: 400 24px/1.1 var(--font-display); color: var(--text-primary);
-  }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) .sabl-when-sub {
-    font-size: 13px;
-  }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet)::before,
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) .sabl-when-sub::before { content: none; }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-urgent .sabl-when-sub::before {
-    content: ''; display: inline-block; width: 7px; height: 7px; margin: 0 6px 1px 0;
-    border-radius: 50%; background: var(--rust);
-  }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-row-when { align-self: start; padding-top: 2px; }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > :is(.sabl-amount, .sabl-card-top-left) { align-self: center; justify-self: start; text-align: left; }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-card-actions { align-self: center; margin: 0; }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) [data-when-main] { font-size: 24px; }
+  /* "213 days left" is wider than the column; the countdown wraps under
+     the date instead of running into the title. */
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) .sabl-when-sub { white-space: normal; line-height: 1.3; }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-quiet [data-when-main] { font-size: 13px; }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-quiet .sabl-when-sub { font-size: 12px; }
 }
 /* "Last checked Mar 2026", under the date, only on a row whose check is old
    enough to matter (isCheckStale in utils.ts). It was on every row, in full
@@ -1953,12 +2012,47 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    the fold (critique 2026-09-27). Nothing is removed; the quiz line runs on
    from the standfirst as one paragraph and the gaps between blocks
    tighten. Last in the file so it outranks the base rules it trims. */
+/* 2026-09-29: the first row still started at 475px of 844 (critique), two
+   listings on the first screen. The standfirst holds two lines (the full
+   text stays in the HTML, so a screen reader and a search engine read it
+   all), the
+   quiz line goes (the header's Explore and every empty state keep the quiz),
+   and so does the spring note: the list now opens on what is due within two
+   weeks, which answers "is there anything for me" better than a paragraph,
+   and the OPENS LATER run says the rest. */
 @media (max-width: 640px) {
-  .sabl-title-row > div:has(> .sabl-quiz-line) { font-size: 16px; line-height: 1.55; }
-  .sabl-title-row > div:has(> .sabl-quiz-line) > .sabl-h1 { margin-bottom: 12px; }
-  .sabl-title-row > div:has(> .sabl-quiz-line) > :is(.sabl-desc, .sabl-quiz-line) { display: inline; margin: 0; font-size: inherit; line-height: inherit; }
-  .sabl-title-row > div:has(> .sabl-quiz-line) > .sabl-quiz-line::before { content: ' '; }
-  .sabl-toolbar { margin-top: 16px; }
-  .sabl-later-note { margin: 0 0 4px; font-size: 14px; line-height: 1.5; }
+  .sabl-title-row > div > .sabl-h1 { margin-bottom: 10px; }
+  .sabl-title-row .sabl-desc {
+    margin: 0; font-size: 16px; line-height: 1.5;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+  }
+  .sabl-title-row .sabl-quiz-line, .sabl-later-note { display: none; }
+  .sabl-toolbar { margin-top: 14px; }
   .sabl-group-h:first-child > .sabl-group { margin-top: 4px; }
+}
+
+/* ── Print (critique 2026-09-29) ──
+   Counsellors print lists for their students. A printed hub came out as 24
+   of 161 rows under the site header, the Filters pill, "Got it" and every
+   Save and Apply, with no address to find a listing again. directory-client
+   puts every row of the current result on the page before printing, and the
+   layout stamps the date, because a printed deadline goes stale. At paper
+   width the phone row applies, which is the compact one. */
+@media print {
+  .sabh, .sabf-footer, #sab-consent, .sabt-strip, .sabl-toolbar, .sabl-rail, .sabl-card-actions,
+  .sabl-later-note, .sabl-quiz-line, .sabl-more, .sabl-group-toggle, .sabl-filters-done, [data-dir-preview],
+  .sabcal-jump, .sabcal-where, .sabl-crumbs, .sabd-remind { display: none !important; }
+  body { background: #fff; }
+  .sabl-railed { display: block !important; }
+  .sabl-card {
+    break-inside: avoid; background: none !important;
+    border-top: 0.5pt solid #b5b5b5 !important; margin: 0 !important; padding: 7pt 0 !important;
+  }
+  .sabl-group-h { break-after: avoid; }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) { grid-template-columns: 80px minmax(0, 1fr) auto; grid-template-areas: "when main amount"; }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-name::after, .sabl-name::after {
+    content: 'scholarab.ca' attr(href); position: static; display: block;
+    font: 400 8.5pt/1.4 var(--font-body); color: #444;
+  }
+  body::after { content: attr(data-printed); display: block; margin: 14pt 0 0; font-size: 9pt; color: #444; }
 }

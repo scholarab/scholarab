@@ -979,8 +979,13 @@ const carousels = [
   .sab-view-all:hover { color: #0A6B4D; }
 
   .sab-closing-table { border-top: 2px solid #141915; }
+  /* The directory row's order (global.css, critique 2026-09-29): the date
+     down the left edge as a figure, the money on the title's line. The date
+     was a 15px line at the far right, the smallest bold thing on a list
+     called "Closing this week". */
   .sab-closing-row {
-    display: grid; grid-template-columns: 1fr auto auto; gap: 28px; align-items: center;
+    display: grid; grid-template-columns: 104px minmax(0, 1fr) auto; grid-template-areas: "when main amount";
+    gap: 28px; align-items: baseline;
     padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
     cursor: pointer; color: inherit; text-decoration: none;
   }
@@ -993,9 +998,17 @@ const carousels = [
        one line cut "Indigenous students starting a STEM progra..." on a phone. */
   }
   .sab-row-amount { font-family: var(--font-display); font-size: 28px; text-align: right; }
-  /* The directory's deadline line (.sabl-when in global.css), a size up. */
-  .sab-row-when { justify-self: end; }
-  .sab-row-when .sabl-when { font-size: 15px; }
+  .sab-closing-row > .sab-row-main { grid-area: main; min-width: 0; }
+  .sab-closing-row > .sab-row-amount { grid-area: amount; }
+  .sab-closing-row > .sab-row-when { grid-area: when; justify-self: start; }
+  .sab-row-when .sabl-when { flex-direction: column; align-items: flex-start; gap: 3px; white-space: normal; }
+  .sab-row-when .sabl-when::before, .sab-row-when .sabl-when-sub::before { content: none; }
+  .sab-row-when [data-when-main] { font: 400 28px/1 var(--font-display); color: var(--text-primary); white-space: nowrap; }
+  .sab-row-when .sabl-when-sub { font-size: 13.5px; line-height: 1.3; }
+  .sab-row-when .sabl-when.is-urgent .sabl-when-sub::before {
+    content: ''; display: inline-block; width: 7px; height: 7px; margin: 0 5px 1px 0;
+    border-radius: 50%; background: var(--rust);
+  }
 
   /* ── Categories ── */
   .sab-types { padding-top: 56px; padding-bottom: 96px; }
@@ -1063,16 +1076,18 @@ const carousels = [
     .sab-biggest { padding-top: 40px; }
     .sab-closing-table { order: 2; margin-top: 12px; }
     .sab-closing .sab-view-all { order: 3; align-self: flex-start; margin-top: 20px; }
-    .sab-closing-row { grid-template-columns: 1fr auto; gap: 4px 14px; padding: 16px 2px; min-height: 44px; }
+    /* The money goes under the title on a phone: beside it, a range like
+       "$2,000 to $7,000" left the name about 125px. */
+    .sab-closing-row { grid-template-columns: 66px minmax(0, 1fr); grid-template-areas: "when main" "when amount"; gap: 6px 14px; padding: 16px 2px; min-height: 44px; align-items: start; }
     .sab-types { padding-top: 32px; padding-bottom: 48px; }
     .sab-type-row { grid-template-columns: 1fr auto; gap: 2px 14px; padding: 14px 2px; }
     .sab-type-next { grid-column: 1 / -1; text-align: left; font-size: 14px; }
-    .sab-row-main { grid-column: 1; min-width: 0; }
+    .sab-row-main { min-width: 0; }
     .sab-row-name { font-size: 16px; line-height: 1.3; }
     .sab-row-blurb { font-size: 13px; margin-top: 4px; }
-    .sab-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; white-space: nowrap; }
-    .sab-row-when { grid-column: 1 / -1; justify-self: start; margin-top: 2px; }
-    .sab-row-when .sabl-when { font-size: 14px; }
+    .sab-row-amount { font-size: 22px; text-align: left; white-space: nowrap; }
+    .sab-row-when [data-when-main] { font-size: 24px; }
+    .sab-row-when .sabl-when-sub { font-size: 13px; }
 
   }
 </style>

@@ -1020,3 +1020,35 @@ Not yet checked on production.
 Repair attempts against these problems: the "Checked" line was made louder on 2026-09-28, which this reverses; none before for the alignment or the row separation.
 
 Add-back fraction: 2 of 6 removals (the "Checked" line, on stale rows only; the privacy link, inside the disclosure).
+
+## One row order, the reminder promise, the phone head and print, 2026-09-29
+
+The outcome: a Grade 12 student on a phone reads each listing in the order they decide (can I still make it, is it worth it, am I allowed), sees what is due in the next two weeks before anything else, is never promised a reminder that cannot arrive, and a counsellor can print a list. The critique run on production after the row pass above (27/40) found the deadline fix held only on desktop (14px on a phone, under a 26px amount), program rows still carried 8 text styles and a 2-line description, the first phone row started at 475px of 844, the reminder form promised "30, 14 and 3 days" on an award closing tomorrow while `send-alerts.ts` mails only at exactly those milestones, and there was no print stylesheet (a printed hub was 24 of 161 rows with site chrome and no addresses).
+
+| Candidate | Outcome |
+| --- | --- |
+| The deadline at the far right of a desktop row, and under the amount at 14px on a phone | Replaced. One row order on every listing row: the date as a figure down the left edge (26px desktop, 24px phone, ink; the countdown under it in rust), the money on the title's line. The same order on the home closing and biggest-awards lists, and /deadlines' dates are ink figures now. |
+| A program's description on its row | Removed from list rows (kept in the DOM for the tile views and the preview pane, which show it). The provider line takes the facts' style. |
+| The standfirst in full, the quiz line and the spring note on phones | The standfirst clamps to two lines (full text still in the HTML). The quiz line and the note are off on phones: the header's Explore and every empty state keep the quiz, and the new DUE WITHIN 2 WEEKS run answers "is there anything for me" better than a paragraph. Desktop unchanged. |
+| The phone filter panel inline above the list, with sort and view buttons in the toolbar | Replaced by a bottom sheet over a scrim holding the sort too (a second picker, kept in step by the existing select painter). Escape, the scrim or "Show N results" closes it; focus goes in and comes back. The view switcher is off on phones and Layout.astro applies a stored tile view only on a wide screen, so a phone cannot be left in a view it has no button to leave. |
+| "Open now" as one run | Split: open and closing within 14 days is its own run, DUE WITHIN 2 WEEKS, ranked first within open under every sort, so the group key stays the sort's primary key and no run appears twice. Calgary's OPEN NOW had started 213 days out. |
+| The reminder form whenever a day was left | Kept, but it names only the milestones still ahead ("3 days" at 10 days out), recomputed in the visitor's browser, and gives way to "Closes tomorrow. Too soon for an email reminder." when none are. `/api/alert` stores only the milestones still ahead and refuses a sign-up with none, so the confirmation email cannot promise one either. The disclosure is named for what it holds, "What we keep", and is 44px tall on a phone. |
+| Printing | Added: `@media print` hides the chrome and the buttons, prints each row's address, and the layout stamps the print date. The directories reveal every row of the current result before printing, /deadlines opens every folded month, and both restore afterwards. |
+| An icon-only Save (the critique's proposal) | Not used. The word was added on 2026-09-26 because the bare bookmark read as decoration (about 5 saves per 100 views). |
+| Apply moved off the row onto the detail page (the critique's proposal) | Not used. It would change the apply_click metric's path for a layout gain; the whole row now opens the listing instead, with Save and Apply above the stretched link. |
+
+Before is production (f3aeefe); after is a local build of this change. Chromium, 390x844 (mobile emulation) and 1440x900, first 24 rows:
+- First row's top on a phone: /scholarships and /scholarships/calgary 475 to 328px, /programs 383 to 328px. Rows wholly on the first phone screen of /scholarships: 2 to 3.
+- Row date size: 14 to 24px on a phone, 24 to 26px on desktop.
+- Average row height on a phone: /programs 202.4 to 158.3px (-22%), /scholarships 178.4 to 166.4px (-7%). Page height 7,523 to 6,483px and 7,492 to 7,131px.
+- Desktop: /programs rows 177.1 to 137.5px (-22%); /scholarships rows grew 100.4 to 106.3px (the countdown sits under the date now).
+- Print emulation of /scholarships/calgary: 24 to 136 of 161 rows (the 25 left out are in the runs shut by default, whose headings print with their counts), each with its address.
+- Reminder: at 1 day out the form is replaced by the closing line; at 10 days out it says "3 days". `/api/alert` unit tests cover the refusal and the stored cadence.
+- The detector (`impeccable detect`) on the changed files reports only the selected filter chip's stripe, judged a false positive in the critique.
+- `npm run ci` passes (1,083 tests) and Playwright passes on the changed specs.
+
+Not yet checked on production.
+
+Repair attempts against these problems: the phone date was deliberately left small in the row pass above ("adds a line to every phone row"); the date column takes no extra line, which is what made it possible. None before for the reminder promise, the phone head at this size, or print.
+
+Add-back fraction: 1 of 4 removals (the program description, kept in the DOM for the tile views and the preview pane).

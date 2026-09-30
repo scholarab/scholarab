@@ -223,6 +223,14 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
       nobody has to scroll the row on a desktop. See the modifier in global.css. */}
   <aside class="sabl-rail" id="dir-filters" aria-label="Filters">
   <div class="sabl-filters sabl-filters-dense">
+    {/* Phones only: the sheet holds the sort too, so one surface shapes the
+        list (critique 2026-09-29). directory-client keeps both pickers in step. */}
+    <div class="sabl-filter-row sabl-rail-sort">
+      <span class="sabl-row-label">Sort</span>
+      <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">
+        {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
+      </select>
+    </div>
     {!hideCategories && (
       <div class="sabl-filter-row">
         <span class="sabl-row-label">Type</span>

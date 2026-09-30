@@ -9,13 +9,15 @@
 // - A "Checked against the provider's page in <month>" line under the CTA
 //   (removed site-wide 2026-07-12, back 2026-09-22 after the design critique:
 //   trust is the product, and the month is per listing, not a promised cycle).
-// - Reminder copy reflects the real send schedule (30/14/3 days out).
+// - Reminder copy names only the reminders still ahead (of 30/14/3 days out),
+//   and gives way to a plain closing line once none can arrive.
 // - Closed and opening-soon states added (the design only shows open listings).
 
 import { emailOff } from '../../lib/email-off';
 import { BOOKMARK } from '../../lib/icons';
 import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
 import { STATUS_WORDS } from '../../lib/status';
+import { milestonesAhead, milestonePhrase, closesPhrase } from '../../lib/alerts';
 
 interface Fact {
   label: string;
@@ -86,6 +88,12 @@ const far = status === 'active' && typeof daysLeft === 'number' && daysLeft > SO
 
 // Listing prose can carry a provider's own address ("apply to x@y.ca"), so it
 // is bracketed for Cloudflare's obfuscator. See src/lib/email-off.ts.
+// Recomputed in the visitor's browser on load (the page is prerendered).
+const remindAhead = typeof daysLeft === 'number' ? milestonesAhead(daysLeft) : [];
+const remindLate = canRemind && remindAhead.length === 0;
+const lateWhen = remindLate && deadlineIso ? closesPhrase(daysLeft ?? 0, deadlineIso) : '';
+const lateApply = ctaLabel === 'Apply';
+
 const aboutHtml = about ? emailOff(about) : '';
 const notesHtml = notes ? emailOff(notes) : '';
 
@@ -307,9 +315,16 @@ const chip =
     )}
 
     {canRemind && (
-      <div class="sabd-remind">
+      <div class="sabd-remind" data-remind data-deadline={deadlineIso ?? undefined}>
+      {/* Once no milestone is ahead, the form promised mail the mailer never
+          sends (critique 2026-09-29). The late line replaces it instead. */}
+      <div data-remind-late hidden={!remindLate}>
+        <h2 class="sabd-remind-label">Closes <span data-remind-late-when>{lateWhen}</span></h2>
+        <p class="sabd-remind-sub sabd-remind-late">Too soon for an email reminder.{lateApply && ' Apply today.'}</p>
+      </div>
+      <div data-remind-open hidden={remindLate}>
         <h2 class="sabd-remind-label">Email me before it closes</h2>
-        <div class="sabd-remind-sub">We send one link to confirm, then a reminder 30, 14 and 3 days before the deadline.</div>
+        <div class="sabd-remind-sub">We send one link to confirm, then a reminder <span data-remind-when>{milestonePhrase(remindAhead.length ? remindAhead : [30, 14, 3])}</span> before the deadline.</div>
         <form data-sabd-alert-form data-item-type={itemType} data-item-id={itemId} class="sabd-remind-form" novalidate>
           <label for={`sabd-remind-${itemType}-${itemId}`} class="sr-only">Your email for a deadline reminder</label>
           <input id={`sabd-remind-${itemType}-${itemId}`} type="email" name="email" required autocomplete="email" placeholder="your@email.com" class="sabd-remind-input" aria-describedby={`sabd-remind-msg-${itemType}-${itemId}`} />
@@ -326,7 +341,7 @@ const chip =
             are the privacy page's own facts about reminders; the page is one
             link further for anyone who wants all of it. */}
         <details class="sabd-remind-how">
-          <summary>How this works<svg class="sabd-remind-caret" viewBox="0 0 12 8" width="10" height="7" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <summary>What we keep<svg class="sabd-remind-caret" viewBox="0 0 12 8" width="10" height="7" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <p>
             Nothing else is sent until you press the button in the confirmation
             email. If you never do, the address is deleted within 30 days.
@@ -335,6 +350,7 @@ const chip =
             <a href="/privacy/">The full privacy policy</a>.
           </p>
         </details>
+      </div>
       </div>
     )}
   </div>
@@ -370,6 +386,7 @@ const chip =
   .sabd-remind-caret { flex: none; transition: transform 0.18s ease; }
   .sabd-remind-how[open] .sabd-remind-caret { transform: rotate(180deg); }
   .sabd-remind-how p { margin: 4px 0 0; }
+  .sabd-remind-late { margin-bottom: 0; }
   .sabd-remind-how a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) { .sabd-remind-caret { transition: none; } }
   .sabd-guide-label { display: block; font-size: 13.5px; font-weight: 600; color: rgba(20, 25, 21, 0.72); }
@@ -626,6 +643,7 @@ const chip =
     /* Safari zooms the page into any field under 16px when it takes focus,
        and leaves it zoomed (critique 2026-09-27). */
     .sabd-remind-input { font-size: 16px; }
+    .sabd-remind-how summary { min-height: 44px; }
   }
   /* The note sat inside three paddings (the column, the eligibility box and
      the paper's margin) and got a 210px measure on a 375px phone, about 25
@@ -647,6 +665,23 @@ const chip =
   import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
   import { STATUS_WORDS } from '../../lib/status';
   import { placeInList, readListContext } from '../../lib/list-context.ts';
+  import { milestonesAhead, milestonePhrase, closesPhrase } from '../../lib/alerts';
+
+  /** The reminder block from today's date, not the build's. */
+  function refreshRemind() {
+    const box = document.querySelector<HTMLElement>('[data-remind]');
+    const deadline = box?.dataset.deadline;
+    if (!box || !deadline) return;
+    const days = Math.round((new Date(deadline + 'T00:00:00').getTime() - todayDate().getTime()) / 86400000);
+    box.hidden = days < 0;
+    const ahead = milestonesAhead(days);
+    const late = box.querySelector<HTMLElement>('[data-remind-late]')!;
+    const open = box.querySelector<HTMLElement>('[data-remind-open]')!;
+    late.hidden = ahead.length > 0;
+    open.hidden = ahead.length === 0;
+    if (ahead.length) box.querySelector('[data-remind-when]')!.textContent = milestonePhrase(ahead);
+    else box.querySelector('[data-remind-late-when]')!.textContent = closesPhrase(days, deadline);
+  }
 
   /** Point the ‹ › arrows at the list the reader came from, or leave them off. */
   function restoreSwitcher() {
@@ -837,6 +872,7 @@ const chip =
   // astro:page-load fires on first load and after every view-transition swap.
   document.addEventListener('astro:page-load', () => {
     refreshStatusChip();
+    refreshRemind();
     restoreSwitcher();
     const view = document.querySelector('[data-detail-view]');
     // Dwell-gated: an instant back/misclick shouldn't count as a view

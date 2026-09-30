@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   ALERT_MILESTONES, isMilestone, parseCadence, formatCadence, cadenceFromInput,
+  milestonesAhead, milestonePhrase,
 } from './alerts'
 
 describe('isMilestone', () => {
@@ -86,5 +87,26 @@ describe('ALERT_MILESTONES', () => {
 
   it('matches the default the migration writes', () => {
     expect(formatCadence([...ALERT_MILESTONES])).toBe('30,14,3')
+  })
+})
+
+describe('milestonesAhead', () => {
+  it('keeps only the milestones strictly before today', () => {
+    expect(milestonesAhead(45)).toEqual([30, 14, 3])
+    expect(milestonesAhead(30)).toEqual([14, 3])
+    expect(milestonesAhead(10)).toEqual([3])
+  })
+  it('is empty when no reminder can arrive', () => {
+    expect(milestonesAhead(3)).toEqual([])
+    expect(milestonesAhead(1)).toEqual([])
+    expect(milestonesAhead(0)).toEqual([])
+  })
+})
+
+describe('milestonePhrase', () => {
+  it('reads as a list', () => {
+    expect(milestonePhrase([30, 14, 3])).toBe('30, 14 and 3 days')
+    expect(milestonePhrase([14, 3])).toBe('14 and 3 days')
+    expect(milestonePhrase([3])).toBe('3 days')
   })
 })

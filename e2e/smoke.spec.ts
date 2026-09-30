@@ -472,18 +472,73 @@ test('rows: Save and Apply on one line, underline under the word, stripes altern
   }
 });
 
-// "How this works" under the reminder form opens where it is. It was a link to
+// A row reads in the order a student decides (critique 2026-09-29): the
+// date, a figure down the left edge on every width; then the title with the
+// money on its line. The date was 14px on a phone, under the amount.
+test('rows lead with a date figure left of the title, money on the title line', async ({ page }, testInfo) => {
+  for (const path of ['/scholarships/', '/programs/', '/']) {
+    await page.goto(path);
+    const rows = await page.locator(path === '/' ? '#closing .sab-closing-row' : '[data-dir-card]:visible').evaluateAll(cards => cards.slice(0, 6).map(c => {
+      const date = c.querySelector('[data-when-main]')!;
+      const title = c.querySelector('.sabl-name, .sab-row-name')!.getBoundingClientRect();
+      const money = c.querySelector('.sabl-amount, .sabl-card-top-left, .sab-row-amount')!.getBoundingClientRect();
+      const d = date.getBoundingClientRect();
+      return { dateRight: d.right, titleLeft: title.left, size: parseFloat(getComputedStyle(date).fontSize), quiet: !!date.closest('.is-quiet'), moneyTop: money.top, titleTop: title.top, moneyH: money.height };
+    }));
+    expect(rows.length).toBeGreaterThan(2);
+    for (const r of rows) {
+      expect(r.dateRight).toBeLessThanOrEqual(r.titleLeft);
+      if (!r.quiet) expect(r.size).toBeGreaterThanOrEqual(24);
+      // Desktop directory rows carry the money on the title's line.
+      if (testInfo.project.name !== 'mobile' && path !== '/' && r.moneyH > 0) expect(Math.abs(r.moneyTop - r.titleTop)).toBeLessThan(14);
+    }
+  }
+});
+
+// The disclosure under the reminder form opens where it is. It was a link to
 // /privacy/, which took a reader off the listing halfway through signing up.
-test('How this works opens beside the reminder form, on the same page', async ({ page }) => {
+// A listing a week or more out, so the form (not the late line) is showing.
+async function listingDaysOut(page: import('@playwright/test').Page, min: number, max: number) {
   await page.goto('/deadlines/');
-  const listing = await page.locator('details.sabcal-month .sabcal-row[data-open] .sabcal-name a').first().getAttribute('href');
-  await page.goto(listing!);
+  return page.evaluate(({ lo, hi }) => {
+    const today = new Date(new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Edmonton' }).format(new Date()) + 'T00:00:00').getTime();
+    for (const li of document.querySelectorAll<HTMLElement>('.sabcal-row[data-open][data-deadline]')) {
+      const days = Math.round((new Date(li.dataset.deadline + 'T00:00:00').getTime() - today) / 86400000);
+      if (days >= lo && days <= hi) return { href: li.querySelector('.sabcal-name a')!.getAttribute('href')!, deadline: li.dataset.deadline! };
+    }
+    return null;
+  }, { lo: min, hi: max });
+}
+
+test('What we keep opens beside the reminder form, on the same page', async ({ page }) => {
+  const listing = await listingDaysOut(page, 7, 400);
+  expect(listing).not.toBeNull();
+  await page.goto(listing!.href);
   const how = page.locator('.sabd-remind-how');
   await expect(how).not.toHaveAttribute('open', '');
   await how.locator('summary').click();
   await expect(how).toHaveAttribute('open', '');
   await expect(how.locator('a[href="/privacy/"]')).toBeVisible();
-  expect(new URL(page.url()).pathname).toBe(listing);
+  expect(new URL(page.url()).pathname).toBe(listing!.href);
   const tall = await how.locator('summary').evaluate(s => s.getBoundingClientRect().height);
   expect(tall).toBeGreaterThanOrEqual(24);
+});
+
+// The mailer sends at exactly 30, 14 and 3 days out. The form promised all
+// three on an award closing tomorrow (critique 2026-09-29), so it names only
+// the reminders ahead, and gives way to a closing line when none are.
+test('the reminder form promises only reminders that can still arrive', async ({ page }) => {
+  const listing = await listingDaysOut(page, 7, 400);
+  expect(listing).not.toBeNull();
+  const at = (daysBefore: number) => new Date(new Date(listing!.deadline + 'T12:00:00-06:00').getTime() - daysBefore * 86400000);
+
+  await page.clock.setFixedTime(at(10));
+  await page.goto(listing!.href);
+  await expect(page.locator('[data-remind-when]')).toHaveText('3 days');
+  await expect(page.locator('[data-remind-late]')).toBeHidden();
+
+  await page.clock.setFixedTime(at(1));
+  await page.goto(listing!.href);
+  await expect(page.locator('[data-remind-open]')).toBeHidden();
+  await expect(page.locator('[data-remind-late]')).toContainText('Closes tomorrow');
 });

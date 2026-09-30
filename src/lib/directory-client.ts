@@ -155,12 +155,23 @@ const previewing = () => {
  * and separate from lean mode, which is a desktop preference about a column;
  * this is a disclosure a reader opens, uses and forgets.
  */
+const NARROW = '(max-width: 900px)';
+
 function setFiltersOpen(open: boolean) {
   const root = document.documentElement;
+  const was = root.hasAttribute('data-filters');
   if (open) root.setAttribute('data-filters', '');
   else root.removeAttribute('data-filters');
   for (const btn of document.querySelectorAll<HTMLElement>('[data-dir-filters]')) {
     btn.setAttribute('aria-expanded', String(open));
+  }
+  // On a phone the panel is a sheet over the page (global.css), so focus
+  // goes into it and comes back to the button that opened it.
+  if (open === was || !matchMedia(NARROW).matches) return;
+  const rail = document.querySelector<HTMLElement>('.sabl-rail');
+  if (open) rail?.querySelector<HTMLElement>('select, button, a[href]')?.focus({ preventScroll: true });
+  else if (!document.activeElement || rail?.contains(document.activeElement)) {
+    document.querySelector<HTMLElement>('[data-dir-filters]')?.focus({ preventScroll: true });
   }
 }
 
@@ -693,6 +704,15 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const t = e.target as Element | null;
     if (!root || !t?.closest || !root.contains(t)) return;
 
+    // A tap on the scrim around the phone sheet puts the sheet away. The
+    // scrim is the page's ::after, so a tap on it lands on .sabl-page itself;
+    // a click a keyboard sends to a control behind the sheet still works.
+    if (document.documentElement.hasAttribute('data-filters') && matchMedia(NARROW).matches
+      && t.matches('.sabl-page')) {
+      setFiltersOpen(false);
+      return;
+    }
+
     const save = t.closest<HTMLElement>('[data-dir-save]');
     if (save) {
       const id = Number(save.dataset.id);
@@ -828,6 +848,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     opening = false;
   });
 
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && root?.isConnected && document.documentElement.hasAttribute('data-filters')) setFiltersOpen(false);
+  });
+
   // Arrow keys walk the selection while focus is in the list or the pane.
   document.addEventListener('keydown', e => {
     const t = e.target as Element | null;
@@ -837,6 +861,22 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (!by) return;
     e.preventDefault();
     stepSelection(by, !!t.closest('[data-dir-grid]'));
+  });
+
+  // Print every row of the current result, not the first step of it: a
+  // counsellor printing a hub got 24 of 161 (critique 2026-09-29).
+  let beforePrint: number | null = null;
+  addEventListener('beforeprint', () => {
+    if (!root?.isConnected || beforePrint !== null) return;
+    beforePrint = shown;
+    shown = items.length;
+    render();
+  });
+  addEventListener('afterprint', () => {
+    if (beforePrint === null) return;
+    shown = beforePrint;
+    beforePrint = null;
+    if (root?.isConnected) render();
   });
 
   // Crossing the phone breakpoint turns Columns into the list and back.

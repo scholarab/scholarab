@@ -313,7 +313,7 @@ const breadcrumbJson = {
               )}
               <ol class="sabcal-rows">
                 {m.items.filter(r => !inWeek.has(r)).map(r => (
-                  <li class="sabcal-row" data-places={r.places} data-open={r.open && !r.after ? '' : undefined}>
+                  <li class="sabcal-row" data-deadline={r.deadline} data-places={r.places} data-open={r.open && !r.after ? '' : undefined}>
                     <span class="sabl-mono sabcal-day tnum">{dayOf(r.deadline)}</span>
                     <span class="sabcal-name">
                       <a href={r.href}>{r.name}</a>
@@ -361,6 +361,17 @@ const breadcrumbJson = {
 </Layout>
 
 <script>
+  // Every month prints, folded or not, and folds back afterwards.
+  let foldedForPrint: HTMLDetailsElement[] = [];
+  addEventListener('beforeprint', () => {
+    foldedForPrint = [...document.querySelectorAll<HTMLDetailsElement>('details.sabcal-month:not([open])')];
+    foldedForPrint.forEach(d => { d.open = true; });
+  });
+  addEventListener('afterprint', () => {
+    foldedForPrint.forEach(d => { d.open = false; });
+    foldedForPrint = [];
+  });
+
   // A jump link to a folded month opens it before the browser scrolls there.
   function openFromHash() {
     const id = decodeURIComponent(location.hash.slice(1));
@@ -523,12 +534,18 @@ const breadcrumbJson = {
   .sabcal-row {
     display: grid; grid-template-columns: 40px 1fr auto auto;
     gap: 8px 18px; align-items: baseline;
-    padding: 13px 0; border-bottom: 1px solid rgba(20,25,21,0.12);
+    padding: 13px 10px;
   }
+  /* Shaded every other row, as on the directories, where the hairlines
+     were replaced for the same reason (reader feedback, 2026-09-29).
+     Counted over the rows a Where-you-live filter leaves showing. */
+  .sabcal-row:nth-child(even of :not(.is-elsewhere)) { background: rgba(20,25,21,0.04); }
   /* A layout-free wrapper above 720px (meta and status stay grid columns);
      phones turn it into one wrapping line. */
   .sabcal-sub { display: contents; }
-  .sabcal-day { font-size: 15px; color: #5C5F5B; text-align: right; }
+  /* The date is a figure in ink, as on every other listing row (critique
+     2026-09-29); it was 15px grey beside a 16px name. */
+  .sabcal-day { font-size: 20px; line-height: 1; color: #141915; text-align: right; }
   /* Each award name is the row's only action and sits in a list, not a
      sentence, so WCAG 2.2 2.5.8's inline exception does not cover it. The
      inline box measured 17px; the padding takes the tap target past 24px and
@@ -560,8 +577,8 @@ const breadcrumbJson = {
   }
 
   .sabcal-above { font-size: 14px; color: #5C5F5B; margin: 12px 0 0; }
-  .sabcal-day-md { white-space: nowrap; }
-  .sabcal-week .sabcal-row { grid-template-columns: 56px 1fr auto auto; }
+  .sabcal-day-md { white-space: nowrap; text-align: left; }
+  .sabcal-week .sabcal-row { grid-template-columns: 64px 1fr auto auto; }
   .sabcal-undated-fold summary {
     display: inline-flex; align-items: center; min-height: 44px; cursor: pointer;
     font-weight: 600; color: #141915; text-decoration: underline; text-underline-offset: 3px;
@@ -593,8 +610,8 @@ const breadcrumbJson = {
        shrinks below its content, and a program's unwrapped eligibility line
        ("Grades 9 to 12 (AMC 10 for ...") pushed the whole page 224px past a
        320px screen. */
-    .sabcal-row { grid-template-columns: 30px minmax(0, 1fr); gap: 4px 12px; padding: 11px 0; }
-    .sabcal-week .sabcal-row { grid-template-columns: 48px minmax(0, 1fr); }
+    .sabcal-row { grid-template-columns: 30px minmax(0, 1fr); gap: 4px 12px; padding: 11px 8px; margin: 0 -8px; }
+    .sabcal-week .sabcal-row { grid-template-columns: 56px minmax(0, 1fr); }
     .sabcal-sub {
       grid-column: 2; display: flex; flex-wrap: wrap;
       justify-content: space-between; align-items: baseline; gap: 2px 12px;

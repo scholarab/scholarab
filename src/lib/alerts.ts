@@ -56,6 +56,31 @@ export function cadenceFromInput(input: unknown): AlertMilestone[] | null {
   return sortCadence(unique)
 }
 
+/**
+ * The milestones still ahead of a deadline `daysLeft` calendar days away.
+ * Strictly ahead: the mailer runs once a day and a sign-up still has to be
+ * confirmed, so a milestone falling today may already have gone. A form that
+ * promised "30, 14 and 3 days" on an award closing tomorrow promised mail the
+ * mailer never sends (critique 2026-09-29).
+ */
+export function milestonesAhead(daysLeft: number): AlertMilestone[] {
+  return ALERT_MILESTONES.filter(m => m < daysLeft)
+}
+
+/** "30, 14 and 3 days" / "14 and 3 days" / "3 days". */
+export function milestonePhrase(days: readonly number[]): string {
+  const list = days.map(String)
+  const head = list.length > 1 ? `${list.slice(0, -1).join(', ')} and ${list[list.length - 1]}` : list[0] ?? ''
+  return `${head} ${days.length === 1 && days[0] === 1 ? 'day' : 'days'}`
+}
+
+/** "today" / "tomorrow" / "on Thursday", for a deadline a few days out. */
+export function closesPhrase(daysLeft: number, deadlineIso: string): string {
+  if (daysLeft <= 0) return 'today'
+  if (daysLeft === 1) return 'tomorrow'
+  return `on ${new Date(deadlineIso + 'T00:00:00').toLocaleDateString('en-CA', { weekday: 'long' })}`
+}
+
 function sortCadence<T extends number>(days: T[]): T[] {
   return days.sort((a, b) => b - a)
 }

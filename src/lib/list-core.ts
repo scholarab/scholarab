@@ -143,6 +143,10 @@ export function filterSortScholarships(
     // (so expired entries don't bury open ones)
     const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
     if (statusDiff !== 0) return statusDiff;
+    if (aStatus === 'active') {
+      const soonDiff = Number(dueSoon(b.deadline, b._deadline_ms)) - Number(dueSoon(a.deadline, a._deadline_ms));
+      if (soonDiff !== 0) return soonDiff;
+    }
 
     if (sortBy === 'highest_pay' || sortBy === 'lowest_pay') {
       const aAmt = a._amount ?? 0;
@@ -173,6 +177,17 @@ export function whenTier(days: number): '' | ' is-soon' | ' is-urgent' {
   return '';
 }
 
+/** Open and closing within URGENT_DAYS: the run a student with a deadline
+ *  close came for. It heads every sort (critique 2026-09-29: Calgary's
+ *  "Open now" run started 213 days out, and a deadline five days away sat
+ *  wherever the amount sort put it). */
+function dueSoon(deadline: string | null | undefined, deadlineMs?: number): boolean {
+  const ms = deadlineMs || (deadline && deadline !== 'TBA' && deadline !== 'Ongoing' ? new Date(deadline + 'T00:00:00').getTime() : NaN);
+  if (!Number.isFinite(ms)) return false;
+  const days = Math.round((ms - getToday().getTime()) / 86400000);
+  return days >= 0 && days <= URGENT_DAYS;
+}
+
 // ── Grid grouping ─────────────────────────────────────────────────────────────
 // The directory sorts open listings above ones that have not opened yet and
 // closed ones below both, but nothing marked the seams, so 153 cards read as
@@ -184,7 +199,10 @@ export function whenTier(days: number): '' | ' is-soon' | ' is-urgent' {
 // rank by status first too since 2026-09-23, so they group the same way:
 // open, no fixed deadline, date not confirmed, closed.
 
+export const DUE_SOON_LABEL = 'DUE WITHIN 2 WEEKS';
+
 export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
+  soon: DUE_SOON_LABEL,
   active: STATUS_WORDS.open.toUpperCase(),
   ongoing: STATUS_WORDS.none.toUpperCase(),
   future: STATUS_WORDS.future.toUpperCase(),
@@ -200,18 +218,24 @@ export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
 export const SCHOLARSHIP_SHUT_GROUPS = ['unconfirmed', 'closed', 'after'];
 
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
+  soon: DUE_SOON_LABEL,
   active: STATUS_WORDS.open.toUpperCase(),
   ongoing: STATUS_WORDS.none.toUpperCase(),
   tba: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
 };
 
+// 'soon' is a slice of open, not a fourth status: the sorts rank it first
+// within open, so it stays the primary key and each run appears once.
 export function scholarshipGroupKey(s: ScholarshipWithMeta): string {
-  return isAfterHighSchool(s) ? 'after' : getScholarshipStatus(s);
+  if (isAfterHighSchool(s)) return 'after';
+  const status = getScholarshipStatus(s);
+  return status === 'active' && dueSoon(s.deadline, s._deadline_ms) ? 'soon' : status;
 }
 
 export function programGroupKey(p: ProgramWithMeta): string {
-  return getProgramStatus(p);
+  const status = getProgramStatus(p);
+  return status === 'active' && dueSoon(p.deadline, p._deadline_ms) ? 'soon' : status;
 }
 
 /** [{key, label, count}] in display order, for a list already in display order. */
@@ -431,6 +455,10 @@ export function filterSortPrograms(
     // directory labels are contiguous and a past deadline never heads the list.
     const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
     if (statusDiff !== 0) return statusDiff;
+    if (aStatus === 'active') {
+      const soonDiff = Number(dueSoon(b.deadline, b._deadline_ms)) - Number(dueSoon(a.deadline, a._deadline_ms));
+      if (soonDiff !== 0) return soonDiff;
+    }
     // within the closed group: most recently expired first
     if (aStatus === 'closed' && sortBy === 'closest_due') {
       return programDeadlineOrder(b) - programDeadlineOrder(a);

@@ -177,6 +177,14 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
       three rows here, not just FIELD, so the block still reads as one set of
       controls. */}
   <div class="sabl-filters sabl-filters-dense">
+    {/* Phones only: the sheet holds the sort too, so one surface shapes the
+        list (critique 2026-09-29). directory-client keeps both pickers in step. */}
+    <div class="sabl-filter-row sabl-rail-sort">
+      <span class="sabl-row-label">Sort</span>
+      <select class="sabl-sort-select" data-fselect="sort" aria-label="Sort">
+        {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
+      </select>
+    </div>
     <div class="sabl-filter-row">
       <span class="sabl-row-label">Format</span>
       <div class="sabl-chips">
@@ -298,7 +306,8 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
                 {meta.map(m => <li class="sabl-meta" title={m}>{m}</li>)}
               </ul>
             )}
-            {p.description && <div class="sabl-blurb" set:html={emailOff(p.description)} />}
+            {/* Hidden on list rows (global.css); the tiles and the preview pane use it. */}
+            {p.description && <div class="sabl-blurb" data-row-desc set:html={emailOff(p.description)} />}
           </div>
           <span class="sabl-card-top-left">
             {p.paid ? <span class="sabl-paid">Pays you</span>

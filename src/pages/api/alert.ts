@@ -1,4 +1,4 @@
-import { todayDate } from '../../lib/calendar'
+import { todayDate, calendarDaysUntil } from '../../lib/calendar'
 export const prerender = false
 
 import type { APIRoute } from 'astro'
@@ -9,7 +9,7 @@ import catalogue from '../../data/runtime-catalogue.json'
 import { jsonOk, jsonError } from '../../lib/api-response'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 import { defer } from '../../lib/defer'
-import { ALERT_MILESTONES, cadenceFromInput, formatCadence } from '../../lib/alerts'
+import { ALERT_MILESTONES, cadenceFromInput, formatCadence, milestonesAhead } from '../../lib/alerts'
 import { sendConfirmEmail } from '../../lib/confirm-email'
 import { canonicalUrl } from '../../lib/site-origin'
 import { EMAIL_RE } from '../../lib/utils'
@@ -82,11 +82,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
   if (new Date(deadline + 'T00:00:00') <= today)
     return jsonError('Deadline has already passed', 400)
 
+  // Store only the reminders the mailer can still send. A milestone already
+  // behind the deadline would sit in the row and never fire, and the
+  // confirmation email would promise it.
+  const ahead = new Set<number>(milestonesAhead(calendarDaysUntil(deadline)))
+  const sendable = cadence.filter(m => ahead.has(m))
+  if (sendable.length === 0)
+    return jsonError('This closes too soon for an email reminder. Apply today.', 400)
+
   const token = Array.from(crypto.getRandomValues(new Uint8Array(24)))
     .map(b => b.toString(16).padStart(2, '0')).join('')
 
   const row = { email: email.toLowerCase(), itemType: itemType as string, itemId, token }
-  const cadenceValue = formatCadence(cadence)
+  const cadenceValue = formatCadence(sendable)
 
   // Updating an existing reminder requires the credential from its email.
   // Public signups never overwrite someone else's confirmed settings.

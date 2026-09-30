@@ -127,7 +127,9 @@ const {
         try {
           if (localStorage.getItem('sa_lean')) root.setAttribute('data-lean', '');
           const view = localStorage.getItem('sa_view');
-          if (view === 'grid' || view === 'columns' || view === 'gallery') root.setAttribute('data-view', view);
+          // Wide screens only: a phone has no view switcher (global.css),
+          // so a stored tile view there could never be switched back.
+          if ((view === 'grid' || view === 'columns' || view === 'gallery') && matchMedia('(min-width: 901px)').matches) root.setAttribute('data-view', view);
           // html[data-later-ok]: the "most of these open later" note was
           // read once and put away; it said the same on every directory and
           // on quiz results (critique 2026-09-27).
@@ -136,6 +138,12 @@ const {
       }
       lean();
       document.addEventListener('astro:after-swap', lean);
+      // The date on a printed page (global.css, @media print): a printed
+      // deadline list is only as good as the day it came off the printer.
+      addEventListener('beforeprint', function () {
+        const day = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+        document.body.setAttribute('data-printed', 'Printed ' + day + ' from scholarab.ca. Check each listing there before you apply; dates can move.');
+      });
       document.addEventListener('pointerdown', function () { root.setAttribute('data-pointer', ''); }, true);
       document.addEventListener('click', function (e) {
         if (!(e.target instanceof Element) || !e.target.closest('[data-later-ok]')) return;
