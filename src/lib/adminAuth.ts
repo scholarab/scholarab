@@ -3,13 +3,13 @@ import { getEnv } from 'astro/env/runtime'
 export const SESSION_COOKIE = 'admin_session'
 
 function getSecret(): string {
-  const s = getEnv('SESSION_SECRET') ?? import.meta.env.SESSION_SECRET ?? process.env.SESSION_SECRET ?? ''
+  const s = getEnv('SESSION_SECRET') ?? process.env.SESSION_SECRET ?? ''
   if (!s) throw new Error('SESSION_SECRET is not configured')
   return s
 }
 
 function getPassword(): string {
-  return getEnv('ADMIN_PASSWORD') ?? import.meta.env.ADMIN_PASSWORD ?? process.env.ADMIN_PASSWORD ?? ''
+  return getEnv('ADMIN_PASSWORD') ?? process.env.ADMIN_PASSWORD ?? ''
 }
 
 async function hmac(secret: string, data: string): Promise<string> {

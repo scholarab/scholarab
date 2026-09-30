@@ -9,7 +9,8 @@
 
 ## Pitfalls
 
-- The build reads the JSON in `src/data/` (`DATABASE_URL=` is blanked in `npm run build`). `npm run dev` reads the database and can disagree with production. Measure and verify against the build (`dist/`), never the dev server.
+- The build reads the JSON in `src/data/`, not the database. `npm run dev` reads the database and can disagree with production. Measure and verify against the build (`dist/`), never the dev server.
+- Read secrets with `getEnv` from `astro/env/runtime`, never `import.meta.env`: Vite inlines what it can resolve, and blanking `DATABASE_URL=` did not stop it. Lint rejects the pattern and `check-bundle-secrets.ts` fails the build on a credential in `dist/`.
 - `active: false` does not mean closed; `concluded: true` does. Status comes from deadline, openDate and those flags via `src/lib/status.ts` and `list-core.ts`. Never invent an openDate.
 - A deleted or renamed page needs a 301 in `public/_redirects` to a real surviving page, in both slash forms. The build validates the file.
 - No em dashes in `src/`, `scripts/`, workflows or docs: validate-data fails the build on one.

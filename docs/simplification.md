@@ -950,3 +950,22 @@ Hosted: CI and the Workers Builds deploy of 81fc23d passed, so the hosted build 
 Repair attempts against this problem: none before this change; the drift was avoided by not staging the file.
 
 Add-back fraction: 0 of 1.
+
+## Secrets out of the Worker bundle, 2026-09-29
+
+The outcome: no credential is readable from the build output, whoever builds it and wherever it is deployed from. A fresh `npm run build` compiled the live Neon connection string and the Anthropic API key into `dist/server/chunks/` from `.env.local`. Five call sites read secrets as `getEnv(X) ?? import.meta.env.X ?? process.env.X`, and Vite inlines every `import.meta.env.X` it can resolve. The `DATABASE_URL=` prefix on `astro build` did not stop it. The public `dist/client` was clean.
+
+| Candidate | Outcome |
+| --- | --- |
+| The `import.meta.env` fallback at all five sites (`db/client.ts` twice, `adminAuth.ts` twice, `parse-eligibility.ts`) | Removed. `getEnv` is the Worker's source, and in `astro dev` Astro copies the loaded env files into `process.env`, so the last fallback still covers dev, scripts and tests. |
+| The `DATABASE_URL=` prefix on `astro build` | Kept, untested for removal. Nothing reads `import.meta.env.DATABASE_URL` any more, but it still stops a prerendered page from reaching the database. |
+| `dist/server/.dev.vars`, a full copy of `.env.local` | Kept. The Cloudflare plugin writes it for local `wrangler dev`; `wrangler deploy` does not upload it and git ignores it. |
+| A lint rule alone | Not enough. It closes this one pattern; `scripts/check-bundle-secrets.ts` checks the output, by the local secret values and by credential shapes, and fails the build naming only file and variable. |
+
+Measured locally: before, the new check reported `DATABASE_URL` and `ANTHROPIC_API_KEY` in two server chunks; after, it passes with 3 local secret values checked. It takes 0.56 to 0.63 s warm (1.83 s on a cold first run), including tsx start-up, over 3,773 files. Its first shape pattern also matched two strings inside the Neon driver (its `user:password@` example and its URL builder); the pattern now excludes both, and the tests pin that.
+
+Not yet measured: whether the deployed Worker carried the credentials. That depends on how each deploy was made, and is checked separately.
+
+Repair attempts against this problem: 1 before this change, the `DATABASE_URL=` prefix, which did not work.
+
+Add-back fraction: 0 of 1.

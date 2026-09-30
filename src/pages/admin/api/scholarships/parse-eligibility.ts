@@ -90,7 +90,7 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonError(`Rate limit exceeded: max ${AI_PARSE_LIMIT} AI parses per hour`, 429)
   }
 
-  const apiKey = getEnv('ANTHROPIC_API_KEY') ?? import.meta.env.ANTHROPIC_API_KEY ?? process.env.ANTHROPIC_API_KEY
+  const apiKey = getEnv('ANTHROPIC_API_KEY') ?? process.env.ANTHROPIC_API_KEY
   if (!apiKey) return jsonError('ANTHROPIC_API_KEY not configured', 500)
 
   try {

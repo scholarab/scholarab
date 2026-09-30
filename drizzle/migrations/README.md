@@ -43,7 +43,7 @@ kept as history, not as working state.
   `ADD COLUMN IF NOT EXISTS`, and a `DEFAULT` instead of a backfill where it
   works. Then re-running one is harmless.
 - **Make the reading code tolerate the column not being there yet.** Cloudflare
-  Pages deploys on every push to `main`, so application code routinely goes live
+  Workers Builds deploys on every push to `main`, so application code routinely goes live
   before anyone has applied the migration. `/api/alert` and
   `scripts/send-alerts.ts` both catch the missing-column error, log it, and fall
   back; see `src/lib/alerts.ts`.

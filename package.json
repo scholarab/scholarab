@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "TZ=America/Edmonton tsx scripts/validate-data.ts && TZ=America/Edmonton tsx scripts/generate-sitemap.ts && TZ=America/Edmonton tsx scripts/generate-og-images.ts && tsx scripts/generate-catalogue-payloads.ts && DATABASE_URL= TZ=America/Edmonton astro build",
+    "build": "TZ=America/Edmonton tsx scripts/validate-data.ts && TZ=America/Edmonton tsx scripts/generate-sitemap.ts && TZ=America/Edmonton tsx scripts/generate-og-images.ts && tsx scripts/generate-catalogue-payloads.ts && DATABASE_URL= TZ=America/Edmonton astro build && tsx scripts/check-bundle-secrets.ts",
     "preview": "astro preview",
     "auto-expire": "tsx scripts/auto-expire.ts",
     "sitemap": "TZ=America/Edmonton tsx scripts/generate-sitemap.ts",

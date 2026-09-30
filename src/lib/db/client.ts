@@ -6,7 +6,7 @@ import * as schema from './schema'
 let _db: ReturnType<typeof drizzle<typeof schema>> | null = null
 
 export function getSql() {
-  const url = getEnv('DATABASE_URL') ?? import.meta.env.DATABASE_URL ?? process.env.DATABASE_URL
+  const url = getEnv('DATABASE_URL') ?? process.env.DATABASE_URL
   if (!url) throw new Error('DATABASE_URL is not set')
   return neon(url)
 }
@@ -15,7 +15,7 @@ export function getDb() {
   if (_db) return _db
   // getEnv is wired to the Worker's env by @astrojs/cloudflare adapter (via setGetEnv).
   // Falls back to process.env in local dev and tests.
-  const url = getEnv('DATABASE_URL') ?? import.meta.env.DATABASE_URL ?? process.env.DATABASE_URL
+  const url = getEnv('DATABASE_URL') ?? process.env.DATABASE_URL
   if (!url) throw new Error('DATABASE_URL is not set. Check .env.local')
   _db = drizzle(neon(url), { schema })
   return _db
