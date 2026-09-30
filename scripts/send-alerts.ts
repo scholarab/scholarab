@@ -2,13 +2,13 @@
 // Sends deadline reminder emails via Resend.
 // Run daily via GitHub Actions. Requires DATABASE_URL and RESEND_API_KEY.
 import { claimRecipient, deliverMail, mailKey, type MailPayload } from '../src/lib/mail-delivery.ts'
-import { calendarDaysUntil } from '../src/lib/calendar.ts'
+import { calendarDaysUntil, todayDate } from '../src/lib/calendar.ts'
 import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { neon } from '@neondatabase/serverless'
 import { generateSlug } from '../src/lib/utils.ts'
-import { parseCadence } from '../src/lib/alerts.ts'
+import { parseCadence, reminderCopy, type ReminderCopy } from '../src/lib/alerts.ts'
 import { CONFIRM_SUBJECT, confirmEmailHtml } from '../src/lib/confirm-email.ts'
 import { listUnsubscribeHeaders, senderIdentityHtml } from '../src/lib/email-identity.ts'
 
@@ -26,7 +26,7 @@ const MAILING_ADDRESS = process.env.ALERT_MAILING_ADDRESS
 if (!DATABASE_URL) { console.error('DATABASE_URL not set'); process.exit(1) }
 if (!RESEND_API_KEY) { console.error('RESEND_API_KEY not set'); process.exit(1) }
 
-interface Item { id: number; title?: string; name?: string; amount?: string; deadline?: string; url: string; active: boolean }
+interface Item { id: number; title?: string; name?: string; amount?: string; deadline?: string; url: string; active: boolean; openDate?: string; deadlineEstimated?: boolean; concluded?: boolean; rolling?: boolean }
 
 const scholarships: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8'))
 const programs: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8'))
@@ -50,16 +50,13 @@ const IGNORE_CADENCE = CATCH_UP || !!process.env.TEST_DAYS || TEST_SUBSCRIPTION_
 interface SubscriberRow { id:number; email:string; token:string; cadence:string; item_type:string; item_id:number }
 const query = (text:string,params?:unknown[]) => sql.query(text,params)
 function daysUntil(deadline:string):number { return calendarDaysUntil(deadline) }
-
-function formatDate(str: string): string {
-  return new Date(str + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
-}
+const TODAY = todayDate()
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
 
-function emailHtml(rawLabel: string, rawAmount: string | undefined, deadline: string, rawApplyUrl: string, unsubscribeUrl: string, daysLeft: number): string {
+function emailHtml(rawLabel: string, rawAmount: string | undefined, copy: ReminderCopy, rawApplyUrl: string, unsubscribeUrl: string): string {
   const label = escapeHtml(rawLabel)
   const amount = rawAmount ? escapeHtml(rawAmount) : undefined
   // Escaped like the two above it, which it was not. validate-data.ts checks
@@ -75,11 +72,12 @@ function emailHtml(rawLabel: string, rawAmount: string | undefined, deadline: st
     <span style="font-size:20px;font-weight:700;color:#fff">Scholar<span style="color:#22d3a5">AB</span></span>
   </div>
   <div style="padding:32px">
-    <p style="margin:0 0 4px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#888">${daysLeft} day${daysLeft === 1 ? '' : 's'} left to apply</p>
+    <p style="margin:0 0 4px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#888">${escapeHtml(copy.kicker)}</p>
     <h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#0a0a0f;line-height:1.3">${label}</h1>
     ${amount ? `<p style="margin:0 0 4px;font-size:18px;font-weight:600;color:#0c8060">${amount}</p>` : ''}
-    <p style="margin:0 0 24px;font-size:14px;color:#666">Deadline: ${formatDate(deadline)}</p>
-    <a href="${applyUrl}" style="display:inline-block;background:#0c8060;color:#fff;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px">Apply Now →</a>
+    <p style="margin:0 0 ${copy.caution ? '8' : '24'}px;font-size:14px;color:#666">${escapeHtml(copy.dateLine)}</p>
+    ${copy.caution ? `<p style="margin:0 0 24px;font-size:14px;line-height:1.5;color:#0a0a0f">${escapeHtml(copy.caution)}</p>` : ''}
+    <a href="${applyUrl}" style="display:inline-block;background:#0c8060;color:#fff;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px">${escapeHtml(copy.button)} →</a>
   </div>
   <div style="padding:16px 32px 24px;border-top:1px solid #f0f0f0">
     ${senderIdentityHtml({
@@ -219,10 +217,12 @@ for (const {item,days} of targets) {
   for (const row of byItem.get(`${item.itemType}:${item.id}`) ?? []) {
     if (!IGNORE_CADENCE && !(parseCadence(row.cadence) as number[]).includes(days)) continue
     if (/@example\.(com|org|net)$/i.test(row.email)) continue
-    const subject = `${TEST_SUBSCRIPTION_ID !== null ? '[TEST] ' : ''}${days} day${days === 1 ? '' : 's'} left: ${item.label} closes ${formatDate(item.deadline!)}`
+    const copy = reminderCopy(item as Item & { deadline: string }, item.label, days, TODAY)
+    if (!copy) continue
+    const subject = `${TEST_SUBSCRIPTION_ID !== null ? '[TEST] ' : ''}${copy.subject}`
     const unsubscribeUrl = `${BASE_URL}/api/unsubscribe?token=${row.token}`
-    const html = emailHtml(item.label,item.amount,item.deadline!,item.detailUrl,unsubscribeUrl,days)
-    if (DRY_RUN) {sent++;console.log(`would send ${days}d to subscription ${row.id}`);continue}
+    const html = emailHtml(item.label,item.amount,copy,item.detailUrl,unsubscribeUrl)
+    if (DRY_RUN) {sent++;console.log(`would send ${days}d${copy.caution ? ' (date not confirmed)' : ''} to subscription ${row.id}`);continue}
     try {
       // Catch-up is one logical send per subscription/deadline, even on rerun.
       const milestone=TEST_SUBSCRIPTION_ID !== null ? 'designated-test' : CATCH_UP?'catch-up':String(days)

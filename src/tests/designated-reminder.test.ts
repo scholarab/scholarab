@@ -14,7 +14,7 @@ vi.mock('@neondatabase/serverless', () => ({ neon: () => Object.assign(async (st
   return [];
 }, { query: vi.fn(async () => []) }) }));
 vi.mock('../lib/mail-delivery', () => ({ claimRecipient: vi.fn(), mailKey: async (key: string) => key, deliverMail: (...args: unknown[]) => state.send(...args as []) }));
-vi.mock('../lib/calendar', () => ({ calendarDaysUntil: () => 6 }));
+vi.mock('../lib/calendar', () => ({ calendarDaysUntil: () => 6, todayDate: () => new Date('2026-01-01T00:00:00') }));
 // The script's own fixture, not the live catalogue. This test used to lean on
 // real program 44 (Breakthrough Junior Challenge) having a dated deadline, and
 // CI runs auto-expire before the tests: the day after that deadline, 44 read

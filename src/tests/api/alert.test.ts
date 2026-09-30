@@ -25,6 +25,7 @@ vi.mock('../../data/runtime-catalogue.json', () => ({ default: {
     // Relative to the run date; a day either way still lands in the same case.
     { id: 6, title: 'Closes in two days', active: true, deadline: new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10) },
     { id: 7, title: 'Closes in ten days', active: true, deadline: new Date(Date.now() + 10 * 86400000).toISOString().slice(0, 10) },
+    { id: 8, title: 'Rolled forward', active: true, deadline: '2099-10-01', deadlineEstimated: true },
   ],
   programs: [
     { id: 2, name: 'Example research', deadline: '2099-10-01' },
@@ -161,4 +162,10 @@ it('stores only the milestones still ahead', async () => {
   const rows = await pg.query<Record<string, unknown>>('SELECT cadence FROM subscribers');
   expect(rows.rows[0]!.cadence).toBe('3');
   expect(state.send.mock.calls[0]![3]).toBe('3');
+});
+it('refuses a reminder for a date the provider has not posted', async () => {
+  const res = await call({ ...valid, itemId: 8 });
+  expect(res.status).toBe(400);
+  expect((await pg.query('SELECT 1 FROM subscribers')).rows).toHaveLength(0);
+  expect(state.send).not.toHaveBeenCalled();
 });

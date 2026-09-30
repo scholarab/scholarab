@@ -65,6 +65,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (!s) return jsonError('Scholarship not found', 404)
     if (s.active === false) return jsonError('This scholarship is not open', 400)
     if (!s.deadline) return jsonError('This scholarship has no deadline', 400)
+    // The listing page never offers the form for a rolled-forward date; this
+    // keeps a hand-made request from subscribing to one anyway.
+    if ((s as { deadlineEstimated?: boolean }).deadlineEstimated)
+      return jsonError("This date isn't confirmed yet, so there is nothing to remind you about.", 400)
     deadline = s.deadline
     itemLabel = s.title
   } else {

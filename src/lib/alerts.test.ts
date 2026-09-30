@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   ALERT_MILESTONES, isMilestone, parseCadence, formatCadence, cadenceFromInput,
-  milestonesAhead, milestonePhrase,
+  milestonesAhead, milestonePhrase, reminderCopy,
 } from './alerts'
 
 describe('isMilestone', () => {
@@ -108,5 +108,46 @@ describe('milestonePhrase', () => {
     expect(milestonePhrase([30, 14, 3])).toBe('30, 14 and 3 days')
     expect(milestonePhrase([14, 3])).toBe('14 and 3 days')
     expect(milestonePhrase([3])).toBe('3 days')
+  })
+})
+
+describe('reminderCopy', () => {
+  const today = new Date('2026-10-01T00:00:00')
+  const deadline = '2026-10-15'
+
+  it('states a posted date plainly, at every milestone', () => {
+    for (const days of [30, 14, 3]) {
+      const copy = reminderCopy({ deadline, active: true }, 'Bursary X', days, today)!
+      expect(copy.subject).toBe(`${days} days left: Bursary X closes October 15, 2026`)
+      expect(copy.kicker).toBe(`${days} days left to apply`)
+      expect(copy.caution).toBeNull()
+      expect(copy.button).toBe('Apply Now')
+    }
+  })
+
+  it('says a rolled-forward date is a guess, and never counts days to it', () => {
+    const copy = reminderCopy({ deadline, active: true, deadlineEstimated: true }, 'Bursary X', 14, today)!
+    expect(copy.subject).toBe('Check the date: Bursary X usually closes around October 15, 2026')
+    expect(copy.kicker).toBe('Date not confirmed yet')
+    expect(copy.dateLine).toContain("last year's deadline")
+    expect(copy.caution).toContain("hasn't posted this year's date")
+    expect(copy.button).toBe('Check the date')
+    expect(`${copy.subject} ${copy.kicker} ${copy.dateLine}`).not.toMatch(/days? left/)
+  })
+
+  it('sends nothing for a closed, ended or between-cycles listing', () => {
+    expect(reminderCopy({ deadline: '2026-09-01', active: true }, 'X', 3, today)).toBeNull()
+    expect(reminderCopy({ deadline: '2026-09-01', active: true, deadlineEstimated: true }, 'X', 3, today)).toBeNull()
+    expect(reminderCopy({ deadline, active: true, concluded: true }, 'X', 14, today)).toBeNull()
+    expect(reminderCopy({ deadline, active: false }, 'X', 14, today)).toBeNull()
+    expect(reminderCopy({ deadline, active: false, deadlineEstimated: true }, 'X', 14, today)).toBeNull()
+  })
+
+  it('keeps mailing a posted deadline that opens later, as it always has', () => {
+    expect(reminderCopy({ deadline, openDate: '2026-10-05' }, 'X', 14, today)?.caution).toBeNull()
+  })
+
+  it('says 1 day, not 1 days', () => {
+    expect(reminderCopy({ deadline: '2026-10-02' }, 'X', 1, today)!.subject).toBe('1 day left: X closes October 2, 2026')
   })
 })

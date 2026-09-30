@@ -8,6 +8,8 @@
 // three booleans: the milestone set is the mailer's to define, and a text
 // column lets it change without another migration.
 
+import { scholarshipStatusOf, type StatusInput } from './status'
+
 /** The days before a deadline the mailer can send on, biggest first. */
 export const ALERT_MILESTONES = [30, 14, 3] as const
 
@@ -83,4 +85,58 @@ export function closesPhrase(daysLeft: number, deadlineIso: string): string {
 
 function sortCadence<T extends number>(days: T[]): T[] {
   return days.sort((a, b) => b - a)
+}
+
+/** "October 1, 2026": the date as every reminder prints it. */
+export function reminderDate(iso: string): string {
+  return new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })
+}
+
+export interface ReminderCopy {
+  subject: string
+  kicker: string
+  dateLine: string
+  /** Said under the date when the date is a guess; null when it is posted. */
+  caution: string | null
+  button: string
+}
+
+/**
+ * What a reminder says, or null when there is nothing to remind about.
+ *
+ * Status comes from scholarshipStatusOf, the same rule the listing page uses,
+ * rather than a filter of the mailer's own. `active: false` still sends
+ * nothing: the listing is between cycles and its subscribers were never
+ * mailed for it. A rolled-forward date (status `unconfirmed`) is mailed in
+ * words that say it is a guess. The sender used to mail it as "3 days left:
+ * X closes Oct 1", the site asserting a date the provider never gave, to
+ * someone who signed up while the date was real (debug 2026-09-27).
+ */
+export function reminderCopy(
+  item: StatusInput & { deadline: string },
+  label: string,
+  daysLeft: number,
+  today: Date,
+): ReminderCopy | null {
+  if (item.active === false) return null
+  const status = scholarshipStatusOf(item, today)
+  if (status === 'closed') return null
+  const date = reminderDate(item.deadline)
+  if (status === 'unconfirmed') {
+    return {
+      subject: `Check the date: ${label} usually closes around ${date}`,
+      kicker: 'Date not confirmed yet',
+      dateLine: `Expected around ${date}, going by last year's deadline`,
+      caution: "The provider hasn't posted this year's date. It may move, or the award may already be closed, so check it before you plan around it.",
+      button: 'Check the date',
+    }
+  }
+  const days = `${daysLeft} day${daysLeft === 1 ? '' : 's'}`
+  return {
+    subject: `${days} left: ${label} closes ${date}`,
+    kicker: `${days} left to apply`,
+    dateLine: `Deadline: ${date}`,
+    caution: null,
+    button: 'Apply Now',
+  }
 }

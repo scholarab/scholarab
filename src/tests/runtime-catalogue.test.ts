@@ -13,7 +13,8 @@ it('preserves every public reminder identity, label, availability and deadline',
   // Compare the serialized contract, including omitted versus null fields.
   const json = (value: unknown) => JSON.parse(JSON.stringify(value));
   expect(catalogue.scholarships).toEqual(json(scholarships.map(
-    ({ id, title, active, deadline }) => ({ id, title, active, deadline }),
+    ({ id, title, active, deadline, deadlineEstimated }) =>
+      ({ id, title, active, deadline, ...(deadlineEstimated ? { deadlineEstimated: true } : {}) }),
   )));
   expect(catalogue.programs).toEqual(json(programs.map(
     ({ id, name, active, deadline }) => ({ id, name, active, deadline }),
