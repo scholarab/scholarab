@@ -4,28 +4,6 @@ import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { webPageJson } from '../lib/ld';
-interface Principle {
-  title: string;
-  body: string;
-  /** Optional trailing link, rendered after the body. */
-  more?: { href: string; label: string };
-}
-const principles: Principle[] = [
-  {
-    title: 'Nothing on it is an ad',
-    body: 'Nothing on the site advertises to you. Listings are sorted by deadline.',
-  },
-  {
-    title: 'No account needed',
-    // Keep detailed collection and retention promises on the privacy page.
-    body: 'You can browse without an account. Saved listings and quiz answers stay on your device. Deadline reminders use an email address you confirm, and you can unsubscribe at any time. We also collect usage counts and abuse-prevention data; Google Analytics runs only if you choose Allow.',
-    more: { href: '/privacy/', label: 'The full list is on the privacy page.' },
-  },
-  {
-    title: 'Everything is public',
-    body: 'Everything is public and works on any device, instantly.',
-  },
-];
 const title = 'About ScholarAB | Free Alberta Scholarship Directory';
 const description =
   'ScholarAB is a free scholarship directory built by Ilia Ivanov, a Medicine Hat high school student. No ads, no login, no data sold.';
@@ -59,8 +37,10 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
 
   <div id="sab-about" class="sabp" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="saba-body" style="flex:1;">
-      <!-- Title -->
       <h1 class="saba-h1">The story behind ScholarAB</h1>
+      <p class="saba-creator">
+        By <a href="https://www.linkedin.com/in/iliaivanov/" target="_blank" rel="noopener noreferrer">Ilia Ivanov</a>, a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer">Medicine Hat High School</a> student.
+      </p>
 
       <!-- The story, in Ilia's words (2026-09-18) -->
       <div class="saba-paper-wrap">
@@ -69,45 +49,16 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
         <p>I remembered that conversation because I wanted to go to university too, and I knew I’d need scholarships myself.</p>
         <p>At the start of Grade 11, I began searching for scholarships myself. The information was scattered across different websites, and a lot of them wanted me to create an account and fill out registration forms. That got tiring. I just wanted to see which scholarships I could apply for without signing up for so many sites.</p>
         <p>In March 2026, I started working on the first version of ScholarAB. I made it free, with no ads and no account required, because those were the things I wanted when I first started searching.</p>
-        <p>I’m a high school student from Medicine Hat, and this project grew out of my own experience trying to find scholarships. I figured other students were running into the same problems, and I wanted to make that search easier.</p>
-        <p class="saba-paper-right saba-paper-sign">I.I.</p>
+        <p>I figured other students were running into the same problems, and I wanted to make that search easier.</p>
       </section>
       </div>
 
-      <!-- How this works -->
-      <div class="saba-card">
-        <h2 class="saba-card-label">How it works</h2>
-        {principles.map((p, i) => (
-          <div class="saba-principle" style={i === 0 ? 'border-top-color:transparent;' : undefined}>
-            <div>
-              <h3 class="saba-principle-title">{p.title}</h3>
-              <div class="saba-principle-body">
-                {p.body}
-                {p.more && <> <a href={p.more.href}>{p.more.label}</a></>}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <!-- Open source + creator -->
-      <h2 class="saba-os-label">
-        <span>Open source, under AGPL-3.0</span>
-      </h2>
-      <div class="saba-actions">
-        <a
-          href="https://github.com/scholarab/scholarab"
-          target="_blank" rel="noopener noreferrer"
-          class="saba-btn saba-btn-solid"
-        >
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-          <span>View on GitHub</span>
-        </a>
-        <!--email_off--><a href="mailto:contact.scholarab@gmail.com" class="saba-btn saba-btn-outline">contact.scholarab@gmail.com</a><!--/email_off-->
-      </div>
-      <p class="saba-creator">
-        Created by <a href="https://www.linkedin.com/in/iliaivanov/" target="_blank" rel="noopener noreferrer" class="saba-creator-name">Ilia Ivanov</a>, a <a href="https://mhhs.mhpsd.ca/" target="_blank" rel="noopener noreferrer" class="saba-creator-link">Medicine Hat High School</a> student.
-      </p>
+      <section class="saba-details" aria-labelledby="saba-details-heading">
+        <h2 id="saba-details-heading">About the site</h2>
+        <p>Saved listings and quiz answers stay on your device. Reminder emails require confirmation, and you can unsubscribe at any time. The <a href="/privacy/">privacy page</a> explains what else we collect and how to control it.</p>
+        <p>For questions or corrections, email <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off-->.</p>
+        <p>The code is <a href="https://github.com/scholarab/scholarab" target="_blank" rel="noopener noreferrer">on GitHub</a> under AGPL-3.0.</p>
+      </section>
     </div>
 
   </div>
@@ -163,66 +114,21 @@ const ldJson = webPageJson({ name: 'About ScholarAB', description, path: '/about
   }
   .saba-paper p { margin: 0 0 1lh; }
   .saba-paper p:last-child { margin-bottom: 0; }
-  /* The initials under the last paragraph, right-aligned like a signed
-     letter, one blank rule below it. */
-  .saba-paper-right { text-align: right; }
-  .saba-paper-sign { font-size: 1.15em; }
-
-  /* A plain section after the letter, not a feature card with a caps label
-     (critique 2026-09-23). */
-  .saba-card { margin-top: 64px; max-width: 880px; }
-  .saba-card-label {
+  .saba-details { margin-top: 48px; max-width: 720px; font-size: 16px; line-height: 1.6; color: rgba(20,25,21,0.8); }
+  .saba-details h2 {
     font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 8px;
+    font-size: clamp(32px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.01em;
+    color: var(--text-primary); margin: 0 0 20px;
   }
-  /* No 01/02/03 badge: three promises, not three steps. */
-  .saba-principle {
-    display: grid; grid-template-columns: 1fr; gap: 20px;
-    padding: 22px 0; border-top: 1px solid rgba(20,25,21,0.12); align-items: start;
-  }
-  .saba-principle-title { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; margin: 0 0 6px; }
-  .saba-principle-body { font-size: 16px; line-height: 1.6; color: rgba(20, 25, 21, 0.8); max-width: 720px; }
-  .saba-principle-body a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px; }
-
-  .saba-os-label {
-    display: flex; align-items: center; gap: 10px; padding: 14px 0;
-    border-top: 2px solid #141915; margin: 64px 0 0;
-    font-weight: 700; font-size: 17px; color: var(--text-primary);
-  }
-  .saba-actions { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
-  .saba-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    color: #141915; font-weight: 600; font-size: 15px;
-    padding: 13px 24px; border-radius: 100px; text-decoration: none;
-    transition: border-color 0.18s ease, transform 0.07s ease;
-  }
-  .saba-btn:active { transform: translateY(1px); transition-duration: 0.07s; }
-  .saba-btn-solid { border: 1.5px solid rgba(20,25,21,0.85); background: #FFFFFF; }
-  .saba-btn-solid:hover, .saba-btn-solid:focus-visible {
-    color: #141915;
-  }
-  .saba-btn-outline { border: 1.5px solid rgba(20,25,21,0.3); }
-  .saba-btn-outline:hover, .saba-btn-outline:focus-visible {
-    border-color: #0A6B4D; color: #141915;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .saba-btn, .saba-btn:hover, .saba-btn:focus-visible, .saba-btn:active { transform: none; transition: none; }
-  }
-
-  .saba-creator { font-size: 16px; line-height: 1.6; color: rgba(20, 25, 21, 0.65); margin: 40px 0 0; }
-  .saba-creator-name { color: #141915; font-weight: 700; }
-  .saba-creator-name:hover, .saba-creator-link:hover { color: #0A6B4D; }
-  .saba-creator-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(20, 25, 21, 0.3); }
+  .saba-details p { margin: 0 0 16px; }
+  .saba-details p:last-child { margin-bottom: 0; }
+  .saba-creator { font-size: 16px; line-height: 1.6; color: rgba(20,25,21,0.8); margin: 16px 0 0; }
+  .saba-creator a, .saba-details a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .saba-creator a:hover, .saba-details a:hover { text-decoration-thickness: 2px; }
 
   /* The design specifies >=1080px only; below is our adaptation. */
   @media (max-width: 900px) {
     .saba-body { padding: 40px 20px 72px; }
     .saba-paper { padding-right: calc(var(--u) * 60); }
-    .saba-card { margin-top: 48px; }
-    /* The 44px column held the 01/02/03 badge; with the badge gone it took the
-       card's only child and set every title one word per line. */
-    .saba-principle { gap: 14px; }
-    .saba-os-label { margin-top: 48px; }
-    .saba-actions .saba-btn { font-size: 14px; padding: 12px 20px; }
   }
 </style>

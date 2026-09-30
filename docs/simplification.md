@@ -1144,3 +1144,22 @@ Baseline measured on production: at a 1440px viewport the rail had 264px of cont
 No unsuccessful repair attempts. One removal group, zero add-backs; the retained behavior did not require restoring the two-column layout. Regression coverage opens the native disclosure with Enter, checks all definitions fit, scrolls to the final definition and closes it again, on both directories at 1200/1440px desktop and 320/412px phone widths. The Impeccable hook reports no findings; no suppressions were added.
 
 After, measured on the built local preview: rail content equals its available width at both desktop sizes (241/241px and 209/209px); the explanation itself fits 217/217px and 185/185px. The 320px phone program sheet also fits, with 280/280px for the explanations. Native browser screenshots confirm the stacked text. `npm run ci` passes all 1,105 unit tests, the production build, bundle-secret checks and type checks. Full `npm run test:e2e` passes 116 tests with 16 existing skips, including all four new directory/project cases. No hosted performance measurement was made.
+
+## About page editorial cleanup, 2026-09-30
+
+Outcome: students can understand who built ScholarAB and why, then find privacy information, contact details and source code without repeated promises. The user explicitly requested deletion of the “I.I.” signature and a complete About-page review for AI slop. The notebook artwork, handwriting, personal account, founder metadata and public identity links remain. An independent source reviewer confirmed the repeated promise sections and vague instant/device claim as useful cuts.
+
+| Removal candidate | Outcome |
+| --- | --- |
+| “I.I.” and signature-only layout | Removed as requested, including its two CSS rules. The existing full-name/school credit moves beside the story. |
+| Repeated identity and origin sentence at the end of the story | Removed. The first four paragraphs are byte-identical, and the original final sentence still explains the wish to help other students. The byline retains the name and school. |
+| Three “How it works” promise blocks | Removed. Free use, no ads and no account are already explained in the story. “Everything is public and works on any device, instantly” was an overbroad assertion. A shorter paragraph keeps device-local saves/quiz answers, reminder confirmation/unsubscribe and an explicit link to the full collection/controls policy. No consent, tracking or retention behavior changes. |
+| Large source-code divider, icon and two pill buttons | Replaced with ordinary descriptive links and short paragraphs. Email protection comments, AGPL-3.0 code identification and every link destination remain. Deleted the unused data structure, wrappers, button variants, animation and breakpoint styles. |
+
+The pre-edit source was preserved in the ignored `.cache/about-before-2026-09-30.astro` for comparison. Source checks confirm the retained story paragraphs and all five link destinations. Native inspection covered the entire published baseline and built replacement at 1440px desktop and 320px phone widths, including the end of the story and lower page. No text clips horizontally; keyboard links retain the visible 2px focus ring. The handwritten text stays at its existing 20.376px on the narrow phone.
+
+Measured main-region text falls from 312 to 240 whitespace-delimited words; headings fall from six to two. Main-region height goes from 2,158.9 to 1,547.8px at 1440px, and 2,930.6 to 2,185.0px at 320px. The measurements compare the published baseline with the local built replacement, using the same browser and viewport sizes. Less text and scrolling are the measured work avoided; no reading-time, load-time or hosted performance reduction is inferred. Page source goes from 11,935 to 7,456 bytes, but this is not a transfer or runtime benchmark.
+
+No unsuccessful repairs. Four removal groups, zero add-backs; no restoration was manufactured to reach the 10% target. The Impeccable hook reports no findings and no suppressions were added. The story's chosen paper and handwriting remain intentionally in place.
+
+Verification: `npm run ci` passes 1,105 unit tests, production build, bundle-secret checks and type checks; the existing two legacy quiz lint warnings and ten Astro hints remain. Full `npm run test:e2e` passes 116 tests with 16 existing skips. The generated last-modified record changes only for `/about/`. No new dependency, script or test fixture was added for this static editorial/layout change.
