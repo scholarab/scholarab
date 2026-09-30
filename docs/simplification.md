@@ -1274,3 +1274,19 @@ Two further provider checks complete the expanded report. AUArts' temporary 502 
 The follow-up passes shared CI with 1,132 unit tests and the full browser suite with 141 passes and 19 expected skips. Its ship check reports five changed files, the removed AUArts slug redirected, and the same two required commands. Both were completed. Native built inspection verifies the rename and retained description. No unsuccessful implementation repair was needed for the two-record follow-up; the provider timeout caused a source replacement, not a retry loop.
 
 Final network limitation: cfad8a1 passed hosted CI and deployed with a matching catalogue fingerprint. The second hosted scan cleared both follow-up URLs, reported no broken links, but timed out on two different unchanged provider pages, Bredal Energy and Alberta's Page Program. Both then returned 200 locally with valid TLS and correct official content. No further data edit or suppression followed. A single final confirmation run after this observed recovery is linked in the audit; repeating full scans indefinitely would not repair external network variability. The normal scheduled checker continues to expose failures. This documentation-only follow-up records the limitation without expanding the repair scope.
+
+## Scholarship combos, September 30, 2026
+
+Outcome: a Medicine Hat student sees the local awards they can apply to together, grouped by the one fact that decides eligibility (school board, town, or where they are going next), and saves a whole set in one step. The user asked for city combos and a new page for them.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| One combo per city | Removed before building. A Medicine Hat High student cannot apply to the Catholic board's awards, so a city-only combo would break the "you can apply to all of these" promise. Each combo adds one deciding fact instead. |
+| Dollar total per combo | Not added. Most awards are competitive, several cannot be stacked and four of the five Catholic awards publish no amount, so a total would be a figure the site cannot support. Rows keep their own amounts. |
+| Hand-listed member IDs | Replaced by rules over the published JSON. Closed awards, awards only for students past high school, and combos under the floor (2 core, 3 total) drop out on the next build without an edit. Cypress County already falls below the floor. |
+| A new residency field in the catalogue | Not added. The Redcliff and Cypress County rules read the audience line, the sentence students already read. Adding `localArea` to these listings would also change /match results, and other agents edit the catalogue concurrently. |
+| A new list component or client controller | Not added. The page reuses the directory's global row styles, `list-core` date and apply cells, and the existing saved-list tracker. The page's script only repaints clock-dependent cells and saves. |
+
+Five candidates, none restored: add-back fraction 0/5. No speedup is claimed. Work avoided, counted rather than timed: saving the Catholic combo is one click where the hub needed five separate saves among 20 rows. Medicine Hat has 3 combos today (5, 3 + 1 add-on, 2 + 2 add-ons), not the 5 the idea assumed; the page does not pad the count with province-wide lists.
+
+Verification: `npm run ci` passed with 1,143 unit tests, including 11 new combo tests; the browser suite passed 141 with 19 expected skips. On the built site, the page rendered on desktop and at 375px with no horizontal scroll and no console errors, "Save all 5" put all five awards on /saved, and the Medicine Hat hub footer links to the page. The sitemap lists the page. No catalogue data, quiz behaviour, privacy or consent handling changed.

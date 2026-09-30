@@ -21,6 +21,7 @@ import { DEFAULT_SCHOLARSHIP_STATE, filterSortScholarships } from '../../lib/lis
 import { itemListJson } from '../../lib/ld';
 import { scholarshipIsIndexable } from '../../lib/status';
 import { getGuide } from '../../lib/guides';
+import { comboCities } from '../../lib/combos';
 
 export async function getStaticPaths() {
   const all = enrichScholarships(await loadScholarships());
@@ -68,6 +69,7 @@ const canonical = `https://www.scholarab.ca/scholarships/${facet.slug}/`;
 const indexable = items.some(s => scholarshipIsIndexable(s, today));
 
 const guide = facet.guide ? getGuide(facet.guide) : null;
+const hasCombos = comboCities(allItems, today).some(c => c.city === facet.slug);
 
 // The hub footer is now the only cross-hub path on the page (SCOPE left the
 // filter rail on 2026-09-15), so it also has to respect the MIN_FACET_ITEMS
@@ -140,6 +142,12 @@ const breadcrumbJson = {
           <p>
             Reading first? <a href={`/guides/${guide.slug}/`}>{guide.title}</a> walks through how to
             work this list.
+          </p>
+        )}
+        {hasCombos && (
+          <p>
+            Know which group you're in? <a href={`/scholarships/${facet.slug}/combos/`}>{facet.label} scholarship combos</a> sort
+            these awards into sets you can apply to together.
           </p>
         )}
         <p class="sabl-hublinks">

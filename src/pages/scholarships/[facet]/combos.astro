@@ -1,0 +1,270 @@
+---
+// A city's scholarship combos: /scholarships/medicine-hat/combos/. The rules
+// and the floor live in lib/combos.ts; this page only lays them out, in the
+// directory's own row so a combo reads as a short list, not a new design.
+import SabFooter from '../../../components/sab/SabFooter.astro';
+import SabFonts from '../../../components/sab/SabFonts.astro';
+import SabHeader from '../../../components/sab/SabHeader.astro';
+import Layout from '../../../layouts/Layout.astro';
+import { todayDate as albertaToday } from '../../../lib/calendar';
+import { CITY_COMBOS, combosForCity } from '../../../lib/combos';
+import { loadScholarships } from '../../../lib/data-loader';
+import { eligibilityFacts } from '../../../lib/eligibility-facts';
+import { enrichScholarships } from '../../../lib/enrich';
+import { SCHOLARSHIP_FACETS } from '../../../lib/facets';
+import { saysNoApplication } from '../../../lib/apply-method';
+import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../../lib/icons';
+import { DEFAULT_SCHOLARSHIP_STATE, amountCell, filterSortScholarships, getScholarshipStatus, rowAction, scholarshipWhen } from '../../../lib/list-core';
+import type { ScholarshipWithMeta } from '../../../lib/list-core';
+import { canApplyNow } from '../../../lib/status';
+import { formatVerifiedMonth, isCheckStale } from '../../../lib/utils';
+
+export async function getStaticPaths() {
+  const all = enrichScholarships(await loadScholarships());
+  const today = albertaToday();
+  return CITY_COMBOS
+    .map(page => ({ page, combos: combosForCity(page.city, all, today) }))
+    .filter(({ combos }) => combos.length > 0)
+    .map(({ page, combos }) => ({ params: { facet: page.city }, props: { page, combos } }));
+}
+
+const { page, combos } = Astro.props;
+const facet = SCHOLARSHIP_FACETS.find(f => f.slug === page.city)!;
+const canonical = `https://www.scholarab.ca/scholarships/${page.city}/combos/`;
+const sorted = (items: ScholarshipWithMeta[]) => filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
+
+const breadcrumbJson = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.scholarab.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'Scholarships', item: 'https://www.scholarab.ca/scholarships/' },
+    { '@type': 'ListItem', position: 3, name: facet.label, item: `https://www.scholarab.ca/scholarships/${facet.slug}/` },
+    { '@type': 'ListItem', position: 4, name: 'Combos', item: canonical },
+  ],
+};
+---
+
+<Layout
+  title={`${page.title} | ScholarAB`}
+  description={page.description}
+  ogTitle={`${page.title} | ScholarAB`}
+  ogDescription={page.description}
+  ogUrl={canonical}
+  canonical={canonical}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbJson)} slot="head" />
+  <SabFonts slot="head" chips />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/scholarships" />
+  </div>
+
+  <div id="sab-combos" class="sabp sabp-wide">
+    <div class="sabp-body">
+      <Fragment set:html={ICON_SPRITE} />
+      <div class="sabl-head">
+        <div class="sabl-title-row">
+          <div>
+            <h1 class="sabl-h1">{page.h1}</h1>
+            <p class="sabl-desc">{page.intro}</p>
+          </div>
+        </div>
+      </div>
+
+      {combos.map(({ combo, core, addOns }) => {
+        const viaSchool = core.every(s => s.applyViaGuidance);
+        const all = [...core, ...addOns];
+        const rows = (list: ScholarshipWithMeta[]) => sorted(list).map(s => {
+          const when = scholarshipWhen(s);
+          const facts = eligibilityFacts(s.eligibility);
+          const amount = amountCell(s.amount);
+          const noApply = saysNoApplication(s.notes, s.metaDetail, (s as { description?: string }).description);
+          const act = rowAction(canApplyNow(getScholarshipStatus(s)) && !noApply, s.url, `/scholarships/${s._slug}/`, s.title);
+          return (
+            <div
+              class="sabl-card"
+              data-combo-card
+              data-id={s.id}
+              data-deadline={s.deadline ?? undefined}
+              data-open-date={s.openDate ?? undefined}
+              data-inactive={s.active === false ? '' : undefined}
+              data-concluded={s.concluded ? '' : undefined}
+              data-estimated={s.deadlineEstimated ? '' : undefined}
+              data-rolling={s.rolling ? '' : undefined}
+              data-no-apply={noApply ? '' : undefined}
+            >
+              <div class="sabl-row-main">
+                <h3 class="sabl-name-h"><a href={`/scholarships/${s._slug}/`} class="sabl-name">{s.title}</a></h3>
+                {s.audience && <div class="sabl-blurb">{s.audience}</div>}
+                {facts.length > 0 && <ul class="sabl-facts" aria-label="Requirements">{facts.map(f => <li>{f}</li>)}</ul>}
+              </div>
+              <div class={amount.cls}>{amount.text}</div>
+              <div class="sabl-row-when">
+                <span class={when.cls} data-when><span data-when-main>{when.main}</span><span class="sabl-when-sub" data-when-sub hidden={!when.sub}>{when.sub}</span></span>
+                {isCheckStale(s.lastVerified) && <span class="sabl-checked">Last checked {formatVerifiedMonth(s.lastVerified)}</span>}
+              </div>
+              <div class="sabl-card-actions">
+                <button type="button" class="sabl-save" data-combo-save aria-label={`Save ${s.title}`} aria-pressed="false"><Fragment set:html={BOOKMARK_REF} /><span class="sabl-save-label" data-save-label>Save</span></button>
+                {act.external
+                  ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-track="apply" data-row-action data-url={s.url} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={EXT_REF} /></span></a>
+                  : <a href={act.href} class="sabl-apply" data-row-action data-url={s.url ?? undefined} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={ARROW_REF} /></span></a>}
+              </div>
+            </div>
+          );
+        });
+        return (
+          <section class="sabc-combo" id={combo.slug} aria-labelledby={`${combo.slug}-h`}>
+            <h2 class="sabl-group sabc-h" id={`${combo.slug}-h`}>
+              <span class="sabl-group-name">
+                <span class="sabl-group-label">{combo.name}</span>
+                <span class="sabl-group-count">{all.length}</span>
+              </span>
+            </h2>
+            <p class="sabc-who"><strong>For you if</strong> {combo.who}.{viaSchool && ' All of these go through your school, so one visit to the guidance office covers them.'}</p>
+            <div class="sabc-actions">
+              <button type="button" class="sabc-save-all" data-combo-save-all data-ids={core.map(s => s.id).join(',')}>
+                Save all {core.length}
+              </button>
+              <a class="sabc-saved-link" href="/saved/" data-combo-saved-link hidden>Open your saved list</a>
+            </div>
+            <div class="sabc-list">{rows(core)}</div>
+            {addOns.length > 0 && (
+              <>
+                <h3 class="sabc-sub">Add if it fits you</h3>
+                <div class="sabc-list">{rows(addOns)}</div>
+              </>
+            )}
+          </section>
+        );
+      })}
+
+      <div class="sabl-hubfoot">
+        <p>
+          Not in any of these? The <a href={`/scholarships/${facet.slug}/`}>full {facet.label} list</a> has
+          every local award, and <a href="/match/">the match quiz</a> sorts it by what you qualify for.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<script>
+  import { ARROW_REF, EXT_REF } from '../../../lib/icons.ts';
+  import { getScholarshipStatus, paintRowAction, rowAction, scholarshipWhen } from '../../../lib/list-core.ts';
+  import type { ScholarshipWithMeta } from '../../../lib/list-core.ts';
+  import { canApplyNow } from '../../../lib/status.ts';
+  import { getSaved, toggleSaved } from '../../../lib/tracker.ts';
+  import { sendEvent } from '../../../lib/events.ts';
+
+  const root = document.getElementById('sab-combos');
+  const cards = [...(root?.querySelectorAll<HTMLElement>('[data-combo-card]') ?? [])];
+  const idOf = (el: HTMLElement) => Number(el.dataset.id);
+  const nameOf = (el: HTMLElement) => el.querySelector('.sabl-name')?.textContent ?? '';
+
+  // The page is prerendered, so the countdowns and Apply labels are
+  // recomputed from the ISO dates here, as the directories do.
+  for (const el of cards) {
+    const d = el.dataset;
+    const s = {
+      id: idOf(el), title: nameOf(el), deadline: d.deadline ?? null, openDate: d.openDate ?? null,
+      active: d.inactive === undefined, concluded: d.concluded !== undefined,
+      deadlineEstimated: d.estimated !== undefined, rolling: d.rolling !== undefined,
+    } as unknown as ScholarshipWithMeta;
+    const whenEl = el.querySelector<HTMLElement>('[data-when]');
+    if (whenEl) {
+      const when = scholarshipWhen(s);
+      whenEl.className = when.cls;
+      whenEl.querySelector('[data-when-main]')!.textContent = when.main;
+      const sub = whenEl.querySelector<HTMLElement>('[data-when-sub]')!;
+      sub.textContent = when.sub;
+      sub.hidden = !when.sub;
+    }
+    const a = el.querySelector<HTMLAnchorElement>('[data-row-action]');
+    if (a) paintRowAction(a, rowAction(canApplyNow(getScholarshipStatus(s)) && d.noApply === undefined, a.dataset.url, el.querySelector('.sabl-name')!.getAttribute('href')!, s.title), { ext: EXT_REF, arrow: ARROW_REF });
+  }
+
+  function paint() {
+    const saved = new Set(getSaved());
+    for (const el of cards) {
+      const btn = el.querySelector<HTMLElement>('[data-combo-save]');
+      if (!btn) continue;
+      const on = saved.has(idOf(el));
+      btn.classList.toggle('on', on);
+      btn.setAttribute('aria-pressed', String(on));
+      btn.setAttribute('aria-label', on ? `Remove ${nameOf(el)} from saved` : `Save ${nameOf(el)}`);
+      btn.querySelector('[data-save-label]')!.textContent = on ? 'Saved' : 'Save';
+    }
+    for (const btn of root?.querySelectorAll<HTMLButtonElement>('[data-combo-save-all]') ?? []) {
+      const ids = btn.dataset.ids!.split(',').map(Number);
+      const done = ids.every(id => saved.has(id));
+      btn.disabled = done;
+      btn.textContent = done ? `All ${ids.length} saved` : `Save all ${ids.length}`;
+      const link = btn.parentElement?.querySelector<HTMLElement>('[data-combo-saved-link]');
+      if (link) link.hidden = !done;
+    }
+  }
+
+  const save = (id: number) => {
+    toggleSaved(id);
+    sendEvent('save', 'scholarship', id);
+  };
+
+  root?.addEventListener('click', e => {
+    const target = e.target as Element;
+    const one = target.closest<HTMLElement>('[data-combo-save]');
+    if (one) {
+      save(idOf(one.closest<HTMLElement>('[data-combo-card]')!));
+      paint();
+      return;
+    }
+    const all = target.closest<HTMLButtonElement>('[data-combo-save-all]');
+    if (all) {
+      const saved = new Set(getSaved());
+      for (const id of all.dataset.ids!.split(',').map(Number)) if (!saved.has(id)) save(id);
+      paint();
+      return;
+    }
+    const apply = target.closest<HTMLElement>('[data-track="apply"]');
+    if (apply) sendEvent('apply_click', 'scholarship', idOf(apply.closest<HTMLElement>('[data-combo-card]')!));
+  });
+
+  // Another tab can change the saved list.
+  window.addEventListener('storage', paint);
+  paint();
+</script>
+
+<style is:global>
+  body:has(#sab-combos) { background: var(--bg-page); }
+  #sab-combos .sabl-desc { min-height: 0; }
+  .sabc-combo { margin-top: 40px; scroll-margin-top: 90px; }
+  html.js .sabc-h { cursor: auto; }
+  .sabc-who {
+    font-size: 16px; line-height: 1.5; color: rgba(20, 25, 21, 0.78);
+    margin: 14px 0 0; max-width: 70ch;
+  }
+  .sabc-who strong { color: var(--text-primary); font-weight: 700; }
+  .sabc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: 16px 0 12px; }
+  .sabc-save-all {
+    font: 700 14px/1 var(--font-body); color: #fff; background: var(--text-primary);
+    border: 0; border-radius: 8px; padding: 12px 16px; min-height: 44px; cursor: pointer;
+  }
+  .sabc-save-all:hover { background: #2b332d; }
+  .sabc-save-all:disabled { cursor: default; color: var(--green); background: rgba(47, 211, 160, 0.15); }
+  .sabc-saved-link { font-size: 14.5px; font-weight: 600; color: var(--text-primary); }
+  .sabc-saved-link[hidden] { display: none; }
+  .sabc-sub {
+    font: 600 13px/1.2 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(20, 25, 21, 0.62); margin: 26px 0 8px;
+  }
+  /* The directory stripes rows inside [data-dir-grid]; a combo list is its
+     own short run, so it stripes itself the same way. */
+  .sabc-list > .sabl-card { border-top-color: transparent; }
+  .sabc-list > .sabl-card:nth-child(even) { --row-bg: rgba(20, 25, 21, 0.04); }
+  @media (max-width: 640px) {
+    .sabc-combo { margin-top: 28px; }
+    .sabc-who { font-size: 15px; }
+  }
+</style>

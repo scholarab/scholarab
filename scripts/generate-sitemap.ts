@@ -16,6 +16,7 @@ import { generateSlug, getToday } from '../src/lib/utils.ts';
 import { scholarshipIsIndexable, programIsIndexable, scholarshipStatusOf } from '../src/lib/status.ts';
 import { guides } from '../src/lib/guides.ts';
 import { SCHOLARSHIP_FACETS, ALL_PROGRAM_FACETS, facetItems, MIN_FACET_ITEMS } from '../src/lib/facets.ts';
+import { CITY_COMBOS, combosForCity, type ComboTarget } from '../src/lib/combos.ts';
 import { fingerprint, stampAll, newest, type LastmodManifest } from '../src/lib/lastmod.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -165,6 +166,13 @@ const lines: string[] = [
     .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
     .map(({ f, items }) =>
       urlEntry(`${BASE}/scholarships/${f.slug}/`, '0.8', newest(items.map((s) => modOf(scholarshipPath(s)))))),
+  // A combo page is built only for a city with at least one combo above the
+  // floor, and is as fresh as the freshest award in it.
+  ...CITY_COMBOS
+    .map((c) => ({ c, members: combosForCity(c.city, scholarships as Array<Scholarship & ComboTarget>, today).flatMap((b) => [...b.core, ...b.addOns]) }))
+    .filter(({ members }) => members.length > 0)
+    .map(({ c, members }) =>
+      urlEntry(`${BASE}/scholarships/${c.city}/combos/`, '0.7', newest(members.map((s) => modOf(scholarshipPath(s)))))),
   ...ALL_PROGRAM_FACETS
     .map((f) => ({ f, items: facetItems(f, indexablePrograms) }))
     .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
