@@ -27,6 +27,9 @@ test('text over every home photo slide holds 4.5:1 against its photo', async ({ 
         track.scrollLeft = idx * track.clientWidth;
         window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY);
       }, i);
+      // Photos after the first get their sources when the carousel reaches
+      // them; wait for the pixels, or this would measure the ink behind them.
+      await expect.poll(() => card.locator('img').evaluate(img => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0)).toBe(true);
       await card.locator('img').evaluate(img => (img as HTMLImageElement).decode().catch(() => {}));
       const name = (await card.locator('.sab-scope-name').textContent())?.trim();
       const boxes = await section.evaluate((el, [idx, sels]) => {

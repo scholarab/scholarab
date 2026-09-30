@@ -300,6 +300,24 @@ test('home scope carousel links every card to its hub and steps with the arrows'
   await expect(root.locator('[data-scopes-prev]')).toBeVisible();
 });
 
+// Only the photo in view and the one beside it download; the next arrives as
+// the strip moves. `loading="lazy"` alone fetched five on a Pixel 7
+// (1,725 KB for one photo on screen, 2026-09-30).
+test('home carousel downloads the photo in view and its neighbour, not the whole strip', async ({ page }) => {
+  const photos = new Set<string>();
+  page.on('request', r => { if (/\/photos\/backdrops\/.*-(tall|wide)-/.test(r.url())) photos.add(new URL(r.url()).pathname); });
+  await page.goto('/');
+  const root = page.locator('[data-scopes="scholarships"]');
+  await root.scrollIntoViewIfNeeded();
+  const cards = root.locator('[data-scope-card] img');
+  await expect.poll(() => cards.nth(1).evaluate(img => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0)).toBe(true);
+  await page.waitForTimeout(500);
+  expect(photos.size).toBe(2);
+  expect(await cards.nth(2).getAttribute('src')).toBeNull();
+  await root.locator('[data-scopes-track]').evaluate(el => { el.scrollLeft = el.clientWidth; });
+  await expect.poll(() => cards.nth(2).evaluate(img => (img as HTMLImageElement).currentSrc)).toMatch(/\/photos\/backdrops\//);
+});
+
 // The program carousel below it: one card per format hub, and its arrows move
 // its own track, not the scholarship one above.
 test('home program carousel links every card to its format hub', async ({ page }, testInfo) => {

@@ -1394,3 +1394,25 @@ Cause, from `private/index-status/weekly.log`: the 2026-09-14 run inspected 12 U
 | A separate scheduler or a hosted job | Not added: the key stays on this machine and out of CI secrets. |
 
 Four candidates, none restored: add-back fraction 0/4. Measured on 2026-09-30: a full manual run inspected 1,878 of 1,878 with 0 failures and 0 retries in 53 minutes (1,792 indexed, 86 in the request queue). The next Monday run is the first real test of the launchd path; read the `RESULT` line at the bottom of weekly.log.
+
+## Home carousel photos on a phone, September 30, 2026
+
+Outcome: a phone visitor downloads the carousel photo they can see and the one a swipe will show, not the whole strip beside it.
+
+Cause: every card's photo was an `<img loading="lazy">`. Chrome's lazy-load distance covers the sideways strip, so on a Pixel 7 the page fetched five 2000w tall photos while one was on screen. Measured on the built site with the page scrolled top to bottom and the carousel never swiped:
+
+| | Before | After |
+| --- | --- | --- |
+| Pixel 7 (Chromium), at load | 5 photos, 1,725 KB | 1 photo, 311 KB |
+| Pixel 7, after scrolling past the carousel | 5 photos, 1,725 KB | 2 photos, 530 KB |
+| iPhone 13 (WebKit), after scrolling past | 3 photos, 991 KB | 2 photos, 530 KB |
+| Desktop Chrome, after scrolling past | 3 photos, 432 KB | 2 photos, 254 KB |
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| Real sources on every card | Removed: only each set's first photo is a real `<img>`. The rest carry `data-srcset` until the carousel is within 400px of the screen, then the card in view and its neighbours get their sources as the strip moves. Swiping each of the ten cards with a 700ms settle landed on a loaded photo every time in Chromium and WebKit. |
+| Smaller files for 3x phones | Not done: a 1170px-wide iPhone screen would upscale the 1000w file, a visible change to photos Ilia chose at full strength. |
+| A lazy-loading library | Not added: an IntersectionObserver and the carousel's own scroll sync. |
+| Photos for no-JS visitors | Kept: a `<noscript>` copy of each deferred picture; with JS off all 18 photos load, as before. |
+
+Four candidates, none restored: add-back fraction 0/4. The contrast test over the photos now waits for each photo to load; before, a deferred card would have been measured against the ink behind it and passed. New browser guard: the home page fetches exactly two carousel photos once the carousel is in view, and the third arrives on a swipe. Local only; `npm run ci` passed (1,163) and `npm run test:e2e` passed (153).

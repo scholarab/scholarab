@@ -164,6 +164,15 @@ const formatCards: PhotoCard[] = PROGRAM_FORMATS
   }))
   .sort((a, b) => b.count - a.count);
 
+// Only a set's first photo is a real <img>. The rest carry their sources in
+// data- attributes until the carousel script asks for them: `loading="lazy"`
+// alone let Chrome fetch the four cards beside the visible one in the sideways
+// strip, 1,725 KB on a Pixel 7 for one photo on screen (2026-09-30).
+// <noscript> keeps every photo for a visitor without JS.
+const tallSet = (b: string) => `/photos/backdrops/${b}-tall-1000.webp 1000w, /photos/backdrops/${b}-tall-2000.webp 2000w`;
+const wideSrc = (b: string) => `/photos/backdrops/${b}-wide-1672.webp`;
+const wideSet = (b: string) => `${wideSrc(b)} 1672w, /photos/backdrops/${b}-wide-3344.webp 3344w`;
+
 const carousels = [
   // `none` is the line under a hub with nothing open, in the directory's own
   // status words (lib/status.ts) so the slide and the hub describe it alike.
@@ -324,17 +333,27 @@ const carousels = [
     {carousels.map((k, i) => (
       <div class="sab-scopes" id={`sab-scopes-${k.key}`} role="tabpanel" aria-labelledby={`sab-scopes-tab-${k.key}`} data-scopes={k.key} data-off={i === 0 ? undefined : ''}>
         <div class="sab-scopes-track" data-scopes-track tabindex="-1">
-          {k.cards.map(c => (
+          {k.cards.map((c, j) => (
             <article class="sab-scope" aria-label={`${c.label}: ${c.count} ${k.noun}`} data-scope-card>
-              <picture>
-                <source media="(max-width: 700px)" srcset={`/photos/backdrops/${c.backdrop}-tall-1000.webp 1000w, /photos/backdrops/${c.backdrop}-tall-2000.webp 2000w`} sizes="100vw" />
-                <img
-                  class="sab-scope-img"
-                  src={`/photos/backdrops/${c.backdrop}-wide-1672.webp`}
-                  srcset={`/photos/backdrops/${c.backdrop}-wide-1672.webp 1672w, /photos/backdrops/${c.backdrop}-wide-3344.webp 3344w`}
-                  sizes="100vw" alt="" loading="lazy" decoding="async"
-                />
-              </picture>
+              {j === 0 ? (
+                <picture>
+                  <source media="(max-width: 700px)" srcset={tallSet(c.backdrop)} sizes="100vw" />
+                  <img class="sab-scope-img" src={wideSrc(c.backdrop)} srcset={wideSet(c.backdrop)} sizes="100vw" alt="" loading="lazy" decoding="async" />
+                </picture>
+              ) : (
+                <Fragment>
+                  <picture data-defer>
+                    <source media="(max-width: 700px)" data-srcset={tallSet(c.backdrop)} sizes="100vw" />
+                    <img class="sab-scope-img" data-src={wideSrc(c.backdrop)} data-srcset={wideSet(c.backdrop)} sizes="100vw" alt="" decoding="async" />
+                  </picture>
+                  <noscript>
+                    <picture>
+                      <source media="(max-width: 700px)" srcset={tallSet(c.backdrop)} sizes="100vw" />
+                      <img class="sab-scope-img" src={wideSrc(c.backdrop)} srcset={wideSet(c.backdrop)} sizes="100vw" alt="" loading="lazy" decoding="async" />
+                    </picture>
+                  </noscript>
+                </Fragment>
+              )}
               <div class="sab-scope-body">
                 <div class="sab-scope-kicker">{c.kicker}</div>
                 <div class="sab-scope-bottom">
@@ -500,8 +519,30 @@ const carousels = [
       const c = cards[Math.max(0, Math.min(cards.length - 1, i))];
       if (c) track.scrollTo({ left: c.offsetLeft - track.offsetLeft, behavior: smooth });
     };
+    // Photos for the card in view and its neighbours, so a swipe lands on a
+    // loaded picture; nothing until the carousel is near the screen.
+    let near = false;
+    const wake = (i: number) => {
+      if (!near) return;
+      for (const c of cards.slice(Math.max(0, i - 1), i + 2)) {
+        const pic = c.querySelector<HTMLElement>('picture[data-defer]');
+        if (!pic) continue;
+        pic.removeAttribute('data-defer');
+        pic.querySelectorAll<HTMLSourceElement | HTMLImageElement>('[data-srcset]').forEach(el => {
+          el.srcset = el.dataset.srcset!;
+          if (el instanceof HTMLImageElement && el.dataset.src) el.src = el.dataset.src;
+        });
+      }
+    };
+    new IntersectionObserver((entries, io) => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      near = true;
+      io.disconnect();
+      wake(current());
+    }, { rootMargin: '0px 0px 400px 0px' }).observe(root);
     const sync = () => {
       const i = current();
+      wake(i);
       dots.forEach((d, j) => (j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
       prev.hidden = track.scrollLeft < 4;
       next.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
@@ -860,6 +901,7 @@ const carousels = [
   }
   .sab-scope picture, .sab-scope-img { position: absolute; inset: 0; width: 100%; height: 100%; }
   .sab-scope-img { object-fit: cover; }
+  html:not(.js) .sab-scope picture[data-defer] { display: none; }
   /* Every slide fades to the hero's ink (#0A1310) at its top and bottom
      edges, after spacex.com (Ilia, 2026-09-23): hero to carousel and carousel
      to carousel then meet solid ink against solid ink, so the seam between two
