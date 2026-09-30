@@ -20,13 +20,6 @@ export type GuideMeta = {
   datePublished: string
   dateModified: string
   /**
-   * Three-line "what you need to know" summary, drawn from the guide's own
-   * prose. Written for the /app guide reader, which was deleted 2026-08-12;
-   * nothing renders these today. Kept because it is authored content, not
-   * mobile plumbing: a guide-summary block on the web pages would use it as-is.
-   */
-  takeaways: [string, string, string]
-  /**
    * Detail-page slugs this guide is *about*, not merely mentions. The listing
    * pages named here render a link back to the guide, so Google sees the pair
    * as a directory entry plus its explainer rather than two thin pages
@@ -59,12 +52,7 @@ export const guides: GuideMeta[] = [
     kicker: 'GET INTO A LAB',
     minutes: 8,
     datePublished: '2026-08-23',
-    dateModified: '2026-08-23',
-    takeaways: [
-      'HYRS splits by geography, not preference: north of Red Deer is the U of A, south to Claresholm is UCalgary, Claresholm and below is Lethbridge.',
-      'The paid programs want Grade 11 with 85% in Math 20, Biology 20 and one more science, and they close in March for a July start.',
-      'If you miss the marks or the deadline, Youreka and the Heritage Fairs still produce a real research project on your record.',
-    ],
+    dateModified: '2026-09-29',
     relatedListings: [
       'alberta-innovates-hyrs-university-of-alberta',
       'alberta-innovates-hyrs-university-of-calgary',
@@ -86,12 +74,7 @@ export const guides: GuideMeta[] = [
     kicker: 'BEFORE MED SCHOOL',
     minutes: 7,
     datePublished: '2026-08-23',
-    dateModified: '2026-08-23',
-    takeaways: [
-      'AHS youth volunteering opens at 15, runs year-round, and is the only route that puts you in a clinical building on a schedule.',
-      'Discovery Days and HOSA both run through your school, so the way in is a teacher conversation in September, not an application in April.',
-      'Paying for a summer medical program teaches you material; a placement or a contest result is what a referee can later write about.',
-    ],
+    dateModified: '2026-09-29',
     relatedListings: [
       'ahs-youth-volunteer-research-programs',
       'cmhf-discovery-days-in-health-sciences',
@@ -112,12 +95,7 @@ export const guides: GuideMeta[] = [
     kicker: 'BUILD SOMETHING',
     minutes: 8,
     datePublished: '2026-08-23',
-    dateModified: '2026-08-23',
-    takeaways: [
-      'The Canadian Computing Competition is written at your school in February, and a teacher registers it: if yours never has, that is the fixable part.',
-      'CyberTitan teams are registered between April and October, so the window closes before most students start thinking about the year.',
-      'Space Apps, the Swift Student Challenge, CyberSci and IBM SkillsBuild need no gatekeeper and no money.',
-    ],
+    dateModified: '2026-09-29',
     relatedListings: [
       'canadian-computing-competition-ccc',
       'cybertitan-national-cybersecurity-competition',
@@ -158,12 +136,7 @@ export const guides: GuideMeta[] = [
     kicker: 'THE BIG ONE',
     minutes: 9,
     datePublished: '2026-07-19',
-    dateModified: '2026-08-22',
-    takeaways: [
-      'Each grade is assessed on its own: $400 for Grade 10, $800 for Grade 11 and $1,300 for Grade 12 at 80%+.',
-      'There is no essay, no interview and no competition. Meet the five-course average and the money is yours.',
-      'Applications open August 1, and you apply once you are enrolled in post-secondary, not while still in high school.',
-    ],
+    dateModified: '2026-09-29',
     relatedListings: ['alexander-rutherford-scholarship'],
   },
   {
@@ -180,12 +153,7 @@ export const guides: GuideMeta[] = [
     kicker: 'SERVICE',
     minutes: 6,
     datePublished: '2026-09-01',
-    dateModified: '2026-09-01',
-    takeaways: [
-      'Committees read for whether you stayed, not for hours. One placement held two years beats eight things tried once, and is less work.',
-      'AHS hospital placements, TELUS Spark and JA all take students on ongoing intake, so there is no application window to wait for.',
-      'Community involvement is an explicit criterion on dozens of awards, from a $70,000 national one down to $1,000 in Medicine Hat, where the odds are far better.',
-    ],
+    dateModified: '2026-09-29',
     // No relatedListings: this is a survey across six placements, not the
     // explainer for any one of them, and the AHS listing is already claimed by
     // the medical-experience guide, which is the page a student arriving on
@@ -205,12 +173,7 @@ export const guides: GuideMeta[] = [
     kicker: 'COMPETITIONS',
     minutes: 6,
     datePublished: '2026-09-01',
-    dateModified: '2026-09-01',
-    takeaways: [
-      'There is no junior chemistry olympiad. The bar is taking chemistry and being under 20, not a grade, so a Grade 10 in Chem 20 may write it.',
-      'The Canadian Chemistry Contest is the only entry point, and you cannot register yourself: a teacher signs the school up through a regional coordinator by late March.',
-      'At the olympiad round the take-home exam is 15% of the score and a hard gate: skip it and you are ineligible for the National Camp regardless of your exam mark.',
-    ],
+    dateModified: '2026-09-29',
     relatedListings: ['canadian-chemistry-olympiad-cco'],
   },
   {
@@ -227,12 +190,7 @@ export const guides: GuideMeta[] = [
     kicker: 'NATIONAL',
     minutes: 7,
     datePublished: '2026-09-01',
-    dateModified: '2026-09-01',
-    takeaways: [
-      'Roughly $150,000 over four years, not the $100,000 usually quoted: a $12,000 stipend, a full tuition waiver at a partner university, and up to $14,000 for summers.',
-      'The 88% is calculated from Grade 10, 11 and 12 courses only, so recalculate before you rule yourself out. Past that bar it is judged on service, not marks.',
-      'You can lose and still be paid: up to 54 finalists get $6,000 and up to 70 provincial recipients get $3,000, which is why the application is worth five weeks.',
-    ],
+    dateModified: '2026-09-29',
     relatedListings: ['loran-scholarship'],
   },
   {
@@ -243,12 +201,7 @@ export const guides: GuideMeta[] = [
     kicker: 'SENIOR YEAR',
     minutes: 9,
     datePublished: '2026-07-19',
-    dateModified: '2026-08-22',
-    takeaways: [
-      'The most valuable awards close earliest: Loran goes in mid-October, before most schools mention scholarships at all.',
-      'November to February is nominated and institutional awards; internal school deadlines are always earlier than published ones.',
-      'March to May is local awards, where the applicant pools are smallest and the odds are best.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     slug: 'how-to-write-a-scholarship-essay',
@@ -258,12 +211,7 @@ export const guides: GuideMeta[] = [
     kicker: 'WRITING',
     minutes: 10,
     datePublished: '2026-07-19',
-    dateModified: '2026-08-22',
-    takeaways: [
-      'Underline the nouns in the award description: leadership, resilience, community. Those nouns are your marking rubric.',
-      'Open inside one specific moment, show the action you took, then say what changed. Specifics are proof; adjectives are claims.',
-      'Reusing an essay is smart. Reusing it without re-aiming it at the new award is how strong students lose.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     slug: 'grade-11-scholarship-timeline',
@@ -273,12 +221,7 @@ export const guides: GuideMeta[] = [
     kicker: 'START EARLY',
     minutes: 5,
     datePublished: '2026-07-19',
-    dateModified: '2026-07-19',
-    takeaways: [
-      'Your Grade 11 average has a posted price: $500 at 75–79.9% and $800 at 80%+, straight from Rutherford.',
-      'Two years in one role beats eight one-off activities. Grade 11 is the last year you can start something and still call it sustained.',
-      'The teachers who write your Grade 12 reference letters are the ones who know you from Grade 11.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     slug: 'reference-letters-for-scholarships',
@@ -288,12 +231,7 @@ export const guides: GuideMeta[] = [
     kicker: 'REFERENCES',
     minutes: 5,
     datePublished: '2026-07-19',
-    dateModified: '2026-08-22',
-    takeaways: [
-      'Ask the person who knows you best, not the one with the best title. A teacher who watched you improve beats a principal who knows your name.',
-      'Three weeks before the deadline is the minimum, and the word "strong" in the ask gives a lukewarm referee a graceful exit.',
-      'Hand every referee one page: what the award rewards, the deadline and how to submit, and three specific things they saw you do.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     slug: 'scholarships-for-medicine-hat-students',
@@ -303,12 +241,7 @@ export const guides: GuideMeta[] = [
     kicker: 'MEDICINE HAT',
     minutes: 6,
     datePublished: '2026-07-19',
-    dateModified: '2026-07-19',
-    takeaways: [
-      'Take Rutherford first. It pays up to $2,500 for marks you already earned and stacks with everything else.',
-      'Work the pools in order of odds: your own school office, then service clubs, then city, county and community foundations.',
-      'Some school awards are only advertised on a sheet by the counsellor’s door, so ask for the local awards list by name.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     // City guide #2, written 2026-09-03 off measured evidence rather than a
@@ -327,12 +260,7 @@ export const guides: GuideMeta[] = [
     kicker: 'RED DEER',
     minutes: 6,
     datePublished: '2026-09-03',
-    dateModified: '2026-09-03',
-    takeaways: [
-      'Take Rutherford first. It pays up to $2,500 for marks you already earned and stacks with everything else.',
-      'The best odds are awards tied to one school: Penhold Crossing alone gives three $10,000 Ford Family scholarships a year.',
-      'Bower and Rotary are the two biggest local awards and both are handed out through your counsellor, so ask in September.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     slug: 'scholarships-for-lethbridge-students',
@@ -342,12 +270,7 @@ export const guides: GuideMeta[] = [
     kicker: 'LETHBRIDGE',
     minutes: 6,
     datePublished: '2026-09-03',
-    dateModified: '2026-09-03',
-    takeaways: [
-      'December 15 is the date that matters: ULethbridge early admission carries the Board of Governors award with it.',
-      'The Health Care Professionals of Tomorrow award needs 40 lifetime volunteer hours at Chinook Regional Hospital, so start in Grade 10 or 11.',
-      'One Lethbridge Polytechnic form reaches over 400 awards and also carries Jason Lang and Louise McKinney.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     slug: 'trades-scholarships-rap-alberta',
@@ -357,12 +280,7 @@ export const guides: GuideMeta[] = [
     kicker: 'TRADES',
     minutes: 6,
     datePublished: '2026-07-19',
-    dateModified: '2026-08-22',
-    takeaways: [
-      'RAP pays you a wage, gives you high school credits, and banks hours toward the first period of your apprenticeship.',
-      'Being registered unlocks awards nobody competes for: $1,000 High School Apprenticeship and $2,000 Bright Futures.',
-      'Getting in goes through your off-campus education coordinator or guidance counsellor, not an application form.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     slug: 'dead-scholarships-alberta-counsellor-lists',
@@ -377,12 +295,7 @@ export const guides: GuideMeta[] = [
     kicker: 'ORIGINAL RESEARCH',
     minutes: 7,
     datePublished: '2026-09-08',
-    dateModified: '2026-09-08',
-    takeaways: [
-      'Nine awards on one circulating Alberta list are dead, including the Jeremy Dias Scholarship, whose charity went bankrupt in October 2024.',
-      'Only one of the nine says so on its own page. The rest freeze with an old deadline, so a working link proves nothing.',
-      'Check the newest date on the provider\'s own page, not whether the link loads, and never trust an automated error as proof of death.',
-    ],
+    dateModified: '2026-09-29',
   },
   {
     slug: 'local-scholarships-better-odds',
@@ -393,11 +306,6 @@ export const guides: GuideMeta[] = [
     minutes: 5,
     datePublished: '2026-07-19',
     dateModified: '2026-08-22',
-    takeaways: [
-      'A $10,000 national award drawing 10,000 applicants is worth a dollar in expected value. A $1,000 local award drawing 25 is worth forty.',
-      'Local committees know your school, your employers and often your referee, and they read part-time jobs as the point, not as filler.',
-      'They hide in guidance offices, city and county programs, service clubs and community foundations. Ask for the list directly.',
-    ],
   },
   {
     slug: 'alberta-scholarship-deadlines-by-month',
@@ -414,12 +322,7 @@ export const guides: GuideMeta[] = [
     kicker: 'THE CALENDAR',
     minutes: 7,
     datePublished: '2026-09-07',
-    dateModified: '2026-09-19',
-    takeaways: [
-      `May carries ${DL.byMonth[4]} of the ${DL.total} dated deadlines, far more than any other month, and it is the month students stop looking.`,
-      `The spikes are administrators, not coincidence: ${DL.onDayFrom('12-18', 'keyano.ca')} awards share December 18 because one college books them all on one date.`,
-      `The money and the odds run in opposite directions. October and November hold the six-figure awards and ${DL.sum(10, 11)} deadlines between them.`,
-    ],
+    dateModified: '2026-09-29',
   },
 ]
 

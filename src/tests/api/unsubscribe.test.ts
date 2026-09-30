@@ -71,12 +71,21 @@ describe('GET /api/unsubscribe', () => {
   })
 
   it('rejects a request with no token', async () => {
-    expect((await get('http://localhost/api/unsubscribe')).status).toBe(400)
+    const res = await get('http://localhost/api/unsubscribe')
+    expect(res.status).toBe(400)
+    expect(res.headers.get('Content-Type')).toContain('text/html')
+    const html = await res.text()
+    expect(html).toContain('Open the full link in your ScholarAB email')
+    expect(html).toContain('href="/"')
+    expect(mockDelete).not.toHaveBeenCalled()
   })
 
   it('refuses when rate limited', async () => {
     mockHitRateLimit.mockResolvedValueOnce(true)
-    expect((await get('http://localhost/api/unsubscribe?token=abc')).status).toBe(429)
+    const res = await get('http://localhost/api/unsubscribe?token=abc')
+    expect(res.status).toBe(429)
+    expect(await res.text()).toContain('Wait 15 minutes')
+    expect(mockDelete).not.toHaveBeenCalled()
   })
 })
 

@@ -7,10 +7,6 @@ import SabHeader from './SabHeader.astro';
 import SabFooter from './SabFooter.astro';
 import SabFonts from './SabFonts.astro';
 import { guides, type GuideMeta } from '../../lib/guides';
-// The guide CTA hardcoded "TWO MINUTES" long after lib/quiz.ts settled on 30
-// seconds as the honest number; the guides were the last surface still
-// quoting the rejected one. Read it from the constant like everywhere else.
-import { QUIZ_DURATION } from '../../lib/quiz';
 import { brandedTitle } from '../../lib/meta';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, facetItems } from '../../lib/facets';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
@@ -147,14 +143,9 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
         </aside>
       )}
 
-      {/* The guide ends in its own voice, not on a dark CTA band (critique
-          2026-09-23): where to look next, as plain lines on the note card. */}
-      <div class="sabg-hublink">
-        {hubFacet && hubHref && (
-          <p>Ready to look? <a href={hubHref}>Browse every {hubFacet.label} listing →</a></p>
-        )}
-        <p>Not sure which ones fit you? <a href="/match/">Take the match quiz</a> ({QUIZ_DURATION}, no account) and get a shortlist worth checking.</p>
-      </div>
+      {hubFacet && hubHref && localRows.length === 0 && (
+        <p class="sabg-hublink"><a href={hubHref}>Browse every {hubFacet.label} listing →</a></p>
+      )}
 
       <nav class="sabg-more" aria-labelledby="sabg-more-h">
         <h2 id="sabg-more-h" class="sabg-more-title">Keep reading</h2>
@@ -253,17 +244,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   }
   .sabg-prose blockquote p:last-child { margin-bottom: 0; }
 
-  /* Was a 3px mint left stripe over a mint wash. That treatment is the one
-     genuinely template-looking thing left on a guide page, and the guides
-     already own a better one: .sabg-note, a white card on a hard border. Same
-     card here, so a hub link and a note read as the same site. */
-  .sabg-hublink {
-    margin: 32px 0 0; font-size: 16px;
-    background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 14px;
-    padding: 18px 22px;
-  }
-  .sabg-hublink p { margin: 0; line-height: 1.55; }
-  .sabg-hublink p + p { margin-top: 8px; }
+  .sabg-hublink { margin: 32px 0 0; font-size: 16px; line-height: 1.55; }
   .sabg-hublink a { color: #0A6B4D; font-weight: 600; }
 
   /* ── Keep reading ── */

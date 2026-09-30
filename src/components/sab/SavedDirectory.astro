@@ -8,17 +8,12 @@ interface Props {
   initialPrograms: Program[];
 }
 const { initialScholarships, initialPrograms } = Astro.props;
-// The card clamps the blurb to two lines, so the text past that never shows;
-// shipping every program's full description made it the page's fastest-growing
-// field. The detail page keeps the whole text.
-const BLURB_MAX = 320;
-const blurb = (d: string | null) => !d || d.length <= BLURB_MAX ? d : `${d.slice(0, d.lastIndexOf(' ', BLURB_MAX))}…`;
 // Keep the card fields inline so every bookmark works with the cached page.
 const items: SavedItem[] = [
-  ...initialScholarships.map(({ id, title: name, amount, audience, category, deadline, openDate, active, concluded, deadlineEstimated, rolling, url }) =>
-    ({ type: 'scholarship' as const, id, name, amount, audience, category, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, href: `/scholarships/${generateSlug(name)}/` })),
-  ...initialPrograms.map(({ id, name, category, provider, description, deadline, url }) =>
-    ({ type: 'program' as const, id, name, category, provider, description: blurb(description), deadline, url, href: `/programs/${generateSlug(name)}/` })),
+  ...initialScholarships.map(({ id, title: name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url }) =>
+    ({ type: 'scholarship' as const, id, name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, href: `/scholarships/${generateSlug(name)}/` })),
+  ...initialPrograms.map(({ id, name, eligibility: audience, paid, cost, deadline, active, url }) =>
+    ({ type: 'program' as const, id, name, audience, paid, cost, deadline, ...(active === false ? { active: false } : {}), url, href: `/programs/${generateSlug(name)}/` })),
 ];
 ---
 
@@ -42,7 +37,7 @@ const items: SavedItem[] = [
       <h1 class="sabl-h1">Saved</h1>
       <p class="sabl-desc tnum" data-sv-count>Your shortlist is saved on this device.</p>
     </div>
-    <div class="sabs-toggle" role="group" aria-label="View">
+    <div class="sabs-toggle" role="group" aria-label="View" data-sv-toggle hidden>
       <button type="button" class="sabs-toggle-btn on" data-sv-view="list" aria-pressed="true">List</button>
       <button type="button" class="sabs-toggle-btn" data-sv-view="calendar" aria-pressed="false">Calendar</button>
     </div>
@@ -76,13 +71,6 @@ const items: SavedItem[] = [
       </h2>
       <div class="sabl-grid" style="padding-top:0"></div>
     </div>
-
-    {/* The list used to end in white space: a shortlist is the start of the
-        work, so say what comes next (critique 2026-09-27). */}
-    <p class="sabs-next">
-      Next: open each one and use <strong>Email me before it closes</strong>, so no deadline slips past.
-      Want more? <a href="/match/">Answer a few questions</a> or <a href="/scholarships/">browse everything</a>.
-    </p>
   </div>
 
   <div data-sv-cal hidden></div>

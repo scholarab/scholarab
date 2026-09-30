@@ -21,7 +21,7 @@ function card(id: number, name: string, category: string, paid: boolean, order: 
          data-category="${category}" data-paid="${paid ? '1' : ''}" data-order="${order}"
          data-search="${name.toLowerCase()}\n${category.toLowerCase()}">
       <a class="sabl-name" href="/scholarships/${name.toLowerCase()}/">${name}</a>
-      <button type="button" class="sabl-save" data-dir-save data-id="${id}" data-name="${name}"
+      <button type="button" class="sabl-save" data-dir-save
               aria-label="Save ${name}" aria-pressed="false">☆</button>
     </div>`
 }
@@ -33,11 +33,15 @@ function mountFixture() {
       <div class="sabl-stat-label" data-dir-stat-label></div>
       <div class="sabl-stat-soon" data-dir-stat-soon hidden></div>
       <input type="search" data-dir-search />
-      <button class="sabl-chip on" data-fkey="sort" data-fval="order" aria-pressed="true">Order</button>
-      <button class="sabl-chip" data-fkey="sort" data-fval="name" aria-pressed="false">A–Z</button>
-      <button class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All</button>
-      <button class="sabl-chip" data-fkey="category" data-fval="Science" aria-pressed="false">Science</button>
-      <button class="sabl-chip" data-fkey="category" data-fval="Arts" aria-pressed="false">Arts</button>
+      <label>Sort<select data-fselect="sort">
+        <option value="order">Order</option>
+        <option value="name">A–Z</option>
+      </select></label>
+      <label>Type<select data-fselect="category">
+        <option value="all" data-filter-label="All">All (3)</option>
+        <option value="Science" data-filter-label="Science">Science (2)</option>
+        <option value="Arts" data-filter-label="Arts">Arts (1)</option>
+      </select></label>
       <div class="sabl-result-line" data-dir-count></div>
       <p data-dir-corrected hidden></p>
       <div class="sabl-grid" data-dir-grid>
@@ -67,7 +71,6 @@ function setup() {
   initDirectory<Item, State>('#dir-root', {
     itemType: 'scholarship',
     defaultState: { sort: 'order', category: 'all' },
-    toggleKeys: ['category'],
     parseCard(el) {
       const d = el.dataset
       return {
@@ -111,6 +114,12 @@ const visibleCardNames = () =>
   $$('[data-dir-card]').filter(el => !el.hidden).map(el => el.dataset.name)
 const gridOrderNames = () => $$('[data-dir-grid] [data-dir-card]').map(el => el.dataset.name)
 const click = (el: Element) => el.dispatchEvent(new Event('click', { bubbles: true }))
+const selectFilter = (key: string, value: string, root = '') => {
+  const select = document.querySelector<HTMLSelectElement>(`${root} select[data-fselect="${key}"]`)!
+  select.value = value
+  select.dispatchEvent(new Event('change', { bubbles: true }))
+  return select
+}
 
 /**
  * The corpus-wide token index the client fetches when a search comes up
@@ -150,48 +159,69 @@ describe('initDirectory', () => {
 
   it('hides the secondary stat when it returns empty, and follows the filters', () => {
     setup()
-    const science = $$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!
-    science.click()
+    selectFilter('category', 'Science')
     // Science holds Beta Lab (paid) and Gamma Research (unpaid).
     expect($('[data-dir-stat]').textContent).toBe('1')
     expect($('[data-dir-stat-soon]').textContent).toBe('+1 UNPAID')
-    const arts = $$('[data-fkey="category"]').find(c => c.dataset.fval === 'Arts')!
-    arts.click()
+    selectFilter('category', 'Arts')
     // Arts holds only Alpha Camp, which is unpaid: no paid money to headline.
     expect($('[data-dir-stat-label]').textContent).toBe('NONE PAID')
     expect($('[data-dir-stat-soon]').textContent).toBe('+1 UNPAID')
   })
 
-  it('category chip filters cards and updates chip state', () => {
+  it('category select filters cards and exposes the selected option and counts', () => {
     setup()
-    const science = $$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!
-    click(science)
+    const category = selectFilter('category', 'Science')
     expect(visibleCardNames()).toEqual(['Beta Lab', 'Gamma Research'])
-    expect(science.classList.contains('on')).toBe(true)
-    expect(science.getAttribute('aria-pressed')).toBe('true')
-    expect($$('[data-fkey="category"]').find(c => c.dataset.fval === 'all')!.classList.contains('on')).toBe(false)
+    expect(category.value).toBe('Science')
+    expect(category.selectedOptions[0]?.textContent).toBe('Science (2)')
+    expect([...category.options].map(option => option.textContent)).toEqual(['All (3)', 'Science (2)', 'Arts (1)'])
     expect($('[data-dir-count]').textContent).toBe('2 OF 3 SHOWN')
+    expect(new URL(location.href).searchParams.get('category')).toBe('Science')
   })
 
-  it('re-clicking the active category toggles back to all', () => {
+  it('selecting all removes the category filter', () => {
     setup()
-    const science = $$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!
-    click(science)
-    click(science)
+    selectFilter('category', 'Science')
+    const category = selectFilter('category', 'all')
     expect(visibleCardNames()).toHaveLength(3)
-    expect(science.classList.contains('on')).toBe(false)
+    expect(category.value).toBe('all')
+    expect(category.selectedOptions[0]?.textContent).toBe('All (3)')
+    expect(new URL(location.href).searchParams.has('category')).toBe(false)
   })
 
-  it('sort chip reorders the grid DOM', () => {
+  it('updates option counts for the search while retaining alternatives to the selected filter', () => {
     setup()
-    click($$('[data-fkey="sort"]').find(c => c.dataset.fval === 'name')!)
+    const category = selectFilter('category', 'Science')
+    const input = $('[data-dir-search]') as HTMLInputElement
+    input.value = 'alpha'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    expect(visibleCardNames()).toEqual([])
+    expect([...category.options].map(option => option.textContent)).toEqual(['All (1)', 'Science (0)', 'Arts (1)'])
+    expect(category.value).toBe('Science')
+    selectFilter('category', 'Arts')
+    expect(visibleCardNames()).toEqual(['Alpha Camp'])
+    expect($('[data-dir-count]').textContent).toBe('1 OF 3 SHOWN')
+  })
+
+  it('sort select reorders the grid DOM', () => {
+    setup()
+    // Make the fixture's numeric order differ from its alphabetical order so
+    // a select that failed to dispatch would not accidentally pass this test.
+    $('[data-dir-card][data-id="2"]').dataset.order = '3'
+    $('[data-dir-card][data-id="3"]').dataset.order = '1'
+    document.dispatchEvent(new Event('astro:page-load'))
+    expect(gridOrderNames()).toEqual(['Gamma Research', 'Beta Lab', 'Alpha Camp'])
+    selectFilter('sort', 'name')
     expect(gridOrderNames()).toEqual(['Alpha Camp', 'Beta Lab', 'Gamma Research'])
-    click($$('[data-fkey="sort"]').find(c => c.dataset.fval === 'order')!)
-    expect(gridOrderNames()).toEqual(['Alpha Camp', 'Beta Lab', 'Gamma Research'])
+    expect(($('select[data-fselect="sort"]') as HTMLSelectElement).value).toBe('name')
+    selectFilter('sort', 'order')
+    expect(gridOrderNames()).toEqual(['Gamma Research', 'Beta Lab', 'Alpha Camp'])
   })
 
   it('search filters, shows empty state, and clear button resets everything', () => {
     setup()
+    selectFilter('category', 'Arts')
     const input = $('[data-dir-search]') as HTMLInputElement
     input.value = 'zzz nothing'
     input.dispatchEvent(new Event('input', { bubbles: true }))
@@ -203,6 +233,7 @@ describe('initDirectory', () => {
     expect(visibleCardNames()).toHaveLength(3)
     expect($('[data-dir-empty]').hidden).toBe(true)
     expect(input.value).toBe('')
+    expect(($('select[data-fselect="category"]') as HTMLSelectElement).value).toBe('all')
   })
 
   it('hands the detail pages the order actually on screen', () => {
@@ -254,7 +285,7 @@ describe('initDirectory', () => {
   it('paints previously saved ids on load', () => {
     savedIds = [2]
     setup()
-    const btn = $$('[data-dir-save]').find(b => b.dataset.id === '2')!
+    const btn = $('[data-dir-card][data-id="2"] [data-dir-save]')
     expect(btn.classList.contains('on')).toBe(true)
     expect(btn.textContent).toBe('★')
   })
@@ -278,7 +309,7 @@ describe('initDirectory', () => {
 
     // Query that matches a card but is starved by a filter → no event
     vi.mocked(sendEvent).mockClear()
-    click($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Arts')!)
+    selectFilter('category', 'Arts')
     vi.useFakeTimers()
     await type('gamma')
     vi.advanceTimersByTime(1500)
@@ -324,7 +355,7 @@ describe('initDirectory', () => {
     const sub = $('[data-dir-empty-sub]') as HTMLElement
 
     // On the page but hidden by a filter: no fallback, no event.
-    click($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Arts')!)
+    selectFilter('category', 'Arts')
 
     // "nursing" is absent from this page's cards but present in the index's
     // scholarship tokens, which is the facet-slice case.
@@ -363,11 +394,11 @@ describe('initDirectory', () => {
 
   it('re-parses cards and restores URL filters on subsequent astro:page-load', () => {
     setup()
-    click($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!)
+    selectFilter('category', 'Science')
     expect(visibleCardNames()).toHaveLength(2)
     document.dispatchEvent(new Event('astro:page-load'))
     expect(visibleCardNames()).toHaveLength(2)
-    expect($$('[data-fkey="category"]').find(c => c.dataset.fval === 'Science')!.classList.contains('on')).toBe(true)
+    expect(($('select[data-fselect="category"]') as HTMLSelectElement).value).toBe('Science')
   })
 })
 
@@ -387,8 +418,10 @@ describe('grouped grids', () => {
   function setupGroups(state = 'all') {
     document.body.innerHTML = `
       <div id="grp-root">
-        <button class="sabl-chip" data-fkey="group" data-fval="all">All</button>
-        <button class="sabl-chip" data-fkey="group" data-fval="open">Open</button>
+        <label>Status<select data-fselect="group">
+          <option value="all" data-filter-label="All">All (3)</option>
+          <option value="open" data-filter-label="Open">Open (2)</option>
+        </select></label>
         <div data-dir-count></div>
         <div class="sabl-grid" data-dir-grid>
           ${gcard(1, 'One', 'open')}${gcard(2, 'Two', 'open')}${gcard(3, 'Three', 'closed')}
@@ -400,7 +433,6 @@ describe('grouped grids', () => {
       initDirectory<DirectoryItem & { group: string }, { group: string }>('#grp-root', {
         itemType: 'scholarship',
         defaultState: { group: state },
-        toggleKeys: [],
         parseCard: el => ({
           el, id: Number(el.dataset.id), name: el.dataset.name ?? '',
           search: el.dataset.search ?? '', group: el.dataset.group ?? '',
@@ -431,15 +463,15 @@ describe('grouped grids', () => {
 
   it('drops the headers when a filter leaves one group', () => {
     setupGroups()
-    click(document.querySelector('[data-fval="open"]')!)
+    selectFilter('group', 'open')
     expect(layout()).toEqual(['One', 'Two'])
     expect(document.querySelectorAll('[data-dir-grid] [data-dir-group]:not([hidden])').length).toBe(0)
   })
 
   it('restores them when the filter is lifted', () => {
     setupGroups()
-    click(document.querySelector('[data-fval="open"]')!)
-    click(document.querySelector('[data-fval="all"]')!)
+    selectFilter('group', 'open')
+    selectFilter('group', 'all')
     expect(layout()).toEqual(['H:open:2', 'One', 'Two', 'H:closed:1', 'Three'])
     expect(document.querySelectorAll('[data-dir-group="open"]').length).toBe(1)
   })
@@ -470,8 +502,10 @@ describe('grouped grids', () => {
   it('opens a default-shut run when a filter leaves nothing else', () => {
     document.body.innerHTML = `
       <div id="shut-root">
-        <button class="sabl-chip" data-fkey="group" data-fval="all">All</button>
-        <button class="sabl-chip" data-fkey="group" data-fval="closed">Closed</button>
+        <label>Status<select data-fselect="group">
+          <option value="all" data-filter-label="All">All (4)</option>
+          <option value="closed" data-filter-label="Closed">Closed (1)</option>
+        </select></label>
         <div data-dir-count></div>
         <div class="sabl-grid" data-dir-grid>
           ${gcard(1, 'One', 'open')}${gcard(2, 'Two', 'open')}${gcard(3, 'Three', 'closed')}${gcard(4, 'Four', 'after')}
@@ -481,7 +515,6 @@ describe('grouped grids', () => {
     initDirectory<DirectoryItem & { group: string }, { group: string }>('#shut-root', {
       itemType: 'scholarship',
       defaultState: { group: 'all' },
-      toggleKeys: [],
       parseCard: el => ({
         el, id: Number(el.dataset.id), name: el.dataset.name ?? '',
         search: el.dataset.search ?? '', group: el.dataset.group ?? '',
@@ -502,10 +535,10 @@ describe('grouped grids', () => {
     expect(grid()).toEqual(['H:open', 'One', 'Two', 'H:closed', 'H:after'])
     // Every match of the filter sits in a shut run: open them rather than
     // answer with two headings over an empty page.
-    click(document.querySelector('#shut-root [data-fval="closed"]')!)
+    selectFilter('group', 'closed', '#shut-root')
     expect(grid()).toEqual(['H:closed', 'Three', 'H:after', 'Four'])
     // Back to everything: the default shut returns.
-    click(document.querySelector('#shut-root [data-fval="all"]')!)
+    selectFilter('group', 'all', '#shut-root')
     expect(grid()).toEqual(['H:open', 'One', 'Two', 'H:closed', 'H:after'])
   })
 })

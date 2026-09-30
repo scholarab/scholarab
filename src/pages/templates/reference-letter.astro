@@ -42,7 +42,7 @@ const blocks = [
     id: 'ask',
     kicker: 'STEP 01',
     title: 'The ask',
-    lede: 'Send this three weeks before the deadline, or in September if a big fall award is on your list. Short on purpose: you are asking one question, and the word "strong" is doing the work. It gives a lukewarm referee a graceful way out, and a lukewarm letter is worse than no letter.',
+    lede: 'Send this three weeks before the deadline, or in September for a big fall award.',
     text: `Hi [Ms./Mr./Mx. Name],
 
 I'm applying for the [award name], which is for [one sentence on what it rewards]. The deadline is [date].
@@ -58,7 +58,7 @@ Thank you,
     id: 'package',
     kicker: 'STEP 02',
     title: 'The one-page package',
-    lede: 'This is the part almost nobody does, and it is the single biggest upgrade available to you. Your referee wants to help and remembers a fraction of what you did. Hand them the evidence and "a responsible student" becomes "reorganised our bottle-drive logistics and doubled the total": same teacher, same student, different letter. Send it the day they say yes.',
+    lede: 'Send this when your referee agrees.',
     text: `REFERENCE PACKAGE: [Your name]
 
 THE AWARD
@@ -90,7 +90,7 @@ I'll send one reminder a few days before the deadline. Thank you, genuinely.
     id: 'reminder',
     kicker: 'STEP 03',
     title: 'The reminder',
-    lede: 'Three or four days out. Nobody has ever been annoyed by this and plenty of letters have been saved by it. Keep it light and make it easy to say "not yet".',
+    lede: 'Send this three or four days before the deadline.',
     text: `Hi [Name],
 
 Quick reminder that the [award name] reference is due [date], [three days] from now. The submission link is [link], and I've pasted the package below again in case it's easier than digging for the email.
@@ -104,7 +104,7 @@ Thanks again,
     id: 'thanks',
     kicker: 'STEP 04',
     title: 'The thank-you',
-    lede: 'Win or lose, and within a week. You will need this person again for the spring round of local awards, and referees remember the students who closed the loop.',
+    lede: 'Send this within a week, whether you win or not.',
     text: `Hi [Name],
 
 Thank you for writing the [award name] reference. [I found out this week that I got it / I didn't get this one, but the application was much stronger for having your letter behind it.]
@@ -135,21 +135,17 @@ I really appreciate you taking the time.
   <div class="sabp" id="sab-tpl" style="display:flex;flex-direction:column;min-height:100%;">
     <div class="sabp-header">
       <div class="sabt-hero">
-        <div class="sab-kicker sabt-kicker">
-          <a href="/guides/" class="sabt-kicker-link">GUIDES</a>
-          <span class="sabt-kicker-sep">/</span>
-          <span>TEMPLATE</span>
-        </div>
+        <a href="/guides/" class="sabt-back">← All guides</a>
         <h1 class="sabt-h1">Reference letter request template</h1>
         <p class="sabt-lede">
-          Four things to send, in order, with the blanks marked. Copy them, fill in the brackets, and delete this sentence if you paste it by accident.
+          Four messages to copy and fill in: the ask, the reference package, a reminder and a thank-you.
         </p>
       </div>
     </div>
 
     <div class="sabt-body" style="flex:1;">
       <p class="sabt-intro">
-        A reference letter is the only part of your application you do not write, which is exactly why committees believe it. The difference between a letter that moves you up the pile and one that quietly sinks you is almost never the referee. It is how you asked. <a href="/guides/reference-letters-for-scholarships/">The guide explains who to ask and why this works</a>. This page is the part you actually use.
+        Read the <a href="/guides/reference-letters-for-scholarships/">reference letter guide</a> for help choosing a referee.
       </p>
 
       {blocks.map(b => (
@@ -168,19 +164,15 @@ I really appreciate you taking the time.
 
       <section class="sabt-block">
         <div class="sabt-block-head">
-          <span class="sabt-mono sabt-step">BEFORE YOU SEND</span>
-          <h2 class="sabt-h2">Three ways this goes wrong</h2>
+          <h2 class="sabt-h2">Before you send</h2>
         </div>
         <ul class="sabt-list">
-          <li><strong>You left a bracket in.</strong> Read it once out loud. Every year somebody emails a teacher asking about the [award name].</li>
-          <li><strong>You asked the wrong person.</strong> The teacher who watched you struggle and improve writes a better letter than the principal who knows your name. Check the award's own rules first, too: some require a teacher, some exclude family, and some want two different perspectives.</li>
-          <li><strong>You asked too late.</strong> Three weeks is the floor. Letters written at 11&nbsp;p.m. the night before read like it, and in October every teacher in Alberta is being asked at once.</li>
+          <li><strong>Fill every bracket.</strong> Read the message once before sending it.</li>
+          <li><strong>Check the referee rules.</strong> Choose someone who knows your work. Some awards require a teacher, exclude family, or ask for two different perspectives.</li>
+          <li><strong>Allow time.</strong> Aim to ask at least three weeks before the deadline.</li>
         </ul>
       </section>
 
-      <p class="sabt-outro">
-        Once the letter is handled, the rest is deadlines. The <a href="/deadlines/">deadline calendar</a> shows what closes each month, and you can <a href="/saved/">turn on reminders</a> for the awards you have saved so a reference you worked for does not go unused.
-      </p>
     </div>
   </div>
 
@@ -216,10 +208,8 @@ I really appreciate you taking the time.
   .sabt-mono { font-family: var(--font-label); }
 
   .sabt-hero { padding: 64px var(--sab-gutter) 72px; width: 100%; box-sizing: border-box; }
-  .sabt-kicker { margin-bottom: 24px; }
-  .sabt-kicker-link { color: rgba(238, 241, 236, 0.55); text-decoration: none; }
-  .sabt-kicker-link:hover { color: #EEF1EC; }
-  .sabt-kicker-sep { color: rgba(238, 241, 236, 0.3); }
+  .sabt-back { display: inline-block; margin-bottom: 24px; color: rgba(238, 241, 236, 0.8); text-decoration: none; }
+  .sabt-back:hover { color: #EEF1EC; }
   .sabt-h1 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(38px, 5.5vw, 62px); line-height: 1.05; letter-spacing: -0.015em;
@@ -228,10 +218,9 @@ I really appreciate you taking the time.
   .sabt-lede { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(238, 241, 236, 0.7); max-width: 52ch; }
 
   .sabt-body { max-width: calc(var(--sab-read) + 2 * var(--sab-gutter)); padding: 56px var(--sab-gutter) 96px; width: 100%; box-sizing: border-box; }
-  .sabt-intro, .sabt-outro { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); margin: 0 0 8px; }
-  .sabt-outro { margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(20,25,21,0.14); }
-  .sabt-intro a, .sabt-outro a, .sabt-list a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
-  .sabt-intro a:hover, .sabt-outro a:hover { color: #141915; }
+  .sabt-intro { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); margin: 0 0 8px; }
+  .sabt-intro a, .sabt-list a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
+  .sabt-intro a:hover { color: #141915; }
 
   .sabt-block { margin-top: 48px; }
   .sabt-block-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }

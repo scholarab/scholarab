@@ -117,10 +117,6 @@ const HUBS = [
   '/programs/clubs/', '/programs/conferences/',
 ];
 
-/** The row whose label is `name`; FORMAT and FIELD are both navigation rows. */
-const filterRow = (page: import('@playwright/test').Page, name: string) =>
-  page.locator('.sabl-filter-row').filter({ has: page.locator('.sabl-row-label', { hasText: new RegExp(`^${name}$`, 'i') }) });
-
 test('every hub puts its filter chips at the same height', async ({ page }, testInfo) => {
   // Mobile stacks the header and wraps the chips on its own terms; the row a
   // reader clicks across is the desktop one.
@@ -176,9 +172,8 @@ test('every scholarship hub links to every other hub of its kind', async ({ page
   }
 });
 
-// The field hubs carry the FIELD row as navigation, the way the scholarship
-// hubs carry SCOPE: every sibling reachable in one click from any of them,
-// with the page's own field marked rather than linked to itself.
+// Category navigation belongs in the header and hub footer. The compact
+// directory controls filter in place; every authored hub remains reachable.
 test('every format hub links to every other format', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === 'mobile', 'desktop layout');
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -190,15 +185,17 @@ test('every format hub links to every other format', async ({ page }, testInfo) 
   ];
   for (const path of ['/programs/', ...formats]) {
     await page.goto(path);
-    const row = filterRow(page, 'FORMAT');
-    const links = await row.locator('a.sabl-chip-link').evaluateAll(
+    const navigation = page.locator(path === '/programs/' ? '#sabh-menu-programs' : '.sabl-hublinks');
+    const links = await navigation.locator('a[href]').evaluateAll(
       els => els.map(e => (e as HTMLAnchorElement).getAttribute('href')!),
     );
     expect(links, `${path} links every sibling`).toEqual(
       expect.arrayContaining(formats.filter(f => f !== path)),
     );
-    expect(links, `${path} does not link to itself`).not.toContain(path);
-    await expect(row.locator('button')).toHaveCount(0);
+    if (path !== '/programs/') {
+      expect(links, `${path} does not link to itself`).not.toContain(path);
+      expect(links).toContain('/programs/');
+    }
   }
 });
 
@@ -211,22 +208,20 @@ test('every field hub links to every other field', async ({ page }, testInfo) =>
     '/programs/social-sciences/', '/programs/health/', '/programs/engineering/',
     '/programs/enrichment/', '/programs/trades/',
   ];
-  // /programs itself is in the walk: its FIELD row navigates too, so a reader
-  // on the directory opens a field's page rather than filtering in place.
+  // The root's header keeps every field hub; each hub footer links siblings.
   for (const path of ['/programs/', ...fields]) {
     await page.goto(path);
-    const row = filterRow(page, 'FIELD');
-    const links = await row.locator('a.sabl-chip-link').evaluateAll(
+    const navigation = page.locator(path === '/programs/' ? '#sabh-menu-programs' : '.sabl-hublinks');
+    const links = await navigation.locator('a[href]').evaluateAll(
       els => els.map(e => (e as HTMLAnchorElement).getAttribute('href')!),
     );
     expect(links, `${path} links every sibling`).toEqual(
       expect.arrayContaining(fields.filter(f => f !== path)),
     );
-    expect(links, `${path} does not link to itself`).not.toContain(path);
-    // The chip for the page you are on, "All" included, is marked rather than
-    // linked, and it is the only one.
-    await expect(row.locator('[aria-current="page"]')).toHaveCount(1);
-    await expect(row.locator('button')).toHaveCount(0);
+    if (path !== '/programs/') {
+      expect(links, `${path} does not link to itself`).not.toContain(path);
+      expect(links).toContain('/programs/');
+    }
   }
 });
 
@@ -344,64 +339,6 @@ test('home film holds while a header dropdown is open', async ({ page }, testInf
   await page.mouse.move(700, 850);
   await expect(page.locator('.sabh-drop')).not.toHaveAttribute('data-on', '');
   await expect.poll(playing).toBe(1);
-});
-
-test('How it works walks through five steps and ends on the quiz', async ({ page }) => {
-  await page.goto('/about/');
-  // Desktop has the button in the bar; phones reach it through the menu.
-  const burger = page.locator('#sabh-burger');
-  if (await burger.isVisible()) {
-    await burger.click();
-    await page.locator('.sabh-how-row button').click();
-  } else {
-    await page.locator('.sabh-how').click();
-  }
-  const dialog = page.locator('dialog[data-tour]');
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('heading', { name: 'Find scholarships' })).toBeVisible();
-  // Layout height, not the box: the open animation scales the dialog in.
-  const height = await dialog.evaluate(el => (el as HTMLElement).offsetHeight);
-  for (const title of ['Get a shortlist', 'Save the ones you want', 'Never miss a deadline', 'Apply with a plan']) {
-    await dialog.getByRole('button', { name: 'Next' }).click();
-    await expect(dialog.getByRole('heading', { name: title })).toBeVisible();
-    // Next stays put: the dialog is the height of its tallest step
-    expect(await dialog.evaluate(el => (el as HTMLElement).offsetHeight)).toBe(height);
-  }
-  await expect(dialog.getByRole('link', { name: 'Find my scholarships' })).toHaveAttribute('href', '/match/');
-  await dialog.getByRole('button', { name: 'Back' }).click();
-  await expect(dialog.getByRole('heading', { name: 'Never miss a deadline' })).toBeVisible();
-  await page.keyboard.press('Escape');
-  await expect(dialog).toBeHidden();
-});
-
-test('A first visit gets a one-line strip, not the dialog, and dismissing it is remembered', async ({ page }) => {
-  // Real browsers only: automation is excluded, so pose as one here.
-  await page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }))
-  await page.goto('/scholarships/')
-  const strip = page.locator('[data-tour-strip]')
-  await expect(strip).toBeVisible({ timeout: 5_000 })
-  await expect(page.locator('dialog[data-tour]')).toBeHidden()
-  await strip.getByRole('button', { name: 'Dismiss' }).click()
-  await expect(strip).toBeHidden()
-  await page.goto('/programs/')
-  await page.waitForTimeout(2_000)
-  await expect(strip).toBeHidden()
-});
-
-test('The strip opens the walkthrough', async ({ page }) => {
-  await page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }))
-  await page.goto('/scholarships/')
-  await page.locator('[data-tour-strip]').getByRole('button', { name: /how it works/i }).click()
-  await expect(page.locator('dialog[data-tour]')).toBeVisible()
-  await expect(page.locator('[data-tour-strip]')).toBeHidden()
-});
-
-test('How it works does not interrupt the quiz', async ({ page }) => {
-  await page.addInitScript(() => Object.defineProperty(navigator, 'webdriver', { get: () => false }))
-  await page.goto('/match/')
-  await page.waitForTimeout(2_000)
-  await expect(page.locator('dialog[data-tour]')).toBeHidden()
-  await expect(page.locator('[data-tour-strip]')).toBeHidden()
 });
 
 // Safari zooms the page into any field under 16px that takes focus, and sizes

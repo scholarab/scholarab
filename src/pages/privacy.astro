@@ -8,7 +8,7 @@ import { webPageJson } from '../lib/ld';
 // Shown in the page and used as the "last updated" line. Bump this whenever
 // what the site actually collects changes; the date is the only thing telling
 // a reader whether this document still describes the code.
-const LAST_UPDATED = 'September 28, 2026';
+const LAST_UPDATED = 'September 29, 2026';
 
 // One row per thing the site stores. Kept as data rather than prose so it is
 // obvious when a new table or endpoint has no row here yet.
@@ -57,9 +57,9 @@ const collected = [
   },
   {
     what: 'Anonymous counts of what gets used',
-    when: 'When you open a listing, click through to apply, save something, run the match quiz, or step through the How it works walkthrough (where it was opened, which step you reached, and whether you closed it or went on to the quiz), and once per visit if you arrived from one of our own tagged links, such as the one in an Instagram or TikTok bio, which records only which of those it was.',
+    when: 'When you open a listing, click through to apply, save something, run the match quiz, and once per visit if you arrived from one of our own tagged links, such as the one in an Instagram or TikTok bio, which records only which of those it was.',
     why: 'To know which listings matter and which way of telling people about the site actually works, so the directory gets better. What was searched for is the row above; this row is counts.',
-    kept: '180 days. These rows carry no IP address, no cookie, no account and no session. There is nothing in them that points back to a person, which also means they cannot be traced to you in order to delete them.',
+    kept: '180 days, including previously recorded walkthrough counts. These rows carry no IP address, no cookie, no account and no session. There is nothing in them that points back to a person, which also means they cannot be traced to you in order to delete them.',
   },
 ];
 
@@ -103,8 +103,8 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
       <h1 class="sabpv-h1">What we keep,<br /><span class="sabpv-h1-accent">and what we don't.</span></h1>
       <p class="sabpv-lede">
         ScholarAB is a free directory built by a high school student in Medicine Hat. You can use the
-        entire site without giving us anything. The only personal information we ever hold is an email
-        address, and only if you asked us to remind you about a deadline.
+        directory without an account or an email address. The details below explain what is collected
+        when you browse, allow analytics or ask for a reminder.
       </p>
       <p class="sabpv-updated">Last updated {LAST_UPDATED}</p>
 
@@ -169,8 +169,7 @@ const ldJson = webPageJson({ name: 'Privacy Policy', description, path: '/privac
       <p class="sabpv-p">
         The unsubscribe link at the bottom of any ScholarAB email has a <strong>Delete all my data</strong>
         button next to it. It removes every reminder set up with your address, the address itself, and
-        its fingerprint, immediately. That is the whole of what we hold about you, so there is nothing
-        left over.
+        its fingerprint, immediately.
       </p>
       <p class="sabpv-p">
         You can also email <!--email_off--><a href="mailto:contact.scholarab@gmail.com">contact.scholarab@gmail.com</a><!--/email_off--> to

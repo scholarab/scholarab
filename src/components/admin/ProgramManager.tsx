@@ -78,7 +78,7 @@ export default function ProgramManager({ initialData }: Props) {
         ? prev.map(p => p.id === saved.id ? saved : p)
         : [saved, ...prev]
       )
-      toast.success(isEdit ? 'Program updated' : 'Program added')
+      toast.success(isEdit ? 'Program draft saved' : 'Program draft created')
       refresh()
       closeModal()
     } catch (e) {
@@ -96,7 +96,7 @@ export default function ProgramManager({ initialData }: Props) {
       if (res.status === 429) { toast.error('Too many requests. Wait a moment and try again.'); return }
       if (!res.ok) throw new Error()
       setItems(prev => prev.filter(p => p.id !== modal.item!.id))
-      toast.success('Program deleted')
+      toast.success('Program marked for removal at publication')
       refresh()
       closeModal()
     } catch {
@@ -108,8 +108,8 @@ export default function ProgramManager({ initialData }: Props) {
 
   const textarea = (key: keyof Program, label: string) => (
     <div key={key}>
-      <label className="block text-xs text-white/50 mb-1">{label}</label>
-      <textarea
+      <label htmlFor={`pm-${key}`} className="block text-xs text-white/50 mb-1">{label}</label>
+      <textarea id={`pm-${key}`}
         value={(form[key] as string) ?? ''}
         onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
         rows={3}
@@ -203,22 +203,22 @@ export default function ProgramManager({ initialData }: Props) {
             {/* ── Essential fields ── */}
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-white/70 mb-1.5">Program name *</label>
-                <input type="text" value={form.name ?? ''} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                <label htmlFor="pm-program-name" className="block text-sm text-white/70 mb-1.5">Program name *</label>
+                <input id="pm-program-name" type="text" value={form.name ?? ''} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                   placeholder="e.g. SHAD Canada"
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-1.5">Organization / Institution</label>
-                <input type="text" value={form.provider ?? ''} onChange={e => setForm(f => ({ ...f, provider: e.target.value }))}
+                <label htmlFor="pm-organization-institution" className="block text-sm text-white/70 mb-1.5">Organization / Institution</label>
+                <input id="pm-organization-institution" type="text" value={form.provider ?? ''} onChange={e => setForm(f => ({ ...f, provider: e.target.value }))}
                   placeholder="e.g. University of Alberta"
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-1.5">Official website *</label>
-                <input type="url" value={form.url ?? ''} onChange={e => setForm(f => ({ ...f, url: e.target.value }))}
+                <label htmlFor="pm-official-website" className="block text-sm text-white/70 mb-1.5">Official website *</label>
+                <input id="pm-official-website" type="url" value={form.url ?? ''} onChange={e => setForm(f => ({ ...f, url: e.target.value }))}
                   onBlur={e => {
                     const v = e.target.value.trim()
                     if (v && !v.startsWith('http://') && !v.startsWith('https://')) {
@@ -231,21 +231,21 @@ export default function ProgramManager({ initialData }: Props) {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm text-white/70 mb-1.5">Application deadline</label>
-                  <input type="date" value={form.deadline ?? ''} onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))}
+                  <label htmlFor="pm-application-deadline" className="block text-sm text-white/70 mb-1.5">Application deadline</label>
+                  <input id="pm-application-deadline" type="date" value={form.deadline ?? ''} onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <div>
-                  <label className="block text-sm text-white/70 mb-1.5">Grade levels</label>
-                  <input type="text" value={form.grades ?? ''} onChange={e => setForm(f => ({ ...f, grades: e.target.value }))}
+                  <label htmlFor="pm-grade-levels" className="block text-sm text-white/70 mb-1.5">Grade levels</label>
+                  <input id="pm-grade-levels" type="text" value={form.grades ?? ''} onChange={e => setForm(f => ({ ...f, grades: e.target.value }))}
                     placeholder="e.g. Grade 10–12"
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-1.5">Location</label>
-                <input type="text" value={form.location ?? ''} onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
+                <label htmlFor="pm-location" className="block text-sm text-white/70 mb-1.5">Location</label>
+                <input id="pm-location" type="text" value={form.location ?? ''} onChange={e => setForm(f => ({ ...f, location: e.target.value }))}
                   placeholder="e.g. Edmonton, AB or Online"
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               </div>
@@ -255,7 +255,7 @@ export default function ProgramManager({ initialData }: Props) {
                 <span className="text-sm text-white/70">Students receive a paid stipend</span>
               </label>
               {form.paid && (
-                <input type="text" value={form.stipend ?? ''} onChange={e => setForm(f => ({ ...f, stipend: e.target.value }))}
+                <input aria-label="Stipend amount" type="text" value={form.stipend ?? ''} onChange={e => setForm(f => ({ ...f, stipend: e.target.value }))}
                   placeholder="Stipend amount (e.g. $5,000)"
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
               )}
@@ -263,8 +263,8 @@ export default function ProgramManager({ initialData }: Props) {
               {/* Separate from the stipend checkbox on purpose: not paying the
                   student says nothing about whether the student pays. */}
               <div className="space-y-2">
-                <span className="text-sm text-white/70">What the student pays</span>
-                <select value={form.cost ?? 'unconfirmed'} onChange={e => setForm(f => ({ ...f, cost: e.target.value as typeof f.cost }))}
+                <label htmlFor="pm-cost" className="text-sm text-white/70">What the student pays</label>
+                <select id="pm-cost" value={form.cost ?? 'unconfirmed'} onChange={e => setForm(f => ({ ...f, cost: e.target.value as typeof f.cost }))}
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition">
                   <option value="unconfirmed">Not checked yet</option>
                   <option value="free">Nothing, the program is free</option>
@@ -272,7 +272,7 @@ export default function ProgramManager({ initialData }: Props) {
                   <option value="varies">Varies</option>
                 </select>
                 {(form.cost === 'fee' || form.cost === 'varies') && (
-                  <input type="text" value={form.costNote ?? ''} onChange={e => setForm(f => ({ ...f, costNote: e.target.value }))}
+                  <input aria-label="Program fee details" type="text" value={form.costNote ?? ''} onChange={e => setForm(f => ({ ...f, costNote: e.target.value }))}
                     placeholder="The fee in the provider's words (e.g. ~$1,700 per module)"
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 )}
@@ -280,7 +280,7 @@ export default function ProgramManager({ initialData }: Props) {
 
               <label className="flex items-center gap-3 cursor-pointer">
                 <input type="checkbox" checked={form.active ?? true} onChange={e => setForm(f => ({ ...f, active: e.target.checked }))} className="accent-[#22d3a5] w-4 h-4" />
-                <span className="text-sm text-white/70">Show on public site (active)</span>
+                <span className="text-sm text-white/70">Include on public site when published</span>
               </label>
             </div>
 
@@ -297,28 +297,28 @@ export default function ProgramManager({ initialData }: Props) {
             {showAdvanced && (
               <div className="mt-3 space-y-3 border-t border-white/6 pt-4">
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Category</label>
-                  <select value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
+                  <label htmlFor="pm-category" className="block text-xs text-white/50 mb-1">Category</label>
+                  <select id="pm-category" value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
                     className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
                     <option value="">Select</option>
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Duration</label>
-                  <input type="text" value={form.duration ?? ''} onChange={e => setForm(f => ({ ...f, duration: e.target.value }))}
+                  <label htmlFor="pm-duration" className="block text-xs text-white/50 mb-1">Duration</label>
+                  <input id="pm-duration" type="text" value={form.duration ?? ''} onChange={e => setForm(f => ({ ...f, duration: e.target.value }))}
                     placeholder="e.g. 4 weeks"
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Eligibility requirements</label>
-                  <input type="text" value={form.eligibility ?? ''} onChange={e => setForm(f => ({ ...f, eligibility: e.target.value }))}
+                  <label htmlFor="pm-eligibility-requirements" className="block text-xs text-white/50 mb-1">Eligibility requirements</label>
+                  <input id="pm-eligibility-requirements" type="text" value={form.eligibility ?? ''} onChange={e => setForm(f => ({ ...f, eligibility: e.target.value }))}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 {textarea('description', 'Description')}
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Emoji icon</label>
-                  <input type="text" value={form.emoji ?? ''} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))}
+                  <label htmlFor="pm-emoji-icon" className="block text-xs text-white/50 mb-1">Emoji icon</label>
+                  <input id="pm-emoji-icon" type="text" value={form.emoji ?? ''} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))}
                     placeholder="e.g. 🔬"
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>

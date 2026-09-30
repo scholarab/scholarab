@@ -1,0 +1,15 @@
+---
+interface Props {
+  label: string;
+  filterKey: string;
+  options: { value: string; label: string; count: number }[];
+  value?: string;
+}
+const { label, filterKey, options, value = 'all' } = Astro.props;
+---
+<label class="sabl-filter-row sabl-interactive-filter">
+  <span class="sabl-row-label">{label}</span>
+  <select class="sabl-filter-select" data-fselect={filterKey}>
+    {options.map(option => <option value={option.value} selected={option.value === value} data-filter-label={option.label}>{option.label} ({option.count.toLocaleString('en-CA')})</option>)}
+  </select>
+</label>

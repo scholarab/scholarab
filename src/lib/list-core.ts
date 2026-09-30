@@ -392,6 +392,7 @@ export type ProgramStatusFilter = 'all' | 'open' | 'active' | 'ongoing' | 'tba' 
 
 export interface ProgramFilterState {
   selectedCategory: string;
+  selectedFormat?: string;
   searchQuery: string;
   sortBy: ProgramSort;
   statusFilter?: ProgramStatusFilter;
@@ -414,7 +415,7 @@ export const DEFAULT_PROGRAM_STATE: ProgramFilterState = {
 /** The program twin of selectScholarships; see that comment. */
 export function selectPrograms(
   initialPrograms: ProgramWithMeta[],
-  { selectedCategory, searchQuery, statusFilter = 'open' }: ProgramFilterState,
+  { selectedCategory, selectedFormat = 'all', searchQuery, statusFilter = 'open' }: ProgramFilterState,
   statusCache: Map<number, ProgramStatus> = buildProgramStatusCache(initialPrograms),
 ): ProgramWithMeta[] {
   const afterStatus = statusFilter === 'all'
@@ -426,6 +427,9 @@ export function selectPrograms(
   const afterCategory = selectedCategory === 'all'
     ? afterStatus
     : afterStatus.filter(p => p.category === selectedCategory);
+  const afterFormat = selectedFormat === 'all'
+    ? afterCategory
+    : afterCategory.filter(p => p.format === selectedFormat);
   // The GRADE row was deleted on 2026-09-15 (Ilia): of 123 programs it held
   // back 10 at Grade 10 and 4 at Grade 12, because most say "High school" or
   // give an age range, and programMatchesGrade counts those as inclusive.
@@ -433,8 +437,8 @@ export function selectPrograms(
   // programMatchesGrade itself stays; the quiz matcher is its real caller.
   const q = normalizeSearchQuery(searchQuery);
   const afterSearch = q === ''
-    ? afterCategory
-    : searchRows(afterCategory, programSearchBlob, q);
+    ? afterFormat
+    : searchRows(afterFormat, programSearchBlob, q);
 
   return afterSearch;
 }

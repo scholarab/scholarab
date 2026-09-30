@@ -24,13 +24,14 @@ export async function getStaticPaths() {
   // directory, so they must stay out of the hubs too; same rule as
   // /programs, and the sitemap agrees with both.
   const all = enrichPrograms((await loadPrograms()).filter(p => programIsListed(p, today)));
-  return ALL_PROGRAM_FACETS
+  const hubs = ALL_PROGRAM_FACETS
     .map(facet => ({ facet, items: facetItems(facet, all) }))
-    .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
-    .map(({ facet, items }) => ({ params: { facet: facet.slug }, props: { facet, items, allItems: all } }));
+    .filter(({ items }) => items.length >= MIN_FACET_ITEMS);
+  const browseFacets = hubs.map(({ facet: { slug, label, kind } }) => ({ slug, label, kind }));
+  return hubs.map(({ facet, items }) => ({ params: { facet: facet.slug }, props: { facet, items, browseFacets } }));
 }
 
-const { facet, items, allItems } = Astro.props;
+const { facet, items, browseFacets } = Astro.props;
 
 const ordered = filterSortPrograms(items, DEFAULT_PROGRAM_STATE);
 const canonical = `https://www.scholarab.ca/programs/${facet.slug}/`;
@@ -46,7 +47,7 @@ const guide = facet.guide ? getGuide(facet.guide) : null;
 
 // Siblings on this hub's own axis: a format hub offers the other formats, not
 // the fields, which the FORMAT and FIELD rows above already both carry.
-const siblings = ALL_PROGRAM_FACETS.filter(f => f.kind === facet.kind && f.slug !== facet.slug);
+const siblings = browseFacets.filter(f => f.kind === facet.kind && f.slug !== facet.slug);
 
 const listJson = itemListJson(
   ordered.map(p => ({ name: p.name, url: `https://www.scholarab.ca/programs/${p._slug}/` })),
@@ -90,9 +91,9 @@ const breadcrumbJson = {
           trail it describes is still true of the URL. */}
       <ProgramDirectory
         items={items}
+        browseFacets={browseFacets}
         h1={facet.h1}
         intro={facet.intro}
-        allItems={allItems}
         currentField={facet.kind === 'category' ? facet.slug : null}
         currentFormat={facet.kind === 'format' ? facet.slug : null}
         railFilters

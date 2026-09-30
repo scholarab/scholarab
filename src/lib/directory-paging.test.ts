@@ -19,8 +19,10 @@ function mount() {
   document.body.innerHTML = `
     <div id="paging-root">
       <input type="search" data-dir-search />
-      <button data-fkey="category" data-fval="all">All</button>
-      <button data-fkey="category" data-fval="Arts">Arts</button>
+      <label>Type<select data-fselect="category">
+        <option value="all" data-filter-label="All">All (5)</option>
+        <option value="Arts" data-filter-label="Arts">Arts (2)</option>
+      </select></label>
       <div data-dir-count></div>
       <div data-dir-grid>
         ${card(1, 'Arts')}${card(2, 'Arts')}${card(3, 'Science')}${card(4, 'Science')}${card(5, 'Science')}
@@ -43,7 +45,6 @@ function setup(url = '/scholarships/') {
     initDirectory<Item, State>('#paging-root', {
       itemType: 'scholarship',
       defaultState: { category: 'all' },
-      toggleKeys: ['category'],
       pageSize: 2,
       parseCard: el => ({ el, id: Number(el.dataset.id), name: el.dataset.name ?? '', search: el.dataset.search ?? '', category: el.dataset.category ?? '', order: Number(el.dataset.id) }),
       select: (items, state) => items.filter(i => state.category === 'all' || i.category === state.category),
@@ -101,10 +102,14 @@ describe('directory "Show more"', () => {
   it('starts over when the filter changes, and drops ?show', () => {
     setup()
     click($('[data-dir-more-btn]'))
-    click($('[data-fkey="category"][data-fval="Arts"]'))
+    const category = $('select[data-fselect="category"]') as HTMLSelectElement
+    category.value = 'Arts'
+    category.dispatchEvent(new Event('change', { bubbles: true }))
     expect(shownIds()).toEqual([1, 2])
     expect($('[data-dir-more]').hidden).toBe(true)
     expect(new URL(location.href).searchParams.has('show')).toBe(false)
+    expect(new URL(location.href).searchParams.get('category')).toBe('Arts')
+    expect(category.selectedOptions[0]?.textContent).toBe('Arts (2)')
   })
 
   it('starts over when the search changes', () => {

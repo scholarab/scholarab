@@ -20,8 +20,6 @@ export interface DirectoryConfig<T extends DirectoryItem, S extends Record<strin
   /** What these cards are; the `save` event needs it to name the item. */
   itemType: 'scholarship' | 'program';
   defaultState: S;
-  /** Chip keys where re-clicking the active (non-default) value toggles it back off. */
-  toggleKeys: string[];
   /**
    * Derived once per render and handed to every select()/countFor() call in it.
    *
@@ -103,53 +101,6 @@ function setLean(on: boolean) {
 }
 
 /**
- * Finder's four views (Ilia, 2026-09-23), persisted like lean mode and for the
- * same reason: it is a standing preference about how a reader likes to read a
- * list. Kept on <html> and re-applied by Layout.astro before the first paint.
- * `list` is the default and is stored as no attribute at all.
- */
-const VIEWS = ['grid', 'list', 'columns', 'gallery'] as const;
-type View = (typeof VIEWS)[number];
-const VIEW_KEY = 'sa_view';
-/** Columns is two panes side by side; below this a phone reads it as a list. */
-const WIDE = '(min-width: 901px)';
-
-function storedView(): View {
-  const v = document.documentElement.getAttribute('data-view');
-  return (VIEWS as readonly string[]).includes(v ?? '') ? (v as View) : 'list';
-}
-
-/** The view actually on screen: a phone keeps a stored Columns as a list. */
-function effectiveView(): View {
-  const v = storedView();
-  return v === 'columns' && !matchMedia(WIDE).matches ? 'list' : v;
-}
-
-function setView(v: View) {
-  const root = document.documentElement;
-  if (v === 'list') root.removeAttribute('data-view');
-  else root.setAttribute('data-view', v);
-  try {
-    if (v === 'list') localStorage.removeItem(VIEW_KEY);
-    else localStorage.setItem(VIEW_KEY, v);
-  } catch { /* storage blocked: the choice holds for this page only */ }
-  paintViewButtons();
-}
-
-function paintViewButtons() {
-  const on = effectiveView();
-  for (const btn of document.querySelectorAll<HTMLElement>('[data-dir-view]')) {
-    btn.setAttribute('aria-pressed', String(btn.dataset.dirView === on));
-  }
-}
-
-/** Columns and Gallery show one listing large beside or above the rest. */
-const previewing = () => {
-  const v = effectiveView();
-  return v === 'columns' || v === 'gallery';
-};
-
-/**
  * The phone layout: filters and sort fold behind one "Filters" button, so the
  * first card is on the first screen instead of under 38 chips. Not persisted
  * and separate from lean mode, which is a desktop preference about a column;
@@ -222,9 +173,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // count over; only the buttons raise it.
   const pageSize = config.pageSize ?? DIRECTORY_PAGE_SIZE;
   let shown = pageSize;
-  // Columns and Gallery: the listing in the preview pane, and the matches it
-  // can step through (the unfolded ones, of which `page` is on screen).
-  let selected: T | null = null;
   let pool: T[] = [];
   // Every word on this page's listings, built on the first search that finds
   // nothing, for correctQuery.
@@ -240,14 +188,14 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const label = btn.querySelector('[data-save-label]');
     if (label) label.textContent = saved ? 'Saved' : 'Save';
     btn.setAttribute('aria-pressed', String(saved));
-    btn.setAttribute('aria-label', config.saveLabel(btn.dataset.name ?? '', saved));
+    btn.setAttribute('aria-label', config.saveLabel(btn.closest('[data-dir-card]')?.querySelector('.sabl-name')?.textContent ?? '', saved));
   }
 
   function paintSaved() {
     if (!root) return;
     const saved = new Set(config.getSavedIds());
     root.querySelectorAll<HTMLElement>('[data-dir-save]').forEach(btn => {
-      setSaveState(btn, saved.has(Number(btn.dataset.id)));
+      setSaveState(btn, saved.has(Number(btn.closest<HTMLElement>('[data-dir-card]')?.dataset.id)));
     });
   }
 
@@ -339,116 +287,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     return out;
   }
 
-  /**
-   * The preview pane of Columns and Gallery: the selected row, large. Built
-   * from clones of the row's own cells, so it says exactly what the row says
-   * (today's countdown, the Apply/Visit word, the saved state) with no second
-   * copy of the listing in the HTML. The pane lives before the grid, so
-   * Gallery needs no reordering to put it on top.
-   */
-  function paintPreview() {
-    if (!root) return;
-    const grid = root.querySelector<HTMLElement>('[data-dir-grid]');
-    if (!grid) return;
-    let pane = root.querySelector<HTMLElement>('[data-dir-preview]');
-    root.querySelectorAll('.sabl-card.is-selected').forEach(el => {
-      el.classList.remove('is-selected');
-      el.querySelector('.sabl-name')?.removeAttribute('aria-current');
-    });
-    if (!previewing() || !page.length) {
-      if (pane) { pane.hidden = true; pane.replaceChildren(); }
-      return;
-    }
-    if (!pane) {
-      pane = document.createElement('section');
-      pane.className = 'sabl-pv';
-      pane.dataset.dirPreview = '';
-      pane.setAttribute('aria-label', 'Selected listing');
-      grid.before(pane);
-    }
-    const sel: T = selected && page.includes(selected) ? selected : page[0]!;
-    selected = sel;
-    const card = sel.el;
-    card.classList.add('is-selected');
-    const link = card.querySelector<HTMLAnchorElement>('.sabl-name');
-    link?.setAttribute('aria-current', 'true');
-
-    const at = pool.indexOf(sel);
-    const top = document.createElement('div');
-    top.className = 'sabl-pv-top';
-    const kicker = document.createElement('p');
-    kicker.className = 'sabl-pv-kicker';
-    // Inside a group the position counts that group, not the whole pool:
-    // "Open now · 1 of 1542" under a heading saying 1083 open was two numbers
-    // for one list (critique 2026-09-23).
-    const grouped = config.groups && isGrouped(visible) ? config.groups : null;
-    const siblings = grouped ? pool.filter(x => grouped.key(x) === grouped.key(sel)) : pool;
-    const group = grouped ? `${grouped.label(grouped.key(sel))} · ` : '';
-    kicker.textContent = `${group}${siblings.indexOf(sel) + 1} of ${siblings.length}`;
-    const nav = document.createElement('div');
-    nav.className = 'sabl-pv-nav';
-    for (const [step, label, glyph] of [[-1, 'Previous listing', 'M7.5 1.5 3 6l4.5 4.5'], [1, 'Next listing', 'M4.5 1.5 9 6l-4.5 4.5']] as const) {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'sabl-pv-step';
-      b.dataset.dirStep = String(step);
-      b.setAttribute('aria-label', label);
-      b.disabled = step < 0 ? at <= 0 : at >= pool.length - 1;
-      b.innerHTML = `<svg viewBox="0 0 12 12" width="14" height="14" fill="none" aria-hidden="true"><path d="${glyph}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-      nav.append(b);
-    }
-    top.append(kicker, nav);
-
-    const name = document.createElement('h2');
-    name.className = 'sabl-pv-name';
-    if (link) {
-      const a = document.createElement('a');
-      a.className = 'sabl-name';
-      a.href = link.getAttribute('href')!;
-      a.textContent = link.textContent;
-      name.append(a);
-    }
-
-    const body = card.querySelector('.sabl-row-main')?.cloneNode(true) as HTMLElement | undefined;
-    body?.querySelector('.sabl-name-h')?.remove();
-    body?.classList.replace('sabl-row-main', 'sabl-pv-body');
-
-    const figures = document.createElement('div');
-    figures.className = 'sabl-pv-figures';
-    for (const cell of card.querySelectorAll('.sabl-amount, .sabl-card-top-left, .sabl-row-when')) {
-      // A program that is not paid has an empty badge slot; a gap for it
-      // would push the date off the pane's edge.
-      if (cell.textContent?.trim()) figures.append(cell.cloneNode(true));
-    }
-
-    const actions = card.querySelector('.sabl-card-actions')?.cloneNode(true) as HTMLElement | undefined;
-    // Programs already end on a Details link; a scholarship's only link out
-    // is the sponsor's, so the pane adds the way to the full listing.
-    if (actions && link && ![...actions.querySelectorAll('a')].some(a => a.getAttribute('href') === link.getAttribute('href'))) {
-      const more = document.createElement('a');
-      more.className = 'sabl-apply sabl-pv-more';
-      more.href = link.getAttribute('href')!;
-      more.textContent = 'Full details';
-      actions.append(more);
-    }
-
-    pane.replaceChildren(...[top, name, body, figures, actions].filter((n): n is HTMLElement => !!n));
-    pane.hidden = false;
-  }
-
-  /** Step the preview through the list; past the last card on screen it
-      reveals the next step of the list, as "Show more" would. */
-  function stepSelection(by: number, focusRow: boolean) {
-    if (!selected) return;
-    const next = pool[pool.indexOf(selected) + by];
-    if (!next) return;
-    if (!page.includes(next)) shown += pageSize;
-    selected = next;
-    render();
-    if (focusRow) next.el.querySelector<HTMLElement>('.sabl-name')?.focus({ preventScroll: true });
-    next.el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-  }
-
   function render() {
     if (!root) return;
     if (emptyTimer) { clearTimeout(emptyTimer); emptyTimer = undefined; }
@@ -494,9 +332,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       note.textContent = meant === null ? '' : `No listing says "${q}". Showing results for "${meant}".`;
     }
     visible = config.select(searched, state, ctx);
-    // Notes that describe the whole list (the spring note) go once it is not.
-    const whole = !ql && Object.keys(state).every(k => k === 'sort' || state[k] === config.defaultState[k]);
-    root.querySelectorAll<HTMLElement>('[data-dir-default-only]').forEach(n => { n.hidden = !whole; });
     // A shut section's cards come off the page entirely, so they do not eat
     // the "Show more" budget either: shutting CLOSED on a 24-card step buys
     // twenty-four open ones rather than twenty-four fewer cards.
@@ -541,7 +376,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       if (moreEl && lastCard && lastCard.nextElementSibling !== moreEl) grid.insertBefore(moreEl, lastCard.nextElementSibling);
       grid.hidden = visible.length === 0;
     }
-    paintPreview();
 
     const more = root.querySelector<HTMLElement>('[data-dir-more]');
     if (more) {
@@ -570,33 +404,11 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     root.querySelectorAll<HTMLSelectElement>('select[data-fselect]').forEach(sel => {
       sel.value = String(state[sel.dataset.fselect!] ?? '');
     });
-    root.querySelectorAll<HTMLElement>('[data-fkey]').forEach(chip => {
-      const on = state[chip.dataset.fkey!] === chip.dataset.fval;
-      chip.classList.toggle('on', on);
-      chip.setAttribute('aria-pressed', String(on));
-    });
-    // A chip's number answers "how many would I be left with if I pressed this",
-    // so it is computed against the rest of the current state rather than the
-    // whole corpus: with STATUS=Open showing, Arts reads the arts awards that are
-    // open, not every arts award on file. A static number would contradict the
-    // result line the moment a second filter went on.
-    //
-    // SORT is deliberately absent. Reordering changes nothing about how many
-    // cards are on screen, so a count there would be the same figure three times.
-    //
-    // Counts are recomputed rather than cached because every one of them
-    // depends on every other filter; there is no subset that survives a click
-    // elsewhere in the block. Each is a filter pass over the shared search pool,
-    // sharing this render's status cache and skipping the sort, since a count
-    // needs the size of the set and not its order.
-    root.querySelectorAll<HTMLElement>('[data-fkey] [data-chip-count]').forEach(slot => {
-      const chip = slot.closest<HTMLElement>('[data-fkey]')!;
-      const next = { ...state, [chip.dataset.fkey!]: chip.dataset.fval ?? '' };
-      const n = config.countFor(searched, next, ctx, chip.dataset.fkey);
-      slot.textContent = n.toLocaleString('en-CA');
-      // A chip that would empty the page still works, but it should not look
-      // like an equal offer beside one holding forty listings.
-      chip.classList.toggle('is-empty', n === 0 && !chip.classList.contains('on'));
+    root.querySelectorAll<HTMLOptionElement>('option[data-filter-label]').forEach(option => {
+      const key = option.closest<HTMLSelectElement>('select')!.dataset.fselect!;
+      const next = { ...state, [key]: option.value };
+      const count = config.countFor(searched, next, ctx, key);
+      option.textContent = `${option.dataset.filterLabel} (${count.toLocaleString('en-CA')})`;
     });
     config.afterCounts?.(root, searched, state, q, ctx);
     root.querySelectorAll<HTMLElement>('[data-dir-filters-done]').forEach(b => {
@@ -689,8 +501,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // Pointer/context-menu activation must store context before a new tab copies it.
   for (const event of ['pointerdown', 'contextmenu', 'click']) document.addEventListener(event, e => {
     const link = (e.target as Element | null)?.closest?.<HTMLAnchorElement>('a[href]');
-    // The preview pane's title and Full details go to the same listing.
-    const card = link?.closest<HTMLElement>('[data-dir-card], [data-dir-preview]');
+    const card = link?.closest<HTMLElement>('[data-dir-card]');
     const detail = card?.querySelector<HTMLAnchorElement>('.sabl-name');
     if (link && card && detail && root?.contains(card)
       && link.origin === detail.origin && link.pathname === detail.pathname) {
@@ -719,11 +530,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
 
     const save = t.closest<HTMLElement>('[data-dir-save]');
     if (save) {
-      const id = Number(save.dataset.id);
+      const id = Number(save.closest<HTMLElement>('[data-dir-card]')?.dataset.id);
       const next = config.toggleSave(id);
       const nowSaved = next.includes(id);
-      // The row and its copy in the preview pane are two buttons for one save.
-      root.querySelectorAll<HTMLElement>(`[data-dir-save][data-id="${id}"]`).forEach(b => setSaveState(b, nowSaved));
+      setSaveState(save, nowSaved);
       // Only the save counts, not the un-save: the metric is "people who
       // shortlisted this", and sendEvent dedupes it per item per tab session.
       if (nowSaved) { showConfetti(save); sendEvent('save', config.itemType, id, 'row'); }
@@ -741,19 +551,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       setFiltersOpen(false);
       root.querySelector<HTMLElement>('[data-dir-grid], [data-dir-empty]:not([hidden])')
         ?.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-      return;
-    }
-
-    const view = t.closest<HTMLElement>('[data-dir-view]');
-    if (view) {
-      setView(view.dataset.dirView as View);
-      render();
-      return;
-    }
-
-    const stepBtn = t.closest<HTMLElement>('[data-dir-step]');
-    if (stepBtn) {
-      stepSelection(Number(stepBtn.dataset.dirStep), false);
       return;
     }
 
@@ -792,17 +589,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
-    const chip = t.closest<HTMLElement>('[data-fkey]');
-    if (chip) {
-      const k = chip.dataset.fkey as keyof S & string;
-      const v = chip.dataset.fval ?? '';
-      const toggleOff = config.toggleKeys.includes(k) && state[k] === v && v !== config.defaultState[k];
-      state = { ...state, [k]: toggleOff ? config.defaultState[k] : v };
-      shown = pageSize;
-      render();
-      return;
-    }
-
     if (t.closest('[data-dir-clear]')) {
       state = { ...config.defaultState };
       query = '';
@@ -822,36 +608,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     render();
   });
 
-  // Columns and Gallery, as in Finder: a click selects a listing into the
-  // preview, a double click opens it. Capture phase, so the router never
-  // starts a navigation for the title link a single click lands on. The row's
-  // own Save and Apply keep working, and a modified click still opens a tab.
-  let opening = false;
-  document.addEventListener('click', e => {
-    const t = e.target as Element | null;
-    if (opening || !root || !previewing() || !t?.closest) return;
-    const card = t.closest<HTMLElement>('[data-dir-card]');
-    if (!card || !root.contains(card) || t.closest('.sabl-card-actions')) return;
-    const a = t.closest('a');
-    if (a && !a.classList.contains('sabl-name')) return;
-    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
-    const item = items.find(it => it.el === card);
-    if (!item || item === selected) return;
-    selected = item;
-    paintPreview();
-    // On a phone the pane sits above the strip; bring it back into view.
-    root.querySelector<HTMLElement>('[data-dir-preview]')?.scrollIntoView({ block: 'nearest' });
-  }, true);
-
-  document.addEventListener('dblclick', e => {
-    const card = (e.target as Element | null)?.closest?.<HTMLElement>('[data-dir-card]');
-    if (!root || !previewing() || !card || !root.contains(card) || (e.target as Element).closest('.sabl-card-actions')) return;
-    opening = true;
-    card.querySelector<HTMLAnchorElement>('.sabl-name')?.click();
-    opening = false;
-  });
-
   // The phone sheet keeps the keyboard: Escape closes it, and Tab cycles
   // through its own controls instead of wandering to the footer behind it.
   document.addEventListener('keydown', e => {
@@ -865,17 +621,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     const next = e.shiftKey ? (at <= 0 ? stops.length - 1 : at - 1) : (at === -1 || at === stops.length - 1 ? 0 : at + 1);
     e.preventDefault();
     stops[next]!.focus();
-  });
-
-  // Arrow keys walk the selection while focus is in the list or the pane.
-  document.addEventListener('keydown', e => {
-    const t = e.target as Element | null;
-    if (!root || !previewing() || !t?.closest || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (!t.closest('[data-dir-grid], [data-dir-preview]') || t.matches('input, select, textarea')) return;
-    const by = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
-    if (!by) return;
-    e.preventDefault();
-    stepSelection(by, !!t.closest('[data-dir-grid]'));
   });
 
   // Print every row of the current result, not the first step of it: a
@@ -894,13 +639,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (root?.isConnected) render();
   });
 
-  // Crossing the phone breakpoint turns Columns into the list and back.
-  matchMedia(WIDE).addEventListener('change', () => {
-    if (!root?.isConnected) return;
-    // The sheet is a phone surface; a window widened past it closes it.
-    if (matchMedia(WIDE).matches) setFiltersOpen(false);
-    paintViewButtons();
-    render();
+  // A sheet opened on a phone must not leave the desktop list inert.
+  matchMedia(NARROW).addEventListener('change', () => {
+    if (root?.isConnected && !matchMedia(NARROW).matches) setFiltersOpen(false);
   });
 
   document.addEventListener('input', e => {
@@ -945,8 +686,6 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     // the button catching up with it after a swap brought a fresh one in.
     setLean(document.documentElement.hasAttribute('data-lean'));
     setFiltersOpen(false);
-    paintViewButtons();
-    selected = null;
     config.onCardsParsed?.(items);
     paintSaved();
     render();

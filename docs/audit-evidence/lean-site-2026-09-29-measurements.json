@@ -1,0 +1,401 @@
+{
+  "documents": 1892,
+  "byFamily": {
+    "authored": 14,
+    "directory": 49,
+    "guide": 18,
+    "listing": 1811
+  },
+  "selected": [
+    {
+      "route": "/",
+      "before": {
+        "bytes": 94664,
+        "gzip": 15168,
+        "elements": 983
+      },
+      "after": {
+        "bytes": 79904,
+        "gzip": 12958,
+        "elements": 794
+      }
+    },
+    {
+      "route": "/scholarships/",
+      "before": {
+        "bytes": 3437457,
+        "gzip": 380571,
+        "elements": 33159
+      },
+      "after": {
+        "bytes": 3101519,
+        "gzip": 343522,
+        "elements": 32924
+      }
+    },
+    {
+      "route": "/programs/",
+      "before": {
+        "bytes": 733279,
+        "gzip": 105328,
+        "elements": 6915
+      },
+      "after": {
+        "bytes": 579553,
+        "gzip": 85243,
+        "elements": 6459
+      }
+    },
+    {
+      "route": "/saved/",
+      "before": {
+        "bytes": 804968,
+        "gzip": 152924,
+        "elements": 597
+      },
+      "after": {
+        "bytes": 699854,
+        "gzip": 127803,
+        "elements": 404
+      }
+    },
+    {
+      "route": "/deadlines/",
+      "before": {
+        "bytes": 560356,
+        "gzip": 65878,
+        "elements": 9562
+      },
+      "after": {
+        "bytes": 545596,
+        "gzip": 63634,
+        "elements": 9373
+      }
+    }
+  ],
+  "mainInternalLinkReferences": 29923,
+  "brokenMainInternalLinks": [],
+  "method": "Local built HTML bytes; gzip estimates use Node gzipSync defaults. DOM element counts are static parsed markup, including noscript. Not hosted transfer or user conversion.",
+  "search": {
+    "method": "One before and one after 20-sample search/clear run, same query, Chromium and 4x CPU throttle. After run followed directory architecture changes; subsequent copy/detail/no-script changes do not change the search handler.",
+    "before": {
+      "chromium": "149.0.7827.55",
+      "query": "Cypress County Agricultural Service Board Bursary",
+      "cpuThrottle": 4,
+      "samples": [
+        {
+          "handler": 55.548,
+          "nextPaint": 108.023
+        },
+        {
+          "handler": 36.48,
+          "nextPaint": 85.238
+        },
+        {
+          "handler": 40.485,
+          "nextPaint": 88.065
+        },
+        {
+          "handler": 48.197,
+          "nextPaint": 100.694
+        },
+        {
+          "handler": 35.84,
+          "nextPaint": 82.032
+        },
+        {
+          "handler": 46.642,
+          "nextPaint": 93.943
+        },
+        {
+          "handler": 34.024,
+          "nextPaint": 81.353
+        },
+        {
+          "handler": 40.538,
+          "nextPaint": 89.147
+        },
+        {
+          "handler": 43.972,
+          "nextPaint": 92.719
+        },
+        {
+          "handler": 36.185,
+          "nextPaint": 86.562
+        },
+        {
+          "handler": 38.755,
+          "nextPaint": 85.621
+        },
+        {
+          "handler": 44.123,
+          "nextPaint": 91.624
+        },
+        {
+          "handler": 33.983,
+          "nextPaint": 81.61
+        },
+        {
+          "handler": 43.264,
+          "nextPaint": 98.224
+        },
+        {
+          "handler": 46.133,
+          "nextPaint": 94.088
+        },
+        {
+          "handler": 37.325,
+          "nextPaint": 85.629
+        },
+        {
+          "handler": 43.341,
+          "nextPaint": 94.501
+        },
+        {
+          "handler": 49.044,
+          "nextPaint": 100.177
+        },
+        {
+          "handler": 44.869,
+          "nextPaint": 92.726
+        },
+        {
+          "handler": 45.407,
+          "nextPaint": 93.455
+        }
+      ],
+      "medianHandler": 43.3025,
+      "medianNextPaint": 92.1715
+    },
+    "after": {
+      "chromium": "149.0.7827.55",
+      "query": "Cypress County Agricultural Service Board Bursary",
+      "cpuThrottle": 4,
+      "samples": [
+        {
+          "handler": 35.068,
+          "nextPaint": 78.031
+        },
+        {
+          "handler": 40.654,
+          "nextPaint": 80.762
+        },
+        {
+          "handler": 34.516,
+          "nextPaint": 75.005
+        },
+        {
+          "handler": 39.918,
+          "nextPaint": 79.46
+        },
+        {
+          "handler": 28.642,
+          "nextPaint": 69.556
+        },
+        {
+          "handler": 36.781,
+          "nextPaint": 77.339
+        },
+        {
+          "handler": 31.765,
+          "nextPaint": 73.278
+        },
+        {
+          "handler": 30.056,
+          "nextPaint": 70.719
+        },
+        {
+          "handler": 37.106,
+          "nextPaint": 77.64
+        },
+        {
+          "handler": 28.702,
+          "nextPaint": 69.994
+        },
+        {
+          "handler": 31.381,
+          "nextPaint": 70.571
+        },
+        {
+          "handler": 37.433,
+          "nextPaint": 77.509
+        },
+        {
+          "handler": 28.09,
+          "nextPaint": 69.561
+        },
+        {
+          "handler": 29.499,
+          "nextPaint": 70.358
+        },
+        {
+          "handler": 37.517,
+          "nextPaint": 77.689
+        },
+        {
+          "handler": 31.255,
+          "nextPaint": 72.863
+        },
+        {
+          "handler": 39.438,
+          "nextPaint": 80.847
+        },
+        {
+          "handler": 38.33,
+          "nextPaint": 80.931
+        },
+        {
+          "handler": 36.628,
+          "nextPaint": 76.845
+        },
+        {
+          "handler": 38.744,
+          "nextPaint": 80.154
+        }
+      ],
+      "medianHandler": 35.848,
+      "medianNextPaint": 77.092
+    }
+  },
+  "serviceWorkerInstall": {
+    "removed_pages": [
+      {
+        "route": "/about/",
+        "bytes": 54508,
+        "gzip": 11698
+      },
+      {
+        "route": "/",
+        "bytes": 94664,
+        "gzip": 15168
+      },
+      {
+        "route": "/programs/",
+        "bytes": 733279,
+        "gzip": 105328
+      },
+      {
+        "route": "/saved/",
+        "bytes": 804968,
+        "gzip": 152924
+      },
+      {
+        "route": "/scholarships/",
+        "bytes": 3437457,
+        "gzip": 380571
+      }
+    ],
+    "before": {
+      "bytes": 5126098,
+      "gzip": 666386
+    },
+    "after": {
+      "bytes": 1222,
+      "gzip": 697
+    },
+    "removed": {
+      "bytes": 5124876,
+      "gzip": 665689
+    },
+    "removed_percent": {
+      "bytes": 99.97616120487747,
+      "gzip": 99.89540596591165
+    },
+    "requests_before": 6,
+    "requests_after": 1
+  },
+  "savedPayload": {
+    "beforeBytes": 753624,
+    "afterBytes": 663488,
+    "items": 1811,
+    "description": "Inline JSON bytes, including nine inactive program flags; all records retained."
+  },
+  "firstScholarshipRowDesktop": {
+    "viewport": "1440x900",
+    "beforeY": 558.89,
+    "afterY": 391.4375,
+    "method": "Local native Chromium DOM measurement; pixels reclaimed, not task time."
+  },
+  "catalogueCopy": {
+    "scholarshipsBefore": 1541,
+    "scholarshipsAfter": 1541,
+    "changedRecords": 9,
+    "changedFields": 9,
+    "beforeWords": 861,
+    "afterWords": 727,
+    "changes": [
+      {
+        "id": 2,
+        "field": "notes",
+        "beforeWords": 40,
+        "afterWords": 27,
+        "beforeCharacters": 218,
+        "afterCharacters": 157
+      },
+      {
+        "id": 59,
+        "field": "notes",
+        "beforeWords": 61,
+        "afterWords": 38,
+        "beforeCharacters": 357,
+        "afterCharacters": 214
+      },
+      {
+        "id": 366,
+        "field": "notes",
+        "beforeWords": 78,
+        "afterWords": 76,
+        "beforeCharacters": 439,
+        "afterCharacters": 460
+      },
+      {
+        "id": 534,
+        "field": "notes",
+        "beforeWords": 96,
+        "afterWords": 85,
+        "beforeCharacters": 520,
+        "afterCharacters": 499
+      },
+      {
+        "id": 880,
+        "field": "metaDetail",
+        "beforeWords": 3,
+        "afterWords": 0,
+        "beforeCharacters": 22,
+        "afterCharacters": 0
+      },
+      {
+        "id": 1051,
+        "field": "notes",
+        "beforeWords": 88,
+        "afterWords": 66,
+        "beforeCharacters": 506,
+        "afterCharacters": 386
+      },
+      {
+        "id": 1052,
+        "field": "notes",
+        "beforeWords": 93,
+        "afterWords": 80,
+        "beforeCharacters": 530,
+        "afterCharacters": 468
+      },
+      {
+        "id": 1106,
+        "field": "notes",
+        "beforeWords": 226,
+        "afterWords": 191,
+        "beforeCharacters": 1326,
+        "afterCharacters": 1141
+      },
+      {
+        "id": 1115,
+        "field": "notes",
+        "beforeWords": 176,
+        "afterWords": 164,
+        "beforeCharacters": 1048,
+        "afterCharacters": 986
+      }
+    ]
+  }
+}

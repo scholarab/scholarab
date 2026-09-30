@@ -9,7 +9,7 @@
     "category": "Academic",
     "lastVerified": "2026-08",
     "region": "Medicine Hat",
-    "notes": "MHC's own award page says applications for the next round open March 1, 2027 and does not publish a closing date. It also does not publish individual award amounts, which is why this shows a range rather than a figure.",
+    "notes": "MHC's own award page says applications for the next round open March 1, 2027 and does not publish a closing date. Individual award amounts are not published.",
     "active": true,
     "description": "Medicine Hat College hands out more than $400,000 a year in scholarships and bursaries to new, continuing and returning students. Some are marked on grades, some on financial need, and many on both. One online form enters you for every award you qualify for, so you do not apply to them individually.",
     "metaDetail": "One form enters you for every award you qualify for.",
@@ -1359,7 +1359,7 @@
       ]
     },
     "metaDetail": "Ended by TD. Nothing to apply for.",
-    "notes": "TD now points students at the TD Scholarship for Indigenous Peoples instead, run with AFOA Canada: 25 awards a year worth up to $60,000 over four years. That one now has its own listing here, checked on 2026-09-11. Confirmed concluded against td.com on 2026-09-09; this listing had been carrying a November 15, 2026 deadline and was sitting in the open set."
+    "notes": "TD now points students at the TD Scholarship for Indigenous Peoples instead, run with AFOA Canada: 25 awards a year worth up to $60,000 over four years. That one now has its own listing here, checked on 2026-09-11."
   },
   {
     "id": 60,
@@ -13312,7 +13312,7 @@
     "active": false,
     "lastVerified": "2026-09",
     "url": "https://airdriebasketball.ca/airdrieminorbasketballassociation/",
-    "notes": "Read this one twice: it is not for players. If you have refereed a season of mini ball or helped run a tournament, you are the intended applicant, and almost nobody applies. AMBA's site moved to TeamLinkt and took the scholarships page with it, so the old link 404s and no criteria are published anywhere as of September 2026. The last advertised window was January 8 to February 26. Contact the association to confirm it is still offered.",
+    "notes": "This award recognizes off-court service as a coach, referee, volunteer or board member, not playing performance. Service can include refereeing a season of mini ball or helping run a tournament. AMBA's site moved to TeamLinkt and took the scholarships page with it, so the old link 404s and no criteria are published anywhere as of September 2026. The last advertised window was January 8 to February 26. Contact the association to confirm it is still offered.",
     "description": "One $500 award from Airdrie Minor Basketball for someone who gave time to the association off the court, as a coach, referee, volunteer or board member, and is now enrolled full time in post-secondary study. It honours Colin McKenna's work building basketball in Airdrie. The application is a short essay judged blind.",
     "metaDetail": "For the volunteers, not the players.",
     "eligibility": {
@@ -19782,7 +19782,7 @@
     "category": "Sports",
     "lastVerified": "2026-09",
     "region": "Chestermere",
-    "notes": "Read the sports rule before you rule yourself out: intramurals count, and so do jiu jitsu, weight lifting and figure skating. The mark rule is stricter than it looks, though, because the 65 per cent has to hold in each grade twelve subject rather than on average. Applications go by email to Mr. Bates with the subject line the form specifies, and the guidance office has his address. Note that the form asks for a social insurance number in the body of the email, so send it from an account you control and keep a copy.",
+    "notes": "Read the sports rule before you rule yourself out: intramurals count, and so do jiu jitsu, weight lifting and figure skating. The mark rule is stricter than it looks, though, because the 65 per cent has to hold in each grade twelve subject rather than on average. Applications go by email to Mr. Bates with the subject line the form specifies, and the guidance office has his address. The form requests a social insurance number. Ask the guidance office how to submit sensitive information securely.",
     "applyViaGuidance": true,
     "active": true,
     "deadline": "2027-06-22",
@@ -33370,7 +33370,6 @@
     "applyViaGuidance": true,
     "active": true,
     "description": "An annual award for a student finishing high school with excellent academic standing who has also proven to be a leader in at least two other fields of endeavour.",
-    "metaDetail": "Two fields, undefined.",
     "eligibility": {
       "grades": [
         "12"
@@ -40201,7 +40200,7 @@
     "category": "Academic",
     "lastVerified": "2026-09",
     "region": "National",
-    "notes": "Worth checking whether a parent or grandparent is in AUPE, because AUPE is a NUPGE component and that makes you eligible for a national award almost nobody in Alberta applies for. Foster children of members count too, which is unusual and worth knowing. It is decided on a 750 to 1,000 word essay about how Tommy Douglas made Canada a more just and equitable society, so it rewards writing rather than marks. You have to be entering the first year of a Canadian public post-secondary institution full time.",
+    "notes": "A parent or grandparent's AUPE membership can qualify you because AUPE is a NUPGE component. Foster children of members also qualify. It is decided on a 750 to 1,000 word essay about how Tommy Douglas made Canada a more just and equitable society, so it rewards writing rather than marks. You have to be entering the first year of a Canadian public post-secondary institution full time.",
     "description": "One of about five $1,500 scholarships the National Union of Public and General Employees awards each year to the children, grandchildren and foster children of its members, decided by essay.",
     "metaDetail": "AUPE family qualifies.",
     "eligibility": {
@@ -40240,7 +40239,7 @@
     "category": "Academic",
     "lastVerified": "2026-09",
     "region": "National",
-    "notes": "Two filters have to line up, and when they do the field is very small: you have a disability, and a parent, grandparent or foster parent belongs to a NUPGE component union, which in Alberta usually means AUPE. The essay is 750 to 1,000 words on why quality public services matter to the quality of life of people with disabilities, so lived experience is the point rather than a disadvantage. Not to be confused with the Terry Fox Humanitarian Award, which is a separate and much larger national program with no union requirement.",
+    "notes": "You must have a disability, and a parent, grandparent or foster parent must belong to a NUPGE component union, which in Alberta usually means AUPE. The essay is 750 to 1,000 words on why quality public services matter to the quality of life of people with disabilities, so lived experience is the point rather than a disadvantage. Not to be confused with the Terry Fox Humanitarian Award, which is a separate and much larger national program with no union requirement.",
     "description": "A $1,500 award for students with disabilities entering first year whose parent, grandparent or foster parent belongs to a NUPGE member union, decided on an essay about public services.",
     "metaDetail": "A disability award, union family only.",
     "eligibility": {
@@ -42226,7 +42225,7 @@
     "category": "General",
     "region": "National",
     "description": "$5,000 for each academic year until your program is finished, for young people who have been in the care of a child protection authority anywhere in Canada.",
-    "notes": "Until now this site carried exactly one award for youth in or from government care, and it was Alberta-only. This is the national one, and it is the largest of its kind in the country. Eligibility covers anyone who was in temporary or permanent care of the ministry or department responsible for child protection up to their age of majority, OR in permanent care for at least 12 months. You must be under 30, or over 30 with no prior Foundation support. Two things the Foundation says plainly in its own FAQ and that are worth repeating. First, APPLY EVEN IF YOU ARE NOT SURE: you do not need to have applied to schools yet, you fill in the form as best you can and they follow up in the spring. Second, apply even if your marks are not strong, because the decision weighs financial need, persistence and your written answers alongside academic achievement. You reapply every year rather than the award renewing itself. You may need a confirmation of care letter from your child welfare office, though not if you have had Foundation support before. Note that the Foundation is a separate organization from your local Children's Aid Society. The 2026-27 round has closed; the Foundation's page says the 2027-28 application reopens in December 2026. Verified against cafdn.org and the Foundation's scholarship FAQ on 2026-09-08.",
+    "notes": "Eligibility covers anyone who was in temporary or permanent care of the ministry or department responsible for child protection up to their age of majority, OR in permanent care for at least 12 months. You must be under 30, or over 30 with no prior Foundation support. Two things the Foundation says plainly in its own FAQ and that are worth repeating. First, APPLY EVEN IF YOU ARE NOT SURE: you do not need to have applied to schools yet, you fill in the form as best you can and they follow up in the spring. Second, apply even if your marks are not strong, because the decision weighs financial need, persistence and your written answers alongside academic achievement. You reapply every year rather than the award renewing itself. You may need a confirmation of care letter from your child welfare office, though not if you have had Foundation support before. Note that the Foundation is a separate organization from your local Children's Aid Society. The 2026-27 round has closed; the Foundation's page says the 2027-28 application reopens in December 2026. Verified against cafdn.org and the Foundation's scholarship FAQ on 2026-09-08.",
     "metaDetail": "Apply before you have even picked a school.",
     "eligibility": {
       "grades": [
@@ -42570,7 +42569,7 @@
     "category": "General",
     "region": "National",
     "description": "Pays up to 80 per cent of tuition and books for up to four years, to a total of $50,000, for the children of Canadian police and peace officers slain in the line of duty.",
-    "notes": "By total value this is the largest award listed on this site. It covers up to but no more than 80 per cent of tuition and books per year, for no more than four years, capped at $50,000 overall, and it pays for tuition and textbooks only, toward an undergraduate degree or diploma at an approved Canadian post-secondary institution. Any child of a Canadian police or peace officer slain in the line of duty may apply, including a child born outside marriage and an adopted child. Applicants must be between 18 and 26 at the time of applying, though the Society will consider a first-time applicant over 27 case by case, and it also considers support for elementary, middle and high school costs on the same basis. You need evidence of the parent's line-of-duty death; the governing definition sits in the Society's by-laws. Run by the Police and Peace Officers' Memorial Ribbon Society. No deadline is published, so contact the Scholarship Advisory Council rather than waiting for a date to appear. Verified against memorialribbon.org on 2026-09-08.",
+    "notes": "It covers up to but no more than 80 per cent of tuition and books per year, for no more than four years, capped at $50,000 overall, and it pays for tuition and textbooks only, toward an undergraduate degree or diploma at an approved Canadian post-secondary institution. Any child of a Canadian police or peace officer slain in the line of duty may apply, including a child born outside marriage and an adopted child. Applicants must be between 18 and 26 at the time of applying, though the Society will consider a first-time applicant over 27 case by case, and it also considers support for elementary, middle and high school costs on the same basis. You need evidence of the parent's line-of-duty death; the governing definition sits in the Society's by-laws. Run by the Police and Peace Officers' Memorial Ribbon Society. No deadline is published, so contact the Scholarship Advisory Council rather than waiting for a date to appear. Verified against memorialribbon.org on 2026-09-08.",
     "metaDetail": "Covers 80 per cent of tuition for four years.",
     "eligibility": {
       "grades": [

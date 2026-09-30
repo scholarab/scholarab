@@ -120,16 +120,9 @@ const {
       // rather than by directory-client, so the wide layout is in the first
       // paint instead of arriving a frame later as a jump. Re-applied after
       // every swap for the same reason html.js is.
-      // html[data-view]: the directories' grid / columns / gallery choice
-      // (SabViewSwitch), read here for the same first-paint reason. Absent
-      // means the list.
       function lean() {
         try {
           if (localStorage.getItem('sa_lean')) root.setAttribute('data-lean', '');
-          const view = localStorage.getItem('sa_view');
-          // Wide screens only: a phone has no view switcher (global.css),
-          // so a stored tile view there could never be switched back.
-          if ((view === 'grid' || view === 'columns' || view === 'gallery') && matchMedia('(min-width: 901px)').matches) root.setAttribute('data-view', view);
           // html[data-later-ok]: the "most of these open later" note was
           // read once and put away; it said the same on every directory and
           // on quiz results (critique 2026-09-27).

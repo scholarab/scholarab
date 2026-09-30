@@ -43,10 +43,30 @@ function shownRuns(visible: typeof items, shown: number) {
 }
 const unique = items.find(s => items.filter(x => scholarshipSearchBlob(x).includes(normalizeSearchQuery(s.title))).length === 1)!;
 const query = unique.title;
-test('all listings remain accessible without JavaScript', async ({ browser, baseURL }) => {
-  const page = await browser.newPage({ javaScriptEnabled: false });
+test('all listings and program hub navigation remain accessible without JavaScript', async ({ browser, baseURL, viewport }) => {
+  const page = await browser.newPage({ javaScriptEnabled: false, viewport });
   await page.goto(`${baseURL}/scholarships/`);
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(items.length);
+
+  await page.goto(`${baseURL}/programs/`);
+  const browse = page.locator('.sabl-noscript-browse');
+  await browse.locator('summary').click();
+  await expect(browse.getByRole('heading', { name: 'Format', exact: true })).toBeVisible();
+  await expect(browse.getByRole('heading', { name: 'Field', exact: true })).toBeVisible();
+  const rootLinks = await browse.getByRole('link').evaluateAll(links => links.map(a => a.getAttribute('href')));
+  expect(rootLinks).toContain('/programs/research/');
+  expect(rootLinks).toContain('/programs/summer-programs/');
+  await browse.locator('a[href="/programs/research/"]').click();
+  await expect(page).toHaveURL(/\/programs\/research\/$/);
+  await expect(page.locator('[data-dir-card]:visible').first()).toBeVisible();
+  await browse.locator('summary').click();
+  expect(await browse.getByRole('link').evaluateAll(links => links.map(a => a.getAttribute('href')))).toEqual(rootLinks);
+  await expect(browse.locator('a[href="/programs/research/"]')).toHaveAttribute('aria-current', 'page');
+  await browse.locator('a[href="/programs/summer-programs/"]').click();
+  await expect(page).toHaveURL(/\/programs\/summer-programs\/$/);
+  await expect(page.locator('[data-dir-card]:visible').first()).toBeVisible();
+  await page.getByRole('link', { name: 'Browse all programs', exact: true }).click();
+  await expect(page).toHaveURL(/\/programs\/$/);
   await page.close();
 });
 
@@ -70,7 +90,8 @@ test('search preserves results, groups, chips, money, closed awards and history'
       // Label and count only: the bar also carries a Hide/Show word, which is
       // state and not part of what the run is called.
       expect(await page.locator('[data-dir-group]:not([hidden])').evaluateAll(els => els.map(e => `${e.querySelector('.sabl-group-label')!.textContent} ${e.querySelector('.sabl-group-count')!.textContent}`))).toEqual(shownRuns(visible, PAGE));
-      const chips = await page.locator('[data-fkey]:has([data-chip-count])').evaluateAll(els => els.map(e => ({ key: e.getAttribute('data-fkey')!, value: e.getAttribute('data-fval')!, count: Number(e.querySelector('[data-chip-count]')!.textContent!.replace(/,/g, '')) })));
+      const chips = await page.locator('option[data-filter-label]').evaluateAll(els => els.map(e => ({ key: e.parentElement!.getAttribute('data-fselect')!, value: (e as HTMLOptionElement).value, count: Number(e.textContent!.match(/\(([\d,]+)\)$/)![1]!.replace(/,/g, '')) })));
+      expect(chips.length).toBeGreaterThan(5);
       const keys = { category: 'selectedCategory', status: 'statusFilter', region: 'selectedRegion' };
       // A status chip counts its run, which leaves out the after-high-school
       // run: "Open now" and the OPEN NOW heading state the same number.
@@ -87,7 +108,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(Math.min(PAGE, items.length));
   expect(await page.evaluate(() => history.length)).toBe(historyLength);
   await openFilters(page);
-  await page.locator(`[data-fkey="category"][data-fval="${unique.category}"]`).press('Enter');
+  await page.locator('[data-fselect="category"]').selectOption(unique.category!);
   await closeFilters(page);
   await page.locator('[data-dir-search]').fill(query);
   await page.locator('[data-dir-card]:visible .sabl-name').press('Enter');
@@ -95,7 +116,7 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await page.goBack();
   await expect(page.locator('[data-dir-search]')).toHaveValue(query);
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(1);
-  await expect(page.locator(`[data-fkey="category"][data-fval="${unique.category}"]`)).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-fselect="category"]')).toHaveValue(unique.category!);
   await page.reload();
   await expect(page.locator('[data-dir-search]')).toHaveValue(query);
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(1);
@@ -131,50 +152,25 @@ test('hiding the filters widens the grid and survives a reload', async ({ page }
   expect((await grid.boundingBox())!.width).toBe(narrow);
 });
 
-test('the view buttons lay the list out as a grid, columns or gallery, and remember it', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === 'mobile', 'Columns is a desktop view');
-  await page.setViewportSize({ width: 1440, height: 1000 });
+test('one responsive list keeps facts and direct navigation even with an old view preference', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('sa_view', 'gallery'));
   await page.goto('/scholarships/calgary/');
   const cards = page.locator('[data-dir-card]:visible');
-  const pv = page.locator('[data-dir-preview]');
-  const title = async (i: number) => (await cards.nth(i).locator('.sabl-name').textContent())!.trim();
-  const sideBySide = async () => {
-    const a = (await cards.nth(0).boundingBox())!;
-    const b = (await cards.nth(1).boundingBox())!;
-    return Math.abs(a.y - b.y) < 2 && b.x > a.x;
-  };
-  await expect(page.locator('[data-dir-view="list"]')).toHaveAttribute('aria-pressed', 'true');
-  expect(await sideBySide()).toBe(false);
-
-  await page.locator('[data-dir-view="grid"]').click();
-  expect(await sideBySide()).toBe(true);
-  // Set in <head> from localStorage, so the chosen view is in the first paint.
+  const first = cards.first();
+  const second = cards.nth(1);
+  expect((await second.boundingBox())!.y).toBeGreaterThan((await first.boundingBox())!.y);
+  await expect(first.locator('.sabl-amount')).toBeVisible();
+  await expect(first.locator('[data-when]')).toBeVisible();
+  const title = await first.locator('.sabl-name').textContent();
+  const save = first.locator('[data-dir-save]');
+  await save.click();
+  await expect(save).toHaveAttribute('aria-pressed', 'true');
+  await expect(save).toHaveAttribute('aria-label', `Remove ${title} from saved`);
   await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-view', 'grid');
-  await expect(page.locator('[data-dir-view="grid"]')).toHaveAttribute('aria-pressed', 'true');
-
-  // Columns: a click puts the listing in the preview rather than leaving.
-  await page.locator('[data-dir-view="columns"]').click();
-  await expect(pv).toBeVisible();
-  await expect(pv.locator('.sabl-pv-name')).toHaveText(await title(0));
-  await cards.nth(1).locator('.sabl-name').click();
-  await expect(page).toHaveURL(/\/scholarships\/calgary\/(\?.*)?$/);
-  await expect(pv.locator('.sabl-pv-name')).toHaveText(await title(1));
-  await page.keyboard.press('ArrowDown');
-  await expect(pv.locator('.sabl-pv-name')).toHaveText(await title(2));
-  await pv.locator('[data-dir-step="-1"]').click();
-  await expect(pv.locator('.sabl-pv-name')).toHaveText(await title(1));
-
-  // Gallery: the preview on top, every match in one strip under it.
-  await page.locator('[data-dir-view="gallery"]').click();
-  await expect(pv).toBeVisible();
-  expect(await sideBySide()).toBe(true);
-  expect((await pv.boundingBox())!.y).toBeLessThan((await cards.nth(0).boundingBox())!.y);
-
-  await page.locator('[data-dir-view="list"]').click();
-  await expect(pv).toBeHidden();
-  await expect(page.locator('html')).not.toHaveAttribute('data-view');
-  expect(await sideBySide()).toBe(false);
+  await expect(first.locator('[data-dir-save]')).toHaveAttribute('aria-pressed', 'true');
+  const href = await first.locator('.sabl-name').getAttribute('href');
+  await first.locator('.sabl-name').click();
+  await expect(page).toHaveURL(new RegExp(`${href}$`));
 });
 
 test('on a phone, filters fold behind one button that counts them', async ({ page }, testInfo) => {
@@ -229,7 +225,7 @@ test('the list reveals 24 at a time and Back returns to the same card', async ({
 
   // A new filter starts the count over and drops ?show.
   await openFilters(page);
-  await page.locator('[data-fkey="status"][data-fval="active"]').click();
+  await page.locator('[data-fselect="status"]').selectOption('active');
   expect(await cards.count()).toBeLessThanOrEqual(PAGE);
   await expect(page).not.toHaveURL(/show=/);
 
@@ -268,13 +264,16 @@ test('program Details links preserve filtered previous and next arrows', async (
   const total = await page.locator('[data-dir-card]').count();
   // Any filter that leaves several programs will do; GRADE used to be the one
   // driven here and was deleted on 2026-09-15, so this walks STATUS instead.
-  const status = await page.locator('[data-fkey="status"] [data-chip-count]').evaluateAll((slots, total) => {
-    const slot = slots.find(slot => Number(slot.textContent!.replace(/,/g, '')) >= 3 && Number(slot.textContent!.replace(/,/g, '')) < total);
-    return slot?.closest<HTMLElement>('[data-fkey]')?.dataset.fval;
+  const status = await page.locator('[data-fselect="status"] option').evaluateAll((options, total) => {
+    const option = options.find(o => {
+      const n = Number(o.textContent!.match(/\(([\d,]+)\)$/)?.[1]?.replace(/,/g, ''));
+      return n >= 3 && n < total;
+    });
+    return (option as HTMLOptionElement | undefined)?.value;
   }, total);
   expect(status, 'choose a status with multiple results from the rendered data').toBeTruthy();
   await openFilters(page);
-  await page.locator(`[data-fkey="status"][data-fval="${status}"]`).click();
+  await page.locator('[data-fselect="status"]').selectOption(status!);
   await closeFilters(page);
   await showEverything(page);
   const paths = await page.locator('[data-dir-card]:not([hidden]) .sabl-name').evaluateAll(links => links.map(link => link.getAttribute('href')!));
@@ -288,4 +287,40 @@ test('program Details links preserve filtered previous and next arrows', async (
   await expect(page.locator('[data-sabd-next]')).toHaveAttribute('href', paths[2]!);
   await page.locator('[data-sabd-prev]').click();
   await expect(page.locator('[data-sabd-position]')).toHaveText(`FILTERED · 1 OF ${paths.length}`);
+});
+
+test('program format and field intersect and survive reload and a detail visit', async ({ page }) => {
+  await page.goto('/programs/');
+  const pair = await page.locator('[data-dir-card]').evaluateAll(cards => {
+    const found = cards.find(c => c.getAttribute('data-category') === 'Computing' && c.getAttribute('data-format') === 'research');
+    if (!found) throw new Error('Expected a computing research program in the published fixture');
+    return { category: found.getAttribute('data-category')!, format: found.getAttribute('data-format')! };
+  });
+  await openFilters(page);
+  await page.locator('[data-fselect="format"]').selectOption(pair.format);
+  await page.locator('[data-fselect="category"]').selectOption(pair.category);
+  await closeFilters(page);
+  await expect(page).toHaveURL(/format=research/);
+  await expect(page).toHaveURL(/category=Computing/);
+  const expected = await page.locator(`[data-dir-card][data-format="${pair.format}"][data-category="${pair.category}"]`).count();
+  expect(expected).toBeGreaterThan(0);
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(expected);
+  await page.reload();
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(expected);
+  const first = page.locator('[data-dir-card]:visible .sabl-name').first();
+  const detailHref = await first.getAttribute('href');
+  await first.click();
+  await expect(page).toHaveURL(new RegExp(`${detailHref}$`));
+  await page.goBack();
+  await expect(page.locator('[data-fselect="format"]')).toHaveValue(pair.format);
+  await expect(page.locator('[data-fselect="category"]')).toHaveValue(pair.category);
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(expected);
+
+  // On a format hub the remaining Field filter refines that hub in place.
+  await page.goto('/programs/research-placements/');
+  await openFilters(page);
+  await page.locator('[data-fselect="category"]').selectOption(pair.category);
+  await closeFilters(page);
+  await expect(page).toHaveURL(/programs\/research-placements\/\?category=Computing/);
+  await expect(page.locator('[data-dir-card]:visible')).toHaveCount(expected);
 });

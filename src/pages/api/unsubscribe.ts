@@ -6,6 +6,7 @@ import { confirmationRecipients, subscribers } from '../../lib/db/schema'
 import { eq } from 'drizzle-orm'
 import { recipientKey } from '../../lib/mail-delivery'
 import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
+import { reminderPage as page, reminderBackLink as backLink, reminderError, escapeAttr } from '../../lib/reminder-page'
 
 // Unsubscribing is a two-step flow on purpose. The link in the email is a GET,
 // and mail security stacks (Outlook Safe Links, Proofpoint, Mimecast, corporate
@@ -14,35 +15,6 @@ import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 // confirmation, and the delete happens on the POST that the button submits.
 // The token stays the only credential: no Origin check here, because a blocked
 // unsubscribe is worse than a forged one.
-
-// Site palette (see .sabp in global.css); this page renders outside the Astro
-// layout, so the colours are inlined rather than inherited.
-const page = (title: string, body: string) =>
-  new Response(
-    `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}; ScholarAB</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <style>
-      body{font-family:system-ui,-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;
-        min-height:100vh;margin:0;background:#FFFFFF;color:#141915}
-      .card{text-align:center;padding:2rem;max-width:420px}
-      h1{font-size:1.5rem;margin:0 0 .5rem}
-      p{color:#5A605B;font-size:.95rem;line-height:1.5}
-      a{color:#141915}
-      button{font:inherit;font-weight:600;background:#2FD3A0;color:#08120E;border:0;border-radius:100px;
-        padding:12px 28px;cursor:pointer;margin-top:1.25rem}
-      button:hover{background:#28BC8E}
-      button.secondary{background:transparent;color:#5A605B;border:1px solid #d8d4c8;font-weight:500;
-        padding:10px 22px;margin-top:.75rem}
-      button.secondary:hover{background:#F2F3F5;color:#141915}
-      .fine{font-size:.8rem;color:#5C5F5B;margin-top:1rem}
-      .fine a{color:#5C5F5B}
-      .back{display:inline-block;margin-top:1.5rem;font-size:.9rem}
-    </style></head>
-    <body><div class="card">${body}</div></body></html>`,
-    { status: 200, headers: { 'Content-Type': 'text/html' } }
-  )
-
-const backLink = '<p class="back"><a href="/">← Back to ScholarAB</a></p>'
 
 async function limited(request: Request): Promise<boolean> {
   const ip = getClientIp(request)
@@ -57,16 +29,16 @@ async function limited(request: Request): Promise<boolean> {
 }
 
 export const GET: APIRoute = async ({ request }) => {
-  if (await limited(request)) return new Response('Too many requests; try again later', { status: 429 })
+  if (await limited(request)) return reminderError('rate-limit')
 
   const token = new URL(request.url).searchParams.get('token')
-  if (!token) return new Response('Missing token', { status: 400 })
+  if (!token) return reminderError('missing-token')
 
   // Nothing is deleted here, so an automated prefetch of this URL is harmless.
   return page(
     'Unsubscribe',
     `<h1>Unsubscribe?</h1>
-     <p>You'll stop receiving deadline reminders for this scholarship.</p>
+     <p>You'll stop receiving emails for this deadline.</p>
      <form method="post">
        <input type="hidden" name="token" value="${escapeAttr(token)}">
        <button type="submit">Yes, unsubscribe me</button>
@@ -77,14 +49,14 @@ export const GET: APIRoute = async ({ request }) => {
        <button type="submit" class="secondary">Delete all my data</button>
      </form>
      <p class="fine">"Delete all my data" removes every reminder set up with this
-     email address and erases the address itself. Nothing else about you is
-     stored; see the <a href="/privacy/">privacy policy</a>.</p>
+     email address, the address itself, and its confirmation-email fingerprint.
+     See the <a href="/privacy/">privacy policy</a> for other collection and retention details.</p>
      ${backLink}`
   )
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  if (await limited(request)) return new Response('Too many requests; try again later', { status: 429 })
+  if (await limited(request)) return reminderError('rate-limit')
 
   // The button posts a form; Gmail's and Yahoo's one-click unsubscribe posts
   // `List-Unsubscribe=One-Click` and no fields at all, so the token has to be
@@ -95,7 +67,7 @@ export const POST: APIRoute = async ({ request }) => {
   let form: FormData
   try { form = await request.formData() } catch { form = new FormData() }
   const token = form.get('token') ?? new URL(request.url).searchParams.get('token')
-  if (typeof token !== 'string' || !token) return new Response('Missing token', { status: 400 })
+  if (typeof token !== 'string' || !token) return reminderError('missing-token')
 
   // "Delete all my data"; the PIPEDA erasure path. The token is what proves
   // ownership of the address: it only ever reached the person who can read
@@ -120,8 +92,8 @@ export const POST: APIRoute = async ({ request }) => {
     return page(
       'Deleted',
       `<h1>Deleted</h1>
-       <p>Every reminder set up with that email address is gone, and so is the
-       address. Nothing of yours is left on our side.</p>
+       <p>Every reminder set up with that email address, the address itself, and
+       its confirmation-email fingerprint have been deleted.</p>
        ${backLink}`
     )
   }
@@ -133,11 +105,7 @@ export const POST: APIRoute = async ({ request }) => {
   return page(
     'Unsubscribed',
     `<h1>Unsubscribed</h1>
-     <p>You won't receive any more deadline reminders for this scholarship.</p>
+     <p>You won't receive any more emails for this deadline.</p>
      ${backLink}`
   )
-}
-
-function escapeAttr(v: string): string {
-  return v.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }

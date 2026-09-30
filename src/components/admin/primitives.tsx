@@ -17,6 +17,7 @@ export function AdminTabBar({ tabs, counts, active, onSelect }: {
           <button
             key={t}
             onClick={() => onSelect(t)}
+            aria-pressed={isActive}
             className="px-3 py-1 rounded-full text-xs font-medium transition"
             style={{
               background: isActive ? 'rgba(34,211,165,0.15)' : 'rgba(255,255,255,0.05)',
@@ -71,7 +72,7 @@ export function AdminDeleteModal({ idPrefix, entityLabel, itemName, saving, onCa
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={onCancel}>
       <div role="dialog" aria-modal="true" aria-labelledby={`${idPrefix}-delete-title`} className="bg-[#111118] border border-white/10 rounded-2xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
         <h2 id={`${idPrefix}-delete-title`} className="text-lg font-semibold mb-2">Delete {entityLabel}?</h2>
-        <p className="text-white/50 text-sm mb-6">"{itemName}" will be permanently removed.</p>
+        <p className="text-white/50 text-sm mb-6">"{itemName}" will be marked for removal when changes are published.</p>
         <div className="flex gap-3 justify-end">
           <button onClick={onCancel} disabled={saving} className="px-4 py-2 rounded-lg text-sm text-white/50 hover:text-white border border-white/10 transition disabled:opacity-50">Cancel</button>
           <button onClick={onConfirm} disabled={saving} className="px-4 py-2 rounded-lg text-sm font-medium bg-red-500 hover:bg-red-600 text-white disabled:opacity-50 transition">

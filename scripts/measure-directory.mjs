@@ -19,8 +19,8 @@ await page.goto(new URL('/scholarships/', process.argv[2] ?? 'http://localhost:4
 await page.evaluate(() => document.fonts.ready);
 await page.waitForTimeout(1500);
 const query = await page.locator('[data-dir-card]').evaluateAll(cards => {
-  const unique = cards.find(c => cards.filter(x => x.dataset.search.includes(c.dataset.name.toLowerCase())).length === 1);
-  return unique.dataset.name;
+  const unique = cards.find(c => cards.filter(x => x.dataset.search.includes(c.querySelector('.sabl-name').textContent.toLowerCase())).length === 1);
+  return unique.querySelector('.sabl-name').textContent;
 });
 const input = page.locator('[data-dir-search]');
 const client = await page.context().newCDPSession(page);

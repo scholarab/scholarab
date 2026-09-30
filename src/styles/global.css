@@ -432,7 +432,7 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
 .sabl-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
 .sabl-h1 {
   font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(48px, 6.5vw, 76px); line-height: 1; letter-spacing: -0.015em; margin: 0;
+  font-size: clamp(40px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
 }
 /* The standfirst is the only part of the header whose height varies, and the
    toolbar and the three chip rows sit directly under it. Left to size itself,
@@ -442,7 +442,7 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
    facets.test.ts caps intro length so none of them runs past it. */
 .sabl-desc {
   font-size: 17px; line-height: 1.55; color: rgba(20, 25, 21, 0.65);
-  margin: 20px 0 0; max-width: 560px; min-height: calc(1.55em * 3);
+  margin: 12px 0 0; max-width: 70ch; min-height: calc(1.55em * 3);
 }
 /* A hub named by a jargon word defines it here (lib/glossary.ts). */
 .sabl-define {
@@ -450,14 +450,6 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
   margin: 0 0 16px; max-width: 640px;
 }
 .sabl-define strong { color: var(--text-primary); font-weight: 600; }
-.sabl-quiz-line { font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.72); margin: 10px 0 0; max-width: 560px; }
-.sabl-quiz-line a {
-  color: var(--text-primary); font-weight: 600; text-decoration: underline;
-  text-underline-offset: 3px; text-decoration-color: var(--green);
-  display: inline-block; padding-block: 10px; margin-block: -10px;
-}
-.sabl-quiz-line a:hover { color: var(--green); }
-
 /* One rule, not three. The toolbar used to close with a hairline of its own
    and the first group seam drew another a few pixels below it, so the band
    between the standfirst and the first card was three horizontal lines in
@@ -465,7 +457,7 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
    the search field is the one that does the work. */
 .sabl-toolbar {
   display: flex; align-items: center; gap: 20px;
-  margin-top: 44px; padding: 14px 0;
+  margin-top: 20px; padding: 14px 0;
   border-top: 2px solid var(--text-primary);
 }
 /* The search box is capped at 420px, so `space-between` used to hold SORT out
@@ -665,6 +657,18 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
   .sabl-filters-dense:has(.sabl-scope-select) .sabl-row-label { width: 108px; }
 }
 
+/* Native fields combine without navigating away or exposing every choice. */
+.sabl-filter-select {
+  font: inherit; font-size: 14px; color: var(--text-primary);
+  background: #FFFFFF var(--select-arrow) right 14px center / 10px 6px no-repeat;
+  -webkit-appearance: none; appearance: none;
+  border: 1px solid rgba(20,25,21,0.28); border-radius: 6px;
+  min-height: 44px; min-width: 0; width: 100%; max-width: 320px; padding: 8px 36px 8px 10px;
+}
+.sabl-all-programs { color: var(--text-primary); font-size: 14px; text-underline-offset: 3px; }
+html:not(.js) .sabl-interactive-filter { display: none; }
+html.js .sabl-rail .sabl-scope-select { border-radius: 6px; min-height: 44px; font-weight: 400; }
+
 /* ── Filter rail (hubs) ──
    One DOM, two layouts. Off a hub, and in any window under 1180px, .sabl-split
    is display:contents and the chip rows sit above the grid exactly as they
@@ -739,25 +743,6 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
   .sabl-railed .sabl-rail .sabl-chip-count { font-size: 13px; }
   /* /scholarships' WHERE YOU LIVE picker, fitted to the column. */
   html.js .sabl-railed .sabl-rail .sabl-scope-select { min-width: 0; width: 100%; }
-  /* As many cards as the window holds, not three. On the wide body a 1440
-     window fits four and a 2560 one seven, and the card keeps a floor of 300px
-     so it never gets too narrow to read. */
-  /* Three is the floor, more only when the window can hold them at full size
-     (Ilia, 2026-09-15: "keep three cards as long as possible on every device").
-     The track's minimum is 340px until three of those no longer fit, and from
-     there it is exactly a third of the row, so a 1180px window still lays out
-     three rather than dropping to two.
-     The floor went 300 -> 340 when the filters became hideable: a hidden rail
-     hands the grid 264px back, and at 300 the grid spent it on a fourth column
-     and came out with SMALLER cards than it had with the rail in place, which
-     is the opposite of what widening it is for (Ilia: "use all the space,
-     making the cards overall bigger"). At 340 a fourth column has to be earned.
-     The rail itself waits until 1180px for the same reason: it costs 220px,
-     and below that the three cards beside it come out narrower than the ones a
-     window 100px smaller shows with the filters stacked above them. */
-  .sabl-railed .sabl-grid {
-    grid-template-columns: repeat(auto-fill, minmax(min(340px, (100% - 36px) / 3), 1fr));
-  }
   /* A 228px rail plus its 36px gutter is a fifth of a 1280px window, and the
      three cards beside it pay for all of it. Under 1280 the rail gives some
      back: the chips still fit a 196px column, and the cards gain 24px each. */
@@ -805,47 +790,6 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
    and a control that does nothing is worse than no control. */
 html:not(.js) .sabl-lean { display: none; }
 
-/* ── View switcher (SabViewSwitch) ──
-   Finder's four buttons, in Finder's shape: one rounded well, the chosen view
-   filled a shade darker. The fill comes from html[data-view] rather than
-   aria-pressed, so it is right in the first paint. No JS, no switcher. */
-.sabl-views {
-  display: inline-flex; align-items: center; gap: 2px; flex: none;
-  padding: 3px; border: 1px solid rgba(20,25,21,0.16); border-radius: 12px;
-}
-.sabl-view {
-  display: inline-grid; place-items: center; width: 36px; height: 30px;
-  padding: 0; border: 0; border-radius: 9px; background: none; cursor: pointer;
-  color: rgba(20, 25, 21, 0.6);
-}
-.sabl-view:hover { color: var(--text-primary); background: rgba(20,25,21,0.05); }
-html:not([data-view]) .sabl-view[data-dir-view='list'],
-html[data-view='grid'] .sabl-view[data-dir-view='grid'],
-html[data-view='columns'] .sabl-view[data-dir-view='columns'],
-html[data-view='gallery'] .sabl-view[data-dir-view='gallery'] {
-  color: var(--text-primary); background: rgba(20,25,21,0.11);
-}
-.sabl-view-label { display: none; font-size: 13px; font-weight: 600; line-height: 1; }
-html:not([data-view]) .sabl-view[data-dir-view='list'],
-html[data-view='list'] .sabl-view[data-dir-view='list'],
-html[data-view='grid'] .sabl-view[data-dir-view='grid'],
-html[data-view='columns'] .sabl-view[data-dir-view='columns'],
-html[data-view='gallery'] .sabl-view[data-dir-view='gallery'] {
-  display: inline-flex; gap: 6px; width: auto; padding: 0 11px 0 8px;
-}
-html:not([data-view]) .sabl-view[data-dir-view='list'] .sabl-view-label,
-html[data-view='list'] .sabl-view[data-dir-view='list'] .sabl-view-label,
-html[data-view='grid'] .sabl-view[data-dir-view='grid'] .sabl-view-label,
-html[data-view='columns'] .sabl-view[data-dir-view='columns'] .sabl-view-label,
-html[data-view='gallery'] .sabl-view[data-dir-view='gallery'] .sabl-view-label { display: inline; }
-html:not(.js) .sabl-views { display: none; }
-@media (max-width: 900px) {
-  /* Two panes do not fit a phone: Columns reads as the list there. */
-  .sabl-view[data-dir-view='columns'] { display: none; }
-  html[data-view='columns'] .sabl-view[data-dir-view='list'] { color: var(--text-primary); background: rgba(20,25,21,0.11); display: inline-flex; gap: 6px; width: auto; padding: 0 11px 0 8px; }
-  html[data-view='columns'] .sabl-view[data-dir-view='list'] .sabl-view-label { display: inline; }
-}
-
 /* ── Phone filters ──
    On a phone, sort and the chip rows sat between the search box and the
    first card: 38 chips on /scholarships, and no listing on the first screen
@@ -873,10 +817,8 @@ html:not(.js) .sabl-views { display: none; }
     background: var(--green); color: var(--bg-page); font-size: 11.5px;
   }
   .sabl-filters-n[hidden] { display: none; }
-  /* The sort lives in the sheet on a phone, and the view switcher is off:
-     Columns and Gallery are wide-screen views, and Layout.astro keeps a
-     stored Grid to the wide screen too, so a phone reads the one list. */
-  html.js .sabl-toolbar :is(.sabl-sort, .sabl-views) { display: none; }
+  /* Sort joins the other filters inside the phone sheet. */
+  html.js .sabl-toolbar .sabl-sort { display: none; }
   html.js:not([data-filters]) .sabl-rail { display: none; }
   html.js .sabl-rail-sort { display: flex; }
   /* A sheet over the page, not a block pushing the list 1,000px down. It
@@ -898,12 +840,11 @@ html:not(.js) .sabl-views { display: none; }
     content: ''; position: fixed; inset: 0; z-index: 69; background: rgba(20,25,21,0.42);
   }
   html.js[data-filters] { overflow: hidden; }
-  .sabl-view { width: 48px; height: 38px; }
   /* Full width and a 44px target inside the phone panel. */
   html.js .sabl-scope-select { width: 100%; min-height: 44px; border-radius: 12px; }
   /* Safari zooms the page into any field under 16px when it takes focus,
      and leaves it zoomed (critique 2026-09-27). */
-  .sabl-search input, .sabl-sort-select, html.js .sabl-scope-select { font-size: 16px; }
+  .sabl-search input, .sabl-sort-select, .sabl-filter-select, html.js .sabl-scope-select { font-size: 16px; }
   /* The panel's exit, pinned to the bottom of the screen while it is open. */
   html.js[data-filters] .sabl-filters-done {
     display: block; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 3;
@@ -927,31 +868,7 @@ html:not(.js) .sabl-views { display: none; }
    `sr-only` in both directories), because typing in the search box changes
    nothing else that a screen reader would announce. */
 
-/* Card metrics went up about 10% on 2026-09-15 (Ilia: "make them bigger"):
-   30/28/26 padding, 20px name, 40px amount, 15px blurb, 12px chips. The hub
-   30/28/26 padding, 20px name, 40px amount, 15px blurb, 12px chips, so a card
-   at 1440 went 329px tall to 354px in the same 359px column.
-   The hub grid's 300px floor stayed: raising it to 340px to buy wider cards on
-   a 1920 window also dropped a 1280 one from three cards to two of 471px, and
-   306px, the value that threads both, leaves a 9px margin at 1280 that a
-   visible scrollbar would eat. Column counts are unchanged: 3 at 1280 and
-   1440, 5 at 1920, 7 at 2560. */
-/* minmax(0,...), not 1fr: a plain 1fr floors at the track's min-content, and a
-   card holds nowrap chips like "School-based across Alberta (national
-   competition)". One long chip widened its column past the page and pushed the
-   next column's cards off the right edge of the viewport, cutting off their
-   Details buttons. Zero floor lets the chips ellipsize as they were told to.
-   The column count grows with the window now that pages are full width: 3 at
-   1440, 4 at 1920, 6 at 2560. A 380px floor keeps those counts dividing the
-   24-card first page evenly. min() keeps the zero floor below 3 columns. */
-/* Rows, not a card grid (2026-09-21). The card model spent a whole screen on
-   three listings: a reader comparing a shortlist had to scroll past 20 of them
-   to see 20, and the amount and the deadline sat in a different place on each
-   one. As rows they sit in fixed columns that can be read straight down
-   without reading a single title, and the Calgary hub went from 6,136px to
-   3,570px. The trade, stated because it reverses a call from 2026-09-15: no
-   three-card floor, no card width to tune, and no hard offset shadow on hover,
-   because a row is not a card. */
+/* One responsive list keeps dates, amounts and actions in a consistent order. */
 .sabl-grid { display: block; padding-top: 10px; }
 /* Status sections. Full-width grid items, not wrappers, so the cards either
    side stay in one grid and keep their column rhythm.
@@ -968,12 +885,7 @@ html:not(.js) .sabl-views { display: none; }
    that shuts the whole run. The control needs JavaScript to do anything, so
    without it the bar is an inert heading and every card stays on the page. */
 /* The spring note (lib/status.ts openLaterNote), over the first row. */
-.sabl-later-note {
-  margin: 4px 0 12px; max-width: 62ch;
-  font-size: 15px; line-height: 1.55; color: #454945;
-}
-.sabl-later-note[hidden] { display: none; }
-html[data-later-ok] :is(.sabl-later-note, .sabm-later-note) { display: none; }
+html[data-later-ok] .sabm-later-note { display: none; }
 .sab-later-ok {
   font: inherit; font-weight: 700; color: #0E6B4D; cursor: pointer;
   padding: 0; border: 0; background: none;
@@ -1050,14 +962,13 @@ html.js .sabl-group-toggle { display: inline-flex; }
    rules stacked, and "one line" is the rule on these pages (Ilia,
    2026-09-15). Counted over the rows on screen, so a filter or a search
    never puts two shaded rows side by side. Directory lists and /saved,
-   whose rows each sit in a wrapper of their own; the tile and columns views
-   keep their hairlines. The stripe sets a variable, not the background, so
+   whose rows each sit in a wrapper of their own. The stripe sets a variable, not the background, so
    hover still wins over it. Behind @supports because a browser without
    `of S` would drop the stripes and still lose the hairlines. */
 @supports selector(:nth-child(1 of .a)) {
-  html:not([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > .sabl-card,
+  [data-dir-grid] > .sabl-card,
   .sabl-grid > [data-sv-wrap] > .sabl-card { border-top-color: transparent; border-bottom-color: transparent; }
-  html:not([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > .sabl-card:nth-child(even of .sabl-card:not([hidden], [data-dir-later], [data-dir-shut])),
+  [data-dir-grid] > .sabl-card:nth-child(even of .sabl-card:not([hidden], [data-dir-later], [data-dir-shut])),
   [data-sv-wrap]:nth-child(even) > .sabl-card {
     --row-bg: rgba(20,25,21,0.04);
   }
@@ -1143,65 +1054,65 @@ html.js .sabl-group-toggle { display: inline-flex; }
    date sat at the far right on a desktop and shrank to 14px on a phone, where
    the audience is, so the reader's "due date and money first" held only on
    the wide screen (reader feedback and critique, 2026-09-29).
-   Rows only: the tile, gallery and columns views keep their own layouts. */
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) {
+   The same responsive list serves every directory. */
+.sabl-card {
   position: relative;
   grid-template-columns: 88px minmax(0, 1fr) 150px 148px;
   grid-template-areas: "when main amount actions";
   align-items: baseline;
 }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-row-main { grid-area: main; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > :is(.sabl-amount, .sabl-card-top-left) { grid-area: amount; align-self: baseline; justify-self: end; margin: 0; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-row-when {
+.sabl-card > .sabl-row-main { grid-area: main; }
+.sabl-card > :is(.sabl-amount, .sabl-card-top-left) { grid-area: amount; align-self: baseline; justify-self: end; margin: 0; }
+.sabl-card > .sabl-row-when {
   grid-area: when; align-self: baseline; justify-self: start;
   flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; max-width: 100%;
 }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-card-actions { grid-area: actions; align-self: baseline; justify-self: end; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when { flex-direction: column; align-items: flex-start; gap: 3px; white-space: normal; max-width: 100%; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when::before, .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when-sub::before { content: none; }
+.sabl-card > .sabl-card-actions { grid-area: actions; align-self: baseline; justify-self: end; }
+.sabl-card .sabl-when { flex-direction: column; align-items: flex-start; gap: 3px; white-space: normal; max-width: 100%; }
+.sabl-card .sabl-when::before, .sabl-card .sabl-when-sub::before { content: none; }
 /* Ink, like the amounts: a column of rust figures read as decoration. The
    countdown under it carries the urgency, in rust, and the last two weeks
    keep their dot, beside the words. */
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) [data-when-main] { font: 400 26px/1 var(--font-display); color: var(--text-primary); white-space: nowrap; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) .sabl-when-sub { font-size: 13px; white-space: nowrap; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-urgent .sabl-when-sub::before {
+.sabl-card .sabl-when:not(.is-quiet) [data-when-main] { font: 400 26px/1 var(--font-display); color: var(--text-primary); white-space: nowrap; }
+.sabl-card .sabl-when:not(.is-quiet) .sabl-when-sub { font-size: 13px; white-space: nowrap; }
+.sabl-card .sabl-when.is-urgent .sabl-when-sub::before {
   content: ''; display: inline-block; width: 7px; height: 7px; margin: 0 5px 1px 0;
   border-radius: 50%; background: var(--rust);
 }
 /* The waiting states are words, not a date, so they stay a note (as
    "Amount varies" does) and wrap inside the column. */
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-quiet [data-when-main] { font-size: 13.5px; line-height: 1.3; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-quiet .sabl-when-sub { font-size: 12.5px; line-height: 1.35; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-checked { white-space: normal; }
+.sabl-card .sabl-when.is-quiet [data-when-main] { font-size: 13.5px; line-height: 1.3; }
+.sabl-card .sabl-when.is-quiet .sabl-when-sub { font-size: 12.5px; line-height: 1.35; }
+.sabl-card .sabl-checked { white-space: normal; }
 /* The whole row opens the listing. The title's link is stretched over it;
    Save and Apply sit above the stretch and keep their own targets. */
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-name::after { content: ''; position: absolute; inset: 0; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) :is(.sabl-save, .sabl-apply) { z-index: 1; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *):hover .sabl-name { color: var(--green); }
+.sabl-card .sabl-name::after { content: ''; position: absolute; inset: 0; }
+.sabl-card :is(.sabl-save, .sabl-apply) { z-index: 1; }
+.sabl-card:hover .sabl-name { color: var(--green); }
 /* A program's description is its detail page's first paragraph. On the row
    it was two more lines of grey under two lines of facts, and the reason the
    page read as busy with nothing leading (reader feedback, 2026-09-29). The
    provider line takes the facts' style, so the row has one secondary voice. */
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-blurb[data-row-desc] { display: none; }
-.sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-org { font-size: 13px; color: rgba(20, 25, 21, 0.76); }
+.sabl-card .sabl-blurb[data-row-desc] { display: none; }
+.sabl-card .sabl-org { font-size: 13px; color: rgba(20, 25, 21, 0.76); }
 @media (max-width: 899px) {
   /* The date keeps its column on a phone, the height it takes comes out of
      the line it used to have under the amount. Money and the buttons share
      the second line. */
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) {
+  .sabl-card {
     grid-template-columns: 66px minmax(0, 1fr) auto;
     grid-template-areas: "when main main" "when amount actions";
     column-gap: 14px; row-gap: 8px; align-items: start;
   }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-row-when { align-self: start; padding-top: 2px; }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > :is(.sabl-amount, .sabl-card-top-left) { align-self: center; justify-self: start; text-align: left; }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) > .sabl-card-actions { align-self: center; margin: 0; }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) [data-when-main] { font-size: 24px; }
+  .sabl-card > .sabl-row-when { align-self: start; padding-top: 2px; }
+  .sabl-card > :is(.sabl-amount, .sabl-card-top-left) { align-self: center; justify-self: start; text-align: left; }
+  .sabl-card > .sabl-card-actions { align-self: center; margin: 0; }
+  .sabl-card .sabl-when:not(.is-quiet) [data-when-main] { font-size: 24px; }
   /* "213 days left" is wider than the column; the countdown wraps under
      the date instead of running into the title. */
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) .sabl-when-sub { white-space: normal; line-height: 1.3; }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-quiet [data-when-main] { font-size: 13px; }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-quiet .sabl-when-sub { font-size: 12px; }
+  .sabl-card .sabl-when:not(.is-quiet) .sabl-when-sub { white-space: normal; line-height: 1.3; }
+  .sabl-card .sabl-when.is-quiet [data-when-main] { font-size: 13px; }
+  .sabl-card .sabl-when.is-quiet .sabl-when-sub { font-size: 12px; }
 }
 /* "Last checked Mar 2026", under the date, only on a row whose check is old
    enough to matter (isCheckStale in utils.ts). It was on every row, in full
@@ -1249,159 +1160,6 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-save, .sabl-apply { position: relative; }
 .sabl-save::after, .sabl-apply::after { content: ''; position: absolute; inset: -5px -3px; }
 .sabl-apply::after { inset: -12px -4px -11px; }
-
-/* ── Views (SabViewSwitch, Ilia 2026-09-23) ──
-   The same rows under four layouts, chosen by html[data-view]; absent is the
-   list above. Directory grids only: /saved shares .sabl-card and stays a list.
-   Grid is Finder's icons: each row becomes a tile whose figures sit on its
-   floor, so a row of tiles reads across at one height. */
-html[data-view='grid'] [data-dir-grid] {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-  column-gap: 28px; align-items: stretch;
-}
-html[data-view='grid'] [data-dir-grid] .sabl-card {
-  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-  padding: 18px 14px 20px; border-bottom: 0;
-}
-/* The row's cells centre themselves in their grid cells; in a column that
-   would centre them across the tile. */
-html:is([data-view='grid'], [data-view='gallery']) [data-dir-grid] .sabl-card > * { align-self: flex-start; }
-html[data-view='grid'] [data-dir-grid] .sabl-row-main { width: 100%; }
-html[data-view='grid'] [data-dir-grid] :is(.sabl-amount, .sabl-card-top-left) { margin-top: auto; padding-top: 6px; text-align: left; }
-html[data-view='grid'] [data-dir-grid] .sabl-row-when { flex-direction: row; align-items: center; }
-html[data-view='grid'] [data-dir-grid] .sabl-card-actions { align-self: stretch; justify-content: space-between; }
-@media (max-width: 899px) {
-  html[data-view='grid'] [data-dir-grid] { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; }
-  html[data-view='grid'] [data-dir-grid] .sabl-card { padding: 14px 0 16px; gap: 8px; }
-  html[data-view='grid'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-meta-row) { display: none; }
-  html[data-view='grid'] [data-dir-grid] .sabl-name { font-size: 15px; }
-  html[data-view='grid'] [data-dir-grid] .sabl-amount { font-size: 22px; }
-  html[data-view='grid'] [data-dir-grid] .sabl-amount.is-long { font-size: 16px; white-space: normal; }
-  html[data-view='grid'] [data-dir-grid] .sabl-amount.is-varies { font-size: 13px; }
-  html[data-view='grid'] [data-dir-grid] .sabl-when { white-space: normal; flex-wrap: wrap; font-size: 13px; }
-}
-
-/* Columns is Finder's column view: a narrow list of names on the left, the
-   selected one in full on the right (directory-client builds that pane).
-   The pane sticks while the list scrolls. A phone has no room for two panes,
-   so there the list is simply the list. */
-@media (min-width: 901px) {
-  html[data-view='columns'] .sabl-col {
-    display: grid; grid-template-columns: minmax(300px, 5fr) minmax(0, 7fr);
-    column-gap: 40px; align-items: start;
-  }
-  html[data-view='columns'] .sabl-col > * { grid-column: 1; }
-  html[data-view='columns'] .sabl-col > [data-dir-grid] { grid-row: 1; }
-  html[data-view='columns'] .sabl-col > [data-dir-more] { grid-row: 2; }
-  html[data-view='columns'] .sabl-col > [data-dir-empty] { grid-column: 1 / -1; }
-  html[data-view='columns'] .sabl-col > [data-dir-preview] {
-    grid-column: 2; grid-row: 1 / span 2;
-    position: sticky; top: calc(var(--sab-nav-h) + 24px);
-    max-height: calc(100vh - var(--sab-nav-h) - 48px);
-    max-height: calc(100svh - var(--sab-nav-h) - 48px);
-    overflow-y: auto; overscroll-behavior: contain;
-    margin-top: 18px; padding: 4px 0 24px 36px; border-left: 1px solid rgba(20,25,21,0.14);
-  }
-  html[data-view='columns'] [data-dir-grid] .sabl-card {
-    grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px;
-    padding: 11px 12px; cursor: pointer;
-  }
-  html[data-view='columns'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-org, .sabl-meta-row, .sabl-amount, .sabl-card-top-left, .sabl-card-actions, .sabl-when-sub, .sabl-checked) { display: none; }
-  html[data-view='columns'] [data-dir-grid] .sabl-name { font-size: 15px; font-weight: 600; }
-  html[data-view='columns'] [data-dir-grid] .sabl-row-when { grid-column: 2; }
-  html[data-view='columns'] [data-dir-grid] .sabl-when { font-size: 13px; }
-  html[data-view='columns'] [data-dir-grid] .sabl-group { margin-top: 26px; }
-  html[data-view='columns'] [data-dir-grid] :is(.sabl-group-label, .sabl-group-count) { font-size: 20px; }
-  /* The rail's own mark for "this one": a green bar and a green wash. */
-  html[data-view='columns'] [data-dir-grid] .sabl-card.is-selected {
-    background: rgba(47,211,160,0.14); box-shadow: inset 3px 0 0 var(--green);
-  }
-}
-
-/* Gallery is Finder's gallery: the selected listing large on top, every
-   match as a small tile in one strip underneath that scrolls sideways. A
-   status heading is a tile of its own in the strip and still folds its run. */
-html[data-view='gallery'] [data-dir-grid] {
-  display: flex; align-items: stretch; gap: 12px;
-  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity;
-  padding: 16px 2px 14px; scrollbar-width: thin;
-}
-html[data-view='gallery'] [data-dir-grid] .sabl-card {
-  flex: none; width: 196px; box-sizing: border-box;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
-  padding: 14px 14px 16px; border: 1px solid rgba(20,25,21,0.14); border-radius: 12px;
-  scroll-snap-align: start; cursor: pointer;
-}
-html[data-view='gallery'] [data-dir-grid] :is(.sabl-blurb, .sabl-facts, .sabl-org, .sabl-meta-row, .sabl-card-actions, .sabl-when-sub) { display: none; }
-html[data-view='gallery'] [data-dir-grid] .sabl-name {
-  font-size: 14.5px; display: -webkit-box; -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
-}
-html[data-view='gallery'] [data-dir-grid] :is(.sabl-amount, .sabl-card-top-left) { margin-top: auto; text-align: left; }
-html[data-view='gallery'] [data-dir-grid] .sabl-amount { font-size: 20px; }
-html[data-view='gallery'] [data-dir-grid] .sabl-amount.is-long { font-size: 16px; white-space: normal; }
-html[data-view='gallery'] [data-dir-grid] .sabl-amount.is-varies { font-size: 12.5px; }
-html[data-view='gallery'] [data-dir-grid] .sabl-row-when { flex-direction: row; }
-html[data-view='gallery'] [data-dir-grid] .sabl-when { font-size: 12.5px; }
-html[data-view='gallery'] [data-dir-grid] .sabl-card.is-selected {
-  border-color: var(--text-primary); box-shadow: inset 0 0 0 1px var(--text-primary);
-  background: rgba(47,211,160,0.1);
-}
-html[data-view='gallery'] [data-dir-grid] .sabl-group {
-  flex: none; width: auto; margin: 0; padding: 14px 4px 16px 0;
-  flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 10px;
-}
-html[data-view='gallery'] [data-dir-grid] .sabl-group-name { flex-direction: column; align-items: flex-start; gap: 2px; padding-bottom: 8px; }
-html[data-view='gallery'] [data-dir-grid] :is(.sabl-group-label, .sabl-group-count) { font-size: 20px; }
-html[data-view='gallery'] [data-dir-grid] .sabl-group-toggle { margin-left: 0; padding-bottom: 0; }
-/* Held at one height so the strip under it does not jump as the reader
-   steps through listings of different lengths. */
-html[data-view='gallery'] .sabl-pv { min-height: 340px; padding-top: 18px; }
-@media (max-width: 899px) {
-  html[data-view='gallery'] .sabl-pv { min-height: 0; padding-top: 10px; }
-  /* Four lines, so the strip is still on the first screen; Details has the rest. */
-  html[data-view='gallery'] .sabl-pv-body .sabl-blurb { display: -webkit-box; -webkit-line-clamp: 4; line-clamp: 4; }
-  html[data-view='gallery'] [data-dir-grid] .sabl-card { width: 164px; }
-}
-
-/* The preview pane, shared by Columns and Gallery. Its cells are clones of
-   the row's, so the row's own classes style them and this only resizes. */
-.sabl-pv { display: flex; flex-direction: column; gap: 14px; }
-.sabl-pv[hidden] { display: none; }
-.sabl-pv-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.sabl-pv-kicker {
-  margin: 0; font-family: var(--font-label); font-size: 14px; font-weight: 600;
-  letter-spacing: 0.06em; text-transform: uppercase; color: rgba(20, 25, 21, 0.6);
-}
-.sabl-pv-nav { display: inline-flex; gap: 6px; }
-.sabl-pv-step {
-  display: inline-grid; place-items: center; width: 36px; height: 36px; padding: 0;
-  border: 1px solid rgba(20,25,21,0.2); border-radius: 50%; background: none;
-  color: var(--text-primary); cursor: pointer;
-}
-.sabl-pv-step:hover:not(:disabled) { background: rgba(20,25,21,0.06); }
-.sabl-pv-step:disabled { opacity: 0.35; cursor: default; }
-.sabl-pv-name { margin: 0; }
-.sabl-pv-name .sabl-name {
-  font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 3.2vw, 48px);
-  line-height: 1.02; letter-spacing: -0.01em;
-}
-.sabl-pv-body { max-width: 720px; }
-.sabl-pv-body .sabl-blurb { display: block; -webkit-line-clamp: unset; line-clamp: none; font-size: 16px; margin-top: 0; }
-.sabl-pv-body .sabl-org { font-size: 15px; }
-.sabl-pv-body .sabl-facts { margin-top: 10px; }
-.sabl-pv-body .sabl-facts li { font-size: 14px; }
-.sabl-pv-figures {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; margin-top: auto;
-  padding: 14px 0; border-top: 1px solid rgba(20,25,21,0.14); border-bottom: 1px solid rgba(20,25,21,0.14);
-}
-.sabl-pv-figures .sabl-amount { font-size: 44px; }
-.sabl-pv-figures .sabl-amount.is-long { font-size: 30px; white-space: normal; }
-.sabl-pv-figures .sabl-amount.is-varies { font-size: 15px; }
-.sabl-pv-figures .sabl-row-when { flex-direction: row; align-items: center; }
-.sabl-pv-figures .sabl-when { font-size: 16px; }
-.sabl-pv .sabl-card-actions { align-self: flex-start; gap: 24px; }
-.sabl-pv .sabl-apply { font-size: 15.5px; }
 
 /* "Show more" under a directory grid. The count line says what is left, the
    filled button takes the next step, the underlined link takes all of it. */
@@ -1469,50 +1227,20 @@ html:not(.js) .sabl-more { display: none; }
     transform: none; transition: none;
   }
 }
-/* Three across is the target everywhere a window can hold it (Ilia,
-   2026-09-15). This used to break to two at 1024px, which gave a half-screen
-   laptop window or an iPad in landscape two 480px cards while a 1920 window
-   was showing five 301px ones. Three fit at 900px (272px each, wider than the
-   railed hubs give at 1180), so the break waits until 899px, and two hold
-   until the single column takes over at 640px. */
-/* The row folds rather than shrinking. Below 900px the four columns cannot
-   hold their content, so the figure and the deadline come out from beside the
-   title and sit under it, where they are still the same two things in the same
-   two places on every row. */
+/* Phone rows keep the same cells; the stripe reaches the viewport edge. */
 @media (max-width: 899px) {
-  .sabl-card {
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 14px;
-    align-items: center;
-    padding: 14px 0 13px;
-  }
-  .sabl-row-main { grid-column: 1 / -1; grid-row: 1; }
-  .sabl-amount,
-  .sabl-card-top-left {
-    grid-column: 1; grid-row: 2;
-    justify-self: start; text-align: left; margin-top: 8px;
-  }
-  /* The deadline sits under the amount, beside the buttons: it was the last
-     line of the row, read after Apply (critique 2026-09-26). */
-  .sabl-card-actions { grid-column: 2; grid-row: 2 / span 2; margin-top: 8px; }
-  .sabl-row-when {
-    grid-column: 1; grid-row: 3;
-    flex-direction: row; flex-wrap: wrap; align-items: center; gap: 2px 10px;
-    justify-self: start; margin-top: 4px;
-  }
-  .sabl-row-when .sabl-when { white-space: normal; flex-wrap: wrap; }
+  .sabl-card { padding: 14px 0 13px; }
+  .sabl-card .sabl-amount.is-long { font-size: 18px; line-height: 1.2; white-space: normal; }
+  .sabl-card .sabl-paid { white-space: normal; }
   /* The rows have no side padding here, so a shaded row would put its text
      against the shade's edge. They run to the screen edge instead, through
      the page's 20px gutter, and the text stays where it was. */
-  html:not([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > .sabl-card,
+  [data-dir-grid] > .sabl-card,
   [data-sv-wrap] > .sabl-card {
     margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px;
   }
 }
 
-@media (max-width: 899px) {
-  .sabl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media (max-width: 900px) {
   .sabl-title-row { flex-direction: column; align-items: flex-start; gap: 18px; }
   /* 48px is the desktop floor of the clamp, which on a phone spent a third of
@@ -1571,9 +1299,6 @@ html:not(.js) .sabl-more { display: none; }
     scrollbar-width: none;
   }
   .sabl-chips::-webkit-scrollbar, .sabl-sort-chips::-webkit-scrollbar { display: none; }
-}
-@media (max-width: 640px) {
-  .sabl-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* Program-card extras for the "ScholarAB Programs" design */
@@ -1879,17 +1604,11 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 
 /* ══ "ScholarAB Saved" design (claude.ai/design); shortlist + calendar ══ */
-.sabs-next {
-  margin: 32px 0 0; padding-top: 20px; max-width: 62ch;
-  border-top: 1px solid rgba(20, 25, 21, 0.12);
-  font-size: 15px; line-height: 1.6; color: #454945;
-}
-.sabs-next strong { color: #141915; }
-.sabs-next a { color: #141915; text-underline-offset: 3px; }
 .sabs-toggle {
   display: flex; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 100px;
   overflow: hidden; flex: none; margin-bottom: 6px;
 }
+.sabs-toggle[hidden] { display: none; }
 .sabs-toggle-btn {
   font-family: var(--font-body); font-size: 14px; font-weight: 700;
   padding: 11px 24px; min-height: 44px; border: none; cursor: pointer; background: transparent; color: var(--text-primary);
@@ -2026,7 +1745,6 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
     margin: 0; font-size: 16px; line-height: 1.5;
     display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
   }
-  .sabl-title-row .sabl-quiz-line, .sabl-later-note { display: none; }
   .sabl-toolbar { margin-top: 14px; }
   .sabl-group-h:first-child > .sabl-group { margin-top: 4px; }
 }
@@ -2040,7 +1758,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    width the phone row applies, which is the compact one. */
 @media print {
   .sabh, .sabf-footer, #sab-consent, .sabt-strip, .sabl-toolbar, .sabl-rail, .sabl-card-actions,
-  .sabl-later-note, .sabl-quiz-line, .sabl-more, .sabl-group-toggle, .sabl-filters-done, [data-dir-preview],
+  .sabl-more, .sabl-group-toggle, .sabl-filters-done,
   .sabcal-jump, .sabcal-where, .sabl-crumbs, .sabd-remind { display: none !important; }
   body { background: #fff; }
   .sabl-railed { display: block !important; }
@@ -2049,8 +1767,8 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
     border-top: 0.5pt solid #b5b5b5 !important; margin: 0 !important; padding: 7pt 0 !important;
   }
   .sabl-group-h { break-after: avoid; }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) { grid-template-columns: 80px minmax(0, 1fr) auto; grid-template-areas: "when main amount"; }
-  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-name::after, .sabl-name::after {
+  .sabl-card { grid-template-columns: 80px minmax(0, 1fr) auto; grid-template-areas: "when main amount"; }
+  .sabl-card .sabl-name::after, .sabl-name::after {
     content: 'scholarab.ca' attr(href); position: static; display: block;
     font: 400 8.5pt/1.4 var(--font-body); color: #444;
   }

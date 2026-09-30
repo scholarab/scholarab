@@ -152,7 +152,7 @@ export default function ScholarshipManager({ initialData }: Props) {
         ? prev.map(s => s.id === saved.id ? saved : s)
         : [saved, ...prev]
       )
-      toast.success(isEdit ? 'Scholarship updated' : 'Scholarship added')
+      toast.success(isEdit ? 'Scholarship draft saved' : 'Scholarship draft created')
       refresh()
       closeModal()
     } catch (e) {
@@ -170,7 +170,7 @@ export default function ScholarshipManager({ initialData }: Props) {
       if (res.status === 429) { toast.error('Too many requests. Wait a moment and try again.'); return }
       if (!res.ok) throw new Error()
       setItems(prev => prev.filter(s => s.id !== modal.item!.id))
-      toast.success('Scholarship deleted')
+      toast.success('Scholarship marked for removal at publication')
       refresh()
       closeModal()
     } catch {
@@ -335,8 +335,8 @@ export default function ScholarshipManager({ initialData }: Props) {
             {/* Essential fields */}
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-white/70 mb-1.5">Scholarship name *</label>
-                <input
+                <label htmlFor="sm-scholarship-name" className="block text-sm text-white/70 mb-1.5">Scholarship name *</label>
+                <input id="sm-scholarship-name"
                   type="text"
                   value={form.title ?? ''}
                   onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
@@ -346,8 +346,8 @@ export default function ScholarshipManager({ initialData }: Props) {
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-1.5">Amount *</label>
-                <input
+                <label htmlFor="sm-amount" className="block text-sm text-white/70 mb-1.5">Amount *</label>
+                <input id="sm-amount"
                   type="text"
                   value={form.amount ?? ''}
                   onChange={e => setForm(f => ({ ...f, amount: e.target.value }))}
@@ -361,8 +361,8 @@ export default function ScholarshipManager({ initialData }: Props) {
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-1.5">Application deadline</label>
-                <input
+                <label htmlFor="sm-application-deadline" className="block text-sm text-white/70 mb-1.5">Application deadline</label>
+                <input id="sm-application-deadline"
                   type="date"
                   value={form.deadline ?? ''}
                   onChange={e => setForm(f => ({ ...f, deadline: e.target.value }))}
@@ -371,8 +371,8 @@ export default function ScholarshipManager({ initialData }: Props) {
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-1.5">Official website *</label>
-                <input
+                <label htmlFor="sm-official-website" className="block text-sm text-white/70 mb-1.5">Official website *</label>
+                <input id="sm-official-website"
                   type="url"
                   value={form.url ?? ''}
                   onChange={e => setForm(f => ({ ...f, url: e.target.value }))}
@@ -389,16 +389,16 @@ export default function ScholarshipManager({ initialData }: Props) {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm text-white/70 mb-1.5">Category</label>
-                  <select value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
+                  <label htmlFor="sm-category" className="block text-sm text-white/70 mb-1.5">Category</label>
+                  <select id="sm-category" value={form.category ?? ''} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
                     className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
                     <option value="">Select</option>
                     {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-white/70 mb-1.5">Region</label>
-                  <select value={form.region ?? ''} onChange={e => setForm(f => ({ ...f, region: e.target.value }))}
+                  <label htmlFor="sm-region" className="block text-sm text-white/70 mb-1.5">Region</label>
+                  <select id="sm-region" value={form.region ?? ''} onChange={e => setForm(f => ({ ...f, region: e.target.value }))}
                     className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50">
                     <option value="">Select</option>
                     {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
@@ -408,7 +408,7 @@ export default function ScholarshipManager({ initialData }: Props) {
 
               <label className="flex items-center gap-3 cursor-pointer">
                 <input type="checkbox" checked={form.active ?? true} onChange={e => setForm(f => ({ ...f, active: e.target.checked }))} className="accent-[#22d3a5] w-4 h-4" />
-                <span className="text-sm text-white/70">Show on public site (active)</span>
+                <span className="text-sm text-white/70">Active cycle (uncheck between cycles)</span>
               </label>
             </div>
 
@@ -425,19 +425,19 @@ export default function ScholarshipManager({ initialData }: Props) {
             {showAdvanced && (
               <div className="mt-3 space-y-3 border-t border-white/6 pt-4">
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Who can apply? (Audience)</label>
-                  <input type="text" value={form.audience ?? ''} onChange={e => setForm(f => ({ ...f, audience: e.target.value }))}
+                  <label htmlFor="sm-who-can-apply-audience" className="block text-xs text-white/50 mb-1">Who can apply? (Audience)</label>
+                  <input id="sm-who-can-apply-audience" type="text" value={form.audience ?? ''} onChange={e => setForm(f => ({ ...f, audience: e.target.value }))}
                     placeholder="e.g. Grade 12 students, First Nations youth"
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Notes</label>
-                  <input type="text" value={form.notes ?? ''} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
+                  <label htmlFor="sm-notes" className="block text-xs text-white/50 mb-1">Notes</label>
+                  <input id="sm-notes" type="text" value={form.notes ?? ''} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Applications open date</label>
-                  <input type="date" value={form.openDate ?? ''} onChange={e => setForm(f => ({ ...f, openDate: e.target.value }))}
+                  <label htmlFor="sm-applications-open-date" className="block text-xs text-white/50 mb-1">Applications open date</label>
+                  <input id="sm-applications-open-date" type="date" value={form.openDate ?? ''} onChange={e => setForm(f => ({ ...f, openDate: e.target.value }))}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-hidden focus:border-[#22d3a5]/50 transition" />
                 </div>
                 <label className="flex items-center gap-2 text-sm cursor-pointer">

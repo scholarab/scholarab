@@ -14,7 +14,6 @@ import { todayDate as albertaToday } from '../../lib/calendar';
 // layouts, so there is no second link list to keep in sync.
 
 import SabLogoMark from './SabLogoMark.astro';
-import SabTour from './SabTour.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { programIsListed } from '../../lib/status';
 import { guides } from '../../lib/guides';
@@ -32,8 +31,6 @@ const { currentPath } = Astro.props;
 // do not render.
 let scholarshipCount: number | null = null;
 let programCount: number | null = null;
-// The real listing the How it works walkthrough draws as its example row.
-let tourExample: { title: string; amount: string; deadline: string | null } | null = null;
 
 // The Scholarships and Programs dropdowns (Tesla-style, Ilia 2026-09-13,
 // Programs added 2026-09-15): tiles for the hubs, a text list beside them.
@@ -44,10 +41,8 @@ let tourExample: { title: string; amount: string; deadline: string | null } | nu
 const MENU_TOPICS = ['stem', 'arts', 'trades', 'community', 'sports', 'indigenous'];
 const scholarshipFacetBySlug = new Map(SCHOLARSHIP_FACETS.map(f => [f.slug, f]));
 
-// A panel link is a page, or (`tour`) the How it works walkthrough, which is a dialog.
-type MenuLink = { label: string; href?: string; tour?: boolean };
-// `note` stands in for a count a tile does not have.
-interface Tile { label: string; href: string; count: number | null; backdrop?: string; note?: string }
+type MenuLink = { label: string; href: string };
+interface Tile { label: string; href: string; count: number | null; backdrop?: string }
 const scopeFacets = MENU_SCOPES
   .map(slug => scholarshipFacetBySlug.get(slug))
   .filter(f => f !== undefined);
@@ -64,8 +59,6 @@ try {
   const today = albertaToday();
   const listedPrograms = programs.filter(p => programIsListed(p, today));
   scholarshipCount = scholarships.length;
-  const loran = scholarships.find(s => s.title === 'Loran Scholarship');
-  if (loran) tourExample = { title: loran.title, amount: loran.amount ?? '', deadline: loran.deadline ?? null };
   programCount = listedPrograms.length;
   // Biggest scope first. Array sort is stable, so a tie keeps the source order.
   scopeTiles = scopeFacets
@@ -105,43 +98,20 @@ const programLinks = [
   { label: 'Guides', href: '/guides/' },
 ];
 
-// Explore gathers the three ways into the directory that are not a list of
-// listings: the quiz, the calendar and the guides. Seven links in the bar
-// were more than a first-time visitor could take in (Ilia, 2026-09-26).
-// Everything else a student can use lives here too, so nothing the footer
-// lists is reachable only from the footer (Ilia, 2026-09-26).
-//
-// Same shape as the Scholarships panel (Ilia, 2026-09-26): ten tiles in two
-// rows beside ten links. Five tiles in one row stretched to the height of the
-// list, tall and narrow. No counts on these tiles; a note says what each is.
-// Every tile is one line of name over one line of note, the notes about the
-// same length, so the ten read as one grid rather than ten shapes (Ilia,
-// 2026-09-27). The list beside the tiles keeps the full guide titles.
-// Each tile has a public domain or CC0 photo (Ilia, 2026-09-27), credited on
-// /credits/ from EXPLORE_PHOTOS in photo-credits.ts.
-const EXPLORE_GUIDES: [string, string, string, string, string][] = [
-  ['alexander-rutherford-scholarship-guide', 'Rutherford guide', 'When and how to apply', 'Rutherford Scholarship guide', 'explore-rutherford'],
-  ['how-to-write-a-scholarship-essay', 'Scholarship essays', 'What committees read for', 'Writing a scholarship essay', 'explore-essays'],
-  ['grade-11-scholarship-timeline', 'Grade 11 timeline', 'Why to start in grade 11', 'Grade 11 timeline', 'explore-grade-11'],
-];
-const shownGuides = EXPLORE_GUIDES.filter(([slug]) => guides.some(g => g.slug === slug));
-const guideTiles: Tile[] = shownGuides.map(([slug, label, note, , backdrop]) => ({ label, href: `/guides/${slug}/`, count: null, note, backdrop }));
-const exploreTiles: Tile[] = [
-  { label: 'Find my scholarships', href: '/match/', count: null, note: 'Answer a few questions', backdrop: 'explore-quiz' },
-  { label: 'Closing soon', href: '/#closing', count: null, note: 'Soonest deadlines first', backdrop: 'explore-closing' },
-  { label: 'Deadlines', href: '/deadlines/', count: null, note: 'Every deadline, by month', backdrop: 'explore-deadlines' },
-  { label: 'Guides', href: '/guides/', count: null, note: 'Written for Albertans', backdrop: 'explore-guides' },
-  { label: 'Reference letter', href: '/templates/reference-letter/', count: null, note: 'A template to hand over', backdrop: 'explore-reference' },
-  ...guideTiles,
-  { label: 'For educators', href: '/educators/', count: null, note: 'Counsellors and teachers', backdrop: 'explore-educators' },
-  { label: 'What changed', href: '/updates/', count: null, note: 'Every update to the site', backdrop: 'explore-updates' },
+// Explore presents each tool or guide once, as a direct link.
+const EXPLORE_GUIDES: [string, string][] = [
+  ['alexander-rutherford-scholarship-guide', 'Rutherford Scholarship guide'],
+  ['how-to-write-a-scholarship-essay', 'Writing a scholarship essay'],
+  ['grade-11-scholarship-timeline', 'Grade 11 timeline'],
 ];
 const exploreLinks: MenuLink[] = [
-  { label: 'How it works', tour: true },
   { label: 'Find my scholarships', href: '/match/' },
+  { label: 'Closing soon', href: '/#closing' },
   { label: 'Deadline calendar', href: '/deadlines/' },
   { label: 'All guides', href: '/guides/' },
-  ...shownGuides.map(([slug, , , full]) => ({ label: full, href: `/guides/${slug}/` })),
+  ...EXPLORE_GUIDES
+    .filter(([slug]) => guides.some(g => g.slug === slug))
+    .map(([slug, label]) => ({ label, href: `/guides/${slug}/` })),
   { label: 'Reference letter template', href: '/templates/reference-letter/' },
   { label: 'For educators', href: '/educators/' },
   { label: 'What changed', href: '/updates/' },
@@ -151,7 +121,7 @@ const exploreLinks: MenuLink[] = [
 const MENUS: Record<string, { label: string; tiles: Tile[]; links: MenuLink[] }> = {
   '/scholarships/': { label: 'Scholarships by location and topic', tiles: scopeTiles, links: topicLinks },
   '/programs/': { label: 'Programs by format and field', tiles: formatTiles, links: programLinks },
-  '/match/': { label: 'Explore: the quiz, deadlines, guides and more', tiles: exploreTiles, links: exploreLinks },
+  '/match/': { label: 'Explore: the quiz, deadlines, guides and more', tiles: [], links: exploreLinks },
 };
 
 // Five in the bar. Deadlines, the quiz and the guides live under Explore,
@@ -228,13 +198,13 @@ const isActive = (href: string, also: string[] = []) =>
                 <button type="button" class="sabh-sub-back" data-sabh-back>
                   <span aria-hidden="true">←</span> Back
                 </button>
-                <div class="sabh-menu-inner">
-                  <ul class="sabh-menu-tiles">
+                <div class:list={['sabh-menu-inner', { 'sabh-menu-inner-compact': MENUS[n.href]!.tiles.length === 0 }]}>
+                  {MENUS[n.href]!.tiles.length > 0 && <ul class="sabh-menu-tiles">
                     {MENUS[n.href]!.tiles.map(t => (
                       <li>
                         <a
                           href={t.href}
-                          class:list={['sabh-tile', { 'sabh-tile-photo': t.backdrop, 'sabh-tile-noted': t.note }]}
+                          class:list={['sabh-tile', { 'sabh-tile-photo': t.backdrop }]}
                           style={t.backdrop ? `--sabh-tile-img: url(/photos/backdrops/${t.backdrop}-tile.webp)` : undefined}
                         >
                           {t.count !== null && (
@@ -248,17 +218,15 @@ const isActive = (href: string, also: string[] = []) =>
                                   ? (t.count === 1 ? 'program' : 'programs')
                                   : (t.count === 1 ? 'scholarship' : 'scholarships')}
                               </span>
-                            ) : t.note && <span class="sabh-tile-count">{t.note}</span>}
+                            ) : null}
                           </span>
                         </a>
                       </li>
                     ))}
-                  </ul>
+                  </ul>}
                   <ul class="sabh-menu-list">
                     {MENUS[n.href]!.links.map(l => (
-                      <li>{l.tour
-                        ? <button type="button" class="sabh-menu-tour" data-tour-open="menu">{l.label}</button>
-                        : <a href={l.href}>{l.label}</a>}</li>
+                      <li><a href={l.href}>{l.label}</a></li>
                     ))}
                   </ul>
                 </div>
@@ -266,19 +234,11 @@ const isActive = (href: string, also: string[] = []) =>
             )}
           </div>
         ))}
-        <div class="sabh-item sabh-how-row">
-          <button type="button" class="sabh-link" data-tour-open="sheet"><span class="sabh-link-label">How it works</span></button>
-        </div>
       </nav>
       {/* Same destinations and link treatment as the footer's CONTACT column:
           outside links open a new tab, and the mailto sits inside email_off so
           Cloudflare's email obfuscation does not rewrite the anchor. */}
       <div class="sabh-right">
-      {/* What the site does, in five steps (SabTour). Text from 1101px, where
-          the bar has room; the "i" alone from 901 to 1100. */}
-      <button type="button" class="sabh-how" data-tour-open="bar" aria-label="How it works">
-        <span class="sabh-how-i" aria-hidden="true">i</span><span class="sabh-how-text">How it works</span>
-      </button>
       <div class="sabh-social">
         <a href="https://www.instagram.com/scholarab.ca" target="_blank" rel="noopener noreferrer" aria-label="ScholarAB on Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" /></svg>
@@ -304,7 +264,6 @@ const isActive = (href: string, also: string[] = []) =>
     </div>
   </div>
 </header>
-<SabTour scholarships={scholarshipCount} programs={programCount} example={tourExample} />
 
 <style>
   /* Full window width, not the content measure: the logo sits at the window's
@@ -416,10 +375,6 @@ const isActive = (href: string, also: string[] = []) =>
     position: relative; overflow: hidden; isolation: isolate; background-color: #16211C;
     --sabh-tile-scrim: linear-gradient(rgba(10,19,16,0.5), rgba(10,19,16,0.05) 38%, rgba(10,19,16,0.1) 55%, rgba(10,19,16,0.82));
   }
-  /* Explore's text sits higher, above the room kept for a second note line,
-     so its shade starts higher and goes darker: a white photo under white
-     text was unreadable (Ilia, 2026-09-27). */
-  .sabh-tile-photo.sabh-tile-noted { --sabh-tile-scrim: linear-gradient(rgba(10,19,16,0.35), rgba(10,19,16,0.05) 25%, rgba(10,19,16,0.55) 50%, rgba(10,19,16,0.9)); }
   .sabh-tile-photo::after {
     content: ''; position: absolute; inset: 0; z-index: -1;
     background-size: cover; background-position: center;
@@ -446,30 +401,24 @@ const isActive = (href: string, also: string[] = []) =>
   .sabh-tile-text { display: flex; flex-direction: column; gap: 2px; margin-top: auto; }
   .sabh-tile-name { font-size: 16px; font-weight: 600; color: #EEF1EC; letter-spacing: -0.005em; }
   .sabh-tile-count { font-size: 13px; color: rgba(238, 241, 236, 0.55); }
-  /* Explore's tiles have no number above the name, so a name or note that
-     wraps in one tile and not the next moved the text around the grid. Each
-     gets two lines of room whatever it holds: the name sits at the bottom of
-     its room and the note at the top of its, so every tile in the panel puts
-     both in the same place (Ilia, 2026-09-27). */
-  .sabh-tile-noted .sabh-tile-name, .sabh-tile-noted .sabh-tile-count {
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
-    line-height: 1.3; height: 2.6em;
-  }
-  .sabh-tile-noted .sabh-tile-name { display: flex; flex-direction: column; justify-content: flex-end; }
   /* Two classes, not one: `.sabh-menu ul` above resets padding and outranks a
      bare `.sabh-menu-list`, which left the divider touching the text. One
-     fixed width in every panel, sized to Explore's longest link, so the three
-     panels put the same tiles in the same places (Ilia, 2026-09-26). */
+     fixed width in the directory panels keeps their tiles aligned. */
   .sabh-menu .sabh-menu-list {
     border-left: 1px solid rgba(238, 241, 236,0.12); padding-left: 40px;
     display: flex; flex-direction: column; gap: 2px; width: 226px;
   }
-  .sabh-menu-list a, .sabh-menu-tour {
+  .sabh-menu-list a {
     display: block; padding: 6px 0; font-size: 14px; font-weight: 500;
     color: rgba(238, 241, 236, 0.78); text-decoration: none;
   }
-  .sabh-menu-tour { background: none; border: 0; font-family: inherit; text-align: left; cursor: pointer; width: 100%; }
-  .sabh-menu-list a:hover, .sabh-menu-tour:hover { color: #EEF1EC; }
+  .sabh-menu-list a:hover { color: #EEF1EC; }
+  .sabh-menu-inner-compact { display: block; max-width: 760px; }
+  .sabh-menu-inner-compact .sabh-menu-list {
+    border: 0; padding: 0; width: auto;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px;
+  }
+  .sabh-menu-inner-compact .sabh-menu-list a { padding: 10px 0; }
   @media (max-width: 1100px) {
     .sabh-menu-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
@@ -485,9 +434,7 @@ const isActive = (href: string, also: string[] = []) =>
      click without an underline or a colour accent. */
   .sabh-link:hover { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
   .sabh-link-active { color: #EEF1EC; }
-  /* Seven links since Deadlines and Guides joined the bar (2026-09-26): one
-     line each, and between the phone sheet and 1100px the icons give way;
-     the footer carries the same three. */
+  /* Keep the navigation on one line before it becomes the phone sheet. */
   @media (min-width: 901px) {
     .sabh-link { white-space: nowrap; }
   }
@@ -536,30 +483,9 @@ const isActive = (href: string, also: string[] = []) =>
      attribute and a scoped `a` selector would miss it. */
   .sabh-right { justify-self: end; display: flex; align-items: center; gap: 6px; }
   .sabh-social { display: flex; align-items: center; gap: 2px; }
-  .sabh-how {
-    display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px 0 6px;
-    border: 0; border-radius: 6px; background: transparent; cursor: pointer; white-space: nowrap;
-    font-family: var(--font-body); font-size: 14px; font-weight: 600; color: rgba(238, 241, 236, 0.78);
-    transition: color 0.15s ease, background-color 0.15s ease;
-  }
-  .sabh-how:hover { color: #EEF1EC; background: rgba(238, 241, 236,0.08); }
-  .sabh-how-i {
-    width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
-    background: rgba(238, 241, 236, 0.14); font-family: Georgia, serif; font-style: italic; font-size: 12px; font-weight: 700;
-  }
-  /* The sheet row only exists on phones; desktop has the button above. */
-  .sabh-how-row { display: none; }
-  .sabh-how-row .sabh-link { border: 0; background: none; font: inherit; cursor: pointer; text-align: left; width: 100%; }
-  /* Room for the right-hand column runs out before the links do. Below
-     1360px the social glyphs go (the footer carries them), and below 1101px
-     How it works shrinks to its "i". Scoped under .sabh-right so these win
-     over the base rules above whatever order the file puts them in. */
+  /* The footer carries the social links when the header has less room. */
   @media (min-width: 901px) and (max-width: 1359px) {
     .sabh-right .sabh-social { display: none; }
-  }
-  @media (min-width: 901px) and (max-width: 1100px) {
-    .sabh-right .sabh-how { padding: 0; width: 36px; justify-content: center; }
-    .sabh-right .sabh-how-text { display: none; }
   }
   .sabh-social :global(a) {
     display: inline-flex; align-items: center; justify-content: center;
@@ -599,7 +525,6 @@ const isActive = (href: string, also: string[] = []) =>
        empty flex box still takes the grid's auto column and pushes the
        burger onto a second row. */
     .sabh-right { display: none; }
-    .sabh-how-row { display: block; }
     /* Tapping Scholarships in the sheet swaps the link list for the same
        panel the desktop dropdown shows (Ilia, 2026-09-15): photo tiles two
        across, the topic list under them, and a Back button above. */
@@ -631,9 +556,11 @@ const isActive = (href: string, also: string[] = []) =>
       border-left: 0; padding-left: 0; width: auto;
       border-top: 1px solid rgba(238, 241, 236,0.12); padding-top: 12px;
     }
-    .sabh-menu-list a, .sabh-menu-tour { padding: 12px 0; font-size: 16px; }
+    .sabh-menu-list a { padding: 12px 0; font-size: 16px; }
+    .sabh-menu-inner-compact .sabh-menu-list { grid-template-columns: 1fr; border: 0; padding: 0; }
+    .sabh-menu-inner-compact .sabh-menu-list a { padding: 12px 0; }
 
-    /* Same six anchors, same order, same active class; just a column that
+    /* Same five anchors, same order, same active class; just a column that
        owns the screen. Nothing to keep in sync with the desktop row. */
     .sabh-links {
       display: none;

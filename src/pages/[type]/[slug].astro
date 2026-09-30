@@ -311,21 +311,17 @@ if (kind === 'scholarship') {
     typeLabel: 'SCHOLARSHIP',
     subline: s.region || 'Alberta',
     status,
+    availability: s.concluded ? 'ended' as const : null,
     // Not `status === 'closed'` spelled out again: the sitemap has to list the
     // exact complement of this, so both sides read it from status.ts.
     noindex: !scholarshipIsIndexable(s, todayDate),
     daysLeft,
-    // ISO dates for the client-side chip recompute (SabDetail): the page is
-    // prerendered, so days-left/closed state must be re-derived on load.
-    // A concluded award is not clock-driven, so it passes none of these on.
-    // refreshStatusChip returns early without them, leaving the server's CLOSED
-    // chip alone; otherwise its `inactive` branch repaints "OPENING SOON" on
-    // every load, and a stale future deadline would paint a days-left count.
+    // Ended awards have no clock-driven availability.
     deadlineIso: s.concluded ? null : s.deadline,
     openDateIso: s.concluded || (s.active === false && !s.openDate) ? null : s.openDate,
     inactive: s.active === false && !s.concluded,
     estimated: s.deadlineEstimated === true,
-    dueLong: formatDate(s.deadline),
+    dueLong: s.rolling ? 'No fixed deadline' : formatDate(s.deadline),
     opensLabel: s.openDate ? formatDate(s.openDate) : null,
     // Empty on purpose. Every one of the five facts this used to list was
     // already on the page within one screen of itself: REGION is the subline,
@@ -376,7 +372,7 @@ if (kind === 'scholarship') {
 
   // Word-boundary clamp, not `slice(0, 157) + '...'`: that cut 123 of the 125
   // program descriptions mid-word. Dated cycles lead with the closing date.
-  const programDescription = programMeta(p, status, formatDate);
+  const programDescription = programMeta(p, p.active === false ? 'tba' : status, formatDate);
   const canonical = `https://www.scholarab.ca/programs/${slug}/`;
   const dueLong = status === 'ongoing' ? 'No deadline, join any time' : formatDate(p.deadline);
 
@@ -403,8 +399,9 @@ if (kind === 'scholarship') {
     typeLabel: 'PROGRAM',
     subline: p.provider ? `Run by ${p.provider}` : 'Alberta',
     status,
-    // Retired programs read as TBA/Ongoing on the page; the copy is honest,
-    // the page just isn't a search result: nothing links to it any more.
+    // Inactive records include ended, paused, seasonal and ineligible programs.
+    // Preserve their explanations without inventing a shared reopening state.
+    availability: p.active === false ? 'unlisted' as const : null,
     noindex: !programIsIndexable(p, todayDate),
     daysLeft,
     deadlineIso: hasDate ? p.deadline : null,
@@ -440,7 +437,7 @@ if (kind === 'scholarship') {
     ctaLabel: 'Visit the program site',
     url: p.url,
     checkedLabel: formatVerifiedMonth(p.lastVerified),
-    canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
+    canRemind: p.active !== false && status === 'active' && daysLeft !== null && daysLeft > 0,
   };
 }
 
@@ -536,6 +533,7 @@ const breadcrumbJson = {
       name={d.itemName}
       subline={d.subline}
       status={d.status}
+      availability={d.availability}
       daysLeft={d.daysLeft}
       deadlineIso={d.deadlineIso}
       openDateIso={d.openDateIso}

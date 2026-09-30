@@ -372,6 +372,18 @@ describe('filterSortPrograms', () => {
   })
   const ids = (r: ProgramWithMeta[]) => r.map(p => p.id)
 
+  it('combines format, field, status and search without dropping any choice', () => {
+    const items = [
+      makeProgram({ id: 1, category: 'Computing', format: 'research', description: 'Robotics mentor', deadline: 'Ongoing' }),
+      makeProgram({ id: 2, category: 'Computing', format: 'summer', description: 'Robotics camp', deadline: 'Ongoing' }),
+      makeProgram({ id: 3, category: 'Research', format: 'research', description: 'Robotics lab', deadline: 'Ongoing' }),
+      makeProgram({ id: 4, category: 'Computing', format: 'research', description: 'Robotics lab', deadline: '2026-01-01', _deadline_ms: PAST_MS }),
+      makeProgram({ id: 5, category: 'Computing', format: 'research', description: 'Networks mentor', deadline: 'Ongoing' }),
+    ]
+    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing', selectedFormat: 'research', statusFilter: 'ongoing', searchQuery: 'robotics' })))).toEqual([1])
+    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing', selectedFormat: 'all', statusFilter: 'ongoing', searchQuery: 'robotics' })))).toEqual([1, 2])
+  })
+
   it('always excludes closed programs', () => {
     const items = [
       makeProgram({ id: 1, deadline: '2026-01-01', _deadline_ms: PAST_MS }),

@@ -8,13 +8,16 @@ import { sendEvent } from './events.ts';
 import { downloadICS } from './ics.ts';
 import { BOOKMARK, ARROW, EXT } from './icons.ts';
 import type { ICSScholarship, ICSProgram } from './ics.ts';
-import { emailOff } from './email-off';
+import type { Program } from './data-loader';
 
 // ── Chip/label helpers ───────────────────────────────────────────────────────
 
 // The same one-line deadline cell the directories use ("Apr 30 · 26 days left"),
 // from the fields a saved card carries.
 export function savedWhen(type: 'scholarship' | 'program', f: { deadline: string | null; openDate?: string | null; active?: boolean; concluded?: boolean; deadlineEstimated?: boolean; rolling?: boolean }): { main: string; sub: string; cls: string } {
+  if (type === 'program' && f.active === false) {
+    return { main: 'Not currently listed', sub: '', cls: 'sabl-when' };
+  }
   // `concluded` must travel with the dates: an ended award carries no deadline,
   // so without it the helper reads "between cycles" and says Opening later.
   return type === 'scholarship'
@@ -35,9 +38,9 @@ function esc(s: string): string {
 
 export type SavedItem = {
   type: 'scholarship' | 'program'; id: number; name: string; href: string;
-  category: string | null; deadline: string | null; url: string;
-  amount?: string; audience?: string | null; provider?: string | null;
-  description?: string | null; openDate?: string | null; active?: boolean; concluded?: boolean;
+  deadline: string | null; url: string;
+  amount?: string; audience?: string | null; paid?: boolean; cost?: Program['cost'];
+  openDate?: string | null; active?: boolean; concluded?: boolean;
   deadlineEstimated?: boolean;
   rolling?: boolean;
 };
@@ -46,14 +49,16 @@ function savedCard(s: SavedItem): string {
   const sh = s.type === 'scholarship';
   const attr = (key: string, value: string | undefined | null) => value == null ? '' : ` data-${key}="${esc(value)}"`;
   return `<div class="h-full" data-sv-wrap data-type="${s.type}" data-id="${s.id}">
-    <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${sh ? attr('open-date', s.openDate) + attr('inactive', s.active === false ? '' : undefined) + attr('concluded', s.concluded ? '' : undefined) + attr('estimated', s.deadlineEstimated ? '' : undefined) + attr('rolling', s.rolling ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
+    <div class="sabl-card h-full" data-id="${s.id}" data-name="${esc(s.name)}"${attr('deadline', s.deadline)}${attr('inactive', s.active === false ? '' : undefined)}${sh ? attr('open-date', s.openDate) + attr('concluded', s.concluded ? '' : undefined) + attr('estimated', s.deadlineEstimated ? '' : undefined) + attr('rolling', s.rolling ? '' : undefined) + attr('amount', s.amount) : ''} data-url="${esc(s.url)}">
       <div class="sabl-row-main">
         <h3 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
-        ${sh
-          ? (s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : '')
-          : `${s.provider ? `<div class="sabl-org">${esc(s.provider)}</div>` : ''}${s.description ? `<div class="sabl-blurb" data-row-desc>${emailOff(s.description)}</div>` : ''}`}
+        ${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}
       </div>
-      ${sh ? (() => { const a = amountCell(s.amount); return `<div class="${a.cls}">${esc(a.text)}</div>`; })() : '<span class="sabl-card-top-left"></span>'}
+      ${sh ? (() => { const a = amountCell(s.amount); return `<div class="${a.cls}">${esc(a.text)}</div>`; })()
+        : `<span class="sabl-card-top-left">${s.paid ? '<span class="sabl-paid">Pays you</span>'
+          : s.cost === 'fee' ? '<span class="sabl-paid sabl-fee">Has a fee</span>'
+          : s.cost === 'free' ? '<span class="sabl-paid sabl-free">Free</span>'
+          : s.cost === 'varies' ? '<span class="sabl-paid sabl-fee">Cost varies</span>' : ''}</span>`}
       <div class="sabl-row-when">
         <span class="sabl-when" data-when><span data-when-main></span><span class="sabl-when-sub" data-when-sub hidden></span></span>
       </div>
@@ -156,6 +161,8 @@ export function initSaved() {
         : `${total} ${total === 1 ? 'item' : 'items'} saved. Your shortlist stays on this device.`;
     }
 
+    const toggle = root.querySelector<HTMLElement>('[data-sv-toggle]');
+    if (toggle) toggle.hidden = empty;
     const emptyEl = root.querySelector<HTMLElement>('[data-sv-empty]');
     const listEl  = root.querySelector<HTMLElement>('[data-sv-list]');
     const calEl   = root.querySelector<HTMLElement>('[data-sv-cal]');

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { initSaved, savedOrder } from './saved-client'
+import { initSaved, savedOrder, savedWhen } from './saved-client'
 
 let savedSch: number[] = []
 let savedPrg: number[] = []
@@ -37,13 +37,16 @@ function mount() {
       <script type="application/json" data-sv-items>${JSON.stringify([
         { type: 'scholarship', id: 1, name: 'Big Award', deadline: '2026-05-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/big-award/' },
         { type: 'scholarship', id: 2, name: 'Closed Award', deadline: '2026-01-01', amount: '$1,000', url: 'https://x.example', href: '/scholarships/closed-award/' },
-        { type: 'program', id: 7, name: 'Summer Lab', deadline: '2026-06-15', url: 'https://y.example', href: '/programs/summer-lab/' },
+        { type: 'program', id: 7, name: 'Summer Lab', audience: 'Students in grades 10–12', cost: 'fee', deadline: '2026-06-15', url: 'https://y.example', href: '/programs/summer-lab/' },
+        { type: 'program', id: 63, name: 'Retired teen program', audience: 'Historical eligibility', active: false, deadline: 'Ongoing', url: 'https://retired.example', href: '/programs/retired-teen-program/' },
       ])}</script>
       <div class="sabl-page" data-sv-skeleton>skeleton</div>
       <div class="sabl-page" data-sv-content hidden>
         <p data-sv-count></p>
-        <button data-sv-view="list" class="on" aria-pressed="true">List</button>
-        <button data-sv-view="calendar" aria-pressed="false">Calendar</button>
+        <div data-sv-toggle hidden>
+          <button data-sv-view="list" class="on" aria-pressed="true">List</button>
+          <button data-sv-view="calendar" aria-pressed="false">Calendar</button>
+        </div>
         <div data-sv-empty hidden>empty</div>
         <div data-sv-list hidden>
           <div data-sv-sh-section hidden>
@@ -86,6 +89,7 @@ describe('initSaved', () => {
     expect($('[data-sv-skeleton]').hidden).toBe(true)
     expect($('[data-sv-content]').hidden).toBe(false)
     expect($('[data-sv-empty]').hidden).toBe(false)
+    expect($('[data-sv-toggle]').hidden).toBe(true)
     expect($('[data-sv-list]').hidden).toBe(true)
     expect($('[data-sv-count]').textContent).toBe('Your shortlist is saved on this device.')
   })
@@ -95,12 +99,15 @@ describe('initSaved', () => {
     savedPrg = [7]
     setup()
     expect($('[data-sv-empty]').hidden).toBe(true)
+    expect($('[data-sv-toggle]').hidden).toBe(false)
     expect($('[data-sv-list]').hidden).toBe(false)
     expect($$('[data-sv-wrap]').filter(w => !w.hidden).map(w => w.dataset.id)).toEqual(['1', '7'])
     // The per-type split belongs to the section heads, not to this line too.
     expect($('[data-sv-count]').textContent).toBe('2 items saved. Your shortlist stays on this device.')
     expect($('[data-sv-sh-label]').textContent).toBe('SCHOLARSHIPS · 1')
     expect($('[data-sv-pr-label]').textContent).toBe('PROGRAMS · 1')
+    expect($('[data-type=program] .sabl-blurb').textContent).toBe('Students in grades 10–12')
+    expect($('[data-type=program] .sabl-card-top-left').textContent).toBe('Has a fee')
   })
 
   it('recomputes day chips from the current clock', () => {
@@ -126,6 +133,27 @@ describe('initSaved', () => {
     expect(applyLinks.map(a => !!a.querySelector('svg'))).toEqual([true, true])
     expect(applyLinks.map(a => a.target)).toEqual(['_blank', ''])
     expect(applyLinks[1]!.getAttribute('aria-label')).toBe('Details for Closed Award')
+  })
+
+  it('keeps an inactive program bookmarked and linked without promising it is open', () => {
+    savedPrg = [63]
+    setup()
+    const card = $('[data-type=program] .sabl-card')
+    expect(card.hasAttribute('data-inactive')).toBe(true)
+    expect(card.querySelector('[data-when]')!.textContent).toBe('Not currently listed')
+    expect(card.querySelector('.sabl-blurb')!.textContent).toBe('Historical eligibility')
+    expect(card.querySelector('.sabl-apply')!.getAttribute('href')).toBe('/programs/retired-teen-program/')
+    expect(savedPrg).toEqual([63])
+    document.dispatchEvent(new Event('astro:page-load'))
+    expect($('[data-when]').textContent).toBe('Not currently listed')
+    expect(savedPrg).toEqual([63])
+  })
+
+  it('uses neutral saved-program availability for unknown and dated inactive records too', () => {
+    for (const deadline of ['TBA', 'Ongoing', '2027-06-01', null]) {
+      expect(savedWhen('program', { active: false, deadline }).main).toBe('Not currently listed')
+    }
+    expect(savedWhen('program', { deadline: 'Ongoing' }).main).toBe('Open any time')
   })
 
   it('remove button unsaves the item, hides its card, and updates counts', () => {
@@ -156,6 +184,7 @@ describe('initSaved', () => {
     setup()
     click($$('[data-sv-wrap]').find(w => w.dataset.id === '7')!.querySelector('[data-sv-remove]')!)
     expect($('[data-sv-empty]').hidden).toBe(false)
+    expect($('[data-sv-toggle]').hidden).toBe(true)
     expect($('[data-sv-list]').hidden).toBe(true)
   })
 
@@ -223,7 +252,7 @@ describe('initSaved', () => {
 
 describe('savedOrder', () => {
   const item = (id: number, deadline: string | null) =>
-    ({ type: 'scholarship' as const, id, name: `S${id}`, href: '', category: null, deadline, url: '' })
+    ({ type: 'scholarship' as const, id, name: `S${id}`, href: '', deadline, url: '' })
   it('puts the soonest deadline first, undated next, passed last', () => {
     const order = savedOrder([item(1, null), item(2, '2000-01-01'), item(3, '2099-06-01'), item(4, '2099-01-01')])
     expect(order.map(s => s.id)).toEqual([4, 3, 1, 2])

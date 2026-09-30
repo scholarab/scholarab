@@ -9,8 +9,8 @@ import { test, expect, type Page } from '@playwright/test';
 const num = (s: string | null | undefined) => Number((s ?? '').replace(/[^\d]/g, '') || 0);
 
 async function chip(page: Page, fval: string): Promise<number> {
-  const el = page.locator(`[data-fkey="status"][data-fval="${fval}"] [data-chip-count]`).first();
-  return (await el.count()) ? num(await el.textContent()) : 0;
+  const el = page.locator(`[data-fselect="status"] option[value="${fval}"]`).first();
+  return (await el.count()) ? num((await el.textContent())?.match(/\(([\d,]+)\)$/)?.[1]) : 0;
 }
 
 test('home photo slides state the same counts as the hubs they link to', async ({ page }, testInfo) => {

@@ -60,12 +60,21 @@ describe('GET /api/confirm', () => {
   })
 
   it('rejects a request with no token', async () => {
-    expect((await get('http://localhost/api/confirm')).status).toBe(400)
+    const res = await get('http://localhost/api/confirm')
+    expect(res.status).toBe(400)
+    expect(res.headers.get('Content-Type')).toContain('text/html')
+    const html = await res.text()
+    expect(html).toContain('Open the full link in your ScholarAB email')
+    expect(html).toContain('href="/"')
+    expect(mockUpdate).not.toHaveBeenCalled()
   })
 
   it('refuses when rate limited', async () => {
     mockHitRateLimit.mockResolvedValueOnce(true)
-    expect((await get('http://localhost/api/confirm?token=abc')).status).toBe(429)
+    const res = await get('http://localhost/api/confirm?token=abc')
+    expect(res.status).toBe(429)
+    expect(await res.text()).toContain('Wait 15 minutes')
+    expect(mockUpdate).not.toHaveBeenCalled()
   })
 })
 
@@ -94,5 +103,19 @@ describe('POST /api/confirm', () => {
 
   it('rejects a submission with no token', async () => {
     expect((await post()).status).toBe(400)
+  })
+
+  it('offers recovery for an unreadable form without recording consent', async () => {
+    const res = await POST({
+      request: new Request('http://localhost/api/confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+      }),
+    } as Parameters<typeof POST>[0])
+    expect(res.status).toBe(400)
+    expect(res.headers.get('Content-Type')).toContain('text/html')
+    expect(await res.text()).toContain('Open the full link in your ScholarAB email')
+    expect(mockUpdate).not.toHaveBeenCalled()
   })
 })

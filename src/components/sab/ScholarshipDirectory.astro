@@ -2,7 +2,7 @@
 // Server-rendered replacement for the old ScholarshipList React island.
 // Every card is in the HTML; lib/directory-client.ts shows/hides/reorders
 // them and recomputes the clock-dependent bits on load, so no React ships.
-import { STATUS_WORDS, canApplyNow, openLaterNote } from '../../lib/status.ts';
+import { STATUS_WORDS, canApplyNow } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
 import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
@@ -12,7 +12,7 @@ import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '.
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
-import SabViewSwitch from './SabViewSwitch.astro';
+import SabFilterSelect from './SabFilterSelect.astro';
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -50,7 +50,7 @@ interface Props {
 const {
   items,
   h1 = 'All scholarships',
-  intro = "All available scholarships for Alberta high school students. Every listing is written from the provider's own page and links straight back to it.",
+  intro = 'Scholarships for Alberta students. Check eligibility and deadlines.',
   allItems = items,
   hideCategories = false,
   hideScopes = false,
@@ -159,7 +159,6 @@ if (showGroups) {
   for (const r of runs) { headerAt.set(at, r); at += r.count; }
 }
 const openNow = openNowCount(initial);
-const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s => ({ status: getScholarshipStatus(s), openDate: s.openDate })));
 ---
 
 <Fragment set:html={ICON_SPRITE} />
@@ -173,7 +172,6 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
       <p class="sabl-desc">{intro}</p>
       {/* The quiz was reachable only from a zero-results state (critique
           2026-09-23); a first-time applicant facing 1,500 rows is who it is for. */}
-      <p class="sabl-quiz-line">Not sure where to start? <a href="/match/">Answer a few questions</a> for a shortlist.</p>
     </div>
   </div>
 
@@ -204,7 +202,6 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
     <button type="button" class="sabl-filters-btn" data-dir-filters aria-expanded="false" aria-controls="dir-sort dir-filters">
       Filters<span class="sabl-mono sabl-filters-n" data-dir-filter-n hidden></span>
     </button>
-    <SabViewSwitch />
     <button type="button" class="sabl-lean" data-dir-lean aria-pressed="false">
       <span data-dir-lean-word>Hide filters</span>
       <svg class="sabl-lean-caret" viewBox="0 0 12 8" width="12" height="8" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -231,17 +228,10 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
         {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
       </select>
     </div>
-    {!hideCategories && (
-      <div class="sabl-filter-row">
-        <span class="sabl-row-label">Type</span>
-        <div class="sabl-chips">
-            <button type="button" class="sabl-chip on" data-fkey="category" data-fval="all" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{(items.length).toLocaleString('en-CA')}</span></button>
-            {categories.map(c => (
-              <button type="button" class="sabl-chip" data-fkey="category" data-fval={c} aria-pressed="false">{c}<span class="sabl-mono sabl-chip-count" data-chip-count>{(counts.get(c) ?? 0).toLocaleString('en-CA')}</span></button>
-            ))}
-        </div>
-      </div>
-    )}
+    {!hideCategories && <SabFilterSelect label="Type" filterKey="category" options={[
+      { value: 'all', label: 'All types', count: items.length },
+      ...categories.map(c => ({ value: c, label: c, count: counts.get(c) ?? 0 })),
+    ]} />}
     {!hideScopes && (
       <div class="sabl-filter-row sabl-filter-row-wrap">
         <span class="sabl-row-label">Where you live</span>
@@ -253,7 +243,6 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
           {regionChips.map(c => <option value={c.slug}>{c.label} ({c.count})</option>)}
         </select>
         <div class="sabl-chips sabl-chips-wrap sabl-scope-chips">
-          <button type="button" class="sabl-chip on" data-fkey="region" data-fval="" aria-pressed="true">All<span class="sabl-mono sabl-chip-count" data-chip-count>{(items.length).toLocaleString('en-CA')}</span></button>
           {regionChips.map(c => (
             <a href={`/scholarships/${c.slug}/`} class="sabl-chip sabl-chip-link" data-scope={c.slug}>
               {c.label}<span class="sabl-mono sabl-chip-count">{(c.count).toLocaleString('en-CA')}</span>
@@ -262,17 +251,9 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
         </div>
       </div>
     )}
-    <div class="sabl-filter-row">
-      <span class="sabl-row-label">Status</span>
-      <div class="sabl-chips">
-        {/* A status this page has none of is left out: "Open any time 0" on
-            Calgary offered a filter that could only empty the list, and no
-            other filter can raise it above the page's own count. */}
-        {STATUS_CHIPS.filter(s => s.value === 'all' || statusChipCount(s.value) > 0).map(s => (
-          <button type="button" class={`sabl-chip${s.value === 'all' ? ' on' : ''}`} data-fkey="status" data-fval={s.value} aria-pressed={s.value === 'all' ? 'true' : 'false'}>{s.label}<span class="sabl-mono sabl-chip-count" data-chip-count>{statusChipCount(s.value).toLocaleString('en-CA')}</span></button>
-        ))}
-      </div>
-    </div>
+    <SabFilterSelect label="Status" filterKey="status" options={STATUS_CHIPS
+      .filter(s => s.value === 'all' || statusChipCount(s.value) > 0)
+      .map(s => ({ ...s, label: s.value === 'all' ? 'All statuses' : s.label, count: statusChipCount(s.value) }))} />
     <SabStatusHelp kind="scholarship" />
   </div>
 
@@ -290,10 +271,6 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
   <div class="sr-only" data-dir-count role="status">
     {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
   </div>
-
-  {/* Above the first row, where the September reader decides the page has
-      nothing for them. Only on the unfiltered list, which it describes. */}
-  {laterNote && <p class="sabl-later-note" data-dir-default-only>{laterNote} <button type="button" class="sab-later-ok" data-later-ok>Got it</button></p>}
 
   <p class="sabl-corrected" data-dir-corrected hidden></p>
 
@@ -343,7 +320,6 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
           data-dir-shut={SHUT_GROUPS.has(scholarshipGroupKey(s)) ? '' : undefined}
           data-after={isAfterHighSchool(s) ? '' : undefined}
           data-id={s.id}
-          data-name={s.title}
           data-category={s.category ?? undefined}
           data-region={s.region ?? undefined}
           data-amount={String(s._amount ?? 0)}
@@ -378,16 +354,14 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
                 type="button"
                 class="sabl-save"
                 data-dir-save
-                data-id={s.id}
-                data-name={s.title}
                 aria-label={`Save ${s.title}`}
                 aria-pressed="false"
               ><Fragment set:html={BOOKMARK_REF} /><span class="sabl-save-label" data-save-label>Save</span></button>
               {(() => {
                 const act = rowAction(canApply, s.url, `/scholarships/${s._slug ?? generateSlug(s.title)}/`, s.title);
                 return act.external
-                  ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-track="apply" data-row-action data-item-id={s.id} data-url={s.url} data-detail={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={EXT_REF} /></span></a>
-                  : <a href={act.href} class="sabl-apply" data-row-action data-item-id={s.id} data-url={s.url ?? undefined} data-detail={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={ARROW_REF} /></span></a>;
+                  ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" data-track="apply" data-row-action data-url={s.url} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={EXT_REF} /></span></a>
+                  : <a href={act.href} class="sabl-apply" data-row-action data-url={s.url ?? undefined} aria-label={act.aria}><span data-apply-label>{act.label}</span><span data-apply-icon><Fragment set:html={ARROW_REF} /></span></a>;
               })()}
           </div>
         </div>
@@ -453,15 +427,14 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
   initDirectory<Item, State, Cache>('#sab-scholarships', {
     itemType: 'scholarship',
     defaultState: { sort: 'closest_due', category: 'all', region: '', status: 'all' },
-    toggleKeys: ['category', 'region'],
     parseCard(el) {
       const d = el.dataset;
       return {
         el,
         search: d.search ?? '',
         id: Number(d.id),
-        name: d.name ?? '',
-        title: d.name ?? '',
+        name: el.querySelector('.sabl-name')?.textContent ?? '',
+        title: el.querySelector('.sabl-name')?.textContent ?? '',
         category: d.category ?? null,
         region: d.region ?? null,
         deadline: d.deadline ?? null,
@@ -541,7 +514,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
           sub.hidden = !when.sub;
         }
         const a = s.el.querySelector<HTMLAnchorElement>('[data-row-action]');
-        if (a) paintRowAction(a, rowAction(canApplyNow(status) && s.el.dataset.noApply === undefined, a.dataset.url, a.dataset.detail!, s.title), { ext: EXT_REF, arrow: ARROW_REF });
+        if (a) paintRowAction(a, rowAction(canApplyNow(status) && s.el.dataset.noApply === undefined, a.dataset.url, s.el.querySelector<HTMLAnchorElement>('.sabl-name')!.getAttribute('href')!, s.title), { ext: EXT_REF, arrow: ARROW_REF });
       }
     },
 
@@ -560,7 +533,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
   document.addEventListener('click', e => {
     const link = (e.target as Element | null)?.closest?.('[data-track="apply"]');
     if (link && link.closest('#sab-scholarships')) {
-      sendEvent('apply_click', 'scholarship', Number((link as HTMLElement).dataset.itemId));
+      sendEvent('apply_click', 'scholarship', Number(link.closest<HTMLElement>('[data-dir-card]')?.dataset.id));
     }
   });
 </script>

@@ -21,6 +21,7 @@ const ldJson = webPageJson({ name: 'What changed on ScholarAB', description, pat
 // invited the reader to subtract one from the other and conclude that most
 // changes went unrecorded. What a reader can actually use is how much is
 // written up and how long the site has been running.
+const newestFirst = [...months].sort((a, b) => b.start.localeCompare(a.start));
 const totalEntries = months.reduce((n, m) => n + m.items.length, 0);
 
 const longDate = (iso: string) =>
@@ -59,12 +60,12 @@ const startLabel = longDate(PROJECT_START);
 
       <nav class="sabu-jump" aria-label="Jump to month">
         <span class="sabu-jump-label">Jump to</span>
-        {months.map(m => (
+        {newestFirst.map(m => (
           <a href={`#${m.id}`} class="sabu-jump-link">{m.label}</a>
         ))}
       </nav>
 
-      {months.map(month => (
+      {newestFirst.map(month => (
         <section class="sabu-month" id={month.id}>
           <div class="sabu-month-head">
             <div class="sabu-month-row">

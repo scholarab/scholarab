@@ -10,6 +10,7 @@ function ToggleChip({ label, active, onClick }: { label: string; active: boolean
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className="text-xs px-2 py-0.5 rounded-full border transition"
       style={{
         background: active ? 'rgba(34,211,165,0.15)' : 'rgba(255,255,255,0.04)',
@@ -51,8 +52,8 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
 
       <div className="grid grid-cols-2 gap-2">
         <div>
-          <label className="text-white/40 block mb-1">Min average (%)</label>
-          <input
+          <label htmlFor="eligibility-min-average" className="text-white/40 block mb-1">Min average (%)</label>
+          <input id="eligibility-min-average"
             type="number"
             value={value.minAverage ?? ''}
             onChange={e => set({ minAverage: e.target.value ? parseInt(e.target.value, 10) : null })}
@@ -62,8 +63,8 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
           />
         </div>
         <div>
-          <label className="text-white/40 block mb-1">Max family income ($)</label>
-          <input
+          <label htmlFor="eligibility-max-family-income" className="text-white/40 block mb-1">Max family income ($)</label>
+          <input id="eligibility-max-family-income"
             type="number"
             value={value.maxFamilyIncome ?? ''}
             onChange={e => set({ maxFamilyIncome: e.target.value ? parseInt(e.target.value, 10) : null })}
@@ -111,8 +112,8 @@ export function EligibilityEditor({ value, onChange }: { value: EligibilityCrite
       </div>
 
       <div>
-        <p className="text-white/40 mb-1.5">Citizenship</p>
-        <select
+        <label htmlFor="eligibility-citizenship" className="block text-white/40 mb-1.5">Citizenship</label>
+        <select id="eligibility-citizenship"
           value={value.citizenship}
           onChange={e => set({ citizenship: e.target.value as EligibilityCriteria['citizenship'] })}
           className="bg-[#1a1a24] border border-white/10 rounded-sm px-2 py-1 text-xs text-white focus:outline-hidden focus:border-[#22d3a5]/50"
