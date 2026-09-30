@@ -335,11 +335,12 @@ describe('isCheckStale', () => {
   it('turns over on the Alberta date, not the host clock', () => {
     vi.useFakeTimers();
     try {
-      // 06:59 UTC on March 1 is still February 28 in Edmonton (UTC-7).
-      vi.setSystemTime(new Date('2027-03-01T06:59:00Z'));
-      expect(isCheckStale('2026-09')).toBe(false);
-      vi.setSystemTime(new Date('2027-03-01T07:00:00Z'));
-      expect(isCheckStale('2026-09')).toBe(true);
+      // Use a historical boundary: future Alberta offsets can change with
+      // timezone-data updates. On March 1, 2026, Edmonton was still UTC-7.
+      vi.setSystemTime(new Date('2026-03-01T06:59:00Z'));
+      expect(isCheckStale('2025-09')).toBe(false);
+      vi.setSystemTime(new Date('2026-03-01T07:00:00Z'));
+      expect(isCheckStale('2025-09')).toBe(true);
     } finally {
       vi.useRealTimers();
     }
