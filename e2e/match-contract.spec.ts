@@ -286,6 +286,25 @@ test('programs asks only search type, grade and field before results', async ({ 
   await expect(page.locator('.sabm-answers button')).toHaveCount(3);
 });
 
+// On a phone the first match started at 499px of a 664px screen and ended
+// below it, so no whole result was on the first screen (2026-09-30). Save
+// stays above the list; the reminder line, Retake and the city link follow it.
+// Desktop keeps them all above.
+test('results keep Save above the list and, on a phone, the rest below it', async ({ page }, testInfo) => {
+  await page.addInitScript(key => sessionStorage.setItem(key, JSON.stringify({ step: 99, savedAt: Date.now(),
+    answers: { searchType: 'scholarships', grade: '12', city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), QUIZ_STORAGE_KEY);
+  await page.goto('/match/');
+  await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+  const top = (selector: string) => page.locator(selector).first().evaluate(el => el.getBoundingClientRect().top);
+  const list = await top('.sabm-table');
+  expect(await top('.sabm-results-actions')).toBeLessThan(list);
+  for (const after of ['.sabm-results-note', '.sabm-results-more']) {
+    if (testInfo.project.name === 'mobile') expect(await top(after), after).toBeGreaterThan(list);
+    else expect(await top(after), after).toBeLessThan(list);
+  }
+  await expect(page.getByRole('button', { name: 'Retake quiz' })).toBeVisible();
+});
+
 for (const step of [2, 3, 4, 8]) {
   test(`legacy programs session at step ${step} resumes the relevant three-question position`, async ({ page }) => {
     await page.addInitScript(({ key, step }) => sessionStorage.setItem(key, JSON.stringify({ step, answers: { searchType: 'programs', grade: '12', city: 'Calgary', field: 'STEM' }, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, step });

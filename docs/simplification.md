@@ -1341,3 +1341,27 @@ Outcome: a student who asked to be reminded about an award is never told "3 days
 | /api/alert accepting a guessed date | Closed: the runtime catalogue carries a sparse `deadlineEstimated`, and the route refuses it. The listing page never offered the form, so only hand-made requests were affected. |
 
 Four candidates, none restored: add-back fraction 0/4. Measured on the production database (counts only, no addresses): 43 confirmed subscriptions, 2 on estimated dates (#373, first email 2027-07-10; #47, 2027-04-01). #748 and #1670, the two nearest estimated dates, had no subscribers, so no wrong email went out. The email template and the confirmed-date copy are unchanged (the email redesign stays deferred); both variants were rendered and checked by screenshot.
+
+## Search check and three phone fixes, September 30, 2026
+
+Outcome: know whether the August snippet rewrites earned clicks, and give a phone reader a smaller consent band, a header that stays with them on the home page, and one whole match on the first results screen.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| Two copies of the Search Console credential loader and token exchange (`index-status.ts`, `gsc-months.ts`) | Merged into `scripts/lib/gsc.ts`, which the new `gsc-ctr.ts` also uses; it pages Search Analytics past 25,000 rows, which the old single request silently could not. |
+| Another snippet rewrite | Not done. The check (docs/seo-index-status.md) shows ranking growth, not a snippet effect, on too few clicks to act on; the Rutherford guide's "stop rewriting" note stands. The one concrete fault, menu text quoted in an AI Overview card, is fixed with `data-nosnippet` on the header and footer. |
+| The home band's `position: relative; z-index: 2` | Removed. It served a transparent bar over a hero film (5382481); the bar has been solid since, and the rule was all that unstuck the home header. |
+| One sentence of the consent body ("which is how we tell a returning visitor from a new one") | Removed on every width. Kept: the cookie, that it identifies the browser, that no changes nothing, the privacy link, both 44px buttons and all consent logic. |
+| The reminder line, Retake and the city link above the phone results | Moved below the list on phones (CSS order; markup split so Save stays above). Desktop unchanged. |
+
+Five candidates, none restored: add-back fraction 0/5.
+
+Measured on the built site in WebKit at iPhone 13 size (390x664):
+
+| | Before | After |
+| --- | --- | --- |
+| Consent band | 179px (27%) | 144px (22%) |
+| Home header top after scrolling 800px | -800px | 0 |
+| First quiz match, top to bottom (Medicine Hat, Grade 12, Catholic board) | 499 to 772px (cut off) | 382 to 655px (whole) |
+
+The plan's target for the band was 110px; the two-line body and 44px buttons set the floor at 144 without dropping required disclosure. The first-match figure differs from the 2026-09-27 audit's 659px because later fixes had already moved it. The 2026-09-28 section's "Not yet checked on production" line is out of date: those fixes were confirmed on www that day. New browser guards: the header stays pinned on / and /scholarships/, and results keep Save above the list with the rest below it on a phone. Found in passing: the weekly index-status launchd run of 2026-09-14 failed 1,308 of 1,320 inspections.

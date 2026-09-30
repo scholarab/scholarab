@@ -588,6 +588,10 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     ? `Save the ${strong.length > 0 ? 'strong' : 'good'} match`
                     : `Save the ${saveable.length} ${strong.length > 0 ? 'strong' : 'good'} matches`}</button>
             )}
+          </div>
+          {/* Its own group so a phone can move it under the list (global.css,
+              "Phones: first result"); beside Save everywhere else. */}
+          <div className="sabm-results-more">
             <button onClick={reset} className="sabm-btn-outline">Retake quiz</button>
             {showScholarships && (
               // The student's own hub, not the whole directory: the city is the

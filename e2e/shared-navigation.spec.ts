@@ -43,3 +43,15 @@ test('Explore keeps every tool reachable by keyboard and phone menu', async ({ p
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(menu).toBeHidden();
 });
+
+// Home was the one page whose header scrolled away: a scoped
+// `position: relative` left over from a transparent hero bar beat the sticky
+// rule (audit 2026-09-27). Checked on a directory page too, so the test fails
+// on the rule, not on one page's layout.
+for (const path of ['/', '/scholarships/']) {
+  test(`the header stays pinned after scrolling ${path}`, async ({ page }) => {
+    await page.goto(path);
+    await page.evaluate(() => window.scrollTo(0, 800));
+    await expect.poll(() => page.locator('[data-sab-header]').evaluate(h => Math.round(h.getBoundingClientRect().top))).toBe(0);
+  });
+}

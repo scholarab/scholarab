@@ -152,6 +152,12 @@ const isActive = (href: string, also: string[] = []) =>
   href === '/' ? currentPath === '/' : [href, ...also].some(h => withSlash(currentPath).startsWith(withSlash(h)));
 ---
 
+{/* data-nosnippet: Google quoted this menu ("Scholarships 971 Programs 117
+    Match Saved About") as the text of our AI Overview source card for the
+    Persons Case Scholarship (2026-09-30). The attribute keeps site chrome out
+    of snippets and AI summaries; links are still crawled. Google honours it on
+    div, span and section only, hence the display: contents wrapper. */}
+<div class="sab-nosnippet" data-nosnippet>
 <header class="sabh" data-sab-header>
   <div class="sabh-nav">
     <a href="/" class="sabh-logo" aria-label="ScholarAB home">
@@ -275,6 +281,7 @@ const isActive = (href: string, also: string[] = []) =>
     </div>
   </div>
 </header>
+</div>
 
 <style>
   /* Full window width, not the content measure: the logo sits at the window's

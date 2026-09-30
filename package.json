@@ -26,6 +26,7 @@
     "indexnow": "TZ=America/Edmonton tsx scripts/submit-indexnow.ts",
     "index-status": "TZ=America/Edmonton tsx scripts/index-status.ts",
     "gsc-months": "TZ=America/Edmonton tsx scripts/gsc-months.ts",
+    "gsc-ctr": "TZ=America/Edmonton tsx scripts/gsc-ctr.ts",
     "predev": "tsx scripts/generate-catalogue-payloads.ts",
     "pretype-check": "tsx scripts/generate-catalogue-payloads.ts",
     "migrate-db": "tsx scripts/migrate-db.ts",

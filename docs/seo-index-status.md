@@ -80,3 +80,46 @@ coverage state changed since the previous snapshot, and counts of URLs that
 entered or left the sitemap. That block is the point of running it weekly --
 it is what answers "did the Validate Fix move anything", which a single
 snapshot cannot.
+
+## Click-through check (`npm run gsc-ctr`), September 30, 2026
+
+`npm run gsc-ctr -- <before> <after>` pulls two windows the same way and prints
+totals, CTR by position band (query x page rows), CTR by page type (page rows,
+which keep the searches Google anonymises), and paired queries: the same
+searches at positions 5 to 10 in both windows. The Rutherford guide is left
+out of the band and paired figures (see its entry in `src/lib/guides.ts`).
+Output goes to `private/seo-ctr/`.
+
+Result for 2026-07-20..08-16 (before the August snippet rewrites) against
+2026-08-31..09-27:
+
+| | Before | After |
+| --- | --- | --- |
+| All searches | 1.62% (169 / 10,433) | 1.69% (762 / 45,214) |
+| Listings (page rows) | 1.71% (87 / 5,073) | 1.93% (454 / 23,515) |
+| Hubs, no snippet change (control) | 2.10% (49 / 2,333) | 2.23% (166 / 7,448) |
+| Positions 5 to 7 (query x page) | 2.12% (10 / 472) | 0.64% (14 / 2,195) |
+| Positions 8 to 10 (query x page) | 1.58% (4 / 253) | 0.75% (21 / 2,806) |
+| Paired queries at 5 to 10 (39) | 1.66% (9 / 541) | 0.41% (6 / 1,480) |
+
+Reading: the September growth is ranking, not snippets. Weekly clicks went
+from about 50 to 190 to 240 and average position from about 11 to 7. The
+same 39 searches drew nearly three times the impressions and no more clicks,
+which a snippet change cannot explain; a larger share of AI Overview
+impressions can. Band and paired figures rest on 4 to 21 clicks a side, too few
+to call a snippet effect either way. Listings rose slightly faster than the
+control, which is the most the data supports.
+
+What a live check found (2026-09-30): for "rbc ignite scholarship" Google
+shows our meta description as written. For "persons case scholarship" our
+page appears as an AI Overview source whose text is the header menu from an
+old crawl ("Scholarships 971 Programs 117 Match Saved About"). The header and
+footer now sit inside `data-nosnippet`, which Google honours for snippets and
+AI features; links are still crawled. Query-level rows cover only 20 to 30% of
+impressions on this property (the rest are anonymised), so read the band
+figures as a sample.
+
+The query x page API rows are not the Performance report's CSV export: the
+2026-08-19 export read 1.38% at 5 to 7; the API reads 1.64% for the same
+window with the guide in. Compare windows pulled the same way, never an
+export against this script.
