@@ -3,6 +3,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { quizPayload } from '../src/lib/quiz-payload.ts';
 import { eligibilitySchema } from '../src/lib/eligibility-types.ts';
 import type { Scholarship, Program } from '../src/lib/data-loader.ts';
+import { comboIndex } from '../src/lib/combos.ts';
+import { todayDate } from '../src/lib/calendar.ts';
 const snapshot = {
   scholarship: validateCatalogue(JSON.parse(readFileSync('src/data/scholarships.json', 'utf8')), 'scholarship'),
   program: validateCatalogue(JSON.parse(readFileSync('src/data/research-programs.json', 'utf8')), 'program'),
@@ -16,7 +18,7 @@ const scholarships = snapshot.scholarship.map(
 const programs = snapshot.program.map(
   (row) => ({ ...(row as unknown as Program), active: row.active !== false })
 ) as Program[];
-const payload=quizPayload(scholarships,programs);
+const payload=quizPayload(scholarships,programs,comboIndex(scholarships,todayDate()));
 for (const [source, result] of [[scholarships, payload.scholarships], [programs, payload.programs]] as const) {
   if (new Set(source.map(row => row.id)).size !== source.length ||
       source.length !== result.length || source.some((row, index) => row.id !== result[index]?.id))

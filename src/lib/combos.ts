@@ -18,6 +18,9 @@
 // why the page says "open to" and each row keeps its own audience line.
 import { facetItems, SCHOLARSHIP_FACETS, type FacetTarget } from './facets.ts';
 import { scholarshipStatusOf, type StatusInput } from './status.ts';
+import { AUDIENCE_SCHOOLS, MIN_COMBO_CORE, type ComboEntry, type ComboKey } from './combo-pick.ts';
+import { QUIZ_QUESTIONS } from './quiz.ts';
+import { generateSlug } from './utils.ts';
 
 export interface ComboTarget extends FacetTarget, StatusInput {
   id: number;
@@ -56,6 +59,9 @@ export interface Combo {
    * `narrower`.
    */
   addOn?: (s: ComboTarget) => boolean;
+  /** The quiz answer that puts a student in it, so /match can name the combo.
+   *  Absent where no answer can (Redcliff residency, Cypress County). */
+  matchOn?: ComboKey;
 }
 
 export interface CityCombos {
@@ -69,7 +75,7 @@ export interface CityCombos {
 }
 
 /** A combo needs two awards everyone in it can apply to, and three in all. */
-export const MIN_COMBO_CORE = 2;
+export { MIN_COMBO_CORE };
 export const MIN_COMBO_ITEMS = 3;
 
 const has = (list: string[] | undefined, value: string) => list?.includes(value) ?? false;
@@ -88,7 +94,12 @@ const AUDIENCE_GATE = /\b(male|female|women|men|girls|boys)\b|\bchild(ren)? of\b
  */
 function narrower(s: ComboTarget): boolean {
   const e = s.eligibility ?? {};
-  return (e.fields?.length ?? 0) > 0
+  // Combos speak to the Grade 12 year ("graduating from", "starting at ...
+  // after Grade 12"). A Grade 10 or 11 award in the core meant no one student
+  // could apply to all of it (St. Oscar Romero, found by the /match drift
+  // test, 2026-09-30).
+  return (e.grades?.length ? !e.grades.includes('12') : false)
+    || (e.fields?.length ?? 0) > 0
     || !!e.genderRequired || !!e.indigenousRequired || !!e.bipocRequired || !!e.fosterCare || !!e.apprenticeship
     || (e.extracurriculars ?? []).some(x => !SOFT_ACTIVITIES.has(x.toLowerCase()))
     || AUDIENCE_GATE.test(s.audience ?? '');
@@ -307,6 +318,7 @@ const audienceSchool = (city: string, name: string, pattern: RegExp): Combo => (
   slug: `school-${slugify(name)}`, city, name, who: `you go to ${name}`,
   includes: s => has(s.eligibility?.specificSchools, name) || pattern.test(s.audience ?? ''),
   addOn: s => narrower(s) || college(s),
+  matchOn: { school: name },
 });
 
 export const COMBOS: Combo[] = [
@@ -326,6 +338,7 @@ export const COMBOS: Combo[] = [
     who: 'you are starting at Medicine Hat College after Grade 12',
     includes: s => has(s.eligibility?.targetInstitutions, 'Medicine Hat College'),
     addOn: s => narrower(s) || schooled(s),
+    matchOn: { institution: 'Medicine Hat College' },
   },
   {
     slug: 'cypress-county',
@@ -343,15 +356,9 @@ export const COMBOS: Combo[] = [
     // you qualify for". Funds for one hamlet, team or nation are sides.
     includes: s => /^(https?:\/\/)?(www\.)?nafgives\.com\//.test(s.url ?? ''),
     addOn: s => narrower(s) || !/\b(northwestern Alberta|Peace Country|Grande Prairie)\b/.test(s.audience ?? ''),
+    matchOn: { city: true },
   },
-  audienceSchool('st-albert', 'Paul Kane High School', /\bPaul Kane\b/),
-  audienceSchool('st-albert', 'Bellerose Composite High School', /\bBellerose\b/),
-  audienceSchool('spruce-grove', 'Memorial Composite High School', /\bMemorial Composite\b/),
-  audienceSchool('spruce-grove', 'Spruce Grove Composite High School', /\bSpruce Grove Composite\b/),
-  audienceSchool('fort-saskatchewan', 'Fort Saskatchewan High School', /\bFort High\b|\bFort Saskatchewan High School\b/),
-  audienceSchool('lloydminster', 'Lloydminster Comprehensive (LCHS)', /\bLCHS\b/),
-  audienceSchool('cold-lake', 'Cold Lake High School', /\bCold Lake High\b/),
-  audienceSchool('chestermere', 'Chestermere High School', /\bChestermere High\b/),
+  ...AUDIENCE_SCHOOLS.map(a => audienceSchool(a.page, a.name, a.pattern)),
 ];
 
 /**
@@ -389,16 +396,19 @@ function generatedCombos(city: string, pool: ComboTarget[]): Combo[] {
     slug: `board-${slugify(code)}`, city, name: BOARDS[code]!.name, who: BOARDS[code]!.who,
     includes: s => boardWide(s).includes(code),
     addOn: s => narrower(s) || college(s),
+    matchOn: { board: code },
   }));
   const colleges: Combo[] = count(s => (s.eligibility?.targetInstitutions ?? []).filter(t => t !== 'any')).map(inst => ({
     slug: `going-to-${slugify(inst)}`, city, name: `Going to ${inst}`, who: `you are starting at ${inst} after Grade 12`,
     includes: s => has(s.eligibility?.targetInstitutions, inst),
     addOn: s => narrower(s) || schooled(s),
+    matchOn: { institution: inst },
   }));
   const schools: Combo[] = count(s => s.eligibility?.specificSchools ?? []).map(school => ({
     slug: `school-${slugify(school)}`, city, name: school, who: `you go to ${school}`,
     includes: s => has(s.eligibility?.specificSchools, school),
     addOn: s => narrower(s) || college(s),
+    matchOn: { school },
   }));
   return [...boards, ...colleges, ...schools];
 }
@@ -466,4 +476,20 @@ export function combosForCity<T extends ComboTarget>(city: string, items: T[], t
 /** Cities with at least one combo, which are the combo pages the build emits. */
 export function comboCities<T extends ComboTarget>(items: T[], today: Date): CityCombos[] {
   return CITY_COMBOS.filter(c => combosForCity(c.city, items, today).length > 0);
+}
+
+/**
+ * Every combo /match can name, for quiz-payload.json: its quiz key and core
+ * ids. The results screen intersects the ids with the student's own matches
+ * (combo-pick.ts), so an award that closed after the build drops out there.
+ */
+export function comboIndex<T extends ComboTarget>(items: T[], today: Date): ComboEntry[] {
+  const cities = QUIZ_QUESTIONS.find(q => q.key === 'city')?.opts.map(o => o.value) ?? [];
+  return CITY_COMBOS.flatMap(({ city }) => {
+    const quizCity = city === 'alberta' ? 'Other Alberta' : cities.find(c => generateSlug(c) === city);
+    if (!quizCity) return [];
+    return combosForCity(city, items, today).flatMap(({ combo, core }) => combo.matchOn
+      ? [{ quizCity, page: city, slug: combo.slug, name: combo.name, who: combo.who, on: combo.matchOn, core: core.map(s => s.id) }]
+      : []);
+  });
 }

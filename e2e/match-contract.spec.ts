@@ -305,6 +305,32 @@ test('results keep Save above the list and, on a phone, the rest below it', asyn
   await expect(page.getByRole('button', { name: 'Retake quiz' })).toBeVisible();
 });
 
+// Combos on /match (2026-09-30): the set a student's answers put them in,
+// with one button to keep it. The ids come from the build's own index, so the
+// test follows the catalogue rather than pinning award ids.
+test('results name the combo a student is in and save it in one tap', async ({ page }) => {
+  const combo = payload.combos.find(c => c.slug === 'board-mhcbe')!;
+  const seed = (grade: string) => page.addInitScript(({ key, grade }) => sessionStorage.setItem(key, JSON.stringify({ step: 99, savedAt: Date.now(),
+    answers: { searchType: 'scholarships', grade, city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), { key: QUIZ_STORAGE_KEY, grade });
+  await seed('12');
+  await page.goto('/match/');
+  const tray = page.locator('.sabm-combo').filter({ hasText: combo.name });
+  await expect(tray).toBeVisible();
+  await expect(tray.getByRole('link', { name: 'See the combo' })).toHaveAttribute('href', '/scholarships/medicine-hat/combos/#board-mhcbe');
+  await tray.getByRole('button', { name: /^Save all \d+$/ }).click();
+  await expect(tray.getByRole('status')).toHaveText(/^All \d+ saved$/);
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('scholarab_saved') || '[]') as number[]);
+  expect(combo.core.filter(id => saved.includes(id)).length).toBeGreaterThanOrEqual(2);
+});
+
+test('a Grade 10 student is not shown a Grade 12 combo', async ({ page }) => {
+  await page.addInitScript(key => sessionStorage.setItem(key, JSON.stringify({ step: 99, savedAt: Date.now(),
+    answers: { searchType: 'scholarships', grade: '10', city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), QUIZ_STORAGE_KEY);
+  await page.goto('/match/');
+  await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
+  await expect(page.locator('.sabm-combo')).toHaveCount(0);
+});
+
 for (const step of [2, 3, 4, 8]) {
   test(`legacy programs session at step ${step} resumes the relevant three-question position`, async ({ page }) => {
     await page.addInitScript(({ key, step }) => sessionStorage.setItem(key, JSON.stringify({ step, answers: { searchType: 'programs', grade: '12', city: 'Calgary', field: 'STEM' }, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, step });

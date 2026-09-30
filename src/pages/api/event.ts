@@ -8,7 +8,7 @@ import { getClientIp, hitRateLimit } from '../../lib/rate-limit'
 
 // Client-sendable events only. alert_subscribe is recorded server-side in /api/alert.
 // app_step left with the application-step ticker (deleted with /app, Aug 2026).
-const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit', 'tour_open', 'tour_step', 'tour_finish', 'tour_close', 'tour_cta'])
+const ALLOWED_EVENTS = new Set(['detail_view', 'apply_click', 'save', 'quiz_start', 'quiz_complete', 'search_empty', 'source_visit', 'tour_open', 'tour_step', 'tour_finish', 'tour_close', 'tour_cta', 'combo_open'])
 // Campaign sources, mirroring SOURCES in src/lib/events.ts. Anyone can type
 // `?s=` into the address bar, so the server keeps its own copy of the list
 // rather than trusting whatever the client sends.

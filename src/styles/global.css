@@ -1459,6 +1459,31 @@ html:not(.js) .sabm-ph { display: none; }
 .sabm-btn-accent:active { transform: translateY(1px); transition-duration: 0.07s; }
 /* The save-all action is a <button>, the rest of the accents are links. */
 button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: pointer; }
+/* A combo tray inside the results: the combo pages' tray, small (a mint
+   tray, ink outline, mustard-on-ink sticker). Mustard stays on ink. The
+   save button turns ink because mint on mint would vanish. */
+.sabm-combo {
+  margin: 18px 0; padding: 20px 24px 22px;
+  background: var(--brand); color: var(--text-primary);
+  border: 3px solid var(--text-primary); border-radius: 26px;
+}
+/* A second tray takes the combo pages' next tone, as their menu does. */
+.sabm-combo + .sabm-combo { background: #FFD84D; }
+.sabm-combo-tag {
+  display: inline-block; background: var(--text-primary); color: #FFC700;
+  font: 800 13px/1 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 7px 12px 6px; border-radius: 999px; transform: rotate(-4deg);
+}
+.sabm-combo-name {
+  font: 800 clamp(26px, 3vw, 34px)/1 var(--font-display); text-transform: uppercase;
+  letter-spacing: 0.01em; margin: 12px 0 6px;
+}
+.sabm-combo-who { font-size: 15.5px; line-height: 1.5; margin: 0; max-width: 60ch; }
+.sabm-combo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; margin-top: 14px; }
+.sabm-combo .sabm-btn-accent { background: var(--text-primary); color: #fff; }
+.sabm-combo .sabm-btn-accent:hover, .sabm-combo .sabm-btn-accent:focus-visible { background: #2B332D; color: #fff; }
+.sabm-combo .sabm-saved-all { color: var(--text-primary); }
+.sabm-combo .sabm-text-link { text-decoration-color: rgba(20, 25, 21, 0.6); }
 /* Leaving the results is the quiet choice (critique 2026-09-23). */
 .sabm-text-link {
   align-self: center; font-size: 14.5px; font-weight: 600; color: var(--text-primary);

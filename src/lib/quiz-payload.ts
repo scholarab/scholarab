@@ -1,4 +1,5 @@
 import type { Scholarship, Program } from './data-loader';
+import type { ComboEntry } from './combo-pick';
 /** Keep only matching inputs and fields actually rendered in results. */
 export type QuizScholarship = Pick<
   Scholarship,
@@ -36,9 +37,12 @@ export type QuizProgram = Pick<
   | 'description'
   | 'location'
 >;
-export function quizPayload(scholarships: Scholarship[], programs: Program[]) {
+/** `combos` is combos.ts's comboIndex, built beside this payload so the
+ *  results can name a student's combo without a second download. */
+export function quizPayload(scholarships: Scholarship[], programs: Program[], combos: ComboEntry[] = []) {
   return {
     version: 1 as const,
+    combos,
     scholarships: scholarships.map(
       ({ id, title, amount, deadline, audience, url, region, eligibility, alsoOpenTo, localArea, concluded, openDate, active, deadlineEstimated, rolling }) => ({
         id,

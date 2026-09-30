@@ -10,6 +10,7 @@ import { generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
 import { STATUS_WORDS, canApplyNow, openLaterNote, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
+import { comboHref, pickCombos, type ComboEntry } from '../lib/combo-pick.ts'
 import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
   SCHOOL_QUESTION_KEY, schoolQuestion, schoolsForCity,
@@ -23,6 +24,8 @@ import {
 interface Props {
   scholarships: Scholarship[]
   programs: Program[]
+  /** combos.ts comboIndex, built into the same payload. */
+  combos?: ComboEntry[]
 }
 
 // ── Questions ─────────────────────────────────────────────────────────────────
@@ -158,7 +161,7 @@ function ResultRow({
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export default function EligibilityQuiz({ scholarships, programs }: Props) {
+export default function EligibilityQuiz({ scholarships, programs, combos = [] }: Props) {
   const [initial] = useState(loadStoredQuiz)
   const [step, setStep] = useState(initial.step)
   const [answers, setAnswers] = useState<Record<string, string>>(initial.answers)
@@ -474,6 +477,12 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     setSavedIds(new Set(getSaved()))
   }, [])
 
+  // The combos this student is in (combo-pick.ts), checked against every
+  // match rather than the ten on screen.
+  const pickedCombos = useMemo(() => allScholarshipResults
+    ? pickCombos(combos, answers, new Set(allScholarshipResults.map(r => r.scholarship.id)))
+    : [], [combos, answers, allScholarshipResults])
+
   // Programs have their own shortlist key, read by the /saved page
   const [savedProgramIds, setSavedProgramIds] = useState<Set<number>>(() => new Set(getSavedPrograms()))
   const handleToggleSaveProgram = useCallback((id: number) => {
@@ -540,6 +549,24 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     // label reads as a promise about each award rather than a ranking.
     const tierCount = [strong, good, possible].filter(t => t.length > 0).length
     const showTiers = tierCount > 1
+
+    // A set the student can apply to as a whole: "pre-built combos, like fast
+    // food" (2026-09-30), from the combo pages. After the third row, never
+    // above the first: on a phone the first match is only just on screen.
+    const comboAfter = Math.min(2, (scholarshipResults?.length ?? 0) - 1)
+    const comboTrays = pickedCombos.map(({ entry, hits }) => (
+      <aside key={entry.slug} className="sabm-combo" aria-labelledby={`sabm-combo-${entry.slug}`}>
+        <span className="sabm-combo-tag" aria-hidden="true">Combo</span>
+        <h3 id={`sabm-combo-${entry.slug}`} className="sabm-combo-name">{entry.name}</h3>
+        <p className="sabm-combo-who">{hits.length} of your matches are in this combo, for you if {entry.who}.</p>
+        <div className="sabm-combo-actions">
+          {hits.every(id => savedIds.has(id))
+            ? <span className="sabm-saved-all" role="status">All {hits.length} saved</span>
+            : <button type="button" className="sabm-btn-accent" onClick={() => handleSaveAll(hits)}>Save all {hits.length}</button>}
+          <a href={comboHref(entry)} className="sabm-text-link" onClick={() => sendEvent('combo_open')}>See the combo</a>
+        </div>
+      </aside>
+    ))
 
     return (
       <div className="quiz-results-in">
@@ -671,6 +698,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     })()}
                   </>}
                 />
+                {index === comboAfter && comboTrays}
                 </Fragment>
               )
             })}

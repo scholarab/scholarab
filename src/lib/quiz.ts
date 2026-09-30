@@ -7,6 +7,8 @@
 // EligibilityQuiz.tsx so the matcher's inputs stay readable next to
 // eligibility-matcher.ts rather than buried in a React component.
 
+import { AUDIENCE_SCHOOLS } from './combo-pick';
+
 export const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v4'
 
 /** Quiz progress lives in sessionStorage, not localStorage: closing the tab
@@ -295,14 +297,19 @@ export function boardQuestion(boards: string[]): QuizQuestion {
  * school is worse than offering one that is not theirs.
  */
 export function schoolsForCity(
-  listings: Array<{ region?: string | null; eligibility?: { specificSchools?: string[]; schoolBoards?: string[] } | null }>,
+  listings: Array<{ region?: string | null; audience?: string | null; eligibility?: { specificSchools?: string[]; schoolBoards?: string[] } | null }>,
   city: string,
   board?: string | null,
 ): string[] {
   const seen = new Set<string>();
   const boardsOf = new Map<string, Set<string>>();
+  // Schools a listing names only in its audience line join the list too, so
+  // the student can reach that school's combo (combo-pick.ts). Those awards
+  // carry no specificSchools, so picking one filters no award out.
+  const named = AUDIENCE_SCHOOLS.filter(a => a.quizCity === city);
   for (const l of listings) {
     if (!inCityScope(l.region, city)) continue;
+    for (const a of named) if (a.pattern.test(l.audience ?? '')) seen.add(a.name);
     for (const s of l.eligibility?.specificSchools ?? []) {
       seen.add(s);
       const known = boardsOf.get(s) ?? new Set<string>();
@@ -334,7 +341,7 @@ export const QUIZ_MIN_QUESTION_WORD = 'Three';
  * growing; "of up to 8" that lands on 6 is good news.
  */
 export function quizQuestionCeiling(
-  listings: Array<{ region?: string | null; eligibility?: { schoolBoards?: string[]; specificSchools?: string[] } | null }>,
+  listings: Array<{ region?: string | null; audience?: string | null; eligibility?: { schoolBoards?: string[]; specificSchools?: string[] } | null }>,
 ): number {
   const cities = QUIZ_QUESTIONS.find(q => q.key === 'city')?.opts ?? [];
   return QUIZ_QUESTION_COUNT + Math.max(0, ...cities.map(o =>

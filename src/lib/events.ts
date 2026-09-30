@@ -9,6 +9,9 @@ export type AppEvent =
   /** Landed from an off-site campaign link carrying `?s=`. Meta is the source
    *  code, never free text; see SOURCES. */
   | 'source_visit'
+  /** "See the combo" on a /match result's combo tray. No meta: which combo
+   *  is not worth an open field in the events table. */
+  | 'combo_open'
 
 const OPT_OUT_KEY = 'sa_no_track'
 /** `?nt=1` opts this browser out, `?nt=0` opts back in. */

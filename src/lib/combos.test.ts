@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { BOARDS, COMBOS, CITY_COMBOS, oneForm, MIN_COMBO_CORE, MIN_COMBO_ITEMS, combosForCity, comboCities, type ComboTarget } from './combos.ts';
+import { BOARDS, COMBOS, CITY_COMBOS, oneForm, MIN_COMBO_CORE, MIN_COMBO_ITEMS, combosForCity, comboCities, comboIndex, type ComboTarget } from './combos.ts';
+import { QUIZ_QUESTIONS, schoolsForCity, boardsForCity } from './quiz.ts';
+import { matchAll } from './eligibility-matcher.ts';
+import { eligibilitySchema } from './eligibility-types.ts';
+import { todayDate } from './calendar.ts';
+import scholarshipsJson from '../data/scholarships.json';
 import { SCHOLARSHIP_FACETS } from './facets.ts';
 
 const TODAY = new Date('2027-01-15T00:00:00');
@@ -109,6 +114,12 @@ describe('combosForCity', () => {
     expect(built.addOns.map(s => s.id).sort()).toEqual([boardOnly.id, men.id].sort());
   });
 
+  it('puts an award not open to Grade 12 in the sides', () => {
+    const grade10 = award({ eligibility: { schoolBoards: ['MHCBE'], grades: ['10'] } });
+    const built = combosForCity('medicine-hat', [catholic(), catholic(), grade10], TODAY)[0]!;
+    expect(built.addOns.map(s => s.id)).toEqual([grade10.id]);
+  });
+
   it('puts children-of and team awards in the sides', () => {
     const kids = catholic({ audience: 'Grade 12 children of Catholic teachers' });
     const team = catholic({ audience: 'Students on a Huskies team' });
@@ -138,5 +149,41 @@ describe('oneForm', () => {
     expect(oneForm([em, { url: 'https://calgaryfoundation.org/x' }])).toBeNull();
     expect(oneForm([{ url: 'https://sites.google.com/other/x' }])).toBeNull();
     expect(oneForm([])).toBeNull();
+  });
+});
+
+// The real catalogue, because the failure this guards is drift between two
+// rule sets that each pass their own fixtures: combos.ts deciding who a combo
+// is for, and the matcher deciding what a student sees on /match.
+describe('combos on /match, against the published catalogue', () => {
+  const today = todayDate();
+  const items = (scholarshipsJson as unknown as ComboTarget[]).map(s => ({
+    ...s, eligibility: s.eligibility ? eligibilitySchema.parse(s.eligibility) : null,
+  })) as unknown as (ComboTarget & Parameters<typeof matchAll>[1][number])[];
+  const index = comboIndex(items, today);
+  const open = items.filter(s => !(s as { concluded?: boolean }).concluded && (!s.deadline || new Date(s.deadline + 'T00:00:00') >= today));
+
+  it('names only quiz answers a student can actually give', () => {
+    const cities = new Set(QUIZ_QUESTIONS.find(q => q.key === 'city')!.opts.map(o => o.value));
+    const institutions = new Set(QUIZ_QUESTIONS.find(q => q.key === 'institution')!.opts.map(o => o.value));
+    for (const e of index) {
+      expect(cities.has(e.quizCity), e.slug).toBe(true);
+      if ('board' in e.on) expect(boardsForCity(items, e.quizCity), e.slug).toContain(e.on.board);
+      if ('school' in e.on) expect(schoolsForCity(items, e.quizCity), e.slug).toContain(e.on.school);
+      if ('institution' in e.on && !institutions.has(e.on.institution)) continue;
+    }
+  });
+
+  it('returns at least two of every combo\'s core awards to a Grade 12 student who gives its answer', () => {
+    for (const e of index) {
+      const on = e.on as { board?: string; school?: string; institution?: string };
+      const got = new Set(matchAll({
+        grade: '12', city: e.quizCity, schoolBoard: on.board ?? null, specificSchool: on.school ?? null,
+        targetInstitution: on.institution ?? null, fields: [], averagePercent: null, averageTop: null, town: null,
+        identifiesAsFemale: null, identifiesAsIndigenous: null, identifiesAsBIPOC: null, hasFinancialNeed: null,
+        familyIncome: null, inFosterCare: null, inApprenticeship: null, extracurriculars: [], citizenship: null,
+      }, open).map(m => m.id));
+      expect(e.core.filter(id => got.has(id)).length, `${e.page}#${e.slug}`).toBeGreaterThanOrEqual(MIN_COMBO_CORE);
+    }
   });
 });

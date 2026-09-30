@@ -1365,3 +1365,17 @@ Measured on the built site in WebKit at iPhone 13 size (390x664):
 | First quiz match, top to bottom (Medicine Hat, Grade 12, Catholic board) | 499 to 772px (cut off) | 382 to 655px (whole) |
 
 The plan's target for the band was 110px; the two-line body and 44px buttons set the floor at 144 without dropping required disclosure. The first-match figure differs from the 2026-09-27 audit's 659px because later fixes had already moved it. The 2026-09-28 section's "Not yet checked on production" line is out of date: those fixes were confirmed on www that day. New browser guards: the header stays pinned on / and /scholarships/, and results keep Save above the list with the rest below it on a phone. Found in passing: the weekly index-status launchd run of 2026-09-14 failed 1,308 of 1,320 inspections.
+
+## Combos on /match, September 30, 2026
+
+Outcome: a student whose quiz answers put them in a combo is told so on the results screen, with one tap to save the set, instead of having to find the combos page.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| A second download for combo data | Not added: `comboIndex` (combos.ts) goes into quiz-payload.json beside the catalogue it is built from, 3.1 KB gzip on a 163 KB payload. The results intersect each combo's core ids with the student's own matches, so an award that closes after the build drops out on the visitor's clock. |
+| Asking a new question for combos | Not added. The key is an answer the quiz already has (city, board, school, college); the eight schools the listings name only in their audience line join the existing school question, derived from the listing text like every other school there, and filter nothing else. |
+| A per-combo field in the events table | Not added: `combo_open` has no meta, so which combo is not an open field. |
+| Placing the tray above the results | Rejected: on a phone the first match is only just on screen (fixed the same day). The tray follows the third row, and the first match is still 382 to 655px on a 664px iPhone screen. |
+| Grade 10 and 11 awards in a combo's core | Removed, found by the new drift test: the St. Oscar Romero combo's core was a Grade 10, a Grade 11 and a Grade 12 award, so no one student could apply to all three. An award not open to Grade 12 is now a side. Romero and the Alberta High School of Fine Arts fall below the floor; Edmonton Public, Calgary Board and "Going to the University of Lethbridge" each lose one core award to their sides. |
+
+Five candidates, none restored: add-back fraction 0/5. Result: 59 combos (was 61), of which 58 can be named on /match (Redcliff has no quiz answer); before this change 51 were reachable, 7 of them only after the school question learned the audience-line schools. A real-catalogue test now fails if any indexed combo returns fewer than two of its core awards to a Grade 12 student who gives its answer; today every one returns all of them. The phone probe and screenshots were taken on the built site in WebKit at iPhone 13 size and in Chromium at 1280px.
