@@ -54,8 +54,8 @@ let scopeTiles: Tile[] = scopeFacets.map(f => tileOf(f, '/scholarships/', null))
 // A hub below the floor has no page, so it gets no tile and no link either.
 let formatTiles: Tile[] = [];
 let fieldLinks: { label: string; href: string }[] = [];
-// One Explore link per city with a combo page; comboCities applies the same
-// floor as the page's own route, so a link never points at a page not built.
+// One Explore link to the combo index, present only while some city has a
+// combo page (comboCities applies the routes' own floor).
 let comboLinks: MenuLink[] = [];
 
 try {
@@ -75,10 +75,9 @@ try {
     .filter(({ items }) => items >= MIN_FACET_ITEMS)
     .map(({ facet, items }) => tileOf(facet, '/programs/', items))
     .sort((a, b) => b.count! - a.count!);
-  comboLinks = comboCities(scholarships, today).map(c => ({
-    label: `${scholarshipFacetBySlug.get(c.city)?.label ?? c.city} scholarship combos`,
-    href: `/scholarships/${c.city}/combos/`,
-  }));
+  comboLinks = comboCities(scholarships, today).length
+    ? [{ label: 'Scholarship combos', href: '/combos/' }]
+    : [];
   fieldLinks = PROGRAM_FACETS
     .filter(f => liveHub(f) >= MIN_FACET_ITEMS)
     .map(f => ({ label: f.label, href: `/programs/${f.slug}/` }));
@@ -139,7 +138,7 @@ const MENUS: Record<string, { label: string; tiles: Tile[]; links: MenuLink[] }>
 const navItems: { label: string; href: string; count: number | null; also?: string[] }[] = [
   { label: 'Scholarships', href: '/scholarships/', count: scholarshipCount },
   { label: 'Programs', href: '/programs/', count: programCount },
-  { label: 'Explore', href: '/match/', count: null, also: ['/deadlines/', '/guides/'] },
+  { label: 'Explore', href: '/match/', count: null, also: ['/deadlines/', '/guides/', '/combos/'] },
   { label: 'Saved', href: '/saved/', count: null },
   { label: 'About', href: '/about/', count: null },
 ];

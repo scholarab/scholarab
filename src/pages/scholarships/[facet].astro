@@ -69,7 +69,7 @@ const canonical = `https://www.scholarab.ca/scholarships/${facet.slug}/`;
 const indexable = items.some(s => scholarshipIsIndexable(s, today));
 
 const guide = facet.guide ? getGuide(facet.guide) : null;
-const hasCombos = comboCities(allItems, today).some(c => c.city === facet.slug);
+const comboPage = comboCities(allItems, today).find(c => c.city === facet.slug);
 
 // The hub footer is now the only cross-hub path on the page (SCOPE left the
 // filter rail on 2026-09-15), so it also has to respect the MIN_FACET_ITEMS
@@ -148,9 +148,9 @@ const breadcrumbJson = {
             work this list.
           </p>
         )}
-        {hasCombos && (
+        {comboPage && (
           <p>
-            Know which group you're in? <a href={`/scholarships/${facet.slug}/combos/`}>{facet.label} scholarship combos</a> sort
+            Know which group you're in? <a href={`/scholarships/${facet.slug}/combos/`}>{comboPage.h1}</a> sort
             these awards into sets you can apply to together.
           </p>
         )}

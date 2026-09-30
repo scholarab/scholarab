@@ -1,0 +1,106 @@
+---
+// The combo index: every city with a combo page, and every combo under it, so
+// a student can find their own school or board from the Explore menu in one
+// look. Built from the same comboCities the city pages and the sitemap use.
+import SabComboBoard from '../components/sab/SabComboBoard.astro';
+import SabFonts from '../components/sab/SabFonts.astro';
+import SabFooter from '../components/sab/SabFooter.astro';
+import SabHeader from '../components/sab/SabHeader.astro';
+import Layout from '../layouts/Layout.astro';
+import { todayDate as albertaToday } from '../lib/calendar';
+import { combosForCity, comboCities } from '../lib/combos';
+import { loadScholarships } from '../lib/data-loader';
+import { SCHOLARSHIP_FACETS } from '../lib/facets';
+
+const all = await loadScholarships();
+const today = albertaToday();
+const cities = comboCities(all, today).map(page => ({
+  page,
+  name: page.city === 'alberta' ? 'Small-town Alberta' : SCHOLARSHIP_FACETS.find(f => f.slug === page.city)!.label,
+  combos: combosForCity(page.city, all, today),
+}));
+const comboCount = cities.reduce((n, c) => n + c.combos.length, 0);
+const canonical = 'https://www.scholarab.ca/combos/';
+const description = 'Alberta scholarships grouped into combos by who can apply: your school board, your high school or the college you are going to. Pick yours, apply to all.';
+---
+
+<Layout
+  title="Alberta Scholarship Combos | ScholarAB"
+  description={description}
+  ogTitle="Alberta Scholarship Combos | ScholarAB"
+  ogDescription={description}
+  ogUrl={canonical}
+  canonical={canonical}
+>
+  <SabFonts slot="head" />
+
+  <div class="sabp-header" slot="header">
+    <SabHeader currentPath="/combos/" />
+  </div>
+
+  <div id="sab-combo-index" class="sabp sabp-wide">
+    <div class="sabp-body">
+      <SabComboBoard
+        kicker="Pick your city"
+        h1="Scholarship combos"
+        intro="A combo is a set of awards open to the same students: one school board, one high school, or everyone starting at one college. Find the one you are in and apply to the whole set."
+        menuLabel="Cities with combos"
+        items={cities.map(c => ({ href: `#${c.page.city}`, name: c.name, count: `${c.combos.length} ${c.combos.length === 1 ? 'combo' : 'combos'}` }))}
+        burst={[`${cities.length} cities`, `${comboCount} combos`]}
+      />
+
+      {cities.map(({ page, name, combos }, n) => (
+        <section class="sabx-city" id={page.city} aria-labelledby={`${page.city}-h`}>
+          <h2 class="sabx-h2" id={`${page.city}-h`}>
+            <a href={`/scholarships/${page.city}/combos/`}>{name}</a>
+          </h2>
+          <ul class="sabx-combos">
+            {combos.map(({ combo, core, addOns }, i) => (
+              <li>
+                <a class={`sabx-combo sabc-tone-${(n + i) % 3}`} href={`/scholarships/${page.city}/combos/#${combo.slug}`}>
+                  <span class="sabx-name">{combo.name}</span>
+                  <span class="sabx-count">{core.length + addOns.length}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </div>
+
+  <SabFooter slot="footer" />
+</Layout>
+
+<style is:global>
+  body:has(#sab-combo-index) { background: var(--bg-page); }
+  #sab-combo-index .sabp-body { max-width: 1080px; margin: 0 auto; }
+  .sabx-city { margin-top: 40px; scroll-margin-top: 80px; }
+  .sabx-h2 {
+    margin: 0 0 14px; padding-bottom: 10px; border-bottom: 3px solid var(--sabc-ink);
+    font: 800 clamp(30px, 3.6vw, 42px)/0.95 var(--font-display); text-transform: uppercase;
+  }
+  .sabx-h2 a { color: var(--sabc-ink); text-decoration: none; }
+  .sabx-h2 a:hover { color: var(--green); }
+  .sabx-h2 a::after { content: ' \2192'; }
+  .sabx-combos { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  /* Each combo is a tray ticket: its tray colour, an ink outline, the count
+     as the sticker. */
+  .sabx-combo {
+    display: inline-flex; align-items: center; gap: 12px; min-height: 48px;
+    padding: 6px 6px 6px 18px; border: 2px solid var(--sabc-ink); border-radius: 999px;
+    background: var(--sabc-tray); color: var(--sabc-ink); text-decoration: none;
+    font-weight: 700; font-size: 15.5px;
+  }
+  .sabx-combo:hover { background: var(--sabc-ink); color: #fff; }
+  .sabx-count {
+    display: grid; place-items: center; min-width: 34px; height: 34px; padding: 0 8px; box-sizing: border-box;
+    border-radius: 999px; background: var(--sabc-ink); color: var(--sabc-mustard);
+    font: 800 18px/1 var(--font-display);
+  }
+  .sabx-combo:hover .sabx-count { background: var(--sabc-mustard); color: var(--sabc-ink); }
+  @media (max-width: 640px) {
+    .sabx-city { margin-top: 30px; }
+    .sabx-combo { font-size: 14.5px; }
+  }
+</style>

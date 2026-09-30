@@ -3,6 +3,7 @@
 // and the floor live in lib/combos.ts; this page only lays them out, in the
 // directory's own row so a combo reads as a short list, not a new design.
 import SabFooter from '../../../components/sab/SabFooter.astro';
+import SabComboBoard from '../../../components/sab/SabComboBoard.astro';
 import SabFonts from '../../../components/sab/SabFonts.astro';
 import SabHeader from '../../../components/sab/SabHeader.astro';
 import Layout from '../../../layouts/Layout.astro';
@@ -13,7 +14,7 @@ import { eligibilityFacts } from '../../../lib/eligibility-facts';
 import { enrichScholarships } from '../../../lib/enrich';
 import { SCHOLARSHIP_FACETS } from '../../../lib/facets';
 import { saysNoApplication } from '../../../lib/apply-method';
-import { ARROW_REF, BOOKMARK_REF, BURST_PATH, EXT_REF, ICON_SPRITE } from '../../../lib/icons';
+import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../../lib/icons';
 import { DEFAULT_SCHOLARSHIP_STATE, amountCell, filterSortScholarships, getScholarshipStatus, rowAction, scholarshipWhen } from '../../../lib/list-core';
 import type { ScholarshipWithMeta } from '../../../lib/list-core';
 import { canApplyNow } from '../../../lib/status';
@@ -32,8 +33,16 @@ const { page, combos } = Astro.props;
 const facet = SCHOLARSHIP_FACETS.find(f => f.slug === page.city)!;
 const canonical = `https://www.scholarab.ca/scholarships/${page.city}/combos/`;
 const sorted = (items: ScholarshipWithMeta[]) => filterSortScholarships(items, DEFAULT_SCHOLARSHIP_STATE);
-const totalAwards = combos.reduce((n, c) => n + c.core.length + c.addOns.length, 0);
+// Distinct awards: a school award open to two schools sits in both combos.
+const totalAwards = new Set(combos.flatMap(c => [...c.core, ...c.addOns].map(s => s.id))).size;
+// The province-wide hub's combos are its small-town schools.
+const place = page.city === 'alberta' ? 'small-town Alberta' : facet.label;
 
+// A big combo (a school board's whole list) opens on its first few and keeps
+// the rest one tap away, so the next tray is still in reach. <details> needs
+// no script, and a crawler or a reader without JavaScript gets every row.
+const CORE_SHOWN = 6;
+const SIDES_SHOWN = 3;
 
 const breadcrumbJson = {
   '@context': 'https://schema.org',
@@ -67,31 +76,28 @@ const breadcrumbJson = {
     <div class="sabp-body">
       <Fragment set:html={ICON_SPRITE} />
 
-      {/* The menu board. A drive-thru board, not a directory header: the
-          combos are the specials, numbered, and each one is a jump link. */}
-      <header class="sabc-board">
-        <p class="sabc-kicker">Now serving {facet.label}</p>
-        <h1 class="sabc-h1">{page.h1}</h1>
-        <p class="sabc-intro">{page.intro}</p>
-        <ol class="sabc-menu" aria-label="Combos on this page">
-          {combos.map(({ combo, core, addOns }, n) => (
-            <li>
-              <a href={`#${combo.slug}`} class={`sabc-menu-link sabc-tone-${n % 3}`}>
-                <span class="sabc-menu-no" aria-hidden="true">{n + 1}</span>
-                <span class="sabc-menu-name">{combo.name}</span>
-                <span class="sabc-menu-count">{core.length + addOns.length} awards</span>
-              </a>
-            </li>
-          ))}
-        </ol>
-        <div class="sabc-burst" aria-hidden="true">
-          <svg viewBox="0 0 120 120"><path d={BURST_PATH} /></svg>
-          <span>{combos.length} combos<br />{totalAwards} awards</span>
-        </div>
-      </header>
+      <SabComboBoard
+        kicker={`Now serving ${place}`}
+        h1={page.h1}
+        intro={page.intro}
+        menuLabel="Combos on this page"
+        items={combos.map(({ combo, core, addOns }) => ({ href: `#${combo.slug}`, name: combo.name, count: `${core.length + addOns.length} awards` }))}
+        burst={[`${combos.length} combos`, `${totalAwards} awards`]}
+      />
 
       {combos.map(({ combo, core, addOns }, n) => {
         const viaSchool = core.every(s => s.applyViaGuidance);
+        const list = (rows: unknown[], shown: number) => (
+          <>
+            <ul class="sabc-items">{rows.slice(0, shown)}</ul>
+            {rows.length > shown && (
+              <details class="sabc-rest">
+                <summary>See the other {rows.length - shown}</summary>
+                <ul class="sabc-items">{rows.slice(shown)}</ul>
+              </details>
+            )}
+          </>
+        );
         const items = (list: ScholarshipWithMeta[]) => sorted(list).map(s => {
           const when = scholarshipWhen(s);
           const facts = eligibilityFacts(s.eligibility);
@@ -148,11 +154,11 @@ const breadcrumbJson = {
                 {addOns.length > 0 && <em>+{addOns.length} {addOns.length === 1 ? 'side' : 'sides'}</em>}
               </div>
             </div>
-            <ul class="sabc-items">{items(core)}</ul>
+            {list(items(core), CORE_SHOWN)}
             {addOns.length > 0 && (
               <div class="sabc-sides">
                 <p class="sabc-sides-h"><strong>Add a side</strong> only if the line under it fits you</p>
-                <ul class="sabc-items">{items(addOns)}</ul>
+                {list(items(addOns), SIDES_SHOWN)}
               </div>
             )}
             <div class="sabc-order">
@@ -167,7 +173,7 @@ const breadcrumbJson = {
 
       <div class="sabl-hubfoot">
         <p>
-          Not in any of these? The <a href={`/scholarships/${facet.slug}/`}>full {facet.label} list</a> has
+          Not in any of these? The <a href={`/scholarships/${facet.slug}/`}>full {place} list</a> has
           every local award, and <a href="/match/">the match quiz</a> sorts it by what you qualify for.
         </p>
       </div>
@@ -267,56 +273,9 @@ const breadcrumbJson = {
      2026-09-30: "like a promotion for fast food chain, more fun"). Ink
      outlines and flat colour trays, no shadows; the mint, pink and yellow
      trays tell the combos apart, and mustard is kept for the stickers. */
-  #sab-combos {
-    --sabc-ink: var(--text-primary);
-    --sabc-mustard: #FFC700;
-    --sabc-line: 3px solid var(--sabc-ink);
-  }
+  #sab-combos { --sabc-line: 3px solid var(--sabc-ink); }
   body:has(#sab-combos) { background: var(--bg-page); }
   #sab-combos .sabp-body { max-width: 1080px; margin: 0 auto; }
-  .sabc-tone-0 { --sabc-tray: var(--brand); }
-  .sabc-tone-1 { --sabc-tray: #FFD84D; }
-  .sabc-tone-2 { --sabc-tray: #FDBEBA; }
-
-  /* ── The menu board ── */
-  .sabc-board {
-    position: relative; background: var(--sabc-ink); color: #fff;
-    border-radius: 30px; padding: 44px 48px 40px; overflow: hidden;
-  }
-  .sabc-kicker {
-    margin: 0; font: 800 15px/1 var(--font-display); letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--sabc-mustard);
-  }
-  .sabc-h1 {
-    margin: 14px 0 0; max-width: 11ch;
-    font: 800 clamp(54px, 8.5vw, 112px)/0.86 var(--font-display);
-    letter-spacing: -0.015em; text-transform: uppercase; text-wrap: balance;
-  }
-  .sabc-intro { margin: 20px 0 0; max-width: 56ch; font-size: 17px; line-height: 1.55; color: rgba(255,255,255,0.8); }
-  .sabc-menu { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-  .sabc-menu-link {
-    display: inline-flex; align-items: center; gap: 12px; min-height: 48px;
-    padding: 6px 18px 6px 6px; border-radius: 999px;
-    border: 2px solid rgba(255,255,255,0.28); color: #fff; text-decoration: none;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
-  }
-  .sabc-menu-link:hover { border-color: var(--sabc-tray); background: rgba(255,255,255,0.06); }
-  .sabc-menu-no {
-    display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
-    background: var(--sabc-tray); color: var(--sabc-ink); font: 800 22px/1 var(--font-display);
-  }
-  .sabc-menu-name { font-weight: 700; font-size: 15.5px; }
-  .sabc-menu-count { font-size: 13.5px; color: rgba(255,255,255,0.62); white-space: nowrap; }
-  .sabc-burst {
-    position: absolute; top: 28px; right: 34px; width: 150px; height: 150px;
-    display: grid; place-items: center; transform: rotate(12deg);
-  }
-  .sabc-burst svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: var(--sabc-mustard); }
-  .sabc-burst span {
-    position: relative; text-align: center; color: var(--sabc-ink);
-    font: 800 21px/0.95 var(--font-display); text-transform: uppercase;
-  }
-
   /* ── A combo: one tray ── */
   .sabc-combo {
     margin-top: 44px; border: var(--sabc-line); border-radius: 30px; overflow: hidden;
@@ -367,6 +326,17 @@ const breadcrumbJson = {
   .sabc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 12px; }
   .sabc-acts { display: inline-flex; align-items: center; gap: 14px; margin-left: auto; }
 
+  .sabc-rest > summary {
+    display: flex; align-items: center; gap: 10px; min-height: 48px; margin: 0 30px 14px;
+    padding: 0 18px; width: fit-content; border: 2px solid var(--sabc-ink); border-radius: 999px;
+    font: 800 17px/1 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; list-style: none;
+  }
+  .sabc-rest > .sabc-items > .sabc-item:first-child { border-top: 2px dashed rgba(20, 25, 21, 0.18); }
+  .sabc-rest > summary::-webkit-details-marker { display: none; }
+  .sabc-rest > summary::after { content: '+'; font-size: 22px; }
+  .sabc-rest[open] > summary { display: none; }
+  .sabc-rest > summary:hover { background: var(--brand); }
   .sabc-sides { border-top: 3px dashed var(--sabc-ink); background: #FAFBF9; }
   .sabc-sides-h { margin: 0; padding: 20px 30px 0; font-size: 14.5px; color: rgba(20, 25, 21, 0.72); }
   .sabc-sides-h strong {
@@ -397,14 +367,6 @@ const breadcrumbJson = {
   }
 
   @media (max-width: 760px) {
-    .sabc-board { border-radius: 22px; padding: 30px 20px 26px; }
-    .sabc-burst { top: 14px; right: 10px; width: 96px; height: 96px; }
-    .sabc-burst span { font-size: 14px; }
-    .sabc-h1 { margin-top: 12px; max-width: 8ch; font-size: clamp(46px, 13vw, 64px); }
-    .sabc-intro { font-size: 16px; }
-    .sabc-menu { flex-direction: column; }
-    .sabc-menu-link { width: 100%; box-sizing: border-box; }
-    .sabc-menu-count { margin-left: auto; }
     .sabc-combo { margin-top: 30px; border-radius: 22px; }
     .sabc-top { grid-template-columns: auto 1fr; gap: 14px 18px; padding: 20px 18px; }
     .sabc-no { font-size: 72px; }
@@ -422,6 +384,7 @@ const breadcrumbJson = {
     .sabc-price { font-size: 26px; }
     .sabc-sides-h { padding: 18px 18px 0; }
     .sabc-order { padding: 18px; }
+    .sabc-rest > summary { margin: 0 18px 14px; }
     .sabc-save-all { width: 100%; }
     .sabc-acts { margin-left: 0; }
   }

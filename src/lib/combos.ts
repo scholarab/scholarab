@@ -30,6 +30,12 @@ export interface ComboTarget extends FacetTarget, StatusInput {
     specificSchools?: string[];
     targetInstitutions?: string[];
     fields?: string[];
+    genderRequired?: string | null;
+    indigenousRequired?: boolean;
+    bipocRequired?: boolean;
+    fosterCare?: boolean;
+    apprenticeship?: boolean;
+    extracurriculars?: string[];
   } | null;
 }
 
@@ -45,8 +51,8 @@ export interface Combo {
   /**
    * Members with a condition narrower than the combo's own rule: a nursing
    * bursary inside the college combo. They are listed apart as add-ons, so the
-   * core list stays one everyone matching `who` can apply to. Defaults to any
-   * award restricted to a field of study.
+   * core list stays one everyone matching `who` can apply to. Defaults to
+   * `narrower`.
    */
   addOn?: (s: ComboTarget) => boolean;
 }
@@ -66,7 +72,26 @@ export const MIN_COMBO_CORE = 2;
 export const MIN_COMBO_ITEMS = 3;
 
 const has = (list: string[] | undefined, value: string) => list?.includes(value) ?? false;
-const fieldGated = (s: ComboTarget) => (s.eligibility?.fields?.length ?? 0) > 0;
+/** Volunteering and leadership are asked of nearly everyone; any other
+ *  activity (a sport, 4-H, cadets, music) is a gate of its own. */
+const SOFT_ACTIVITIES = new Set(['volunteer', 'volunteering', 'leadership']);
+/** Gates the data only states in the audience line: whose child you are, what
+ *  you belong to, what team you are on. */
+const AUDIENCE_GATE = /\b(male|female|women|men|girls|boys)\b|\bchild(ren)? of\b|\bdependants?\b|\bdependents?\b|\bmembers? of\b|\bmembers\b|\bathlet|\bteam\b|disabilit|special needs|\bparents? works?\b|affected by|diagnos|cancer|refugee|newcomer|immigrant|\bdeaf\b|hard of hearing|\bblind\b|\bin care\b|single parent|pregnan|parenting|veteran|military/i;
+
+/**
+ * An award with a condition narrower than its combo's own rule: a field of
+ * study, an identity, a named activity, a family tie. Listed as a side, so the
+ * core stays a list everyone matching the combo can apply to. Over-flagging
+ * only moves an award into the sides; under-flagging would break the promise.
+ */
+function narrower(s: ComboTarget): boolean {
+  const e = s.eligibility ?? {};
+  return (e.fields?.length ?? 0) > 0
+    || !!e.genderRequired || !!e.indigenousRequired || !!e.bipocRequired || !!e.fosterCare || !!e.apprenticeship
+    || (e.extracurriculars ?? []).some(x => !SOFT_ACTIVITIES.has(x.toLowerCase()))
+    || AUDIENCE_GATE.test(s.audience ?? '');
+}
 
 export const CITY_COMBOS: CityCombos[] = [
   {
@@ -78,18 +103,145 @@ export const CITY_COMBOS: CityCombos[] = [
     intro:
       'Each combo is a set of local awards open to the same students, so if its first line describes you, you can apply to every award in it. The conditions on each award still apply.',
   },
+  {
+    city: 'edmonton',
+    h1: 'Edmonton scholarship combos',
+    title: 'Edmonton Scholarship Combos',
+    description:
+      "Edmonton scholarships grouped by who can apply: Edmonton Public and Catholic students, King's University entrants, and single high schools' award lists.",
+    intro:
+      "Edmonton's awards split by school board, by the university they pay into and by the high schools that publish their own lists. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+  },
+  {
+    city: 'calgary',
+    h1: 'Calgary scholarship combos',
+    title: 'Calgary Scholarship Combos',
+    description:
+      'Calgary scholarships grouped by who can apply: Calgary Board of Education and Calgary Catholic students, and the award lists of single high schools.',
+    intro:
+      'Most Calgary awards are open to one board or one school, so the combo you are in says more than the whole city list does. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'red-deer',
+    h1: 'Red Deer scholarship combos',
+    title: 'Red Deer Scholarship Combos',
+    description:
+      'Red Deer scholarships grouped by who can apply: Red Deer Catholic graduates and students going to Red Deer Polytechnic, whose awards share one form.',
+    intro:
+      "Red Deer Polytechnic's entrance awards are the biggest set here, and the Catholic division runs a smaller one of its own. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+  },
+  {
+    city: 'lethbridge',
+    h1: 'Lethbridge scholarship combos',
+    title: 'Lethbridge Scholarship Combos',
+    description:
+      "Lethbridge scholarships grouped by who can apply: the University of Lethbridge's awards for students starting there right after Grade 12.",
+    intro:
+      'The University of Lethbridge ties several of its awards to students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'brooks',
+    h1: 'Brooks scholarship combos',
+    title: 'Brooks Scholarship Combos',
+    description:
+      "Brooks-area scholarships grouped by who can apply: Bassano School's own graduation awards, with the ones for a named field listed as add-ons.",
+    intro:
+      'Bassano School runs its own list of graduation awards, several of them for students going into one field. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'lacombe',
+    h1: 'Lacombe scholarship combos',
+    title: 'Lacombe Scholarship Combos',
+    description:
+      'Lacombe-area scholarships grouped by who can apply: Burman University entrants, Alix-MAC School and Iron Ridge Secondary Campus students.',
+    intro:
+      "Lacombe's awards cluster around Burman University and around two Wolf Creek schools that publish their own lists. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+  },
+  {
+    city: 'cochrane',
+    h1: 'Cochrane scholarship combos',
+    title: 'Cochrane Scholarship Combos',
+    description:
+      'Cochrane scholarships grouped by who can apply: Cochrane High, Bow Valley High and St. Timothy students, plus the Calgary Catholic awards open here.',
+    intro:
+      'Almost every Cochrane award belongs to one school, so the right combo is simply the school you go to. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'okotoks',
+    h1: 'Okotoks scholarship combos',
+    title: 'Okotoks Scholarship Combos',
+    description:
+      "Okotoks-area scholarships grouped by who can apply: Foothills Composite's long award list, Holy Trinity Academy and the Alberta High School of Fine Arts.",
+    intro:
+      'Foothills Composite publishes a long list of school awards, and two smaller schools here run their own. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'sherwood-park',
+    h1: 'Sherwood Park scholarship combos',
+    title: 'Sherwood Park Scholarship Combos',
+    description:
+      "Sherwood Park scholarships grouped by who can apply: Bev Facey Community High School's own awards, with field-specific ones listed as add-ons.",
+    intro:
+      'Bev Facey Community High School runs its own award list, and much of it is for students heading into one field. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'grande-prairie',
+    h1: 'Grande Prairie scholarship combos',
+    title: 'Grande Prairie Scholarship Combos',
+    description:
+      'Grande Prairie scholarships grouped by who can apply: Grande Prairie Public graduates and students starting at Northwestern Polytechnic.',
+    intro:
+      "Northwestern Polytechnic's entrance awards are the big set here, and the public school division runs a smaller one. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+  },
+  {
+    city: 'fort-mcmurray',
+    h1: 'Fort McMurray scholarship combos',
+    title: 'Fort McMurray Scholarship Combos',
+    description:
+      "Fort McMurray scholarships grouped by who can apply: Keyano College's awards for local students starting there right after Grade 12, in one set.",
+    intro:
+      'Keyano College ties several of its awards to local students arriving straight from high school. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'wetaskiwin',
+    h1: 'Wetaskiwin scholarship combos',
+    title: 'Wetaskiwin Scholarship Combos',
+    description:
+      "Wetaskiwin scholarships grouped by who can apply: Wetaskiwin Composite High School's award list, with the field-specific ones listed as add-ons.",
+    intro:
+      'Wetaskiwin Composite publishes a long list of its own awards, many of them for students going into one field. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'camrose',
+    h1: 'Camrose scholarship combos',
+    title: 'Camrose Scholarship Combos',
+    description:
+      "Camrose-area scholarships grouped by who can apply: University of Alberta entrants, and Forestburg and Bawlf School students' own award lists.",
+    intro:
+      'Camrose awards gather around the University of Alberta, whose Augustana campus is here, and around two Battle River schools. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'alberta',
+    h1: 'Small-town Alberta scholarship combos',
+    title: 'Small-Town Alberta Scholarship Combos',
+    description:
+      "Scholarship combos for Alberta's small towns: the award lists of County Central, Boyle, Willow Creek, Bonnyville and other rural high schools.",
+    intro:
+      'Rural schools often run their own award lists, and the students who can apply to them are the ones in the building. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
 ];
 
+// A second structural gate is narrower than a combo's own: an award for
+// Edmonton Public students going to the U of A is a side in both combos.
+const college = (s: ComboTarget) => (s.eligibility?.targetInstitutions ?? []).some(t => t !== 'any');
+const schooled = (s: ComboTarget) => !!(s.eligibility?.schoolBoards?.length || s.eligibility?.specificSchools?.length);
+
+/**
+ * Rules the data cannot express on its own: a town inside a hub (Redcliff is
+ * filed under Medicine Hat), or a college whose side awards are gated by a
+ * need the data does not flag. Everything else is generated below.
+ */
 export const COMBOS: Combo[] = [
-  {
-    slug: 'catholic-school-graduates',
-    city: 'medicine-hat',
-    name: 'Catholic school graduates',
-    who: 'you are graduating from a Medicine Hat Catholic school',
-    // Board-wide only: an award for one school (Chuck Love is Monsignor
-    // McCoy's) is not open to every Catholic graduate.
-    includes: s => has(s.eligibility?.schoolBoards, 'MHCBE') && !s.eligibility?.specificSchools?.length,
-  },
   {
     slug: 'redcliff',
     city: 'medicine-hat',
@@ -105,7 +257,7 @@ export const COMBOS: Combo[] = [
     name: 'Staying for Medicine Hat College',
     who: 'you are starting at Medicine Hat College after Grade 12',
     includes: s => has(s.eligibility?.targetInstitutions, 'Medicine Hat College'),
-    addOn: s => fieldGated(s) || /special needs/i.test(s.audience ?? ''),
+    addOn: s => narrower(s) || schooled(s),
   },
   {
     slug: 'cypress-county',
@@ -115,6 +267,57 @@ export const COMBOS: Combo[] = [
     includes: s => /\bCypress County\b/.test(s.audience ?? ''),
   },
 ];
+
+/**
+ * School boards by the code the data files them under. Only boards whose
+ * audience lines name them are here; a code nobody has checked gets no combo
+ * rather than a guessed name.
+ */
+export const BOARDS: Record<string, { name: string; who: string }> = {
+  CBE: { name: 'Calgary Board of Education', who: 'you go to a Calgary Board of Education high school' },
+  CCSD: { name: 'Calgary Catholic', who: 'you go to a Calgary Catholic high school' },
+  EPS: { name: 'Edmonton Public Schools', who: 'you go to an Edmonton Public high school' },
+  ECSD: { name: 'Edmonton Catholic Schools', who: 'you go to an Edmonton Catholic high school' },
+  MHCBE: { name: 'Medicine Hat Catholic schools', who: 'you are graduating from a Medicine Hat Catholic school' },
+  RDCSD: { name: 'Red Deer Catholic', who: 'you go to a Red Deer Catholic high school' },
+  RDPSD: { name: 'Red Deer Public', who: 'you go to a Red Deer Public high school' },
+  GPPSD: { name: 'Grande Prairie Public', who: 'you go to a Grande Prairie Public high school' },
+  RVS: { name: 'Rocky View Schools', who: 'you go to a Rocky View high school' },
+  CESD: { name: "Chinook's Edge", who: "you go to a Chinook's Edge high school" },
+};
+
+const slugify = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+/**
+ * The combos the data writes itself, for any city: one per school board (its
+ * board-wide awards), per college or university the awards are tied to, and
+ * per high school that runs its own list. Each is one fact a student knows
+ * about themselves, which is the whole test for a combo.
+ */
+function generatedCombos(city: string, pool: ComboTarget[]): Combo[] {
+  const count = (keys: (s: ComboTarget) => string[]) => {
+    const n = new Map<string, number>();
+    for (const s of pool) for (const k of keys(s)) n.set(k, (n.get(k) ?? 0) + 1);
+    return [...n.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([k]) => k);
+  };
+  const boardWide = (s: ComboTarget) => (s.eligibility?.specificSchools?.length ? [] : s.eligibility?.schoolBoards ?? []);
+  const boards: Combo[] = count(boardWide).filter(code => BOARDS[code]).map(code => ({
+    slug: `board-${slugify(code)}`, city, name: BOARDS[code]!.name, who: BOARDS[code]!.who,
+    includes: s => boardWide(s).includes(code),
+    addOn: s => narrower(s) || college(s),
+  }));
+  const colleges: Combo[] = count(s => (s.eligibility?.targetInstitutions ?? []).filter(t => t !== 'any')).map(inst => ({
+    slug: `going-to-${slugify(inst)}`, city, name: `Going to ${inst}`, who: `you are starting at ${inst} after Grade 12`,
+    includes: s => has(s.eligibility?.targetInstitutions, inst),
+    addOn: s => narrower(s) || schooled(s),
+  }));
+  const schools: Combo[] = count(s => s.eligibility?.specificSchools ?? []).map(school => ({
+    slug: `school-${slugify(school)}`, city, name: school, who: `you go to ${school}`,
+    includes: s => has(s.eligibility?.specificSchools, school),
+    addOn: s => narrower(s) || college(s),
+  }));
+  return [...boards, ...colleges, ...schools];
+}
 
 export interface BuiltCombo<T> {
   combo: Combo;
@@ -136,14 +339,22 @@ export function combosForCity<T extends ComboTarget>(city: string, items: T[], t
   const facet = SCHOLARSHIP_FACETS.find(f => f.slug === city);
   if (!facet) return [];
   const pool = facetItems(facet, items).filter(s => forHighSchool(s) && scholarshipStatusOf(s, today) !== 'closed');
-  return COMBOS
-    .filter(c => c.city === city)
+  const seen = new Set<string>();
+  return [...COMBOS.filter(c => c.city === city), ...generatedCombos(city, pool)]
     .map(combo => {
       const members = pool.filter(combo.includes);
-      const isAddOn = combo.addOn ?? fieldGated;
+      const isAddOn = combo.addOn ?? narrower;
       return { combo, core: members.filter(s => !isAddOn(s)), addOns: members.filter(isAddOn) };
     })
-    .filter(b => b.core.length >= MIN_COMBO_CORE && b.core.length + b.addOns.length >= MIN_COMBO_ITEMS);
+    .filter(b => b.core.length >= MIN_COMBO_CORE && b.core.length + b.addOns.length >= MIN_COMBO_ITEMS)
+    // A generated combo that repeats one already on the page (the college a
+    // hand rule covers) is dropped, first one wins.
+    .filter(b => {
+      const key = [...b.core, ...b.addOns].map(s => s.id).sort((x, y) => x - y).join(',');
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
 }
 
 /** Cities with at least one combo, which are the combo pages the build emits. */

@@ -1311,3 +1311,18 @@ Six candidates, one restored behaviour (the filter panel outline was added and t
 Measured on the built site at 390x844, first listing top: /scholarships 330px before, 378px after; /programs 330px before, 378px after. That 48px is the board's cost on a phone, reduced from 94px by the phone rules above. Not a speedup; no performance claim. `npm run ci` passed 1,143 tests and the browser suite 141 with 19 expected skips, including the check that every hub puts its toolbar at the same height.
 
 Second pass, same day ("make ScholarAB fun to use, less default looking"): the trim reaches the parts used on every visit. Rows gained menu-board leader dots from the name to the price on desktop (prices now sit left in their column where the dots end); run count stickers are coloured by meaning (rust for due within two weeks, mint for open now); rows light mint under the pointer; the filter and sort pickers moved from 6px hairline boxes to ink-outlined pills; the empty state says "Nothing on the menu for that."; and the header's Saved link carries a mustard count of saved listings, updated by an event from `tracker.ts` so every save surface feeds it without its own code. Not added: a "big one" sticker on high-value rows (clutter on a 1,500-row list) and new copy for the status run labels (clarity over jokes). Phone first listing unchanged at 378px (leaders are desktop only). `npm run ci` passed 1,143 tests; browser suite 141 passed, 19 expected skips.
+
+## Combos for every city, September 30, 2026
+
+Outcome: students outside Medicine Hat get combos too, and a /combos/ index lets anyone find their school, board or college from the Explore menu.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| Hand-written rules per city | Replaced for the common cases by generated combos: one per checked school board (board-wide awards only), per college the awards are tied to, per high school with its own list. Hand rules remain only for what the data cannot express (Redcliff residency, Cypress County). |
+| Guessed board names | Not added: only the ten board codes whose audience lines name them get a combo; an unchecked code gets none. |
+| Treating every member as open to all | Replaced: an award with a narrower gate is a side. Found by reading members, not by tests: Keyano's Huskies-only awards, Edmonton Public awards inside "Going to the U of A", a male-only award, an award for children of Calgary Catholic teachers (Airdrie's only combo dissolved), and one for students affected by cancer. Structured gates (field, gender, identity, named activity, a second board or college) and a list of audience-line gates now make a side. Over-flagging only moves an award into the sides. |
+| One Explore link per city | Removed: 15 links would swamp the menu; one "Scholarship combos" link goes to /combos/. |
+| Long combos shown in full | Collapsed: the first 6 core and 3 sides show, the rest sit in a `<details>` (no script; crawlers and no-JS readers get every row). The Calgary Board list is 58 awards. |
+| A figure that double counts | Fixed: the burst counts distinct awards, since one award can sit in two school combos. |
+
+Six candidates, one restored behaviour (the hand-written Medicine Hat College rule briefly lost its board-gate check when helpers moved; a new test caught it): add-back fraction 1/6. Result on today's data: 15 city pages (plus the index), 53 combos. City pages copy is hand-written per city with no counts in it, so it cannot go stale as awards close. `npm run ci` passed 1,148 tests (16 combo tests); browser suite 141 passed, 19 expected skips. Limitation: on a phone, Calgary's 12 jump pills stack, so its first tray starts at 1,164px.

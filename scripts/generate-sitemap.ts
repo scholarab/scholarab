@@ -166,6 +166,10 @@ const lines: string[] = [
     .filter(({ items }) => items.length >= MIN_FACET_ITEMS)
     .map(({ f, items }) =>
       urlEntry(`${BASE}/scholarships/${f.slug}/`, '0.8', newest(items.map((s) => modOf(scholarshipPath(s)))))),
+  // The combo index exists while any city has a combo page.
+  ...(CITY_COMBOS.some((c) => combosForCity(c.city, scholarships as Array<Scholarship & ComboTarget>, today).length)
+    ? [urlEntry(`${BASE}/combos/`, '0.7')]
+    : []),
   // A combo page is built only for a city with at least one combo above the
   // floor, and is as fresh as the freshest award in it.
   ...CITY_COMBOS
