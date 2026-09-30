@@ -23,6 +23,7 @@ export interface ComboTarget extends FacetTarget, StatusInput {
   id: number;
   title: string;
   audience?: string | null;
+  url?: string | null;
   applyViaGuidance?: boolean;
   eligibility?: {
     grades?: string[];
@@ -77,7 +78,7 @@ const has = (list: string[] | undefined, value: string) => list?.includes(value)
 const SOFT_ACTIVITIES = new Set(['volunteer', 'volunteering', 'leadership']);
 /** Gates the data only states in the audience line: whose child you are, what
  *  you belong to, what team you are on. */
-const AUDIENCE_GATE = /\b(male|female|women|men|girls|boys)\b|\bchild(ren)? of\b|\bdependants?\b|\bdependents?\b|\bmembers? of\b|\bmembers\b|\bathlet|\bteam\b|disabilit|special needs|\bparents? works?\b|affected by|diagnos|cancer|refugee|newcomer|immigrant|\bdeaf\b|hard of hearing|\bblind\b|\bin care\b|single parent|pregnan|parenting|veteran|military/i;
+const AUDIENCE_GATE = /\b(male|female|women|men|girls|boys)\b|\bchild(ren)? of\b|\bdependants?\b|\bdependents?\b|\bmembers? of\b|\bmembers\b|\bathlet|\bteam\b|disabilit|special needs|\bparents? works?\b|affected by|diagnos|cancer|refugee|newcomer|immigrant|\bdeaf\b|hard of hearing|\bblind\b|\bin care\b|single parent|pregnan|parenting|veteran|military|\bplayers?\b|hockey|volleyball|basketball|football|soccer|curling|rodeo|immersion|student council/i;
 
 /**
  * An award with a condition narrower than its combo's own rule: a field of
@@ -189,9 +190,9 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Grande Prairie scholarship combos',
     title: 'Grande Prairie Scholarship Combos',
     description:
-      'Grande Prairie scholarships grouped by who can apply: Grande Prairie Public graduates and students starting at Northwestern Polytechnic.',
+      'Grande Prairie scholarships grouped by who can apply: one Northwestern Alberta Foundation form, Grande Prairie Public grads and Northwestern Polytechnic.',
     intro:
-      "Northwestern Polytechnic's entrance awards are the big set here, and the public school division runs a smaller one. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      'One Northwestern Alberta Foundation form reaches dozens of Peace Country funds, and the college and the public division each run their own set. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
   },
   {
     city: 'fort-mcmurray',
@@ -229,7 +230,63 @@ export const CITY_COMBOS: CityCombos[] = [
     intro:
       'Rural schools often run their own award lists, and the students who can apply to them are the ones in the building. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
   },
+  {
+    city: 'st-albert',
+    h1: 'St. Albert scholarship combos',
+    title: 'St. Albert Scholarship Combos',
+    description:
+      'St. Albert scholarships grouped by who can apply: the award lists Paul Kane High School and Bellerose Composite run for their own students.',
+    intro:
+      "St. Albert's awards mostly belong to one high school, so the combo you are in is the school you go to. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+  },
+  {
+    city: 'spruce-grove',
+    h1: 'Spruce Grove scholarship combos',
+    title: 'Spruce Grove Scholarship Combos',
+    description:
+      "Spruce Grove-area scholarships grouped by who can apply: Memorial Composite and Spruce Grove Composite High School's own award lists.",
+    intro:
+      "Memorial Composite and Spruce Grove Composite each publish their own awards, and each list is open only to that school's students. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+  },
+  {
+    city: 'fort-saskatchewan',
+    h1: 'Fort Saskatchewan scholarship combos',
+    title: 'Fort Saskatchewan Scholarship Combos',
+    description:
+      "Fort Saskatchewan scholarships grouped by who can apply: Fort Saskatchewan High School's own award list, with the narrower ones as add-ons.",
+    intro:
+      'Fort High runs its own list of awards for its students, a few of them for one field or one kind of student. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'lloydminster',
+    h1: 'Lloydminster scholarship combos',
+    title: 'Lloydminster Scholarship Combos',
+    description:
+      'Lloydminster scholarships grouped by who can apply: the award list for LCHS graduates, all of it reached through one Lloydminster Public form.',
+    intro:
+      "Lloydminster Comprehensive's awards come through one division awards form, so one sitting covers the whole combo. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+  },
+  {
+    city: 'cold-lake',
+    h1: 'Cold Lake scholarship combos',
+    title: 'Cold Lake Scholarship Combos',
+    description:
+      "Cold Lake scholarships grouped by who can apply: Cold Lake High School's own graduation awards, open to the school's own students.",
+    intro:
+      'Cold Lake High School hands out its own graduation awards, and the students who can apply are the ones in the building. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
+  {
+    city: 'chestermere',
+    h1: 'Chestermere scholarship combos',
+    title: 'Chestermere Scholarship Combos',
+    description:
+      "Chestermere scholarships grouped by who can apply: Chestermere High School's own awards, with the ones for athletes listed as add-ons.",
+    intro:
+      'Chestermere High School runs a short list of its own awards for its graduates. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+  },
 ];
+
+const slugify = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 // A second structural gate is narrower than a combo's own: an award for
 // Edmonton Public students going to the U of A is a side in both combos.
@@ -241,6 +298,17 @@ const schooled = (s: ComboTarget) => !!(s.eligibility?.schoolBoards?.length || s
  * filed under Medicine Hat), or a college whose side awards are gated by a
  * need the data does not flag. Everything else is generated below.
  */
+/**
+ * A high school the data names only in the audience line, not in
+ * specificSchools. Each pattern was checked against that city's listings on
+ * 2026-09-30; an award that also lists the school structurally counts too.
+ */
+const audienceSchool = (city: string, name: string, pattern: RegExp): Combo => ({
+  slug: `school-${slugify(name)}`, city, name, who: `you go to ${name}`,
+  includes: s => has(s.eligibility?.specificSchools, name) || pattern.test(s.audience ?? ''),
+  addOn: s => narrower(s) || college(s),
+});
+
 export const COMBOS: Combo[] = [
   {
     slug: 'redcliff',
@@ -266,6 +334,24 @@ export const COMBOS: Combo[] = [
     who: 'you live in Cypress County',
     includes: s => /\bCypress County\b/.test(s.audience ?? ''),
   },
+  {
+    slug: 'northwestern-alberta-foundation',
+    city: 'grande-prairie',
+    name: 'Peace Country students',
+    who: 'you live in Grande Prairie or the wider Peace Country',
+    // The listings' notes: "one universal form puts you in front of every one
+    // you qualify for". Funds for one hamlet, team or nation are sides.
+    includes: s => /^(https?:\/\/)?(www\.)?nafgives\.com\//.test(s.url ?? ''),
+    addOn: s => narrower(s) || !/\b(northwestern Alberta|Peace Country|Grande Prairie)\b/.test(s.audience ?? ''),
+  },
+  audienceSchool('st-albert', 'Paul Kane High School', /\bPaul Kane\b/),
+  audienceSchool('st-albert', 'Bellerose Composite High School', /\bBellerose\b/),
+  audienceSchool('spruce-grove', 'Memorial Composite High School', /\bMemorial Composite\b/),
+  audienceSchool('spruce-grove', 'Spruce Grove Composite High School', /\bSpruce Grove Composite\b/),
+  audienceSchool('fort-saskatchewan', 'Fort Saskatchewan High School', /\bFort High\b|\bFort Saskatchewan High School\b/),
+  audienceSchool('lloydminster', 'Lloydminster Comprehensive (LCHS)', /\bLCHS\b/),
+  audienceSchool('cold-lake', 'Cold Lake High School', /\bCold Lake High\b/),
+  audienceSchool('chestermere', 'Chestermere High School', /\bChestermere High\b/),
 ];
 
 /**
@@ -285,8 +371,6 @@ export const BOARDS: Record<string, { name: string; who: string }> = {
   RVS: { name: 'Rocky View Schools', who: 'you go to a Rocky View high school' },
   CESD: { name: "Chinook's Edge", who: "you go to a Chinook's Edge high school" },
 };
-
-const slugify = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 /**
  * The combos the data writes itself, for any city: one per school board (its
@@ -317,6 +401,28 @@ function generatedCombos(city: string, pool: ComboTarget[]): Combo[] {
     addOn: s => narrower(s) || college(s),
   }));
   return [...boards, ...colleges, ...schools];
+}
+
+/**
+ * Application routes where one form covers a whole set, each quoted from the
+ * listings' own notes: EducationMatters ("one application for all CBE and
+ * Calgary Catholic awards"), Red Deer Polytechnic's General Application, the
+ * Northwestern Alberta Foundation's universal form, Bev Facey's one in-house
+ * form and LPSD's ("one form covers every LPSD award").
+ */
+const ONE_FORMS: { prefix: string; text: string }[] = [
+  { prefix: 'www.educationmatters.ca/', text: 'One EducationMatters application covers these' },
+  { prefix: 'rdpolytech.academicworks.ca/', text: 'One Red Deer Polytechnic General Application covers these' },
+  { prefix: 'nafgives.com/', text: 'One Northwestern Alberta Foundation form covers these' },
+  { prefix: 'www.bevfacey.ca/', text: 'One Bev Facey awards form covers these' },
+  { prefix: 'sites.google.com/lpsd.ca/', text: 'One LPSD awards form covers these' },
+];
+
+/** The one form every core award goes through, or null when they differ. */
+export function oneForm(core: { url?: string | null }[]): string | null {
+  const bare = (u: string | null | undefined) => (u ?? '').replace(/^https?:\/\//, '');
+  const route = ONE_FORMS.find(f => bare(core[0]?.url).startsWith(f.prefix));
+  return route && core.every(s => bare(s.url).startsWith(route.prefix)) ? route.text : null;
 }
 
 export interface BuiltCombo<T> {

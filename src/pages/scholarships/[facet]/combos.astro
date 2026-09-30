@@ -8,7 +8,7 @@ import SabFonts from '../../../components/sab/SabFonts.astro';
 import SabHeader from '../../../components/sab/SabHeader.astro';
 import Layout from '../../../layouts/Layout.astro';
 import { todayDate as albertaToday } from '../../../lib/calendar';
-import { CITY_COMBOS, combosForCity } from '../../../lib/combos';
+import { CITY_COMBOS, combosForCity, oneForm } from '../../../lib/combos';
 import { loadScholarships } from '../../../lib/data-loader';
 import { eligibilityFacts } from '../../../lib/eligibility-facts';
 import { enrichScholarships } from '../../../lib/enrich';
@@ -82,11 +82,12 @@ const breadcrumbJson = {
         intro={page.intro}
         menuLabel="Combos on this page"
         items={combos.map(({ combo, core, addOns }) => ({ href: `#${combo.slug}`, name: combo.name, count: `${core.length + addOns.length} awards` }))}
-        burst={[`${combos.length} combos`, `${totalAwards} awards`]}
+        burst={[`${combos.length} ${combos.length === 1 ? 'combo' : 'combos'}`, `${totalAwards} awards`]}
       />
 
       {combos.map(({ combo, core, addOns }, n) => {
         const viaSchool = core.every(s => s.applyViaGuidance);
+        const form = oneForm(core);
         const list = (rows: unknown[], shown: number) => (
           <>
             <ul class="sabc-items">{rows.slice(0, shown)}</ul>
@@ -146,7 +147,9 @@ const breadcrumbJson = {
               <div class="sabc-title">
                 <h2 class="sabc-h2" id={`${combo.slug}-h`}>{combo.name}</h2>
                 <p class="sabc-who"><strong>For you if</strong> {combo.who}.</p>
-                {viaSchool && <p class="sabc-tip">One trip to the guidance office covers all {core.length}.</p>}
+                {form
+                  ? <p class="sabc-tip">{form}: all {core.length}.</p>
+                  : viaSchool && <p class="sabc-tip">One trip to the guidance office covers all {core.length}.</p>}
               </div>
               <div class="sabc-sticker" aria-hidden="true">
                 <strong>{core.length}</strong>

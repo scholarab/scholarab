@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { BOARDS, COMBOS, CITY_COMBOS, MIN_COMBO_CORE, MIN_COMBO_ITEMS, combosForCity, comboCities, type ComboTarget } from './combos.ts';
+import { BOARDS, COMBOS, CITY_COMBOS, oneForm, MIN_COMBO_CORE, MIN_COMBO_ITEMS, combosForCity, comboCities, type ComboTarget } from './combos.ts';
 import { SCHOLARSHIP_FACETS } from './facets.ts';
 
 const TODAY = new Date('2027-01-15T00:00:00');
@@ -128,5 +128,15 @@ describe('combosForCity', () => {
   it('builds a page only for a city with a combo', () => {
     expect(comboCities([award()], TODAY)).toEqual([]);
     expect(comboCities([catholic(), catholic(), catholic()], TODAY).map(c => c.city)).toEqual(['medicine-hat']);
+  });
+});
+
+describe('oneForm', () => {
+  it('names the form only when every core award goes through it', () => {
+    const em = { url: 'https://www.educationmatters.ca/award/1' };
+    expect(oneForm([em, em])).toBe('One EducationMatters application covers these');
+    expect(oneForm([em, { url: 'https://calgaryfoundation.org/x' }])).toBeNull();
+    expect(oneForm([{ url: 'https://sites.google.com/other/x' }])).toBeNull();
+    expect(oneForm([])).toBeNull();
   });
 });

@@ -18,7 +18,10 @@ const cities = comboCities(all, today).map(page => ({
   page,
   name: page.city === 'alberta' ? 'Small-town Alberta' : SCHOLARSHIP_FACETS.find(f => f.slug === page.city)!.label,
   combos: combosForCity(page.city, all, today),
-}));
+}))
+  // Alphabetical, so a reader scanning for their town finds it; the
+  // small-town schools close the list.
+  .sort((a, b) => Number(a.page.city === 'alberta') - Number(b.page.city === 'alberta') || a.name.localeCompare(b.name));
 const comboCount = cities.reduce((n, c) => n + c.combos.length, 0);
 const canonical = 'https://www.scholarab.ca/combos/';
 const description = 'Alberta scholarships grouped into combos by who can apply: your school board, your high school or the college you are going to. Pick yours, apply to all.';
