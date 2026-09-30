@@ -154,5 +154,71 @@
   {
     "host": "aupe.org",
     "reason": "Queue-it waiting room redirects every automated request in a loop (redirect count exceeded), so the checker can never reach the page. The site also returned a Cloudflare 502 in browser on 2026-09-12; the page was verified when the three AUPE listings were added on 2026-09-07. Recheck it by hand."
+  },
+  {
+    "url": "https://usw.ca/pages/post-secondary/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Verified page content in the native browser on 2026-09-30. Automated requests reproduce the bot refusal reported by issue #39. Match only this response on this URL; review again by 2026-10-30."
+  },
+  {
+    "url": "https://usw.ca/pages/usw-indigenous-scholarships/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Verified page content in the native browser on 2026-09-30. Automated requests reproduce the bot refusal reported by issue #39. Match only this response on this URL; review again by 2026-10-30."
+  },
+  {
+    "url": "https://usw.ca/david-ellis/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Verified page content in the native browser on 2026-09-30. Automated requests reproduce the bot refusal reported by issue #39. Match only this response on this URL; review again by 2026-10-30."
+  },
+  {
+    "url": "https://cwf-fcf.org/en/conserve/wild-outside.html",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Verified page content in the native browser on 2026-09-30. Automated requests reproduce the bot refusal reported by issue #39. Match only this response on this URL; review again by 2026-10-30."
+  },
+  {
+    "url": "https://www.rotary.org/en/get-involved/youth-programs/interact-clubs",
+    "error": "HTTP 429",
+    "reviewUntil": "2026-10-30",
+    "reason": "Verified page content in the native browser on 2026-09-30. Automated requests reproduce the bot refusal reported by issue #39. Match only this response on this URL; review again by 2026-10-30."
+  },
+  {
+    "url": "https://usaco.org/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Native browser shows the named program and local Node returns HTTP 200 on 2026-09-30. GitHub Actions returned HTTP 403 on 2026-09-28 and 2026-09-30 (run 36685893407). For Bow Seat the reviewed canonical URL replaces the redirecting old path. Restrict the exception to this URL and response; review by 2026-10-30."
+  },
+  {
+    "url": "https://albertaaviationmuseum.com/empowering-youth-at-the-alberta-aviation-museum-youth-volunteer-program/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Native browser shows the named program and local Node returns HTTP 200 on 2026-09-30. GitHub Actions returned HTTP 403 on 2026-09-28 and 2026-09-30 (run 36685893407). For Bow Seat the reviewed canonical URL replaces the redirecting old path. Restrict the exception to this URL and response; review by 2026-10-30."
+  },
+  {
+    "url": "https://bowseat.org/programs/blue-planet-awareness-contest/contest-overview/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Native browser shows the named program and local Node returns HTTP 200 on 2026-09-30. GitHub Actions returned HTTP 403 on 2026-09-28 and 2026-09-30 (run 36685893407). For Bow Seat the reviewed canonical URL replaces the redirecting old path. Restrict the exception to this URL and response; review by 2026-10-30."
+  },
+  {
+    "url": "https://www.abcee.org/alberta-youth-leaders-for-environmental-education/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Native browser shows the named program and local Node returns HTTP 200 on 2026-09-30. GitHub Actions returned HTTP 403 on 2026-09-28 and 2026-09-30 (run 36685893407). For Bow Seat the reviewed canonical URL replaces the redirecting old path. Restrict the exception to this URL and response; review by 2026-10-30."
+  },
+  {
+    "url": "https://blueoceancompetition.org/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Native browser shows the named program and local Node returns HTTP 200 on 2026-09-30. GitHub Actions returned HTTP 403 on 2026-09-28 and 2026-09-30 (run 36685893407). For Bow Seat the reviewed canonical URL replaces the redirecting old path. Restrict the exception to this URL and response; review by 2026-10-30."
+  },
+  {
+    "url": "https://globalyouth.wharton.upenn.edu/competitions/investment-competition/",
+    "error": "HTTP 403",
+    "reviewUntil": "2026-10-30",
+    "reason": "Reviewed 2026-09-30: native browser loads Wharton competition overview and 2026-27 dates; hosted run 36685893407 and local Node requests return 403. Only this refusal is excepted; later errors remain reportable."
   }
 ]

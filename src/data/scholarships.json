@@ -5586,16 +5586,16 @@
   {
     "id": 173,
     "title": "Luke Santi Memorial Award",
-    "amount": "$1,000",
-    "deadline": "2027-05-31",
+    "amount": "$2,500",
+    "deadline": null,
     "audience": "Graduating Canadian high school students entering physical sciences",
     "url": "https://perimeterinstitute.ca/outreach/students/luke-santi-award-student-achievement",
     "category": "STEM",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-09",
     "region": "National",
-    "notes": "Applications are accepted until May 31 every year. One $1,000 award, and the winner is notified in the fall.",
+    "notes": "The 2026 application round is closed. Perimeter lists one $2,500 award and a visit to the institute. The next application deadline has not been posted.",
     "active": false,
-    "description": "The Luke Santi Memorial Award honours a graduating high school student who embodies excellence in the physical sciences. Named for a passionate young scientist, this $1,000 award from the Perimeter Institute requires a minimum 80% average and acceptance into a full-time physical sciences program at a Canadian university. Applicants must demonstrate scientific curiosity, extracurricular involvement, and community contributions. Two letters of recommendation are required. The recipient also receives an invitation to visit the Perimeter Institute for Theoretical Physics.",
+    "description": "The Luke Santi Memorial Award honours a graduating high school student who embodies excellence in the physical sciences. Named for a passionate young scientist, this $2,500 award from the Perimeter Institute requires a minimum 80% average and acceptance into a full-time physical sciences program at a Canadian university. Applicants must demonstrate scientific curiosity, extracurricular involvement, and community contributions. Two letters of recommendation are required. The recipient also receives an invitation to visit the Perimeter Institute for Theoretical Physics.",
     "eligibility": {
       "grades": [
         "12"
@@ -17434,7 +17434,7 @@
     "title": "Border Paving Award",
     "amount": "$1,000",
     "audience": "Parkland graduates entering engineering or engineering technology",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "STEM",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17472,15 +17472,15 @@
     "title": "Capital Plumbing and Heating Scholarship",
     "amount": "$500",
     "audience": "Graduates apprenticing in a plumbing-related trade",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Trades",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
-    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "notes": "This award is absent from Memorial Composite's current awards list, checked September 30, 2026. The details below describe the earlier award. Ask Student Services whether it is still offered before preparing an application.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "Capital Plumbing and Heating gives $500 plus tools to a graduating student apprenticing in one of five plumbing-related trades: plumbing, refrigeration, sheet metal, gasfitting, or steamfitting and pipefitting. The tools are the part worth noticing, because a first-year apprentice buying their own kit is facing a real cost that a cash award of this size would barely cover on its own.",
-    "metaDetail": "Comes with tools as well as the money.",
+    "description": "Current availability is unconfirmed. Capital Plumbing and Heating gives $500 plus tools to a graduating student apprenticing in one of five plumbing-related trades: plumbing, refrigeration, sheet metal, gasfitting, or steamfitting and pipefitting. The tools are the part worth noticing, because a first-year apprentice buying their own kit is facing a real cost that a cash award of this size would barely cover on its own.",
+    "metaDetail": "Not in the current school award list; confirm with Student Services.",
     "eligibility": {
       "grades": [
         "12"
@@ -17508,7 +17508,7 @@
     "title": "Constituency of Lac Ste. Anne-Parkland Award for Leadership in Business",
     "amount": "Gift",
     "audience": "Memorial Composite graduates showing business leadership potential",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Academic",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17548,7 +17548,7 @@
     "title": "Constituency of Spruce Grove-Stony Plain Award for Leadership in Building a Better Community",
     "amount": "Gift",
     "audience": "Memorial Composite graduates with a record of social activism",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17587,7 +17587,7 @@
     "title": "Decker Award",
     "amount": "$500",
     "audience": "Memorial Composite graduates with a 75% average",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Academic",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17625,15 +17625,15 @@
     "title": "Dr. Dekterov Health Care Professionals Award",
     "amount": "$1,000",
     "audience": "Memorial Composite graduates entering health sciences",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Academic",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
-    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "notes": "This award is absent from Memorial Composite's current awards list, checked September 30, 2026. The details below describe the earlier award. Ask Student Services whether it is still offered before preparing an application.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "Funded by Dentistry by Dekterov and granted to a graduating Memorial Composite student entering a post-secondary program related to health sciences. The published criteria name nothing beyond the field itself, no average and no service record, which is unusual for an award of this size and means the pool is whoever in the graduating class is heading into health.",
-    "metaDetail": "Field of study is the only stated criterion.",
+    "description": "Current availability is unconfirmed. Funded by Dentistry by Dekterov and granted to a graduating Memorial Composite student entering a post-secondary program related to health sciences. The published criteria name nothing beyond the field itself, no average and no service record, which is unusual for an award of this size and means the pool is whoever in the graduating class is heading into health.",
+    "metaDetail": "Not in the current school award list; confirm with Student Services.",
     "eligibility": {
       "grades": [
         "12"
@@ -17663,7 +17663,7 @@
     "title": "Elizabeth Spychka Citizenship Scholarship",
     "amount": "$500",
     "audience": "Memorial Composite graduates with a 70 to 79.5% average",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17701,7 +17701,7 @@
     "title": "Hawkings Tinney LLP Commerce Award",
     "amount": "$1,000",
     "audience": "Memorial Composite graduates entering a Bachelor of Commerce",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Academic",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17739,15 +17739,15 @@
     "title": "Laverne & Jack Lewis Award",
     "amount": "$500",
     "audience": "Stony Plain area graduates entering agriculture",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "General",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
-    "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
+    "notes": "This award is absent from Memorial Composite's current awards list, checked September 30, 2026. The details below describe the earlier award. Ask Student Services whether it is still offered before preparing an application.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "The Stony Plain Rotary Club funds this for an exemplary grade 12 student pursuing a career in agriculture. To qualify you need to be registered at a post-secondary institution, have prior experience in agricultural endeavours, participate in community programs, and reside in Stony Plain or the surrounding area. The prior experience clause is the real gate, and it is not something you can assemble in your final semester.",
-    "metaDetail": "Wants prior hands-on agricultural experience.",
+    "description": "Current availability is unconfirmed. The Stony Plain Rotary Club funds this for an exemplary grade 12 student pursuing a career in agriculture. To qualify you need to be registered at a post-secondary institution, have prior experience in agricultural endeavours, participate in community programs, and reside in Stony Plain or the surrounding area. The prior experience clause is the real gate, and it is not something you can assemble in your final semester.",
+    "metaDetail": "Not in the current school award list; confirm with Student Services.",
     "eligibility": {
       "grades": [
         "12"
@@ -17776,17 +17776,17 @@
   },
   {
     "id": 482,
-    "title": "Meridian Masonic Lodge Bursary",
+    "title": "Jack Webster Memorial Bursary",
     "amount": "$1,000",
     "audience": "Memorial Composite graduates who need financial help",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
     "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "Meridian Masonic Lodge No. 129 in Stony Plain fund this for a graduating student with good work habits, citizenship and participation, who shows respect and caring for fellow students, parents and teachers. Three further conditions apply: you can be enrolling in any type of post-secondary education, you must not be receiving any other major award, and you must require financial assistance. The any type wording puts trades and college on equal footing with university here.",
+    "description": "Listed previously as the Meridian Masonic Lodge Bursary. Meridian Masonic Lodge No. 129 in Stony Plain fund this for a graduating student with good work habits, citizenship and participation, who shows respect and caring for fellow students, parents and teachers. Three further conditions apply: you can be enrolling in any type of post-secondary education, you must not be receiving any other major award, and you must require financial assistance. The any type wording puts trades and college on equal footing with university here.",
     "metaDetail": "Any post-secondary type qualifies, and need is weighed.",
     "eligibility": {
       "grades": [
@@ -17813,9 +17813,9 @@
   {
     "id": 483,
     "title": "Parker Tobin Memorial Award",
-    "amount": "$750",
+    "amount": "$1,000",
     "audience": "Memorial Composite student athletes with 80% in Math 30",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Sports",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17853,7 +17853,7 @@
     "title": "Rotary Club of Stony Plain Volunteer Award",
     "amount": "$500",
     "audience": "Memorial Composite students who volunteer in the community",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17891,7 +17891,7 @@
     "title": "Rotary Club of Parkland After Dark Scholarship",
     "amount": "$1,000",
     "audience": "Parkland students entering any first year, apprenticeships included",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17929,7 +17929,7 @@
     "title": "Shiloh Chiropractic Clinic Sports Medicine Award",
     "amount": "$500",
     "audience": "The top Sports Medicine student at Memorial Composite",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Sports",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -17967,14 +17967,14 @@
     "title": "Stony Plain Lions Award for Improvement",
     "amount": "$250 to $500",
     "audience": "Parkland students in grades 10 to 12 whose work improved",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "General",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
     "notes": "Memorial Composite marks this one as needing an application in the spring of Semester 2 and publishes no calendar date for it. Its own award list also says sponsorship and amounts are subject to change, so confirm both with the school before counting on the figure.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "The Stony Plain Lions Club fund three of these: $500 to a graduating student who has improved in attitude, achievement and citizenship across their high school career, and $250 each to a grade 10 and a grade 11 student who improved over the course of one school year. All three ask for contribution to the community through volunteering and an acceptable level of academic standing. Improvement is the measure, which makes this one of very few awards a student can win precisely because they started badly.",
+    "description": "The Stony Plain Lions Club awards $500 to a graduating Grade 12 student and $250 each to a Grade 10 and Grade 11 student. The school recognizes improvement in attitude, achievement and citizenship over the school year or high school career. Apply through the school when its award applications open.",
     "metaDetail": "Three awards, one each for grades 10, 11 and 12.",
     "eligibility": {
       "grades": [
@@ -17997,9 +17997,7 @@
       "fosterCare": false,
       "citizenship": "any",
       "apprenticeship": false,
-      "extracurriculars": [
-        "Volunteering"
-      ]
+      "extracurriculars": []
     }
   },
   {
@@ -18007,7 +18005,7 @@
     "title": "Stony Plain Lions Legacy Scholarship Fund",
     "amount": "$1,000",
     "audience": "Students volunteering for humanitarian causes",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -18045,7 +18043,7 @@
     "title": "Stony Plain Royal Canadian Legion Bursary",
     "amount": "$500",
     "audience": "Memorial Composite students with leadership and work habits",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Community",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -18083,7 +18081,7 @@
     "title": "Stony Plain TireCraft Mechanics Award",
     "amount": "Gift",
     "audience": "Memorial Composite students who completed all three mechanics levels",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/students/awards",
     "category": "Trades",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
@@ -18119,15 +18117,15 @@
     "title": "Green and Gold Athletic Scholarships",
     "amount": "$1,000",
     "audience": "Memorial Composite athletes with a 70% average and two years on a team",
-    "url": "https://mchs.psd.ca/download/441592",
+    "url": "https://mchs.psd.ca/programs/athletics",
     "category": "Sports",
     "lastVerified": "2026-09",
     "region": "Spruce Grove",
-    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you.",
+    "notes": "Memorial Composite does not asterisk this one, which in its award list means there is no separate application to file; the school selects from the students in front of it. Making sure the department knows you want it is the step that is actually available to you. The current Athletics Handbook is linked from the athletics page.",
     "applyViaGuidance": true,
     "active": true,
-    "description": "Memorial Composite fund two of these at $1,000 each for athletes who are well rounded and community minded, with a positive attitude, unselfishness, responsibility, coachability, leadership and goal setting. The hard requirements are an overall average of at least 70% in grade 12, involvement on at least one school athletic team in two high school years with one of them being grade 12, and involvement in Green and Gold fundraising while at the school. That last one is easy to miss and cannot be fixed late.",
-    "metaDetail": "Two awards, and fundraising is required.",
+    "description": "Memorial Composite may award $1,000 each to one male and one female graduating student-athlete. Recipients need a Grade 12 average of at least 70%, participation on a school team in two high school years including Grade 12, and strong attitude, responsibility, leadership and teamwork. The scholarship is paid after proof of post-secondary registration, which must be supplied within two years of graduation.",
+    "metaDetail": "Provide proof of post-secondary registration within two years.",
     "eligibility": {
       "grades": [
         "12"
@@ -40313,7 +40311,7 @@
     "deadline": "2026-10-15",
     "openDate": null,
     "audience": "Métis citizens in full-time studies at Alberta post-secondary institutions",
-    "url": "https://www.rupertsland.org/education/metis-scholar-awards/",
+    "url": "https://www.rupertsland.org/metis-scholar-awards/",
     "category": "Indigenous",
     "lastVerified": "2026-09",
     "region": "Alberta",
@@ -41309,13 +41307,13 @@
     "id": 1081,
     "title": "USW Post Secondary Scholarships",
     "amount": "$1,500",
-    "deadline": "2027-06-30",
+    "deadline": null,
     "audience": "United Steelworkers members and their children, age 25 or under",
     "url": "https://usw.ca/pages/post-secondary/",
     "category": "General",
     "region": "National",
     "description": "The United Steelworkers awards 22 scholarships of $1,500 each year to members and children of members who are heading into post-secondary education.",
-    "notes": "Open to a USW member or the child of a member in good standing who is 25 or younger. The application is a form plus either a three-minute video or a 250-word written statement, in English or French, on one of four set topics. The 22 awards are split across USW Districts 3, 5 and 6 and the national locals; District 3 covers Western Canada including Alberta. You cannot win more than twice. The 2026 cycle closed June 30, 2026 and the date has held to June 30 in recent years, but confirm on the USW page before relying on it. Verified against usw.ca on 2026-09-08.",
+    "notes": "Open to a USW member or the child of a member in good standing who is 25 or younger. The application is a form plus either a three-minute video or a 250-word written statement, in English or French, on one of four set topics. The 22 awards are split across USW Districts 3, 5 and 6 and the national locals; District 3 covers Western Canada including Alberta. You cannot win more than twice. The 2026 cycle closed June 30, 2026. Dates for the next cycle were not posted when checked on September 30, 2026.",
     "metaDetail": "22 awards for USW members and their children.",
     "eligibility": {
       "grades": [
@@ -41339,19 +41337,19 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-09",
-    "active": true
+    "active": false
   },
   {
     "id": 1082,
     "title": "USW Indigenous Post-Secondary Scholarships",
     "amount": "$1,500",
-    "deadline": "2027-06-30",
+    "deadline": null,
     "audience": "First Nations, Inuit or Métis members of USW families",
     "url": "https://usw.ca/pages/usw-indigenous-scholarships/",
     "category": "Indigenous",
     "region": "National",
     "description": "Six scholarships of $1,500 from the United Steelworkers for First Nations, Inuit and Métis students in USW families who are heading to a Canadian post-secondary institution.",
-    "notes": "Separate from the general USW post-secondary scholarships and judged on its own. Open to active or retired USW members and their children, grandchildren and immediate family who self-identify as First Nations, Inuit or Métis. The six awards are split two apiece across three regions, and Alberta sits in the Western and Northern Canada region. Application is a form plus a three-minute video or a 250-word statement on one of three set topics. The 2026 cycle closed June 30, 2026. Verified against usw.ca on 2026-09-08.",
+    "notes": "Separate from the general USW post-secondary scholarships and judged on its own. Open to active or retired USW members and their children, grandchildren and immediate family who self-identify as First Nations, Inuit or Métis. The six awards are split two apiece across three regions, and Alberta sits in the Western and Northern Canada region. Application is a form plus a three-minute video or a 250-word statement on one of three set topics. The 2026 cycle closed June 30, 2026. Dates for the next cycle were not posted when checked on September 30, 2026.",
     "metaDetail": "Two of the six are set aside for Western Canada.",
     "eligibility": {
       "grades": [
@@ -41375,7 +41373,7 @@
       "extracurriculars": []
     },
     "lastVerified": "2026-09",
-    "active": true
+    "active": false
   },
   {
     "id": 1083,
@@ -43477,7 +43475,7 @@
     "id": 1152,
     "title": "David Ellis Scholarship",
     "amount": "$1,000",
-    "deadline": "2027-06-30",
+    "deadline": null,
     "openDate": null,
     "audience": "High school students who are children or grandchildren of United Steelworkers members",
     "url": "https://usw.ca/david-ellis/",
@@ -43486,7 +43484,7 @@
     "lastVerified": "2026-09",
     "active": false,
     "description": "United Steelworkers offers three $1,000 David Ellis Scholarships in each Canadian district to help high school students continue their education. Applicants must be children or grandchildren of a USW member and submit work about young workers' health and safety.",
-    "notes": "Email a 750-1,000-word essay or a 3-5-minute YouTube video on one of the two posted themes. Include your contact details, school and relative's name and union local. Dates for the new cycle were not posted when checked; this is last cycle's date carried forward, confirm before planning around it.",
+    "notes": "Email a 750-1,000-word essay or a 3-5-minute YouTube video on one of the two posted themes. Include your contact details, school and relative's name and union local. The 2026 cycle closed June 30, 2026. Dates for the next cycle were not posted when checked on September 30, 2026.",
     "eligibility": {
       "grades": [
         "10",

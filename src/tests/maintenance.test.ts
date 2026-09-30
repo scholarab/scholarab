@@ -2,7 +2,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { publicationPending } from '../../scripts/publication-pending.mjs';
 import { livePublicationMatches } from '../../scripts/live-publication';
-import { groupLinkTargets, forEachHost } from '../../scripts/link-targets';
+import { groupLinkTargets, forEachHost, reviewedLinkFailure, requestLink, type LinkException } from '../../scripts/link-targets';
 import { parseMessage } from '../lib/parse-message';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
@@ -83,6 +83,54 @@ describe('deployment readiness', () => {
 });
 
 describe('deduplicated link checks', () => {
+  it('recovers a transport failure without treating a failed retry as a passing page', async () => {
+    const sleep = vi.fn().mockResolvedValue(undefined);
+    const request = vi.fn().mockResolvedValue({ error: 'Headers Timeout Error' });
+    const fallback = vi.fn().mockResolvedValue({ status: 200 });
+    expect(await requestLink('https://example.com', request, fallback, sleep)).toEqual({ status: 200 });
+    expect(request).toHaveBeenCalledTimes(1);
+    expect(fallback).toHaveBeenCalledTimes(1);
+    fallback.mockResolvedValue({ status: 404 });
+    expect(await requestLink('https://example.com', request, fallback, sleep)).toEqual({ status: 404 });
+    fallback.mockClear().mockResolvedValue({ error: 'curl transport failed (code 60)' });
+    expect(await requestLink('https://example.com', request, fallback, sleep)).toEqual({ error: 'curl transport failed (code 60)' });
+    expect(fallback).toHaveBeenCalledTimes(2);
+  });
+
+  it('keeps retries bounded and does not retry permanent HTTP failures', async () => {
+    const sleep = vi.fn().mockResolvedValue(undefined);
+    const fallback = vi.fn();
+    for (const status of [200, 403, 404, 410]) {
+      const request = vi.fn().mockResolvedValue({ status });
+      expect(await requestLink('https://example.com', request, fallback, sleep)).toEqual({ status });
+      expect(request).toHaveBeenCalledTimes(1);
+    }
+    const request = vi.fn().mockResolvedValue({ status: 429 });
+    expect(await requestLink('https://example.com', request, fallback, sleep)).toEqual({ status: 429 });
+    expect(request).toHaveBeenCalledTimes(3);
+    expect(fallback).not.toHaveBeenCalled();
+    expect(sleep.mock.calls.map(([ms]) => ms)).toEqual([2000, 4000]);
+  });
+
+  it('limits browser-verified exceptions to the exact URL, refusal and review window', () => {
+    const url = 'https://example.com/award';
+    const exceptions: LinkException[] = [
+      { url, error: 'HTTP 403', reviewUntil: '2026-10-30', reason: 'Browser-verified award page' },
+    ];
+    const refused = { kind: 'suspect', error: 'HTTP 403' };
+    expect(reviewedLinkFailure(url, refused, exceptions, '2026-10-30')).toBe(true);
+    expect(reviewedLinkFailure(url, refused, exceptions, '2026-10-31')).toBe(false);
+    expect(reviewedLinkFailure(`${url}/other`, refused, exceptions, '2026-09-30')).toBe(false);
+    for (const verdict of [
+      { kind: 'broken', error: 'HTTP 404' }, { kind: 'broken', error: 'HTTP 410' },
+      { kind: 'broken', error: 'ENOTFOUND' }, { kind: 'suspect', error: 'HTTP 500' },
+      { kind: 'suspect', error: 'fetch failed: certificate expired' },
+      { kind: 'suspect', error: 'fetch failed: timeout' }, { kind: 'suspect', error: 'HTTP 429' },
+    ]) expect(reviewedLinkFailure(url, verdict, exceptions, '2026-09-30')).toBe(false);
+    expect(reviewedLinkFailure(url, refused, [{ host: 'example.com', reason: 'Legacy host exception' }], '2026-09-30')).toBe(false);
+    expect(reviewedLinkFailure(url, refused, [{ ...exceptions[0]!, reviewUntil: '' } as LinkException], '2026-09-30')).toBe(false);
+  });
+
   it('starts the next host as soon as a slot is free, checks all hosts once and stays bounded', async () => {
     vi.useFakeTimers();
     const started: number[] = [];

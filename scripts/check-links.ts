@@ -3,7 +3,9 @@ import { readFileSync } from 'fs'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { Agent } from 'undici'
-import { groupLinkTargets, forEachHost } from './link-targets.ts'
+import { execFile } from 'node:child_process'
+import { promisify } from 'node:util'
+import { groupLinkTargets, forEachHost, reviewedLinkFailure, requestLink, type LinkException } from './link-targets.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -12,12 +14,14 @@ interface Item { id: unknown; title?: string; name?: string; url?: string }
 const scholarships: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/scholarships.json'), 'utf8'))
 const programs: Item[] = JSON.parse(readFileSync(join(__dirname, '../src/data/research-programs.json'), 'utf8'))
 
-// Hosts whose WAFs block requests from CI runners no matter what headers we
-// send. Verified manually; re-check when adding or removing an entry.
-const ignoreList: { host: string; reason: string }[] = JSON.parse(
+// Existing host exclusions and dated, URL-specific browser reviews. New
+// reviews still request the URL and only match its verified refusal status.
+const ignoreList: LinkException[] = JSON.parse(
   readFileSync(join(__dirname, 'link-checker-ignore.json'), 'utf8')
 )
-const ignoredHosts = new Set(ignoreList.map(e => e.host))
+const ignoredHosts = new Set(ignoreList.flatMap(e => 'host' in e ? [e.host] : []))
+const reviewDate = new Date().toISOString().slice(0, 10)
+let reviewedFailures = 0
 
 // Dormant listings are checked too. They used to be skipped, which is how all
 // seven CPA Education Foundation URLs sat on a dead path from whenever CPA
@@ -41,7 +45,7 @@ const BROWSER_HEADERS = {
   'Accept-Language': 'en-CA,en;q=0.9',
 }
 
-const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
+const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, ms))
 
 /**
  * A dispatcher with a connect timeout long enough for a congested runner.
@@ -89,21 +93,32 @@ async function fetchStatus(url: string): Promise<{ status?: number; error?: stri
 
 type Verdict = { kind: 'ok' } | { kind: 'broken' | 'suspect'; error: string }
 
-const transient = (r: { status?: number; error?: string }) =>
-  !!r.error || (!!r.status && (r.status >= 500 || r.status === 429))
+const exec = promisify(execFile)
+
+// Some providers close undici's connection or never send it headers while
+// their pages load through the platform HTTP client. Keep TLS verification
+// enabled and use curl only as an alternative for an existing retry slot.
+async function fetchWithCurl(url: string): Promise<{ status?: number; error?: string }> {
+  try {
+    const { stdout } = await exec('curl', [
+      '--proto', '=http,https', '--proto-redir', '=http,https', '--location', '--max-redirs', '10',
+      '--connect-timeout', '20', '--max-time', '25', '--silent', '--show-error',
+      '--output', '/dev/null', '--write-out', '%{http_code}', '--user-agent', BROWSER_HEADERS['User-Agent'], url,
+    ], { timeout: 30_000, maxBuffer: 16_384 })
+    const status = Number(stdout.trim())
+    return Number.isInteger(status) && status >= 100 && status <= 599
+      ? { status } : { error: 'curl returned no valid HTTP status' }
+  } catch (error: unknown) {
+    const code = error && typeof error === 'object' && 'code' in error ? error.code : 'unknown'
+    // Keep final failures visible without leaking command arguments or output.
+    return { error: `curl transport failed (code ${code})` }
+  }
+}
 
 async function checkUrl(url: string): Promise<Verdict> {
-  // Two retries with backoff, not one. A single 2s retry was not enough for
-  // hosts that drop connections under burst; every studentaid.alberta.ca
-  // listing failed the 2026-08-03 run on a connect timeout and every one of
-  // them was live in a browser.
-  let result = await fetchStatus(url)
-  for (let attempt = 0; attempt < 2 && transient(result); attempt++) {
-    await sleep(2_000 * (attempt + 1))
-    result = await fetchStatus(url)
-  }
+  const result = await requestLink(url, fetchStatus, fetchWithCurl, sleep)
   if (result.error) {
-    const dnsFailure = /ENOTFOUND/i.test(result.error)
+    const dnsFailure = /ENOTFOUND|curl transport failed \(code 6\)/i.test(result.error)
     return { kind: dnsFailure ? 'broken' : 'suspect', error: result.error }
   }
   const status = result.status!
@@ -147,6 +162,11 @@ async function checkHost(host: string, hostItems: typeof items): Promise<void> {
     if (i > 0) await sleep(PER_HOST_DELAY_MS)
     const verdict = await checkUrl(url)
     if (verdict.kind === 'ok') continue
+    if (reviewedLinkFailure(url, verdict, ignoreList, reviewDate)) {
+      reviewedFailures++
+      console.log(`  ${url}: ${verdict.error} (browser-verified exception; still checked for other failures)`)
+      continue
+    }
     for (const item of listings) {
       const entry = { id: item.id, name: item.label, url, error: verdict.error }
       ;(verdict.kind === 'broken' ? broken : suspect).push(entry)
@@ -188,5 +208,5 @@ if (broken.length > 0 || suspect.length > 0) {
   console.log(`REPORT_JSON=${JSON.stringify({ broken, suspect })}`)
   process.exit(1)
 } else {
-  console.log('All links OK')
+  console.log(`No broken or unreviewed link failures. ${reviewedFailures} URL-specific browser-verified exception(s); legacy host exclusions remain in link-checker-ignore.json.`)
 }

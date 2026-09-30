@@ -72,7 +72,7 @@ function data(kind: 'scholarship' | 'program', record: object) {
 }
 
 describe('detail availability', () => {
-  it('carries all nine inactive program flags into the saved payload without adding active defaults', () => {
+  it('carries all inactive program flags into the saved payload without adding active defaults', () => {
     const payload = prepareSaved({ initialScholarships: [], initialPrograms: programs })
     expect(payload).toHaveLength(270)
     expect(payload.filter(p => p.active === false).map(p => p.id)).toEqual(programs.filter(p => p.active === false).map(p => p.id))
@@ -81,7 +81,7 @@ describe('detail availability', () => {
 
   it('keeps every inactive program neutral, linked, and explained after clock repaint', async () => {
     const inactive = programs.filter(p => p.active === false)
-    expect(inactive).toHaveLength(9)
+    expect(inactive).toHaveLength(11)
     for (const p of inactive) {
       const d = data('program', p)
       await render(d)
@@ -147,7 +147,7 @@ describe('detail availability', () => {
 
   it('preserves all no-separate-application routes and provider links', async () => {
     const records = scholarships.filter(s => saysNoApplication(s.notes, s.metaDetail, s.description))
-    expect(records).toHaveLength(61)
+    expect(records).toHaveLength(60)
     for (const s of records) {
       await render(data('scholarship', s))
       expect(text('.sabd-cta'), s.title).not.toMatch(/^Apply\b/)
