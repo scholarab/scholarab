@@ -4,7 +4,7 @@ import SabFonts from '../components/sab/SabFonts.astro';
 import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
-import { QUIZ_DURATION, QUIZ_QUESTION_COUNT, QUIZ_MAX_QUESTION_COUNT } from '../lib/quiz';
+import { QUIZ_DURATION, QUIZ_MIN_QUESTION_COUNT, QUIZ_MAX_QUESTION_COUNT } from '../lib/quiz';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../lib/facets';
 import { programIsListed, scholarshipStatusOf } from '../lib/status';
 import { getToday, formatDeadline, generateSlug } from '../lib/utils';
@@ -29,7 +29,7 @@ const cityHubCount = SCHOLARSHIP_FACETS
 // 01/02/03 steps and dark CTA block were a landing-page kit, on the page for
 // the site's distribution channel). Plain lines a counsellor can print.
 const canDo = [
-  `Take the ${QUIZ_QUESTION_COUNT} to ${QUIZ_MAX_QUESTION_COUNT} question match quiz (${QUIZ_DURATION}) and get a shortlist worth checking.`,
+  `Take the ${QUIZ_MIN_QUESTION_COUNT} to ${QUIZ_MAX_QUESTION_COUNT} question match quiz (${QUIZ_DURATION}) and get a shortlist worth checking.`,
   `Browse by where they live: ${cityHubCount} city and town pages, plus province-wide and national lists.`,
   'Save scholarships and choose email reminders for the 30, 14 and 3-day milestones still ahead.',
   'Find paid and unpaid research placements, competitions and trades apprenticeships.',

@@ -3,9 +3,10 @@ import { describe, expect, it } from 'vitest';
 import {
   QUIZ_DURATION, QUIZ_PROMISE, QUIZ_QUESTION_COUNT, QUIZ_QUESTION_WORD,
   QUIZ_MAX_QUESTION_COUNT, QUIZ_MAX_QUESTION_WORD, QUIZ_OPTIONAL_QUESTION_COUNT, SCHOOL_QUESTION_KEY,
+  QUIZ_PROGRAM_QUESTIONS, QUIZ_MIN_QUESTION_COUNT, QUIZ_MIN_QUESTION_WORD,
   schoolQuestion, schoolsForCity,
   BOARD_QUESTION_KEY, boardQuestion, boardsForCity, SCHOOL_BOARD_NAMES,
-  QUIZ_QUESTIONS, QUIZ_STORAGE_KEY,
+  QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, quizOptionBatch, quizOptionPage,
 } from './quiz.ts';
 
 describe('quiz storage', () => {
@@ -22,6 +23,70 @@ describe('quiz option values', () => {
       const values = q.opts.map(o => o.value);
       expect(new Set(values).size, `"${q.key}" has duplicate values`).toBe(values.length);
     }
+  });
+});
+
+describe('four-option batches', () => {
+  const options = (count: number) => Array.from({ length: count }, (_, i) => ({ label: `Choice ${i}`, value: String(i) }));
+
+  it('keeps four real answers together and reserves the fourth slot for navigation only when needed', () => {
+    expect(quizOptionBatch(options(4))).toEqual({ options: options(4), page: 0, start: 0, hasMore: false });
+    expect(quizOptionBatch(options(5))).toEqual({ options: options(3), page: 0, start: 0, hasMore: true });
+    expect(quizOptionBatch(options(5), 1)).toEqual({ options: options(5).slice(3), page: 1, start: 3, hasMore: false });
+    expect(quizOptionBatch(options(7), 1).options).toHaveLength(4);
+    expect(quizOptionBatch(options(8), 1).hasMore).toBe(true);
+    expect(quizOptionBatch(options(8), 2).options).toEqual(options(8).slice(6));
+  });
+
+  it('reaches every option exactly once, in order, for every length through the largest school lists', () => {
+    for (let length = 0; length <= 100; length++) {
+      const opts = options(length);
+      const original = structuredClone(opts);
+      const seen: typeof opts = [];
+      for (let page = 0; page <= length; page++) {
+        const batch = quizOptionBatch(opts, page);
+        expect(batch.page).toBe(page);
+        expect(batch.start).toBe(seen.length);
+        expect(batch.options.length + Number(batch.hasMore)).toBeLessThanOrEqual(4);
+        if (batch.hasMore) expect(batch.options).toHaveLength(3);
+        for (const opt of batch.options) {
+          expect(quizOptionPage(opts, opt.value)).toBe(page);
+          expect(opt).toBe(opts[seen.length]);
+          seen.push(opt);
+        }
+        if (!batch.hasMore) break;
+      }
+      expect(seen, `length ${length}`).toEqual(opts);
+      expect(new Set(seen.map(o => o.value)).size).toBe(length);
+      expect(opts).toEqual(original);
+    }
+  });
+
+  it('clamps invalid and stale pages without producing an unreachable or blank batch', () => {
+    const opts = options(8);
+    for (const page of [-1, -Infinity, Infinity, NaN]) {
+      expect(quizOptionBatch(opts, page)).toEqual(quizOptionBatch(opts, 0));
+    }
+    expect(quizOptionBatch(opts, 1.9)).toEqual(quizOptionBatch(opts, 1));
+    expect(quizOptionBatch(opts, 999)).toEqual(quizOptionBatch(opts, 2));
+    expect(quizOptionBatch(options(2), 999)).toEqual(quizOptionBatch(options(2), 0));
+    expect(quizOptionBatch([], 999)).toEqual({ options: [], page: 0, start: 0, hasMore: false });
+  });
+
+  it('restores a real empty answer while unknown and unanswered values start at the first batch', () => {
+    const opts = [...options(6), { label: 'None of these', value: '' }];
+    expect(quizOptionPage(opts, '')).toBe(1);
+    expect(quizOptionPage(opts, undefined)).toBe(0);
+    expect(quizOptionPage(opts, 'not an answer')).toBe(0);
+    expect(quizOptionPage([], '')).toBe(0);
+    expect(quizOptionBatch(opts, quizOptionPage(opts, '')).options.at(-1)?.value).toBe('');
+  });
+
+  it('keeps the city fallback distinct from navigation and after the population-ordered opening choices', () => {
+    const opts = QUIZ_QUESTIONS.find(q => q.key === 'city')!.opts;
+    expect(opts.slice(0, 3).map(o => o.value)).toEqual(['Calgary', 'Edmonton', 'Red Deer']);
+    expect(opts.at(-1)?.value).toBe('Other Alberta');
+    expect(opts.some(o => o.value === 'Other')).toBe(false);
   });
 });
 
@@ -57,7 +122,10 @@ describe('how the quiz describes itself', () => {
   });
 
   it('builds the promise from the two parts, not a copy of them', () => {
-    expect(QUIZ_PROMISE).toContain(QUIZ_QUESTION_WORD);
+    expect(QUIZ_PROMISE).toContain(QUIZ_MIN_QUESTION_WORD);
+    expect(QUIZ_MIN_QUESTION_WORD).toBe(NUMERALS[QUIZ_MIN_QUESTION_COUNT]);
+    expect(QUIZ_MIN_QUESTION_COUNT).toBe(QUIZ_PROGRAM_QUESTIONS.length);
+    expect(QUIZ_PROGRAM_QUESTIONS.map(q => q.key)).toEqual(['searchType', 'grade', 'field']);
     expect(QUIZ_PROMISE).toContain(QUIZ_DURATION);
   });
 

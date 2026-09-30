@@ -15,7 +15,7 @@ import type { ConfidenceTier } from '../lib/eligibility-types'
 // mock's row shape is derived from the real one so the two cannot drift;
 // `signals` was added to matchAll and this stub kept compiling without it.
 import type { matchAll } from '../lib/eligibility-matcher'
-import { QUIZ_STORAGE_KEY, QUIZ_TTL_MS } from '../lib/quiz'
+import { QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS } from '../lib/quiz'
 import { albertaDate } from '../lib/calendar'
 
 // ── Mocks ─────────────────────────────────────────────────────────────────────
@@ -79,9 +79,31 @@ function makeScholarship(overrides: { id: number; title?: string; amount?: strin
   }
 }
 
-/** Click a tile and flush the 240 ms setTimeout so the step advances. */
+const visibleAnswerTiles = () => [...document.querySelectorAll<HTMLElement>('[data-quiz-answer]')]
+const visibleLabels = () => [...document.querySelectorAll('.sabm-opt-label')].map(e => e.textContent)
+function revealTile(label: string): HTMLElement {
+  const find = () => visibleAnswerTiles().find(tile => tile.querySelector('.sabm-opt-label')?.textContent === label)
+  // Real UI navigation only: an already answered question may reopen on a
+  // later batch. Return to the first batch before walking forward if needed.
+  for (let i = 0; !find() && i < 100; i++) {
+    const previous = screen.queryByRole('button', { name: /Previous options$/i })
+    if (!previous) break
+    fireEvent.click(previous)
+  }
+  for (let i = 0; !find() && i < 100; i++) {
+    const more = document.querySelector('[data-quiz-more]')
+    if (!more) break
+    expect(document.querySelectorAll('.sabm-opt').length).toBeLessThanOrEqual(4)
+    fireEvent.click(more)
+  }
+  const found = find()
+  expect(found, `reachable answer: ${label}`).toBeTruthy()
+  return found!
+}
+
+/** Navigate to a real tile and flush the 260 ms committed-answer delay. */
 function clickTile(label: string) {
-  fireEvent.click(screen.getByText(label))
+  fireEvent.click(revealTile(label))
   act(() => { vi.runAllTimers() })
 }
 
@@ -97,6 +119,10 @@ function schoolRestricted(id: number, school: string) {
 function advanceToResults(searchType: 'Scholarships' | 'Programs' | 'Both' = 'Scholarships') {
   clickTile(searchType)                // Q1 searchType
   clickTile('Grade 12')                // Q2 grade
+  if (searchType === 'Programs') {
+    clickTile('Still figuring it out') // Programs depend only on grade and field.
+    return
+  }
   clickTile('Medicine Hat')            // Q3 city
   clickTile('Still figuring it out')   // Q4 field
   clickTile("I'd rather not say")      // Q5 average
@@ -183,9 +209,9 @@ describe('Question 3; City', () => {
   })
 
   it('renders city options', () => {
-    expect(screen.getByText('Medicine Hat')).toBeTruthy()
-    expect(screen.getByText('Calgary')).toBeTruthy()
-    expect(screen.getByText('Edmonton')).toBeTruthy()
+    expect(visibleLabels()).toEqual(['Calgary', 'Edmonton', 'Red Deer', 'Other'])
+    expect(screen.queryByText('Medicine Hat')).toBeNull()
+    expect(revealTile('Medicine Hat')).toBeTruthy()
   })
 
   it('shows Question 3 of 6', () => {
@@ -194,7 +220,7 @@ describe('Question 3; City', () => {
 
   it('clicking a city advances to question 4', () => {
     clickTile('Medicine Hat')
-    expect(screen.getByText("What's your academic focus?")).toBeTruthy()
+    expect(screen.getByText("What are you interested in?")).toBeTruthy()
   })
 })
 
@@ -211,8 +237,11 @@ describe('Question 4; Field', () => {
   it('renders field options', () => {
     expect(screen.getByText('STEM & Engineering')).toBeTruthy()
     expect(screen.getByText('Health & Medicine')).toBeTruthy()
+    expect(screen.queryByText('Trades')).toBeNull()
+    fireEvent.click(document.querySelector('[data-quiz-more]')!)
     expect(screen.getByText('Trades')).toBeTruthy()
     expect(screen.getByText('Still figuring it out')).toBeTruthy()
+    expect(document.querySelectorAll('.sabm-opt')).toHaveLength(3)
   })
 
   it('shows Question 4 of 6', () => {
@@ -220,7 +249,7 @@ describe('Question 4; Field', () => {
   })
 
   it('Previous button returns to city question', () => {
-    fireEvent.click(screen.getByRole('button', { name: /previous/i }))
+    fireEvent.click(screen.getByText('← Previous'))
     expect(screen.getByText('Where are you based?')).toBeTruthy()
   })
 
@@ -273,7 +302,8 @@ describe('Question 6; Institution', () => {
   it('renders institution options', () => {
     expect(screen.getByText('University of Calgary')).toBeTruthy()
     expect(screen.getByText('University of Alberta')).toBeTruthy()
-    expect(screen.getByText('Somewhere else, or not sure')).toBeTruthy()
+    expect(screen.queryByText('Somewhere else, or not sure')).toBeNull()
+    expect(revealTile('Somewhere else, or not sure')).toBeTruthy()
   })
 
   it('shows Question 6 of 6', () => {
@@ -282,7 +312,7 @@ describe('Question 6; Institution', () => {
 
   it('clicking an institution advances to results', () => {
     clickTile('Somewhere else, or not sure')
-    expect(screen.getByText(/worth a look/i)).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
   })
 })
 
@@ -292,7 +322,8 @@ describe('Results', () => {
   it('shows "0 scholarships found" when matchAll returns empty', () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/^0 scholarships worth a look/i)).toBeTruthy()
+    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(screen.getByText(/^Showing 0 scholarships/i)).toBeTruthy()
   })
 
   it('shows why each row ranked where it did, at most two reasons', () => {
@@ -310,7 +341,7 @@ describe('Results', () => {
     expect(screen.queryByText('Matches your STEM focus')).toBeNull()
   })
 
-  it('labels the ranking so the 01..10 column means something', () => {
+  it('keeps the fit ordering label without decorative rank numbers', () => {
     const s1 = makeScholarship({ id: 1, title: 'Ranked Award' })
     mockMatchAll.mockReturnValue([
       { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] },
@@ -318,6 +349,7 @@ describe('Results', () => {
     render(<EligibilityQuiz scholarships={[s1 as any]} programs={[]} />)
     advanceToResults()
     expect(screen.getByText(/Best fit first/)).toBeTruthy()
+    expect(document.querySelector('.sabm-row-num')).toBeNull()
   })
 
   // Critique 2026-09-24: in September every top-fit row opened in March.
@@ -332,8 +364,8 @@ describe('Results', () => {
     advanceToResults()
     const text = document.querySelector('.sabm-table')!.textContent!
     expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Open Now Award'))
-    expect(text.indexOf('Open Now Award')).toBeLessThan(text.indexOf('Opens later, best fit first'))
-    expect(text.indexOf('Opens later, best fit first')).toBeLessThan(text.indexOf('Opens Later Award'))
+    expect(text.indexOf('Open Now Award')).toBeLessThan(text.indexOf('Upcoming or undated, best fit first'))
+    expect(text.indexOf('Upcoming or undated, best fit first')).toBeLessThan(text.indexOf('Opens Later Award'))
   })
 
   // Critique 2026-09-26: Loran, due in 19 days, sat below spring awards.
@@ -439,7 +471,7 @@ describe('Results', () => {
     ])
     render(<EligibilityQuiz scholarships={[s1 as any, s2 as any]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/^2 scholarships worth a look/i)).toBeTruthy()
+    expect(screen.getByText(/^Showing 2 scholarships/i)).toBeTruthy()
   })
 
   it('shows "1 scholarship found" with singular form', () => {
@@ -447,19 +479,20 @@ describe('Results', () => {
     mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] }])
     render(<EligibilityQuiz scholarships={[s1 as any]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/^1 scholarship worth a look/i)).toBeTruthy()
+    expect(screen.getByText(/^Showing 1 scholarship\b/i)).toBeTruthy()
   })
 
-  it('says "your top 10 of N" when the list is cut, and shows the rest on request', () => {
+  it('states the displayed and total counts, and shows the rest on request', () => {
     // "We found 10" would be the cap talking; 25 matched.
     const many = Array.from({ length: 25 }, (_, i) => makeScholarship({ id: i + 1, title: `Award ${i + 1}` }))
     mockMatchAll.mockReturnValue(many.map(s => ({ id: s.id, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] })))
     render(<EligibilityQuiz scholarships={many as any} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText(/^Your top 10 of 25 scholarships worth a look/)).toBeTruthy()
+    expect(screen.getByText(/^Showing 10 of 25 scholarships/i)).toBeTruthy()
     expect(screen.queryByText('Award 25')).toBeNull()
     fireEvent.click(screen.getByRole('button', { name: /show all 25 scholarships/i }))
     expect(screen.getByText('Award 25')).toBeTruthy()
+    expect(screen.getByText(/^Showing 25 scholarships/i)).toBeTruthy()
   })
 
   it('renders scholarship titles in results', () => {
@@ -515,7 +548,7 @@ describe('Results', () => {
     expect(screen.getByText('Check: Indigenous students only')).toBeTruthy()
     expect(screen.getByText('Strong match')).toBeTruthy()
     expect(screen.getByText('Good match')).toBeTruthy()
-    expect(screen.getByText('1 strong match')).toBeTruthy()
+    expect(screen.queryByText('1 strong match')).toBeNull()
   })
 
   it('never says the student qualifies', () => {
@@ -524,7 +557,7 @@ describe('Results', () => {
     render(<EligibilityQuiz scholarships={[s1 as any]} programs={[]} />)
     advanceToResults()
     expect(screen.queryByText(/qualify/i)).toBeNull()
-    expect(screen.getByText(/worth a look/i)).toBeTruthy()
+    expect(screen.getByText(/Confirm eligibility and dates on the provider’s site/i)).toBeTruthy()
   })
 
   it('"Retake quiz" button resets to question 1', () => {
@@ -540,11 +573,15 @@ describe('Results', () => {
     expect(screen.getByText(/no matches found for your profile/i)).toBeTruthy()
   })
 
-  it('"Try again" button in empty state resets to question 1', () => {
+  it('the empty state can recover by editing an answer without a duplicate reset button', () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     advanceToResults()
-    fireEvent.click(screen.getByRole('button', { name: /try again/i }))
-    expect(screen.getByText('What are you looking for?')).toBeTruthy()
+    expect(screen.getByText(/no matches found for your profile/i)).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: /^Grade 12\. Change your answer/ }))
+    clickTile('Grade 11')
+    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect((mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0].grade).toBe('11')
+    expect(screen.queryByRole('button', { name: /try again/i })).toBeNull()
   })
 
   it('save button calls toggleSaved', () => {
@@ -580,17 +617,37 @@ describe('Results', () => {
     expect(screen.getByText('$3,000 stipend')).toBeTruthy()
   })
 
-  it('showConfetti is called when saving a scholarship', () => {
+  it('links open programs to their providers and unknown or closed programs to their details', () => {
+    mockMatchPrograms.mockReturnValue([
+      { id: 51, name: 'Open Program', deadline: '2099-06-01' },
+      { id: 52, name: 'Rolling Program', deadline: 'Ongoing' },
+      { id: 53, name: 'Unknown Program', deadline: 'TBA' },
+      { id: 54, name: 'Closed Program', deadline: '2001-06-01' },
+    ].map(p => ({ ...p, provider: 'Provider', url: `https://provider.example/${p.id}`, paid: false, stipend: null, category: null })))
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    advanceToResults('Programs')
+    const actions = [...document.querySelectorAll<HTMLAnchorElement>('.sabl-apply')]
+    expect(actions.map(a => a.textContent?.replace(/[↗→]/g, '').trim())).toEqual(['Apply', 'Apply', 'Details', 'Details'])
+    expect(actions.map(a => a.getAttribute('href'))).toEqual([
+      'https://provider.example/51', 'https://provider.example/52', '/programs/unknown-program/', '/programs/closed-program/',
+    ])
+    expect(actions.map(a => a.target)).toEqual(['_blank', '_blank', '', ''])
+  })
+
+  it('saving keeps the save event and state without decorative confetti', () => {
     const s1 = makeScholarship({ id: 1 })
     mockMatchAll.mockReturnValue([{ id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] }])
     mockGetSaved.mockReturnValueOnce([]).mockReturnValue([1])
     render(<EligibilityQuiz scholarships={[s1 as any]} programs={[]} />)
     advanceToResults()
     fireEvent.click(screen.getByRole('button', { name: /^save: scholarship 1$/i }))
-    expect(mockShowConfetti).toHaveBeenCalledTimes(1)
+    expect(mockToggleSaved).toHaveBeenCalledWith(1)
+    expect(mockSendEvent).toHaveBeenCalledWith('save', 'scholarship', 1, 'quiz')
+    expect(mockShowConfetti).not.toHaveBeenCalled()
+    expect(screen.getByRole('button', { name: /^Remove from saved: scholarship 1$/i }).getAttribute('aria-pressed')).toBe('true')
   })
 
-  it('shows summary tier badges (strong matches / good matches)', () => {
+  it('keeps per-row fit labels without a duplicate tier recap', () => {
     const s1 = makeScholarship({ id: 1 })
     const s2 = makeScholarship({ id: 2 })
     mockMatchAll.mockReturnValue([
@@ -599,8 +656,10 @@ describe('Results', () => {
     ])
     render(<EligibilityQuiz scholarships={[s1 as any, s2 as any]} programs={[]} />)
     advanceToResults()
-    expect(screen.getByText('1 strong match')).toBeTruthy()
-    expect(screen.getByText('1 good match')).toBeTruthy()
+    expect(screen.getByText('Strong match')).toBeTruthy()
+    expect(screen.getByText('Good match')).toBeTruthy()
+    expect(screen.queryByText('1 strong match')).toBeNull()
+    expect(screen.queryByText('1 good match')).toBeNull()
   })
 
   it("links the results to the student's own city hub", () => {
@@ -706,14 +765,14 @@ describe('School question', () => {
     expect(profile.specificSchool).toBe('Bowness High School')
   })
 
-  it('drops a stored school when the city is changed on the way back', () => {
+  it('drops stored school and board answers when the city is changed on the way back', () => {
     // Seeded rather than clicked: the school question is the last step, so the
     // only way to reach a set school and then change city is a restored run.
     sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({
       step: 6,
       answers: {
         searchType: 'scholarships', grade: '12', city: 'Calgary', field: '',
-        average: '', institution: '', school: 'Bowness High School',
+        average: '', institution: '', school: 'Bowness High School', board: 'CBE',
       },
       savedAt: Date.now(),
     }))
@@ -733,6 +792,7 @@ describe('School question', () => {
     const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]
     expect(profile.city).toBe('Edmonton')
     expect(profile.specificSchool).toBeNull()
+    expect(profile.schoolBoard).toBeNull()
   })
 
   // "Another school" is an answer: the matcher reads '' as "none of the
@@ -758,7 +818,7 @@ describe('Operator completion events', () => {
     expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
     for (const text of ['Grade 12', 'Medicine Hat', 'Still figuring it out', "I'd rather not say"]) clickTile(text)
     expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
-    fireEvent.click(screen.getByText('Somewhere else, or not sure'))
+    fireEvent.click(revealTile('Somewhere else, or not sure'))
     act(() => { vi.advanceTimersByTime(259) })
     expect(mockSendEvent.mock.calls).toEqual([['quiz_start']])
     act(() => { vi.advanceTimersByTime(1) })
@@ -804,12 +864,13 @@ describe('Town filter on the city question', () => {
     expect(screen.queryByText('Other Alberta')).toBeTruthy()
   })
 
-  it('lists Other Alberta, then the six biggest cities', () => {
+  it('starts with three population-ordered cities and Other navigation', () => {
     render(<EligibilityQuiz scholarships={[]} programs={[]} />)
     clickTile('Scholarships')
     clickTile('Grade 12')
     const labels = [...document.querySelectorAll('.sabm-opt-label')].map(e => e.textContent)
-    expect(labels.slice(0, 7)).toEqual(['Other Alberta', 'Calgary', 'Edmonton', 'Red Deer', 'Lethbridge', 'St. Albert', 'Medicine Hat'])
+    expect(labels).toEqual(['Calgary', 'Edmonton', 'Red Deer', 'Other'])
+    expect(document.querySelector('[data-quiz-more]')?.textContent).toContain('More cities')
   })
 
   it('says Other Alberta includes a town it does not list, and Enter still picks a real city', () => {
@@ -821,6 +882,213 @@ describe('Town filter on the city question', () => {
     expect(screen.queryByText('Includes Vulcan')).toBeTruthy()
     act(() => { input.value = 'leth'; dispatch.input(input) })
     expect(screen.queryByText('Includes leth')).toBeNull()
-    expect(screen.queryByText('Any other town or county')).toBeTruthy()
+    expect(screen.queryByText('Another town or county')).toBeTruthy()
+  })
+})
+
+describe('Batch navigation', () => {
+  const stored = () => JSON.parse(sessionStorage.getItem(QUIZ_STORAGE_KEY)!)
+  function startCity() {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    clickTile('Both')
+    clickTile('Grade 12')
+  }
+  function typeQuery(value: string) {
+    const input = screen.getByRole('searchbox') as HTMLInputElement
+    act(() => { input.value = value; dispatch.input(input) })
+    return input
+  }
+
+  it('reaches every city exactly once without answering, writing progress, or sending events', () => {
+    startCity()
+    const before = sessionStorage.getItem(QUIZ_STORAGE_KEY)
+    const events = mockSendEvent.mock.calls.slice()
+    const seen: string[] = []
+    for (let i = 0; i < 30; i++) {
+      expect(document.querySelectorAll('.sabm-opt').length).toBeLessThanOrEqual(4)
+      seen.push(...visibleAnswerTiles().map(tile => tile.querySelector('.sabm-opt-label')!.textContent!))
+      const more = document.querySelector('[data-quiz-more]')
+      if (!more) break
+      expect(visibleLabels().at(-1)).toBe('Other')
+      fireEvent.click(more)
+      act(() => { vi.advanceTimersByTime(300) })
+      expect(screen.getByText('Where are you based?')).toBeTruthy()
+      expect(sessionStorage.getItem(QUIZ_STORAGE_KEY)).toBe(before)
+      expect(mockSendEvent.mock.calls).toEqual(events)
+    }
+    expect(seen).toEqual(QUIZ_QUESTIONS.find(q => q.key === 'city')!.opts.map(o => o.label))
+    expect(new Set(seen).size).toBe(seen.length)
+    expect(stored().answers).toEqual({ searchType: 'both', grade: '12' })
+    expect(localStorage.getItem(QUIZ_STORAGE_KEY)).toBeNull()
+  })
+
+  it('Previous options changes only the batch; Previous returns to the prior question', () => {
+    startCity()
+    const first = visibleLabels()
+    fireEvent.click(document.querySelector('[data-quiz-more]')!)
+    expect(visibleLabels()).not.toEqual(first)
+    fireEvent.click(screen.getByRole('button', { name: /Previous options$/i }))
+    expect(visibleLabels()).toEqual(first)
+    expect(screen.getByText(/Question 3 of 6/)).toBeTruthy()
+    fireEvent.click(screen.getByText('← Previous'))
+    expect(screen.getByText('What grade are you in?')).toBeTruthy()
+  })
+
+  it('ignores rapid answer and navigation clicks until the selected answer commits', () => {
+    startCity()
+    fireEvent.click(revealTile('Calgary'))
+    fireEvent.click(screen.getByText('Edmonton'))
+    fireEvent.click(document.querySelector('[data-quiz-more]')!)
+    fireEvent.click(screen.getByText('← Previous'))
+    act(() => { vi.advanceTimersByTime(259) })
+    expect(stored().step).toBe(2)
+    expect(stored().answers.city).toBeUndefined()
+    expect(visibleLabels()).toEqual(['Calgary', 'Edmonton', 'Red Deer', 'Other'])
+    act(() => { vi.advanceTimersByTime(1) })
+    expect(stored().answers.city).toBe('Calgary')
+    expect(stored().step).toBe(3)
+  })
+
+  it('searches all city batches and resets the visible batch when the query changes or clears', () => {
+    startCity()
+    revealTile('Other Alberta')
+    const input = typeQuery('leth')
+    expect(visibleLabels()).toEqual(['Lethbridge', 'Other Alberta'])
+    expect(screen.queryByRole('button', { name: /Previous options$/i })).toBeNull()
+    act(() => { dispatch.keyDown(input, { key: 'Enter' }); vi.runAllTimers() })
+    expect(stored().answers.city).toBe('Lethbridge')
+    expect(stored().answers.town).toBeUndefined()
+    fireEvent.click(screen.getByText('← Previous'))
+    typeQuery('Vulcan')
+    expect(visibleLabels()).toEqual(['Other Alberta'])
+    expect(screen.getByText('Includes Vulcan')).toBeTruthy()
+    typeQuery('')
+    expect(visibleLabels()).toEqual(['Calgary', 'Edmonton', 'Red Deer', 'Other'])
+    const unmatched = typeQuery('Vulcan')
+    act(() => { dispatch.keyDown(unmatched, { key: 'Enter' }); vi.runAllTimers() })
+    expect(stored().answers.city).toBe('Other Alberta')
+    expect(stored().answers.town).toBe('Vulcan')
+  })
+
+  it('restores the chosen city batch on Previous and a fresh mount without changing the stored schema', () => {
+    startCity()
+    clickTile('Medicine Hat')
+    fireEvent.click(screen.getByText('← Previous'))
+    expect(visibleAnswerTiles().some(t => t.textContent?.includes('Medicine Hat'))).toBe(true)
+    const before = stored()
+    expect(before.step).toBe(2)
+    expect(before.answers.city).toBe('Medicine Hat')
+    expect(Object.keys(before).sort()).toEqual(['answers', 'savedAt', 'step', 'version'])
+    cleanup()
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    expect(screen.getByText('Where are you based?')).toBeTruthy()
+    expect(visibleAnswerTiles().some(t => t.textContent?.includes('Medicine Hat'))).toBe(true)
+  })
+
+  it('edits a late-batch institution directly and returns to results after the answer', () => {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    advanceToResults()
+    fireEvent.click(screen.getByRole('button', { name: /^Somewhere else, or not sure\. Change your answer/ }))
+    expect(screen.getByText('Where are you planning to study?')).toBeTruthy()
+    expect(visibleAnswerTiles().some(t => t.textContent?.includes('Somewhere else, or not sure'))).toBe(true)
+    const input = typeQuery('Keyano')
+    expect(visibleLabels()).toEqual(['Keyano College', 'Somewhere else, or not sure'])
+    act(() => { dispatch.keyDown(input, { key: 'Enter' }); vi.runAllTimers() })
+    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(stored().answers.institution).toBe('Keyano College')
+  })
+
+  it('searches five-option school lists and keeps the empty answer available', () => {
+    const schools = ['Alpha School', 'Beta School', 'Delta School', 'Omega School']
+      .map((name, i) => schoolRestricted(i + 1, name))
+    render(<EligibilityQuiz scholarships={schools as any} programs={[]} />)
+    for (const label of ['Scholarships', 'Grade 12', 'Calgary', 'Still figuring it out', "I'd rather not say", 'Somewhere else, or not sure']) clickTile(label)
+    expect(visibleLabels()).toEqual(['Another school', 'Alpha School', 'Beta School', 'Other'])
+    typeQuery('Omega')
+    expect(visibleLabels()).toEqual(['Another school', 'Omega School'])
+    clickTile('Another school')
+    expect(stored().answers.school).toBe('')
+    expect((mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0].specificSchool).toBe('')
+  })
+
+  it('clears a previous school and resets its batch after the board changes', () => {
+    const schools = Array.from({ length: 8 }, (_, i) => makeScholarship({ id: i + 1, region: 'Calgary', eligibility: {
+      ...EMPTY_ELIGIBILITY, schoolBoards: ['CBE'], specificSchools: [`Public School ${i + 1}`],
+    } }))
+    schools.push(makeScholarship({ id: 20, region: 'Calgary', eligibility: {
+      ...EMPTY_ELIGIBILITY, schoolBoards: ['CCSD'], specificSchools: ['Catholic School'],
+    } }))
+    sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step: 7, savedAt: Date.now(), answers: {
+      searchType: 'scholarships', grade: '12', city: 'Calgary', field: '', average: '', institution: '', board: 'CBE', school: 'Public School 8',
+    } }))
+    render(<EligibilityQuiz scholarships={schools as any} programs={[]} />)
+    expect(screen.getByText('Public School 8')).toBeTruthy()
+    fireEvent.click(screen.getByText('← Previous'))
+    clickTile('Calgary Catholic School District')
+    expect(stored().answers.school).toBeUndefined()
+    expect(visibleLabels()).toEqual(['Another school', 'Catholic School'])
+    expect(screen.queryByRole('button', { name: /Previous options$/i })).toBeNull()
+    clickTile('Catholic School')
+    const profile = (mockMatchAll.mock.calls.at(-1) as unknown as any[])?.[0]
+    expect(profile.schoolBoard).toBe('CCSD')
+    expect(profile.specificSchool).toBe('Catholic School')
+  })
+})
+
+describe('Programs-only questions and session migration', () => {
+  it('asks only search type, grade and field and persists the three-step version', () => {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    clickTile('Programs')
+    expect(screen.getByText('Question 2 of 3')).toBeTruthy()
+    clickTile('Grade 11')
+    expect(screen.getByText("What are you interested in?")).toBeTruthy()
+    expect(screen.getByText('Question 3 of 3')).toBeTruthy()
+    clickTile('Trades')
+    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    const saved = JSON.parse(sessionStorage.getItem(QUIZ_STORAGE_KEY)!)
+    expect(saved).toMatchObject({ version: 2, step: 3, answers: { searchType: 'programs', grade: '11', field: 'trades' } })
+    expect(Object.keys(saved.answers).sort()).toEqual(['field', 'grade', 'searchType'])
+    expect(mockMatchAll).not.toHaveBeenCalled()
+    expect(mockMatchPrograms).toHaveBeenLastCalledWith([], saved.answers, Infinity, expect.any(Date))
+    expect(mockSendEvent.mock.calls).toEqual([['quiz_start'], ['quiz_complete']])
+  })
+
+  it.each([
+    [0, 'What are you looking for?'], [1, 'What grade are you in?'],
+    [2, "What are you interested in?"], [3, "What are you interested in?"],
+    [4, 'Your matches'], [6, 'Your matches'], [8, 'Your matches'],
+  ] as const)('maps legacy programs step %i to the same remaining matching inputs', (step, heading) => {
+    const answers = { searchType: 'programs', grade: '11', city: 'Calgary', field: 'STEM' }
+    sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step, answers, savedAt: Date.now() }))
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    expect(screen.getByRole('heading', { name: heading })).toBeTruthy()
+    expect(mockSendEvent).not.toHaveBeenCalled()
+    const saved = JSON.parse(sessionStorage.getItem(QUIZ_STORAGE_KEY)!)
+    expect(saved.version).toBe(2)
+    expect(saved.answers.grade).toBe('11')
+    expect(saved.answers.field).toBe('STEM')
+  })
+
+  it('does not remigrate completed version-2 programs results back to a question', () => {
+    sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ version: 2, step: 3, savedAt: Date.now(), answers: { searchType: 'programs', grade: '12', field: '' } }))
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    expect(mockSendEvent).not.toHaveBeenCalled()
+  })
+
+  it('walks the required scholarship questions when a programs result is changed to Both', () => {
+    render(<EligibilityQuiz scholarships={[]} programs={[]} />)
+    advanceToResults('Programs')
+    fireEvent.click(screen.getByRole('button', { name: /^Programs\. Change your answer/ }))
+    clickTile('Both')
+    expect(screen.getByText('What grade are you in?')).toBeTruthy()
+    clickTile('Grade 12')
+    expect(screen.getByText('Where are you based?')).toBeTruthy()
+    for (const label of ['Medicine Hat', 'Still figuring it out', "I'd rather not say", 'Somewhere else, or not sure']) clickTile(label)
+    expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
+    const saved = JSON.parse(sessionStorage.getItem(QUIZ_STORAGE_KEY)!)
+    expect(saved.step).toBe(6)
+    expect(saved.answers.searchType).toBe('both')
+    expect(saved.answers.city).toBe('Medicine Hat')
   })
 })

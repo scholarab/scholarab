@@ -18,7 +18,7 @@ const totalLabel = quizTotalLabel(ceiling, QUIZ_QUESTIONS.length, false);
     that looks for a live tile, heading or step label can find it. */}
 <div class="sabm-slot">
   <div class="sabm-ph" data-quiz-placeholder aria-hidden="true" inert>
-    <div style="display:flex;flex-direction:column">
+    <div class="sabm-question-panel">
       <div class="sabm-progress-wrap">
         <div class="sabm-progress">
           {Array.from({ length: Math.max(QUIZ_QUESTIONS.length, ceiling) }, (_, i) => <div class:list={['sabm-seg', i === 0 && 'current', i >= QUIZ_QUESTIONS.length && 'maybe']} />)}
@@ -35,7 +35,6 @@ const totalLabel = quizTotalLabel(ceiling, QUIZ_QUESTIONS.length, false);
                   <span class="sabm-ph-opt-label">{opt.label}</span>
                   {opt.hint && <span class="sabm-ph-opt-hint">{opt.hint}</span>}
                 </span>
-                <span class="sabm-opt-arrow">→</span>
               </button>
             </div>
           ))}

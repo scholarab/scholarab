@@ -7,9 +7,9 @@ import SabHeader from '../components/sab/SabHeader.astro';
 import QuizLoader from '../components/QuizLoader.astro';
 import quizDataUrl from '../data/quiz-payload.json?url';
 import {
-  QUIZ_DURATION,
   QUIZ_PROMISE,
-  QUIZ_QUESTION_WORD,
+  QUIZ_MIN_QUESTION_WORD,
+  QUIZ_MIN_QUESTION_COUNT,
   QUIZ_MAX_QUESTION_WORD,
   QUIZ_QUESTION_COUNT,
   QUIZ_STORAGE_KEY,
@@ -50,13 +50,15 @@ const breadcrumbJson = {
       after the catalogue loads. Question one's placeholder and the intro stood
       in until then and were swapped out, a 0.817 layout shift on desktop
       (critique 2026-09-25). Known before first paint, so they never show.
-      Finished = past the six base questions plus the board and school
-      questions when those were answered, which is how the quiz counts them. */}
-  <script is:inline slot="head" define:vars={{ key: QUIZ_STORAGE_KEY, ttl: QUIZ_TTL_MS, base: QUIZ_QUESTION_COUNT }}>
+      Program-only runs have three questions. Older stored runs used four
+      steps to reach the last program-relevant answer. */}
+  <script is:inline slot="head" define:vars={{ key: QUIZ_STORAGE_KEY, ttl: QUIZ_TTL_MS, base: QUIZ_QUESTION_COUNT, programTotal: QUIZ_MIN_QUESTION_COUNT }}>
     try {
       const saved = JSON.parse(sessionStorage.getItem(key) || 'null');
       const a = saved && saved.answers || {};
-      const total = base + ('board' in a ? 1 : 0) + ('school' in a ? 1 : 0);
+      const total = a.searchType === 'programs'
+        ? saved.version === 2 ? programTotal : 4
+        : base + ('board' in a ? 1 : 0) + ('school' in a ? 1 : 0);
       if (saved && Date.now() - saved.savedAt <= ttl && saved.step >= total) document.documentElement.classList.add('quiz-restore');
     } catch { /* private mode: the normal first paint */ }
   </script>
@@ -79,68 +81,31 @@ const breadcrumbJson = {
         <h1 class="sabm-h1">Find your match</h1>
         <p class="sabm-sub">
           {
-            `${QUIZ_QUESTION_WORD} to ${QUIZ_MAX_QUESTION_WORD} questions. A shortlist worth checking, not a promise you qualify.`
+            `${QUIZ_MIN_QUESTION_WORD} to ${QUIZ_MAX_QUESTION_WORD} questions to find scholarships and programs for you.`
           }
         </p>
-        <p class="sabm-trust">{`No name or email needed, and it takes ${QUIZ_DURATION}.`}</p>
+        <p class="sabm-trust">No account needed. Your answers stay in this browser tab.</p>
       </div>
 
       <QuizLoader url={quizDataUrl} />
 
-      {
-        /* The quiz renders in the browser, so until it loads this page has about
-          twenty words on it -- a heading, a subhead, and two trust chips. That
-          is not enough for anything to read, index or rank, and it is not
-          enough for a reader who lands here and wants to know what the tool
-          does before answering questions about themselves. This section is the
-          page's actual prose. It sits below the quiz because the quiz is what
-          the reader came for; it does not get hidden once the quiz starts,
-          because a description of how matching works is most useful next to
-          the results it produced. Folded since 2026-09-27: 400 words open
-          under the results were the last thing the page said (critique). The
-          text is still in the HTML for anything that reads it. */
-      }
-          <details class="sabm-about">
-            <summary><h2>How the match works</h2></summary>
-            <p>
-              The quiz asks {QUIZ_QUESTION_WORD.toLowerCase()} things: whether you want
-              scholarships, programs or both; your grade; your city; the field you are
-              headed into; your average; and where you plan to study. If your city has awards tied
-              to a school board or to particular schools, it asks which board you are with and which
-              school you go to as well, which makes it {QUIZ_MAX_QUESTION_WORD} at most. Nothing
-              else. There is no name field, no email field and no account, and your answers never
-              leave your browser. They are held on your own device for the tab you are in, so the
-              quiz remembers where you were if you reload, and they are gone once you close the tab
-              or leave it sitting for an hour. You can also clear them at any time by starting over.
-            </p>
-            <p>
-              What comes back is the same corpus you can browse on{' '}
-              <a href="/scholarships/">the scholarship directory</a> and{' '}
-              <a href="/programs/">the programs list</a>, narrowed to what your answers
-              actually clear. The matching is deliberately cautious in one direction: a question you
-              skip is treated as unknown rather than as a &ldquo;no&rdquo;, so an award restricted
-              to a group you did not tell us about still appears rather than being silently dropped.
-              That is the right way round to be wrong. It does mean the list you get is the set
-              worth checking, not a set you are guaranteed to be eligible for.
-            </p>
-            <p>
-              Each result carries a <strong>strong</strong>, <strong>good</strong> or{' '}
-              <strong>possible</strong> badge. Those tiers are about how much of your profile the
-              award's criteria actually spoke to, not about your odds of winning. A local award that
-              names your city and your grade earns a strong badge because it matched on specific
-              things; a province-wide award open to everyone in Alberta is a possible match for the
-              same reason it is open to you: it barely asked. Read them as &ldquo;how well this fits
-              what you told us&rdquo;.
-            </p>
-            <p>
-              Every result links to its full listing, and the criteria on that page come from the
-              provider's own site. Check them there before you apply: rules change mid-cycle, and
-              this quiz is a way to shorten the list, not a ruling on eligibility. If you would
-              rather read than answer, the <a href="/deadlines/">deadline calendar</a> shows the
-              same awards by month and the <a href="/guides/">guides</a> explain the year they sit
-              in.
-            </p>
-          </details>
+      <details class="sabm-about">
+        <summary><h2>How the match works</h2></summary>
+        <p>
+          Programs use your grade and interests. Scholarships also use your location,
+          average and study plans, plus your board or school when local awards require them.
+          Saved progress stays in this tab and expires after an hour of inactivity. Retake quiz clears it.
+        </p>
+        <p>
+          Scholarship match labels describe fit, not your chances of winning. Criteria
+          the quiz hasn’t asked about appear as checks beside each award. Confirm eligibility
+          and dates on the provider’s site before applying.
+        </p>
+        <p>
+          You can also browse the full <a href="/scholarships/">scholarship directory</a>
+          {' '}or <a href="/programs/">programs list</a>.
+        </p>
+      </details>
     </div>
   </div>
 
@@ -162,7 +127,7 @@ const breadcrumbJson = {
      itself, not competing with the thing the reader came to use. */
   .sabm-about {
     max-width: 62ch;
-    margin: 72px auto 8px;
+    margin: 48px 0 8px;
     padding-top: 32px;
     border-top: 1px solid rgba(20, 25, 21, 0.12);
     font-family: var(--font-body);

@@ -6,15 +6,16 @@ import type { QuizScholarship as Scholarship, QuizProgram as Program } from '../
 import type { StudentProfile, ConfidenceTier } from '../lib/eligibility-types'
 import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-matcher'
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
-import { showConfetti, generateSlug, parseAmount } from '../lib/utils.ts'
+import { generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { STATUS_WORDS, canApplyNow, openLaterNote, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
+import { STATUS_WORDS, canApplyNow, openLaterNote, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import {
   QUIZ_QUESTIONS, QUIZ_STORAGE_KEY, QUIZ_TTL_MS, QUIZ_MAX_QUESTION_COUNT,
   SCHOOL_QUESTION_KEY, schoolQuestion, schoolsForCity,
   BOARD_QUESTION_KEY, boardQuestion, boardsForCity, RESULT_LIMIT,
-  quizQuestionCeiling, quizTotalLabel, AVERAGE_BAND_TOP,
+  quizQuestionCeiling, quizTotalLabel, AVERAGE_BAND_TOP, QUIZ_PROGRAM_QUESTIONS,
+  quizOptionBatch, quizOptionPage,
 } from '../lib/quiz.ts'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -45,7 +46,7 @@ const SOON_SHOWN = 3
 const GROUP_LABELS: Record<ResultGroup, string> = {
   soon: `Due in the next ${SOON_DAYS} days, best fit first`,
   now: 'Open now, best fit first',
-  later: 'Opens later, best fit first',
+  later: 'Upcoming or undated, best fit first',
 }
 
 function formatDue(iso: string): string {
@@ -60,7 +61,7 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
     try { localStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
     const raw = sessionStorage.getItem(QUIZ_STORAGE_KEY)
     if (raw) {
-      const parsed = JSON.parse(raw) as { step?: unknown; answers?: unknown; savedAt?: unknown }
+      const parsed = JSON.parse(raw) as { version?: number; step?: unknown; answers?: unknown; savedAt?: unknown }
       // Progress older than the TTL is thrown away rather than resumed.
       const savedAt = typeof parsed.savedAt === 'number' && Number.isFinite(parsed.savedAt)
         ? parsed.savedAt
@@ -69,7 +70,7 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
         try { sessionStorage.removeItem(QUIZ_STORAGE_KEY) } catch { /* ignore */ }
         return { step: 0, answers: {} }
       }
-      const step = typeof parsed.step === 'number' && Number.isFinite(parsed.step)
+      let step = typeof parsed.step === 'number' && Number.isFinite(parsed.step)
         // Clamped to the longest the quiz can be: whether the school question
         // is in play depends on the city, which is one of the answers being
         // restored here, so the shorter bound would truncate a valid step.
@@ -81,6 +82,11 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
           if (typeof v === 'string') answers[k] = v
         }
       }
+      // Existing program attempts used the six-question scholarship path.
+      // Preserve their grade/field and resume at the equivalent question.
+      if (answers.searchType === 'programs' && parsed.version !== 2) {
+        step = step <= 1 ? step : step <= 3 ? 2 : QUIZ_PROGRAM_QUESTIONS.length
+      }
       return { step, answers }
     }
   } catch { /* ignore */ }
@@ -91,30 +97,29 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
 
 // Selection state lives in the parent so only one tile can ever be selected
 // and clicks during the step transition are ignored.
-function MatchTile({
-  label, hint, delay, state, animateIn, onClick,
-}: {
+function MatchTile({ label, hint, state, more = false, disabled, onClick }: {
   label: string
   hint?: string
-  delay: number
   state: 'idle' | 'selected' | 'dim'
-  animateIn: boolean
+  more?: boolean
+  disabled: boolean
   onClick: () => void
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      // Read as "Calgary, And the foothills", not the two run together.
       aria-label={hint ? `${label}, ${hint}` : undefined}
-      className={`sabm-opt${state === 'selected' ? ' sabm-opt-selected' : ''}${state === 'dim' ? ' sabm-opt-dim' : ''}${state === 'idle' && animateIn ? ' quiz-tile-in' : ''}`}
-      style={{ animationDelay: `${delay}ms`, height: '100%' }}
+      aria-pressed={more ? undefined : state === 'selected'}
+      data-quiz-answer={more ? undefined : ''}
+      data-quiz-more={more ? '' : undefined}
+      disabled={disabled}
+      className={`sabm-opt${state === 'selected' ? ' sabm-opt-selected' : ''}${state === 'dim' ? ' sabm-opt-dim' : ''}`}
     >
       <span className="sabm-opt-text">
         <span className="sabm-opt-label">{label}</span>
         {hint && <span className="sabm-opt-hint">{hint}</span>}
       </span>
-      <span className="sabm-opt-arrow" aria-hidden="true">→</span>
     </button>
   )
 }
@@ -122,9 +127,8 @@ function MatchTile({
 // ── Result row (design table style) ──────────────────────────────────────────
 
 function ResultRow({
-  rank, title, titleHref, subtitle, tags, why, amount, actions, delay,
+  title, titleHref, subtitle, tags, why, amount, actions,
 }: {
-  rank: number
   title: string
   titleHref: string
   subtitle?: string | null
@@ -133,11 +137,9 @@ function ResultRow({
   why?: string[]
   amount: ComponentChildren
   actions: ComponentChildren
-  delay: number
 }) {
   return (
-    <div className="sabm-row quiz-card-in" style={{ animationDelay: `${delay}ms` }}>
-      <div className="sabm-row-num sabl-mono">{String(rank).padStart(2, '0')}</div>
+    <div className="sabm-row">
       <div className="sabm-row-main">
         <a href={titleHref} className="sabm-row-name">{title}</a>
         {subtitle && <div className="sabm-row-blurb">{subtitle}</div>}
@@ -160,10 +162,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const [initial] = useState(loadStoredQuiz)
   const [step, setStep] = useState(initial.step)
   const [answers, setAnswers] = useState<Record<string, string>>(initial.answers)
-  const [animKey, setAnimKey] = useState(0)
-  // Index of the tile just clicked; non-null while the step is animating out
+  // A brief selected state confirms a tap and ignores duplicate submission.
   const [pendingTile, setPendingTile] = useState<number | null>(null)
-  const [enterDir, setEnterDir] = useState<'fwd' | 'back'>('fwd')
+  const [optionPage, setOptionPage] = useState(0)
+  const batchNavigationRef = useRef(false)
+  const previousStepRef = useRef(step)
   const transitionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const mountedOnceRef = useRef(false)
   const questionHeadingRef = useRef<HTMLHeadingElement>(null)
@@ -174,10 +177,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   // tied to a board or to named schools. Appended rather than slotted in after
   // the city question so that every step index stays stable, which matters
   // because the step is what is persisted.
+  const { city, searchType: selectedSearchType } = answers
+  const selectedBoard = answers[BOARD_QUESTION_KEY]
   const QUESTIONS = useMemo(() => {
-    if (!answers.city) return BASE_QUESTIONS
-    const boards = boardsForCity(scholarships, answers.city)
-    const schools = schoolsForCity(scholarships, answers.city, answers[BOARD_QUESTION_KEY])
+    if (selectedSearchType === 'programs') return QUIZ_PROGRAM_QUESTIONS
+    if (!city) return BASE_QUESTIONS
+    const boards = boardsForCity(scholarships, city)
+    const schools = schoolsForCity(scholarships, city, selectedBoard)
     // Board before school: it is the coarser cut, and a student who answers it
     // has already narrowed the school list they are about to be shown.
     return [
@@ -185,14 +191,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       ...(boards.length > 0 ? [boardQuestion(boards)] : []),
       ...(schools.length > 0 ? [schoolQuestion(schools)] : []),
     ]
-  }, [answers.city, answers[BOARD_QUESTION_KEY], scholarships])
+  }, [city, selectedBoard, selectedSearchType, scholarships])
 
   // Until the city is answered the board and school questions are unknown, so
   // "of 6" would jump to "of 8" mid-quiz. Say the most it can be for any city
   // instead; landing on fewer is good news, growing is not.
   // QuizLoader's placeholder prints the same label from the same helpers.
   const ceiling = useMemo(() => quizQuestionCeiling(scholarships), [scholarships])
-  const totalLabel = quizTotalLabel(ceiling, QUESTIONS.length, !!answers.city)
+  const totalLabel = quizTotalLabel(ceiling, QUESTIONS.length, !!city || selectedSearchType === 'programs')
 
   useLayoutEffect(() => () => {
     if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
@@ -222,14 +228,15 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
       mountedOnceRef.current = true
       return
     }
+    const questionChanged = previousStepRef.current !== step
+    previousStepRef.current = step
+    if (!questionChanged && !batchNavigationRef.current) return
+    batchNavigationRef.current = false
     if (step < QUESTIONS.length) {
       // A long option list (schools, towns) leaves the page scrolled down, and
       // the next question opened with its heading above the viewport on a
       // phone (critique 2026-09-24). Bring it back only when it is hidden, so
-      // a short question on desktop does not jump. Measured by offsetTop, which
-      // leaves out the 14px the step is still sliding up from: measured with
-      // that transform, the heading came to rest touching the header instead
-      // of its scroll margin below it (critique 2026-09-27).
+      // a short question on desktop does not jump.
       const h = questionHeadingRef.current
       if (h) {
         let top = -window.scrollY
@@ -247,11 +254,11 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     // header cannot end up covering the heading focus would have scrolled to.
     window.scrollTo({ top: 0, behavior: 'auto' })
     resultsHeadingRef.current?.focus({ preventScroll: true })
-  }, [animKey, step, QUESTIONS.length])
+  }, [step, QUESTIONS.length, optionPage])
 
   // Persist, including the completed state, so results survive a reload
   useLayoutEffect(() => {
-    try { sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ step, answers, savedAt: Date.now() })) } catch { /* ignore */ }
+    try { sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ version: 2, step, answers, savedAt: Date.now() })) } catch { /* ignore */ }
   }, [step, answers])
 
   // Set when a student jumps back from the results summary to change one
@@ -261,8 +268,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
   const editingRef = useRef(false)
   function editAnswer(i: number) {
     editingRef.current = true
-    setEnterDir('back')
-    setAnimKey(k => k + 1)
     setStep(i)
   }
 
@@ -293,15 +298,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         if (key === BOARD_QUESTION_KEY && a[BOARD_QUESTION_KEY] !== value) delete next[SCHOOL_QUESTION_KEY]
         return next
       })
-      setEnterDir('fwd')
-      setAnimKey(k => k + 1)
       // Answering the first question = one started run, with quiz_complete
       // this gives a drop-off rate. Session-deduped like every event.
       if (step === 0) sendEvent('quiz_start')
       // Answering the final question = one completed run. Counted here, not on
       // the results screen, so restored sessions don't recount.
       if (step === QUESTIONS.length - 1) sendEvent('quiz_complete')
-      const jumpToResults = editingRef.current && key !== 'city' && key !== BOARD_QUESTION_KEY
+      const jumpToResults = editingRef.current && key !== 'searchType' && key !== 'city' && key !== BOARD_QUESTION_KEY
       editingRef.current = false
       setStep(s => jumpToResults ? QUESTIONS.length : Math.min(s + 1, QUESTIONS.length))
     }, 260)
@@ -312,16 +315,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current)
     setPendingTile(null)
     setAnswers({})
-    setEnterDir('fwd')
     setStep(0)
     setShowAll(false)
-    setAnimKey(k => k + 1)
+    editingRef.current = false
   }
 
   function back() {
     if (pendingTile !== null) return
-    setEnterDir('back')
-    setAnimKey(k => k + 1)
     setStep(s => Math.max(s - 1, 0))
   }
 
@@ -457,36 +457,58 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
 
   const [savedIds, setSavedIds] = useState<Set<number>>(() => new Set(getSaved()))
-  const handleToggleSave = useCallback((id: number, el?: Element | null) => {
+  const handleToggleSave = useCallback((id: number) => {
     toggleSaved(id)
     const next = new Set(getSaved())
     // Saves count, un-saves don't; the metric is "people who shortlisted it"
-    if (next.has(id)) { showConfetti(el); sendEvent('save', 'scholarship', id, 'quiz') }
+    if (next.has(id)) sendEvent('save', 'scholarship', id, 'quiz')
     setSavedIds(next)
   }, [])
 
   // One tap to keep the whole shortlist: the results were the best moment in
   // the quiz and ended on "Retake" with nothing kept (critique 2026-09-23).
-  const handleSaveAll = useCallback((ids: number[], el?: Element | null) => {
+  const handleSaveAll = useCallback((ids: number[]) => {
     const have = new Set(getSaved())
     const fresh = ids.filter(id => !have.has(id))
     for (const id of fresh) { toggleSaved(id); sendEvent('save', 'scholarship', id, 'quiz') }
-    if (fresh.length > 0) showConfetti(el)
     setSavedIds(new Set(getSaved()))
   }, [])
 
   // Programs have their own shortlist key, read by the /saved page
   const [savedProgramIds, setSavedProgramIds] = useState<Set<number>>(() => new Set(getSavedPrograms()))
-  const handleToggleSaveProgram = useCallback((id: number, el?: Element | null) => {
+  const handleToggleSaveProgram = useCallback((id: number) => {
     toggleSavedProgram(id)
     const next = new Set(getSavedPrograms())
-    if (next.has(id)) { showConfetti(el); sendEvent('save', 'program', id, 'quiz') }
+    if (next.has(id)) sendEvent('save', 'program', id, 'quiz')
     setSavedProgramIds(next)
   }, [])
 
-  // Type-to-filter for the city question; cleared whenever the step moves.
+  const current = QUESTIONS[step]
+  const previousAnswer = current ? answers[current.key] : undefined
   const [placeFilter, setPlaceFilter] = useState('')
-  useLayoutEffect(() => { setPlaceFilter('') }, [step])
+  useLayoutEffect(() => {
+    setPlaceFilter('')
+    setOptionPage(quizOptionPage(current?.opts ?? [], previousAnswer))
+  }, [step, current, previousAnswer])
+
+  const q = placeFilter.trim().toLowerCase()
+  const filterable = !!current && (current.key === 'city'
+    || ((current.key === SCHOOL_QUESTION_KEY || current.key === 'institution') && current.opts.length > 4))
+  const filteredOpts = current && filterable && q
+    ? current.opts.filter(o => o.label.toLowerCase().includes(q)
+      || (o.hint ?? '').toLowerCase().includes(q)
+      || o.value === 'Other Alberta' || o.value === '')
+    : current?.opts ?? []
+  const batch = quizOptionBatch(filteredOpts, optionPage)
+  const shownOpts = batch.options
+  const unlistedTown = current?.key === 'city' && q.length >= 3
+    && !filteredOpts.some(o => o.value !== 'Other Alberta')
+
+  function showOptionPage(page: number) {
+    if (pendingTile !== null) return
+    batchNavigationRef.current = true
+    setOptionPage(page)
+  }
 
   // ── Results ────────────────────────────────────────────────────────────────
 
@@ -505,19 +527,13 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
     const programTotal = allProgramResults?.length ?? 0
     const hasAnyResults = scholarshipCount > 0 || programCount > 0
     const hasMore = scholarshipTotal > scholarshipCount || programTotal > programCount
-    // "Your top 10 of 64" when the list is cut, the plain count when it is not.
+    // State the shown and available counts without implying a program ranking.
     const counted = (shown: number, total: number, noun: string) =>
-      `${total > shown ? `your top ${shown} of ${total}` : shown} ${noun}${total !== 1 ? 's' : ''}`
+      `${total > shown ? `${shown} of ${total}` : shown} ${noun}${total !== 1 ? 's' : ''}`
 
-    // "Worth a look", never "you qualify for": the quiz asks six things and
-    // most awards gate on more than six, so it can rule awards out but it
-    // cannot rule them in. The rows say what is left to check.
-    const sentence = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
-    const headline = showScholarships && showPrograms
-      ? sentence(`${counted(scholarshipCount, scholarshipTotal, 'scholarship')} and ${counted(programCount, programTotal, 'program')} worth a look.`)
-      : showPrograms
-        ? sentence(`${counted(programCount, programTotal, 'program')} for your grade and field.`)
-        : sentence(`${counted(scholarshipCount, scholarshipTotal, 'scholarship')} worth a look.`)
+    const countLabel = showScholarships && showPrograms
+      ? `Showing ${counted(scholarshipCount, scholarshipTotal, 'scholarship')} and ${counted(programCount, programTotal, 'program')}.`
+      : `Showing ${showPrograms ? counted(programCount, programTotal, 'program') : counted(scholarshipCount, scholarshipTotal, 'scholarship')}.`
 
     // A tier only means something next to a different tier. When every row
     // carries the same one (20 of 20 "Strong match" was the common case), the
@@ -527,16 +543,8 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
     return (
       <div className="quiz-results-in">
-        {/* Segmented progress; all filled */}
-        <div className="sabm-progress" style={{ marginTop: 4 }}>
-          {QUESTIONS.map((_, i) => (
-            <div key={i} className="sabm-seg done" />
-          ))}
-        </div>
-
-        <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1" style={{ marginTop: 24 }}>
-          {headline}
-        </h2>
+        <h2 ref={resultsHeadingRef} tabIndex={-1} className="sabm-results-h1">Your matches</h2>
+        <p className="sabm-results-count">{countLabel}</p>
         {/* Every match, not the ten on screen: the ten are split on purpose. */}
         {showScholarships && (() => {
           const note = openLaterNote((allScholarshipResults ?? []).map(r => ({ status: scholarshipStatusOf(r.scholarship, today), openDate: r.scholarship.openDate })))
@@ -563,20 +571,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           </ul>
         </div>
 
-        {showScholarships && (
-          <p className="sabm-results-note">
-            Each is a separate application, judged on its own. Check eligibility on the official site before you apply.
-          </p>
-        )}
+        <p className="sabm-results-note">Confirm eligibility and dates on the provider’s site before applying.</p>
 
         <div className="sabm-results-bar">
-          {showScholarships && showTiers ? (
-            <div className="sabm-count-chips">
-              {strong.length > 0 && <span className="sabm-count-chip solid">{strong.length} strong match{strong.length !== 1 ? 'es' : ''}</span>}
-              {good.length > 0 && <span className="sabm-count-chip">{good.length} good match{good.length !== 1 ? 'es' : ''}</span>}
-              {possible.length > 0 && <span className="sabm-count-chip">{possible.length} possible</span>}
-            </div>
-          ) : <div />}
           <div className="sabm-results-actions">
             {showScholarships && saveable.length > 0 && (
               saveable.every(r => savedIds.has(r.scholarship.id))
@@ -585,7 +582,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 // be a link away from it (critique 2026-09-23). The label names
                 // which rows it saves, since 20 are showing and it saves fewer.
                 : <button
-                    onClick={e => handleSaveAll(saveable.map(r => r.scholarship.id), e.currentTarget)}
+                    onClick={() => handleSaveAll(saveable.map(r => r.scholarship.id))}
                     className="sabm-btn-accent"
                   >{saveable.length === 1
                     ? `Save the ${strong.length > 0 ? 'strong' : 'good'} match`
@@ -608,8 +605,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         {/* Scholarship rows */}
         {showScholarships && scholarshipResults && scholarshipResults.length > 0 && (
           <div className="sabm-table">
-            {/* The rows are numbered 01..10 and were never told what the
-                number meant. It is confidence order, so say so. */}
             {scholarshipResults.map(({ scholarship: s, tier, signals, checks, group }, index) => {
               // A label at the top of each group, only when there are two;
               // one group keeps the single "best fit first" line.
@@ -636,8 +631,6 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 <Fragment key={s.id}>
                 {label && <p className="sabm-table-label">{label}</p>}
                 <ResultRow
-                  rank={index + 1}
-                  delay={Math.min(index * 40, 320)}
                   title={s.title}
                   titleHref={`/scholarships/${generateSlug(s.title)}/`}
                   subtitle={s.audience}
@@ -654,7 +647,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                   amount={s.amount}
                   actions={<>
                     <button
-                      onClick={(e) => handleToggleSave(s.id, e.currentTarget)}
+                      onClick={() => handleToggleSave(s.id)}
                       aria-label={`${savedIds.has(s.id) ? 'Remove from saved' : 'Save'}: ${s.title}`}
                       aria-pressed={savedIds.has(s.id)}
                       className={`sabl-save${savedIds.has(s.id) ? ' on' : ''}`}
@@ -694,11 +687,9 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             <p className="sabm-table-label">
               {showScholarships ? 'Programs for your grade and field' : 'Matched to your grade and field'}
             </p>
-            {programResults.map((p, index) => (
+            {programResults.map(p => (
               <ResultRow
                 key={p.id}
-                rank={index + 1}
-                delay={Math.min(index * 40, 320)}
                 title={p.name}
                 titleHref={`/programs/${generateSlug(p.name)}/`}
                 subtitle={p.provider}
@@ -721,7 +712,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                 }
                 actions={<>
                   <button
-                    onClick={(e) => handleToggleSaveProgram(p.id, e.currentTarget)}
+                    onClick={() => handleToggleSaveProgram(p.id)}
                     aria-label={`${savedProgramIds.has(p.id) ? 'Remove from saved' : 'Save'}: ${p.name}`}
                     aria-pressed={savedProgramIds.has(p.id)}
                     className={`sabl-save${savedProgramIds.has(p.id) ? ' on' : ''}`}
@@ -729,15 +720,14 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
                     <span className="sabm-save-ico" dangerouslySetInnerHTML={{ __html: BOOKMARK }} />
                     <span className="sabl-save-label">{savedProgramIds.has(p.id) ? 'Saved' : 'Save'}</span>
                   </button>
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    referrerPolicy="no-referrer"
-                    className="sabl-apply"
-                    onClick={() => sendEvent('apply_click', 'program', p.id)}
-                    aria-label={`Apply for ${p.name} on the provider's site (opens in a new tab)`}
-                  >Apply<span className="sabl-ext" aria-hidden="true">↗</span></a>
+                  {(() => {
+                    const act = rowAction(canApplyNow(programStatusOf(p, today)), p.url, `/programs/${generateSlug(p.name)}/`, p.name)
+                    return act.external
+                      ? <a href={act.href} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" className="sabl-apply"
+                          onClick={() => sendEvent('apply_click', 'program', p.id)} aria-label={act.aria}
+                        >{act.label}<span className="sabl-ext" aria-hidden="true">↗</span></a>
+                      : <a href={act.href} className="sabl-apply" aria-label={act.aria}>{act.label}<span className="sabl-ext" aria-hidden="true">→</span></a>
+                  })()}
                 </>}
               />
             ))}
@@ -755,8 +745,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         {!hasAnyResults && (
           <div className="sabl-empty" style={{ marginTop: 32 }}>
             <div className="sabl-empty-title">No matches found for your profile.</div>
-            <div className="sabl-empty-sub">Try leaving optional fields blank. Average and institution answers narrow results significantly.</div>
-            <button onClick={reset} className="sabl-empty-btn">Try again</button>
+            <div className="sabl-empty-sub">Change your answers above or browse the directory.</div>
           </div>
         )}
 
@@ -766,22 +755,10 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
 
   // ── Question step ──────────────────────────────────────────────────────────
 
-  const current = QUESTIONS[step]
-  // The town list and a long school list both get the filter. "Other
-  // Alberta" and "Another school" always stay, so a place or school that is
-  // not listed still has a tile.
-  const q = placeFilter.trim().toLowerCase()
-  const filterable = !!current && (current.key === 'city' || (current.key === SCHOOL_QUESTION_KEY && current.opts.length > 8))
-  const shownOpts = current && filterable && q
-    ? current.opts.filter(o => o.label.toLowerCase().includes(q) || (o.hint ?? '').toLowerCase().includes(q) || o.value === 'Other Alberta' || (current.key === SCHOOL_QUESTION_KEY && o.value === ''))
-    : current?.opts ?? []
-  // A typed town that no named city (or its hint) covers: "Other Alberta"
-  // says it includes that town instead of standing alone without a word.
-  const unlistedTown = !!current && current.key === 'city' && q.length >= 3 && !shownOpts.some(o => o.value !== 'Other Alberta')
   if (!current) return null
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className="sabm-question-panel">
       {/* Segmented progress */}
       <div className="sabm-progress-wrap">
         {/* One segment per question the label counts: while the city is
@@ -796,7 +773,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           aria-valuenow={step + 1}
           aria-valuetext={`Question ${step + 1} of ${totalLabel}`}
         >
-          {Array.from({ length: Math.max(QUESTIONS.length, answers.city ? 0 : ceiling) }, (_, i) => (
+          {Array.from({ length: Math.max(QUESTIONS.length, answers.city || selectedSearchType === 'programs' ? 0 : ceiling) }, (_, i) => (
             <div key={i} className={`sabm-seg${i >= QUESTIONS.length ? ' maybe' : i < step ? ' done' : i === step ? ' current' : ''}`} />
           ))}
         </div>
@@ -805,11 +782,7 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
         </div>
       </div>
 
-      {/* Question + tiles; exit animates out, next step animates in directionally */}
-      <div
-        key={`${animKey}-${step}`}
-        className={pendingTile !== null ? 'quiz-step-out' : enterDir === 'back' ? 'quiz-step-in-back' : 'quiz-step-in'}
-      >
+      <div key={current.key}>
         <h2 ref={questionHeadingRef} tabIndex={-1} className="sabm-question">
           {current.q}
         </h2>
@@ -818,10 +791,10 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
           <input
             type="search"
             className="sabm-find"
-            placeholder={current.key === 'city' ? 'Type your town' : 'Type your school'}
-            aria-label={current.key === 'city' ? 'Filter the list of towns' : 'Filter the list of schools'}
+            placeholder={current.key === 'city' ? 'Type your town' : current.key === 'institution' ? 'Type a university or college' : 'Type your school'}
+            aria-label={current.key === 'city' ? 'Filter the list of towns' : current.key === 'institution' ? 'Filter the list of institutions' : 'Filter the list of schools'}
             value={placeFilter}
-            onInput={e => setPlaceFilter((e.currentTarget as HTMLInputElement).value)}
+            onInput={e => { setPlaceFilter(e.currentTarget.value); setOptionPage(0) }}
             onKeyDown={e => {
               if (e.key !== 'Enter') return
               // The first real match, not the "Another school" or "Other
@@ -832,32 +805,39 @@ export default function EligibilityQuiz({ scholarships, programs }: Props) {
             }}
           />
         )}
-        <div className={`sabm-opts${current.opts.length > 8 ? ' is-many' : ''}`}>
+        <div className="sabm-opts">
           {shownOpts.map((opt, i) => {
-            // A lone last tile spans the row in the two-column grid only; the
-            // compact grid has three columns on desktop and would stretch it.
-            const spanFull = shownOpts.length <= 8 && shownOpts.length % 2 !== 0 && i === shownOpts.length - 1;
+            const spanFull = !batch.hasMore && shownOpts.length % 2 !== 0 && i === shownOpts.length - 1;
             return (
               <div key={opt.value + i} style={spanFull ? { gridColumn: '1 / -1', height: '100%' } : { height: '100%' }}>
                 <MatchTile
                   label={opt.label}
                   hint={opt.value === 'Other Alberta' && unlistedTown ? `Includes ${placeFilter.trim()}` : opt.hint}
-                  // Capped: 13 study-location tiles at 50ms each were still
-                  // fading in 1.1s after the question (critique 2026-09-28).
-                  delay={Math.min(i * 30, 150)}
-                  state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : 'idle'}
-                  animateIn={enterDir === 'fwd'}
+                  state={pendingTile === i ? 'selected' : pendingTile !== null ? 'dim' : previousAnswer === opt.value ? 'selected' : 'idle'}
+                  disabled={pendingTile !== null}
                   onClick={() => answer(current.key, opt.value, i)}
                 />
               </div>
             );
           })}
+          {batch.hasMore && (
+            <MatchTile label="Other" hint={current.key === 'city' ? 'More cities' : 'More options'} more
+              state={pendingTile !== null ? 'dim' : 'idle'} disabled={pendingTile !== null}
+              onClick={() => showOptionPage(batch.page + 1)} />
+          )}
         </div>
+        {filteredOpts.length > 4 && (
+          <div className="sabm-options-nav">
+            {batch.page > 0 && <button type="button" className="sabm-prev" disabled={pendingTile !== null}
+              onClick={() => showOptionPage(batch.page - 1)}>Previous options</button>}
+            <p className="sabm-options-count" role="status">Options {batch.start + 1}–{batch.start + shownOpts.length} of {filteredOpts.length}</p>
+          </div>
+        )}
       </div>
 
       {/* Back button */}
       {step > 0 && (
-        <button onClick={back} className="sabm-prev">← Previous</button>
+        <button onClick={back} disabled={pendingTile !== null} className="sabm-prev">← Previous</button>
       )}
     </div>
   )

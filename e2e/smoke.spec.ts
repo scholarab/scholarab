@@ -23,7 +23,7 @@ test('programs page - list hydrates and shows count', async ({ page }) => {
 
 test('match quiz reaches results', async ({ page }) => {
   await page.goto('/match/');
-    // Wait for React client:load hydration
+    // Wait for the matching payload and live answer controls.
     await expect(page.locator('text=/Question 1 of up to \\d+/')).toBeVisible({ timeout: 15_000 });
 
     // The length is not fixed. Answering the city appends a board question, and
@@ -42,8 +42,9 @@ test('match quiz reaches results', async ({ page }) => {
       // main, and its label is whitespace, so the Previous filter kept it. On
       // mobile that opened the nav sheet instead of answering; the quiz never
       // advanced and this test failed on every run.
-      const tiles = page.locator('.sabm-opt');
+      const tiles = page.locator('.sabm-opt[data-quiz-answer]');
       await expect(tiles.first()).toBeVisible({ timeout: 10_000 });
+      expect(await page.locator('.sabm-opt').count()).toBeLessThanOrEqual(4);
       await tiles.first().click();
 
       if (step === total) break;
@@ -54,7 +55,8 @@ test('match quiz reaches results', async ({ page }) => {
         .toBeVisible({ timeout: 10_000 });
     }
 
-    await expect(page.locator('text=/worth a look/')).toBeVisible({ timeout: 10_000 });
+    await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches', { timeout: 10_000 });
+    await expect(page.locator('.sabm-results-count')).toContainText(/\d/);
 });
 
 test('saved page - hydrates and shows item count', async ({ page }) => {

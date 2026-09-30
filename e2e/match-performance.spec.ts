@@ -45,7 +45,7 @@ test('production match startup budget and ten-run median at 4x CPU', async ({ br
         cdp.on('Network.loadingFinished', e => { const script = scripts.get(e.requestId); if (script) script.gzip = e.encodedDataLength - script.headers; });
         await page.addInitScript(() => {
           const observer = new MutationObserver(() => {
-            const tile = document.querySelector<HTMLButtonElement>('.sabm-opt');
+            const tile = document.querySelector<HTMLButtonElement>('.sabm-opt[data-quiz-answer]');
             if (!tile) return;
             observer.disconnect();
             // Probe the installed handler at first render, then require its

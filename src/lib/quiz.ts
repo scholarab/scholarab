@@ -17,7 +17,7 @@ export const QUIZ_STORAGE_KEY = 'scholarab_quiz_answers_v4'
  *  their matches is worse than one extra minute of tapping. */
 export const QUIZ_TTL_MS = 60 * 60 * 1000
 
-export interface StoredQuiz { step: number; answers: Record<string, string>; savedAt?: number }
+export interface StoredQuiz { version?: number; step: number; answers: Record<string, string>; savedAt?: number }
 
 export interface QuizOption {
   label: string
@@ -27,9 +27,25 @@ export interface QuizOption {
 }
 export interface QuizQuestion { key: string; q: string; opts: QuizOption[] }
 
+/** Three answers plus Other while more remain; at most four on the last page.
+ * Other is navigation, so it never becomes a matcher value or a quiz step. */
+export function quizOptionBatch(opts: QuizOption[], requestedPage = 0) {
+  const lastPage = Math.max(0, Math.ceil((opts.length - 4) / 3));
+  const page = Math.min(lastPage, Number.isFinite(requestedPage) ? Math.max(0, Math.floor(requestedPage)) : 0);
+  const start = page * 3;
+  const hasMore = opts.length - start > 4;
+  return { options: opts.slice(start, start + (hasMore ? 3 : 4)), page, start, hasMore };
+}
+
+/** Reopening a question shows the page containing its existing answer. */
+export function quizOptionPage(opts: QuizOption[], value: string | undefined): number {
+  const index = value === undefined ? -1 : opts.findIndex(o => o.value === value);
+  return quizOptionBatch(opts, Math.floor(Math.max(0, index) / 3)).page;
+}
+
 /**
  * Hints only where they tell the student something: what an option covers
- * ("And County of Newell", "Science, tech, math"). The reassurance lines
+ * ("Science, tech, math"). The reassurance lines
  * ("Prime prep time", "Totally fine", "Grades aren't everything") were filler
  * and are gone (critique 2026-09-23). No emoji either: 🔬 once carried
  * "Programs" and "STEM & Engineering" at once.
@@ -44,7 +60,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     opts: [
       { label: 'Scholarships', value: 'scholarships', hint: 'Awards, including bursaries for financial need' },
       { label: 'Programs', value: 'programs', hint: 'Summer, trades, contests' },
-      { label: 'Both', value: 'both', hint: 'Scholarships and programs' },
+      { label: 'Both', value: 'both' },
     ],
   },
   {
@@ -60,46 +76,48 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     key: 'city',
     q: 'Where are you based?',
-    // "Other Alberta" first, then the six biggest cities, then alphabetical
-    // (critique 2026-09-23: 24 tiles in no order meant reading all of them;
-    // 2026-09-27: a rural student scrolled past all 24 to reach their tile).
-    // The quiz also offers a type-to-filter box above this list.
+    // Descending 2021 census populations, using named places rather than
+    // metro areas. Sherwood Park excludes rural Strathcona County;
+    // Fort McMurray excludes the rest of Wood Buffalo; Lloydminster is AB.
+    // Sources and boundary notes: docs/simplification.md, 2026-09-30 quiz.
+    // Search always includes the real Other Alberta answer. The separate
+    // fourth tile labelled Other only opens another batch of choices.
     opts: [
-      { label: 'Other Alberta', value: 'Other Alberta', hint: 'Any other town or county' },
-      { label: 'Calgary', value: 'Calgary', hint: 'And the foothills' },
-      { label: 'Edmonton', value: 'Edmonton', hint: 'And the capital region' },
-      { label: 'Red Deer', value: 'Red Deer', hint: 'And central Alberta' },
-      { label: 'Lethbridge', value: 'Lethbridge', hint: 'And the southwest' },
-      { label: 'St. Albert', value: 'St. Albert', hint: 'And Sturgeon County' },
+      { label: 'Calgary', value: 'Calgary' },
+      { label: 'Edmonton', value: 'Edmonton' },
+      { label: 'Red Deer', value: 'Red Deer' },
+      { label: 'Lethbridge', value: 'Lethbridge' },
+      { label: 'Airdrie', value: 'Airdrie' },
+      { label: 'Sherwood Park', value: 'Sherwood Park' },
+      { label: 'St. Albert', value: 'St. Albert' },
+      { label: 'Fort McMurray', value: 'Fort McMurray' },
+      { label: 'Grande Prairie', value: 'Grande Prairie' },
       { label: 'Medicine Hat', value: 'Medicine Hat' },
-      { label: 'Airdrie', value: 'Airdrie', hint: 'And Rocky View' },
-      { label: 'Beaumont', value: 'Beaumont', hint: 'South of Edmonton' },
-      { label: 'Brooks', value: 'Brooks', hint: 'And the County of Newell' },
-      { label: 'Camrose', value: 'Camrose', hint: 'And Camrose County' },
-      { label: 'Chestermere', value: 'Chestermere', hint: 'East of Calgary' },
-      { label: 'Cochrane', value: 'Cochrane', hint: 'And Rocky View County' },
-      { label: 'Cold Lake', value: 'Cold Lake', hint: 'And the Lakeland' },
-      { label: 'Fort McMurray', value: 'Fort McMurray', hint: 'And Wood Buffalo' },
-      { label: 'Fort Saskatchewan', value: 'Fort Saskatchewan', hint: 'And Elk Island' },
-      { label: 'Grande Prairie', value: 'Grande Prairie', hint: 'And the Peace Region' },
-      { label: 'Lacombe', value: 'Lacombe', hint: 'And Lacombe County' },
-      { label: 'Leduc', value: 'Leduc', hint: 'And Leduc County' },
-      { label: 'Lloydminster', value: 'Lloydminster', hint: 'The Alberta side' },
-      { label: 'Okotoks', value: 'Okotoks', hint: 'And the foothills' },
-      { label: 'Sherwood Park', value: 'Sherwood Park', hint: 'And Strathcona County' },
-      { label: 'Spruce Grove', value: 'Spruce Grove', hint: 'And Stony Plain' },
-      { label: 'Wetaskiwin', value: 'Wetaskiwin', hint: 'And Wetaskiwin County' },
+      { label: 'Spruce Grove', value: 'Spruce Grove' },
+      { label: 'Leduc', value: 'Leduc' },
+      { label: 'Cochrane', value: 'Cochrane' },
+      { label: 'Okotoks', value: 'Okotoks' },
+      { label: 'Fort Saskatchewan', value: 'Fort Saskatchewan' },
+      { label: 'Chestermere', value: 'Chestermere' },
+      { label: 'Beaumont', value: 'Beaumont' },
+      { label: 'Lloydminster', value: 'Lloydminster' },
+      { label: 'Camrose', value: 'Camrose' },
+      { label: 'Cold Lake', value: 'Cold Lake' },
+      { label: 'Brooks', value: 'Brooks' },
+      { label: 'Lacombe', value: 'Lacombe' },
+      { label: 'Wetaskiwin', value: 'Wetaskiwin' },
+      { label: 'Other Alberta', value: 'Other Alberta', hint: 'Another town or county' },
     ],
   },
   {
     key: 'field',
-    q: "What's your academic focus?",
+    q: 'What are you interested in?',
     opts: [
       { label: 'STEM & Engineering', value: 'STEM', hint: 'Science, tech, math' },
-      { label: 'Health & Medicine', value: 'health', hint: 'Pre-med, nursing, kinesiology' },
+      { label: 'Health & Medicine', value: 'health', hint: 'Medicine, nursing, kinesiology' },
       { label: 'Business & Commerce', value: 'business', hint: 'Finance, management' },
       { label: 'Arts & Humanities', value: 'arts', hint: 'Fine arts, social science' },
-      { label: 'Trades', value: 'trades', hint: 'RAP and apprenticeships' },
+      { label: 'Trades', value: 'trades', hint: 'Apprenticeships and skilled trades' },
       { label: 'Still figuring it out', value: '' },
     ],
   },
@@ -137,6 +155,9 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
 ]
 
+/** Programs use grade and field only; the other questions cannot change them. */
+export const QUIZ_PROGRAM_QUESTIONS = QUIZ_QUESTIONS.filter(q => ['searchType', 'grade', 'field'].includes(q.key));
+
 /** The key the school question stores under, and the matcher reads. */
 /** The top of each average band, keyed by the option value (a band's
  *  middle). An award whose minimum falls inside the band stays in the
@@ -167,7 +188,7 @@ export function schoolQuestion(schools: string[]): QuizQuestion {
       // Always present, and first: a student at a school with no awards of its
       // own must be able to pass without claiming one that isn't theirs, and
       // at the end of 64 tiles it sat 3,000px down a phone (critique 2026-09-27).
-      { label: 'Another school', value: '', hint: 'Skip this question' },
+      { label: 'Another school', value: '' },
       // No hint on these: the same "Has school-only awards" under each of up
       // to 67 tiles said nothing that told one from another (critique
       // 2026-09-23). Being on this list is what it meant.
@@ -255,12 +276,11 @@ export function boardQuestion(boards: string[]): QuizQuestion {
       ...boards.map(code => ({
         label: SCHOOL_BOARD_NAMES[code] ?? code,
         value: code,
-        hint: 'Has board-only awards',
       })),
       // Always last, and always present. A student at an independent, charter,
       // francophone or home-education school belongs to none of these, and
       // must be able to pass without claiming a board that is not theirs.
-      { label: 'None of these', value: '', hint: 'Skip this filter' },
+      { label: 'None of these', value: '' },
     ],
   };
 }
@@ -301,15 +321,12 @@ export function schoolsForCity(
 }
 
 // ── How the quiz describes itself ─────────────────────────────────────────────
-// The same six taps were sold as "under 30 seconds" on /match, "2 minutes" to
-// counsellors, and "two minutes" in four guides; three numbers for one act,
-// and the length was hard-coded next to a question list that can change. These
-// are the only place any surface may get that copy from.
-//
-// 30 seconds is the honest one: six questions, one tap each, results on the
-// same page. The two-minute figure was really "quiz plus read the results".
+// Shared descriptions follow the three-question program and six-to-eight
+// question scholarship paths.
 
 export const QUIZ_QUESTION_COUNT = QUIZ_QUESTIONS.length;
+export const QUIZ_MIN_QUESTION_COUNT = QUIZ_PROGRAM_QUESTIONS.length;
+export const QUIZ_MIN_QUESTION_WORD = 'Three';
 
 /**
  * The most questions any city can get, for the step label before the city is
@@ -335,9 +352,8 @@ export const QUIZ_QUESTION_WORD = 'Six';
 
 /**
  * The board and school questions are asked only where they can change the
- * answer, so the quiz is six questions for most students and up to eight for
- * some. Prose that quotes a single number is wrong for one group or the
- * other; both numbers come from here.
+ * answer. Scholarship searches use six to eight questions; programs use
+ * three. Keep public descriptions tied to these shared counts.
  */
 export const QUIZ_OPTIONAL_QUESTION_COUNT = 2;
 export const QUIZ_MAX_QUESTION_COUNT = QUIZ_QUESTION_COUNT + QUIZ_OPTIONAL_QUESTION_COUNT;
@@ -355,10 +371,8 @@ export const QUIZ_MAX_QUESTION_WORD = 'eight';
  */
 export const RESULT_LIMIT = 10;
 
-// "30 seconds" was the claim for six questions; with the two optional ones
-// the quiz runs to eight taps, so the honest figure is about a minute
-// (critique 2026-09-23).
+// Existing shared estimate, not a measured completion-time guarantee.
 export const QUIZ_DURATION = 'about a minute';
 
 /** One sentence, for anywhere that needs the whole claim at once. */
-export const QUIZ_PROMISE = `${QUIZ_QUESTION_WORD} to ${QUIZ_MAX_QUESTION_WORD} questions, ${QUIZ_DURATION}. No account, no email.`;
+export const QUIZ_PROMISE = `${QUIZ_MIN_QUESTION_WORD} to ${QUIZ_MAX_QUESTION_WORD} questions, ${QUIZ_DURATION}. No account, no email.`;

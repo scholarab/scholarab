@@ -60,7 +60,7 @@ No ads, no account, no paywall, no email required to browse.
 
 - Directories for scholarships and research programs, with facet hubs by city,
   scope, topic, field and format; detail pages per listing; a match quiz at
-  /match (six to eight questions, depending on the answers); saved listings;
+  /match (three questions for programs, six to eight for scholarships); saved listings;
   deadline reminders by email; guides;
   an admin area.
 - Status vocabulary is product truth. `src/lib/status.ts` owns the states and

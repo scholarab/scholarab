@@ -1171,3 +1171,59 @@ Removed assumption: a future winter offset in an otherwise valid midnight-bounda
 The single hosted rerun passed on Node 22.23.2, confirming why runner selection changed the outcome. The repaired 55-test utility suite and full 1,105-test CI pass locally on 22.23.3. The first attempt to run browser tests through `npx -c` prevented its nested `npx wrangler` server command from starting; selecting the same downloaded Node binary through PATH removes that launcher conflict without changing repository configuration.
 
 The final browser run under Node 22.23.3 passes 116 tests with 16 existing skips. The follow-up changes only this evidence log and the existing unit-test dates; the published About page and production calendar logic remain unchanged.
+
+## Match quiz: four choices and fewer questions, 2026-09-30
+
+Outcome: students can answer one manageable question at a time, find their city or school without scanning a wall of cards, and reach useful results with the fewest relevant answers. The user explicitly expanded the legacy quiz scope and requested at most four options, largest-population cities first, and Other as the fourth city control to reveal another batch. Impeccable source reviewers, a complete published quiz walkthrough, and built desktop/phone inspections informed this change.
+
+| Removal candidate | Retained outcome and result |
+| --- | --- |
+| All city, field, institution and school options displayed together | Replaced with one shared batching helper: three answers plus Other while more remain, then at most four answers. Other only navigates; it never writes an answer, advances progress or emits quiz events. Previous options is separate from Previous question. Search covers the full city/school/institution pool and retains its real fallback answer. Back, reload and answer editing reopen the selected answer's batch. All six base-question answer-value sets match the isolated baseline exactly. |
+| City, average, institution, board and school questions on program-only searches | Removed from that path because matchPrograms uses only grade and field. Programs now take three questions instead of six to eight. Scholarships and Both retain the relevant six-to-eight-question path. Versioned session records migrate old program progress without losing relevant answers. Changing the search type walks forward through the newly relevant questions. |
+| Broad city catchment hints, repetitive board hints and misleading school/board skip instructions | Removed. Exact city/board/school matching semantics remain, including the distinction between an unknown answer and explicit None of these/Another school. Typed rural towns retain local matching. Changing city or board still clears dependent answers. The field question now asks about interests in plain language. |
+| Long results headline, completed progress bar, repeated tier totals and decorative row ranks | Removed. Your matches leads with actual shown/total counts, with per-row checks, fit labels where useful, dates, reasons, amounts, saves and provider/detail links retained. The later group now says Upcoming or undated because an unknown date is not proof that an award opens later. |
+| Slide/stagger animation state, tile arrows and save confetti | Removed from the quiz and its placeholder/CSS. The 260ms selected-answer confirmation and duplicate-click guard remain intentionally, with timer cancellation on unmount. Keyboard heading focus and scroll positioning remain. No new animation dependency or automatic process replaces them. |
+| Verbose explanation and duplicate empty-state reset button | Reduced the rendered disclosure from 389 to 89 whitespace-delimited words, including its heading. It keeps matching scope, session privacy/expiry, fit versus winning odds, provider verification and both directory links. Empty results direct students to the existing editable answers or directory; Retake remains available. |
+| Unconditional program Apply action | Replaced with the existing shared status/action helper. Undated or closed programs use Details, while open applications link to the provider. Catalogue data and matcher rules are unchanged. |
+
+Population ordering uses the same 2021 census year throughout, rather than mixing recent municipal estimates with older urban-area counts. Sources: [Statistics Canada municipal census subdivisions](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810000201), [Strathcona County's 2021 urban/rural census breakdown](https://www.strathcona.ca/council-county/facts-stats-and-forecasts/census/past-census-results/), and [Statistics Canada population centres](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810001101). Sherwood Park uses its urban population, Fort McMurray its population centre rather than all Wood Buffalo, and Lloydminster the Alberta portion. These are named-place populations, not metro-area populations. Other Alberta remains the real final answer and is immediately available in filtered searches.
+
+| Order | Place | 2021 population |
+| --- | --- | ---: |
+| 1 | Calgary | 1,306,784 |
+| 2 | Edmonton | 1,010,899 |
+| 3 | Red Deer | 100,844 |
+| 4 | Lethbridge | 98,406 |
+| 5 | Airdrie | 74,100 |
+| 6 | Sherwood Park | 72,017 |
+| 7 | St. Albert | 68,232 |
+| 8 | Fort McMurray | 68,002 |
+| 9 | Grande Prairie | 64,141 |
+| 10 | Medicine Hat | 63,271 |
+| 11 | Spruce Grove | 37,645 |
+| 12 | Leduc | 34,094 |
+| 13 | Cochrane | 32,199 |
+| 14 | Okotoks | 30,405 |
+| 15 | Fort Saskatchewan | 27,088 |
+| 16 | Chestermere | 22,163 |
+| 17 | Beaumont | 20,888 |
+| 18 | Lloydminster, Alberta | 19,739 |
+| 19 | Camrose | 18,772 |
+| 20 | Cold Lake | 15,661 |
+| 21 | Brooks | 14,924 |
+| 22 | Lacombe | 13,396 |
+| 23 | Wetaskiwin | 12,594 |
+
+Measured work avoided: at 1440x900, the city grid changes from 24 displayed answers in 718px of height to three answers plus Other in 183px. The first scholarship result starts at y=524.45 instead of y=592.39 for the same Both/Grade 12/Calgary/STEM/90%+/University of Calgary/CBE/Another school profile. The baseline's first immediate measurement was still inside its entrance animation; the comparison uses its settled position. These are local browser layout measurements against the published baseline, not hosted latency, conversion or completion-time improvements. Smaller places require more paging if students do not use search; the complete search pool avoids that extra navigation. No percentage speed claim is inferred from fewer words or source bytes.
+
+The source baseline is isolated in ignored `.cache/match-before-2026-09-30`. Independent tests cover every option in each encountered question, helper lengths 0 through 100, full-pool search, typed towns, explicit fallback semantics, city/board invalidation, keyboard paging, saved selections, both result types, legacy/v2 progress, storage failure, TTL, metadata-only events, loader errors/retry and cancelled unmounts. The answer schema and published JSON values remain unchanged apart from a session-record version used for migration. No user answers are sent over the network. Consent, subscription retention and publication reconciliation are untouched.
+
+Repair evidence: the first focused UI run exposed seven assertions tied to intentionally removed copy or the duplicate reset button; one remaining fallback wording assertion was then corrected. Matching and navigation behavior passed. The initial browser-test helper incorrectly assumed every fallback should be sorted last; it was corrected to the authoritative question order before the first full run. The first full browser run passed 136 tests with 16 expected skips. Native inspection then found a long waiting-date badge overflowing a 320px screen and a low-contrast search placeholder. One repair batch allows tags to wrap, lets the row's text track shrink, and sets the placeholder to #626862. It also aligns the short explanation with the quiz and clarifies its expiry wording. Confirmation finds no row or page overflow; search retains the existing visible 2px focus ring. The new regression initially overconstrained an inner wrapper that intentionally contains gutter-wide scrolling answer chips; document/body width and date bounds already passed. Removing that wrapper-only assertion keeps the meaningful page-overflow and wrapping checks.
+
+The local preview was briefly requested while CI rebuilt its output. After the server was restarted, the old browser error tab still rejected reload/navigation; a fresh tab opened the healthy 200 response. This was an inspection recovery, not a production code repair. No automatic retry loop was added.
+
+Seven removal groups, zero add-backs. None failed a retained behavior, so no restoration was manufactured to meet the requested 10% target. Intentional brand type, palette, per-row eligibility checks and answer-confirmation feedback remain. The Impeccable detector reported no findings; no ignores or rule suppressions were added.
+
+Final shared CI passes 1,129 unit tests, the production build, bundle-secret check and type checks, with zero errors and the ten existing Astro hints. The prior two quiz hook-dependency lint warnings are resolved by the primitive dependencies used for the dynamic question list. Final browser and hosted verification are recorded below.
+
+Final full browser run passes **138 tests with 16 expected skips**, including both 320px long-date regressions. All 24 city answer values and every answer in each encountered quiz question remain reachable with at most four tiles. `git diff --check` passes. No catalogue or last-modified JSON changed during these builds. Production deployment and hosted CI status are reported with the delivered result; the measurements above remain explicitly local.
