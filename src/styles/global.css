@@ -534,7 +534,6 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
   box-shadow: inset 0 -2px 0 transparent;
 }
 .sabl-chip:hover { color: var(--text-primary); box-shadow: inset 0 -2px 0 rgba(20, 25, 21, 0.2); }
-.sabl-chip.on { color: var(--text-primary); box-shadow: inset 0 -2px 0 var(--text-primary); }
 
 /* City chips are links to that city's hub, so they need the padding and
    baseline an inline anchor does not get on its own, and no underline. */
@@ -725,8 +724,7 @@ html.js .sabl-rail .sabl-scope-select { border-radius: 6px; min-height: 44px; fo
     flex-direction: column; align-items: stretch; gap: 8px;
   }
   .sabl-railed .sabl-rail .sabl-row-label { width: auto; padding-top: 0; }
-  /* The rail reads as an index: one choice per line, its count flush right,
-     and a green mark beside the one in force. */
+  /* The no-script location links read as an index, with counts flush right. */
   .sabl-railed .sabl-rail .sabl-chips {
     flex-direction: column; align-items: stretch; flex-wrap: nowrap; overflow-x: visible; gap: 0;
   }
@@ -735,11 +733,6 @@ html.js .sabl-rail .sabl-scope-select { border-radius: 6px; min-height: 44px; fo
     width: 100%; padding: 6px 0 6px 14px; text-align: left; font-weight: 500; box-shadow: none;
   }
   .sabl-railed .sabl-rail .sabl-chip:hover { box-shadow: none; }
-  .sabl-railed .sabl-rail .sabl-chip.on { font-weight: 700; }
-  .sabl-railed .sabl-rail .sabl-chip.on::before {
-    content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px;
-    border-radius: 2px; background: var(--green);
-  }
   .sabl-railed .sabl-rail .sabl-chip-count { font-size: 13px; }
   /* /scholarships' WHERE YOU LIVE picker, fitted to the column. */
   html.js .sabl-railed .sabl-rail .sabl-scope-select { min-width: 0; width: 100%; }
