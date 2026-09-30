@@ -4,7 +4,9 @@ import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import SabFonts from '../components/sab/SabFonts.astro';
 import { loadScholarships } from '../lib/data-loader';
-import { SCHOLARSHIP_FACETS, facetItems } from '../lib/facets';
+import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems } from '../lib/facets';
+import { enrichScholarships } from '../lib/enrich';
+import { scopeSearchMap } from '../lib/scope-search';
 
 // A search box and the biggest hubs, so a dead link still lands somewhere
 // useful (critique 2026-09-23: two buttons and a slogan were a dead end).
@@ -13,6 +15,8 @@ const hubs = SCHOLARSHIP_FACETS
   .map(f => ({ label: f.label, href: `/scholarships/${f.slug}/`, count: facetItems(f, scholarships).length }))
   .sort((a, b) => b.count - a.count)
   .slice(0, 6);
+const enriched = enrichScholarships(scholarships);
+const scopeMap = scopeSearchMap(SCHOLARSHIP_FACETS.filter(f => facetItems(f, enriched).length >= MIN_FACET_ITEMS));
 ---
 
 <Layout
@@ -33,7 +37,7 @@ const hubs = SCHOLARSHIP_FACETS
     <div class="sabp-body" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
       <h1 class="sab404-h1">This page doesn't exist.</h1>
       <p class="sab404-copy">The link may be old, or the address was mistyped. Search the directory, or start from one of the biggest lists.</p>
-      <form action="/scholarships/" method="get" class="sab404-search" role="search">
+      <form action="/scholarships/" method="get" class="sab404-search" role="search" data-scope-search data-scope-hubs={JSON.stringify(scopeMap)}>
         <label for="sab404-q" class="sr-only">Search scholarships</label>
         <input id="sab404-q" name="q" type="search" placeholder="Search, e.g. nursing or Red Deer" class="sab404-input" />
         <button type="submit" class="sab-btn sab404-btn-accent">Search</button>
@@ -47,6 +51,11 @@ const hubs = SCHOLARSHIP_FACETS
 
   <SabFooter slot="footer" />
 </Layout>
+
+<script>
+  import { wireScopeSearch } from '../lib/scope-search';
+  document.querySelectorAll<HTMLFormElement>('form[data-scope-search]').forEach(wireScopeSearch);
+</script>
 
 <style is:global>
   body:has(#sab-404) { background: var(--bg-page); }

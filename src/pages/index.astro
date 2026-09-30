@@ -13,6 +13,8 @@ import { isAfterHighSchool } from '../lib/list-core';
 import { SCHOLARSHIP_FACETS, PROGRAM_FORMATS, MENU_SCOPES, MIN_FACET_ITEMS, facetForCategory, facetItems } from '../lib/facets';
 import { PHOTO_CREDITS, needsCredit } from '../lib/photo-credits';
 import { GLOSSARY } from '../lib/glossary';
+import { enrichScholarships } from '../lib/enrich';
+import { scopeSearchMap } from '../lib/scope-search';
 
 const scholarships = await loadScholarships();
 const programs = await loadPrograms();
@@ -142,6 +144,9 @@ const FORMAT_KICKERS: Record<string, string> = {
   clubs: 'Start any week of the year',
   conferences: 'A few days, some funded down to the flight',
 };
+// Only scopes with a hub page (the floor in scholarships/[facet].astro).
+const enrichedScholarships = enrichScholarships(scholarships);
+const scopeMap = scopeSearchMap(SCHOLARSHIP_FACETS.filter(f => facetItems(f, enrichedScholarships).length >= MIN_FACET_ITEMS));
 const listedPrograms = programs.filter(p => programIsListed(p, today));
 const formatCards: PhotoCard[] = PROGRAM_FORMATS
   .filter(f => f.backdrop)
@@ -255,7 +260,7 @@ const carousels = [
             </p>
             {/* The home page had no search (critique 2026-09-24); the directory
                 reads ?q= the same way the 404 page's search uses it. */}
-            <form action="/scholarships/" method="get" class="sab-hero-search" role="search">
+            <form action="/scholarships/" method="get" class="sab-hero-search" role="search" data-scope-search data-scope-hubs={JSON.stringify(scopeMap)}>
               <label for="sab-hero-q" class="sr-only">Search scholarships</label>
               <svg class="sab-hero-search-icon" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/><path d="M10.6 10.6L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               <input id="sab-hero-q" name="q" type="search" enterkeyhint="search" placeholder="Search, e.g. nursing" class="sab-hero-search-input" />
@@ -425,6 +430,7 @@ const carousels = [
 </Layout>
 
 <script>
+  import { wireScopeSearch } from '../lib/scope-search';
   import { scholarshipWhen } from '../lib/list-core';
   import type { ScholarshipWithMeta } from '../lib/list-core';
   import { todayDate as albertaToday } from '../lib/calendar';
@@ -466,6 +472,7 @@ const carousels = [
   }
 
   updateClosingSoon();
+  document.querySelectorAll<HTMLFormElement>('form[data-scope-search]').forEach(wireScopeSearch);
   document.addEventListener('astro:page-load', updateClosingSoon);
 
   // ── Scope carousel ──
