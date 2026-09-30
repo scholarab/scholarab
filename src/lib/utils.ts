@@ -1,4 +1,4 @@
-import { todayDate } from './calendar'
+import { albertaDate, todayDate } from './calendar'
 // Accents are folded to their base letter, not dropped. Without the NFD pass
 // the character class below deletes them outright, which is how the Belcourt
 // listing shipped at /scholarships/belcourt-brosseau-mtis-awards/ and why the
@@ -36,6 +36,25 @@ export function formatVerifiedMonth(str: string | null | undefined): string | nu
   if (!m) return null;
   const month = VERIFIED_MONTHS[Number(m[2]) - 1];
   return month ? `${month} ${m[1]}` : null;
+}
+
+/** Months after which a directory row says when it was last checked. */
+export const STALE_CHECK_MONTHS = 6;
+
+/**
+ * Whether a listing's last check is old enough to put on its directory row.
+ * Every listing is checked; the row only needs to say so once the check might
+ * predate what the provider says now (reader feedback, 2026-09-29: the line on
+ * every row was noise beside the deadline). Calendar months in Alberta, so a
+ * check in September turns stale on March 1. Unparseable is never stale:
+ * formatVerifiedMonth would have nothing to print.
+ */
+export function isCheckStale(str: string | null | undefined, today: string = albertaDate()): boolean {
+  const v = /^(\d{4})-(\d{2})/.exec(str ?? '');
+  const t = /^(\d{4})-(\d{2})/.exec(today);
+  if (!v || !t || !formatVerifiedMonth(str)) return false;
+  const months = (Number(t[1]) * 12 + Number(t[2])) - (Number(v[1]) * 12 + Number(v[2]));
+  return months >= STALE_CHECK_MONTHS;
 }
 
 // First dollar figure in the string: "$2,500" → 2500, "up to $8,000" → 8000,

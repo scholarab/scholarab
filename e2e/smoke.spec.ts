@@ -430,3 +430,60 @@ test('on a phone, no field makes Safari zoom and every picker draws its own box'
   expect(seen.join(' ')).toContain('sabd-remind-input');
   expect(problems).toEqual([]);
 });
+
+// Save and Apply share one centre line on every row, and Apply's underline
+// sits under its word. The line was the link's bottom border, which lifted the
+// word 2px above "Save" and, on a phone that stretched the link to 44px, hung
+// 15px below it (reader feedback, 2026-09-29). The shaded rows alternate over
+// the rows a search leaves on screen, not over every row in the document.
+test('rows: Save and Apply on one line, underline under the word, stripes alternate', async ({ page }) => {
+  for (const [path, term] of [['/scholarships/', 'engineering'], ['/programs/', 'math']] as const) {
+    await page.goto(path);
+    const measure = () => page.locator('[data-dir-card]:visible').evaluateAll(cards => cards.slice(0, 10).map(c => {
+      const firstText = (el: Element) => {
+        const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, { acceptNode: n => (n.textContent ?? '').trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP });
+        const r = document.createRange(); r.selectNodeContents(walk.nextNode()!); return r.getBoundingClientRect();
+      };
+      const save = firstText(c.querySelector('.sabl-save-label')!);
+      const apply = c.querySelector('.sabl-apply')!;
+      const word = firstText(apply);
+      const bar = getComputedStyle(apply, '::before');
+      const barTop = apply.getBoundingClientRect().bottom - parseFloat(bar.bottom) - parseFloat(bar.height);
+      return {
+        off: Math.abs((save.top + save.height / 2) - (word.top + word.height / 2)),
+        gap: barTop - word.bottom,
+        bg: getComputedStyle(c).backgroundColor,
+      };
+    }));
+    for (const rows of [await measure(), await (async () => {
+      await page.locator('[data-dir-search]').fill(term);
+      await page.waitForTimeout(400);
+      return measure();
+    })()]) {
+      expect(rows.length).toBeGreaterThan(3);
+      for (const r of rows) {
+        expect(r.off).toBeLessThanOrEqual(1);
+        expect(r.gap).toBeGreaterThanOrEqual(0);
+        expect(r.gap).toBeLessThanOrEqual(6);
+      }
+      const shaded = rows.map(r => r.bg !== 'rgba(0, 0, 0, 0)');
+      expect(shaded).toEqual(rows.map((_, i) => i % 2 === 1));
+    }
+  }
+});
+
+// "How this works" under the reminder form opens where it is. It was a link to
+// /privacy/, which took a reader off the listing halfway through signing up.
+test('How this works opens beside the reminder form, on the same page', async ({ page }) => {
+  await page.goto('/deadlines/');
+  const listing = await page.locator('details.sabcal-month .sabcal-row[data-open] .sabcal-name a').first().getAttribute('href');
+  await page.goto(listing!);
+  const how = page.locator('.sabd-remind-how');
+  await expect(how).not.toHaveAttribute('open', '');
+  await how.locator('summary').click();
+  await expect(how).toHaveAttribute('open', '');
+  await expect(how.locator('a[href="/privacy/"]')).toBeVisible();
+  expect(new URL(page.url()).pathname).toBe(listing);
+  const tall = await how.locator('summary').evaluate(s => s.getBoundingClientRect().height);
+  expect(tall).toBeGreaterThanOrEqual(24);
+});

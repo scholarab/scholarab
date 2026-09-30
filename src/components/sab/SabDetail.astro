@@ -318,8 +318,23 @@ const chip =
         <div id={`sabd-remind-msg-${itemType}-${itemId}`} data-sabd-alert-msg class="sabd-remind-msg" role="status" aria-live="polite" hidden></div>
         <div class="sabd-remind-fine">
           We store your address only to send these reminders, and delete it the
-          moment you unsubscribe. <a href="/privacy/">How this works</a>.
+          moment you unsubscribe.
         </div>
+        {/* Opens in place. It was a link to /privacy/, which took a reader
+            off the listing mid sign-up, onto a long page with no way back to
+            the form but the browser's (reader feedback, 2026-09-29). These
+            are the privacy page's own facts about reminders; the page is one
+            link further for anyone who wants all of it. */}
+        <details class="sabd-remind-how">
+          <summary>How this works<svg class="sabd-remind-caret" viewBox="0 0 12 8" width="10" height="7" fill="none" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <p>
+            Nothing else is sent until you press the button in the confirmation
+            email. If you never do, the address is deleted within 30 days.
+            Otherwise it goes 60 days after the deadline or the moment you
+            unsubscribe, whichever comes first. We never sell or trade it.
+            <a href="/privacy/">The full privacy policy</a>.
+          </p>
+        </details>
       </div>
     )}
   </div>
@@ -342,9 +357,21 @@ const chip =
   /* On the #141915 block, #6B716C measured 3.56:1. Paper at 0.55 is 5.48:1
      and still sits below the sub above it, which is paper at 0.65. */
   .sabd-remind-fine { margin-top: 10px; font-size: 12.5px; line-height: 1.55; color: rgba(20, 25, 21, 0.72); }
-  /* This was the same colour as the sentence around it with no underline, so
-     the one route from the reminder form to the privacy page was invisible. */
-  .sabd-remind-fine a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px; }
+  /* The disclosure under it. The summary keeps the colour and underline the
+     old "How this works" link had (in the sentence's own colour it was
+     invisible), so it still reads as the thing to press, and is 24px tall
+     (the link was 14). */
+  .sabd-remind-how { margin-top: 4px; font-size: 12.5px; line-height: 1.55; color: rgba(20, 25, 21, 0.72); }
+  .sabd-remind-how summary {
+    display: inline-flex; align-items: center; gap: 6px; min-height: 24px; cursor: pointer;
+    list-style: none; color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px;
+  }
+  .sabd-remind-how summary::-webkit-details-marker { display: none; }
+  .sabd-remind-caret { flex: none; transition: transform 0.18s ease; }
+  .sabd-remind-how[open] .sabd-remind-caret { transform: rotate(180deg); }
+  .sabd-remind-how p { margin: 4px 0 0; }
+  .sabd-remind-how a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .sabd-remind-caret { transition: none; } }
   .sabd-guide-label { display: block; font-size: 13.5px; font-weight: 600; color: rgba(20, 25, 21, 0.72); }
   .sabd-guide-title {
     display: block; margin-top: 6px; font-family: var(--font-display);

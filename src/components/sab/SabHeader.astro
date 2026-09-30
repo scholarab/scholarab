@@ -33,7 +33,7 @@ const { currentPath } = Astro.props;
 let scholarshipCount: number | null = null;
 let programCount: number | null = null;
 // The real listing the How it works walkthrough draws as its example row.
-let tourExample: { title: string; amount: string; deadline: string | null; checked: string | null } | null = null;
+let tourExample: { title: string; amount: string; deadline: string | null } | null = null;
 
 // The Scholarships and Programs dropdowns (Tesla-style, Ilia 2026-09-13,
 // Programs added 2026-09-15): tiles for the hubs, a text list beside them.
@@ -65,7 +65,7 @@ try {
   const listedPrograms = programs.filter(p => programIsListed(p, today));
   scholarshipCount = scholarships.length;
   const loran = scholarships.find(s => s.title === 'Loran Scholarship');
-  if (loran) tourExample = { title: loran.title, amount: loran.amount ?? '', deadline: loran.deadline ?? null, checked: loran.lastVerified ?? null };
+  if (loran) tourExample = { title: loran.title, amount: loran.amount ?? '', deadline: loran.deadline ?? null };
   programCount = listedPrograms.length;
   // Biggest scope first. Array sort is stable, so a tie keeps the source order.
   scopeTiles = scopeFacets

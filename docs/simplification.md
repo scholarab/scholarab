@@ -987,3 +987,36 @@ Residual: someone with database access could re-queue an old signed request (sam
 Repair attempts against this problem: none before this change.
 
 Add-back fraction: not applicable; nothing was removed.
+
+## Directory rows: the deadline and the money first, 2026-09-29
+
+The outcome: a student scanning /programs or /scholarships finds each listing's deadline and money first, can tell one listing from the next, and presses Save or Apply on a row that lines up. A reader on Reddit, shown the site at Ilia's request, said the Programs page still looked AI-made and busy, with no clear first thing to read; that Save and Apply were misaligned; that the "Checked" line mattered only once a listing went stale; that listings needed contrast between them and the filters a surface of their own; and that "How this works" under the reminder form left the page with no way back. Every row element was semibold at 13 to 14px, the deadline included, so nothing led.
+
+| Candidate | Outcome |
+| --- | --- |
+| "Checked Sep 2026" on every directory row (full ink and a green tick since the 2026-09-28 critique) | Removed. Every one of the 1,802 rows said August or September 2026, beside the deadline. Added back only where it says something: `isCheckStale` prints "Last checked Mon YYYY", quietly, on a row whose check is six calendar months old in Alberta. Today that is none. The detail page keeps its sentence. |
+| The dots before a program's "Free", "Has a fee" and "Pays you" | Removed. The words are set in the amount's face and column instead, so a program row has a money figure like a scholarship row. |
+| The hairline between list rows | Removed. Alternate rows are shaded instead, counted over the rows a search or filter leaves on screen; under a section heading the hairline had been a second rule. Tile and columns views keep their hairlines, and a browser without `:nth-child(of S)` keeps them too. |
+| The phone-only 44px `min-height` on Save and Apply | Removed. The hit areas have been 44px at every width since 2026-09-27 through `::after`, and the stretched box was what hung Apply's underline 15px under the word. |
+| Apply's underline as its bottom border | Replaced by a bar under the box, so the box is the word and Save and Apply share a centre line. |
+| The link from the reminder fine print to /privacy/ | Replaced by a disclosure that opens in place with the privacy page's own reminder facts (nothing sent until confirmed, deletion at 30 days unconfirmed or 60 after the deadline, never sold). The full policy is one link inside it. |
+| A modal for "How this works" (the reader's suggestion) | Not used. A native disclosure needs no script and keeps the form in view. |
+| The deadline as a figure on phone rows too | Not used. It adds a line to every phone row, which is the height this change takes out. |
+| A stipend figure for paid programs | Not used. The field is free text ("~$15/hr", "Fully funded (travel, accommodation, meals)"), so a figure would be invented. |
+| Reorganising the listings (the reader's last idea) | Not attempted in this pass. |
+
+Before is production (8fc405c); after is a local build of this change served by `wrangler dev`. Chromium, 1440x900 and iPhone 13 (390x664), first 24 rows:
+- Save and Apply label centres: 2px apart on every row before, 0 after, both pages and both widths.
+- Apply's underline under its word: 14.5px on a phone before, 5px after (5px on desktop, unchanged).
+- Tap areas: still at least 44px (phone Apply 63 to 44, Save 54 to 44; the drawn Save stays 34px).
+- "Checked" lines rendered: 261 to 0 on /programs, 1,541 to 0 on /scholarships.
+- Average row height on a phone: /programs 218.1 to 202.4px (-7%), /scholarships 199.9 to 178.4px (-11%). Page height 7,899 to 7,523px and 8,008 to 7,492px. Listings wholly on the first phone screen of /scholarships: 0 to 1.
+- Desktop rows grew slightly with the date figure: 176.3 to 177.1px on /programs, 98.6 to 100.4px on /scholarships.
+- The filter rail is 24px wider (252px, 220px under 1280) so its chips keep the 228px and 196px they were measured in.
+- `npm run ci` passes (1,071 tests) and Playwright passes (111, 17 skipped). The two new e2e tests passed 60 of 60 over 15 repeats here and failed 4 of 4 against production, so they fail on the defect.
+
+Not yet checked on production.
+
+Repair attempts against these problems: the "Checked" line was made louder on 2026-09-28, which this reverses; none before for the alignment or the row separation.
+
+Add-back fraction: 2 of 6 removals (the "Checked" line, on stale rows only; the privacy link, inside the disclosure).

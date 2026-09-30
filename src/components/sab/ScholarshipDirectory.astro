@@ -6,7 +6,7 @@ import { STATUS_WORDS, canApplyNow, openLaterNote } from '../../lib/status.ts';
 import SabStatusHelp from './SabStatusHelp.astro';
 import { showingLine, DEFAULT_SCHOLARSHIP_STATE, DIRECTORY_PAGE_SIZE, SCHOLARSHIP_GROUP_LABELS, SCHOLARSHIP_SHUT_GROUPS, directoryCountLine, openNowCount, filterSortScholarships, getScholarshipStatus, amountCell, groupRuns, isAfterHighSchool, rowAction, scholarshipGroupKey, scholarshipWhen } from '../../lib/list-core.ts';
 import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list-core.ts';
-import { generateSlug, formatVerifiedMonth } from '../../lib/utils.ts';
+import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
@@ -363,7 +363,7 @@ const laterNote = openLaterNote(initial.filter(s => !isAfterHighSchool(s)).map(s
           <div class={amount.cls}>{amount.text}</div>
           <div class="sabl-row-when">
             <span class={when.cls} data-when><span data-when-main>{when.main}</span><span class="sabl-when-sub" data-when-sub hidden={!when.sub}>{when.sub}</span></span>
-            {formatVerifiedMonth(s.lastVerified) && <span class="sabl-checked">Checked {formatVerifiedMonth(s.lastVerified)}</span>}
+            {isCheckStale(s.lastVerified) && <span class="sabl-checked">Last checked {formatVerifiedMonth(s.lastVerified)}</span>}
           </div>
           <div class="sabl-card-actions">
               <button

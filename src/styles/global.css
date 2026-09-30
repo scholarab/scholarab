@@ -140,6 +140,7 @@
   --green-shadow: #0E8C64;  /* the lighter green: fills and done quiz segments, never text */
   --paper:        #EEF1EC;  /* light text on ink */
   --rust:         #A0491A;  /* deadlines; above 5.5:1 on white */
+  --bg-panel:     #F3F5F2;  /* the filter panel: controls, not listings */
 
   /* The three public faces. Every public rule names one of these rather than
      a family, so a type change is one line here. */
@@ -559,6 +560,12 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 .sabl-chip-link:hover .sabl-chip-count { color: rgba(20, 25, 21, 0.7); }
 
 .sabl-filters { display: flex; flex-direction: column; gap: 12px; padding: 20px 0 0; }
+/* The filters sit on a panel of their own, so they read as controls that
+   fold away rather than as the top of the list (reader feedback,
+   2026-09-29). Every width: the rail beside the list, the rows above it in
+   a narrower window, and the phone's fold. */
+.sabl-rail { background-color: var(--bg-panel); border-radius: 12px; padding: 16px 12px 18px; }
+.sabl-rail .sabl-filters { padding-top: 0; }
 /* Phone-only control; the media block below turns it on. */
 .sabl-filters-done { display: none; }
 /* WHERE YOU LIVE is one picker at every width, not 27 chips: on a desktop the
@@ -671,8 +678,10 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
      heading down to the last card, fills the rest. .sabl-split dissolves so
      its two children become items of this grid rather than a grid of their
      own, which is what lets the head share the right column with them. */
+  /* 252 is the 228px the chips were measured in plus the panel's 12px each
+     side (2026-09-29); the list is rows now, which spare the width. */
   .sabl-railed {
-    display: grid; grid-template-columns: 228px minmax(0, 1fr);
+    display: grid; grid-template-columns: 252px minmax(0, 1fr);
     gap: 0 36px; align-items: start;
   }
   .sabl-railed .sabl-head { grid-column: 2; grid-row: 1; }
@@ -701,8 +710,9 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
        rides with the content and hides it at the end (critique 2026-09-24:
        the rail cut "Status" in half with nothing saying it scrolled). */
     background:
-      linear-gradient(to top, var(--bg-page) 40%, rgba(255,255,255,0)) center bottom / 100% 36px no-repeat local,
-      linear-gradient(to top, rgba(20,25,21,0.12), rgba(20,25,21,0)) center bottom / 100% 18px no-repeat scroll;
+      linear-gradient(to top, var(--bg-panel) 40%, transparent) center bottom / 100% 36px no-repeat local,
+      linear-gradient(to top, rgba(20,25,21,0.12), rgba(20,25,21,0)) center bottom / 100% 18px no-repeat scroll
+      var(--bg-panel);
   }
   .sabl-railed .sabl-rail .sabl-filters { padding-top: 0; gap: 18px; }
   /* Stacked, not a row: the label sits over its chips and the chips wrap down
@@ -752,7 +762,7 @@ html.js .sabl-scope-select:hover { border-color: var(--text-primary); }
      three cards beside it pay for all of it. Under 1280 the rail gives some
      back: the chips still fit a 196px column, and the cards gain 24px each. */
   @media (max-width: 1279px) {
-    .sabl-railed { grid-template-columns: 196px minmax(0, 1fr); gap: 0 24px; }
+    .sabl-railed { grid-template-columns: 220px minmax(0, 1fr); gap: 0 24px; }
   }
 }
 
@@ -882,6 +892,9 @@ html:not(.js) .sabl-views { display: none; }
      row gave no sign there were more chips past the edge, and the fold has
      the height to spare. */
   html.js .sabl-rail .sabl-chips, html.js .sabl-sort-chips { flex-wrap: wrap; overflow-x: visible; }
+  /* Inside the panel the rows keep to its padding rather than bleeding to
+     the screen edge the way a bare scrolling row does. */
+  .sabl-rail .sabl-chips { margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; }
 }
 
 /* The visible count line ("153 OF 153 LISTINGS · 15 OPEN NOW") was deleted
@@ -1004,9 +1017,29 @@ html.js .sabl-group-toggle { display: inline-flex; }
   border-top: 1px solid rgba(20,25,21,0.14);
   border-radius: 0;
   padding: 16px 12px 15px;
+  background-color: var(--row-bg, transparent);
   transition: background-color 0.14s ease;
 }
-.sabl-card:hover { background-color: rgba(20,25,21,0.04); }
+/* Every other row is shaded so a reader can tell where one listing ends
+   and the next begins; a hairline alone let the tall program rows run
+   together (reader feedback, 2026-09-29). The shading replaces the
+   hairlines rather than joining them: under a section heading that was two
+   rules stacked, and "one line" is the rule on these pages (Ilia,
+   2026-09-15). Counted over the rows on screen, so a filter or a search
+   never puts two shaded rows side by side. Directory lists and /saved,
+   whose rows each sit in a wrapper of their own; the tile and columns views
+   keep their hairlines. The stripe sets a variable, not the background, so
+   hover still wins over it. Behind @supports because a browser without
+   `of S` would drop the stripes and still lose the hairlines. */
+@supports selector(:nth-child(1 of .a)) {
+  html:not([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > .sabl-card,
+  .sabl-grid > [data-sv-wrap] > .sabl-card { border-top-color: transparent; border-bottom-color: transparent; }
+  html:not([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > .sabl-card:nth-child(even of .sabl-card:not([hidden], [data-dir-later], [data-dir-shut])),
+  [data-sv-wrap]:nth-child(even) > .sabl-card {
+    --row-bg: rgba(20,25,21,0.04);
+  }
+}
+.sabl-card:hover { background-color: rgba(20,25,21,0.07); }
 /* The 01/02 row numbers (2026-09-22) were removed on 2026-09-23 (Ilia, after
    the critique): section numbers carry no information a sort does not. */
 [data-dir-grid] .sabl-card { position: relative; }
@@ -1086,14 +1119,38 @@ html.js .sabl-group-toggle { display: inline-flex; }
   .sabl-card .sabl-row-when { max-width: 100%; min-width: 0; }
   .sabl-card .sabl-when.is-quiet { flex-direction: column; align-items: flex-end; white-space: normal; text-align: right; max-width: 100%; }
   .sabl-card .sabl-when.is-quiet .sabl-when-sub::before { content: none; }
+  /* The date is one of the two things a reader scans a row for, with the
+     money, and it was 14px beside a 26px amount (reader feedback,
+     2026-09-29). On a list row it is a figure in the amount's face now, the
+     countdown on its own line under it. The waiting states above stay a
+     note, the way "Amount varies" does. Rows only: the tile views and the
+     columns list size their own dates. */
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) {
+    flex-direction: column; align-items: flex-end; gap: 3px;
+  }
+  /* Ink, like the amounts: a column of rust figures read as decoration. The
+     countdown under it carries the urgency, in rust, and the last two weeks
+     keep their dot, moved from beside the date to beside the words. */
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) [data-when-main] {
+    font: 400 24px/1.1 var(--font-display); color: var(--text-primary);
+  }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) .sabl-when-sub {
+    font-size: 13px;
+  }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet)::before,
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when:not(.is-quiet) .sabl-when-sub::before { content: none; }
+  .sabl-card:not(:is([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > *) .sabl-when.is-urgent .sabl-when-sub::before {
+    content: ''; display: inline-block; width: 7px; height: 7px; margin: 0 6px 1px 0;
+    border-radius: 50%; background: var(--rust);
+  }
 }
-/* The month the listing was last checked against its provider, under the
-   date on every row: the check is the reason to trust the row. */
-/* Freshness is the site's case against stale PDFs, and it was the quietest
-   text on the row (critique 2026-09-28): full ink and a green tick, same
-   place, no badge. The tick is decoration; the words carry the meaning. */
-.sabl-checked { font-size: 13px; font-weight: 600; color: #141915; white-space: nowrap; }
-.sabl-checked::before { content: '\2713' / ''; margin-right: 4px; color: var(--green); font-weight: 700; }
+/* "Last checked Mar 2026", under the date, only on a row whose check is old
+   enough to matter (isCheckStale in utils.ts). It was on every row, in full
+   ink with a green tick, and on every row it said August or September 2026,
+   beside the one date a reader came for (reader feedback, 2026-09-29). The
+   detail page still says when each listing was checked. A caveat, so quiet
+   ink and no tick. */
+.sabl-checked { font-size: 12.5px; font-weight: 500; color: rgba(20, 25, 21, 0.62); white-space: nowrap; }
 .sabl-card-actions { display: flex; align-items: center; gap: 12px; }
 .sabl-save {
   font-family: var(--font-body); font-size: 15px; background: none;
@@ -1115,18 +1172,24 @@ html.js .sabl-group-toggle { display: inline-flex; }
    fills it; unsaved leaves it open. */
 .sabl-save svg { fill: none; }
 .sabl-save.on svg { fill: currentColor; }
+/* The underline hangs under the link instead of being its bottom border. As
+   a border it made the box 4px taller than the word, so "Apply" sat 2px
+   above "Save" beside it, and on a phone, where the link was stretched to
+   44px, the line hung 15px under the word (reader feedback, 2026-09-29).
+   Now the box is the text, and the two words share one centre line. */
 .sabl-apply {
   font-size: 14px; font-weight: 700; color: var(--text-primary); text-decoration: none;
-  border-bottom: 2px solid var(--brand); padding-bottom: 2px; white-space: nowrap;
-  display: inline-flex; align-items: center; gap: 5px;
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 5px;
 }
+.sabl-apply::before { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--brand); }
 .sabl-apply:hover { color: var(--green); }
 /* 44px to the pointer on every width without growing the row: the drawn
-   controls stay 34px and 25px, the hit area around them does not
-   (critique 2026-09-27). */
+   controls stay 34px and 21px, the hit area around them does not
+   (critique 2026-09-27; the link was 25px until its underline moved off the
+   box, 2026-09-29). */
 .sabl-save, .sabl-apply { position: relative; }
 .sabl-save::after, .sabl-apply::after { content: ''; position: absolute; inset: -5px -3px; }
-.sabl-apply::after { inset: -10px -4px -9px; }
+.sabl-apply::after { inset: -12px -4px -11px; }
 
 /* ── Views (SabViewSwitch, Ilia 2026-09-23) ──
    The same rows under four layouts, chosen by html[data-view]; absent is the
@@ -1379,6 +1442,13 @@ html:not(.js) .sabl-more { display: none; }
     justify-self: start; margin-top: 4px;
   }
   .sabl-row-when .sabl-when { white-space: normal; flex-wrap: wrap; }
+  /* The rows have no side padding here, so a shaded row would put its text
+     against the shade's edge. They run to the screen edge instead, through
+     the page's 20px gutter, and the text stays where it was. */
+  html:not([data-view='grid'], [data-view='gallery'], [data-view='columns']) [data-dir-grid] > .sabl-card,
+  [data-sv-wrap] > .sabl-card {
+    margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px;
+  }
 }
 
 @media (max-width: 899px) {
@@ -1420,10 +1490,6 @@ html:not(.js) .sabl-more { display: none; }
      grew, but the input is what takes the tap. */
   .sabl-search { min-height: 44px; }
   .sabl-search input { min-height: 44px; }
-  /* The two controls on every card: the save star at 34px and the Details
-     link, which is text with an underline and was 25px tall. */
-  .sabl-save { min-width: 44px; height: 44px; }
-  .sabl-apply { display: inline-flex; align-items: center; min-height: 44px; }
   /* SORT was the one control row that still wrapped, so three chips took two
      lines and sat at a different rhythm from the three scrolling rows directly
      beneath it. Given the same shape, the four rows read as one block. */
@@ -1452,7 +1518,10 @@ html:not(.js) .sabl-more { display: none; }
 }
 
 /* Program-card extras for the "ScholarAB Programs" design */
-.sabl-org { font-size: 13.5px; font-weight: 600; color: rgba(20, 25, 21, 0.72); margin-top: 3px; }
+/* The provider and the facts under it are one weight below the title, so
+   the name, the money and the date lead the row (reader feedback,
+   2026-09-29: a row of semibold lines had no first thing to read). */
+.sabl-org { font-size: 13.5px; font-weight: 500; color: rgba(20, 25, 21, 0.72); margin-top: 3px; }
 /* Plain facts separated by dots. They were grey boxes until 2026-09-22. */
 .sabl-meta-row { display: flex; flex-wrap: wrap; gap: 3px 16px; margin: 8px 0 6px; padding: 0; list-style: none; }
 /* One line each. duration/grades/location are free text, and a listing whose
@@ -1465,7 +1534,7 @@ html:not(.js) .sabl-more { display: none; }
    title was unreadable on a phone (critique 2026-09-24). */
 .sabl-meta {
   position: relative; padding-left: 12px; box-sizing: border-box;
-  font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82); line-height: 1.4;
+  font-size: 13px; font-weight: 500; color: rgba(20, 25, 21, 0.76); line-height: 1.4;
   max-width: 100%; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 /* A dot per item rather than a separator between them, so an item that wraps
@@ -1479,7 +1548,7 @@ html:not(.js) .sabl-more { display: none; }
   .sabl-row-main .sabl-org { display: none; }
   .sabl-meta-row {
     display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
-    font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82); line-height: 1.4;
+    font-size: 13px; font-weight: 500; color: rgba(20, 25, 21, 0.76); line-height: 1.4;
   }
   .sabl-meta { display: inline; padding-left: 0; }
   .sabl-meta::before { content: none; }
@@ -1491,16 +1560,13 @@ html:not(.js) .sabl-more { display: none; }
    nothing to tell them apart until you were gone. */
 .sabl-ext { margin-left: 0.4em; }
 
-.sabl-paid {
-  display: inline-flex; align-items: center; gap: 7px;
-  font-size: 14px; font-weight: 700; color: var(--green); white-space: nowrap;
-}
-.sabl-paid::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
-/* Cost is not money received: ink, not green, and an open dot. */
-.sabl-fee { color: var(--text-primary); }
-.sabl-fee::before { background: transparent; box-shadow: inset 0 0 0 1.5px var(--text-primary); }
-.sabl-free { color: var(--text-primary); }
-.sabl-free::before { background: var(--text-primary); }
+/* A program's money, in the column and the face a scholarship's amount
+   uses, so "Free" or "Pays you" reads as the figure it is. It was a 14px
+   label with a dot, the same size as the facts under the title (reader
+   feedback, 2026-09-29). */
+.sabl-paid { font: 400 22px/1.15 var(--font-display); color: var(--green); white-space: nowrap; }
+/* Cost is not money received: ink, not green. */
+.sabl-fee, .sabl-free { color: var(--text-primary); }
 
 /* Directory-page shell (scholarships + programs design pages) */
 .sabp { background: var(--bg-page); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }

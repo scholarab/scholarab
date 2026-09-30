@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { formatVerifiedMonth, generateSlug, getToday, formatDeadline, parseAmount, showConfetti, showToast, emailProblem, EMAIL_RE, amountSpan } from './utils'
+import { formatVerifiedMonth, isCheckStale, generateSlug, getToday, formatDeadline, parseAmount, showConfetti, showToast, emailProblem, EMAIL_RE, amountSpan } from './utils'
 
 // ── generateSlug ─────────────────────────────────────────────────────────────
 
@@ -308,6 +308,41 @@ describe('formatVerifiedMonth', () => {
     expect(formatVerifiedMonth('sometime in August')).toBeNull();
     expect(formatVerifiedMonth('2026-13')).toBeNull();
     expect(formatVerifiedMonth('2026-00')).toBeNull();
+  });
+});
+
+// A directory row names its check month only once the check is six calendar
+// months old; before that the line was the same on every row (2026-09-29).
+describe('isCheckStale', () => {
+  it('stays off the row for six calendar months, then comes back', () => {
+    expect(isCheckStale('2026-09', '2026-09-29')).toBe(false);
+    expect(isCheckStale('2026-09', '2027-02-28')).toBe(false);
+    expect(isCheckStale('2026-09', '2027-03-01')).toBe(true);
+    expect(isCheckStale('2026-08-15', '2027-02-01')).toBe(true);
+  });
+
+  it('counts across a year end', () => {
+    expect(isCheckStale('2025-12', '2026-05-31')).toBe(false);
+    expect(isCheckStale('2025-12', '2026-06-01')).toBe(true);
+  });
+
+  it('is never stale when there is no month to print', () => {
+    for (const v of [null, undefined, '', 'sometime in August', '2026-13', '2026-00']) {
+      expect(isCheckStale(v, '2030-01-01')).toBe(false);
+    }
+  });
+
+  it('turns over on the Alberta date, not the host clock', () => {
+    vi.useFakeTimers();
+    try {
+      // 06:59 UTC on March 1 is still February 28 in Edmonton (UTC-7).
+      vi.setSystemTime(new Date('2027-03-01T06:59:00Z'));
+      expect(isCheckStale('2026-09')).toBe(false);
+      vi.setSystemTime(new Date('2027-03-01T07:00:00Z'));
+      expect(isCheckStale('2026-09')).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
 

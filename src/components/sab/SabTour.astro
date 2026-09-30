@@ -11,12 +11,11 @@
 // real data at build time: the example row is a real listing, the counts are
 // the directory's.
 import { BOOKMARK } from '../../lib/icons';
-import { formatVerifiedMonth } from '../../lib/utils';
 
 interface Props {
   scholarships: number | null;
   programs: number | null;
-  example: { title: string; amount: string; deadline: string | null; checked: string | null } | null;
+  example: { title: string; amount: string; deadline: string | null } | null;
 }
 const { scholarships, programs, example } = Astro.props;
 
@@ -30,7 +29,6 @@ const row = example && {
   title: example.title,
   amount: example.amount,
   when: shortDate(example.deadline),
-  checked: formatVerifiedMonth(example.checked),
 };
 const findCopy = scholarships !== null && programs !== null
   ? `${fmt(scholarships)} scholarships and ${fmt(programs)} programs for Alberta high school students, in one place.`
@@ -53,7 +51,6 @@ const STEPS = 5;
         <div class="sabt-row-amt">{row?.amount ?? '~$150,000'}</div>
         <div class="sabt-row-when">
           {row?.when && <span class="sabt-rust">{row.when}</span>}
-          {row?.checked && <span class="sabt-quiet">Checked {row.checked}</span>}
         </div>
         <div class="sabt-row-acts"><span class="sabt-save"><Fragment set:html={BOOKMARK} />Save</span><span class="sabt-apply">Apply ↗</span></div>
       </div>
@@ -61,7 +58,7 @@ const STEPS = 5;
     <div class="sabt-body">
       <p class="sabt-count">1 of {STEPS}</p>
       <h2 class="sabt-title" id="sabt-title-1">Find scholarships</h2>
-      <p class="sabt-text">{findCopy} Search by name or keyword, filter by where you live, and see when each listing was last checked against the provider's own page.</p>
+      <p class="sabt-text">{findCopy} Search by name or keyword, filter by where you live, and open any listing to see when it was last checked against the provider's own page.</p>
     </div>
   </section>
 
