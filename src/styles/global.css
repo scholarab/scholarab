@@ -1478,10 +1478,10 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabm-table-label { font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.75); padding: 14px 0 0; margin: 0; }
 /* The second group's label, below the first group's last row */
 .sabm-row + .sabm-table-label { padding-top: 40px; }
-/* Fixed amount + action tracks so every row lines up, including across the
-   scholarship and program tables (each row is its own grid) */
+/* Actions keep their full content width, including Saved and Details.
+   The title track absorbs the remaining space. */
 .sabm-row {
-  display: grid; grid-template-columns: minmax(0, 1fr) 152px 108px; gap: 24px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) 152px max-content; gap: 24px; align-items: center;
   padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
 }
 .sabm-row:hover { background: rgba(47,211,160,0.07); }
@@ -1526,6 +1526,8 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .sabm-row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+.sabm-row-actions > * { flex: none; }
+.sabm-save-ico { display: inline-flex; flex: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .sabm-opt, .sabm-opt:hover, .sabm-opt-selected { transform: none; transition: none; }
