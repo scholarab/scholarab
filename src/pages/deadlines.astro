@@ -538,8 +538,9 @@ const breadcrumbJson = {
   }
   /* Shaded every other row, as on the directories, where the hairlines
      were replaced for the same reason (reader feedback, 2026-09-29).
-     Counted over the rows a Where-you-live filter leaves showing. */
-  .sabcal-row:nth-child(even of :not(.is-elsewhere)) { background: rgba(20,25,21,0.04); }
+     Counted over the rows on screen: a Where-you-live filter and a
+     deadline passing since the build both take rows out. */
+  .sabcal-row:nth-child(even of :not(.is-elsewhere, [hidden])) { background: rgba(20,25,21,0.04); }
   /* A layout-free wrapper above 720px (meta and status stay grid columns);
      phones turn it into one wrapping line. */
   .sabcal-sub { display: contents; }

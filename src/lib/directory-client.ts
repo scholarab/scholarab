@@ -166,8 +166,12 @@ function setFiltersOpen(open: boolean) {
     btn.setAttribute('aria-expanded', String(open));
   }
   // On a phone the panel is a sheet over the page (global.css), so focus
-  // goes into it and comes back to the button that opened it.
-  if (open === was || !matchMedia(NARROW).matches) return;
+  // goes into it and stays there (the rest of the directory is inert while it
+  // is up), then comes back to the button that opened it.
+  if (open === was) return;
+  const narrow = matchMedia(NARROW).matches;
+  for (const el of document.querySelectorAll<HTMLElement>('.sabl-head, .sabl-col')) el.inert = open && narrow;
+  if (!narrow) return;
   const rail = document.querySelector<HTMLElement>('.sabl-rail');
   if (open) rail?.querySelector<HTMLElement>('select, button, a[href]')?.focus({ preventScroll: true });
   else if (!document.activeElement || rail?.contains(document.activeElement)) {
@@ -848,8 +852,19 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     opening = false;
   });
 
+  // The phone sheet keeps the keyboard: Escape closes it, and Tab cycles
+  // through its own controls instead of wandering to the footer behind it.
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && root?.isConnected && document.documentElement.hasAttribute('data-filters')) setFiltersOpen(false);
+    if (!root?.isConnected || !document.documentElement.hasAttribute('data-filters')) return;
+    if (e.key === 'Escape') { setFiltersOpen(false); return; }
+    if (e.key !== 'Tab' || !matchMedia(NARROW).matches) return;
+    const rail = root.querySelector<HTMLElement>('.sabl-rail');
+    const stops = [...(rail?.querySelectorAll<HTMLElement>('select, button, a[href], input') ?? [])].filter(el => el.offsetParent !== null);
+    if (!stops.length) return;
+    const at = stops.indexOf(document.activeElement as HTMLElement);
+    const next = e.shiftKey ? (at <= 0 ? stops.length - 1 : at - 1) : (at === -1 || at === stops.length - 1 ? 0 : at + 1);
+    e.preventDefault();
+    stops[next]!.focus();
   });
 
   // Arrow keys walk the selection while focus is in the list or the pane.
@@ -882,6 +897,8 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
   // Crossing the phone breakpoint turns Columns into the list and back.
   matchMedia(WIDE).addEventListener('change', () => {
     if (!root?.isConnected) return;
+    // The sheet is a phone surface; a window widened past it closes it.
+    if (matchMedia(WIDE).matches) setFiltersOpen(false);
     paintViewButtons();
     render();
   });

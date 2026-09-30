@@ -1052,3 +1052,5 @@ Not yet checked on production.
 Repair attempts against these problems: the phone date was deliberately left small in the row pass above ("adds a line to every phone row"); the date column takes no extra line, which is what made it possible. None before for the reminder promise, the phone head at this size, or print.
 
 Add-back fraction: 1 of 4 removals (the program description, kept in the DOM for the tile views and the preview pane).
+
+Follow-up the same night, from a review of the shipped change: the /saved rows still showed a program's description (the row there is built by `saved-client.ts`, which now marks it the same way); Tab walked out of the phone sheet into the footer and skip link behind it (the sheet now keeps focus, the directory behind it is `inert`, and widening the window past the phone layout closes it); and the /deadlines stripes counted rows hidden after their deadline passed. Checked on production at dac0e04: the reminder block says "Closes tomorrow" 1 day out and "14 and 3 days" 16 days out; the sheet sits at the bottom edge on the Edmonton, Alberta, National and Fort McMurray hubs (the photo-backdrop pages) and on a program hub.

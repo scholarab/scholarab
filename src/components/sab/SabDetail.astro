@@ -86,14 +86,15 @@ const {
 const urgent = status === 'active' && typeof daysLeft === 'number' && daysLeft <= URGENT_DAYS;
 const far = status === 'active' && typeof daysLeft === 'number' && daysLeft > SOON_DAYS;
 
-// Listing prose can carry a provider's own address ("apply to x@y.ca"), so it
-// is bracketed for Cloudflare's obfuscator. See src/lib/email-off.ts.
-// Recomputed in the visitor's browser on load (the page is prerendered).
+// The reminder block's first paint; refreshRemind redoes it in the visitor's
+// browser on load, because the page is prerendered.
 const remindAhead = typeof daysLeft === 'number' ? milestonesAhead(daysLeft) : [];
 const remindLate = canRemind && remindAhead.length === 0;
 const lateWhen = remindLate && deadlineIso ? closesPhrase(daysLeft ?? 0, deadlineIso) : '';
 const lateApply = ctaLabel === 'Apply';
 
+// Listing prose can carry a provider's own address ("apply to x@y.ca"), so it
+// is bracketed for Cloudflare's obfuscator. See src/lib/email-off.ts.
 const aboutHtml = about ? emailOff(about) : '';
 const notesHtml = notes ? emailOff(notes) : '';
 

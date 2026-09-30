@@ -55,7 +55,10 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await openFilters(page);
   const historyLength = await page.evaluate(() => history.length);
   for (const sortBy of ['highest_pay', 'lowest_pay', 'closest_due'] as const) {
+    await openFilters(page);
     await page.locator('[data-fselect="sort"]:visible').selectOption(sortBy);
+    // On a phone the sheet holds the sort and the page behind it is inert.
+    await closeFilters(page);
     for (const searchQuery of [query, '', 'zz-no-matching-student-award']) {
       await page.locator('[data-dir-search]').fill(searchQuery);
       const state = { ...DEFAULT_SCHOLARSHIP_STATE, sortBy, searchQuery };
@@ -83,7 +86,9 @@ test('search preserves results, groups, chips, money, closed awards and history'
   await page.locator('[data-dir-clear]').press('Enter');
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(Math.min(PAGE, items.length));
   expect(await page.evaluate(() => history.length)).toBe(historyLength);
+  await openFilters(page);
   await page.locator(`[data-fkey="category"][data-fval="${unique.category}"]`).press('Enter');
+  await closeFilters(page);
   await page.locator('[data-dir-search]').fill(query);
   await page.locator('[data-dir-card]:visible .sabl-name').press('Enter');
   await expect(page.locator('[data-sabd-position]')).toHaveText('FILTERED · 1 OF 1');
@@ -187,6 +192,8 @@ test('on a phone, filters fold behind one button that counts them', async ({ pag
   // A sheet over the page, holding the sort; focus goes into it, and Escape
   // or the scrim puts it away and hands focus back.
   await expect(page.locator('.sabl-rail [data-fselect="sort"]')).toBeFocused();
+  for (let i = 0; i < 25; i++) await page.keyboard.press('Tab');
+  expect(await page.evaluate(() => !!document.activeElement?.closest('.sabl-rail'))).toBe(true);
   expect(await page.locator('.sabl-rail').evaluate(el => getComputedStyle(el).position)).toBe('fixed');
   await page.keyboard.press('Escape');
   await expect(page.locator('.sabl-rail')).toBeHidden();

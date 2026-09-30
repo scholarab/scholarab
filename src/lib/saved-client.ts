@@ -51,7 +51,7 @@ function savedCard(s: SavedItem): string {
         <h3 class="sabl-name-h"><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
         ${sh
           ? (s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : '')
-          : `${s.provider ? `<div class="sabl-org">${esc(s.provider)}</div>` : ''}${s.description ? `<div class="sabl-blurb">${emailOff(s.description)}</div>` : ''}`}
+          : `${s.provider ? `<div class="sabl-org">${esc(s.provider)}</div>` : ''}${s.description ? `<div class="sabl-blurb" data-row-desc>${emailOff(s.description)}</div>` : ''}`}
       </div>
       ${sh ? (() => { const a = amountCell(s.amount); return `<div class="${a.cls}">${esc(a.text)}</div>`; })() : '<span class="sabl-card-top-left"></span>'}
       <div class="sabl-row-when">
