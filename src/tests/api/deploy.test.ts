@@ -4,6 +4,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
 import { readFileSync } from 'node:fs';
 import { GET, POST } from '../../pages/admin/api/deploy';
+import { verifyPublication } from '../../lib/publication-signature';
 const state = vi.hoisted(() => ({ db: null as any, admin: true }));
 vi.mock('../../lib/db/client', () => ({ db: new Proxy({}, { get: (_, key) => state.db[key] }) }));
 vi.mock('../../lib/adminAuth', () => ({ isAdminRequest: async () => state.admin }));
@@ -12,10 +13,13 @@ beforeAll(async () => {
   pg = new PGlite();
   await pg.exec(readFileSync('drizzle/bootstrap.sql', 'utf8'));
   await pg.exec(readFileSync('drizzle/migrations/0013_catalogue_and_delivery.sql', 'utf8'));
+  await pg.exec(readFileSync('drizzle/migrations/0015_publication_signature.sql', 'utf8'));
   state.db = drizzle(pg);
 }, 30000);
+const KEY = 'test-signing-key-0123456789abcdef';
 beforeEach(async () => {
   state.admin = true;
+  vi.stubEnv('PUBLICATION_SIGNING_KEY', KEY);
   await pg.exec('TRUNCATE catalogue_entries,publication_requests');
 });
 afterAll(async () => pg.close());
@@ -62,4 +66,24 @@ it('rejects a stale review snapshot', async () => {
   const { previewHash } = await response.json();
   await pg.exec(`UPDATE catalogue_entries SET draft='{"id":1,"name":"Later"}',revision=2`);
   expect((await call(POST, 'POST', previewHash)).status).toBe(409);
+});
+
+it('signs the stored request so the publisher can verify it after the jsonb round trip', async () => {
+  await pg.exec(
+    `INSERT INTO catalogue_entries(kind,public_id,draft,draft_base,revision) VALUES ('scholarship',7,'{"url":"https://a.example","title":"T","id":7,"amount":1.50}','{"id":7,"title":"Old"}',2)`
+  );
+  expect((await call(POST)).status).toBe(202);
+  const [row] = (await pg.query<{ id: string; changes: unknown; signature: string }>('SELECT id,changes,signature FROM publication_requests')).rows;
+  expect(await verifyPublication(KEY, row!.id, row!.changes, row!.signature)).toBe(true);
+  // What a leaked DATABASE_URL could do: rewrite the queued changes.
+  await pg.exec(`UPDATE publication_requests SET changes = jsonb_set(changes, '{0,value,url}', '"https://evil.example"')`);
+  const [tampered] = (await pg.query<{ changes: unknown }>('SELECT changes FROM publication_requests')).rows;
+  expect(await verifyPublication(KEY, row!.id, tampered!.changes, row!.signature)).toBe(false);
+});
+
+it('refuses to queue an unsigned request when no signing key is configured', async () => {
+  vi.stubEnv('PUBLICATION_SIGNING_KEY', '');
+  await pg.exec(`INSERT INTO catalogue_entries(kind,public_id,draft) VALUES ('program',3,'{"id":3,"name":"D"}')`);
+  expect((await call(POST)).status).toBe(503);
+  expect((await pg.query('SELECT 1 FROM publication_requests')).rows).toHaveLength(0);
 });

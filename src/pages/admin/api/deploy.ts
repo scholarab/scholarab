@@ -6,6 +6,8 @@ import { publicationRequests, catalogueEntries } from '../../../lib/db/schema';
 import { jsonOk, jsonError } from '../../../lib/api-response';
 import { stableJson, type PublicationChange } from '../../../lib/catalogue';
 import { mailKey } from '../../../lib/mail-delivery';
+import { signPublication } from '../../../lib/publication-signature';
+import { getEnv } from 'astro/env/runtime';
 export const prerender = false;
 async function preview() {
   const rows = await db
@@ -74,12 +76,20 @@ export const POST: APIRoute = async ({ request }) => {
     const current = await preview();
     if (expected !== current.hash)
       return jsonError('Drafts changed. Review the latest changes before publishing.', 409);
+    // Unsigned requests are refused by the publisher, so do not queue one.
+    const signingKey = getEnv('PUBLICATION_SIGNING_KEY') ?? process.env.PUBLICATION_SIGNING_KEY;
+    if (!signingKey)
+      return jsonError('Publishing is not configured (no signing key). Your drafts are safe.', 503);
     const id = crypto.randomUUID();
+    // Signed over the snapshot the editor reviewed. The INSERT below stores
+    // only if the database's own aggregate equals that snapshot, so the
+    // signature always matches the stored changes.
+    const signature = await signPublication(signingKey, id, current.changes);
     // Freeze the exact draft revisions that the editor requested. Later edits
     // stay drafts and are never silently included in this publication.
-    const result = await db.execute(sql`INSERT INTO publication_requests (id,changes)
+    const result = await db.execute(sql`INSERT INTO publication_requests (id,changes,signature)
       SELECT ${id},jsonb_agg(jsonb_build_object('kind',kind,'publicId',public_id,
-        'base',draft_base,'value',CASE WHEN deleted THEN NULL ELSE draft END,'revision',revision) ORDER BY kind,public_id)
+        'base',draft_base,'value',CASE WHEN deleted THEN NULL ELSE draft END,'revision',revision) ORDER BY kind,public_id),${signature}
       FROM catalogue_entries WHERE draft IS NOT NULL OR deleted
       HAVING count(*)>0 AND jsonb_agg(jsonb_build_object('kind',kind,'publicId',public_id,'base',draft_base,'value',CASE WHEN deleted THEN NULL ELSE draft END,'revision',revision) ORDER BY kind,public_id)=${JSON.stringify(current.changes)}::jsonb ON CONFLICT DO NOTHING RETURNING id`);
     if (!result.rows.length)

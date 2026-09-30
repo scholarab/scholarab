@@ -969,3 +969,21 @@ Not yet measured: whether the deployed Worker carried the credentials. That depe
 Repair attempts against this problem: 1 before this change, the `DATABASE_URL=` prefix, which did not work.
 
 Add-back fraction: 0 of 1.
+
+## Signed publication requests, 2026-09-29
+
+The outcome: only an editor using the admin page can change the live catalogue. `publish-drafts.ts` turns any queued row in `publication_requests` into a commit on `main`, which deploys. So write access to the database was enough to publish, for example a phishing link in place of an apply URL, and validation would pass it. The audit that found the inlined `DATABASE_URL` made that path concrete.
+
+| Candidate | Outcome |
+| --- | --- |
+| An HMAC over the request id and its changes, made by the admin API with a key the database never holds, checked by the publisher before git is touched | Added: `src/lib/publication-signature.ts`, column `signature` (0015), one secret in the Worker and GitHub Actions. A rejected request is marked failed so it cannot hold the one-pending slot. |
+| A restricted database role for the Worker instead | Not used (declined 2026-09-29). It narrows what a leak of the Worker's password can do, but the GitHub Actions secret is still the owner role, and either can write this table. |
+| A human approving each publication in GitHub (an environment with required reviewers) | Not used. It adds a manual step to every publication, which the signature makes unnecessary. |
+
+Measured locally: the stored signature verifies after a real Postgres jsonb round trip (PGlite, keys reordered, `1.50` normalised), and rewriting one URL in the stored changes fails it. Without a key the admin route answers 503 and queues nothing.
+
+Residual: someone with database access could re-queue an old signed request (same id and changes) by deleting its row first. `applyPublication` skips a change already live and rejects one whose field has moved on since, so a replay can only re-publish content an editor once approved (for example a field later changed back, or a listing later removed), never new content.
+
+Repair attempts against this problem: none before this change.
+
+Add-back fraction: not applicable; nothing was removed.

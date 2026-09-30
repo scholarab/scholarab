@@ -44,6 +44,10 @@ export default defineConfig({
       // case: rate-limit.ts derives one from SESSION_SECRET, with domain
       // separation, so there is nothing extra to bind.
       RATE_LIMIT_SALT: envField.string({ context: 'server', access: 'secret', optional: true }),
+      // Signs admin publication requests so the publisher can tell them from a
+      // row written by anyone else with database access. Also a GitHub Actions
+      // secret; see src/lib/publication-signature.ts.
+      PUBLICATION_SIGNING_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
   vite: {

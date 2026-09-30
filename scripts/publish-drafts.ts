@@ -6,6 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { neon } from '@neondatabase/serverless';
 import { applyPublication, type PublicationChange, type Document } from '../src/lib/catalogue.ts';
 import { catalogueHash } from '../src/lib/catalogue.ts';
+import { verifyPublication } from '../src/lib/publication-signature.ts';
 import { generateSlug } from '../src/lib/utils.ts';
 import { DEPLOYMENT_ORIGIN } from './live-publication.ts';
 const sql = neon(process.env.DATABASE_URL!);
@@ -18,6 +19,15 @@ if (!pending) {
   process.exit(0);
 }
 const id = String(pending.id);
+// Only the admin API holds this key, so a request anyone else wrote into the
+// table (with a leaked DATABASE_URL, say) fails here, before git is touched.
+// Marked failed rather than left queued, so it cannot block real publications.
+const signingKey = process.env.PUBLICATION_SIGNING_KEY;
+if (!signingKey) throw new Error('PUBLICATION_SIGNING_KEY is not set; refusing to publish');
+if (!(await verifyPublication(signingKey, id, pending.changes, pending.signature))) {
+  await sql`UPDATE publication_requests SET status='failed',message='Rejected: not signed by the admin API. Queue it again from the admin page.',updated_at=now() WHERE id=${id}`;
+  throw new Error(`Publication ${id} is not signed by the admin API; rejected`);
+}
 const paths = {
   scholarship: 'src/data/scholarships.json',
   program: 'src/data/research-programs.json',

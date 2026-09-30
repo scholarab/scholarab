@@ -38,6 +38,7 @@ jobs:
         if: steps.queue.outputs.pending == 'true'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PUBLICATION_SIGNING_KEY: ${{ secrets.PUBLICATION_SIGNING_KEY }}
           TZ: America/Edmonton
         run: |
           git config user.email "action@github.com"

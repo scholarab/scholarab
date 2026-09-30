@@ -128,6 +128,8 @@ export const publicationRequests = pgTable('publication_requests', {
   changes: jsonb('changes').$type<PublicationChange[]>().notNull(),
   message: text('message'),
   commitSha: text('commit_sha'),
+  // See src/lib/publication-signature.ts and 0015_publication_signature.sql.
+  signature: text('signature'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 }, t => [uniqueIndex('publication_one_pending').on(sql`(true)`).where(sql`${t.status} in ('queued','processing','committed')`)])
