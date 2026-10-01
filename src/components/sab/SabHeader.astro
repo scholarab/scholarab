@@ -135,10 +135,12 @@ const MENUS: Record<string, { label: string; tiles: Tile[]; links: MenuLink[] }>
 // Five in the bar. Deadlines, the quiz and the guides live under Explore,
 // whose own link opens the quiz: the one first step every visitor can take.
 // `also` lights Explore on the pages it holds.
-const navItems: { label: string; href: string; count: number | null; also?: string[] }[] = [
+const navItems: { label: string; href: string; count: number | null; also?: string[]; hint?: string }[] = [
   { label: 'Scholarships', href: '/scholarships/', count: scholarshipCount },
   { label: 'Programs', href: '/programs/', count: programCount },
-  { label: 'Explore', href: '/match/', count: null, also: ['/deadlines/', '/guides/', '/combos/'] },
+  // The hint is for the phone sheet, where "Explore" alone did not say the
+  // quiz and the deadline calendar were inside (critique 2026-10-01).
+  { label: 'Explore', href: '/match/', count: null, also: ['/deadlines/', '/guides/', '/combos/'], hint: 'Quiz, deadlines, guides' },
   { label: 'Saved', href: '/saved/', count: null },
   { label: 'About', href: '/about/', count: null },
 ];
@@ -191,6 +193,7 @@ const isActive = (href: string, also: string[] = []) =>
             >
               <span class="sabh-link-label">{n.label}</span>
               {n.count !== null && <span class="sabh-link-count" aria-hidden="true">{n.count.toLocaleString('en-CA')}</span>}
+              {n.hint && <span class="sabh-link-hint" aria-hidden="true">{n.hint}</span>}
               {/* How many listings are on the reader's list, filled from the
                   browser by the script below; the tray count on a menu board. */}
               {n.href === '/saved/' && <span class="sabh-saved-n" data-saved-n hidden></span>}
@@ -482,7 +485,7 @@ const isActive = (href: string, also: string[] = []) =>
   }
   /* Sheet-only furniture: the section label, the per-link counts and the
      footnote are all invisible on desktop. */
-  .sabh-sheet-label, .sabh-link-count, .sabh-sub-back { display: none; }
+  .sabh-sheet-label, .sabh-link-count, .sabh-link-hint, .sabh-sub-back { display: none; }
   /* Clipped to nothing until it has keyboard focus, then a small chevron
      beside its link. Never shown to the pointer, which has hover. */
   .sabh-menu-toggle {
@@ -620,9 +623,10 @@ const isActive = (href: string, also: string[] = []) =>
       background: #2FD3A0; margin-left: 10px; vertical-align: middle;
     }
     .sabh-link-count {
-      display: inline-block; font-family: var(--font-label); font-size: 11px;
-      color: rgba(238, 241, 236, 0.62);
+      display: inline-block; font-family: var(--font-label); font-size: 14px;
+      color: rgba(238, 241, 236, 0.72);
     }
+    .sabh-link-hint { display: inline-block; font-size: 14px; font-weight: 500; letter-spacing: 0; color: rgba(238, 241, 236, 0.72); }
   }
 </style>
 

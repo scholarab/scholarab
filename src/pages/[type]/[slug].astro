@@ -321,7 +321,8 @@ if (kind === 'scholarship') {
     openDateIso: s.concluded || (s.active === false && !s.openDate) ? null : s.openDate,
     inactive: s.active === false && !s.concluded,
     estimated: s.deadlineEstimated === true,
-    dueLong: s.rolling ? 'No fixed deadline' : formatDate(s.deadline),
+    // The list says "date not posted"; "TBA" here described one award two ways (critique 2026-10-01).
+    dueLong: s.rolling ? 'No fixed deadline' : s.deadline ? formatDate(s.deadline) : 'Not posted yet',
     opensLabel: s.openDate ? formatDate(s.openDate) : null,
     // Empty on purpose. Every one of the five facts this used to list was
     // already on the page within one screen of itself: REGION is the subline,
@@ -374,7 +375,7 @@ if (kind === 'scholarship') {
   // program descriptions mid-word. Dated cycles lead with the closing date.
   const programDescription = programMeta(p, p.active === false ? 'tba' : status, formatDate);
   const canonical = `https://www.scholarab.ca/programs/${slug}/`;
-  const dueLong = status === 'ongoing' ? 'No deadline, join any time' : formatDate(p.deadline);
+  const dueLong = status === 'ongoing' ? 'No deadline, join any time' : hasDate ? formatDate(p.deadline) : 'Not posted yet';
 
   d = {
     currentPath: '/programs/',

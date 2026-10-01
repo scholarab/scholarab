@@ -77,7 +77,6 @@ const breadcrumbJson = {
       <Fragment set:html={ICON_SPRITE} />
 
       <SabComboBoard
-        kicker={`Now serving ${place}`}
         h1={page.h1}
         intro={page.intro}
         menuLabel="Combos on this page"
@@ -154,13 +153,13 @@ const breadcrumbJson = {
               <div class="sabc-sticker" aria-hidden="true">
                 <strong>{core.length}</strong>
                 <span>awards</span>
-                {addOns.length > 0 && <em>+{addOns.length} {addOns.length === 1 ? 'side' : 'sides'}</em>}
+                {addOns.length > 0 && <em>+{addOns.length} to check</em>}
               </div>
             </div>
             {list(items(core), CORE_SHOWN)}
             {addOns.length > 0 && (
               <div class="sabc-sides">
-                <p class="sabc-sides-h"><strong>Add a side</strong> only if the line under it fits you</p>
+                <p class="sabc-sides-h"><strong>Also check</strong> these, if the line under one fits you</p>
                 {list(items(addOns), SIDES_SHOWN)}
               </div>
             )}

@@ -1474,3 +1474,28 @@ Outcome: a Grade 12 student reaches their matches in one fewer tap. Every listin
 | Progress saved by the six-question version | Migrated, not discarded: version 3 drops the stored grade and moves the step back one, so a student mid-quiz resumes on the same question. |
 
 Add-back fraction: 0/3. Scholarship quiz 6 to 8 questions becomes 5 to 7; programs stay at 3. Local only: `npm run ci` passed (1,162).
+
+## Critique fixes, October 1, 2026
+
+Outcome: the three first-impression moments (quiz results, a city hub reached from Google, a listing on a phone) show the student what they can act on, in plain words. From the 2026-10-01 critique (`.impeccable/critique/2026-10-01T03-40-17Z__src-pages.md`).
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Quiz results grouped by date first | Changed: up to five strong, unrestricted matches lead as "Your strongest matches", then the date groups. The Save button saves that group, which now sits directly under it. Due-soon possible matches keep their group and their Check: reasons. |
+| "Good match" for keyword-only hits (critique claim) | No change: the cited award (Bonnyville Agriculture Society) is tagged business in the data because it funds agriculture business programs. |
+| City hubs read as the whole list | Added one line under the toolbar naming the province-wide and national counts, linked. Placed under the toolbar so every hub's toolbar stays at one height (smoke.spec). "Many of", not "all of": the province-wide hub also holds single-town awards. |
+| Phone standfirst clamped to two lines | Removed: it cut Calgary's off before "$100,000". |
+| Directory Apply/Save under 44px (critique claim) | No change: both already carry 44px hit areas through `::after` (global.css); the review measured the drawn box. |
+| Detail CTA labels touching the button edge | Fixed: 18px side padding on the CTA, official-site and copy buttons. |
+| Mustard kickers ("Now serving", "On the menu", "Pick your city") | Removed from directories, hubs and combo boards. The heading already names the place; the burst, ink board and stickers stay. |
+| "Sides" wording on combo pages | Reworded: "+N to check" and "Also check these, if the line under one fits you". Empty states say "No scholarships match that." / "No programs match that." |
+| "Deadline TBA" on detail pages | Now "Not posted yet", matching the list's "date not posted". |
+| Quiz option hover sticking on touch | Hover tint gated by `(hover: hover)`. |
+| Count sticker squeezed beside a wrapping heading | `flex: none`. |
+| Guide cards on /scholarships/ and /programs/ | Now zebra rows like every other list; /scholarships/ leads with the Grade 12 timeline instead of the Grade 11 one. |
+| Duplicate "Who can apply" on phone detail pages | The box below the top line keeps only its "Worth knowing" note on phones. |
+| Deadlines "This week" chip beside "SEP" | Renamed "Next 7 days" and set apart by a rule; the section reads "Due in the next 7 days". |
+| Phone menu "Explore" said nothing about its contents | Hint "Quiz, deadlines, guides" in the sheet (aria-hidden, so the link's name stays Explore); menu counts 11px at 62% to 14px at 72%. |
+| "Another school" first in the school question (critique claim) | No change: first on purpose since 2026-09-27, so a student without a listed school can pass without paging 64 tiles. |
+
+Add-back fraction: 0/15 (three claims checked and left unchanged, not counted as removals). Measured on the static build: Calgary hub first row 492px of 812 on a phone (the line and the unclamped standfirst cost it; the kicker's removal paid some back), /scholarships/ first row 358px (was 378px with the kicker), no horizontal overflow at 375 or 1280. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (151, 19 skipped), `impeccable detect` clean on every changed file.

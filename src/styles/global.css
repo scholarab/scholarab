@@ -1346,7 +1346,7 @@ html:not(.js) .sabl-more { display: none; }
   display: flex; flex-direction: column; gap: 12px;
   font-size: 15px; color: #4B5563;
 }
-.sabl-hubfoot p { margin: 0; }
+.sabl-hubfoot p { margin: 0; max-width: 75ch; }
 /* Row gap carries most of the vertical rhythm so each link can pad itself
    out to a 24px tap target (WCAG 2.2 2.5.8); these are a nav cluster, not
    links inside a sentence, so the inline exception does not apply. */
@@ -1401,7 +1401,9 @@ html:not(.js) .sabl-more { display: none; }
 /* Hover tints; selected turns the border green and doubles it with an inset
    ring, so the chosen option reads as chosen without moving (no layout
    shift, and pointing at an option never looks like having picked it). */
-.sabm-opt:hover { background: #F5F6F4; }
+/* Pointers only: on a touch screen the tint stuck to whatever option
+   landed under the finger on the next question (critique 2026-10-01). */
+@media (hover: hover) { .sabm-opt:hover { background: #F5F6F4; } }
 .sabm-opt-selected { border-color: var(--green); background: #EEF6F1; box-shadow: inset 0 0 0 1.5px var(--green); }
 .sabm-opt-dim { opacity: 0.45; }
 .sabm-opt-text { display: flex; flex-direction: column; gap: 5px; }
@@ -1741,10 +1743,9 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    and the OPENS LATER run says the rest. */
 @media (max-width: 640px) {
   .sabl-title-row > div > .sabl-h1 { margin-bottom: 10px; }
-  .sabl-title-row .sabl-desc {
-    margin: 0; font-size: 16px; line-height: 1.5;
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
-  }
+  /* No line clamp since 2026-10-01: two lines cut Calgary's off before the
+     "$100,000" that sells the page (critique). */
+  .sabl-title-row .sabl-desc { margin: 0; font-size: 16px; line-height: 1.5; }
   .sabl-toolbar { margin-top: 14px; }
   .sabl-group-h:first-child > .sabl-group { margin-top: 4px; }
 }
@@ -1779,21 +1780,19 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    Ilia asked for the combo page's fast-food feel on /scholarships and
    /programs; the hubs share the same header, so they carry it too and every
    directory still reads the same way. What changes is the frame, not the
-   list: the heading becomes a menu board (ink panel, mustard kicker, a price
+   list: the heading becomes a menu board (ink panel, a price
    burst that makes a promise rather than a count), the run headings get their
    count as a sticker, and the Show more button speaks the display face. Rows,
    their order, stripes and the Save and Apply cells are untouched.
-   Mustard (#FFC700) is only ever a sticker or the kicker, never text on white. */
+   Mustard (#FFC700) is only ever a sticker or a link hover on ink, never text on white.
+   The mustard kicker over the heading left 2026-10-01 (critique: "Now serving"
+   was a metaphor to decode, and the heading already names the place). */
 .sabl-title-row {
   position: relative; overflow: hidden;
   background: var(--text-primary); color: #fff;
   border-radius: 30px; padding: 34px 44px 32px;
 }
 .sabl-title-row > div:first-child { padding-right: 150px; }
-.sabl-kicker {
-  margin: 0 0 12px; font: 800 15px/1 var(--font-display);
-  letter-spacing: 0.14em; text-transform: uppercase; color: #FFC700;
-}
 .sabl-title-row .sabl-h1 {
   color: #fff; font-weight: 800; text-transform: uppercase;
   font-size: clamp(44px, 4.8vw, 68px); line-height: 0.9;
@@ -1802,6 +1801,10 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    stacked read as a double line. */
 .sabl-title-row + .sabl-toolbar { border-top: 0; }
 .sabl-title-row .sabl-desc { color: rgba(255, 255, 255, 0.8); }
+/* City hubs: where the rest of the reader's awards are (critique 2026-10-01). */
+.sabl-also { margin: 0 0 18px; max-width: 75ch; font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.78); }
+.sabl-also a { color: #0A6B4D; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.sabl-also a:hover { color: var(--text-primary); }
 .sabl-promo {
   position: absolute; top: 22px; right: 30px; width: 124px; height: 124px;
   display: grid; place-items: center; transform: rotate(12deg);
@@ -1817,6 +1820,9 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabl-group-count {
   display: inline-grid; place-items: center; box-sizing: border-box;
   min-width: 42px; height: 42px; padding: 0 10px; border-radius: 999px;
+  /* flex: none: beside a heading that wraps ("OPENS LATER, DATE NOT
+     POSTED") the row squeezed "261" out of its pill (critique 2026-10-01). */
+  flex: none;
   background: var(--text-primary); color: #FFC700;
   font: 800 21px/1 var(--font-display); transform: rotate(-6deg);
 }
@@ -1833,7 +1839,6 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
      "ALL SCHOLARSHIPS" on two lines and the first listing 94px lower. */
   .sabl-title-row > div:first-child { padding-right: 0; }
   .sabl-promo { display: none; }
-  .sabl-kicker { font-size: 12px; margin-bottom: 8px; }
   .sabl-title-row .sabl-h1 { font-size: 36px; }
   .sabl-toolbar { margin-top: 14px; }
   .sabl-group-count { min-width: 36px; height: 36px; font-size: 18px; }
@@ -1875,7 +1880,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   .sabl-card .sabl-name-h::after { content: none; }
   .sabl-title-row { background: none; color: inherit; padding: 0; border-radius: 0; }
   .sabl-title-row .sabl-h1, .sabl-title-row .sabl-desc { color: #141915; }
-  .sabl-promo, .sabl-kicker { display: none; }
+  .sabl-promo { display: none; }
   .sabl-group-count { background: none; color: inherit; transform: none; }
 }
 

@@ -40,7 +40,7 @@ interface Props {
   openDateIso?: string | null;
   inactive?: boolean; // curator-closed next-cycle listing (open date unknown)
   estimated?: boolean; // the deadline is last cycle's, rolled forward
-  dueLong: string; // 'July 15, 2026' / 'No fixed deadline, join any time' / 'TBA'
+  dueLong: string; // 'July 15, 2026' / 'No fixed deadline, join any time' / 'Not posted yet'
   opensLabel?: string | null; // formatted open date, for status 'future'
   backHref: string;
   backLabel: string;
@@ -552,7 +552,7 @@ const chip =
     flex: 1; text-align: center; font-size: 15.5px; font-weight: 700;
     /* The site's one Apply fill, the mint of the home and hero buttons; it was
        dark green here alone (critique 2026-09-23). */
-    background: #2FD3A0; color: #08120E; padding: 15px 0; border-radius: 100px; text-decoration: none;
+    background: #2FD3A0; color: #08120E; padding: 15px 18px; border-radius: 100px; line-height: 1.25; text-decoration: none;
     transition: background-color 0.15s ease;
   }
   .sabd-cta:hover { background: #5CE3BB; color: #08120E; }
@@ -582,13 +582,13 @@ const chip =
     display: block; text-align: center; text-decoration: none;
     font-size: 14px; font-weight: 600; width: 100%; margin-top: 12px;
     border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
-    padding: 11px 0; color: rgba(20, 25, 21, 0.78);
+    padding: 11px 18px; color: rgba(20, 25, 21, 0.78);
   }
   .sabd-visit:hover { border-color: #0E8C64; color: #0A6B4D; }
   .sabd-copy {
     font-family: var(--font-body); font-size: 14px; font-weight: 600; width: 100%; margin-top: 12px;
     background: transparent; border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
-    padding: 11px 0; cursor: pointer; color: rgba(20, 25, 21, 0.78);
+    padding: 11px 18px; cursor: pointer; color: rgba(20, 25, 21, 0.78);
   }
   .sabd-copy:hover { border-color: #141915; color: #141915; }
 
@@ -647,6 +647,11 @@ const chip =
     .sabd-facts { grid-template-columns: 1fr; }
     .sabd-who { display: block; font-size: 16px; line-height: 1.5; color: #141915; margin: 14px 0 0; max-width: 640px; }
     .sabd-who-label { font-weight: 600; color: #0A6B4D; }
+    /* The line above already says who can apply, so the box below keeps
+       only its "Worth knowing" note; the same sentence twice in a row read
+       as a glitch (critique 2026-10-01). */
+    .sabd-elig > .sabd-h2-elig, .sabd-elig > .sabd-elig-text { display: none; }
+    .sabd-elig:not(:has(.sabd-note)) { display: none; }
     /* Safari zooms the page into any field under 16px when it takes focus,
        and leaves it zoomed (critique 2026-09-27). */
     .sabd-remind-input { font-size: 16px; }

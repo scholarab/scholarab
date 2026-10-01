@@ -259,7 +259,7 @@ const breadcrumbJson = {
           <nav class="sabcal-jump" aria-label="Jump to a month">
             {thisWeek.length > 0 && (
               <a href="#this-week" class="sabcal-chip sabcal-chip-week" data-cal-chip="this-week">
-                <span class="sabcal-chip-m">This week</span>
+                <span class="sabcal-chip-m">Next 7 days</span>
                 <span class="sabcal-chip-n tnum">{thisWeek.length}</span>
               </a>
             )}
@@ -274,7 +274,7 @@ const breadcrumbJson = {
           {thisWeek.length > 0 && (
             <section class="sabcal-month sabcal-week" id="this-week" aria-labelledby="this-week-h">
               <div class="sabcal-month-head">
-                <h2 class="sabcal-h2" id="this-week-h">Due this week</h2>
+                <h2 class="sabcal-h2" id="this-week-h">Due in the next 7 days</h2>
                 <span class="sabcal-month-count" data-cal-count>{`${thisWeek.length} ${thisWeek.length === 1 ? 'deadline' : 'deadlines'}`}</span>
               </div>
               <ol class="sabcal-rows">
@@ -506,6 +506,10 @@ const breadcrumbJson = {
     padding: 6px 4px; text-decoration: none; color: #141915;
   }
   .sabcal-chip:hover .sabcal-chip-m { text-decoration: underline; text-underline-offset: 3px; }
+  /* Set apart from the months: "This week 24" beside "SEP 15" read as two
+     counts of one thing, though the week runs into October (critique
+     2026-10-01). */
+  .sabcal-chip-week { padding-right: 16px; margin-right: 10px; border-right: 2px solid rgba(20, 25, 21, 0.18); }
   .sabcal-chip-m { font-size: 15px; font-weight: 700; }
   .sabcal-chip-n { font-size: 13.5px; color: #5C5F5B; }
 

@@ -19,8 +19,6 @@ interface Props {
   /** Facet hubs supply their own heading and standfirst; /scholarships keeps these defaults. */
   h1?: string;
   intro?: string;
-  /** The line over the heading, in the promo header's mustard. */
-  kicker?: string;
   /**
    * Hubs only (Ilia, 2026-09-15). SCOPE on a hub was eighteen chips of
    * navigation dressed as a filter: the reader had already chosen Calgary in
@@ -48,16 +46,18 @@ interface Props {
    * layout like the others"), so every directory page reads the same way.
    */
   railFilters?: boolean;
+  /** City hubs: the broad lists the reader can also apply from. */
+  alsoOpen?: { place: string; lists: Array<{ slug: string; label: string; count: number }> };
 }
 const {
   items,
   h1 = 'All scholarships',
   intro = 'Scholarships for Alberta students. Check eligibility and deadlines.',
-  kicker = 'Now serving all of Alberta',
   allItems = items,
   hideCategories = false,
   hideScopes = false,
   railFilters = false,
+  alsoOpen,
 } = Astro.props;
 
 // SCOPE, not REGION: these are how far an award reaches, not where the student
@@ -171,7 +171,6 @@ const openNow = openNowCount(initial);
   <div class="sabl-head">
   <div class="sabl-title-row">
     <div>
-      <p class="sabl-kicker">{kicker}</p>
       <h1 class="sabl-h1">{h1}</h1>
       <p class="sabl-desc">{intro}</p>
       {/* The quiz was reachable only from a zero-results state (critique
@@ -283,6 +282,16 @@ const openNow = openNowCount(initial);
     {directoryCountLine(initial.length, items.length, 'LISTINGS', openNow)}
   </div>
 
+  {/* Under the toolbar, not in the board: every hub's toolbar sits at one
+      height (smoke.spec), and this line is about the list below it. */}
+  {alsoOpen && (
+    <p class="sabl-also">
+      These are only the {alsoOpen.place} awards. Many of the{' '}
+      {alsoOpen.lists.map((l, i) => (
+        <>{i > 0 && ' and '}<a href={`/scholarships/${l.slug}/`}>{l.count.toLocaleString('en-CA')} {l.label}</a></>
+      ))}{' '}awards are open to you too.
+    </p>
+  )}
   <p class="sabl-corrected" data-dir-corrected hidden></p>
 
   <div class="sabl-grid" data-dir-grid hidden={initial.length === 0}>
@@ -398,7 +407,7 @@ const openNow = openNowCount(initial);
   )}
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
-    <div class="sabl-empty-title">Nothing on the menu for that.</div>
+    <div class="sabl-empty-title">No scholarships match that.</div>
     <div class="sabl-empty-sub" data-dir-empty-sub>Try a shorter word, or clear a filter.</div>
     {/* Filled in by directory-client when the term exists somewhere else on
         the site: a facet page holds a slice, so "clear a filter" is the wrong

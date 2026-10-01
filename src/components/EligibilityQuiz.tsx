@@ -42,11 +42,18 @@ const TIER_STYLES: Record<ConfidenceTier, { badge: string; label: string }> = {
   possible: { badge: 'sabm-tier sabm-tier-possible', label: 'Possible match' },
 }
 
-// Results come in up to three groups, each best fit first.
-type ResultGroup = 'soon' | 'now' | 'later'
+// Results come in up to four groups: the strongest few, then by date.
+type ResultGroup = 'best' | 'soon' | 'now' | 'later'
 const SOON_DAYS = 30
 const SOON_SHOWN = 3
+// The strong matches lead, whatever their dates: a Calgary business student's
+// list opened on three possible matches due soon (an essay contest, a
+// right-to-life award, Loran) and the three strong fits sat last, under the
+// "Save the 3 strong matches" button that saved them (critique 2026-10-01).
+// Capped so a list of spring awards cannot fill the first screen again.
+const BEST_SHOWN = 5
 const GROUP_LABELS: Record<ResultGroup, string> = {
+  best: 'Your strongest matches',
   soon: `Due in the next ${SOON_DAYS} days, best fit first`,
   now: 'Open now, best fit first',
   later: 'Upcoming or undated, best fit first',
@@ -433,7 +440,10 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     // Ahead of both, the open ones due within 30 days: best fit first put
     // every one of them below spring awards, so a late-September list had
     // nothing urgent in its top ten (critique 2026-09-26).
-    const groupOf = (r: typeof kept[number]): ResultGroup => actionable(r.scholarship) !== 0 ? 'later'
+    // kept is already strong first, unrestricted first, open first.
+    const best = new Set(kept.filter(r => r.tier === 'strong' && !restricted(r.checks)).slice(0, BEST_SHOWN))
+    const groupOf = (r: typeof kept[number]): ResultGroup => best.has(r) ? 'best'
+      : actionable(r.scholarship) !== 0 ? 'later'
       : dueSoon(r) ? 'soon' : 'now'
     const tagged = kept.map(r => ({ ...r, group: groupOf(r) }))
     // Fit first, then biggest: with days left the money is the tiebreak a
@@ -443,7 +453,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     const soon = tagged.filter(r => r.group === 'soon')
       .sort((a, b) => TIER_RANK[a.tier]! - TIER_RANK[b.tier]!
         || parseAmount(b.scholarship.amount) - parseAmount(a.scholarship.amount))
-    return [...soon, ...tagged.filter(r => r.group === 'now'), ...tagged.filter(r => r.group === 'later')]
+    return [...tagged.filter(r => r.group === 'best'), ...soon, ...tagged.filter(r => r.group === 'now'), ...tagged.filter(r => r.group === 'later')]
   }, [profile, step, openScholarships, scholarshipMap, showScholarships, QUESTIONS.length])
 
   const allProgramResults = useMemo(() => {
@@ -457,12 +467,13 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
   // not all pushed behind "Show all" by the ones open tonight.
   // The due-soon rows come first and take at most three of the ten.
   const scholarshipResults = allScholarshipResults && (showAll ? allScholarshipResults : (() => {
+    const best = allScholarshipResults.filter(r => r.group === 'best')
     const soon = allScholarshipResults.filter(r => r.group === 'soon').slice(0, SOON_SHOWN)
-    const limit = RESULT_LIMIT - soon.length
+    const limit = RESULT_LIMIT - best.length - soon.length
     const now = allScholarshipResults.filter(r => r.group === 'now')
     const later = allScholarshipResults.filter(r => r.group === 'later')
     const nowShown = now.slice(0, Math.max(Math.ceil(limit / 2), limit - later.length))
-    return [...soon, ...nowShown, ...later.slice(0, limit - nowShown.length)]
+    return [...best, ...soon, ...nowShown, ...later.slice(0, limit - nowShown.length)]
   })())
   const programResults = allProgramResults && (showAll ? allProgramResults : allProgramResults.slice(0, RESULT_LIMIT))
 
@@ -536,7 +547,9 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     const possible = scholarshipResults?.filter(r => r.tier === 'possible') ?? []
     // Strong matches when there are any, otherwise good ones: the set a
     // student would save first.
-    const saveable = strong.length > 0 ? strong : good
+    // The strongest group sits directly under the button, so it saves those.
+    const best = scholarshipResults?.filter(r => r.group === 'best') ?? []
+    const saveable = best.length > 0 ? best : strong.length > 0 ? strong : good
 
     const scholarshipCount = scholarshipResults?.length ?? 0
     const programCount = programResults?.length ?? 0

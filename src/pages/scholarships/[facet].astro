@@ -69,6 +69,15 @@ const canonical = `https://www.scholarab.ca/scholarships/${facet.slug}/`;
 const indexable = items.some(s => scholarshipIsIndexable(s, today));
 
 const guide = facet.guide ? getGuide(facet.guide) : null;
+
+// A city hub lists only its own city's awards, and read as the whole list: a
+// Calgary student from Google saw 89 rows, the first open one 212 days out,
+// and nothing said the province-wide and national lists were theirs too
+// (critique 2026-10-01). "Many of", not "all of": the province-wide hub also
+// holds awards for one town or county outside the named cities.
+const broadCounts = facet.kind === 'region' && !facet.broad
+  ? SCHOLARSHIP_FACETS.filter(f => f.broad).map(f => ({ slug: f.slug, label: f.label.toLowerCase(), count: facetItems(f, allItems).length }))
+  : [];
 const comboPage = comboCities(allItems, today).find(c => c.city === facet.slug);
 
 // The hub footer is now the only cross-hub path on the page (SCOPE left the
@@ -131,14 +140,11 @@ const breadcrumbJson = {
         items={items}
         h1={facet.h1}
         intro={facet.intro}
-        kicker={facet.kind !== 'region' ? `On the menu: ${facet.label}`
-          : facet.slug === 'national' ? 'Now serving all of Canada'
-          : facet.broad ? 'Now serving all of Alberta'
-          : `Now serving ${facet.label}`}
         allItems={allItems}
         hideCategories={facet.kind === 'category'}
         hideScopes
         railFilters
+        alsoOpen={broadCounts.length === 2 ? { place: facet.label, lists: broadCounts } : undefined}
       />
 
       <div class="sabl-hubfoot">

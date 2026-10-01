@@ -1,11 +1,10 @@
 ---
-// The combo pages' menu board: an ink panel with a mustard kicker, a huge
+// The combo pages' menu board: an ink panel with a huge
 // heading, numbered jump pills and a price burst. Shared by a city's combo
 // page and the /combos/ index, so the two open the same way.
 import { BURST_PATH } from '../../lib/icons';
 
 interface Props {
-  kicker: string;
   h1: string;
   intro: string;
   menuLabel: string;
@@ -13,11 +12,10 @@ interface Props {
   /** Two short lines for the sticker. */
   burst: [string, string];
 }
-const { kicker, h1, intro, menuLabel, items, burst } = Astro.props;
+const { h1, intro, menuLabel, items, burst } = Astro.props;
 ---
 
 <header class="sabc-board">
-  <p class="sabc-kicker">{kicker}</p>
   <h1 class="sabc-h1">{h1}</h1>
   <p class="sabc-intro">{intro}</p>
   <ol class="sabc-menu" aria-label={menuLabel}>
@@ -48,12 +46,8 @@ const { kicker, h1, intro, menuLabel, items, burst } = Astro.props;
     position: relative; background: var(--sabc-ink); color: #fff;
     border-radius: 30px; padding: 44px 48px 40px; overflow: hidden;
   }
-  .sabc-kicker {
-    margin: 0; font: 800 15px/1 var(--font-display); letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--sabc-mustard);
-  }
   .sabc-h1 {
-    margin: 14px 0 0; max-width: 11ch;
+    margin: 0; max-width: 11ch;
     font: 800 clamp(54px, 8.5vw, 112px)/0.86 var(--font-display);
     letter-spacing: -0.015em; text-transform: uppercase; text-wrap: balance;
   }

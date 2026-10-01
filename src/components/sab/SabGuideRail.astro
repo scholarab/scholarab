@@ -32,16 +32,22 @@ const items = slugs.map(getGuide);
       <a class="sabgr-mono sabgr-all" href="/guides/">ALL GUIDES &rarr;</a>
     </div>
 
-    <div class="sabgr-grid">
+    {/* Rows, not cards: every other list on the site is rows since
+        2026-09-21, and this was the one bordered-card grid left (critique
+        2026-10-01). Same zebra and hover as a directory row. */}
+    <ul class="sabgr-list">
       {items.map(g => (
-        <a class="sabgr-card" href={`/guides/${g.slug}/`}>
-          <span class="sabgr-mono sabgr-tag">{g.kicker}</span>
-          <span class="sabgr-title">{g.title}</span>
-          <span class="sabgr-desc">{g.description}</span>
-          <span class="sabgr-mono sabgr-meta">{g.minutes} MIN READ</span>
-        </a>
+        <li>
+          <a class="sabgr-row" href={`/guides/${g.slug}/`}>
+            <span class="sabgr-text">
+              <span class="sabgr-title">{g.title}</span>
+              <span class="sabgr-desc">{g.description}</span>
+            </span>
+            <span class="sabgr-mono sabgr-meta">{g.minutes} min read</span>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   </div>
 </section>
 
@@ -66,29 +72,22 @@ const items = slugs.map(getGuide);
   .sabgr-all { font-size: 11px; letter-spacing: 0.08em; color: #0A6B4D; text-decoration: none; white-space: nowrap; display: inline-block; padding: 12px 0; margin: -12px 0; }
   .sabgr-all:hover { text-decoration: underline; }
 
-  .sabgr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
-
-  .sabgr-card {
-    display: flex; flex-direction: column; background: #FFFFFF;
-    border: 1px solid rgba(20, 25, 21, 0.14); border-radius: 4px;
-    padding: 22px 24px; text-decoration: none; color: #141915;
-    transition: border-color 0.15s ease;
+  .sabgr-list { list-style: none; margin: 0; padding: 0; border-top: 3px solid #141915; }
+  .sabgr-list li:nth-child(even) .sabgr-row { background: rgba(20, 25, 21, 0.04); }
+  .sabgr-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+    padding: 18px 20px; text-decoration: none; color: #141915;
+    transition: background-color 0.15s ease;
   }
-  .sabgr-card:hover { border-color: #0E8C64; }
-
-  .sabgr-tag { font-size: 11px; letter-spacing: 0.08em; color: rgba(20, 25, 21, 0.68); }
-  .sabgr-title {
-    margin-top: 10px; font-family: var(--font-display);
-    font-size: 20px; line-height: 1.25;
-  }
-  .sabgr-desc {
-    margin-top: 10px; font-size: 14px; line-height: 1.6;
-    color: rgba(20, 25, 21, 0.65); flex: 1;
-  }
-  .sabgr-meta { margin-top: 16px; font-size: 11px; letter-spacing: 0.08em; color: #0A6B4D; }
+  .sabgr-list li .sabgr-row:hover { background: rgba(47, 211, 160, 0.14); }
+  .sabgr-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; max-width: 72ch; }
+  .sabgr-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.2; text-transform: uppercase; }
+  .sabgr-desc { font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.72); }
+  .sabgr-meta { flex: none; font-size: 13px; color: #0A6B4D; white-space: nowrap; }
 
   @media (max-width: 720px) {
     .sabgr-inner { padding: 44px 20px 64px; }
     .sabgr-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .sabgr-row { flex-direction: column; gap: 8px; padding: 16px 14px; }
   }
 </style>

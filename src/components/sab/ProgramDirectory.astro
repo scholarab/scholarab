@@ -20,8 +20,6 @@ interface Props {
   /** Facet hubs supply their own heading and standfirst; /programs keeps these defaults. */
   h1?: string;
   intro?: string;
-  /** The line over the heading, in the promo header's mustard. */
-  kicker?: string;
   /** Set on a field hub: the FIELD row turns into navigation rather than a
       filter, since filtering a hub by any other field can only empty it. */
   currentField?: string | null;
@@ -37,7 +35,6 @@ const {
   browseFacets,
   h1 = 'All programs',
   intro = 'Programs for Alberta students, from competitions to research placements.',
-  kicker = 'Now serving all of Alberta',
   currentField = null,
   currentFormat = null,
   railFilters = false,
@@ -90,7 +87,6 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
   <div class="sabl-head">
   <div class="sabl-title-row">
     <div>
-      <p class="sabl-kicker">{kicker}</p>
       <h1 class="sabl-h1">{h1}</h1>
       <p class="sabl-desc">{intro}</p>
     </div>
@@ -304,7 +300,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
   )}
 
   <div class="sabl-empty" data-dir-empty hidden={initial.length > 0}>
-    <div class="sabl-empty-title">Nothing on the menu for that.</div>
+    <div class="sabl-empty-title">No programs match that.</div>
     <div class="sabl-empty-sub" data-dir-empty-sub>Try a shorter word, or clear a filter.</div>
     {/* Filled in by directory-client when the term exists somewhere else on
         the site: a facet page holds a slice, so "clear a filter" is the wrong

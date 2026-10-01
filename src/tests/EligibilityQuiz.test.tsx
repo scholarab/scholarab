@@ -335,7 +335,7 @@ describe('Results', () => {
     const later = makeScholarship({ id: 1, title: 'Opens Later Award', deadline: '2099-05-30', openDate: '2099-03-01' })
     const now = makeScholarship({ id: 2, title: 'Open Now Award', deadline: '2099-05-30' })
     mockMatchAll.mockReturnValue([
-      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] },
+      { id: 1, tier: 'good' as ConfidenceTier, confidence: 0.6, signals: [], checks: [] },
       { id: 2, tier: 'good' as ConfidenceTier, confidence: 0.5, signals: [], checks: [] },
     ])
     render(<EligibilityQuiz scholarships={[later as any, now as any]} programs={[]} />)
@@ -352,7 +352,7 @@ describe('Results', () => {
     const far = makeScholarship({ id: 1, title: 'Far Award', deadline: '2099-05-30' })
     const soon = makeScholarship({ id: 2, title: 'Soon Award', deadline: soonIso })
     mockMatchAll.mockReturnValue([
-      { id: 1, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] },
+      { id: 1, tier: 'good' as ConfidenceTier, confidence: 0.6, signals: [], checks: [] },
       { id: 2, tier: 'possible' as ConfidenceTier, confidence: 0.2, signals: [], checks: [] },
     ])
     render(<EligibilityQuiz scholarships={[far as any, soon as any]} programs={[]} />)
@@ -361,6 +361,26 @@ describe('Results', () => {
     expect(text.indexOf('Due in the next 30 days, best fit first')).toBeLessThan(text.indexOf('Soon Award'))
     expect(text.indexOf('Soon Award')).toBeLessThan(text.indexOf('Open now, best fit first'))
     expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Far Award'))
+  })
+
+  // Critique 2026-10-01: three possible matches due soon led, and the three
+  // strong fits the Save button named sat last.
+  it('leads with up to five strong matches, above the ones due soon, and saves those', () => {
+    const soonIso = new Date(Date.now() + 10 * 86_400_000).toISOString().slice(0, 10)
+    const strongs = Array.from({ length: 6 }, (_, i) => makeScholarship({ id: i + 1, title: `Strong ${i + 1}`, deadline: '2099-05-30', openDate: '2099-03-01' }))
+    const soon = makeScholarship({ id: 9, title: 'Soon Award', deadline: soonIso })
+    mockMatchAll.mockReturnValue([
+      ...strongs.map(s => ({ id: s.id, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] })),
+      { id: 9, tier: 'possible' as ConfidenceTier, confidence: 0.2, signals: [], checks: [] },
+    ])
+    render(<EligibilityQuiz scholarships={[...strongs, soon] as any[]} programs={[]} />)
+    advanceToResults()
+    const text = document.querySelector('.sabm-table')!.textContent!
+    expect(text.indexOf('Your strongest matches')).toBeLessThan(text.indexOf('Strong 1'))
+    expect(text.indexOf('Strong 5')).toBeLessThan(text.indexOf('Soon Award'))
+    expect(text.indexOf('Soon Award')).toBeLessThan(text.indexOf('Strong 6'))
+    fireEvent.click(screen.getByRole('button', { name: 'Save the 5 strong matches' }))
+    expect(mockToggleSaved.mock.calls.map(c => c[0])).toEqual([1, 2, 3, 4, 5])
   })
 
   it('orders the due-soon group biggest first and leaves restricted awards in their fit order', () => {
