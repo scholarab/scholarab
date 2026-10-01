@@ -110,9 +110,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'medicine-hat',
     title: 'Medicine Hat High School Scholarships',
     description:
-      'Every scholarship a Medicine Hat high school student can apply for: Catholic board awards, county bursaries, the college, service clubs and local employers.',
+      "Every scholarship a Medicine Hat high school student can apply for: Catholic board awards, Redcliff scholarships, county bursaries, service clubs and employers.",
     intro:
-      'A local award here might see a dozen applications in a good year, and they run from $1,000 service club and college bursaries up to the three Redcliff scholarships worth $6,000 each.',
+      "A local award here might see a dozen applications in a good year, and they run from $500 health foundation and Catholic board awards up to the three Redcliff scholarships worth $6,000 each.",
     guide: 'scholarships-for-medicine-hat-students',
   },
   {
@@ -124,7 +124,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'edmonton',
     title: 'Edmonton High School Scholarships',
     description:
-      "Scholarships for Edmonton high school students: public and Catholic division awards, Edmonton Community Foundation funds and King's University entrance money.",
+      "Scholarships for Edmonton high school students: public and Catholic division awards, Edmonton Community Foundation funds and the city's service clubs.",
     intro:
       "The Edmonton Public Schools awards here share one April deadline, and they run from a $250 French award to the LeRoy Warden scholarship of up to $10,000 for students with financial need.",
   },
@@ -139,7 +139,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     description:
       "Scholarships for Calgary high school students: EducationMatters and Calgary Foundation awards, teachers' union scholarships and the Burns Memorial Fund.",
     intro:
-      'Calgary-restricted awards run from a $100 band bursary up to renewable entrance awards worth $100,000 over four years, against a far smaller field than a national award.',
+      'Calgary-restricted awards run from a $314 scholarship up to an award worth $100,000 over four years, against a far smaller field than a national award.',
   },
   {
     slug: 'red-deer',
@@ -151,9 +151,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'red-deer',
     title: 'Red Deer Scholarships for High School Students',
     description:
-      'Scholarships for Red Deer and central Alberta high school students: polytechnic entrance awards, memorial funds, and community scholarships.',
+      "Scholarships for Red Deer and central Alberta high school students: public and Catholic division awards, memorial funds, arts and community scholarships.",
     intro:
-      'Central Alberta awards are consistently under-applied, and several are entrance scholarships assessed on the marks you already have, which means no essay and no competition beyond meeting the average.',
+      "Central Alberta awards are consistently under-applied, and the two largest here, the $10,000 Rising Futures and the $5,000 Bower memorial, both close in May.",
   },
   {
     slug: 'lethbridge',
@@ -165,9 +165,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'lethbridge',
     title: 'Lethbridge High School Scholarships',
     description:
-      'Scholarships for Lethbridge and southern Alberta students: school division awards, county scholarships, and university entrance bursaries.',
+      "Scholarships for Lethbridge and southern Alberta students: school division awards, county scholarships, Coaldale community money and arts awards.",
     intro:
-      'Lethbridge awards include one of the few in Alberta open to Grade 11 students, and the county and division awards here have some of the thinnest applicant pools in the province.',
+      "The county and division awards here have some of the thinnest applicant pools in the province, and the hospital volunteer award pays up to $4,000 to students heading into health care.",
   },
   {
     slug: 'airdrie',
@@ -282,9 +282,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'lacombe',
     title: 'Lacombe Scholarships',
     description:
-      "Scholarships for Lacombe and Lacombe County students: Wolf Creek division awards, service club and Legion money, and the entrance awards at Burman University.",
+      "Scholarships for Lacombe and Lacombe County students: Wolf Creek division awards, service club and Legion money, and the central Alberta arts and co-op awards.",
     intro:
-      "Burman University sits in Lacombe, so its entrance awards are here, from $1,000 for applying by February 1 to full tuition for a 95 per cent admission average.",
+      "Most of these close in late spring, and the Wolf Creek division awards include two for students who will not get the Rutherford or who carry a heavy CTS load.",
   },
   {
     slug: 'cochrane',
@@ -308,9 +308,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'okotoks',
     title: 'Okotoks Scholarships',
     description:
-      "Scholarships for Okotoks students: the town's Rotary, Legion and Elks awards, Foothills division and county money, and the Calgary-region awards open here.",
+      "Scholarships for Okotoks students: the town's Rotary, Legion and Elks awards, Foothills division and co-op money, and the Calgary-region awards open here.",
     intro:
-      "The Okotoks Rotary award is open to graduates of every high school in town at $1,500, and the Foothills County agricultural scholarship pays $2,500 to students already in second year.",
+      "The Okotoks Rotary award is open to graduates of every high school in town at $1,500, and the Calgary Black Chambers award here pays $7,000 to Black students entering agriculture or engineering.",
   },
   {
     slug: 'sherwood-park',
@@ -334,9 +334,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'grande-prairie',
     title: 'Grande Prairie Scholarships',
     description:
-      'Scholarships for Grande Prairie and the Peace Region: Northwestern Polytechnic entrance awards, community foundation funds and the city and county money.',
+      "Scholarships for Grande Prairie and the Peace Region: Northwestern Alberta Foundation funds, Grande Prairie Public awards and the city and county money.",
     intro:
-      'Northwestern Polytechnic lists 359 awards, but its standard criteria shut almost all of them until you have two semesters behind you, so these are the ones you can win from grade 12.',
+      "One Northwestern Alberta Foundation form reaches most of the community funds here, and they stay open until August 9, well after most Alberta awards have closed.",
   },
   {
     slug: 'fort-mcmurray',
@@ -347,9 +347,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'fort-mcmurray',
     title: 'Fort McMurray Scholarships',
     description:
-      'Scholarships for Fort McMurray and Wood Buffalo students: the Keyano College award book, the public district awards and the industry money behind them.',
+      "Scholarships for Fort McMurray and Wood Buffalo students: public district awards, First Nation education funding, local clubs and the municipality.",
     intro:
-      'One Keyano application covers most of this page, and a local graduate with an 80 per cent average can have their first year of tuition paid outright.',
+      "The largest fixed award is $3,000 for a Fort McMurray Public graduate in financial need, and three First Nations here fund their own members' post-secondary study.",
   },
   {
     slug: 'wetaskiwin',
@@ -373,9 +373,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'camrose',
     title: 'Camrose Scholarships',
     description:
-      "Scholarships for Camrose and Camrose County students: the entrance and community awards at Augustana, Battle River division money and service club bursaries.",
+      "Scholarships for Camrose and Camrose County students: Battle River division money, co-op and teachers' awards, and disability and human services scholarships.",
     intro:
-      "Fourteen of these are Augustana awards, many preferring Camrose students, so a local graduate starting at the U of A's Camrose campus has a short field for each.",
+      "Three of these come from one Camrose disability services society and close on the same day in May, so one sitting can cover all of them.",
   },
   {
     slug: 'cold-lake',

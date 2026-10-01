@@ -991,11 +991,11 @@ describe('Batch navigation', () => {
     fireEvent.click(screen.getByRole('button', { name: /^Somewhere else, or not sure\. Change your answer/ }))
     expect(screen.getByText('Where are you planning to study?')).toBeTruthy()
     expect(visibleAnswerTiles().some(t => t.textContent?.includes('Somewhere else, or not sure'))).toBe(true)
-    const input = typeQuery('Keyano')
-    expect(visibleLabels()).toEqual(['Keyano College', 'Somewhere else, or not sure'])
+    const input = typeQuery('Red Deer')
+    expect(visibleLabels()).toEqual(['Red Deer Polytechnic', 'Somewhere else, or not sure'])
     act(() => { dispatch.keyDown(input, { key: 'Enter' }); vi.runAllTimers() })
     expect(screen.getByRole('heading', { name: 'Your matches' })).toBeTruthy()
-    expect(stored().answers.institution).toBe('Keyano College')
+    expect(stored().answers.institution).toBe('Red Deer Polytechnic')
   })
 
   it('searches five-option school lists and keeps the empty answer available', () => {

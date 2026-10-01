@@ -1446,3 +1446,19 @@ Search Console (2026-03-01 to 09-28) gave the single-school group 93 of 491 list
 | Copy that described removed awards | Rewritten from the surviving listings: 13 city page descriptions or intros (Okotoks promised a 52-award handbook, Lloydminster "thirty-two of these share one form"), 4 combo pages and the combos index. |
 
 Add-back fraction: 0/5 removed. Listings 1,541 to 1,069 (31% fewer to re-check each cycle); sitemap 1,878 to 1,395 URLs; `_redirects` 122 to 1,092 rules (Workers allows 2,000 static). Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped), and the built home page's 60 internal links all resolve.
+
+## Grade 12 focus: college, post-secondary and Grade 10 to 11 awards removed, September 30, 2026
+
+Outcome: ScholarAB serves one student well, a Grade 12 student heading to college or university, before it widens. Ilia's instruction: "focus on one thing, make it good", and add colleges and universities back properly later.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| Awards a college or university gives out itself (205: 113 for its enrolled students, 92 entrance) | Removed, entrance awards included (Ilia's choice): Keyano, Red Deer Polytechnic, Burman, Augustana, Northwestern Polytechnic, King's, U of Lethbridge, UCalgary, Medicine Hat College and the rest. They return later as their own section. |
+| Outside awards only for students already in post-secondary (67) | Removed after reading each audience line: 62 graded post-secondary only or ungraded, plus 5 graded Grade 12 whose text was for working nurses, student leaders in university or registered apprentices. Kept 9 ungraded or post-secondary-graded awards a Grade 12 student can apply for (Advancing Futures, Indspire, the Masonic bursary and six more), and county bursaries for graduates entering first year. |
+| Grade 10 or 11 only (8, plus the U of Lethbridge Grade 11 award counted above) | Removed (Ilia's choice). Awards open to Grades 10 to 12 stay. |
+| Quiz answers for colleges with no remaining award | Removed: U of Lethbridge, Northwestern Polytechnic, Keyano and Medicine Hat College. Seven colleges and the trades answer stay, each still named by a listing. |
+| Copy that described removed awards | Rewritten from the surviving listings: 10 city pages, 4 combo pages and the combos index. Seven guides keep their prose and drop the links. |
+
+Each removed slug 301s in both slash forms to its city or scope page, older rules that pointed at a removed listing were retargeted, and the four college combo pages (Lethbridge, Lacombe, Fort McMurray, Camrose) 301 to their city pages. Every city page keeps at least MIN_FACET_ITEMS; Beaumont is the thinnest, one Beaumont award among seven.
+
+Add-back fraction: 0/5. Listings 1,069 to 789 (280 removed; 1,541 to 789 across both cuts today, 49%). Combos 16 to 8, combo pages 9 to 5. Sitemap 1,395 to 1,111 URLs. `_redirects` 1,092 to 1,660 rules: Workers allows 2,000 static rules, so the next large removal needs a different redirect approach (dropping the oldest rename rules once Google has recrawled them, or a Worker route) rather than more lines. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped).

@@ -24,7 +24,7 @@ const cities = comboCities(all, today).map(page => ({
   .sort((a, b) => Number(a.page.city === 'alberta') - Number(b.page.city === 'alberta') || a.name.localeCompare(b.name));
 const comboCount = cities.reduce((n, c) => n + c.combos.length, 0);
 const canonical = 'https://www.scholarab.ca/combos/';
-const description = 'Alberta scholarships grouped into combos by who can apply: your school board, your town or the college you are going to. Pick yours, apply to all.';
+const description = 'Alberta scholarships grouped into combos by who can apply: your school board or your town. Pick the one you are in and apply to every award in it.';
 ---
 
 <Layout
@@ -46,7 +46,7 @@ const description = 'Alberta scholarships grouped into combos by who can apply: 
       <SabComboBoard
         kicker="Pick your city"
         h1="Scholarship combos"
-        intro="A combo is a set of awards open to the same students: one school board, one town, or everyone starting at one college. Find the one you are in and apply to the whole set."
+        intro="A combo is a set of awards open to the same students: one school board or one town. Find the one you are in and apply to the whole set."
         menuLabel="Cities with combos"
         items={cities.map(c => ({ href: `#${c.page.city}`, name: c.name, count: `${c.combos.length} ${c.combos.length === 1 ? 'combo' : 'combos'}` }))}
         burst={[`${cities.length} cities`, `${comboCount} combos`]}

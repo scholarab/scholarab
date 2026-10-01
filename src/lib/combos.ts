@@ -111,7 +111,7 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Medicine Hat scholarship combos',
     title: 'Medicine Hat Scholarship Combos',
     description:
-      'Medicine Hat scholarships grouped by who can apply: Catholic school graduates, Redcliff students and Medicine Hat College entrants. Apply to the whole set.',
+      "Medicine Hat scholarships grouped by who can apply: Medicine Hat Catholic school graduates and Redcliff students. Apply to the whole set at once.",
     intro:
       'Each combo is a set of local awards open to the same students, so if its first line describes you, you can apply to every award in it. The conditions on each award still apply.',
   },
@@ -120,9 +120,9 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Edmonton scholarship combos',
     title: 'Edmonton Scholarship Combos',
     description:
-      "Edmonton scholarships grouped by who can apply: Edmonton Public and Edmonton Catholic students, and students starting at The King's University.",
+      "Edmonton scholarships grouped by who can apply: Edmonton Public Schools students and Edmonton Catholic Schools students, each with add-ons.",
     intro:
-      "Edmonton's awards split by school board and by the university they pay into. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "Edmonton's awards split by school board. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
   },
   {
     city: 'calgary',
@@ -138,9 +138,9 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Red Deer scholarship combos',
     title: 'Red Deer Scholarship Combos',
     description:
-      'Red Deer scholarships grouped by who can apply: Red Deer Catholic graduates and students going to Red Deer Polytechnic, whose awards share one form.',
+      "Red Deer scholarships grouped by who can apply: graduates of Red Deer Catholic Regional Schools, whose division runs a set of its own awards.",
     intro:
-      "Red Deer Polytechnic's entrance awards are the biggest set here, and the Catholic division runs a smaller one of its own. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "The Catholic division runs its own set of awards for its graduates. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
   },
   {
     city: 'lethbridge',
@@ -201,9 +201,9 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Grande Prairie scholarship combos',
     title: 'Grande Prairie Scholarship Combos',
     description:
-      'Grande Prairie scholarships grouped by who can apply: one Northwestern Alberta Foundation form, Grande Prairie Public grads and Northwestern Polytechnic.',
+      "Grande Prairie scholarships grouped by who can apply: one Northwestern Alberta Foundation form for the Peace Country, and Grande Prairie Public grads.",
     intro:
-      'One Northwestern Alberta Foundation form reaches dozens of Peace Country funds, and the college and the public division each run their own set. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+      "One Northwestern Alberta Foundation form reaches dozens of Peace Country funds, and the public division runs its own set. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
   },
   {
     city: 'fort-mcmurray',
