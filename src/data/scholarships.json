@@ -264,7 +264,7 @@
     "lastVerified": "2026-09",
     "region": "Medicine Hat",
     "notes": "The residency rule is wider than the County's name suggests: the application form counts residents of urban areas inside the County's outer boundaries, and names the City of Medicine Hat and the Town of Redcliff outright, so a student living in the city qualifies. That is the opposite of the County Council scholarship that closes the same day, which turns on living in the County itself. Environmental programmes count alongside agriculture, which widens this well past farm kids. You can win it only once, and you need last year's marks plus a letter of acceptance.",
-    "active": true,
+    "active": false,
     "description": "Cypress County awards two $1,000 bursaries a year to students continuing at a college or university in an in-depth agricultural, agri-tech or environmental programme. Applications and supporting documents go to the County's agricultural fieldman, and the board decides on scholastic standing alongside social and community involvement.",
     "eligibility": {
       "grades": [
@@ -1326,7 +1326,7 @@
     "lastVerified": "2026-08",
     "region": "Alberta",
     "notes": "Applications open October 1, 2026 and close December 1. Shortlisted applicants get a preliminary application in early December, due early January, with decisions in February.",
-    "active": false,
+    "active": true,
     "description": "UCalgary's renewable award for low-income, rural, and Indigenous students entering its undergraduate programs: up to $5,000 a year, to a maximum of $20,000 over four years, with an eye toward students headed for medicine.",
     "eligibility": {
       "grades": [
@@ -4148,7 +4148,7 @@
     "audience": "Domestic students entering UAlberta direct-entry with no prior post-secondary and financial need",
     "category": "Academic",
     "region": "Alberta",
-    "active": false,
+    "active": true,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
     "notes": "The 2027 intake runs October 1, 2026 to February 15, 2027, with offers from mid-April.",
@@ -4226,7 +4226,7 @@
     "audience": "Deaf or hard of hearing Albertans entering post-secondary or vocational study",
     "category": "Community",
     "region": "Alberta",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
     "notes": null,
@@ -4307,7 +4307,7 @@
     "audience": "UFCW Canada members or their dependents/spouses entering full-time post-secondary studies in Canada",
     "category": "Community",
     "region": "National",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
     "notes": "18 scholarships of $1,000 allocated nationally by region. Apply online at ufcw.ca.",
@@ -7662,7 +7662,7 @@
     "lastVerified": "2026-08",
     "region": "Edmonton",
     "notes": "One application is considered for all five, so you do not pick. The parent is the one who has to be an Edmonton Catholic teacher, active or retired, which means it does not matter which school you attend yourself.",
-    "active": true,
+    "active": false,
     "description": "Five scholarships worth up to $1,000 each for children and dependents of Edmonton Catholic teachers entering their first year of post-secondary: the Archbishop Joseph MacNeil for Christian service, the Bernie Lemay for computer science, digital arts or multimedia, the Bishop Greschuk for a Faculty of Education, the Donna Swiniarski for communications, marketing or English, and the MacNeil/Quinlan for leadership and citizenship. Amounts vary with the number of successful applicants.",
     "eligibility": {
       "grades": [
@@ -8698,7 +8698,7 @@
     "audience": "Cypress County residents in high school who are starting post-secondary",
     "category": "General",
     "region": "Medicine Hat",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-08",
     "url": "https://www.cypress.ab.ca/p/online-registrations",
     "notes": "This is the County Council award, which is separate from the Agricultural Service Board bursary that closes on the same date. You can be a candidate for both. What decides it is residency, not which school you attend: the terms of reference say applicants living in the County but attending high school in Medicine Hat, Brooks, Foremost or Bow Island are eligible, and so are students in the Crown Village of Ralston and the Townsite of Elkwater. You can only win it once. The application form is on the County's online registrations page, under Scholarship Application.",
@@ -9459,7 +9459,7 @@
     "audience": "Rocky View graduates, and children of ATA Local 35 members graduating in Alberta",
     "category": "Academic",
     "region": "Airdrie",
-    "active": true,
+    "active": false,
     "lastVerified": "2026-08",
     "url": "https://sites.google.com/rvata35.ca/rvata35/scholarships/for-students",
     "notes": "The teachers fund this themselves out of ATA Local 35, and in 2022-23 the pool was about $90,000. Proof of enrolment is the catch: a letter of acceptance does not count, so you apply after you have registered, not when you get in. The forms are Cognito forms and do not work properly on a phone.",
@@ -22929,7 +22929,7 @@
     "category": "Community",
     "region": "Alberta",
     "localArea": "Vermilion-area students",
-    "active": true,
+    "active": false,
     "description": "Cornerstone Co-op gives five $1,000 scholarships: two for Buffalo Trail Public Schools students, one for East Central Alberta Catholic Schools and two in memory of Liane Plante for St. Paul Education students. Home-educated students apply in the Buffalo Trail stream.",
     "notes": "Marks count for 40% and community involvement for 60%. Apply online through the form for your school division or mail a paper form to the Vermilion office, with an official transcript. Ties go to students who support the co-op or have worked there. Questions go to marketing@cornerstone.crs.",
     "applyViaGuidance": false,
@@ -25042,7 +25042,7 @@
     "lastVerified": "2026-09",
     "region": "National",
     "notes": "The set is four general $3,000 scholarships plus the $3,000 First Year Scholarship and the $3,000 Trevor Vance Memorial, both for first-year students only. You can win each named award once, and no more than two Foundation awards in your life.",
-    "active": true,
+    "active": false,
     "description": "The Foundation hands out $18,000 a year to students involved in beef cattle who are working toward any degree, diploma or certificate. One application form covers all six awards, including two reserved for first-year students.",
     "metaDetail": "One form enters you for six awards.",
     "eligibility": {
@@ -25979,7 +25979,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "The money follows the Deloitte Mentorship Shadow Day, so the bursary comes with the program rather than instead of it. International students can apply.",
-    "active": true,
+    "active": false,
     "description": "The Crown Mentorship Foundation gives a $2,000 bursary to Black students living and studying in Calgary, Edmonton or the surrounding areas, alongside mentorship and professional development.",
     "metaDetail": "Comes with a mentorship day.",
     "eligibility": {
@@ -26816,7 +26816,7 @@
     "region": "Alberta",
     "localArea": "County of Vermilion River students",
     "notes": "Residents of the towns of Vermilion, Marwayne and Kitscoty are excluded, so the award is aimed squarely at the rural county. You send proof of acceptance plus a personal and an educational reference.",
-    "active": true,
+    "active": false,
     "description": "The Islay Health Centre Auxiliary gives up to $1,000 a year to someone accepted into a health related post-secondary course who lives in the County of Vermilion River.",
     "metaDetail": "Three towns are excluded from the county.",
     "eligibility": {
@@ -26971,7 +26971,7 @@
     "lastVerified": "2026-09",
     "region": "National",
     "notes": "You need a current Cando student membership, and students at Cando accredited institutions get priority. The application takes your marks or GPA, an essay, two academic references and a resume.",
-    "active": true,
+    "active": false,
     "description": "Cando awards six $3,000 scholarships to Indigenous students enrolled full time in business administration, economics, finance, management, natural resources or community economic development.",
     "metaDetail": "Needs a Cando student membership.",
     "eligibility": {
@@ -28972,7 +28972,7 @@
     "lastVerified": "2026-09",
     "region": "Alberta",
     "notes": "This is the largest award on this site for a rural Alberta student. You need to enrol in Business 1220E, show interest in Ivey, and have competitive extracurricular experience. Renewal in second year needs a 70 percent average.",
-    "active": true,
+    "active": false,
     "description": "An award worth up to $30,000 over four years for a first-year Western University student from Alberta outside Calgary and Edmonton, paying $5,000 in each of years one and two and $10,000 in years three and four if the student continues into the Ivey Business School HBA program.",
     "metaDetail": "Up to $30,000 across four years.",
     "eligibility": {
@@ -30710,7 +30710,7 @@
     "lastVerified": "2026-09",
     "region": "National",
     "notes": "One application covers all three Friends of Canadian Simmental Foundation scholarships; applications are considered for the foundation's own scholarship first, then for this one and the first-year scholarship. You can win at most two of the foundation's awards in your lifetime, and winners may be asked to judge later rounds.",
-    "active": true,
+    "active": false,
     "description": "A $3,000 scholarship for first-year students from the Friends of Canadian Simmental Foundation, open to Canadian citizens involved in the beef cattle industry who are attending a post-secondary institution for any degree, diploma or certificate in any field. You do not need to be in an agriculture program.",
     "metaDetail": null,
     "eligibility": {
