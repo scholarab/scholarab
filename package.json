@@ -58,7 +58,7 @@
     }
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.9",
+    "@astrojs/check": "^0.9.10",
     "@axe-core/playwright": "^4.13.0",
     "@electric-sql/pglite": "^0.5.8",
     "@eslint/js": "^10.0.1",
@@ -75,7 +75,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "happy-dom": "^20.8.9",
     "prettier": "^3.8.2",
-    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-astro": "^1.1.0",
     "satori": "^0.28.0",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1",
