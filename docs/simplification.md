@@ -1462,3 +1462,15 @@ Outcome: ScholarAB serves one student well, a Grade 12 student heading to colleg
 Each removed slug 301s in both slash forms to its city or scope page, older rules that pointed at a removed listing were retargeted, and the four college combo pages (Lethbridge, Lacombe, Fort McMurray, Camrose) 301 to their city pages. Every city page keeps at least MIN_FACET_ITEMS; Beaumont is the thinnest, one Beaumont award among seven.
 
 Add-back fraction: 0/5. Listings 1,069 to 789 (280 removed; 1,541 to 789 across both cuts today, 49%). Combos 16 to 8, combo pages 9 to 5. Sitemap 1,395 to 1,111 URLs. `_redirects` 1,092 to 1,660 rules: Workers allows 2,000 static rules, so the next large removal needs a different redirect approach (dropping the oldest rename rules once Google has recrawled them, or a Worker route) rather than more lines. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped).
+
+## Grade question removed from the scholarship quiz, September 30, 2026
+
+Outcome: a Grade 12 student reaches their matches in one fewer tap. Every listing left after the Grade 12 cut is open to Grade 12, so the grade answer could no longer change a scholarship result; Grade 10, Grade 11 and "Already in post-secondary" only promised awards the catalogue no longer has.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| Grade question on the Scholarships and Both paths | Removed. The matcher scores every scholarship search as Grade 12, including a Both search switched from Programs with a different grade. |
+| Grade question on the Programs path | Kept for now: 20 of 259 live programs are closed to Grade 12 and 14 cap at age 17, so the answer still changes program results. Under review with Ilia. |
+| Progress saved by the six-question version | Migrated, not discarded: version 3 drops the stored grade and moves the step back one, so a student mid-quiz resumes on the same question. |
+
+Add-back fraction: 0/3. Scholarship quiz 6 to 8 questions becomes 5 to 7; programs stay at 3. Local only: `npm run ci` passed (1,162).

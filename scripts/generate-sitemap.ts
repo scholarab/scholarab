@@ -252,7 +252,7 @@ const llms = [
   `- [All scholarships](${BASE}/scholarships/): the full directory, filterable by region, amount and deadline.`,
   `- [Research programs](${BASE}/programs/): summer and year-round research placements open to high school students.`,
   `- [Deadlines by month](${BASE}/deadlines/): every dated deadline we track, in calendar order. Use this one for "what closes in <month>" questions.`,
-  `- [Eligibility match](${BASE}/match/): six questions, returns the listings a given student qualifies for.`,
+  `- [Eligibility match](${BASE}/match/): three to seven questions, returns the listings a given student qualifies for.`,
   '',
   '## Guides',
   '',

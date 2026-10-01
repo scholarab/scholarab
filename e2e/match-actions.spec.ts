@@ -76,10 +76,10 @@ for (const width of [1440, 1024, 320]) {
     // Exercise real Apply and Details states without depending on today's date.
     await page.clock.setFixedTime(new Date('2026-09-30T12:00:00-06:00'));
     const profile = {
-      searchType: 'both', grade: '12', city: 'Calgary', field: 'STEM',
+      searchType: 'both', city: 'Calgary', field: 'STEM',
       average: '93', institution: 'University of Calgary', board: 'CBE', school: '',
     };
-    await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ version: 2, step: 8, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
+    await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 7, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
     await page.goto('/match/');
     await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
     await page.evaluate(() => document.fonts.ready);

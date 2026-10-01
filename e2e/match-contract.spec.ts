@@ -145,10 +145,10 @@ test('320px results wrap long waiting dates without horizontal overflow', async 
   // Keep this recorded waiting-date case stable as the calendar advances.
   await page.clock.setFixedTime(new Date('2026-09-30T12:00:00-06:00'));
   const profile = {
-    searchType: 'both', grade: '12', city: 'Calgary', field: 'STEM',
+    searchType: 'both', city: 'Calgary', field: 'STEM',
     average: '93', institution: 'University of Calgary', board: 'CBE', school: '',
   };
-  await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ version: 2, step: 8, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
+  await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 7, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
   await page.goto('/match/');
   await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
   await page.evaluate(() => document.fonts.ready);
@@ -208,7 +208,7 @@ for (const key of ['city', 'institution', 'school'] as const) {
     const index = questions.indexOf(question);
     const fallback = question.opts.find(o => key === 'city' ? o.value === 'Other Alberta' : o.value === '')!;
     const target = question.opts.filter(o => o !== fallback).at(-1)!;
-    await page.addInitScript(({ key, step, answers }) => sessionStorage.setItem(key, JSON.stringify({ version: 2, step, answers, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, step: index, answers: { ...answers, [key]: undefined } });
+    await page.addInitScript(({ key, step, answers }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step, answers, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, step: index, answers: { ...answers, [key]: undefined } });
     await page.goto('/match/');
     await expect(page.locator('.sabm-question')).toHaveText(question.q);
     await page.locator('.sabm-find').fill(target.label);
@@ -227,7 +227,7 @@ for (const key of ['city', 'institution', 'school'] as const) {
 
 test('filtered batches have their own back control and clearing search starts at the first batch', async ({ page }) => {
   const question = questions.find(q => q.key === 'city')!;
-  await page.addInitScript(({ key, answers }) => sessionStorage.setItem(key, JSON.stringify({ version: 2, step: 2, answers, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, answers: { searchType: 'both', grade: '12' } });
+  await page.addInitScript(({ key, answers }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 1, answers, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, answers: { searchType: 'both' } });
   await page.goto('/match/');
   await page.locator('.sabm-find').fill('a');
   const matches = question.opts.filter(o => o.value === 'Other Alberta' || `${o.label} ${o.hint ?? ''}`.toLowerCase().includes('a'));
@@ -251,7 +251,7 @@ test('filtered batches have their own back control and clearing search starts at
 
 test('Previous question and reload reveal the previously selected city batch', async ({ page }) => {
   await page.addInitScript(({ key }) => {
-    if (!sessionStorage.getItem(key)) sessionStorage.setItem(key, JSON.stringify({ version: 2, step: 2, answers: { searchType: 'both', grade: '12' }, savedAt: Date.now() }));
+    if (!sessionStorage.getItem(key)) sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 1, answers: { searchType: 'both' }, savedAt: Date.now() }));
   }, { key: QUIZ_STORAGE_KEY });
   await page.goto('/match/');
   const tile = await revealAnswer(page, 'Wetaskiwin');
@@ -291,8 +291,8 @@ test('programs asks only search type, grade and field before results', async ({ 
 // stays above the list; the reminder line, Retake and the city link follow it.
 // Desktop keeps them all above.
 test('results keep Save above the list and, on a phone, the rest below it', async ({ page }, testInfo) => {
-  await page.addInitScript(key => sessionStorage.setItem(key, JSON.stringify({ step: 99, savedAt: Date.now(),
-    answers: { searchType: 'scholarships', grade: '12', city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), QUIZ_STORAGE_KEY);
+  await page.addInitScript(key => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 99, savedAt: Date.now(),
+    answers: { searchType: 'scholarships', city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), QUIZ_STORAGE_KEY);
   await page.goto('/match/');
   await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
   const top = (selector: string) => page.locator(selector).first().evaluate(el => el.getBoundingClientRect().top);
@@ -310,9 +310,8 @@ test('results keep Save above the list and, on a phone, the rest below it', asyn
 // test follows the catalogue rather than pinning award ids.
 test('results name the combo a student is in and save it in one tap', async ({ page }) => {
   const combo = payload.combos.find(c => c.slug === 'board-mhcbe')!;
-  const seed = (grade: string) => page.addInitScript(({ key, grade }) => sessionStorage.setItem(key, JSON.stringify({ step: 99, savedAt: Date.now(),
-    answers: { searchType: 'scholarships', grade, city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), { key: QUIZ_STORAGE_KEY, grade });
-  await seed('12');
+  await page.addInitScript(key => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 99, savedAt: Date.now(),
+    answers: { searchType: 'scholarships', city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), QUIZ_STORAGE_KEY);
   await page.goto('/match/');
   const tray = page.locator('.sabm-combo').filter({ hasText: combo.name });
   await expect(tray).toBeVisible();
@@ -321,14 +320,6 @@ test('results name the combo a student is in and save it in one tap', async ({ p
   await expect(tray.getByRole('status')).toHaveText(/^All \d+ saved$/);
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('scholarab_saved') || '[]') as number[]);
   expect(combo.core.filter(id => saved.includes(id)).length).toBeGreaterThanOrEqual(2);
-});
-
-test('a Grade 10 student is not shown a Grade 12 combo', async ({ page }) => {
-  await page.addInitScript(key => sessionStorage.setItem(key, JSON.stringify({ step: 99, savedAt: Date.now(),
-    answers: { searchType: 'scholarships', grade: '10', city: 'Medicine Hat', board: 'MHCBE', school: '', field: '', average: '', institution: '' } })), QUIZ_STORAGE_KEY);
-  await page.goto('/match/');
-  await expect(page.locator('.sabm-results-h1')).toHaveText('Your matches');
-  await expect(page.locator('.sabm-combo')).toHaveCount(0);
 });
 
 for (const step of [2, 3, 4, 8]) {
@@ -349,7 +340,7 @@ for (const step of [2, 3, 4, 8]) {
 for (const failure of ['network', 'version', 'shape'] as const) {
   test(`quiz data ${failure} failure is visible and manual retry preserves progress`, async ({ page }) => {
     let requests = 0;
-    await page.addInitScript(({ key, answers }) => sessionStorage.setItem(key, JSON.stringify({ step: 3, answers, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, answers });
+    await page.addInitScript(({ key, answers }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 3, answers, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, answers });
     await page.route('**/quiz-payload*.json', async route => {
       requests++;
       if (requests > 1) return route.continue();
@@ -402,11 +393,10 @@ test('expired and corrupt sessions reset, storage denial still permits answering
 test('a concluded catalogue award is excluded even when its profile would otherwise match', async ({ page }) => {
   const ended = payload.scholarships.find(s => 'concluded' in s && s.concluded)!;
   expect(ended).toBeTruthy();
-  const grade = QUIZ_QUESTIONS.find(q => q.key === 'grade')!.opts.find(o => ended.eligibility?.grades.some(grade => String(grade) === o.value))!.value;
-  const profile = { ...answers, grade, city: 'Other Alberta', average: '93', field: '', institution: '', board: '', school: '' };
+  const profile = { ...answers, city: 'Other Alberta', average: '93', field: '', institution: '', board: '', school: '' };
   let concluded = false;
   await page.route('**/quiz-payload*.json', route => route.fulfill({ json: { version: 1, scholarships: [{ ...ended, concluded }], programs: [] } }));
-  await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ step: 8, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
+  await page.addInitScript(({ key, profile }) => sessionStorage.setItem(key, JSON.stringify({ version: 3, step: 7, answers: profile, savedAt: Date.now() })), { key: QUIZ_STORAGE_KEY, profile });
   await page.goto('/match/');
   await expect(page.locator('.sabm-row-name')).toHaveText(ended.title);
   concluded = true;

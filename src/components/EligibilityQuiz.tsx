@@ -87,8 +87,15 @@ function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
       }
       // Existing program attempts used the six-question scholarship path.
       // Preserve their grade/field and resume at the equivalent question.
-      if (answers.searchType === 'programs' && parsed.version !== 2) {
+      const version = parsed.version ?? 1
+      if (answers.searchType === 'programs' && version < 2) {
         step = step <= 1 ? step : step <= 3 ? 2 : QUIZ_PROGRAM_QUESTIONS.length
+      }
+      // Before version 3 the scholarship path asked the grade second. It is
+      // gone (Grade 12 only), so drop the answer and the step it took.
+      if (answers.searchType !== 'programs' && version < 3) {
+        delete answers.grade
+        if (step >= 2) step -= 1
       }
       return { step, answers }
     }
@@ -261,7 +268,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
 
   // Persist, including the completed state, so results survive a reload
   useLayoutEffect(() => {
-    try { sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ version: 2, step, answers, savedAt: Date.now() })) } catch { /* ignore */ }
+    try { sessionStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify({ version: 3, step, answers, savedAt: Date.now() })) } catch { /* ignore */ }
   }, [step, answers])
 
   // Set when a student jumps back from the results summary to change one
@@ -334,9 +341,10 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     if (!city) return null
     const fieldVal = answers.field
     const avgVal = answers.average
-    const gradeVal = answers.grade ?? '12'
     return {
-      grade: gradeVal as StudentProfile['grade'],
+      // Scholarships are Grade 12 only since 2026-09-30. A grade answered on
+      // the programs path must not narrow them after a switch to Both.
+      grade: '12',
       city,
       // '' ("None of these", "Another school") is an answer, not a skip: it
       // rules out the board-only and school-only awards the question listed.

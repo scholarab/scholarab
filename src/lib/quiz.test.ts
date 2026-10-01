@@ -231,7 +231,7 @@ describe('school question', () => {
 
   it('keeps the spelled maximum in step with the count', () => {
     expect(QUIZ_MAX_QUESTION_COUNT).toBe(QUIZ_QUESTION_COUNT + QUIZ_OPTIONAL_QUESTION_COUNT);
-    expect(QUIZ_MAX_QUESTION_WORD).toBe('eight');
+    expect(QUIZ_MAX_QUESTION_WORD).toBe('seven');
   });
 })
 

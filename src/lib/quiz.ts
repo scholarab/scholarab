@@ -66,16 +66,6 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     ],
   },
   {
-    key: 'grade',
-    q: 'What grade are you in?',
-    opts: [
-      { label: 'Grade 10', value: '10' },
-      { label: 'Grade 11', value: '11' },
-      { label: 'Grade 12', value: '12' },
-      { label: 'Already in post-secondary', value: 'post-secondary', hint: 'Awards for enrolled students' },
-    ],
-  },
-  {
     key: 'city',
     q: 'Where are you based?',
     // Descending 2021 census populations, using named places rather than
@@ -153,8 +143,28 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
 ]
 
+/**
+ * Scholarship searches no longer ask the grade: since 2026-09-30 the catalogue
+ * is Grade 12 awards only, and the matcher reads an unanswered grade as '12'.
+ * Programs still ask it, because program ages run below and above Grade 12.
+ */
+const GRADE_QUESTION: QuizQuestion = {
+  key: 'grade',
+  q: 'What grade are you in?',
+  opts: [
+    { label: 'Grade 10', value: '10' },
+    { label: 'Grade 11', value: '11' },
+    { label: 'Grade 12', value: '12' },
+    { label: 'Already in post-secondary', value: 'post-secondary', hint: 'Awards for enrolled students' },
+  ],
+};
+
 /** Programs use grade and field only; the other questions cannot change them. */
-export const QUIZ_PROGRAM_QUESTIONS = QUIZ_QUESTIONS.filter(q => ['searchType', 'grade', 'field'].includes(q.key));
+export const QUIZ_PROGRAM_QUESTIONS: QuizQuestion[] = [
+  QUIZ_QUESTIONS.find(q => q.key === 'searchType')!,
+  GRADE_QUESTION,
+  QUIZ_QUESTIONS.find(q => q.key === 'field')!,
+];
 
 /** The key the school question stores under, and the matcher reads. */
 /** The top of each average band, keyed by the option value (a band's
@@ -323,7 +333,7 @@ export function schoolsForCity(
 }
 
 // ── How the quiz describes itself ─────────────────────────────────────────────
-// Shared descriptions follow the three-question program and six-to-eight
+// Shared descriptions follow the three-question program and five-to-seven
 // question scholarship paths.
 
 export const QUIZ_QUESTION_COUNT = QUIZ_QUESTIONS.length;
@@ -332,8 +342,8 @@ export const QUIZ_MIN_QUESTION_WORD = 'Three';
 
 /**
  * The most questions any city can get, for the step label before the city is
- * answered. "of 6" that turns into "of 8" at question four reads as the quiz
- * growing; "of up to 8" that lands on 6 is good news.
+ * answered. "of 5" that turns into "of 7" at question three reads as the quiz
+ * growing; "of up to 7" that lands on 5 is good news.
  */
 export function quizQuestionCeiling(
   listings: Array<{ region?: string | null; audience?: string | null; eligibility?: { schoolBoards?: string[]; specificSchools?: string[] } | null }>,
@@ -344,22 +354,22 @@ export function quizQuestionCeiling(
     (schoolsForCity(listings, o.value).length > 0 ? 1 : 0)));
 }
 
-/** The step label's denominator: "6", or "up to 8" while the city is open. */
+/** The step label's denominator: "5", or "up to 7" while the city is open. */
 export function quizTotalLabel(ceiling: number, current: number, cityAnswered: boolean): string {
   return !cityAnswered && ceiling > current ? `up to ${ceiling}` : String(current);
 }
 
 /** Spelled form for prose. Pinned to QUIZ_QUESTION_COUNT by a test. */
-export const QUIZ_QUESTION_WORD = 'Six';
+export const QUIZ_QUESTION_WORD = 'Five';
 
 /**
  * The board and school questions are asked only where they can change the
- * answer. Scholarship searches use six to eight questions; programs use
+ * answer. Scholarship searches use five to seven questions; programs use
  * three. Keep public descriptions tied to these shared counts.
  */
 export const QUIZ_OPTIONAL_QUESTION_COUNT = 2;
 export const QUIZ_MAX_QUESTION_COUNT = QUIZ_QUESTION_COUNT + QUIZ_OPTIONAL_QUESTION_COUNT;
-export const QUIZ_MAX_QUESTION_WORD = 'eight';
+export const QUIZ_MAX_QUESTION_WORD = 'seven';
 
 /**
  * How many matches the results screen shows, per list.

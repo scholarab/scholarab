@@ -57,9 +57,11 @@ const breadcrumbJson = {
       const saved = JSON.parse(sessionStorage.getItem(key) || 'null');
       const a = saved && saved.answers || {};
       const total = a.searchType === 'programs'
-        ? saved.version === 2 ? programTotal : 4
+        ? (saved.version || 1) >= 2 ? programTotal : 4
         : base + ('board' in a ? 1 : 0) + ('school' in a ? 1 : 0);
-      if (saved && Date.now() - saved.savedAt <= ttl && saved.step >= total) document.documentElement.classList.add('quiz-restore');
+      // Version 3 dropped the scholarship path's grade question, one step.
+      const step = a.searchType !== 'programs' && (saved.version || 1) < 3 && saved.step >= 2 ? saved.step - 1 : saved.step;
+      if (saved && Date.now() - saved.savedAt <= ttl && step >= total) document.documentElement.classList.add('quiz-restore');
     } catch { /* private mode: the normal first paint */ }
   </script>
   {/* The quiz cannot render until the catalogue lands, and the fetch used to
