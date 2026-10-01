@@ -146,10 +146,6 @@ export function filterSortScholarships(
     // entries don't bury open ones). Undated open awards sort last by date.
     const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
     if (statusDiff !== 0) return statusDiff;
-    if (rank[aStatus] === 0) {
-      const soonDiff = Number(dueSoon(b.deadline, b._deadline_ms)) - Number(dueSoon(a.deadline, a._deadline_ms));
-      if (soonDiff !== 0) return soonDiff;
-    }
 
     if (sortBy === 'highest_pay' || sortBy === 'lowest_pay') {
       const aAmt = a._amount ?? 0;
@@ -180,17 +176,6 @@ export function whenTier(days: number): '' | ' is-soon' | ' is-urgent' {
   return '';
 }
 
-/** Open and closing within URGENT_DAYS: the run a student with a deadline
- *  close came for. It heads every sort (critique 2026-09-29: Calgary's
- *  "Open now" run started 213 days out, and a deadline five days away sat
- *  wherever the amount sort put it). */
-function dueSoon(deadline: string | null | undefined, deadlineMs?: number): boolean {
-  const ms = deadlineMs || (deadline && deadline !== 'TBA' && deadline !== 'Ongoing' ? new Date(deadline + 'T00:00:00').getTime() : NaN);
-  if (!Number.isFinite(ms)) return false;
-  const days = Math.round((ms - getToday().getTime()) / 86400000);
-  return days >= 0 && days <= URGENT_DAYS;
-}
-
 // ── Grid grouping ─────────────────────────────────────────────────────────────
 // The directory sorts open listings above ones that have not opened yet and
 // closed ones below both, but nothing marked the seams, so 153 cards read as
@@ -201,11 +186,13 @@ function dueSoon(deadline: string | null | undefined, deadlineMs?: number): bool
 // scholarship sort ranks by status first, so status is safe. Programs only
 // rank by status first too since 2026-09-23, so they group the same way:
 // open, date not confirmed, closed. Open with no deadline is in the open run.
-
-export const DUE_SOON_LABEL = 'DUE WITHIN 2 WEEKS';
+//
+// A "DUE WITHIN 2 WEEKS" run headed OPEN NOW from 2026-09-29 to 2026-10-01.
+// Under the default "Earliest deadline" sort it was the top of OPEN NOW with
+// a second heading, and the row's date already turns rust inside 14 days
+// (whenTier), so it was deleted: one open run, sorted the way the student chose.
 
 export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
-  soon: DUE_SOON_LABEL,
   active: STATUS_WORDS.open.toUpperCase(),
   future: STATUS_WORDS.future.toUpperCase(),
   unconfirmed: STATUS_WORDS.unconfirmed.toUpperCase(),
@@ -220,25 +207,20 @@ export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
 export const SCHOLARSHIP_SHUT_GROUPS = ['unconfirmed', 'closed', 'after'];
 
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
-  soon: DUE_SOON_LABEL,
   active: STATUS_WORDS.open.toUpperCase(),
   tba: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
 };
 
-// 'soon' is a slice of open, not a fourth status: the sorts rank it first
-// within open, so it stays the primary key and each run appears once.
 export function scholarshipGroupKey(s: ScholarshipWithMeta): string {
   if (isAfterHighSchool(s)) return 'after';
   const status = getScholarshipStatus(s);
-  if (status === 'ongoing') return 'active';
-  return status === 'active' && dueSoon(s.deadline, s._deadline_ms) ? 'soon' : status;
+  return status === 'ongoing' ? 'active' : status;
 }
 
 export function programGroupKey(p: ProgramWithMeta): string {
   const status = getProgramStatus(p);
-  if (status === 'ongoing') return 'active';
-  return status === 'active' && dueSoon(p.deadline, p._deadline_ms) ? 'soon' : status;
+  return status === 'ongoing' ? 'active' : status;
 }
 
 /** [{key, label, count}] in display order, for a list already in display order. */
@@ -470,10 +452,6 @@ export function filterSortPrograms(
     // labels are contiguous and a past deadline never heads the list.
     const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
     if (statusDiff !== 0) return statusDiff;
-    if (rank[aStatus] === 0) {
-      const soonDiff = Number(dueSoon(b.deadline, b._deadline_ms)) - Number(dueSoon(a.deadline, a._deadline_ms));
-      if (soonDiff !== 0) return soonDiff;
-    }
     // within the closed group: most recently expired first
     if (aStatus === 'closed' && sortBy === 'closest_due') {
       return programDeadlineOrder(b) - programDeadlineOrder(a);

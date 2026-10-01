@@ -601,10 +601,9 @@ describe('showingLine', () => {
   })
 })
 
-// Today is 2026-04-05 (mocked above). A deadline within URGENT_DAYS is its
-// own run at the head of every sort, so a student with a deadline close sees
-// it first whatever the list is sorted by (critique 2026-09-29).
-describe('due within two weeks', () => {
+// Today is 2026-04-05 (mocked above). The "DUE WITHIN 2 WEEKS" run was
+// deleted 2026-10-01: open listings are one run, in the order the sort says.
+describe('one open run', () => {
   const ms = (iso: string) => new Date(iso + 'T00:00:00').getTime()
   const state = (over: Partial<ScholarshipFilterState> = {}): ScholarshipFilterState => ({
     statusFilter: 'all', selectedCategory: 'all', selectedRegion: null, searchQuery: '', sortBy: 'closest_due', ...over,
@@ -619,16 +618,13 @@ describe('due within two weeks', () => {
     makeScholarship({ id: 3, deadline: '2026-04-19', _deadline_ms: ms('2026-04-19'), _amount: 700 }),
     makeScholarship({ id: 4, deadline: '2026-04-20', _deadline_ms: ms('2026-04-20'), _amount: 8000 }),
   ]
-  it('groups open listings closing within 14 days as their own run', () => {
-    expect(scholarships.map(scholarshipGroupKey)).toEqual(['active', 'soon', 'soon', 'active'])
-    expect(SCHOLARSHIP_GROUP_LABELS.soon).toBe('DUE WITHIN 2 WEEKS')
+  it('puts deadlines close and far in the same open run', () => {
+    expect(scholarships.map(scholarshipGroupKey)).toEqual(['active', 'active', 'active', 'active'])
+    expect(Object.keys(SCHOLARSHIP_GROUP_LABELS)).not.toContain('soon')
   })
-  it('puts that run first under every sort, so each run appears once', () => {
-    for (const sortBy of ['closest_due', 'highest_pay', 'lowest_pay'] as const) {
-      const sorted = filterSortScholarships(scholarships, state({ sortBy }))
-      expect(groupRuns(sorted, scholarshipGroupKey, SCHOLARSHIP_GROUP_LABELS).map(r => r.key)).toEqual(['soon', 'active'])
-    }
-    expect(ids(filterSortScholarships(scholarships, state({ sortBy: 'highest_pay' })))).toEqual([3, 2, 1, 4])
+  it('orders the run by the chosen sort alone', () => {
+    expect(ids(filterSortScholarships(scholarships, state()))).toEqual([2, 3, 4, 1])
+    expect(ids(filterSortScholarships(scholarships, state({ sortBy: 'highest_pay' })))).toEqual([1, 4, 3, 2])
   })
   it('does the same for programs', () => {
     const programs = [
@@ -637,7 +633,8 @@ describe('due within two weeks', () => {
       makeProgram({ id: 3, deadline: 'TBA' }),
     ]
     const sorted = filterSortPrograms(programs, programState({ sortBy: 'paid_first' }))
-    expect(sorted.map(programGroupKey)).toEqual(['soon', 'active', 'tba'])
-    expect(PROGRAM_GROUP_LABELS.soon).toBe('DUE WITHIN 2 WEEKS')
+    expect(sorted.map(p => p.id)).toEqual([1, 2, 3])
+    expect(sorted.map(programGroupKey)).toEqual(['active', 'active', 'tba'])
+    expect(Object.keys(PROGRAM_GROUP_LABELS)).not.toContain('soon')
   })
 })

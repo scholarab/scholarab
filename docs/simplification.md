@@ -1512,4 +1512,6 @@ Outcome: a student filtering for what they can apply to today gets all of it wit
 | "Open any time" as a fourth status headword | Now the headword "Open now" with the qualifier "no deadline" (rows, /saved, the detail chip, quiz results, related cards). The "What these mean" note loses a line. |
 | The rolling/Ongoing distinction itself | Kept: it decides the row's date cell and keeps estimated or unposted dates out of "Open now" (status.ts unchanged). |
 
-Add-back fraction: 0/4. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped); no "open any time" text left in `dist/`.
+| "DUE WITHIN 2 WEEKS" run above OPEN NOW | Removed, with its sort rule and rust count style. Under the default "Earliest deadline" sort it was the top of OPEN NOW with a second heading; each row's date already turns rust inside 14 days. Under "Highest $" a close deadline now sits where its amount puts it (the trade-off). The quiz's own due-soon results group is separate and unchanged. |
+
+Add-back fraction: 0/5. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped); no "open any time" or "within 2 weeks" text left in `dist/`.

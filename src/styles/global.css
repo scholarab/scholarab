@@ -1857,7 +1857,6 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 /* The count stickers say what the run is: rust for the ones closing within
    two weeks (rust is the deadline colour everywhere), mint for open now. */
-[data-dir-group='soon'] .sabl-group-count { background: var(--rust); color: #fff; }
 [data-dir-group='active'] .sabl-group-count { background: var(--brand); color: var(--text-primary); }
 /* A row lights up mint under the pointer instead of going grey. */
 .sabl-card:hover { background-color: rgba(47, 211, 160, 0.14); }
