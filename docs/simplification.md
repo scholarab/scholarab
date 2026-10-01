@@ -1499,3 +1499,17 @@ Outcome: the three first-impression moments (quiz results, a city hub reached fr
 | "Another school" first in the school question (critique claim) | No change: first on purpose since 2026-09-27, so a student without a listed school can pass without paging 64 tiles. |
 
 Add-back fraction: 0/15 (three claims checked and left unchanged, not counted as removals). Measured on the static build: Calgary hub first row 492px of 812 on a phone (the line and the unclamped standfirst cost it; the kicker's removal paid some back), /scholarships/ first row 358px (was 378px with the kicker), no horizontal overflow at 375 or 1280. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (151, 19 skipped), `impeccable detect` clean on every changed file.
+
+## One "Open now" status, October 1, 2026
+
+Outcome: a student filtering for what they can apply to today gets all of it with one choice. "Open any time" was a second STATUS option and a second list run for the same answer to that question. It held 2 scholarships beside 249 "Open now", and on /programs it held more programs (48) than "Open now" did (40), so "Open now" hid most of the open programs.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| "Open any time" STATUS option on /scholarships and /programs | Removed. "Open now" holds dated and no-deadline listings: /programs "Open now" is 88 (40 + 48). Old `?status=ongoing` links open "Open now" (directory-client, e2e test). |
+| "OPEN ANY TIME" list run | Folded into the OPEN NOW run. Within it, no-deadline rows sort after dated ones by date and by amount like any other row, so "Highest $" no longer splits the run. |
+| "N open any time" line on home photo slides | Removed. "N open right now" counts both, the same set as the hub chip it links to (`openCounts`, numbers.spec). |
+| "Open any time" as a fourth status headword | Now the headword "Open now" with the qualifier "no deadline" (rows, /saved, the detail chip, quiz results, related cards). The "What these mean" note loses a line. |
+| The rolling/Ongoing distinction itself | Kept: it decides the row's date cell and keeps estimated or unposted dates out of "Open now" (status.ts unchanged). |
+
+Add-back fraction: 0/4. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped); no "open any time" text left in `dist/`.

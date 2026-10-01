@@ -329,7 +329,7 @@ describe('programWhen', () => {
     // getToday mock = 2026-04-05
     expect(programWhen(makeProgram({ id: 1, deadline: '2026-04-08', _deadline_ms: new Date('2026-04-08T00:00:00').getTime() })))
       .toEqual({ main: 'Apr 8', sub: '3 days left', cls: 'sabl-when is-urgent' })
-    expect(programWhen(makeProgram({ id: 2, deadline: 'Ongoing' })).main).toBe('Open any time')
+    expect(programWhen(makeProgram({ id: 2, deadline: 'Ongoing' }))).toMatchObject({ main: 'Open now', sub: 'no deadline' })
     expect(programWhen(makeProgram({ id: 3, deadline: 'TBA' })).main).toBe('Opens later, date not posted')
     expect(programWhen(makeProgram({ id: 4, deadline: '2026-01-01', _deadline_ms: new Date('2026-01-01T00:00:00').getTime() })).main).toBe('Closed')
   })
@@ -355,7 +355,7 @@ describe('scholarshipWhen', () => {
   it('names the other states plainly', () => {
     expect(scholarshipWhen(makeScholarship({ id: 1, deadline: '2026-01-01', _deadline_ms: at('2026-01-01') })).main).toBe('Closed')
     expect(scholarshipWhen(makeScholarship({ id: 2, openDate: '2026-09-01', deadline: '2026-12-01', _open_ms: at('2026-09-01'), _deadline_ms: at('2026-12-01') })).main).toBe('Opens Sep 1')
-    expect(scholarshipWhen(makeScholarship({ id: 3, deadline: null, _deadline_ms: 0, rolling: true })).main).toBe('Open any time')
+    expect(scholarshipWhen(makeScholarship({ id: 3, deadline: null, _deadline_ms: 0, rolling: true }))).toMatchObject({ main: 'Open now', sub: 'no deadline' })
     expect(scholarshipWhen(makeScholarship({ id: 4, deadline: null, _deadline_ms: 0 }))).toMatchObject({ main: 'Opens later', sub: 'date not posted' })
   })
 })
@@ -380,8 +380,8 @@ describe('filterSortPrograms', () => {
       makeProgram({ id: 4, category: 'Computing', format: 'research', description: 'Robotics lab', deadline: '2026-01-01', _deadline_ms: PAST_MS }),
       makeProgram({ id: 5, category: 'Computing', format: 'research', description: 'Networks mentor', deadline: 'Ongoing' }),
     ]
-    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing', selectedFormat: 'research', statusFilter: 'ongoing', searchQuery: 'robotics' })))).toEqual([1])
-    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing', selectedFormat: 'all', statusFilter: 'ongoing', searchQuery: 'robotics' })))).toEqual([1, 2])
+    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing', selectedFormat: 'research', statusFilter: 'active', searchQuery: 'robotics' })))).toEqual([1])
+    expect(ids(filterSortPrograms(items, state({ selectedCategory: 'Computing', selectedFormat: 'all', statusFilter: 'active', searchQuery: 'robotics' })))).toEqual([1, 2])
   })
 
   it('always excludes closed programs', () => {
@@ -402,15 +402,16 @@ describe('filterSortPrograms', () => {
     expect(ids(filterSortPrograms(items, state({ statusFilter: 'all' })))).toEqual([2, 3, 1])
   })
 
-  it('statusFilter narrows to a single program status', () => {
+  // "Open now" holds year-round programs too: the "Open any time" chip that
+  // split them off held more programs (48) than "Open now" did (40).
+  it('statusFilter narrows to one status, with active taking dated and year-round', () => {
     const items = [
       makeProgram({ id: 1, deadline: '2026-01-01', _deadline_ms: PAST_MS }),
       makeProgram({ id: 2, deadline: '2026-12-01', _deadline_ms: FUTURE_MS }),
       makeProgram({ id: 3, deadline: 'Ongoing' }),
       makeProgram({ id: 4, deadline: 'TBA' }),
     ]
-    expect(ids(filterSortPrograms(items, state({ statusFilter: 'active' })))).toEqual([2])
-    expect(ids(filterSortPrograms(items, state({ statusFilter: 'ongoing' })))).toEqual([3])
+    expect(ids(filterSortPrograms(items, state({ statusFilter: 'active' })))).toEqual([2, 3])
     expect(ids(filterSortPrograms(items, state({ statusFilter: 'tba' })))).toEqual([4])
     expect(ids(filterSortPrograms(items, state({ statusFilter: 'closed' })))).toEqual([1])
   })
@@ -433,7 +434,8 @@ describe('filterSortPrograms', () => {
       makeProgram({ id: 2, deadline: '2026-12-01', _deadline_ms: FUTURE_MS }),
       makeProgram({ id: 3, paid: true, deadline: 'TBA' }),
     ]
-    expect(ids(filterSortPrograms(items, state({ sortBy: 'paid_first' })))).toEqual([2, 1, 3])
+    // Dated and year-round share the open group, so paid leads inside it.
+    expect(ids(filterSortPrograms(items, state({ sortBy: 'paid_first' })))).toEqual([1, 2, 3])
   })
 
   it('paid_first puts paid programs first, then by deadline', () => {

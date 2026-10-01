@@ -136,7 +136,7 @@ describe('detail availability', () => {
       await render(data('scholarship', s))
       expect(text('.sabd-deadline-value')).toBe('No fixed deadline')
       refresh()
-      expect(text('[data-status-chip]')).toBe('Open any time')
+      expect(text('[data-status-chip]')).toBe('Open now')
     }
     await render(data('scholarship', scholarships.find(s => s.id === 20)!))
     expect(text('.sabd-deadline-value')).toBe('Around May 31, 2027')

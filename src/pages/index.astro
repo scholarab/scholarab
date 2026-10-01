@@ -105,8 +105,8 @@ const SCOPE_KICKERS: Record<string, string> = {
 interface PhotoCard {
   label: string; kicker: string; backdrop: string; href: string; count: number;
   /** The open count (dated, not yet closed), and where it links; null href
-   *  when the hub has no open filter. `ongoing` is open with no deadline. */
-  open: number; ongoing: number; openHref: string | null;
+   *  when the hub has no open filter. Open includes no-deadline listings. */
+  open: number; openHref: string | null;
   credit: (typeof PHOTO_CREDITS)[string] | undefined;
 }
 const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
@@ -132,8 +132,8 @@ const scopeCards: PhotoCard[] = SCHOLARSHIP_FACETS
 // The program twin (Ilia, 2026-09-23): one card per format hub, the same eight
 // the header's Programs tiles show, biggest first. The kickers are each hub's
 // own intro cut to a line; the two named by a jargon word define it instead
-// (lib/glossary.ts). "Open" counts dated deadlines still ahead, the same
-// rule as the hub's Open chip (lib/counts.ts); year-round ones are counted apart.
+// (lib/glossary.ts). "Open" counts what a student can join today, dated or
+// year-round, the same rule as the hub's Open chip (lib/counts.ts).
 const FORMAT_KICKERS: Record<string, string> = {
   'summer-programs': 'Camps, institutes and labs',
   competitions: 'Built over a season, entered as a team',
@@ -360,12 +360,7 @@ const carousels = [
                   <h3 class="sab-scope-name">{c.label}</h3>
                   {c.open > 0 && c.openHref
                     ? <a href={c.openHref} class="sab-scope-sub">{c.open.toLocaleString('en-CA')} open right now</a>
-                    : c.open > 0 || c.ongoing === 0
-                      ? <span class="sab-scope-sub sab-scope-sub-plain">{c.open > 0 ? `${c.open.toLocaleString('en-CA')} open right now` : k.none}</span>
-                      : null}
-                  {c.ongoing > 0 && (
-                    <span class="sab-scope-sub sab-scope-sub-plain sab-scope-sub-more">{c.ongoing.toLocaleString('en-CA')} open any time</span>
-                  )}
+                    : <span class="sab-scope-sub sab-scope-sub-plain">{c.open > 0 ? `${c.open.toLocaleString('en-CA')} open right now` : k.none}</span>}
                   <div class="sab-scope-ctas">
                     <a href={c.href} class="sab-scope-btn sab-scope-btn-solid">
                       See all {c.count.toLocaleString('en-CA')}
@@ -953,7 +948,6 @@ const carousels = [
   .sab-scope-sub-plain, .sab-scope-sub-plain:hover { text-decoration: none; }
   /* The no-deadline count, on its own line under the open one: counted apart
      so "open" here matches the hub's Open chip (lib/counts.ts). */
-  .sab-scope-sub-more { display: block; margin-top: 6px; }
   .sab-scope-ctas { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
   .sab-scope-btn {
     display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;

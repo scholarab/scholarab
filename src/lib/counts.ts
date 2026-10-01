@@ -4,23 +4,20 @@
 // "Competitions 8 open", the hub said 3, because home counted year-round
 // programs as open and the hub did not).
 //
-// "Open" means a real deadline that has not passed (status 'active'). Open
-// with no deadline is its own count, 'ongoing', and is never folded in.
+// "Open" means a student can apply today: a deadline that has not passed
+// ('active') or no deadline at all ('ongoing'). Since 2026-10-01 the two are
+// one count, the same set the directories' "Open now" chip and run hold.
 
 export interface OpenCounts {
-  /** Open now, with a deadline to apply by. */
+  /** Open now, with or without a deadline. */
   open: number;
-  /** Open, with no fixed deadline. */
-  ongoing: number;
 }
 
 export function openCounts<T>(items: readonly T[], statusOf: (item: T) => string): OpenCounts {
   let open = 0;
-  let ongoing = 0;
   for (const it of items) {
     const st = statusOf(it);
-    if (st === 'active') open++;
-    else if (st === 'ongoing') ongoing++;
+    if (st === 'active' || st === 'ongoing') open++;
   }
-  return { open, ongoing };
+  return { open };
 }

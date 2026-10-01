@@ -163,14 +163,19 @@ export function programIsIndexable(p: ProgramStatusInput, today: Date): boolean 
 // closed. Anything finer is a qualifier after the headword, never a word of
 // its own: six labels ("Not open yet", "Date not confirmed", "No fixed
 // deadline"...) were more than a first-time applicant could act on (critique
-// 2026-09-26). The counts did not change: "open now" is still dated only.
+// 2026-09-26). "Open now" counts every listing open today, dated or not.
 export const STATUS_WORDS = {
   open: 'Open now',
   future: 'Opens later',
   unconfirmed: 'Opens later, date not posted',
-  none: 'Open any time',
   closed: 'Closed',
 } as const;
+
+// Open with no deadline is "Open now" with this qualifier, not a fourth
+// headword: "Open any time" was a second chip and a second run for what is,
+// to a student, the same answer to "can I apply today" (2026-10-01).
+export const NO_DEADLINE = 'no deadline';
+export const OPEN_NO_DEADLINE = `${STATUS_WORDS.open}, ${NO_DEADLINE}`;
 
 /**
  * `main` is the state or its date, `sub` the qualifier a one-line cell prints
@@ -199,7 +204,7 @@ export function waitingLabel(
 
 /** Programs speak the same words: TBA is an unconfirmed date, Ongoing has no deadline. */
 export function programUndatedLabel(deadline: string | null | undefined): string {
-  return deadline === 'Ongoing' ? STATUS_WORDS.none : STATUS_WORDS.unconfirmed;
+  return deadline === 'Ongoing' ? OPEN_NO_DEADLINE : STATUS_WORDS.unconfirmed;
 }
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

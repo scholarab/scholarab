@@ -4,7 +4,7 @@
 // shows/hides/reorders them, so the page ships no React.
 import SabStatusHelp from './SabStatusHelp.astro';
 import { STATUS_WORDS } from '../../lib/status.ts';
-import { showingLine, DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, getProgramStatus, groupRuns, programGroupKey, programWhen } from '../../lib/list-core.ts';
+import { showingLine, DEFAULT_PROGRAM_STATE, DIRECTORY_PAGE_SIZE, PROGRAM_GROUP_LABELS, directoryCountLine, filterSortPrograms, groupRuns, programGroupKey, programOpenNowCount, programWhen } from '../../lib/list-core.ts';
 import { programSearchBlob } from '../../lib/search-text.ts';
 import type { ProgramFilterState, ProgramWithMeta } from '../../lib/list-core.ts';
 import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils.ts';
@@ -49,12 +49,11 @@ const SORT_CHIPS = [
   { value: 'name',        label: 'A–Z' },
 ] as const;
 
-// Mirrors the scholarship STATUS row, in the same words: 'ongoing' is open
-// with no deadline, 'tba' is a date the provider has not posted yet.
+// Mirrors the scholarship STATUS row, in the same words: 'active' includes
+// programs open with no deadline, 'tba' is a date not posted yet.
 const STATUS_CHIPS = [
   { value: 'all',     label: 'All' },
   { value: 'active',  label: STATUS_WORDS.open },
-  { value: 'ongoing', label: STATUS_WORDS.none },
   { value: 'tba',     label: STATUS_WORDS.unconfirmed },
   { value: 'closed', label: 'Closed' },
 ] as const;
@@ -76,7 +75,7 @@ if (showGroups) {
   let at = 0;
   for (const r of runs) { headerAt.set(at, r); at += r.count; }
 }
-const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
+const openNow = programOpenNowCount(initial);
 ---
 
 <Fragment set:html={ICON_SPRITE} />
@@ -314,7 +313,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
 
 <script>
   import { initDirectory } from '../../lib/directory-client.ts';
-  import { PROGRAM_GROUP_LABELS, buildProgramStatusCache, directoryCountLine, filterSortPrograms, getProgramStatus, programGroupKey, programWhen, selectPrograms } from '../../lib/list-core.ts';
+  import { PROGRAM_GROUP_LABELS, buildProgramStatusCache, directoryCountLine, filterSortPrograms, programGroupKey, programOpenNowCount, programWhen, selectPrograms } from '../../lib/list-core.ts';
   import type { ProgramWithMeta, ProgramSort, ProgramStatus, ProgramStatusFilter } from '../../lib/list-core.ts';
   import { getSavedPrograms, toggleSavedProgram } from '../../lib/tracker.ts';
 
@@ -363,7 +362,7 @@ const openNow = initial.filter(p => getProgramStatus(p) === 'active').length;
     countFor: (items, state, cache) => selectPrograms(items, asFilterState(state), cache).length,
     groups: { key: programGroupKey, label: key => PROGRAM_GROUP_LABELS[key] ?? key },
     summary: (visible, total) => ({
-      count: directoryCountLine(visible.length, total, 'PROGRAMS', visible.filter(p => getProgramStatus(p) === 'active').length),
+      count: directoryCountLine(visible.length, total, 'PROGRAMS', programOpenNowCount(visible)),
     }),
     getSavedIds: () => [...getSavedPrograms()],
     toggleSave: id => [...toggleSavedProgram(id)],

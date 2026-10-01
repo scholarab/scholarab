@@ -24,14 +24,13 @@ test('home photo slides state the same counts as the hubs they link to', async (
       href: c.querySelector<HTMLAnchorElement>('.sab-scope-btn-solid')!.getAttribute('href')!,
       total: c.querySelector('.sab-scope-btn-solid')!.textContent ?? '',
       open: subs.find(t => /open right now/.test(t)) ?? '',
-      ongoing: subs.find(t => /open any time/.test(t)) ?? '',
     };
   }));
   expect(slides.length).toBeGreaterThanOrEqual(18);
   for (const s of slides) {
     await page.goto(s.href);
-    const hub = { total: await chip(page, 'all'), open: await chip(page, 'active'), ongoing: await chip(page, 'ongoing') };
-    expect.soft({ slide: s.name, total: num(s.total), open: num(s.open), ongoing: num(s.ongoing) })
+    const hub = { total: await chip(page, 'all'), open: await chip(page, 'active') };
+    expect.soft({ slide: s.name, total: num(s.total), open: num(s.open) })
       .toEqual({ slide: s.name, ...hub });
   }
 });

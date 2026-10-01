@@ -670,7 +670,10 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     state = { ...config.defaultState };
     // Deep links like /scholarships?category=STEM pre-select that track chip.
     for (const key of Object.keys(state)) {
-      const value = params.get(key);
+      let value = params.get(key);
+      // ?status=ongoing was the "Open any time" chip until 2026-10-01; it is
+      // part of "Open now" since, so old links land on that list.
+      if (key === 'status' && value === 'ongoing') value = 'active';
       if (value !== null) state = { ...state, [key]: value };
     }
     // ?q= arrives from the other directory's empty state, which offers this

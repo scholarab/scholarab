@@ -324,3 +324,12 @@ test('program format and field intersect and survive reload and a detail visit',
   await expect(page).toHaveURL(/programs\/research-placements\/\?category=Computing/);
   await expect(page.locator('[data-dir-card]:visible')).toHaveCount(expected);
 });
+
+// "Open any time" was its own STATUS option until 2026-10-01. Old ?status=ongoing
+// links open the "Open now" list, which holds those listings since.
+test('an old ?status=ongoing link opens the Open now list', async ({ page }) => {
+  await page.goto('/programs/?status=ongoing');
+  await expect(page.locator('[data-fselect="status"]').first()).toHaveValue('active');
+  await expect(page.locator('[data-fselect="status"] option[value="ongoing"]')).toHaveCount(0);
+  await expect(page.locator('.sabl-group-label', { hasText: /open any time/i })).toHaveCount(0);
+});

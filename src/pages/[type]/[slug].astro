@@ -15,7 +15,7 @@ import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline, amountSpan } from '../../lib/utils.ts';
-import { STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
+import { OPEN_NO_DEADLINE, STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts';
@@ -149,7 +149,7 @@ export async function getStaticPaths() {
       title: s.title,
       value: s.amount,
       tag: s.region || 'Alberta',
-      when: !s.deadline ? (s.rolling ? STATUS_WORDS.none : STATUS_WORDS.unconfirmed)
+      when: !s.deadline ? (s.rolling ? OPEN_NO_DEADLINE : STATUS_WORDS.unconfirmed)
         : `${s.deadlineEstimated ? 'Around ' : 'Due '}${formatDeadline(s.deadline)}`,
       money: true,
     }));

@@ -153,7 +153,7 @@ describe('initSaved', () => {
     for (const deadline of ['TBA', 'Ongoing', '2027-06-01', null]) {
       expect(savedWhen('program', { active: false, deadline }).main).toBe('Not currently listed')
     }
-    expect(savedWhen('program', { deadline: 'Ongoing' }).main).toBe('Open any time')
+    expect(savedWhen('program', { deadline: 'Ongoing' })).toMatchObject({ main: 'Open now', sub: 'no deadline' })
   })
 
   it('remove button unsaves the item, hides its card, and updates counts', () => {

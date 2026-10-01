@@ -8,7 +8,7 @@ import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-m
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { STATUS_WORDS, canApplyNow, openLaterNote, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
+import { OPEN_NO_DEADLINE, canApplyNow, openLaterNote, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import { comboHref, pickCombos, type ComboEntry } from '../lib/combo-pick.ts'
 import {
@@ -678,7 +678,7 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
               const left = s.deadline ? calendarDaysUntil(s.deadline) : null
               const when = waiting ? [waiting.main, waiting.sub].filter(Boolean).join(', ')
                 : left === 0 ? 'Due today' : left === 1 ? 'Due tomorrow'
-                : s.deadline ? `Due ${formatDue(s.deadline)}` : STATUS_WORDS.none
+                : s.deadline ? `Due ${formatDue(s.deadline)}` : OPEN_NO_DEADLINE
               return (
                 <Fragment key={s.id}>
                 {label && <p className="sabm-table-label">{label}</p>}

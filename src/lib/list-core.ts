@@ -1,7 +1,7 @@
 // Framework-free filtering/sorting/status logic for the public directories.
 // Shared by the directory page scripts and the eligibility quiz.
 import { getToday } from './utils.ts';
-import { STATUS_WORDS, programUndatedLabel, scholarshipStatusOf, waitingLabel } from './status.ts';
+import { NO_DEADLINE, STATUS_WORDS, canApplyNow, scholarshipStatusOf, waitingLabel } from './status.ts';
 import type { ScholarshipStatus } from './status.ts';
 import type { Scholarship, Program } from './data-loader.ts';
 import { normalizeSearchQuery, programSearchBlob, scholarshipSearchBlob, searchRows } from './search-text.ts';
@@ -19,7 +19,10 @@ export interface ScholarshipWithMeta extends Scholarship {
 }
 
 export type { ScholarshipStatus };
-export type StatusFilter = 'all' | 'active' | 'ongoing' | 'opening' | 'unconfirmed' | 'closed';
+// 'active' is every listing a student can apply to today, dated or not. A
+// separate "Open any time" chip split that set in two for one fact a row
+// already states, and held 2 scholarships beside 249 (2026-10-01).
+export type StatusFilter = 'all' | 'active' | 'opening' | 'unconfirmed' | 'closed';
 
 /** Only for students already past high school (every listed grade is
  *  post-secondary). They stay listed, since a Grade 12 student applies to
@@ -106,8 +109,8 @@ export function selectScholarships(
     ? initialScholarships.filter(s => statusCache.get(s.id) === 'closed')
     : statusFilter === 'opening'
       ? initialScholarships.filter(s => statusCache.get(s.id) === 'future')
-      : statusFilter === 'active' || statusFilter === 'ongoing'
-        ? initialScholarships.filter(s => statusCache.get(s.id) === statusFilter)
+      : statusFilter === 'active'
+        ? initialScholarships.filter(s => canApplyNow(statusCache.get(s.id) ?? 'active'))
         : statusFilter === 'unconfirmed'
           ? initialScholarships.filter(s => statusCache.get(s.id) === 'unconfirmed')
           : initialScholarships;
@@ -133,17 +136,17 @@ export function filterSortScholarships(
 ): ScholarshipWithMeta[] {
   const afterSearch = selectScholarships(initialScholarships, state, statusCache);
   const { sortBy } = state;
-  const rank = { active: 0, ongoing: 1, future: 2, unconfirmed: 3, closed: 4 } as Record<string, number>;
+  const rank = { active: 0, ongoing: 0, future: 2, unconfirmed: 3, closed: 4 } as Record<string, number>;
   return [...afterSearch].sort((a, b) => {
     const afterDiff = Number(isAfterHighSchool(a)) - Number(isAfterHighSchool(b));
     if (afterDiff !== 0) return afterDiff;
     const aStatus = statusCache.get(a.id) ?? 'active';
     const bStatus = statusCache.get(b.id) ?? 'active';
-    // open (dated) first → no fixed deadline → future → closed, for every sort
-    // (so expired entries don't bury open ones)
+    // open (dated or not) → future → closed, for every sort (so expired
+    // entries don't bury open ones). Undated open awards sort last by date.
     const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
     if (statusDiff !== 0) return statusDiff;
-    if (aStatus === 'active') {
+    if (rank[aStatus] === 0) {
       const soonDiff = Number(dueSoon(b.deadline, b._deadline_ms)) - Number(dueSoon(a.deadline, a._deadline_ms));
       if (soonDiff !== 0) return soonDiff;
     }
@@ -197,14 +200,13 @@ function dueSoon(deadline: string | null | undefined, deadlineMs?: number): bool
 // The key MUST be the sort's primary key, or a group would appear twice: every
 // scholarship sort ranks by status first, so status is safe. Programs only
 // rank by status first too since 2026-09-23, so they group the same way:
-// open, no fixed deadline, date not confirmed, closed.
+// open, date not confirmed, closed. Open with no deadline is in the open run.
 
 export const DUE_SOON_LABEL = 'DUE WITHIN 2 WEEKS';
 
 export const SCHOLARSHIP_GROUP_LABELS: Record<string, string> = {
   soon: DUE_SOON_LABEL,
   active: STATUS_WORDS.open.toUpperCase(),
-  ongoing: STATUS_WORDS.none.toUpperCase(),
   future: STATUS_WORDS.future.toUpperCase(),
   unconfirmed: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
@@ -220,7 +222,6 @@ export const SCHOLARSHIP_SHUT_GROUPS = ['unconfirmed', 'closed', 'after'];
 export const PROGRAM_GROUP_LABELS: Record<string, string> = {
   soon: DUE_SOON_LABEL,
   active: STATUS_WORDS.open.toUpperCase(),
-  ongoing: STATUS_WORDS.none.toUpperCase(),
   tba: STATUS_WORDS.unconfirmed.toUpperCase(),
   closed: 'CLOSED',
 };
@@ -230,11 +231,13 @@ export const PROGRAM_GROUP_LABELS: Record<string, string> = {
 export function scholarshipGroupKey(s: ScholarshipWithMeta): string {
   if (isAfterHighSchool(s)) return 'after';
   const status = getScholarshipStatus(s);
+  if (status === 'ongoing') return 'active';
   return status === 'active' && dueSoon(s.deadline, s._deadline_ms) ? 'soon' : status;
 }
 
 export function programGroupKey(p: ProgramWithMeta): string {
   const status = getProgramStatus(p);
+  if (status === 'ongoing') return 'active';
   return status === 'active' && dueSoon(p.deadline, p._deadline_ms) ? 'soon' : status;
 }
 
@@ -267,7 +270,12 @@ export const DIRECTORY_PAGE_SIZE = 24;
 /** "N OPEN NOW" on a scholarship list: the OPEN NOW run, so after-high-school
  *  awards (their own run whatever their status) are not counted twice over. */
 export function openNowCount(items: ScholarshipWithMeta[]): number {
-  return items.filter(s => !isAfterHighSchool(s) && getScholarshipStatus(s) === 'active').length;
+  return items.filter(s => !isAfterHighSchool(s) && canApplyNow(getScholarshipStatus(s))).length;
+}
+
+/** The program twin of openNowCount: the OPEN NOW run, dated or not. */
+export function programOpenNowCount(items: ProgramWithMeta[]): number {
+  return items.filter(p => canApplyNow(getProgramStatus(p))).length;
 }
 
 /**
@@ -318,7 +326,7 @@ export function scholarshipWhen(s: ScholarshipWithMeta): { main: string; sub: st
   const status = getScholarshipStatus(s);
   const waiting = waitingLabel(status, s, date);
   if (waiting) return { ...waiting, cls: 'sabl-when is-quiet' };
-  if (!s.deadline) return { main: STATUS_WORDS.none, sub: '', cls: 'sabl-when is-quiet' };
+  if (!s.deadline) return { main: STATUS_WORDS.open, sub: NO_DEADLINE, cls: 'sabl-when is-quiet' };
   const days = Math.max(0, Math.round((new Date(s.deadline + 'T00:00:00').getTime() - getToday().getTime()) / 86400000));
   const sub = days === 0 ? 'due today' : `${days} ${days === 1 ? 'day' : 'days'} left`;
   return { main: date(s.deadline), sub, cls: `sabl-when${whenTier(days)}` };
@@ -366,7 +374,8 @@ export function getProgramStatus(p: ProgramWithMeta): ProgramStatus {
 export function programWhen(p: ProgramWithMeta): { main: string; sub: string; cls: string } {
   const status = getProgramStatus(p);
   if (status === 'closed') return { main: STATUS_WORDS.closed, sub: '', cls: 'sabl-when is-quiet' };
-  if (status === 'tba' || status === 'ongoing') return { main: programUndatedLabel(p.deadline), sub: '', cls: 'sabl-when is-quiet' };
+  if (status === 'ongoing') return { main: STATUS_WORDS.open, sub: NO_DEADLINE, cls: 'sabl-when is-quiet' };
+  if (status === 'tba') return { main: STATUS_WORDS.unconfirmed, sub: '', cls: 'sabl-when is-quiet' };
   const deadMs = p._deadline_ms ?? new Date(p.deadline! + 'T00:00:00').getTime();
   const days = Math.max(0, Math.round((deadMs - getToday().getTime()) / 86400000));
   const main = new Date(deadMs).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
@@ -388,7 +397,7 @@ function programDeadlineOrder(p: ProgramWithMeta): number {
 
 // 'open' is the historical behaviour (closed programs never surface); the
 // directory passes an explicit value so its STATUS chips can reach them.
-export type ProgramStatusFilter = 'all' | 'open' | 'active' | 'ongoing' | 'tba' | 'closed';
+export type ProgramStatusFilter = 'all' | 'open' | 'active' | 'tba' | 'closed';
 
 export interface ProgramFilterState {
   selectedCategory: string;
@@ -422,7 +431,9 @@ export function selectPrograms(
     ? initialPrograms
     : initialPrograms.filter(p => {
         const status = statusCache.get(p.id);
-        return statusFilter === 'open' ? status !== 'closed' : status === statusFilter;
+        return statusFilter === 'open' ? status !== 'closed'
+          : statusFilter === 'active' ? status === 'active' || status === 'ongoing'
+          : status === statusFilter;
       });
   const afterCategory = selectedCategory === 'all'
     ? afterStatus
@@ -450,16 +461,16 @@ export function filterSortPrograms(
 ): ProgramWithMeta[] {
   const afterSearch = selectPrograms(initialPrograms, state, statusCache);
   const { sortBy } = state;
-  const rank = { active: 0, ongoing: 1, tba: 2, closed: 3 } as Record<string, number>;
+  const rank = { active: 0, ongoing: 0, tba: 2, closed: 3 } as Record<string, number>;
   return [...afterSearch].sort((a, b) => {
     const aStatus = statusCache.get(a.id) ?? 'active';
     const bStatus = statusCache.get(b.id) ?? 'active';
-    // Status leads every sort, the scholarship rule: open programs, then no
-    // fixed deadline, then date not confirmed, then closed, so the groups the
-    // directory labels are contiguous and a past deadline never heads the list.
+    // Status leads every sort, the scholarship rule: open programs (dated or
+    // not), then date not confirmed, then closed, so the groups the directory
+    // labels are contiguous and a past deadline never heads the list.
     const statusDiff = (rank[aStatus] ?? 0) - (rank[bStatus] ?? 0);
     if (statusDiff !== 0) return statusDiff;
-    if (aStatus === 'active') {
+    if (rank[aStatus] === 0) {
       const soonDiff = Number(dueSoon(b.deadline, b._deadline_ms)) - Number(dueSoon(a.deadline, a._deadline_ms));
       if (soonDiff !== 0) return soonDiff;
     }
