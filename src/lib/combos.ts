@@ -120,18 +120,18 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Edmonton scholarship combos',
     title: 'Edmonton Scholarship Combos',
     description:
-      "Edmonton scholarships grouped by who can apply: Edmonton Public and Catholic students, King's University entrants, and single high schools' award lists.",
+      "Edmonton scholarships grouped by who can apply: Edmonton Public and Edmonton Catholic students, and students starting at The King's University.",
     intro:
-      "Edmonton's awards split by school board, by the university they pay into and by the high schools that publish their own lists. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "Edmonton's awards split by school board and by the university they pay into. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
   },
   {
     city: 'calgary',
     h1: 'Calgary scholarship combos',
     title: 'Calgary Scholarship Combos',
     description:
-      'Calgary scholarships grouped by who can apply: Calgary Board of Education and Calgary Catholic students, and the award lists of single high schools.',
+      "Calgary scholarships grouped by who can apply: Calgary Board of Education students and Calgary Catholic students, each set with its own add-ons.",
     intro:
-      'Most Calgary awards are open to one board or one school, so the combo you are in says more than the whole city list does. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+      "Most Calgary awards here are open to one school board, so the combo you are in says more than the whole city list does. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
   },
   {
     city: 'red-deer',
@@ -165,9 +165,9 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Lacombe scholarship combos',
     title: 'Lacombe Scholarship Combos',
     description:
-      'Lacombe-area scholarships grouped by who can apply: Burman University entrants, Alix-MAC School and Iron Ridge Secondary Campus students.',
+      "Lacombe-area scholarships grouped by who can apply: students starting at Burman University, whose entrance awards make up a set of their own.",
     intro:
-      "Lacombe's awards cluster around Burman University and around two Wolf Creek schools that publish their own lists. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
+      "Lacombe's awards cluster around Burman University, the university in town. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
   },
   {
     city: 'cochrane',
@@ -228,9 +228,9 @@ export const CITY_COMBOS: CityCombos[] = [
     h1: 'Camrose scholarship combos',
     title: 'Camrose Scholarship Combos',
     description:
-      "Camrose-area scholarships grouped by who can apply: University of Alberta entrants, and Forestburg and Bawlf School students' own award lists.",
+      "Camrose-area scholarships grouped by who can apply: students starting at the University of Alberta's Augustana campus, which sits in Camrose.",
     intro:
-      'Camrose awards gather around the University of Alberta, whose Augustana campus is here, and around two Battle River schools. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.',
+      "Camrose awards gather around the University of Alberta, whose Augustana campus is here. If the first line of a combo describes you, every award in it is open to you; the conditions on each award still apply.",
   },
   {
     city: 'alberta',
@@ -404,7 +404,11 @@ function generatedCombos(city: string, pool: ComboTarget[]): Combo[] {
     addOn: s => narrower(s) || schooled(s),
     matchOn: { institution: inst },
   }));
-  const schools: Combo[] = count(s => s.eligibility?.specificSchools ?? []).map(school => ({
+  // A school's combo needs one award that is that school's alone. Without it
+  // the set is awards several schools share, and naming it after whichever
+  // school sorted first told the others' students it was not for them.
+  const ownAward = (school: string) => pool.some(s => s.eligibility?.specificSchools?.length === 1 && s.eligibility.specificSchools[0] === school);
+  const schools: Combo[] = count(s => s.eligibility?.specificSchools ?? []).filter(ownAward).map(school => ({
     slug: `school-${slugify(school)}`, city, name: school, who: `you go to ${school}`,
     includes: s => has(s.eligibility?.specificSchools, school),
     addOn: s => narrower(s) || college(s),

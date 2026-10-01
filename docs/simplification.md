@@ -1416,3 +1416,33 @@ Cause: every card's photo was an `<img loading="lazy">`. Chrome's lazy-load dist
 | Photos for no-JS visitors | Kept: a `<noscript>` copy of each deferred picture; with JS off all 18 photos load, as before. |
 
 Four candidates, none restored: add-back fraction 0/4. The contrast test over the photos now waits for each photo to load; before, a deferred card would have been measured against the ink behind it and passed. New browser guard: the home page fetches exactly two carousel photos once the carousel is in view, and the third arrives on a swipe. Local only; `npm run ci` passed (1,163) and `npm run test:e2e` passed (153).
+
+## Single-school awards removed, September 30, 2026
+
+Outcome: a student opening ScholarAB finds awards they can apply for and would not hear about at school. An award only one high school's students can win is announced by that school, and nobody outside the building can apply, so its listing costs a yearly re-check and a row in the directory for almost no use.
+
+Method: every listing was tagged by who can apply (one high school, enrolled at one college, entrance to one college, a town or county or district, Alberta, Canada), by hand from its audience, school list and source page. Tags, scripts and data are in `private/city-demand/` (gitignored). An award on a school's page whose audience did not name the school was tagged local, so 472 is a floor.
+
+| | Listings | Share | Apply clicks since Jul 17 | Share | Apply per listing, live by Sep 15, events since |
+| --- | --- | --- | --- | --- | --- |
+| One high school | 472 | 31% | 56 | 4% | 0.10 |
+| Enrolled at one college | 113 | 7% | 10 | 1% | 0.06 |
+| Entrance to one college | 92 | 6% | 24 | 2% | 0.10 |
+| Town, county or district | 551 | 36% | 348 | 27% | 0.26 |
+| Alberta | 161 | 10% | 467 | 36% | 0.91 |
+| Canada | 152 | 10% | 408 | 31% | 1.63 |
+
+Search Console (2026-03-01 to 09-28) gave the single-school group 93 of 491 listing clicks; the queries Google reports for small-town listings were the award's own name, typed by someone who already knew it. Calgary held 62 of the 472, so the line is eligibility, not city size.
+
+| Removal candidate | Result and retained requirement |
+| --- | --- |
+| Whole small-city directories | Not done: town and county awards open to anyone there get 2.6 times the use of single-school ones and are the awards students miss. |
+| The 472 single-school listings | Removed. Each slug 301s, in both slash forms, to its city or scope page; every city page keeps at least MIN_FACET_ITEMS (Chestermere lands on 5). The Spruce Grove rename that pointed at a removed listing now points at the Spruce Grove page. Two guides keep their prose about school awards and drop the four links. |
+| Database copies | Kept: `sync-db` mirrors without `--prune`, and its guard refuses a bulk removal, so `catalogue_entries` still holds 472 published rows the site no longer builds. Reminders read the JSON, so the one confirmed subscription on a removed award stops sending. |
+| College-only awards (113 enrolled, 92 entrance) | Not yet: Ilia chose to cut the single-school group first. |
+| The Chestermere page | Removed: after the cut its five listings were four Calgary Black Chambers awards and the Rocky View teachers' award, none from Chestermere, and its intro described a city award that was gone. It 301s to the Calgary page; the quiz keeps Chestermere as a city answer, since the Calgary-region awards still match there. |
+| School combos named after one of several schools | Removed: a school combo now needs one award that is that school's alone. Without the rule, the cut left "Bow Valley High School" in Cochrane and "Holy Trinity Academy" in Okotoks holding awards every school in town shares, named after whichever school sorted first. Combos 58 to 16, combo pages 21 to 9; the 12 retired combo pages 301 to their city page. |
+| Quiz school answers taken from audience text | Removed: all eight led to a combo that no longer exists. |
+| Copy that described removed awards | Rewritten from the surviving listings: 13 city page descriptions or intros (Okotoks promised a 52-award handbook, Lloydminster "thirty-two of these share one form"), 4 combo pages and the combos index. |
+
+Add-back fraction: 0/5 removed. Listings 1,541 to 1,069 (31% fewer to re-check each cycle); sitemap 1,878 to 1,395 URLs; `_redirects` 122 to 1,092 rules (Workers allows 2,000 static). Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped), and the built home page's 60 internal links all resolve.

@@ -124,9 +124,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'edmonton',
     title: 'Edmonton High School Scholarships',
     description:
-      'Scholarships for Edmonton high school students: the public and Catholic division awards, the Edmonton Community Foundation funds, and school award lists.',
+      "Scholarships for Edmonton high school students: public and Catholic division awards, Edmonton Community Foundation funds and King's University entrance money.",
     intro:
-      'Only a handful of Edmonton\'s high schools publish what they hand out, so the awards below range from a $100 grade 10 prize to a $16,000 mathematics scholarship at a single school.',
+      "The Edmonton Public Schools awards here share one April deadline, and they run from a $250 French award to the LeRoy Warden scholarship of up to $10,000 for students with financial need.",
   },
   {
     slug: 'calgary',
@@ -191,9 +191,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'brooks',
     title: 'Brooks High School Scholarships',
     description:
-      'Scholarships for Brooks and County of Newell students: the Brooks Composite handbook awards, service club money, trades scholarships and health bursaries.',
+      "Scholarships for Brooks and County of Newell students: Grasslands division awards, service club money, trades scholarships and health bursaries.",
     intro:
-      'Almost all of these are collected by the school rather than mailed to a sponsor, and the handbook prints no closing dates, so the date you need is the one your own office sets.',
+      "Most of these are open to any Grasslands or County of Newell graduate, and many print no closing date, so ask your school office which date applies before you count on one.",
   },
   {
     slug: 'st-albert',
@@ -204,9 +204,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'st-albert',
     title: 'St. Albert High School Scholarships',
     description:
-      'Scholarships for St. Albert and Sturgeon County students: community foundation awards, the Humboldt memorial funds, service club money and school bursaries.',
+      "Scholarships for St. Albert and Sturgeon County students: community foundation awards, the Humboldt memorial funds, service clubs and public division awards.",
     intro:
-      'One award reaches five schools and several run at two with different cutoffs, so the date you are held to is your own school\'s rather than the one the sponsor prints.',
+      "Fourteen of these close on April 10, and six are for hockey players, from U15 AAA alumni to U18 officials, so a hockey family here has more to apply for than most.",
   },
   {
     slug: 'spruce-grove',
@@ -243,7 +243,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'fort-saskatchewan',
     title: 'Fort Saskatchewan Scholarships',
     description:
-      'Scholarships for Fort Saskatchewan and Elk Island students: Fort High internal awards, division scholarships, industry money and service club bursaries.',
+      "Scholarships for Fort Saskatchewan and Elk Island students: the thrift store and Lions awards, division scholarships, industry money and service club bursaries.",
     intro:
       'The two largest are funded by a thrift store, at $5,000 each, and they score financial need three times as heavily as they score marks.',
   },
@@ -256,7 +256,7 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'beaumont',
     title: 'Beaumont Scholarships',
     description:
-      'Scholarships for Beaumont students: two Beaumont Composite awards, the Chamber and RCMP scholarship, Black Gold division money and francophone bourses.',
+      "Scholarships for Beaumont students: the Chamber and RCMP scholarship, Black Gold division money, a Beaumont roots bourse and Centre-Nord francophone awards.",
     intro:
       'Beaumont is a city rather than part of Leduc County, so the county bursaries here are not open to it, and the awards that are open come from the school division instead.',
   },
@@ -269,9 +269,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'lloydminster',
     title: 'Lloydminster Scholarships',
     description:
-      'Scholarships for Lloydminster students on the Alberta side: Comprehensive High awards, service club money, trades and engineering awards, and the Rutherford.',
+      "Scholarships for Lloydminster students on the Alberta side: division bursaries, performing arts awards, and agriculture, engineering and health money.",
     intro:
-      'Thirty-two of these share one form and one deadline, May 1 in the school Google Classroom, so the work of applying for all of them at once is barely more than applying for one.',
+      "Several of these close in late summer rather than spring, including the teachers' association and veterinary awards on August 31, so a graduate who missed the May dates still has some.",
   },
   {
     slug: 'lacombe',
@@ -282,9 +282,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'lacombe',
     title: 'Lacombe Scholarships',
     description:
-      'Scholarships for Lacombe and Lacombe County students: the Lacombe Composite awards list, service club money and the entrance awards at Burman.',
+      "Scholarships for Lacombe and Lacombe County students: Wolf Creek division awards, service club and Legion money, and the entrance awards at Burman University.",
     intro:
-      'Eight of these are decided on a grade 12 mark alone with nothing to fill in, and one of the eight covers eight separate courses at $500 each.',
+      "Burman University sits in Lacombe, so its entrance awards are here, from $1,000 for applying by February 1 to full tuition for a 95 per cent admission average.",
   },
   {
     slug: 'cochrane',
@@ -295,9 +295,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'cochrane',
     title: 'Cochrane Scholarships',
     description:
-      "Scholarships for Cochrane students: the Cochrane High award package, the town's Rotary, Kiwanis and Lions awards, and the Rocky View County scholarships.",
+      "Scholarships for Cochrane students: the town's Rotary and Kiwanis awards, environmental and humane society money, and the Rocky View County scholarships.",
     intro:
-      'Cochrane High collects thirteen local awards behind one printed application package, so a single envelope handed to the main office puts you in the running for all of them.',
+      "The largest local award is the Rotary U-START bursary at $5,000 for one student with financial need, and it closes April 1, earlier than most of the town's money.",
   },
   {
     slug: 'okotoks',
@@ -308,9 +308,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'okotoks',
     title: 'Okotoks Scholarships',
     description:
-      "Scholarships for Okotoks students: the Foothills Composite awards handbook, the town's service clubs, and the Holy Trinity Academy and Foothills County awards.",
+      "Scholarships for Okotoks students: the town's Rotary, Legion and Elks awards, Foothills division and county money, and the Calgary-region awards open here.",
     intro:
-      'Foothills Composite publishes a 52-award handbook that almost no other Alberta school matches, so a single Okotoks graduate can be eligible for a dozen of these at once.',
+      "The Okotoks Rotary award is open to graduates of every high school in town at $1,500, and the Foothills County agricultural scholarship pays $2,500 to students already in second year.",
   },
   {
     slug: 'sherwood-park',
@@ -321,9 +321,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'sherwood-park',
     title: 'Sherwood Park Scholarships',
     description:
-      'Scholarships for Sherwood Park and Strathcona County: the Bev Facey and Ardrossan award lists, the Elk Island division awards and the local service clubs.',
+      "Scholarships for Sherwood Park and Strathcona County: the Rotary and Elks awards, Elk Island division scholarships and the teacher education grants.",
     intro:
-      'Two of the four high schools here publish what they hand out and two do not, so ask your own student services what else is on their form.',
+      "Each high school here runs its own awards list on top of these, so ask your student services for theirs; the awards below are the ones open across Sherwood Park.",
   },
   {
     slug: 'grande-prairie',
@@ -360,9 +360,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'wetaskiwin',
     title: 'Wetaskiwin Scholarships',
     description:
-      'Scholarships for Wetaskiwin and Wetaskiwin County students: the Composite High School award list, service club money and the county agricultural bursaries.',
+      "Scholarships for Wetaskiwin and Wetaskiwin County students: the Leanne Wright and Legion bursaries, the county agricultural bursary and provincial rural awards.",
     intro:
-      'One Google Form covers twenty-three of these at once, so ticking a box you almost qualify for costs you nothing but the box.',
+      "Wetaskiwin Composite runs its own awards list for its graduates; the awards here are the ones open to any Wetaskiwin student, including the county agricultural bursary closing October 1.",
   },
   {
     slug: 'camrose',
@@ -373,9 +373,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'camrose',
     title: 'Camrose Scholarships',
     description:
-      'Scholarships for Camrose and Camrose County students: the Camrose Composite handbook, service club money and the entrance awards at Augustana.',
+      "Scholarships for Camrose and Camrose County students: the entrance and community awards at Augustana, Battle River division money and service club bursaries.",
     intro:
-      'Thirty of these come out of one handbook and one application form, and the school will let you submit that form only once, so which awards you tick matters more here than anywhere else.',
+      "Fourteen of these are Augustana awards, many preferring Camrose students, so a local graduate starting at the U of A's Camrose campus has a short field for each.",
   },
   {
     slug: 'cold-lake',
@@ -386,22 +386,9 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
     backdrop: 'cold-lake',
     title: 'Cold Lake Scholarships',
     description:
-      'Scholarships for Cold Lake and Lakeland students: Cold Lake High awards, the 4 Wing military scholarships, co-op and credit union money, and division awards.',
+      "Scholarships for Cold Lake and Lakeland students: the 4 Wing military scholarship, co-op and credit union money, Northern Lights awards and service clubs.",
     intro:
-      'Four of these have no application at all, since staff pick the winners from the graduating class, and the military scholarships here exist nowhere else in Alberta.',
-  },
-  {
-    slug: 'chestermere',
-    kind: 'region',
-    value: 'Chestermere',
-    label: 'Chestermere',
-    h1: 'Chestermere scholarships',
-    backdrop: 'chestermere',
-    title: 'Chestermere Scholarships',
-    description:
-      'Scholarships for Chestermere students: the three Chestermere High awards, the Rocky View teachers\' scholarship and the Calgary-region awards that name the city.',
-    intro:
-      'The city award here is the unusual one, since it closes on September 1 rather than in the spring and lets the next year\'s graduates apply if nobody did.',
+      "The military scholarship here exists nowhere else in Alberta, and the largest local award, the Billion Barrel scholarship at $5,000, stays open until July 31.",
   },
   {
     slug: 'alberta',
