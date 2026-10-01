@@ -27,7 +27,7 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: '22'
+          node-version: '24'
           cache: npm
 
       - run: npm ci
@@ -36,7 +36,7 @@ jobs:
       # the checkout. The cache carries it week to week instead; if it ever
       # misses, the worst case is a repeat post, not a wrong one.
       - name: Restore posted log
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: outreach/social-log.json
           key: social-log-${{ github.run_id }}
@@ -45,7 +45,7 @@ jobs:
       - name: Build the queue
         run: npm run social -- --count=${{ inputs.count || '5' }} --max-days=${{ inputs.max_days || '45' }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: social-queue
           path: social-out/

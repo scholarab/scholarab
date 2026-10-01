@@ -41,7 +41,7 @@
     "@tailwindcss/postcss": "^4.3.0",
     "astro": "^7.3.5",
     "drizzle-orm": "^0.45.2",
-    "preact": "^10.29.8",
+    "preact": "^11.0.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sonner": "^2.0.7",
@@ -49,12 +49,15 @@
     "zod": "^4.3.6"
   },
   "overrides": {
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.2",
     "@esbuild-kit/core-utils": {
-      "esbuild": "^0.25.0"
+      "esbuild": "^0.28.2"
     },
     "miniflare": {
       "undici": "^7.30.0"
+    },
+    "satori": {
+      "fflate": "^0.8.3"
     }
   },
   "devDependencies": {
@@ -68,7 +71,7 @@
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitest/coverage-v8": "^4.1.2",
+    "@vitest/coverage-v8": "^5.0.3",
     "drizzle-kit": "^0.31.10",
     "eslint": "^10.2.0",
     "eslint-plugin-astro": "^1.7.0",
@@ -76,11 +79,11 @@
     "happy-dom": "^20.8.9",
     "prettier": "^3.8.2",
     "prettier-plugin-astro": "^1.1.0",
-    "satori": "^0.28.0",
+    "satori": "^0.33.5",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1",
-    "undici": "^7.30.0",
-    "vitest": "^4.1.2",
-    "wrangler": "4.143.0"
+    "undici": "^8.11.2",
+    "vitest": "^5.0.3",
+    "wrangler": "4.145.0"
   }
 }

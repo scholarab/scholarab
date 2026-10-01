@@ -1,7 +1,7 @@
 # Cloudflare Workers with static assets. The Astro adapter fills in `main` and
 # the assets directory and binding at build time.
 name = "scholarab"
-compatibility_date = "2024-09-23"
+compatibility_date = "2026-09-30"
 compatibility_flags = ["nodejs_compat"]
 
 # The site's hostnames. The zone's proxied CNAMEs for www and the apex point at

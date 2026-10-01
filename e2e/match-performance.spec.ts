@@ -10,7 +10,7 @@ import { gzipSync } from 'node:zlib';
 test('production match startup budget and ten-run median at 4x CPU', async ({ browser }) => {
   test.skip(!process.env.MATCH_MEASURE, 'Opt-in measurement, isolated from concurrent E2E work');
   test.setTimeout(120_000);
-  const root = resolve('dist');
+  const root = resolve('dist/client');
   const server = createServer(async (req, res) => {
     try {
       let path = resolve(root, '.' + new URL(req.url!, 'http://localhost').pathname);
@@ -34,7 +34,8 @@ test('production match startup budget and ten-run median at 4x CPU', async ({ br
         const cdp = await context.newCDPSession(page);
         await cdp.send('Network.enable');
         await cdp.send('Network.setCacheDisabled', { cacheDisabled: true });
-        await cdp.send('Network.setAcceptedEncodings', { encodings: ['gzip'] });
+        // Chromium 153 removed Network.setAcceptedEncodings; the header does the same job.
+        await cdp.send('Network.setExtraHTTPHeaders', { headers: { 'Accept-Encoding': 'gzip' } });
         await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
         const scripts = new Map<string, { url: string; encoding: string; gzip: number; headers: number }>();
         cdp.on('Network.responseReceived', e => {
