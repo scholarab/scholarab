@@ -321,7 +321,7 @@ const carousels = [
             })();</script>
             {/* The home page's only road to the quiz went with the mini-quiz
                 (critique 2026-09-23). One quiet line, not a third button. */}
-            <p class="sab-hero-quiz">Not sure where to start? <a href="/match/">Answer a few questions</a> and get a shortlist. No email needed.</p>
+            <p class="sab-hero-quiz">Not sure where to start? <a href="/match/">Answer a few questions</a><span class="sab-hero-quiz-tail"> and get a shortlist. No email needed.</span></p>
           </div>
 
         </div>
@@ -1132,8 +1132,10 @@ const carousels = [
     .sab-container { padding-left: 20px; padding-right: 20px; }
     /* The rule that ate the phone viewport. Nothing else in the hero
        changes shape; it simply stops padding itself out to 100svh. */
-    .sab-hero { min-height: 0; }
-    .sab-hero-body { padding-top: 22px; }
+    /* Phones fill the first screen too (Ilia, 2026-10-02): the copy sits
+       centred in the space under the header instead of the hero ending
+       where its content does. */
+    .sab-hero-body { padding-top: 22px; padding-bottom: 8px; }
     /* 44px at 390, 41 at 360, 48 at a Pro Max; where the closing list
        clears one more row above the fold. */
     /* Phones wrap naturally; the lines go back inline and only the first
@@ -1146,6 +1148,9 @@ const carousels = [
     .sab-hero .sab-hero-quiz { white-space: normal; }
     .sab-hero-p-l1 { display: inline; white-space: normal; }
     .sab-hero-copy p { font-size: var(--fs-small); line-height: 1.5; margin: 0 0 16px; }
+    /* Less text on a phone: the tagline repeats the headline, and the quiz
+       line keeps its link without the second sentence. */
+    .sab-hero-copy > p:first-child, .sab-hero-quiz-tail { display: none; }
     /* Three separate blocks all said "free, student-built, no account" before
        the fold. On a phone that reads as a wall, so the two decorative ones
        go and the sentence keeps the claim. */
