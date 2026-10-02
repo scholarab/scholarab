@@ -1627,3 +1627,16 @@ Outcome: a returning student gets back to their city's list in one tap, and a ci
 | Privacy page | Updated: the counts list now names the /saved status event shipped 2026-10-01 (it had been missed), and the device-storage line names statuses and the remembered city. |
 
 Add-back fraction: 0/0. Local only: built Calgary, Edmonton and home pages checked on phone and desktop.
+
+## City boards: specials and the city's photo, October 2, 2026
+
+Outcome: a city page says something only it can, from its own data and its own place, on the board a student already reads, without costing a phone screen.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| "Closes next" special | Not built: the list is sorted by closing date, so it would repeat the first row under the board. |
+| Specials in the board | Tried and moved: on the board they pushed every city's toolbar 170 to 260px below the other hubs' (smoke.spec holds every hub's toolbar at one height). They sit under the toolbar instead, beside "These are only the Calgary awards": "Biggest" (largest figure still to go for) and "Opens next" (soonest future open date), from `lib/city-specials.ts`, Grade 12 awards only. Phones show only "Biggest". |
+| Full-page photo backdrops back on | Not done: switched off 2026-09-15 ("looks broke") and still off (`BACKDROPS_OFF`). |
+| The city photo inside the board | Desktop only, the right 30% at full strength under the sticker, meeting the ink as the home carousel's slides do; the text keeps its usual column (holding it to half the board wrapped it and moved the toolbar), with a shadow where a long name (Fort Saskatchewan) reaches the photo's dark edge. The CC BY photos carry their credit on the board. Phones get a 1px placeholder, so no download and no added height. |
+
+Add-back fraction: 0/0. Local only: every city board measured at 1440, 1180 and 1000 wide (toolbar height and text-to-photo overlap); Calgary, Airdrie and Fort Saskatchewan checked by eye; no backdrop request at 375.

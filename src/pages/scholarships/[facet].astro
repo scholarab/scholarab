@@ -19,7 +19,10 @@ import { enrichScholarships } from '../../lib/enrich';
 import { SCHOLARSHIP_FACETS, facetItems, MIN_FACET_ITEMS } from '../../lib/facets';
 import { DEFAULT_SCHOLARSHIP_STATE, filterSortScholarships } from '../../lib/list-core';
 import { itemListJson } from '../../lib/ld';
-import { scholarshipIsIndexable } from '../../lib/status';
+import { scholarshipIsIndexable, scholarshipStatusOf, STATUS_WORDS } from '../../lib/status';
+import { citySpecials } from '../../lib/city-specials';
+import { PHOTO_CREDITS } from '../../lib/photo-credits';
+import { isAfterHighSchool } from '../../lib/list-core';
 import { getGuide } from '../../lib/guides';
 import { comboCities } from '../../lib/combos';
 
@@ -72,6 +75,28 @@ const guide = facet.guide ? getGuide(facet.guide) : null;
 
 // A city's own list, as opposed to a province-wide, national or school one.
 const isCity = facet.kind === 'region' && !facet.broad && !facet.bySchool;
+
+// The board's specials (lib/city-specials.ts), from the awards a Grade 12
+// student here can still go for; after-high-school ones have their own run.
+const shortDate = (iso: string) => new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+const whenOf = (s: (typeof items)[number]) => {
+  const st = scholarshipStatusOf(s, today);
+  if (st === 'active' || st === 'ongoing') return s.deadline ? `due ${shortDate(s.deadline)}` : 'open now';
+  if (st === 'future' && s.openDate) return `opens ${shortDate(s.openDate)}`;
+  return STATUS_WORDS.unconfirmed.toLowerCase();
+};
+const picked = isCity
+  ? citySpecials(items.filter(s => !isAfterHighSchool(s)), s => scholarshipStatusOf(s, today), today.toLocaleDateString('en-CA'))
+  : { biggest: null, nextToOpen: null };
+const specials = [
+  picked.biggest && { label: 'Biggest', item: picked.biggest },
+  picked.nextToOpen && { label: 'Opens next', item: picked.nextToOpen },
+].filter(Boolean).map(x => ({
+  label: x!.label,
+  href: `/scholarships/${x!.item._slug}/`,
+  title: x!.item.title,
+  meta: `${x!.item.amount}, ${whenOf(x!.item)}`,
+}));
 
 // A city hub lists only its own city's awards, and read as the whole list: a
 // Calgary student from Google saw 89 rows, the first open one 212 days out,
@@ -151,6 +176,8 @@ const breadcrumbJson = {
         schoolFilter={facet.bySchool}
         alsoOpen={broadCounts.length === 2 ? { place: facet.label, lists: broadCounts } : undefined}
         step={isCity ? 12 : undefined}
+        specials={specials}
+        photo={isCity && facet.backdrop ? { backdrop: facet.backdrop, credit: PHOTO_CREDITS[facet.backdrop] } : undefined}
       />
 
       <div class="sabl-hubfoot">

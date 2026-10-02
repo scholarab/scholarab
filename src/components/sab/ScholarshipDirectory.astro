@@ -54,6 +54,10 @@ interface Props {
   /** Rows before "Show more". City hubs take 12: a phone page ran 8 screens and
       4-7% of readers reached its end (private/flow-plan, 2026-10-01). */
   step?: number;
+  /** City hubs: the board's specials, from lib/city-specials.ts. */
+  specials?: Array<{ label: string; href: string; title: string; meta: string }>;
+  /** City hubs: the city's photo on the board, desktop only. */
+  photo?: { backdrop: string; credit?: PhotoCredit };
 }
 const {
   items,
@@ -66,6 +70,8 @@ const {
   schoolFilter = false,
   alsoOpen,
   step = DIRECTORY_PAGE_SIZE,
+  specials = [],
+  photo,
 } = Astro.props;
 
 // SCOPE, not REGION: these are how far an award reaches, not where the student
@@ -174,6 +180,7 @@ if (showGroups) {
   for (const r of runs) { headerAt.set(at, r); at += r.count; }
 }
 const openNow = openNowCount(initial);
+import { needsCredit, type PhotoCredit } from '../../lib/photo-credits';
 ---
 
 <Fragment set:html={ICON_SPRITE} />
@@ -181,7 +188,7 @@ const openNow = openNowCount(initial);
   {/* Everything above the cards. Unstyled by default; a hub with a photo
       backdrop turns it into one frosted panel so no text sits on the photo. */}
   <div class="sabl-head">
-  <div class="sabl-title-row">
+  <div class:list={['sabl-title-row', photo && 'has-photo']}>
     <div>
       <h1 class="sabl-h1">{h1}</h1>
       <p class="sabl-desc">{intro}</p>
@@ -195,6 +202,20 @@ const openNow = openNowCount(initial);
       <svg viewBox="0 0 120 120"><path d={BURST_PATH} /></svg>
       <span>Free<br />No sign-up</span>
     </div>
+    {/* After the text and the sticker, so `> div:first-child` still finds the
+        text. The city's own photo, full strength on the board's right, meeting the
+        ink the way the home carousel's slides do (2026-10-02). Desktop only:
+        on a phone the board is all text, and a photo there either sits under
+        it or adds height; a phone gets the 1px placeholder and no download. */}
+    {photo && (
+      <picture class="sabl-board-photo" aria-hidden="true">
+        <source media="(min-width: 901px)" srcset={`/photos/backdrops/${photo.backdrop}-wide-1672.webp 1672w, /photos/backdrops/${photo.backdrop}-wide-3344.webp 3344w`} sizes="55vw" />
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" decoding="async" />
+      </picture>
+    )}
+    {photo?.credit && needsCredit(photo.credit) && (
+      <a class="sabl-board-credit" href={photo.credit.sourceUrl} target="_blank" rel="noopener noreferrer">Photo: {photo.credit.author}, {photo.credit.license}</a>
+    )}
   </div>
 
   <div class="sabl-toolbar">
@@ -307,6 +328,21 @@ const openNow = openNowCount(initial);
         <>{i > 0 && ' and '}<a href={`/scholarships/${l.slug}/`}>{l.count.toLocaleString('en-CA')} {l.label}</a></>
       ))}{' '}awards are open to you too.
     </p>
+  )}
+  {/* A city's specials (lib/city-specials.ts): the biggest award still to go
+      for and the next to open, from the data. Under the toolbar for the same
+      reason as the line above; in the board they moved every city's toolbar
+      down by 170 to 260px. */}
+  {specials.length > 0 && (
+    <ul class="sabl-specials">
+      {specials.map(sp => (
+        <li class="sabl-special">
+          <span class="sabl-special-k">{sp.label}</span>
+          <a href={sp.href} class="sabl-special-name">{sp.title}</a>
+          <span class="sabl-special-v tnum">{sp.meta}</span>
+        </li>
+      ))}
+    </ul>
   )}
   <p class="sabl-corrected" data-dir-corrected hidden></p>
 

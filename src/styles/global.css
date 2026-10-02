@@ -1857,6 +1857,50 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
    stacked read as a double line. */
 .sabl-title-row + .sabl-toolbar { border-top: 0; }
 .sabl-title-row .sabl-desc { color: rgba(255, 255, 255, 0.8); }
+/* A city list's specials (2026-10-02): line items under the toolbar, each
+   with the run headings' sticker (ink, mustard figure). */
+.sabl-specials { list-style: none; margin: 0 0 22px; padding: 0; max-width: 75ch; }
+.sabl-special {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px;
+  padding: 7px 0; font-size: 15px; line-height: 1.45;
+}
+.sabl-special + .sabl-special { border-top: 1px solid rgba(20, 25, 21, 0.1); }
+.sabl-special-k {
+  flex: none; padding: 4px 10px 3px; border-radius: 999px;
+  background: var(--text-primary); color: #FFC700;
+  font: 800 13px/1.1 var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
+}
+.sabl-special-name { color: #0A6B4D; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.sabl-special-name:hover { color: var(--text-primary); }
+.sabl-special-v { color: rgba(20, 25, 21, 0.72); }
+/* A city board's photo (2026-10-02), desktop only; see ScholarshipDirectory. */
+.sabl-board-photo, .sabl-board-credit { display: none; }
+@media (min-width: 901px) {
+  /* The text keeps its usual column (every hub's toolbar sits at one
+     height, smoke.spec), so the photo takes only what the text leaves. */
+  .sabl-title-row.has-photo > div:first-child { position: relative; z-index: 1; }
+  /* A long name (Fort Saskatchewan) still reaches the photo's dark edge. */
+  .sabl-title-row.has-photo :is(.sabl-h1, .sabl-desc) { text-shadow: 0 1px 2px rgba(5, 10, 8, 0.7), 0 0 14px rgba(5, 10, 8, 0.6); }
+  .sabl-title-row.has-photo .sabl-promo { z-index: 1; }
+  .sabl-board-photo { display: block; position: absolute; top: 0; right: 0; bottom: 0; width: 30%; }
+  .sabl-board-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* Ink into photo across its left third; the rest is the photo untouched. */
+  .sabl-board-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, var(--text-primary), var(--text-primary) 12%, rgba(20, 25, 21, 0.6) 28%, rgba(20, 25, 21, 0) 48%);
+  }
+  .sabl-board-credit {
+    display: block; position: absolute; right: 18px; bottom: 8px; z-index: 1;
+    font-size: 11px; line-height: 1.3; color: rgba(255, 255, 255, 0.78); text-decoration: none;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  }
+  .sabl-board-credit:hover { color: #fff; text-decoration: underline; }
+}
+/* One special on a phone: two cost the first row 190px of a 812px screen. */
+@media (max-width: 640px) {
+  .sabl-specials { margin-bottom: 16px; }
+  .sabl-special + .sabl-special { display: none; }
+}
 /* /saved's List / Calendar switch sits on the same board. Its ink borders and
    ink "Calendar" vanished there, leaving a stray "List" (2026-10-01). */
 .sabl-title-row .sabs-toggle { border-color: rgba(255, 255, 255, 0.85); margin-bottom: 0; }
