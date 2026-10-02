@@ -127,7 +127,7 @@ const startLabel = longDate(PROJECT_START);
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(44px, 7vw, 76px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
-  .sabu-lede { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.78); margin: 20px 0 0; max-width: 62ch; }
+  .sabu-lede { font-size: 17px; line-height: 1.6; color: var(--ink-soft); margin: 20px 0 0; max-width: 62ch; }
 
   /* A line of plain month links, not a row of pills. */
   .sabu-jump {
@@ -135,7 +135,7 @@ const startLabel = longDate(PROJECT_START);
     margin-top: 36px; padding-bottom: 28px; border-bottom: 1.5px solid rgba(20,25,21,0.12);
     font-size: 15px;
   }
-  .sabu-jump-label { color: rgba(20, 25, 21, 0.72); }
+  .sabu-jump-label { color: var(--ink-muted); }
   .sabu-jump-link { color: #0A6B4D; text-decoration: underline; text-decoration-color: rgba(10,107,77,0.35); text-underline-offset: 3px; }
   .sabu-jump-link:hover { text-decoration-color: currentColor; }
 
@@ -143,13 +143,13 @@ const startLabel = longDate(PROJECT_START);
   .sabu-month { padding-top: 56px; scroll-margin-top: 24px; }
   .sabu-month-head { margin-bottom: 30px; }
   .sabu-month-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-  .sabu-month-count { font-size: 14px; color: rgba(20, 25, 21, 0.72); }
+  .sabu-month-count { font-size: 14px; color: var(--ink-muted); }
   .sabu-month-title {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(34px, 4.4vw, 50px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
   .sabu-month-summary {
-    font-size: 16px; line-height: 1.6; color: rgba(20, 25, 21, 0.65);
+    font-size: 16px; line-height: 1.6; color: var(--ink-faint);
     margin: 12px 0 0; max-width: 680px;
   }
 
@@ -171,7 +171,7 @@ const startLabel = longDate(PROJECT_START);
   .sabu-shot-wide { flex: 0 1 420px; }
   .sabu-shot-tall { flex: 0 1 190px; }
   .sabu-shot figcaption {
-    font-size: 12.5px; line-height: 1.5; color: rgba(20, 25, 21, 0.68);
+    font-size: var(--fs-meta); line-height: 1.5; color: var(--ink-muted);
     margin-top: 9px;
   }
 
@@ -186,7 +186,7 @@ const startLabel = longDate(PROJECT_START);
      The kind is a plain word in its colour, not a pill (critique 2026-09-23). */
   .sabu-item { display: grid; grid-template-columns: 118px 1fr; gap: 16px; align-items: baseline; }
   .sabu-tag { font-size: 14px; font-weight: 700; white-space: nowrap; }
-  .sabu-item-text { font-size: 15px; line-height: 1.62; color: rgba(20, 25, 21, 0.72); }
+  .sabu-item-text { font-size: 15px; line-height: 1.62; color: var(--ink-muted); }
 
   @media (max-width: 900px) {
     /* Touch height without pills. */

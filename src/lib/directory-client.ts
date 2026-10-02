@@ -121,10 +121,16 @@ function setFiltersOpen(open: boolean) {
   // is up), then comes back to the button that opened it.
   if (open === was) return;
   const narrow = matchMedia(NARROW).matches;
-  for (const el of document.querySelectorAll<HTMLElement>('.sabl-head, .sabl-col')) el.inert = open && narrow;
-  if (!narrow) return;
+  // The header and footer too: a screen reader's cursor walked out of the
+  // sheet into them. And the sheet says what it is while it is one.
+  for (const el of document.querySelectorAll<HTMLElement>('.sabl-head, .sabl-col, .sabh, .sabf-footer')) el.inert = open && narrow;
   const rail = document.querySelector<HTMLElement>('.sabl-rail');
-  if (open) rail?.querySelector<HTMLElement>('select, button, a[href]')?.focus({ preventScroll: true });
+  if (open && narrow) { rail?.setAttribute('role', 'dialog'); rail?.setAttribute('aria-modal', 'true'); }
+  else { rail?.removeAttribute('role'); rail?.removeAttribute('aria-modal'); }
+  if (!narrow) return;
+  // The first picker, not the sheet's Clear filters above it: opening the
+  // sheet is for choosing, and Clear sits one Shift+Tab away.
+  if (open) (rail?.querySelector<HTMLElement>('select') ?? rail?.querySelector<HTMLElement>('button, a[href]'))?.focus({ preventScroll: true });
   else if (!document.activeElement || rail?.contains(document.activeElement)) {
     document.querySelector<HTMLElement>('[data-dir-filters]')?.focus({ preventScroll: true });
   }
@@ -310,6 +316,7 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       n.textContent = String(active);
       n.hidden = active === 0;
     });
+    root.querySelectorAll<HTMLElement>('[data-dir-reset]').forEach(b => { b.hidden = active === 0; });
 
     const q = query.trim();
     // Normalized the same way the cards' blobs were, so punctuation a student
@@ -590,6 +597,16 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
       return;
     }
 
+    // The sheet's Clear filters: every filter back to its default, keeping
+    // the sort and the words in the search box, which are not filters.
+    if (t.closest('[data-dir-reset]')) {
+      state = { ...config.defaultState, sort: state.sort };
+      shown = pageSize;
+      render();
+      root.querySelector<HTMLElement>('.sabl-rail select')?.focus({ preventScroll: true });
+      return;
+    }
+
     if (t.closest('[data-dir-clear]')) {
       state = { ...config.defaultState };
       query = '';
@@ -616,7 +633,9 @@ export function initDirectory<T extends DirectoryItem, S extends Record<string, 
     if (e.key === 'Escape') { setFiltersOpen(false); return; }
     if (e.key !== 'Tab' || !matchMedia(NARROW).matches) return;
     const rail = root.querySelector<HTMLElement>('.sabl-rail');
-    const stops = [...(rail?.querySelectorAll<HTMLElement>('select, button, a[href], input') ?? [])].filter(el => el.offsetParent !== null);
+    // summary too: the glossary under the pickers ("What these mean") was
+    // skipped, so a keyboard could not open it inside the sheet (critique 2026-10-02).
+    const stops = [...(rail?.querySelectorAll<HTMLElement>('select, button, a[href], input, summary') ?? [])].filter(el => el.offsetParent !== null);
     if (!stops.length) return;
     const at = stops.indexOf(document.activeElement as HTMLElement);
     const next = e.shiftKey ? (at <= 0 ? stops.length - 1 : at - 1) : (at === -1 || at === stops.length - 1 ? 0 : at + 1);

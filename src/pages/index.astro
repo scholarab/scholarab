@@ -47,10 +47,12 @@ const closingSoon = activeScholarships
 
 // The heading follows the list rather than asserting urgency it may not have:
 // "Closing this week" over a row due in November is a claim the page can't keep.
-const anyClosingThisWeek = closingSoon.some(
+// Every row, not any: one award due today flipped the heading over four due
+// in 13 days (critique 2026-10-02).
+const allClosingThisWeek = closingSoon.every(
   s => new Date(s.deadline! + 'T00:00:00').getTime() <= today.getTime() + CLOSING_SOON_MS,
 );
-const closingHeading = anyClosingThisWeek ? 'Closing this week' : 'Next deadlines';
+const closingHeading = allClosingThisWeek ? 'Closing this week' : 'Next deadlines';
 
 // The biggest awards a student can apply for today, in the directory's own
 // "Highest $" order (first dollar figure, so "$2,000 to $7,000" ranks at
@@ -878,12 +880,12 @@ const carousels = [
   .sab-hero-search-input::placeholder { color: rgba(238, 241, 236, 0.66); }
   .sab-hero-search-btn {
     height: 40px; margin-right: 5px; padding: 0 18px; border: 0; border-radius: 100px; cursor: pointer;
-    font: 600 14.5px var(--font-body); color: #EEF1EC; background: rgba(238, 241, 236, 0.12);
+    font: 600 15px var(--font-body); color: #EEF1EC; background: rgba(238, 241, 236, 0.12);
   }
   .sab-hero-search-btn:hover { background: rgba(238, 241, 236, 0.22); }
   .sab-hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   /* One sentence, one line: a 62ch cap broke "No email needed." onto its own row. Phones wrap. */
-  .sab-hero .sab-hero-quiz { margin: 18px 0 0; font-size: 15.5px; line-height: 1.5; color: rgba(238, 241, 236, 0.88); white-space: nowrap; }
+  .sab-hero .sab-hero-quiz { margin: 18px 0 0; font-size: var(--fs-body); line-height: 1.5; color: rgba(238, 241, 236, 0.88); white-space: nowrap; }
   /* Small type at the bottom of the film: median 3.4:1 on bright frames
      (critique 2026-09-27). The byline's heavier shadow and full-strength ink. */
   .sab-hero .sab-hero-quiz { color: #EEF1EC; text-shadow: 0 1px 2px rgba(5,10,8,0.7), 0 0 14px rgba(5,10,8,0.6); }
@@ -1072,13 +1074,19 @@ const carousels = [
   .sab-closing-row {
     display: grid; grid-template-columns: 104px minmax(0, 1fr) auto; grid-template-areas: "when main amount";
     gap: 28px; align-items: baseline;
-    padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
+    padding: 26px 8px;
     cursor: pointer; color: inherit; text-decoration: none;
   }
-  .sab-closing-row:hover { background: rgba(47,211,160,0.07); color: inherit; }
+  /* Stripes, not hairlines, and the directory's hover: the same row should
+     not change its separators between the home page and the list it links
+     to (critique 2026-10-02). */
+  .sab-closing-row:nth-child(even) { background: rgba(20,25,21,0.04); }
+  .sab-closing-row:last-child { border-bottom: 1px solid rgba(20,25,21,0.14); }
+  .sab-closing-row:hover { background: rgba(47,211,160,0.14); color: inherit; }
+  .sab-closing-row:hover .sab-row-name { color: var(--green); }
   .sab-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
   .sab-row-blurb {
-    font-size: 14.5px; color: rgba(20, 25, 21, 0.68); margin-top: 5px;
+    font-size: var(--fs-small); color: var(--ink-muted); margin-top: 5px;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     /* Two lines: who can apply decides whether a student opens the row, and
        one line cut "Indigenous students starting a STEM progra..." on a phone. */
@@ -1090,7 +1098,7 @@ const carousels = [
   .sab-row-when .sabl-when { flex-direction: column; align-items: flex-start; gap: 3px; white-space: normal; }
   .sab-row-when .sabl-when::before, .sab-row-when .sabl-when-sub::before { content: none; }
   .sab-row-when [data-when-main] { font: 400 28px/1 var(--font-display); color: var(--text-primary); white-space: nowrap; }
-  .sab-row-when .sabl-when-sub { font-size: 13.5px; line-height: 1.3; }
+  .sab-row-when .sabl-when-sub { font-size: var(--fs-ui); line-height: 1.3; }
   .sab-row-when .sabl-when.is-urgent .sabl-when-sub::before {
     content: ''; display: inline-block; width: 7px; height: 7px; margin: 0 5px 1px 0;
     border-radius: 50%; background: var(--rust);
@@ -1106,8 +1114,8 @@ const carousels = [
   .sab-type-row:hover { background: rgba(47,211,160,0.07); }
   .sab-type-row:hover .sab-row-name { color: var(--green); }
   .sab-type-open { font-size: 15px; font-weight: 700; text-align: right; }
-  .sab-type-total { font-weight: 500; color: rgba(20, 25, 21, 0.72); }
-  .sab-type-next { font-size: 15px; color: rgba(20, 25, 21, 0.78); text-align: right; }
+  .sab-type-total { font-weight: 500; color: var(--ink-muted); }
+  .sab-type-next { font-size: 15px; color: var(--ink-soft); text-align: right; }
 
   /* ── Motion safety ── */
   @media (prefers-reduced-motion: reduce) {
@@ -1137,7 +1145,7 @@ const carousels = [
     .sab-hero-copy { max-width: none; }
     .sab-hero .sab-hero-quiz { white-space: normal; }
     .sab-hero-p-l1 { display: inline; white-space: normal; }
-    .sab-hero-copy p { font-size: 14.5px; line-height: 1.5; margin: 0 0 16px; }
+    .sab-hero-copy p { font-size: var(--fs-small); line-height: 1.5; margin: 0 0 16px; }
     /* Three separate blocks all said "free, student-built, no account" before
        the fold. On a phone that reads as a wall, so the two decorative ones
        go and the sentence keeps the claim. */
@@ -1164,7 +1172,7 @@ const carousels = [
     .sab-closing .sab-view-all { order: 3; align-self: flex-start; margin-top: 20px; }
     /* The money goes under the title on a phone: beside it, a range like
        "$2,000 to $7,000" left the name about 125px. */
-    .sab-closing-row { grid-template-columns: 66px minmax(0, 1fr); grid-template-areas: "when main" "when amount"; gap: 6px 14px; padding: 16px 2px; min-height: 44px; align-items: start; }
+    .sab-closing-row { grid-template-columns: 66px minmax(0, 1fr); grid-template-areas: "when main" "when amount"; gap: 6px 14px; padding: 16px var(--sab-gutter); margin: 0 calc(-1 * var(--sab-gutter)); min-height: 44px; align-items: start; }
     .sab-types { padding-top: 32px; padding-bottom: 48px; }
     .sab-type-row { grid-template-columns: 1fr auto; gap: 2px 14px; padding: 14px 2px; }
     .sab-type-next { grid-column: 1 / -1; text-align: left; font-size: 14px; }

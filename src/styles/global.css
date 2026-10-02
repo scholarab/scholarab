@@ -142,6 +142,23 @@
   --rust:         #A0491A;  /* deadlines; above 5.5:1 on white */
   --bg-panel:     #F3F5F2;  /* the filter panel: controls, not listings */
 
+  /* Secondary text is the ink at one of three strengths, not fourteen
+     (critique 2026-10-02 counted 0.55 to 0.85 in 14 steps). Faint is the
+     floor: 0.62 is 4.84:1 on a shaded row, where 0.6 was 4.54:1. */
+  --ink-soft:     rgba(20, 25, 21, 0.8);   /* facts, provider lines */
+  --ink-muted:    rgba(20, 25, 21, 0.72);  /* standfirsts, blurbs, notes */
+  --ink-faint:    rgba(20, 25, 21, 0.62);  /* countdowns, captions, "Amount varies" */
+
+  /* The text sizes under the display face. Whole pixels only: the half
+     sizes (12.5, 13.5, 14.5, 15.5, 16.5) each sat a hair from a neighbour
+     and read as drift, not hierarchy. design-tokens.test.ts holds the line. */
+  --fs-caption:   12px;
+  --fs-meta:      13px;
+  --fs-ui:        14px;
+  --fs-small:     15px;
+  --fs-body:      16px;
+  --fs-lead:      17px;
+
   /* The three public faces. Every public rule names one of these rather than
      a family, so a type change is one line here. */
   --font-display: 'Big Shoulders', 'Arial Narrow', Arial, sans-serif;
@@ -334,7 +351,7 @@ body.quiz-past-first #match-intro .sabm-sub,
 body.quiz-past-first #match-intro .sabm-trust { display: none; }
 body.quiz-past-first #match-intro .sabm-h1 {
   font-family: var(--font-body); font-size: 14px; font-weight: 600; line-height: 1.4;
-  letter-spacing: 0; color: rgba(20, 25, 21, 0.72);
+  letter-spacing: 0; color: var(--ink-muted);
 }
 body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; }
 /* Search spans the whole answer list, including options on later batches. */
@@ -348,7 +365,7 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
 /* The results' answer summary: each answer a quiet chip that reopens its
    question. */
 .sabm-answers { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; margin: 14px 0 0; }
-.sabm-answers-label { font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.72); }
+.sabm-answers-label { font-size: 14px; font-weight: 600; color: var(--ink-muted); }
 .sabm-answers-hint { font-weight: 400; }
 .sabm-answers ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .sabm-answers button {
@@ -413,12 +430,12 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
    every page: it is what all but the shortest intro already needs, and
    facets.test.ts caps intro length so none of them runs past it. */
 .sabl-desc {
-  font-size: 17px; line-height: 1.55; color: rgba(20, 25, 21, 0.65);
+  font-size: 17px; line-height: 1.55; color: var(--ink-faint);
   margin: 12px 0 0; max-width: 70ch; min-height: calc(1.55em * 3);
 }
 /* A hub named by a jargon word defines it here (lib/glossary.ts). */
 .sabl-define {
-  font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.72);
+  font-size: 15px; line-height: 1.5; color: var(--ink-muted);
   margin: 0 0 16px; max-width: 640px;
 }
 .sabl-define strong { color: var(--text-primary); font-weight: 600; }
@@ -448,7 +465,7 @@ body.quiz-past-first .sabm-progress-wrap { margin-top: 10px; padding-top: 16px; 
    weight and baseline, so it sat light and low next to 15px Archivo and looked
    like a stray mark rather than a control. Drawn instead, at the weight of the
    placeholder beside it. */
-.sabl-search-icon { display: flex; color: rgba(20, 25, 21, 0.68); flex: none; }
+.sabl-search-icon { display: flex; color: var(--ink-muted); flex: none; }
 /* The container's padding is not clickable, so the input's own 23px box was
    the whole target on a desktop. The phone block below already raises the
    container to 44px. */
@@ -475,7 +492,7 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 }
 /* The field carries no visible label, so the placeholder is the only thing
    saying what to type; 0.4 alpha put it at 2.6:1. 0.62 clears AA. */
-.sabl-search input::placeholder { color: rgba(20, 25, 21, 0.65); }
+.sabl-search input::placeholder { color: var(--ink-faint); }
 /* WebKit's own clear affordance is a pale grey ✕ we cannot recolour, on a
    control whose whole job is to be findable once you have typed. Replaced
    with our own ink glyph at a 24px target. */
@@ -492,7 +509,7 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    a black lump in it (Ilia, 2026-09-15: "too packed together"). The phone
    block below overrides the gap for the scrolling row. */
 .sabl-sort-chips { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-.sabl-row-label { font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.68); width: 72px; flex: none; }
+.sabl-row-label { font-size: 13px; font-weight: 600; color: var(--ink-muted); width: 72px; flex: none; }
 .sabl-sort .sabl-row-label { width: auto; margin-right: 0; }
 
 /* Words, not pills (Ilia, 2026-09-22). A row of outlined capsules with one
@@ -500,9 +517,9 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    now ink and an underline, the way a tab is marked, and the counts sit
    beside the words. On a railed hub the rail restyles these as an index. */
 .sabl-chip {
-  font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
+  font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 600;
   padding: 8px 0; border: 0; border-radius: 0; background: none;
-  color: rgba(20, 25, 21, 0.72); cursor: pointer;
+  color: var(--ink-muted); cursor: pointer;
   box-shadow: inset 0 -2px 0 transparent;
 }
 .sabl-chip:hover { color: var(--text-primary); box-shadow: inset 0 -2px 0 rgba(20, 25, 21, 0.2); }
@@ -512,15 +529,15 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
 .sabl-chip-link { display: inline-flex; align-items: center; text-decoration: none; }
 /* margin rather than a flex gap, because most chips carrying a count are plain
    buttons and only the city ones are inline-flex links. */
-.sabl-chip-count { font-size: 12px; margin-left: 6px; color: rgba(20, 25, 21, 0.62); }
+.sabl-chip-count { font-size: 12px; margin-left: 6px; color: var(--ink-faint); }
 /* A filter that would leave nothing behind. Still clickable (the empty state
    explains itself and offers a way out), just not presented as an equal
    offer beside a chip holding forty listings. */
 /* Muted by ink, not opacity: at 0.45 opacity the label measured 2.87:1 on
    the cream and failed AA. 0.62 ink is about 5:1. */
-.sabl-chip.is-empty { color: rgba(20, 25, 21, 0.62); font-weight: 500; }
-.sabl-chip.is-empty .sabl-chip-count { color: rgba(20, 25, 21, 0.62); }
-.sabl-chip-link:hover .sabl-chip-count { color: rgba(20, 25, 21, 0.7); }
+.sabl-chip.is-empty { color: var(--ink-faint); font-weight: 500; }
+.sabl-chip.is-empty .sabl-chip-count { color: var(--ink-faint); }
+.sabl-chip-link:hover .sabl-chip-count { color: var(--ink-muted); }
 
 .sabl-filters { display: flex; flex-direction: column; gap: 12px; padding: 20px 0 0; }
 /* The filters sit on a panel of their own, so they read as controls that
@@ -529,8 +546,8 @@ html:not([data-pointer]) .sabl-search:has(input:focus-visible) {
    a narrower window, and the phone's fold. */
 .sabl-rail { background-color: var(--bg-panel); border-radius: 12px; padding: 16px 12px 18px; }
 .sabl-rail .sabl-filters { padding-top: 0; }
-/* Phone-only control; the media block below turns it on. */
-.sabl-filters-done { display: none; }
+/* Phone-only controls; the media block below turns them on. */
+.sabl-filters-done, .sabl-sheet-head { display: none; }
 /* WHERE YOU LIVE is one picker at every width, not 27 chips: on a desktop the
    chips alone took four rows above the first listing. The picker navigates by
    script, so without it the chips stay. */
@@ -742,8 +759,8 @@ html.js .sabl-rail .sabl-scope-select { border-radius: 6px; min-height: 44px; fo
      block below takes it to 44px. */
   display: inline-flex; align-items: center; gap: 8px; flex: none; min-height: 24px;
   background: none; border: 0; padding: 0; cursor: pointer;
-  font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
-  color: rgba(20, 25, 21, 0.68);
+  font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 600;
+  color: var(--ink-muted);
 }
 .sabl-lean:hover { color: var(--text-primary); }
 /* Points at the rail it tucks away, and back out at the space it would come
@@ -779,7 +796,7 @@ html:not(.js) .sabl-lean { display: none; }
   .sabl-filters-n {
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 20px; height: 20px; padding: 0 6px; box-sizing: border-box; border-radius: 100px;
-    background: var(--green); color: var(--bg-page); font-size: 11.5px;
+    background: var(--green); color: var(--bg-page); font-size: var(--fs-caption);
   }
   .sabl-filters-n[hidden] { display: none; }
   /* Sort joins the other filters inside the phone sheet. */
@@ -805,6 +822,19 @@ html:not(.js) .sabl-lean { display: none; }
     content: ''; position: fixed; inset: 0; z-index: 69; background: rgba(20,25,21,0.42);
   }
   html.js[data-filters] { overflow: hidden; }
+  /* The sheet's head: what it is, and one tap to undo it (critique 2026-10-02). */
+  html.js[data-filters] .sabl-sheet-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 6px;
+  }
+  .sabl-sheet-title { font: 400 30px/1 var(--font-display); margin: 0; color: var(--text-primary); }
+  .sabl-sheet-clear {
+    min-height: 44px; padding: 0 2px; border: 0; background: none; cursor: pointer;
+    font: 600 15px var(--font-body); color: var(--text-primary);
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px;
+  }
+  .sabl-sheet-clear[hidden] { display: none; }
+  /* One width for every picker in the sheet; they were 335 and 320px. */
+  html.js[data-filters] .sabl-rail select { width: 100%; max-width: none; box-sizing: border-box; }
   /* Full width and a 44px target inside the phone panel. */
   html.js .sabl-scope-select { width: 100%; min-height: 44px; border-radius: 12px; }
   /* Safari zooms the page into any field under 16px when it takes focus,
@@ -814,7 +844,9 @@ html:not(.js) .sabl-lean { display: none; }
   html.js[data-filters] .sabl-filters-done {
     display: block; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 3;
     width: 100%; min-height: 50px; margin: 18px 0 12px; border: 0; border-radius: 100px;
-    background: var(--text-primary); color: var(--paper); font: 700 15.5px var(--font-body); cursor: pointer;
+    /* The one primary fill, mint with ink, as Apply (critique 2026-10-02:
+       black, dark green and mint pills all played primary). */
+    background: var(--brand); color: var(--text-on-brand); font: 700 16px var(--font-body); cursor: pointer;
     box-shadow: 0 8px 20px -8px rgba(20,25,21,0.45);
   }
   /* Inside the fold the rows wrap instead of scrolling sideways: a clipped
@@ -888,14 +920,14 @@ html.js .sabl-group { cursor: pointer; }
    until 2026-09-22; pills on every count were part of the templated look. */
 .sabl-group-count {
   font-family: var(--font-label); font-size: 26px; font-weight: 500;
-  line-height: 1.1; color: rgba(20, 25, 21, 0.62);
+  line-height: 1.1; color: var(--ink-faint);
 }
 /* padding, not align-items: centre, so the word sits on the same line as the
    rule beside it rather than in the middle of the taller heading box. */
 .sabl-group-toggle {
   display: none; margin-left: auto; align-items: center; gap: 8px; padding-bottom: 12px;
-  font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
-  color: rgba(20, 25, 21, 0.68);
+  font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 600;
+  color: var(--ink-muted);
 }
 html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-group:hover .sabl-group-toggle { color: var(--text-primary); }
@@ -962,7 +994,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
    beside it was an eyebrow over the listing's own heading and is gone. */
 .sabl-tag {
   font-family: var(--font-label); font-size: 12px; letter-spacing: 0.05em;
-  padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(20,25,21,0.25); color: rgba(20, 25, 21, 0.65);
+  padding: 6px 12px; border-radius: 100px; border: 1px solid rgba(20,25,21,0.25); color: var(--ink-faint);
   white-space: nowrap;
 }
 .sabl-name { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; line-height: 1.3; color: var(--text-primary); text-decoration: none; display: block; }
@@ -986,31 +1018,33 @@ html.js .sabl-group-toggle { display: inline-flex; }
    dead space across the page. The full text is one click away on the detail
    page, which is where it belongs. */
 .sabl-blurb {
-  font-size: 13.5px; line-height: 1.5; color: rgba(20, 25, 21, 0.68); margin-top: 3px;
+  font-size: var(--fs-ui); line-height: 1.5; color: var(--ink-muted); margin-top: 3px;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2;
   overflow: hidden;
 }
 /* "Amount varies" is the absence of a figure, so it is set as a note, not in
    the display face the real amounts use. */
-.sabl-amount.is-varies { font: 500 13.5px/1.3 var(--font-body); color: rgba(20, 25, 21, 0.6); }
-.sabl-amount.is-long { font-size: 20px; white-space: nowrap; }
+.sabl-amount.is-varies { font: 500 14px/1.3 var(--font-body); color: var(--ink-faint); }
+/* Wraps inside its 150px column: nowrap ran four amounts ("$1,000 per year,
+   up to $4,000") over Save at 1280 (critique 2026-10-02). */
+.sabl-amount.is-long { font-size: 20px; line-height: 1.2; white-space: normal; text-wrap: balance; }
 /* The requirements the audience line leaves out ("80% average", "Financial
    need"), each after a small green mark. */
 .sabl-facts { display: flex; flex-wrap: wrap; gap: 4px 16px; list-style: none; margin: 7px 0 0; padding: 0; }
-.sabl-facts li { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82); }
+.sabl-facts li { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--ink-soft); }
 .sabl-facts li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex: none; }
 /* Not a requirement, so not the green dot: an open ink ring for who takes the application (lib/apply-method.ts). */
 .sabl-facts li.is-route::before { background: none; box-shadow: inset 0 0 0 1.5px rgba(20, 25, 21, 0.7); width: 7px; height: 7px; }
 /* The deadline cell: the date, then the countdown in a lighter weight. The
    tier colours the text; only the last two weeks get the dot. */
 .sabl-when { font-size: 14px; font-weight: 700; color: var(--text-primary); white-space: nowrap; display: inline-flex; align-items: center; }
-.sabl-when-sub { font-weight: 500; color: rgba(20, 25, 21, 0.62); }
+.sabl-when-sub { font-weight: 500; color: var(--ink-faint); }
 .sabl-when-sub::before { content: '·'; margin: 0 6px; }
 .sabl-when-sub[hidden] { display: none; }
 .sabl-when.is-soon .sabl-when-sub { color: var(--rust); }
 .sabl-when.is-urgent, .sabl-when.is-urgent .sabl-when-sub { color: var(--rust); }
 .sabl-when.is-urgent::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--rust); margin-right: 7px; }
-.sabl-when.is-quiet { font-weight: 600; color: rgba(20, 25, 21, 0.62); }
+.sabl-when.is-quiet { font-weight: 600; color: var(--ink-faint); }
 .sabl-when.is-quiet .sabl-when-sub { font-weight: 500; }
 /* ── The list row (critique 2026-09-29) ──
    One row everywhere a listing is a row: the directories and their hubs,
@@ -1048,8 +1082,8 @@ html.js .sabl-group-toggle { display: inline-flex; }
 }
 /* The waiting states are words, not a date, so they stay a note (as
    "Amount varies" does) and wrap inside the column. */
-.sabl-card .sabl-when.is-quiet [data-when-main] { font-size: 13.5px; line-height: 1.3; }
-.sabl-card .sabl-when.is-quiet .sabl-when-sub { font-size: 12.5px; line-height: 1.35; }
+.sabl-card .sabl-when.is-quiet [data-when-main] { font-size: var(--fs-ui); line-height: 1.3; }
+.sabl-card .sabl-when.is-quiet .sabl-when-sub { font-size: var(--fs-meta); line-height: 1.35; }
 .sabl-card .sabl-checked { white-space: normal; }
 /* The whole row opens the listing. The title's link is stretched over it;
    Save and Apply sit above the stretch and keep their own targets. */
@@ -1061,7 +1095,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
    page read as busy with nothing leading (reader feedback, 2026-09-29). The
    provider line takes the facts' style, so the row has one secondary voice. */
 .sabl-card .sabl-blurb[data-row-desc] { display: none; }
-.sabl-card .sabl-org { font-size: 13px; color: rgba(20, 25, 21, 0.76); }
+.sabl-card .sabl-org { font-size: 13px; color: var(--ink-soft); }
 @media (max-width: 899px) {
   /* The date keeps its column on a phone, the height it takes comes out of
      the line it used to have under the amount. Money and the buttons share
@@ -1087,12 +1121,12 @@ html.js .sabl-group-toggle { display: inline-flex; }
    beside the one date a reader came for (reader feedback, 2026-09-29). The
    detail page still says when each listing was checked. A caveat, so quiet
    ink and no tick. */
-.sabl-checked { font-size: 12.5px; font-weight: 500; color: rgba(20, 25, 21, 0.62); white-space: nowrap; }
+.sabl-checked { font-size: var(--fs-meta); font-weight: 500; color: var(--ink-faint); white-space: nowrap; }
 .sabl-card-actions { display: flex; align-items: center; gap: 12px; }
 .sabl-save {
   font-family: var(--font-body); font-size: 15px; background: none;
   border: 0; border-radius: 8px;
-  min-width: 34px; height: 34px; padding: 0 8px; gap: 6px; cursor: pointer; color: rgba(20, 25, 21, 0.68);
+  min-width: 34px; height: 34px; padding: 0 8px; gap: 6px; cursor: pointer; color: var(--ink-muted);
   display: inline-grid; place-items: center;
   display: inline-flex; align-items: center; justify-content: center;
 }
@@ -1101,7 +1135,7 @@ html.js .sabl-group-toggle { display: inline-flex; }
    saves per 100 views). Same size and weight as the Apply link beside it. */
 /* "No listing says voley. Showing results for volleyball." Above the grid,
    in the standfirst's grey, so the swap is never silent. */
-.sabl-corrected { margin: 0 0 16px; font-size: 15px; color: rgba(20, 25, 21, 0.72); }
+.sabl-corrected { margin: 0 0 16px; font-size: 15px; color: var(--ink-muted); }
 .sabl-save-label { font-size: 14px; font-weight: 700; color: var(--text-primary); }
 .sabl-save.on .sabl-save-label { color: var(--green); }
 .sabl-save.on { color: var(--green); background: rgba(47,211,160,0.15); }
@@ -1144,15 +1178,17 @@ html.js .sabl-group-toggle { display: inline-flex; }
 html.js .sabl-grid [data-dir-later],
 html.js .sabl-grid [data-dir-shut] { display: none; }
 html:not(.js) .sabl-more { display: none; }
-.sabl-more-line { font-size: 14px; color: rgba(20, 25, 21, 0.72); margin: 0; }
+.sabl-more-line { font-size: 14px; color: var(--ink-muted); margin: 0; }
 .sabl-more-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 22px; }
 .sabl-more-btn {
   font-family: var(--font-body); font-weight: 700; font-size: 15px;
   min-height: 48px; padding: 0 30px; border-radius: 100px; cursor: pointer;
-  background: var(--text-primary); color: var(--paper); border: 1.5px solid var(--text-primary);
+  /* Secondary, so an outline: the next 24 rows are not the page's action
+     (critique 2026-10-02, one primary fill sitewide). */
+  background: transparent; color: var(--text-primary); border: 1.5px solid rgba(20,25,21,0.3);
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
-.sabl-more-btn:hover { background: var(--green); border-color: var(--green); }
+.sabl-more-btn:hover { border-color: var(--text-primary); background: rgba(20,25,21,0.04); }
 .sabl-more-all {
   font-family: var(--font-body); font-weight: 600; font-size: 15px;
   min-height: 44px; padding: 0 6px; background: none; border: none; cursor: pointer;
@@ -1173,7 +1209,7 @@ html:not(.js) .sabl-more { display: none; }
 .sabs-empty-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 .sabs-empty-ctas .sabm-btn-outline { text-decoration: none; display: inline-block; }
 .sabl-empty-title { font-family: var(--font-display); font-weight: 400; font-size: 34px; margin: 0 0 10px; }
-.sabl-empty-sub { font-size: 15px; color: rgba(20, 25, 21, 0.68); margin-bottom: 24px; }
+.sabl-empty-sub { font-size: 15px; color: var(--ink-muted); margin-bottom: 24px; }
 .sabl-empty-quiz { margin: 22px 0 0; }
 .sabl-empty-quiz a { color: var(--green); font-weight: 600; text-underline-offset: 3px; }
 .sabl-empty-elsewhere { font-size: 15px; margin-bottom: 24px; }
@@ -1185,12 +1221,12 @@ html:not(.js) .sabl-more { display: none; }
 .sabl-empty-link:hover, .sabl-empty-link:focus-visible { color: #08573E; }
 
 .sabl-empty-btn {
-  font-family: var(--font-body); background: var(--green); color: #F5FBF8;
+  font-family: var(--font-body); background: var(--brand); color: var(--text-on-brand);
   font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 100px; border: none; cursor: pointer;
   transition: background 0.18s ease, transform 0.07s ease;
 }
 .sabl-empty-btn:hover, .sabl-empty-btn:focus-visible {
-  background: #08573E;
+  background: #5CE3BB;
 }
 .sabl-empty-btn:active { transform: translateY(1px); transition-duration: 0.07s; }
 
@@ -1278,7 +1314,7 @@ html:not(.js) .sabl-more { display: none; }
 /* The provider and the facts under it are one weight below the title, so
    the name, the money and the date lead the row (reader feedback,
    2026-09-29: a row of semibold lines had no first thing to read). */
-.sabl-org { font-size: 13.5px; font-weight: 500; color: rgba(20, 25, 21, 0.72); margin-top: 3px; }
+.sabl-org { font-size: var(--fs-ui); font-weight: 500; color: var(--ink-muted); margin-top: 3px; }
 /* Plain facts separated by dots. They were grey boxes until 2026-09-22. */
 .sabl-meta-row { display: flex; flex-wrap: wrap; gap: 3px 16px; margin: 8px 0 6px; padding: 0; list-style: none; }
 /* One line each. duration/grades/location are free text, and a listing whose
@@ -1291,7 +1327,7 @@ html:not(.js) .sabl-more { display: none; }
    title was unreadable on a phone (critique 2026-09-24). */
 .sabl-meta {
   position: relative; padding-left: 12px; box-sizing: border-box;
-  font-size: 13px; font-weight: 500; color: rgba(20, 25, 21, 0.76); line-height: 1.4;
+  font-size: 13px; font-weight: 500; color: var(--ink-soft); line-height: 1.4;
   max-width: 100%; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 /* A dot per item rather than a separator between them, so an item that wraps
@@ -1305,7 +1341,7 @@ html:not(.js) .sabl-more { display: none; }
   .sabl-row-main .sabl-org { display: none; }
   .sabl-meta-row {
     display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
-    font-size: 13px; font-weight: 500; color: rgba(20, 25, 21, 0.76); line-height: 1.4;
+    font-size: 13px; font-weight: 500; color: var(--ink-soft); line-height: 1.4;
   }
   .sabl-meta { display: inline; padding-left: 0; }
   .sabl-meta::before { content: none; }
@@ -1327,7 +1363,7 @@ html:not(.js) .sabl-more { display: none; }
 /* And a fee is not a headline: in the money type it read like a prize
    (flow plan, 2026-10-02). Plain words, so the row's big type stays for
    what a student gets, "Pays you" and "Free". */
-.sabl-paid.sabl-fee { font: 600 14px/1.3 var(--font-body); color: rgba(20, 25, 21, 0.72); }
+.sabl-paid.sabl-fee { font: 600 14px/1.3 var(--font-body); color: var(--ink-muted); }
 
 /* Directory-page shell (scholarships + programs design pages) */
 .sabp { background: var(--bg-page); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
@@ -1356,7 +1392,7 @@ html:not(.js) .sabl-more { display: none; }
   border-top: 1px solid #E5E0D5;
   margin-top: 48px; padding: 28px 0;
   display: flex; flex-direction: column; gap: 12px;
-  font-size: 15px; color: #4B5563;
+  font-size: 15px; color: var(--ink-muted);
 }
 .sabl-hubfoot p { margin: 0; max-width: 75ch; }
 /* Row gap carries most of the vertical rhythm so each link can pad itself
@@ -1377,8 +1413,8 @@ html:not(.js) .sabl-more { display: none; }
   font-family: var(--font-display); font-weight: 400;
   font-size: clamp(44px, 7vw, 72px); line-height: 1; letter-spacing: -0.015em; margin: 0; color: var(--text-primary);
 }
-.sabm-sub { font-size: 17px; line-height: 1.55; color: rgba(20, 25, 21, 0.65); margin: 18px 0 0; max-width: 560px; }
-.sabm-trust { margin: 14px 0 0; font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.72); }
+.sabm-sub { font-size: 17px; line-height: 1.55; color: var(--ink-faint); margin: 18px 0 0; max-width: 560px; }
+.sabm-trust { margin: 14px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-muted); }
 
 .sabm-progress-wrap { margin-top: 34px; padding-top: 24px; border-top: 2px solid var(--text-primary); }
 .sabm-progress { display: flex; gap: 8px; max-width: 420px; }
@@ -1387,7 +1423,7 @@ html:not(.js) .sabl-more { display: none; }
 .sabm-seg.current { background: var(--brand); }
 /* A question only some cities get: outlined until the city answer decides. */
 .sabm-seg.maybe { background: transparent; box-shadow: inset 0 0 0 1px rgba(20,25,21,0.22); }
-.sabm-step-label, .sabm-ph-step-label { font-family: var(--font-body); font-size: 14px; color: rgba(20, 25, 21, 0.72); margin-top: 14px; }
+.sabm-step-label, .sabm-ph-step-label { font-family: var(--font-body); font-size: 14px; color: var(--ink-muted); margin-top: 14px; }
 
 .sabm-question-panel { display: flex; flex-direction: column; max-width: 840px; }
 .sabm-question {
@@ -1420,7 +1456,7 @@ html:not(.js) .sabl-more { display: none; }
 .sabm-opt-dim { opacity: 0.45; }
 .sabm-opt-text { display: flex; flex-direction: column; gap: 5px; }
 .sabm-opt-label, .sabm-ph-opt-label { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--text-primary); }
-.sabm-opt-hint, .sabm-ph-opt-hint { font-size: 14px; color: rgba(20, 25, 21, 0.72); }
+.sabm-opt-hint, .sabm-ph-opt-hint { font-size: 14px; color: var(--ink-muted); }
 /* Holds question one's height until the quiz renders (see QuizLoader.astro).
    One column that may shrink, so the host keeps a block's width. */
 .sabm-slot { display: grid; grid-template-columns: minmax(0, 1fr); }
@@ -1431,13 +1467,13 @@ html:not(.js) .sabm-ph { display: none; }
   /* 44px tall, text where it was: it measured 75x23 (critique 2026-09-27). */
   margin-top: 26px; min-height: 44px; align-self: flex-start; background: none; border: none; padding: 0 16px 0 0;
   font-family: var(--font-body); font-size: 15px; font-weight: 600;
-  color: rgba(20, 25, 21, 0.65); cursor: pointer;
+  color: var(--ink-faint); cursor: pointer;
 }
 .sabm-prev:hover { color: var(--text-primary); }
 .sabm-opt:disabled, .sabm-prev:disabled { cursor: default; }
 .sabm-options-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px 20px; flex-wrap: wrap; margin-top: 8px; }
 .sabm-options-nav .sabm-prev { margin-top: 0; }
-.sabm-options-count { font-size: 14px; color: rgba(20, 25, 21, 0.72); margin: 0; min-height: 44px; display: flex; align-items: center; }
+.sabm-options-count { font-size: 14px; color: var(--ink-muted); margin: 0; min-height: 44px; display: flex; align-items: center; }
 .sabm-results-count { font-size: 17px; line-height: 1.5; margin: 12px 0 0; color: var(--text-primary); }
 
 .sabm-results-h1 {
@@ -1445,15 +1481,15 @@ html:not(.js) .sabm-ph { display: none; }
   font-size: clamp(38px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.015em;
   margin: 18px 0 0; color: var(--text-primary);
 }
-.sabm-results-note { font-size: 15px; line-height: 1.55; color: rgba(20, 25, 21, 0.75); margin: 10px 0 0; max-width: 62ch; }
-.sabm-saved-all { align-self: center; font-size: 14.5px; font-weight: 700; color: var(--green); }
+.sabm-results-note { font-size: 15px; line-height: 1.55; color: var(--ink-soft); margin: 10px 0 0; max-width: 62ch; }
+.sabm-saved-all { align-self: center; font-size: var(--fs-small); font-weight: 700; color: var(--green); }
 
 .sabm-results-bar { display: flex; align-items: center; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
 .sabm-results-actions, .sabm-results-more { display: flex; gap: 12px; flex-wrap: wrap; }
 .sabm-results-actions:empty { display: none; }
 .sabm-show-all { display: block; margin: 32px auto 0; }
 .sabm-btn-outline {
-  font-family: var(--font-body); font-size: 14.5px; font-weight: 600;
+  font-family: var(--font-body); font-size: var(--fs-small); font-weight: 600;
   padding: 12px 22px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
   background: transparent; color: var(--text-primary); cursor: pointer;
   transition: border-color 0.18s ease, transform 0.07s ease;
@@ -1463,7 +1499,7 @@ html:not(.js) .sabm-ph { display: none; }
 }
 .sabm-btn-outline:active { transform: translateY(1px); transition-duration: 0.07s; }
 .sabm-btn-accent {
-  font-size: 14.5px; font-weight: 700; background: var(--brand); color: var(--text-on-brand);
+  font-size: var(--fs-small); font-weight: 700; background: var(--brand); color: var(--text-on-brand);
   padding: 12px 22px; border-radius: 100px; text-decoration: none; display: inline-block;
   transition: background 0.18s ease, color 0.18s ease, transform 0.07s ease;
 }
@@ -1492,7 +1528,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   font: 800 clamp(26px, 3vw, 34px)/1 var(--font-display); text-transform: uppercase;
   letter-spacing: 0.01em; margin: 12px 0 6px;
 }
-.sabm-combo-who { font-size: 15.5px; line-height: 1.5; margin: 0; max-width: 60ch; }
+.sabm-combo-who { font-size: var(--fs-body); line-height: 1.5; margin: 0; max-width: 60ch; }
 .sabm-combo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; margin-top: 14px; }
 .sabm-combo .sabm-btn-accent { background: var(--text-primary); color: #fff; }
 .sabm-combo .sabm-btn-accent:hover, .sabm-combo .sabm-btn-accent:focus-visible { background: #2B332D; color: #fff; }
@@ -1500,7 +1536,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabm-combo .sabm-text-link { text-decoration-color: rgba(20, 25, 21, 0.6); }
 /* Leaving the results is the quiet choice (critique 2026-09-23). */
 .sabm-text-link {
-  align-self: center; font-size: 14.5px; font-weight: 600; color: var(--text-primary);
+  align-self: center; font-size: var(--fs-small); font-weight: 600; color: var(--text-primary);
   text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(20, 25, 21, 0.35);
   padding: 12px 4px;
 }
@@ -1515,28 +1551,29 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 
 .sabm-later-note { font-size: 15px; line-height: 1.55; color: #454945; max-width: 62ch; margin: 10px 0 0; }
 .sabm-table { border-top: 2px solid var(--text-primary); margin-top: 40px; }
-.sabm-table-label { font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.75); padding: 14px 0 0; margin: 0; }
+.sabm-table-label { font-size: 14px; font-weight: 600; color: var(--ink-soft); padding: 14px 0 0; margin: 0; }
 /* The second group's label, below the first group's last row */
 .sabm-row + .sabm-table-label { padding-top: 40px; }
-/* Actions keep their full content width, including Saved and Details.
-   The title track absorbs the remaining space. */
-.sabm-row {
-  display: grid; grid-template-columns: minmax(0, 1fr) 152px max-content; gap: 24px; align-items: center;
-  padding: 26px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
+/* Result rows are directory rows (.sabl-card, critique 2026-10-02): the
+   same columns, stripes and stretched link. Only what /match adds is styled
+   here: the fit tags and the reasons under the title. */
+@supports selector(:nth-child(1 of .a)) {
+  .sabm-table > .sabl-card { border-top-color: transparent; }
+  .sabm-table > .sabl-card:nth-child(even of .sabl-card) { --row-bg: rgba(20,25,21,0.04); }
 }
-.sabm-row:hover { background: rgba(47,211,160,0.07); }
-.sabm-row-main { min-width: 0; }
-.sabm-row-name { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; color: var(--text-primary); text-decoration: none; }
-.sabm-row-name:hover { color: var(--green); }
-.sabm-row-blurb { font-size: 14.5px; color: rgba(20, 25, 21, 0.68); margin-top: 5px; }
-.sabm-row-tags { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.sabm-table > .sabl-card:last-child { border-bottom: 1px solid rgba(20,25,21,0.14); }
+@media (max-width: 899px) {
+  .sabm-table > .sabl-card { margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
+}
+.sabm-row-tags { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.sabm-row-tags:empty { display: none; }
 /* Why this row ranked where it did; drawn from the same branches that scored
    it. Two at most, set quietly: they justify the order without competing with
    the award name. */
 .sabm-row-why {
   list-style: none; margin: 10px 0 0; padding: 0;
   display: flex; flex-wrap: wrap; gap: 4px 14px;
-  font-family: var(--font-body); font-size: 13.5px; color: rgba(20, 25, 21, 0.75);
+  font-family: var(--font-body); font-size: var(--fs-ui); color: var(--ink-soft);
 }
 .sabm-row-why li { display: flex; align-items: center; gap: 6px; }
 .sabm-row-why li::before {
@@ -1548,25 +1585,22 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   padding: 3px 10px; border-radius: 100px; white-space: normal; max-width: 100%;
 }
 .sabm-tier-strong { background: rgba(47,211,160,0.18); color: var(--green); }
-.sabm-tier-good { background: rgba(20,25,21,0.07); color: rgba(20, 25, 21, 0.7); }
+.sabm-tier-good { background: rgba(20,25,21,0.07); color: var(--ink-muted); }
 /* An eligibility rule the quiz never asked about. Rust, like every other
    "act on this" mark, at #A0491A, the directory day-chip rust, which clears AA on white. */
 .sabm-check { border: 1px solid rgba(160,73,26,0.45); color: var(--rust); white-space: normal; }
-.sabm-tier-possible, .sabm-due { border: 1px solid rgba(20,25,21,0.2); color: rgba(20, 25, 21, 0.68); }
-.sabm-row-amount { font-family: var(--font-display); font-size: 28px; line-height: 1.15; text-align: right; color: var(--green); }
-.sabm-amount-muted { font-family: var(--font-body); font-size: 13px; color: rgba(20, 25, 21, 0.68); }
+.sabm-tier-possible, .sabm-cat { border: 1px solid rgba(20,25,21,0.2); color: var(--ink-muted); }
+.sabm-amount-muted { font-family: var(--font-body); font-size: 13px; color: var(--ink-muted); }
 .sabm-amount-cell { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
 .sabm-paid-chip {
   font-family: var(--font-body); font-size: 13px; font-weight: 700; padding: 5px 11px; border-radius: 100px;
   background: rgba(14,140,100,0.12); color: var(--green); white-space: nowrap;
 }
 .sabm-paid-note {
-  font-family: var(--font-body); font-size: 12.5px; line-height: 1.35;
-  color: rgba(20, 25, 21, 0.68); text-align: right;
+  font-family: var(--font-body); font-size: var(--fs-meta); line-height: 1.35;
+  color: var(--ink-muted); text-align: right;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
-.sabm-row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
-.sabm-row-actions > * { flex: none; }
 .sabm-save-ico { display: inline-flex; flex: none; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1575,10 +1609,6 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 @media (max-width: 900px) {
   .sabm-body { padding: 24px 20px 64px; }
   .sabm-opts { grid-template-columns: 1fr; }
-  .sabm-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; padding: 20px 4px; }
-  .sabm-row-main { grid-column: 1; }
-  .sabm-row-amount { grid-column: 2; grid-row: 1; font-size: 22px; align-self: start; max-width: 140px; }
-  .sabm-row-actions { grid-column: 1 / -1; justify-content: flex-start; margin-top: 4px; }
 }
 /* Phones: the first result sat at 887px, under the headline, eight answer
    chips and the buttons (critique 2026-09-26). The answers become one line
@@ -1635,7 +1665,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   display: flex; align-items: center; gap: 10px;
   font: 800 20px/1.05 var(--font-display); text-transform: uppercase;
 }
-.sabs-plan-note { font-size: 14px; line-height: 1.5; color: rgba(20, 25, 21, 0.74); margin: 16px 0 0; max-width: 70ch; }
+.sabs-plan-note { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 16px 0 0; max-width: 70ch; }
 .sabs-need-short { display: none; }
 .sabs-start {
   display: inline-grid; place-items: center; flex: none;
@@ -1687,8 +1717,8 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   border-top: 2px solid var(--text-primary);
   /* An <h2> on /saved: weight and margin are pinned so promoting it out of a
      <div> changed the outline and nothing else. */
-  font-size: 12.5px; font-weight: 400; margin: 0;
-  letter-spacing: 0.06em; color: rgba(20, 25, 21, 0.65);
+  font-size: var(--fs-meta); font-weight: 400; margin: 0;
+  letter-spacing: 0.06em; color: var(--ink-faint);
 }
 .sabs-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
@@ -1697,7 +1727,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   padding: 14px 0; border-top: 2px solid var(--text-primary); gap: 16px; flex-wrap: wrap;
 }
 .sabs-cal-add {
-  font-family: var(--font-body); font-size: 13.5px; font-weight: 600;
+  font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 600;
   padding: 9px 18px; border-radius: 100px; border: 1.5px solid rgba(20,25,21,0.3);
   background: transparent; color: var(--text-primary); cursor: pointer;
 }
@@ -1723,7 +1753,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 .sabs-cal-nav:hover { border-color: var(--text-primary); }
 .sabs-cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
-.sabs-cal-wd { text-align: center; font-size: 11.5px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); padding: 6px 0; }
+.sabs-cal-wd { text-align: center; font-size: var(--fs-caption); letter-spacing: 0.05em; color: var(--ink-muted); padding: 6px 0; }
 .sabs-cal-cell {
   min-height: 58px; border-radius: 12px; padding: 8px 10px; box-sizing: border-box;
   background: transparent; border: 1.5px solid rgba(20,25,21,0.08);
@@ -1731,7 +1761,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabs-cal-cell.blank { border-color: transparent; }
 .sabs-cal-cell.has-due { background: rgba(47,211,160,0.16); border-color: rgba(14,140,100,0.4); }
 .sabs-cal-cell.today { border-color: var(--text-primary); }
-.sabs-cal-day { font-size: 13.5px; color: var(--text-primary); }
+.sabs-cal-day { font-size: var(--fs-ui); color: var(--text-primary); }
 .sabs-cal-cell.has-due .sabs-cal-day, .sabs-cal-cell.today .sabs-cal-day { font-weight: 700; }
 .sabs-cal-due { font-size: 10px; letter-spacing: 0.03em; color: var(--green); margin-top: 4px; line-height: 1.3; }
 .sabs-cal-list { border-top: 1px solid rgba(20,25,21,0.12); margin-top: 24px; }
@@ -1739,10 +1769,10 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
   display: grid; grid-template-columns: 110px 1fr auto; gap: 24px; align-items: center;
   padding: 18px 4px; border-bottom: 1px solid rgba(20,25,21,0.1);
 }
-.sabs-cal-date { font-size: 12.5px; letter-spacing: 0.04em; color: var(--rust); }
+.sabs-cal-date { font-size: var(--fs-meta); letter-spacing: 0.04em; color: var(--rust); }
 .sabs-cal-name { font-weight: 700; font-size: 16px; }
-.sabs-cal-kind { font-size: 11.5px; letter-spacing: 0.04em; color: rgba(20, 25, 21, 0.68); margin-top: 3px; }
-.sabs-cal-none { text-align: center; font-size: 13px; color: rgba(20, 25, 21, 0.68); padding: 28px 0 8px; }
+.sabs-cal-kind { font-size: var(--fs-caption); letter-spacing: 0.04em; color: var(--ink-muted); margin-top: 3px; }
+.sabs-cal-none { text-align: center; font-size: 13px; color: var(--ink-muted); padding: 28px 0 8px; }
 
 @media (max-width: 900px) {
   .sabs-cal-card { padding: 20px 14px 18px; }
@@ -1772,11 +1802,11 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 .sab-consent-copy { min-width: 0; }
 .sab-consent-title { font-weight: 700; font-size: 15px; margin: 0; }
-.sab-consent-body { font-size: 13.5px; line-height: 1.5; margin: 4px 0 0; color: rgba(255, 255, 255, 0.72); }
+.sab-consent-body { font-size: var(--fs-ui); line-height: 1.5; margin: 4px 0 0; color: rgba(255, 255, 255, 0.72); }
 .sab-consent-body a { color: var(--brand); text-underline-offset: 3px; }
 .sab-consent-actions { display: flex; gap: 10px; flex-shrink: 0; }
 .sab-consent-btn {
-  font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer;
+  font: inherit; font-size: var(--fs-ui); font-weight: 700; cursor: pointer;
   padding: 10px 18px; border-radius: 999px; white-space: nowrap;
   /* 44px minimum target: the banner's most likely reader is on a phone. */
   min-height: 44px;
@@ -1884,7 +1914,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 }
 .sabl-special-name { color: #0A6B4D; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .sabl-special-name:hover { color: var(--text-primary); }
-.sabl-special-v { color: rgba(20, 25, 21, 0.72); }
+.sabl-special-v { color: var(--ink-muted); }
 /* A city board's photo (2026-10-02), desktop only; see ScholarshipDirectory. */
 .sabl-board-photo, .sabl-board-credit { display: none; }
 @media (min-width: 901px) {
@@ -1920,7 +1950,7 @@ button.sabm-btn-accent { border: 0; font-family: var(--font-body); cursor: point
 .sabl-title-row .sabs-toggle-btn + .sabs-toggle-btn { border-left-color: rgba(255, 255, 255, 0.85); }
 .sabl-title-row .sabs-toggle-btn.on { background: #fff; color: var(--text-primary); }
 /* City hubs: where the rest of the reader's awards are (critique 2026-10-01). */
-.sabl-also { margin: 0 0 18px; max-width: 75ch; font-size: 15px; line-height: 1.5; color: rgba(20, 25, 21, 0.78); }
+.sabl-also { margin: 0 0 18px; max-width: 75ch; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
 .sabl-also a { color: #0A6B4D; font-weight: 700; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .sabl-also a:hover { color: var(--text-primary); }
 .sabl-promo {

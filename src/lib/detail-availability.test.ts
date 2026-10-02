@@ -55,7 +55,7 @@ beforeAll(async () => {
   const clock = component.slice(component.indexOf('  function refreshStatusChip()'), component.indexOf('  // Per-item views'))
   refresh = (await moduleFrom(`import { todayDate } from '../../lib/calendar';
     import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
-    import { STATUS_WORDS } from '../../lib/status';
+    import { LIKELY_DATE, STATUS_WORDS } from '../../lib/status';
     ${clock}\nexport { refreshStatusChip };`, dirname(componentPath))).refreshStatusChip
   const savedSource = readFileSync(resolve('src/components/sab/SavedDirectory.astro'), 'utf8').split('---')[1]!
   const savedImports = savedSource.match(/^import .*;$/gm)!.join('\n')
@@ -142,7 +142,7 @@ describe('detail availability', () => {
     expect(text('.sabd-deadline-value')).toBe('Around May 31, 2027')
     expect(text('.sabd-estimate-note')).toContain("Last year's date")
     refresh()
-    expect(text('[data-status-chip]')).toBe('Opens later, date not posted')
+    expect(text('[data-status-chip]')).toBe('Likely date, not posted yet')
   })
 
   it('preserves all no-separate-application routes and provider links', async () => {

@@ -1710,3 +1710,29 @@ Outcome: the most-searched program pages say something only ScholarAB says, the 
 | Meta descriptions | Three shortened (SHAD, CCO, AHSMC): the new closing dates pushed them past the snippet cut. |
 
 Add-back fraction: 0/0. Local only: built CCO page checked on a phone; all nine pages render the note.
+
+## Critique fix pass: rows, urgency, tokens, the filter sheet, October 2, 2026
+
+Outcome: a student meets one row layout on the directories, /match, the home list and a listing's related lists; Apply stays under the thumb on a phone listing; a deadline due today still says it is too soon for a reminder; an estimated date no longer contradicts itself; and the phone filter sheet behaves as a dialog a keyboard can finish.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Apply and Save "52x21 targets" (critique, both reviewers) | No change: a false positive. The drawn link is 52x21, the hit area (`::after`, 2026-09-27) is 60x44; a probe 10px above and below hit Apply on 8 of 8 rows. Save is 44px tall the same way. |
+| Long amounts over Save at 1280 | `.sabl-amount.is-long` wraps in its column: 4 of 880 overlaps to 0. The three amount formats in the data are left alone (factual copy, not this pass). |
+| /match leading with strong fits that open in spring | Only strong fits a student can apply to today lead; the others head "Upcoming", still strong first. Keeps the 2026-10-01 rule (open strong fits above possible matches due soon) and drops its one case: six spring openers above Loran. Test rewritten to say so. |
+| Combo tray at row three | Under the first two groups. |
+| Apply below the fold on phone listings (688 to 743px on a 667px screen) | A pinned bar (amount, date, Apply, Save) while the card's own buttons are off screen; hidden under the footer and while the consent band is up. Needs stays above the card's Apply (2026-09-26). |
+| Reminder block missing on the due date | `canRemind` is `daysLeft >= 0`, so the written "Too soon for an email reminder. Apply today." shows (ATCO, due today: absent, now shown). |
+| "Closing this week" over rows due in 13 days | The heading needs every row inside the week; otherwise "Next deadlines". |
+| /match result cards | Directory rows (`sabl-card`): date figure left, ink money with leader dots, the same stripes and stretched link. Program results use the same cell. Quiz bundle +636 bytes. |
+| Related lists on listing pages | Date figure first, as the directory; no countdown, since these rows are built once. |
+| Home closing rows | Stripes and the mint hover of the directories instead of hairlines. |
+| /deadlines "Open now" on 323 of 622 rows | Only exceptions print a state; the month count already says how many are open. Month headings in the display face. Tailwind grey replaced by the ink token. 279px shorter on a phone. |
+| 73 half-pixel font sizes, 14 ink strengths for secondary text | `--fs-*` (12 to 17, whole pixels) and `--ink-soft/-muted/-faint` (0.8, 0.72, 0.62) on `:root`; design-tokens.test.ts rejects both from now on. Distinct sizes per page down on every page measured (listing 19 to 14 at 1280). |
+| Three primary fills (mint, dark green, black) | Mint with ink for Remind me, the educators' handout, the sheet's Show results and the empty-state button; Show 24 more is an outline. The menu-board yellow-on-black pieces are the boards' own look and stay. |
+| Status heading on estimated listings | "Likely date, not posted yet" (`LIKELY_DATE` in status.ts, shared with /deadlines), not "Opens later, date not posted" above "Around May 31, 2027". |
+| Verification as fine print | Under the deadline it vouches for, with a drawn mark: "Date confirmed on the provider's page, Sep 2026." for posted dates, the plain check otherwise. Rows unchanged: "confirmed" on 880 rows would be noise. |
+| Phone filter sheet | `role="dialog"` with `aria-modal` while open on a phone, header and footer inert, the glossary's summary in the Tab cycle, a Filters heading and Clear filters; pickers one width. Focus still lands on the first picker. |
+| Confetti in Tailwind purple and pink | The site's colours. |
+
+Add-back fraction: 1/18 (the focus target, restored to the first picker after E2E caught Clear filters taking it). Local only: built site measured with a scripted Playwright pass at 375x667, 375x812 and 1280x900 before and after; `npm run ci` 1,204 tests; E2E 153 passed on Chromium and Pixel 7; detector clean on the changed files. Not measured: hosted timings, real-device Safari.

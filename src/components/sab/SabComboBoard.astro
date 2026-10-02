@@ -64,8 +64,8 @@ const { h1, intro, menuLabel, items, burst } = Astro.props;
     display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
     background: var(--sabc-tray); color: var(--sabc-ink); font: 800 22px/1 var(--font-display);
   }
-  .sabc-menu-name { font-weight: 700; font-size: 15.5px; }
-  .sabc-menu-count { font-size: 13.5px; color: rgba(255,255,255,0.62); white-space: nowrap; }
+  .sabc-menu-name { font-weight: 700; font-size: var(--fs-body); }
+  .sabc-menu-count { font-size: var(--fs-ui); color: rgba(255,255,255,0.62); white-space: nowrap; }
   .sabc-burst {
     position: absolute; top: 28px; right: 34px; width: 150px; height: 150px;
     display: grid; place-items: center; transform: rotate(12deg);

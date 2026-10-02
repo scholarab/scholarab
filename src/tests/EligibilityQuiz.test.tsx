@@ -365,20 +365,26 @@ describe('Results', () => {
 
   // Critique 2026-10-01: three possible matches due soon led, and the three
   // strong fits the Save button named sat last.
-  it('leads with up to five strong matches, above the ones due soon, and saves those', () => {
+  // Critique 2026-10-02: a strong fit that opens in spring led above Loran,
+  // due in 13 days. It now heads "Upcoming" instead; open strong fits still lead.
+  it('leads with up to five open strong matches, above the ones due soon, and saves those', () => {
     const soonIso = new Date(Date.now() + 10 * 86_400_000).toISOString().slice(0, 10)
-    const strongs = Array.from({ length: 6 }, (_, i) => makeScholarship({ id: i + 1, title: `Strong ${i + 1}`, deadline: '2099-05-30', openDate: '2099-03-01' }))
+    const strongs = Array.from({ length: 6 }, (_, i) => makeScholarship({ id: i + 1, title: `Strong ${i + 1}`, deadline: '2099-05-30' }))
+    const later = makeScholarship({ id: 7, title: 'Strong Later', deadline: '2099-05-30', openDate: '2099-03-01' })
     const soon = makeScholarship({ id: 9, title: 'Soon Award', deadline: soonIso })
     mockMatchAll.mockReturnValue([
+      { id: 7, tier: 'strong' as ConfidenceTier, confidence: 0.95, signals: [], checks: [] },
       ...strongs.map(s => ({ id: s.id, tier: 'strong' as ConfidenceTier, confidence: 0.9, signals: [], checks: [] })),
       { id: 9, tier: 'possible' as ConfidenceTier, confidence: 0.2, signals: [], checks: [] },
     ])
-    render(<EligibilityQuiz scholarships={[...strongs, soon] as any[]} programs={[]} />)
+    render(<EligibilityQuiz scholarships={[later, ...strongs, soon] as any[]} programs={[]} />)
     advanceToResults()
     const text = document.querySelector('.sabm-table')!.textContent!
     expect(text.indexOf('Your strongest matches')).toBeLessThan(text.indexOf('Strong 1'))
     expect(text.indexOf('Strong 5')).toBeLessThan(text.indexOf('Soon Award'))
     expect(text.indexOf('Soon Award')).toBeLessThan(text.indexOf('Strong 6'))
+    expect(text.indexOf('Soon Award')).toBeLessThan(text.indexOf('Strong Later'))
+    expect(text.indexOf('Upcoming or undated, best fit first')).toBeLessThan(text.indexOf('Strong Later'))
     fireEvent.click(screen.getByRole('button', { name: 'Save the 5 strong matches' }))
     expect(mockToggleSaved.mock.calls.map(c => c[0])).toEqual([1, 2, 3, 4, 5])
   })
@@ -420,7 +426,7 @@ describe('Results', () => {
     advanceToResults()
     const text = document.querySelector('.sabm-table')!.textContent!
     expect(text.indexOf('Small Strong')).toBeLessThan(text.indexOf('Big Possible'))
-    expect(text).toContain('Due today')
+    expect(text).toMatch(/due today/i)
     // Due today is not "the next 30 days": it lists below that group.
     expect(text.indexOf('Open now, best fit first')).toBeLessThan(text.indexOf('Big Possible'))
   })

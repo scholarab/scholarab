@@ -66,7 +66,7 @@ const scopeMap = scopeSearchMap(SCHOLARSHIP_FACETS.filter(f => facetItems(f, enr
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(44px, 6vw, 68px); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
   }
-  .sab404-copy { font-size: 17px; line-height: 1.6; color: rgba(20, 25, 21, 0.78); margin: 20px 0 0; max-width: 520px; }
+  .sab404-copy { font-size: 17px; line-height: 1.6; color: var(--ink-soft); margin: 20px 0 0; max-width: 520px; }
   .sab404-search { display: flex; gap: 10px; margin-top: 28px; max-width: 560px; }
   .sab404-input {
     flex: 1; min-width: 0; font: 16px var(--font-body); color: var(--text-primary);
@@ -74,9 +74,9 @@ const scopeMap = scopeSearchMap(SCHOLARSHIP_FACETS.filter(f => facetItems(f, enr
   }
   .sab404-input:focus { outline: none; border-color: var(--green); }
   .sab404-input:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
-  .sab404-hubs { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 22px; font-size: 15.5px; }
+  .sab404-hubs { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 22px; font-size: var(--fs-body); }
   .sab404-hubs a { color: #0A6B4D; font-weight: 600; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 32px; }
-  .sab404-hubs span { color: rgba(20, 25, 21, 0.72); }
+  .sab404-hubs span { color: var(--ink-muted); }
   .sab404-btn-accent {
     display: inline-flex; align-items: center; font-weight: 600; font-size: 15px;
     background: #2FD3A0; color: #08120E; padding: 13px 24px; border-radius: 100px; text-decoration: none;

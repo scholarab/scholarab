@@ -372,7 +372,7 @@ export function initSaved() {
           + `<div class="sabs-cal-name">${esc(item.title)}</div>`
           + `<div class="sabl-mono sabs-cal-kind">${item.type === 'scholarship' ? `SCHOLARSHIP${item.amount ? ' · ' + esc(item.amount.toUpperCase()) : ''}` : 'PROGRAM'}</div>`
           + '</div>'
-          + `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" style="font-size:13.5px">Apply${EXT}</a>`
+          + `<a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" class="sabl-apply" style="font-size:var(--fs-ui)">Apply${EXT}</a>`
           + '</div>').join('')
         + '</div>'
       : '<div class="sabl-mono sabs-cal-none">No deadlines this month.</div>';

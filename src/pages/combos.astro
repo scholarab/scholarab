@@ -92,7 +92,7 @@ const description = 'Alberta scholarships grouped into combos by who can apply: 
     display: inline-flex; align-items: center; gap: 12px; min-height: 48px;
     padding: 6px 6px 6px 18px; border: 2px solid var(--sabc-ink); border-radius: 999px;
     background: var(--sabc-tray); color: var(--sabc-ink); text-decoration: none;
-    font-weight: 700; font-size: 15.5px;
+    font-weight: 700; font-size: var(--fs-body);
   }
   .sabx-combo:hover { background: var(--sabc-ink); color: #fff; }
   .sabx-count {
@@ -103,6 +103,6 @@ const description = 'Alberta scholarships grouped into combos by who can apply: 
   .sabx-combo:hover .sabx-count { background: var(--sabc-mustard); color: var(--sabc-ink); }
   @media (max-width: 640px) {
     .sabx-city { margin-top: 30px; }
-    .sabx-combo { font-size: 14.5px; }
+    .sabx-combo { font-size: var(--fs-small); }
   }
 </style>

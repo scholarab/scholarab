@@ -175,6 +175,11 @@ export const STATUS_WORDS = {
 // headword: "Open any time" was a second chip and a second run for what is,
 // to a student, the same answer to "can I apply today" (2026-10-01).
 export const NO_DEADLINE = 'no deadline';
+// A rolled-forward date shown as a date (the listing page's card, /deadlines):
+// the headword says the date is the uncertain part. "Opens later, date not
+// posted" above a card reading "Around May 31, 2027" contradicted itself
+// (critique 2026-10-02).
+export const LIKELY_DATE = 'Likely date, not posted yet';
 export const OPEN_NO_DEADLINE = `${STATUS_WORDS.open}, ${NO_DEADLINE}`;
 
 /**

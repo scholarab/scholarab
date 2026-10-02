@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
 import SabHeader from '../components/sab/SabHeader.astro';
 import { loadScholarships, loadPrograms } from '../lib/data-loader';
 import { generateSlug, getToday } from '../lib/utils';
-import { STATUS_WORDS, scholarshipStatusOf, programIsListed } from '../lib/status';
+import { LIKELY_DATE, STATUS_WORDS, scholarshipStatusOf, programIsListed } from '../lib/status';
 import { formatListingDate } from '../lib/meta';
 import { itemListJson } from '../lib/ld';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../lib/facets';
@@ -97,7 +97,7 @@ const scholarshipRows: Row[] = scholarships
         : status === 'unconfirmed'
           // Not "Opens later": it sits under "Due this week" by this date, and
           // the date is the thing that is uncertain (critique 2026-09-27).
-          ? 'Likely date, not posted yet'
+          ? LIKELY_DATE
           : s.openDate
           ? `Opens ${formatListingDate(s.openDate)}`
           : STATUS_WORDS.future,
@@ -287,7 +287,7 @@ const breadcrumbJson = {
                     </span>
                     <span class="sabcal-sub">
                       <span class="sabcal-meta">{r.meta}</span>
-                      <span class:list={['sabcal-state', r.open && 'is-open']}>{r.state}</span>
+                      {!r.open && <span class="sabcal-state">{r.state}</span>}
                     </span>
                   </li>
                 ))}
@@ -321,7 +321,7 @@ const breadcrumbJson = {
                     </span>
                     <span class="sabcal-sub">
                       <span class="sabcal-meta">{r.meta}</span>
-                      <span class:list={['sabcal-state', r.open && 'is-open']}>{r.state}</span>
+                      {!r.open && <span class="sabcal-state">{r.state}</span>}
                     </span>
                   </li>
                 ))}
@@ -463,10 +463,10 @@ const breadcrumbJson = {
   .sabl-crumbs {
     display: flex; gap: 8px; align-items: center;
     font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
-    padding-top: 24px; color: #5C5F5B;
+    padding-top: 24px; color: var(--ink-muted);
   }
   /* 24px tap target at 12px type; the negative margin keeps the line in place. */
-  .sabl-crumbs a { color: #5C5F5B; text-decoration: none; display: inline-flex; align-items: center; min-height: 24px; padding: 0 4px; margin: -6px -4px; }
+  .sabl-crumbs a { color: var(--ink-muted); text-decoration: none; display: inline-flex; align-items: center; min-height: 24px; padding: 0 4px; margin: -6px -4px; }
   .sabl-crumbs a:hover { color: #141915; text-decoration: underline; }
 
   .sabd-cal { padding-bottom: 72px; }
@@ -479,7 +479,7 @@ const breadcrumbJson = {
     margin: 0 0 16px; text-wrap: balance; max-width: 24ch;
   }
   .sabcal-intro { font-size: 17px; line-height: 1.65; color: #454945; max-width: 62ch; margin: 0; }
-  .sabcal-stats { font-size: 15px; color: #5C5F5B; margin: 14px 0 0; max-width: 72ch; }
+  .sabcal-stats { font-size: 15px; color: var(--ink-muted); margin: 14px 0 0; max-width: 72ch; }
   .sabcal-where { display: inline-flex; align-items: center; gap: 12px; margin-top: 18px; font-size: 15px; font-weight: 600; color: #141915; }
   html:not(.js) .sabcal-where { display: none; }
   /* Draws its own box and arrow like the directory pickers (.sabl-sort-select
@@ -511,7 +511,7 @@ const breadcrumbJson = {
      2026-10-01). */
   .sabcal-chip-week { padding-right: 16px; margin-right: 10px; border-right: 2px solid rgba(20, 25, 21, 0.18); }
   .sabcal-chip-m { font-size: 15px; font-weight: 700; }
-  .sabcal-chip-n { font-size: 13.5px; color: #5C5F5B; }
+  .sabcal-chip-n { font-size: var(--fs-ui); color: var(--ink-muted); }
 
   .sabcal-month { padding-top: 40px; scroll-margin-top: 72px; }
   .sabcal-month-head {
@@ -528,11 +528,13 @@ const breadcrumbJson = {
   details.sabcal-month:not([open]) .sabcal-h2::after { transform: translateY(-1px) rotate(-45deg); }
   /* The week list is a plain section that never folds, so no chevron. */
   .sabcal-week .sabcal-h2::after { content: none; }
+  /* The display face, as every other section heading on the site; the
+     month headings were the one set in bold body type (critique 2026-10-02). */
   .sabcal-h2 {
-    font-family: var(--font-body); font-weight: 700; letter-spacing: -0.01em;
-    font-size: 24px; color: #141915; margin: 0;
+    font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em;
+    font-size: 30px; line-height: 1.1; color: #141915; margin: 0;
   }
-  .sabcal-month-count { font-size: 14px; color: #5C5F5B; }
+  .sabcal-month-count { font-size: 14px; color: var(--ink-muted); }
 
   .sabcal-rows { list-style: none; margin: 0; padding: 0; }
   .sabcal-row {
@@ -565,12 +567,13 @@ const breadcrumbJson = {
   }
   .sabcal-name a:hover { text-decoration: underline; }
   .sabcal-tag {
-    font-size: 13px; font-weight: 600; color: #5C5F5B; margin-left: 8px;
+    font-size: 13px; font-weight: 600; color: var(--ink-muted); margin-left: 8px;
     white-space: nowrap;
   }
-  .sabcal-meta { font-size: 14px; color: #5C5F5B; white-space: nowrap; }
-  .sabcal-state { font-size: 13.5px; font-weight: 600; color: #5C5F5B; white-space: nowrap; }
-  .sabcal-state.is-open { color: #0B7A5A; }
+  .sabcal-meta { font-size: 14px; color: var(--ink-muted); white-space: nowrap; }
+  /* Only the exceptions: "Open now" was printed on 323 of 622 rows, and the
+     month heading already counts the open ones (critique 2026-10-02). */
+  .sabcal-state { font-size: var(--fs-ui); font-weight: 600; color: var(--ink-muted); white-space: nowrap; }
 
   .sabcal-tail { padding-top: 56px; font-size: 16px; line-height: 1.65; color: #454945; }
   .sabcal-tail p { max-width: 62ch; }
@@ -581,7 +584,7 @@ const breadcrumbJson = {
     color: #141915; display: inline-block; padding-block: 3px; margin-block: -3px;
   }
 
-  .sabcal-above { font-size: 14px; color: #5C5F5B; margin: 12px 0 0; }
+  .sabcal-above { font-size: 14px; color: var(--ink-muted); margin: 12px 0 0; }
   .sabcal-day-md { white-space: nowrap; text-align: left; }
   .sabcal-week .sabcal-row { grid-template-columns: 64px 1fr auto auto; }
   .sabcal-undated-fold summary {

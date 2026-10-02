@@ -172,7 +172,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
      one way across the site. */
   .sabg-crumb {
     display: inline-block; font-family: var(--font-label); font-size: 13px; letter-spacing: 0.04em;
-    color: rgba(20, 25, 21, 0.65); text-decoration: none; padding: 12px 0; margin: -12px 0 6px;
+    color: var(--ink-faint); text-decoration: none; padding: 12px 0; margin: -12px 0 6px;
   }
   .sabg-crumb:hover { color: #0A6B4D; }
   .sabg-h1 {
@@ -201,12 +201,12 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-local-row:hover { background: rgba(20,25,21,0.04); }
   .sabg-local-row:hover .sabg-local-name { color: var(--green); }
   .sabg-local-name { font-weight: 700; font-size: 15px; line-height: 1.35; }
-  .sabg-local-meta { display: flex; gap: 10px; font-size: 13.5px; color: rgba(20, 25, 21, 0.75); }
+  .sabg-local-meta { display: flex; gap: 10px; font-size: var(--fs-ui); color: var(--ink-soft); }
   .sabg-local-amt { color: #0A6B4D; font-weight: 700; }
   .sabg-local-all { display: inline-block; margin-top: 12px; font-size: 15px; font-weight: 600; color: #0A6B4D; text-decoration: none; }
   .sabg-local-all:hover { color: #141915; }
   /* The page runs full width; the prose alone keeps a readable line. */
-  .sabg-prose { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); max-width: var(--sab-read); }
+  .sabg-prose { font-size: 17px; line-height: 1.7; color: var(--ink-soft); max-width: var(--sab-read); }
   .sabg-prose h2 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(28px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.01em;
@@ -219,8 +219,8 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-prose a { color: #0A6B4D; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
   .sabg-prose a:hover { color: #141915; }
   .sabg-prose strong { color: #141915; }
-  .sabg-prose table { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 15.5px; }
-  .sabg-prose th { font-family: var(--font-label); font-weight: 500; font-size: 12px; letter-spacing: 0.05em; text-align: left; color: rgba(20, 25, 21, 0.68); padding: 10px 14px; border-bottom: 2px solid #141915; }
+  .sabg-prose table { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: var(--fs-body); }
+  .sabg-prose th { font-family: var(--font-label); font-weight: 500; font-size: 12px; letter-spacing: 0.05em; text-align: left; color: var(--ink-muted); padding: 10px 14px; border-bottom: 2px solid #141915; }
   .sabg-prose td { padding: 12px 14px; border-bottom: 1px solid rgba(20,25,21,0.14); }
   .sabg-prose td:last-child, .sabg-prose th:last-child { text-align: right; }
   /* At 320px the three columns with 14px sides ran 8px past the screen. */
@@ -231,7 +231,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   }
   .sabg-note {
     background: #FFFFFF; border: 1.5px solid rgba(20,25,21,0.85); border-radius: 14px;
-    padding: 18px 22px; margin: 0 0 18px; font-size: 15.5px;
+    padding: 18px 22px; margin: 0 0 18px; font-size: var(--fs-body);
   }
   /* Quoted specimen prose -- a sample essay paragraph the surrounding text is
      analysing. Set apart from the guide's own voice, and deliberately not the
@@ -240,7 +240,7 @@ const keepReading = [...others.slice(start), ...others.slice(0, start)].slice(0,
   .sabg-prose blockquote {
     margin: 0 0 18px; padding: 4px 0 4px 22px;
     border-left: 3px solid rgba(20,25,21,0.25);
-    font-size: 16.5px; color: rgba(20, 25, 21, 0.72);
+    font-size: var(--fs-lead); color: var(--ink-muted);
   }
   .sabg-prose blockquote p:last-child { margin-bottom: 0; }
 

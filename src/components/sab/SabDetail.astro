@@ -16,7 +16,7 @@
 import { emailOff } from '../../lib/email-off';
 import { BOOKMARK } from '../../lib/icons';
 import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
-import { STATUS_WORDS } from '../../lib/status';
+import { LIKELY_DATE, STATUS_WORDS } from '../../lib/status';
 import { milestonesAhead, milestonePhrase, closesPhrase } from '../../lib/alerts';
 import type { ToApply } from '../../lib/to-apply';
 import { formatVerifiedMonth } from '../../lib/utils';
@@ -103,6 +103,19 @@ const remindAhead = typeof daysLeft === 'number' ? milestonesAhead(daysLeft) : [
 const remindLate = canRemind && remindAhead.length === 0;
 const lateWhen = remindLate && deadlineIso ? closesPhrase(daysLeft ?? 0, deadlineIso) : '';
 const lateApply = ctaLabel === 'Apply';
+// A posted deadline for a listing still to come: what "confirmed" means in
+// status.ts. Closed, estimated and undated listings keep the plain check.
+const dateConfirmed = !availability && !!deadlineIso && !estimated && (status === 'active' || status === 'future');
+
+// The pinned Apply bar on a phone (critique 2026-10-02): the card's Apply sat
+// at 688 to 743px, under the fold of a 667px screen, below the title, the
+// provider, Who can apply and the amount. Only when the card's button is a
+// link; a Closed or Opens-later label has nothing to pin.
+const barCta = status !== 'closed' && status !== 'ended' && status !== 'future' && !!url;
+const barLabel = status === 'unconfirmed' ? 'Check the provider' : ctaLabel;
+const barDue = !availability && deadlineIso
+  ? `${estimated ? 'Around ' : 'Due '}${new Date(deadlineIso + 'T00:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })}`
+  : '';
 
 // Listing prose can carry a provider's own address ("apply to x@y.ca"), so it
 // is bracketed for Cloudflare's obfuscator. See src/lib/email-off.ts.
@@ -116,6 +129,7 @@ const chip: { text: string; tone: Tone } =
   status === 'ended' || status === 'unlisted' ? { text: status === 'ended' ? 'Ended' : 'Not currently listed', tone: 'quiet' }
   : status === 'closed' ? { text: STATUS_WORDS.closed, tone: 'quiet' }
   : status === 'future' ? { text: opensLabel ? `Opens ${opensLabel}` : STATUS_WORDS.future, tone: 'go' }
+  : status === 'unconfirmed' && estimated && deadlineIso ? { text: LIKELY_DATE, tone: 'quiet' }
   : status === 'unconfirmed' || status === 'tba' ? { text: STATUS_WORDS.unconfirmed, tone: 'quiet' }
   : status === 'ongoing' ? { text: STATUS_WORDS.open, tone: 'go' }
   : daysLeft === 0 ? { text: 'Due today', tone: 'urgent' }
@@ -191,6 +205,18 @@ const chip: { text: string; tone: Tone } =
       <span class="sabd-card-label">Deadline</span>
       <span class="sabd-deadline-value">{estimated ? `Around ${dueLong}` : dueLong}</span>
     </div>}
+    {/* Under the date it vouches for. The check is what the site is for (the
+        moat in PRODUCT.md), and as 14px grey under the requirements it was the
+        quietest line on the page (critique 2026-10-02). A posted, dated
+        deadline says so; anything else keeps the plain check. */}
+    {checkedLabel && (
+      <p class:list={['sabd-checked', { 'is-confirmed': dateConfirmed }]}>
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">{dateConfirmed
+          ? <><circle cx="8" cy="8" r="8" fill="currentColor" /><path d="M4.6 8.3 7 10.6l4.4-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></>
+          : <circle cx="8" cy="8" r="6.75" fill="none" stroke="currentColor" stroke-width="1.5" />}</svg>
+        <span>{dateConfirmed ? `Date confirmed on the provider's page, ${checkedLabel}.` : `Checked against the provider's page in ${checkedLabel}.`}</span>
+      </p>
+    )}
     {/* The bar a student has to clear, above the button: on a phone Apply
         came before Who can apply, and Loran's 88% sat in the About prose
         (critique 2026-09-26). */}
@@ -199,11 +225,6 @@ const chip: { text: string; tone: Tone } =
         <span class="sabd-card-label">Needs</span>
         <span class="sabd-needs-value">{needs.join(' · ')}</span>
       </div>
-    )}
-    {/* Beside the deadline, at reading size: the check is what the site is
-        for, and at the foot of the card in 12.5px grey nobody saw it. */}
-    {checkedLabel && (
-      <p class="sabd-checked">Checked against the provider's page in {checkedLabel}.</p>
     )}
     {status === 'ended' && <p class="sabd-estimate-note">This scholarship has ended.</p>}
     {status === 'closed' && (
@@ -258,6 +279,24 @@ const chip: { text: string; tone: Tone } =
         class="sabd-visit">Visit the official site<span class="sabl-ext" aria-hidden="true">↗</span></a>
     )}
   </section>
+
+  {/* Phones only, and only while the card's own button is off screen
+      (setupBar below). The same link and the same Save, so a tap here is a
+      tap on the card. */}
+  {barCta && (
+    <div class:list={['sabd-bar', { 'is-long': barLabel.length > 12 }]} data-sabd-bar hidden>
+      <p class="sabd-bar-facts">
+        <span class="sabd-bar-value">{valueBig}</span>
+        {barDue && <span class="sabd-bar-due">{barDue}</span>}
+      </p>
+      <a href={url} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+        data-track="apply" data-item-type={itemType} data-item-id={itemId}
+        class="sab-btn sabd-cta sabd-bar-cta">{barLabel}<span class="sabl-ext" aria-hidden="true">↗</span></a>
+      <button data-sabd-save data-bookmark-type={itemType} data-bookmark-id={itemId}
+        class="sabd-save sabd-bar-save" aria-label={`Save: ${name}`} data-save-name={name} aria-pressed="false"
+        data-save-idle="Save"><Fragment set:html={BOOKMARK} /><span data-save-label>Save</span></button>
+    </div>
+  )}
 
   <!-- left column -->
   <div class="sabd-left">
@@ -352,7 +391,7 @@ const chip: { text: string; tone: Tone } =
     {guideHref && guideTitle && (
       <a href={guideHref} class="sabd-guide">
         <span class="sabd-guide-label">Read the guide</span>
-        <span class="sabd-guide-title">{guideTitle} →</span>
+        <span class="sabd-guide-title">{guideTitle}{'\u00A0'}→</span>
       </a>
     )}
 
@@ -414,12 +453,12 @@ const chip: { text: string; tone: Tone } =
      the moment to say what happens to it is the moment it is asked for. */
   /* On the #141915 block, #6B716C measured 3.56:1. Paper at 0.55 is 5.48:1
      and still sits below the sub above it, which is paper at 0.65. */
-  .sabd-remind-fine { margin-top: 10px; font-size: 12.5px; line-height: 1.55; color: rgba(20, 25, 21, 0.72); }
+  .sabd-remind-fine { margin-top: 10px; font-size: var(--fs-meta); line-height: 1.55; color: var(--ink-muted); }
   /* The disclosure under it. The summary keeps the colour and underline the
      old "How this works" link had (in the sentence's own colour it was
      invisible), so it still reads as the thing to press, and is 24px tall
      (the link was 14). */
-  .sabd-remind-how { margin-top: 4px; font-size: 12.5px; line-height: 1.55; color: rgba(20, 25, 21, 0.72); }
+  .sabd-remind-how { margin-top: 4px; font-size: var(--fs-meta); line-height: 1.55; color: var(--ink-muted); }
   .sabd-remind-how summary {
     display: inline-flex; align-items: center; gap: 6px; min-height: 24px; cursor: pointer;
     list-style: none; color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px;
@@ -431,7 +470,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-remind-late { margin-bottom: 0; }
   .sabd-remind-how a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) { .sabd-remind-caret { transition: none; } }
-  .sabd-guide-label { display: block; font-size: 13.5px; font-weight: 600; color: rgba(20, 25, 21, 0.72); }
+  .sabd-guide-label { display: block; font-size: var(--fs-ui); font-weight: 600; color: var(--ink-muted); }
   .sabd-guide-title {
     display: block; margin-top: 6px; font-family: var(--font-display);
     font-size: 19px; line-height: 1.25; color: #141915;
@@ -443,7 +482,7 @@ const chip: { text: string; tone: Tone } =
   }
   /* 12px of padding cancelled by margin: the text sits where it did, the tap
      target grows from 20px to 44px. */
-  .sabd-back { font-size: 13px; letter-spacing: 0.04em; color: rgba(20, 25, 21, 0.65); text-decoration: none; display: inline-block; padding: 12px 0; margin: -12px 0; }
+  .sabd-back { font-size: 13px; letter-spacing: 0.04em; color: var(--ink-faint); text-decoration: none; display: inline-block; padding: 12px 0; margin: -12px 0; }
   .sabd-back:hover { color: #0A6B4D; }
   /* The facet crumb sits beside the back link with a separator drawn in CSS, so
      the two read as one trail rather than two competing back-buttons. */
@@ -451,7 +490,7 @@ const chip: { text: string; tone: Tone } =
   /* The auto margin keeps the crumb beside the back link. Without it
      space-between threw it to the far edge, a stray "/ Calgary" on its own. */
   .sabd-facet { margin-left: 8px; margin-right: auto; }
-  .sabd-switcher { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.05em; color: rgba(20, 25, 21, 0.68); }
+  .sabd-switcher { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.05em; color: var(--ink-muted); }
   .sabd-arrow {
     font-size: 13px; border: 1.5px solid rgba(20,25,21,0.3); color: #141915;
     border-radius: 100px; width: 30px; height: 30px; text-decoration: none;
@@ -462,7 +501,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-title-block { padding: 36px var(--sab-gutter) 0; box-sizing: border-box; }
   .sabd-chips { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .sabd-chip { font-family: var(--font-body); font-size: 15px; font-weight: 700; }
-  .sabd-chip[data-tone='quiet'] { color: rgba(20, 25, 21, 0.68); }
+  .sabd-chip[data-tone='quiet'] { color: var(--ink-muted); }
   .sabd-chip[data-tone='go'] { color: #0A6B4D; }
   .sabd-chip[data-tone='soon'], .sabd-chip[data-tone='urgent'] { color: #A0491A; }
   .sabd-h1 {
@@ -470,7 +509,7 @@ const chip: { text: string; tone: Tone } =
     font-size: clamp(38px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.015em;
     margin: 22px 0 0; max-width: 820px;
   }
-  .sabd-subline { font-size: 15px; color: rgba(20, 25, 21, 0.75); margin-top: 12px; }
+  .sabd-subline { font-size: 15px; color: var(--ink-soft); margin-top: 12px; }
   .sabd-who { font-size: 16px; line-height: 1.5; color: #141915; margin: 14px 0 0; max-width: 640px; }
   .sabd-who-label { font-weight: 600; color: #0A6B4D; }
   .sabd-how { margin-top: 6px; }
@@ -493,7 +532,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-fact { padding: 20px 24px 20px 0; border-bottom: 1px solid rgba(20,25,21,0.14); }
   /* Sentence case in the body face: the tiny all-caps labels were the card's
      loudest template tell (flow plan, 2026-10-02). */
-  .sabd-card-label { font-size: 14px; color: rgba(20, 25, 21, 0.68); }
+  .sabd-card-label { font-size: 14px; color: var(--ink-muted); }
   .sabd-fact .sabd-card-label { margin-bottom: 6px; }
   .sabd-fact-value { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
 
@@ -522,13 +561,13 @@ const chip: { text: string; tone: Tone } =
     .sabd-note { padding: 20px 18px 22px; }
     .sabd-note-text { font-size: 16px; }
   }
-  .sabd-about { font-size: 16.5px; line-height: 1.65; color: rgba(20, 25, 21, 0.78); max-width: 640px; }
+  .sabd-about { font-size: var(--fs-lead); line-height: 1.65; color: var(--ink-soft); max-width: 640px; }
   .sabd-about p { margin: 0; }
   .sabd-about p + p { margin-top: 12px; }
 
   .sabd-kit { max-width: 640px; }
   .sabd-kit-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid #141915; }
-  .sabd-kit-item { padding: 14px 0 14px 26px; position: relative; border-bottom: 1px solid rgba(20,25,21,0.14); font-size: 16.5px; line-height: 1.5; color: #141915; }
+  .sabd-kit-item { padding: 14px 0 14px 26px; position: relative; border-bottom: 1px solid rgba(20,25,21,0.14); font-size: var(--fs-lead); line-height: 1.5; color: #141915; }
   /* A tick box, not a bullet: the list is the one a student works through. */
   .sabd-kit-item::before {
     content: ''; position: absolute; left: 0; top: 19px; width: 13px; height: 13px;
@@ -537,7 +576,7 @@ const chip: { text: string; tone: Tone } =
   /* Nothing to collect, so nothing to tick. */
   .sabd-kit-item.is-nothing { padding-left: 0; }
   .sabd-kit-item.is-nothing::before { display: none; }
-  .sabd-kit-note { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: rgba(20, 25, 21, 0.72); }
+  .sabd-kit-note { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--ink-muted); }
   /* The kit's ruled rows, so the two read as one run: this one, then the next. */
   .sabd-next { max-width: 640px; }
   .sabd-next-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid #141915; }
@@ -545,15 +584,15 @@ const chip: { text: string; tone: Tone } =
     display: block; padding: 13px 0; border-bottom: 1px solid rgba(20,25,21,0.14);
     text-decoration: none; color: #141915;
   }
-  .sabd-next-why { display: block; font-size: 13.5px; font-weight: 600; color: #0A6B4D; }
+  .sabd-next-why { display: block; font-size: var(--fs-ui); font-weight: 600; color: #0A6B4D; }
   .sabd-next-name { display: block; margin-top: 2px; font-size: 17px; font-weight: 600; line-height: 1.3; }
   .sabd-next-row:hover .sabd-next-name { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
-  .sabd-next-meta { display: block; margin-top: 3px; font-size: 14px; color: rgba(20, 25, 21, 0.72); }
+  .sabd-next-meta { display: block; margin-top: 3px; font-size: 14px; color: var(--ink-muted); }
 
   .sabd-steps { display: flex; flex-direction: column; border-top: 1px solid rgba(20,25,21,0.14); max-width: 640px; }
   .sabd-step { display: flex; gap: 18px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(20,25,21,0.14); }
   .sabd-step-n { font-family: var(--font-display); font-size: 24px; color: #0A6B4D; flex: none; width: 28px; }
-  .sabd-step-text { font-size: 15.5px; line-height: 1.55; color: rgba(20, 25, 21, 0.8); }
+  .sabd-step-text { font-size: var(--fs-body); line-height: 1.55; color: var(--ink-soft); }
 
   .sabd-rail { grid-column: 2; grid-row: 2; display: flex; flex-direction: column; gap: 16px; }
   .sabd-card {
@@ -563,7 +602,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-value { font-family: var(--font-display); font-size: 52px; line-height: 1.05; color: #0A6B4D; margin: 8px 0 4px; }
   .sabd-value.is-cost { color: #141915; }
   .sabd-value.is-quiet { font-family: var(--font-body); font-size: 20px; font-weight: 700; line-height: 1.3; margin: 6px 0 2px; }
-  .sabd-value-note { font-size: 14px; color: rgba(20, 25, 21, 0.65); }
+  .sabd-value-note { font-size: 14px; color: var(--ink-faint); }
   /* space-between with no gap only looked safe because the rail was 360px
      wide. In the phone's single column the label and the date met in the
      middle and read as one word. */
@@ -575,15 +614,21 @@ const chip: { text: string; tone: Tone } =
   /* Same rule as the deadline, tighter to it: one block of facts. */
   .sabd-needs-row { margin-top: 12px; padding-top: 12px; }
   .sabd-needs-value { font-size: 15px; font-weight: 700; text-align: right; }
-  .sabd-checked { margin: 10px 0 0; font-size: 14.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.8); }
-  .sabd-estimate-note { margin: 10px 0 0; font-size: 13.5px; line-height: 1.45; color: rgba(20, 25, 21, 0.72); }
+  .sabd-checked {
+    display: flex; align-items: flex-start; gap: 8px; margin: 10px 0 2px;
+    font-size: var(--fs-ui); font-weight: 600; line-height: 1.4; color: var(--ink-soft);
+  }
+  .sabd-checked svg { flex: none; margin-top: 2px; color: var(--ink-faint); }
+  .sabd-checked.is-confirmed { color: var(--text-primary); }
+  .sabd-checked.is-confirmed svg { color: #0A6B4D; }
+  .sabd-estimate-note { margin: 10px 0 0; font-size: var(--fs-ui); line-height: 1.45; color: var(--ink-muted); }
   .sabd-alts { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid rgba(20,25,21,0.12); }
-  .sabd-alts-h { margin: 0 0 4px; font-size: 14px; font-weight: 700; color: rgba(20, 25, 21, 0.68); }
+  .sabd-alts-h { margin: 0 0 4px; font-size: 14px; font-weight: 700; color: var(--ink-muted); }
   .sabd-alts ul { list-style: none; margin: 0; padding: 0; }
   .sabd-alt { display: block; padding: 9px 0; text-decoration: none; color: #141915; border-bottom: 1px solid rgba(20,25,21,0.08); }
   .sabd-alt-name { display: block; font-size: 15px; font-weight: 600; line-height: 1.3; }
   .sabd-alt:hover .sabd-alt-name { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
-  .sabd-alt-meta { display: block; margin-top: 2px; font-size: 13.5px; color: rgba(20, 25, 21, 0.72); }
+  .sabd-alt-meta { display: block; margin-top: 2px; font-size: var(--fs-ui); color: var(--ink-muted); }
   .sabd-alts-all {
     display: inline-flex; align-items: center; min-height: 32px; margin-top: 4px;
     font-size: 14px; font-weight: 600; color: #141915;
@@ -592,20 +637,20 @@ const chip: { text: string; tone: Tone } =
   .sabd-alts-all:hover { color: #0A6B4D; }
   .sabd-cta-row { display: flex; gap: 10px; margin-top: 22px; }
   .sabd-cta {
-    flex: 1; text-align: center; font-size: 15.5px; font-weight: 700;
+    flex: 1; text-align: center; font-size: var(--fs-body); font-weight: 700;
     /* The site's one Apply fill, the mint of the home and hero buttons; it was
        dark green here alone (critique 2026-09-23). */
     background: #2FD3A0; color: #08120E; padding: 15px 18px; border-radius: 100px; line-height: 1.25; text-decoration: none;
     transition: background-color 0.15s ease;
   }
   .sabd-cta:hover { background: #5CE3BB; color: #08120E; }
-  .sabd-cta-disabled { background: rgba(20,25,21,0.08); color: rgba(20, 25, 21, 0.68); cursor: not-allowed; }
-  .sabd-cta-disabled:hover { background: rgba(20,25,21,0.08); color: rgba(20, 25, 21, 0.68); }
+  .sabd-cta-disabled { background: rgba(20,25,21,0.08); color: var(--ink-muted); cursor: not-allowed; }
+  .sabd-cta-disabled:hover { background: rgba(20,25,21,0.08); color: var(--ink-muted); }
   .sabd-save {
     display: inline-flex; align-items: center; justify-content: center;
     font-family: var(--font-body); border: 1.5px solid rgba(20,25,21,0.3);
     border-radius: 100px; height: 50px; padding: 0 20px; gap: 8px; cursor: pointer;
-    font-size: 15.5px; font-weight: 700; color: #141915; background: transparent; flex: none;
+    font-size: var(--fs-body); font-weight: 700; color: #141915; background: transparent; flex: none;
   }
   .sabd-save:hover { border-color: #141915; }
   .sabd-save[data-saved] { color: #0A6B4D; background: rgba(47,211,160,0.15); }
@@ -619,13 +664,34 @@ const chip: { text: string; tone: Tone } =
   /* :global because the icon arrives through set:html and carries no scope id. */
   .sabd-save :global(svg) { width: 16px; height: 18px; fill: none; }
   .sabd-save[data-saved] :global(svg) { fill: currentColor; }
+  .sabd-bar { display: none; }
+  @media (max-width: 899px) {
+    .sabd-bar:not([hidden]) {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px calc(10px + env(safe-area-inset-bottom, 0px));
+      background: var(--bg-page); border-top: 1px solid rgba(20,25,21,0.14);
+      box-shadow: 0 -6px 18px rgba(20,25,21,0.07);
+    }
+    .sabd-bar-facts { flex: 1; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+    .sabd-bar-value {
+      font-family: var(--font-display); font-size: 22px; line-height: 1.05; color: var(--text-primary);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sabd-bar-due { font-size: var(--fs-meta); font-weight: 600; color: var(--ink-muted); white-space: nowrap; }
+    .sabd-bar .sabd-bar-cta { flex: none; padding: 12px 18px; }
+    .sabd-bar .sabd-bar-save { height: 46px; padding: 0 16px; }
+    /* "Check the provider" takes the width the figures had. */
+    .sabd-bar.is-long .sabd-bar-facts { display: none; }
+    .sabd-bar.is-long .sabd-bar-cta { flex: 1; }
+  }
   /* Official-site link shown when the CTA pill is Closed/Opens-soon, so the
      source page stays reachable for every listing. */
   .sabd-visit {
     display: block; text-align: center; text-decoration: none;
     font-size: 14px; font-weight: 600; width: 100%; margin-top: 12px;
     border: 1.5px solid rgba(20,25,21,0.25); border-radius: 100px;
-    padding: 11px 18px; color: rgba(20, 25, 21, 0.78);
+    padding: 11px 18px; color: var(--ink-soft);
   }
   .sabd-visit:hover { border-color: #0E8C64; color: #0A6B4D; }
 
@@ -633,7 +699,7 @@ const chip: { text: string; tone: Tone } =
      (critique 2026-09-23). */
   .sabd-remind { border-top: 1px solid rgba(20,25,21,0.14); padding: 18px 2px 0; color: var(--text-primary); }
   .sabd-remind-label { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin: 0 0 4px; }
-  .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: rgba(20, 25, 21, 0.75); margin-bottom: 12px; }
+  .sabd-remind-sub { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin-bottom: 12px; }
   .sabd-remind-form { display: flex; gap: 8px; }
   .sabd-remind-input {
     font-family: var(--font-body); font-size: 14px; flex: 1; min-width: 0;
@@ -649,15 +715,15 @@ const chip: { text: string; tone: Tone } =
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
-  .sabd-remind-input::placeholder { color: rgba(20, 25, 21, 0.55); }
+  .sabd-remind-input::placeholder { color: var(--ink-faint); }
   .sabd-remind-btn {
-    font-family: var(--font-body); font-size: 13.5px; font-weight: 700;
-    background: #0A6B4D; color: #F5FBF8; border: none; border-radius: 100px;
+    font-family: var(--font-body); font-size: var(--fs-ui); font-weight: 700;
+    background: #2FD3A0; color: #08120E; border: none; border-radius: 100px;
     padding: 11px 18px; cursor: pointer; flex: none;
   }
-  .sabd-remind-btn:hover { background: #08573E; }
+  .sabd-remind-btn:hover { background: #5CE3BB; }
   .sabd-remind-btn:disabled { opacity: 0.6; cursor: default; }
-  .sabd-remind-msg { margin-top: 8px; font-size: 14.5px; font-weight: 600; color: #0A6B4D; }
+  .sabd-remind-msg { margin-top: 8px; font-size: var(--fs-small); font-weight: 600; color: #0A6B4D; }
   /* It was near-white on the white card, so a bad address showed nothing. */
   .sabd-remind-msg.is-error { color: #B42318; }
   .sabd-remind-input[aria-invalid="true"] { border-color: #B42318; }
@@ -686,7 +752,7 @@ const chip: { text: string; tone: Tone } =
     .sabd-facts { grid-template-columns: 1fr; }
     .sabd-fact { display: grid; grid-template-columns: 82px 1fr; gap: 12px; align-items: baseline; padding: 12px 0; }
     .sabd-fact .sabd-card-label { margin-bottom: 0; }
-    .sabd-fact-value { font-size: 15.5px; line-height: 1.4; }
+    .sabd-fact-value { font-size: var(--fs-body); line-height: 1.4; }
     /* Safari zooms the page into any field under 16px when it takes focus,
        and leaves it zoomed (critique 2026-09-27). */
     .sabd-remind-input { font-size: 16px; }
@@ -700,7 +766,7 @@ const chip: { text: string; tone: Tone } =
   import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../../lib/tracker';
   import { showToast, showConfetti, prefersReducedMotion, emailProblem } from '../../lib/utils';
   import { URGENT_DAYS, SOON_DAYS } from '../../lib/list-core';
-  import { STATUS_WORDS } from '../../lib/status';
+  import { LIKELY_DATE, STATUS_WORDS } from '../../lib/status';
   import { placeInList, readListContext } from '../../lib/list-context.ts';
   import { milestonesAhead, milestonePhrase, closesPhrase } from '../../lib/alerts';
 
@@ -765,7 +831,7 @@ const chip: { text: string; tone: Tone } =
     // unscoped, it fired a second, type-less apply_click on every directory
     // click made after any detail page had been opened in the tab.
     const apply = target.closest?.('[data-track="apply"]');
-    if (apply?.closest('.sabd-card')) {
+    if (apply?.closest('.sabd-card, .sabd-bar')) {
       const [applyType, applyId] = itemAttrs(apply);
       if (applyType && applyId) sendEvent('apply_click', applyType, applyId);
     }
@@ -780,7 +846,9 @@ const chip: { text: string; tone: Tone } =
       );
       const next = type === 'program' ? toggleSavedProgram(id) : toggleSaved(id);
       const nowSaved = next.includes(id);
-      applySaveState(save, nowSaved);
+      // The card and the phone bar carry one Save each; both show the answer.
+      document.querySelectorAll<HTMLElement>(`[data-sabd-save][data-bookmark-id="${id}"][data-bookmark-type="${type}"]`)
+        .forEach(btn => applySaveState(btn, nowSaved));
       // Saves count, un-saves don't; the metric is "people who shortlisted it"
       if (nowSaved) { showConfetti(save); sendEvent('save', type, id, 'page'); }
       // Say where it went: the Saved page was otherwise only a header link.
@@ -878,7 +946,7 @@ const chip: { text: string; tone: Tone } =
     const pastDeadline = !!deadline && todayMs > new Date(deadline + 'T00:00:00').getTime();
     // Same ladder as status.ts: an estimate outranks a (rolled-forward) open date.
     if (el.dataset.estimated !== undefined && !pastDeadline) {
-      paint(STATUS_WORDS.unconfirmed, 'quiet');
+      paint(deadline ? LIKELY_DATE : STATUS_WORDS.unconfirmed, 'quiet');
     } else if (openDate && todayMs < new Date(openDate + 'T00:00:00').getTime()) {
       paint(`Opens ${fmtLong(openDate)}`, 'go');
     } else if (deadline && todayMs > new Date(deadline + 'T00:00:00').getTime()) {
@@ -896,12 +964,41 @@ const chip: { text: string; tone: Tone } =
     }
   }
 
+  // The phone bar shows while the card's buttons are off screen, and gets out
+  // of the way of the footer and of the consent band, which share the foot.
+  let barWatch: IntersectionObserver | null = null;
+  let consentWatch: MutationObserver | null = null;
+  function setupBar() {
+    barWatch?.disconnect();
+    consentWatch?.disconnect();
+    const bar = document.querySelector<HTMLElement>('[data-sabd-bar]');
+    const row = document.querySelector<HTMLElement>('.sabd-card .sabd-cta-row');
+    if (!bar || !row) return;
+    const footer = document.querySelector<HTMLElement>('.sabf-footer, footer');
+    const consent = document.getElementById('sab-consent');
+    const seen = new Map<Element, boolean>();
+    const paint = () => {
+      bar.hidden = !!seen.get(row) || !!(footer && seen.get(footer)) || !!(consent && !consent.hidden);
+    };
+    barWatch = new IntersectionObserver(entries => {
+      for (const e of entries) seen.set(e.target, e.isIntersecting);
+      paint();
+    });
+    barWatch.observe(row);
+    if (footer) barWatch.observe(footer);
+    if (consent) {
+      consentWatch = new MutationObserver(paint);
+      consentWatch.observe(consent, { attributes: true, attributeFilter: ['hidden'] });
+    }
+  }
+
   // Per-item views + initial save-state paint.
   // astro:page-load fires on first load and after every view-transition swap.
   document.addEventListener('astro:page-load', () => {
     refreshStatusChip();
     refreshRemind();
     restoreSwitcher();
+    setupBar();
     const view = document.querySelector('[data-detail-view]');
     // Dwell-gated: an instant back/misclick shouldn't count as a view
     if (view) sendEventAfterDwell('detail_view', ...itemAttrs(view));

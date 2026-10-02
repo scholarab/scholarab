@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
 const root = join(__dirname, '..', '..')
@@ -201,5 +201,48 @@ describe('quiz option states', () => {
     // one you had chosen.
     expect(globalCss).toMatch(/\.sabm-opt:hover \{ background: #F5F6F4; \}/)
     expect(globalCss).toMatch(/\.sabm-opt-selected \{ border-color: var\(--green\);/)
+  })
+})
+
+// Critique 2026-10-02: 73 half-pixel font sizes and 14 ink strengths for
+// secondary text. Both now come from the tokens on :root in global.css.
+describe('type scale and ink tokens', () => {
+  const publicSources = (dir: string): string[] => {
+    const out: string[] = []
+    for (const name of readdirSync(join(root, dir))) {
+      const rel = `${dir}/${name}`
+      if (rel.includes('/admin') || name.includes('.test.')) continue
+      if (statSync(join(root, rel)).isDirectory()) out.push(...publicSources(rel))
+      else if (/\.(css|astro|tsx|ts)$/.test(name)) out.push(rel)
+    }
+    return out
+  }
+  const files = publicSources('src')
+
+  it('sets no half-pixel font size', () => {
+    const offenders: string[] = []
+    for (const f of files) {
+      stripComments(read(f)).split('\n').forEach((line, i) => {
+        if (/font(-size)?:[^;]*\b\d+\.5px/.test(line)) offenders.push(`${f}:${i + 1}`)
+      })
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('colours secondary text with an ink token, not a raw ink alpha', () => {
+    const offenders: string[] = []
+    for (const f of files) {
+      stripComments(read(f)).split('\n').forEach((line, i) => {
+        if (/(^|[\s;{"'])color: ?rgba\(20, ?25, ?21/.test(line)) offenders.push(`${f}:${i + 1}`)
+      })
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('keeps the faint ink at or above 0.62', () => {
+    // 0.62 is 4.84:1 on a shaded row; 0.6 was 4.54:1, a pass with no margin.
+    const faint = globalCss.match(/--ink-faint: *rgba\(20, 25, 21, ([0-9.]+)\)/)
+    expect(faint).not.toBeNull()
+    expect(Number(faint![1])).toBeGreaterThanOrEqual(0.62)
   })
 })

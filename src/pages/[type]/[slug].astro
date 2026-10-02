@@ -27,7 +27,7 @@ import type { Scholarship, Program } from '../../lib/data-loader';
 
 // A related listing as a row: name, where/what, amount, deadline. The cards
 // these replaced left out the deadline, the one thing a student compares on.
-type RelatedItem = { href: string; title: string; value: string; tag: string; when: string; money?: boolean; open?: boolean; why?: string };
+type RelatedItem = { href: string; title: string; value: string; tag: string; when: string; day?: { main: string; sub: string }; money?: boolean; open?: boolean; why?: string };
 
 export async function getStaticPaths() {
   // Neighbor order matches each directory's default sort: earliest deadline
@@ -146,6 +146,14 @@ export async function getStaticPaths() {
     prefer: (a, b) => ms(a.deadline) - ms(b.deadline),
   });
 
+  // The date figure down the left edge, as on every directory row (critique
+  // 2026-10-02). No countdown: these rows are built once, and a day count
+  // would go stale between builds. The year only when it is not this one.
+  const thisYear = metaTodayIso.slice(0, 4);
+  const dayCell = (iso: string, estimated = false) => ({
+    main: new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' }),
+    sub: estimated ? 'likely date' : iso.slice(0, 4) !== thisYear ? iso.slice(0, 4) : '',
+  });
   const asScholarshipCards = (list: Scholarship[]): RelatedItem[] =>
     list.map(s => ({
       href: `/scholarships/${generateSlug(s.title)}/`,
@@ -154,6 +162,7 @@ export async function getStaticPaths() {
       tag: placeOf(s) || 'Alberta',
       when: !s.deadline ? (s.rolling ? OPEN_NO_DEADLINE : STATUS_WORDS.unconfirmed)
         : `${s.deadlineEstimated ? 'Around ' : 'Due '}${formatDeadline(s.deadline)}`,
+      day: s.deadline ? dayCell(s.deadline, !!s.deadlineEstimated) : undefined,
       money: true,
     }));
 
@@ -172,6 +181,7 @@ export async function getStaticPaths() {
       tag: (p.format && formatLabel.get(p.format)) || p.category || 'Program',
       when: !p.deadline || p.deadline === 'TBA' || p.deadline === 'Ongoing' ? programUndatedLabel(p.deadline)
         : `Due ${formatDeadline(p.deadline)}`,
+      day: p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' ? dayCell(p.deadline) : undefined,
       open: canApplyNow(programStatusOf(p, metaToday)),
     }));
 
@@ -468,7 +478,9 @@ if (kind === 'scholarship') {
     toApply: s.toApply ?? null,
     ctaLabel: noApplication ? 'How it is awarded' : s.applyViaGuidance ? 'How to apply' : 'Apply',
     url: s.url,
-    canRemind: status === 'active' && daysLeft !== null && daysLeft > 0,
+    // >= 0: on the due date the block still renders, as "Closes today. Too soon
+    // for an email reminder. Apply today." With > 0 it vanished (critique 2026-10-02).
+    canRemind: status === 'active' && daysLeft !== null && daysLeft >= 0,
   };
 } else {
   const p = program!;
@@ -547,7 +559,7 @@ if (kind === 'scholarship') {
     ctaLabel: 'Visit the program site',
     url: p.url,
     checkedLabel: formatVerifiedMonth(p.lastVerified),
-    canRemind: p.active !== false && status === 'active' && daysLeft !== null && daysLeft > 0,
+    canRemind: p.active !== false && status === 'active' && daysLeft !== null && daysLeft >= 0,
   };
 }
 
@@ -687,12 +699,14 @@ const breadcrumbJson = {
         <div class="sabd-related-grid">
           {related.map(r => (
             <a href={r.href} class="sabd-related-row">
+              <span class:list={['sabd-related-when', { 'is-quiet': !r.day }]}>
+                {r.day ? <><span class="sabd-related-day">{r.day.main}</span>{r.day.sub && <span class="sabd-related-day-sub">{r.day.sub}</span>}</> : r.when}
+              </span>
               <span class="sabd-related-main">
                 <span class="sabd-related-name">{r.title}</span>
                 <span class="sabd-related-tag">{r.tag}</span>
               </span>
               <span class:list={['sabd-related-value tnum', { 'is-plain': !r.money }]}>{r.value}</span>
-              <span class="sabd-related-when tnum">{r.when}</span>
             </a>
           ))}
         </div>
@@ -712,12 +726,14 @@ const breadcrumbJson = {
         <div class="sabd-related-grid">
           {crossRelated.map(r => (
             <a href={r.href} class="sabd-related-row">
+              <span class:list={['sabd-related-when', { 'is-quiet': !r.day }]}>
+                {r.day ? <><span class="sabd-related-day">{r.day.main}</span>{r.day.sub && <span class="sabd-related-day-sub">{r.day.sub}</span>}</> : r.when}
+              </span>
               <span class="sabd-related-main">
                 <span class="sabd-related-name">{r.title}</span>
                 <span class="sabd-related-tag">{r.tag}</span>
               </span>
               <span class:list={['sabd-related-value tnum', { 'is-plain': !r.money }]}>{r.value}</span>
-              <span class="sabd-related-when tnum">{r.when}</span>
             </a>
           ))}
         </div>
@@ -750,27 +766,35 @@ const breadcrumbJson = {
      between them would read as two unrelated sections. Applied from the first
      block only when a second actually follows it. */
   .sabd-related-paired { padding-bottom: 40px; }
+  /* The directory row's order (critique 2026-10-02): the date figure in a
+     left column, the name, the money. It was name, money, then "Due Oct 15,
+     2026" in a third column, a layout found nowhere else. */
   .sabd-related-row {
-    display: grid; grid-template-columns: 1fr 180px 170px; gap: 24px; align-items: center;
+    display: grid; grid-template-columns: 88px minmax(0, 1fr) 180px; gap: 24px; align-items: baseline;
     padding: 16px 8px; border-bottom: 1px solid rgba(20,25,21,0.14);
     text-decoration: none; color: #141915; transition: background 0.15s ease;
   }
-  .sabd-related-row:hover { background: rgba(20,25,21,0.04); }
+  .sabd-related-row:hover { background: rgba(47,211,160,0.14); }
   .sabd-related-row:hover .sabd-related-name { color: var(--green); }
   .sabd-related-main { min-width: 0; }
   .sabd-related-name { display: block; font-weight: 700; font-size: 16px; line-height: 1.35; letter-spacing: -0.01em; }
-  .sabd-related-tag { display: block; font-size: 13.5px; color: rgba(20, 25, 21, 0.72); margin-top: 2px; }
+  .sabd-related-tag { display: block; font-size: var(--fs-ui); color: var(--ink-muted); margin-top: 2px; }
   .sabd-related-value { font-family: var(--font-display); font-size: 22px; color: var(--text-primary); text-align: right; }
   /* A duration is not prize money; display type made "1 day" read as one. */
-  .sabd-related-value.is-plain { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: rgba(20, 25, 21, 0.75); }
-  .sabd-related-when { font-size: 14px; font-weight: 700; text-align: right; }
+  .sabd-related-value.is-plain { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--ink-soft); }
+  .sabd-related-when { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .sabd-related-day { font: 400 26px/1 var(--font-display); color: var(--text-primary); white-space: nowrap; }
+  .sabd-related-day-sub { font-size: var(--fs-meta); font-weight: 500; color: var(--ink-faint); }
+  .sabd-related-when.is-quiet { font-size: var(--fs-meta); font-weight: 600; line-height: 1.3; color: var(--ink-faint); }
 
   @media (max-width: 900px) {
     .sabd-related { padding: 0 20px 72px; }
     .sabd-related-title { font-size: 26px; }
-    .sabd-related-row { grid-template-columns: 1fr auto; gap: 4px 14px; padding: 14px 2px; }
-    .sabd-related-main { grid-column: 1 / -1; }
-    .sabd-related-value { text-align: left; font-size: 20px; }
+    .sabd-related-row { grid-template-columns: 66px minmax(0, 1fr); grid-template-areas: "when main" "when value"; gap: 6px 14px; padding: 14px 2px; }
+    .sabd-related-when { grid-area: when; }
+    .sabd-related-main { grid-area: main; }
+    .sabd-related-value { grid-area: value; text-align: left; font-size: 20px; }
+    .sabd-related-day { font-size: 24px; }
     .sabd-related-value.is-plain { font-size: 14px; }
   }
 </style>

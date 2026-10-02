@@ -262,6 +262,12 @@ import { needsCredit, type PhotoCredit } from '../../lib/photo-credits';
       wrap, so this is not load-bearing; it just buys back enough width that
       nobody has to scroll the row on a desktop. See the modifier in global.css. */}
   <aside class="sabl-rail" id="dir-filters" aria-label="Filters">
+  {/* Phones only (global.css): the sheet's own heading and a way to undo
+      every filter at once, which it had neither of (critique 2026-10-02). */}
+  <div class="sabl-sheet-head">
+    <h2 class="sabl-sheet-title">Filters</h2>
+    <button type="button" class="sabl-sheet-clear" data-dir-reset hidden>Clear filters</button>
+  </div>
   <div class="sabl-filters sabl-filters-dense">
     {/* Phones only: the sheet holds the sort too, so one surface shapes the
         list (critique 2026-09-29). directory-client keeps both pickers in step. */}

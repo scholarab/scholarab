@@ -98,7 +98,9 @@ export function showConfetti(originEl?: Element | null): void {
   ctx.scale(dpr, dpr);
   document.body.appendChild(canvas);
 
-  const COLORS = ['#22d3a5', '#5ee8c4', '#ffffff', '#fbbf24', '#a78bfa', '#f472b6'];
+  // The site's own colours: mint, green, the menu-board yellow, ink. The
+  // purple and pink were Tailwind defaults no page uses (critique 2026-10-02).
+  const COLORS = ['#2FD3A0', '#0A6B4D', '#FFC700', '#141915', '#5CE3BB'];
   const particles: Particle[] = Array.from({ length: 30 }, () => {
     const angle = Math.random() * Math.PI * 2;
     const speed = Math.random() * 9 + 4;

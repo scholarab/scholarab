@@ -218,20 +218,20 @@ I really appreciate you taking the time.
   .sabt-lede { margin: 22px 0 0; font-size: 17px; line-height: 1.6; color: rgba(238, 241, 236, 0.7); max-width: 52ch; }
 
   .sabt-body { max-width: calc(var(--sab-read) + 2 * var(--sab-gutter)); padding: 56px var(--sab-gutter) 96px; width: 100%; box-sizing: border-box; }
-  .sabt-intro { font-size: 17px; line-height: 1.7; color: rgba(20, 25, 21, 0.85); margin: 0 0 8px; }
+  .sabt-intro { font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 8px; }
   .sabt-intro a, .sabt-list a { color: #0A6B4D; text-decoration: underline; text-underline-offset: 3px; }
   .sabt-intro a:hover { color: #141915; }
 
   .sabt-block { margin-top: 48px; }
   .sabt-block-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  .sabt-step { font-size: 12px; letter-spacing: 0.09em; color: rgba(20, 25, 21, 0.68); }
+  .sabt-step { font-size: 12px; letter-spacing: 0.09em; color: var(--ink-muted); }
   .sabt-h2 {
     font-family: var(--font-display); font-weight: 400;
     font-size: clamp(26px, 3.2vw, 34px); line-height: 1.15; letter-spacing: -0.01em;
     margin: 0; color: #141915;
   }
-  .sabt-note { font-size: 16px; line-height: 1.65; color: rgba(20, 25, 21, 0.72); margin: 12px 0 18px; }
-  .sabt-list { margin: 14px 0 0; padding-left: 22px; font-size: 16px; line-height: 1.65; color: rgba(20, 25, 21, 0.78); }
+  .sabt-note { font-size: 16px; line-height: 1.65; color: var(--ink-muted); margin: 12px 0 18px; }
+  .sabt-list { margin: 14px 0 0; padding-left: 22px; font-size: 16px; line-height: 1.65; color: var(--ink-soft); }
   .sabt-list li { margin-bottom: 12px; }
   .sabt-list strong, .sabt-note strong { color: #141915; }
 
@@ -245,7 +245,7 @@ I really appreciate you taking the time.
   }
   .sabt-pre {
     margin: 0; font-family: var(--font-label);
-    font-size: 13.5px; line-height: 1.75; color: #141915;
+    font-size: var(--fs-ui); line-height: 1.75; color: #141915;
     white-space: pre-wrap; overflow-wrap: anywhere;
   }
   .sabt-copy {
@@ -265,6 +265,6 @@ I really appreciate you taking the time.
        it instead, in flow, where it cannot cover the thing it copies. */
     .sabt-card { padding: 56px 16px 18px; }
     .sabt-copy { top: 14px; left: 16px; right: auto; }
-    .sabt-pre { font-size: 12.5px; }
+    .sabt-pre { font-size: var(--fs-meta); }
   }
 </style>

@@ -8,7 +8,8 @@ import { isRestrictedCheck, matchAll, matchPrograms } from '../lib/eligibility-m
 import { getSaved, toggleSaved, getSavedPrograms, toggleSavedProgram } from '../lib/tracker.ts'
 import { generateSlug, parseAmount } from '../lib/utils.ts'
 import { sendEvent } from '../lib/events.ts'
-import { OPEN_NO_DEADLINE, canApplyNow, openLaterNote, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
+import { NO_DEADLINE, STATUS_WORDS, canApplyNow, openLaterNote, programStatusOf, programUndatedLabel, rowAction, scholarshipStatusOf, waitingLabel } from '../lib/status.ts'
+import { amountCell, whenTier } from '../lib/list-core.ts'
 import { BOOKMARK } from '../lib/icons.ts'
 import { comboHref, pickCombos, type ComboEntry } from '../lib/combo-pick.ts'
 import {
@@ -57,11 +58,6 @@ const GROUP_LABELS: Record<ResultGroup, string> = {
   soon: `Due in the next ${SOON_DAYS} days, best fit first`,
   now: 'Open now, best fit first',
   later: 'Upcoming or undated, best fit first',
-}
-
-function formatDue(iso: string): string {
-  return new Date(iso + 'T00:00:00')
-    .toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
 function loadStoredQuiz(): { step: number; answers: Record<string, string> } {
@@ -143,9 +139,16 @@ function MatchTile({ label, hint, state, more = false, disabled, onClick }: {
 
 // ── Result row (design table style) ──────────────────────────────────────────
 
+// The directory's row (ScholarshipDirectory.astro), so a match and the row it
+// links to read the same way: the date down the left edge, money on the
+// title's line, the whole row opening the listing. /match had its own card,
+// with the date in a pill and the money in green, one of five row layouts a
+// student met across the site (critique 2026-10-02). The sabm-row classes
+// stay as hooks for the tests and the combo tray's place in the list.
 function ResultRow({
-  title, titleHref, subtitle, tags, why, amount, actions,
+  when, title, titleHref, subtitle, tags, why, amount, amountClass = 'sabl-amount', actions,
 }: {
+  when: { main: string; sub: string; cls: string }
   title: string
   titleHref: string
   subtitle?: string | null
@@ -153,25 +156,40 @@ function ResultRow({
   /** Why this one ranked here, in the student's own answers. */
   why?: string[]
   amount: ComponentChildren
+  amountClass?: string
   actions: ComponentChildren
 }) {
   return (
-    <div className="sabm-row">
-      <div className="sabm-row-main">
-        <a href={titleHref} className="sabm-row-name">{title}</a>
-        {subtitle && <div className="sabm-row-blurb">{subtitle}</div>}
+    <article className="sabl-card sabm-row">
+      <div className="sabl-row-main">
+        <h3 className="sabl-name-h"><a href={titleHref} className="sabl-name sabm-row-name">{title}</a></h3>
+        {subtitle && <div className="sabl-blurb sabm-row-blurb">{subtitle}</div>}
         <div className="sabm-row-tags">{tags}</div>
         {why && why.length > 0 && (
-          <ul className="sabm-row-why sabl-mono">
+          <ul className="sabm-row-why">
             {why.map(w => <li key={w}>{w}</li>)}
           </ul>
         )}
       </div>
-      <div className="sabm-row-amount">{amount}</div>
-      <div className="sabm-row-actions">{actions}</div>
-    </div>
+      <div className={`${amountClass} sabm-row-amount`}>{amount}</div>
+      <div className="sabl-row-when">
+        <span className={`${when.cls} sabm-due`}><span data-when-main>{when.main}</span>{when.sub && <span className="sabl-when-sub">{when.sub}</span>}</span>
+      </div>
+      <div className="sabl-card-actions sabm-row-actions">{actions}</div>
+    </article>
   )
 }
+
+/** The directory's date cell (list-core scholarshipWhen), from the status the
+ *  quiz already has. */
+function rowWhen(status: ReturnType<typeof scholarshipStatusOf>, s: { openDate?: string | null; deadline?: string | null }): { main: string; sub: string; cls: string } {
+  const waiting = waitingLabel(status, s, shortDate)
+  if (waiting) return { ...waiting, cls: 'sabl-when is-quiet' }
+  if (!s.deadline) return { main: STATUS_WORDS.open, sub: NO_DEADLINE, cls: 'sabl-when is-quiet' }
+  const days = Math.max(0, calendarDaysUntil(s.deadline))
+  return { main: shortDate(s.deadline), sub: days === 0 ? 'due today' : `${days} ${days === 1 ? 'day' : 'days'} left`, cls: `sabl-when${whenTier(days)}` }
+}
+const shortDate = (iso: string) => new Date(iso + 'T00:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })
 
 // ── Main component ────────────────────────────────────────────────────────────
 
@@ -441,7 +459,11 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     // every one of them below spring awards, so a late-September list had
     // nothing urgent in its top ten (critique 2026-09-26).
     // kept is already strong first, unrestricted first, open first.
-    const best = new Set(kept.filter(r => r.tier === 'strong' && !restricted(r.checks)).slice(0, BEST_SHOWN))
+    // Strong AND open with a real date: a strong fit that opens in March or
+    // has no date yet heads "Upcoming" instead, still strong first. Leading
+    // with three of those put Loran, due in 13 days, on the third screen
+    // (critique 2026-10-02). Open strong fits still lead, as 2026-10-01 asked.
+    const best = new Set(kept.filter(r => r.tier === 'strong' && !restricted(r.checks) && actionable(r.scholarship) === 0).slice(0, BEST_SHOWN))
     const groupOf = (r: typeof kept[number]): ResultGroup => best.has(r) ? 'best'
       : actionable(r.scholarship) !== 0 ? 'later'
       : dueSoon(r) ? 'soon' : 'now'
@@ -574,7 +596,16 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
     // A set the student can apply to as a whole: "pre-built combos, like fast
     // food" (2026-09-30), from the combo pages. After the third row, never
     // above the first: on a phone the first match is only just on screen.
-    const comboAfter = Math.min(2, (scholarshipResults?.length ?? 0) - 1)
+    // Under the first two groups (what to apply to now), not inside them: at
+    // row three it split the strongest fits from the ones due this month
+    // (critique 2026-10-02). One group: after its third row, as before.
+    const comboAfter = (() => {
+      const rows = scholarshipResults ?? []
+      const starts = rows.flatMap((r, i) => i === 0 || r.group !== rows[i - 1]!.group ? [i] : [])
+      if (starts.length >= 3) return starts[2]! - 1
+      if (starts.length === 2) return starts[1]! - 1
+      return Math.min(2, rows.length - 1)
+    })()
     const comboTrays = pickedCombos.map(({ entry, hits }) => (
       <aside key={entry.slug} className="sabm-combo" aria-labelledby={`sabm-combo-${entry.slug}`}>
         <span className="sabm-combo-tag" aria-hidden="true">Combo</span>
@@ -672,17 +703,12 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
               const status = scholarshipStatusOf(s, today)
               // The directory's words (lib/status.ts), so a result and the row
               // it links to never describe one award two ways.
-              const waiting = waitingLabel(status, s, formatDue)
-              // Tonight and tomorrow say so: "Due Sep 27, 2026" on the 27th
-              // read like any other date.
-              const left = s.deadline ? calendarDaysUntil(s.deadline) : null
-              const when = waiting ? [waiting.main, waiting.sub].filter(Boolean).join(', ')
-                : left === 0 ? 'Due today' : left === 1 ? 'Due tomorrow'
-                : s.deadline ? `Due ${formatDue(s.deadline)}` : OPEN_NO_DEADLINE
+              const amount = amountCell(s.amount)
               return (
                 <Fragment key={s.id}>
                 {label && <p className="sabm-table-label">{label}</p>}
                 <ResultRow
+                  when={rowWhen(status, s)}
                   title={s.title}
                   titleHref={`/scholarships/${generateSlug(s.title)}/`}
                   subtitle={s.audience}
@@ -691,12 +717,12 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
                         over two rows labelled Strong read as a miscount. */}
                     {showTiers && <span className={style.badge}>{style.label}</span>}
                     {checks.map(c => <span key={c} className="sabm-tier sabm-check">Check: {c}</span>)}
-                    <span className="sabm-tier sabm-due">{when}</span>
                   </>}
                   // Two at most. The point is to justify the rank at a glance,
                   // not to reprint the eligibility criteria.
                   why={signals.slice(0, 2)}
-                  amount={s.amount}
+                  amount={amount.text}
+                  amountClass={amount.cls}
                   actions={<>
                     <button
                       onClick={() => handleToggleSave(s.id)}
@@ -746,10 +772,11 @@ export default function EligibilityQuiz({ scholarships, programs, combos = [] }:
                 title={p.name}
                 titleHref={`/programs/${generateSlug(p.name)}/`}
                 subtitle={p.provider}
-                tags={<>
-                  {p.category && <span className="sabm-tier sabm-due">{p.category}</span>}
-                  <span className="sabm-tier sabm-due">{p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing' ? `Due ${formatDue(p.deadline)}` : programUndatedLabel(p.deadline)}</span>
-                </>}
+                when={p.deadline && p.deadline !== 'TBA' && p.deadline !== 'Ongoing'
+                  ? rowWhen(programStatusOf(p, today) === 'closed' ? 'closed' : 'active', { deadline: p.deadline })
+                  : { main: programUndatedLabel(p.deadline), sub: '', cls: 'sabl-when is-quiet' }}
+                tags={p.category ? <span className="sabm-tier sabm-cat">{p.category}</span> : null}
+                amountClass="sabl-card-top-left"
                 amount={
                   // Stipends are free text ("Paid internship", "$3,000 stipend"),
                   // so they get a chip plus a small note instead of the serif
