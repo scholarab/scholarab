@@ -43,6 +43,12 @@ describe('plan', () => {
     expect(startWith(list, st({ 4: 'submitted' })).map(i => i.id)).toEqual([3, 6, 7])
   })
 
+  it('skips awards that wait on a nomination or take nothing, and counts only the second as nothing', () => {
+    const list = [sch(1, { via: 'nominated' }), sch(2, { via: 'none' }), sch(3, { via: 'school' })]
+    expect(startWith(list, st({})).map(i => i.id)).toEqual([3])
+    expect(planNeeds(list, st({})).nothing).toBe(1)
+  })
+
   it('adds up what the open, unsent awards ask for', () => {
     const list = [
       sch(1, { kit: { k: ['essay', 'reference', 'reference'], r: 2, c: true } }),

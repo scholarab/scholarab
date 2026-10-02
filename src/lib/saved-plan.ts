@@ -29,6 +29,8 @@ export interface PlanItem {
   /** True when the award can't be applied for now or later this cycle. */
   closed: boolean;
   kit?: PlanKit;
+  /** Who takes the application (lib/apply-method.ts). */
+  via?: string;
 }
 
 const KEY = 'scholarab_status';
@@ -63,7 +65,10 @@ export function setStatus(type: PlanItem['type'], id: number, status: PlanStatus
 }
 
 const isDone = (s: PlanStatus) => s === 'submitted' || s === 'won';
-const needsNothing = (i: PlanItem) => i.kit?.k.includes('none') ?? false;
+// Nothing to file, by its researched kit or its own text (via 'none').
+const needsNothing = (i: PlanItem) => i.via === 'none' || (i.kit?.k.includes('none') ?? false);
+// Not one to start tonight: nothing to file, or it waits on someone's nomination.
+const cantStart = (i: PlanItem) => needsNothing(i) || i.via === 'nominated';
 
 /**
  * Rows still to do keep the deadline order they arrive in; submitted, then
@@ -79,7 +84,7 @@ export function planOrder<T>(ordered: T[], status: (i: T) => PlanStatus): T[] {
  * still open or coming, not yet submitted, and actually take an application.
  */
 export function startWith<T extends PlanItem>(ordered: T[], status: (i: T) => PlanStatus, max = 3): T[] {
-  return ordered.filter(i => i.type === 'scholarship' && !i.closed && !isDone(status(i)) && !needsNothing(i)).slice(0, max);
+  return ordered.filter(i => i.type === 'scholarship' && !i.closed && !isDone(status(i)) && !cantStart(i)).slice(0, max);
 }
 
 // `short` is the phone strip's word, where the whole plan is one line.
@@ -112,8 +117,8 @@ export function planNeeds<T extends PlanItem>(items: T[], status: (i: T) => Plan
   let nothing = 0;
   let partial = 0;
   for (const i of live) {
-    if (!i.kit) continue;
     if (needsNothing(i)) { nothing++; continue; }
+    if (!i.kit) continue;
     listed++;
     if (!i.kit.c) partial++;
     for (const kind of new Set(i.kit.k)) counts.set(kind, (counts.get(kind) ?? 0) + (kind === 'reference' ? i.kit.r : 1));

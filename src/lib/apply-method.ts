@@ -43,3 +43,25 @@ export function howYouApply(route: ApplyRoute | null | undefined, noApplication:
   if (route) return ROUTE_LINE[route]
   return noApplication ? 'Nothing to file. The notes say how it is awarded.' : null
 }
+
+/** The route a list row carries: the hand-checked one, or 'none' when the listing's own text says there is nothing to file. */
+export type RowRoute = ApplyRoute | 'none'
+export function rowRoute(route: ApplyRoute | null | undefined, noApplication: boolean): RowRoute | null {
+  return route ?? (noApplication ? 'none' : null)
+}
+
+// No row word for 'sponsor': applying to the provider is what most awards
+// are, so on a row it would say nothing the others don't.
+const ROUTE_TAG: Partial<Record<RowRoute, string>> = {
+  school: 'Through your school',
+  board: 'Division application',
+  nominated: 'Nominated only',
+  contest: 'Contest entry',
+  campus: 'Apply after you accept',
+  none: 'No application',
+}
+
+/** The few words on a list or /saved row, or null. */
+export function routeTag(r: RowRoute | null | undefined): string | null {
+  return r ? ROUTE_TAG[r] ?? null : null
+}

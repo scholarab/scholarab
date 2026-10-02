@@ -9,7 +9,7 @@ import type { ScholarshipFilterState, ScholarshipWithMeta } from '../../lib/list
 import { generateSlug, formatVerifiedMonth, isCheckStale } from '../../lib/utils.ts';
 import { scholarshipSearchBlob } from '../../lib/search-text.ts';
 import { SCHOLARSHIP_FACETS, MIN_FACET_ITEMS, facetItems, facetMatches } from '../../lib/facets.ts';
-import { saysNoApplication } from '../../lib/apply-method.ts';
+import { saysNoApplication, rowRoute, routeTag } from '../../lib/apply-method.ts';
 import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE, BURST_PATH } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
@@ -356,6 +356,7 @@ import { needsCredit, type PhotoCredit } from '../../lib/photo-credits';
       // Nominated, school-selected or automatic: "Apply" would send a student
       // to a form that does not exist. Same test as the detail page's button.
       const noApply = saysNoApplication(s.notes, s.metaDetail, (s as { description?: string }).description);
+      const via = routeTag(rowRoute(s.applyRoute, noApply));
       const canApply = canApplyNow(status) && !noApply;
       return (
         <>
@@ -413,8 +414,10 @@ import { needsCredit, type PhotoCredit } from '../../lib/photo-credits';
           <div class="sabl-row-main">
             <h3 class="sabl-name-h"><a href={`/scholarships/${s._slug ?? generateSlug(s.title)}/`} class="sabl-name">{s.title}</a></h3>
             {s.audience && <div class="sabl-blurb">{s.audience}</div>}
-            {facts.length > 0 && (
-              <ul class="sabl-facts" aria-label="Requirements">{facts.map(f => <li>{f}</li>)}</ul>
+            {/* The route shares the requirements' line, after them: it is the
+                other thing that decides whether a student can start tonight. */}
+            {(facts.length > 0 || via) && (
+              <ul class="sabl-facts" aria-label="Before you apply">{facts.map(f => <li>{f}</li>)}{via && <li class="is-route">{via}</li>}</ul>
             )}
           </div>
           <div class={amount.cls}>{amount.text}</div>

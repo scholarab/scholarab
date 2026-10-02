@@ -1667,3 +1667,17 @@ Outcome: under "Who can apply", a student reads who takes the application, so th
 | Routes on list rows and /saved | Not yet: the page line comes first. |
 
 Add-back fraction: 0/0. Local only: 194 built pages carry the line; Schulich, Leduc Kinsmen and Loran (no line) checked on a phone, no horizontal scroll.
+
+## Rows and /saved: who takes the application, October 2, 2026
+
+Outcome: scanning a list or their saved awards, a student sees which ones go through the school, a division form or a nomination, without opening each.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| A route chip or a new row line | Not added: the route joins the requirements line ("Financial need · Division application"), after the facts, with an open ink ring where they have a green dot, so a row with facts usually grows by nothing; a row without them gains one line, on the 194 that carry a route. |
+| "Straight to the sponsor" on rows | Left off: applying to the provider is what most awards are, so on a row it says nothing. The award page still says it. |
+| The route's words in the /saved payload | Its key instead (`via`, only on the 194 that have one); /saved is 94.7 KB gzip against its 200 KB budget. |
+| Numbering nominated awards in "Start with" | Not done: a nominated award is not one to start tonight, so the 1-2-3 skips it. It still does not count as "no application at all": Schulich nominees do apply after the nomination. |
+| Combos rows | Unchanged for now; same list markup, so it can follow. |
+
+Add-back fraction: 0/0. Local only: built Calgary list and /saved (Schulich, Joan MacLeod, Servus, Ted Rogers) checked on a phone, no horizontal scroll.

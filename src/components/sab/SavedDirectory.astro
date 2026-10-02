@@ -3,6 +3,7 @@ import type { SavedItem } from '../../lib/saved-client.ts';
 import { generateSlug } from '../../lib/utils.ts';
 import type { Scholarship, Program } from '../../lib/data-loader.ts';
 import type { PlanKit } from '../../lib/saved-plan.ts';
+import { saysNoApplication, rowRoute } from '../../lib/apply-method.ts';
 
 interface Props {
   initialScholarships: Scholarship[];
@@ -18,8 +19,11 @@ const kitOf = (t: Scholarship['toApply']): PlanKit | undefined => t ? {
   c: t.complete,
 } : undefined;
 const items: SavedItem[] = [
-  ...initialScholarships.map(({ id, title: name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, toApply }) =>
-    ({ type: 'scholarship' as const, id, name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, href: `/scholarships/${generateSlug(name)}/`, ...(toApply ? { kit: kitOf(toApply) } : {}) })),
+  ...initialScholarships.map(({ id, title: name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, toApply, applyRoute, notes, metaDetail, ...rest }) => {
+    // The route as its key, not its words: a few bytes on the 194 that have one.
+    const via = rowRoute(applyRoute, saysNoApplication(notes, metaDetail, (rest as { description?: string }).description));
+    return { type: 'scholarship' as const, id, name, amount, audience, deadline, openDate, active, concluded, deadlineEstimated, rolling, url, href: `/scholarships/${generateSlug(name)}/`, ...(toApply ? { kit: kitOf(toApply) } : {}), ...(via ? { via } : {}) };
+  }),
   ...initialPrograms.map(({ id, name, eligibility: audience, paid, cost, deadline, active, url }) =>
     ({ type: 'program' as const, id, name, audience, paid, cost, deadline, ...(active === false ? { active: false } : {}), url, href: `/programs/${generateSlug(name)}/` })),
 ];

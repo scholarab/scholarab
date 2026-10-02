@@ -999,6 +999,8 @@ html.js .sabl-group-toggle { display: inline-flex; }
 .sabl-facts { display: flex; flex-wrap: wrap; gap: 4px 16px; list-style: none; margin: 7px 0 0; padding: 0; }
 .sabl-facts li { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: rgba(20, 25, 21, 0.82); }
 .sabl-facts li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex: none; }
+/* Not a requirement, so not the green dot: an open ink ring for who takes the application (lib/apply-method.ts). */
+.sabl-facts li.is-route::before { background: none; box-shadow: inset 0 0 0 1.5px rgba(20, 25, 21, 0.7); width: 7px; height: 7px; }
 /* The deadline cell: the date, then the countdown in a lighter weight. The
    tier colours the text; only the last two weeks get the dot. */
 .sabl-when { font-size: 14px; font-weight: 700; color: var(--text-primary); white-space: nowrap; display: inline-flex; align-items: center; }

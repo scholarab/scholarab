@@ -9,6 +9,7 @@ import { downloadICS } from './ics.ts';
 import { BOOKMARK, ARROW, EXT } from './icons.ts';
 import type { ICSScholarship, ICSProgram } from './ics.ts';
 import type { Program } from './data-loader';
+import { routeTag, type RowRoute } from './apply-method.ts';
 import { PLAN_STATUSES, STATUS_LABEL, getStatus, setStatus, planOrder, startWith, planNeeds, type PlanKit, type PlanStatus } from './saved-plan.ts';
 
 // ── Chip/label helpers ───────────────────────────────────────────────────────
@@ -46,6 +47,8 @@ export type SavedItem = {
   rolling?: boolean;
   /** From toApply, on the scholarships that have one. */
   kit?: PlanKit;
+  /** Who takes the application, on the listings that say (lib/apply-method.ts). */
+  via?: RowRoute;
 };
 
 function savedCard(s: SavedItem): string {
@@ -56,6 +59,7 @@ function savedCard(s: SavedItem): string {
       <div class="sabl-row-main">
         <h3 class="sabl-name-h"><span class="sabs-start" data-sv-start hidden></span><a href="${esc(s.href)}" class="sabl-name">${esc(s.name)}</a></h3>
         ${s.audience ? `<div class="sabl-blurb">${esc(s.audience)}</div>` : ''}
+        ${routeTag(s.via) ? `<ul class="sabl-facts" aria-label="Before you apply"><li class="is-route">${esc(routeTag(s.via)!)}</li></ul>` : ''}
         <label class="sabs-status"><span class="sr-only">Where ${esc(s.name)} stands</span><select data-sv-status>${PLAN_STATUSES.map(v => `<option value="${v}">${STATUS_LABEL[v]}</option>`).join('')}</select></label>
       </div>
       ${sh ? (() => { const a = amountCell(s.amount); return `<div class="${a.cls}">${esc(a.text)}</div>`; })()

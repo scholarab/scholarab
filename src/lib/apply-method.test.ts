@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { saysNoApplication, howYouApply, APPLY_ROUTES } from './apply-method'
+import { saysNoApplication, howYouApply, APPLY_ROUTES, rowRoute, routeTag } from './apply-method'
 import scholarships from '../data/scholarships.json'
 
 describe('saysNoApplication', () => {
@@ -59,5 +59,14 @@ describe('howYouApply', () => {
       expect(APPLY_ROUTES, `#${s.id}`).toContain(s.applyRoute)
       expect(s.applyViaGuidance, `#${s.id}`).toBe(true)
     }
+  })
+})
+
+describe('routeTag', () => {
+  it('names the route on a row, and leaves applying to the sponsor unsaid', () => {
+    expect(routeTag(rowRoute('school', false))).toBe('Through your school')
+    expect(routeTag(rowRoute(null, true))).toBe('No application')
+    expect(routeTag(rowRoute('sponsor', false))).toBeNull()
+    expect(routeTag(rowRoute(null, false))).toBeNull()
   })
 })
