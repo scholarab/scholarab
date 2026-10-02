@@ -953,6 +953,31 @@ describe('a field the quiz cannot emit', () => {
   })
 })
 
+// ── A school's own entrance awards ───────────────────────────────────────────
+
+describe('University & college awards', () => {
+  const award = (over: object = {}) => ({
+    region: 'University & college', alsoOpenTo: null, localArea: null, audience: null,
+    eligibility: { ...EMPTY_ELIGIBILITY, targetInstitutions: ['Red Deer Polytechnic'] }, ...over,
+  })
+  it('reach a student anywhere who is going to that school', () => {
+    expect(matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitution: 'Red Deer Polytechnic' }, award()).match).toBe(true)
+  })
+  it('do not reach a student going elsewhere or not sure', () => {
+    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitution: 'SAIT' }, award()).match).toBe(false)
+    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitution: null }, award()).match).toBe(false)
+  })
+  it('keep the city rule on a local one filed under its city', () => {
+    const local = award({ region: 'Red Deer', alsoOpenTo: ['University & college'] })
+    expect(matchScholarship({ ...baseProfile, city: 'Red Deer', targetInstitution: 'Red Deer Polytechnic' }, local).match).toBe(true)
+    expect(matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitution: 'Red Deer Polytechnic' }, local).match).toBe(false)
+  })
+  it('do not count as local to a city', () => {
+    const r = matchScholarship({ ...baseProfile, city: 'Calgary', targetInstitution: 'Red Deer Polytechnic' }, award())
+    expect(r.signals.some(x => x.startsWith('Local to'))).toBe(false)
+  })
+})
+
 // ── Nothing in the corpus is unreachable ─────────────────────────────────────
 
 describe('the corpus the quiz matches against', () => {
@@ -982,11 +1007,17 @@ describe('the corpus the quiz matches against', () => {
     const scholarships = (await import('../data/scholarships.json')).default
     const cities = ['Airdrie', 'Beaumont', 'Brooks', 'Calgary', 'Camrose', 'Chestermere', 'Cochrane', 'Cold Lake', 'Edmonton', 'Fort McMurray', 'Fort Saskatchewan', 'Grande Prairie', 'Lacombe', 'Leduc', 'Lethbridge', 'Lloydminster', 'Medicine Hat', 'Okotoks', 'Red Deer', 'Sherwood Park', 'Spruce Grove', 'St. Albert', 'Wetaskiwin', 'Other Alberta']
     const grades = ['10', '11', '12', 'post-secondary'] as const
+    // A school's own entrance award reaches only students who name the school,
+    // so every school one names has to be a quiz answer.
+    const { QUIZ_QUESTIONS } = await import('./quiz')
+    const institutions = [null, ...QUIZ_QUESTIONS.find(q => q.key === 'institution')!.opts.map(o => o.value).filter(Boolean)]
     const dead = scholarships.filter(s => {
       for (const city of cities) {
         for (const grade of grades) {
-          const profile = { ...baseProfile, city, grade }
-          if (matchScholarship(profile, s as never).match) return false
+          for (const targetInstitution of institutions) {
+            const profile = { ...baseProfile, city, grade, targetInstitution }
+            if (matchScholarship(profile, s as never).match) return false
+          }
         }
       }
       return true

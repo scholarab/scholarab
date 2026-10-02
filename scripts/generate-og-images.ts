@@ -9,6 +9,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { placeOf } from '../src/lib/school-awards.ts';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { encodeCardPng } from './opaque-png';
@@ -62,7 +63,7 @@ function card(s: Scholarship) {
   }, [
     el('div', { display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 22, letterSpacing: 2, color: '#2FD3A0' }, [
       el('div', { width: 14, height: 14, borderRadius: 999, backgroundColor: '#2FD3A0' }),
-      el('div', {}, `SCHOLARSHIP · ${(s.region || 'ALBERTA').toUpperCase()}`),
+      el('div', {}, `SCHOLARSHIP · ${(placeOf(s) || 'ALBERTA').toUpperCase()}`),
     ]),
     el('div', { display: 'flex', flexDirection: 'column', gap: 28 }, [
       el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: titleSize, lineHeight: 1.05, letterSpacing: -1 }, s.title),

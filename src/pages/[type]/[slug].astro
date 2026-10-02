@@ -15,6 +15,7 @@ import SabHeader from '../../components/sab/SabHeader.astro';
 import SabDetail from '../../components/sab/SabDetail.astro';
 import { loadScholarships, loadPrograms } from '../../lib/data-loader';
 import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline, amountSpan } from '../../lib/utils.ts';
+import { placeOf } from '../../lib/school-awards';
 import { OPEN_NO_DEADLINE, STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication } from '../../lib/apply-method.ts';
@@ -148,7 +149,7 @@ export async function getStaticPaths() {
       href: `/scholarships/${generateSlug(s.title)}/`,
       title: s.title,
       value: s.amount,
-      tag: s.region || 'Alberta',
+      tag: placeOf(s) || 'Alberta',
       when: !s.deadline ? (s.rolling ? OPEN_NO_DEADLINE : STATUS_WORDS.unconfirmed)
         : `${s.deadlineEstimated ? 'Around ' : 'Due '}${formatDeadline(s.deadline)}`,
       money: true,
@@ -309,7 +310,7 @@ if (kind === 'scholarship') {
     itemId: s.id,
     itemType: 'scholarship' as const,
     typeLabel: 'SCHOLARSHIP',
-    subline: s.region || 'Alberta',
+    subline: placeOf(s) || 'Alberta',
     status,
     availability: s.concluded ? 'ended' as const : null,
     // Not `status === 'closed'` spelled out again: the sitemap has to list the

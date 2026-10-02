@@ -4,6 +4,7 @@ import { getToday } from './utils.ts';
 import { NO_DEADLINE, STATUS_WORDS, canApplyNow, scholarshipStatusOf, waitingLabel } from './status.ts';
 import type { ScholarshipStatus } from './status.ts';
 import type { Scholarship, Program } from './data-loader.ts';
+import { schoolOf } from './school-awards.ts';
 import { normalizeSearchQuery, programSearchBlob, scholarshipSearchBlob, searchRows } from './search-text.ts';
 
 // ── Scholarships ──────────────────────────────────────────────────────────────
@@ -16,6 +17,8 @@ export interface ScholarshipWithMeta extends Scholarship {
   _amount?: number;
   _slug?: string;
   _deadline_formatted?: string | null;
+  /** The school a school award is for; the client reads it off the row. */
+  _school?: string | null;
 }
 
 export type { ScholarshipStatus };
@@ -67,6 +70,8 @@ export interface ScholarshipFilterState {
   statusFilter: StatusFilter;
   selectedCategory: string;
   selectedRegion: RegionKey | null;
+  /** University & college awards page only: one school, or 'all'. */
+  selectedSchool?: string;
   searchQuery: string;
   sortBy: ScholarshipSort;
 }
@@ -102,7 +107,7 @@ export const DEFAULT_SCHOLARSHIP_STATE: ScholarshipFilterState = {
  */
 export function selectScholarships(
   initialScholarships: ScholarshipWithMeta[],
-  { statusFilter, selectedCategory, selectedRegion, searchQuery }: ScholarshipFilterState,
+  { statusFilter, selectedCategory, selectedRegion, selectedSchool = 'all', searchQuery }: ScholarshipFilterState,
   statusCache: Map<number, ScholarshipStatus> = buildScholarshipStatusCache(initialScholarships),
 ): ScholarshipWithMeta[] {
   const pool = statusFilter === 'closed'
@@ -115,9 +120,12 @@ export function selectScholarships(
           ? initialScholarships.filter(s => statusCache.get(s.id) === 'unconfirmed')
           : initialScholarships;
 
-  const afterCategory = selectedCategory === 'all'
+  const afterSchool = selectedSchool === 'all'
     ? pool
-    : pool.filter(s => s.category === selectedCategory);
+    : pool.filter(s => (s._school ?? schoolOf(s)) === selectedSchool);
+  const afterCategory = selectedCategory === 'all'
+    ? afterSchool
+    : afterSchool.filter(s => s.category === selectedCategory);
   const afterRegion = selectedRegion === null
     ? afterCategory
     : afterCategory.filter(s => regionMatches(selectedRegion, s));

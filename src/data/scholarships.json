@@ -8,7 +8,7 @@
     "url": "https://www.mhc.ab.ca/student-life/financial-aid/applications",
     "category": "Academic",
     "lastVerified": "2026-08",
-    "region": "Medicine Hat",
+    "region": "University & college",
     "notes": "MHC's own award page says applications for the next round open March 1, 2027 and does not publish a closing date. Individual award amounts are not published.",
     "active": true,
     "description": "Medicine Hat College hands out more than $400,000 a year in scholarships and bursaries to new, continuing and returning students. Some are marked on grades, some on financial need, and many on both. One online form enters you for every award you qualify for, so you do not apply to them individually.",
@@ -2278,7 +2278,7 @@
     "audience": "Grade 12 students applying to University of Lethbridge; automatic with admission",
     "url": "https://www.ulethbridge.ca/future-student/high-school-student-awards",
     "category": "Academic",
-    "region": "Lethbridge",
+    "region": "University & college",
     "lastVerified": "2026-08",
     "active": true,
     "openDate": "2026-09-01",
@@ -4499,7 +4499,7 @@
     "deadline": "2027-05-31",
     "audience": "Current high school students with an 80%+ average in five 5-credit grade 11 or 12 subjects planning to attend RDP",
     "category": "Academic",
-    "region": "Red Deer",
+    "region": "University & college",
     "active": false,
     "lastVerified": "2026-08",
     "applyViaGuidance": false,
@@ -4578,7 +4578,10 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 155,
@@ -5056,7 +5059,7 @@
     "url": "https://www.ulethbridge.ca/future-student/high-school-student-awards",
     "category": "Academic",
     "lastVerified": "2026-08",
-    "region": "Lethbridge",
+    "region": "University & college",
     "notes": "The provider had not posted a date for the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward. Confirm before you plan around it.",
     "active": false,
     "description": "The University of Lethbridge's Chinook Scholarship pays $5,000 to entering students with at least an 85% average, a reference letter, and full-time enrollment through both fall and spring semesters.",
@@ -5094,7 +5097,7 @@
     "url": "https://www.ulethbridge.ca/future-student/high-school-student-awards",
     "category": "Academic",
     "lastVerified": "2026-08",
-    "region": "Lethbridge",
+    "region": "University & college",
     "notes": "The provider had not posted a date for the new cycle when this was checked in August 2026, so this is last cycle's deadline rolled forward. Confirm before you plan around it.",
     "active": false,
     "description": "The University of Lethbridge offers entrance awards of up to $6,000 for graduating high school students entering the university. These awards are available through a pool of named entrance scholarships with varying criteria; some consider academic average, others focus on leadership, financial need, or artistic ability. Students apply through the Bridge student portal.",
@@ -5132,7 +5135,7 @@
     "url": "https://lethpolytech.ca/departments/student-awards-and-financial-aid/awards-and-scholarships",
     "category": "Academic",
     "lastVerified": "2026-08",
-    "region": "Lethbridge",
+    "region": "University & college",
     "notes": "Confirmed against the polytechnic's own funding calendar, and the distinction matters more than the deadline. Applications open March 1. May 1 closes the continuing, graduating and apprentice awards, which is the date most lists reproduce, but as a grade 12 you are an entrance applicant and your deadline is July 15. Reading the wrong line costs you nothing but reading the wrong deadline costs you the award. One form enters you for every award you qualify for.",
     "active": false,
     "description": "Lethbridge Polytechnic offers entrance awards to students admitted to full-time programs at the institution. With over 400 awards worth $800,000+ available through a single application, this is a major scholarship opportunity for qualifying students. Alberta residents can also apply for provincial scholarships (Jason Lang and Louise McKinney) using the same application.",
@@ -8212,7 +8215,7 @@
     "url": "https://www.community.ab.bluecross.ca/programs/scholarships/medicine-hat.php",
     "category": "Academic",
     "lastVerified": "2026-08",
-    "region": "Medicine Hat",
+    "region": "University & college",
     "notes": "Alberta Blue Cross publishes the amount, and Medicine Hat College runs the application. There is no separate form: MHC's one online award application, which opens March 1, 2027, enters you for this along with everything else you qualify for. Neither party publishes a closing date.",
     "active": true,
     "description": "One $1,000 bursary from Alberta Blue Cross for a student starting at Medicine Hat College out of high school.",
@@ -8252,7 +8255,7 @@
     "url": "https://www.community.ab.bluecross.ca/programs/scholarships/medicine-hat.php",
     "category": "Academic",
     "lastVerified": "2026-08",
-    "region": "Medicine Hat",
+    "region": "University & college",
     "notes": "Alberta Blue Cross publishes the amount, and Medicine Hat College runs the application. There is no separate form: MHC's one online award application, which opens March 1, 2027, enters you for this along with everything else you qualify for. Neither party publishes a closing date.",
     "active": true,
     "description": "One $1,000 bursary from Alberta Blue Cross for a Medicine Hat College nursing student.",
@@ -14568,7 +14571,7 @@
   },
   {
     "id": 621,
-    "region": "Camrose",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
@@ -14606,7 +14609,7 @@
   },
   {
     "id": 622,
-    "region": "Camrose",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
@@ -14644,7 +14647,7 @@
   },
   {
     "id": 633,
-    "region": "Camrose",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.ualberta.ca/en/augustana/giving/cap/annual-awards.html",
@@ -15915,7 +15918,7 @@
   },
   {
     "id": 703,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/scholarships/entrance/can",
@@ -15987,11 +15990,14 @@
       "citizenship": "canadian",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 705,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/studentfinancialservices/scholarship/eats",
@@ -16030,7 +16036,7 @@
   },
   {
     "id": 706,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/studentfinancialservices/valedictorian",
@@ -16068,7 +16074,7 @@
   },
   {
     "id": 707,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/studentfinancialservices/salutatorian",
@@ -16106,7 +16112,7 @@
   },
   {
     "id": 708,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/studentfinancialservices/presidentsawardsuperior",
@@ -16145,7 +16151,7 @@
   },
   {
     "id": 711,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/orchestralscholarship",
@@ -16187,7 +16193,7 @@
   },
   {
     "id": 712,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/studentfinancialservices/leadership/cad",
@@ -16228,7 +16234,7 @@
   },
   {
     "id": 713,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/scholarships/business",
@@ -16268,7 +16274,7 @@
   },
   {
     "id": 715,
-    "region": "Lacombe",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.burmanu.ca/scholarships/kutzner",
@@ -16341,7 +16347,10 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 740,
@@ -16574,7 +16583,10 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 750,
@@ -16615,11 +16627,14 @@
         "Leadership",
         "Volunteering"
       ]
-    }
+    },
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 755,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -16658,7 +16673,7 @@
   },
   {
     "id": 756,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -16697,7 +16712,7 @@
   },
   {
     "id": 763,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -16736,7 +16751,7 @@
   },
   {
     "id": 764,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -16778,7 +16793,7 @@
   },
   {
     "id": 766,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -16817,7 +16832,7 @@
   },
   {
     "id": 789,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -16895,11 +16910,14 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2026-12-18"
+    "deadline": "2026-12-18",
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 792,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -16942,7 +16960,7 @@
   },
   {
     "id": 794,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -16983,7 +17001,7 @@
   },
   {
     "id": 797,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -17024,7 +17042,7 @@
   },
   {
     "id": 800,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -17065,7 +17083,7 @@
   },
   {
     "id": 810,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -17144,7 +17162,10 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2026-12-18"
+    "deadline": "2026-12-18",
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 812,
@@ -17185,11 +17206,14 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2026-12-18"
+    "deadline": "2026-12-18",
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 813,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -17269,7 +17293,10 @@
         "Volunteering"
       ]
     },
-    "deadline": "2026-12-18"
+    "deadline": "2026-12-18",
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 816,
@@ -17310,11 +17337,14 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "deadline": "2026-12-18"
+    "deadline": "2026-12-18",
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 817,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -17355,7 +17385,7 @@
   },
   {
     "id": 818,
-    "region": "Fort McMurray",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.keyano.ca/media/tbfhaeiz/2025-2026-student-award-booklet.pdf",
@@ -17593,7 +17623,7 @@
   },
   {
     "id": 825,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17631,7 +17661,7 @@
   },
   {
     "id": 826,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17669,7 +17699,7 @@
   },
   {
     "id": 827,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17707,7 +17737,7 @@
   },
   {
     "id": 828,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17745,7 +17775,7 @@
   },
   {
     "id": 829,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17783,7 +17813,7 @@
   },
   {
     "id": 830,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17859,11 +17889,14 @@
       "citizenship": "any",
       "apprenticeship": false,
       "extracurriculars": []
-    }
+    },
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 833,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17903,7 +17936,7 @@
   },
   {
     "id": 834,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17943,7 +17976,7 @@
   },
   {
     "id": 835,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -17984,7 +18017,7 @@
   },
   {
     "id": 836,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -18025,7 +18058,7 @@
   },
   {
     "id": 837,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -18065,7 +18098,7 @@
   },
   {
     "id": 838,
-    "region": "Grande Prairie",
+    "region": "University & college",
     "lastVerified": "2026-09",
     "active": true,
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
@@ -19028,7 +19061,7 @@
     "url": "https://www.ulethbridge.ca/fine-arts/student-support/fund-your-education/fine-arts-scholarships-awards",
     "category": "Arts",
     "lastVerified": "2026-09",
-    "region": "Lethbridge",
+    "region": "University & college",
     "notes": "A music studio audition doubles as the application, so a student auditioning for the BMus or BA Music studio stream is considered automatically as part of admission. For the other departments the portfolio is up to ten recent pieces from the past three years. The March cutoff is the same one that governs the general high school awards application, so both can be handled in one sitting.",
     "applyViaGuidance": false,
     "active": true,
@@ -19102,7 +19135,10 @@
       "extracurriculars": [
         "volunteer"
       ]
-    }
+    },
+    "alsoOpenTo": [
+      "University & college"
+    ]
   },
   {
     "id": 961,
@@ -19114,7 +19150,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11916",
     "category": "STEM",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Optometry is a preference rather than a condition, so a science student with another career in mind is still eligible. It is the largest science entrance award on the list.",
     "applyViaGuidance": false,
     "active": true,
@@ -19156,7 +19192,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12068",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. There is no programme restriction and no residency requirement, which makes this one of the widest-open entrance awards Red Deer Polytechnic lists.",
     "applyViaGuidance": false,
     "active": true,
@@ -19196,7 +19232,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11676",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The 100 kilometre rule is the whole filter and it is measured from your hometown, so a student from a small central Alberta community may qualify where a Red Deer student never can. Programmes shorter than two years do not count.",
     "applyViaGuidance": false,
     "active": true,
@@ -19236,7 +19272,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12316",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Alberta Blue Cross funds separate entrance awards at several institutions, so this is not the same award as the ones at Augustana or Keyano and you would apply through whichever college you are attending.",
     "applyViaGuidance": false,
     "active": true,
@@ -19276,7 +19312,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12321",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The award is written around the additional cost of attending rather than around the disability itself, so the case to make is a practical one about what your education actually costs you.",
     "applyViaGuidance": false,
     "active": true,
@@ -19316,7 +19352,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12093",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The certificate and diploma count alongside the degree, which is unusual: most business entrance awards want a degree student. The rural connection is what the sponsor is looking for.",
     "applyViaGuidance": false,
     "active": true,
@@ -19358,7 +19394,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11932",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The Olafson endowment funds a second entrance award for science students, so a candidate deciding between education and science should look at both before choosing which to argue for.",
     "applyViaGuidance": false,
     "active": true,
@@ -19400,7 +19436,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12287",
     "category": "STEM",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The agriculture and environmental conservation preference narrows the real field considerably, because most science entrants at the polytechnic are not in those streams.",
     "applyViaGuidance": false,
     "active": true,
@@ -19443,7 +19479,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12213",
     "category": "STEM",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Academic achievement is the only stated criterion, with no financial need test, no essay and no leadership requirement, which makes it the most straightforward large award on the list.",
     "applyViaGuidance": false,
     "active": true,
@@ -19485,7 +19521,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12250",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The 74 per cent minimum is well below the 80 per cent that most entrance scholarships ask for, and community involvement is listed first among the criteria.",
     "applyViaGuidance": false,
     "active": true,
@@ -19527,7 +19563,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11795",
     "category": "Community",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. No programme is specified and no residency is required, so the deciding factor is the leadership record rather than what you are studying or where you are from.",
     "applyViaGuidance": false,
     "active": true,
@@ -19569,7 +19605,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11827",
     "category": "STEM",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Marks are not mentioned anywhere in the criteria, which is rare for a nursing award and means a student who scraped into the programme is on the same footing as the top of the intake.",
     "applyViaGuidance": false,
     "active": true,
@@ -19611,7 +19647,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11902",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. This is the kind of award families miss because nobody thinks to check a parent's union. Sponsorship by an AUPE member also qualifies you, so the connection does not have to be a family one.",
     "applyViaGuidance": false,
     "active": true,
@@ -19651,7 +19687,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12034",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Certificate programmes rarely carry dedicated entrance awards, and the applicant pool for a one-year certificate is much smaller than for a degree.",
     "applyViaGuidance": false,
     "active": true,
@@ -19691,7 +19727,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12224",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. The same estate funds a matching award for Early Learning and Child Care, so a student choosing between the two programmes has an equivalent award waiting either way.",
     "applyViaGuidance": false,
     "active": true,
@@ -19731,7 +19767,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11756",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Upgrading students are almost invisible in scholarship listings, and Red Deer Polytechnic carries three awards aimed at them. Clearly defined career goals is a stated requirement, so the application is about the plan rather than the transcript.",
     "applyViaGuidance": false,
     "active": true,
@@ -19771,7 +19807,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11930",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Red Deer Polytechnic runs one General Application that closes May 31 and puts you in the running for every award you qualify for, so this is one box on a form rather than a separate submission. Open Studies qualifies as well as Academic Upgrading, which widens it past students who left school without finishing. Evidence of career planning is what the application turns on.",
     "applyViaGuidance": false,
     "active": true,
@@ -31568,7 +31604,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12499",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "An entrance award, so you apply as you start rather than partway through. ATB funds a parallel award reserved for Indigenous students, and it is worth checking which fits you better.",
     "active": true,
     "description": "A scholarship of $1,250 for an incoming full-time Red Deer Polytechnic Business Administration student who is Black, Indigenous or a person of colour, considering grades and financial need.",
@@ -31608,7 +31644,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12529",
     "category": "Indigenous",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Reserved for Indigenous students entering the program, which makes the field much smaller than the general entrance scholarships. Apply in your first term.",
     "active": true,
     "description": "A scholarship of $1,250 for an incoming full-time Indigenous Red Deer Polytechnic Business Administration student, considering grades and financial need.",
@@ -31648,7 +31684,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12245",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "For students just starting the diploma. ATB runs a separate continuing scholarship for the jump into second year, so you can be considered twice over two years.",
     "active": true,
     "description": "A scholarship of $1,000 for an incoming full-time first-year Red Deer Polytechnic Business Administration student, considering financial circumstances, grades and community service.",
@@ -31688,7 +31724,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12254",
     "category": "Indigenous",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Six awards at $2,500 makes this the most generous entrance award for Indigenous students at the school. Cultural leadership is weighed alongside need.",
     "active": true,
     "description": "Six scholarships of $2,500 for incoming full-time first-year Indigenous Red Deer Polytechnic students, considering financial circumstances and leadership supporting Indigenous culture.",
@@ -31726,7 +31762,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11989",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Four program streams share two awards, so check that yours is one of the named ones before applying.",
     "active": true,
     "description": "Two scholarships of $750 for incoming full-time first-year Red Deer Polytechnic students in Commerce, Education, Science or Nursing, considering grades and financial circumstances.",
@@ -31807,7 +31843,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/12498",
     "category": "Community",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Need is the only criterion and every credit program qualifies, which makes this the most broadly open of the $2,000 entrance awards at the school.",
     "active": true,
     "description": "A bursary of $2,000 for an incoming full-time first-year student in any Red Deer Polytechnic credit program, selected on financial circumstances alone.",
@@ -31845,7 +31881,7 @@
     "url": "https://rdpolytech.academicworks.ca/opportunities/11615",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Red Deer",
+    "region": "University & college",
     "notes": "Two awards at $2,000 for students entering the business degree, judged on need as well as marks.",
     "active": true,
     "description": "Two scholarships of $2,000 for incoming full-time first-year Red Deer Polytechnic Bachelor of Business Administration students, considering financial circumstances and grades.",
@@ -32424,7 +32460,7 @@
     "url": "https://ucalgary.ca/registrar/awards/adam-richard-leinweber-entrance-scholarship",
     "category": "STEM",
     "lastVerified": "2026-09",
-    "region": "Calgary",
+    "region": "University & college",
     "notes": "Ten thousand dollars for one entering physics major is among the largest entrance awards at the university. Declaring Physics rather than general Science is what puts you in the running.",
     "active": true,
     "description": "A $10,000 entrance scholarship for a first-year University of Calgary Science student majoring in Physics, awarded on academic achievement.",
@@ -34585,7 +34621,7 @@
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships/admission-scholarships",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Edmonton",
+    "region": "University & college",
     "notes": "No separate application: you are considered when you apply for admission on high school marks. The money is paid half in the fall and half in the winter, applied to tuition, and you need at least 12 credits a term.",
     "active": true,
     "description": "Every new student admitted to The King's University on high school marks is considered automatically: a final Grade 12 average of 80% to 89% earns the $2,000 Honours Scholarship and 90% or more earns the $3,000 Academic Distinction Scholarship. The Leder School of Business adds $3,000 and $2,000 to the two incoming business students with the highest entrance marks.",
@@ -34624,7 +34660,7 @@
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Edmonton",
+    "region": "University & college",
     "notes": "Applications for King's competitive awards open February 1, 2027 and close March 26, 2027; music awards that need a performance video are due before March 31. The awards page filters by program and year of study and gives each award's criteria.",
     "active": true,
     "description": "About forty King's awards take applications from incoming high school students, usually needing an 80% entrance average for scholarships or financial need for bursaries. They include the Boessenkool Scholarship (twelve at $2,000 for commerce), the Cook/Mahaffy Bursary ($4,000), Computronix computing science awards ($1,000 to $3,000), environmental studies awards from $500 to $2,000, the King's Awareness Scholarship ($2,000, renewable, for students from a Canadian high school that has not sent anyone to King's in two years), music scholarships that ask for a video, and several awards that ask for a statement of Christian commitment.",
@@ -34663,7 +34699,7 @@
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Edmonton",
+    "region": "University & college",
     "notes": "Apply in King's competitive awards window, February 1 to March 26, 2027.",
     "active": true,
     "description": "One $4,000 scholarship each year from GLC Solutions for a full-time female student, incoming or returning, in the four-year Bachelor of Commerce at The King's University. You need an 80% high school entrance average or a 3.30 GPA, and a written statement of Christian commitment, career intent and volunteer experience; marks and the statement are weighed together.",
@@ -34707,7 +34743,7 @@
     "url": "https://www.kingsu.ca/services/financial-aid/scholarships",
     "category": "STEM",
     "lastVerified": "2026-09",
-    "region": "Edmonton",
+    "region": "University & college",
     "notes": "Apply in King's competitive awards window, February 1 to March 26, 2027.",
     "active": true,
     "description": "One $4,000 scholarship each year from GLC Solutions for a full-time female student, incoming or returning, in the four-year Bachelor of Science with a major in Computing Science at The King's University. You need an 80% high school entrance average or a 3.30 GPA, and a written statement of Christian commitment, career intent and volunteer experience.",
@@ -34750,7 +34786,7 @@
     "url": "https://media-002-ca.cdn.govstack.com/keyano-015-ca/media/qaenhvzf/26-27-booklet-august-26-2026.pdf",
     "category": "Academic",
     "lastVerified": "2026-09",
-    "region": "Fort McMurray",
+    "region": "University & college",
     "notes": "No application: the Office of the Registrar picks recipients from entering students' marks, and entrance scholarships are paid half in the fall and half in the winter.",
     "active": true,
     "description": "Keyano's Registrar awards entrance scholarships on marks to new full-time students: Keyano College Entrance Scholarships ($1,200), four Syncrude Canada scholarships ($1,750 each) for the top entrants to the Bachelor of Education, Bachelor of Science, Business Administration and Bachelor of Science in Nursing, and three $500 Lamb family scholarships for entrants to nursing, the Bachelor of Commerce and Business Administration.",
@@ -34788,7 +34824,7 @@
     "url": "https://cbtsc.ca/scholarships/",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Cochrane",
+    "region": "University & college",
     "notes": "Apply once a year through the Populi student system before the school year starts, or before the Winter semester if you start in January. Most awards need admission to a program and at least two courses that semester, and returning students need a 2.3 GPA.",
     "active": true,
     "description": "Canadian Baptist Theological Seminary & College funds more than twenty scholarships through one yearly application, most paid per credit hour: from $50 a credit for named scholarships up to $250 a credit for the Barnabas Scholarship (new students nominated by a CNBC or SBC church) and for ministry leaders on staff at a CNBC church. Others cover dependents of CNBC, CBT and IMB staff, spouses of CBT students, former missionary volunteers, and students planning missions, pastoral, children's or religious education ministry.",
@@ -34827,7 +34863,7 @@
     "url": "https://www.nwpolytech.ca/financial-aid/awards-listing",
     "category": "General",
     "lastVerified": "2026-09",
-    "region": "Grande Prairie",
+    "region": "University & college",
     "notes": "The awards listing filters by type (bursaries, entrance, Indigenous, leadership, fine arts, year-end) and by program, and each award says whether you apply or are selected. Several NWP awards also have their own listings here.",
     "active": true,
     "description": "Northwestern Polytechnic's awards listing holds about 350 awards, with more than $350,000 a year in scholarships and bursaries: entrance awards such as the Alberta Blue Cross awards for students with 80% in English 30 and four other 30-level courses, bursaries for financial need, and program awards for power engineering, automotive, millwright, animal health technology, education and athletics, from a few hundred dollars to $2,000.",

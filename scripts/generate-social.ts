@@ -26,6 +26,7 @@ import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { generateSlug, getToday, parseAmount } from '../src/lib/utils.ts';
 import { scholarshipStatusOf } from '../src/lib/status.ts';
+import { placeOf } from '../src/lib/school-awards.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -156,7 +157,7 @@ function caption(p: Post, index: number): string {
     p.s.title,
     `Amount: ${p.s.amount}`,
     `Deadline: ${fmtDate(p.s.deadline as string)} (${p.days} days)`,
-    p.s.region ? `Who: ${p.s.region}` : null,
+    placeOf(p.s) ? `Who: ${placeOf(p.s)}` : null,
     '',
     'Full details and the application link are on ScholarAB; every listing links to the provider.',
     '',
@@ -204,7 +205,7 @@ function card(p: Post, height: number) {
         el('div', {}, `${p.days} DAYS LEFT`),
       ]),
       el('div', { fontFamily: 'Big Shoulders Label', fontWeight: 700, fontSize: 24, letterSpacing: 2, color: 'rgba(238,241,236,0.55)' },
-        (p.s.region || 'ALBERTA').toUpperCase()),
+        (placeOf(p.s) || 'ALBERTA').toUpperCase()),
     ]),
     el('div', { display: 'flex', flexDirection: 'column', gap: 72 }, [
       el('div', { fontFamily: 'Big Shoulders', fontWeight: 800, fontSize: titleSize, lineHeight: 1.03, letterSpacing: -1 }, t),

@@ -75,7 +75,7 @@ const guide = facet.guide ? getGuide(facet.guide) : null;
 // and nothing said the province-wide and national lists were theirs too
 // (critique 2026-10-01). "Many of", not "all of": the province-wide hub also
 // holds awards for one town or county outside the named cities.
-const broadCounts = facet.kind === 'region' && !facet.broad
+const broadCounts = facet.kind === 'region' && !facet.broad && !facet.bySchool
   ? SCHOLARSHIP_FACETS.filter(f => f.broad).map(f => ({ slug: f.slug, label: f.label.toLowerCase(), count: facetItems(f, allItems).length }))
   : [];
 const comboPage = comboCities(allItems, today).find(c => c.city === facet.slug);
@@ -144,6 +144,7 @@ const breadcrumbJson = {
         hideCategories={facet.kind === 'category'}
         hideScopes
         railFilters
+        schoolFilter={facet.bySchool}
         alsoOpen={broadCounts.length === 2 ? { place: facet.label, lists: broadCounts } : undefined}
       />
 

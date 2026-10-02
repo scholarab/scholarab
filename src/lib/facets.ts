@@ -85,6 +85,12 @@ export interface Facet {
    * home page's program carousel (Ilia, 2026-09-23); its hub page has none.
    */
   backdrop?: string;
+  /**
+   * The University & college awards hub: a region value that names who gives
+   * the award, not where the student lives. Its page filters by school, and
+   * the surfaces that list places leave it out.
+   */
+  bySchool?: boolean;
 }
 
 /**
@@ -418,6 +424,22 @@ export const SCHOLARSHIP_FACETS: Facet[] = [
       'The Canada-wide scholarships an Alberta student can enter, from the $100,000 Loran and Schulich awards down to essay contests that take an evening.',
     intro:
       'The largest awards in Canada are here, and the first close this fall: Loran, worth about $150,000, closes October 15, and Schulich Leader and Ted Rogers each pay $100,000 or more.',
+  },
+  {
+    // A school's own entrance awards, by school rather than city (Ilia,
+    // 2026-10-01). Not a place: it stays out of "Where you live", the
+    // deadlines town filter and the city pages' "also open to you" line.
+    slug: 'university-college-awards',
+    kind: 'region',
+    value: 'University & college',
+    label: 'University & college awards',
+    bySchool: true,
+    h1: 'University & college awards',
+    title: 'University and College Entrance Scholarships',
+    description:
+      'Entrance scholarships Alberta colleges and universities give new students, from Red Deer Polytechnic to Burman. Wherever you live, apply to the school.',
+    intro:
+      "Red Deer Polytechnic's awards here share one General Application, and Burman's run from $1,000 for applying by February 1 to full tuition for a 95 per cent admission average.",
   },
   {
     slug: 'indigenous',

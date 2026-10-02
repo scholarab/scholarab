@@ -9,6 +9,7 @@ import { programMatchesGrade } from './list-core'
 import { parseAmount } from './utils'
 import { programStatusOf } from './status'
 import { RESULT_LIMIT } from './quiz'
+import { SCHOOL_AWARDS_REGION, isSchoolAward } from './school-awards'
 
 const AVERAGE_CHECK = 'Needs an average of '
 /** The check a local award carries until the student's school confirms it. */
@@ -93,7 +94,9 @@ const ALBERTA_CITIES = new Set([
 
 export function regionMatches(city: string, scholarshipRegion: string | null, alsoOpenTo?: string[] | null): boolean {
   if (alsoOpenTo?.includes(city)) return true
-  if (!scholarshipRegion || scholarshipRegion === 'National' || scholarshipRegion === 'International') return true
+  // A school's own entrance award goes by the school, not the city: the
+  // institution rule in matchScholarship decides it.
+  if (!scholarshipRegion || scholarshipRegion === 'National' || scholarshipRegion === 'International' || scholarshipRegion === SCHOOL_AWARDS_REGION) return true
   if (scholarshipRegion === 'Alberta' || scholarshipRegion === 'Alberta-wide') return ALBERTA_CITIES.has(city)
   return scholarshipRegion === city
 }
@@ -163,6 +166,16 @@ export function matchScholarship(
     ? [`${LOCAL_CHECK}${localArea}`] : []
   // Missing criteria do not erase the geography that we do know.
   if (!eligibility) return { match: true, confidence: 0.20, reasons: [], signals: [], checks: [...localChecks, ...tieChecks] }
+
+  // ── A school's own entrance award ─────────────────────────────────────────
+  // Only for students going there. Without this every one of them reached
+  // every student, a Calgary student bound for SAIT included; "Somewhere else,
+  // or not sure" leaves them on the University & college awards page.
+  if (isSchoolAward(scholarship) && eligibility.targetInstitutions.length > 0
+      && !(profile.targetInstitution && eligibility.targetInstitutions.includes(profile.targetInstitution))) {
+    reasons.push(`For students going to ${eligibility.targetInstitutions.join(' or ')}`)
+    return { match: false, confidence: 0, reasons, signals: [], checks: [] }
+  }
 
   // ── Grade ─────────────────────────────────────────────────────────────────
   if (eligibility.grades.length > 0 && !eligibility.grades.includes(profile.grade)) {
@@ -280,7 +293,7 @@ export function matchScholarship(
   const signals: string[] = []
 
   // City-specific match; scholarship is for this exact city (not national/provincial)
-  if (region && region !== 'National' && region !== 'Alberta' && region !== 'Alberta-wide') {
+  if (region && region !== 'National' && region !== 'Alberta' && region !== 'Alberta-wide' && region !== SCHOOL_AWARDS_REGION) {
     confidence += CITY_SPECIFIC_BOOST
     signals.push(`Local to ${region}`)
   }

@@ -63,7 +63,7 @@ interface Row {
 // student read Red Deer and Lacombe deadlines to find their own (critique
 // 2026-09-26). The towns are the directory's hubs, by the hubs' own test.
 const townFacets = SCHOLARSHIP_FACETS
-  .filter(f => f.kind === 'region' && !f.broad && facetItems(f, scholarships).length >= MIN_FACET_ITEMS)
+  .filter(f => f.kind === 'region' && !f.broad && !f.bySchool && facetItems(f, scholarships).length >= MIN_FACET_ITEMS)
   .sort((a, b) => a.label.localeCompare(b.label));
 const broadRegions = new Set(SCHOLARSHIP_FACETS.filter(f => f.broad).flatMap(f => [f.value, ...(f.extraValues ?? [])]));
 const placesOf = (s: (typeof scholarships)[number]) =>

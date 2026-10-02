@@ -26,6 +26,8 @@
  * deadline field, so they pass through as themselves rather than parsing to
  * Invalid Date.
  */
+import { SCHOOL_AWARDS_REGION, placeOf } from './school-awards';
+
 export function formatListingDate(str: string | null | undefined): string {
   if (!str) return 'TBA';
   if (str === 'TBA' || str === 'Ongoing') return str;
@@ -242,6 +244,8 @@ export interface ScholarshipMetaInput {
   amount?: string | null;
   audience?: string | null;
   region?: string | null;
+  /** Names the school, which a school award shows in place of its region. */
+  eligibility?: { targetInstitutions?: string[] } | null;
   openDate?: string | null;
   deadline?: string | null;
   /**
@@ -365,7 +369,12 @@ export function scholarshipMeta(
   today?: string | null,
 ): string {
   const when = whenClause(s, status, fmt, today);
-  const region = !s.region || s.region === 'National' ? '' : ` (${s.region})`;
+  // A school award shows its school, and only when the title does not already
+  // name it: "(Burman University)" after "Burman University Early Admission
+  // Tuition Scholarship" spent the room its metaDetail clause needed.
+  const place = placeOf(s);
+  const named = s.region === SCHOOL_AWARDS_REGION && !!place && s.title.includes(place);
+  const region = !place || place === 'National' || named ? '' : ` (${place})`;
   // With no date to lead on, the amount has to be a printable figure or there
   // is nothing to put in front of the audience: "Varies for Alberta golfers"
   // opens a SERP snippet on a word that answers nothing. Everywhere else the

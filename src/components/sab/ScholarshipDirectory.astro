@@ -13,6 +13,7 @@ import { saysNoApplication } from '../../lib/apply-method.ts';
 import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE, BURST_PATH } from '../../lib/icons.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts.ts';
 import SabFilterSelect from './SabFilterSelect.astro';
+import { schoolOf } from '../../lib/school-awards.ts';
 
 interface Props {
   items: ScholarshipWithMeta[];
@@ -46,6 +47,8 @@ interface Props {
    * layout like the others"), so every directory page reads the same way.
    */
   railFilters?: boolean;
+  /** University & college awards: a School picker, biggest school first. */
+  schoolFilter?: boolean;
   /** City hubs: the broad lists the reader can also apply from. */
   alsoOpen?: { place: string; lists: Array<{ slug: string; label: string; count: number }> };
 }
@@ -57,6 +60,7 @@ const {
   hideCategories = false,
   hideScopes = false,
   railFilters = false,
+  schoolFilter = false,
   alsoOpen,
 } = Astro.props;
 
@@ -81,8 +85,9 @@ const chipSource = allItems;
 // sat fourth behind three scopes a tenth its size. Counted against the whole
 // corpus rather than the page, so the order is the same on every hub and a
 // reader crossing the row twice finds the chip where they left it.
+// University & college awards is a page, not a place to live: left out.
 const regionFacets = SCHOLARSHIP_FACETS
-  .filter(f => f.kind === 'region' && facetItems(f, chipSource).length >= MIN_FACET_ITEMS);
+  .filter(f => f.kind === 'region' && !f.bySchool && facetItems(f, chipSource).length >= MIN_FACET_ITEMS);
 // The two broad scopes first, then the towns A to Z. Biggest-first put Brooks
 // somewhere in the middle of 27 chips, and a student looks for their town by
 // name, not by how many awards it has.
@@ -126,6 +131,10 @@ const STATUS_CHIPS = [
   { value: 'unconfirmed', label: STATUS_WORDS.unconfirmed },
   { value: 'closed',  label: 'Closed' },
 ] as const;
+
+const schoolCounts = new Map<string, number>();
+if (schoolFilter) for (const s of items) { const k = schoolOf(s); if (k) schoolCounts.set(k, (schoolCounts.get(k) ?? 0) + 1); }
+const schools = [...schoolCounts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 
 const counts = new Map<string, number>();
 for (const s of items) if (s.category) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
@@ -237,6 +246,10 @@ const openNow = openNowCount(initial);
         {SORT_CHIPS.map(s => <option value={s.value} selected={s.value === 'closest_due'}>{s.label}</option>)}
       </select>
     </div>
+    {schoolFilter && <SabFilterSelect label="School" filterKey="school" options={[
+      { value: 'all', label: 'All schools', count: items.length },
+      ...schools.map(([name, count]) => ({ value: name, label: name, count })),
+    ]} />}
     {!hideCategories && <SabFilterSelect label="Type" filterKey="category" options={[
       { value: 'all', label: 'All types', count: items.length },
       ...categories.map(c => ({ value: c, label: c, count: counts.get(c) ?? 0 })),
@@ -341,6 +354,7 @@ const openNow = openNowCount(initial);
           data-id={s.id}
           data-category={s.category ?? undefined}
           data-region={s.region ?? undefined}
+          data-school={schoolFilter ? schoolOf(s) ?? undefined : undefined}
           data-amount={String(s._amount ?? 0)}
           data-deadline={s.deadline ?? undefined}
           data-open-date={s.openDate ?? undefined}
@@ -430,7 +444,7 @@ const openNow = openNowCount(initial);
 
   // `name` mirrors the card title for the DirectoryItem contract (save labels)
   type Item = ScholarshipWithMeta & { el: HTMLElement; search: string; name: string; scopes: string[] };
-  type State = { sort: string; category: string; region: string; status: string };
+  type State = { sort: string; category: string; region: string; status: string; school: string };
 
   type Cache = Map<number, ScholarshipStatus>;
 
@@ -439,13 +453,14 @@ const openNow = openNowCount(initial);
     statusFilter: state.status as StatusFilter,
     selectedCategory: state.category,
     selectedRegion: (state.region || null) as RegionKey | null,
+    selectedSchool: state.school,
     searchQuery: '',
     sortBy: state.sort as ScholarshipSort,
   });
 
   initDirectory<Item, State, Cache>('#sab-scholarships', {
     itemType: 'scholarship',
-    defaultState: { sort: 'closest_due', category: 'all', region: '', status: 'all' },
+    defaultState: { sort: 'closest_due', category: 'all', region: '', status: 'all', school: 'all' },
     parseCard(el) {
       const d = el.dataset;
       return {
@@ -456,6 +471,7 @@ const openNow = openNowCount(initial);
         title: el.querySelector('.sabl-name')?.textContent ?? '',
         category: d.category ?? null,
         region: d.region ?? null,
+        _school: d.school ?? null,
         deadline: d.deadline ?? null,
         openDate: d.openDate ?? null,
         _amount: Number(d.amount ?? 0),

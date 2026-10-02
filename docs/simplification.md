@@ -1530,3 +1530,17 @@ Outcome: a Grade 12 student choosing a college or university sees the money that
 | Hub and combo copy rewritten for the cut | Kept: still true, it just does not mention entrance awards. |
 
 Add-back fraction: 91/92 of the entrance cut. Local only: `npm run ci` passed (1,163), `npm run test:e2e` passed (153, 19 skipped); the no-separate-application count test moved 16 to 21, all five restored admission-automatic awards. The database republishes them on the next CI mirror (sync-db upserts published JSON).
+
+## University & college awards page, October 1, 2026
+
+Outcome: a student applying to a college or university finds that school's entrance awards wherever they live. Filed by the school's city, Burman's eleven sat on the Lacombe page, and the quiz hid every one of them from a student outside that city even when they named the school (Ilia: "no matter where you are located ... as long as you apply to that university").
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Entrance awards filed under the school's city | 79 moved to region "University & college" and a new hub, `/scholarships/university-college-awards/`, with a School picker (Red Deer Polytechnic 27, Keyano 22, Northwestern Polytechnic 14, Burman 11 and seven more). The 12 that also require a local graduate or resident (Wood Buffalo at Keyano, Central Alberta at Red Deer Polytechnic, within 100 km of Burman, the Peace Region, Mamawi Atosketan) keep their city and appear on both pages via `alsoOpenTo`. |
+| Quiz: city rule on a school's own award | Replaced by the school rule (`school-awards.ts`, eligibility-matcher): a school award matches a student who names that school, from any city; local ones still need the city. Not "Local to" anywhere. Burman, The King's, Lethbridge Polytechnic and CBTS joined the school question, since their awards are reachable only through it; the reachability test now tries every school answer. |
+| "University & college" printed as a place | Rows, related cards, the detail subline, OG and social cards show the school instead (`placeOf`). Left out of "Where you live", the deadlines town filter and the city pages' "also open to you" line. In snippets the school is omitted when the title already names it, which kept 3 metaDetail clauses; 3 others now carry the school instead of their clause. |
+| Lethbridge, Lacombe, Fort McMurray and Camrose combo pages | Gone again (they were made of these awards) and 301 to their city pages. |
+| Menu | A text link under Scholarships, not a photo tile: the tiles are places. |
+
+Add-back fraction: 0/5. Local only: `npm run ci` passed (1,167), `npm run test:e2e` passed (153, 19 skipped); built page checked in the browser (School picker narrows and deep-links with `?school=`).

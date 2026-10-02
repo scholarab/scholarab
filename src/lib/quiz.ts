@@ -129,7 +129,9 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     // Every school here is one the listings name as a requirement, so picking
     // it changes the results. Lethbridge, Northwestern Polytechnic, Keyano and
     // Medicine Hat College left on 2026-09-30 with the colleges' own awards and
-    // came back on 2026-10-01 with their entrance awards.
+    // came back on 2026-10-01 with their entrance awards; Burman, The King's,
+    // Lethbridge Polytechnic and CBTS joined then, since a school's own
+    // entrance awards are only reached through this answer.
     opts: [
       { label: 'University of Alberta', value: 'University of Alberta', hint: 'Edmonton' },
       { label: 'University of Calgary', value: 'University of Calgary', hint: 'Calgary' },
@@ -142,6 +144,10 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       { label: 'Northwestern Polytechnic', value: 'Northwestern Polytechnic', hint: 'Grande Prairie' },
       { label: 'Keyano College', value: 'Keyano College', hint: 'Fort McMurray' },
       { label: 'Medicine Hat College', value: 'Medicine Hat College', hint: 'Medicine Hat' },
+      { label: 'Burman University', value: 'Burman University', hint: 'Lacombe' },
+      { label: "The King's University", value: "The King's University", hint: 'Edmonton' },
+      { label: 'Lethbridge Polytechnic', value: 'Lethbridge Polytechnic', hint: 'Lethbridge' },
+      { label: 'Canadian Baptist Theological Seminary and College', value: 'Canadian Baptist Theological Seminary and College', hint: 'Cochrane' },
       { label: 'Trades / Apprenticeship', value: 'Trades / Apprenticeship program', hint: 'Any apprenticeship' },
       { label: 'Somewhere else, or not sure', value: '' },
     ],
