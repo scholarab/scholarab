@@ -4915,15 +4915,15 @@
   {
     "id": 152,
     "title": "Scotiabank x myBlueprint Scholarships",
-    "amount": "$3,750",
-    "deadline": "2027-04-30",
-    "openDate": "2027-01-01",
+    "amount": "$3,000",
+    "deadline": "2027-04-24",
+    "deadlineEstimated": true,
     "audience": "Grade 12 students across Canada with a myBlueprint account",
     "url": "https://education.myblueprint.ca/scotia/",
     "category": "General",
-    "lastVerified": "2026-08",
+    "lastVerified": "2026-10",
     "region": "National",
-    "notes": null,
+    "notes": "The 2026 round had one stream, Financial Wellness: Phase 1 ran January 15 to April 24, 2026, and invited applicants sent their video by May 18. The 2027 dates are not posted yet, so the deadline here is last year's rolled forward one year. Check the myBlueprint page in January.",
     "toApply": {
       "checked": "2026-10-01",
       "complete": false,
@@ -4940,8 +4940,8 @@
     },
     "applyViaGuidance": false,
     "active": false,
-    "description": "Scotiabank offers four scholarship streams (Diversity, Financial Wellness, Future Women Leaders, and STEM) through myBlueprint for Grade 12 students across Canada. One winner per stream is guaranteed per region (Alberta grouped with MB, SK, NT, NU), with 16 national winners at $3,750 each. Eligible students apply through a two-phase process: an initial short application followed by a video submission for selected finalists, accessed via their school's myBlueprint account.",
-    "metaDetail": "Four streams, with 16 national winners.",
+    "description": "Scotiabank funds ten Financial Wellness Scholarships of $3,000 each through myBlueprint, open to Grade 12 students anywhere in Canada with no regional or demographic limits. Phase 1 is a written answer about your financial wellness goals and how the money would help; the top Phase 1 applicants are invited to send a short video to finish their application.",
+    "metaDetail": "Ten $3,000 awards; a short video only if you reach round two.",
     "eligibility": {
       "grades": [
         "12"
@@ -23171,13 +23171,15 @@
     "id": 1060,
     "title": "Ted Rogers Legacy Scholarship",
     "amount": "$100,000",
-    "audience": "Students entering a technology-focused program at one of six partner universities, including the University of Calgary",
-    "url": "https://about.rogers.com/our-impact/ted-rogers-scholarships/",
+    "deadline": "2026-12-01",
+    "openDate": "2026-10-01",
+    "audience": "Grade 12 students entering Computer Science, Data Science, Computer Engineering or Software Engineering at the University of Calgary",
+    "url": "https://ucalgary.ca/registrar/awards/ted-rogers-legacy-scholarship",
     "category": "STEM",
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "region": "National",
     "active": true,
-    "description": "Ten awards a year worth $100,000 over four years, covering full tuition, living expenses and other costs for students in a technology-focused program. Rogers calls it Canada's largest scholarship program. There is no central application: each partner university runs its own selection, and the University of Calgary is one of the six.",
+    "description": "Two awards a year at the University of Calgary of $25,000, renewable in second, third and fourth year, so up to $100,000. For a high school student entering the Faculty of Science or the Schulich School of Engineering in Computer Science, Data Science, Computer Engineering or Software Engineering, who is a Canadian citizen or permanent resident and has led in school or community life.",
     "eligibility": {
       "grades": [
         "12"
@@ -23203,7 +23205,7 @@
       "apprenticeship": false,
       "extracurriculars": []
     },
-    "notes": "Do not look for a Rogers application form, because there isn't one. The six partner universities are UBC, the University of Calgary, Waterloo, Toronto Metropolitan, Polytechnique Montreal and UNB, and each handles its own nomination and selection. For an Alberta student the practical route is the University of Calgary's own awards process, so ask their admissions office how the Ted Rogers award is assessed there."
+    "notes": "Apply through the High School Prestige Awards application in the My UCalgary portal, which opens October 1 and closes December 1; admissions documents are due December 15. Keeping it needs a 3.20 GPA over at least 24 units each fall and winter. Rogers took its own scholarship page down; UBC, Waterloo, Toronto Metropolitan, Polytechnique Montreal and UNB run their own selections."
   },
   {
     "id": 1061,
@@ -27077,7 +27079,7 @@
     "region": "National",
     "active": true,
     "description": "Chick-fil-A gives up to 13 scholarships of up to $25,000 to students who lead in their communities, with a year-long leadership development program for the $25,000 winners. Canadian residents can apply.",
-    "notes": "Apply on the Scholarship America portal by 3 p.m. Central on November 3, 2026, for study starting in 2027-28. You need at least a 3.0 GPA, community service, extracurriculars or leadership in the last 12 months, your transcript, and the first two pages of your parents’ T-1 tax return. At least one online recommendation must arrive within three business days of the deadline.",
+    "notes": "Apply on the Scholarship America portal by 3 p.m. Central on November 3, 2026, for study starting in 2027-28. You need at least a 3.0 GPA, community service, extracurriculars or leadership in the last 12 months, your transcript, and the first two pages of your parents’ T-1 tax return. At least one online recommendation must arrive within three business days of the deadline. You must be 18 by July 15, 2027.",
     "toApply": {
       "checked": "2026-10-01",
       "complete": true,
@@ -27102,7 +27104,7 @@
       ]
     },
     "applyViaGuidance": false,
-    "lastVerified": "2026-09",
+    "lastVerified": "2026-10",
     "eligibility": {
       "grades": [
         "12"

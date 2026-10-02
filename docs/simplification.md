@@ -1570,3 +1570,17 @@ Outcome: a student on /saved can see both views and switch between them. The 202
 | Switch colours inside the board | Inverted (white border and text, white active button), 14px above it on phones where the board stacks with no gap. |
 
 Add-back fraction: 0/0. Local only: built /saved checked on phone and desktop, both views.
+
+## Five listings from the What you'll need research, October 1, 2026
+
+Outcome: a student acts on what the provider says today. Reading the top 50 provider pages for `toApply` turned up five listings that disagreed with their source.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Scotiabank x myBlueprint: $3,750, four streams, 16 winners, opens 2027-01-01 | Corrected to the 2026 page: one Financial Wellness stream, ten awards of $3,000. The 2027 open date was never published, so it goes; the deadline is 2026's April 24 rolled forward with `deadlineEstimated`. |
+| Ted Rogers Legacy: Rogers page 404, "no application form" | Pointed at the University of Calgary award page: two $25,000 awards a year, renewable to $100,000, through the High School Prestige Awards application (October 1 to December 1, the same dates as Pathways to Medicine). |
+| Chick-fil-A Community Scholars: age rule only in the kit | Added to the notes: 18 by July 15, 2027. |
+| RBC Elevate "listed as open" | No change: it already reads "Not posted yet", and the 2026 window is in its notes. My report was wrong. |
+| Canada's Luckiest Student as a scholarship | Kept: the description calls it a giveaway and its kit says prize draw. |
+
+Add-back fraction: 0/0 (corrections, nothing cut). Local only: validate-data OK.
