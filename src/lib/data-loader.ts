@@ -1,6 +1,7 @@
 import type { EligibilityCriteria } from './eligibility-types'
 import { eligibilitySchema } from './eligibility-types'
 import type { ToApply } from './to-apply'
+import type { ApplyRoute } from './apply-method'
 
 export { eligibilitySchema } from './eligibility-types'
 
@@ -72,6 +73,8 @@ export type Scholarship = {
   localArea?: string | null
   /** What applying takes, from the provider's page. JSON-only. See lib/to-apply.ts. */
   toApply?: ToApply | null
+  /** Who takes the application, on the 175 school-route listings. JSON-only. See lib/apply-method.ts. */
+  applyRoute?: ApplyRoute | null
 }
 
 export type Program = {

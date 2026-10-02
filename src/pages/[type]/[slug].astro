@@ -19,7 +19,7 @@ import { generateSlug, parseAmount, formatVerifiedMonth, formatDeadline, amountS
 import { placeOf } from '../../lib/school-awards';
 import { OPEN_NO_DEADLINE, STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
-import { saysNoApplication } from '../../lib/apply-method.ts';
+import { saysNoApplication, howYouApply } from '../../lib/apply-method.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
@@ -446,7 +446,10 @@ if (kind === 'scholarship') {
     // nothing the button did not, and were false for every award with no
     // form. Only the school-run case has advice worth a section: the school's
     // own cut-off, which the listing cannot show.
-    steps: s.applyViaGuidance && !noApplication
+    // Only where the school or its division takes the form (applyRoute,
+    // classified 2026-10-02): a club, a nomination or a campus office has
+    // nothing to do with the counsellor's cut-off.
+    steps: s.applyRoute === 'school' || s.applyRoute === 'board'
       ? [
           'Ask your guidance counsellor how your school handles this award.',
           'Ask for the school deadline too. It is often earlier than the one listed here.',
@@ -458,10 +461,8 @@ if (kind === 'scholarship') {
     // $5,000 a year at first (critique 2026-09-24).
     valueNote: [
       amountSpan(s.amount, [s.metaDetail, (s as { description?: string }).description].filter(Boolean).join(' ')),
-      noApplication
-        ? "You don't file an application for this one. The notes say how it is awarded."
-        : s.applyViaGuidance ? 'Applications go through your school.' : null,
     ].filter(Boolean).join(' ') || null,
+    howApply: howYouApply(s.applyRoute, noApplication),
     checkedLabel: formatVerifiedMonth(s.lastVerified),
     toApply: s.toApply ?? null,
     ctaLabel: noApplication ? 'How it is awarded' : s.applyViaGuidance ? 'How to apply' : 'Apply',
@@ -654,6 +655,7 @@ const breadcrumbJson = {
       facts={d.facts}
       needs={"needs" in d ? d.needs : undefined}
       eligibility={d.eligibility}
+      howApply={"howApply" in d ? d.howApply : null}
       about={d.about}
       notes={d.notes}
       steps={d.steps}

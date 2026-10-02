@@ -1653,3 +1653,17 @@ Outcome: the note that only ScholarAB has (Loran closes at noon ET, finalists st
 | The filled status pill | Coloured words above the title, by tone (quiet, go, soon, urgent) instead of inline background and colour pairs, in the build and the client repaint. "Open now instead" lost its uppercase too. |
 
 Add-back fraction: 0/0. Local only: built Loran page checked on phone and desktop, compared with www.
+
+## Listing page: How you apply, October 2, 2026
+
+Outcome: under "Who can apply", a student reads who takes the application, so they know whether to go to the counsellor, a club or nobody before they open the provider's page.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| Show "Through your school" for all 175 `applyViaGuidance` listings | Not done: read by hand, it was true of 92. The rest are a division-wide form (27: EducationMatters, Edmonton Public Schools Foundation, Elk Island myBlueprint, Calgary Catholic), the sponsor itself (32: Legion branches, Lions and Kinsmen clubs, county ag boards, foundations), a nomination (16), a contest (4) or a campus awards office (4). Stored as `applyRoute` beside the flag; validate-data rejects an unknown route or one without the flag, and only warns on a flagged listing without one, since the admin form has no route field. |
+| A route for the other 705 | Not guessed: 503 have no flag at all. They show no line, except the 19 whose own notes say there is nothing to file (`saysNoApplication`, already used for the button). |
+| "Applications go through your school." under the amount | Deleted: the line under the title says it, by route. The "nothing to file" sentence moved there too. |
+| The two counsellor steps (school deadline) on every flagged listing | Kept only for school and division routes: they were telling students to ask a counsellor about a Kinsmen bursary that is emailed to the club. |
+| Routes on list rows and /saved | Not yet: the page line comes first. |
+
+Add-back fraction: 0/0. Local only: 194 built pages carry the line; Schulich, Leduc Kinsmen and Loran (no line) checked on a phone, no horizontal scroll.

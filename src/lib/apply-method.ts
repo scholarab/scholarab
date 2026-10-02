@@ -17,3 +17,29 @@ const NO_APPLICATION =
 export function saysNoApplication(...texts: Array<string | null | undefined>): boolean {
   return texts.some(t => !!t && NO_APPLICATION.test(t))
 }
+
+/**
+ * How an application reaches the people who decide, for the 175 listings
+ * marked `applyViaGuidance`. Classified by hand from each listing's notes
+ * (2026-10-02): "through your school" was true of about half of them; the
+ * rest are a division-wide form, a nomination, a club or foundation taking
+ * applications itself, a contest, or a campus awards office. JSON-only.
+ * Listings without it say nothing here rather than guess.
+ */
+export const APPLY_ROUTES = ['school', 'board', 'nominated', 'sponsor', 'contest', 'campus'] as const
+export type ApplyRoute = typeof APPLY_ROUTES[number]
+
+const ROUTE_LINE: Record<ApplyRoute, string> = {
+  school: 'Through your school. It collects the form, often before the date shown here.',
+  board: "Through your school division's own application. Ask your counsellor where to find it.",
+  nominated: "You can't apply yourself. Someone nominates you, so tell them you want to be considered.",
+  sponsor: 'Straight to the sponsor, not through your school.',
+  contest: 'You enter a contest. Placing in it is the application.',
+  campus: "Through your university or college's awards office, once you have accepted an offer.",
+}
+
+/** The "How you apply" line, or null when the listing doesn't say. A route outranks the text test. */
+export function howYouApply(route: ApplyRoute | null | undefined, noApplication: boolean): string | null {
+  if (route) return ROUTE_LINE[route]
+  return noApplication ? 'Nothing to file. The notes say how it is awarded.' : null
+}

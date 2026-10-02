@@ -7,6 +7,7 @@ import { programMeta, scholarshipMetas, formatListingDate, META_MAX } from '../s
 import { scholarshipStatusOf } from '../src/lib/status.ts';
 import { eligibilitySchema } from '../src/lib/eligibility-types.ts';
 import { toApplyProblems } from '../src/lib/to-apply.ts';
+import { APPLY_ROUTES } from '../src/lib/apply-method.ts';
 import {
   RESERVED_SCHOLARSHIP_SLUGS,
   RESERVED_PROGRAM_SLUGS,
@@ -280,6 +281,22 @@ for (const s of scholarships) {
   for (const problem of toApplyProblems(s.toApply)) {
     console.error(`${tag}: toApply ${problem}`);
     failed = true;
+  }
+
+  // A route is the hand-checked answer to "through your school?", so it only
+  // belongs on a listing that says it goes through the school. A new
+  // school-route listing without one only warns: the admin form has no route
+  // field, and its page then shows no "How you apply" line rather than a guess.
+  const route = (s as { applyRoute?: unknown }).applyRoute;
+  if (route !== undefined && !(APPLY_ROUTES as readonly unknown[]).includes(route)) {
+    console.error(`${tag}: applyRoute "${String(route)}" is not one of ${APPLY_ROUTES.join(', ')}`);
+    failed = true;
+  }
+  if (route !== undefined && s.applyViaGuidance !== true) {
+    console.error(`${tag}: applyRoute is set but applyViaGuidance is not`);
+    failed = true;
+  } else if (route === undefined && s.applyViaGuidance === true) {
+    console.warn(`${tag}: applyViaGuidance has no applyRoute, so its page shows no "How you apply" line`);
   }
 }
 

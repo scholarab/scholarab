@@ -55,6 +55,8 @@ interface Props {
   eligibility: string | null;
   about: string | null;
   notes?: string | null;
+  /** Who takes the application, from lib/apply-method.ts; null when the listing doesn't say. */
+  howApply?: string | null;
   steps: string[];
   /** What applying takes, from the provider's page. See lib/to-apply.ts. */
   toApply?: ToApply | null;
@@ -82,7 +84,7 @@ const {
   itemType, itemId, typeLabel, name, subline,
   status: datedStatus, availability = null, daysLeft, deadlineIso, openDateIso, inactive, estimated = false, dueLong, opensLabel,
   backHref, backLabel, facetHref = null, facetLabel = null,
-  facts, needs = [], eligibility, about, notes, steps, toApply = null,
+  facts, needs = [], eligibility, howApply = null, about, notes, steps, toApply = null,
   valueLabel, valueBig, valueNote, checkedLabel = null, valueQuiet = false,
   ctaLabel, url, canRemind, guideHref, guideTitle,
   alternatives = [], alternativesHref = backHref, next = [],
@@ -165,6 +167,12 @@ const chip: { text: string; tone: Tone } =
       What you'll need took the top of the left column. */}
   {eligibility && (
     <p class="sabd-who"><span class="sabd-who-label">Who can apply:</span> <span set:html={emailOff(eligibility)} /></p>
+  )}
+  {/* The second question, "what does it take?", answered beside the first.
+      It used to be one grey sentence under the amount, and it said "through
+      your school" for clubs, nominations and campus offices alike. */}
+  {howApply && (
+    <p class="sabd-who sabd-how"><span class="sabd-who-label">How you apply:</span> {howApply}</p>
   )}
 </div>
 
@@ -465,6 +473,7 @@ const chip: { text: string; tone: Tone } =
   .sabd-subline { font-size: 15px; color: rgba(20, 25, 21, 0.75); margin-top: 12px; }
   .sabd-who { font-size: 16px; line-height: 1.5; color: #141915; margin: 14px 0 0; max-width: 640px; }
   .sabd-who-label { font-weight: 600; color: #0A6B4D; }
+  .sabd-how { margin-top: 6px; }
   .sabd-grid {
     padding: 44px var(--sab-gutter) 96px; box-sizing: border-box;
     display: grid; grid-template-columns: 1fr 360px; grid-template-rows: auto 1fr; gap: 16px 40px; align-items: start;

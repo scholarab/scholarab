@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { saysNoApplication } from './apply-method'
+import { saysNoApplication, howYouApply, APPLY_ROUTES } from './apply-method'
 import scholarships from '../data/scholarships.json'
 
 describe('saysNoApplication', () => {
@@ -37,5 +37,27 @@ describe('saysNoApplication', () => {
     const alexander = find('Alexander Rutherford Scholarship')
     expect(saysNoApplication(scholar.notes, scholar.metaDetail, scholar.description)).toBe(true)
     expect(saysNoApplication(alexander.notes, alexander.metaDetail, alexander.description)).toBe(false)
+  })
+})
+
+describe('howYouApply', () => {
+  it('says who takes the application, and nothing when the listing does not say', () => {
+    expect(howYouApply('school', false)).toMatch(/^Through your school\./)
+    expect(howYouApply('nominated', false)).toMatch(/^You can't apply yourself/)
+    expect(howYouApply(null, true)).toMatch(/^Nothing to file/)
+    expect(howYouApply(null, false)).toBeNull()
+  })
+
+  it('lets the hand-checked route outrank the text test', () => {
+    expect(howYouApply('sponsor', true)).toBe('Straight to the sponsor, not through your school.')
+  })
+
+  it('only carries a known route, and only on a school-route listing', () => {
+    const routed = (scholarships as { id: number; applyViaGuidance?: boolean; applyRoute?: string }[]).filter(s => s.applyRoute !== undefined)
+    expect(routed.length).toBeGreaterThan(0)
+    for (const s of routed) {
+      expect(APPLY_ROUTES, `#${s.id}`).toContain(s.applyRoute)
+      expect(s.applyViaGuidance, `#${s.id}`).toBe(true)
+    }
   })
 })
