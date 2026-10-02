@@ -4,6 +4,9 @@ import { generateSlug } from '../../lib/utils.ts';
 import type { Scholarship, Program } from '../../lib/data-loader.ts';
 import type { PlanKit } from '../../lib/saved-plan.ts';
 import { saysNoApplication, rowRoute } from '../../lib/apply-method.ts';
+import { scholarshipStatusOf } from '../../lib/status.ts';
+import { isAfterHighSchool } from '../../lib/list-core.ts';
+import { todayDate } from '../../lib/calendar';
 
 interface Props {
   initialScholarships: Scholarship[];
@@ -27,6 +30,16 @@ const items: SavedItem[] = [
   ...initialPrograms.map(({ id, name, eligibility: audience, paid, cost, deadline, active, url }) =>
     ({ type: 'program' as const, id, name, audience, paid, cost, deadline, ...(active === false ? { active: false } : {}), url, href: `/programs/${generateSlug(name)}/` })),
 ];
+
+// The empty page leads with a real count rather than a dashed box (flow plan,
+// 2026-10-02). Not three picked awards: by date the first three included a
+// Photoshop-actions essay contest and Niagara Region Right to Life, and
+// filters on the data called a bleeding-disorder award open to anyone.
+// The directory's own OPEN NOW run, so the two pages give the same number.
+const openNow = initialScholarships.filter(s => {
+  const st = scholarshipStatusOf(s, todayDate());
+  return (st === 'active' || st === 'ongoing') && !isAfterHighSchool(s);
+}).length;
 ---
 
 <!-- Same skeleton the React island used to show before hydration -->
@@ -55,15 +68,15 @@ const items: SavedItem[] = [
     </div>
   </div>
 
-  <div class="sabl-empty" style="margin-top:56px" data-sv-empty hidden>
+  <div class="sabl-empty sabs-empty" data-sv-empty hidden>
     <h2 class="sabl-empty-title">Nothing saved yet</h2>
-    <div class="sabl-empty-sub" style="max-width:420px;margin:0 auto 30px">
-      Save scholarships and programs to track their deadlines in one place.
-      Not sure which? A few questions build you a shortlist.
+    <div class="sabl-empty-sub">
+      {openNow.toLocaleString('en-CA')} scholarships are open to apply for right now. Save the ones
+      that fit and their deadlines line up here. Not sure which? A few questions build you a shortlist.
     </div>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <div class="sabs-empty-ctas">
       <a href="/match/" class="sabm-btn-accent">Find my scholarships</a>
-      <a href="/scholarships/" class="sabm-btn-outline" style="text-decoration:none;display:inline-block">Browse scholarships</a>
+      <a href="/scholarships/" class="sabm-btn-outline">Browse scholarships</a>
     </div>
   </div>
 

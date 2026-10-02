@@ -13,7 +13,7 @@ import { loadScholarships } from '../../../lib/data-loader';
 import { eligibilityFacts } from '../../../lib/eligibility-facts';
 import { enrichScholarships } from '../../../lib/enrich';
 import { SCHOLARSHIP_FACETS } from '../../../lib/facets';
-import { saysNoApplication } from '../../../lib/apply-method';
+import { saysNoApplication, rowRoute, routeTag } from '../../../lib/apply-method';
 import { ARROW_REF, BOOKMARK_REF, EXT_REF, ICON_SPRITE } from '../../../lib/icons';
 import { DEFAULT_SCHOLARSHIP_STATE, amountCell, filterSortScholarships, getScholarshipStatus, rowAction, scholarshipWhen } from '../../../lib/list-core';
 import type { ScholarshipWithMeta } from '../../../lib/list-core';
@@ -104,6 +104,7 @@ const breadcrumbJson = {
           const amount = amountCell(s.amount);
           const varies = amount.cls.includes('is-varies');
           const noApply = saysNoApplication(s.notes, s.metaDetail, (s as { description?: string }).description);
+          const via = routeTag(rowRoute(s.applyRoute, noApply));
           const act = rowAction(canApplyNow(getScholarshipStatus(s)) && !noApply, s.url, `/scholarships/${s._slug}/`, s.title);
           return (
             <li
@@ -125,7 +126,7 @@ const breadcrumbJson = {
                 <span class:list={['sabc-price', { 'is-varies': varies }]}>{varies ? 'Amount varies' : amount.text}</span>
               </div>
               {s.audience && <p class="sabc-aud">{s.audience}</p>}
-              {facts.length > 0 && <ul class="sabl-facts" aria-label="Requirements">{facts.map(f => <li>{f}</li>)}</ul>}
+              {(facts.length > 0 || via) && <ul class="sabl-facts" aria-label="Before you apply">{facts.map(f => <li>{f}</li>)}{via && <li class="is-route">{via}</li>}</ul>}
               <div class="sabc-meta">
                 <span class={when.cls} data-when><span data-when-main>{when.main}</span><span class="sabl-when-sub" data-when-sub hidden={!when.sub}>{when.sub}</span></span>
                 {isCheckStale(s.lastVerified) && <span class="sabl-checked">Last checked {formatVerifiedMonth(s.lastVerified)}</span>}

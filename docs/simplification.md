@@ -1681,3 +1681,19 @@ Outcome: scanning a list or their saved awards, a student sees which ones go thr
 | Combos rows | Unchanged for now; same list markup, so it can follow. |
 
 Add-back fraction: 0/0. Local only: built Calgary list and /saved (Schulich, Joan MacLeod, Servus, Ted Rogers) checked on a phone, no horizontal scroll.
+
+## Uniqueness pass, batch 1: programs, empty /saved, combo rows, October 2, 2026
+
+Outcome: on program pages the biggest text is the real cost, the facts take a third less of a phone, a fee on a list row stops reading like a prize, and the empty /saved page gives a real number instead of a dashed box.
+
+| Candidate | Result and retained requirement |
+| --- | --- |
+| "Has a fee" as the program card's big figure | The fee itself when the cost note leads with one (`lib/fee-figure.ts`): 37 of 68 fee programs, e.g. "$10" over "$10 per student", "From $55" where a second price follows, never an add-on ("$5 per extra nomination"). The other 31 keep "Has a fee". |
+| "THIS PROGRAM" / "THIS PROGRAM IS" over Pays you and Free | Sentence case: missed in the card pass earlier today. |
+| Label-over-value facts on phones | Label beside value: AAPT PhysicsBowl's four facts 478 to 319px, the page 159px shorter. Desktop unchanged. |
+| "Has a fee" in the list's money type | Plain 14px words; "Pays you" and "Free" keep the big type. |
+| Three suggested awards on the empty /saved page | Tried and dropped: soonest-first gave a Photoshop-actions essay contest and Niagara Region Right to Life; biggest-first passed a bleeding-disorder award as open to anyone, so the data cannot say "open to almost anyone". |
+| The dashed box itself | Gone on /saved only (the directories' no-results box shares the class and keeps it). The text leads with the directory's own OPEN NOW count, 283 today, the same number /scholarships shows. |
+| Combo rows | Carry the route label, like the other lists. |
+
+Add-back fraction: 1/7 (the suggested awards, removed after two attempts). Local only: built AAPT PhysicsBowl, /programs, empty /saved and Calgary combos checked on a phone and compared with www.

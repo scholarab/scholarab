@@ -20,6 +20,7 @@ import { placeOf } from '../../lib/school-awards';
 import { OPEN_NO_DEADLINE, STATUS_WORDS, canApplyNow, programIsListed, programUndatedLabel, programStatusOf, scholarshipStatusOf, scholarshipIsIndexable, programIsIndexable } from '../../lib/status.ts';
 import { guides } from '../../lib/guides.ts';
 import { saysNoApplication, howYouApply } from '../../lib/apply-method.ts';
+import { feeFigure } from '../../lib/fee-figure.ts';
 import { eligibilityFacts } from '../../lib/eligibility-facts';
 import { SCHOLARSHIP_FACETS, PROGRAM_FACETS, PROGRAM_FORMATS, facetForListing } from '../../lib/facets.ts';
 import type { Scholarship, Program } from '../../lib/data-loader';
@@ -557,15 +558,15 @@ if (kind === 'scholarship') {
 function programValue(p: Program) {
   if (p.paid) {
     // "Paid" alone could be either direction on a page about cost.
-    return { valueLabel: 'THIS PROGRAM', valueBig: 'Pays you', valueNote: p.stipend };
+    return { valueLabel: 'This program', valueBig: 'Pays you', valueNote: p.stipend };
   }
   if (p.cost === 'free') {
-    return { valueLabel: 'THIS PROGRAM IS', valueBig: 'Free', valueNote: p.costNote };
+    return { valueLabel: 'This program is', valueBig: 'Free', valueNote: p.costNote };
   }
   if (p.cost === 'fee' || p.cost === 'varies') {
     return {
       valueLabel: 'Cost',
-      valueBig: p.cost === 'fee' ? 'Has a fee' : 'Varies',
+      valueBig: p.cost === 'fee' ? feeFigure(p.costNote) ?? 'Has a fee' : 'Varies',
       valueNote: p.costNote,
     };
   }

@@ -681,7 +681,12 @@ const chip: { text: string; tone: Tone } =
        257px in a 335px measure. */
     .sabd-grid { display: flex; flex-direction: column; align-items: stretch; gap: 32px; padding: 32px 20px 72px; }
     .sabd-rail { display: contents; }
+    /* Label beside value, not above it: four facts stacked label-over-value
+       ran a screen and a half on a phone (flow plan, 2026-10-02). */
     .sabd-facts { grid-template-columns: 1fr; }
+    .sabd-fact { display: grid; grid-template-columns: 82px 1fr; gap: 12px; align-items: baseline; padding: 12px 0; }
+    .sabd-fact .sabd-card-label { margin-bottom: 0; }
+    .sabd-fact-value { font-size: 15.5px; line-height: 1.4; }
     /* Safari zooms the page into any field under 16px when it takes focus,
        and leaves it zoomed (critique 2026-09-27). */
     .sabd-remind-input { font-size: 16px; }
